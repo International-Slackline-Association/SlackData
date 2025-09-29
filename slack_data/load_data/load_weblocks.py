@@ -1,41 +1,83 @@
 import json
+import re
 from pathlib import Path
+from typing import Any
 
 from sqlmodel import select
 from slack_data.database import SessionDep
 from slack_data.models.brands import Brand, BrandCreate
 from slack_data.models.weblocks import FrontPin, AttachmentPoint, Weblock, WeblockCreate
-from slack_data.utilities.materials import MetalMaterial
+from slack_data.utilities.materials import MetalMaterial, get_metal_material
 from slack_data.utilities.brand_finder import get_brand
+from slack_data.utilities.currencies import Currency 
+from slack_data.utilities.isa_warnings import ISAWarning
 
-WEBLOCK_FILE = Path(__file__).parent.parent.parent / "weblocks.json"
+WEBLOCKS_FILE = Path(__file__).parent.parent.parent / "weblocks.json"
 
-def load_weblocks_json() -> list[dict]:
+def parse_numerical_value(value_str: str | None, remove_suffix: str = "") -> float | None:
+    if value_str is None:
+        return None
+    try:
+        cleaned_val = value_str.lower()
+        if remove_suffix:
+            cleaned_val = cleaned_val.replace(remove_suffix.lower(), "")
+        return float(cleaned_val.strip())
+    except (ValueError, AttributeError):
+        return None
+    
+def parse_width_range(width_str: str | None) -> tuple[int, int | None]:
     """
-    Load the weblock data from the ISA's `weblock.json` file.
+    Parse webbing width string and return (min_width, max_width).
+    For ranges like "24mm - 26mm", returns (24, 26).
+    For single values like "25mm", returns (25, None).
+    For invalid/missing values, returns (0, None) as default.
     """
-    if not WEBLOCK_FILE.exists():
-        raise FileNotFoundError(f"Weblock file not found: {WEBLOCK_FILE}")
-    with open(WEBLOCK_FILE, "r", encoding="utf-8") as file:
-        weblock_data = json.load(file)
+    if not width_str or width_str.lower() in ['n/a', 'na', 'unknown', '']:
+        return 0, None
+    
+    width_str = width_str.lower().replace(" ", "")
+    match = re.match(r"(\d+)(?:mm)?(?:-(\d+)(?:mm)?)?", width_str)
+    
+    if not match:
+        return 0, None
+    
+    val1 = int(match.group(1))
+    val2_group = match.group(2)
+    
+    if val2_group:  # Range like "24-26"
+        val2 = int(val2_group)
+        return min(val1, val2), max(val1, val2)  # Ensure min <= max
+    else:  # Single value like "25"
+        return val1, None
 
-    return weblock_data
-
-def clean_weblock_data(weblock: dict) -> dict:
+def clean_weblock_data(weblock: dict[str, Any]) -> dict[str, Any]:
     """
     Clean the weblock data by removing any keys with None values.
     """
-    cleaned_weblock = weblock
-    for key, value in weblock.items():
-        if key in {"width", "weight"} and value == "":
-            cleaned_weblock[key] = 0
-        elif key not in {"name", "brand", "materialType"} and value == "":
-            cleaned_weblock[key] = None
-        elif key == "isa_certified":
-            cleaned_weblock[key] = bool(value) if isinstance(value,str) else value
-        else:
-            cleaned_weblock[key] = str(value) if value is not None else None
-    return cleaned_weblock
+    cleaned_data = {}
+    specs = weblock.get("specifications", {})
+
+    cleaned_data["raw_name"] = weblock.get("product_name") 
+    cleaned_data["raw_brand_name"] = weblock.get("brand") 
+
+    cleaned_data["material"] = get_metal_material(specs.get("Material"))
+    
+    # Parse width range
+    width_min, width_max = parse_width_range(specs.get("Compatible webbing width"))
+    cleaned_data["width_min"] = width_min
+    cleaned_data["width_max"] = width_max
+    
+    cleaned_data["weight"] = parse_numerical_value(specs.get("Weight"), remove_suffix="gr")
+    cleaned_data["breaking_strength"] = parse_numerical_value(specs.get("MBS"), remove_suffix="kN")
+    
+    cleaned_data["front_pin"] = get_front_pin_type(specs.get("Webbing connection type"))
+    cleaned_data["attachment_point"] = get_attachment_point(specs.get("Anchor connection type"))
+    cleaned_data["isa_certified"] = parse_boolean_isa(specs.get("ISA approved"))
+    
+    cleaned_data["price"] = parse_price_from_weblock(weblock)
+    cleaned_data["currency"] = parse_currency_from_weblock(weblock).value if parse_currency_from_weblock(weblock) else None
+
+    return cleaned_data
 
 def add_weblocks_to_db(weblocks: list[dict], session: SessionDep) -> None:
     """
@@ -51,73 +93,181 @@ def add_weblocks_to_db(weblocks: list[dict], session: SessionDep) -> None:
         attachment_point = get_attachment_point(str(weblock.get("attachment_point", "")))
 
         weblock_create = WeblockCreate(
-            name=str(weblock.get("name")),
+            name=weblock.get("raw_name", "Unknown Weblock"),
             brand_id=brand_id,
-            material=material,
-            width=int(weblock.get("width", 0)),
-            weight=float(weblock.get("weight", 0)),
-            breaking_strength=weblock.get("breakingStrength"),
-            front_pin=front_pin,
-            attachment_point=attachment_point,
+            release_date=weblock.get("release_date"),
+            material=weblock.get("material"),
+            width_min=weblock.get("width_min"),
+            width_max=weblock.get("width_max"),
+            weight=weblock.get("weight"),
+            breaking_strength=weblock.get("breaking_strength"),
+            front_pin=weblock.get("front_pin"),
+            attachment_point=weblock.get("attachment_point"),
+            isa_certified=weblock.get("isa_certified", False),
+            isa_warning=weblock.get("isa_warning"),
+            colors=weblock.get("colors"),
+            price=weblock.get("price"),
+            currency=weblock.get("currency"),
+            description=weblock.get("description"),
+            version=weblock.get("version"),
+            notes=weblock.get("notes")
         )
         db_weblock = Weblock.model_validate(weblock_create)
         db_weblock.brand = session.get(Brand, brand_id)
-        print(f"Adding webbing: {db_weblock.name} by {db_weblock.brand.name}")
+        print(f"Adding weblock: {db_weblock.name} by {db_weblock.brand.name}")
         session.add(db_weblock)
     
     session.commit()
     session.refresh(db_weblock)
-
-def get_metal_material(material: str) -> MetalMaterial:
-    """
-    Convert the material string to a MetalMaterial enum.
-    """
-    material = material.lower()
-    if "aluminum" in material:
-        return MetalMaterial.ALUMINUM
-    elif "stainless steel" in material:
-        return MetalMaterial.STAINLESS_STEEL
-    elif "steel" in material:
-        return MetalMaterial.STEEL
-    elif "titanium" in material:
-        return MetalMaterial.TITANIUM
-    else:
-        return MetalMaterial.OTHER
     
-def get_front_pin_type(pin_type: str) -> FrontPin:
+def get_front_pin_type(pin_type: str | list[str] | None) -> FrontPin:
     """
-    Convert the front pin string to a FrontPin enum
+    Convert the front pin string or list to a FrontPin enum.
+    If pin_type is a list, uses the first item.
     """
-    pin_type = pin_type.lower()
-    if "push" in pin_type:
+    if not pin_type:
+        return FrontPin.OTHER
+    if isinstance(pin_type, list):
+        if not pin_type:
+            return FrontPin.OTHER
+        pin_str = pin_type[0]
+    else:
+        pin_str = pin_type
+    
+    pin_str = pin_str.lower()
+    if "push" in pin_str:
         return FrontPin.PUSHPIN
-    elif "pull" in pin_type:
+    elif "pull" in pin_str:
         return FrontPin.PULLPIN
-    elif "captive" in pin_type:
+    elif "captive" in pin_str:
         return FrontPin.CAPTIVEPIN
-    elif "fixed" in pin_type:
+    elif "fixed" in pin_str:
         return FrontPin.FIXEDBOLT
     else:
         return FrontPin.OTHER
     
-def get_attachment_point(attachment_type: str) -> AttachmentPoint:
+def get_attachment_point(point_input: str | list[str] | None) -> AttachmentPoint:
     """
-    Convert the attachment point to a AttachmentPoint enum
+    Convert the attachment point(s) to an AttachmentPoint enum.
+    If point_input is a list, uses the first item.
     """
-    attachment_type = attachment_type.lower()
-    if "universal" in attachment_type:
+    if not point_input:
+        return None
+    if isinstance(point_input, list):
+        if not point_input:
+            return None
+        point_str = point_input[0]
+    else:
+        point_str = point_input
+    
+    point_str = point_str.lower()
+    if "universal" in point_str:
         return AttachmentPoint.UNIVERSAL
-    elif "pin" in attachment_type:
+    elif "pin" in point_str:
         return AttachmentPoint.PIN
-    elif "bolt" in attachment_type:
+    elif "bolt" in point_str:
         return AttachmentPoint.BOLT
-    elif "bent" in attachment_type:
+    elif "bent" in point_str:
         return AttachmentPoint.BENTPLATE
-    elif "sling" in attachment_type:
+    elif "sling" in point_str:
         return AttachmentPoint.SLING
-    elif "hole" in attachment_type:
+    elif "hole" in point_str:
         return AttachmentPoint.HOLE
     else:
         return AttachmentPoint.OTHER
 
-# TODO: Add a json file for the data and import it, add a main function
+def parse_price_from_weblock(weblock_data: dict) -> float | None:
+    """Extract price from weblock pricing data or specifications."""
+    # Try pricing array first
+    pricing = weblock_data.get("pricing", [])
+    if pricing and pricing[0].get("text"):
+        # Look for price pattern: number before currency code
+        text = pricing[0]["text"]
+        match = re.search(r'([0-9]+(?:\.[0-9]+)?)\s*(?:EUR|USD|GBP|CAD|PLN|ZAR)', text)
+        if match:
+            return float(match.group(1))
+    
+    # Try specifications as fallback
+    specs = weblock_data.get("specifications", {})
+    price_text = specs.get("Price (per unit)", "")
+    if price_text:
+        match = re.search(r'([0-9]+(?:\.[0-9]+)?)\s*(?:EUR|USD|GBP|CAD|PLN|ZAR)', price_text)
+        if match:
+            return float(match.group(1))
+    
+    return None
+
+def parse_currency_from_weblock(weblock_data: dict) -> Currency | None:
+    """Extract currency from weblock pricing data or specifications."""
+    
+    def check_all_currencies(text: str) -> Currency | None:
+        if not text: return None
+        text = text.upper()
+        if "USD" in text: return Currency.USD
+        if "EUR" in text: return Currency.EUR
+        if "GBP" in text: return Currency.GBP
+        if "CAD" in text: return Currency.CAD
+        if "PLN" in text: return Currency.PLN
+        if "ZAR" in text: return Currency.ZAR
+        return None
+    
+    # Try pricing array first - check tooltip for original currency
+    pricing = weblock_data.get("pricing", [])
+    if pricing:
+        tooltip = pricing[0].get("tooltip", "")
+        currency = check_all_currencies(tooltip)
+        if currency: return currency
+        
+        # Check main text
+        text = pricing[0].get("text", "")
+        currency = check_all_currencies(text)
+        if currency: return currency
+    
+    # Try specifications as fallback
+    specs = weblock_data.get("specifications", {})
+    price_text = specs.get("Price (per unit)", "")
+    currency = check_all_currencies(price_text)
+    if currency: return currency
+    
+    return Currency.EUR  # Default fallback
+
+def parse_boolean_isa(value_str: str | None) -> bool:
+    if not value_str:
+        return False
+    s = value_str.strip().lower()
+    if s == "yes" or s == "true" or s == "approved": 
+        return True
+    return False
+
+def load_weblocks_json() -> list[dict]:
+    if not WEBLOCKS_FILE.exists():
+        raise FileNotFoundError(f"Weblock JSON file not found: {WEBLOCKS_FILE}")
+
+    with open(WEBLOCKS_FILE, "r", encoding="utf-8") as file:
+        weblock_data = json.load(file)
+    
+    return weblock_data
+
+def load_weblocks(session: SessionDep) -> None:
+    raw_weblocks_data = load_weblocks_json()
+    print(f"Loaded {len(raw_weblocks_data)} raw weblock items from {WEBLOCKS_FILE}")
+
+    cleaned_weblocks_payloads = []
+    for item_data in raw_weblocks_data:
+        try:
+            cleaned_payload = clean_weblock_data(item_data)
+            cleaned_weblocks_payloads.append(cleaned_payload)
+        except Exception as e:
+            print(f"Error cleaning weblock data for item '{item_data.get('product_name', 'Unknown')}': {e}")
+
+    if not cleaned_weblocks_payloads:
+        print("No weblock data successfully cleaned. Aborting.")
+        return
+
+    added_count = add_weblocks_to_db(cleaned_weblocks_payloads, session)
+    print(f"Finished processing. Added {added_count} weblocks to the database.")
+
+if __name__ == "__main__":
+    weblocks = load_weblocks_json()
+    print(f"Loaded {len(weblocks)} weblocks from {WEBLOCKS_FILE}")
+    print(weblocks[:1])

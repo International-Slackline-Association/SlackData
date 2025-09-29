@@ -3,7 +3,7 @@ from fastapi import FastAPI
 from sqlmodel import select
 
 from slack_data.database import get_session, create_db_and_tables
-from slack_data.load_weblocks import load_weblocks
+from slack_data.load_data.load_weblocks import load_weblocks
 from slack_data.load_data.load_rollers import load_rollers
 from slack_data.load_data.load_webbings import load_webbings
 from slack_data.api.routers.brand_router import brand_router

@@ -7,7 +7,7 @@ from slack_data.database import SessionDep
 from slack_data.models.brands import Brand, BrandCreate
 from slack_data.models.rollers import BearingMaterial, LockType, SliderType, Roller, RollerCreate
 from slack_data.utilities.currencies import get_currency
-from slack_data.utilities.materials import MetalMaterial, RollerMaterial
+from slack_data.utilities.materials import MetalMaterial, RollerMaterial, get_metal_material
 from slack_data.utilities.brand_finder import get_brand
 
 ROLLER_FILE = Path(__file__).parent.parent.parent / "rollers.json"
@@ -46,10 +46,10 @@ def add_rollers_to_db(rollers: list[dict], session: SessionDep) -> None:
     """
     Add the loaded roller and brand data to the database session.
     """
-
-
+    brand_cache = {}
+    
     for roller in rollers:
-        brand_id = get_brand(session, roller)
+        brand_id, brand_cache = get_brand(session, brand_cache, roller)
 
         if (currency := roller.get("price_unit")) is not None:
             currency = get_currency(currency)
@@ -90,22 +90,6 @@ def get_slider_type(slider_type: str) -> SliderType:
         return SliderType.LockingCarabiner
     else:
         return SliderType.Other
-    
-def get_metal_material(material: str) -> MetalMaterial:
-    """
-    Convert the material string to a MetalMaterial enum.
-    """
-    material = material.lower()
-    if "aluminum" in material:
-        return MetalMaterial.ALUMINUM
-    elif "stainless steel" in material:
-        return MetalMaterial.STAINLESS_STEEL
-    elif "steel" in material:
-        return MetalMaterial.STEEL
-    elif "titanium" in material:
-        return MetalMaterial.TITANIUM
-    else:
-        return MetalMaterial.OTHER
     
 def get_roller_material(roller_material: str) -> RollerMaterial:
     """

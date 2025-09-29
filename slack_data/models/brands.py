@@ -19,9 +19,9 @@ class BaseBrands(SQLModel):
 
 class Brand(BaseBrands, table=True):
     id: int | None = Field(default=None, primary_key=True)
-    webbing: list["Webbing"] = Relationship(back_populates="brand")
-    weblock: list["Weblock"] = Relationship(back_populates="brand")
-    roller: list["Roller"] = Relationship(back_populates="brand")
+    _webbings: list["Webbing"] = Relationship(back_populates="brand")
+    _weblocks: list["Weblock"] = Relationship(back_populates="brand")
+    _rollers: list["Roller"] = Relationship(back_populates="brand")
     
     @computed_field
     def webbings(self) -> list[str]:

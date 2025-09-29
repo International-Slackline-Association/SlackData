@@ -45,7 +45,7 @@ class BaseWebbing(SQLModel):
 class Webbing(BaseWebbing, table=True):
     id: int | None = Field(default=None, primary_key=True)
     brand_id: int = Field(foreign_key="brand.id")
-    brand: "Brand" = Relationship(back_populates="webbing")
+    brand: "Brand" = Relationship(back_populates="_webbings")
     
     
     @computed_field

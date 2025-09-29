@@ -2,6 +2,9 @@ from sqlmodel import select
 
 from slack_data.database import SessionDep
 from slack_data.models.brands import Brand, BrandCreate
+from slack_data.models.webbing import Webbing
+from slack_data.models.weblocks import Weblock
+from slack_data.models.rollers import Roller
 
 
 def get_brand(session: SessionDep, brand_cache: dict[str, int] | None, item: dict) -> tuple[int,dict]:
