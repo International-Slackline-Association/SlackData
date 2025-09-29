@@ -31,7 +31,7 @@ class BaseWeblock(SQLModel):
     name: str = Field(index=True)
     release_date: str | None = None
     material: MetalMaterial
-    width: int
+    width: int # TODO: webbing should be a range? Like 24-26mm?
     weight: float | None = None # g
     breaking_strength: float | None = None # kN
     front_pin: FrontPin | None = None
