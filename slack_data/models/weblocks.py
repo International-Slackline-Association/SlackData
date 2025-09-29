@@ -12,6 +12,7 @@ class FrontPin(str, Enum):
     PULLPIN = "Pull Pin"
     CAPTIVEPIN = "Captive Pin"
     FIXEDBOLT = "Fixed Bolt"
+    OTHER = "Other"
 
 class AttachmentPoint(str, Enum):
     UNIVERSAL = "Universal" # Fits hard connectors, soft connectors, sewn loops
@@ -20,6 +21,7 @@ class AttachmentPoint(str, Enum):
     BOLT = "Bolt"
     BENTPLATE = "Bent Plate"
     SLING = "Sling"
+    OTHER = "Other"
 
 
 class BaseWeblock(SQLModel):

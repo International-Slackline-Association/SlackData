@@ -8,7 +8,7 @@ from slack_data.models.brands import Brand, BrandCreate
 from slack_data.models.rollers import BearingMaterial, LockType, SliderType, Roller, RollerCreate
 from slack_data.utilities.currencies import get_currency
 from slack_data.utilities.materials import MetalMaterial, RollerMaterial
-
+from slack_data.utilities.brand_finder import get_brand
 
 ROLLER_FILE = Path(__file__).parent.parent.parent / "rollers.json"
 
@@ -76,33 +76,6 @@ def add_rollers_to_db(rollers: list[dict], session: SessionDep) -> None:
 
     session.commit()
     session.refresh(db_roller)
-
-def get_brand(session: SessionDep, roller: dict) -> int:
-    brand_name = roller.get("manufacturer") or roller.get("brand")
-
-    if not brand_name:
-        raise ValueError("Brand name is missing from roller data.")
-    
-    brand_name = str(brand_name).strip()
-
-    statement = select(Brand.id).where(Brand.name == brand_name)
-    result = session.exec(statement).first()
-
-    if result is None:
-        brand_create = BrandCreate(name=brand_name)
-        db_brand = Brand.model_validate(brand_create)
-        print(f"Adding brand: {db_brand.name}")
-        session.add(db_brand)
-        session.commit()
-        session.refresh(db_brand)
-        brand_id = db_brand.id
-    else:
-        brand_id = result
-
-    if brand_id is None:
-        raise ValueError(f"Brand ID for '{brand_name}' could not be determined.")
-        
-    return brand_id
 
 def get_slider_type(slider_type: str) -> SliderType:
     """
