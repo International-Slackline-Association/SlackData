@@ -23,6 +23,8 @@ class Brand(BaseBrands, table=True):
     _webbings: list["Webbing"] = Relationship(back_populates="brand")
     _weblocks: list["Weblock"] = Relationship(back_populates="brand")
     _rollers: list["Roller"] = Relationship(back_populates="brand")
+    _leashrings: list["LeashRing"] = Relationship(back_populates="brand")
+
     
     @computed_field
     def webbings(self) -> list[str]:
@@ -44,6 +46,13 @@ class Brand(BaseBrands, table=True):
         Computed field to get the names of all rollers associated with this brand.
         """
         return [roller.name for roller in self._rollers]
+    
+    @computed_field
+    def leashrings(self) -> list[str]:
+        """
+        Computed field to get the names of all leash rings associated with this brand.
+        """
+        return [leashring.name for leashring in self._leashrings]
     
 def get_brand(session: SessionDep, brand_cache: dict[str, int] | None, item: dict) -> tuple[int,dict]:
     brand_name = str(item.get("brand"))
