@@ -204,18 +204,27 @@ def parse_currency_from_weblock(weblock_data: dict) -> Currency | None:
     pricing = weblock_data.get("pricing", [])
     if pricing:
         tooltip = pricing[0].get("tooltip", "")
-        currency = get_currency(tooltip)
+        try:
+            currency = get_currency(tooltip)
+        except:
+            pass
         if currency: return currency
         
         # Check main text
         text = pricing[0].get("text", "")
-        currency = get_currency(text)
+        try:
+            currency = get_currency(text)
+        except:
+            pass
         if currency: return currency
     
     # Try specifications as fallback
     specs = weblock_data.get("specifications", {})
     price_text = specs.get("Price (per unit)", "")
-    currency = get_currency(price_text)
+    try:
+        currency = get_currency(price_text)
+    except:
+        pass
     if currency: return currency
     
     return Currency.EUR

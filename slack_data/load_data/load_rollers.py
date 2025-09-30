@@ -48,7 +48,8 @@ def add_rollers_to_db(rollers: list[dict], session: SessionDep) -> None:
     brand_cache = {}
     
     for roller in rollers:
-        brand_id, brand_cache = get_brand(session, brand_cache, roller)
+        roller_for_brand = {"brand": roller.get("manufacturer")}
+        brand_id, brand_cache = get_brand(session, brand_cache, roller_for_brand)
 
         if (currency := roller.get("price_unit")) is not None:
             currency = get_currency(currency)
