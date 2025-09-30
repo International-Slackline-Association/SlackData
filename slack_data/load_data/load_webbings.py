@@ -4,9 +4,8 @@ from pathlib import Path
 from sqlmodel import select
 
 from slack_data.database import SessionDep
-from slack_data.models.brands import Brand, BrandCreate
+from slack_data.models.brands import Brand, BrandCreate, get_brand
 from slack_data.models.webbing import FiberMaterial, Webbing, WebbingCreate
-from slack_data.utilities.brand_finder import get_brand
 
 
 WEBBING_FILE = Path(__file__).parent.parent.parent / "webbings.json"

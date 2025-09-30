@@ -5,11 +5,10 @@ from typing import Any
 
 from sqlmodel import select
 from slack_data.database import SessionDep
-from slack_data.models.brands import Brand, BrandCreate
+from slack_data.models.brands import Brand, BrandCreate, get_brand
 from slack_data.models.weblocks import FrontPin, AttachmentPoint, Weblock, WeblockCreate
 from slack_data.utilities.materials import MetalMaterial, get_metal_material
-from slack_data.utilities.brand_finder import get_brand
-from slack_data.utilities.currencies import Currency 
+from slack_data.utilities.currencies import Currency, get_currency
 from slack_data.utilities.isa_warnings import ISAWarning
 
 WEBLOCKS_FILE = Path(__file__).parent.parent.parent / "weblocks.json"
@@ -25,7 +24,7 @@ def parse_numerical_value(value_str: str | None, remove_suffix: str = "") -> flo
     except (ValueError, AttributeError):
         return None
     
-def parse_width_range(width_str: str | None) -> tuple[int, int | None]:
+def parse_width_range(width_str: str | None) -> tuple[int, int]:
     """
     Parse webbing width string and return (min_width, max_width).
     For ranges like "24mm - 26mm", returns (24, 26).
@@ -33,22 +32,22 @@ def parse_width_range(width_str: str | None) -> tuple[int, int | None]:
     For invalid/missing values, returns (0, None) as default.
     """
     if not width_str or width_str.lower() in ['n/a', 'na', 'unknown', '']:
-        return 0, None
+        return 0, 0
     
     width_str = width_str.lower().replace(" ", "")
     match = re.match(r"(\d+)(?:mm)?(?:-(\d+)(?:mm)?)?", width_str)
     
     if not match:
-        return 0, None
+        return 0, 0
     
     val1 = int(match.group(1))
     val2_group = match.group(2)
     
-    if val2_group:  # Range like "24-26"
+    if val2_group:
         val2 = int(val2_group)
-        return min(val1, val2), max(val1, val2)  # Ensure min <= max
-    else:  # Single value like "25"
-        return val1, None
+        return min(val1, val2), max(val1, val2)
+    else:
+        return val1, val1
 
 def clean_weblock_data(weblock: dict[str, Any]) -> dict[str, Any]:
     """
@@ -86,7 +85,8 @@ def add_weblocks_to_db(weblocks: list[dict], session: SessionDep) -> None:
     brand_cache = {}
 
     for weblock in weblocks:
-        brand_id, brand_cache = get_brand(session, brand_cache, weblock)
+        weblock_for_brand = {"brand": weblock.get("raw_brand_name")}
+        brand_id, brand_cache = get_brand(session, brand_cache, weblock_for_brand)
 
         material = get_metal_material(str(weblock.get("material", "")))
         front_pin = get_front_pin_type(str(weblock.get("front_pin", "")))
@@ -200,36 +200,25 @@ def parse_price_from_weblock(weblock_data: dict) -> float | None:
 def parse_currency_from_weblock(weblock_data: dict) -> Currency | None:
     """Extract currency from weblock pricing data or specifications."""
     
-    def check_all_currencies(text: str) -> Currency | None:
-        if not text: return None
-        text = text.upper()
-        if "USD" in text: return Currency.USD
-        if "EUR" in text: return Currency.EUR
-        if "GBP" in text: return Currency.GBP
-        if "CAD" in text: return Currency.CAD
-        if "PLN" in text: return Currency.PLN
-        if "ZAR" in text: return Currency.ZAR
-        return None
-    
     # Try pricing array first - check tooltip for original currency
     pricing = weblock_data.get("pricing", [])
     if pricing:
         tooltip = pricing[0].get("tooltip", "")
-        currency = check_all_currencies(tooltip)
+        currency = get_currency(tooltip)
         if currency: return currency
         
         # Check main text
         text = pricing[0].get("text", "")
-        currency = check_all_currencies(text)
+        currency = get_currency(text)
         if currency: return currency
     
     # Try specifications as fallback
     specs = weblock_data.get("specifications", {})
     price_text = specs.get("Price (per unit)", "")
-    currency = check_all_currencies(price_text)
+    currency = get_currency(price_text)
     if currency: return currency
     
-    return Currency.EUR  # Default fallback
+    return Currency.EUR
 
 def parse_boolean_isa(value_str: str | None) -> bool:
     if not value_str:

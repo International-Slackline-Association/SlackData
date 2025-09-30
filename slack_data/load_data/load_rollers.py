@@ -4,11 +4,10 @@ from pathlib import Path
 from sqlmodel import select
 
 from slack_data.database import SessionDep
-from slack_data.models.brands import Brand, BrandCreate
+from slack_data.models.brands import Brand, BrandCreate, get_brand
 from slack_data.models.rollers import BearingMaterial, LockType, SliderType, Roller, RollerCreate
 from slack_data.utilities.currencies import get_currency
 from slack_data.utilities.materials import MetalMaterial, RollerMaterial, get_metal_material
-from slack_data.utilities.brand_finder import get_brand
 
 ROLLER_FILE = Path(__file__).parent.parent.parent / "rollers.json"
 
