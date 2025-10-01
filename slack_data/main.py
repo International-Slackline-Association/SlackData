@@ -7,15 +7,18 @@ from slack_data.load_data.load_weblocks import load_weblocks
 from slack_data.load_data.load_rollers import load_rollers
 from slack_data.load_data.load_webbings import load_webbings
 from slack_data.load_data.load_leashrings import load_leashrings
+from slack_data.load_data.load_grips import load_grips
 from slack_data.api.routers.brand_router import brand_router
 from slack_data.api.routers.roller_router import roller_router
 from slack_data.api.routers.webbing_router import webbing_router
 from slack_data.api.routers.weblock_router import weblock_router
 from slack_data.api.routers.leashring_router import leashring_router
+from slack_data.api.routers.grip_router import grip_router
 from slack_data.models.rollers import Roller
 from slack_data.models.webbing import Webbing
 from slack_data.models.weblocks import Weblock
 from slack_data.models.leashrings import LeashRing
+from slack_data.models.grips import Grip
 
 
 
@@ -39,6 +42,10 @@ async def lifespan(app: FastAPI):
         if existing_leashrings is None: # Only load from `leashrings.json` if the database is empty
             print("Loading leash ring data into the database...")
             load_leashrings(session=session)
+        existing_grips = session.exec(select(Grip)).first()
+        if existing_grips is None:# Only load from `grips.json` if the database is empty
+            print("Loading grip data into the database...")
+            load_grips(session=session)
     yield
 
 app = FastAPI(lifespan=lifespan)
@@ -48,6 +55,7 @@ app.include_router(brand_router)
 app.include_router(weblock_router)
 app.include_router(roller_router)
 app.include_router(leashring_router)
+app.include_router(grip_router)
 
 @app.get("/")
 def root():
