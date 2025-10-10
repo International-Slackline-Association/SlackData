@@ -1,0 +1,4223 @@
+[
+  {
+    "image_url": "/api/gear/image_thumb/3039",
+    "details_url": "/gear_details/aeris_pweblock",
+    "brand": "Petram Slacklines",
+    "product_name": "Aeris P Weblock",
+    "full_name": "Petram Slacklines Aeris P Weblock",
+    "manufacturer_info": {
+      "name": "Petram Slacklines",
+      "url": "/manufacturer_details/PetramSlacklines#TAB-IMAGES",
+      "country": "Poland",
+      "country_flag_url": "/img/flags/PL.png"
+    },
+    "product_page_url": "https://petramslacklines.site123.me/shop-1/aeris-p-weblock-2",
+    "pricing": [
+      {
+        "text": "1 unit and above : 84.40 EUR"
+      }
+    ],
+    "specifications": {
+      "Material": [
+        "Stainless Steel",
+        "High Strength Steel",
+        "Aluminum"
+      ],
+      "Weight": "185gr",
+      "WLL": "10kN",
+      "MBS": "50kN",
+      "Anchor connection type": "Quick Pin",
+      "Webbing connection type": "Quick Pin",
+      "Compatible webbing width": "24mm - 27mm",
+      "Diverter diameter": "35mm",
+      "Efficiency": "90%",
+      "Usage": [
+        "Slackline",
+        "Highline",
+        "Longline",
+        "Rodeoline",
+        "Low Tension lines",
+        "Soft Release"
+      ],
+      "ISA approved": "N/A",
+      "Date introduced": "Sep 2017",
+      "Manufacturer": "Petram Slacklines",
+      "Manufacturer Product Page": "Manufacturer product page",
+      "Price (per unit)": "1 unit and above : 84.40 EUR"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/3040",
+    "details_url": "/gear_details/aeris_weblock",
+    "brand": "Petram Slacklines",
+    "product_name": "Aeris Weblock",
+    "full_name": "Petram Slacklines Aeris Weblock",
+    "manufacturer_info": {
+      "name": "Petram Slacklines",
+      "url": "/manufacturer_details/PetramSlacklines#TAB-IMAGES",
+      "country": "Poland",
+      "country_flag_url": "/img/flags/PL.png"
+    },
+    "product_page_url": "https://petramslacklines.site123.me/shop-1/aeris-weblock-2",
+    "pricing": [
+      {
+        "text": "1 unit and above : 49.90 EUR"
+      }
+    ],
+    "specifications": {
+      "Material": [
+        "Stainless Steel",
+        "High Strength Steel",
+        "Aluminum"
+      ],
+      "Weight": "180gr",
+      "WLL": "12kN",
+      "MBS": "60kN",
+      "Anchor connection type": "Fixed Bolt",
+      "Webbing connection type": "Captive Pin",
+      "Compatible webbing width": "24mm - 26mm",
+      "Diverter diameter": "35mm",
+      "Efficiency": "90%",
+      "Usage": [
+        "Slackline",
+        "Highline",
+        "Longline",
+        "Rodeoline",
+        "Low Tension lines",
+        "Soft Release"
+      ],
+      "ISA approved": "N/A",
+      "Date introduced": "Sep 2017",
+      "Manufacturer": "Petram Slacklines",
+      "Manufacturer Product Page": "Manufacturer product page",
+      "Price (per unit)": "1 unit and above : 49.90 EUR"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/533",
+    "details_url": "/gear_details/AlpineWebLock40",
+    "brand": "Balance Community: Slackline Outfitters",
+    "product_name": "Alpine WebLock 4.0",
+    "full_name": "Balance Community: Slackline Outfitters Alpine WebLock 4.0",
+    "manufacturer_info": {
+      "name": "Balance Community: Slackline Outfitters",
+      "url": "/manufacturer_details/BalanceCommunity#TAB-IMAGES",
+      "country": "United States",
+      "country_flag_url": "/img/flags/US.png"
+    },
+    "product_page_url": "https://www.balancecommunity.com/blogs/slack-science/tagged/alpine-weblock-4-0",
+    "pricing": [
+      {
+        "text": "1 unit and above : 111.93 EUR",
+        "tooltip": "Converted from 124.95 USD with the rate of 1 EUR = 1.12 USD"
+      }
+    ],
+    "specifications": {
+      "Material": "Aluminum",
+      "Weight": "335gr",
+      "WLL": "12kN",
+      "MBS": "60kN",
+      "Anchor connection type": "Mounting Hole",
+      "Webbing connection type": "Quick Pin",
+      "Compatible webbing width": "24mm - 26mm",
+      "Diverter diameter": "N/A",
+      "Efficiency": "100%",
+      "Usage": [
+        "Slackline",
+        "Highline",
+        "Longline",
+        "Rodeoline",
+        "Low Tension lines"
+      ],
+      "ISA approved": "N/A",
+      "Date introduced": "N/A",
+      "Manufacturer": "Balance Community: Slackline Outfitters",
+      "Manufacturer Product Page": "Manufacturer product page",
+      "Price (per unit)": "1 unit and above : 111.93 EUR"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/3089",
+    "details_url": "/gear_details/alpine_weblock50",
+    "brand": "Balance Community: Slackline Outfitters",
+    "product_name": "Alpine WebLock 5.0",
+    "full_name": "Balance Community: Slackline Outfitters Alpine WebLock 5.0",
+    "manufacturer_info": {
+      "name": "Balance Community: Slackline Outfitters",
+      "url": "/manufacturer_details/BalanceCommunity#TAB-IMAGES",
+      "country": "United States",
+      "country_flag_url": "/img/flags/US.png"
+    },
+    "product_page_url": "https://www.balancecommunity.com/products/alpine-weblock-5",
+    "pricing": [
+      {
+        "text": "1 unit and above : 115.56 EUR",
+        "tooltip": "Converted from 129 USD with the rate of 1 EUR = 1.12 USD"
+      }
+    ],
+    "specifications": {
+      "Material": "Aluminum",
+      "Weight": "188gr",
+      "WLL": "12kN",
+      "MBS": "60kN",
+      "Anchor connection type": [
+        "Soft Release",
+        "XL Mounting Hole"
+      ],
+      "Webbing connection type": "Quick Pin",
+      "Compatible webbing width": "24mm - 26mm",
+      "Diverter diameter": "28.6mm",
+      "Efficiency": "N/A",
+      "Usage": "N/A",
+      "ISA approved": "true",
+      "Date introduced": "Jan 2020",
+      "Manufacturer": "Balance Community: Slackline Outfitters",
+      "Manufacturer Product Page": "Manufacturer product page",
+      "Price (per unit)": "1 unit and above : 115.56 EUR"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/3255",
+    "details_url": "/gear_details/alpine_weblock61",
+    "brand": "Balance Community: Slackline Outfitters",
+    "product_name": "Alpine WebLock 6.1",
+    "full_name": "Balance Community: Slackline Outfitters Alpine WebLock 6.1",
+    "manufacturer_info": {
+      "name": "Balance Community: Slackline Outfitters",
+      "url": "/manufacturer_details/BalanceCommunity#TAB-IMAGES",
+      "country": "United States",
+      "country_flag_url": "/img/flags/US.png"
+    },
+    "product_page_url": "https://www.balancecommunity.com/collections/webbing-anchors/products/alpine-weblock-6-0",
+    "pricing": [
+      {
+        "text": "1 unit and above : 124.52 EUR",
+        "tooltip": "Converted from 139 USD with the rate of 1 EUR = 1.12 USD"
+      }
+    ],
+    "specifications": {
+      "Material": "Aluminum",
+      "Weight": "210gr",
+      "WLL": "12kN",
+      "MBS": "84kN",
+      "Anchor connection type": "XL Mounting Hole",
+      "Webbing connection type": "Quick Pin",
+      "Compatible webbing width": "24mm - 26mm",
+      "Diverter diameter": "38mm",
+      "Efficiency": "N/A",
+      "Usage": "N/A",
+      "ISA approved": "N/A",
+      "Date introduced": "N/A",
+      "Manufacturer": "Balance Community: Slackline Outfitters",
+      "Manufacturer Product Page": "Manufacturer product page",
+      "Price (per unit)": "1 unit and above : 124.52 EUR"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/3256",
+    "details_url": "/gear_details/alpine_weblock6120mm",
+    "brand": "Balance Community: Slackline Outfitters",
+    "product_name": "Alpine WebLock 6.1 20mm",
+    "full_name": "Balance Community: Slackline Outfitters Alpine WebLock 6.1 20mm",
+    "manufacturer_info": {
+      "name": "Balance Community: Slackline Outfitters",
+      "url": "/manufacturer_details/BalanceCommunity#TAB-IMAGES",
+      "country": "United States",
+      "country_flag_url": "/img/flags/US.png"
+    },
+    "product_page_url": "https://www.balancecommunity.com/collections/webbing-anchors/products/alpine-weblock-6-0",
+    "pricing": [
+      {
+        "text": "1 unit and above : 124.52 EUR",
+        "tooltip": "Converted from 139 USD with the rate of 1 EUR = 1.12 USD"
+      }
+    ],
+    "specifications": {
+      "Material": "Aluminum",
+      "Weight": "210gr",
+      "WLL": "12kN",
+      "MBS": "84kN",
+      "Anchor connection type": "XL Mounting Hole",
+      "Webbing connection type": "Quick Pin",
+      "Compatible webbing width": "19mm - 20mm",
+      "Diverter diameter": "38mm",
+      "Efficiency": "N/A",
+      "Usage": "N/A",
+      "ISA approved": "N/A",
+      "Date introduced": "N/A",
+      "Manufacturer": "Balance Community: Slackline Outfitters",
+      "Manufacturer Product Page": "Manufacturer product page",
+      "Price (per unit)": "1 unit and above : 124.52 EUR"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/537",
+    "details_url": "/gear_details/BaboonLock",
+    "brand": "SlackGear",
+    "product_name": "BaboonLock",
+    "full_name": "SlackGear BaboonLock",
+    "manufacturer_info": {
+      "name": "SlackGear",
+      "url": "/manufacturer_details/SlackGear#TAB-IMAGES",
+      "country": "South Africa",
+      "country_flag_url": "/img/flags/ZA.png"
+    },
+    "product_page_url": "http://www.slackgear.co.za/product/baboonlock/",
+    "pricing": [
+      {
+        "text": "1 unit and above : 24.83 EUR",
+        "tooltip": "Converted from 500 ZAR with the rate of 1 EUR = 20.14 ZAR"
+      }
+    ],
+    "specifications": {
+      "Material": "Stainless Steel",
+      "Weight": "360gr",
+      "WLL": "12kN",
+      "MBS": "40kN",
+      "Anchor connection type": "Fixed Bolt",
+      "Webbing connection type": "Screw Pin",
+      "Compatible webbing width": "24mm - 26mm",
+      "Diverter diameter": "24mm",
+      "Efficiency": "80%",
+      "Usage": [
+        "Slackline",
+        "Highline",
+        "Longline",
+        "Rodeoline",
+        "Low Tension lines"
+      ],
+      "ISA approved": "N/A",
+      "Date introduced": "N/A",
+      "Manufacturer": "SlackGear",
+      "Manufacturer Product Page": "Manufacturer product page",
+      "Price (per unit)": "1 unit and above : 24.83 EUR"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/526",
+    "details_url": "/gear_details/Banana",
+    "brand": "Dakas",
+    "product_name": "Banana",
+    "full_name": "Dakas Banana",
+    "manufacturer_info": {
+      "name": "Dakas",
+      "url": "/manufacturer_details/Dakas#TAB-IMAGES",
+      "country": "France",
+      "country_flag_url": "/img/flags/FR.png"
+    },
+    "pricing": [],
+    "specifications": {
+      "Material": "Stainless Steel",
+      "Weight": "N/A",
+      "WLL": "15kN",
+      "MBS": "N/A",
+      "Anchor connection type": "Mounting Hole",
+      "Webbing connection type": "Quick Pin",
+      "Compatible webbing width": "24mm - 26mm",
+      "Diverter diameter": "30mm",
+      "Efficiency": "N/A",
+      "Usage": "N/A",
+      "ISA approved": "N/A",
+      "Date introduced": "N/A",
+      "Manufacturer": "Dakas"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/544",
+    "details_url": "/gear_details/BANANA",
+    "brand": "Slack house",
+    "product_name": "BANANA! 2.0",
+    "full_name": "Slack house BANANA! 2.0",
+    "manufacturer_info": {
+      "name": "Slack house",
+      "url": "/manufacturer_details/Slackhouse#TAB-IMAGES",
+      "country": "Poland",
+      "country_flag_url": "/img/flags/PL.png"
+    },
+    "pricing": [
+      {
+        "text": "1 unit and above : 31.63 EUR",
+        "tooltip": "Converted from 135 PLN with the rate of 1 EUR = 4.27 PLN"
+      }
+    ],
+    "specifications": {
+      "Material": [
+        "Stainless Steel",
+        "Aluminum"
+      ],
+      "Weight": "228gr",
+      "WLL": "10kN",
+      "MBS": "50kN",
+      "Anchor connection type": "Mounting Hole",
+      "Webbing connection type": "Captive Pin",
+      "Compatible webbing width": "24mm - 26mm",
+      "Diverter diameter": "20mm",
+      "Efficiency": "85%",
+      "Usage": [
+        "Slackline",
+        "Highline",
+        "Longline",
+        "Rodeoline",
+        "Low Tension lines"
+      ],
+      "ISA approved": "N/A",
+      "Date introduced": "N/A",
+      "Manufacturer": "Slack house",
+      "Price (per unit)": "1 unit and above : 31.63 EUR"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/3117",
+    "details_url": "/gear_details/banana_30sr",
+    "brand": "Slack house",
+    "product_name": "BANANA! 3.0 SR",
+    "full_name": "Slack house BANANA! 3.0 SR",
+    "manufacturer_info": {
+      "name": "Slack house",
+      "url": "/manufacturer_details/Slackhouse#TAB-IMAGES",
+      "country": "Poland",
+      "country_flag_url": "/img/flags/PL.png"
+    },
+    "product_page_url": "https://slackhouseshop.pl/en/produkt/banana-3-0-sr/",
+    "pricing": [
+      {
+        "text": "1 unit : 65.13 EUR",
+        "tooltip": "Converted from 278 PLN with the rate of 1 EUR = 4.27 PLN"
+      }
+    ],
+    "specifications": {
+      "Material": [
+        "Stainless Steel",
+        "Aluminum"
+      ],
+      "Weight": "262gr",
+      "WLL": "10kN",
+      "MBS": "50kN",
+      "Anchor connection type": "Soft Release",
+      "Webbing connection type": "Captive Sliding Pin",
+      "Compatible webbing width": "24mm - 26mm",
+      "Diverter diameter": "20mm",
+      "Efficiency": "83%",
+      "Usage": "N/A",
+      "ISA approved": "N/A",
+      "Date introduced": "N/A",
+      "Manufacturer": "Slack house",
+      "Manufacturer Product Page": "Manufacturer product page",
+      "Price (per unit)": "1 unit : 65.13 EUR"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/3118",
+    "details_url": "/gear_details/banana_31",
+    "brand": "Slack house",
+    "product_name": "BANANA! 3.1",
+    "full_name": "Slack house BANANA! 3.1",
+    "manufacturer_info": {
+      "name": "Slack house",
+      "url": "/manufacturer_details/Slackhouse#TAB-IMAGES",
+      "country": "Poland",
+      "country_flag_url": "/img/flags/PL.png"
+    },
+    "product_page_url": "https://slackhouseshop.pl/en/produkt/banana-3-1-weblock/",
+    "pricing": [
+      {
+        "text": "1 unit and above : 57.40 EUR",
+        "tooltip": "Converted from 245 PLN with the rate of 1 EUR = 4.27 PLN"
+      }
+    ],
+    "specifications": {
+      "Material": [
+        "Stainless Steel",
+        "Aluminum"
+      ],
+      "Weight": "233gr",
+      "WLL": "10kN",
+      "MBS": "50kN",
+      "Anchor connection type": "Mounting Hole",
+      "Webbing connection type": "Captive Pin",
+      "Compatible webbing width": "24mm - 26mm",
+      "Diverter diameter": "22mm",
+      "Efficiency": "85%",
+      "Usage": "N/A",
+      "ISA approved": "N/A",
+      "Date introduced": "N/A",
+      "Manufacturer": "Slack house",
+      "Manufacturer Product Page": "Manufacturer product page",
+      "Price (per unit)": "1 unit and above : 57.40 EUR"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/502",
+    "details_url": "/gear_details/BanditFX",
+    "brand": "Equilibrium Slacklines (EQB)",
+    "product_name": "Bandit FX",
+    "full_name": "Equilibrium Slacklines (EQB) Bandit FX",
+    "manufacturer_info": {
+      "name": "Equilibrium Slacklines (EQB)",
+      "url": "/manufacturer_details/EQB#TAB-IMAGES",
+      "country": "Czech Republic",
+      "country_flag_url": "/img/flags/CZ.png"
+    },
+    "pricing": [
+      {
+        "text": "1 unit and above : 43.00 EUR"
+      }
+    ],
+    "specifications": {
+      "Material": "Stainless Steel",
+      "Weight": "207gr",
+      "WLL": "12kN",
+      "MBS": "60kN",
+      "Anchor connection type": "Mounting Hole",
+      "Webbing connection type": "Captive Pin",
+      "Compatible webbing width": "24mm - 26mm",
+      "Diverter diameter": "20mm",
+      "Efficiency": "85%",
+      "Usage": [
+        "Slackline",
+        "Highline",
+        "Longline",
+        "Rodeoline",
+        "Low Tension lines"
+      ],
+      "ISA approved": "N/A",
+      "Date introduced": "N/A",
+      "Manufacturer": "Equilibrium Slacklines (EQB)",
+      "Price (per unit)": "1 unit and above : 43.00 EUR"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/500",
+    "details_url": "/gear_details/BanditSH",
+    "brand": "Equilibrium Slacklines (EQB)",
+    "product_name": "Bandit SH",
+    "full_name": "Equilibrium Slacklines (EQB) Bandit SH",
+    "manufacturer_info": {
+      "name": "Equilibrium Slacklines (EQB)",
+      "url": "/manufacturer_details/EQB#TAB-IMAGES",
+      "country": "Czech Republic",
+      "country_flag_url": "/img/flags/CZ.png"
+    },
+    "pricing": [],
+    "specifications": {
+      "Material": "Stainless Steel",
+      "Weight": "230gr",
+      "WLL": "12kN",
+      "MBS": "36kN",
+      "Anchor connection type": "Mounting Hole",
+      "Webbing connection type": [
+        "Quick Pin",
+        "Screw Pin"
+      ],
+      "Compatible webbing width": "24mm - 26mm",
+      "Diverter diameter": "20mm",
+      "Efficiency": "85%",
+      "Usage": [
+        "Slackline",
+        "Highline",
+        "Longline",
+        "Rodeoline",
+        "Low Tension lines"
+      ],
+      "ISA approved": "N/A",
+      "Date introduced": "N/A",
+      "Manufacturer": "Equilibrium Slacklines (EQB)"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/524",
+    "details_url": "/gear_details/BanditSH",
+    "brand": "Spider slacklines",
+    "product_name": "Bandit SH",
+    "full_name": "Spider slacklines Bandit SH",
+    "manufacturer_info": {
+      "name": "Spider slacklines",
+      "url": "/manufacturer_details/Spiderslacklines#TAB-IMAGES",
+      "country": "Italy",
+      "country_flag_url": "/img/flags/IT.png"
+    },
+    "pricing": [],
+    "specifications": {
+      "Material": "Stainless Steel",
+      "Weight": "230gr",
+      "WLL": "12kN",
+      "MBS": "36kN",
+      "Anchor connection type": "Mounting Hole",
+      "Webbing connection type": "Screw Pin",
+      "Compatible webbing width": "24mm - 26mm",
+      "Diverter diameter": "20mm",
+      "Efficiency": "85%",
+      "Usage": [
+        "Slackline",
+        "Highline",
+        "Longline",
+        "Rodeoline",
+        "Low Tension lines"
+      ],
+      "ISA approved": "N/A",
+      "Date introduced": "N/A",
+      "Manufacturer": "Spider slacklines"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/501",
+    "details_url": "/gear_details/BanditSL",
+    "brand": "Equilibrium Slacklines (EQB)",
+    "product_name": "Bandit SL",
+    "full_name": "Equilibrium Slacklines (EQB) Bandit SL",
+    "manufacturer_info": {
+      "name": "Equilibrium Slacklines (EQB)",
+      "url": "/manufacturer_details/EQB#TAB-IMAGES",
+      "country": "Czech Republic",
+      "country_flag_url": "/img/flags/CZ.png"
+    },
+    "pricing": [],
+    "specifications": {
+      "Material": "Stainless Steel",
+      "Weight": "293gr",
+      "WLL": "12kN",
+      "MBS": "36kN",
+      "Anchor connection type": "Fixed Bolt",
+      "Webbing connection type": [
+        "Quick Pin",
+        "Screw Pin"
+      ],
+      "Compatible webbing width": "24mm - 26mm",
+      "Diverter diameter": "20mm",
+      "Efficiency": "85%",
+      "Usage": [
+        "Slackline",
+        "Highline",
+        "Longline",
+        "Rodeoline",
+        "Low Tension lines"
+      ],
+      "ISA approved": "N/A",
+      "Date introduced": "N/A",
+      "Manufacturer": "Equilibrium Slacklines (EQB)"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/525",
+    "details_url": "/gear_details/BanditSL",
+    "brand": "Spider slacklines",
+    "product_name": "Bandit SL",
+    "full_name": "Spider slacklines Bandit SL",
+    "manufacturer_info": {
+      "name": "Spider slacklines",
+      "url": "/manufacturer_details/Spiderslacklines#TAB-IMAGES",
+      "country": "Italy",
+      "country_flag_url": "/img/flags/IT.png"
+    },
+    "pricing": [],
+    "specifications": {
+      "Material": "Stainless Steel",
+      "Weight": "293gr",
+      "WLL": "12kN",
+      "MBS": "36kN",
+      "Anchor connection type": "Fixed Bolt",
+      "Webbing connection type": "Screw Pin",
+      "Compatible webbing width": "24mm - 26mm",
+      "Diverter diameter": "20mm",
+      "Efficiency": "85%",
+      "Usage": [
+        "Slackline",
+        "Highline",
+        "Longline",
+        "Rodeoline",
+        "Low Tension lines"
+      ],
+      "ISA approved": "N/A",
+      "Date introduced": "N/A",
+      "Manufacturer": "Spider slacklines"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/548",
+    "details_url": "/gear_details/Beast10",
+    "brand": "Absolute Slacklines",
+    "product_name": "Beast 1.0",
+    "full_name": "Absolute Slacklines Beast 1.0",
+    "manufacturer_info": {
+      "name": "Absolute Slacklines",
+      "url": "/manufacturer_details/AbsoluteSlacklines#TAB-IMAGES",
+      "country": "Canada",
+      "country_flag_url": "/img/flags/CA.png"
+    },
+    "pricing": [
+      {
+        "text": "1 unit and above : 67.32 EUR",
+        "tooltip": "Converted from 104.99 CAD with the rate of 1 EUR = 1.56 CAD"
+      },
+      {
+        "text": "2 units : 64.11 EUR",
+        "tooltip": "Converted from 99.99 CAD with the rate of 1 EUR = 1.56 CAD"
+      }
+    ],
+    "specifications": {
+      "Material": "Stainless Steel",
+      "Weight": "347gr",
+      "WLL": "15kN",
+      "MBS": "60kN",
+      "Anchor connection type": "Mounting Hole",
+      "Webbing connection type": "Captive Pin",
+      "Compatible webbing width": "24mm - 26mm",
+      "Diverter diameter": "30mm",
+      "Efficiency": "N/A",
+      "Usage": [
+        "Slackline",
+        "Highline",
+        "Longline",
+        "Rodeoline",
+        "Low Tension lines"
+      ],
+      "ISA approved": "N/A",
+      "Date introduced": "N/A",
+      "Manufacturer": "Absolute Slacklines",
+      "Price (per unit)": "1 unit and above : 67.32 EUR"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/556",
+    "details_url": "/gear_details/Campoweblock",
+    "brand": "Petram Slacklines",
+    "product_name": "Campo weblock",
+    "full_name": "Petram Slacklines Campo weblock",
+    "manufacturer_info": {
+      "name": "Petram Slacklines",
+      "url": "/manufacturer_details/PetramSlacklines#TAB-IMAGES",
+      "country": "Poland",
+      "country_flag_url": "/img/flags/PL.png"
+    },
+    "pricing": [
+      {
+        "text": "1 unit and above : 33.90 EUR"
+      }
+    ],
+    "specifications": {
+      "Material": "Stainless Steel",
+      "Weight": "225gr",
+      "WLL": "10kN",
+      "MBS": "50kN",
+      "Anchor connection type": "Mounting Hole",
+      "Webbing connection type": "Captive Pin",
+      "Compatible webbing width": "24mm - 26mm",
+      "Diverter diameter": "25mm",
+      "Efficiency": "N/A",
+      "Usage": [
+        "Slackline",
+        "Highline",
+        "Longline",
+        "Rodeoline",
+        "Low Tension lines"
+      ],
+      "ISA approved": "N/A",
+      "Date introduced": "N/A",
+      "Manufacturer": "Petram Slacklines",
+      "Price (per unit)": "1 unit and above : 33.90 EUR"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/505",
+    "details_url": "/gear_details/CanonFX",
+    "brand": "Equilibrium Slacklines (EQB)",
+    "product_name": "Canon FX",
+    "full_name": "Equilibrium Slacklines (EQB) Canon FX",
+    "manufacturer_info": {
+      "name": "Equilibrium Slacklines (EQB)",
+      "url": "/manufacturer_details/EQB#TAB-IMAGES",
+      "country": "Czech Republic",
+      "country_flag_url": "/img/flags/CZ.png"
+    },
+    "product_page_url": "https://www.slackshop.cz/en/weblocks/24-eqb-canon-fx.html",
+    "pricing": [
+      {
+        "text": "1 unit and above : 64.22 EUR",
+        "tooltip": "Converted from 1599 CZK with the rate of 1 EUR = 24.90 CZK"
+      }
+    ],
+    "specifications": {
+      "Material": "Stainless Steel",
+      "Weight": "455gr",
+      "WLL": "18kN",
+      "MBS": "90kN",
+      "Anchor connection type": "Mounting Hole",
+      "Webbing connection type": "Captive Pin",
+      "Compatible webbing width": "24mm - 26mm",
+      "Diverter diameter": "36mm",
+      "Efficiency": "95%",
+      "Usage": [
+        "Slackline",
+        "Highline",
+        "Longline",
+        "Low Tension lines"
+      ],
+      "ISA approved": "N/A",
+      "Date introduced": "N/A",
+      "Manufacturer": "Equilibrium Slacklines (EQB)",
+      "Manufacturer Product Page": "Manufacturer product page",
+      "Price (per unit)": "1 unit and above : 64.22 EUR"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/503",
+    "details_url": "/gear_details/CanonSH",
+    "brand": "Equilibrium Slacklines (EQB)",
+    "product_name": "Canon SH",
+    "full_name": "Equilibrium Slacklines (EQB) Canon SH",
+    "manufacturer_info": {
+      "name": "Equilibrium Slacklines (EQB)",
+      "url": "/manufacturer_details/EQB#TAB-IMAGES",
+      "country": "Czech Republic",
+      "country_flag_url": "/img/flags/CZ.png"
+    },
+    "pricing": [],
+    "specifications": {
+      "Material": "Stainless Steel",
+      "Weight": "515gr",
+      "WLL": "16kN",
+      "MBS": "50kN",
+      "Anchor connection type": "Mounting Hole",
+      "Webbing connection type": [
+        "Quick Pin",
+        "Screw Pin"
+      ],
+      "Compatible webbing width": "24mm - 26mm",
+      "Diverter diameter": "36mm",
+      "Efficiency": "95%",
+      "Usage": [
+        "Slackline",
+        "Highline",
+        "Longline",
+        "Low Tension lines"
+      ],
+      "ISA approved": "N/A",
+      "Date introduced": "N/A",
+      "Manufacturer": "Equilibrium Slacklines (EQB)"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/504",
+    "details_url": "/gear_details/CanonSL",
+    "brand": "Equilibrium Slacklines (EQB)",
+    "product_name": "Canon SL",
+    "full_name": "Equilibrium Slacklines (EQB) Canon SL",
+    "manufacturer_info": {
+      "name": "Equilibrium Slacklines (EQB)",
+      "url": "/manufacturer_details/EQB#TAB-IMAGES",
+      "country": "Czech Republic",
+      "country_flag_url": "/img/flags/CZ.png"
+    },
+    "pricing": [
+      {
+        "text": "1 unit and above : 47.79 EUR",
+        "tooltip": "Converted from 1190 CZK with the rate of 1 EUR = 24.90 CZK"
+      }
+    ],
+    "specifications": {
+      "Material": "Stainless Steel",
+      "Weight": "590gr",
+      "WLL": "16kN",
+      "MBS": "50kN",
+      "Anchor connection type": [
+        "Fixed Bolt",
+        "Quick Pin"
+      ],
+      "Webbing connection type": [
+        "Quick Pin",
+        "Screw Pin"
+      ],
+      "Compatible webbing width": "24mm - 26mm",
+      "Diverter diameter": "36mm",
+      "Efficiency": "85%",
+      "Usage": [
+        "Slackline",
+        "Highline",
+        "Longline",
+        "Low Tension lines"
+      ],
+      "ISA approved": "N/A",
+      "Date introduced": "N/A",
+      "Manufacturer": "Equilibrium Slacklines (EQB)",
+      "Price (per unit)": "1 unit and above : 47.79 EUR"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/551",
+    "details_url": "/gear_details/Catlock",
+    "brand": "Cat on slack",
+    "product_name": "Catlock classic",
+    "full_name": "Cat on slack Catlock classic",
+    "manufacturer_info": {
+      "name": "Cat on slack",
+      "url": "/manufacturer_details/Catonslack#TAB-IMAGES",
+      "country": "Poland",
+      "country_flag_url": "/img/flags/PL.png"
+    },
+    "product_page_url": "https://catonslack.com/product/35390452-slackline-weblock-catlock-classic",
+    "pricing": [
+      {
+        "text": "1 unit : 37.50 EUR"
+      },
+      {
+        "text": "2 units and above : 33.75 EUR"
+      }
+    ],
+    "specifications": {
+      "Material": "Stainless Steel",
+      "Weight": "312gr",
+      "WLL": "12kN",
+      "MBS": "60kN",
+      "Anchor connection type": "Mounting Hole",
+      "Webbing connection type": "Captive Pin",
+      "Compatible webbing width": "24mm - 26mm",
+      "Diverter diameter": "30mm",
+      "Efficiency": "86%",
+      "Usage": [
+        "Slackline",
+        "Highline",
+        "Longline",
+        "Rodeoline",
+        "Low Tension lines"
+      ],
+      "ISA approved": "N/A",
+      "Date introduced": "N/A",
+      "Manufacturer": "Cat on slack",
+      "Manufacturer Product Page": "Manufacturer product page",
+      "Price (per unit)": "1 unit : 37.50 EUR"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/553",
+    "details_url": "/gear_details/CatlockPromini",
+    "brand": "Cat on slack",
+    "product_name": "Catlock mini",
+    "full_name": "Cat on slack Catlock mini",
+    "manufacturer_info": {
+      "name": "Cat on slack",
+      "url": "/manufacturer_details/Catonslack#TAB-IMAGES",
+      "country": "Poland",
+      "country_flag_url": "/img/flags/PL.png"
+    },
+    "product_page_url": "https://catonslack.com/product/34629326-slackline-weblock-catlock-mini",
+    "pricing": [
+      {
+        "text": "1 unit : 44.95 EUR"
+      },
+      {
+        "text": "2 units and above : 42.50 EUR"
+      }
+    ],
+    "specifications": {
+      "Material": [
+        "Stainless Steel",
+        "Aluminum"
+      ],
+      "Weight": "225gr",
+      "WLL": "10kN",
+      "MBS": "50kN",
+      "Anchor connection type": "Mounting Hole",
+      "Webbing connection type": "Quick Pin",
+      "Compatible webbing width": "24mm - 26mm",
+      "Diverter diameter": "25mm",
+      "Efficiency": "N/A",
+      "Usage": [
+        "Slackline",
+        "Highline",
+        "Longline",
+        "Rodeoline",
+        "Low Tension lines"
+      ],
+      "ISA approved": "N/A",
+      "Date introduced": "N/A",
+      "Manufacturer": "Cat on slack",
+      "Manufacturer Product Page": "Manufacturer product page",
+      "Price (per unit)": "1 unit : 44.95 EUR"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/552",
+    "details_url": "/gear_details/CatlockPro",
+    "brand": "Cat on slack",
+    "product_name": "Catlock Pro",
+    "full_name": "Cat on slack Catlock Pro",
+    "manufacturer_info": {
+      "name": "Cat on slack",
+      "url": "/manufacturer_details/Catonslack#TAB-IMAGES",
+      "country": "Poland",
+      "country_flag_url": "/img/flags/PL.png"
+    },
+    "pricing": [
+      {
+        "text": "1 unit and above : 47.79 EUR",
+        "tooltip": "Converted from 204 PLN with the rate of 1 EUR = 4.27 PLN"
+      }
+    ],
+    "specifications": {
+      "Material": "Stainless Steel",
+      "Weight": "340gr",
+      "WLL": "12kN",
+      "MBS": "60kN",
+      "Anchor connection type": [
+        "Mounting Hole",
+        "Rotatable Mounting Hole"
+      ],
+      "Webbing connection type": "Quick Pin",
+      "Compatible webbing width": "24mm - 26mm",
+      "Diverter diameter": "30mm",
+      "Efficiency": "86%",
+      "Usage": [
+        "Slackline",
+        "Highline",
+        "Longline",
+        "Rodeoline",
+        "Low Tension lines"
+      ],
+      "ISA approved": "N/A",
+      "Date introduced": "Mar 2018",
+      "Manufacturer": "Cat on slack",
+      "Price (per unit)": "1 unit and above : 47.79 EUR"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/550",
+    "details_url": "/gear_details/CatlockSR",
+    "brand": "Cat on slack",
+    "product_name": "Catlock SR",
+    "full_name": "Cat on slack Catlock SR",
+    "manufacturer_info": {
+      "name": "Cat on slack",
+      "url": "/manufacturer_details/Catonslack#TAB-IMAGES",
+      "country": "Poland",
+      "country_flag_url": "/img/flags/PL.png"
+    },
+    "pricing": [
+      {
+        "text": "1 unit and above : 37.02 EUR",
+        "tooltip": "Converted from 158 PLN with the rate of 1 EUR = 4.27 PLN"
+      }
+    ],
+    "specifications": {
+      "Material": "Stainless Steel",
+      "Weight": "280gr",
+      "WLL": "10kN",
+      "MBS": "50kN",
+      "Anchor connection type": [
+        "Fixed Bolt",
+        "Soft Release"
+      ],
+      "Webbing connection type": "Captive Pin",
+      "Compatible webbing width": "24mm - 26mm",
+      "Diverter diameter": "25mm",
+      "Efficiency": "N/A",
+      "Usage": [
+        "Slackline",
+        "Highline",
+        "Longline",
+        "Low Tension lines"
+      ],
+      "ISA approved": "N/A",
+      "Date introduced": "N/A",
+      "Manufacturer": "Cat on slack",
+      "Price (per unit)": "1 unit and above : 37.02 EUR"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/563",
+    "details_url": "/gear_details/CatlockSRPRO",
+    "brand": "Cat on slack",
+    "product_name": "Catlock SR PRO",
+    "full_name": "Cat on slack Catlock SR PRO",
+    "manufacturer_info": {
+      "name": "Cat on slack",
+      "url": "/manufacturer_details/Catonslack#TAB-IMAGES",
+      "country": "Poland",
+      "country_flag_url": "/img/flags/PL.png"
+    },
+    "pricing": [
+      {
+        "text": "1 unit and above : 62.08 EUR",
+        "tooltip": "Converted from 265 PLN with the rate of 1 EUR = 4.27 PLN"
+      }
+    ],
+    "specifications": {
+      "Material": "Stainless Steel",
+      "Weight": "340gr",
+      "WLL": "12kN",
+      "MBS": "65kN",
+      "Anchor connection type": [
+        "Soft Release",
+        "Quick Pin"
+      ],
+      "Webbing connection type": "Quick Pin",
+      "Compatible webbing width": "24mm - 26mm",
+      "Diverter diameter": "30mm",
+      "Efficiency": "N/A",
+      "Usage": [
+        "Slackline",
+        "Highline",
+        "Longline",
+        "Rodeoline",
+        "Low Tension lines",
+        "Soft Release"
+      ],
+      "ISA approved": "N/A",
+      "Date introduced": "N/A",
+      "Manufacturer": "Cat on slack",
+      "Price (per unit)": "1 unit and above : 62.08 EUR"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/523",
+    "details_url": "/gear_details/Chili",
+    "brand": "Spider slacklines",
+    "product_name": "Chili",
+    "full_name": "Spider slacklines Chili",
+    "manufacturer_info": {
+      "name": "Spider slacklines",
+      "url": "/manufacturer_details/Spiderslacklines#TAB-IMAGES",
+      "country": "Italy",
+      "country_flag_url": "/img/flags/IT.png"
+    },
+    "pricing": [],
+    "specifications": {
+      "Material": "Stainless Steel",
+      "Weight": "300gr",
+      "WLL": "12kN",
+      "MBS": "50kN",
+      "Anchor connection type": "Mounting Hole",
+      "Webbing connection type": "Quick Pin",
+      "Compatible webbing width": "24mm - 26mm",
+      "Diverter diameter": "N/A",
+      "Efficiency": "N/A",
+      "Usage": "N/A",
+      "ISA approved": "N/A",
+      "Date introduced": "N/A",
+      "Manufacturer": "Spider slacklines"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/549",
+    "details_url": "/gear_details/CHILI20",
+    "brand": "Spider slacklines",
+    "product_name": "CHILI 2.0",
+    "full_name": "Spider slacklines CHILI 2.0",
+    "manufacturer_info": {
+      "name": "Spider slacklines",
+      "url": "/manufacturer_details/Spiderslacklines#TAB-IMAGES",
+      "country": "Italy",
+      "country_flag_url": "/img/flags/IT.png"
+    },
+    "pricing": [
+      {
+        "text": "1 - 1 units : 49.95 EUR"
+      },
+      {
+        "text": "2 - 3 units : 45.95 EUR"
+      },
+      {
+        "text": "4 units and above : 42.95 EUR"
+      }
+    ],
+    "specifications": {
+      "Material": "Stainless Steel",
+      "Weight": "275gr",
+      "WLL": "15kN",
+      "MBS": "70kN",
+      "Anchor connection type": "Mounting Hole",
+      "Webbing connection type": "Captive Pin",
+      "Compatible webbing width": "24mm - 26mm",
+      "Diverter diameter": "N/A",
+      "Efficiency": "N/A",
+      "Usage": [
+        "Slackline",
+        "Highline",
+        "Longline",
+        "Rodeoline",
+        "Low Tension lines"
+      ],
+      "ISA approved": "N/A",
+      "Date introduced": "N/A",
+      "Manufacturer": "Spider slacklines",
+      "Price (per unit)": "1 - 1 units : 49.95 EUR"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/543",
+    "details_url": "/gear_details/Constatweblock",
+    "brand": "Petram Slacklines",
+    "product_name": "Constat weblock",
+    "full_name": "Petram Slacklines Constat weblock",
+    "manufacturer_info": {
+      "name": "Petram Slacklines",
+      "url": "/manufacturer_details/PetramSlacklines#TAB-IMAGES",
+      "country": "Poland",
+      "country_flag_url": "/img/flags/PL.png"
+    },
+    "pricing": [
+      {
+        "text": "1 unit and above : 13.90 EUR"
+      }
+    ],
+    "specifications": {
+      "Material": "Polycarbonate",
+      "Weight": "60gr",
+      "WLL": "2.5kN",
+      "MBS": "7.5kN",
+      "Anchor connection type": "Mounting Hole",
+      "Webbing connection type": "Captive Pin",
+      "Compatible webbing width": "24mm - 26mm",
+      "Diverter diameter": "N/A",
+      "Efficiency": "N/A",
+      "Usage": "Rodeoline",
+      "ISA approved": "N/A",
+      "Date introduced": "N/A",
+      "Manufacturer": "Petram Slacklines",
+      "Price (per unit)": "1 unit and above : 13.90 EUR"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/512",
+    "details_url": "/gear_details/Direct",
+    "brand": "Equilibrium Slacklines (EQB)",
+    "product_name": "Direct",
+    "full_name": "Equilibrium Slacklines (EQB) Direct",
+    "manufacturer_info": {
+      "name": "Equilibrium Slacklines (EQB)",
+      "url": "/manufacturer_details/EQB#TAB-IMAGES",
+      "country": "Czech Republic",
+      "country_flag_url": "/img/flags/CZ.png"
+    },
+    "pricing": [
+      {
+        "text": "1 unit and above : 34.14 EUR",
+        "tooltip": "Converted from 850 CZK with the rate of 1 EUR = 24.90 CZK"
+      }
+    ],
+    "specifications": {
+      "Material": "Stainless Steel",
+      "Weight": "245gr",
+      "WLL": "12kN",
+      "MBS": "40kN",
+      "Anchor connection type": "Mounting Hole",
+      "Webbing connection type": "Soft Release",
+      "Compatible webbing width": "24mm - 26mm",
+      "Diverter diameter": "N/A",
+      "Efficiency": "N/A",
+      "Usage": "Soft Release",
+      "ISA approved": "N/A",
+      "Date introduced": "N/A",
+      "Manufacturer": "Equilibrium Slacklines (EQB)",
+      "Price (per unit)": "1 unit and above : 34.14 EUR"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/522",
+    "details_url": "/gear_details/Dreamcatcher",
+    "brand": "One Inch Dreams",
+    "product_name": "Dreamcatcher",
+    "full_name": "One Inch Dreams Dreamcatcher",
+    "manufacturer_info": {
+      "name": "One Inch Dreams",
+      "url": "/manufacturer_details/OneInchDreams#TAB-IMAGES",
+      "country": "Germany",
+      "country_flag_url": "/img/flags/DE.png"
+    },
+    "pricing": [
+      {
+        "text": "1 unit and above : 84.90 EUR"
+      }
+    ],
+    "specifications": {
+      "Material": "Stainless Steel",
+      "Weight": "350gr",
+      "WLL": "15kN",
+      "MBS": "N/A",
+      "Anchor connection type": "Rotatable Mounting Hole",
+      "Webbing connection type": "Captive Pin",
+      "Compatible webbing width": "24mm - 26mm",
+      "Diverter diameter": "30mm",
+      "Efficiency": "N/A",
+      "Usage": [
+        "Slackline",
+        "Highline",
+        "Longline",
+        "Rodeoline",
+        "Low Tension lines"
+      ],
+      "ISA approved": "N/A",
+      "Date introduced": "N/A",
+      "Manufacturer": "One Inch Dreams",
+      "Price (per unit)": "1 unit and above : 84.90 EUR"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/519",
+    "details_url": "/gear_details/Easylock",
+    "brand": "Slackliner.de",
+    "product_name": "Easylock",
+    "full_name": "Slackliner.de Easylock",
+    "manufacturer_info": {
+      "name": "Slackliner.de",
+      "url": "/manufacturer_details/Sigma#TAB-IMAGES",
+      "country": "Germany",
+      "country_flag_url": "/img/flags/DE.png"
+    },
+    "pricing": [],
+    "specifications": {
+      "Material": "Stainless Steel",
+      "Weight": "280gr",
+      "WLL": "10kN",
+      "MBS": "28.5kN",
+      "Anchor connection type": "Mounting Hole",
+      "Webbing connection type": "Quick Pin",
+      "Compatible webbing width": "24mm - 26mm",
+      "Diverter diameter": "22mm",
+      "Efficiency": "75%",
+      "Usage": "N/A",
+      "ISA approved": "N/A",
+      "Date introduced": "N/A",
+      "Manufacturer": "Slackliner.de"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/520",
+    "details_url": "/gear_details/Equilocker",
+    "brand": "Slackliner.de",
+    "product_name": "Equilocker",
+    "full_name": "Slackliner.de Equilocker",
+    "manufacturer_info": {
+      "name": "Slackliner.de",
+      "url": "/manufacturer_details/Sigma#TAB-IMAGES",
+      "country": "Germany",
+      "country_flag_url": "/img/flags/DE.png"
+    },
+    "product_page_url": "http://www.slackliner.de/Verbindungselemente/Linelocker/Equilocker.html",
+    "pricing": [
+      {
+        "text": "1 unit and above : 55.50 EUR"
+      }
+    ],
+    "specifications": {
+      "Material": "Stainless Steel",
+      "Weight": "380gr",
+      "WLL": "N/A",
+      "MBS": "34kN",
+      "Anchor connection type": "Mounting Hole",
+      "Webbing connection type": "Quick Pin",
+      "Compatible webbing width": "24mm - 26mm",
+      "Diverter diameter": "34mm",
+      "Efficiency": "90%",
+      "Usage": [
+        "Slackline",
+        "Highline",
+        "Longline",
+        "Rodeoline",
+        "Low Tension lines"
+      ],
+      "ISA approved": "N/A",
+      "Date introduced": "N/A",
+      "Manufacturer": "Slackliner.de",
+      "Manufacturer Product Page": "Manufacturer product page",
+      "Price (per unit)": "1 unit and above : 55.50 EUR"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/558",
+    "details_url": "/gear_details/Fortisweblock",
+    "brand": "Petram Slacklines",
+    "product_name": "Fortis weblock",
+    "full_name": "Petram Slacklines Fortis weblock",
+    "manufacturer_info": {
+      "name": "Petram Slacklines",
+      "url": "/manufacturer_details/PetramSlacklines#TAB-IMAGES",
+      "country": "Poland",
+      "country_flag_url": "/img/flags/PL.png"
+    },
+    "pricing": [
+      {
+        "text": "1 unit and above : 39.90 EUR"
+      }
+    ],
+    "specifications": {
+      "Material": "Stainless Steel",
+      "Weight": "365gr",
+      "WLL": "14kN",
+      "MBS": "70kN",
+      "Anchor connection type": "Mounting Hole",
+      "Webbing connection type": "Screw Pin",
+      "Compatible webbing width": "49mm - 51mm",
+      "Diverter diameter": "15mm",
+      "Efficiency": "N/A",
+      "Usage": "Trickline",
+      "ISA approved": "N/A",
+      "Date introduced": "N/A",
+      "Manufacturer": "Petram Slacklines",
+      "Price (per unit)": "1 unit and above : 39.90 EUR"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/542",
+    "details_url": "/gear_details/Frog",
+    "brand": "Slack Mountain",
+    "product_name": "Frog",
+    "full_name": "Slack Mountain Frog",
+    "manufacturer_info": {
+      "name": "Slack Mountain",
+      "url": "/manufacturer_details/SlackMountain#TAB-IMAGES",
+      "country": "France",
+      "country_flag_url": "/img/flags/FR.png"
+    },
+    "product_page_url": "https://slack-mountain.com/en/webbing-anchor/231-4047-frogx.html",
+    "pricing": [
+      {
+        "text": "1 unit and above : 79.00 EUR"
+      },
+      {
+        "text": "2 units : 67.50 EUR"
+      }
+    ],
+    "specifications": {
+      "Material": [
+        "Stainless Steel",
+        "High Strength Steel"
+      ],
+      "Weight": "296gr",
+      "WLL": "15kN",
+      "MBS": "60kN",
+      "Anchor connection type": [
+        "Mounting Hole",
+        "Sling",
+        "XL Mounting Hole"
+      ],
+      "Webbing connection type": "Quick Pin",
+      "Compatible webbing width": "20mm - 27mm",
+      "Diverter diameter": "60mm",
+      "Efficiency": "98%",
+      "Usage": [
+        "Slackline",
+        "Highline",
+        "Longline",
+        "Rodeoline",
+        "Low Tension lines"
+      ],
+      "ISA approved": "N/A",
+      "Date introduced": "N/A",
+      "Manufacturer": "Slack Mountain",
+      "Manufacturer Product Page": "Manufacturer product page",
+      "Price (per unit)": "1 unit and above : 79.00 EUR"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/528",
+    "details_url": "/gear_details/Gingko2",
+    "brand": "Slack Mountain",
+    "product_name": "Ginkgo",
+    "full_name": "Slack Mountain Ginkgo",
+    "manufacturer_info": {
+      "name": "Slack Mountain",
+      "url": "/manufacturer_details/SlackMountain#TAB-IMAGES",
+      "country": "France",
+      "country_flag_url": "/img/flags/FR.png"
+    },
+    "product_page_url": "https://slack-mountain.com/en/tricklines/166-paire-de-ginkgo-745-l-unite.html",
+    "pricing": [
+      {
+        "text": "1 unit and above : 100.00 EUR"
+      },
+      {
+        "text": "2 units : 92.50 EUR"
+      }
+    ],
+    "specifications": {
+      "Material": [
+        "Stainless Steel",
+        "High Strength Steel"
+      ],
+      "Weight": "850gr",
+      "WLL": "30kN",
+      "MBS": "100kN",
+      "Anchor connection type": "Mounting Hole",
+      "Webbing connection type": [
+        "Quick Pin",
+        "Screw Pin"
+      ],
+      "Compatible webbing width": "40mm - 51mm",
+      "Diverter diameter": "30mm",
+      "Efficiency": "95%",
+      "Usage": [
+        "Highline",
+        "Trickline"
+      ],
+      "ISA approved": "N/A",
+      "Date introduced": "N/A",
+      "Manufacturer": "Slack Mountain",
+      "Manufacturer Product Page": "Manufacturer product page",
+      "Price (per unit)": "1 unit and above : 100.00 EUR"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/3071",
+    "details_url": "/gear_details/ginkgo_mini",
+    "brand": "Slack Mountain",
+    "product_name": "Ginkgo Mini",
+    "full_name": "Slack Mountain Ginkgo Mini",
+    "manufacturer_info": {
+      "name": "Slack Mountain",
+      "url": "/manufacturer_details/SlackMountain#TAB-IMAGES",
+      "country": "France",
+      "country_flag_url": "/img/flags/FR.png"
+    },
+    "pricing": [
+      {
+        "text": "1 unit : 65.00 EUR"
+      },
+      {
+        "text": "2 units and above : 60.00 EUR"
+      }
+    ],
+    "specifications": {
+      "Material": "Stainless Steel",
+      "Weight": "560gr",
+      "WLL": "20kN",
+      "MBS": "105kN",
+      "Anchor connection type": "Mounting Hole",
+      "Webbing connection type": "Quick Pin",
+      "Compatible webbing width": "30mm - 51mm",
+      "Diverter diameter": "26mm",
+      "Efficiency": "N/A",
+      "Usage": "Trickline",
+      "ISA approved": "N/A",
+      "Date introduced": "N/A",
+      "Manufacturer": "Slack Mountain",
+      "Price (per unit)": "1 unit : 65.00 EUR"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/3019",
+    "details_url": "/gear_details/ginkgo_quickpin",
+    "brand": "Slack Mountain",
+    "product_name": "Ginkgo Quickpin",
+    "full_name": "Slack Mountain Ginkgo Quickpin",
+    "manufacturer_info": {
+      "name": "Slack Mountain",
+      "url": "/manufacturer_details/SlackMountain#TAB-IMAGES",
+      "country": "France",
+      "country_flag_url": "/img/flags/FR.png"
+    },
+    "pricing": [
+      {
+        "text": "2 units and above : 69.00 EUR"
+      }
+    ],
+    "specifications": {
+      "Material": "Stainless Steel",
+      "Weight": "783gr",
+      "WLL": "20kN",
+      "MBS": "110kN",
+      "Anchor connection type": "Mounting Hole",
+      "Webbing connection type": "Quick Pin",
+      "Compatible webbing width": "40mm - 51mm",
+      "Diverter diameter": "35mm",
+      "Efficiency": "95%",
+      "Usage": "Trickline",
+      "ISA approved": "N/A",
+      "Date introduced": "N/A",
+      "Manufacturer": "Slack Mountain",
+      "Price (per unit)": "2 units and above : 69.00 EUR"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/506",
+    "details_url": "/gear_details/Katana",
+    "brand": "Equilibrium Slacklines (EQB)",
+    "product_name": "Katana",
+    "full_name": "Equilibrium Slacklines (EQB) Katana",
+    "manufacturer_info": {
+      "name": "Equilibrium Slacklines (EQB)",
+      "url": "/manufacturer_details/EQB#TAB-IMAGES",
+      "country": "Czech Republic",
+      "country_flag_url": "/img/flags/CZ.png"
+    },
+    "pricing": [
+      {
+        "text": "1 unit and above : 47.97 EUR"
+      }
+    ],
+    "specifications": {
+      "Material": "Stainless Steel",
+      "Weight": "415gr",
+      "WLL": "16kN",
+      "MBS": "80kN",
+      "Anchor connection type": "Mounting Hole",
+      "Webbing connection type": "Captive Pin",
+      "Compatible webbing width": "34mm - 36mm",
+      "Diverter diameter": "24mm",
+      "Efficiency": "90%",
+      "Usage": "Trickline",
+      "ISA approved": "N/A",
+      "Date introduced": "N/A",
+      "Manufacturer": "Equilibrium Slacklines (EQB)",
+      "Price (per unit)": "1 unit and above : 47.97 EUR"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/507",
+    "details_url": "/gear_details/KatanaFX",
+    "brand": "Equilibrium Slacklines (EQB)",
+    "product_name": "Katana FX",
+    "full_name": "Equilibrium Slacklines (EQB) Katana FX",
+    "manufacturer_info": {
+      "name": "Equilibrium Slacklines (EQB)",
+      "url": "/manufacturer_details/EQB#TAB-IMAGES",
+      "country": "Czech Republic",
+      "country_flag_url": "/img/flags/CZ.png"
+    },
+    "product_page_url": "https://www.slackshop.cz/en/weblocks/27-eqb-katana-fx.html",
+    "pricing": [
+      {
+        "text": "1 unit and above : 44.94 EUR",
+        "tooltip": "Converted from 1119 CZK with the rate of 1 EUR = 24.90 CZK"
+      }
+    ],
+    "specifications": {
+      "Material": "Stainless Steel",
+      "Weight": "415gr",
+      "WLL": "16kN",
+      "MBS": "80kN",
+      "Anchor connection type": "Mounting Hole",
+      "Webbing connection type": "Captive Pin",
+      "Compatible webbing width": "34mm - 36mm",
+      "Diverter diameter": "24mm",
+      "Efficiency": "90%",
+      "Usage": "Trickline",
+      "ISA approved": "N/A",
+      "Date introduced": "N/A",
+      "Manufacturer": "Equilibrium Slacklines (EQB)",
+      "Manufacturer Product Page": "Manufacturer product page",
+      "Price (per unit)": "1 unit and above : 44.94 EUR"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/3252",
+    "details_url": "/gear_details/kingpin",
+    "brand": "Slacktivity",
+    "product_name": "KingPin",
+    "full_name": "Slacktivity KingPin",
+    "manufacturer_info": {
+      "name": "Slacktivity",
+      "url": "/manufacturer_details/Slacktivity#TAB-IMAGES",
+      "country": "Switzerland",
+      "country_flag_url": "/img/flags/CH.png"
+    },
+    "product_page_url": "https://slacktivity.com/shop/kingpin-weblock/",
+    "pricing": [
+      {
+        "text": "1 unit and above : 60.00 EUR"
+      }
+    ],
+    "specifications": {
+      "Material": "Aluminum",
+      "Weight": "153gr",
+      "WLL": "4kN",
+      "MBS": "17kN",
+      "Anchor connection type": "Integrated Shackle",
+      "Webbing connection type": "Quick Pin",
+      "Compatible webbing width": "19mm - 20mm",
+      "Diverter diameter": "N/A",
+      "Efficiency": "N/A",
+      "Usage": "N/A",
+      "ISA approved": "N/A",
+      "Date introduced": "N/A",
+      "Manufacturer": "Slacktivity",
+      "Manufacturer Product Page": "Manufacturer product page",
+      "Price (per unit)": "1 unit and above : 60.00 EUR"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/3064",
+    "details_url": "/gear_details/liime_sr",
+    "brand": "Spider slacklines",
+    "product_name": "LIime SR",
+    "full_name": "Spider slacklines LIime SR",
+    "manufacturer_info": {
+      "name": "Spider slacklines",
+      "url": "/manufacturer_details/Spiderslacklines#TAB-IMAGES",
+      "country": "Italy",
+      "country_flag_url": "/img/flags/IT.png"
+    },
+    "pricing": [
+      {
+        "text": "1 - 1 units : 42.95 EUR"
+      },
+      {
+        "text": "2 - 3 units : 39.95 EUR"
+      },
+      {
+        "text": "4 units and above : 36.95 EUR"
+      }
+    ],
+    "specifications": {
+      "Material": [
+        "High Strength Steel",
+        "Aluminum"
+      ],
+      "Weight": "220gr",
+      "WLL": "12kN",
+      "MBS": "48kN",
+      "Anchor connection type": "Sling",
+      "Webbing connection type": [
+        "Soft Release",
+        "Captive Pin"
+      ],
+      "Compatible webbing width": "24mm - 26mm",
+      "Diverter diameter": "N/A",
+      "Efficiency": "N/A",
+      "Usage": "N/A",
+      "ISA approved": "N/A",
+      "Date introduced": "N/A",
+      "Manufacturer": "Spider slacklines",
+      "Price (per unit)": "1 - 1 units : 42.95 EUR"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/561",
+    "details_url": "/gear_details/LimeLinelock",
+    "brand": "Spider slacklines",
+    "product_name": "Lime",
+    "full_name": "Spider slacklines Lime",
+    "manufacturer_info": {
+      "name": "Spider slacklines",
+      "url": "/manufacturer_details/Spiderslacklines#TAB-IMAGES",
+      "country": "Italy",
+      "country_flag_url": "/img/flags/IT.png"
+    },
+    "pricing": [
+      {
+        "text": "1 - 1 units : 39.95 EUR"
+      },
+      {
+        "text": "2 - 3 units : 36.95 EUR"
+      },
+      {
+        "text": "4 units and above : 33.95 EUR"
+      }
+    ],
+    "specifications": {
+      "Material": [
+        "Stainless Steel",
+        "Aluminum"
+      ],
+      "Weight": "275gr",
+      "WLL": "12kN",
+      "MBS": "48kN",
+      "Anchor connection type": "Mounting Hole",
+      "Webbing connection type": "Captive Pin",
+      "Compatible webbing width": "24mm - 26mm",
+      "Diverter diameter": "N/A",
+      "Efficiency": "N/A",
+      "Usage": [
+        "Slackline",
+        "Highline",
+        "Longline",
+        "Rodeoline",
+        "Low Tension lines"
+      ],
+      "ISA approved": "N/A",
+      "Date introduced": "N/A",
+      "Manufacturer": "Spider slacklines",
+      "Price (per unit)": "1 - 1 units : 39.95 EUR"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/540",
+    "details_url": "/gear_details/LineLockALMKIII",
+    "brand": "Slack Pro!",
+    "product_name": "LineLock AL MK4",
+    "full_name": "Slack Pro! LineLock AL MK4",
+    "manufacturer_info": {
+      "name": "Slack Pro!",
+      "url": "/manufacturer_details/SlackPro#TAB-IMAGES",
+      "country": "Germany",
+      "country_flag_url": "/img/flags/DE.png"
+    },
+    "product_page_url": "https://www.linegrip.com/shop/slackpro-linelock-al/",
+    "pricing": [
+      {
+        "text": "1 unit and above : 76.30 EUR"
+      }
+    ],
+    "specifications": {
+      "Material": "Aluminum",
+      "Weight": "197gr",
+      "WLL": "15kN",
+      "MBS": "45kN",
+      "Anchor connection type": [
+        "Fixed Bolt",
+        "Soft Release",
+        "Sling",
+        "Pin Locked Bolt"
+      ],
+      "Webbing connection type": "Captive Pin",
+      "Compatible webbing width": "24mm - 26mm",
+      "Diverter diameter": "22mm",
+      "Efficiency": "N/A",
+      "Usage": [
+        "Slackline",
+        "Highline",
+        "Longline",
+        "Rodeoline",
+        "Low Tension lines"
+      ],
+      "ISA approved": "N/A",
+      "Date introduced": "N/A",
+      "Manufacturer": "Slack Pro!",
+      "Manufacturer Product Page": "Manufacturer product page",
+      "Price (per unit)": "1 unit and above : 76.30 EUR"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/3041",
+    "details_url": "/gear_details/linelock_mini",
+    "brand": "Krok",
+    "product_name": "LineLock mini",
+    "full_name": "Krok LineLock mini",
+    "manufacturer_info": {
+      "name": "Krok",
+      "url": "/manufacturer_details/krok#TAB-IMAGES",
+      "country": "Russian Federation",
+      "country_flag_url": "/img/flags/RU.png"
+    },
+    "product_page_url": "https://krok.biz/slackline/layn-lok-mini",
+    "pricing": [
+      {
+        "text": "1 unit and above : 19.12 EUR",
+        "tooltip": "Converted from 1730 RUB with the rate of 1 EUR = 90.50 RUB"
+      }
+    ],
+    "specifications": {
+      "Material": [
+        "High Strength Steel",
+        "Aluminum"
+      ],
+      "Weight": "175gr",
+      "WLL": "30kN",
+      "MBS": "60kN",
+      "Anchor connection type": "Mounting Hole",
+      "Webbing connection type": "Captive Pin",
+      "Compatible webbing width": "24mm - 26mm",
+      "Diverter diameter": "N/A",
+      "Efficiency": "N/A",
+      "Usage": "N/A",
+      "ISA approved": "N/A",
+      "Date introduced": "Sep 2017",
+      "Manufacturer": "Krok",
+      "Manufacturer Product Page": "Manufacturer product page",
+      "Price (per unit)": "1 unit and above : 19.12 EUR"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/541",
+    "details_url": "/gear_details/LineLockVAMKIII",
+    "brand": "Slack Pro!",
+    "product_name": "LineLock VA MKIII",
+    "full_name": "Slack Pro! LineLock VA MKIII",
+    "manufacturer_info": {
+      "name": "Slack Pro!",
+      "url": "/manufacturer_details/SlackPro#TAB-IMAGES",
+      "country": "Germany",
+      "country_flag_url": "/img/flags/DE.png"
+    },
+    "pricing": [
+      {
+        "text": "1 unit and above : 59.90 EUR"
+      }
+    ],
+    "specifications": {
+      "Material": "High Strength Steel",
+      "Weight": "330gr",
+      "WLL": "15kN",
+      "MBS": "45kN",
+      "Anchor connection type": [
+        "Fixed Bolt",
+        "Sling",
+        "Pin Locked Bolt"
+      ],
+      "Webbing connection type": "Captive Pin",
+      "Compatible webbing width": "24mm - 26mm",
+      "Diverter diameter": "22mm",
+      "Efficiency": "N/A",
+      "Usage": [
+        "Slackline",
+        "Highline",
+        "Longline",
+        "Rodeoline",
+        "Low Tension lines"
+      ],
+      "ISA approved": "N/A",
+      "Date introduced": "N/A",
+      "Manufacturer": "Slack Pro!",
+      "Price (per unit)": "1 unit and above : 59.90 EUR"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/3135",
+    "details_url": "/gear_details/linelocker",
+    "brand": "Equilibrium Slacklines (EQB)",
+    "product_name": "Linelocker",
+    "full_name": "Equilibrium Slacklines (EQB) Linelocker",
+    "manufacturer_info": {
+      "name": "Equilibrium Slacklines (EQB)",
+      "url": "/manufacturer_details/EQB#TAB-IMAGES",
+      "country": "Czech Republic",
+      "country_flag_url": "/img/flags/CZ.png"
+    },
+    "product_page_url": "https://www.slackshop.cz/cs/kotvitka/132-linelocker.html",
+    "pricing": [
+      {
+        "text": "1 unit : 8.80 EUR",
+        "tooltip": "Converted from 219 CZK with the rate of 1 EUR = 24.90 CZK"
+      }
+    ],
+    "specifications": {
+      "Material": "Aluminum",
+      "Weight": "24gr",
+      "WLL": "6kN",
+      "MBS": "35kN",
+      "Anchor connection type": "N/A",
+      "Webbing connection type": "N/A",
+      "Compatible webbing width": "N/A",
+      "Diverter diameter": "N/A",
+      "Efficiency": "N/A",
+      "Usage": "N/A",
+      "ISA approved": "N/A",
+      "Date introduced": "N/A",
+      "Manufacturer": "Equilibrium Slacklines (EQB)",
+      "Manufacturer Product Page": "Manufacturer product page",
+      "Price (per unit)": "1 unit : 8.80 EUR"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/555",
+    "details_url": "/gear_details/LINK",
+    "brand": "ZERGE outdoor",
+    "product_name": "LINK",
+    "full_name": "ZERGE outdoor LINK",
+    "manufacturer_info": {
+      "name": "ZERGE outdoor",
+      "url": "/manufacturer_details/ZERGEoutdoor#TAB-IMAGES",
+      "country": "United Kingdom",
+      "country_flag_url": "/img/flags/GB.png"
+    },
+    "pricing": [],
+    "specifications": {
+      "Material": "Stainless Steel",
+      "Weight": "328gr",
+      "WLL": "15kN",
+      "MBS": "70kN",
+      "Anchor connection type": "Mounting Hole",
+      "Webbing connection type": "Quick Pin",
+      "Compatible webbing width": "24mm - 26mm",
+      "Diverter diameter": "28mm",
+      "Efficiency": "N/A",
+      "Usage": "N/A",
+      "ISA approved": "N/A",
+      "Date introduced": "N/A",
+      "Manufacturer": "ZERGE outdoor"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/3024",
+    "details_url": "/gear_details/lynx_1",
+    "brand": "Landcruising",
+    "product_name": "Lynx 1",
+    "full_name": "Landcruising Lynx 1",
+    "manufacturer_info": {
+      "name": "Landcruising",
+      "url": "/manufacturer_details/Landcruising#TAB-IMAGES",
+      "country": "Germany",
+      "country_flag_url": "/img/flags/DE.png"
+    },
+    "pricing": [],
+    "specifications": {
+      "Material": "Stainless Steel",
+      "Weight": "240gr",
+      "WLL": "10kN",
+      "MBS": "N/A",
+      "Anchor connection type": [
+        "Fixed Angled bolt?",
+        "Sling"
+      ],
+      "Webbing connection type": [
+        "Quick Pin",
+        "Removable pin"
+      ],
+      "Compatible webbing width": "24mm - 26mm",
+      "Diverter diameter": "14mm",
+      "Efficiency": "N/A",
+      "Usage": [
+        "Slackline",
+        "Longline"
+      ],
+      "ISA approved": "N/A",
+      "Date introduced": "Jan 2010",
+      "Manufacturer": "Landcruising"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/3023",
+    "details_url": "/gear_details/lynx_21",
+    "brand": "Landcruising",
+    "product_name": "Lynx 2.1",
+    "full_name": "Landcruising Lynx 2.1",
+    "manufacturer_info": {
+      "name": "Landcruising",
+      "url": "/manufacturer_details/Landcruising#TAB-IMAGES",
+      "country": "Germany",
+      "country_flag_url": "/img/flags/DE.png"
+    },
+    "pricing": [],
+    "specifications": {
+      "Material": "High Strength Steel",
+      "Weight": "290.2gr",
+      "WLL": "12kN",
+      "MBS": "48kN",
+      "Anchor connection type": "Sling",
+      "Webbing connection type": "Quick Pin",
+      "Compatible webbing width": "24mm - 26mm",
+      "Diverter diameter": "22mm",
+      "Efficiency": "N/A",
+      "Usage": [
+        "Slackline",
+        "Longline"
+      ],
+      "ISA approved": "N/A",
+      "Date introduced": "Jan 2011",
+      "Manufacturer": "Landcruising"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/514",
+    "details_url": "/gear_details/Lynx30",
+    "brand": "Landcruising",
+    "product_name": "Lynx 3.0",
+    "full_name": "Landcruising Lynx 3.0",
+    "manufacturer_info": {
+      "name": "Landcruising",
+      "url": "/manufacturer_details/Landcruising#TAB-IMAGES",
+      "country": "Germany",
+      "country_flag_url": "/img/flags/DE.png"
+    },
+    "pricing": [],
+    "specifications": {
+      "Material": "High Strength Steel",
+      "Weight": "310gr",
+      "WLL": "12kN",
+      "MBS": "70kN",
+      "Anchor connection type": "Mounting Hole",
+      "Webbing connection type": "Quick Pin",
+      "Compatible webbing width": "24mm - 26mm",
+      "Diverter diameter": "28mm",
+      "Efficiency": "N/A",
+      "Usage": [
+        "Slackline",
+        "Highline",
+        "Longline",
+        "Rodeoline",
+        "Low Tension lines"
+      ],
+      "ISA approved": "N/A",
+      "Date introduced": "N/A",
+      "Manufacturer": "Landcruising"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/515",
+    "details_url": "/gear_details/Lynx40SH",
+    "brand": "Landcruising",
+    "product_name": "Lynx 4.0 SH",
+    "full_name": "Landcruising Lynx 4.0 SH",
+    "manufacturer_info": {
+      "name": "Landcruising",
+      "url": "/manufacturer_details/Landcruising#TAB-IMAGES",
+      "country": "Germany",
+      "country_flag_url": "/img/flags/DE.png"
+    },
+    "pricing": [
+      {
+        "text": "1 unit and above : 80.00 EUR"
+      }
+    ],
+    "specifications": {
+      "Material": "Aluminum",
+      "Weight": "196gr",
+      "WLL": "12kN",
+      "MBS": "75kN",
+      "Anchor connection type": "Mounting Hole",
+      "Webbing connection type": "Quick Pin",
+      "Compatible webbing width": "24mm - 26mm",
+      "Diverter diameter": "36mm",
+      "Efficiency": "N/A",
+      "Usage": [
+        "Slackline",
+        "Highline",
+        "Longline",
+        "Rodeoline",
+        "Low Tension lines"
+      ],
+      "ISA approved": "N/A",
+      "Date introduced": "N/A",
+      "Manufacturer": "Landcruising",
+      "Price (per unit)": "1 unit and above : 80.00 EUR"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/516",
+    "details_url": "/gear_details/Lynx40Vari",
+    "brand": "Landcruising",
+    "product_name": "Lynx 4.0 Vari",
+    "full_name": "Landcruising Lynx 4.0 Vari",
+    "manufacturer_info": {
+      "name": "Landcruising",
+      "url": "/manufacturer_details/Landcruising#TAB-IMAGES",
+      "country": "Germany",
+      "country_flag_url": "/img/flags/DE.png"
+    },
+    "pricing": [
+      {
+        "text": "1 unit and above : 90.00 EUR"
+      }
+    ],
+    "specifications": {
+      "Material": "Aluminum",
+      "Weight": "230gr",
+      "WLL": "12kN",
+      "MBS": "70kN",
+      "Anchor connection type": [
+        "Soft Release",
+        "Quick Pin"
+      ],
+      "Webbing connection type": "Quick Pin",
+      "Compatible webbing width": "24mm - 26mm",
+      "Diverter diameter": "36mm",
+      "Efficiency": "N/A",
+      "Usage": [
+        "Slackline",
+        "Highline",
+        "Longline",
+        "Low Tension lines"
+      ],
+      "ISA approved": "N/A",
+      "Date introduced": "N/A",
+      "Manufacturer": "Landcruising",
+      "Price (per unit)": "1 unit and above : 90.00 EUR"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/3249",
+    "details_url": "/gear_details/lynx_5",
+    "brand": "Aki Slacklines",
+    "product_name": "Lynx 5",
+    "full_name": "Aki Slacklines Lynx 5",
+    "manufacturer_info": {
+      "name": "Aki Slacklines",
+      "url": "/manufacturer_details/aki_slacklines#TAB-IMAGES",
+      "country": "Germany",
+      "country_flag_url": "/img/flags/DE.png"
+    },
+    "product_page_url": "https://aki-slacklines.de/en/hardware/weblocks/203/aki-lynx-5-webbing-locker",
+    "pricing": [
+      {
+        "text": "1 unit and above : 134.95 EUR"
+      }
+    ],
+    "specifications": {
+      "Material": "Aluminum",
+      "Weight": "210gr",
+      "WLL": "12kN",
+      "MBS": "72kN",
+      "Anchor connection type": "Quick Pin",
+      "Webbing connection type": "Quick Pin",
+      "Compatible webbing width": "24mm - 26mm",
+      "Diverter diameter": "36mm",
+      "Efficiency": "N/A",
+      "Usage": "N/A",
+      "ISA approved": "true",
+      "Date introduced": "Jul 2021",
+      "Manufacturer": "Aki Slacklines",
+      "Manufacturer Product Page": "Manufacturer product page",
+      "Price (per unit)": "1 unit and above : 134.95 EUR"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/3065",
+    "details_url": "/gear_details/mint",
+    "brand": "Spider slacklines",
+    "product_name": "Mint",
+    "full_name": "Spider slacklines Mint",
+    "manufacturer_info": {
+      "name": "Spider slacklines",
+      "url": "/manufacturer_details/Spiderslacklines#TAB-IMAGES",
+      "country": "Italy",
+      "country_flag_url": "/img/flags/IT.png"
+    },
+    "pricing": [
+      {
+        "text": "1 - 1 units : 49.95 EUR"
+      },
+      {
+        "text": "2 - 3 units : 45.95 EUR"
+      },
+      {
+        "text": "4 units and above : 42.95 EUR"
+      }
+    ],
+    "specifications": {
+      "Material": [
+        "High Strength Steel",
+        "Aluminum"
+      ],
+      "Weight": "275gr",
+      "WLL": "12kN",
+      "MBS": "70kN",
+      "Anchor connection type": "Mounting Hole",
+      "Webbing connection type": "Captive Pin",
+      "Compatible webbing width": "49mm - 51mm",
+      "Diverter diameter": "N/A",
+      "Efficiency": "N/A",
+      "Usage": "Trickline",
+      "ISA approved": "N/A",
+      "Date introduced": "N/A",
+      "Manufacturer": "Spider slacklines",
+      "Price (per unit)": "1 - 1 units : 49.95 EUR"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/3085",
+    "details_url": "/gear_details/mithril_-pullpin",
+    "brand": "Equilibrium Slacklines (EQB)",
+    "product_name": "Mithril - Pull Pin",
+    "full_name": "Equilibrium Slacklines (EQB) Mithril - Pull Pin",
+    "manufacturer_info": {
+      "name": "Equilibrium Slacklines (EQB)",
+      "url": "/manufacturer_details/EQB#TAB-IMAGES",
+      "country": "Czech Republic",
+      "country_flag_url": "/img/flags/CZ.png"
+    },
+    "product_page_url": "https://www.slackshop.cz/en/weblocks/145-349-eqb-mithril.html#/164-pin_version-pull_pin",
+    "pricing": [
+      {
+        "text": "1 unit and above : 64.22 EUR",
+        "tooltip": "Converted from 1599 CZK with the rate of 1 EUR = 24.90 CZK"
+      }
+    ],
+    "specifications": {
+      "Material": "Aluminum",
+      "Weight": "165gr",
+      "WLL": "8kN",
+      "MBS": "40kN",
+      "Anchor connection type": "Pull pin",
+      "Webbing connection type": "Pull pin",
+      "Compatible webbing width": "24mm - 26mm",
+      "Diverter diameter": "N/A",
+      "Efficiency": "N/A",
+      "Usage": [
+        "Slackline",
+        "Highline",
+        "Longline"
+      ],
+      "ISA approved": "N/A",
+      "Date introduced": "N/A",
+      "Manufacturer": "Equilibrium Slacklines (EQB)",
+      "Manufacturer Product Page": "Manufacturer product page",
+      "Price (per unit)": "1 unit and above : 64.22 EUR"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/3079",
+    "details_url": "/gear_details/mithril",
+    "brand": "Equilibrium Slacklines (EQB)",
+    "product_name": "Mithril - Quick Pin",
+    "full_name": "Equilibrium Slacklines (EQB) Mithril - Quick Pin",
+    "manufacturer_info": {
+      "name": "Equilibrium Slacklines (EQB)",
+      "url": "/manufacturer_details/EQB#TAB-IMAGES",
+      "country": "Czech Republic",
+      "country_flag_url": "/img/flags/CZ.png"
+    },
+    "product_page_url": "https://www.slackshop.cz/en/weblocks/145-350-eqb-mithril.html#/165-pin_version-quick_pin",
+    "pricing": [
+      {
+        "text": "1 unit and above : 86.31 EUR",
+        "tooltip": "Converted from 2149 CZK with the rate of 1 EUR = 24.90 CZK"
+      }
+    ],
+    "specifications": {
+      "Material": "Aluminum",
+      "Weight": "175gr",
+      "WLL": "8kN",
+      "MBS": "40kN",
+      "Anchor connection type": "Quick Pin",
+      "Webbing connection type": "Quick Pin",
+      "Compatible webbing width": "24mm - 26mm",
+      "Diverter diameter": "N/A",
+      "Efficiency": "N/A",
+      "Usage": [
+        "Slackline",
+        "Highline",
+        "Longline"
+      ],
+      "ISA approved": "N/A",
+      "Date introduced": "N/A",
+      "Manufacturer": "Equilibrium Slacklines (EQB)",
+      "Manufacturer Product Page": "Manufacturer product page",
+      "Price (per unit)": "1 unit and above : 86.31 EUR"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/3081",
+    "details_url": "/gear_details/multilock",
+    "brand": "Aki Slacklines",
+    "product_name": "MultiLock",
+    "full_name": "Aki Slacklines MultiLock",
+    "manufacturer_info": {
+      "name": "Aki Slacklines",
+      "url": "/manufacturer_details/aki_slacklines#TAB-IMAGES",
+      "country": "Germany",
+      "country_flag_url": "/img/flags/DE.png"
+    },
+    "pricing": [],
+    "specifications": {
+      "Material": "Aluminum",
+      "Weight": "270gr",
+      "WLL": "N/A",
+      "MBS": "60kN",
+      "Anchor connection type": "Quick Pin",
+      "Webbing connection type": "Quick Pin",
+      "Compatible webbing width": "24mm - 26mm",
+      "Diverter diameter": "N/A",
+      "Efficiency": "N/A",
+      "Usage": "N/A",
+      "ISA approved": "N/A",
+      "Date introduced": "May 2019",
+      "Manufacturer": "Aki Slacklines"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/3251",
+    "details_url": "/gear_details/orange_1",
+    "brand": "Radrigs",
+    "product_name": "Orange",
+    "full_name": "Radrigs Orange",
+    "manufacturer_info": {
+      "name": "Radrigs",
+      "url": "/manufacturer_details/radrigs#TAB-IMAGES",
+      "country": "United Kingdom",
+      "country_flag_url": "/img/flags/GB.png"
+    },
+    "product_page_url": "https://www.radrigs.co.uk/product-page/orange",
+    "pricing": [
+      {
+        "text": "1 unit : 118.97 EUR",
+        "tooltip": "Converted from 100 GBP with the rate of 1 EUR = 0.84 GBP"
+      }
+    ],
+    "specifications": {
+      "Material": "Aluminum",
+      "Weight": "380gr",
+      "WLL": "12kN",
+      "MBS": "50kN",
+      "Anchor connection type": "Sling",
+      "Webbing connection type": "Removable pin",
+      "Compatible webbing width": "24mm - 26mm",
+      "Diverter diameter": "N/A",
+      "Efficiency": "N/A",
+      "Usage": [
+        "Slackline",
+        "Highline",
+        "Longline"
+      ],
+      "ISA approved": "true",
+      "Date introduced": "N/A",
+      "Manufacturer": "Radrigs",
+      "Manufacturer Product Page": "Manufacturer product page",
+      "Price (per unit)": "1 unit : 118.97 EUR"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/510",
+    "details_url": "/gear_details/PaddleFX",
+    "brand": "Equilibrium Slacklines (EQB)",
+    "product_name": "Paddle FX",
+    "full_name": "Equilibrium Slacklines (EQB) Paddle FX",
+    "manufacturer_info": {
+      "name": "Equilibrium Slacklines (EQB)",
+      "url": "/manufacturer_details/EQB#TAB-IMAGES",
+      "country": "Czech Republic",
+      "country_flag_url": "/img/flags/CZ.png"
+    },
+    "product_page_url": "https://www.slackshop.cz/en/weblocks/25-eqb-paddle-fx.html",
+    "pricing": [
+      {
+        "text": "1 unit and above : 63.21 EUR",
+        "tooltip": "Converted from 1574 CZK with the rate of 1 EUR = 24.90 CZK"
+      }
+    ],
+    "specifications": {
+      "Material": "Stainless Steel",
+      "Weight": "326gr",
+      "WLL": "14kN",
+      "MBS": "70kN",
+      "Anchor connection type": "Mounting Hole",
+      "Webbing connection type": "Captive Pin",
+      "Compatible webbing width": "49mm - 51mm",
+      "Diverter diameter": "16mm",
+      "Efficiency": "80%",
+      "Usage": "Trickline",
+      "ISA approved": "N/A",
+      "Date introduced": "N/A",
+      "Manufacturer": "Equilibrium Slacklines (EQB)",
+      "Manufacturer Product Page": "Manufacturer product page",
+      "Price (per unit)": "1 unit and above : 63.21 EUR"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/560",
+    "details_url": "/gear_details/PaddleLinelock",
+    "brand": "Spider slacklines",
+    "product_name": "Paddle Linelock",
+    "full_name": "Spider slacklines Paddle Linelock",
+    "manufacturer_info": {
+      "name": "Spider slacklines",
+      "url": "/manufacturer_details/Spiderslacklines#TAB-IMAGES",
+      "country": "Italy",
+      "country_flag_url": "/img/flags/IT.png"
+    },
+    "pricing": [
+      {
+        "text": "1 unit and above : 42.95 EUR"
+      }
+    ],
+    "specifications": {
+      "Material": "Stainless Steel",
+      "Weight": "317gr",
+      "WLL": "14kN",
+      "MBS": "50kN",
+      "Anchor connection type": "Mounting Hole",
+      "Webbing connection type": "Screw Pin",
+      "Compatible webbing width": "49mm - 51mm",
+      "Diverter diameter": "N/A",
+      "Efficiency": "N/A",
+      "Usage": "Trickline",
+      "ISA approved": "N/A",
+      "Date introduced": "N/A",
+      "Manufacturer": "Spider slacklines",
+      "Price (per unit)": "1 unit and above : 42.95 EUR"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/509",
+    "details_url": "/gear_details/PaddleSH",
+    "brand": "Equilibrium Slacklines (EQB)",
+    "product_name": "Paddle SH",
+    "full_name": "Equilibrium Slacklines (EQB) Paddle SH",
+    "manufacturer_info": {
+      "name": "Equilibrium Slacklines (EQB)",
+      "url": "/manufacturer_details/EQB#TAB-IMAGES",
+      "country": "Czech Republic",
+      "country_flag_url": "/img/flags/CZ.png"
+    },
+    "product_page_url": "http://www.slackshop.cz/en/lockers/83-eqb-paddle.html",
+    "pricing": [
+      {
+        "text": "1 unit and above : 43.78 EUR",
+        "tooltip": "Converted from 1090 CZK with the rate of 1 EUR = 24.90 CZK"
+      }
+    ],
+    "specifications": {
+      "Material": "Stainless Steel",
+      "Weight": "317gr",
+      "WLL": "14kN",
+      "MBS": "50kN",
+      "Anchor connection type": "Mounting Hole",
+      "Webbing connection type": [
+        "Quick Pin",
+        "Screw Pin"
+      ],
+      "Compatible webbing width": "49mm - 51mm",
+      "Diverter diameter": "16mm",
+      "Efficiency": "80%",
+      "Usage": "Trickline",
+      "ISA approved": "N/A",
+      "Date introduced": "N/A",
+      "Manufacturer": "Equilibrium Slacklines (EQB)",
+      "Manufacturer Product Page": "Manufacturer product page",
+      "Price (per unit)": "1 unit and above : 43.78 EUR"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/508",
+    "details_url": "/gear_details/PaddleSL",
+    "brand": "Equilibrium Slacklines (EQB)",
+    "product_name": "Paddle SL",
+    "full_name": "Equilibrium Slacklines (EQB) Paddle SL",
+    "manufacturer_info": {
+      "name": "Equilibrium Slacklines (EQB)",
+      "url": "/manufacturer_details/EQB#TAB-IMAGES",
+      "country": "Czech Republic",
+      "country_flag_url": "/img/flags/CZ.png"
+    },
+    "pricing": [
+      {
+        "text": "1 unit and above : 43.78 EUR",
+        "tooltip": "Converted from 1090 CZK with the rate of 1 EUR = 24.90 CZK"
+      }
+    ],
+    "specifications": {
+      "Material": "Stainless Steel",
+      "Weight": "410gr",
+      "WLL": "14kN",
+      "MBS": "50kN",
+      "Anchor connection type": "Fixed Bolt",
+      "Webbing connection type": [
+        "Quick Pin",
+        "Screw Pin"
+      ],
+      "Compatible webbing width": "49mm - 51mm",
+      "Diverter diameter": "16mm",
+      "Efficiency": "80%",
+      "Usage": "Trickline",
+      "ISA approved": "N/A",
+      "Date introduced": "N/A",
+      "Manufacturer": "Equilibrium Slacklines (EQB)",
+      "Price (per unit)": "1 unit and above : 43.78 EUR"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/3133",
+    "details_url": "/gear_details/eqb_piratpp",
+    "brand": "Equilibrium Slacklines (EQB)",
+    "product_name": "Pirat PP",
+    "full_name": "Equilibrium Slacklines (EQB) Pirat PP",
+    "manufacturer_info": {
+      "name": "Equilibrium Slacklines (EQB)",
+      "url": "/manufacturer_details/EQB#TAB-IMAGES",
+      "country": "Czech Republic",
+      "country_flag_url": "/img/flags/CZ.png"
+    },
+    "product_page_url": "https://www.slackshop.cz/en/weblocks/155-369-eqb-pirat.html#/164-pin_version-pull_pin",
+    "pricing": [
+      {
+        "text": "1 unit : 56.59 EUR",
+        "tooltip": "Converted from 1409 CZK with the rate of 1 EUR = 24.90 CZK"
+      }
+    ],
+    "specifications": {
+      "Material": "Stainless Steel",
+      "Weight": "265gr",
+      "WLL": "10kN",
+      "MBS": "50kN",
+      "Anchor connection type": "Mounting Hole",
+      "Webbing connection type": "Pull pin",
+      "Compatible webbing width": "N/A",
+      "Diverter diameter": "26mm",
+      "Efficiency": "N/A",
+      "Usage": [
+        "Slackline",
+        "Highline",
+        "Longline"
+      ],
+      "ISA approved": "N/A",
+      "Date introduced": "N/A",
+      "Manufacturer": "Equilibrium Slacklines (EQB)",
+      "Manufacturer Product Page": "Manufacturer product page",
+      "Price (per unit)": "1 unit : 56.59 EUR"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/3134",
+    "details_url": "/gear_details/pirar_qp",
+    "brand": "Equilibrium Slacklines (EQB)",
+    "product_name": "Pirat QP",
+    "full_name": "Equilibrium Slacklines (EQB) Pirat QP",
+    "manufacturer_info": {
+      "name": "Equilibrium Slacklines (EQB)",
+      "url": "/manufacturer_details/EQB#TAB-IMAGES",
+      "country": "Czech Republic",
+      "country_flag_url": "/img/flags/CZ.png"
+    },
+    "product_page_url": "https://www.slackshop.cz/en/weblocks/155-368-eqb-pirat.html#/165-pin_version-quick_pin",
+    "pricing": [
+      {
+        "text": "1 unit : 75.46 EUR",
+        "tooltip": "Converted from 1879 CZK with the rate of 1 EUR = 24.90 CZK"
+      }
+    ],
+    "specifications": {
+      "Material": "Stainless Steel",
+      "Weight": "265gr",
+      "WLL": "10kN",
+      "MBS": "50kN",
+      "Anchor connection type": "Mounting Hole",
+      "Webbing connection type": "Quick Pin",
+      "Compatible webbing width": "24mm - 26mm",
+      "Diverter diameter": "24mm",
+      "Efficiency": "N/A",
+      "Usage": [
+        "Slackline",
+        "Highline",
+        "Longline"
+      ],
+      "ISA approved": "N/A",
+      "Date introduced": "N/A",
+      "Manufacturer": "Equilibrium Slacklines (EQB)",
+      "Manufacturer Product Page": "Manufacturer product page",
+      "Price (per unit)": "1 unit : 75.46 EUR"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/554",
+    "details_url": "/gear_details/PROWeblock",
+    "brand": "Raed Slacklines",
+    "product_name": "PRO Weblock",
+    "full_name": "Raed Slacklines PRO Weblock",
+    "manufacturer_info": {
+      "name": "Raed Slacklines",
+      "url": "/manufacturer_details/RaedSlacklines#TAB-IMAGES",
+      "country": "Germany",
+      "country_flag_url": "/img/flags/DE.png"
+    },
+    "product_page_url": "https://raed-slacklines.com/pro-weblock",
+    "pricing": [
+      {
+        "text": "1 unit and above : 119.95 EUR"
+      }
+    ],
+    "specifications": {
+      "Material": "High Strength Steel",
+      "Weight": "306gr",
+      "WLL": "15kN",
+      "MBS": "100kN",
+      "Anchor connection type": [
+        "Other",
+        "Soft Release",
+        "Quick Pin"
+      ],
+      "Webbing connection type": [
+        "Quick Pin",
+        "Removable pin"
+      ],
+      "Compatible webbing width": "24mm - 26mm",
+      "Diverter diameter": "35mm",
+      "Efficiency": "N/A",
+      "Usage": [
+        "Slackline",
+        "Highline",
+        "Longline",
+        "Rodeoline",
+        "Low Tension lines"
+      ],
+      "ISA approved": "N/A",
+      "Date introduced": "N/A",
+      "Manufacturer": "Raed Slacklines",
+      "Manufacturer Product Page": "Manufacturer product page",
+      "Price (per unit)": "1 unit and above : 119.95 EUR"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/517",
+    "details_url": "/gear_details/Puma20",
+    "brand": "Landcruising",
+    "product_name": "Puma 2.0",
+    "full_name": "Landcruising Puma 2.0",
+    "manufacturer_info": {
+      "name": "Landcruising",
+      "url": "/manufacturer_details/Landcruising#TAB-IMAGES",
+      "country": "Germany",
+      "country_flag_url": "/img/flags/DE.png"
+    },
+    "pricing": [
+      {
+        "text": "1 unit and above : 80.00 EUR"
+      }
+    ],
+    "specifications": {
+      "Material": "High Strength Steel",
+      "Weight": "350gr",
+      "WLL": "12kN",
+      "MBS": "70kN",
+      "Anchor connection type": "Mounting Hole",
+      "Webbing connection type": "Quick Pin",
+      "Compatible webbing width": "31mm - 33mm",
+      "Diverter diameter": "28mm",
+      "Efficiency": "N/A",
+      "Usage": [
+        "Slackline",
+        "Highline",
+        "Longline",
+        "Rodeoline",
+        "Low Tension lines"
+      ],
+      "ISA approved": "N/A",
+      "Date introduced": "N/A",
+      "Manufacturer": "Landcruising",
+      "Price (per unit)": "1 unit and above : 80.00 EUR"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/547",
+    "details_url": "/gear_details/PureLock",
+    "brand": "Pure Slacklines",
+    "product_name": "PureLock",
+    "full_name": "Pure Slacklines PureLock",
+    "manufacturer_info": {
+      "name": "Pure Slacklines",
+      "url": "/manufacturer_details/PureSlacklines#TAB-IMAGES",
+      "country": "Australia",
+      "country_flag_url": "/img/flags/AU.png"
+    },
+    "pricing": [
+      {
+        "text": "1 unit and above : 115.56 EUR",
+        "tooltip": "Converted from 129 USD with the rate of 1 EUR = 1.12 USD"
+      }
+    ],
+    "specifications": {
+      "Material": "Aluminum",
+      "Weight": "243gr",
+      "WLL": "12kN",
+      "MBS": "60kN",
+      "Anchor connection type": "Integrated Shackle",
+      "Webbing connection type": "Captive Sliding Pin",
+      "Compatible webbing width": "24mm - 26mm",
+      "Diverter diameter": "N/A",
+      "Efficiency": "N/A",
+      "Usage": [
+        "Slackline",
+        "Highline",
+        "Longline",
+        "Rodeoline",
+        "Low Tension lines"
+      ],
+      "ISA approved": "N/A",
+      "Date introduced": "Oct 2016",
+      "Manufacturer": "Pure Slacklines",
+      "Price (per unit)": "1 unit and above : 115.56 EUR"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/534",
+    "details_url": "/gear_details/RAGElock",
+    "brand": "Balance Community: Slackline Outfitters",
+    "product_name": "RAGElock",
+    "full_name": "Balance Community: Slackline Outfitters RAGElock",
+    "manufacturer_info": {
+      "name": "Balance Community: Slackline Outfitters",
+      "url": "/manufacturer_details/BalanceCommunity#TAB-IMAGES",
+      "country": "United States",
+      "country_flag_url": "/img/flags/US.png"
+    },
+    "product_page_url": "http://www.balancecommunity.com/ragelock",
+    "pricing": [
+      {
+        "text": "1 unit and above : 107.45 EUR",
+        "tooltip": "Converted from 119.95 USD with the rate of 1 EUR = 1.12 USD"
+      }
+    ],
+    "specifications": {
+      "Material": "High Strength Steel",
+      "Weight": "598gr",
+      "WLL": "12kN",
+      "MBS": "57kN",
+      "Anchor connection type": "Mounting Hole",
+      "Webbing connection type": "Quick Pin",
+      "Compatible webbing width": "31mm - 33mm",
+      "Diverter diameter": "28.5mm",
+      "Efficiency": "95%",
+      "Usage": "Trickline",
+      "ISA approved": "N/A",
+      "Date introduced": "N/A",
+      "Manufacturer": "Balance Community: Slackline Outfitters",
+      "Manufacturer Product Page": "Manufacturer product page",
+      "Price (per unit)": "1 unit and above : 107.45 EUR"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/535",
+    "details_url": "/gear_details/RamLock",
+    "brand": "SlackTech",
+    "product_name": "RamLock",
+    "full_name": "SlackTech RamLock",
+    "manufacturer_info": {
+      "name": "SlackTech",
+      "url": "/manufacturer_details/SlackTech#TAB-IMAGES",
+      "country": "United States",
+      "country_flag_url": "/img/flags/US.png"
+    },
+    "product_page_url": "https://www.slacklinetechnology.com/shop/ramlock-slackline-anchor",
+    "pricing": [
+      {
+        "text": "1 unit and above : 102.97 EUR",
+        "tooltip": "Converted from 114.95 USD with the rate of 1 EUR = 1.12 USD"
+      }
+    ],
+    "specifications": {
+      "Material": "Aluminum",
+      "Weight": "272gr",
+      "WLL": "9kN",
+      "MBS": "44kN",
+      "Anchor connection type": "XL Mounting Hole",
+      "Webbing connection type": "Quick Pin",
+      "Compatible webbing width": "24mm - 26mm",
+      "Diverter diameter": "N/A",
+      "Efficiency": "N/A",
+      "Usage": [
+        "Slackline",
+        "Highline",
+        "Longline",
+        "Rodeoline",
+        "Low Tension lines"
+      ],
+      "ISA approved": "N/A",
+      "Date introduced": "N/A",
+      "Manufacturer": "SlackTech",
+      "Manufacturer Product Page": "Manufacturer product page",
+      "Price (per unit)": "1 unit and above : 102.97 EUR"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/527",
+    "details_url": "/gear_details/Rhino",
+    "brand": "Slack Mountain",
+    "product_name": "Rhino",
+    "full_name": "Slack Mountain Rhino",
+    "manufacturer_info": {
+      "name": "Slack Mountain",
+      "url": "/manufacturer_details/SlackMountain#TAB-IMAGES",
+      "country": "France",
+      "country_flag_url": "/img/flags/FR.png"
+    },
+    "pricing": [
+      {
+        "text": "1 unit and above : 45.00 EUR"
+      },
+      {
+        "text": "2 units : 40.00 EUR"
+      }
+    ],
+    "specifications": {
+      "Material": "Stainless Steel",
+      "Weight": "410gr",
+      "WLL": "20kN",
+      "MBS": "60kN",
+      "Anchor connection type": "Mounting Hole",
+      "Webbing connection type": "Quick Pin",
+      "Compatible webbing width": "20mm - 27mm",
+      "Diverter diameter": "35mm",
+      "Efficiency": "95%",
+      "Usage": [
+        "Slackline",
+        "Highline",
+        "Longline",
+        "Rodeoline",
+        "Low Tension lines"
+      ],
+      "ISA approved": "N/A",
+      "Date introduced": "N/A",
+      "Manufacturer": "Slack Mountain",
+      "Price (per unit)": "1 unit and above : 45.00 EUR"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/3046",
+    "details_url": "/gear_details/minion",
+    "brand": "Slack Mountain",
+    "product_name": "Rhino Minion",
+    "full_name": "Slack Mountain Rhino Minion",
+    "manufacturer_info": {
+      "name": "Slack Mountain",
+      "url": "/manufacturer_details/SlackMountain#TAB-IMAGES",
+      "country": "France",
+      "country_flag_url": "/img/flags/FR.png"
+    },
+    "product_page_url": "https://slack-mountain.com/fr/bloqueur-longline-highline/190-rhino-minion.html",
+    "pricing": [
+      {
+        "text": "1 unit : 57.90 EUR"
+      },
+      {
+        "text": "2 units and above : 55.00 EUR"
+      }
+    ],
+    "specifications": {
+      "Material": "Stainless Steel",
+      "Weight": "281gr",
+      "WLL": "15kN",
+      "MBS": "60kN",
+      "Anchor connection type": [
+        "Mounting Hole",
+        "XL Mounting Hole"
+      ],
+      "Webbing connection type": "Quick Pin",
+      "Compatible webbing width": "20mm - 26mm",
+      "Diverter diameter": "33.4mm",
+      "Efficiency": "95%",
+      "Usage": [
+        "Slackline",
+        "Highline",
+        "Longline",
+        "Rodeoline",
+        "Low Tension lines"
+      ],
+      "ISA approved": "N/A",
+      "Date introduced": "Dec 2017",
+      "Manufacturer": "Slack Mountain",
+      "Manufacturer Product Page": "Manufacturer product page",
+      "Price (per unit)": "1 unit : 57.90 EUR"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/536",
+    "details_url": "/gear_details/RhinoLock",
+    "brand": "SlackGear",
+    "product_name": "RhinoLock",
+    "full_name": "SlackGear RhinoLock",
+    "manufacturer_info": {
+      "name": "SlackGear",
+      "url": "/manufacturer_details/SlackGear#TAB-IMAGES",
+      "country": "South Africa",
+      "country_flag_url": "/img/flags/ZA.png"
+    },
+    "product_page_url": "http://www.slackgear.co.za/product/rhinolock/",
+    "pricing": [
+      {
+        "text": "1 unit and above : 32.27 EUR",
+        "tooltip": "Converted from 650 ZAR with the rate of 1 EUR = 20.14 ZAR"
+      }
+    ],
+    "specifications": {
+      "Material": "Stainless Steel",
+      "Weight": "775gr",
+      "WLL": "16kN",
+      "MBS": "70kN",
+      "Anchor connection type": [
+        "Fixed Bolt",
+        "Soft Release"
+      ],
+      "Webbing connection type": "Screw Pin",
+      "Compatible webbing width": "24mm - 26mm",
+      "Diverter diameter": "40mm",
+      "Efficiency": "90%",
+      "Usage": "N/A",
+      "ISA approved": "N/A",
+      "Date introduced": "N/A",
+      "Manufacturer": "SlackGear",
+      "Manufacturer Product Page": "Manufacturer product page",
+      "Price (per unit)": "1 unit and above : 32.27 EUR"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/3047",
+    "details_url": "/gear_details/rodeo_weblock",
+    "brand": "Raed Slacklines",
+    "product_name": "RODEO weblock",
+    "full_name": "Raed Slacklines RODEO weblock",
+    "manufacturer_info": {
+      "name": "Raed Slacklines",
+      "url": "/manufacturer_details/RaedSlacklines#TAB-IMAGES",
+      "country": "Germany",
+      "country_flag_url": "/img/flags/DE.png"
+    },
+    "pricing": [
+      {
+        "text": "1 unit and above : 64.95 EUR"
+      }
+    ],
+    "specifications": {
+      "Material": "Aluminum",
+      "Weight": "57gr",
+      "WLL": "4kN",
+      "MBS": "17kN",
+      "Anchor connection type": "Mounting Hole",
+      "Webbing connection type": "Quick Pin",
+      "Compatible webbing width": "24mm - 26mm",
+      "Diverter diameter": "30mm",
+      "Efficiency": "90%",
+      "Usage": "Rodeoline",
+      "ISA approved": "N/A",
+      "Date introduced": "Dec 2017",
+      "Manufacturer": "Raed Slacklines",
+      "Price (per unit)": "1 unit and above : 64.95 EUR"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/3248",
+    "details_url": "/gear_details/rodeo_weblock_1",
+    "brand": "Raed Slacklines",
+    "product_name": "RODEO weblock",
+    "full_name": "Raed Slacklines RODEO weblock",
+    "manufacturer_info": {
+      "name": "Raed Slacklines",
+      "url": "/manufacturer_details/RaedSlacklines#TAB-IMAGES",
+      "country": "Germany",
+      "country_flag_url": "/img/flags/DE.png"
+    },
+    "product_page_url": "https://raed-slacklines.com/rodeo-weblock",
+    "pricing": [
+      {
+        "text": "1 unit and above : 65.00 EUR"
+      }
+    ],
+    "specifications": {
+      "Material": "Aluminum",
+      "Weight": "57gr",
+      "WLL": "N/A",
+      "MBS": "17kN",
+      "Anchor connection type": "Sling",
+      "Webbing connection type": "Quick Pin",
+      "Compatible webbing width": "24mm - 26mm",
+      "Diverter diameter": "N/A",
+      "Efficiency": "N/A",
+      "Usage": "Rodeoline",
+      "ISA approved": "N/A",
+      "Date introduced": "Jul 2021",
+      "Manufacturer": "Raed Slacklines",
+      "Manufacturer Product Page": "Manufacturer product page",
+      "Price (per unit)": "1 unit and above : 65.00 EUR"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/3070",
+    "details_url": "/gear_details/rowan_1031mm",
+    "brand": "Souz Slackline",
+    "product_name": "Rowan 1.0 (31mm)",
+    "full_name": "Souz Slackline Rowan 1.0 (31mm)",
+    "manufacturer_info": {
+      "name": "Souz Slackline",
+      "url": "/manufacturer_details/souz_slackline#TAB-IMAGES",
+      "country": "Russian Federation",
+      "country_flag_url": "/img/flags/RU.png"
+    },
+    "pricing": [
+      {
+        "text": "1 unit and above : 22.84 EUR",
+        "tooltip": "Converted from 25.5 USD with the rate of 1 EUR = 1.12 USD"
+      }
+    ],
+    "specifications": {
+      "Material": "Aluminum",
+      "Weight": "175gr",
+      "WLL": "12kN",
+      "MBS": "55kN",
+      "Anchor connection type": [
+        "Mounting Hole",
+        "XL Mounting Hole"
+      ],
+      "Webbing connection type": "Captive Pin",
+      "Compatible webbing width": "29mm - 32mm",
+      "Diverter diameter": "N/A",
+      "Efficiency": "N/A",
+      "Usage": "N/A",
+      "ISA approved": "N/A",
+      "Date introduced": "N/A",
+      "Manufacturer": "Souz Slackline",
+      "Price (per unit)": "1 unit and above : 22.84 EUR"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/3057",
+    "details_url": "/gear_details/rowan_10captivepin",
+    "brand": "Souz Slackline",
+    "product_name": "Rowan 1.0 Captive pin",
+    "full_name": "Souz Slackline Rowan 1.0 Captive pin",
+    "manufacturer_info": {
+      "name": "Souz Slackline",
+      "url": "/manufacturer_details/souz_slackline#TAB-IMAGES",
+      "country": "Russian Federation",
+      "country_flag_url": "/img/flags/RU.png"
+    },
+    "pricing": [
+      {
+        "text": "1 unit and above : 26.87 EUR",
+        "tooltip": "Converted from 30 USD with the rate of 1 EUR = 1.12 USD"
+      }
+    ],
+    "specifications": {
+      "Material": "Aluminum",
+      "Weight": "190gr",
+      "WLL": "12kN",
+      "MBS": "50kN",
+      "Anchor connection type": "Mounting Hole",
+      "Webbing connection type": "Captive Pin",
+      "Compatible webbing width": "24mm - 26mm",
+      "Diverter diameter": "30mm",
+      "Efficiency": "N/A",
+      "Usage": "N/A",
+      "ISA approved": "N/A",
+      "Date introduced": "Aug 2018",
+      "Manufacturer": "Souz Slackline",
+      "Price (per unit)": "1 unit and above : 26.87 EUR"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/3058",
+    "details_url": "/gear_details/rowan_10captivepinlight",
+    "brand": "Souz Slackline",
+    "product_name": "Rowan 1.0 Captive Pin Light",
+    "full_name": "Souz Slackline Rowan 1.0 Captive Pin Light",
+    "manufacturer_info": {
+      "name": "Souz Slackline",
+      "url": "/manufacturer_details/souz_slackline#TAB-IMAGES",
+      "country": "Russian Federation",
+      "country_flag_url": "/img/flags/RU.png"
+    },
+    "pricing": [
+      {
+        "text": "1 unit and above : 35.83 EUR",
+        "tooltip": "Converted from 40 USD with the rate of 1 EUR = 1.12 USD"
+      }
+    ],
+    "specifications": {
+      "Material": "Aluminum",
+      "Weight": "141gr",
+      "WLL": "7kN",
+      "MBS": "35kN",
+      "Anchor connection type": "Mounting Hole",
+      "Webbing connection type": "Captive Pin",
+      "Compatible webbing width": "24mm - 26mm",
+      "Diverter diameter": "30mm",
+      "Efficiency": "N/A",
+      "Usage": [
+        "Rodeoline",
+        "Low Tension lines"
+      ],
+      "ISA approved": "N/A",
+      "Date introduced": "Aug 2018",
+      "Manufacturer": "Souz Slackline",
+      "Price (per unit)": "1 unit and above : 35.83 EUR"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/3059",
+    "details_url": "/gear_details/rowan_10quickpin",
+    "brand": "Souz Slackline",
+    "product_name": "Rowan 1.1",
+    "full_name": "Souz Slackline Rowan 1.1",
+    "manufacturer_info": {
+      "name": "Souz Slackline",
+      "url": "/manufacturer_details/souz_slackline#TAB-IMAGES",
+      "country": "Russian Federation",
+      "country_flag_url": "/img/flags/RU.png"
+    },
+    "pricing": [
+      {
+        "text": "1 unit and above : 38.96 EUR",
+        "tooltip": "Converted from 43.49 USD with the rate of 1 EUR = 1.12 USD"
+      }
+    ],
+    "specifications": {
+      "Material": "Aluminum",
+      "Weight": "187gr",
+      "WLL": "12kN",
+      "MBS": "50kN",
+      "Anchor connection type": "Mounting Hole",
+      "Webbing connection type": "Quick Pin",
+      "Compatible webbing width": "24mm - 26mm",
+      "Diverter diameter": "30mm",
+      "Efficiency": "N/A",
+      "Usage": "N/A",
+      "ISA approved": "N/A",
+      "Date introduced": "Aug 2018",
+      "Manufacturer": "Souz Slackline",
+      "Price (per unit)": "1 unit and above : 38.96 EUR"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/3060",
+    "details_url": "/gear_details/rowan_10softrelease",
+    "brand": "Souz Slackline",
+    "product_name": "Rowan 1.3",
+    "full_name": "Souz Slackline Rowan 1.3",
+    "manufacturer_info": {
+      "name": "Souz Slackline",
+      "url": "/manufacturer_details/souz_slackline#TAB-IMAGES",
+      "country": "Russian Federation",
+      "country_flag_url": "/img/flags/RU.png"
+    },
+    "pricing": [
+      {
+        "text": "1 unit and above : 47.02 EUR",
+        "tooltip": "Converted from 52.49 USD with the rate of 1 EUR = 1.12 USD"
+      }
+    ],
+    "specifications": {
+      "Material": "Aluminum",
+      "Weight": "270gr",
+      "WLL": "12kN",
+      "MBS": "50kN",
+      "Anchor connection type": [
+        "Soft Release",
+        "Quick Pin"
+      ],
+      "Webbing connection type": "Quick Pin",
+      "Compatible webbing width": "24mm - 26mm",
+      "Diverter diameter": "30mm",
+      "Efficiency": "N/A",
+      "Usage": "N/A",
+      "ISA approved": "N/A",
+      "Date introduced": "Aug 2018",
+      "Manufacturer": "Souz Slackline",
+      "Price (per unit)": "1 unit and above : 47.02 EUR"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/3106",
+    "details_url": "/gear_details/rowan_31",
+    "brand": "Souz Slackline",
+    "product_name": "Rowan 3.1",
+    "full_name": "Souz Slackline Rowan 3.1",
+    "manufacturer_info": {
+      "name": "Souz Slackline",
+      "url": "/manufacturer_details/souz_slackline#TAB-IMAGES",
+      "country": "Russian Federation",
+      "country_flag_url": "/img/flags/RU.png"
+    },
+    "pricing": [
+      {
+        "text": "1 unit and above : 25.59 EUR",
+        "tooltip": "Converted from 2316 RUB with the rate of 1 EUR = 90.50 RUB"
+      }
+    ],
+    "specifications": {
+      "Material": "Stainless Steel",
+      "Weight": "185gr",
+      "WLL": "12kN",
+      "MBS": "55kN",
+      "Anchor connection type": "Mounting Hole",
+      "Webbing connection type": "Captive Pin",
+      "Compatible webbing width": "24mm - 26mm",
+      "Diverter diameter": "25mm",
+      "Efficiency": "N/A",
+      "Usage": "N/A",
+      "ISA approved": "N/A",
+      "Date introduced": "N/A",
+      "Manufacturer": "Souz Slackline",
+      "Price (per unit)": "1 unit and above : 25.59 EUR"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/3107",
+    "details_url": "/gear_details/rowan_31t",
+    "brand": "Souz Slackline",
+    "product_name": "Rowan 3.1T",
+    "full_name": "Souz Slackline Rowan 3.1T",
+    "manufacturer_info": {
+      "name": "Souz Slackline",
+      "url": "/manufacturer_details/souz_slackline#TAB-IMAGES",
+      "country": "Russian Federation",
+      "country_flag_url": "/img/flags/RU.png"
+    },
+    "pricing": [
+      {
+        "text": "1 unit and above : 32.20 EUR",
+        "tooltip": "Converted from 2914 RUB with the rate of 1 EUR = 90.50 RUB"
+      }
+    ],
+    "specifications": {
+      "Material": "Stainless Steel",
+      "Weight": "275gr",
+      "WLL": "12kN",
+      "MBS": "50kN",
+      "Anchor connection type": "Mounting Hole",
+      "Webbing connection type": "Captive Pin",
+      "Compatible webbing width": "49mm - 51mm",
+      "Diverter diameter": "25mm",
+      "Efficiency": "N/A",
+      "Usage": "Trickline",
+      "ISA approved": "N/A",
+      "Date introduced": "N/A",
+      "Manufacturer": "Souz Slackline",
+      "Price (per unit)": "1 unit and above : 32.20 EUR"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/3108",
+    "details_url": "/gear_details/rowan_32",
+    "brand": "Souz Slackline",
+    "product_name": "Rowan 3.2",
+    "full_name": "Souz Slackline Rowan 3.2",
+    "manufacturer_info": {
+      "name": "Souz Slackline",
+      "url": "/manufacturer_details/souz_slackline#TAB-IMAGES",
+      "country": "Russian Federation",
+      "country_flag_url": "/img/flags/RU.png"
+    },
+    "pricing": [
+      {
+        "text": "1 unit and above : 35.50 EUR",
+        "tooltip": "Converted from 3213 RUB with the rate of 1 EUR = 90.50 RUB"
+      }
+    ],
+    "specifications": {
+      "Material": "Stainless Steel",
+      "Weight": "200gr",
+      "WLL": "12kN",
+      "MBS": "50kN",
+      "Anchor connection type": "Mounting Hole",
+      "Webbing connection type": "Quick Pin",
+      "Compatible webbing width": "24mm - 26mm",
+      "Diverter diameter": "25mm",
+      "Efficiency": "N/A",
+      "Usage": "N/A",
+      "ISA approved": "N/A",
+      "Date introduced": "N/A",
+      "Manufacturer": "Souz Slackline",
+      "Price (per unit)": "1 unit and above : 35.50 EUR"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/3109",
+    "details_url": "/gear_details/rowan_33",
+    "brand": "Souz Slackline",
+    "product_name": "Rowan 3.3",
+    "full_name": "Souz Slackline Rowan 3.3",
+    "manufacturer_info": {
+      "name": "Souz Slackline",
+      "url": "/manufacturer_details/souz_slackline#TAB-IMAGES",
+      "country": "Russian Federation",
+      "country_flag_url": "/img/flags/RU.png"
+    },
+    "pricing": [
+      {
+        "text": "1 unit and above : 51.18 EUR",
+        "tooltip": "Converted from 4632 RUB with the rate of 1 EUR = 90.50 RUB"
+      }
+    ],
+    "specifications": {
+      "Material": "Stainless Steel",
+      "Weight": "240gr",
+      "WLL": "12kN",
+      "MBS": "50kN",
+      "Anchor connection type": "Quick Pin",
+      "Webbing connection type": "Quick Pin",
+      "Compatible webbing width": "24mm - 26mm",
+      "Diverter diameter": "25mm",
+      "Efficiency": "N/A",
+      "Usage": "N/A",
+      "ISA approved": "N/A",
+      "Date introduced": "N/A",
+      "Manufacturer": "Souz Slackline",
+      "Price (per unit)": "1 unit and above : 51.18 EUR"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/545",
+    "details_url": "/gear_details/SeaHorses",
+    "brand": "Slacktivity",
+    "product_name": "SeaHorse DP 1",
+    "full_name": "Slacktivity SeaHorse DP 1",
+    "manufacturer_info": {
+      "name": "Slacktivity",
+      "url": "/manufacturer_details/Slacktivity#TAB-IMAGES",
+      "country": "Switzerland",
+      "country_flag_url": "/img/flags/CH.png"
+    },
+    "pricing": [
+      {
+        "text": "1 unit and above : 89.95 EUR"
+      }
+    ],
+    "specifications": {
+      "Material": "Aluminum",
+      "Weight": "314gr",
+      "WLL": "12kN",
+      "MBS": "60kN",
+      "Anchor connection type": "Sling",
+      "Webbing connection type": "Quick Pin",
+      "Compatible webbing width": "20mm - 27mm",
+      "Diverter diameter": "36mm",
+      "Efficiency": "N/A",
+      "Usage": [
+        "Slackline",
+        "Highline",
+        "Longline",
+        "Rodeoline",
+        "Low Tension lines"
+      ],
+      "ISA approved": "N/A",
+      "Date introduced": "N/A",
+      "Manufacturer": "Slacktivity",
+      "Price (per unit)": "1 unit and above : 89.95 EUR"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/546",
+    "details_url": "/gear_details/SeaHorsesDP",
+    "brand": "Slacktivity",
+    "product_name": "SeaHorse DP 1.5",
+    "full_name": "Slacktivity SeaHorse DP 1.5",
+    "manufacturer_info": {
+      "name": "Slacktivity",
+      "url": "/manufacturer_details/Slacktivity#TAB-IMAGES",
+      "country": "Switzerland",
+      "country_flag_url": "/img/flags/CH.png"
+    },
+    "product_page_url": "https://slacktivity.com/shop/slacktivity-seahorse/",
+    "pricing": [
+      {
+        "text": "1 unit and above : 130.00 EUR"
+      }
+    ],
+    "specifications": {
+      "Material": "Aluminum",
+      "Weight": "260gr",
+      "WLL": "12kN",
+      "MBS": "60kN",
+      "Anchor connection type": [
+        "Soft Release",
+        "Quick Pin",
+        "Sling",
+        "XL Mounting Hole"
+      ],
+      "Webbing connection type": "Quick Pin",
+      "Compatible webbing width": "19mm - 27mm",
+      "Diverter diameter": "36mm",
+      "Efficiency": "N/A",
+      "Usage": "N/A",
+      "ISA approved": "true",
+      "Date introduced": "N/A",
+      "Manufacturer": "Slacktivity",
+      "Manufacturer Product Page": "Manufacturer product page",
+      "Price (per unit)": "1 unit and above : 130.00 EUR"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/3154",
+    "details_url": "/gear_details/seahorse_sling1",
+    "brand": "Slacktivity",
+    "product_name": "SeaHorse Sling 1",
+    "full_name": "Slacktivity SeaHorse Sling 1",
+    "manufacturer_info": {
+      "name": "Slacktivity",
+      "url": "/manufacturer_details/Slacktivity#TAB-IMAGES",
+      "country": "Switzerland",
+      "country_flag_url": "/img/flags/CH.png"
+    },
+    "pricing": [
+      {
+        "text": "1 unit : 116.54 EUR",
+        "tooltip": "Converted from 109 CHF with the rate of 1 EUR = 0.94 CHF"
+      }
+    ],
+    "specifications": {
+      "Material": "Aluminum",
+      "Weight": "N/A",
+      "WLL": "N/A",
+      "MBS": "N/A",
+      "Anchor connection type": "Sling",
+      "Webbing connection type": "N/A",
+      "Compatible webbing width": "N/A",
+      "Diverter diameter": "N/A",
+      "Efficiency": "N/A",
+      "Usage": [
+        "Slackline",
+        "Highline",
+        "Longline",
+        "Rodeoline",
+        "Low Tension lines"
+      ],
+      "ISA approved": "N/A",
+      "Date introduced": "N/A",
+      "Manufacturer": "Slacktivity",
+      "Price (per unit)": "1 unit : 116.54 EUR"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/511",
+    "details_url": "/gear_details/Sherriff",
+    "brand": "Equilibrium Slacklines (EQB)",
+    "product_name": "Sherriff",
+    "full_name": "Equilibrium Slacklines (EQB) Sherriff",
+    "manufacturer_info": {
+      "name": "Equilibrium Slacklines (EQB)",
+      "url": "/manufacturer_details/EQB#TAB-IMAGES",
+      "country": "Czech Republic",
+      "country_flag_url": "/img/flags/CZ.png"
+    },
+    "pricing": [
+      {
+        "text": "1 unit and above : 38.15 EUR",
+        "tooltip": "Converted from 950 CZK with the rate of 1 EUR = 24.90 CZK"
+      }
+    ],
+    "specifications": {
+      "Material": "Stainless Steel",
+      "Weight": "373gr",
+      "WLL": "12kN",
+      "MBS": "40kN",
+      "Anchor connection type": "Soft Release",
+      "Webbing connection type": [
+        "Quick Pin",
+        "Screw Pin"
+      ],
+      "Compatible webbing width": "24mm - 26mm",
+      "Diverter diameter": "20mm",
+      "Efficiency": "85%",
+      "Usage": [
+        "Slackline",
+        "Highline",
+        "Longline",
+        "Low Tension lines",
+        "Soft Release"
+      ],
+      "ISA approved": "N/A",
+      "Date introduced": "N/A",
+      "Manufacturer": "Equilibrium Slacklines (EQB)",
+      "Price (per unit)": "1 unit and above : 38.15 EUR"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/562",
+    "details_url": "/gear_details/SherriffFX",
+    "brand": "Equilibrium Slacklines (EQB)",
+    "product_name": "Sherriff FX",
+    "full_name": "Equilibrium Slacklines (EQB) Sherriff FX",
+    "manufacturer_info": {
+      "name": "Equilibrium Slacklines (EQB)",
+      "url": "/manufacturer_details/EQB#TAB-IMAGES",
+      "country": "Czech Republic",
+      "country_flag_url": "/img/flags/CZ.png"
+    },
+    "pricing": [
+      {
+        "text": "1 unit and above : 64.22 EUR",
+        "tooltip": "Converted from 1599 CZK with the rate of 1 EUR = 24.90 CZK"
+      }
+    ],
+    "specifications": {
+      "Material": "Stainless Steel",
+      "Weight": "326gr",
+      "WLL": "12kN",
+      "MBS": "60kN",
+      "Anchor connection type": "Soft Release",
+      "Webbing connection type": "Captive Pin",
+      "Compatible webbing width": "24mm - 26mm",
+      "Diverter diameter": "20mm",
+      "Efficiency": "N/A",
+      "Usage": [
+        "Slackline",
+        "Highline",
+        "Longline",
+        "Low Tension lines",
+        "Soft Release"
+      ],
+      "ISA approved": "N/A",
+      "Date introduced": "N/A",
+      "Manufacturer": "Equilibrium Slacklines (EQB)",
+      "Price (per unit)": "1 unit and above : 64.22 EUR"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/532",
+    "details_url": "/gear_details/SlackDuck",
+    "brand": "Slacktivity",
+    "product_name": "SlackDuck",
+    "full_name": "Slacktivity SlackDuck",
+    "manufacturer_info": {
+      "name": "Slacktivity",
+      "url": "/manufacturer_details/Slacktivity#TAB-IMAGES",
+      "country": "Switzerland",
+      "country_flag_url": "/img/flags/CH.png"
+    },
+    "pricing": [],
+    "specifications": {
+      "Material": "Stainless Steel",
+      "Weight": "375gr",
+      "WLL": "12kN",
+      "MBS": "N/A",
+      "Anchor connection type": "Sling",
+      "Webbing connection type": "Quick Pin",
+      "Compatible webbing width": "24mm - 26mm",
+      "Diverter diameter": "N/A",
+      "Efficiency": "N/A",
+      "Usage": "N/A",
+      "ISA approved": "N/A",
+      "Date introduced": "N/A",
+      "Manufacturer": "Slacktivity"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/531",
+    "details_url": "/gear_details/SlackDuckDP",
+    "brand": "Slacktivity",
+    "product_name": "SlackDuck-DP",
+    "full_name": "Slacktivity SlackDuck-DP",
+    "manufacturer_info": {
+      "name": "Slacktivity",
+      "url": "/manufacturer_details/Slacktivity#TAB-IMAGES",
+      "country": "Switzerland",
+      "country_flag_url": "/img/flags/CH.png"
+    },
+    "pricing": [],
+    "specifications": {
+      "Material": "Stainless Steel",
+      "Weight": "350gr",
+      "WLL": "12kN",
+      "MBS": "N/A",
+      "Anchor connection type": "Quick Pin",
+      "Webbing connection type": "Quick Pin",
+      "Compatible webbing width": "24mm - 26mm",
+      "Diverter diameter": "N/A",
+      "Efficiency": "N/A",
+      "Usage": "N/A",
+      "ISA approved": "N/A",
+      "Date introduced": "N/A",
+      "Manufacturer": "Slacktivity"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/538",
+    "details_url": "/gear_details/Slackibloc31",
+    "brand": "Slack Inov",
+    "product_name": "Slackibloc 3.1",
+    "full_name": "Slack Inov Slackibloc 3.1",
+    "manufacturer_info": {
+      "name": "Slack Inov",
+      "url": "/manufacturer_details/SlackInov#TAB-IMAGES",
+      "country": "France",
+      "country_flag_url": "/img/flags/FR.png"
+    },
+    "product_page_url": "https://slack-inov.com/gb/gear/95-slackiblock-31",
+    "pricing": [
+      {
+        "text": "1 unit and above : 50.00 EUR"
+      }
+    ],
+    "specifications": {
+      "Material": "High Strength Steel",
+      "Weight": "285gr",
+      "WLL": "N/A",
+      "MBS": "60kN",
+      "Anchor connection type": "Mounting Hole",
+      "Webbing connection type": "Rotatable Side Plates",
+      "Compatible webbing width": "24mm - 26mm",
+      "Diverter diameter": "30mm",
+      "Efficiency": "N/A",
+      "Usage": [
+        "Slackline",
+        "Highline",
+        "Longline",
+        "Rodeoline",
+        "Low Tension lines"
+      ],
+      "ISA approved": "N/A",
+      "Date introduced": "N/A",
+      "Manufacturer": "Slack Inov",
+      "Manufacturer Product Page": "Manufacturer product page",
+      "Price (per unit)": "1 unit and above : 50.00 EUR"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/3012",
+    "details_url": "/gear_details/slackibloc_4",
+    "brand": "Slack Inov",
+    "product_name": "Slackibloc 4",
+    "full_name": "Slack Inov Slackibloc 4",
+    "manufacturer_info": {
+      "name": "Slack Inov",
+      "url": "/manufacturer_details/SlackInov#TAB-IMAGES",
+      "country": "France",
+      "country_flag_url": "/img/flags/FR.png"
+    },
+    "pricing": [
+      {
+        "text": "1 unit and above : 60.00 EUR"
+      }
+    ],
+    "specifications": {
+      "Material": "Aluminum",
+      "Weight": "165gr",
+      "WLL": "N/A",
+      "MBS": "60kN",
+      "Anchor connection type": "Mounting Hole",
+      "Webbing connection type": "Quick Pin",
+      "Compatible webbing width": "24mm - 26mm",
+      "Diverter diameter": "N/A",
+      "Efficiency": "N/A",
+      "Usage": [
+        "Slackline",
+        "Highline",
+        "Longline",
+        "Rodeoline",
+        "Low Tension lines"
+      ],
+      "ISA approved": "N/A",
+      "Date introduced": "N/A",
+      "Manufacturer": "Slack Inov",
+      "Price (per unit)": "1 unit and above : 60.00 EUR"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/539",
+    "details_url": "/gear_details/SlackiblocJump12",
+    "brand": "Slack Inov",
+    "product_name": "Slackibloc Jump 1.2",
+    "full_name": "Slack Inov Slackibloc Jump 1.2",
+    "manufacturer_info": {
+      "name": "Slack Inov",
+      "url": "/manufacturer_details/SlackInov#TAB-IMAGES",
+      "country": "France",
+      "country_flag_url": "/img/flags/FR.png"
+    },
+    "pricing": [
+      {
+        "text": "1 unit and above : 60.00 EUR"
+      }
+    ],
+    "specifications": {
+      "Material": "High Strength Steel",
+      "Weight": "580gr",
+      "WLL": "N/A",
+      "MBS": "95kN",
+      "Anchor connection type": "Double Mounting Hole",
+      "Webbing connection type": "Rotatable Side Plates",
+      "Compatible webbing width": "24mm - 51mm",
+      "Diverter diameter": "30mm",
+      "Efficiency": "N/A",
+      "Usage": "Trickline",
+      "ISA approved": "N/A",
+      "Date introduced": "N/A",
+      "Manufacturer": "Slack Inov",
+      "Price (per unit)": "1 unit and above : 60.00 EUR"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/3152",
+    "details_url": "/gear_details/slackibloc_sr",
+    "brand": "Slack Inov",
+    "product_name": "Slackibloc SR Pull pin",
+    "full_name": "Slack Inov Slackibloc SR Pull pin",
+    "manufacturer_info": {
+      "name": "Slack Inov",
+      "url": "/manufacturer_details/SlackInov#TAB-IMAGES",
+      "country": "France",
+      "country_flag_url": "/img/flags/FR.png"
+    },
+    "pricing": [
+      {
+        "text": "1 unit and above : 59.95 EUR"
+      }
+    ],
+    "specifications": {
+      "Material": "Aluminum",
+      "Weight": "173gr",
+      "WLL": "15kN",
+      "MBS": "50kN",
+      "Anchor connection type": "Pull pin",
+      "Webbing connection type": "Pull pin",
+      "Compatible webbing width": "24mm - 26mm",
+      "Diverter diameter": "N/A",
+      "Efficiency": "N/A",
+      "Usage": "N/A",
+      "ISA approved": "N/A",
+      "Date introduced": "N/A",
+      "Manufacturer": "Slack Inov",
+      "Price (per unit)": "1 unit and above : 59.95 EUR"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/3153",
+    "details_url": "/gear_details/slackibloc_srquickpin",
+    "brand": "Slack Inov",
+    "product_name": "Slackibloc SR Quick Pin",
+    "full_name": "Slack Inov Slackibloc SR Quick Pin",
+    "manufacturer_info": {
+      "name": "Slack Inov",
+      "url": "/manufacturer_details/SlackInov#TAB-IMAGES",
+      "country": "France",
+      "country_flag_url": "/img/flags/FR.png"
+    },
+    "pricing": [
+      {
+        "text": "1 unit and above : 84.54 EUR"
+      }
+    ],
+    "specifications": {
+      "Material": "Aluminum",
+      "Weight": "173gr",
+      "WLL": "15kN",
+      "MBS": "50kN",
+      "Anchor connection type": "Quick Pin",
+      "Webbing connection type": "Quick Pin",
+      "Compatible webbing width": "24mm - 26mm",
+      "Diverter diameter": "N/A",
+      "Efficiency": "N/A",
+      "Usage": "N/A",
+      "ISA approved": "N/A",
+      "Date introduced": "N/A",
+      "Manufacturer": "Slack Inov",
+      "Price (per unit)": "1 unit and above : 84.54 EUR"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/3069",
+    "details_url": "/gear_details/slackijump",
+    "brand": "Slack Inov",
+    "product_name": "Slackijump",
+    "full_name": "Slack Inov Slackijump",
+    "manufacturer_info": {
+      "name": "Slack Inov",
+      "url": "/manufacturer_details/SlackInov#TAB-IMAGES",
+      "country": "France",
+      "country_flag_url": "/img/flags/FR.png"
+    },
+    "pricing": [
+      {
+        "text": "1 unit and above : 65.00 EUR"
+      }
+    ],
+    "specifications": {
+      "Material": "High Strength Steel",
+      "Weight": "517gr",
+      "WLL": "12kN",
+      "MBS": "100kN",
+      "Anchor connection type": "Mounting Hole",
+      "Webbing connection type": "Captive Sliding Pin",
+      "Compatible webbing width": "49mm - 51mm",
+      "Diverter diameter": "N/A",
+      "Efficiency": "N/A",
+      "Usage": "Trickline",
+      "ISA approved": "N/A",
+      "Date introduced": "Jul 2018",
+      "Manufacturer": "Slack Inov",
+      "Price (per unit)": "1 unit and above : 65.00 EUR"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/529",
+    "details_url": "/gear_details/SladLockPower",
+    "brand": "Slack.fr",
+    "product_name": "SladLock Power",
+    "full_name": "Slack.fr SladLock Power",
+    "manufacturer_info": {
+      "name": "Slack.fr",
+      "url": "/manufacturer_details/Slackfr#TAB-IMAGES",
+      "country": "France",
+      "country_flag_url": "/img/flags/FR.png"
+    },
+    "pricing": [
+      {
+        "text": "1 unit and above : 45.00 EUR"
+      }
+    ],
+    "specifications": {
+      "Material": [
+        "Stainless Steel",
+        "Aluminum"
+      ],
+      "Weight": "300gr",
+      "WLL": "10kN",
+      "MBS": "45kN",
+      "Anchor connection type": "Mounting Hole",
+      "Webbing connection type": "Captive Pin",
+      "Compatible webbing width": "24mm - 26mm",
+      "Diverter diameter": "38mm",
+      "Efficiency": "95%",
+      "Usage": [
+        "Slackline",
+        "Highline",
+        "Longline",
+        "Rodeoline",
+        "Low Tension lines"
+      ],
+      "ISA approved": "N/A",
+      "Date introduced": "N/A",
+      "Manufacturer": "Slack.fr",
+      "Price (per unit)": "1 unit and above : 45.00 EUR"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/557",
+    "details_url": "/gear_details/Solverisweblock",
+    "brand": "Petram Slacklines",
+    "product_name": "Solveris weblock",
+    "full_name": "Petram Slacklines Solveris weblock",
+    "manufacturer_info": {
+      "name": "Petram Slacklines",
+      "url": "/manufacturer_details/PetramSlacklines#TAB-IMAGES",
+      "country": "Poland",
+      "country_flag_url": "/img/flags/PL.png"
+    },
+    "pricing": [
+      {
+        "text": "1 unit and above : 33.90 EUR"
+      }
+    ],
+    "specifications": {
+      "Material": "Stainless Steel",
+      "Weight": "295gr",
+      "WLL": "10kN",
+      "MBS": "50kN",
+      "Anchor connection type": "Soft Release",
+      "Webbing connection type": "Captive Pin",
+      "Compatible webbing width": "24mm - 26mm",
+      "Diverter diameter": "25mm",
+      "Efficiency": "N/A",
+      "Usage": [
+        "Slackline",
+        "Highline",
+        "Longline",
+        "Rodeoline",
+        "Low Tension lines"
+      ],
+      "ISA approved": "N/A",
+      "Date introduced": "N/A",
+      "Manufacturer": "Petram Slacklines",
+      "Price (per unit)": "1 unit and above : 33.90 EUR"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/3018",
+    "details_url": "/gear_details/petram_slacklinesspatiumweblock",
+    "brand": "Petram Slacklines",
+    "product_name": "Spatium weblock",
+    "full_name": "Petram Slacklines Spatium weblock",
+    "manufacturer_info": {
+      "name": "Petram Slacklines",
+      "url": "/manufacturer_details/PetramSlacklines#TAB-IMAGES",
+      "country": "Poland",
+      "country_flag_url": "/img/flags/PL.png"
+    },
+    "pricing": [
+      {
+        "text": "1 unit and above : 39.90 EUR"
+      }
+    ],
+    "specifications": {
+      "Material": "Stainless Steel",
+      "Weight": "325gr",
+      "WLL": "14kN",
+      "MBS": "70kN",
+      "Anchor connection type": [
+        "Mounting Hole",
+        "XL Mounting Hole"
+      ],
+      "Webbing connection type": "Captive Pin",
+      "Compatible webbing width": "24mm - 26mm",
+      "Diverter diameter": "36mm",
+      "Efficiency": "95%",
+      "Usage": [
+        "Slackline",
+        "Highline",
+        "Longline",
+        "Rodeoline",
+        "Low Tension lines"
+      ],
+      "ISA approved": "N/A",
+      "Date introduced": "N/A",
+      "Manufacturer": "Petram Slacklines",
+      "Price (per unit)": "1 unit and above : 39.90 EUR"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/530",
+    "details_url": "/gear_details/SpiritLock",
+    "brand": "Line Spirit",
+    "product_name": "Spirit Lock",
+    "full_name": "Line Spirit Spirit Lock",
+    "manufacturer_info": {
+      "name": "Line Spirit",
+      "url": "/manufacturer_details/LineSpirit#TAB-IMAGES",
+      "country": "France",
+      "country_flag_url": "/img/flags/FR.png"
+    },
+    "pricing": [],
+    "specifications": {
+      "Material": "Aluminum",
+      "Weight": "180gr",
+      "WLL": "16kN",
+      "MBS": "36kN",
+      "Anchor connection type": "Sling",
+      "Webbing connection type": "N/A",
+      "Compatible webbing width": "24mm - 26mm",
+      "Diverter diameter": "N/A",
+      "Efficiency": "N/A",
+      "Usage": "N/A",
+      "ISA approved": "N/A",
+      "Date introduced": "N/A",
+      "Manufacturer": "Line Spirit"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/521",
+    "details_url": "/gear_details/TRig",
+    "brand": "Elephant",
+    "product_name": "T-Rig",
+    "full_name": "Elephant T-Rig",
+    "manufacturer_info": {
+      "name": "Elephant",
+      "url": "/manufacturer_details/Elephant#TAB-IMAGES",
+      "country": "Germany",
+      "country_flag_url": "/img/flags/DE.png"
+    },
+    "pricing": [
+      {
+        "text": "1 unit and above : 95.00 EUR"
+      }
+    ],
+    "specifications": {
+      "Material": "Stainless Steel",
+      "Weight": "320gr",
+      "WLL": "15kN",
+      "MBS": "30kN",
+      "Anchor connection type": "Fixed Angled bolt?",
+      "Webbing connection type": "Captive Pin",
+      "Compatible webbing width": "24mm - 26mm",
+      "Diverter diameter": "30mm",
+      "Efficiency": "N/A",
+      "Usage": "N/A",
+      "ISA approved": "N/A",
+      "Date introduced": "N/A",
+      "Manufacturer": "Elephant",
+      "Price (per unit)": "1 unit and above : 95.00 EUR"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/3253",
+    "details_url": "/gear_details/tilock_19mm",
+    "brand": "Raed Slacklines",
+    "product_name": "TiLock 19mm",
+    "full_name": "Raed Slacklines TiLock 19mm",
+    "manufacturer_info": {
+      "name": "Raed Slacklines",
+      "url": "/manufacturer_details/RaedSlacklines#TAB-IMAGES",
+      "country": "Germany",
+      "country_flag_url": "/img/flags/DE.png"
+    },
+    "product_page_url": "https://raed-slacklines.com/tilock",
+    "pricing": [
+      {
+        "text": "1 unit and above : 229.95 EUR"
+      }
+    ],
+    "specifications": {
+      "Material": "Titanium",
+      "Weight": "N/A",
+      "WLL": "N/A",
+      "MBS": "N/A",
+      "Anchor connection type": "Quick Pin",
+      "Webbing connection type": "Quick Pin",
+      "Compatible webbing width": "24mm - 26mm",
+      "Diverter diameter": "N/A",
+      "Efficiency": "N/A",
+      "Usage": "N/A",
+      "ISA approved": "N/A",
+      "Date introduced": "N/A",
+      "Manufacturer": "Raed Slacklines",
+      "Manufacturer Product Page": "Manufacturer product page",
+      "Price (per unit)": "1 unit and above : 229.95 EUR"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/3254",
+    "details_url": "/gear_details/tilock_25mm",
+    "brand": "Raed Slacklines",
+    "product_name": "TiLock 25mm",
+    "full_name": "Raed Slacklines TiLock 25mm",
+    "manufacturer_info": {
+      "name": "Raed Slacklines",
+      "url": "/manufacturer_details/RaedSlacklines#TAB-IMAGES",
+      "country": "Germany",
+      "country_flag_url": "/img/flags/DE.png"
+    },
+    "product_page_url": "https://raed-slacklines.com/tilock",
+    "pricing": [
+      {
+        "text": "1 unit and above : 229.95 EUR"
+      }
+    ],
+    "specifications": {
+      "Material": "Titanium",
+      "Weight": "N/A",
+      "WLL": "N/A",
+      "MBS": "N/A",
+      "Anchor connection type": "Quick Pin",
+      "Webbing connection type": "Quick Pin",
+      "Compatible webbing width": "24mm - 26mm",
+      "Diverter diameter": "N/A",
+      "Efficiency": "N/A",
+      "Usage": "N/A",
+      "ISA approved": "N/A",
+      "Date introduced": "N/A",
+      "Manufacturer": "Raed Slacklines",
+      "Manufacturer Product Page": "Manufacturer product page",
+      "Price (per unit)": "1 unit and above : 229.95 EUR"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/559",
+    "details_url": "/gear_details/Xylon",
+    "brand": "Pump Slackline",
+    "product_name": "Xylon",
+    "full_name": "Pump Slackline Xylon",
+    "manufacturer_info": {
+      "name": "Pump Slackline",
+      "url": "/manufacturer_details/PumpSlackline#TAB-IMAGES",
+      "country": "Argentina",
+      "country_flag_url": "/img/flags/AR.png"
+    },
+    "pricing": [],
+    "specifications": {
+      "Material": "Stainless Steel",
+      "Weight": "280gr",
+      "WLL": "15kN",
+      "MBS": "38kN",
+      "Anchor connection type": "Sling",
+      "Webbing connection type": "Captive Pin",
+      "Compatible webbing width": "24mm - 26mm",
+      "Diverter diameter": "N/A",
+      "Efficiency": "N/A",
+      "Usage": "N/A",
+      "ISA approved": "N/A",
+      "Date introduced": "N/A",
+      "Manufacturer": "Pump Slackline"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/518",
+    "details_url": "/gear_details/Yang",
+    "brand": "Slackliner.de",
+    "product_name": "Yang",
+    "full_name": "Slackliner.de Yang",
+    "manufacturer_info": {
+      "name": "Slackliner.de",
+      "url": "/manufacturer_details/Sigma#TAB-IMAGES",
+      "country": "Germany",
+      "country_flag_url": "/img/flags/DE.png"
+    },
+    "pricing": [],
+    "specifications": {
+      "Material": "Stainless Steel",
+      "Weight": "227gr",
+      "WLL": "10kN",
+      "MBS": "30kN",
+      "Anchor connection type": "Mounting Hole",
+      "Webbing connection type": "Quick Pin",
+      "Compatible webbing width": "24mm - 26mm",
+      "Diverter diameter": "N/A",
+      "Efficiency": "N/A",
+      "Usage": "N/A",
+      "ISA approved": "N/A",
+      "Date introduced": "N/A",
+      "Manufacturer": "Slackliner.de"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/3022",
+    "details_url": "/gear_details/zilla_10",
+    "brand": "Landcruising",
+    "product_name": "Zilla 1.0",
+    "full_name": "Landcruising Zilla 1.0",
+    "manufacturer_info": {
+      "name": "Landcruising",
+      "url": "/manufacturer_details/Landcruising#TAB-IMAGES",
+      "country": "Germany",
+      "country_flag_url": "/img/flags/DE.png"
+    },
+    "pricing": [],
+    "specifications": {
+      "Material": "Stainless Steel",
+      "Weight": "680gr",
+      "WLL": "15kN",
+      "MBS": "40kN",
+      "Anchor connection type": [
+        "Fixed Angled bolt?",
+        "Sling",
+        "Double Mounting Hole",
+        "Integrated Shackle"
+      ],
+      "Webbing connection type": "Quick Pin",
+      "Compatible webbing width": "24mm - 26mm",
+      "Diverter diameter": "30mm",
+      "Efficiency": "94%",
+      "Usage": [
+        "Slackline",
+        "Longline"
+      ],
+      "ISA approved": "N/A",
+      "Date introduced": "Jan 2010",
+      "Manufacturer": "Landcruising"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/3021",
+    "details_url": "/gear_details/zilla_20",
+    "brand": "Landcruising",
+    "product_name": "Zilla 2.0",
+    "full_name": "Landcruising Zilla 2.0",
+    "manufacturer_info": {
+      "name": "Landcruising",
+      "url": "/manufacturer_details/Landcruising#TAB-IMAGES",
+      "country": "Germany",
+      "country_flag_url": "/img/flags/DE.png"
+    },
+    "pricing": [],
+    "specifications": {
+      "Material": "Aluminum",
+      "Weight": "530gr",
+      "WLL": "16kN",
+      "MBS": "70kN",
+      "Anchor connection type": "Sling",
+      "Webbing connection type": "Quick Pin",
+      "Compatible webbing width": "24mm - 26mm",
+      "Diverter diameter": "36mm",
+      "Efficiency": "98%",
+      "Usage": [
+        "Slackline",
+        "Longline"
+      ],
+      "ISA approved": "N/A",
+      "Date introduced": "Jan 2011",
+      "Manufacturer": "Landcruising"
+    }
+  },
+  {
+    "image_url": "/api/gear/image_thumb/513",
+    "details_url": "/gear_details/Zilla30",
+    "brand": "Landcruising",
+    "product_name": "Zilla 3.0",
+    "full_name": "Landcruising Zilla 3.0",
+    "manufacturer_info": {
+      "name": "Landcruising",
+      "url": "/manufacturer_details/Landcruising#TAB-IMAGES",
+      "country": "Germany",
+      "country_flag_url": "/img/flags/DE.png"
+    },
+    "pricing": [
+      {
+        "text": "1 unit and above : 110.00 EUR"
+      }
+    ],
+    "specifications": {
+      "Material": "High Strength Steel",
+      "Weight": "525gr",
+      "WLL": "18kN",
+      "MBS": "100kN",
+      "Anchor connection type": "Mounting Hole",
+      "Webbing connection type": "Quick Pin",
+      "Compatible webbing width": "24mm - 26mm",
+      "Diverter diameter": "60mm",
+      "Efficiency": "N/A",
+      "Usage": [
+        "Slackline",
+        "Highline",
+        "Longline",
+        "Low Tension lines"
+      ],
+      "ISA approved": "N/A",
+      "Date introduced": "N/A",
+      "Manufacturer": "Landcruising",
+      "Price (per unit)": "1 unit and above : 110.00 EUR"
+    }
+  }
+]
