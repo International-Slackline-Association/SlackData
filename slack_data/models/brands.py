@@ -25,6 +25,7 @@ class Brand(BaseBrands, table=True):
     _rollers: list["Roller"] = Relationship(back_populates="brand")
     _leashrings: list["LeashRing"] = Relationship(back_populates="brand")
     _grips: list["Grip"] = Relationship(back_populates="brand")
+    _treepros: list["TreePro"] = Relationship(back_populates="brand")
 
     
     @computed_field
@@ -61,6 +62,13 @@ class Brand(BaseBrands, table=True):
         Computed field to get the names of all grips associated with this brand.
         """
         return [grip.name for grip in self._grips]
+
+    @computed_field
+    def treepros(self) -> list[str]:
+        """
+        Computed field to get the names of all tree protectors associated with this brand.
+        """
+        return [treepro.name for treepro in self._treepros]
     
 def get_brand(session: SessionDep, brand_cache: dict[str, int] | None, item: dict) -> tuple[int,dict]:
     brand_name = str(item.get("brand"))
