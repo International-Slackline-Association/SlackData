@@ -26,7 +26,8 @@ class BaseWebbing(SQLModel):
     Base class for webbing version.
     """
     name: str = Field(index=True)
-    release_date: str | None = None
+    release_date: int | None = None # Unix timestamp
+    product_url: str | None = None # Manufacturer/vendor product page URL
     material: FiberMaterial
     width: int
     weight: float | None = None # g/m

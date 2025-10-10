@@ -1,0 +1,381 @@
+{
+  "metadata": {
+    "total_manufacturers": 74,
+    "known_manufacturers": 74,
+    "missing_manufacturers": 0,
+    "total_gear_items": 533,
+    "coverage_percentage": 100.0
+  },
+  "manufacturers": {
+    "1": {
+      "name": "Gibbon",
+      "verified": true,
+      "item_count": 4
+    },
+    "2": {
+      "name": "Landcruising",
+      "verified": true,
+      "item_count": 25
+    },
+    "3": {
+      "name": "Balance Community: Slackline Outfitters",
+      "verified": true,
+      "item_count": 38
+    },
+    "4": {
+      "name": "Slack Mountain",
+      "verified": true,
+      "item_count": 37
+    },
+    "5": {
+      "name": "Slack Pro!",
+      "verified": true,
+      "item_count": 10
+    },
+    "6": {
+      "name": "Slacktivity",
+      "verified": true,
+      "item_count": 30
+    },
+    "7": {
+      "name": "Slack Inov",
+      "verified": true,
+      "item_count": 21
+    },
+    "8": {
+      "name": "Line Spirit",
+      "verified": true,
+      "item_count": 12
+    },
+    "9": {
+      "name": "Equilibrium Slacklines (EQB)",
+      "verified": true,
+      "item_count": 45
+    },
+    "10": {
+      "name": "Elephant",
+      "verified": true,
+      "item_count": 7
+    },
+    "11": {
+      "name": "2 Trees",
+      "verified": true,
+      "item_count": 0
+    },
+    "12": {
+      "name": "Slack.fr",
+      "verified": true,
+      "item_count": 18
+    },
+    "13": {
+      "name": "Gambit",
+      "verified": true,
+      "item_count": 2
+    },
+    "14": {
+      "name": "Slackline brothers",
+      "verified": true,
+      "item_count": 0
+    },
+    "15": {
+      "name": "SlackTech",
+      "verified": true,
+      "item_count": 1
+    },
+    "16": {
+      "name": "SlackGear",
+      "verified": true,
+      "item_count": 6
+    },
+    "17": {
+      "name": "Slacklife",
+      "verified": true,
+      "item_count": 0
+    },
+    "18": {
+      "name": "One Inch Dreams",
+      "verified": true,
+      "item_count": 2
+    },
+    "19": {
+      "name": "Pure Slacklines",
+      "verified": true,
+      "item_count": 2
+    },
+    "20": {
+      "name": "Yoga Slackers",
+      "verified": true,
+      "item_count": 2
+    },
+    "21": {
+      "name": "Slackline Industries",
+      "verified": true,
+      "item_count": 8
+    },
+    "22": {
+      "name": "Pump Slackline",
+      "verified": true,
+      "item_count": 2
+    },
+    "23": {
+      "name": "Ambaradam",
+      "verified": true,
+      "item_count": 1
+    },
+    "24": {
+      "name": "Spider slacklines",
+      "verified": true,
+      "item_count": 22
+    },
+    "25": {
+      "name": "Slackline tools",
+      "verified": true,
+      "item_count": 8
+    },
+    "26": {
+      "name": "Raed Slacklines",
+      "verified": true,
+      "item_count": 21
+    },
+    "27": {
+      "name": "Slack house",
+      "verified": true,
+      "item_count": 13
+    },
+    "28": {
+      "name": "Singing rock",
+      "verified": true,
+      "item_count": 1
+    },
+    "29": {
+      "name": "Dakas",
+      "verified": true,
+      "item_count": 6
+    },
+    "30": {
+      "name": "Slackliner.de",
+      "verified": true,
+      "item_count": 13
+    },
+    "31": {
+      "name": "Petzl",
+      "verified": true,
+      "item_count": 10
+    },
+    "32": {
+      "name": "Edelrid",
+      "verified": true,
+      "item_count": 4
+    },
+    "33": {
+      "name": "Rock Exotica",
+      "verified": true,
+      "item_count": 0
+    },
+    "34": {
+      "name": "SMC",
+      "verified": true,
+      "item_count": 1
+    },
+    "35": {
+      "name": "Camp",
+      "verified": true,
+      "item_count": 2
+    },
+    "36": {
+      "name": "Climbing Technology (CT)",
+      "verified": true,
+      "item_count": 5
+    },
+    "37": {
+      "name": "Van Beest",
+      "verified": true,
+      "item_count": 6
+    },
+    "38": {
+      "name": "Omega Pacific",
+      "verified": true,
+      "item_count": 0
+    },
+    "39": {
+      "name": "Tendon",
+      "verified": true,
+      "item_count": 0
+    },
+    "40": {
+      "name": "Slackline Animals",
+      "verified": true,
+      "item_count": 0
+    },
+    "41": {
+      "name": "Slacklife BC",
+      "verified": true,
+      "item_count": 7
+    },
+    "42": {
+      "name": "Absolute Slacklines",
+      "verified": true,
+      "item_count": 2
+    },
+    "43": {
+      "name": "Slackline Shop NZ",
+      "verified": true,
+      "item_count": 3
+    },
+    "44": {
+      "name": "Balancing Earth Slacklines",
+      "verified": true,
+      "item_count": 2
+    },
+    "45": {
+      "name": "Petram Slacklines",
+      "verified": true,
+      "item_count": 11
+    },
+    "46": {
+      "name": "Middle Way Slacklines",
+      "verified": true,
+      "item_count": 6
+    },
+    "47": {
+      "name": "ISC",
+      "verified": true,
+      "item_count": 2
+    },
+    "48": {
+      "name": "Trango",
+      "verified": true,
+      "item_count": 1
+    },
+    "49": {
+      "name": "Episwiss Rigging",
+      "verified": true,
+      "item_count": 1
+    },
+    "50": {
+      "name": "Slacklining Canada",
+      "verified": true,
+      "item_count": 1
+    },
+    "51": {
+      "name": "Cat on slack",
+      "verified": true,
+      "item_count": 5
+    },
+    "52": {
+      "name": "Kong",
+      "verified": true,
+      "item_count": 1
+    },
+    "53": {
+      "name": "ZERGE outdoor",
+      "verified": true,
+      "item_count": 6
+    },
+    "54": {
+      "name": "Fusion Climb",
+      "verified": true,
+      "item_count": 1
+    },
+    "55": {
+      "name": "Slackstar",
+      "verified": true,
+      "item_count": 13
+    },
+    "58": {
+      "name": "CMC Rescue",
+      "verified": true,
+      "item_count": 1
+    },
+    "59": {
+      "name": "Mammut",
+      "verified": true,
+      "item_count": 1
+    },
+    "60": {
+      "name": "Krok",
+      "verified": true,
+      "item_count": 1
+    },
+    "61": {
+      "name": "BananasColombia",
+      "verified": true,
+      "item_count": 0
+    },
+    "62": {
+      "name": "Souz Slackline",
+      "verified": true,
+      "item_count": 13
+    },
+    "63": {
+      "name": "Balanceur",
+      "verified": true,
+      "item_count": 2
+    },
+    "64": {
+      "name": "Aki Slacklines",
+      "verified": true,
+      "item_count": 12
+    },
+    "65": {
+      "name": "Slack Mitra",
+      "verified": true,
+      "item_count": 2
+    },
+    "66": {
+      "name": "Viper Slacklines",
+      "verified": true,
+      "item_count": 1
+    },
+    "67": {
+      "name": "Radrigs",
+      "verified": true,
+      "item_count": 1
+    },
+    "68": {
+      "name": "Shaoline Slack",
+      "verified": true,
+      "item_count": 0
+    },
+    "69": {
+      "name": "A-Zero Slackline",
+      "verified": true,
+      "item_count": 0
+    },
+    "70": {
+      "name": "Slackear",
+      "verified": true,
+      "item_count": 0
+    },
+    "71": {
+      "name": "Dnd_Line",
+      "verified": true,
+      "item_count": 0
+    },
+    "72": {
+      "name": "Geko Slacklines",
+      "verified": true,
+      "item_count": 1
+    },
+    "73": {
+      "name": "Easy Slackline",
+      "verified": true,
+      "item_count": 4
+    },
+    "74": {
+      "name": "Acrobat Slackline",
+      "verified": true,
+      "item_count": 3
+    },
+    "75": {
+      "name": "BLOACS",
+      "verified": true,
+      "item_count": 0
+    },
+    "76": {
+      "name": "Bera Adventure",
+      "verified": true,
+      "item_count": 3
+    }
+  }
+}

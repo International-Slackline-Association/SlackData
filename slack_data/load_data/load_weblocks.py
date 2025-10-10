@@ -56,7 +56,7 @@ def clean_weblock_data(weblock: dict[str, Any]) -> dict[str, Any]:
     cleaned_data = {}
     specs = weblock.get("specifications", {})
 
-    cleaned_data["raw_name"] = weblock.get("product_name") 
+    cleaned_data["raw_name"] = weblock.get("name") 
     cleaned_data["raw_brand_name"] = weblock.get("brand") 
 
     cleaned_data["material"] = get_metal_material(specs.get("Material"))
@@ -75,6 +75,9 @@ def clean_weblock_data(weblock: dict[str, Any]) -> dict[str, Any]:
     
     cleaned_data["price"] = parse_price_from_weblock(weblock)
     cleaned_data["currency"] = parse_currency_from_weblock(weblock).value if parse_currency_from_weblock(weblock) else None
+
+    cleaned_data["date_introduced"] = weblock.get("date_introduced")
+    cleaned_data["product_url"] = weblock.get("product_url")
 
     return cleaned_data
 
@@ -95,7 +98,8 @@ def add_weblocks_to_db(weblocks: list[dict], session: SessionDep) -> None:
         weblock_create = WeblockCreate(
             name=weblock.get("raw_name", "Unknown Weblock"),
             brand_id=brand_id,
-            release_date=weblock.get("release_date"),
+            release_date=weblock.get("date_introduced"),
+            product_url=weblock.get("product_url"),
             material=weblock.get("material"),
             width_min=weblock.get("width_min"),
             width_max=weblock.get("width_max"),
@@ -256,7 +260,7 @@ def load_weblocks(session: SessionDep) -> None:
             cleaned_payload = clean_weblock_data(item_data)
             cleaned_weblocks_payloads.append(cleaned_payload)
         except Exception as e:
-            print(f"Error cleaning weblock data for item '{item_data.get('product_name', 'Unknown')}': {e}")
+            print(f"Error cleaning weblock data for item '{item_data.get('name', 'Unknown')}': {e}")
 
     if not cleaned_weblocks_payloads:
         print("No weblock data successfully cleaned. Aborting.")
