@@ -1,7 +1,6 @@
 from pydantic import computed_field
-from sqlmodel import select, Field, Relationship, SQLModel
+from sqlmodel import Field, Relationship, SQLModel
 
-from slack_data.database import SessionDep
 from slack_data.utilities.countries import Country
 
 class BaseBrands(SQLModel):
@@ -20,64 +19,32 @@ class BaseBrands(SQLModel):
 
 class Brand(BaseBrands, table=True):
     id: int | None = Field(default=None, primary_key=True)
-    _webbings: list["Webbing"] = Relationship(back_populates="brand")
-    _weblocks: list["Weblock"] = Relationship(back_populates="brand")
-    _rollers: list["Roller"] = Relationship(back_populates="brand")
-    _leashrings: list["LeashRing"] = Relationship(back_populates="brand")
-
+    webbing: list["Webbing"] = Relationship(back_populates="brand")
+    weblock: list["Weblock"] = Relationship(back_populates="brand")
+    roller: list["Roller"] = Relationship(back_populates="brand")
     
     @computed_field
     def webbings(self) -> list[str]:
         """
         Computed field to get the names of all webbings associated with this brand.
         """
-        return [webbing.name for webbing in self._webbings]
+        return [webbing.name for webbing in self.webbing]
     
     @computed_field
     def weblocks(self) -> list[str]:
         """
         Computed field to get the names of all weblocks associated with this brand.
         """
-        return [weblock.name for weblock in self._weblocks]
+        return [weblock.name for weblock in self.weblock]
     
     @computed_field
     def rollers(self) -> list[str]:
         """
         Computed field to get the names of all rollers associated with this brand.
         """
-        return [roller.name for roller in self._rollers]
+        return [roller.name for roller in self.roller]
     
-    @computed_field
-    def leashrings(self) -> list[str]:
-        """
-        Computed field to get the names of all leash rings associated with this brand.
-        """
-        return [leashring.name for leashring in self._leashrings]
-    
-def get_brand(session: SessionDep, brand_cache: dict[str, int] | None, item: dict) -> tuple[int,dict]:
-    brand_name = str(item.get("brand"))
-    if brand_name not in brand_cache:
-        # get brand_id from the database or create it if it doesn't exist
-        statement = select(Brand.id).where(Brand.name == brand_name)
-        result = session.exec(statement).first()
-        if result is None:
-            # Create a new brand entry if it doesn't exist
-            brand_create = BrandCreate(name=brand_name)
-            db_brand = Brand.model_validate(brand_create)
-            print(f"Adding brand: {db_brand.name}")
-            session.add(db_brand)
-            session.commit()
-            session.refresh(db_brand)
-            brand_id = db_brand.id
-        else:
-            brand_id = result
 
-        if brand_id is None:
-            raise ValueError(f"Brand ID for '{brand_name}' could not be determined.")
-        
-        brand_cache[brand_name] = brand_id
-    brand_id = brand_cache[brand_name]
-    return brand_id, brand_cache
     
 class BrandPublic(BaseBrands):
     """

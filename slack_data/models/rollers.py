@@ -52,7 +52,7 @@ class BaseRoller(SQLModel):
 class Roller(BaseRoller, table=True):
     id: int | None = Field(default=None, primary_key=True)
     brand_id: int = Field(foreign_key="brand.id")
-    brand: "Brand" = Relationship(back_populates="_rollers")
+    brand: "Brand" = Relationship(back_populates="roller")
     
     
     @computed_field
