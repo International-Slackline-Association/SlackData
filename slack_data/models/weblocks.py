@@ -12,7 +12,6 @@ class FrontPin(str, Enum):
     PULLPIN = "Pull Pin"
     CAPTIVEPIN = "Captive Pin"
     FIXEDBOLT = "Fixed Bolt"
-    OTHER = "Other"
 
 class AttachmentPoint(str, Enum):
     UNIVERSAL = "Universal" # Fits hard connectors, soft connectors, sewn loops
@@ -21,7 +20,6 @@ class AttachmentPoint(str, Enum):
     BOLT = "Bolt"
     BENTPLATE = "Bent Plate"
     SLING = "Sling"
-    OTHER = "Other"
 
 
 class BaseWeblock(SQLModel):
@@ -31,8 +29,7 @@ class BaseWeblock(SQLModel):
     name: str = Field(index=True)
     release_date: str | None = None
     material: MetalMaterial
-    width_min: int # mm
-    width_max: int | None = None # mm
+    width: int
     weight: float | None = None # g
     breaking_strength: float | None = None # kN
     front_pin: FrontPin | None = None
@@ -49,7 +46,7 @@ class BaseWeblock(SQLModel):
 class Weblock(BaseWeblock, table=True):
     id: int | None = Field(default=None, primary_key=True)
     brand_id: int = Field(foreign_key="brand.id")
-    brand: "Brand" = Relationship(back_populates="_weblocks")
+    brand: "Brand" = Relationship(back_populates="weblock")
     
     
     @computed_field
