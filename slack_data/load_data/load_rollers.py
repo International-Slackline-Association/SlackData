@@ -57,6 +57,8 @@ def add_rollers_to_db(rollers: list[dict], session: SessionDep) -> None:
         roller_create = RollerCreate(
             name=str(roller.get("name")),
             brand_id=brand_id,
+            release_date=roller.get("date_introduced"),
+            product_url=roller.get("product_url"),
             material=get_metal_material(str(roller.get("materialType", ""))),
             roller_material=get_roller_material(str(roller.get("roller_material", ""))),
             lock_type=get_lock_type(str(roller.get("locking_type", ""))),

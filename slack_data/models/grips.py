@@ -16,7 +16,8 @@ class BaseGrip(SQLModel):
     Base class for Grip version.
     """
     name: str = Field(index=True)
-    release_date: str | None = None
+    release_date: int | None = None # Unix timestamp
+    product_url: str | None = None # Manufacturer/vendor product page URL
     material: MetalMaterial
     width_min: int # mm
     width_max: int | None = None # mm

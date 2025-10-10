@@ -56,6 +56,8 @@ def add_leashrings_to_db(leashrings: list[dict], session: SessionDep) -> None:
         leashring_create = LeashRingCreate(
             name=str(leashring.get("name")),
             brand_id=brand_id,
+            release_date=leashring.get("date_introduced"),
+            product_url=leashring.get("product_url"),
             material=get_metal_material(str(leashring.get("material", ""))),
             inner_diameter=leashring.get("inner_diameter"),
             outer_diameter=leashring.get("outer_diameter"),

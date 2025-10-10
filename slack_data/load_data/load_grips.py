@@ -56,6 +56,8 @@ def add_grips_to_db(grips: list[dict], session: SessionDep) -> None:
         grip_create = GripCreate(
             name=str(grip.get("name")),
             brand_id=brand_id,
+            release_date=grip.get("date_introduced"),
+            product_url=grip.get("product_url"),
             material=get_metal_material(str(grip.get("material", ""))),
             width_min=int(grip.get("width_min", 0)),
             width_max=grip.get("width_max"),

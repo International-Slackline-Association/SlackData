@@ -11,7 +11,8 @@ class BaseLeashRing(SQLModel):
     Base class for Leash Ring version
     """
     name: str = Field(index=True)
-    release_date: str | None = None
+    release_date: int | None = None # Unix timestamp
+    product_url: str | None = None # Manufacturer/vendor product page URL
     material: MetalMaterial
     inner_diameter: float | None = None # mm
     outer_diameter: float | None = None # mm

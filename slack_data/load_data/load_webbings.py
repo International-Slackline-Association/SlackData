@@ -52,6 +52,8 @@ def add_webbings_to_db(webbings: list[dict], session: SessionDep) -> None:
         webbing_create = WebbingCreate(
             name=str(webbing.get("name")),
             brand_id=brand_id,
+            release_date=webbing.get("date_introduced"),
+            product_url=webbing.get("product_url"),
             material=material,
             width=int(webbing.get("width", 0)),
             weight=float(webbing.get("weight", 0)),
