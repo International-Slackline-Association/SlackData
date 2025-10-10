@@ -24,6 +24,7 @@ class Brand(BaseBrands, table=True):
     _weblocks: list["Weblock"] = Relationship(back_populates="brand")
     _rollers: list["Roller"] = Relationship(back_populates="brand")
     _leashrings: list["LeashRing"] = Relationship(back_populates="brand")
+    _grips: list["Grip"] = Relationship(back_populates="brand")
 
     
     @computed_field
@@ -53,6 +54,13 @@ class Brand(BaseBrands, table=True):
         Computed field to get the names of all leash rings associated with this brand.
         """
         return [leashring.name for leashring in self._leashrings]
+
+    @computed_field
+    def grips(self) -> list[str]:
+        """
+        Computed field to get the names of all grips associated with this brand.
+        """
+        return [grip.name for grip in self._grips]
     
 def get_brand(session: SessionDep, brand_cache: dict[str, int] | None, item: dict) -> tuple[int,dict]:
     brand_name = str(item.get("brand"))
