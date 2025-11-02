@@ -27,6 +27,7 @@ class Brand(BaseBrands, table=True):
     _grips: list["Grip"] = Relationship(back_populates="brand")
     _treepros: list["TreePro"] = Relationship(back_populates="brand")
     _starterkits: list["StarterKit"] = Relationship(back_populates="brand")
+    _tricklinekits: list["TricklineKit"] = Relationship(back_populates="brand")
 
     
     @computed_field
@@ -77,6 +78,13 @@ class Brand(BaseBrands, table=True):
         Computed field to get the names of all starter kits associated with this brand.
         """
         return [starterkit.name for starterkit in self._starterkits]
+    
+    @computed_field
+    def tricklinekits(self) -> list[str]:
+        """
+        Computed field to get the names of all trickline kits associated with this brand.
+        """
+        return [tricklinekit.name for tricklinekit in self._tricklinekits]
     
 def get_brand(session: SessionDep, brand_cache: dict[str, int] | None, item: dict) -> tuple[int,dict]:
     brand_name = str(item.get("brand"))
