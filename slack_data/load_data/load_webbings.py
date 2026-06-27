@@ -30,10 +30,10 @@ def clean_webbing_data(webbing: dict) -> dict:
     for key, value in webbing.items():
         if key in {"width", "weight"} and value == "":
             cleaned_webbing[key] = 0
-        elif key not in {"name", "brand", "materialType"} and value == "":
-            cleaned_webbing[key] = None
         elif key == "isa_certified":
             cleaned_webbing[key] = bool(value) if isinstance(value, str) else value
+        elif key not in {"name", "brand", "materialType"} and value == "":
+            cleaned_webbing[key] = None
         else:
             cleaned_webbing[key] = str(value) if value is not None else None
     return cleaned_webbing
