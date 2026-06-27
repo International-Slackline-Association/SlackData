@@ -15,8 +15,8 @@ class FrontPin(str, Enum):
     OTHER = "Other"
 
 class AttachmentPoint(str, Enum):
-    UNIVERSAL = "Universal" # Fits hard connectors, soft connectors, sewn loops
-    HOLE = "Hole" # connected hole like AWL 3/4, Frog, Ramlock TODO: Find a better name for this
+    UNIVERSAL = "Universal"
+    HOLE = "Hole"
     PIN = "Pin"
     BOLT = "Bolt"
     BENTPLATE = "Bent Plate"
@@ -26,44 +26,45 @@ class AttachmentPoint(str, Enum):
 
 class BaseWeblock(SQLModel):
     """
-    Base class for Weblock version.
+    Base class for weblock. All fields optional so adding a new field is one line.
+    Required fields are re-declared in the table model, WeblockPublic, and WeblockCreate.
     """
-    name: str = Field(index=True)
-    release_date: int | None = None # Unix timestamp
-    product_url: str | None = None # Manufacturer/vendor product page URL
-    material: MetalMaterial
-    width_min: int # mm
-    width_max: int | None = None # mm
-    weight: float | None = None # g
+    name: str | None = Field(default=None, index=True)
+    material: MetalMaterial | None = None
+    width_min: int | None = None          # mm
+    width_max: int | None = None          # mm
+    release_date: int | None = None
+    product_url: str | None = None
+    weight: float | None = None           # g
     breaking_strength: float | None = None # kN
     front_pin: FrontPin | None = None
     attachment_point: AttachmentPoint | None = None
     isa_certified: bool = False
     isa_warning: ISAWarning | None = None
-    colors: str | None = None # Comma separated list of colors
-    price: float | None = None 
-    currency: Currency | None = None # ISO 4217 currency code
+    colors: str | None = None
+    price: float | None = None
+    currency: Currency | None = None
     description: str | None = None
-    version: str | None = None # Version indicating which batch data is from TODO: how to keep track of this?
+    version: str | None = None
     notes: str | None = None
 
 class Weblock(BaseWeblock, table=True):
     id: int | None = Field(default=None, primary_key=True)
+    name: str = Field(index=True)         # required — NOT NULL in DB
+    material: MetalMaterial               # required — NOT NULL in DB
+    width_min: int                        # required — NOT NULL in DB
     brand_id: int = Field(foreign_key="brand.id")
     brand: "Brand" = Relationship(back_populates="_weblocks")
-    
-    
+
     @computed_field
     def brand_name(self) -> str:
-        """
-        Computed field to get the brand name.
-        """
         return self.brand.name if self.brand else "Unknown"
 
 class WeblockPublic(BaseWeblock):
-    """
-    Model for public weblock data.
-    """
+    """Model for public weblock data."""
+    name: str
+    material: MetalMaterial
+    width_min: int
     brand_name: str
 
     class Config:
@@ -72,9 +73,10 @@ class WeblockPublic(BaseWeblock):
         extra = "forbid"
 
 class WeblockCreate(BaseWeblock):
-    """
-    Model for creating a new weblock entry.
-    """
+    """Model for creating a new weblock entry."""
+    name: str
+    material: MetalMaterial
+    width_min: int
     brand_id: int
 
     class Config:
@@ -82,15 +84,10 @@ class WeblockCreate(BaseWeblock):
         validate_assignment = True
 
 class WeblockUpdate(BaseWeblock):
-    """
-    Model for updating an existing weblock entry.
-    """
+    """Model for updating a weblock entry. All fields optional for PATCH semantics."""
     brand_id: int | None = None
 
     class Config:
         exclude = ["id"]
         validate_assignment = True
         extra = "forbid"
-
-
-    
