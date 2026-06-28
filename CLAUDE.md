@@ -2,6 +2,48 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Development philosophy — Test-Driven and Behavior-Driven Development
+
+This project follows **strict TDD/BDD**. This is non-negotiable and shapes every line of code written. If you are about to write production code without a failing test already in place, stop.
+
+### The rule: red first, always
+
+Every feature, fix, or behaviour change follows this sequence with no exceptions:
+
+1. **Write the test that describes the desired behaviour** — it must fail because the code doesn't exist yet. This is the "red" phase. The test is the specification.
+2. **Write the minimum production code to make the test pass** — nothing more, nothing less. This is the "green" phase.
+3. **Refactor if needed** — clean up the implementation while keeping tests green.
+
+A test written after the code it tests has no value as a specification. It only proves the code runs, not that it does the right thing. Tests written before code prove the contract.
+
+### BDD framing: tests describe behaviour, not implementation
+
+Tests are written from the outside in — they describe what the system does from a caller's perspective, not how it's built. Test names read like sentences: `test_get_brand_no_duplicate_rows`, `test_patch_webbing_does_not_touch_other_fields`, `test_create_webbing_missing_required_field_rejected`. A reader should understand exactly what is being guaranteed without reading the test body.
+
+### Scale: write ALL failing tests first, then implement
+
+When adding a new feature — a new gear type, endpoint, loader, frontend page — write **the full test coverage** for that feature before writing any production code. Don't write one test, implement it, write the next. Write them all up front. This forces you to think through the complete contract before touching the implementation. The failing tests ARE the design document.
+
+For a new gear type this means: write the full CRUD test file (`tests/test_<type>.py`) with every test failing before creating the model, loader, or router. For a new frontend feature it means: write the Cypress spec describing the user flow before building the component.
+
+### What counts as a test for this project
+
+- **Backend endpoint tests** — `tests/test_<type>.py`: CRUD contract, required field validation, pagination, `brand_name` in response. These exist for all 7 active gear types.
+- **Loader tests** — `tests/test_loaders.py`: JSON normalisation, enum mapping, brand upsert idempotency.
+- **Future Cypress E2E** — once the frontend is wired to the backend, Cypress tests describe full user flows: navigate to webbings → filter by Dyneema → expect 3 results. These are the highest-value tests in the stack. Write them before implementing the filtering logic.
+
+Vitest/unit tests for frontend components are low value here — the components are thin UI over data. Don't write them unless there is non-trivial logic to isolate.
+
+### When a test documents a bug
+
+If the correct behaviour is not yet implemented, write the test asserting the **desired** (currently failing) behaviour — not what the code currently does. A test asserting wrong behaviour just to make it green is a lie. The bug test stays red until the bug is fixed. See `test_clean_webbing_isa_certified_empty_string` in `tests/test_loaders.py` for how this was handled: the test was written asserting `False`, it failed, then `clean_webbing_data()` was fixed to make it pass.
+
+### Do not ask "should I write tests for this?"
+
+The answer is always yes. No production code ships without a failing test written first.
+
+---
+
 ## Git push protocol — ALWAYS do this before pushing
 
 Before pushing any branch, run `git diff main...HEAD --stat` and list every changed file explicitly to the user. Ask them to confirm what should and shouldn't be included **before** running any push or branch creation. Never assume a branch is clean based on what commits were made in the current session — the branch's ancestry may include unrelated work (frontend files, JSON data, etc. have contaminated branches before).
@@ -233,6 +275,8 @@ Brand tests cover `get_brand()` upsert, cache behaviour, and `brand_name` in API
 
 ## Frontend
 
+**Branch:** `frontend` (on GitHub as `origin/frontend`, commit `acd2793`). **Not yet merged to main — PR not yet opened.**
+
 Located in `frontend/`. React 18 + TypeScript + Vite + Tailwind CSS. **Mock data only — not connected to the backend API yet.**
 
 Covers all 8 gear types in the nav (Webbings, Weblocks, Leash Rings, Grips, Rollers, Tree Protectors, Starter Kits, Trickline Kits) plus a Manufacturers page. Features: filterable/sortable gear listing, gear detail page, loading skeletons.
@@ -280,4 +324,4 @@ Currently `*Public` response models do not include `id` — this was intentional
 - `database.db` / `*.db` — generated SQLite, recreated at runtime
 - `slackdata.egg-info/`, `uv.lock` (unless changing deps), `.git/`
 - `frontend/node_modules/`, `frontend/.vite/` — frontend build artifacts
-- Full contents of `webbings.json` / `weblocks.json` (~120–155 KB) — read one item for the schema, not the whole file
+- Full contents of any of the json files — read one item for the schema, not the whole file
