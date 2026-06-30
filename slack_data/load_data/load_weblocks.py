@@ -210,7 +210,7 @@ def parse_currency_from_weblock(weblock_data: dict) -> Currency | None:
         tooltip = pricing[0].get("tooltip", "")
         try:
             currency = get_currency(tooltip)
-        except:
+        except ValueError:
             pass
         if currency: return currency
         
@@ -218,7 +218,7 @@ def parse_currency_from_weblock(weblock_data: dict) -> Currency | None:
         text = pricing[0].get("text", "")
         try:
             currency = get_currency(text)
-        except:
+        except ValueError:
             pass
         if currency: return currency
     
@@ -227,7 +227,7 @@ def parse_currency_from_weblock(weblock_data: dict) -> Currency | None:
     price_text = specs.get("Price (per unit)", "")
     try:
         currency = get_currency(price_text)
-    except:
+    except ValueError:
         pass
     if currency: return currency
     

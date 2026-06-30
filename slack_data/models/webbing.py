@@ -23,43 +23,44 @@ class Classification(str, Enum):
 
 class BaseWebbing(SQLModel):
     """
-    Base class for webbing version.
+    Base class for webbing. All fields optional so adding a new field is one line.
+    Required fields are re-declared in the table model, WebbingPublic, and WebbingCreate.
     """
-    name: str = Field(index=True)
-    release_date: int | None = None # Unix timestamp
-    product_url: str | None = None # Manufacturer/vendor product page URL
-    material: FiberMaterial
-    width: int
-    weight: float | None = None # g/m
+    name: str | None = Field(default=None, index=True)
+    material: FiberMaterial | None = None
+    width: int | None = None              # mm
+    release_date: int | None = None       # Unix timestamp
+    product_url: str | None = None
+    weight: float | None = None           # g/m
     breaking_strength: float | None = None # kN
-    stretch: str | None = None # like [{"kn":0, "percent": 0.0}, {"kn": 10, "percent": 14.97}]
+    stretch: str | None = None            # like [{"kn":0, "percent": 0.0}, ...]
     isa_certified: bool = False
     classification: Classification | None = None
     isa_warning: ISAWarning | None = None
-    colors: str | None = None # Comma separated list of colors
-    price: float | None = None 
-    currency: Currency | None = None # ISO 4217 currency code
+    colors: str | None = None
+    price: float | None = None
+    currency: Currency | None = None
     description: str | None = None
-    version: str | None = None # Version indicating which batch data is from TODO: how to keep track of this?
+    version: str | None = None
     notes: str | None = None
 
 class Webbing(BaseWebbing, table=True):
     id: int | None = Field(default=None, primary_key=True)
+    name: str = Field(index=True)         # required — NOT NULL in DB
+    material: FiberMaterial               # required — NOT NULL in DB
+    width: int                            # required — NOT NULL in DB
     brand_id: int = Field(foreign_key="brand.id")
     brand: "Brand" = Relationship(back_populates="_webbings")
-    
-    
+
     @computed_field
     def brand_name(self) -> str:
-        """
-        Computed field to get the brand name.
-        """
         return self.brand.name if self.brand else "Unknown"
 
 class WebbingPublic(BaseWebbing):
-    """
-    Model for public webbing data.
-    """
+    """Model for public webbing data."""
+    name: str                             # required in response
+    material: FiberMaterial               # required in response
+    width: int                            # required in response
     brand_name: str
 
     class Config:
@@ -68,19 +69,18 @@ class WebbingPublic(BaseWebbing):
         extra = "forbid"
 
 class WebbingCreate(BaseWebbing):
-    """
-    Model for creating a new webbing entry.
-    """
-    brand_id: int
+    """Model for creating a new webbing entry."""
+    name: str                             # required on create
+    material: FiberMaterial               # required on create
+    width: int                            # required on create
+    brand_id: int                         # required on create
 
     class Config:
         exclude = ["id"]
         validate_assignment = True
 
 class WebbingUpdate(BaseWebbing):
-    """
-    Model for updating an existing webbing entry.
-    """
+    """Model for updating a webbing entry. All fields optional for PATCH semantics."""
     brand_id: int | None = None
 
     class Config:
@@ -88,5 +88,3 @@ class WebbingUpdate(BaseWebbing):
         validate_assignment = True
         extra = "forbid"
 
-
-    

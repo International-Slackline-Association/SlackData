@@ -67,4 +67,37 @@ fastapi dev main.py
 
 API runs at [http://127.0.0.1:8000](http://127.0.0.1:8000). Append `/docs` for the interactive OpenAPI explorer.
 
-> The database is seeded automatically on first run. To re-seed after editing JSON files, delete `slack_data/database.db` and restart.
+1. Activate environment (if not already activated)
+    - `source venv/bin/activate`
+2. Navigate to backend folder
+    - `cd slack_data`
+3. Run server
+    - `fastapi dev main.py`
+4. Open browser and go to URL printed in terminal
+    - Append `/docs` to see the interactive API docs
+    - Most likely [http://127.0.0.1:8000/docs]
+
+## Testing
+
+The test suite covers all active gear types with CRUD, pagination, and loader logic tests.
+
+### Setup
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate       # Linux/Mac
+# .venv\Scripts\activate        # Windows
+pip install -e ".[dev]"
+```
+
+Or with uv:
+
+```bash
+uv sync
+```
+
+### Running
+
+```bash
+pytest
+```
