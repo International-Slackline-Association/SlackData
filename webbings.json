@@ -633,7 +633,8 @@
         "weight": 80,
         "breakingStrength": 38,
         "date_introduced": null,
-        "product_url": null
+        "product_url": null,
+        "width": 25
     },
     {
         "name": "Sonic 2",
@@ -859,7 +860,8 @@
         "weight": 58,
         "breakingStrength": 32.5,
         "date_introduced": null,
-        "product_url": "https://aki-slacklines.de/en/webbing/polyester/4/aki-white-magic-webbing?c=6"
+        "product_url": "https://aki-slacklines.de/en/webbing/polyester/4/aki-white-magic-webbing?c=6",
+        "width": 25
     },
     {
         "name": "Verve red",
@@ -981,7 +983,8 @@
         "weight": 61.5,
         "breakingStrength": 32,
         "date_introduced": 1489363200000,
-        "product_url": null
+        "product_url": null,
+        "width": 25
     },
     {
         "name": "Wizard",
@@ -1048,7 +1051,8 @@
         "weight": 55,
         "breakingStrength": 33,
         "date_introduced": 1518991200000,
-        "product_url": null
+        "product_url": null,
+        "width": 25
     },
     {
         "name": "Aero",
@@ -1143,7 +1147,8 @@
         "weight": 62,
         "breakingStrength": 33.4,
         "date_introduced": null,
-        "product_url": null
+        "product_url": null,
+        "width": 25
     },
     {
         "name": "Aero 2",
@@ -1238,7 +1243,8 @@
         "weight": 62,
         "breakingStrength": 33.4,
         "date_introduced": 1449273600000,
-        "product_url": "http://www.balancecommunity.com/aero-2"
+        "product_url": "http://www.balancecommunity.com/aero-2",
+        "width": 25.4
     },
     {
         "name": "Feather",
@@ -1293,7 +1299,8 @@
         "weight": 47,
         "breakingStrength": 27,
         "date_introduced": null,
-        "product_url": null
+        "product_url": null,
+        "width": 25
     },
     {
         "name": "Feather Pro",
@@ -1388,7 +1395,8 @@
         "weight": 47,
         "breakingStrength": 27,
         "date_introduced": 1459900800000,
-        "product_url": "http://www.balancecommunity.com/feather-pro"
+        "product_url": "http://www.balancecommunity.com/feather-pro",
+        "width": 25
     },
     {
         "name": "Mantra MK1",
@@ -1749,10 +1757,11 @@
             }
         ],
         "materialType": "pes",
-        "weight": "",
-        "breakingStrength": "",
+        "weight": 76,
+        "breakingStrength": 42,
         "date_introduced": null,
-        "product_url": null
+        "product_url": "http://www.balancecommunity.com/mantra-mk4-flight",
+        "width": 25
     },
     {
         "name": "type-18 MK1",
@@ -1981,7 +1990,8 @@
         "weight": "58",
         "breakingStrength": "28",
         "date_introduced": 1507150800000,
-        "product_url": "http://www.balancecommunity.com/lift"
+        "product_url": "http://www.balancecommunity.com/lift",
+        "width": 25
     },
     {
         "name": "SpiderSilk MK2",
@@ -2130,7 +2140,8 @@
         "weight": 33.4,
         "breakingStrength": 35,
         "date_introduced": null,
-        "product_url": "https://laboutique.slack.fr/en/slackline-webbings/41-moonwalk-flat-hybride.html"
+        "product_url": "https://laboutique.slack.fr/en/slackline-webbings/41-moonwalk-flat-hybride.html",
+        "width": 25
     },
     {
         "name": "McFly",
@@ -2157,7 +2168,8 @@
         "weight": 65,
         "breakingStrength": 31,
         "date_introduced": null,
-        "product_url": null
+        "product_url": null,
+        "width": 25
     },
     {
         "name": "Spring",
@@ -2279,7 +2291,8 @@
         "weight": 63,
         "breakingStrength": 30,
         "date_introduced": null,
-        "product_url": null
+        "product_url": null,
+        "width": 25
     },
     {
         "name": "Passion",
@@ -2469,10 +2482,11 @@
             }
         ],
         "materialType": "pes",
-        "weight": "",
-        "breakingStrength": "",
+        "weight": 48,
+        "breakingStrength": 20,
         "date_introduced": null,
-        "product_url": "https://www.slackshop.cz/en/webbing/30-eqb-neon.html"
+        "product_url": "https://www.slackshop.cz/en/webbing/30-eqb-neon.html",
+        "width": 25
     },
     {
         "name": "Sigma N",
@@ -2531,7 +2545,8 @@
         "weight": 55,
         "breakingStrength": 26,
         "date_introduced": null,
-        "product_url": "http://www.slackliner.de/Webbing/Nylon/Sigma-N-jormungand-270.html"
+        "product_url": "http://www.slackliner.de/Webbing/Nylon/Sigma-N-jormungand-270.html",
+        "width": 25
     },
     {
         "name": "Sigma X",
@@ -2688,7 +2703,8 @@
         "weight": "64",
         "breakingStrength": "35",
         "date_introduced": null,
-        "product_url": "http://www.slackliner.de/Webbing/Flat-Webbing/Sigma-Impact.html"
+        "product_url": "http://www.slackliner.de/Webbing/Flat-Webbing/Sigma-Impact.html",
+        "width": 25
     },
     {
         "name": "Sigma LG",
@@ -2731,7 +2747,8 @@
         "weight": 66,
         "breakingStrength": 38,
         "date_introduced": null,
-        "product_url": null
+        "product_url": null,
+        "width": 25
     },
     {
         "name": "Dragon",
@@ -2766,7 +2783,8 @@
         "weight": 64,
         "breakingStrength": 31,
         "date_introduced": null,
-        "product_url": "https://www.slackshop.cz/en/webbing/31-eqb-dragon.html"
+        "product_url": "https://www.slackshop.cz/en/webbing/31-eqb-dragon.html",
+        "width": 25
     },
     {
         "name": "Sumo",
@@ -2801,7 +2819,8 @@
         "weight": 82,
         "breakingStrength": 40,
         "date_introduced": null,
-        "product_url": null
+        "product_url": null,
+        "width": 25
     },
     {
         "name": "Bounce",
@@ -2832,7 +2851,8 @@
         "weight": "38",
         "breakingStrength": "16",
         "date_introduced": null,
-        "product_url": "https://www.slackshop.cz/en/for-advanced/142-eqb-bounce.html"
+        "product_url": "https://www.slackshop.cz/en/for-advanced/142-eqb-bounce.html",
+        "width": 19
     },
     {
         "name": "Flash",
@@ -2867,7 +2887,8 @@
         "weight": 61,
         "breakingStrength": 31,
         "date_introduced": null,
-        "product_url": null
+        "product_url": null,
+        "width": 25
     },
     {
         "name": "Element",
@@ -2898,7 +2919,8 @@
         "weight": 42,
         "breakingStrength": 20,
         "date_introduced": null,
-        "product_url": "http://www.eqb.cz/element-en.html"
+        "product_url": "http://www.eqb.cz/element-en.html",
+        "width": 25
     },
     {
         "name": "Skye",
@@ -2961,7 +2983,8 @@
         "weight": 62,
         "breakingStrength": 36,
         "date_introduced": 1492041600000,
-        "product_url": "https://www.slackshop.cz/en/webbing/78-eqb-skye.html"
+        "product_url": "https://www.slackshop.cz/en/webbing/78-eqb-skye.html",
+        "width": 25
     },
     {
         "name": "Fresh",
@@ -2996,7 +3019,8 @@
         "weight": 67,
         "breakingStrength": 32,
         "date_introduced": 1496188800000,
-        "product_url": "https://www.slackshop.cz/en/webbing/76-157-eqb-fresh.html"
+        "product_url": "https://www.slackshop.cz/en/webbing/76-157-eqb-fresh.html",
+        "width": 25
     },
     {
         "name": "eLine",
@@ -3054,7 +3078,8 @@
         "weight": "53",
         "breakingStrength": "29",
         "date_introduced": null,
-        "product_url": "http://slack-mountain.com/en/webbing-slackline/1-cobalt.html"
+        "product_url": "http://slack-mountain.com/en/webbing-slackline/1-cobalt.html",
+        "width": 25
     },
     {
         "name": "Windu",
@@ -3082,10 +3107,11 @@
             }
         ],
         "materialType": "pes",
-        "weight": "",
-        "breakingStrength": "",
+        "weight": 65,
+        "breakingStrength": 25,
         "date_introduced": null,
-        "product_url": null
+        "product_url": null,
+        "width": 25
     },
     {
         "name": "Snake",
@@ -3198,10 +3224,11 @@
             }
         ],
         "materialType": "pes",
-        "weight": "",
-        "breakingStrength": "",
+        "weight": 52,
+        "breakingStrength": 21,
         "date_introduced": null,
-        "product_url": null
+        "product_url": null,
+        "width": 25
     },
     {
         "name": "flax",
@@ -3252,10 +3279,11 @@
             }
         ],
         "materialType": "pes",
-        "weight": "",
-        "breakingStrength": "",
+        "weight": 57,
+        "breakingStrength": 25,
         "date_introduced": null,
-        "product_url": null
+        "product_url": null,
+        "width": 25
     },
     {
         "name": "spectre",
@@ -3283,10 +3311,11 @@
             }
         ],
         "materialType": "polyamid/nylon",
-        "weight": "",
-        "breakingStrength": "",
+        "weight": 70,
+        "breakingStrength": 30,
         "date_introduced": 1486425600000,
-        "product_url": "http://slack-mountain.com/en/webbing-slackline/168-spectre.html"
+        "product_url": "http://slack-mountain.com/en/webbing-slackline/168-spectre.html",
+        "width": 25
     },
     {
         "name": "rubalise",
@@ -3306,10 +3335,11 @@
             }
         ],
         "materialType": "50mm pes",
-        "weight": "",
-        "breakingStrength": "",
+        "weight": 80,
+        "breakingStrength": 30,
         "date_introduced": null,
-        "product_url": null
+        "product_url": null,
+        "width": 50
     },
     {
         "name": "wallaby",
@@ -3332,7 +3362,8 @@
         "weight": "118",
         "breakingStrength": "30",
         "date_introduced": null,
-        "product_url": "http://slack-mountain.com/en/jumplines/6-wallaby.html"
+        "product_url": "http://slack-mountain.com/en/jumplines/6-wallaby.html",
+        "width": 48
     },
     {
         "name": "Storm",
@@ -3352,10 +3383,11 @@
             }
         ],
         "materialType": "50mm pes",
-        "weight": "",
-        "breakingStrength": "",
+        "weight": 80,
+        "breakingStrength": 30,
         "date_introduced": null,
-        "product_url": null
+        "product_url": null,
+        "width": 50
     },
     {
         "name": "plum",
@@ -3375,10 +3407,11 @@
             }
         ],
         "materialType": "pes",
-        "weight": "",
+        "weight": 25,
         "breakingStrength": "10",
         "date_introduced": null,
-        "product_url": "http://slack-mountain.com/en/webbing-slackline/7-plum.html"
+        "product_url": "http://slack-mountain.com/en/webbing-slackline/7-plum.html",
+        "width": 25
     },
     {
         "name": "Cosmic",
@@ -3453,7 +3486,8 @@
         "weight": "50",
         "breakingStrength": "31",
         "date_introduced": 1470528000000,
-        "product_url": "http://slack-inov.com/gb/webbing/69-cosmic"
+        "product_url": "http://slack-inov.com/gb/webbing/69-cosmic",
+        "width": 25
     },
     {
         "name": "Flame3",
@@ -3559,7 +3593,8 @@
         "weight": "66",
         "breakingStrength": "32",
         "date_introduced": null,
-        "product_url": "https://slack-inov.com/gb/longline/144-donkey"
+        "product_url": "https://slack-inov.com/gb/longline/144-donkey",
+        "width": 25.4
     },
     {
         "name": "Nova",
@@ -3590,7 +3625,8 @@
         "weight": "56",
         "breakingStrength": "27",
         "date_introduced": null,
-        "product_url": "https://slack-inov.com/gb/longline/145-nova"
+        "product_url": "https://slack-inov.com/gb/longline/145-nova",
+        "width": 25.4
     },
     {
         "name": "(pes)",
@@ -3764,7 +3800,8 @@
         "weight": "62",
         "breakingStrength": "36",
         "date_introduced": 1539118800000,
-        "product_url": "https://raed-slacklines.com/rainbow-polyester-highline-webbing"
+        "product_url": "https://raed-slacklines.com/rainbow-polyester-highline-webbing",
+        "width": 25.4
     },
     {
         "name": "Parsec",
@@ -3859,7 +3896,8 @@
         "weight": "59",
         "breakingStrength": "33",
         "date_introduced": null,
-        "product_url": "https://raed-slacklines.com/parsec-longline-webbing"
+        "product_url": "https://raed-slacklines.com/parsec-longline-webbing",
+        "width": 25
     },
     {
         "name": "MOTM",
@@ -3954,7 +3992,8 @@
         "weight": "56",
         "breakingStrength": "27",
         "date_introduced": null,
-        "product_url": "https://raed-slacklines.com/motm-tubular-nylon-slackline-webbing"
+        "product_url": "https://raed-slacklines.com/motm-tubular-nylon-slackline-webbing",
+        "width": 25
     },
     {
         "name": "Helium",
@@ -4049,7 +4088,8 @@
         "weight": "38",
         "breakingStrength": "24",
         "date_introduced": null,
-        "product_url": "https://raed-slacklines.com/helium-lightweight-polyester-slackline-webbing"
+        "product_url": "https://raed-slacklines.com/helium-lightweight-polyester-slackline-webbing",
+        "width": 25
     },
     {
         "name": "Cumulus",
@@ -4124,7 +4164,8 @@
         "weight": "66",
         "breakingStrength": "35",
         "date_introduced": 1563919200000,
-        "product_url": "https://raed-slacklines.com/cumulus-nylon-highline-webbing"
+        "product_url": "https://raed-slacklines.com/cumulus-nylon-highline-webbing",
+        "width": 25
     },
     {
         "name": "pinkTube",
@@ -4235,7 +4276,8 @@
         "weight": "48",
         "breakingStrength": "20.6",
         "date_introduced": 1503349200000,
-        "product_url": "https://www.slacktivity.com/pinktube-25m-200m"
+        "product_url": "https://www.slacktivity.com/pinktube-25m-200m",
+        "width": 25.5
     },
     {
         "name": "redTube",
@@ -4398,7 +4440,8 @@
         "weight": 76,
         "breakingStrength": 36,
         "date_introduced": null,
-        "product_url": "https://www.slacktivity.com/redtube-30m-200m"
+        "product_url": "https://www.slacktivity.com/redtube-30m-200m",
+        "width": 25
     },
     {
         "name": "Marathon",
@@ -4557,7 +4600,8 @@
         "weight": "61.5",
         "breakingStrength": "37",
         "date_introduced": null,
-        "product_url": "https://www.slacktivity.com/marathon-50m-500m"
+        "product_url": "https://www.slacktivity.com/marathon-50m-500m",
+        "width": 25
     },
     {
         "name": "Marathon Play",
@@ -4713,10 +4757,11 @@
             }
         ],
         "materialType": "pes",
-        "weight": "",
-        "breakingStrength": "",
+        "weight": 65,
+        "breakingStrength": 37,
         "date_introduced": null,
-        "product_url": null
+        "product_url": null,
+        "width": 25
     },
     {
         "name": "halfMarathon 20mm",
@@ -4919,10 +4964,11 @@
             }
         ],
         "materialType": "pes",
-        "weight": "",
-        "breakingStrength": "",
+        "weight": 45,
+        "breakingStrength": 16,
         "date_introduced": null,
-        "product_url": "https://www.balanceur.ro/slackshop/benzi/pana-corbului/"
+        "product_url": "https://www.balanceur.ro/slackshop/benzi/pana-corbului/",
+        "width": 25
     },
     {
         "name": "Milky Way",
@@ -5065,7 +5111,8 @@
         "weight": "63",
         "breakingStrength": "32",
         "date_introduced": 1562706000000,
-        "product_url": "https://www.balanceur.ro/slackshop/benzi/milky-way/"
+        "product_url": "https://www.balanceur.ro/slackshop/benzi/milky-way/",
+        "width": 25
     },
     {
         "name": "Tender",
@@ -5317,7 +5364,8 @@
         "weight": "62",
         "breakingStrength": "35",
         "date_introduced": null,
-        "product_url": "http://spider-slacklines.com/shop/en/longline-webbings/74-edge-line.html"
+        "product_url": "http://spider-slacklines.com/shop/en/longline-webbings/74-edge-line.html",
+        "width": 25.4
     },
     {
         "name": "Jumbo",
@@ -5380,7 +5428,8 @@
         "weight": "83",
         "breakingStrength": "35",
         "date_introduced": null,
-        "product_url": "http://spider-slacklines.com/shop/en/longline-webbings/73-jumbo-line.html"
+        "product_url": "http://spider-slacklines.com/shop/en/longline-webbings/73-jumbo-line.html",
+        "width": 25.4
     },
     {
         "name": "Nylove",
@@ -5443,7 +5492,8 @@
         "weight": "62",
         "breakingStrength": "31",
         "date_introduced": null,
-        "product_url": "https://spider-slacklines.com/shop/en/longline-webbings/245-nylove-longline-price-per-meter.html"
+        "product_url": "https://spider-slacklines.com/shop/en/longline-webbings/245-nylove-longline-price-per-meter.html",
+        "width": 25
     },
     {
         "name": "Y2k",
@@ -5458,7 +5508,8 @@
         "breakingStrength": 34,
         "materialType": "dyneema",
         "date_introduced": 1534744800000,
-        "product_url": "https://www.slacktivity.com/y2k"
+        "product_url": "https://www.slacktivity.com/y2k",
+        "width": 25.4
     },
     {
         "name": "Voyage",
@@ -5510,5 +5561,2372 @@
         "materialType": "pes",
         "date_introduced": null,
         "product_url": null
+    },
+    {
+        "name": "Ribera",
+        "brand": "Pump Slackline",
+        "materialType": "Polyester",
+        "width": 26,
+        "weight": 80,
+        "breakingStrength": 42,
+        "stretch": null,
+        "date_introduced": null,
+        "product_url": null
+    },
+    {
+        "name": "Bloodline",
+        "brand": "Pure Slacklines",
+        "materialType": "Polyester",
+        "width": 25,
+        "weight": 65,
+        "breakingStrength": 30,
+        "stretch": [
+            {
+                "percent": 7,
+                "kn": 10
+            }
+        ],
+        "date_introduced": null,
+        "product_url": null
+    },
+    {
+        "name": "Tape",
+        "brand": "Singing rock",
+        "materialType": "Polyester",
+        "width": 25,
+        "weight": 59,
+        "breakingStrength": 30,
+        "stretch": [
+            {
+                "percent": 8
+            }
+        ],
+        "date_introduced": null,
+        "product_url": "http://www.singingrock.com/slackline-webbing-yellowblack"
+    },
+    {
+        "name": "Ninja",
+        "brand": "Equilibrium Slacklines (EQB)",
+        "materialType": "Nylon",
+        "width": 35,
+        "weight": 86,
+        "breakingStrength": 45,
+        "stretch": [
+            {
+                "percent": 11,
+                "kn": 10
+            }
+        ],
+        "date_introduced": null,
+        "product_url": "https://www.eqb.cz/ninja-en.html"
+    },
+    {
+        "name": "Nitro",
+        "brand": "Equilibrium Slacklines (EQB)",
+        "materialType": "Polyester",
+        "width": 50,
+        "weight": 99,
+        "breakingStrength": 40,
+        "stretch": [
+            {
+                "percent": 11,
+                "kn": 10
+            }
+        ],
+        "date_introduced": null,
+        "product_url": null
+    },
+    {
+        "name": "Slim Green",
+        "brand": "Equilibrium Slacklines (EQB)",
+        "materialType": "Polyester",
+        "width": 25,
+        "weight": 26,
+        "breakingStrength": 11,
+        "stretch": [
+            {
+                "percent": 7,
+                "kn": 3
+            }
+        ],
+        "date_introduced": null,
+        "product_url": "https://www.slackshop.cz/en/webbing/29-eqb-slim.html"
+    },
+    {
+        "name": "Chartreuse",
+        "brand": "Line Spirit",
+        "materialType": "Polyester",
+        "width": 25,
+        "weight": 30,
+        "breakingStrength": 20,
+        "stretch": [
+            {
+                "percent": 8,
+                "kn": 10
+            }
+        ],
+        "date_introduced": null,
+        "product_url": null
+    },
+    {
+        "name": "Dibona",
+        "brand": "Line Spirit",
+        "materialType": "Polyester",
+        "width": 25,
+        "weight": 65,
+        "breakingStrength": 25,
+        "stretch": [
+            {
+                "percent": 10,
+                "kn": 10
+            }
+        ],
+        "date_introduced": null,
+        "product_url": null
+    },
+    {
+        "name": "Elia",
+        "brand": "Line Spirit",
+        "materialType": "Polyester",
+        "width": 25,
+        "weight": 60,
+        "breakingStrength": 32,
+        "stretch": [
+            {
+                "percent": 4.5,
+                "kn": 10
+            }
+        ],
+        "date_introduced": null,
+        "product_url": null
+    },
+    {
+        "name": "Etna II",
+        "brand": "Line Spirit",
+        "materialType": "Polyester",
+        "width": 25,
+        "weight": 90,
+        "breakingStrength": 50,
+        "stretch": [
+            {
+                "percent": 2,
+                "kn": 10
+            }
+        ],
+        "date_introduced": null,
+        "product_url": null
+    },
+    {
+        "name": "Fuji",
+        "brand": "Line Spirit",
+        "materialType": "Dyneema",
+        "width": 25,
+        "weight": 37,
+        "breakingStrength": 40,
+        "stretch": [
+            {
+                "percent": 3,
+                "kn": 10
+            }
+        ],
+        "date_introduced": null,
+        "product_url": null
+    },
+    {
+        "name": "Krakatoa",
+        "brand": "Line Spirit",
+        "materialType": "Polyester",
+        "width": 45,
+        "weight": 96,
+        "breakingStrength": 45,
+        "stretch": null,
+        "date_introduced": null,
+        "product_url": null
+    },
+    {
+        "name": "Mauna Kea",
+        "brand": "Line Spirit",
+        "materialType": "Polyester",
+        "width": 26,
+        "weight": 116,
+        "breakingStrength": 42,
+        "stretch": [
+            {
+                "percent": 4,
+                "kn": 10
+            }
+        ],
+        "date_introduced": null,
+        "product_url": null
+    },
+    {
+        "name": "Pierra Menta",
+        "brand": "Line Spirit",
+        "materialType": "Nylon",
+        "width": 25,
+        "weight": 54,
+        "breakingStrength": 22,
+        "stretch": [
+            {
+                "percent": 15,
+                "kn": 10
+            }
+        ],
+        "date_introduced": null,
+        "product_url": null
+    },
+    {
+        "name": "Vercors",
+        "brand": "Line Spirit",
+        "materialType": "Polyester",
+        "width": 25,
+        "weight": 60,
+        "breakingStrength": 30,
+        "stretch": [
+            {
+                "percent": 6,
+                "kn": 10
+            }
+        ],
+        "date_introduced": null,
+        "product_url": null
+    },
+    {
+        "name": "Vesuve",
+        "brand": "Line Spirit",
+        "materialType": "Polyester",
+        "width": 25,
+        "weight": 56,
+        "breakingStrength": 24,
+        "stretch": [
+            {
+                "percent": 7,
+                "kn": 10
+            }
+        ],
+        "date_introduced": null,
+        "product_url": null
+    },
+    {
+        "name": "Sat'Elite",
+        "brand": "Dakas",
+        "materialType": "Nylon",
+        "width": 50,
+        "weight": 145,
+        "breakingStrength": 75,
+        "stretch": null,
+        "date_introduced": null,
+        "product_url": null
+    },
+    {
+        "name": "Red Zebra",
+        "brand": "Dakas",
+        "materialType": "Nylon",
+        "width": 25,
+        "weight": 62,
+        "breakingStrength": 30.9,
+        "stretch": [
+            {
+                "percent": 16.5,
+                "kn": 10
+            }
+        ],
+        "date_introduced": null,
+        "product_url": null
+    },
+    {
+        "name": "Slack Swan",
+        "brand": "Dakas",
+        "materialType": "Polyester",
+        "width": 25,
+        "weight": 78,
+        "breakingStrength": 36.5,
+        "stretch": [
+            {
+                "percent": 5.8,
+                "kn": 10
+            }
+        ],
+        "date_introduced": null,
+        "product_url": null
+    },
+    {
+        "name": "Flamme II",
+        "brand": "Slack Inov",
+        "materialType": "Polyester",
+        "width": 25,
+        "weight": 76,
+        "breakingStrength": 43,
+        "stretch": [
+            {
+                "percent": 3.5,
+                "kn": 10
+            }
+        ],
+        "date_introduced": null,
+        "product_url": null
+    },
+    {
+        "name": "Emeraude",
+        "brand": "Slack Inov",
+        "materialType": "Polyester",
+        "width": 50,
+        "weight": 95,
+        "breakingStrength": 40,
+        "stretch": null,
+        "date_introduced": null,
+        "product_url": "http://slack-inov.com/gb/webbing/9-emeraude"
+    },
+    {
+        "name": "Diablo2",
+        "brand": "Slack Mountain",
+        "materialType": "Polyester",
+        "width": 25,
+        "weight": 96,
+        "breakingStrength": 30,
+        "stretch": [
+            {
+                "percent": 3.5,
+                "kn": 10
+            }
+        ],
+        "date_introduced": null,
+        "product_url": "http://slack-mountain.com/en/webbing-slackline/132-diablo2.html"
+    },
+    {
+        "name": "Flax NY",
+        "brand": "Slack Mountain",
+        "materialType": "Nylon",
+        "width": 25,
+        "weight": 38,
+        "breakingStrength": 20,
+        "stretch": [
+            {
+                "percent": 13,
+                "kn": 10
+            }
+        ],
+        "date_introduced": null,
+        "product_url": null
+    },
+    {
+        "name": "Goku",
+        "brand": "Slack Mountain",
+        "materialType": "Hybrid",
+        "width": 25,
+        "weight": 32,
+        "breakingStrength": 35,
+        "stretch": [
+            {
+                "percent": 3.8,
+                "kn": 10
+            }
+        ],
+        "date_introduced": null,
+        "product_url": null
+    },
+    {
+        "name": "Goku 2",
+        "brand": "Slack Mountain",
+        "materialType": "Hybrid",
+        "width": 25,
+        "weight": 41,
+        "breakingStrength": 40,
+        "stretch": [
+            {
+                "percent": 3.8,
+                "kn": 10
+            }
+        ],
+        "date_introduced": null,
+        "product_url": "http://slack-mountain.com/en/webbing-slackline/136-goku2.html"
+    },
+    {
+        "name": "Snake Tub",
+        "brand": "Slack Mountain",
+        "materialType": "Polyester",
+        "width": 25,
+        "weight": 52,
+        "breakingStrength": 21,
+        "stretch": [
+            {
+                "percent": 10,
+                "kn": 10
+            }
+        ],
+        "date_introduced": null,
+        "product_url": "http://slack-mountain.com/en/webbing-slackline/5-snake-tub.html"
+    },
+    {
+        "name": "Club S",
+        "brand": "Slack.fr",
+        "materialType": "Other",
+        "width": 25,
+        "weight": 75,
+        "breakingStrength": 30,
+        "stretch": [
+            {
+                "percent": 7,
+                "kn": 10
+            }
+        ],
+        "date_introduced": null,
+        "product_url": null
+    },
+    {
+        "name": "Dark Blue",
+        "brand": "Slack.fr",
+        "materialType": "Polyester",
+        "width": 25,
+        "weight": 62,
+        "breakingStrength": 28,
+        "stretch": [
+            {
+                "percent": 4.7,
+                "kn": 10
+            }
+        ],
+        "date_introduced": null,
+        "product_url": null
+    },
+    {
+        "name": "MILF",
+        "brand": "Slack.fr",
+        "materialType": "Polyester",
+        "width": 25,
+        "weight": 73,
+        "breakingStrength": 37,
+        "stretch": [
+            {
+                "percent": 7,
+                "kn": 10
+            }
+        ],
+        "date_introduced": null,
+        "product_url": null
+    },
+    {
+        "name": "Neon Light",
+        "brand": "Slack.fr",
+        "materialType": "Polyester",
+        "width": 25,
+        "weight": 62,
+        "breakingStrength": 35,
+        "stretch": [
+            {
+                "percent": 4.5,
+                "kn": 10
+            }
+        ],
+        "date_introduced": null,
+        "product_url": null
+    },
+    {
+        "name": "SuperFL Kill Bill",
+        "brand": "Slack.fr",
+        "materialType": "Polyester",
+        "width": 25,
+        "weight": 146,
+        "breakingStrength": 54,
+        "stretch": [
+            {
+                "percent": 2.5,
+                "kn": 10
+            }
+        ],
+        "date_introduced": null,
+        "product_url": null
+    },
+    {
+        "name": "SuperFL Maverick V2",
+        "brand": "Slack.fr",
+        "materialType": "Polyester",
+        "width": 25,
+        "weight": 62,
+        "breakingStrength": 31,
+        "stretch": [
+            {
+                "percent": 4.5,
+                "kn": 10
+            }
+        ],
+        "date_introduced": null,
+        "product_url": null
+    },
+    {
+        "name": "Supertube Norway",
+        "brand": "Slack.fr",
+        "materialType": "Polyester",
+        "width": 25,
+        "weight": 54,
+        "breakingStrength": 21,
+        "stretch": [
+            {
+                "percent": 10,
+                "kn": 10
+            }
+        ],
+        "date_introduced": null,
+        "product_url": null
+    },
+    {
+        "name": "Jumpline",
+        "brand": "Slack.fr",
+        "materialType": "Polyester",
+        "width": 30,
+        "weight": 60,
+        "breakingStrength": 30,
+        "stretch": [
+            {
+                "percent": 4,
+                "kn": 10
+            }
+        ],
+        "date_introduced": null,
+        "product_url": null
+    },
+    {
+        "name": "Jumpline Pro Series",
+        "brand": "Slack.fr",
+        "materialType": "Polyester",
+        "width": 40,
+        "weight": 74,
+        "breakingStrength": 40,
+        "stretch": [
+            {
+                "percent": 4.5,
+                "kn": 10
+            }
+        ],
+        "date_introduced": null,
+        "product_url": null
+    },
+    {
+        "name": "Jumpline AntiPop",
+        "brand": "Slack.fr",
+        "materialType": "Polyester",
+        "width": 40,
+        "weight": 101,
+        "breakingStrength": 45,
+        "stretch": [
+            {
+                "percent": 8,
+                "kn": 10
+            }
+        ],
+        "date_introduced": null,
+        "product_url": null
+    },
+    {
+        "name": "Passion red",
+        "brand": "Elephant",
+        "materialType": "Nylon",
+        "width": 25,
+        "weight": 69,
+        "breakingStrength": 33,
+        "stretch": [
+            {
+                "percent": 12.3,
+                "kn": 10
+            }
+        ],
+        "date_introduced": null,
+        "product_url": null
+    },
+    {
+        "name": "Flash'line",
+        "brand": "Elephant",
+        "materialType": "Polyester",
+        "width": 50,
+        "weight": 86,
+        "breakingStrength": null,
+        "stretch": [
+            {
+                "percent": 2,
+                "kn": 7.5
+            }
+        ],
+        "date_introduced": null,
+        "product_url": "http://elephant-slacklines.com"
+    },
+    {
+        "name": "EcoLine",
+        "brand": "Elephant",
+        "materialType": "Polyester",
+        "width": 50,
+        "weight": 86,
+        "breakingStrength": 45,
+        "stretch": [
+            {
+                "percent": 2,
+                "kn": 7
+            }
+        ],
+        "date_introduced": null,
+        "product_url": "http://elephant-slacklines.com"
+    },
+    {
+        "name": "Wing 3.5",
+        "brand": "Elephant",
+        "materialType": "Polyester",
+        "width": 35,
+        "weight": 54,
+        "breakingStrength": 30,
+        "stretch": [
+            {
+                "percent": 5.9,
+                "kn": 7.5
+            }
+        ],
+        "date_introduced": null,
+        "product_url": null
+    },
+    {
+        "name": "Skillshot HS",
+        "brand": "Gambit",
+        "materialType": "Polyester",
+        "width": 25,
+        "weight": 60,
+        "breakingStrength": 32,
+        "stretch": [
+            {
+                "percent": 6,
+                "kn": 10
+            }
+        ],
+        "date_introduced": null,
+        "product_url": null
+    },
+    {
+        "name": "Skillshot LS",
+        "brand": "Gambit",
+        "materialType": "Polyester",
+        "width": 25,
+        "weight": 59,
+        "breakingStrength": 32,
+        "stretch": [
+            {
+                "percent": 4,
+                "kn": 10
+            }
+        ],
+        "date_introduced": null,
+        "product_url": null
+    },
+    {
+        "name": "Flow Line",
+        "brand": "Gibbon",
+        "materialType": "Polyester",
+        "width": 25,
+        "weight": 64,
+        "breakingStrength": 30,
+        "stretch": [
+            {
+                "percent": 7,
+                "kn": 10
+            }
+        ],
+        "date_introduced": null,
+        "product_url": "http://www.gibbon-slacklines.com/en/products/longline-modules/flowline/index.html"
+    },
+    {
+        "name": "Tube Line",
+        "brand": "Gibbon",
+        "materialType": "Other",
+        "width": 25,
+        "weight": 64,
+        "breakingStrength": 30,
+        "stretch": null,
+        "date_introduced": null,
+        "product_url": null
+    },
+    {
+        "name": "Verve 35mm",
+        "brand": "Landcruising",
+        "materialType": "Polyester",
+        "width": 35,
+        "weight": 69,
+        "breakingStrength": 35,
+        "stretch": [
+            {
+                "percent": 7,
+                "kn": 10
+            }
+        ],
+        "date_introduced": null,
+        "product_url": null
+    },
+    {
+        "name": "Core 1",
+        "brand": "Landcruising",
+        "materialType": "Polyester",
+        "width": 25,
+        "weight": 76,
+        "breakingStrength": 40,
+        "stretch": [
+            {
+                "percent": 2.8,
+                "kn": 10
+            }
+        ],
+        "date_introduced": null,
+        "product_url": null
+    },
+    {
+        "name": "Core 2 HS",
+        "brand": "Landcruising",
+        "materialType": "Polyester",
+        "width": 25,
+        "weight": 71.5,
+        "breakingStrength": 44,
+        "stretch": [
+            {
+                "percent": 6,
+                "kn": 10
+            }
+        ],
+        "date_introduced": null,
+        "product_url": null
+    },
+    {
+        "name": "Core 2 LS",
+        "brand": "Landcruising",
+        "materialType": "Polyester",
+        "width": 25,
+        "weight": 69.9,
+        "breakingStrength": 44,
+        "stretch": [
+            {
+                "percent": 2,
+                "kn": 10
+            }
+        ],
+        "date_introduced": null,
+        "product_url": null
+    },
+    {
+        "name": "Matrix",
+        "brand": "Landcruising",
+        "materialType": "Nylon",
+        "width": 32,
+        "weight": 102,
+        "breakingStrength": 43,
+        "stretch": [
+            {
+                "percent": 14.5,
+                "kn": 12
+            }
+        ],
+        "date_introduced": null,
+        "product_url": null
+    },
+    {
+        "name": "Matrix Outer",
+        "brand": "Landcruising",
+        "materialType": "Nylon",
+        "width": 32,
+        "weight": 58,
+        "breakingStrength": 27,
+        "stretch": [
+            {
+                "percent": 14,
+                "kn": 9
+            }
+        ],
+        "date_introduced": null,
+        "product_url": null
+    },
+    {
+        "name": "Sonic 2.0",
+        "brand": "Aki Slacklines",
+        "materialType": "Nylon",
+        "width": 25,
+        "weight": 68,
+        "breakingStrength": 34,
+        "stretch": [
+            {
+                "percent": 15,
+                "kn": 10
+            }
+        ],
+        "date_introduced": null,
+        "product_url": "https://aki-slacklines.de/en/webbing/polyamide/137/aki-sonic-2-slackline-webbing?c=12&fbclid=IwAR1eTq7La_8P4pp3HW0hq4rE2LNuzA2ZAbm-Vyx4gXORVdZU1EmhrtBbLAo"
+    },
+    {
+        "name": "Wave Tube",
+        "brand": "Landcruising",
+        "materialType": "Nylon",
+        "width": 25,
+        "weight": 42,
+        "breakingStrength": 20,
+        "stretch": [
+            {
+                "percent": 17,
+                "kn": 10
+            }
+        ],
+        "date_introduced": null,
+        "product_url": null
+    },
+    {
+        "name": "Wave Tape 19",
+        "brand": "Landcruising",
+        "materialType": "Nylon",
+        "width": 19,
+        "weight": 38,
+        "breakingStrength": 18,
+        "stretch": [
+            {
+                "percent": 14,
+                "kn": 6
+            }
+        ],
+        "date_introduced": null,
+        "product_url": null
+    },
+    {
+        "name": "Wave Tube 19",
+        "brand": "Landcruising",
+        "materialType": "Nylon",
+        "width": 19,
+        "weight": 36,
+        "breakingStrength": 16,
+        "stretch": [
+            {
+                "percent": 14,
+                "kn": 6
+            }
+        ],
+        "date_introduced": null,
+        "product_url": null
+    },
+    {
+        "name": "Sigma Impact LS",
+        "brand": "Slackliner.de",
+        "materialType": "Polyester",
+        "width": 25,
+        "weight": 64,
+        "breakingStrength": 37,
+        "stretch": [
+            {
+                "percent": 4,
+                "kn": 10
+            }
+        ],
+        "date_introduced": null,
+        "product_url": "http://www.slackliner.de/Slackline-Band/Flachband/Sigma-Impact-lowstretch.html"
+    },
+    {
+        "name": "Sigma X (HeliX)",
+        "brand": "Slackliner.de",
+        "materialType": "Nylon",
+        "width": 25,
+        "weight": 44,
+        "breakingStrength": 21,
+        "stretch": [
+            {
+                "percent": 15.5,
+                "kn": 8
+            }
+        ],
+        "date_introduced": null,
+        "product_url": "http://www.slackliner.de/Slackline-Band/Schlauchband/Sigma-X.html"
+    },
+    {
+        "name": "Strong II",
+        "brand": "Slackline tools",
+        "materialType": "Polyester",
+        "width": 25,
+        "weight": 67,
+        "breakingStrength": 36,
+        "stretch": [
+            {
+                "percent": 4.5,
+                "kn": 6
+            }
+        ],
+        "date_introduced": null,
+        "product_url": "https://www.slack-shop.de/baender-schlingen/bander/strong/slacklineband-strong-ii.html"
+    },
+    {
+        "name": "FLY Line",
+        "brand": "Spider slacklines",
+        "materialType": "Polyester",
+        "width": 25,
+        "weight": 58,
+        "breakingStrength": 33,
+        "stretch": [
+            {
+                "percent": 4,
+                "kn": 10
+            }
+        ],
+        "date_introduced": null,
+        "product_url": "http://spider-slacklines.com/shop/en/longline-webbings/77-fly-line.html"
+    },
+    {
+        "name": "Tender Line",
+        "brand": "Spider slacklines",
+        "materialType": "Polyester",
+        "width": 25,
+        "weight": 48,
+        "breakingStrength": 23,
+        "stretch": [
+            {
+                "percent": 6,
+                "kn": 8
+            }
+        ],
+        "date_introduced": null,
+        "product_url": "https://spider-slacklines.com/shop/en/longline-webbings/76-tender-line.html"
+    },
+    {
+        "name": "Zao Line",
+        "brand": "Spider slacklines",
+        "materialType": "Polyester",
+        "width": 25,
+        "weight": 65,
+        "breakingStrength": 32,
+        "stretch": [
+            {
+                "percent": 9,
+                "kn": 12
+            }
+        ],
+        "date_introduced": null,
+        "product_url": "http://spider-slacklines.com/shop/en/longline-webbings/69-zao-line.html"
+    },
+    {
+        "name": "Octopussy MKV",
+        "brand": "Slack house",
+        "materialType": "Polyester",
+        "width": 25,
+        "weight": 60,
+        "breakingStrength": 30,
+        "stretch": [
+            {
+                "percent": 7,
+                "kn": 10
+            }
+        ],
+        "date_introduced": null,
+        "product_url": "https://slackhouseshop.pl/en/produkt/octopussy-en"
+    },
+    {
+        "name": "Rubber Band MKIII BLU",
+        "brand": "Slack house",
+        "materialType": "Nylon",
+        "width": 25,
+        "weight": 60,
+        "breakingStrength": 30,
+        "stretch": [
+            {
+                "percent": 14,
+                "kn": 10
+            }
+        ],
+        "date_introduced": null,
+        "product_url": "https://slackhouseshop.pl/produkt/rubber-band-blu"
+    },
+    {
+        "name": "Rubber Band MKIII SOL",
+        "brand": "Slack house",
+        "materialType": "Nylon",
+        "width": 25,
+        "weight": 60,
+        "breakingStrength": 30,
+        "stretch": [
+            {
+                "percent": 14,
+                "kn": 10
+            }
+        ],
+        "date_introduced": null,
+        "product_url": "https://slackhouseshop.pl/en/produkt/slackhouse-rubber-band-25mm-sol/"
+    },
+    {
+        "name": "Blue Mile",
+        "brand": "Slack house",
+        "materialType": "Polyester",
+        "width": 25,
+        "weight": 59.7,
+        "breakingStrength": 32,
+        "stretch": [
+            {
+                "percent": 3.8,
+                "kn": 10
+            }
+        ],
+        "date_introduced": null,
+        "product_url": "http://slackline.pl/bluemile"
+    },
+    {
+        "name": "Sin Más",
+        "brand": "Ambaradam",
+        "materialType": "Polyester",
+        "width": 25,
+        "weight": 52,
+        "breakingStrength": 36,
+        "stretch": [
+            {
+                "percent": 7,
+                "kn": 10
+            }
+        ],
+        "date_introduced": null,
+        "product_url": "http://ambaradam.net/product/sin-mas/"
+    },
+    {
+        "name": "Black-White",
+        "brand": "Slacktivity",
+        "materialType": "Polyester",
+        "width": 25,
+        "weight": 88,
+        "breakingStrength": 43,
+        "stretch": [
+            {
+                "percent": 6,
+                "kn": 10
+            }
+        ],
+        "date_introduced": null,
+        "product_url": null
+    },
+    {
+        "name": "Mantra MKIII",
+        "brand": "Balance Community: Slackline Outfitters",
+        "materialType": "Polyester",
+        "width": 25,
+        "weight": 83,
+        "breakingStrength": 42,
+        "stretch": [
+            {
+                "percent": 8.8,
+                "kn": 10
+            }
+        ],
+        "date_introduced": null,
+        "product_url": null
+    },
+    {
+        "name": "Slack-Spec Tubelar",
+        "brand": "Balance Community: Slackline Outfitters",
+        "materialType": "Nylon",
+        "width": 25,
+        "weight": 40,
+        "breakingStrength": 20,
+        "stretch": null,
+        "date_introduced": null,
+        "product_url": "http://www.balancecommunity.com/1-slack-spec-tubular"
+    },
+    {
+        "name": "Slack-Spec 11/16\"",
+        "brand": "Balance Community: Slackline Outfitters",
+        "materialType": "Nylon",
+        "width": 17.5,
+        "weight": 28,
+        "breakingStrength": 13.3,
+        "stretch": null,
+        "date_introduced": null,
+        "product_url": "http://www.balancecommunity.com/11-16-slack-spec-tubular"
+    },
+    {
+        "name": "Slack-Spec Threaded Tubular",
+        "brand": "Balance Community: Slackline Outfitters",
+        "materialType": "Nylon",
+        "width": 25.4,
+        "weight": 70,
+        "breakingStrength": 33.4,
+        "stretch": [
+            {
+                "percent": 11.1,
+                "kn": 6.7
+            }
+        ],
+        "date_introduced": null,
+        "product_url": null
+    },
+    {
+        "name": "Spider Silk 7/8\"",
+        "brand": "Balance Community: Slackline Outfitters",
+        "materialType": "Vectran",
+        "width": 22.2,
+        "weight": 44,
+        "breakingStrength": 51.2,
+        "stretch": [
+            {
+                "percent": 1.6,
+                "kn": 10
+            }
+        ],
+        "date_introduced": null,
+        "product_url": null
+    },
+    {
+        "name": "Spider Silk MKII",
+        "brand": "Balance Community: Slackline Outfitters",
+        "materialType": "Vectran",
+        "width": 25,
+        "weight": 48,
+        "breakingStrength": 67,
+        "stretch": [
+            {
+                "percent": 1.22,
+                "kn": 10
+            }
+        ],
+        "date_introduced": null,
+        "product_url": "http://www.balancecommunity.com/spider-silk-mkii"
+    },
+    {
+        "name": "Type 18 MKII",
+        "brand": "Balance Community: Slackline Outfitters",
+        "materialType": "Nylon",
+        "width": 25,
+        "weight": 62,
+        "breakingStrength": 35.6,
+        "stretch": [
+            {
+                "percent": 14.8,
+                "kn": 10
+            }
+        ],
+        "date_introduced": null,
+        "product_url": "http://www.balancecommunity.com/type-18-mkii"
+    },
+    {
+        "name": "RAGEline",
+        "brand": "Balance Community: Slackline Outfitters",
+        "materialType": "Hybrid",
+        "width": 31,
+        "weight": 104,
+        "breakingStrength": 42,
+        "stretch": [
+            {
+                "percent": 8.3,
+                "kn": 12
+            }
+        ],
+        "date_introduced": null,
+        "product_url": "http://www.balancecommunity.com/rageline"
+    },
+    {
+        "name": "CoreTek",
+        "brand": "Slackline Industries",
+        "materialType": "Polyester",
+        "width": 25,
+        "weight": 56,
+        "breakingStrength": 27.5,
+        "stretch": [
+            {
+                "percent": 2.5,
+                "kn": 5.34
+            }
+        ],
+        "date_introduced": null,
+        "product_url": "https://slacklineindustries.com/collections/1-inch/products/coretek"
+    },
+    {
+        "name": "Sugoi",
+        "brand": "Slackline Industries",
+        "materialType": "Polyester",
+        "width": 25,
+        "weight": 62,
+        "breakingStrength": 34.32,
+        "stretch": [
+            {
+                "percent": 3,
+                "kn": 6.67
+            }
+        ],
+        "date_introduced": null,
+        "product_url": "https://slacklineindustries.com/collections/all-products/products/sugoi"
+    },
+    {
+        "name": "Great White",
+        "brand": "SlackGear",
+        "materialType": "Polyester",
+        "width": 25,
+        "weight": 62,
+        "breakingStrength": 32,
+        "stretch": [
+            {
+                "percent": 6.5,
+                "kn": 10
+            }
+        ],
+        "date_introduced": null,
+        "product_url": "http://www.slackgear.co.za/product/great-white/"
+    },
+    {
+        "name": "Tantalus",
+        "brand": "Slacklife BC",
+        "materialType": "Polyester",
+        "width": 25.4,
+        "weight": 53,
+        "breakingStrength": 34.7,
+        "stretch": [
+            {
+                "percent": 8,
+                "kn": 10
+            }
+        ],
+        "date_introduced": null,
+        "product_url": null
+    },
+    {
+        "name": "Sky Pilot (Green/Orange)",
+        "brand": "Slacklife BC",
+        "materialType": "Nylon",
+        "width": 25.4,
+        "weight": 65,
+        "breakingStrength": 36.4,
+        "stretch": [
+            {
+                "percent": 9,
+                "kn": 10
+            }
+        ],
+        "date_introduced": null,
+        "product_url": null
+    },
+    {
+        "name": "HighTech",
+        "brand": "Slacklife BC",
+        "materialType": "Dyneema",
+        "width": 25.4,
+        "weight": 48,
+        "breakingStrength": 39.2,
+        "stretch": [
+            {
+                "percent": 4.6,
+                "kn": 10
+            }
+        ],
+        "date_introduced": null,
+        "product_url": null
+    },
+    {
+        "name": "Type 18 CG4",
+        "brand": "Balancing Earth Slacklines",
+        "materialType": "Nylon",
+        "width": 25.4,
+        "weight": 60,
+        "breakingStrength": 31,
+        "stretch": [
+            {
+                "percent": 10,
+                "kn": 6
+            }
+        ],
+        "date_introduced": null,
+        "product_url": "http://www.balancingearthslacklines.com/slackline_webbing_flat_nylon_type_18_cg4_slackline_p/cg4.htm"
+    },
+    {
+        "name": "Rasta Tubelar",
+        "brand": "Balancing Earth Slacklines",
+        "materialType": "Nylon",
+        "width": 25.4,
+        "weight": null,
+        "breakingStrength": 20,
+        "stretch": null,
+        "date_introduced": null,
+        "product_url": "http://www.balancingearthslacklines.com/webbing_tubular_rasta_slackline_balancing_earth_p/rtw.htm"
+    },
+    {
+        "name": "Chi",
+        "brand": "Middle Way Slacklines",
+        "materialType": "Polyester",
+        "width": 25.4,
+        "weight": 60,
+        "breakingStrength": 32,
+        "stretch": [
+            {
+                "percent": 5,
+                "kn": 10
+            }
+        ],
+        "date_introduced": 1454371200000,
+        "product_url": "https://www.middlewayslacklines.com"
+    },
+    {
+        "name": "Zen",
+        "brand": "Middle Way Slacklines",
+        "materialType": "Polyester",
+        "width": 25.4,
+        "weight": 62,
+        "breakingStrength": 37,
+        "stretch": [
+            {
+                "percent": 4,
+                "kn": 10
+            }
+        ],
+        "date_introduced": 1454371200000,
+        "product_url": "http://www.middlewayslacklines.com/?gclid=CNuN-J2FrssCFS8z0wodUssKNQ#!product-page/q2heq/175dcc60-c3b2-604d-301a-41aa51e3fc68"
+    },
+    {
+        "name": "Flat",
+        "brand": "Slackline Shop NZ",
+        "materialType": "Polyester",
+        "width": 25,
+        "weight": 50,
+        "breakingStrength": 21,
+        "stretch": [
+            {
+                "percent": 7,
+                "kn": 10
+            }
+        ],
+        "date_introduced": null,
+        "product_url": "https://www.slacklineshop.co.nz/product/25mm-flat-slackline-webbing/"
+    },
+    {
+        "name": "Sky Pilot (Black/White)",
+        "brand": "Slacklife BC",
+        "materialType": "Nylon",
+        "width": 25.4,
+        "weight": 53,
+        "breakingStrength": 32,
+        "stretch": [
+            {
+                "percent": 12,
+                "kn": 10
+            }
+        ],
+        "date_introduced": null,
+        "product_url": "https://www.slacklifebc.com/product/skypilot-nylon"
+    },
+    {
+        "name": "Lion Line",
+        "brand": "Slacklife BC",
+        "materialType": "Dyneema",
+        "width": 25.4,
+        "weight": 35,
+        "breakingStrength": 35.6,
+        "stretch": null,
+        "date_introduced": null,
+        "product_url": "https://www.slacklifebc.com/product/lions-line-hightech-webbing/"
+    },
+    {
+        "name": "Tube #1",
+        "brand": "Slackline Shop NZ",
+        "materialType": "Nylon",
+        "width": 25,
+        "weight": null,
+        "breakingStrength": 18,
+        "stretch": null,
+        "date_introduced": null,
+        "product_url": "http://www.slacklineshop.co.nz/product/25-mm-tubular-nylon-slackline-webbing-assorted-colors-order-by-the-metre/"
+    },
+    {
+        "name": "Mirage",
+        "brand": "Absolute Slacklines",
+        "materialType": "Polyester",
+        "width": 25,
+        "weight": 65,
+        "breakingStrength": 31,
+        "stretch": [
+            {
+                "percent": 6,
+                "kn": 10
+            }
+        ],
+        "date_introduced": null,
+        "product_url": null
+    },
+    {
+        "name": "Alfa",
+        "brand": "Slacklining Canada",
+        "materialType": "Polyester",
+        "width": 25,
+        "weight": 62,
+        "breakingStrength": 32,
+        "stretch": [
+            {
+                "percent": 10.5,
+                "kn": 10
+            }
+        ],
+        "date_introduced": null,
+        "product_url": "http://www.slacklining.ca/shop/alfa/"
+    },
+    {
+        "name": "Mamba",
+        "brand": "Spider slacklines",
+        "materialType": "Nylon",
+        "width": 25,
+        "weight": 65,
+        "breakingStrength": 22,
+        "stretch": [
+            {
+                "percent": 13.5,
+                "kn": 10
+            }
+        ],
+        "date_introduced": null,
+        "product_url": null
+    },
+    {
+        "name": "Flamme III",
+        "brand": "Slack Inov",
+        "materialType": "Polyester",
+        "width": 25,
+        "weight": 76,
+        "breakingStrength": 40,
+        "stretch": [
+            {
+                "percent": 5.4,
+                "kn": 10
+            }
+        ],
+        "date_introduced": null,
+        "product_url": null
+    },
+    {
+        "name": "Abysses",
+        "brand": "Slack Inov",
+        "materialType": "Nylon",
+        "width": 25,
+        "weight": 63,
+        "breakingStrength": 32,
+        "stretch": [
+            {
+                "percent": 11,
+                "kn": 10
+            }
+        ],
+        "date_introduced": null,
+        "product_url": null
+    },
+    {
+        "name": "Verve 25mm",
+        "brand": "Landcruising",
+        "materialType": "Polyester",
+        "width": 25.4,
+        "weight": 59,
+        "breakingStrength": 32,
+        "stretch": [
+            {
+                "percent": 11,
+                "kn": 10
+            }
+        ],
+        "date_introduced": null,
+        "product_url": "https://aki-slacklines.de/en/webbing/polyester/11/landcruising-verve-25-mm-slackline-30m?c=6"
+    },
+    {
+        "name": "Wave Tube  32",
+        "brand": "Landcruising",
+        "materialType": "Polyester",
+        "width": 25.4,
+        "weight": 58,
+        "breakingStrength": 27,
+        "stretch": [
+            {
+                "percent": 16,
+                "kn": 10
+            }
+        ],
+        "date_introduced": null,
+        "product_url": null
+    },
+    {
+        "name": "#FFF",
+        "brand": "Raed Slacklines",
+        "materialType": "Polyester",
+        "width": 25,
+        "weight": 61,
+        "breakingStrength": 34,
+        "stretch": [
+            {
+                "percent": 6,
+                "kn": 11
+            }
+        ],
+        "date_introduced": null,
+        "product_url": null
+    },
+    {
+        "name": "SlackPro 42kN",
+        "brand": "Slack Pro!",
+        "materialType": "Polyester",
+        "width": 25,
+        "weight": 72,
+        "breakingStrength": 42,
+        "stretch": [
+            {
+                "percent": 3.5,
+                "kn": 10
+            }
+        ],
+        "date_introduced": null,
+        "product_url": "http://www.slackpro.de/en/products/2542slackline.shtml"
+    },
+    {
+        "name": "Neon Light",
+        "brand": "Slack Pro!",
+        "materialType": "Polyester",
+        "width": 25,
+        "weight": 57,
+        "breakingStrength": 33,
+        "stretch": [
+            {
+                "percent": 3.8,
+                "kn": 10
+            }
+        ],
+        "date_introduced": null,
+        "product_url": null
+    },
+    {
+        "name": "Reggae",
+        "brand": "Slack.fr",
+        "materialType": "Polyester",
+        "width": 25,
+        "weight": 54,
+        "breakingStrength": 21,
+        "stretch": [
+            {
+                "percent": 10,
+                "kn": 10
+            }
+        ],
+        "date_introduced": null,
+        "product_url": "https://laboutique.slack.fr/en/tubular-webbing/143-reggae-tubular.html"
+    },
+    {
+        "name": "RVD",
+        "brand": "Slack.fr",
+        "materialType": "Polyester",
+        "width": 25,
+        "weight": 48,
+        "breakingStrength": 21,
+        "stretch": [
+            {
+                "percent": 10,
+                "kn": 10
+            }
+        ],
+        "date_introduced": null,
+        "product_url": "https://laboutique.slack.fr/en/tubular-webbing/146-rvd-tubular.html"
+    },
+    {
+        "name": "Half-Marathon",
+        "brand": "Slacktivity",
+        "materialType": "Polyester",
+        "width": 20,
+        "weight": 48.5,
+        "breakingStrength": 28,
+        "stretch": [
+            {
+                "percent": 4.5,
+                "kn": 10
+            }
+        ],
+        "date_introduced": null,
+        "product_url": "https://www.slacktivity.com/halfmarathon-50m-500m"
+    },
+    {
+        "name": "Low stretch Webbing",
+        "brand": "Slacktivity",
+        "materialType": "Polyester",
+        "width": 37,
+        "weight": 64,
+        "breakingStrength": null,
+        "stretch": [
+            {
+                "percent": 3,
+                "kn": 10
+            }
+        ],
+        "date_introduced": null,
+        "product_url": null
+    },
+    {
+        "name": "SuperMOTM",
+        "brand": "Raed Slacklines",
+        "materialType": "Nylon",
+        "width": 25,
+        "weight": 77,
+        "breakingStrength": 36,
+        "stretch": [
+            {
+                "percent": 14,
+                "kn": 12
+            }
+        ],
+        "date_introduced": null,
+        "product_url": null
+    },
+    {
+        "name": "Plasma",
+        "brand": "Slack Inov",
+        "materialType": "Polyester",
+        "width": 25,
+        "weight": 73,
+        "breakingStrength": 40,
+        "stretch": [
+            {
+                "percent": 6.2,
+                "kn": 10
+            }
+        ],
+        "date_introduced": null,
+        "product_url": "http://slack-inov.com/gb/webbing/92-flamme3-webbing"
+    },
+    {
+        "name": "Mammut",
+        "brand": "Mammut",
+        "materialType": "Polyester",
+        "width": 25.8,
+        "weight": 76.8,
+        "breakingStrength": 25,
+        "stretch": [
+            {
+                "percent": 9.5,
+                "kn": 10
+            }
+        ],
+        "date_introduced": null,
+        "product_url": null
+    },
+    {
+        "name": "Firefly (phosphorescent)",
+        "brand": "Slack Mountain",
+        "materialType": "Hybrid",
+        "width": 25,
+        "weight": 60,
+        "breakingStrength": 30,
+        "stretch": [
+            {
+                "percent": 7.8,
+                "kn": 10
+            }
+        ],
+        "date_introduced": 1510700400000,
+        "product_url": "https://slack-mountain.com/fr/sangle-hybride/185-firefly.html"
+    },
+    {
+        "name": "French Line",
+        "brand": "Slack Mountain",
+        "materialType": "Polyester",
+        "width": 25,
+        "weight": 52,
+        "breakingStrength": 30,
+        "stretch": [
+            {
+                "percent": 8,
+                "kn": 10
+            }
+        ],
+        "date_introduced": 1512946800000,
+        "product_url": "https://slack-mountain.com/fr/sangles-slackline/189-french-line.html"
+    },
+    {
+        "name": "Pop-Art",
+        "brand": "Slack Mountain",
+        "materialType": "Polyester",
+        "width": 50,
+        "weight": 71,
+        "breakingStrength": 30,
+        "stretch": null,
+        "date_introduced": 1513465200000,
+        "product_url": "https://slack-mountain.com/fr/jumplines/191-pop-art.html"
+    },
+    {
+        "name": "Project 44",
+        "brand": "Slack Mountain",
+        "materialType": "Polyester",
+        "width": 25,
+        "weight": 54,
+        "breakingStrength": 25,
+        "stretch": [
+            {
+                "percent": 9.2,
+                "kn": 10
+            }
+        ],
+        "date_introduced": 1519340400000,
+        "product_url": "https://slack-mountain.com/fr/sangles-slackline/194-project-44.html"
+    },
+    {
+        "name": "Aloha (Aka Aki Tidal)",
+        "brand": "Landcruising",
+        "materialType": "Polyester",
+        "width": 25,
+        "weight": 48,
+        "breakingStrength": 20,
+        "stretch": [
+            {
+                "percent": 9,
+                "kn": 10
+            }
+        ],
+        "date_introduced": 1511128800000,
+        "product_url": "https://aki-slacklines.de/en/webbing/polyester/99/aki-tidal-webbing?c=6"
+    },
+    {
+        "name": "Panda",
+        "brand": "Slackline Industries",
+        "materialType": "Hybrid",
+        "width": 25,
+        "weight": 34.3,
+        "breakingStrength": 32,
+        "stretch": [
+            {
+                "percent": 3,
+                "kn": 6.4
+            }
+        ],
+        "date_introduced": 1493758800000,
+        "product_url": "https://slacklineindustries.com/collections/1-inch/products/panda"
+    },
+    {
+        "name": "Joker",
+        "brand": "Slack Inov",
+        "materialType": "Hybrid",
+        "width": 25.4,
+        "weight": 54,
+        "breakingStrength": 27,
+        "stretch": [
+            {
+                "percent": 9,
+                "kn": 10
+            }
+        ],
+        "date_introduced": 1533934800000,
+        "product_url": "http://slack-inov.com/gb/webbing/110-joker-sold-by-meter"
+    },
+    {
+        "name": "Y.a.w",
+        "brand": "Slackliner.de",
+        "materialType": "Polyester",
+        "width": 25,
+        "weight": 38,
+        "breakingStrength": 24,
+        "stretch": [
+            {
+                "percent": 3,
+                "kn": 8
+            }
+        ],
+        "date_introduced": 1541368800000,
+        "product_url": "https://www.slackliner.de/Webbing/Flat-Webbing/yaw.html?language=en"
+    },
+    {
+        "name": "Coelum",
+        "brand": "Petram Slacklines",
+        "materialType": "Polyester",
+        "width": 25,
+        "weight": 61.5,
+        "breakingStrength": 31,
+        "stretch": [
+            {
+                "percent": 10,
+                "kn": 10
+            }
+        ],
+        "date_introduced": 1539118800000,
+        "product_url": "https://petramslacklines.site123.me/shop-1/coelum-webbing-1"
+    },
+    {
+        "name": "Skyway",
+        "brand": "Slack Mountain",
+        "materialType": "Polyester",
+        "width": 25,
+        "weight": 56.2,
+        "breakingStrength": 27,
+        "stretch": [
+            {
+                "percent": 11,
+                "kn": 10
+            }
+        ],
+        "date_introduced": 1542232800000,
+        "product_url": "https://slack-mountain.com/en/webbing-slackline/213-skyway.html"
+    },
+    {
+        "name": "Totally Tubular",
+        "brand": "Slacklife BC",
+        "materialType": "Nylon",
+        "width": 25,
+        "weight": 40,
+        "breakingStrength": 17.7,
+        "stretch": null,
+        "date_introduced": null,
+        "product_url": "https://www.slacklifebc.com/product/totally-tubular/"
+    },
+    {
+        "name": "FIREFOX",
+        "brand": "Slack Mountain",
+        "materialType": "Nylon",
+        "width": 25,
+        "weight": 52,
+        "breakingStrength": 26,
+        "stretch": [
+            {
+                "percent": 17,
+                "kn": 10
+            }
+        ],
+        "date_introduced": 1543618800000,
+        "product_url": "https://slack-mountain.com/fr/sangles-slackline/214-firefox.html"
+    },
+    {
+        "name": "Spice",
+        "brand": "Slack Mountain",
+        "materialType": "Polyester",
+        "width": 25,
+        "weight": 62,
+        "breakingStrength": 30,
+        "stretch": [
+            {
+                "percent": 3.9,
+                "kn": 10
+            }
+        ],
+        "date_introduced": 1541026800000,
+        "product_url": null
+    },
+    {
+        "name": "Orange",
+        "brand": "Souz Slackline",
+        "materialType": "Polyester",
+        "width": 25.4,
+        "weight": 62,
+        "breakingStrength": 32,
+        "stretch": [
+            {
+                "percent": 4,
+                "kn": 10
+            }
+        ],
+        "date_introduced": null,
+        "product_url": "https://souzslackline.com/product/violet"
+    },
+    {
+        "name": "S.O.S - Sunset Over Seas",
+        "brand": "Slack Mountain",
+        "materialType": "Hybrid",
+        "width": 22,
+        "weight": 33.6,
+        "breakingStrength": 32,
+        "stretch": [
+            {
+                "percent": 3.4,
+                "kn": 10
+            }
+        ],
+        "date_introduced": 1554152400000,
+        "product_url": "https://slack-mountain.com/en/hybrid-webbing/221-cloud.html#/242-swen_loop-with/65-longueur-55_m"
+    },
+    {
+        "name": "Blue",
+        "brand": "Balance Community: Slackline Outfitters",
+        "materialType": "Polyester",
+        "width": 25.4,
+        "weight": 55,
+        "breakingStrength": 28,
+        "stretch": [
+            {
+                "percent": 3,
+                "kn": 10
+            }
+        ],
+        "date_introduced": 1567976400000,
+        "product_url": "https://www.balancecommunity.com/products/blue"
+    },
+    {
+        "name": "Green",
+        "brand": "Balance Community: Slackline Outfitters",
+        "materialType": "Nylon",
+        "width": 25.4,
+        "weight": 53,
+        "breakingStrength": 27,
+        "stretch": [
+            {
+                "percent": 11.72,
+                "kn": 10
+            }
+        ],
+        "date_introduced": 1567976400000,
+        "product_url": "https://www.balancecommunity.com/products/green"
+    },
+    {
+        "name": "Polar",
+        "brand": "Aki Slacklines",
+        "materialType": "Polyester",
+        "width": 25.4,
+        "weight": 56,
+        "breakingStrength": 28,
+        "stretch": [
+            {
+                "percent": 8.5,
+                "kn": 10
+            }
+        ],
+        "date_introduced": 1582668000000,
+        "product_url": "https://aki-slacklines.de/en/detail/index/sArticle/162"
+    },
+    {
+        "name": "Jybn",
+        "brand": "Balance Community: Slackline Outfitters",
+        "materialType": "Nylon",
+        "width": 25.4,
+        "weight": 51,
+        "breakingStrength": 26,
+        "stretch": [
+            {
+                "percent": 19.6,
+                "kn": 10
+            }
+        ],
+        "date_introduced": 1583272800000,
+        "product_url": "https://www.balancecommunity.com/products/jybn"
+    },
+    {
+        "name": "SuperTape 19mm",
+        "brand": "Edelrid",
+        "materialType": "Nylon",
+        "width": 18,
+        "weight": 35,
+        "breakingStrength": 15,
+        "stretch": null,
+        "date_introduced": null,
+        "product_url": "https://www.edelrid.de/en/sports/flat-webbings1/flachband-supertape-19mm.html"
+    },
+    {
+        "name": "X-Tuble 16mm",
+        "brand": "Edelrid",
+        "materialType": "Nylon",
+        "width": 16,
+        "weight": 34,
+        "breakingStrength": 15,
+        "stretch": null,
+        "date_introduced": null,
+        "product_url": "https://www.edelrid.de/en/sports/tubular-webbings/x-tube-16mm.html"
+    },
+    {
+        "name": "X-Tube 25mm",
+        "brand": "Edelrid",
+        "materialType": "Nylon",
+        "width": 25,
+        "weight": 43,
+        "breakingStrength": 20,
+        "stretch": [
+            {
+                "percent": 15.5,
+                "kn": 8
+            }
+        ],
+        "date_introduced": null,
+        "product_url": "https://www.edelrid.de/en/sports/tubular-webbings/x-tube-25mm.html"
+    },
+    {
+        "name": "Abysses Bounce",
+        "brand": "Slack Inov",
+        "materialType": "Nylon",
+        "width": 25,
+        "weight": 63,
+        "breakingStrength": 32,
+        "stretch": [
+            {
+                "percent": 15.2,
+                "kn": 10
+            }
+        ],
+        "date_introduced": null,
+        "product_url": "https://slack-inov.com/gb/longline/106-abysses-bounce-sold-by-meter"
+    },
+    {
+        "name": "Photon",
+        "brand": "Slack Mountain",
+        "materialType": "Polyester",
+        "width": 25,
+        "weight": 50,
+        "breakingStrength": 29,
+        "stretch": [
+            {
+                "percent": 4.1,
+                "kn": 10
+            }
+        ],
+        "date_introduced": null,
+        "product_url": "https://slack-mountain.com/en/webbing-slackline/233-photon.html"
+    },
+    {
+        "name": "Rubber Band PUR",
+        "brand": "Slack house",
+        "materialType": "Nylon",
+        "width": 25,
+        "weight": 60,
+        "breakingStrength": 30,
+        "stretch": [
+            {
+                "percent": 14,
+                "kn": 10
+            }
+        ],
+        "date_introduced": null,
+        "product_url": "https://slackhouseshop.pl/produkt/rubber-band-pur/"
+    },
+    {
+        "name": "Levitation",
+        "brand": "Slack house",
+        "materialType": "Polyester",
+        "width": 25,
+        "weight": 48,
+        "breakingStrength": 22,
+        "stretch": [
+            {
+                "percent": 7,
+                "kn": 10
+            }
+        ],
+        "date_introduced": null,
+        "product_url": "https://slackhouseshop.pl/en/produkt/levitation/"
+    },
+    {
+        "name": "MOTM light",
+        "brand": "Raed Slacklines",
+        "materialType": "Nylon",
+        "width": 19,
+        "weight": 33,
+        "breakingStrength": null,
+        "stretch": null,
+        "date_introduced": null,
+        "product_url": "https://raed-slacklines.com/motm-light"
+    },
+    {
+        "name": "Ocean",
+        "brand": "Equilibrium Slacklines (EQB)",
+        "materialType": "Nylon",
+        "width": 25,
+        "weight": 53,
+        "breakingStrength": 27,
+        "stretch": [
+            {
+                "percent": 12,
+                "kn": 10
+            }
+        ],
+        "date_introduced": 1590008400000,
+        "product_url": "https://www.slackshop.cz/en/webbing/176-eqb-ocean.html"
+    },
+    {
+        "name": "Skye2",
+        "brand": "Equilibrium Slacklines (EQB)",
+        "materialType": "Polyester",
+        "width": 25,
+        "weight": 59,
+        "breakingStrength": 31,
+        "stretch": [
+            {
+                "percent": 4,
+                "kn": 10
+            }
+        ],
+        "date_introduced": 1590008400000,
+        "product_url": "https://www.slackshop.cz/en/webbing/175-eqb-skye2.html"
+    },
+    {
+        "name": "LSDTube",
+        "brand": "Slacktivity",
+        "materialType": "Nylon",
+        "width": 25.5,
+        "weight": 49.5,
+        "breakingStrength": 25,
+        "stretch": [
+            {
+                "percent": 18,
+                "kn": 10
+            }
+        ],
+        "date_introduced": 1597006800000,
+        "product_url": "https://www.slacktivity.com/lsdtube"
+    },
+    {
+        "name": "Spider Silk MK3",
+        "brand": "Balance Community: Slackline Outfitters",
+        "materialType": "Dyneema",
+        "width": 20,
+        "weight": 31,
+        "breakingStrength": 38,
+        "stretch": [
+            {
+                "percent": 1.8,
+                "kn": 6
+            }
+        ],
+        "date_introduced": 1592341200000,
+        "product_url": "https://www.balancecommunity.com/products/spider-silk-mk3"
+    },
+    {
+        "name": "Dyneemite",
+        "brand": "Raed Slacklines",
+        "materialType": "Hybrid",
+        "width": 25,
+        "weight": 22,
+        "breakingStrength": 30,
+        "stretch": [
+            {
+                "percent": 1,
+                "kn": 5
+            }
+        ],
+        "date_introduced": 1598734800000,
+        "product_url": "https://raed-slacklines.com/dyneemite-ultralight-highline-project-webbing"
+    },
+    {
+        "name": "Aurora",
+        "brand": "Raed Slacklines",
+        "materialType": "Polyester",
+        "width": 25.4,
+        "weight": 61,
+        "breakingStrength": 31,
+        "stretch": [
+            {
+                "percent": 4,
+                "kn": 5
+            }
+        ],
+        "date_introduced": 1602190800000,
+        "product_url": "https://raed-slacklines.com/aurora-polyester-highline-webbing"
+    },
+    {
+        "name": "ReBL",
+        "brand": "Slackliner.de",
+        "materialType": "Polyester",
+        "width": 25,
+        "weight": 56,
+        "breakingStrength": 36,
+        "stretch": null,
+        "date_introduced": 1603490400000,
+        "product_url": "https://www.slackliner.de/en/Sigma-ReBL.html"
+    },
+    {
+        "name": "Zen 2",
+        "brand": "Middle Way Slacklines",
+        "materialType": "Polyester",
+        "width": 25.4,
+        "weight": 64,
+        "breakingStrength": 32,
+        "stretch": [
+            {
+                "percent": 9,
+                "kn": 10
+            }
+        ],
+        "date_introduced": 1604181600000,
+        "product_url": "https://middlewayslacklines.com/product/zen25mm/"
+    },
+    {
+        "name": "Lift 2be",
+        "brand": "Balance Community: Slackline Outfitters",
+        "materialType": "Nylon",
+        "width": 25.4,
+        "weight": 48,
+        "breakingStrength": 21.5,
+        "stretch": [
+            {
+                "percent": 16.9,
+                "kn": 10
+            }
+        ],
+        "date_introduced": 1596834000000,
+        "product_url": "https://www.balancecommunity.com/products/lift-2be"
+    },
+    {
+        "name": "Candy",
+        "brand": "Equilibrium Slacklines (EQB)",
+        "materialType": "Polyester",
+        "width": 25,
+        "weight": 61,
+        "breakingStrength": 36,
+        "stretch": [
+            {
+                "percent": 3,
+                "kn": 10
+            }
+        ],
+        "date_introduced": 1604354400000,
+        "product_url": "https://www.slackshop.cz/en/polyester/195-eqb-candy.html"
+    },
+    {
+        "name": "Eclipse",
+        "brand": "Raed Slacklines",
+        "materialType": "Polyester",
+        "width": 25,
+        "weight": 30,
+        "breakingStrength": 16,
+        "stretch": [
+            {
+                "percent": 5,
+                "kn": 5
+            }
+        ],
+        "date_introduced": 1617051600000,
+        "product_url": "https://raed-slacklines.com/eclipse-lightweight-polyester-webbing"
+    },
+    {
+        "name": "Jelly",
+        "brand": "Balance Community: Slackline Outfitters",
+        "materialType": "Polyester",
+        "width": 25.4,
+        "weight": 45,
+        "breakingStrength": 20,
+        "stretch": [
+            {
+                "percent": 7.01,
+                "kn": 10
+            }
+        ],
+        "date_introduced": 1616450400000,
+        "product_url": "https://www.balancecommunity.com/products/jelly-webbing"
+    },
+    {
+        "name": "Blue 20",
+        "brand": "Balance Community: Slackline Outfitters",
+        "materialType": "Polyester",
+        "width": 20,
+        "weight": 53,
+        "breakingStrength": 25,
+        "stretch": [
+            {
+                "percent": 7.51,
+                "kn": 10
+            }
+        ],
+        "date_introduced": 1614290400000,
+        "product_url": "https://www.balancecommunity.com/collections/20mm-webbing/products/blue-20"
+    },
+    {
+        "name": "Green 20",
+        "brand": "Balance Community: Slackline Outfitters",
+        "materialType": "Nylon",
+        "width": 20,
+        "weight": 53,
+        "breakingStrength": 25,
+        "stretch": [
+            {
+                "percent": 11.72,
+                "kn": 10
+            }
+        ],
+        "date_introduced": 1614290400000,
+        "product_url": "https://www.balancecommunity.com/collections/20mm-webbing/products/green-20?variant"
+    },
+    {
+        "name": "Green Magic",
+        "brand": "Acrobat Slackline",
+        "materialType": "Polyester",
+        "width": 25,
+        "weight": 60,
+        "breakingStrength": 30,
+        "stretch": [
+            {
+                "percent": 6,
+                "kn": 10
+            }
+        ],
+        "date_introduced": null,
+        "product_url": "https://www.acrobatslackline.com/slackline1inch-1"
+    },
+    {
+        "name": "Purple Gold",
+        "brand": "Aki Slacklines",
+        "materialType": "Nylon",
+        "width": 25,
+        "weight": 65.5,
+        "breakingStrength": 30.5,
+        "stretch": [
+            {
+                "percent": 17,
+                "kn": 10
+            }
+        ],
+        "date_introduced": 1605132000000,
+        "product_url": "https://aki-slacklines.de/en/detail/index/sArticle/188/sCategory/6"
+    },
+    {
+        "name": "Nomad",
+        "brand": "Aki Slacklines",
+        "materialType": "Polyester",
+        "width": 25,
+        "weight": 38,
+        "breakingStrength": 23.5,
+        "stretch": [
+            {
+                "percent": 4,
+                "kn": 10
+            }
+        ],
+        "date_introduced": 1605391200000,
+        "product_url": "https://aki-slacklines.de/en/webbing/polyester/187/aki-nomad-webbing"
+    },
+    {
+        "name": "Sonic Light",
+        "brand": "Aki Slacklines",
+        "materialType": "Nylon",
+        "width": 25,
+        "weight": 53,
+        "breakingStrength": 27,
+        "stretch": [
+            {
+                "percent": 13,
+                "kn": 10
+            }
+        ],
+        "date_introduced": 1600030800000,
+        "product_url": "https://aki-slacklines.de/en/webbing/polyamide/176/aki-sonic-light-webbing"
+    },
+    {
+        "name": "Sky Diamond",
+        "brand": "Spider slacklines",
+        "materialType": "Dyneema",
+        "width": 17,
+        "weight": 33,
+        "breakingStrength": 35,
+        "stretch": [
+            {
+                "percent": 3,
+                "kn": 10
+            }
+        ],
+        "date_introduced": null,
+        "product_url": "https://spider-slacklines.com/shop/en/highline-webbing/426-2764-sky-diamond-longline-presale.html#/306-select_model-price_by_meter"
+    },
+    {
+        "name": "Rodeo",
+        "brand": "Spider slacklines",
+        "materialType": "Nylon",
+        "width": 25,
+        "weight": null,
+        "breakingStrength": 27,
+        "stretch": [
+            {
+                "percent": 23.1,
+                "kn": 10
+            }
+        ],
+        "date_introduced": null,
+        "product_url": "https://spider-slacklines.com/shop/en/products/344-3723-rodeo-line.html"
+    },
+    {
+        "name": "Heavy",
+        "brand": "Balance Community: Slackline Outfitters",
+        "materialType": "Nylon",
+        "width": 25,
+        "weight": 100,
+        "breakingStrength": 45,
+        "stretch": [
+            {
+                "percent": 13.12,
+                "kn": 10
+            }
+        ],
+        "date_introduced": 1623358800000,
+        "product_url": "https://www.balancecommunity.com/products/heavy"
     }
 ]
