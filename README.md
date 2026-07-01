@@ -4,26 +4,68 @@ SlackData is a database of slackline gear, inspired by [SlackDB](https://slackdb
 
 SlackData is open source, with an open API to allow other tools to use the database.
 
-The project is still in it's early stages, so currently the only option is to run the backend locally.
+**Stack:** Python / FastAPI / SQLModel / SQLite backend + React / TypeScript / Vite frontend.
+
+---
+
+## Frontend
+
+The frontend is scaffolded (React, TypeScript, Vite) with a full Cypress E2E test suite written red-first against the real backend. UI implementation has not started yet.
+
+### Setup
+
+```bash
+cd frontend
+npm install
+```
+
+### Run
+
+```bash
+npm run dev
+```
+
+Opens at [http://localhost:5173](http://localhost:5173).
+
+### Tests (Cypress E2E)
+
+Tests run against the real backend, so the backend must be running on port 8000 before launching Cypress.
+
+```bash
+# Open Cypress interactively
+npm run cypress:open
+
+# Run headlessly
+npm run cypress:run
+```
+
+---
 
 ## Backend
 
-### Installation
+### Setup
 
-1. Create and activate a new python environment:
-- with uv: 
-    1. `uv venv`
-    2. `source venv/bin/activate`
+**with uv:**
+```bash
+uv sync
+source .venv/bin/activate
+```
 
-- with standard python
-    1. `python3 -m venv venv`
-    2. `source venv/bin/activate`
+**with pip:**
+```bash
+python3 -m venv venv
+source venv/bin/activate
+pip install '-e.[dev]'
+```
 
-2. Install dependencies
-- for uv: `uv sync`
-- for python: `pip install '-e.[dev]'`
+### Run
 
-### Running
+```bash
+cd slack_data
+fastapi dev main.py
+```
+
+API runs at [http://127.0.0.1:8000](http://127.0.0.1:8000). Append `/docs` for the interactive OpenAPI explorer.
 
 1. Activate environment (if not already activated)
     - `source venv/bin/activate`
