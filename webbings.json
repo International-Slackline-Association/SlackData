@@ -1,386 +1,6 @@
 [
     {
-        "name": "9mm static",
-        "brand": "Edelrid",
-        "stretch": [
-            {
-                "kn": 0,
-                "percent": 0
-            },
-            {
-                "kn": 0.5,
-                "percent": 2
-            },
-            {
-                "kn": 1,
-                "percent": 3.5
-            },
-            {
-                "kn": 5,
-                "percent": 12
-            },
-            {
-                "kn": 10,
-                "percent": 16.1
-            },
-            {
-                "kn": 15,
-                "percent": 20.3
-            },
-            {
-                "kn": 20,
-                "percent": 27.6
-            }
-        ],
-        "materialType": "static rope",
-        "weight": "",
-        "breakingStrength": "",
-        "date_introduced": null,
-        "product_url": null
-    },
-    {
-        "name": "10mm static",
-        "brand": "Edelrid",
-        "stretch": [
-            {
-                "kn": 0,
-                "percent": 0
-            },
-            {
-                "kn": 0.5,
-                "percent": 2.6
-            },
-            {
-                "kn": 1.5,
-                "percent": 4.7
-            },
-            {
-                "kn": 5,
-                "percent": 12.4
-            },
-            {
-                "kn": 10,
-                "percent": 17.1
-            },
-            {
-                "kn": 15,
-                "percent": 20.1
-            },
-            {
-                "kn": 20,
-                "percent": 22.5
-            },
-            {
-                "kn": 25,
-                "percent": 25.6
-            }
-        ],
-        "materialType": "static rope",
-        "weight": "",
-        "breakingStrength": "",
-        "date_introduced": null,
-        "product_url": null
-    },
-    {
-        "name": "11mm static",
-        "brand": "Edelrid",
-        "stretch": [
-            {
-                "kn": 0,
-                "percent": 0
-            },
-            {
-                "kn": 0.8,
-                "percent": 3.9
-            },
-            {
-                "kn": 5,
-                "percent": 12.4
-            },
-            {
-                "kn": 10,
-                "percent": 16.7
-            },
-            {
-                "kn": 15,
-                "percent": 19.1
-            }
-        ],
-        "materialType": "static rope",
-        "weight": "",
-        "breakingStrength": "",
-        "date_introduced": null,
-        "product_url": null
-    },
-    {
-        "name": "12mm static",
-        "brand": "Edelrid",
-        "stretch": [
-            {
-                "kn": 0,
-                "percent": 0
-            },
-            {
-                "kn": 0.8,
-                "percent": 5.5
-            },
-            {
-                "kn": 5,
-                "percent": 15.3
-            },
-            {
-                "kn": 10,
-                "percent": 20.7
-            },
-            {
-                "kn": 15,
-                "percent": 23.7
-            }
-        ],
-        "materialType": "static rope",
-        "weight": "",
-        "breakingStrength": "",
-        "date_introduced": null,
-        "product_url": null
-    },
-    {
-        "name": "8.2",
-        "brand": "Edelrid",
-        "stretch": [
-            {
-                "kn": 0,
-                "percent": 0
-            },
-            {
-                "kn": 0.15,
-                "percent": 2.1
-            },
-            {
-                "kn": 0.2,
-                "percent": 2.8
-            },
-            {
-                "kn": 0.25,
-                "percent": 3.3
-            },
-            {
-                "kn": 0.5,
-                "percent": 5.2
-            },
-            {
-                "kn": 0.75,
-                "percent": 7
-            },
-            {
-                "kn": 1,
-                "percent": 9
-            },
-            {
-                "kn": 2.5,
-                "percent": 19.6
-            },
-            {
-                "kn": 5,
-                "percent": 29.8
-            },
-            {
-                "kn": 7.5,
-                "percent": 37.4
-            },
-            {
-                "kn": 10,
-                "percent": 43.44
-            },
-            {
-                "kn": 12.5,
-                "percent": 47.93
-            }
-        ],
-        "materialType": "climbing rope",
-        "weight": "",
-        "breakingStrength": "",
-        "date_introduced": null,
-        "product_url": null
-    },
-    {
-        "name": "8.9",
-        "brand": "Edelrid",
-        "stretch": [
-            {
-                "kn": 0,
-                "percent": 0
-            },
-            {
-                "kn": 0.15,
-                "percent": 1.5
-            },
-            {
-                "kn": 0.2,
-                "percent": 2
-            },
-            {
-                "kn": 0.25,
-                "percent": 2.3
-            },
-            {
-                "kn": 0.5,
-                "percent": 3.8
-            },
-            {
-                "kn": 0.75,
-                "percent": 5
-            },
-            {
-                "kn": 1,
-                "percent": 6.2
-            },
-            {
-                "kn": 2.5,
-                "percent": 16.3
-            },
-            {
-                "kn": 5,
-                "percent": 25.9
-            },
-            {
-                "kn": 7.5,
-                "percent": 32.9
-            },
-            {
-                "kn": 10,
-                "percent": 38.85
-            },
-            {
-                "kn": 12.5,
-                "percent": 44.06
-            }
-        ],
-        "materialType": "climbing rope",
-        "weight": "",
-        "breakingStrength": "",
-        "date_introduced": null,
-        "product_url": null
-    },
-    {
-        "name": "10",
-        "brand": "Edelrid",
-        "stretch": [
-            {
-                "kn": 0,
-                "percent": 0
-            },
-            {
-                "kn": 0.15,
-                "percent": 1.2
-            },
-            {
-                "kn": 0.2,
-                "percent": 1.7
-            },
-            {
-                "kn": 0.25,
-                "percent": 2.1
-            },
-            {
-                "kn": 0.5,
-                "percent": 3.8
-            },
-            {
-                "kn": 0.75,
-                "percent": 5.5
-            },
-            {
-                "kn": 1,
-                "percent": 7.2
-            },
-            {
-                "kn": 2.5,
-                "percent": 15.7
-            },
-            {
-                "kn": 5,
-                "percent": 24.2
-            },
-            {
-                "kn": 7.5,
-                "percent": 29.8
-            },
-            {
-                "kn": 10,
-                "percent": 34.55
-            },
-            {
-                "kn": 12.5,
-                "percent": 38.28
-            }
-        ],
-        "materialType": "climbing rope",
-        "weight": "",
-        "breakingStrength": "",
-        "date_introduced": null,
-        "product_url": null
-    },
-    {
-        "name": "12",
-        "brand": "Edelrid",
-        "stretch": [
-            {
-                "kn": 0,
-                "percent": 0
-            },
-            {
-                "kn": 0.15,
-                "percent": 1.3
-            },
-            {
-                "kn": 0.2,
-                "percent": 1.8
-            },
-            {
-                "kn": 0.25,
-                "percent": 2.1
-            },
-            {
-                "kn": 0.5,
-                "percent": 3.6
-            },
-            {
-                "kn": 0.75,
-                "percent": 4.7
-            },
-            {
-                "kn": 1,
-                "percent": 5.8
-            },
-            {
-                "kn": 2.5,
-                "percent": 13.2
-            },
-            {
-                "kn": 5,
-                "percent": 21
-            },
-            {
-                "kn": 7.5,
-                "percent": 26.4
-            },
-            {
-                "kn": 10,
-                "percent": 30.75
-            },
-            {
-                "kn": 12.5,
-                "percent": 34.78
-            }
-        ],
-        "materialType": "climbing rope",
-        "weight": "",
-        "breakingStrength": "",
-        "date_introduced": null,
-        "product_url": null
-    },
-    {
-        "name": "Core2 HS",
+        "name": "Core 2 HS",
         "brand": "Landcruising",
         "stretch": [
             {
@@ -436,14 +56,16 @@
                 "percent": 8.1
             }
         ],
-        "materialType": "pes",
+        "materialType": "Polyester",
         "weight": 71.5,
         "breakingStrength": 44,
-        "date_introduced": null,
-        "product_url": null
+        "width": 25,
+        "thickness": 3.5,
+        "webbing_construction": "Core/Sheath",
+        "isa_certified": false
     },
     {
-        "name": "Core2 LS",
+        "name": "Core 2 LS",
         "brand": "Landcruising",
         "stretch": [
             {
@@ -499,14 +121,16 @@
                 "percent": 3.7
             }
         ],
-        "materialType": "pes",
+        "materialType": "Polyester",
         "weight": 69.9,
         "breakingStrength": 44,
-        "date_introduced": null,
-        "product_url": null
+        "width": 25,
+        "thickness": 3.2,
+        "webbing_construction": "Core/Sheath",
+        "isa_certified": false
     },
     {
-        "name": "Core1",
+        "name": "Core 1",
         "brand": "Landcruising",
         "stretch": [
             {
@@ -562,11 +186,13 @@
                 "percent": 7
             }
         ],
-        "materialType": "pes",
+        "materialType": "Polyester",
         "weight": 76,
-        "breakingStrength": 43,
-        "date_introduced": null,
-        "product_url": null
+        "breakingStrength": 40,
+        "width": 25,
+        "thickness": 3.9,
+        "webbing_construction": "Core/Sheath",
+        "isa_certified": false
     },
     {
         "name": "T-Wave",
@@ -629,16 +255,25 @@
                 "percent": 18.4
             }
         ],
-        "materialType": "polyamid/nylon",
+        "materialType": "Nylon",
         "weight": 80,
         "breakingStrength": 38,
         "date_introduced": null,
         "product_url": null,
-        "width": 25
+        "width": 25,
+        "thickness": 4.5,
+        "webbing_construction": "Tubular",
+        "isa_certified": false,
+        "priceMeter": 3.33,
+        "currency": "EUR"
     },
     {
         "name": "Sonic 2",
-        "brand": "Landcruising",
+        "brand": "Aki Slacklines",
+        "materialType": "Nylon",
+        "width": 25,
+        "weight": 68,
+        "breakingStrength": 34,
         "stretch": [
             {
                 "kn": 0,
@@ -789,11 +424,12 @@
                 "percent": 33.78
             }
         ],
-        "materialType": "polyamid/nylon",
-        "weight": 68,
-        "breakingStrength": 35,
         "date_introduced": null,
-        "product_url": null
+        "product_url": "https://aki-slacklines.de/en/webbing/polyamide/137/aki-sonic-2-slackline-webbing?c=12&fbclid=IwAR1eTq7La_8P4pp3HW0hq4rE2LNuzA2ZAbm-Vyx4gXORVdZU1EmhrtBbLAo",
+        "webbing_construction": "Core/Sheath",
+        "isa_certified": false,
+        "priceMeter": 1.99,
+        "currency": "EUR"
     },
     {
         "name": "White Magic",
@@ -856,71 +492,16 @@
                 "percent": 15
             }
         ],
-        "materialType": "pes",
+        "materialType": "Polyester",
         "weight": 58,
         "breakingStrength": 32.5,
         "date_introduced": null,
         "product_url": "https://aki-slacklines.de/en/webbing/polyester/4/aki-white-magic-webbing?c=6",
-        "width": 25
-    },
-    {
-        "name": "Verve red",
-        "brand": "Landcruising",
-        "stretch": [
-            {
-                "kn": 0,
-                "percent": 0
-            },
-            {
-                "kn": 1,
-                "percent": 0.5
-            },
-            {
-                "kn": 2,
-                "percent": 0.9
-            },
-            {
-                "kn": 4,
-                "percent": 1.8
-            },
-            {
-                "kn": 6,
-                "percent": 3.1
-            },
-            {
-                "kn": 8,
-                "percent": 5
-            },
-            {
-                "kn": 10,
-                "percent": 7
-            },
-            {
-                "kn": 12,
-                "percent": 8.9
-            },
-            {
-                "kn": 14,
-                "percent": 10.25
-            },
-            {
-                "kn": 16,
-                "percent": 11.5
-            },
-            {
-                "kn": 18,
-                "percent": 12.4
-            },
-            {
-                "kn": 20,
-                "percent": 13.2
-            }
-        ],
-        "materialType": "pes",
-        "weight": "58",
-        "breakingStrength": "33",
-        "date_introduced": null,
-        "product_url": null
+        "width": 25,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 1.3,
+        "currency": "EUR"
     },
     {
         "name": "Unicorn",
@@ -979,12 +560,17 @@
                 "percent": 13
             }
         ],
-        "materialType": "pes",
+        "materialType": "Polyester",
         "weight": 61.5,
         "breakingStrength": 32,
         "date_introduced": 1489363200000,
         "product_url": null,
-        "width": 25
+        "width": 25,
+        "thickness": 2.7,
+        "webbing_construction": "Core/Sheath",
+        "isa_certified": false,
+        "priceMeter": 1.79,
+        "currency": "EUR"
     },
     {
         "name": "Wizard",
@@ -1047,12 +633,17 @@
                 "percent": 15
             }
         ],
-        "materialType": "pes",
+        "materialType": "Polyester",
         "weight": 55,
         "breakingStrength": 33,
         "date_introduced": 1518991200000,
         "product_url": null,
-        "width": 25
+        "width": 25,
+        "thickness": 2.5,
+        "webbing_construction": "Core/Sheath",
+        "isa_certified": false,
+        "priceMeter": 1.79,
+        "currency": "EUR"
     },
     {
         "name": "Aero",
@@ -1143,12 +734,15 @@
                 "percent": 14.24
             }
         ],
-        "materialType": "pes/polyamid/nylon",
-        "weight": 62,
+        "materialType": "Polyester",
+        "weight": 59,
         "breakingStrength": 33.4,
         "date_introduced": null,
         "product_url": null,
-        "width": 25
+        "width": 25,
+        "thickness": 2.5,
+        "webbing_construction": "Flat",
+        "isa_certified": false
     },
     {
         "name": "Aero 2",
@@ -1244,7 +838,12 @@
         "breakingStrength": 33.4,
         "date_introduced": 1449273600000,
         "product_url": "http://www.balancecommunity.com/aero-2",
-        "width": 25.4
+        "width": 25.4,
+        "thickness": 3.2,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 2.96,
+        "currency": "USD"
     },
     {
         "name": "Feather",
@@ -1295,12 +894,18 @@
                 "percent": 10.36
             }
         ],
-        "materialType": "pes",
-        "weight": 47,
-        "breakingStrength": 27,
+        "materialType": "Polyester",
+        "weight": 34,
+        "breakingStrength": 20,
         "date_introduced": null,
+        "product_url": "http://www.balancecommunity.com/feather",
         "product_url": null,
-        "width": 25
+        "width": 25,
+        "thickness": 1.5,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 1.61,
+        "currency": "USD"
     },
     {
         "name": "Feather Pro",
@@ -1391,12 +996,17 @@
                 "percent": 14.03
             }
         ],
-        "materialType": "pes/polyamid/nylon",
-        "weight": 47,
+        "materialType": "Polyester",
+        "weight": 51,
         "breakingStrength": 27,
         "date_introduced": 1459900800000,
         "product_url": "http://www.balancecommunity.com/feather-pro",
-        "width": 25
+        "width": 25,
+        "thickness": 2.46,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 2.36,
+        "currency": "USD"
     },
     {
         "name": "Mantra MK1",
@@ -1586,11 +1196,16 @@
         "weight": "",
         "breakingStrength": "",
         "date_introduced": null,
-        "product_url": null
+        "product_url": null,
+        "width": 25
     },
     {
         "name": "Mantra MK3",
-        "brand": "BalanceCommunity",
+        "brand": "Balance Community: Slackline Outfitters",
+        "materialType": "Polyester",
+        "width": 25,
+        "weight": 83,
+        "breakingStrength": 42,
         "stretch": [
             {
                 "kn": 0,
@@ -1661,11 +1276,11 @@
                 "percent": 13.79
             }
         ],
-        "materialType": "pes",
-        "weight": "",
-        "breakingStrength": "",
         "date_introduced": null,
-        "product_url": null
+        "product_url": null,
+        "thickness": 4.1,
+        "webbing_construction": "Flat",
+        "isa_certified": false
     },
     {
         "name": "Mantra MK4 Flight",
@@ -1756,12 +1371,17 @@
                 "percent": 7.65
             }
         ],
-        "materialType": "pes",
+        "materialType": "Polyester",
         "weight": 76,
         "breakingStrength": 42,
         "date_introduced": null,
         "product_url": "http://www.balancecommunity.com/mantra-mk4-flight",
-        "width": 25
+        "width": 25,
+        "thickness": 3.5,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 2.46,
+        "currency": "USD"
     },
     {
         "name": "type-18 MK1",
@@ -1831,8 +1451,12 @@
         "product_url": null
     },
     {
-        "name": "type-18 MK2",
-        "brand": "BalanceCommunity",
+        "name": "Type 18 MKII",
+        "brand": "Balance Community: Slackline Outfitters",
+        "materialType": "Nylon",
+        "width": 25,
+        "weight": 62,
+        "breakingStrength": 35.6,
         "stretch": [
             {
                 "kn": 0,
@@ -1891,11 +1515,13 @@
                 "percent": 17.4
             }
         ],
-        "materialType": "polyamid/nylon",
-        "weight": 62,
-        "breakingStrength": 35.6,
         "date_introduced": null,
-        "product_url": "http://www.balancecommunity.com/type-18-mkii"
+        "product_url": "http://www.balancecommunity.com/type-18-mkii",
+        "thickness": 3,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 2.36,
+        "currency": "USD"
     },
     {
         "name": "Lift",
@@ -1986,15 +1612,25 @@
                 "percent": 23.83
             }
         ],
-        "materialType": "polyamid/nylon",
-        "weight": "58",
-        "breakingStrength": "28",
+        "materialType": "Nylon",
+        "weight": 58,
+        "breakingStrength": 28,
         "date_introduced": 1507150800000,
         "product_url": "http://www.balancecommunity.com/lift",
-        "width": 25
+        "width": 25,
+        "thickness": 3.18,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 2.46,
+        "currency": "USD"
     },
     {
-        "name": "SpiderSilk MK2",
+        "name": "Spider Silk MK2",
+        "brand": "Balance Community: Slackline Outfitters",
+        "materialType": "Vectran",
+        "width": 25,
+        "weight": 48,
+        "breakingStrength": 67,
         "stretch": [
             {
                 "kn": 0,
@@ -2081,16 +1717,21 @@
                 "percent": 1.88
             }
         ],
-        "brand": "BalanceCommunity",
-        "materialType": "vectran",
-        "weight": 48,
-        "breakingStrength": 67,
         "date_introduced": null,
-        "product_url": "http://www.balancecommunity.com/spider-silk-mkii"
+        "product_url": "http://www.balancecommunity.com/spider-silk-mkii",
+        "thickness": 2.5,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 9.68,
+        "currency": "USD"
     },
     {
         "name": "Maverick",
         "brand": "Slack.fr",
+        "materialType": "Polyester",
+        "width": 25,
+        "weight": 62,
+        "breakingStrength": 31,
         "stretch": [
             {
                 "kn": 0,
@@ -2105,11 +1746,12 @@
                 "percent": 4.7
             }
         ],
-        "materialType": "pes",
-        "weight": 62,
-        "breakingStrength": 31,
         "date_introduced": null,
-        "product_url": null
+        "product_url": null,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 1.4,
+        "currency": "EUR"
     },
     {
         "name": "Moonwalk",
@@ -2136,12 +1778,17 @@
                 "percent": 5
             }
         ],
-        "materialType": "hybrid",
-        "weight": 33.4,
+        "materialType": "Hybrid",
+        "weight": 34,
         "breakingStrength": 35,
         "date_introduced": null,
         "product_url": "https://laboutique.slack.fr/en/slackline-webbings/41-moonwalk-flat-hybride.html",
-        "width": 25
+        "width": 25,
+        "thickness": 2,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 3.2,
+        "currency": "EUR"
     },
     {
         "name": "McFly",
@@ -2164,39 +1811,17 @@
                 "percent": 14.5
             }
         ],
-        "materialType": "polyamid/nylon",
+        "materialType": "Nylon",
         "weight": 65,
         "breakingStrength": 31,
         "date_introduced": null,
         "product_url": null,
-        "width": 25
-    },
-    {
-        "name": "Spring",
-        "brand": "Slack.fr",
-        "stretch": [
-            {
-                "kn": 0,
-                "percent": 0
-            },
-            {
-                "kn": 5,
-                "percent": 1.8
-            },
-            {
-                "kn": 10,
-                "percent": 4.7
-            },
-            {
-                "kn": 15,
-                "percent": 6.9
-            }
-        ],
-        "materialType": "pes",
-        "weight": "",
-        "breakingStrength": "",
-        "date_introduced": null,
-        "product_url": null
+        "width": 25,
+        "thickness": 3,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 2.29,
+        "currency": "EUR"
     },
     {
         "name": "Bluewing",
@@ -2287,16 +1912,24 @@
                 "percent": 16.5
             }
         ],
-        "materialType": "pes",
+        "materialType": "Polyester",
         "weight": 63,
         "breakingStrength": 30,
         "date_introduced": null,
         "product_url": null,
-        "width": 25
+        "width": 25,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 1.49,
+        "currency": "EUR"
     },
     {
-        "name": "Passion",
-        "brand": "Elephant Slacklines",
+        "name": "Passion Red",
+        "brand": "Elephant",
+        "materialType": "Nylon",
+        "width": 25,
+        "weight": 69,
+        "breakingStrength": 33,
         "stretch": [
             {
                 "kn": 0,
@@ -2343,15 +1976,21 @@
                 "percent": 16.9
             }
         ],
-        "materialType": "polyamid/nylon",
-        "weight": 69,
-        "breakingStrength": 33,
         "date_introduced": null,
-        "product_url": null
+        "product_url": null,
+        "thickness": 3.6,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 3,
+        "currency": "CAD"
     },
     {
-        "name": "42kN",
-        "brand": "slackPro",
+        "name": "SlackPro 42kN",
+        "brand": "Slack Pro!",
+        "materialType": "Polyester",
+        "width": 25,
+        "weight": 72,
+        "breakingStrength": 42,
         "stretch": [
             {
                 "kn": 0,
@@ -2422,11 +2061,11 @@
                 "percent": 6.5
             }
         ],
-        "materialType": "pes",
-        "weight": "",
-        "breakingStrength": "",
         "date_introduced": null,
-        "product_url": null
+        "product_url": "http://www.slackpro.de/en/products/2542slackline.shtml",
+        "thickness": 2.7,
+        "webbing_construction": "Flat",
+        "isa_certified": false
     },
     {
         "name": "Neon ",
@@ -2481,12 +2120,17 @@
                 "percent": 7.2
             }
         ],
-        "materialType": "pes",
+        "materialType": "Polyester",
         "weight": 48,
         "breakingStrength": 20,
         "date_introduced": null,
         "product_url": "https://www.slackshop.cz/en/webbing/30-eqb-neon.html",
-        "width": 25
+        "width": 25,
+        "thickness": 2.2,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 27,
+        "currency": "CZK"
     },
     {
         "name": "Sigma N",
@@ -2541,16 +2185,24 @@
                 "percent": 23.5
             }
         ],
-        "materialType": "polyamid/nylon",
+        "materialType": "Nylon",
         "weight": 55,
         "breakingStrength": 26,
         "date_introduced": null,
         "product_url": "http://www.slackliner.de/Webbing/Nylon/Sigma-N-jormungand-270.html",
-        "width": 25
+        "width": 25,
+        "webbing_construction": "Tubular",
+        "isa_certified": false,
+        "priceMeter": 1.49,
+        "currency": "EUR"
     },
     {
         "name": "Sigma X",
-        "brand": "slackliner.de",
+        "brand": "Slackliner.de",
+        "materialType": "Nylon",
+        "width": 25,
+        "weight": 44,
+        "breakingStrength": 21,
         "stretch": [
             {
                 "kn": 0,
@@ -2601,54 +2253,12 @@
                 "percent": 25.1
             }
         ],
-        "materialType": "polyamid/nylon",
-        "weight": 44,
-        "breakingStrength": 21,
         "date_introduced": null,
-        "product_url": null
-    },
-    {
-        "name": "Sigma P",
-        "brand": "slackliner.de",
-        "stretch": [
-            {
-                "kn": 0,
-                "percent": 0
-            },
-            {
-                "kn": 3,
-                "percent": 0.9
-            },
-            {
-                "kn": 6,
-                "percent": 2.1
-            },
-            {
-                "kn": 9,
-                "percent": 4.5
-            },
-            {
-                "kn": 12,
-                "percent": 6.1
-            },
-            {
-                "kn": 15,
-                "percent": 7.2
-            },
-            {
-                "kn": 18,
-                "percent": 8
-            },
-            {
-                "kn": 20,
-                "percent": 8.9
-            }
-        ],
-        "materialType": "",
-        "weight": "",
-        "breakingStrength": "",
-        "date_introduced": null,
-        "product_url": null
+        "product_url": "http://www.slackliner.de/Slackline-Band/Schlauchband/Sigma-X.html",
+        "webbing_construction": "Tubular",
+        "isa_certified": false,
+        "priceMeter": 1.49,
+        "currency": "EUR"
     },
     {
         "name": "Sigma Impact",
@@ -2699,12 +2309,17 @@
                 "percent": 16.6
             }
         ],
-        "materialType": "pes",
-        "weight": "64",
-        "breakingStrength": "35",
+        "materialType": "Polyester",
+        "weight": 64,
+        "breakingStrength": 35,
         "date_introduced": null,
         "product_url": "http://www.slackliner.de/Webbing/Flat-Webbing/Sigma-Impact.html",
-        "width": 25
+        "width": 25,
+        "thickness": 2.7,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 1.05,
+        "currency": "EUR"
     },
     {
         "name": "Sigma LG",
@@ -2743,12 +2358,17 @@
                 "percent": 9.2
             }
         ],
-        "materialType": "pes",
+        "materialType": "Polyester",
         "weight": 66,
         "breakingStrength": 38,
         "date_introduced": null,
         "product_url": null,
-        "width": 25
+        "width": 25,
+        "thickness": 2.8,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 1.05,
+        "currency": "EUR"
     },
     {
         "name": "Dragon",
@@ -2779,12 +2399,17 @@
                 "percent": 12
             }
         ],
-        "materialType": "pes",
+        "materialType": "Polyester",
         "weight": 64,
         "breakingStrength": 31,
         "date_introduced": null,
         "product_url": "https://www.slackshop.cz/en/webbing/31-eqb-dragon.html",
-        "width": 25
+        "width": 25,
+        "thickness": 2.5,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 33,
+        "currency": "CZK"
     },
     {
         "name": "Sumo",
@@ -2815,12 +2440,17 @@
                 "percent": 10
             }
         ],
-        "materialType": "pes",
+        "materialType": "Polyester",
         "weight": 82,
         "breakingStrength": 40,
         "date_introduced": null,
         "product_url": null,
-        "width": 25
+        "width": 25,
+        "thickness": 3.8,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 39,
+        "currency": "CZK"
     },
     {
         "name": "Bounce",
@@ -2847,12 +2477,17 @@
                 "percent": 20
             }
         ],
-        "materialType": "polyamid/nylon",
-        "weight": "38",
-        "breakingStrength": "16",
+        "materialType": "Nylon",
+        "weight": 38,
+        "breakingStrength": 16,
         "date_introduced": null,
         "product_url": "https://www.slackshop.cz/en/for-advanced/142-eqb-bounce.html",
-        "width": 19
+        "width": 19,
+        "thickness": 2,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 25,
+        "currency": "CZK"
     },
     {
         "name": "Flash",
@@ -2883,12 +2518,15 @@
                 "percent": 17
             }
         ],
-        "materialType": "polyamid/nylon",
+        "materialType": "Nylon",
         "weight": 61,
         "breakingStrength": 31,
         "date_introduced": null,
         "product_url": null,
-        "width": 25
+        "width": 25,
+        "thickness": 2.5,
+        "webbing_construction": "Flat",
+        "isa_certified": false
     },
     {
         "name": "Element",
@@ -2915,12 +2553,17 @@
                 "percent": 19
             }
         ],
-        "materialType": "polyamid/nylon",
+        "materialType": "Nylon",
         "weight": 42,
         "breakingStrength": 20,
         "date_introduced": null,
         "product_url": "http://www.eqb.cz/element-en.html",
-        "width": 25
+        "width": 25,
+        "thickness": 2.4,
+        "webbing_construction": "Tubular",
+        "isa_certified": false,
+        "priceMeter": 29,
+        "currency": "CZK"
     },
     {
         "name": "Skye",
@@ -2979,12 +2622,17 @@
                 "percent": 9.79
             }
         ],
-        "materialType": "pes",
+        "materialType": "Polyester",
         "weight": 62,
-        "breakingStrength": 36,
+        "breakingStrength": 31,
         "date_introduced": 1492041600000,
         "product_url": "https://www.slackshop.cz/en/webbing/78-eqb-skye.html",
-        "width": 25
+        "width": 25,
+        "thickness": 2.6,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 45,
+        "currency": "CZK"
     },
     {
         "name": "Fresh",
@@ -3015,12 +2663,17 @@
                 "percent": 25
             }
         ],
-        "materialType": "polyamid/nylon",
+        "materialType": "Nylon",
         "weight": 67,
         "breakingStrength": 32,
         "date_introduced": 1496188800000,
         "product_url": "https://www.slackshop.cz/en/webbing/76-157-eqb-fresh.html",
-        "width": 25
+        "width": 25,
+        "thickness": 4,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 42,
+        "currency": "CZK"
     },
     {
         "name": "eLine",
@@ -3043,11 +2696,14 @@
                 "percent": 16.5
             }
         ],
-        "materialType": "pes",
-        "weight": 48.18,
+        "materialType": "Polyester",
+        "weight": 52.24,
         "breakingStrength": 21.5,
         "date_introduced": null,
-        "product_url": null
+        "product_url": "https://yogaslackers.com/shop/slackline/eline-webbing/",
+        "width": 25.4,
+        "thickness": 2.08,
+        "webbing_construction": "Tubular"
     },
     {
         "name": "Cobalt",
@@ -3074,12 +2730,17 @@
                 "percent": 6
             }
         ],
-        "materialType": "pes",
-        "weight": "53",
-        "breakingStrength": "29",
+        "materialType": "Polyester",
+        "weight": 60,
+        "breakingStrength": 30,
         "date_introduced": null,
         "product_url": "http://slack-mountain.com/en/webbing-slackline/1-cobalt.html",
-        "width": 25
+        "width": 25,
+        "thickness": 2.8,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 2,
+        "currency": "EUR"
     },
     {
         "name": "Windu",
@@ -3106,16 +2767,25 @@
                 "percent": 10
             }
         ],
-        "materialType": "pes",
+        "materialType": "Polyester",
         "weight": 65,
         "breakingStrength": 25,
         "date_introduced": null,
         "product_url": null,
-        "width": 25
+        "width": 25,
+        "thickness": 2.5,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 1.33,
+        "currency": "EUR"
     },
     {
-        "name": "Snake",
-        "brand": "SlackMountain",
+        "name": "Snake Tub",
+        "brand": "Slack Mountain",
+        "materialType": "Polyester",
+        "width": 25,
+        "weight": 52,
+        "breakingStrength": 21,
         "stretch": [
             {
                 "kn": 0,
@@ -3134,15 +2804,21 @@
                 "percent": 14.7
             }
         ],
-        "materialType": "pes",
-        "weight": "52",
-        "breakingStrength": "21",
         "date_introduced": null,
-        "product_url": null
+        "product_url": "http://slack-mountain.com/en/webbing-slackline/5-snake-tub.html",
+        "thickness": 2.1,
+        "webbing_construction": "Tubular",
+        "isa_certified": false,
+        "priceMeter": 1.5,
+        "currency": "EUR"
     },
     {
-        "name": "Diablo",
-        "brand": "SlackMountain",
+        "name": "Diablo2",
+        "brand": "Slack Mountain",
+        "materialType": "Polyester",
+        "width": 25,
+        "weight": 96,
+        "breakingStrength": 30,
         "stretch": [
             {
                 "kn": 0,
@@ -3165,14 +2841,16 @@
                 "percent": 5
             }
         ],
-        "materialType": "pes",
-        "weight": "",
-        "breakingStrength": "",
         "date_introduced": null,
-        "product_url": null
+        "product_url": "http://slack-mountain.com/en/webbing-slackline/132-diablo2.html",
+        "thickness": 3.6,
+        "webbing_construction": "Core/Sheath",
+        "isa_certified": false,
+        "priceMeter": 1,
+        "currency": "EUR"
     },
     {
-        "name": "Goku2",
+        "name": "Goku 2",
         "brand": "SlackMountain",
         "stretch": [
             {
@@ -3196,11 +2874,16 @@
                 "percent": 4.8
             }
         ],
-        "materialType": "hybrid",
-        "weight": "41",
-        "breakingStrength": "40",
-        "date_introduced": null,
-        "product_url": "http://slack-mountain.com/en/webbing-slackline/136-goku2.html"
+        "materialType": "Hybrid",
+        "weight": 41,
+        "breakingStrength": 40,
+        "product_url": "http://slack-mountain.com/en/webbing-slackline/136-goku2.html",
+        "width": 25,
+        "thickness": 2,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 2.66,
+        "currency": "EUR"
     },
     {
         "name": "Artic Fox",
@@ -3223,16 +2906,25 @@
                 "percent": 14.7
             }
         ],
-        "materialType": "pes",
+        "materialType": "Polyester",
         "weight": 52,
         "breakingStrength": 21,
         "date_introduced": null,
         "product_url": null,
-        "width": 25
+        "width": 25,
+        "thickness": 2,
+        "webbing_construction": "Tubular",
+        "isa_certified": false,
+        "priceMeter": 1.3,
+        "currency": "EUR"
     },
     {
-        "name": "flax",
-        "brand": "SlackMountain",
+        "name": "Flax",
+        "brand": "Slack Mountain",
+        "materialType": "Nylon",
+        "width": 25,
+        "weight": 38,
+        "breakingStrength": 20,
         "stretch": [
             {
                 "kn": 0,
@@ -3247,11 +2939,13 @@
                 "percent": 13
             }
         ],
-        "materialType": "polyamid/nylon",
-        "weight": "",
-        "breakingStrength": "",
         "date_introduced": null,
-        "product_url": null
+        "product_url": null,
+        "thickness": 1.7,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 1.5,
+        "currency": "EUR"
     },
     {
         "name": "morpheus",
@@ -3278,12 +2972,17 @@
                 "percent": 14
             }
         ],
-        "materialType": "pes",
+        "materialType": "Polyester",
         "weight": 57,
         "breakingStrength": 25,
         "date_introduced": null,
         "product_url": null,
-        "width": 25
+        "width": 25,
+        "thickness": 2.1,
+        "webbing_construction": "Core/Sheath",
+        "isa_certified": false,
+        "priceMeter": 1.49,
+        "currency": "EUR"
     },
     {
         "name": "spectre",
@@ -3310,12 +3009,17 @@
                 "percent": 21.2
             }
         ],
-        "materialType": "polyamid/nylon",
+        "materialType": "Nylon",
         "weight": 70,
         "breakingStrength": 30,
         "date_introduced": 1486425600000,
         "product_url": "http://slack-mountain.com/en/webbing-slackline/168-spectre.html",
-        "width": 25
+        "width": 25,
+        "thickness": 3,
+        "webbing_construction": "Core/Sheath",
+        "isa_certified": false,
+        "priceMeter": 1.66,
+        "currency": "EUR"
     },
     {
         "name": "rubalise",
@@ -3334,12 +3038,17 @@
                 "percent": 4.6
             }
         ],
-        "materialType": "50mm pes",
+        "materialType": "Polyester",
         "weight": 80,
         "breakingStrength": 30,
         "date_introduced": null,
         "product_url": null,
-        "width": 50
+        "width": 50,
+        "thickness": 1.7,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 1.39,
+        "currency": "EUR"
     },
     {
         "name": "wallaby",
@@ -3358,12 +3067,17 @@
                 "percent": 3.3
             }
         ],
-        "materialType": "50mm pes",
-        "weight": "118",
-        "breakingStrength": "30",
+        "materialType": "Polyester",
+        "weight": 118,
+        "breakingStrength": 60,
         "date_introduced": null,
         "product_url": "http://slack-mountain.com/en/jumplines/6-wallaby.html",
-        "width": 48
+        "width": 48,
+        "thickness": 3.1,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 2.2,
+        "currency": "EUR"
     },
     {
         "name": "Storm",
@@ -3382,12 +3096,17 @@
                 "percent": 4.4
             }
         ],
-        "materialType": "50mm pes",
+        "materialType": "Polyester",
         "weight": 80,
         "breakingStrength": 30,
         "date_introduced": null,
         "product_url": null,
-        "width": 50
+        "width": 50,
+        "thickness": 1.7,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 2.2,
+        "currency": "EUR"
     },
     {
         "name": "plum",
@@ -3406,12 +3125,17 @@
                 "percent": 12.8
             }
         ],
-        "materialType": "pes",
+        "materialType": "Polyester",
         "weight": 25,
-        "breakingStrength": "10",
+        "breakingStrength": 10,
         "date_introduced": null,
         "product_url": "http://slack-mountain.com/en/webbing-slackline/7-plum.html",
-        "width": 25
+        "width": 25,
+        "thickness": 1,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 1.67,
+        "currency": "EUR"
     },
     {
         "name": "Cosmic",
@@ -3482,87 +3206,16 @@
                 "percent": 11.47
             }
         ],
-        "materialType": "pes",
-        "weight": "50",
-        "breakingStrength": "31",
+        "materialType": "Polyester",
+        "weight": 50,
+        "breakingStrength": 31,
         "date_introduced": 1470528000000,
         "product_url": "http://slack-inov.com/gb/webbing/69-cosmic",
-        "width": 25
-    },
-    {
-        "name": "Flame3",
-        "brand": "Slack Inov",
-        "stretch": [
-            {
-                "kn": 0,
-                "percent": 0
-            },
-            {
-                "kn": 2,
-                "percent": 1.45
-            },
-            {
-                "kn": 4,
-                "percent": 2.21
-            },
-            {
-                "kn": 6,
-                "percent": 3.02
-            },
-            {
-                "kn": 8,
-                "percent": 4.14
-            },
-            {
-                "kn": 10,
-                "percent": 5.4
-            },
-            {
-                "kn": 12,
-                "percent": 6.71
-            },
-            {
-                "kn": 14,
-                "percent": 8.04
-            },
-            {
-                "kn": 16,
-                "percent": 9.26
-            },
-            {
-                "kn": 18,
-                "percent": 10.38
-            },
-            {
-                "kn": 20,
-                "percent": 11.3
-            },
-            {
-                "kn": 22,
-                "percent": 12.21
-            },
-            {
-                "kn": 24,
-                "percent": 12.97
-            },
-            {
-                "kn": 26,
-                "percent": 13.66
-            },
-            {
-                "kn": 28,
-                "percent": 14.34
-            },
-            {
-                "kn": 30,
-                "percent": 14.96
-            }
-        ],
-        "materialType": "pes",
-        "weight": "",
-        "breakingStrength": "",
-        "date_introduced": null,
-        "product_url": null
+        "width": 25,
+        "webbing_construction": "Tubular",
+        "isa_certified": false,
+        "priceMeter": 1.6,
+        "currency": "EUR"
     },
     {
         "name": "Donkey",
@@ -3589,12 +3242,16 @@
                 "percent": 13
             }
         ],
-        "materialType": "polyamid/nylon",
-        "weight": "66",
-        "breakingStrength": "32",
+        "materialType": "Nylon",
+        "weight": 66,
+        "breakingStrength": 32,
         "date_introduced": null,
         "product_url": "https://slack-inov.com/gb/longline/144-donkey",
-        "width": 25.4
+        "width": 25.4,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 2.9,
+        "currency": "EUR"
     },
     {
         "name": "Nova",
@@ -3621,15 +3278,19 @@
                 "percent": 23.1
             }
         ],
-        "materialType": "polyamid/nylon",
-        "weight": "56",
-        "breakingStrength": "27",
+        "materialType": "Nylon",
+        "weight": 56,
+        "breakingStrength": 27,
         "date_introduced": null,
         "product_url": "https://slack-inov.com/gb/longline/145-nova",
-        "width": 25.4
+        "width": 25.4,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 2.7,
+        "currency": "EUR"
     },
     {
-        "name": "(pes)",
+        "name": "Mammut",
         "brand": "Mammut",
         "stretch": [
             {
@@ -3717,11 +3378,13 @@
                 "percent": 15
             }
         ],
-        "materialType": "pes",
-        "weight": "",
-        "breakingStrength": "",
-        "date_introduced": null,
-        "product_url": null
+        "materialType": "Polyester",
+        "weight": 76.8,
+        "breakingStrength": 25,
+        "width": 25.8,
+        "thickness": 4.2,
+        "webbing_construction": "Core/Sheath",
+        "isa_certified": false
     },
     {
         "name": "Rainbow",
@@ -3796,12 +3459,16 @@
                 "percent": 12
             }
         ],
-        "materialType": "pes",
-        "weight": "62",
-        "breakingStrength": "36",
+        "materialType": "Polyester",
+        "weight": 62,
+        "breakingStrength": 36,
         "date_introduced": 1539118800000,
         "product_url": "https://raed-slacklines.com/rainbow-polyester-highline-webbing",
-        "width": 25.4
+        "width": 25.4,
+        "webbing_construction": "Core/Sheath",
+        "isa_certified": false,
+        "priceMeter": 1.65,
+        "currency": "EUR"
     },
     {
         "name": "Parsec",
@@ -3892,12 +3559,16 @@
                 "percent": 8.5
             }
         ],
-        "materialType": "pes",
-        "weight": "59",
-        "breakingStrength": "33",
+        "materialType": "Polyester",
+        "weight": 59,
+        "breakingStrength": 35,
         "date_introduced": null,
         "product_url": "https://raed-slacklines.com/parsec-longline-webbing",
-        "width": 25
+        "width": 25,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 0.99,
+        "currency": "EUR"
     },
     {
         "name": "MOTM",
@@ -3988,12 +3659,16 @@
                 "percent": 23.5
             }
         ],
-        "materialType": "polyamid/nylon",
-        "weight": "56",
-        "breakingStrength": "27",
+        "materialType": "Nylon",
+        "weight": 56,
+        "breakingStrength": 27,
         "date_introduced": null,
         "product_url": "https://raed-slacklines.com/motm-tubular-nylon-slackline-webbing",
-        "width": 25
+        "width": 25,
+        "webbing_construction": "Tubular",
+        "isa_certified": false,
+        "priceMeter": 1.49,
+        "currency": "EUR"
     },
     {
         "name": "Helium",
@@ -4084,12 +3759,16 @@
                 "percent": 9.1
             }
         ],
-        "materialType": "pes",
-        "weight": "38",
-        "breakingStrength": "24",
+        "materialType": "Hybrid",
+        "weight": 38,
+        "breakingStrength": 24,
         "date_introduced": null,
         "product_url": "https://raed-slacklines.com/helium-lightweight-polyester-slackline-webbing",
-        "width": 25
+        "width": 25,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 0.69,
+        "currency": "EUR"
     },
     {
         "name": "Cumulus",
@@ -4160,12 +3839,16 @@
                 "percent": 13.2
             }
         ],
-        "materialType": "polyamid/nylon",
-        "weight": "66",
-        "breakingStrength": "35",
+        "materialType": "Nylon",
+        "weight": 66,
+        "breakingStrength": 35,
         "date_introduced": 1563919200000,
         "product_url": "https://raed-slacklines.com/cumulus-nylon-highline-webbing",
-        "width": 25
+        "width": 25,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 1.99,
+        "currency": "EUR"
     },
     {
         "name": "pinkTube",
@@ -4272,12 +3955,16 @@
                 "percent": 35.4
             }
         ],
-        "materialType": "polyamid/nylon",
-        "weight": "48",
-        "breakingStrength": "20.6",
+        "materialType": "Nylon",
+        "weight": 48,
+        "breakingStrength": 23.6,
         "date_introduced": 1503349200000,
         "product_url": "https://www.slacktivity.com/pinktube-25m-200m",
-        "width": 25.5
+        "width": 25.5,
+        "webbing_construction": "Tubular",
+        "isa_certified": false,
+        "priceMeter": 1.83,
+        "currency": "EUR"
     },
     {
         "name": "redTube",
@@ -4436,12 +4123,16 @@
                 "percent": 34.3
             }
         ],
-        "materialType": "polyamid/nylon",
+        "materialType": "Nylon",
         "weight": 76,
-        "breakingStrength": 36,
+        "breakingStrength": 32,
         "date_introduced": null,
         "product_url": "https://www.slacktivity.com/redtube-30m-200m",
-        "width": 25
+        "width": 25,
+        "webbing_construction": "Tubular",
+        "isa_certified": true,
+        "priceMeter": 2.5,
+        "currency": "EUR"
     },
     {
         "name": "Marathon",
@@ -4596,12 +4287,16 @@
                 "percent": 15.9
             }
         ],
-        "materialType": "pes",
-        "weight": "61.5",
-        "breakingStrength": "37",
+        "materialType": "Polyester",
+        "weight": 61.5,
+        "breakingStrength": 37,
         "date_introduced": null,
         "product_url": "https://www.slacktivity.com/marathon-50m-500m",
-        "width": 25
+        "width": 25,
+        "webbing_construction": "Core/Sheath",
+        "isa_certified": false,
+        "priceMeter": 1.8,
+        "currency": "EUR"
     },
     {
         "name": "Marathon Play",
@@ -4756,12 +4451,16 @@
                 "percent": 18.8
             }
         ],
-        "materialType": "pes",
+        "materialType": "Polyester",
         "weight": 65,
         "breakingStrength": 37,
         "date_introduced": null,
         "product_url": null,
-        "width": 25
+        "width": 25,
+        "webbing_construction": "Core/Sheath",
+        "isa_certified": false,
+        "priceMeter": 1.9,
+        "currency": "EUR"
     },
     {
         "name": "halfMarathon 20mm",
@@ -4884,11 +4583,16 @@
                 "percent": 14
             }
         ],
-        "materialType": "pes",
-        "weight": "48.5",
-        "breakingStrength": "28",
+        "materialType": "Polyester",
+        "weight": 48.5,
+        "breakingStrength": 28,
         "date_introduced": null,
-        "product_url": null
+        "product_url": "https://slacktivity.com/shop/halfmarathon-20mm-webbing/",
+        "width": 20,
+        "thickness": 2.6,
+        "webbing_construction": "Core/Sheath",
+        "priceMeter": 2.7,
+        "currency": "EUR"
     },
     {
         "name": "Raven",
@@ -4963,12 +4667,17 @@
                 "percent": 13.07
             }
         ],
-        "materialType": "pes",
+        "materialType": "Polyester",
         "weight": 45,
         "breakingStrength": 16,
         "date_introduced": null,
         "product_url": "https://www.balanceur.ro/slackshop/benzi/pana-corbului/",
-        "width": 25
+        "width": 25,
+        "thickness": 2,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 0.85,
+        "currency": "EUR"
     },
     {
         "name": "Milky Way",
@@ -5107,16 +4816,24 @@
                 "percent": 15.45
             }
         ],
-        "materialType": "pes",
-        "weight": "63",
-        "breakingStrength": "32",
+        "materialType": "Polyester",
+        "weight": 63,
+        "breakingStrength": 32,
         "date_introduced": 1562706000000,
         "product_url": "https://www.balanceur.ro/slackshop/benzi/milky-way/",
-        "width": 25
+        "width": 25,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 0.99,
+        "currency": "EUR"
     },
     {
         "name": "Tender",
-        "brand": "Spider Slacklines",
+        "brand": "Spider slacklines",
+        "materialType": "Polyester",
+        "width": 25,
+        "weight": 48,
+        "breakingStrength": 23,
         "stretch": [
             {
                 "kn": 0,
@@ -5171,15 +4888,21 @@
                 "percent": 18
             }
         ],
-        "materialType": "pes",
-        "weight": "48",
-        "breakingStrength": "23",
         "date_introduced": null,
-        "product_url": null
+        "product_url": "https://spider-slacklines.com/shop/en/longline-webbings/76-tender-line.html",
+        "thickness": 2.5,
+        "webbing_construction": "Tubular",
+        "isa_certified": false,
+        "priceMeter": 1.1,
+        "currency": "EUR"
     },
     {
         "name": "Fly",
-        "brand": "Spider Slacklines",
+        "brand": "Spider slacklines",
+        "materialType": "Polyester",
+        "width": 25,
+        "weight": 58,
+        "breakingStrength": 33,
         "stretch": [
             {
                 "kn": 0,
@@ -5234,15 +4957,20 @@
                 "percent": 9.9
             }
         ],
-        "materialType": "pes",
-        "weight": "58",
-        "breakingStrength": "33",
         "date_introduced": null,
-        "product_url": null
+        "product_url": "http://spider-slacklines.com/shop/en/longline-webbings/77-fly-line.html",
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 1.37,
+        "currency": "EUR"
     },
     {
         "name": "Zao",
-        "brand": "Spider Slacklines",
+        "brand": "Spider slacklines",
+        "materialType": "Polyester",
+        "width": 25,
+        "weight": 65,
+        "breakingStrength": 32,
         "stretch": [
             {
                 "kn": 0,
@@ -5297,11 +5025,13 @@
                 "percent": 14.5
             }
         ],
-        "materialType": "pes",
-        "weight": "65",
-        "breakingStrength": "31",
         "date_introduced": null,
-        "product_url": null
+        "product_url": "http://spider-slacklines.com/shop/en/longline-webbings/69-zao-line.html",
+        "thickness": 3.2,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 1.4,
+        "currency": "EUR"
     },
     {
         "name": "Edge",
@@ -5360,12 +5090,17 @@
                 "percent": 9.2
             }
         ],
-        "materialType": "pes",
-        "weight": "62",
-        "breakingStrength": "35",
+        "materialType": "Polyester",
+        "weight": 62,
+        "breakingStrength": 35,
         "date_introduced": null,
         "product_url": "http://spider-slacklines.com/shop/en/longline-webbings/74-edge-line.html",
-        "width": 25.4
+        "width": 25.4,
+        "thickness": 2.7,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 1.48,
+        "currency": "EUR"
     },
     {
         "name": "Jumbo",
@@ -5424,12 +5159,17 @@
                 "percent": 10.5
             }
         ],
-        "materialType": "pes",
-        "weight": "83",
-        "breakingStrength": "35",
+        "materialType": "Polyester",
+        "weight": 83,
+        "breakingStrength": 35,
         "date_introduced": null,
         "product_url": "http://spider-slacklines.com/shop/en/longline-webbings/73-jumbo-line.html",
-        "width": 25.4
+        "width": 25.4,
+        "thickness": 4,
+        "webbing_construction": "Tubular",
+        "isa_certified": false,
+        "priceMeter": 1.89,
+        "currency": "EUR"
     },
     {
         "name": "Nylove",
@@ -5488,12 +5228,17 @@
                 "percent": 17
             }
         ],
-        "materialType": "polyamid/nylon",
-        "weight": "62",
-        "breakingStrength": "31",
+        "materialType": "Nylon",
+        "weight": 62,
+        "breakingStrength": 31,
         "date_introduced": null,
         "product_url": "https://spider-slacklines.com/shop/en/longline-webbings/245-nylove-longline-price-per-meter.html",
-        "width": 25
+        "width": 25,
+        "thickness": 3.4,
+        "webbing_construction": "Tubular",
+        "isa_certified": false,
+        "priceMeter": 1.6,
+        "currency": "EUR"
     },
     {
         "name": "Y2k",
@@ -5506,61 +5251,14 @@
         ],
         "weight": 33.1,
         "breakingStrength": 34,
-        "materialType": "dyneema",
+        "materialType": "Hybrid",
         "date_introduced": 1534744800000,
         "product_url": "https://www.slacktivity.com/y2k",
-        "width": 25.4
-    },
-    {
-        "name": "Voyage",
-        "brand": "Aki Slackline",
-        "stretch": [
-            {
-                "kn": 2,
-                "percent": 0.6
-            },
-            {
-                "kn": 3,
-                "percent": 0.9
-            },
-            {
-                "kn": 4,
-                "percent": 1.2
-            },
-            {
-                "kn": 5,
-                "percent": 1.5
-            },
-            {
-                "kn": 6,
-                "percent": 1.9
-            },
-            {
-                "kn": 7,
-                "percent": 2.3
-            },
-            {
-                "kn": 8,
-                "percent": 3.1
-            },
-            {
-                "kn": 9,
-                "percent": 3.7
-            },
-            {
-                "kn": 10,
-                "percent": 4.4
-            }
-        ],
-        "weight": 55,
-        "priceMeter": {
-            "value": 1.69,
-            "currency": "euro"
-        },
-        "breakingStrength": 33,
-        "materialType": "pes",
-        "date_introduced": null,
-        "product_url": null
+        "width": 25.4,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 4.6,
+        "currency": "EUR"
     },
     {
         "name": "Ribera",
@@ -5571,7 +5269,9 @@
         "breakingStrength": 42,
         "stretch": null,
         "date_introduced": null,
-        "product_url": null
+        "product_url": null,
+        "webbing_construction": "Flat",
+        "isa_certified": false
     },
     {
         "name": "Bloodline",
@@ -5587,7 +5287,9 @@
             }
         ],
         "date_introduced": null,
-        "product_url": null
+        "product_url": null,
+        "webbing_construction": "Flat",
+        "isa_certified": false
     },
     {
         "name": "Tape",
@@ -5602,7 +5304,9 @@
             }
         ],
         "date_introduced": null,
-        "product_url": "http://www.singingrock.com/slackline-webbing-yellowblack"
+        "product_url": "http://www.singingrock.com/slackline-webbing-yellowblack",
+        "webbing_construction": "Flat",
+        "isa_certified": false
     },
     {
         "name": "Ninja",
@@ -5618,7 +5322,11 @@
             }
         ],
         "date_introduced": null,
-        "product_url": "https://www.eqb.cz/ninja-en.html"
+        "product_url": "https://www.eqb.cz/ninja-en.html",
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 45,
+        "currency": "CZK"
     },
     {
         "name": "Nitro",
@@ -5634,7 +5342,11 @@
             }
         ],
         "date_introduced": null,
-        "product_url": null
+        "product_url": null,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 55.6,
+        "currency": "CZK"
     },
     {
         "name": "Slim Green",
@@ -5650,7 +5362,12 @@
             }
         ],
         "date_introduced": null,
-        "product_url": "https://www.slackshop.cz/en/webbing/29-eqb-slim.html"
+        "product_url": "https://www.slackshop.cz/en/webbing/29-eqb-slim.html",
+        "thickness": 1.6,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 18,
+        "currency": "CZK"
     },
     {
         "name": "Chartreuse",
@@ -5666,7 +5383,9 @@
             }
         ],
         "date_introduced": null,
-        "product_url": null
+        "product_url": null,
+        "webbing_construction": "Flat",
+        "isa_certified": false
     },
     {
         "name": "Dibona",
@@ -5682,7 +5401,9 @@
             }
         ],
         "date_introduced": null,
-        "product_url": null
+        "product_url": null,
+        "webbing_construction": "Tubular",
+        "isa_certified": false
     },
     {
         "name": "Elia",
@@ -5698,7 +5419,9 @@
             }
         ],
         "date_introduced": null,
-        "product_url": null
+        "product_url": null,
+        "webbing_construction": "Flat",
+        "isa_certified": false
     },
     {
         "name": "Etna II",
@@ -5714,7 +5437,9 @@
             }
         ],
         "date_introduced": null,
-        "product_url": null
+        "product_url": null,
+        "webbing_construction": "Flat",
+        "isa_certified": false
     },
     {
         "name": "Fuji",
@@ -5730,7 +5455,9 @@
             }
         ],
         "date_introduced": null,
-        "product_url": null
+        "product_url": null,
+        "webbing_construction": "Flat",
+        "isa_certified": false
     },
     {
         "name": "Krakatoa",
@@ -5741,7 +5468,9 @@
         "breakingStrength": 45,
         "stretch": null,
         "date_introduced": null,
-        "product_url": null
+        "product_url": null,
+        "webbing_construction": "Flat",
+        "isa_certified": false
     },
     {
         "name": "Mauna Kea",
@@ -5757,7 +5486,9 @@
             }
         ],
         "date_introduced": null,
-        "product_url": null
+        "product_url": null,
+        "webbing_construction": "Tubular",
+        "isa_certified": false
     },
     {
         "name": "Pierra Menta",
@@ -5773,7 +5504,9 @@
             }
         ],
         "date_introduced": null,
-        "product_url": null
+        "product_url": null,
+        "webbing_construction": "Flat",
+        "isa_certified": false
     },
     {
         "name": "Vercors",
@@ -5789,7 +5522,9 @@
             }
         ],
         "date_introduced": null,
-        "product_url": null
+        "product_url": null,
+        "webbing_construction": "Flat",
+        "isa_certified": false
     },
     {
         "name": "Vesuve",
@@ -5805,7 +5540,9 @@
             }
         ],
         "date_introduced": null,
-        "product_url": null
+        "product_url": null,
+        "webbing_construction": "Flat",
+        "isa_certified": false
     },
     {
         "name": "Sat'Elite",
@@ -5816,7 +5553,11 @@
         "breakingStrength": 75,
         "stretch": null,
         "date_introduced": null,
-        "product_url": null
+        "product_url": null,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 2.72,
+        "currency": "EUR"
     },
     {
         "name": "Red Zebra",
@@ -5832,7 +5573,11 @@
             }
         ],
         "date_introduced": null,
-        "product_url": null
+        "product_url": null,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 1.19,
+        "currency": "EUR"
     },
     {
         "name": "Slack Swan",
@@ -5848,7 +5593,9 @@
             }
         ],
         "date_introduced": null,
-        "product_url": null
+        "product_url": null,
+        "webbing_construction": "Flat",
+        "isa_certified": false
     },
     {
         "name": "Flamme II",
@@ -5864,7 +5611,9 @@
             }
         ],
         "date_introduced": null,
-        "product_url": null
+        "product_url": null,
+        "webbing_construction": "Flat",
+        "isa_certified": false
     },
     {
         "name": "Emeraude",
@@ -5875,39 +5624,11 @@
         "breakingStrength": 40,
         "stretch": null,
         "date_introduced": null,
-        "product_url": "http://slack-inov.com/gb/webbing/9-emeraude"
-    },
-    {
-        "name": "Diablo2",
-        "brand": "Slack Mountain",
-        "materialType": "Polyester",
-        "width": 25,
-        "weight": 96,
-        "breakingStrength": 30,
-        "stretch": [
-            {
-                "percent": 3.5,
-                "kn": 10
-            }
-        ],
-        "date_introduced": null,
-        "product_url": "http://slack-mountain.com/en/webbing-slackline/132-diablo2.html"
-    },
-    {
-        "name": "Flax NY",
-        "brand": "Slack Mountain",
-        "materialType": "Nylon",
-        "width": 25,
-        "weight": 38,
-        "breakingStrength": 20,
-        "stretch": [
-            {
-                "percent": 13,
-                "kn": 10
-            }
-        ],
-        "date_introduced": null,
-        "product_url": null
+        "product_url": "http://slack-inov.com/gb/webbing/9-emeraude",
+        "webbing_construction": "Tubular",
+        "isa_certified": false,
+        "priceMeter": 2,
+        "currency": "EUR"
     },
     {
         "name": "Goku",
@@ -5923,39 +5644,9 @@
             }
         ],
         "date_introduced": null,
-        "product_url": null
-    },
-    {
-        "name": "Goku 2",
-        "brand": "Slack Mountain",
-        "materialType": "Hybrid",
-        "width": 25,
-        "weight": 41,
-        "breakingStrength": 40,
-        "stretch": [
-            {
-                "percent": 3.8,
-                "kn": 10
-            }
-        ],
-        "date_introduced": null,
-        "product_url": "http://slack-mountain.com/en/webbing-slackline/136-goku2.html"
-    },
-    {
-        "name": "Snake Tub",
-        "brand": "Slack Mountain",
-        "materialType": "Polyester",
-        "width": 25,
-        "weight": 52,
-        "breakingStrength": 21,
-        "stretch": [
-            {
-                "percent": 10,
-                "kn": 10
-            }
-        ],
-        "date_introduced": null,
-        "product_url": "http://slack-mountain.com/en/webbing-slackline/5-snake-tub.html"
+        "product_url": null,
+        "webbing_construction": "Flat",
+        "isa_certified": false
     },
     {
         "name": "Club S",
@@ -5971,7 +5662,11 @@
             }
         ],
         "date_introduced": null,
-        "product_url": null
+        "product_url": null,
+        "webbing_construction": "Tubular",
+        "isa_certified": false,
+        "priceMeter": 2.06,
+        "currency": "EUR"
     },
     {
         "name": "Dark Blue",
@@ -5987,7 +5682,11 @@
             }
         ],
         "date_introduced": null,
-        "product_url": null
+        "product_url": null,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 1.96,
+        "currency": "EUR"
     },
     {
         "name": "MILF",
@@ -6003,14 +5702,19 @@
             }
         ],
         "date_introduced": null,
-        "product_url": null
+        "product_url": null,
+        "thickness": 3,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 2.15,
+        "currency": "EUR"
     },
     {
         "name": "Neon Light",
         "brand": "Slack.fr",
         "materialType": "Polyester",
         "width": 25,
-        "weight": 62,
+        "weight": 57,
         "breakingStrength": 35,
         "stretch": [
             {
@@ -6019,7 +5723,10 @@
             }
         ],
         "date_introduced": null,
-        "product_url": null
+        "product_url": null,
+        "thickness": 2.4,
+        "webbing_construction": "Flat",
+        "isa_certified": false
     },
     {
         "name": "SuperFL Kill Bill",
@@ -6035,23 +5742,12 @@
             }
         ],
         "date_introduced": null,
-        "product_url": null
-    },
-    {
-        "name": "SuperFL Maverick V2",
-        "brand": "Slack.fr",
-        "materialType": "Polyester",
-        "width": 25,
-        "weight": 62,
-        "breakingStrength": 31,
-        "stretch": [
-            {
-                "percent": 4.5,
-                "kn": 10
-            }
-        ],
-        "date_introduced": null,
-        "product_url": null
+        "product_url": null,
+        "thickness": 5,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 2.7,
+        "currency": "EUR"
     },
     {
         "name": "Supertube Norway",
@@ -6067,7 +5763,12 @@
             }
         ],
         "date_introduced": null,
-        "product_url": null
+        "product_url": null,
+        "thickness": 2,
+        "webbing_construction": "Tubular",
+        "isa_certified": false,
+        "priceMeter": 2.24,
+        "currency": "EUR"
     },
     {
         "name": "Jumpline",
@@ -6083,7 +5784,10 @@
             }
         ],
         "date_introduced": null,
-        "product_url": null
+        "product_url": null,
+        "thickness": 2,
+        "webbing_construction": "Flat",
+        "isa_certified": false
     },
     {
         "name": "Jumpline Pro Series",
@@ -6099,7 +5803,12 @@
             }
         ],
         "date_introduced": null,
-        "product_url": null
+        "product_url": null,
+        "thickness": 2,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 2.75,
+        "currency": "EUR"
     },
     {
         "name": "Jumpline AntiPop",
@@ -6115,23 +5824,12 @@
             }
         ],
         "date_introduced": null,
-        "product_url": null
-    },
-    {
-        "name": "Passion red",
-        "brand": "Elephant",
-        "materialType": "Nylon",
-        "width": 25,
-        "weight": 69,
-        "breakingStrength": 33,
-        "stretch": [
-            {
-                "percent": 12.3,
-                "kn": 10
-            }
-        ],
-        "date_introduced": null,
-        "product_url": null
+        "product_url": null,
+        "thickness": 3,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 2.72,
+        "currency": "EUR"
     },
     {
         "name": "Flash'line",
@@ -6147,7 +5845,11 @@
             }
         ],
         "date_introduced": null,
-        "product_url": "http://elephant-slacklines.com"
+        "product_url": "http://elephant-slacklines.com",
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 2.35,
+        "currency": "EUR"
     },
     {
         "name": "EcoLine",
@@ -6163,7 +5865,11 @@
             }
         ],
         "date_introduced": null,
-        "product_url": "http://elephant-slacklines.com"
+        "product_url": "http://elephant-slacklines.com",
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 1.95,
+        "currency": "EUR"
     },
     {
         "name": "Wing 3.5",
@@ -6179,7 +5885,9 @@
             }
         ],
         "date_introduced": null,
-        "product_url": null
+        "product_url": null,
+        "webbing_construction": "Flat",
+        "isa_certified": false
     },
     {
         "name": "Skillshot HS",
@@ -6195,7 +5903,10 @@
             }
         ],
         "date_introduced": null,
-        "product_url": null
+        "product_url": null,
+        "thickness": 3.1,
+        "webbing_construction": "Flat",
+        "isa_certified": false
     },
     {
         "name": "Skillshot LS",
@@ -6211,7 +5922,10 @@
             }
         ],
         "date_introduced": null,
-        "product_url": null
+        "product_url": null,
+        "thickness": 2.5,
+        "webbing_construction": "Flat",
+        "isa_certified": false
     },
     {
         "name": "Flow Line",
@@ -6227,7 +5941,9 @@
             }
         ],
         "date_introduced": null,
-        "product_url": "http://www.gibbon-slacklines.com/en/products/longline-modules/flowline/index.html"
+        "product_url": "http://www.gibbon-slacklines.com/en/products/longline-modules/flowline/index.html",
+        "webbing_construction": "Flat",
+        "isa_certified": false
     },
     {
         "name": "Tube Line",
@@ -6238,7 +5954,9 @@
         "breakingStrength": 30,
         "stretch": null,
         "date_introduced": null,
-        "product_url": null
+        "product_url": null,
+        "webbing_construction": "Tubular",
+        "isa_certified": false
     },
     {
         "name": "Verve 35mm",
@@ -6254,55 +5972,9 @@
             }
         ],
         "date_introduced": null,
-        "product_url": null
-    },
-    {
-        "name": "Core 1",
-        "brand": "Landcruising",
-        "materialType": "Polyester",
-        "width": 25,
-        "weight": 76,
-        "breakingStrength": 40,
-        "stretch": [
-            {
-                "percent": 2.8,
-                "kn": 10
-            }
-        ],
-        "date_introduced": null,
-        "product_url": null
-    },
-    {
-        "name": "Core 2 HS",
-        "brand": "Landcruising",
-        "materialType": "Polyester",
-        "width": 25,
-        "weight": 71.5,
-        "breakingStrength": 44,
-        "stretch": [
-            {
-                "percent": 6,
-                "kn": 10
-            }
-        ],
-        "date_introduced": null,
-        "product_url": null
-    },
-    {
-        "name": "Core 2 LS",
-        "brand": "Landcruising",
-        "materialType": "Polyester",
-        "width": 25,
-        "weight": 69.9,
-        "breakingStrength": 44,
-        "stretch": [
-            {
-                "percent": 2,
-                "kn": 10
-            }
-        ],
-        "date_introduced": null,
-        "product_url": null
+        "product_url": null,
+        "webbing_construction": "Flat",
+        "isa_certified": false
     },
     {
         "name": "Matrix",
@@ -6318,7 +5990,12 @@
             }
         ],
         "date_introduced": null,
-        "product_url": null
+        "product_url": null,
+        "thickness": 4,
+        "webbing_construction": "Tubular",
+        "isa_certified": false,
+        "priceMeter": 3.95,
+        "currency": "EUR"
     },
     {
         "name": "Matrix Outer",
@@ -6334,23 +6011,9 @@
             }
         ],
         "date_introduced": null,
-        "product_url": null
-    },
-    {
-        "name": "Sonic 2.0",
-        "brand": "Aki Slacklines",
-        "materialType": "Nylon",
-        "width": 25,
-        "weight": 68,
-        "breakingStrength": 34,
-        "stretch": [
-            {
-                "percent": 15,
-                "kn": 10
-            }
-        ],
-        "date_introduced": null,
-        "product_url": "https://aki-slacklines.de/en/webbing/polyamide/137/aki-sonic-2-slackline-webbing?c=12&fbclid=IwAR1eTq7La_8P4pp3HW0hq4rE2LNuzA2ZAbm-Vyx4gXORVdZU1EmhrtBbLAo"
+        "product_url": null,
+        "webbing_construction": "Tubular",
+        "isa_certified": false
     },
     {
         "name": "Wave Tube",
@@ -6366,7 +6029,12 @@
             }
         ],
         "date_introduced": null,
-        "product_url": null
+        "product_url": null,
+        "thickness": 2.3,
+        "webbing_construction": "Tubular",
+        "isa_certified": false,
+        "priceMeter": 1.69,
+        "currency": "EUR"
     },
     {
         "name": "Wave Tape 19",
@@ -6382,7 +6050,12 @@
             }
         ],
         "date_introduced": null,
-        "product_url": null
+        "product_url": null,
+        "thickness": 2.4,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 1.35,
+        "currency": "EUR"
     },
     {
         "name": "Wave Tube 19",
@@ -6398,7 +6071,12 @@
             }
         ],
         "date_introduced": null,
-        "product_url": null
+        "product_url": null,
+        "thickness": 2.4,
+        "webbing_construction": "Tubular",
+        "isa_certified": false,
+        "priceMeter": 1.35,
+        "currency": "EUR"
     },
     {
         "name": "Sigma Impact LS",
@@ -6414,23 +6092,12 @@
             }
         ],
         "date_introduced": null,
-        "product_url": "http://www.slackliner.de/Slackline-Band/Flachband/Sigma-Impact-lowstretch.html"
-    },
-    {
-        "name": "Sigma X (HeliX)",
-        "brand": "Slackliner.de",
-        "materialType": "Nylon",
-        "width": 25,
-        "weight": 44,
-        "breakingStrength": 21,
-        "stretch": [
-            {
-                "percent": 15.5,
-                "kn": 8
-            }
-        ],
-        "date_introduced": null,
-        "product_url": "http://www.slackliner.de/Slackline-Band/Schlauchband/Sigma-X.html"
+        "product_url": "http://www.slackliner.de/Slackline-Band/Flachband/Sigma-Impact-lowstretch.html",
+        "thickness": 2.7,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 0.9,
+        "currency": "EUR"
     },
     {
         "name": "Strong II",
@@ -6446,55 +6113,11 @@
             }
         ],
         "date_introduced": null,
-        "product_url": "https://www.slack-shop.de/baender-schlingen/bander/strong/slacklineband-strong-ii.html"
-    },
-    {
-        "name": "FLY Line",
-        "brand": "Spider slacklines",
-        "materialType": "Polyester",
-        "width": 25,
-        "weight": 58,
-        "breakingStrength": 33,
-        "stretch": [
-            {
-                "percent": 4,
-                "kn": 10
-            }
-        ],
-        "date_introduced": null,
-        "product_url": "http://spider-slacklines.com/shop/en/longline-webbings/77-fly-line.html"
-    },
-    {
-        "name": "Tender Line",
-        "brand": "Spider slacklines",
-        "materialType": "Polyester",
-        "width": 25,
-        "weight": 48,
-        "breakingStrength": 23,
-        "stretch": [
-            {
-                "percent": 6,
-                "kn": 8
-            }
-        ],
-        "date_introduced": null,
-        "product_url": "https://spider-slacklines.com/shop/en/longline-webbings/76-tender-line.html"
-    },
-    {
-        "name": "Zao Line",
-        "brand": "Spider slacklines",
-        "materialType": "Polyester",
-        "width": 25,
-        "weight": 65,
-        "breakingStrength": 32,
-        "stretch": [
-            {
-                "percent": 9,
-                "kn": 12
-            }
-        ],
-        "date_introduced": null,
-        "product_url": "http://spider-slacklines.com/shop/en/longline-webbings/69-zao-line.html"
+        "product_url": "https://www.slack-shop.de/baender-schlingen/bander/strong/slacklineband-strong-ii.html",
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 1.99,
+        "currency": "EUR"
     },
     {
         "name": "Octopussy MKV",
@@ -6510,7 +6133,12 @@
             }
         ],
         "date_introduced": null,
-        "product_url": "https://slackhouseshop.pl/en/produkt/octopussy-en"
+        "product_url": "https://slackhouseshop.pl/en/produkt/octopussy-en",
+        "thickness": 2.85,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 3.66,
+        "currency": "PLN"
     },
     {
         "name": "Rubber Band MKIII BLU",
@@ -6526,7 +6154,12 @@
             }
         ],
         "date_introduced": null,
-        "product_url": "https://slackhouseshop.pl/produkt/rubber-band-blu"
+        "product_url": "https://slackhouseshop.pl/produkt/rubber-band-blu",
+        "thickness": 3.35,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 4.47,
+        "currency": "PLN"
     },
     {
         "name": "Rubber Band MKIII SOL",
@@ -6542,7 +6175,12 @@
             }
         ],
         "date_introduced": null,
-        "product_url": "https://slackhouseshop.pl/en/produkt/slackhouse-rubber-band-25mm-sol/"
+        "product_url": "https://slackhouseshop.pl/en/produkt/slackhouse-rubber-band-25mm-sol/",
+        "thickness": 3.35,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 4.47,
+        "currency": "PLN"
     },
     {
         "name": "Blue Mile",
@@ -6558,7 +6196,12 @@
             }
         ],
         "date_introduced": null,
-        "product_url": "http://slackline.pl/bluemile"
+        "product_url": "http://slackline.pl/bluemile",
+        "thickness": 2.6,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 4.5,
+        "currency": "PLN"
     },
     {
         "name": "Sin Más",
@@ -6574,7 +6217,11 @@
             }
         ],
         "date_introduced": null,
-        "product_url": "http://ambaradam.net/product/sin-mas/"
+        "product_url": "http://ambaradam.net/product/sin-mas/",
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 0.95,
+        "currency": "EUR"
     },
     {
         "name": "Black-White",
@@ -6590,23 +6237,11 @@
             }
         ],
         "date_introduced": null,
-        "product_url": null
-    },
-    {
-        "name": "Mantra MKIII",
-        "brand": "Balance Community: Slackline Outfitters",
-        "materialType": "Polyester",
-        "width": 25,
-        "weight": 83,
-        "breakingStrength": 42,
-        "stretch": [
-            {
-                "percent": 8.8,
-                "kn": 10
-            }
-        ],
-        "date_introduced": null,
-        "product_url": null
+        "product_url": null,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 2.3,
+        "currency": "EUR"
     },
     {
         "name": "Slack-Spec Tubelar",
@@ -6617,7 +6252,11 @@
         "breakingStrength": 20,
         "stretch": null,
         "date_introduced": null,
-        "product_url": "http://www.balancecommunity.com/1-slack-spec-tubular"
+        "product_url": "http://www.balancecommunity.com/1-slack-spec-tubular",
+        "webbing_construction": "Tubular",
+        "isa_certified": false,
+        "priceMeter": 1.38,
+        "currency": "USD"
     },
     {
         "name": "Slack-Spec 11/16\"",
@@ -6628,7 +6267,11 @@
         "breakingStrength": 13.3,
         "stretch": null,
         "date_introduced": null,
-        "product_url": "http://www.balancecommunity.com/11-16-slack-spec-tubular"
+        "product_url": "http://www.balancecommunity.com/11-16-slack-spec-tubular",
+        "webbing_construction": "Tubular",
+        "isa_certified": false,
+        "priceMeter": 1.18,
+        "currency": "USD"
     },
     {
         "name": "Slack-Spec Threaded Tubular",
@@ -6644,7 +6287,9 @@
             }
         ],
         "date_introduced": null,
-        "product_url": null
+        "product_url": null,
+        "webbing_construction": "Tubular",
+        "isa_certified": false
     },
     {
         "name": "Spider Silk 7/8\"",
@@ -6660,39 +6305,10 @@
             }
         ],
         "date_introduced": null,
-        "product_url": null
-    },
-    {
-        "name": "Spider Silk MKII",
-        "brand": "Balance Community: Slackline Outfitters",
-        "materialType": "Vectran",
-        "width": 25,
-        "weight": 48,
-        "breakingStrength": 67,
-        "stretch": [
-            {
-                "percent": 1.22,
-                "kn": 10
-            }
-        ],
-        "date_introduced": null,
-        "product_url": "http://www.balancecommunity.com/spider-silk-mkii"
-    },
-    {
-        "name": "Type 18 MKII",
-        "brand": "Balance Community: Slackline Outfitters",
-        "materialType": "Nylon",
-        "width": 25,
-        "weight": 62,
-        "breakingStrength": 35.6,
-        "stretch": [
-            {
-                "percent": 14.8,
-                "kn": 10
-            }
-        ],
-        "date_introduced": null,
-        "product_url": "http://www.balancecommunity.com/type-18-mkii"
+        "product_url": null,
+        "thickness": 2.8,
+        "webbing_construction": "Flat",
+        "isa_certified": false
     },
     {
         "name": "RAGEline",
@@ -6708,7 +6324,9 @@
             }
         ],
         "date_introduced": null,
-        "product_url": "http://www.balancecommunity.com/rageline"
+        "product_url": "http://www.balancecommunity.com/rageline",
+        "webbing_construction": "Tubular",
+        "isa_certified": false
     },
     {
         "name": "CoreTek",
@@ -6724,7 +6342,12 @@
             }
         ],
         "date_introduced": null,
-        "product_url": "https://slacklineindustries.com/collections/1-inch/products/coretek"
+        "product_url": "https://slacklineindustries.com/collections/1-inch/products/coretek",
+        "thickness": 2.7,
+        "webbing_construction": "Tubular",
+        "isa_certified": false,
+        "priceMeter": 2.3,
+        "currency": "USD"
     },
     {
         "name": "Sugoi",
@@ -6740,7 +6363,12 @@
             }
         ],
         "date_introduced": null,
-        "product_url": "https://slacklineindustries.com/collections/all-products/products/sugoi"
+        "product_url": "https://slacklineindustries.com/collections/all-products/products/sugoi",
+        "thickness": 2.5,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 2.3,
+        "currency": "USD"
     },
     {
         "name": "Great White",
@@ -6756,7 +6384,12 @@
             }
         ],
         "date_introduced": null,
-        "product_url": "http://www.slackgear.co.za/product/great-white/"
+        "product_url": "http://www.slackgear.co.za/product/great-white/",
+        "thickness": 2.6,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 14,
+        "currency": "ZAR"
     },
     {
         "name": "Tantalus",
@@ -6772,7 +6405,12 @@
             }
         ],
         "date_introduced": null,
-        "product_url": null
+        "product_url": null,
+        "thickness": 3.2,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 2.6,
+        "currency": "CAD"
     },
     {
         "name": "Sky Pilot (Green/Orange)",
@@ -6788,7 +6426,10 @@
             }
         ],
         "date_introduced": null,
-        "product_url": null
+        "product_url": null,
+        "thickness": 3,
+        "webbing_construction": "Flat",
+        "isa_certified": false
     },
     {
         "name": "HighTech",
@@ -6804,7 +6445,10 @@
             }
         ],
         "date_introduced": null,
-        "product_url": null
+        "product_url": null,
+        "thickness": 3,
+        "webbing_construction": "Flat",
+        "isa_certified": false
     },
     {
         "name": "Type 18 CG4",
@@ -6820,7 +6464,12 @@
             }
         ],
         "date_introduced": null,
-        "product_url": "http://www.balancingearthslacklines.com/slackline_webbing_flat_nylon_type_18_cg4_slackline_p/cg4.htm"
+        "product_url": "http://www.balancingearthslacklines.com/slackline_webbing_flat_nylon_type_18_cg4_slackline_p/cg4.htm",
+        "thickness": 3,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 2.3,
+        "currency": "USD"
     },
     {
         "name": "Rasta Tubelar",
@@ -6831,7 +6480,12 @@
         "breakingStrength": 20,
         "stretch": null,
         "date_introduced": null,
-        "product_url": "http://www.balancingearthslacklines.com/webbing_tubular_rasta_slackline_balancing_earth_p/rtw.htm"
+        "product_url": "http://www.balancingearthslacklines.com/webbing_tubular_rasta_slackline_balancing_earth_p/rtw.htm",
+        "thickness": 2.2,
+        "webbing_construction": "Tubular",
+        "isa_certified": false,
+        "priceMeter": 1.38,
+        "currency": "USD"
     },
     {
         "name": "Chi",
@@ -6847,7 +6501,12 @@
             }
         ],
         "date_introduced": 1454371200000,
-        "product_url": "https://www.middlewayslacklines.com"
+        "product_url": "https://www.middlewayslacklines.com",
+        "thickness": 2.6,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 6,
+        "currency": "ILS"
     },
     {
         "name": "Zen",
@@ -6863,7 +6522,12 @@
             }
         ],
         "date_introduced": 1454371200000,
-        "product_url": "http://www.middlewayslacklines.com/?gclid=CNuN-J2FrssCFS8z0wodUssKNQ#!product-page/q2heq/175dcc60-c3b2-604d-301a-41aa51e3fc68"
+        "product_url": "http://www.middlewayslacklines.com/?gclid=CNuN-J2FrssCFS8z0wodUssKNQ#!product-page/q2heq/175dcc60-c3b2-604d-301a-41aa51e3fc68",
+        "thickness": 2.9,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 9,
+        "currency": "ILS"
     },
     {
         "name": "Flat",
@@ -6879,7 +6543,12 @@
             }
         ],
         "date_introduced": null,
-        "product_url": "https://www.slacklineshop.co.nz/product/25mm-flat-slackline-webbing/"
+        "product_url": "https://www.slacklineshop.co.nz/product/25mm-flat-slackline-webbing/",
+        "thickness": 1.8,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 1.98,
+        "currency": "NZD"
     },
     {
         "name": "Sky Pilot (Black/White)",
@@ -6895,7 +6564,11 @@
             }
         ],
         "date_introduced": null,
-        "product_url": "https://www.slacklifebc.com/product/skypilot-nylon"
+        "product_url": "https://www.slacklifebc.com/product/skypilot-nylon",
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 4.2,
+        "currency": "CAD"
     },
     {
         "name": "Lion Line",
@@ -6906,7 +6579,11 @@
         "breakingStrength": 35.6,
         "stretch": null,
         "date_introduced": null,
-        "product_url": "https://www.slacklifebc.com/product/lions-line-hightech-webbing/"
+        "product_url": "https://www.slacklifebc.com/product/lions-line-hightech-webbing/",
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 8.99,
+        "currency": "CAD"
     },
     {
         "name": "Tube #1",
@@ -6917,7 +6594,11 @@
         "breakingStrength": 18,
         "stretch": null,
         "date_introduced": null,
-        "product_url": "http://www.slacklineshop.co.nz/product/25-mm-tubular-nylon-slackline-webbing-assorted-colors-order-by-the-metre/"
+        "product_url": "http://www.slacklineshop.co.nz/product/25-mm-tubular-nylon-slackline-webbing-assorted-colors-order-by-the-metre/",
+        "webbing_construction": "Tubular",
+        "isa_certified": false,
+        "priceMeter": 2.7,
+        "currency": "NZD"
     },
     {
         "name": "Mirage",
@@ -6933,7 +6614,12 @@
             }
         ],
         "date_introduced": null,
-        "product_url": null
+        "product_url": null,
+        "thickness": 3.2,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 2.8,
+        "currency": "CAD"
     },
     {
         "name": "Alfa",
@@ -6949,7 +6635,12 @@
             }
         ],
         "date_introduced": null,
-        "product_url": "http://www.slacklining.ca/shop/alfa/"
+        "product_url": "http://www.slacklining.ca/shop/alfa/",
+        "thickness": 3.1,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 2.3,
+        "currency": "CAD"
     },
     {
         "name": "Mamba",
@@ -6965,7 +6656,12 @@
             }
         ],
         "date_introduced": null,
-        "product_url": null
+        "product_url": null,
+        "thickness": 3.2,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 1.59,
+        "currency": "EUR"
     },
     {
         "name": "Flamme III",
@@ -6981,7 +6677,11 @@
             }
         ],
         "date_introduced": null,
-        "product_url": null
+        "product_url": null,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 1,
+        "currency": "EUR"
     },
     {
         "name": "Abysses",
@@ -6997,7 +6697,11 @@
             }
         ],
         "date_introduced": null,
-        "product_url": null
+        "product_url": null,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 2.3,
+        "currency": "EUR"
     },
     {
         "name": "Verve 25mm",
@@ -7013,7 +6717,12 @@
             }
         ],
         "date_introduced": null,
-        "product_url": "https://aki-slacklines.de/en/webbing/polyester/11/landcruising-verve-25-mm-slackline-30m?c=6"
+        "product_url": "https://aki-slacklines.de/en/webbing/polyester/11/landcruising-verve-25-mm-slackline-30m?c=6",
+        "thickness": 2.5,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 1.33,
+        "currency": "EUR"
     },
     {
         "name": "Wave Tube  32",
@@ -7029,7 +6738,12 @@
             }
         ],
         "date_introduced": null,
-        "product_url": null
+        "product_url": null,
+        "thickness": 2.3,
+        "webbing_construction": "Tubular",
+        "isa_certified": false,
+        "priceMeter": 1.95,
+        "currency": "EUR"
     },
     {
         "name": "#FFF",
@@ -7045,23 +6759,11 @@
             }
         ],
         "date_introduced": null,
-        "product_url": null
-    },
-    {
-        "name": "SlackPro 42kN",
-        "brand": "Slack Pro!",
-        "materialType": "Polyester",
-        "width": 25,
-        "weight": 72,
-        "breakingStrength": 42,
-        "stretch": [
-            {
-                "percent": 3.5,
-                "kn": 10
-            }
-        ],
-        "date_introduced": null,
-        "product_url": "http://www.slackpro.de/en/products/2542slackline.shtml"
+        "product_url": null,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 0.89,
+        "currency": "EUR"
     },
     {
         "name": "Neon Light",
@@ -7077,7 +6779,10 @@
             }
         ],
         "date_introduced": null,
-        "product_url": null
+        "product_url": null,
+        "thickness": 2.4,
+        "webbing_construction": "Flat",
+        "isa_certified": false
     },
     {
         "name": "Reggae",
@@ -7093,7 +6798,12 @@
             }
         ],
         "date_introduced": null,
-        "product_url": "https://laboutique.slack.fr/en/tubular-webbing/143-reggae-tubular.html"
+        "product_url": "https://laboutique.slack.fr/en/tubular-webbing/143-reggae-tubular.html",
+        "thickness": 2,
+        "webbing_construction": "Tubular",
+        "isa_certified": false,
+        "priceMeter": 2.24,
+        "currency": "EUR"
     },
     {
         "name": "RVD",
@@ -7109,7 +6819,12 @@
             }
         ],
         "date_introduced": null,
-        "product_url": "https://laboutique.slack.fr/en/tubular-webbing/146-rvd-tubular.html"
+        "product_url": "https://laboutique.slack.fr/en/tubular-webbing/146-rvd-tubular.html",
+        "thickness": 2,
+        "webbing_construction": "Tubular",
+        "isa_certified": false,
+        "priceMeter": 2.24,
+        "currency": "EUR"
     },
     {
         "name": "Half-Marathon",
@@ -7125,7 +6840,11 @@
             }
         ],
         "date_introduced": null,
-        "product_url": "https://www.slacktivity.com/halfmarathon-50m-500m"
+        "product_url": "https://www.slacktivity.com/halfmarathon-50m-500m",
+        "webbing_construction": "Core/Sheath",
+        "isa_certified": false,
+        "priceMeter": 1.8,
+        "currency": "EUR"
     },
     {
         "name": "Low stretch Webbing",
@@ -7141,7 +6860,11 @@
             }
         ],
         "date_introduced": null,
-        "product_url": null
+        "product_url": null,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 2.79,
+        "currency": "EUR"
     },
     {
         "name": "SuperMOTM",
@@ -7157,7 +6880,11 @@
             }
         ],
         "date_introduced": null,
-        "product_url": null
+        "product_url": null,
+        "webbing_construction": "Tubular",
+        "isa_certified": false,
+        "priceMeter": 3.29,
+        "currency": "EUR"
     },
     {
         "name": "Plasma",
@@ -7173,23 +6900,11 @@
             }
         ],
         "date_introduced": null,
-        "product_url": "http://slack-inov.com/gb/webbing/92-flamme3-webbing"
-    },
-    {
-        "name": "Mammut",
-        "brand": "Mammut",
-        "materialType": "Polyester",
-        "width": 25.8,
-        "weight": 76.8,
-        "breakingStrength": 25,
-        "stretch": [
-            {
-                "percent": 9.5,
-                "kn": 10
-            }
-        ],
-        "date_introduced": null,
-        "product_url": null
+        "product_url": "http://slack-inov.com/gb/webbing/92-flamme3-webbing",
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 1.2,
+        "currency": "EUR"
     },
     {
         "name": "Firefly (phosphorescent)",
@@ -7205,7 +6920,12 @@
             }
         ],
         "date_introduced": 1510700400000,
-        "product_url": "https://slack-mountain.com/fr/sangle-hybride/185-firefly.html"
+        "product_url": "https://slack-mountain.com/fr/sangle-hybride/185-firefly.html",
+        "thickness": 2,
+        "webbing_construction": "Core/Sheath",
+        "isa_certified": false,
+        "priceMeter": 1.79,
+        "currency": "EUR"
     },
     {
         "name": "French Line",
@@ -7221,7 +6941,12 @@
             }
         ],
         "date_introduced": 1512946800000,
-        "product_url": "https://slack-mountain.com/fr/sangles-slackline/189-french-line.html"
+        "product_url": "https://slack-mountain.com/fr/sangles-slackline/189-french-line.html",
+        "thickness": 2,
+        "webbing_construction": "Core/Sheath",
+        "isa_certified": false,
+        "priceMeter": 1.34,
+        "currency": "EUR"
     },
     {
         "name": "Pop-Art",
@@ -7232,7 +6957,12 @@
         "breakingStrength": 30,
         "stretch": null,
         "date_introduced": 1513465200000,
-        "product_url": "https://slack-mountain.com/fr/jumplines/191-pop-art.html"
+        "product_url": "https://slack-mountain.com/fr/jumplines/191-pop-art.html",
+        "thickness": 1.8,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 2.4,
+        "currency": "EUR"
     },
     {
         "name": "Project 44",
@@ -7248,7 +6978,12 @@
             }
         ],
         "date_introduced": 1519340400000,
-        "product_url": "https://slack-mountain.com/fr/sangles-slackline/194-project-44.html"
+        "product_url": "https://slack-mountain.com/fr/sangles-slackline/194-project-44.html",
+        "thickness": 1.8,
+        "webbing_construction": "Tubular",
+        "isa_certified": false,
+        "priceMeter": 1.65,
+        "currency": "EUR"
     },
     {
         "name": "Aloha (Aka Aki Tidal)",
@@ -7264,7 +6999,12 @@
             }
         ],
         "date_introduced": 1511128800000,
-        "product_url": "https://aki-slacklines.de/en/webbing/polyester/99/aki-tidal-webbing?c=6"
+        "product_url": "https://aki-slacklines.de/en/webbing/polyester/99/aki-tidal-webbing?c=6",
+        "thickness": 2,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 1.19,
+        "currency": "EUR"
     },
     {
         "name": "Panda",
@@ -7280,7 +7020,12 @@
             }
         ],
         "date_introduced": 1493758800000,
-        "product_url": "https://slacklineindustries.com/collections/1-inch/products/panda"
+        "product_url": "https://slacklineindustries.com/collections/1-inch/products/panda",
+        "thickness": 2.1,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 4.59,
+        "currency": "USD"
     },
     {
         "name": "Joker",
@@ -7296,7 +7041,11 @@
             }
         ],
         "date_introduced": 1533934800000,
-        "product_url": "http://slack-inov.com/gb/webbing/110-joker-sold-by-meter"
+        "product_url": "http://slack-inov.com/gb/webbing/110-joker-sold-by-meter",
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 1.99,
+        "currency": "EUR"
     },
     {
         "name": "Y.a.w",
@@ -7312,7 +7061,11 @@
             }
         ],
         "date_introduced": 1541368800000,
-        "product_url": "https://www.slackliner.de/Webbing/Flat-Webbing/yaw.html?language=en"
+        "product_url": "https://www.slackliner.de/Webbing/Flat-Webbing/yaw.html?language=en",
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 0.59,
+        "currency": "EUR"
     },
     {
         "name": "Coelum",
@@ -7328,7 +7081,12 @@
             }
         ],
         "date_introduced": 1539118800000,
-        "product_url": "https://petramslacklines.site123.me/shop-1/coelum-webbing-1"
+        "product_url": "https://petramslacklines.site123.me/shop-1/coelum-webbing-1",
+        "thickness": 2.7,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 1.65,
+        "currency": "EUR"
     },
     {
         "name": "Skyway",
@@ -7344,7 +7102,12 @@
             }
         ],
         "date_introduced": 1542232800000,
-        "product_url": "https://slack-mountain.com/en/webbing-slackline/213-skyway.html"
+        "product_url": "https://slack-mountain.com/en/webbing-slackline/213-skyway.html",
+        "thickness": 2.3,
+        "webbing_construction": "Core/Sheath",
+        "isa_certified": false,
+        "priceMeter": 1.53,
+        "currency": "EUR"
     },
     {
         "name": "Totally Tubular",
@@ -7355,7 +7118,11 @@
         "breakingStrength": 17.7,
         "stretch": null,
         "date_introduced": null,
-        "product_url": "https://www.slacklifebc.com/product/totally-tubular/"
+        "product_url": "https://www.slacklifebc.com/product/totally-tubular/",
+        "webbing_construction": "Tubular",
+        "isa_certified": false,
+        "priceMeter": 1.55,
+        "currency": "CAD"
     },
     {
         "name": "FIREFOX",
@@ -7371,7 +7138,12 @@
             }
         ],
         "date_introduced": 1543618800000,
-        "product_url": "https://slack-mountain.com/fr/sangles-slackline/214-firefox.html"
+        "product_url": "https://slack-mountain.com/fr/sangles-slackline/214-firefox.html",
+        "thickness": 2,
+        "webbing_construction": "Tubular",
+        "isa_certified": false,
+        "priceMeter": 1.5,
+        "currency": "EUR"
     },
     {
         "name": "Spice",
@@ -7387,7 +7159,12 @@
             }
         ],
         "date_introduced": 1541026800000,
-        "product_url": null
+        "product_url": null,
+        "thickness": 2.5,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 1.1,
+        "currency": "EUR"
     },
     {
         "name": "Orange",
@@ -7403,7 +7180,11 @@
             }
         ],
         "date_introduced": null,
-        "product_url": "https://souzslackline.com/product/violet"
+        "product_url": "https://souzslackline.com/product/violet",
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 47.53,
+        "currency": "RUB"
     },
     {
         "name": "S.O.S - Sunset Over Seas",
@@ -7419,7 +7200,12 @@
             }
         ],
         "date_introduced": 1554152400000,
-        "product_url": "https://slack-mountain.com/en/hybrid-webbing/221-cloud.html#/242-swen_loop-with/65-longueur-55_m"
+        "product_url": "https://slack-mountain.com/en/hybrid-webbing/221-cloud.html#/242-swen_loop-with/65-longueur-55_m",
+        "thickness": 2.14,
+        "webbing_construction": "Core/Sheath",
+        "isa_certified": false,
+        "priceMeter": 3.2,
+        "currency": "EUR"
     },
     {
         "name": "Blue",
@@ -7435,7 +7221,12 @@
             }
         ],
         "date_introduced": 1567976400000,
-        "product_url": "https://www.balancecommunity.com/products/blue"
+        "product_url": "https://www.balancecommunity.com/products/blue",
+        "thickness": 2.46,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 2,
+        "currency": "USD"
     },
     {
         "name": "Green",
@@ -7451,7 +7242,12 @@
             }
         ],
         "date_introduced": 1567976400000,
-        "product_url": "https://www.balancecommunity.com/products/green"
+        "product_url": "https://www.balancecommunity.com/products/green",
+        "thickness": 2.46,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 2.3,
+        "currency": "USD"
     },
     {
         "name": "Polar",
@@ -7467,7 +7263,12 @@
             }
         ],
         "date_introduced": 1582668000000,
-        "product_url": "https://aki-slacklines.de/en/detail/index/sArticle/162"
+        "product_url": "https://aki-slacklines.de/en/detail/index/sArticle/162",
+        "thickness": 2.4,
+        "webbing_construction": "Core/Sheath",
+        "isa_certified": false,
+        "priceMeter": 1.89,
+        "currency": "EUR"
     },
     {
         "name": "Jybn",
@@ -7483,7 +7284,12 @@
             }
         ],
         "date_introduced": 1583272800000,
-        "product_url": "https://www.balancecommunity.com/products/jybn"
+        "product_url": "https://www.balancecommunity.com/products/jybn",
+        "thickness": 2.5,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 1.8,
+        "currency": "USD"
     },
     {
         "name": "SuperTape 19mm",
@@ -7494,7 +7300,9 @@
         "breakingStrength": 15,
         "stretch": null,
         "date_introduced": null,
-        "product_url": "https://www.edelrid.de/en/sports/flat-webbings1/flachband-supertape-19mm.html"
+        "product_url": "https://www.edelrid.de/en/sports/flat-webbings1/flachband-supertape-19mm.html",
+        "webbing_construction": "Flat",
+        "isa_certified": false
     },
     {
         "name": "X-Tuble 16mm",
@@ -7505,7 +7313,9 @@
         "breakingStrength": 15,
         "stretch": null,
         "date_introduced": null,
-        "product_url": "https://www.edelrid.de/en/sports/tubular-webbings/x-tube-16mm.html"
+        "product_url": "https://www.edelrid.de/en/sports/tubular-webbings/x-tube-16mm.html",
+        "webbing_construction": "Tubular",
+        "isa_certified": false
     },
     {
         "name": "X-Tube 25mm",
@@ -7521,7 +7331,9 @@
             }
         ],
         "date_introduced": null,
-        "product_url": "https://www.edelrid.de/en/sports/tubular-webbings/x-tube-25mm.html"
+        "product_url": "https://www.edelrid.de/en/sports/tubular-webbings/x-tube-25mm.html",
+        "webbing_construction": "Tubular",
+        "isa_certified": false
     },
     {
         "name": "Abysses Bounce",
@@ -7537,7 +7349,11 @@
             }
         ],
         "date_introduced": null,
-        "product_url": "https://slack-inov.com/gb/longline/106-abysses-bounce-sold-by-meter"
+        "product_url": "https://slack-inov.com/gb/longline/106-abysses-bounce-sold-by-meter",
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 2.6,
+        "currency": "EUR"
     },
     {
         "name": "Photon",
@@ -7553,7 +7369,11 @@
             }
         ],
         "date_introduced": null,
-        "product_url": "https://slack-mountain.com/en/webbing-slackline/233-photon.html"
+        "product_url": "https://slack-mountain.com/en/webbing-slackline/233-photon.html",
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 0.96,
+        "currency": "EUR"
     },
     {
         "name": "Rubber Band PUR",
@@ -7569,7 +7389,12 @@
             }
         ],
         "date_introduced": null,
-        "product_url": "https://slackhouseshop.pl/produkt/rubber-band-pur/"
+        "product_url": "https://slackhouseshop.pl/produkt/rubber-band-pur/",
+        "thickness": 3.35,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 4.47,
+        "currency": "PLN"
     },
     {
         "name": "Levitation",
@@ -7585,7 +7410,12 @@
             }
         ],
         "date_introduced": null,
-        "product_url": "https://slackhouseshop.pl/en/produkt/levitation/"
+        "product_url": "https://slackhouseshop.pl/en/produkt/levitation/",
+        "thickness": 2,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 2.93,
+        "currency": "PLN"
     },
     {
         "name": "MOTM light",
@@ -7596,7 +7426,11 @@
         "breakingStrength": null,
         "stretch": null,
         "date_introduced": null,
-        "product_url": "https://raed-slacklines.com/motm-light"
+        "product_url": "https://raed-slacklines.com/motm-light",
+        "webbing_construction": "Tubular",
+        "isa_certified": false,
+        "priceMeter": 1.49,
+        "currency": "EUR"
     },
     {
         "name": "Ocean",
@@ -7612,7 +7446,12 @@
             }
         ],
         "date_introduced": 1590008400000,
-        "product_url": "https://www.slackshop.cz/en/webbing/176-eqb-ocean.html"
+        "product_url": "https://www.slackshop.cz/en/webbing/176-eqb-ocean.html",
+        "thickness": 2.8,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 1.74,
+        "currency": "EUR"
     },
     {
         "name": "Skye2",
@@ -7628,7 +7467,12 @@
             }
         ],
         "date_introduced": 1590008400000,
-        "product_url": "https://www.slackshop.cz/en/webbing/175-eqb-skye2.html"
+        "product_url": "https://www.slackshop.cz/en/webbing/175-eqb-skye2.html",
+        "thickness": 2.4,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 1.84,
+        "currency": "EUR"
     },
     {
         "name": "LSDTube",
@@ -7644,7 +7488,11 @@
             }
         ],
         "date_introduced": 1597006800000,
-        "product_url": "https://www.slacktivity.com/lsdtube"
+        "product_url": "https://www.slacktivity.com/lsdtube",
+        "webbing_construction": "Tubular",
+        "isa_certified": false,
+        "priceMeter": 2.65,
+        "currency": "EUR"
     },
     {
         "name": "Spider Silk MK3",
@@ -7660,7 +7508,12 @@
             }
         ],
         "date_introduced": 1592341200000,
-        "product_url": "https://www.balancecommunity.com/products/spider-silk-mk3"
+        "product_url": "https://www.balancecommunity.com/products/spider-silk-mk3",
+        "thickness": 3,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 4.17,
+        "currency": "USD"
     },
     {
         "name": "Dyneemite",
@@ -7676,7 +7529,11 @@
             }
         ],
         "date_introduced": 1598734800000,
-        "product_url": "https://raed-slacklines.com/dyneemite-ultralight-highline-project-webbing"
+        "product_url": "https://raed-slacklines.com/dyneemite-ultralight-highline-project-webbing",
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 2.99,
+        "currency": "EUR"
     },
     {
         "name": "Aurora",
@@ -7692,7 +7549,11 @@
             }
         ],
         "date_introduced": 1602190800000,
-        "product_url": "https://raed-slacklines.com/aurora-polyester-highline-webbing"
+        "product_url": "https://raed-slacklines.com/aurora-polyester-highline-webbing",
+        "webbing_construction": "Core/Sheath",
+        "isa_certified": false,
+        "priceMeter": 1.99,
+        "currency": "EUR"
     },
     {
         "name": "ReBL",
@@ -7703,7 +7564,12 @@
         "breakingStrength": 36,
         "stretch": null,
         "date_introduced": 1603490400000,
-        "product_url": "https://www.slackliner.de/en/Sigma-ReBL.html"
+        "product_url": "https://www.slackliner.de/en/Sigma-ReBL.html",
+        "thickness": 2.6,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 1.05,
+        "currency": "EUR"
     },
     {
         "name": "Zen 2",
@@ -7719,7 +7585,11 @@
             }
         ],
         "date_introduced": 1604181600000,
-        "product_url": "https://middlewayslacklines.com/product/zen25mm/"
+        "product_url": "https://middlewayslacklines.com/product/zen25mm/",
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 6.9,
+        "currency": "ILS"
     },
     {
         "name": "Lift 2be",
@@ -7735,7 +7605,12 @@
             }
         ],
         "date_introduced": 1596834000000,
-        "product_url": "https://www.balancecommunity.com/products/lift-2be"
+        "product_url": "https://www.balancecommunity.com/products/lift-2be",
+        "thickness": 3.2,
+        "webbing_construction": "Tubular",
+        "isa_certified": false,
+        "priceMeter": 2.25,
+        "currency": "USD"
     },
     {
         "name": "Candy",
@@ -7751,7 +7626,12 @@
             }
         ],
         "date_introduced": 1604354400000,
-        "product_url": "https://www.slackshop.cz/en/polyester/195-eqb-candy.html"
+        "product_url": "https://www.slackshop.cz/en/polyester/195-eqb-candy.html",
+        "thickness": 2.6,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 1.61,
+        "currency": "EUR"
     },
     {
         "name": "Eclipse",
@@ -7767,7 +7647,12 @@
             }
         ],
         "date_introduced": 1617051600000,
-        "product_url": "https://raed-slacklines.com/eclipse-lightweight-polyester-webbing"
+        "product_url": "https://raed-slacklines.com/eclipse-lightweight-polyester-webbing",
+        "thickness": 1.5,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 0.69,
+        "currency": "EUR"
     },
     {
         "name": "Jelly",
@@ -7783,7 +7668,12 @@
             }
         ],
         "date_introduced": 1616450400000,
-        "product_url": "https://www.balancecommunity.com/products/jelly-webbing"
+        "product_url": "https://www.balancecommunity.com/products/jelly-webbing",
+        "thickness": 2.3,
+        "webbing_construction": "Tubular",
+        "isa_certified": false,
+        "priceMeter": 2,
+        "currency": "USD"
     },
     {
         "name": "Blue 20",
@@ -7799,7 +7689,12 @@
             }
         ],
         "date_introduced": 1614290400000,
-        "product_url": "https://www.balancecommunity.com/collections/20mm-webbing/products/blue-20"
+        "product_url": "https://www.balancecommunity.com/collections/20mm-webbing/products/blue-20",
+        "thickness": 3,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 2,
+        "currency": "USD"
     },
     {
         "name": "Green 20",
@@ -7815,7 +7710,12 @@
             }
         ],
         "date_introduced": 1614290400000,
-        "product_url": "https://www.balancecommunity.com/collections/20mm-webbing/products/green-20?variant"
+        "product_url": "https://www.balancecommunity.com/collections/20mm-webbing/products/green-20?variant",
+        "thickness": 3.38,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 2.45,
+        "currency": "USD"
     },
     {
         "name": "Green Magic",
@@ -7831,7 +7731,12 @@
             }
         ],
         "date_introduced": null,
-        "product_url": "https://www.acrobatslackline.com/slackline1inch-1"
+        "product_url": "https://www.acrobatslackline.com/slackline1inch-1",
+        "thickness": 2.2,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 6,
+        "currency": "ILS"
     },
     {
         "name": "Purple Gold",
@@ -7847,7 +7752,12 @@
             }
         ],
         "date_introduced": 1605132000000,
-        "product_url": "https://aki-slacklines.de/en/detail/index/sArticle/188/sCategory/6"
+        "product_url": "https://aki-slacklines.de/en/detail/index/sArticle/188/sCategory/6",
+        "thickness": 3.4,
+        "webbing_construction": "Tubular",
+        "isa_certified": false,
+        "priceMeter": 2.3,
+        "currency": "EUR"
     },
     {
         "name": "Nomad",
@@ -7863,7 +7773,12 @@
             }
         ],
         "date_introduced": 1605391200000,
-        "product_url": "https://aki-slacklines.de/en/webbing/polyester/187/aki-nomad-webbing"
+        "product_url": "https://aki-slacklines.de/en/webbing/polyester/187/aki-nomad-webbing",
+        "thickness": 1.5,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 1,
+        "currency": "EUR"
     },
     {
         "name": "Sonic Light",
@@ -7879,7 +7794,12 @@
             }
         ],
         "date_introduced": 1600030800000,
-        "product_url": "https://aki-slacklines.de/en/webbing/polyamide/176/aki-sonic-light-webbing"
+        "product_url": "https://aki-slacklines.de/en/webbing/polyamide/176/aki-sonic-light-webbing",
+        "thickness": 2.8,
+        "webbing_construction": "Core/Sheath",
+        "isa_certified": false,
+        "priceMeter": 2.3,
+        "currency": "EUR"
     },
     {
         "name": "Sky Diamond",
@@ -7895,7 +7815,12 @@
             }
         ],
         "date_introduced": null,
-        "product_url": "https://spider-slacklines.com/shop/en/highline-webbing/426-2764-sky-diamond-longline-presale.html#/306-select_model-price_by_meter"
+        "product_url": "https://spider-slacklines.com/shop/en/highline-webbing/426-2764-sky-diamond-longline-presale.html#/306-select_model-price_by_meter",
+        "thickness": 3.5,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 4.97,
+        "currency": "EUR"
     },
     {
         "name": "Rodeo",
@@ -7911,7 +7836,12 @@
             }
         ],
         "date_introduced": null,
-        "product_url": "https://spider-slacklines.com/shop/en/products/344-3723-rodeo-line.html"
+        "product_url": "https://spider-slacklines.com/shop/en/products/344-3723-rodeo-line.html",
+        "thickness": 3.5,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 1.62,
+        "currency": "EUR"
     },
     {
         "name": "Heavy",
@@ -7927,6 +7857,11 @@
             }
         ],
         "date_introduced": 1623358800000,
-        "product_url": "https://www.balancecommunity.com/products/heavy"
+        "product_url": "https://www.balancecommunity.com/products/heavy",
+        "thickness": 5,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 3.5,
+        "currency": "USD"
     }
 ]

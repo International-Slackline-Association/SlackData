@@ -21,6 +21,12 @@ class Classification(str, Enum):
     C = "C"
     OTHER = "Other"
 
+class WebbingConstruction(str, Enum):
+    FLAT = "Flat"
+    TUBULAR = "Tubular"
+    CORE_SHEATH = "Core/Sheath"
+    OTHER = "Other"
+
 class BaseWebbing(SQLModel):
     """
     Base class for webbing. All fields optional so adding a new field is one line.
@@ -28,7 +34,9 @@ class BaseWebbing(SQLModel):
     """
     name: str | None = Field(default=None, index=True)
     material: FiberMaterial | None = None
+    webbing_construction: WebbingConstruction | None = None # Flat / Tubular / Core-Sheath
     width: int | None = None              # mm
+    thickness: float | None = None        # mm
     release_date: int | None = None       # Unix timestamp
     product_url: str | None = None
     weight: float | None = None           # g/m

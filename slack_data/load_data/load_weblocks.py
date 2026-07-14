@@ -211,7 +211,7 @@ def parse_currency_from_weblock(weblock_data: dict) -> Currency | None:
         try:
             currency = get_currency(tooltip)
         except ValueError:
-            pass
+            currency = None
         if currency: return currency
         
         # Check main text
@@ -219,7 +219,7 @@ def parse_currency_from_weblock(weblock_data: dict) -> Currency | None:
         try:
             currency = get_currency(text)
         except ValueError:
-            pass
+            currency = None
         if currency: return currency
     
     # Try specifications as fallback
@@ -228,7 +228,7 @@ def parse_currency_from_weblock(weblock_data: dict) -> Currency | None:
     try:
         currency = get_currency(price_text)
     except ValueError:
-        pass
+        currency = None
     if currency: return currency
     
     return Currency.EUR
