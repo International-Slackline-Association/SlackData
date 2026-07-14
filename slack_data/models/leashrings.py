@@ -39,6 +39,7 @@ class LeashRing(BaseLeashRing, table=True):
 
 class LeashRingPublic(BaseLeashRing):
     """Model for public leash ring data."""
+    id: int
     name: str
     material: MetalMaterial
     brand_name: str

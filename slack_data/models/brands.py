@@ -116,7 +116,7 @@ class BrandPublic(BaseBrands):
     """
     Model for public brand data.
     """
-
+    id: int
     webbings: list[str]
 
 

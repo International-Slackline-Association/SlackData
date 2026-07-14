@@ -47,6 +47,7 @@ class StarterKit(BaseStarterKit, table=True):
 
 class StarterKitPublic(BaseStarterKit):
     """Model for public starter kit data."""
+    id: int
     name: str
     webbing_length: int
     webbing_width: int

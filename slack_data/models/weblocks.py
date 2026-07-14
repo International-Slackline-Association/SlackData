@@ -62,6 +62,7 @@ class Weblock(BaseWeblock, table=True):
 
 class WeblockPublic(BaseWeblock):
     """Model for public weblock data."""
+    id: int
     name: str
     material: MetalMaterial
     width_min: int
