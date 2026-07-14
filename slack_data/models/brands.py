@@ -2,6 +2,7 @@ from pydantic import computed_field
 from sqlmodel import select, Field, Relationship, SQLModel
 
 from slack_data.database import SessionDep
+from slack_data.utilities.brand_aliases import canonical_brand
 from slack_data.utilities.countries import Country
 
 class BaseBrands(SQLModel):
@@ -87,7 +88,7 @@ class Brand(BaseBrands, table=True):
         return [tricklinekit.name for tricklinekit in self._tricklinekits]
     
 def get_brand(session: SessionDep, brand_cache: dict[str, int] | None, item: dict) -> tuple[int,dict]:
-    brand_name = str(item.get("brand"))
+    brand_name = canonical_brand(str(item.get("brand")))
     if brand_name not in brand_cache:
         # get brand_id from the database or create it if it doesn't exist
         statement = select(Brand.id).where(Brand.name == brand_name)
