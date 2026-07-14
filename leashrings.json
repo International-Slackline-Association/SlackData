@@ -411,10 +411,10 @@
         "outer_diameter": 80.8,
         "weight": 50,
         "breaking_strength": 24,
-        "isa_certified": false,
+        "isa_certified": true,
         "price": 12.45,
         "currency": "USD",
-        "notes": null,
+        "notes": "Formerly called 'Loop'",
         "manufacturer": "Balance Community: Slackline Outfitters",
         "date_introduced": 1597093200000,
         "product_url": "https://www.balancecommunity.com/products/bc-aluminum-leash-ring"

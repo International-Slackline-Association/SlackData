@@ -646,7 +646,7 @@
         "currency": "EUR"
     },
     {
-        "name": "Aero",
+        "name": "Aero 1",
         "brand": "BalanceCommunity",
         "stretch": [
             {
@@ -738,7 +738,7 @@
         "weight": 59,
         "breakingStrength": 33.4,
         "date_introduced": null,
-        "product_url": null,
+        "product_url": "https://www.balancecommunity.com/products/aero-1",
         "width": 25,
         "thickness": 2.5,
         "webbing_construction": "Flat",
@@ -898,8 +898,7 @@
         "weight": 34,
         "breakingStrength": 20,
         "date_introduced": null,
-        "product_url": "http://www.balancecommunity.com/feather",
-        "product_url": null,
+        "product_url": "https://www.balancecommunity.com/feather",
         "width": 25,
         "thickness": 1.5,
         "webbing_construction": "Flat",
@@ -1098,10 +1097,11 @@
             }
         ],
         "materialType": "pes",
-        "weight": "",
-        "breakingStrength": "",
+        "weight": 72,
+        "breakingStrength": 42,
         "date_introduced": null,
-        "product_url": null
+        "product_url": "https://www.balancecommunity.com/products/mantra-mk1",
+        "width": 25
     },
     {
         "name": "Mantra MK2",
@@ -1193,10 +1193,10 @@
             }
         ],
         "materialType": "pes",
-        "weight": "",
-        "breakingStrength": "",
+        "weight": 79,
+        "breakingStrength": 42,
         "date_introduced": null,
-        "product_url": null,
+        "product_url": "https://www.balancecommunity.com/products/mantra-mk2",
         "width": 25
     },
     {
@@ -1277,7 +1277,7 @@
             }
         ],
         "date_introduced": null,
-        "product_url": null,
+        "product_url": "https://www.balancecommunity.com/products/mantra-mk3",
         "thickness": 4.1,
         "webbing_construction": "Flat",
         "isa_certified": false
@@ -1445,10 +1445,11 @@
             }
         ],
         "materialType": "polyamid/nylon",
-        "weight": "",
-        "breakingStrength": "",
+        "weight": 58,
+        "breakingStrength": 26,
         "date_introduced": null,
-        "product_url": null
+        "product_url": null,
+        "width": 25
     },
     {
         "name": "Type 18 MKII",
@@ -1916,7 +1917,7 @@
         "weight": 63,
         "breakingStrength": 30,
         "date_introduced": null,
-        "product_url": null,
+        "product_url": "https://elephant-slacklines.com/products/bluewing-set-25m",
         "width": 25,
         "webbing_construction": "Flat",
         "isa_certified": false,
@@ -3962,7 +3963,7 @@
         "product_url": "https://www.slacktivity.com/pinktube-25m-200m",
         "width": 25.5,
         "webbing_construction": "Tubular",
-        "isa_certified": false,
+        "isa_certified": true,
         "priceMeter": 1.83,
         "currency": "EUR"
     },
@@ -5954,7 +5955,7 @@
         "breakingStrength": 30,
         "stretch": null,
         "date_introduced": null,
-        "product_url": null,
+        "product_url": "https://www.fitshop.fr/en/gibbon-tube-line-set-gib-13895",
         "webbing_construction": "Tubular",
         "isa_certified": false
     },
@@ -6405,7 +6406,7 @@
             }
         ],
         "date_introduced": null,
-        "product_url": null,
+        "product_url": "https://www.slacklifebc.com/product-category/webbing/tantalus-polyester-webbing/",
         "thickness": 3.2,
         "webbing_construction": "Flat",
         "isa_certified": false,
