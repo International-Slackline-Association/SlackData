@@ -31,11 +31,15 @@ Current state: backend only (FastAPI + SQLModel + SQLite), no frontend, no hoste
 
 ## Frontend (in progress)
 
-**Immediate priority:** A sandboxed React + TypeScript + Vite frontend using **simulated/mock data only** — no backend connection yet. Focus entirely on UI display, layout, and component design before wiring up real API calls.
+**Live status + the phase-by-phase roadmap live in [PLAN.md](PLAN.md) — read it first.** It is the
+single source of truth for where the build is and what's next. The visual/UX spec is in
+[DESIGN.md](DESIGN.md).
 
-Directory: `frontend/` at repo root (not yet created).
+Directory: `frontend/` at repo root. Built **TDD against the real backend** (localhost:8000) via a
+red-first Cypress suite — not mock data.
 
-**Tech:** React, TypeScript, Vite. No framework decision beyond that has been made yet.
+**Tech:** React 19, TypeScript, Vite, Tailwind v4, react-router-dom v7. `erasableSyntaxOnly` tsconfig
+→ no TS `enum`s / parameter-properties; use string-literal unions + `as const` arrays.
 
 Key screens to design (in priority order):
 1. Gear listing page (filterable, sortable cards/table per gear type)

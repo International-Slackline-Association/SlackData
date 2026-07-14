@@ -10,7 +10,11 @@ SlackData is open source, with an open API to allow other tools to use the datab
 
 ## Frontend
 
-The frontend is scaffolded (React, TypeScript, Vite) with a full Cypress E2E test suite written red-first against the real backend. UI implementation has not started yet.
+A React + TypeScript + Vite app, built TDD against a red-first Cypress E2E suite that runs on the
+real backend. Nav, gear listing, and cards are in place; filters, detail, compare, and manufacturers
+are in progress.
+
+**Build status and the phase-by-phase roadmap live in [PLAN.md](PLAN.md); the visual/UX spec is in [DESIGN.md](DESIGN.md).**
 
 ### Setup
 
