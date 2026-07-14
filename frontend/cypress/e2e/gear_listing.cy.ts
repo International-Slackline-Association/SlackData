@@ -101,9 +101,9 @@ GEAR_TYPES.forEach(({ slug, apiPath, label }) => {
         cy.get('[data-cy="gear-card"]').should('have.length', all.length)
       })
     })
-  })
 
   // ── Chart (table) view ────────────────────────────────────────────────────
+  // These live inside the describe above so they inherit its cy.visit beforeEach.
   // Chart view shows items as rows in a data table instead of visual cards.
   // Same items, same filters — just a different display format.
   //
@@ -154,5 +154,6 @@ GEAR_TYPES.forEach(({ slug, apiPath, label }) => {
     cy.get('[data-cy="view-chart"]').click()
     cy.get('[data-cy="gear-table-row"]').should('not.exist')
     cy.get('[data-cy="empty-state"]').should('be.visible')
+  })
   })
 })
