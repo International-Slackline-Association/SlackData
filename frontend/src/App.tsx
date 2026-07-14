@@ -1,19 +1,27 @@
+// Route table. Route ranking (not JSX order) resolves overlaps: the static
+// segments `/manufacturers` and `:slug/compare` outrank the dynamic `:slug`
+// and `:slug/:id` patterns.
+
+import { Navigate, Route, Routes } from 'react-router-dom'
+import AppLayout from '@/components/layout/AppLayout'
+import GearListingPage from '@/pages/GearListingPage'
+import GearDetailPage from '@/pages/GearDetailPage'
+import ComparePage from '@/pages/ComparePage'
+import ManufacturersPage from '@/pages/ManufacturersPage'
+import NotFoundPage from '@/pages/NotFoundPage'
 import './index.css'
 
 export default function App() {
   return (
-    <div className="min-h-screen" style={{ background: '#F8F7F4' }}>
-      <header data-cy="top-nav" className="bg-white border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-6 h-14 flex items-center gap-8">
-          <span data-cy="wordmark" className="font-bold text-gray-900 text-lg">
-            SlackData
-          </span>
-          <nav data-cy="gear-tabs" className="flex gap-1" />
-        </div>
-      </header>
-      <main className="max-w-7xl mx-auto px-6 py-12">
-        <p className="text-gray-400 text-sm">Coming soon</p>
-      </main>
-    </div>
+    <Routes>
+      <Route element={<AppLayout />}>
+        <Route index element={<Navigate to="/webbings" replace />} />
+        <Route path="manufacturers" element={<ManufacturersPage />} />
+        <Route path=":slug/compare" element={<ComparePage />} />
+        <Route path=":slug/:id" element={<GearDetailPage />} />
+        <Route path=":slug" element={<GearListingPage />} />
+        <Route path="*" element={<NotFoundPage />} />
+      </Route>
+    </Routes>
   )
 }
