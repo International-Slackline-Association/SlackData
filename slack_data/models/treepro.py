@@ -43,6 +43,7 @@ class TreePro(BaseTreePro, table=True):
 
 class TreeProPublic(BaseTreePro):
     """Model for public tree protector data."""
+    id: int
     name: str
     brand_name: str
 

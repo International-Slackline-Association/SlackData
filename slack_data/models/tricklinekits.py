@@ -46,6 +46,7 @@ class TricklineKit(BaseTricklineKit, table=True):
 
 class TricklineKitPublic(BaseTricklineKit):
     """Model for public trickline kit data."""
+    id: int
     name: str
     webbing_length: int
     webbing_width: int

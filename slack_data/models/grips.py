@@ -49,6 +49,7 @@ class Grip(BaseGrip, table=True):
 
 class GripPublic(BaseGrip):
     """Model for public grip data."""
+    id: int
     name: str
     material: MetalMaterial
     width_min: int

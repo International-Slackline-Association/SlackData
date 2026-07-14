@@ -68,6 +68,7 @@ class Roller(BaseRoller, table=True):
 
 class RollerPublic(BaseRoller):
     """Model for public roller data."""
+    id: int
     name: str
     material: MetalMaterial
     roller_material: RollerMaterial

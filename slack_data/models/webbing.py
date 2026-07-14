@@ -66,6 +66,7 @@ class Webbing(BaseWebbing, table=True):
 
 class WebbingPublic(BaseWebbing):
     """Model for public webbing data."""
+    id: int
     name: str                             # required in response
     material: FiberMaterial               # required in response
     width: int                            # required in response
