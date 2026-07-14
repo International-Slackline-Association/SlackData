@@ -25,6 +25,7 @@ class Currency(str, Enum):
     JPY = "JPY"  # Japanese Yen
     KRW = "KRW"  # South Korean Won
     MXN = "MXN"  # Mexican Peso
+    NZD = "NZD"  # New Zealand Dollar
     PEN = "PEN"  # Peruvian Sol
     PLN = "PLN"  # Polish Zloty
     RUB = "RUB"  # Russian Ruble

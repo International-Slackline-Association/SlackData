@@ -1,3 +1,4 @@
+import ast
 import json
 from pathlib import Path
 
@@ -5,7 +6,8 @@ from sqlmodel import select
 
 from slack_data.database import SessionDep
 from slack_data.models.brands import Brand, BrandCreate, get_brand
-from slack_data.models.webbing import FiberMaterial, Webbing, WebbingCreate
+from slack_data.models.webbing import FiberMaterial, Webbing, WebbingConstruction, WebbingCreate
+from slack_data.utilities.currencies import Currency
 
 
 WEBBING_FILE = Path(__file__).parent.parent.parent / "webbings.json"
@@ -30,10 +32,15 @@ def clean_webbing_data(webbing: dict) -> dict:
     for key, value in webbing.items():
         if key in {"width", "weight"} and value == "":
             cleaned_webbing[key] = 0
-        elif key not in {"name", "brand", "materialType"} and value == "":
-            cleaned_webbing[key] = None
         elif key == "isa_certified":
             cleaned_webbing[key] = bool(value) if isinstance(value, str) else value
+        elif key == "stretch":
+            # stretch is a list of {kn, percent} dicts; store it as valid JSON
+            # (the generic str() branch below would emit a Python repr with
+            # single quotes, which is not JSON-parseable on the client).
+            cleaned_webbing[key] = json.dumps(value) if value else None
+        elif key not in {"name", "brand", "materialType"} and value == "":
+            cleaned_webbing[key] = None
         else:
             cleaned_webbing[key] = str(value) if value is not None else None
     return cleaned_webbing
@@ -55,10 +62,20 @@ def add_webbings_to_db(webbings: list[dict], session: SessionDep) -> None:
             release_date=webbing.get("date_introduced"),
             product_url=webbing.get("product_url"),
             material=material,
-            width=int(webbing.get("width", 0)),
-            weight=float(webbing.get("weight", 0)),
+            # width is `int` mm in the model, but the enriched dataset carries
+            # some decimal widths (e.g. "25.4"); coerce via float so int() won't
+            # crash on them.
+            width=int(float(webbing.get("width") or 0)),
+            # weight is `float | None` in the model; the enriched dataset has
+            # some null weights, so pass None through instead of float(None).
+            weight=float(webbing.get("weight")) if webbing.get("weight") not in (None, "") else None,
             breaking_strength=webbing.get("breakingStrength"),
             stretch=webbing.get("stretch"),
+            thickness=float(webbing.get("thickness")) if webbing.get("thickness") not in (None, "") else None,
+            webbing_construction=get_webbing_construction(webbing.get("webbing_construction")),
+            isa_certified=webbing.get("isa_certified", False),
+            price=parse_price(webbing.get("priceMeter")),
+            currency=parse_currency(webbing.get("currency")),
         )
         db_webbing = Webbing.model_validate(webbing_create)
         db_webbing.brand = session.get(Brand, brand_id)
@@ -67,6 +84,44 @@ def add_webbings_to_db(webbings: list[dict], session: SessionDep) -> None:
 
     session.commit()
     session.refresh(db_webbing)
+
+def parse_currency(value) -> Currency | None:
+    """Map a currency code to the enum; unknown codes -> None (don't crash seeding)."""
+    if not value:
+        return None
+    try:
+        return Currency(str(value).upper())
+    except ValueError:
+        return None
+
+def parse_price(raw) -> float | None:
+    """priceMeter may be a number, a numeric string, or a stringified dict like
+    "{'value': 1.69, 'currency': 'euro'}" left over from the original scrape."""
+    if raw in (None, ""):
+        return None
+    if isinstance(raw, (int, float)):
+        return float(raw)
+    s = str(raw).strip()
+    try:
+        return float(s)
+    except ValueError:
+        pass
+    try:
+        parsed = ast.literal_eval(s)
+    except (ValueError, SyntaxError):
+        return None
+    if isinstance(parsed, dict) and parsed.get("value") is not None:
+        return float(parsed["value"])
+    return None
+
+def get_webbing_construction(value: str | None) -> WebbingConstruction | None:
+    """Map a webbing_construction label (e.g. "Core/Sheath") to the enum."""
+    if not value:
+        return None
+    try:
+        return WebbingConstruction(str(value))
+    except ValueError:
+        return WebbingConstruction.OTHER
 
 def get_material_type(material: str) -> FiberMaterial:
     """
