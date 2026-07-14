@@ -1,0 +1,16 @@
+@import "tailwindcss";
+
+@theme {
+  --color-teal-primary: #00897B;
+  --color-teal-light: #E0F2F1;
+  --color-amber-price: #E8770A;
+  --color-coral-badge: #D04A3E;
+  --color-page-bg: #F8F7F4;
+}
+
+body {
+  margin: 0;
+  background-color: #F8F7F4;
+  font-family: system-ui, 'Segoe UI', Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}

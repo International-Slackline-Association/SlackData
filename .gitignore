@@ -8,4 +8,8 @@ wheels/
 
 # Virtual environments
 venv/
+.venv/
 *.db
+
+# Scraper output (images + manifests)
+scraper/output/

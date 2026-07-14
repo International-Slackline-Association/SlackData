@@ -13,7 +13,7 @@ weblock_router = APIRouter(
 
 @weblock_router.post("/", response_model=WeblockPublic)
 def create_weblock(weblock: WeblockCreate, session: SessionDep):
-    db_weblock = weblock.model_validate(weblock)
+    db_weblock = Weblock.model_validate(weblock)
     session.add(db_weblock)
     session.commit()
     session.refresh(db_weblock)

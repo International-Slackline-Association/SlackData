@@ -898,6 +898,7 @@
         "weight": 34,
         "breakingStrength": 20,
         "date_introduced": null,
+        "product_url": "http://www.balancecommunity.com/feather",
         "product_url": null,
         "width": 25,
         "thickness": 1.5,
@@ -1195,7 +1196,8 @@
         "weight": "",
         "breakingStrength": "",
         "date_introduced": null,
-        "product_url": null
+        "product_url": null,
+        "width": 25
     },
     {
         "name": "Mantra MK3",

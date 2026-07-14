@@ -9,7 +9,14 @@ dependencies = [
     "sqlmodel>=0.0.24",
 ]
 
-[dependency-groups]
+[project.optional-dependencies]
 dev = [
+    "pytest>=8.0",
     "ruff>=0.11.11",
 ]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.setuptools.packages.find]
+include = ["slack_data*"]
