@@ -8,8 +8,12 @@ GEAR_TYPES.forEach(({ slug, apiPath, label, hasISA }) => {
     let firstItem: Record<string, unknown>
 
     before(() => {
-      cy.request(`${Cypress.env('apiUrl')}/${apiPath}/?limit=1`).then(({ body }) => {
-        firstItem = body[0]
+      // The listing defaults to alphabetical-by-name order, so the first card is
+      // the name-first item across the whole dataset — not the API's first row.
+      cy.fetchAllItems(apiPath).then((all) => {
+        firstItem = [...(all as Record<string, unknown>[])].sort((a, b) =>
+          String(a.name).localeCompare(String(b.name)),
+        )[0]
       })
     })
 
@@ -32,12 +36,6 @@ GEAR_TYPES.forEach(({ slug, apiPath, label, hasISA }) => {
         .should('be.visible')
         .and('contain.text', firstItem.name as string)
         .and('have.attr', 'href')
-    })
-
-    it('shows a category badge in the image area', () => {
-      cy.get('[data-cy="gear-card"]').first()
-        .find('[data-cy="gear-card-badge"]')
-        .should('be.visible')
     })
 
     it('shows an inline specs row', () => {

@@ -10,7 +10,7 @@
 // The hook is generic: `q` and `sort` are fixed keys; pill/range accessors take
 // the field name, and the calling page supplies those from its filter config.
 
-import { useCallback, useMemo } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 
 export type SortDirection = 'asc' | 'desc'
@@ -21,6 +21,19 @@ export interface SortSpec {
 
 export function useUrlState() {
   const [params, setParams] = useSearchParams()
+  // Bumped on clearAll so inputs holding local state can reset themselves without
+  // reacting to every async param echo (which would race in-progress typing).
+  const [resetNonce, setResetNonce] = useState(0)
+
+  // Mirror of the latest INTENDED params. react-router does not compose rapid
+  // functional setParams calls — each `prev` is the last committed location, so
+  // back-to-back writes (two slider thumbs, fast typing) clobber each other.
+  // Building each mutation from this ref instead composes correctly; the effect
+  // resyncs it after every commit (covers clear-all / back-forward).
+  const pendingRef = useRef(params)
+  useEffect(() => {
+    pendingRef.current = params
+  }, [params])
 
   const q = params.get('q') ?? ''
 
@@ -38,14 +51,10 @@ export function useUrlState() {
   // back button) and operate on a copy of the current params.
   const mutate = useCallback(
     (fn: (next: URLSearchParams) => void) => {
-      setParams(
-        prev => {
-          const next = new URLSearchParams(prev)
-          fn(next)
-          return next
-        },
-        { replace: true },
-      )
+      const next = new URLSearchParams(pendingRef.current)
+      fn(next)
+      pendingRef.current = next
+      setParams(next, { replace: true })
     },
     [setParams],
   )
@@ -113,14 +122,33 @@ export function useUrlState() {
     [mutate],
   )
 
-  // Clears search + all filters but stays on the current route.
-  const clearAll = useCallback(
-    () => setParams(new URLSearchParams(), { replace: true }),
-    [setParams],
+  // Sets both bounds of a range in a single write. react-router does not compose
+  // rapid functional setParams calls, so writing min and max separately lets one
+  // clobber the other while typing; writing both at once (from local state) is
+  // clobber-safe.
+  const setRange = useCallback(
+    (field: string, min: string, max: string) =>
+      mutate(next => {
+        const minKey = `${field}_min`
+        const maxKey = `${field}_max`
+        if (min !== '') next.set(minKey, min)
+        else next.delete(minKey)
+        if (max !== '') next.set(maxKey, max)
+        else next.delete(maxKey)
+      }),
+    [mutate],
   )
+
+  // Clears search + all filters but stays on the current route.
+  const clearAll = useCallback(() => {
+    pendingRef.current = new URLSearchParams()
+    setParams(new URLSearchParams(), { replace: true })
+    setResetNonce(n => n + 1)
+  }, [setParams])
 
   return {
     params,
+    resetNonce,
     q,
     setQ,
     sort,
@@ -130,6 +158,7 @@ export function useUrlState() {
     togglePill,
     getRange,
     setRangeBound,
+    setRange,
     clearAll,
   }
 }
