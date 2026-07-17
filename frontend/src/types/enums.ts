@@ -21,12 +21,12 @@ export type ISAWarning = (typeof ISA_WARNINGS)[number]
 
 // models/webbing.py — FiberMaterial
 export const FIBER_MATERIALS = [
-  'Nylon', 'Polyester', 'Dyneema', 'Vectran', 'Hybrid', 'Other',
+  'Nylon', 'Polyester', 'Dyneema/HMPE', 'Vectran', 'Hybrid', 'Other',
 ] as const
 export type FiberMaterial = (typeof FIBER_MATERIALS)[number]
 
 // models/webbing.py — Classification
-export const CLASSIFICATIONS = ['A+', 'A', 'B', 'C', 'Other'] as const
+export const CLASSIFICATIONS = ['A+', 'A', 'B', 'C', 'Not for Highline'] as const
 export type Classification = (typeof CLASSIFICATIONS)[number]
 
 // models/webbing.py — WebbingConstruction

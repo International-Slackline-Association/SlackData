@@ -31,6 +31,8 @@ export interface GearBase {
 
 export interface Webbing extends GearBase {
   material: FiberMaterial
+  // For Hybrid webbings: JSON array of component fiber names, e.g. ["Polyester", "Dyneema/HMPE"]
+  material_composition: string | null
   webbing_construction: WebbingConstruction | null
   width: number
   thickness: number | null
@@ -76,7 +78,7 @@ export interface Grip extends GearBase {
 }
 
 export interface Roller extends GearBase {
-  material: MetalMaterial
+  material: MetalMaterial[] // JSON column: frame can be multiple materials
   roller_material: RollerMaterial
   slider_type: SliderType
   lock_type: LockType
