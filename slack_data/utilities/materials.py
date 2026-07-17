@@ -1,3 +1,4 @@
+import re
 from enum import Enum
 
 
@@ -42,3 +43,31 @@ def get_metal_material(material: str | list[str] | None) -> MetalMaterial:
         return MetalMaterial.TITANIUM
     else:
         return MetalMaterial.OTHER
+
+
+def get_metal_materials(material: str | list[str] | None) -> list[MetalMaterial]:
+    """
+    Convert a material value into a list of MetalMaterial enums (multi-select).
+
+    Accepts a list, or a delimited string like "Aluminum, Steel" / "Aluminum & Steel".
+    Duplicates are collapsed and order is preserved. Returns [OTHER] when empty/unknown.
+    """
+    if not material:
+        return [MetalMaterial.OTHER]
+
+    if isinstance(material, list):
+        parts = material
+    else:
+        # split on commas, slashes, ampersands and the word "and"
+        parts = re.split(r",|/|&|\band\b", material)
+
+    materials: list[MetalMaterial] = []
+    for part in parts:
+        part = part.strip()
+        if not part:
+            continue
+        resolved = get_metal_material(part)
+        if resolved not in materials:
+            materials.append(resolved)
+
+    return materials or [MetalMaterial.OTHER]
