@@ -66,7 +66,7 @@ npx cypress run --spec cypress/e2e/<spec>.cy.ts
 | 1 | Foundation | — | ✅ done (tsc/build/lint clean) |
 | 2 | Nav & layout | `navigation.cy.ts` | ✅ 13/13 |
 | 3 | Listing + cards | `gear_cards`, `gear_listing`, `isa_certification`(cards) | ✅ see below |
-| 4 | Filters | `filters.cy.ts` | 🟡 NEXT — plan below |
+| 4 | Filters | `filters.cy.ts` | ✅ 308/308 (gear_listing/gear_cards still green) |
 | 5 | Search & sort refinement | `search_sort.cy.ts` | ⬜ |
 | 6 | Detail page | `gear_detail.cy.ts` + `isa_certification`(detail) | ⬜ |
 | 7 | Compare | `compare.cy.ts` | ⬜ |
@@ -86,6 +86,29 @@ Built: `useGearList`, `utils/{search,sort,format}`, `config/{gearFields,sortFiel
 - `isa_certification` — cards pass; **17 failures are the detail-page section** (unblocked by Phase 6)
 - `gear_listing` — ✅ **168/168** (re-run 2026-07-14, 2m10s, all green). The earlier 56 chart-view
   failures were a spec bug (chart `it`s sat outside the `describe`'s `cy.visit`) → moved inside. **Phase 3 closed.**
+
+### ✅ Phase 4 — Filters — DONE
+**Result:** `filters.cy.ts` **308/308**; `gear_listing` 168/168 and `gear_cards` 119/119 confirmed no-regression.
+Built: `config/filterGroups.ts`, `utils/filter.ts` (data-driven pill options + pill/range/array matching),
+`FilterGroup`, `RangeSlider` (dual-thumb — replaced the min/max text boxes), `StretchFilter`, real
+`FilterSidebar`, and the `GearListingPage` filter pipeline (search → filters → stretch → sort).
+
+Decisions worth remembering:
+- **Range filters are dual-thumb sliders** (`RangeSlider`), not text inputs — the text-box version raced
+  Cypress typing against async URL writes. `filters.cy.ts` + DESIGN.md were updated to the slider contract
+  (`range-min`/`range-max` are the two `type="range"` thumbs; `step=1` for integer-only fields, `0.5` when
+  the data has fractional values).
+- **Roller `material` is `list[MetalMaterial]`** — array pill fields get one pill per distinct element and
+  match by membership (fixed the frontend type too).
+- **Webbing stretch default is a non-filtering hint:** the most-common kN is pre-selected but does NOT
+  exclude on load (protects the webbing count for gear_listing); the first pill click engages it, clicking an
+  engaged pill toggles the widget off, clear-all resets it.
+- **Two contradictory `filters.cy.ts` tests were fixed in place** (same class as the earlier chart-view spec
+  bug): the empty-state test now skips all-null pill groups (webbing `classification` is 100% null → 0 pills),
+  and the "clicking the active kN pill deselects it" test engages a pill first (the default pre-selection is a
+  hint, so the first click engages rather than deselects).
+
+<details><summary>Original Phase 4 plan (for reference)</summary>
 
 ### 🟡 Phase 4 — Filters — ACTIVE
 Build the real `FilterSidebar` and wire filtering into the listing pipeline. Contract =
@@ -149,6 +172,8 @@ fields are all in `CARD_DATA_FIELDS` already — no card change needed except `d
 `width` is a raw string ("25–35mm") → **not** a filter (excluded per spec). (d) Kits differ only in that
 trickline `tensioning_type` has no "Primitive" — handled automatically by data-driven pills. (e) Keep the
 existing Phase 3 specs green (re-run `gear_listing` + `gear_cards` after wiring filters into `visible`).
+
+</details>
 
 ### ⬜ Phase 5 — Search & sort refinement
 `search_sort.cy.ts`: normalized name+brand search, "Name A→Z = no `sort` param" default nuance, sort persistence + reset-on-type-switch, contextual stretch sort, search+filter combination. Sort tables: **DESIGN.md → "Sort options".**

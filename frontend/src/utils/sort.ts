@@ -1,22 +1,55 @@
 // Client-side sorting for the listing.
 //
-// A null/absent sort = the backend's own order (the gear_cards tests assert the
-// first card matches the API's first item, so the default must NOT reorder).
-// Name sorts use locale compare; numeric sorts put nulls/blanks last in both
-// directions.
+// Name is the default AND the universal tie-breaker:
+//   - A null/absent sort sorts alphabetically by name (ascending). A fresh load
+//     of the listing is therefore alphabetical.
+//   - Numeric sorts (e.g. mbs) break ties on equal values — and order among
+//     null/blank values — alphabetically by name, always ascending regardless of
+//     the numeric direction.
+// Numeric sorts put nulls/blanks last in both directions.
 
 import type { SortSpec } from '@/hooks/useUrlState'
 import type { AnyItem } from '@/utils/format'
+import { percentAtKn } from '@/utils/stretch'
+
+// Secondary/tie-break comparator: alphabetical by name, always ascending.
+function byName(a: AnyItem, b: AnyItem): number {
+  return String(a.name).localeCompare(String(b.name))
+}
+
+// Compare two nullable numbers with the shared listing rules: nulls last in both
+// directions, ties (incl. both-null) fall back to name ascending.
+function compareNumeric(
+  a: AnyItem,
+  b: AnyItem,
+  an: number | null,
+  bn: number | null,
+  factor: number,
+): number {
+  if (an === null && bn === null) return byName(a, b)
+  if (an === null) return 1
+  if (bn === null) return -1
+  if (an === bn) return byName(a, b)
+  return factor * (an - bn)
+}
 
 export function sortItems(items: AnyItem[], sort: SortSpec | null): AnyItem[] {
-  if (!sort) return items // default: backend order
+  // Default (no sort) and explicit Name sort are both alphabetical by name.
+  if (!sort || sort.field === 'name') {
+    const factor = sort && sort.direction === 'desc' ? -1 : 1
+    return [...items].sort((a, b) => factor * byName(a, b))
+  }
 
   const { field, direction } = sort
   const factor = direction === 'asc' ? 1 : -1
 
-  if (field === 'name') {
-    return [...items].sort(
-      (a, b) => factor * String(a.name).localeCompare(String(b.name)),
+  // Webbing stretch sort. The field carries the reference kN (`stretch@10`), so
+  // sorting by stretch is self-contained — it reads the % at that kN straight off
+  // each item's curve, independent of whichever kN the filter widget is showing.
+  if (field.startsWith('stretch@')) {
+    const kn = Number(field.slice('stretch@'.length))
+    return [...items].sort((a, b) =>
+      compareNumeric(a, b, percentAtKn(a.stretch, kn), percentAtKn(b.stretch, kn), factor),
     )
   }
 
@@ -25,9 +58,6 @@ export function sortItems(items: AnyItem[], sort: SortSpec | null): AnyItem[] {
     const bv = b[field]
     const an = av == null || av === '' ? null : Number(av)
     const bn = bv == null || bv === '' ? null : Number(bv)
-    if (an === null && bn === null) return 0
-    if (an === null) return 1 // nulls last, regardless of direction
-    if (bn === null) return -1
-    return factor * (an - bn)
+    return compareNumeric(a, b, an, bn, factor)
   })
 }

@@ -26,8 +26,8 @@ const FILTER_GROUPS: Record<string, FilterGroup[]> = {
   //         isa_warning(enum) colors(str, comma-sep — excluded, needs split logic)
   webbings: [
     { group: 'material',          label: 'Material Type',     type: 'pill'  },
-    { group: 'width',             label: 'Width',             type: 'pill', unit: 'mm' }, // discrete int set
-    { group: 'classification',    label: 'Classification',    type: 'pill'  }, // A+/A/B/C/Other
+    { group: 'width',             label: 'Width',             type: 'range', unit: 'mm' }, // dual-thumb slider
+    { group: 'classification',    label: 'Classification',    type: 'pill'  }, // A+/A/B/C/Not for Highline
     { group: 'isa_certified',     label: 'ISA Certified',     type: 'pill'  },
     { group: 'isa_warning',       label: 'ISA Warning',       type: 'pill'  }, // Recall/Warning/Notice/No Warning
     // stretch has its own widget — see the dedicated describe block below FILTER_GROUPS
@@ -41,7 +41,7 @@ const FILTER_GROUPS: Record<string, FilterGroup[]> = {
   //         isa_certified(bool) isa_warning(enum) colors(excluded)
   weblocks: [
     { group: 'material',          label: 'Material',          type: 'pill'  }, // MetalMaterial
-    { group: 'width_min',         label: 'Min Width',         type: 'pill', unit: 'mm' }, // discrete int
+    { group: 'width_min',         label: 'Min Width',         type: 'range', unit: 'mm' }, // dual-thumb slider
     { group: 'front_pin',         label: 'Front Pin',         type: 'pill'  }, // Push/Pull/Captive/Fixed Bolt/Other
     { group: 'attachment_point',  label: 'Attachment Point',  type: 'pill'  }, // Universal/Hole/Pin/Bolt/Bent Plate/Sling/Other
     { group: 'isa_certified',     label: 'ISA Certified',     type: 'pill'  },
@@ -92,7 +92,8 @@ const FILTER_GROUPS: Record<string, FilterGroup[]> = {
     { group: 'slider_type',      label: 'Slider Type',       type: 'pill'  }, // Moving plates/Carabiner/Locking Carabiner/Other
     { group: 'lock_type',        label: 'Lock Type',         type: 'pill'  }, // Non-locking/Screw Lock/Auto Lock/Twist Lock/Magnetic Lock/Other
     { group: 'bearing_material', label: 'Bearing Material',  type: 'pill'  }, // Stainless Steel/Steel/Other
-    { group: 'isa_certified',    label: 'ISA Certified',     type: 'pill'  },
+    // isa_certified is HIDDEN for rollers — no roller is ISA certified, so a lone
+    // "No" toggle is useless (see FilterSidebar.pillGroupVisible).
     { group: 'isa_warning',      label: 'ISA Warning',       type: 'pill'  },
     { group: 'weight',           label: 'Weight',            type: 'range', unit: 'g'  },
     { group: 'breaking_strength',label: 'Breaking Strength', type: 'range', unit: 'kN' },
@@ -121,7 +122,7 @@ const FILTER_GROUPS: Record<string, FilterGroup[]> = {
     { group: 'webbing_width',    label: 'Webbing Width',     type: 'pill', unit: 'mm' }, // discrete int
     { group: 'webbing_length',   label: 'Webbing Length',    type: 'pill', unit: 'm'  }, // discrete int
     { group: 'includes_treepro', label: 'Includes Tree Pro', type: 'pill'  },
-    { group: 'isa_certified',    label: 'ISA Certified',     type: 'pill'  },
+    // isa_certified HIDDEN — no starter kit is ISA certified.
     { group: 'weight',           label: 'Kit Weight',        type: 'range', unit: 'g' },
   ],
 
@@ -135,8 +136,9 @@ const FILTER_GROUPS: Record<string, FilterGroup[]> = {
     { group: 'webbing_width',    label: 'Webbing Width',     type: 'pill', unit: 'mm' },
     { group: 'webbing_length',   label: 'Webbing Length',    type: 'pill', unit: 'm'  },
     { group: 'includes_treepro', label: 'Includes Tree Pro', type: 'pill'  },
-    { group: 'isa_certified',    label: 'ISA Certified',     type: 'pill'  },
-    { group: 'weight',           label: 'Kit Weight',        type: 'range', unit: 'g' },
+    // isa_certified HIDDEN — no trickline kit is ISA certified.
+    // Kit Weight is NOT filterable for trickline kits — only 2 of 9 have weight
+    // data, so a slider would mislead (see filterGroups.ts).
   ],
 }
 
@@ -148,6 +150,31 @@ function pillGroups(slug: string) {
 
 function rangeGroups(slug: string) {
   return (FILTER_GROUPS[slug] ?? []).filter(g => g.type === 'range')
+}
+
+// Range filters are dual-thumb sliders (two overlaid <input type="range">, the
+// min thumb data-cy="range-min", the max thumb data-cy="range-max"). React
+// ignores jQuery .val(), so set the value via the native setter + a real input
+// event. The slider domain is data-driven, so wait for it to load (max > min).
+function setSlider(group: string, which: 'min' | 'max', value: number) {
+  const scope = `[data-cy="filter-group"][data-group="${group}"]`
+  cy.get(scope).find('[data-cy="range-max"]').should(($el) => {
+    expect(Number($el.attr('max'))).to.be.greaterThan(Number($el.attr('min')))
+  })
+  cy.get(scope).find(`[data-cy="range-${which}"]`).then(($el) => {
+    const input = $el[0] as HTMLInputElement
+    const setter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value')!.set!
+    setter.call(input, String(value))
+    input.dispatchEvent(new Event('input', { bubbles: true }))
+  })
+}
+
+// Reset a thumb to its domain bound — which removes that constraint.
+function clearSlider(group: string, which: 'min' | 'max') {
+  const scope = `[data-cy="filter-group"][data-group="${group}"]`
+  cy.get(scope).find(`[data-cy="range-${which}"]`).invoke('attr', which).then((bound) => {
+    setSlider(group, which, Number(bound))
+  })
 }
 
 // ── Tests (run for every gear type) ──────────────────────────────────────────
@@ -237,15 +264,56 @@ GEAR_TYPES.forEach(({ slug, apiPath, label }) => {
           .should('have.attr', 'data-active', 'false')
       })
 
-      it('multiple pills in the same group can be active simultaneously', () => {
-        cy.get(`[data-cy="filter-group"][data-group="${pills[0].group}"]`)
-          .find('[data-cy="filter-pill"]').then(($pills) => {
-            if ($pills.length < 2) return
-            cy.wrap($pills[0]).click()
-            cy.wrap($pills[1]).click()
-            cy.wrap($pills[0]).should('have.attr', 'data-active', 'true')
-            cy.wrap($pills[1]).should('have.attr', 'data-active', 'true')
+      it('multiple pills can be active simultaneously in a multi-select (3+) group', () => {
+        // Two-option groups are single-select (covered below); this only applies
+        // to groups with 3+ options. Some types (e.g. treepros) have none — skip.
+        cy.get('body').then(($b) => {
+          if ($b.find('[data-cy="pill-group"][data-select="multi"]').length === 0) return
+          cy.get('[data-cy="pill-group"][data-select="multi"]').first().within(() => {
+            cy.get('[data-cy="filter-pill"]').then(($pills) => {
+              cy.wrap($pills[0]).click()
+              cy.wrap($pills[1]).click()
+              cy.wrap($pills[0]).should('have.attr', 'data-active', 'true')
+              cy.wrap($pills[1]).should('have.attr', 'data-active', 'true')
+            })
           })
+        })
+      })
+
+      it('two-option groups are single-select: picking one replaces the other, re-picking clears', () => {
+        cy.get('body').then(($b) => {
+          if ($b.find('[data-cy="pill-group"][data-select="single"]').length === 0) return
+          cy.get('[data-cy="pill-group"][data-select="single"]').first().within(() => {
+            cy.get('[data-cy="filter-pill"]').then(($pills) => {
+              cy.wrap($pills[0]).click().should('have.attr', 'data-active', 'true')
+              cy.wrap($pills[1]).click()
+              cy.wrap($pills[1]).should('have.attr', 'data-active', 'true')
+              cy.wrap($pills[0]).should('have.attr', 'data-active', 'false') // replaced, not added
+              cy.wrap($pills[1]).click().should('have.attr', 'data-active', 'false') // re-pick clears to all
+            })
+          })
+        })
+      })
+
+      it('only multi-select (3+) groups expose All / None shortcuts', () => {
+        cy.get('body').then(($b) => {
+          if ($b.find('[data-cy="pill-group"][data-select="multi"]').length) {
+            cy.get('[data-cy="pill-group"][data-select="multi"]').first().within(() => {
+              cy.get('[data-cy="pill-select-all"]').click()
+              cy.get('[data-cy="filter-pill"]').each(($p) =>
+                cy.wrap($p).should('have.attr', 'data-active', 'true'),
+              )
+              cy.get('[data-cy="pill-select-none"]').click()
+              cy.get('[data-cy="filter-pill"]').each(($p) =>
+                cy.wrap($p).should('have.attr', 'data-active', 'false'),
+              )
+            })
+          }
+          if ($b.find('[data-cy="pill-group"][data-select="single"]').length) {
+            cy.get('[data-cy="pill-group"][data-select="single"]').first()
+              .find('[data-cy="pill-select-all"]').should('not.exist')
+          }
+        })
       })
 
       it('activating a pill reduces the card count', () => {
@@ -284,60 +352,39 @@ GEAR_TYPES.forEach(({ slug, apiPath, label }) => {
         }
 
         it('setting a min value reduces the card count', () => {
-          // Fetch real data to pick a meaningful min that excludes some items
           cy.fetchAllItems(apiPath).then((allItems) => {
             const values = (allItems as Record<string, unknown>[])
-              .map(i => i[group])
-              .filter(v => v != null)
-              .map(Number)
-              .sort((a, b) => a - b)
+              .map(i => i[group]).filter(v => v != null).map(Number).sort((a, b) => a - b)
+            if (values.length < 2) return
 
-            if (values.length < 2) return // skip if field is always null
-
-            // Use the median as the min — should cut out the lower half
             const median = values[Math.floor(values.length / 2)]
-
-            cy.get(`[data-cy="filter-group"][data-group="${group}"]`)
-              .find('[data-cy="range-min"]').clear().type(String(median))
-
-            cy.get('[data-cy="gear-card"]')
-              .its('length').should('be.lte', allItems.length)
+            setSlider(group, 'min', median)
+            cy.get('[data-cy="gear-card"]').its('length').should('be.lte', allItems.length)
           })
         })
 
         it('setting a max value reduces the card count', () => {
           cy.fetchAllItems(apiPath).then((allItems) => {
             const values = (allItems as Record<string, unknown>[])
-              .map(i => i[group])
-              .filter(v => v != null)
-              .map(Number)
-              .sort((a, b) => a - b)
-
+              .map(i => i[group]).filter(v => v != null).map(Number).sort((a, b) => a - b)
             if (values.length < 2) return
 
             const median = values[Math.floor(values.length / 2)]
-
-            cy.get(`[data-cy="filter-group"][data-group="${group}"]`)
-              .find('[data-cy="range-max"]').clear().type(String(median))
-
-            cy.get('[data-cy="gear-card"]')
-              .its('length').should('be.lte', allItems.length)
+            setSlider(group, 'max', median)
+            cy.get('[data-cy="gear-card"]').its('length').should('be.lte', allItems.length)
           })
         })
 
-        it('clearing both inputs restores the full card count', () => {
+        it('resetting the thumbs restores the full card count', () => {
           cy.fetchAllItems(apiPath).then((allItems) => {
             const values = (allItems as Record<string, unknown>[])
-              .map(i => i[group]).filter(v => v != null).map(Number)
+              .map(i => i[group]).filter(v => v != null).map(Number).sort((a, b) => a - b)
             if (values.length < 2) return
 
             const median = values[Math.floor(values.length / 2)]
-
-            cy.get(`[data-cy="filter-group"][data-group="${group}"]`)
-              .find('[data-cy="range-min"]').clear().type(String(median))
-            cy.get(`[data-cy="filter-group"][data-group="${group}"]`)
-              .find('[data-cy="range-min"]').clear()
-
+            setSlider(group, 'min', median)
+            // Slide the min thumb back to its domain floor → constraint removed.
+            clearSlider(group, 'min')
             cy.get('[data-cy="gear-card"]').should('have.length', allItems.length)
           })
         })
@@ -345,27 +392,33 @@ GEAR_TYPES.forEach(({ slug, apiPath, label }) => {
         it('items outside the min–max range are excluded', () => {
           cy.fetchAllItems(apiPath).then((allItems) => {
             const values = (allItems as Record<string, unknown>[])
-              .map(i => i[group]).filter(v => v != null).map(Number)
-              .sort((a, b) => a - b)
+              .map(i => i[group]).filter(v => v != null).map(Number).sort((a, b) => a - b)
             if (values.length < 3) return
 
             const lo = values[Math.floor(values.length * 0.25)]
             const hi = values[Math.floor(values.length * 0.75)]
 
-            cy.get(`[data-cy="filter-group"][data-group="${group}"]`)
-              .find('[data-cy="range-min"]').clear().type(String(lo))
-            cy.get(`[data-cy="filter-group"][data-group="${group}"]`)
-              .find('[data-cy="range-max"]').clear().type(String(hi))
+            setSlider(group, 'min', lo)
+            setSlider(group, 'max', hi)
+            // Barrier: wait for the filter to shrink the list before inspecting.
+            cy.get('[data-cy="gear-card"]').should('have.length.lessThan', allItems.length)
 
-            // Cards carry data-{field} attributes with the raw numeric value
-            // (empty string when null). Verify every card's value is within [lo, hi].
+            // Read the actual thumb values (the slider snaps to its step), so the
+            // bounds check matches exactly what was committed.
+            const scope = `[data-cy="filter-group"][data-group="${group}"]`
             const attr = `data-${group.replace(/_/g, '-')}`
-            cy.get('[data-cy="gear-card"]').each(($card) => {
-              const raw = $card.attr(attr)
-              if (raw && raw !== '') {
-                expect(Number(raw)).to.be.gte(lo)
-                expect(Number(raw)).to.be.lte(hi)
-              }
+            cy.get(scope).find('[data-cy="range-min"]').invoke('val').then((aLo) => {
+              cy.get(scope).find('[data-cy="range-max"]').invoke('val').then((aHi) => {
+                const min = Number(aLo)
+                const max = Number(aHi)
+                cy.get('[data-cy="gear-card"]').each(($card) => {
+                  const raw = $card.attr(attr)
+                  if (raw && raw !== '') {
+                    expect(Number(raw)).to.be.gte(min)
+                    expect(Number(raw)).to.be.lte(max)
+                  }
+                })
+              })
             })
           })
         })
@@ -373,12 +426,11 @@ GEAR_TYPES.forEach(({ slug, apiPath, label }) => {
         it('the item-count label matches the number of filtered cards', () => {
           cy.fetchAllItems(apiPath).then((allItems) => {
             const values = (allItems as Record<string, unknown>[])
-              .map(i => i[group]).filter(v => v != null).map(Number)
+              .map(i => i[group]).filter(v => v != null).map(Number).sort((a, b) => a - b)
             if (values.length < 2) return
 
             const median = values[Math.floor(values.length / 2)]
-            cy.get(`[data-cy="filter-group"][data-group="${group}"]`)
-              .find('[data-cy="range-min"]').clear().type(String(median))
+            setSlider(group, 'min', median)
 
             cy.get('[data-cy="gear-card"]').its('length').then((count) => {
               cy.get('[data-cy="item-count"]').should('contain.text', String(count))
@@ -398,10 +450,15 @@ GEAR_TYPES.forEach(({ slug, apiPath, label }) => {
 
     it('shows an empty state with a clear-filters link when nothing matches', () => {
       if (pills.length < 2) return
-      cy.get(`[data-cy="filter-group"][data-group="${pills[0].group}"]`)
-        .find('[data-cy="filter-pill"]').last().click()
-      cy.get(`[data-cy="filter-group"][data-group="${pills[1].group}"]`)
-        .find('[data-cy="filter-pill"]').last().click()
+      // Activate the last pill of every group that actually has options (some
+      // enum fields are all-null in the data → zero pills). Stacking these
+      // incompatible constraints drives the list toward empty.
+      pills.forEach(({ group }) => {
+        cy.get(`[data-cy="filter-group"][data-group="${group}"]`).then(($g) => {
+          const $pills = $g.find('[data-cy="filter-pill"]')
+          if ($pills.length > 0) cy.wrap($pills.last()).click()
+        })
+      })
       cy.get('body').then(($body) => {
         if ($body.find('[data-cy="empty-state"]').length > 0) {
           cy.get('[data-cy="empty-state"]').find('[data-cy="clear-filters"]').should('be.visible')
@@ -419,13 +476,20 @@ GEAR_TYPES.forEach(({ slug, apiPath, label }) => {
         .should('have.attr', 'data-active', 'false')
     })
 
-    it('clear-filters resets all range inputs to empty', () => {
+    it('clear-filters resets the range sliders to their full span', () => {
       if (ranges.length === 0) return
-      cy.get(`[data-cy="filter-group"][data-group="${ranges[0].group}"]`)
-        .find('[data-cy="range-min"]').type('999')
-      cy.get('[data-cy="clear-filters"]').first().click()
-      cy.get(`[data-cy="filter-group"][data-group="${ranges[0].group}"]`)
-        .find('[data-cy="range-min"]').should('have.value', '')
+      const group = ranges[0].group
+      cy.fetchAllItems(apiPath).then((allItems) => {
+        const values = (allItems as Record<string, unknown>[])
+          .map(i => i[group]).filter(v => v != null).map(Number).sort((a, b) => a - b)
+        if (values.length < 2) return
+        setSlider(group, 'min', values[Math.floor(values.length / 2)])
+        cy.get('[data-cy="clear-filters"]').first().click()
+        // The min thumb returns to the domain floor (its `min` attribute).
+        cy.get(`[data-cy="filter-group"][data-group="${group}"]`)
+          .find('[data-cy="range-min"]')
+          .should(($el) => expect($el.val()).to.eq($el.attr('min')))
+      })
     })
   })
 })
@@ -451,12 +515,14 @@ GEAR_TYPES.forEach(({ slug, apiPath, label }) => {
 describe('Webbing stretch filter', () => {
   const api = () => Cypress.env('apiUrl')
 
-  // Helper: parse stretch JSON and return kN values present in a single item
+  // Helper: parse stretch JSON and return kN values present in a single item.
+  // Skip malformed points with no numeric kn (some data has stray {percent}
+  // entries) — the widget excludes them too, so they must not count as pills.
   function parseKnValues(stretchJson: string | null): number[] {
     if (!stretchJson) return []
     try {
       const points: { kn: number; percent: number }[] = JSON.parse(stretchJson)
-      return points.map(p => p.kn)
+      return points.map(p => p.kn).filter((k): k is number => typeof k === 'number')
     } catch {
       return []
     }
@@ -472,6 +538,28 @@ describe('Webbing stretch filter', () => {
     } catch {
       return null
     }
+  }
+
+  // Helper: the kN → webbing-count map across the whole dataset.
+  function knFrequency(webbings: Record<string, unknown>[]): Map<number, number> {
+    const freq = new Map<number, number>()
+    webbings.forEach(w => {
+      new Set(parseKnValues(w.stretch as string | null)).forEach(k => {
+        freq.set(k, (freq.get(k) ?? 0) + 1)
+      })
+    })
+    return freq
+  }
+
+  // Helper: the top-5 reference kN points the widget must offer — 0 kN dropped,
+  // integers only, ranked by webbing count (ties toward the smaller kN). Mirrors
+  // src/utils/stretch.ts topKnPoints. Returns [{kn, count}] in that ranked order.
+  function topKnPoints(webbings: Record<string, unknown>[], n = 5): { kn: number; count: number }[] {
+    return [...knFrequency(webbings).entries()]
+      .filter(([kn]) => kn !== 0 && Number.isInteger(kn))
+      .sort((a, b) => b[1] - a[1] || a[0] - b[0])
+      .slice(0, n)
+      .map(([kn, count]) => ({ kn, count }))
   }
 
   beforeEach(() => {
@@ -497,54 +585,58 @@ describe('Webbing stretch filter', () => {
       .find('[data-cy="range-max"]').should('exist')
   })
 
-  it('kN pills are populated from the actual dataset (no phantom values)', () => {
+  it('shows only the top-5 kN points as pills (integers, no 0 kN)', () => {
     cy.fetchAllItems('webbing').then((all) => {
-      const allKn = new Set<number>()
-      ;(all as Record<string, unknown>[]).forEach(w => {
-        parseKnValues(w.stretch as string | null).forEach(k => allKn.add(k))
-      })
-      const expectedCount = allKn.size
-
+      const top = topKnPoints(all as Record<string, unknown>[])
       cy.get('[data-cy="filter-group"][data-group="stretch"]')
         .find('[data-cy="stretch-kn-pill"]')
-        .should('have.length', expectedCount)
+        .should('have.length', top.length)
     })
   })
 
-  it('kN pill labels match the actual kN values present in the data', () => {
+  it('pill labels are exactly the top-5 kN values (no phantom / non-top values)', () => {
     cy.fetchAllItems('webbing').then((all) => {
-      const allKn = new Set<number>()
-      ;(all as Record<string, unknown>[]).forEach(w => {
-        parseKnValues(w.stretch as string | null).forEach(k => allKn.add(k))
-      })
+      const topKns = topKnPoints(all as Record<string, unknown>[]).map(p => p.kn)
 
-      allKn.forEach(kn => {
-        cy.get('[data-cy="filter-group"][data-group="stretch"]')
-          .find('[data-cy="stretch-kn-pill"]')
-          .contains(`${kn}`)
-          .should('exist')
+      cy.get('[data-cy="filter-group"][data-group="stretch"]')
+        .find('[data-cy="stretch-kn-pill"]').then(($pills) => {
+          const shown = [...$pills].map(p => Number(p.getAttribute('data-kn')))
+          expect([...shown].sort((a, b) => a - b)).to.deep.equal([...topKns].sort((a, b) => a - b))
+        })
+    })
+  })
+
+  it('never offers 0 kN or non-integer kN as a pill', () => {
+    cy.get('[data-cy="filter-group"][data-group="stretch"]')
+      .find('[data-cy="stretch-kn-pill"]').each(($pill) => {
+        const kn = Number($pill.attr('data-kn'))
+        expect(kn).to.not.equal(0)
+        expect(Number.isInteger(kn)).to.equal(true)
       })
+  })
+
+  it('each pill shows the number of webbings with data at that kN', () => {
+    cy.fetchAllItems('webbing').then((all) => {
+      const counts = new Map(topKnPoints(all as Record<string, unknown>[]).map(p => [p.kn, p.count]))
+      cy.get('[data-cy="filter-group"][data-group="stretch"]')
+        .find('[data-cy="stretch-kn-pill"]').each(($pill) => {
+          const kn = Number($pill.attr('data-kn'))
+          expect(Number($pill.attr('data-count'))).to.equal(counts.get(kn))
+          expect($pill.text()).to.contain(`(${counts.get(kn)})`)
+        })
     })
   })
 
   // ── Default selected kN ───────────────────────────────────────────────────
 
-  it('defaults to the most common kN value pre-selected', () => {
+  it('defaults to the most common (top) kN value pre-selected', () => {
     cy.fetchAllItems('webbing').then((all) => {
-      // Count occurrences of each kN across all stretch arrays
-      const freq: Record<number, number> = {}
-      ;(all as Record<string, unknown>[]).forEach(w => {
-        parseKnValues(w.stretch as string | null).forEach(k => {
-          freq[k] = (freq[k] ?? 0) + 1
-        })
-      })
-      const mostCommonKn = Number(
-        Object.entries(freq).sort(([, a], [, b]) => b - a)[0][0]
-      )
+      // The default is the highest-count top point.
+      const mostCommonKn = topKnPoints(all as Record<string, unknown>[])[0].kn
 
       cy.get('[data-cy="filter-group"][data-group="stretch"]')
         .find('[data-cy="stretch-kn-pill"][data-active="true"]')
-        .should('contain.text', `${mostCommonKn}`)
+        .should('have.attr', 'data-kn', `${mostCommonKn}`)
     })
   })
 
@@ -574,6 +666,12 @@ describe('Webbing stretch filter', () => {
   })
 
   it('clicking the active kN pill deselects it (widget goes inactive)', () => {
+    // The default pre-selection is a non-filtering hint; the first click on any
+    // pill engages it. Engage a pill, then click that engaged pill to toggle the
+    // widget off.
+    cy.get('[data-cy="filter-group"][data-group="stretch"]')
+      .find('[data-cy="stretch-kn-pill"]').first().click()
+
     cy.get('[data-cy="filter-group"][data-group="stretch"]')
       .find('[data-cy="stretch-kn-pill"][data-active="true"]').click()
 
@@ -588,27 +686,17 @@ describe('Webbing stretch filter', () => {
     cy.fetchAllItems('webbing').then((all) => {
       const webbings = all as Record<string, unknown>[]
 
-      // Find a kN value that some (but not all) webbings have data for
-      const freq: Record<number, number> = {}
-      webbings.forEach(w => {
-        parseKnValues(w.stretch as string | null).forEach(k => {
-          freq[k] = (freq[k] ?? 0) + 1
-        })
-      })
+      // Find a TOP-5 kN that some (but not all) webbings have data for — only
+      // top points are offered as pills now.
+      const partial = topKnPoints(webbings)
+        .find(({ count }) => count > 0 && count < webbings.length)
 
-      const partialKn = Object.entries(freq)
-        .find(([, count]) => count > 0 && count < webbings.length)
-
-      if (!partialKn) return // skip if all webbings have data at every kN (unlikely)
-
-      const kn = Number(partialKn[0])
-      const expectedCount = partialKn[1]
+      if (!partial) return // skip if every top kN is present on every webbing (unlikely)
 
       cy.get('[data-cy="filter-group"][data-group="stretch"]')
-        .find('[data-cy="stretch-kn-pill"]')
-        .contains(`${kn}`).click()
+        .find(`[data-cy="stretch-kn-pill"][data-kn="${partial.kn}"]`).click()
 
-      cy.get('[data-cy="gear-card"]').should('have.length', expectedCount)
+      cy.get('[data-cy="gear-card"]').should('have.length', partial.count)
     })
   })
 
@@ -641,13 +729,10 @@ describe('Webbing stretch filter', () => {
         .find('[data-cy="stretch-kn-pill"]')
         .contains(`${mostCommonKn}`).click()
 
-      const eligibleCount = percents.length // items with this kN
-
-      cy.get('[data-cy="filter-group"][data-group="stretch"]')
-        .find('[data-cy="range-min"]').clear().type(String(median))
+      setSlider('stretch', 'min', median)
 
       cy.get('[data-cy="gear-card"]')
-        .its('length').should('be.lte', eligibleCount)
+        .its('length').should('be.lte', percents.length)
     })
   })
 
@@ -678,8 +763,7 @@ describe('Webbing stretch filter', () => {
         .find('[data-cy="stretch-kn-pill"]')
         .contains(`${mostCommonKn}`).click()
 
-      cy.get('[data-cy="filter-group"][data-group="stretch"]')
-        .find('[data-cy="range-max"]').clear().type(String(median))
+      setSlider('stretch', 'max', median)
 
       cy.get('[data-cy="gear-card"]')
         .its('length').should('be.lte', percents.length)
@@ -698,18 +782,19 @@ describe('Webbing stretch filter', () => {
   // ── Clearing ──────────────────────────────────────────────────────────────
 
   it('clear-filters deselects the kN pill and clears the % range', () => {
-    cy.get('[data-cy="filter-group"][data-group="stretch"]')
-      .find('[data-cy="stretch-kn-pill"]').first().click()
-    cy.get('[data-cy="filter-group"][data-group="stretch"]')
-      .find('[data-cy="range-min"]').type('5')
+    const stretch = '[data-cy="filter-group"][data-group="stretch"]'
+    cy.get(stretch).find('[data-cy="stretch-kn-pill"]').first().click()
+    // Move the % min thumb off its floor (up to the domain ceiling).
+    cy.get(stretch).find('[data-cy="range-max"]').invoke('attr', 'max').then((hi) => {
+      setSlider('stretch', 'min', Number(hi))
+    })
 
     cy.get('[data-cy="clear-filters"]').first().click()
 
-    cy.get('[data-cy="filter-group"][data-group="stretch"]')
-      .find('[data-cy="stretch-kn-pill"][data-active="true"]')
-      .should('not.exist')
-    cy.get('[data-cy="filter-group"][data-group="stretch"]')
-      .find('[data-cy="range-min"]').should('have.value', '')
+    cy.get(stretch).find('[data-cy="stretch-kn-pill"][data-active="true"]').should('not.exist')
+    // The % min thumb returns to its domain floor.
+    cy.get(stretch).find('[data-cy="range-min"]')
+      .should(($el) => expect($el.val()).to.eq($el.attr('min')))
   })
 
   it('restores the full webbing list when the stretch filter is cleared', () => {
@@ -721,48 +806,144 @@ describe('Webbing stretch filter', () => {
     })
   })
 
-  // ── Sort by stretch at selected kN ────────────────────────────────────────
+  // ── Sort by stretch at a top-5 kN (decoupled from the filter pill) ─────────
 
-  it('the sort dropdown exposes Stretch % Low→High when a kN is selected', () => {
-    cy.get('[data-cy="filter-group"][data-group="stretch"]')
-      .find('[data-cy="stretch-kn-pill"]').first().click()
+  it('the sort dropdown exposes a Stretch sort row without needing a filter pill', () => {
     cy.get('[data-cy="sort-dropdown"]').click()
-    cy.get('[data-cy="sort-option"]').contains(/stretch.*low|low.*stretch/i).should('exist')
+    cy.get('[data-cy="sort-stretch-row"]').should('exist')
+    cy.get('[data-cy="sort-stretch-row"] [data-cy="sort-option"][data-field="stretch"][data-direction="asc"]')
+      .should('exist')
+    cy.get('[data-cy="sort-stretch-row"] [data-cy="sort-option"][data-field="stretch"][data-direction="desc"]')
+      .should('exist')
   })
 
-  it('the sort dropdown exposes Stretch % High→Low when a kN is selected', () => {
-    cy.get('[data-cy="filter-group"][data-group="stretch"]')
-      .find('[data-cy="stretch-kn-pill"]').first().click()
-    cy.get('[data-cy="sort-dropdown"]').click()
-    cy.get('[data-cy="sort-option"]').contains(/stretch.*high|high.*stretch/i).should('exist')
-  })
-
-  it('sorting by Stretch % Low→High orders cards ascending by % at the selected kN', () => {
+  it('the stretch kN secondary dropdown lists exactly the top-5 kN points', () => {
     cy.fetchAllItems('webbing').then((all) => {
-      const webbings = all as Record<string, unknown>[]
-
-      const freq: Record<number, number> = {}
-      webbings.forEach(w => {
-        parseKnValues(w.stretch as string | null).forEach(k => {
-          freq[k] = (freq[k] ?? 0) + 1
-        })
-      })
-      const mostCommonKn = Number(
-        Object.entries(freq).sort(([, a], [, b]) => b - a)[0][0]
-      )
-
-      cy.get('[data-cy="filter-group"][data-group="stretch"]')
-        .find('[data-cy="stretch-kn-pill"]')
-        .contains(`${mostCommonKn}`).click()
-
+      const topKns = topKnPoints(all as Record<string, unknown>[]).map(p => p.kn)
       cy.get('[data-cy="sort-dropdown"]').click()
-      cy.get('[data-cy="sort-option"]').contains(/stretch.*low/i).click()
+      cy.get('[data-cy="stretch-sort-kn"]').click()
+      cy.get('[data-cy="stretch-sort-kn-option"]').then(($opts) => {
+        const shown = [...$opts].map(o => Number(o.getAttribute('data-kn')))
+        expect([...shown].sort((a, b) => a - b)).to.deep.equal([...topKns].sort((a, b) => a - b))
+      })
+    })
+  })
 
-      // Read the stretch % values shown on the cards (via data attribute)
-      cy.get('[data-cy="gear-card"][data-stretch-percent]').then(($cards) => {
-        const percents = [...$cards].map(c => parseFloat(c.getAttribute('data-stretch-percent') ?? '0'))
-        const sorted = [...percents].sort((a, b) => a - b)
-        expect(percents).to.deep.equal(sorted)
+  it('sorting by Stretch Low→High orders cards ascending by % at the chosen kN', () => {
+    // The default stretch-sort kN equals the default filter kN, so each card's
+    // own data-stretch-percent is the value being sorted on (reliable per-card,
+    // unlike mapping by webbing name — names are not unique).
+    cy.get('[data-cy="sort-dropdown"]').click()
+    cy.get('[data-cy="sort-stretch-row"] [data-cy="sort-option"][data-field="stretch"][data-direction="asc"]')
+      .click()
+
+    cy.get('[data-cy="gear-card"][data-stretch-percent]').should(($cards) => {
+      const percents = [...$cards]
+        .map(c => c.getAttribute('data-stretch-percent'))
+        .filter((v): v is string => v != null && v !== '')
+        .map(Number)
+      expect(percents).to.deep.equal([...percents].sort((a, b) => a - b))
+    })
+  })
+})
+
+// ── ISA Certified visibility (data-driven) ────────────────────────────────────
+// The ISA Certified toggle is dropped for gear types where nothing is certified
+// (a lone "No" is useless), and shown where at least one item is certified.
+
+describe('ISA Certified filter visibility', () => {
+  it('is HIDDEN for a type with no certified gear (rollers)', () => {
+    cy.visit('/rollers')
+    cy.get('[data-cy="filter-sidebar"]').should('be.visible')
+    cy.get('[data-cy="filter-group"][data-group="isa_certified"]').should('not.exist')
+  })
+
+  it('is HIDDEN for starter kits and trickline kits (none certified)', () => {
+    cy.visit('/starterkits')
+    cy.get('[data-cy="filter-group"][data-group="isa_certified"]').should('not.exist')
+    cy.visit('/tricklinekits')
+    cy.get('[data-cy="filter-group"][data-group="isa_certified"]').should('not.exist')
+  })
+
+  it('is SHOWN for types that have certified gear (webbings, leash rings)', () => {
+    cy.visit('/webbings')
+    cy.get('[data-cy="filter-group"][data-group="isa_certified"]').should('exist')
+    cy.visit('/leashrings')
+    cy.get('[data-cy="filter-group"][data-group="isa_certified"]').should('exist')
+  })
+})
+
+// ── TreePro "Sold As" label capitalization ────────────────────────────────────
+
+describe('TreePro Sold As labels', () => {
+  it('capitalizes the pair / single pill labels', () => {
+    cy.visit('/treepros')
+    cy.get('[data-cy="filter-group"][data-group="price_unit"]')
+      .find('[data-cy="filter-pill"]').then(($pills) => {
+        const labels = [...$pills].map(p => (p.textContent ?? '').trim())
+        expect(labels.length).to.be.gte(1)
+        labels.forEach(l => expect(l).to.match(/^[A-Z]/)) // each starts uppercase
+        expect(labels).to.include.members(['Pair', 'Single'])
+      })
+  })
+})
+
+// ── Trickline kit weight is not filterable ────────────────────────────────────
+
+describe('Trickline kit weight filter', () => {
+  it('trickline kits have NO Kit Weight range filter (only 2 of 9 have data)', () => {
+    cy.visit('/tricklinekits')
+    cy.get('[data-cy="filter-sidebar"]').should('be.visible')
+    cy.get('[data-cy="filter-group"][data-group="weight"]').should('not.exist')
+  })
+
+  it('starter kits DO keep the Kit Weight filter', () => {
+    cy.visit('/starterkits')
+    cy.get('[data-cy="filter-group"][data-group="weight"]').should('exist')
+  })
+})
+
+// ── Editable range-slider bound labels ────────────────────────────────────────
+// The min/max value labels below each slider are click-to-edit: one click turns
+// the value into a numeric input; typing a value and committing moves the thumb.
+
+describe('Editable slider bounds — Webbing width', () => {
+  beforeEach(() => {
+    cy.visit('/webbings')
+  })
+
+  it('clicking the min value label reveals an editable number input', () => {
+    const scope = '[data-cy="filter-group"][data-group="width"]'
+    cy.get(scope).find('[data-cy="range-min-value"]').should('have.attr', 'data-editing', 'false').click()
+    cy.get(scope).find('[data-cy="range-min-value"]').should('have.attr', 'data-editing', 'true')
+    cy.get(scope).find('input[data-cy="range-min-value"]').should('be.visible')
+  })
+
+  it('typing a new min value moves the min thumb to that value', () => {
+    const scope = '[data-cy="filter-group"][data-group="width"]'
+    // Wait for the data-driven domain to load.
+    cy.get(scope).find('[data-cy="range-max"]').should(($el) => {
+      expect(Number($el.attr('max'))).to.be.greaterThan(Number($el.attr('min')))
+    })
+    cy.get(scope).find('[data-cy="range-min"]').invoke('attr', 'min').then((lo) => {
+      const target = Number(lo) + 2
+      cy.get(scope).find('[data-cy="range-min-value"]').click()
+      cy.get(scope).find('input[data-cy="range-min-value"]').clear().type(`${target}{enter}`)
+      cy.get(scope).find('[data-cy="range-min"]').should('have.value', `${target}`)
+    })
+  })
+
+  it('committing an out-of-range min value is clamped, not rejected', () => {
+    const scope = '[data-cy="filter-group"][data-group="width"]'
+    cy.get(scope).find('[data-cy="range-max"]').should(($el) => {
+      expect(Number($el.attr('max'))).to.be.greaterThan(Number($el.attr('min')))
+    })
+    cy.get(scope).find('[data-cy="range-min-value"]').click()
+    cy.get(scope).find('input[data-cy="range-min-value"]').clear().type('99999{enter}')
+    // Clamped to at most the current max thumb value.
+    cy.get(scope).find('[data-cy="range-min"]').then(($min) => {
+      cy.get(scope).find('[data-cy="range-max"]').then(($max) => {
+        expect(Number($min.val())).to.be.lte(Number($max.val()))
       })
     })
   })

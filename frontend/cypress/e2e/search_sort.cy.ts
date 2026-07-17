@@ -198,6 +198,17 @@ GEAR_TYPES.forEach(({ slug, apiPath, label }) => {
       cy.get('[data-cy="sort-dropdown"]').should('be.visible')
     })
 
+    // ── Default order ─────────────────────────────────────────────────────────
+    // A fresh load (no sort chosen) must be alphabetical by name — name is the
+    // default sort as well as the universal tie-breaker.
+
+    it('defaults to ascending alphabetical order on first load', () => {
+      cy.get('[data-cy="gear-card-name"]').then(($els) => {
+        const names = [...$els].map(el => el.textContent ?? '')
+        expect(names).to.deep.equal([...names].sort((a, b) => a.localeCompare(b)))
+      })
+    })
+
     it('always contains Name A→Z and Name Z→A', () => {
       cy.get('[data-cy="sort-dropdown"]').click()
       cy.get('[data-cy="sort-option"]').contains(/name.*a.*z|a.*z/i).should('exist')
@@ -273,6 +284,26 @@ GEAR_TYPES.forEach(({ slug, apiPath, label }) => {
         })
       })
 
+      it(`${fieldLabel} Low→High: equal values are broken alphabetically by name`, () => {
+        cy.get('[data-cy="sort-dropdown"]').click()
+        cy.get('[data-cy="sort-option"]')
+          .filter(`[data-field="${field}"][data-direction="asc"]`).click()
+
+        cy.get('[data-cy="gear-card"]').then(($cards) => {
+          const rows = [...$cards].map(c => ({
+            value: c.getAttribute(`data-${field.replace(/_/g, '-')}`) ?? '',
+            name: c.querySelector('[data-cy="gear-card-name"]')?.textContent ?? '',
+          }))
+          // Within every run of cards sharing the same numeric value, names must
+          // be in ascending alphabetical order.
+          for (let i = 1; i < rows.length; i++) {
+            if (rows[i].value !== '' && rows[i].value === rows[i - 1].value) {
+              expect(rows[i - 1].name.localeCompare(rows[i].name)).to.be.at.most(0)
+            }
+          }
+        })
+      })
+
       it(`${fieldLabel} High→Low: cards are in descending numeric order (nulls last)`, () => {
         cy.get('[data-cy="sort-dropdown"]').click()
         cy.get('[data-cy="sort-option"]')
@@ -315,18 +346,13 @@ GEAR_TYPES.forEach(({ slug, apiPath, label }) => {
   })
 })
 
-// ── Webbing stretch sort (context-driven) ─────────────────────────────────────
+// ── Webbing stretch sort (top-5 kN, secondary dropdown) ───────────────────────
 //
-// Stretch sort options appear in the dropdown ONLY when a kN is selected in
-// the stretch filter widget. The selected kN determines which stretch % values
-// are used for ordering.
-//
-// Null-last: webbings without stretch data at the selected kN sort to the
-// bottom regardless of direction — they are NOT excluded from results unless
-// a % range filter is also active.
-//
-// Cards carry data-stretch-percent="<value>" when they have data at the
-// selected kN, and data-stretch-percent="" when they do not.
+// Stretch sorting is decoupled from the filter widget: the sort dropdown always
+// carries ONE "Stretch at <kN>" row for webbings, where the kN is a nested
+// secondary dropdown offering the top-5 stretch points. Low→High / High→Low then
+// order by the % at the chosen kN (nulls last, ties alphabetical). No filter kN
+// pill needs to be selected.
 
 describe('Webbing stretch sort', () => {
   function parseKnValues(json: string | null): number[] {
@@ -343,163 +369,146 @@ describe('Webbing stretch sort', () => {
     } catch { return null }
   }
 
+  // Mirror of src/utils/stretch.ts topKnPoints: 0 dropped, integers only, top-5
+  // by webbing count (ties toward smaller kN).
+  function topKnPoints(webbings: Record<string, unknown>[], n = 5): { kn: number; count: number }[] {
+    const freq = new Map<number, number>()
+    webbings.forEach(w => {
+      new Set(parseKnValues(w.stretch as string | null)).forEach(k => {
+        freq.set(k, (freq.get(k) ?? 0) + 1)
+      })
+    })
+    return [...freq.entries()]
+      .filter(([kn]) => kn !== 0 && Number.isInteger(kn))
+      .sort((a, b) => b[1] - a[1] || a[0] - b[0])
+      .slice(0, n)
+      .map(([kn, count]) => ({ kn, count }))
+  }
+
+  // Read the visible cards' item ids top-to-bottom, from the detail-link href
+  // (/webbings/<id>). Ids are unique — webbing NAMES are not, so map by id.
+  function cardIds($cards: JQuery<HTMLElement>): string[] {
+    return [...$cards].map(c => {
+      const href = c.querySelector('[data-cy="gear-card-name"]')?.getAttribute('href') ?? ''
+      return href.split('/').pop() ?? ''
+    })
+  }
+
+  function pctByIdAt(webbings: Record<string, unknown>[], kn: number): Map<string, number | null> {
+    return new Map(webbings.map(w => [String(w.id), percentAtKn(w.stretch as string | null, kn)]))
+  }
+
   beforeEach(() => {
     cy.visit('/webbings')
   })
 
-  it('stretch sort options are NOT in the dropdown before a kN is selected', () => {
+  it('exposes a stretch sort row in the dropdown WITHOUT a filter kN selected', () => {
     cy.get('[data-cy="sort-dropdown"]').click()
-    cy.get('[data-cy="sort-option"][data-field="stretch"]').should('not.exist')
+    cy.get('[data-cy="sort-stretch-row"]').should('exist')
+    cy.get('[data-cy="sort-stretch-row"] [data-cy="sort-option"][data-field="stretch"][data-direction="asc"]')
+      .should('exist')
+    cy.get('[data-cy="sort-stretch-row"] [data-cy="sort-option"][data-field="stretch"][data-direction="desc"]')
+      .should('exist')
     cy.get('body').type('{esc}')
   })
 
-  it('stretch Low→High and High→Low options appear after selecting a kN', () => {
-    cy.get('[data-cy="filter-group"][data-group="stretch"]')
-      .find('[data-cy="stretch-kn-pill"]').first().click()
-
-    cy.get('[data-cy="sort-dropdown"]').click()
-    cy.get('[data-cy="sort-option"][data-field="stretch"][data-direction="asc"]').should('exist')
-    cy.get('[data-cy="sort-option"][data-field="stretch"][data-direction="desc"]').should('exist')
-    cy.get('body').type('{esc}')
+  it('the kN secondary dropdown offers only the top-5 stretch points', () => {
+    cy.fetchAllItems('webbing').then((all) => {
+      const topKns = topKnPoints(all as Record<string, unknown>[]).map(p => p.kn)
+      cy.get('[data-cy="sort-dropdown"]').click()
+      cy.get('[data-cy="stretch-sort-kn"]').click()
+      cy.get('[data-cy="stretch-sort-kn-option"]').should('have.length', topKns.length)
+      cy.get('[data-cy="stretch-sort-kn-option"]').then(($opts) => {
+        const shown = [...$opts].map(o => Number(o.getAttribute('data-kn')))
+        expect([...shown].sort((a, b) => a - b)).to.deep.equal([...topKns].sort((a, b) => a - b))
+      })
+    })
   })
 
-  it('stretch sort options disappear when the kN pill is deselected', () => {
-    cy.get('[data-cy="filter-group"][data-group="stretch"]')
-      .find('[data-cy="stretch-kn-pill"]').first().click()  // select
-    cy.get('[data-cy="filter-group"][data-group="stretch"]')
-      .find('[data-cy="stretch-kn-pill"]').first().click()  // deselect
-
-    cy.get('[data-cy="sort-dropdown"]').click()
-    cy.get('[data-cy="sort-option"][data-field="stretch"]').should('not.exist')
-    cy.get('body').type('{esc}')
+  it('defaults the stretch sort kN to the most common (top) point', () => {
+    cy.fetchAllItems('webbing').then((all) => {
+      const defaultKn = topKnPoints(all as Record<string, unknown>[])[0].kn
+      cy.get('[data-cy="sort-dropdown"]').click()
+      cy.get('[data-cy="stretch-sort-kn"]').should('have.attr', 'data-kn', `${defaultKn}`)
+      cy.get('body').type('{esc}')
+    })
   })
 
-  it('Stretch Low→High orders by % ascending at the selected kN, nulls last', () => {
+  it('Stretch Low→High orders by % ascending at the chosen kN, nulls last', () => {
     cy.fetchAllItems('webbing').then((all) => {
       const webbings = all as Record<string, unknown>[]
-
-      // Find the most common kN
-      const freq: Record<number, number> = {}
-      webbings.forEach(w => {
-        parseKnValues(w.stretch as string | null).forEach(k => {
-          freq[k] = (freq[k] ?? 0) + 1
-        })
-      })
-      const kn = Number(Object.entries(freq).sort(([, a], [, b]) => b - a)[0][0])
-
-      cy.get('[data-cy="filter-group"][data-group="stretch"]')
-        .find('[data-cy="stretch-kn-pill"]').contains(`${kn}`).click()
+      const kn = topKnPoints(webbings)[0].kn
+      const pctById = pctByIdAt(webbings, kn)
 
       cy.get('[data-cy="sort-dropdown"]').click()
-      cy.get('[data-cy="sort-option"][data-field="stretch"][data-direction="asc"]').click()
+      cy.get('[data-cy="sort-stretch-row"] [data-cy="sort-option"][data-field="stretch"][data-direction="asc"]')
+        .click()
 
-      cy.get('[data-cy="gear-card"]').then(($cards) => {
-        const raw     = [...$cards].map(c => c.getAttribute('data-stretch-percent') ?? '')
-        const nums    = raw.filter(v => v !== '').map(Number)
-        const firstNull = raw.indexOf('')
-        const lastNum   = raw.map((v, i) => v !== '' ? i : -1).filter(i => i >= 0).pop() ?? -1
-
-        // Non-null values are ascending
+      cy.get('[data-cy="gear-card"]').should(($cards) => {
+        const pcts = cardIds($cards).map(id => pctById.get(id) ?? null)
+        const nums = pcts.filter((p): p is number => p != null)
         expect(nums).to.deep.equal([...nums].sort((a, b) => a - b))
-
-        // Nulls (no data at this kN) are after all real values
-        if (firstNull !== -1 && lastNum !== -1) {
-          expect(firstNull).to.be.gt(lastNum)
-        }
+        const firstNull = pcts.indexOf(null)
+        const lastNum = pcts.map((p, i) => (p != null ? i : -1)).filter(i => i >= 0).pop() ?? -1
+        if (firstNull !== -1 && lastNum !== -1) expect(firstNull).to.be.gt(lastNum)
       })
     })
   })
 
-  it('Stretch High→Low orders by % descending at the selected kN, nulls last', () => {
+  it('Stretch High→Low orders by % descending at the chosen kN, nulls last', () => {
     cy.fetchAllItems('webbing').then((all) => {
       const webbings = all as Record<string, unknown>[]
-
-      const freq: Record<number, number> = {}
-      webbings.forEach(w => {
-        parseKnValues(w.stretch as string | null).forEach(k => {
-          freq[k] = (freq[k] ?? 0) + 1
-        })
-      })
-      const kn = Number(Object.entries(freq).sort(([, a], [, b]) => b - a)[0][0])
-
-      cy.get('[data-cy="filter-group"][data-group="stretch"]')
-        .find('[data-cy="stretch-kn-pill"]').contains(`${kn}`).click()
+      const kn = topKnPoints(webbings)[0].kn
+      const pctById = pctByIdAt(webbings, kn)
 
       cy.get('[data-cy="sort-dropdown"]').click()
-      cy.get('[data-cy="sort-option"][data-field="stretch"][data-direction="desc"]').click()
+      cy.get('[data-cy="sort-stretch-row"] [data-cy="sort-option"][data-field="stretch"][data-direction="desc"]')
+        .click()
 
-      cy.get('[data-cy="gear-card"]').then(($cards) => {
-        const raw     = [...$cards].map(c => c.getAttribute('data-stretch-percent') ?? '')
-        const nums    = raw.filter(v => v !== '').map(Number)
-        const firstNull = raw.indexOf('')
-        const lastNum   = raw.map((v, i) => v !== '' ? i : -1).filter(i => i >= 0).pop() ?? -1
-
+      cy.get('[data-cy="gear-card"]').should(($cards) => {
+        const pcts = cardIds($cards).map(id => pctById.get(id) ?? null)
+        const nums = pcts.filter((p): p is number => p != null)
         expect(nums).to.deep.equal([...nums].sort((a, b) => b - a))
-
-        if (firstNull !== -1 && lastNum !== -1) {
-          expect(firstNull).to.be.gt(lastNum)
-        }
+        const firstNull = pcts.indexOf(null)
+        const lastNum = pcts.map((p, i) => (p != null ? i : -1)).filter(i => i >= 0).pop() ?? -1
+        if (firstNull !== -1 && lastNum !== -1) expect(firstNull).to.be.gt(lastNum)
       })
     })
   })
 
-  it('changing the selected kN updates both the visible cards and the sort', () => {
+  it('all webbings stay visible when sorting by stretch (nulls sink, not excluded)', () => {
     cy.fetchAllItems('webbing').then((all) => {
-      const webbings = all as Record<string, unknown>[]
-
-      const freq: Record<number, number> = {}
-      webbings.forEach(w => {
-        parseKnValues(w.stretch as string | null).forEach(k => {
-          freq[k] = (freq[k] ?? 0) + 1
-        })
-      })
-      const sortedKns = Object.entries(freq).sort(([, a], [, b]) => b - a)
-      if (sortedKns.length < 2) return
-
-      const kn1 = Number(sortedKns[0][0])
-      const kn2 = Number(sortedKns[1][0])
-
-      // Select first kN and sort
-      cy.get('[data-cy="filter-group"][data-group="stretch"]')
-        .find('[data-cy="stretch-kn-pill"]').contains(`${kn1}`).click()
       cy.get('[data-cy="sort-dropdown"]').click()
-      cy.get('[data-cy="sort-option"][data-field="stretch"][data-direction="asc"]').click()
-
-      cy.get('[data-cy="gear-card"]').its('length').then((count1) => {
-        // Switch to second kN
-        cy.get('[data-cy="filter-group"][data-group="stretch"]')
-          .find('[data-cy="stretch-kn-pill"]').contains(`${kn2}`).click()
-
-        // Sort option should still be stretch asc but now driven by kn2
-        cy.get('[data-cy="sort-dropdown"]')
-          .should('contain.text', `${kn2}`)
-
-        // Card count may differ since different kN values are present in different webbings
-        cy.get('[data-cy="gear-card"]').its('length').should('be.gte', 1)
-      })
+      cy.get('[data-cy="sort-stretch-row"] [data-cy="sort-option"][data-field="stretch"][data-direction="asc"]')
+        .click()
+      cy.get('[data-cy="gear-card"]').should('have.length', all.length)
     })
   })
 
-  it('stretch sort without a % range filter shows all webbings (not just those with data)', () => {
+  it('choosing a different kN in the secondary dropdown re-sorts by that kN', () => {
     cy.fetchAllItems('webbing').then((all) => {
       const webbings = all as Record<string, unknown>[]
+      const top = topKnPoints(webbings)
+      if (top.length < 2) return
+      const kn2 = top[1].kn
+      const pctById = pctByIdAt(webbings, kn2)
 
-      const freq: Record<number, number> = {}
-      webbings.forEach(w => {
-        parseKnValues(w.stretch as string | null).forEach(k => {
-          freq[k] = (freq[k] ?? 0) + 1
-        })
-      })
-      const kn = Number(Object.entries(freq).sort(([, a], [, b]) => b - a)[0][0])
-
-      // Select kN and sort — no % range set
-      cy.get('[data-cy="filter-group"][data-group="stretch"]')
-        .find('[data-cy="stretch-kn-pill"]').contains(`${kn}`).click()
       cy.get('[data-cy="sort-dropdown"]').click()
-      cy.get('[data-cy="sort-option"][data-field="stretch"][data-direction="asc"]').click()
+      // Sort ascending at the default kN first.
+      cy.get('[data-cy="sort-stretch-row"] [data-cy="sort-option"][data-field="stretch"][data-direction="asc"]')
+        .click()
+      // Reopen, switch the secondary kN to the second top point.
+      cy.get('[data-cy="sort-dropdown"]').click()
+      cy.get('[data-cy="stretch-sort-kn"]').click()
+      cy.get(`[data-cy="stretch-sort-kn-option"][data-kn="${kn2}"]`).click()
 
-      // All webbings are visible (those without data at this kN appear at the bottom)
-      cy.get('[data-cy="gear-card"]').should('have.length', webbings.length)
+      cy.get('[data-cy="sort-dropdown"]').should('contain.text', `${kn2}`)
+      cy.get('[data-cy="gear-card"]').should(($cards) => {
+        const nums = cardIds($cards)
+          .map(id => pctById.get(id) ?? null)
+          .filter((p): p is number => p != null)
+        expect(nums).to.deep.equal([...nums].sort((a, b) => a - b))
+      })
     })
   })
 })

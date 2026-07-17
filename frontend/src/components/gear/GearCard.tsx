@@ -31,10 +31,17 @@ export default function GearCard({ item, meta }: { item: AnyItem; meta: GearType
     .map(s => formatValue(item[s.field], s.unit))
     .filter(v => v !== '')
 
+  // Webbing stretch % at the active kN (set by the listing page). Emitted only
+  // when present — an empty attribute would still match the [data-stretch-percent]
+  // selector the sort-order test uses.
+  const stretchAttr =
+    item.stretch_percent != null ? { 'data-stretch-percent': String(item.stretch_percent) } : {}
+
   return (
     <article
       data-cy="gear-card"
       {...dataAttrs(item, CARD_DATA_FIELDS[slug] ?? [])}
+      {...stretchAttr}
       className="flex flex-col overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-shadow hover:shadow-md"
     >
       <div
