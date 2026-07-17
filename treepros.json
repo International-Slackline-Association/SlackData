@@ -371,7 +371,7 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": null
+        "manufacturer": "Gibbon"
     },
     {
         "name": "Treeskin",
@@ -388,6 +388,6 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": null
+        "manufacturer": "Elephant"
     }
 ]

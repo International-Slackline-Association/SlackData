@@ -6,7 +6,13 @@ from sqlmodel import select
 
 from slack_data.database import SessionDep
 from slack_data.models.brands import Brand, BrandCreate, get_brand
-from slack_data.models.webbing import FiberMaterial, Webbing, WebbingConstruction, WebbingCreate
+from slack_data.models.webbing import (
+    FiberMaterial,
+    Webbing,
+    WebbingConstruction,
+    WebbingCreate,
+    classify_webbing,
+)
 from slack_data.utilities.currencies import Currency
 
 
@@ -34,10 +40,10 @@ def clean_webbing_data(webbing: dict) -> dict:
             cleaned_webbing[key] = 0
         elif key == "isa_certified":
             cleaned_webbing[key] = bool(value) if isinstance(value, str) else value
-        elif key == "stretch":
-            # stretch is a list of {kn, percent} dicts; store it as valid JSON
-            # (the generic str() branch below would emit a Python repr with
-            # single quotes, which is not JSON-parseable on the client).
+        elif key in {"stretch", "materialComposition"}:
+            # stretch (list of {kn, percent}) and materialComposition (list of
+            # fiber names) are stored as valid JSON — the generic str() branch
+            # below would emit a Python repr with single quotes, not JSON.
             cleaned_webbing[key] = json.dumps(value) if value else None
         elif key not in {"name", "brand", "materialType"} and value == "":
             cleaned_webbing[key] = None
@@ -56,6 +62,16 @@ def add_webbings_to_db(webbings: list[dict], session: SessionDep) -> None:
 
         material = get_material_type(str(webbing.get("materialType", "")))
 
+        breaking_strength = (
+            float(webbing["breakingStrength"])
+            if webbing.get("breakingStrength") not in (None, "")
+            else None
+        )
+
+        # For hybrids, parse the JSON list of component fiber names (set by
+        # clean_webbing_data) into FiberMaterial values for classification.
+        composition = parse_composition(webbing.get("materialComposition"))
+
         webbing_create = WebbingCreate(
             name=str(webbing.get("name")),
             brand_id=brand_id,
@@ -69,7 +85,9 @@ def add_webbings_to_db(webbings: list[dict], session: SessionDep) -> None:
             # weight is `float | None` in the model; the enriched dataset has
             # some null weights, so pass None through instead of float(None).
             weight=float(webbing.get("weight")) if webbing.get("weight") not in (None, "") else None,
-            breaking_strength=webbing.get("breakingStrength"),
+            breaking_strength=breaking_strength,
+            material_composition=webbing.get("materialComposition"),
+            classification=classify_webbing(material, breaking_strength, composition),
             stretch=webbing.get("stretch"),
             thickness=float(webbing.get("thickness")) if webbing.get("thickness") not in (None, "") else None,
             webbing_construction=get_webbing_construction(webbing.get("webbing_construction")),
@@ -84,6 +102,24 @@ def add_webbings_to_db(webbings: list[dict], session: SessionDep) -> None:
 
     session.commit()
     session.refresh(db_webbing)
+
+def parse_composition(raw) -> list[FiberMaterial] | None:
+    """Parse a hybrid's component fibers into FiberMaterial values.
+
+    `raw` is the JSON string produced by clean_webbing_data (e.g.
+    '["Polyester", "Dyneema/HMPE"]'), or a plain list, or None. Unknown fiber names
+    are skipped so a bad entry can't crash seeding."""
+    if not raw:
+        return None
+    fibers = json.loads(raw) if isinstance(raw, str) else raw
+    result = []
+    for name in fibers:
+        try:
+            result.append(FiberMaterial(name))
+        except ValueError:
+            continue
+    return result or None
+
 
 def parse_currency(value) -> Currency | None:
     """Map a currency code to the enum; unknown codes -> None (don't crash seeding)."""
@@ -128,13 +164,13 @@ def get_material_type(material: str) -> FiberMaterial:
     Convert the material string to a Material enum.
     """
     material = material.lower()
-    if "pes/polyamid" in material:
+    if "pes/polyamid" in material or "hybrid" in material:
         return FiberMaterial.HYBRID
     elif "nylon" in material or "polyamid" in material:
         return FiberMaterial.NYLON
     elif "polyester" in material or "pes" in material:
         return FiberMaterial.POLYESTER
-    elif "dyneema" in material:
+    elif "dyneema" in material or "hmpe" in material:  # HMPE/UHMWPE == Dyneema
         return FiberMaterial.DYNEEMA
     elif "vectran" in material:
         return FiberMaterial.VECTRAN

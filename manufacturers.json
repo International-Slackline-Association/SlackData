@@ -1,381 +1,857 @@
 {
   "metadata": {
-    "total_manufacturers": 74,
+    "total_manufacturers": 76,
     "known_manufacturers": 74,
     "missing_manufacturers": 0,
     "total_gear_items": 533,
-    "coverage_percentage": 100.0
+    "coverage_percentage": 100.0,
+    "enriched_from": "slackdb.com/api/manufacturers",
+    "enriched_fields": [
+      "country",
+      "year_established",
+      "slackline_oriented",
+      "website",
+      "facebook",
+      "active"
+    ]
   },
   "manufacturers": {
     "1": {
       "name": "Gibbon",
       "verified": true,
-      "item_count": 4
+      "item_count": 4,
+      "country": "DE",
+      "year_established": 2007,
+      "slackline_oriented": true,
+      "website": "http://www.gibbon-slacklines.com",
+      "facebook": "https://www.facebook.com/Gibbon-Slacklines-85859466425",
+      "active": true
     },
     "2": {
       "name": "Landcruising",
       "verified": true,
-      "item_count": 25
+      "item_count": 25,
+      "country": "DE",
+      "year_established": 2007,
+      "slackline_oriented": true,
+      "website": null,
+      "facebook": "https://www.facebook.com/landcruising.slackline",
+      "active": null
     },
     "3": {
       "name": "Balance Community: Slackline Outfitters",
       "verified": true,
-      "item_count": 38
+      "item_count": 38,
+      "country": "US",
+      "year_established": 2009,
+      "slackline_oriented": true,
+      "website": "http://www.balancecommunity.com",
+      "facebook": "https://www.facebook.com/BalanceCommunity",
+      "active": true
     },
     "4": {
       "name": "Slack Mountain",
       "verified": true,
-      "item_count": 37
+      "item_count": 37,
+      "country": "FR",
+      "year_established": 2010,
+      "slackline_oriented": true,
+      "website": "http://slack-mountain.com",
+      "facebook": "https://www.facebook.com/slackmountain",
+      "active": true
     },
     "5": {
       "name": "Slack Pro!",
       "verified": true,
-      "item_count": 10
+      "item_count": 10,
+      "country": "DE",
+      "year_established": null,
+      "slackline_oriented": true,
+      "website": "http://www.slackpro.de",
+      "facebook": "https://www.facebook.com/Slackpro-157374974272544",
+      "active": null
     },
     "6": {
       "name": "Slacktivity",
       "verified": true,
-      "item_count": 30
+      "item_count": 30,
+      "country": "CH",
+      "year_established": null,
+      "slackline_oriented": true,
+      "website": "http://www.slacktivity.com",
+      "facebook": "https://www.facebook.com/slacklinetechnology",
+      "active": true
     },
     "7": {
       "name": "Slack Inov",
       "verified": true,
-      "item_count": 21
+      "item_count": 21,
+      "country": "FR",
+      "year_established": null,
+      "slackline_oriented": true,
+      "website": "http://slack-inov.com/gb",
+      "facebook": "https://www.facebook.com/slack.inov",
+      "active": true
     },
     "8": {
       "name": "Line Spirit",
       "verified": true,
-      "item_count": 12
+      "item_count": 12,
+      "country": "FR",
+      "year_established": null,
+      "slackline_oriented": true,
+      "website": null,
+      "facebook": "https://www.facebook.com/LineSpirit",
+      "active": null
     },
     "9": {
       "name": "Equilibrium Slacklines (EQB)",
       "verified": true,
-      "item_count": 45
+      "item_count": 45,
+      "country": "CZ",
+      "year_established": 2008,
+      "slackline_oriented": true,
+      "website": "https://www.slackshop.cz/en/",
+      "facebook": "https://www.facebook.com/eqb.cz",
+      "active": true
     },
     "10": {
       "name": "Elephant",
       "verified": true,
-      "item_count": 7
+      "item_count": 7,
+      "country": "DE",
+      "year_established": 2010,
+      "slackline_oriented": true,
+      "website": "http://www.elephant-slackline.com",
+      "facebook": "https://www.facebook.com/ElephantSlacklines",
+      "active": null
     },
     "11": {
       "name": "2 Trees",
       "verified": true,
-      "item_count": 0
+      "item_count": 0,
+      "country": "PL",
+      "year_established": null,
+      "slackline_oriented": true,
+      "website": null,
+      "facebook": "https://www.facebook.com/2TreesSlacklines",
+      "active": null
     },
     "12": {
       "name": "Slack.fr",
       "verified": true,
-      "item_count": 18
+      "item_count": 18,
+      "country": "FR",
+      "year_established": 2005,
+      "slackline_oriented": true,
+      "website": "http://slack.fr",
+      "facebook": "https://www.facebook.com/Slack.fr",
+      "active": null
     },
     "13": {
       "name": "Gambit",
       "verified": true,
-      "item_count": 2
+      "item_count": 2,
+      "country": "DE",
+      "year_established": null,
+      "slackline_oriented": true,
+      "website": null,
+      "facebook": "https://www.facebook.com/GAMBITSlacklines",
+      "active": null
     },
     "14": {
       "name": "Slackline brothers",
       "verified": true,
-      "item_count": 0
+      "item_count": 0,
+      "country": "US",
+      "year_established": 2012,
+      "slackline_oriented": true,
+      "website": null,
+      "facebook": "https://www.facebook.com/slacklinebrothers",
+      "active": null
     },
     "15": {
       "name": "SlackTech",
       "verified": true,
-      "item_count": 1
+      "item_count": 1,
+      "country": "US",
+      "year_established": 2013,
+      "slackline_oriented": true,
+      "website": "http://slacklinetechnology.com",
+      "facebook": "https://www.facebook.com/slacklinetechnology",
+      "active": null
     },
     "16": {
       "name": "SlackGear",
       "verified": true,
-      "item_count": 6
+      "item_count": 6,
+      "country": "ZA",
+      "year_established": null,
+      "slackline_oriented": true,
+      "website": "http://www.slackgear.co.za",
+      "facebook": "https://www.facebook.com/slackgear",
+      "active": true
     },
     "17": {
       "name": "Slacklife",
       "verified": true,
-      "item_count": 0
+      "item_count": 0,
+      "country": "BR",
+      "year_established": null,
+      "slackline_oriented": true,
+      "website": null,
+      "facebook": null,
+      "active": null
     },
     "18": {
       "name": "One Inch Dreams",
       "verified": true,
-      "item_count": 2
+      "item_count": 2,
+      "country": "DE",
+      "year_established": null,
+      "slackline_oriented": true,
+      "website": "http://www.oneinchdreams.com",
+      "facebook": "https://www.facebook.com/OneInchDreams",
+      "active": null
     },
     "19": {
       "name": "Pure Slacklines",
       "verified": true,
-      "item_count": 2
+      "item_count": 2,
+      "country": "AU",
+      "year_established": null,
+      "slackline_oriented": true,
+      "website": "http://pureslacklines.com.au",
+      "facebook": "https://www.facebook.com/PureSlacklines",
+      "active": null
     },
     "20": {
       "name": "Yoga Slackers",
       "verified": true,
-      "item_count": 2
+      "item_count": 2,
+      "country": "US",
+      "year_established": null,
+      "slackline_oriented": true,
+      "website": "http://www.yogaslackers.com",
+      "facebook": "https://www.facebook.com/yogaslackers",
+      "active": true
     },
     "21": {
       "name": "Slackline Industries",
       "verified": true,
-      "item_count": 8
+      "item_count": 8,
+      "country": "US",
+      "year_established": 2014,
+      "slackline_oriented": true,
+      "website": "http://www.slacklineindustries.com",
+      "facebook": "https://www.facebook.com/SlacklineIndustries",
+      "active": true
     },
     "22": {
       "name": "Pump Slackline",
       "verified": true,
-      "item_count": 2
+      "item_count": 2,
+      "country": "AR",
+      "year_established": 2008,
+      "slackline_oriented": true,
+      "website": null,
+      "facebook": "https://www.facebook.com/PumpSlacklineArg",
+      "active": true
     },
     "23": {
       "name": "Ambaradam",
       "verified": true,
-      "item_count": 1
+      "item_count": 1,
+      "country": "ES",
+      "year_established": null,
+      "slackline_oriented": true,
+      "website": "http://ambaradam.net",
+      "facebook": "https://www.facebook.com/AmbaradaMLongLineLab",
+      "active": null
     },
     "24": {
       "name": "Spider slacklines",
       "verified": true,
-      "item_count": 22
+      "item_count": 22,
+      "country": "IT",
+      "year_established": null,
+      "slackline_oriented": true,
+      "website": "http://www.spider-slacklines.com",
+      "facebook": "https://www.facebook.com/SpiderSlacklines",
+      "active": true
     },
     "25": {
       "name": "Slackline tools",
       "verified": true,
-      "item_count": 8
+      "item_count": 8,
+      "country": "DE",
+      "year_established": 2007,
+      "slackline_oriented": true,
+      "website": "https://www.slackline-tools.de",
+      "facebook": "https://www.facebook.com/SlacklineTools",
+      "active": true
     },
     "26": {
       "name": "Raed Slacklines",
       "verified": true,
-      "item_count": 21
+      "item_count": 21,
+      "country": "DE",
+      "year_established": 2015,
+      "slackline_oriented": true,
+      "website": "https://raed-slacklines.com",
+      "facebook": "https://www.facebook.com/raedslacklines",
+      "active": true
     },
     "27": {
       "name": "Slack house",
       "verified": true,
-      "item_count": 13
+      "item_count": 13,
+      "country": "PL",
+      "year_established": null,
+      "slackline_oriented": true,
+      "website": "http://slackhouseshop.pl",
+      "facebook": "https://www.facebook.com/slackhouse.official",
+      "active": true
     },
     "28": {
       "name": "Singing rock",
       "verified": true,
-      "item_count": 1
+      "item_count": 1,
+      "country": "CZ",
+      "year_established": null,
+      "slackline_oriented": null,
+      "website": "http://www.singingrock.com",
+      "facebook": "https://www.facebook.com/singingrock.page",
+      "active": true
     },
     "29": {
       "name": "Dakas",
       "verified": true,
-      "item_count": 6
+      "item_count": 6,
+      "country": "FR",
+      "year_established": null,
+      "slackline_oriented": true,
+      "website": null,
+      "facebook": "https://www.facebook.com/Dakas.Slackline",
+      "active": null
     },
     "30": {
       "name": "Slackliner.de",
       "verified": true,
-      "item_count": 13
+      "item_count": 13,
+      "country": "DE",
+      "year_established": null,
+      "slackline_oriented": true,
+      "website": "https://www.slackliner.de",
+      "facebook": "https://www.facebook.com/Slackliner.de",
+      "active": true
     },
     "31": {
       "name": "Petzl",
       "verified": true,
-      "item_count": 10
+      "item_count": 10,
+      "country": "FR",
+      "year_established": null,
+      "slackline_oriented": null,
+      "website": "http://www.petzl.com/en?l=INT",
+      "facebook": "https://www.facebook.com/Petzl",
+      "active": true
     },
     "32": {
       "name": "Edelrid",
       "verified": true,
-      "item_count": 4
+      "item_count": 4,
+      "country": "DE",
+      "year_established": null,
+      "slackline_oriented": null,
+      "website": "http://www.edelrid.de/en",
+      "facebook": "https://www.facebook.com/EDELRIDClimbing",
+      "active": true
     },
     "33": {
       "name": "Rock Exotica",
       "verified": true,
-      "item_count": 0
+      "item_count": 0,
+      "country": "US",
+      "year_established": null,
+      "slackline_oriented": null,
+      "website": "http://www.rockexotica.com",
+      "facebook": "https://www.facebook.com/Rock-Exotica-147747201953857",
+      "active": true
     },
     "34": {
       "name": "SMC",
       "verified": true,
-      "item_count": 1
+      "item_count": 1,
+      "country": "US",
+      "year_established": 1967,
+      "slackline_oriented": null,
+      "website": "http://smcgear.com",
+      "facebook": "https://www.facebook.com/mySMCgear",
+      "active": true
     },
     "35": {
       "name": "Camp",
       "verified": true,
-      "item_count": 2
+      "item_count": 2,
+      "country": "IT",
+      "year_established": null,
+      "slackline_oriented": null,
+      "website": "http://www.camp.it",
+      "facebook": "https://www.facebook.com/camp1889",
+      "active": true
     },
     "36": {
       "name": "Climbing Technology (CT)",
       "verified": true,
-      "item_count": 5
+      "item_count": 5,
+      "country": "IT",
+      "year_established": null,
+      "slackline_oriented": null,
+      "website": "http://www.climbingtechnology.com",
+      "facebook": "https://www.facebook.com/ClimbingTechnologyItaly",
+      "active": true
     },
     "37": {
       "name": "Van Beest",
       "verified": true,
-      "item_count": 6
+      "item_count": 6,
+      "country": "NL",
+      "year_established": null,
+      "slackline_oriented": null,
+      "website": "http://www.vanbeest.com",
+      "facebook": "https://www.facebook.com/VanBeestInternational",
+      "active": true
     },
     "38": {
       "name": "Omega Pacific",
       "verified": true,
-      "item_count": 0
+      "item_count": 0,
+      "country": "US",
+      "year_established": null,
+      "slackline_oriented": null,
+      "website": null,
+      "facebook": "https://www.facebook.com/OmegaPacific",
+      "active": null
     },
     "39": {
       "name": "Tendon",
       "verified": true,
-      "item_count": 0
+      "item_count": 0,
+      "country": "CZ",
+      "year_established": null,
+      "slackline_oriented": null,
+      "website": "http://www.mytendon.com",
+      "facebook": "https://www.facebook.com/mytendon",
+      "active": true
     },
     "40": {
       "name": "Slackline Animals",
       "verified": true,
-      "item_count": 0
+      "item_count": 0,
+      "country": "CA",
+      "year_established": null,
+      "slackline_oriented": true,
+      "website": null,
+      "facebook": "https://www.facebook.com/slacklineanimals",
+      "active": null
     },
     "41": {
       "name": "Slacklife BC",
       "verified": true,
-      "item_count": 7
+      "item_count": 7,
+      "country": "CA",
+      "year_established": 2013,
+      "slackline_oriented": true,
+      "website": "http://slacklifebc.com",
+      "facebook": "https://www.facebook.com/SlacklifeBC",
+      "active": true
     },
     "42": {
       "name": "Absolute Slacklines",
       "verified": true,
-      "item_count": 2
+      "item_count": 2,
+      "country": "CA",
+      "year_established": null,
+      "slackline_oriented": true,
+      "website": "http://www.absoluteslacklines.com",
+      "facebook": "https://www.facebook.com/AbsoluteSlacklines",
+      "active": null
     },
     "43": {
       "name": "Slackline Shop NZ",
       "verified": true,
-      "item_count": 3
+      "item_count": 3,
+      "country": "NZ",
+      "year_established": null,
+      "slackline_oriented": true,
+      "website": "http://www.slacklineshop.co.nz",
+      "facebook": "https://www.facebook.com/SlacklineshopNZ",
+      "active": true
     },
     "44": {
       "name": "Balancing Earth Slacklines",
       "verified": true,
-      "item_count": 2
+      "item_count": 2,
+      "country": "US",
+      "year_established": null,
+      "slackline_oriented": true,
+      "website": "http://www.balancingearthslacklines.com",
+      "facebook": "https://www.facebook.com/balancingearthslacklines",
+      "active": null
     },
     "45": {
       "name": "Petram Slacklines",
       "verified": true,
-      "item_count": 11
+      "item_count": 11,
+      "country": "PL",
+      "year_established": 2014,
+      "slackline_oriented": true,
+      "website": "https://petramslacklines.site123.me/",
+      "facebook": "https://www.facebook.com/Petram.Slackline",
+      "active": true
     },
     "46": {
       "name": "Middle Way Slacklines",
       "verified": true,
-      "item_count": 6
+      "item_count": 6,
+      "country": "IL",
+      "year_established": null,
+      "slackline_oriented": true,
+      "website": "http://www.middlewayslacklines.com",
+      "facebook": "https://www.facebook.com/MiddleWaySlacklines",
+      "active": true
     },
     "47": {
       "name": "ISC",
       "verified": true,
-      "item_count": 2
+      "item_count": 2,
+      "country": "GB",
+      "year_established": null,
+      "slackline_oriented": null,
+      "website": "http://www.iscwales.com",
+      "facebook": "https://www.facebook.com/iscwalesuk",
+      "active": true
     },
     "48": {
       "name": "Trango",
       "verified": true,
-      "item_count": 1
+      "item_count": 1,
+      "country": "US",
+      "year_established": null,
+      "slackline_oriented": null,
+      "website": "http://www.trango.com",
+      "facebook": "http://www.facebook.com/pages/Trango-Extraordinary-Climbing/158158420882901",
+      "active": true
     },
     "49": {
       "name": "Episwiss Rigging",
       "verified": true,
-      "item_count": 1
+      "item_count": 1,
+      "country": "CH",
+      "year_established": null,
+      "slackline_oriented": null,
+      "website": "http://www.episwiss.com",
+      "facebook": "https://www.facebook.com/Episwiss",
+      "active": true
     },
     "50": {
       "name": "Slacklining Canada",
       "verified": true,
-      "item_count": 1
+      "item_count": 1,
+      "country": "CA",
+      "year_established": null,
+      "slackline_oriented": true,
+      "website": "http://www.slacklining.ca",
+      "facebook": "https://www.facebook.com/slackliningcanada",
+      "active": null
     },
     "51": {
       "name": "Cat on slack",
       "verified": true,
-      "item_count": 5
+      "item_count": 5,
+      "country": "PL",
+      "year_established": null,
+      "slackline_oriented": true,
+      "website": "http://www.catonslack.com",
+      "facebook": "https://www.facebook.com/CatOnSlack",
+      "active": true
     },
     "52": {
       "name": "Kong",
       "verified": true,
-      "item_count": 1
+      "item_count": 1,
+      "country": "IT",
+      "year_established": null,
+      "slackline_oriented": null,
+      "website": "http://www.kong.it",
+      "facebook": "https://www.facebook.com/kongitaly",
+      "active": true
     },
     "53": {
       "name": "ZERGE outdoor",
       "verified": true,
-      "item_count": 6
+      "item_count": 6,
+      "country": "GB",
+      "year_established": null,
+      "slackline_oriented": true,
+      "website": "http://zergeoutdoor.com",
+      "facebook": "https://www.facebook.com/zergeoutdoor",
+      "active": true
     },
     "54": {
       "name": "Fusion Climb",
       "verified": true,
-      "item_count": 1
+      "item_count": 1,
+      "country": "US",
+      "year_established": null,
+      "slackline_oriented": null,
+      "website": "http://www.fusionclimb.com",
+      "facebook": "https://www.facebook.com/FusionClimbUSA",
+      "active": true
     },
     "55": {
       "name": "Slackstar",
       "verified": true,
-      "item_count": 13
+      "item_count": 13,
+      "country": "DE",
+      "year_established": null,
+      "slackline_oriented": true,
+      "website": "http://slackstar.de",
+      "facebook": null,
+      "active": true
     },
     "58": {
       "name": "CMC Rescue",
       "verified": true,
-      "item_count": 1
+      "item_count": 1,
+      "country": "US",
+      "year_established": null,
+      "slackline_oriented": null,
+      "website": "http://www.cmcrescue.com/",
+      "facebook": "https://www.facebook.com/cmcrescue",
+      "active": true
     },
     "59": {
       "name": "Mammut",
       "verified": true,
-      "item_count": 1
+      "item_count": 1,
+      "country": "CH",
+      "year_established": null,
+      "slackline_oriented": null,
+      "website": "https://www.mammut.com/",
+      "facebook": "https://www.facebook.com/Mammut/",
+      "active": true
     },
     "60": {
       "name": "Krok",
       "verified": true,
-      "item_count": 1
+      "item_count": 1,
+      "country": "RU",
+      "year_established": null,
+      "slackline_oriented": null,
+      "website": "https://krok.biz",
+      "facebook": "https://www.facebook.com/tmkrok",
+      "active": true
     },
     "61": {
       "name": "BananasColombia",
       "verified": true,
-      "item_count": 0
+      "item_count": 0,
+      "country": "CO",
+      "year_established": 2015,
+      "slackline_oriented": true,
+      "website": null,
+      "facebook": "https://www.facebook.com/BananasColombia",
+      "active": null
     },
     "62": {
       "name": "Souz Slackline",
       "verified": true,
-      "item_count": 13
+      "item_count": 13,
+      "country": "RU",
+      "year_established": 2018,
+      "slackline_oriented": true,
+      "website": "https://souzslackline.com",
+      "facebook": null,
+      "active": null
     },
     "63": {
       "name": "Balanceur",
       "verified": true,
-      "item_count": 2
+      "item_count": 2,
+      "country": "RO",
+      "year_established": 2017,
+      "slackline_oriented": true,
+      "website": "https://www.balanceur.ro/",
+      "facebook": "https://www.facebook.com/balanceur.slackshop/",
+      "active": true
     },
     "64": {
       "name": "Aki Slacklines",
       "verified": true,
-      "item_count": 12
+      "item_count": 12,
+      "country": "DE",
+      "year_established": null,
+      "slackline_oriented": true,
+      "website": "https://aki-slacklines.de",
+      "facebook": "https://www.facebook.com/AkiSlack/",
+      "active": true
     },
     "65": {
       "name": "Slack Mitra",
       "verified": true,
-      "item_count": 2
+      "item_count": 2,
+      "country": "IN",
+      "year_established": null,
+      "slackline_oriented": true,
+      "website": "https://www.instamojo.com/slackmitra",
+      "facebook": null,
+      "active": true
     },
     "66": {
       "name": "Viper Slacklines",
       "verified": true,
-      "item_count": 1
+      "item_count": 1,
+      "country": "ZA",
+      "year_established": 2017,
+      "slackline_oriented": true,
+      "website": "https://www.viperslacklines.co.za",
+      "facebook": "https://www.facebook.com/viperslacklines",
+      "active": true
     },
     "67": {
       "name": "Radrigs",
       "verified": true,
-      "item_count": 1
+      "item_count": 1,
+      "country": "GB",
+      "year_established": 2018,
+      "slackline_oriented": true,
+      "website": "https://www.radrigs.co.uk/",
+      "facebook": "https://www.facebook.com/Radrigs-Slackline-Equipment-101532338172670/?modal=admin_todo_tour",
+      "active": true
     },
     "68": {
       "name": "Shaoline Slack",
       "verified": true,
-      "item_count": 0
+      "item_count": 0,
+      "country": "AR",
+      "year_established": null,
+      "slackline_oriented": true,
+      "website": null,
+      "facebook": "https://www.facebook.com/ShaoLine-319592072005126",
+      "active": true
     },
     "69": {
       "name": "A-Zero Slackline",
       "verified": true,
-      "item_count": 0
+      "item_count": 0,
+      "country": "AR",
+      "year_established": 2018,
+      "slackline_oriented": true,
+      "website": "https://www.a-zero.com.ar/",
+      "facebook": "https://www.facebook.com/A-Zero-175969599786013",
+      "active": true
     },
     "70": {
       "name": "Slackear",
       "verified": true,
-      "item_count": 0
+      "item_count": 0,
+      "country": "AR",
+      "year_established": 2013,
+      "slackline_oriented": true,
+      "website": null,
+      "facebook": "https://www.facebook.com/Slackear",
+      "active": true
     },
     "71": {
       "name": "Dnd_Line",
       "verified": true,
-      "item_count": 0
+      "item_count": 0,
+      "country": "AR",
+      "year_established": null,
+      "slackline_oriented": true,
+      "website": null,
+      "facebook": "https://www.facebook.com/trickline.dnd",
+      "active": true
     },
     "72": {
       "name": "Geko Slacklines",
       "verified": true,
-      "item_count": 1
+      "item_count": 1,
+      "country": "MX",
+      "year_established": null,
+      "slackline_oriented": true,
+      "website": "http://www.gekoslacklines.mx",
+      "facebook": null,
+      "active": true
     },
     "73": {
       "name": "Easy Slackline",
       "verified": true,
-      "item_count": 4
+      "item_count": 4,
+      "country": "FR",
+      "year_established": null,
+      "slackline_oriented": true,
+      "website": "http://www.easy-slackline.fr",
+      "facebook": "https://www.facebook.com/EasySlackline.CO",
+      "active": true
     },
     "74": {
       "name": "Acrobat Slackline",
       "verified": true,
-      "item_count": 3
+      "item_count": 3,
+      "country": "IL",
+      "year_established": null,
+      "slackline_oriented": true,
+      "website": "https://www.acrobatslackline.com",
+      "facebook": "https://www.facebook.com/acrobatslackline",
+      "active": true
     },
     "75": {
       "name": "BLOACS",
       "verified": true,
-      "item_count": 0
+      "item_count": 0,
+      "country": "DE",
+      "year_established": 2016,
+      "slackline_oriented": true,
+      "website": "https://bloacs.de/",
+      "facebook": "https://m.facebook.com/BLOACS/",
+      "active": true
     },
     "76": {
       "name": "Bera Adventure",
       "verified": true,
-      "item_count": 3
+      "item_count": 3,
+      "country": "BR",
+      "year_established": 2013,
+      "slackline_oriented": true,
+      "website": "https://beraadventure.com.br/",
+      "facebook": "https://m.facebook.com/BeraAdventure/",
+      "active": true
+    },
+    "local_space_age_slacklines": {
+      "name": "Space Age Slacklines",
+      "verified": false,
+      "item_count": 1,
+      "country": "US",
+      "year_established": null,
+      "slackline_oriented": null,
+      "website": null,
+      "facebook": null,
+      "active": true
+    },
+    "local_rigging_ventures": {
+      "name": "Rigging Ventures",
+      "verified": false,
+      "item_count": 4,
+      "country": "US",
+      "year_established": null,
+      "slackline_oriented": null,
+      "website": "https://www.riggingventures.com",
+      "facebook": null,
+      "tiktok": "https://www.tiktok.com/@riggingventures",
+      "active": true
     }
   }
 }

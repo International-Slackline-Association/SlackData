@@ -106,7 +106,7 @@
         "release_date": 1621927211777,
         "product_url": "https://laboutique.slack.fr/en/mid-level-slack-2535m/327-kit-freestyle-andy-lewis-slackline.html?fbclid=IwAR2dNVp-afje4n2EDp3MmF23fT_mHKwvaHh9cUyVwPT1JJfJufXXGPbdcUY",
         "webbing_length": 22,
-        "webbing_width": 5,
+        "webbing_width": 50,
         "weight": 7800,
         "tensioning_type": "RAT2",
         "includes_treepro": false,
@@ -151,5 +151,22 @@
         "version": null,
         "notes": null,
         "manufacturer": "Slackline tools"
+    },
+    {
+        "name": "Level Two Kit",
+        "release_date": 1620111600000,
+        "product_url": "https://www.riggingventures.com/product-page/rv-trickline-kit",
+        "webbing_length": 30,
+        "webbing_width": 50,
+        "weight": null,
+        "tensioning_type": "RAT2",
+        "includes_treepro": true,
+        "isa_certified": false,
+        "price": 185,
+        "currency": "USD",
+        "description": null,
+        "version": null,
+        "notes": null,
+        "manufacturer": "Rigging Ventures"
     }
 ]
