@@ -450,7 +450,7 @@
         "product_url": "https://raed-slacklines.com/halo-titanium-highline-leash-ring"
     },
     {
-        "name": "Space Age Slacklines SATURN ring",
+        "name": " SATURN ring",
         "material": "Aluminum",
         "inner_diameter": 76,
         "outer_diameter": null,
@@ -460,7 +460,7 @@
         "price": null,
         "currency": null,
         "notes": null,
-        "manufacturer": null,
+        "manufacturer": "Space Age Slacklines",
         "date_introduced": null,
         "product_url": null
     }
