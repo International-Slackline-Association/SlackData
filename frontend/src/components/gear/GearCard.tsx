@@ -1,6 +1,8 @@
 // A single gear card. Anatomy (top→bottom) per DESIGN.md and gear_cards.cy.ts:
-//   category badge (coral, in image area) · ISA stamp (if certified) · image
+//   ISA stamp (if certified) · image
 //   brand (small caps) · product name (link) · inline specs · price (amber)
+// No gear-type badge: every listing is single-type, so it would be redundant.
+// (Revisit when manufacturer pages mix types — see DESIGN.md card anatomy.)
 //   Save / Alert / Compare buttons.
 //
 // The card root carries data-{field} attributes (numeric fields) so sort/filter
@@ -11,16 +13,19 @@ import { Link } from 'react-router-dom'
 import type { GearTypeMeta } from '@/config/gearTypes'
 import { CARD_DATA_FIELDS, INLINE_SPECS } from '@/config/gearFields'
 import { dataAttrs, formatPrice, formatValue, type AnyItem } from '@/utils/format'
+import { primaryImage } from '@/utils/images'
 import IsaApprovedBadge from './IsaApprovedBadge'
 
 const pillBtn =
   'rounded-full border border-gray-300 px-3 py-1 text-xs text-gray-600 hover:border-gray-400 hover:text-gray-800 transition-colors'
 
 export default function GearCard({ item, meta }: { item: AnyItem; meta: GearTypeMeta }) {
-  const { slug, label, hasISA } = meta
+  const { slug, hasISA } = meta
   const price = formatPrice(item.price, item.currency)
   const specs = INLINE_SPECS[slug] ?? []
   const isaCertified = hasISA && item.isa_certified === true
+
+  const imgSrc = primaryImage(slug, String(item.brand_name), String(item.name))
 
   const specParts = specs
     .map(s => formatValue(item[s.field], s.unit))
@@ -36,19 +41,26 @@ export default function GearCard({ item, meta }: { item: AnyItem; meta: GearType
         data-cy="gear-card-image-area"
         className="relative flex h-40 items-center justify-center bg-gray-50"
       >
-        <span
-          data-cy="gear-card-badge"
-          className="absolute left-2 top-2 rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-white"
-          style={{ background: '#D04A3E' }}
-        >
-          {label}
-        </span>
         {isaCertified && (
           <div className="absolute right-2 top-2">
             <IsaApprovedBadge />
           </div>
         )}
-        <span className="text-xs text-gray-300">No image</span>
+        {imgSrc ? (
+          <img
+            data-cy="gear-card-img"
+            src={imgSrc}
+            alt={String(item.name)}
+            loading="lazy"
+            className="h-full w-full object-contain p-3"
+            onError={e => {
+              // Manifest key didn't resolve to a real file — fall back to placeholder.
+              e.currentTarget.style.display = 'none'
+              e.currentTarget.nextElementSibling?.removeAttribute('hidden')
+            }}
+          />
+        ) : null}
+        <span hidden={!!imgSrc} className="text-xs text-gray-300">No image</span>
       </div>
 
       <div className="flex flex-1 flex-col gap-1 p-4">
