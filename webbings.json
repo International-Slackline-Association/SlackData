@@ -833,7 +833,7 @@
                 "percent": 18.84
             }
         ],
-        "materialType": "pes/polyamid/nylon",
+        "materialType": "Polyester",
         "weight": 62,
         "breakingStrength": 33.4,
         "date_introduced": 1449273600000,
@@ -1449,79 +1449,72 @@
         "breakingStrength": 26,
         "date_introduced": null,
         "product_url": null,
-        "width": 25
+        "width": 25,
+        "webbing_construction": "Flat"
     },
     {
         "name": "Type 18 MKII",
         "brand": "Balance Community: Slackline Outfitters",
         "materialType": "Nylon",
-        "width": 25,
+        "width": 25.4,
         "weight": 62,
-        "breakingStrength": 35.6,
+        "breakingStrength": 32,
         "stretch": [
             {
-                "kn": 0,
-                "percent": 0
+                "percent": 1.3,
+                "kn": 1
             },
             {
-                "kn": 1,
-                "percent": 1.06
+                "percent": 2.61,
+                "kn": 2
             },
             {
-                "kn": 2,
-                "percent": 2.39
+                "percent": 4.4,
+                "kn": 3
             },
             {
-                "kn": 3,
-                "percent": 4.52
+                "percent": 6.33,
+                "kn": 4
             },
             {
-                "kn": 4,
-                "percent": 6.94
+                "percent": 7.92,
+                "kn": 5
             },
             {
-                "kn": 5,
-                "percent": 8.8
+                "percent": 9.22,
+                "kn": 6
             },
             {
-                "kn": 6,
-                "percent": 10.33
+                "percent": 10.42,
+                "kn": 7
             },
             {
-                "kn": 7,
-                "percent": 11.69
+                "percent": 11.41,
+                "kn": 8
             },
             {
-                "kn": 8,
-                "percent": 12.78
+                "percent": 12.38,
+                "kn": 9
             },
             {
-                "kn": 9,
-                "percent": 13.84
+                "percent": 13.14,
+                "kn": 10
             },
             {
-                "kn": 10,
-                "percent": 14.79
+                "percent": 13.91,
+                "kn": 11
             },
             {
-                "kn": 11,
-                "percent": 15.7
-            },
-            {
-                "kn": 12,
-                "percent": 16.65
-            },
-            {
-                "kn": 13,
-                "percent": 17.4
+                "percent": 14.59,
+                "kn": 12
             }
         ],
         "date_introduced": null,
         "product_url": "http://www.balancecommunity.com/type-18-mkii",
-        "thickness": 3,
+        "thickness": 3.05,
         "webbing_construction": "Flat",
         "isa_certified": false,
-        "priceMeter": 2.36,
+        "priceMeter": 2.5,
         "currency": "USD"
     },
     {
@@ -1780,6 +1773,10 @@
             }
         ],
         "materialType": "Hybrid",
+        "materialComposition": [
+            "Polyester",
+            "Dyneema/HMPE"
+        ],
         "weight": 34,
         "breakingStrength": 35,
         "date_introduced": null,
@@ -2876,6 +2873,10 @@
             }
         ],
         "materialType": "Hybrid",
+        "materialComposition": [
+            "Polyester",
+            "Dyneema/HMPE"
+        ],
         "weight": 41,
         "breakingStrength": 40,
         "product_url": "http://slack-mountain.com/en/webbing-slackline/136-goku2.html",
@@ -3761,6 +3762,10 @@
             }
         ],
         "materialType": "Hybrid",
+        "materialComposition": [
+            "Vectran",
+            "Polyester"
+        ],
         "weight": 38,
         "breakingStrength": 24,
         "date_introduced": null,
@@ -4464,7 +4469,7 @@
         "currency": "EUR"
     },
     {
-        "name": "halfMarathon 20mm",
+        "name": "Half-Marathon",
         "brand": "Slacktivity",
         "stretch": [
             {
@@ -4592,6 +4597,7 @@
         "width": 20,
         "thickness": 2.6,
         "webbing_construction": "Core/Sheath",
+        "isa_certified": false,
         "priceMeter": 2.7,
         "currency": "EUR"
     },
@@ -5253,6 +5259,10 @@
         "weight": 33.1,
         "breakingStrength": 34,
         "materialType": "Hybrid",
+        "materialComposition": [
+            "Polyester",
+            "Dyneema/HMPE"
+        ],
         "date_introduced": 1534744800000,
         "product_url": "https://www.slacktivity.com/y2k",
         "width": 25.4,
@@ -5445,7 +5455,7 @@
     {
         "name": "Fuji",
         "brand": "Line Spirit",
-        "materialType": "Dyneema",
+        "materialType": "Dyneema/HMPE",
         "width": 25,
         "weight": 37,
         "breakingStrength": 40,
@@ -5635,6 +5645,10 @@
         "name": "Goku",
         "brand": "Slack Mountain",
         "materialType": "Hybrid",
+        "materialComposition": [
+            "Polyester",
+            "Dyneema/HMPE"
+        ],
         "width": 25,
         "weight": 32,
         "breakingStrength": 35,
@@ -5664,7 +5678,7 @@
         ],
         "date_introduced": null,
         "product_url": null,
-        "webbing_construction": "Tubular",
+        "webbing_construction": "Threaded Tubular",
         "isa_certified": false,
         "priceMeter": 2.06,
         "currency": "EUR"
@@ -6315,6 +6329,10 @@
         "name": "RAGEline",
         "brand": "Balance Community: Slackline Outfitters",
         "materialType": "Hybrid",
+        "materialComposition": [
+            "Polyester",
+            "Nylon"
+        ],
         "width": 31,
         "weight": 104,
         "breakingStrength": 42,
@@ -6435,7 +6453,7 @@
     {
         "name": "HighTech",
         "brand": "Slacklife BC",
-        "materialType": "Dyneema",
+        "materialType": "Dyneema/HMPE",
         "width": 25.4,
         "weight": 48,
         "breakingStrength": 39.2,
@@ -6574,7 +6592,7 @@
     {
         "name": "Lion Line",
         "brand": "Slacklife BC",
-        "materialType": "Dyneema",
+        "materialType": "Dyneema/HMPE",
         "width": 25.4,
         "weight": 35,
         "breakingStrength": 35.6,
@@ -6828,26 +6846,6 @@
         "currency": "EUR"
     },
     {
-        "name": "Half-Marathon",
-        "brand": "Slacktivity",
-        "materialType": "Polyester",
-        "width": 20,
-        "weight": 48.5,
-        "breakingStrength": 28,
-        "stretch": [
-            {
-                "percent": 4.5,
-                "kn": 10
-            }
-        ],
-        "date_introduced": null,
-        "product_url": "https://www.slacktivity.com/halfmarathon-50m-500m",
-        "webbing_construction": "Core/Sheath",
-        "isa_certified": false,
-        "priceMeter": 1.8,
-        "currency": "EUR"
-    },
-    {
         "name": "Low stretch Webbing",
         "brand": "Slacktivity",
         "materialType": "Polyester",
@@ -6911,6 +6909,9 @@
         "name": "Firefly (phosphorescent)",
         "brand": "Slack Mountain",
         "materialType": "Hybrid",
+        "materialComposition": [
+            "Polyester"
+        ],
         "width": 25,
         "weight": 60,
         "breakingStrength": 30,
@@ -7011,6 +7012,10 @@
         "name": "Panda",
         "brand": "Slackline Industries",
         "materialType": "Hybrid",
+        "materialComposition": [
+            "Polyester",
+            "Dyneema/HMPE"
+        ],
         "width": 25,
         "weight": 34.3,
         "breakingStrength": 32,
@@ -7032,6 +7037,10 @@
         "name": "Joker",
         "brand": "Slack Inov",
         "materialType": "Hybrid",
+        "materialComposition": [
+            "Nylon",
+            "Polyester"
+        ],
         "width": 25.4,
         "weight": 54,
         "breakingStrength": 27,
@@ -7191,6 +7200,10 @@
         "name": "S.O.S - Sunset Over Seas",
         "brand": "Slack Mountain",
         "materialType": "Hybrid",
+        "materialComposition": [
+            "Polyester",
+            "Dyneema/HMPE"
+        ],
         "width": 22,
         "weight": 33.6,
         "breakingStrength": 32,
@@ -7214,11 +7227,55 @@
         "materialType": "Polyester",
         "width": 25.4,
         "weight": 55,
-        "breakingStrength": 28,
+        "breakingStrength": 25,
         "stretch": [
             {
-                "percent": 3,
+                "percent": 1.08,
+                "kn": 1
+            },
+            {
+                "percent": 1.72,
+                "kn": 2
+            },
+            {
+                "percent": 2.26,
+                "kn": 3
+            },
+            {
+                "percent": 2.88,
+                "kn": 4
+            },
+            {
+                "percent": 3.61,
+                "kn": 5
+            },
+            {
+                "percent": 4.55,
+                "kn": 6
+            },
+            {
+                "percent": 5.73,
+                "kn": 7
+            },
+            {
+                "percent": 6.99,
+                "kn": 8
+            },
+            {
+                "percent": 8.06,
+                "kn": 9
+            },
+            {
+                "percent": 8.98,
                 "kn": 10
+            },
+            {
+                "percent": 9.77,
+                "kn": 11
+            },
+            {
+                "percent": 10.5,
+                "kn": 12
             }
         ],
         "date_introduced": 1567976400000,
@@ -7226,7 +7283,7 @@
         "thickness": 2.46,
         "webbing_construction": "Flat",
         "isa_certified": false,
-        "priceMeter": 2,
+        "priceMeter": 2.2,
         "currency": "USD"
     },
     {
@@ -7235,11 +7292,55 @@
         "materialType": "Nylon",
         "width": 25.4,
         "weight": 53,
-        "breakingStrength": 27,
+        "breakingStrength": 29,
         "stretch": [
             {
-                "percent": 11.72,
+                "percent": 2.95,
+                "kn": 1
+            },
+            {
+                "percent": 4.26,
+                "kn": 2
+            },
+            {
+                "percent": 5.77,
+                "kn": 3
+            },
+            {
+                "percent": 7.7,
+                "kn": 4
+            },
+            {
+                "percent": 9.26,
+                "kn": 5
+            },
+            {
+                "percent": 10.5,
+                "kn": 6
+            },
+            {
+                "percent": 11.61,
+                "kn": 7
+            },
+            {
+                "percent": 12.61,
+                "kn": 8
+            },
+            {
+                "percent": 13.43,
+                "kn": 9
+            },
+            {
+                "percent": 14.22,
                 "kn": 10
+            },
+            {
+                "percent": 14.89,
+                "kn": 11
+            },
+            {
+                "percent": 15.41,
+                "kn": 12
             }
         ],
         "date_introduced": 1567976400000,
@@ -7247,7 +7348,7 @@
         "thickness": 2.46,
         "webbing_construction": "Flat",
         "isa_certified": false,
-        "priceMeter": 2.3,
+        "priceMeter": 2.4,
         "currency": "USD"
     },
     {
@@ -7498,14 +7599,62 @@
     {
         "name": "Spider Silk MK3",
         "brand": "Balance Community: Slackline Outfitters",
-        "materialType": "Dyneema",
+        "materialType": "Hybrid",
+        "materialComposition": [
+            "Vectran",
+            "Dyneema/HMPE"
+        ],
         "width": 20,
         "weight": 31,
         "breakingStrength": 38,
         "stretch": [
             {
+                "percent": 0.37,
+                "kn": 1
+            },
+            {
+                "percent": 0.78,
+                "kn": 2
+            },
+            {
+                "percent": 0.93,
+                "kn": 3
+            },
+            {
+                "percent": 1.09,
+                "kn": 4
+            },
+            {
+                "percent": 1.21,
+                "kn": 5
+            },
+            {
                 "percent": 1.8,
                 "kn": 6
+            },
+            {
+                "percent": 1.87,
+                "kn": 7
+            },
+            {
+                "percent": 1.93,
+                "kn": 8
+            },
+            {
+                "percent": 2.21,
+                "kn": 9
+            },
+            {
+                "percent": 2.36,
+                "kn": 10
+            },
+            {
+                "percent": 2.36,
+                "kn": 11
+            },
+            {
+                "percent": 2.67,
+                "kn": 12
             }
         ],
         "date_introduced": 1592341200000,
@@ -7513,13 +7662,17 @@
         "thickness": 3,
         "webbing_construction": "Flat",
         "isa_certified": false,
-        "priceMeter": 4.17,
+        "priceMeter": 4.2,
         "currency": "USD"
     },
     {
         "name": "Dyneemite",
         "brand": "Raed Slacklines",
         "materialType": "Hybrid",
+        "materialComposition": [
+            "Polyester",
+            "Dyneema/HMPE"
+        ],
         "width": 25,
         "weight": 22,
         "breakingStrength": 30,
@@ -7601,8 +7754,52 @@
         "breakingStrength": 21.5,
         "stretch": [
             {
+                "percent": 3.31,
+                "kn": 1
+            },
+            {
+                "percent": 5.85,
+                "kn": 2
+            },
+            {
+                "percent": 8.53,
+                "kn": 3
+            },
+            {
+                "percent": 9.59,
+                "kn": 4
+            },
+            {
+                "percent": 10.98,
+                "kn": 5
+            },
+            {
+                "percent": 12.88,
+                "kn": 6
+            },
+            {
+                "percent": 14.42,
+                "kn": 7
+            },
+            {
+                "percent": 15.39,
+                "kn": 8
+            },
+            {
+                "percent": 16.22,
+                "kn": 9
+            },
+            {
                 "percent": 16.9,
                 "kn": 10
+            },
+            {
+                "percent": 17.69,
+                "kn": 11
+            },
+            {
+                "percent": 18.12,
+                "kn": 12
             }
         ],
         "date_introduced": 1596834000000,
@@ -7610,7 +7807,7 @@
         "thickness": 3.2,
         "webbing_construction": "Tubular",
         "isa_certified": false,
-        "priceMeter": 2.25,
+        "priceMeter": 2.45,
         "currency": "USD"
     },
     {
@@ -7664,8 +7861,52 @@
         "breakingStrength": 20,
         "stretch": [
             {
+                "percent": 0.48,
+                "kn": 1
+            },
+            {
+                "percent": 1.37,
+                "kn": 2
+            },
+            {
+                "percent": 2.21,
+                "kn": 3
+            },
+            {
+                "percent": 2.96,
+                "kn": 4
+            },
+            {
+                "percent": 3.84,
+                "kn": 5
+            },
+            {
+                "percent": 4.5,
+                "kn": 6
+            },
+            {
+                "percent": 5.1,
+                "kn": 7
+            },
+            {
+                "percent": 5.72,
+                "kn": 8
+            },
+            {
+                "percent": 6.38,
+                "kn": 9
+            },
+            {
                 "percent": 7.01,
                 "kn": 10
+            },
+            {
+                "percent": 7.61,
+                "kn": 11
+            },
+            {
+                "percent": 8.19,
+                "kn": 12
             }
         ],
         "date_introduced": 1616450400000,
@@ -7703,11 +7944,55 @@
         "materialType": "Nylon",
         "width": 20,
         "weight": 53,
-        "breakingStrength": 25,
+        "breakingStrength": 30,
         "stretch": [
             {
-                "percent": 11.72,
+                "percent": 2.15,
+                "kn": 1
+            },
+            {
+                "percent": 3.38,
+                "kn": 2
+            },
+            {
+                "percent": 4.69,
+                "kn": 3
+            },
+            {
+                "percent": 6.48,
+                "kn": 4
+            },
+            {
+                "percent": 7.88,
+                "kn": 5
+            },
+            {
+                "percent": 9.06,
+                "kn": 6
+            },
+            {
+                "percent": 10.1,
+                "kn": 7
+            },
+            {
+                "percent": 11.03,
+                "kn": 8
+            },
+            {
+                "percent": 11.86,
+                "kn": 9
+            },
+            {
+                "percent": 12.52,
                 "kn": 10
+            },
+            {
+                "percent": 13.15,
+                "kn": 11
+            },
+            {
+                "percent": 13.7,
+                "kn": 12
             }
         ],
         "date_introduced": 1614290400000,
@@ -7715,7 +8000,7 @@
         "thickness": 3.38,
         "webbing_construction": "Flat",
         "isa_certified": false,
-        "priceMeter": 2.45,
+        "priceMeter": 2.4,
         "currency": "USD"
     },
     {
@@ -7805,7 +8090,7 @@
     {
         "name": "Sky Diamond",
         "brand": "Spider slacklines",
-        "materialType": "Dyneema",
+        "materialType": "Dyneema/HMPE",
         "width": 17,
         "weight": 33,
         "breakingStrength": 35,
@@ -7848,13 +8133,57 @@
         "name": "Heavy",
         "brand": "Balance Community: Slackline Outfitters",
         "materialType": "Nylon",
-        "width": 25,
+        "width": 25.4,
         "weight": 100,
         "breakingStrength": 45,
         "stretch": [
             {
+                "percent": 1.08,
+                "kn": 1
+            },
+            {
+                "percent": 2.24,
+                "kn": 2
+            },
+            {
+                "percent": 3.37,
+                "kn": 3
+            },
+            {
+                "percent": 5.24,
+                "kn": 4
+            },
+            {
+                "percent": 7.18,
+                "kn": 5
+            },
+            {
+                "percent": 8.87,
+                "kn": 6
+            },
+            {
+                "percent": 10.19,
+                "kn": 7
+            },
+            {
+                "percent": 10.87,
+                "kn": 8
+            },
+            {
+                "percent": 11.99,
+                "kn": 9
+            },
+            {
                 "percent": 13.12,
                 "kn": 10
+            },
+            {
+                "percent": 13.68,
+                "kn": 11
+            },
+            {
+                "percent": 14.24,
+                "kn": 12
             }
         ],
         "date_introduced": 1623358800000,
@@ -7864,5 +8193,68 @@
         "isa_certified": false,
         "priceMeter": 3.5,
         "currency": "USD"
+    },
+    {
+        "name": "Neon",
+        "brand": "Equilibrium Slacklines (EQB)",
+        "materialType": "Polyester",
+        "width": 25,
+        "weight": 48,
+        "breakingStrength": 20,
+        "thickness": 2.2,
+        "stretch": [
+            {
+                "percent": 9,
+                "kn": 10
+            }
+        ],
+        "date_introduced": null,
+        "product_url": "https://www.slackshop.cz/en/webbing/30-eqb-neon.html",
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 27,
+        "currency": "CZK"
+    },
+    {
+        "name": "White Magic",
+        "brand": "Aki Slacklines",
+        "materialType": "Polyester",
+        "width": 25,
+        "weight": 58,
+        "breakingStrength": 32.5,
+        "thickness": null,
+        "stretch": [
+            {
+                "percent": 5,
+                "kn": 10
+            }
+        ],
+        "date_introduced": null,
+        "product_url": "https://aki-slacklines.de/en/webbing/polyester/4/aki-white-magic-webbing?c=6",
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "priceMeter": 1.3,
+        "currency": "EUR"
+    },
+    {
+        "name": "Unicorn",
+        "brand": "Aki Slacklines",
+        "materialType": "Polyester",
+        "width": 25,
+        "weight": 61.5,
+        "breakingStrength": 32,
+        "thickness": 2.7,
+        "stretch": [
+            {
+                "percent": 9,
+                "kn": 10
+            }
+        ],
+        "date_introduced": 1489363200000,
+        "product_url": null,
+        "webbing_construction": "Core/Sheath",
+        "isa_certified": false,
+        "priceMeter": 1.79,
+        "currency": "EUR"
     }
 ]
