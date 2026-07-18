@@ -70,6 +70,7 @@ function PillGroup({ meta, url, items }: { meta: FilterGroupMeta; url: UrlState;
         {options.map(opt => (
           <Pill
             key={opt.value}
+            value={opt.value}
             active={selected.includes(opt.value)}
             label={opt.label}
             onClick={() => onPick(opt.value)}
@@ -80,11 +81,22 @@ function PillGroup({ meta, url, items }: { meta: FilterGroupMeta; url: UrlState;
   )
 }
 
-function Pill({ active, label, onClick }: { active: boolean; label: string; onClick: () => void }) {
+function Pill({
+  active,
+  label,
+  value,
+  onClick,
+}: {
+  active: boolean
+  label: string
+  value: string
+  onClick: () => void
+}) {
   return (
     <button
       data-cy="filter-pill"
       type="button"
+      data-value={value}
       data-active={active ? 'true' : 'false'}
       onClick={onClick}
       className={

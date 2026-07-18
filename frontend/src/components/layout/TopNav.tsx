@@ -13,7 +13,7 @@
 //
 // A gear tab is active on its listing page and any nested route (detail/compare).
 
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { ALL_GEAR_TYPES } from '@/config/gearTypes'
 
 function isSectionActive(pathname: string, base: string): boolean {
@@ -31,7 +31,22 @@ const tabClass = (active: boolean, muted = false) =>
 
 export default function TopNav() {
   const { pathname } = useLocation()
+  const navigate = useNavigate()
   const mfrActive = isSectionActive(pathname, '/manufacturers')
+
+  // Re-clicking the CURRENT gear tab keeps its query string (sort/search/filters
+  // persist); clicking a DIFFERENT tab navigates bare, resetting to defaults. We
+  // read window.location at click time — not the render-time `active` flag — so
+  // the decision can't race React Router's navigation re-render (which flaked the
+  // "resets on type switch" test on whichever tab re-rendered a beat late).
+  const goToTab = (e: React.MouseEvent, slug: string) => {
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return
+    e.preventDefault()
+    const base = `/${slug}`
+    const onIt =
+      window.location.pathname === base || window.location.pathname.startsWith(`${base}/`)
+    navigate({ pathname: base, search: onIt ? window.location.search : '' })
+  }
 
   return (
     <header
@@ -68,6 +83,7 @@ export default function TopNav() {
             <Link
               key={slug}
               to={`/${slug}`}
+              onClick={e => goToTab(e, slug)}
               data-cy={available ? 'nav-tab' : 'nav-tab-upcoming'}
               data-type={slug}
               data-active={active ? 'true' : 'false'}

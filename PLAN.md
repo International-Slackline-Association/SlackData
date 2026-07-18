@@ -67,7 +67,7 @@ npx cypress run --spec cypress/e2e/<spec>.cy.ts
 | 2 | Nav & layout | `navigation.cy.ts` | ✅ 13/13 |
 | 3 | Listing + cards | `gear_cards`, `gear_listing`, `isa_certification`(cards) | ✅ see below |
 | 4 | Filters | `filters.cy.ts` | ✅ 308/308 (gear_listing/gear_cards still green) |
-| 5 | Search & sort refinement | `search_sort.cy.ts` | ⬜ |
+| 5 | Search & sort refinement | `search_sort.cy.ts` | ✅ 306/306 |
 | 6 | Detail page | `gear_detail.cy.ts` + `isa_certification`(detail) | ⬜ |
 | 7 | Compare | `compare.cy.ts` | ⬜ |
 | 8 | Manufacturers | `manufacturers.cy.ts` | ⬜ |
@@ -175,8 +175,42 @@ existing Phase 3 specs green (re-run `gear_listing` + `gear_cards` after wiring 
 
 </details>
 
-### ⬜ Phase 5 — Search & sort refinement
-`search_sort.cy.ts`: normalized name+brand search, "Name A→Z = no `sort` param" default nuance, sort persistence + reset-on-type-switch, contextual stretch sort, search+filter combination. Sort tables: **DESIGN.md → "Sort options".**
+### ✅ Phase 5 — Search & sort refinement — DONE
+**Result:** `search_sort.cy.ts` **306/306**; `filters` 328/328, `gear_cards` 111/111,
+`gear_listing` 168/168, `navigation` 13/13 all confirmed no-regression.
+
+Most of the *dropdown/sort* surface was already built in Phase 4.5 (default+tie-break name sort,
+decoupled stretch sort). Phase 5 closed the remaining search/sort-refinement gaps — all of them were
+the same root cause showing up in different places: **controlled inputs / reads racing the async
+`useSearchParams` URL echo** (the same class as the Phase-4 `RangeInput → RangeSlider` fix).
+
+Fixes worth remembering:
+- **Search box is local state, not `value={q}`** (`GearListingPage`). Binding the input straight to
+  the lagging URL param dropped characters while Cypress typed fast (`"Core"` → filtered as `"e"` →
+  172/200 cards). The box now holds local state that drives filtering and pushes to the URL for
+  bookmarking; it resyncs from the URL on `resetNonce` (clear-all) and on gear-type (`slug`) change,
+  never mid-typing.
+- **Stretch-sort kN retarget uses a synchronous local flag, not the URL read** (`SortDropdown`).
+  Right after applying a stretch sort, `sort` (from `useSearchParams`) still reads null for a render,
+  so the kN-secondary-dropdown's `if (activeKn != null)` guard silently dropped the retarget. Added a
+  local `stretchActive` state set synchronously by `pickStretch` (kept in sync with external/deep-link
+  sort via an effect); the retarget keys off that.
+- **Sort persist / reset-on-type-switch is decided from `window.location` at click time**
+  (`TopNav.goToTab`), not a render-time `active` flag. The render-time flag raced React Router's
+  navigation re-render and flaked "resets on switch" on whichever tab re-rendered a beat late.
+  Re-clicking the *current* tab preserves its query (sort/search/filters persist); a *different* tab
+  navigates bare (resets).
+- **`data-value` on filter pills** (`FilterSidebar.Pill`) — raw enum value, additive; the
+  search+filter combination tests select pills by it.
+- **Accent-insensitive search** — `utils/search.ts` `normalize()` now NFD-folds diacritics in addition
+  to stripping `[.\-()/ ]` (é → e).
+- **Spec fixes in place** (same precedent as Phase 4): `contain.text` was passed a RegExp (coerced to
+  the literal `/z.*a/i`, never matched) → plain `'Z→A'`; flaky `.then()` DOM reads after a sort click
+  → retrying `.should()`; the name-substring assertion now allows a name **or brand** match
+  (the locked-in contract); one search+filter count read moved to `item-count` (tolerates 0 cards).
+
+Known pre-existing flake (NOT Phase 5): `filters.cy.ts` "clicking an active pill deactivates it" can
+flake ~1/run on a rapid double-click racing the pill's async URL write; passes on re-run.
 
 ### ⬜ Phase 6 — Detail page
 Replace `GearDetailPage` stub: back link, brand/name/price, spec table (`spec-row[data-field]` + units, omit null rows), description, "View product →", ISA certification block + ISA warning banner, not-found. Special cases: weblock width range, webbing classification pill, treepro `price_unit`. Unblocks the 17 `isa_certification` detail failures. Per-type spec rows: **DESIGN.md → "Spec rows per gear type".**

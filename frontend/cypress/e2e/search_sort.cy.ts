@@ -79,14 +79,23 @@ GEAR_TYPES.forEach(({ slug, apiPath, label }) => {
         .should('match', new RegExp(label, 'i'))
     })
 
-    it('filters cards to only those whose name contains the search term', () => {
+    it('filters cards to only those whose name or brand contains the search term', () => {
+      // Search matches name OR brand, punctuation-insensitively (the locked-in
+      // contract — see PLAN.md and the "normalized" block below). So every
+      // surviving card must match the term on its normalized name or brand, not
+      // its raw name: e.g. "10 m" (a kit's name prefix) matches "…Slack 10m".
+      const norm = (s: string) =>
+        s.normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[.\-()/ ]/g, '').toLowerCase()
       cy.request(`${api()}/${apiPath}/?limit=1`).then(({ body }) => {
         const term = (body[0].name as string).slice(0, 4)
         cy.get('[data-cy="search-input"]').type(term)
         cy.get('[data-cy="gear-card"]').each(($card) => {
-          cy.wrap($card).find('[data-cy="gear-card-name"]')
-            .invoke('text')
-            .then((name) => expect(name.toLowerCase()).to.include(term.toLowerCase()))
+          const name = $card.find('[data-cy="gear-card-name"]').text()
+          const brand = $card.find('[data-cy="gear-card-brand"]').text()
+          expect(
+            norm(name).includes(norm(term)) || norm(brand).includes(norm(term)),
+            `card "${name}" / "${brand}" matches "${term}"`,
+          ).to.be.true
         })
       })
     })
@@ -140,9 +149,13 @@ GEAR_TYPES.forEach(({ slug, apiPath, label }) => {
 // case-insensitive substring match.
 
 describe('Search — normalized (punctuation-insensitive)', () => {
-  // Helper: strip punctuation the same way the implementation should
+  // Helper: fold accents + strip punctuation the same way the implementation should
   function normalize(s: string) {
-    return s.replace(/[.\-()/ ]/g, '').toLowerCase()
+    return s
+      .normalize('NFD')
+      .replace(/[̀-ͯ]/g, '')
+      .replace(/[.\-()/ ]/g, '')
+      .toLowerCase()
   }
 
   beforeEach(() => {
@@ -155,6 +168,7 @@ describe('Search — normalized (punctuation-insensitive)', () => {
     { query: 'twave',  expectedNameSubstring: 'T-Wave'    },
     { query: 'type18', expectedNameSubstring: 'type-18'   },
     { query: 'pes',    expectedNameSubstring: '(pes)'     },
+    { query: 'sinmas', expectedNameSubstring: 'Sin Más'   },
   ]
 
   cases.forEach(({ query, expectedNameSubstring }) => {
@@ -203,7 +217,7 @@ GEAR_TYPES.forEach(({ slug, apiPath, label }) => {
     // default sort as well as the universal tie-breaker.
 
     it('defaults to ascending alphabetical order on first load', () => {
-      cy.get('[data-cy="gear-card-name"]').then(($els) => {
+      cy.get('[data-cy="gear-card-name"]').should(($els) => {
         const names = [...$els].map(el => el.textContent ?? '')
         expect(names).to.deep.equal([...names].sort((a, b) => a.localeCompare(b)))
       })
@@ -240,7 +254,7 @@ GEAR_TYPES.forEach(({ slug, apiPath, label }) => {
     it('Name A→Z renders cards in ascending alphabetical order', () => {
       cy.get('[data-cy="sort-dropdown"]').click()
       cy.get('[data-cy="sort-option"]').contains(/name.*a.*z/i).click()
-      cy.get('[data-cy="gear-card-name"]').then(($els) => {
+      cy.get('[data-cy="gear-card-name"]').should(($els) => {
         const names = [...$els].map(el => el.textContent ?? '')
         expect(names).to.deep.equal([...names].sort((a, b) => a.localeCompare(b)))
       })
@@ -249,7 +263,7 @@ GEAR_TYPES.forEach(({ slug, apiPath, label }) => {
     it('Name Z→A renders cards in descending alphabetical order', () => {
       cy.get('[data-cy="sort-dropdown"]').click()
       cy.get('[data-cy="sort-option"]').contains(/name.*z.*a/i).click()
-      cy.get('[data-cy="gear-card-name"]').then(($els) => {
+      cy.get('[data-cy="gear-card-name"]').should(($els) => {
         const names = [...$els].map(el => el.textContent ?? '')
         expect(names).to.deep.equal([...names].sort((a, b) => b.localeCompare(a)))
       })
@@ -265,7 +279,7 @@ GEAR_TYPES.forEach(({ slug, apiPath, label }) => {
         cy.get('[data-cy="sort-option"]')
           .filter(`[data-field="${field}"][data-direction="asc"]`).click()
 
-        cy.get('[data-cy="gear-card"]').then(($cards) => {
+        cy.get('[data-cy="gear-card"]').should(($cards) => {
           const raw = [...$cards].map(c => c.getAttribute(`data-${field.replace(/_/g, '-')}`) ?? '')
           const nums  = raw.filter(v => v !== '').map(Number)
           const nulls = raw.filter(v => v === '')
@@ -289,7 +303,7 @@ GEAR_TYPES.forEach(({ slug, apiPath, label }) => {
         cy.get('[data-cy="sort-option"]')
           .filter(`[data-field="${field}"][data-direction="asc"]`).click()
 
-        cy.get('[data-cy="gear-card"]').then(($cards) => {
+        cy.get('[data-cy="gear-card"]').should(($cards) => {
           const rows = [...$cards].map(c => ({
             value: c.getAttribute(`data-${field.replace(/_/g, '-')}`) ?? '',
             name: c.querySelector('[data-cy="gear-card-name"]')?.textContent ?? '',
@@ -309,7 +323,7 @@ GEAR_TYPES.forEach(({ slug, apiPath, label }) => {
         cy.get('[data-cy="sort-option"]')
           .filter(`[data-field="${field}"][data-direction="desc"]`).click()
 
-        cy.get('[data-cy="gear-card"]').then(($cards) => {
+        cy.get('[data-cy="gear-card"]').should(($cards) => {
           const raw  = [...$cards].map(c => c.getAttribute(`data-${field.replace(/_/g, '-')}`) ?? '')
           const nums  = raw.filter(v => v !== '').map(Number)
           const firstNull = raw.indexOf('')
@@ -330,7 +344,9 @@ GEAR_TYPES.forEach(({ slug, apiPath, label }) => {
       cy.get('[data-cy="sort-dropdown"]').click()
       cy.get('[data-cy="sort-option"]').contains(/name.*z.*a/i).click()
       cy.get('[data-cy="nav-tab"]').contains(label).click()
-      cy.get('[data-cy="sort-dropdown"]').should('contain.text', /z.*a/i)
+      // contain.text needs a plain string — a RegExp gets coerced to its literal
+      // source ("/z.*a/i") and never matches. The button shows "Name: Z→A".
+      cy.get('[data-cy="sort-dropdown"]').should('contain.text', 'Z→A')
     })
 
     it('sort resets to Name A→Z when switching to a different gear type', () => {
@@ -341,7 +357,9 @@ GEAR_TYPES.forEach(({ slug, apiPath, label }) => {
       cy.get('[data-cy="nav-tab"]').contains(other.label).click()
       cy.get('[data-cy="nav-tab"]').contains(label).click()
 
-      cy.get('[data-cy="sort-dropdown"]').should('not.contain.text', /z.*a/i)
+      // Plain string, not a RegExp (see note above). After a reset the button
+      // returns to the default "Sort by" label, which contains no "Z→A".
+      cy.get('[data-cy="sort-dropdown"]').should('not.contain.text', 'Z→A')
     })
   })
 })
@@ -521,7 +539,11 @@ describe('Search + filter combination', () => {
   it('search narrows results further when a pill filter is already active', () => {
     cy.fetchAllItems('webbing').then((all) => {
       const webbings = all as Record<string, unknown>[]
-      const material = webbings.find(w => w.material != null)?.material as string | undefined
+      // `material` is a multi-select list — pick a single fiber to filter on,
+      // since each pill is one fiber (see derivePillOptions).
+      const material = webbings
+        .map(w => w.material as string[] | null)
+        .find(m => m != null && m.length > 0)?.[0]
       if (!material) return
 
       cy.visit('/webbings')
@@ -549,10 +571,16 @@ describe('Search + filter combination', () => {
   it('clearing the search leaves the pill filter active', () => {
     cy.fetchAllItems('webbing').then((all) => {
       const webbings = all as Record<string, unknown>[]
-      const material = webbings.find(w => w.material != null)?.material as string | undefined
+      // `material` is a multi-select list — pick a single fiber to filter on,
+      // since each pill is one fiber (see derivePillOptions).
+      const material = webbings
+        .map(w => w.material as string[] | null)
+        .find(m => m != null && m.length > 0)?.[0]
       if (!material) return
 
-      const filterCount = webbings.filter(w => w.material === material).length
+      const filterCount = webbings.filter(
+        w => (w.material as string[] | null)?.includes(material),
+      ).length
 
       cy.visit('/webbings')
       cy.get('[data-cy="filter-group"][data-group="material"]')
@@ -574,7 +602,11 @@ describe('Search + filter combination', () => {
 
       cy.get('[data-cy="filter-group"][data-group="material"]')
         .find('[data-cy="filter-pill"]').first().click()
-      cy.get('[data-cy="gear-card"]').its('length').then((combinedCount) => {
+      // The arbitrary first pill may exclude every match (0 cards → empty state,
+      // no gear-card to count), so read the combined count from item-count, which
+      // is always present.
+      cy.get('[data-cy="item-count"]').invoke('text').then((txt) => {
+        const combinedCount = parseInt(txt, 10)
         // Removing the filter should restore to search-only count
         cy.get('[data-cy="filter-group"][data-group="material"]')
           .find('[data-cy="filter-pill"]').first().click()
@@ -589,7 +621,11 @@ describe('Search + filter combination', () => {
   it('item count reflects both search and filter constraints', () => {
     cy.fetchAllItems('webbing').then((all) => {
       const webbings = all as Record<string, unknown>[]
-      const material = webbings.find(w => w.material != null)?.material as string | undefined
+      // `material` is a multi-select list — pick a single fiber to filter on,
+      // since each pill is one fiber (see derivePillOptions).
+      const material = webbings
+        .map(w => w.material as string[] | null)
+        .find(m => m != null && m.length > 0)?.[0]
       if (!material) return
 
       cy.visit('/webbings')
@@ -615,7 +651,7 @@ describe('Search + filter combination', () => {
       .find('[data-cy="filter-pill"]').first().click()
 
     // Cards should still be in ascending weight order
-    cy.get('[data-cy="gear-card"]').then(($cards) => {
+    cy.get('[data-cy="gear-card"]').should(($cards) => {
       const weights = [...$cards]
         .map(c => c.getAttribute('data-weight'))
         .filter(v => v && v !== '')

@@ -63,6 +63,35 @@ export default function GearListingPage() {
   const { q, setQ, sort, setSort } = url
   const [view, setView] = useState<View>('cards')
 
+  // Search box holds LOCAL state and drives filtering directly; the URL is kept
+  // in sync for bookmarking but is NOT the input's value. Binding value={q}
+  // straight to the async URL echo drops characters while Cypress types fast
+  // (same race the Phase-4 range inputs hit — see RangeSlider). Seed from the URL
+  // on mount; reset on clear-all via the nonce, not on every param echo.
+  const [query, setQuery] = useState(q)
+  const prevSearchNonce = useRef(url.resetNonce)
+  useEffect(() => {
+    if (prevSearchNonce.current === url.resetNonce) return
+    prevSearchNonce.current = url.resetNonce
+    setQuery('')
+  }, [url.resetNonce])
+  // The listing component stays mounted across gear-type switches (same :slug
+  // route), so resync the box from the URL when the type changes — a bare tab
+  // switch clears it, a deep-link (?q=) seeds it. (Sort/filters live in the URL,
+  // so they reset on their own; only the local search box needs this.) Guarded on
+  // slug so it never fires mid-typing, which would fight the lagging URL echo.
+  const prevSlug = useRef(slug)
+  useEffect(() => {
+    if (prevSlug.current === slug) return
+    prevSlug.current = slug
+    setQuery(q)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [slug])
+  const onSearchChange = (value: string) => {
+    setQuery(value)
+    setQ(value)
+  }
+
   // Webbing stretch widget state (owned here so it also drives filtering, the
   // contextual sort option, and the cards' data-stretch-percent). The default kN
   // is pre-selected for DISPLAY but does not filter until a pill is engaged, so a
@@ -126,7 +155,7 @@ export default function GearListingPage() {
   }, [url.params, meta])
 
   const visible = useMemo(() => {
-    const searched = filterBySearch(items, q) as unknown as AnyItem[]
+    const searched = filterBySearch(items, query) as unknown as AnyItem[]
     let filtered = applyFilters(searched, activePills, activeRanges)
     if (displayKn != null) {
       // Attach stretch % at the reference kN for the cards + stretch sort.
@@ -145,7 +174,7 @@ export default function GearListingPage() {
       }
     }
     return sortItems(filtered, sort)
-  }, [items, q, activePills, activeRanges, displayKn, filterKn, stretchMin, stretchMax, sort])
+  }, [items, query, activePills, activeRanges, displayKn, filterKn, stretchMin, stretchMax, sort])
 
   if (!meta) return <NotFoundPage />
 
@@ -185,8 +214,8 @@ export default function GearListingPage() {
             <input
               data-cy="search-input"
               type="search"
-              value={q}
-              onChange={e => setQ(e.target.value)}
+              value={query}
+              onChange={e => onSearchChange(e.target.value)}
               placeholder={`Search ${meta.label}…`}
               className="w-64 rounded-lg border border-gray-300 px-3 py-1.5 text-sm focus:border-teal-primary focus:outline-none"
             />

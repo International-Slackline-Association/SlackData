@@ -56,6 +56,17 @@ export default function SortDropdown({
   const activeKn = stretchKnOf(sort)
   const stretchKn = activeKn ?? pickedKn ?? stretchKns[0] ?? null
 
+  // Whether a stretch sort is currently applied, tracked in LOCAL state rather
+  // than read back off `sort`. The `sort` prop comes from the URL via
+  // useSearchParams, which lags a render behind setSort — so right after applying
+  // a stretch sort, `activeKn` is still null. Deciding "retarget the kN?" off that
+  // stale value silently dropped the retarget. pickStretch sets this synchronously;
+  // an effect keeps it in sync with external/deep-linked sort changes.
+  const [stretchActive, setStretchActive] = useState<'asc' | 'desc' | null>(null)
+  useEffect(() => {
+    setStretchActive(activeKn != null ? sort!.direction : null)
+  }, [sort, activeKn])
+
   useEffect(() => {
     if (!open) return
     const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setOpen(false)
@@ -76,8 +87,10 @@ export default function SortDropdown({
     setKnOpen(false)
   }
 
-  const pickStretch = (kn: number, direction: 'asc' | 'desc') =>
+  const pickStretch = (kn: number, direction: 'asc' | 'desc') => {
+    setStretchActive(direction) // synchronous — don't wait for the URL echo
     pick({ field: `${STRETCH_PREFIX}${kn}`, direction })
+  }
 
   const optionClass =
     'block w-full px-3 py-1.5 text-left text-sm text-gray-700 hover:bg-gray-50'
@@ -164,8 +177,9 @@ export default function SortDropdown({
                           onClick={() => {
                             setPickedKn(kn)
                             setKnOpen(false)
-                            // If a stretch sort is already active, retarget it.
-                            if (activeKn != null) pickStretch(kn, sort!.direction)
+                            // If a stretch sort is already applied, retarget it to
+                            // the new kN. Use the local flag, not `sort` (see above).
+                            if (stretchActive != null) pickStretch(kn, stretchActive)
                           }}
                         >
                           {kn} kN
