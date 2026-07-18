@@ -5,15 +5,19 @@
 // hidden (display:none) so the view toggle just flips visibility. When there are
 // no results, an empty state with a clear-filters action replaces both.
 
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { getGearType } from '@/config/gearTypes'
 import { useGearList } from '@/hooks/useGearList'
 import { useUrlState } from '@/hooks/useUrlState'
 import { filterBySearch } from '@/utils/search'
 import { sortItems } from '@/utils/sort'
+import { filterGroupsFor } from '@/config/filterGroups'
+import { applyFilters, type RangeBounds } from '@/utils/filter'
+import { mostCommonKn, percentAtKn, topKnPoints } from '@/utils/stretch'
 import type { AnyItem } from '@/utils/format'
 import FilterSidebar from '@/components/gear/FilterSidebar'
+import StretchFilter from '@/components/gear/StretchFilter'
 import SortDropdown from '@/components/gear/SortDropdown'
 import GearGrid from '@/components/gear/GearGrid'
 import GearTable from '@/components/gear/GearTable'
@@ -55,13 +59,122 @@ export default function GearListingPage() {
   const meta = slug ? getGearType(slug) : undefined
   const available = !!meta?.available
   const { items, loading } = useGearList(meta?.slug ?? '', available)
-  const { q, setQ, sort, setSort, clearAll } = useUrlState()
+  const url = useUrlState()
+  const { q, setQ, sort, setSort } = url
   const [view, setView] = useState<View>('cards')
 
+  // Search box holds LOCAL state and drives filtering directly; the URL is kept
+  // in sync for bookmarking but is NOT the input's value. Binding value={q}
+  // straight to the async URL echo drops characters while Cypress types fast
+  // (same race the Phase-4 range inputs hit — see RangeSlider). Seed from the URL
+  // on mount; reset on clear-all via the nonce, not on every param echo.
+  const [query, setQuery] = useState(q)
+  const prevSearchNonce = useRef(url.resetNonce)
+  useEffect(() => {
+    if (prevSearchNonce.current === url.resetNonce) return
+    prevSearchNonce.current = url.resetNonce
+    setQuery('')
+  }, [url.resetNonce])
+  // The listing component stays mounted across gear-type switches (same :slug
+  // route), so resync the box from the URL when the type changes — a bare tab
+  // switch clears it, a deep-link (?q=) seeds it. (Sort/filters live in the URL,
+  // so they reset on their own; only the local search box needs this.) Guarded on
+  // slug so it never fires mid-typing, which would fight the lagging URL echo.
+  const prevSlug = useRef(slug)
+  useEffect(() => {
+    if (prevSlug.current === slug) return
+    prevSlug.current = slug
+    setQuery(q)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [slug])
+  const onSearchChange = (value: string) => {
+    setQuery(value)
+    setQ(value)
+  }
+
+  // Webbing stretch widget state (owned here so it also drives filtering, the
+  // contextual sort option, and the cards' data-stretch-percent). The default kN
+  // is pre-selected for DISPLAY but does not filter until a pill is engaged, so a
+  // fresh load still shows all webbings (keeps gear_listing/gear_cards green).
+  const isWebbing = meta?.slug === 'webbings'
+  const [stretchKn, setStretchKn] = useState<number | null>(null)
+  const [stretchTouched, setStretchTouched] = useState(false)
+  const [stretchMin, setStretchMin] = useState('')
+  const [stretchMax, setStretchMax] = useState('')
+  const defaultKn = useMemo(
+    () => (isWebbing ? mostCommonKn(items as unknown as { stretch?: unknown }[]) : null),
+    [isWebbing, items],
+  )
+  const displayKn = isWebbing ? (stretchTouched ? stretchKn : defaultKn) : null
+  const filterKn = isWebbing && stretchTouched ? stretchKn : null
+
+  // Reset the stretch widget only when clear-all actually bumps the nonce.
+  // Comparing the previous value (not a mounted flag) survives StrictMode's
+  // double-invoked mount effect, which would otherwise fire the reset on load
+  // and deselect the default kN pill.
+  const prevNonce = useRef(url.resetNonce)
+  useEffect(() => {
+    if (prevNonce.current === url.resetNonce) return
+    prevNonce.current = url.resetNonce
+    // clear-all: deselect the kN (no pill active) and clear the % range.
+    setStretchTouched(true)
+    setStretchKn(null)
+    setStretchMin('')
+    setStretchMax('')
+  }, [url.resetNonce])
+
+  const selectKn = (kn: number) => {
+    // Clicking the currently-engaged pill toggles the widget off; clicking any
+    // other pill — including the non-filtering default hint — engages it. (The
+    // default is only engaged after the first explicit click, so it never filters
+    // on load.)
+    if (stretchTouched && stretchKn === kn) {
+      setStretchKn(null)
+    } else {
+      setStretchTouched(true)
+      setStretchKn(kn)
+    }
+  }
+
+  const { activePills, activeRanges } = useMemo(() => {
+    const activePills: Record<string, string[]> = {}
+    const activeRanges: Record<string, RangeBounds> = {}
+    if (meta) {
+      for (const g of filterGroupsFor(meta.slug)) {
+        if (g.type === 'pill') {
+          const values = url.getPillValues(g.group)
+          if (values.length) activePills[g.group] = values
+        } else {
+          const r = url.getRange(g.group)
+          if (r.min != null || r.max != null) activeRanges[g.group] = r
+        }
+      }
+    }
+    return { activePills, activeRanges }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [url.params, meta])
+
   const visible = useMemo(() => {
-    const filtered = filterBySearch(items, q)
-    return sortItems(filtered as unknown as AnyItem[], sort)
-  }, [items, q, sort])
+    const searched = filterBySearch(items, query) as unknown as AnyItem[]
+    let filtered = applyFilters(searched, activePills, activeRanges)
+    if (displayKn != null) {
+      // Attach stretch % at the reference kN for the cards + stretch sort.
+      filtered = filtered.map(it => ({ ...it, stretch_percent: percentAtKn(it.stretch, displayKn) }))
+      // Exclusion only once a pill is engaged (filterKn), not on the default.
+      if (filterKn != null) {
+        const lo = stretchMin === '' ? null : Number(stretchMin)
+        const hi = stretchMax === '' ? null : Number(stretchMax)
+        filtered = filtered.filter(it => {
+          const p = it.stretch_percent as number | null
+          if (p == null) return false
+          if (lo != null && p < lo) return false
+          if (hi != null && p > hi) return false
+          return true
+        })
+      }
+    }
+    return sortItems(filtered, sort)
+  }, [items, query, activePills, activeRanges, displayKn, filterKn, stretchMin, stretchMax, sort])
 
   if (!meta) return <NotFoundPage />
 
@@ -81,7 +194,19 @@ export default function GearListingPage() {
       <h1 className="mb-6 text-2xl font-bold text-gray-900">{meta.label}</h1>
 
       <div className="flex gap-8">
-        <FilterSidebar meta={meta} />
+        <FilterSidebar meta={meta} items={items as unknown as AnyItem[]} url={url}>
+          {isWebbing && (
+            <StretchFilter
+              items={items as unknown as AnyItem[]}
+              displayKn={displayKn}
+              onSelectKn={selectKn}
+              min={stretchMin}
+              max={stretchMax}
+              onMinChange={setStretchMin}
+              onMaxChange={setStretchMax}
+            />
+          )}
+        </FilterSidebar>
 
         <div className="min-w-0 flex-1">
           {/* Toolbar */}
@@ -89,8 +214,8 @@ export default function GearListingPage() {
             <input
               data-cy="search-input"
               type="search"
-              value={q}
-              onChange={e => setQ(e.target.value)}
+              value={query}
+              onChange={e => onSearchChange(e.target.value)}
               placeholder={`Search ${meta.label}…`}
               className="w-64 rounded-lg border border-gray-300 px-3 py-1.5 text-sm focus:border-teal-primary focus:outline-none"
             />
@@ -119,7 +244,18 @@ export default function GearListingPage() {
                   Chart
                 </button>
               </div>
-              <SortDropdown slug={meta.slug} sort={sort} onChange={setSort} />
+              <SortDropdown
+                slug={meta.slug}
+                sort={sort}
+                onChange={setSort}
+                stretchKns={
+                  isWebbing
+                    ? // Ranked by count (most common first) so the dropdown's default
+                      // stretch-sort kN matches the filter's default reference kN.
+                      topKnPoints(items as unknown as { stretch?: unknown }[]).map(p => p.kn)
+                    : []
+                }
+              />
             </div>
           </div>
 
@@ -127,7 +263,7 @@ export default function GearListingPage() {
           {loading ? (
             <LoadingSkeleton />
           ) : visible.length === 0 ? (
-            <EmptyState onClear={clearAll} />
+            <EmptyState onClear={url.clearAll} />
           ) : (
             <>
               <div className={view === 'chart' ? 'hidden' : ''}>

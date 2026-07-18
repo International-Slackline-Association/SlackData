@@ -1,9 +1,14 @@
-// Punctuation-insensitive search. Strips [.\-()/ ] and lowercases before a
-// substring match, so "82" matches "8.2", "twave" matches "T-Wave", etc.
+// Punctuation- and accent-insensitive search. Folds diacritics, strips
+// [.\-()/ ], and lowercases before a substring match, so "82" matches "8.2",
+// "twave" matches "T-Wave", "sinmas" matches "Sin Más", etc.
 // (see search_sort.cy.ts — "normalized" search).
 
 export function normalize(s: string): string {
-  return s.replace(/[.\-()/ ]/g, '').toLowerCase()
+  return s
+    .normalize('NFD')                 // û → u + ◌̂ (combining circumflex)
+    .replace(/[̀-ͯ]/g, '') // strip the combining marks
+    .replace(/[.\-()/ ]/g, '')
+    .toLowerCase()
 }
 
 // Filtering rules:

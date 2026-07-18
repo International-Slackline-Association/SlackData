@@ -13,7 +13,7 @@ References: climbing-gear.com (layout/UX) + slacklineinternational.org (color id
 | Card surface | white `#FFFFFF` | Cards pop against the warm background |
 | Primary / interactive | ISA teal `#00897B` | Active nav tabs, pill focus ring, filter dot accents, sidebar section dots |
 | Price / buy CTA | amber-orange `#E8770A` | Borrowed from climbing-gear.com; universally reads as "cost" |
-| Category badge | ISA coral `#D04A3E` | From the ISA logo mark — gear-type pill top-left of card image |
+| Coral accent | ISA coral `#D04A3E` | From the ISA logo mark — used in the ISA Approved stamp. (Reserved for a future gear-type badge on mixed-type views, e.g. manufacturer pages.) |
 | Feature tags | light gray `#F0F0F0` bg, `#555` text | ISA certified, Dry-rated, etc. |
 | Body text | near-black `#1A1A1A` | Product names, headings |
 | Secondary text | medium gray `#6B7280` | Brand names (all-caps), spec labels, metadata |
@@ -60,34 +60,40 @@ Header: "FIND YOUR [GEAR TYPE]" in small gray all-caps at the top.
 
 Each filter group:
 - Small colored dot (teal) + section label in all-caps gray (e.g. "MATERIAL TYPE")
-- Filter options rendered as **outlined pill/chip buttons** — not checkboxes. Multiple selectable.
+- Filter options rendered as **outlined pill/chip buttons** — not checkboxes.
 - Pills are inactive by default (white bg, gray border, gray text). Active = teal border + teal text + very light teal bg (`#E0F2F1`).
 - Groups are collapsible (arrow on the right).
+
+**Pill selection mode depends on how many options a group has** (derived from the data at render time; the group carries `data-select="single|multi"`):
+- **Exactly 2 options → single-select** (a radio with a clear): picking one replaces the other, and re-clicking the active pill clears the group back to "all". Applies to every boolean Yes/No group and any 2-value enum (e.g. Tree Protector "Sold As", Slider/Bearing Material on rollers).
+- **3+ options → multi-select** (OR within the group) with subtle **All / None** shortcuts (`data-cy="pill-select-all"` / `pill-select-none`) above the pills — All selects every option, None clears the group.
+
+**Hidden pill groups.** A boolean group is dropped entirely when nothing in the data is `true` — e.g. no roller / starter-kit / trickline-kit is ISA certified, so their "ISA Certified" toggle is omitted rather than showing a lone, useless "No". Empty enum groups (e.g. `isa_warning`, which currently has no data anywhere) still render — they're valid, forthcoming fields.
 
 Filter groups per gear type — verified against `slack_data/models/*.py` and `utilities/`.
 
 Three filter control types:
-- **Pill toggle** — enum and boolean fields; values become toggle buttons (multi-select within a group)
-- **Range input** — numeric fields (float or int); rendered as a min + max text input pair with unit label
+- **Pill toggle** — enum and boolean fields; single- or multi-select per the rule above
+- **Range slider** — numeric fields (float or int); rendered as a **dual-thumb slider** (two overlaid `<input type="range">`, min thumb `data-cy="range-min"`, max thumb `data-cy="range-max"`), domain = the data's [min, max], `step="any"`. A thumb parked at its domain bound means "no constraint". The two value labels below the track (`data-cy="range-min-value"` / `range-max-value`) are **click-to-edit**: one click turns the number into an inline numeric input (commit on Enter/blur, cancel on Escape) so an exact bound can be typed without dragging; out-of-range values are clamped, not rejected. This is the standard control for every min/max filter (weight, breaking strength, diameters, widths, dimensions, kit weight, and the stretch %).
 - **Stretch at X kN** — webbing-only custom widget (see below)
 
 Excluded from filters: `name`/`description`/`notes` (search), `release_date`, `product_url`, `version`, `currency` (not a UX-meaningful filter), `colors` (comma-separated string needing split logic — future work), `stretch` on webbing (JSON blob of {kn,percent} pairs — exposed as a "has stretch data" pill instead), `width` on rollers (raw string like "25–35mm", not a numeric field).
 
-**Webbings:** Material Type [pill] · Width mm [pill] · Classification [pill] · ISA Certified [pill] · ISA Warning [pill] · Weight g/m [range] · Breaking Strength kN [range] · **Stretch at X kN** [custom — see below]
+**Webbings:** Material Type [pill] · Width mm [range] · Classification [pill] · ISA Certified [pill] · ISA Warning [pill] · Weight g/m [range] · Breaking Strength kN [range] · **Stretch at X kN** [custom — see below]
 
-**Weblocks:** Material [pill] · Min Width mm [pill] · Front Pin [pill] · Attachment Point [pill] · ISA Certified [pill] · ISA Warning [pill] · Weight g [range] · Breaking Strength kN [range]
+**Weblocks:** Material [pill] · Min Width mm [range] · Front Pin [pill] · Attachment Point [pill] · ISA Certified [pill] · ISA Warning [pill] · Weight g [range] · Breaking Strength kN [range]
 
 **Leash Rings:** Material [pill] · ISA Certified [pill] · ISA Warning [pill] · Inner Diameter mm [range] · Outer Diameter mm [range] · Weight g [range] · Breaking Strength kN [range]
 
 **Grips:** Material [pill] · Min Width mm [pill] · Connection Type [pill] · ISA Certified [pill] · ISA Warning [pill] · Weight g [range] · WLL kN [range] · MBS kN [range] · Slipping Threshold kN [range]
 
-**Rollers:** Frame Material [pill] · Roller Material [pill] · Slider Type [pill] · Lock Type [pill] · Bearing Material [pill] · ISA Certified [pill] · ISA Warning [pill] · Weight g [range] · Breaking Strength kN [range]
+**Rollers:** Frame Material [pill] · Roller Material [pill] · Slider Type [pill] · Lock Type [pill] · Bearing Material [pill] · ISA Warning [pill] · Weight g [range] · Breaking Strength kN [range]  _(ISA Certified hidden — no roller is certified)_
 
-**Tree Protectors:** Sling Attachment [pill] · Sold As [pill] · Weight g [range] · Width cm [range] · Length cm [range] · Thickness mm [range]
+**Tree Protectors:** Sling Attachment [pill] · Sold As [pill — labels title-cased: Pair / Single] · Weight g [range] · Width cm [range] · Length cm [range] · Thickness mm [range]
 
-**Starter Kits:** Tensioning [pill] · Webbing Width mm [pill] · Webbing Length m [pill] · Includes Tree Pro [pill] · ISA Certified [pill] · Kit Weight g [range]
+**Starter Kits:** Tensioning [pill] · Webbing Width mm [pill] · Webbing Length m [pill] · Includes Tree Pro [pill] · Kit Weight g [range]  _(ISA Certified hidden — none certified)_
 
-**Trickline Kits:** Tensioning [pill] · Webbing Width mm [pill] · Webbing Length m [pill] · Includes Tree Pro [pill] · ISA Certified [pill] · Kit Weight g [range]
+**Trickline Kits:** Tensioning [pill] · Webbing Width mm [pill] · Webbing Length m [pill] · Includes Tree Pro [pill]  _(ISA Certified hidden — none certified; Kit Weight NOT filterable — only 2 of 9 have weight data)_
 
 **Manufacturers sidebar:** Continent [pill] · Slackline-Focused [pill]
 
@@ -97,20 +103,20 @@ The `stretch` field is a JSON array of `{kn, percent}` pairs — a curve, not a 
 
 ```
 ┌─ Stretch at ──────────────────────────────────────┐
-│  [0 kN]  [5 kN]  [►10 kN]  [15 kN]  [20 kN]  …  │  ← single-select kN pills, populated from data
+│  [►10 kN (167)] [5 kN (61)] [6 kN (54)] …         │  ← single-select kN pills (top 5), with webbing counts
 │  Min %  [      ]   Max %  [      ]                 │  ← % range at the selected kN
 └───────────────────────────────────────────────────┘
 ```
 
 Rules:
-- kN pills are populated dynamically from the union of all kN values present across all webbing stretch arrays — no hard-coded values
-- Default selected kN = the kN value that appears in the most webbing stretch arrays (most common in the dataset)
+- kN pills show only the **top 5 reference points**, chosen from the data: **0 kN is excluded** (every curve reads 0% there — a useless data point), **only integer kN qualify**, and the five are ranked by how many webbings carry a data point at that kN (ties broken toward the smaller kN). Each pill shows that **webbing count** in parentheses, e.g. `10 kN (167)`.
+- Default selected kN = the highest-count top point (the most common kN in the dataset)
 - When a kN pill is active, only webbings that have a data point at exactly that kN are eligible; others are excluded
 - The min/max % range further narrows within eligible webbings
 - Deselecting the kN pill (clicking active pill) makes the widget fully inactive — all webbings show again
 - Changing the selected kN resets the % range inputs
-- When this filter is active, the sort dropdown gains two extra options: Stretch % Low→High and Stretch % High→Low (sorted by % at the currently selected kN)
-- Cards in the sorted result carry `data-stretch-percent` attribute for test verification
+- Cards carry a `data-stretch-percent` attribute (% at the widget's displayed kN) for test verification
+- Sorting by stretch is handled by the sort dropdown's own secondary kN picker, **decoupled** from this filter widget — see Sort options below
 
 ---
 
@@ -122,12 +128,14 @@ Sort options use `data-field` + `data-direction` attributes on the `[data-cy="so
 
 Null-last in both directions: items where the field is null always appear below items with real values, regardless of whether the sort is ascending or descending.
 
+**Name is the default sort AND the universal tie-breaker.** A fresh load (no sort chosen) is alphabetical by name ascending. On every numeric sort, items with **equal values** — and the order among null/blank values — fall back to **name ascending** (regardless of the numeric direction). So e.g. MBS High→Low lists equal-MBS grips A→Z.
+
 **All types — always present:**
 - Name A→Z / Z→A
 - Price Low→High / High→Low _(null-last)_
 - Weight Low→High / High→Low _(null-last)_
 
-**Webbings:** + Width · Breaking Strength · **Stretch at X kN** _(context-driven — see below)_
+**Webbings:** + Width · Breaking Strength · **Stretch at X kN** _(secondary kN picker — see below)_
 **Weblocks:** + Min Width · Breaking Strength
 **Leash Rings:** + Inner Diameter · Outer Diameter · Breaking Strength
 **Grips:** + Min Width · WLL · MBS · Slipping Threshold
@@ -137,10 +145,10 @@ Null-last in both directions: items where the field is null always appear below 
 **Trickline Kits:** + Webbing Length · Webbing Width
 
 **Stretch sort (webbings only):**
-- Stretch sort options (`data-field="stretch"`) appear in the dropdown **only** when a kN pill is selected in the Stretch filter widget.
-- The active kN determines which stretch % values drive the ordering.
-- Webbings without data at the selected kN are sorted to the bottom (null-last) but are **not excluded** — they remain visible unless a % range filter is also active.
-- Changing the selected kN updates the sort immediately; the sort label in the dropdown reflects the current kN (e.g. "Stretch at 10 kN ↑").
+- The dropdown always carries a single **Stretch** row (`data-cy="sort-stretch-row"`) for webbings — it does **not** depend on the filter widget's kN selection.
+- The kN is a **nested secondary dropdown** (`data-cy="stretch-sort-kn"`, options `data-cy="stretch-sort-kn-option"`): the clickable number offers the **top-5 kN points** (same set as the filter pills). Default = the most common point.
+- Below it, Low→High / High→Low (`data-field="stretch"`, `data-kn="<kn>"`) order by the % at the chosen kN. The underlying sort field is encoded as `stretch@<kn>`.
+- Webbings without data at the chosen kN sort to the bottom (null-last, name tie-break) but are **not excluded** — they remain visible unless a % range filter is also active.
 
 ### Above the Card Grid
 
@@ -163,7 +171,7 @@ Hover: shadow deepens slightly.
 **Image area** (top ~40% of card):
 - White or very light gray bg
 - Product image centered (placeholder: rope/webbing icon in low-opacity gray)
-- Category badge pill — top-left corner, absolute positioned. Coral bg (`#D04A3E`), white text, small rounded pill. Text is gear type or a sub-category (e.g. "LONGLINE", "CLASSIC", "PRIMITIVE").
+- **No gear-type badge.** Each listing shows a single gear type, so labelling every card "ROLLER" on the rollers page is redundant. Reintroduce a coral gear-type pill (top-left, absolute) only on views that mix types — e.g. manufacturer pages.
 
 **Content area** (bottom ~60%):
 - Brand name: small-caps gray, ~11px, ~4px below image area
@@ -204,11 +212,12 @@ Max-width centered container (~720px), left-aligned back link.
 | Row label | Field | Display notes |
 |-----------|-------|---------------|
 | Material | `material` | Enum value as-is: Nylon, Dyneema, etc. |
+| Material Composition | `material_composition` | Hybrid webbings only. JSON array of component fiber names — render as a plain slash-joined string, e.g. `Polyester / Dyneema`. Omit the row entirely when null (single-fiber webbings). **Detail spec sheet only — never shown on the card.** |
 | Width | `width` | Append "mm" |
 | Weight | `weight` | Append "g/m"; omit if null |
 | Breaking Strength | `breaking_strength` | Append "kN"; omit if null |
 | Stretch | `stretch` | JSON array of {kn, percent} points — render as a small inline stretch curve chart, or fallback to a text summary "X% at YkN" at the reference load. Omit if null. |
-| Classification | `classification` | A+/A/B/C — show as a colored pill (A+ = teal, A = green, B = amber, C = gray) |
+| Classification | `classification` | ISA highline class — show as a colored pill: A+ = teal, A = green, B = amber, C = gray, Not for Highline = subdued gray/muted. For hybrids the class is derived from the strongest component fiber (see Material Composition). |
 | Colors | `colors` | Comma-separated string — render as small color-name chips |
 | ISA Certified | `isa_certified` | Handled by the ISA Certification block above the spec table — no row needed here |
 
