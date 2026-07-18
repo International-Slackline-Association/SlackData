@@ -1,6 +1,7 @@
 from enum import Enum
 from pydantic import computed_field
-from sqlmodel import Field, Relationship, SQLModel
+from sqlalchemy import JSON
+from sqlmodel import Column, Field, Relationship, SQLModel
 
 from slack_data.utilities.currencies import Currency
 from slack_data.utilities.isa_warnings import ISAWarning
@@ -32,7 +33,8 @@ class BaseRoller(SQLModel):
     Required fields are re-declared in the table model, RollerPublic, and RollerCreate.
     """
     name: str | None = Field(default=None, index=True)
-    material: MetalMaterial | None = None
+    # multi-select: a roller can be made of several metals (e.g. aluminum + steel)
+    material: list[MetalMaterial] | None = Field(default=None, sa_column=Column(JSON))
     roller_material: RollerMaterial | None = None
     slider_type: SliderType | None = None
     lock_type: LockType | None = None
@@ -54,7 +56,7 @@ class BaseRoller(SQLModel):
 class Roller(BaseRoller, table=True):
     id: int | None = Field(default=None, primary_key=True)
     name: str = Field(index=True)         # required — NOT NULL in DB
-    material: MetalMaterial               # required — NOT NULL in DB
+    # material inherits the JSON column from BaseRoller (multi-select list)
     roller_material: RollerMaterial       # required — NOT NULL in DB
     slider_type: SliderType               # required — NOT NULL in DB
     lock_type: LockType                   # required — NOT NULL in DB
@@ -70,7 +72,7 @@ class RollerPublic(BaseRoller):
     """Model for public roller data."""
     id: int
     name: str
-    material: MetalMaterial
+    material: list[MetalMaterial]
     roller_material: RollerMaterial
     slider_type: SliderType
     lock_type: LockType
@@ -85,7 +87,7 @@ class RollerPublic(BaseRoller):
 class RollerCreate(BaseRoller):
     """Model for creating a new roller entry."""
     name: str
-    material: MetalMaterial
+    material: list[MetalMaterial]
     roller_material: RollerMaterial
     slider_type: SliderType
     lock_type: LockType

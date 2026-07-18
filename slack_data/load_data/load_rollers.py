@@ -7,7 +7,7 @@ from slack_data.database import SessionDep
 from slack_data.models.brands import Brand, BrandCreate, get_brand
 from slack_data.models.rollers import BearingMaterial, LockType, SliderType, Roller, RollerCreate
 from slack_data.utilities.currencies import get_currency
-from slack_data.utilities.materials import MetalMaterial, RollerMaterial, get_metal_material
+from slack_data.utilities.materials import RollerMaterial, get_metal_materials
 
 ROLLER_FILE = Path(__file__).parent.parent.parent / "rollers.json"
 
@@ -59,7 +59,7 @@ def add_rollers_to_db(rollers: list[dict], session: SessionDep) -> None:
             brand_id=brand_id,
             release_date=roller.get("date_introduced"),
             product_url=roller.get("product_url"),
-            material=get_metal_material(str(roller.get("materialType", ""))),
+            material=get_metal_materials(roller.get("material")),
             roller_material=get_roller_material(str(roller.get("roller_material", ""))),
             lock_type=get_lock_type(str(roller.get("locking_type", ""))),
             bearing_material=get_bearing_material(str(roller.get("bearing_material", "steel"))),

@@ -20,7 +20,7 @@
     },
     {
         "name": "Hangover 2.0",
-        "material": "Aluminum",
+        "material": "Aluminum, Steel",
         "weight": 152,
         "wll": 4,
         "mbs": 24,
@@ -42,7 +42,7 @@
     },
     {
         "name": "HangOver Stainless",
-        "material": "Aluminum",
+        "material": "Aluminum, Stainless Steel",
         "weight": 152,
         "wll": 4,
         "mbs": 22,
@@ -65,7 +65,7 @@
     },
     {
         "name": "HangOver-S",
-        "material": "Aluminum",
+        "material": "Aluminum, Steel",
         "weight": 157,
         "wll": 4,
         "mbs": 24,
@@ -84,28 +84,6 @@
         "locking_type": "screw lock",
         "date_introduced": null,
         "product_url": "https://www.slacktivity.com/hangover-s"
-    },
-    {
-        "name": "HangOver 2.0",
-        "material": "Aluminum",
-        "weight": 152,
-        "wll": 4,
-        "mbs": 18,
-        "compatible_webbing_width": [
-            25,
-            26
-        ],
-        "slider_type": "Carabiner",
-        "inner_width": 28.7,
-        "outer_bearing_diameter": null,
-        "isa_approved": null,
-        "manufacturer": "Slacktivity",
-        "price": 50.0,
-        "price_unit": "EUR",
-        "roller_material": "Steel",
-        "locking_type": "non-locking",
-        "date_introduced": null,
-        "product_url": "https://www.slacktivity.com/default/longline-highline/hangover"
     },
     {
         "name": "HangOver Royal",
@@ -220,7 +198,7 @@
     },
     {
         "name": "Rock'n'Roll",
-        "material": "Aluminum",
+        "material": "Aluminum, Stainless Steel",
         "weight": 210,
         "wll": 2,
         "mbs": null,
@@ -242,7 +220,7 @@
     },
     {
         "name": "ROLLEX SS",
-        "material": "Aluminum",
+        "material": "Aluminum, Stainless Steel",
         "weight": 129,
         "wll": 4,
         "mbs": 22,
@@ -265,7 +243,7 @@
     },
     {
         "name": "ROLLEX SG",
-        "material": "Aluminum",
+        "material": "Aluminum, Steel",
         "weight": 129,
         "wll": 4,
         "mbs": 22,
@@ -287,7 +265,7 @@
     },
     {
         "name": "ROLLEX",
-        "material": "Aluminum",
+        "material": "Aluminum, Steel",
         "weight": 129,
         "wll": 4,
         "mbs": 22,
@@ -353,7 +331,7 @@
     },
     {
         "name": "Webbling Pulley",
-        "material": "Aluminum",
+        "material": "Nylon, Aluminum",
         "weight": 67,
         "wll": null,
         "mbs": 15,
@@ -375,7 +353,7 @@
     },
     {
         "name": "BC Roller - Straight Gate",
-        "material": "Aluminum",
+        "material": "Aluminum, Stainless Steel",
         "weight": 121,
         "wll": 4,
         "mbs": 21,
@@ -395,7 +373,7 @@
     },
     {
         "name": "BC Roller - 2-Stage Twist Lock",
-        "material": "Aluminum",
+        "material": "Aluminum, Stainless Steel",
         "weight": 136,
         "wll": 4,
         "mbs": 21,
