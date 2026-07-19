@@ -12,6 +12,7 @@ class FrontPin(str, Enum):
     PULLPIN = "Pull Pin"
     CAPTIVEPIN = "Captive Pin"
     FIXEDBOLT = "Fixed Bolt"
+    SCREWPIN = "Screw Pin"
     OTHER = "Other"
 
 class AttachmentPoint(str, Enum):

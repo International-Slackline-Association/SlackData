@@ -15,21 +15,6 @@
         "product_url": "http://www.kong.it/en/2-products/items/f17-anchorage/p160-ana"
     },
     {
-        "name": "HighlineRing Green",
-        "material": "Aluminum",
-        "inner_diameter": 60,
-        "outer_diameter": 80,
-        "weight": 48,
-        "breaking_strength": 20,
-        "isa_certified": true,
-        "price": 10.95,
-        "currency": "EUR",
-        "notes": null,
-        "manufacturer": "Slacktivity",
-        "date_introduced": null,
-        "product_url": null
-    },
-    {
         "name": "Steel Ring",
         "material": "Stainless Steel",
         "inner_diameter": 57,
@@ -397,7 +382,7 @@
         "weight": 51,
         "breaking_strength": 39,
         "isa_certified": true,
-        "price": 16.95,
+        "price": 19.00,
         "currency": "EUR",
         "notes": null,
         "manufacturer": "Slacktivity",
@@ -406,7 +391,7 @@
     },
     {
         "name": "BC Aluminum Leash Ring",
-        "material": "Other",
+        "material": "Aluminum",
         "inner_diameter": 60,
         "outer_diameter": 80.8,
         "weight": 50,
@@ -450,7 +435,7 @@
         "product_url": "https://raed-slacklines.com/halo-titanium-highline-leash-ring"
     },
     {
-        "name": " SATURN ring",
+        "name": "SATURN ring",
         "material": "Aluminum",
         "inner_diameter": 76,
         "outer_diameter": null,

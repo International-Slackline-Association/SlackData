@@ -60,17 +60,15 @@ def add_webbings_to_db(webbings: list[dict], session: SessionDep) -> None:
     for webbing in webbings:
         brand_id, brand_cache = get_brand(session, brand_cache, webbing)
 
-        material = get_material_type(str(webbing.get("materialType", "")))
+        material = get_material_types(
+            webbing.get("materialType"), webbing.get("materialComposition")
+        )
 
         breaking_strength = (
             float(webbing["breakingStrength"])
             if webbing.get("breakingStrength") not in (None, "")
             else None
         )
-
-        # For hybrids, parse the JSON list of component fiber names (set by
-        # clean_webbing_data) into FiberMaterial values for classification.
-        composition = parse_composition(webbing.get("materialComposition"))
 
         webbing_create = WebbingCreate(
             name=str(webbing.get("name")),
@@ -86,8 +84,7 @@ def add_webbings_to_db(webbings: list[dict], session: SessionDep) -> None:
             # some null weights, so pass None through instead of float(None).
             weight=float(webbing.get("weight")) if webbing.get("weight") not in (None, "") else None,
             breaking_strength=breaking_strength,
-            material_composition=webbing.get("materialComposition"),
-            classification=classify_webbing(material, breaking_strength, composition),
+            classification=classify_webbing(material, breaking_strength),
             stretch=webbing.get("stretch"),
             thickness=float(webbing.get("thickness")) if webbing.get("thickness") not in (None, "") else None,
             webbing_construction=get_webbing_construction(webbing.get("webbing_construction")),
@@ -103,22 +100,33 @@ def add_webbings_to_db(webbings: list[dict], session: SessionDep) -> None:
     session.commit()
     session.refresh(db_webbing)
 
-def parse_composition(raw) -> list[FiberMaterial] | None:
-    """Parse a hybrid's component fibers into FiberMaterial values.
+def get_material_types(material_type, composition) -> list[FiberMaterial]:
+    """Resolve a webbing's fibers into the multi-select `material` list.
 
-    `raw` is the JSON string produced by clean_webbing_data (e.g.
-    '["Polyester", "Dyneema/HMPE"]'), or a plain list, or None. Unknown fiber names
-    are skipped so a bad entry can't crash seeding."""
-    if not raw:
-        return None
-    fibers = json.loads(raw) if isinstance(raw, str) else raw
-    result = []
-    for name in fibers:
-        try:
-            result.append(FiberMaterial(name))
-        except ValueError:
-            continue
-    return result or None
+    `composition` wins when present — it is the explicit per-fiber breakdown
+    (a JSON string like '["Polyester", "Dyneema/HMPE"]' as produced by
+    clean_webbing_data, or a plain list). It is the only source for what used to
+    be `materialType: "Hybrid"`, which named no actual fibers.
+
+    Otherwise the single `materialType` string is resolved to a 1-element list.
+    Unknown fiber names are skipped so one bad entry can't crash seeding; if
+    nothing resolves, fall back to [OTHER] rather than an empty list, since
+    `material` is NOT NULL.
+    """
+    if composition:
+        fibers = json.loads(composition) if isinstance(composition, str) else composition
+        result: list[FiberMaterial] = []
+        for name in fibers:
+            try:
+                fiber = FiberMaterial(name)
+            except ValueError:
+                continue
+            if fiber not in result:  # collapse duplicates, preserve order
+                result.append(fiber)
+        if result:
+            return result
+
+    return [get_material_type(str(material_type or ""))]
 
 
 def parse_currency(value) -> Currency | None:
@@ -161,12 +169,13 @@ def get_webbing_construction(value: str | None) -> WebbingConstruction | None:
 
 def get_material_type(material: str) -> FiberMaterial:
     """
-    Convert the material string to a Material enum.
+    Convert a single material string to a FiberMaterial enum.
+
+    Multi-fiber sources are handled by get_material_types() via the explicit
+    composition list; a bare "Hybrid" names no fibers, so it lands in OTHER.
     """
     material = material.lower()
-    if "pes/polyamid" in material or "hybrid" in material:
-        return FiberMaterial.HYBRID
-    elif "nylon" in material or "polyamid" in material:
+    if "nylon" in material or "polyamid" in material:
         return FiberMaterial.NYLON
     elif "polyester" in material or "pes" in material:
         return FiberMaterial.POLYESTER

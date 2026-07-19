@@ -280,7 +280,7 @@
         "manufacturer": "Spider Slacklines",
         "price": 54.95,
         "price_unit": "USD",
-        "roller_material": null,
+        "roller_material": "Aluminum",
         "locking_type": "Non-locking",
         "date_introduced": 1555189200000,
         "product_url": "https://www.slackshop.cz/en/rollex/157-379-rollex.html"

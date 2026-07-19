@@ -86,6 +86,8 @@ def get_connection_type(connection_type: str) -> ConnectionType:
     connection_type = connection_type.lower()
     if "dyneema sling loop" in connection_type:
         return ConnectionType.DYNEEMA_SLING_LOOP
+    elif "sling loop" in connection_type:
+        return ConnectionType.SLING_LOOP
     elif "mounting hole" in connection_type:
         return ConnectionType.MOUNTING_HOLE
     else:
