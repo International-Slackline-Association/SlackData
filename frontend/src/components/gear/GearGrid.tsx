@@ -1,5 +1,5 @@
 // Card grid (3 columns at ≥lg, per DESIGN.md). `className` lets the page hide it
-// (display:none) when the Chart view is active while keeping it in the DOM.
+// (display:none) when the Detailed view is active while keeping it in the DOM.
 
 import type { GearTypeMeta } from '@/config/gearTypes'
 import type { AnyItem } from '@/utils/format'

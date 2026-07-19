@@ -68,7 +68,7 @@ npx cypress run --spec cypress/e2e/<spec>.cy.ts
 | 3 | Listing + cards | `gear_cards`, `gear_listing`, `isa_certification`(cards) | ✅ see below |
 | 4 | Filters | `filters.cy.ts` | ✅ 308/308 (gear_listing/gear_cards still green) |
 | 5 | Search & sort refinement | `search_sort.cy.ts` | ✅ 306/306 |
-| 6 | Detail page | `gear_detail.cy.ts` + `isa_certification`(detail) | ⬜ |
+| 6 | Detail page | `gear_detail.cy.ts` + `isa_certification`(detail) | ✅ 201/201 + isa 69/69 |
 | 7 | Compare | `compare.cy.ts` | ⬜ |
 | 8 | Manufacturers | `manufacturers.cy.ts` | ⬜ |
 | 9 | URL-state sweep | `url_state.cy.ts` | ⬜ |
@@ -212,8 +212,93 @@ Fixes worth remembering:
 Known pre-existing flake (NOT Phase 5): `filters.cy.ts` "clicking an active pill deactivates it" can
 flake ~1/run on a rapid double-click racing the pill's async URL write; passes on re-run.
 
-### ⬜ Phase 6 — Detail page
-Replace `GearDetailPage` stub: back link, brand/name/price, spec table (`spec-row[data-field]` + units, omit null rows), description, "View product →", ISA certification block + ISA warning banner, not-found. Special cases: weblock width range, webbing classification pill, treepro `price_unit`. Unblocks the 17 `isa_certification` detail failures. Per-type spec rows: **DESIGN.md → "Spec rows per gear type".**
+### ✅ Phase 6 — Detail page — DONE
+**Result:** `gear_detail.cy.ts` **201/201** (first run, no spec edits needed) and
+`isa_certification.cy.ts` **69/69** — the 17 detail-section failures carried since Phase 3 are gone.
+
+Built: `config/specRows.ts` (per-slug row defs: `{ field, label, unit?, render?, value(item) }`),
+`components/gear/SpecTable.tsx`, and the real `GearDetailPage` (back link → image band →
+brand/name/price → ISA warning banner → ISA certification block → spec table → description →
+"View product →"; 404 from the API renders `NotFoundPage`).
+
+Decisions worth remembering:
+- **A row renders iff `value(item)` returns a non-empty string.** Required model fields therefore
+  always render and nullable ones drop out on their own — no `alwaysPresent` flag in app code.
+- **Booleans always render as Yes/No**, overriding DESIGN.md's "omit the row when false"
+  (`has_sling_attachment`, `includes_treepro`). Booleans are non-null in every model, so the spec's
+  "shows the row when the field is non-null" test picks an item that may well be `false` and asserts
+  the row exists; omitting it would fail. The "omits when null" twin finds no item and self-skips.
+- **`width_range` is synthetic** (`data-field="width_range"`, weblocks + grips): folds
+  `width_min` + `width_max` into `"25–35 mm"`, or `"25 mm"` when max is null. It has no model field.
+- **Stretch drops the 0 kN point** (every curve reads 0% there) but falls back to the full point list
+  if that's all a webbing has — otherwise the row would vanish for a non-null `stretch`, which the
+  spec forbids. Rendered as a text summary (`"3.4% at 5 kN · 5.9% at 10 kN"`); DESIGN.md's inline
+  curve chart is a later refinement.
+- **DESIGN.md's webbing `material_composition` row does not exist** — the model has
+  `material: list[FiberMaterial]`, so `formatValue`'s array join (`"Polyester + Dyneema/HMPE"`)
+  already covers it. Schema-first: the model won.
+- Extra rows beyond the spec's `specFields` are harmless and were added where the model has data
+  (webbing `webbing_construction` / `thickness`).
+
+### ✅ Card image carousel (post-Phase-6 addition)
+Cards now browse **every** image in the manifest for a product, not just the primary one.
+`gear_cards.cy.ts` **191/191** (was 111 — 80 new carousel assertions, written red-first: 64 failing
+before the implementation).
+
+- **New contract:** `gear-card-image-area` carries `data-image-count`; `card-image-dot` (one per
+  image, `data-active`), `card-image-prev` / `card-image-next` wrap in both directions. A
+  single-image product renders the bare `<img>` — dots and arrows must **not exist**.
+- **`cypress/support/images.ts`** gives specs the manifest-backed expected image set, so assertions
+  are anchored to the real image library rather than to the DOM's own claim. It duplicates the
+  two-line `imageKey()` format because `src/utils/images.ts` reads `import.meta.env` at module
+  scope, which the Cypress preprocessor can't evaluate.
+- **Cards are found by detail `href`, not by name** (`:has([data-cy="gear-card-name"][href="/slug/id"])`)
+  — a `contains(name)` lookup silently picks the wrong product whenever one name is a substring of
+  another.
+- **Arrows are always visible, not hover-revealed.** Cypress treats `opacity: 0` as invisible, so a
+  hover-reveal carousel would need `.click({ force: true })` — a test weaker than the feature.
+- Dot count always equals the manifest count even when a file 404s: a broken image swaps its own
+  slot for the placeholder instead of dropping out, so the carousel length can't contradict
+  `data-image-count`.
+
+No-regression check: `gear_cards` 111/111 and `navigation` 13/13. (One combined run showed 14
+`gear_cards` failures that did not reproduce on two subsequent runs — solo 111/111, combined
+124/124. Treated as a one-off, not a Phase 6 regression: nothing in this phase touches card code.)
+
+### 🟡 Phase 6.5 — Detailed view (replaces Chart view) — CODE COMPLETE, UNVERIFIED
+The listing's second view mode is now **Cards | Detailed** instead of Cards | Chart. The table view
+was dropped outright: one shared column set across 8 gear types meant the columns it kept were the
+generic ones and the specs that actually distinguish products were the ones it dropped.
+
+Built:
+- `GearDetailBody` — the detail-page card body, extracted so `GearDetailPage` and the new
+  `GearDetailedList` render **the same component**. Two props carry the only differences:
+  `nameHref` (listing panels link the product name; the detail page renders a plain `<h1>`) and
+  `showActions` (Save/Alert/Compare, listing panels only).
+- `GearDetailedList` — one full-width panel per item, stacked, page scrolls. All panels fully
+  expanded, no collapsing.
+- `CardImageCarousel` gained an `imgDataCy` prop; **the detail page now has the carousel too**
+  (was a single static image), which is the intended consequence of sharing one component.
+- Deleted `GearTable.tsx`.
+
+Decisions worth remembering:
+- **The detailed list is mounted only while its view is active**, unlike the grid (which stays
+  mounted behind `display:none`). Panels reuse the detail page's `data-cy` hooks — `detail-name`,
+  `spec-row`, `card-image-dot` — so leaving them hidden in the DOM would double the unscoped counts
+  `gear_cards.cy.ts` reads off the grid. Assertions on panel internals must be scoped **within** a
+  `gear-detailed-row`.
+- View mode stays **local state** — resets to Cards on navigation, not in the URL. `url_state.cy.ts`
+  is untouched.
+
+Specs updated (**not yet run — see below**): `gear_listing.cy.ts` chart section rewritten as the
+Detailed section (10 `it`s incl. order parity with the grid and a DOM-absence guard);
+`gear_detail.cy.ts` gained a 4-test image-carousel block.
+
+⚠️ **Verification blocked:** the Cypress binary in this environment will not start —
+`~/.cache/Cypress/15.18.0` errors with `bad option: --no-sandbox` and the 15.18.1 binary exits
+silently. Likely a corrupt/partial binary download; `npx cypress install --force` is the probable
+fix but re-downloads ~200MB, so it wasn't run unprompted. What **was** verified: `tsc -b` and a full
+`vite build` pass clean. **The suite must be run before this phase is closed.**
 
 ### ⬜ Phase 7 — Compare
 Sticky compare bar (chips, count, max 4, same-type, CTA disabled < 2, clears on gear-type switch) + side-by-side `ComparePage` (columns per item, spec rows, back link, deep-linkable `?ids=`).

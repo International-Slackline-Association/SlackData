@@ -77,6 +77,13 @@ Three filter control types:
 - **Range slider** — numeric fields (float or int); rendered as a **dual-thumb slider** (two overlaid `<input type="range">`, min thumb `data-cy="range-min"`, max thumb `data-cy="range-max"`), domain = the data's [min, max], `step="any"`. A thumb parked at its domain bound means "no constraint". The two value labels below the track (`data-cy="range-min-value"` / `range-max-value`) are **click-to-edit**: one click turns the number into an inline numeric input (commit on Enter/blur, cancel on Escape) so an exact bound can be typed without dragging; out-of-range values are clamped, not rejected. This is the standard control for every min/max filter (weight, breaking strength, diameters, widths, dimensions, kit weight, and the stretch %).
 - **Stretch at X kN** — webbing-only custom widget (see below)
 
+**Pill order within a group** — values are alphabetical by default, with catch-all buckets ("Other",
+"Unknown") always sinking to the bottom. Groups whose domain is *ranked* rather than alphabetical
+declare an explicit order instead: **Classification is `A+ · A · B · C · Not for Highline`**,
+mirroring `_CLASSIFICATION_RANK` in `slack_data/models/webbing.py`. This is not cosmetic — sorting
+those values alphabetically puts `A` before `A+`, because a string is a prefix of itself plus a
+suffix. Values absent from an explicit order sort after it, alphabetically.
+
 Excluded from filters: `name`/`description`/`notes` (search), `release_date`, `product_url`, `version`, `currency` (not a UX-meaningful filter), `colors` (comma-separated string needing split logic — future work), `stretch` on webbing (JSON blob of {kn,percent} pairs — exposed as a "has stretch data" pill instead), `width` on rollers (raw string like "25–35mm", not a numeric field).
 
 **Webbings:** Material Type [pill] · Width mm [range] · Classification [pill] · ISA Certified [pill] · ISA Warning [pill] · Weight g/m [range] · Breaking Strength kN [range] · **Stretch at X kN** [custom — see below]
@@ -110,12 +117,12 @@ The `stretch` field is a JSON array of `{kn, percent}` pairs — a curve, not a 
 
 Rules:
 - kN pills show only the **top 5 reference points**, chosen from the data: **0 kN is excluded** (every curve reads 0% there — a useless data point), **only integer kN qualify**, and the five are ranked by how many webbings carry a data point at that kN (ties broken toward the smaller kN). Each pill shows that **webbing count** in parentheses, e.g. `10 kN (167)`.
-- Default selected kN = the highest-count top point (the most common kN in the dataset)
+- **Nothing is selected by default.** The widget loads fully disengaged: no pill is active, the % slider is inert, and it does not filter. A kN becomes active only on an explicit click. (There is no "default reference kN" — a pre-selected hint rendered a pill as active on load, implying a filter that wasn't applied.)
 - When a kN pill is active, only webbings that have a data point at exactly that kN are eligible; others are excluded
 - The min/max % range further narrows within eligible webbings
 - Deselecting the kN pill (clicking active pill) makes the widget fully inactive — all webbings show again
 - Changing the selected kN resets the % range inputs
-- Cards carry a `data-stretch-percent` attribute (% at the widget's displayed kN) for test verification
+- Cards carry a `data-stretch-percent` attribute (% at the engaged kN) **only while a kN pill is engaged** — on a fresh load no card carries it
 - Sorting by stretch is handled by the sort dropdown's own secondary kN picker, **decoupled** from this filter widget — see Sort options below
 
 ---
@@ -154,7 +161,7 @@ Null-last in both directions: items where the field is null always appear below 
 
 Full-width search bar (rounded, light border, teal focus ring) on the left.
 
-Right side: `Cards | Chart` toggle (two pill buttons, Cards active by default) + item count (`145 items`) + `SORT BY` dropdown.
+Right side: `Cards | Detailed` toggle (two pill buttons, Cards active by default) + item count (`145 items`) + `SORT BY` dropdown.
 
 Below this row, a subtle `145 items` count left-aligned, above the grid itself.
 
@@ -164,6 +171,31 @@ Below this row, a subtle `145 items` count left-aligned, above the grid itself.
 Cards: white, border-radius ~14px, very subtle shadow (`0 1px 3px rgba(0,0,0,0.08)`), thin `#E5E7EB` border.
 Hover: shadow deepens slightly.
 
+### Detailed View
+
+The second listing mode. Where Cards give a scannable summary, Detailed gives the **whole spec
+sheet for every match at once** — you scroll the list instead of clicking into items one at a time.
+This replaces the old `Chart` table view: a table forced every gear type into the same handful of
+columns, which meant the specs that actually distinguish products were the ones it dropped.
+
+- **One full-width panel per item**, stacked vertically with the same 20px gutter as the grid.
+  Panel chrome matches a card exactly: white, ~14px radius, thin `#E5E7EB` border, subtle shadow
+  that deepens on hover.
+- Panels stack down the page and the **page's own scrollbar** moves through them — no inner scroll
+  region, no fixed-height viewport. The filter sidebar and toolbar scroll away normally.
+- **Every panel is fully expanded.** Nothing is collapsed or behind a disclosure — the point of the
+  mode is that you never have to click to see a spec.
+- Panel content is **identical to the Gear Detail Page body** (see below): image carousel left;
+  brand, product name, classification bubble, price, ISA warning banner, ISA certification block
+  and the full specification grid right; description and `View product →` full width beneath. The
+  two are literally the same component, so a spec row added to one appears in the other.
+- Two wiring differences from the standalone detail page: the **product name is a link** to that
+  item's detail page, and the panel carries the card's **`♡ Save` / `🔔 Alert` / `⧉ Compare`** row
+  (next to `View product →`), so those actions work from either view.
+- Filters, search and sort apply identically in both modes — same items, same order, different
+  density. The view choice is **local state**: it resets to Cards on navigation and is not encoded
+  in the URL.
+
 ---
 
 ## Gear Card Anatomy (top → bottom)
@@ -172,13 +204,16 @@ Hover: shadow deepens slightly.
 - White or very light gray bg
 - Product image centered (placeholder: rope/webbing icon in low-opacity gray)
 - **No gear-type badge.** Each listing shows a single gear type, so labelling every card "ROLLER" on the rollers page is redundant. Reintroduce a coral gear-type pill (top-left, absolute) only on views that mix types — e.g. manufacturer pages.
+- **Top-right overlay stack** (absolute, ~8px from the top-right corner, stacked vertically with ~6px gaps, right-aligned):
+  1. **Classification bubble** — webbing only, when `classification` is set. Identical component, colors and shape to the detail page's bubble (see § Classification bubble) — the ISA highline class is the fastest read on a webbing card, so it belongs in the grid, not just one click deep. Omit entirely when the field is null; other gear types have no `classification` field and never show it.
+  2. **ISA Approved badge** — the miniature stamp, when `isa_certified` is true (see below).
 
 **Content area** (bottom ~60%):
 - Brand name: small-caps gray, ~11px, ~4px below image area
 - Product name: bold near-black, ~15px, clickable → detail page
 - Key specs inline row: small gray text with `·` separators — e.g. `25mm · 280g/m · MBS 32kN`
 - Feature tag pills: light gray bg, dark-gray text, small rounded pills — e.g. `Dyneema`, `Tubular`
-- **ISA Approved badge** — if `isa_certified` is true, show a miniature version of the ISA Approved stamp in the bottom-left of the image area (absolute positioned, overlapping the content area slightly). The stamp replicates the official badge: dark charcoal frame, ISA geometric mark (teal + coral), bold white "APPROVED" text, teal checkmark in the V. If false, omit entirely — no "Not certified" label on cards.
+- **ISA Approved badge** — if `isa_certified` is true, show a miniature version of the ISA Approved stamp in the top-right overlay stack of the image area (under the classification bubble when both are present). The stamp replicates the official badge: dark charcoal frame, ISA geometric mark (teal + coral), bold white "APPROVED" text, teal checkmark in the V. If false, omit entirely — no "Not certified" label on cards.
 - Price: bold amber-orange — e.g. `$84 → Buy` (the "→ Buy" in slightly smaller amber text)
 - **Bottom action row**: three equal-width outlined buttons spanning full card width — `♡ Save`, `🔔 Alert`, `⧉ Compare`. Light gray border, gray text. Hover: teal border + teal text.
 
@@ -186,21 +221,51 @@ Hover: shadow deepens slightly.
 
 ## Gear Detail Page
 
-Max-width centered container (~720px), left-aligned back link.
+Max-width centered container (~1024px), left-aligned back link. The body is a **two-column split**:
+image carousel on the left (~320px), and on the right the brand / product name (+ classification
+bubble) / price header, the ISA warning banner, the ISA certification block and the specification
+grid — so the specs wrap around the title rather than sitting in a slab beneath it. Description and
+`View product →` run full width below the split. Collapses to a single column below `sm`.
+
+**Order within the right column matters** and is asserted geometrically by `isa_certification.cy.ts`:
+name → ISA warning banner → ISA certification block → spec grid. Keeping the banner and cert block
+inside the right column (rather than below the whole split) is deliberate: it holds a safety warning
+next to the product name instead of burying it under the spec grid.
 
 **Back link**: `← Webbings` in small gray text, hover teal.
 
 **Main card** (white, rounded, shadow):
 
+The body of this card (everything below the back link) is the **same component the Detailed view
+renders per item** — see § Detailed View. Keep the two in sync by changing the shared component,
+never by editing one side.
+
 **Header block** (same for all types):
-- Image area: light gray bg band (~200px tall), placeholder icon centered
+- Image area: light gray bg band (~200px tall, ~290px at `sm`+). Images **fill the frame vertically**
+  (`object-cover`, no padding) rather than being letterboxed — product shots carry a lot of dead
+  white space, and `object-contain` left grey bands above and below. The long axis is cropped; these
+  are centered product shots, so the subject survives. Same treatment on the listing cards. Uses the
+  **same multi-image
+  carousel the cards use** — prev/next arrows and one dot per image, browsing every image we hold
+  for the product. Single-image products render the bare image with no chrome; products with no
+  image show a low-opacity "No image" placeholder.
 - Brand name in small-caps gray
 - Product name in bold ~24px
 - Price in bold amber-orange ~20px — omit row entirely if null. Tree protectors append the price unit in small gray: `$45 per pair`
 
 **ISA Warning banner** — if `isa_warning` is set, show a full-width amber warning strip below the header block (before specs), with a ⚠ icon and the warning text. Tree protectors have no `isa_warning` field — omit entirely.
 
-**"SPECIFICATIONS" label** — small-caps gray with teal dot, then a spec table. Rows: label left (gray), value right (dark), `border-bottom: 1px solid #E5E7EB`, `padding: 10px 0`. Omit any row where the value is null.
+**"SPECIFICATIONS" label** — small-caps gray with teal dot, then the spec grid: **two balanced columns** of label/value pairs (`gap-x-10`), collapsing to one column on narrow screens. Within each cell: label left (gray), value right (dark), `border-bottom: 1px solid #E5E7EB`, `padding: 10px 0`. Omit any row where the value is null. The webbing stretch curve is the one full-width entry — it spans both columns.
+
+**Classification bubble** — the ISA highline class sits as a colored bubble immediately right of the product name, not in the spec grid. The same bubble is overlaid top-right on the card's image area in the listing grid (see § Gear Card Anatomy) — one component, so the two can never drift apart. Colors are taken from the ISA's own [webbing type graphic](https://www.slacklineinternational.org/wp-content/uploads/2020/02/webbing_type_graphic.png) so they match the chart people already know:
+
+| Class | Fill | | Class | Fill |
+|---|---|---|---|---|
+| A+ | `#6AA84F` (dark green) | | C | `#F6B26B` (orange) |
+| A | `#93C47D` (light green) | | Not for Highline | `#E5E7EB` (neutral gray — not on the ISA chart) |
+| B | `#FFD966` (yellow) | | | |
+
+The letter is **dark ink `#1F2937` on every fill**: white text fails WCAG AA on all four ISA colors (contrast 1.37–2.87), while `#1F2937` clears AA on each (5.12–11.86). A+/A/B/C render as round bubbles; the long "Not for Highline" stays a full pill so it isn't truncated. The letter itself carries the meaning, so identity is never colour-alone, and a `title` spells it out for screen readers. For hybrids the class is derived from the strongest component fiber (see Material Composition).
 
 **ISA Certification block** (where applicable, before the spec table) — if `isa_certified` is true, show a larger version of the ISA Approved stamp badge (same visual: charcoal frame, teal + coral ISA mark, white "APPROVED" text with teal checkmark in the V), left-aligned, ~80px wide. If false, show a small gray text line "Not ISA Certified" — subdued, not alarming. Tree protectors have no `isa_certified` field — omit this block entirely.
 
@@ -216,8 +281,8 @@ Max-width centered container (~720px), left-aligned back link.
 | Width | `width` | Append "mm" |
 | Weight | `weight` | Append "g/m"; omit if null |
 | Breaking Strength | `breaking_strength` | Append "kN"; omit if null |
-| Stretch | `stretch` | JSON array of {kn, percent} points — render as a small inline stretch curve chart, or fallback to a text summary "X% at YkN" at the reference load. Omit if null. |
-| Classification | `classification` | ISA highline class — show as a colored pill: A+ = teal, A = green, B = amber, C = gray, Not for Highline = subdued gray/muted. For hybrids the class is derived from the strongest component fiber (see Material Composition). |
+| Stretch | `stretch` | JSON array of {kn, percent} points. **≥ 3 measured points** → a two-row table spanning the full grid width: `Load` across the top, `Stretch` beneath, **one column per measured point** — nothing interpolated, no fixed column set. Ascending by kN; **0 kN is dropped** (every curve reads 0% there); long curves scroll horizontally with the row-label stub pinned left. **1–2 points** → inline text instead, e.g. `3.4% @ 10 kN · 4.7% @ 15 kN` (a one- or two-column table is all chrome, no signal). Row is omitted when there are no *measured* points — note this is stricter than `stretch != null`: a curve like `[{"percent": 8}]` (no `kn`) has nothing to show. |
+| Classification | `classification` | **Not a spec row.** Renders as a colored bubble beside the product name — see § Classification bubble below. |
 | Colors | `colors` | Comma-separated string — render as small color-name chips |
 | ISA Certified | `isa_certified` | Handled by the ISA Certification block above the spec table — no row needed here |
 
@@ -329,7 +394,7 @@ Manufacturer card anatomy:
 - **All interactive elements**: cursor pointer, teal focus ring on keyboard nav
 - **Border radius**: consistent ~8px for pills, ~14px for cards, ~6px for buttons
 - **No sharp rectangles anywhere** — even the large CTA buttons are rounded
-- **ISA Certified** always uses the official ISA Approved stamp badge (charcoal frame, teal + coral ISA mark, white "APPROVED", teal checkmark). On cards: miniature stamp ~28px tall, bottom-left of image area, only shown when true. On detail page: ~80px wide block above specs, "Not ISA Certified" in subdued gray when false. Never use a plain checkmark or generic pill — the stamp is the trust signal.
+- **ISA Certified** always uses the official ISA Approved stamp badge (charcoal frame, teal + coral ISA mark, white "APPROVED", teal checkmark). On cards: miniature stamp ~28px tall, top-right of image area (below the classification bubble when the item has one), only shown when true. On detail page: ~80px wide block above specs, "Not ISA Certified" in subdued gray when false. Never use a plain checkmark or generic pill — the stamp is the trust signal.
 - **Empty states**: centered gray icon + short message — e.g. "No webbings match your filters" with a "Clear filters" teal link
 - **Loading skeleton**: same card shape as real cards, `animate-pulse` in light gray
 

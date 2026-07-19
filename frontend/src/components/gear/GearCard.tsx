@@ -1,5 +1,5 @@
 // A single gear card. Anatomy (top→bottom) per DESIGN.md and gear_cards.cy.ts:
-//   ISA stamp (if certified) · image
+//   image · top-right overlay: classification bubble + ISA stamp (if certified)
 //   brand (small caps) · product name (link) · inline specs · price (amber)
 // No gear-type badge: every listing is single-type, so it would be redundant.
 // (Revisit when manufacturer pages mix types — see DESIGN.md card anatomy.)
@@ -13,7 +13,9 @@ import { Link } from 'react-router-dom'
 import type { GearTypeMeta } from '@/config/gearTypes'
 import { CARD_DATA_FIELDS, INLINE_SPECS } from '@/config/gearFields'
 import { dataAttrs, formatPrice, formatValue, type AnyItem } from '@/utils/format'
-import { primaryImage } from '@/utils/images'
+import { imageUrls } from '@/utils/images'
+import CardImageCarousel from './CardImageCarousel'
+import ClassificationBubble from './ClassificationBubble'
 import IsaApprovedBadge from './IsaApprovedBadge'
 
 const pillBtn =
@@ -25,7 +27,8 @@ export default function GearCard({ item, meta }: { item: AnyItem; meta: GearType
   const specs = INLINE_SPECS[slug] ?? []
   const isaCertified = hasISA && item.isa_certified === true
 
-  const imgSrc = primaryImage(slug, String(item.brand_name), String(item.name))
+  // Every image we hold for this product — the card browses the whole set.
+  const images = imageUrls(slug, String(item.brand_name), String(item.name))
 
   const specParts = specs
     .map(s => formatValue(item[s.field], s.unit))
@@ -44,30 +47,21 @@ export default function GearCard({ item, meta }: { item: AnyItem; meta: GearType
       {...stretchAttr}
       className="flex flex-col overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-shadow hover:shadow-md"
     >
+      {/* `group` drives the carousel arrows, which stay hidden until hover/focus
+          so a resting grid isn't peppered with chevrons. */}
       <div
         data-cy="gear-card-image-area"
-        className="relative flex h-40 items-center justify-center bg-gray-50"
+        data-image-count={images.length}
+        className="group relative flex h-40 items-center justify-center bg-gray-50"
       >
-        {isaCertified && (
-          <div className="absolute right-2 top-2">
-            <IsaApprovedBadge />
-          </div>
-        )}
-        {imgSrc ? (
-          <img
-            data-cy="gear-card-img"
-            src={imgSrc}
-            alt={String(item.name)}
-            loading="lazy"
-            className="h-full w-full object-contain p-3"
-            onError={e => {
-              // Manifest key didn't resolve to a real file — fall back to placeholder.
-              e.currentTarget.style.display = 'none'
-              e.currentTarget.nextElementSibling?.removeAttribute('hidden')
-            }}
-          />
-        ) : null}
-        <span hidden={!!imgSrc} className="text-xs text-gray-300">No image</span>
+        {/* Top-right stack: the highline class first (it's the fastest read on a
+            webbing card), the ISA stamp under it. Same bubble component as the
+            detail page, so the colors can't drift apart. */}
+        <div className="absolute right-2 top-2 z-10 flex flex-col items-end gap-1.5">
+          <ClassificationBubble value={item.classification} />
+          {isaCertified && <IsaApprovedBadge />}
+        </div>
+        <CardImageCarousel urls={images} alt={String(item.name)} />
       </div>
 
       <div className="flex flex-1 flex-col gap-1 p-4">
