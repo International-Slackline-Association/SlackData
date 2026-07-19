@@ -29,11 +29,21 @@ export default function StretchFilter({
   onMaxChange: (v: string) => void
 }) {
   // Top-5 integer kN points (excluding 0), each with its webbing count, shown in
-  // ascending kN order for a stable left-to-right pill layout.
-  const points = useMemo(
-    () => [...topKnPoints(items)].sort((a, b) => a.kn - b.kn),
-    [items],
-  )
+  // ascending kN order for a stable left-to-right pill layout. `items` is the
+  // set left by search + the other filter groups, so the counts (and which
+  // points make the top-5) move as the rest of the UI changes.
+  //
+  // The engaged pill is pinned in even if it falls out of the top-5 under the
+  // current filters — otherwise its own filter would stay applied with no pill
+  // left to click to turn it off.
+  const points = useMemo(() => {
+    const top = topKnPoints(items)
+    if (displayKn != null && !top.some(p => p.kn === displayKn)) {
+      const count = items.filter(i => percentAtKn(i.stretch, displayKn) != null).length
+      top.push({ kn: displayKn, count })
+    }
+    return top.sort((a, b) => a.kn - b.kn)
+  }, [items, displayKn])
 
   // % domain = spread of stretch % across webbings at the selected kN.
   const domain = useMemo(() => {

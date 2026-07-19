@@ -1,9 +1,10 @@
 // Gear listing page: filter sidebar + toolbar (search / count / view toggle /
-// sort) + card grid or chart table.
+// sort) + card grid or detailed spec panels.
 //
-// Grid and table are both mounted when there are results; the inactive one is
-// hidden (display:none) so the view toggle just flips visibility. When there are
-// no results, an empty state with a clear-filters action replaces both.
+// The grid stays mounted and is hidden (display:none) when Detailed is active;
+// the detailed list mounts only while active (see the Results block for why).
+// When there are no results, an empty state with a clear-filters action
+// replaces both.
 
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { useParams } from 'react-router-dom'
@@ -14,16 +15,16 @@ import { filterBySearch } from '@/utils/search'
 import { sortItems } from '@/utils/sort'
 import { filterGroupsFor } from '@/config/filterGroups'
 import { applyFilters, type RangeBounds } from '@/utils/filter'
-import { mostCommonKn, percentAtKn, topKnPoints } from '@/utils/stretch'
+import { percentAtKn, topKnPoints } from '@/utils/stretch'
 import type { AnyItem } from '@/utils/format'
 import FilterSidebar from '@/components/gear/FilterSidebar'
 import StretchFilter from '@/components/gear/StretchFilter'
 import SortDropdown from '@/components/gear/SortDropdown'
 import GearGrid from '@/components/gear/GearGrid'
-import GearTable from '@/components/gear/GearTable'
+import GearDetailedList from '@/components/gear/GearDetailedList'
 import NotFoundPage from './NotFoundPage'
 
-type View = 'cards' | 'chart'
+type View = 'cards' | 'detailed'
 
 function LoadingSkeleton() {
   return (
@@ -93,48 +94,33 @@ export default function GearListingPage() {
   }
 
   // Webbing stretch widget state (owned here so it also drives filtering, the
-  // contextual sort option, and the cards' data-stretch-percent). The default kN
-  // is pre-selected for DISPLAY but does not filter until a pill is engaged, so a
-  // fresh load still shows all webbings (keeps gear_listing/gear_cards green).
+  // contextual sort option, and the cards' data-stretch-percent). NOTHING is
+  // selected on load: no pill is active, the % slider is inert, cards carry no
+  // stretch %, and the contextual stretch sort is absent until a kN is picked.
   const isWebbing = meta?.slug === 'webbings'
   const [stretchKn, setStretchKn] = useState<number | null>(null)
-  const [stretchTouched, setStretchTouched] = useState(false)
   const [stretchMin, setStretchMin] = useState('')
   const [stretchMax, setStretchMax] = useState('')
-  const defaultKn = useMemo(
-    () => (isWebbing ? mostCommonKn(items as unknown as { stretch?: unknown }[]) : null),
-    [isWebbing, items],
-  )
-  const displayKn = isWebbing ? (stretchTouched ? stretchKn : defaultKn) : null
-  const filterKn = isWebbing && stretchTouched ? stretchKn : null
+  // One value now: the engaged kN, or null when the widget is off. (There is no
+  // separate "display" kN — a pre-selected default hint would render a pill
+  // active on load, which it must not.)
+  const selectedKn = isWebbing ? stretchKn : null
 
   // Reset the stretch widget only when clear-all actually bumps the nonce.
   // Comparing the previous value (not a mounted flag) survives StrictMode's
-  // double-invoked mount effect, which would otherwise fire the reset on load
-  // and deselect the default kN pill.
+  // double-invoked mount effect.
   const prevNonce = useRef(url.resetNonce)
   useEffect(() => {
     if (prevNonce.current === url.resetNonce) return
     prevNonce.current = url.resetNonce
     // clear-all: deselect the kN (no pill active) and clear the % range.
-    setStretchTouched(true)
     setStretchKn(null)
     setStretchMin('')
     setStretchMax('')
   }, [url.resetNonce])
 
-  const selectKn = (kn: number) => {
-    // Clicking the currently-engaged pill toggles the widget off; clicking any
-    // other pill — including the non-filtering default hint — engages it. (The
-    // default is only engaged after the first explicit click, so it never filters
-    // on load.)
-    if (stretchTouched && stretchKn === kn) {
-      setStretchKn(null)
-    } else {
-      setStretchTouched(true)
-      setStretchKn(kn)
-    }
-  }
+  // Clicking the engaged pill toggles the widget off; any other pill engages it.
+  const selectKn = (kn: number) => setStretchKn(prev => (prev === kn ? null : kn))
 
   const { activePills, activeRanges } = useMemo(() => {
     const activePills: Record<string, string[]> = {}
@@ -154,27 +140,40 @@ export default function GearListingPage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [url.params, meta])
 
+  // Everything the OTHER controls (search + the regular filter groups) leave in
+  // play, before the stretch widget itself narrows further. This is the context
+  // the stretch kN pills and the sort dropdown's kN submenu are built from, so
+  // their counts track the rest of the UI live. The stretch widget's own kN/%
+  // selection is deliberately excluded — folding it in would collapse every
+  // count to the engaged pill's own number the moment you clicked one.
+  const contextItems = useMemo(
+    () =>
+      applyFilters(
+        filterBySearch(items, query) as unknown as AnyItem[],
+        activePills,
+        activeRanges,
+      ),
+    [items, query, activePills, activeRanges],
+  )
+
   const visible = useMemo(() => {
-    const searched = filterBySearch(items, query) as unknown as AnyItem[]
-    let filtered = applyFilters(searched, activePills, activeRanges)
-    if (displayKn != null) {
-      // Attach stretch % at the reference kN for the cards + stretch sort.
-      filtered = filtered.map(it => ({ ...it, stretch_percent: percentAtKn(it.stretch, displayKn) }))
-      // Exclusion only once a pill is engaged (filterKn), not on the default.
-      if (filterKn != null) {
-        const lo = stretchMin === '' ? null : Number(stretchMin)
-        const hi = stretchMax === '' ? null : Number(stretchMax)
-        filtered = filtered.filter(it => {
-          const p = it.stretch_percent as number | null
-          if (p == null) return false
-          if (lo != null && p < lo) return false
-          if (hi != null && p > hi) return false
-          return true
-        })
-      }
+    let filtered = contextItems
+    if (selectedKn != null) {
+      // Attach stretch % at the reference kN for the cards + stretch sort, and
+      // exclude webbings with no data there. Both only once a pill is engaged.
+      filtered = filtered.map(it => ({ ...it, stretch_percent: percentAtKn(it.stretch, selectedKn) }))
+      const lo = stretchMin === '' ? null : Number(stretchMin)
+      const hi = stretchMax === '' ? null : Number(stretchMax)
+      filtered = filtered.filter(it => {
+        const p = it.stretch_percent as number | null
+        if (p == null) return false
+        if (lo != null && p < lo) return false
+        if (hi != null && p > hi) return false
+        return true
+      })
     }
     return sortItems(filtered, sort)
-  }, [items, query, activePills, activeRanges, displayKn, filterKn, stretchMin, stretchMax, sort])
+  }, [contextItems, selectedKn, stretchMin, stretchMax, sort])
 
   if (!meta) return <NotFoundPage />
 
@@ -197,8 +196,8 @@ export default function GearListingPage() {
         <FilterSidebar meta={meta} items={items as unknown as AnyItem[]} url={url}>
           {isWebbing && (
             <StretchFilter
-              items={items as unknown as AnyItem[]}
-              displayKn={displayKn}
+              items={contextItems}
+              displayKn={selectedKn}
               onSelectKn={selectKn}
               min={stretchMin}
               max={stretchMax}
@@ -235,13 +234,13 @@ export default function GearListingPage() {
                   Cards
                 </button>
                 <button
-                  data-cy="view-chart"
+                  data-cy="view-detailed"
                   type="button"
-                  data-active={view === 'chart' ? 'true' : 'false'}
-                  onClick={() => setView('chart')}
-                  className={`border-l border-gray-300 ${viewBtn(view === 'chart')}`}
+                  data-active={view === 'detailed' ? 'true' : 'false'}
+                  onClick={() => setView('detailed')}
+                  className={`border-l border-gray-300 ${viewBtn(view === 'detailed')}`}
                 >
-                  Chart
+                  Detailed
                 </button>
               </div>
               <SortDropdown
@@ -250,9 +249,13 @@ export default function GearListingPage() {
                 onChange={setSort}
                 stretchKns={
                   isWebbing
-                    ? // Ranked by count (most common first) so the dropdown's default
-                      // stretch-sort kN matches the filter's default reference kN.
-                      topKnPoints(items as unknown as { stretch?: unknown }[]).map(p => p.kn)
+                    ? // Ranked by count (most common first) so the dropdown's own kN
+                      // submenu opens on the most useful reference point. Computed
+                      // over contextItems, so the offered points follow the active
+                      // search/filters. Still independent of the stretch widget:
+                      // stretch sort reads the curve directly (see sortItems), so it
+                      // works with no kN pill engaged.
+                      topKnPoints(contextItems as unknown as { stretch?: unknown }[]).map(p => p.kn)
                     : []
                 }
               />
@@ -266,12 +269,16 @@ export default function GearListingPage() {
             <EmptyState onClear={url.clearAll} />
           ) : (
             <>
-              <div className={view === 'chart' ? 'hidden' : ''}>
+              {/* The grid stays mounted-but-hidden (cheap, and the toggle just
+                  flips visibility). The detailed list is mounted only while
+                  active — its panels reuse the detail page's data-cy hooks and
+                  render a full spec table each, so keeping N of them in the DOM
+                  behind display:none would both cost real work and double the
+                  element counts gear_cards.cy.ts reads off the grid. */}
+              <div className={view === 'detailed' ? 'hidden' : ''}>
                 <GearGrid items={visible} meta={meta} />
               </div>
-              <div className={view === 'cards' ? 'hidden' : ''}>
-                <GearTable items={visible} meta={meta} />
-              </div>
+              {view === 'detailed' && <GearDetailedList items={visible} meta={meta} />}
             </>
           )}
         </div>

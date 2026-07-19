@@ -21,7 +21,7 @@ export type ISAWarning = (typeof ISA_WARNINGS)[number]
 
 // models/webbing.py — FiberMaterial
 export const FIBER_MATERIALS = [
-  'Nylon', 'Polyester', 'Dyneema/HMPE', 'Vectran', 'Hybrid', 'Other',
+  'Nylon', 'Polyester', 'Dyneema/HMPE', 'Vectran', 'Other',
 ] as const
 export type FiberMaterial = (typeof FIBER_MATERIALS)[number]
 
@@ -47,7 +47,7 @@ export type AttachmentPoint = (typeof ATTACHMENT_POINTS)[number]
 
 // models/grips.py — ConnectionType
 export const CONNECTION_TYPES = [
-  'Dyneema Sling Loop', 'Mounting Hole', 'Other',
+  'Dyneema Sling Loop', 'Sling Loop', 'Mounting Hole', 'Other',
 ] as const
 export type ConnectionType = (typeof CONNECTION_TYPES)[number]
 

@@ -100,6 +100,27 @@ export function useUrlState() {
     [mutate],
   )
 
+  // Single-select groups (exactly 2 options): picking a value replaces whatever
+  // was there, and re-picking the active value clears the group.
+  //
+  // The "is this already the only value?" decision MUST be made in here, off
+  // `next` (built from the pending mirror), not by the caller off `getPillValues`
+  // — which reads the last COMMITTED params. Deciding outside meant a second
+  // click landing before the URL echo saw stale state, concluded the value
+  // wasn't active, and re-applied it instead of clearing: the pill appeared
+  // stuck on. Same reasoning as togglePill above.
+  const setPillExclusive = useCallback(
+    (field: string, value: string) =>
+      mutate(next => {
+        const raw = next.get(field)
+        const values = raw ? raw.split(',') : []
+        const isOnly = values.length === 1 && values[0] === value
+        if (isOnly) next.delete(field)
+        else next.set(field, value)
+      }),
+    [mutate],
+  )
+
   const getRange = useCallback(
     (field: string): { min?: number; max?: number } => {
       const min = params.get(`${field}_min`)
@@ -156,6 +177,7 @@ export function useUrlState() {
     getPillValues,
     setPillValues,
     togglePill,
+    setPillExclusive,
     getRange,
     setRangeBound,
     setRange,

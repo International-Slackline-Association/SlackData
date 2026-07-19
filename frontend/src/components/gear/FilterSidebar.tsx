@@ -21,7 +21,7 @@ type UrlState = ReturnType<typeof useUrlState>
 // (isa_warning currently has no data but is still a valid, forthcoming field).
 function pillGroupVisible(meta: FilterGroupMeta, items: AnyItem[]): boolean {
   if (meta.type !== 'pill' || meta.pillKind !== 'bool') return true
-  const options = derivePillOptions(items, meta.group, meta.pillKind, meta.capitalize)
+  const options = derivePillOptions(items, meta.group, meta.pillKind, meta.capitalize, meta.order)
   return options.some(o => o.value === 'true')
 }
 
@@ -30,17 +30,16 @@ function pillGroupVisible(meta: FilterGroupMeta, items: AnyItem[]): boolean {
 // back to "all". Groups with 3+ options are multi-select (OR within the group)
 // and get subtle All / None shortcuts.
 function PillGroup({ meta, url, items }: { meta: FilterGroupMeta; url: UrlState; items: AnyItem[] }) {
-  const options = derivePillOptions(items, meta.group, meta.pillKind, meta.capitalize)
+  const options = derivePillOptions(items, meta.group, meta.pillKind, meta.capitalize, meta.order)
   const single = options.length === 2
   const selected = url.getPillValues(meta.group)
 
+  // Both branches decide inside the hook, off the pending-params mirror — never
+  // from `selected` here, which reflects the last committed URL and lags a fast
+  // second click (see setPillExclusive in useUrlState).
   const onPick = (value: string) => {
-    if (single) {
-      const isOnly = selected.length === 1 && selected[0] === value
-      url.setPillValues(meta.group, isOnly ? [] : [value])
-    } else {
-      url.togglePill(meta.group, value)
-    }
+    if (single) url.setPillExclusive(meta.group, value)
+    else url.togglePill(meta.group, value)
   }
 
   return (

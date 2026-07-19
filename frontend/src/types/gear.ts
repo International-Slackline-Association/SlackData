@@ -30,9 +30,8 @@ export interface GearBase {
 }
 
 export interface Webbing extends GearBase {
-  material: FiberMaterial
-  // For Hybrid webbings: JSON array of component fiber names, e.g. ["Polyester", "Dyneema/HMPE"]
-  material_composition: string | null
+  // multi-select: one entry per fiber, e.g. ["Polyester", "Dyneema/HMPE"]
+  material: FiberMaterial[]
   webbing_construction: WebbingConstruction | null
   width: number
   thickness: number | null

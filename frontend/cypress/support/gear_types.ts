@@ -25,8 +25,15 @@ export const GEAR_TYPES: GearTypeConfig[] = [
       { field: 'width',              label: 'Width',              unit: 'mm', alwaysPresent: true  },
       { field: 'weight',             label: 'Weight',             unit: 'g/m', alwaysPresent: false },
       { field: 'breaking_strength',  label: 'Breaking Strength',  unit: 'kN', alwaysPresent: false },
-      { field: 'stretch',            label: 'Stretch',            alwaysPresent: false },
-      { field: 'classification',     label: 'Classification',     alwaysPresent: false },
+      // stretch and classification are deliberately NOT in this generic list —
+      // both have dedicated tests in gear_detail.cy.ts:
+      //   · classification renders as a colored bubble beside the product name,
+      //     not as a spec row at all.
+      //   · stretch's row visibility is driven by the count of MEASURED points,
+      //     not by `stretch != null`. The generic loop's null-check predicate
+      //     disagrees with the render rule for curves like "Tape"
+      //     ('[{"percent": 8}]' — non-null, but no kn, so nothing to show),
+      //     which would make this suite depend on API result ordering.
       { field: 'colors',             label: 'Colors',             alwaysPresent: false },
     ],
   },

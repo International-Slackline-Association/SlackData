@@ -15,6 +15,7 @@
 // separately, because it's a JSON curve of {kn, percent} pairs, not a scalar.
 
 import type { GearSlug } from '@/types'
+import { CLASSIFICATIONS } from '@/types/enums'
 
 export type FilterType = 'pill' | 'range'
 
@@ -30,13 +31,19 @@ export interface FilterGroupMeta {
   unit?: string        // shown next to range inputs / int pills (mm, kN, g, …)
   pillKind?: PillKind  // pills only; defaults to 'enum'
   capitalize?: boolean // pills only; title-case the display labels (e.g. pair→Pair)
+  // pills only; canonical value order for fields whose domain order is meaningful
+  // rather than alphabetical. Values not listed here sort after, alphabetically.
+  order?: readonly string[]
 }
 
 export const FILTER_GROUPS: Record<GearSlug, FilterGroupMeta[]> = {
   webbings: [
     { group: 'material',          label: 'Material Type',     type: 'pill', pillKind: 'enum' },
     { group: 'width',             label: 'Width',             type: 'range', unit: 'mm' },
-    { group: 'classification',    label: 'Classification',    type: 'pill', pillKind: 'enum' },
+    // Best-to-worst, mirroring _CLASSIFICATION_RANK in models/webbing.py — NOT
+    // alphabetical, which would sort "A" before "A+".
+    { group: 'classification',    label: 'Classification',    type: 'pill', pillKind: 'enum',
+      order: CLASSIFICATIONS },
     { group: 'isa_certified',     label: 'ISA Certified',     type: 'pill', pillKind: 'bool' },
     { group: 'isa_warning',       label: 'ISA Warning',       type: 'pill', pillKind: 'enum' },
     { group: 'weight',            label: 'Weight',            type: 'range', unit: 'g/m' },

@@ -32,6 +32,16 @@ export function percentAtKn(json: unknown, kn: number): number | null {
   return match ? match.percent : null
 }
 
+// The points one item's curve should DISPLAY, ascending by load. 0 kN is dropped
+// (every curve reads 0% there — a useless column), unless it's all there is, so
+// the spec row still renders for any webbing with non-null `stretch`. Only real
+// measured points are returned — nothing is interpolated or padded.
+export function displayPoints(json: unknown): StretchPoint[] {
+  const all = parseStretch(json)
+  const pts = all.filter(p => p.kn !== 0)
+  return [...(pts.length ? pts : all)].sort((a, b) => a.kn - b.kn)
+}
+
 // Across a set of webbings: the sorted union of every kN present (for the pills)
 // and the kN appearing in the most curves (the default reference).
 export function knFrequency(items: { stretch?: unknown }[]): Map<number, number> {
