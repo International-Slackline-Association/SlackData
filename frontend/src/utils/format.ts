@@ -28,7 +28,15 @@ export function formatPrice(price: unknown, currency: unknown): string | null {
 }
 
 // A spec value with an optional unit appended, e.g. "25 mm". "" when null.
+// Multi-select fields (webbing `material`, roller `material`) arrive as arrays;
+// they join with " + " so a composition reads as one spec — "Polyester +
+// Dyneema/HMPE" — and stays distinct from the " · " that separates specs.
 export function formatValue(value: unknown, unit?: string): string {
   if (value == null || value === '') return ''
+  if (Array.isArray(value)) {
+    const parts = value.filter(v => v != null && v !== '')
+    if (parts.length === 0) return ''
+    return formatValue(parts.join(' + '), unit)
+  }
   return unit ? `${value} ${unit}` : String(value)
 }

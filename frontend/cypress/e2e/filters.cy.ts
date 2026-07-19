@@ -494,23 +494,51 @@ GEAR_TYPES.forEach(({ slug, apiPath, label }) => {
   })
 })
 
+// ── Classification pill order ─────────────────────────────────────────────────
+// Classification is ranked, not alphabetical: A+ is the strongest class and must
+// lead. Sorting these values alphabetically puts "A" before "A+" (a prefix sorts
+// first), which is why the group carries an explicit order mirroring
+// _CLASSIFICATION_RANK in slack_data/models/webbing.py.
+
+describe('Webbing classification pill order', () => {
+  const CANONICAL = ['A+', 'A', 'B', 'C', 'Not for Highline']
+
+  beforeEach(() => {
+    cy.visit('/webbings')
+  })
+
+  it('orders classification pills best-to-worst, with A+ before A', () => {
+    cy.get('[data-cy="filter-group"][data-group="classification"]')
+      .find('[data-cy="filter-pill"]')
+      .then(($pills) => {
+        const shown = [...$pills].map(p => p.getAttribute('data-value') as string)
+        // Only assert on the values actually present in the dataset, in the
+        // canonical relative order.
+        const expected = CANONICAL.filter(v => shown.includes(v))
+        expect(shown).to.deep.equal(expected)
+      })
+  })
+})
+
 // ── Webbing stretch filter (custom widget) ────────────────────────────────────
 //
 // stretch is stored as a JSON string: '[{"kn": 0, "percent": 0.0}, {"kn": 10, "percent": 14.97}]'
 // It is not a scalar — it's a curve. The filter widget is:
 //
 //   ┌─ Stretch at ──────────────────────────────┐
-//   │  [0 kN] [5 kN] [►10 kN] [15 kN] [20 kN]  │  ← single-select pills, populated from data
+//   │  [5 kN] [10 kN] [12 kN] [15 kN] [20 kN]  │  ← single-select pills, populated from data
 //   │  Min %  [___]   Max %  [___]               │  ← range inputs for % at the selected kN
 //   └───────────────────────────────────────────┘
 //
 // Rules:
 //   - kN pills are populated dynamically from the union of all kN values in the dataset.
-//   - Default selected kN = the kN value that appears most often across all webbings.
+//   - NOTHING is selected on load. The widget starts fully disengaged: no pill is
+//     active, it does not filter, and cards carry no data-stretch-percent until a
+//     kN is explicitly clicked.
 //   - When a kN pill is selected, only webbings that have a data point at that kN are
 //     eligible (others are excluded regardless of the % range).
 //   - Min/Max % further narrows within the eligible set.
-//   - When no kN is selected and no % range is set, the widget is inactive (all items show).
+//   - Clicking the engaged pill deselects it, returning the widget to inactive.
 
 describe('Webbing stretch filter', () => {
   const api = () => Cypress.env('apiUrl')
@@ -627,17 +655,111 @@ describe('Webbing stretch filter', () => {
     })
   })
 
-  // ── Default selected kN ───────────────────────────────────────────────────
+  // ── Counts are contextual ─────────────────────────────────────────────────
+  //
+  // The kN points and their counts describe the set the OTHER controls leave in
+  // play (search + the regular filter groups), not the whole webbing table — so
+  // they move as the user narrows. The stretch widget's own kN/% selection is
+  // excluded from that context, otherwise engaging a pill would collapse every
+  // count to its own number.
 
-  it('defaults to the most common (top) kN value pre-selected', () => {
+  // The most common brand in the dataset — a search term guaranteed to leave a
+  // real, smaller subset behind. Mirrors src/utils/search.ts (name OR brand,
+  // case-insensitive substring).
+  function topBrand(webbings: Record<string, unknown>[]): string {
+    const freq = new Map<string, number>()
+    webbings.forEach(w => {
+      const b = String(w.brand_name ?? '')
+      if (b) freq.set(b, (freq.get(b) ?? 0) + 1)
+    })
+    return [...freq.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))[0][0]
+  }
+
+  function matchingSearch(webbings: Record<string, unknown>[], q: string) {
+    const n = q.trim().toLowerCase()
+    return webbings.filter(
+      w =>
+        String(w.name ?? '').toLowerCase().includes(n) ||
+        String(w.brand_name ?? '').toLowerCase().includes(n),
+    )
+  }
+
+  it('pill counts recompute against the searched subset', () => {
     cy.fetchAllItems('webbing').then((all) => {
-      // The default is the highest-count top point.
-      const mostCommonKn = topKnPoints(all as Record<string, unknown>[])[0].kn
+      const items = all as Record<string, unknown>[]
+      const brand = topBrand(items)
+      const expected = new Map(topKnPoints(matchingSearch(items, brand)).map(p => [p.kn, p.count]))
 
+      cy.get('[data-cy="search-input"]').type(brand)
+      cy.get('[data-cy="filter-group"][data-group="stretch"]')
+        .find('[data-cy="stretch-kn-pill"]').should('have.length', expected.size)
+      cy.get('[data-cy="filter-group"][data-group="stretch"]')
+        .find('[data-cy="stretch-kn-pill"]').each(($pill) => {
+          const kn = Number($pill.attr('data-kn'))
+          expect(Number($pill.attr('data-count'))).to.equal(expected.get(kn))
+        })
+    })
+  })
+
+  it('pill counts ignore the stretch widget\'s own selection', () => {
+    cy.fetchAllItems('webbing').then((all) => {
+      const counts = new Map(topKnPoints(all as Record<string, unknown>[]).map(p => [p.kn, p.count]))
+      cy.get('[data-cy="filter-group"][data-group="stretch"]')
+        .find('[data-cy="stretch-kn-pill"]').first().click()
+      cy.get('[data-cy="filter-group"][data-group="stretch"]')
+        .find('[data-cy="stretch-kn-pill"]').each(($pill) => {
+          expect(Number($pill.attr('data-count'))).to.equal(counts.get(Number($pill.attr('data-kn'))))
+        })
+    })
+  })
+
+  it('keeps the engaged pill visible even if it drops out of the top-5', () => {
+    // Engage a kN, then narrow with a search: whatever the top-5 becomes, the
+    // active pill must survive — it is the only way to switch its filter off.
+    cy.fetchAllItems('webbing').then((all) => {
+      const brand = topBrand(all as Record<string, unknown>[])
+      cy.get('[data-cy="filter-group"][data-group="stretch"]')
+        .find('[data-cy="stretch-kn-pill"]').last().click()
       cy.get('[data-cy="filter-group"][data-group="stretch"]')
         .find('[data-cy="stretch-kn-pill"][data-active="true"]')
-        .should('have.attr', 'data-kn', `${mostCommonKn}`)
+        .invoke('attr', 'data-kn').then((kn) => {
+          cy.get('[data-cy="search-input"]').type(brand)
+          cy.get('[data-cy="filter-group"][data-group="stretch"]')
+            .find(`[data-cy="stretch-kn-pill"][data-kn="${kn}"][data-active="true"]`)
+            .should('exist')
+        })
     })
+  })
+
+  it('the stretch sort kN options follow the searched subset', () => {
+    cy.fetchAllItems('webbing').then((all) => {
+      const items = all as Record<string, unknown>[]
+      const brand = topBrand(items)
+      const expected = topKnPoints(matchingSearch(items, brand)).map(p => p.kn).sort((a, b) => a - b)
+
+      cy.get('[data-cy="search-input"]').type(brand)
+      cy.get('[data-cy="sort-dropdown"]').click()
+      cy.get('[data-cy="stretch-sort-kn"]').click()
+      cy.get('[data-cy="stretch-sort-kn-option"]').then(($opts) => {
+        const shown = [...$opts].map(o => Number(o.getAttribute('data-kn'))).sort((a, b) => a - b)
+        expect(shown).to.deep.equal(expected)
+      })
+    })
+  })
+
+  // ── Default selected kN ───────────────────────────────────────────────────
+
+  it('defaults to NO kN pill selected', () => {
+    // The widget starts fully disengaged: nothing is pre-selected, so a fresh
+    // load neither filters nor implies a reference kN. A kN becomes active only
+    // on an explicit click.
+    cy.get('[data-cy="filter-group"][data-group="stretch"]')
+      .find('[data-cy="stretch-kn-pill"]')
+      .should('have.length.gte', 1)
+
+    cy.get('[data-cy="filter-group"][data-group="stretch"]')
+      .find('[data-cy="stretch-kn-pill"][data-active="true"]')
+      .should('not.exist')
   })
 
   // ── kN selection ──────────────────────────────────────────────────────────
@@ -653,6 +775,14 @@ describe('Webbing stretch filter', () => {
   })
 
   it('only one kN pill can be active at a time', () => {
+    // Starts with none active; engaging one, then another, never yields two.
+    cy.get('[data-cy="filter-group"][data-group="stretch"]')
+      .find('[data-cy="stretch-kn-pill"][data-active="true"]')
+      .should('not.exist')
+
+    cy.get('[data-cy="filter-group"][data-group="stretch"]')
+      .find('[data-cy="stretch-kn-pill"]').first().click()
+
     cy.get('[data-cy="filter-group"][data-group="stretch"]')
       .find('[data-cy="stretch-kn-pill"][data-active="true"]')
       .should('have.length', 1)
@@ -666,9 +796,8 @@ describe('Webbing stretch filter', () => {
   })
 
   it('clicking the active kN pill deselects it (widget goes inactive)', () => {
-    // The default pre-selection is a non-filtering hint; the first click on any
-    // pill engages it. Engage a pill, then click that engaged pill to toggle the
-    // widget off.
+    // Nothing is selected on load, so engage a pill first, then click that same
+    // engaged pill to toggle the widget back off.
     cy.get('[data-cy="filter-group"][data-group="stretch"]')
       .find('[data-cy="stretch-kn-pill"]').first().click()
 
@@ -724,7 +853,7 @@ describe('Webbing stretch filter', () => {
 
       const median = percents[Math.floor(percents.length / 2)]
 
-      // Activate the most common kN (may already be selected by default)
+      // Activate the most common kN (nothing is selected until clicked)
       cy.get('[data-cy="filter-group"][data-group="stretch"]')
         .find('[data-cy="stretch-kn-pill"]')
         .contains(`${mostCommonKn}`).click()
@@ -830,12 +959,23 @@ describe('Webbing stretch filter', () => {
   })
 
   it('sorting by Stretch Low→High orders cards ascending by % at the chosen kN', () => {
-    // The default stretch-sort kN equals the default filter kN, so each card's
-    // own data-stretch-percent is the value being sorted on (reliable per-card,
-    // unlike mapping by webbing name — names are not unique).
-    cy.get('[data-cy="sort-dropdown"]').click()
-    cy.get('[data-cy="sort-stretch-row"] [data-cy="sort-option"][data-field="stretch"][data-direction="asc"]')
-      .click()
+    // Cards only carry data-stretch-percent while a kN pill is ENGAGED — nothing
+    // is selected on load — so engage one first, then point the stretch sort at
+    // that same kN. Reading each card's own attribute is reliable per-card,
+    // unlike mapping by webbing name (names are not unique).
+    cy.get('[data-cy="filter-group"][data-group="stretch"]')
+      .find('[data-cy="stretch-kn-pill"]').first().click()
+
+    cy.get('[data-cy="filter-group"][data-group="stretch"]')
+      .find('[data-cy="stretch-kn-pill"][data-active="true"]')
+      .invoke('attr', 'data-kn')
+      .then((kn) => {
+        cy.get('[data-cy="sort-dropdown"]').click()
+        cy.get('[data-cy="stretch-sort-kn"]').click()
+        cy.get(`[data-cy="stretch-sort-kn-option"][data-kn="${kn}"]`).click()
+        cy.get('[data-cy="sort-stretch-row"] [data-cy="sort-option"][data-field="stretch"][data-direction="asc"]')
+          .click()
+      })
 
     cy.get('[data-cy="gear-card"][data-stretch-percent]').should(($cards) => {
       const percents = [...$cards]

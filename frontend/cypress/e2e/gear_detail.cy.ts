@@ -1,4 +1,5 @@
 import { GEAR_TYPES } from '../support/gear_types'
+import { imageFilesFor } from '../support/images'
 
 // Detail page tests run for every gear type.
 // The `before` hook fetches a real item from the API so assertions
@@ -140,15 +141,108 @@ GEAR_TYPES.forEach(({ slug, apiPath, label, hasISA, hasISAWarning, specFields })
 
     // Webbing: classification rendered as a colored pill ─────────────────────
     if (slug === 'webbings') {
-      it('renders classification as a pill, not plain text', () => {
+      it('renders classification as a bubble beside the name, not as a spec row', () => {
         cy.request(`${api()}/webbing/?limit=100`).then(({ body }) => {
           const withClass = (body as Record<string, unknown>[])
             .find(i => i.classification != null)
           if (!withClass) return
           cy.visit(`/webbings/${withClass.id}`)
-          cy.get('[data-cy="spec-row"][data-field="classification"]')
-            .find('[data-cy="classification-pill"]')
+
+          // The bubble carries the class letter and sits next to the title …
+          cy.get('[data-cy="classification-pill"]')
             .should('be.visible')
+            .and('have.attr', 'data-classification', String(withClass.classification))
+
+          // … and classification is no longer duplicated in the spec grid.
+          cy.get('[data-cy="spec-row"][data-field="classification"]').should('not.exist')
+
+          cy.get('[data-cy="detail-name"]').then(($name) => {
+            cy.get('[data-cy="classification-pill"]').then(($pill) => {
+              const name = $name[0].getBoundingClientRect()
+              const pill = $pill[0].getBoundingClientRect()
+              // Same line, bubble to the right of the name.
+              expect(pill.left).to.be.gte(name.right - 1)
+              expect(pill.top).to.be.lt(name.bottom)
+            })
+          })
+        })
+      })
+    }
+
+    // Webbing: the stretch curve ──────────────────────────────────────────────
+    // A curve of 3+ measured points renders as a two-row Load/Stretch table;
+    // 1–2 points render as inline text ("3.4% @ 10 kN · 4.7% @ 15 kN"), because
+    // a table one or two columns wide is all chrome and no signal. 0 kN is
+    // dropped from the display (every curve reads 0% there).
+    if (slug === 'webbings') {
+      // Mirrors displayPoints() in src/utils/stretch.ts.
+      const displayPoints = (raw: unknown): { kn: number; percent: number }[] => {
+        if (typeof raw !== 'string' || raw === '') return []
+        let pts: { kn: number; percent: number }[] = []
+        try {
+          const parsed = JSON.parse(raw)
+          if (!Array.isArray(parsed)) return []
+          pts = parsed.filter(
+            (p: unknown): p is { kn: number; percent: number } =>
+              !!p && typeof p === 'object' &&
+              typeof (p as { kn: unknown }).kn === 'number' &&
+              typeof (p as { percent: unknown }).percent === 'number',
+          )
+        } catch {
+          return []
+        }
+        const nonZero = pts.filter(p => p.kn !== 0)
+        return [...(nonZero.length ? nonZero : pts)].sort((a, b) => a.kn - b.kn)
+      }
+
+      it('renders a curve of 3+ points as a Load/Stretch table, one column per measured point', () => {
+        cy.request(`${api()}/webbing/?limit=100`).then(({ body }) => {
+          const long = (body as Record<string, unknown>[])
+            .find(i => displayPoints(i.stretch).length >= 3)
+          if (!long) return
+          const pts = displayPoints(long.stretch)
+          cy.visit(`/webbings/${long.id}`)
+
+          cy.get('[data-cy="spec-row"][data-field="stretch"]')
+            .find('[data-cy="stretch-table"]').should('exist')
+
+          // Exactly one column per measured point, in ascending kN order …
+          cy.get('[data-cy="stretch-kn"]').should('have.length', pts.length)
+          cy.get('[data-cy="stretch-percent"]').should('have.length', pts.length)
+          cy.get('[data-cy="stretch-percent"]').then(($cells) => {
+            const kns = [...$cells].map(c => Number(c.getAttribute('data-kn')))
+            expect(kns).to.deep.equal(pts.map(p => p.kn))
+          })
+
+          // … and no 0 kN column, since every curve reads 0% there.
+          cy.get('[data-cy="stretch-percent"][data-kn="0"]').should('not.exist')
+        })
+      })
+
+      it('renders a curve of 1–2 points as inline text, with no table', () => {
+        cy.request(`${api()}/webbing/?limit=100`).then(({ body }) => {
+          const short = (body as Record<string, unknown>[]).find(i => {
+            const n = displayPoints(i.stretch).length
+            return n >= 1 && n < 3
+          })
+          if (!short) return
+          const pts = displayPoints(short.stretch)
+          cy.visit(`/webbings/${short.id}`)
+
+          cy.get('[data-cy="spec-row"][data-field="stretch"]').should('be.visible')
+          cy.get('[data-cy="stretch-table"]').should('not.exist')
+          cy.get('[data-cy="spec-row"][data-field="stretch"]')
+            .should('contain.text', `${pts[0].percent}% @ ${pts[0].kn} kN`)
+        })
+      })
+
+      it('omits the stretch row entirely when there are no measured points', () => {
+        cy.request(`${api()}/webbing/?limit=100`).then(({ body }) => {
+          const none = (body as Record<string, unknown>[])
+            .find(i => displayPoints(i.stretch).length === 0)
+          if (!none) return
+          cy.visit(`/webbings/${none.id}`)
+          cy.get('[data-cy="spec-row"][data-field="stretch"]').should('not.exist')
         })
       })
     }
@@ -226,6 +320,56 @@ GEAR_TYPES.forEach(({ slug, apiPath, label, hasISA, hasISAWarning, specFields })
         cy.get('[data-cy="isa-warning-banner"]').should('not.exist')
       })
     }
+
+    // ── Image carousel ────────────────────────────────────────────────────────
+    // The detail page shares its body (and therefore its image carousel) with
+    // the listing's Detailed view, so every image we hold for a product is
+    // browsable here too — same controls as the cards, but the visible <img>
+    // keeps this page's own detail-img hook.
+
+    describe('image carousel', () => {
+      let multi: { item: Record<string, unknown>; files: string[] } | undefined
+      let single: { item: Record<string, unknown>; files: string[] } | undefined
+
+      before(() => {
+        cy.request(`${api()}/${apiPath}/?limit=100`).then(({ body }) => {
+          const withFiles = (body as Record<string, unknown>[]).map(i => ({
+            item: i,
+            files: imageFilesFor(slug, String(i.brand_name), String(i.name)),
+          }))
+          multi = withFiles.find(x => x.files.length > 1)
+          single = withFiles.find(x => x.files.length === 1)
+        })
+      })
+
+      it('renders one dot per image for a multi-image product', () => {
+        if (!multi) return
+        cy.visit(`/${slug}/${multi.item.id}`)
+        cy.get('[data-cy="card-image-dot"]').should('have.length', multi.files.length)
+      })
+
+      it('starts on the primary (first) image', () => {
+        if (!multi) return
+        cy.visit(`/${slug}/${multi.item.id}`)
+        cy.get('[data-cy="detail-img"]').should('have.attr', 'src').and('include', multi.files[0])
+      })
+
+      it('next advances to the second image and moves the active dot', () => {
+        if (!multi) return
+        cy.visit(`/${slug}/${multi.item.id}`)
+        cy.get('[data-cy="card-image-next"]').click()
+        cy.get('[data-cy="detail-img"]').should('have.attr', 'src').and('include', multi!.files[1])
+        cy.get('[data-cy="card-image-dot"]').eq(1).should('have.attr', 'data-active', 'true')
+      })
+
+      it('shows no carousel chrome for a single-image product', () => {
+        if (!single) return
+        cy.visit(`/${slug}/${single.item.id}`)
+        cy.get('[data-cy="detail-img"]').should('be.visible')
+        cy.get('[data-cy="card-image-dot"]').should('not.exist')
+        cy.get('[data-cy="card-image-next"]').should('not.exist')
+      })
+    })
 
     // ── 404-like: unknown ID ──────────────────────────────────────────────────
 

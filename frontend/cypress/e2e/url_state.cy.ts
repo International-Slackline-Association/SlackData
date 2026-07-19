@@ -83,7 +83,10 @@ describe('URL state — pill filters', () => {
   it('visiting a URL with ?material= selects the pill and filters cards', () => {
     cy.fetchAllItems('webbing').then((all) => {
       const webbings = all as Record<string, unknown>[]
-      const material = webbings.find(w => w.material != null)?.material as string | undefined
+      // `material` is a multi-select list — each pill is a single fiber.
+      const material = webbings
+        .map(w => w.material as string[] | null)
+        .find(m => m != null && m.length > 0)?.[0]
       if (!material) return
 
       cy.visit(`/webbings?material=${encodeURIComponent(material)}`)
@@ -171,7 +174,8 @@ describe('URL state — combined params', () => {
   it('search, sort, and a pill filter can all be active simultaneously in the URL', () => {
     cy.fetchAllItems('webbing').then((all) => {
       const material = (all as Record<string, unknown>[])
-        .find(w => w.material != null)?.material as string | undefined
+        .map(w => w.material as string[] | null)
+        .find(m => m != null && m.length > 0)?.[0]
       if (!material) return
 
       const url = `/webbings?q=Gibbon&sort=weight-asc&material=${encodeURIComponent(material)}`

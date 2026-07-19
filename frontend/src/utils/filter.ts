@@ -29,11 +29,19 @@ function titleCase(s: string): string {
   return s.replace(/\b\w/g, c => c.toUpperCase())
 }
 
+// "Other" is the catch-all bucket on every enum in slack_data/models — it reads
+// as a fallback, so it belongs at the end of the list rather than wherever the
+// alphabet puts it.
+function rank(value: string): number {
+  return value.toLowerCase() === 'other' ? 1 : 0
+}
+
 export function derivePillOptions(
   items: AnyItem[],
   field: string,
   kind: PillKind = 'enum',
   capitalize = false,
+  order?: readonly string[],
 ): PillOption[] {
   const seen = new Set<string>()
   for (const item of items) {
@@ -53,8 +61,18 @@ export function derivePillOptions(
     values.sort((a, b) => Number(a) - Number(b))
   } else if (kind === 'bool') {
     values.sort((a, b) => (a === 'true' ? 0 : 1) - (b === 'true' ? 0 : 1)) // Yes before No
+  } else if (order) {
+    // Explicit domain order (e.g. classification A+ → Not for Highline). Values
+    // outside the list sort after it, alphabetically.
+    const idx = (v: string) => {
+      const i = order.indexOf(v)
+      return i === -1 ? order.length : i
+    }
+    values.sort((a, b) => idx(a) - idx(b) || a.localeCompare(b))
   } else {
-    values.sort((a, b) => a.localeCompare(b))
+    // Alphabetical, except catch-all buckets ("Other", "Unknown") always sink
+    // to the bottom of the list.
+    values.sort((a, b) => rank(a) - rank(b) || a.localeCompare(b))
   }
   return values.map(value => ({
     value,

@@ -56,7 +56,7 @@ Visual design spec:
 - **Left filter sidebar** (~280px): collapsible section groups, pill/chip toggle buttons (not checkboxes), small-caps section labels with colored dot accents
 - **Card anatomy** (top → bottom): category badge pill top-left (coral/amber), large centered product image, brand name in small all-caps, bold product name, inline key specs row, feature tag pills (light gray bg), price in warm amber/orange, then Save / Alert / Compare as outlined pill buttons with icons
 - **Top nav**: gear-type tabs (Webbings, Weblocks, Leash Rings, Grips, Rollers, Tree Protectors, Starter Kits, Trickline Kits)
-- **Above grid**: search bar left, Cards | Chart view toggle, item count, SORT BY dropdown right
+- **Above grid**: search bar left, Cards | Detailed view toggle, item count, SORT BY dropdown right
 - Accent: warm amber/orange for prices and active CTAs; coral for category badges; otherwise white/light gray
 - Rounded consistently throughout — cards, pills, buttons, badges all share the same radius
 

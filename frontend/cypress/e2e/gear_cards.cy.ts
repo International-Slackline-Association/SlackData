@@ -1,4 +1,5 @@
 import { GEAR_TYPES } from '../support/gear_types'
+import { imageFilesFor } from '../support/images'
 
 // Tests the visual anatomy of a gear card against the DESIGN.md spec.
 // Runs for every gear type using real backend data to pick representative items.
@@ -159,6 +160,218 @@ GEAR_TYPES.forEach(({ slug, apiPath, label, hasISA }) => {
         cy.get('[data-cy="btn-save"]').focus().should('be.focused')
         cy.get('[data-cy="btn-alert"]').focus().should('be.focused')
         cy.get('[data-cy="btn-compare"]').focus().should('be.focused')
+      })
+    })
+  })
+})
+
+// ── Classification bubble on the card ─────────────────────────────────────────
+// Webbing only. The same bubble the detail page shows beside the product name is
+// overlaid on the card's image area, top-right — so the highline class is
+// readable while scanning the grid, without opening every item.
+
+describe('Card classification bubble — Webbings', () => {
+  let withClass: Record<string, unknown> | undefined
+  let withoutClass: Record<string, unknown> | undefined
+
+  const cardFor = (id: unknown) =>
+    cy.get(`[data-cy="gear-card"]:has([data-cy="gear-card-name"][href="/webbings/${id}"])`)
+
+  before(() => {
+    cy.fetchAllItems('/webbing').then((all) => {
+      const items = all as Record<string, unknown>[]
+      withClass = items.find(i => i.classification != null && i.classification !== '')
+      withoutClass = items.find(i => i.classification == null || i.classification === '')
+    })
+  })
+
+  beforeEach(() => {
+    cy.visit('/webbings')
+  })
+
+  it('shows the bubble with the item’s class on a classified webbing', () => {
+    if (!withClass) return
+    cardFor(withClass.id)
+      .find('[data-cy="classification-pill"]')
+      .should('be.visible')
+      .and('have.attr', 'data-classification', String(withClass.classification))
+      .and('contain.text', String(withClass.classification))
+  })
+
+  it('omits the bubble entirely when the webbing has no classification', () => {
+    if (!withoutClass) return
+    cardFor(withoutClass.id)
+      .find('[data-cy="classification-pill"]')
+      .should('not.exist')
+  })
+
+  it('overlays the bubble on the top-right of the image area', () => {
+    if (!withClass) return
+    cardFor(withClass.id).within(() => {
+      cy.get('[data-cy="gear-card-image-area"]').then(($area) => {
+        cy.get('[data-cy="classification-pill"]').then(($pill) => {
+          const area = $area[0].getBoundingClientRect()
+          const pill = $pill[0].getBoundingClientRect()
+          // Inside the image area …
+          expect(pill.top).to.be.gte(area.top)
+          expect(pill.bottom).to.be.lte(area.bottom)
+          // … pinned to the right half and the top half of it.
+          expect(pill.left).to.be.gt(area.left + area.width / 2)
+          expect(pill.right).to.be.lte(area.right)
+          expect(pill.top).to.be.lt(area.top + area.height / 2)
+        })
+      })
+    })
+  })
+
+  it('stacks the bubble above the ISA stamp when the item is also certified', () => {
+    cy.fetchAllItems('/webbing').then((all) => {
+      const both = (all as Record<string, unknown>[]).find(
+        i => i.classification != null && i.classification !== '' && i.isa_certified === true,
+      )
+      if (!both) return
+      cardFor(both.id).within(() => {
+        cy.get('[data-cy="classification-pill"]').then(($pill) => {
+          cy.get('[data-cy="isa-approved-badge"]').then(($badge) => {
+            expect($pill[0].getBoundingClientRect().bottom)
+              .to.be.lte($badge[0].getBoundingClientRect().top + 1)
+          })
+        })
+      })
+    })
+  })
+})
+
+// Non-webbing types have no classification field at all — nothing should render.
+GEAR_TYPES.filter(g => g.slug !== 'webbings').forEach(({ slug, label }) => {
+  describe(`Card classification bubble — ${label} (none expected)`, () => {
+    it('never renders a classification bubble', () => {
+      cy.visit(`/${slug}`)
+      cy.get('[data-cy="gear-card"]').should('exist')
+      cy.get('[data-cy="classification-pill"]').should('not.exist')
+    })
+  })
+})
+
+// ── Card image carousel ───────────────────────────────────────────────────────
+// A card shows EVERY image the manifest holds for that product, not just the
+// primary one: dots (one per image) plus prev/next controls, wrapping in both
+// directions. Products with a single image get no carousel chrome at all.
+// Expected image sets come from the manifest (cypress/support/images.ts) so the
+// assertions are anchored to the real image library, not to the DOM's own claim.
+
+GEAR_TYPES.forEach(({ slug, apiPath, label }) => {
+  describe(`Card image carousel — ${label}`, () => {
+    let multi: { item: Record<string, unknown>; files: string[] } | undefined
+    let single: { item: Record<string, unknown>; files: string[] } | undefined
+
+    // Exact card lookup by detail href — a `contains(name)` match would pick the
+    // wrong product whenever one name is a substring of another.
+    const cardFor = (id: unknown) =>
+      cy.get(`[data-cy="gear-card"]:has([data-cy="gear-card-name"][href="/${slug}/${id}"])`)
+
+    before(() => {
+      cy.fetchAllItems(apiPath).then((all) => {
+        const withFiles = (all as Record<string, unknown>[]).map(item => ({
+          item,
+          files: imageFilesFor(slug, String(item.brand_name), String(item.name)),
+        }))
+        multi = withFiles.find(x => x.files.length > 1)
+        single = withFiles.find(x => x.files.length === 1)
+      })
+    })
+
+    beforeEach(() => {
+      cy.visit(`/${slug}`)
+    })
+
+    it('renders one dot per image for a multi-image product', () => {
+      if (!multi) return
+      cardFor(multi.item.id)
+        .find('[data-cy="card-image-dot"]')
+        .should('have.length', multi.files.length)
+    })
+
+    it('reports the full image count on the image area', () => {
+      if (!multi) return
+      cardFor(multi.item.id)
+        .find('[data-cy="gear-card-image-area"]')
+        .should('have.attr', 'data-image-count', String(multi.files.length))
+    })
+
+    it('shows prev/next controls for a multi-image product', () => {
+      if (!multi) return
+      cardFor(multi.item.id).within(() => {
+        cy.get('[data-cy="card-image-prev"]').should('exist')
+        cy.get('[data-cy="card-image-next"]').should('exist')
+      })
+    })
+
+    it('starts on the primary (first) image', () => {
+      if (!multi) return
+      cardFor(multi.item.id)
+        .find('[data-cy="gear-card-img"]')
+        .should('have.attr', 'src')
+        .and('include', multi.files[0])
+    })
+
+    it('next advances to the second image and moves the active dot', () => {
+      if (!multi) return
+      cardFor(multi.item.id).within(() => {
+        cy.get('[data-cy="card-image-next"]').click()
+        cy.get('[data-cy="gear-card-img"]').should('have.attr', 'src').and('include', multi!.files[1])
+        cy.get('[data-cy="card-image-dot"]').eq(1).should('have.attr', 'data-active', 'true')
+        cy.get('[data-cy="card-image-dot"]').eq(0).should('have.attr', 'data-active', 'false')
+      })
+    })
+
+    it('cycles through every image and wraps back to the first', () => {
+      if (!multi) return
+      cardFor(multi.item.id).within(() => {
+        // Step through each image in turn, asserting the manifest order.
+        multi!.files.slice(1).forEach((file) => {
+          cy.get('[data-cy="card-image-next"]').click()
+          cy.get('[data-cy="gear-card-img"]').should('have.attr', 'src').and('include', file)
+        })
+        // One more click wraps to the primary image.
+        cy.get('[data-cy="card-image-next"]').click()
+        cy.get('[data-cy="gear-card-img"]').should('have.attr', 'src').and('include', multi!.files[0])
+      })
+    })
+
+    it('prev from the first image wraps to the last', () => {
+      if (!multi) return
+      cardFor(multi.item.id).within(() => {
+        cy.get('[data-cy="card-image-prev"]').click()
+        cy.get('[data-cy="gear-card-img"]')
+          .should('have.attr', 'src')
+          .and('include', multi!.files[multi!.files.length - 1])
+      })
+    })
+
+    it('clicking a dot jumps straight to that image', () => {
+      if (!multi) return
+      const last = multi.files.length - 1
+      cardFor(multi.item.id).within(() => {
+        cy.get('[data-cy="card-image-dot"]').eq(last).click()
+        cy.get('[data-cy="gear-card-img"]').should('have.attr', 'src').and('include', multi!.files[last])
+        cy.get('[data-cy="card-image-dot"]').eq(last).should('have.attr', 'data-active', 'true')
+      })
+    })
+
+    it('carousel controls do not navigate to the detail page', () => {
+      if (!multi) return
+      cardFor(multi.item.id).find('[data-cy="card-image-next"]').click()
+      cy.url().should('not.include', `/${slug}/${multi.item.id}`)
+    })
+
+    it('single-image products show no dots and no controls', () => {
+      if (!single) return
+      cardFor(single.item.id).within(() => {
+        cy.get('[data-cy="gear-card-img"]').should('be.visible')
+        cy.get('[data-cy="card-image-dot"]').should('not.exist')
+        cy.get('[data-cy="card-image-next"]').should('not.exist')
+        cy.get('[data-cy="card-image-prev"]').should('not.exist')
       })
     })
   })
