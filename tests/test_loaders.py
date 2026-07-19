@@ -11,7 +11,11 @@ They cover the JSON→model mapping that is most likely to break silently:
 
 import pytest
 
-from slack_data.load_data.load_webbings import clean_webbing_data, get_material_type
+from slack_data.load_data.load_webbings import (
+    clean_webbing_data,
+    get_material_type,
+    get_material_types,
+)
 from slack_data.models.brands import get_brand
 from slack_data.models.webbing import FiberMaterial
 
@@ -29,12 +33,42 @@ from slack_data.models.webbing import FiberMaterial
     ("Dyneema",      FiberMaterial.DYNEEMA),
     ("DYNEEMA SK75", FiberMaterial.DYNEEMA),     # with suffix
     ("Vectran",      FiberMaterial.VECTRAN),
-    ("pes/polyamid", FiberMaterial.HYBRID),      # hybrid check comes first
+    ("Hybrid",       FiberMaterial.OTHER),       # names no fibers on its own
     ("Carbon Fibre", FiberMaterial.OTHER),       # unrecognised
     ("",             FiberMaterial.OTHER),       # empty string
 ])
 def test_get_material_type(raw, expected):
     assert get_material_type(raw) == expected
+
+
+# ---------------------------------------------------------------------------
+# get_material_types() — the multi-select `material` list
+# ---------------------------------------------------------------------------
+
+@pytest.mark.parametrize("material_type, composition, expected", [
+    # no composition → single-fiber list off materialType
+    ("Nylon", None, [FiberMaterial.NYLON]),
+    ("PES",   None, [FiberMaterial.POLYESTER]),
+    # composition wins, and is the only source for former "Hybrid" rows
+    ("Hybrid", ["Polyester", "Dyneema/HMPE"],
+     [FiberMaterial.POLYESTER, FiberMaterial.DYNEEMA]),
+    ("Hybrid", ["Vectran", "Polyester"],
+     [FiberMaterial.VECTRAN, FiberMaterial.POLYESTER]),
+    # a JSON string (as clean_webbing_data produces) parses the same way
+    ("Hybrid", '["Nylon", "Polyester"]',
+     [FiberMaterial.NYLON, FiberMaterial.POLYESTER]),
+    # a one-element composition is not special — it is just that fiber
+    ("Hybrid", ["Polyester"], [FiberMaterial.POLYESTER]),
+    # duplicates collapse, order preserved
+    ("Hybrid", ["Nylon", "Nylon"], [FiberMaterial.NYLON]),
+    # unknown fibers are skipped; empty result falls back to materialType
+    ("Nylon", ["Kryptonite"], [FiberMaterial.NYLON]),
+    # nothing resolvable at all → [OTHER], never an empty list (NOT NULL column)
+    ("", None, [FiberMaterial.OTHER]),
+    ("Hybrid", None, [FiberMaterial.OTHER]),
+])
+def test_get_material_types(material_type, composition, expected):
+    assert get_material_types(material_type, composition) == expected
 
 
 # ---------------------------------------------------------------------------

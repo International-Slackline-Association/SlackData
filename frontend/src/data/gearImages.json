@@ -50,6 +50,10 @@
     ]
   },
   "leashrings": {
+    "bc_bc-aluminum-leash-ring": [
+      "bc_bc-aluminum-leash-ring.jpg",
+      "bc_bc-aluminum-leash-ring-2.jpg"
+    ],
     "bc_bomber-steel-ring": [
       "bc_bomber-steel-ring.jpg"
     ],
@@ -108,13 +112,21 @@
     "slacktools_steel-ring": [
       "slacktools_steel-ring.jpg"
     ],
-    "slacktvty_highlinering-green": [
-      "slacktvty_highlinering-green.jpg",
-      "slacktvty_highlinering-green-2.jpg"
+    "slacktvty_highlinering": [
+      "slacktvty_highlinering.jpg",
+      "slacktvty_highlinering-2.jpg",
+      "slacktvty_highlinering-3.jpg"
     ],
     "souz_leash-protector": [
       "souz_leash-protector.jpg",
       "souz_leash-protector-2.jpg"
+    ],
+    "space-age-slacklines_saturn-ring": [
+      "space-age-slacklines_saturn-ring.jpg",
+      "space-age-slacklines_saturn-ring-2.jpg"
+    ],
+    "spider_60mm-aluminium-ring": [
+      "spider_60mm-aluminium-ring.jpg"
     ],
     "zerge_zero-gold": [
       "zerge_zero-gold.jpg"
@@ -388,8 +400,8 @@
     "bc_treehugger-cosmic": [
       "bc_treehugger-cosmic.jpg"
     ],
-    "bera_adjustable-tree-wear-bera": [
-      "bera_adjustable-tree-wear-bera.jpg"
+    "bera_adjustable-tree-wear": [
+      "bera_adjustable-tree-wear.jpg"
     ],
     "elephant_treeskin": [
       "elephant_treeskin.jpg"
@@ -558,7 +570,9 @@
     ],
     "bc_feather-pro": [
       "bc_feather-pro.jpg",
-      "bc_feather-pro-2.jpg"
+      "bc_feather-pro-2.jpg",
+      "bc_feather-pro-3.jpg",
+      "bc_feather-pro-4.jpg"
     ],
     "bc_green": [
       "bc_green.jpg",
@@ -748,7 +762,6 @@
     ],
     "middleway_zen": [
       "middleway_zen.jpg",
-      "middleway_zen-2.jpg",
       "middleway_zen-3.jpg",
       "middleway_zen-4.jpg",
       "middleway_zen-5.jpg",
@@ -1263,6 +1276,14 @@
       "petram_campo-weblock.jpg",
       "petram_campo-weblock-2.jpg"
     ],
+    "petram_constat-weblock": [
+      "petram_constat-weblock.jpg",
+      "petram_constat-weblock-2.jpg",
+      "petram_constat-weblock-3.jpg",
+      "petram_constat-weblock-4.jpg",
+      "petram_constat-weblock-5.jpg",
+      "petram_constat-weblock-6.jpg"
+    ],
     "petram_fortis-weblock": [
       "petram_fortis-weblock.jpg",
       "petram_fortis-weblock-2.jpg",
@@ -1298,6 +1319,9 @@
     "raed_tilock-25mm": [
       "raed_tilock-25mm.jpg",
       "raed_tilock-25mm-2.jpg"
+    ],
+    "slackde_easylock": [
+      "slackde_easylock.jpg"
     ],
     "slackde_equilocker": [
       "slackde_equilocker.jpg",
@@ -1350,6 +1374,9 @@
     ],
     "slackpro_linelock-al-mk4": [
       "slackpro_linelock-al-mk4.jpg"
+    ],
+    "slackpro_linelock-va-mkiii": [
+      "slackpro_linelock-va-mkiii.jpg"
     ],
     "slacktech_ramlock": [
       "slacktech_ramlock.jpg"

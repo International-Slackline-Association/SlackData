@@ -8,6 +8,7 @@ from slack_data.utilities.materials import MetalMaterial
 
 class ConnectionType(str, Enum):
     DYNEEMA_SLING_LOOP = "Dyneema Sling Loop"
+    SLING_LOOP = "Sling Loop"
     MOUNTING_HOLE = "Mounting Hole"
     OTHER = "Other"
 

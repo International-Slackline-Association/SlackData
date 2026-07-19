@@ -431,7 +431,7 @@
         "webbing_length": 15,
         "webbing_width": 25,
         "weight": null,
-        "tensioning_type": null,
+        "tensioning_type": "Primitive",
         "includes_treepro": true,
         "isa_certified": false,
         "price": 120.0,

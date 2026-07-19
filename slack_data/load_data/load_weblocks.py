@@ -127,19 +127,22 @@ def add_weblocks_to_db(weblocks: list[dict], session: SessionDep) -> None:
 def get_front_pin_type(pin_type: str | list[str] | None) -> FrontPin:
     """
     Convert the front pin string or list to a FrontPin enum.
-    If pin_type is a list, uses the first item.
+    A list is matched across all its items, not just the first. Screw pin is
+    checked first: locks listed as both push/quick and screw pin are screw pins.
     """
     if not pin_type:
         return FrontPin.OTHER
     if isinstance(pin_type, list):
         if not pin_type:
             return FrontPin.OTHER
-        pin_str = pin_type[0]
+        pin_str = " ".join(pin_type)
     else:
         pin_str = pin_type
-    
+
     pin_str = pin_str.lower()
-    if "push" in pin_str:
+    if "screw" in pin_str:
+        return FrontPin.SCREWPIN
+    elif "push" in pin_str or "quick" in pin_str:
         return FrontPin.PUSHPIN
     elif "pull" in pin_str:
         return FrontPin.PULLPIN
@@ -153,30 +156,32 @@ def get_front_pin_type(pin_type: str | list[str] | None) -> FrontPin:
 def get_attachment_point(point_input: str | list[str] | None) -> AttachmentPoint:
     """
     Convert the attachment point(s) to an AttachmentPoint enum.
-    If point_input is a list, uses the first item.
+    A list is matched across all its items, not just the first. Pin and hole are
+    checked ahead of bolt: a lock that accepts a pin is a pin anchor even when it
+    also takes a bolt. "XL Mounting Hole" matches hole.
     """
     if not point_input:
         return None
     if isinstance(point_input, list):
         if not point_input:
             return None
-        point_str = point_input[0]
+        point_str = " ".join(point_input)
     else:
         point_str = point_input
-    
+
     point_str = point_str.lower()
     if "universal" in point_str:
         return AttachmentPoint.UNIVERSAL
     elif "pin" in point_str:
         return AttachmentPoint.PIN
+    elif "hole" in point_str:
+        return AttachmentPoint.HOLE
     elif "bolt" in point_str:
         return AttachmentPoint.BOLT
     elif "bent" in point_str:
         return AttachmentPoint.BENTPLATE
     elif "sling" in point_str:
         return AttachmentPoint.SLING
-    elif "hole" in point_str:
-        return AttachmentPoint.HOLE
     else:
         return AttachmentPoint.OTHER
 

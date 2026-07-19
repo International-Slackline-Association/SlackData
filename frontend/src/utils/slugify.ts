@@ -1,5 +1,5 @@
 // Turns a raw product name into a URL/file-safe slug.
-// MUST stay in sync with the Python `slugify` in scripts/build_gear_images.py —
+// MUST stay in sync with the Python `slugify` in scripts/build_gear_manifest.py —
 // the manifest keys are generated there and looked up here at runtime.
 //   "Mantra MK2"  -> "mantra-mk2"
 //   "7/8\" Spider" -> "7-8-spider"

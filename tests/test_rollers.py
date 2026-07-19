@@ -5,7 +5,7 @@ from slack_data.utilities.materials import MetalMaterial, RollerMaterial
 
 # Defaults for roller's many required fields
 _DEFAULTS = dict(
-    material=MetalMaterial.ALUMINUM,
+    material=[MetalMaterial.ALUMINUM],
     roller_material=RollerMaterial.PLASTIC,
     slider_type=SliderType.Carabiner,
     lock_type=LockType.Nonlocking,
@@ -24,7 +24,7 @@ def make_roller(session, brand, *, name="Test Roller", **kwargs) -> Roller:
 def _create_payload(brand_id: int, **overrides) -> dict:
     base = {
         "name": "New Roller",
-        "material": "Aluminum",
+        "material": ["Aluminum"],
         "roller_material": "Plastic",
         "slider_type": "Carabiner",
         "lock_type": "Non-locking",
