@@ -76,7 +76,7 @@ def test_brand_name_present_in_webbing_response(client, session):
     session.commit()
     session.refresh(brand)
 
-    webbing = Webbing(name="Verve", material=FiberMaterial.POLYESTER, width=25, brand_id=brand.id)
+    webbing = Webbing(name="Verve", material=[FiberMaterial.POLYESTER], width=25, brand_id=brand.id)
     session.add(webbing)
     session.commit()
     session.refresh(webbing)
@@ -92,7 +92,7 @@ def test_brand_name_present_in_list_response(client, session):
     session.commit()
     session.refresh(brand)
 
-    webbing = Webbing(name="Jibline", material=FiberMaterial.POLYESTER, width=20, brand_id=brand.id)
+    webbing = Webbing(name="Jibline", material=[FiberMaterial.POLYESTER], width=20, brand_id=brand.id)
     session.add(webbing)
     session.commit()
 
@@ -106,7 +106,7 @@ def test_brand_name_present_after_patch(client, session):
     session.commit()
     session.refresh(brand)
 
-    webbing = Webbing(name="Mission", material=FiberMaterial.NYLON, width=25, brand_id=brand.id)
+    webbing = Webbing(name="Mission", material=[FiberMaterial.NYLON], width=25, brand_id=brand.id)
     session.add(webbing)
     session.commit()
     session.refresh(webbing)

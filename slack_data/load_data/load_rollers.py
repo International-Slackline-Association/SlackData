@@ -62,7 +62,7 @@ def add_rollers_to_db(rollers: list[dict], session: SessionDep) -> None:
             material=get_metal_materials(roller.get("material")),
             roller_material=get_roller_material(str(roller.get("roller_material", ""))),
             lock_type=get_lock_type(str(roller.get("locking_type", ""))),
-            bearing_material=get_bearing_material(str(roller.get("bearing_material", "steel"))),
+            bearing_material=get_bearing_material(str(roller.get("bearing_material", ""))),
             width=roller.get("width", None),
             weight=float(roller.get("weight", 0)),
             breaking_strength=roller.get("mbs"),

@@ -51,6 +51,11 @@ def get_metal_materials(material: str | list[str] | None) -> list[MetalMaterial]
 
     Accepts a list, or a delimited string like "Aluminum, Steel" / "Aluminum & Steel".
     Duplicates are collapsed and order is preserved. Returns [OTHER] when empty/unknown.
+
+    OTHER is a fallback bucket, not a material, so it is dropped once any real
+    metal resolves: "Nylon, Aluminum" -> [ALUMINUM], not [OTHER, ALUMINUM]. (The
+    non-metal component is still recorded in the source JSON; it just has no
+    MetalMaterial to map to.) OTHER survives only when nothing else resolved.
     """
     if not material:
         return [MetalMaterial.OTHER]
@@ -70,4 +75,5 @@ def get_metal_materials(material: str | list[str] | None) -> list[MetalMaterial]
         if resolved not in materials:
             materials.append(resolved)
 
-    return materials or [MetalMaterial.OTHER]
+    real_metals = [m for m in materials if m is not MetalMaterial.OTHER]
+    return real_metals or [MetalMaterial.OTHER]

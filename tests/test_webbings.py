@@ -28,11 +28,17 @@ def make_webbing(
     brand: Brand,
     *,
     name: str = "Test Webbing",
-    material: FiberMaterial = FiberMaterial.NYLON,
+    material: list[FiberMaterial] | None = None,
     width: int = 25,
     **kwargs,
 ) -> Webbing:
-    webbing = Webbing(name=name, material=material, width=width, brand_id=brand.id, **kwargs)
+    webbing = Webbing(
+        name=name,
+        material=material or [FiberMaterial.NYLON],
+        width=width,
+        brand_id=brand.id,
+        **kwargs,
+    )
     session.add(webbing)
     session.commit()
     session.refresh(webbing)
@@ -105,14 +111,14 @@ def test_create_webbing(client, session):
 
     response = client.post("/webbing/", json={
         "name": "New Webbing",
-        "material": "Nylon",
+        "material": ["Nylon"],
         "width": 25,
         "brand_id": brand.id,
     })
     assert response.status_code == 200
     data = response.json()
     assert data["name"] == "New Webbing"
-    assert data["material"] == "Nylon"
+    assert data["material"] == ["Nylon"]
     assert data["brand_name"] == brand.name
 
 
@@ -121,7 +127,7 @@ def test_create_webbing_optional_fields_default_null(client, session):
 
     response = client.post("/webbing/", json={
         "name": "Minimal Webbing",
-        "material": "Polyester",
+        "material": ["Polyester"],
         "width": 35,
         "brand_id": brand.id,
     })
@@ -137,7 +143,7 @@ def test_create_webbing_with_optional_fields(client, session):
 
     response = client.post("/webbing/", json={
         "name": "Full Webbing",
-        "material": "Dyneema",
+        "material": ["Dyneema/HMPE"],
         "width": 18,
         "brand_id": brand.id,
         "breaking_strength": 22.5,

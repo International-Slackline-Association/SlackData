@@ -1,6 +1,7 @@
 from enum import Enum
 from pydantic import computed_field
-from sqlmodel import Field, Relationship, SQLModel
+from sqlalchemy import JSON
+from sqlmodel import Column, Field, Relationship, SQLModel
 
 from slack_data.utilities.currencies import Currency
 from slack_data.utilities.isa_warnings import ISAWarning
@@ -11,8 +12,9 @@ class FiberMaterial(str, Enum):
     POLYESTER = "Polyester"
     DYNEEMA = "Dyneema/HMPE"  # Dyneema, UHMWPE and HMPE are used interchangeably
     VECTRAN = "Vectran"
-    HYBRID = "Hybrid" # TODO: maybe include different combinations explicitly?
     OTHER = "Other"
+    # No HYBRID member: `Webbing.material` is a list, so a hybrid is spelled out
+    # as its component fibers, e.g. ["Polyester", "Dyneema/HMPE"].
 
 class Classification(str, Enum):
     A_PLUS = "A+"
@@ -33,11 +35,32 @@ _CLASSIFICATION_RANK = {
 
 
 def classify_webbing(
-    material: "FiberMaterial | None",
+    material: "list[FiberMaterial] | None",
     breaking_strength: float | None,
-    composition: "list[FiberMaterial] | None" = None,
 ) -> Classification:
-    """Derive the ISA highline classification from material + breaking strength (kN).
+    """Derive the ISA highline classification from a webbing's fibers + breaking
+    strength (kN).
+
+    `material` is the full fiber list. A multi-fiber (formerly "hybrid") webbing is
+    graded on its *strongest* component fiber: a Polyester/Dyneema webbing is graded
+    on its polyester, because the HMPE strand contributes no ISA class of its own.
+
+    Missing fibers or strength -> Not for Highline.
+    """
+    if not material or breaking_strength is None:
+        return Classification.NOT_FOR_HIGHLINE
+
+    return max(
+        (_classify_fiber(fiber, breaking_strength) for fiber in material),
+        key=lambda c: _CLASSIFICATION_RANK[c],
+    )
+
+
+def _classify_fiber(
+    material: "FiberMaterial",
+    breaking_strength: float,
+) -> Classification:
+    """Classification of a single fiber at a given breaking strength.
 
     ISA certifies single webbings by strength class, gated by fiber material:
       - Nylon (PA):      eligible for all classes (C/B/A/A+) by strength.
@@ -47,27 +70,9 @@ def classify_webbing(
         webbings"); at 30 kN+ they take the strength-based class -> A (>=30),
         A+ (>=40). No Type B or C for HMPE.
       - Everything else (Other): never certified -> Not for Highline.
-      - Hybrid: classified as its *strongest* component fiber. The component fibers
-        are supplied via `composition` (e.g. [Polyester, Dyneema]); a Polyester/Dyneema
-        hybrid is graded on its polyester (the HMPE strand contributes no ISA class).
-        Without a composition it cannot be graded -> Not for Highline.
 
     Strength thresholds (inclusive): A+ >= 40, A >= 30, B >= 26, C >= 22 kN.
-    Missing material or strength -> Not for Highline.
     """
-    if material is None or breaking_strength is None:
-        return Classification.NOT_FOR_HIGHLINE
-
-    if material == FiberMaterial.HYBRID:
-        if not composition:
-            return Classification.NOT_FOR_HIGHLINE
-        # Grade each component fiber on its own, then keep the strongest class.
-        best = max(
-            (classify_webbing(fiber, breaking_strength) for fiber in composition),
-            key=lambda c: _CLASSIFICATION_RANK[c],
-        )
-        return best
-
     # HMPE fibers (Dyneema/UHMWPE, Vectran): not certified as single webbings
     # under 30 kN; at 30 kN+ take the strength class (A >=30, A+ >=40). No B/C.
     if material in (FiberMaterial.DYNEEMA, FiberMaterial.VECTRAN):
@@ -112,10 +117,9 @@ class BaseWebbing(SQLModel):
     Required fields are re-declared in the table model, WebbingPublic, and WebbingCreate.
     """
     name: str | None = Field(default=None, index=True)
-    material: FiberMaterial | None = None
-    # For Hybrid webbings: the component fibers, as a JSON list of FiberMaterial
-    # values, e.g. '["Polyester", "Dyneema/HMPE"]'. None for single-fiber webbings.
-    material_composition: str | None = None
+    # multi-select: one entry per fiber in the weave. Single-fiber webbing is a
+    # 1-element list; a hybrid spells out its fibers, e.g. ["Polyester", "Dyneema/HMPE"].
+    material: list[FiberMaterial] | None = Field(default=None, sa_column=Column(JSON))
     webbing_construction: WebbingConstruction | None = None # Flat / Tubular / Core-Sheath
     width: int | None = None              # mm
     thickness: float | None = None        # mm
@@ -137,7 +141,7 @@ class BaseWebbing(SQLModel):
 class Webbing(BaseWebbing, table=True):
     id: int | None = Field(default=None, primary_key=True)
     name: str = Field(index=True)         # required — NOT NULL in DB
-    material: FiberMaterial               # required — NOT NULL in DB
+    # material inherits the JSON column from BaseWebbing (multi-select list)
     width: int                            # required — NOT NULL in DB
     brand_id: int = Field(foreign_key="brand.id")
     brand: "Brand" = Relationship(back_populates="_webbings")
@@ -150,7 +154,7 @@ class WebbingPublic(BaseWebbing):
     """Model for public webbing data."""
     id: int
     name: str                             # required in response
-    material: FiberMaterial               # required in response
+    material: list[FiberMaterial]         # required in response
     width: int                            # required in response
     brand_name: str
 
@@ -162,7 +166,7 @@ class WebbingPublic(BaseWebbing):
 class WebbingCreate(BaseWebbing):
     """Model for creating a new webbing entry."""
     name: str                             # required on create
-    material: FiberMaterial               # required on create
+    material: list[FiberMaterial]         # required on create
     width: int                            # required on create
     brand_id: int                         # required on create
 
