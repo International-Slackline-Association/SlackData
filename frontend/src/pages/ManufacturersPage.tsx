@@ -42,11 +42,15 @@ export default function ManufacturersPage() {
     // every visible card's raw name contains the raw typed term, so a fuzzier
     // match here would surface cards that fail that assertion.
     const term = query.trim().toLowerCase()
-    return brands.filter(b => {
+    const matched = brands.filter(b => {
       if (term && !b.name.toLowerCase().includes(term)) return false
       if (countries.length && (b.country == null || !countries.includes(b.country))) return false
       return true
     })
+    // Default order: deepest catalogue first — the most useful entry point into a
+    // directory of 56 brands. Name is the tie-break so the order is stable and
+    // deterministic rather than dependent on API insertion order.
+    return matched.sort((a, b) => b.total - a.total || a.name.localeCompare(b.name))
   }, [brands, query, countries])
 
   const toggleCountry = (value: string) =>

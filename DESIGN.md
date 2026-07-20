@@ -378,14 +378,43 @@ The letter is **dark ink `#1F2937` on every fill**: white text fails WCAG AA on 
 
 Card grid (3 columns, same layout as gear listing).
 
-Manufacturer card anatomy:
-- Brand name bold, ~16px
-- Small slackline-icon badge if slackline-focused flag is true
-- Country flag or continent label (small gray)
-- Year founded (small gray)
-- Gear inventory row: small pills showing counts — `Webbings: 12`, `Weblocks: 4`, etc.
-- Star rating or review count if available
-- "View Gear" button — teal outline pill
+**The manufacturer card is the gear card's twin.** It reuses the gear card's shell verbatim —
+same radius, border, shadow, hover lift, and the same `h-40` centered image area on a
+`bg-gray-50` field with an absolutely-positioned overlay stack in the **top-right** corner. What
+changes is only what fills those slots: the product shot becomes the **manufacturer logo**, and
+the classification/ISA overlay becomes a single **country flag**.
+
+Manufacturer card anatomy (top → bottom):
+- **Logo image area** — the brand's logo, centered and letterboxed (`object-contain`) in the same
+  `h-40` gray field the gear cards use. Brands with no logo fall back to the shared image
+  placeholder rather than collapsing the area, so every card in a row is the same height.
+- **Country flag, top-right overlay** — a small (~24×16) rounded flag chip with a hairline border,
+  in the exact slot the gear card's classification bubble occupies. Flag only, no country label:
+  the name is redundant next to the flag and the row has no space for it. The country name goes on
+  the flag's `title`/`alt` so it stays available to hover and to screen readers.
+- **Brand name** — bold, ~16px, the card's primary line.
+- **Slackline badge** — small teal pill when `slackline_focused` is true.
+- **Year founded** — small gray, beneath the name; omitted when null.
+- **Gear inventory row** — small gray pills, one per type the brand actually stocks:
+  `Webbings: 12`, `Weblocks: 4`, … Types with zero are omitted from the pills (a wall of zeroes is
+  noise) but still emitted as `data-count-{slug}="0"` on the card root.
+- **"View Gear"** — teal outline pill, links to the brand's detail page.
+
+**Default ordering.** Manufacturers list by **total gear count, largest first** — with 56 brands,
+the deepest catalogues are the most useful entry point. Name is the tie-break, so the order is
+deterministic rather than dependent on API insertion order.
+
+**Country data + flags.** `Brand.country` is the existing `Country` enum (full names —
+`"Germany"`, not `"DE"`); the frontend maps that name to an ISO alpha-2 code to resolve
+`/flags/{cc}.png`. Flag artwork is vendored from **flagcdn.com** (Flagpedia's public-domain set)
+into `frontend/public/flags/`, not hotlinked — the page must not depend on a third-party CDN at
+runtime. Logos are vendored likewise into `frontend/public/manufacturer-images/`, keyed by our
+**canonical** brand slug so lookup is a pure function of the brand name.
+
+Cards with no country render **no flag at all** — never a placeholder or "unknown" flag. The
+country filter group is likewise data-driven: it renders only the country values actually present,
+and disappears entirely when none are (see the note in `manufacturers.cy.ts`; there is no
+`continent` field anywhere in the schema).
 
 ---
 

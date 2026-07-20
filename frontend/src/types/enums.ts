@@ -87,6 +87,9 @@ export type PriceUnit = (typeof PRICE_UNITS)[number]
 // alias; the full list is rarely needed on the client, so we don't enumerate it.
 export type Currency = string
 
-// utilities/countries.py — Country. Also aliased to string; the full list is
-// not needed on the client, and brand.country is null for nearly all rows today.
+// utilities/countries.py — Country. Aliased to string: the client never needs to
+// enumerate the members, only to display one and map it to a flag (see
+// utils/countryFlags.ts). Values are full display names ("Germany"), not ISO
+// codes — the manufacturers.json enrichment pass resolves codes to enum members
+// server-side, so every brand carries a country today.
 export type Country = string

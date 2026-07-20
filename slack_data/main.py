@@ -8,6 +8,7 @@ from slack_data.database import get_session, create_db_and_tables
 
 from slack_data.load_data.load_grips import load_grips
 from slack_data.load_data.load_leashrings import load_leashrings
+from slack_data.load_data.load_manufacturers import load_manufacturers
 from slack_data.load_data.load_rollers import load_rollers
 from slack_data.load_data.load_starterkits import load_starterkits
 from slack_data.load_data.load_treepros import load_treepros
@@ -25,6 +26,7 @@ from slack_data.api.routers.tricklinekit_router import tricklinekit_router
 from slack_data.api.routers.webbing_router import webbing_router
 from slack_data.api.routers.weblock_router import weblock_router
 
+from slack_data.models.brands import Brand
 from slack_data.models.grips import Grip
 from slack_data.models.leashrings import LeashRing
 from slack_data.models.rollers import Roller
@@ -71,6 +73,16 @@ async def lifespan(app: FastAPI):
         if existing_tricklinekits is None: # Only load from `tricklinekits.json` if the database is empty
             print("Loading trickline kit data into the database...")
             load_tricklinekits(session=session)
+        # MUST come last: Brand rows are created by the gear loaders above (via
+        # get_brand(), name-only), and this pass backfills their metadata. Gated on
+        # "no brand has a country yet" rather than on an empty table, because the
+        # table is never empty by this point.
+        needs_enrichment = session.exec(
+            select(Brand).where(Brand.country.is_not(None))
+        ).first() is None
+        if needs_enrichment:
+            print("Enriching brands from manufacturers.json...")
+            load_manufacturers(session=session)
     yield
 
 app = FastAPI(lifespan=lifespan)

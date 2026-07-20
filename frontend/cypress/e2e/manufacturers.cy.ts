@@ -1,7 +1,21 @@
 // Manufacturers page tests.
 // The /brand/ endpoint provides manufacturer data.
-// Each brand in the DB was created on-the-fly from gear JSON, so
-// country/website/etc may be empty — we only assert on what the API guarantees.
+//
+// NOTE ON country: brands are still created on-the-fly by get_brand() with only a
+// name, but a manufacturers.json enrichment pass now backfills country (and year
+// founded / website / socials) onto those rows. So country IS populated today —
+// unlike the gear-derived fields, which may still be empty. Every assertion below
+// stays data-driven off the API rather than hardcoding that, so the suite keeps
+// working whether or not the enrichment ran.
+//
+// The logo manifest is imported straight from src (same approach as
+// cypress/support/images.ts) so logo assertions are anchored to the real vendored
+// image set rather than to whatever the DOM claims about itself.
+
+import manufacturerImages from '../../src/data/manufacturerImages.json'
+
+// canonical brand name -> stored logo filename
+const LOGO_MANIFEST = manufacturerImages as Record<string, string>
 
 describe('Manufacturers page', () => {
   const api = () => Cypress.env('apiUrl')
@@ -87,11 +101,12 @@ describe('Manufacturers page', () => {
   // exist, which is exactly backwards: filter design must follow the model,
   // not be invented and reconciled against it after the fact.
   //
-  // Per CLAUDE.md, brands are created on-the-fly by get_brand() with only a
-  // `name` — country is essentially never populated by the current loaders.
-  // So in real data today, most/all brands have country == null. The filter
-  // group must therefore degrade gracefully: render only the country values
-  // that actually appear in the data, and disappear entirely if none do.
+  // get_brand() still creates brands with only a `name`, but the manufacturers.json
+  // enrichment pass backfills `country` onto those rows afterwards — so country IS
+  // populated today and these tests exercise the populated branch. The filter group
+  // must nonetheless stay data-driven: render only the country values that actually
+  // appear, and disappear entirely if none do (which is what the pre-enrichment
+  // dataset looked like, and what a fresh DB looks like before enrichment runs).
 
   it('renders a country filter only for country values present in the data', () => {
     cy.fetchAllItems('brand').then((all) => {
@@ -177,6 +192,168 @@ describe('Manufacturers page', () => {
     cy.fetchAllItems('brand').then((all) => {
       cy.get('[data-cy="manufacturer-search"]').type('xqzxqzxqzxqz_no_match').clear()
       cy.get('[data-cy="manufacturers-card"]').should('have.length', all.length)
+    })
+  })
+
+  // ── Default ordering ──────────────────────────────────────────────────────
+  // Manufacturers are listed by total gear count, largest first — the directory's
+  // most useful default (the brands you're most likely to want are the ones with
+  // the deepest catalogue). Asserted off the cards' own data-count-* attributes
+  // rather than by recomputing from the API, so this pins the rendered order
+  // directly.
+
+  const totalOn = ($card: JQuery<HTMLElement>) =>
+    ['webbings', 'weblocks', 'rollers', 'leashrings',
+     'grips', 'treepros', 'starterkits', 'tricklinekits']
+      .reduce((sum, slug) => sum + Number($card.attr(`data-count-${slug}`) ?? '0'), 0)
+
+  it('lists manufacturers by total gear count, descending, by default', () => {
+    cy.get('[data-cy="manufacturers-card"]').then(($cards) => {
+      const totals = $cards.toArray().map(el => totalOn(Cypress.$(el)))
+      const sorted = [...totals].sort((a, b) => b - a)
+      expect(totals, 'card order is by total gear desc').to.deep.equal(sorted)
+    })
+  })
+
+  it('the first manufacturer card has the largest inventory', () => {
+    cy.get('[data-cy="manufacturers-card"]').then(($cards) => {
+      const totals = $cards.toArray().map(el => totalOn(Cypress.$(el)))
+      expect(totals[0]).to.equal(Math.max(...totals))
+      expect(totals[0], 'top brand actually has gear').to.be.greaterThan(0)
+    })
+  })
+
+  // ── Manufacturer logo ─────────────────────────────────────────────────────
+  //
+  // The manufacturer card reuses the gear card's shell (DESIGN.md → Manufacturers
+  // Page), so it has the same fixed-height image area. Logos are vendored under
+  // public/manufacturer-images/ and keyed by our CANONICAL brand slug; the
+  // manifest (src/data/manufacturerImages.json) is the source of truth for which
+  // brands have one. Brands without a logo keep the area and show a placeholder,
+  // so cards in a row can't end up different heights.
+
+  it('every card has an image area', () => {
+    cy.fetchAllItems('brand').then((all) => {
+      cy.get('[data-cy="manufacturer-image-area"]').should('have.length', all.length)
+    })
+  })
+
+  it('a brand with a logo in the manifest renders it from /manufacturer-images/', () => {
+    const withLogo = Object.keys(LOGO_MANIFEST)
+    expect(withLogo.length, 'manifest is non-empty').to.be.greaterThan(0)
+
+    cy.fetchAllItems('brand').then((all) => {
+      const brands = all as Record<string, unknown>[]
+      // A brand that both exists in our DB and has a logo on disk.
+      const target = brands.find(b => withLogo.includes(b.name as string))
+      if (!target) return
+
+      cy.get('[data-cy="manufacturers-card"]')
+        .contains('[data-cy="manufacturer-name"]', target.name as string)
+        .closest('[data-cy="manufacturers-card"]')
+        .find('[data-cy="manufacturer-logo"]')
+        .should('have.attr', 'src')
+        .and('include', '/manufacturer-images/')
+    })
+  })
+
+  it('a brand with no logo shows a placeholder instead of an empty area', () => {
+    const withLogo = Object.keys(LOGO_MANIFEST)
+    cy.fetchAllItems('brand').then((all) => {
+      const brands = all as Record<string, unknown>[]
+      const target = brands.find(b => !withLogo.includes(b.name as string))
+      if (!target) return // every brand has a logo — nothing to assert
+
+      cy.get('[data-cy="manufacturers-card"]')
+        .contains('[data-cy="manufacturer-name"]', target.name as string)
+        .closest('[data-cy="manufacturers-card"]')
+        .find('[data-cy="manufacturer-logo-placeholder"]')
+        .should('exist')
+    })
+  })
+
+  // ── Country flag ──────────────────────────────────────────────────────────
+  //
+  // Brand.country stores the Country enum's FULL NAME ("Germany"), and the
+  // frontend maps that to an ISO alpha-2 code to resolve /flags/{cc}.png. These
+  // tests deliberately do NOT duplicate that mapping: they assert the flag
+  // resolves to a /flags/*.png and that its accessible name is the country the
+  // API reports, which pins the linkage without re-implementing it.
+
+  it('a brand with a country shows a flag on its card', () => {
+    cy.fetchAllItems('brand').then((all) => {
+      const brands = all as Record<string, unknown>[]
+      const target = brands.find(b => b.country != null)
+      if (!target) {
+        cy.get('[data-cy="manufacturer-flag"]').should('not.exist')
+        return
+      }
+
+      cy.get('[data-cy="manufacturers-card"]')
+        .contains('[data-cy="manufacturer-name"]', target.name as string)
+        .closest('[data-cy="manufacturers-card"]')
+        .find('[data-cy="manufacturer-flag"]')
+        .should('be.visible')
+        .and('have.attr', 'src')
+        .and('match', /\/flags\/[a-z]{2}\.png$/)
+    })
+  })
+
+  it('the flag carries the country name as its accessible name', () => {
+    cy.fetchAllItems('brand').then((all) => {
+      const brands = all as Record<string, unknown>[]
+      const target = brands.find(b => b.country != null)
+      if (!target) return
+
+      cy.get('[data-cy="manufacturers-card"]')
+        .contains('[data-cy="manufacturer-name"]', target.name as string)
+        .closest('[data-cy="manufacturers-card"]')
+        .find('[data-cy="manufacturer-flag"]')
+        .should('have.attr', 'alt', target.country as string)
+    })
+  })
+
+  it('a brand with no country shows no flag at all', () => {
+    cy.fetchAllItems('brand').then((all) => {
+      const brands = all as Record<string, unknown>[]
+      const target = brands.find(b => b.country == null)
+      if (!target) return // every brand has a country — nothing to assert
+
+      cy.get('[data-cy="manufacturers-card"]')
+        .contains('[data-cy="manufacturer-name"]', target.name as string)
+        .closest('[data-cy="manufacturers-card"]')
+        .find('[data-cy="manufacturer-flag"]')
+        .should('not.exist')
+    })
+  })
+
+  it('every rendered flag belongs to a brand the API reports a country for', () => {
+    cy.fetchAllItems('brand').then((all) => {
+      const brands = all as Record<string, unknown>[]
+      const withCountry = new Set(
+        brands.filter(b => b.country != null).map(b => b.name as string),
+      )
+      cy.get('[data-cy="manufacturers-card"]').each(($card) => {
+        const name = $card.find('[data-cy="manufacturer-name"]').text().trim()
+        const flags = $card.find('[data-cy="manufacturer-flag"]').length
+        expect(flags, `flag count for ${name}`).to.equal(withCountry.has(name) ? 1 : 0)
+      })
+    })
+  })
+
+  // ── Stored country data ───────────────────────────────────────────────────
+  // Country is backfilled onto Brand rows from manufacturers.json. These pin the
+  // storage contract itself, independent of how the card renders it.
+
+  it('the brand API serves country values from the Country enum, not ISO codes', () => {
+    cy.fetchAllItems('brand').then((all) => {
+      const brands = all as Record<string, unknown>[]
+      const countries = brands.map(b => b.country).filter(c => c != null) as string[]
+      if (countries.length === 0) return
+      // Full names ("Germany"), never 2-letter codes ("DE").
+      countries.forEach((c) => {
+        expect(c.length, `country "${c}" should be a full name`).to.be.greaterThan(2)
+      })
     })
   })
 
