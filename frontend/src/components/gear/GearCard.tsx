@@ -6,8 +6,8 @@
 //   Save / Alert / Compare buttons.
 //
 // The card root carries data-{field} attributes (numeric fields) so sort/filter
-// tests can read raw values. Save/Alert/Compare are non-functional stubs here
-// (Compare is wired in Phase 7).
+// tests can read raw values. Save/Alert are non-functional stubs; Compare toggles
+// the item into the sticky compare bar (state owned by GearListingPage).
 
 import { Link } from 'react-router-dom'
 import type { GearTypeMeta } from '@/config/gearTypes'
@@ -19,9 +19,26 @@ import ClassificationBubble from './ClassificationBubble'
 import IsaApprovedBadge from './IsaApprovedBadge'
 
 const pillBtn =
-  'rounded-full border border-gray-300 px-3 py-1 text-xs text-gray-600 hover:border-gray-400 hover:text-gray-800 transition-colors'
+  'rounded-full border border-gray-300 px-3 py-1 text-xs text-gray-600 hover:border-gray-400 hover:text-gray-800 transition-colors disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:border-gray-300 disabled:hover:text-gray-600'
+// Selected compare button: teal fill, matching the active filter-pill treatment.
+const pillBtnActive =
+  'rounded-full border border-teal-primary bg-teal-primary px-3 py-1 text-xs font-medium text-white transition-colors'
 
-export default function GearCard({ item, meta }: { item: AnyItem; meta: GearTypeMeta }) {
+export default function GearCard({
+  item,
+  meta,
+  compareSelected = false,
+  compareDisabled = false,
+  onToggleCompare,
+}: {
+  item: AnyItem
+  meta: GearTypeMeta
+  compareSelected?: boolean
+  // The 4-item cap is full and this card isn't one of the selected — its button
+  // is disabled so a 5th can't be added.
+  compareDisabled?: boolean
+  onToggleCompare?: (id: number) => void
+}) {
   const { slug, hasISA } = meta
   const price = formatPrice(item.price, item.currency)
   const specs = INLINE_SPECS[slug] ?? []
@@ -95,7 +112,16 @@ export default function GearCard({ item, meta }: { item: AnyItem; meta: GearType
         <div className="flex gap-2 pt-2">
           <button data-cy="btn-save" type="button" className={pillBtn}>Save</button>
           <button data-cy="btn-alert" type="button" className={pillBtn}>Alert</button>
-          <button data-cy="btn-compare" type="button" className={pillBtn}>Compare</button>
+          <button
+            data-cy="btn-compare"
+            type="button"
+            data-active={compareSelected ? 'true' : 'false'}
+            disabled={compareDisabled}
+            onClick={() => onToggleCompare?.(Number(item.id))}
+            className={compareSelected ? pillBtnActive : pillBtn}
+          >
+            Compare
+          </button>
         </div>
       </div>
     </article>

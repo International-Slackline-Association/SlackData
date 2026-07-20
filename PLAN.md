@@ -69,7 +69,7 @@ npx cypress run --spec cypress/e2e/<spec>.cy.ts
 | 4 | Filters | `filters.cy.ts` | ✅ 308/308 (gear_listing/gear_cards still green) |
 | 5 | Search & sort refinement | `search_sort.cy.ts` | ✅ 306/306 |
 | 6 | Detail page | `gear_detail.cy.ts` + `isa_certification`(detail) | ✅ 201/201 + isa 69/69 |
-| 7 | Compare | `compare.cy.ts` | ⬜ |
+| 7 | Compare | `compare.cy.ts` | ✅ 20/20 |
 | 8 | Manufacturers | `manufacturers.cy.ts` | ⬜ |
 | 9 | URL-state sweep | `url_state.cy.ts` | ⬜ |
 | 10 | Full green + cleanup | (whole suite) | ⬜ |
@@ -300,8 +300,42 @@ silently. Likely a corrupt/partial binary download; `npx cypress install --force
 fix but re-downloads ~200MB, so it wasn't run unprompted. What **was** verified: `tsc -b` and a full
 `vite build` pass clean. **The suite must be run before this phase is closed.**
 
-### ⬜ Phase 7 — Compare
-Sticky compare bar (chips, count, max 4, same-type, CTA disabled < 2, clears on gear-type switch) + side-by-side `ComparePage` (columns per item, spec rows, back link, deep-linkable `?ids=`).
+### ✅ Phase 7 — Compare — DONE
+**Result:** `compare.cy.ts` **20/20**. `gear_listing` 192/192 confirmed no-regression; `gear_cards`
+198/1-fail/3-skip — the one failure (`Card classification bubble — Webbings` before-all) reproduces
+**identically on the clean pre-Phase-7 tree**, so it's a pre-existing spec-infra bug, not a
+regression: that describe's `cy.request` hits `http://localhost:8000//webbing/` (double slash from a
+leading-slash `apiPath`) → 404. `npm run build` + `npm run lint` clean.
+
+Built:
+- **`components/gear/CompareBar.tsx`** — sticky bottom bar; renders only at ≥1 selection.
+  `compare-bar-count`, a `compare-bar-item` chip (with `compare-bar-item-name` + `compare-bar-remove`
+  ×) per item, `compare-bar-clear`, and `compare-bar-view-btn` **disabled below 2 items**.
+- **`GearCard`** — the `btn-compare` stub is now live: `data-active`, `disabled` (when the 4-cap is
+  full and this card isn't selected), toggles selection. Teal fill when active.
+- **`GearGrid`** — threads `selectedIds` / `compareFull` / `onToggleCompare` to cards.
+- **`GearListingPage`** — owns the selection: an ordered `selectedIds` list, capped at 4, **cleared
+  on slug change** (the gear-type-switch signal, since the component stays mounted across `:slug`).
+  The CTA navigates to `/${slug}/compare?ids=…`.
+- **`ComparePage`** — the real side-by-side table. Reads `?ids=` (URL is the only source of truth →
+  deep-linkable), fetches the type via `useGearList`, picks ids in URL order. `compare-col[data-id]`
+  per item, `compare-row[data-field]` per SPEC_ROWS entry with a `compare-field-label`, and a
+  `compare-back-link` → `/${slug}`.
+
+Decisions worth remembering:
+- **Selection state is local to the listing page, NOT in the URL.** It only has to survive within one
+  listing page and hand off to the compare page. The handoff is the `?ids=` query param, which is
+  also exactly what makes `ComparePage` deep-linkable on its own — no shared context/store needed,
+  and no lag-a-render URL-read trap (handoff trap #1) because nothing reads selection back from the
+  URL on the listing side.
+- **Clears on gear-type switch via a `prevSlug` ref effect**, mirroring the existing search-box
+  resync — a slug change is the switch signal.
+- **The compare table renders every SPEC_ROWS row** (blank cells show "—") rather than dropping
+  all-empty rows — a comparison reads more honestly with the full field set aligned.
+- Rows **reuse `SPEC_ROWS`** from Phase 6 (that's why Phase 6 came first); labels/formatting can't
+  drift from the detail page.
+- The Detailed-view `btn-compare` in `GearDetailBody` is still a dead stub — that view isn't in
+  `compare.cy.ts`'s scope and isn't mounted by default. Left as-is to keep Phase 7 tight.
 
 ### ⬜ Phase 8 — Manufacturers
 Replace `ManufacturersPage` stub: brand cards, View Gear, per-type gear counts (`data-count-*`), search, graceful country/continent filter, list toggle. `BrandPublic` only serializes `webbings` reliably — read the model. Layout: **DESIGN.md → "Manufacturers Page".**

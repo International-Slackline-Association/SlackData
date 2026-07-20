@@ -7,7 +7,7 @@
 // replaces both.
 
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { getGearType } from '@/config/gearTypes'
 import { useGearList } from '@/hooks/useGearList'
 import { useUrlState } from '@/hooks/useUrlState'
@@ -22,9 +22,12 @@ import StretchFilter from '@/components/gear/StretchFilter'
 import SortDropdown from '@/components/gear/SortDropdown'
 import GearGrid from '@/components/gear/GearGrid'
 import GearDetailedList from '@/components/gear/GearDetailedList'
+import CompareBar from '@/components/gear/CompareBar'
 import NotFoundPage from './NotFoundPage'
 
 type View = 'cards' | 'detailed'
+
+const COMPARE_MAX = 4
 
 function LoadingSkeleton() {
   return (
@@ -63,6 +66,32 @@ export default function GearListingPage() {
   const url = useUrlState()
   const { q, setQ, sort, setSort } = url
   const [view, setView] = useState<View>('cards')
+  const navigate = useNavigate()
+
+  // Compare selection: an ordered list of item ids (order = the columns/chips
+  // order downstream). Lives in local state, capped at COMPARE_MAX. It clears on
+  // a gear-type switch — the component stays mounted across the same :slug route,
+  // so a slug change is the signal (see the effect below). The compare page is
+  // reached by handing these ids off through the ?ids= query param, which is what
+  // makes that page deep-linkable independent of this state.
+  const [selectedIds, setSelectedIds] = useState<number[]>([])
+  const prevCompareSlug = useRef(slug)
+  useEffect(() => {
+    if (prevCompareSlug.current === slug) return
+    prevCompareSlug.current = slug
+    setSelectedIds([])
+  }, [slug])
+
+  const toggleCompare = (id: number) =>
+    setSelectedIds(prev =>
+      prev.includes(id)
+        ? prev.filter(x => x !== id)
+        : prev.length >= COMPARE_MAX
+          ? prev
+          : [...prev, id],
+    )
+  const removeCompare = (id: number) => setSelectedIds(prev => prev.filter(x => x !== id))
+  const clearCompare = () => setSelectedIds([])
 
   // Search box holds LOCAL state and drives filtering directly; the URL is kept
   // in sync for bookmarking but is NOT the input's value. Binding value={q}
@@ -175,6 +204,16 @@ export default function GearListingPage() {
     return sortItems(filtered, sort)
   }, [contextItems, selectedKn, stretchMin, stretchMax, sort])
 
+  // The selected items, in selection order, resolved from the FULL list (not
+  // `visible`) so a chip survives the item being filtered out of the grid.
+  const selectedItems = useMemo(() => {
+    const byId = new Map((items as unknown as AnyItem[]).map(it => [Number(it.id), it]))
+    return selectedIds.map(id => byId.get(id)).filter((it): it is AnyItem => it != null)
+  }, [items, selectedIds])
+
+  const viewComparison = () =>
+    navigate(`/${meta?.slug}/compare?ids=${selectedIds.join(',')}`)
+
   if (!meta) return <NotFoundPage />
 
   if (!available) {
@@ -276,13 +315,26 @@ export default function GearListingPage() {
                   behind display:none would both cost real work and double the
                   element counts gear_cards.cy.ts reads off the grid. */}
               <div className={view === 'detailed' ? 'hidden' : ''}>
-                <GearGrid items={visible} meta={meta} />
+                <GearGrid
+                  items={visible}
+                  meta={meta}
+                  selectedIds={selectedIds}
+                  compareFull={selectedIds.length >= COMPARE_MAX}
+                  onToggleCompare={toggleCompare}
+                />
               </div>
               {view === 'detailed' && <GearDetailedList items={visible} meta={meta} />}
             </>
           )}
         </div>
       </div>
+
+      <CompareBar
+        items={selectedItems}
+        onRemove={removeCompare}
+        onClear={clearCompare}
+        onView={viewComparison}
+      />
     </div>
   )
 }
