@@ -400,9 +400,30 @@ Manufacturer card anatomy (top → bottom):
   noise) but still emitted as `data-count-{slug}="0"` on the card root.
 - **"View Gear"** — teal outline pill, links to the brand's detail page.
 
-**Default ordering.** Manufacturers list by **total gear count, largest first** — with 56 brands,
-the deepest catalogues are the most useful entry point. Name is the tie-break, so the order is
-deterministic rather than dependent on API insertion order.
+**Grid only, with a sort control.** There is no Cards/List view toggle — the directory is a card
+grid, and that toolbar slot holds a **Sort by** dropdown instead. Options:
+
+| Sort | Order | Why |
+|------|-------|-----|
+| **Gear count** (default) | most first | With 56 brands, the deepest catalogues are the most useful entry point. |
+| Name | A→Z | Straight lookup when you know who you're after. |
+| Country | A→Z | Groups the directory geographically. |
+| Year established | oldest first | A founding year is a heritage signal, so ascending reads more naturally. |
+
+**Name is the tie-break in every mode**, so ordering is deterministic rather than dependent on API
+insertion order. Missing values (no country, no founding year) always sort **last**, matching the
+gear listing's null-last rule.
+
+**Active / inactive.** `Brand.active` is backfilled from a reviewed `manufacturers.json`. A brand
+that is no longer trading gets a **red `Inactive` pill in the card's top-LEFT corner** — the same
+slot the gear card uses for its category badge, so the two card types read the same way (top-right
+stays the flag, mirroring the gear card's classification bubble). The whole card is also dimmed, but
+it is *not* hidden: its gear is still real and still worth browsing, it just can't be bought new.
+The card root carries `data-active`.
+
+The word is deliberately **"Inactive"**, not "Defunct" or "Closed": `active` is a plain bool, so it
+marks only the negative case — "still trading" and "never checked" are the same value. A hedged word
+is honest about that, where a final-sounding one would assert a certainty the schema can't hold.
 
 **Country data + flags.** `Brand.country` is the existing `Country` enum (full names —
 `"Germany"`, not `"DE"`); the frontend maps that name to an ISO alpha-2 code to resolve

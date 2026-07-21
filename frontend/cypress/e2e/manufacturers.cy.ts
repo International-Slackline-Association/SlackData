@@ -38,12 +38,26 @@ describe('Manufacturers page', () => {
     cy.get('[data-cy="manufacturers-link"]').should('have.attr', 'data-active', 'true')
   })
 
-  it('renders a List view toggle', () => {
-    cy.get('[data-cy="view-list"]').should('be.visible')
+  // The Cards/List view toggle was removed — the directory is grid-only now, and
+  // that toolbar slot holds the sort control instead.
+  it('does not render a view toggle', () => {
+    cy.get('[data-cy="view-list"]').should('not.exist')
+    cy.get('[data-cy="view-grid"]').should('not.exist')
   })
 
-  it('defaults to List view active', () => {
-    cy.get('[data-cy="view-list"]').should('have.attr', 'data-active', 'true')
+  it('renders a sort control', () => {
+    cy.get('[data-cy="manufacturer-sort"]').should('be.visible')
+  })
+
+  it('defaults the sort to gear quantity', () => {
+    cy.get('[data-cy="manufacturer-sort"]').should('have.value', 'gear')
+  })
+
+  it('offers gear, name, country and year sort options', () => {
+    cy.get('[data-cy="manufacturer-sort"] option').then(($opts) => {
+      const values = $opts.toArray().map(o => (o as HTMLOptionElement).value)
+      expect(values).to.include.members(['gear', 'name', 'country', 'year'])
+    })
   })
 
   // ── Data-driven: card count matches API ───────────────────────────────────
@@ -220,6 +234,99 @@ describe('Manufacturers page', () => {
       const totals = $cards.toArray().map(el => totalOn(Cypress.$(el)))
       expect(totals[0]).to.equal(Math.max(...totals))
       expect(totals[0], 'top brand actually has gear').to.be.greaterThan(0)
+    })
+  })
+
+  const namesInOrder = () =>
+    cy.get('[data-cy="manufacturer-name"]').then($els =>
+      $els.toArray().map(el => el.textContent!.trim()),
+    )
+
+  it('sorting by name orders manufacturers alphabetically', () => {
+    cy.get('[data-cy="manufacturer-sort"]').select('name')
+    namesInOrder().then((names) => {
+      const sorted = [...names].sort((a, b) => a.localeCompare(b))
+      expect(names).to.deep.equal(sorted)
+    })
+  })
+
+  it('sorting by country groups them alphabetically by country', () => {
+    cy.get('[data-cy="manufacturer-sort"]').select('country')
+    cy.get('[data-cy="manufacturers-card"]').then(($cards) => {
+      const countries = $cards.toArray()
+        .map(el => Cypress.$(el).find('[data-cy="manufacturer-flag"]').attr('data-country') ?? '')
+      // Brands with no country sort last, so ignore the trailing blanks.
+      const named = countries.filter(c => c !== '')
+      const sorted = [...named].sort((a, b) => a.localeCompare(b))
+      expect(named).to.deep.equal(sorted)
+    })
+  })
+
+  it('sorting by year established orders oldest first, undated last', () => {
+    cy.get('[data-cy="manufacturer-sort"]').select('year')
+    cy.get('[data-cy="manufacturers-card"]').then(($cards) => {
+      const years = $cards.toArray().map((el) => {
+        const raw = Cypress.$(el).find('[data-cy="manufacturer-founded"]').text().replace(/\D/g, '')
+        return raw ? Number(raw) : null
+      })
+      const dated = years.filter((y): y is number => y != null)
+      expect(dated, 'dated brands are ascending').to.deep.equal([...dated].sort((a, b) => a - b))
+      // Every dated brand must appear before every undated one.
+      const firstUndated = years.indexOf(null)
+      if (firstUndated !== -1) {
+        expect(years.slice(firstUndated).every(y => y == null), 'undated all trail').to.be.true
+      }
+    })
+  })
+
+  it('switching sort back to gear restores the quantity order', () => {
+    cy.get('[data-cy="manufacturer-sort"]').select('name')
+    cy.get('[data-cy="manufacturer-sort"]').select('gear')
+    cy.get('[data-cy="manufacturers-card"]').then(($cards) => {
+      const totals = $cards.toArray().map(el => totalOn(Cypress.$(el)))
+      expect(totals).to.deep.equal([...totals].sort((a, b) => b - a))
+    })
+  })
+
+  // ── Active / inactive status ──────────────────────────────────────────────
+  // Brand.active is backfilled from the reviewed manufacturers.json. It is a
+  // plain bool (never null), so "still trading" and "never checked" are the same
+  // value — the badge therefore marks only the negative case.
+
+  it('every card reflects the API active flag as data-active', () => {
+    cy.fetchAllItems('brand').then((all) => {
+      const byName = new Map(
+        (all as Record<string, unknown>[]).map(b => [b.name as string, b.active as boolean]),
+      )
+      cy.get('[data-cy="manufacturers-card"]').each(($card) => {
+        const name = $card.find('[data-cy="manufacturer-name"]').text().trim()
+        if (!byName.has(name)) return
+        expect($card.attr('data-active'), `data-active for ${name}`)
+          .to.equal(String(byName.get(name)))
+      })
+    })
+  })
+
+  it('an inactive brand shows an Inactive badge; an active one does not', () => {
+    cy.fetchAllItems('brand').then((all) => {
+      const brands = all as Record<string, unknown>[]
+      const dead = brands.find(b => b.active === false)
+      const alive = brands.find(b => b.active === true)
+
+      if (dead) {
+        cy.get('[data-cy="manufacturers-card"]')
+          .contains('[data-cy="manufacturer-name"]', dead.name as string)
+          .closest('[data-cy="manufacturers-card"]')
+          .find('[data-cy="manufacturer-inactive"]')
+          .should('be.visible')
+      }
+      if (alive) {
+        cy.get('[data-cy="manufacturers-card"]')
+          .contains('[data-cy="manufacturer-name"]', alive.name as string)
+          .closest('[data-cy="manufacturers-card"]')
+          .find('[data-cy="manufacturer-inactive"]')
+          .should('not.exist')
+      }
     })
   })
 

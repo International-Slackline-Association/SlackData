@@ -16,17 +16,22 @@
 import { useMemo, useState } from 'react'
 import FilterGroup from '@/components/gear/FilterGroup'
 import ManufacturerCard from '@/components/brand/ManufacturerCard'
-import { useBrandDirectory } from '@/hooks/useBrandDirectory'
+import { useBrandDirectory, type BrandWithCounts } from '@/hooks/useBrandDirectory'
 
-type View = 'list' | 'grid'
+// The directory is grid-only; the toolbar slot the Cards/List toggle used to
+// occupy now holds this sort control.
+type SortKey = 'gear' | 'name' | 'country' | 'year'
 
-const viewBtn = (active: boolean) =>
-  `px-3 py-1.5 text-sm ${active ? 'bg-teal-primary text-white' : 'bg-white text-gray-600 hover:text-gray-900'}`
+const SORT_OPTIONS: { value: SortKey; label: string }[] = [
+  { value: 'gear', label: 'Gear count' },
+  { value: 'name', label: 'Name (A–Z)' },
+  { value: 'country', label: 'Country' },
+  { value: 'year', label: 'Year established' },
+]
 
 export default function ManufacturersPage() {
   const { brands, loading } = useBrandDirectory()
-  // List is the default view (denser, and the directory is mostly name + counts).
-  const [view, setView] = useState<View>('list')
+  const [sort, setSort] = useState<SortKey>('gear')
   const [query, setQuery] = useState('')
   const [countries, setCountries] = useState<string[]>([])
 
@@ -47,11 +52,28 @@ export default function ManufacturersPage() {
       if (countries.length && (b.country == null || !countries.includes(b.country))) return false
       return true
     })
-    // Default order: deepest catalogue first — the most useful entry point into a
-    // directory of 56 brands. Name is the tie-break so the order is stable and
-    // deterministic rather than dependent on API insertion order.
-    return matched.sort((a, b) => b.total - a.total || a.name.localeCompare(b.name))
-  }, [brands, query, countries])
+    // Name is the tie-break in every mode, so the order is stable and
+    // deterministic rather than dependent on API insertion order. Missing values
+    // (no country, no founding year) always sort LAST regardless of direction —
+    // the same null-last rule the gear listing uses.
+    const byName = (a: BrandWithCounts, b: BrandWithCounts) => a.name.localeCompare(b.name)
+    const comparators: Record<SortKey, (a: BrandWithCounts, b: BrandWithCounts) => number> = {
+      // Deepest catalogue first — the most useful entry point into 56 brands.
+      gear: (a, b) => b.total - a.total || byName(a, b),
+      name: byName,
+      country: (a, b) =>
+        (a.country ? 0 : 1) - (b.country ? 0 : 1) ||
+        (a.country ?? '').localeCompare(b.country ?? '') ||
+        byName(a, b),
+      // Oldest first: a founding year is a heritage signal, so ascending reads
+      // more naturally than descending here.
+      year: (a, b) =>
+        (a.year_founded ? 0 : 1) - (b.year_founded ? 0 : 1) ||
+        (a.year_founded ?? 0) - (b.year_founded ?? 0) ||
+        byName(a, b),
+    }
+    return matched.sort(comparators[sort])
+  }, [brands, query, countries, sort])
 
   const toggleCountry = (value: string) =>
     setCountries(prev =>
@@ -107,26 +129,21 @@ export default function ManufacturersPage() {
               {visible.length} {visible.length === 1 ? 'manufacturer' : 'manufacturers'}
             </span>
 
-            <div className="ml-auto flex overflow-hidden rounded-lg border border-gray-300">
-              <button
-                data-cy="view-list"
-                type="button"
-                data-active={view === 'list' ? 'true' : 'false'}
-                onClick={() => setView('list')}
-                className={viewBtn(view === 'list')}
+            <label className="ml-auto flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-gray-500">
+              Sort by
+              <select
+                data-cy="manufacturer-sort"
+                value={sort}
+                onChange={e => setSort(e.target.value as SortKey)}
+                className="rounded-lg border border-gray-300 px-3 py-1.5 text-sm font-normal normal-case tracking-normal text-gray-700 focus:border-teal-primary focus:outline-none"
               >
-                List
-              </button>
-              <button
-                data-cy="view-grid"
-                type="button"
-                data-active={view === 'grid' ? 'true' : 'false'}
-                onClick={() => setView('grid')}
-                className={`border-l border-gray-300 ${viewBtn(view === 'grid')}`}
-              >
-                Grid
-              </button>
-            </div>
+                {SORT_OPTIONS.map(o => (
+                  <option key={o.value} value={o.value}>
+                    {o.label}
+                  </option>
+                ))}
+              </select>
+            </label>
           </div>
 
           {loading ? (
@@ -151,15 +168,9 @@ export default function ManufacturersPage() {
               </button>
             </div>
           ) : (
-            <div
-              className={
-                view === 'grid'
-                  ? 'grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3'
-                  : 'flex flex-col gap-3'
-              }
-            >
+            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
               {visible.map(brand => (
-                <ManufacturerCard key={brand.id} brand={brand} layout={view} />
+                <ManufacturerCard key={brand.id} brand={brand} />
               ))}
             </div>
           )}

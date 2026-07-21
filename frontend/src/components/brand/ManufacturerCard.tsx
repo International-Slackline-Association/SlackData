@@ -10,8 +10,8 @@
 // (explicit 0 when the brand has none): manufacturers.cy.ts reads every one off
 // the root and compares against counts computed from the API.
 //
-// `layout` only changes how the card arranges itself; both variants render the
-// same single element, so the card count never depends on the view mode.
+// The directory is grid-only (the Cards/List toggle was removed in favour of a
+// sort control), so there is a single layout.
 
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
@@ -65,13 +65,7 @@ function Logo({ brandName }: { brandName: string }) {
   )
 }
 
-export default function ManufacturerCard({
-  brand,
-  layout,
-}: {
-  brand: BrandWithCounts
-  layout: 'grid' | 'list'
-}) {
+export default function ManufacturerCard({ brand }: { brand: BrandWithCounts }) {
   const countAttrs = Object.fromEntries(
     GEAR_TYPES.map(t => [`data-count-${t.slug}`, String(brand.counts[t.slug] ?? 0)]),
   )
@@ -79,32 +73,46 @@ export default function ManufacturerCard({
   // Inventory pills show only what the brand actually stocks — a wall of "0"
   // pills is noise. The zeroes still live on the root as data attributes.
   const stocked = GEAR_TYPES.filter(t => (brand.counts[t.slug] ?? 0) > 0)
-  const isList = layout === 'list'
 
   return (
     <article
       data-cy="manufacturers-card"
       {...countAttrs}
-      className={`overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-shadow hover:shadow-md ${
-        isList ? 'flex flex-wrap items-center gap-x-5 gap-y-3 p-4' : 'flex flex-col'
+      // Brand.active is a plain bool, so this is "confirmed inactive" vs
+      // "everything else" — it cannot distinguish verified-trading from never
+      // reviewed, which is why only the negative case is ever labelled. An
+      // inactive card is dimmed rather than hidden: its gear is still real and
+      // still worth browsing, it just can't be bought new.
+      data-active={String(brand.active)}
+      className={`flex flex-col overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-shadow hover:shadow-md ${
+        brand.active ? '' : 'opacity-75'
       }`}
     >
       {/* Image area — the gear card's, with the flag where the classification
-          bubble sits. In list layout it shrinks to a fixed thumbnail so the row
-          stays compact, but keeps the same relative/overlay structure. */}
+          bubble sits. */}
       <div
         data-cy="manufacturer-image-area"
-        className={`relative flex shrink-0 items-center justify-center bg-gray-50 ${
-          isList ? 'h-16 w-24 rounded-lg' : 'h-40'
-        }`}
+        className="relative flex h-40 shrink-0 items-center justify-center bg-gray-50"
       >
+        {/* Top-LEFT: the status pill, in the same slot the gear card uses for its
+            category badge — so the two card types read the same way. Top-RIGHT is
+            the flag, mirroring the gear card's classification bubble. */}
+        {!brand.active && (
+          <span
+            data-cy="manufacturer-inactive"
+            title="No longer trading"
+            className="absolute left-2 top-2 z-10 rounded-full bg-red-600 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-white shadow-sm"
+          >
+            Inactive
+          </span>
+        )}
         <div className="absolute right-2 top-2 z-10">
           <CountryFlag country={brand.country} />
         </div>
         <Logo brandName={brand.name} />
       </div>
 
-      <div className={isList ? 'min-w-[10rem] flex-1' : 'flex flex-1 flex-col gap-1 p-4'}>
+      <div className="flex flex-1 flex-col gap-1 p-4">
         <div className="flex flex-wrap items-center gap-2">
           <h2 data-cy="manufacturer-name" className="font-bold text-gray-900">
             {brand.name}
@@ -126,10 +134,7 @@ export default function ManufacturerCard({
           </div>
         )}
 
-        <div
-          data-cy="manufacturer-gear-counts"
-          className={`flex flex-wrap gap-1.5 ${isList ? 'mt-2' : 'mt-2'}`}
-        >
+        <div data-cy="manufacturer-gear-counts" className="mt-2 flex flex-wrap gap-1.5">
           {stocked.length === 0 ? (
             <span className="text-xs text-gray-400">No gear listed</span>
           ) : (
@@ -146,28 +151,16 @@ export default function ManufacturerCard({
           )}
         </div>
 
-        {!isList && <div className="flex-1" />}
+        <div className="flex-1" />
 
-        {!isList && (
-          <Link
-            data-cy="btn-view-gear"
-            to={`/manufacturers/${brand.id}`}
-            className="mt-3 rounded-full border border-teal-primary px-4 py-1.5 text-center text-xs font-medium text-teal-primary transition-colors hover:bg-teal-light"
-          >
-            View Gear
-          </Link>
-        )}
-      </div>
-
-      {isList && (
         <Link
           data-cy="btn-view-gear"
           to={`/manufacturers/${brand.id}`}
-          className="shrink-0 rounded-full border border-teal-primary px-4 py-1.5 text-center text-xs font-medium text-teal-primary transition-colors hover:bg-teal-light"
+          className="mt-3 rounded-full border border-teal-primary px-4 py-1.5 text-center text-xs font-medium text-teal-primary transition-colors hover:bg-teal-light"
         >
           View Gear
         </Link>
-      )}
+      </div>
     </article>
   )
 }
