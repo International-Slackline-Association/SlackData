@@ -338,19 +338,27 @@ Decisions worth remembering:
   `compare.cy.ts`'s scope and isn't mounted by default. Left as-is to keep Phase 7 tight.
 
 ### ✅ Phase 8 — Manufacturers — DONE
-**Result:** `manufacturers.cy.ts` **18/18 on the first run, no spec edits** (second time a phase has
-managed that, after Phase 6). `navigation` 13/13 and `compare` 20/20 confirmed no-regression;
+**Result:** `manufacturers.cy.ts` **36/36**. (It was 18/18 on the first run with no spec edits —
+the second phase to manage that, after Phase 6 — and grew to 36 across the follow-up work below.)
+`navigation` 13/13, `compare` 20/20, `gear_listing` 192/192 confirmed no-regression; pytest 155;
 build + lint clean.
 
 Built:
 - **`hooks/useBrandDirectory.ts`** — fetches all brands **plus all 8 gear lists**, and derives
   brand→per-type counts by grouping each gear endpoint on `brand_name`. Shared by both new pages.
-- **`components/brand/ManufacturerCard.tsx`** — name, slackline-focused badge, country/year line
-  (usually empty), gear-inventory pills, View Gear. Root carries `data-count-{slug}` for all eight
-  types including zeroes.
-- **`pages/ManufacturersPage.tsx`** — search + data-driven country filter + cards, List/Grid toggle.
+- **`components/brand/ManufacturerCard.tsx`** — the gear card's twin: logo image area with the
+  Inactive pill top-left and the country flag top-right, then name, slackline badge, `Est. YYYY`,
+  gear-inventory pills, View Gear. Root carries `data-count-{slug}` for all eight types (zeroes
+  included) plus `data-active`.
+- **`pages/ManufacturersPage.tsx`** — search + data-driven country filter + card grid, with a
+  **Sort by** control (gear count default, name, country, year established). Grid-only; the
+  Cards/List toggle was removed.
 - **`pages/BrandDetailPage.tsx`** (`/manufacturers/:id`, new route) — the View Gear destination: one
   `GearGrid` section per gear type the brand stocks.
+
+**Follow-up landed after the phase closed** (commits `62570d5`, `f059888`): country is now stored
+(see below), manufacturer logos + country flags are vendored, the reviewed active/inactive status
+is applied, and the view toggle became the sort control.
 
 Decisions worth remembering:
 - **Gear counts MUST be computed client-side.** `BrandPublic` declares only `webbings: list[str]`
@@ -358,14 +366,20 @@ Decisions worth remembering:
   the response schema, so the API genuinely cannot answer "how many weblocks does this brand have".
   Hence the 8-endpoint fetch. This is the same conclusion `types/brand.ts` had already written down
   in Phase 1; schema-first paid off again.
-- **The country filter is data-driven and therefore ABSENT today.** Every one of the 56 brands has
-  `country: null` (`get_brand()` only ever sets a name), so no pills exist and the group doesn't
-  render — which is exactly what both country tests assert. Don't hardcode a country list, and note
-  there is **no `continent` field anywhere in the schema** (the spec's own comment records that an
-  earlier version of the test invented one).
-- **Grid and List render the same card elements**, with only the container class changing. Mounting
-  two variants would double `manufacturers-card` counts — the trap Phase 6.5 hit with the detailed
-  list. **List is the default view** (the spec asserts `view-list` is active on load).
+- **The country filter is data-driven — and now POPULATED.** It was absent at first because every
+  brand had `country: null` (`get_brand()` only sets a name); the `load_manufacturers.py` enrichment
+  pass has since backfilled all 56, so the group renders ~20 real pills and both country tests now
+  exercise the populated branch. The filter must stay data-driven either way: never hardcode a
+  country list, and note there is **no `continent` field anywhere in the schema** (the spec's own
+  comment records that an earlier version of the test invented one).
+- **The directory is grid-only.** The Cards/List toggle was removed and its toolbar slot now holds
+  the sort control (gear count default, name, country, year established; name tie-breaks, missing
+  values last). The two `view-list` tests were retired and replaced with sort tests — a spec now
+  asserts the toggle does **not** exist.
+- **`slackline_focused` is `true` for all 56 brands**, so its teal badge currently renders on every
+  card and discriminates nothing. Left in place because the field is real and will matter once a
+  non-focused brand exists, but treat it as decoration, not signal — and see DESIGN.md's note that
+  the general-outdoor brands (Petzl, CAMP, Mammut) look mis-flagged upstream.
 - **Manufacturer search uses plain lowercase substring matching, not `utils/search.normalize()`.**
   The spec asserts every visible card's *raw* name contains the *raw* typed term, so the gear
   listing's punctuation/accent-folding matcher would surface cards that fail that assertion.

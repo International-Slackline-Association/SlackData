@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 SlackData is a **better, open-source replacement for [SlackDB](https://slackdb.com/)** — a community database of slackline gear. Goals vs SlackDB: stronger/simpler backend, modern UX design, and an account system (manufacturer accounts with edit access, general user accounts with suggest access, admin accounts for approvals).
 
-Current state: backend only (FastAPI + SQLModel + SQLite), no frontend, no hosted deployment, no test suite, no CI.
+Current state: FastAPI + SQLModel + SQLite backend, plus a React/TypeScript/Vite frontend that is well underway (Phases 1–8 of [PLAN.md](PLAN.md) are done: listing, filters, search/sort, detail, compare, manufacturers). There is a pytest suite (155 tests) and a Cypress e2e suite, but **no CI and no hosted deployment**.
 
 **Stack:** Python ≥3.10 backend (FastAPI, SQLModel, SQLite) + React/TypeScript/Vite frontend (in progress).
 
@@ -77,7 +77,17 @@ fastapi dev main.py            # → http://127.0.0.1:8000  (/docs for interacti
 ruff check .
 ```
 
-There is **no test suite** and no CI. Verify changes by running the server and exercising endpoints via `/docs`. The README's install snippet says `uv venv` then `source venv/bin/activate`, but `uv` actually creates `.venv` — use `source .venv/bin/activate` for the uv path.
+There **is** a test suite now (there was not when this file was first written), but still **no CI** — nothing runs automatically, so run these yourself:
+
+```bash
+python -m pytest tests/ -q          # 155 backend tests (11 files, all gear types + loaders)
+cd frontend && npm run build        # tsc -b + vite build
+cd frontend && npm run lint         # oxlint
+# Cypress e2e (10 specs) needs BOTH servers up — see PLAN.md → "Running things"
+cd frontend && npx cypress run --spec cypress/e2e/<spec>.cy.ts
+```
+
+The README's install snippet says `uv venv` then `source venv/bin/activate`, but `uv` actually creates `.venv` — use `source .venv/bin/activate` for the uv path.
 
 ## Architecture
 
