@@ -397,11 +397,12 @@ Manufacturer card anatomy (top → bottom):
   the name is redundant next to the flag and the row has no space for it. The country name goes on
   the flag's `title`/`alt` so it stays available to hover and to screen readers.
 - **Brand name** — bold, ~16px, the card's primary line.
-- **Slackline badge** — small teal pill when `slackline_focused` is true. ⚠️ **Currently
-  non-discriminating: all 56 brands are `true`, so this renders on every card and conveys nothing.**
-  It only earns its space once a non-slackline-focused brand exists (the general-outdoor names —
-  Petzl, CAMP, Mammut — arguably already qualify and are mis-flagged upstream). Same principle as
-  omitting zero-count gear pills: a badge every row carries is noise.
+- **Slackline badge** — small teal pill when `slackline_focused` is true. The flag is corrected
+  from the source (SlackDB marks nearly everyone slackline-oriented): dedicated slackline companies
+  are true, general climbing / rope-access / rigging brands that merely make a part slackliners use
+  (Petzl, CAMP, Mammut, Edelrid, Kong, …) are false. So the badge discriminates — 48 of 56 brands
+  in the DB carry it, the other 8 don't. See `scripts/apply_slackline_focus.py` for the exception
+  list and the reason attached to each.
 - **Year founded** — small gray (`Est. 2009`), beneath the name; omitted when null (37 of 56).
 - **Gear inventory row** — small gray pills, one per type the brand actually stocks:
   `Webbings: 12`, `Weblocks: 4`, … Types with zero are omitted from the pills (a wall of zeroes is

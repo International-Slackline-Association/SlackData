@@ -376,10 +376,11 @@ Decisions worth remembering:
   the sort control (gear count default, name, country, year established; name tie-breaks, missing
   values last). The two `view-list` tests were retired and replaced with sort tests — a spec now
   asserts the toggle does **not** exist.
-- **`slackline_focused` is `true` for all 56 brands**, so its teal badge currently renders on every
-  card and discriminates nothing. Left in place because the field is real and will matter once a
-  non-focused brand exists, but treat it as decoration, not signal — and see DESIGN.md's note that
-  the general-outdoor brands (Petzl, CAMP, Mammut) look mis-flagged upstream.
+- **`slackline_focused` is corrected from the source** (`scripts/apply_slackline_focus.py`): SlackDB
+  flags nearly everyone slackline-oriented, so imported as-is the badge rendered on all 56 cards and
+  meant nothing. General climbing / rope-access / rigging brands that only make a part slackliners
+  use (Petzl, CAMP, Mammut, Edelrid, Kong, Singing Rock, …) are now `false` — 48 of 56 carry the
+  badge, 8 don't. The badge now discriminates and is covered by two spec tests.
 - **Manufacturer search uses plain lowercase substring matching, not `utils/search.normalize()`.**
   The spec asserts every visible card's *raw* name contains the *raw* typed term, so the gear
   listing's punctuation/accent-folding matcher would surface cards that fail that assertion.

@@ -288,6 +288,40 @@ describe('Manufacturers page', () => {
     })
   })
 
+  // ── Slackline-focused badge ───────────────────────────────────────────────
+  // Brand.slackline_focused is corrected from the source: general climbing /
+  // rigging brands (Petzl, CAMP, Mammut, …) are false, dedicated slackline
+  // companies are true. The badge renders iff the flag is true, so — unlike the
+  // Inactive pill — it must NOT appear on every card.
+
+  it('shows the slackline badge exactly for the brands the API flags true', () => {
+    cy.fetchAllItems('brand').then((all) => {
+      const focused = new Map(
+        (all as Record<string, unknown>[]).map(b => [b.name as string, b.slackline_focused as boolean]),
+      )
+      cy.get('[data-cy="manufacturers-card"]').each(($card) => {
+        const name = $card.find('[data-cy="manufacturer-name"]').text().trim()
+        if (!focused.has(name)) return
+        const shown = $card.find('[data-cy="slackline-focused-badge"]').length === 1
+        expect(shown, `badge for ${name}`).to.equal(focused.get(name))
+      })
+    })
+  })
+
+  it('the badge discriminates — it is not on every card', () => {
+    cy.fetchAllItems('brand').then((all) => {
+      const brands = all as Record<string, unknown>[]
+      // Guard the assertion's premise: only meaningful if the data actually has
+      // a non-focused brand to hide the badge from.
+      if (!brands.some(b => b.slackline_focused === false)) return
+      cy.get('[data-cy="slackline-focused-badge"]').then(($badges) => {
+        cy.get('[data-cy="manufacturers-card"]').then(($cards) => {
+          expect($badges.length).to.be.lessThan($cards.length)
+        })
+      })
+    })
+  })
+
   // ── Active / inactive status ──────────────────────────────────────────────
   // Brand.active is backfilled from the reviewed manufacturers.json. It is a
   // plain bool (never null), so "still trading" and "never checked" are the same

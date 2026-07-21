@@ -319,7 +319,7 @@
       "item_count": 1,
       "country": "CZ",
       "year_established": null,
-      "slackline_oriented": null,
+      "slackline_oriented": false,
       "website": "http://www.singingrock.com",
       "facebook": "https://www.facebook.com/singingrock.page",
       "active": true
@@ -352,7 +352,7 @@
       "item_count": 10,
       "country": "FR",
       "year_established": null,
-      "slackline_oriented": null,
+      "slackline_oriented": false,
       "website": "http://www.petzl.com/en?l=INT",
       "facebook": "https://www.facebook.com/Petzl",
       "active": true
@@ -363,7 +363,7 @@
       "item_count": 4,
       "country": "DE",
       "year_established": null,
-      "slackline_oriented": null,
+      "slackline_oriented": false,
       "website": "http://www.edelrid.de/en",
       "facebook": "https://www.facebook.com/EDELRIDClimbing",
       "active": true
@@ -374,7 +374,7 @@
       "item_count": 0,
       "country": "US",
       "year_established": null,
-      "slackline_oriented": null,
+      "slackline_oriented": false,
       "website": "http://www.rockexotica.com",
       "facebook": "https://www.facebook.com/Rock-Exotica-147747201953857",
       "active": true
@@ -385,7 +385,7 @@
       "item_count": 1,
       "country": "US",
       "year_established": 1967,
-      "slackline_oriented": null,
+      "slackline_oriented": false,
       "website": "http://smcgear.com",
       "facebook": "https://www.facebook.com/mySMCgear",
       "active": true
@@ -396,7 +396,7 @@
       "item_count": 2,
       "country": "IT",
       "year_established": null,
-      "slackline_oriented": null,
+      "slackline_oriented": false,
       "website": "http://www.camp.it",
       "facebook": "https://www.facebook.com/camp1889",
       "active": true
@@ -407,7 +407,7 @@
       "item_count": 5,
       "country": "IT",
       "year_established": null,
-      "slackline_oriented": null,
+      "slackline_oriented": false,
       "website": "http://www.climbingtechnology.com",
       "facebook": "https://www.facebook.com/ClimbingTechnologyItaly",
       "active": false
@@ -418,7 +418,7 @@
       "item_count": 6,
       "country": "NL",
       "year_established": null,
-      "slackline_oriented": null,
+      "slackline_oriented": false,
       "website": "http://www.vanbeest.com",
       "facebook": "https://www.facebook.com/VanBeestInternational",
       "active": true
@@ -429,7 +429,7 @@
       "item_count": 0,
       "country": "US",
       "year_established": null,
-      "slackline_oriented": null,
+      "slackline_oriented": false,
       "website": null,
       "facebook": "https://www.facebook.com/OmegaPacific",
       "active": null
@@ -440,7 +440,7 @@
       "item_count": 0,
       "country": "CZ",
       "year_established": null,
-      "slackline_oriented": null,
+      "slackline_oriented": false,
       "website": "http://www.mytendon.com",
       "facebook": "https://www.facebook.com/mytendon",
       "active": true
@@ -528,7 +528,7 @@
       "item_count": 2,
       "country": "GB",
       "year_established": null,
-      "slackline_oriented": null,
+      "slackline_oriented": false,
       "website": "http://www.iscwales.com",
       "facebook": "https://www.facebook.com/iscwalesuk",
       "active": true
@@ -539,7 +539,7 @@
       "item_count": 1,
       "country": "US",
       "year_established": null,
-      "slackline_oriented": null,
+      "slackline_oriented": false,
       "website": "http://www.trango.com",
       "facebook": "http://www.facebook.com/pages/Trango-Extraordinary-Climbing/158158420882901",
       "active": true
@@ -550,7 +550,7 @@
       "item_count": 1,
       "country": "CH",
       "year_established": null,
-      "slackline_oriented": null,
+      "slackline_oriented": false,
       "website": "http://www.episwiss.com",
       "facebook": "https://www.facebook.com/Episwiss",
       "active": true
@@ -583,7 +583,7 @@
       "item_count": 1,
       "country": "IT",
       "year_established": null,
-      "slackline_oriented": null,
+      "slackline_oriented": false,
       "website": "http://www.kong.it",
       "facebook": "https://www.facebook.com/kongitaly",
       "active": true
@@ -605,7 +605,7 @@
       "item_count": 1,
       "country": "US",
       "year_established": null,
-      "slackline_oriented": null,
+      "slackline_oriented": false,
       "website": "http://www.fusionclimb.com",
       "facebook": "https://www.facebook.com/FusionClimbUSA",
       "active": true
@@ -627,7 +627,7 @@
       "item_count": 1,
       "country": "US",
       "year_established": null,
-      "slackline_oriented": null,
+      "slackline_oriented": false,
       "website": "http://www.cmcrescue.com/",
       "facebook": "https://www.facebook.com/cmcrescue",
       "active": true
@@ -638,7 +638,7 @@
       "item_count": 1,
       "country": "CH",
       "year_established": null,
-      "slackline_oriented": null,
+      "slackline_oriented": false,
       "website": "https://www.mammut.com/",
       "facebook": "https://www.facebook.com/Mammut/",
       "active": true
@@ -649,7 +649,7 @@
       "item_count": 1,
       "country": "RU",
       "year_established": null,
-      "slackline_oriented": null,
+      "slackline_oriented": false,
       "website": "https://krok.biz",
       "facebook": "https://www.facebook.com/tmkrok",
       "active": true
@@ -836,7 +836,7 @@
       "item_count": 1,
       "country": "US",
       "year_established": null,
-      "slackline_oriented": null,
+      "slackline_oriented": true,
       "website": null,
       "facebook": null,
       "active": false
@@ -847,7 +847,7 @@
       "item_count": 4,
       "country": "US",
       "year_established": null,
-      "slackline_oriented": null,
+      "slackline_oriented": true,
       "website": "https://www.riggingventures.com",
       "facebook": null,
       "tiktok": "https://www.tiktok.com/@riggingventures",
