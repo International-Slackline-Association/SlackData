@@ -323,7 +323,18 @@ export default function GearListingPage() {
                   onToggleCompare={toggleCompare}
                 />
               </div>
-              {view === 'detailed' && <GearDetailedList items={visible} meta={meta} />}
+              {/* Same compare wiring as the grid above — selection is owned here,
+                  so it is shared by both views and survives switching between
+                  them. */}
+              {view === 'detailed' && (
+                <GearDetailedList
+                  items={visible}
+                  meta={meta}
+                  selectedIds={selectedIds}
+                  compareFull={selectedIds.length >= COMPARE_MAX}
+                  onToggleCompare={toggleCompare}
+                />
+              )}
             </>
           )}
         </div>

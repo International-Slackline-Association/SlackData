@@ -17,26 +17,41 @@ import GearDetailBody from './GearDetailBody'
 export default function GearDetailedList({
   items,
   meta,
+  selectedIds = [],
+  compareFull = false,
+  onToggleCompare,
 }: {
   items: AnyItem[]
   meta: GearTypeMeta
+  selectedIds?: number[]
+  compareFull?: boolean
+  onToggleCompare?: (id: number) => void
 }) {
   return (
     <div data-cy="gear-detailed-list" className="flex flex-col gap-5">
-      {items.map(item => (
-        <article
-          data-cy="gear-detailed-row"
-          key={String(item.id)}
-          className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm transition-shadow hover:shadow-md"
-        >
-          <GearDetailBody
-            item={item}
-            meta={meta}
-            nameHref={`/${meta.slug}/${item.id}`}
-            showActions
-          />
-        </article>
-      ))}
+      {items.map(item => {
+        // Same derivation as GearGrid: when the selection is full, only the
+        // buttons that aren't themselves selected go disabled — so a selected
+        // panel can always be toggled back off.
+        const selected = selectedIds.includes(Number(item.id))
+        return (
+          <article
+            data-cy="gear-detailed-row"
+            key={String(item.id)}
+            className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm transition-shadow hover:shadow-md"
+          >
+            <GearDetailBody
+              item={item}
+              meta={meta}
+              nameHref={`/${meta.slug}/${item.id}`}
+              showActions
+              compareSelected={selected}
+              compareDisabled={compareFull && !selected}
+              onToggleCompare={onToggleCompare}
+            />
+          </article>
+        )
+      })}
     </div>
   )
 }

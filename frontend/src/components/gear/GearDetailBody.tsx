@@ -9,6 +9,13 @@
 //                  so it renders a plain <h1>)
 //   showActions  — Save / Alert / Compare pill row, listing panels only
 //
+// The Compare pill is wired exactly as GearCard's is, from the same three props
+// (compareSelected / compareDisabled / onToggleCompare) threaded down by the
+// listing page. Both views therefore drive one selection list owned above them,
+// so a pick survives a Cards ⇄ Detailed switch. The standalone detail page
+// passes none of them and never sets showActions, so the row doesn't render
+// there at all.
+//
 // Layout: image left, everything identifying/spec'd right — so the spec grid
 // wraps around the title rather than sitting in a separate block far below it.
 // The ISA banner and certification block stay INSIDE the right column, above
@@ -25,19 +32,30 @@ import ClassificationBubble from './ClassificationBubble'
 import IsaApprovedBadge from './IsaApprovedBadge'
 import SpecTable from './SpecTable'
 
+// Kept byte-identical to GearCard's pair so the same button can't look like two
+// different controls depending on which view you're in.
 const pillBtn =
-  'rounded-full border border-gray-300 px-3 py-1 text-xs text-gray-600 hover:border-gray-400 hover:text-gray-800 transition-colors'
+  'rounded-full border border-gray-300 px-3 py-1 text-xs text-gray-600 hover:border-gray-400 hover:text-gray-800 transition-colors disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:border-gray-300 disabled:hover:text-gray-600'
+// Selected compare button: teal fill, matching the active filter-pill treatment.
+const pillBtnActive =
+  'rounded-full border border-teal-primary bg-teal-primary px-3 py-1 text-xs font-medium text-white transition-colors'
 
 export default function GearDetailBody({
   item,
   meta,
   nameHref,
   showActions = false,
+  compareSelected = false,
+  compareDisabled = false,
+  onToggleCompare,
 }: {
   item: AnyItem
   meta: GearTypeMeta
   nameHref?: string
   showActions?: boolean
+  compareSelected?: boolean
+  compareDisabled?: boolean
+  onToggleCompare?: (id: number) => void
 }) {
   const price = formatPrice(item.price, item.currency)
   const priceUnit = item.price_unit ? ` per ${String(item.price_unit)}` : ''
@@ -137,7 +155,16 @@ export default function GearDetailBody({
           <div className="flex gap-2">
             <button data-cy="btn-save" type="button" className={pillBtn}>Save</button>
             <button data-cy="btn-alert" type="button" className={pillBtn}>Alert</button>
-            <button data-cy="btn-compare" type="button" className={pillBtn}>Compare</button>
+            <button
+              data-cy="btn-compare"
+              type="button"
+              data-active={compareSelected ? 'true' : 'false'}
+              disabled={compareDisabled}
+              onClick={() => onToggleCompare?.(Number(item.id))}
+              className={compareSelected ? pillBtnActive : pillBtn}
+            >
+              Compare
+            </button>
           </div>
         )}
       </div>

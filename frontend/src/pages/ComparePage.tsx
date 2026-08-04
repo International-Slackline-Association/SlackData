@@ -4,8 +4,18 @@
 // ids, preserving their URL order for the columns.
 //
 // Rows reuse SPEC_ROWS (Phase 6) so the compared fields, labels and formatting
-// match the detail page exactly. Every configured row renders — a blank cell
-// (·"—") reads more honestly across a comparison than a dropped row would.
+// match the detail page exactly. A row whose value is blank for the *compared*
+// items still renders — a "—" cell reads more honestly across a comparison than
+// a dropped row would (it says "this one doesn't state it", which is a real
+// difference between two products).
+//
+// Dead rows are the exception. If NO item of this gear type carries a value for
+// a field — anywhere in the dataset, not just the compared columns — the row is
+// pure noise: an all-"—" stripe that can never distinguish anything. Those are
+// dropped. This applies to every gear type, so a spec row can be configured
+// ahead of the data landing and simply stays invisible until it does. `colors`
+// is the current case: on the model for webbings/weblocks/rollers, but null for
+// all 367 rows because no seed JSON carries the key.
 
 import { useMemo } from 'react'
 import { Link, useParams, useSearchParams } from 'react-router-dom'
@@ -13,6 +23,7 @@ import { getGearType } from '@/config/gearTypes'
 import { useGearList } from '@/hooks/useGearList'
 import { SPEC_ROWS } from '@/config/specRows'
 import type { AnyItem } from '@/utils/format'
+import type { GearSlug } from '@/types'
 import NotFoundPage from './NotFoundPage'
 
 export default function ComparePage() {
@@ -36,9 +47,17 @@ export default function ComparePage() {
     return ids.map(id => byId.get(id)).filter((it): it is AnyItem => it != null)
   }, [items, ids])
 
-  if (!meta) return <NotFoundPage />
+  // Rows that at least one item in the whole dataset populates. Keyed off
+  // `items`, not `columns`, so which rows exist is a property of the gear type
+  // and doesn't shift as you add or remove compare picks.
+  const rows = useMemo(() => {
+    const all = SPEC_ROWS[meta?.slug as GearSlug] ?? []
+    const data = items as unknown as AnyItem[]
+    if (data.length === 0) return all
+    return all.filter(row => data.some(it => row.value(it) !== ''))
+  }, [meta?.slug, items])
 
-  const rows = SPEC_ROWS[meta.slug] ?? []
+  if (!meta) return <NotFoundPage />
 
   return (
     <div data-cy="compare-page">
