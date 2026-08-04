@@ -378,14 +378,73 @@ The letter is **dark ink `#1F2937` on every fill**: white text fails WCAG AA on 
 
 Card grid (3 columns, same layout as gear listing).
 
-Manufacturer card anatomy:
-- Brand name bold, ~16px
-- Small slackline-icon badge if slackline-focused flag is true
-- Country flag or continent label (small gray)
-- Year founded (small gray)
-- Gear inventory row: small pills showing counts — `Webbings: 12`, `Weblocks: 4`, etc.
-- Star rating or review count if available
-- "View Gear" button — teal outline pill
+**The manufacturer card is the gear card's twin.** It reuses the gear card's shell verbatim —
+same radius, border, shadow, hover lift, and the same `h-40` centered image area on a
+`bg-gray-50` field with absolutely-positioned overlays in **both top corners**. What changes is
+only what fills those slots: the product shot becomes the **manufacturer logo**, the gear card's
+top-left category badge becomes the **Inactive pill**, and its top-right classification/ISA
+overlay becomes a single **country flag**.
+
+Manufacturer card anatomy (top → bottom):
+- **Logo image area** — the brand's logo, centered and letterboxed (`object-contain`) in the same
+  `h-40` gray field the gear cards use. Brands with no logo show a muted `No logo` placeholder
+  (mirroring the gear card's `No image`) rather than collapsing the area, so every card in a row
+  is the same height.
+- **Inactive pill, top-left overlay** — red, uppercase, shown only when `active` is false. See
+  "Active / inactive" below.
+- **Country flag, top-right overlay** — a small (~24×16) rounded flag chip with a hairline border,
+  in the exact slot the gear card's classification bubble occupies. Flag only, no country label:
+  the name is redundant next to the flag and the row has no space for it. The country name goes on
+  the flag's `title`/`alt` so it stays available to hover and to screen readers.
+- **Brand name** — bold, ~16px, the card's primary line.
+- **Slackline badge** — small teal pill when `slackline_focused` is true. The flag is corrected
+  from the source (SlackDB marks nearly everyone slackline-oriented): dedicated slackline companies
+  are true, general climbing / rope-access / rigging brands that merely make a part slackliners use
+  (Petzl, CAMP, Mammut, Edelrid, Kong, …) are false. So the badge discriminates — 48 of 56 brands
+  in the DB carry it, the other 8 don't. See `scripts/apply_slackline_focus.py` for the exception
+  list and the reason attached to each.
+- **Year founded** — small gray (`Est. 2009`), beneath the name; omitted when null (37 of 56).
+- **Gear inventory row** — small gray pills, one per type the brand actually stocks:
+  `Webbings: 12`, `Weblocks: 4`, … Types with zero are omitted from the pills (a wall of zeroes is
+  noise) but still emitted as `data-count-{slug}="0"` on the card root.
+- **"View Gear"** — teal outline pill, links to the brand's detail page.
+
+**Grid only, with a sort control.** There is no Cards/List view toggle — the directory is a card
+grid, and that toolbar slot holds a **Sort by** dropdown instead. Options:
+
+| Sort | Order | Why |
+|------|-------|-----|
+| **Gear count** (default) | most first | With 56 brands, the deepest catalogues are the most useful entry point. |
+| Name | A→Z | Straight lookup when you know who you're after. |
+| Country | A→Z | Groups the directory geographically. |
+| Year established | oldest first | A founding year is a heritage signal, so ascending reads more naturally. |
+
+**Name is the tie-break in every mode**, so ordering is deterministic rather than dependent on API
+insertion order. Missing values (no country, no founding year) always sort **last**, matching the
+gear listing's null-last rule.
+
+**Active / inactive.** `Brand.active` is backfilled from a reviewed `manufacturers.json`. A brand
+that is no longer trading gets a **red `Inactive` pill in the card's top-LEFT corner** — the same
+slot the gear card uses for its category badge, so the two card types read the same way (top-right
+stays the flag, mirroring the gear card's classification bubble). The whole card is also dimmed, but
+it is *not* hidden: its gear is still real and still worth browsing, it just can't be bought new.
+The card root carries `data-active`.
+
+The word is deliberately **"Inactive"**, not "Defunct" or "Closed": `active` is a plain bool, so it
+marks only the negative case — "still trading" and "never checked" are the same value. A hedged word
+is honest about that, where a final-sounding one would assert a certainty the schema can't hold.
+
+**Country data + flags.** `Brand.country` is the existing `Country` enum (full names —
+`"Germany"`, not `"DE"`); the frontend maps that name to an ISO alpha-2 code to resolve
+`/flags/{cc}.png`. Flag artwork is vendored from **flagcdn.com** (Flagpedia's public-domain set)
+into `frontend/public/flags/`, not hotlinked — the page must not depend on a third-party CDN at
+runtime. Logos are vendored likewise into `frontend/public/manufacturer-images/`, keyed by our
+**canonical** brand slug so lookup is a pure function of the brand name.
+
+Cards with no country render **no flag at all** — never a placeholder or "unknown" flag. The
+country filter group is likewise data-driven: it renders only the country values actually present,
+and disappears entirely when none are (see the note in `manufacturers.cy.ts`; there is no
+`continent` field anywhere in the schema).
 
 ---
 

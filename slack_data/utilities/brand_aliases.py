@@ -15,7 +15,12 @@ BRAND_ALIASES: dict[str, str] = {
     "Equilibrium": "Equilibrium Slacklines (EQB)",
     "slackliner.de": "Slackliner.de",
     "SlackMountain": "Slack Mountain",
-    "slackPro": "Slack Pro!",
+    # Slack Pro! rebranded to lineGrip. The gear seed files still carry the old
+    # name, so both spellings must map to the new one directly — canonical_brand()
+    # is a single dict lookup and does NOT chain, so pointing "slackPro" at
+    # "Slack Pro!" would leave it stranded on the retired name.
+    "slackPro": "lineGrip (formerly Slack Pro!)",
+    "Slack Pro!": "lineGrip (formerly Slack Pro!)",
     "Spider slacklines": "Spider Slacklines",
     "yogaslackers": "Yoga Slackers",
 }

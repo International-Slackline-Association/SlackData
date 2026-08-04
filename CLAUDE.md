@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 SlackData is a **better, open-source replacement for [SlackDB](https://slackdb.com/)** — a community database of slackline gear. Goals vs SlackDB: stronger/simpler backend, modern UX design, and an account system (manufacturer accounts with edit access, general user accounts with suggest access, admin accounts for approvals).
 
-Current state: backend only (FastAPI + SQLModel + SQLite), no frontend, no hosted deployment, no test suite, no CI.
+Current state: FastAPI + SQLModel + SQLite backend, plus a React/TypeScript/Vite frontend that is well underway (Phases 1–8 of [PLAN.md](PLAN.md) are done: listing, filters, search/sort, detail, compare, manufacturers). There is a pytest suite (155 tests) and a Cypress e2e suite, but **no CI and no hosted deployment**.
 
 **Stack:** Python ≥3.10 backend (FastAPI, SQLModel, SQLite) + React/TypeScript/Vite frontend (in progress).
 
@@ -77,7 +77,17 @@ fastapi dev main.py            # → http://127.0.0.1:8000  (/docs for interacti
 ruff check .
 ```
 
-There is **no test suite** and no CI. Verify changes by running the server and exercising endpoints via `/docs`. The README's install snippet says `uv venv` then `source venv/bin/activate`, but `uv` actually creates `.venv` — use `source .venv/bin/activate` for the uv path.
+There **is** a test suite now (there was not when this file was first written), but still **no CI** — nothing runs automatically, so run these yourself:
+
+```bash
+python -m pytest tests/ -q          # 155 backend tests (11 files, all gear types + loaders)
+cd frontend && npm run build        # tsc -b + vite build
+cd frontend && npm run lint         # oxlint
+# Cypress e2e (10 specs) needs BOTH servers up — see PLAN.md → "Running things"
+cd frontend && npx cypress run --spec cypress/e2e/<spec>.cy.ts
+```
+
+The README's install snippet says `uv venv` then `source venv/bin/activate`, but `uv` actually creates `.venv` — use `source .venv/bin/activate` for the uv path.
 
 ## Architecture
 
@@ -195,7 +205,8 @@ Before writing any of the above, open the relevant `models/<type>.py` and `utili
 ## Conventions
 
 - Imports are absolute (`from slack_data....`).
-- `manufacturers.json` (74 brands) at root is **reference metadata only — not loaded**; brand rows are created on the fly by `get_brand()`, so brand `country`/`website`/etc. are not populated.
+- `manufacturers.json` (76 entries) at root **is loaded — but as an enrichment pass, not a creator**. Brand rows are still created on the fly by `get_brand()` with only a name; `load_manufacturers.py` then backfills `country` / `year_founded` / `website` / `socials` / `active` / `slackline_focused` onto the rows that already exist, matching on `canonical_brand()`. It never inserts a brand (an entry with no matching row means we hold no gear for that manufacturer). It **must run last** in the lifespan, and is gated on "no brand has a country yet" rather than on an empty table.
+- Country is stored as the `Country` enum's **full display name** (`"Germany"`), not an ISO code; `get_country()` in `utilities/countries.py` maps the sources' alpha-2 codes onto the enum.
 - `BrandPublic` only declares `webbings` in its response schema — other gear lists exist on the ORM model via `@computed_field` but may not serialize in API responses.
 - No auth — all endpoints are open.
 - Known small artifacts: some routers carry a copy-paste variable name (`heroes`); a `reccomended_line_length` typo in the bungee model.

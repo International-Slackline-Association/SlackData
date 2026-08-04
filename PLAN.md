@@ -70,7 +70,7 @@ npx cypress run --spec cypress/e2e/<spec>.cy.ts
 | 5 | Search & sort refinement | `search_sort.cy.ts` | ✅ 306/306 |
 | 6 | Detail page | `gear_detail.cy.ts` + `isa_certification`(detail) | ✅ 201/201 + isa 69/69 |
 | 7 | Compare | `compare.cy.ts` | ✅ 20/20 |
-| 8 | Manufacturers | `manufacturers.cy.ts` | ⬜ |
+| 8 | Manufacturers | `manufacturers.cy.ts` | ✅ 18/18 |
 | 9 | URL-state sweep | `url_state.cy.ts` | ⬜ |
 | 10 | Full green + cleanup | (whole suite) | ⬜ |
 
@@ -337,8 +337,56 @@ Decisions worth remembering:
 - The Detailed-view `btn-compare` in `GearDetailBody` is still a dead stub — that view isn't in
   `compare.cy.ts`'s scope and isn't mounted by default. Left as-is to keep Phase 7 tight.
 
-### ⬜ Phase 8 — Manufacturers
-Replace `ManufacturersPage` stub: brand cards, View Gear, per-type gear counts (`data-count-*`), search, graceful country/continent filter, list toggle. `BrandPublic` only serializes `webbings` reliably — read the model. Layout: **DESIGN.md → "Manufacturers Page".**
+### ✅ Phase 8 — Manufacturers — DONE
+**Result:** `manufacturers.cy.ts` **36/36**. (It was 18/18 on the first run with no spec edits —
+the second phase to manage that, after Phase 6 — and grew to 36 across the follow-up work below.)
+`navigation` 13/13, `compare` 20/20, `gear_listing` 192/192 confirmed no-regression; pytest 155;
+build + lint clean.
+
+Built:
+- **`hooks/useBrandDirectory.ts`** — fetches all brands **plus all 8 gear lists**, and derives
+  brand→per-type counts by grouping each gear endpoint on `brand_name`. Shared by both new pages.
+- **`components/brand/ManufacturerCard.tsx`** — the gear card's twin: logo image area with the
+  Inactive pill top-left and the country flag top-right, then name, slackline badge, `Est. YYYY`,
+  gear-inventory pills, View Gear. Root carries `data-count-{slug}` for all eight types (zeroes
+  included) plus `data-active`.
+- **`pages/ManufacturersPage.tsx`** — search + data-driven country filter + card grid, with a
+  **Sort by** control (gear count default, name, country, year established). Grid-only; the
+  Cards/List toggle was removed.
+- **`pages/BrandDetailPage.tsx`** (`/manufacturers/:id`, new route) — the View Gear destination: one
+  `GearGrid` section per gear type the brand stocks.
+
+**Follow-up landed after the phase closed** (commits `62570d5`, `f059888`): country is now stored
+(see below), manufacturer logos + country flags are vendored, the reviewed active/inactive status
+is applied, and the view toggle became the sort control.
+
+Decisions worth remembering:
+- **Gear counts MUST be computed client-side.** `BrandPublic` declares only `webbings: list[str]`
+  among the gear lists — the other seven `@computed_field`s exist on the ORM model but are *not* in
+  the response schema, so the API genuinely cannot answer "how many weblocks does this brand have".
+  Hence the 8-endpoint fetch. This is the same conclusion `types/brand.ts` had already written down
+  in Phase 1; schema-first paid off again.
+- **The country filter is data-driven — and now POPULATED.** It was absent at first because every
+  brand had `country: null` (`get_brand()` only sets a name); the `load_manufacturers.py` enrichment
+  pass has since backfilled all 56, so the group renders ~20 real pills and both country tests now
+  exercise the populated branch. The filter must stay data-driven either way: never hardcode a
+  country list, and note there is **no `continent` field anywhere in the schema** (the spec's own
+  comment records that an earlier version of the test invented one).
+- **The directory is grid-only.** The Cards/List toggle was removed and its toolbar slot now holds
+  the sort control (gear count default, name, country, year established; name tie-breaks, missing
+  values last). The two `view-list` tests were retired and replaced with sort tests — a spec now
+  asserts the toggle does **not** exist.
+- **`slackline_focused` is corrected from the source** (`scripts/apply_slackline_focus.py`): SlackDB
+  flags nearly everyone slackline-oriented, so imported as-is the badge rendered on all 56 cards and
+  meant nothing. General climbing / rope-access / rigging brands that only make a part slackliners
+  use (Petzl, CAMP, Mammut, Edelrid, Kong, Singing Rock, …) are now `false` — 48 of 56 carry the
+  badge, 8 don't. The badge now discriminates and is covered by two spec tests.
+- **Manufacturer search uses plain lowercase substring matching, not `utils/search.normalize()`.**
+  The spec asserts every visible card's *raw* name contains the *raw* typed term, so the gear
+  listing's punctuation/accent-folding matcher would surface cards that fail that assertion.
+- **Brand→gear membership is decided on `brand_name`**, the gear item's computed field, which
+  resolves through the Brand relationship and so always equals the Brand row's `name`.
+- Route ranking puts `/manufacturers/:id` above `:slug/:id`, so brand detail wins over gear detail.
 
 ### ⬜ Phase 9 — URL-state sweep
 `url_state.cy.ts`: q / sort / pill / range / combined round-trips, clear-all, 404.

@@ -13,3 +13,4 @@ venv/
 
 # Scraper output (images + manifests)
 scraper/
+scripts/.cache/
