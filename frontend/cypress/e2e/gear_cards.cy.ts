@@ -165,6 +165,80 @@ GEAR_TYPES.forEach(({ slug, apiPath, label, hasISA }) => {
   })
 })
 
+// ── Weight in the inline specs row ────────────────────────────────────────────
+// Webbing only. Weight (g/m) is a primary quick-compare spec for webbing, so it
+// sits in the card's inline row between width and breaking strength. Other types
+// keep weight on the detail spec sheet only. Unit is `g/m` to match specRows.ts
+// and the range filter — the webbing model stores grams per metre.
+
+describe('Card inline weight — Webbings', () => {
+  let withWeight: Record<string, unknown> | undefined
+  let withoutWeight: Record<string, unknown> | undefined
+
+  const cardFor = (id: unknown) =>
+    cy.get(`[data-cy="gear-card"]:has([data-cy="gear-card-name"][href="/webbings/${id}"])`)
+
+  before(() => {
+    cy.fetchAllItems('webbing').then((all) => {
+      const items = all as Record<string, unknown>[]
+      withWeight = items.find(i => i.weight != null)
+      withoutWeight = items.find(i => i.weight == null)
+    })
+  })
+
+  beforeEach(() => {
+    cy.visit('/webbings')
+  })
+
+  it('shows the weight with a g/m unit when the webbing has one', () => {
+    if (!withWeight) return
+    cardFor(withWeight.id)
+      .find('[data-cy="gear-card-specs"]')
+      .should('contain.text', `${withWeight.weight} g/m`)
+  })
+
+  it('omits the weight segment — with no empty separator — when weight is null', () => {
+    if (!withoutWeight) return
+    cardFor(withoutWeight.id)
+      .find('[data-cy="gear-card-specs"]')
+      .should('not.contain.text', 'g/m')
+      .invoke('text')
+      .should('not.match', /·\s*·/)
+  })
+
+  it('orders weight after width and before breaking strength', () => {
+    // Needs an item carrying all three so the relative order is observable.
+    cy.fetchAllItems('webbing').then((all) => {
+      const full = (all as Record<string, unknown>[]).find(
+        i => i.weight != null && i.width != null && i.breaking_strength != null,
+      )
+      if (!full) return
+      cardFor(full.id)
+        .find('[data-cy="gear-card-specs"]')
+        .invoke('text')
+        .then((text) => {
+          expect(text.indexOf(`${full.width} mm`)).to.be.lessThan(text.indexOf(`${full.weight} g/m`))
+          expect(text.indexOf(`${full.weight} g/m`))
+            .to.be.lessThan(text.indexOf(`${full.breaking_strength} kN`))
+        })
+    })
+  })
+})
+
+// Weight stays off the inline row for every other type — it is not a primary
+// quick-compare spec there, and those cards have more relevant specs to show.
+GEAR_TYPES.filter(g => g.slug !== 'webbings').forEach(({ slug, label }) => {
+  describe(`Card inline weight — ${label} (not shown)`, () => {
+    it('does not put a g/m weight in the inline specs row', () => {
+      cy.visit(`/${slug}`)
+      cy.get('[data-cy="gear-card"]').should('exist')
+      cy.get('[data-cy="gear-card-specs"]').each(($row) => {
+        expect($row.text()).to.not.contain('g/m')
+      })
+    })
+  })
+})
+
 // ── Classification bubble on the card ─────────────────────────────────────────
 // Webbing only. The same bubble the detail page shows beside the product name is
 // overlaid on the card's image area, top-right — so the highline class is
@@ -178,7 +252,7 @@ describe('Card classification bubble — Webbings', () => {
     cy.get(`[data-cy="gear-card"]:has([data-cy="gear-card-name"][href="/webbings/${id}"])`)
 
   before(() => {
-    cy.fetchAllItems('/webbing').then((all) => {
+    cy.fetchAllItems('webbing').then((all) => {
       const items = all as Record<string, unknown>[]
       withClass = items.find(i => i.classification != null && i.classification !== '')
       withoutClass = items.find(i => i.classification == null || i.classification === '')
@@ -225,7 +299,7 @@ describe('Card classification bubble — Webbings', () => {
   })
 
   it('stacks the bubble above the ISA stamp when the item is also certified', () => {
-    cy.fetchAllItems('/webbing').then((all) => {
+    cy.fetchAllItems('webbing').then((all) => {
       const both = (all as Record<string, unknown>[]).find(
         i => i.classification != null && i.classification !== '' && i.isa_certified === true,
       )

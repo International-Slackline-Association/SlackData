@@ -29,7 +29,7 @@ export interface InlineSpec {
 }
 
 export const INLINE_SPECS: Record<GearSlug, InlineSpec[]> = {
-  webbings:      [{ field: 'material' }, { field: 'width', unit: 'mm' }, { field: 'breaking_strength', unit: 'kN' }],
+  webbings:      [{ field: 'material' }, { field: 'width', unit: 'mm' }, { field: 'weight', unit: 'g/m' }, { field: 'breaking_strength', unit: 'kN' }],
   weblocks:      [{ field: 'material' }, { field: 'width_min', unit: 'mm' }, { field: 'breaking_strength', unit: 'kN' }],
   leashrings:    [{ field: 'material' }, { field: 'inner_diameter', unit: 'mm' }, { field: 'breaking_strength', unit: 'kN' }],
   grips:         [{ field: 'material' }, { field: 'mbs', unit: 'kN' }],
