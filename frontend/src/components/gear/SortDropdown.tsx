@@ -114,7 +114,11 @@ export default function SortDropdown({
             data-field="name"
             data-direction="asc"
             className={optionClass}
-            onClick={() => pick({ field: 'name', direction: 'asc' })}
+            // Name A→Z is the default sort, so it carries NO ?sort= param — picking
+            // it clears the sort back to the null (default) state rather than
+            // writing sort=name-asc. Name Z→A is a real, non-default choice and is
+            // written normally. See url_state.cy.ts / the useUrlState contract.
+            onClick={() => pick(null)}
           >
             Name: A→Z
           </button>
