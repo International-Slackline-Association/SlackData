@@ -21,9 +21,13 @@ export interface SortSpec {
 
 export function useUrlState() {
   const [params, setParams] = useSearchParams()
-  // Bumped on clearAll so inputs holding local state can reset themselves without
+  // Bumped on a clear so inputs holding local state can reset themselves without
   // reacting to every async param echo (which would race in-progress typing).
-  const [resetNonce, setResetNonce] = useState(0)
+  // It carries the search term the clear INTENDED to leave behind ('' for
+  // clearAll, the kept term for clearFilters): the router commits the new params
+  // in a later render than this bump, so a listener reading `q` at bump time
+  // would still see the pre-clear value.
+  const [reset, setReset] = useState({ nonce: 0, q: '' })
 
   // Mirror of the latest INTENDED params. react-router does not compose rapid
   // functional setParams calls — each `prev` is the last committed location, so
@@ -164,12 +168,29 @@ export function useUrlState() {
   const clearAll = useCallback(() => {
     pendingRef.current = new URLSearchParams()
     setParams(new URLSearchParams(), { replace: true })
-    setResetNonce(n => n + 1)
+    setReset(r => ({ nonce: r.nonce + 1, q: '' }))
+  }, [setParams])
+
+  // Clears the filters but KEEPS the search term (and the sort, which can't
+  // empty a result set) — the empty state's "Clear filters" action. Same route,
+  // now carrying only ?q=/?sort=. It bumps the same reset nonce as clearAll, so
+  // widgets holding local state (the stretch filter) reset either way; the
+  // search box re-seeds itself from the surviving `q` rather than blanking.
+  const clearFilters = useCallback(() => {
+    const next = new URLSearchParams()
+    const keptQ = pendingRef.current.get('q')
+    const keptSort = pendingRef.current.get('sort')
+    if (keptQ) next.set('q', keptQ)
+    if (keptSort) next.set('sort', keptSort)
+    pendingRef.current = next
+    setParams(next, { replace: true })
+    setReset(r => ({ nonce: r.nonce + 1, q: keptQ ?? '' }))
   }, [setParams])
 
   return {
     params,
-    resetNonce,
+    resetNonce: reset.nonce,
+    resetQuery: reset.q, // the search term the last clear meant to keep
     q,
     setQ,
     sort,
@@ -182,5 +203,6 @@ export function useUrlState() {
     setRangeBound,
     setRange,
     clearAll,
+    clearFilters,
   }
 }

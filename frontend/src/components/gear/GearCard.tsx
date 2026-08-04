@@ -17,6 +17,7 @@ import { imageUrls } from '@/utils/images'
 import CardImageCarousel from './CardImageCarousel'
 import ClassificationBubble from './ClassificationBubble'
 import IsaApprovedBadge from './IsaApprovedBadge'
+import LegacyBadge from './LegacyBadge'
 
 const pillBtn =
   'rounded-full border border-gray-300 px-3 py-1 text-xs text-gray-600 hover:border-gray-400 hover:text-gray-800 transition-colors disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:border-gray-300 disabled:hover:text-gray-600'
@@ -74,6 +75,10 @@ export default function GearCard({
         {/* Top-right stack: the highline class first (it's the fastest read on a
             webbing card), the ISA stamp under it. Same bubble component as the
             detail page, so the colors can't drift apart. */}
+        {/* Top-left: lifecycle status. Legacy = no longer sold; nothing renders
+            for active/unknown gear. Mirrors the manufacturer card's Inactive pill. */}
+        <LegacyBadge active={item.active} className="absolute left-2 top-2 z-10" />
+        {/* Top-right: classification then ISA stamp. */}
         <div className="absolute right-2 top-2 z-10 flex flex-col items-end gap-1.5">
           <ClassificationBubble value={item.classification} />
           {isaCertified && <IsaApprovedBadge />}

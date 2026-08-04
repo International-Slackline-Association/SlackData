@@ -3,6 +3,10 @@
 // groups (min/max inputs). All state lives in the URL via useUrlState, so the
 // listing page re-derives the visible list from it. The webbing stretch widget
 // is appended separately (StretchFilter).
+//
+// Layout: a sticky flex column, capped to the viewport. The status bubble is
+// pinned to the top; the header and every group live in one inner scroll region
+// (data-cy="filter-scroll") that slides beneath it.
 
 import { useMemo } from 'react'
 import type { GearTypeMeta } from '@/config/gearTypes'
@@ -12,6 +16,7 @@ import type { useUrlState } from '@/hooks/useUrlState'
 import type { AnyItem } from '@/utils/format'
 import FilterGroup from './FilterGroup'
 import RangeSlider from './RangeSlider'
+import StatusToggle, { type Status } from './StatusToggle'
 
 type UrlState = ReturnType<typeof useUrlState>
 
@@ -166,47 +171,66 @@ export default function FilterSidebar({
   meta,
   items,
   url,
+  status,
+  onStatusChange,
+  onClearAll,
   children,
 }: {
   meta: GearTypeMeta
   items: AnyItem[]
   url: UrlState
+  status: Status
+  onStatusChange: (next: Status) => void
+  onClearAll: () => void // clears filters + search + status (the page owns status)
   children?: React.ReactNode // webbing stretch widget slots in here
 }) {
   const groups = filterGroupsFor(meta.slug)
 
   return (
-    <aside data-cy="filter-sidebar" className="w-[280px] shrink-0">
-      <div className="mb-3 flex items-center justify-between">
-        <div
-          data-cy="filter-sidebar-header"
-          className="text-xs font-semibold uppercase tracking-wide text-gray-500"
-        >
-          Find your {meta.label.toUpperCase()}
-        </div>
-        <button
-          data-cy="clear-filters"
-          type="button"
-          onClick={url.clearAll}
-          className="text-[11px] font-medium text-teal-primary hover:underline"
-        >
-          Clear all
-        </button>
+    <aside
+      data-cy="filter-sidebar"
+      className="flex w-[280px] shrink-0 flex-col self-start sticky top-[calc(var(--header-h,96px)+1rem)] max-h-[calc(100vh-var(--header-h,96px)-6rem)]"
+    >
+      {/* Lifecycle scope comes first — it bounds everything below it, so it is
+          pinned outside the scroll region and never scrolls away. */}
+      <div className="shrink-0">
+        <StatusToggle status={status} onChange={onStatusChange} />
       </div>
 
-      <div className="rounded-xl border border-gray-200 bg-white px-4">
-        {groups
-          .filter(g => pillGroupVisible(g, items))
-          .map(g => (
-            <FilterGroup key={g.group} group={g.group} label={g.label}>
-              {g.type === 'pill' ? (
-                <PillGroup meta={g} url={url} items={items} />
-              ) : (
-                <RangeControl group={g.group} unit={g.unit} url={url} items={items} />
-              )}
-            </FilterGroup>
-          ))}
-        {children}
+      {/* Everything below the bubble scrolls as one. `min-h-0` lets this shrink
+          under the aside's max-height, which is what turns on the scrollbar. */}
+      <div data-cy="filter-scroll" className="min-h-0 flex-1 overflow-y-auto pb-4">
+        <div className="mb-3 flex items-center justify-between">
+          <div
+            data-cy="filter-sidebar-header"
+            className="text-xs font-semibold uppercase tracking-wide text-gray-500"
+          >
+            Find your {meta.label.toUpperCase()}
+          </div>
+          <button
+            data-cy="clear-filters"
+            type="button"
+            onClick={onClearAll}
+            className="text-[11px] font-medium text-teal-primary hover:underline"
+          >
+            Clear all
+          </button>
+        </div>
+
+        <div className="rounded-xl border border-gray-200 bg-white px-4">
+          {groups
+            .filter(g => pillGroupVisible(g, items))
+            .map(g => (
+              <FilterGroup key={g.group} group={g.group} label={g.label}>
+                {g.type === 'pill' ? (
+                  <PillGroup meta={g} url={url} items={items} />
+                ) : (
+                  <RangeControl group={g.group} unit={g.unit} url={url} items={items} />
+                )}
+              </FilterGroup>
+            ))}
+          {children}
+        </div>
       </div>
     </aside>
   )

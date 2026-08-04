@@ -94,10 +94,15 @@ GEAR_TYPES.forEach(({ slug, apiPath, label }) => {
       cy.get('[data-cy="empty-state"]').find('[data-cy="clear-filters"]').should('be.visible')
     })
 
-    it('restores the full card list when clear-filters is clicked from empty state', () => {
+    // The sidebar's "Clear all" is the one that also wipes the search box.
+    // (The empty state's own button keeps the term — see the webbings-only
+    // "Empty-state clear" describe at the bottom of this file.)
+    it('restores the full card list when the sidebar Clear all is clicked from empty state', () => {
       cy.fetchAllItems(apiPath).then((all) => {
         cy.get('[data-cy="search-input"]').type('xqzxqzxqzxqz_no_match')
-        cy.get('[data-cy="empty-state"]').find('[data-cy="clear-filters"]').click()
+        cy.get('[data-cy="empty-state"]').should('be.visible')
+        cy.get('[data-cy="filter-sidebar"]').find('[data-cy="clear-filters"]').click()
+        cy.get('[data-cy="search-input"]').should('have.value', '')
         cy.get('[data-cy="gear-card"]').should('have.length', all.length)
       })
     })
@@ -193,5 +198,132 @@ GEAR_TYPES.forEach(({ slug, apiPath, label }) => {
     cy.get('[data-cy="gear-detailed-row"]').should('not.exist')
     cy.get('[data-cy="empty-state"]').should('be.visible')
   })
+  })
+})
+
+// ── Sticky filter sidebar ─────────────────────────────────────────────────────
+// Behavioral assertions (Cypress can't read `position: sticky` from CSS): the
+// sidebar must stay visible and usable while the results scroll, self-scroll so
+// its tallest groups stay reachable, and never overlap the fixed CompareBar.
+// Run against webbings — its sidebar (8 groups + stretch widget) is the tallest
+// and the only one with the stretch-kn-pill that guards the inner-scroll rule.
+describe('Gear listing page — sticky filter sidebar (webbings)', () => {
+  beforeEach(() => {
+    cy.visit('/webbings')
+    cy.get('[data-cy="gear-card"]').should('have.length.greaterThan', 0)
+  })
+
+  it('pins below the top nav after the results scroll', () => {
+    cy.scrollTo('bottom')
+    cy.get('[data-cy="top-nav"]').then(($nav) => {
+      const navBottom = $nav[0].getBoundingClientRect().bottom
+      cy.get('[data-cy="filter-sidebar"]').should('be.visible').then(($aside) => {
+        const top = $aside[0].getBoundingClientRect().top
+        expect(top).to.be.at.least(0)
+        // Pinned just below the sticky nav (offset ~1rem), with tolerance.
+        expect(top).to.be.at.most(navBottom + 24)
+      })
+    })
+  })
+
+  it('keeps filters usable while scrolled — no scroll back to top needed', () => {
+    cy.scrollTo('bottom')
+    cy.get('[data-cy="item-count"]').invoke('text').then((before) => {
+      cy.get('[data-cy="filter-sidebar"] [data-cy="filter-pill"]').first().click()
+      cy.get('[data-cy="item-count"]').invoke('text').should('not.eq', before)
+    })
+  })
+
+  // The scroll region is the aside's lower half — the status bubble is pinned
+  // above it (see gear_status.cy.ts), so the groups scroll under a fixed control.
+  it('self-scrolls so the tallest groups stay reachable', () => {
+    cy.scrollTo('bottom')
+    cy.get('[data-cy="filter-sidebar"] [data-cy="filter-scroll"]').scrollTo('bottom')
+    cy.get('[data-cy="stretch-kn-pill"]').first().should('be.visible')
+  })
+
+  it('does not collide with the CompareBar', () => {
+    cy.get('[data-cy="gear-card"] [data-cy="btn-compare"]').eq(0).click()
+    cy.get('[data-cy="gear-card"] [data-cy="btn-compare"]').eq(1).click()
+    cy.get('[data-cy="compare-bar"]').should('be.visible')
+    cy.scrollTo('bottom')
+    cy.get('[data-cy="compare-bar"]').then(($bar) => {
+      const barTop = $bar[0].getBoundingClientRect().top
+      cy.get('[data-cy="filter-sidebar"]').then(($aside) => {
+        expect($aside[0].getBoundingClientRect().bottom).to.be.at.most(barTop)
+      })
+    })
+  })
+})
+
+// ── Empty-state clear (webbings fixture) ──────────────────────────────────────
+//
+// The empty state's "Clear filters" clears the FILTERS and the status scope but
+// KEEPS the search term: a dead end is nearly always the filters, so the words
+// typed are the one thing worth carrying over. It navigates to the same route
+// with only ?q= left. The sidebar's "Clear all" is the harder reset (covered per
+// gear type above).
+
+describe('Empty state — Clear filters keeps the search', () => {
+  // A term that matches plenty, plus a weight bound nothing can satisfy.
+  const DEAD_END = '/webbings?q=a&weight_min=999999'
+
+  it('empties the grid to begin with', () => {
+    cy.visit(DEAD_END)
+    cy.get('[data-cy="empty-state"]').should('be.visible')
+    cy.get('[data-cy="gear-card"]').should('not.exist')
+  })
+
+  it('brings the cards back while keeping the term in the box and the URL', () => {
+    cy.visit(DEAD_END)
+    cy.get('[data-cy="empty-state"]').find('[data-cy="clear-filters"]').click()
+    cy.get('[data-cy="gear-card"]').should('have.length.greaterThan', 0)
+    cy.get('[data-cy="search-input"]').should('have.value', 'a')
+    cy.url().should('include', 'q=a')
+    cy.url().should('not.include', 'weight_min')
+  })
+
+  it('still filters by the kept search term', () => {
+    cy.visit(DEAD_END)
+    cy.get('[data-cy="empty-state"]').find('[data-cy="clear-filters"]').click()
+    cy.fetchAllItems('webbing').then((all) => {
+      // Same rule as utils/search: name OR brand, punctuation-insensitive.
+      const norm = (s: unknown) =>
+        String(s ?? '').normalize('NFD').replace(/[̀-ͯ]/g, '')
+          .replace(/[.\-()/ ]/g, '').toLowerCase()
+      const matching = (all as Record<string, unknown>[]).filter(
+        (it) => norm(it.name).includes('a') || norm(it.brand_name).includes('a'),
+      )
+      cy.get('[data-cy="item-count"]').should('contain.text', String(matching.length))
+    })
+  })
+
+  it('resets the status bubble to ALL', () => {
+    cy.visit(DEAD_END)
+    cy.get('[data-cy="status-historic"]').click()
+    cy.get('[data-cy="empty-state"]').find('[data-cy="clear-filters"]').click()
+    cy.get('[data-cy="status-all"]').should('have.attr', 'data-active', 'true')
+    cy.get('[data-cy="status-historic"]').should('have.attr', 'data-active', 'false')
+  })
+
+  // The stretch widget resets through the same reset signal as the sidebar's
+  // Clear all (asserted in filters.cy.ts) — it cannot be engaged from an already
+  // empty grid, since its kN pills are derived from the items still in scope.
+  it('leaves the sidebar filter pills deselected afterwards', () => {
+    cy.visit('/webbings?q=a&material=Nylon&weight_min=999999')
+    cy.get('[data-cy="empty-state"]').find('[data-cy="clear-filters"]').click()
+    cy.get('[data-cy="filter-pill"][data-active="true"]').should('not.exist')
+    cy.url().should('not.include', 'material=')
+  })
+})
+
+// The sidebar's Clear all keeps its harder semantics: search included, status
+// back to ALL.
+describe('Sidebar Clear all — resets the status bubble too', () => {
+  it('returns to ALL after browsing Historic', () => {
+    cy.visit('/webbings')
+    cy.get('[data-cy="status-historic"]').click()
+    cy.get('[data-cy="filter-sidebar"]').find('[data-cy="clear-filters"]').click()
+    cy.get('[data-cy="status-all"]').should('have.attr', 'data-active', 'true')
   })
 })

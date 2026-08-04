@@ -412,5 +412,21 @@ this was mostly a verification sweep. One real app fix + three stale-spec fixes:
   separator; the round-trip still decodes to a comma. Assertion now reads the decoded `material` value
   and checks for the `a,b` shape instead of grepping the raw URL for a literal comma.
 
+### ✅ Sticky filter sidebar (post-Phase-9 UX)
+The left filter sidebar now pins below the top nav as results scroll and self-scrolls when its groups
+exceed the viewport, so no filter (notably the webbing stretch widget) scrolls out of reach.
+Purely presentational — two files, no schema/data/API:
+- `TopNav.tsx` publishes the measured header height as a `--header-h` CSS var (a `ResizeObserver` on
+  `<header>`), so the offset survives tier-2 category tabs wrapping to more rows on narrow widths.
+- `FilterSidebar.tsx` `<aside>` gains `self-start sticky top-[calc(var(--header-h)+1rem)]
+  max-h-[calc(100vh-var(--header-h)-6rem)] overflow-y-auto` — the `6rem` bottom reserve keeps the
+  self-scroll region clear of the `fixed` CompareBar.
+
+Tests: 4 behavioral assertions added to `gear_listing.cy.ts` (pins after scroll, filters usable while
+scrolled, tall-sidebar reachability via `stretch-kn-pill`, no CompareBar collision) — all green.
+⚠️ Same run surfaced a **pre-existing, unrelated** failure cluster: 32 count-comparison tests (4 per
+gear type) now fail because the frontend renders fewer cards than the (expanded) backend serves —
+independent of this CSS change; needs separate investigation.
+
 ### ⬜ Phase 10 — Full green + cleanup
 Whole suite green; simplify/dedupe.

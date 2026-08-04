@@ -56,7 +56,34 @@ Two-column layout: left filter sidebar + right content area.
 
 ### Left Filter Sidebar (~280px wide)
 
-Header: "FIND YOUR [GEAR TYPE]" in small gray all-caps at the top.
+The sidebar is sticky — it pins below the top nav as results scroll, and is capped to viewport height
+minus the header. Internally it splits in two: the **status control is pinned to its top**, and
+everything below it — the "FIND YOUR …" header, "Clear all", and every filter group — sits in a
+single scroll region (`data-cy="filter-scroll"`, `overflow-y-auto`) that scrolls under it. So no
+filter ever scrolls out of reach, and the scope control never scrolls away at all.
+
+**Status segmented control — the first thing in the sidebar**, above the "FIND YOUR …" header and
+outside the scroll region. A single full-width pill ("bubble") split into equal thirds:
+`ALL · CURRENT · HISTORIC` (`data-cy="status-toggle"`, options `status-all` / `status-current` /
+`status-historic`, each carrying `data-active="true|false"`).
+
+- **Defaults to ALL** — the listing opens on the whole catalogue, current and historic together.
+  Scope is the *first* narrowing applied: search, the filter groups, their facet counts, the item
+  count and the grid all work off it.
+- `ALL` = every item · `CURRENT` = still sold, i.e. `active !== false` (true or unknown) ·
+  `HISTORIC` = retired only, `active === false`.
+- **One color per third**: ALL amber-orange `#E8770A`, CURRENT green `#15803D`, HISTORIC red
+  `#DC2626`. The **selected** third is filled with its own color, white bold uppercase text, and is
+  the only one with rounded ends (it inherits the bubble's full radius on its outer side). The
+  other two sit on white with their color as the text color, muted, separated by a hairline
+  `#E5E7EB` divider. The whole bubble is `rounded-full` with a light gray border.
+- **Always visible.** Because scope bounds every other control, it is pinned: scrolling the filter
+  groups moves them beneath a stationary bubble, and switching scope never costs a scroll back up.
+- This replaces the old two-way Current/Historic toggle that lived in the toolbar above the grid —
+  the toolbar's right side is now just `Cards | Detailed` + `SORT BY`.
+
+Header: "FIND YOUR [GEAR TYPE]" in small gray all-caps, directly under the status control — it is the
+first thing *inside* the scroll region, so it scrolls away with the groups.
 
 Each filter group:
 - Small colored dot (teal) + section label in all-caps gray (e.g. "MATERIAL TYPE")
@@ -204,6 +231,7 @@ columns, which meant the specs that actually distinguish products were the ones 
 - White or very light gray bg
 - Product image centered (placeholder: rope/webbing icon in low-opacity gray)
 - **No gear-type badge.** Each listing shows a single gear type, so labelling every card "ROLLER" on the rollers page is redundant. Reintroduce a coral gear-type pill (top-left, absolute) only on views that mix types — e.g. manufacturer pages.
+- **Legacy badge, top-left overlay** (absolute, ~8px from the top-**left** corner) — a small red uppercase `Legacy` pill, shown only when `active` is false (discontinued / no longer sold). Nothing renders for active or unknown (`active` true/null) gear — an active card carries no status pill. Because the listing defaults to ALL, a grid routinely mixes badged and unbadged cards — the badge is what tells them apart, so it is never suppressed by the sidebar's status scope. This occupies the **top-left** slot (the one reserved above for a future gear-type pill), mirroring the manufacturer card's top-left **Inactive** pill (see § Manufacturer card anatomy), so both card types read the same way: lifecycle status on the left, classification/ISA on the right.
 - **Top-right overlay stack** (absolute, ~8px from the top-right corner, stacked vertically with ~6px gaps, right-aligned):
   1. **Classification bubble** — webbing only, when `classification` is set. Identical component, colors and shape to the detail page's bubble (see § Classification bubble) — the ISA highline class is the fastest read on a webbing card, so it belongs in the grid, not just one click deep. Omit entirely when the field is null; other gear types have no `classification` field and never show it.
   2. **ISA Approved badge** — the miniature stamp, when `isa_certified` is true (see below).
@@ -467,6 +495,23 @@ and disappears entirely when none are (see the note in `manufacturers.cy.ts`; th
 - **No sharp rectangles anywhere** — even the large CTA buttons are rounded
 - **ISA Certified** always uses the official ISA Approved stamp badge (charcoal frame, teal + coral ISA mark, white "APPROVED", teal checkmark). On cards: miniature stamp ~28px tall, top-right of image area (below the classification bubble when the item has one), only shown when true. On detail page: ~80px wide block above specs, "Not ISA Certified" in subdued gray when false. Never use a plain checkmark or generic pill — the stamp is the trust signal.
 - **Empty states**: centered gray icon + short message — e.g. "No webbings match your filters" with a "Clear filters" teal link
+
+### The two clear actions
+
+They are deliberately different, and both are `data-cy="clear-filters"`:
+
+| | Sidebar **Clear all** | Empty-state **Clear filters** |
+|---|---|---|
+| Filter pills / ranges / stretch widget | cleared | cleared |
+| Search term (`?q=`) | cleared | **kept** |
+| Status bubble | reset to **ALL** | reset to **ALL** |
+
+The empty-state button's job is "show me what this *search* can find" — a dead end is nearly always
+the filters or a narrow status scope, not the words typed, so wiping the search too threw away the
+one thing worth keeping. It navigates to the same route carrying **only** `?q=<term>` (sort is kept
+too — it can't empty a result set), and the search box keeps showing the term. Resetting the status
+to ALL is part of the same promise: a HISTORIC-only scope is itself a filter, so a "clear filters"
+that left it engaged could still land on an empty grid.
 - **Loading skeleton**: same card shape as real cards, `animate-pulse` in light gray
 
 ---
