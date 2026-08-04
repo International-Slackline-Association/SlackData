@@ -14,7 +14,8 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Middle Way Slacklines"
+        "manufacturer": "Middle Way Slacklines",
+        "active": false
     },
     {
         "name": "Level 1 Kit",
@@ -31,7 +32,8 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Rigging Ventures"
+        "manufacturer": "Rigging Ventures",
+        "active": false
     },
     {
         "name": "Level 2 Kit",
@@ -48,7 +50,8 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Rigging Ventures"
+        "manufacturer": "Rigging Ventures",
+        "active": false
     },
     {
         "name": "Level 3 Trickline kit",
@@ -65,7 +68,8 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Rigging Ventures"
+        "manufacturer": "Rigging Ventures",
+        "active": false
     },
     {
         "name": "Super Jumpline Slackline Set",
@@ -82,7 +86,8 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Slacktivity"
+        "manufacturer": "Slacktivity",
+        "active": true
     },
     {
         "name": "Trickline Kit - Pro Line 25",
@@ -99,7 +104,8 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Spider slacklines"
+        "manufacturer": "Spider slacklines",
+        "active": true
     },
     {
         "name": "Kit Freestyle 22m - Andy Lewis X13",
@@ -116,7 +122,8 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Slack.fr"
+        "manufacturer": "Slack.fr",
+        "active": false
     },
     {
         "name": "BOSS LINE KIT",
@@ -133,7 +140,8 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Slackline Industries"
+        "manufacturer": "Slackline Industries",
+        "active": true
     },
     {
         "name": "25 m Air n Jump Set",
@@ -150,7 +158,8 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Slackline tools"
+        "manufacturer": "Slackline tools",
+        "active": false
     },
     {
         "name": "Level Two Kit",
@@ -167,6 +176,7 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Rigging Ventures"
+        "manufacturer": "Rigging Ventures",
+        "active": false
     }
 ]

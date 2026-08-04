@@ -35,6 +35,7 @@ class BaseGrip(SQLModel):
     description: str | None = None
     version: str | None = None
     notes: str | None = None
+    active: bool | None = Field(default=None, index=True)
 
 class Grip(BaseGrip, table=True):
     id: int | None = Field(default=None, primary_key=True)

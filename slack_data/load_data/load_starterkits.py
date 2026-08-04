@@ -104,6 +104,7 @@ def add_starterkits_to_db(starterkits: list[dict], session: SessionDep) -> None:
             description=sk.get("description"),
             version=sk.get("version"),
             notes=sk.get("notes"),
+            active=sk.get("active"),
         )
 
         db_sk = StarterKit.model_validate(starterkit_create)
