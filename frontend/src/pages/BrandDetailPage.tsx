@@ -60,9 +60,21 @@ export default function BrandDetailPage() {
         ← Manufacturers
       </Link>
 
-      <h1 data-cy="brand-detail-name" className="mt-3 text-2xl font-bold text-gray-900">
-        {brand.name}
-      </h1>
+      {brand.website ? (
+        <a
+          data-cy="brand-detail-name"
+          href={brand.website}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-3 block w-fit text-2xl font-bold text-gray-900 hover:text-teal-primary hover:underline"
+        >
+          {brand.name}
+        </a>
+      ) : (
+        <h1 data-cy="brand-detail-name" className="mt-3 text-2xl font-bold text-gray-900">
+          {brand.name}
+        </h1>
+      )}
       <p className="mb-8 mt-1 text-sm text-gray-500">
         {brand.total} {brand.total === 1 ? 'item' : 'items'}
       </p>

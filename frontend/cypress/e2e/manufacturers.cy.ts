@@ -79,25 +79,42 @@ describe('Manufacturers page', () => {
     })
   })
 
-  it('each card shows a View Gear button', () => {
+  it('each card shows a website button', () => {
     cy.get('[data-cy="manufacturers-card"]').first()
-      .find('[data-cy="btn-view-gear"]').should('be.visible')
+      .find('[data-cy="btn-website"], [data-cy="btn-website-disabled"]')
+      .should('be.visible')
   })
 
-  it('View Gear button navigates to a page showing only that brand\'s gear', () => {
+  it('the website button links to the brand\'s website', () => {
+    cy.request(`${api()}/brand/?limit=100`).then(({ body }) => {
+      const brand = (body as Record<string, unknown>[]).find(b => b.website)!
+      cy.get('[data-cy="manufacturers-card"]')
+        .contains('[data-cy="manufacturer-name"]', brand.name as string)
+        .closest('[data-cy="manufacturers-card"]')
+        .find('[data-cy="btn-website"]')
+        .should('have.attr', 'href', brand.website as string)
+        .and('have.attr', 'target', '_blank')
+    })
+  })
+
+  it('clicking the manufacturer name navigates to that brand\'s detail page', () => {
     cy.request(`${api()}/brand/?limit=1`).then(({ body }) => {
       const brand = body[0] as Record<string, unknown>
       cy.get('[data-cy="manufacturers-card"]')
         .contains('[data-cy="manufacturer-name"]', brand.name as string)
-        .closest('[data-cy="manufacturers-card"]')
-        .find('[data-cy="btn-view-gear"]').click()
+        .click()
 
-      // The page must either be a brand detail page or a filtered gear listing.
-      // Regardless of route shape, every visible gear card must belong to this brand.
-      cy.get('[data-cy="gear-card"]').should('have.length.gte', 1)
-      cy.get('[data-cy="gear-card-brand"]').each(($el) => {
-        expect($el.text().trim()).to.equal(brand.name as string)
-      })
+      cy.url().should('include', `/manufacturers/${brand.id}`)
+    })
+  })
+
+  it('the detail-page brand name links to the brand\'s website', () => {
+    cy.request(`${api()}/brand/?limit=100`).then(({ body }) => {
+      const brand = (body as Record<string, unknown>[]).find(b => b.website)!
+      cy.visit(`/manufacturers/${brand.id}`)
+      cy.get('[data-cy="brand-detail-name"]')
+        .should('have.attr', 'href', brand.website as string)
+        .and('have.attr', 'target', '_blank')
     })
   })
 
