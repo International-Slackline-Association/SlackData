@@ -18,6 +18,7 @@ import { applyFilters, type RangeBounds } from '@/utils/filter'
 import { percentAtKn, topKnPoints } from '@/utils/stretch'
 import type { AnyItem } from '@/utils/format'
 import FilterSidebar from '@/components/gear/FilterSidebar'
+import type { Status } from '@/components/gear/StatusToggle'
 import StretchFilter from '@/components/gear/StretchFilter'
 import SortDropdown from '@/components/gear/SortDropdown'
 import GearGrid from '@/components/gear/GearGrid'
@@ -66,6 +67,11 @@ export default function GearListingPage() {
   const url = useUrlState()
   const { q, setQ, sort, setSort } = url
   const [view, setView] = useState<View>('cards')
+  // Lifecycle scope, owned here but controlled from the sidebar's status bubble.
+  // All = everything (the default — the listing opens on the whole catalogue).
+  // Current = still sold (active true, or unknown/null). Historic = legacy gear
+  // that's no longer sold (active === false).
+  const [status, setStatus] = useState<Status>('all')
   const navigate = useNavigate()
 
   // Compare selection: an ordered list of item ids (order = the columns/chips
@@ -98,12 +104,18 @@ export default function GearListingPage() {
   // straight to the async URL echo drops characters while Cypress types fast
   // (same race the Phase-4 range inputs hit — see RangeSlider). Seed from the URL
   // on mount; reset on clear-all via the nonce, not on every param echo.
+  // Re-seed from the clear's own intent rather than blanking: clearAll carries
+  // '' so the box empties, while the empty state's clear-filters carries the
+  // kept term so the box keeps showing it. Read from resetQuery, not `q` — the
+  // router commits the cleared params a render later than the nonce bump, so `q`
+  // here would still be the pre-clear term.
   const [query, setQuery] = useState(q)
   const prevSearchNonce = useRef(url.resetNonce)
   useEffect(() => {
     if (prevSearchNonce.current === url.resetNonce) return
     prevSearchNonce.current = url.resetNonce
-    setQuery('')
+    setQuery(url.resetQuery)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [url.resetNonce])
   // The listing component stays mounted across gear-type switches (same :slug
   // route), so resync the box from the URL when the type changes — a bare tab
@@ -175,14 +187,21 @@ export default function GearListingPage() {
   // their counts track the rest of the UI live. The stretch widget's own kN/%
   // selection is deliberately excluded — folding it in would collapse every
   // count to the engaged pill's own number the moment you clicked one.
+  // Narrow to the chosen status before anything else — search, filters, facet
+  // counts and the grid all work off this scope.
+  const scopedItems = useMemo(() => {
+    if (status === 'all') return items
+    return items.filter(it => (status === 'historic' ? it.active === false : it.active !== false))
+  }, [items, status])
+
   const contextItems = useMemo(
     () =>
       applyFilters(
-        filterBySearch(items, query) as unknown as AnyItem[],
+        filterBySearch(scopedItems, query) as unknown as AnyItem[],
         activePills,
         activeRanges,
       ),
-    [items, query, activePills, activeRanges],
+    [scopedItems, query, activePills, activeRanges],
   )
 
   const visible = useMemo(() => {
@@ -214,6 +233,19 @@ export default function GearListingPage() {
   const viewComparison = () =>
     navigate(`/${meta?.slug}/compare?ids=${selectedIds.join(',')}`)
 
+  // The two clear actions. Both drop every filter and put the status scope back
+  // to All; they differ on the search term — the empty state's button keeps it
+  // (you asked for those words; the filters are what dead-ended), the sidebar's
+  // "Clear all" wipes it.
+  const clearFilters = () => {
+    url.clearFilters()
+    setStatus('all')
+  }
+  const clearAll = () => {
+    url.clearAll()
+    setStatus('all')
+  }
+
   if (!meta) return <NotFoundPage />
 
   if (!available) {
@@ -232,7 +264,14 @@ export default function GearListingPage() {
       <h1 className="mb-6 text-2xl font-bold text-gray-900">{meta.label}</h1>
 
       <div className="flex gap-8">
-        <FilterSidebar meta={meta} items={items as unknown as AnyItem[]} url={url}>
+        <FilterSidebar
+          meta={meta}
+          items={scopedItems as unknown as AnyItem[]}
+          url={url}
+          status={status}
+          onStatusChange={setStatus}
+          onClearAll={clearAll}
+        >
           {isWebbing && (
             <StretchFilter
               items={contextItems}
@@ -305,7 +344,7 @@ export default function GearListingPage() {
           {loading ? (
             <LoadingSkeleton />
           ) : visible.length === 0 ? (
-            <EmptyState onClear={url.clearAll} />
+            <EmptyState onClear={clearFilters} />
           ) : (
             <>
               {/* The grid stays mounted-but-hidden (cheap, and the toggle just

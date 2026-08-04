@@ -26,6 +26,9 @@ export interface GearBase {
   description: string | null
   version: string | null
   notes: string | null
+  // For-sale status: true = active (still sold), false = legacy (discontinued).
+  // null = unknown/not yet verified.
+  active: boolean | null
   brand_name: string
 }
 
