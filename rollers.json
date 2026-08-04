@@ -345,11 +345,11 @@
         "active": false
     },
     {
-        "name": "Webbling Pulley",
+        "name": "High-way",
         "material": "Nylon, Aluminum",
         "weight": 67,
         "wll": null,
-        "mbs": 15,
+        "mbs": 21,
         "compatible_webbing_width": [
             25,
             26
