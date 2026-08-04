@@ -52,6 +52,7 @@ class BaseRoller(SQLModel):
     description: str | None = None
     version: str | None = None
     notes: str | None = None
+    active: bool | None = Field(default=None, index=True)
 
 class Roller(BaseRoller, table=True):
     id: int | None = Field(default=None, primary_key=True)

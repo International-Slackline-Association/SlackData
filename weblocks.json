@@ -46,7 +46,8 @@
         },
         "date_introduced": 1506117600000,
         "name": "Aeris P Weblock",
-        "product_url": "https://petramslacklines.site123.me/shop-1/aeris-p-weblock-2"
+        "product_url": "https://petramslacklines.site123.me/shop-1/aeris-p-weblock-2",
+        "active": true
     },
     {
         "image_url": "/api/gear/image_thumb/3040",
@@ -95,7 +96,8 @@
         },
         "date_introduced": 1506117600000,
         "name": "Aeris Weblock",
-        "product_url": "https://petramslacklines.site123.me/shop-1/aeris-weblock-2"
+        "product_url": "https://petramslacklines.site123.me/shop-1/aeris-weblock-2",
+        "active": true
     },
     {
         "image_url": "/api/gear/image_thumb/533",
@@ -140,7 +142,8 @@
         },
         "date_introduced": null,
         "name": "Alpine WebLock 4.0",
-        "product_url": "https://www.balancecommunity.com/blogs/slack-science/tagged/alpine-weblock-4-0"
+        "product_url": "https://www.balancecommunity.com/blogs/slack-science/tagged/alpine-weblock-4-0",
+        "active": false
     },
     {
         "image_url": "/api/gear/image_thumb/3089",
@@ -182,7 +185,8 @@
         },
         "date_introduced": 1579816800000,
         "name": "Alpine WebLock 5.0",
-        "product_url": "https://www.balancecommunity.com/products/alpine-weblock-5"
+        "product_url": "https://www.balancecommunity.com/products/alpine-weblock-5",
+        "active": false
     },
     {
         "image_url": "/api/gear/image_thumb/3255",
@@ -221,7 +225,8 @@
         },
         "date_introduced": null,
         "name": "Alpine WebLock 6.1",
-        "product_url": "https://www.balancecommunity.com/collections/webbing-anchors/products/alpine-weblock-6-0"
+        "product_url": "https://www.balancecommunity.com/collections/webbing-anchors/products/alpine-weblock-6-0",
+        "active": true
     },
     {
         "image_url": "/api/gear/image_thumb/3256",
@@ -260,7 +265,8 @@
         },
         "date_introduced": null,
         "name": "Alpine WebLock 6.1 20mm",
-        "product_url": "https://www.balancecommunity.com/collections/webbing-anchors/products/alpine-weblock-6-0"
+        "product_url": "https://www.balancecommunity.com/collections/webbing-anchors/products/alpine-weblock-6-0",
+        "active": true
     },
     {
         "image_url": "/api/gear/image_thumb/537",
@@ -305,7 +311,8 @@
         },
         "date_introduced": null,
         "name": "BaboonLock",
-        "product_url": "http://www.slackgear.co.za/product/baboonlock/"
+        "product_url": "http://www.slackgear.co.za/product/baboonlock/",
+        "active": true
     },
     {
         "image_url": "/api/gear/image_thumb/526",
@@ -336,7 +343,8 @@
         },
         "date_introduced": null,
         "name": "Banana",
-        "product_url": null
+        "product_url": null,
+        "active": false
     },
     {
         "image_url": "/api/gear/image_thumb/544",
@@ -382,7 +390,8 @@
         },
         "date_introduced": null,
         "name": "BANANA! 2.0",
-        "product_url": null
+        "product_url": null,
+        "active": false
     },
     {
         "image_url": "/api/gear/image_thumb/3117",
@@ -424,7 +433,8 @@
         },
         "date_introduced": null,
         "name": "BANANA! 3.0 SR",
-        "product_url": "https://slackhouseshop.pl/en/produkt/banana-3-0-sr/"
+        "product_url": "https://slackhouseshop.pl/en/produkt/banana-3-0-sr/",
+        "active": false
     },
     {
         "image_url": "/api/gear/image_thumb/3118",
@@ -466,7 +476,8 @@
         },
         "date_introduced": null,
         "name": "BANANA! 3.1",
-        "product_url": "https://slackhouseshop.pl/en/produkt/banana-3-1-weblock/"
+        "product_url": "https://slackhouseshop.pl/en/produkt/banana-3-1-weblock/",
+        "active": false
     },
     {
         "image_url": "/api/gear/image_thumb/502",
@@ -508,7 +519,8 @@
         },
         "date_introduced": null,
         "name": "Bandit FX",
-        "product_url": null
+        "product_url": null,
+        "active": false
     },
     {
         "image_url": "/api/gear/image_thumb/500",
@@ -548,7 +560,8 @@
         },
         "date_introduced": null,
         "name": "Bandit SH",
-        "product_url": null
+        "product_url": null,
+        "active": false
     },
     {
         "image_url": "/api/gear/image_thumb/524",
@@ -585,7 +598,8 @@
         },
         "date_introduced": null,
         "name": "Bandit SH",
-        "product_url": null
+        "product_url": null,
+        "active": false
     },
     {
         "image_url": "/api/gear/image_thumb/501",
@@ -625,7 +639,8 @@
         },
         "date_introduced": null,
         "name": "Bandit SL",
-        "product_url": null
+        "product_url": null,
+        "active": false
     },
     {
         "image_url": "/api/gear/image_thumb/525",
@@ -662,7 +677,8 @@
         },
         "date_introduced": null,
         "name": "Bandit SL",
-        "product_url": null
+        "product_url": null,
+        "active": false
     },
     {
         "image_url": "/api/gear/image_thumb/548",
@@ -709,7 +725,8 @@
         },
         "date_introduced": null,
         "name": "Beast 1.0",
-        "product_url": null
+        "product_url": null,
+        "active": false
     },
     {
         "image_url": "/api/gear/image_thumb/556",
@@ -751,7 +768,8 @@
         },
         "date_introduced": null,
         "name": "Campo weblock",
-        "product_url": null
+        "product_url": null,
+        "active": false
     },
     {
         "image_url": "/api/gear/image_thumb/505",
@@ -795,7 +813,8 @@
         },
         "date_introduced": null,
         "name": "Canon FX",
-        "product_url": "https://www.slackshop.cz/en/weblocks/24-eqb-canon-fx.html"
+        "product_url": "https://www.slackshop.cz/en/weblocks/24-eqb-canon-fx.html",
+        "active": false
     },
     {
         "image_url": "/api/gear/image_thumb/503",
@@ -834,7 +853,8 @@
         },
         "date_introduced": null,
         "name": "Canon SH",
-        "product_url": null
+        "product_url": null,
+        "active": false
     },
     {
         "image_url": "/api/gear/image_thumb/504",
@@ -882,7 +902,8 @@
         },
         "date_introduced": null,
         "name": "Canon SL",
-        "product_url": null
+        "product_url": null,
+        "active": false
     },
     {
         "image_url": "/api/gear/image_thumb/551",
@@ -929,7 +950,8 @@
         },
         "date_introduced": null,
         "name": "Catlock classic",
-        "product_url": "https://catonslack.com/product/35390452-slackline-weblock-catlock-classic"
+        "product_url": "https://catonslack.com/product/35390452-slackline-weblock-catlock-classic",
+        "active": false
     },
     {
         "image_url": "/api/gear/image_thumb/553",
@@ -979,7 +1001,8 @@
         },
         "date_introduced": null,
         "name": "Catlock mini",
-        "product_url": "https://catonslack.com/product/34629326-slackline-weblock-catlock-mini"
+        "product_url": "https://catonslack.com/product/34629326-slackline-weblock-catlock-mini",
+        "active": false
     },
     {
         "image_url": "/api/gear/image_thumb/552",
@@ -1025,7 +1048,8 @@
         },
         "date_introduced": 1519858800000,
         "name": "Catlock Pro",
-        "product_url": null
+        "product_url": null,
+        "active": false
     },
     {
         "image_url": "/api/gear/image_thumb/550",
@@ -1070,7 +1094,8 @@
         },
         "date_introduced": null,
         "name": "Catlock SR",
-        "product_url": null
+        "product_url": null,
+        "active": false
     },
     {
         "image_url": "/api/gear/image_thumb/563",
@@ -1117,7 +1142,8 @@
         },
         "date_introduced": null,
         "name": "Catlock SR PRO",
-        "product_url": null
+        "product_url": null,
+        "active": false
     },
     {
         "image_url": "/api/gear/image_thumb/523",
@@ -1148,7 +1174,8 @@
         },
         "date_introduced": null,
         "name": "Chili",
-        "product_url": null
+        "product_url": null,
+        "active": true
     },
     {
         "image_url": "/api/gear/image_thumb/549",
@@ -1196,7 +1223,8 @@
         },
         "date_introduced": null,
         "name": "CHILI 2.0",
-        "product_url": null
+        "product_url": null,
+        "active": false
     },
     {
         "image_url": "/api/gear/image_thumb/543",
@@ -1232,7 +1260,8 @@
         },
         "date_introduced": null,
         "name": "Constat weblock",
-        "product_url": null
+        "product_url": null,
+        "active": false
     },
     {
         "image_url": "/api/gear/image_thumb/512",
@@ -1269,7 +1298,8 @@
         },
         "date_introduced": null,
         "name": "Direct",
-        "product_url": null
+        "product_url": null,
+        "active": false
     },
     {
         "image_url": "/api/gear/image_thumb/522",
@@ -1311,7 +1341,8 @@
         },
         "date_introduced": null,
         "name": "Dreamcatcher",
-        "product_url": null
+        "product_url": null,
+        "active": false
     },
     {
         "image_url": "/api/gear/image_thumb/519",
@@ -1342,7 +1373,8 @@
         },
         "date_introduced": null,
         "name": "Easylock",
-        "product_url": null
+        "product_url": null,
+        "active": false
     },
     {
         "image_url": "/api/gear/image_thumb/520",
@@ -1386,7 +1418,8 @@
         },
         "date_introduced": null,
         "name": "Equilocker",
-        "product_url": "http://www.slackliner.de/Verbindungselemente/Linelocker/Equilocker.html"
+        "product_url": "http://www.slackliner.de/Verbindungselemente/Linelocker/Equilocker.html",
+        "active": true
     },
     {
         "image_url": "/api/gear/image_thumb/558",
@@ -1422,7 +1455,8 @@
         },
         "date_introduced": null,
         "name": "Fortis weblock",
-        "product_url": null
+        "product_url": null,
+        "active": false
     },
     {
         "image_url": "/api/gear/image_thumb/542",
@@ -1476,7 +1510,8 @@
         },
         "date_introduced": null,
         "name": "Frog",
-        "product_url": "https://slack-mountain.com/en/webbing-anchor/231-4047-frogx.html"
+        "product_url": "https://slack-mountain.com/en/webbing-anchor/231-4047-frogx.html",
+        "active": true
     },
     {
         "image_url": "/api/gear/image_thumb/528",
@@ -1526,7 +1561,8 @@
         },
         "date_introduced": null,
         "name": "Ginkgo",
-        "product_url": "https://slack-mountain.com/en/tricklines/166-paire-de-ginkgo-745-l-unite.html"
+        "product_url": "https://slack-mountain.com/en/tricklines/166-paire-de-ginkgo-745-l-unite.html",
+        "active": true
     },
     {
         "image_url": "/api/gear/image_thumb/3071",
@@ -1565,7 +1601,8 @@
         },
         "date_introduced": null,
         "name": "Ginkgo Mini",
-        "product_url": null
+        "product_url": null,
+        "active": false
     },
     {
         "image_url": "/api/gear/image_thumb/3019",
@@ -1601,7 +1638,8 @@
         },
         "date_introduced": null,
         "name": "Ginkgo Quickpin",
-        "product_url": null
+        "product_url": null,
+        "active": false
     },
     {
         "image_url": "/api/gear/image_thumb/506",
@@ -1637,7 +1675,8 @@
         },
         "date_introduced": null,
         "name": "Katana",
-        "product_url": null
+        "product_url": null,
+        "active": false
     },
     {
         "image_url": "/api/gear/image_thumb/507",
@@ -1676,7 +1715,8 @@
         },
         "date_introduced": null,
         "name": "Katana FX",
-        "product_url": "https://www.slackshop.cz/en/weblocks/27-eqb-katana-fx.html"
+        "product_url": "https://www.slackshop.cz/en/weblocks/27-eqb-katana-fx.html",
+        "active": true
     },
     {
         "image_url": "/api/gear/image_thumb/3252",
@@ -1714,7 +1754,8 @@
         },
         "date_introduced": null,
         "name": "KingPin",
-        "product_url": "https://slacktivity.com/shop/kingpin-weblock/"
+        "product_url": "https://slacktivity.com/shop/kingpin-weblock/",
+        "active": true
     },
     {
         "image_url": "/api/gear/image_thumb/561",
@@ -1765,7 +1806,8 @@
         },
         "date_introduced": null,
         "name": "Lime",
-        "product_url": null
+        "product_url": null,
+        "active": true
     },
     {
         "image_url": "/api/gear/image_thumb/540",
@@ -1814,7 +1856,8 @@
         },
         "date_introduced": null,
         "name": "LineLock AL MK4",
-        "product_url": "https://www.linegrip.com/shop/slackpro-linelock-al/"
+        "product_url": "https://www.linegrip.com/shop/slackpro-linelock-al/",
+        "active": false
     },
     {
         "image_url": "/api/gear/image_thumb/3041",
@@ -1856,7 +1899,8 @@
         },
         "date_introduced": 1506805200000,
         "name": "LineLock mini",
-        "product_url": "https://krok.biz/slackline/layn-lok-mini"
+        "product_url": "https://krok.biz/slackline/layn-lok-mini",
+        "active": true
     },
     {
         "image_url": "/api/gear/image_thumb/541",
@@ -1902,7 +1946,8 @@
         },
         "date_introduced": null,
         "name": "LineLock VA MKIII",
-        "product_url": null
+        "product_url": null,
+        "active": false
     },
     {
         "image_url": "/api/gear/image_thumb/3135",
@@ -1941,7 +1986,8 @@
         },
         "date_introduced": null,
         "name": "Linelocker",
-        "product_url": "https://www.slackshop.cz/cs/kotvitka/132-linelocker.html"
+        "product_url": "https://www.slackshop.cz/cs/kotvitka/132-linelocker.html",
+        "active": true
     },
     {
         "image_url": "/api/gear/image_thumb/555",
@@ -1972,7 +2018,8 @@
         },
         "date_introduced": null,
         "name": "LINK",
-        "product_url": null
+        "product_url": null,
+        "active": false
     },
     {
         "image_url": "/api/gear/image_thumb/3024",
@@ -2012,7 +2059,8 @@
         },
         "date_introduced": 1262300400000,
         "name": "Lynx 1",
-        "product_url": null
+        "product_url": null,
+        "active": false
     },
     {
         "image_url": "/api/gear/image_thumb/3023",
@@ -2046,7 +2094,8 @@
         },
         "date_introduced": 1293836400000,
         "name": "Lynx 2.1",
-        "product_url": null
+        "product_url": null,
+        "active": false
     },
     {
         "image_url": "/api/gear/image_thumb/514",
@@ -2083,7 +2132,8 @@
         },
         "date_introduced": null,
         "name": "Lynx 3.0",
-        "product_url": null
+        "product_url": null,
+        "active": false
     },
     {
         "image_url": "/api/gear/image_thumb/515",
@@ -2125,7 +2175,8 @@
         },
         "date_introduced": null,
         "name": "Lynx 4.0 SH",
-        "product_url": null
+        "product_url": null,
+        "active": false
     },
     {
         "image_url": "/api/gear/image_thumb/516",
@@ -2169,7 +2220,8 @@
         },
         "date_introduced": null,
         "name": "Lynx 4.0 Vari",
-        "product_url": null
+        "product_url": null,
+        "active": false
     },
     {
         "image_url": "/api/gear/image_thumb/3249",
@@ -2207,7 +2259,8 @@
         },
         "date_introduced": 1626901200000,
         "name": "Lynx 5",
-        "product_url": "https://aki-slacklines.de/en/hardware/weblocks/203/aki-lynx-5-webbing-locker"
+        "product_url": "https://aki-slacklines.de/en/hardware/weblocks/203/aki-lynx-5-webbing-locker",
+        "active": false
     },
     {
         "image_url": "/api/gear/image_thumb/3065",
@@ -2252,7 +2305,8 @@
         },
         "date_introduced": null,
         "name": "Mint",
-        "product_url": null
+        "product_url": null,
+        "active": false
     },
     {
         "image_url": "/api/gear/image_thumb/3085",
@@ -2295,7 +2349,8 @@
         },
         "date_introduced": null,
         "name": "Mithril - Pull Pin",
-        "product_url": "https://www.slackshop.cz/en/weblocks/145-349-eqb-mithril.html#/164-pin_version-pull_pin"
+        "product_url": "https://www.slackshop.cz/en/weblocks/145-349-eqb-mithril.html#/164-pin_version-pull_pin",
+        "active": true
     },
     {
         "image_url": "/api/gear/image_thumb/3079",
@@ -2338,7 +2393,8 @@
         },
         "date_introduced": null,
         "name": "Mithril - Quick Pin",
-        "product_url": "https://www.slackshop.cz/en/weblocks/145-350-eqb-mithril.html#/165-pin_version-quick_pin"
+        "product_url": "https://www.slackshop.cz/en/weblocks/145-350-eqb-mithril.html#/165-pin_version-quick_pin",
+        "active": true
     },
     {
         "image_url": "/api/gear/image_thumb/3081",
@@ -2369,7 +2425,8 @@
         },
         "date_introduced": 1558904400000,
         "name": "MultiLock",
-        "product_url": null
+        "product_url": null,
+        "active": false
     },
     {
         "image_url": "/api/gear/image_thumb/3251",
@@ -2412,7 +2469,8 @@
         },
         "date_introduced": null,
         "name": "Orange",
-        "product_url": "https://www.radrigs.co.uk/product-page/orange"
+        "product_url": "https://www.radrigs.co.uk/product-page/orange",
+        "active": true
     },
     {
         "image_url": "/api/gear/image_thumb/510",
@@ -2451,7 +2509,8 @@
         },
         "date_introduced": null,
         "name": "Paddle FX",
-        "product_url": "https://www.slackshop.cz/en/weblocks/25-eqb-paddle-fx.html"
+        "product_url": "https://www.slackshop.cz/en/weblocks/25-eqb-paddle-fx.html",
+        "active": true
     },
     {
         "image_url": "/api/gear/image_thumb/560",
@@ -2487,7 +2546,8 @@
         },
         "date_introduced": null,
         "name": "Paddle Linelock",
-        "product_url": null
+        "product_url": null,
+        "active": false
     },
     {
         "image_url": "/api/gear/image_thumb/509",
@@ -2529,7 +2589,8 @@
         },
         "date_introduced": null,
         "name": "Paddle SH",
-        "product_url": "http://www.slackshop.cz/en/lockers/83-eqb-paddle.html"
+        "product_url": "http://www.slackshop.cz/en/lockers/83-eqb-paddle.html",
+        "active": false
     },
     {
         "image_url": "/api/gear/image_thumb/508",
@@ -2569,7 +2630,8 @@
         },
         "date_introduced": null,
         "name": "Paddle SL",
-        "product_url": null
+        "product_url": null,
+        "active": false
     },
     {
         "image_url": "/api/gear/image_thumb/3133",
@@ -2612,7 +2674,8 @@
         },
         "date_introduced": null,
         "name": "Pirat PP",
-        "product_url": "https://www.slackshop.cz/en/weblocks/155-369-eqb-pirat.html#/164-pin_version-pull_pin"
+        "product_url": "https://www.slackshop.cz/en/weblocks/155-369-eqb-pirat.html#/164-pin_version-pull_pin",
+        "active": true
     },
     {
         "image_url": "/api/gear/image_thumb/3134",
@@ -2655,7 +2718,8 @@
         },
         "date_introduced": null,
         "name": "Pirat QP",
-        "product_url": "https://www.slackshop.cz/en/weblocks/155-368-eqb-pirat.html#/165-pin_version-quick_pin"
+        "product_url": "https://www.slackshop.cz/en/weblocks/155-368-eqb-pirat.html#/165-pin_version-quick_pin",
+        "active": true
     },
     {
         "image_url": "/api/gear/image_thumb/554",
@@ -2706,7 +2770,8 @@
         },
         "date_introduced": null,
         "name": "PRO Weblock",
-        "product_url": "https://raed-slacklines.com/pro-weblock"
+        "product_url": "https://raed-slacklines.com/pro-weblock",
+        "active": false
     },
     {
         "image_url": "/api/gear/image_thumb/517",
@@ -2748,7 +2813,8 @@
         },
         "date_introduced": null,
         "name": "Puma 2.0",
-        "product_url": null
+        "product_url": null,
+        "active": false
     },
     {
         "image_url": "/api/gear/image_thumb/547",
@@ -2791,7 +2857,8 @@
         },
         "date_introduced": 1475971200000,
         "name": "PureLock",
-        "product_url": null
+        "product_url": null,
+        "active": false
     },
     {
         "image_url": "/api/gear/image_thumb/534",
@@ -2830,7 +2897,8 @@
         },
         "date_introduced": null,
         "name": "RAGElock",
-        "product_url": "http://www.balancecommunity.com/ragelock"
+        "product_url": "http://www.balancecommunity.com/ragelock",
+        "active": false
     },
     {
         "image_url": "/api/gear/image_thumb/535",
@@ -2875,7 +2943,8 @@
         },
         "date_introduced": null,
         "name": "RamLock",
-        "product_url": "https://www.slacklinetechnology.com/shop/ramlock-slackline-anchor"
+        "product_url": "https://www.slacklinetechnology.com/shop/ramlock-slackline-anchor",
+        "active": false
     },
     {
         "image_url": "/api/gear/image_thumb/527",
@@ -2920,7 +2989,8 @@
         },
         "date_introduced": null,
         "name": "Rhino",
-        "product_url": null
+        "product_url": null,
+        "active": false
     },
     {
         "image_url": "/api/gear/image_thumb/3046",
@@ -2970,7 +3040,8 @@
         },
         "date_introduced": 1512946800000,
         "name": "Rhino Minion",
-        "product_url": "https://slack-mountain.com/fr/bloqueur-longline-highline/190-rhino-minion.html"
+        "product_url": "https://slack-mountain.com/fr/bloqueur-longline-highline/190-rhino-minion.html",
+        "active": false
     },
     {
         "image_url": "/api/gear/image_thumb/536",
@@ -3012,7 +3083,8 @@
         },
         "date_introduced": null,
         "name": "RhinoLock",
-        "product_url": "http://www.slackgear.co.za/product/rhinolock/"
+        "product_url": "http://www.slackgear.co.za/product/rhinolock/",
+        "active": true
     },
     {
         "image_url": "/api/gear/image_thumb/3047",
@@ -3048,7 +3120,8 @@
         },
         "date_introduced": 1513720800000,
         "name": "RODEO weblock",
-        "product_url": null
+        "product_url": null,
+        "active": true
     },
     {
         "image_url": "/api/gear/image_thumb/3248",
@@ -3086,7 +3159,8 @@
         },
         "date_introduced": 1513720800000,
         "name": "RODEO weblock",
-        "product_url": null
+        "product_url": null,
+        "active": true
     },
     {
         "image_url": "/api/gear/image_thumb/3070",
@@ -3126,7 +3200,8 @@
         },
         "date_introduced": null,
         "name": "Rowan 1.0 (31mm)",
-        "product_url": null
+        "product_url": null,
+        "active": false
     },
     {
         "image_url": "/api/gear/image_thumb/3057",
@@ -3163,7 +3238,8 @@
         },
         "date_introduced": 1533189600000,
         "name": "Rowan 1.0 Captive pin",
-        "product_url": null
+        "product_url": null,
+        "active": false
     },
     {
         "image_url": "/api/gear/image_thumb/3058",
@@ -3203,7 +3279,8 @@
         },
         "date_introduced": 1533189600000,
         "name": "Rowan 1.0 Captive Pin Light",
-        "product_url": null
+        "product_url": null,
+        "active": false
     },
     {
         "image_url": "/api/gear/image_thumb/3059",
@@ -3240,7 +3317,8 @@
         },
         "date_introduced": 1533189600000,
         "name": "Rowan 1.1",
-        "product_url": null
+        "product_url": null,
+        "active": false
     },
     {
         "image_url": "/api/gear/image_thumb/3060",
@@ -3280,7 +3358,8 @@
         },
         "date_introduced": 1533189600000,
         "name": "Rowan 1.3",
-        "product_url": null
+        "product_url": null,
+        "active": false
     },
     {
         "image_url": "/api/gear/image_thumb/3106",
@@ -3317,7 +3396,8 @@
         },
         "date_introduced": null,
         "name": "Rowan 3.1",
-        "product_url": null
+        "product_url": null,
+        "active": false
     },
     {
         "image_url": "/api/gear/image_thumb/3107",
@@ -3354,7 +3434,8 @@
         },
         "date_introduced": null,
         "name": "Rowan 3.1T",
-        "product_url": null
+        "product_url": null,
+        "active": false
     },
     {
         "image_url": "/api/gear/image_thumb/3108",
@@ -3391,7 +3472,8 @@
         },
         "date_introduced": null,
         "name": "Rowan 3.2",
-        "product_url": null
+        "product_url": null,
+        "active": false
     },
     {
         "image_url": "/api/gear/image_thumb/3109",
@@ -3428,7 +3510,8 @@
         },
         "date_introduced": null,
         "name": "Rowan 3.3",
-        "product_url": null
+        "product_url": null,
+        "active": false
     },
     {
         "image_url": "/api/gear/image_thumb/545",
@@ -3470,7 +3553,8 @@
         },
         "date_introduced": null,
         "name": "SeaHorse DP 1",
-        "product_url": null
+        "product_url": null,
+        "active": false
     },
     {
         "image_url": "/api/gear/image_thumb/546",
@@ -3513,7 +3597,8 @@
         },
         "date_introduced": null,
         "name": "SeaHorse DP 1.5",
-        "product_url": "https://slacktivity.com/shop/slacktivity-seahorse/"
+        "product_url": "https://slacktivity.com/shop/slacktivity-seahorse/",
+        "active": true
     },
     {
         "image_url": "/api/gear/image_thumb/3154",
@@ -3556,7 +3641,8 @@
         },
         "date_introduced": null,
         "name": "SeaHorse Sling 1",
-        "product_url": null
+        "product_url": null,
+        "active": false
     },
     {
         "image_url": "/api/gear/image_thumb/511",
@@ -3602,7 +3688,8 @@
         },
         "date_introduced": null,
         "name": "Sherriff",
-        "product_url": null
+        "product_url": null,
+        "active": false
     },
     {
         "image_url": "/api/gear/image_thumb/562",
@@ -3645,7 +3732,8 @@
         },
         "date_introduced": null,
         "name": "Sherriff FX",
-        "product_url": null
+        "product_url": null,
+        "active": false
     },
     {
         "image_url": "/api/gear/image_thumb/532",
@@ -3676,7 +3764,8 @@
         },
         "date_introduced": null,
         "name": "SlackDuck",
-        "product_url": null
+        "product_url": null,
+        "active": false
     },
     {
         "image_url": "/api/gear/image_thumb/531",
@@ -3707,7 +3796,8 @@
         },
         "date_introduced": null,
         "name": "SlackDuck-DP",
-        "product_url": null
+        "product_url": null,
+        "active": false
     },
     {
         "image_url": "/api/gear/image_thumb/538",
@@ -3751,7 +3841,8 @@
         },
         "date_introduced": null,
         "name": "Slackibloc 3.1",
-        "product_url": "https://slack-inov.com/gb/gear/95-slackiblock-31"
+        "product_url": "https://slack-inov.com/gb/gear/95-slackiblock-31",
+        "active": false
     },
     {
         "image_url": "/api/gear/image_thumb/3012",
@@ -3793,7 +3884,8 @@
         },
         "date_introduced": null,
         "name": "Slackibloc 4",
-        "product_url": null
+        "product_url": null,
+        "active": false
     },
     {
         "image_url": "/api/gear/image_thumb/539",
@@ -3829,7 +3921,8 @@
         },
         "date_introduced": null,
         "name": "Slackibloc Jump 1.2",
-        "product_url": null
+        "product_url": null,
+        "active": false
     },
     {
         "image_url": "/api/gear/image_thumb/3152",
@@ -3865,7 +3958,8 @@
         },
         "date_introduced": null,
         "name": "Slackibloc SR Pull pin",
-        "product_url": null
+        "product_url": null,
+        "active": false
     },
     {
         "image_url": "/api/gear/image_thumb/3153",
@@ -3901,7 +3995,8 @@
         },
         "date_introduced": null,
         "name": "Slackibloc SR Quick Pin",
-        "product_url": null
+        "product_url": null,
+        "active": false
     },
     {
         "image_url": "/api/gear/image_thumb/3069",
@@ -3937,7 +4032,8 @@
         },
         "date_introduced": 1531947600000,
         "name": "Slackijump",
-        "product_url": null
+        "product_url": null,
+        "active": false
     },
     {
         "image_url": "/api/gear/image_thumb/529",
@@ -3982,7 +4078,8 @@
         },
         "date_introduced": null,
         "name": "SladLock Power",
-        "product_url": null
+        "product_url": null,
+        "active": false
     },
     {
         "image_url": "/api/gear/image_thumb/557",
@@ -4024,7 +4121,8 @@
         },
         "date_introduced": null,
         "name": "Solveris weblock",
-        "product_url": null
+        "product_url": null,
+        "active": false
     },
     {
         "image_url": "/api/gear/image_thumb/3018",
@@ -4069,7 +4167,8 @@
         },
         "date_introduced": null,
         "name": "Spatium weblock",
-        "product_url": null
+        "product_url": null,
+        "active": false
     },
     {
         "image_url": "/api/gear/image_thumb/530",
@@ -4100,7 +4199,8 @@
         },
         "date_introduced": null,
         "name": "Spirit Lock",
-        "product_url": null
+        "product_url": null,
+        "active": false
     },
     {
         "image_url": "/api/gear/image_thumb/521",
@@ -4136,7 +4236,8 @@
         },
         "date_introduced": null,
         "name": "T-Rig",
-        "product_url": null
+        "product_url": null,
+        "active": false
     },
     {
         "image_url": "/api/gear/image_thumb/3253",
@@ -4174,7 +4275,8 @@
         },
         "date_introduced": null,
         "name": "TiLock 19mm",
-        "product_url": "https://raed-slacklines.com/tilock"
+        "product_url": "https://raed-slacklines.com/tilock",
+        "active": true
     },
     {
         "image_url": "/api/gear/image_thumb/3254",
@@ -4212,7 +4314,8 @@
         },
         "date_introduced": null,
         "name": "TiLock 25mm",
-        "product_url": "https://raed-slacklines.com/tilock"
+        "product_url": "https://raed-slacklines.com/tilock",
+        "active": true
     },
     {
         "image_url": "/api/gear/image_thumb/559",
@@ -4243,7 +4346,8 @@
         },
         "date_introduced": null,
         "name": "Xylon",
-        "product_url": null
+        "product_url": null,
+        "active": false
     },
     {
         "image_url": "/api/gear/image_thumb/518",
@@ -4274,7 +4378,8 @@
         },
         "date_introduced": null,
         "name": "Yang",
-        "product_url": null
+        "product_url": null,
+        "active": false
     },
     {
         "image_url": "/api/gear/image_thumb/3022",
@@ -4313,7 +4418,8 @@
         },
         "date_introduced": 1262300400000,
         "name": "Zilla 1.0",
-        "product_url": null
+        "product_url": null,
+        "active": false
     },
     {
         "image_url": "/api/gear/image_thumb/3021",
@@ -4347,7 +4453,8 @@
         },
         "date_introduced": 1293836400000,
         "name": "Zilla 2.0",
-        "product_url": null
+        "product_url": null,
+        "active": false
     },
     {
         "image_url": "/api/gear/image_thumb/513",
@@ -4388,6 +4495,7 @@
         },
         "date_introduced": null,
         "name": "Zilla 3.0",
-        "product_url": null
+        "product_url": null,
+        "active": false
     }
 ]

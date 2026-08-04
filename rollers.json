@@ -16,7 +16,8 @@
         "roller_material": null,
         "locking_type": "Non-locking",
         "date_introduced": null,
-        "product_url": "http://www.slackshop.cz/en/rigging-equipment/81-kladka-aidman.html"
+        "product_url": "http://www.slackshop.cz/en/rigging-equipment/81-kladka-aidman.html",
+        "active": false
     },
     {
         "name": "Hangover 2.0",
@@ -38,7 +39,8 @@
         "roller_material": "Steel",
         "locking_type": "Non-locking",
         "date_introduced": null,
-        "product_url": "https://www.slacktivity.com/default/longline-highline/hangover"
+        "product_url": "https://www.slacktivity.com/default/longline-highline/hangover",
+        "active": true
     },
     {
         "name": "HangOver Stainless",
@@ -61,7 +63,8 @@
         "locking_type": "Non-locking",
         "bearing_material": "Stainless Steel",
         "date_introduced": 1507064400000,
-        "product_url": "https://www.slacktivity.com/hangover-stainless"
+        "product_url": "https://www.slacktivity.com/hangover-stainless",
+        "active": true
     },
     {
         "name": "HangOver-S",
@@ -83,7 +86,8 @@
         "roller_material": "Steel",
         "locking_type": "screw lock",
         "date_introduced": null,
-        "product_url": "https://www.slacktivity.com/hangover-s"
+        "product_url": "https://www.slacktivity.com/hangover-s",
+        "active": true
     },
     {
         "name": "HangOver Royal",
@@ -106,7 +110,8 @@
         "bearing_material": "Stainless Steel",
         "locking_type": "non-locking",
         "date_introduced": null,
-        "product_url": null
+        "product_url": null,
+        "active": true
     },
     {
         "name": "HighSlide 2.0",
@@ -128,7 +133,8 @@
         "roller_material": null,
         "locking_type": "Non-locking",
         "date_introduced": null,
-        "product_url": null
+        "product_url": null,
+        "active": false
     },
     {
         "name": "LineBuggy",
@@ -150,7 +156,8 @@
         "roller_material": null,
         "locking_type": "Non-locking",
         "date_introduced": null,
-        "product_url": "http://www.slackgear.co.za/product/linebuggy/"
+        "product_url": "http://www.slackgear.co.za/product/linebuggy/",
+        "active": false
     },
     {
         "name": "Motum webbing pulley",
@@ -172,7 +179,8 @@
         "roller_material": null,
         "locking_type": "Non-locking",
         "date_introduced": null,
-        "product_url": "https://petramslacklines.site123.me/shop-1/motum-pulley"
+        "product_url": "https://petramslacklines.site123.me/shop-1/motum-pulley",
+        "active": false
     },
     {
         "name": "Pulley",
@@ -194,7 +202,8 @@
         "roller_material": null,
         "locking_type": "Non-locking",
         "date_introduced": null,
-        "product_url": "http://slack-mountain.com/en/pulley-and-tension/61-poulie-de-sangle-slack-mountain.html"
+        "product_url": "http://slack-mountain.com/en/pulley-and-tension/61-poulie-de-sangle-slack-mountain.html",
+        "active": true
     },
     {
         "name": "Rock'n'Roll",
@@ -216,7 +225,8 @@
         "roller_material": "Stainless Steel",
         "locking_type": "Non-locking",
         "date_introduced": null,
-        "product_url": null
+        "product_url": null,
+        "active": false
     },
     {
         "name": "ROLLEX SS",
@@ -239,7 +249,8 @@
         "locking_type": "Non-locking",
         "bearing_material": "Stainless Steel",
         "date_introduced": null,
-        "product_url": null
+        "product_url": null,
+        "active": true
     },
     {
         "name": "ROLLEX SG",
@@ -261,7 +272,8 @@
         "roller_material": "Aluminum",
         "locking_type": "screw locking",
         "date_introduced": null,
-        "product_url": null
+        "product_url": null,
+        "active": true
     },
     {
         "name": "ROLLEX",
@@ -283,7 +295,8 @@
         "roller_material": "Aluminum",
         "locking_type": "Non-locking",
         "date_introduced": 1555189200000,
-        "product_url": "https://www.slackshop.cz/en/rollex/157-379-rollex.html"
+        "product_url": "https://www.slackshop.cz/en/rollex/157-379-rollex.html",
+        "active": true
     },
     {
         "name": "SKIP",
@@ -305,7 +318,8 @@
         "roller_material": null,
         "locking_type": "Non-locking",
         "date_introduced": null,
-        "product_url": "http://zergeoutdoor.com/product/skip-the-high-efficiency-webbing-pulley/"
+        "product_url": "http://zergeoutdoor.com/product/skip-the-high-efficiency-webbing-pulley/",
+        "active": false
     },
     {
         "name": "SKIP UL",
@@ -327,7 +341,8 @@
         "roller_material": null,
         "locking_type": "Non-locking",
         "date_introduced": null,
-        "product_url": "http://zergeoutdoor.com/product/skip-ul-the-ultralight-stainless-steel-webbing-pulley/"
+        "product_url": "http://zergeoutdoor.com/product/skip-ul-the-ultralight-stainless-steel-webbing-pulley/",
+        "active": false
     },
     {
         "name": "Webbling Pulley",
@@ -349,7 +364,8 @@
         "roller_material": "Nylon (Polyamide)",
         "locking_type": "Non-locking",
         "date_introduced": null,
-        "product_url": null
+        "product_url": null,
+        "active": false
     },
     {
         "name": "BC Roller - Straight Gate",
@@ -369,7 +385,8 @@
         "bearing_material": "Stainless Steel",
         "locking_type": "non-locking",
         "date_introduced": null,
-        "product_url": null
+        "product_url": null,
+        "active": true
     },
     {
         "name": "BC Roller - 2-Stage Twist Lock",
@@ -389,6 +406,7 @@
         "bearing_material": "Stainless Steel",
         "locking_type": "twist lock",
         "date_introduced": null,
-        "product_url": null
+        "product_url": null,
+        "active": true
     }
 ]

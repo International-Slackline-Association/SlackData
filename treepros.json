@@ -14,7 +14,8 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Raed Slacklines"
+        "manufacturer": "Raed Slacklines",
+        "active": false
     },
     {
         "name": "Adjustable Tree Wear",
@@ -31,7 +32,8 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Bera Adventure"
+        "manufacturer": "Bera Adventure",
+        "active": true
     },
     {
         "name": "Tree-Shirt  L TreePro",
@@ -48,7 +50,8 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Slack house"
+        "manufacturer": "Slack house",
+        "active": true
     },
     {
         "name": "TreeHugger Classic",
@@ -65,7 +68,8 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Balance Community: Slackline Outfitters"
+        "manufacturer": "Balance Community: Slackline Outfitters",
+        "active": true
     },
     {
         "name": "TreeHugger Cosmic",
@@ -82,7 +86,8 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Balance Community: Slackline Outfitters"
+        "manufacturer": "Balance Community: Slackline Outfitters",
+        "active": false
     },
     {
         "name": "Breathe Tree Pro",
@@ -99,7 +104,8 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Balance Community: Slackline Outfitters"
+        "manufacturer": "Balance Community: Slackline Outfitters",
+        "active": false
     },
     {
         "name": "Tree-Shirt M TreePro",
@@ -116,7 +122,8 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Slack house"
+        "manufacturer": "Slack house",
+        "active": true
     },
     {
         "name": "Treepro XL",
@@ -133,7 +140,8 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Slackline Industries"
+        "manufacturer": "Slackline Industries",
+        "active": false
     },
     {
         "name": "Tree Pro",
@@ -150,7 +158,8 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Slackline Industries"
+        "manufacturer": "Slackline Industries",
+        "active": true
     },
     {
         "name": "Slackline Tree Protection Set",
@@ -167,7 +176,8 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Slacktivity"
+        "manufacturer": "Slacktivity",
+        "active": true
     },
     {
         "name": "TreeProtection Set | V2",
@@ -184,7 +194,8 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Slacktivity"
+        "manufacturer": "Slacktivity",
+        "active": true
     },
     {
         "name": "Tree Protection | 3L",
@@ -201,7 +212,8 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Slacktivity"
+        "manufacturer": "Slacktivity",
+        "active": true
     },
     {
         "name": "Tree Protection XL",
@@ -218,7 +230,8 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Spider slacklines"
+        "manufacturer": "Spider slacklines",
+        "active": true
     },
     {
         "name": "Protect Abre Pillow",
@@ -235,7 +248,8 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Slack Mountain"
+        "manufacturer": "Slack Mountain",
+        "active": true
     },
     {
         "name": "Tree-Shirt S TreePro",
@@ -252,7 +266,8 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Slack house"
+        "manufacturer": "Slack house",
+        "active": true
     },
     {
         "name": "Tree-Guard Set",
@@ -269,7 +284,8 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Slackline tools"
+        "manufacturer": "Slackline tools",
+        "active": false
     },
     {
         "name": "Baumschutz Basic",
@@ -286,7 +302,8 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Slackstar"
+        "manufacturer": "Slackstar",
+        "active": false
     },
     {
         "name": "Tree Pad",
@@ -303,7 +320,8 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Equilibrium Slacklines (EQB)"
+        "manufacturer": "Equilibrium Slacklines (EQB)",
+        "active": true
     },
     {
         "name": "Baumschutz Easy",
@@ -320,7 +338,8 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Slackstar"
+        "manufacturer": "Slackstar",
+        "active": false
     },
     {
         "name": "Tree Eco",
@@ -337,7 +356,8 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Slack.fr"
+        "manufacturer": "Slack.fr",
+        "active": false
     },
     {
         "name": "Tree Protection",
@@ -354,7 +374,8 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Spider slacklines"
+        "manufacturer": "Spider slacklines",
+        "active": true
     },
     {
         "name": "Treewear XL - Edition",
@@ -371,7 +392,8 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Gibbon"
+        "manufacturer": "Gibbon",
+        "active": true
     },
     {
         "name": "Treeskin",
@@ -388,6 +410,7 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Elephant"
+        "manufacturer": "Elephant",
+        "active": false
     }
 ]
