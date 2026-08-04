@@ -4,10 +4,6 @@
         "brand": "Landcruising",
         "stretch": [
             {
-                "kn": 0,
-                "percent": 0
-            },
-            {
                 "kn": 4,
                 "percent": 1.1
             },
@@ -69,10 +65,6 @@
         "name": "Core 2 LS",
         "brand": "Landcruising",
         "stretch": [
-            {
-                "kn": 0,
-                "percent": 0
-            },
             {
                 "kn": 4,
                 "percent": 0.8
@@ -136,10 +128,6 @@
         "brand": "Landcruising",
         "stretch": [
             {
-                "kn": 0,
-                "percent": 0
-            },
-            {
                 "kn": 2,
                 "percent": 0.5
             },
@@ -201,10 +189,6 @@
         "name": "T-Wave",
         "brand": "Landcruising",
         "stretch": [
-            {
-                "kn": 0,
-                "percent": 0
-            },
             {
                 "kn": 2,
                 "percent": 3.1
@@ -279,10 +263,6 @@
         "weight": 68,
         "breakingStrength": 34,
         "stretch": [
-            {
-                "kn": 0,
-                "percent": 0
-            },
             {
                 "kn": 1,
                 "percent": 1.45
@@ -441,10 +421,6 @@
         "brand": "Landcruising",
         "stretch": [
             {
-                "kn": 0,
-                "percent": 0
-            },
-            {
                 "kn": 2,
                 "percent": 0.7
             },
@@ -514,10 +490,6 @@
         "brand": "Landcruising",
         "stretch": [
             {
-                "kn": 0,
-                "percent": 0
-            },
-            {
                 "kn": 2,
                 "percent": 1.1
             },
@@ -583,10 +555,6 @@
         "name": "Wizard",
         "brand": "Landcruising",
         "stretch": [
-            {
-                "kn": 0,
-                "percent": 0
-            },
             {
                 "kn": 2,
                 "percent": 0.6
@@ -657,10 +625,6 @@
         "name": "Aero 1",
         "brand": "BalanceCommunity",
         "stretch": [
-            {
-                "kn": 0,
-                "percent": 0
-            },
             {
                 "kn": 1,
                 "percent": 0.2
@@ -757,10 +721,6 @@
         "name": "Aero 2",
         "brand": "BalanceCommunity",
         "stretch": [
-            {
-                "kn": 0,
-                "percent": 0
-            },
             {
                 "kn": 1,
                 "percent": 0.19
@@ -860,10 +820,6 @@
         "brand": "BalanceCommunity",
         "stretch": [
             {
-                "kn": 0,
-                "percent": 0
-            },
-            {
                 "kn": 1,
                 "percent": 0.58
             },
@@ -921,10 +877,6 @@
         "name": "Feather Pro",
         "brand": "BalanceCommunity",
         "stretch": [
-            {
-                "kn": 0,
-                "percent": 0
-            },
             {
                 "kn": 1,
                 "percent": 0.4
@@ -1024,10 +976,6 @@
         "brand": "BalanceCommunity",
         "stretch": [
             {
-                "kn": 0,
-                "percent": 0
-            },
-            {
                 "kn": 1,
                 "percent": 0.8
             },
@@ -1120,10 +1068,6 @@
         "name": "Mantra MK2",
         "brand": "BalanceCommunity",
         "stretch": [
-            {
-                "kn": 0,
-                "percent": 0
-            },
             {
                 "kn": 1,
                 "percent": 0.59
@@ -1222,10 +1166,6 @@
         "breakingStrength": 42,
         "stretch": [
             {
-                "kn": 0,
-                "percent": 0
-            },
-            {
                 "kn": 1,
                 "percent": 0.92
             },
@@ -1301,10 +1241,6 @@
         "name": "Mantra MK4 Flight",
         "brand": "BalanceCommunity",
         "stretch": [
-            {
-                "kn": 0,
-                "percent": 0
-            },
             {
                 "kn": 1,
                 "percent": 0.26
@@ -1400,13 +1336,9 @@
         "active": true
     },
     {
-        "name": "type-18 MK1",
+        "name": "Type 18 MK1",
         "brand": "BalanceCommunity",
         "stretch": [
-            {
-                "kn": 0,
-                "percent": 0
-            },
             {
                 "kn": 1,
                 "percent": 1
@@ -1540,10 +1472,6 @@
         "brand": "BalanceCommunity",
         "stretch": [
             {
-                "kn": 0,
-                "percent": 0
-            },
-            {
                 "kn": 1,
                 "percent": 2.37
             },
@@ -1646,10 +1574,6 @@
         "breakingStrength": 67,
         "stretch": [
             {
-                "kn": 0,
-                "percent": 0
-            },
-            {
                 "kn": 1,
                 "percent": 0.28
             },
@@ -1748,10 +1672,6 @@
         "breakingStrength": 31,
         "stretch": [
             {
-                "kn": 0,
-                "percent": 0
-            },
-            {
                 "kn": 10,
                 "percent": 3.4
             },
@@ -1772,10 +1692,6 @@
         "name": "Moonwalk",
         "brand": "Slack.fr",
         "stretch": [
-            {
-                "kn": 0,
-                "percent": 0
-            },
             {
                 "kn": 5,
                 "percent": 2.4
@@ -1815,10 +1731,6 @@
         "brand": "Slack.fr",
         "stretch": [
             {
-                "kn": 0,
-                "percent": 0
-            },
-            {
                 "kn": 5,
                 "percent": 8.5
             },
@@ -1848,10 +1760,6 @@
         "name": "Bluewing",
         "brand": "Elephant Slacklines",
         "stretch": [
-            {
-                "kn": 0,
-                "percent": 0
-            },
             {
                 "kn": 1,
                 "percent": 0.5
@@ -1954,10 +1862,6 @@
         "breakingStrength": 33,
         "stretch": [
             {
-                "kn": 0,
-                "percent": 0
-            },
-            {
                 "kn": 2,
                 "percent": 3.5
             },
@@ -2015,10 +1919,6 @@
         "weight": 72,
         "breakingStrength": 42,
         "stretch": [
-            {
-                "kn": 0,
-                "percent": 0
-            },
             {
                 "kn": 5,
                 "percent": 2
@@ -2092,78 +1992,9 @@
         "active": false
     },
     {
-        "name": "Neon ",
-        "brand": "slackPro",
-        "stretch": [
-            {
-                "kn": 0,
-                "percent": 0
-            },
-            {
-                "kn": 5,
-                "percent": 1.7
-            },
-            {
-                "kn": 6,
-                "percent": 2.1
-            },
-            {
-                "kn": 7,
-                "percent": 2.7
-            },
-            {
-                "kn": 8,
-                "percent": 3.4
-            },
-            {
-                "kn": 9,
-                "percent": 4.1
-            },
-            {
-                "kn": 10,
-                "percent": 4.8
-            },
-            {
-                "kn": 11,
-                "percent": 5.4
-            },
-            {
-                "kn": 12,
-                "percent": 5.9
-            },
-            {
-                "kn": 13,
-                "percent": 6.4
-            },
-            {
-                "kn": 14,
-                "percent": 6.8
-            },
-            {
-                "kn": 15,
-                "percent": 7.2
-            }
-        ],
-        "materialType": "Polyester",
-        "weight": 48,
-        "breakingStrength": 20,
-        "date_introduced": null,
-        "product_url": "https://www.slackshop.cz/en/webbing/30-eqb-neon.html",
-        "width": 25,
-        "thickness": 2.2,
-        "webbing_construction": "Flat",
-        "isa_certified": false,
-        "priceMeter": 27,
-        "currency": "CZK"
-    },
-    {
         "name": "Sigma N",
         "brand": "slackliner.de",
         "stretch": [
-            {
-                "kn": 0,
-                "percent": 0
-            },
             {
                 "kn": 2,
                 "percent": 3
@@ -2230,10 +2061,6 @@
         "breakingStrength": 21,
         "stretch": [
             {
-                "kn": 0,
-                "percent": 0
-            },
-            {
                 "kn": 2,
                 "percent": 5.5
             },
@@ -2290,10 +2117,6 @@
         "name": "Sigma Impact",
         "brand": "slackliner.de",
         "stretch": [
-            {
-                "kn": 0,
-                "percent": 0
-            },
             {
                 "kn": 2,
                 "percent": 1
@@ -2353,10 +2176,6 @@
         "brand": "slackliner.de",
         "stretch": [
             {
-                "kn": 0,
-                "percent": 0
-            },
-            {
                 "kn": 3,
                 "percent": 1
             },
@@ -2403,10 +2222,6 @@
         "brand": "Equilibrium",
         "stretch": [
             {
-                "kn": 0,
-                "percent": 0
-            },
-            {
                 "kn": 2.5,
                 "percent": 3
             },
@@ -2444,10 +2259,6 @@
         "name": "Sumo",
         "brand": "Equilibrium",
         "stretch": [
-            {
-                "kn": 0,
-                "percent": 0
-            },
             {
                 "kn": 2.5,
                 "percent": 2
@@ -2487,10 +2298,6 @@
         "brand": "Equilibrium",
         "stretch": [
             {
-                "kn": 0,
-                "percent": 0
-            },
-            {
                 "kn": 2.5,
                 "percent": 7
             },
@@ -2524,10 +2331,6 @@
         "name": "Flash",
         "brand": "Equilibrium",
         "stretch": [
-            {
-                "kn": 0,
-                "percent": 0
-            },
             {
                 "kn": 2.5,
                 "percent": 5
@@ -2565,10 +2368,6 @@
         "brand": "Equilibrium",
         "stretch": [
             {
-                "kn": 0,
-                "percent": 0
-            },
-            {
                 "kn": 2.5,
                 "percent": 7
             },
@@ -2602,10 +2401,6 @@
         "name": "Skye",
         "brand": "Equilibrium",
         "stretch": [
-            {
-                "kn": 0,
-                "percent": 0
-            },
             {
                 "kn": 2,
                 "percent": 0.57
@@ -2673,10 +2468,6 @@
         "brand": "Equilibrium",
         "stretch": [
             {
-                "kn": 0,
-                "percent": 0
-            },
-            {
                 "kn": 5,
                 "percent": 8
             },
@@ -2715,10 +2506,6 @@
         "brand": "yogaslackers",
         "stretch": [
             {
-                "kn": 0,
-                "percent": 0
-            },
-            {
                 "kn": 4.5,
                 "percent": 6.5
             },
@@ -2745,10 +2532,6 @@
         "name": "Cobalt",
         "brand": "SlackMountain",
         "stretch": [
-            {
-                "kn": 0,
-                "percent": 0
-            },
             {
                 "kn": 5,
                 "percent": 2.8
@@ -2783,10 +2566,6 @@
         "name": "Windu",
         "brand": "SlackMountain",
         "stretch": [
-            {
-                "kn": 0,
-                "percent": 0
-            },
             {
                 "kn": 5,
                 "percent": 3.1
@@ -2826,10 +2605,6 @@
         "breakingStrength": 21,
         "stretch": [
             {
-                "kn": 0,
-                "percent": 0
-            },
-            {
                 "kn": 5,
                 "percent": 4.3
             },
@@ -2860,10 +2635,6 @@
         "breakingStrength": 30,
         "stretch": [
             {
-                "kn": 0,
-                "percent": 0
-            },
-            {
                 "kn": 5,
                 "percent": 2.1
             },
@@ -2893,10 +2664,6 @@
         "name": "Goku 2",
         "brand": "SlackMountain",
         "stretch": [
-            {
-                "kn": 0,
-                "percent": 0
-            },
             {
                 "kn": 5,
                 "percent": 2.4
@@ -2935,10 +2702,6 @@
         "brand": "SlackMountain",
         "stretch": [
             {
-                "kn": 0,
-                "percent": 0
-            },
-            {
                 "kn": 5,
                 "percent": 4.3
             },
@@ -2973,10 +2736,6 @@
         "breakingStrength": 20,
         "stretch": [
             {
-                "kn": 0,
-                "percent": 0
-            },
-            {
                 "kn": 5,
                 "percent": 11.1
             },
@@ -2998,10 +2757,6 @@
         "name": "morpheus",
         "brand": "SlackMountain",
         "stretch": [
-            {
-                "kn": 0,
-                "percent": 0
-            },
             {
                 "kn": 5,
                 "percent": 4.9
@@ -3037,10 +2792,6 @@
         "brand": "SlackMountain",
         "stretch": [
             {
-                "kn": 0,
-                "percent": 0
-            },
-            {
                 "kn": 5,
                 "percent": 8.3
             },
@@ -3075,10 +2826,6 @@
         "brand": "SlackMountain",
         "stretch": [
             {
-                "kn": 0,
-                "percent": 0
-            },
-            {
                 "kn": 10,
                 "percent": 3.4
             },
@@ -3104,10 +2851,6 @@
         "name": "wallaby",
         "brand": "SlackMountain",
         "stretch": [
-            {
-                "kn": 0,
-                "percent": 0
-            },
             {
                 "kn": 10,
                 "percent": 2.4
@@ -3135,10 +2878,6 @@
         "brand": "SlackMountain",
         "stretch": [
             {
-                "kn": 0,
-                "percent": 0
-            },
-            {
                 "kn": 10,
                 "percent": 3.2
             },
@@ -3165,10 +2904,6 @@
         "brand": "SlackMountain",
         "stretch": [
             {
-                "kn": 0,
-                "percent": 0
-            },
-            {
                 "kn": 5,
                 "percent": 7.5
             },
@@ -3194,10 +2929,6 @@
         "name": "Cosmic",
         "brand": "Slack Inov",
         "stretch": [
-            {
-                "kn": 0,
-                "percent": 0
-            },
             {
                 "kn": 2,
                 "percent": 2.1
@@ -3276,10 +3007,6 @@
         "brand": "Slack Inov",
         "stretch": [
             {
-                "kn": 0,
-                "percent": 0
-            },
-            {
                 "kn": 3,
                 "percent": 7
             },
@@ -3313,10 +3040,6 @@
         "brand": "Slack Inov",
         "stretch": [
             {
-                "kn": 0,
-                "percent": 0
-            },
-            {
                 "kn": 3,
                 "percent": 9.2
             },
@@ -3349,10 +3072,6 @@
         "name": "Mammut",
         "brand": "Mammut",
         "stretch": [
-            {
-                "kn": 0,
-                "percent": 0
-            },
             {
                 "kn": 1,
                 "percent": 1.64
@@ -3448,10 +3167,6 @@
         "brand": "Raed Slacklines",
         "stretch": [
             {
-                "kn": 0,
-                "percent": 0
-            },
-            {
                 "kn": 1,
                 "percent": 0.3
             },
@@ -3521,21 +3236,18 @@
         "breakingStrength": 36,
         "date_introduced": 1539118800000,
         "product_url": "https://raed-slacklines.com/rainbow-polyester-highline-webbing",
-        "width": 25.4,
-        "webbing_construction": "Core/Sheath",
-        "isa_certified": false,
+        "width": 26,
+        "webbing_construction": "Flat",
+        "isa_certified": true,
         "priceMeter": 1.65,
         "currency": "EUR",
+        "notes": "Specs from raed webbing manual Annex A. loop MBS 32 kN; DLV MBS 26 kN; ISA strength class A",
         "active": true
     },
     {
         "name": "Parsec",
         "brand": "Raed Slacklines",
         "stretch": [
-            {
-                "kn": 0,
-                "percent": 0
-            },
             {
                 "kn": 1,
                 "percent": 0.25
@@ -3619,24 +3331,21 @@
         ],
         "materialType": "Polyester",
         "weight": 59,
-        "breakingStrength": 35,
+        "breakingStrength": 34,
         "date_introduced": null,
         "product_url": "https://raed-slacklines.com/parsec-longline-webbing",
         "width": 25,
         "webbing_construction": "Flat",
-        "isa_certified": false,
+        "isa_certified": true,
         "priceMeter": 0.99,
         "currency": "EUR",
+        "notes": "Specs from raed webbing manual Annex A. loop MBS 32 kN; ISA strength class A",
         "active": true
     },
     {
         "name": "MOTM",
         "brand": "Raed Slacklines",
         "stretch": [
-            {
-                "kn": 0,
-                "percent": 0
-            },
             {
                 "kn": 1,
                 "percent": 4
@@ -3720,7 +3429,7 @@
         ],
         "materialType": "Nylon",
         "weight": 56,
-        "breakingStrength": 27,
+        "breakingStrength": 26,
         "date_introduced": null,
         "product_url": "https://raed-slacklines.com/motm-tubular-nylon-slackline-webbing",
         "width": 25,
@@ -3728,16 +3437,13 @@
         "isa_certified": false,
         "priceMeter": 1.49,
         "currency": "EUR",
+        "notes": "Specs from raed webbing manual Annex A. MBS 26 kN, WLL1 5.2 kN (SF=5), WLL2 8.7 kN (SF=3); loop MBS 23 kN, TypeX MBS 13 kN; 25mm Nylon tube, 56 g/m; recommended highline length 100m, backup surplus 18%. Stretch: 20-point measured curve retained (reads 11.5% @5kN); note the manual quotes 14.3% @5kN — the two disagree, likely different production versions.",
         "active": true
     },
     {
         "name": "Helium",
         "brand": "Raed Slacklines",
         "stretch": [
-            {
-                "kn": 0,
-                "percent": 0
-            },
             {
                 "kn": 1,
                 "percent": 0.3
@@ -3819,13 +3525,9 @@
                 "percent": 9.1
             }
         ],
-        "materialType": "Hybrid",
-        "materialComposition": [
-            "Vectran",
-            "Polyester"
-        ],
+        "materialType": "Polyester",
         "weight": 38,
-        "breakingStrength": 24,
+        "breakingStrength": 23,
         "date_introduced": null,
         "product_url": "https://raed-slacklines.com/helium-lightweight-polyester-slackline-webbing",
         "width": 25,
@@ -3833,16 +3535,13 @@
         "isa_certified": false,
         "priceMeter": 0.69,
         "currency": "EUR",
+        "notes": "Specs from raed webbing manual Annex A. loop MBS 22 kN; TypeX MBS 13 kN",
         "active": true
     },
     {
         "name": "Cumulus",
         "brand": "Raed Slacklines",
         "stretch": [
-            {
-                "kn": 0,
-                "percent": 0
-            },
             {
                 "kn": 1,
                 "percent": 1.8
@@ -3920,10 +3619,6 @@
         "name": "pinkTube",
         "brand": "Slacktivity",
         "stretch": [
-            {
-                "kn": 0,
-                "percent": 0
-            },
             {
                 "kn": 1,
                 "percent": 1.6
@@ -4037,10 +3732,6 @@
         "name": "redTube",
         "brand": "Slacktivity",
         "stretch": [
-            {
-                "kn": 0,
-                "percent": 0
-            },
             {
                 "kn": 1,
                 "percent": 1.1
@@ -4207,10 +3898,6 @@
         "brand": "Slacktivity",
         "stretch": [
             {
-                "kn": 0,
-                "percent": 0
-            },
-            {
                 "kn": 1,
                 "percent": 0.3
             },
@@ -4371,10 +4058,6 @@
         "name": "Marathon Play",
         "brand": "Slacktivity",
         "stretch": [
-            {
-                "kn": 0,
-                "percent": 0
-            },
             {
                 "kn": 1,
                 "percent": 0.3
@@ -4537,10 +4220,6 @@
         "brand": "Slacktivity",
         "stretch": [
             {
-                "kn": 0,
-                "percent": 0
-            },
-            {
                 "kn": 1,
                 "percent": 0.3
             },
@@ -4671,10 +4350,6 @@
         "brand": "Balanceur",
         "stretch": [
             {
-                "kn": 0,
-                "percent": 0
-            },
-            {
                 "kn": 1,
                 "percent": 2.7025
             },
@@ -4756,10 +4431,6 @@
         "name": "Milky Way",
         "brand": "Balanceur",
         "stretch": [
-            {
-                "kn": 0,
-                "percent": 0
-            },
             {
                 "kn": 1,
                 "percent": 1.17
@@ -4910,10 +4581,6 @@
         "breakingStrength": 23,
         "stretch": [
             {
-                "kn": 0,
-                "percent": 0
-            },
-            {
                 "kn": 1,
                 "percent": 1.8
             },
@@ -4980,10 +4647,6 @@
         "breakingStrength": 33,
         "stretch": [
             {
-                "kn": 0,
-                "percent": 0
-            },
-            {
                 "kn": 1,
                 "percent": 0.4
             },
@@ -5049,10 +4712,6 @@
         "breakingStrength": 32,
         "stretch": [
             {
-                "kn": 0,
-                "percent": 0
-            },
-            {
                 "kn": 1,
                 "percent": 1.6
             },
@@ -5114,10 +4773,6 @@
         "name": "Edge",
         "brand": "Spider Slacklines",
         "stretch": [
-            {
-                "kn": 0,
-                "percent": 0
-            },
             {
                 "kn": 1,
                 "percent": 0.3
@@ -5185,10 +4840,6 @@
         "brand": "Spider Slacklines",
         "stretch": [
             {
-                "kn": 0,
-                "percent": 0
-            },
-            {
                 "kn": 1,
                 "percent": 3
             },
@@ -5254,10 +4905,6 @@
         "name": "Nylove",
         "brand": "Spider Slacklines",
         "stretch": [
-            {
-                "kn": 0,
-                "percent": 0
-            },
             {
                 "kn": 1,
                 "percent": 2.9
@@ -6659,7 +6306,7 @@
             }
         ],
         "date_introduced": 1454371200000,
-        "product_url": "https://www.middlewayslacklines.com",
+        "product_url": "https://middlewayslacklines.com/chi-25mm-slackline/",
         "thickness": 2.6,
         "webbing_construction": "Flat",
         "isa_certified": false,
@@ -7710,7 +7357,7 @@
         "materialType": "Nylon",
         "width": 19,
         "weight": 33,
-        "breakingStrength": null,
+        "breakingStrength": 15,
         "stretch": null,
         "date_introduced": null,
         "product_url": "https://raed-slacklines.com/motm-light",
@@ -7718,6 +7365,7 @@
         "isa_certified": false,
         "priceMeter": 1.49,
         "currency": "EUR",
+        "notes": "Specs from raed webbing manual Annex A.",
         "active": true
     },
     {
@@ -7860,12 +7508,12 @@
         "brand": "Raed Slacklines",
         "materialType": "Hybrid",
         "materialComposition": [
-            "Polyester",
-            "Dyneema/HMPE"
+            "Dyneema/HMPE",
+            "Polyester"
         ],
         "width": 25,
         "weight": 22,
-        "breakingStrength": 30,
+        "breakingStrength": 29,
         "stretch": [
             {
                 "percent": 1,
@@ -7878,27 +7526,29 @@
         "isa_certified": false,
         "priceMeter": 2.99,
         "currency": "EUR",
+        "notes": "Specs from raed webbing manual Annex A.",
         "active": false
     },
     {
         "name": "Aurora",
         "brand": "Raed Slacklines",
         "materialType": "Polyester",
-        "width": 25.4,
+        "width": 26,
         "weight": 61,
-        "breakingStrength": 31,
+        "breakingStrength": 29,
         "stretch": [
             {
-                "percent": 4,
-                "kn": 5
+                "kn": 5,
+                "percent": 8.1
             }
         ],
         "date_introduced": 1602190800000,
         "product_url": "https://raed-slacklines.com/aurora-polyester-highline-webbing",
-        "webbing_construction": "Core/Sheath",
-        "isa_certified": false,
+        "webbing_construction": "Flat",
+        "isa_certified": true,
         "priceMeter": 1.99,
         "currency": "EUR",
+        "notes": "Specs from raed webbing manual Annex A. loop MBS 26 kN; ISA strength class B",
         "active": true
     },
     {
@@ -8047,6 +7697,7 @@
         "isa_certified": false,
         "priceMeter": 0.69,
         "currency": "EUR",
+        "notes": "Specs from raed webbing manual Annex A.",
         "active": true
     },
     {
@@ -8217,7 +7868,7 @@
             }
         ],
         "date_introduced": null,
-        "product_url": "https://www.acrobatslackline.com/slackline1inch-1",
+        "product_url": "https://www.acrobatslackline.com/product-page/%D7%92%D7%A8%D7%99%D7%9F-%D7%9E%D7%92-%D7%99%D7%A7-%D7%A8%D7%A6%D7%95%D7%A2%D7%94-1-%D7%90%D7%99%D7%A0%D7%A6-%D7%A4%D7%A8%D7%9E%D7%99%D7%95%D7%9D",
         "thickness": 2.2,
         "webbing_construction": "Flat",
         "isa_certified": false,
@@ -8466,5 +8117,1188 @@
         "priceMeter": 1.79,
         "currency": "EUR",
         "active": false
+    },
+    {
+        "name": "Paradigm",
+        "brand": "Balance Community: Slackline Outfitters",
+        "materialType": "Nylon",
+        "width": 25.4,
+        "thickness": 2.3,
+        "weight": 44,
+        "breakingStrength": 22.2,
+        "webbing_construction": "Tubular",
+        "isa_certified": false,
+        "product_url": "https://balancecommunity.com/products/paradigm",
+        "date_introduced": null,
+        "priceMeter": null,
+        "currency": "USD",
+        "stretch": [
+            {
+                "kn": 1,
+                "percent": 2.45
+            },
+            {
+                "kn": 2,
+                "percent": 4.96
+            },
+            {
+                "kn": 3,
+                "percent": 8.49
+            },
+            {
+                "kn": 4,
+                "percent": 11.24
+            },
+            {
+                "kn": 5,
+                "percent": 13.61
+            },
+            {
+                "kn": 6,
+                "percent": 15.71
+            },
+            {
+                "kn": 7,
+                "percent": 17.51
+            },
+            {
+                "kn": 8,
+                "percent": 19.02
+            },
+            {
+                "kn": 9,
+                "percent": 20.35
+            },
+            {
+                "kn": 10,
+                "percent": 21.5
+            },
+            {
+                "kn": 11,
+                "percent": 22.62
+            },
+            {
+                "kn": 12,
+                "percent": 23.59
+            }
+        ],
+        "description": "Lightweight, high-stretch, abrasion-resistant tubular nylon freestyle highline webbing developed with Ian Eisenberg. Made in the US.",
+        "notes": null,
+        "active": false
+    },
+    {
+        "name": "Paradigm Signature",
+        "brand": "Balance Community: Slackline Outfitters",
+        "materialType": "Nylon",
+        "width": 25.4,
+        "thickness": 2.1,
+        "weight": 40,
+        "breakingStrength": 21.0,
+        "webbing_construction": "Tubular",
+        "isa_certified": false,
+        "product_url": "https://balancecommunity.com/products/paradigm-signature-1",
+        "date_introduced": null,
+        "priceMeter": 2.5,
+        "currency": "USD",
+        "stretch": [
+            {
+                "kn": 1,
+                "percent": 2.11
+            },
+            {
+                "kn": 2,
+                "percent": 4.25
+            },
+            {
+                "kn": 3,
+                "percent": 7.76
+            },
+            {
+                "kn": 4,
+                "percent": 10.36
+            },
+            {
+                "kn": 5,
+                "percent": 12.62
+            },
+            {
+                "kn": 6,
+                "percent": 14.59
+            },
+            {
+                "kn": 7,
+                "percent": 16.28
+            },
+            {
+                "kn": 8,
+                "percent": 17.74
+            },
+            {
+                "kn": 9,
+                "percent": 18.99
+            },
+            {
+                "kn": 10,
+                "percent": 20.14
+            },
+            {
+                "kn": 11,
+                "percent": 21.22
+            },
+            {
+                "kn": 12,
+                "percent": 22.13
+            }
+        ],
+        "description": "Custom Paradigm rig tuned to Ian Eisenberg's specifications: more stretch, 10% lighter. Freestyle use only.",
+        "notes": "Manufacturer marks this FOR EXPERT USE ONLY due to its lower MBS.",
+        "active": true
+    },
+    {
+        "name": "Axiom",
+        "brand": "Balance Community: Slackline Outfitters",
+        "materialType": "Dyneema/HMPE",
+        "width": 20,
+        "thickness": 2.9,
+        "weight": 33,
+        "breakingStrength": 40.0,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "product_url": "https://balancecommunity.com/products/axiom",
+        "date_introduced": null,
+        "priceMeter": 2.9,
+        "currency": "USD",
+        "stretch": [
+            {
+                "kn": 1,
+                "percent": 1.58
+            },
+            {
+                "kn": 2,
+                "percent": 2.26
+            },
+            {
+                "kn": 3,
+                "percent": 2.73
+            },
+            {
+                "kn": 4,
+                "percent": 3.1
+            },
+            {
+                "kn": 5,
+                "percent": 3.4
+            },
+            {
+                "kn": 6,
+                "percent": 3.63
+            },
+            {
+                "kn": 7,
+                "percent": 3.85
+            },
+            {
+                "kn": 8,
+                "percent": 4.02
+            },
+            {
+                "kn": 9,
+                "percent": 4.2
+            },
+            {
+                "kn": 10,
+                "percent": 4.35
+            },
+            {
+                "kn": 11,
+                "percent": 4.49
+            },
+            {
+                "kn": 12,
+                "percent": 4.62
+            }
+        ],
+        "description": "100% HMPE webbing; single layer, single zone weave. White HMPE with green HMPE marker. Woven in China, finished in Colorado.",
+        "notes": null,
+        "active": true
+    },
+    {
+        "name": "Pharaoh",
+        "brand": "Balance Community: Slackline Outfitters",
+        "materialType": "Polyester",
+        "width": 20,
+        "thickness": 2.5,
+        "weight": 49,
+        "breakingStrength": 27.0,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "product_url": "https://balancecommunity.com/products/pharaoh",
+        "date_introduced": null,
+        "priceMeter": 2.3,
+        "currency": "USD",
+        "stretch": [
+            {
+                "kn": 1,
+                "percent": 1.24
+            },
+            {
+                "kn": 2,
+                "percent": 1.97
+            },
+            {
+                "kn": 3,
+                "percent": 2.58
+            },
+            {
+                "kn": 4,
+                "percent": 3.24
+            },
+            {
+                "kn": 5,
+                "percent": 4.18
+            },
+            {
+                "kn": 6,
+                "percent": 6.02
+            },
+            {
+                "kn": 7,
+                "percent": 8.13
+            },
+            {
+                "kn": 8,
+                "percent": 9.71
+            },
+            {
+                "kn": 9,
+                "percent": 10.96
+            },
+            {
+                "kn": 10,
+                "percent": 11.96
+            },
+            {
+                "kn": 11,
+                "percent": 12.94
+            },
+            {
+                "kn": 12,
+                "percent": 13.87
+            }
+        ],
+        "description": "Mid-stretch 20mm polyester webbing, flat weave with pillowed TruRound edges and four-zone construction. Made in the US.",
+        "notes": null,
+        "active": true
+    },
+    {
+        "name": "Jelly PRO Desert",
+        "brand": "Balance Community: Slackline Outfitters",
+        "materialType": "Polyester",
+        "width": 25.4,
+        "thickness": 2.8,
+        "weight": 55,
+        "breakingStrength": 25.0,
+        "webbing_construction": "Tubular",
+        "isa_certified": false,
+        "product_url": "https://balancecommunity.com/products/jelly-pro-desert",
+        "date_introduced": null,
+        "priceMeter": 2.3,
+        "currency": "USD",
+        "stretch": [
+            {
+                "kn": 1,
+                "percent": 1.84
+            },
+            {
+                "kn": 2,
+                "percent": 2.88
+            },
+            {
+                "kn": 3,
+                "percent": 3.69
+            },
+            {
+                "kn": 4,
+                "percent": 4.5
+            },
+            {
+                "kn": 5,
+                "percent": 5.41
+            },
+            {
+                "kn": 6,
+                "percent": 6.36
+            },
+            {
+                "kn": 7,
+                "percent": 7.3
+            },
+            {
+                "kn": 8,
+                "percent": 8.15
+            },
+            {
+                "kn": 9,
+                "percent": 8.92
+            },
+            {
+                "kn": 10,
+                "percent": 9.6
+            },
+            {
+                "kn": 11,
+                "percent": 10.26
+            },
+            {
+                "kn": 12,
+                "percent": 10.88
+            }
+        ],
+        "description": "Tubular woven polyester, mid-stretch. Born from the BREATHE festival. Thickness expands to ~7.0mm under tension.",
+        "notes": "MBS 25 kN confirmed by owner (product copy's 26 kN rejected). Jelly, Jelly PRO Classic and Jelly PRO Desert are three distinct products; Classic and Desert share an identical published spec sheet and stretch curve and differ by colourway.",
+        "active": true
+    },
+    {
+        "name": "Secondaire MK2",
+        "brand": "Balance Community: Slackline Outfitters",
+        "materialType": "Polyester",
+        "width": 20,
+        "thickness": 2.5,
+        "weight": 44,
+        "breakingStrength": 27.0,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "product_url": "https://balancecommunity.com/products/secondaire-mk2",
+        "date_introduced": null,
+        "priceMeter": 1.7,
+        "currency": "USD",
+        "stretch": null,
+        "description": "Backup webbing; single zone weave with black marker yarns. Stiffer than the original Secondaire to prevent candy-caning.",
+        "notes": "Stretch chart on the product page is empty; no stretch data published.",
+        "active": true
+    },
+    {
+        "name": "Spider Silk MK5",
+        "brand": "Balance Community: Slackline Outfitters",
+        "materialType": "Hybrid",
+        "materialComposition": [
+            "Vectran",
+            "Polyester"
+        ],
+        "width": 20,
+        "thickness": 2.78,
+        "weight": 40,
+        "breakingStrength": 40.0,
+        "webbing_construction": "Other",
+        "isa_certified": false,
+        "product_url": "https://balancecommunity.com/products/spider-silk-mk5",
+        "date_introduced": null,
+        "priceMeter": 4.6,
+        "currency": "USD",
+        "stretch": [
+            {
+                "kn": 1,
+                "percent": 0.37
+            },
+            {
+                "kn": 2,
+                "percent": 1.33
+            },
+            {
+                "kn": 3,
+                "percent": 1.83
+            },
+            {
+                "kn": 4,
+                "percent": 2.25
+            },
+            {
+                "kn": 5,
+                "percent": 2.64
+            },
+            {
+                "kn": 6,
+                "percent": 2.95
+            },
+            {
+                "kn": 7,
+                "percent": 3.24
+            },
+            {
+                "kn": 8,
+                "percent": 3.44
+            },
+            {
+                "kn": 9,
+                "percent": 3.63
+            },
+            {
+                "kn": 10,
+                "percent": 3.79
+            },
+            {
+                "kn": 11,
+                "percent": 4.06
+            },
+            {
+                "kn": 12,
+                "percent": 4.18
+            }
+        ],
+        "description": "Dual layer weave with dual strength zones. Mostly Vectran with polyester edges and marker line. Made in the US.",
+        "notes": null,
+        "active": true
+    },
+    {
+        "name": "Silk 99",
+        "brand": "Balance Community: Slackline Outfitters",
+        "materialType": "Dyneema/HMPE",
+        "width": 19,
+        "thickness": 1.45,
+        "weight": 19,
+        "breakingStrength": 40.0,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "product_url": "https://balancecommunity.com/products/silk-99",
+        "date_introduced": null,
+        "priceMeter": 4.2,
+        "currency": "USD",
+        "stretch": [
+            {
+                "kn": 1,
+                "percent": 0.23
+            },
+            {
+                "kn": 2,
+                "percent": 0.69
+            },
+            {
+                "kn": 3,
+                "percent": 1.04
+            },
+            {
+                "kn": 4,
+                "percent": 1.29
+            },
+            {
+                "kn": 5,
+                "percent": 1.57
+            },
+            {
+                "kn": 6,
+                "percent": 1.73
+            },
+            {
+                "kn": 7,
+                "percent": 1.86
+            },
+            {
+                "kn": 8,
+                "percent": 2.07
+            },
+            {
+                "kn": 9,
+                "percent": 2.17
+            },
+            {
+                "kn": 10,
+                "percent": 2.24
+            },
+            {
+                "kn": 11,
+                "percent": 2.39
+            },
+            {
+                "kn": 12,
+                "percent": 2.53
+            }
+        ],
+        "description": "Dyneema SK99 and black HMPE, single layer single zone weave. Built for giga-lines; enhanced creep performance. Made in the US.",
+        "notes": null,
+        "active": true
+    },
+    {
+        "name": "PULSAR",
+        "brand": "Raed Slacklines",
+        "materialType": "Polyester",
+        "width": 19,
+        "thickness": null,
+        "weight": 42,
+        "breakingStrength": 26.0,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "product_url": "https://raed-sports.com/products/pulsar-19mm-highline-backup-webbing",
+        "date_introduced": null,
+        "priceMeter": 1.56,
+        "currency": "USD",
+        "stretch": null,
+        "description": "19mm polyester highline backup webbing with NFC loops for lifetime tracking. Made in Germany, OekoTex 100 compliant.",
+        "notes": "Specs from raed webbing manual Annex A.",
+        "active": true
+    },
+    {
+        "name": "X-Wing",
+        "brand": "Raed Slacklines",
+        "materialType": "Nylon",
+        "width": 19,
+        "thickness": null,
+        "weight": 49,
+        "breakingStrength": 22,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "product_url": "https://raed-sports.com/products/x-wing-webbing",
+        "date_introduced": null,
+        "priceMeter": 1.75,
+        "currency": "USD",
+        "stretch": [
+            {
+                "kn": 5,
+                "percent": 24.0
+            }
+        ],
+        "description": "Highline freestyle webbing. Sold in 30/50/75/100m and custom lengths.",
+        "notes": "Specs from raed webbing manual Annex A (width 20mm confirmed by owner). MBS 22 kN, WLL1 4.4 kN (SF=5), WLL2 7.3 kN (SF=3); 49 g/m Nylon, flat weave; 24% stretch @5kN; recommended highline length 30m, backup surplus 26%. No live product page on raed-sports.com, hence no product_url or price.",
+        "active": true
+    },
+    {
+        "name": "Y2K Light",
+        "brand": "Slacktivity",
+        "materialType": "Hybrid",
+        "materialComposition": [
+            "Polyester",
+            "Dyneema/HMPE"
+        ],
+        "width": 18,
+        "thickness": null,
+        "weight": 29,
+        "breakingStrength": 27.0,
+        "webbing_construction": "Core/Sheath",
+        "isa_certified": false,
+        "product_url": "https://slacktivity.com/shop/y2k-light-18mm-hightech-webbing/",
+        "date_introduced": null,
+        "priceMeter": 3.93,
+        "currency": "EUR",
+        "stretch": [
+            {
+                "kn": 5,
+                "percent": 1.0
+            }
+        ],
+        "description": "18mm kern-mantel hightech webbing: 50% polyester cover / 50% UHMWPE core, 3-layer construction. Endloop MBS 27kN.",
+        "notes": "Explicitly NOT ISA certified for highlining. Max 5kN tension with a single webbing grab; above 5kN two LineGrips in series.",
+        "active": true
+    },
+    {
+        "name": "AcroLine",
+        "brand": "Slacktivity",
+        "materialType": "Polyester",
+        "width": 50,
+        "thickness": null,
+        "weight": 177,
+        "breakingStrength": null,
+        "webbing_construction": "Tubular",
+        "isa_certified": false,
+        "product_url": "https://slacktivity.com/shop/acroline-webbing/",
+        "date_introduced": null,
+        "priceMeter": 9.15,
+        "currency": "EUR",
+        "stretch": null,
+        "description": "50mm double tubular tape filled with polyester fibers, sewn padding. Rigged untensioned like a rodeo line for acro/yoga use. 8m or 12m.",
+        "notes": "No MBS published — rigged at very low load by design.",
+        "active": true
+    },
+    {
+        "name": "PRO",
+        "brand": "Slacktivity",
+        "materialType": "Polyester",
+        "width": 37,
+        "thickness": null,
+        "weight": 64,
+        "breakingStrength": 32.0,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "product_url": "https://slacktivity.com/shop/pro-low-stretch-webbing/",
+        "date_introduced": null,
+        "priceMeter": 2.6,
+        "currency": "EUR",
+        "stretch": [
+            {
+                "kn": 10,
+                "percent": 3.0
+            }
+        ],
+        "description": "Low stretch 37mm park/longline webbing tensionable to 100m with ratchets alone. 1-meter distance markers.",
+        "notes": null,
+        "active": true
+    },
+    {
+        "name": "Experience",
+        "brand": "Slacktivity",
+        "materialType": "Polyester",
+        "width": 37,
+        "thickness": null,
+        "weight": 63,
+        "breakingStrength": 34.0,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "product_url": "https://slacktivity.com/shop/experience-30m-70m/",
+        "date_introduced": null,
+        "priceMeter": 2.4,
+        "currency": "EUR",
+        "stretch": [
+            {
+                "kn": 10,
+                "percent": 5.0
+            }
+        ],
+        "description": "Versatile 37mm low-stretch webbing usable as both longline and trickline. whiteGrip surface for wet-condition grip.",
+        "notes": null,
+        "active": true
+    },
+    {
+        "name": "GREEN T20",
+        "brand": "Slacktivity",
+        "materialType": "Nylon",
+        "width": 20,
+        "thickness": null,
+        "weight": 28,
+        "breakingStrength": 12.0,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "product_url": "https://slacktivity.com/shop/green-t20/",
+        "date_introduced": null,
+        "priceMeter": 2,
+        "currency": "EUR",
+        "stretch": null,
+        "description": "20mm soft-stretch nylon webbing with colored sublimation print, sold in 20m lengths. Travel line or home rodeoline.",
+        "notes": null,
+        "active": true
+    },
+    {
+        "name": "LEMON HAZE",
+        "brand": "Spider slacklines",
+        "materialType": "Hybrid",
+        "materialComposition": [
+            "Dyneema/HMPE",
+            "Polyester"
+        ],
+        "width": 20,
+        "thickness": null,
+        "weight": null,
+        "breakingStrength": 32.0,
+        "webbing_construction": "Tubular",
+        "isa_certified": false,
+        "product_url": "https://slacklines.us/products/lemon-haze",
+        "date_introduced": null,
+        "priceMeter": 3.9,
+        "currency": "USD",
+        "stretch": null,
+        "description": "20mm tubular webbing blending UHMWPE white fibers with coloured PES fibers. High stretch, anti-slip surface. Designed and made in Italy.",
+        "notes": "MBS 32 kN confirmed by owner. 20mm tubular webbing blending UHMWPE white fibres with coloured PES fibres. High stretch, anti-slip surface. Designed and made in Italy. Weight and thickness not published.",
+        "active": true
+    },
+    {
+        "name": "PANTHER",
+        "brand": "Spider slacklines",
+        "materialType": "Nylon",
+        "width": 25,
+        "thickness": 3.1,
+        "weight": 50,
+        "breakingStrength": 24.0,
+        "webbing_construction": "Tubular",
+        "isa_certified": false,
+        "product_url": "https://slacklines.us/products/panther",
+        "date_introduced": null,
+        "priceMeter": 2.0,
+        "currency": "USD",
+        "stretch": null,
+        "description": "Tubular nylon polyamide core freestyle/highline webbing with improved grip surface and abrasion resistance. Made in Italy/France.",
+        "notes": "MBS 24 kN confirmed by owner (the on-page datasheet's 31 kN is wrong). Tubular nylon polyamide core freestyle/highline webbing with improved grip surface and abrasion resistance. Made in Italy/France. Weight/thickness from product copy; stretch curve not published.",
+        "active": true
+    },
+    {
+        "name": "GREEN MAMBA",
+        "brand": "Spider slacklines",
+        "materialType": "Polyester",
+        "width": 20,
+        "thickness": 2.8,
+        "weight": 44,
+        "breakingStrength": 28.0,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "product_url": "https://slacklines.us/products/highline-webbing-greenmamba",
+        "date_introduced": null,
+        "priceMeter": 1.69,
+        "currency": "USD",
+        "stretch": null,
+        "description": "High-tenacity polyester highline backup webbing, flat core with soft edges. Green top / black bottom for twist detection.",
+        "notes": "Does not fit standard weblocks; anchors via LINELOCK ALUMINUM RING. Max 180 days UV exposure.",
+        "active": true
+    },
+    {
+        "name": "Dyneemite PRO",
+        "brand": "Raed Slacklines",
+        "materialType": "Hybrid",
+        "materialComposition": [
+            "Dyneema/HMPE",
+            "Polyester"
+        ],
+        "width": 19,
+        "thickness": null,
+        "weight": 22,
+        "breakingStrength": 34,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "product_url": null,
+        "date_introduced": null,
+        "priceMeter": null,
+        "currency": "EUR",
+        "stretch": [
+            {
+                "kn": 5,
+                "percent": 0.6
+            }
+        ],
+        "description": "19mm slim, 34 kN, ultralight 22 g/m Dyneema/polyester blend. Slimmer than Dyneemite but stronger and thicker at the same weight; the 19mm width significantly reduces wind drag on big lines compared to 25mm webbing. Recommended highline length up to 200m.",
+        "notes": "Specs from raed webbing manual Annex A. WLL1 6.8 kN (SF=5), WLL2 11.3 kN (SF=3); recommended weblock RigLock 19mm. ISA certification as Type A highline webbing is INTENDED but not yet granted — manufacturer states it is pending the final production batch, so isa_certified stays false. No live product page on raed-sports.com (appears in the shop only as used stock), hence no product_url or price.",
+        "active": false
+    },
+    {
+        "name": "Jelly PRO Classic",
+        "brand": "Balance Community: Slackline Outfitters",
+        "materialType": "Polyester",
+        "width": 25.4,
+        "thickness": 2.8,
+        "weight": 55,
+        "breakingStrength": 25.0,
+        "webbing_construction": "Tubular",
+        "isa_certified": false,
+        "product_url": "https://balancecommunity.com/products/jelly-pro",
+        "date_introduced": null,
+        "priceMeter": 2.3,
+        "currency": "USD",
+        "stretch": [
+            {
+                "kn": 1,
+                "percent": 1.84
+            },
+            {
+                "kn": 2,
+                "percent": 2.88
+            },
+            {
+                "kn": 3,
+                "percent": 3.69
+            },
+            {
+                "kn": 4,
+                "percent": 4.5
+            },
+            {
+                "kn": 5,
+                "percent": 5.41
+            },
+            {
+                "kn": 6,
+                "percent": 6.36
+            },
+            {
+                "kn": 7,
+                "percent": 7.3
+            },
+            {
+                "kn": 8,
+                "percent": 8.15
+            },
+            {
+                "kn": 9,
+                "percent": 8.92
+            },
+            {
+                "kn": 10,
+                "percent": 9.6
+            },
+            {
+                "kn": 11,
+                "percent": 10.26
+            },
+            {
+                "kn": 12,
+                "percent": 10.88
+            }
+        ],
+        "description": "Tubular woven polyester, mid-stretch, in the original Jelly PRO colourway. 25 kN and 55 g/m; thickness expands to ~7.0mm under tension. Stronger, highline-capable successor to the original Jelly.",
+        "notes": "Jelly, Jelly PRO Classic and Jelly PRO Desert are three distinct products. Classic and Desert share an identical published spec sheet and stretch curve — they differ by colourway — but are sold and tracked separately.",
+        "active": true
+    },
+    {
+        "name": "Yolo T-1",
+        "brand": "Geko Slacklines",
+        "materialType": "Polyester",
+        "width": 25,
+        "thickness": 3.0,
+        "weight": 58.5,
+        "breakingStrength": 26.5,
+        "webbing_construction": "Tubular",
+        "isa_certified": false,
+        "product_url": "https://gekoslacklines.mx/producto/yolo-t-1-por-metro",
+        "date_introduced": null,
+        "priceMeter": 40.0,
+        "currency": "MXN",
+        "stretch": [
+            {
+                "kn": 5,
+                "percent": 5.0
+            },
+            {
+                "kn": 10,
+                "percent": 10.5
+            }
+        ],
+        "description": "The first highline webbing designed and made in Mexico, by Mexican highliners. 100% polyester with a tubular construction and padded edges — easy to tension like polyester, with the playful dynamism of a tubular weave, and added comfort when rigging, walking or catching the line. Well suited to park use and to highlines of 60m or more. Colours were chosen from available pre-dyed fibres to minimise water use in manufacturing.",
+        "notes": "Specs from the manufacturer (translated from Spanish): MBS 26.5 kN, recommended WLL 5.3 kN, elasticity 5% @5kN and 10.5% @10kN, 58.5 g/m, 3mm thick, PES. Width 25mm confirmed by owner. Also sold as a 100m piece with sewn ends.",
+        "active": true
+    },
+    {
+        "name": "Xiui T1",
+        "brand": "Geko Slacklines",
+        "materialType": "Nylon",
+        "width": 25,
+        "thickness": null,
+        "weight": 56,
+        "breakingStrength": 25.0,
+        "webbing_construction": "Tubular",
+        "isa_certified": false,
+        "product_url": "https://gekoslacklines.mx/producto/xiui-t1-por-metro",
+        "date_introduced": null,
+        "priceMeter": 42.0,
+        "currency": "MXN",
+        "stretch": [
+            {
+                "kn": 10,
+                "percent": 9.0
+            }
+        ],
+        "description": "A light, soft tubular nylon webbing with dynamic rebound, designed by Geko Slacklines for those after a lively but stable feel on slackline or highline. Suited to flowing crossings, training and versatile rigging, and primarily to freestyle. Compatible with 1\" (25mm) slackline and highline systems; usable as highline main or backup, and for longline.",
+        "notes": "Specs from the manufacturer (translated from Spanish): 25mm tubular polyamide (nylon), 56 g/m, MBS 25 kN, elongation 8–10% @10kN (midpoint 9% recorded), continuous tubular weave. Manufacturer states the webbing corresponds to ISA Type C with a maximum 180 days of accumulated sun exposure, but also that it is NOT certified as PPE — treated as not ISA-certified. Retire if cut, severely abraded or discoloured.",
+        "active": true
+    },
+    {
+        "name": "Flama",
+        "brand": "Slack house",
+        "materialType": "Nylon",
+        "width": 20,
+        "thickness": 3.2,
+        "weight": 52,
+        "breakingStrength": 23,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "product_url": "https://slackhouseshop.pl/en/produkt/flama/",
+        "date_introduced": null,
+        "priceMeter": 7.0,
+        "currency": "PLN",
+        "stretch": null,
+        "description": "Slackhouse's freestyle webbing, designed specifically for bouncing with slackline bungees. High strength and durability at a reduced weight, tuned over many iterations for a long, smooth bounce with explosive power. Paired with a lightweight backup such as Tiger webbing or Aero HMPE rope it forms Slackhouse's top-end freestyle set.",
+        "notes": "Manufacturer specs (slackhouseshop.pl): 20 mm flat polyamide (nylon), 3.20 mm thick, 52 g/m, MBS 23 kN, sewn-loop MBS 20 kN, WLL 5 kN, made in Poland. Slackhouse recommends bungee model v5 below 50 m, v6 for 50–60 m and v6+ above 60 m, tensioned to about 2.4 kN. No stretch curve is published for Flama. Price is per metre (7.00 PLN/m on the Polish shop; the English shop quotes EUR).",
+        "active": true
+    },
+    {
+        "name": "Tiger",
+        "brand": "Slack house",
+        "materialType": "Dyneema/HMPE",
+        "width": 21.5,
+        "thickness": 2.5,
+        "weight": 29.8,
+        "breakingStrength": 30,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "product_url": "https://slackhouseshop.pl/en/produkt/tiger/",
+        "date_introduced": null,
+        "priceMeter": 13.0,
+        "currency": "PLN",
+        "stretch": [
+            {
+                "kn": 5,
+                "percent": 1.9
+            },
+            {
+                "kn": 10,
+                "percent": 2.8
+            }
+        ],
+        "description": "Ultralight UHMWPE longline/highline webbing at under 30 g/m. Its very low stretch makes tensioning the longest projects efficient, while the reduced 21.5 mm width cuts wind exposure and softens the edges. Available in orange or black, and also a popular lightweight backup for freestyle sets.",
+        "notes": "Manufacturer specs (slackhouseshop.pl): 21.5 mm flat UHMWPE, 2.5 mm thick, 29.8 g/m, MBS 30 kN, sewn-loop MBS 30 kN, WLL 8 kN, elongation 1.9 % @ 5 kN and 2.8 % @ 10 kN, backup +7 %, made in China. Sold as 50 m or 100 m sewn segments (ST loops with an integrated soft thimble by default, or flat FL loops). Not compatible with standard weblocks or with rubber-jaw grips (too slippery) — anchor via the sewn loops or a Petram Simplex-type device with a double wrap. UHMWPE melts at 140–150 °C, so friction damage develops faster than on PA/PES. Manufacturer caps service life at 5 years and advises against permanent installs as a mainline; recommended as a mainline only from ~150 m. The prose description quotes 2.4 % @ 5 kN / 2.9 % @ 10 kN — the spec table values recorded here are the manufacturer's tabulated figures. Price is per metre at the 100 m segment (13.00 PLN/m); longer orders are cheaper per metre.",
+        "active": true
+    },
+    {
+        "name": "Rubbit",
+        "brand": "Slack house",
+        "materialType": "Nylon",
+        "width": 26,
+        "thickness": 3.35,
+        "weight": 61.1,
+        "breakingStrength": 24,
+        "webbing_construction": "Tubular",
+        "isa_certified": false,
+        "product_url": "https://slackhouseshop.pl/en/produkt/rubbit/",
+        "date_introduced": null,
+        "priceMeter": 9.6,
+        "currency": "PLN",
+        "stretch": [
+            {
+                "kn": 1,
+                "percent": 2.19
+            },
+            {
+                "kn": 2,
+                "percent": 5.5
+            },
+            {
+                "kn": 3,
+                "percent": 8.57
+            },
+            {
+                "kn": 4,
+                "percent": 10.59
+            },
+            {
+                "kn": 5,
+                "percent": 12.29
+            },
+            {
+                "kn": 6,
+                "percent": 13.59
+            },
+            {
+                "kn": 7,
+                "percent": 14.8
+            },
+            {
+                "kn": 8,
+                "percent": 16.0
+            },
+            {
+                "kn": 9,
+                "percent": 17.0
+            },
+            {
+                "kn": 10,
+                "percent": 17.7
+            },
+            {
+                "kn": 11,
+                "percent": 18.5
+            },
+            {
+                "kn": 12,
+                "percent": 19.1
+            },
+            {
+                "kn": 13,
+                "percent": 19.81
+            },
+            {
+                "kn": 14,
+                "percent": 20.51
+            },
+            {
+                "kn": 15,
+                "percent": 21.41
+            },
+            {
+                "kn": 16,
+                "percent": 22.42
+            },
+            {
+                "kn": 17,
+                "percent": 23.22
+            },
+            {
+                "kn": 18,
+                "percent": 24.12
+            },
+            {
+                "kn": 19,
+                "percent": 25.02
+            },
+            {
+                "kn": 20,
+                "percent": 26.19
+            }
+        ],
+        "description": "A modern, super-stretchy tubular nylon webbing built for big freestyle moves. The dense weave feels soft underfoot while still giving the grip needed for tricks, and the 'Pillowed Edges' rounded construction stays comfortable to catch late in a session.",
+        "notes": "Manufacturer specs (slackhouseshop.pl), version MK II: 26 mm tubular polyamide (nylon), 3.35 mm thick, 61.1 g/m, MBS 24 kN, sewn-loop MBS 22.4 kN, T-loop MBS 19.5 kN, WLL 6 kN, backup +15–20 %, made in Poland. Elongation is published as 12.3 % @ 5 kN and 17.7 % @ 10 kN; the curve stored here was digitised from Slackhouse's own stretch chart and reads 12.29 % / 17.70 % at those points. Also offered through the shop's 'Rubbit X-Type' configurator (X-type stitching), which is the same webbing, not a separate product. Price is the per-metre rate (9.60 PLN/m).",
+        "active": true
+    },
+    {
+        "name": "Slamina",
+        "brand": "Gibbon",
+        "materialType": "Other",
+        "width": 50,
+        "thickness": null,
+        "weight": null,
+        "breakingStrength": 30,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "product_url": "https://slackhouseshop.pl/en/produkt/gibbon-slamina-trickline-50mm/",
+        "date_introduced": null,
+        "priceMeter": 11.96,
+        "currency": "PLN",
+        "stretch": null,
+        "description": "Jaan Roose's signature high-performance trickline webbing, built for extremely dynamic acrobatics. An innovative printed line design gives high visibility and a distinctive feel.",
+        "notes": "Sold as a 25 m piece. Published specs: 50 mm wide, 25 m long, MBS 30 kN, 2.2 kg packed weight, made in China. Fibre is not published by Gibbon or any retailer checked (Gibbon's other 50 mm tricklines are polyester), so the material is recorded as Other rather than guessed; g/m weight is likewise unpublished — the 2.2 kg figure is the packed shipping weight. Listed by Slackhouse (slackhouseshop.pl), which names Gibbon as the producer; imported under Gibbon rather than the shop, per the master list's retailer rule. Discontinued: absent from Gibbon's own shop and sold out at Slackhouse. Price is 299.00 PLN for the 25 m piece (11.96 PLN/m).",
+        "active": false
+    },
+    {
+        "name": "Brasileirinha (Nylon)",
+        "brand": "Bera Adventure",
+        "materialType": "Nylon",
+        "width": 25,
+        "thickness": null,
+        "weight": 60,
+        "breakingStrength": 28,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "product_url": "https://www.beraadventure.com.br/product/fita-flat-brasileirinha-nylon-25mm-x-50-metros/",
+        "date_introduced": null,
+        "priceMeter": 8.0,
+        "currency": "BRL",
+        "stretch": [
+            {
+                "kn": 10,
+                "percent": 12.0
+            }
+        ],
+        "description": "Bera's flat nylon all-rounder — strong, very dynamic and aimed at walkers who like a loose, lively line. Intended for longline, highline, rodeoline and waterline use.",
+        "notes": "Manufacturer specs (beraadventure.com.br): 100 % polyamide (nylon), 25 mm flat, MBS 28 kN, WLL 5.6 kN (5 kN with a sewn eye), safety factor 5:1, stretch 12 % @ 10 kN, 60 g/m. Sold in 30/50/75/100/200 m lengths, in white and purple (roxa); the 50 m white piece is the reference row here. Price is per metre derived from the base length prices (R$ 400 / 50 m = 8.00 BRL/m); sewn-eye options add a surcharge.",
+        "active": true
+    },
+    {
+        "name": "Sky 2.0",
+        "brand": "Bera Adventure",
+        "materialType": "Polyester",
+        "width": 25,
+        "thickness": null,
+        "weight": 68,
+        "breakingStrength": 35,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "product_url": "https://www.beraadventure.com.br/product/fita-flat-double-face-sky-2-0-50-metros-vinho-e-lilas/",
+        "date_introduced": null,
+        "priceMeter": 7.0,
+        "currency": "BRL",
+        "stretch": [
+            {
+                "kn": 10,
+                "percent": 6.7
+            }
+        ],
+        "description": "Flat double-face polyester webbing woven from coloured polyester yarns, with high resistance to heat, UV and abrasion — Bera's pick for longlines and highlines. Sold in a wine-and-lilac colourway.",
+        "notes": "Manufacturer specs (beraadventure.com.br): 100 % polyester, 25 mm flat double-face, MBS 35 kN, WLL 7 kN (5 kN with a sewn eye), safety factor 5:1, stretch 6.7 % @ 10 kN, 68 g/m. Predominant colours wine (vinho) and lilac. Sold in 30–200 m lengths; price per metre derived from the base length prices (R$ 350 / 50 m = 7.00 BRL/m). Distinct product from Sky 2.0 3D.",
+        "active": true
+    },
+    {
+        "name": "Sky 2.0 3D",
+        "brand": "Bera Adventure",
+        "materialType": "Polyester",
+        "width": 25,
+        "thickness": null,
+        "weight": 68,
+        "breakingStrength": 33,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "product_url": "https://www.beraadventure.com.br/product/fita-flat-double-face-sky-2-0-3d-50-metros/",
+        "date_introduced": null,
+        "priceMeter": 5.5,
+        "currency": "BRL",
+        "stretch": [
+            {
+                "kn": 10,
+                "percent": 6.7
+            }
+        ],
+        "description": "The 3D-weave version of Bera's flat double-face Sky 2.0 polyester webbing — same heat, UV and abrasion resistance for longlines and highlines, in a white line with royal-blue and orange detailing.",
+        "notes": "Manufacturer specs (beraadventure.com.br): 100 % polyester, 25 mm flat double-face 3D weave, MBS 33 kN, WLL 6.6 kN (5 kN with a sewn eye), safety factor 5:1, stretch 6.7 % @ 10 kN, 68 g/m. Predominant colour white with royal blue and orange details. Sold in 30–200 m lengths; price per metre derived from the base length prices (R$ 275 / 50 m = 5.50 BRL/m). Separate product from Sky 2.0 — lower MBS and a different weave.",
+        "active": true
+    },
+    {
+        "name": "Brazilian Tube",
+        "brand": "Bera Adventure",
+        "materialType": "Nylon",
+        "width": 25,
+        "thickness": null,
+        "weight": 50,
+        "breakingStrength": 25.5,
+        "webbing_construction": "Tubular",
+        "isa_certified": false,
+        "product_url": "https://www.beraadventure.com.br/product/brazilian-tube/",
+        "date_introduced": null,
+        "priceMeter": 8.0,
+        "currency": "BRL",
+        "stretch": [
+            {
+                "kn": 6,
+                "percent": 20.0
+            }
+        ],
+        "description": "A tubular nylon webbing with very high elasticity, made for highline freestyle.",
+        "notes": "Manufacturer specs (beraadventure.com.br): 100 % polyamide (nylon), 25 mm tubular, MBS 25.5 kN, stretch 20 % @ 6 kN, 50 g/m, white. Sold in 60, 80 or 100 m lengths; price per metre derived from the base 60 m price (R$ 480 / 60 m = 8.00 BRL/m). Bera reuses one generic coil photo across several flat webbings — only the tubular close-up is stored for this row.",
+        "active": true
+    },
+    {
+        "name": "Lagoon",
+        "brand": "Equilibrium Slacklines (EQB)",
+        "materialType": "Hybrid",
+        "materialComposition": [
+            "Dyneema/HMPE",
+            "Polyester"
+        ],
+        "width": 25,
+        "thickness": null,
+        "weight": 35,
+        "breakingStrength": 31,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "product_url": "https://www.slackshop.cz/en/dyneema/256-eqb-lagoon.html",
+        "date_introduced": null,
+        "priceMeter": 2.99,
+        "currency": "EUR",
+        "stretch": [
+            {
+                "kn": 10,
+                "percent": 3.0
+            }
+        ],
+        "description": "Ultralight fifty-fifty dyneema/polyester webbing for extreme projects — alpine highlines and monster longlines. The HMPE gives the weight and strength, the polyester cuts the slippage that pure dyneema suffers in weblocks and grips. EQB's best strength-to-weight webbing: over 30 kN at just 35 g/m.",
+        "notes": "Manufacturer data sheet (slackshop.cz): 25 mm, 35 g/m, MBS 31 kN, WLL 6 kN, elongation 3 % @ 10 kN, 50 % HMPE / 50 % PES. Must be doubled in the weblock or tied off — it starts slipping at 9–10 kN in a standard 25 mm-diverter weblock; about 4–5 kN holding with an EQB Grippen and about 9 kN with an original LineGrip. EQB recommends it for highlines of roughly 100 m and up because of the low stretch. Also offered as 50 m and 100 m sewn highline split segments. Price is the current per-metre sale price (€2.99/m; list €3.29/m). Weave construction is not stated in the data sheet — recorded as Flat, which is what the product photos show.",
+        "active": true
+    },
+    {
+        "name": "Paradigm MK2",
+        "brand": "Balance Community: Slackline Outfitters",
+        "materialType": "Nylon",
+        "width": 25,
+        "thickness": 2.44,
+        "weight": 49.0,
+        "breakingStrength": 25,
+        "webbing_construction": "Tubular",
+        "isa_certified": false,
+        "product_url": "https://balancecommunity.com/products/paradigm-mk2",
+        "date_introduced": 1784862246000,
+        "priceMeter": 2.4,
+        "currency": "USD",
+        "stretch": [
+            {
+                "kn": 5,
+                "percent": 11.5
+            },
+            {
+                "kn": 10,
+                "percent": 17.5
+            }
+        ],
+        "description": "The next iteration of Balance Community's Paradigm freestyle webbing. High-stretch nylon tubular at 25 kN and 49 g/m — built for freestyle but burly with it. UV-treated nylon fibres in a dense plain tubular weave, dyed pink/purple. Designed, inspected and sewn in the US; woven in Taiwan.",
+        "notes": "Manufacturer specs (balancecommunity.com): 25.0 mm × 2.44 mm, 49.0 g/m, MBS 25 kN, sewn-loop MBS 23 kN, WLL 8 kN, 100 % nylon (polyamide) tubular weave with coloured edges, single zone. Optimum tension 1.8–2.2 kN, preferred lengths 15–100 m, backup 18 % longer than the main. Holding strengths: Alpine WebLock 24 kN, MightyLock 23 kN. ISA stretch 11.5 % @ 5 kN and 17.5 % @ 10 kN — BC states the full stretch chart is 'coming soon', so REVISIT and replace this two-point curve once released-product data is published. BC labels it highline-approved; that is the maker's own statement, not an ISA certification. Price is the custom per-metre rate ($2.40/m); cut lengths run 40–100 m. Released 2026-07-23 (Shopify listing publish date).",
+        "active": true
     }
 ]
