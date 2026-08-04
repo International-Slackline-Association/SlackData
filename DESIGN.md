@@ -396,7 +396,10 @@ Manufacturer card anatomy (top → bottom):
   in the exact slot the gear card's classification bubble occupies. Flag only, no country label:
   the name is redundant next to the flag and the row has no space for it. The country name goes on
   the flag's `title`/`alt` so it stays available to hover and to screen readers.
-- **Brand name** — bold, ~16px, the card's primary line.
+- **Brand name** — bold, ~16px, the card's primary line, and a link to the brand's detail page.
+  The whole card is a **stretched click target** for that same destination (the name link carries an
+  `after:inset-0` overlay), so a click anywhere on the card — except the website button — opens the
+  detail page, and hovering anywhere on the card highlights the name (`group-hover`) in teal.
 - **Slackline badge** — small teal pill when `slackline_focused` is true. The flag is corrected
   from the source (SlackDB marks nearly everyone slackline-oriented): dedicated slackline companies
   are true, general climbing / rope-access / rigging brands that merely make a part slackliners use
@@ -407,7 +410,16 @@ Manufacturer card anatomy (top → bottom):
 - **Gear inventory row** — small gray pills, one per type the brand actually stocks:
   `Webbings: 12`, `Weblocks: 4`, … Types with zero are omitted from the pills (a wall of zeroes is
   noise) but still emitted as `data-count-{slug}="0"` on the card root.
-- **"View Gear"** — teal outline pill, links to the brand's detail page.
+- **"Visit Website"** — teal outline pill, opens the brand's `website` in a new tab
+  (`target="_blank"`, `rel="noopener noreferrer"`). It sits at `z-10` above the card's stretched
+  link so it stays independently clickable. Brands with no `website` show a disabled, greyed-out
+  **"No Website"** chip in the same slot rather than the pill, keeping the card footer aligned. (The
+  detail page is reached by clicking the card/name, not this button.)
+
+**Detail page heading.** On the brand's detail page (`/manufacturers/:id`) the `brand-detail-name`
+heading sits on its own line **below** the "← Manufacturers" back link, and is itself a link to the
+brand's `website` (new tab, teal hover + underline) when one exists — the same destination as the
+card's Visit Website button. Brands with no `website` render the name as a plain, non-link heading.
 
 **Grid only, with a sort control.** There is no Cards/List view toggle — the directory is a card
 grid, and that toolbar slot holds a **Sort by** dropdown instead. Options:

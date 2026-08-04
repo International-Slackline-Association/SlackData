@@ -84,7 +84,7 @@ export default function ManufacturerCard({ brand }: { brand: BrandWithCounts }) 
       // inactive card is dimmed rather than hidden: its gear is still real and
       // still worth browsing, it just can't be bought new.
       data-active={String(brand.active)}
-      className={`flex flex-col overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-shadow hover:shadow-md ${
+      className={`group relative flex flex-col overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-shadow hover:shadow-md ${
         brand.active ? '' : 'opacity-75'
       }`}
     >
@@ -114,9 +114,21 @@ export default function ManufacturerCard({ brand }: { brand: BrandWithCounts }) 
 
       <div className="flex flex-1 flex-col gap-1 p-4">
         <div className="flex flex-wrap items-center gap-2">
-          <h2 data-cy="manufacturer-name" className="font-bold text-gray-900">
-            {brand.name}
-          </h2>
+          {/* Stretched link: the after:inset-0 overlay makes the entire card a
+              click target for the detail page, while group-hover highlights the
+              name from anywhere on the card. The website button below sits at
+              z-10 so it stays clickable above this overlay. */}
+          <Link
+            to={`/manufacturers/${brand.id}`}
+            className="rounded-sm outline-none after:absolute after:inset-0 after:z-0 after:content-[''] focus-visible:ring-2 focus-visible:ring-teal-primary"
+          >
+            <h2
+              data-cy="manufacturer-name"
+              className="font-bold text-gray-900 group-hover:text-teal-primary"
+            >
+              {brand.name}
+            </h2>
+          </Link>
           {brand.slackline_focused && (
             <span
               data-cy="slackline-focused-badge"
@@ -153,13 +165,24 @@ export default function ManufacturerCard({ brand }: { brand: BrandWithCounts }) 
 
         <div className="flex-1" />
 
-        <Link
-          data-cy="btn-view-gear"
-          to={`/manufacturers/${brand.id}`}
-          className="mt-3 rounded-full border border-teal-primary px-4 py-1.5 text-center text-xs font-medium text-teal-primary transition-colors hover:bg-teal-light"
-        >
-          View Gear
-        </Link>
+        {brand.website ? (
+          <a
+            data-cy="btn-website"
+            href={brand.website}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="relative z-10 mt-3 rounded-full border border-teal-primary px-4 py-1.5 text-center text-xs font-medium text-teal-primary transition-colors hover:bg-teal-light"
+          >
+            Visit Website
+          </a>
+        ) : (
+          <span
+            data-cy="btn-website-disabled"
+            className="mt-3 cursor-not-allowed rounded-full border border-gray-200 px-4 py-1.5 text-center text-xs font-medium text-gray-300"
+          >
+            No Website
+          </span>
+        )}
       </div>
     </article>
   )
