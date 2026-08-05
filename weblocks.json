@@ -1174,7 +1174,7 @@
         },
         "date_introduced": null,
         "name": "Chili",
-        "product_url": null,
+        "product_url": "https://renegadejuggling.com/products/spider-chili-line-lock",
         "active": true
     },
     {
@@ -1806,7 +1806,7 @@
         },
         "date_introduced": null,
         "name": "Lime",
-        "product_url": null,
+        "product_url": "https://renegadejuggling.com/products/spider-lime-line-lock",
         "active": true
     },
     {
@@ -3117,45 +3117,6 @@
             "Date introduced": "Dec 2017",
             "Manufacturer": "Raed Slacklines",
             "Price (per unit)": "1 unit and above : 64.95 EUR"
-        },
-        "date_introduced": 1513720800000,
-        "name": "RODEO weblock",
-        "product_url": null,
-        "active": true
-    },
-    {
-        "image_url": "/api/gear/image_thumb/3248",
-        "details_url": "/gear_details/rodeo_weblock_1",
-        "brand": "Raed Slacklines",
-        "full_name": "Raed Slacklines RODEO weblock",
-        "manufacturer_info": {
-            "name": "Raed Slacklines",
-            "url": "/manufacturer_details/RaedSlacklines#TAB-IMAGES",
-            "country": "Germany",
-            "country_flag_url": "/img/flags/DE.png"
-        },
-        "product_page_url": "https://raed-slacklines.com/rodeo-weblock",
-        "pricing": [
-            {
-                "text": "1 unit and above : 65.00 EUR"
-            }
-        ],
-        "specifications": {
-            "Material": "Aluminum",
-            "Weight": "57gr",
-            "WLL": "N/A",
-            "MBS": "17kN",
-            "Anchor connection type": "Sling",
-            "Webbing connection type": "Push Pin",
-            "Compatible webbing width": "24mm - 26mm",
-            "Diverter diameter": "N/A",
-            "Efficiency": "N/A",
-            "Usage": "Rodeoline",
-            "ISA approved": "N/A",
-            "Date introduced": "Jul 2021",
-            "Manufacturer": "Raed Slacklines",
-            "Manufacturer Product Page": "Manufacturer product page",
-            "Price (per unit)": "1 unit and above : 65.00 EUR"
         },
         "date_introduced": 1513720800000,
         "name": "RODEO weblock",
