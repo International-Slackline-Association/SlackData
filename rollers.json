@@ -408,5 +408,73 @@
         "date_introduced": null,
         "product_url": null,
         "active": true
+    },
+    {
+        "name": "HIGHWHEEL Longline Flat Pulley",
+        "material": "Aluminum, Steel",
+        "weight": 91,
+        "wll": 4,
+        "mbs": 20,
+        "compatible_webbing_width": [
+            24,
+            26
+        ],
+        "slider_type": "Moving plates",
+        "inner_width": null,
+        "outer_bearing_diameter": null,
+        "isa_approved": null,
+        "manufacturer": "Spider Slacklines",
+        "price": 39.9,
+        "price_unit": "USD",
+        "roller_material": "Aluminum",
+        "bearing_material": "Steel",
+        "locking_type": "Non-locking",
+        "date_introduced": null,
+        "product_url": "https://slacklines.us/products/highwheel-longline-flat-pulley",
+        "active": true
+    },
+    {
+        "name": "Rolley",
+        "material": null,
+        "weight": null,
+        "wll": null,
+        "mbs": 25,
+        "compatible_webbing_width": [
+            25,
+            25
+        ],
+        "slider_type": "Moving plates",
+        "inner_width": null,
+        "outer_bearing_diameter": null,
+        "isa_approved": null,
+        "manufacturer": "Viper Slacklines",
+        "price": 645.0,
+        "price_unit": "ZAR",
+        "roller_material": null,
+        "locking_type": "Non-locking",
+        "date_introduced": null,
+        "product_url": "https://www.viperslacklines.co.za/products/rollie-25mm-slackline-roller",
+        "active": true
+    },
+    {
+        "name": "Polia de Fita Bera",
+        "material": "Aluminum, Stainless Steel",
+        "weight": 125,
+        "wll": 4,
+        "mbs": null,
+        "compatible_webbing_width": null,
+        "slider_type": "Moving plates",
+        "inner_width": 28,
+        "outer_bearing_diameter": null,
+        "isa_approved": null,
+        "manufacturer": "Bera Adventure",
+        "price": 139.0,
+        "price_unit": "BRL",
+        "roller_material": null,
+        "bearing_material": "Stainless Steel",
+        "locking_type": "Non-locking",
+        "date_introduced": null,
+        "product_url": "https://www.beraadventure.com.br/product/polia-de-fita-bera/",
+        "active": true
     }
 ]

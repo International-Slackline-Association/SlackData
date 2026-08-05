@@ -98,75 +98,118 @@ images (`frontend/public/gear-images/webbings/`, manifest rebuilt). Re-seed to p
 | [x] | [Lagoon](https://www.slackshop.cz/en/dyneema/256-eqb-lagoon.html) | Equilibrium (EQB) | slackshop.cz | 50/50 HMPE-PES hybrid → `materialComposition: ["Dyneema/HMPE", "Polyester"]`; 31 kN at 35 g/m. Weave not stated in the data sheet — recorded `Flat` from the product photos. |
 | [x] | [Paradigm MK2](https://balancecommunity.com/products/paradigm-mk2) | Balance Community | balancecommunity.com | ⚠ newer rev of `Paradigm` — both kept. **Stretch chart is not final: revisit and update the curve once BC publishes released-product data** (only the ISA 5 kN/10 kN anchors are stored). |
 
-### Weblock (20)
+### Weblock (20) — ✔ **imported 2026-08-04**
+
+All twenty are in `weblocks.json` (127 rows) with manufacturer specs scraped from each product page,
+descriptions, source notes and images (`frontend/public/gear-images/weblocks/`, manifest rebuilt).
+Re-seed to pick them up: delete `slack_data/database.db` and restart the server.
+
+Four brand/name corrections were made against the table below, all following the retailer rule in
+[Method](#method) — file a product under its true maker, not the shop that sells it:
+
+- **ZENLOCK** and **Diamond Lock** → **Slack Inov**, not Spider Slacklines. slacklines.us is the US
+  storefront; its own vendor field on the Diamond Lock reads `SLACK-INOV'`, and Slack Inov's press
+  photography for the Zenlock is filed under `slackinov`.
+- **Simplex Locker** → **Petram Slacklines**, not Slack house. The Slackhouse product page lists
+  Petram as the producer.
+- **lineLoose Buckle** → seeded as `Slack Pro!`, which `canonical_brand()` maps to
+  `lineGrip (formerly Slack Pro!)`. lineGrip sell it as a slackPro! last-stock item under
+  "Discontinued Products", so `active: false` — the only inactive row in this batch.
+
+Two scraping gaps in `load_weblocks.py` were fixed to let this data through: BRL (plus CZK/CHF/SEK)
+were added to the price regexes, which previously matched only EUR/USD/GBP/CAD/PLN/ZAR and silently
+dropped both Bera prices; and `description` / `notes` / `colors` / `version` / `isa_warning` are now
+carried from the seed into `WeblockCreate` — the loader parsed only the SlackDB `specifications`
+shape, so those model columns could never be populated from JSON.
 
 | ✓ | Item | Brand | Source | Import notes |
 |---|------|-------|--------|--------------|
-| [ ] | [Slackfriend](https://www.radrigs.co.uk/product-page/slackfriend) | Radrigs | radrigs.co.uk | **Type corrected: weblock, not roller** — was listed under Roller / Pulley in Sweep 2 and the deep sweep. Import into `weblocks.json`. |
-| [ ] | [MightyLock](https://balancecommunity.com/products/mightylock) | Balance Community | balancecommunity.com | |
-| [ ] | [Aluminum Line-Locker Ring](https://balancecommunity.com/products/aluminum-line-locker-ring) | Balance Community | balancecommunity.com | |
-| [ ] | [ChainLock](https://slacktivity.com/shop/chainlock-slackline-linelocker/) | Slacktivity | slacktivity.com | |
-| [ ] | [ZENLOCK WEBLOCK](https://slacklines.us/products/zenlock-weblock) | Spider Slacklines | slacklines.us | |
-| [ ] | [DIAMOND LOCK LINELOCK](https://slacklines.us/products/weblock-diamond-lock) | Spider Slacklines | slacklines.us | |
-| [ ] | [BLUEBERRY SR WEBLOCK](https://slacklines.us/products/weblock-blueberry-sr) | Spider Slacklines | slacklines.us | |
-| [ ] | [BLUEBERRY WEBLOCK](https://slacklines.us/products/weblock-blueberry) | Spider Slacklines | slacklines.us | |
-| [ ] | [LINELOCK ALUMINUM RING](https://slacklines.us/products/linelock-ring-slackline) | Spider Slacklines | slacklines.us | |
-| [ ] | [Simplex Locker](https://slackhouseshop.pl/produkt/simplex-locker/) | Slack house | slackhouseshop.pl | |
-| [ ] | [Weblock 50mm (Soft Release)](https://www.beraadventure.com.br/product/weblock-50mm-soft-release-50mm/) | Bera Adventure | beraadventure.com.br | trickline |
-| [ ] | [Anel Linelock – Bera](https://www.beraadventure.com.br/product/anel-linelock-bera/) | Bera Adventure | beraadventure.com.br | |
-| [ ] | [Line Lock](https://yogaslackers.com/shop/slackline/linelock/) | Yoga Slackers | yogaslackers.com | |
-| [ ] | [lineLoose Buckle](https://www.linegrip.com/shop/slackpro-lineloose-buckle/) | lineGrip | linegrip.com | ex-Slack Pro! |
-| [ ] | [Boa – Weblock for 25mm](https://www.viperslacklines.co.za/products/boa-constrictor-slackline-weblock) | Viper Slacklines | viperslacklines.co.za | |
-| [ ] | [Aluminium Static Linelock Ring](https://www.viperslacklines.co.za/products/aluminium-static-slackline-linelock) | Viper Slacklines | viperslacklines.co.za | |
-| [ ] | [Viper Constrictor 25mm](https://www.viperslacklines.co.za/products/viper-constrictor-25mm-linelock) | Viper Slacklines | viperslacklines.co.za | |
-| [ ] | [Chainlink LineLocker](http://www.slackgear.co.za/product/chainlink-linelocker/) | SlackGear | slackgear.co.za | |
-| [ ] | [Meercat LineLocker](http://www.slackgear.co.za/product/meercat-linelocker/) | SlackGear | slackgear.co.za | |
-| [ ] | [Linelocker for 50mm](https://www.slackliner.de/de/Linelocker-fuer-50mm-Baender-251.html) | Slackliner.de | slackliner.de | 50mm |
+| [x] | [Slackfriend](https://www.radrigs.co.uk/product-page/slackfriend) | Radrigs | radrigs.co.uk | **Type corrected: weblock, not roller** — was listed under Roller / Pulley in Sweep 2 and the deep sweep. 120 g incl. soft shackle, MBS 20 kN, £50. Width recorded as 26 mm: Radrigs publish only an upper bound. |
+| [x] | [MightyLock](https://balancecommunity.com/products/mightylock) | Balance Community | balancecommunity.com | MBS 42 kN, 54 g, 20 mm **and** 25 mm sides → width 20–25 mm. $17. |
+| [x] | [Aluminum Line-Locker Ring](https://balancecommunity.com/products/aluminum-line-locker-ring) | Balance Community | balancecommunity.com | MBS 15 kN, drop-forged 6061, $8. No product weight published (the 91 g Shopify figure is shipping weight) → `weight: null`. |
+| [x] | [ChainLock](https://slacktivity.com/shop/chainlock-slackline-linelocker/) | Slacktivity | slacktivity.com | MBS 30 kN, 23 g, forged 7075-T6. 25 mm, or 20 mm with the optional 3D-printed spacer → width 20–25 mm. Price is the base link (€9.00), not the €16.00 bundle. |
+| [x] | [ZENLOCK WEBLOCK](https://slacklines.us/products/zenlock-weblock) | ~~Spider Slacklines~~ → **Slack Inov** | slacklines.us | Stored as `ZENLOCK`. 200 g, MBS 60 kN, 17–26 mm via screw-fixed spacers. $139.90 is the bare weblock; soft-release/sling variants excluded. |
+| [x] | [DIAMOND LOCK LINELOCK](https://slacklines.us/products/weblock-diamond-lock) | ~~Spider Slacklines~~ → **Slack Inov** | slacklines.us | Stored as `Diamond Lock`. 54 g, MBS 40 kN, backup (17–20 mm) and main (24–26 mm) webbing → width 17–26 mm. |
+| [x] | [BLUEBERRY SR WEBLOCK](https://slacklines.us/products/weblock-blueberry-sr) | Spider Slacklines | slacklines.us | Stored as `Blueberry SR`. 125 g, MBS 48 kN, 24–26 mm. Second bottom pin for soft-release/sling entry → attachment `Pin`. |
+| [x] | [BLUEBERRY WEBLOCK](https://slacklines.us/products/weblock-blueberry) | Spider Slacklines | slacklines.us | Stored as `Blueberry`. 165 g, MBS 48 kN, 24–26 mm, rear hole → attachment `Hole`. |
+| [x] | [LINELOCK ALUMINUM RING](https://slacklines.us/products/linelock-ring-slackline) | Spider Slacklines | slacklines.us | Stored as `Linelock Aluminum Ring`. 20 g, MBS 30 kN, forged lime-green aluminium. |
+| [x] | [Simplex Locker](https://slackhouseshop.pl/produkt/simplex-locker/) | ~~Slack house~~ → **Petram Slacklines** | slackhouseshop.pl | MBS 36 kN, 40 g, inside width 21/26 mm → width 20–26 mm. €20. |
+| [x] | [Weblock 50mm (Soft Release)](https://www.beraadventure.com.br/product/weblock-50mm-soft-release-50mm/) | Bera Adventure | beraadventure.com.br | trickline. Stored as `Weblock 50mm`. 600 g, WLL 10 kN, inner width 51 mm. **No MBS published** → `breaking_strength: null`. R$399.00 is the bundle price (weblock + 5 m webbing + soft release) and overstates the weblock alone. |
+| [x] | [Anel Linelock – Bera](https://www.beraadventure.com.br/product/anel-linelock-bera/) | Bera Adventure | beraadventure.com.br | Stored as `Anel Linelock`. MBS 47 kN, 43 g, R$55.00. Out of stock but still catalogued → `active: true`. |
+| [x] | [Line Lock](https://yogaslackers.com/shop/slackline/linelock/) | Yoga Slackers | yogaslackers.com | $9. Aluminium is the only spec YogaSlackers publish — weight, MBS and dimensions are all null. |
+| [x] | [lineLoose Buckle](https://www.linegrip.com/shop/slackpro-lineloose-buckle/) | lineGrip | linegrip.com | ex-Slack Pro! — seeded as `Slack Pro!`, canonicalised to `lineGrip (formerly Slack Pro!)`. MBS 45 kN, 430 g, zinc-plated steel, 24–32 mm. `active: false` (discontinued last-stock sell-off); price is the €30.00 net sell-off, was €42.10. |
+| [x] | [Boa – Weblock for 25mm](https://www.viperslacklines.co.za/products/boa-constrictor-slackline-weblock) | Viper Slacklines | viperslacklines.co.za | Stored as `Boa Constrictor`. 343 g, captured pin, R1650.00. **No MBS published** → null. |
+| [x] | [Aluminium Static Linelock Ring](https://www.viperslacklines.co.za/products/aluminium-static-slackline-linelock) | Viper Slacklines | viperslacklines.co.za | MBS 25 kN, 37 g, 60 mm outer / 40 mm inner, R220.00. |
+| [x] | [Viper Constrictor 25mm](https://www.viperslacklines.co.za/products/viper-constrictor-25mm-linelock) | Viper Slacklines | viperslacklines.co.za | Stainless steel, 25 mm. No weight or MBS published → null. R225.00 is the pin alone; the R435.00 shackle bundle is excluded. |
+| [x] | [Chainlink LineLocker](http://www.slackgear.co.za/product/chainlink-linelocker/) | SlackGear | slackgear.co.za | Stainless steel, 60 g, R75.00. No MBS published → null. |
+| [x] | [Meercat LineLocker](http://www.slackgear.co.za/product/meercat-linelocker/) | SlackGear | slackgear.co.za | Stainless steel, 95 g, 14 mm diverter (19 mm effective), rated to 100 m / 10 kN pre-tension → recorded as WLL. No MBS published → null. |
+| [x] | [Linelocker for 50mm](https://www.slackliner.de/de/Linelocker-fuer-50mm-Baender-251.html) | Slackliner.de | slackliner.de | 50mm. Stored as `Linelocker 50mm`. Galvanised bent steel, 480 g, €7.25. "Belastbar bis 5000 kg" (~49 kN) is a load rating of unstated type, not a published MBS → `breaking_strength: null`, recorded in `notes`. |
 
-### Leash Ring (4)
+**Release dates.** `date_introduced` is set from the Shopify listing publish date only where that
+plausibly is the release (MightyLock 2020-05-25, BC ring 2020-01-27, Zenlock 2025-11-12, Boa
+2026-06-22, Viper Constrictor 2021-09-09, Viper ring 2025-11-03). The four slacklines.us items all
+share a 2024-06-14 timestamp — a bulk store migration, not a release — so they are left null, as are
+the non-Shopify shops, which publish no date at all.
 
-| ✓ | Item | Brand | Source | Import notes |
-|---|------|-------|--------|--------------|
-| [ ] | [BigLoop](https://balancecommunity.com/products/bigloop) | Balance Community | balancecommunity.com | |
-| [ ] | [80MM HIGHRING](https://slacklines.us/products/highline-leash-ring) | Spider Slacklines | slacklines.us | |
-| [ ] | [VORTEX 2](https://slacklines.us/products/vortex-highline-ring) | Spider Slacklines | slacklines.us | ⚠ distinct from Slack Inov's `Vortex` already in the DB — different brand, keep both |
-| [ ] | [Anel Duplo para Leash](https://www.beraadventure.com.br/product/anel-duplo-para-leash/) | Bera Adventure | beraadventure.com.br | double leash ring |
+### Leash Ring (4) — ✔ **imported 2026-08-04**
 
-### Roller / Pulley (3)
-
-| ✓ | Item | Brand | Source | Import notes |
-|---|------|-------|--------|--------------|
-| [ ] | [HIGHWHEEL LONGLINE FLAT PULLEY](https://slacklines.us/products/highwheel-longline-flat-pulley) | Spider Slacklines | slacklines.us | |
-| [ ] | [Rolley – 25mm Roller](https://www.viperslacklines.co.za/products/rollie-25mm-slackline-roller) | Viper Slacklines | viperslacklines.co.za | |
-| [ ] | [Polia de Fita Bera](https://www.beraadventure.com.br/product/polia-de-fita-bera/) | Bera Adventure | beraadventure.com.br | webbing pulley |
-
-### Grip (8)
+All four are in `leashrings.json` (34 rows) with manufacturer-published specs, source notes and images
+(`frontend/public/gear-images/leashrings/`, manifest rebuilt). Re-seed to pick them up: delete
+`slack_data/database.db` and restart the server.
 
 | ✓ | Item | Brand | Source | Import notes |
 |---|------|-------|--------|--------------|
-| [ ] | [SHARK](https://spider-slacklines.com/shop/en/tensioning-systems/550-shark.html) | Spider Slacklines | spider-slacklines.com | |
-| [ ] | [MOUSE GRIP](https://slacklines.us/products/mousegrip) | Spider Slacklines | slacklines.us | |
-| [ ] | [Wafer 2.0](https://balancecommunity.com/products/wafer-2-0) | Balance Community | balancecommunity.com | ⚠ newer rev of `Wafer` — keep both |
-| [ ] | [Wafer XL](https://balancecommunity.com/products/wafer-xl) | Balance Community | balancecommunity.com | ⚠ distinct size, not a variant of `Wafer` — keep both |
-| [ ] | [T-Grip Light](https://slacktivity.com/shop/t-grip-light/) | Slacktivity | slacktivity.com | |
-| [ ] | [T-Grip](https://slacktivity.com/shop/t-grip-webbing-grip-tool/) | Slacktivity | slacktivity.com | |
-| [ ] | [Grippex](https://www.viperslacklines.co.za/products/grippex-25mm-slackline-webbing-grip) | Viper Slacklines | viperslacklines.co.za | |
-| [ ] | [BeraGrip 50mm](https://www.beraadventure.com.br/product/beragrip-50mm/) | Bera Adventure | beraadventure.com.br | trickline grip |
+| [x] | [BigLoop](https://balancecommunity.com/products/bigloop) | Balance Community | balancecommunity.com | 80mm ID / 103mm OD, 16mm stock width, 90 g, MBS 24 kN (WLL 7 kN), CNC-machined anodized 7075. `date_introduced` from BC's store listing (2021-09-30). |
+| [x] | [80MM HIGHRING](https://slacklines.us/products/highline-leash-ring) | Spider Slacklines | slacklines.us | 80mm ID, 99 g, MBS 35 kN, drop-forged anodized aluminium, 10mm thick. OD not published — recorded as 90mm (ID + thickness). Engraved "SPIDER HIGHRING" — genuinely Spider's own product. |
+| [x] | [VORTEX 2](https://slack-inov.com/shop/en/leashes/314-4422-vortex-highline-ring-3926909790.html) | ~~Spider Slacklines~~ → **Slack Inov** | slack-inov.com | **Brand corrected**: the product is engraved "Slack Inov" and is sold on Slack Inov's own store at €49.96 — slacklines.us merely resells it at USD 74.95. Filed under the true maker per the retailer rule in [Method](#method). Still a *distinct row* from `Vortex`: it is the successor (65mm ID / 77 g vs 60mm / 100 g, wire-gate clip-and-go) — both kept. OD not published — recorded as 85mm (ID + 20mm thickness). Not a PPE device, no MBS published → `breaking_strength: null`. |
+| [x] | [Anel Duplo para Leash](https://www.beraadventure.com.br/product/anel-duplo-para-leash/) | Bera Adventure | beraadventure.com.br | Sold as a pair; 77mm ID / 99mm OD, 90 g and 18 kN are **per ring**, the R$130.00 price is for the pair. |
+
+### Tree Protector (2) — ✔ **imported 2026-08-05**
+
+Both are in `treepros.json` (25 rows) with vendor-published specs and images
+(`frontend/public/gear-images/treepros/`, manifest rebuilt). Re-seed to pick them up: delete
+`slack_data/database.db` and restart the server.
+
+| ✓ | Item | Brand | Source | Import notes |
+|---|------|-------|--------|--------------|
+| [x] | [Tree Protectors](http://www.slackgear.co.za/product/tree-protectors/) | SlackGear | slackgear.co.za | 1.8 m × 18 cm, 360 g **for the 2-pack** (2 × 180 g) — pair weight, matching the convention of the other `pair` rows. R130.00 → `price_unit: "pair"`, `currency: "ZAR"`. Velcro strips secure it to the tree and hold the slings → `has_sling_attachment: true`. Thickness and release date not published → null. |
+| [x] | ["Boomslang" Tree Protectors](https://www.viperslacklines.co.za/products/boomslang-tree-protectors) | Viper Slacklines | viperslacklines.co.za | 140 cm × 15 cm, R250.00 per pair. Weight, thickness and release date not published → null. The included velcro straps join the **two protectors to each other** for oversized trees/boulders — they do not carry a sling, so `has_sling_attachment: false` (recorded in `notes`). |
+
+### Roller / Pulley (3) — ✔ **imported 2026-08-05**
+
+All three are in `rollers.json` (21 rows) with vendor-published specs, and images are in
+`public/gear-images/rollers/` (manifest rebuilt). Re-seed to pick them up: delete
+`slack_data/database.db` and restart the server.
+
+Spider's own shop 403s WebFetch but serves a browser UA over `curl` — its data sheet (weight/WLL/MBS)
+was read there, not from the retailer page.
+
+| ✓ | Item | Brand | Source | Import notes |
+|---|------|-------|--------|--------------|
+| [x] | [HIGHWHEEL LONGLINE FLAT PULLEY](https://slacklines.us/products/highwheel-longline-flat-pulley) | Spider Slacklines | slacklines.us | 91 g, WLL 4 kN, MBS 20 kN (data sheet on spider-slacklines.com, ref `HRSHO`), 24–26 mm webbing. Anodised aluminium body **and** roller on two steel ball bearings → `roller_material: Aluminum`, `bearing_material: Steel`. Swivel-open side plates that take any carabiner → `slider_type: Moving plates`, `locking_type: Non-locking`. Priced from the US retailer to match the source URL ($39.90); EU list is €29.13. Explicitly **not** PPE above 1 m. |
+| [x] | [Rolley – 25mm Roller](https://www.viperslacklines.co.za/products/rollie-25mm-slackline-roller) | Viper Slacklines | viperslacklines.co.za | Only spec Viper publishes is MBS 25 kN (also engraved on the body); 25 mm webbing, R645.00. Weight, materials and inner width not published → null (this is why `load_rollers.py` now keeps a null weight instead of coercing it to 0 g). Plate-and-barrel pulley taking a separate carabiner → `slider_type: Moving plates`, `locking_type: Non-locking`. Shopify `created_at` is a 2026 store-migration date, not a release → `date_introduced: null`. |
+| [x] | [Polia de Fita Bera](https://www.beraadventure.com.br/product/polia-de-fita-bera/) | Bera Adventure | beraadventure.com.br | webbing pulley. 125 g, WLL 4 kN, 28 mm **inner** width, R$139.00. 4.8 mm oscillating aluminium side plates (→ `Moving plates`), 3 bearings + bolt in stainless steel → `bearing_material: Stainless Steel`. Sheave material and MBS not published → null. Grey/orange. ⚠ **only 2 of the 4 gallery images are this product** — Bera's gallery also carries their round *HighSlide* rope pulley (engraved "HighSlide / Bera SlackLine / 4kN"), which is a different, not-yet-modelled item; those two were left out. |
+
+### Grip (8) — ✔ **imported 2026-08-05**
+
+All eight are in `grips.json` (20 rows), with images in `public/gear-images/grips/` (manifest rebuilt).
+Re-seed to pick them up. Every one of these is sold as a **non-PPE** tensioning device →
+`isa_certified: false` throughout.
+
+| ✓ | Item | Brand | Source | Import notes |
+|---|------|-------|--------|--------------|
+| [x] | [SHARK](https://spider-slacklines.com/shop/en/tensioning-systems/550-shark.html) | Spider Slacklines | spider-slacklines.com | 129 g, WLL 7 kN, MBS 25 kN, 17–26 mm (ref `LDI07`, €149.17). **Toothed** stainless-steel body + dyneema sling — the only grip here that is not rubber-faced, hence rated for wet/dyneema webbing. Page currently reads "temporarily unavailable" (not discontinued) → `active: true`. Read via `curl` with a browser UA; WebFetch gets 403. |
+| [x] | [MOUSE GRIP](https://slacklines.us/products/mousegrip) | Spider Slacklines | slacklines.us | 105 g, WLL 7 kN, MBS 25 kN, 16–26 mm (ref `LDS01`). Anodised aluminium body, rubber plates, dyneema sling. Priced from the US retailer to match the source URL ($99.95); EU list is €91.63. PES/PA only. |
+| [x] | [Wafer 2.0](https://balancecommunity.com/products/wafer-2-0) | Balance Community | balancecommunity.com | ⚠ newer rev of `Wafer` — keep both. 68 g, WLL 4 kN, slippage 8 kN, **23–27 mm** (the original `Wafer` row is 16–27 with a 6 kN slippage threshold, so the two rows differ on every spec). 7075 plate, Amsteel-78 grog splice → `Dyneema Sling Loop`. $89. `date_introduced` from BC's store listing (2023-06-08). MBS not published. |
+| [x] | [Wafer XL](https://balancecommunity.com/products/wafer-xl) | Balance Community | balancecommunity.com | ⚠ distinct size, not a variant of `Wafer` — keep both. 212 g, max load 10 kN, slippage 16 kN, 16–27 mm, $139. Full-length rubber pad with a double sling wrap. `wll` records the published **Max Load** (BC labels this row differently from the Wafer's "Working Load Limit"). `date_introduced` 2023-03-10. |
+| [x] | [T-Grip Light](https://slacktivity.com/shop/t-grip-light/) | Slacktivity | slacktivity.com | 91 g, **WLL 7 kN**, 16–26 mm, €81.32. Anodised aluminium + UHMWPE cord → `Dyneema Sling Loop`. ⚠ **the shop page is wrong on both specs** — it claims WLL 4 kN and contradicts itself on width (prose 20–26 mm, spec block 16–26 mm). Slacktivity's own `Manual-EN-T-Grip-light-V1.pdf` says WLL 7 kN / 16–26 mm, and the product photo shows "PULLING DIRECTION WLL 7kN" engraved on a batch-07/25 unit. Manual + engraving recorded over the page. |
+| [x] | [T-Grip](https://slacktivity.com/shop/t-grip-webbing-grip-tool/) | Slacktivity | slacktivity.com | 200 g, WLL 7 kN, 20–26 mm, €130.00 (specs from Slacktivity's own `Manual-EN-T-Grip-V1.pdf`). **`active: false`** — listed SOLD OUT in the grips category and its product URL now redirects to the T-Grip Light, i.e. superseded rather than restocking. PES/PA only, 5–30 °C. |
+| [x] | [Grippex](https://www.viperslacklines.co.za/products/grippex-25mm-slackline-webbing-grip) | Viper Slacklines | viperslacklines.co.za | 65 g, WLL 5 kN (engraved "GRIPPEX WLL5KN"), 20–25 mm, 44 × 44 × 25 mm, R1795.00. Gold-anodised aluminium body with an HMPE tail → `Dyneema Sling Loop`. MBS not published. |
+| [x] | [BeraGrip 50mm](https://www.beraadventure.com.br/product/beragrip-50mm/) | Bera Adventure | beraadventure.com.br | trickline grip. 615 g, WLL 4 kN, MBS 8 kN, 50 mm webbing (52 mm rubber face), 120 × 90 mm, R$450.00. Body is **plastic** (visibly 3D-printed in Bera's own photos) — no `MetalMaterial` fits, so `material: "Other"`. Separate 8 mm polyester/spectra cordelete rated 21 kN → `Sling Loop`, not `Dyneema Sling Loop`. Warranty is void unless assembled per Bera's tutorial video. ⚠ the published spec says MBS 8 kN but the unit in Bera's photos is engraved **"MBS 7.0kN"** (2021 images) — recorded the current published 8 kN; worth confirming with Bera. |
 
 ---
 
 ## Candidates — still to adjudicate
-
-### Tree Protector (6)
-
-| ✓ | Item | Brand | Source | Note |
-|---|------|-------|--------|------|
-| [ ] | [LineSlider 2.0](https://slacktivity.com/shop/lineslider-slackline-protection/) | Slacktivity | slacktivity.com | |
-| [ ] | [Flexitube](https://sicherungsprofi.de/flexitube/SL05-RS) | Slackstar | sicherungsprofi.de | |
-| [ ] | [Impact Protection](https://sicherungsprofi.de/prallschutz/SL81803-A) | Slackstar | sicherungsprofi.de | |
-| [ ] | [Tree Protectors](http://www.slackgear.co.za/product/tree-protectors/) | SlackGear | slackgear.co.za | |
-| [ ] | ["Boomslang" Tree Protectors](https://www.viperslacklines.co.za/products/boomslang-tree-protectors) | Viper Slacklines | viperslacklines.co.za | |
-| [ ] | [Protetor de Árvore Regulável](https://www.beraadventure.com.br/product/protetor-de-arvore-regulavel-bera/) | Bera Adventure | beraadventure.com.br | adjustable |
 
 ### Starter / Longline / Highline Kit (59)
 
@@ -242,8 +285,9 @@ images (`frontend/public/gear-images/webbings/`, manifest rebuilt). Re-seed to p
 | [ ] | [Jibline (trickline set)](https://slackhouseshop.pl/produkt/zestaw-jibline/) | Slack house | slackhouseshop.pl | |
 | [ ] | [Trickline](https://middlewayslacklines.com/trickline/) | Middle Way | middlewayslacklines.com | ⚠ vs DB `23m kit` — confirm distinct |
 
-**Master list total: 125 items across 8 gear types** — 45 approved (10 of them **imported**: the whole
-Webbing section, 2026-08-01), 7 rejected, 73 still to adjudicate.
+**Master list total: 125 items across 8 gear types** — 47 approved (**all imported**: Webbing 2026-08-01,
+Weblock + Leash Ring 2026-08-04, Tree Protector + Roller + Grip 2026-08-05), plus the rejected list below
+and 64 kit rows still to adjudicate (the two kit sections are all that is left).
 
 Brands confirmed **fully covered** by this sweep (no new items — catalog already in DB): Slack Mountain,
 Slack Inov, Spider (webbings), Slackliner.de (webbings), Middle Way (Chi/Zen/Classic), plus all Sweep-1
@@ -274,6 +318,10 @@ permanent — re-examine on the next sweep).
 | [Compact Double Pulley](http://www.slackgear.co.za/product/compact-double-pulley/) | SlackGear | roller | `out-of-scope` | 2026-08-01 | Rope pulley, not a webbing roller — belongs to the general rigging-hardware exclusion. |
 | [Utility Rings](http://www.slackgear.co.za/product/utility-rings/) | SlackGear | leashring | `out-of-scope` | 2026-08-01 | Not a leash ring — the vendor's own listing states they must **not** be used as a highline leash ring. General rigging rings; same class as the ring/quicklink hardware exclusion. |
 | [CobraGrip (One Inch Dreams Ed.)](https://www.linegrip.com/shop/one-inch-dreams-edition-cobragrip/) | lineGrip | grip | `novelty` | 2026-08-01 | One-off One Inch Dreams collaboration edition. lineGrip's catalog carries no base CobraGrip, so there is no distinct product line to record — see the note below. |
+| [Impact Protection](https://sicherungsprofi.de/prallschutz/SL81803-A) | Slackstar | treepro | `out-of-scope` | 2026-08-05 | Rejected by reviewer — not a slackline tree protector. |
+| [Protetor de Árvore Regulável](https://www.beraadventure.com.br/product/protetor-de-arvore-regulavel-bera/) | Bera Adventure | treepro | `duplicate` | 2026-08-05 | Already in the DB — `treepros.json` holds it under its English name **"Adjustable Tree Wear"** (Bera Adventure, same `product_url` slug). The sweep's name normalization missed it because the shop lists the Portuguese title. |
+| [Flexitube](https://sicherungsprofi.de/flexitube/SL05-RS) | Slackstar | treepro | `out-of-scope` | 2026-08-05 | Rejected by reviewer — not a slackline tree protector. |
+| [LineSlider 2.0](https://slacktivity.com/shop/lineslider-slackline-protection/) | Slacktivity | treepro | `out-of-scope` | 2026-08-05 | Rejected by reviewer — not a slackline tree protector. |
 
 **Follow-up — lineGrip CobraGrip:** the One Inch Dreams edition is the *only* CobraGrip in lineGrip's
 current catalog (35-product WooCommerce feed, checked 2026-08-01), and no base `CobraGrip` exists in

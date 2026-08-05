@@ -412,5 +412,41 @@
         "notes": null,
         "manufacturer": "Elephant",
         "active": false
+    },
+    {
+        "name": "Tree Protectors",
+        "release_date": null,
+        "product_url": "http://www.slackgear.co.za/product/tree-protectors/",
+        "weight": 360.0,
+        "width": 18,
+        "length": 180,
+        "thickness": null,
+        "has_sling_attachment": true,
+        "price": 130.0,
+        "price_unit": "pair",
+        "currency": "ZAR",
+        "description": "Tree Protectors are an important part of your slackline kit, not only do they protect the trees but they protect your slings from abrasion and damage. Handy velcro strips easily secure the Tree Protector to the tree and hold your slings in place.",
+        "version": null,
+        "notes": "Sold as a 2-pack; weight is 2x180g for the pair.",
+        "manufacturer": "SlackGear",
+        "active": true
+    },
+    {
+        "name": "\"Boomslang\" Tree Protectors",
+        "release_date": null,
+        "product_url": "https://www.viperslacklines.co.za/products/boomslang-tree-protectors",
+        "weight": null,
+        "width": 15,
+        "length": 140,
+        "thickness": null,
+        "has_sling_attachment": false,
+        "price": 250.0,
+        "price_unit": "pair",
+        "currency": "ZAR",
+        "description": "Tree protection for slacklining, longlining and highline abrasion protection. Protects the trees and extends the life of your gear.",
+        "version": null,
+        "notes": "Sold as a pair. Included velcro straps join the two protectors together for larger trees or boulders — they do not carry a sling.",
+        "manufacturer": "Viper Slacklines",
+        "active": true
     }
 ]
