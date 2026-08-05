@@ -15,6 +15,7 @@ venv/
 scraper/
 scripts/.cache/
 
+# Local gear-status provenance (working set for the active-field pass; not runtime input)
 # Gear-status web-verification working set. Provenance for the `active` field
 # only — nothing at runtime reads it; the values it produced are baked into the
 # root <type>s.json seeds.

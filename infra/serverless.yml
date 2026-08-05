@@ -1,0 +1,144 @@
+# SlackData — serverless deploy (Serverless Framework), Phase 1: public read-only.
+#
+# Deploys the FastAPI catalog API as a container-image Lambda behind an HTTP API.
+# The website (S3 + CloudFront) is defined in the `resources` block below; the
+# CloudFront distribution fronts BOTH the SPA (default) and the API (/api/*), so
+# the browser only ever talks to one origin (no CORS).
+#
+#   cd infra && npx serverless deploy --stage prod
+#
+# The frontend is built + synced separately (see infra/README.md) — Serverless
+# manages the API + AWS resources, not the SPA upload.
+#
+# NOTE: items marked TODO(isa) need the ISA account's specifics (region, custom
+# domain, ACM certificate). The API + S3 + CloudFront default setup deploys as-is.
+
+service: slackdata
+
+provider:
+  name: aws
+  region: ${opt:region, 'eu-central-1'}          # TODO(isa): confirm region
+  stage: ${opt:stage, 'prod'}
+  architecture: x86_64                             # match your build host; arm64 is cheaper
+  ecr:
+    images:
+      api:
+        path: ..                                   # build context = repo root
+        file: Dockerfile.lambda
+
+functions:
+  api:
+    image:
+      name: api
+    memorySize: 512
+    timeout: 29                                    # API Gateway hard max
+    events:
+      - httpApi: '*'                               # proxy every method/path to FastAPI
+
+resources:
+  Resources:
+
+    # ---- Website bucket (private; served only through CloudFront) ------------
+    WebBucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: ${self:service}-web-${self:provider.stage}   # TODO(isa): globally-unique name
+
+    WebBucketPolicy:
+      Type: AWS::S3::BucketPolicy
+      Properties:
+        Bucket: !Ref WebBucket
+        PolicyDocument:
+          Statement:
+            - Effect: Allow
+              Principal:
+                Service: cloudfront.amazonaws.com
+              Action: s3:GetObject
+              Resource: !Sub '${WebBucket.Arn}/*'
+              Condition:
+                StringEquals:
+                  AWS:SourceArn: !Sub 'arn:aws:cloudfront::${AWS::AccountId}:distribution/${Cdn}'
+
+    Oac:
+      Type: AWS::CloudFront::OriginAccessControl
+      Properties:
+        OriginAccessControlConfig:
+          Name: ${self:service}-oac-${self:provider.stage}
+          OriginAccessControlOriginType: s3
+          SigningBehavior: always
+          SigningProtocol: sigv4
+
+    # ---- Strip "/api" before requests reach the API origin ------------------
+    StripApiFunction:
+      Type: AWS::CloudFront::Function
+      Properties:
+        Name: ${self:service}-strip-api-${self:provider.stage}
+        AutoPublish: true
+        FunctionConfig:
+          Comment: Strip the /api prefix for the API cache behavior
+          Runtime: cloudfront-js-1.0
+        FunctionCode: |
+          function handler(event) {
+              var request = event.request;
+              request.uri = request.uri.replace(/^\/api/, '');
+              if (request.uri === '') {
+                  request.uri = '/';
+              }
+              return request;
+          }
+
+    # ---- CloudFront: one domain fronting the SPA (default) + the API (/api/*)-
+    Cdn:
+      Type: AWS::CloudFront::Distribution
+      Properties:
+        DistributionConfig:
+          Enabled: true
+          DefaultRootObject: index.html
+          # TODO(isa): custom domain + cert
+          # Aliases: [slackdata.slackline.international]
+          # ViewerCertificate:
+          #   AcmCertificateArn: <us-east-1 ACM cert ARN>
+          #   SslSupportMethod: sni-only
+          Origins:
+            - Id: web-s3
+              DomainName: !GetAtt WebBucket.RegionalDomainName
+              OriginAccessControlId: !Ref Oac
+              S3OriginConfig:
+                OriginAccessIdentity: ''
+            - Id: api-httpapi
+              DomainName: !Sub '${HttpApi}.execute-api.${AWS::Region}.amazonaws.com'
+              CustomOriginConfig:
+                OriginProtocolPolicy: https-only
+                OriginSSLProtocols: [TLSv1.2]
+          DefaultCacheBehavior:
+            TargetOriginId: web-s3
+            ViewerProtocolPolicy: redirect-to-https
+            # AWS managed "CachingOptimized" policy id
+            CachePolicyId: 658327ea-f89d-4fab-a63d-7e88639e58f6
+          CacheBehaviors:
+            - PathPattern: /api/*
+              TargetOriginId: api-httpapi
+              ViewerProtocolPolicy: redirect-to-https
+              AllowedMethods: [GET, HEAD, OPTIONS, PUT, PATCH, POST, DELETE]
+              # AWS managed "CachingDisabled" + "AllViewerExceptHostHeader"
+              CachePolicyId: 4135ea2d-6df8-44a3-9df3-4b5a84be39ad
+              OriginRequestPolicyId: b689b0a8-53d0-40ab-baf2-68738e2966ac
+              FunctionAssociations:
+                - EventType: viewer-request
+                  FunctionARN: !GetAtt StripApiFunction.FunctionMetadata.FunctionARN
+          # SPA deep links: serve index.html for client-routed paths.
+          CustomErrorResponses:
+            - ErrorCode: 403
+              ResponseCode: 200
+              ResponsePagePath: /index.html
+            - ErrorCode: 404
+              ResponseCode: 200
+              ResponsePagePath: /index.html
+
+  Outputs:
+    WebBucketName:
+      Value: !Ref WebBucket
+    CdnDomain:
+      Value: !GetAtt Cdn.DomainName
+    CdnDistributionId:
+      Value: !Ref Cdn
