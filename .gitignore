@@ -14,3 +14,6 @@ venv/
 # Scraper output (images + manifests)
 scraper/
 scripts/.cache/
+
+# Local gear-status provenance (working set for the active-field pass; not runtime input)
+gear_status/

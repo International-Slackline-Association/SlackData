@@ -1,0 +1,35 @@
+# SlackData API — AWS Lambda container image (serverless deploy).
+#
+# One Lambda runs the FastAPI API. The gear catalog is baked into a read-only
+# SQLite file AT BUILD TIME from the root *.json, so there is no database to run
+# and nothing to seed on cold start. The website (SPA + images) is NOT in here —
+# it's served separately from S3/CloudFront. See infra/ and GOING_LIVE.md.
+#
+#   docker build -f Dockerfile.lambda -t slackdata-api .
+
+FROM public.ecr.aws/lambda/python:3.12
+
+# Runtime deps only — no uvicorn/CLI needed inside Lambda (Mangum drives the app).
+RUN pip install --no-cache-dir \
+      "fastapi>=0.115.12" \
+      "sqlmodel>=0.0.24" \
+      "mangum>=0.17"
+
+# App source.
+COPY slack_data/ ${LAMBDA_TASK_ROOT}/slack_data/
+
+# Seed data + builder → bake the read-only catalog into the image, then drop the
+# JSON (only the baked catalog.db is read at runtime).
+COPY *.json ${LAMBDA_TASK_ROOT}/
+COPY scripts/build_catalog_db.py ${LAMBDA_TASK_ROOT}/scripts/build_catalog_db.py
+RUN cd ${LAMBDA_TASK_ROOT} \
+    && PYTHONPATH=${LAMBDA_TASK_ROOT} python scripts/build_catalog_db.py ${LAMBDA_TASK_ROOT}/catalog.db \
+    && rm -f ${LAMBDA_TASK_ROOT}/*.json
+
+# CATALOG_DB_PATH → read-only mode (no seeding). API_ROOT_PATH → the API is served
+# under /api behind CloudFront (only affects /docs + openapi.json URLs; CloudFront
+# strips the /api prefix before the request reaches Lambda — see infra/).
+ENV CATALOG_DB_PATH=${LAMBDA_TASK_ROOT}/catalog.db \
+    API_ROOT_PATH=/api
+
+CMD ["slack_data.lambda_handler.handler"]
