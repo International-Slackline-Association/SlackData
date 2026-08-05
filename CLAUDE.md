@@ -138,19 +138,21 @@ Per-model enums (e.g. `FiberMaterial`, `ConnectionType`, `TensioningType`) live 
 
 There are **no cross-links between gear types** — kits do not FK to specific webbing/weblock rows; they only link to a brand.
 
+Every gear type carries an **`active: bool | None`** field on its `Base<X>` (so it flows to `Public`/`Create`/`Update`): `True` = still sold, `False` = legacy/discontinued, `None` = unknown. It is baked into each root `<type>s.json` seed (one `"active"` key per item) and mapped through the loaders like any other field — sourced from a one-off web-verification pass (227 active / 271 legacy across 498 items as of 2026-07-31). That pass's working set lives in `gear_status/`, which is **gitignored** — it is local provenance, not tracked input, and nothing at runtime reads it. The frontend shows a red "Legacy" card badge when `active === false`, and scopes the listing with an **ALL / CURRENT / HISTORIC** bubble at the top of the filter sidebar (defaults to ALL — see DESIGN.md § Left Filter Sidebar).
+
 ### Active models (wired into `main.py`)
 
 | Model | Table / router prefix | JSON seed | ~Count |
 |-------|-----------------------|-----------|--------|
 | Brand | `/brand` | (auto-created from gear loads) | — |
-| Webbing | `/webbing` | `webbings.json` | 88 |
-| Weblock | `/weblock` | `weblocks.json` | 109 |
-| Roller | `/roller` | `rollers.json` | 19 |
-| LeashRing | `/leashring` | `leashrings.json` | 31 |
+| Webbing | `/webbing` | `webbings.json` | 242 |
+| Weblock | `/weblock` | `weblocks.json` | 107 |
+| Roller | `/roller` | `rollers.json` | 18 |
+| LeashRing | `/leashring` | `leashrings.json` | 30 |
 | Grip | `/grip` | `grips.json` | 12 |
 | TreePro | `/treepro` | `treepros.json` | 23 |
 | StarterKit | `/starterkit` | `starterkits.json` | 64 |
-| TricklineKit | `/tricklinekit` | `tricklinekits.json` | 9 |
+| TricklineKit | `/tricklinekit` | `tricklinekits.json` | 10 |
 
 ### In-progress models (branch `bungees_ringpadding`)
 

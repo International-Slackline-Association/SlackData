@@ -13,6 +13,7 @@
 //
 // A gear tab is active on its listing page and any nested route (detail/compare).
 
+import { useLayoutEffect, useRef } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { ALL_GEAR_TYPES } from '@/config/gearTypes'
 
@@ -34,6 +35,21 @@ export default function TopNav() {
   const navigate = useNavigate()
   const mfrActive = isSectionActive(pathname, '/manufacturers')
 
+  // Publish the measured header height as --header-h so the sticky filter sidebar
+  // can pin itself just below the nav. Tier-2 tabs wrap onto more rows on narrow
+  // widths, so the header height is variable — observe it instead of hard-coding.
+  const headerRef = useRef<HTMLElement>(null)
+  useLayoutEffect(() => {
+    const header = headerRef.current
+    if (!header) return
+    const publish = () =>
+      document.documentElement.style.setProperty('--header-h', `${header.offsetHeight}px`)
+    publish()
+    const ro = new ResizeObserver(publish)
+    ro.observe(header)
+    return () => ro.disconnect()
+  }, [])
+
   // Re-clicking the CURRENT gear tab keeps its query string (sort/search/filters
   // persist); clicking a DIFFERENT tab navigates bare, resetting to defaults. We
   // read window.location at click time — not the render-time `active` flag — so
@@ -50,6 +66,7 @@ export default function TopNav() {
 
   return (
     <header
+      ref={headerRef}
       data-cy="top-nav"
       className="bg-white border-b border-gray-200 sticky top-0 z-20"
     >

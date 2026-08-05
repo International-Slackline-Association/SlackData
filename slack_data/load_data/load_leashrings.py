@@ -67,6 +67,7 @@ def add_leashrings_to_db(leashrings: list[dict], session: SessionDep) -> None:
             price=leashring.get("price"),
             currency=currency,
             notes=leashring.get("notes"),
+            active=leashring.get("active"),
         )
         db_leashring = LeashRing.model_validate(leashring_create)
         db_leashring.brand = session.get(Brand, brand_id)

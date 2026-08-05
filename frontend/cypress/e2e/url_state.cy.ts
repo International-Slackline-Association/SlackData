@@ -51,7 +51,9 @@ describe('URL state — sort', () => {
 
   it('visiting a URL with ?sort= applies that sort and marks it active in the dropdown', () => {
     cy.visit('/webbings?sort=weight-asc')
-    cy.get('[data-cy="sort-dropdown"]').should('contain.text', /weight.*low|low.*weight/i)
+    // contain.text needs a plain string — a RegExp is coerced to its literal
+    // source and never matches (see search_sort.cy.ts). Button shows "Weight: Low→High".
+    cy.get('[data-cy="sort-dropdown"]').should('contain.text', 'Weight: Low→High')
     cy.get('[data-cy="gear-card"]').then(($cards) => {
       const weights = [...$cards].map(c => {
         const v = c.getAttribute('data-weight')
@@ -105,7 +107,12 @@ describe('URL state — pill filters', () => {
       .find('[data-cy="filter-pill"]').eq(0).click()
     cy.get('[data-cy="filter-group"][data-group="material"]')
       .find('[data-cy="filter-pill"]').eq(1).click()
-    cy.url().should('match', /material=[^&].*,[^&]/)
+    // URLSearchParams encodes the comma separator as %2C in the raw URL; assert on
+    // the decoded value, which is what round-trips back into the filter.
+    cy.location('search').should((search) => {
+      const material = new URLSearchParams(search).get('material')
+      expect(material).to.match(/[^,]+,[^,]+/)
+    })
   })
 
   it('deselecting the last pill for a filter removes that param from the URL', () => {
@@ -119,18 +126,27 @@ describe('URL state — pill filters', () => {
 // ── Range filter → URL ────────────────────────────────────────────────────────
 
 describe('URL state — range filters', () => {
+  // Range bounds are dual-thumb sliders (the thumbs have pointer-events:none and
+  // can't be typed into). An exact bound is set via the click-to-edit value label
+  // (data-cy="range-{min,max}-value"), which is the Phase-4 contract in filters.cy.ts.
+  const weight = '[data-cy="filter-group"][data-group="weight"]'
+
   it('entering a weight min writes ?weight_min= to the URL', () => {
     cy.visit('/webbings')
-    cy.get('[data-cy="filter-group"][data-group="weight"]')
-      .find('[data-cy="range-min"]').type('50')
+    cy.get(weight).find('[data-cy="range-min-value"]').click()
+    cy.get(weight).find('input[data-cy="range-min-value"]').clear().type('50{enter}')
+    // Wait for the commit to round-trip through the URL back onto the thumb before
+    // asserting on the URL — otherwise the assertion can race the async param write.
+    cy.get(weight).find('[data-cy="range-min"]').should('have.value', '50')
     cy.url().should('include', 'weight_min=50')
   })
 
   it('entering a weight max writes ?weight_max= to the URL', () => {
     cy.visit('/webbings')
-    cy.get('[data-cy="filter-group"][data-group="weight"]')
-      .find('[data-cy="range-max"]').type('200')
-    cy.url().should('include', 'weight_max=200')
+    cy.get(weight).find('[data-cy="range-max-value"]').click()
+    cy.get(weight).find('input[data-cy="range-max-value"]').clear().type('150{enter}')
+    cy.get(weight).find('[data-cy="range-max"]').should('have.value', '150')
+    cy.url().should('include', 'weight_max=150')
   })
 
   it('visiting a URL with range params restores the inputs and filters cards', () => {
@@ -160,11 +176,15 @@ describe('URL state — range filters', () => {
     })
   })
 
-  it('clearing a range input removes its param from the URL', () => {
+  it('resetting a range bound to its domain edge removes its param from the URL', () => {
     cy.visit('/webbings?weight_min=50')
-    cy.get('[data-cy="filter-group"][data-group="weight"]')
-      .find('[data-cy="range-min"]').clear()
-    cy.url().should('not.include', 'weight_min=')
+    // A thumb parked at its domain bound means "no constraint" — setting the min
+    // back to the domain low drops the param. Read the low off the thumb's min attr.
+    cy.get(weight).find('[data-cy="range-min"]').invoke('attr', 'min').then((lo) => {
+      cy.get(weight).find('[data-cy="range-min-value"]').click()
+      cy.get(weight).find('input[data-cy="range-min-value"]').clear().type(`${lo}{enter}`)
+      cy.url().should('not.include', 'weight_min=')
+    })
   })
 })
 
@@ -182,7 +202,7 @@ describe('URL state — combined params', () => {
       cy.visit(url)
 
       cy.get('[data-cy="search-input"]').should('have.value', 'Gibbon')
-      cy.get('[data-cy="sort-dropdown"]').should('contain.text', /weight.*low|low.*weight/i)
+      cy.get('[data-cy="sort-dropdown"]').should('contain.text', 'Weight: Low→High')
       cy.get('[data-cy="filter-group"][data-group="material"]')
         .find(`[data-cy="filter-pill"][data-value="${material}"]`)
         .should('have.attr', 'data-active', 'true')

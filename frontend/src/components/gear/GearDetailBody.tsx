@@ -30,6 +30,7 @@ import { imageUrls } from '@/utils/images'
 import CardImageCarousel from './CardImageCarousel'
 import ClassificationBubble from './ClassificationBubble'
 import IsaApprovedBadge from './IsaApprovedBadge'
+import LegacyBadge from './LegacyBadge'
 import SpecTable from './SpecTable'
 
 // Kept byte-identical to GearCard's pair so the same button can't look like two
@@ -94,6 +95,9 @@ export default function GearDetailBody({
               </h1>
             )}
             <ClassificationBubble value={item.classification} />
+            {/* Same pill as the listing card, inline here since there's no
+                image corner to pin it to. */}
+            <LegacyBadge active={item.active} />
           </div>
           {price && (
             <div data-cy="detail-price" className="mt-2 text-xl font-bold" style={{ color: '#E8770A' }}>

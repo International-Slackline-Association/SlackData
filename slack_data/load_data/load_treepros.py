@@ -78,6 +78,7 @@ def add_treepros_to_db(treepros: list[dict], session: SessionDep) -> None:
             description=treepro.get("description"),
             version=treepro.get("version"),
             notes=treepro.get("notes"),
+            active=treepro.get("active"),
         )
 
         db_treepro = TreePro.model_validate(treepro_create)
