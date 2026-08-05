@@ -6,7 +6,13 @@ from typing import Any
 from sqlmodel import select
 from slack_data.database import SessionDep
 from slack_data.models.brands import Brand, BrandCreate, get_brand
-from slack_data.models.weblocks import FrontPin, AttachmentPoint, Weblock, WeblockCreate
+from slack_data.models.weblocks import (
+    AttachmentPoint,
+    FrontPin,
+    Weblock,
+    WeblockCreate,
+    WeblockStyle,
+)
 from slack_data.utilities.materials import MetalMaterial, get_metal_material
 from slack_data.utilities.currencies import Currency, get_currency
 from slack_data.utilities.isa_warnings import ISAWarning
@@ -59,6 +65,7 @@ def clean_weblock_data(weblock: dict[str, Any]) -> dict[str, Any]:
     cleaned_data["raw_name"] = weblock.get("name") 
     cleaned_data["raw_brand_name"] = weblock.get("brand") 
 
+    cleaned_data["style"] = get_weblock_style(weblock.get("style"))
     cleaned_data["material"] = get_metal_material(specs.get("Material"))
     
     # Parse width range
@@ -79,6 +86,11 @@ def clean_weblock_data(weblock: dict[str, Any]) -> dict[str, Any]:
     cleaned_data["date_introduced"] = weblock.get("date_introduced")
     cleaned_data["product_url"] = weblock.get("product_url")
     cleaned_data["active"] = weblock.get("active")
+
+    # Free-text/optional columns carried straight through from the seed. The
+    # SlackDB scrape never populated these, so they are absent on older rows.
+    for passthrough in ("description", "notes", "colors", "version", "isa_warning"):
+        cleaned_data[passthrough] = weblock.get(passthrough)
 
     return cleaned_data
 
@@ -101,6 +113,7 @@ def add_weblocks_to_db(weblocks: list[dict], session: SessionDep) -> None:
             brand_id=brand_id,
             release_date=weblock.get("date_introduced"),
             product_url=weblock.get("product_url"),
+            style=weblock.get("style"),
             material=weblock.get("material"),
             width_min=weblock.get("width_min"),
             width_max=weblock.get("width_max"),
@@ -126,6 +139,26 @@ def add_weblocks_to_db(weblocks: list[dict], session: SessionDep) -> None:
     session.commit()
     session.refresh(db_weblock)
     
+def get_weblock_style(style_input: str | None) -> WeblockStyle | None:
+    """
+    Convert the seed's `style` string to a WeblockStyle.
+
+    The seed carries the value verbatim ("Tensionable Weblock" / "Fixed
+    Linelocker"); matching is loose so "linelocker", "line locker" and
+    "tensionable" all resolve. Anything unrecognised (or missing) stays None
+    rather than being guessed into a category.
+    """
+    if not style_input:
+        return None
+
+    style_str = style_input.lower().replace("-", " ")
+    if "lock" in style_str and "line" in style_str:
+        return WeblockStyle.LINELOCKER
+    if "tension" in style_str:
+        return WeblockStyle.TENSIONABLE
+    return None
+
+
 def get_front_pin_type(pin_type: str | list[str] | None) -> FrontPin:
     """
     Convert the front pin string or list to a FrontPin enum.
@@ -194,7 +227,7 @@ def parse_price_from_weblock(weblock_data: dict) -> float | None:
     if pricing and pricing[0].get("text"):
         # Look for price pattern: number before currency code
         text = pricing[0]["text"]
-        match = re.search(r'([0-9]+(?:\.[0-9]+)?)\s*(?:EUR|USD|GBP|CAD|PLN|ZAR)', text)
+        match = re.search(r'([0-9]+(?:\.[0-9]+)?)\s*(?:EUR|USD|GBP|CAD|PLN|ZAR|BRL|CZK|CHF|SEK)', text)
         if match:
             return float(match.group(1))
     
@@ -202,7 +235,7 @@ def parse_price_from_weblock(weblock_data: dict) -> float | None:
     specs = weblock_data.get("specifications", {})
     price_text = specs.get("Price (per unit)", "")
     if price_text:
-        match = re.search(r'([0-9]+(?:\.[0-9]+)?)\s*(?:EUR|USD|GBP|CAD|PLN|ZAR)', price_text)
+        match = re.search(r'([0-9]+(?:\.[0-9]+)?)\s*(?:EUR|USD|GBP|CAD|PLN|ZAR|BRL|CZK|CHF|SEK)', price_text)
         if match:
             return float(match.group(1))
     

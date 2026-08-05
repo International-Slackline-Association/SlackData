@@ -9300,5 +9300,213 @@
         "description": "The next iteration of Balance Community's Paradigm freestyle webbing. High-stretch nylon tubular at 25 kN and 49 g/m — built for freestyle but burly with it. UV-treated nylon fibres in a dense plain tubular weave, dyed pink/purple. Designed, inspected and sewn in the US; woven in Taiwan.",
         "notes": "Manufacturer specs (balancecommunity.com): 25.0 mm × 2.44 mm, 49.0 g/m, MBS 25 kN, sewn-loop MBS 23 kN, WLL 8 kN, 100 % nylon (polyamide) tubular weave with coloured edges, single zone. Optimum tension 1.8–2.2 kN, preferred lengths 15–100 m, backup 18 % longer than the main. Holding strengths: Alpine WebLock 24 kN, MightyLock 23 kN. ISA stretch 11.5 % @ 5 kN and 17.5 % @ 10 kN — BC states the full stretch chart is 'coming soon', so REVISIT and replace this two-point curve once released-product data is published. BC labels it highline-approved; that is the maker's own statement, not an ISA certification. Price is the custom per-metre rate ($2.40/m); cut lengths run 40–100 m. Released 2026-07-23 (Shopify listing publish date).",
         "active": true
+    },
+    {
+        "name": "JASP",
+        "brand": "Balance Community: Slackline Outfitters",
+        "materialType": "Polyester",
+        "width": 25.4,
+        "thickness": 2.37,
+        "weight": 57.0,
+        "breakingStrength": 25.0,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "product_url": "https://balancecommunity.com/products/jasp",
+        "date_introduced": null,
+        "priceMeter": 1.4,
+        "currency": "USD",
+        "stretch": [
+            {
+                "kn": 1,
+                "percent": 0.89
+            },
+            {
+                "kn": 2,
+                "percent": 1.57
+            },
+            {
+                "kn": 3,
+                "percent": 2.14
+            },
+            {
+                "kn": 4,
+                "percent": 2.78
+            },
+            {
+                "kn": 5,
+                "percent": 3.77
+            },
+            {
+                "kn": 6,
+                "percent": 5.14
+            },
+            {
+                "kn": 7,
+                "percent": 6.57
+            },
+            {
+                "kn": 8,
+                "percent": 7.96
+            },
+            {
+                "kn": 9,
+                "percent": 9.31
+            },
+            {
+                "kn": 10,
+                "percent": 10.47
+            },
+            {
+                "kn": 11,
+                "percent": 11.49
+            },
+            {
+                "kn": 12,
+                "percent": 12.45
+            }
+        ],
+        "description": "\"Just A Simple Polyester\" — plain weave, single-zone construction with a ridged design. Low-cost entry line, park longline and highline backup; pairs with JYBN. Made in the US.",
+        "notes": "WLL 5 kN.",
+        "active": false
+    },
+    {
+        "name": "Spider Silk MK4",
+        "brand": "Balance Community: Slackline Outfitters",
+        "materialType": "Hybrid",
+        "materialComposition": [
+            "Dyneema/HMPE",
+            "Polyester"
+        ],
+        "width": 20,
+        "thickness": 2.0,
+        "weight": 26.0,
+        "breakingStrength": 30.0,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "product_url": "https://balancecommunity.com/products/spider-silk-mk4",
+        "date_introduced": null,
+        "priceMeter": 3.79,
+        "currency": "USD",
+        "stretch": [
+            {
+                "kn": 1,
+                "percent": 0.64
+            },
+            {
+                "kn": 2,
+                "percent": 2.0
+            },
+            {
+                "kn": 3,
+                "percent": 2.7
+            },
+            {
+                "kn": 4,
+                "percent": 3.12
+            },
+            {
+                "kn": 5,
+                "percent": 3.47
+            },
+            {
+                "kn": 6,
+                "percent": 3.71
+            },
+            {
+                "kn": 7,
+                "percent": 3.93
+            },
+            {
+                "kn": 8,
+                "percent": 4.11
+            },
+            {
+                "kn": 9,
+                "percent": 4.25
+            },
+            {
+                "kn": 10,
+                "percent": 4.4
+            },
+            {
+                "kn": 11,
+                "percent": 4.49
+            },
+            {
+                "kn": 12,
+                "percent": 4.67
+            }
+        ],
+        "description": "3-layer weave with a full polyester jacket, three-zone construction with strength and protective zones. No high-tech fibers exposed on the exterior, so it handles and weblocks like a standard webbing. Contrasting orange/blue faces for twist spotting. Made in the US.",
+        "notes": "WLL 10 kN. Unlike MK3 (Vectran + Dyneema) and MK5 (Vectran + Polyester), MK4 is UHMWPE/Dyneema + Polyester.",
+        "active": false
+    },
+    {
+        "name": "Secondaire",
+        "brand": "Balance Community: Slackline Outfitters",
+        "materialType": "Polyester",
+        "width": 20,
+        "thickness": 2.5,
+        "weight": 44.0,
+        "breakingStrength": 25.0,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "product_url": "https://balancecommunity.com/products/secondaire",
+        "date_introduced": null,
+        "priceMeter": 1.7,
+        "currency": "USD",
+        "stretch": [
+            {
+                "kn": 1,
+                "percent": 1.69
+            },
+            {
+                "kn": 2,
+                "percent": 2.64
+            },
+            {
+                "kn": 3,
+                "percent": 3.5
+            },
+            {
+                "kn": 4,
+                "percent": 4.71
+            },
+            {
+                "kn": 5,
+                "percent": 6.88
+            },
+            {
+                "kn": 6,
+                "percent": 9.78
+            },
+            {
+                "kn": 7,
+                "percent": 11.96
+            },
+            {
+                "kn": 8,
+                "percent": 13.55
+            },
+            {
+                "kn": 9,
+                "percent": 14.96
+            },
+            {
+                "kn": 10,
+                "percent": 16.28
+            },
+            {
+                "kn": 11,
+                "percent": 17.52
+            },
+            {
+                "kn": 12,
+                "percent": 18.65
+            }
+        ],
+        "description": "Lightweight polyester highline backup webbing. Plain weave with a low pick count for a high strength-to-weight ratio; single-zone weave with black marker yarns. Made in the US.",
+        "notes": "WLL 8 kN; 24 kN through an Alpine WebLock. Superseded by Secondaire MK2.",
+        "active": false
     }
 ]

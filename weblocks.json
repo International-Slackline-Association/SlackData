@@ -47,7 +47,8 @@
         "date_introduced": 1506117600000,
         "name": "Aeris P Weblock",
         "product_url": "https://petramslacklines.site123.me/shop-1/aeris-p-weblock-2",
-        "active": true
+        "active": true,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/3040",
@@ -97,7 +98,8 @@
         "date_introduced": 1506117600000,
         "name": "Aeris Weblock",
         "product_url": "https://petramslacklines.site123.me/shop-1/aeris-weblock-2",
-        "active": true
+        "active": true,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/533",
@@ -143,7 +145,8 @@
         "date_introduced": null,
         "name": "Alpine WebLock 4.0",
         "product_url": "https://www.balancecommunity.com/blogs/slack-science/tagged/alpine-weblock-4-0",
-        "active": false
+        "active": false,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/3089",
@@ -186,7 +189,8 @@
         "date_introduced": 1579816800000,
         "name": "Alpine WebLock 5.0",
         "product_url": "https://www.balancecommunity.com/products/alpine-weblock-5",
-        "active": false
+        "active": false,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/3255",
@@ -226,7 +230,8 @@
         "date_introduced": null,
         "name": "Alpine WebLock 6.1",
         "product_url": "https://www.balancecommunity.com/collections/webbing-anchors/products/alpine-weblock-6-0",
-        "active": true
+        "active": true,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/3256",
@@ -266,7 +271,8 @@
         "date_introduced": null,
         "name": "Alpine WebLock 6.1 20mm",
         "product_url": "https://www.balancecommunity.com/collections/webbing-anchors/products/alpine-weblock-6-0",
-        "active": true
+        "active": true,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/537",
@@ -312,7 +318,8 @@
         "date_introduced": null,
         "name": "BaboonLock",
         "product_url": "http://www.slackgear.co.za/product/baboonlock/",
-        "active": true
+        "active": true,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/526",
@@ -344,7 +351,8 @@
         "date_introduced": null,
         "name": "Banana",
         "product_url": null,
-        "active": false
+        "active": false,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/544",
@@ -391,7 +399,8 @@
         "date_introduced": null,
         "name": "BANANA! 2.0",
         "product_url": null,
-        "active": false
+        "active": false,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/3117",
@@ -434,7 +443,8 @@
         "date_introduced": null,
         "name": "BANANA! 3.0 SR",
         "product_url": "https://slackhouseshop.pl/en/produkt/banana-3-0-sr/",
-        "active": false
+        "active": false,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/3118",
@@ -477,7 +487,8 @@
         "date_introduced": null,
         "name": "BANANA! 3.1",
         "product_url": "https://slackhouseshop.pl/en/produkt/banana-3-1-weblock/",
-        "active": false
+        "active": false,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/502",
@@ -520,7 +531,8 @@
         "date_introduced": null,
         "name": "Bandit FX",
         "product_url": null,
-        "active": false
+        "active": false,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/500",
@@ -561,7 +573,8 @@
         "date_introduced": null,
         "name": "Bandit SH",
         "product_url": null,
-        "active": false
+        "active": false,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/524",
@@ -599,7 +612,8 @@
         "date_introduced": null,
         "name": "Bandit SH",
         "product_url": null,
-        "active": false
+        "active": false,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/501",
@@ -640,7 +654,8 @@
         "date_introduced": null,
         "name": "Bandit SL",
         "product_url": null,
-        "active": false
+        "active": false,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/525",
@@ -678,7 +693,8 @@
         "date_introduced": null,
         "name": "Bandit SL",
         "product_url": null,
-        "active": false
+        "active": false,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/548",
@@ -726,7 +742,8 @@
         "date_introduced": null,
         "name": "Beast 1.0",
         "product_url": null,
-        "active": false
+        "active": false,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/556",
@@ -769,7 +786,8 @@
         "date_introduced": null,
         "name": "Campo weblock",
         "product_url": null,
-        "active": false
+        "active": false,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/505",
@@ -814,7 +832,8 @@
         "date_introduced": null,
         "name": "Canon FX",
         "product_url": "https://www.slackshop.cz/en/weblocks/24-eqb-canon-fx.html",
-        "active": false
+        "active": false,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/503",
@@ -854,7 +873,8 @@
         "date_introduced": null,
         "name": "Canon SH",
         "product_url": null,
-        "active": false
+        "active": false,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/504",
@@ -903,7 +923,8 @@
         "date_introduced": null,
         "name": "Canon SL",
         "product_url": null,
-        "active": false
+        "active": false,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/551",
@@ -951,7 +972,8 @@
         "date_introduced": null,
         "name": "Catlock classic",
         "product_url": "https://catonslack.com/product/35390452-slackline-weblock-catlock-classic",
-        "active": false
+        "active": false,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/553",
@@ -1002,7 +1024,8 @@
         "date_introduced": null,
         "name": "Catlock mini",
         "product_url": "https://catonslack.com/product/34629326-slackline-weblock-catlock-mini",
-        "active": false
+        "active": false,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/552",
@@ -1049,7 +1072,8 @@
         "date_introduced": 1519858800000,
         "name": "Catlock Pro",
         "product_url": null,
-        "active": false
+        "active": false,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/550",
@@ -1095,7 +1119,8 @@
         "date_introduced": null,
         "name": "Catlock SR",
         "product_url": null,
-        "active": false
+        "active": false,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/563",
@@ -1143,7 +1168,8 @@
         "date_introduced": null,
         "name": "Catlock SR PRO",
         "product_url": null,
-        "active": false
+        "active": false,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/523",
@@ -1175,7 +1201,8 @@
         "date_introduced": null,
         "name": "Chili",
         "product_url": "https://renegadejuggling.com/products/spider-chili-line-lock",
-        "active": true
+        "active": true,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/549",
@@ -1224,7 +1251,8 @@
         "date_introduced": null,
         "name": "CHILI 2.0",
         "product_url": null,
-        "active": false
+        "active": false,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/543",
@@ -1261,7 +1289,8 @@
         "date_introduced": null,
         "name": "Constat weblock",
         "product_url": null,
-        "active": false
+        "active": false,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/512",
@@ -1299,7 +1328,8 @@
         "date_introduced": null,
         "name": "Direct",
         "product_url": null,
-        "active": false
+        "active": false,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/522",
@@ -1342,7 +1372,8 @@
         "date_introduced": null,
         "name": "Dreamcatcher",
         "product_url": null,
-        "active": false
+        "active": false,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/519",
@@ -1374,7 +1405,8 @@
         "date_introduced": null,
         "name": "Easylock",
         "product_url": null,
-        "active": false
+        "active": false,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/520",
@@ -1419,7 +1451,8 @@
         "date_introduced": null,
         "name": "Equilocker",
         "product_url": "http://www.slackliner.de/Verbindungselemente/Linelocker/Equilocker.html",
-        "active": true
+        "active": true,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/558",
@@ -1456,7 +1489,8 @@
         "date_introduced": null,
         "name": "Fortis weblock",
         "product_url": null,
-        "active": false
+        "active": false,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/542",
@@ -1511,7 +1545,8 @@
         "date_introduced": null,
         "name": "Frog",
         "product_url": "https://slack-mountain.com/en/webbing-anchor/231-4047-frogx.html",
-        "active": true
+        "active": true,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/528",
@@ -1562,7 +1597,8 @@
         "date_introduced": null,
         "name": "Ginkgo",
         "product_url": "https://slack-mountain.com/en/tricklines/166-paire-de-ginkgo-745-l-unite.html",
-        "active": true
+        "active": true,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/3071",
@@ -1602,7 +1638,8 @@
         "date_introduced": null,
         "name": "Ginkgo Mini",
         "product_url": null,
-        "active": false
+        "active": false,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/3019",
@@ -1639,7 +1676,8 @@
         "date_introduced": null,
         "name": "Ginkgo Quickpin",
         "product_url": null,
-        "active": false
+        "active": false,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/506",
@@ -1676,7 +1714,8 @@
         "date_introduced": null,
         "name": "Katana",
         "product_url": null,
-        "active": false
+        "active": false,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/507",
@@ -1716,7 +1755,8 @@
         "date_introduced": null,
         "name": "Katana FX",
         "product_url": "https://www.slackshop.cz/en/weblocks/27-eqb-katana-fx.html",
-        "active": true
+        "active": true,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/3252",
@@ -1755,7 +1795,8 @@
         "date_introduced": null,
         "name": "KingPin",
         "product_url": "https://slacktivity.com/shop/kingpin-weblock/",
-        "active": true
+        "active": true,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/561",
@@ -1807,7 +1848,8 @@
         "date_introduced": null,
         "name": "Lime",
         "product_url": "https://renegadejuggling.com/products/spider-lime-line-lock",
-        "active": true
+        "active": true,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/540",
@@ -1857,7 +1899,8 @@
         "date_introduced": null,
         "name": "LineLock AL MK4",
         "product_url": "https://www.linegrip.com/shop/slackpro-linelock-al/",
-        "active": false
+        "active": false,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/3041",
@@ -1900,7 +1943,8 @@
         "date_introduced": 1506805200000,
         "name": "LineLock mini",
         "product_url": "https://krok.biz/slackline/layn-lok-mini",
-        "active": true
+        "active": true,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/541",
@@ -1947,7 +1991,8 @@
         "date_introduced": null,
         "name": "LineLock VA MKIII",
         "product_url": null,
-        "active": false
+        "active": false,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/3135",
@@ -1987,7 +2032,8 @@
         "date_introduced": null,
         "name": "Linelocker",
         "product_url": "https://www.slackshop.cz/cs/kotvitka/132-linelocker.html",
-        "active": true
+        "active": true,
+        "style": "Fixed Linelocker"
     },
     {
         "image_url": "/api/gear/image_thumb/555",
@@ -2019,7 +2065,8 @@
         "date_introduced": null,
         "name": "LINK",
         "product_url": null,
-        "active": false
+        "active": false,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/3024",
@@ -2060,7 +2107,8 @@
         "date_introduced": 1262300400000,
         "name": "Lynx 1",
         "product_url": null,
-        "active": false
+        "active": false,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/3023",
@@ -2095,7 +2143,8 @@
         "date_introduced": 1293836400000,
         "name": "Lynx 2.1",
         "product_url": null,
-        "active": false
+        "active": false,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/514",
@@ -2133,7 +2182,8 @@
         "date_introduced": null,
         "name": "Lynx 3.0",
         "product_url": null,
-        "active": false
+        "active": false,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/515",
@@ -2176,7 +2226,8 @@
         "date_introduced": null,
         "name": "Lynx 4.0 SH",
         "product_url": null,
-        "active": false
+        "active": false,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/516",
@@ -2221,7 +2272,8 @@
         "date_introduced": null,
         "name": "Lynx 4.0 Vari",
         "product_url": null,
-        "active": false
+        "active": false,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/3249",
@@ -2260,7 +2312,8 @@
         "date_introduced": 1626901200000,
         "name": "Lynx 5",
         "product_url": "https://aki-slacklines.de/en/hardware/weblocks/203/aki-lynx-5-webbing-locker",
-        "active": false
+        "active": false,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/3065",
@@ -2306,7 +2359,8 @@
         "date_introduced": null,
         "name": "Mint",
         "product_url": null,
-        "active": false
+        "active": false,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/3085",
@@ -2350,7 +2404,8 @@
         "date_introduced": null,
         "name": "Mithril - Pull Pin",
         "product_url": "https://www.slackshop.cz/en/weblocks/145-349-eqb-mithril.html#/164-pin_version-pull_pin",
-        "active": true
+        "active": true,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/3079",
@@ -2394,7 +2449,8 @@
         "date_introduced": null,
         "name": "Mithril - Quick Pin",
         "product_url": "https://www.slackshop.cz/en/weblocks/145-350-eqb-mithril.html#/165-pin_version-quick_pin",
-        "active": true
+        "active": true,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/3081",
@@ -2426,7 +2482,8 @@
         "date_introduced": 1558904400000,
         "name": "MultiLock",
         "product_url": null,
-        "active": false
+        "active": false,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/3251",
@@ -2470,7 +2527,8 @@
         "date_introduced": null,
         "name": "Orange",
         "product_url": "https://www.radrigs.co.uk/product-page/orange",
-        "active": true
+        "active": true,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/510",
@@ -2510,7 +2568,8 @@
         "date_introduced": null,
         "name": "Paddle FX",
         "product_url": "https://www.slackshop.cz/en/weblocks/25-eqb-paddle-fx.html",
-        "active": true
+        "active": true,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/560",
@@ -2547,7 +2606,8 @@
         "date_introduced": null,
         "name": "Paddle Linelock",
         "product_url": null,
-        "active": false
+        "active": false,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/509",
@@ -2590,7 +2650,8 @@
         "date_introduced": null,
         "name": "Paddle SH",
         "product_url": "http://www.slackshop.cz/en/lockers/83-eqb-paddle.html",
-        "active": false
+        "active": false,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/508",
@@ -2631,7 +2692,8 @@
         "date_introduced": null,
         "name": "Paddle SL",
         "product_url": null,
-        "active": false
+        "active": false,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/3133",
@@ -2675,7 +2737,8 @@
         "date_introduced": null,
         "name": "Pirat PP",
         "product_url": "https://www.slackshop.cz/en/weblocks/155-369-eqb-pirat.html#/164-pin_version-pull_pin",
-        "active": true
+        "active": true,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/3134",
@@ -2719,7 +2782,8 @@
         "date_introduced": null,
         "name": "Pirat QP",
         "product_url": "https://www.slackshop.cz/en/weblocks/155-368-eqb-pirat.html#/165-pin_version-quick_pin",
-        "active": true
+        "active": true,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/554",
@@ -2771,7 +2835,8 @@
         "date_introduced": null,
         "name": "PRO Weblock",
         "product_url": "https://raed-slacklines.com/pro-weblock",
-        "active": false
+        "active": false,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/517",
@@ -2814,7 +2879,8 @@
         "date_introduced": null,
         "name": "Puma 2.0",
         "product_url": null,
-        "active": false
+        "active": false,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/547",
@@ -2858,7 +2924,8 @@
         "date_introduced": 1475971200000,
         "name": "PureLock",
         "product_url": null,
-        "active": false
+        "active": false,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/534",
@@ -2898,7 +2965,8 @@
         "date_introduced": null,
         "name": "RAGElock",
         "product_url": "http://www.balancecommunity.com/ragelock",
-        "active": false
+        "active": false,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/535",
@@ -2944,7 +3012,8 @@
         "date_introduced": null,
         "name": "RamLock",
         "product_url": "https://www.slacklinetechnology.com/shop/ramlock-slackline-anchor",
-        "active": false
+        "active": false,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/527",
@@ -2990,7 +3059,8 @@
         "date_introduced": null,
         "name": "Rhino",
         "product_url": null,
-        "active": false
+        "active": false,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/3046",
@@ -3041,7 +3111,8 @@
         "date_introduced": 1512946800000,
         "name": "Rhino Minion",
         "product_url": "https://slack-mountain.com/fr/bloqueur-longline-highline/190-rhino-minion.html",
-        "active": false
+        "active": false,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/536",
@@ -3084,7 +3155,8 @@
         "date_introduced": null,
         "name": "RhinoLock",
         "product_url": "http://www.slackgear.co.za/product/rhinolock/",
-        "active": true
+        "active": true,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/3047",
@@ -3121,7 +3193,8 @@
         "date_introduced": 1513720800000,
         "name": "RODEO weblock",
         "product_url": null,
-        "active": true
+        "active": true,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/3070",
@@ -3162,7 +3235,8 @@
         "date_introduced": null,
         "name": "Rowan 1.0 (31mm)",
         "product_url": null,
-        "active": false
+        "active": false,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/3057",
@@ -3200,7 +3274,8 @@
         "date_introduced": 1533189600000,
         "name": "Rowan 1.0 Captive pin",
         "product_url": null,
-        "active": false
+        "active": false,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/3058",
@@ -3241,7 +3316,8 @@
         "date_introduced": 1533189600000,
         "name": "Rowan 1.0 Captive Pin Light",
         "product_url": null,
-        "active": false
+        "active": false,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/3059",
@@ -3279,7 +3355,8 @@
         "date_introduced": 1533189600000,
         "name": "Rowan 1.1",
         "product_url": null,
-        "active": false
+        "active": false,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/3060",
@@ -3320,7 +3397,8 @@
         "date_introduced": 1533189600000,
         "name": "Rowan 1.3",
         "product_url": null,
-        "active": false
+        "active": false,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/3106",
@@ -3358,7 +3436,8 @@
         "date_introduced": null,
         "name": "Rowan 3.1",
         "product_url": null,
-        "active": false
+        "active": false,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/3107",
@@ -3396,7 +3475,8 @@
         "date_introduced": null,
         "name": "Rowan 3.1T",
         "product_url": null,
-        "active": false
+        "active": false,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/3108",
@@ -3434,7 +3514,8 @@
         "date_introduced": null,
         "name": "Rowan 3.2",
         "product_url": null,
-        "active": false
+        "active": false,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/3109",
@@ -3472,7 +3553,8 @@
         "date_introduced": null,
         "name": "Rowan 3.3",
         "product_url": null,
-        "active": false
+        "active": false,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/545",
@@ -3515,7 +3597,8 @@
         "date_introduced": null,
         "name": "SeaHorse DP 1",
         "product_url": null,
-        "active": false
+        "active": false,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/546",
@@ -3559,7 +3642,8 @@
         "date_introduced": null,
         "name": "SeaHorse DP 1.5",
         "product_url": "https://slacktivity.com/shop/slacktivity-seahorse/",
-        "active": true
+        "active": true,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/3154",
@@ -3603,7 +3687,8 @@
         "date_introduced": null,
         "name": "SeaHorse Sling 1",
         "product_url": null,
-        "active": false
+        "active": false,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/511",
@@ -3650,7 +3735,8 @@
         "date_introduced": null,
         "name": "Sherriff",
         "product_url": null,
-        "active": false
+        "active": false,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/562",
@@ -3694,7 +3780,8 @@
         "date_introduced": null,
         "name": "Sherriff FX",
         "product_url": null,
-        "active": false
+        "active": false,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/532",
@@ -3726,7 +3813,8 @@
         "date_introduced": null,
         "name": "SlackDuck",
         "product_url": null,
-        "active": false
+        "active": false,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/531",
@@ -3758,7 +3846,8 @@
         "date_introduced": null,
         "name": "SlackDuck-DP",
         "product_url": null,
-        "active": false
+        "active": false,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/538",
@@ -3803,7 +3892,8 @@
         "date_introduced": null,
         "name": "Slackibloc 3.1",
         "product_url": "https://slack-inov.com/gb/gear/95-slackiblock-31",
-        "active": false
+        "active": false,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/3012",
@@ -3846,7 +3936,8 @@
         "date_introduced": null,
         "name": "Slackibloc 4",
         "product_url": null,
-        "active": false
+        "active": false,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/539",
@@ -3883,7 +3974,8 @@
         "date_introduced": null,
         "name": "Slackibloc Jump 1.2",
         "product_url": null,
-        "active": false
+        "active": false,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/3152",
@@ -3920,7 +4012,8 @@
         "date_introduced": null,
         "name": "Slackibloc SR Pull pin",
         "product_url": null,
-        "active": false
+        "active": false,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/3153",
@@ -3957,7 +4050,8 @@
         "date_introduced": null,
         "name": "Slackibloc SR Quick Pin",
         "product_url": null,
-        "active": false
+        "active": false,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/3069",
@@ -3994,7 +4088,8 @@
         "date_introduced": 1531947600000,
         "name": "Slackijump",
         "product_url": null,
-        "active": false
+        "active": false,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/529",
@@ -4040,7 +4135,8 @@
         "date_introduced": null,
         "name": "SladLock Power",
         "product_url": null,
-        "active": false
+        "active": false,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/557",
@@ -4083,7 +4179,8 @@
         "date_introduced": null,
         "name": "Solveris weblock",
         "product_url": null,
-        "active": false
+        "active": false,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/3018",
@@ -4129,7 +4226,8 @@
         "date_introduced": null,
         "name": "Spatium weblock",
         "product_url": null,
-        "active": false
+        "active": false,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/530",
@@ -4161,7 +4259,8 @@
         "date_introduced": null,
         "name": "Spirit Lock",
         "product_url": null,
-        "active": false
+        "active": false,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/521",
@@ -4198,7 +4297,8 @@
         "date_introduced": null,
         "name": "T-Rig",
         "product_url": null,
-        "active": false
+        "active": false,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/3253",
@@ -4237,7 +4337,8 @@
         "date_introduced": null,
         "name": "TiLock 19mm",
         "product_url": "https://raed-slacklines.com/tilock",
-        "active": true
+        "active": true,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/3254",
@@ -4276,7 +4377,8 @@
         "date_introduced": null,
         "name": "TiLock 25mm",
         "product_url": "https://raed-slacklines.com/tilock",
-        "active": true
+        "active": true,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/559",
@@ -4308,7 +4410,8 @@
         "date_introduced": null,
         "name": "Xylon",
         "product_url": null,
-        "active": false
+        "active": false,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/518",
@@ -4340,7 +4443,8 @@
         "date_introduced": null,
         "name": "Yang",
         "product_url": null,
-        "active": false
+        "active": false,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/3022",
@@ -4380,7 +4484,8 @@
         "date_introduced": 1262300400000,
         "name": "Zilla 1.0",
         "product_url": null,
-        "active": false
+        "active": false,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/3021",
@@ -4415,7 +4520,8 @@
         "date_introduced": 1293836400000,
         "name": "Zilla 2.0",
         "product_url": null,
-        "active": false
+        "active": false,
+        "style": "Tensionable Weblock"
     },
     {
         "image_url": "/api/gear/image_thumb/513",
@@ -4457,6 +4563,403 @@
         "date_introduced": null,
         "name": "Zilla 3.0",
         "product_url": null,
-        "active": false
+        "active": false,
+        "style": "Tensionable Weblock"
+    },
+    {
+        "brand": "Radrigs",
+        "name": "Slackfriend",
+        "specifications": {
+            "Material": "Aluminum",
+            "Weight": "120gr",
+            "MBS": "20kN",
+            "Anchor connection type": "Sling",
+            "Webbing connection type": "Other",
+            "Compatible webbing width": "26mm",
+            "ISA approved": "N/A",
+            "Price (per unit)": "50 GBP"
+        },
+        "date_introduced": null,
+        "product_url": "https://www.radrigs.co.uk/product-page/slackfriend",
+        "active": true,
+        "description": "Radrigs' lever-action weblock for rodeo lines and low-tension park lines. The locking mechanism uses no webbing-on-webbing friction, so pre-tensioning is easy and tension can be released in a controlled way by pulling the handle. The quoted 120 g includes the integrated Dyneema soft-shackle connector, so no extra hardware is needed.",
+        "notes": "Manufacturer specs (radrigs.co.uk): 85 x 45 x 45 mm, 120 g incl. soft shackle, approved webbing width up to 26 mm, WLL 3 kN, MBS 20 kN. Centre diverter and ring 7075-T6 aluminium, side plates hard-anodised 6082-T6, soft shackle 5 mm SK78 Dyneema. Designed and manufactured in the UK. Width recorded as 26 mm because Radrigs publish only an upper bound, not a range. TYPE CORRECTED: listed as a roller/pulley in earlier sweeps — it is a weblock. Radrigs note that post-Brexit EU orders are routed through SlackX.eu.",
+        "style": "Tensionable Weblock"
+    },
+    {
+        "brand": "Balance Community",
+        "name": "MightyLock",
+        "specifications": {
+            "Material": "Aluminum",
+            "Weight": "54gr",
+            "MBS": "42kN",
+            "Anchor connection type": "Pin",
+            "Webbing connection type": "Other",
+            "Compatible webbing width": "20mm - 25mm",
+            "ISA approved": "N/A",
+            "Price (per unit)": "17 USD"
+        },
+        "date_introduced": 1590364800000,
+        "product_url": "https://balancecommunity.com/products/mightylock",
+        "active": true,
+        "description": "A square line-locker ring with rounded bars from Balance Community. The geometry retains over 85 % of the webbing's strength — far better than a frost knot or a plain chain link — making it viable as a static, backup or longline anchor. One side is sized for 25 mm webbing, the other for 20 mm. Ships with a catch cord.",
+        "notes": "Manufacturer specs (balancecommunity.com): MBS 42 kN, WLL 10 kN, 54.0 g. Inner length 26.0 mm, inner width 20.0 mm, height/thickness 12.0 mm. Anodised aluminium. 25 mm side pairs with the pin of a 12 mm bow shackle; 20 mm side with a 10 mm bow or 1/2\" anchor shackle. Works on the bow side of most shackles. Catch cord is 2.75 mm Sterling GloCord. Colours: black, blue, orange, purple. No pin of its own — recorded as connection type Other. Date introduced is the Shopify listing publish date (2020-05-25).",
+        "colors": "Black, Blue, Orange, Purple",
+        "style": "Fixed Linelocker"
+    },
+    {
+        "brand": "Balance Community",
+        "name": "Aluminum Line-Locker Ring",
+        "specifications": {
+            "Material": "Aluminum",
+            "MBS": "15kN",
+            "Anchor connection type": "Universal",
+            "Webbing connection type": "Other",
+            "Compatible webbing width": "25mm",
+            "ISA approved": "N/A",
+            "Price (per unit)": "8 USD"
+        },
+        "date_introduced": 1580083200000,
+        "product_url": "https://balancecommunity.com/products/aluminum-line-locker-ring",
+        "active": true,
+        "description": "A drop-forged aluminium ring dimensioned for building line-lockers with 1-inch webbing. Intended for line-lockers on a carabiner or the bow side of a shackle.",
+        "notes": "Manufacturer specs (balancecommunity.com): MBS 15 kN, WLL 3 kN, drop-forged anodised aluminium alloy 6061. No weight published (the 91 g Shopify figure is shipping weight, not product weight) — left null. Date introduced is the Shopify listing publish date (2020-01-27).",
+        "style": "Fixed Linelocker"
+    },
+    {
+        "brand": "Slacktivity",
+        "name": "ChainLock",
+        "specifications": {
+            "Material": "Aluminum",
+            "Weight": "23gr",
+            "MBS": "30kN",
+            "Anchor connection type": "Universal",
+            "Webbing connection type": "Other",
+            "Compatible webbing width": "20mm - 25mm",
+            "ISA approved": "N/A",
+            "Price (per unit)": "9 EUR"
+        },
+        "date_introduced": null,
+        "product_url": "https://slacktivity.com/shop/chainlock-slackline-linelocker/",
+        "active": true,
+        "description": "A forged, green-anodised chain link sold as a cheap line-locker for rodeo lines and lines up to about 40 m, or as the multiplier connection in a HangOver pulley system. Explicitly not recommended for highlines, and it cannot pre-tension the webbing when used with a shackle or carabiner.",
+        "notes": "Manufacturer specs (slacktivity.com): MBS 30 kN, WLL 6 kN, 23 g, forged 7075-T6 aluminium, green anodised. Outer 50 x 35 mm, inner 30 x 15 mm. Designed for 25 mm webbing; a separately sold 3D-printed spacer (bundled or standalone, €16.00 for the bundle) adapts it to 20 mm — hence the 20-25 mm range. Slacktivity's own note: low-tension setups up to 50 m only; the seaHorse is their recommendation above that. Price is the base ChainLock (€9.00).",
+        "style": "Fixed Linelocker"
+    },
+    {
+        "brand": "Slack Inov",
+        "name": "ZENLOCK",
+        "specifications": {
+            "Material": "Aluminum",
+            "Weight": "200gr",
+            "MBS": "60kN",
+            "Anchor connection type": "Universal",
+            "Webbing connection type": "Push Pin",
+            "Compatible webbing width": "17mm - 26mm",
+            "ISA approved": "N/A",
+            "Price (per unit)": "139.9 USD"
+        },
+        "date_introduced": 1762905600000,
+        "product_url": "https://slacklines.us/products/zenlock-weblock",
+        "active": true,
+        "description": "Slack Inov's current flagship weblock: 200 g, 60 kN MBS, and adjustable from 17 to 26 mm webbing via screw-fixed rigid aluminium spacers that cannot be dropped. A large progressive spiral diverter preserves roughly 95 % of the webbing MBS and doubles as an auxiliary anchor point for a multiplier; a lowered front pin reduces friction damage. The rear becket accepts metallic and soft connectors, and a separate slot takes a soft release or 25 mm soft shackle directly.",
+        "notes": "Manufacturer specs (slacklines.us / Slack Inov): 200 g, MBS 60 kN, 17-26 mm webbing. Spacer configuration: none for 24-26 mm, one pair (included) for 19-23 mm, two pairs (sold separately) for 15-17 mm. Stainless steel safety pin with double-action (press + pull) unlock and fall-arrest cord; reinforced anodised aluminium head; included round-head allen key. Sold with optional 7 m/13 m soft release and 0.3 T Dyneema sling; base price is the bare weblock. BRAND: sold on slacklines.us under the 'Spider Slackline US' vendor field, but the product is Slack Inov's (its own press photography is filed as 'slackinov') — filed under the true maker per the retailer rule. Date introduced is the Shopify listing publish date (2025-11-12).",
+        "colors": "Teal Blue, Gray",
+        "style": "Tensionable Weblock"
+    },
+    {
+        "brand": "Slack Inov",
+        "name": "Diamond Lock",
+        "specifications": {
+            "Material": "Aluminum",
+            "Weight": "54gr",
+            "MBS": "40kN",
+            "Anchor connection type": "Pin",
+            "Webbing connection type": "Other",
+            "Compatible webbing width": "17mm - 26mm",
+            "ISA approved": "N/A",
+            "Price (per unit)": "17 USD"
+        },
+        "date_introduced": null,
+        "product_url": "https://slacklines.us/products/weblock-diamond-lock",
+        "active": true,
+        "description": "A diamond/square-section locker ring offered as a lighter, part-free alternative to a weblock. Slack Inov pitch it as a replacement for a frost knot on highline backup webbing, for primitive park setups, and as a static longline end blocker on webbing without end loops. Unlike some ascender-style locks it is designed to retain around 85 % of the webbing strength.",
+        "notes": "Manufacturer specs (slacklines.us data sheet): 54 g (1.9 oz), ring thickness 12 mm (0.47 in), WLL 10 kN, MBS 40 kN. Square shape: the 1-inch side takes the pin of a standard 1-inch shackle, the 20 mm side the pin of a standard 10 mm shackle. Compatible with 17-20 mm backup webbing and 24-26 mm webbing — recorded as a 17-26 mm range. BRAND: the shop's own vendor field reads SLACK-INOV', not Spider — filed under the true maker per the retailer rule. Colours: light blue, red. Shopify publish date 2024-06-14 is a bulk store migration, not a release date, so date_introduced is left null.",
+        "colors": "Light Blue, Red",
+        "style": "Fixed Linelocker"
+    },
+    {
+        "brand": "Spider Slacklines",
+        "name": "Blueberry SR",
+        "specifications": {
+            "Material": "Aluminum",
+            "Weight": "125gr",
+            "MBS": "48kN",
+            "Anchor connection type": "Pin",
+            "Webbing connection type": "Push Pin",
+            "Compatible webbing width": "24mm - 26mm",
+            "ISA approved": "N/A",
+            "Price (per unit)": "105 USD"
+        },
+        "date_introduced": null,
+        "product_url": "https://slacklines.us/products/weblock-blueberry-sr",
+        "active": true,
+        "description": "The soft-release variant of the Blueberry: the same tempered-aluminium body, plus a second bottom pin so a soft release or a sling can enter the weblock directly, removing one connector from the anchor. The anodised aluminium diverter retains about 95 % of the webbing's resistance and the stainless pins let the webbing slide freely while tensioning.",
+        "notes": "Manufacturer specs (slacklines.us data sheet): 125 g (4.41 oz), WLL 10 kN, MBS 48 kN, for 24-26 mm polyester or nylon webbing up to 10 mm thick. Push-button stainless/aluminium head requiring a double movement to unlock, with an anti-drop mini sling. Suggested connector: 2.2 T stainless bow shackle. Sold with optional 7 m/13 m soft release and 0.3 T Dyneema sling; base price is the bare weblock. Spider warn it is not PPE. Shopify publish date 2024-06-14 is a bulk store migration, not a release date, so date_introduced is left null.",
+        "style": "Tensionable Weblock"
+    },
+    {
+        "brand": "Spider Slacklines",
+        "name": "Blueberry",
+        "specifications": {
+            "Material": "Aluminum",
+            "Weight": "165gr",
+            "MBS": "48kN",
+            "Anchor connection type": "Hole",
+            "Webbing connection type": "Push Pin",
+            "Compatible webbing width": "24mm - 26mm",
+            "ISA approved": "N/A",
+            "Price (per unit)": "79 USD"
+        },
+        "date_introduced": null,
+        "product_url": "https://slacklines.us/products/weblock-blueberry",
+        "active": true,
+        "description": "A light, robust 1-inch weblock built around a tempered-aluminium body with an anodised aluminium diverter that spreads load across the webbing surface. The stainless steel pin slides freely during setup, the push button needs a press-and-pull double movement to unlock, and a fall-arrest cord is included. The rear hole takes any standard connector.",
+        "notes": "Manufacturer specs (slacklines.us data sheet): 165 g (5.82 oz), WLL 10 kN, MBS 48 kN, for 24-26 mm polyester or nylon webbing up to 10 mm thick. Suggested connector: 2.2 T (4,850 lb) stainless bow shackle. Optional 0.3 T Dyneema sling turns the diverter into a Buckingham tensioning system with Spider's ROLLEX. Spider warn it is not PPE and that a loose tail can derail in wind — always tie an anti-slip knot. Shopify publish date 2024-06-14 is a bulk store migration, not a release date, so date_introduced is left null.",
+        "style": "Tensionable Weblock"
+    },
+    {
+        "brand": "Spider Slacklines",
+        "name": "Linelock Aluminum Ring",
+        "specifications": {
+            "Material": "Aluminum",
+            "Weight": "20gr",
+            "MBS": "30kN",
+            "Anchor connection type": "Universal",
+            "Webbing connection type": "Other",
+            "Compatible webbing width": "24mm - 26mm",
+            "ISA approved": "N/A",
+            "Price (per unit)": "8 USD"
+        },
+        "date_introduced": null,
+        "product_url": "https://slacklines.us/products/linelock-ring-slackline",
+        "active": true,
+        "description": "Spider's simplest webbing anchor — a forged, lime-green aluminium ring for locking webbing onto an oval-section connector. Recommended with an oval screw-gate steel carabiner to build a primitive pulley tensioning system.",
+        "notes": "Manufacturer specs (slacklines.us data sheet): 20 g (0.71 oz), WLL 6 kN, MBS 30 kN, forged aluminium, lime green. Outer dimension 30 x 15 mm. For 24-26 mm polyester and nylon webbing, 1-5 mm thick; Spider note it also suits their JUMBO. Shopify publish date 2024-06-14 is a bulk store migration, not a release date, so date_introduced is left null.",
+        "colors": "Lime Green",
+        "style": "Fixed Linelocker"
+    },
+    {
+        "brand": "Petram Slacklines",
+        "name": "Simplex Locker",
+        "specifications": {
+            "Material": "Aluminum",
+            "Weight": "40gr",
+            "MBS": "36kN",
+            "Anchor connection type": "Pin",
+            "Webbing connection type": "Other",
+            "Compatible webbing width": "20mm - 26mm",
+            "ISA approved": "N/A",
+            "Price (per unit)": "20 EUR"
+        },
+        "date_introduced": null,
+        "product_url": "https://slackhouseshop.pl/en/produkt/simplex-locker/",
+        "active": true,
+        "description": "A minimalist rectangular locking ring: the shape lets you pick the inner width to match your webbing (~20 mm or ~25 mm) for optimal locking geometry, retaining more than 80 % of the webbing's original strength. Single-wrap locks in one direction while still allowing pre-tensioning the other way; a double wrap all but eliminates slippage.",
+        "notes": "Manufacturer specs (slackhouseshop.pl): MBS 36 kN, WLL 6 kN, 40 g, aluminium, 48 x 44 x 12 mm, inside width 21 / 26 mm. Made in Poland. Works best mounted directly to a shackle, preferably 'Kingpin' style — 12 mm shackle for ~25 mm webbing, 10 mm for ~20 mm. BRAND: sold by Slack house but the shop lists Petram as the producer — filed under the true maker per the retailer rule.",
+        "style": "Fixed Linelocker"
+    },
+    {
+        "brand": "Bera Adventure",
+        "name": "Weblock 50mm",
+        "specifications": {
+            "Material": "Aluminum",
+            "Weight": "600gr",
+            "Anchor connection type": "Other",
+            "Webbing connection type": "Push Pin",
+            "Compatible webbing width": "50mm",
+            "ISA approved": "N/A",
+            "Price (per unit)": "399 BRL"
+        },
+        "date_introduced": null,
+        "product_url": "https://www.beraadventure.com.br/product/weblock-50mm-soft-release-50mm/",
+        "active": true,
+        "description": "Bera's 50 mm trickline weblock, in anodised blue aluminium with 6 mm side plates and a removable stainless steel pin secured by two ball detents. Sold bundled with a 5 m 'Street Balance' printed 50 mm webbing and a 50 mm soft release.",
+        "notes": "Manufacturer specs (beraadventure.com.br): anodised aluminium, plate thickness 6 mm, overall width 63 mm, inner width 51 mm, length 145 mm, height 70 mm, WLL 10 kN, 600 g, blue. Removable stainless steel pin with two ball locks. No MBS published — left null. Price (R$399.00) is for the bundle: weblock + 5 m 50 mm webbing + 50 mm soft release, so it overstates the weblock alone.",
+        "colors": "Blue",
+        "style": "Tensionable Weblock"
+    },
+    {
+        "brand": "Bera Adventure",
+        "name": "Anel Linelock",
+        "specifications": {
+            "Material": "Aluminum",
+            "Weight": "43gr",
+            "MBS": "47kN",
+            "Anchor connection type": "Universal",
+            "Webbing connection type": "Other",
+            "Compatible webbing width": "25mm",
+            "ISA approved": "N/A",
+            "Price (per unit)": "55 BRL"
+        },
+        "date_introduced": null,
+        "product_url": "https://www.beraadventure.com.br/product/anel-linelock-bera/",
+        "active": true,
+        "description": "A high-strength aluminium locking ring from Bera. The generous internal space is deliberate: it leaves room for a protective sleeve over the webbing, which is why Bera recommend it for locking off primitive systems.",
+        "notes": "Manufacturer specs (beraadventure.com.br): breaking load 47 kN, working load 15 kN, high-strength aluminium, silver, 43 g. Stock diameter 12 mm, inner length 33 mm, outer length 58 mm. Listed out of stock at the time of import but still catalogued, so active is true.",
+        "colors": "Silver",
+        "style": "Fixed Linelocker"
+    },
+    {
+        "brand": "Yoga Slackers",
+        "name": "Line Lock",
+        "specifications": {
+            "Material": "Aluminum",
+            "Anchor connection type": "Universal",
+            "Webbing connection type": "Other",
+            "Compatible webbing width": "25mm",
+            "ISA approved": "N/A",
+            "Price (per unit)": "9 USD"
+        },
+        "date_introduced": null,
+        "product_url": "https://yogaslackers.com/shop/slackline/linelock/",
+        "active": true,
+        "description": "The aluminium line lock used on the YogaSlackers eLine, also sold on its own as a replacement. It creates a movable, impermanent anchor anywhere along the line while retaining over 70 % of the webbing's strength — against roughly 60 % for a knot.",
+        "notes": "Manufacturer specs (yogaslackers.com): material aluminium; no weight, MBS or dimensions published — left null. Sized for the 25 mm eLine. YogaSlackers advise clipping it to the carabiner on uninstall so it is not lost.",
+        "style": "Fixed Linelocker"
+    },
+    {
+        "brand": "Slack Pro!",
+        "name": "lineLoose Buckle",
+        "specifications": {
+            "Material": "Steel",
+            "Weight": "430gr",
+            "MBS": "45kN",
+            "Anchor connection type": "Hole",
+            "Webbing connection type": "Other",
+            "Compatible webbing width": "24mm - 32mm",
+            "ISA approved": "N/A",
+            "Price (per unit)": "30 EUR"
+        },
+        "date_introduced": null,
+        "product_url": "https://www.linegrip.com/shop/slackpro-lineloose-buckle/",
+        "active": false,
+        "description": "A buckle assembly for building a dedicated webbing de-tensioning (lineLoose) system with 24-32 mm webbing. Compared with improvising the same system on a shackle it adds an integrated 'weblock method' fixation for the loose end, and — more importantly — moves the inner end knot onto its own bar so the moving webbing never rubs over the knot, which is where that setup normally wears dangerously.",
+        "notes": "Manufacturer specs (linegrip.com): SWL 10 kN, max allowable load 15 kN, MBS 45 kN, 430 g incl. delta links and pin, inside width 32 mm, approved webbing width 24-32 mm, buckle 103 x 10 x 55 mm, zinc-plated steel. In the box: buckle with spacer, 2x 8 mm delta link, 1x locker pin; webbing not included (10-20 m needed to wrap the release loops). Sold by lineGrip as a slackPro! last-stock sell-off under 'Discontinued Products' — hence active: false. Price is the net sell-off price (€30.00, ex VAT; was €42.10). Brand recorded as 'Slack Pro!', which canonical_brand() maps to 'lineGrip (formerly Slack Pro!)'.",
+        "style": "Tensionable Weblock"
+    },
+    {
+        "brand": "Viper Slacklines",
+        "name": "Boa Constrictor",
+        "specifications": {
+            "Material": "Aluminum",
+            "Weight": "343gr",
+            "Anchor connection type": "Other",
+            "Webbing connection type": "Captive Pin",
+            "Compatible webbing width": "25mm",
+            "ISA approved": "N/A",
+            "Price (per unit)": "1650 ZAR"
+        },
+        "date_introduced": 1782086400000,
+        "product_url": "https://www.viperslacklines.co.za/products/boa-constrictor-slackline-weblock",
+        "active": true,
+        "description": "Viper's high-tension weblock, the result of four years of development. It pre-tensions easily, pairs with their slow release to hold tension by friction, and uses a captured pin so nothing can be dropped or left behind. For longer lines Viper pair it with their Grippex and Rolley in a Buckingham 3:1.",
+        "notes": "Manufacturer specs (viperslacklines.co.za): 343 g, for 25 mm webbing. Hard-anodised gold aluminium diverter, powder-coated and laser-etched stainless steel side plates, stainless steel pins. No MBS published — left null. Date introduced is the Shopify listing publish date (2026-06-22), consistent with the 'proud to present' launch copy.",
+        "style": "Tensionable Weblock"
+    },
+    {
+        "brand": "Viper Slacklines",
+        "name": "Aluminium Static Linelock Ring",
+        "specifications": {
+            "Material": "Aluminum",
+            "Weight": "37gr",
+            "MBS": "25kN",
+            "Anchor connection type": "Universal",
+            "Webbing connection type": "Other",
+            "Compatible webbing width": "25mm",
+            "ISA approved": "N/A",
+            "Price (per unit)": "220 ZAR"
+        },
+        "date_introduced": 1762128000000,
+        "product_url": "https://www.viperslacklines.co.za/products/aluminium-static-slackline-linelock",
+        "active": true,
+        "description": "A forged, anodised aluminium locking ring for low- to medium-tension 25 mm webbing. Combined with an oval carabiner or the bow side of a slackline shackle it makes a light, easy webbing lock — Viper aim it at rodeo lines, surf lines and classic lightweight primitive setups.",
+        "notes": "Manufacturer specs (viperslacklines.co.za): MBS 25 kN, 37 g, overall size 60 mm, internal diameter 40 mm, forged anodised aluminium. Date introduced is the Shopify listing publish date (2025-11-03).",
+        "style": "Fixed Linelocker"
+    },
+    {
+        "brand": "Viper Slacklines",
+        "name": "Viper Constrictor 25mm",
+        "specifications": {
+            "Material": "Stainless Steel",
+            "Anchor connection type": "Pin",
+            "Webbing connection type": "Other",
+            "Compatible webbing width": "25mm",
+            "ISA approved": "N/A",
+            "Price (per unit)": "225 ZAR"
+        },
+        "date_introduced": 1631145600000,
+        "product_url": "https://www.viperslacklines.co.za/products/viper-constrictor-25mm-linelock",
+        "active": true,
+        "description": "A stainless steel linelock made in South Africa, used together with a slackline shackle to lock 25 mm webbing off to an anchor sling when the webbing has no sewn loop. Viper position their simpler aluminium ring as the cheaper option for short primitive lines and rodeo lines.",
+        "notes": "Manufacturer specs (viperslacklines.co.za): stainless steel, for 25 mm / 1-inch webbing. No weight or MBS published — left null. Sold either as the locking pin alone (R225.00, recorded here) or bundled with a slackline shackle (R435.00). Date introduced is the Shopify listing publish date (2021-09-09).",
+        "style": "Fixed Linelocker"
+    },
+    {
+        "brand": "SlackGear",
+        "name": "Chainlink LineLocker",
+        "specifications": {
+            "Material": "Stainless Steel",
+            "Weight": "60gr",
+            "Anchor connection type": "Universal",
+            "Webbing connection type": "Other",
+            "Compatible webbing width": "25mm",
+            "ISA approved": "N/A",
+            "Price (per unit)": "75 ZAR"
+        },
+        "date_introduced": null,
+        "product_url": "http://www.slackgear.co.za/product/chainlink-linelocker/",
+        "active": true,
+        "description": "SlackGear's budget stainless steel line-locker for anchoring 25 mm webbing. Smooth-finished and intended for short or low-tension lines, used with a carabiner for quick setup.",
+        "notes": "Manufacturer specs (slackgear.co.za): stainless steel, 60 g, for 25 mm (1-inch) webbing. No MBS published — left null.",
+        "style": "Fixed Linelocker"
+    },
+    {
+        "brand": "SlackGear",
+        "name": "Meercat LineLocker",
+        "specifications": {
+            "Material": "Stainless Steel",
+            "Weight": "95gr",
+            "Anchor connection type": "Universal",
+            "Webbing connection type": "Other",
+            "Compatible webbing width": "25mm",
+            "ISA approved": "N/A",
+            "Price (per unit)": "250 ZAR"
+        },
+        "date_introduced": null,
+        "product_url": "http://www.slackgear.co.za/product/meercat-linelocker/",
+        "active": true,
+        "description": "A lightweight all-stainless webbing anchor for 25 mm webbing, rated by SlackGear for lines up to 100 m or 10 kN of pre-tension. The 14 mm main diverter behaves like a 19 mm equivalent, keeping it non-damaging to the webbing, and the geometry gives a twist-free connection to a safety cord.",
+        "notes": "Manufacturer specs (slackgear.co.za): 100 % stainless steel, 95 g, 14 mm main diverter (19 mm effective equivalent), for lines up to 100 m or 10 kN pre-tension — recorded as WLL 10 kN. Best paired with a 12 mm stainless bow or D-shackle. No MBS published — left null.",
+        "style": "Fixed Linelocker"
+    },
+    {
+        "brand": "Slackliner.de",
+        "name": "Linelocker 50mm",
+        "specifications": {
+            "Material": "Steel",
+            "Weight": "480gr",
+            "Anchor connection type": "Universal",
+            "Webbing connection type": "Other",
+            "Compatible webbing width": "50mm",
+            "ISA approved": "N/A",
+            "Price (per unit)": "7.25 EUR"
+        },
+        "date_introduced": null,
+        "product_url": "https://www.slackliner.de/de/Linelocker-fuer-50mm-Baender-251.html",
+        "active": true,
+        "description": "A galvanised bent-steel hook for shortening thick 50 mm slacklines. Slackliner.de's argument against the usual chain-link method is that the hook lets the webbing clamp against itself rather than being crushed, which is gentler on the band and costs less breaking strength.",
+        "notes": "Manufacturer specs (slackliner.de): galvanised bent steel, 12 mm stock, 15 mm centre bar, 480 g, for webbing up to 50 mm of any thickness. Shipping weight 0.48 kg. Slackliner.de state 'belastbar bis 5000 kg' (~49 kN) — that is a load rating of unstated type, not a published MBS, so breaking_strength is left null rather than guessed.",
+        "style": "Fixed Linelocker"
     }
 ]
