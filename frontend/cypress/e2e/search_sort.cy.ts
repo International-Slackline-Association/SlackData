@@ -143,7 +143,7 @@ GEAR_TYPES.forEach(({ slug, apiPath, label }) => {
 
 // ── Normalized search (punctuation / number stripping) ────────────────────────
 // Searching should ignore punctuation and separators so that "82" matches "8.2",
-// "twave" matches "T-Wave", "type18" matches "type-18 MK1", and "pes" matches
+// "twave" matches "T-Wave", "type18" matches "Type 18 MK1", and "pes" matches
 // "(pes)". These are real webbing names from the database.
 // The normalization rule: strip [.\-()/ ] before comparing, then do a
 // case-insensitive substring match.
@@ -166,7 +166,7 @@ describe('Search — normalized (punctuation-insensitive)', () => {
     { query: '82',     expectedNameSubstring: '8.2'       },
     { query: '89',     expectedNameSubstring: '8.9'       },
     { query: 'twave',  expectedNameSubstring: 'T-Wave'    },
-    { query: 'type18', expectedNameSubstring: 'type-18'   },
+    { query: 'type18', expectedNameSubstring: 'Type 18'   },
     { query: 'pes',    expectedNameSubstring: '(pes)'     },
     { query: 'sinmas', expectedNameSubstring: 'Sin Más'   },
   ]
