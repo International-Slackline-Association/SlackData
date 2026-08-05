@@ -1,20 +1,13 @@
+import os
 from contextlib import asynccontextmanager
+from pathlib import Path
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from sqlmodel import select
+from fastapi.responses import FileResponse
 
-from slack_data.database import get_session, create_db_and_tables
-
-from slack_data.load_data.load_grips import load_grips
-from slack_data.load_data.load_leashrings import load_leashrings
-from slack_data.load_data.load_manufacturers import load_manufacturers
-from slack_data.load_data.load_rollers import load_rollers
-from slack_data.load_data.load_starterkits import load_starterkits
-from slack_data.load_data.load_treepros import load_treepros
-from slack_data.load_data.load_tricklinekits import load_tricklinekits
-from slack_data.load_data.load_webbings import load_webbings
-from slack_data.load_data.load_weblocks import load_weblocks
+from slack_data.database import get_session, create_db_and_tables, READ_ONLY
+from slack_data.seed import seed_catalog
 
 from slack_data.api.routers.brand_router import brand_router
 from slack_data.api.routers.grip_router import grip_router
@@ -26,73 +19,38 @@ from slack_data.api.routers.tricklinekit_router import tricklinekit_router
 from slack_data.api.routers.webbing_router import webbing_router
 from slack_data.api.routers.weblock_router import weblock_router
 
-from slack_data.models.brands import Brand
-from slack_data.models.grips import Grip
-from slack_data.models.leashrings import LeashRing
-from slack_data.models.rollers import Roller
-from slack_data.models.starterkits import StarterKit
-from slack_data.models.treepro import TreePro
-from slack_data.models.tricklinekits import TricklineKit
-from slack_data.models.webbing import Webbing
-from slack_data.models.weblocks import Weblock
-
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
+    # Local/dev: create a writable SQLite in the CWD and seed it from the root
+    # *.json files on first boot. Hosted (read-only) mode ships a pre-built
+    # catalog baked into the deployment package, so there is nothing to create
+    # or seed here — see slack_data.database and scripts/build_catalog_db.py.
     create_db_and_tables()
-    with next(get_session()) as session:
-        existing_webbings = session.exec(select(Webbing)).first()
-        if existing_webbings is None: # Only load from `webbings.json` if the database is empty
-            print("Loading webbing data into the database...")
-            load_webbings(session=session)
-        existing_weblocks = session.exec(select(Weblock)).first()
-        if existing_weblocks is None: # Only load from `webbings.json` if the database is empty
-            print("Loading weblocks data into the database...")
-            load_weblocks(session=session)
-        existing_rollers = session.exec(select(Roller)).first()
-        if existing_rollers is None: # Only load from `rollers.json` if the database is empty
-            print("Loading roller data into the database...")
-            load_rollers(session=session)
-        existing_leashrings = session.exec(select(LeashRing)).first()
-        if existing_leashrings is None: # Only load from `leashrings.json` if the database is empty
-            print("Loading leash ring data into the database...")
-            load_leashrings(session=session)
-        existing_grips = session.exec(select(Grip)).first()
-        if existing_grips is None: # Only load from `grips.json` if the database is empty
-            print("Loading grip data into the database...")
-            load_grips(session=session)
-        existing_treepros = session.exec(select(TreePro)).first()
-        if existing_treepros is None: # Only load from `treepros.json` if the database is empty
-            print("Loading treepro data into the database...")
-            load_treepros(session=session)
-        existing_starterkits = session.exec(select(StarterKit)).first()
-        if existing_starterkits is None: # Only load from `starterkits.json` if the database is empty
-            print("Loading starter kit data into the database...")
-            load_starterkits(session=session)
-        existing_tricklinekits = session.exec(select(TricklineKit)).first()
-        if existing_tricklinekits is None: # Only load from `tricklinekits.json` if the database is empty
-            print("Loading trickline kit data into the database...")
-            load_tricklinekits(session=session)
-        # MUST come last: Brand rows are created by the gear loaders above (via
-        # get_brand(), name-only), and this pass backfills their metadata. Gated on
-        # "no brand has a country yet" rather than on an empty table, because the
-        # table is never empty by this point.
-        needs_enrichment = session.exec(
-            select(Brand).where(Brand.country.is_not(None))
-        ).first() is None
-        if needs_enrichment:
-            print("Enriching brands from manufacturers.json...")
-            load_manufacturers(session=session)
+    if not READ_ONLY:
+        with next(get_session()) as session:
+            seed_catalog(session)
     yield
 
-app = FastAPI(lifespan=lifespan)
+
+# root_path lets the API sit under a path prefix (e.g. "/api" behind CloudFront)
+# without changing any route — it only fixes the URLs in /docs and openapi.json.
+app = FastAPI(lifespan=lifespan, root_path=os.getenv("API_ROOT_PATH", ""))
 
 # Allow the local Vite dev server (and preview) to call the API from the browser.
+# 5174 is the conventional second port: Vite falls back to it when 5173 is taken,
+# which is what a git worktree running its own dev server alongside the primary
+# one gets. Without it that server returns no data at all and the app looks
+# broken for a reason unrelated to the code under test.
+# Hosted builds don't depend on any of this — the container serves the SPA and
+# the API from a single origin, so there is no cross-origin request to allow.
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:5173",
         "http://127.0.0.1:5173",
+        "http://localhost:5174",
+        "http://127.0.0.1:5174",
     ],
     allow_credentials=True,
     allow_methods=["*"],
@@ -109,8 +67,28 @@ app.include_router(tricklinekit_router)
 app.include_router(webbing_router)
 app.include_router(weblock_router)
 
-@app.get("/")
-def root():
-    return {"message": "Welcome to SlackData"}
+# Serve the built React SPA (frontend/dist) from the same origin as the API, so
+# the whole app can ship as a single container with no CORS. This is only wired
+# up when a production build is present — the hosted serverless deploy serves the
+# SPA from S3/CloudFront instead (no dist in the Lambda image), and backend-only
+# runs (plus the pytest app in tests/conftest.py) skip it entirely.
+_DIST_DEFAULT = Path(__file__).resolve().parent.parent / "frontend" / "dist"
+FRONTEND_DIST = Path(os.getenv("FRONTEND_DIST", str(_DIST_DEFAULT))).resolve()
 
+if FRONTEND_DIST.is_dir():
+    _INDEX_HTML = FRONTEND_DIST / "index.html"
 
+    @app.get("/{full_path:path}", include_in_schema=False)
+    def serve_spa(full_path: str):
+        # A request for a real built asset (JS/CSS/images/icons/flags) → serve the
+        # file; anything else → index.html so client-side routes survive a refresh.
+        # The API routers are registered above and take precedence over this
+        # catch-all, so JSON endpoints are never shadowed.
+        candidate = (FRONTEND_DIST / full_path).resolve()
+        if candidate.is_file() and FRONTEND_DIST in candidate.parents:
+            return FileResponse(candidate)
+        return FileResponse(_INDEX_HTML)
+else:
+    @app.get("/")
+    def root():
+        return {"message": "Welcome to SlackData"}

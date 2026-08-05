@@ -1,0 +1,22 @@
+# Keep the build context small and deterministic. The frontend is rebuilt inside
+# the image, so local node_modules / dist never ship; the DB is regenerated on
+# boot, so never ship a local one.
+.git
+.gitignore
+**/__pycache__
+**/*.py[cod]
+.pytest_cache
+.venv
+venv
+*.db
+*.egg-info
+slackdata.egg-info
+
+# Frontend: rebuilt in the `web` stage from source.
+frontend/node_modules
+frontend/dist
+
+# Local/dev-only material not needed at runtime.
+scraper
+scripts/.cache
+scratchpad_dl
