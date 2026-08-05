@@ -5,6 +5,21 @@
       "bc_wafer-2.jpg",
       "bc_wafer-3.jpg"
     ],
+    "bc_wafer-2-0": [
+      "bc_wafer-2-0.jpg",
+      "bc_wafer-2-0-2.jpg",
+      "bc_wafer-2-0-3.jpg"
+    ],
+    "bc_wafer-xl": [
+      "bc_wafer-xl.jpg",
+      "bc_wafer-xl-2.jpg",
+      "bc_wafer-xl-3.jpg"
+    ],
+    "bera_beragrip-50mm": [
+      "bera_beragrip-50mm.jpg",
+      "bera_beragrip-50mm-2.jpg",
+      "bera_beragrip-50mm-3.jpg"
+    ],
     "eqb_grippen": [
       "eqb_grippen.jpg",
       "eqb_grippen-2.jpg"
@@ -40,6 +55,14 @@
     "slackpro_tricklinegrip-g2": [
       "slackpro_tricklinegrip-g2.jpg"
     ],
+    "slacktvty_t-grip": [
+      "slacktvty_t-grip.jpg",
+      "slacktvty_t-grip-2.jpg"
+    ],
+    "slacktvty_t-grip-light": [
+      "slacktvty_t-grip-light.jpg",
+      "slacktvty_t-grip-light-2.jpg"
+    ],
     "souz_snatch-2-2": [
       "souz_snatch-2-2.jpg",
       "souz_snatch-2-2-2.jpg"
@@ -47,6 +70,21 @@
     "souz_snatch-2-2t": [
       "souz_snatch-2-2t.jpg",
       "souz_snatch-2-2t-2.jpg"
+    ],
+    "spider_mouse-grip": [
+      "spider_mouse-grip.jpg",
+      "spider_mouse-grip-2.jpg",
+      "spider_mouse-grip-3.jpg"
+    ],
+    "spider_shark": [
+      "spider_shark.jpg",
+      "spider_shark-2.jpg",
+      "spider_shark-3.jpg"
+    ],
+    "viper_grippex": [
+      "viper_grippex.jpg",
+      "viper_grippex-2.jpg",
+      "viper_grippex-3.jpg"
     ]
   },
   "leashrings": {
@@ -54,11 +92,19 @@
       "bc_bc-aluminum-leash-ring.jpg",
       "bc_bc-aluminum-leash-ring-2.jpg"
     ],
+    "bc_bigloop": [
+      "bc_bigloop.jpg",
+      "bc_bigloop-2.jpg",
+      "bc_bigloop-3.jpg"
+    ],
     "bc_bomber-steel-ring": [
       "bc_bomber-steel-ring.jpg"
     ],
     "bc_medium-steel-ring": [
       "bc_medium-steel-ring.jpg"
+    ],
+    "bera_anel-duplo-para-leash": [
+      "bera_anel-duplo-para-leash.jpg"
     ],
     "camp_access": [
       "camp_access.jpg"
@@ -109,6 +155,11 @@
     "slackinov_vortex": [
       "slackinov_vortex.jpg"
     ],
+    "slackinov_vortex-2": [
+      "slackinov_vortex-2.jpg",
+      "slackinov_vortex-2-2.jpg",
+      "slackinov_vortex-2-3.jpg"
+    ],
     "slacktools_steel-ring": [
       "slacktools_steel-ring.jpg"
     ],
@@ -128,6 +179,11 @@
     "spider_60mm-aluminium-ring": [
       "spider_60mm-aluminium-ring.jpg"
     ],
+    "spider_80mm-highring": [
+      "spider_80mm-highring.jpg",
+      "spider_80mm-highring-2.jpg",
+      "spider_80mm-highring-3.jpg"
+    ],
     "zerge_zero-gold": [
       "zerge_zero-gold.jpg"
     ],
@@ -141,6 +197,10 @@
     ],
     "bc_bc-roller-straight-gate": [
       "bc_bc-roller-straight-gate.jpg"
+    ],
+    "bera_polia-de-fita-bera": [
+      "bera_polia-de-fita-bera.jpg",
+      "bera_polia-de-fita-bera-2.jpg"
     ],
     "eqb_aidman": [
       "eqb_aidman.jpg"
@@ -178,6 +238,11 @@
     "slacktvty_hangover-stainless": [
       "slacktvty_hangover-stainless.jpg"
     ],
+    "spider_highwheel-longline-flat-pulley": [
+      "spider_highwheel-longline-flat-pulley.jpg",
+      "spider_highwheel-longline-flat-pulley-2.jpg",
+      "spider_highwheel-longline-flat-pulley-3.jpg"
+    ],
     "spider_rollex": [
       "spider_rollex.jpg"
     ],
@@ -186,6 +251,11 @@
     ],
     "spider_rollex-ss": [
       "spider_rollex-ss.jpg"
+    ],
+    "viper_rolley": [
+      "viper_rolley.jpg",
+      "viper_rolley-2.jpg",
+      "viper_rolley-3.jpg"
     ],
     "zerge_skip": [
       "zerge_skip.jpg"
@@ -421,6 +491,10 @@
     "slackfr_tree-eco": [
       "slackfr_tree-eco.jpg"
     ],
+    "slackgear_tree-protectors": [
+      "slackgear_tree-protectors.jpg",
+      "slackgear_tree-protectors-2.jpg"
+    ],
     "slackhouse_tree-shirt-l-treepro": [
       "slackhouse_tree-shirt-l-treepro.jpg"
     ],
@@ -462,6 +536,11 @@
     ],
     "spider_tree-protection-xl": [
       "spider_tree-protection-xl.jpg"
+    ],
+    "viper_boomslang-tree-protectors": [
+      "viper_boomslang-tree-protectors.jpg",
+      "viper_boomslang-tree-protectors-2.jpg",
+      "viper_boomslang-tree-protectors-3.jpg"
     ]
   },
   "tricklinekits": {
@@ -1284,6 +1363,21 @@
     "bc_alpine-weblock-6-1-20mm": [
       "bc_alpine-weblock-6-1-20mm.jpg"
     ],
+    "bc_aluminum-line-locker-ring": [
+      "bc_aluminum-line-locker-ring.jpg"
+    ],
+    "bc_mightylock": [
+      "bc_mightylock.jpg",
+      "bc_mightylock-2.jpg",
+      "bc_mightylock-3.jpg",
+      "bc_mightylock-4.jpg"
+    ],
+    "bera_anel-linelock": [
+      "bera_anel-linelock.jpg"
+    ],
+    "bera_weblock-50mm": [
+      "bera_weblock-50mm.jpg"
+    ],
     "catonslack_catlock-classic": [
       "catonslack_catlock-classic.jpg",
       "catonslack_catlock-classic-2.jpg",
@@ -1434,6 +1528,12 @@
       "petram_fortis-weblock-3.jpg",
       "petram_fortis-weblock-4.jpg"
     ],
+    "petram_simplex-locker": [
+      "petram_simplex-locker.jpg",
+      "petram_simplex-locker-2.jpg",
+      "petram_simplex-locker-3.jpg",
+      "petram_simplex-locker-4.jpg"
+    ],
     "petram_solveris-weblock": [
       "petram_solveris-weblock.jpg",
       "petram_solveris-weblock-2.jpg"
@@ -1446,6 +1546,11 @@
       "radrigs_orange.jpg",
       "radrigs_orange-2.jpg",
       "radrigs_orange-3.jpg"
+    ],
+    "radrigs_slackfriend": [
+      "radrigs_slackfriend.jpg",
+      "radrigs_slackfriend-2.jpg",
+      "radrigs_slackfriend-3.jpg"
     ],
     "raed_pro-weblock": [
       "raed_pro-weblock.jpg",
@@ -1470,8 +1575,21 @@
       "slackde_equilocker.jpg",
       "slackde_equilocker-2.jpg"
     ],
+    "slackde_linelocker-50mm": [
+      "slackde_linelocker-50mm.jpg",
+      "slackde_linelocker-50mm-2.jpg",
+      "slackde_linelocker-50mm-3.jpg"
+    ],
     "slackgear_baboonlock": [
       "slackgear_baboonlock.jpg"
+    ],
+    "slackgear_chainlink-linelocker": [
+      "slackgear_chainlink-linelocker.jpg"
+    ],
+    "slackgear_meercat-linelocker": [
+      "slackgear_meercat-linelocker.jpg",
+      "slackgear_meercat-linelocker-2.jpg",
+      "slackgear_meercat-linelocker-3.jpg"
     ],
     "slackgear_rhinolock": [
       "slackgear_rhinolock.jpg",
@@ -1486,6 +1604,12 @@
     "slackhouse_banana-3-1": [
       "slackhouse_banana-3-1.jpg"
     ],
+    "slackinov_diamond-lock": [
+      "slackinov_diamond-lock.jpg",
+      "slackinov_diamond-lock-2.jpg",
+      "slackinov_diamond-lock-3.jpg",
+      "slackinov_diamond-lock-4.jpg"
+    ],
     "slackinov_slackibloc-4": [
       "slackinov_slackibloc-4.jpg",
       "slackinov_slackibloc-4-2.jpg",
@@ -1496,6 +1620,12 @@
     ],
     "slackinov_slackibloc-sr-quick-pin": [
       "slackinov_slackibloc-sr-quick-pin.jpg"
+    ],
+    "slackinov_zenlock": [
+      "slackinov_zenlock.jpg",
+      "slackinov_zenlock-2.jpg",
+      "slackinov_zenlock-3.jpg",
+      "slackinov_zenlock-4.jpg"
     ],
     "slackmtn_frog": [
       "slackmtn_frog.jpg"
@@ -1521,8 +1651,18 @@
     "slackpro_linelock-va-mkiii": [
       "slackpro_linelock-va-mkiii.jpg"
     ],
+    "slackpro_lineloose-buckle": [
+      "slackpro_lineloose-buckle.jpg",
+      "slackpro_lineloose-buckle-2.jpg",
+      "slackpro_lineloose-buckle-3.jpg",
+      "slackpro_lineloose-buckle-4.jpg"
+    ],
     "slacktech_ramlock": [
       "slacktech_ramlock.jpg"
+    ],
+    "slacktvty_chainlock": [
+      "slacktvty_chainlock.jpg",
+      "slacktvty_chainlock-2.jpg"
     ],
     "slacktvty_kingpin": [
       "slacktvty_kingpin.jpg"
@@ -1569,6 +1709,18 @@
     "souz_rowan-3-3": [
       "souz_rowan-3-3.jpg"
     ],
+    "spider_blueberry": [
+      "spider_blueberry.jpg",
+      "spider_blueberry-2.jpg",
+      "spider_blueberry-3.jpg",
+      "spider_blueberry-4.jpg"
+    ],
+    "spider_blueberry-sr": [
+      "spider_blueberry-sr.jpg",
+      "spider_blueberry-sr-2.jpg",
+      "spider_blueberry-sr-3.jpg",
+      "spider_blueberry-sr-4.jpg"
+    ],
     "spider_chili": [
       "spider_chili.jpg"
     ],
@@ -1578,6 +1730,32 @@
     "spider_lime": [
       "spider_lime.jpg",
       "spider_lime-2.jpg"
+    ],
+    "spider_linelock-aluminum-ring": [
+      "spider_linelock-aluminum-ring.jpg",
+      "spider_linelock-aluminum-ring-2.jpg",
+      "spider_linelock-aluminum-ring-3.jpg",
+      "spider_linelock-aluminum-ring-4.jpg"
+    ],
+    "viper_aluminium-static-linelock-ring": [
+      "viper_aluminium-static-linelock-ring.jpg",
+      "viper_aluminium-static-linelock-ring-2.jpg",
+      "viper_aluminium-static-linelock-ring-3.jpg",
+      "viper_aluminium-static-linelock-ring-4.jpg"
+    ],
+    "viper_boa-constrictor": [
+      "viper_boa-constrictor.jpg",
+      "viper_boa-constrictor-2.jpg",
+      "viper_boa-constrictor-3.jpg",
+      "viper_boa-constrictor-4.jpg"
+    ],
+    "viper_viper-constrictor-25mm": [
+      "viper_viper-constrictor-25mm.jpg",
+      "viper_viper-constrictor-25mm-2.jpg",
+      "viper_viper-constrictor-25mm-3.jpg"
+    ],
+    "yogaslack_line-lock": [
+      "yogaslack_line-lock.jpg"
     ]
   }
 }
