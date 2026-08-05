@@ -145,12 +145,12 @@ Every gear type carries an **`active: bool | None`** field on its `Base<X>` (so 
 | Model | Table / router prefix | JSON seed | ~Count |
 |-------|-----------------------|-----------|--------|
 | Brand | `/brand` | (auto-created from gear loads) | — |
-| Webbing | `/webbing` | `webbings.json` | 242 |
-| Weblock | `/weblock` | `weblocks.json` | 107 |
-| Roller | `/roller` | `rollers.json` | 18 |
-| LeashRing | `/leashring` | `leashrings.json` | 30 |
-| Grip | `/grip` | `grips.json` | 12 |
-| TreePro | `/treepro` | `treepros.json` | 23 |
+| Webbing | `/webbing` | `webbings.json` | 245 |
+| Weblock | `/weblock` | `weblocks.json` | 127 |
+| Roller | `/roller` | `rollers.json` | 21 |
+| LeashRing | `/leashring` | `leashrings.json` | 34 |
+| Grip | `/grip` | `grips.json` | 20 |
+| TreePro | `/treepro` | `treepros.json` | 25 |
 | StarterKit | `/starterkit` | `starterkits.json` | 64 |
 | TricklineKit | `/tricklinekit` | `tricklinekits.json` | 10 |
 

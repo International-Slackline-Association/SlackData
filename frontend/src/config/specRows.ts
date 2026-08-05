@@ -80,6 +80,7 @@ export const SPEC_ROWS: Record<GearSlug, SpecRowDef[]> = {
     { ...plain('colors', 'Colors'), render: 'chips' },
   ],
   weblocks: [
+    plain('style', 'Style'),
     plain('material', 'Material'),
     widthRange,
     plain('weight', 'Weight', 'g'),

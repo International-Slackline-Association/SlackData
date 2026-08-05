@@ -15,7 +15,7 @@
 // separately, because it's a JSON curve of {kn, percent} pairs, not a scalar.
 
 import type { GearSlug } from '@/types'
-import { CLASSIFICATIONS } from '@/types/enums'
+import { CLASSIFICATIONS, WEBLOCK_STYLES } from '@/types/enums'
 
 export type FilterType = 'pill' | 'range'
 
@@ -52,6 +52,8 @@ export const FILTER_GROUPS: Record<GearSlug, FilterGroupMeta[]> = {
   ],
 
   weblocks: [
+    { group: 'style',             label: 'Style',             type: 'pill', pillKind: 'enum',
+      order: WEBLOCK_STYLES },
     { group: 'material',          label: 'Material',          type: 'pill', pillKind: 'enum' },
     { group: 'width_min',         label: 'Min Width',         type: 'range', unit: 'mm' },
     { group: 'front_pin',         label: 'Front Pin',         type: 'pill', pillKind: 'enum' },
