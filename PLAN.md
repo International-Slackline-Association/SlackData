@@ -71,7 +71,7 @@ npx cypress run --spec cypress/e2e/<spec>.cy.ts
 | 6 | Detail page | `gear_detail.cy.ts` + `isa_certification`(detail) | ✅ 201/201 + isa 69/69 |
 | 7 | Compare | `compare.cy.ts` | ✅ 20/20 |
 | 8 | Manufacturers | `manufacturers.cy.ts` | ✅ 18/18 |
-| 9 | URL-state sweep | `url_state.cy.ts` | ⬜ |
+| 9 | URL-state sweep | `url_state.cy.ts` | ✅ 18/18 |
 | 10 | Full green + cleanup | (whole suite) | ⬜ |
 
 ### ✅ Phase 1 — Foundation
@@ -388,8 +388,45 @@ Decisions worth remembering:
   resolves through the Brand relationship and so always equals the Brand row's `name`.
 - Route ranking puts `/manufacturers/:id` above `:slug/:id`, so brand detail wins over gear detail.
 
-### ⬜ Phase 9 — URL-state sweep
-`url_state.cy.ts`: q / sort / pill / range / combined round-trips, clear-all, 404.
+### ✅ Phase 9 — URL-state sweep — DONE
+`url_state.cy.ts` **18/18** — q / sort / pill / range / combined round-trips, clear-all, 404.
+`search_sort.cy.ts` re-run **306/306** (no regression from the sort-default fix below).
+
+The infrastructure (`useUrlState`, routes, `NotFoundPage`) already existed from Phases 1–8, so
+this was mostly a verification sweep. One real app fix + three stale-spec fixes:
+
+- **App fix — Name A→Z carries no `?sort=`.** The contract (top of `useUrlState`, DESIGN "Name is
+  the default sort") is that Name A→Z is the default and produces no param. The dropdown was writing
+  `sort=name-asc`. Fixed in `SortDropdown` — the Name A→Z option now `pick(null)` (clears sort to the
+  default state); Name Z→A still writes `sort=name-desc`. Default sort was already null→name-asc, so
+  card order is unchanged and `search_sort.cy.ts` stays green.
+- **Spec — `contain.text` with a RegExp never matches** (a RegExp is coerced to its literal source).
+  Two sort assertions used `/weight.*low/i`; switched to the plain string `'Weight: Low→High'`,
+  matching the convention already documented at `search_sort.cy.ts:347`.
+- **Spec — range bounds are dual-thumb sliders, not text boxes** (the Phase-4 change). Three tests
+  typed into the `range-min`/`range-max` thumbs, which have `pointer-events:none`. Rewrote them to the
+  established click-to-edit `range-{min,max}-value` label pattern from `filters.cy.ts`, reading domain
+  edges off the thumb `min` attr rather than hardcoding, and added a `have.value` guard so the URL
+  assertion can't race the async param write.
+- **Spec — multi-select comma is `%2C` in the raw URL.** `URLSearchParams` percent-encodes the
+  separator; the round-trip still decodes to a comma. Assertion now reads the decoded `material` value
+  and checks for the `a,b` shape instead of grepping the raw URL for a literal comma.
+
+### ✅ Sticky filter sidebar (post-Phase-9 UX)
+The left filter sidebar now pins below the top nav as results scroll and self-scrolls when its groups
+exceed the viewport, so no filter (notably the webbing stretch widget) scrolls out of reach.
+Purely presentational — two files, no schema/data/API:
+- `TopNav.tsx` publishes the measured header height as a `--header-h` CSS var (a `ResizeObserver` on
+  `<header>`), so the offset survives tier-2 category tabs wrapping to more rows on narrow widths.
+- `FilterSidebar.tsx` `<aside>` gains `self-start sticky top-[calc(var(--header-h)+1rem)]
+  max-h-[calc(100vh-var(--header-h)-6rem)] overflow-y-auto` — the `6rem` bottom reserve keeps the
+  self-scroll region clear of the `fixed` CompareBar.
+
+Tests: 4 behavioral assertions added to `gear_listing.cy.ts` (pins after scroll, filters usable while
+scrolled, tall-sidebar reachability via `stretch-kn-pill`, no CompareBar collision) — all green.
+⚠️ Same run surfaced a **pre-existing, unrelated** failure cluster: 32 count-comparison tests (4 per
+gear type) now fail because the frontend renders fewer cards than the (expanded) backend serves —
+independent of this CSS change; needs separate investigation.
 
 ### ⬜ Phase 10 — Full green + cleanup
 Whole suite green; simplify/dedupe.

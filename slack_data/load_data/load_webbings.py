@@ -91,6 +91,7 @@ def add_webbings_to_db(webbings: list[dict], session: SessionDep) -> None:
             isa_certified=webbing.get("isa_certified", False),
             price=parse_price(webbing.get("priceMeter")),
             currency=parse_currency(webbing.get("currency")),
+            active=webbing.get("active"),
         )
         db_webbing = Webbing.model_validate(webbing_create)
         db_webbing.brand = session.get(Brand, brand_id)

@@ -14,7 +14,8 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Slackline tools"
+        "manufacturer": "Slackline tools",
+        "active": false
     },
     {
         "name": "10 m Fit n Slack Set",
@@ -31,7 +32,8 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Slackline tools"
+        "manufacturer": "Slackline tools",
+        "active": false
     },
     {
         "name": "10 m Kids n Slack Set",
@@ -48,7 +50,8 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Slackline tools"
+        "manufacturer": "Slackline tools",
+        "active": false
     },
     {
         "name": "15 m Clip n Slack Set",
@@ -65,7 +68,8 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Slackline tools"
+        "manufacturer": "Slackline tools",
+        "active": false
     },
     {
         "name": "15 Meter Slackline Set – Includes Tree Protection",
@@ -82,7 +86,8 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Slackline Shop NZ"
+        "manufacturer": "Slackline Shop NZ",
+        "active": true
     },
     {
         "name": "15m kit",
@@ -99,7 +104,8 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Middle Way Slacklines"
+        "manufacturer": "Middle Way Slacklines",
+        "active": true
     },
     {
         "name": "15m kit",
@@ -116,7 +122,8 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Acrobat Slackline"
+        "manufacturer": "Acrobat Slackline",
+        "active": true
     },
     {
         "name": "20m Slackline Kit: 1 Practice Line",
@@ -133,7 +140,8 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Slack Mitra"
+        "manufacturer": "Slack Mitra",
+        "active": false
     },
     {
         "name": "23m Active Slackline",
@@ -150,7 +158,8 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Viper Slacklines"
+        "manufacturer": "Viper Slacklines",
+        "active": true
     },
     {
         "name": "25m kit",
@@ -167,7 +176,8 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Middle Way Slacklines"
+        "manufacturer": "Middle Way Slacklines",
+        "active": true
     },
     {
         "name": "25m kit",
@@ -184,7 +194,8 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Acrobat Slackline"
+        "manufacturer": "Acrobat Slackline",
+        "active": true
     },
     {
         "name": "Aki Starter Classic Slacklineset",
@@ -201,7 +212,8 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Aki Slacklines"
+        "manufacturer": "Aki Slacklines",
+        "active": false
     },
     {
         "name": "Aki Starter Comfort Slacklineset",
@@ -218,7 +230,8 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Aki Slacklines"
+        "manufacturer": "Aki Slacklines",
+        "active": false
     },
     {
         "name": "Allround Slackline | 15m Set",
@@ -235,7 +248,8 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Slacktivity"
+        "manufacturer": "Slacktivity",
+        "active": true
     },
     {
         "name": "Base Line Kit",
@@ -252,7 +266,8 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Slackline Industries"
+        "manufacturer": "Slackline Industries",
+        "active": true
     },
     {
         "name": "Basic 6 25 M",
@@ -269,7 +284,8 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Slackstar"
+        "manufacturer": "Slackstar",
+        "active": false
     },
     {
         "name": "Basic2",
@@ -286,7 +302,8 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Slackstar"
+        "manufacturer": "Slackstar",
+        "active": false
     },
     {
         "name": "BC Prim-25 Slackline Kit",
@@ -303,7 +320,8 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Balance Community: Slackline Outfitters"
+        "manufacturer": "Balance Community: Slackline Outfitters",
+        "active": true
     },
     {
         "name": "Beginner Primitive Slackline Kit",
@@ -320,7 +338,8 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Slacklife BC"
+        "manufacturer": "Slacklife BC",
+        "active": true
     },
     {
         "name": "Breathe 20 Slackline Kit",
@@ -337,7 +356,8 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Balance Community: Slackline Outfitters"
+        "manufacturer": "Balance Community: Slackline Outfitters",
+        "active": false
     },
     {
         "name": "Classic Line Red XL TreeWear",
@@ -354,7 +374,8 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Gibbon"
+        "manufacturer": "Gibbon",
+        "active": true
     },
     {
         "name": "Dragon 2 25 M",
@@ -371,7 +392,8 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Slackstar"
+        "manufacturer": "Slackstar",
+        "active": false
     },
     {
         "name": "Dragon 6",
@@ -388,7 +410,8 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Slackstar"
+        "manufacturer": "Slackstar",
+        "active": false
     },
     {
         "name": "Easy pack",
@@ -405,7 +428,8 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Easy Slackline"
+        "manufacturer": "Easy Slackline",
+        "active": false
     },
     {
         "name": "ELINE SLACKLINE: LIGHT KIT",
@@ -422,7 +446,8 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Yoga Slackers"
+        "manufacturer": "Yoga Slackers",
+        "active": true
     },
     {
         "name": "Eline SlacklineE Kit",
@@ -439,7 +464,8 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Yoga Slackers"
+        "manufacturer": "Yoga Slackers",
+        "active": true
     },
     {
         "name": "EQB BALANCE 20 M",
@@ -456,7 +482,8 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Equilibrium Slacklines (EQB)"
+        "manufacturer": "Equilibrium Slacklines (EQB)",
+        "active": true
     },
     {
         "name": "EQB STEP 12 M",
@@ -473,7 +500,8 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Equilibrium Slacklines (EQB)"
+        "manufacturer": "Equilibrium Slacklines (EQB)",
+        "active": true
     },
     {
         "name": "EQB TRICK 20 M",
@@ -490,7 +518,8 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Equilibrium Slacklines (EQB)"
+        "manufacturer": "Equilibrium Slacklines (EQB)",
+        "active": true
     },
     {
         "name": "EQB Yoga15 M",
@@ -507,7 +536,8 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Equilibrium Slacklines (EQB)"
+        "manufacturer": "Equilibrium Slacklines (EQB)",
+        "active": true
     },
     {
         "name": "Experience Slackline | 30m Set",
@@ -524,7 +554,8 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Slacktivity"
+        "manufacturer": "Slacktivity",
+        "active": true
     },
     {
         "name": "Firestarter 35m",
@@ -541,7 +572,8 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "SlackGear"
+        "manufacturer": "SlackGear",
+        "active": true
     },
     {
         "name": "FUN Kit - Beginner Slackline Set 20m",
@@ -558,7 +590,8 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Raed Slacklines"
+        "manufacturer": "Raed Slacklines",
+        "active": true
     },
     {
         "name": "Guide 2 20 M",
@@ -575,7 +608,8 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Slackstar"
+        "manufacturer": "Slackstar",
+        "active": false
     },
     {
         "name": "Guide 6 20 M",
@@ -592,7 +626,8 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Slackstar"
+        "manufacturer": "Slackstar",
+        "active": false
     },
     {
         "name": "Kit Cruise 15m",
@@ -609,7 +644,8 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Easy Slackline"
+        "manufacturer": "Easy Slackline",
+        "active": false
     },
     {
         "name": "Kit Cruise Easy with handlerail",
@@ -626,7 +662,8 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Easy Slackline"
+        "manufacturer": "Easy Slackline",
+        "active": false
     },
     {
         "name": "KIT EASY 15M",
@@ -643,7 +680,8 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Slack Mountain"
+        "manufacturer": "Slack Mountain",
+        "active": true
     },
     {
         "name": "KIT IGLOO 25 M",
@@ -660,7 +698,8 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Slack Mountain"
+        "manufacturer": "Slack Mountain",
+        "active": true
     },
     {
         "name": "KIT INUIT 30 M",
@@ -677,7 +716,8 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Slack Mountain"
+        "manufacturer": "Slack Mountain",
+        "active": true
     },
     {
         "name": "Kit Primitiv 25",
@@ -694,7 +734,8 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Easy Slackline"
+        "manufacturer": "Easy Slackline",
+        "active": false
     },
     {
         "name": "Kit Primitive Compact Line",
@@ -711,7 +752,8 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Bera Adventure"
+        "manufacturer": "Bera Adventure",
+        "active": true
     },
     {
         "name": "KIT SLACK 15M (17M CUMULÉ)",
@@ -728,7 +770,8 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Slack Mountain"
+        "manufacturer": "Slack Mountain",
+        "active": false
     },
     {
         "name": "KIT SLACK DE 20M AVEC CLIQUET",
@@ -745,7 +788,8 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Slack Mountain"
+        "manufacturer": "Slack Mountain",
+        "active": true
     },
     {
         "name": "KIT STREET BALANCE SLACK 10m",
@@ -762,7 +806,8 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Bera Adventure"
+        "manufacturer": "Bera Adventure",
+        "active": true
     },
     {
         "name": "Landcruising Aloha Rodeolineset",
@@ -779,7 +824,8 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Aki Slacklines"
+        "manufacturer": "Aki Slacklines",
+        "active": false
     },
     {
         "name": "Minimum Slackline | 12m Set",
@@ -796,7 +842,8 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Slacktivity"
+        "manufacturer": "Slacktivity",
+        "active": true
     },
     {
         "name": "Nature 2 15M",
@@ -813,7 +860,8 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Slackstar"
+        "manufacturer": "Slackstar",
+        "active": false
     },
     {
         "name": "Nature 6 15 M",
@@ -830,7 +878,8 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Slackstar"
+        "manufacturer": "Slackstar",
+        "active": false
     },
     {
         "name": "PACK CLICK 25 M",
@@ -847,7 +896,8 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Slack Mountain"
+        "manufacturer": "Slack Mountain",
+        "active": true
     },
     {
         "name": "PLAY LINE",
@@ -864,7 +914,8 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Slackline Industries"
+        "manufacturer": "Slackline Industries",
+        "active": true
     },
     {
         "name": "Primitive Pack 30m",
@@ -881,7 +932,8 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Geko Slacklines"
+        "manufacturer": "Geko Slacklines",
+        "active": true
     },
     {
         "name": "Primitive Slackline Kit | Light &amp; Easy Setup",
@@ -898,7 +950,8 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Slacktivity"
+        "manufacturer": "Slacktivity",
+        "active": true
     },
     {
         "name": "Sigma Impact Set",
@@ -915,7 +968,8 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Slackliner.de"
+        "manufacturer": "Slackliner.de",
+        "active": true
     },
     {
         "name": "Sigma Slackline Set ( 35 mm ), 15m lang",
@@ -932,7 +986,8 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Slackliner.de"
+        "manufacturer": "Slackliner.de",
+        "active": true
     },
     {
         "name": "Sigma Slackline Set ( 35 mm breit ) 25m lang",
@@ -949,7 +1004,8 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Slackliner.de"
+        "manufacturer": "Slackliner.de",
+        "active": true
     },
     {
         "name": "SLACKLINE KIT - PIRATE 18",
@@ -966,7 +1022,8 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Slack Inov"
+        "manufacturer": "Slack Inov",
+        "active": false
     },
     {
         "name": "SLACKLINE KIT - PLASMA 30",
@@ -983,7 +1040,8 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Slack Inov"
+        "manufacturer": "Slack Inov",
+        "active": false
     },
     {
         "name": "Slackline Kit - Training LINE 18",
@@ -1000,7 +1058,8 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Spider slacklines"
+        "manufacturer": "Spider slacklines",
+        "active": true
     },
     {
         "name": "Slackline YOGA Set",
@@ -1017,7 +1076,8 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Slacktivity"
+        "manufacturer": "Slacktivity",
+        "active": true
     },
     {
         "name": "Super Guide 6 30 M",
@@ -1034,7 +1094,8 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Slackstar"
+        "manufacturer": "Slackstar",
+        "active": false
     },
     {
         "name": "Traveler | leichte Reise-Slackline",
@@ -1051,7 +1112,8 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Slacktivity"
+        "manufacturer": "Slacktivity",
+        "active": true
     },
     {
         "name": "Zebra 2 25 M",
@@ -1068,7 +1130,8 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Slackstar"
+        "manufacturer": "Slackstar",
+        "active": false
     },
     {
         "name": "Zebra 6 25 M",
@@ -1085,6 +1148,7 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Slackstar"
+        "manufacturer": "Slackstar",
+        "active": false
     }
 ]

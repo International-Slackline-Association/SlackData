@@ -14,7 +14,8 @@
         "currency": "EUR",
         "manufacturer": "Slack Pro!",
         "date_introduced": null,
-        "product_url": "https://www.linegrip.com/shop/custom-color-design-linegrip-g4-sbr/"
+        "product_url": "https://www.linegrip.com/shop/custom-color-design-linegrip-g4-sbr/",
+        "active": false
     },
     {
         "name": "Snatch 2.2",
@@ -31,7 +32,8 @@
         "currency": "RUB",
         "manufacturer": "Souz Slackline",
         "date_introduced": null,
-        "product_url": "https://souzslackline.com/product/stropochvat-2-2/"
+        "product_url": "https://souzslackline.com/product/stropochvat-2-2/",
+        "active": false
     },
     {
         "name": "Wafer",
@@ -48,7 +50,8 @@
         "currency": "USD",
         "manufacturer": "Balance Community: Slackline Outfitters",
         "date_introduced": null,
-        "product_url": "https://www.balancecommunity.com/products/wafer"
+        "product_url": "https://www.balancecommunity.com/products/wafer",
+        "active": false
     },
     {
         "name": "Snatch 2.2T",
@@ -65,7 +68,8 @@
         "currency": "RUB",
         "manufacturer": "Souz Slackline",
         "date_introduced": null,
-        "product_url": "https://souzslackline.com/product/snatch-2-2trickline-50mm/"
+        "product_url": "https://souzslackline.com/product/snatch-2-2trickline-50mm/",
+        "active": false
     },
     {
         "name": "LineGrip nano",
@@ -82,7 +86,8 @@
         "currency": "EUR",
         "manufacturer": "Slack Pro!",
         "date_introduced": null,
-        "product_url": "https://www.linegrip.com/shop/linegrip-nano"
+        "product_url": "https://www.linegrip.com/shop/linegrip-nano",
+        "active": false
     },
     {
         "name": "LineGrip G5",
@@ -99,7 +104,8 @@
         "currency": "EUR",
         "manufacturer": "Slack Pro!",
         "date_introduced": 1512079200000,
-        "product_url": "https://www.linegrip.com/shop/linegrip-g5/"
+        "product_url": "https://www.linegrip.com/shop/linegrip-g5/",
+        "active": true
     },
     {
         "name": "TricklineGrip G1",
@@ -116,7 +122,8 @@
         "currency": "EUR",
         "manufacturer": "Slack Pro!",
         "date_introduced": 1501534800000,
-        "product_url": "https://www.linegrip.com/shop/tricklinegrip-g1-sbr/"
+        "product_url": "https://www.linegrip.com/shop/tricklinegrip-g1-sbr/",
+        "active": false
     },
     {
         "name": "TricklineGrip G2",
@@ -133,7 +140,8 @@
         "currency": "EUR",
         "manufacturer": "Slack Pro!",
         "date_introduced": 1512079200000,
-        "product_url": "https://www.linegrip.com/shop/tricklinegrip-g2/"
+        "product_url": "https://www.linegrip.com/shop/tricklinegrip-g2/",
+        "active": true
     },
     {
         "name": "HighlineGrip G2",
@@ -150,7 +158,8 @@
         "currency": null,
         "manufacturer": "Slack Pro!",
         "date_introduced": null,
-        "product_url": "https://www.linegrip.com/highlinegrip/"
+        "product_url": "https://www.linegrip.com/highlinegrip/",
+        "active": true
     },
     {
         "name": "Grippen",
@@ -167,7 +176,8 @@
         "currency": "EUR",
         "manufacturer": "Equilibrium Slacklines (EQB)",
         "date_introduced": 1580248800000,
-        "product_url": "https://www.slackshop.cz/en/linegrip/166-396-eqb-grippen.html"
+        "product_url": "https://www.slackshop.cz/en/linegrip/166-396-eqb-grippen.html",
+        "active": false
     },
     {
         "name": "Cito",
@@ -184,7 +194,8 @@
         "currency": "EUR",
         "manufacturer": "Petram Slacklines",
         "date_introduced": 1558818000000,
-        "product_url": "https://petramslacklines.site123.me/shop-1/cito-webbing-grip"
+        "product_url": "https://petramslacklines.site123.me/shop-1/cito-webbing-grip",
+        "active": true
     },
     {
         "name": "Line Mitra Webbing Gripper",
@@ -201,6 +212,7 @@
         "currency": "INR",
         "manufacturer": "Slack Mitra",
         "date_introduced": 1577817000000,
-        "product_url": "https://www.instamojo.com/slackmitra/line-mitra-webbing-gripper/?ref=store"
+        "product_url": "https://www.instamojo.com/slackmitra/line-mitra-webbing-gripper/?ref=store",
+        "active": false
     }
 ]

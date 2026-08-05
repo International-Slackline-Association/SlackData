@@ -28,6 +28,7 @@ class BaseTricklineKit(SQLModel):
     description: str | None = None
     version: str | None = None
     notes: str | None = None
+    active: bool | None = Field(default=None, index=True)
 
 
 class TricklineKit(BaseTricklineKit, table=True):

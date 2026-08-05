@@ -69,6 +69,7 @@ def add_grips_to_db(grips: list[dict], session: SessionDep) -> None:
             isa_certified=grip.get("isa_certified", False),
             price=grip.get("price"),
             currency=currency,
+            active=grip.get("active"),
         )
         db_grip = Grip.model_validate(grip_create)
         db_grip.brand = session.get(Brand, brand_id)

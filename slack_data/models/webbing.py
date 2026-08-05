@@ -137,6 +137,7 @@ class BaseWebbing(SQLModel):
     description: str | None = None
     version: str | None = None
     notes: str | None = None
+    active: bool | None = Field(default=None, index=True)
 
 class Webbing(BaseWebbing, table=True):
     id: int | None = Field(default=None, primary_key=True)

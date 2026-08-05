@@ -94,6 +94,7 @@ def add_tricklinekits_to_db(tricks: list[dict], session: SessionDep) -> None:
             description=t.get("description"),
             version=t.get("version"),
             notes=t.get("notes"),
+            active=t.get("active"),
         )
 
         db_tk = TricklineKit.model_validate(trick_create)

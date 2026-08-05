@@ -78,6 +78,7 @@ def clean_weblock_data(weblock: dict[str, Any]) -> dict[str, Any]:
 
     cleaned_data["date_introduced"] = weblock.get("date_introduced")
     cleaned_data["product_url"] = weblock.get("product_url")
+    cleaned_data["active"] = weblock.get("active")
 
     return cleaned_data
 
@@ -114,7 +115,8 @@ def add_weblocks_to_db(weblocks: list[dict], session: SessionDep) -> None:
             currency=weblock.get("currency"),
             description=weblock.get("description"),
             version=weblock.get("version"),
-            notes=weblock.get("notes")
+            notes=weblock.get("notes"),
+            active=weblock.get("active"),
         )
         db_weblock = Weblock.model_validate(weblock_create)
         db_weblock.brand = session.get(Brand, brand_id)

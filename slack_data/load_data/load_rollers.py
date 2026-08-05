@@ -70,6 +70,7 @@ def add_rollers_to_db(rollers: list[dict], session: SessionDep) -> None:
             isa_certified=roller.get("isa_approved", False),
             price=roller.get("price"),
             currency=currency,
+            active=roller.get("active"),
         )
         db_roller = Roller.model_validate(roller_create)
         db_roller.brand = session.get(Brand, brand_id)

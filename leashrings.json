@@ -12,7 +12,8 @@
         "notes": null,
         "manufacturer": "Kong",
         "date_introduced": null,
-        "product_url": "http://www.kong.it/en/2-products/items/f17-anchorage/p160-ana"
+        "product_url": "http://www.kong.it/en/2-products/items/f17-anchorage/p160-ana",
+        "active": false
     },
     {
         "name": "Steel Ring",
@@ -27,7 +28,8 @@
         "notes": null,
         "manufacturer": "Slackline tools",
         "date_introduced": null,
-        "product_url": "http://www.slack-shop.de/stahl-ring.html"
+        "product_url": "http://www.slack-shop.de/stahl-ring.html",
+        "active": false
     },
     {
         "name": "Leashring V2.0",
@@ -42,7 +44,8 @@
         "notes": null,
         "manufacturer": "Slack.fr",
         "date_introduced": null,
-        "product_url": "https://laboutique.slack.fr/en/hardware/162-steel-leash-ring-pair.html"
+        "product_url": "https://laboutique.slack.fr/en/hardware/162-steel-leash-ring-pair.html",
+        "active": false
     },
     {
         "name": "Forged steel ring",
@@ -57,7 +60,8 @@
         "notes": null,
         "manufacturer": "Line Spirit",
         "date_introduced": null,
-        "product_url": null
+        "product_url": null,
+        "active": false
     },
     {
         "name": "Arbo Steel Ring L",
@@ -72,7 +76,8 @@
         "notes": null,
         "manufacturer": "Climbing Technology (CT)",
         "date_introduced": null,
-        "product_url": "https://spider-slacklines.com/shop/en/rings/202-anello-forgiato-alluminio-ct-46-mm.html"
+        "product_url": "https://spider-slacklines.com/shop/en/rings/202-anello-forgiato-alluminio-ct-46-mm.html",
+        "active": false
     },
     {
         "name": "Bomber Ring",
@@ -87,7 +92,8 @@
         "notes": null,
         "manufacturer": "Landcruising",
         "date_introduced": null,
-        "product_url": null
+        "product_url": null,
+        "active": false
     },
     {
         "name": "Arbo Ring L",
@@ -102,7 +108,8 @@
         "notes": null,
         "manufacturer": "Climbing Technology (CT)",
         "date_introduced": null,
-        "product_url": "https://spider-slacklines.com/shop/en/rings/127-322-anello-forgiato-alluminio-ct-46-mm.html"
+        "product_url": "https://spider-slacklines.com/shop/en/rings/127-322-anello-forgiato-alluminio-ct-46-mm.html",
+        "active": false
     },
     {
         "name": "Steel Ring 200kN",
@@ -117,7 +124,8 @@
         "notes": null,
         "manufacturer": "Dakas",
         "date_introduced": null,
-        "product_url": null
+        "product_url": null,
+        "active": false
     },
     {
         "name": "Steel Ring 150kN",
@@ -132,7 +140,8 @@
         "notes": null,
         "manufacturer": "Dakas",
         "date_introduced": null,
-        "product_url": null
+        "product_url": null,
+        "active": false
     },
     {
         "name": "Bomber Steel Ring",
@@ -147,7 +156,8 @@
         "notes": null,
         "manufacturer": "Balance Community: Slackline Outfitters",
         "date_introduced": null,
-        "product_url": "http://www.balancecommunity.com/bomber-steel-ring"
+        "product_url": "http://www.balancecommunity.com/bomber-steel-ring",
+        "active": false
     },
     {
         "name": "Large Steel Ring",
@@ -162,7 +172,8 @@
         "notes": null,
         "manufacturer": "Balance Community: Slackline Outfitters",
         "date_introduced": null,
-        "product_url": null
+        "product_url": null,
+        "active": false
     },
     {
         "name": "Medium Steel Ring",
@@ -177,7 +188,8 @@
         "notes": null,
         "manufacturer": "Balance Community: Slackline Outfitters",
         "date_introduced": null,
-        "product_url": "http://www.balancecommunity.com/medium-steel-ring"
+        "product_url": "http://www.balancecommunity.com/medium-steel-ring",
+        "active": false
     },
     {
         "name": "RING77",
@@ -192,7 +204,8 @@
         "notes": null,
         "manufacturer": "Slack house",
         "date_introduced": null,
-        "product_url": "http://slackhouseshop.pl/produkt/ring77/"
+        "product_url": "http://slackhouseshop.pl/produkt/ring77/",
+        "active": true
     },
     {
         "name": "Access",
@@ -207,7 +220,8 @@
         "notes": null,
         "manufacturer": "Camp",
         "date_introduced": null,
-        "product_url": "https://www.rocknrescue.com/product/camp-safety-access-ring"
+        "product_url": "https://www.rocknrescue.com/product/camp-safety-access-ring",
+        "active": false
     },
     {
         "name": "Leash Ring",
@@ -222,7 +236,8 @@
         "notes": null,
         "manufacturer": "SlackGear",
         "date_introduced": null,
-        "product_url": "http://www.slackgear.co.za/product/leash-rings/"
+        "product_url": "http://www.slackgear.co.za/product/leash-rings/",
+        "active": false
     },
     {
         "name": "Slackisûr",
@@ -237,7 +252,8 @@
         "notes": null,
         "manufacturer": "Slack Inov",
         "date_introduced": null,
-        "product_url": "https://slack-inov.com/shop/en/leashes/315-slackisur-highline-ring.html"
+        "product_url": "https://slack-inov.com/shop/en/leashes/315-slackisur-highline-ring.html",
+        "active": false
     },
     {
         "name": "ZERO Silver",
@@ -252,7 +268,8 @@
         "notes": null,
         "manufacturer": "ZERGE outdoor",
         "date_introduced": null,
-        "product_url": "http://zergeoutdoor.com/product/zero-silver-stainless-ring/"
+        "product_url": "http://zergeoutdoor.com/product/zero-silver-stainless-ring/",
+        "active": false
     },
     {
         "name": "ZERO Black",
@@ -267,7 +284,8 @@
         "notes": null,
         "manufacturer": "ZERGE outdoor",
         "date_introduced": null,
-        "product_url": "http://zergeoutdoor.com/product/zero-black-ultralight-ring/"
+        "product_url": "http://zergeoutdoor.com/product/zero-black-ultralight-ring/",
+        "active": false
     },
     {
         "name": "O-RING",
@@ -282,7 +300,8 @@
         "notes": null,
         "manufacturer": "Fusion Climb",
         "date_introduced": null,
-        "product_url": null
+        "product_url": null,
+        "active": false
     },
     {
         "name": "Stainless Steel Leash Ring",
@@ -297,7 +316,8 @@
         "notes": null,
         "manufacturer": "Equilibrium Slacklines (EQB)",
         "date_introduced": null,
-        "product_url": null
+        "product_url": null,
+        "active": false
     },
     {
         "name": "Leash Ring",
@@ -312,7 +332,8 @@
         "notes": null,
         "manufacturer": "Equilibrium Slacklines (EQB)",
         "date_introduced": null,
-        "product_url": "http://www.slackgear.co.za/product/leash-rings/"
+        "product_url": "http://www.slackgear.co.za/product/leash-rings/",
+        "active": true
     },
     {
         "name": "ZERO Gold",
@@ -327,7 +348,8 @@
         "notes": null,
         "manufacturer": "ZERGE outdoor",
         "date_introduced": null,
-        "product_url": "http://zergeoutdoor.com/product/zero-gold-ultralight-ring/"
+        "product_url": "http://zergeoutdoor.com/product/zero-gold-ultralight-ring/",
+        "active": false
     },
     {
         "name": "Petram Aluminium ring",
@@ -342,7 +364,8 @@
         "notes": null,
         "manufacturer": "Petram Slacklines",
         "date_introduced": 1505858400000,
-        "product_url": "https://petramslacklines.site123.me/shop-1/aluminium-ring"
+        "product_url": "https://petramslacklines.site123.me/shop-1/aluminium-ring",
+        "active": false
     },
     {
         "name": "Leash Protector",
@@ -357,7 +380,8 @@
         "notes": null,
         "manufacturer": "Souz Slackline",
         "date_introduced": 1533448800000,
-        "product_url": "https://souzslackline.com/product/leasring/?currency=USD"
+        "product_url": "https://souzslackline.com/product/leasring/?currency=USD",
+        "active": false
     },
     {
         "name": "60mm Aluminium Ring",
@@ -372,7 +396,8 @@
         "notes": null,
         "manufacturer": "Spider slacklines",
         "date_introduced": null,
-        "product_url": "https://spider-slacklines.com/shop/en/rings/163-anello-alluminio-forgiato-highline.html"
+        "product_url": "https://spider-slacklines.com/shop/en/rings/163-anello-alluminio-forgiato-highline.html",
+        "active": true
     },
     {
         "name": "HighlineRing",
@@ -387,7 +412,8 @@
         "notes": null,
         "manufacturer": "Slacktivity",
         "date_introduced": null,
-        "product_url": "https://www.slacktivity.com/highlinering"
+        "product_url": "https://www.slacktivity.com/highlinering",
+        "active": true
     },
     {
         "name": "BC Aluminum Leash Ring",
@@ -402,7 +428,8 @@
         "notes": "Formerly called 'Loop'",
         "manufacturer": "Balance Community: Slackline Outfitters",
         "date_introduced": 1597093200000,
-        "product_url": "https://www.balancecommunity.com/products/bc-aluminum-leash-ring"
+        "product_url": "https://www.balancecommunity.com/products/bc-aluminum-leash-ring",
+        "active": true
     },
     {
         "name": "Vortex",
@@ -417,7 +444,8 @@
         "notes": null,
         "manufacturer": "Slack Inov",
         "date_introduced": null,
-        "product_url": "https://slack-inov.com/shop/en/leashes/314-vortex-highline-ring.html"
+        "product_url": null,
+        "active": false
     },
     {
         "name": "Halo",
@@ -432,7 +460,8 @@
         "notes": null,
         "manufacturer": "Raed Slacklines",
         "date_introduced": 1620680400000,
-        "product_url": "https://raed-slacklines.com/halo-titanium-highline-leash-ring"
+        "product_url": "https://raed-slacklines.com/halo-titanium-highline-leash-ring",
+        "active": true
     },
     {
         "name": "SATURN ring",
@@ -447,6 +476,7 @@
         "notes": null,
         "manufacturer": "Space Age Slacklines",
         "date_introduced": null,
-        "product_url": null
+        "product_url": null,
+        "active": false
     }
 ]
