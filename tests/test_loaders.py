@@ -16,8 +16,13 @@ from slack_data.load_data.load_webbings import (
     get_material_type,
     get_material_types,
 )
+from slack_data.load_data.load_weblocks import (
+    clean_weblock_data,
+    get_weblock_style,
+)
 from slack_data.models.brands import get_brand
 from slack_data.models.webbing import FiberMaterial
+from slack_data.models.weblocks import WeblockStyle
 
 
 # ---------------------------------------------------------------------------
@@ -123,6 +128,56 @@ def test_clean_webbing_numeric_value_becomes_string():
     # Non-special fields get str() applied
     result = clean_webbing_data(_base_item(breaking_strength=32))
     assert result["breaking_strength"] == "32"
+
+
+# ---------------------------------------------------------------------------
+# get_weblock_style() — the `style` categoriser on weblocks
+# ---------------------------------------------------------------------------
+
+@pytest.mark.parametrize("raw, expected", [
+    ("Tensionable Weblock", WeblockStyle.TENSIONABLE),
+    ("tensionable weblock", WeblockStyle.TENSIONABLE),   # case-insensitive
+    ("Tensionable",         WeblockStyle.TENSIONABLE),
+    ("Fixed Linelocker",    WeblockStyle.LINELOCKER),
+    ("fixed linelocker",    WeblockStyle.LINELOCKER),
+    ("Line Locker",         WeblockStyle.LINELOCKER),    # spaced spelling
+    ("line-lock",           WeblockStyle.LINELOCKER),    # hyphenated spelling
+    ("Weblock",             None),                       # ambiguous → unset
+    ("something else",      None),                       # unrecognised
+    ("",                    None),
+    (None,                  None),
+])
+def test_get_weblock_style(raw, expected):
+    assert get_weblock_style(raw) == expected
+
+
+def _weblock_item(**overrides):
+    item = {
+        "name": "Test Weblock",
+        "brand": "Test Brand",
+        "specifications": {"Material": "Aluminum", "Compatible webbing width": "25mm"},
+    }
+    item.update(overrides)
+    return item
+
+
+def test_clean_weblock_carries_style():
+    result = clean_weblock_data(_weblock_item(style="Fixed Linelocker"))
+    assert result["style"] == WeblockStyle.LINELOCKER
+
+
+def test_clean_weblock_missing_style_is_none():
+    assert clean_weblock_data(_weblock_item())["style"] is None
+
+
+def test_weblocks_seed_declares_a_style_for_every_item():
+    """Every seeded weblock is categorised — no silent Nones from the JSON."""
+    from slack_data.load_data.load_weblocks import load_weblocks_json
+
+    styles = [get_weblock_style(w.get("style")) for w in load_weblocks_json()]
+    assert None not in styles
+    assert WeblockStyle.LINELOCKER in styles
+    assert WeblockStyle.TENSIONABLE in styles
 
 
 # ---------------------------------------------------------------------------

@@ -36,10 +36,11 @@ const FILTER_GROUPS: Record<string, FilterGroup[]> = {
   ],
 
   // ── Weblock ───────────────────────────────────────────────────────────────
-  // Fields: material(enum) width_min(int) width_max(int|None) weight(float)
+  // Fields: style(enum|None) material(enum) width_min(int) width_max(int|None) weight(float)
   //         breaking_strength(float) front_pin(enum|None) attachment_point(enum|None)
   //         isa_certified(bool) isa_warning(enum) colors(excluded)
   weblocks: [
+    { group: 'style',             label: 'Style',             type: 'pill'  }, // Tensionable Weblock / Fixed Linelocker
     { group: 'material',          label: 'Material',          type: 'pill'  }, // MetalMaterial
     { group: 'width_min',         label: 'Min Width',         type: 'range', unit: 'mm' }, // dual-thumb slider
     { group: 'front_pin',         label: 'Front Pin',         type: 'pill'  }, // Push/Pull/Captive/Fixed Bolt/Other

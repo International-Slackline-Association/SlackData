@@ -15,6 +15,19 @@ class FrontPin(str, Enum):
     SCREWPIN = "Screw Pin"
     OTHER = "Other"
 
+class WeblockStyle(str, Enum):
+    """
+    How the device holds the webbing.
+
+    TENSIONABLE — the usual weblock: webbing is locked by a pin/plate mechanism
+    that can be dressed and released under (or near) tension.
+    LINELOCKER  — a fixed/static line locker: a ring, plate or chain the webbing
+    is simply woven through; nothing to open, it locks by friction.
+    """
+    TENSIONABLE = "Tensionable Weblock"
+    LINELOCKER = "Fixed Linelocker"
+
+
 class AttachmentPoint(str, Enum):
     UNIVERSAL = "Universal"
     HOLE = "Hole"
@@ -31,6 +44,7 @@ class BaseWeblock(SQLModel):
     Required fields are re-declared in the table model, WeblockPublic, and WeblockCreate.
     """
     name: str | None = Field(default=None, index=True)
+    style: WeblockStyle | None = Field(default=None, index=True)
     material: MetalMaterial | None = None
     width_min: int | None = None          # mm
     width_max: int | None = None          # mm

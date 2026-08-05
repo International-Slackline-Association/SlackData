@@ -1,6 +1,11 @@
 """Tests for the /weblock endpoints."""
 
-from slack_data.models.weblocks import AttachmentPoint, FrontPin, Weblock
+from slack_data.models.weblocks import (
+    AttachmentPoint,
+    FrontPin,
+    Weblock,
+    WeblockStyle,
+)
 from slack_data.utilities.materials import MetalMaterial
 
 
@@ -123,6 +128,50 @@ def test_patch_weblock_does_not_touch_other_fields(client, session, brand):
 
 def test_patch_weblock_not_found(client):
     assert client.patch("/weblock/9999", json={"price": 10.0}).status_code == 404
+
+
+# --- style ---
+
+def test_weblock_style_defaults_to_null(client, session, brand):
+    w = make_weblock(session, brand)
+    assert client.get(f"/weblock/{w.id}").json()["style"] is None
+
+
+def test_create_weblock_with_style(client, brand):
+    r = client.post("/weblock/", json={
+        "name": "Locker",
+        "material": "Aluminum",
+        "width_min": 25,
+        "style": "Fixed Linelocker",
+        "brand_id": brand.id,
+    })
+    assert r.status_code == 200
+    assert r.json()["style"] == "Fixed Linelocker"
+
+
+def test_create_weblock_rejects_unknown_style(client, brand):
+    r = client.post("/weblock/", json={
+        "name": "Bogus",
+        "material": "Aluminum",
+        "width_min": 25,
+        "style": "Ratchet",
+        "brand_id": brand.id,
+    })
+    assert r.status_code == 422
+
+
+def test_patch_weblock_style(client, session, brand):
+    w = make_weblock(session, brand, style=WeblockStyle.TENSIONABLE)
+    r = client.patch(f"/weblock/{w.id}", json={"style": "Fixed Linelocker"})
+    assert r.status_code == 200
+    assert r.json()["style"] == "Fixed Linelocker"
+
+
+def test_list_weblocks_exposes_both_styles(client, session, brand):
+    make_weblock(session, brand, name="Pin Lock", style=WeblockStyle.TENSIONABLE)
+    make_weblock(session, brand, name="Ring", style=WeblockStyle.LINELOCKER)
+    styles = {w["name"]: w["style"] for w in client.get("/weblock/").json()}
+    assert styles == {"Pin Lock": "Tensionable Weblock", "Ring": "Fixed Linelocker"}
 
 
 # --- DELETE ---

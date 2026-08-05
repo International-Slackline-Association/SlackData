@@ -10,7 +10,7 @@ import type {
   AttachmentPoint, BearingMaterial, Classification, ConnectionType, Currency,
   FiberMaterial, FrontPin, ISAWarning, LockType, MetalMaterial, PriceUnit,
   RollerMaterial, SliderType, StarterKitTensioningType, TricklineKitTensioningType,
-  WebbingConstruction,
+  WebbingConstruction, WeblockStyle,
 } from './enums'
 
 // Fields shared by every gear type (from each Base* class + the brand_name
@@ -47,6 +47,7 @@ export interface Webbing extends GearBase {
 }
 
 export interface Weblock extends GearBase {
+  style: WeblockStyle | null
   material: MetalMaterial
   width_min: number
   width_max: number | null

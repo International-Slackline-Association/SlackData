@@ -33,6 +33,10 @@ export type Classification = (typeof CLASSIFICATIONS)[number]
 export const WEBBING_CONSTRUCTIONS = ['Flat', 'Tubular', 'Core/Sheath', 'Other'] as const
 export type WebbingConstruction = (typeof WEBBING_CONSTRUCTIONS)[number]
 
+// models/weblocks.py — WeblockStyle
+export const WEBLOCK_STYLES = ['Tensionable Weblock', 'Fixed Linelocker'] as const
+export type WeblockStyle = (typeof WEBLOCK_STYLES)[number]
+
 // models/weblocks.py — FrontPin
 export const FRONT_PINS = [
   'Push Pin', 'Pull Pin', 'Captive Pin', 'Fixed Bolt', 'Other',

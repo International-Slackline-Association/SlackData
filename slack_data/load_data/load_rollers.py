@@ -64,7 +64,13 @@ def add_rollers_to_db(rollers: list[dict], session: SessionDep) -> None:
             lock_type=get_lock_type(str(roller.get("locking_type", ""))),
             bearing_material=get_bearing_material(str(roller.get("bearing_material", ""))),
             width=roller.get("width", None),
-            weight=float(roller.get("weight", 0)),
+            # `weight` is `float | None` on the model — a roller whose maker does
+            # not publish a weight must stay None. `.get("weight", 0)` did not do
+            # that: the default only applies when the KEY is absent, so an
+            # explicit `"weight": null` returned None and crashed float(). And
+            # where the key really was missing it substituted 0, which reads as
+            # "weighs nothing" rather than "unknown".
+            weight=float(w) if (w := roller.get("weight")) is not None else None,
             breaking_strength=roller.get("mbs"),
             slider_type=get_slider_type(str(roller.get("slider_type", ""))),
             isa_certified=roller.get("isa_approved", False),

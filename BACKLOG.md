@@ -2,6 +2,27 @@
 
 Non-phase engineering tasks not tracked in [PLAN.md](PLAN.md) (frontend roadmap).
 
+## Blocking the first ship
+
+- [x] **Backend test coverage for `active`.** Done — [tests/test_active.py](tests/test_active.py),
+  96 tests, parametrized across all 8 gear types. Three layers:
+  API round trip (`true` / `false` / key omitted → `True` / `False` / `None` on the `*Public`
+  response, on POST, re-GET and the list endpoint), PATCH (both directions, plus `None` → `True`,
+  plus "patching another field leaves `active` alone"), and — the layer that matters — loader
+  mapping: a minimal JSON item is pushed through each type's real `clean_*` + `add_*_to_db` pair and
+  the DB row is asserted, so deleting an `active=x.get("active")` line or typo'ing the JSON key goes
+  red (verified by dropping the line in `load_grips.py`: 2 failures). A final check reads each root
+  `*.json` and asserts every item carries an explicit boolean `active`. Full suite 270 passed.
+
+- [x] **Compare button is dead in the detailed view.** Fixed: `compareSelected` / `compareDisabled` /
+  `onToggleCompare` are threaded from `GearListingPage` (which owns the selection, so it is shared
+  with the card grid and survives a density switch) through
+  [GearDetailedList.tsx](frontend/src/components/gear/GearDetailedList.tsx) into
+  [GearDetailBody.tsx:158](frontend/src/components/gear/GearDetailBody.tsx#L158), which renders the
+  pill with the same active styling and `data-active` hook as the card. Covered by the
+  "Compare — Detailed view" and "selection shared across Cards and Detailed views" blocks in
+  `compare.cy.ts` — 31/31 passing.
+
 ## Backend / data
 
 - [ ] **Adjudicate the remaining missing-gear candidates.** [MISSING_GEAR_REVIEW.md](MISSING_GEAR_REVIEW.md)
@@ -75,18 +96,6 @@ Non-phase engineering tasks not tracked in [PLAN.md](PLAN.md) (frontend roadmap)
   - <https://spider-slacklines.com/shop/en/bungee/1284-7330-modular-bungee.html#/1362-select_model-soft_shackle_openable>
 
 ## ✅ Shipped (kept here briefly so the entries above don't get re-opened)
-
-- **Backend test coverage for `active`.** `tests/test_active_field.py`, 48 cases — 6 per gear type:
-  true/false round-trip, absent key → `None`, `active` declared on the `*Public` schema, PATCH can
-  flip it, and PATCH of an unrelated field must not reset it. Verified by mutation: deleting the
-  `active=` line from a loader fails 3 of them. Backend suite 155 → 203.
-
-- **Compare button was dead in the Detailed view.** `compareSelected` / `compareDisabled` /
-  `onToggleCompare` are threaded from `GearListingPage` (which owns the selection, so it is shared
-  with the card grid and survives a density switch) through `GearDetailedList` into
-  `GearDetailBody`, which renders the pill with the same active styling and `data-active` hook as
-  the card. Covered by the "Compare — Detailed view" and "selection shared across Cards and
-  Detailed views" blocks in `compare.cy.ts` — 32/32.
 
 - **Gear lifecycle status.** Shipped as **`active`**, not the `available` this backlog originally
   specified, and with real data rather than the `null`-everywhere rollout that was planned: a

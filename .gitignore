@@ -14,3 +14,8 @@ venv/
 # Scraper output (images + manifests)
 scraper/
 scripts/.cache/
+
+# Gear-status web-verification working set. Provenance for the `active` field
+# only — nothing at runtime reads it; the values it produced are baked into the
+# root <type>s.json seeds.
+gear_status/
