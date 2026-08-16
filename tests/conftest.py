@@ -22,6 +22,7 @@ from sqlmodel.pool import StaticPool
 from slack_data.database import get_session
 from slack_data.models.brands import Brand
 from slack_data.api.routers.brand_router import brand_router
+from slack_data.api.routers.fx_router import fx_router
 from slack_data.api.routers.grip_router import grip_router
 from slack_data.api.routers.leashring_router import leashring_router
 from slack_data.api.routers.roller_router import roller_router
@@ -36,6 +37,7 @@ def _build_test_app() -> FastAPI:
     """Minimal app — same routers as production, no lifespan seeding."""
     app = FastAPI()
     app.include_router(brand_router)
+    app.include_router(fx_router)  # no session dependency — display-layer FX rates
     app.include_router(grip_router)
     app.include_router(leashring_router)
     app.include_router(roller_router)

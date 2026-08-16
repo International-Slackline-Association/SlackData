@@ -14,11 +14,17 @@ interface SortField {
   label: string         // human label used in describe/it strings
   unit: string          // for display only
   nullLast: boolean     // true = items with null value sort to the bottom
+  // The attribute the ORDER is verified against, when it isn't data-{field}.
+  // Price is the one such field: the card's data-price stays the raw as-sold
+  // amount (in the seller's own currency), while the sort actually runs on the
+  // currency-normalized data-price-base. Comparing raw amounts across currencies
+  // is exactly the bug this attribute exists to prevent — see currency.cy.ts.
+  orderAttr?: string
 }
 
 // Fields that appear in the sort dropdown for every gear type
 const UNIVERSAL_SORT_FIELDS: SortField[] = [
-  { field: 'price',  label: 'Price',  unit: '',    nullLast: true },
+  { field: 'price',  label: 'Price',  unit: '',    nullLast: true, orderAttr: 'data-price-base' },
   { field: 'weight', label: 'Weight', unit: 'g',   nullLast: true },
 ]
 
@@ -273,14 +279,16 @@ GEAR_TYPES.forEach(({ slug, apiPath, label }) => {
     // Cards carry data-{field}="<value>" attributes (empty string = null).
     // Null-last fields: nulls/empties appear after all real values in both directions.
 
-    sortFields.forEach(({ field, label: fieldLabel, nullLast }) => {
+    sortFields.forEach(({ field, label: fieldLabel, nullLast, orderAttr }) => {
+      const attr = orderAttr ?? `data-${field.replace(/_/g, '-')}`
+
       it(`${fieldLabel} Low→High: cards are in ascending numeric order (nulls last)`, () => {
         cy.get('[data-cy="sort-dropdown"]').click()
         cy.get('[data-cy="sort-option"]')
           .filter(`[data-field="${field}"][data-direction="asc"]`).click()
 
         cy.get('[data-cy="gear-card"]').should(($cards) => {
-          const raw = [...$cards].map(c => c.getAttribute(`data-${field.replace(/_/g, '-')}`) ?? '')
+          const raw = [...$cards].map(c => c.getAttribute(attr) ?? '')
           const nums  = raw.filter(v => v !== '').map(Number)
           const nulls = raw.filter(v => v === '')
 
@@ -305,7 +313,7 @@ GEAR_TYPES.forEach(({ slug, apiPath, label }) => {
 
         cy.get('[data-cy="gear-card"]').should(($cards) => {
           const rows = [...$cards].map(c => ({
-            value: c.getAttribute(`data-${field.replace(/_/g, '-')}`) ?? '',
+            value: c.getAttribute(attr) ?? '',
             name: c.querySelector('[data-cy="gear-card-name"]')?.textContent ?? '',
           }))
           // Within every run of cards sharing the same numeric value, names must
@@ -324,7 +332,7 @@ GEAR_TYPES.forEach(({ slug, apiPath, label }) => {
           .filter(`[data-field="${field}"][data-direction="desc"]`).click()
 
         cy.get('[data-cy="gear-card"]').should(($cards) => {
-          const raw  = [...$cards].map(c => c.getAttribute(`data-${field.replace(/_/g, '-')}`) ?? '')
+          const raw  = [...$cards].map(c => c.getAttribute(attr) ?? '')
           const nums  = raw.filter(v => v !== '').map(Number)
           const firstNull = raw.indexOf('')
           const lastNum   = raw.map((v, i) => v !== '' ? i : -1).filter(i => i >= 0).pop() ?? -1

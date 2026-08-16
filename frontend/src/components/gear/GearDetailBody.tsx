@@ -25,7 +25,8 @@
 
 import { Link } from 'react-router-dom'
 import type { GearTypeMeta } from '@/config/gearTypes'
-import { formatPrice, type AnyItem } from '@/utils/format'
+import { useCurrency } from '@/context/CurrencyContext'
+import { type AnyItem } from '@/utils/format'
 import { imageUrls } from '@/utils/images'
 import CardImageCarousel from './CardImageCarousel'
 import ClassificationBubble from './ClassificationBubble'
@@ -58,8 +59,9 @@ export default function GearDetailBody({
   compareDisabled?: boolean
   onToggleCompare?: (id: number) => void
 }) {
-  const price = formatPrice(item.price, item.currency)
-  const priceUnit = item.price_unit ? ` per ${String(item.price_unit)}` : ''
+  // `qualifier: true` — the detail page has room for the "per pair" / "per
+  // single" note that the card omits.
+  const price = useCurrency().priceText(item, meta.slug, { qualifier: true })
   const images = imageUrls(meta.slug, String(item.brand_name), String(item.name))
   const isaWarning = meta.hasISAWarning ? item.isa_warning : null
 
@@ -107,9 +109,22 @@ export default function GearDetailBody({
             <LegacyBadge active={item.active} />
           </div>
           {price && (
-            <div data-cy="detail-price" className="mt-2 text-xl font-bold" style={{ color: '#E8770A' }}>
-              {price}
-              {priceUnit && <span className="ml-1 text-sm font-normal text-gray-500">{priceUnit}</span>}
+            <div className="mt-2">
+              <div
+                data-cy="detail-price"
+                data-approx={price.approx ? 'true' : 'false'}
+                className="text-xl font-bold"
+                style={{ color: '#E8770A' }}
+              >
+                {price.text}
+              </div>
+              {/* What the manufacturer actually charges, kept visible so a
+                  converted figure is never mistaken for the sticker price. */}
+              {price.original && (
+                <div data-cy="detail-price-original" className="text-xs text-gray-500">
+                  {price.original} as sold
+                </div>
+              )}
             </div>
           )}
 

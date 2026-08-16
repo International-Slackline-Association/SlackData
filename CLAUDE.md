@@ -83,9 +83,16 @@ There **is** a test suite now (there was not when this file was first written), 
 python -m pytest tests/ -q          # 155 backend tests (11 files, all gear types + loaders)
 cd frontend && npm run build        # tsc -b + vite build
 cd frontend && npm run lint         # oxlint
-# Cypress e2e (10 specs) needs BOTH servers up — see PLAN.md → "Running things"
+cd frontend && npm run test:unit    # 59 unit tests — node:test on the pure utils, no servers, no deps
+# Cypress e2e (11 specs) needs BOTH servers up — see PLAN.md → "Running things"
 cd frontend && npx cypress run --spec cypress/e2e/<spec>.cy.ts
 ```
+
+`test:unit` runs `node --experimental-strip-types --test tests/unit/*.test.ts` — Node 22 strips the
+types itself, so there is **no test framework dependency**. It covers the arithmetic that is
+invisible in a screenshot (slider domains, currency precision); anything about the DOM belongs in
+Cypress. `frontend/tests/` has its own tsconfig (`types: ["node"]`) exactly like `cypress/` does, so
+it stays out of `tsc -b`.
 
 The README's install snippet says `uv venv` then `source venv/bin/activate`, but `uv` actually creates `.venv` — use `source .venv/bin/activate` for the uv path.
 
@@ -153,6 +160,15 @@ Every gear type carries an **`active: bool | None`** field on its `Base<X>` (so 
 | TreePro | `/treepro` | `treepros.json` | 25 |
 | StarterKit | `/starterkit` | `starterkits.json` | 64 |
 | TricklineKit | `/tricklinekit` | `tricklinekits.json` | 10 |
+
+### Non-model routers
+
+`/fx/rates` (`api/routers/fx_router.py` + `utilities/fx.py`) — EUR-based exchange rates for the
+frontend's display layer. **No model, no table, no DB access**, so it is safe under the hosted
+read-only catalog. Rates are cached in a module-level dict with a TTL (the only cache available on
+Lambda's read-only filesystem) and every failure path falls back to a baked-in table with
+`stale: true` — a 5xx here would blank the price on every card. Prices themselves are **never**
+converted in storage; see DESIGN.md § Currency & Prices and [CURRENCY_PLAN.md](CURRENCY_PLAN.md).
 
 ### In-progress models (branch `bungees_ringpadding`)
 

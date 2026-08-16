@@ -35,6 +35,74 @@ Single sans-serif family throughout (Inter or system-ui).
 
 ---
 
+## Currency & Prices
+
+Every price in the catalogue is stored **as sold, in the seller's own currency** — 471 priced items
+across 14 currencies (EUR is ~60%). That storage never changes: rates move daily, so a converted
+number written into the database is wrong tomorrow and throws away the fact worth keeping ("this
+manufacturer charges €89"). **Conversion is a display layer**, applied on read.
+
+**The viewer picks one display currency and the whole site speaks it** — cards, detail pages, the
+compare table, the price filter and the price sort.
+
+### Where the display currency comes from
+
+Precedence, highest first:
+
+1. **Explicit choice** — the top-nav selector, persisted in `localStorage`.
+2. **`?cur=` URL param** — so a link carrying a price filter means the same thing to whoever opens it.
+3. **Detected** — from the browser's own locale: `Intl.DateTimeFormat().resolvedOptions()` (timeZone
+   region, falling back to the locale's region subtag) mapped through a country→currency table.
+4. **`USD`** — the default when the region is unknown or has no mapping.
+
+Detection is browser-side on purpose: it needs no infrastructure, and it behaves identically in
+local dev, in Cypress and in production. A hosted deployment can do better — CloudFront can pass
+`CloudFront-Viewer-Country`, which `/fx/rates` echoes back as `detected_currency` and the frontend
+prefers when present — but that requires a custom OriginRequestPolicy and is **not** required for
+detection to work.
+
+### Rates
+
+Rates come from **our own backend** (`GET /fx/rates`), never from a third-party call in the browser:
+one shared cache instead of one per tab, same-origin behind CloudFront, and a single endpoint the
+Cypress suite can stub deterministically.
+
+- Base is **EUR**. `rates["EUR"] == 1.0`.
+- Normalize, then convert: `base = price / rates[item.currency]`, `display = base * rates[target]`.
+- The frontend caches the response in `localStorage` with a TTL so a repeat visit doesn't block
+  first paint on a network round-trip.
+- **Rates never block the catalogue.** If `/fx/rates` fails, prices render **as sold** in their own
+  currency, the `≈` is dropped, and a single quiet notice (`data-cy="fx-stale-notice"`) appears.
+  Gear is still browsable, filterable and sortable — only cross-currency price comparison degrades.
+
+### Displaying a converted price
+
+- Converted values are **marked approximate**: `≈ $96`. Never present a converted figure as if it
+  were the sticker price.
+- The **as-sold original stays reachable**: small gray secondary text under the price on the detail
+  page and in the compare cell (`€89`).
+- When the display currency **equals the item's own currency**, there is no `≈` and no secondary
+  line — it *is* the price.
+- Formatting is `Intl.NumberFormat(locale, { style: 'currency', currency })`: 2 decimals below 10,
+  0 decimals at 100 and above, 2 in between.
+
+### Units survive conversion
+
+Two gear types price something other than "one item", and converting must not flatten that:
+
+- **Webbings are priced per meter** (`price` maps from the seed's `priceMeter`). They render with a
+  `/m` suffix — `≈ $2.60 /m` — and their filter and sort labels read **"Price per meter"**. Without
+  it a €2.40 webbing sits beside an €89 weblock with nothing to tell them apart, which is misleading
+  now and worse once price is a headline filter.
+- **Tree protectors** may be sold singly or in pairs (`price_unit`). The qualifier is appended —
+  `≈ $45 per pair` — and pair prices are **never silently halved**: the pair is the product. The
+  existing "Sold As" pill is how a viewer scopes that comparison.
+
+Because per-meter and absolute prices are different quantities, they must never be pooled in one
+range — which is fine today, since every listing shows exactly one gear type.
+
+---
+
 ## Page Header / Top Nav
 
 White bar, full-width, subtle bottom border.
@@ -46,7 +114,21 @@ Center (or just right of logo): horizontal gear-type tabs —
 
 Active tab: teal underline (2px) + teal text. Inactive: gray text, no underline. No background fill on tabs.
 
-Right: currency selector (US USD style dropdown like climbing-gear.com), heart/saved icon, account icon.
+Right: **currency selector**, heart/saved icon, account icon.
+
+**Currency selector** (`data-cy="currency-selector"`) — a compact dropdown in the climbing-gear.com
+style showing the active currency's code and symbol (`$ USD`). Opening it lists options
+(`data-cy="currency-option"`, each carrying `data-currency="USD"`):
+
+- **"Auto (detected)"** is the first entry and the initial state — it follows the detection chain in
+  § Currency & Prices and shows which currency it resolved to.
+- Then the **14 currencies the catalogue actually prices in** — EUR, USD, CZK, PLN, CAD, ILS, BRL,
+  CHF, ZAR, NZD, MXN, RUB, GBP, INR — followed by the remaining majors. Deliberately **not** all 30
+  members of the `Currency` enum: most have no gear behind them, so offering them is a list of dead
+  ends.
+- The active option carries `data-active="true"`. Picking one persists it (see the precedence chain)
+  and re-renders every price on the page without a refetch — rates are already loaded.
+- The selector is present on every page, not just listings: prices appear on detail and compare too.
 
 ---
 
@@ -101,7 +183,7 @@ Filter groups per gear type — verified against `slack_data/models/*.py` and `u
 
 Three filter control types:
 - **Pill toggle** — enum and boolean fields; single- or multi-select per the rule above
-- **Range slider** — numeric fields (float or int); rendered as a **dual-thumb slider** (two overlaid `<input type="range">`, min thumb `data-cy="range-min"`, max thumb `data-cy="range-max"`), domain = the data's [min, max], `step="any"`. A thumb parked at its domain bound means "no constraint". The two value labels below the track (`data-cy="range-min-value"` / `range-max-value`) are **click-to-edit**: one click turns the number into an inline numeric input (commit on Enter/blur, cancel on Escape) so an exact bound can be typed without dragging; out-of-range values are clamped, not rejected. This is the standard control for every min/max filter (weight, breaking strength, diameters, widths, dimensions, kit weight, and the stretch %).
+- **Range slider** — numeric fields (float or int); rendered as a **dual-thumb slider** (two overlaid `<input type="range">`, min thumb `data-cy="range-min"`, max thumb `data-cy="range-max"`). Step is 1 for integer-only fields and 0.5 otherwise, unless the field knows its own granularity (money steps by the cent); the domain is the data's [min, max] **snapped onto that step grid** (a native range input only lands on `min + n·step`, so an off-grid max would be unreachable — the thumb would stop short of the track end and never read as "no constraint"). A thumb parked at its domain bound means "no constraint". The two value labels below the track (`data-cy="range-min-value"` / `range-max-value`) are **click-to-edit**: one click turns the number into an inline numeric input (commit on Enter/blur, cancel on Escape) so an exact bound can be typed without dragging; out-of-range values are clamped, not rejected. This is the standard control for every min/max filter (weight, breaking strength, diameters, widths, dimensions, kit weight, and the stretch %).
 - **Stretch at X kN** — webbing-only custom widget (see below)
 
 **Pill order within a group** — values are alphabetical by default, with catch-all buckets ("Other",
@@ -110,23 +192,54 @@ may declare an explicit order instead, and values absent from that order sort af
 alphabetically. No group uses this today (classification, the one ranked domain, is not a filter —
 see below); the mechanism stays in `filterGroups.ts` for the next ranked enum.
 
-Excluded from filters: `name`/`description`/`notes` (search), `release_date`, `product_url`, `version`, `currency` (not a UX-meaningful filter), `colors` (comma-separated string needing split logic — future work), `stretch` on webbing (JSON blob of {kn,percent} pairs — exposed as a "has stretch data" pill instead), `width` on rollers (raw string like "25–35mm", not a numeric field), **`classification` on webbing** (an ISA grant, not an independent axis of the catalogue — see § Classification bubble; filter by **ISA Certified** instead).
+**Price is the first group in every gear type's sidebar** — above Material, above everything. It is
+the filter people reach for first in any gear catalogue, and it is the only one that is meaningful
+for all 8 types.
 
-**Webbings:** Material Type [pill] · Width mm [range] · ISA Certified [pill] · ISA Warning [pill] · Weight g/m [range] · Breaking Strength kN [range] · **Stretch at X kN** [custom — see below]
+It is a range slider like any other numeric filter, with four behaviours unique to it:
 
-**Weblocks:** Material [pill] · Min Width mm [range] · Front Pin [pill] · Attachment Point [pill] · ISA Certified [pill] · ISA Warning [pill] · Weight g [range] · Breaking Strength kN [range]
+- **Its unit is the display currency's symbol**, and its **domain is expressed in the display
+  currency** — so unlike every other range filter, the domain moves when the selector changes.
+- **It works in money, at a precision that follows the currency.** The domain is the cheapest and
+  priciest items themselves — in USD the webbing slider spans `0.58 $` to `10.56 $`, not a
+  rounded-off `0.00`–`10.50`, because a price filter whose floor sits below anything for sale wastes
+  half its track. The **dollar is the baseline: cent steps, two decimals.** A currency an order of
+  magnitude larger drops a decimal (`¥1,683` is as precise as `$10.56`), stopping at whole units at
+  100× and beyond — `0.1` for CZK/INR/MXN/RUB/ZAR, `1` for JPY/KRW — and nothing goes finer than the
+  dollar's cents. Both labels carry that many decimals at every magnitude, including above 100 where
+  a price *tag* drops them: they sit on one control and must match each other.
+- **Switching currency converts an active bound rather than clearing it.** Filter to `$50–$100`,
+  switch to EUR, and the bounds become `€46–€92`: the same items stay selected. Anything else would
+  silently change a result set behind the viewer's back.
+- **The bounds are written to the URL in the display currency**, alongside `?cur=` so the link
+  stays meaningful when shared (`?price_min=50&price_max=100&cur=USD`). `?cur=` is written **only**
+  when a price bound is set — currency is otherwise a viewer preference, not view state, and does
+  not belong in every URL. Storing bounds in the canonical base instead was rejected: the numbers
+  in the URL would not match the numbers on screen, breaking the rule that `?{field}_min` mirrors
+  the visible value.
 
-**Leash Rings:** Material [pill] · ISA Certified [pill] · ISA Warning [pill] · Inner Diameter mm [range] · Outer Diameter mm [range] · Weight g [range] · Breaking Strength kN [range]
+Items with **no price are excluded** whenever a bound is set — the same null-last philosophy as
+every other range filter.
 
-**Grips:** Material [pill] · Min Width mm [pill] · Connection Type [pill] · ISA Certified [pill] · ISA Warning [pill] · Weight g [range] · WLL kN [range] · MBS kN [range] · Slipping Threshold kN [range]
+On webbings the group is labelled **"Price per meter"** (see § Currency & Prices).
 
-**Rollers:** Frame Material [pill] · Roller Material [pill] · Slider Type [pill] · Lock Type [pill] · Bearing Material [pill] · ISA Warning [pill] · Weight g [range] · Breaking Strength kN [range]  _(ISA Certified hidden — no roller is certified)_
+Excluded from filters: `name`/`description`/`notes` (search), `release_date`, `product_url`, `version`, `currency` (the top-nav **selector** governs currency site-wide — filtering by the seller's currency would be filtering by an accident of where the shop is), `colors` (comma-separated string needing split logic — future work), `stretch` on webbing (JSON blob of {kn,percent} pairs — exposed as a "has stretch data" pill instead), `width` on rollers (raw string like "25–35mm", not a numeric field), **`classification` on webbing** (an ISA grant, not an independent axis of the catalogue — see § Classification bubble; filter by **ISA Certified** instead).
 
-**Tree Protectors:** Sling Attachment [pill] · Sold As [pill — labels title-cased: Pair / Single] · Weight g [range] · Width cm [range] · Length cm [range] · Thickness mm [range]
+**Webbings:** **Price per meter** [range] · Material Type [pill] · Width mm [range] · ISA Certified [pill] · ISA Warning [pill] · Weight g/m [range] · Breaking Strength kN [range] · **Stretch at X kN** [custom — see below]
 
-**Starter Kits:** Tensioning [pill] · Webbing Width mm [pill] · Webbing Length m [pill] · Includes Tree Pro [pill] · Kit Weight g [range]  _(ISA Certified hidden — none certified)_
+**Weblocks:** **Price** [range] · Material [pill] · Min Width mm [range] · Front Pin [pill] · Attachment Point [pill] · ISA Certified [pill] · ISA Warning [pill] · Weight g [range] · Breaking Strength kN [range]
 
-**Trickline Kits:** Tensioning [pill] · Webbing Width mm [pill] · Webbing Length m [pill] · Includes Tree Pro [pill]  _(ISA Certified hidden — none certified; Kit Weight NOT filterable — only 2 of 9 have weight data)_
+**Leash Rings:** **Price** [range] · Material [pill] · ISA Certified [pill] · ISA Warning [pill] · Inner Diameter mm [range] · Outer Diameter mm [range] · Weight g [range] · Breaking Strength kN [range]
+
+**Grips:** **Price** [range] · Material [pill] · Min Width mm [pill] · Connection Type [pill] · ISA Certified [pill] · ISA Warning [pill] · Weight g [range] · WLL kN [range] · MBS kN [range] · Slipping Threshold kN [range]
+
+**Rollers:** **Price** [range] · Frame Material [pill] · Roller Material [pill] · Slider Type [pill] · Lock Type [pill] · Bearing Material [pill] · ISA Warning [pill] · Weight g [range] · Breaking Strength kN [range]  _(ISA Certified hidden — no roller is certified)_
+
+**Tree Protectors:** **Price** [range] · Sling Attachment [pill] · Sold As [pill — labels title-cased: Pair / Single] · Weight g [range] · Width cm [range] · Length cm [range] · Thickness mm [range]
+
+**Starter Kits:** **Price** [range] · Tensioning [pill] · Webbing Width mm [pill] · Webbing Length m [pill] · Includes Tree Pro [pill] · Kit Weight g [range]  _(ISA Certified hidden — none certified)_
+
+**Trickline Kits:** **Price** [range] · Tensioning [pill] · Webbing Width mm [pill] · Webbing Length m [pill] · Includes Tree Pro [pill]  _(ISA Certified hidden — none certified; Kit Weight NOT filterable — only 2 of 9 have weight data)_
 
 **Manufacturers sidebar:** Continent [pill] · Slackline-Focused [pill]
 
@@ -165,7 +278,12 @@ Null-last in both directions: items where the field is null always appear below 
 
 **All types — always present:**
 - Name A→Z / Z→A
-- Price Low→High / High→Low _(null-last)_
+- Price Low→High / High→Low _(null-last)_ — **sorts on the normalized value, not the raw number.**
+  Before this, "Price Low→High" ranked a `5377 RUB` grip against an `89 USD` one numerically, which
+  was simply wrong. Converting every price to a common base is a single global scalar multiply, so
+  **the resulting order is identical in every display currency** — the sort needs normalization but
+  never needs to know which currency you're viewing in. Webbings sort per meter. Items with no price
+  stay null-last, as before.
 - Weight Low→High / High→Low _(null-last)_
 
 **Webbings:** + Width · Breaking Strength · **Stretch at X kN** _(secondary kN picker — see below)_
@@ -261,7 +379,10 @@ columns, which meant the specs that actually distinguish products were the ones 
 - Key specs inline row: small gray text with `·` separators — e.g. `25mm · 280g/m · MBS 32kN`
 - Feature tag pills: light gray bg, dark-gray text, small rounded pills — e.g. `Dyneema`, `Tubular`
 - **ISA Approved badge** — if `isa_certified` is true, show a miniature version of the ISA Approved stamp in the top-right overlay stack of the image area (under the classification bubble when both are present). The stamp replicates the official badge: dark charcoal frame, ISA geometric mark (teal + coral), bold white "APPROVED" text, teal checkmark in the V. If false, omit entirely — no "Not certified" label on cards.
-- Price: bold amber-orange — e.g. `$84 → Buy` (the "→ Buy" in slightly smaller amber text)
+- Price: bold amber-orange in the **display currency** — e.g. `≈ $84 → Buy` (the "→ Buy" in slightly
+  smaller amber text). The `≈` is dropped when the item is already priced in the display currency.
+  Webbings append `/m`. The card shows only the converted figure — the as-sold original lives on the
+  detail page and in the compare cell, where there's room for it.
 - **Bottom action row**: three equal-width outlined buttons spanning full card width — `♡ Save`, `🔔 Alert`, `⧉ Compare`. Light gray border, gray text. Hover: teal border + teal text.
 
 ---
@@ -297,7 +418,11 @@ never by editing one side.
   image show a low-opacity "No image" placeholder.
 - Brand name in small-caps gray
 - Product name in bold ~24px
-- Price in bold amber-orange ~20px — omit row entirely if null. Tree protectors append the price unit in small gray: `$45 per pair`
+- Price in bold amber-orange ~20px, in the **display currency** — omit row entirely if null.
+  Prefixed `≈` when converted (`≈ $96`), with the **as-sold original** directly beneath in small
+  gray (`€89`, `data-cy="detail-price-original"`). Neither the `≈` nor the original appears when the
+  item is already priced in the display currency. Webbings append `/m`; tree protectors append the
+  price unit in small gray: `≈ $45 per pair`.
 
 **ISA Warning banner** — if `isa_warning` is set, show a full-width amber warning strip below the header block (before specs), with a ⚠ icon and the warning text. Tree protectors have no `isa_warning` field — omit entirely.
 
@@ -327,6 +452,19 @@ The letter is **dark ink `#1F2937` on every fill**: white text fails WCAG AA on 
 ---
 
 ### Spec rows per gear type
+
+**Every table below is preceded by a shared Price row** — it is not repeated in each table:
+
+| Row label | Field | Display notes |
+|-----------|-------|---------------|
+| Price | `price` | In the display currency, `≈`-prefixed when converted, with the as-sold original beneath in small gray. Omit the row when `price` is null. Webbings label it **"Price per meter"** and append `/m`; tree protectors append `per single` / `per pair`. |
+
+This is what puts price on the **compare page**: compare renders `SPEC_ROWS`, so a type that has no
+price row has no price column — which is why, until now, you could compare two weblocks on weight
+and breaking strength but not on what they cost. Price is the **first row** of every compare table.
+
+On the **detail page** the price already appears in the header block, so it is *not* repeated in the
+spec grid — the row is declared for compare and suppressed in `SpecTable`.
 
 **Webbing**
 | Row label | Field | Display notes |
@@ -397,7 +535,7 @@ The letter is **dark ink `#1F2937` on every fill**: white text fails WCAG AA on 
 | Length | `length` | Append "cm" |
 | Thickness | `thickness` | Append "mm" |
 | Sling Attachment | `has_sling_attachment` | "Yes" or omit row if false |
-| Price Per | `price_unit` | "single" or "pair" — shown inline with price in header, not as its own spec row |
+| Price Per | `price_unit` | "single" or "pair" — appended to the price in the header and to the shared Price row, not a spec row of its own. It stays a **filter** pill ("Sold As") because pair pricing is the one place where two tree protectors' prices are not directly comparable. |
 
 *No ISA Certified field, no ISA Warning field.*
 

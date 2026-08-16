@@ -13,7 +13,8 @@
 import { Link } from 'react-router-dom'
 import type { GearTypeMeta } from '@/config/gearTypes'
 import { CARD_DATA_FIELDS, INLINE_SPECS } from '@/config/gearFields'
-import { dataAttrs, formatPrice, formatValue, type AnyItem } from '@/utils/format'
+import { useCurrency } from '@/context/CurrencyContext'
+import { dataAttrs, formatValue, type AnyItem } from '@/utils/format'
 import { imageUrls } from '@/utils/images'
 import CardImageCarousel from './CardImageCarousel'
 import ClassificationBubble from './ClassificationBubble'
@@ -42,7 +43,9 @@ export default function GearCard({
   onToggleCompare?: (id: number) => void
 }) {
   const { slug, hasISA } = meta
-  const price = formatPrice(item.price, item.currency)
+  // The card shows the converted figure only — the as-sold original lives on
+  // the detail page and in the compare cell, where there's room for it.
+  const price = useCurrency().priceText(item, slug)
   const specs = INLINE_SPECS[slug] ?? []
   const isaCertified = hasISA && item.isa_certified === true
 
@@ -116,8 +119,13 @@ export default function GearCard({
 
         <div className="mt-auto pt-2">
           {price && (
-            <span data-cy="gear-card-price" className="font-bold" style={{ color: '#E8770A' }}>
-              {price}
+            <span
+              data-cy="gear-card-price"
+              data-approx={price.approx ? 'true' : 'false'}
+              className="font-bold"
+              style={{ color: '#E8770A' }}
+            >
+              {price.text}
             </span>
           )}
         </div>

@@ -73,6 +73,7 @@ npx cypress run --spec cypress/e2e/<spec>.cy.ts
 | 8 | Manufacturers | `manufacturers.cy.ts` | ✅ 18/18 |
 | 9 | URL-state sweep | `url_state.cy.ts` | ✅ 18/18 |
 | 10 | Full green + cleanup | (whole suite) | ⬜ |
+| 11 | Currency & price | `currency.cy.ts` + `tests/test_fx.py` | ✅ 56/56 + 28 backend |
 
 ### ✅ Phase 1 — Foundation
 Types mirroring `*Public` schemas (`types/`), gear registry (`config/gearTypes.ts` — 8 available + Bungees/Leash-Ring-Pro upcoming), API layer (`api/` — paginates past the 100-cap, `API_BASE` from `VITE_API_URL`), `useUrlState` hook, router + `AppLayout` + page stubs.
@@ -430,3 +431,42 @@ independent of this CSS change; needs separate investigation.
 
 ### ⬜ Phase 10 — Full green + cleanup
 Whole suite green; simplify/dedupe.
+
+### 🟡 Phase 11 — Currency & price
+Full plan: **[CURRENCY_PLAN.md](CURRENCY_PLAN.md)**. Spec: DESIGN.md § Currency & Prices.
+
+One display currency for the whole site — auto-detected from the browser's locale, overridable from
+a top-nav selector, converted live off rates served by the backend. Price becomes **filterable**
+(a range slider, first group in every sidebar) and **comparable** (a row in every compare table),
+and the existing price **sort is fixed**: it currently ranks a `5377 RUB` grip against an `89 USD`
+one numerically.
+
+Storage does not change — price stays as-sold in the seller's currency, conversion is a display
+layer. No model, loader, seed or migration work.
+
+| Step | State |
+|------|-------|
+| 1. DESIGN.md § Currency & Prices + sidebar / sort / card / detail / spec-row edits | ✅ |
+| 2. Red-first tests — `tests/test_fx.py`, `cypress/e2e/currency.cy.ts`, 5 amended specs | ✅ |
+| 3. Backend — `utilities/fx.py`, `api/routers/fx_router.py`, wired in `main.py` | ✅ green |
+| 4. Frontend — `CurrencyContext`, selector, `utils/money.ts`, filter/sort/compare wiring | ✅ green |
+| 5. Full verification sweep | ✅ |
+
+**Sweep result:** 231 pytest (28 new) · 1 587 Cypress across 12 specs · `tsc` + `vite build` +
+`oxlint` clean. `currency.cy.ts` 56/56. `filters.cy.ts` grew 308 → 381 (the 8 new price groups).
+
+One pre-existing failure is **not** from this phase: `manufacturers.cy.ts` "clicking the manufacturer
+name navigates to that brand's detail page" — `cy.click()` is blocked by the sticky top-nav covering
+the target. It reproduces with the currency selector removed from `TopNav`, and both the spec and
+`ManufacturersPage` are unchanged from HEAD. Needs its own fix (scroll offset or `scrollBehavior`).
+
+Two card attributes carry the money contract, and the distinction is the whole point:
+`data-price` stays the **as-sold** amount, `data-price-base` is the normalized value **sort** runs
+on, and `data-price-display` is the display-currency value the **price filter's bounds** are checked
+against. `search_sort.cy.ts` (`orderAttr`) and `filters.cy.ts` (`valueAttr`) each opt the price
+field onto the right one — comparing a slider bound in USD against a raw EUR amount is exactly the
+class of bug this phase set out to remove.
+
+Two decisions still open (defaults assumed, cheap to change): the `CloudFront-Viewer-Country`
+OriginRequestPolicy is **deferred** (the endpoint already echoes the header when present, so it's a
+one-line infra change later), and the undetected-region fallback is **USD**.

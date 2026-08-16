@@ -141,6 +141,13 @@ describe('Compare view — side-by-side table', () => {
     cy.get('[data-cy="compare-row"]').should('have.length.gte', 3)
   })
 
+  // The price row — the reason you can compare two weblocks on cost at all — is
+  // specified in currency.cy.ts, because its content depends on the selected
+  // display currency. Only its existence is anyone's business here.
+  it('includes price among the compared fields', () => {
+    cy.get('[data-cy="compare-row"][data-field="price"]').should('exist')
+  })
+
   // A row no item in the dataset populates can never distinguish anything, so
   // ComparePage drops it rather than drawing an all-"—" stripe. `colors` is the
   // live example: on the webbing model, but null for every seeded row.

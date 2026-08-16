@@ -137,12 +137,17 @@ export function useUrlState() {
     [params],
   )
 
+  // `extra` rides along in the SAME mutation — writing it separately would let
+  // the two calls clobber each other (see the pendingRef note above). The price
+  // filter uses it to keep ?cur= beside its bounds, so a shared link's numbers
+  // say which currency they're in.
   const setRangeBound = useCallback(
-    (field: string, bound: 'min' | 'max', value: string) =>
+    (field: string, bound: 'min' | 'max', value: string, extra?: Record<string, string>) =>
       mutate(next => {
         const key = `${field}_${bound}`
         if (value !== '') next.set(key, value)
         else next.delete(key)
+        if (extra) for (const [k, v] of Object.entries(extra)) next.set(k, v)
       }),
     [mutate],
   )
