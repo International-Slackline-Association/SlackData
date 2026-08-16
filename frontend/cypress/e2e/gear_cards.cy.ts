@@ -240,12 +240,29 @@ GEAR_TYPES.filter(g => g.slug !== 'webbings').forEach(({ slug, label }) => {
 })
 
 // ── Classification bubble on the card ─────────────────────────────────────────
-// Webbing only. The same bubble the detail page shows beside the product name is
-// overlaid on the card's image area, top-right — so the highline class is
-// readable while scanning the grid, without opening every item.
+// Webbing only, and only in two cases (see src/.../ClassificationBubble.tsx):
+//   · the webbing is ISA certified → its granted class (A+/A/B/C). A letter
+//     class is an ISA grant, so an uncertified webbing must not show one even
+//     though the backend computes a class for every webbing — the bubble would
+//     read as certification.
+//   · breaking_strength < 22 kN → the gray "Not for Highline" pill, certified or
+//     not. Below the Type C floor no fiber is highline-rated, so that's a fact
+//     about the webbing, not a withheld grant.
+// Everything else shows nothing — including an uncertified "Not for Highline" at
+// 22 kN+ (e.g. 25 kN polyester, which misses Type C only because ISA doesn't
+// certify PES that low), and any webbing whose strength is unknown.
+// On items that do qualify, the same bubble the detail page shows beside the
+// product name is overlaid on the card's image area, top-right — so the class is
+// readable while scanning the grid.
+
+const HIGHLINE_MIN_KN = 22
+const NOT_FOR_HIGHLINE = 'Not for Highline'
 
 describe('Card classification bubble — Webbings', () => {
   let withClass: Record<string, unknown> | undefined
+  let uncertifiedWithClass: Record<string, unknown> | undefined
+  let weakUncertified: Record<string, unknown> | undefined
+  let strongUncertifiedNfh: Record<string, unknown> | undefined
   let withoutClass: Record<string, unknown> | undefined
 
   const cardFor = (id: unknown) =>
@@ -254,8 +271,34 @@ describe('Card classification bubble — Webbings', () => {
   before(() => {
     cy.fetchAllItems('webbing').then((all) => {
       const items = all as Record<string, unknown>[]
-      withClass = items.find(i => i.classification != null && i.classification !== '')
-      withoutClass = items.find(i => i.classification == null || i.classification === '')
+      const classed = (i: Record<string, unknown>) =>
+        i.classification != null && i.classification !== ''
+      const kn = (i: Record<string, unknown>) =>
+        typeof i.breaking_strength === 'number' ? i.breaking_strength : null
+      const weak = (i: Record<string, unknown>) => {
+        const v = kn(i)
+        return v !== null && v < HIGHLINE_MIN_KN
+      }
+
+      withClass = items.find(i => classed(i) && i.isa_certified === true)
+      // Uncertified with a LETTER class — the case that must stay hidden. Its
+      // strength is irrelevant: a sub-22 kN webbing is never a letter class.
+      uncertifiedWithClass = items.find(
+        i => classed(i) && i.isa_certified !== true && i.classification !== NOT_FOR_HIGHLINE,
+      )
+      // Uncertified and under the floor — the case the pill must come back for.
+      weakUncertified = items.find(
+        i => i.isa_certified !== true && i.classification === NOT_FOR_HIGHLINE && weak(i),
+      )
+      // "Not for Highline" for a certification reason rather than a strength one
+      // (>= 22 kN, or strength unknown) — still hidden.
+      strongUncertifiedNfh = items.find(
+        i => i.isa_certified !== true && i.classification === NOT_FOR_HIGHLINE && !weak(i),
+      )
+      // The dataset currently classifies every webbing (the class is computed
+      // from fibers + strength), so this one usually finds nothing and the
+      // test below bails — it guards the null path for when it doesn't.
+      withoutClass = items.find(i => !classed(i))
     })
   })
 
@@ -263,7 +306,7 @@ describe('Card classification bubble — Webbings', () => {
     cy.visit('/webbings')
   })
 
-  it('shows the bubble with the item’s class on a classified webbing', () => {
+  it('shows the bubble with the item’s class on a certified, classified webbing', () => {
     if (!withClass) return
     cardFor(withClass.id)
       .find('[data-cy="classification-pill"]')
@@ -272,11 +315,60 @@ describe('Card classification bubble — Webbings', () => {
       .and('contain.text', String(withClass.classification))
   })
 
+  it('omits the letter class on a webbing that is not ISA certified', () => {
+    if (!uncertifiedWithClass) return
+    cardFor(uncertifiedWithClass.id)
+      .find('[data-cy="classification-pill"]')
+      .should('not.exist')
+  })
+
+  it('shows "Not for Highline" on an uncertified webbing under 22 kN', () => {
+    if (!weakUncertified) return
+    cardFor(weakUncertified.id)
+      .find('[data-cy="classification-pill"]')
+      .should('be.visible')
+      .and('have.attr', 'data-classification', NOT_FOR_HIGHLINE)
+      .and('contain.text', NOT_FOR_HIGHLINE)
+  })
+
+  it('omits "Not for Highline" when the webbing is 22 kN or more', () => {
+    if (!strongUncertifiedNfh) return
+    cardFor(strongUncertifiedNfh.id)
+      .find('[data-cy="classification-pill"]')
+      .should('not.exist')
+  })
+
   it('omits the bubble entirely when the webbing has no classification', () => {
     if (!withoutClass) return
     cardFor(withoutClass.id)
       .find('[data-cy="classification-pill"]')
       .should('not.exist')
+  })
+
+  it('shows a bubble only where certification or sub-22 kN justifies it', () => {
+    // Sweep the whole grid: every rendered bubble is either a letter class on a
+    // card that also carries the ISA stamp, or a "Not for Highline" pill on a
+    // card whose data-breaking-strength is under the floor. (dataAttrs() spells
+    // field names with dashes, and writes "" for a null value.)
+    cy.get('[data-cy="gear-card"]').should('exist')
+    cy.get('[data-cy="gear-card"]').each(($card) => {
+      const $pill = $card.find('[data-cy="classification-pill"]')
+      if ($pill.length === 0) return
+      const cls = $pill.attr('data-classification')
+      const certified = $card.find('[data-cy="isa-approved-badge"]').length > 0
+      if (cls === NOT_FOR_HIGHLINE) {
+        // A certified webbing shows its granted class at any strength; an
+        // uncertified one only as the sub-22 kN warning.
+        if (certified) return
+        const raw = $card.attr('data-breaking-strength')
+        expect(raw, `${NOT_FOR_HIGHLINE} pill card states a breaking strength`)
+          .to.not.be.oneOf([undefined, ''])
+        expect(Number(raw), `${NOT_FOR_HIGHLINE} pill is on a sub-22 kN card`)
+          .to.be.lessThan(HIGHLINE_MIN_KN)
+      } else {
+        expect(certified, `letter class ${cls} is on a certified card`).to.equal(true)
+      }
+    })
   })
 
   it('overlays the bubble on the top-right of the image area', () => {

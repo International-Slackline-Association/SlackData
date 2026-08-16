@@ -94,7 +94,11 @@ export default function GearDetailBody({
                 {String(item.name)}
               </h1>
             )}
-            <ClassificationBubble value={item.classification} />
+            <ClassificationBubble
+              value={item.classification}
+              certified={meta.hasISA && item.isa_certified === true}
+              breakingStrength={item.breaking_strength}
+            />
             {/* Same pill as the listing card, inline here since there's no
                 image corner to pin it to. */}
             <LegacyBadge active={item.active} />
