@@ -127,11 +127,13 @@ resources:
                 - EventType: viewer-request
                   FunctionARN: !GetAtt StripApiFunction.FunctionMetadata.FunctionARN
           # SPA deep links: serve index.html for client-routed paths.
+          #
+          # 403 ONLY — CustomErrorResponses are distribution-wide, so they apply
+          # to /api/* too. S3 with OAC returns 403 (not 404) for a missing key,
+          # so 403 alone covers deep links; adding 404 here would rewrite the
+          # API's JSON 404s into HTML 200s and break not-found handling.
           CustomErrorResponses:
             - ErrorCode: 403
-              ResponseCode: 200
-              ResponsePagePath: /index.html
-            - ErrorCode: 404
               ResponseCode: 200
               ResponsePagePath: /index.html
 
