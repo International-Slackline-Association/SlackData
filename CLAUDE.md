@@ -164,9 +164,9 @@ Each loader defines: `load_<type>s_json()` (reads `Path(__file__).parent.parent.
 
 **JSON keys differ per type — always check the existing loader, don't assume:**
 - Brand field is `brand` for webbing, but `manufacturer` for grips/leashrings/rollers/treepro/kits.
-- Webbing: `materialType` → `FiberMaterial`; `stretch` stored as a JSON string; `date_introduced` → `release_date` (unix ms).
+- Webbing: `materialType` → `FiberMaterial`; `stretch` stored as a JSON string; `date_introduced` → `release_date` (unix ms). **`priceMeter` → `price`** — webbing `price` is therefore **per meter**, not per item; the model field name doesn't say so.
 - Weblock: rich SlackDB scrape with nested `specifications`/`pricing`; heaviest parsing (width ranges, ISA yes/no, price/currency regex) in `load_weblocks.py`.
-- Rollers: JSON uses `locking_type`, `isa_approved`, `mbs`; loader maps to model enums.
+- Rollers: JSON uses `locking_type`, `isa_approved`, `mbs`; loader maps to model enums. **`price_unit` in `rollers.json` holds the CURRENCY** (`"EUR"`), which `load_rollers.py` maps to `currency` — it does *not* mean what `price_unit` means on tree protectors (`single`/`pair`). Don't "fix" it.
 - Kits: `tensioning_type` normalized from strings like `RAT1`, `Double Ratchet`.
 
 Timestamps (`release_date`) are unix milliseconds (`int | None`).
