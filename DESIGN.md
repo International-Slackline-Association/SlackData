@@ -476,6 +476,28 @@ heading sits on its own line **below** the "← Manufacturers" back link, and is
 brand's `website` (new tab, teal hover + underline) when one exists — the same destination as the
 card's Visit Website button. Brands with no `website` render the name as a plain, non-link heading.
 
+**Detail page gear sections.** Below the heading the brand's inventory is grouped into one section
+per gear type, in the nav's gear-type order; types the brand has none of are omitted entirely.
+
+- **Ordering within a section is alphabetical by `name` (A→Z)**, never API/insertion order. The
+  sections are the one place in the app that renders gear outside the listing page, so they'd
+  otherwise inherit raw id order — which reads as random to anyone scanning a brand's catalogue for
+  a specific product. This is the same rule the gear listing applies with no explicit sort, so a
+  brand's webbings read in the same order in both places.
+- **Each section header is a collapse toggle.** The whole header — the type label, the item count,
+  and a small chevron to their right — is one `<button>`; clicking anywhere on it (label, count or
+  chevron) collapses the section, hiding its card grid and leaving the header in place. Clicking
+  again expands it. The chevron points **down** when expanded and rotates to point **right** when
+  collapsed (a CSS rotation on one glyph, so the two states are the same mark and read as one
+  control moving).
+- **Sections start expanded**, so the default view of a brand page is its whole catalogue. Collapse
+  state is per-section and lives in component state only — it is not persisted to the URL or across
+  navigations, because it's a transient reading aid, not a view worth sharing.
+- The header keeps the small-caps teal-dotted styling used elsewhere for section labels, and carries
+  the shared interactive affordances (cursor pointer, teal focus ring) since it is now a control.
+  The section root carries `data-collapsed`, and the button `aria-expanded`, so the state is
+  readable to both tests and assistive tech.
+
 **Grid only, with a sort control.** There is no Cards/List view toggle — the directory is a card
 grid, and that toolbar slot holds a **Sort by** dropdown instead. Options:
 
