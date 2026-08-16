@@ -140,11 +140,15 @@ GEAR_TYPES.forEach(({ slug, apiPath, label, hasISA, hasISAWarning, specFields })
     }
 
     // Webbing: classification rendered as a colored pill ─────────────────────
+    // Shown in two cases only: a letter class on an ISA-certified webbing (the
+    // class is an ISA grant, so it appears only where certification does), and
+    // "Not for Highline" on any webbing under 22 kN (a strength fact, not a
+    // grant). See src/components/gear/ClassificationBubble.tsx.
     if (slug === 'webbings') {
       it('renders classification as a bubble beside the name, not as a spec row', () => {
         cy.request(`${api()}/webbing/?limit=100`).then(({ body }) => {
           const withClass = (body as Record<string, unknown>[])
-            .find(i => i.classification != null)
+            .find(i => i.classification != null && i.isa_certified === true)
           if (!withClass) return
           cy.visit(`/webbings/${withClass.id}`)
 
@@ -165,6 +169,62 @@ GEAR_TYPES.forEach(({ slug, apiPath, label, hasISA, hasISAWarning, specFields })
               expect(pill.top).to.be.lt(name.bottom)
             })
           })
+        })
+      })
+
+      it('omits the letter class on a webbing that is not ISA certified', () => {
+        cy.request(`${api()}/webbing/?limit=100`).then(({ body }) => {
+          const uncertified = (body as Record<string, unknown>[]).find(
+            i =>
+              i.classification != null &&
+              i.classification !== 'Not for Highline' &&
+              i.isa_certified !== true,
+          )
+          if (!uncertified) return
+          cy.visit(`/webbings/${uncertified.id}`)
+          // The page has loaded (the ISA block always renders for webbings) …
+          cy.get('[data-cy="isa-not-certified-text"]').should('be.visible')
+          // … and no class is claimed for it.
+          cy.get('[data-cy="classification-pill"]').should('not.exist')
+        })
+      })
+
+      it('shows "Not for Highline" on an uncertified webbing under 22 kN', () => {
+        cy.request(`${api()}/webbing/?limit=100`).then(({ body }) => {
+          const weak = (body as Record<string, unknown>[]).find(
+            i =>
+              i.classification === 'Not for Highline' &&
+              i.isa_certified !== true &&
+              typeof i.breaking_strength === 'number' &&
+              i.breaking_strength < 22,
+          )
+          if (!weak) return
+          cy.visit(`/webbings/${weak.id}`)
+          cy.get('[data-cy="classification-pill"]')
+            .should('be.visible')
+            .and('have.attr', 'data-classification', 'Not for Highline')
+            // The warning is about strength, so it must not be titled an ISA type.
+            .and('have.attr', 'title')
+            .and('not.contain', 'ISA Type')
+        })
+      })
+
+      it('omits "Not for Highline" when the webbing is 22 kN or more', () => {
+        // Uncertified and unclassed for a certification reason rather than a
+        // strength one (e.g. 25 kN polyester — no Type C for PES). Nothing to warn
+        // about, so nothing renders.
+        cy.request(`${api()}/webbing/?limit=100`).then(({ body }) => {
+          const strong = (body as Record<string, unknown>[]).find(
+            i =>
+              i.classification === 'Not for Highline' &&
+              i.isa_certified !== true &&
+              typeof i.breaking_strength === 'number' &&
+              i.breaking_strength >= 22,
+          )
+          if (!strong) return
+          cy.visit(`/webbings/${strong.id}`)
+          cy.get('[data-cy="isa-not-certified-text"]').should('be.visible')
+          cy.get('[data-cy="classification-pill"]').should('not.exist')
         })
       })
     }

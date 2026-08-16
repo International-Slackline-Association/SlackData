@@ -22,12 +22,15 @@ interface FilterGroup {
 const FILTER_GROUPS: Record<string, FilterGroup[]> = {
   // ── Webbing ───────────────────────────────────────────────────────────────
   // Fields: material(enum) width(int) weight(float) breaking_strength(float)
-  //         stretch(str|None→pill) isa_certified(bool) classification(enum)
-  //         isa_warning(enum) colors(str, comma-sep — excluded, needs split logic)
+  //         stretch(str|None→pill) isa_certified(bool) classification(enum — excluded,
+  //         it's a badge, not an axis) isa_warning(enum)
+  //         colors(str, comma-sep — excluded, needs split logic)
   webbings: [
     { group: 'material',          label: 'Material Type',     type: 'pill'  },
     { group: 'width',             label: 'Width',             type: 'range', unit: 'mm' }, // dual-thumb slider
-    { group: 'classification',    label: 'Classification',    type: 'pill'  }, // A+/A/B/C/Not for Highline
+    // classification is deliberately NOT a filter group — it's a badge on the
+    // items that earn one (ISA-certified, or under 22 kN), not an axis of the
+    // catalogue (see the "is not a filter" describe below).
     { group: 'isa_certified',     label: 'ISA Certified',     type: 'pill'  },
     { group: 'isa_warning',       label: 'ISA Warning',       type: 'pill'  }, // Recall/Warning/Notice/No Warning
     // stretch has its own widget — see the dedicated describe block below FILTER_GROUPS
@@ -495,29 +498,21 @@ GEAR_TYPES.forEach(({ slug, apiPath, label }) => {
   })
 })
 
-// ── Classification pill order ─────────────────────────────────────────────────
-// Classification is ranked, not alphabetical: A+ is the strongest class and must
-// lead. Sorting these values alphabetically puts "A" before "A+" (a prefix sorts
-// first), which is why the group carries an explicit order mirroring
-// _CLASSIFICATION_RANK in slack_data/models/webbing.py.
+// ── No classification filter ──────────────────────────────────────────────────
+// The ISA highline class is a property of ISA certification, not an independent
+// axis of the catalogue: an uncertified webbing may compute a class from its
+// fibers and strength, but ISA never granted it. Filtering the whole grid by it
+// would imply otherwise, so the sidebar has no Classification group at all —
+// ISA Certified is the filter for the letter classes, and Breaking Strength
+// already covers the sub-22 kN "Not for Highline" case. The class shows as a
+// badge on the items that earn one instead.
 
-describe('Webbing classification pill order', () => {
-  const CANONICAL = ['A+', 'A', 'B', 'C', 'Not for Highline']
-
-  beforeEach(() => {
+describe('Webbing classification is not a filter', () => {
+  it('has no Classification group in the sidebar', () => {
     cy.visit('/webbings')
-  })
-
-  it('orders classification pills best-to-worst, with A+ before A', () => {
-    cy.get('[data-cy="filter-group"][data-group="classification"]')
-      .find('[data-cy="filter-pill"]')
-      .then(($pills) => {
-        const shown = [...$pills].map(p => p.getAttribute('data-value') as string)
-        // Only assert on the values actually present in the dataset, in the
-        // canonical relative order.
-        const expected = CANONICAL.filter(v => shown.includes(v))
-        expect(shown).to.deep.equal(expected)
-      })
+    cy.get('[data-cy="filter-sidebar"]').should('be.visible')
+    cy.get('[data-cy="filter-group"][data-group="classification"]').should('not.exist')
+    cy.get('[data-cy="filter-sidebar"]').should('not.contain.text', 'Classification')
   })
 })
 

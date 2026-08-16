@@ -1,5 +1,6 @@
 // A single gear card. Anatomy (top→bottom) per DESIGN.md and gear_cards.cy.ts:
-//   image · top-right overlay: classification bubble + ISA stamp (if certified)
+//   image · top-right overlay: classification bubble (ISA-certified, or sub-22 kN
+//     "Not for Highline") + ISA stamp (if certified)
 //   brand (small caps) · product name (link) · inline specs · price (amber)
 // No gear-type badge: every listing is single-type, so it would be redundant.
 // (Revisit when manufacturer pages mix types — see DESIGN.md card anatomy.)
@@ -73,14 +74,19 @@ export default function GearCard({
         className="group relative flex h-40 items-center justify-center bg-gray-50"
       >
         {/* Top-right stack: the highline class first (it's the fastest read on a
-            webbing card), the ISA stamp under it. Same bubble component as the
-            detail page, so the colors can't drift apart. */}
+            webbing card), the ISA stamp under it. The bubble appears on
+            certified webbings and on sub-22 kN "Not for Highline" ones (see
+            ClassificationBubble); the stamp only on certified. Same bubble
+            component as the detail page, so the colors can't drift apart. */}
         {/* Top-left: lifecycle status. Legacy = no longer sold; nothing renders
             for active/unknown gear. Mirrors the manufacturer card's Inactive pill. */}
         <LegacyBadge active={item.active} className="absolute left-2 top-2 z-10" />
-        {/* Top-right: classification then ISA stamp. */}
         <div className="absolute right-2 top-2 z-10 flex flex-col items-end gap-1.5">
-          <ClassificationBubble value={item.classification} />
+          <ClassificationBubble
+            value={item.classification}
+            certified={isaCertified}
+            breakingStrength={item.breaking_strength}
+          />
           {isaCertified && <IsaApprovedBadge />}
         </div>
         <CardImageCarousel urls={images} alt={String(item.name)} />
