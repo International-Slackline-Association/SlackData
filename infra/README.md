@@ -49,14 +49,25 @@ The catalog is baked into the image, so a data change = edit the root `*.json` �
 
 ## Local check before deploying
 
+See [../LAUNCH_RUNBOOK.md](../LAUNCH_RUNBOOK.md) §5.1 for the full smoke test (four endpoints,
+including the checks for a missing Python dep and an unbaked catalog). The short version — note the
+event must be a **complete** API Gateway v2 payload; omitting `requestContext.http.sourceIp` makes
+Mangum raise `KeyError: 'sourceIp'` before FastAPI is ever reached:
+
 ```bash
 # Build the Lambda image and invoke it like API Gateway would (uses the AWS RIE
 # built into the base image):
 docker build -f ../Dockerfile.lambda -t slackdata-api ..
-docker run --rm -p 9000:8080 slackdata-api &
+docker run -d --rm --name sd-smoke -p 9000:8080 slackdata-api
 curl -s "http://localhost:9000/2015-03-31/functions/function/invocations" -d '{
-  "version":"2.0","routeKey":"GET /webbing/","rawPath":"/webbing/",
-  "rawQueryString":"limit=1","requestContext":{"http":{"method":"GET","path":"/webbing/"}}}'
+  "version":"2.0","routeKey":"$default","rawPath":"/webbing/","rawQueryString":"limit=1",
+  "headers":{"accept":"application/json","host":"example.com"},
+  "requestContext":{"accountId":"123456789012","apiId":"abc","domainName":"example.com",
+    "stage":"$default","requestId":"r1","timeEpoch":1767225600000,
+    "http":{"method":"GET","path":"/webbing/","protocol":"HTTP/1.1",
+            "sourceIp":"1.2.3.4","userAgent":"smoke"}},
+  "isBase64Encoded":false}'
+docker rm -f sd-smoke
 ```
 
 ## Not in Phase 1 (added later, additively)
