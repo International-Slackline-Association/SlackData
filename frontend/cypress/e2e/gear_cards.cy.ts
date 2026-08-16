@@ -542,3 +542,181 @@ GEAR_TYPES.forEach(({ slug, apiPath, label }) => {
     })
   })
 })
+
+// ── Card image fit ────────────────────────────────────────────────────────────
+// DESIGN.md § Gear Card Anatomy → Image area. Nothing is ever cropped: the photo
+// is fitted inside the band, and since every shot in the library is narrower
+// (0.67–1.54 w/h) than the ~1.9 band, that always lands as a fit by HEIGHT with
+// bars left and right. The bars are filled by a blurred copy of the same file,
+// so they carry the photo's own background colour instead of a grey gutter.
+//
+// Measured, not read off the class list: the <img> box always fills the band, so
+// the size that matters is the PAINTED rectangle inside it. `painted()` applies
+// the object-fit: contain math to the real band and the real file — the numbers
+// only come out right if the fit really is contain (asserted alongside) and the
+// band really is wider than the shot, which is the invariant worth holding.
+
+// The rectangle an object-fit: contain image actually paints inside its box.
+function painted(box: DOMRect, nat: { w: number; h: number }) {
+  const scale = Math.min(box.width / nat.w, box.height / nat.h)
+  const w = nat.w * scale
+  const h = nat.h * scale
+  return { w, h, left: box.left + (box.width - w) / 2, top: box.top + (box.height - h) / 2 }
+}
+
+GEAR_TYPES.forEach(({ slug, apiPath, label }) => {
+  describe(`Card image fit — ${label}`, () => {
+    let withImages: { item: Record<string, unknown>; files: string[] } | undefined
+    let multi: { item: Record<string, unknown>; files: string[] } | undefined
+    let none: Record<string, unknown> | undefined
+
+    const cardFor = (id: unknown) =>
+      cy.get(`[data-cy="gear-card"]:has([data-cy="gear-card-name"][href="/${slug}/${id}"])`)
+
+    // Band rect, image box, the file's intrinsic size and the object-fit mode.
+    // Scrolls the card into view and waits for the file to decode first: images
+    // are lazy, and an undecoded one has no intrinsic size to fit.
+    const measure = (
+      id: unknown,
+      fn: (r: {
+        area: DOMRect
+        box: DOMRect
+        nat: { w: number; h: number }
+        fit: string
+      }) => void,
+    ) => {
+      cardFor(id).scrollIntoView()
+      cardFor(id)
+        .find('[data-cy="gear-card-img"]')
+        .should(($img) => {
+          expect(($img[0] as HTMLImageElement).naturalWidth, 'image has decoded').to.be.greaterThan(0)
+        })
+      cardFor(id).then(($card) => {
+        const $img = $card.find('[data-cy="gear-card-img"]')
+        const img = $img[0] as HTMLImageElement
+        fn({
+          area: $card.find('[data-cy="gear-card-image-area"]')[0].getBoundingClientRect(),
+          box: img.getBoundingClientRect(),
+          nat: { w: img.naturalWidth, h: img.naturalHeight },
+          fit: $img.css('object-fit'),
+        })
+      })
+    }
+
+    before(() => {
+      cy.fetchAllItems(apiPath).then((all) => {
+        const withFiles = (all as Record<string, unknown>[]).map(item => ({
+          item,
+          files: imageFilesFor(slug, String(item.brand_name), String(item.name)),
+        }))
+        withImages = withFiles.find(x => x.files.length > 0)
+        multi = withFiles.find(x => x.files.length > 1)
+        none = withFiles.find(x => x.files.length === 0)?.item
+      })
+    })
+
+    beforeEach(() => {
+      cy.visit(`/${slug}`)
+    })
+
+    it('fits the whole photo inside the band, cropping nothing', () => {
+      if (!withImages) return
+      measure(withImages.item.id, ({ area, box, fit }) => {
+        expect(fit, 'fitted, not cropped — cover would slice off the overflow').to.equal('contain')
+        // The box fills the band; object-fit does the letterboxing inside it.
+        expect(box.width, 'box spans the band').to.be.closeTo(area.width, 1)
+        expect(box.height, 'box spans the band').to.be.closeTo(area.height, 1)
+      })
+    })
+
+    it('scales the image to the full height of the band', () => {
+      if (!withImages) return
+      measure(withImages.item.id, ({ area, box, nat }) => {
+        const p = painted(box, nat)
+        expect(p.h, 'image height fills the band').to.be.closeTo(area.height, 1)
+        expect(p.top, 'nothing cropped off the top').to.be.gte(area.top - 1)
+        expect(p.top + p.h, 'nothing cropped off the bottom').to.be.lte(area.bottom + 1)
+      })
+    })
+
+    it('pillarboxes it, centred, instead of filling the band edge to edge', () => {
+      if (!withImages) return
+      measure(withImages.item.id, ({ area, box, nat }) => {
+        const p = painted(box, nat)
+        // Holds for every file we hold today. A shot wider than the band would
+        // fit by width instead and letterbox top/bottom — the backdrop covers
+        // either case, but the vertical fit is what the card band is tuned for.
+        expect(nat.w / nat.h, 'shot is narrower than the band').to.be.lessThan(
+          area.width / area.height,
+        )
+        expect(p.w, 'image is narrower than the band').to.be.lessThan(area.width)
+        expect(p.left, 'bar on the left').to.be.gt(area.left)
+        expect(p.left + p.w, 'bar on the right').to.be.lt(area.right)
+        expect(p.left - area.left, 'bars are even — image is centred').to.be.closeTo(
+          area.right - (p.left + p.w),
+          2,
+        )
+      })
+    })
+
+    it('fills the bars with a blurred copy of the image, behind it', () => {
+      if (!withImages) return
+      cardFor(withImages.item.id).scrollIntoView()
+      cardFor(withImages.item.id).then(($card) => {
+        const $backdrop = $card.find('[data-cy="card-image-backdrop"]')
+        expect($backdrop, 'backdrop exists').to.have.length(1)
+        expect($backdrop.attr('src'), 'shows the current image').to.include(withImages!.files[0])
+        expect($backdrop.css('filter'), 'blurred, not a second sharp picture').to.match(/blur\(/)
+        expect($backdrop.attr('aria-hidden'), 'decorative').to.equal('true')
+        // Lazy like the image it backs — a CSS background would fetch for every
+        // off-screen card in the grid.
+        expect($backdrop.attr('loading'), 'lazily loaded').to.equal('lazy')
+
+        const area = $card.find('[data-cy="gear-card-image-area"]')[0].getBoundingClientRect()
+        const bd = $backdrop[0].getBoundingClientRect()
+        expect(bd.width, 'spans the band').to.be.gte(area.width - 1)
+        expect(bd.height, 'spans the band').to.be.gte(area.height - 1)
+
+        // Painted under the sharp image: the image comes later in the DOM *and*
+        // is positioned, so it joins the same paint layer as the absolute
+        // backdrop and wins on order. A static image would be painted under it.
+        const $img = $card.find('[data-cy="gear-card-img"]')
+        const FOLLOWING = 4 // Node.DOCUMENT_POSITION_FOLLOWING
+        expect($backdrop[0].compareDocumentPosition($img[0]) & FOLLOWING, 'image comes after')
+          .to.be.greaterThan(0)
+        expect($img.css('position'), 'image is in the positioned layer').to.not.equal('static')
+      })
+    })
+
+    it('clips the band, so the over-scaled backdrop cannot spill onto the content', () => {
+      if (!withImages) return
+      // The backdrop is deliberately scaled past the band's edges (it pushes the
+      // blur's own soft border out of frame), so its *rect* is larger than the
+      // band by design — what has to hold is that the band paints nothing
+      // outside itself. That is the clip, not the geometry.
+      cardFor(withImages.item.id).scrollIntoView()
+      cardFor(withImages.item.id)
+        .find('[data-cy="gear-card-image-area"]')
+        .should(($area) => {
+          expect($area.css('overflow'), 'band clips its own backdrop').to.equal('hidden')
+        })
+    })
+
+    it('swaps the backdrop with the carousel', () => {
+      if (!multi) return
+      cardFor(multi.item.id).find('[data-cy="card-image-next"]').click()
+      cardFor(multi.item.id)
+        .find('[data-cy="card-image-backdrop"]')
+        .should('have.attr', 'src')
+        .and('include', multi.files[1])
+    })
+
+    it('renders no backdrop for a product with no image', () => {
+      if (!none) return
+      cardFor(none.id).within(() => {
+        cy.get('[data-cy="card-image-backdrop"]').should('not.exist')
+        cy.contains('No image').should('be.visible')
+      })
+    })
+  })
+})

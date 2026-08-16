@@ -227,8 +227,28 @@ columns, which meant the specs that actually distinguish products were the ones 
 ## Gear Card Anatomy (top → bottom)
 
 **Image area** (top ~40% of card):
-- White or very light gray bg
-- Product image centered (placeholder: rope/webbing icon in low-opacity gray)
+- White or very light gray bg (the fallback only — see the backdrop rule below)
+- **Images fit the frame vertically, never horizontally.** The image is fitted *inside* the band and
+  centred (`object-contain` — *not* `object-cover`, which fit by width and sliced the top and bottom
+  off every portrait shot). Nothing is ever cropped: the whole product reads end to end. The band is
+  far wider than it is tall (~300×160) while our shots run 0.67–1.54 w/h, so the fit always lands on
+  the height and **every image is pillarboxed** — bars of frame to its left and right.
+  Sizing note: the `<img>` box fills the band and `object-fit` does the letterboxing inside it, not
+  `h-full w-auto` sizing the box to the photo. Chromium will not transfer a percentage height
+  through a replaced element's intrinsic ratio to an `auto` width — as a flex child or absolutely
+  positioned it lays the image out 0px wide, leaving nothing on the card but the blurred backdrop.
+  So the geometry tests measure the **painted** rectangle (the `object-fit` math applied to the real
+  band and the real file), not the element box.
+- **The pillar bars match the image's own background.** Behind the image sits a blurred,
+  `cover`-scaled copy of the same file — a second lazily-loaded `<img>`
+  (`data-cy="card-image-backdrop"`, `aria-hidden`; a CSS background would ignore `loading="lazy"`
+  and fetch a backdrop for every off-screen card in the grid) — so the bars pick up the
+  colour the photo's own edges have — a shot on white gets white bars, a shot on grass gets a soft
+  green wash — and the letterboxing reads as part of the picture instead of a grey gutter. Blur it
+  hard enough (~24px, slightly over-scaled so the blur's own soft edge is pushed out of frame) that
+  it registers as a colour field, not a second picture. It always shows the image the carousel is
+  currently on, so it changes with the arrows and dots. Products with **no** image fall back to the
+  flat light-gray band with the low-opacity `No image` placeholder.
 - **No gear-type badge.** Each listing shows a single gear type, so labelling every card "ROLLER" on the rollers page is redundant. Reintroduce a coral gear-type pill (top-left, absolute) only on views that mix types — e.g. manufacturer pages.
 - **Legacy badge, top-left overlay** (absolute, ~8px from the top-**left** corner) — a small red uppercase `Legacy` pill, shown only when `active` is false (discontinued / no longer sold). Nothing renders for active or unknown (`active` true/null) gear — an active card carries no status pill. Because the listing defaults to ALL, a grid routinely mixes badged and unbadged cards — the badge is what tells them apart, so it is never suppressed by the sidebar's status scope. This occupies the **top-left** slot (the one reserved above for a future gear-type pill), mirroring the manufacturer card's top-left **Inactive** pill (see § Manufacturer card anatomy), so both card types read the same way: lifecycle status on the left, classification/ISA on the right.
 - **Top-right overlay stack** (absolute, ~8px from the top-right corner, stacked vertically with ~6px gaps, right-aligned):
@@ -268,11 +288,10 @@ renders per item** — see § Detailed View. Keep the two in sync by changing th
 never by editing one side.
 
 **Header block** (same for all types):
-- Image area: light gray bg band (~200px tall, ~290px at `sm`+). Images **fill the frame vertically**
-  (`object-cover`, no padding) rather than being letterboxed — product shots carry a lot of dead
-  white space, and `object-contain` left grey bands above and below. The long axis is cropped; these
-  are centered product shots, so the subject survives. Same treatment on the listing cards. Uses the
-  **same multi-image
+- Image area: light gray bg band (~200px tall, ~290px at `sm`+). Images **fit the band vertically**
+  and are pillarboxed against a blurred copy of themselves — exactly the treatment the listing cards
+  use, because it is literally the same component (see § Gear Card Anatomy → Image area for the
+  rule and the reasoning). Uses the **same multi-image
   carousel the cards use** — prev/next arrows and one dot per image, browsing every image we hold
   for the product. Single-image products render the bare image with no chrome; products with no
   image show a low-opacity "No image" placeholder.
