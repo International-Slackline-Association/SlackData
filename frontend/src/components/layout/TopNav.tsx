@@ -16,6 +16,7 @@
 import { useLayoutEffect, useRef } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { ALL_GEAR_TYPES } from '@/config/gearTypes'
+import CurrencySelector from './CurrencySelector'
 
 function isSectionActive(pathname: string, base: string): boolean {
   return pathname === base || pathname.startsWith(`${base}/`)
@@ -79,14 +80,19 @@ export default function TopNav() {
         >
           SlackData
         </Link>
-        <Link
-          to="/manufacturers"
-          data-cy="manufacturers-link"
-          data-active={mfrActive ? 'true' : 'false'}
-          className={tabClass(mfrActive)}
-        >
-          Manufacturers
-        </Link>
+        {/* Right side: the currency selector sits beside Manufacturers on every
+            page, not just listings — prices appear on detail and compare too. */}
+        <div className="flex items-center gap-4">
+          <Link
+            to="/manufacturers"
+            data-cy="manufacturers-link"
+            data-active={mfrActive ? 'true' : 'false'}
+            className={tabClass(mfrActive)}
+          >
+            Manufacturers
+          </Link>
+          <CurrencySelector />
+        </div>
       </div>
 
       {/* Tier 2 — category tabs, wrap on small screens */}

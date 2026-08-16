@@ -20,6 +20,7 @@ export default function RangeSlider({
   hi,
   unit,
   step = 1,
+  decimals,
   onMinChange,
   onMaxChange,
 }: {
@@ -28,7 +29,11 @@ export default function RangeSlider({
   lo: number
   hi: number
   unit?: string
-  step?: number // 1 for integer-only fields, 0.5 when the data has fractional values
+  step?: number // 1 for integer-only fields, 0.5 for fractional data, 0.01 for money
+  // Fixed decimal places for the bound labels. Money passes 2 — a price reads as
+  // "9.50 €", never "9.5 €" — and gets cent-precision typing in the edit box.
+  // Everything else leaves it unset and keeps the terse "as many as it needs".
+  decimals?: number
   // Per-thumb so a single change only writes its own bound — writing both would
   // let a stale `lo`/`hi` prop (async URL echo) clobber the other thumb.
   onMinChange: (v: number) => void
@@ -37,6 +42,15 @@ export default function RangeSlider({
   // Degenerate domain (all values equal / no data): render disabled thumbs.
   const span = domainHi - domainLo || 1
   const pct = (v: number) => `${((v - domainLo) / span) * 100}%`
+
+  // A drag lands on `domainLo + n · step`, and with cent-sized steps that
+  // arithmetic carries float dust: the very top of the track can report
+  // 10.559999… for a 10.56 domain, which the caller then reads as a real upper
+  // bound rather than "no constraint" — quietly hiding the priciest item behind
+  // a slider that looks maxed. No interior grid point is within half a step of
+  // an end, so snapping that close is unambiguous.
+  const atEnd = (v: number) =>
+    v <= domainLo + step / 2 ? domainLo : v >= domainHi - step / 2 ? domainHi : v
 
   const thumb =
     'pointer-events-none absolute inset-0 h-1.5 w-full appearance-none bg-transparent ' +
@@ -65,7 +79,7 @@ export default function RangeSlider({
           max={domainHi}
           step={step}
           value={lo}
-          onChange={e => onMinChange(Math.min(Number(e.target.value), hi))}
+          onChange={e => onMinChange(Math.min(atEnd(Number(e.target.value)), hi))}
           className={`${thumb} top-1/2 -translate-y-1/2`}
           aria-label="minimum"
         />
@@ -76,7 +90,7 @@ export default function RangeSlider({
           max={domainHi}
           step={step}
           value={hi}
-          onChange={e => onMaxChange(Math.max(Number(e.target.value), lo))}
+          onChange={e => onMaxChange(Math.max(atEnd(Number(e.target.value)), lo))}
           className={`${thumb} top-1/2 -translate-y-1/2`}
           aria-label="maximum"
         />
@@ -89,6 +103,7 @@ export default function RangeSlider({
           min={domainLo}
           max={hi}
           step={step}
+          decimals={decimals}
           onCommit={v => onMinChange(Math.min(Math.max(v, domainLo), hi))}
         />
         <EditableBound
@@ -98,6 +113,7 @@ export default function RangeSlider({
           min={lo}
           max={domainHi}
           step={step}
+          decimals={decimals}
           onCommit={v => onMaxChange(Math.max(Math.min(v, domainHi), lo))}
         />
       </div>
@@ -115,6 +131,7 @@ function EditableBound({
   min,
   max,
   step,
+  decimals,
   onCommit,
 }: {
   cy: string
@@ -123,6 +140,7 @@ function EditableBound({
   min: number
   max: number
   step: number
+  decimals?: number
   onCommit: (v: number) => void
 }) {
   const [editing, setEditing] = useState(false)
@@ -134,7 +152,7 @@ function EditableBound({
   }, [editing])
 
   const start = () => {
-    setDraft(String(value))
+    setDraft(formatBound(value, decimals))
     setEditing(true)
   }
 
@@ -153,7 +171,9 @@ function EditableBound({
         type="number"
         min={min}
         max={max}
-        step={step}
+        // The thumb's coarse grid must not stop you typing an exact bound, so a
+        // money field accepts cents here even though a drag lands on the grid.
+        step={decimals != null ? 10 ** -decimals : step}
         value={draft}
         onChange={e => setDraft(e.target.value)}
         onBlur={commit}
@@ -175,11 +195,15 @@ function EditableBound({
       onClick={start}
       className="cursor-text rounded px-1 hover:bg-gray-100"
     >
-      {formatBound(value)}{unit ? ` ${unit}` : ''}
+      {formatBound(value, decimals)}{unit ? ` ${unit}` : ''}
     </button>
   )
 }
 
-function formatBound(v: number): string {
+// Both labels on one slider are formatted the same way — a money slider reading
+// "31.50" on the left and "512" on the right looks broken, so `decimals` (when
+// given) applies to every value regardless of size.
+function formatBound(v: number, decimals?: number): string {
+  if (decimals != null) return v.toFixed(decimals)
   return Number.isInteger(v) ? String(v) : v.toFixed(1)
 }

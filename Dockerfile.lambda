@@ -10,10 +10,15 @@
 FROM public.ecr.aws/lambda/python:3.12
 
 # Runtime deps only — no uvicorn/CLI needed inside Lambda (Mangum drives the app).
+# httpx is NOT a core fastapi dependency (it ships with fastapi[standard], which
+# is what pyproject.toml declares) — but slack_data.utilities.fx imports it, and
+# main.py imports fx_router at module scope, so omitting it here is a cold-start
+# ImportError that 502s every request. Keep it listed explicitly.
 RUN pip install --no-cache-dir \
       "fastapi>=0.115.12" \
       "sqlmodel>=0.0.24" \
-      "mangum>=0.17"
+      "mangum>=0.17" \
+      "httpx>=0.27"
 
 # App source.
 COPY slack_data/ ${LAMBDA_TASK_ROOT}/slack_data/

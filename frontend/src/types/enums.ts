@@ -91,6 +91,28 @@ export type PriceUnit = (typeof PRICE_UNITS)[number]
 // alias; the full list is rarely needed on the client, so we don't enumerate it.
 export type Currency = string
 
+// The 14 currencies the catalogue actually prices in, confirmed against the
+// seeded database. These lead the currency selector because they are the ones
+// with gear behind them.
+export const CATALOGUE_CURRENCIES = [
+  'EUR', 'USD', 'GBP', 'CHF', 'CAD', 'NZD', 'CZK',
+  'PLN', 'ILS', 'INR', 'BRL', 'MXN', 'ZAR', 'RUB',
+] as const
+
+// Majors a viewer might plausibly want to read prices in even though no item is
+// priced in them. Deliberately NOT the whole Currency enum: most of its 30
+// members have no gear behind them, so offering them is a list of dead ends.
+export const EXTRA_CURRENCIES = ['AUD', 'JPY', 'CNY', 'SEK', 'DKK', 'SGD', 'HKD', 'KRW', 'TRY'] as const
+
+export const SELECTABLE_CURRENCIES: readonly string[] = [
+  ...CATALOGUE_CURRENCIES,
+  ...EXTRA_CURRENCIES,
+]
+
+export function isSelectableCurrency(code: string): boolean {
+  return SELECTABLE_CURRENCIES.includes(code)
+}
+
 // utilities/countries.py — Country. Aliased to string: the client never needs to
 // enumerate the members, only to display one and map it to a flag (see
 // utils/countryFlags.ts). Values are full display names ("Germany"), not ISO

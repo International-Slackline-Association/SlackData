@@ -29,6 +29,15 @@ export interface FilterGroupMeta {
   label: string        // human label shown in the sidebar (asserted by tests)
   type: FilterType
   unit?: string        // shown next to range inputs / int pills (mm, kN, g, …)
+  // The item field the filter READS, when it isn't `group`. Price is the only
+  // one: the URL key and data-group stay `price` (so ?price_min= reads the way
+  // every other range filter does), but the values compared are the
+  // display-currency ones the listing attaches — comparing raw amounts across
+  // fourteen currencies is meaningless. See DESIGN.md § Currency & Prices.
+  valueField?: string
+  // Range groups only: the unit follows the viewer's display currency rather
+  // than being a fixed string like "mm". Price is the only such group.
+  currencyUnit?: boolean
   pillKind?: PillKind  // pills only; defaults to 'enum'
   capitalize?: boolean // pills only; title-case the display labels (e.g. pair→Pair)
   // pills only; canonical value order for fields whose domain order is meaningful
@@ -40,6 +49,10 @@ export interface FilterGroupMeta {
 
 export const FILTER_GROUPS: Record<GearSlug, FilterGroupMeta[]> = {
   webbings: [
+    // Price leads every sidebar — it's the filter people reach for first, and
+    // the only one meaningful for all 8 gear types.
+    { group: 'price', label: 'Price per meter', type: 'range',
+      valueField: 'price_display', currencyUnit: true },
     { group: 'material',          label: 'Material Type',     type: 'pill', pillKind: 'enum' },
     { group: 'width',             label: 'Width',             type: 'range', unit: 'mm' },
     // No Classification group: the ISA class is only meaningful on an
@@ -54,6 +67,7 @@ export const FILTER_GROUPS: Record<GearSlug, FilterGroupMeta[]> = {
   ],
 
   weblocks: [
+    { group: 'price', label: 'Price', type: 'range', valueField: 'price_display', currencyUnit: true },
     { group: 'style',             label: 'Style',             type: 'pill', pillKind: 'enum',
       order: WEBLOCK_STYLES },
     { group: 'material',          label: 'Material',          type: 'pill', pillKind: 'enum' },
@@ -67,6 +81,7 @@ export const FILTER_GROUPS: Record<GearSlug, FilterGroupMeta[]> = {
   ],
 
   leashrings: [
+    { group: 'price', label: 'Price', type: 'range', valueField: 'price_display', currencyUnit: true },
     { group: 'material',          label: 'Material',          type: 'pill', pillKind: 'enum' },
     { group: 'isa_certified',     label: 'ISA Certified',     type: 'pill', pillKind: 'bool' },
     { group: 'isa_warning',       label: 'ISA Warning',       type: 'pill', pillKind: 'enum' },
@@ -77,6 +92,7 @@ export const FILTER_GROUPS: Record<GearSlug, FilterGroupMeta[]> = {
   ],
 
   grips: [
+    { group: 'price', label: 'Price', type: 'range', valueField: 'price_display', currencyUnit: true },
     { group: 'material',                  label: 'Material',           type: 'pill', pillKind: 'enum' },
     { group: 'width_min',                 label: 'Min Width',          type: 'pill', pillKind: 'int', unit: 'mm' },
     { group: 'connection_type',           label: 'Connection Type',    type: 'pill', pillKind: 'enum' },
@@ -89,6 +105,7 @@ export const FILTER_GROUPS: Record<GearSlug, FilterGroupMeta[]> = {
   ],
 
   rollers: [
+    { group: 'price', label: 'Price', type: 'range', valueField: 'price_display', currencyUnit: true },
     { group: 'material',          label: 'Frame Material',    type: 'pill', pillKind: 'enum' },
     { group: 'roller_material',   label: 'Roller Material',   type: 'pill', pillKind: 'enum' },
     { group: 'slider_type',       label: 'Slider Type',       type: 'pill', pillKind: 'enum' },
@@ -101,6 +118,7 @@ export const FILTER_GROUPS: Record<GearSlug, FilterGroupMeta[]> = {
   ],
 
   treepros: [
+    { group: 'price', label: 'Price', type: 'range', valueField: 'price_display', currencyUnit: true },
     { group: 'has_sling_attachment', label: 'Sling Attachment', type: 'pill', pillKind: 'bool' },
     { group: 'price_unit',           label: 'Sold As',          type: 'pill', pillKind: 'enum', capitalize: true },
     { group: 'weight',               label: 'Weight',           type: 'range', unit: 'g' },
@@ -110,6 +128,7 @@ export const FILTER_GROUPS: Record<GearSlug, FilterGroupMeta[]> = {
   ],
 
   starterkits: [
+    { group: 'price', label: 'Price', type: 'range', valueField: 'price_display', currencyUnit: true },
     { group: 'tensioning_type',  label: 'Tensioning',        type: 'pill', pillKind: 'enum' },
     { group: 'webbing_width',    label: 'Webbing Width',     type: 'pill', pillKind: 'int', unit: 'mm' },
     { group: 'webbing_length',   label: 'Webbing Length',    type: 'pill', pillKind: 'int', unit: 'm' },
@@ -119,6 +138,7 @@ export const FILTER_GROUPS: Record<GearSlug, FilterGroupMeta[]> = {
   ],
 
   tricklinekits: [
+    { group: 'price', label: 'Price', type: 'range', valueField: 'price_display', currencyUnit: true },
     { group: 'tensioning_type',  label: 'Tensioning',        type: 'pill', pillKind: 'enum' },
     { group: 'webbing_width',    label: 'Webbing Width',     type: 'pill', pillKind: 'int', unit: 'mm' },
     { group: 'webbing_length',   label: 'Webbing Length',    type: 'pill', pillKind: 'int', unit: 'm' },

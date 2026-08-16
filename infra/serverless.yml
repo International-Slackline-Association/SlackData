@@ -87,6 +87,31 @@ resources:
               return request;
           }
 
+    # ---- What the API origin receives ---------------------------------------
+    # The managed "AllViewerExceptHostHeader" policy forwards viewer headers but
+    # does NOT add CloudFront's own CloudFront-* headers, so /fx/rates never sees
+    # CloudFront-Viewer-Country and currency auto-detection silently no-ops.
+    #
+    # The managed "AllViewerAndCloudFrontHeaders" policy would add it, but it is
+    # AllViewer-based and therefore forwards Host — which makes API Gateway reject
+    # every request with a 403, since the Host wouldn't match its execute-api
+    # domain. Hence this minimal custom policy: no Host, all query strings (the
+    # routers page on limit/offset), and the one CloudFront header we use.
+    ApiOriginRequestPolicy:
+      Type: AWS::CloudFront::OriginRequestPolicy
+      Properties:
+        OriginRequestPolicyConfig:
+          Name: ${self:service}-api-origin-req-${self:provider.stage}
+          Comment: All query strings + CloudFront-Viewer-Country; no Host, no cookies
+          HeadersConfig:
+            HeaderBehavior: whitelist
+            Headers:
+              - CloudFront-Viewer-Country
+          CookiesConfig:
+            CookieBehavior: none
+          QueryStringsConfig:
+            QueryStringBehavior: all
+
     # ---- CloudFront: one domain fronting the SPA (default) + the API (/api/*)-
     Cdn:
       Type: AWS::CloudFront::Distribution
@@ -120,9 +145,9 @@ resources:
               TargetOriginId: api-httpapi
               ViewerProtocolPolicy: redirect-to-https
               AllowedMethods: [GET, HEAD, OPTIONS, PUT, PATCH, POST, DELETE]
-              # AWS managed "CachingDisabled" + "AllViewerExceptHostHeader"
+              # AWS managed "CachingDisabled" + the custom origin request policy above
               CachePolicyId: 4135ea2d-6df8-44a3-9df3-4b5a84be39ad
-              OriginRequestPolicyId: b689b0a8-53d0-40ab-baf2-68738e2966ac
+              OriginRequestPolicyId: !Ref ApiOriginRequestPolicy
               FunctionAssociations:
                 - EventType: viewer-request
                   FunctionARN: !GetAtt StripApiFunction.FunctionMetadata.FunctionARN

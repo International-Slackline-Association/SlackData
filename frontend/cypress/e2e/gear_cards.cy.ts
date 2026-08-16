@@ -61,6 +61,9 @@ GEAR_TYPES.forEach(({ slug, apiPath, label, hasISA }) => {
     })
 
     // ── Price: shown only when non-null ───────────────────────────────────────
+    // Presence/absence only. What the price SAYS — the display currency, the ≈
+    // prefix, the /m suffix, data-price-base — belongs to currency.cy.ts. These
+    // two hold whatever currency is selected, which is why they assert no text.
 
     it('shows the price in amber when the item has a price', () => {
       cy.fetchAllItems(apiPath).then((all) => {
@@ -169,7 +172,7 @@ GEAR_TYPES.forEach(({ slug, apiPath, label, hasISA }) => {
 // Webbing only. Weight (g/m) is a primary quick-compare spec for webbing, so it
 // sits in the card's inline row between width and breaking strength. Other types
 // keep weight on the detail spec sheet only. Unit is `g/m` to match specRows.ts
-// and the range filter — the webbing model stores grams per metre.
+// and the range filter — the webbing model stores grams per meter.
 
 describe('Card inline weight — Webbings', () => {
   let withWeight: Record<string, unknown> | undefined

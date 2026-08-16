@@ -47,6 +47,8 @@ GEAR_TYPES.forEach(({ slug, apiPath, label, hasISA, hasISAWarning, specFields })
         .and('contain.text', item.name as string)
     })
 
+    // Presence/absence only — the converted amount, the ≈ prefix and the
+    // "as sold" secondary line are currency.cy.ts's business.
     it('shows the price when it is set', () => {
       cy.request(`${api()}/${apiPath}/?limit=100`).then(({ body }) => {
         const withPrice = (body as Record<string, unknown>[]).find(i => i.price != null)

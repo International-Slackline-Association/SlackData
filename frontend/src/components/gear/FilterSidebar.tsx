@@ -11,6 +11,8 @@
 import { useMemo } from 'react'
 import type { GearTypeMeta } from '@/config/gearTypes'
 import { filterGroupsFor, type FilterGroupMeta } from '@/config/filterGroups'
+import { useCurrency } from '@/context/CurrencyContext'
+import { moneyPrecision, symbolFor } from '@/utils/money'
 import { derivePillOptions } from '@/utils/filter'
 import { rangeDomain } from '@/utils/range'
 import type { useUrlState } from '@/hooks/useUrlState'
@@ -123,23 +125,33 @@ function Pill({
 // so clear-all — which empties the URL — restores the full span automatically.
 function RangeControl({
   group,
+  field,
   unit,
+  step,
+  decimals,
   url,
   items,
+  extraParams,
 }: {
-  group: string
+  group: string           // URL key + data-group
+  field: string           // the item field read for the domain (== group, except price)
   unit?: string
+  step?: number           // overrides the data-derived step — 0.01 for money
+  decimals?: number       // fixed decimal places on the bound labels — 2 for money
   url: UrlState
   items: AnyItem[]
+  // Written alongside the bound in the same URL mutation. Price uses it to keep
+  // ?cur= beside the numbers, so a shared link's bounds stay readable.
+  extraParams?: Record<string, string>
 }) {
   const domain = useMemo(() => {
     const vals = items
-      .map(i => i[group])
+      .map(i => i[field])
       .filter(v => v != null && v !== '')
       .map(Number)
       .filter(v => Number.isFinite(v))
-    return rangeDomain(vals)
-  }, [items, group])
+    return rangeDomain(vals, step)
+  }, [items, field, step])
 
   const rawMin = url.params.get(`${group}_min`)
   const rawMax = url.params.get(`${group}_max`)
@@ -156,8 +168,13 @@ function RangeControl({
       hi={hi}
       unit={unit}
       step={domain.step}
-      onMinChange={v => url.setRangeBound(group, 'min', v <= domain.lo ? '' : String(v))}
-      onMaxChange={v => url.setRangeBound(group, 'max', v >= domain.hi ? '' : String(v))}
+      decimals={decimals}
+      onMinChange={v =>
+        url.setRangeBound(group, 'min', v <= domain.lo ? '' : String(v), extraParams)
+      }
+      onMaxChange={v =>
+        url.setRangeBound(group, 'max', v >= domain.hi ? '' : String(v), extraParams)
+      }
     />
   )
 }
@@ -180,6 +197,10 @@ export default function FilterSidebar({
   children?: React.ReactNode // webbing stretch widget slots in here
 }) {
   const groups = filterGroupsFor(meta.slug)
+  const { display, rates } = useCurrency()
+  // How finely the price slider moves, in the currency on screen — cents for the
+  // dollar, whole yen for the yen. Recomputed when either changes.
+  const money = moneyPrecision(display, rates)
 
   return (
     <aside
@@ -220,7 +241,20 @@ export default function FilterSidebar({
                 {g.type === 'pill' ? (
                   <PillGroup meta={g} url={url} items={items} />
                 ) : (
-                  <RangeControl group={g.group} unit={g.unit} url={url} items={items} />
+                  <RangeControl
+                    group={g.group}
+                    field={g.valueField ?? g.group}
+                    // The price slider's unit is the viewer's currency, so it
+                    // moves with the top-nav selector rather than being fixed —
+                    // and so do its step and decimals. Every other field keeps
+                    // its data-derived step.
+                    unit={g.currencyUnit ? symbolFor(display) : g.unit}
+                    step={g.currencyUnit ? money.step : undefined}
+                    decimals={g.currencyUnit ? money.decimals : undefined}
+                    url={url}
+                    items={items}
+                    extraParams={g.currencyUnit ? { cur: display } : undefined}
+                  />
                 )}
               </FilterGroup>
             ))}
