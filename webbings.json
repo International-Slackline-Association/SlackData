@@ -715,6 +715,8 @@
         "thickness": 2.5,
         "webbing_construction": "Flat",
         "isa_certified": false,
+        "priceMeter": 2.5,
+        "currency": "USD",
         "active": false
     },
     {
@@ -811,7 +813,7 @@
         "thickness": 3.2,
         "webbing_construction": "Flat",
         "isa_certified": false,
-        "priceMeter": 2.96,
+        "priceMeter": 3.5,
         "currency": "USD",
         "active": false
     },
@@ -869,7 +871,7 @@
         "thickness": 1.5,
         "webbing_construction": "Flat",
         "isa_certified": false,
-        "priceMeter": 1.61,
+        "priceMeter": 1.8,
         "currency": "USD",
         "active": true
     },
@@ -967,7 +969,7 @@
         "thickness": 2.46,
         "webbing_construction": "Flat",
         "isa_certified": false,
-        "priceMeter": 2.36,
+        "priceMeter": 2.6,
         "currency": "USD",
         "active": true
     },
@@ -1062,6 +1064,8 @@
         "date_introduced": null,
         "product_url": "https://www.balancecommunity.com/products/mantra-mk1",
         "width": 25,
+        "priceMeter": 2.4,
+        "currency": "USD",
         "active": false
     },
     {
@@ -1155,6 +1159,8 @@
         "date_introduced": null,
         "product_url": "https://www.balancecommunity.com/products/mantra-mk2",
         "width": 25,
+        "priceMeter": 2.4,
+        "currency": "USD",
         "active": false
     },
     {
@@ -1235,6 +1241,8 @@
         "thickness": 4.1,
         "webbing_construction": "Flat",
         "isa_certified": false,
+        "priceMeter": 2.4,
+        "currency": "USD",
         "active": false
     },
     {
@@ -1326,12 +1334,12 @@
         "weight": 76,
         "breakingStrength": 42,
         "date_introduced": null,
-        "product_url": "http://www.balancecommunity.com/mantra-mk4-flight",
+        "product_url": "https://www.balancecommunity.com/products/mantra-mk4",
         "width": 25,
         "thickness": 3.5,
         "webbing_construction": "Flat",
         "isa_certified": false,
-        "priceMeter": 2.46,
+        "priceMeter": 2.6,
         "currency": "USD",
         "active": true
     },
@@ -1655,11 +1663,11 @@
             }
         ],
         "date_introduced": null,
-        "product_url": "http://www.balancecommunity.com/spider-silk-mkii",
+        "product_url": "https://www.balancecommunity.com/products/spider-silk-mk2",
         "thickness": 2.5,
         "webbing_construction": "Flat",
         "isa_certified": false,
-        "priceMeter": 9.68,
+        "priceMeter": 6.0,
         "currency": "USD",
         "active": false
     },
@@ -3720,13 +3728,13 @@
         "weight": 48,
         "breakingStrength": 23.6,
         "date_introduced": 1503349200000,
-        "product_url": "https://www.slacktivity.com/pinktube-25m-200m",
+        "product_url": "https://slacktivity.com/shop/pinktube-slackline-tubular-webbing/",
         "width": 25.5,
         "webbing_construction": "Tubular",
         "isa_certified": true,
         "priceMeter": 1.83,
         "currency": "EUR",
-        "active": false
+        "active": true
     },
     {
         "name": "redTube",
@@ -6059,7 +6067,7 @@
         "product_url": "http://www.balancecommunity.com/11-16-slack-spec-tubular",
         "webbing_construction": "Tubular",
         "isa_certified": false,
-        "priceMeter": 1.18,
+        "priceMeter": 2.0,
         "currency": "USD",
         "active": true
     },
@@ -7595,7 +7603,7 @@
         "materialType": "Nylon",
         "width": 25.4,
         "weight": 48,
-        "breakingStrength": 21.5,
+        "breakingStrength": 22,
         "stretch": [
             {
                 "percent": 3.31,
@@ -8130,7 +8138,7 @@
         "isa_certified": false,
         "product_url": "https://balancecommunity.com/products/paradigm",
         "date_introduced": null,
-        "priceMeter": null,
+        "priceMeter": 2.4,
         "currency": "USD",
         "stretch": [
             {
@@ -8400,7 +8408,7 @@
         "breakingStrength": 25.0,
         "webbing_construction": "Tubular",
         "isa_certified": false,
-        "product_url": "https://balancecommunity.com/products/jelly-pro-desert",
+        "product_url": "https://www.balancecommunity.com/products/jelly-pro",
         "date_introduced": null,
         "priceMeter": 2.3,
         "currency": "USD",

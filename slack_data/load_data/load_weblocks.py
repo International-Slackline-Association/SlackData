@@ -80,8 +80,9 @@ def clean_weblock_data(weblock: dict[str, Any]) -> dict[str, Any]:
     cleaned_data["attachment_point"] = get_attachment_point(specs.get("Anchor connection type"))
     cleaned_data["isa_certified"] = parse_boolean_isa(specs.get("ISA approved"))
     
-    cleaned_data["price"] = parse_price_from_weblock(weblock)
-    cleaned_data["currency"] = parse_currency_from_weblock(weblock).value if parse_currency_from_weblock(weblock) else None
+    price, currency = parse_price_and_currency_from_weblock(weblock)
+    cleaned_data["price"] = price
+    cleaned_data["currency"] = currency.value if currency else None
 
     cleaned_data["date_introduced"] = weblock.get("date_introduced")
     cleaned_data["product_url"] = weblock.get("product_url")
@@ -220,58 +221,54 @@ def get_attachment_point(point_input: str | list[str] | None) -> AttachmentPoint
     else:
         return AttachmentPoint.OTHER
 
-def parse_price_from_weblock(weblock_data: dict) -> float | None:
-    """Extract price from weblock pricing data or specifications."""
-    # Try pricing array first
-    pricing = weblock_data.get("pricing", [])
-    if pricing and pricing[0].get("text"):
-        # Look for price pattern: number before currency code
-        text = pricing[0]["text"]
-        match = re.search(r'([0-9]+(?:\.[0-9]+)?)\s*(?:EUR|USD|GBP|CAD|PLN|ZAR|BRL|CZK|CHF|SEK)', text)
-        if match:
-            return float(match.group(1))
-    
-    # Try specifications as fallback
-    specs = weblock_data.get("specifications", {})
-    price_text = specs.get("Price (per unit)", "")
-    if price_text:
-        match = re.search(r'([0-9]+(?:\.[0-9]+)?)\s*(?:EUR|USD|GBP|CAD|PLN|ZAR|BRL|CZK|CHF|SEK)', price_text)
-        if match:
-            return float(match.group(1))
-    
-    return None
+# "1 unit and above : 43.00 EUR" → ("43.00", "EUR")
+PRICE_PAIR_RE = re.compile(r'([0-9]+(?:\.[0-9]+)?)\s*([A-Z]{3})')
+# "Converted from 219 CZK with the rate of 1 EUR = 24.90 CZK" → ("219", "CZK")
+CONVERTED_FROM_RE = re.compile(r'[Cc]onverted from\s*([0-9]+(?:\.[0-9]+)?)\s*([A-Z]{3})')
 
-def parse_currency_from_weblock(weblock_data: dict) -> Currency | None:
-    """Extract currency from weblock pricing data or specifications."""
-    
-    # Try pricing array first - check tooltip for original currency
-    pricing = weblock_data.get("pricing", [])
-    if pricing:
-        tooltip = pricing[0].get("tooltip", "")
-        try:
-            currency = get_currency(tooltip)
-        except ValueError:
-            currency = None
-        if currency: return currency
-        
-        # Check main text
-        text = pricing[0].get("text", "")
-        try:
-            currency = get_currency(text)
-        except ValueError:
-            currency = None
-        if currency: return currency
-    
-    # Try specifications as fallback
-    specs = weblock_data.get("specifications", {})
-    price_text = specs.get("Price (per unit)", "")
+
+def parse_amount_and_currency(text: str | None, pattern: re.Pattern = PRICE_PAIR_RE) -> tuple[float, Currency] | None:
+    """
+    Pull an amount and its currency out of one string, as a pair.
+
+    Price and currency must always come from the same match: SlackDB's `text`
+    quotes the price already converted to EUR while its `tooltip` quotes the
+    original, so reading the number from one and the code from the other
+    labels a EUR figure with a foreign currency (8.80 EUR → "8.80 CZK").
+    """
+    if not text:
+        return None
+    match = pattern.search(text)
+    if not match:
+        return None
     try:
-        currency = get_currency(price_text)
+        currency = get_currency(match.group(2))
     except ValueError:
-        currency = None
-    if currency: return currency
-    
-    return Currency.EUR
+        return None
+    return float(match.group(1)), currency
+
+
+def parse_price_and_currency_from_weblock(weblock_data: dict) -> tuple[float | None, Currency | None]:
+    """
+    Extract the weblock's price and currency from its pricing data or specifications.
+
+    The tooltip wins when present: it carries the manufacturer's *original*
+    price and currency, which the display layer re-converts at live rates,
+    rather than SlackDB's EUR figure frozen at whatever rate it scraped.
+    """
+    pricing = weblock_data.get("pricing") or []
+    if pricing:
+        found = (parse_amount_and_currency(pricing[0].get("tooltip"), CONVERTED_FROM_RE)
+                 or parse_amount_and_currency(pricing[0].get("text")))
+        if found:
+            return found
+
+    specs = weblock_data.get("specifications", {})
+    found = parse_amount_and_currency(specs.get("Price (per unit)"))
+    if found:
+        return found
+
+    return None, None
 
 def parse_boolean_isa(value_str: str | None) -> bool:
     if not value_str:
