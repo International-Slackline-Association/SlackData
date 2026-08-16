@@ -69,7 +69,10 @@ export default function GearDetailBody({
     <>
       <div className="grid gap-8 sm:grid-cols-[minmax(0,20rem)_1fr]">
         {/* `group` drives the carousel arrows, matching the listing cards. */}
-        <div className="group relative flex h-52 items-center justify-center self-start overflow-hidden rounded-lg bg-gray-50 sm:h-72">
+        <div
+          data-cy="detail-image-area"
+          className="group relative flex h-52 items-center justify-center self-start overflow-hidden rounded-lg bg-gray-50 sm:h-72"
+        >
           <CardImageCarousel urls={images} alt={String(item.name)} imgDataCy="detail-img" />
         </div>
 

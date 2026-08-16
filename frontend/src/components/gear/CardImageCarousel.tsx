@@ -9,6 +9,10 @@
 // to load: a broken image swaps its own slot for the placeholder rather than
 // dropping out of the set, so the carousel's length never contradicts
 // data-image-count on the image area.
+//
+// The host band must be `relative overflow-hidden` and give this component its
+// height — the image is sized off the band, and the blurred backdrop is scaled
+// past the band's edges (see below).
 
 import { useState } from 'react'
 
@@ -46,18 +50,47 @@ export default function CardImageCarousel({
       {failed.has(current) ? (
         <span className="text-xs text-gray-300">No image</span>
       ) : (
-        <img
-          data-cy={imgDataCy}
-          src={current}
-          alt={alt}
-          loading="lazy"
-          // object-cover (not contain) so the photo fills the image area top to
-          // bottom — product shots carry a lot of dead white space, and
-          // letterboxing them left grey bands above and below. Crops the long
-          // axis; these are centered product shots, so the subject survives.
-          className="h-full w-full object-cover"
-          onError={() => setFailed(prev => new Set(prev).add(current))}
-        />
+        <>
+          {/* The photo fits the band by HEIGHT, so a shot narrower than the band
+              (all of ours — 0.67–1.54 w/h against a ~2:1 band) leaves bars either
+              side. Filling them with a blurred, over-scaled copy of the same file
+              gives them the photo's own background colour, so a white product
+              shot reads as one white field instead of a picture in a grey gutter.
+              Purely decorative — the <img> below carries the alt text. The band
+              must clip this (it is scaled past its own edges to push the blur's
+              soft border out of frame).
+              An <img> and not a CSS background: backgrounds ignore loading=lazy,
+              so a 240-card grid would fetch every backdrop up front. Same src as
+              the image below, so it costs no extra request. */}
+          <img
+            data-cy="card-image-backdrop"
+            aria-hidden="true"
+            alt=""
+            src={current}
+            loading="lazy"
+            className="absolute inset-0 h-full w-full scale-110 object-cover blur-xl"
+          />
+          <img
+            data-cy={imgDataCy}
+            src={current}
+            alt={alt}
+            loading="lazy"
+            // contain, NOT cover: the whole photo is fitted inside the band and
+            // nothing is cropped. Our shots (0.67–1.54 w/h) are all narrower
+            // than the card band (~1.9), so in practice this is a fit by HEIGHT
+            // with bars left and right — which is the point. cover fit by WIDTH
+            // and sliced the top and bottom off every portrait shot.
+            //
+            // The box fills the band and object-fit does the letterboxing,
+            // rather than `h-full w-auto` sizing the box to the photo: Chromium
+            // won't transfer a percentage height through the intrinsic ratio to
+            // an auto width — as a flex child *or* absolutely positioned it lays
+            // the image out 0px wide, leaving nothing but the blurred backdrop.
+            // `relative` puts it in the positioned layer, above that backdrop.
+            className="relative h-full w-full object-contain"
+            onError={() => setFailed(prev => new Set(prev).add(current))}
+          />
+        </>
       )}
 
       {urls.length > 1 && (

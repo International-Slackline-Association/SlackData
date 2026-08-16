@@ -71,7 +71,9 @@ export default function GearCard({
       <div
         data-cy="gear-card-image-area"
         data-image-count={images.length}
-        className="group relative flex h-40 items-center justify-center bg-gray-50"
+        // overflow-hidden: the image fits the band by height and the blurred
+        // backdrop is scaled past its edges — both must be clipped to the band.
+        className="group relative flex h-40 items-center justify-center overflow-hidden bg-gray-50"
       >
         {/* Top-right stack: the highline class first (it's the fastest read on a
             webbing card), the ISA stamp under it. The bubble appears on
