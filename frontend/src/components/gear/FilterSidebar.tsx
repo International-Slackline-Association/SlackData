@@ -12,6 +12,7 @@ import { useMemo } from 'react'
 import type { GearTypeMeta } from '@/config/gearTypes'
 import { filterGroupsFor, type FilterGroupMeta } from '@/config/filterGroups'
 import { derivePillOptions } from '@/utils/filter'
+import { rangeDomain } from '@/utils/range'
 import type { useUrlState } from '@/hooks/useUrlState'
 import type { AnyItem } from '@/utils/format'
 import FilterGroup from './FilterGroup'
@@ -137,13 +138,7 @@ function RangeControl({
       .filter(v => v != null && v !== '')
       .map(Number)
       .filter(v => Number.isFinite(v))
-    // No data yet (still loading) → a zero-width domain so consumers can tell it
-    // isn't ready. Integer-only fields step by 1, otherwise 0.5 (no 0.1 noise).
-    if (!vals.length) return { lo: 0, hi: 0, step: 1 }
-    const lo = Math.min(...vals)
-    const hi = Math.max(...vals)
-    const step = vals.every(Number.isInteger) ? 1 : 0.5
-    return { lo, hi: hi > lo ? hi : lo + 1, step }
+    return rangeDomain(vals)
   }, [items, group])
 
   const rawMin = url.params.get(`${group}_min`)
