@@ -10,7 +10,8 @@
 //    across items — it's in whichever of fourteen currencies the seller charges:
 //      price         — the as-sold amount, exactly as stored
 //      currency      — what that amount is in (the one non-numeric member here)
-//      price_base    — normalized to the rate table's base; what SORT compares
+//      price_base    — normalized to the rate table's base AND to one item (a
+//                      pair price is halved); what SORT compares
 //      price_display — the same price in the viewer's currency; what the price
 //                      FILTER compares, and so what its bounds are checked against
 //    The last two are attached by GearListingPage (see money.ts).
@@ -24,7 +25,9 @@ export const CARD_DATA_FIELDS: Record<GearSlug, string[]> = {
   leashrings:    ['price', 'price_base', 'price_display', 'currency', 'weight', 'inner_diameter', 'outer_diameter', 'breaking_strength'],
   grips:         ['price', 'price_base', 'price_display', 'currency', 'weight', 'width_min', 'wll', 'mbs', 'common_slipping_threshold'],
   rollers:       ['price', 'price_base', 'price_display', 'currency', 'weight', 'breaking_strength'],
-  treepros:      ['price', 'price_base', 'price_display', 'currency', 'weight', 'width', 'length', 'thickness'],
+  // `price_unit` joins the price attributes on tree protectors: it is what
+  // separates the as-sold price from price_base, which is per protector.
+  treepros:      ['price', 'price_unit', 'price_base', 'price_display', 'currency', 'weight', 'width', 'length', 'thickness'],
   starterkits:   ['price', 'price_base', 'price_display', 'currency', 'weight', 'webbing_length', 'webbing_width'],
   tricklinekits: ['price', 'price_base', 'price_display', 'currency', 'weight', 'webbing_length', 'webbing_width'],
   // upcoming types have no data / cards yet

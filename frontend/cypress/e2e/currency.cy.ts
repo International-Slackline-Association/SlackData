@@ -331,7 +331,19 @@ describe('Units survive conversion', () => {
       if (!pair) return
 
       cy.visit(`/treepros/${pair.id}?cur=USD`)
-      cy.get('[data-cy="detail-price"]').should('contain.text', 'pair')
+      cy.get('[data-cy="detail-price"]').should('contain.text', '/pair')
+    })
+  })
+
+  // The card is where the qualifier matters most: two cards reading "$45" are
+  // not the same offer when one of them is a pair.
+  it('qualifies tree protector prices on the cards too', () => {
+    cy.visit('/treepros?cur=USD')
+    cy.get('[data-cy="gear-card"]').each($card => {
+      const price = $card.find('[data-cy="gear-card-price"]')
+      const unit = $card.attr('data-price-unit')
+      if (!price.length || !unit) return
+      expect(price.text()).to.contain(`/${unit}`)
     })
   })
 
@@ -348,6 +360,47 @@ describe('Units survive conversion', () => {
         expect(shown).to.be.closeTo(expected, 1)
       })
     })
+  })
+
+  // ── Sorting tree protectors runs on unit cost ────────────────────────────
+
+  it('halves a pair price for the sort key, and only there', () => {
+    cy.visit('/treepros?cur=EUR')
+    cy.get('[data-cy="gear-card"]').each($card => {
+      const price = Number($card.attr('data-price'))
+      const base = Number($card.attr('data-price-base'))
+      const unit = $card.attr('data-price-unit')
+      if (!Number.isFinite(price) || !Number.isFinite(base)) return
+
+      // data-price is untouched — the as-sold amount, whatever the unit.
+      // data-price-base is that amount per protector, in the base currency.
+      const asBase = convert(price, String($card.attr('data-currency')), 'EUR')
+      expect(base).to.be.closeTo(asBase / (unit === 'pair' ? 2 : 1), 0.01)
+    })
+  })
+
+  it('ranks an 80 pair below a 50 single when sorting price low→high', () => {
+    cy.visit('/treepros?cur=EUR')
+    cy.get('[data-cy="sort-dropdown"]').click()
+    cy.get('[data-cy="sort-option"][data-field="price"][data-direction="asc"]').click()
+
+    // Ascending on unit cost — the invariant holds for any rate table, so it
+    // does not depend on the stub's numbers. `should` (not `then`) so the
+    // assertion retries past the re-render the click triggers.
+    cy.get('[data-cy="gear-card"]').should($cards => {
+      const bases = [...$cards]
+        .map(el => el.getAttribute('data-price-base'))
+        .filter((v): v is string => v != null && v !== '')
+        .map(Number)
+      expect(bases).to.deep.equal([...bases].sort((a, b) => a - b))
+    })
+  })
+
+  it('says the price sort is per protector, so the order is not a surprise', () => {
+    cy.visit('/treepros')
+    cy.get('[data-cy="sort-dropdown"]').click()
+    cy.get('[data-cy="sort-option"][data-field="price"][data-direction="asc"]')
+      .should('contain.text', 'per protector')
   })
 })
 
