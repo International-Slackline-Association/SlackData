@@ -1196,8 +1196,8 @@
         },
         "date_introduced": null,
         "name": "Chili",
-        "product_url": "https://renegadejuggling.com/products/spider-chili-line-lock",
-        "active": true,
+        "product_url": null,
+        "active": false,
         "style": "Tensionable Weblock"
     },
     {
@@ -1807,13 +1807,7 @@
         },
         "pricing": [
             {
-                "text": "1 - 1 units : 39.95 EUR"
-            },
-            {
-                "text": "2 - 3 units : 36.95 EUR"
-            },
-            {
-                "text": "4 units and above : 33.95 EUR"
+                "text": "1 unit and above : 39.00 USD"
             }
         ],
         "specifications": {
@@ -1839,7 +1833,7 @@
             "ISA approved": "N/A",
             "Date introduced": "N/A",
             "Manufacturer": "Spider slacklines",
-            "Price (per unit)": "1 - 1 units : 39.95 EUR"
+            "Price (per unit)": "1 unit and above : 39.00 USD"
         },
         "date_introduced": null,
         "name": "Lime",
