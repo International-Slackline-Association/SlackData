@@ -3,6 +3,7 @@
 import { Outlet } from 'react-router-dom'
 import { useCurrency } from '@/context/CurrencyContext'
 import TopNav from './TopNav'
+import SiteFooter from './SiteFooter'
 
 // Shown when rates are missing or the backend flagged them stale. Prices still
 // render — as sold, in each item's own currency — so this explains why the page
@@ -23,12 +24,16 @@ export default function AppLayout() {
   const { stale } = useCurrency()
 
   return (
-    <div className="min-h-screen" style={{ background: '#F8F7F4' }}>
+    // flex column so the footer sits at the bottom of the viewport on short
+    // pages instead of riding up under the content. `main` needs w-full for its
+    // own max-w-7xl mx-auto to keep centring inside the flex parent.
+    <div className="flex min-h-screen flex-col" style={{ background: '#F8F7F4' }}>
       <TopNav />
       {stale && <StaleRatesNotice />}
-      <main className="max-w-7xl mx-auto px-6 py-8">
+      <main className="mx-auto w-full max-w-7xl flex-1 px-6 py-8">
         <Outlet />
       </main>
+      <SiteFooter />
     </div>
   )
 }

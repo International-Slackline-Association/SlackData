@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { fetchGearItem } from '@/api/gear'
 import GearDetailBody from '@/components/gear/GearDetailBody'
+import SafetyNotice from '@/components/layout/SafetyNotice'
 import { getGearType } from '@/config/gearTypes'
 import { type AnyItem } from '@/utils/format'
 import NotFoundPage from './NotFoundPage'
@@ -59,6 +60,12 @@ export default function GearDetailPage() {
       <article className="mt-4 rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
         <GearDetailBody item={item} meta={meta} />
       </article>
+
+      {/* Sits below the spec sheet, on the page where someone is reading the
+          individual numbers they might act on. Deliberately here rather than in
+          GearDetailBody: that body is shared with the listing's Detailed view,
+          which would repeat this callout once per visible item. */}
+      <SafetyNotice variant="callout" className="mt-4" />
     </div>
   )
 }

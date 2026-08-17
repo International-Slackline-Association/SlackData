@@ -1,7 +1,8 @@
 // Route table. Route ranking (not JSX order) resolves overlaps: the static
-// segments `/manufacturers` and `:slug/compare` outrank the dynamic `:slug`
-// and `:slug/:id` patterns — so `/manufacturers/:id` (brand detail) wins over
-// `:slug/:id` (gear detail) for a URL like /manufacturers/7.
+// segments `/manufacturers`, `/safety` and `:slug/compare` outrank the dynamic
+// `:slug` and `:slug/:id` patterns — so `/manufacturers/:id` (brand detail) wins
+// over `:slug/:id` (gear detail) for a URL like /manufacturers/7, and `/safety`
+// resolves to the safety page rather than being read as a gear-type slug.
 
 import { Navigate, Route, Routes } from 'react-router-dom'
 import { CurrencyProvider } from '@/context/CurrencyContext'
@@ -11,6 +12,7 @@ import GearDetailPage from '@/pages/GearDetailPage'
 import ComparePage from '@/pages/ComparePage'
 import ManufacturersPage from '@/pages/ManufacturersPage'
 import BrandDetailPage from '@/pages/BrandDetailPage'
+import SafetyPage from '@/pages/SafetyPage'
 import NotFoundPage from '@/pages/NotFoundPage'
 import './index.css'
 
@@ -23,6 +25,7 @@ export default function App() {
       <Routes>
         <Route element={<AppLayout />}>
           <Route index element={<Navigate to="/webbings" replace />} />
+          <Route path="safety" element={<SafetyPage />} />
           <Route path="manufacturers" element={<ManufacturersPage />} />
           <Route path="manufacturers/:id" element={<BrandDetailPage />} />
           <Route path=":slug/compare" element={<ComparePage />} />

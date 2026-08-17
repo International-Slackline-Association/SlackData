@@ -25,6 +25,7 @@ import SortDropdown from '@/components/gear/SortDropdown'
 import GearGrid from '@/components/gear/GearGrid'
 import GearDetailedList from '@/components/gear/GearDetailedList'
 import CompareBar from '@/components/gear/CompareBar'
+import DataAccuracyNote from '@/components/layout/DataAccuracyNote'
 import NotFoundPage from './NotFoundPage'
 
 type View = 'cards' | 'detailed'
@@ -323,6 +324,9 @@ export default function GearListingPage() {
             <span data-cy="item-count" className="text-sm text-gray-500">
               {visible.length} {visible.length === 1 ? 'item' : 'items'}
             </span>
+            {/* Next to the count: the moment a visitor reads how much data there
+                is, is the moment to say what it's worth. */}
+            <DataAccuracyNote variant="inline" />
 
             <div className="ml-auto flex items-center gap-3">
               <div className="flex overflow-hidden rounded-lg border border-gray-300">
