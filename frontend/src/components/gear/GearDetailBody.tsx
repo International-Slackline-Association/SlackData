@@ -59,9 +59,7 @@ export default function GearDetailBody({
   compareDisabled?: boolean
   onToggleCompare?: (id: number) => void
 }) {
-  // `qualifier: true` — the detail page has room for the "per pair" / "per
-  // single" note that the card omits.
-  const price = useCurrency().priceText(item, meta.slug, { qualifier: true })
+  const price = useCurrency().priceText(item, meta.slug)
   const images = imageUrls(meta.slug, String(item.brand_name), String(item.name))
   const isaWarning = meta.hasISAWarning ? item.isa_warning : null
 

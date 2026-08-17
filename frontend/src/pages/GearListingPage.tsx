@@ -167,8 +167,10 @@ export default function GearListingPage() {
 
   // Every item gains two derived money fields, the same way the stretch widget
   // attaches stretch_percent below:
-  //   price_base    — normalized to the rate table's base; what SORT compares,
-  //                   so a 5377 RUB grip and an 89 USD one rank correctly.
+  //   price_base    — normalized to the rate table's base AND to one item; what
+  //                   SORT compares, so a 5377 RUB grip and an 89 USD one rank
+  //                   correctly, and an €80 pair of tree protectors ranks below
+  //                   a €50 single because it is €40 a protector.
   //   price_display — the same price in the viewer's currency; what the price
   //                   FILTER compares, so its bounds mean what the sidebar says.
   // Both are null when the item has no price or its currency isn't in the table,

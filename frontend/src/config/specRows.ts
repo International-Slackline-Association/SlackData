@@ -25,7 +25,6 @@ export type SpecRender = 'text' | 'chips' | 'stretch'
 // "€89" or "≈ $96" depending on who's looking.
 export type PriceFormatter = (
   item: AnyItem,
-  opts?: { qualifier?: boolean },
 ) => { text: string; original: string | null } | null
 
 export interface SpecRowDef {
@@ -55,10 +54,10 @@ function priceRow(label = 'Price'): SpecRowDef {
       if (item.price == null) return ''
       // No formatter (a caller that doesn't do money) → fall back to the raw
       // as-sold figure rather than rendering nothing.
-      const parts = money?.(item, { qualifier: true })
+      const parts = money?.(item)
       return parts ? parts.text : `${item.price} ${item.currency ?? ''}`.trim()
     },
-    secondary: (item, money) => money?.(item, { qualifier: true })?.original ?? '',
+    secondary: (item, money) => money?.(item)?.original ?? '',
   }
 }
 

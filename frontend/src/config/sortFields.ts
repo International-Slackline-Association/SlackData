@@ -19,9 +19,14 @@ export const UNIVERSAL_SORT_FIELDS: SortFieldMeta[] = [
   { field: 'weight', label: 'Weight', nullLast: true },
 ]
 
-// Webbing is priced per meter, so its price sort is a different quantity from
-// every other type's and says so.
-const PRICE_LABELS: Partial<Record<GearSlug, string>> = { webbings: 'Price per meter' }
+// Two types don't price "one item", and their price sort is therefore a
+// different quantity from every other type's — so it says so. Webbing is priced
+// per meter; tree protectors come singly or in pairs and rank on what one
+// protector costs (see DESIGN.md § Units survive conversion).
+const PRICE_LABELS: Partial<Record<GearSlug, string>> = {
+  webbings: 'Price per meter',
+  treepros: 'Price per protector',
+}
 
 export const EXTRA_SORT_FIELDS: Record<GearSlug, SortFieldMeta[]> = {
   webbings: [

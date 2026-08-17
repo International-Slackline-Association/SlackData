@@ -94,9 +94,19 @@ Two gear types price something other than "one item", and converting must not fl
   `/m` suffix — `≈ $2.60 /m` — and their filter and sort labels read **"Price per meter"**. Without
   it a €2.40 webbing sits beside an €89 weblock with nothing to tell them apart, which is misleading
   now and worse once price is a headline filter.
-- **Tree protectors** may be sold singly or in pairs (`price_unit`). The qualifier is appended —
-  `≈ $45 per pair` — and pair prices are **never silently halved**: the pair is the product. The
-  existing "Sold As" pill is how a viewer scopes that comparison.
+- **Tree protectors** may be sold singly or in pairs (`price_unit`). The unit is appended to **every**
+  rendering of the price — card, detail and compare alike — as `≈ $45 /pair` or `≈ $22 /single`, the
+  same shape as webbing's `/m`. An unqualified number on a card is the misleading case: two cards
+  showing "$45" are not the same offer when one is a pair.
+- **Sorting tree protectors by price ranks on unit cost**: the sort key divides a pair price by two,
+  so an €80 pair (€40 a protector) sits below a €50 single. The sort label says **"Price per
+  protector"** so the ordering isn't a surprise. Only the *sort key* is normalized —
+
+  - the **displayed** price is always the price as sold, never halved (the pair is what you buy);
+  - the **price filter** also compares the as-sold price, so its bounds mean exactly what the
+    numbers on the cards say.
+
+  The "Sold As" pill is still how a viewer scopes to one kind of offer.
 
 Because per-meter and absolute prices are different quantities, they must never be pooled in one
 range — which is fine today, since every listing shows exactly one gear type.

@@ -38,7 +38,7 @@ export default function ComparePage() {
   // 5377 RUB grip against an 89 USD one side by side is exactly the question
   // this page exists to answer, and raw amounts can't answer it.
   const money = useCallback<PriceFormatter>(
-    (item, opts) => priceText(item, meta?.slug ?? '', opts),
+    item => priceText(item, meta?.slug ?? ''),
     [priceText, meta?.slug],
   )
 

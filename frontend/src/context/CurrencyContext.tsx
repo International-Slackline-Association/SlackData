@@ -14,7 +14,14 @@ import { createContext, useCallback, useContext, useEffect, useMemo, useState } 
 import { useSearchParams } from 'react-router-dom'
 import { fetchRates } from '@/api/fx'
 import { detectCurrency } from '@/utils/detectCurrency'
-import { convertPrice, formatMoney, toBase, type FxRates } from '@/utils/money'
+import {
+  convertPrice,
+  formatMoney,
+  perUnit,
+  priceSuffix,
+  toBase,
+  type FxRates,
+} from '@/utils/money'
 import { isSelectableCurrency } from '@/types/enums'
 import type { AnyItem } from '@/utils/format'
 
@@ -35,12 +42,15 @@ interface CurrencyValue {
   rates: FxRates | null
   /** No usable rates, or rates the backend flagged as stale. */
   stale: boolean
-  /** Price in the rate table's base currency — what sort and filter run on. */
+  /**
+   * Price in the rate table's base currency, per single item — what sort runs
+   * on. A pair-priced tree protector is halved so it ranks on unit cost.
+   */
   basePrice: (item: AnyItem) => number | null
-  /** Price in the display currency, as a number. */
+  /** Price in the display currency, as sold — what the price filter runs on. */
   displayPrice: (item: AnyItem) => number | null
   /** Fully formatted price, or null when the item has no price at all. */
-  priceText: (item: AnyItem, slug: string, opts?: { qualifier?: boolean }) => PriceParts | null
+  priceText: (item: AnyItem, slug: string) => PriceParts | null
 }
 
 const CurrencyContext = createContext<CurrencyValue | null>(null)
@@ -103,24 +113,17 @@ export function CurrencyProvider({ children }: { children: React.ReactNode }) {
   }, [])
 
   const value = useMemo<CurrencyValue>(() => {
-    const basePrice = (item: AnyItem) => toBase(item.price, item.currency, rates)
+    // Sorting compares what one item costs, so a pair price is divided by two
+    // here and only here — the price on screen is always the price as sold.
+    const basePrice = (item: AnyItem) =>
+      perUnit(toBase(item.price, item.currency, rates), item.price_unit)
     const displayPrice = (item: AnyItem) => convertPrice(item.price, item.currency, display, rates)
 
-    const priceText = (
-      item: AnyItem,
-      slug: string,
-      opts?: { qualifier?: boolean },
-    ): PriceParts | null => {
+    const priceText = (item: AnyItem, slug: string): PriceParts | null => {
       if (item.price == null || item.price === '') return null
 
       const currency = typeof item.currency === 'string' ? item.currency : null
-      // Webbing is priced per meter (the seed's `priceMeter`), which the model
-      // field name doesn't say. Without this suffix a €2.40 webbing reads like
-      // a €2.40 product next to an €89 weblock.
-      const perMeter = slug === 'webbings' ? ' /m' : ''
-      const qualifier =
-        opts?.qualifier && item.price_unit ? ` per ${String(item.price_unit)}` : ''
-      const suffix = `${perMeter}${qualifier}`
+      const suffix = priceSuffix(slug, item.price_unit)
 
       const converted = displayPrice(item)
       // No rates, an uncovered currency, or the item is already in the display
