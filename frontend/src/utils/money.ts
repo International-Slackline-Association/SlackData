@@ -57,6 +57,40 @@ export function toBase(
   return rate == null ? null : amount / rate
 }
 
+/**
+ * How many items one price buys. Tree protectors carry a `price_unit` and are
+ * sold either singly or in pairs; everything else prices one thing.
+ *
+ * Only the sort key divides by this (see `perUnit`) — a displayed price is
+ * always the price as sold.
+ */
+export function unitCount(priceUnit: unknown): number {
+  return priceUnit === 'pair' ? 2 : 1
+}
+
+/**
+ * A price per single item, for ranking only: an €80 pair of tree protectors is
+ * €40 a piece and belongs below a €50 single, which is the order someone
+ * sorting by price is asking for. Null in, null out.
+ */
+export function perUnit(price: number | null, priceUnit: unknown): number | null {
+  return price == null ? null : price / unitCount(priceUnit)
+}
+
+/**
+ * The suffix that keeps a price honest about what it buys — appended to every
+ * rendering of it, card, detail and compare alike.
+ *
+ * Webbing is priced per meter (the seed's `priceMeter`), which the model field
+ * name doesn't say; without `/m` a €2.40 webbing reads like a €2.40 product
+ * next to an €89 weblock. Tree protectors say whether the money buys one or
+ * two, which is the difference between the sticker price and the unit price.
+ */
+export function priceSuffix(slug: string, priceUnit: unknown): string {
+  if (slug === 'webbings') return ' /m'
+  return typeof priceUnit === 'string' && priceUnit ? ` /${priceUnit}` : ''
+}
+
 /** Convert between two currencies via the base. Null when either side is unknown. */
 export function convertPrice(
   price: unknown,

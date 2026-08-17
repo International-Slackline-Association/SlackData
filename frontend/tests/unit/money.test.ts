@@ -7,7 +7,13 @@
 
 import { test, describe } from 'node:test'
 import assert from 'node:assert/strict'
-import { moneyPrecision, type FxRates } from '../../src/utils/money.ts'
+import {
+  moneyPrecision,
+  perUnit,
+  priceSuffix,
+  unitCount,
+  type FxRates,
+} from '../../src/utils/money.ts'
 import { rangeDomain } from '../../src/utils/range.ts'
 
 // EUR-based, the shape /fx/rates serves. Values are close to real ones so the
@@ -171,5 +177,51 @@ describe('moneyPrecision — against the Cypress stub table', () => {
     // moves to 1.0, RUB crosses into whole units and the e2e expectations move.
     assert.equal(moneyPrecision('RUB', STUB).decimals, 1)
     assert.equal(moneyPrecision('RUB', rates({ USD: 1.0, RUB: 100 })).decimals, 0)
+  })
+})
+
+describe('price units — what one price actually buys', () => {
+  test('a pair buys two, everything else buys one', () => {
+    assert.equal(unitCount('pair'), 2)
+    assert.equal(unitCount('single'), 1)
+    assert.equal(unitCount(null), 1)
+    assert.equal(unitCount(undefined), 1)
+    // Nothing else in the catalogue carries a price_unit; an unknown value must
+    // never quietly divide a price.
+    assert.equal(unitCount('box of 4'), 1)
+  })
+
+  test('perUnit ranks an 80 pair below a 50 single', () => {
+    assert.equal(perUnit(80, 'pair'), 40)
+    assert.equal(perUnit(50, 'single'), 50)
+    assert.ok(perUnit(80, 'pair')! < perUnit(50, 'single')!)
+  })
+
+  test('perUnit passes an unpriced item straight through as null', () => {
+    assert.equal(perUnit(null, 'pair'), null)
+    assert.equal(perUnit(null, null), null)
+  })
+
+  test('perUnit leaves gear without a price_unit alone', () => {
+    assert.equal(perUnit(89, null), 89)
+    assert.equal(perUnit(2.4, undefined), 2.4)
+  })
+
+  test('the suffix says what the money buys', () => {
+    assert.equal(priceSuffix('webbings', null), ' /m')
+    assert.equal(priceSuffix('treepros', 'pair'), ' /pair')
+    assert.equal(priceSuffix('treepros', 'single'), ' /single')
+  })
+
+  test('no price_unit, no suffix — a weblock price stands alone', () => {
+    assert.equal(priceSuffix('weblocks', null), '')
+    assert.equal(priceSuffix('treepros', null), '')
+    assert.equal(priceSuffix('treepros', ''), '')
+  })
+
+  test('webbing is per meter whatever else it carries', () => {
+    // The /m rule is about the field mapping (`priceMeter`), not price_unit,
+    // so it must not be overridden by one.
+    assert.equal(priceSuffix('webbings', 'pair'), ' /m')
   })
 })
