@@ -713,6 +713,52 @@ that left it engaged could still land on an empty grid.
 
 ---
 
+## Safety & Data Notices
+
+Two standing notices, required before launch ([LAUNCH_RUNBOOK.md §10](LAUNCH_RUNBOOK.md)). The
+**copy is not owned by the frontend** — [SAFETY_AND_ACCURACY.md](SAFETY_AND_ACCURACY.md) is the source
+text, reviewed and approved by the ISA because it is published under their name. Change the wording
+there first, then mirror it into the components.
+
+Each notice is **one component rendered in two places**, with a `variant` prop for presentation only,
+so the wording physically cannot drift between surfaces (same reasoning as `LegacyBadge`).
+
+| Notice | Component | Placements |
+|---|---|---|
+| Safety disclaimer | `layout/SafetyNotice.tsx` | site footer (`variant="footer"`), gear detail page (`variant="callout"`) |
+| Data-accuracy note | `layout/DataAccuracyNote.tsx` | site footer (`variant="footer"`), listing toolbar beside the item count (`variant="inline"`) |
+
+- **Neither notice is dismissible.** A notice with a close button is one most readers have already
+  closed by the time it matters. There is no "don't show again" and no local-storage state.
+- **Footer** (`data-cy="site-footer"`) — white, top border, on every page. `AppLayout` is a flex
+  column so it settles at the bottom of short pages rather than riding up under the content.
+- **Detail-page callout** — amber panel (`amber-50` / `amber-200`), below the spec sheet, where
+  someone is reading the individual numbers they might act on. It lives in `GearDetailPage`, **not**
+  in `GearDetailBody`: that body is shared with the listing's Detailed view, which would otherwise
+  repeat the callout once per visible item.
+- **Listing inline note** — small gray text immediately after `data-cy="item-count"`. Reading how
+  much data there is, is the moment to say what it's worth.
+
+### `/safety` page
+
+Full safety text, static JSX (no markdown renderer — one route doesn't justify the dependency).
+Covers: breaking strength is not a working load (and where to find one), stretch curves are
+indicative and not comparable between brands, certification/warning data is a periodically-updated
+copy rather than a live feed, Legacy gear is not a fitness-for-use claim, and slacklining carries
+risk.
+
+The route is a **static** segment, so React Router ranks it above the dynamic `:slug` gear-type
+pattern — `/safety` must not be read as a gear type. It links out to the ISA's own warnings database
+as the authoritative source.
+
+> **Known data limitation the copy has to work around:** `isa_certified` is `bool = False` on every
+> gear model, so the data cannot distinguish *not certified* from *unknown*, and every unrecorded
+> product reads as uncertified. The `/safety` copy addresses this in prose. The real fix is a nullable
+> three-state field — a model change, tracked in LAUNCH_RUNBOOK.md §10, deliberately out of scope for
+> launch.
+
+---
+
 ## What's NOT in scope yet
 
 - User accounts / login
