@@ -54,8 +54,11 @@ export default function GearCard({
   // Every image we hold for this product — the card browses the whole set.
   const images = imageUrls(slug, String(item.brand_name), String(item.name))
 
+  // A spec is either a plain field + unit, or a composite that folds several
+  // fields into one segment (weblock width range). Empty segments drop out, so
+  // a missing value never leaves a dangling " · " separator.
   const specParts = specs
-    .map(s => formatValue(item[s.field], s.unit))
+    .map(s => (s.value ? s.value(item) : formatValue(item[s.field], s.unit)))
     .filter(v => v !== '')
 
   // Webbing stretch % at the active kN (set by the listing page). Emitted only
