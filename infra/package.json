@@ -1,0 +1,9 @@
+{
+  "name": "slackdata-infra",
+  "private": true,
+  "description": "Pins the Serverless Framework version used to deploy the SlackData stack. Without this, `npx serverless` floats to whatever major is current, and v3 vs v4 differ in a way that stops a deploy dead: v4 requires an authenticated Serverless Framework account, v3 requires nothing.",
+  "comment": "TEMPORARY: pinned to v3 so the first launch is not blocked on deciding who owns the Serverless Framework account (see LAUNCH_RUNBOOK.md 5.3 and 11). v4 is the intended destination; the serverless.yml in this directory is compatible with both, so migrating is this version bump plus exporting SERVERLESS_ACCESS_KEY. v3 is EOL and receives no security updates - do not leave it here indefinitely.",
+  "devDependencies": {
+    "serverless": "^3"
+  }
+}

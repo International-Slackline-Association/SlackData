@@ -10,16 +10,34 @@
 # The frontend is built + synced separately (see infra/README.md) — Serverless
 # manages the API + AWS resources, not the SPA upload.
 #
-# NOTE: items marked TODO(isa) need the ISA account's specifics (region, custom
-# domain, ACM certificate). The API + S3 + CloudFront default setup deploys as-is.
+# The ISA-specific values (region, custom domain, ACM certificate) are filled in
+# — see LAUNCH_RUNBOOK.md §5.2. This template deploys as-is into that account.
 
 service: slackdata
 
 provider:
   name: aws
-  region: ${opt:region, 'eu-central-1'}          # TODO(isa): confirm region
+  region: ${opt:region, 'eu-central-1'}          # confirmed with the ISA (2026-08-16)
   stage: ${opt:stage, 'prod'}
-  architecture: x86_64                             # match your build host; arm64 is cheaper
+  # Use a pre-created Lambda execution role instead of creating one.
+  #
+  # This deploy's identity (SSO permission set `slackdata-dev-access`) denies
+  # iam:CreateRole under a `DenyIdentitySelfEscalation` guardrail — deliberately,
+  # so a compromised dev session can't mint itself an admin role. So the ISA
+  # creates this role once and we reference it; the name reproduces exactly what
+  # Serverless would have auto-generated, matching the account's other services
+  # (slackmap-prod-eu-central-1-lambdaRole, isa-tools-prod-…).
+  #
+  # The role needs CloudWatch Logs write and nothing else: the catalog is a
+  # read-only SQLite file baked into the image, and the app makes no AWS API
+  # calls at all. See LAUNCH_RUNBOOK.md §5.4.
+  iam:
+    role: arn:aws:iam::${aws:accountId}:role/${self:service}-${self:provider.stage}-${aws:region}-lambdaRole
+  architecture: x86_64                             # matches this WSL2 build host (x86_64).
+                                                   # Deploying from Apple silicon? Switch this and
+                                                   # the image to arm64, or build --platform
+                                                   # linux/amd64 — a mismatch gives a Lambda that
+                                                   # dies at runtime with an exec-format error.
   ecr:
     images:
       api:
@@ -42,7 +60,10 @@ resources:
     WebBucket:
       Type: AWS::S3::Bucket
       Properties:
-        BucketName: ${self:service}-web-${self:provider.stage}   # TODO(isa): globally-unique name
+        # S3 bucket names are a single global namespace, so "slackdata-web-prod"
+        # is very likely taken by someone else. Suffixing the account id keeps it
+        # deterministic (same name on every deploy) and unique to this account.
+        BucketName: ${self:service}-web-${self:provider.stage}-${aws:accountId}
 
     WebBucketPolicy:
       Type: AWS::S3::BucketPolicy
@@ -119,11 +140,18 @@ resources:
         DistributionConfig:
           Enabled: true
           DefaultRootObject: index.html
-          # TODO(isa): custom domain + cert
-          # Aliases: [slackdata.slackline.international]
-          # ViewerCertificate:
-          #   AcmCertificateArn: <us-east-1 ACM cert ARN>
-          #   SslSupportMethod: sni-only
+          # Custom domain. The cert is an existing ACM cert in us-east-1 (a hard
+          # CloudFront requirement, independent of the stack's own region), issued
+          # for the apex + www and validated through the slackdata.org hosted zone
+          # in this account. The ARN is built from ${aws:accountId} rather than
+          # written out, to keep the account id out of this public repo.
+          Aliases:
+            - slackdata.org
+            - www.slackdata.org
+          ViewerCertificate:
+            AcmCertificateArn: arn:aws:acm:us-east-1:${aws:accountId}:certificate/577c4142-3d31-4229-b53f-2f89e54287da
+            SslSupportMethod: sni-only
+            MinimumProtocolVersion: TLSv1.2_2021
           Origins:
             - Id: web-s3
               DomainName: !GetAtt WebBucket.RegionalDomainName
