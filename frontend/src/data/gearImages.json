@@ -206,10 +206,6 @@
     "eqb_aidman": [
       "eqb_aidman.jpg"
     ],
-    "eqb_rollex": [
-      "eqb_rollex.jpg",
-      "eqb_rollex-2.jpg"
-    ],
     "landcruise_highslide-2-0": [
       "landcruise_highslide-2-0.jpg"
     ],
@@ -1100,6 +1096,9 @@
       "slackinov_abysses-bounce.jpg",
       "slackinov_abysses-bounce-2.jpg",
       "slackinov_abysses-bounce-3.jpg"
+    ],
+    "slackinov_boomboom": [
+      "slackinov_boomboom.jpg"
     ],
     "slackinov_cosmic": [
       "slackinov_cosmic.jpg"
