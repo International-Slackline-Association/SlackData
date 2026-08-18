@@ -19,13 +19,46 @@ import { displayPoints } from '@/utils/stretch'
 // in SpecTable (color-name chips, the stretch curve table).
 export type SpecRender = 'text' | 'chips' | 'stretch'
 
+// Formats an item's price in the viewer's display currency. Supplied by the
+// caller (from CurrencyContext) rather than imported, because a row's value is
+// otherwise a pure function of the item — and money isn't: the same item reads
+// "€89" or "≈ $96" depending on who's looking.
+export type PriceFormatter = (
+  item: AnyItem,
+) => { text: string; original: string | null } | null
+
 export interface SpecRowDef {
   field: string
   label: string
   unit?: string
   render?: SpecRender
   // Display value; '' means "omit this row".
-  value: (item: AnyItem) => string
+  value: (item: AnyItem, money?: PriceFormatter) => string
+  // Small gray line beneath the value in a compare cell — the as-sold price.
+  secondary?: (item: AnyItem, money?: PriceFormatter) => string
+  // Declared for the compare table but suppressed on the detail page, where the
+  // price already sits in the header block above the spec grid.
+  compareOnly?: boolean
+}
+
+// The shared Price row, first in every gear type's table. This is what puts
+// price on the compare page at all: compare renders SPEC_ROWS, so before this
+// existed you could compare two weblocks on weight and breaking strength but
+// not on what they cost.
+function priceRow(label = 'Price'): SpecRowDef {
+  return {
+    field: 'price',
+    label,
+    compareOnly: true,
+    value: (item, money) => {
+      if (item.price == null) return ''
+      // No formatter (a caller that doesn't do money) → fall back to the raw
+      // as-sold figure rather than rendering nothing.
+      const parts = money?.(item)
+      return parts ? parts.text : `${item.price} ${item.currency ?? ''}`.trim()
+    },
+    secondary: (item, money) => money?.(item)?.original ?? '',
+  }
 }
 
 // Plain field lookup, unit appended.
@@ -68,6 +101,7 @@ const stretchRow: SpecRowDef = {
 
 export const SPEC_ROWS: Record<GearSlug, SpecRowDef[]> = {
   webbings: [
+    priceRow('Price per meter'),
     plain('material', 'Material'),
     plain('webbing_construction', 'Construction'),
     plain('width', 'Width', 'mm'),
@@ -80,6 +114,7 @@ export const SPEC_ROWS: Record<GearSlug, SpecRowDef[]> = {
     { ...plain('colors', 'Colors'), render: 'chips' },
   ],
   weblocks: [
+    priceRow(),
     plain('style', 'Style'),
     plain('material', 'Material'),
     widthRange,
@@ -90,6 +125,7 @@ export const SPEC_ROWS: Record<GearSlug, SpecRowDef[]> = {
     { ...plain('colors', 'Colors'), render: 'chips' },
   ],
   leashrings: [
+    priceRow(),
     plain('material', 'Material'),
     plain('inner_diameter', 'Inner Diameter', 'mm'),
     plain('outer_diameter', 'Outer Diameter', 'mm'),
@@ -97,6 +133,7 @@ export const SPEC_ROWS: Record<GearSlug, SpecRowDef[]> = {
     plain('breaking_strength', 'Breaking Strength', 'kN'),
   ],
   grips: [
+    priceRow(),
     plain('material', 'Material'),
     widthRange,
     plain('weight', 'Weight', 'g'),
@@ -106,6 +143,7 @@ export const SPEC_ROWS: Record<GearSlug, SpecRowDef[]> = {
     plain('connection_type', 'Connection Type'),
   ],
   rollers: [
+    priceRow(),
     plain('material', 'Frame Material'),
     plain('roller_material', 'Roller Material'),
     plain('slider_type', 'Slider Type'),
@@ -117,6 +155,7 @@ export const SPEC_ROWS: Record<GearSlug, SpecRowDef[]> = {
     { ...plain('colors', 'Colors'), render: 'chips' },
   ],
   treepros: [
+    priceRow(),
     plain('weight', 'Weight', 'g'),
     plain('width', 'Width', 'cm'),
     plain('length', 'Length', 'cm'),
@@ -124,6 +163,7 @@ export const SPEC_ROWS: Record<GearSlug, SpecRowDef[]> = {
     yesNo('has_sling_attachment', 'Sling Attachment'),
   ],
   starterkits: [
+    priceRow(),
     plain('webbing_length', 'Webbing Length', 'm'),
     plain('webbing_width', 'Webbing Width', 'mm'),
     plain('weight', 'Weight', 'g'),
@@ -131,6 +171,7 @@ export const SPEC_ROWS: Record<GearSlug, SpecRowDef[]> = {
     yesNo('includes_treepro', 'Includes Tree Pro'),
   ],
   tricklinekits: [
+    priceRow(),
     plain('webbing_length', 'Webbing Length', 'm'),
     plain('webbing_width', 'Webbing Width', 'mm'),
     plain('weight', 'Weight', 'g'),

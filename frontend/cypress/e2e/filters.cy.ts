@@ -17,17 +17,30 @@ interface FilterGroup {
   label: string   // human label shown in the sidebar
   type: FilterType
   unit?: string   // displayed next to the range inputs (mm, kN, g, etc.)
+  // The card attribute a range filter's bounds are verified against, when it
+  // isn't data-{group}. Price is the only one: its slider is denominated in the
+  // viewer's display currency, while data-price stays the as-sold amount in the
+  // seller's own currency. Checking bounds against data-price would compare
+  // "1.30 EUR" to "1.50 USD" and call it a bug. See currency.cy.ts.
+  valueAttr?: string
 }
 
 const FILTER_GROUPS: Record<string, FilterGroup[]> = {
   // ── Webbing ───────────────────────────────────────────────────────────────
   // Fields: material(enum) width(int) weight(float) breaking_strength(float)
-  //         stretch(str|None→pill) isa_certified(bool) classification(enum)
-  //         isa_warning(enum) colors(str, comma-sep — excluded, needs split logic)
+  //         stretch(str|None→pill) isa_certified(bool) classification(enum — excluded,
+  //         it's a badge, not an axis) isa_warning(enum)
+  //         colors(str, comma-sep — excluded, needs split logic)
   webbings: [
+    // Price is the FIRST group in every sidebar (DESIGN.md § Left Filter Sidebar).
+    // No `unit` here on purpose: its unit is the display currency's symbol, which
+    // changes with the top-nav selector — currency.cy.ts owns that behaviour.
+    { group: 'price',             label: 'Price per meter',   type: 'range', valueAttr: 'data-price-display' },
     { group: 'material',          label: 'Material Type',     type: 'pill'  },
     { group: 'width',             label: 'Width',             type: 'range', unit: 'mm' }, // dual-thumb slider
-    { group: 'classification',    label: 'Classification',    type: 'pill'  }, // A+/A/B/C/Not for Highline
+    // classification is deliberately NOT a filter group — it's a badge on the
+    // items that earn one (ISA-certified, or under 22 kN), not an axis of the
+    // catalogue (see the "is not a filter" describe below).
     { group: 'isa_certified',     label: 'ISA Certified',     type: 'pill'  },
     { group: 'isa_warning',       label: 'ISA Warning',       type: 'pill'  }, // Recall/Warning/Notice/No Warning
     // stretch has its own widget — see the dedicated describe block below FILTER_GROUPS
@@ -40,6 +53,7 @@ const FILTER_GROUPS: Record<string, FilterGroup[]> = {
   //         breaking_strength(float) front_pin(enum|None) attachment_point(enum|None)
   //         isa_certified(bool) isa_warning(enum) colors(excluded)
   weblocks: [
+    { group: 'price',             label: 'Price',             type: 'range', valueAttr: 'data-price-display' },
     { group: 'style',             label: 'Style',             type: 'pill'  }, // Tensionable Weblock / Fixed Linelocker
     { group: 'material',          label: 'Material',          type: 'pill'  }, // MetalMaterial
     { group: 'width_min',         label: 'Min Width',         type: 'range', unit: 'mm' }, // dual-thumb slider
@@ -55,6 +69,7 @@ const FILTER_GROUPS: Record<string, FilterGroup[]> = {
   // Fields: material(enum) inner_diameter(float) outer_diameter(float)
   //         weight(float) breaking_strength(float) isa_certified(bool) isa_warning(enum)
   leashrings: [
+    { group: 'price',             label: 'Price',             type: 'range', valueAttr: 'data-price-display' },
     { group: 'material',          label: 'Material',          type: 'pill'  }, // MetalMaterial
     { group: 'isa_certified',     label: 'ISA Certified',     type: 'pill'  },
     { group: 'isa_warning',       label: 'ISA Warning',       type: 'pill'  },
@@ -69,6 +84,7 @@ const FILTER_GROUPS: Record<string, FilterGroup[]> = {
   //         wll(float) mbs(float) common_slipping_threshold(float)
   //         connection_type(enum|None) isa_certified(bool) isa_warning(enum)
   grips: [
+    { group: 'price',                     label: 'Price',               type: 'range', valueAttr: 'data-price-display' },
     { group: 'material',                  label: 'Material',            type: 'pill'  }, // MetalMaterial
     { group: 'width_min',                 label: 'Min Width',           type: 'pill', unit: 'mm' }, // discrete int
     { group: 'connection_type',           label: 'Connection Type',     type: 'pill'  }, // Dyneema Sling Loop/Mounting Hole/Other
@@ -88,6 +104,7 @@ const FILTER_GROUPS: Record<string, FilterGroup[]> = {
   // Note: width on rollers is a raw string ("25–35mm") — not a numeric field.
   //       It cannot be used as a range filter; it's display-only.
   rollers: [
+    { group: 'price',            label: 'Price',             type: 'range', valueAttr: 'data-price-display' },
     { group: 'material',         label: 'Frame Material',    type: 'pill'  }, // MetalMaterial
     { group: 'roller_material',  label: 'Roller Material',   type: 'pill'  }, // RollerMaterial: Aluminum/Steel/Stainless Steel/Plastic/Other
     { group: 'slider_type',      label: 'Slider Type',       type: 'pill'  }, // Moving plates/Carabiner/Locking Carabiner/Other
@@ -105,6 +122,7 @@ const FILTER_GROUPS: Record<string, FilterGroup[]> = {
   //         has_sling_attachment(bool) price(float) price_unit(enum)
   // No isa_certified, no isa_warning on this model.
   treepros: [
+    { group: 'price',                label: 'Price',            type: 'range', valueAttr: 'data-price-display' },
     { group: 'has_sling_attachment', label: 'Sling Attachment', type: 'pill'  },
     { group: 'price_unit',           label: 'Sold As',          type: 'pill'  }, // single/pair
     { group: 'weight',               label: 'Weight',           type: 'range', unit: 'g'   },
@@ -119,6 +137,7 @@ const FILTER_GROUPS: Record<string, FilterGroup[]> = {
   //         includes_treepro(bool) isa_certified(bool)
   // No isa_warning on this model.
   starterkits: [
+    { group: 'price',            label: 'Price',             type: 'range', valueAttr: 'data-price-display' },
     { group: 'tensioning_type',  label: 'Tensioning',        type: 'pill'  }, // Single Ratchet/Double Ratchet/Primitive/Other
     { group: 'webbing_width',    label: 'Webbing Width',     type: 'pill', unit: 'mm' }, // discrete int
     { group: 'webbing_length',   label: 'Webbing Length',    type: 'pill', unit: 'm'  }, // discrete int
@@ -133,6 +152,7 @@ const FILTER_GROUPS: Record<string, FilterGroup[]> = {
   //         tensioning_type(enum: Single Ratchet/Double Ratchet/Other)
   //         includes_treepro(bool) isa_certified(bool)
   tricklinekits: [
+    { group: 'price',            label: 'Price',             type: 'range', valueAttr: 'data-price-display' },
     { group: 'tensioning_type',  label: 'Tensioning',        type: 'pill'  }, // Single Ratchet/Double Ratchet/Other (no Primitive)
     { group: 'webbing_width',    label: 'Webbing Width',     type: 'pill', unit: 'mm' },
     { group: 'webbing_length',   label: 'Webbing Length',    type: 'pill', unit: 'm'  },
@@ -336,7 +356,7 @@ GEAR_TYPES.forEach(({ slug, apiPath, label }) => {
 
     // ── Range-filter behaviour ────────────────────────────────────────────────
 
-    ranges.forEach(({ group, label: groupLabel, unit }) => {
+    ranges.forEach(({ group, label: groupLabel, unit, valueAttr }) => {
       describe(`Range filter — ${groupLabel}${unit ? ` (${unit})` : ''}`, () => {
         it('renders a min input and a max input', () => {
           cy.get(`[data-cy="filter-group"][data-group="${group}"]`)
@@ -407,7 +427,7 @@ GEAR_TYPES.forEach(({ slug, apiPath, label }) => {
             // Read the actual thumb values (the slider snaps to its step), so the
             // bounds check matches exactly what was committed.
             const scope = `[data-cy="filter-group"][data-group="${group}"]`
-            const attr = `data-${group.replace(/_/g, '-')}`
+            const attr = valueAttr ?? `data-${group.replace(/_/g, '-')}`
             cy.get(scope).find('[data-cy="range-min"]').invoke('val').then((aLo) => {
               cy.get(scope).find('[data-cy="range-max"]').invoke('val').then((aHi) => {
                 const min = Number(aLo)
@@ -495,29 +515,21 @@ GEAR_TYPES.forEach(({ slug, apiPath, label }) => {
   })
 })
 
-// ── Classification pill order ─────────────────────────────────────────────────
-// Classification is ranked, not alphabetical: A+ is the strongest class and must
-// lead. Sorting these values alphabetically puts "A" before "A+" (a prefix sorts
-// first), which is why the group carries an explicit order mirroring
-// _CLASSIFICATION_RANK in slack_data/models/webbing.py.
+// ── No classification filter ──────────────────────────────────────────────────
+// The ISA highline class is a property of ISA certification, not an independent
+// axis of the catalogue: an uncertified webbing may compute a class from its
+// fibers and strength, but ISA never granted it. Filtering the whole grid by it
+// would imply otherwise, so the sidebar has no Classification group at all —
+// ISA Certified is the filter for the letter classes, and Breaking Strength
+// already covers the sub-22 kN "Not for Highline" case. The class shows as a
+// badge on the items that earn one instead.
 
-describe('Webbing classification pill order', () => {
-  const CANONICAL = ['A+', 'A', 'B', 'C', 'Not for Highline']
-
-  beforeEach(() => {
+describe('Webbing classification is not a filter', () => {
+  it('has no Classification group in the sidebar', () => {
     cy.visit('/webbings')
-  })
-
-  it('orders classification pills best-to-worst, with A+ before A', () => {
-    cy.get('[data-cy="filter-group"][data-group="classification"]')
-      .find('[data-cy="filter-pill"]')
-      .then(($pills) => {
-        const shown = [...$pills].map(p => p.getAttribute('data-value') as string)
-        // Only assert on the values actually present in the dataset, in the
-        // canonical relative order.
-        const expected = CANONICAL.filter(v => shown.includes(v))
-        expect(shown).to.deep.equal(expected)
-      })
+    cy.get('[data-cy="filter-sidebar"]').should('be.visible')
+    cy.get('[data-cy="filter-group"][data-group="classification"]').should('not.exist')
+    cy.get('[data-cy="filter-sidebar"]').should('not.contain.text', 'Classification')
   })
 })
 

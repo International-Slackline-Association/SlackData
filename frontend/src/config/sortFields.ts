@@ -10,11 +10,23 @@ export interface SortFieldMeta {
   nullLast: boolean // items with null value sort to the bottom in both directions
 }
 
-// Present for every gear type.
+// Present for every gear type. Price sorts on the currency-normalized value
+// (see utils/sort.ts) — the order is therefore the same whichever display
+// currency is selected, because converting to any target is one global scalar
+// multiply.
 export const UNIVERSAL_SORT_FIELDS: SortFieldMeta[] = [
   { field: 'price',  label: 'Price',  nullLast: true },
   { field: 'weight', label: 'Weight', nullLast: true },
 ]
+
+// Two types don't price "one item", and their price sort is therefore a
+// different quantity from every other type's — so it says so. Webbing is priced
+// per meter; tree protectors come singly or in pairs and rank on what one
+// protector costs (see DESIGN.md § Units survive conversion).
+const PRICE_LABELS: Partial<Record<GearSlug, string>> = {
+  webbings: 'Price per meter',
+  treepros: 'Price per protector',
+}
 
 export const EXTRA_SORT_FIELDS: Record<GearSlug, SortFieldMeta[]> = {
   webbings: [
@@ -57,5 +69,8 @@ export const EXTRA_SORT_FIELDS: Record<GearSlug, SortFieldMeta[]> = {
 }
 
 export function sortFieldsFor(slug: GearSlug): SortFieldMeta[] {
-  return [...UNIVERSAL_SORT_FIELDS, ...(EXTRA_SORT_FIELDS[slug] ?? [])]
+  const universal = UNIVERSAL_SORT_FIELDS.map(f =>
+    f.field === 'price' && PRICE_LABELS[slug] ? { ...f, label: PRICE_LABELS[slug]! } : f,
+  )
+  return [...universal, ...(EXTRA_SORT_FIELDS[slug] ?? [])]
 }

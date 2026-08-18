@@ -78,6 +78,10 @@ function StretchTable({ item }: { item: AnyItem }) {
 
 export default function SpecTable({ item, slug }: { item: AnyItem; slug: GearSlug }) {
   const rows = (SPEC_ROWS[slug] ?? [])
+    // Price is declared in SPEC_ROWS so the compare table gets a price column,
+    // but it already sits in the header block right above this grid — repeating
+    // it here would print the same number twice on one screen.
+    .filter(row => !row.compareOnly)
     .map(row => ({ row, text: row.value(item) }))
     .filter(({ text }) => text !== '')
   const stretchPoints = displayPoints(item.stretch).length

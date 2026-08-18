@@ -10,6 +10,7 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { getGearType } from '@/config/gearTypes'
 import { useGearList } from '@/hooks/useGearList'
+import { useCurrency } from '@/context/CurrencyContext'
 import { useUrlState } from '@/hooks/useUrlState'
 import { filterBySearch } from '@/utils/search'
 import { sortItems } from '@/utils/sort'
@@ -24,6 +25,7 @@ import SortDropdown from '@/components/gear/SortDropdown'
 import GearGrid from '@/components/gear/GearGrid'
 import GearDetailedList from '@/components/gear/GearDetailedList'
 import CompareBar from '@/components/gear/CompareBar'
+import DataAccuracyNote from '@/components/layout/DataAccuracyNote'
 import NotFoundPage from './NotFoundPage'
 
 type View = 'cards' | 'detailed'
@@ -63,7 +65,8 @@ export default function GearListingPage() {
   const { slug } = useParams()
   const meta = slug ? getGearType(slug) : undefined
   const available = !!meta?.available
-  const { items, loading } = useGearList(meta?.slug ?? '', available)
+  const { items: rawItems, loading } = useGearList(meta?.slug ?? '', available)
+  const { basePrice, displayPrice } = useCurrency()
   const url = useUrlState()
   const { q, setQ, sort, setSort } = url
   const [view, setView] = useState<View>('cards')
@@ -163,6 +166,27 @@ export default function GearListingPage() {
   // Clicking the engaged pill toggles the widget off; any other pill engages it.
   const selectKn = (kn: number) => setStretchKn(prev => (prev === kn ? null : kn))
 
+  // Every item gains two derived money fields, the same way the stretch widget
+  // attaches stretch_percent below:
+  //   price_base    — normalized to the rate table's base AND to one item; what
+  //                   SORT compares, so a 5377 RUB grip and an 89 USD one rank
+  //                   correctly, and an €80 pair of tree protectors ranks below
+  //                   a €50 single because it is €40 a protector.
+  //   price_display — the same price in the viewer's currency; what the price
+  //                   FILTER compares, so its bounds mean what the sidebar says.
+  // Both are null when the item has no price or its currency isn't in the table,
+  // which is exactly the null-last / excluded-by-a-bound behaviour already in
+  // place for every other numeric field.
+  const items = useMemo<AnyItem[]>(
+    () =>
+      (rawItems as unknown as AnyItem[]).map(it => ({
+        ...it,
+        price_base: basePrice(it),
+        price_display: displayPrice(it),
+      })),
+    [rawItems, basePrice, displayPrice],
+  )
+
   const { activePills, activeRanges } = useMemo(() => {
     const activePills: Record<string, string[]> = {}
     const activeRanges: Record<string, RangeBounds> = {}
@@ -172,8 +196,9 @@ export default function GearListingPage() {
           const values = url.getPillValues(g.group)
           if (values.length) activePills[g.group] = values
         } else {
+          // The URL key is the group; the field compared may differ (price).
           const r = url.getRange(g.group)
-          if (r.min != null || r.max != null) activeRanges[g.group] = r
+          if (r.min != null || r.max != null) activeRanges[g.valueField ?? g.group] = r
         }
       }
     }
@@ -197,7 +222,7 @@ export default function GearListingPage() {
   const contextItems = useMemo(
     () =>
       applyFilters(
-        filterBySearch(scopedItems, query) as unknown as AnyItem[],
+        filterBySearch(scopedItems as never, query) as unknown as AnyItem[],
         activePills,
         activeRanges,
       ),
@@ -299,6 +324,9 @@ export default function GearListingPage() {
             <span data-cy="item-count" className="text-sm text-gray-500">
               {visible.length} {visible.length === 1 ? 'item' : 'items'}
             </span>
+            {/* Next to the count: the moment a visitor reads how much data there
+                is, is the moment to say what it's worth. */}
+            <DataAccuracyNote variant="inline" />
 
             <div className="ml-auto flex items-center gap-3">
               <div className="flex overflow-hidden rounded-lg border border-gray-300">

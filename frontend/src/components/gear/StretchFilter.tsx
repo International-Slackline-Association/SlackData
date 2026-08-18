@@ -7,6 +7,7 @@
 
 import { useMemo } from 'react'
 import { percentAtKn, topKnPoints } from '@/utils/stretch'
+import { rangeDomain } from '@/utils/range'
 import type { AnyItem } from '@/utils/format'
 import FilterGroup from './FilterGroup'
 import RangeSlider from './RangeSlider'
@@ -51,11 +52,7 @@ export default function StretchFilter({
     const ps = items
       .map(i => percentAtKn(i.stretch, displayKn))
       .filter((p): p is number => p != null)
-    if (!ps.length) return { lo: 0, hi: 0, step: 1 }
-    const lo = Math.min(...ps)
-    const hi = Math.max(...ps)
-    const step = ps.every(Number.isInteger) ? 1 : 0.5
-    return { lo, hi: hi > lo ? hi : lo + 1, step }
+    return rangeDomain(ps)
   }, [items, displayKn])
 
   const lo = min !== '' ? Number(min) : domain.lo

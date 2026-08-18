@@ -47,6 +47,8 @@ GEAR_TYPES.forEach(({ slug, apiPath, label, hasISA, hasISAWarning, specFields })
         .and('contain.text', item.name as string)
     })
 
+    // Presence/absence only — the converted amount, the ≈ prefix and the
+    // "as sold" secondary line are currency.cy.ts's business.
     it('shows the price when it is set', () => {
       cy.request(`${api()}/${apiPath}/?limit=100`).then(({ body }) => {
         const withPrice = (body as Record<string, unknown>[]).find(i => i.price != null)
@@ -140,11 +142,15 @@ GEAR_TYPES.forEach(({ slug, apiPath, label, hasISA, hasISAWarning, specFields })
     }
 
     // Webbing: classification rendered as a colored pill ─────────────────────
+    // Shown in two cases only: a letter class on an ISA-certified webbing (the
+    // class is an ISA grant, so it appears only where certification does), and
+    // "Not for Highline" on any webbing under 22 kN (a strength fact, not a
+    // grant). See src/components/gear/ClassificationBubble.tsx.
     if (slug === 'webbings') {
       it('renders classification as a bubble beside the name, not as a spec row', () => {
         cy.request(`${api()}/webbing/?limit=100`).then(({ body }) => {
           const withClass = (body as Record<string, unknown>[])
-            .find(i => i.classification != null)
+            .find(i => i.classification != null && i.isa_certified === true)
           if (!withClass) return
           cy.visit(`/webbings/${withClass.id}`)
 
@@ -165,6 +171,62 @@ GEAR_TYPES.forEach(({ slug, apiPath, label, hasISA, hasISAWarning, specFields })
               expect(pill.top).to.be.lt(name.bottom)
             })
           })
+        })
+      })
+
+      it('omits the letter class on a webbing that is not ISA certified', () => {
+        cy.request(`${api()}/webbing/?limit=100`).then(({ body }) => {
+          const uncertified = (body as Record<string, unknown>[]).find(
+            i =>
+              i.classification != null &&
+              i.classification !== 'Not for Highline' &&
+              i.isa_certified !== true,
+          )
+          if (!uncertified) return
+          cy.visit(`/webbings/${uncertified.id}`)
+          // The page has loaded (the ISA block always renders for webbings) …
+          cy.get('[data-cy="isa-not-certified-text"]').should('be.visible')
+          // … and no class is claimed for it.
+          cy.get('[data-cy="classification-pill"]').should('not.exist')
+        })
+      })
+
+      it('shows "Not for Highline" on an uncertified webbing under 22 kN', () => {
+        cy.request(`${api()}/webbing/?limit=100`).then(({ body }) => {
+          const weak = (body as Record<string, unknown>[]).find(
+            i =>
+              i.classification === 'Not for Highline' &&
+              i.isa_certified !== true &&
+              typeof i.breaking_strength === 'number' &&
+              i.breaking_strength < 22,
+          )
+          if (!weak) return
+          cy.visit(`/webbings/${weak.id}`)
+          cy.get('[data-cy="classification-pill"]')
+            .should('be.visible')
+            .and('have.attr', 'data-classification', 'Not for Highline')
+            // The warning is about strength, so it must not be titled an ISA type.
+            .and('have.attr', 'title')
+            .and('not.contain', 'ISA Type')
+        })
+      })
+
+      it('omits "Not for Highline" when the webbing is 22 kN or more', () => {
+        // Uncertified and unclassed for a certification reason rather than a
+        // strength one (e.g. 25 kN polyester — no Type C for PES). Nothing to warn
+        // about, so nothing renders.
+        cy.request(`${api()}/webbing/?limit=100`).then(({ body }) => {
+          const strong = (body as Record<string, unknown>[]).find(
+            i =>
+              i.classification === 'Not for Highline' &&
+              i.isa_certified !== true &&
+              typeof i.breaking_strength === 'number' &&
+              i.breaking_strength >= 22,
+          )
+          if (!strong) return
+          cy.visit(`/webbings/${strong.id}`)
+          cy.get('[data-cy="isa-not-certified-text"]').should('be.visible')
+          cy.get('[data-cy="classification-pill"]').should('not.exist')
         })
       })
     }
@@ -368,6 +430,47 @@ GEAR_TYPES.forEach(({ slug, apiPath, label, hasISA, hasISAWarning, specFields })
         cy.get('[data-cy="detail-img"]').should('be.visible')
         cy.get('[data-cy="card-image-dot"]').should('not.exist')
         cy.get('[data-cy="card-image-next"]').should('not.exist')
+      })
+
+      // The band follows the same rule as the listing cards — fit by height,
+      // blurred copy behind the leftover width (DESIGN.md § Gear Card Anatomy →
+      // Image area, § Gear Detail Page). It is the same component, so this is a
+      // wiring check that the detail band didn't grow its own treatment, not a
+      // second copy of the spec — gear_cards.cy.ts owns the full geometry.
+      it('fits the image to the band height and backs it with a blurred copy', () => {
+        const chosen = multi ?? single
+        if (!chosen) return
+        cy.visit(`/${slug}/${chosen.item.id}`)
+        cy.get('[data-cy="detail-img"]').should(($img) => {
+          expect(($img[0] as HTMLImageElement).naturalWidth, 'image has decoded').to.be.greaterThan(0)
+        })
+        cy.get('[data-cy="detail-image-area"]').then(($area) => {
+          const area = $area[0].getBoundingClientRect()
+          const $img = $area.find('[data-cy="detail-img"]')
+          const img = $img[0] as HTMLImageElement
+          const box = img.getBoundingClientRect()
+          expect($img.css('object-fit'), 'fitted, not cropped').to.equal('contain')
+          expect(box.width, 'box spans the band').to.be.closeTo(area.width, 1)
+          expect(box.height, 'box spans the band').to.be.closeTo(area.height, 1)
+
+          // This band is much squarer than the cards' (~1.1 vs ~1.9 w/h), so
+          // which axis ends up flush depends on the shot. What holds either way
+          // is that the whole photo is inside the band and one axis fills it —
+          // the blurred backdrop takes care of the leftover.
+          const scale = Math.min(area.width / img.naturalWidth, area.height / img.naturalHeight)
+          const w = img.naturalWidth * scale
+          const h = img.naturalHeight * scale
+          expect(w, 'painted width within the band').to.be.lte(area.width + 1)
+          expect(h, 'painted height within the band').to.be.lte(area.height + 1)
+          expect(
+            Math.abs(w - area.width) < 1 || Math.abs(h - area.height) < 1,
+            'one axis fills the band',
+          ).to.equal(true)
+
+          const $backdrop = $area.find('[data-cy="card-image-backdrop"]')
+          expect($backdrop.attr('src'), 'backdrop is the same file').to.equal(img.getAttribute('src'))
+          expect($backdrop.css('filter'), 'backdrop is blurred').to.match(/blur\(/)
+        })
       })
     })
 

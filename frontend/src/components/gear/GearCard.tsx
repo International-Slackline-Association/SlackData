@@ -1,5 +1,6 @@
 // A single gear card. Anatomy (top→bottom) per DESIGN.md and gear_cards.cy.ts:
-//   image · top-right overlay: classification bubble + ISA stamp (if certified)
+//   image · top-right overlay: classification bubble (ISA-certified, or sub-22 kN
+//     "Not for Highline") + ISA stamp (if certified)
 //   brand (small caps) · product name (link) · inline specs · price (amber)
 // No gear-type badge: every listing is single-type, so it would be redundant.
 // (Revisit when manufacturer pages mix types — see DESIGN.md card anatomy.)
@@ -12,7 +13,8 @@
 import { Link } from 'react-router-dom'
 import type { GearTypeMeta } from '@/config/gearTypes'
 import { CARD_DATA_FIELDS, INLINE_SPECS } from '@/config/gearFields'
-import { dataAttrs, formatPrice, formatValue, type AnyItem } from '@/utils/format'
+import { useCurrency } from '@/context/CurrencyContext'
+import { dataAttrs, formatValue, type AnyItem } from '@/utils/format'
 import { imageUrls } from '@/utils/images'
 import CardImageCarousel from './CardImageCarousel'
 import ClassificationBubble from './ClassificationBubble'
@@ -41,7 +43,9 @@ export default function GearCard({
   onToggleCompare?: (id: number) => void
 }) {
   const { slug, hasISA } = meta
-  const price = formatPrice(item.price, item.currency)
+  // The card shows the converted figure only — the as-sold original lives on
+  // the detail page and in the compare cell, where there's room for it.
+  const price = useCurrency().priceText(item, slug)
   const specs = INLINE_SPECS[slug] ?? []
   const isaCertified = hasISA && item.isa_certified === true
 
@@ -70,17 +74,24 @@ export default function GearCard({
       <div
         data-cy="gear-card-image-area"
         data-image-count={images.length}
-        className="group relative flex h-40 items-center justify-center bg-gray-50"
+        // overflow-hidden: the image fits the band by height and the blurred
+        // backdrop is scaled past its edges — both must be clipped to the band.
+        className="group relative flex h-40 items-center justify-center overflow-hidden bg-gray-50"
       >
         {/* Top-right stack: the highline class first (it's the fastest read on a
-            webbing card), the ISA stamp under it. Same bubble component as the
-            detail page, so the colors can't drift apart. */}
+            webbing card), the ISA stamp under it. The bubble appears on
+            certified webbings and on sub-22 kN "Not for Highline" ones (see
+            ClassificationBubble); the stamp only on certified. Same bubble
+            component as the detail page, so the colors can't drift apart. */}
         {/* Top-left: lifecycle status. Legacy = no longer sold; nothing renders
             for active/unknown gear. Mirrors the manufacturer card's Inactive pill. */}
         <LegacyBadge active={item.active} className="absolute left-2 top-2 z-10" />
-        {/* Top-right: classification then ISA stamp. */}
         <div className="absolute right-2 top-2 z-10 flex flex-col items-end gap-1.5">
-          <ClassificationBubble value={item.classification} />
+          <ClassificationBubble
+            value={item.classification}
+            certified={isaCertified}
+            breakingStrength={item.breaking_strength}
+          />
           {isaCertified && <IsaApprovedBadge />}
         </div>
         <CardImageCarousel urls={images} alt={String(item.name)} />
@@ -108,8 +119,13 @@ export default function GearCard({
 
         <div className="mt-auto pt-2">
           {price && (
-            <span data-cy="gear-card-price" className="font-bold" style={{ color: '#E8770A' }}>
-              {price}
+            <span
+              data-cy="gear-card-price"
+              data-approx={price.approx ? 'true' : 'false'}
+              className="font-bold"
+              style={{ color: '#E8770A' }}
+            >
+              {price.text}
             </span>
           )}
         </div>

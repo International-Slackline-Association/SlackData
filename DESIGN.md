@@ -35,6 +35,84 @@ Single sans-serif family throughout (Inter or system-ui).
 
 ---
 
+## Currency & Prices
+
+Every price in the catalogue is stored **as sold, in the seller's own currency** — 471 priced items
+across 14 currencies (EUR is ~60%). That storage never changes: rates move daily, so a converted
+number written into the database is wrong tomorrow and throws away the fact worth keeping ("this
+manufacturer charges €89"). **Conversion is a display layer**, applied on read.
+
+**The viewer picks one display currency and the whole site speaks it** — cards, detail pages, the
+compare table, the price filter and the price sort.
+
+### Where the display currency comes from
+
+Precedence, highest first:
+
+1. **Explicit choice** — the top-nav selector, persisted in `localStorage`.
+2. **`?cur=` URL param** — so a link carrying a price filter means the same thing to whoever opens it.
+3. **Detected** — from the browser's own locale: `Intl.DateTimeFormat().resolvedOptions()` (timeZone
+   region, falling back to the locale's region subtag) mapped through a country→currency table.
+4. **`USD`** — the default when the region is unknown or has no mapping.
+
+Detection is browser-side on purpose: it needs no infrastructure, and it behaves identically in
+local dev, in Cypress and in production. A hosted deployment can do better — CloudFront can pass
+`CloudFront-Viewer-Country`, which `/fx/rates` echoes back as `detected_currency` and the frontend
+prefers when present — but that requires a custom OriginRequestPolicy and is **not** required for
+detection to work.
+
+### Rates
+
+Rates come from **our own backend** (`GET /fx/rates`), never from a third-party call in the browser:
+one shared cache instead of one per tab, same-origin behind CloudFront, and a single endpoint the
+Cypress suite can stub deterministically.
+
+- Base is **EUR**. `rates["EUR"] == 1.0`.
+- Normalize, then convert: `base = price / rates[item.currency]`, `display = base * rates[target]`.
+- The frontend caches the response in `localStorage` with a TTL so a repeat visit doesn't block
+  first paint on a network round-trip.
+- **Rates never block the catalogue.** If `/fx/rates` fails, prices render **as sold** in their own
+  currency, the `≈` is dropped, and a single quiet notice (`data-cy="fx-stale-notice"`) appears.
+  Gear is still browsable, filterable and sortable — only cross-currency price comparison degrades.
+
+### Displaying a converted price
+
+- Converted values are **marked approximate**: `≈ $96`. Never present a converted figure as if it
+  were the sticker price.
+- The **as-sold original stays reachable**: small gray secondary text under the price on the detail
+  page and in the compare cell (`€89`).
+- When the display currency **equals the item's own currency**, there is no `≈` and no secondary
+  line — it *is* the price.
+- Formatting is `Intl.NumberFormat(locale, { style: 'currency', currency })`: 2 decimals below 10,
+  0 decimals at 100 and above, 2 in between.
+
+### Units survive conversion
+
+Two gear types price something other than "one item", and converting must not flatten that:
+
+- **Webbings are priced per meter** (`price` maps from the seed's `priceMeter`). They render with a
+  `/m` suffix — `≈ $2.60 /m` — and their filter and sort labels read **"Price per meter"**. Without
+  it a €2.40 webbing sits beside an €89 weblock with nothing to tell them apart, which is misleading
+  now and worse once price is a headline filter.
+- **Tree protectors** may be sold singly or in pairs (`price_unit`). The unit is appended to **every**
+  rendering of the price — card, detail and compare alike — as `≈ $45 /pair` or `≈ $22 /single`, the
+  same shape as webbing's `/m`. An unqualified number on a card is the misleading case: two cards
+  showing "$45" are not the same offer when one is a pair.
+- **Sorting tree protectors by price ranks on unit cost**: the sort key divides a pair price by two,
+  so an €80 pair (€40 a protector) sits below a €50 single. The sort label says **"Price per
+  protector"** so the ordering isn't a surprise. Only the *sort key* is normalized —
+
+  - the **displayed** price is always the price as sold, never halved (the pair is what you buy);
+  - the **price filter** also compares the as-sold price, so its bounds mean exactly what the
+    numbers on the cards say.
+
+  The "Sold As" pill is still how a viewer scopes to one kind of offer.
+
+Because per-meter and absolute prices are different quantities, they must never be pooled in one
+range — which is fine today, since every listing shows exactly one gear type.
+
+---
+
 ## Page Header / Top Nav
 
 White bar, full-width, subtle bottom border.
@@ -46,7 +124,21 @@ Center (or just right of logo): horizontal gear-type tabs —
 
 Active tab: teal underline (2px) + teal text. Inactive: gray text, no underline. No background fill on tabs.
 
-Right: currency selector (US USD style dropdown like climbing-gear.com), heart/saved icon, account icon.
+Right: **currency selector**, heart/saved icon, account icon.
+
+**Currency selector** (`data-cy="currency-selector"`) — a compact dropdown in the climbing-gear.com
+style showing the active currency's code and symbol (`$ USD`). Opening it lists options
+(`data-cy="currency-option"`, each carrying `data-currency="USD"`):
+
+- **"Auto (detected)"** is the first entry and the initial state — it follows the detection chain in
+  § Currency & Prices and shows which currency it resolved to.
+- Then the **14 currencies the catalogue actually prices in** — EUR, USD, CZK, PLN, CAD, ILS, BRL,
+  CHF, ZAR, NZD, MXN, RUB, GBP, INR — followed by the remaining majors. Deliberately **not** all 30
+  members of the `Currency` enum: most have no gear behind them, so offering them is a list of dead
+  ends.
+- The active option carries `data-active="true"`. Picking one persists it (see the precedence chain)
+  and re-renders every price on the page without a refetch — rates are already loaded.
+- The selector is present on every page, not just listings: prices appear on detail and compare too.
 
 ---
 
@@ -101,33 +193,63 @@ Filter groups per gear type — verified against `slack_data/models/*.py` and `u
 
 Three filter control types:
 - **Pill toggle** — enum and boolean fields; single- or multi-select per the rule above
-- **Range slider** — numeric fields (float or int); rendered as a **dual-thumb slider** (two overlaid `<input type="range">`, min thumb `data-cy="range-min"`, max thumb `data-cy="range-max"`), domain = the data's [min, max], `step="any"`. A thumb parked at its domain bound means "no constraint". The two value labels below the track (`data-cy="range-min-value"` / `range-max-value`) are **click-to-edit**: one click turns the number into an inline numeric input (commit on Enter/blur, cancel on Escape) so an exact bound can be typed without dragging; out-of-range values are clamped, not rejected. This is the standard control for every min/max filter (weight, breaking strength, diameters, widths, dimensions, kit weight, and the stretch %).
+- **Range slider** — numeric fields (float or int); rendered as a **dual-thumb slider** (two overlaid `<input type="range">`, min thumb `data-cy="range-min"`, max thumb `data-cy="range-max"`). Step is 1 for integer-only fields and 0.5 otherwise, unless the field knows its own granularity (money steps by the cent); the domain is the data's [min, max] **snapped onto that step grid** (a native range input only lands on `min + n·step`, so an off-grid max would be unreachable — the thumb would stop short of the track end and never read as "no constraint"). A thumb parked at its domain bound means "no constraint". The two value labels below the track (`data-cy="range-min-value"` / `range-max-value`) are **click-to-edit**: one click turns the number into an inline numeric input (commit on Enter/blur, cancel on Escape) so an exact bound can be typed without dragging; out-of-range values are clamped, not rejected. This is the standard control for every min/max filter (weight, breaking strength, diameters, widths, dimensions, kit weight, and the stretch %).
 - **Stretch at X kN** — webbing-only custom widget (see below)
 
 **Pill order within a group** — values are alphabetical by default, with catch-all buckets ("Other",
 "Unknown") always sinking to the bottom. Groups whose domain is *ranked* rather than alphabetical
-declare an explicit order instead: **Classification is `A+ · A · B · C · Not for Highline`**,
-mirroring `_CLASSIFICATION_RANK` in `slack_data/models/webbing.py`. This is not cosmetic — sorting
-those values alphabetically puts `A` before `A+`, because a string is a prefix of itself plus a
-suffix. Values absent from an explicit order sort after it, alphabetically.
+may declare an explicit order instead, and values absent from that order sort after it,
+alphabetically. No group uses this today (classification, the one ranked domain, is not a filter —
+see below); the mechanism stays in `filterGroups.ts` for the next ranked enum.
 
-Excluded from filters: `name`/`description`/`notes` (search), `release_date`, `product_url`, `version`, `currency` (not a UX-meaningful filter), `colors` (comma-separated string needing split logic — future work), `stretch` on webbing (JSON blob of {kn,percent} pairs — exposed as a "has stretch data" pill instead), `width` on rollers (raw string like "25–35mm", not a numeric field).
+**Price is the first group in every gear type's sidebar** — above Material, above everything. It is
+the filter people reach for first in any gear catalogue, and it is the only one that is meaningful
+for all 8 types.
 
-**Webbings:** Material Type [pill] · Width mm [range] · Classification [pill] · ISA Certified [pill] · ISA Warning [pill] · Weight g/m [range] · Breaking Strength kN [range] · **Stretch at X kN** [custom — see below]
+It is a range slider like any other numeric filter, with four behaviours unique to it:
 
-**Weblocks:** Material [pill] · Min Width mm [range] · Front Pin [pill] · Attachment Point [pill] · ISA Certified [pill] · ISA Warning [pill] · Weight g [range] · Breaking Strength kN [range]
+- **Its unit is the display currency's symbol**, and its **domain is expressed in the display
+  currency** — so unlike every other range filter, the domain moves when the selector changes.
+- **It works in money, at a precision that follows the currency.** The domain is the cheapest and
+  priciest items themselves — in USD the webbing slider spans `0.58 $` to `10.56 $`, not a
+  rounded-off `0.00`–`10.50`, because a price filter whose floor sits below anything for sale wastes
+  half its track. The **dollar is the baseline: cent steps, two decimals.** A currency an order of
+  magnitude larger drops a decimal (`¥1,683` is as precise as `$10.56`), stopping at whole units at
+  100× and beyond — `0.1` for CZK/INR/MXN/RUB/ZAR, `1` for JPY/KRW — and nothing goes finer than the
+  dollar's cents. Both labels carry that many decimals at every magnitude, including above 100 where
+  a price *tag* drops them: they sit on one control and must match each other.
+- **Switching currency converts an active bound rather than clearing it.** Filter to `$50–$100`,
+  switch to EUR, and the bounds become `€46–€92`: the same items stay selected. Anything else would
+  silently change a result set behind the viewer's back.
+- **The bounds are written to the URL in the display currency**, alongside `?cur=` so the link
+  stays meaningful when shared (`?price_min=50&price_max=100&cur=USD`). `?cur=` is written **only**
+  when a price bound is set — currency is otherwise a viewer preference, not view state, and does
+  not belong in every URL. Storing bounds in the canonical base instead was rejected: the numbers
+  in the URL would not match the numbers on screen, breaking the rule that `?{field}_min` mirrors
+  the visible value.
 
-**Leash Rings:** Material [pill] · ISA Certified [pill] · ISA Warning [pill] · Inner Diameter mm [range] · Outer Diameter mm [range] · Weight g [range] · Breaking Strength kN [range]
+Items with **no price are excluded** whenever a bound is set — the same null-last philosophy as
+every other range filter.
 
-**Grips:** Material [pill] · Min Width mm [pill] · Connection Type [pill] · ISA Certified [pill] · ISA Warning [pill] · Weight g [range] · WLL kN [range] · MBS kN [range] · Slipping Threshold kN [range]
+On webbings the group is labelled **"Price per meter"** (see § Currency & Prices).
 
-**Rollers:** Frame Material [pill] · Roller Material [pill] · Slider Type [pill] · Lock Type [pill] · Bearing Material [pill] · ISA Warning [pill] · Weight g [range] · Breaking Strength kN [range]  _(ISA Certified hidden — no roller is certified)_
+Excluded from filters: `name`/`description`/`notes` (search), `release_date`, `product_url`, `version`, `currency` (the top-nav **selector** governs currency site-wide — filtering by the seller's currency would be filtering by an accident of where the shop is), `colors` (comma-separated string needing split logic — future work), `stretch` on webbing (JSON blob of {kn,percent} pairs — exposed as a "has stretch data" pill instead), `width` on rollers (raw string like "25–35mm", not a numeric field), **`classification` on webbing** (an ISA grant, not an independent axis of the catalogue — see § Classification bubble; filter by **ISA Certified** instead).
 
-**Tree Protectors:** Sling Attachment [pill] · Sold As [pill — labels title-cased: Pair / Single] · Weight g [range] · Width cm [range] · Length cm [range] · Thickness mm [range]
+**Webbings:** **Price per meter** [range] · Material Type [pill] · Width mm [range] · ISA Certified [pill] · ISA Warning [pill] · Weight g/m [range] · Breaking Strength kN [range] · **Stretch at X kN** [custom — see below]
 
-**Starter Kits:** Tensioning [pill] · Webbing Width mm [pill] · Webbing Length m [pill] · Includes Tree Pro [pill] · Kit Weight g [range]  _(ISA Certified hidden — none certified)_
+**Weblocks:** **Price** [range] · Material [pill] · Min Width mm [range] · Front Pin [pill] · Attachment Point [pill] · ISA Certified [pill] · ISA Warning [pill] · Weight g [range] · Breaking Strength kN [range]
 
-**Trickline Kits:** Tensioning [pill] · Webbing Width mm [pill] · Webbing Length m [pill] · Includes Tree Pro [pill]  _(ISA Certified hidden — none certified; Kit Weight NOT filterable — only 2 of 9 have weight data)_
+**Leash Rings:** **Price** [range] · Material [pill] · ISA Certified [pill] · ISA Warning [pill] · Inner Diameter mm [range] · Outer Diameter mm [range] · Weight g [range] · Breaking Strength kN [range]
+
+**Grips:** **Price** [range] · Material [pill] · Min Width mm [pill] · Connection Type [pill] · ISA Certified [pill] · ISA Warning [pill] · Weight g [range] · WLL kN [range] · MBS kN [range] · Slipping Threshold kN [range]
+
+**Rollers:** **Price** [range] · Frame Material [pill] · Roller Material [pill] · Slider Type [pill] · Lock Type [pill] · Bearing Material [pill] · ISA Warning [pill] · Weight g [range] · Breaking Strength kN [range]  _(ISA Certified hidden — no roller is certified)_
+
+**Tree Protectors:** **Price** [range] · Sling Attachment [pill] · Sold As [pill — labels title-cased: Pair / Single] · Weight g [range] · Width cm [range] · Length cm [range] · Thickness mm [range]
+
+**Starter Kits:** **Price** [range] · Tensioning [pill] · Webbing Width mm [pill] · Webbing Length m [pill] · Includes Tree Pro [pill] · Kit Weight g [range]  _(ISA Certified hidden — none certified)_
+
+**Trickline Kits:** **Price** [range] · Tensioning [pill] · Webbing Width mm [pill] · Webbing Length m [pill] · Includes Tree Pro [pill]  _(ISA Certified hidden — none certified; Kit Weight NOT filterable — only 2 of 9 have weight data)_
 
 **Manufacturers sidebar:** Continent [pill] · Slackline-Focused [pill]
 
@@ -156,7 +278,7 @@ Rules:
 
 ### Sort options
 
-Rule: **only numeric fields are sortable**. Enums (material, classification, etc.) and booleans (isa_certified, etc.) are filter-only — they appear as pills in the sidebar but never in the sort dropdown.
+Rule: **only numeric fields are sortable**. Enums (material, front pin, etc.) and booleans (isa_certified, etc.) are filter-only — they appear as pills in the sidebar but never in the sort dropdown. (Classification is neither: not sortable, and not a filter either — see § Classification bubble.)
 
 Sort options use `data-field` + `data-direction` attributes on the `[data-cy="sort-option"]` elements so tests can target them precisely. Cards carry `data-{field-name}="<value>"` attributes (empty string when null) for order verification.
 
@@ -166,7 +288,12 @@ Null-last in both directions: items where the field is null always appear below 
 
 **All types — always present:**
 - Name A→Z / Z→A
-- Price Low→High / High→Low _(null-last)_
+- Price Low→High / High→Low _(null-last)_ — **sorts on the normalized value, not the raw number.**
+  Before this, "Price Low→High" ranked a `5377 RUB` grip against an `89 USD` one numerically, which
+  was simply wrong. Converting every price to a common base is a single global scalar multiply, so
+  **the resulting order is identical in every display currency** — the sort needs normalization but
+  never needs to know which currency you're viewing in. Webbings sort per meter. Items with no price
+  stay null-last, as before.
 - Weight Low→High / High→Low _(null-last)_
 
 **Webbings:** + Width · Breaking Strength · **Stretch at X kN** _(secondary kN picker — see below)_
@@ -228,12 +355,32 @@ columns, which meant the specs that actually distinguish products were the ones 
 ## Gear Card Anatomy (top → bottom)
 
 **Image area** (top ~40% of card):
-- White or very light gray bg
-- Product image centered (placeholder: rope/webbing icon in low-opacity gray)
+- White or very light gray bg (the fallback only — see the backdrop rule below)
+- **Images fit the frame vertically, never horizontally.** The image is fitted *inside* the band and
+  centred (`object-contain` — *not* `object-cover`, which fit by width and sliced the top and bottom
+  off every portrait shot). Nothing is ever cropped: the whole product reads end to end. The band is
+  far wider than it is tall (~300×160) while our shots run 0.67–1.54 w/h, so the fit always lands on
+  the height and **every image is pillarboxed** — bars of frame to its left and right.
+  Sizing note: the `<img>` box fills the band and `object-fit` does the letterboxing inside it, not
+  `h-full w-auto` sizing the box to the photo. Chromium will not transfer a percentage height
+  through a replaced element's intrinsic ratio to an `auto` width — as a flex child or absolutely
+  positioned it lays the image out 0px wide, leaving nothing on the card but the blurred backdrop.
+  So the geometry tests measure the **painted** rectangle (the `object-fit` math applied to the real
+  band and the real file), not the element box.
+- **The pillar bars match the image's own background.** Behind the image sits a blurred,
+  `cover`-scaled copy of the same file — a second lazily-loaded `<img>`
+  (`data-cy="card-image-backdrop"`, `aria-hidden`; a CSS background would ignore `loading="lazy"`
+  and fetch a backdrop for every off-screen card in the grid) — so the bars pick up the
+  colour the photo's own edges have — a shot on white gets white bars, a shot on grass gets a soft
+  green wash — and the letterboxing reads as part of the picture instead of a grey gutter. Blur it
+  hard enough (~24px, slightly over-scaled so the blur's own soft edge is pushed out of frame) that
+  it registers as a colour field, not a second picture. It always shows the image the carousel is
+  currently on, so it changes with the arrows and dots. Products with **no** image fall back to the
+  flat light-gray band with the low-opacity `No image` placeholder.
 - **No gear-type badge.** Each listing shows a single gear type, so labelling every card "ROLLER" on the rollers page is redundant. Reintroduce a coral gear-type pill (top-left, absolute) only on views that mix types — e.g. manufacturer pages.
 - **Legacy badge, top-left overlay** (absolute, ~8px from the top-**left** corner) — a small red uppercase `Legacy` pill, shown only when `active` is false (discontinued / no longer sold). Nothing renders for active or unknown (`active` true/null) gear — an active card carries no status pill. Because the listing defaults to ALL, a grid routinely mixes badged and unbadged cards — the badge is what tells them apart, so it is never suppressed by the sidebar's status scope. This occupies the **top-left** slot (the one reserved above for a future gear-type pill), mirroring the manufacturer card's top-left **Inactive** pill (see § Manufacturer card anatomy), so both card types read the same way: lifecycle status on the left, classification/ISA on the right.
 - **Top-right overlay stack** (absolute, ~8px from the top-right corner, stacked vertically with ~6px gaps, right-aligned):
-  1. **Classification bubble** — webbing only, when `classification` is set. Identical component, colors and shape to the detail page's bubble (see § Classification bubble) — the ISA highline class is the fastest read on a webbing card, so it belongs in the grid, not just one click deep. Omit entirely when the field is null; other gear types have no `classification` field and never show it.
+  1. **Classification bubble** — webbing only, and only in the two cases § Classification bubble defines: an **ISA-certified** webbing shows its granted class, and a webbing under **22 kN** shows the gray **Not for Highline** pill. Identical component, colors and shape to the detail page's bubble — the highline class is the fastest read on a webbing card, so it belongs in the grid, not just one click deep. Omit entirely otherwise (including an uncertified `Not for Highline` webbing at 22 kN or more, and any null `classification`). Other gear types have no `classification` field and never show it. So a letter bubble always has the ISA stamp beneath it, while a `Not for Highline` pill usually stands alone.
   2. **ISA Approved badge** — the miniature stamp, when `isa_certified` is true (see below).
 
 **Content area** (bottom ~60%):
@@ -242,7 +389,10 @@ columns, which meant the specs that actually distinguish products were the ones 
 - Key specs inline row: small gray text with `·` separators — e.g. `25mm · 280g/m · MBS 32kN`
 - Feature tag pills: light gray bg, dark-gray text, small rounded pills — e.g. `Dyneema`, `Tubular`
 - **ISA Approved badge** — if `isa_certified` is true, show a miniature version of the ISA Approved stamp in the top-right overlay stack of the image area (under the classification bubble when both are present). The stamp replicates the official badge: dark charcoal frame, ISA geometric mark (teal + coral), bold white "APPROVED" text, teal checkmark in the V. If false, omit entirely — no "Not certified" label on cards.
-- Price: bold amber-orange — e.g. `$84 → Buy` (the "→ Buy" in slightly smaller amber text)
+- Price: bold amber-orange in the **display currency** — e.g. `≈ $84 → Buy` (the "→ Buy" in slightly
+  smaller amber text). The `≈` is dropped when the item is already priced in the display currency.
+  Webbings append `/m`. The card shows only the converted figure — the as-sold original lives on the
+  detail page and in the compare cell, where there's room for it.
 - **Bottom action row**: three equal-width outlined buttons spanning full card width — `♡ Save`, `🔔 Alert`, `⧉ Compare`. Light gray border, gray text. Hover: teal border + teal text.
 
 ---
@@ -269,17 +419,20 @@ renders per item** — see § Detailed View. Keep the two in sync by changing th
 never by editing one side.
 
 **Header block** (same for all types):
-- Image area: light gray bg band (~200px tall, ~290px at `sm`+). Images **fill the frame vertically**
-  (`object-cover`, no padding) rather than being letterboxed — product shots carry a lot of dead
-  white space, and `object-contain` left grey bands above and below. The long axis is cropped; these
-  are centered product shots, so the subject survives. Same treatment on the listing cards. Uses the
-  **same multi-image
+- Image area: light gray bg band (~200px tall, ~290px at `sm`+). Images **fit the band vertically**
+  and are pillarboxed against a blurred copy of themselves — exactly the treatment the listing cards
+  use, because it is literally the same component (see § Gear Card Anatomy → Image area for the
+  rule and the reasoning). Uses the **same multi-image
   carousel the cards use** — prev/next arrows and one dot per image, browsing every image we hold
   for the product. Single-image products render the bare image with no chrome; products with no
   image show a low-opacity "No image" placeholder.
 - Brand name in small-caps gray
 - Product name in bold ~24px
-- Price in bold amber-orange ~20px — omit row entirely if null. Tree protectors append the price unit in small gray: `$45 per pair`
+- Price in bold amber-orange ~20px, in the **display currency** — omit row entirely if null.
+  Prefixed `≈` when converted (`≈ $96`), with the **as-sold original** directly beneath in small
+  gray (`€89`, `data-cy="detail-price-original"`). Neither the `≈` nor the original appears when the
+  item is already priced in the display currency. Webbings append `/m`; tree protectors append the
+  price unit in small gray: `≈ $45 per pair`.
 
 **ISA Warning banner** — if `isa_warning` is set, show a full-width amber warning strip below the header block (before specs), with a ⚠ icon and the warning text. Tree protectors have no `isa_warning` field — omit entirely.
 
@@ -293,6 +446,15 @@ never by editing one side.
 | A | `#93C47D` (light green) | | Not for Highline | `#E5E7EB` (neutral gray — not on the ISA chart) |
 | B | `#FFD966` (yellow) | | | |
 
+**When the bubble is shown.** Two cases, and only two — both gated inside the bubble component itself, so the card and the detail page cannot diverge:
+
+1. **ISA certified** (`isa_certified === true`) → the bubble is its granted class. A+/A/B/C is an ISA grant, so an **uncertified** webbing never shows a letter class, even though the backend computes a `classification` for every webbing from its fibers and strength: a class ISA never granted, rendered in ISA's own colors, reads as certification.
+2. **Breaking strength under 22 kN** → the gray **Not for Highline** pill, certified or not. 22 kN is the Type C floor in `_classify_fiber()` (`slack_data/models/webbing.py`); below it no fiber earns any class, so this is a fact about the webbing rather than a withheld grant, and the warning is worth carrying on every such item.
+
+Anything else shows nothing — including an uncertified `Not for Highline` webbing at **22 kN or more** (a 25 kN polyester, say, which misses Type C only because ISA doesn't certify PES that low: that is a certification gap, not a strength warning). Unknown `breaking_strength` counts as *not* below the floor — no data, no claim. On a sub-22 kN item the `title` reads "Not for highline — breaking strength under 22 kN" rather than "ISA Type …", since nothing about it is an ISA type.
+
+Classification is still **not a sidebar filter**: as a letter class it is an attribute of certification rather than an independent axis of the catalogue (filter by **ISA Certified**), and as a warning it is already implied by the Breaking Strength range.
+
 The letter is **dark ink `#1F2937` on every fill**: white text fails WCAG AA on all four ISA colors (contrast 1.37–2.87), while `#1F2937` clears AA on each (5.12–11.86). A+/A/B/C render as round bubbles; the long "Not for Highline" stays a full pill so it isn't truncated. The letter itself carries the meaning, so identity is never colour-alone, and a `title` spells it out for screen readers. For hybrids the class is derived from the strongest component fiber (see Material Composition).
 
 **ISA Certification block** (where applicable, before the spec table) — if `isa_certified` is true, show a larger version of the ISA Approved stamp badge (same visual: charcoal frame, teal + coral ISA mark, white "APPROVED" text with teal checkmark in the V), left-aligned, ~80px wide. If false, show a small gray text line "Not ISA Certified" — subdued, not alarming. Tree protectors have no `isa_certified` field — omit this block entirely.
@@ -300,6 +462,19 @@ The letter is **dark ink `#1F2937` on every fill**: white text fails WCAG AA on 
 ---
 
 ### Spec rows per gear type
+
+**Every table below is preceded by a shared Price row** — it is not repeated in each table:
+
+| Row label | Field | Display notes |
+|-----------|-------|---------------|
+| Price | `price` | In the display currency, `≈`-prefixed when converted, with the as-sold original beneath in small gray. Omit the row when `price` is null. Webbings label it **"Price per meter"** and append `/m`; tree protectors append `per single` / `per pair`. |
+
+This is what puts price on the **compare page**: compare renders `SPEC_ROWS`, so a type that has no
+price row has no price column — which is why, until now, you could compare two weblocks on weight
+and breaking strength but not on what they cost. Price is the **first row** of every compare table.
+
+On the **detail page** the price already appears in the header block, so it is *not* repeated in the
+spec grid — the row is declared for compare and suppressed in `SpecTable`.
 
 **Webbing**
 | Row label | Field | Display notes |
@@ -310,7 +485,7 @@ The letter is **dark ink `#1F2937` on every fill**: white text fails WCAG AA on 
 | Weight | `weight` | Append "g/m"; omit if null |
 | Breaking Strength | `breaking_strength` | Append "kN"; omit if null |
 | Stretch | `stretch` | JSON array of {kn, percent} points. **≥ 3 measured points** → a two-row table spanning the full grid width: `Load` across the top, `Stretch` beneath, **one column per measured point** — nothing interpolated, no fixed column set. Ascending by kN; **0 kN is dropped** (every curve reads 0% there); long curves scroll horizontally with the row-label stub pinned left. **1–2 points** → inline text instead, e.g. `3.4% @ 10 kN · 4.7% @ 15 kN` (a one- or two-column table is all chrome, no signal). Row is omitted when there are no *measured* points — note this is stricter than `stretch != null`: a curve like `[{"percent": 8}]` (no `kn`) has nothing to show. |
-| Classification | `classification` | **Not a spec row.** Renders as a colored bubble beside the product name — see § Classification bubble below. |
+| Classification | `classification` | **Not a spec row.** Renders as a colored bubble beside the product name, and only when the webbing is ISA certified or under 22 kN — see § Classification bubble below. |
 | Colors | `colors` | Comma-separated string — render as small color-name chips |
 | ISA Certified | `isa_certified` | Handled by the ISA Certification block above the spec table — no row needed here |
 
@@ -370,7 +545,7 @@ The letter is **dark ink `#1F2937` on every fill**: white text fails WCAG AA on 
 | Length | `length` | Append "cm" |
 | Thickness | `thickness` | Append "mm" |
 | Sling Attachment | `has_sling_attachment` | "Yes" or omit row if false |
-| Price Per | `price_unit` | "single" or "pair" — shown inline with price in header, not as its own spec row |
+| Price Per | `price_unit` | "single" or "pair" — appended to the price in the header and to the shared Price row, not a spec row of its own. It stays a **filter** pill ("Sold As") because pair pricing is the one place where two tree protectors' prices are not directly comparable. |
 
 *No ISA Certified field, no ISA Warning field.*
 
@@ -449,6 +624,28 @@ heading sits on its own line **below** the "← Manufacturers" back link, and is
 brand's `website` (new tab, teal hover + underline) when one exists — the same destination as the
 card's Visit Website button. Brands with no `website` render the name as a plain, non-link heading.
 
+**Detail page gear sections.** Below the heading the brand's inventory is grouped into one section
+per gear type, in the nav's gear-type order; types the brand has none of are omitted entirely.
+
+- **Ordering within a section is alphabetical by `name` (A→Z)**, never API/insertion order. The
+  sections are the one place in the app that renders gear outside the listing page, so they'd
+  otherwise inherit raw id order — which reads as random to anyone scanning a brand's catalogue for
+  a specific product. This is the same rule the gear listing applies with no explicit sort, so a
+  brand's webbings read in the same order in both places.
+- **Each section header is a collapse toggle.** The whole header — the type label, the item count,
+  and a small chevron to their right — is one `<button>`; clicking anywhere on it (label, count or
+  chevron) collapses the section, hiding its card grid and leaving the header in place. Clicking
+  again expands it. The chevron points **down** when expanded and rotates to point **right** when
+  collapsed (a CSS rotation on one glyph, so the two states are the same mark and read as one
+  control moving).
+- **Sections start expanded**, so the default view of a brand page is its whole catalogue. Collapse
+  state is per-section and lives in component state only — it is not persisted to the URL or across
+  navigations, because it's a transient reading aid, not a view worth sharing.
+- The header keeps the small-caps teal-dotted styling used elsewhere for section labels, and carries
+  the shared interactive affordances (cursor pointer, teal focus ring) since it is now a control.
+  The section root carries `data-collapsed`, and the button `aria-expanded`, so the state is
+  readable to both tests and assistive tech.
+
 **Grid only, with a sort control.** There is no Cards/List view toggle — the directory is a card
 grid, and that toolbar slot holds a **Sort by** dropdown instead. Options:
 
@@ -493,7 +690,7 @@ and disappears entirely when none are (see the note in `manufacturers.cy.ts`; th
 - **All interactive elements**: cursor pointer, teal focus ring on keyboard nav
 - **Border radius**: consistent ~8px for pills, ~14px for cards, ~6px for buttons
 - **No sharp rectangles anywhere** — even the large CTA buttons are rounded
-- **ISA Certified** always uses the official ISA Approved stamp badge (charcoal frame, teal + coral ISA mark, white "APPROVED", teal checkmark). On cards: miniature stamp ~28px tall, top-right of image area (below the classification bubble when the item has one), only shown when true. On detail page: ~80px wide block above specs, "Not ISA Certified" in subdued gray when false. Never use a plain checkmark or generic pill — the stamp is the trust signal.
+- **ISA Certified** always uses the official ISA Approved stamp badge (charcoal frame, teal + coral ISA mark, white "APPROVED", teal checkmark). On cards: miniature stamp ~28px tall, top-right of image area (below the classification bubble when the webbing has one — a letter bubble only ever appears on a certified item, so the stamp is always its neighbour), only shown when true. On detail page: ~80px wide block above specs, "Not ISA Certified" in subdued gray when false. Never use a plain checkmark or generic pill — the stamp is the trust signal.
 - **Empty states**: centered gray icon + short message — e.g. "No webbings match your filters" with a "Clear filters" teal link
 
 ### The two clear actions
@@ -513,6 +710,52 @@ too — it can't empty a result set), and the search box keeps showing the term.
 to ALL is part of the same promise: a HISTORIC-only scope is itself a filter, so a "clear filters"
 that left it engaged could still land on an empty grid.
 - **Loading skeleton**: same card shape as real cards, `animate-pulse` in light gray
+
+---
+
+## Safety & Data Notices
+
+Two standing notices, required before launch ([LAUNCH_RUNBOOK.md §10](LAUNCH_RUNBOOK.md)). The
+**copy is not owned by the frontend** — [SAFETY_AND_ACCURACY.md](SAFETY_AND_ACCURACY.md) is the source
+text, reviewed and approved by the ISA because it is published under their name. Change the wording
+there first, then mirror it into the components.
+
+Each notice is **one component rendered in two places**, with a `variant` prop for presentation only,
+so the wording physically cannot drift between surfaces (same reasoning as `LegacyBadge`).
+
+| Notice | Component | Placements |
+|---|---|---|
+| Safety disclaimer | `layout/SafetyNotice.tsx` | site footer (`variant="footer"`), gear detail page (`variant="callout"`) |
+| Data-accuracy note | `layout/DataAccuracyNote.tsx` | site footer (`variant="footer"`), listing toolbar beside the item count (`variant="inline"`) |
+
+- **Neither notice is dismissible.** A notice with a close button is one most readers have already
+  closed by the time it matters. There is no "don't show again" and no local-storage state.
+- **Footer** (`data-cy="site-footer"`) — white, top border, on every page. `AppLayout` is a flex
+  column so it settles at the bottom of short pages rather than riding up under the content.
+- **Detail-page callout** — amber panel (`amber-50` / `amber-200`), below the spec sheet, where
+  someone is reading the individual numbers they might act on. It lives in `GearDetailPage`, **not**
+  in `GearDetailBody`: that body is shared with the listing's Detailed view, which would otherwise
+  repeat the callout once per visible item.
+- **Listing inline note** — small gray text immediately after `data-cy="item-count"`. Reading how
+  much data there is, is the moment to say what it's worth.
+
+### `/safety` page
+
+Full safety text, static JSX (no markdown renderer — one route doesn't justify the dependency).
+Covers: breaking strength is not a working load (and where to find one), stretch curves are
+indicative and not comparable between brands, certification/warning data is a periodically-updated
+copy rather than a live feed, Legacy gear is not a fitness-for-use claim, and slacklining carries
+risk.
+
+The route is a **static** segment, so React Router ranks it above the dynamic `:slug` gear-type
+pattern — `/safety` must not be read as a gear type. It links out to the ISA's own warnings database
+as the authoritative source.
+
+> **Known data limitation the copy has to work around:** `isa_certified` is `bool = False` on every
+> gear model, so the data cannot distinguish *not certified* from *unknown*, and every unrecorded
+> product reads as uncertified. The `/safety` copy addresses this in prose. The real fix is a nullable
+> three-state field — a model change, tracked in LAUNCH_RUNBOOK.md §10, deliberately out of scope for
+> launch.
 
 ---
 

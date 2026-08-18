@@ -11,6 +11,15 @@ venv/
 .venv/
 *.db
 
+# Node dependencies. frontend/.gitignore covers the frontend's copy; this catches
+# every other one — notably infra/, which gets a node_modules once the pinned
+# Serverless Framework is installed (see infra/README.md).
+node_modules/
+
+# Serverless Framework's per-deploy build output (packaged artifacts + the
+# resolved CloudFormation template it uploads). Regenerated on every deploy.
+.serverless/
+
 # Scraper output (images + manifests)
 scraper/
 scripts/.cache/

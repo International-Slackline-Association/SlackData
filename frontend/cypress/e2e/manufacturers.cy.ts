@@ -118,6 +118,86 @@ describe('Manufacturers page', () => {
     })
   })
 
+  // ── Brand detail: gear sections ───────────────────────────────────────────
+  //
+  // The brand page groups the inventory into one section per gear type. Two
+  // rules live here (DESIGN.md § Detail page gear sections): items are
+  // alphabetical, and each section header collapses its grid. The grouping and
+  // sorting arithmetic is unit-tested in tests/unit/brandSections.test.ts —
+  // these pin the rendered DOM and the interaction.
+
+  // The brand with the deepest catalogue, so the page has several sections.
+  const visitBiggestBrand = () => {
+    cy.visit('/manufacturers')
+    cy.get('[data-cy="manufacturers-card"]').first()
+      .find('[data-cy="manufacturer-name"]').click()
+    cy.get('[data-cy="brand-gear-section"]').should('have.length.gte', 1)
+  }
+
+  it('lists each gear section\'s items alphabetically by name', () => {
+    visitBiggestBrand()
+    cy.get('[data-cy="brand-gear-section"]').each(($section) => {
+      const names = Cypress.$($section).find('[data-cy="gear-card-name"]')
+        .toArray().map(el => el.textContent!.trim())
+      const sorted = [...names].sort((a, b) => a.localeCompare(b))
+      expect(names, `${$section.attr('data-slug')} is A→Z`).to.deep.equal(sorted)
+    })
+  })
+
+  it('every gear section header is a collapse toggle with a chevron', () => {
+    visitBiggestBrand()
+    cy.get('[data-cy="brand-gear-section"]').each(($section) => {
+      cy.wrap($section).find('[data-cy="brand-section-toggle"]').should('have.length', 1)
+      cy.wrap($section).find('[data-cy="brand-section-chevron"]').should('exist')
+    })
+  })
+
+  it('sections start expanded', () => {
+    visitBiggestBrand()
+    cy.get('[data-cy="brand-gear-section"]').first()
+      .should('have.attr', 'data-collapsed', 'false')
+      .find('[data-cy="brand-section-toggle"]')
+      .should('have.attr', 'aria-expanded', 'true')
+    cy.get('[data-cy="brand-gear-section"]').first()
+      .find('[data-cy="gear-card"]').should('be.visible')
+  })
+
+  it('clicking the section name collapses that section\'s cards', () => {
+    visitBiggestBrand()
+    cy.get('[data-cy="brand-gear-section"]').first().as('section')
+    cy.get('@section').find('[data-cy="brand-section-label"]').click()
+    cy.get('@section').should('have.attr', 'data-collapsed', 'true')
+    cy.get('@section').find('[data-cy="brand-section-toggle"]')
+      .should('have.attr', 'aria-expanded', 'false')
+    cy.get('@section').find('[data-cy="gear-card"]').should('not.exist')
+    // The header itself stays put, so the section can be re-opened.
+    cy.get('@section').find('[data-cy="brand-section-toggle"]').should('be.visible')
+  })
+
+  it('clicking the chevron collapses, and clicking again expands', () => {
+    visitBiggestBrand()
+    cy.get('[data-cy="brand-gear-section"]').first().as('section')
+    cy.get('@section').find('[data-cy="gear-card"]').its('length').then((count) => {
+      cy.get('@section').find('[data-cy="brand-section-chevron"]').click()
+      cy.get('@section').should('have.attr', 'data-collapsed', 'true')
+      cy.get('@section').find('[data-cy="brand-section-chevron"]').click()
+      cy.get('@section').should('have.attr', 'data-collapsed', 'false')
+      cy.get('@section').find('[data-cy="gear-card"]').should('have.length', count)
+    })
+  })
+
+  it('collapsing one section leaves the others open', () => {
+    visitBiggestBrand()
+    cy.get('[data-cy="brand-gear-section"]').then(($sections) => {
+      if ($sections.length < 2) return // brand has one gear type — nothing to assert
+      cy.get('[data-cy="brand-gear-section"]').first()
+        .find('[data-cy="brand-section-toggle"]').click()
+      cy.get('[data-cy="brand-gear-section"]').eq(1)
+        .should('have.attr', 'data-collapsed', 'false')
+        .find('[data-cy="gear-card"]').should('exist')
+    })
+  })
+
   it('each card shows a gear-count row listing how many items the brand has', () => {
     cy.get('[data-cy="manufacturers-card"]').first()
       .find('[data-cy="manufacturer-gear-counts"]')

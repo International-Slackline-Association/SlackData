@@ -8,6 +8,7 @@ from slack_data.database import get_session, create_db_and_tables, READ_ONLY
 from slack_data.seed import seed_catalog
 
 from slack_data.api.routers.brand_router import brand_router
+from slack_data.api.routers.fx_router import fx_router
 from slack_data.api.routers.grip_router import grip_router
 from slack_data.api.routers.leashring_router import leashring_router
 from slack_data.api.routers.roller_router import roller_router
@@ -56,6 +57,8 @@ app.add_middleware(
 )
 
 app.include_router(brand_router)
+# Display-layer FX rates — no session, no DB access, safe under READ_ONLY.
+app.include_router(fx_router)
 app.include_router(grip_router)
 app.include_router(leashring_router)
 app.include_router(roller_router)

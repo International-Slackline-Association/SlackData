@@ -17,11 +17,12 @@
 // is the current case: on the model for webbings/weblocks/rollers, but null for
 // all 367 rows because no seed JSON carries the key.
 
-import { useMemo } from 'react'
+import { useCallback, useMemo } from 'react'
 import { Link, useParams, useSearchParams } from 'react-router-dom'
 import { getGearType } from '@/config/gearTypes'
 import { useGearList } from '@/hooks/useGearList'
-import { SPEC_ROWS } from '@/config/specRows'
+import { useCurrency } from '@/context/CurrencyContext'
+import { SPEC_ROWS, type PriceFormatter } from '@/config/specRows'
 import type { AnyItem } from '@/utils/format'
 import type { GearSlug } from '@/types'
 import NotFoundPage from './NotFoundPage'
@@ -31,6 +32,15 @@ export default function ComparePage() {
   const meta = slug ? getGearType(slug) : undefined
   const [params] = useSearchParams()
   const { items, loading } = useGearList(meta?.slug ?? '', !!meta?.available)
+  const { priceText } = useCurrency()
+
+  // Every compared price is shown in the one display currency — comparing a
+  // 5377 RUB grip against an 89 USD one side by side is exactly the question
+  // this page exists to answer, and raw amounts can't answer it.
+  const money = useCallback<PriceFormatter>(
+    item => priceText(item, meta?.slug ?? ''),
+    [priceText, meta?.slug],
+  )
 
   const ids = useMemo(() => {
     const raw = params.get('ids')
@@ -54,8 +64,8 @@ export default function ComparePage() {
     const all = SPEC_ROWS[meta?.slug as GearSlug] ?? []
     const data = items as unknown as AnyItem[]
     if (data.length === 0) return all
-    return all.filter(row => data.some(it => row.value(it) !== ''))
-  }, [meta?.slug, items])
+    return all.filter(row => data.some(it => row.value(it, money) !== ''))
+  }, [meta?.slug, items, money])
 
   if (!meta) return <NotFoundPage />
 
@@ -115,13 +125,27 @@ export default function ComparePage() {
                     {row.unit ? ` (${row.unit})` : ''}
                   </th>
                   {columns.map(item => {
-                    const text = row.value(item)
+                    const text = row.value(item, money)
+                    const secondary = row.secondary?.(item, money) ?? ''
                     return (
                       <td
                         key={String(item.id)}
+                        data-cy="compare-cell"
+                        data-id={String(item.id)}
                         className="border-b border-gray-100 px-4 py-2.5 align-top text-gray-900"
                       >
-                        {text === '' ? <span className="text-gray-300">—</span> : text}
+                        {text === '' ? (
+                          <span className="text-gray-300">—</span>
+                        ) : (
+                          <>
+                            {text}
+                            {/* The as-sold price, so a converted figure in this
+                                column is never mistaken for the real one. */}
+                            {secondary && (
+                              <div className="text-xs font-normal text-gray-400">{secondary}</div>
+                            )}
+                          </>
+                        )}
                       </td>
                     )
                   })}

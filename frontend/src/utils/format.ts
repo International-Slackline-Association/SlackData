@@ -19,13 +19,11 @@ export function dataAttrs(item: AnyItem, fields: string[]): Record<string, strin
   return attrs
 }
 
-// Price with its currency code, e.g. "120 EUR". Returns null when no price.
-export function formatPrice(price: unknown, currency: unknown): string | null {
-  if (price == null) return null
-  const amount = typeof price === 'number' ? price : Number(price)
-  const cur = currency ? ` ${String(currency)}` : ''
-  return `${amount}${cur}`
-}
+// Prices are NOT formatted here. Every price on the site is rendered through
+// the display currency (see context/CurrencyContext `priceText`), which needs
+// the live rate table — something a pure formatting helper can't reach. The old
+// `formatPrice(price, currency)` that printed "120 EUR" is gone: it stated an
+// amount without saying it was one of fourteen different currencies.
 
 // A spec value with an optional unit appended, e.g. "25 mm". "" when null.
 // Multi-select fields (webbing `material`, roller `material`) arrive as arrays;

@@ -7,19 +7,27 @@
 //
 // Membership is decided on `brand_name`, the gear item's computed field, which
 // resolves through the Brand relationship — so it always equals the Brand row's
-// own `name` and can't drift from what the directory counted.
+// own `name` and can't drift from what the directory counted. The grouping and
+// its A→Z ordering live in utils/brandSections.ts, where they are unit-tested.
+//
+// Each section header is a collapse toggle (DESIGN.md § Detail page gear
+// sections). Collapse state is transient component state — a reading aid for a
+// long catalogue, not something worth putting in the URL.
 
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import GearGrid from '@/components/gear/GearGrid'
 import { GEAR_TYPES } from '@/config/gearTypes'
 import { useBrandDirectory } from '@/hooks/useBrandDirectory'
+import { buildBrandSections } from '@/utils/brandSections'
 import type { AnyItem } from '@/utils/format'
 import NotFoundPage from './NotFoundPage'
 
 export default function BrandDetailPage() {
   const { id } = useParams()
   const { brands, gearBySlug, loading } = useBrandDirectory()
+  // Slugs the reader has collapsed; absent = expanded, so sections default open.
+  const [collapsed, setCollapsed] = useState<Record<string, boolean>>({})
 
   const brand = useMemo(
     () => brands.find(b => String(b.id) === String(id)),
@@ -28,13 +36,15 @@ export default function BrandDetailPage() {
 
   const sections = useMemo(() => {
     if (!brand) return []
-    return GEAR_TYPES.map(type => ({
-      type,
-      items: ((gearBySlug[type.slug] ?? []) as unknown as AnyItem[]).filter(
-        item => String(item.brand_name) === brand.name,
-      ),
-    })).filter(s => s.items.length > 0)
+    return buildBrandSections(
+      GEAR_TYPES,
+      gearBySlug as Partial<Record<string, AnyItem[]>>,
+      brand.name,
+    )
   }, [brand, gearBySlug])
+
+  const toggle = (slug: string) =>
+    setCollapsed(prev => ({ ...prev, [slug]: !prev[slug] }))
 
   if (loading) {
     return (
@@ -84,16 +94,43 @@ export default function BrandDetailPage() {
           No gear listed for this manufacturer yet.
         </div>
       ) : (
-        sections.map(({ type, items }) => (
-          <section key={type.slug} data-cy="brand-gear-section" data-slug={type.slug} className="mb-10">
-            <h2 className="mb-3 flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-gray-500">
-              <span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: '#00897B' }} />
-              {type.label}
-              <span className="font-normal text-gray-400">({items.length})</span>
-            </h2>
-            <GearGrid items={items} meta={type} />
-          </section>
-        ))
+        sections.map(({ type, items }) => {
+          const isOpen = !collapsed[type.slug]
+          return (
+            <section
+              key={type.slug}
+              data-cy="brand-gear-section"
+              data-slug={type.slug}
+              data-collapsed={String(!isOpen)}
+              className="mb-10"
+            >
+              <h2 className="mb-3">
+                <button
+                  type="button"
+                  data-cy="brand-section-toggle"
+                  aria-expanded={isOpen}
+                  onClick={() => toggle(type.slug)}
+                  className="flex cursor-pointer items-center gap-2 rounded text-xs font-semibold uppercase tracking-wider text-gray-500 hover:text-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-primary"
+                >
+                  <span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: '#00897B' }} />
+                  <span data-cy="brand-section-label">{type.label}</span>
+                  <span className="font-normal text-gray-400">({items.length})</span>
+                  {/* One glyph for both states — it rotates rather than swapping,
+                      so expanded/collapsed read as the same control moving. */}
+                  <svg
+                    data-cy="brand-section-chevron"
+                    viewBox="0 0 20 20"
+                    aria-hidden="true"
+                    className={`h-3.5 w-3.5 transition-transform ${isOpen ? '' : '-rotate-90'}`}
+                  >
+                    <path d="M5 7.5 10 12.5 15 7.5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </button>
+              </h2>
+              {isOpen && <GearGrid items={items} meta={type} />}
+            </section>
+          )
+        })
       )}
     </div>
   )

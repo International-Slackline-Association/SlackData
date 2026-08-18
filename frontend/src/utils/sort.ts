@@ -42,6 +42,12 @@ export function sortItems(items: AnyItem[], sort: SortSpec | null): AnyItem[] {
 
   const { field, direction } = sort
   const factor = direction === 'asc' ? 1 : -1
+  // Price is the one field whose stored number can't be compared item to item:
+  // it's in whatever currency the seller charges, so "Price Low→High" on the raw
+  // values ranks a 5377 RUB grip against an 89 USD one. Order on the normalized
+  // value the listing attaches instead. The URL and the sort dropdown still say
+  // `price` — this is purely which number gets compared.
+  const key = field === 'price' ? 'price_base' : field
 
   // Webbing stretch sort. The field carries the reference kN (`stretch@10`), so
   // sorting by stretch is self-contained — it reads the % at that kN straight off
@@ -54,8 +60,8 @@ export function sortItems(items: AnyItem[], sort: SortSpec | null): AnyItem[] {
   }
 
   return [...items].sort((a, b) => {
-    const av = a[field]
-    const bv = b[field]
+    const av = a[key]
+    const bv = b[key]
     const an = av == null || av === '' ? null : Number(av)
     const bn = bv == null || bv === '' ? null : Number(bv)
     return compareNumeric(a, b, an, bn, factor)
