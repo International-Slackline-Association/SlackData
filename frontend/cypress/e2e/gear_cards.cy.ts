@@ -242,6 +242,75 @@ GEAR_TYPES.filter(g => g.slug !== 'webbings').forEach(({ slug, label }) => {
   })
 })
 
+// ── Width range in the inline specs row ───────────────────────────────────────
+// Weblocks accept a BAND of webbing widths, so the card's width segment must be
+// the whole band ("24–26 mm"), not `width_min` alone — a lock printed as "24 mm"
+// reads as "24 mm only", which is exactly the wrong conclusion for a buyer with
+// 25 mm webbing. Collapses to a single figure when the bounds coincide (or there
+// is no max) so a genuinely single-width lock is not dressed up as a range.
+// The formatting rule itself is unit-tested in tests/unit/format.test.ts.
+
+describe('Card inline width range — Weblocks', () => {
+  let ranged: Record<string, unknown> | undefined
+  let single: Record<string, unknown> | undefined
+
+  const cardFor = (id: unknown) =>
+    cy.get(`[data-cy="gear-card"]:has([data-cy="gear-card-name"][href="/weblocks/${id}"])`)
+
+  before(() => {
+    cy.fetchAllItems('weblock').then((all) => {
+      const items = all as Record<string, unknown>[]
+      ranged = items.find(i => i.width_max != null && i.width_max !== i.width_min)
+      single = items.find(i => i.width_max == null || i.width_max === i.width_min)
+    })
+  })
+
+  beforeEach(() => {
+    cy.visit('/weblocks')
+  })
+
+  it('shows both bounds when the lock takes a range of widths', () => {
+    if (!ranged) return
+    cardFor(ranged.id)
+      .find('[data-cy="gear-card-specs"]')
+      .should('contain.text', `${ranged.width_min}–${ranged.width_max} mm`)
+  })
+
+  it('does not show the minimum on its own', () => {
+    if (!ranged) return
+    cardFor(ranged.id)
+      .find('[data-cy="gear-card-specs"]')
+      .invoke('text')
+      // "24 mm" must not appear unattached to its upper bound.
+      .should('not.match', new RegExp(`(^|[^–\\d])${ranged.width_min} mm`))
+  })
+
+  it('collapses to one figure when min and max coincide', () => {
+    if (!single) return
+    cardFor(single.id)
+      .find('[data-cy="gear-card-specs"]')
+      .should('contain.text', `${single.width_min} mm`)
+      .and('not.contain.text', `${single.width_min}–`)
+  })
+
+  it('keeps the width between the material and the breaking strength', () => {
+    cy.fetchAllItems('weblock').then((all) => {
+      const full = (all as Record<string, unknown>[]).find(
+        i => i.material != null && i.width_max != null && i.breaking_strength != null,
+      )
+      if (!full) return
+      cardFor(full.id)
+        .find('[data-cy="gear-card-specs"]')
+        .invoke('text')
+        .then((text) => {
+          const width = text.indexOf(`${full.width_min}`)
+          expect(text.indexOf(String(full.material))).to.be.lessThan(width)
+          expect(width).to.be.lessThan(text.indexOf(`${full.breaking_strength} kN`))
+        })
+    })
+  })
+})
+
 // ── Classification bubble on the card ─────────────────────────────────────────
 // Webbing only, and only in two cases (see src/.../ClassificationBubble.tsx):
 //   · the webbing is ISA certified → its granted class (A+/A/B/C). A letter

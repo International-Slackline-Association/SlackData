@@ -392,7 +392,14 @@ columns, which meant the specs that actually distinguish products were the ones 
 **Content area** (bottom ~60%):
 - Brand name: small-caps gray, ~11px, ~4px below image area
 - Product name: bold near-black, ~15px, clickable → detail page
-- Key specs inline row: small gray text with `·` separators — e.g. `25mm · 280g/m · MBS 32kN`
+- Key specs inline row: small gray text with `·` separators — e.g. `25mm · 280g/m · MBS 32kN`.
+  A segment is normally one field, but it may be a **composite** where a single field is a
+  half-truth: **weblocks show the full range of webbing widths the device accepts**
+  (`width_min` + `width_max` → `24–26 mm`), never `width_min` alone — a lock listed as `24 mm`
+  reads as "24 mm only", which is the one thing the buyer must not conclude. It collapses to a
+  single figure (`26 mm`) when the two bounds are equal or `width_max` is null, so a genuinely
+  single-width lock is not dressed up as a range. Same rule, same formatter as the detail page's
+  **Width Range** row.
 - Feature tag pills: light gray bg, dark-gray text, small rounded pills — e.g. `Dyneema`, `Tubular`
 - **ISA Approved badge** — if `isa_certified` is true, show a miniature version of the ISA Approved stamp in the top-right overlay stack of the image area (under the classification bubble when both are present). The stamp replicates the official badge: dark charcoal frame, ISA geometric mark (teal + coral), bold white "APPROVED" text, teal checkmark in the V. If false, omit entirely — no "Not certified" label on cards.
 - Price: bold amber-orange in the **display currency** — e.g. `≈ $84 → Buy` (the "→ Buy" in slightly
@@ -530,7 +537,7 @@ spec grid — the row is declared for compare and suppressed in `SpecTable`.
 | Row label | Field | Display notes |
 |-----------|-------|---------------|
 | Material | `material` | MetalMaterial enum value |
-| Width Range | `width_min` + `width_max` | "25–35mm" or "25mm" if max is null |
+| Width Range | `width_min` + `width_max` | "25–35mm"; a single figure ("25mm") when max is null **or equal to min** |
 | Weight | `weight` | Append "g" |
 | Breaking Strength | `breaking_strength` | Append "kN" |
 | Front Pin | `front_pin` | Enum value as-is |
@@ -542,7 +549,7 @@ spec grid — the row is declared for compare and suppressed in `SpecTable`.
 | Row label | Field | Display notes |
 |-----------|-------|---------------|
 | Material | `material` | MetalMaterial enum |
-| Width Range | `width_min` + `width_max` | "25–35mm" |
+| Width Range | `width_min` + `width_max` | "25–35mm"; a single figure ("25mm") when max is null **or equal to min** |
 | Weight | `weight` | Append "g" |
 | WLL | `wll` | Working Load Limit — append "kN" |
 | MBS | `mbs` | Min Breaking Strength — append "kN" |
