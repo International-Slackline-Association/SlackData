@@ -13,7 +13,7 @@ import type { GearTypeMeta } from '@/config/gearTypes'
 import { filterGroupsFor, type FilterGroupMeta } from '@/config/filterGroups'
 import { useCurrency } from '@/context/CurrencyContext'
 import { moneyPrecision, symbolFor } from '@/utils/money'
-import { derivePillOptions } from '@/utils/filter'
+import { derivePillOptions, NO_VALUE_PILL } from '@/utils/filter'
 import { rangeDomain } from '@/utils/range'
 import type { useUrlState } from '@/hooks/useUrlState'
 import type { AnyItem } from '@/utils/format'
@@ -25,12 +25,18 @@ type UrlState = ReturnType<typeof useUrlState>
 
 // A boolean pill group is hidden when nothing in the data is `true` — e.g. no
 // ISA-certified rollers means the whole "ISA Certified" toggle is dropped rather
-// than showing a lone, useless "No". Enum groups are left as-is even when empty
-// (isa_warning currently has no data but is still a valid, forthcoming field).
+// than showing a lone, useless "No".
+//
+// A `includeNone` group (isa_warning) is hidden when the only pill left would be
+// "None" — a gear type nothing has been warned about doesn't need a filter whose
+// single option selects everything.
 function pillGroupVisible(meta: FilterGroupMeta, items: AnyItem[]): boolean {
-  if (meta.type !== 'pill' || meta.pillKind !== 'bool') return true
-  const options = derivePillOptions(items, meta.group, meta.pillKind, meta.capitalize, meta.order)
-  return options.some(o => o.value === 'true')
+  if (meta.type !== 'pill') return true
+  if (meta.includeNone) {
+    return derivePillOptions(items, meta).some(o => o.value !== NO_VALUE_PILL)
+  }
+  if (meta.pillKind !== 'bool') return true
+  return derivePillOptions(items, meta).some(o => o.value === 'true')
 }
 
 // Pill filter group. Groups with exactly two options are single-select (a radio
@@ -38,7 +44,7 @@ function pillGroupVisible(meta: FilterGroupMeta, items: AnyItem[]): boolean {
 // back to "all". Groups with 3+ options are multi-select (OR within the group)
 // and get subtle All / None shortcuts.
 function PillGroup({ meta, url, items }: { meta: FilterGroupMeta; url: UrlState; items: AnyItem[] }) {
-  const options = derivePillOptions(items, meta.group, meta.pillKind, meta.capitalize, meta.order)
+  const options = derivePillOptions(items, meta)
   const single = options.length === 2
   const selected = url.getPillValues(meta.group)
 

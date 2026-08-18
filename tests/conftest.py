@@ -19,33 +19,21 @@ from fastapi.testclient import TestClient
 from sqlmodel import Session, SQLModel, create_engine
 from sqlmodel.pool import StaticPool
 
+from slack_data.api.routing import register_routers
 from slack_data.database import get_session
 from slack_data.models.brands import Brand
-from slack_data.api.routers.brand_router import brand_router
-from slack_data.api.routers.fx_router import fx_router
-from slack_data.api.routers.grip_router import grip_router
-from slack_data.api.routers.leashring_router import leashring_router
-from slack_data.api.routers.roller_router import roller_router
-from slack_data.api.routers.starterkit_router import starterkit_router
-from slack_data.api.routers.treepro_router import treepro_router
-from slack_data.api.routers.tricklinekit_router import tricklinekit_router
-from slack_data.api.routers.webbing_router import webbing_router
-from slack_data.api.routers.weblock_router import weblock_router
 
 
-def _build_test_app() -> FastAPI:
-    """Minimal app — same routers as production, no lifespan seeding."""
+def _build_test_app(read_only: bool = False) -> FastAPI:
+    """Minimal app — same routers as production, no lifespan seeding.
+
+    Registration goes through the same `register_routers` main.py uses, so the
+    routes these tests exercise are the routes production serves. `read_only`
+    mirrors the hosted catalogue, where the write routes are never mounted; see
+    slack_data/api/routing.py and tests/test_read_only.py.
+    """
     app = FastAPI()
-    app.include_router(brand_router)
-    app.include_router(fx_router)  # no session dependency — display-layer FX rates
-    app.include_router(grip_router)
-    app.include_router(leashring_router)
-    app.include_router(roller_router)
-    app.include_router(starterkit_router)
-    app.include_router(treepro_router)
-    app.include_router(tricklinekit_router)
-    app.include_router(webbing_router)
-    app.include_router(weblock_router)
+    register_routers(app, read_only=read_only)
     return app
 
 
@@ -69,6 +57,25 @@ def session(engine):
 @pytest.fixture
 def client(session):
     app = _build_test_app()
+
+    def get_session_override():
+        yield session
+
+    app.dependency_overrides[get_session] = get_session_override
+
+    with TestClient(app) as c:
+        yield c
+
+
+@pytest.fixture
+def read_only_client(session):
+    """A client for the hosted catalogue's shape: GET routes and nothing else.
+
+    The session is still writable — the point of the guard is that the routes
+    are absent, not that SQLite refuses. That distinction matters because
+    Phase 2 adds a store the Lambda *can* write to.
+    """
+    app = _build_test_app(read_only=True)
 
     def get_session_override():
         yield session

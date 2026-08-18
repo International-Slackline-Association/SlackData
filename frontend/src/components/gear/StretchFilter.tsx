@@ -46,17 +46,16 @@ export default function StretchFilter({
     return top.sort((a, b) => a.kn - b.kn)
   }, [items, displayKn])
 
-  // % domain = spread of stretch % across webbings at the selected kN.
+  // % domain = spread of stretch % across webbings at the selected kN. Null
+  // until a pill is engaged — there is no curve position to measure a % at, so
+  // the slider is not rendered at all (see below).
   const domain = useMemo(() => {
-    if (displayKn == null) return { lo: 0, hi: 0, step: 1 }
+    if (displayKn == null) return null
     const ps = items
       .map(i => percentAtKn(i.stretch, displayKn))
       .filter((p): p is number => p != null)
     return rangeDomain(ps)
   }, [items, displayKn])
-
-  const lo = min !== '' ? Number(min) : domain.lo
-  const hi = max !== '' ? Number(max) : domain.hi
 
   return (
     <FilterGroup group="stretch" label="Stretch at kN">
@@ -89,18 +88,23 @@ export default function StretchFilter({
         })}
       </div>
 
-      <div className="mt-3">
-        <RangeSlider
-          domainLo={domain.lo}
-          domainHi={domain.hi}
-          lo={lo}
-          hi={hi}
-          unit="%"
-          step={domain.step}
-          onMinChange={v => onMinChange(v <= domain.lo ? '' : String(v))}
-          onMaxChange={v => onMaxChange(v >= domain.hi ? '' : String(v))}
-        />
-      </div>
+      {/* The % slider only exists once a kN is engaged. With no reference point
+          its domain would be [0, 0] — a dead track that filters nothing, but
+          reads as a control the user has failed to understand. */}
+      {domain && (
+        <div className="mt-3">
+          <RangeSlider
+            domainLo={domain.lo}
+            domainHi={domain.hi}
+            lo={min !== '' ? Number(min) : domain.lo}
+            hi={max !== '' ? Number(max) : domain.hi}
+            unit="%"
+            step={domain.step}
+            onMinChange={v => onMinChange(v <= domain.lo ? '' : String(v))}
+            onMaxChange={v => onMaxChange(v >= domain.hi ? '' : String(v))}
+          />
+        </div>
+      )}
     </FilterGroup>
   )
 }

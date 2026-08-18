@@ -547,7 +547,9 @@ describe('Webbing classification is not a filter', () => {
 //   - kN pills are populated dynamically from the union of all kN values in the dataset.
 //   - NOTHING is selected on load. The widget starts fully disengaged: no pill is
 //     active, it does not filter, and cards carry no data-stretch-percent until a
-//     kN is explicitly clicked.
+//     kN is explicitly clicked. The % slider is not rendered at all while
+//     disengaged — with no reference kN its domain is [0, 0], a dead track.
+//     It appears on the first pill click and is removed again on deselect/clear.
 //   - When a kN pill is selected, only webbings that have a data point at that kN are
 //     eligible (others are excluded regardless of the % range).
 //   - Min/Max % further narrows within the eligible set.
@@ -619,11 +621,29 @@ describe('Webbing stretch filter', () => {
       .should('have.length.gte', 1)
   })
 
-  it('shows a min % and max % input inside the stretch group', () => {
-    cy.get('[data-cy="filter-group"][data-group="stretch"]')
-      .find('[data-cy="range-min"]').should('exist')
-    cy.get('[data-cy="filter-group"][data-group="stretch"]')
-      .find('[data-cy="range-max"]').should('exist')
+  it('shows no % slider until a kN pill is engaged', () => {
+    const stretch = '[data-cy="filter-group"][data-group="stretch"]'
+    cy.get(stretch).find('[data-cy="stretch-kn-pill"]').should('have.length.gte', 1)
+    cy.get(stretch).find('[data-cy="range-min"]').should('not.exist')
+    cy.get(stretch).find('[data-cy="range-max"]').should('not.exist')
+  })
+
+  it('shows a min % and max % thumb once a kN pill is engaged', () => {
+    const stretch = '[data-cy="filter-group"][data-group="stretch"]'
+    cy.get(stretch).find('[data-cy="stretch-kn-pill"]').first().click()
+    cy.get(stretch).find('[data-cy="range-min"]').should('exist')
+    cy.get(stretch).find('[data-cy="range-max"]').should('exist')
+    // A live domain, not the dead [0, 0] track the disengaged widget would show.
+    cy.get(stretch).find('[data-cy="range-max"]')
+      .should(($el) => expect(Number($el.attr('max'))).to.be.greaterThan(0))
+  })
+
+  it('removes the % slider again when the kN pill is deselected', () => {
+    const stretch = '[data-cy="filter-group"][data-group="stretch"]'
+    cy.get(stretch).find('[data-cy="stretch-kn-pill"]').first().click()
+    cy.get(stretch).find('[data-cy="range-min"]').should('exist')
+    cy.get(stretch).find('[data-cy="stretch-kn-pill"][data-active="true"]').click()
+    cy.get(stretch).find('[data-cy="range-min"]').should('not.exist')
   })
 
   it('shows only the top-5 kN points as pills (integers, no 0 kN)', () => {
@@ -934,7 +954,10 @@ describe('Webbing stretch filter', () => {
     cy.get('[data-cy="clear-filters"]').first().click()
 
     cy.get(stretch).find('[data-cy="stretch-kn-pill"][data-active="true"]').should('not.exist')
-    // The % min thumb returns to its domain floor.
+    // With no kN engaged the % slider is gone entirely, not reset in place.
+    cy.get(stretch).find('[data-cy="range-min"]').should('not.exist')
+    // Re-engaging a pill brings it back at its domain floor, not the old bound.
+    cy.get(stretch).find('[data-cy="stretch-kn-pill"]').first().click()
     cy.get(stretch).find('[data-cy="range-min"]')
       .should(($el) => expect($el.val()).to.eq($el.attr('min')))
   })

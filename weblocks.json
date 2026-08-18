@@ -4645,7 +4645,7 @@
             "Anchor connection type": "Universal",
             "Webbing connection type": "Push Pin",
             "Compatible webbing width": "17mm - 26mm",
-            "ISA approved": "N/A",
+            "ISA approved": "true",
             "Price (per unit)": "139.9 USD"
         },
         "date_introduced": 1762905600000,

@@ -45,7 +45,18 @@ export interface FilterGroupMeta {
   // No group uses it today (classification, the one ranked domain, is no longer a
   // filter) — kept for the next ranked enum.
   order?: readonly string[]
+  // pills only; offer an explicit "None" pill for items with no value in this
+  // field, instead of silently excluding them. Only isa_warning uses it: an
+  // absent warning is a real answer people filter on ("show me the gear with
+  // nothing against it"), unlike an absent material, which just means unknown.
+  includeNone?: boolean
 }
+
+// Severity order for the ISA Warning pills — None, then worst to mildest.
+// Alphabetical would read "Notice · Recall · Warning", which buries the recall
+// in the middle. Values are omitted when no item of that type carries them, so
+// a gear type with no recalls simply has no Recall pill (see derivePillOptions).
+export const ISA_WARNING_ORDER = ['none', 'Recall', 'Warning', 'Notice'] as const
 
 export const FILTER_GROUPS: Record<GearSlug, FilterGroupMeta[]> = {
   webbings: [
@@ -60,7 +71,8 @@ export const FILTER_GROUPS: Record<GearSlug, FilterGroupMeta[]> = {
     // as a filter axis across the whole catalogue (filter by ISA Certified
     // instead).
     { group: 'isa_certified',     label: 'ISA Certified',     type: 'pill', pillKind: 'bool' },
-    { group: 'isa_warning',       label: 'ISA Warning',       type: 'pill', pillKind: 'enum' },
+    { group: 'isa_warning',       label: 'ISA Warning',       type: 'pill', pillKind: 'enum',
+      order: ISA_WARNING_ORDER, includeNone: true },
     { group: 'weight',            label: 'Weight',            type: 'range', unit: 'g/m' },
     { group: 'breaking_strength', label: 'Breaking Strength', type: 'range', unit: 'kN' },
     // + the Stretch widget (StretchFilter), appended in the sidebar for webbings
@@ -75,7 +87,8 @@ export const FILTER_GROUPS: Record<GearSlug, FilterGroupMeta[]> = {
     { group: 'front_pin',         label: 'Front Pin',         type: 'pill', pillKind: 'enum' },
     { group: 'attachment_point',  label: 'Attachment Point',  type: 'pill', pillKind: 'enum' },
     { group: 'isa_certified',     label: 'ISA Certified',     type: 'pill', pillKind: 'bool' },
-    { group: 'isa_warning',       label: 'ISA Warning',       type: 'pill', pillKind: 'enum' },
+    { group: 'isa_warning',       label: 'ISA Warning',       type: 'pill', pillKind: 'enum',
+      order: ISA_WARNING_ORDER, includeNone: true },
     { group: 'weight',            label: 'Weight',            type: 'range', unit: 'g' },
     { group: 'breaking_strength', label: 'Breaking Strength', type: 'range', unit: 'kN' },
   ],
@@ -84,7 +97,8 @@ export const FILTER_GROUPS: Record<GearSlug, FilterGroupMeta[]> = {
     { group: 'price', label: 'Price', type: 'range', valueField: 'price_display', currencyUnit: true },
     { group: 'material',          label: 'Material',          type: 'pill', pillKind: 'enum' },
     { group: 'isa_certified',     label: 'ISA Certified',     type: 'pill', pillKind: 'bool' },
-    { group: 'isa_warning',       label: 'ISA Warning',       type: 'pill', pillKind: 'enum' },
+    { group: 'isa_warning',       label: 'ISA Warning',       type: 'pill', pillKind: 'enum',
+      order: ISA_WARNING_ORDER, includeNone: true },
     { group: 'inner_diameter',    label: 'Inner Diameter',    type: 'range', unit: 'mm' },
     { group: 'outer_diameter',    label: 'Outer Diameter',    type: 'range', unit: 'mm' },
     { group: 'weight',            label: 'Weight',            type: 'range', unit: 'g' },
@@ -97,7 +111,8 @@ export const FILTER_GROUPS: Record<GearSlug, FilterGroupMeta[]> = {
     { group: 'width_min',                 label: 'Min Width',          type: 'pill', pillKind: 'int', unit: 'mm' },
     { group: 'connection_type',           label: 'Connection Type',    type: 'pill', pillKind: 'enum' },
     { group: 'isa_certified',             label: 'ISA Certified',      type: 'pill', pillKind: 'bool' },
-    { group: 'isa_warning',               label: 'ISA Warning',        type: 'pill', pillKind: 'enum' },
+    { group: 'isa_warning',               label: 'ISA Warning',        type: 'pill', pillKind: 'enum',
+      order: ISA_WARNING_ORDER, includeNone: true },
     { group: 'weight',                    label: 'Weight',             type: 'range', unit: 'g' },
     { group: 'wll',                       label: 'WLL',                type: 'range', unit: 'kN' },
     { group: 'mbs',                       label: 'MBS',                type: 'range', unit: 'kN' },
@@ -112,7 +127,8 @@ export const FILTER_GROUPS: Record<GearSlug, FilterGroupMeta[]> = {
     { group: 'lock_type',         label: 'Lock Type',         type: 'pill', pillKind: 'enum' },
     { group: 'bearing_material',  label: 'Bearing Material',  type: 'pill', pillKind: 'enum' },
     { group: 'isa_certified',     label: 'ISA Certified',     type: 'pill', pillKind: 'bool' },
-    { group: 'isa_warning',       label: 'ISA Warning',       type: 'pill', pillKind: 'enum' },
+    { group: 'isa_warning',       label: 'ISA Warning',       type: 'pill', pillKind: 'enum',
+      order: ISA_WARNING_ORDER, includeNone: true },
     { group: 'weight',            label: 'Weight',            type: 'range', unit: 'g' },
     { group: 'breaking_strength', label: 'Breaking Strength', type: 'range', unit: 'kN' },
   ],

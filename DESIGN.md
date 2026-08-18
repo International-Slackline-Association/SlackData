@@ -187,7 +187,7 @@ Each filter group:
 - **Exactly 2 options → single-select** (a radio with a clear): picking one replaces the other, and re-clicking the active pill clears the group back to "all". Applies to every boolean Yes/No group and any 2-value enum (e.g. Tree Protector "Sold As", Slider/Bearing Material on rollers).
 - **3+ options → multi-select** (OR within the group) with subtle **All / None** shortcuts (`data-cy="pill-select-all"` / `pill-select-none`) above the pills — All selects every option, None clears the group.
 
-**Hidden pill groups.** A boolean group is dropped entirely when nothing in the data is `true` — e.g. no roller / starter-kit / trickline-kit is ISA certified, so their "ISA Certified" toggle is omitted rather than showing a lone, useless "No". Empty enum groups (e.g. `isa_warning`, which currently has no data anywhere) still render — they're valid, forthcoming fields.
+**Hidden pill groups.** A boolean group is dropped entirely when nothing in the data is `true` — e.g. no roller / starter-kit / trickline-kit is ISA certified, so their "ISA Certified" toggle is omitted rather than showing a lone, useless "No". The **ISA Warning** group is dropped when the only pill left would be "None" — a gear type nothing has been warned about doesn't need a filter whose single option selects everything. Other enum groups always render.
 
 Filter groups per gear type — verified against `slack_data/models/*.py` and `utilities/`.
 
@@ -259,14 +259,19 @@ The `stretch` field is a JSON array of `{kn, percent}` pairs — a curve, not a 
 
 ```
 ┌─ Stretch at ──────────────────────────────────────┐
-│  [►10 kN (167)] [5 kN (61)] [6 kN (54)] …         │  ← single-select kN pills (top 5), with webbing counts
-│  Min %  [      ]   Max %  [      ]                 │  ← % range at the selected kN
+│  [10 kN (167)] [5 kN (61)] [6 kN (54)] …          │  ← single-select kN pills (top 5), with webbing counts
+└───────────────────────────────────────────────────┘        …and once a pill is engaged:
+┌─ Stretch at ──────────────────────────────────────┐
+│  [►10 kN (167)] [5 kN (61)] [6 kN (54)] …         │
+│  ├──────●───────────────●──────┤                   │  ← % range slider at the selected kN
+│  3.1 %                     14.8 %                  │
 └───────────────────────────────────────────────────┘
 ```
 
 Rules:
 - kN pills show only the **top 5 reference points**, chosen from the data: **0 kN is excluded** (every curve reads 0% there — a useless data point), **only integer kN qualify**, and the five are ranked by how many webbings carry a data point at that kN (ties broken toward the smaller kN). Each pill shows that **webbing count** in parentheses, e.g. `10 kN (167)`.
-- **Nothing is selected by default.** The widget loads fully disengaged: no pill is active, the % slider is inert, and it does not filter. A kN becomes active only on an explicit click. (There is no "default reference kN" — a pre-selected hint rendered a pill as active on load, implying a filter that wasn't applied.)
+- **Nothing is selected by default.** The widget loads fully disengaged: no pill is active and it does not filter. A kN becomes active only on an explicit click. (There is no "default reference kN" — a pre-selected hint rendered a pill as active on load, implying a filter that wasn't applied.)
+- **The % slider is not rendered until a kN pill is engaged.** With no reference point there is nothing to measure a % against, so its domain would be [0, 0] — a dead track showing `0 %` at both ends that cannot be dragged and filters nothing. The group is pills-only on load; the slider appears beneath them on the first pill click and disappears again when the pill is deselected or filters are cleared.
 - When a kN pill is active, only webbings that have a data point at exactly that kN are eligible; others are excluded
 - The min/max % range further narrows within eligible webbings
 - Deselecting the kN pill (clicking active pill) makes the widget fully inactive — all webbings show again
@@ -380,8 +385,9 @@ columns, which meant the specs that actually distinguish products were the ones 
 - **No gear-type badge.** Each listing shows a single gear type, so labelling every card "ROLLER" on the rollers page is redundant. Reintroduce a coral gear-type pill (top-left, absolute) only on views that mix types — e.g. manufacturer pages.
 - **Legacy badge, top-left overlay** (absolute, ~8px from the top-**left** corner) — a small red uppercase `Legacy` pill, shown only when `active` is false (discontinued / no longer sold). Nothing renders for active or unknown (`active` true/null) gear — an active card carries no status pill. Because the listing defaults to ALL, a grid routinely mixes badged and unbadged cards — the badge is what tells them apart, so it is never suppressed by the sidebar's status scope. This occupies the **top-left** slot (the one reserved above for a future gear-type pill), mirroring the manufacturer card's top-left **Inactive** pill (see § Manufacturer card anatomy), so both card types read the same way: lifecycle status on the left, classification/ISA on the right.
 - **Top-right overlay stack** (absolute, ~8px from the top-right corner, stacked vertically with ~6px gaps, right-aligned):
-  1. **Classification bubble** — webbing only, and only in the two cases § Classification bubble defines: an **ISA-certified** webbing shows its granted class, and a webbing under **22 kN** shows the gray **Not for Highline** pill. Identical component, colors and shape to the detail page's bubble — the highline class is the fastest read on a webbing card, so it belongs in the grid, not just one click deep. Omit entirely otherwise (including an uncertified `Not for Highline` webbing at 22 kN or more, and any null `classification`). Other gear types have no `classification` field and never show it. So a letter bubble always has the ISA stamp beneath it, while a `Not for Highline` pill usually stands alone.
-  2. **ISA Approved badge** — the miniature stamp, when `isa_certified` is true (see below).
+  1. **ISA warning bubble** — a small uppercase pill (`RECALL` / `WARNING` / `NOTICE`) whenever `isa_warning` is set, coloured by severity (see § ISA Warnings). It sits **above the classification bubble**, at the very top of the stack: a recalled webbing's Type A grant is the second thing you need to know, not the first. Omit entirely when `isa_warning` is null or `No Warning`, and on the three types with no `isa_warning` field (tree protectors, starter kits, trickline kits).
+  2. **Classification bubble** — webbing only, and only in the two cases § Classification bubble defines: an **ISA-certified** webbing shows its granted class, and a webbing under **22 kN** shows the gray **Not for Highline** pill. Identical component, colors and shape to the detail page's bubble — the highline class is the fastest read on a webbing card, so it belongs in the grid, not just one click deep. Omit entirely otherwise (including an uncertified `Not for Highline` webbing at 22 kN or more, and any null `classification`). Other gear types have no `classification` field and never show it. So a letter bubble always has the ISA stamp beneath it, while a `Not for Highline` pill usually stands alone.
+  3. **ISA Approved badge** — the miniature stamp, when `isa_certified` is true (see below).
 
 **Content area** (bottom ~60%):
 - Brand name: small-caps gray, ~11px, ~4px below image area
@@ -434,7 +440,7 @@ never by editing one side.
   item is already priced in the display currency. Webbings append `/m`; tree protectors append the
   price unit in small gray: `≈ $45 per pair`.
 
-**ISA Warning banner** — if `isa_warning` is set, show a full-width amber warning strip below the header block (before specs), with a ⚠ icon and the warning text. Tree protectors have no `isa_warning` field — omit entirely.
+**ISA Warning panel** — if `isa_warning` is set, show a full-width strip below the header block (before specs) carrying **the full ISA entry**, not just the status word: ⚠ + `ISA RECALL` + the publication date + a `No longer in production` chip where that applies, then the ISA's description verbatim, a **What to do:** line from its solution, and one `Source: <host> ↗` link per source. **Coloured by severity, not one fixed amber** — see § ISA Warnings. An item with several warnings against it renders one entry per warning, newest first. Tree protectors, starter kits and trickline kits have no `isa_warning` field — omit entirely.
 
 **"SPECIFICATIONS" label** — small-caps gray with teal dot, then the spec grid: **two balanced columns** of label/value pairs (`gap-x-10`), collapsing to one column on narrow screens. Within each cell: label left (gray), value right (dark), `border-bottom: 1px solid #E5E7EB`, `padding: 10px 0`. Omit any row where the value is null. The webbing stretch curve is the one full-width entry — it spans both columns.
 
@@ -458,6 +464,37 @@ Classification is still **not a sidebar filter**: as a letter class it is an att
 The letter is **dark ink `#1F2937` on every fill**: white text fails WCAG AA on all four ISA colors (contrast 1.37–2.87), while `#1F2937` clears AA on each (5.12–11.86). A+/A/B/C render as round bubbles; the long "Not for Highline" stays a full pill so it isn't truncated. The letter itself carries the meaning, so identity is never colour-alone, and a `title` spells it out for screen readers. For hybrids the class is derived from the strongest component fiber (see Material Composition).
 
 **ISA Certification block** (where applicable, before the spec table) — if `isa_certified` is true, show a larger version of the ISA Approved stamp badge (same visual: charcoal frame, teal + coral ISA mark, white "APPROVED" text with teal checkmark in the V), left-aligned, ~80px wide. If false, show a small gray text line "Not ISA Certified" — subdued, not alarming. Tree protectors have no `isa_certified` field — omit this block entirely.
+
+---
+
+### ISA Warnings
+
+The ISA publishes a [gear warnings database](https://data.slacklineinternational.org/safety/isa-gear-warnings/) — recalls and cautions on specific products. Where an entry maps to a piece of gear we hold, that gear carries an `isa_warning` status (`Recall` / `Warning` / `Notice`; `No Warning` and null both mean nothing to show). Five types have the field: **webbing, weblock, roller, leashring, grip**. Tree protectors, starter kits and trickline kits do not, and never render any of this.
+
+**One severity palette, two surfaces.** The card bubble and the detail banner take their colours from the same table, so they cannot drift apart:
+
+| Status | Card bubble | Detail banner | Reading |
+|---|---|---|---|
+| `Recall` | `#DC2626` fill, white text | red border `#FCA5A5`, `#FEF2F2` ground, `#7F1D1D` text | The manufacturer or the ISA has pulled the product. Loudest thing on the card. |
+| `Warning` | `#FBBF24` fill, `#1F2937` ink | amber border `#FCD34D`, `#FFFBEB` ground, `#78350F` text | A known failure mode; usable with care or in a narrower role. |
+| `Notice` | `#E5E7EB` fill, `#1F2937` ink | gray border `#D1D5DB`, `#F9FAFB` ground, `#374151` text | Something to be aware of. Present because dropping it would hide safety information, muted because it is not an alarm. |
+
+Red is deliberately the same `#DC2626` as the **Legacy** pill — but the two never compete for the eye, because Legacy is pinned top-**left** and the warning bubble top-**right** (see § Gear Card Anatomy). Dark ink `#1F2937` on the amber and gray fills for the same reason the classification bubble uses it: white fails WCAG AA on both.
+
+**The word is the badge.** `RECALL` / `WARNING` / `NOTICE` is spelled out rather than encoded as an icon or a bare colour, so severity is never carried by colour alone. The bubble also sets `data-isa-warning="<status>"` for tests and for anyone reading the DOM.
+
+**Filtering.** `isa_warning` is a sidebar pill group on all five types that carry the field, and it is the **only group that offers an explicit `None` pill**. Everywhere else a null value produces no option and is excluded from a filtered result — right for material or connection type, where absence means "we don't know". Here absence is the answer people want ("show me the gear with nothing against it"), so `None` leads the group and matches exactly the rows with no warning.
+
+Options are derived from the loaded data, so **a status no item of that type carries has no pill** — leash rings only ever show `None · Notice`, because no leash ring has been recalled or warned. Order is severity, not alphabet: `None · Recall · Warning · Notice` (alphabetical would read Notice · Recall · Warning and bury the recall in the middle). A group left with nothing but `None` is hidden entirely (see § Left Filter Sidebar → Hidden pill groups).
+
+**Where the detail comes from.** The gear row's `isa_warning` enum holds only the severity word — enough for the bubble and the filter, useless for telling someone what is actually wrong with their weblock. The full entries live in their own table (`ISAGearWarning`, one row per warning × matched item, served by `GET /isawarning/`), because one warning routinely covers several products and one product can carry several warnings. The frontend fetches the whole table once (~90 rows) and indexes it by item.
+
+**Two honesty rules on the detail panel.** They matter more here than anywhere else on the site, because the subject is gear failing under load:
+
+1. **A less-than-certain match is labelled.** Matches from the ISA's product naming onto ours were adjudicated by hand, and a `likely` / `partial` / `ambiguous` one renders the ISA's own wording of the product beneath the entry — "The ISA lists this warning against Spider Lime SR — check it against your own gear before relying on the match." An `exact` match shows no such line.
+2. **We are a mirror, not the source.** The description and the solution are rendered **verbatim**, never paraphrased, and every entry links out to what the ISA published.
+
+If the detail fetch fails, the banner falls back to the severity word alone — a lost request downgrades the warning, it never hides it.
 
 ---
 
