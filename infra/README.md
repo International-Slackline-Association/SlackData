@@ -165,7 +165,20 @@ curl -sI "$BASE/" | head -1                                   # 200
 curl -s  "$BASE/api/webbing/?limit=1" | head -c 120           # a real row
 curl -s  "$BASE/api/fx/rates" | head -c 120                   # "stale":false
 curl -s -o /dev/null -w '%{http_code}\n' "$BASE/api/webbing/999999"   # 404, not 200
+
+# The catalogue publishes no write surface. Both must hold:
+curl -s -o /dev/null -w '%{http_code}\n' "$BASE/api/openapi.json"         # 404 — docs are off
+curl -s -o /dev/null -w '%{http_code}\n' -X DELETE "$BASE/api/webbing/1"  # 405 — route not mounted
 ```
+
+The write routes are not registered at all in hosted mode ([slack_data/api/routing.py](../slack_data/api/routing.py)),
+so `DELETE` hits a path whose only method is `GET` and Starlette answers 405 without reaching a
+handler. A **200 or a 422 there is a live write endpoint** — 422 means a body was validated, which
+means the route exists. The regression guard is `tests/test_read_only.py`; it fails long before a
+deploy can.
+
+To bring `/api/docs` back (e.g. behind admin auth later), set `ENABLE_DOCS=true` on the function —
+it is an environment flip, not a code change.
 
 Use **GET, not `curl -I`,** for that last one: the routers declare GET only, so HEAD returns 405 on
 every API path and tells you nothing. A JSON 404 here (rather than HTML 200) is what proves

@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 SlackData is a **better, open-source replacement for [SlackDB](https://slackdb.com/)** — a community database of slackline gear. Goals vs SlackDB: stronger/simpler backend, modern UX design, and an account system (manufacturer accounts with edit access, general user accounts with suggest access, admin accounts for approvals).
 
-Current state: FastAPI + SQLModel + SQLite backend, plus a React/TypeScript/Vite frontend that is well underway (Phases 1–8 of [PLAN.md](PLAN.md) are done: listing, filters, search/sort, detail, compare, manufacturers). There is a pytest suite (155 tests) and a Cypress e2e suite, but **no CI and no hosted deployment**.
+Current state: FastAPI + SQLModel + SQLite backend, plus a React/TypeScript/Vite frontend that is well underway (Phases 1–8 of [PLAN.md](PLAN.md) are done: listing, filters, search/sort, detail, compare, manufacturers). There is a pytest suite (332 tests) and a Cypress e2e suite, and the public read-only catalogue is **live at https://slackdata.org** (Phase 1). There is still **no CI** — nothing runs automatically.
 
 **Stack:** Python ≥3.10 backend (FastAPI, SQLModel, SQLite) + React/TypeScript/Vite frontend (in progress).
 
@@ -80,7 +80,7 @@ ruff check .
 There **is** a test suite now (there was not when this file was first written), but still **no CI** — nothing runs automatically, so run these yourself:
 
 ```bash
-python -m pytest tests/ -q          # 155 backend tests (11 files, all gear types + loaders)
+python -m pytest tests/ -q          # 332 backend tests (14 files, all gear types + loaders)
 cd frontend && npm run build        # tsc -b + vite build
 cd frontend && npm run lint         # oxlint
 cd frontend && npm run test:unit    # 59 unit tests — node:test on the pure utils, no servers, no deps
@@ -117,6 +117,7 @@ Root *.json seed files
 | `slack_data/models/<type>.py` | SQLModel schemas per gear type |
 | `slack_data/load_data/load_<type>s.py` | JSON → DB importers — copy this pattern for new types |
 | `slack_data/api/routers/<type>_router.py` | REST CRUD — copy this pattern for new types |
+| `slack_data/api/routing.py` | Router registration + the READ_ONLY write-route filter (see below) |
 | `slack_data/utilities/` | shared enums/helpers (currency, country, materials, ISA warnings) |
 
 There are `__init__.py` files in `models/`, `api/`, and `utilities/`. No `tests/`, no `.github/`, no Docker, no migrations (SQLModel `create_all` only).
@@ -160,6 +161,39 @@ Every gear type carries an **`active: bool | None`** field on its `Base<X>` (so 
 | TreePro | `/treepro` | `treepros.json` | 25 |
 | StarterKit | `/starterkit` | `starterkits.json` | 64 |
 | TricklineKit | `/tricklinekit` | `tricklinekits.json` | 10 |
+| ISAGearWarning | `/isawarning` | `isa_gear_warnings.json` | 88 |
+
+### ISA gear warnings
+
+`isa_gear_warnings.json` (root, 82 entries scraped from the ISA's warnings database) is loaded by
+`load_data/load_isa_warnings.py`, which **runs last in `seed.py`** — it addresses gear by primary
+key, so every gear table must already be populated. Each entry carries a hand-adjudicated `match`
+block (`gearType` / `gearIds` / `gearNames` / `confidence` / `note`) mapping it onto our catalogue;
+ids are **verified against the recorded `"<brand> <name>"`** before use, so seed-order drift is
+reported instead of silently re-pointing a recall. The pass writes two things:
+
+1. `isa_warning` (the `ISAWarning` enum) onto the gear row — worst severity wins. Only
+   webbing / weblock / roller / leashring / grip have the column.
+2. One `ISAGearWarning` row per (entry x matched gear id) — `models/isa_gear_warnings.py`, served
+   read-only by `/isawarning` — holding the full entry (description, solution, parsed date, source
+   links, in-production flag, match confidence). It has **no FK**: `(gear_type, gear_id)` is the
+   link, because a warning can land on any of five tables.
+
+Seeding is gated on the `ISAGearWarning` table being empty. Eight entries match nothing we hold —
+tracked in BACKLOG.md.
+
+### Read-only mode (`api/routing.py`)
+
+Hosted, the catalogue is a SQLite baked into the Lambda image and opened `mode=ro&immutable=1`, so
+writes cannot work. `register_routers(app, read_only=READ_ONLY)` therefore **does not mount the
+`POST`/`PATCH`/`DELETE` routes at all** when `READ_ONLY` — they answer 405 and are absent from the
+OpenAPI schema, rather than 403-ing per route. `/docs`, `/redoc` and `/openapi.json` are off too
+(`ENABLE_DOCS=true` re-enables them). Local dev is unaffected: `READ_ONLY` is false, every route
+mounts, and the loaders/tests work as before.
+
+`tests/conftest.py` builds its app through the same `register_routers`, so the tests exercise the
+routes production serves. `tests/test_read_only.py` is the regression guard — if a refactor of
+`main.py` reinstates the write routes hosted, it fails there.
 
 ### Non-model routers
 

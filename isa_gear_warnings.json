@@ -11,7 +11,17 @@
             "description": "The webbing is significantly weaker than advertised. Especially when used with weblocks.",
             "solution": "Do NOT use for highlining.",
             "productImage": "https://slackdb.com/user_content/img/gear/370_prv.jpg",
-            "link1": "https://slack-inov.com/shop/en/content/39-tubular-polyamide-nylon-webbing-nova"
+            "link1": "https://slack-inov.com/shop/en/content/39-tubular-polyamide-nylon-webbing-nova",
+            "match": {
+                "gearType": "webbing",
+                "gearIds": [
+                    54
+                ],
+                "gearNames": [
+                    "Slack Inov Nova"
+                ],
+                "confidence": "exact"
+            }
         },
         {
             "id": "11",
@@ -24,7 +34,18 @@
             "description": "The original pin can come undone when tensioning, because the catch cord unscrews the head of the pin.",
             "solution": "Manufacturer has issued a recall for the original pin, will replace with new pin which has several features to address unscrewing.",
             "productImage": "https://slackdb.com/user_content/img/gear/355.jpg",
-            "link1": "https://www.balancecommunity.com/pages/alpine-weblock-5-pin-recall"
+            "link1": "https://www.balancecommunity.com/pages/alpine-weblock-5-pin-recall",
+            "match": {
+                "gearType": "weblock",
+                "gearIds": [
+                    4
+                ],
+                "gearNames": [
+                    "Balance Community Alpine WebLock 5.0"
+                ],
+                "confidence": "exact",
+                "note": "AWL 5 = Alpine WebLock 5.0; warning is on the pin"
+            }
         },
         {
             "id": "16",
@@ -36,7 +57,20 @@
             "inProduction": "No",
             "description": "The weblock is significantly weaker than advertised (<24 kN).",
             "solution": "Do NOT use for highlining and high tension applications (longlining)",
-            "productImage": "https://slackdb.com/user_content/img/gear/313.jpg"
+            "productImage": "https://slackdb.com/user_content/img/gear/313.jpg",
+            "match": {
+                "gearType": "weblock",
+                "gearIds": [
+                    77,
+                    78
+                ],
+                "gearNames": [
+                    "Souz Slackline Rowan 1.1",
+                    "Souz Slackline Rowan 1.3"
+                ],
+                "confidence": "partial",
+                "note": "Rowan 1.1 and 1.3 held; 1.2 not in catalogue"
+            }
         },
         {
             "id": "40",
@@ -50,7 +84,14 @@
             "solution": "Do NOT use. Only affects a specific batch, follow the link.",
             "productImage": "https://www.ferrehogar.es/storage/images/image?remote=https%3A%2F%2Fwww.ferrehogar.es%2FWebRoot%2FStoreES2%2FShops%2Feb2406%2F56B4%2FCFFC%2F85BE%2F2F26%2FDE7B%2F52DF%2FD022%2FB0AA%2FSet-Slackline-Passion-Mountain-Equiment.jpg&shop=eb2406&width=800&height=2560",
             "link1": "https://www.bergfreunde.de/basislager/ruckruf-der-mountain-equipment-passion-slacklines/",
-            "link2": "https://www.bergsteigen.com/produkte/mountain-equipment-ruft-slackline-passion-zurueck/"
+            "link2": "https://www.bergsteigen.com/produkte/mountain-equipment-ruft-slackline-passion-zurueck/",
+            "match": {
+                "gearType": null,
+                "gearIds": [],
+                "gearNames": [],
+                "confidence": "none",
+                "note": "Mountain Equipment not a brand we hold"
+            }
         },
         {
             "id": "1",
@@ -62,7 +103,14 @@
             "inProduction": "No",
             "description": "Underdimensioned or faulty product",
             "solution": "Exchange for adequately dimensioned loop-style slings.",
-            "link1": "https://www.facebook.com/slacklineinternational/posts/1627258547452841"
+            "link1": "https://www.facebook.com/slacklineinternational/posts/1627258547452841",
+            "match": {
+                "gearType": null,
+                "gearIds": [],
+                "gearNames": [],
+                "confidence": "none",
+                "note": "Krok dogbone; no dogbone type and no Krok dogbone held"
+            }
         },
         {
             "id": "2",
@@ -75,7 +123,18 @@
             "description": "Dogbone style webbing slings (like a sling for a quickdraw) can break at very low tensions when the stitching is pulled in the wrong direction. This can happen, when you use them as a rigging plate or you use a very large connector (>14mm).",
             "solution": "Use with great caution or exchange for adequately dimensioned loop-style slings.",
             "productImage": "https://slackdb.com/user_content/img/gear/488.jpg",
-            "link1": "https://www.facebook.com/groups/slackchat/permalink/1875294379211097"
+            "link1": "https://www.facebook.com/groups/slackchat/permalink/1875294379211097",
+            "match": {
+                "gearType": "weblock",
+                "gearIds": [
+                    85
+                ],
+                "gearNames": [
+                    "Slacktivity SeaHorse Sling 1"
+                ],
+                "confidence": "likely",
+                "note": "dogbone of the SeaHorse Sling 1"
+            }
         },
         {
             "id": "3",
@@ -87,7 +146,18 @@
             "inProduction": "No",
             "description": "Dogbone style webbing slings (like a sling for a quickdraw) can break at very low tensions when the stitching is pulled in the wrong direction. This can happen, when you use them as a rigging plate or you use a very large connector (>14mm).",
             "solution": "Use with great caution or exchange for adequately dimensioned loop-style slings.",
-            "productImage": "https://slackdb.com/user_content/img/gear/489.jpg"
+            "productImage": "https://slackdb.com/user_content/img/gear/489.jpg",
+            "match": {
+                "gearType": "weblock",
+                "gearIds": [
+                    48
+                ],
+                "gearNames": [
+                    "Landcruising Lynx 1"
+                ],
+                "confidence": "likely",
+                "note": "dogbone of Lynx 1"
+            }
         },
         {
             "id": "4",
@@ -99,7 +169,18 @@
             "inProduction": "No",
             "description": "Dogbone style webbing slings (like a sling for a quickdraw) can break at very low tensions when the stitching is pulled in the wrong direction. This can happen, when you use them as a rigging plate or you use a very large connector (>14mm).",
             "solution": "Use with great caution or exchange for adequately dimensioned loop-style slings.",
-            "productImage": "https://slackdb.com/user_content/img/gear/490.jpg"
+            "productImage": "https://slackdb.com/user_content/img/gear/490.jpg",
+            "match": {
+                "gearType": "weblock",
+                "gearIds": [
+                    49
+                ],
+                "gearNames": [
+                    "Landcruising Lynx 2.1"
+                ],
+                "confidence": "likely",
+                "note": "dogbone of Lynx 2 (held as Lynx 2.1)"
+            }
         },
         {
             "id": "5",
@@ -111,7 +192,18 @@
             "inProduction": "No",
             "description": "Dogbone style webbing slings (like a sling for a quickdraw) can break at very low tensions when the stitching is pulled in the wrong direction. This can happen, when you use them as a rigging plate or you use a very large connector (>14mm).",
             "solution": "Use with great caution or exchange for adequately dimensioned loop-style slings.",
-            "productImage": "https://slackdb.com/user_content/img/gear/491.jpg"
+            "productImage": "https://slackdb.com/user_content/img/gear/491.jpg",
+            "match": {
+                "gearType": "weblock",
+                "gearIds": [
+                    105
+                ],
+                "gearNames": [
+                    "Landcruising Zilla 1.0"
+                ],
+                "confidence": "likely",
+                "note": "dogbone of Zilla 1.0"
+            }
         },
         {
             "id": "6",
@@ -123,7 +215,18 @@
             "inProduction": "No",
             "description": "Dogbone style webbing slings (like a sling for a quickdraw) can break at very low tensions when the stitching is pulled in the wrong direction. This can happen, when you use them as a rigging plate or you use a very large connector (>14mm).",
             "solution": "Use with great caution or exchange for adequately dimensioned loop-style slings.",
-            "productImage": "https://slackdb.com/user_content/img/gear/152.jpg"
+            "productImage": "https://slackdb.com/user_content/img/gear/152.jpg",
+            "match": {
+                "gearType": "weblock",
+                "gearIds": [
+                    106
+                ],
+                "gearNames": [
+                    "Landcruising Zilla 2.0"
+                ],
+                "confidence": "likely",
+                "note": "dogbone of Zilla 2.0"
+            }
         },
         {
             "id": "7",
@@ -135,7 +238,18 @@
             "inProduction": "Yes",
             "description": "Dogbone style webbing slings (like a sling for a quickdraw) can break at very low tensions when the stitching is pulled in the wrong direction. This can happen, when you use them as a rigging plate or you use a very large connector (>14mm).",
             "solution": "Use with great caution or exchange for adequately dimensioned loop-style slings.",
-            "link1": "https://spider-slacklines.com/shop/en/weblock/250-lime-sr-linelock.html"
+            "link1": "https://spider-slacklines.com/shop/en/weblock/250-lime-sr-linelock.html",
+            "match": {
+                "gearType": "weblock",
+                "gearIds": [
+                    42
+                ],
+                "gearNames": [
+                    "Spider Slacklines Lime"
+                ],
+                "confidence": "ambiguous",
+                "note": "Spider Lime SR; only plain Lime held"
+            }
         },
         {
             "id": "8",
@@ -146,7 +260,14 @@
             "manufacturer": "Gibbon",
             "inProduction": "No",
             "description": "Dogbone style webbing slings (like a sling for a quickdraw) can break at very low tensions when the stitching is pulled in the wrong direction. This can happen, when you use them as a rigging plate or you use a very large connector (>14mm).",
-            "solution": "Use with great caution or exchange for adequately dimensioned loop-style slings."
+            "solution": "Use with great caution or exchange for adequately dimensioned loop-style slings.",
+            "match": {
+                "gearType": null,
+                "gearIds": [],
+                "gearNames": [],
+                "confidence": "none",
+                "note": "no Gibbon weblock in catalogue"
+            }
         },
         {
             "id": "9",
@@ -157,7 +278,20 @@
             "manufacturer": "Slackpro",
             "inProduction": "No",
             "description": "Dogbone style webbing slings (like a sling for a quickdraw) can break at very low tensions when the stitching is pulled in the wrong direction. This can happen, when you use them as a rigging plate or you use a very large connector (>14mm).",
-            "solution": "Use with great caution or exchange for adequately dimensioned loop-style slings."
+            "solution": "Use with great caution or exchange for adequately dimensioned loop-style slings.",
+            "match": {
+                "gearType": "weblock",
+                "gearIds": [
+                    43,
+                    45
+                ],
+                "gearNames": [
+                    "lineGrip (formerly Slack Pro!) LineLock AL MK4",
+                    "lineGrip (formerly Slack Pro!) LineLock VA MKIII"
+                ],
+                "confidence": "ambiguous",
+                "note": "SlackPro/lineGrip lineLock: AL MK4 or VA MKIII"
+            }
         },
         {
             "id": "12",
@@ -168,7 +302,18 @@
             "manufacturer": "slack.fr",
             "inProduction": "No",
             "description": "The pin mechanism is prone to failures. Several incidents ranging from webbing damage to complete failures have been reported.",
-            "solution": "For professional use only. Not recommended for general highline use."
+            "solution": "For professional use only. Not recommended for general highline use.",
+            "match": {
+                "gearType": "weblock",
+                "gearIds": [
+                    96
+                ],
+                "gearNames": [
+                    "Slack.fr SladLock Power"
+                ],
+                "confidence": "likely",
+                "note": "only slack.fr weblock held is SladLock Power"
+            }
         },
         {
             "id": "14",
@@ -181,7 +326,20 @@
             "description": "The splicing of the first version is not safe.",
             "solution": "Watch the video and re-splice your snatch.",
             "productImage": "https://slackdb.com/user_content/img/gear/378.jpg",
-            "link1": "https://www.youtube.com/watch?v=u98sTZ9EOZs&fbclid=IwAR2bSm-pk7r70JxV9PiiLHD9ov8RU3Z_Hjt8eONLq0TIgYWXfCBN_tCU8_s"
+            "link1": "https://www.youtube.com/watch?v=u98sTZ9EOZs&fbclid=IwAR2bSm-pk7r70JxV9PiiLHD9ov8RU3Z_Hjt8eONLq0TIgYWXfCBN_tCU8_s",
+            "match": {
+                "gearType": "grip",
+                "gearIds": [
+                    2,
+                    4
+                ],
+                "gearNames": [
+                    "Souz Slackline Snatch 2.2",
+                    "Souz Slackline Snatch 2.2T"
+                ],
+                "confidence": "ambiguous",
+                "note": "ISA says Snatch v2.0; we hold Snatch 2.2 and 2.2T"
+            }
         },
         {
             "id": "18",
@@ -194,7 +352,18 @@
             "description": "The weblock is significantly weaker than advertised (~30 kN). Affects weblocks with Serial Nr. XXXX2017 and 60kN MBS written on the sideplate.",
             "solution": "See manufacturer's recommendation.",
             "productImage": "https://slackdb.com/user_content/img/gear/109.jpg",
-            "link1": "https://slack-inov.com/shop/fr/content/62-isa-tests-de-cyclique-chargement-sur-des-bananas"
+            "link1": "https://slack-inov.com/shop/fr/content/62-isa-tests-de-cyclique-chargement-sur-des-bananas",
+            "match": {
+                "gearType": "weblock",
+                "gearIds": [
+                    91
+                ],
+                "gearNames": [
+                    "Slack Inov Slackibloc 4"
+                ],
+                "confidence": "exact",
+                "note": "Slackibloc 4, batch 1"
+            }
         },
         {
             "id": "19",
@@ -208,7 +377,18 @@
             "solution": "See manufacturer's recommendation.",
             "productImage": "https://slackdb.com/user_content/img/gear/109.jpg",
             "link1": "https://slack-inov.com/shop/fr/content/62-isa-tests-de-cyclique-chargement-sur-des-bananas",
-            "link2": "https://data.slacklineinternational.org/safety/highline/cyclic-loading-tests-2021.pdf/"
+            "link2": "https://data.slacklineinternational.org/safety/highline/cyclic-loading-tests-2021.pdf/",
+            "match": {
+                "gearType": "weblock",
+                "gearIds": [
+                    91
+                ],
+                "gearNames": [
+                    "Slack Inov Slackibloc 4"
+                ],
+                "confidence": "exact",
+                "note": "Slackibloc 4, all batches"
+            }
         },
         {
             "id": "20",
@@ -222,7 +402,18 @@
             "solution": "Use with great caution, check more often for good pin placement, always use a good weblock tieoff to prevent any movement of the pin while the line is rigged.",
             "productImage": "https://slackdb.com/user_content/img/gear/109.jpg",
             "link1": "https://slack-inov.com/shop/en/weblock/313-1202-slackiblock-linelock.html#/177-select_option-none",
-            "link2": "https://slack-inov.com/shop/en/weblock/428-3021-slackibloc-SR-linelock.html#/177-select_option-none/578-select_pin-classic_quick_lock_pin/583-select_accessory-none/585-select_antislip-none"
+            "link2": "https://slack-inov.com/shop/en/weblock/428-3021-slackibloc-SR-linelock.html#/177-select_option-none/578-select_pin-classic_quick_lock_pin/583-select_accessory-none/585-select_antislip-none",
+            "match": {
+                "gearType": "weblock",
+                "gearIds": [
+                    91
+                ],
+                "gearNames": [
+                    "Slack Inov Slackibloc 4"
+                ],
+                "confidence": "exact",
+                "note": "Slackibloc 4"
+            }
         },
         {
             "id": "21",
@@ -235,7 +426,18 @@
             "description": "Stress fractures under cyclic loading on the sideplates.",
             "solution": "Do NOT use for tricklining.",
             "productImage": "https://slackdb.com/user_content/img/gear/115.jpg",
-            "link1": "https://www.facebook.com/groups/slackchat/permalink/4226650130742165"
+            "link1": "https://www.facebook.com/groups/slackchat/permalink/4226650130742165",
+            "match": {
+                "gearType": "weblock",
+                "gearIds": [
+                    36
+                ],
+                "gearNames": [
+                    "Slack Mountain Ginkgo"
+                ],
+                "confidence": "likely",
+                "note": "Ginkgo; Ginkgo Quickpin (38) may also be affected"
+            }
         },
         {
             "id": "23",
@@ -249,7 +451,17 @@
             "solution": "Do NOT use for highlining.",
             "productImage": "https://slackdb.com/user_content/img/gear/110.jpg",
             "link1": "https://slack-mountain.com/en/14-webbing-anchor",
-            "link2": "https://drive.google.com/file/d/1dsEi2DcxbP7-FzsWuRN4Lt2Oh0DTm3et/view?usp=sharing"
+            "link2": "https://drive.google.com/file/d/1dsEi2DcxbP7-FzsWuRN4Lt2Oh0DTm3et/view?usp=sharing",
+            "match": {
+                "gearType": "weblock",
+                "gearIds": [
+                    35
+                ],
+                "gearNames": [
+                    "Slack Mountain Frog"
+                ],
+                "confidence": "exact"
+            }
         },
         {
             "id": "24",
@@ -263,7 +475,18 @@
             "solution": "Do NOT use for highlining.",
             "productImage": "https://slackdb.com/user_content/img/gear/115.jpg",
             "link1": "https://slack-mountain.com/en/14-webbing-anchor",
-            "link2": "https://drive.google.com/file/d/1dsEi2DcxbP7-FzsWuRN4Lt2Oh0DTm3et/view?usp=sharing"
+            "link2": "https://drive.google.com/file/d/1dsEi2DcxbP7-FzsWuRN4Lt2Oh0DTm3et/view?usp=sharing",
+            "match": {
+                "gearType": "weblock",
+                "gearIds": [
+                    36
+                ],
+                "gearNames": [
+                    "Slack Mountain Ginkgo"
+                ],
+                "confidence": "exact",
+                "note": "Ginko = Ginkgo"
+            }
         },
         {
             "id": "25",
@@ -277,7 +500,18 @@
             "solution": "Do NOT use for highlining.",
             "productImage": "https://slackdb.com/user_content/img/gear/307.jpg",
             "link1": "https://slack-mountain.com/en/14-webbing-anchor",
-            "link2": "https://drive.google.com/file/d/1dsEi2DcxbP7-FzsWuRN4Lt2Oh0DTm3et/view?usp=sharing"
+            "link2": "https://drive.google.com/file/d/1dsEi2DcxbP7-FzsWuRN4Lt2Oh0DTm3et/view?usp=sharing",
+            "match": {
+                "gearType": "weblock",
+                "gearIds": [
+                    37
+                ],
+                "gearNames": [
+                    "Slack Mountain Ginkgo Mini"
+                ],
+                "confidence": "exact",
+                "note": "Ginko mini = Ginkgo Mini"
+            }
         },
         {
             "id": "26",
@@ -291,7 +525,18 @@
             "solution": "Do NOT use for highlining.",
             "productImage": "https://slackdb.com/user_content/img/gear/278.jpg",
             "link1": "https://catonslack.com/en_US/c/Catlock-Weblocks/13",
-            "link2": "https://drive.google.com/file/d/1dsEi2DcxbP7-FzsWuRN4Lt2Oh0DTm3et/view?usp=sharing"
+            "link2": "https://drive.google.com/file/d/1dsEi2DcxbP7-FzsWuRN4Lt2Oh0DTm3et/view?usp=sharing",
+            "match": {
+                "gearType": "weblock",
+                "gearIds": [
+                    22
+                ],
+                "gearNames": [
+                    "Cat on slack Catlock classic"
+                ],
+                "confidence": "likely",
+                "note": "plain Catlock = Catlock classic"
+            }
         },
         {
             "id": "27",
@@ -305,7 +550,18 @@
             "solution": "Do NOT use for highlining.",
             "productImage": "https://slackdb.com/user_content/img/gear/286.jpg",
             "link1": "https://catonslack.com/en_US/c/Catlock-Weblocks/13",
-            "link2": "https://drive.google.com/file/d/1dsEi2DcxbP7-FzsWuRN4Lt2Oh0DTm3et/view?usp=sharing"
+            "link2": "https://drive.google.com/file/d/1dsEi2DcxbP7-FzsWuRN4Lt2Oh0DTm3et/view?usp=sharing",
+            "match": {
+                "gearType": "weblock",
+                "gearIds": [
+                    26
+                ],
+                "gearNames": [
+                    "Cat on slack Catlock SR PRO"
+                ],
+                "confidence": "likely",
+                "note": "ISA says SL Pro, we hold Catlock SR PRO"
+            }
         },
         {
             "id": "28",
@@ -317,7 +573,18 @@
             "inProduction": "Yes",
             "description": "The captive pins can come easily undone while rigging and pretensioning.",
             "solution": "Use with great caution, always use a good weblock tieoff to prevent any movement of the captive pin while the line is rigged.",
-            "productImage": "https://slackdb.com/user_content/img/gear/281.jpg"
+            "productImage": "https://slackdb.com/user_content/img/gear/281.jpg",
+            "match": {
+                "gearType": "weblock",
+                "gearIds": [
+                    25
+                ],
+                "gearNames": [
+                    "Cat on slack Catlock SR"
+                ],
+                "confidence": "likely",
+                "note": "ISA says SL, we hold Catlock SR"
+            }
         },
         {
             "id": "29",
@@ -331,7 +598,17 @@
             "solution": "Do NOT use for highlining.",
             "productImage": "https://slackdb.com/user_content/img/gear/35.jpg",
             "link1": "https://catonslack.com/en_US/c/Catlock-Weblocks/13",
-            "link2": "https://drive.google.com/file/d/1dsEi2DcxbP7-FzsWuRN4Lt2Oh0DTm3et/view?usp=sharing"
+            "link2": "https://drive.google.com/file/d/1dsEi2DcxbP7-FzsWuRN4Lt2Oh0DTm3et/view?usp=sharing",
+            "match": {
+                "gearType": "weblock",
+                "gearIds": [
+                    23
+                ],
+                "gearNames": [
+                    "Cat on slack Catlock mini"
+                ],
+                "confidence": "exact"
+            }
         },
         {
             "id": "30",
@@ -344,7 +621,17 @@
             "description": "Plate-type pushpins can fail when they get older and the glue no longer fixed the head and the plate-end to the body of the pin.",
             "solution": "Do NOT use for highlining.",
             "link1": "https://www.slackliner.de/de/Verbindungselemente/Linelocker/",
-            "link2": "https://drive.google.com/file/d/1dsEi2DcxbP7-FzsWuRN4Lt2Oh0DTm3et/view?usp=sharing"
+            "link2": "https://drive.google.com/file/d/1dsEi2DcxbP7-FzsWuRN4Lt2Oh0DTm3et/view?usp=sharing",
+            "match": {
+                "gearType": "weblock",
+                "gearIds": [
+                    33
+                ],
+                "gearNames": [
+                    "Slackliner.de Equilocker"
+                ],
+                "confidence": "exact"
+            }
         },
         {
             "id": "31",
@@ -357,7 +644,18 @@
             "description": "Plate-type pushpins can fail when they get older and the glue no longer fixed the head and the plate-end to the body of the pin.",
             "solution": "Do NOT use for highlining.",
             "productImage": "https://slackdb.com/user_content/img/gear/152.jpg",
-            "link1": "https://drive.google.com/file/d/1dsEi2DcxbP7-FzsWuRN4Lt2Oh0DTm3et/view?usp=sharing"
+            "link1": "https://drive.google.com/file/d/1dsEi2DcxbP7-FzsWuRN4Lt2Oh0DTm3et/view?usp=sharing",
+            "match": {
+                "gearType": "weblock",
+                "gearIds": [
+                    106
+                ],
+                "gearNames": [
+                    "Landcruising Zilla 2.0"
+                ],
+                "confidence": "exact",
+                "note": "Zilla 2.0"
+            }
         },
         {
             "id": "32",
@@ -370,7 +668,18 @@
             "description": "Plate-type pushpins can fail when they get older and the glue no longer fixed the head and the plate-end to the body of the pin.",
             "solution": "Do NOT use for highlining.",
             "productImage": "https://slackdb.com/user_content/img/gear/325.jpg",
-            "link1": "https://drive.google.com/file/d/1dsEi2DcxbP7-FzsWuRN4Lt2Oh0DTm3et/view?usp=sharing"
+            "link1": "https://drive.google.com/file/d/1dsEi2DcxbP7-FzsWuRN4Lt2Oh0DTm3et/view?usp=sharing",
+            "match": {
+                "gearType": "weblock",
+                "gearIds": [
+                    86
+                ],
+                "gearNames": [
+                    "Equilibrium Slacklines (EQB) Sherriff"
+                ],
+                "confidence": "exact",
+                "note": "Sheriff = Sherriff (our spelling)"
+            }
         },
         {
             "id": "34",
@@ -382,7 +691,22 @@
             "inProduction": "No",
             "description": "Plate-type pushpins can fail when they get older and the glue no longer fixed the head and the plate-end to the body of the pin.",
             "solution": "Do NOT use for highlining.",
-            "link1": "https://drive.google.com/file/d/1dsEi2DcxbP7-FzsWuRN4Lt2Oh0DTm3et/view?usp=sharing"
+            "link1": "https://drive.google.com/file/d/1dsEi2DcxbP7-FzsWuRN4Lt2Oh0DTm3et/view?usp=sharing",
+            "match": {
+                "gearType": "weblock",
+                "gearIds": [
+                    12,
+                    13,
+                    15
+                ],
+                "gearNames": [
+                    "Equilibrium Slacklines (EQB) Bandit FX",
+                    "Equilibrium Slacklines (EQB) Bandit SH",
+                    "Equilibrium Slacklines (EQB) Bandit SL"
+                ],
+                "confidence": "exact",
+                "note": "applies to every Bandit weblock, FX included (warning 35 is the FX-specific notice)"
+            }
         },
         {
             "id": "36",
@@ -394,7 +718,22 @@
             "inProduction": "No",
             "description": "Plate-type pushpins can fail when they get older and the glue no longer fixed the head and the plate-end to the body of the pin.",
             "solution": "Do NOT use for highlining.",
-            "link1": "https://drive.google.com/file/d/1dsEi2DcxbP7-FzsWuRN4Lt2Oh0DTm3et/view?usp=sharing"
+            "link1": "https://drive.google.com/file/d/1dsEi2DcxbP7-FzsWuRN4Lt2Oh0DTm3et/view?usp=sharing",
+            "match": {
+                "gearType": "weblock",
+                "gearIds": [
+                    19,
+                    20,
+                    21
+                ],
+                "gearNames": [
+                    "Equilibrium Slacklines (EQB) Canon FX",
+                    "Equilibrium Slacklines (EQB) Canon SH",
+                    "Equilibrium Slacklines (EQB) Canon SL"
+                ],
+                "confidence": "exact",
+                "note": "applies to every Canon weblock, FX included (37 is the SL-specific warning, 38 the FX notice)"
+            }
         },
         {
             "id": "37",
@@ -406,7 +745,17 @@
             "inProduction": "No",
             "description": "The pins can come undone while rigging and pretensioning due to the use of a unsecured bolt and nut.",
             "solution": "Use with great caution, always use a good weblock tieoff to prevent any movement of the pin while the line is rigged.",
-            "productImage": "https://slackdb.com/user_content/img/gear/498.jpg"
+            "productImage": "https://slackdb.com/user_content/img/gear/498.jpg",
+            "match": {
+                "gearType": "weblock",
+                "gearIds": [
+                    21
+                ],
+                "gearNames": [
+                    "Equilibrium Slacklines (EQB) Canon SL"
+                ],
+                "confidence": "exact"
+            }
         },
         {
             "id": "44",
@@ -418,7 +767,18 @@
             "inProduction": "No",
             "description": "The side plates can be very sharp and can cut webbing.",
             "solution": "Don't use for highlining",
-            "productImage": "https://slackdb.com/user_content/img/gear/426.jpg"
+            "productImage": "https://slackdb.com/user_content/img/gear/426.jpg",
+            "match": {
+                "gearType": "roller",
+                "gearIds": [
+                    1
+                ],
+                "gearNames": [
+                    "Equilibrium Slacklines (EQB) AIDMAN"
+                ],
+                "confidence": "exact",
+                "note": "AIDMAN"
+            }
         },
         {
             "id": "57",
@@ -430,7 +790,20 @@
             "inProduction": "No",
             "description": "Plate-type pushpins can fail when they get older and the glue no longer fixed the head and the plate-end to the body of the pin.",
             "solution": "Do NOT use for highlining.",
-            "link1": "https://drive.google.com/file/d/1dsEi2DcxbP7-FzsWuRN4Lt2Oh0DTm3et/view?usp=sharing"
+            "link1": "https://drive.google.com/file/d/1dsEi2DcxbP7-FzsWuRN4Lt2Oh0DTm3et/view?usp=sharing",
+            "match": {
+                "gearType": "weblock",
+                "gearIds": [
+                    88,
+                    89
+                ],
+                "gearNames": [
+                    "Slacktivity SlackDuck",
+                    "Slacktivity SlackDuck-DP"
+                ],
+                "confidence": "ambiguous",
+                "note": "SlackDuck and SlackDuck-DP"
+            }
         },
         {
             "id": "62",
@@ -442,7 +815,18 @@
             "inProduction": "No",
             "description": "The side plates can be very sharp and can cut webbing.",
             "solution": "Don't use for highlining",
-            "productImage": "https://slackdb.com/user_content/img/gear/75.jpg"
+            "productImage": "https://slackdb.com/user_content/img/gear/75.jpg",
+            "match": {
+                "gearType": "roller",
+                "gearIds": [
+                    8
+                ],
+                "gearNames": [
+                    "Petram Slacklines Motum webbing pulley"
+                ],
+                "confidence": "exact",
+                "note": "Motum webbing pulley"
+            }
         },
         {
             "id": "63",
@@ -454,7 +838,17 @@
             "inProduction": "Yes",
             "description": "The side plates can be very sharp and can cut webbing.",
             "solution": "Don't use for highlining",
-            "productImage": "https://slackdb.com/user_content/img/gear/229.jpg"
+            "productImage": "https://slackdb.com/user_content/img/gear/229.jpg",
+            "match": {
+                "gearType": "roller",
+                "gearIds": [
+                    9
+                ],
+                "gearNames": [
+                    "Slack Mountain Pulley"
+                ],
+                "confidence": "exact"
+            }
         },
         {
             "id": "64",
@@ -466,7 +860,18 @@
             "inProduction": "No",
             "description": "Can break at above 10kN if threaded wrongly",
             "productImage": "http://www.slackpro.de/images/products/hook_bruchgefahr1.jpg",
-            "link1": "http://www.slackpro.de/en/warnings/warn_slackhook.shtml"
+            "link1": "http://www.slackpro.de/en/warnings/warn_slackhook.shtml",
+            "match": {
+                "gearType": "weblock",
+                "gearIds": [
+                    127
+                ],
+                "gearNames": [
+                    "Slackliner.de Linelocker 50mm"
+                ],
+                "confidence": "exact",
+                "note": "ISA lists it as the SlackPro Slackhook; we hold the same steel 50mm hook under Slackliner.de"
+            }
         },
         {
             "id": "65",
@@ -479,7 +884,18 @@
             "description": "50 Pins of the first batch have screw fit heads without additional locking splints. If used in a non-rotating way, there is no issue. But if used in any manner which would rotate the pin (such as in a primitive or in a soft release) the rubber cord can prevent the pinhead from turning - if the pin is spun during this interaction, the pin can disassemble. The above mentioned problem can only happen to the pins that have the black head with 6 holes. The heads with 1 hole are not affected as they are assembled differently.",
             "solution": "Pins that have unscrewed will be replaced for free. For customers that want to regularly use the KingPin in a rotating system, Slacktivity is accommodating and will also replace those pins for free. This issue does not affect new products. Contact info@slacktivity.com",
             "productImage": "https://www.slacklineinternational.org/2b1118f6-915c-48b4-b7d0-ca63578d47b8/",
-            "link1": "https://m.facebook.com/photo.php?fbid=10100695211287975&id=17402980&set=gm.5156896224384213&source=57"
+            "link1": "https://m.facebook.com/photo.php?fbid=10100695211287975&id=17402980&set=gm.5156896224384213&source=57",
+            "match": {
+                "gearType": "weblock",
+                "gearIds": [
+                    41
+                ],
+                "gearNames": [
+                    "Slacktivity KingPin"
+                ],
+                "confidence": "likely",
+                "note": "Slacktivity KingPin shackle, held as a weblock"
+            }
         },
         {
             "id": "66",
@@ -492,7 +908,18 @@
             "description": "The original weblock tie-off against slippage is no longer recommended, because the inside of the weblock has a sharp edge which can cut the webbing.",
             "solution": "Manufacturer has published a video describing the new tie-off method.",
             "productImage": "https://slackdb.com/user_content/img/gear/355.jpg",
-            "link1": "https://www.youtube.com/watch?v=tgV0f4JoA3U"
+            "link1": "https://www.youtube.com/watch?v=tgV0f4JoA3U",
+            "match": {
+                "gearType": "weblock",
+                "gearIds": [
+                    4
+                ],
+                "gearNames": [
+                    "Balance Community Alpine WebLock 5.0"
+                ],
+                "confidence": "exact",
+                "note": "Alpine WebLock 5.0"
+            }
         },
         {
             "id": "78",
@@ -505,7 +932,18 @@
             "description": "A webbing broke at 7kN after 7 months of intense use.",
             "productImage": "https://www.slacklineinternational.org/wp-content/uploads/2024/11/boomboom.jpg",
             "link1": "https://www.facebook.com/slack.inov/posts/pfbid02Za2SBvhgVg8F3eqRngFKozEHAws2HSw2cnjLMYs3WUhuMf1aAjLSSQP5dHCLnGpnl",
-            "link2": "https://www.facebook.com/groups/slackchat/posts/25818923867754813/"
+            "link2": "https://www.facebook.com/groups/slackchat/posts/25818923867754813/",
+            "match": {
+                "gearType": "webbing",
+                "gearIds": [
+                    246
+                ],
+                "gearNames": [
+                    "Slack Inov BoomBoom"
+                ],
+                "confidence": "exact",
+                "note": "stub row added to webbings.json for this warning; no published specs"
+            }
         },
         {
             "id": "81",
@@ -518,7 +956,17 @@
             "description": "A permarigg webbing broke at 5.5-7 kN after 15 months of use",
             "productImage": "https://www.slacklineinternational.org/wp-content/uploads/2024/11/nylove-longline.jpg",
             "link1": "https://data.slacklineinternational.org/publications/highline/webbing/webbing-break-tests-spider-nylove-2024-v1-en.pdf/",
-            "link2": "https://www.facebook.com/slacklineinternational/posts/983351897154151"
+            "link2": "https://www.facebook.com/slacklineinternational/posts/983351897154151",
+            "match": {
+                "gearType": "webbing",
+                "gearIds": [
+                    73
+                ],
+                "gearNames": [
+                    "Spider Slacklines Nylove"
+                ],
+                "confidence": "exact"
+            }
         },
         {
             "id": "82",
@@ -529,7 +977,14 @@
             "manufacturer": "slack.fr",
             "inProduction": "No",
             "description": "The Weblock is not made for tensioned slacklines, this is a lightweight, low tension weblock. The pin mechanism is prone to failures. Several incidents ranging from webbing damage to complete failures have been reported.",
-            "solution": "For professional use only. Not recommended for general highline use."
+            "solution": "For professional use only. Not recommended for general highline use.",
+            "match": {
+                "gearType": null,
+                "gearIds": [],
+                "gearNames": [],
+                "confidence": "none",
+                "note": "SladLock light is a distinct low-tension model; not in the catalogue (weblock 96 SladLock Power is a different product)"
+            }
         },
         {
             "id": "13",
@@ -542,7 +997,17 @@
             "description": "The webbing is weaker than advertised. Only one batch is affected.",
             "solution": "See manufacturer's recommendation.",
             "productImage": "https://slackdb.com/user_content/img/gear/211.jpg",
-            "link1": "https://www.facebook.com/SLACKTIVITY/posts/2238869669574057"
+            "link1": "https://www.facebook.com/SLACKTIVITY/posts/2238869669574057",
+            "match": {
+                "gearType": "webbing",
+                "gearIds": [
+                    61
+                ],
+                "gearNames": [
+                    "Slacktivity pinkTube"
+                ],
+                "confidence": "exact"
+            }
         },
         {
             "id": "15",
@@ -555,7 +1020,17 @@
             "description": "The rubber adhesion can fail below the WLL.",
             "solution": "Contact manufacturer.",
             "productImage": "https://slackdb.com/user_content/img/gear/410.jpg",
-            "link1": "https://petramslacklines.site123.me/shop-1/cito-webbing-grip"
+            "link1": "https://petramslacklines.site123.me/shop-1/cito-webbing-grip",
+            "match": {
+                "gearType": "grip",
+                "gearIds": [
+                    11
+                ],
+                "gearNames": [
+                    "Petram Slacklines Cito"
+                ],
+                "confidence": "exact"
+            }
         },
         {
             "id": "17",
@@ -568,7 +1043,17 @@
             "description": "The leashring / thimble is made from plastic and abrades easily.",
             "solution": "For professional use only. Not recommended for general highline use.",
             "link1": "https://slack-inov.com/shop/en/leashes/314-vortex-highline-ring.html",
-            "link2": "https://www.facebook.com/groups/127031727370713"
+            "link2": "https://www.facebook.com/groups/127031727370713",
+            "match": {
+                "gearType": "leashring",
+                "gearIds": [
+                    28
+                ],
+                "gearNames": [
+                    "Slack Inov Vortex"
+                ],
+                "confidence": "exact"
+            }
         },
         {
             "id": "22",
@@ -580,7 +1065,14 @@
             "inProduction": "Yes",
             "description": "Sling can harm the tree.",
             "solution": "Only use with reinforced tree protection sold by the same manufacturer.",
-            "link1": "https://raed-slacklines.com/treepro"
+            "link1": "https://raed-slacklines.com/treepro",
+            "match": {
+                "gearType": null,
+                "gearIds": [],
+                "gearNames": [],
+                "confidence": "none",
+                "note": "slings are not a gear type we hold"
+            }
         },
         {
             "id": "33",
@@ -591,7 +1083,18 @@
             "manufacturer": "EQB",
             "inProduction": "Yes",
             "description": "The captive pins can come easily undone while rigging and pretensioning.",
-            "solution": "Use with great caution, always use a good weblock tieoff to prevent any movement of the captive pin while the line is rigged."
+            "solution": "Use with great caution, always use a good weblock tieoff to prevent any movement of the captive pin while the line is rigged.",
+            "match": {
+                "gearType": "weblock",
+                "gearIds": [
+                    87
+                ],
+                "gearNames": [
+                    "Equilibrium Slacklines (EQB) Sherriff FX"
+                ],
+                "confidence": "exact",
+                "note": "Sherriff FX"
+            }
         },
         {
             "id": "35",
@@ -603,7 +1106,17 @@
             "inProduction": "Yes",
             "description": "The captive pins can come easily undone while rigging and pretensioning.",
             "solution": "Use with great caution, always use a good weblock tieoff to prevent any movement of the captive pin while the line is rigged.",
-            "productImage": "https://slackdb.com/user_content/img/gear/327.jpg"
+            "productImage": "https://slackdb.com/user_content/img/gear/327.jpg",
+            "match": {
+                "gearType": "weblock",
+                "gearIds": [
+                    12
+                ],
+                "gearNames": [
+                    "Equilibrium Slacklines (EQB) Bandit FX"
+                ],
+                "confidence": "exact"
+            }
         },
         {
             "id": "38",
@@ -615,7 +1128,17 @@
             "inProduction": "Yes",
             "description": "The captive pins can come easily undone while rigging and pretensioning.",
             "solution": "Use with great caution, always use a good weblock tieoff to prevent any movement of the captive pin while the line is rigged.",
-            "productImage": "https://slackdb.com/user_content/img/gear/328.jpg"
+            "productImage": "https://slackdb.com/user_content/img/gear/328.jpg",
+            "match": {
+                "gearType": "weblock",
+                "gearIds": [
+                    19
+                ],
+                "gearNames": [
+                    "Equilibrium Slacklines (EQB) Canon FX"
+                ],
+                "confidence": "exact"
+            }
         },
         {
             "id": "39",
@@ -627,7 +1150,20 @@
             "inProduction": "No",
             "description": "The captive pins can come easily undone while rigging and pretensioning.",
             "solution": "Use with great caution, always use a good weblock tieoff to prevent any movement of the captive pin while the line is rigged.",
-            "productImage": "https://slackdb.com/user_content/img/gear/500_prv.jpg"
+            "productImage": "https://slackdb.com/user_content/img/gear/500_prv.jpg",
+            "match": {
+                "gearType": "weblock",
+                "gearIds": [
+                    39,
+                    40
+                ],
+                "gearNames": [
+                    "Equilibrium Slacklines (EQB) Katana",
+                    "Equilibrium Slacklines (EQB) Katana FX"
+                ],
+                "confidence": "ambiguous",
+                "note": "Katana and Katana FX both held"
+            }
         },
         {
             "id": "41",
@@ -640,7 +1176,14 @@
             "description": "The tree sling has a buckle system that needs to be doubled backed. If it is only threaded through once the sling can fail under tension.",
             "solution": "double back the buckle",
             "productImage": "https://www.ferrehogar.es/storage/images/image?remote=https%3A%2F%2Fwww.ferrehogar.es%2FWebRoot%2FStoreES2%2FShops%2Feb2406%2F56B4%2FCFFC%2F85BE%2F2F26%2FDE7B%2F52DF%2FD022%2FB0AA%2FSet-Slackline-Passion-Mountain-Equiment.jpg&shop=eb2406&width=800&height=2560",
-            "link2": "https://www.bergsteigen.com/produkte/mountain-equipment-ruft-slackline-passion-zurueck/"
+            "link2": "https://www.bergsteigen.com/produkte/mountain-equipment-ruft-slackline-passion-zurueck/",
+            "match": {
+                "gearType": null,
+                "gearIds": [],
+                "gearNames": [],
+                "confidence": "none",
+                "note": "Mountain Equipment not a brand we hold"
+            }
         },
         {
             "id": "42",
@@ -653,7 +1196,14 @@
             "description": "The plastic handle can break when you try to release higher tensions lines.",
             "solution": "Be careful with higher tensions. Re-install the multiplier to manually release at the beginning.",
             "productImage": "https://slackdb.com/user_content/img/gear/207.jpg",
-            "link1": "https://www.petzl.com/CH/fr/Sport/Assureurs--descendeurs/GRIGRI"
+            "link1": "https://www.petzl.com/CH/fr/Sport/Assureurs--descendeurs/GRIGRI",
+            "match": {
+                "gearType": null,
+                "gearIds": [],
+                "gearNames": [],
+                "confidence": "none",
+                "note": "belay brakes are not a gear type we hold"
+            }
         },
         {
             "id": "43",
@@ -666,7 +1216,22 @@
             "description": "Can slip at high temperatures.",
             "solution": "Adhere to the manufacturer's recommendations.",
             "productImage": "https://slackdb.com/user_content/img/gear/374.jpg",
-            "link1": "https://www.linegrip.com/linegrip-safety-warnings/"
+            "link1": "https://www.linegrip.com/linegrip-safety-warnings/",
+            "match": {
+                "gearType": "grip",
+                "gearIds": [
+                    1,
+                    6,
+                    5
+                ],
+                "gearNames": [
+                    "lineGrip (formerly Slack Pro!) LineGrip Alu G4",
+                    "lineGrip (formerly Slack Pro!) LineGrip G5",
+                    "lineGrip (formerly Slack Pro!) LineGrip nano"
+                ],
+                "confidence": "ambiguous",
+                "note": "generic 'LineGrip'; Alu G4 / G5 / nano all held"
+            }
         },
         {
             "id": "45",
@@ -677,7 +1242,18 @@
             "manufacturer": "Slacktivity",
             "inProduction": "No",
             "description": "The spacing between the bearings is wide enough for webbings to get stuck. This can damage webbings while tensioning or linesliding.",
-            "solution": "Use with caution.."
+            "solution": "Use with caution..",
+            "match": {
+                "gearType": "roller",
+                "gearIds": [
+                    22
+                ],
+                "gearNames": [
+                    "Slacktivity Hangover 1.0"
+                ],
+                "confidence": "exact",
+                "note": "stub row added to rollers.json for this warning; carabiner slider type, no other specs known"
+            }
         },
         {
             "id": "46",
@@ -690,7 +1266,17 @@
             "description": "The captive pins can come easily undone while rigging and pretensioning.",
             "solution": "Use with great caution, always use a good weblock tieoff to prevent any movement of the captive pin while the line is rigged.",
             "productImage": "https://slackdb.com/user_content/img/gear/508.jpg",
-            "link1": "https://spider-slacklines.com/shop/en/weblock/87-lime-linelock.html"
+            "link1": "https://spider-slacklines.com/shop/en/weblock/87-lime-linelock.html",
+            "match": {
+                "gearType": "weblock",
+                "gearIds": [
+                    42
+                ],
+                "gearNames": [
+                    "Spider Slacklines Lime"
+                ],
+                "confidence": "exact"
+            }
         },
         {
             "id": "47",
@@ -703,7 +1289,18 @@
             "description": "The captive pins can come easily undone while rigging and pretensioning.",
             "solution": "Use with great caution, always use a good weblock tieoff to prevent any movement of the captive pin while the line is rigged.",
             "productImage": "https://slackdb.com/user_content/img/gear/507.jpg",
-            "link1": "https://spider-slacklines.com/shop/en/weblock/250-814-lime-sr-linelock.html#/195-select_soft_release_length-no_soft_release"
+            "link1": "https://spider-slacklines.com/shop/en/weblock/250-814-lime-sr-linelock.html#/195-select_soft_release_length-no_soft_release",
+            "match": {
+                "gearType": "weblock",
+                "gearIds": [
+                    42
+                ],
+                "gearNames": [
+                    "Spider Slacklines Lime"
+                ],
+                "confidence": "ambiguous",
+                "note": "Lime SR variant not held separately"
+            }
         },
         {
             "id": "48",
@@ -716,7 +1313,18 @@
             "description": "The captive pins can come easily undone while rigging and pretensioning.",
             "solution": "Use with great caution, always use a good weblock tieoff to prevent any movement of the captive pin while the line is rigged.",
             "productImage": "https://slackdb.com/user_content/img/gear/505.jpg",
-            "link1": "https://spider-slacklines.com/shop/en/weblock/79-2663-chili-linelock.html#/177-select_option-none"
+            "link1": "https://spider-slacklines.com/shop/en/weblock/79-2663-chili-linelock.html#/177-select_option-none",
+            "match": {
+                "gearType": "weblock",
+                "gearIds": [
+                    27
+                ],
+                "gearNames": [
+                    "Spider Slacklines Chili"
+                ],
+                "confidence": "exact",
+                "note": "Chilli 1 = Chili"
+            }
         },
         {
             "id": "49",
@@ -729,7 +1337,18 @@
             "description": "The captive pins can come easily undone while rigging and pretensioning.",
             "solution": "Use with great caution, always use a good weblock tieoff to prevent any movement of the captive pin while the line is rigged.",
             "productImage": "https://slackdb.com/user_content/img/gear/505.jpg",
-            "link1": "https://spider-slacklines.com/shop/en/weblock/79-2663-chili-linelock.html#/177-select_option-none"
+            "link1": "https://spider-slacklines.com/shop/en/weblock/79-2663-chili-linelock.html#/177-select_option-none",
+            "match": {
+                "gearType": "weblock",
+                "gearIds": [
+                    28
+                ],
+                "gearNames": [
+                    "Spider Slacklines CHILI 2.0"
+                ],
+                "confidence": "exact",
+                "note": "Chilli 2 = CHILI 2.0"
+            }
         },
         {
             "id": "50",
@@ -742,7 +1361,20 @@
             "description": "The captive pins can come easily undone while rigging and pretensioning.",
             "solution": "Use with great caution, always use a good weblock tieoff to prevent any movement of the captive pin while the line is rigged.",
             "productImage": "https://slackdb.com/user_content/img/gear/219.jpg",
-            "link1": "https://petramslacklines.site123.me/shop-1/aeris-weblock-2"
+            "link1": "https://petramslacklines.site123.me/shop-1/aeris-weblock-2",
+            "match": {
+                "gearType": "weblock",
+                "gearIds": [
+                    2,
+                    1
+                ],
+                "gearNames": [
+                    "Petram Slacklines Aeris Weblock",
+                    "Petram Slacklines Aeris P Weblock"
+                ],
+                "confidence": "ambiguous",
+                "note": "Aeris Weblock; Aeris P Weblock is a sibling"
+            }
         },
         {
             "id": "51",
@@ -754,7 +1386,18 @@
             "inProduction": "Yes",
             "description": "The captive pins can come easily undone while rigging and pretensioning.",
             "solution": "Use with great caution, always use a good weblock tieoff to prevent any movement of the captive pin while the line is rigged.",
-            "productImage": "https://slackdb.com/user_content/img/gear/405.jpg"
+            "productImage": "https://slackdb.com/user_content/img/gear/405.jpg",
+            "match": {
+                "gearType": "weblock",
+                "gearIds": [
+                    10
+                ],
+                "gearNames": [
+                    "Slack house BANANA! 3.0 SR"
+                ],
+                "confidence": "exact",
+                "note": "BANANA! 3.0 SR"
+            }
         },
         {
             "id": "52",
@@ -766,7 +1409,18 @@
             "inProduction": "Yes",
             "description": "The captive pins can come easily undone while rigging and pretensioning.",
             "solution": "Use with great caution, always use a good weblock tieoff to prevent any movement of the captive pin while the line is rigged.",
-            "productImage": "https://slackdb.com/user_content/img/gear/406.jpg"
+            "productImage": "https://slackdb.com/user_content/img/gear/406.jpg",
+            "match": {
+                "gearType": "weblock",
+                "gearIds": [
+                    11
+                ],
+                "gearNames": [
+                    "Slack house BANANA! 3.1"
+                ],
+                "confidence": "exact",
+                "note": "BANANA! 3.1"
+            }
         },
         {
             "id": "53",
@@ -777,7 +1431,20 @@
             "manufacturer": "EQB",
             "inProduction": "Yes",
             "description": "The pull-pin can come out while rigging and pretensioning. Affects all version with the pull-pins (not the push-pin versions)",
-            "productImage": "https://slackdb.com/user_content/img/gear/342.jpg"
+            "productImage": "https://slackdb.com/user_content/img/gear/342.jpg",
+            "match": {
+                "gearType": "weblock",
+                "gearIds": [
+                    55,
+                    56
+                ],
+                "gearNames": [
+                    "Equilibrium Slacklines (EQB) Mithril - Pull Pin",
+                    "Equilibrium Slacklines (EQB) Mithril - Quick Pin"
+                ],
+                "confidence": "ambiguous",
+                "note": "Mithril Pull Pin and Quick Pin both held"
+            }
         },
         {
             "id": "54",
@@ -789,7 +1456,17 @@
             "inProduction": "Yes",
             "description": "The captive pins can come easily undone while rigging and pretensioning.",
             "solution": "Use with great caution, always use a good weblock tieoff to prevent any movement of the captive pin while the line is rigged.",
-            "productImage": "https://slackdb.com/user_content/img/gear/225.jpg"
+            "productImage": "https://slackdb.com/user_content/img/gear/225.jpg",
+            "match": {
+                "gearType": "weblock",
+                "gearIds": [
+                    44
+                ],
+                "gearNames": [
+                    "Krok LineLock mini"
+                ],
+                "confidence": "exact"
+            }
         },
         {
             "id": "55",
@@ -801,7 +1478,18 @@
             "inProduction": "No",
             "description": "The captive pins can come easily undone while rigging and pretensioning.",
             "solution": "Use with great caution, always use a good weblock tieoff to prevent any movement of the captive pin while the line is rigged.",
-            "productImage": "https://slackdb.com/user_content/img/gear/65.jpg"
+            "productImage": "https://slackdb.com/user_content/img/gear/65.jpg",
+            "match": {
+                "gearType": "weblock",
+                "gearIds": [
+                    18
+                ],
+                "gearNames": [
+                    "Petram Slacklines Campo weblock"
+                ],
+                "confidence": "exact",
+                "note": "Campo weblock"
+            }
         },
         {
             "id": "56",
@@ -813,7 +1501,17 @@
             "inProduction": "Yes",
             "description": "The pins can come undone while rigging and pretensioning due to the use of a unsecured bolt and nut.",
             "solution": "Use with great caution, always use a good weblock tieoff to prevent any movement of the pin while the line is rigged.",
-            "productImage": "https://slackdb.com/user_content/img/gear/502.jpg"
+            "productImage": "https://slackdb.com/user_content/img/gear/502.jpg",
+            "match": {
+                "gearType": "weblock",
+                "gearIds": [
+                    7
+                ],
+                "gearNames": [
+                    "SlackGear BaboonLock"
+                ],
+                "confidence": "exact"
+            }
         },
         {
             "id": "58",
@@ -825,7 +1523,17 @@
             "inProduction": "No",
             "description": "The captive pins can come easily undone while rigging and pretensioning.",
             "solution": "Use with great caution, always use a good weblock tieoff to prevent any movement of the captive pin while the line is rigged.",
-            "productImage": "https://slackdb.com/user_content/img/gear/511_prv.jpg"
+            "productImage": "https://slackdb.com/user_content/img/gear/511_prv.jpg",
+            "match": {
+                "gearType": "weblock",
+                "gearIds": [
+                    31
+                ],
+                "gearNames": [
+                    "One Inch Dreams Dreamcatcher"
+                ],
+                "confidence": "exact"
+            }
         },
         {
             "id": "59",
@@ -837,7 +1545,18 @@
             "inProduction": "No",
             "description": "The captive pins can come easily undone while rigging and pretensioning.",
             "solution": "Use with great caution, always use a good weblock tieoff to prevent any movement of the captive pin while the line is rigged.",
-            "productImage": "https://slackdb.com/gear_details/LineLockALMKIII#/ITEMID-506"
+            "productImage": "https://slackdb.com/gear_details/LineLockALMKIII#/ITEMID-506",
+            "match": {
+                "gearType": "weblock",
+                "gearIds": [
+                    43
+                ],
+                "gearNames": [
+                    "lineGrip (formerly Slack Pro!) LineLock AL MK4"
+                ],
+                "confidence": "exact",
+                "note": "LineLock AL MK4"
+            }
         },
         {
             "id": "60",
@@ -849,7 +1568,17 @@
             "inProduction": "No",
             "description": "The captive pins can come easily undone while rigging and pretensioning.",
             "solution": "Use with great caution, always use a good weblock tieoff to prevent any movement of the captive pin while the line is rigged.",
-            "productImage": "https://slackdb.com/user_content/img/gear/503_prv.jpg"
+            "productImage": "https://slackdb.com/user_content/img/gear/503_prv.jpg",
+            "match": {
+                "gearType": "weblock",
+                "gearIds": [
+                    17
+                ],
+                "gearNames": [
+                    "Absolute Slacklines Beast 1.0"
+                ],
+                "confidence": "exact"
+            }
         },
         {
             "id": "61",
@@ -861,7 +1590,17 @@
             "inProduction": "No",
             "description": "The captive pins can come easily undone while rigging and pretensioning.",
             "solution": "Use with great caution, always use a good weblock tieoff to prevent any movement of the captive pin while the line is rigged.",
-            "productImage": "https://slackdb.com/user_content/img/gear/510.jpg"
+            "productImage": "https://slackdb.com/user_content/img/gear/510.jpg",
+            "match": {
+                "gearType": "weblock",
+                "gearIds": [
+                    100
+                ],
+                "gearNames": [
+                    "Elephant Slacklines T-Rig"
+                ],
+                "confidence": "exact"
+            }
         },
         {
             "id": "67",
@@ -874,7 +1613,17 @@
             "description": "The leashring / thimble gate has shown to damage a leash",
             "solution": "Tie the figure 8 as close as possible to the device, read the manual! Also read the statement from Slack-Inov provided in the links.",
             "link1": "https://www.facebook.com/groups/slackchat/posts/7016210978452719",
-            "link2": "https://www.facebook.com/slack.inov/photos/pcb.5275879579103243/5275879489103252/"
+            "link2": "https://www.facebook.com/slack.inov/photos/pcb.5275879579103243/5275879489103252/",
+            "match": {
+                "gearType": "leashring",
+                "gearIds": [
+                    33
+                ],
+                "gearNames": [
+                    "Slack Inov Vortex 2"
+                ],
+                "confidence": "exact"
+            }
         },
         {
             "id": "68",
@@ -887,7 +1636,18 @@
             "description": "Slacktivity Pinktube produced before April 2020 is weaker than certified Pinktube and therefore might have a shorter lifetime than 180 days rigged outside. Pinktube produced after April 2020 has a ISA approved Label on its tag.",
             "solution": "See linked publication",
             "productImage": "https://slackdb.com/user_content/img/gear/211.jpg",
-            "link2": "https://slacktivity.com/shop/pinktube-slackline-tubular-webbing/"
+            "link2": "https://slacktivity.com/shop/pinktube-slackline-tubular-webbing/",
+            "match": {
+                "gearType": "webbing",
+                "gearIds": [
+                    61
+                ],
+                "gearNames": [
+                    "Slacktivity pinkTube"
+                ],
+                "confidence": "exact",
+                "note": "second pinkTube notice"
+            }
         },
         {
             "id": "69",
@@ -900,7 +1660,18 @@
             "description": "Lift2be has a low breaking strength and users need to make themselves aware of the limited lifetime of sub 26 kN MBS webbing (we recommend no more than 180 days rigged outside)",
             "solution": "See linked publication",
             "productImage": "https://slackdb.com/user_content/img/gear/482.jpg",
-            "link2": "https://slacktivity.com/shop/pinktube-slackline-tubular-webbing/"
+            "link2": "https://slacktivity.com/shop/pinktube-slackline-tubular-webbing/",
+            "match": {
+                "gearType": "webbing",
+                "gearIds": [
+                    195
+                ],
+                "gearNames": [
+                    "Balance Community Lift 2be"
+                ],
+                "confidence": "exact",
+                "note": "Lift2be = Lift 2be"
+            }
         },
         {
             "id": "70",
@@ -912,7 +1683,18 @@
             "inProduction": "Yes",
             "description": "We have two documented occasions where the blue pins have lost their autolocking capabilities and failed while a slackline was tensioned.",
             "solution": "This is beeing analysed, no solution yet",
-            "productImage": "https://slackdb.com/user_content/img/gear/574.jpg"
+            "productImage": "https://slackdb.com/user_content/img/gear/574.jpg",
+            "match": {
+                "gearType": "weblock",
+                "gearIds": [
+                    91
+                ],
+                "gearNames": [
+                    "Slack Inov Slackibloc 4"
+                ],
+                "confidence": "exact",
+                "note": "Slackibloc 4, blue-pin batch"
+            }
         },
         {
             "id": "71",
@@ -924,7 +1706,18 @@
             "inProduction": "No",
             "description": "A small number of the center diverters have been installed incorrectly, please check closely if the drop shaped diverter has been installed correctly.",
             "solution": "Please don't use for highlining or longlining, only for low tension rodeolining.",
-            "productImage": "https://slackdb.com/user_content/img/gear/25.jpg"
+            "productImage": "https://slackdb.com/user_content/img/gear/25.jpg",
+            "match": {
+                "gearType": "weblock",
+                "gearIds": [
+                    51
+                ],
+                "gearNames": [
+                    "Landcruising Lynx 4.0 SH"
+                ],
+                "confidence": "exact",
+                "note": "Lynx 4.0 SH"
+            }
         },
         {
             "id": "72",
@@ -936,7 +1729,18 @@
             "inProduction": "No",
             "description": "A small number of the center diverters have been installed incorrectly, please check closely if the drop shaped diverter has been installed correctly.",
             "solution": "Please don't use for highlining or longlining, only for low tension rodeolining.",
-            "productImage": "https://slackdb.com/user_content/img/gear/23.jpg"
+            "productImage": "https://slackdb.com/user_content/img/gear/23.jpg",
+            "match": {
+                "gearType": "weblock",
+                "gearIds": [
+                    52
+                ],
+                "gearNames": [
+                    "Landcruising Lynx 4.0 Vari"
+                ],
+                "confidence": "exact",
+                "note": "Lynx 4.0 Vari"
+            }
         },
         {
             "id": "73",
@@ -948,7 +1752,18 @@
             "inProduction": "No",
             "description": "A small number of the center diverters have been installed incorrectly, please check closely if the drop shaped diverter has been installed correctly.",
             "solution": "Please don't use for highlining or longlining, only for low tension rodeolining.",
-            "productImage": "https://slackdb.com/user_content/img/gear/51.jpg"
+            "productImage": "https://slackdb.com/user_content/img/gear/51.jpg",
+            "match": {
+                "gearType": "weblock",
+                "gearIds": [
+                    107
+                ],
+                "gearNames": [
+                    "Landcruising Zilla 3.0"
+                ],
+                "confidence": "exact",
+                "note": "Zilla 3.0"
+            }
         },
         {
             "id": "74",
@@ -961,7 +1776,17 @@
             "description": "Use of webbing grips have been shown to lead to premature failure on polyester sheathed dyneema/HMPE webbings.",
             "solution": "Do not use webbing grips on this webbing. Use a low tech segment in weblocks for tensioning.",
             "productImage": "https://www.balancecommunity.com/cdn/shop/products/IMG_03091_800x_crop_center.jpg?v=1660007695",
-            "link1": "https://www.balancecommunity.com/blogs/slack-science/webbing-grips-and-polyester-sheathed-dyneema-webbings"
+            "link1": "https://www.balancecommunity.com/blogs/slack-science/webbing-grips-and-polyester-sheathed-dyneema-webbings",
+            "match": {
+                "gearType": "webbing",
+                "gearIds": [
+                    244
+                ],
+                "gearNames": [
+                    "Balance Community Spider Silk MK4"
+                ],
+                "confidence": "exact"
+            }
         },
         {
             "id": "75",
@@ -975,7 +1800,18 @@
             "solution": "Slacktivity recommends not exceeding 6 kn in a LineGrip or T-Grip, and up to 4 kn in other grips.",
             "productImage": "https://www.slacklineinternational.org/wp-content/uploads/2023/07/Slacktivity_Y2K_1_01.jpg",
             "link1": "https://www.balancecommunity.com/blogs/slack-science/webbing-grips-and-polyester-sheathed-dyneema-webbings",
-            "link2": "https://slacktivity.com/high-tech-webbing/"
+            "link2": "https://slacktivity.com/high-tech-webbing/",
+            "match": {
+                "gearType": "webbing",
+                "gearIds": [
+                    74
+                ],
+                "gearNames": [
+                    "Slacktivity Y2k"
+                ],
+                "confidence": "likely",
+                "note": "Y2k; Y2K Light (221) is a separate product"
+            }
         },
         {
             "id": "76",
@@ -988,7 +1824,18 @@
             "description": "Use of webbing grips have been shown to lead to premature failure on polyester sheathed dyneema/HMPE webbings.",
             "solution": "Do not use webbing grips on this webbing. Use a low tech segment in weblocks for tensioning.",
             "productImage": "https://slack-mountain.com/547-slackm_maint_product/cloud.jpg",
-            "link1": "https://www.balancecommunity.com/blogs/slack-science/webbing-grips-and-polyester-sheathed-dyneema-webbings"
+            "link1": "https://www.balancecommunity.com/blogs/slack-science/webbing-grips-and-polyester-sheathed-dyneema-webbings",
+            "match": {
+                "gearType": "webbing",
+                "gearIds": [
+                    174
+                ],
+                "gearNames": [
+                    "Slack Mountain S.O.S - Sunset Over Seas"
+                ],
+                "confidence": "exact",
+                "note": "S. O. S. = S.O.S - Sunset Over Seas"
+            }
         },
         {
             "id": "77",
@@ -1001,7 +1848,18 @@
             "description": "Use of webbing grips have been shown to lead to premature failure on polyester sheathed dyneema/HMPE webbings.",
             "solution": "Do not use webbing grips on this webbing. Use a low tech segment in weblocks for tensioning.",
             "productImage": "https://slackdb.com/user_content/img/gear/449.jpg",
-            "link1": "https://www.balancecommunity.com/blogs/slack-science/webbing-grips-and-polyester-sheathed-dyneema-webbings"
+            "link1": "https://www.balancecommunity.com/blogs/slack-science/webbing-grips-and-polyester-sheathed-dyneema-webbings",
+            "match": {
+                "gearType": "webbing",
+                "gearIds": [
+                    144
+                ],
+                "gearNames": [
+                    "Slacklife BC Lion Line"
+                ],
+                "confidence": "exact",
+                "note": "Lion = Lion Line"
+            }
         },
         {
             "id": "79",
@@ -1014,7 +1872,20 @@
             "description": "sharp edges on the sidewall of the weblock where the webbing leaves the weblock",
             "solution": "align the weblock perfectly, so the webbing comes out of the weblock straight. check regularly",
             "productImage": "https://raed-slacklines.com/media/catalog/product/cache/82674256299464684dc8ef1d02ece8bb/_/m/_mg_4767.jpeg",
-            "link1": "https://raed-slacklines.com/tilock"
+            "link1": "https://raed-slacklines.com/tilock",
+            "match": {
+                "gearType": "weblock",
+                "gearIds": [
+                    101,
+                    102
+                ],
+                "gearNames": [
+                    "Raed Slacklines TiLock 19mm",
+                    "Raed Slacklines TiLock 25mm"
+                ],
+                "confidence": "ambiguous",
+                "note": "TiLock held in 19mm and 25mm"
+            }
         },
         {
             "id": "80",
@@ -1026,7 +1897,14 @@
             "inProduction": "Yes",
             "description": "sharp edges on the sidewall of the weblock where the webbing leaves the weblock",
             "solution": "align the weblock perfectly, so the webbing comes out of the weblock straight. check regularly",
-            "link1": "https://www.facebook.com/groups/slackchat/posts/23983097978004087/"
+            "link1": "https://www.facebook.com/groups/slackchat/posts/23983097978004087/",
+            "match": {
+                "gearType": null,
+                "gearIds": [],
+                "gearNames": [],
+                "confidence": "none",
+                "note": "Raed RigLock not in catalogue (only named in a webbing note)"
+            }
         }
     ]
 }

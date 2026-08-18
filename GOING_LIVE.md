@@ -119,6 +119,12 @@ requests — no CORS in production at all.
 | **2 — Feedback** | Both submission forms + captcha | DynamoDB table | AWS console / one-line CLI (no login yet) |
 | **3 — Admin polish** | Cognito login (your email) + admin triage page | Cognito user pool | the admin UI |
 
+**Phase 1 shipped 2026-08-17** — live at https://slackdata.org (see LAUNCH_RUNBOOK.md).
+**Phase 2 + 3 now have a full implementation plan: [SUBMISSIONS_PLAN.md](SUBMISSIONS_PLAN.md).**
+It supersedes the sketch in this table where the two differ — notably, it folds the single admin
+login into Phase 2 rather than deferring it, because the open write endpoints have to be closed
+and the admin surface authenticated in the same pass.
+
 Phase 2 is the highest-value step for the stated goal ("go live to get feedback") and needs **no**
 login — you read submissions straight from DynamoDB until phase 3 justifies a UI.
 

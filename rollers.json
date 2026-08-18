@@ -476,5 +476,26 @@
         "date_introduced": null,
         "product_url": "https://www.beraadventure.com.br/product/polia-de-fita-bera/",
         "active": true
+    },
+    {
+        "name": "Hangover 1.0",
+        "material": null,
+        "weight": null,
+        "wll": null,
+        "mbs": null,
+        "compatible_webbing_width": null,
+        "slider_type": "Carabiner",
+        "inner_width": null,
+        "outer_bearing_diameter": null,
+        "isa_approved": null,
+        "manufacturer": "Slacktivity",
+        "price": null,
+        "price_unit": null,
+        "roller_material": null,
+        "locking_type": null,
+        "bearing_material": null,
+        "date_introduced": null,
+        "product_url": null,
+        "active": false
     }
 ]

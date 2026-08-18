@@ -14,6 +14,7 @@ Importing this module also imports every table model + loader, so
 from sqlmodel import Session, select
 
 from slack_data.load_data.load_grips import load_grips
+from slack_data.load_data.load_isa_warnings import has_isa_warnings, load_isa_warnings
 from slack_data.load_data.load_leashrings import load_leashrings
 from slack_data.load_data.load_manufacturers import load_manufacturers
 from slack_data.load_data.load_rollers import load_rollers
@@ -81,3 +82,10 @@ def seed_catalog(session: Session) -> None:
     if needs_enrichment:
         print("Enriching brands from manufacturers.json...")
         load_manufacturers(session=session)
+    # ALSO last: this pass stamps `isa_warning` onto rows the gear loaders above
+    # created, addressing them by primary key, so every table must be populated
+    # first. Gated on "no row carries a warning yet" rather than on an empty
+    # table, for the same reason as the brand enrichment above.
+    if not has_isa_warnings(session):
+        print("Applying ISA gear warnings from isa_gear_warnings.json...")
+        load_isa_warnings(session=session)
