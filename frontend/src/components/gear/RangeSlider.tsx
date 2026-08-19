@@ -10,8 +10,12 @@
 // The two bound labels below the track are click-to-edit: a single click turns
 // the value into a numeric input you can type into (committed on Enter/blur,
 // reverted on Escape), so the exact bound can be set without dragging a thumb.
+//
+// Where the thumbs overlap, only the top input (max) receives the pointer, so
+// the drag's direction picks which bound moves — see utils/rangeDrag.ts.
 
 import { useEffect, useRef, useState } from 'react'
+import { resolveDragRole, thumbsOverlap } from '../../utils/rangeDrag'
 
 export default function RangeSlider({
   domainLo,
@@ -52,6 +56,55 @@ export default function RangeSlider({
   const atEnd = (v: number) =>
     v <= domainLo + step / 2 ? domainLo : v >= domainHi - step / 2 ? domainHi : v
 
+  // The track element, measured at event time so overlap can be judged in
+  // pixels. Read on demand rather than observed — it is only ever needed inside
+  // a change handler, which is long after layout.
+  const trackRef = useRef<HTMLDivElement>(null)
+
+  // The bound the in-flight gesture is moving, held until it ends so a reversal
+  // mid-drag keeps moving the same thumb. Null between gestures.
+  //
+  // `dragging` scopes that stickiness to a real pointer gesture. A keyboard
+  // arrow or a programmatic write arrives with no pointerdown around it, and
+  // must be judged on its own merits — carrying a role between two such writes
+  // would land the second one on the bound the first just moved.
+  const dragRole = useRef<'min' | 'max' | null>(null)
+  const dragging = useRef(false)
+  const startGesture = () => {
+    dragging.current = true
+    dragRole.current = null
+  }
+  const endGesture = () => {
+    dragging.current = false
+    dragRole.current = null
+  }
+
+  // One change from either input: decide whose bound it is, then clamp so the
+  // thumbs still cannot cross.
+  const apply = (source: 'min' | 'max', raw: number) => {
+    const value = atEnd(raw)
+    const role = resolveDragRole({
+      source,
+      value,
+      lo,
+      hi,
+      overlapping: thumbsOverlap(lo, hi, domainLo, domainHi, trackRef.current?.offsetWidth ?? 0),
+      active: dragging.current ? dragRole.current : null,
+    })
+    if (dragging.current) dragRole.current = role
+    if (role === 'min') onMinChange(Math.min(Math.max(value, domainLo), hi))
+    else onMaxChange(Math.max(Math.min(value, domainHi), lo))
+  }
+
+  // Every gesture starts fresh: a pointer press, or a key press for the keyboard
+  // path (each arrow is its own gesture).
+  const gestureProps = {
+    onPointerDown: startGesture,
+    onPointerUp: endGesture,
+    onPointerCancel: endGesture,
+    onKeyDown: endGesture,
+  }
+
   const thumb =
     'pointer-events-none absolute inset-0 h-1.5 w-full appearance-none bg-transparent ' +
     '[&::-webkit-slider-thumb]:pointer-events-auto [&::-webkit-slider-thumb]:h-3.5 ' +
@@ -64,7 +117,7 @@ export default function RangeSlider({
 
   return (
     <div>
-      <div className="relative h-4">
+      <div ref={trackRef} className="relative h-4">
         {/* track */}
         <div className="absolute top-1/2 h-1.5 w-full -translate-y-1/2 rounded-full bg-gray-200" />
         {/* selected span */}
@@ -79,7 +132,8 @@ export default function RangeSlider({
           max={domainHi}
           step={step}
           value={lo}
-          onChange={e => onMinChange(Math.min(atEnd(Number(e.target.value)), hi))}
+          onChange={e => apply('min', Number(e.target.value))}
+          {...gestureProps}
           className={`${thumb} top-1/2 -translate-y-1/2`}
           aria-label="minimum"
         />
@@ -90,7 +144,8 @@ export default function RangeSlider({
           max={domainHi}
           step={step}
           value={hi}
-          onChange={e => onMaxChange(Math.max(atEnd(Number(e.target.value)), lo))}
+          onChange={e => apply('max', Number(e.target.value))}
+          {...gestureProps}
           className={`${thumb} top-1/2 -translate-y-1/2`}
           aria-label="maximum"
         />

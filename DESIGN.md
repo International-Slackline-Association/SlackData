@@ -194,6 +194,24 @@ Filter groups per gear type — verified against `slack_data/models/*.py` and `u
 Three filter control types:
 - **Pill toggle** — enum and boolean fields; single- or multi-select per the rule above
 - **Range slider** — numeric fields (float or int); rendered as a **dual-thumb slider** (two overlaid `<input type="range">`, min thumb `data-cy="range-min"`, max thumb `data-cy="range-max"`). Step is 1 for integer-only fields and 0.5 otherwise, unless the field knows its own granularity (money steps by the cent); the domain is the data's [min, max] **snapped onto that step grid** (a native range input only lands on `min + n·step`, so an off-grid max would be unreachable — the thumb would stop short of the track end and never read as "no constraint"). A thumb parked at its domain bound means "no constraint". The two value labels below the track (`data-cy="range-min-value"` / `range-max-value`) are **click-to-edit**: one click turns the number into an inline numeric input (commit on Enter/blur, cancel on Escape) so an exact bound can be typed without dragging; out-of-range values are clamped, not rejected. This is the standard control for every min/max filter (weight, breaking strength, diameters, widths, dimensions, kit weight, and the stretch %).
+
+  **Overlapping thumbs.** The two inputs are stacked, so where they overlap only the top one
+  (`range-max`) can be grabbed — and once both sit on the same point the pair would be stuck: max
+  cannot move below min, and min cannot be reached at all. At the top of the domain that is
+  unrecoverable without clearing the filter. So when the thumbs overlap, **the direction of the
+  drag decides which bound moves**: the top input takes the grab, and a first movement to the left
+  is applied to the *min* bound instead of the max one (and, for a keyboard user on the min thumb,
+  a first movement right moves the max bound). The two thumbs are indistinguishable while
+  overlapping, so this reassignment is invisible — nothing jumps. The role is then **sticky for the
+  rest of the pointer gesture** (until `pointerup`), so reversing direction mid-drag keeps moving
+  the same thumb rather than handing the gesture back. Stickiness is scoped to a gesture that
+  actually began with a `pointerdown`: a keyboard arrow, or a programmatic change, is decided on
+  its own merits, never against a role left behind by an earlier one.
+
+  "Overlap" is measured in **pixels, not values**: thumbs one step apart on a wide domain are
+  distinct numbers but the same 14px circle, so the rule triggers whenever the gap between them
+  renders narrower than a thumb. Beyond that distance both thumbs are separately grabbable and each
+  input moves its own bound, clamped so they cannot cross.
 - **Stretch at X kN** — webbing-only custom widget (see below)
 
 **Pill order within a group** — values are alphabetical by default, with catch-all buckets ("Other",
