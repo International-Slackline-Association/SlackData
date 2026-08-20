@@ -154,12 +154,12 @@ GEAR_TYPES.forEach(({ slug, apiPath, label }) => {
     })
   })
 
-  it('each panel keeps the Save / Alert / Compare actions', () => {
+  it('each panel keeps the Compare action, without the dead Save / Alert', () => {
     cy.get('[data-cy="view-detailed"]').click()
     cy.get('[data-cy="gear-detailed-row"]').first().within(() => {
-      cy.get('[data-cy="btn-save"]').should('be.visible')
-      cy.get('[data-cy="btn-alert"]').should('be.visible')
       cy.get('[data-cy="btn-compare"]').should('be.visible')
+      cy.get('[data-cy="btn-save"]').should('not.exist')
+      cy.get('[data-cy="btn-alert"]').should('not.exist')
     })
   })
 

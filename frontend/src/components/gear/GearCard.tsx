@@ -59,6 +59,14 @@ export default function GearCard({
   // Every image we hold for this product — the card browses the whole set.
   const images = imageUrls(slug, String(item.brand_name), String(item.name))
 
+  // Roughly half the catalogue has no product_url (57/100 webbings, 36/100
+  // weblocks; kits and grips are near-complete). The link is simply absent on
+  // those cards rather than rendered dead — Compare then takes the row on its
+  // own, which is the same treatment the detail page gives a missing link.
+  const productUrl = typeof item.product_url === 'string' && item.product_url !== ''
+    ? item.product_url
+    : null
+
   // A spec is either a plain field + unit, or a composite that folds several
   // fields into one segment (weblock width range). Empty segments drop out, so
   // a missing value never leaves a dangling " · " separator.
@@ -143,9 +151,26 @@ export default function GearCard({
           )}
         </div>
 
+        {/* Two real actions. Save and Alert used to sit here and did nothing at
+            all — no handler, no state, nowhere for the intent to go — so they
+            were removed rather than left as furniture. The product link takes
+            their place: it is the one thing a reader actually wants from a card
+            they have decided on, and it is the only outbound action the
+            catalogue can honestly offer today. */}
         <div className="flex gap-2 pt-2">
-          <button data-cy="btn-save" type="button" className={pillBtn}>Save</button>
-          <button data-cy="btn-alert" type="button" className={pillBtn}>Alert</button>
+          {productUrl && (
+            <a
+              data-cy="btn-product"
+              href={productUrl}
+              // The card links out to a manufacturer's site: new tab, and
+              // noopener so the opened page can't reach back through window.opener.
+              target="_blank"
+              rel="noopener noreferrer"
+              className={pillBtn}
+            >
+              View product ↗
+            </a>
+          )}
           <button
             data-cy="btn-compare"
             type="button"

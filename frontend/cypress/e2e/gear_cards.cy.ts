@@ -45,14 +45,38 @@ GEAR_TYPES.forEach(({ slug, apiPath, label, hasISA }) => {
         .should('exist')
     })
 
-    it('shows a Save button', () => {
-      cy.get('[data-cy="gear-card"]').first()
-        .find('[data-cy="btn-save"]').should('be.visible')
+    // Save and Alert were removed: they had no handler and no state behind
+    // them. The card's outbound action is the product link, which is present
+    // only when the item records one (roughly half the catalogue does).
+    it('has no dead Save or Alert buttons', () => {
+      cy.get('[data-cy="btn-save"]').should('not.exist')
+      cy.get('[data-cy="btn-alert"]').should('not.exist')
     })
 
-    it('shows an Alert button', () => {
-      cy.get('[data-cy="gear-card"]').first()
-        .find('[data-cy="btn-alert"]').should('be.visible')
+    it('links out to the product page, safely, wherever one is recorded', () => {
+      cy.fetchAllItems(apiPath).then((all) => {
+        const urls = new Set(all.map((i) => i.product_url).filter(Boolean))
+        if (urls.size === 0) return // nothing of this type records a link
+
+        cy.get('[data-cy="btn-product"]').should('have.length.greaterThan', 0)
+        cy.get('[data-cy="btn-product"]').each(($a) => {
+          // Every link points at a URL the API actually served — no invented
+          // hrefs, and no link left behind on an item whose URL was removed.
+          expect(urls.has($a.attr('href'))).to.equal(true)
+          expect($a.attr('target')).to.equal('_blank')
+          // noopener matters: these go to third-party manufacturer sites, which
+          // must not get a handle on our window through window.opener.
+          expect($a.attr('rel')).to.contain('noopener')
+        })
+      })
+    })
+
+    it('omits the link entirely on items with no product URL', () => {
+      cy.fetchAllItems(apiPath).then((all) => {
+        const withUrl = all.filter((i) => i.product_url).length
+        // A dead or disabled button would be the same furniture we just removed.
+        cy.get('[data-cy="btn-product"]').should('have.length', withUrl)
+      })
     })
 
     it('shows a Compare button', () => {
@@ -158,10 +182,8 @@ GEAR_TYPES.forEach(({ slug, apiPath, label, hasISA }) => {
         .should('be.focused')
     })
 
-    it('the Save, Alert, and Compare buttons are keyboard-focusable', () => {
+    it('the Compare button is keyboard-focusable', () => {
       cy.get('[data-cy="gear-card"]').first().within(() => {
-        cy.get('[data-cy="btn-save"]').focus().should('be.focused')
-        cy.get('[data-cy="btn-alert"]').focus().should('be.focused')
         cy.get('[data-cy="btn-compare"]').focus().should('be.focused')
       })
     })

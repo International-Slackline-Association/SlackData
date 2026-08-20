@@ -179,10 +179,11 @@ export default function GearDetailBody({
           </a>
         ) : null}
 
+        {/* Save and Alert lived here too and were equally inert. Removed for the
+            same reason as on the card — and this panel already carries the real
+            "View product" link above, so Compare is all that is left to offer. */}
         {showActions && (
           <div className="flex gap-2 [&>*]:flex-1 sm:[&>*]:flex-none">
-            <button data-cy="btn-save" type="button" className={pillBtn}>Save</button>
-            <button data-cy="btn-alert" type="button" className={pillBtn}>Alert</button>
             <button
               data-cy="btn-compare"
               type="button"

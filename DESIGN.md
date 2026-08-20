@@ -373,7 +373,7 @@ columns, which meant the specs that actually distinguish products were the ones 
   and the full specification grid right; description and `View product →` full width beneath. The
   two are literally the same component, so a spec row added to one appears in the other.
 - Two wiring differences from the standalone detail page: the **product name is a link** to that
-  item's detail page, and the panel carries the card's **`♡ Save` / `🔔 Alert` / `⧉ Compare`** row
+  item's detail page, and the panel carries the card's **`⧉ Compare`** action
   (next to `View product →`), so those actions work from either view.
 - Filters, search and sort apply identically in both modes — same items, same order, different
   density. The view choice is **local state**: it resets to Cards on navigation and is not encoded
@@ -430,7 +430,9 @@ columns, which meant the specs that actually distinguish products were the ones 
   smaller amber text). The `≈` is dropped when the item is already priced in the display currency.
   Webbings append `/m`. The card shows only the converted figure — the as-sold original lives on the
   detail page and in the compare cell, where there's room for it.
-- **Bottom action row**: three equal-width outlined buttons spanning full card width — `♡ Save`, `🔔 Alert`, `⧉ Compare`. Light gray border, gray text. Hover: teal border + teal text.
+- **Bottom action row**: equal-width outlined buttons spanning full card width — `View product ↗` (only when the item records a `product_url`; roughly half the catalogue does) and `⧉ Compare`. Light gray border, gray text. Hover: teal border + teal text. The link opens in a new tab with `rel="noopener"`, since it leaves for a third-party manufacturer site.
+
+  `♡ Save` and `🔔 Alert` used to sit here and were removed. They had no handler, no state and nowhere for the intent to go — a card should not offer an action the product cannot perform. If saved items or price alerts arrive later they come back with an account system behind them, not as furniture.
 
 ---
 
@@ -980,8 +982,7 @@ scrollbar is hidden, and the header stays ~100px tall. Do not revert this to wra
 ### Touch targets
 
 - **44px** minimum for primary controls: nav tabs, filter/sort buttons, sheet rows, the compare CTA.
-- **40px** for card action buttons (`Save · Alert · Compare`), which are three equal-width buttons
-  spanning the card width.
+- **40px** for card action buttons (`View product · Compare`), which span the card width.
 - **36px** for filter pills — they sit in dense wrapping groups where 44px would push longer lists
   off-screen, and they are wide targets already.
 - Range-slider thumbs are 20px on a 24px row with `touch-action: pan-y`, so a vertical swipe scrolls
