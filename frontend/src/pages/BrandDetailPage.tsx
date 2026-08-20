@@ -49,7 +49,7 @@ export default function BrandDetailPage() {
   if (loading) {
     return (
       <div data-cy="brand-detail-page">
-        <div data-cy="loading-skeleton" className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div data-cy="loading-skeleton" className="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3">
           {Array.from({ length: 6 }).map((_, i) => (
             <div key={i} className="h-72 animate-pulse rounded-xl border border-gray-200 bg-white" />
           ))}

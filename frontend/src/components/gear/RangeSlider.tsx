@@ -105,19 +105,26 @@ export default function RangeSlider({
     onKeyDown: endGesture,
   }
 
+  // 20px thumbs (was 14px). A 14px target is under half the 44px guideline and
+  // the two thumbs sit on top of each other at the ends of the track, which on
+  // touch made the wrong one move. The row is also taller (h-6) so the thumbs
+  // have vertical slop around them; the visible track stays 1.5 units.
   const thumb =
-    'pointer-events-none absolute inset-0 h-1.5 w-full appearance-none bg-transparent ' +
-    '[&::-webkit-slider-thumb]:pointer-events-auto [&::-webkit-slider-thumb]:h-3.5 ' +
-    '[&::-webkit-slider-thumb]:w-3.5 [&::-webkit-slider-thumb]:appearance-none ' +
+    'pointer-events-none absolute inset-0 h-full w-full appearance-none bg-transparent ' +
+    '[&::-webkit-slider-thumb]:pointer-events-auto [&::-webkit-slider-thumb]:h-5 ' +
+    '[&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:appearance-none ' +
     '[&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:border ' +
     '[&::-webkit-slider-thumb]:border-white [&::-webkit-slider-thumb]:bg-teal-primary ' +
     '[&::-webkit-slider-thumb]:shadow [&::-moz-range-thumb]:pointer-events-auto ' +
-    '[&::-moz-range-thumb]:h-3.5 [&::-moz-range-thumb]:w-3.5 [&::-moz-range-thumb]:rounded-full ' +
-    '[&::-moz-range-thumb]:border-0 [&::-moz-range-thumb]:bg-teal-primary'
+    '[&::-moz-range-thumb]:h-5 [&::-moz-range-thumb]:w-5 [&::-moz-range-thumb]:rounded-full ' +
+    '[&::-moz-range-thumb]:border [&::-moz-range-thumb]:border-white ' +
+    '[&::-moz-range-thumb]:bg-teal-primary [&::-moz-range-thumb]:shadow ' +
+    // Let a vertical swipe scroll the page; only horizontal drags move a thumb.
+    '[touch-action:pan-y]'
 
   return (
     <div>
-      <div ref={trackRef} className="relative h-4">
+      <div ref={trackRef} className="relative h-6">
         {/* track */}
         <div className="absolute top-1/2 h-1.5 w-full -translate-y-1/2 rounded-full bg-gray-200" />
         {/* selected span */}
@@ -236,7 +243,10 @@ function EditableBound({
           if (e.key === 'Enter') commit()
           else if (e.key === 'Escape') setEditing(false)
         }}
-        className="w-14 rounded border border-teal-primary px-1 py-0.5 text-[11px] text-gray-700 focus:outline-none"
+        // text-base below sm: iOS Safari zooms the whole page when a focused
+        // input's font is under 16px, and does not zoom back out afterwards.
+        inputMode="decimal"
+        className="w-16 rounded border border-teal-primary px-1 py-1 text-base text-gray-700 focus:outline-none sm:w-14 sm:py-0.5 sm:text-[11px]"
         aria-label={cy}
       />
     )

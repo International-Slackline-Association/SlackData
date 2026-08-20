@@ -23,11 +23,16 @@ import IsaApprovedBadge from './IsaApprovedBadge'
 import IsaWarningBadge from './IsaWarningBadge'
 import LegacyBadge from './LegacyBadge'
 
+// flex-1 + min-h-10: three equal-width buttons spanning the card, at a size a
+// thumb can actually hit. DESIGN.md § Card Anatomy always specified equal-width
+// full-width buttons; they had been rendered as small left-aligned pills.
+const pillBtnBase =
+  'flex min-h-10 flex-1 items-center justify-center rounded-full border px-3 text-xs transition-colors'
 const pillBtn =
-  'rounded-full border border-gray-300 px-3 py-1 text-xs text-gray-600 hover:border-gray-400 hover:text-gray-800 transition-colors disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:border-gray-300 disabled:hover:text-gray-600'
+  `${pillBtnBase} border-gray-300 text-gray-600 hover:border-gray-400 hover:text-gray-800 disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:border-gray-300 disabled:hover:text-gray-600`
 // Selected compare button: teal fill, matching the active filter-pill treatment.
 const pillBtnActive =
-  'rounded-full border border-teal-primary bg-teal-primary px-3 py-1 text-xs font-medium text-white transition-colors'
+  `${pillBtnBase} border-teal-primary bg-teal-primary font-medium text-white`
 
 export default function GearCard({
   item,

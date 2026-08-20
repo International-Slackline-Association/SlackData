@@ -25,7 +25,9 @@ export default function FilterGroup({
         data-cy="filter-group-toggle"
         type="button"
         onClick={() => setOpen(o => !o)}
-        className="flex w-full items-center gap-2"
+        // min-h-9 below sm: the toggle is otherwise only as tall as its 11px
+        // label, which is a hard target to hit with a thumb.
+        className="flex min-h-9 w-full items-center gap-2 sm:min-h-0"
         aria-expanded={open}
       >
         <span

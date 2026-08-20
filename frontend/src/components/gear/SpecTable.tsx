@@ -42,7 +42,9 @@ function StretchTable({ item }: { item: AnyItem }) {
   const stub = 'sticky left-0 z-10 bg-white px-2.5 py-1.5 text-left font-normal text-gray-500'
 
   return (
-    <div className="mt-2 overflow-x-auto">
+    // -mx-4 on a phone lets a long curve use the full screen width before it has
+    // to scroll; the sticky Load/Stretch stub keeps the rows identifiable.
+    <div className="-mx-4 mt-2 overflow-x-auto px-4 sm:mx-0 sm:px-0">
       <table data-cy="stretch-table" className="w-full border-collapse text-sm">
         <tbody>
           <tr className="border-b border-gray-200">
