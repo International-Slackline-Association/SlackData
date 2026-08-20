@@ -58,6 +58,10 @@ GEAR_TYPES.forEach(({ slug, apiPath, label }) => {
     })
 
     it('renders at least 3 columns on a 1440px viewport', () => {
+      // Pinned explicitly. The grid is 1 column below sm by design (see
+      // mobile.cy.ts), so this assertion is only meaningful at a wide viewport —
+      // without the pin it would fail the moment anything ran the suite narrow.
+      cy.viewport(1440, 900)
       cy.get('[data-cy="gear-card"]').then(($cards) => {
         if ($cards.length < 2) return // skip if fewer than 2 items exist
         const top0 = $cards[0].getBoundingClientRect().top
