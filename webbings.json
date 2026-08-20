@@ -1697,7 +1697,7 @@
         "isa_certified": false,
         "priceMeter": 1.4,
         "currency": "EUR",
-        "active": true
+        "active": false
     },
     {
         "name": "Moonwalk",
@@ -6699,7 +6699,7 @@
         "isa_certified": false,
         "priceMeter": 1.59,
         "currency": "EUR",
-        "active": true
+        "active": false
     },
     {
         "name": "Flamme III",
@@ -6817,7 +6817,7 @@
         "isa_certified": false,
         "priceMeter": 2.3,
         "currency": "EUR",
-        "active": true
+        "active": false
     },
     {
         "name": "Verve 25mm",
@@ -7731,7 +7731,7 @@
             }
         ],
         "date_introduced": null,
-        "product_url": "https://slack-inov.com/gb/longline/106-abysses-bounce-sold-by-meter",
+        "product_url": "https://slack-inov.com/shop/en/highline-webbing/347-abysses-bounce-longline-9506919000.html",
         "webbing_construction": "Flat",
         "isa_certified": false,
         "priceMeter": 2.6,
