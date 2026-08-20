@@ -204,6 +204,15 @@ Lambda's read-only filesystem) and every failure path falls back to a baked-in t
 `stale: true` — a 5xx here would blank the price on every card. Prices themselves are **never**
 converted in storage; see DESIGN.md § Currency & Prices and [CURRENCY_PLAN.md](CURRENCY_PLAN.md).
 
+### Non-model routers
+
+`/fx/rates` (`api/routers/fx_router.py` + `utilities/fx.py`) — EUR-based exchange rates for the
+frontend's display layer. **No model, no table, no DB access**, so it is safe under the hosted
+read-only catalog. Rates are cached in a module-level dict with a TTL (the only cache available on
+Lambda's read-only filesystem) and every failure path falls back to a baked-in table with
+`stale: true` — a 5xx here would blank the price on every card. Prices themselves are **never**
+converted in storage; see DESIGN.md § Currency & Prices and [CURRENCY_PLAN.md](CURRENCY_PLAN.md).
+
 ### In-progress models (branch `bungees_ringpadding`)
 
 `Bungee` (`models/bungees.py`) and `RingPadding` (`models/ringpadding.py`) have models defined but **no seed JSON, no loader, no router, and no `Brand` back-reference** — intentionally, because no source data exists yet. They are not imported in `main.py`. To wire one up once data exists: add the `Brand._<type>` Relationship + computed field, a `<type>s.json`, a loader, a router, and register both in `main.py`.
