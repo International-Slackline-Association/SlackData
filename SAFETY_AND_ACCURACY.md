@@ -67,4 +67,4 @@ Notes on choices made, and what still needs a decision, are at the bottom.
 
 ### B1. Short form — near the item count on listing pages, and in the footer
 
-> **Data is community-sourced and may be incomplete.**
+> **Community-sourced — may be incomplete.**

@@ -19,7 +19,7 @@ const API = 'webbing'
 // load-bearing clause of each notice is pinned.
 const SAFETY_LEAD = 'Check manufacturer specifications before you rig'
 const SAFETY_QUALIFIER = 'not a safety authority'
-const ACCURACY_TEXT = 'Data is community-sourced and may be incomplete'
+const ACCURACY_TEXT = 'Community-sourced — may be incomplete'
 
 describe('Safety & data-accuracy notices', () => {
   describe('site footer', () => {
