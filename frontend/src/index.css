@@ -8,9 +8,26 @@
   --color-page-bg: #F8F7F4;
 }
 
+html {
+  /* Stop iOS Safari inflating text when the device is rotated to landscape.
+     Font sizes are already set deliberately per breakpoint. */
+  -webkit-text-size-adjust: 100%;
+}
+
 body {
   margin: 0;
   background-color: #F8F7F4;
   font-family: system-ui, 'Segoe UI', Roboto, sans-serif;
   -webkit-font-smoothing: antialiased;
+}
+
+@utility scrollbar-none {
+  /* The gear-type tab strip scrolls horizontally on narrow screens. A visible
+     scrollbar under it reads as a broken layout rather than an affordance — the
+     tabs bleeding off the edge is the affordance. */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
