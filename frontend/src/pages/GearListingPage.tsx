@@ -15,17 +15,21 @@ import { useUrlState } from '@/hooks/useUrlState'
 import { filterBySearch } from '@/utils/search'
 import { sortItems } from '@/utils/sort'
 import { filterGroupsFor } from '@/config/filterGroups'
-import { applyFilters, type RangeBounds } from '@/utils/filter'
+import { activeFilterCount, applyFilters, type RangeBounds } from '@/utils/filter'
 import { percentAtKn, topKnPoints } from '@/utils/stretch'
+import { useIsDesktop } from '@/hooks/useMediaQuery'
 import type { AnyItem } from '@/utils/format'
 import FilterSidebar from '@/components/gear/FilterSidebar'
 import type { Status } from '@/components/gear/StatusToggle'
 import StretchFilter from '@/components/gear/StretchFilter'
-import SortDropdown from '@/components/gear/SortDropdown'
+import SortDropdown, { labelFor } from '@/components/gear/SortDropdown'
+import MobileFilterBar from '@/components/gear/MobileFilterBar'
+import Sheet from '@/components/layout/Sheet'
 import GearGrid from '@/components/gear/GearGrid'
 import GearDetailedList from '@/components/gear/GearDetailedList'
 import CompareBar from '@/components/gear/CompareBar'
 import DataAccuracyNote from '@/components/layout/DataAccuracyNote'
+import SuggestButton from '@/components/submissions/SuggestButton'
 import NotFoundPage from './NotFoundPage'
 
 type View = 'cards' | 'detailed'
@@ -34,7 +38,7 @@ const COMPARE_MAX = 4
 
 function LoadingSkeleton() {
   return (
-    <div data-cy="loading-skeleton" className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+    <div data-cy="loading-skeleton" className="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3">
       {Array.from({ length: 6 }).map((_, i) => (
         <div key={i} className="h-72 animate-pulse rounded-xl border border-gray-200 bg-white" />
       ))}
@@ -76,6 +80,20 @@ export default function GearListingPage() {
   // that's no longer sold (active === false).
   const [status, setStatus] = useState<Status>('all')
   const navigate = useNavigate()
+
+  // Below `lg` the sidebar has nowhere to live, so filters and sort move into a
+  // bottom sheet. `isDesktop` (matchMedia, not a `hidden lg:block` pair) decides
+  // which tree is MOUNTED — rendering both would put two
+  // [data-cy="filter-sidebar"] / [data-cy="sort-option"] sets in the DOM and
+  // break every selector the Cypress suite is built on.
+  const isDesktop = useIsDesktop()
+  const [sheet, setSheet] = useState<'none' | 'filters' | 'sort'>('none')
+  const closeSheet = () => setSheet('none')
+  // A sheet left open while the window grows past `lg` would sit on top of a
+  // perfectly good sidebar.
+  useEffect(() => {
+    if (isDesktop) setSheet('none')
+  }, [isDesktop])
 
   // Compare selection: an ordered list of item ids (order = the columns/chips
   // order downstream). Lives in local state, capped at COMPARE_MAX. It clears on
@@ -271,6 +289,28 @@ export default function GearListingPage() {
     setStatus('all')
   }
 
+  // How many filters are engaged, for the mobile "Filters (n)" badge — the only
+  // signal, once the sidebar is behind a sheet, that the list is narrowed at all.
+  const filterCount = meta
+    ? activeFilterCount(filterGroupsFor(meta.slug), url.params, {
+        statusScoped: status !== 'all',
+        stretchEngaged: selectedKn != null,
+      })
+    : 0
+
+  // The webbing stretch widget, slotted into whichever FilterSidebar is mounted.
+  const stretchWidget = isWebbing && (
+    <StretchFilter
+      items={contextItems}
+      displayKn={selectedKn}
+      onSelectKn={selectKn}
+      min={stretchMin}
+      max={stretchMax}
+      onMinChange={setStretchMin}
+      onMaxChange={setStretchMax}
+    />
+  )
+
   if (!meta) return <NotFoundPage />
 
   if (!available) {
@@ -286,32 +326,41 @@ export default function GearListingPage() {
 
   return (
     <div data-cy="gear-listing">
-      <h1 className="mb-6 text-2xl font-bold text-gray-900">{meta.label}</h1>
+      <h1 className="mb-4 text-2xl font-bold text-gray-900 lg:mb-6">{meta.label}</h1>
 
-      <div className="flex gap-8">
-        <FilterSidebar
-          meta={meta}
-          items={scopedItems as unknown as AnyItem[]}
-          url={url}
-          status={status}
-          onStatusChange={setStatus}
-          onClearAll={clearAll}
-        >
-          {isWebbing && (
-            <StretchFilter
-              items={contextItems}
-              displayKn={selectedKn}
-              onSelectKn={selectKn}
-              min={stretchMin}
-              max={stretchMax}
-              onMinChange={setStretchMin}
-              onMaxChange={setStretchMax}
-            />
-          )}
-        </FilterSidebar>
+      {!isDesktop && (
+        <MobileFilterBar
+          query={query}
+          onQueryChange={onSearchChange}
+          placeholder={`Search ${meta.label}…`}
+          count={visible.length}
+          filterCount={filterCount}
+          sortLabel={labelFor(sort, meta.slug)}
+          onOpenFilters={() => setSheet('filters')}
+          onOpenSort={() => setSheet('sort')}
+        />
+      )}
+
+      <div className="flex flex-col lg:flex-row lg:gap-8">
+        {isDesktop && (
+          <FilterSidebar
+            meta={meta}
+            items={scopedItems as unknown as AnyItem[]}
+            url={url}
+            status={status}
+            onStatusChange={setStatus}
+            onClearAll={clearAll}
+          >
+            {stretchWidget}
+          </FilterSidebar>
+        )}
 
         <div className="min-w-0 flex-1">
-          {/* Toolbar */}
+          {/* Toolbar — desktop only, and CONDITIONALLY MOUNTED rather than
+              CSS-hidden: below `lg` its search box and count live in the sticky
+              MobileFilterBar above under the same data-cy hooks, so keeping this
+              one in the DOM would double every one of those selectors. */}
+          {isDesktop && (
           <div className="mb-6 flex flex-wrap items-center gap-3">
             <input
               data-cy="search-input"
@@ -319,7 +368,17 @@ export default function GearListingPage() {
               value={query}
               onChange={e => onSearchChange(e.target.value)}
               placeholder={`Search ${meta.label}…`}
-              className="w-64 rounded-lg border border-gray-300 px-3 py-1.5 text-sm focus:border-teal-primary focus:outline-none"
+              // Takes whatever the row has left, up to its old w-64, instead of
+              // a fixed width. The toolbar is one flex-wrap row, so a fixed
+              // width one pixel too large wraps the entire right-hand group
+              // onto a second line — and the exact ceiling depends on the
+              // width of the copy beside it, which is not this file's business
+              // to track. `flex-1` gives a 0 flex-basis, so the input never
+              // contributes to line-breaking and the row cannot wrap because of
+              // it; `min-w-0` lets it actually shrink. Today that resolves to
+              // ~130px in the 920px content column; shorten anything else on
+              // the row and it grows back on its own.
+              className="min-w-0 flex-1 max-w-64 rounded-lg border border-gray-300 px-3 py-1.5 text-sm focus:border-teal-primary focus:outline-none"
             />
             <span data-cy="item-count" className="text-sm text-gray-500">
               {visible.length} {visible.length === 1 ? 'item' : 'items'}
@@ -327,6 +386,9 @@ export default function GearListingPage() {
             {/* Next to the count: the moment a visitor reads how much data there
                 is, is the moment to say what it's worth. */}
             <DataAccuracyNote variant="inline" />
+            {/* The other half of that thought: if the data is incomplete, say
+                where to report what's missing. */}
+            <SuggestButton gearType={meta.slug} variant="new-item" />
 
             <div className="ml-auto flex items-center gap-3">
               <div className="flex overflow-hidden rounded-lg border border-gray-300">
@@ -367,6 +429,7 @@ export default function GearListingPage() {
               />
             </div>
           </div>
+          )}
 
           {/* Results */}
           {loading ? (
@@ -413,6 +476,57 @@ export default function GearListingPage() {
         onClear={clearCompare}
         onView={viewComparison}
       />
+
+      {/* The mobile homes for the sidebar and the sort menu. Mounted only while
+          open, so their children stay single-instance in the DOM. */}
+      {sheet === 'filters' && (
+        <Sheet
+          title="Filters"
+          onClose={closeSheet}
+          footer={
+            // Filters already apply live (they write straight to the URL), so
+            // this commits nothing — it dismisses, and carries the result count
+            // so the effect of what you just tapped is legible without closing.
+            <button
+              data-cy="sheet-apply"
+              type="button"
+              onClick={closeSheet}
+              className="w-full rounded-full bg-teal-primary py-3 text-sm font-medium text-white"
+            >
+              Show {visible.length} {visible.length === 1 ? 'result' : 'results'}
+            </button>
+          }
+        >
+          <FilterSidebar
+            meta={meta}
+            items={scopedItems as unknown as AnyItem[]}
+            url={url}
+            status={status}
+            onStatusChange={setStatus}
+            onClearAll={clearAll}
+            variant="sheet"
+          >
+            {stretchWidget}
+          </FilterSidebar>
+        </Sheet>
+      )}
+
+      {sheet === 'sort' && (
+        <Sheet title="Sort by" onClose={closeSheet}>
+          <SortDropdown
+            slug={meta.slug}
+            sort={sort}
+            onChange={setSort}
+            variant="sheet"
+            onClose={closeSheet}
+            stretchKns={
+              isWebbing
+                ? topKnPoints(contextItems as unknown as { stretch?: unknown }[]).map(p => p.kn)
+                : []
+            }
+          />
+        </Sheet>
+      )}
     </div>
   )
 }

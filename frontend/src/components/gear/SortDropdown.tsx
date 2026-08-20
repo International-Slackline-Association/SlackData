@@ -20,7 +20,9 @@ function stretchKnOf(sort: SortSpec | null): number | null {
   return Number(sort.field.slice(STRETCH_PREFIX.length))
 }
 
-function labelFor(sort: SortSpec | null, slug: GearSlug): string {
+// Exported so MobileFilterBar can label its Sort button with the current choice
+// without duplicating the formatting rules.
+export function labelFor(sort: SortSpec | null, slug: GearSlug): string {
   if (!sort) return 'Sort by'
   if (sort.field === 'name') return sort.direction === 'asc' ? 'Name: A→Z' : 'Name: Z→A'
   const kn = stretchKnOf(sort)
@@ -37,6 +39,8 @@ export default function SortDropdown({
   sort,
   onChange,
   stretchKns = [],
+  variant = 'dropdown',
+  onClose,
 }: {
   slug: GearSlug
   sort: SortSpec | null
@@ -44,7 +48,14 @@ export default function SortDropdown({
   // Top-5 webbing stretch reference kN, RANKED by webbing count (most common
   // first) so stretchKns[0] is the default sort kN. Empty for non-webbing types.
   stretchKns?: number[]
+  // 'dropdown' — the desktop trigger + absolutely-positioned popover.
+  // 'sheet'    — just the option list, rendered inside the mobile bottom sheet;
+  //              the trigger is MobileFilterBar's Sort button. A popover anchored
+  //              `right-0` with a nested submenu is unusable on a phone.
+  variant?: 'dropdown' | 'sheet'
+  onClose?: () => void // sheet variant: dismiss after a pick
 }) {
+  const inSheet = variant === 'sheet'
   const [open, setOpen] = useState(false)
   const [knOpen, setKnOpen] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
@@ -68,7 +79,8 @@ export default function SortDropdown({
   }, [sort, activeKn])
 
   useEffect(() => {
-    if (!open) return
+    // The sheet owns its own Esc / outside-tap dismissal.
+    if (!open || inSheet) return
     const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setOpen(false)
     const onClick = (e: MouseEvent) => {
       if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false)
@@ -79,12 +91,13 @@ export default function SortDropdown({
       window.removeEventListener('keydown', onKey)
       window.removeEventListener('mousedown', onClick)
     }
-  }, [open])
+  }, [open, inSheet])
 
   const pick = (spec: SortSpec | null) => {
     onChange(spec)
     setOpen(false)
     setKnOpen(false)
+    onClose?.()
   }
 
   const pickStretch = (kn: number, direction: 'asc' | 'desc') => {
@@ -92,8 +105,159 @@ export default function SortDropdown({
     pick({ field: `${STRETCH_PREFIX}${kn}`, direction })
   }
 
-  const optionClass =
-    'block w-full px-3 py-1.5 text-left text-sm text-gray-700 hover:bg-gray-50'
+
+  const optionClass = inSheet
+    ? // Sheet rows are full-width, 44px-tall tap targets rather than the dense
+      // 1.5-unit popover rows a mouse can hit precisely.
+      'block w-full rounded-lg px-3 py-3 text-left text-sm text-gray-700 hover:bg-gray-50'
+    : 'block w-full px-3 py-1.5 text-left text-sm text-gray-700 hover:bg-gray-50'
+
+  // The option list, shared by both variants — identical data-cy hooks either
+  // way, so search_sort.cy.ts (desktop) and mobile.cy.ts read the same contract.
+  const options = (
+    <>
+      <button
+        data-cy="sort-option"
+        data-field="name"
+        data-direction="asc"
+        className={optionClass}
+        // Name A→Z is the default sort, so it carries NO ?sort= param — picking
+        // it clears the sort back to the null (default) state rather than
+        // writing sort=name-asc. Name Z→A is a real, non-default choice and is
+        // written normally. See url_state.cy.ts / the useUrlState contract.
+        onClick={() => pick(null)}
+      >
+        Name: A→Z
+      </button>
+      <button
+        data-cy="sort-option"
+        data-field="name"
+        data-direction="desc"
+        className={optionClass}
+        onClick={() => pick({ field: 'name', direction: 'desc' })}
+      >
+        Name: Z→A
+      </button>
+      {fields.map(f => (
+        <Fragment key={f.field}>
+          <button
+            data-cy="sort-option"
+            data-field={f.field}
+            data-direction="asc"
+            className={optionClass}
+            onClick={() => pick({ field: f.field, direction: 'asc' })}
+          >
+            {f.label}: Low→High
+          </button>
+          <button
+            data-cy="sort-option"
+            data-field={f.field}
+            data-direction="desc"
+            className={optionClass}
+            onClick={() => pick({ field: f.field, direction: 'desc' })}
+          >
+            {f.label}: High→Low
+          </button>
+        </Fragment>
+      ))}
+
+      {stretchKn != null && (
+        <div data-cy="sort-stretch-row" className="border-t border-gray-100 mt-1 pt-1">
+          <div className="flex flex-wrap items-center gap-1 px-3 py-1 text-xs uppercase tracking-wide text-gray-400">
+            <span>Stretch at</span>
+            {inSheet ? (
+              // Flattened to inline chips. The desktop version is a dropdown
+              // nested inside a dropdown, which is close to unusable on touch:
+              // the submenu opens under your own finger and any tap outside it
+              // dismisses both layers.
+              <span data-cy="stretch-sort-kn" data-kn={stretchKn} className="flex flex-wrap gap-1">
+                {[...stretchKns].sort((a, b) => a - b).map(kn => (
+                  <button
+                    key={kn}
+                    data-cy="stretch-sort-kn-option"
+                    data-kn={kn}
+                    data-active={kn === stretchKn ? 'true' : 'false'}
+                    type="button"
+                    className={
+                      'min-h-9 rounded-full border px-3 text-xs font-semibold ' +
+                      (kn === stretchKn
+                        ? 'border-teal-primary bg-teal-light text-teal-primary'
+                        : 'border-gray-300 text-gray-600')
+                    }
+                    onClick={() => {
+                      setPickedKn(kn)
+                      // If a stretch sort is already applied, retarget it to the
+                      // new kN. Use the local flag, not `sort` (see above).
+                      if (stretchActive != null) pickStretch(kn, stretchActive)
+                    }}
+                  >
+                    {kn} kN
+                  </button>
+                ))}
+              </span>
+            ) : (
+              /* Secondary dropdown: the kN number is itself clickable. */
+              <div className="relative">
+                <button
+                  data-cy="stretch-sort-kn"
+                  data-kn={stretchKn}
+                  type="button"
+                  onClick={() => setKnOpen(o => !o)}
+                  className="rounded border border-gray-300 px-1.5 py-0.5 text-xs font-semibold text-gray-600 hover:border-gray-400"
+                >
+                  {stretchKn} kN ▾
+                </button>
+                {knOpen && (
+                  <div className="absolute left-0 z-40 mt-1 min-w-[80px] rounded-lg border border-gray-200 bg-white py-1 shadow-lg">
+                    {[...stretchKns].sort((a, b) => a - b).map(kn => (
+                      <button
+                        key={kn}
+                        data-cy="stretch-sort-kn-option"
+                        data-kn={kn}
+                        type="button"
+                        className="block w-full px-3 py-1 text-left text-xs text-gray-700 hover:bg-gray-50"
+                        onClick={() => {
+                          setPickedKn(kn)
+                          setKnOpen(false)
+                          if (stretchActive != null) pickStretch(kn, stretchActive)
+                        }}
+                      >
+                        {kn} kN
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+          <button
+            data-cy="sort-option"
+            data-field="stretch"
+            data-kn={stretchKn}
+            data-direction="asc"
+            className={optionClass}
+            onClick={() => pickStretch(stretchKn, 'asc')}
+          >
+            Low→High
+          </button>
+          <button
+            data-cy="sort-option"
+            data-field="stretch"
+            data-kn={stretchKn}
+            data-direction="desc"
+            className={optionClass}
+            onClick={() => pickStretch(stretchKn, 'desc')}
+          >
+            High→Low
+          </button>
+        </div>
+      )}
+    </>
+  )
+
+  // In the sheet the option list IS the whole component — the trigger lives in
+  // MobileFilterBar and dismissal belongs to the Sheet.
+  if (inSheet) return <div className="pb-2">{options}</div>
 
   return (
     <div ref={ref} className="relative">
@@ -109,112 +273,7 @@ export default function SortDropdown({
 
       {open && (
         <div className="absolute right-0 z-30 mt-1 min-w-[210px] rounded-lg border border-gray-200 bg-white py-1 shadow-lg">
-          <button
-            data-cy="sort-option"
-            data-field="name"
-            data-direction="asc"
-            className={optionClass}
-            // Name A→Z is the default sort, so it carries NO ?sort= param — picking
-            // it clears the sort back to the null (default) state rather than
-            // writing sort=name-asc. Name Z→A is a real, non-default choice and is
-            // written normally. See url_state.cy.ts / the useUrlState contract.
-            onClick={() => pick(null)}
-          >
-            Name: A→Z
-          </button>
-          <button
-            data-cy="sort-option"
-            data-field="name"
-            data-direction="desc"
-            className={optionClass}
-            onClick={() => pick({ field: 'name', direction: 'desc' })}
-          >
-            Name: Z→A
-          </button>
-          {fields.map(f => (
-            <Fragment key={f.field}>
-              <button
-                data-cy="sort-option"
-                data-field={f.field}
-                data-direction="asc"
-                className={optionClass}
-                onClick={() => pick({ field: f.field, direction: 'asc' })}
-              >
-                {f.label}: Low→High
-              </button>
-              <button
-                data-cy="sort-option"
-                data-field={f.field}
-                data-direction="desc"
-                className={optionClass}
-                onClick={() => pick({ field: f.field, direction: 'desc' })}
-              >
-                {f.label}: High→Low
-              </button>
-            </Fragment>
-          ))}
-
-          {stretchKn != null && (
-            <div data-cy="sort-stretch-row" className="border-t border-gray-100 mt-1 pt-1">
-              <div className="flex items-center gap-1 px-3 py-1 text-xs uppercase tracking-wide text-gray-400">
-                <span>Stretch at</span>
-                {/* Secondary dropdown: the kN number is itself clickable. */}
-                <div className="relative">
-                  <button
-                    data-cy="stretch-sort-kn"
-                    data-kn={stretchKn}
-                    type="button"
-                    onClick={() => setKnOpen(o => !o)}
-                    className="rounded border border-gray-300 px-1.5 py-0.5 text-xs font-semibold text-gray-600 hover:border-gray-400"
-                  >
-                    {stretchKn} kN ▾
-                  </button>
-                  {knOpen && (
-                    <div className="absolute left-0 z-40 mt-1 min-w-[80px] rounded-lg border border-gray-200 bg-white py-1 shadow-lg">
-                      {[...stretchKns].sort((a, b) => a - b).map(kn => (
-                        <button
-                          key={kn}
-                          data-cy="stretch-sort-kn-option"
-                          data-kn={kn}
-                          type="button"
-                          className="block w-full px-3 py-1 text-left text-xs text-gray-700 hover:bg-gray-50"
-                          onClick={() => {
-                            setPickedKn(kn)
-                            setKnOpen(false)
-                            // If a stretch sort is already applied, retarget it to
-                            // the new kN. Use the local flag, not `sort` (see above).
-                            if (stretchActive != null) pickStretch(kn, stretchActive)
-                          }}
-                        >
-                          {kn} kN
-                        </button>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              </div>
-              <button
-                data-cy="sort-option"
-                data-field="stretch"
-                data-kn={stretchKn}
-                data-direction="asc"
-                className={optionClass}
-                onClick={() => pickStretch(stretchKn, 'asc')}
-              >
-                Low→High
-              </button>
-              <button
-                data-cy="sort-option"
-                data-field="stretch"
-                data-kn={stretchKn}
-                data-direction="desc"
-                className={optionClass}
-                onClick={() => pickStretch(stretchKn, 'desc')}
-              >
-                High→Low
-              </button>
-            </div>
-          )}
+          {options}
         </div>
       )}
     </div>
