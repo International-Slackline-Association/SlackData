@@ -9,11 +9,11 @@
 // overlapping thumbs are indistinguishable, though, so the drag's direction can
 // pick the bound for free: nothing jumps, because there is nothing to jump.
 
-// Thumb diameter in px — keep in step with the h-3.5 / w-3.5 thumb styles in
+// Thumb diameter in px — keep in step with the h-5 / w-5 thumb styles in
 // RangeSlider. Two thumbs closer together than this are one circle on screen no
 // matter what the numbers say, so overlap is measured here rather than by
 // comparing values.
-export const THUMB_PX = 14
+export const THUMB_PX = 20
 
 /**
  * Do the thumbs render as a single grabbable circle?
