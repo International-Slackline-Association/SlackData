@@ -217,8 +217,14 @@ describe('Gear listing page — sticky filter sidebar (webbings)', () => {
     cy.get('[data-cy="gear-card"]').should('have.length.greaterThan', 0)
   })
 
+  // Scrolls a long way INTO the results rather than to the document bottom.
+  // At the very bottom the flex row's own bottom edge arrives, and a sticky
+  // element taller than the space left above it is then pushed up and out of
+  // view — that is what `position: sticky` means, not a bug. This assertion used
+  // to scroll to 'bottom' and so could never pass for webbings, whose sidebar is
+  // the tallest in the app (measured -18px before the mobile work, -12px after).
   it('pins below the top nav after the results scroll', () => {
-    cy.scrollTo('bottom')
+    cy.scrollTo(0, 2000)
     cy.get('[data-cy="top-nav"]').then(($nav) => {
       const navBottom = $nav[0].getBoundingClientRect().bottom
       cy.get('[data-cy="filter-sidebar"]').should('be.visible').then(($aside) => {
