@@ -148,6 +148,10 @@ Two-column layout: left filter sidebar + right content area.
 
 ### Left Filter Sidebar (~280px wide)
 
+**Below `lg` there is no sidebar** — the identical control set renders inside a bottom sheet reached
+from the mobile filter bar. Same component, same `data-cy` hooks, `data-variant="sheet"`; see
+§ Responsive & Mobile. Everything below describes the `lg`+ column.
+
 The sidebar is sticky — it pins below the top nav as results scroll, and is capped to viewport height
 minus the header. Internally it splits in two: the **status control is pinned to its top**, and
 everything below it — the "FIND YOUR …" header, "Clear all", and every filter group — sits in a
@@ -209,7 +213,7 @@ Three filter control types:
   its own merits, never against a role left behind by an earlier one.
 
   "Overlap" is measured in **pixels, not values**: thumbs one step apart on a wide domain are
-  distinct numbers but the same 14px circle, so the rule triggers whenever the gap between them
+  distinct numbers but the same 20px circle, so the rule triggers whenever the gap between them
   renders narrower than a thumb. Beyond that distance both thumbs are separately grabbable and each
   input moves its own bound, clamped so they cannot cross.
 - **Stretch at X kN** — webbing-only custom widget (see below)
@@ -344,7 +348,9 @@ Below this row, a subtle `145 items` count left-aligned, above the grid itself.
 
 ### Card Grid
 
-3 columns default. 2 on medium screens. 1 on mobile.
+3 columns at `xl` (≥1280px), 2 from `sm` to `xl`, 1 below `sm`. The 3-column break is `xl` and not
+`lg` because from `lg` up the filter sidebar shares the row: three cards in the ~664px remainder at
+1024px are too narrow to read their spec line. See § Responsive & Mobile.
 Cards: white, border-radius ~14px, very subtle shadow (`0 1px 3px rgba(0,0,0,0.08)`), thin `#E5E7EB` border.
 Hover: shadow deepens slightly.
 
@@ -821,10 +827,199 @@ as the authoritative source.
 
 ---
 
+## Suggest a Correction (Phase 2)
+
+The catalogue is community data, and the fastest way for it to rot is for a reader to spot a wrong
+number and have nowhere to put it. This is that place. It is a **suggestion box, not an editor** —
+nothing a visitor submits changes the site. See [SUBMISSIONS_PLAN.md](SUBMISSIONS_PLAN.md).
+
+### Entry points
+
+| Where | Control | Prefills |
+|---|---|---|
+| Gear detail page, below the spec sheet | `data-cy="suggest-correction"` — outlined pill, secondary weight | gear type, id and name |
+| Listing toolbar, beside the item count | `data-cy="suggest-new-item"` — plain teal text link, "Missing something?" | gear type only |
+
+Deliberately **not** on the card. The card is a scanning surface; a per-card report button would
+compete with Compare for attention and invite reports from people who have not read the specs yet.
+By the detail page, the reader is looking at the number they think is wrong.
+
+### The form
+
+A modal dialog (`data-cy="submission-form"`), not a route — the reader keeps their place, and the
+gear they are correcting stays visible behind it. Focus moves to the first field on open, `Esc`
+closes it, and focus returns to the button that opened it.
+
+- **Product type** and **product name** — the first two fields, present on every page, so the form
+  is one form wherever it is opened; only the *default* type differs (the page you came from).
+  Changing the type re-bases the field picker, and — because a gear id belongs to one table — turns
+  a correction into a new-item tip, saying so in an amber note (`data-cy="submission-retargeted"`)
+  rather than silently mis-filing it against whatever row holds that id.
+- **What is wrong** — a field picker listing only that gear type's correctable fields, each row a
+  `current → proposed` pair with the current value shown as read-only context. Adding a row is a
+  `+ Add another field` link. Rows cap at 20 (`MAX_CHANGES`).
+- **Notes** — free text, always available. Some corrections are not a field ("the photo is of the
+  MK2"), and a submission may be a note alone.
+- **Evidence link** — optional URL. Labelled *"A link to the manufacturer's spec sheet makes this
+  much faster to verify"*, because it genuinely does.
+- **Your email** — optional. Labelled with exactly what it is for: *"Only used to follow up on this
+  correction. Leave blank to submit anonymously."* This is the only personal data the site collects,
+  and the label is load-bearing, not decoration — see § Privacy in the plan.
+- **Honeypot** — a `website` input, visually hidden (not `display:none`; positioned off-canvas so
+  bots that check computed style still fill it), `tabindex="-1"`, `autocomplete="off"`.
+- **Captcha** — Cloudflare Turnstile widget, rendered only when `VITE_TURNSTILE_SITE_KEY` is set, so
+  local dev and Cypress run without it.
+
+**Submit is never disabled.** A disabled button that does not say why is the most common
+accessibility failure in a form like this; instead it submits, and errors render inline against the
+offending field with `data-cy="field-error"`.
+
+### After submitting
+
+The dialog swaps to a confirmation panel (`data-cy="submission-success"`), which must say **three
+things**: thank you, the submission id (worth quoting in an email), and — in plain words — that the
+change is not live until a moderator has reviewed it. Overstating this is far better than
+understating it: a reader who believes they have edited the database and finds the old number next
+week trusts the site less than one who was told to wait.
+
+Failures are their own state (`data-cy="submission-error"`) with the form still populated behind it,
+because the most likely failure is a captcha timeout, and re-typing the whole thing is the wrong
+punishment for that.
+
+---
+
+## Admin Triage (Phase 2)
+
+Route `/admin` — a **static** segment, so it outranks the dynamic `:slug` gear-type pattern, exactly
+as `/safety` and `/manufacturers` do (see the comment at the top of `App.tsx`).
+
+- **Logged out** → a login prompt, *not* a 404 and not a redirect. `data-cy="admin-login"`.
+- The page is not access control. Every route behind it is enforced server-side; hiding the UI is
+  cosmetic. See `slack_data/api/auth.py`.
+
+### The queue
+
+Pending submissions, **oldest first** — a queue, not a feed, so the top item is the one that has been
+waiting longest. Each entry (`data-cy="submission-row"`) shows:
+
+- Gear name + type, linked to the item, and the submission's age ("3 days ago").
+- The proposed changes as a **current → proposed** diff, with current values fetched from the
+  catalogue at render time rather than trusted from the record — a submission may be months old and
+  the value may already have been fixed, which is itself the most useful thing the reviewer can know.
+- The note and the evidence link (`rel="noopener noreferrer"`, opens in a new tab).
+- **Approve** / **Reject**, each with an optional review note.
+
+`kind: new_item` entries have no id to diff against, so they render the proposed values as a plain
+list under a coral "NEW ITEM" badge.
+
+### Approving shows the work still to do
+
+On approve, the row expands into a copy-pasteable JSON snippet for the root `*.json` file
+(`data-cy="approved-patch"`), directly above a plain sentence: **the change is not live until that
+JSON is edited and the API redeployed**, linking `infra/README.md` § Deploying to live.
+
+This is the screen's most important design decision. Approve reads like "apply", and it is not —
+approving records a decision and nothing else. The patch and the sentence are what stop an admin
+believing the catalogue changed.
+
+---
+
+
+## Responsive & Mobile
+
+The catalogue is used on phones at least as much as on laptops, and every layout below `lg` is a
+first-class target rather than a graceful degradation.
+
+### Breakpoints
+
+Tailwind v4 defaults, used as follows:
+
+| Range | Layout |
+|---|---|
+| base (< 640) | 1 card column · filters + sort in a bottom sheet · nav tabs scroll · page gutter `px-4` |
+| `sm` 640–1023 | 2 card columns · filters still in the sheet |
+| `lg` 1024+ | Filter sidebar becomes an inline 280px column · 2 card columns beside it |
+| `xl` 1280+ | 3 card columns beside the sidebar |
+
+`lg` is the structural break — the point where a 280px sidebar and a readable results column both
+fit. Everything else is presentational.
+
+### Mounting rule (important)
+
+Where the two layouts need *different DOM* — not just different classes — the choice is made in JS
+with `useIsDesktop()` (`src/hooks/useMediaQuery.ts`), never with a `hidden lg:block` / `lg:hidden`
+pair. A CSS-hidden duplicate is still in the DOM, and two elements sharing a `data-cy` breaks every
+Cypress selector in the suite. This applies to the filter sidebar, the listing toolbar, and the
+manufacturers country aside. Purely visual differences still use Tailwind prefixes.
+
+### Mobile filter bar + bottom sheet
+
+Below `lg` the listing toolbar is replaced by a sticky bar pinned under the nav
+(`data-cy="mobile-filter-bar"`, `top: var(--header-h)`): full-width search, a `Filters` button
+badged with the number of engaged filter *groups* (`data-cy="mobile-filter-btn"`, `data-count`), a
+`Sort` button showing the current choice, and the item count.
+
+Both buttons open a **bottom sheet** (`src/components/layout/Sheet.tsx`, `data-cy="sheet"`): rounded
+top corners, drag handle, capped at `85dvh` so a strip of results stays visible behind it, scrim
+tap / `×` / Esc to dismiss, body scroll locked while open, safe-area inset respected. The filter
+sheet carries a footer button reading **"Show N results"** — filters apply live, so it dismisses
+rather than commits, but it keeps the effect of each tap legible. The status bubble sticks to the
+top of the sheet's scroll region, keeping "the scope control never scrolls away" true in both
+layouts.
+
+Sort in the sheet flattens the desktop kN submenu into a row of inline chips — a dropdown nested
+inside a dropdown is unusable on touch.
+
+### Top nav
+
+The gear-type tabs are **one horizontally scrolling row** at every width, not a wrapping block.
+Wrapping put 10 tabs onto ~5 rows at 390px — 200px+ of permanently sticky chrome. The active tab is
+auto-centred in the strip on navigation (scrolling the strip's own `scrollLeft`, never the page), the
+scrollbar is hidden, and the header stays ~100px tall. Do not revert this to wrapping.
+
+### Touch targets
+
+- **44px** minimum for primary controls: nav tabs, filter/sort buttons, sheet rows, the compare CTA.
+- **40px** for card action buttons (`Save · Alert · Compare`), which are three equal-width buttons
+  spanning the card width.
+- **36px** for filter pills — they sit in dense wrapping groups where 44px would push longer lists
+  off-screen, and they are wide targets already.
+- Range-slider thumbs are 20px on a 24px row with `touch-action: pan-y`, so a vertical swipe scrolls
+  the page and only horizontal drags move a thumb.
+- Nothing is revealed on hover alone. A hover-only control is invisible on touch (and reads as
+  `opacity: 0`, i.e. not visible, to Cypress).
+
+### Inputs
+
+Every focusable `<input>` is **≥16px (`text-base`) below `sm`**, stepping down to `text-sm` above it.
+Under 16px, iOS Safari zooms the page on focus and never zooms back out.
+
+### Tables
+
+Compare and the webbing stretch curve stay tables — side-by-side is the whole point — and scroll
+horizontally inside an `overflow-x-auto` wrapper with the row-label column pinned (`sticky left-0`).
+Below `sm` they bleed into the page gutter (`-mx-4 px-4`) to buy back 32px of column width, the
+label stub is capped at `w-24`, and compare columns drop to `min-w-[7rem]`. Compare shows a "Swipe
+the table to see every column →" hint below `sm`, because an overflow with no visible edge is not
+discoverable.
+
+### Fixed bottom bar
+
+The CompareBar measures itself and publishes `--compare-bar-h`, which the app shell turns into
+bottom padding on the **outer** column — padding `<main>` alone still leaves the footer underneath
+the bar. Below `sm` the bar reflows to count + actions on one row with the item chips on their own
+horizontally scrolling line, so the CTA is never pushed off-screen by four selections.
+
+### Testing
+
+`cypress/e2e/mobile.cy.ts` runs at **390×844** and is the only spec that exercises a narrow
+viewport; everything else runs at the 1440×900 config default. Its most valuable assertion is the
+horizontal-overflow check (`documentElement.scrollWidth <= clientWidth + 1`) applied to every route,
+which catches any reintroduced fixed-width element regardless of how it is implemented.
+
 ## What's NOT in scope yet
 
-- User accounts / login
+- User accounts for the public (Phase 3 — submissions already carry a null `submitted_by` for it)
 - Review / rating system
-- Edit-suggestion workflow
-- Compare side-by-side view (button exists, page TBD)
+- **Live** catalogue editing — approving a submission still produces a hand-applied JSON patch
 - Homepage stats dashboard

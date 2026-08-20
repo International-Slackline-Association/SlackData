@@ -112,6 +112,14 @@ Non-phase engineering tasks not tracked in [PLAN.md](PLAN.md) (frontend roadmap)
 
 ## ✅ Shipped (kept here briefly so the entries above don't get re-opened)
 
+- **Mobile & responsive (PLAN.md Phase 12).** The listing page was unusable below ~900px: an
+  uncollapsed `flex gap-8` row with a fixed 280px sidebar. Now `lg` is the structural break, filters
+  and sort live in a bottom sheet below it, and the nav tabs scroll in one row instead of wrapping
+  onto five. **Two decisions not to undo:** (1) the gear-tab strip scrolls rather than wraps — the
+  older code comment said the opposite, deliberately reversed; (2) layouts that need different DOM
+  switch on `useIsDesktop()`, not `hidden lg:block`, because a CSS-hidden duplicate still doubles
+  every `data-cy` the Cypress suite selects on. See DESIGN.md § Responsive & Mobile.
+
 - **Gear lifecycle status.** Shipped as **`active`**, not the `available` this backlog originally
   specified, and with real data rather than the `null`-everywhere rollout that was planned: a
   web-verification pass filled in all 498 items (227 active / 271 legacy). On all 8 gear models,

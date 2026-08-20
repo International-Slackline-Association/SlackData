@@ -74,6 +74,33 @@ npx cypress run --spec cypress/e2e/<spec>.cy.ts
 | 9 | URL-state sweep | `url_state.cy.ts` | ✅ 18/18 |
 | 10 | Full green + cleanup | (whole suite) | ⬜ |
 | 11 | Currency & price | `currency.cy.ts` + `tests/test_fx.py` | ✅ 56/56 + 28 backend |
+| 12 | Mobile & responsive | `mobile.cy.ts` | ✅ 39/39 |
+
+### ✅ Phase 12 — Mobile & responsive
+Before this, the whole responsive surface was 8 grid-column utilities, and the listing page was
+unusable on a phone: `GearListingPage`'s bare `flex gap-8` held a `w-[280px] shrink-0` sidebar with
+no breakpoint, so at 390px the results column was squeezed to ~30px and the grid's `grid-cols-1`
+branch was unreachable.
+
+What shipped — full spec in DESIGN.md § Responsive & Mobile:
+- **`lg` is the structural break.** Listing and manufacturers rows are `flex-col lg:flex-row`; the
+  3-column grid moved `lg:` → `xl:` (three cards beside a 280px sidebar at 1024px were too narrow).
+- **Filters and sort move into a bottom sheet** below `lg`, opened from a new sticky
+  `MobileFilterBar` badged with the engaged-filter count (`activeFilterCount` in `utils/filter.ts`).
+- **The mounting rule**: where the two layouts need different DOM, `useIsDesktop()`
+  (`hooks/useMediaQuery.ts`) decides which tree is *mounted*. A `hidden lg:block` pair would put two
+  `data-cy="filter-sidebar"` / `search-input` / `sort-option` sets in the DOM and break the selector
+  contract this whole suite rests on. This is the one thing not to "simplify" later.
+- **Nav tabs became a single scrolling strip** with the active tab auto-centred — reversing the
+  earlier wrap-don't-scroll decision, which cost 200px+ of sticky header on a phone.
+- **CompareBar publishes `--compare-bar-h`**, reserved as bottom padding on the app shell's outer
+  column. It had been covering the last row of cards and the footer on desktop too.
+- Touch-target and 16px-input pass (see the table in DESIGN.md); compare + stretch tables bleed to
+  the screen edge and gained a scroll hint.
+
+`cypress/e2e/mobile.cy.ts` (39 tests at 390×844) is the guard; `gear_listing.cy.ts`'s 3-column test
+is now explicitly pinned to `cy.viewport(1440, 900)`. `tests/unit/filterCount.test.ts` covers the
+badge arithmetic.
 
 ### ✅ Phase 1 — Foundation
 Types mirroring `*Public` schemas (`types/`), gear registry (`config/gearTypes.ts` — 8 available + Bungees/Leash-Ring-Pro upcoming), API layer (`api/` — paginates past the 100-cap, `API_BASE` from `VITE_API_URL`), `useUrlState` hook, router + `AppLayout` + page stubs.
