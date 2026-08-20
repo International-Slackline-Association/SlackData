@@ -14,7 +14,6 @@ import ManufacturersPage from '@/pages/ManufacturersPage'
 import BrandDetailPage from '@/pages/BrandDetailPage'
 import SafetyPage from '@/pages/SafetyPage'
 import NotFoundPage from '@/pages/NotFoundPage'
-import './index.css'
 
 export default function App() {
   return (
