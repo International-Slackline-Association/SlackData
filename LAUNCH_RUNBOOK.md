@@ -25,7 +25,9 @@ the admin folds it into the JSON and redeploys. This is why SQLite stays for the
 the relational filtering the app does) **and** why submissions go to DynamoDB (perfect for flat,
 append-only records): no DynamoDB rewrite of the catalog, no relational server for submissions.
 Because the two domains are separate, the feedback features are purely **additive** — nothing built
-for the read-only launch had to change to add them. See [SUBMISSIONS_PLAN.md](SUBMISSIONS_PLAN.md).
+for the read-only launch had to change to add them. See [SUBMISSIONS_PLAN.md](SUBMISSIONS_PLAN.md),
+which **folds the single admin login into Phase 2 rather than deferring it** — the open write
+endpoints have to be closed and the admin surface authenticated in the same pass.
 
 ```
                      ┌──────────────── CloudFront (one domain) ────────────────┐
