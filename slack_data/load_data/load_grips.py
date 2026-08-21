@@ -1,27 +1,19 @@
-import json
-from pathlib import Path
 
-from sqlmodel import select
 
 from slack_data.database import SessionDep
-from slack_data.models.brands import Brand, BrandCreate, get_brand
+from slack_data.load_data._seed_io import read_seed_json, seed_path, to_bool
+from slack_data.models.brands import Brand, get_brand
 from slack_data.models.grips import Grip, GripCreate, ConnectionType
 from slack_data.utilities.currencies import get_currency
 from slack_data.utilities.materials import get_metal_material
 
-GRIP_FILE = Path(__file__).parent.parent.parent / "grips.json"
+GRIP_FILE = seed_path("grips.json")
 
 def load_grips_json() -> list[dict]:
     """
     Load the grips data from the `grips.json` file.
     """
-    if not GRIP_FILE.exists():
-        raise FileNotFoundError(f"Grips file not found: {GRIP_FILE}")
-
-    with open(GRIP_FILE, "r", encoding="utf-8") as file:
-        grip_data = json.load(file)
-
-    return grip_data
+    return read_seed_json("grips.json")
 
 def clean_grip_data(grip: dict) -> dict:
     """
@@ -32,9 +24,7 @@ def clean_grip_data(grip: dict) -> dict:
         if key not in {"name", "manufacturer", "material", "isa_certified"} and value == "":
             cleaned_grip[key] = None
         elif key == "isa_certified":
-            cleaned_grip[key] = bool(value) if isinstance(value, str) else value
-            if value is None:
-                cleaned_grip[key] = False
+            cleaned_grip[key] = to_bool(value)
         else:
             cleaned_grip[key] = str(value) if value is not None else None
     return cleaned_grip
@@ -78,7 +68,6 @@ def add_grips_to_db(grips: list[dict], session: SessionDep) -> None:
         session.add(db_grip)
 
     session.commit()
-    session.refresh(db_grip)
 
 def get_connection_type(connection_type: str) -> ConnectionType:
     """

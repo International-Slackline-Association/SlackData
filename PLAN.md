@@ -460,7 +460,11 @@ independent of this CSS change; needs separate investigation.
 Whole suite green; simplify/dedupe.
 
 ### 🟡 Phase 11 — Currency & price
-Full plan: **[CURRENCY_PLAN.md](CURRENCY_PLAN.md)**. Spec: DESIGN.md § Currency & Prices.
+Spec: **DESIGN.md § Currency & Prices**. (The old CURRENCY_PLAN.md is gone — it was a pre-build
+plan, and everything in it that still binds now lives where the code can be checked against it:
+the storage/display split, the precedence order and the `?cur=` rule in DESIGN.md § Currency &
+Prices; the provider choice and its never-fail contract in the module docstring of
+`slack_data/utilities/fx.py`; the per-meter and per-pair traps in CLAUDE.md § Loader pattern.)
 
 One display currency for the whole site — auto-detected from the browser's locale, overridable from
 a top-nav selector, converted live off rates served by the backend. Price becomes **filterable**

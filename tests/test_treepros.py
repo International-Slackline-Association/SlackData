@@ -1,14 +1,13 @@
 """Tests for the /treepro endpoints."""
 
-from slack_data.models.treepro import PriceUnit, TreePro
+from conftest import persist
+
+from slack_data.models.treepro import TreePro
 
 
 def make_treepro(session, brand, *, name="Test TreePro", **kwargs) -> TreePro:
     t = TreePro(name=name, brand_id=brand.id, **kwargs)
-    session.add(t)
-    session.commit()
-    session.refresh(t)
-    return t
+    return persist(session, t)
 
 
 # --- LIST ---

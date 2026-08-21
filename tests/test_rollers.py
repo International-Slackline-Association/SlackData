@@ -1,5 +1,7 @@
 """Tests for the /roller endpoints."""
 
+from conftest import persist
+
 from slack_data.models.rollers import BearingMaterial, LockType, Roller, SliderType
 from slack_data.utilities.materials import MetalMaterial, RollerMaterial
 
@@ -15,10 +17,7 @@ _DEFAULTS = dict(
 
 def make_roller(session, brand, *, name="Test Roller", **kwargs) -> Roller:
     r = Roller(name=name, brand_id=brand.id, **{**_DEFAULTS, **kwargs})
-    session.add(r)
-    session.commit()
-    session.refresh(r)
-    return r
+    return persist(session, r)
 
 
 def _create_payload(brand_id: int, **overrides) -> dict:

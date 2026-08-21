@@ -1,5 +1,7 @@
 """Tests for the /starterkit endpoints."""
 
+from conftest import persist
+
 from slack_data.models.starterkits import StarterKit, TensioningType
 
 
@@ -12,10 +14,7 @@ def make_starterkit(session, brand, *, name="Test Kit", webbing_length=15, webbi
         brand_id=brand.id,
         **kwargs,
     )
-    session.add(k)
-    session.commit()
-    session.refresh(k)
-    return k
+    return persist(session, k)
 
 
 # --- LIST ---

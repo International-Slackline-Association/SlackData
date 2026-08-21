@@ -39,12 +39,11 @@ leashring, grip. Entries pointing at anything else (dogbones, slings, brakes,
 kits) are counted and reported, not applied.
 """
 
-import json
 from datetime import datetime
-from pathlib import Path
 
 from sqlmodel import Session, select
 
+from slack_data.load_data._seed_io import read_seed_json, seed_path
 from slack_data.models.grips import Grip
 from slack_data.models.isa_gear_warnings import ISAGearWarning, ISAGearWarningCreate
 from slack_data.models.leashrings import LeashRing
@@ -53,7 +52,7 @@ from slack_data.models.webbing import Webbing
 from slack_data.models.weblocks import Weblock
 from slack_data.utilities.isa_warnings import ISAWarning
 
-ISA_WARNING_FILE = Path(__file__).parent.parent.parent / "isa_gear_warnings.json"
+ISA_WARNING_FILE = seed_path("isa_gear_warnings.json")
 
 # The gear types that carry an `isa_warning` column. Tree protectors, starter
 # kits and trickline kits do not — see CLAUDE.md § Data model.
@@ -78,11 +77,7 @@ SEVERITY = {
 
 def load_isa_warnings_json() -> list[dict]:
     """Read the warning entries from `isa_gear_warnings.json`."""
-    if not ISA_WARNING_FILE.exists():
-        raise FileNotFoundError(f"ISA warnings file not found: {ISA_WARNING_FILE}")
-
-    with open(ISA_WARNING_FILE, "r", encoding="utf-8") as file:
-        return json.load(file)["items"]
+    return read_seed_json("isa_gear_warnings.json")["items"]
 
 
 def get_isa_warning(status: str | None) -> ISAWarning | None:

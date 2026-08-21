@@ -1,15 +1,14 @@
 """Tests for the /leashring endpoints."""
 
+from conftest import persist
+
 from slack_data.models.leashrings import LeashRing
 from slack_data.utilities.materials import MetalMaterial
 
 
 def make_leashring(session, brand, *, name="Test Ring", **kwargs) -> LeashRing:
     r = LeashRing(name=name, material=MetalMaterial.STEEL, brand_id=brand.id, **kwargs)
-    session.add(r)
-    session.commit()
-    session.refresh(r)
-    return r
+    return persist(session, r)
 
 
 # --- LIST ---

@@ -12,7 +12,6 @@
 // Tests use webbings (88 items, rich filter set) as the primary subject.
 // Sort and search URL tests run for all gear types via GEAR_TYPES.
 
-import { GEAR_TYPES } from '../support/gear_types'
 
 // ── Search → URL ──────────────────────────────────────────────────────────────
 

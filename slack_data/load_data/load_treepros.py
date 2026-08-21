@@ -1,27 +1,19 @@
-import json
-from pathlib import Path
 
-from sqlmodel import select
 
 from slack_data.database import SessionDep
-from slack_data.models.brands import Brand, BrandCreate, get_brand
+from slack_data.load_data._seed_io import read_seed_json, seed_path, to_bool
+from slack_data.models.brands import Brand, get_brand
 from slack_data.models.treepro import TreePro, TreeProCreate
 from slack_data.utilities.currencies import get_currency
 
-TREEPRO_FILE = Path(__file__).parent.parent.parent / "treepros.json"
+TREEPRO_FILE = seed_path("treepros.json")
 
 
 def load_treepros_json() -> list[dict]:
     """
     Load the tree pro data from the `treepros.json` file.
     """
-    if not TREEPRO_FILE.exists():
-        raise FileNotFoundError(f"TreePro file not found: {TREEPRO_FILE}")
-
-    with open(TREEPRO_FILE, "r", encoding="utf-8") as file:
-        treepro_data = json.load(file)
-
-    return treepro_data
+    return read_seed_json("treepros.json")
 
 
 def clean_treepro_data(treepro: dict) -> dict:
@@ -38,11 +30,7 @@ def clean_treepro_data(treepro: dict) -> dict:
 
     # Ensure booleans are booleans
     if "has_sling_attachment" in cleaned:
-        v = cleaned.get("has_sling_attachment")
-        if isinstance(v, str):
-            cleaned["has_sling_attachment"] = v.lower() in ("true", "1", "yes")
-        else:
-            cleaned["has_sling_attachment"] = bool(v) if v is not None else False
+        cleaned["has_sling_attachment"] = to_bool(cleaned.get("has_sling_attachment"))
 
     return cleaned
 
@@ -87,7 +75,6 @@ def add_treepros_to_db(treepros: list[dict], session: SessionDep) -> None:
         session.add(db_treepro)
 
     session.commit()
-    session.refresh(db_treepro)
 
 
 def load_treepros(session: SessionDep) -> None:

@@ -3,7 +3,6 @@ from pydantic import computed_field
 from sqlmodel import Field, Relationship, SQLModel
 
 from slack_data.utilities.currencies import Currency
-from slack_data.utilities.isa_warnings import ISAWarning
 
 class PriceUnit(str, Enum):
     SINGLE = "single"

@@ -5,7 +5,7 @@ import { imageFilesFor } from '../support/images'
 // The `before` hook fetches a real item from the API so assertions
 // can verify both structure and actual data values.
 
-GEAR_TYPES.forEach(({ slug, apiPath, label, hasISA, hasISAWarning, specFields }) => {
+GEAR_TYPES.forEach(({ slug, apiPath, label, hasISAWarning, specFields }) => {
   describe(`Gear detail page — ${label}`, () => {
     let item: Record<string, unknown>
     const api = () => Cypress.env('apiUrl')

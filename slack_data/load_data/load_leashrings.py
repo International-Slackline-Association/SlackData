@@ -1,27 +1,19 @@
-import json
-from pathlib import Path
 
-from sqlmodel import select
 
 from slack_data.database import SessionDep
-from slack_data.models.brands import Brand, BrandCreate, get_brand
+from slack_data.load_data._seed_io import read_seed_json, seed_path, to_bool
+from slack_data.models.brands import Brand, get_brand
 from slack_data.models.leashrings import LeashRing, LeashRingCreate
 from slack_data.utilities.currencies import get_currency
 from slack_data.utilities.materials import get_metal_material
 
-LEASHRING_FILE = Path(__file__).parent.parent.parent / "leashrings.json"
+LEASHRING_FILE = seed_path("leashrings.json")
 
 def load_leashrings_json() -> list[dict]:
     """
     Load the leash rings data from the `leashrings.json` file.
     """
-    if not LEASHRING_FILE.exists():
-        raise FileNotFoundError(f"Leash rings file not found: {LEASHRING_FILE}")
-
-    with open(LEASHRING_FILE, "r", encoding="utf-8") as file:
-        leashring_data = json.load(file)
-
-    return leashring_data
+    return read_seed_json("leashrings.json")
 
 def clean_leashring_data(leashring: dict) -> dict:
     """
@@ -32,9 +24,7 @@ def clean_leashring_data(leashring: dict) -> dict:
         if key not in {"name", "brand_id", "material", "isa_certified"} and value == "":
             cleaned_leashring[key] = None
         elif key == "isa_certified":
-            cleaned_leashring[key] = bool(value) if isinstance(value, str) else value
-            if value is None:
-                cleaned_leashring[key] = False
+            cleaned_leashring[key] = to_bool(value)
         else:
             cleaned_leashring[key] = str(value) if value is not None else None
     return cleaned_leashring
@@ -75,7 +65,6 @@ def add_leashrings_to_db(leashrings: list[dict], session: SessionDep) -> None:
         session.add(db_leashring)
 
     session.commit()
-    session.refresh(db_leashring)
 
 def load_leashrings(session: SessionDep) -> None:
     """

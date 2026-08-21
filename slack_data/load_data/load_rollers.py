@@ -1,27 +1,19 @@
-import json
-from pathlib import Path
 
-from sqlmodel import select
 
 from slack_data.database import SessionDep
-from slack_data.models.brands import Brand, BrandCreate, get_brand
+from slack_data.load_data._seed_io import read_seed_json, seed_path, to_bool
+from slack_data.models.brands import Brand, get_brand
 from slack_data.models.rollers import BearingMaterial, LockType, SliderType, Roller, RollerCreate
 from slack_data.utilities.currencies import get_currency
 from slack_data.utilities.materials import RollerMaterial, get_metal_materials
 
-ROLLER_FILE = Path(__file__).parent.parent.parent / "rollers.json"
+ROLLER_FILE = seed_path("rollers.json")
 
 def load_rollers_json() -> list[dict]:
     """
     Load the rollers data from the `rollers.json` file.
     """
-    if not ROLLER_FILE.exists():
-        raise FileNotFoundError(f"rollers file not found: {ROLLER_FILE}")
-
-    with open(ROLLER_FILE, "r", encoding="utf-8") as file:
-        roller_data = json.load(file)
-
-    return roller_data
+    return read_seed_json("rollers.json")
 
 def clean_roller_data(rollers: dict) -> dict:
     """
@@ -34,9 +26,7 @@ def clean_roller_data(rollers: dict) -> dict:
         elif key not in {"name", "brand", "materialType"} and value == "":
             cleaned_rollers[key] = None
         elif key == "isa_approved":
-            cleaned_rollers[key] = bool(value) if isinstance(value, str) else value
-            if value is None:
-                cleaned_rollers[key] = False
+            cleaned_rollers[key] = to_bool(value)
         else:
             cleaned_rollers[key] = str(value) if value is not None else None
     return cleaned_rollers
@@ -84,7 +74,6 @@ def add_rollers_to_db(rollers: list[dict], session: SessionDep) -> None:
         session.add(db_roller)
 
     session.commit()
-    session.refresh(db_roller)
 
 def get_slider_type(slider_type: str) -> SliderType:
     """

@@ -1,6 +1,8 @@
 """Tests for the /grip endpoints."""
 
-from slack_data.models.grips import ConnectionType, Grip
+from conftest import persist
+
+from slack_data.models.grips import Grip
 from slack_data.utilities.materials import MetalMaterial
 
 
@@ -12,10 +14,7 @@ def make_grip(session, brand, *, name="Test Grip", width_min=24, **kwargs) -> Gr
         brand_id=brand.id,
         **kwargs,
     )
-    session.add(g)
-    session.commit()
-    session.refresh(g)
-    return g
+    return persist(session, g)
 
 
 # --- LIST ---

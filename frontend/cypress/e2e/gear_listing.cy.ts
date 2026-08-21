@@ -3,8 +3,6 @@ import { GEAR_TYPES } from '../support/gear_types'
 // Tests run against every gear type — all assertions use the real backend.
 GEAR_TYPES.forEach(({ slug, apiPath, label }) => {
   describe(`Gear listing page — ${label}`, () => {
-    const api = () => `${Cypress.env('apiUrl')}/${apiPath}`
-
     beforeEach(() => {
       cy.visit(`/${slug}`)
     })

@@ -204,7 +204,7 @@ describe('Search — normalized (punctuation-insensitive)', () => {
 
 // ── Sort tests ────────────────────────────────────────────────────────────────
 
-GEAR_TYPES.forEach(({ slug, apiPath, label }) => {
+GEAR_TYPES.forEach(({ slug, label }) => {
   const sortFields = [...UNIVERSAL_SORT_FIELDS, ...(EXTRA_SORT_FIELDS[slug] ?? [])]
 
   describe(`Sort — ${label}`, () => {
@@ -290,7 +290,6 @@ GEAR_TYPES.forEach(({ slug, apiPath, label }) => {
         cy.get('[data-cy="gear-card"]').should(($cards) => {
           const raw = [...$cards].map(c => c.getAttribute(attr) ?? '')
           const nums  = raw.filter(v => v !== '').map(Number)
-          const nulls = raw.filter(v => v === '')
 
           // Non-null values should be ascending
           expect(nums).to.deep.equal([...nums].sort((a, b) => a - b))

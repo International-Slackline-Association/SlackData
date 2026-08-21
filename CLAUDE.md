@@ -116,7 +116,9 @@ Root *.json seed files
 | `slack_data/models/brands.py` | `Brand` model + `get_brand()` upsert helper (central entity) |
 | `slack_data/models/<type>.py` | SQLModel schemas per gear type |
 | `slack_data/load_data/load_<type>s.py` | JSON → DB importers — copy this pattern for new types |
-| `slack_data/api/routers/<type>_router.py` | REST CRUD — copy this pattern for new types |
+| `slack_data/load_data/_seed_io.py` | `read_seed_json()` / `seed_path()` / `to_bool()` — shared by every loader |
+| `slack_data/api/routers/_crud.py` | `crud_router()` — the CRUD factory every gear router is built from |
+| `slack_data/api/routers/<type>_router.py` | One `crud_router(...)` call per gear type |
 | `slack_data/api/routing.py` | Router registration + the READ_ONLY write-route filter (see below) |
 | `slack_data/utilities/` | shared enums/helpers (currency, country, materials, ISA warnings) |
 
@@ -202,16 +204,7 @@ frontend's display layer. **No model, no table, no DB access**, so it is safe un
 read-only catalog. Rates are cached in a module-level dict with a TTL (the only cache available on
 Lambda's read-only filesystem) and every failure path falls back to a baked-in table with
 `stale: true` — a 5xx here would blank the price on every card. Prices themselves are **never**
-converted in storage; see DESIGN.md § Currency & Prices and [CURRENCY_PLAN.md](CURRENCY_PLAN.md).
-
-### Non-model routers
-
-`/fx/rates` (`api/routers/fx_router.py` + `utilities/fx.py`) — EUR-based exchange rates for the
-frontend's display layer. **No model, no table, no DB access**, so it is safe under the hosted
-read-only catalog. Rates are cached in a module-level dict with a TTL (the only cache available on
-Lambda's read-only filesystem) and every failure path falls back to a baked-in table with
-`stale: true` — a 5xx here would blank the price on every card. Prices themselves are **never**
-converted in storage; see DESIGN.md § Currency & Prices and [CURRENCY_PLAN.md](CURRENCY_PLAN.md).
+converted in storage; see DESIGN.md § Currency & Prices.
 
 ### In-progress models (branch `bungees_ringpadding`)
 
@@ -219,7 +212,9 @@ converted in storage; see DESIGN.md § Currency & Prices and [CURRENCY_PLAN.md](
 
 ## Loader pattern (`load_data/load_<type>s.py`)
 
-Each loader defines: `load_<type>s_json()` (reads `Path(__file__).parent.parent.parent / "<type>s.json"`), `clean_<type>_data()` (normalizes blanks/types), `add_<type>s_to_db()` (maps JSON keys → `<X>Create`, resolves brand via `get_brand()`, `session.add()`, commit), and `load_<type>s(session)` orchestrating them. There's an `if __name__ == "__main__"` block for standalone inspection.
+Each loader defines: `load_<type>s_json()` (one line — `read_seed_json("<type>s.json")`), `clean_<type>_data()` (normalizes blanks/types), `add_<type>s_to_db()` (maps JSON keys → `<X>Create`, resolves brand via `get_brand()`, `session.add()`, commit), and `load_<type>s(session)` orchestrating them. There's an `if __name__ == "__main__"` block for standalone inspection.
+
+Reading the file, locating the repo root, and coercing a seed's loose booleans are **not** per-type knowledge and live in `load_data/_seed_io.py` (`read_seed_json`, `seed_path`, `to_bool`). What stays in each loader is the part that genuinely differs: which JSON key maps onto which model field — including the traps below.
 
 **JSON keys differ per type — always check the existing loader, don't assume:**
 - Brand field is `brand` for webbing, but `manufacturer` for grips/leashrings/rollers/treepro/kits.
@@ -232,14 +227,37 @@ Timestamps (`release_date`) are unix milliseconds (`int | None`).
 
 ## Router pattern (`api/routers/<type>_router.py`)
 
-Standard CRUD using `SessionDep`:
+**Every catalogue router is one call to `crud_router()`** (`api/routers/_crud.py`) — the nine of
+them were byte-identical apart from names, so the five handlers are written once and parameterised
+by model. A router file is now:
+
+```python
+from slack_data.api.routers._crud import crud_router
+from slack_data.models.grips import Grip, GripCreate, GripPublic, GripUpdate
+
+grip_router = crud_router(
+    prefix="grip", model=Grip,
+    create_model=GripCreate, public_model=GripPublic, update_model=GripUpdate,
+)
+```
+
+What it builds, using `SessionDep`:
 - `POST /` — `<X>.model_validate(create)`, add, commit, refresh
 - `GET /` — paginated: `offset` (`ge=0`, default 0), `limit` (`le=100`, default 10)
-- `GET /{id}` — 404 if missing
-- `PATCH /{id}` — `model_dump(exclude_unset=True)` then `setattr` each field
-- `DELETE /{id}` — returns `{"ok": True}`
+- `GET /{<prefix>_id}` — 404 if missing
+- `PATCH /{<prefix>_id}` — `model_dump(exclude_unset=True)` then `setattr` each field
+- `DELETE /{<prefix>_id}` — returns `{"ok": True}`
 
-Register every new router in `main.py` via `app.include_router(...)`. `APIRouter(prefix="/<type>", tags=["<type>"], responses={404: ...})`.
+`prefix` drives the URL prefix, the OpenAPI tag, the `{<prefix>_id}` path parameter and the handler
+names (hence the `operationId`s); the 404 label is the model's class name. The path parameter and
+the handler names are **published API surface** — `_crud.py` goes to some trouble to keep them
+per-type rather than generic, and `tests/test_read_only.py` asserts the exact path template.
+
+Register every new router in `main.py` via `app.include_router(...)`, and add it to
+`CATALOG_ROUTERS` in `api/routing.py` so read-only mode strips its writes.
+
+`isa_warning_router`, `fx_router` and `submissions_router` are hand-written — they are not CRUD over
+a gear table.
 
 ## Adding a new gear type (checklist)
 
@@ -247,7 +265,7 @@ Register every new router in `main.py` via `app.include_router(...)`. `APIRouter
 2. **Brand** — add `Brand._<type>` Relationship + `@computed_field` list in `brands.py`.
 3. **JSON** — `<type>s.json` at repo root (array of objects).
 4. **Loader** — `load_data/load_<type>s.py` following the pattern above.
-5. **Router** — `api/routers/<type>_router.py` (CRUD).
+5. **Router** — `api/routers/<type>_router.py`: one `crud_router(...)` call.
 6. **Wire up** — in `main.py`: import + add empty-checked loader call in lifespan, and `include_router`.
 7. **Re-seed** — delete `slack_data/database.db`, restart.
 
