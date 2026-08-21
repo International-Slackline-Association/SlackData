@@ -38,3 +38,17 @@ export function formatValue(value: unknown, unit?: string): string {
   }
   return unit ? `${value} ${unit}` : String(value)
 }
+
+// width_min + width_max → "24–26 mm": the full band of webbing widths a device
+// accepts. Collapses to a single figure ("26 mm") when the bounds coincide or
+// there is no max — a single-width lock must not read as a range — and to ""
+// when there is no min, which drops the spec row / card segment entirely.
+// Shared by the card's inline specs row and the detail page's Width Range row
+// so the two can never disagree (see DESIGN.md § Card anatomy).
+export function widthRangeText(item: AnyItem, unit = 'mm'): string {
+  const min = item.width_min
+  const max = item.width_max
+  if (min == null) return ''
+  if (max == null || max === min) return `${min} ${unit}`
+  return `${min}–${max} ${unit}`
+}

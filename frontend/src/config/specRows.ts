@@ -12,7 +12,7 @@
 // the first item with a non-null value (which may well be `false`).
 
 import type { GearSlug } from '@/types'
-import { formatValue, type AnyItem } from '@/utils/format'
+import { formatValue, widthRangeText, type AnyItem } from '@/utils/format'
 import { displayPoints } from '@/utils/stretch'
 
 // How the value is drawn. 'text' is the default; the others get bespoke markup
@@ -71,17 +71,13 @@ function yesNo(field: string, label: string): SpecRowDef {
   return { field, label, value: item => (item[field] ? 'Yes' : 'No') }
 }
 
-// width_min + width_max → "25–35 mm", or "25 mm" when there's no max.
+// width_min + width_max → "25–35 mm", collapsing to "25 mm" when there is no
+// max or the bounds coincide. Same formatter as the card's inline width segment.
 const widthRange: SpecRowDef = {
   field: 'width_range',
   label: 'Width Range',
   unit: 'mm',
-  value: item => {
-    const min = item.width_min
-    const max = item.width_max
-    if (min == null) return ''
-    return max == null ? `${min} mm` : `${min}–${max} mm`
-  },
+  value: item => widthRangeText(item),
 }
 
 // Stretch renders one of two ways, decided in SpecTable by point count:

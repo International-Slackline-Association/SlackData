@@ -15,9 +15,12 @@
 //      price_display — the same price in the viewer's currency; what the price
 //                      FILTER compares, and so what its bounds are checked against
 //    The last two are attached by GearListingPage (see money.ts).
-//  - INLINE_SPECS: the few specs shown in the card's inline specs row.
+//  - INLINE_SPECS: the few specs shown in the card's inline specs row. A spec is
+//    normally one field, but it may supply its own `value` where a single field
+//    would be a half-truth — see the weblock width range below.
 
 import type { GearSlug } from '@/types'
+import { widthRangeText, type AnyItem } from '@/utils/format'
 
 export const CARD_DATA_FIELDS: Record<GearSlug, string[]> = {
   webbings:      ['price', 'price_base', 'price_display', 'currency', 'weight', 'width', 'breaking_strength'],
@@ -38,11 +41,16 @@ export const CARD_DATA_FIELDS: Record<GearSlug, string[]> = {
 export interface InlineSpec {
   field: string
   unit?: string
+  // Composite segment: overrides the plain `item[field] + unit` lookup. `field`
+  // stays as the segment's name (tests and ordering read it); '' omits it.
+  value?: (item: AnyItem) => string
 }
 
 export const INLINE_SPECS: Record<GearSlug, InlineSpec[]> = {
   webbings:      [{ field: 'material' }, { field: 'width', unit: 'mm' }, { field: 'weight', unit: 'g/m' }, { field: 'breaking_strength', unit: 'kN' }],
-  weblocks:      [{ field: 'material' }, { field: 'width_min', unit: 'mm' }, { field: 'breaking_strength', unit: 'kN' }],
+  // A weblock takes a BAND of webbing widths — showing width_min alone reads as
+  // "24 mm only", so the segment is the whole range (DESIGN.md § Card anatomy).
+  weblocks:      [{ field: 'material' }, { field: 'width_range', value: widthRangeText }, { field: 'breaking_strength', unit: 'kN' }],
   leashrings:    [{ field: 'material' }, { field: 'inner_diameter', unit: 'mm' }, { field: 'breaking_strength', unit: 'kN' }],
   grips:         [{ field: 'material' }, { field: 'mbs', unit: 'kN' }],
   rollers:       [{ field: 'material' }, { field: 'breaking_strength', unit: 'kN' }],
