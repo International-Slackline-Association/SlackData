@@ -667,6 +667,9 @@
       "bc_heavy-3.jpg",
       "bc_heavy-4.jpg"
     ],
+    "bc_jasp": [
+      "bc_jasp.jpg"
+    ],
     "bc_jelly": [
       "bc_jelly.jpg",
       "bc_jelly-2.jpg"
@@ -710,6 +713,11 @@
       "bc_pharaoh-2.jpg",
       "bc_pharaoh-3.jpg",
       "bc_pharaoh-4.jpg"
+    ],
+    "bc_secondaire": [
+      "bc_secondaire.jpg",
+      "bc_secondaire-2.jpg",
+      "bc_secondaire-3.jpg"
     ],
     "bc_secondaire-mk2": [
       "bc_secondaire-mk2.jpg",
@@ -943,6 +951,9 @@
     ],
     "raed_dyneemite": [
       "raed_dyneemite.jpg"
+    ],
+    "raed_dyneemite-pro": [
+      "raed_dyneemite-pro.jpg"
     ],
     "raed_eclipse": [
       "raed_eclipse.jpg"

@@ -2968,7 +2968,7 @@
             "country": "United States",
             "country_flag_url": "/img/flags/US.png"
         },
-        "product_page_url": "https://www.slacklinetechnology.com/shop/ramlock-slackline-anchor",
+        "product_page_url": null,
         "pricing": [
             {
                 "text": "1 unit and above : 102.97 EUR",
@@ -3000,7 +3000,7 @@
         },
         "date_introduced": null,
         "name": "RamLock",
-        "product_url": "https://www.slacklinetechnology.com/shop/ramlock-slackline-anchor",
+        "product_url": null,
         "active": false,
         "style": "Tensionable Weblock"
     },
@@ -4313,7 +4313,7 @@
             "MBS": "30kN",
             "Anchor connection type": "Push Pin",
             "Webbing connection type": "Push Pin",
-            "Compatible webbing width": "24mm - 26mm",
+            "Compatible webbing width": "19mm - 19mm",
             "Diverter diameter": "N/A",
             "Efficiency": "N/A",
             "Usage": "N/A",
