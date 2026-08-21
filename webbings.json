@@ -1066,7 +1066,8 @@
         "width": 25,
         "priceMeter": 2.4,
         "currency": "USD",
-        "active": false
+        "active": false,
+        "isa_certified": false
     },
     {
         "name": "Mantra MK2",
@@ -1161,7 +1162,8 @@
         "width": 25,
         "priceMeter": 2.4,
         "currency": "USD",
-        "active": false
+        "active": false,
+        "isa_certified": false
     },
     {
         "name": "Mantra MK3",
@@ -1407,7 +1409,8 @@
         "product_url": null,
         "width": 25,
         "webbing_construction": "Flat",
-        "active": false
+        "active": false,
+        "isa_certified": false
     },
     {
         "name": "Type 18 MKII",
@@ -2534,7 +2537,8 @@
         "width": 25.4,
         "thickness": 2.08,
         "webbing_construction": "Tubular",
-        "active": true
+        "active": true,
+        "isa_certified": false
     },
     {
         "name": "Cobalt",
@@ -3266,7 +3270,7 @@
         "product_url": "https://raed-slacklines.com/rainbow-polyester-highline-webbing",
         "width": 26,
         "webbing_construction": "Flat",
-        "isa_certified": true,
+        "isa_certified": false,
         "priceMeter": 1.65,
         "currency": "EUR",
         "notes": "Specs from raed webbing manual Annex A. loop MBS 32 kN; DLV MBS 26 kN; ISA strength class A",
@@ -3364,7 +3368,7 @@
         "product_url": "https://raed-slacklines.com/parsec-longline-webbing",
         "width": 25,
         "webbing_construction": "Flat",
-        "isa_certified": true,
+        "isa_certified": false,
         "priceMeter": 0.99,
         "currency": "EUR",
         "notes": "Specs from raed webbing manual Annex A. loop MBS 32 kN; ISA strength class A",
@@ -4077,7 +4081,7 @@
         "product_url": "https://www.slacktivity.com/marathon-50m-500m",
         "width": 25,
         "webbing_construction": "Core/Sheath",
-        "isa_certified": false,
+        "isa_certified": true,
         "priceMeter": 1.8,
         "currency": "EUR",
         "active": true
@@ -5207,7 +5211,7 @@
         "product_url": "https://www.slacktivity.com/y2k",
         "width": 25.4,
         "webbing_construction": "Flat",
-        "isa_certified": false,
+        "isa_certified": true,
         "priceMeter": 4.6,
         "currency": "EUR",
         "active": true
@@ -7876,7 +7880,7 @@
         "date_introduced": 1597006800000,
         "product_url": "https://www.slacktivity.com/lsdtube",
         "webbing_construction": "Tubular",
-        "isa_certified": false,
+        "isa_certified": true,
         "priceMeter": 2.65,
         "currency": "EUR",
         "active": true
@@ -7993,7 +7997,7 @@
         "date_introduced": 1602190800000,
         "product_url": "https://raed-slacklines.com/aurora-polyester-highline-webbing",
         "webbing_construction": "Flat",
-        "isa_certified": true,
+        "isa_certified": false,
         "priceMeter": 1.99,
         "currency": "EUR",
         "notes": "Specs from raed webbing manual Annex A. loop MBS 26 kN; ISA strength class B",
@@ -10274,6 +10278,25 @@
         ],
         "description": "Lightweight polyester highline backup webbing. Plain weave with a low pick count for a high strength-to-weight ratio; single-zone weave with black marker yarns. Made in the US.",
         "notes": "WLL 8 kN; 24 kN through an Alpine WebLock. Superseded by Secondaire MK2.",
+        "active": false
+    },
+    {
+        "name": "BoomBoom",
+        "brand": "Slack Inov",
+        "materialType": "Nylon",
+        "width": 25,
+        "thickness": null,
+        "weight": 52,
+        "breakingStrength": 27,
+        "webbing_construction": "Tubular",
+        "isa_certified": false,
+        "product_url": null,
+        "date_introduced": 1672272000000,
+        "priceMeter": null,
+        "currency": null,
+        "stretch": null,
+        "description": null,
+        "notes": "Stub created for ISA warning 78 (a sample broke at 7 kN after 7 months of use). No published specs.",
         "active": false
     }
 ]

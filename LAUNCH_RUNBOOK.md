@@ -599,7 +599,24 @@ aws cloudfront create-invalidation --distribution-id <CdnDistributionId> --paths
 
 ---
 
-## 7. Point the domain at CloudFront
+## 7. Point the domain at CloudFront — ✅ DONE (2026-08-17)
+
+Applied as a four-record UPSERT batch (apex + `www`, each A and AAAA) into zone
+`Z023751015VNPXXICR3SC`; change `/change/C03370582B9UAKB94VMSM` reached `INSYNC`.
+**`https://slackdata.org` is live.**
+
+> **A local resolver can lag the zone.** Straight after the change, `slackdata.org` resolved fine via
+> `1.1.1.1` and `8.8.8.8` but returned nothing on this WSL host — negative caching of the earlier
+> NXDOMAIN, not a bad record. `www` resolved immediately, which is the giveaway. Don't re-apply the
+> batch: confirm against a public resolver first, and pin the address to test through it —
+>
+> ```bash
+> dig +short @1.1.1.1 slackdata.org A
+> IP=$(dig +short @1.1.1.1 slackdata.org A | head -1)
+> curl -sI --resolve slackdata.org:443:$IP https://slackdata.org/
+> ```
+
+### The original procedure, for reference
 
 In the `slackdata.org` hosted zone, create **alias** records (not CNAMEs — an apex can't be a CNAME,
 and Route 53 aliases are free):
@@ -629,7 +646,16 @@ didn't make it into the distribution — check with
 
 ---
 
-## 8. Smoke test the live site
+## 8. Smoke test the live site — ✅ PASSED on `https://slackdata.org` (2026-08-17)
+
+Every check below passed on the real domain: SPA `200`, TLS verifying without `-k` on a cert whose
+SANs are exactly `slackdata.org, www.slackdata.org`, `http` → `301` https, `www` `200`, images `200`,
+deep links `/webbings` `/gear/webbings` `/safety` `/manufacturers` all `200`, `/api/webbing/` serving
+real rows, `/api/fx/rates` with `stale:false` and `detected_currency` populated (so
+`CloudFront-Viewer-Country` survives on the custom domain too), `/api/webbing/999999` a JSON `404`,
+and **no `localhost:8000` in the production bundle**.
+
+### The checks
 
 ```bash
 BASE=https://slackdata.org
@@ -702,16 +728,16 @@ Carried over from [GOING_LIVE.md §6](GOING_LIVE.md) — these are launch-blocki
 sense, under the ISA's name, not the technical one:
 
 - [x] ~~**Image rights.**~~ Resolved by the ISA (confirmed 2026-08-17).
-- [ ] **Safety disclaimer.** Text drafted in [SAFETY_AND_ACCURACY.md](SAFETY_AND_ACCURACY.md) §A and
-      under review. **Still needs building into the UI** — a footer line site-wide plus a callout on
-      gear detail pages, next to the spec numbers someone might actually act on.
+- [x] ~~**Safety disclaimer.**~~ Live. Copy in [SAFETY_AND_ACCURACY.md](SAFETY_AND_ACCURACY.md) §A,
+      built as a site-wide footer line plus an amber callout on gear detail pages, with the full text
+      at `/safety`. Covered by `frontend/cypress/e2e/safety_notices.cy.ts` (13 cases) and specified in
+      [DESIGN.md](DESIGN.md) § Safety & Data Notices.
 - [x] ~~**`LICENSE` file.**~~ Added, split two ways because the project is both software and a
       database: [LICENSE](LICENSE) is MIT and covers the code; [LICENSE-DATA](LICENSE-DATA) is
       CC BY-SA 4.0 and covers the gear catalogue, so a reuser must credit the ISA and share alike.
       Both files state explicitly that the images under `frontend/public/` are covered by **neither**
       and may not be redistributed on their basis.
-- [ ] **Data-accuracy note.** Drafted in [SAFETY_AND_ACCURACY.md](SAFETY_AND_ACCURACY.md) §B; needs
-      building into the UI alongside the item count and in the footer.
+- [x] ~~**Data-accuracy note.**~~ Live — in the footer and inline beside the listing item count.
 
 > **Schema issue worth logging separately:** `isa_certified` is `bool = False` on every gear type, so
 > the data **cannot distinguish "not certified" from "unknown"**. Every un-recorded product reads as
@@ -743,13 +769,31 @@ sense, under the ISA's name, not the technical one:
 
 ---
 
+### 🚀 Launched — `https://slackdata.org`, 2026-08-17
+
+Phase 1 is live: the public read-only catalogue, on the real domain, over TLS, with the safety and
+data-accuracy notices in place. Every step below is done.
+
+**For routine updates from here, use [infra/README.md](infra/README.md) § Deploying to live** — not
+this file. This runbook is the one-time launch record.
+
+Still open, none of it launch-blocking:
+
+- Serverless Framework pinned to **v3**, which is EOL. Move to v4 once the ISA-vs-us deploy-ownership
+  question (§11) is settled, since the same answer decides who owns the Serverless account.
+- The **budget alarm** (§9) needs an admin — `budgets:*` is denied to this permission set.
+- **`isa_certified` cannot express "unknown"** (§10). A three-state field is the real fix; the
+  `/safety` copy currently carries that caveat in prose.
+- **ISA warning/certification data is a snapshot**, not a live feed — the auto-sync job is still
+  backlog, and `/safety` says so.
+
 ### Order of operations, one line each
 
 ~~Pre-flight code fixes (§1)~~ ✅ → ~~SSO profile (§2)~~ ✅ → ~~region (§3)~~ ✅ `eu-central-1` →
 ~~domain + cert (§4)~~ ✅ already in place → ~~container smoke test (§5.1)~~ ✅ →
 ~~fill serverless.yml (§5.2)~~ ✅ → ~~Serverless version (§5.3)~~ ✅ pinned v3, account deferred →
-**Lambda role created by the ISA (§5.4) ← blocked here, waiting on them** → retry `sls deploy` (§6)
-→ sync SPA + invalidate (§6.1) → Route 53 aliases (§7) → smoke test (§8).
+~~Lambda role created by the ISA (§5.4)~~ ✅ → ~~`sls deploy` (§6)~~ ✅ → ~~sync SPA + invalidate
+(§6.1)~~ ✅ → ~~Route 53 aliases (§7)~~ ✅ → ~~smoke test (§8)~~ ✅ → **launched.**
 
 **Deployed successfully 2026-08-17** once the ISA created the role (263s). Stack `slackdata-prod` is
 `UPDATE_COMPLETE`, the SPA + 900 objects are synced, and CloudFront is serving the whole site at

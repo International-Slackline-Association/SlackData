@@ -8,7 +8,19 @@
 //     null/blank value are excluded (null-last philosophy).
 
 import type { AnyItem } from '@/utils/format'
-import type { PillKind } from '@/config/filterGroups'
+import type { FilterGroupMeta } from '@/config/filterGroups'
+
+// Sentinel value for "this item has no value in this field". Pill groups
+// normally derive their options from the data and EXCLUDE nulls on both sides:
+// a null value produces no option, and an item with a null in an actively
+// filtered field is dropped. That is right for material or connection type,
+// where absence means "we don't know". It is wrong for `isa_warning`, where
+// absence is the answer people actually want to filter on — "show me the gear
+// with no ISA warning against it". Groups opt in via `includeNone` in the
+// filter config; nothing else offers the option, so nothing else changes
+// behaviour. Lowercase so it can never collide with an enum value
+// (ISAWarning's members are Recall / Warning / Notice / No Warning).
+export const NO_VALUE_PILL = 'none'
 
 export interface PillOption {
   value: string // raw value used in the URL + for matching (String(item[field]))
@@ -36,17 +48,17 @@ function rank(value: string): number {
   return value.toLowerCase() === 'other' ? 1 : 0
 }
 
-export function derivePillOptions(
-  items: AnyItem[],
-  field: string,
-  kind: PillKind = 'enum',
-  capitalize = false,
-  order?: readonly string[],
-): PillOption[] {
+export function derivePillOptions(items: AnyItem[], meta: FilterGroupMeta): PillOption[] {
+  const { group: field, capitalize = false, order, includeNone = false } = meta
+  const kind = meta.pillKind ?? 'enum'
   const seen = new Set<string>()
+  let anyMissing = false
   for (const item of items) {
     const v = item[field]
-    if (v == null || v === '') continue
+    if (v == null || v === '' || (Array.isArray(v) && v.length === 0)) {
+      anyMissing = true
+      continue
+    }
     // Multi-valued fields (e.g. roller `material` is list[MetalMaterial]) get one
     // pill per distinct element, not one pill for the whole array — otherwise the
     // comma in "Aluminum,Steel" collides with the comma-delimited URL encoding.
@@ -74,13 +86,22 @@ export function derivePillOptions(
     // to the bottom of the list.
     values.sort((a, b) => rank(a) - rank(b) || a.localeCompare(b))
   }
-  return values.map(value => ({
+  const options = values.map(value => ({
     value,
     label:
       kind === 'bool'
         ? value === 'true' ? 'Yes' : 'No'
         : capitalize ? titleCase(value) : value,
   }))
+
+  // "None" leads the group — it is the reassuring answer, and on isa_warning it
+  // is also by far the largest bucket. Offered only when the loaded data
+  // actually contains items without a value, so a type where every item is
+  // warned doesn't show a pill that matches nothing.
+  if (includeNone && anyMissing) {
+    options.unshift({ value: NO_VALUE_PILL, label: 'None' })
+  }
+  return options
 }
 
 function passesPills(item: AnyItem, activePills: Record<string, string[]>): boolean {
@@ -88,7 +109,9 @@ function passesPills(item: AnyItem, activePills: Record<string, string[]>): bool
     const values = activePills[field]
     if (!values || values.length === 0) continue
     const iv = item[field]
-    if (iv == null || iv === '') return false
+    // Missing value: passes only when the group offers, and the viewer picked,
+    // the explicit "None" pill (see NO_VALUE_PILL).
+    if (iv == null || iv === '') return values.includes(NO_VALUE_PILL)
     // Array field: match if the item's list shares any selected value.
     if (Array.isArray(iv)) {
       if (!iv.some(el => values.includes(String(el)))) return false

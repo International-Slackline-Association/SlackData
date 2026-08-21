@@ -7,16 +7,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from slack_data.database import get_session, create_db_and_tables, READ_ONLY
 from slack_data.seed import seed_catalog
 
-from slack_data.api.routers.brand_router import brand_router
-from slack_data.api.routers.fx_router import fx_router
-from slack_data.api.routers.grip_router import grip_router
-from slack_data.api.routers.leashring_router import leashring_router
-from slack_data.api.routers.roller_router import roller_router
-from slack_data.api.routers.starterkit_router import starterkit_router
-from slack_data.api.routers.treepro_router import treepro_router
-from slack_data.api.routers.tricklinekit_router import tricklinekit_router
-from slack_data.api.routers.webbing_router import webbing_router
-from slack_data.api.routers.weblock_router import weblock_router
+from slack_data.api.routing import docs_kwargs, register_routers
 
 
 @asynccontextmanager
@@ -34,7 +25,12 @@ async def lifespan(app: FastAPI):
 
 # root_path lets the API sit under a path prefix (e.g. "/api" behind CloudFront)
 # without changing any route — it only fixes the URLs in /docs and openapi.json.
-app = FastAPI(lifespan=lifespan, root_path=os.getenv("API_ROOT_PATH", ""))
+# The docs themselves are off in the hosted read-only app; see api/routing.py.
+app = FastAPI(
+    lifespan=lifespan,
+    root_path=os.getenv("API_ROOT_PATH", ""),
+    **docs_kwargs(READ_ONLY),
+)
 
 # Allow the local Vite dev server (and preview) to call the API from the browser.
 # 5174 is the conventional second port: Vite falls back to it when 5173 is taken,
@@ -56,17 +52,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(brand_router)
-# Display-layer FX rates — no session, no DB access, safe under READ_ONLY.
-app.include_router(fx_router)
-app.include_router(grip_router)
-app.include_router(leashring_router)
-app.include_router(roller_router)
-app.include_router(starterkit_router)
-app.include_router(treepro_router)
-app.include_router(tricklinekit_router)
-app.include_router(webbing_router)
-app.include_router(weblock_router)
+# One call so the tests can build the same app. Under READ_ONLY the catalogue's
+# POST/PATCH/DELETE routes are not registered at all — they 404 and are absent
+# from the OpenAPI schema. See api/routing.py for why that, and not a 403.
+register_routers(app, read_only=READ_ONLY)
 
 # The SPA is served separately from S3/CloudFront (see infra/), so the API only
 # needs a simple root. CloudFront routes "/" to the SPA and "/api/*" here.

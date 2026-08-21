@@ -9,6 +9,12 @@ describe('Top navigation', () => {
     cy.get('[data-cy="wordmark"]').should('be.visible').and('contain.text', 'SlackData')
   })
 
+  // The browser tab / bookmark name, from index.html. Guards against the Vite
+  // scaffold default ("frontend") coming back, which shipped to production once.
+  it('titles the browser tab SlackData', () => {
+    cy.title().should('eq', 'SlackData')
+  })
+
   it('shows all 8 gear-type tabs', () => {
     cy.get('[data-cy="nav-tab"]').should('have.length', 8)
   })

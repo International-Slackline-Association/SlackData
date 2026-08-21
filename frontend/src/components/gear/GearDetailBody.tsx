@@ -26,11 +26,14 @@
 import { Link } from 'react-router-dom'
 import type { GearTypeMeta } from '@/config/gearTypes'
 import { useCurrency } from '@/context/CurrencyContext'
+import { useIsaWarnings } from '@/hooks/useIsaWarnings'
 import { type AnyItem } from '@/utils/format'
 import { imageUrls } from '@/utils/images'
 import CardImageCarousel from './CardImageCarousel'
 import ClassificationBubble from './ClassificationBubble'
 import IsaApprovedBadge from './IsaApprovedBadge'
+import { isaWarningStatus } from './IsaWarningBadge'
+import IsaWarningPanel from './IsaWarningPanel'
 import LegacyBadge from './LegacyBadge'
 import SpecTable from './SpecTable'
 
@@ -61,7 +64,10 @@ export default function GearDetailBody({
 }) {
   const price = useCurrency().priceText(item, meta.slug)
   const images = imageUrls(meta.slug, String(item.brand_name), String(item.name))
-  const isaWarning = meta.hasISAWarning ? item.isa_warning : null
+  const isaWarning = isaWarningStatus(meta.hasISAWarning ? item.isa_warning : null)
+  // The full ISA entries behind that status word — description, what to do,
+  // date, sources. Shared index, fetched once (see useIsaWarnings).
+  const isaWarnings = useIsaWarnings(meta.apiPath, item.id as number)
 
   const nameClass = 'text-2xl font-bold text-gray-900'
 
@@ -126,14 +132,10 @@ export default function GearDetailBody({
             </div>
           )}
 
-          {isaWarning != null && (
-            <div
-              data-cy="isa-warning-banner"
-              className="mt-5 flex items-start gap-2 rounded-lg border border-amber-300 bg-amber-50 px-4 py-3 text-sm text-amber-900"
-            >
-              <span aria-hidden>⚠</span>
-              <span>{String(isaWarning)}</span>
-            </div>
+          {/* Severity-coloured, from the same table as the card bubble — a
+              recall must not be delivered in the same amber as a notice. */}
+          {isaWarning !== null && (
+            <IsaWarningPanel status={isaWarning} warnings={isaWarnings} />
           )}
 
           {meta.hasISA && (

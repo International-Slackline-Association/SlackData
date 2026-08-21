@@ -31,6 +31,44 @@ Non-phase engineering tasks not tracked in [PLAN.md](PLAN.md) (frontend roadmap)
   still need a keep/reject call before they can be. Follow the per-type schema notes in that file's
   "Approved" section — the webbing and weblock loaders take different object shapes.
 
+- [ ] **Add the gear items the ISA warnings point at.** Every entry in
+  [isa_gear_warnings.json](isa_gear_warnings.json) now carries a `match` block (`gearType`,
+  `gearIds`, `gearNames`, `confidence`, `note`) resolving it against the catalogue — 51 exact,
+  12 likely, 1 partial, 10 ambiguous. **Eight have nothing to point at**, in three tiers:
+
+  *Type and brand both exist — just add the row:*
+  - [ ] **SladLock light** (slack.fr) — ISA 82, weblock. A distinct low-tension model; the
+    SladLock Power we hold (weblock 96) is a different product.
+  - [ ] **RigLock** (Raed Slacklines) — ISA 80, weblock, still in production. Already named in the
+    Dyneemite PRO notes as its recommended weblock, but has no row.
+
+  *Manufacturer missing:*
+  - [ ] **Passion / Passion 18m** (Mountain Equipment) — ISA 40 (recall) + 41, starter kit. The kit
+    type exists; Mountain Equipment is not one of our 56 brands. Two warnings resolve at once.
+
+  *Needs a gear type we don't model:*
+  - [ ] **Dogbones** — ISA 1 (Krok Хвостик) and 8 (Gibbon lineLock) have no home at all, and a
+    further 7 dogbone warnings (2–7, 9) currently ride on the parent weblock's row rather than the
+    product they actually name. Both brands already exist. Adding a `Dogbone` type is the single
+    highest-yield gap here: 9 warnings.
+  - [ ] **Whoopie** (Raed Slacklines) — ISA 22, sling, still in production. Brand exists, slings
+    don't.
+  - [ ] **Grigri** (Petzl) — ISA 42, brake, still in production. Neither a brake type nor Petzl as
+    a brand; the only entry from outside the slackline industry.
+
+  Two stubs were already created this way and are seeded from the root JSON with `active: false` and
+  no specs beyond what the ISA entry itself states: **Slacktivity Hangover 1.0**
+  (`rollers.json`, roller 22, `slider_type: Carabiner`) for ISA 45, and **Slack Inov BoomBoom**
+  (`webbings.json`, webbing 246) for ISA 78. Both carry a wart worth fixing when specs surface:
+  the required NOT NULL columns fall to their fallback buckets (`roller_material`/`lock_type`/
+  `bearing_material` → `Other`, `material` → `["Other"]`, and BoomBoom's `width` seeds as **0 mm**).
+
+  The 10 `ambiguous` matches are a separate, smaller call: the ISA names one product where we hold
+  several rows (EQB Katana/Katana FX, Mithril Pull/Quick Pin, Slacktivity SlackDuck/-DP, Raed TiLock
+  19/25mm, Petram Aeris/Aeris P, lineGrip LineLock AL MK4/VA MKIII, LineGrip Alu G4/G5/nano, Souz
+  Snatch 2.2/2.2T, Spider Lime vs Lime SR, Souz Rowan 1.2). Decide per item whether the warning
+  covers the whole family or one variant.
+
 - [ ] **Auto-sync ISA certification (every 24h).** Build a scheduled job that fetches the
   official ISA-approved gear list from
   <https://data.slacklineinternational.org/safety/isa-approved-gear/> once per day and
@@ -41,46 +79,23 @@ Non-phase engineering tasks not tracked in [PLAN.md](PLAN.md) (frontend roadmap)
   BC Wafer 2.0, BC Wafer XL, BC Loop, BC Threaded Highline Leash, Cong Gear Path,
   Slack Inov Zenlock, SlackX Orange, Slacktivity HighlineLeash).
 
-- [ ] **Surface ISA gear warnings on the item page.** We've collected the full ISA warning
-  database in [isa_gear_warnings.json](isa_gear_warnings.json) (root, ~80 entries). Each entry is
-  rich: `status` (Recall / Warning / Notice), `date`, `productType`, `model`, `manufacturer`,
-  `description`, `solution`, optional `productImage` and `link1`/`link2`. Today the DB stores only a
-  bare `isa_warning` enum (the *status* word) on webbing/weblock/roller/leashring/grip, and
-  [GearDetailBody.tsx:87](frontend/src/components/gear/GearDetailBody.tsx#L87) renders just that word
-  in an amber banner — the description, solution, date, and source links are all dropped. Goal:
-  display the **full warning** (what's wrong + what to do + when + source links) on the detail page
-  wherever a warning maps to a gear item.
+- [x] **Surface ISA gear warnings on the item page.** Done, via **option 2** (the dedicated
+  table) as this entry preferred — and with the matching problem solved by hand rather than by
+  fuzzy string matching. Every entry in [isa_gear_warnings.json](isa_gear_warnings.json) carries an
+  adjudicated `match` block (`gearType` / `gearIds` / `gearNames` / `confidence` / `note`);
+  [load_isa_warnings.py](slack_data/load_data/load_isa_warnings.py) runs last in
+  [seed.py](slack_data/seed.py) and writes two things — the `isa_warning` severity enum onto the
+  gear row (worst wins; 75 rows) and one `ISAGearWarning` row per warning × matched item (88 rows,
+  `models/isa_gear_warnings.py`, served by `GET /isawarning/`). Each id is verified against the
+  recorded `"<brand> <name>"` before it is stamped, so seed-order drift is loud rather than silently
+  re-pointing a recall at the wrong gear. Frontend: severity bubble top-right on cards (above the
+  classification), a `None · Recall · Warning · Notice` sidebar filter, and a detail panel with the
+  ISA's description and solution verbatim, the parsed date, an in-production chip, source links, and
+  an explicit hedge line on non-`exact` matches. See DESIGN.md § ISA Warnings and
+  `frontend/cypress/e2e/isa_warnings.cy.ts`.
 
-  **Where the richness has to live.** The single `isa_warning: ISAWarning | None` enum can't hold
-  description/solution/date/links. Two options:
-  1. **Add fields to each gear model** — e.g. `isa_warning_description`, `isa_warning_solution`,
-     `isa_warning_date`, `isa_warning_links` (JSON string) alongside the existing enum. Simple, but
-     duplicates the shape across 5 models and doesn't handle an item with >1 warning.
-  2. **A dedicated `ISAWarning` table** keyed by brand + model (nullable FK from gear, or matched at
-     read time), one row per warning-JSON entry. Cleaner, supports multiple warnings per item, and
-     is the natural home for the auto-sync job below. Preferred.
-
-  **Matching is partial — hence "wherever possible."** The JSON's `productType` covers many
-  categories we don't model as gear types (`Dogbone`, `Weblock Pin`, `Shackle Pin`, `Sling`,
-  `Brake`) — only `Webbing`→webbing, `Weblock`→weblock, `Line Gliders`→roller,
-  `Webbing Grab`→grip, `Leashring`→leashring, `Slackline Kit`→starterkit map onto our tables. Match
-  on `canonical_brand()` + model string (fuzzy — JSON models like `"Rowan 1.1, 1.2, 1.3"` or
-  `"Slackibloc 4.0 all batches"` cover multiple/variant rows). Report unmatched warnings the same way
-  the ISA auto-sync item does, so the catalog gap is visible rather than silently dropped.
-
-  **Frontend.** Expand the banner into a warning card: status pill colored by severity (Recall = red,
-  Warning = amber, Notice = neutral), the `description`, a "What to do" line from `solution`, the
-  `date`, and the source `link`s. Mirror the new fields in `types/gear.ts` and the `*Public` schemas.
-  Keep the existing `data-cy="isa-warning-banner"` hook (extend, don't break `isa_certification.cy.ts`).
-
-  **Loader/seed.** Add a `load_isa_warnings.py` pass (runs late, like `load_manufacturers.py`) that
-  reads the JSON and populates the new fields/table by matching against already-seeded rows. Note the
-  one dirty date in the source (`"01.07,19"`, id 15) — parse defensively.
-
-  **Relationship to the ISA auto-sync item below:** that job syncs *certification*; this is the
-  *warnings* feed from the same org (`data.slacklineinternational.org/safety/isa-gear-warnings/`).
-  Ideally the auto-sync job eventually refreshes both. See [SlackDB API](slackdb.md) for the
-  original source of this scrape.
+  **Still open from this entry:** the 8 warnings with no gear to point at (see the item above), and
+  the ISA's `productImage` is stored but not yet displayed.
 
 - [ ] **Add bungees as a gear type.** The `Bungee` model already exists on branch
   `bungees_ringpadding` (`slack_data/models/bungees.py`) but has **no seed JSON, no loader, no
