@@ -122,7 +122,7 @@
       "country": "DE",
       "year_established": 2010,
       "slackline_oriented": true,
-      "website": "http://www.elephant-slackline.com",
+      "website": null,
       "facebook": "https://www.facebook.com/ElephantSlacklines",
       "active": false
     },
@@ -177,7 +177,7 @@
       "country": "US",
       "year_established": 2013,
       "slackline_oriented": true,
-      "website": "http://slacklinetechnology.com",
+      "website": null,
       "facebook": "https://www.facebook.com/slacklinetechnology",
       "active": false
     },
@@ -221,7 +221,7 @@
       "country": "AU",
       "year_established": null,
       "slackline_oriented": true,
-      "website": "http://pureslacklines.com.au",
+      "website": null,
       "facebook": "https://www.facebook.com/PureSlacklines",
       "active": false
     },
@@ -265,7 +265,7 @@
       "country": "ES",
       "year_established": null,
       "slackline_oriented": true,
-      "website": "http://ambaradam.net",
+      "website": null,
       "facebook": "https://www.facebook.com/AmbaradaMLongLineLab",
       "active": false
     },
@@ -496,7 +496,7 @@
       "country": "US",
       "year_established": null,
       "slackline_oriented": true,
-      "website": "http://www.balancingearthslacklines.com",
+      "website": null,
       "facebook": "https://www.facebook.com/balancingearthslacklines",
       "active": false
     },
@@ -562,7 +562,7 @@
       "country": "CA",
       "year_established": null,
       "slackline_oriented": true,
-      "website": "http://www.slacklining.ca",
+      "website": null,
       "facebook": "https://www.facebook.com/slackliningcanada",
       "active": false
     },
@@ -595,7 +595,7 @@
       "country": "GB",
       "year_established": null,
       "slackline_oriented": true,
-      "website": "http://zergeoutdoor.com",
+      "website": null,
       "facebook": "https://www.facebook.com/zergeoutdoor",
       "active": false
     },
@@ -672,7 +672,7 @@
       "country": "RU",
       "year_established": 2018,
       "slackline_oriented": true,
-      "website": "https://souzslackline.com",
+      "website": null,
       "facebook": null,
       "active": false
     },
@@ -705,7 +705,7 @@
       "country": "IN",
       "year_established": null,
       "slackline_oriented": true,
-      "website": "https://www.instamojo.com/slackmitra",
+      "website": null,
       "facebook": null,
       "active": true
     },
@@ -793,7 +793,7 @@
       "country": "FR",
       "year_established": 2005,
       "slackline_oriented": true,
-      "website": "http://www.easy-slackline.fr",
+      "website": null,
       "facebook": "https://www.facebook.com/EasySlackline.CO",
       "active": false
     },

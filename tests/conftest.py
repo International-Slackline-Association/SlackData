@@ -94,3 +94,16 @@ def brand(session):
     session.commit()
     session.refresh(b)
     return b
+
+
+def persist(session, obj):
+    """Add, commit, refresh — the four lines every `make_<type>` helper repeated.
+
+    Each test file still builds its own model instance, because the required
+    fields differ per gear type and naming them at the call site is the point of
+    those helpers. Only the session dance is shared.
+    """
+    session.add(obj)
+    session.commit()
+    session.refresh(obj)
+    return obj

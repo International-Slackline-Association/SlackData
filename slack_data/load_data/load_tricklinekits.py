@@ -1,26 +1,20 @@
-import json
-from pathlib import Path
-from typing import Any
 
-from sqlmodel import select
 
 from slack_data.database import SessionDep
-from slack_data.models.brands import Brand, BrandCreate, get_brand
+from slack_data.load_data._seed_io import read_seed_json, seed_path, to_bool
+from slack_data.models.brands import Brand, get_brand
 from slack_data.models.tricklinekits import TricklineKit, TricklineKitCreate, TensioningType
 from slack_data.utilities.currencies import get_currency
 
 
-TRICKLINEKITS_FILE = Path(__file__).parent.parent.parent / "tricklinekits.json"
+TRICKLINEKITS_FILE = seed_path("tricklinekits.json")
 
 
 def load_tricklinekits_json() -> list[dict]:
     """
     Load the tricklinekits data from the `tricklinekits.json` file.
     """
-    if not TRICKLINEKITS_FILE.exists():
-        raise FileNotFoundError(f"Tricklinekits file not found: {TRICKLINEKITS_FILE}")
-    with open(TRICKLINEKITS_FILE, "r", encoding="utf-8") as fh:
-        return json.load(fh)
+    return read_seed_json("tricklinekits.json")
 
 
 def clean_tricklinekit_data(trick: dict) -> dict:
@@ -33,19 +27,9 @@ def clean_tricklinekit_data(trick: dict) -> dict:
         cleaned[k] = None if v == "" else v
 
     # Booleans
-    if "includes_treepro" in cleaned:
-        v = cleaned.get("includes_treepro")
-        if isinstance(v, str):
-            cleaned["includes_treepro"] = v.lower() in ("true", "1", "yes")
-        else:
-            cleaned["includes_treepro"] = bool(v) if v is not None else False
-
-    if "isa_certified" in cleaned:
-        v = cleaned.get("isa_certified")
-        if isinstance(v, str):
-            cleaned["isa_certified"] = v.lower() in ("true", "1", "yes")
-        else:
-            cleaned["isa_certified"] = bool(v) if v is not None else False
+    for key in ("includes_treepro", "isa_certified"):
+        if key in cleaned:
+            cleaned[key] = to_bool(cleaned.get(key))
 
     raw = cleaned.get("tensioning_type")
     if raw is None:
@@ -66,7 +50,6 @@ def add_tricklinekits_to_db(tricks: list[dict], session: SessionDep) -> None:
     Add the loaded tricklinekit and brand data to the database session.
     """
     brand_cache = {}
-    last = None
     for t in tricks:
         sk_for_brand = {"brand": t.get("manufacturer")}
         brand_id, brand_cache = get_brand(session, brand_cache, sk_for_brand)
@@ -101,10 +84,8 @@ def add_tricklinekits_to_db(tricks: list[dict], session: SessionDep) -> None:
         db_tk.brand = session.get(Brand, brand_id)
         print(f"Adding trickline kit: {db_tk.name} by {db_tk.brand.name}")
         session.add(db_tk)
-        last = db_tk
 
     session.commit()
-    session.refresh(last)
 
 
 def load_tricklinekits(session: SessionDep) -> None:

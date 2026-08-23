@@ -23,7 +23,7 @@ export default function DataAccuracyNote({
           : `text-xs text-gray-500 ${className}`
       }
     >
-      Data is community-sourced and may be incomplete.
+      Community-sourced — may be incomplete.
     </span>
   )
 }

@@ -39,11 +39,13 @@ import SpecTable from './SpecTable'
 
 // Kept byte-identical to GearCard's pair so the same button can't look like two
 // different controls depending on which view you're in.
+const pillBtnBase =
+  'inline-flex min-h-10 items-center justify-center rounded-full border px-4 text-xs transition-colors'
 const pillBtn =
-  'rounded-full border border-gray-300 px-3 py-1 text-xs text-gray-600 hover:border-gray-400 hover:text-gray-800 transition-colors disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:border-gray-300 disabled:hover:text-gray-600'
+  `${pillBtnBase} border-gray-300 text-gray-600 hover:border-gray-400 hover:text-gray-800 disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:border-gray-300 disabled:hover:text-gray-600`
 // Selected compare button: teal fill, matching the active filter-pill treatment.
 const pillBtnActive =
-  'rounded-full border border-teal-primary bg-teal-primary px-3 py-1 text-xs font-medium text-white transition-colors'
+  `${pillBtnBase} border-teal-primary bg-teal-primary font-medium text-white`
 
 export default function GearDetailBody({
   item,
@@ -163,24 +165,25 @@ export default function GearDetailBody({
       {/* Only rendered when it has something in it — an empty row would still
           push its mt-6 of dead space under the specs. */}
       {(item.product_url || showActions) && (
-      <div className="mt-6 flex flex-wrap items-center gap-3">
+      <div className="mt-6 flex flex-col items-stretch gap-3 sm:flex-row sm:flex-wrap sm:items-center">
         {item.product_url ? (
           <a
             data-cy="view-product-btn"
             href={String(item.product_url)}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-block rounded-full px-5 py-2 text-sm font-medium text-white"
+            className="inline-flex min-h-11 items-center justify-center rounded-full px-5 text-sm font-medium text-white"
             style={{ backgroundColor: '#00897B' }}
           >
             View product →
           </a>
         ) : null}
 
+        {/* Save and Alert lived here too and were equally inert. Removed for the
+            same reason as on the card — and this panel already carries the real
+            "View product" link above, so Compare is all that is left to offer. */}
         {showActions && (
-          <div className="flex gap-2">
-            <button data-cy="btn-save" type="button" className={pillBtn}>Save</button>
-            <button data-cy="btn-alert" type="button" className={pillBtn}>Alert</button>
+          <div className="flex gap-2 [&>*]:flex-1 sm:[&>*]:flex-none">
             <button
               data-cy="btn-compare"
               type="button"

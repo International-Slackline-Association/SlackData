@@ -1,29 +1,20 @@
-import json
-from pathlib import Path
-from typing import Any
 
-from sqlmodel import select
 
 from slack_data.database import SessionDep
-from slack_data.models.brands import Brand, BrandCreate, get_brand
+from slack_data.load_data._seed_io import read_seed_json, seed_path, to_bool
+from slack_data.models.brands import Brand, get_brand
 from slack_data.models.starterkits import StarterKit, StarterKitCreate, TensioningType
 from slack_data.utilities.currencies import get_currency
 
 
-STARTERKITS_FILE = Path(__file__).parent.parent.parent / "starterkits.json"
+STARTERKITS_FILE = seed_path("starterkits.json")
 
 
 def load_starterkits_json() -> list[dict]:
     """
     Load the starterkits data from the `starterkits.json` file.
     """
-    if not STARTERKITS_FILE.exists():
-        raise FileNotFoundError(f"Starterkits file not found: {STARTERKITS_FILE}")
-
-    with open(STARTERKITS_FILE, "r", encoding="utf-8") as file:
-        starter_kit_data = json.load(file)
-
-    return starter_kit_data
+    return read_seed_json("starterkits.json")
 
 
 def clean_starterkit_data(starterkit: dict) -> dict:
@@ -39,19 +30,9 @@ def clean_starterkit_data(starterkit: dict) -> dict:
             cleaned_kits[key] = value
 
     # Booleans
-    if "includes_treepro" in cleaned_kits:
-        v = cleaned_kits.get("includes_treepro")
-        if isinstance(v, str):
-            cleaned_kits["includes_treepro"] = v.lower() in ("true", "1", "yes")
-        else:
-            cleaned_kits["includes_treepro"] = bool(v) if v is not None else False
-
-    if "isa_certified" in cleaned_kits:
-        v = cleaned_kits.get("isa_certified")
-        if isinstance(v, str):
-            cleaned_kits["isa_certified"] = v.lower() in ("true", "1", "yes")
-        else:
-            cleaned_kits["isa_certified"] = bool(v) if v is not None else False
+    for key in ("includes_treepro", "isa_certified"):
+        if key in cleaned_kits:
+            cleaned_kits[key] = to_bool(cleaned_kits.get(key))
 
     # Normalize tensioning type to one of the model's enum value strings.
     raw_t = cleaned_kits.get("tensioning_type")
@@ -113,7 +94,6 @@ def add_starterkits_to_db(starterkits: list[dict], session: SessionDep) -> None:
         session.add(db_sk)
 
     session.commit()
-    session.refresh(db_sk)
 
 
 def load_starterkits(session: SessionDep) -> None:

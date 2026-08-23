@@ -556,8 +556,6 @@ describe('Webbing classification is not a filter', () => {
 //   - Clicking the engaged pill deselects it, returning the widget to inactive.
 
 describe('Webbing stretch filter', () => {
-  const api = () => Cypress.env('apiUrl')
-
   // Helper: parse stretch JSON and return kN values present in a single item.
   // Skip malformed points with no numeric kn (some data has stray {percent}
   // entries) — the widget excludes them too, so they must not count as pills.

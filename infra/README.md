@@ -1,6 +1,6 @@
 # Deploying SlackData (serverless, Phase 1 — public read-only)
 
-Architecture recap (see [../GOING_LIVE.md](../GOING_LIVE.md) for the full plan):
+Architecture recap (see [../LAUNCH_RUNBOOK.md §0.2](../LAUNCH_RUNBOOK.md) for the full picture):
 
 - **API** — FastAPI as a container-image **Lambda** behind an **HTTP API**. The gear catalog is
   baked into a **read-only SQLite** file inside the image at build time, so there's no database to

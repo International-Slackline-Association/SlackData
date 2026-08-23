@@ -1,11 +1,9 @@
-import json
 import re
-from pathlib import Path
 from typing import Any
 
-from sqlmodel import select
 from slack_data.database import SessionDep
-from slack_data.models.brands import Brand, BrandCreate, get_brand
+from slack_data.load_data._seed_io import read_seed_json, seed_path
+from slack_data.models.brands import Brand, get_brand
 from slack_data.models.weblocks import (
     AttachmentPoint,
     FrontPin,
@@ -13,11 +11,10 @@ from slack_data.models.weblocks import (
     WeblockCreate,
     WeblockStyle,
 )
-from slack_data.utilities.materials import MetalMaterial, get_metal_material
+from slack_data.utilities.materials import get_metal_material
 from slack_data.utilities.currencies import Currency, get_currency
-from slack_data.utilities.isa_warnings import ISAWarning
 
-WEBLOCKS_FILE = Path(__file__).parent.parent.parent / "weblocks.json"
+WEBLOCKS_FILE = seed_path("weblocks.json")
 
 def parse_numerical_value(value_str: str | None, remove_suffix: str = "") -> float | None:
     if value_str is None:
@@ -105,10 +102,6 @@ def add_weblocks_to_db(weblocks: list[dict], session: SessionDep) -> None:
         weblock_for_brand = {"brand": weblock.get("raw_brand_name")}
         brand_id, brand_cache = get_brand(session, brand_cache, weblock_for_brand)
 
-        material = get_metal_material(str(weblock.get("material", "")))
-        front_pin = get_front_pin_type(str(weblock.get("front_pin", "")))
-        attachment_point = get_attachment_point(str(weblock.get("attachment_point", "")))
-
         weblock_create = WeblockCreate(
             name=weblock.get("raw_name", "Unknown Weblock"),
             brand_id=brand_id,
@@ -138,7 +131,6 @@ def add_weblocks_to_db(weblocks: list[dict], session: SessionDep) -> None:
         session.add(db_weblock)
     
     session.commit()
-    session.refresh(db_weblock)
     
 def get_weblock_style(style_input: str | None) -> WeblockStyle | None:
     """
@@ -279,13 +271,7 @@ def parse_boolean_isa(value_str: str | None) -> bool:
     return False
 
 def load_weblocks_json() -> list[dict]:
-    if not WEBLOCKS_FILE.exists():
-        raise FileNotFoundError(f"Weblock JSON file not found: {WEBLOCKS_FILE}")
-
-    with open(WEBLOCKS_FILE, "r", encoding="utf-8") as file:
-        weblock_data = json.load(file)
-    
-    return weblock_data
+    return read_seed_json("weblocks.json")
 
 def load_weblocks(session: SessionDep) -> None:
     raw_weblocks_data = load_weblocks_json()

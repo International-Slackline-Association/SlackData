@@ -6,17 +6,19 @@
 // reads as random when scanning a brand's catalogue for one product. See
 // DESIGN.md § Manufacturers Page → Detail page gear sections.
 //
-// Deliberately dependency-free (only erased `import type`s), so `npm run
-// test:unit` can load it under node --experimental-strip-types without the `@/`
-// alias or a bundler. The collapse behaviour it feeds is DOM state and lives in
-// cypress/e2e/manufacturers.cy.ts.
+// Deliberately dependency-free (only ./compare, which is held to the same bar),
+// so `npm run test:unit` can load it under node --experimental-strip-types
+// without the `@/` alias or a bundler. The collapse behaviour it feeds is DOM
+// state and lives in cypress/e2e/manufacturers.cy.ts.
 
-// Structurally the minimum this module needs; the real callers pass
-// GearTypeMeta and AnyItem/GearItem.
-interface NamedItem {
-  name?: unknown
-  brand_name?: unknown
-}
+// `compareByName` / `sortByName` live in ./compare and are re-exported here so
+// the existing callers (and tests/unit/brandSections.test.ts) keep their import
+// path. The relative specifier matters: this module is loaded by
+// `npm run test:unit` under node --experimental-strip-types, where `@/` does
+// not resolve.
+export { compareByName, sortByName } from './compare.ts'
+import { sortByName } from './compare.ts'
+import type { NamedItem } from './compare.ts'
 
 interface Slugged {
   slug: string
@@ -25,16 +27,6 @@ interface Slugged {
 export interface BrandSection<TMeta, TItem> {
   type: TMeta
   items: TItem[]
-}
-
-// Alphabetical by name, ascending — the same comparison the listing's default
-// sort uses (utils/sort.ts), so a brand's gear reads identically in both places.
-export function compareByName(a: NamedItem, b: NamedItem): number {
-  return String(a.name ?? '').localeCompare(String(b.name ?? ''))
-}
-
-export function sortByName<T extends NamedItem>(items: readonly T[]): T[] {
-  return [...items].sort(compareByName)
 }
 
 /**

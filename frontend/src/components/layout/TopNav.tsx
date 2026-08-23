@@ -1,8 +1,11 @@
 // Persistent top navigation, two tiers:
 //   Tier 1 (fixed height): wordmark + manufacturers link — the stable upper area.
-//   Tier 2: gear-category tabs. Fixed-size tabs that WRAP onto more rows on
-//           narrow/mobile widths (the header grows downward) rather than
-//           scrolling horizontally.
+//   Tier 2: gear-category tabs. A single row that SCROLLS horizontally when it
+//           doesn't fit. This reverses an earlier decision to wrap instead:
+//           wrapping put 10 tabs onto ~5 rows at 390px, i.e. 200px+ of
+//           permanently sticky chrome on a phone. The strip keeps the header at
+//           a stable ~100px and the active tab is auto-centred, so the current
+//           category is never scrolled off-screen. Don't "fix" it back to wrap.
 //
 // Contract (navigation.cy.ts + manufacturers.cy.ts):
 //   [data-cy="nav-tab"]            one per data-backed gear type (exactly 8)
@@ -23,7 +26,7 @@ function isSectionActive(pathname: string, base: string): boolean {
 }
 
 const tabClass = (active: boolean, muted = false) =>
-  `whitespace-nowrap px-3 py-2 text-sm border-b-2 -mb-px transition-colors ${
+  `flex min-h-11 shrink-0 snap-start items-center whitespace-nowrap px-3 text-sm border-b-2 -mb-px transition-colors ${
     active
       ? 'text-teal-primary border-teal-primary font-semibold'
       : muted
@@ -40,6 +43,25 @@ export default function TopNav() {
   // can pin itself just below the nav. Tier-2 tabs wrap onto more rows on narrow
   // widths, so the header height is variable — observe it instead of hard-coding.
   const headerRef = useRef<HTMLElement>(null)
+  const stripRef = useRef<HTMLElement>(null)
+  const activeTabRef = useRef<HTMLAnchorElement>(null)
+
+  // Centre the active tab in the scroll strip whenever the route changes, so the
+  // category you are on is always visible even though the strip overflows on a
+  // phone. Scoped to the strip's own scrollLeft rather than scrollIntoView(),
+  // which would also scroll the PAGE — jumping you past the results on every
+  // navigation.
+  useLayoutEffect(() => {
+    const strip = stripRef.current
+    const tab = activeTabRef.current
+    if (!strip || !tab) return
+    if (strip.scrollWidth <= strip.clientWidth) return
+    strip.scrollTo({
+      left: tab.offsetLeft - (strip.clientWidth - tab.offsetWidth) / 2,
+      behavior: 'instant' as ScrollBehavior,
+    })
+  }, [pathname])
+
   useLayoutEffect(() => {
     const header = headerRef.current
     if (!header) return
@@ -72,7 +94,7 @@ export default function TopNav() {
       className="bg-white border-b border-gray-200 sticky top-0 z-20"
     >
       {/* Tier 1 — fixed upper area */}
-      <div className="max-w-7xl mx-auto px-6 h-14 flex items-center justify-between gap-4">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between gap-2 sm:gap-4">
         <Link
           to="/webbings"
           data-cy="wordmark"
@@ -82,7 +104,7 @@ export default function TopNav() {
         </Link>
         {/* Right side: the currency selector sits beside Manufacturers on every
             page, not just listings — prices appear on detail and compare too. */}
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2 sm:gap-4">
           <Link
             to="/manufacturers"
             data-cy="manufacturers-link"
@@ -97,8 +119,9 @@ export default function TopNav() {
 
       {/* Tier 2 — category tabs, wrap on small screens */}
       <nav
+        ref={stripRef}
         aria-label="Gear categories"
-        className="max-w-7xl mx-auto px-6 flex flex-wrap items-center gap-x-1 border-t border-gray-100"
+        className="max-w-7xl mx-auto px-4 sm:px-6 flex flex-nowrap items-center gap-x-1 overflow-x-auto scrollbar-none snap-x scroll-px-4 border-t border-gray-100"
       >
         {ALL_GEAR_TYPES.map(({ slug, label, available }) => {
           const active = isSectionActive(pathname, `/${slug}`)
@@ -106,6 +129,7 @@ export default function TopNav() {
             <Link
               key={slug}
               to={`/${slug}`}
+              ref={active ? activeTabRef : undefined}
               onClick={e => goToTab(e, slug)}
               data-cy={available ? 'nav-tab' : 'nav-tab-upcoming'}
               data-type={slug}

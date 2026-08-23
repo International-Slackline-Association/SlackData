@@ -1,8 +1,8 @@
 """Tests for the /weblock endpoints."""
 
+from conftest import persist
+
 from slack_data.models.weblocks import (
-    AttachmentPoint,
-    FrontPin,
     Weblock,
     WeblockStyle,
 )
@@ -17,10 +17,7 @@ def make_weblock(session, brand, *, name="Test Weblock", width_min=25, **kwargs)
         brand_id=brand.id,
         **kwargs,
     )
-    session.add(w)
-    session.commit()
-    session.refresh(w)
-    return w
+    return persist(session, w)
 
 
 # --- LIST ---

@@ -268,7 +268,7 @@
         "notes": null,
         "manufacturer": "ZERGE outdoor",
         "date_introduced": null,
-        "product_url": "http://zergeoutdoor.com/product/zero-silver-stainless-ring/",
+        "product_url": null,
         "active": false
     },
     {
@@ -284,7 +284,7 @@
         "notes": null,
         "manufacturer": "ZERGE outdoor",
         "date_introduced": null,
-        "product_url": "http://zergeoutdoor.com/product/zero-black-ultralight-ring/",
+        "product_url": null,
         "active": false
     },
     {
@@ -348,7 +348,7 @@
         "notes": null,
         "manufacturer": "ZERGE outdoor",
         "date_introduced": null,
-        "product_url": "http://zergeoutdoor.com/product/zero-gold-ultralight-ring/",
+        "product_url": null,
         "active": false
     },
     {
@@ -380,7 +380,7 @@
         "notes": null,
         "manufacturer": "Souz Slackline",
         "date_introduced": 1533448800000,
-        "product_url": "https://souzslackline.com/product/leasring/?currency=USD",
+        "product_url": null,
         "active": false
     },
     {

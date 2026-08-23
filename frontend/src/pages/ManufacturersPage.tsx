@@ -13,8 +13,10 @@
 //    [data-cy="manufacturers-card"] can never double-count across view modes
 //    (the trap Phase 6.5 hit with the detailed list).
 
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import FilterGroup from '@/components/gear/FilterGroup'
+import Sheet from '@/components/layout/Sheet'
+import { useIsDesktop } from '@/hooks/useMediaQuery'
 import ManufacturerCard from '@/components/brand/ManufacturerCard'
 import { useBrandDirectory, type BrandWithCounts } from '@/hooks/useBrandDirectory'
 
@@ -34,6 +36,15 @@ export default function ManufacturersPage() {
   const [sort, setSort] = useState<SortKey>('gear')
   const [query, setQuery] = useState('')
   const [countries, setCountries] = useState<string[]>([])
+
+  // Same rule as the gear listing: below `lg` the country aside has no room, so
+  // it moves into a bottom sheet. Mounted one place or the other, never both —
+  // [data-cy="manufacturer-filters"] and its pills must stay single-instance.
+  const isDesktop = useIsDesktop()
+  const [filtersOpen, setFiltersOpen] = useState(false)
+  useEffect(() => {
+    if (isDesktop) setFiltersOpen(false)
+  }, [isDesktop])
 
   // Only the country values actually present in the data become pills.
   const countryOptions = useMemo(
@@ -84,9 +95,9 @@ export default function ManufacturersPage() {
     <div data-cy="manufacturers-page">
       <h1 className="mb-6 text-2xl font-bold text-gray-900">Manufacturers</h1>
 
-      <div className="flex gap-8">
+      <div className="flex flex-col lg:flex-row lg:gap-8">
         {/* The sidebar only earns its space once there's something to filter by. */}
-        {countryOptions.length > 0 && (
+        {countryOptions.length > 0 && isDesktop && (
           <aside data-cy="manufacturer-filters" className="w-64 shrink-0">
             <FilterGroup group="country" label="Country">
               <div className="flex flex-wrap gap-1.5">
@@ -100,7 +111,7 @@ export default function ManufacturersPage() {
                       data-active={active ? 'true' : 'false'}
                       type="button"
                       onClick={() => toggleCountry(c)}
-                      className={`rounded-full border px-2.5 py-1 text-xs transition-colors ${
+                      className={`inline-flex min-h-9 items-center rounded-full border px-3.5 text-xs transition-colors sm:min-h-0 sm:px-2.5 sm:py-1 ${
                         active
                           ? 'border-teal-primary bg-teal-light text-teal-primary'
                           : 'border-gray-300 bg-white text-gray-600 hover:border-gray-400'
@@ -117,19 +128,44 @@ export default function ManufacturersPage() {
 
         <div className="min-w-0 flex-1">
           <div className="mb-6 flex flex-wrap items-center gap-3">
+            {/* Mobile entry point to the country filter — rendered only when
+                there is a country to filter by, which today there never is (see
+                the note at the top of this file). */}
+            {countryOptions.length > 0 && !isDesktop && (
+              <button
+                data-cy="mobile-filter-btn"
+                data-count={countries.length}
+                type="button"
+                onClick={() => setFiltersOpen(true)}
+                className={
+                  'order-2 flex min-h-11 items-center gap-1.5 rounded-full border px-4 text-sm ' +
+                  (countries.length > 0
+                    ? 'border-teal-primary bg-teal-light text-teal-primary'
+                    : 'border-gray-300 bg-white text-gray-700')
+                }
+              >
+                Filters
+                {countries.length > 0 && (
+                  <span className="rounded-full bg-teal-primary px-1.5 py-0.5 text-[11px] font-semibold text-white">
+                    {countries.length}
+                  </span>
+                )}
+              </button>
+            )}
             <input
               data-cy="manufacturer-search"
               type="search"
               value={query}
               onChange={e => setQuery(e.target.value)}
               placeholder="Search manufacturers…"
-              className="w-64 rounded-lg border border-gray-300 px-3 py-1.5 text-sm focus:border-teal-primary focus:outline-none"
+              // text-base below sm: iOS Safari zooms the page on focus under 16px.
+              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-base focus:border-teal-primary focus:outline-none sm:w-64 sm:py-1.5 sm:text-sm"
             />
             <span data-cy="item-count" className="text-sm text-gray-500">
               {visible.length} {visible.length === 1 ? 'manufacturer' : 'manufacturers'}
             </span>
 
-            <label className="ml-auto flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-gray-500">
+            <label className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-gray-500 sm:ml-auto">
               Sort by
               <select
                 data-cy="manufacturer-sort"
@@ -168,7 +204,7 @@ export default function ManufacturersPage() {
               </button>
             </div>
           ) : (
-            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3">
               {visible.map(brand => (
                 <ManufacturerCard key={brand.id} brand={brand} />
               ))}
@@ -176,6 +212,39 @@ export default function ManufacturersPage() {
           )}
         </div>
       </div>
+
+      {/* The mobile home for the country aside. Mounted only while open, so the
+          aside and its pills stay single-instance in the DOM. */}
+      {filtersOpen && (
+        <Sheet title="Filters" onClose={() => setFiltersOpen(false)}>
+          <aside data-cy="manufacturer-filters">
+            <FilterGroup group="country" label="Country">
+              <div className="flex flex-wrap gap-1.5">
+                {countryOptions.map(c => {
+                  const active = countries.includes(c)
+                  return (
+                    <button
+                      key={c}
+                      data-cy="filter-pill"
+                      data-value={c}
+                      data-active={active ? 'true' : 'false'}
+                      type="button"
+                      onClick={() => toggleCountry(c)}
+                      className={`inline-flex min-h-9 items-center rounded-full border px-3.5 text-xs transition-colors ${
+                        active
+                          ? 'border-teal-primary bg-teal-light text-teal-primary'
+                          : 'border-gray-300 bg-white text-gray-600'
+                      }`}
+                    >
+                      {c}
+                    </button>
+                  )
+                })}
+              </div>
+            </FilterGroup>
+          </aside>
+        </Sheet>
+      )}
     </div>
   )
 }

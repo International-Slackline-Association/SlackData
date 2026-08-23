@@ -1,4 +1,5 @@
-// Card grid (3 columns at ≥lg, per DESIGN.md). `className` lets the page hide it
+// Card grid (3 columns at ≥xl — below that the filter sidebar shares the row,
+// and three cards in the remainder are too narrow to read; see DESIGN.md). `className` lets the page hide it
 // (display:none) when the Detailed view is active while keeping it in the DOM.
 
 import type { GearTypeMeta } from '@/config/gearTypes'
@@ -23,7 +24,7 @@ export default function GearGrid({
   return (
     <div
       data-cy="gear-grid"
-      className={`grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 ${className}`}
+      className={`grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3 ${className}`}
     >
       {items.map(item => {
         const selected = selectedIds.includes(Number(item.id))

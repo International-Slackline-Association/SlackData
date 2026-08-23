@@ -1697,7 +1697,7 @@
         "isa_certified": false,
         "priceMeter": 1.4,
         "currency": "EUR",
-        "active": true
+        "active": false
     },
     {
         "name": "Moonwalk",
@@ -6227,7 +6227,7 @@
             }
         ],
         "date_introduced": null,
-        "product_url": "http://ambaradam.net/product/sin-mas/",
+        "product_url": null,
         "webbing_construction": "Flat",
         "isa_certified": false,
         "priceMeter": 0.95,
@@ -6491,7 +6491,7 @@
             }
         ],
         "date_introduced": null,
-        "product_url": "http://www.balancingearthslacklines.com/slackline_webbing_flat_nylon_type_18_cg4_slackline_p/cg4.htm",
+        "product_url": null,
         "thickness": 3,
         "webbing_construction": "Flat",
         "isa_certified": false,
@@ -6508,7 +6508,7 @@
         "breakingStrength": 20,
         "stretch": null,
         "date_introduced": null,
-        "product_url": "http://www.balancingearthslacklines.com/webbing_tubular_rasta_slackline_balancing_earth_p/rtw.htm",
+        "product_url": null,
         "thickness": 2.2,
         "webbing_construction": "Tubular",
         "isa_certified": false,
@@ -6671,7 +6671,7 @@
             }
         ],
         "date_introduced": null,
-        "product_url": "http://www.slacklining.ca/shop/alfa/",
+        "product_url": null,
         "thickness": 3.1,
         "webbing_construction": "Flat",
         "isa_certified": false,
@@ -6699,7 +6699,7 @@
         "isa_certified": false,
         "priceMeter": 1.59,
         "currency": "EUR",
-        "active": true
+        "active": false
     },
     {
         "name": "Flamme III",
@@ -6817,7 +6817,7 @@
         "isa_certified": false,
         "priceMeter": 2.3,
         "currency": "EUR",
-        "active": true
+        "active": false
     },
     {
         "name": "Verve 25mm",
@@ -7461,7 +7461,7 @@
             }
         ],
         "date_introduced": null,
-        "product_url": "https://souzslackline.com/product/violet",
+        "product_url": null,
         "webbing_construction": "Flat",
         "isa_certified": false,
         "priceMeter": 47.53,
@@ -7674,7 +7674,7 @@
         "name": "SuperTape 19mm",
         "brand": "Edelrid",
         "materialType": "Nylon",
-        "width": 18,
+        "width": 19,
         "weight": 35,
         "breakingStrength": 15,
         "stretch": null,
@@ -7731,7 +7731,7 @@
             }
         ],
         "date_introduced": null,
-        "product_url": "https://slack-inov.com/gb/longline/106-abysses-bounce-sold-by-meter",
+        "product_url": "https://slack-inov.com/shop/en/highline-webbing/347-abysses-bounce-longline-9506919000.html",
         "webbing_construction": "Flat",
         "isa_certified": false,
         "priceMeter": 2.6,

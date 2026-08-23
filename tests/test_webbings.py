@@ -4,7 +4,8 @@ Tests for the /webbing endpoints.
 Covers: CRUD contract, pagination edge cases, response schema.
 """
 
-import pytest
+from conftest import persist
+
 from sqlmodel import Session
 
 from slack_data.models.brands import Brand
@@ -17,10 +18,7 @@ from slack_data.models.webbing import FiberMaterial, Webbing
 
 def make_brand(session: Session, name: str = "Test Brand") -> Brand:
     brand = Brand(name=name)
-    session.add(brand)
-    session.commit()
-    session.refresh(brand)
-    return brand
+    return persist(session, brand)
 
 
 def make_webbing(
@@ -39,10 +37,7 @@ def make_webbing(
         brand_id=brand.id,
         **kwargs,
     )
-    session.add(webbing)
-    session.commit()
-    session.refresh(webbing)
-    return webbing
+    return persist(session, webbing)
 
 
 # ---------------------------------------------------------------------------

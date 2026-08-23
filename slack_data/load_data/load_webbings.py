@@ -1,11 +1,10 @@
 import ast
 import json
-from pathlib import Path
 
-from sqlmodel import select
 
 from slack_data.database import SessionDep
-from slack_data.models.brands import Brand, BrandCreate, get_brand
+from slack_data.load_data._seed_io import read_seed_json, seed_path
+from slack_data.models.brands import Brand, get_brand
 from slack_data.models.webbing import (
     FiberMaterial,
     Webbing,
@@ -16,19 +15,13 @@ from slack_data.models.webbing import (
 from slack_data.utilities.currencies import Currency
 
 
-WEBBING_FILE = Path(__file__).parent.parent.parent / "webbings.json"
+WEBBING_FILE = seed_path("webbings.json")
 
 def load_webbings_json() -> list[dict]:
     """
     Load the webbing data from the ISA's `webbing.json` file.
     """
-    if not WEBBING_FILE.exists():
-        raise FileNotFoundError(f"Webbing file not found: {WEBBING_FILE}")
-
-    with open(WEBBING_FILE, "r", encoding="utf-8") as file:
-        webbing_data = json.load(file)
-
-    return webbing_data
+    return read_seed_json("webbings.json")
 
 def clean_webbing_data(webbing: dict) -> dict:
     """
@@ -99,7 +92,6 @@ def add_webbings_to_db(webbings: list[dict], session: SessionDep) -> None:
         session.add(db_webbing)
 
     session.commit()
-    session.refresh(db_webbing)
 
 def get_material_types(material_type, composition) -> list[FiberMaterial]:
     """Resolve a webbing's fibers into the multi-select `material` list.

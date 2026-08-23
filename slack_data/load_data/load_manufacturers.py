@@ -19,11 +19,10 @@ Country arrives as an ISO alpha-2 code ("DE") and is stored as the Country enum'
 full display name ("Germany") via `get_country()`.
 """
 
-import json
-from pathlib import Path
 
 from sqlmodel import select
 
+from slack_data.load_data._seed_io import read_seed_json
 from slack_data.models.brands import Brand
 from slack_data.utilities.brand_aliases import canonical_brand
 from slack_data.utilities.countries import get_country
@@ -31,9 +30,7 @@ from slack_data.utilities.countries import get_country
 
 def load_manufacturers_json() -> dict:
     """The root manufacturers.json — {"metadata": {...}, "manufacturers": {id: {...}}}."""
-    path = Path(__file__).parent.parent.parent / "manufacturers.json"
-    with open(path, encoding="utf-8") as f:
-        return json.load(f)
+    return read_seed_json("manufacturers.json")
 
 
 def clean_manufacturer_data(raw: dict) -> dict[str, dict]:

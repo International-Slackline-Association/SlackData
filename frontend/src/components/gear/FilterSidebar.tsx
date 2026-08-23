@@ -113,7 +113,11 @@ function Pill({
       data-active={active ? 'true' : 'false'}
       onClick={onClick}
       className={
-        'rounded-full border px-3 py-1 text-xs transition-colors ' +
+        // min-h-9 (36px) rather than the 44px used for primary controls: pills
+        // sit in dense wrapping groups where 44px would push the longer filter
+        // lists past a phone screen, and they are large, well-spaced targets in
+        // both axes already.
+        'inline-flex min-h-9 items-center rounded-full border px-3.5 text-xs transition-colors sm:min-h-0 sm:px-3 sm:py-1 ' +
         (active
           ? 'border-teal-primary bg-teal-50 text-teal-primary'
           : 'border-gray-300 bg-white text-gray-600 hover:border-gray-400 hover:text-gray-800')
@@ -192,6 +196,7 @@ export default function FilterSidebar({
   status,
   onStatusChange,
   onClearAll,
+  variant = 'sidebar',
   children,
 }: {
   meta: GearTypeMeta
@@ -200,6 +205,11 @@ export default function FilterSidebar({
   status: Status
   onStatusChange: (next: Status) => void
   onClearAll: () => void // clears filters + search + status (the page owns status)
+  // 'sidebar' — the desktop column: fixed width, sticky, self-scrolling.
+  // 'sheet'   — inside the mobile bottom sheet, which owns width and scrolling.
+  // The component is rendered ONCE either way (the page picks by matchMedia, not
+  // by `hidden lg:block`) so [data-cy="filter-sidebar"] stays single-instance.
+  variant?: 'sidebar' | 'sheet'
   children?: React.ReactNode // webbing stretch widget slots in here
 }) {
   const groups = filterGroupsFor(meta.slug)
@@ -211,17 +221,37 @@ export default function FilterSidebar({
   return (
     <aside
       data-cy="filter-sidebar"
-      className="flex w-[280px] shrink-0 flex-col self-start sticky top-[calc(var(--header-h,96px)+1rem)] max-h-[calc(100vh-var(--header-h,96px)-6rem)]"
+      data-variant={variant}
+      className={
+        variant === 'sheet'
+          ? // The Sheet supplies the height cap and the scrolling. Keeping the
+            // aside's own sticky/max-h here would nest a second scroll region
+            // inside the sheet's — two scrollbars fighting one swipe.
+            'flex w-full flex-col'
+          : 'flex w-[280px] shrink-0 flex-col self-start sticky top-[calc(var(--header-h,96px)+1rem)] max-h-[calc(100vh-var(--header-h,96px)-6rem)]'
+      }
     >
       {/* Lifecycle scope comes first — it bounds everything below it, so it is
           pinned outside the scroll region and never scrolls away. */}
-      <div className="shrink-0">
+      {/* In the sheet the bubble sticks to the top of the sheet's scroll region
+          instead, which keeps DESIGN.md's "the scope control never scrolls away"
+          true in both layouts. */}
+      <div
+        className={
+          variant === 'sheet' ? 'sticky top-0 z-10 -mt-1 bg-white pb-1 pt-1' : 'shrink-0'
+        }
+      >
         <StatusToggle status={status} onChange={onStatusChange} />
       </div>
 
       {/* Everything below the bubble scrolls as one. `min-h-0` lets this shrink
           under the aside's max-height, which is what turns on the scrollbar. */}
-      <div data-cy="filter-scroll" className="min-h-0 flex-1 overflow-y-auto pb-4">
+      <div
+        data-cy="filter-scroll"
+        className={
+          variant === 'sheet' ? 'pb-2' : 'min-h-0 flex-1 overflow-y-auto pb-4'
+        }
+      >
         <div className="mb-3 flex items-center justify-between">
           <div
             data-cy="filter-sidebar-header"

@@ -1,5 +1,7 @@
 """Tests for the /tricklinekit endpoints."""
 
+from conftest import persist
+
 from slack_data.models.tricklinekits import TensioningType, TricklineKit
 
 
@@ -12,10 +14,7 @@ def make_tricklinekit(session, brand, *, name="Test Trickline Kit", webbing_leng
         brand_id=brand.id,
         **kwargs,
     )
-    session.add(k)
-    session.commit()
-    session.refresh(k)
-    return k
+    return persist(session, k)
 
 
 # --- LIST ---

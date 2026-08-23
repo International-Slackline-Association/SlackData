@@ -144,3 +144,31 @@ export function applyFilters(
     item => passesPills(item, activePills) && passesRanges(item, activeRanges),
   )
 }
+
+// How many filters are currently engaged, for the mobile "Filters (n)" button.
+// On desktop the sidebar shows its own state, so the count is only needed where
+// the controls are hidden behind a sheet — the badge is the sole signal that the
+// list you are looking at is narrowed at all.
+//
+// Counting rule: one per pill group with ≥1 value selected, one per range group
+// with either bound set, plus one for a non-default status scope and one for an
+// engaged stretch filter. Groups, not individual pills — "Material (3 selected)"
+// is one decision, and counting pills would inflate the badge past the number of
+// things you'd have to undo.
+export function activeFilterCount(
+  groups: readonly FilterGroupMeta[],
+  params: URLSearchParams,
+  extras: { statusScoped?: boolean; stretchEngaged?: boolean } = {},
+): number {
+  let n = 0
+  for (const meta of groups) {
+    if (meta.type === 'range') {
+      if (params.get(`${meta.group}_min`) || params.get(`${meta.group}_max`)) n += 1
+    } else if ((params.get(meta.group) ?? '') !== '') {
+      n += 1
+    }
+  }
+  if (extras.statusScoped) n += 1
+  if (extras.stretchEngaged) n += 1
+  return n
+}

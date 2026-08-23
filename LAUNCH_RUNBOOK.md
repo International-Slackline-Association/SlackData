@@ -4,10 +4,54 @@ Step-by-step procedure to deploy the Phase-1 (public, read-only) stack into the 
 and put it behind `slackdata.org`. Written to be followed by a human **or** by an agent working
 alongside a human.
 
-- **What** is being deployed and **why** it looks like this → [GOING_LIVE.md](GOING_LIVE.md)
+- **What** is being deployed and **why** it looks like this → §0.2 below
 - **The deploy commands in isolation** → [infra/README.md](infra/README.md)
 - **This file** is the end-to-end sequence, including the credential handling, the domain, the TLS
   certificate, and the things that are currently broken and must be fixed before the first deploy.
+
+---
+
+## 0.2 What is being deployed, and why it looks like this
+
+Everything about keeping this cheap, serverless and future-proof comes from one split:
+
+| Domain | Nature | Where it lives | Who writes |
+|--------|--------|----------------|------------|
+| **Catalog** (the ~500 gear rows) | **read-only**, derived from the repo's version-controlled `*.json` | a **pre-built SQLite file baked into the Lambda**, opened read-only | nobody at runtime — updated by editing JSON + redeploying |
+| **Submissions** (suggestions & corrections) | **append-only**, grows over time | **DynamoDB** (on-demand, ≈$0 idle — the ISA's native tool) | the anonymous public, via form POSTs; read by the admin |
+
+The catalog never becomes writable. A "correction" is a *text note to the admin*, not a live edit —
+the admin folds it into the JSON and redeploys. This is why SQLite stays for the catalog (great at
+the relational filtering the app does) **and** why submissions go to DynamoDB (perfect for flat,
+append-only records): no DynamoDB rewrite of the catalog, no relational server for submissions.
+Because the two domains are separate, the feedback features are purely **additive** — nothing built
+for the read-only launch had to change to add them. See [SUBMISSIONS_PLAN.md](SUBMISSIONS_PLAN.md),
+which **folds the single admin login into Phase 2 rather than deferring it** — the open write
+endpoints have to be closed and the admin surface authenticated in the same pass.
+
+```
+                     ┌──────────────── CloudFront (one domain) ────────────────┐
+   browser ────────► │  default behavior   /*     → S3  (React SPA + images)   │
+                     │  path behavior      /api/* → API Gateway → Lambda        │
+                     └──────────────────────────────┬──────────────────────────┘
+                                                     │
+                              ┌──────────────────────┴───────────────────────┐
+                              │  Lambda: FastAPI (via Mangum)                 │
+                              │   ├─ read catalog  → baked read-only SQLite   │
+                              │   └─ write/read submissions → DynamoDB        │
+                              └───────────────────────────────────────────────┘
+```
+
+| Piece | Service | Idle cost |
+|-------|---------|-----------|
+| Website (SPA + 62 MB images) | **S3 + CloudFront** (static, client-rendered) | ≈$0 |
+| Read API | **Lambda** (FastAPI + Mangum) behind **API Gateway** | ≈$0 |
+| Catalog data | **read-only SQLite baked into the Lambda package** | $0 |
+| Submissions | **DynamoDB** (on-demand billing) | ≈$0 |
+| Admin login | **Cognito**, one user | ≈$0 |
+
+Putting the API under `/api/*` on the **same CloudFront domain** means the SPA makes **same-origin**
+requests — no CORS in production at all.
 
 ---
 
@@ -724,7 +768,7 @@ refuse to delete it. The ACM certificate and hosted zone are created outside the
 
 ## 10. Before this is really "public"
 
-Carried over from [GOING_LIVE.md §6](GOING_LIVE.md) — these are launch-blocking in the reputational
+These are launch-blocking in the reputational
 sense, under the ISA's name, not the technical one:
 
 - [x] ~~**Image rights.**~~ Resolved by the ISA (confirmed 2026-08-17).

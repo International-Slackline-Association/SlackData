@@ -40,7 +40,9 @@ export default function StatusToggle({
             data-active={active ? 'true' : 'false'}
             onClick={() => onChange(opt.value)}
             className={
-              'flex-1 rounded-full px-2 py-2 text-xs font-semibold uppercase tracking-wide transition-colors ' +
+              // Full 44px targets on touch; unchanged from sm up, where the
+              // bubble sits in the desktop sidebar.
+              'min-h-11 flex-1 rounded-full px-2 text-xs font-semibold uppercase tracking-wide transition-colors sm:min-h-0 sm:py-2 ' +
               (divided ? 'border-l border-gray-200 ' : '')
             }
             style={

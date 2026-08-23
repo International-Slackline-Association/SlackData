@@ -14,7 +14,7 @@
         "currency": "EUR",
         "manufacturer": "Slack Pro!",
         "date_introduced": null,
-        "product_url": "https://www.linegrip.com/shop/custom-color-design-linegrip-g4-sbr/",
+        "product_url": "https://www.linegrip.com/linegrip-model-archive-history-chronology/",
         "active": false
     },
     {
@@ -32,7 +32,7 @@
         "currency": "RUB",
         "manufacturer": "Souz Slackline",
         "date_introduced": null,
-        "product_url": "https://souzslackline.com/product/stropochvat-2-2/",
+        "product_url": "https://www.slackshop.cz/en/linegrip/125-snatch-v22.html",
         "active": false
     },
     {
@@ -68,7 +68,7 @@
         "currency": "RUB",
         "manufacturer": "Souz Slackline",
         "date_introduced": null,
-        "product_url": "https://souzslackline.com/product/snatch-2-2trickline-50mm/",
+        "product_url": null,
         "active": false
     },
     {
@@ -86,7 +86,7 @@
         "currency": "EUR",
         "manufacturer": "Slack Pro!",
         "date_introduced": null,
-        "product_url": "https://www.linegrip.com/shop/linegrip-nano",
+        "product_url": "https://www.linegrip.com/linegrip-model-archive-history-chronology/",
         "active": false
     },
     {
@@ -122,7 +122,7 @@
         "currency": "EUR",
         "manufacturer": "Slack Pro!",
         "date_introduced": 1501534800000,
-        "product_url": "https://www.linegrip.com/shop/tricklinegrip-g1-sbr/",
+        "product_url": "https://www.linegrip.com/linegrip-model-archive-history-chronology/",
         "active": false
     },
     {
@@ -212,7 +212,7 @@
         "currency": "INR",
         "manufacturer": "Slack Mitra",
         "date_introduced": 1577817000000,
-        "product_url": "https://www.instamojo.com/slackmitra/line-mitra-webbing-gripper/?ref=store",
+        "product_url": null,
         "active": false
     },
     {

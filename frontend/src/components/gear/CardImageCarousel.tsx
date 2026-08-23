@@ -19,8 +19,10 @@ import { useState } from 'react'
 // Arrows sit at rest rather than appearing on hover: a hidden control is
 // undiscoverable, and an opacity-0 element is un-clickable in Cypress without
 // force: true, which would make the carousel tests weaker than the feature.
+// Sized for a thumb (36px) rather than a mouse pointer — see the touch-target
+// pass in DESIGN.md § Responsive & Mobile.
 const arrowBtn =
-  'absolute top-1/2 z-10 flex h-6 w-6 -translate-y-1/2 items-center justify-center rounded-full ' +
+  'absolute top-1/2 z-10 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full ' +
   'bg-white/70 text-base leading-none text-gray-500 shadow-sm transition-colors ' +
   'hover:bg-white hover:text-gray-900 group-hover:bg-white/90'
 

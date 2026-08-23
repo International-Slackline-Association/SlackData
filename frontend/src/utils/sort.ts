@@ -10,12 +10,8 @@
 
 import type { SortSpec } from '@/hooks/useUrlState'
 import type { AnyItem } from '@/utils/format'
+import { compareByName as byName } from '@/utils/compare'
 import { percentAtKn } from '@/utils/stretch'
-
-// Secondary/tie-break comparator: alphabetical by name, always ascending.
-function byName(a: AnyItem, b: AnyItem): number {
-  return String(a.name).localeCompare(String(b.name))
-}
 
 // Compare two nullable numbers with the shared listing rules: nulls last in both
 // directions, ties (incl. both-null) fall back to name ascending.

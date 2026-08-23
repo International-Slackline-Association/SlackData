@@ -86,18 +86,25 @@ export default function ComparePage() {
       ) : columns.length === 0 ? (
         <p className="text-gray-500">Nothing to compare — pick items from the listing.</p>
       ) : (
-        <div className="overflow-x-auto">
+        <>
+          {/* Side-by-side IS the feature, so the table stays a table on a phone
+              and scrolls sideways with the label column pinned. What a phone
+              needs is the hint that it scrolls at all. */}
+          <p className="mb-2 text-xs text-gray-400 sm:hidden">Swipe the table to see every column →</p>
+          {/* -mx-4 lets the table bleed into the page gutter on a phone, buying
+              back 32px of column width. */}
+          <div className="-mx-4 overflow-x-auto px-4 sm:mx-0 sm:px-0">
           <table data-cy="compare-table" className="w-full border-collapse text-sm">
             <thead>
               <tr>
                 {/* Empty top-left corner above the field-label column. */}
-                <th className="sticky left-0 z-10 bg-white" />
+                <th className="sticky left-0 z-10 w-24 bg-white sm:w-auto" />
                 {columns.map(item => (
                   <th
                     key={String(item.id)}
                     data-cy="compare-col"
                     data-id={String(item.id)}
-                    className="min-w-[10rem] border-b border-gray-200 px-4 py-3 text-left align-bottom"
+                    className="min-w-[7rem] border-b border-gray-200 px-3 py-3 text-left align-bottom sm:min-w-[10rem] sm:px-4"
                   >
                     <div className="text-[11px] font-medium uppercase tracking-wide text-gray-500">
                       {String(item.brand_name)}
@@ -119,7 +126,7 @@ export default function ComparePage() {
                   <th
                     data-cy="compare-field-label"
                     scope="row"
-                    className="sticky left-0 z-10 whitespace-nowrap border-b border-gray-100 bg-white px-4 py-2.5 text-left font-normal text-gray-500"
+                    className="sticky left-0 z-10 w-24 border-b border-gray-100 bg-white pr-3 py-2.5 text-left text-xs font-normal text-gray-500 sm:w-auto sm:whitespace-nowrap sm:px-4 sm:text-sm"
                   >
                     {row.label}
                     {row.unit ? ` (${row.unit})` : ''}
@@ -132,7 +139,7 @@ export default function ComparePage() {
                         key={String(item.id)}
                         data-cy="compare-cell"
                         data-id={String(item.id)}
-                        className="border-b border-gray-100 px-4 py-2.5 align-top text-gray-900"
+                        className="border-b border-gray-100 px-3 py-2.5 align-top text-gray-900 sm:px-4"
                       >
                         {text === '' ? (
                           <span className="text-gray-300">—</span>
@@ -153,7 +160,8 @@ export default function ComparePage() {
               ))}
             </tbody>
           </table>
-        </div>
+          </div>
+        </>
       )}
     </div>
   )
