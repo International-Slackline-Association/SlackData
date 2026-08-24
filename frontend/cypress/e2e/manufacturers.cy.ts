@@ -118,6 +118,39 @@ describe('Manufacturers page', () => {
     })
   })
 
+  // ── Brand detail: contact email ───────────────────────────────────────────
+  //
+  // 34 of 76 brands publish one; the rest render nothing at all rather than a
+  // placeholder (same rule as the card's missing flag). It lives on the detail
+  // page ONLY — the last spec here is the anti-harvesting one, and it is the
+  // reason the directory grid was left alone.
+
+  it('the detail page shows a mailto link for a brand that has an email', () => {
+    cy.request(`${api()}/brand/?limit=100`).then(({ body }) => {
+      const brand = (body as Record<string, unknown>[]).find(b => b.contact_email)!
+      cy.visit(`/manufacturers/${brand.id}`)
+      cy.get('[data-cy="brand-detail-email"]')
+        .should('have.attr', 'href', `mailto:${brand.contact_email}`)
+        .and('contain.text', brand.contact_email as string)
+    })
+  })
+
+  it('a brand with no email renders no contact link at all', () => {
+    cy.request(`${api()}/brand/?limit=100`).then(({ body }) => {
+      const brand = (body as Record<string, unknown>[]).find(b => !b.contact_email)!
+      cy.visit(`/manufacturers/${brand.id}`)
+      cy.get('[data-cy="brand-detail-name"]').should('exist')
+      cy.get('[data-cy="brand-detail-email"]').should('not.exist')
+    })
+  })
+
+  it('the manufacturers grid exposes no email addresses', () => {
+    cy.visit('/manufacturers')
+    cy.get('[data-cy="manufacturers-card"]').should('have.length.gte', 1)
+    cy.get('[data-cy="brand-detail-email"]').should('not.exist')
+    cy.get('a[href^="mailto:"]').should('not.exist')
+  })
+
   // ── Brand detail: gear sections ───────────────────────────────────────────
   //
   // The brand page groups the inventory into one section per gear type. Two

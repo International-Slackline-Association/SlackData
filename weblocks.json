@@ -3144,7 +3144,7 @@
         "date_introduced": null,
         "name": "RhinoLock",
         "product_url": "http://www.slackgear.co.za/product/rhinolock/",
-        "active": true,
+        "active": false,
         "style": "Tensionable Weblock"
     },
     {
@@ -4276,7 +4276,7 @@
             "Webbing connection type": "Captive Pin",
             "Compatible webbing width": "24mm - 26mm",
             "Diverter diameter": "30mm",
-            "Efficiency": "N/A",
+            "Efficiency": "N/A", 
             "Usage": "N/A",
             "ISA approved": "N/A",
             "Date introduced": "N/A",

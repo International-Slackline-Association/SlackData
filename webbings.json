@@ -6143,7 +6143,7 @@
         "thickness": 2.85,
         "webbing_construction": "Flat",
         "isa_certified": false,
-        "priceMeter": 3.66,
+        "priceMeter": 5.0,
         "currency": "PLN",
         "active": true
     },
@@ -6165,7 +6165,7 @@
         "thickness": 3.35,
         "webbing_construction": "Flat",
         "isa_certified": false,
-        "priceMeter": 4.47,
+        "priceMeter": 7.5,
         "currency": "PLN",
         "active": true
     },
@@ -6187,7 +6187,7 @@
         "thickness": 3.35,
         "webbing_construction": "Flat",
         "isa_certified": false,
-        "priceMeter": 4.47,
+        "priceMeter": 7.0,
         "currency": "PLN",
         "active": true
     },
@@ -6205,11 +6205,11 @@
             }
         ],
         "date_introduced": null,
-        "product_url": "http://slackline.pl/bluemile",
+        "product_url": "https://slackhouseshop.pl/produkt/blue-mile/",
         "thickness": 2.6,
         "webbing_construction": "Flat",
         "isa_certified": false,
-        "priceMeter": 4.5,
+        "priceMeter": 4.8,
         "currency": "PLN",
         "active": false
     },
@@ -6411,7 +6411,7 @@
         "thickness": 2.6,
         "webbing_construction": "Flat",
         "isa_certified": false,
-        "priceMeter": 14,
+        "priceMeter": 24,
         "currency": "ZAR",
         "active": true
     },
@@ -7777,7 +7777,7 @@
         "thickness": 3.35,
         "webbing_construction": "Flat",
         "isa_certified": false,
-        "priceMeter": 4.47,
+        "priceMeter": 10.0,
         "currency": "PLN",
         "active": true
     },
@@ -7799,7 +7799,7 @@
         "thickness": 2,
         "webbing_construction": "Flat",
         "isa_certified": false,
-        "priceMeter": 2.93,
+        "priceMeter": 4.0,
         "currency": "PLN",
         "active": true
     },

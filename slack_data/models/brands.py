@@ -16,6 +16,7 @@ class BaseBrands(SQLModel):
     slackline_focused: bool = True
     website: str | None = None
     socials: str | None = None
+    contact_email: str | None = None
     description: str | None = None
     notes: str | None = None
 

@@ -4,7 +4,8 @@ This loader is the odd one out: every other load_*.py CREATES rows for a gear
 type, but Brand rows already exist by the time this runs — `get_brand()` creates
 them on the fly during the gear loads, populated with nothing but a name. This
 pass ENRICHES those existing rows with the reference metadata we already have on
-disk (country, year founded, website, socials, active, slackline-focused).
+disk (country, year founded, website, socials, contact email, active,
+slackline-focused).
 
 It therefore must run AFTER every gear loader in the lifespan, and it never
 inserts a brand: a manufacturers.json entry with no matching Brand row means we
@@ -56,6 +57,7 @@ def clean_manufacturer_data(raw: dict) -> dict[str, dict]:
             "year_founded": entry.get("year_established"),
             "website": blank_to_none(entry.get("website")),
             "socials": blank_to_none(entry.get("facebook")) or blank_to_none(entry.get("tiktok")),
+            "contact_email": blank_to_none(entry.get("email")),
             "active": entry.get("active"),
             "slackline_focused": entry.get("slackline_oriented"),
         }
@@ -77,7 +79,7 @@ def add_manufacturer_data_to_db(session, cleaned: dict[str, dict]) -> int:
             continue
 
         changed = False
-        for field in ("country", "year_founded", "website", "socials"):
+        for field in ("country", "year_founded", "website", "socials", "contact_email"):
             value = data.get(field)
             if value is not None and getattr(brand, field) is None:
                 setattr(brand, field, value)

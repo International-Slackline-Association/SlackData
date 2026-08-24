@@ -12,8 +12,11 @@
       "slackline_oriented",
       "website",
       "facebook",
-      "active"
-    ]
+      "active",
+      "email"
+    ],
+    "email_source": "scraped from each manufacturer's own website (2026-08-23)",
+    "email_coverage": "34/76"
   },
   "manufacturers": {
     "1": {
@@ -25,6 +28,7 @@
       "slackline_oriented": true,
       "website": "http://www.gibbon-slacklines.com",
       "facebook": "https://www.facebook.com/Gibbon-Slacklines-85859466425",
+      "email": "info@gibbon-slacklines.com",
       "active": true
     },
     "2": {
@@ -36,6 +40,7 @@
       "slackline_oriented": true,
       "website": null,
       "facebook": "https://www.facebook.com/landcruising.slackline",
+      "email": null,
       "active": false
     },
     "3": {
@@ -47,6 +52,7 @@
       "slackline_oriented": true,
       "website": "http://www.balancecommunity.com",
       "facebook": "https://www.facebook.com/BalanceCommunity",
+      "email": "info@balancecommunity.com",
       "active": true
     },
     "4": {
@@ -58,6 +64,7 @@
       "slackline_oriented": true,
       "website": "http://slack-mountain.com",
       "facebook": "https://www.facebook.com/slackmountain",
+      "email": "slackmountain.com@gmail.com",
       "active": true
     },
     "5": {
@@ -69,6 +76,7 @@
       "slackline_oriented": true,
       "website": "linegrip.com",
       "facebook": "https://www.facebook.com/Slackpro-157374974272544",
+      "email": null,
       "active": true
     },
     "6": {
@@ -80,6 +88,7 @@
       "slackline_oriented": true,
       "website": "http://www.slacktivity.com",
       "facebook": "https://www.facebook.com/slacklinetechnology",
+      "email": "support@slacktivity.com",
       "active": true
     },
     "7": {
@@ -91,6 +100,7 @@
       "slackline_oriented": true,
       "website": "http://slack-inov.com/gb",
       "facebook": "https://www.facebook.com/slack.inov",
+      "email": "support@slack-inov.com",
       "active": true
     },
     "8": {
@@ -102,6 +112,7 @@
       "slackline_oriented": true,
       "website": null,
       "facebook": "https://www.facebook.com/LineSpirit",
+      "email": null,
       "active": false
     },
     "9": {
@@ -113,6 +124,7 @@
       "slackline_oriented": true,
       "website": "https://www.slackshop.cz/en/",
       "facebook": "https://www.facebook.com/eqb.cz",
+      "email": "info@slackshop.cz",
       "active": true
     },
     "10": {
@@ -124,6 +136,7 @@
       "slackline_oriented": true,
       "website": null,
       "facebook": "https://www.facebook.com/ElephantSlacklines",
+      "email": null,
       "active": false
     },
     "11": {
@@ -135,6 +148,7 @@
       "slackline_oriented": true,
       "website": null,
       "facebook": "https://www.facebook.com/2TreesSlacklines",
+      "email": null,
       "active": null
     },
     "12": {
@@ -146,6 +160,7 @@
       "slackline_oriented": true,
       "website": "http://slack.fr",
       "facebook": "https://www.facebook.com/Slack.fr",
+      "email": "support@slack-inov.com",
       "active": null
     },
     "13": {
@@ -157,6 +172,7 @@
       "slackline_oriented": true,
       "website": null,
       "facebook": "https://www.facebook.com/GAMBITSlacklines",
+      "email": null,
       "active": false
     },
     "14": {
@@ -168,6 +184,7 @@
       "slackline_oriented": true,
       "website": null,
       "facebook": "https://www.facebook.com/slacklinebrothers",
+      "email": null,
       "active": null
     },
     "15": {
@@ -179,6 +196,7 @@
       "slackline_oriented": true,
       "website": null,
       "facebook": "https://www.facebook.com/slacklinetechnology",
+      "email": null,
       "active": false
     },
     "16": {
@@ -190,6 +208,7 @@
       "slackline_oriented": true,
       "website": "http://www.slackgear.co.za",
       "facebook": "https://www.facebook.com/slackgear",
+      "email": "info@slackgear.co.za",
       "active": true
     },
     "17": {
@@ -201,6 +220,7 @@
       "slackline_oriented": true,
       "website": null,
       "facebook": null,
+      "email": null,
       "active": null
     },
     "18": {
@@ -212,6 +232,7 @@
       "slackline_oriented": true,
       "website": "http://www.oneinchdreams.com",
       "facebook": "https://www.facebook.com/OneInchDreams",
+      "email": "info@oneinchdreams.com",
       "active": false
     },
     "19": {
@@ -223,6 +244,7 @@
       "slackline_oriented": true,
       "website": null,
       "facebook": "https://www.facebook.com/PureSlacklines",
+      "email": null,
       "active": false
     },
     "20": {
@@ -234,6 +256,7 @@
       "slackline_oriented": true,
       "website": "http://www.yogaslackers.com",
       "facebook": "https://www.facebook.com/yogaslackers",
+      "email": "yogaslackers@gmail.com",
       "active": true
     },
     "21": {
@@ -245,6 +268,7 @@
       "slackline_oriented": true,
       "website": "http://www.slacklineindustries.com",
       "facebook": "https://www.facebook.com/SlacklineIndustries",
+      "email": "info@slacklineindustries.com",
       "active": true
     },
     "22": {
@@ -256,6 +280,7 @@
       "slackline_oriented": true,
       "website": null,
       "facebook": "https://www.facebook.com/PumpSlacklineArg",
+      "email": null,
       "active": false
     },
     "23": {
@@ -267,6 +292,7 @@
       "slackline_oriented": true,
       "website": null,
       "facebook": "https://www.facebook.com/AmbaradaMLongLineLab",
+      "email": null,
       "active": false
     },
     "24": {
@@ -278,6 +304,7 @@
       "slackline_oriented": true,
       "website": "http://www.spider-slacklines.com",
       "facebook": "https://www.facebook.com/SpiderSlacklines",
+      "email": "info@spider-slacklines.com",
       "active": true
     },
     "25": {
@@ -289,6 +316,7 @@
       "slackline_oriented": true,
       "website": "https://www.slackline-tools.de",
       "facebook": "https://www.facebook.com/SlacklineTools",
+      "email": null,
       "active": false
     },
     "26": {
@@ -300,6 +328,7 @@
       "slackline_oriented": true,
       "website": "https://raed-slacklines.com",
       "facebook": "https://www.facebook.com/raedslacklines",
+      "email": "shop@raed-sports.com",
       "active": true
     },
     "27": {
@@ -311,6 +340,7 @@
       "slackline_oriented": true,
       "website": "http://slackhouseshop.pl",
       "facebook": "https://www.facebook.com/slackhouse.official",
+      "email": "sklep@slackhouse.pl",
       "active": true
     },
     "28": {
@@ -322,6 +352,7 @@
       "slackline_oriented": false,
       "website": "http://www.singingrock.com",
       "facebook": "https://www.facebook.com/singingrock.page",
+      "email": "info@singingrock.cz",
       "active": true
     },
     "29": {
@@ -333,6 +364,7 @@
       "slackline_oriented": true,
       "website": null,
       "facebook": "https://www.facebook.com/Dakas.Slackline",
+      "email": null,
       "active": false
     },
     "30": {
@@ -344,6 +376,7 @@
       "slackline_oriented": true,
       "website": "https://www.slackliner.de",
       "facebook": "https://www.facebook.com/Slackliner.de",
+      "email": null,
       "active": true
     },
     "31": {
@@ -355,6 +388,7 @@
       "slackline_oriented": false,
       "website": "http://www.petzl.com/en?l=INT",
       "facebook": "https://www.facebook.com/Petzl",
+      "email": null,
       "active": true
     },
     "32": {
@@ -366,6 +400,7 @@
       "slackline_oriented": false,
       "website": "http://www.edelrid.de/en",
       "facebook": "https://www.facebook.com/EDELRIDClimbing",
+      "email": "mail@edelrid.de",
       "active": true
     },
     "33": {
@@ -377,6 +412,7 @@
       "slackline_oriented": false,
       "website": "http://www.rockexotica.com",
       "facebook": "https://www.facebook.com/Rock-Exotica-147747201953857",
+      "email": "info@rockexotica.com",
       "active": true
     },
     "34": {
@@ -388,6 +424,7 @@
       "slackline_oriented": false,
       "website": "http://smcgear.com",
       "facebook": "https://www.facebook.com/mySMCgear",
+      "email": "customerservice@smcgear.com",
       "active": true
     },
     "35": {
@@ -399,6 +436,7 @@
       "slackline_oriented": false,
       "website": "http://www.camp.it",
       "facebook": "https://www.facebook.com/camp1889",
+      "email": null,
       "active": true
     },
     "36": {
@@ -410,6 +448,7 @@
       "slackline_oriented": false,
       "website": "http://www.climbingtechnology.com",
       "facebook": "https://www.facebook.com/ClimbingTechnologyItaly",
+      "email": "commerciale@aludesign.it",
       "active": false
     },
     "37": {
@@ -421,6 +460,7 @@
       "slackline_oriented": false,
       "website": "http://www.vanbeest.com",
       "facebook": "https://www.facebook.com/VanBeestInternational",
+      "email": "sales@vanbeest.eu",
       "active": true
     },
     "38": {
@@ -432,6 +472,7 @@
       "slackline_oriented": false,
       "website": null,
       "facebook": "https://www.facebook.com/OmegaPacific",
+      "email": "customers@theomegapacific.com",
       "active": null
     },
     "39": {
@@ -443,6 +484,7 @@
       "slackline_oriented": false,
       "website": "http://www.mytendon.com",
       "facebook": "https://www.facebook.com/mytendon",
+      "email": "eshop@mytendon.cz",
       "active": true
     },
     "40": {
@@ -454,6 +496,7 @@
       "slackline_oriented": true,
       "website": null,
       "facebook": "https://www.facebook.com/slacklineanimals",
+      "email": null,
       "active": null
     },
     "41": {
@@ -465,6 +508,7 @@
       "slackline_oriented": true,
       "website": "http://slacklifebc.com",
       "facebook": "https://www.facebook.com/SlacklifeBC",
+      "email": "info@slacklifebc.com",
       "active": false
     },
     "42": {
@@ -476,6 +520,7 @@
       "slackline_oriented": true,
       "website": "http://www.absoluteslacklines.com",
       "facebook": "https://www.facebook.com/AbsoluteSlacklines",
+      "email": null,
       "active": false
     },
     "43": {
@@ -487,6 +532,7 @@
       "slackline_oriented": true,
       "website": "http://www.slacklineshop.co.nz",
       "facebook": "https://www.facebook.com/SlacklineshopNZ",
+      "email": null,
       "active": true
     },
     "44": {
@@ -498,6 +544,7 @@
       "slackline_oriented": true,
       "website": null,
       "facebook": "https://www.facebook.com/balancingearthslacklines",
+      "email": null,
       "active": false
     },
     "45": {
@@ -509,6 +556,7 @@
       "slackline_oriented": true,
       "website": "https://petramslacklines.site123.me/",
       "facebook": "https://www.facebook.com/Petram.Slackline",
+      "email": null,
       "active": true
     },
     "46": {
@@ -520,6 +568,7 @@
       "slackline_oriented": true,
       "website": "http://www.middlewayslacklines.com",
       "facebook": "https://www.facebook.com/MiddleWaySlacklines",
+      "email": "info@middlewayslacklines.com",
       "active": true
     },
     "47": {
@@ -531,6 +580,7 @@
       "slackline_oriented": false,
       "website": "http://www.iscwales.com",
       "facebook": "https://www.facebook.com/iscwalesuk",
+      "email": "sales@iscwales.com",
       "active": true
     },
     "48": {
@@ -542,6 +592,7 @@
       "slackline_oriented": false,
       "website": "http://www.trango.com",
       "facebook": "http://www.facebook.com/pages/Trango-Extraordinary-Climbing/158158420882901",
+      "email": null,
       "active": true
     },
     "49": {
@@ -553,6 +604,7 @@
       "slackline_oriented": false,
       "website": "http://www.episwiss.com",
       "facebook": "https://www.facebook.com/Episwiss",
+      "email": null,
       "active": true
     },
     "50": {
@@ -564,6 +616,7 @@
       "slackline_oriented": true,
       "website": null,
       "facebook": "https://www.facebook.com/slackliningcanada",
+      "email": null,
       "active": false
     },
     "51": {
@@ -575,6 +628,7 @@
       "slackline_oriented": true,
       "website": "http://www.catonslack.com",
       "facebook": "https://www.facebook.com/CatOnSlack",
+      "email": null,
       "active": false
     },
     "52": {
@@ -586,6 +640,7 @@
       "slackline_oriented": false,
       "website": "http://www.kong.it",
       "facebook": "https://www.facebook.com/kongitaly",
+      "email": null,
       "active": true
     },
     "53": {
@@ -597,6 +652,7 @@
       "slackline_oriented": true,
       "website": null,
       "facebook": "https://www.facebook.com/zergeoutdoor",
+      "email": null,
       "active": false
     },
     "54": {
@@ -608,6 +664,7 @@
       "slackline_oriented": false,
       "website": "http://www.fusionclimb.com",
       "facebook": "https://www.facebook.com/FusionClimbUSA",
+      "email": "order@fusionclimb.com",
       "active": true
     },
     "55": {
@@ -619,6 +676,7 @@
       "slackline_oriented": true,
       "website": "http://slackstar.de",
       "facebook": null,
+      "email": "shop@sicherungsprofi.de",
       "active": true
     },
     "58": {
@@ -630,6 +688,7 @@
       "slackline_oriented": false,
       "website": "http://www.cmcrescue.com/",
       "facebook": "https://www.facebook.com/cmcrescue",
+      "email": "info@cmcpro.com",
       "active": true
     },
     "59": {
@@ -641,6 +700,7 @@
       "slackline_oriented": false,
       "website": "https://www.mammut.com/",
       "facebook": "https://www.facebook.com/Mammut/",
+      "email": null,
       "active": true
     },
     "60": {
@@ -652,6 +712,7 @@
       "slackline_oriented": false,
       "website": "https://krok.biz",
       "facebook": "https://www.facebook.com/tmkrok",
+      "email": "krok@krok.biz",
       "active": true
     },
     "61": {
@@ -663,6 +724,7 @@
       "slackline_oriented": true,
       "website": null,
       "facebook": "https://www.facebook.com/BananasColombia",
+      "email": null,
       "active": null
     },
     "62": {
@@ -674,6 +736,7 @@
       "slackline_oriented": true,
       "website": null,
       "facebook": null,
+      "email": null,
       "active": false
     },
     "63": {
@@ -685,6 +748,7 @@
       "slackline_oriented": true,
       "website": "https://www.balanceur.ro/",
       "facebook": "https://www.facebook.com/balanceur.slackshop/",
+      "email": null,
       "active": false
     },
     "64": {
@@ -696,6 +760,7 @@
       "slackline_oriented": true,
       "website": "https://aki-slacklines.de",
       "facebook": "https://www.facebook.com/AkiSlack/",
+      "email": null,
       "active": false
     },
     "65": {
@@ -707,6 +772,7 @@
       "slackline_oriented": true,
       "website": null,
       "facebook": null,
+      "email": null,
       "active": true
     },
     "66": {
@@ -718,6 +784,7 @@
       "slackline_oriented": true,
       "website": "https://www.viperslacklines.co.za",
       "facebook": "https://www.facebook.com/viperslacklines",
+      "email": null,
       "active": true
     },
     "67": {
@@ -729,6 +796,7 @@
       "slackline_oriented": true,
       "website": "https://www.radrigs.co.uk/",
       "facebook": "https://www.facebook.com/Radrigs-Slackline-Equipment-101532338172670/?modal=admin_todo_tour",
+      "email": "info@radrigs.co.uk",
       "active": true
     },
     "68": {
@@ -740,6 +808,7 @@
       "slackline_oriented": true,
       "website": null,
       "facebook": "https://www.facebook.com/ShaoLine-319592072005126",
+      "email": null,
       "active": true
     },
     "69": {
@@ -751,6 +820,7 @@
       "slackline_oriented": true,
       "website": "https://www.a-zero.com.ar/",
       "facebook": "https://www.facebook.com/A-Zero-175969599786013",
+      "email": null,
       "active": true
     },
     "70": {
@@ -762,6 +832,7 @@
       "slackline_oriented": true,
       "website": null,
       "facebook": "https://www.facebook.com/Slackear",
+      "email": null,
       "active": true
     },
     "71": {
@@ -773,6 +844,7 @@
       "slackline_oriented": true,
       "website": null,
       "facebook": "https://www.facebook.com/trickline.dnd",
+      "email": null,
       "active": true
     },
     "72": {
@@ -784,6 +856,7 @@
       "slackline_oriented": true,
       "website": "http://www.gekoslacklines.mx",
       "facebook": null,
+      "email": null,
       "active": true
     },
     "73": {
@@ -795,6 +868,7 @@
       "slackline_oriented": true,
       "website": null,
       "facebook": "https://www.facebook.com/EasySlackline.CO",
+      "email": "info@easy-slackline.fr",
       "active": false
     },
     "74": {
@@ -806,6 +880,7 @@
       "slackline_oriented": true,
       "website": "https://www.acrobatslackline.com",
       "facebook": "https://www.facebook.com/acrobatslackline",
+      "email": "acrobatslackline@gmail.com",
       "active": true
     },
     "75": {
@@ -817,6 +892,7 @@
       "slackline_oriented": true,
       "website": "https://bloacs.de/",
       "facebook": "https://m.facebook.com/BLOACS/",
+      "email": "info@bloacs.de",
       "active": true
     },
     "76": {
@@ -828,6 +904,7 @@
       "slackline_oriented": true,
       "website": "https://beraadventure.com.br/",
       "facebook": "https://m.facebook.com/BeraAdventure/",
+      "email": "contato@beraadventure.com.br",
       "active": true
     },
     "local_space_age_slacklines": {
@@ -839,6 +916,7 @@
       "slackline_oriented": true,
       "website": null,
       "facebook": null,
+      "email": null,
       "active": false
     },
     "local_rigging_ventures": {
@@ -851,6 +929,7 @@
       "website": "https://www.riggingventures.com",
       "facebook": null,
       "tiktok": "https://www.tiktok.com/@riggingventures",
+      "email": null,
       "active": false
     }
   }

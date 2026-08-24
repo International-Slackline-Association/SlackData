@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 SlackData is a **better, open-source replacement for [SlackDB](https://slackdb.com/)** — a community database of slackline gear. Goals vs SlackDB: stronger/simpler backend, modern UX design, and an account system (manufacturer accounts with edit access, general user accounts with suggest access, admin accounts for approvals).
 
-Current state: FastAPI + SQLModel + SQLite backend, plus a React/TypeScript/Vite frontend that is well underway (Phases 1–8 of [PLAN.md](PLAN.md) are done: listing, filters, search/sort, detail, compare, manufacturers). There is a pytest suite (332 tests) and a Cypress e2e suite, and the public read-only catalogue is **live at https://slackdata.org** (Phase 1). There is still **no CI** — nothing runs automatically.
+Current state: FastAPI + SQLModel + SQLite backend, plus a React/TypeScript/Vite frontend that is well underway (Phases 1–8 of [PLAN.md](PLAN.md) are done: listing, filters, search/sort, detail, compare, manufacturers). There is a pytest suite (354 tests) and a Cypress e2e suite, and the public read-only catalogue is **live at https://slackdata.org** (Phase 1). There is still **no CI** — nothing runs automatically.
 
 **Stack:** Python ≥3.10 backend (FastAPI, SQLModel, SQLite) + React/TypeScript/Vite frontend (in progress).
 
@@ -80,7 +80,8 @@ ruff check .
 There **is** a test suite now (there was not when this file was first written), but still **no CI** — nothing runs automatically, so run these yourself:
 
 ```bash
-python -m pytest tests/ -q          # 332 backend tests (14 files, all gear types + loaders)
+python -m pytest tests/ -q          # 354 backend tests (15 files: all gear types + loaders,
+                                    #   plus manufacturer contact emails)
 cd frontend && npm run build        # tsc -b + vite build
 cd frontend && npm run lint         # oxlint
 cd frontend && npm run test:unit    # 59 unit tests — node:test on the pure utils, no servers, no deps
@@ -284,7 +285,7 @@ Before writing any of the above, open the relevant `models/<type>.py` and `utili
 ## Conventions
 
 - Imports are absolute (`from slack_data....`).
-- `manufacturers.json` (76 entries) at root **is loaded — but as an enrichment pass, not a creator**. Brand rows are still created on the fly by `get_brand()` with only a name; `load_manufacturers.py` then backfills `country` / `year_founded` / `website` / `socials` / `active` / `slackline_focused` onto the rows that already exist, matching on `canonical_brand()`. It never inserts a brand (an entry with no matching row means we hold no gear for that manufacturer). It **must run last** in the lifespan, and is gated on "no brand has a country yet" rather than on an empty table.
+- `manufacturers.json` (76 entries) at root **is loaded — but as an enrichment pass, not a creator**. Brand rows are still created on the fly by `get_brand()` with only a name; `load_manufacturers.py` then backfills `country` / `year_founded` / `website` / `socials` / `contact_email` / `active` / `slackline_focused` onto the rows that already exist, matching on `canonical_brand()`. It never inserts a brand (an entry with no matching row means we hold no gear for that manufacturer). It **must run last** in the lifespan, and is gated on "no brand has a country yet" rather than on an empty table. `contact_email` is the one field here that is **ours, not SlackDB's** — scraped from each manufacturer's own site (34/76 as of 2026-08-23; the rest publish a contact form only, or have no site left). `metadata.email_source` in the JSON records that provenance.
 - Country is stored as the `Country` enum's **full display name** (`"Germany"`), not an ISO code; `get_country()` in `utilities/countries.py` maps the sources' alpha-2 codes onto the enum.
 - `BrandPublic` only declares `webbings` in its response schema — other gear lists exist on the ORM model via `@computed_field` but may not serialize in API responses.
 - No auth — all endpoints are open.
