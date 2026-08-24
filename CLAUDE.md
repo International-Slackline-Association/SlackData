@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 SlackData is a **better, open-source replacement for [SlackDB](https://slackdb.com/)** — a community database of slackline gear. Goals vs SlackDB: stronger/simpler backend, modern UX design, and an account system (manufacturer accounts with edit access, general user accounts with suggest access, admin accounts for approvals).
 
-Current state: FastAPI + SQLModel + SQLite backend, plus a React/TypeScript/Vite frontend that is well underway (Phases 1–8 of [PLAN.md](PLAN.md) are done: listing, filters, search/sort, detail, compare, manufacturers). There is a pytest suite (354 tests) and a Cypress e2e suite, and the public read-only catalogue is **live at https://slackdata.org** (Phase 1). There is still **no CI** — nothing runs automatically.
+Current state: FastAPI + SQLModel + SQLite backend, plus a React/TypeScript/Vite frontend that is well underway (Phases 1–8 of [PLAN.md](PLAN.md) are done: listing, filters, search/sort, detail, compare, manufacturers). There is a pytest suite (622 tests) and a Cypress e2e suite, and the public read-only catalogue is **live at https://slackdata.org** (Phase 1). **CI runs on every PR** (`.github/workflows/ci.yml`): pytest with a dynamodb-local service, the frontend build/lint/unit suite, and Cypress against both real servers.
 
 **Stack:** Python ≥3.10 backend (FastAPI, SQLModel, SQLite) + React/TypeScript/Vite frontend (in progress).
 
@@ -77,16 +77,42 @@ fastapi dev main.py            # → http://127.0.0.1:8000  (/docs for interacti
 ruff check .
 ```
 
-There **is** a test suite now (there was not when this file was first written), but still **no CI** — nothing runs automatically, so run these yourself:
+CI runs all of this on every PR (`.github/workflows/ci.yml`), but it is the last check, not the first — run them yourself before pushing:
 
 ```bash
-python -m pytest tests/ -q          # 354 backend tests (15 files: all gear types + loaders,
-                                    #   plus manufacturer contact emails)
+python -m pytest tests/ -q          # 646 backend tests (23 files: gear types, loaders, read-only guard,
+                                    #   submissions, auth, manufacturer API, live server, DynamoDB,
+                                    #   manufacturer contact emails, seed ids)
+# tests/test_live_api.py boots THREE real uvicorn processes (local-dev, hosted
+# READ_ONLY, and hosted-with-a-Cognito-pool) and hits them over HTTP. It builds its
+# own minimal catalogue, so it adds ~9s and needs no seeded database.db, no network.
+#
+# tests/test_dynamo_stores.py runs the DynamoDB repositories against a real
+# DynamoDB — otherwise those paths first execute in production. It builds its
+# tables FROM infra/serverless.yml, so template/code drift fails here. Skips
+# cleanly without boto3 or without the container, so the default dev environment
+# still gets a green run (15 skip, and the 2 template-drift checks still run):
+docker run -d --name ddb-local -p 8765:8000 amazon/dynamodb-local
+pip install '-e.[aws]'      # boto3; the app still imports it lazily
 cd frontend && npm run build        # tsc -b + vite build
 cd frontend && npm run lint         # oxlint
-cd frontend && npm run test:unit    # 59 unit tests — node:test on the pure utils, no servers, no deps
-# Cypress e2e (11 specs) needs BOTH servers up — see PLAN.md → "Running things"
-cd frontend && npx cypress run --spec cypress/e2e/<spec>.cy.ts
+cd frontend && npm run test:unit    # 130 unit tests — node:test on the pure utils, no servers, no deps
+# Cypress e2e (19 specs) needs BOTH servers up — see PLAN.md → "Running things"
+cd frontend && env -u ELECTRON_RUN_AS_NODE npx cypress run --spec cypress/e2e/<spec>.cy.ts
+# (the `env -u` is required under VS Code, or Cypress dies with SIGILL / exit 132)
+
+# admin_triage.cy.ts needs a submissions store it hasn't already filled. The
+# triage list is a queue — oldest first, one page of 50 — so fixtures the spec
+# creates land at the bottom and drop off the page once ~50 pending rows have
+# accumulated across runs. Start the API against a scratch file for test runs:
+cd slack_data && SUBMISSIONS_DB_PATH=/tmp/cypress-submissions.db fastapi dev main.py
+
+# The manufacturer API needs a registered brand client before any token works.
+# Locally the store is a SQLite file (BRAND_CLIENTS_DB_PATH, default
+# brand_clients.db in the CWD), and the dev credential is
+# "<MANUFACTURER_DEV_TOKEN>:<client_id>":
+python -m slack_data.manufacturers.register --client-id dev-client --brand "Balance Community"
+curl -H 'Authorization: Bearer dev-manufacturer-token:dev-client' localhost:8000/manufacturer/me
 ```
 
 `test:unit` runs `node --experimental-strip-types --test tests/unit/*.test.ts` — Node 22 strips the
@@ -124,6 +150,12 @@ Root *.json seed files
 | `slack_data/api/routers/<type>_router.py` | One `crud_router(...)` call per gear type |
 | `slack_data/api/routing.py` | Router registration + the READ_ONLY write-route filter (see below) |
 | `slack_data/utilities/` | shared enums/helpers (currency, country, materials, ISA warnings) |
+| `slack_data/models/submissions.py` | Submission schemas — **pydantic, not SQLModel**; never in the catalogue DB |
+| `slack_data/submissions/` | The submission store: `repository.py` (Protocol + SQLite + in-memory), `dynamo.py`, `store.py` (env selection), `fields.py` (allowed field names, derived from the models) |
+| `slack_data/api/auth.py` | Cognito token verification (admin **ID** tokens + manufacturer **access** tokens) + the local dev-token modes |
+| `slack_data/models/brand_clients.py` | `BrandClient` / `BrandPermission` / `ManufacturerPrincipal` — the account linkage `Brand` never had |
+| `slack_data/manufacturers/` | The manufacturer API's stores: `clients.py` (Protocol + SQLite + in-memory), `dynamo.py`, `store.py`, `matching.py` (gear identity), `register.py` (onboarding CLI) |
+| `slack_data/utilities/turnstile.py` | Captcha verification — **fails closed**, unlike `fx.py` |
 
 There are `__init__.py` files in `models/`, `api/`, and `utilities/`. No `tests/`, no `.github/`, no Docker, no migrations (SQLModel `create_all` only).
 
@@ -199,6 +231,101 @@ mounts, and the loaders/tests work as before.
 `tests/conftest.py` builds its app through the same `register_routers`, so the tests exercise the
 routes production serves. `tests/test_read_only.py` is the regression guard — if a refactor of
 `main.py` reinstates the write routes hosted, it fails there.
+
+### Submissions (Phase 2) — a second, writable store
+
+The "suggest a correction" box. **A submission is a note to the admin, not an edit** — approving one
+records the outcome and produces a JSON patch the admin applies to the root `*.json` by hand,
+followed by a redeploy. The catalogue stays read-only. See [SUBMISSIONS_PLAN.md](SUBMISSIONS_PLAN.md)
+and DESIGN.md § Suggest a Correction.
+
+The important structural point: `register_routers` splits its routers in two. `CATALOG_ROUTERS` lose
+their writes under `READ_ONLY`; `WRITABLE_ROUTERS` (just `submissions_router`) mount in full in every
+mode, because they write to a **different database** — DynamoDB hosted, a separate SQLite file
+locally. `POST /submissions/` therefore works on the live site while the catalogue cannot be written
+at all.
+
+- **The submissions router takes no `SessionDep`.** Reaching for the catalogue session would pass
+  every local test (where SQLite is writable) and fail on the live site. `tests/test_submissions.py`
+  asserts it explicitly by wiring `get_session` to a dependency that raises.
+- **Which store** is chosen by env var in `submissions/store.py`: `SUBMISSIONS_TABLE` → DynamoDB,
+  otherwise `SUBMISSIONS_DB_PATH` (default `submissions.db` in the CWD). boto3 is imported lazily, so
+  the suite and Cypress run with no AWS credentials and no boto3 installed.
+- **Ids are monotonic ULIDs** (`utilities/ulid.py`), so sorting by primary key *is* sorting by
+  creation time — which is the triage queue's whole contract ("pending, oldest first"). Monotonic
+  within a millisecond, deliberately: plain ULIDs tie on a burst.
+- **Correctable field names are derived**, never written down — `submissions/fields.py` reads each
+  gear type's real `<X>Update` schema. `tests/test_frontend_contract.py` then checks the frontend's
+  form offers only names that list contains.
+- **Append-only.** The repository Protocol has no `delete`, and the hosted IAM role is not granted
+  `dynamodb:DeleteItem`. Expiry is DynamoDB's TTL on `expires_at`.
+- **No IP or user-agent is stored** — an anonymous suggestion box that logs IPs is not one. Abuse is
+  handled by Turnstile (fail-closed), a honeypot, and API Gateway route throttling.
+
+### The manufacturer API (Phase 4) — brands updating their own gear
+
+`POST /manufacturer/gear`, authenticated per brand. **We publish; they call.**
+See [MANUFACTURER_API_PLAN.md](MANUFACTURER_API_PLAN.md).
+
+It reuses the submissions pipeline rather than forking it: an update becomes an
+ordinary `Submission` with `kind="manufacturer"`, validated against the same
+derived field list (`submissions/fields.py`). What differs is trust and shape.
+
+- **Auto-approved on arrival.** The sender makes the product, so there is no
+  decision left — only the JSON edit and the redeploy. Records are stored
+  `APPROVED`, which (via `expiry_for`) means they **never expire**: it is work
+  outstanding. The admin's remaining move is "Mark handled" — or "Reject
+  instead", which exists precisely because nobody judged it on the way in.
+- **One call, N products, N records, one `batch_id`.** The review unit is one
+  product's JSON patch; triage regroups them (`frontend/src/utils/batches.ts`).
+  **Resolution is all-or-nothing**: if any item fails to match, nothing is
+  stored, so that retry is always safe. The *writes* are a loop rather than a
+  transaction (no `dynamodb:TransactWriteItems` is granted), so a store failure
+  part-way answers 502 naming how many landed and the `batch_id` — a blind retry
+  there duplicates them.
+- **Identity is verify-then-self-heal** (`manufacturers/matching.py`), and it
+  applies to the *brand* as well as the gear. `verify_brand()` runs on every
+  route: `brand_id` is a seed-order autoincrement just like a gear id, and
+  `register.py` resolves it against the operator's local catalogue, so a drifted
+  id would otherwise hand a credential another company's inventory rather than
+  erroring. A mismatch with the stored `brand_name` is a 503, not a guess.
+  For the gear itself — ids drift with seed order, names collide, and we hold no
+  SKU column. So: a brand
+  discovers our ids from `GET /manufacturer/gear`, sends `gear_id` + `name`
+  back, we check the id is **theirs** and that the name still agrees, fall back
+  to matching the name within their own brand when it doesn't, refuse ambiguity
+  rather than guessing, and **echo the resolved id back** so their mapping
+  corrects itself. Same guard as `load_isa_warnings.py`.
+- **`manufacturer_sku` is stored but matches nothing yet** — recorded now so
+  brands never have to re-send it, and so it can be promoted into the root
+  `*.json` later.
+- **A second verifier, not a loosened one.** `verify_manufacturer_token` sits
+  beside `verify_cognito_token`, sharing only `signing_key()` and the JWKS
+  cache. A client-credentials access token has no `aud` claim at all, so it
+  cannot pass the admin path — and that path guards admin login, so it must not
+  be made to. Identity is `client_id` → `brand_id` through the
+  `slackdata-brand-clients-*` table, which is what makes revocation one PutItem
+  instead of a redeploy.
+- **This router *does* take a `SessionDep`** — unlike `submissions_router` — and
+  reads through it only, to answer "which of your products is this?". Reads are
+  fine hosted; a write would pass every local test and fail live.
+  `tests/test_manufacturer_api.py` wires a session whose writes raise.
+- **Full write rights are designed for, not built.** `BrandPermission.WRITE`
+  exists and is not honoured: `may_write_directly()` returns False structurally,
+  because the hosted catalogue physically cannot be written. The per-item
+  response already reports `applied: true/false`, so the day it flips, brands'
+  integrations need no new field — and a test pins the current answer so the
+  flip is deliberate.
+
+Onboarding is a **CLI, not a route** (`python -m slack_data.manufacturers.register`):
+minting credentials decides whose data a token can change, it happens a dozen
+times a year, and an endpoint for it would be a permanent attack surface.
+
+Admin auth (`api/auth.py`) has three modes: a Cognito pool set → verify the RS256 **ID** token
+against the pool's JWKS; unset **and hosted** → reject everything with 503, never fall through;
+unset and local → a static `ADMIN_DEV_TOKEN`. That middle row is why the dev token is safe to have in
+the repo: reaching it requires no pool *and* no `CATALOG_DB_PATH`, and `Dockerfile.lambda` always
+sets the latter.
 
 ### Non-model routers
 
