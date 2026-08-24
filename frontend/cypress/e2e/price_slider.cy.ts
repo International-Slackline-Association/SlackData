@@ -64,12 +64,24 @@ function awaitDomain(scope = PRICE) {
 
 // React ignores jQuery .val(), so drive the thumb the way filters.cy.ts does:
 // native setter + a real input event.
+//
+// Then wait for the thumb to actually park on the new bound, because the
+// slider's state lives in the URL and that round-trip is async. React
+// re-renders the controlled input once with the PRE-change bound first —
+// restoring the DOM value we just overwrote — and only then does the new bound
+// arrive. A second write issued inside that window writes the value React has
+// just restored, so its change event is swallowed by React's value tracker and
+// the bound never moves. Settling here is what a real drag gets for free: it
+// emits an input event per pixel, so no single dropped one is load-bearing.
 function setSlider(which: 'min' | 'max', value: number, scope = PRICE) {
   cy.get(scope).find(`[data-cy="range-${which}"]`).then($el => {
     const input = $el[0] as HTMLInputElement
     const setter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value')!.set!
     setter.call(input, String(value))
     input.dispatchEvent(new Event('input', { bubbles: true }))
+  })
+  cy.get(scope).find(`[data-cy="range-${which}"]`).should($el => {
+    expect(Number($el.val()), `${which} thumb settled`).to.equal(value)
   })
 }
 
