@@ -15,6 +15,29 @@
 
 service: slackdata
 
+# Phase 4's Cognito resource server needs `cognito-idp:CreateResourceServer` on
+# the DEPLOYING identity — your SSO session, NOT the Lambda execution role. No
+# role grant can supply it; the role holds no cognito-idp action at all, by
+# design (tokens are checked against the pool's public JWKS, not via an AWS API).
+#
+# That action IS granted — confirmed 2026-08-24 by direct API call against a
+# throwaway pool. Earlier revisions of this comment said it was not, which is
+# why the flag exists at all. So DEPLOY IT ON:
+#
+#   DEPLOY_MANUFACTURER_API=true npx serverless deploy --stage prod
+#
+# The default stays 'false' only until half A has succeeded once with it on.
+# After that, delete this condition and make the resource unconditional — a
+# flag nobody will set to 'false' again is just a way to deploy the wrong thing
+# by forgetting it. See LAMBDA_ROLE_PERMISSIONS.md § Deploy-time permissions.
+#
+# With it off, everything else deploys and the manufacturer API is simply
+# dormant — which it is anyway until a brand is onboarded by hand. Do NOT create
+# the resource server by hand as well: CloudFormation would hit a name conflict
+# on identifier `slackdata` and fail the stack.
+custom:
+  manufacturerApi: ${env:DEPLOY_MANUFACTURER_API, 'false'}
+
 provider:
   name: aws
   region: ${opt:region, 'eu-central-1'}          # confirmed with the ISA (2026-08-16)
@@ -28,9 +51,14 @@ provider:
   # Serverless would have auto-generated, matching the account's other services
   # (slackmap-prod-eu-central-1-lambdaRole, isa-tools-prod-…).
   #
-  # The role needs CloudWatch Logs write and nothing else: the catalog is a
-  # read-only SQLite file baked into the image, and the app makes no AWS API
-  # calls at all. See LAUNCH_RUNBOOK.md §5.4.
+  # In Phase 1 the role needed CloudWatch Logs write and nothing else. It now
+  # also needs DynamoDB (PutItem/GetItem/Query/UpdateItem) on `table/slackdata-*`
+  # plus `/index/*`, because submissions and brand-client records are stored
+  # there — the catalogue itself is still a read-only SQLite file in the image
+  # and is never written. **Applied 2026-08-23.** The exact policy is in
+  # ISA_ROLE_REQUEST_PHASE2.md; the reasoning, and what is deliberately excluded
+  # (no DeleteItem, no Scan, no Cognito, no `Resource: "*"`), is in
+  # LAMBDA_ROLE_PERMISSIONS.md. See also LAUNCH_RUNBOOK.md §5.4.
   iam:
     role: arn:aws:iam::${aws:accountId}:role/${self:service}-${self:provider.stage}-${aws:region}-lambdaRole
   architecture: x86_64                             # matches this WSL2 build host (x86_64).
@@ -50,11 +78,356 @@ functions:
       name: api
     memorySize: 512
     timeout: 29                                    # API Gateway hard max
+    environment:
+      # Phase 2 (submissions). The catalogue stays a read-only file baked into
+      # the image; these point at the *separate* stores a submission uses.
+      SUBMISSIONS_TABLE: !Ref SubmissionsTable
+      # Phase 4 (the manufacturer API). A second small table, not a second use
+      # of the submissions one: it is read by primary key on every authenticated
+      # manufacturer request, and unlike a submission a credential mapping must
+      # never expire. No new IAM grant is needed — the role's DynamoDB policy is
+      # scoped to `table/slackdata-*`, which was asked for with exactly this in
+      # mind (infra/ISA_ROLE_REQUEST_PHASE2.md).
+      BRAND_CLIENTS_TABLE: !Ref BrandClientsTable
+      # Must match the resource server scope below, and the default in
+      # slack_data/api/auth.py. A brand's token is refused without it.
+      COGNITO_MANUFACTURER_SCOPE: slackdata/gear.write
+      COGNITO_USER_POOL_ID: !Ref AdminUserPool
+      COGNITO_CLIENT_ID: !Ref AdminUserPoolClient
+      COGNITO_REGION: ${aws:region}
+      SUBMISSION_RETENTION_DAYS: '365'             # pending the ISA's answer
+      # Read from the deployer's shell at deploy time, so the secret is never in
+      # this repo. If it is unset the app fails CLOSED — `POST /submissions`
+      # answers 503 rather than running with the captcha disabled. See
+      # slack_data/utilities/turnstile.py.
+      TURNSTILE_SECRET: ${env:TURNSTILE_SECRET, ''}
+      # No mail configuration, deliberately. **The app sends no email.** SES
+      # would mean an identity to verify, DKIM to keep valid, a sending
+      # reputation attached to slackdata.org, and an execution role able to send
+      # mail *as* our own domain — cost and exposure with nothing bought. The
+      # admin finds new work at /admin. A human-reachable address (a brand
+      # asking to be onboarded) is a Google-forwarded alias on the ISA's domain,
+      # in the manner of slackmap@slacklineinternational.org: outside AWS
+      # entirely, and it outlives whoever holds this account.
+      #
+      # The role still carries `ses:SendEmail` — see LAMBDA_ROLE_PERMISSIONS.md.
+      # It is unused; dropping it is queued for the next policy revision rather
+      # than a round-trip of its own.
     events:
+      # Explicit routes for the public write endpoint, listed BEFORE the
+      # catch-all. They exist solely so the stage can throttle them by name:
+      # route settings key on a route key, and '*' compiles to a single
+      # $default route that cannot be targeted (see RouteSettings below).
+      # FastAPI 307-redirects /submissions to /submissions/, so both spellings
+      # are declared — otherwise the un-slashed one falls through to $default
+      # and is throttled at the generous global rate instead.
+      - httpApi: 'POST /submissions'
+      - httpApi: 'POST /submissions/'
+      # Authenticated, but still the largest body the API accepts (256 KB) and
+      # still a write. Named for the same reason: a route key is the only thing
+      # RouteSettings can throttle.
+      - httpApi: 'POST /manufacturer/gear'
       - httpApi: '*'                               # proxy every method/path to FastAPI
 
 resources:
+
+  Conditions:
+    # See `custom.manufacturerApi` above. String comparison because Serverless
+    # variables always resolve to strings.
+    EnableManufacturerApi: !Equals ['${self:custom.manufacturerApi}', 'true']
+
+  # Patch the stage Serverless generates, to add throttling. RouteSettings is
+  # the only per-route control an HTTP API has, and there is no Serverless v3
+  # syntax for it — hence the extension.
+  extensions:
+    HttpApiStage:
+      Properties:
+        DefaultRouteSettings:
+          # A ceiling for the whole API so no single client can run up a bill.
+          # Generous: the catalogue routes sit behind CloudFront's cache, so
+          # sustained traffic here is already unusual.
+          ThrottlingRateLimit: 50
+          ThrottlingBurstLimit: 100
+        RouteSettings:
+          # The one unauthenticated write endpoint on the site. A human
+          # correcting a spec submits once; two a second with a burst of five is
+          # far more than that and far less than a bot needs to be a problem.
+          #
+          # **Per-stage, not per-IP.** HTTP APIs have no usage plans, so this is
+          # a shared budget: a determined bot can spend it and make the box
+          # unavailable to everyone. Accepted — the cost is a temporarily
+          # unavailable suggestion form, the catalogue is untouched, and the
+          # alternative (WAF rate-based rules) is a monthly bill for a feature
+          # nobody has yet abused. Revisit if it is ever actually abused.
+          'POST /submissions':
+            ThrottlingRateLimit: 2
+            ThrottlingBurstLimit: 5
+          'POST /submissions/':
+            ThrottlingRateLimit: 2
+            ThrottlingBurstLimit: 5
+          # A brand posts their whole line in one call, so the useful rate is
+          # low and the burst matters more than the sustained rate — a first
+          # integration run is a handful of calls in a few seconds, then
+          # nothing for weeks. Per-BRAND quotas would need usage plans, which
+          # HTTP APIs do not have; that is a REST API migration, not a setting.
+          'POST /manufacturer/gear':
+            ThrottlingRateLimit: 1
+            ThrottlingBurstLimit: 10
+
   Resources:
+
+    # ---- Submissions store (Phase 2) ----------------------------------------
+    # NOT the catalogue. The catalogue is a read-only SQLite file in the image,
+    # rebuilt from the root *.json on every deploy; this holds what members of
+    # the public typed, which is the one thing in the system that cannot be
+    # regenerated from git. Hence on-demand billing (~$0 idle) and PITR.
+    SubmissionsTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:service}-submissions-${self:provider.stage}
+        BillingMode: PAY_PER_REQUEST
+        # Attribute names are snake_case, matching slack_data/models/submissions.py
+        # and every other schema in the repo. (SUBMISSIONS_PLAN.md sketched them
+        # in camelCase; consistency with the rest of the API won.)
+        AttributeDefinitions:
+          - AttributeName: submission_id
+            AttributeType: S
+          - AttributeName: status
+            AttributeType: S
+          - AttributeName: created_at
+            AttributeType: S
+          - AttributeName: brand_id
+            AttributeType: N
+          - AttributeName: batch_id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: submission_id
+            KeyType: HASH
+        GlobalSecondaryIndexes:
+          # Triage: "pending, oldest first".
+          # Must stay in step with STATUS_INDEX in submissions/dynamo.py.
+          - IndexName: status-created_at-index
+            KeySchema:
+              - AttributeName: status
+                KeyType: HASH
+              - AttributeName: created_at
+                KeyType: RANGE
+            Projection:
+              ProjectionType: ALL
+          # The manufacturer read-back: "my submissions, newest first", and
+          # "this exact batch" — the 502 partial-batch message names a batch_id
+          # and nothing else, so that has to be answerable as a key condition.
+          #
+          # **Sparse on purpose.** A public submission has neither attribute
+          # (dynamo.py::_to_item drops nulls), so the suggestion box is absent
+          # from this index rather than filtered out of it. `batch_id` is a
+          # monotonic ULID, so the sort key orders by creation time.
+          #
+          # Needs no IAM change: dynamodb:Query is already granted on
+          # table/slackdata-*/index/* (infra/LAMBDA_ROLE_PERMISSIONS.md).
+          # Must stay in step with BRAND_INDEX in submissions/dynamo.py.
+          - IndexName: brand_id-batch_id-index
+            KeySchema:
+              - AttributeName: brand_id
+                KeyType: HASH
+              - AttributeName: batch_id
+                KeyType: RANGE
+            Projection:
+              ProjectionType: ALL
+        TimeToLiveSpecification:
+          # GDPR retention, enforced by the service rather than by a job we
+          # would have to remember to run. Unix SECONDS, written by
+          # models/submissions.py::expiry_epoch. See SUBMISSIONS_PLAN.md § Privacy.
+          AttributeName: expires_at
+          Enabled: true
+        PointInTimeRecoverySpecification:
+          PointInTimeRecoveryEnabled: true
+      # Retained for exactly the reason the comment above gives: this table holds
+      # the one thing in the system that cannot be regenerated from git. PITR
+      # protects it from a bad write; this protects it from a stack teardown or a
+      # property change CloudFormation decides to satisfy by replacement.
+      DeletionPolicy: Retain
+      UpdateReplacePolicy: Retain
+
+    # ---- Brand API clients (Phase 4) ----------------------------------------
+    # Maps a Cognito app client id onto one of our brands. `Brand` has no
+    # account linkage of its own, so this table IS the linkage — and putting it
+    # in data rather than in a per-brand Cognito scope is what makes a leaked
+    # credential revocable with one PutItem, taking effect on the very next
+    # request instead of after a redeploy.
+    #
+    # No TTL, deliberately. A submission expires; a credential mapping that
+    # expired on its own would lock a brand out silently. It holds a contact
+    # address (personal data) — see slack_data/models/brand_clients.py § Privacy
+    # and MANUFACTURER_API_PLAN.md § Open questions 4, which the ISA should see
+    # before this ships.
+    BrandClientsTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:service}-brand-clients-${self:provider.stage}
+        BillingMode: PAY_PER_REQUEST
+        AttributeDefinitions:
+          - AttributeName: client_id
+            AttributeType: S
+          - AttributeName: brand_id
+            AttributeType: N
+        KeySchema:
+          - AttributeName: client_id
+            KeyType: HASH
+        GlobalSecondaryIndexes:
+          # "which clients does this brand hold?" — the admin/audit read, not
+          # the hot path. Must stay in step with BRAND_INDEX in
+          # slack_data/manufacturers/dynamo.py.
+          - IndexName: brand_id-index
+            KeySchema:
+              - AttributeName: brand_id
+                KeyType: HASH
+            Projection:
+              ProjectionType: ALL
+        PointInTimeRecoverySpecification:
+          PointInTimeRecoveryEnabled: true
+      # Losing this table does not lose data that can be regenerated — it locks
+      # every brand out until each one is re-registered by hand.
+      DeletionPolicy: Retain
+      UpdateReplacePolicy: Retain
+
+    # The scope a brand's machine token must carry. Declaring a resource server
+    # is what makes `slackdata/gear.write` a thing Cognito will mint at all.
+    #
+    # The per-brand app clients themselves are NOT in this template, and that is
+    # the point: creating one is the moment we decide a company speaks for a
+    # brand (MANUFACTURER_API_PLAN.md § Open questions 2), which is a human
+    # judgement, not a deploy. Create the app client in the console with the
+    # client_credentials grant and this scope, then run
+    # `python -m slack_data.manufacturers.register` to map it to a brand.
+    ManufacturerResourceServer:
+      Type: AWS::Cognito::UserPoolResourceServer
+      # Off unless DEPLOY_MANUFACTURER_API=true — see `custom.manufacturerApi`.
+      # The BrandClientsTable above is deliberately NOT gated: the function's
+      # environment does `!Ref BrandClientsTable`, and a Ref to a resource whose
+      # condition is false fails the whole template. An empty on-demand table
+      # costs nothing, so it is always created and simply sits unused.
+      Condition: EnableManufacturerApi
+      Properties:
+        UserPoolId: !Ref AdminUserPool
+        Identifier: slackdata
+        Name: SlackData gear API
+        Scopes:
+          - ScopeName: gear.write
+            ScopeDescription: Submit updates to your own gear
+
+    # ---- Admin login (Phase 2) ----------------------------------------------
+    # One user, created by hand. Self-signup is off: this pool exists to
+    # authenticate the person who triages submissions, not to register anyone.
+    AdminUserPool:
+      Type: AWS::Cognito::UserPool
+      Properties:
+        UserPoolName: ${self:service}-admins-${self:provider.stage}
+        # Tagged so the pool can be addressed by attribute rather than by id.
+        # A user pool's ARN contains an id AWS generates at creation, so an IAM
+        # policy written before the first deploy cannot name it — but it CAN
+        # match `aws:ResourceTag/Project`. Free to add now; without it, granting
+        # the Lambda any Cognito permission later means a second round-trip to
+        # the ISA to fill in an id. See ISA_ROLE_REQUEST_PHASE2.md.
+        UserPoolTags:
+          Project: slackdata
+          Stage: ${self:provider.stage}
+        AdminCreateUserConfig:
+          AllowAdminCreateUserOnly: true           # no public sign-up. The point.
+        UsernameAttributes:
+          - email
+        AutoVerifiedAttributes:
+          - email
+        MfaConfiguration: 'OPTIONAL'
+        EnabledMfas:
+          - SOFTWARE_TOKEN_MFA
+        Policies:
+          PasswordPolicy:
+            MinimumLength: 14
+            RequireLowercase: true
+            RequireUppercase: true
+            RequireNumbers: true
+            RequireSymbols: true
+      # Keep the pool (and the admin account in it) even if the stack is torn
+      # down or the resource is replaced — losing it locks the admin out of
+      # triage, and it holds a real person's credentials.
+      DeletionPolicy: Retain
+      UpdateReplacePolicy: Retain
+
+    AdminUserPoolClient:
+      Type: AWS::Cognito::UserPoolClient
+      Properties:
+        ClientName: ${self:service}-admin-spa-${self:provider.stage}
+        UserPoolId: !Ref AdminUserPool
+        # A browser cannot keep a secret, so it must not be issued one — with a
+        # secret configured the SPA's PKCE token exchange fails outright.
+        GenerateSecret: false
+        AllowedOAuthFlows:
+          - code                                   # authorization code + PKCE
+        AllowedOAuthFlowsUserPoolClient: true
+        AllowedOAuthScopes:
+          - openid
+          - email
+        SupportedIdentityProviders:
+          - COGNITO
+        CallbackURLs:
+          - https://slackdata.org/admin
+          - http://localhost:5173/admin            # local dev against the real pool
+        LogoutURLs:
+          - https://slackdata.org/
+          - http://localhost:5173/
+        # The API verifies the ID token; refresh keeps a triage session alive.
+        ExplicitAuthFlows:
+          - ALLOW_REFRESH_TOKEN_AUTH
+          - ALLOW_USER_SRP_AUTH
+        PreventUserExistenceErrors: ENABLED
+
+    AdminUserPoolDomain:
+      Type: AWS::Cognito::UserPoolDomain
+      Properties:
+        UserPoolId: !Ref AdminUserPool
+        # Cognito's own hosted login page. Account-id-suffixed because this
+        # prefix is a per-region global namespace, exactly like the S3 bucket.
+        Domain: ${self:service}-admin-${self:provider.stage}-${aws:accountId}
+
+    # ---- Uploads bucket (Phase 4 — manufacturer photo uploads) ---------------
+    # SEPARATE from the website bucket, and deliberately so. Half B of the deploy
+    # runs `aws s3 sync dist/ --delete` over the web bucket, so anything written
+    # there that is not build output is destroyed on the next deploy — and gear
+    # images ARE build output (frontend/public/gear-images, resolved through a
+    # build-time manifest). An upload landing there would be deleted, and would
+    # not render in the meantime because it is not in the manifest.
+    #
+    # This bucket is never synced by anything. It is a quarantine: unreviewed
+    # binaries from outside the project land here, and become site assets only
+    # once someone has looked at them and committed them like any other image.
+    UploadsBucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: ${self:service}-uploads-${self:provider.stage}-${aws:accountId}
+        # Not served to anyone. CloudFront has no origin here; the only reader is
+        # the admin fetching a photo to review.
+        PublicAccessBlockConfiguration:
+          BlockPublicAcls: true
+          BlockPublicPolicy: true
+          IgnorePublicAcls: true
+          RestrictPublicBuckets: true
+        BucketEncryption:
+          ServerSideEncryptionConfiguration:
+            - ServerSideEncryptionByDefault:
+                SSEAlgorithm: AES256
+        LifecycleConfiguration:
+          Rules:
+            # An upload is either accepted (and committed to the repo, where it
+            # then lives permanently) or it isn't. Either way this copy stops
+            # being the record after a few months, so it should not accumulate.
+            - Id: expire-reviewed-uploads
+              Status: Enabled
+              ExpirationInDays: 90
+            - Id: abort-incomplete-multipart
+              Status: Enabled
+              AbortIncompleteMultipartUpload:
+                DaysAfterInitiation: 7
 
     # ---- Website bucket (private; served only through CloudFront) ------------
     WebBucket:
@@ -104,6 +477,54 @@ resources:
               request.uri = request.uri.replace(/^\/api/, '');
               if (request.uri === '') {
                   request.uri = '/';
+              }
+              return request;
+          }
+
+    # ---- SPA deep links, without hijacking a status code --------------------
+    # Client-routed paths (/webbings/17, /admin) are not objects in S3, so they
+    # have to resolve to index.html. This used to be done with a distribution
+    # CustomErrorResponse mapping 403 -> 200 /index.html, exploiting the fact
+    # that S3-with-OAC answers 403 rather than 404 for a missing key.
+    #
+    # That had to go. **CustomErrorResponses are distribution-wide** — the old
+    # comment said so and reasoned only about 404 — so they applied to /api/*
+    # too. In Phase 1 that was harmless because the API never returned 403. It
+    # does now: an unregistered or revoked brand credential, a credential
+    # lacking permission (api/auth.py) and gear belonging to another brand
+    # (manufacturers/matching.py) are all 403. Every one of them would have
+    # reached the caller as **200 OK with a page of HTML**, so a manufacturer
+    # integration would either fail parsing JSON or, worse, read 200 as success
+    # and believe a revoked credential still worked.
+    #
+    # Rewriting the request instead is both narrower and more correct: it is
+    # attached to the default behaviour only, so /api/* cannot be affected by
+    # it, and a genuinely missing asset now returns a real 404/403 rather than
+    # 200 + HTML.
+    SpaRoutingFunction:
+      Type: AWS::CloudFront::Function
+      Properties:
+        Name: ${self:service}-spa-routing-${self:provider.stage}
+        AutoPublish: true
+        FunctionConfig:
+          Comment: Serve index.html for client-routed paths
+          Runtime: cloudfront-js-1.0
+        FunctionCode: |
+          function handler(event) {
+              var request = event.request;
+              var uri = request.uri;
+              // A directory-ish path is always a route, never an object.
+              if (uri.endsWith('/')) {
+                  request.uri = '/index.html';
+                  return request;
+              }
+              // Otherwise: an extension means a real asset (/assets/x-a1b2.js,
+              // /gear-images/webbings/y.webp, /favicon.ico); no extension means
+              // a react-router path. Every route in App.tsx is extensionless —
+              // gear ids are numeric, so no path segment contains a dot.
+              var last = uri.substring(uri.lastIndexOf('/') + 1);
+              if (last.indexOf('.') === -1) {
+                  request.uri = '/index.html';
               }
               return request;
           }
@@ -168,6 +589,11 @@ resources:
             ViewerProtocolPolicy: redirect-to-https
             # AWS managed "CachingOptimized" policy id
             CachePolicyId: 658327ea-f89d-4fab-a63d-7e88639e58f6
+            # Attached HERE and not to /api/* — that is the whole point; see
+            # SpaRoutingFunction above.
+            FunctionAssociations:
+              - EventType: viewer-request
+                FunctionARN: !GetAtt SpaRoutingFunction.FunctionMetadata.FunctionARN
           CacheBehaviors:
             - PathPattern: /api/*
               TargetOriginId: api-httpapi
@@ -179,16 +605,11 @@ resources:
               FunctionAssociations:
                 - EventType: viewer-request
                   FunctionARN: !GetAtt StripApiFunction.FunctionMetadata.FunctionARN
-          # SPA deep links: serve index.html for client-routed paths.
-          #
-          # 403 ONLY — CustomErrorResponses are distribution-wide, so they apply
-          # to /api/* too. S3 with OAC returns 403 (not 404) for a missing key,
-          # so 403 alone covers deep links; adding 404 here would rewrite the
-          # API's JSON 404s into HTML 200s and break not-found handling.
-          CustomErrorResponses:
-            - ErrorCode: 403
-              ResponseCode: 200
-              ResponsePagePath: /index.html
+          # No CustomErrorResponses, deliberately. Deep links are handled by
+          # SpaRoutingFunction on the default behaviour above; a distribution-wide
+          # error mapping would rewrite the API's 403s (revoked credential, another
+          # brand's gear) into 200 + HTML. Anything added here applies to /api/*
+          # as well — check what the API can return before adding one.
 
   Outputs:
     WebBucketName:
@@ -197,3 +618,19 @@ resources:
       Value: !GetAtt Cdn.DomainName
     CdnDistributionId:
       Value: !Ref Cdn
+    # The SPA needs these three to build its login. See infra/README.md half B.
+    AdminUserPoolId:
+      Value: !Ref AdminUserPool
+    AdminUserPoolClientId:
+      Value: !Ref AdminUserPoolClient
+    AdminLoginDomain:
+      Value: !Sub '${AdminUserPoolDomain}.auth.${AWS::Region}.amazoncognito.com'
+    SubmissionsTableName:
+      Value: !Ref SubmissionsTable
+    BrandClientsTableName:
+      Value: !Ref BrandClientsTable
+    # Where a brand exchanges its client id + secret for a token.
+    ManufacturerTokenUrl:
+      Value: !Sub 'https://${AdminUserPoolDomain}.auth.${AWS::Region}.amazoncognito.com/oauth2/token'
+    UploadsBucketName:
+      Value: !Ref UploadsBucket

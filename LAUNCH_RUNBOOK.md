@@ -805,8 +805,13 @@ sense, under the ISA's name, not the technical one:
       directly (§5.4): `Allow *` minus a deny list. No VPC issue (`ec2:*` is denied outright, and the
       stack runs Lambda outside a VPC by design). Everything the deploy needs is permitted **except**
       IAM role creation.
-- [ ] **A Lambda execution role, created by an ISA admin** (§5.4) — the only thing blocking launch.
-      Policy requested by email 2026-08-16.
+- [x] ~~**A Lambda execution role, created by an ISA admin** (§5.4).~~ Created for Phase 1, and
+      **extended for Phase 2/4 on 2026-08-23** (DynamoDB on `table/slackdata-*`, S3 on the uploads
+      bucket, an unused SES grant to drop at the next revision). Re-confirmed against the live role
+      2026-08-24; the authoritative text is
+      [infra/ISA_ROLE_REQUEST_PHASE2.md](infra/ISA_ROLE_REQUEST_PHASE2.md). Nothing in it is a
+      deploy-time permission — see infra/LAMBDA_ROLE_PERMISSIONS.md § Deploy-time permissions for
+      that separate question.
 - [ ] Budget alarm (§9) must be set by an admin — `budgets:*` and `ce:*` are denied to this
       permission set.
 - [ ] Captcha provider, ahead of Phase 2 (Turnstile is free and simple).
