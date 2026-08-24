@@ -85,9 +85,35 @@ export default function BrandDetailPage() {
           {brand.name}
         </h1>
       )}
-      <p className="mb-8 mt-1 text-sm text-gray-500">
+      <p className="mt-1 text-sm text-gray-500">
         {brand.total} {brand.total === 1 ? 'item' : 'items'}
       </p>
+
+      {/* Contact email — detail page only, never the 76-card directory grid.
+          One address per page is a contact link; seventy-six in one document is
+          a harvest. See DESIGN.md § Manufacturers Page → Contact email. */}
+      {brand.contact_email ? (
+        <a
+          data-cy="brand-detail-email"
+          href={`mailto:${brand.contact_email}`}
+          className="mt-2 inline-flex w-fit items-center gap-1.5 text-sm text-teal-primary hover:underline"
+        >
+          <svg
+            aria-hidden="true"
+            viewBox="0 0 20 20"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            className="h-4 w-4 shrink-0"
+          >
+            <rect x="2.5" y="4.5" width="15" height="11" rx="2" />
+            <path d="m3 6 7 5 7-5" />
+          </svg>
+          {brand.contact_email}
+        </a>
+      ) : null}
+
+      <div className="mb-8" />
 
       {sections.length === 0 ? (
         <div data-cy="empty-state" className="py-16 text-center text-gray-500">

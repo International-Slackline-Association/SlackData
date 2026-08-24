@@ -1,7 +1,7 @@
 
 
 from slack_data.database import SessionDep
-from slack_data.load_data._seed_io import read_seed_json, seed_path, to_bool
+from slack_data.load_data._seed_io import read_seed_json, require_seed_id, seed_path, to_bool
 from slack_data.models.brands import Brand, get_brand
 from slack_data.models.starterkits import StarterKit, StarterKitCreate, TensioningType
 from slack_data.utilities.currencies import get_currency
@@ -89,6 +89,7 @@ def add_starterkits_to_db(starterkits: list[dict], session: SessionDep) -> None:
         )
 
         db_sk = StarterKit.model_validate(starterkit_create)
+        db_sk.id = require_seed_id(sk, "starterkits.json")
         db_sk.brand = session.get(Brand, brand_id)
         print(f"Adding starter kit: {db_sk.name} by {db_sk.brand.name}")
         session.add(db_sk)

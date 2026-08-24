@@ -1,7 +1,7 @@
 
 
 from slack_data.database import SessionDep
-from slack_data.load_data._seed_io import read_seed_json, seed_path, to_bool
+from slack_data.load_data._seed_io import read_seed_json, require_seed_id, seed_path, to_bool
 from slack_data.models.brands import Brand, get_brand
 from slack_data.models.rollers import BearingMaterial, LockType, SliderType, Roller, RollerCreate
 from slack_data.utilities.currencies import get_currency
@@ -69,6 +69,7 @@ def add_rollers_to_db(rollers: list[dict], session: SessionDep) -> None:
             active=roller.get("active"),
         )
         db_roller = Roller.model_validate(roller_create)
+        db_roller.id = require_seed_id(roller, "rollers.json")
         db_roller.brand = session.get(Brand, brand_id)
         print(f"Adding roller: {db_roller.name} by {db_roller.brand.name}")
         session.add(db_roller)

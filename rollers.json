@@ -1,5 +1,6 @@
 [
     {
+        "id": 1,
         "name": "AIDMAN",
         "material": null,
         "weight": 139,
@@ -20,6 +21,7 @@
         "active": false
     },
     {
+        "id": 2,
         "name": "Hangover 2.0",
         "material": "Aluminum, Steel",
         "weight": 152,
@@ -43,6 +45,7 @@
         "active": true
     },
     {
+        "id": 3,
         "name": "HangOver Stainless",
         "material": "Aluminum, Stainless Steel",
         "weight": 152,
@@ -67,6 +70,7 @@
         "active": true
     },
     {
+        "id": 4,
         "name": "HangOver-S",
         "material": "Aluminum, Steel",
         "weight": 157,
@@ -90,6 +94,7 @@
         "active": true
     },
     {
+        "id": 5,
         "name": "HangOver Royal",
         "material": "Aluminum",
         "weight": 154,
@@ -114,6 +119,7 @@
         "active": true
     },
     {
+        "id": 6,
         "name": "HighSlide 2.0",
         "material": "Aluminum",
         "weight": 110,
@@ -137,6 +143,7 @@
         "active": false
     },
     {
+        "id": 7,
         "name": "LineBuggy",
         "material": "Stainless Steel",
         "weight": 140,
@@ -151,8 +158,8 @@
         "outer_bearing_diameter": null,
         "isa_approved": null,
         "manufacturer": "SlackGear",
-        "price": 15.39,
-        "price_unit": "EUR",
+        "price": 380.0,
+        "price_unit": "ZAR",
         "roller_material": null,
         "locking_type": "Non-locking",
         "date_introduced": null,
@@ -160,6 +167,7 @@
         "active": false
     },
     {
+        "id": 8,
         "name": "Motum webbing pulley",
         "material": "Stainless Steel",
         "weight": 85,
@@ -183,6 +191,7 @@
         "active": false
     },
     {
+        "id": 9,
         "name": "Pulley",
         "material": "Stainless Steel",
         "weight": 135,
@@ -206,6 +215,7 @@
         "active": true
     },
     {
+        "id": 10,
         "name": "Rock'n'Roll",
         "material": "Aluminum, Stainless Steel",
         "weight": 210,
@@ -229,6 +239,7 @@
         "active": false
     },
     {
+        "id": 11,
         "name": "ROLLEX SS",
         "material": "Aluminum, Stainless Steel",
         "weight": 129,
@@ -253,6 +264,7 @@
         "active": true
     },
     {
+        "id": 12,
         "name": "ROLLEX SG",
         "material": "Aluminum, Steel",
         "weight": 129,
@@ -276,6 +288,7 @@
         "active": true
     },
     {
+        "id": 13,
         "name": "ROLLEX",
         "material": "Aluminum, Steel",
         "weight": 129,
@@ -299,6 +312,7 @@
         "active": true
     },
     {
+        "id": 14,
         "name": "SKIP",
         "material": "Stainless Steel",
         "weight": 165,
@@ -322,6 +336,7 @@
         "active": false
     },
     {
+        "id": 15,
         "name": "SKIP UL",
         "material": "Stainless Steel",
         "weight": 108,
@@ -345,6 +360,7 @@
         "active": false
     },
     {
+        "id": 16,
         "name": "High-way",
         "material": "Nylon, Aluminum",
         "weight": 67,
@@ -368,6 +384,7 @@
         "active": false
     },
     {
+        "id": 17,
         "name": "BC Roller - Straight Gate",
         "material": "Aluminum, Stainless Steel",
         "weight": 121,
@@ -389,6 +406,7 @@
         "active": true
     },
     {
+        "id": 18,
         "name": "BC Roller - 2-Stage Twist Lock",
         "material": "Aluminum, Stainless Steel",
         "weight": 136,
@@ -410,6 +428,7 @@
         "active": true
     },
     {
+        "id": 19,
         "name": "HIGHWHEEL Longline Flat Pulley",
         "material": "Aluminum, Steel",
         "weight": 91,
@@ -434,6 +453,7 @@
         "active": true
     },
     {
+        "id": 20,
         "name": "Rolley",
         "material": null,
         "weight": null,
@@ -457,6 +477,7 @@
         "active": true
     },
     {
+        "id": 21,
         "name": "Polia de Fita Bera",
         "material": "Aluminum, Stainless Steel",
         "weight": 125,
@@ -478,6 +499,7 @@
         "active": true
     },
     {
+        "id": 22,
         "name": "Hangover 1.0",
         "material": null,
         "weight": null,

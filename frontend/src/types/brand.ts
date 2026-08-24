@@ -16,6 +16,7 @@ export interface Brand {
   slackline_focused: boolean
   website: string | null
   socials: string | null
+  contact_email: string | null
   description: string | null
   notes: string | null
   webbings: string[]

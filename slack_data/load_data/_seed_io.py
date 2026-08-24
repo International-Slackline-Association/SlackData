@@ -53,3 +53,35 @@ def to_bool(value: Any, default: bool = False) -> bool:
     if isinstance(value, str):
         return value.strip().lower() in _TRUTHY
     return bool(value)
+
+
+def require_seed_id(item: dict, filename: str) -> int:
+    """The item's explicit `id`, or a loud failure.
+
+    Gear ids used to be SQLite autoincrements, i.e. a statement about where an
+    item sat in its file: insert one product mid-file and every id after it
+    shifted, silently re-pointing ISA warning matches, brand credentials,
+    submitted corrections and bookmarked links. The id now lives in the seed, and
+    the loaders assign it rather than letting the database choose.
+
+    Missing is a hard error, never a fallback to autoincrement — a fallback would
+    put the old behaviour back on the one path nobody watches, the freshly
+    appended item.
+
+    A digit string is accepted because several `clean_*_data()` passes coerce
+    unrecognised values with `str()`; that is their job, and re-teaching eight of
+    them about one key is more moving parts than reading the number back.
+    """
+    value = item.get("id")
+    if isinstance(value, bool):  # `bool` is an `int` in Python; `true` is not an id.
+        value = None
+    if isinstance(value, str) and value.strip().isdigit():
+        value = int(value)
+    if not isinstance(value, int) or value < 1:
+        raise ValueError(
+            # `raw_name` is what clean_weblock_data() calls it.
+            f"{filename}: {item.get('name') or item.get('raw_name')!r}"
+            f' has no valid "id" ({value!r}).'
+            " Run scripts/backfill_seed_ids.py to give it one."
+        )
+    return value

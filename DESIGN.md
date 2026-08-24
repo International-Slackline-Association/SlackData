@@ -694,6 +694,28 @@ heading sits on its own line **below** the "← Manufacturers" back link, and is
 brand's `website` (new tab, teal hover + underline) when one exists — the same destination as the
 card's Visit Website button. Brands with no `website` render the name as a plain, non-link heading.
 
+**Contact email.** Brands with a `contact_email` show it under the item count as a teal `mailto:`
+link with a small envelope glyph (`brand-detail-email`). Brands without one render **nothing at
+all** — no placeholder, no greyed "No Email" chip — the same rule the card's missing flag follows.
+This is the one place the two "no data" conventions on this page diverge, and deliberately: the
+card's **No Website** chip exists to keep a grid of card footers aligned, and there is no grid here
+to align.
+
+**It is on the detail page only, and never on the manufacturers grid.** One address on a page a
+reader navigated to is a contact link; seventy-six addresses in a single HTML document is a mailing
+list, and scraping one is a page fetch. The directory keeps its **Visit Website** pill and nothing
+more. `manufacturers.cy.ts` asserts the absence (`a[href^="mailto:"]` must not exist on
+`/manufacturers`), so this is a rule with a test behind it rather than an omission someone can
+helpfully "fix" later.
+
+The data behind it is ours rather than SlackDB's — scraped from each manufacturer's own site, 34 of
+76 entries, 26 of which match a brand we actually hold gear for. Only **role mailboxes**
+(`info@`, `sales@`, `support@`) and **brand-named mailboxes** (`yogaslackers@gmail.com`) are
+published; addresses naming a person were found during the scrape and dropped, and
+`tests/test_manufacturer_emails.py` keeps them out — see `models/brand_clients.py` § Privacy for
+the same argument applied to the *private* contact field, which this column is a wider-exposure
+sibling of.
+
 **Detail page gear sections.** Below the heading the brand's inventory is grouped into one section
 per gear type, in the nav's gear-type order; types the brand has none of are omitted entirely.
 

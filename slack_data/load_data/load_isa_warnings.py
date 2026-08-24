@@ -16,12 +16,18 @@ carries a hand-adjudicated `match` block written alongside the scrape:
 manufacturer's website does ("Ginko mini", "Catlock SL", "AWL 5"), which often
 is not the string in our catalogue ("Ginkgo Mini", "Catlock SR", "Alpine WebLock
 5.0"). Fuzzy matching those at load time gets both false positives and misses,
-so the adjudication was done once, by hand, and recorded as ids. Ids, though,
-are assigned by seed order — insert an item into the middle of `webbings.json`
-and every id after it shifts, silently re-pointing warnings at the wrong gear.
-So each id is checked against the `"<brand> <name>"` string recorded next to it,
-and a row that does not match is **skipped with a warning** rather than stamped.
-That makes seed-order drift loud and non-destructive.
+so the adjudication was done once, by hand, and recorded as ids. Ids used to be
+assigned by seed order, which made that a fragile thing to record — inserting an
+item into the middle of `webbings.json` shifted every id after it and silently
+re-pointed warnings at the wrong gear. They are explicit in the seeds now
+(`load_data/_seed_io.require_seed_id`), so that particular drift is gone.
+
+The verification stays regardless: each id is checked against the
+`"<brand> <name>"` string recorded next to it, and a row that does not match is
+**skipped with a warning** rather than stamped. A recall pointed at the wrong
+product is the one error here worth being noisy about, and this block was
+adjudicated by hand — the check costs one comparison and catches a mistyped id
+as readily as it caught the drift.
 
 The pass writes two things:
 

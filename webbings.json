@@ -1,5 +1,6 @@
 [
     {
+        "id": 1,
         "name": "Core 2 HS",
         "brand": "Landcruising",
         "stretch": [
@@ -62,6 +63,7 @@
         "active": false
     },
     {
+        "id": 2,
         "name": "Core 2 LS",
         "brand": "Landcruising",
         "stretch": [
@@ -124,6 +126,7 @@
         "active": false
     },
     {
+        "id": 3,
         "name": "Core 1",
         "brand": "Landcruising",
         "stretch": [
@@ -186,6 +189,7 @@
         "active": false
     },
     {
+        "id": 4,
         "name": "T-Wave",
         "brand": "Landcruising",
         "stretch": [
@@ -256,6 +260,7 @@
         "active": false
     },
     {
+        "id": 5,
         "name": "Sonic 2",
         "brand": "Aki Slacklines",
         "materialType": "Nylon",
@@ -417,6 +422,7 @@
         "active": false
     },
     {
+        "id": 6,
         "name": "White Magic",
         "brand": "Landcruising",
         "stretch": [
@@ -486,6 +492,7 @@
         "active": false
     },
     {
+        "id": 7,
         "name": "Unicorn",
         "brand": "Landcruising",
         "stretch": [
@@ -552,6 +559,7 @@
         "active": false
     },
     {
+        "id": 8,
         "name": "Wizard",
         "brand": "Landcruising",
         "stretch": [
@@ -622,6 +630,7 @@
         "active": false
     },
     {
+        "id": 9,
         "name": "Aero 1",
         "brand": "BalanceCommunity",
         "stretch": [
@@ -720,6 +729,7 @@
         "active": false
     },
     {
+        "id": 10,
         "name": "Aero 2",
         "brand": "BalanceCommunity",
         "stretch": [
@@ -818,6 +828,7 @@
         "active": false
     },
     {
+        "id": 11,
         "name": "Feather",
         "brand": "BalanceCommunity",
         "stretch": [
@@ -876,6 +887,7 @@
         "active": true
     },
     {
+        "id": 12,
         "name": "Feather Pro",
         "brand": "BalanceCommunity",
         "stretch": [
@@ -974,6 +986,7 @@
         "active": true
     },
     {
+        "id": 13,
         "name": "Mantra MK1",
         "brand": "BalanceCommunity",
         "stretch": [
@@ -1070,6 +1083,7 @@
         "isa_certified": false
     },
     {
+        "id": 14,
         "name": "Mantra MK2",
         "brand": "BalanceCommunity",
         "stretch": [
@@ -1166,6 +1180,7 @@
         "isa_certified": false
     },
     {
+        "id": 15,
         "name": "Mantra MK3",
         "brand": "Balance Community: Slackline Outfitters",
         "materialType": "Polyester",
@@ -1248,6 +1263,7 @@
         "active": false
     },
     {
+        "id": 16,
         "name": "Mantra MK4 Flight",
         "brand": "BalanceCommunity",
         "stretch": [
@@ -1346,6 +1362,7 @@
         "active": true
     },
     {
+        "id": 17,
         "name": "Type 18 MK1",
         "brand": "BalanceCommunity",
         "stretch": [
@@ -1413,6 +1430,7 @@
         "isa_certified": false
     },
     {
+        "id": 18,
         "name": "Type 18 MKII",
         "brand": "Balance Community: Slackline Outfitters",
         "materialType": "Nylon",
@@ -1479,6 +1497,7 @@
         "active": false
     },
     {
+        "id": 19,
         "name": "Lift",
         "brand": "BalanceCommunity",
         "stretch": [
@@ -1577,6 +1596,7 @@
         "active": false
     },
     {
+        "id": 20,
         "name": "Spider Silk MK2",
         "brand": "Balance Community: Slackline Outfitters",
         "materialType": "Vectran",
@@ -1675,6 +1695,7 @@
         "active": false
     },
     {
+        "id": 21,
         "name": "Maverick",
         "brand": "Slack.fr",
         "materialType": "Polyester",
@@ -1700,6 +1721,7 @@
         "active": false
     },
     {
+        "id": 22,
         "name": "Moonwalk",
         "brand": "Slack.fr",
         "stretch": [
@@ -1738,6 +1760,7 @@
         "active": false
     },
     {
+        "id": 23,
         "name": "McFly",
         "brand": "Slack.fr",
         "stretch": [
@@ -1768,6 +1791,7 @@
         "active": false
     },
     {
+        "id": 24,
         "name": "Bluewing",
         "brand": "Elephant Slacklines",
         "stretch": [
@@ -1865,6 +1889,7 @@
         "active": false
     },
     {
+        "id": 25,
         "name": "Passion Red",
         "brand": "Elephant",
         "materialType": "Nylon",
@@ -1923,6 +1948,7 @@
         "active": false
     },
     {
+        "id": 26,
         "name": "SlackPro 42kN",
         "brand": "Slack Pro!",
         "materialType": "Polyester",
@@ -2003,6 +2029,7 @@
         "active": false
     },
     {
+        "id": 27,
         "name": "Sigma N",
         "brand": "slackliner.de",
         "stretch": [
@@ -2064,6 +2091,7 @@
         "active": true
     },
     {
+        "id": 28,
         "name": "Sigma X",
         "brand": "Slackliner.de",
         "materialType": "Nylon",
@@ -2125,6 +2153,7 @@
         "active": true
     },
     {
+        "id": 29,
         "name": "Sigma Impact",
         "brand": "slackliner.de",
         "stretch": [
@@ -2183,6 +2212,7 @@
         "active": true
     },
     {
+        "id": 30,
         "name": "Sigma LG",
         "brand": "slackliner.de",
         "stretch": [
@@ -2229,6 +2259,7 @@
         "active": false
     },
     {
+        "id": 31,
         "name": "Dragon",
         "brand": "Equilibrium",
         "stretch": [
@@ -2267,6 +2298,7 @@
         "active": true
     },
     {
+        "id": 32,
         "name": "Sumo",
         "brand": "Equilibrium",
         "stretch": [
@@ -2305,6 +2337,7 @@
         "active": false
     },
     {
+        "id": 33,
         "name": "Bounce",
         "brand": "Equilibrium",
         "stretch": [
@@ -2339,6 +2372,7 @@
         "active": true
     },
     {
+        "id": 34,
         "name": "Flash",
         "brand": "Equilibrium",
         "stretch": [
@@ -2375,6 +2409,7 @@
         "active": false
     },
     {
+        "id": 35,
         "name": "Element",
         "brand": "Equilibrium",
         "stretch": [
@@ -2409,6 +2444,7 @@
         "active": true
     },
     {
+        "id": 36,
         "name": "Skye",
         "brand": "Equilibrium",
         "stretch": [
@@ -2475,6 +2511,7 @@
         "active": false
     },
     {
+        "id": 37,
         "name": "Fresh",
         "brand": "Equilibrium",
         "stretch": [
@@ -2513,6 +2550,7 @@
         "active": true
     },
     {
+        "id": 38,
         "name": "eLine",
         "brand": "yogaslackers",
         "stretch": [
@@ -2541,6 +2579,7 @@
         "isa_certified": false
     },
     {
+        "id": 39,
         "name": "Cobalt",
         "brand": "SlackMountain",
         "stretch": [
@@ -2575,6 +2614,7 @@
         "active": true
     },
     {
+        "id": 40,
         "name": "Windu",
         "brand": "SlackMountain",
         "stretch": [
@@ -2609,6 +2649,7 @@
         "active": false
     },
     {
+        "id": 41,
         "name": "Snake Tub",
         "brand": "Slack Mountain",
         "materialType": "Polyester",
@@ -2639,6 +2680,7 @@
         "active": true
     },
     {
+        "id": 42,
         "name": "Diablo2",
         "brand": "Slack Mountain",
         "materialType": "Polyester",
@@ -2673,6 +2715,7 @@
         "active": false
     },
     {
+        "id": 43,
         "name": "Goku 2",
         "brand": "SlackMountain",
         "stretch": [
@@ -2710,6 +2753,7 @@
         "active": false
     },
     {
+        "id": 44,
         "name": "Artic Fox",
         "brand": "SlackMountain",
         "stretch": [
@@ -2740,6 +2784,7 @@
         "active": false
     },
     {
+        "id": 45,
         "name": "Flax",
         "brand": "Slack Mountain",
         "materialType": "Nylon",
@@ -2766,6 +2811,7 @@
         "active": false
     },
     {
+        "id": 46,
         "name": "morpheus",
         "brand": "SlackMountain",
         "stretch": [
@@ -2800,6 +2846,7 @@
         "active": false
     },
     {
+        "id": 47,
         "name": "spectre",
         "brand": "SlackMountain",
         "stretch": [
@@ -2834,6 +2881,7 @@
         "active": false
     },
     {
+        "id": 48,
         "name": "rubalise",
         "brand": "SlackMountain",
         "stretch": [
@@ -2860,6 +2908,7 @@
         "active": false
     },
     {
+        "id": 49,
         "name": "wallaby",
         "brand": "SlackMountain",
         "stretch": [
@@ -2886,6 +2935,7 @@
         "active": true
     },
     {
+        "id": 50,
         "name": "Storm",
         "brand": "SlackMountain",
         "stretch": [
@@ -2912,6 +2962,7 @@
         "active": false
     },
     {
+        "id": 51,
         "name": "plum",
         "brand": "SlackMountain",
         "stretch": [
@@ -2938,6 +2989,7 @@
         "active": true
     },
     {
+        "id": 52,
         "name": "Cosmic",
         "brand": "Slack Inov",
         "stretch": [
@@ -3035,6 +3087,7 @@
         "active": true
     },
     {
+        "id": 53,
         "name": "Donkey",
         "brand": "Slack Inov",
         "stretch": [
@@ -3068,6 +3121,7 @@
         "active": false
     },
     {
+        "id": 54,
         "name": "Nova",
         "brand": "Slack Inov",
         "stretch": [
@@ -3101,6 +3155,7 @@
         "active": false
     },
     {
+        "id": 55,
         "name": "Mammut",
         "brand": "Mammut",
         "stretch": [
@@ -3195,6 +3250,7 @@
         "active": false
     },
     {
+        "id": 56,
         "name": "Rainbow",
         "brand": "Raed Slacklines",
         "stretch": [
@@ -3277,6 +3333,7 @@
         "active": true
     },
     {
+        "id": 57,
         "name": "Parsec",
         "brand": "Raed Slacklines",
         "stretch": [
@@ -3375,6 +3432,7 @@
         "active": true
     },
     {
+        "id": 58,
         "name": "MOTM",
         "brand": "Raed Slacklines",
         "stretch": [
@@ -3473,6 +3531,7 @@
         "active": true
     },
     {
+        "id": 59,
         "name": "Helium",
         "brand": "Raed Slacklines",
         "stretch": [
@@ -3571,6 +3630,7 @@
         "active": true
     },
     {
+        "id": 60,
         "name": "Cumulus",
         "brand": "Raed Slacklines",
         "stretch": [
@@ -3648,6 +3708,7 @@
         "active": false
     },
     {
+        "id": 61,
         "name": "pinkTube",
         "brand": "Slacktivity",
         "stretch": [
@@ -3761,6 +3822,7 @@
         "active": true
     },
     {
+        "id": 62,
         "name": "redTube",
         "brand": "Slacktivity",
         "stretch": [
@@ -3926,6 +3988,7 @@
         "active": true
     },
     {
+        "id": 63,
         "name": "Marathon",
         "brand": "Slacktivity",
         "stretch": [
@@ -4087,6 +4150,7 @@
         "active": true
     },
     {
+        "id": 64,
         "name": "Marathon Play",
         "brand": "Slacktivity",
         "stretch": [
@@ -4248,6 +4312,7 @@
         "active": false
     },
     {
+        "id": 65,
         "name": "Half-Marathon",
         "brand": "Slacktivity",
         "stretch": [
@@ -4378,6 +4443,7 @@
         "active": true
     },
     {
+        "id": 66,
         "name": "Raven",
         "brand": "Balanceur",
         "stretch": [
@@ -4460,6 +4526,7 @@
         "active": false
     },
     {
+        "id": 67,
         "name": "Milky Way",
         "brand": "Balanceur",
         "stretch": [
@@ -4605,6 +4672,7 @@
         "active": false
     },
     {
+        "id": 68,
         "name": "Tender",
         "brand": "Spider slacklines",
         "materialType": "Polyester",
@@ -4703,6 +4771,7 @@
         "active": true
     },
     {
+        "id": 69,
         "name": "Fly",
         "brand": "Spider slacklines",
         "materialType": "Polyester",
@@ -4800,6 +4869,7 @@
         "active": true
     },
     {
+        "id": 70,
         "name": "Zao",
         "brand": "Spider slacklines",
         "materialType": "Polyester",
@@ -4898,6 +4968,7 @@
         "active": true
     },
     {
+        "id": 71,
         "name": "Edge",
         "brand": "Spider Slacklines",
         "stretch": [
@@ -4996,6 +5067,7 @@
         "active": true
     },
     {
+        "id": 72,
         "name": "Jumbo",
         "brand": "Spider Slacklines",
         "stretch": [
@@ -5094,6 +5166,7 @@
         "active": true
     },
     {
+        "id": 73,
         "name": "Nylove",
         "brand": "Spider Slacklines",
         "stretch": [
@@ -5192,6 +5265,7 @@
         "active": true
     },
     {
+        "id": 74,
         "name": "Y2k",
         "brand": "Slacktivity",
         "stretch": [
@@ -5217,6 +5291,7 @@
         "active": true
     },
     {
+        "id": 75,
         "name": "Ribera",
         "brand": "Pump Slackline",
         "materialType": "Polyester",
@@ -5231,6 +5306,7 @@
         "active": false
     },
     {
+        "id": 76,
         "name": "Bloodline",
         "brand": "Pure Slacklines",
         "materialType": "Polyester",
@@ -5250,6 +5326,7 @@
         "active": false
     },
     {
+        "id": 77,
         "name": "Tape",
         "brand": "Singing rock",
         "materialType": "Polyester",
@@ -5268,6 +5345,7 @@
         "active": true
     },
     {
+        "id": 78,
         "name": "Ninja",
         "brand": "Equilibrium Slacklines (EQB)",
         "materialType": "Nylon",
@@ -5289,6 +5367,7 @@
         "active": false
     },
     {
+        "id": 79,
         "name": "Nitro",
         "brand": "Equilibrium Slacklines (EQB)",
         "materialType": "Polyester",
@@ -5310,6 +5389,7 @@
         "active": false
     },
     {
+        "id": 80,
         "name": "Slim Green",
         "brand": "Equilibrium Slacklines (EQB)",
         "materialType": "Polyester",
@@ -5332,6 +5412,7 @@
         "active": true
     },
     {
+        "id": 81,
         "name": "Chartreuse",
         "brand": "Line Spirit",
         "materialType": "Polyester",
@@ -5351,6 +5432,7 @@
         "active": false
     },
     {
+        "id": 82,
         "name": "Dibona",
         "brand": "Line Spirit",
         "materialType": "Polyester",
@@ -5370,6 +5452,7 @@
         "active": false
     },
     {
+        "id": 83,
         "name": "Elia",
         "brand": "Line Spirit",
         "materialType": "Polyester",
@@ -5389,6 +5472,7 @@
         "active": false
     },
     {
+        "id": 84,
         "name": "Etna II",
         "brand": "Line Spirit",
         "materialType": "Polyester",
@@ -5408,6 +5492,7 @@
         "active": false
     },
     {
+        "id": 85,
         "name": "Fuji",
         "brand": "Line Spirit",
         "materialType": "Dyneema/HMPE",
@@ -5427,6 +5512,7 @@
         "active": false
     },
     {
+        "id": 86,
         "name": "Krakatoa",
         "brand": "Line Spirit",
         "materialType": "Polyester",
@@ -5441,6 +5527,7 @@
         "active": false
     },
     {
+        "id": 87,
         "name": "Mauna Kea",
         "brand": "Line Spirit",
         "materialType": "Polyester",
@@ -5460,6 +5547,7 @@
         "active": false
     },
     {
+        "id": 88,
         "name": "Pierra Menta",
         "brand": "Line Spirit",
         "materialType": "Nylon",
@@ -5479,6 +5567,7 @@
         "active": false
     },
     {
+        "id": 89,
         "name": "Vercors",
         "brand": "Line Spirit",
         "materialType": "Polyester",
@@ -5498,6 +5587,7 @@
         "active": false
     },
     {
+        "id": 90,
         "name": "Vesuve",
         "brand": "Line Spirit",
         "materialType": "Polyester",
@@ -5517,6 +5607,7 @@
         "active": false
     },
     {
+        "id": 91,
         "name": "Sat'Elite",
         "brand": "Dakas",
         "materialType": "Nylon",
@@ -5533,6 +5624,7 @@
         "active": false
     },
     {
+        "id": 92,
         "name": "Red Zebra",
         "brand": "Dakas",
         "materialType": "Nylon",
@@ -5554,6 +5646,7 @@
         "active": false
     },
     {
+        "id": 93,
         "name": "Slack Swan",
         "brand": "Dakas",
         "materialType": "Polyester",
@@ -5573,6 +5666,7 @@
         "active": false
     },
     {
+        "id": 94,
         "name": "Flamme II",
         "brand": "Slack Inov",
         "materialType": "Polyester",
@@ -5592,6 +5686,7 @@
         "active": false
     },
     {
+        "id": 95,
         "name": "Emeraude",
         "brand": "Slack Inov",
         "materialType": "Polyester",
@@ -5608,6 +5703,7 @@
         "active": false
     },
     {
+        "id": 96,
         "name": "Goku",
         "brand": "Slack Mountain",
         "materialType": "Hybrid",
@@ -5631,6 +5727,7 @@
         "active": false
     },
     {
+        "id": 97,
         "name": "Club S",
         "brand": "Slack.fr",
         "materialType": "Other",
@@ -5652,6 +5749,7 @@
         "active": false
     },
     {
+        "id": 98,
         "name": "Dark Blue",
         "brand": "Slack.fr",
         "materialType": "Polyester",
@@ -5673,6 +5771,7 @@
         "active": false
     },
     {
+        "id": 99,
         "name": "MILF",
         "brand": "Slack.fr",
         "materialType": "Polyester",
@@ -5695,6 +5794,7 @@
         "active": false
     },
     {
+        "id": 100,
         "name": "Neon Light",
         "brand": "Slack.fr",
         "materialType": "Polyester",
@@ -5715,6 +5815,7 @@
         "active": false
     },
     {
+        "id": 101,
         "name": "SuperFL Kill Bill",
         "brand": "Slack.fr",
         "materialType": "Polyester",
@@ -5737,6 +5838,7 @@
         "active": false
     },
     {
+        "id": 102,
         "name": "Supertube Norway",
         "brand": "Slack.fr",
         "materialType": "Polyester",
@@ -5759,6 +5861,7 @@
         "active": false
     },
     {
+        "id": 103,
         "name": "Jumpline",
         "brand": "Slack.fr",
         "materialType": "Polyester",
@@ -5779,6 +5882,7 @@
         "active": false
     },
     {
+        "id": 104,
         "name": "Jumpline Pro Series",
         "brand": "Slack.fr",
         "materialType": "Polyester",
@@ -5801,6 +5905,7 @@
         "active": false
     },
     {
+        "id": 105,
         "name": "Jumpline AntiPop",
         "brand": "Slack.fr",
         "materialType": "Polyester",
@@ -5823,6 +5928,7 @@
         "active": false
     },
     {
+        "id": 106,
         "name": "Flash'line",
         "brand": "Elephant",
         "materialType": "Polyester",
@@ -5844,6 +5950,7 @@
         "active": false
     },
     {
+        "id": 107,
         "name": "EcoLine",
         "brand": "Elephant",
         "materialType": "Polyester",
@@ -5865,6 +5972,7 @@
         "active": false
     },
     {
+        "id": 108,
         "name": "Wing 3.5",
         "brand": "Elephant",
         "materialType": "Polyester",
@@ -5884,6 +5992,7 @@
         "active": false
     },
     {
+        "id": 109,
         "name": "Skillshot HS",
         "brand": "Gambit",
         "materialType": "Polyester",
@@ -5904,6 +6013,7 @@
         "active": false
     },
     {
+        "id": 110,
         "name": "Skillshot LS",
         "brand": "Gambit",
         "materialType": "Polyester",
@@ -5924,6 +6034,7 @@
         "active": false
     },
     {
+        "id": 111,
         "name": "Flow Line",
         "brand": "Gibbon",
         "materialType": "Polyester",
@@ -5943,6 +6054,7 @@
         "active": false
     },
     {
+        "id": 112,
         "name": "Tube Line",
         "brand": "Gibbon",
         "materialType": "Other",
@@ -5957,6 +6069,7 @@
         "active": true
     },
     {
+        "id": 113,
         "name": "Verve 35mm",
         "brand": "Landcruising",
         "materialType": "Polyester",
@@ -5976,6 +6089,7 @@
         "active": false
     },
     {
+        "id": 114,
         "name": "Matrix",
         "brand": "Landcruising",
         "materialType": "Nylon",
@@ -5998,6 +6112,7 @@
         "active": false
     },
     {
+        "id": 115,
         "name": "Matrix Outer",
         "brand": "Landcruising",
         "materialType": "Nylon",
@@ -6017,6 +6132,7 @@
         "active": false
     },
     {
+        "id": 116,
         "name": "Wave Tube",
         "brand": "Landcruising",
         "materialType": "Nylon",
@@ -6039,6 +6155,7 @@
         "active": false
     },
     {
+        "id": 117,
         "name": "Wave Tape 19",
         "brand": "Landcruising",
         "materialType": "Nylon",
@@ -6061,6 +6178,7 @@
         "active": false
     },
     {
+        "id": 118,
         "name": "Wave Tube 19",
         "brand": "Landcruising",
         "materialType": "Nylon",
@@ -6083,6 +6201,7 @@
         "active": false
     },
     {
+        "id": 119,
         "name": "Sigma Impact LS",
         "brand": "Slackliner.de",
         "materialType": "Polyester",
@@ -6105,6 +6224,7 @@
         "active": true
     },
     {
+        "id": 120,
         "name": "Strong II",
         "brand": "Slackline tools",
         "materialType": "Polyester",
@@ -6126,6 +6246,7 @@
         "active": false
     },
     {
+        "id": 121,
         "name": "Octopussy MKV",
         "brand": "Slack house",
         "materialType": "Polyester",
@@ -6143,11 +6264,12 @@
         "thickness": 2.85,
         "webbing_construction": "Flat",
         "isa_certified": false,
-        "priceMeter": 3.66,
+        "priceMeter": 5.0,
         "currency": "PLN",
         "active": true
     },
     {
+        "id": 122,
         "name": "Rubber Band MKIII BLU",
         "brand": "Slack house",
         "materialType": "Nylon",
@@ -6165,11 +6287,12 @@
         "thickness": 3.35,
         "webbing_construction": "Flat",
         "isa_certified": false,
-        "priceMeter": 4.47,
+        "priceMeter": 7.5,
         "currency": "PLN",
         "active": true
     },
     {
+        "id": 123,
         "name": "Rubber Band MKIII SOL",
         "brand": "Slack house",
         "materialType": "Nylon",
@@ -6187,11 +6310,12 @@
         "thickness": 3.35,
         "webbing_construction": "Flat",
         "isa_certified": false,
-        "priceMeter": 4.47,
+        "priceMeter": 7.0,
         "currency": "PLN",
         "active": true
     },
     {
+        "id": 124,
         "name": "Blue Mile",
         "brand": "Slack house",
         "materialType": "Polyester",
@@ -6205,15 +6329,16 @@
             }
         ],
         "date_introduced": null,
-        "product_url": "http://slackline.pl/bluemile",
+        "product_url": "https://slackhouseshop.pl/produkt/blue-mile/",
         "thickness": 2.6,
         "webbing_construction": "Flat",
         "isa_certified": false,
-        "priceMeter": 4.5,
+        "priceMeter": 4.8,
         "currency": "PLN",
         "active": false
     },
     {
+        "id": 125,
         "name": "Sin Más",
         "brand": "Ambaradam",
         "materialType": "Polyester",
@@ -6235,6 +6360,7 @@
         "active": false
     },
     {
+        "id": 126,
         "name": "Black-White",
         "brand": "Slacktivity",
         "materialType": "Polyester",
@@ -6256,6 +6382,7 @@
         "active": false
     },
     {
+        "id": 127,
         "name": "Slack-Spec Tubelar",
         "brand": "Balance Community: Slackline Outfitters",
         "materialType": "Nylon",
@@ -6272,6 +6399,7 @@
         "active": false
     },
     {
+        "id": 128,
         "name": "Slack-Spec 11/16\"",
         "brand": "Balance Community: Slackline Outfitters",
         "materialType": "Nylon",
@@ -6288,6 +6416,7 @@
         "active": true
     },
     {
+        "id": 129,
         "name": "Slack-Spec Threaded Tubular",
         "brand": "Balance Community: Slackline Outfitters",
         "materialType": "Nylon",
@@ -6307,6 +6436,7 @@
         "active": false
     },
     {
+        "id": 130,
         "name": "Spider Silk 7/8\"",
         "brand": "Balance Community: Slackline Outfitters",
         "materialType": "Vectran",
@@ -6327,6 +6457,7 @@
         "active": false
     },
     {
+        "id": 131,
         "name": "RAGEline",
         "brand": "Balance Community: Slackline Outfitters",
         "materialType": "Hybrid",
@@ -6350,6 +6481,7 @@
         "active": false
     },
     {
+        "id": 132,
         "name": "CoreTek",
         "brand": "Slackline Industries",
         "materialType": "Polyester",
@@ -6372,6 +6504,7 @@
         "active": false
     },
     {
+        "id": 133,
         "name": "Sugoi",
         "brand": "Slackline Industries",
         "materialType": "Polyester",
@@ -6394,6 +6527,7 @@
         "active": false
     },
     {
+        "id": 134,
         "name": "Great White",
         "brand": "SlackGear",
         "materialType": "Polyester",
@@ -6411,11 +6545,12 @@
         "thickness": 2.6,
         "webbing_construction": "Flat",
         "isa_certified": false,
-        "priceMeter": 14,
+        "priceMeter": 24,
         "currency": "ZAR",
         "active": true
     },
     {
+        "id": 135,
         "name": "Tantalus",
         "brand": "Slacklife BC",
         "materialType": "Polyester",
@@ -6438,6 +6573,7 @@
         "active": false
     },
     {
+        "id": 136,
         "name": "Sky Pilot (Green/Orange)",
         "brand": "Slacklife BC",
         "materialType": "Nylon",
@@ -6458,6 +6594,7 @@
         "active": false
     },
     {
+        "id": 137,
         "name": "HighTech",
         "brand": "Slacklife BC",
         "materialType": "Dyneema/HMPE",
@@ -6478,6 +6615,7 @@
         "active": false
     },
     {
+        "id": 138,
         "name": "Type 18 CG4",
         "brand": "Balancing Earth Slacklines",
         "materialType": "Nylon",
@@ -6500,6 +6638,7 @@
         "active": false
     },
     {
+        "id": 139,
         "name": "Rasta Tubelar",
         "brand": "Balancing Earth Slacklines",
         "materialType": "Nylon",
@@ -6517,6 +6656,7 @@
         "active": false
     },
     {
+        "id": 140,
         "name": "Chi",
         "brand": "Middle Way Slacklines",
         "materialType": "Polyester",
@@ -6539,6 +6679,7 @@
         "active": true
     },
     {
+        "id": 141,
         "name": "Zen",
         "brand": "Middle Way Slacklines",
         "materialType": "Polyester",
@@ -6561,6 +6702,7 @@
         "active": false
     },
     {
+        "id": 142,
         "name": "Flat",
         "brand": "Slackline Shop NZ",
         "materialType": "Polyester",
@@ -6583,6 +6725,7 @@
         "active": true
     },
     {
+        "id": 143,
         "name": "Sky Pilot (Black/White)",
         "brand": "Slacklife BC",
         "materialType": "Nylon",
@@ -6604,6 +6747,7 @@
         "active": false
     },
     {
+        "id": 144,
         "name": "Lion Line",
         "brand": "Slacklife BC",
         "materialType": "Dyneema/HMPE",
@@ -6620,6 +6764,7 @@
         "active": false
     },
     {
+        "id": 145,
         "name": "Tube #1",
         "brand": "Slackline Shop NZ",
         "materialType": "Nylon",
@@ -6636,6 +6781,7 @@
         "active": true
     },
     {
+        "id": 146,
         "name": "Mirage",
         "brand": "Absolute Slacklines",
         "materialType": "Polyester",
@@ -6658,6 +6804,7 @@
         "active": false
     },
     {
+        "id": 147,
         "name": "Alfa",
         "brand": "Slacklining Canada",
         "materialType": "Polyester",
@@ -6680,6 +6827,7 @@
         "active": false
     },
     {
+        "id": 148,
         "name": "Mamba",
         "brand": "Spider slacklines",
         "materialType": "Nylon",
@@ -6702,6 +6850,7 @@
         "active": false
     },
     {
+        "id": 149,
         "name": "Flamme III",
         "brand": "Slack Inov",
         "materialType": "Polyester",
@@ -6723,6 +6872,7 @@
         "active": false
     },
     {
+        "id": 150,
         "name": "Abysses",
         "brand": "Slack Inov",
         "materialType": "Nylon",
@@ -6820,6 +6970,7 @@
         "active": false
     },
     {
+        "id": 151,
         "name": "Verve 25mm",
         "brand": "Landcruising",
         "materialType": "Polyester",
@@ -6842,6 +6993,7 @@
         "active": false
     },
     {
+        "id": 152,
         "name": "Wave Tube  32",
         "brand": "Landcruising",
         "materialType": "Polyester",
@@ -6864,6 +7016,7 @@
         "active": false
     },
     {
+        "id": 153,
         "name": "#FFF",
         "brand": "Raed Slacklines",
         "materialType": "Polyester",
@@ -6885,6 +7038,7 @@
         "active": false
     },
     {
+        "id": 154,
         "name": "Neon Light",
         "brand": "Slack Pro!",
         "materialType": "Polyester",
@@ -6905,6 +7059,7 @@
         "active": false
     },
     {
+        "id": 155,
         "name": "Reggae",
         "brand": "Slack.fr",
         "materialType": "Polyester",
@@ -7003,6 +7158,7 @@
         "active": false
     },
     {
+        "id": 156,
         "name": "RVD",
         "brand": "Slack.fr",
         "materialType": "Polyester",
@@ -7025,6 +7181,7 @@
         "active": false
     },
     {
+        "id": 157,
         "name": "Low stretch Webbing",
         "brand": "Slacktivity",
         "materialType": "Polyester",
@@ -7046,6 +7203,7 @@
         "active": false
     },
     {
+        "id": 158,
         "name": "SuperMOTM",
         "brand": "Raed Slacklines",
         "materialType": "Nylon",
@@ -7067,6 +7225,7 @@
         "active": false
     },
     {
+        "id": 159,
         "name": "Plasma",
         "brand": "Slack Inov",
         "materialType": "Polyester",
@@ -7088,6 +7247,7 @@
         "active": false
     },
     {
+        "id": 160,
         "name": "Firefly (phosphorescent)",
         "brand": "Slack Mountain",
         "materialType": "Hybrid",
@@ -7113,6 +7273,7 @@
         "active": true
     },
     {
+        "id": 161,
         "name": "French Line",
         "brand": "Slack Mountain",
         "materialType": "Polyester",
@@ -7135,6 +7296,7 @@
         "active": false
     },
     {
+        "id": 162,
         "name": "Pop-Art",
         "brand": "Slack Mountain",
         "materialType": "Polyester",
@@ -7152,6 +7314,7 @@
         "active": true
     },
     {
+        "id": 163,
         "name": "Project 44",
         "brand": "Slack Mountain",
         "materialType": "Polyester",
@@ -7174,6 +7337,7 @@
         "active": true
     },
     {
+        "id": 164,
         "name": "Aloha (Aka Aki Tidal)",
         "brand": "Landcruising",
         "materialType": "Polyester",
@@ -7196,6 +7360,7 @@
         "active": false
     },
     {
+        "id": 165,
         "name": "Panda",
         "brand": "Slackline Industries",
         "materialType": "Hybrid",
@@ -7222,6 +7387,7 @@
         "active": false
     },
     {
+        "id": 166,
         "name": "Joker",
         "brand": "Slack Inov",
         "materialType": "Hybrid",
@@ -7323,6 +7489,7 @@
         "active": true
     },
     {
+        "id": 167,
         "name": "Y.a.w",
         "brand": "Slackliner.de",
         "materialType": "Polyester",
@@ -7344,6 +7511,7 @@
         "active": false
     },
     {
+        "id": 168,
         "name": "Coelum",
         "brand": "Petram Slacklines",
         "materialType": "Polyester",
@@ -7366,6 +7534,7 @@
         "active": true
     },
     {
+        "id": 169,
         "name": "Skyway",
         "brand": "Slack Mountain",
         "materialType": "Polyester",
@@ -7388,6 +7557,7 @@
         "active": true
     },
     {
+        "id": 170,
         "name": "Totally Tubular",
         "brand": "Slacklife BC",
         "materialType": "Nylon",
@@ -7404,6 +7574,7 @@
         "active": false
     },
     {
+        "id": 171,
         "name": "FIREFOX",
         "brand": "Slack Mountain",
         "materialType": "Nylon",
@@ -7426,6 +7597,7 @@
         "active": true
     },
     {
+        "id": 172,
         "name": "Spice",
         "brand": "Slack Mountain",
         "materialType": "Polyester",
@@ -7448,6 +7620,7 @@
         "active": false
     },
     {
+        "id": 173,
         "name": "Orange",
         "brand": "Souz Slackline",
         "materialType": "Polyester",
@@ -7469,6 +7642,7 @@
         "active": false
     },
     {
+        "id": 174,
         "name": "S.O.S - Sunset Over Seas",
         "brand": "Slack Mountain",
         "materialType": "Hybrid",
@@ -7495,6 +7669,7 @@
         "active": true
     },
     {
+        "id": 175,
         "name": "Blue",
         "brand": "Balance Community: Slackline Outfitters",
         "materialType": "Polyester",
@@ -7561,6 +7736,7 @@
         "active": true
     },
     {
+        "id": 176,
         "name": "Green",
         "brand": "Balance Community: Slackline Outfitters",
         "materialType": "Nylon",
@@ -7627,6 +7803,7 @@
         "active": true
     },
     {
+        "id": 177,
         "name": "Polar",
         "brand": "Aki Slacklines",
         "materialType": "Polyester",
@@ -7649,6 +7826,7 @@
         "active": false
     },
     {
+        "id": 178,
         "name": "Jybn",
         "brand": "Balance Community: Slackline Outfitters",
         "materialType": "Nylon",
@@ -7671,6 +7849,7 @@
         "active": false
     },
     {
+        "id": 179,
         "name": "SuperTape 19mm",
         "brand": "Edelrid",
         "materialType": "Nylon",
@@ -7685,6 +7864,7 @@
         "active": false
     },
     {
+        "id": 180,
         "name": "X-Tuble 16mm",
         "brand": "Edelrid",
         "materialType": "Nylon",
@@ -7699,6 +7879,7 @@
         "active": false
     },
     {
+        "id": 181,
         "name": "X-Tube 25mm",
         "brand": "Edelrid",
         "materialType": "Nylon",
@@ -7718,6 +7899,7 @@
         "active": true
     },
     {
+        "id": 182,
         "name": "Abysses Bounce",
         "brand": "Slack Inov",
         "materialType": "Nylon",
@@ -7739,6 +7921,7 @@
         "active": true
     },
     {
+        "id": 183,
         "name": "Photon",
         "brand": "Slack Mountain",
         "materialType": "Polyester",
@@ -7760,6 +7943,7 @@
         "active": false
     },
     {
+        "id": 184,
         "name": "Rubber Band PUR",
         "brand": "Slack house",
         "materialType": "Nylon",
@@ -7777,11 +7961,12 @@
         "thickness": 3.35,
         "webbing_construction": "Flat",
         "isa_certified": false,
-        "priceMeter": 4.47,
+        "priceMeter": 10.0,
         "currency": "PLN",
         "active": true
     },
     {
+        "id": 185,
         "name": "Levitation",
         "brand": "Slack house",
         "materialType": "Polyester",
@@ -7799,11 +7984,12 @@
         "thickness": 2,
         "webbing_construction": "Flat",
         "isa_certified": false,
-        "priceMeter": 2.93,
+        "priceMeter": 4.0,
         "currency": "PLN",
         "active": true
     },
     {
+        "id": 186,
         "name": "MOTM light",
         "brand": "Raed Slacklines",
         "materialType": "Nylon",
@@ -7821,6 +8007,7 @@
         "active": true
     },
     {
+        "id": 187,
         "name": "Ocean",
         "brand": "Equilibrium Slacklines (EQB)",
         "materialType": "Nylon",
@@ -7843,6 +8030,7 @@
         "active": true
     },
     {
+        "id": 188,
         "name": "Skye2",
         "brand": "Equilibrium Slacklines (EQB)",
         "materialType": "Polyester",
@@ -7865,6 +8053,7 @@
         "active": true
     },
     {
+        "id": 189,
         "name": "LSDTube",
         "brand": "Slacktivity",
         "materialType": "Nylon",
@@ -7886,6 +8075,7 @@
         "active": true
     },
     {
+        "id": 190,
         "name": "Spider Silk MK3",
         "brand": "Balance Community: Slackline Outfitters",
         "materialType": "Hybrid",
@@ -7956,6 +8146,7 @@
         "active": false
     },
     {
+        "id": 191,
         "name": "Dyneemite",
         "brand": "Raed Slacklines",
         "materialType": "Hybrid",
@@ -7982,6 +8173,7 @@
         "active": false
     },
     {
+        "id": 192,
         "name": "Aurora",
         "brand": "Raed Slacklines",
         "materialType": "Polyester",
@@ -8004,6 +8196,7 @@
         "active": true
     },
     {
+        "id": 193,
         "name": "ReBL",
         "brand": "Slackliner.de",
         "materialType": "Polyester",
@@ -8021,6 +8214,7 @@
         "active": true
     },
     {
+        "id": 194,
         "name": "Zen 2",
         "brand": "Middle Way Slacklines",
         "materialType": "Polyester",
@@ -8042,6 +8236,7 @@
         "active": true
     },
     {
+        "id": 195,
         "name": "Lift 2be",
         "brand": "Balance Community: Slackline Outfitters",
         "materialType": "Nylon",
@@ -8108,6 +8303,7 @@
         "active": false
     },
     {
+        "id": 196,
         "name": "Candy",
         "brand": "Equilibrium Slacklines (EQB)",
         "materialType": "Polyester",
@@ -8130,6 +8326,7 @@
         "active": true
     },
     {
+        "id": 197,
         "name": "Eclipse",
         "brand": "Raed Slacklines",
         "materialType": "Polyester",
@@ -8153,6 +8350,7 @@
         "active": true
     },
     {
+        "id": 198,
         "name": "Jelly",
         "brand": "Balance Community: Slackline Outfitters",
         "materialType": "Polyester",
@@ -8219,6 +8417,7 @@
         "active": false
     },
     {
+        "id": 199,
         "name": "Blue 20",
         "brand": "Balance Community: Slackline Outfitters",
         "materialType": "Polyester",
@@ -8241,6 +8440,7 @@
         "active": false
     },
     {
+        "id": 200,
         "name": "Green 20",
         "brand": "Balance Community: Slackline Outfitters",
         "materialType": "Nylon",
@@ -8307,6 +8507,7 @@
         "active": true
     },
     {
+        "id": 201,
         "name": "Green Magic",
         "brand": "Acrobat Slackline",
         "materialType": "Polyester",
@@ -8329,6 +8530,7 @@
         "active": true
     },
     {
+        "id": 202,
         "name": "Purple Gold",
         "brand": "Aki Slacklines",
         "materialType": "Nylon",
@@ -8351,6 +8553,7 @@
         "active": false
     },
     {
+        "id": 203,
         "name": "Nomad",
         "brand": "Aki Slacklines",
         "materialType": "Polyester",
@@ -8373,6 +8576,7 @@
         "active": false
     },
     {
+        "id": 204,
         "name": "Sonic Light",
         "brand": "Aki Slacklines",
         "materialType": "Nylon",
@@ -8395,6 +8599,7 @@
         "active": false
     },
     {
+        "id": 205,
         "name": "Sky Diamond",
         "brand": "Spider slacklines",
         "materialType": "Dyneema/HMPE",
@@ -8493,6 +8698,7 @@
         "active": true
     },
     {
+        "id": 206,
         "name": "Rodeo",
         "brand": "Spider slacklines",
         "materialType": "Nylon",
@@ -8515,6 +8721,7 @@
         "active": false
     },
     {
+        "id": 207,
         "name": "Heavy",
         "brand": "Balance Community: Slackline Outfitters",
         "materialType": "Nylon",
@@ -8581,6 +8788,7 @@
         "active": false
     },
     {
+        "id": 208,
         "name": "Neon",
         "brand": "Equilibrium Slacklines (EQB)",
         "materialType": "Polyester",
@@ -8603,6 +8811,7 @@
         "active": true
     },
     {
+        "id": 209,
         "name": "White Magic",
         "brand": "Aki Slacklines",
         "materialType": "Polyester",
@@ -8625,6 +8834,7 @@
         "active": false
     },
     {
+        "id": 210,
         "name": "Unicorn",
         "brand": "Aki Slacklines",
         "materialType": "Polyester",
@@ -8647,6 +8857,7 @@
         "active": false
     },
     {
+        "id": 211,
         "name": "Paradigm",
         "brand": "Balance Community: Slackline Outfitters",
         "materialType": "Nylon",
@@ -8715,6 +8926,7 @@
         "active": false
     },
     {
+        "id": 212,
         "name": "Paradigm Signature",
         "brand": "Balance Community: Slackline Outfitters",
         "materialType": "Nylon",
@@ -8783,6 +8995,7 @@
         "active": true
     },
     {
+        "id": 213,
         "name": "Axiom",
         "brand": "Balance Community: Slackline Outfitters",
         "materialType": "Dyneema/HMPE",
@@ -8851,6 +9064,7 @@
         "active": true
     },
     {
+        "id": 214,
         "name": "Pharaoh",
         "brand": "Balance Community: Slackline Outfitters",
         "materialType": "Polyester",
@@ -8919,6 +9133,7 @@
         "active": true
     },
     {
+        "id": 215,
         "name": "Jelly PRO Desert",
         "brand": "Balance Community: Slackline Outfitters",
         "materialType": "Polyester",
@@ -8987,6 +9202,7 @@
         "active": true
     },
     {
+        "id": 216,
         "name": "Secondaire MK2",
         "brand": "Balance Community: Slackline Outfitters",
         "materialType": "Polyester",
@@ -9006,6 +9222,7 @@
         "active": true
     },
     {
+        "id": 217,
         "name": "Spider Silk MK5",
         "brand": "Balance Community: Slackline Outfitters",
         "materialType": "Hybrid",
@@ -9078,6 +9295,7 @@
         "active": true
     },
     {
+        "id": 218,
         "name": "Silk 99",
         "brand": "Balance Community: Slackline Outfitters",
         "materialType": "Dyneema/HMPE",
@@ -9146,6 +9364,7 @@
         "active": true
     },
     {
+        "id": 219,
         "name": "PULSAR",
         "brand": "Raed Slacklines",
         "materialType": "Polyester",
@@ -9165,6 +9384,7 @@
         "active": true
     },
     {
+        "id": 220,
         "name": "X-Wing",
         "brand": "Raed Slacklines",
         "materialType": "Nylon",
@@ -9189,6 +9409,7 @@
         "active": true
     },
     {
+        "id": 221,
         "name": "Y2K Light",
         "brand": "Slacktivity",
         "materialType": "Hybrid",
@@ -9217,6 +9438,7 @@
         "active": true
     },
     {
+        "id": 222,
         "name": "AcroLine",
         "brand": "Slacktivity",
         "materialType": "Polyester",
@@ -9236,6 +9458,7 @@
         "active": true
     },
     {
+        "id": 223,
         "name": "PRO",
         "brand": "Slacktivity",
         "materialType": "Polyester",
@@ -9260,6 +9483,7 @@
         "active": true
     },
     {
+        "id": 224,
         "name": "Experience",
         "brand": "Slacktivity",
         "materialType": "Polyester",
@@ -9284,6 +9508,7 @@
         "active": true
     },
     {
+        "id": 225,
         "name": "GREEN T20",
         "brand": "Slacktivity",
         "materialType": "Nylon",
@@ -9303,6 +9528,7 @@
         "active": true
     },
     {
+        "id": 226,
         "name": "LEMON HAZE",
         "brand": "Spider slacklines",
         "materialType": "Hybrid",
@@ -9407,6 +9633,7 @@
         "active": true
     },
     {
+        "id": 227,
         "name": "PANTHER",
         "brand": "Spider slacklines",
         "materialType": "Nylon",
@@ -9507,6 +9734,7 @@
         "active": true
     },
     {
+        "id": 228,
         "name": "GREEN MAMBA",
         "brand": "Spider slacklines",
         "materialType": "Polyester",
@@ -9607,6 +9835,7 @@
         "active": true
     },
     {
+        "id": 229,
         "name": "Dyneemite PRO",
         "brand": "Raed Slacklines",
         "materialType": "Hybrid",
@@ -9635,6 +9864,7 @@
         "active": false
     },
     {
+        "id": 230,
         "name": "Jelly PRO Classic",
         "brand": "Balance Community: Slackline Outfitters",
         "materialType": "Polyester",
@@ -9703,6 +9933,7 @@
         "active": true
     },
     {
+        "id": 231,
         "name": "Yolo T-1",
         "brand": "Geko Slacklines",
         "materialType": "Polyester",
@@ -9731,6 +9962,7 @@
         "active": true
     },
     {
+        "id": 232,
         "name": "Xiui T1",
         "brand": "Geko Slacklines",
         "materialType": "Nylon",
@@ -9755,6 +9987,7 @@
         "active": true
     },
     {
+        "id": 233,
         "name": "Flama",
         "brand": "Slack house",
         "materialType": "Nylon",
@@ -9774,6 +10007,7 @@
         "active": true
     },
     {
+        "id": 234,
         "name": "Tiger",
         "brand": "Slack house",
         "materialType": "Dyneema/HMPE",
@@ -9802,6 +10036,7 @@
         "active": true
     },
     {
+        "id": 235,
         "name": "Rubbit",
         "brand": "Slack house",
         "materialType": "Nylon",
@@ -9902,6 +10137,7 @@
         "active": true
     },
     {
+        "id": 236,
         "name": "Slamina",
         "brand": "Gibbon",
         "materialType": "Other",
@@ -9921,6 +10157,7 @@
         "active": false
     },
     {
+        "id": 237,
         "name": "Brasileirinha (Nylon)",
         "brand": "Bera Adventure",
         "materialType": "Nylon",
@@ -9945,6 +10182,7 @@
         "active": true
     },
     {
+        "id": 238,
         "name": "Sky 2.0",
         "brand": "Bera Adventure",
         "materialType": "Polyester",
@@ -9969,6 +10207,7 @@
         "active": true
     },
     {
+        "id": 239,
         "name": "Sky 2.0 3D",
         "brand": "Bera Adventure",
         "materialType": "Polyester",
@@ -9993,6 +10232,7 @@
         "active": true
     },
     {
+        "id": 240,
         "name": "Brazilian Tube",
         "brand": "Bera Adventure",
         "materialType": "Nylon",
@@ -10017,6 +10257,7 @@
         "active": true
     },
     {
+        "id": 241,
         "name": "Lagoon",
         "brand": "Equilibrium Slacklines (EQB)",
         "materialType": "Hybrid",
@@ -10045,6 +10286,7 @@
         "active": true
     },
     {
+        "id": 242,
         "name": "Paradigm MK2",
         "brand": "Balance Community: Slackline Outfitters",
         "materialType": "Nylon",
@@ -10073,6 +10315,7 @@
         "active": true
     },
     {
+        "id": 243,
         "name": "JASP",
         "brand": "Balance Community: Slackline Outfitters",
         "materialType": "Polyester",
@@ -10141,6 +10384,7 @@
         "active": false
     },
     {
+        "id": 244,
         "name": "Spider Silk MK4",
         "brand": "Balance Community: Slackline Outfitters",
         "materialType": "Hybrid",
@@ -10213,6 +10457,7 @@
         "active": false
     },
     {
+        "id": 245,
         "name": "Secondaire",
         "brand": "Balance Community: Slackline Outfitters",
         "materialType": "Polyester",
@@ -10281,6 +10526,7 @@
         "active": false
     },
     {
+        "id": 246,
         "name": "BoomBoom",
         "brand": "Slack Inov",
         "materialType": "Nylon",
