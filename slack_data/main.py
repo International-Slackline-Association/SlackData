@@ -7,6 +7,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from slack_data.database import get_session, create_db_and_tables, READ_ONLY
 from slack_data.seed import seed_catalog
 
+from slack_data.api.routers.submissions_router import warn_if_captcha_is_unconfigured
 from slack_data.api.routing import docs_kwargs, register_routers
 
 
@@ -20,6 +21,8 @@ async def lifespan(app: FastAPI):
     if not READ_ONLY:
         with next(get_session()) as session:
             seed_catalog(session)
+    # A hosted misconfiguration that is otherwise silent until a visitor hits it.
+    warn_if_captcha_is_unconfigured()
     yield
 
 

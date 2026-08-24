@@ -1,0 +1,1004 @@
+{
+  "info": {
+    "name": "SlackData \u2014 Manufacturer API",
+    "description": "Phase 4: a brand updating its own gear (`/manufacturer/*`).\n\n## Before you start\n\nA credential only works once a brand client is registered. The store is a SQLite file resolved relative to the CWD, so run the CLI from the same directory as the server:\n\n    cd slack_data\n    python -m slack_data.manufacturers.register --client-id postman-client --brand \"Balance Community\"\n    fastapi dev main.py\n\n## Credentials\n\n- **Local dev** \u2014 `Authorization: Bearer <MANUFACTURER_DEV_TOKEN>:<client_id>`, i.e. `dev-manufacturer-token:postman-client`. The `:client_id` half is required; unlike the admin (one person) a manufacturer request must say which brand it is.\n- **Hosted** \u2014 a Cognito *client_credentials access* token carrying the `slackdata/gear.write` scope. Clear the `devToken`/`clientId` variables and paste it into `bearer`.\n\nAn admin ID token cannot pass the manufacturer path and vice versa \u2014 two verifiers, deliberately.\n\n## The one contract to keep in mind\n\n`applied` is **always false**. The hosted catalogue is a read-only SQLite baked into the Lambda image; an accepted update is *recorded*, then hand-applied to the root `*.json` and shipped by redeploy. Folder 3 makes that visible.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearer}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8000",
+      "type": "string"
+    },
+    {
+      "key": "devToken",
+      "value": "dev-manufacturer-token",
+      "type": "string"
+    },
+    {
+      "key": "clientId",
+      "value": "postman-client",
+      "type": "string"
+    },
+    {
+      "key": "adminToken",
+      "value": "dev-admin-token",
+      "type": "string"
+    },
+    {
+      "key": "bearer",
+      "value": "dev-manufacturer-token:postman-client",
+      "type": "string"
+    },
+    {
+      "key": "gearType",
+      "value": "webbings",
+      "type": "string"
+    },
+    {
+      "key": "brandId",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "gearId",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "gearName",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "batchId",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "submissionId",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "spec",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "// Local dev: the credential is \"<token>:<client_id>\".",
+          "// Hosted: blank devToken/clientId and set `bearer` to the Cognito access token.",
+          "const t = pm.collectionVariables.get('devToken');",
+          "const c = pm.collectionVariables.get('clientId');",
+          "if (t && c) { pm.collectionVariables.set('bearer', t + ':' + c); }"
+        ]
+      }
+    }
+  ],
+  "item": [
+    {
+      "name": "1 \u2014 Identity & discovery",
+      "description": "Run these first: they populate {{gearId}} / {{gearName}} for everything below.",
+      "item": [
+        {
+          "name": "GET /manufacturer/me",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/manufacturer/me",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "manufacturer",
+                "me"
+              ]
+            },
+            "description": "The first call any integration should make. Verifies the token AND re-checks the stored brand_id against the brand_name in the catalogue this deploy actually serves \u2014 brand ids are seed-order autoincrements, so drift is real. A mismatch is 503, never a guess."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('200', () => pm.response.to.have.status(200));",
+                  "const b = pm.response.json();",
+                  "pm.collectionVariables.set('brandId', b.brand_id);",
+                  "pm.test('has a brand', () => pm.expect(b.brand_id).to.be.a('number'));",
+                  "console.log('brand', b.brand_id, b.brand_name, '| perms', b.permissions, '| dev', b.dev);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "GET /manufacturer/gear \u2014 all types",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/manufacturer/gear",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "manufacturer",
+                "gear"
+              ]
+            },
+            "description": "Discovery \u2014 how a brand learns our ids in the first place. Four fields only (gear_type, gear_id, name, active): this is id-mapping, NOT a spec sheet. For current values, see folder 3.\n\nCaptures the first row into {{gearId}} / {{gearName}} / {{gearType}}."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('200', () => pm.response.to.have.status(200));",
+                  "const rows = pm.response.json();",
+                  "pm.test('brand owns some gear', () => pm.expect(rows.length).to.be.above(0));",
+                  "const w = rows.find(r => r.gear_type === 'webbings') || rows[0];",
+                  "pm.collectionVariables.set('gearId', w.gear_id);",
+                  "pm.collectionVariables.set('gearName', w.name);",
+                  "pm.collectionVariables.set('gearType', w.gear_type);",
+                  "console.log('using', w.gear_type, w.gear_id, w.name);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "GET /manufacturer/gear?gear_type=webbings",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/manufacturer/gear?gear_type=webbings",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "manufacturer",
+                "gear"
+              ],
+              "query": [
+                {
+                  "key": "gear_type",
+                  "value": "webbings",
+                  "description": "webbings | weblocks | leashrings | grips | rollers | treepros | starterkits | tricklinekits \u2014 an unknown slug is 404"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET /manufacturer/gear?include=spec \u2014 the round trip",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/manufacturer/gear?gear_type=webbings&include=spec",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "manufacturer",
+                "gear"
+              ],
+              "query": [
+                {
+                  "key": "gear_type",
+                  "value": "webbings"
+                },
+                {
+                  "key": "include",
+                  "value": "spec",
+                  "description": "comma separated; only `spec` today"
+                }
+              ]
+            },
+            "description": "**The values we currently hold, keyed by the same names the write accepts** \u2014 so you can GET this dict, change what is wrong, and POST it straight back.\n\nThe keys are the derived correctable field list (submissions/fields.py), which is why:\n- `brand_id` and `classification` are absent \u2014 the write refuses them, so offering them for editing would be a trap.\n- `brand_name` IS present, even though it is not a column: it is computed over the Brand relationship, and it is correctable.\n- Values keep their stored types. Deliberately unlike `changes` on the write, which is all text because the admin hand-applies prose; stringifying a read would make the round trip lossy.\n\nOpt-in: the bare call (above) is byte-identical to what it returned before this existed \u2014 no `spec` key at all, not a null one."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('200', () => pm.response.to.have.status(200));",
+                  "const rows = pm.response.json();",
+                  "pm.test('every row carries a spec', () => pm.expect(rows.every(r => r.spec)).to.be.true);",
+                  "pm.test('closed fields are absent', () => {",
+                  "  pm.expect(rows[0].spec).to.not.have.property('brand_id');",
+                  "  pm.expect(rows[0].spec).to.not.have.property('classification');",
+                  "});",
+                  "pm.test('synthetic brand_name is present', () => pm.expect(rows[0].spec).to.have.property('brand_name'));",
+                  "const row = rows.find(r => String(r.gear_id) === String(pm.collectionVariables.get('gearId'))) || rows[0];",
+                  "pm.collectionVariables.set('spec', JSON.stringify(row.spec));",
+                  "console.log('spec keys:', Object.keys(row.spec).length);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "GET /manufacturer/gear?include=specs \u2014 422, not ignored",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/manufacturer/gear?include=specs",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "manufacturer",
+                "gear"
+              ],
+              "query": [
+                {
+                  "key": "include",
+                  "value": "specs"
+                }
+              ]
+            },
+            "description": "\"cannot include specs; known values: spec\". Silently dropping an unknown value would leave a caller who typo'd staring at four fields and concluding the feature does not work.\n\n`include` is comma-separated rather than a boolean flag because step 4 (photos) wants `?include=spec,photos`; a `spec=true` flag would have to be deprecated to get there."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('422', () => pm.response.to.have.status(422));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "2 \u2014 Submitting updates",
+      "item": [
+        {
+          "name": "POST /manufacturer/gear \u2014 one field, matched by id",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/manufacturer/gear",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "manufacturer",
+                "gear"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              },
+              "raw": "{\n  \"note\": \"spring 2027 line\",\n  \"items\": [\n    {\n      \"gear_type\": \"{{gearType}}\",\n      \"gear_id\": {{gearId}},\n      \"name\": \"{{gearName}}\",\n      \"manufacturer_sku\": \"BC-AX-25\",\n      \"changes\": { \"price\": \"1.95\" },\n      \"note\": \"new list price\",\n      \"source_url\": \"https://balancecommunity.com/products/axiom\"\n    }\n  ]\n}"
+            },
+            "description": "201. Stored APPROVED \u2014 the sender makes the product, so there is no decision left, only the JSON edit and the redeploy. An APPROVED record never expires (expires_at is null): it is work outstanding, and must not age out with the site still wrong."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('201', () => pm.response.to.have.status(201));",
+                  "const r = pm.response.json();",
+                  "pm.collectionVariables.set('batchId', r.batch_id);",
+                  "pm.collectionVariables.set('submissionId', r.results[0].submission_id);",
+                  "pm.test('auto-approved', () => pm.expect(r.results[0].status).to.eql('approved'));",
+                  "pm.test('matched by id', () => pm.expect(r.results[0].resolution).to.eql('id'));",
+                  "pm.test('NOT applied to the catalogue', () => pm.expect(r.results[0].applied).to.eql(false));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "POST /manufacturer/gear \u2014 wide edit (18 fields)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/manufacturer/gear",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "manufacturer",
+                "gear"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              },
+              "raw": "{\n  \"note\": \"full spec refresh\",\n  \"items\": [\n    {\n      \"gear_type\": \"webbings\",\n      \"gear_id\": {{gearId}},\n      \"name\": \"{{gearName}}\",\n      \"manufacturer_sku\": \"BC-AX-25\",\n      \"changes\": {\n        \"material\": \"Polyester, Dyneema/HMPE\",\n        \"webbing_construction\": \"Flat\",\n        \"breaking_strength\": 42.5,\n        \"width\": 20,\n        \"thickness\": 2.9,\n        \"weight\": 33.0,\n        \"stretch\": \"[{\\\"kn\\\": 1, \\\"percent\\\": 1.5}, {\\\"kn\\\": 5, \\\"percent\\\": 3.1}]\",\n        \"colors\": \"black, red\",\n        \"isa_certified\": true,\n        \"isa_warning\": null,\n        \"price\": 1.95,\n        \"currency\": \"EUR\",\n        \"product_url\": \"https://balancecommunity.com/products/axiom\",\n        \"description\": \"updated blurb\",\n        \"notes\": \"2027 spec\",\n        \"release_date\": 1767225600000,\n        \"version\": \"v2\",\n        \"active\": true\n      }\n    }\n  ]\n}"
+            },
+            "description": "Every correctable field is derived from WebbingUpdate at import time (submissions/fields.py) \u2014 the same source the catalogue's own PATCH routes use. A field added to the model is correctable the moment it exists.\n\nType handling worth knowing:\n- Numbers and booleans are ACCEPTED and stored as text (`true`, not `True`) \u2014 the patch is destined for a *.json file.\n- Explicit `null` becomes the string \"null\", meaningfully: \"we no longer publish a price\". An empty string would read as a value of \"\".\n- `material` is a list on the model but must be sent as a SCALAR here \u2014 a JSON array is rejected (see folder 5). The value is prose the admin hand-applies.\n\nOnly two fields we hold are closed: `brand_id` (a submitter knows a name, not a key \u2014 use `brand_name`) and `classification` (derived from material + breaking_strength on every seed, so a hand-edit is overwritten; correct the inputs instead)."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('201', () => pm.response.to.have.status(201));",
+                  "const r = pm.response.json();",
+                  "pm.collectionVariables.set('batchId', r.batch_id);",
+                  "pm.collectionVariables.set('submissionId', r.results[0].submission_id);",
+                  "pm.test('accepted', () => pm.expect(r.accepted).to.eql(1));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "POST /manufacturer/gear \u2014 stale id self-heals by name",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/manufacturer/gear",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "manufacturer",
+                "gear"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              },
+              "raw": "{\n  \"items\": [\n    {\n      \"gear_type\": \"{{gearType}}\",\n      \"gear_id\": 999999,\n      \"name\": \"{{gearName}}\",\n      \"changes\": { \"price\": \"2.05\" }\n    }\n  ]\n}"
+            },
+            "description": "The id is wrong, but the name still matches within the brand \u2014 so the matcher re-resolves, sets `stale_gear_id` to what you sent, and echoes the CORRECT gear_id back. Store the echoed id and your mapping heals itself after a re-seed shifts our ids, with nobody having to be told.\n\nThe id is never trusted alone, and never guessed: an ambiguous name is refused rather than resolved."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('201', () => pm.response.to.have.status(201));",
+                  "const item = pm.response.json().results[0];",
+                  "pm.test('resolved by name', () => pm.expect(item.resolution).to.eql('name'));",
+                  "pm.test('reports the stale id', () => pm.expect(item.stale_gear_id).to.eql(999999));",
+                  "pm.test('echoes the real id', () => pm.expect(String(item.gear_id)).to.eql(String(pm.collectionVariables.get('gearId'))));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "POST /manufacturer/gear \u2014 batch of 2, one batch_id",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/manufacturer/gear",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "manufacturer",
+                "gear"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              },
+              "raw": "{\n  \"note\": \"whole catalogue refresh\",\n  \"items\": [\n    { \"gear_type\": \"{{gearType}}\", \"gear_id\": {{gearId}}, \"name\": \"{{gearName}}\", \"changes\": { \"price\": \"1.99\" } },\n    { \"gear_type\": \"{{gearType}}\", \"name\": \"{{gearName}}\", \"changes\": { \"active\": true, \"weight\": 44 } }\n  ]\n}"
+            },
+            "description": "One call, N products, N records, one batch_id \u2014 the review unit is one product's JSON patch, not a wall of 40, and triage regroups them.\n\nCaps: 50 items, 60 changed fields per item, 256 KB body (Content-Length is checked before the body is read).\n\nResolution is ALL-OR-NOTHING: if any item fails to match, nothing is stored and the call is refused naming the item by index, so a retry is always safe. The writes are weaker \u2014 a loop, not a transaction (no TransactWriteItems is granted) \u2014 so a store failure part-way answers 502 saying how many landed plus the batch_id. Do not blind-retry that one."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('201', () => pm.response.to.have.status(201));",
+                  "const r = pm.response.json();",
+                  "pm.test('2 accepted', () => pm.expect(r.accepted).to.eql(2));",
+                  "pm.test('both share one batch_id', () => pm.expect(r.results.length).to.eql(2));",
+                  "pm.collectionVariables.set('batchId', r.batch_id);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "POST /manufacturer/gear \u2014 a list value becomes prose",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/manufacturer/gear",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "manufacturer",
+                "gear"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              },
+              "raw": "{\n  \"items\": [\n    {\n      \"gear_type\": \"webbings\",\n      \"gear_id\": {{gearId}},\n      \"name\": \"{{gearName}}\",\n      \"changes\": { \"material\": [\"Polyester\", \"Dyneema/HMPE\"] }\n    }\n  ]\n}"
+            },
+            "description": "`material` really IS a list on the model (webbings and rollers are the only two list-valued correctable fields). A list of SCALARS is accepted and stored as prose \u2014 \"Polyester, Dyneema/HMPE\" \u2014 like every other value, because the admin reads it and hand-applies it.\n\nThis was a 422 until 2026-08-24. Refusing it made `?include=spec` un-round-trippable: the read hands back [\"Polyester\"] and the write would not take it. A list containing objects is still refused."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('201', () => pm.response.to.have.status(201));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "3 \u2014 What the catalogue actually shows",
+      "description": "Run this AFTER folder 2. The point is that nothing changed: `applied` is false, so the submission sits in the admin's queue until it is hand-applied to the root *.json and redeployed. This public read is also how a brand sees the values we currently hold \u2014 GET /manufacturer/gear does not return them.\n\nAssumes the discovery step picked a WEBBINGS row (it prefers one). A brand holding no webbings needs this URL pointed at the matching /<geartype>/ router instead.",
+      "item": [
+        {
+          "name": "GET /webbing/{id} \u2014 public, no auth",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "noauth"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/webbing/{{gearId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "webbing",
+                "{{gearId}}"
+              ]
+            },
+            "description": "The full current spec sheet. Unauthenticated \u2014 the catalogue is public. Compare the fields you just submitted: they are unchanged, and will stay unchanged until the admin applies the patch."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('200', () => pm.response.to.have.status(200));",
+                  "const w = pm.response.json();",
+                  "console.log('catalogue still says: price', w.price, '| weight', w.weight, '| active', w.active);",
+                  "pm.test('submitted price is NOT live', () => pm.expect(String(w.price)).to.not.eql('1.95'));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "4 \u2014 Read-back: what the brand can see",
+      "description": "A brand CAN now read its own submissions: `GET /manufacturer/submissions`, newest first, scoped by the credential \u2014 there is no parameter to pass a brand_id. It exists because the POST receipt is one-shot, and two failure modes depended on it: a 502 partial batch (whose message names a batch_id and nothing else), and a rejection the sender could otherwise never learn about.\n\n`review_note` IS returned \u2014 for a rejection it is the whole point. Admins should know their note is read by the brand.\n\nThe admin requests below use the ADMIN dev token and are here for contrast: they show the full stored record, including fields the brand does not get.",
+      "item": [
+        {
+          "name": "GET /manufacturer/submissions \u2014 my submissions, newest first",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/manufacturer/submissions",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "manufacturer",
+                "submissions"
+              ]
+            },
+            "description": "Scoped by the credential. Newest first \u2014 the OPPOSITE of the admin triage list, which is oldest-first because it is a queue; a brand asking \"did my last batch land?\" wants the last batch. Both sort on a ULID, so neither ties.\n\nNever returns the public suggestion box: those rows have no brand_id, so hosted they are absent from the sparse GSI rather than filtered out of it."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('200', () => pm.response.to.have.status(200));",
+                  "const rows = pm.response.json();",
+                  "pm.test('scoped to me', () => pm.expect(rows.length).to.be.above(0));",
+                  "pm.test('omits fields that say nothing', () => {",
+                  "  pm.expect(rows[0]).to.not.have.property('submitter_email');",
+                  "  pm.expect(rows[0]).to.not.have.property('gear_brand');",
+                  "  pm.expect(rows[0]).to.not.have.property('brand_id');",
+                  "});",
+                  "pm.test('carries the outcome', () => pm.expect(rows[0]).to.have.property('review_note'));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "GET /manufacturer/submissions?batch_id={{batchId}} \u2014 did this batch land?",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/manufacturer/submissions?batch_id={{batchId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "manufacturer",
+                "submissions"
+              ],
+              "query": [
+                {
+                  "key": "batch_id",
+                  "value": "{{batchId}}",
+                  "description": "captured by folder 2"
+                }
+              ]
+            },
+            "description": "**This is what a 502 needs.** A partial batch answers \"stored 3 of 40; batch_id X. Do NOT blind-retry\" \u2014 before this endpoint the only remedy was to email the admin. Now you count what landed and resend the rest.\n\nHosted this is a key condition on the GSI, not a filter."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('200', () => pm.response.to.have.status(200));",
+                  "const rows = pm.response.json();",
+                  "pm.test('all from the one batch', () => pm.expect(rows.every(r => r.batch_id === pm.collectionVariables.get('batchId'))).to.be.true);",
+                  "console.log('items stored in this batch:', rows.length);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "GET /manufacturer/submissions?limit=500 \u2014 422",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/manufacturer/submissions?limit=500",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "manufacturer",
+                "submissions"
+              ],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "500"
+                }
+              ]
+            },
+            "description": "Capped at 100. A \"did my batch land?\" check, not a data export."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('422', () => pm.response.to.have.status(422));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "GET /submissions/ \u2014 admin's fuller view (contrast)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminToken}}"
+              }
+            ],
+            "auth": {
+              "type": "noauth"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/submissions/?status=approved&limit=10",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "submissions",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "approved"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
+              ]
+            },
+            "description": "The stored record, including what a manufacturer never sees: submitted_by (`brand-client:<client_id>`), brand_id, batch_id, the merged note (item note + batch note), expires_at null, and review_note explaining the auto-approval. `gear_brand` comes from the verified credential, not from anything the caller sent \u2014 attribution must not be assertable."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('200', () => pm.response.to.have.status(200));",
+                  "const rows = pm.response.json();",
+                  "const mine = rows.filter(r => r.kind === 'manufacturer');",
+                  "pm.test('manufacturer submissions are there', () => pm.expect(mine.length).to.be.above(0));",
+                  "if (mine.length) {",
+                  "  pm.test('never expires', () => pm.expect(mine[0].expires_at).to.eql(null));",
+                  "  pm.test('nobody reviewed it', () => pm.expect(mine[0].reviewed_at).to.eql(null));",
+                  "  console.log('changes:', JSON.stringify(mine[0].changes));",
+                  "}"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "GET /submissions/{id} \u2014 admin, the one you just sent",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminToken}}"
+              }
+            ],
+            "auth": {
+              "type": "noauth"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/submissions/{{submissionId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "submissions",
+                "{{submissionId}}"
+              ]
+            },
+            "description": "Uses {{submissionId}} captured by folder 2."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('200', () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "5 \u2014 Rejections",
+      "item": [
+        {
+          "name": "422 \u2014 brand_id is closed",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/manufacturer/gear",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "manufacturer",
+                "gear"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              },
+              "raw": "{\n  \"items\": [\n    { \"gear_type\": \"webbings\", \"gear_id\": {{gearId}}, \"name\": \"{{gearName}}\", \"changes\": { \"brand_id\": \"17\" } }\n  ]\n}"
+            },
+            "description": "\"webbings has no field(s): brand_id\". One of only two fields we hold that are deliberately closed \u2014 a submitter knows \"Balance Community\", not 17, and an id from a different environment is worse than no answer. Send `brand_name` instead; resolving it to a brand row is the admin's job at patch time. (The other closed field is `classification`.)"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('422', () => pm.response.to.have.status(422));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "422 \u2014 a list of objects",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/manufacturer/gear",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "manufacturer",
+                "gear"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              },
+              "raw": "{\n  \"items\": [\n    {\n      \"gear_type\": \"webbings\",\n      \"gear_id\": {{gearId}},\n      \"name\": \"{{gearName}}\",\n      \"changes\": { \"material\": [{ \"fiber\": \"Polyester\" }] }\n    }\n  ]\n}"
+            },
+            "description": "A list of scalars is fine (folder 2); a list of objects is not. The store holds prose the admin hand-applies to a *.json file \u2014 there is no sensible rendering of a nested structure, and guessing one would put garbage in the queue."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('422', () => pm.response.to.have.status(422));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "422 \u2014 a typo'd field name",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/manufacturer/gear",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "manufacturer",
+                "gear"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              },
+              "raw": "{\n  \"items\": [\n    { \"gear_type\": \"webbings\", \"gear_id\": {{gearId}}, \"name\": \"{{gearName}}\", \"changes\": { \"colour\": \"red\" } }\n  ]\n}"
+            },
+            "description": "The real field is `colors`. This guard exists so the admin triage list does not fill with `breaking_stength` and invented fields that no amount of reviewing can turn into a JSON patch."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('422', () => pm.response.to.have.status(422));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "403 \u2014 unregistered or revoked client",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{devToken}}:not-a-real-client"
+              }
+            ],
+            "auth": {
+              "type": "noauth"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/manufacturer/me",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "manufacturer",
+                "me"
+              ]
+            },
+            "description": "403, not 401: the token is genuine and re-authenticating produces the same one \u2014 it is simply not registered to a brand, or no longer is. `register.py --deactivate` takes effect on the very next request; the client record is never cached, because revocation that takes effect \"eventually\" is not revocation."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('403', () => pm.response.to.have.status(403));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "401 \u2014 no credential",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "noauth"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/manufacturer/me",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "manufacturer",
+                "me"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('401', () => pm.response.to.have.status(401));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "404 \u2014 unknown gear type",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/manufacturer/gear?gear_type=slacklines",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "manufacturer",
+                "gear"
+              ],
+              "query": [
+                {
+                  "key": "gear_type",
+                  "value": "slacklines"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('404', () => pm.response.to.have.status(404));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

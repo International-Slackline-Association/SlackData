@@ -56,16 +56,24 @@ def test_brand_writes_are_not_routed_when_read_only(read_only_client):
     assert read_only_client.delete("/brand/1").status_code == 405
 
 
-def test_read_only_schema_documents_no_write_operations(read_only_client):
+def test_read_only_schema_documents_no_catalogue_writes(read_only_client):
     """The OpenAPI schema is the discovery surface — it must be clean.
 
     Asserted over the whole schema rather than route by route, so a *new*
     catalogue router registered with write methods fails here even though no
     test above knows about it.
 
-    Phase 2's `/submissions` will be the one allowed exception — it writes to a
-    different store, so it is unaffected by the catalogue being read-only. Add
-    it here deliberately when it lands, rather than loosening the rule.
+    `/submissions` and `/manufacturer` are the allowed exceptions, and are named
+    explicitly rather than pattern-matched: both write to a different store
+    (DynamoDB hosted), so they are unaffected by the catalogue being read-only.
+    Adding another exception should be a deliberate edit to this line — which is
+    what happened when Phase 4 landed, and is the whole point of asserting over
+    the schema rather than route by route.
+
+    `/manufacturer` earns it on the same terms as `/submissions`: it *reads* the
+    catalogue to resolve which product a brand means, and writes nothing but
+    submissions. `tests/test_manufacturer_api.py` pins that with a session whose
+    writes raise.
     """
     schema = read_only_client.get("/openapi.json").json()
     offenders = [
@@ -73,20 +81,112 @@ def test_read_only_schema_documents_no_write_operations(read_only_client):
         for path, operations in schema["paths"].items()
         for method in operations
         if method.lower() not in ("get", "head", "parameters")
+        and not path.startswith(("/submissions", "/manufacturer"))
     ]
     assert offenders == []
 
 
-def test_read_only_leaves_no_write_route_registered(read_only_client):
+def concrete_routes(routes):
+    """Every real route reachable from an app's route table, wrappers unwrapped.
+
+    Written because the obvious `for route in app.routes` **silently stops
+    working**. Current FastAPI wraps each `include_router` call in a
+    `fastapi.routing._IncludedRouter`, which carries neither `path` nor
+    `methods` and does *not* enumerate its children alongside itself. A loop
+    that skipped attribute-less entries — as this file's guard used to — then
+    inspected only the four FastAPI-generated docs routes and asserted nothing
+    whatsoever about the application: it passed just as happily with all thirty
+    catalogue write routes mounted.
+
+    So: recurse through anything exposing `original_router`, and fall back to
+    the flat shape for FastAPI versions that never wrapped. Both shapes are
+    handled because which one you get is a dependency-version detail, and this
+    guard failing open is worse than it failing loudly.
+    """
+    for route in routes:
+        included = getattr(route, "original_router", None)
+        if included is not None:
+            yield from concrete_routes(included.routes)
+        elif getattr(route, "path", ""):
+            yield route
+
+
+def test_the_route_table_walk_actually_reaches_the_routes():
+    """The guard on the guard. See `concrete_routes` for why this exists.
+
+    Without it, the two tests below can go quietly vacuous on a FastAPI upgrade
+    and keep reporting green — which is the failure mode they are supposed to
+    prevent, reproduced inside the thing preventing it.
+    """
+    from fastapi import FastAPI
+
+    from slack_data.api.routing import register_routers
+
+    app = FastAPI()
+    register_routers(app, read_only=False)
+    paths = {route.path for route in concrete_routes(app.routes)}
+    # A catalogue GET, a catalogue write, and both writable routers: if the walk
+    # can see all four it is looking at real routes, not wrappers.
+    for expected in (
+        "/webbing/{webbing_id}",
+        "/brand/",
+        "/submissions/",
+        "/manufacturer/gear",
+    ):
+        assert expected in paths, f"the route walk cannot see {expected}"
+
+    writes = [
+        route.path
+        for route in concrete_routes(app.routes)
+        if not set(route.methods) <= {"GET", "HEAD"}
+    ]
+    # Local dev mounts the catalogue's writes; if the walk sees none of them it
+    # is not looking at anything.
+    assert len(writes) > 20, writes
+
+
+def test_read_only_leaves_no_catalogue_write_route_registered(read_only_client):
     """Belt and braces: check the router table, not just what it documents."""
-    for route in read_only_client.app.routes:
-        # FastAPI wraps included routers in objects with no `path`; the concrete
-        # routes are enumerated alongside them, so skipping the wrappers loses
-        # no coverage.
-        path = getattr(route, "path", "")
-        if not path:
+    checked = 0
+    for route in concrete_routes(read_only_client.app.routes):
+        if route.path.startswith(("/submissions", "/manufacturer")):
+            # The writable routers, mounted in full in every mode because they
+            # write to a different store. Named rather than pattern-matched, so
+            # a third one is a deliberate edit here — same rule as the schema
+            # test above.
             continue
-        assert set(getattr(route, "methods", ())) <= {"GET", "HEAD"}, path
+        checked += 1
+        assert set(route.methods) <= {"GET", "HEAD"}, route.path
+    assert checked > 20, f"only {checked} routes inspected — the walk is not working"
+
+
+def test_submissions_are_writable_while_the_catalogue_is_not(read_only_client):
+    """The point of the split: the suggestion box works on the live site.
+
+    A submission is stored in DynamoDB, not in the immutable SQLite catalogue,
+    so read-only mode must not touch it. This is the single most likely thing to
+    be broken by a careless reuse of the catalogue's SessionDep.
+    """
+    posted = read_only_client.post(
+        "/submissions/",
+        json={"gear_type": "webbings", "gear_id": 1, "changes": {"breaking_strength": "44"}},
+    )
+    assert posted.status_code == 201, posted.text
+
+
+def test_submissions_router_takes_no_catalogue_session():
+    """Guards it at the source, not just by observed behaviour.
+
+    A `SessionDep` on any submissions route would open the catalogue engine —
+    which in hosted mode is a read-only file — and the failure would appear only
+    on the live site, never in a local test run.
+    """
+    from slack_data.api.routers import submissions_router as module
+    from slack_data.database import get_session
+
+    for route in module.submissions_router.routes:
+        dependants = [route.dependant, *route.dependant.dependencies]
+        assert all(d.call is not get_session for d in dependants), route.path
 
 
 # ---------------------------------------------------------------------------
