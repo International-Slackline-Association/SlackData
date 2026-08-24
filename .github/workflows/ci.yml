@@ -1,0 +1,143 @@
+# CI for SlackData.
+#
+# Until this file existed, nothing ran automatically — every check in this repo
+# was run by hand, which is why the README kept having to say "run these
+# yourself". That is fine while one person holds the whole thing in their head
+# and stops being fine the moment anyone else touches it.
+#
+# Three jobs, matching the three loops a developer actually runs:
+#
+#   backend   pytest, including the live-server tests (which boot real uvicorn
+#             processes) and the DynamoDB tests (against dynamodb-local).
+#   frontend  tsc + vite build, oxlint, and the node:test unit suite.
+#   e2e       Cypress against BOTH real servers — no mocks, which is how this
+#             suite was written and the only way it means anything.
+#
+# The backend job is the one that would have caught the bugs this repo has
+# actually hit: a cold-start ImportError, and DynamoDB code that had never
+# executed anywhere.
+
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+# A second push to the same branch cancels the first — CI minutes are not free
+# and a superseded run tells nobody anything.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  backend:
+    name: pytest
+    runs-on: ubuntu-latest
+    services:
+      # The real DynamoDB, so submissions/dynamo.py and manufacturers/dynamo.py
+      # execute here rather than for the first time in production. Without this
+      # service the tests skip cleanly — see tests/test_dynamo_stores.py — so a
+      # fork without it still gets a green, honest run.
+      dynamodb:
+        image: amazon/dynamodb-local:latest
+        ports: ['8765:8000']
+    env:
+      DYNAMODB_ENDPOINT: http://localhost:8765
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'   # matches Dockerfile.lambda's base image
+
+      - name: Install
+        # [aws] pulls boto3 so the DynamoDB tests run. The *application* still
+        # imports it lazily, and tests/test_submissions.py asserts the suite's
+        # no-boto3 guarantee structurally rather than by its absence here.
+        run: pip install '-e.[dev,aws]'
+
+      - name: Lint
+        run: ruff check slack_data/ tests/ --output-format=github
+        continue-on-error: true   # advisory: the repo has pre-existing findings
+
+      - name: Test
+        run: python -m pytest tests/ -q
+
+  frontend:
+    name: build + unit
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'      # test:unit uses --experimental-strip-types
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run build       # tsc -b && vite build — type errors fail here
+      - run: npm run test:unit
+
+  e2e:
+    name: cypress
+    runs-on: ubuntu-latest
+    needs: [backend, frontend]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Install
+        run: |
+          pip install '-e.[dev]'
+          cd frontend && npm ci
+
+      - name: Start the API
+        # Scratch stores in /tmp, not the repo: admin_triage.cy.ts works a queue,
+        # and a store that persisted between runs would fill up and push the
+        # spec's own fixtures off the first page. See CLAUDE.md § Commands.
+        run: |
+          cd slack_data
+          SUBMISSIONS_DB_PATH=/tmp/cypress-submissions.db \
+          BRAND_CLIENTS_DB_PATH=/tmp/cypress-brand-clients.db \
+          python -m uvicorn main:app --port 8000 &
+          for i in $(seq 1 60); do
+            curl -sf localhost:8000/webbing/?limit=1 >/dev/null && exit 0
+            sleep 2
+          done
+          echo "the API did not come up"; exit 1
+
+      - name: Start the frontend
+        run: |
+          cd frontend
+          npm run dev &
+          for i in $(seq 1 30); do
+            curl -sf localhost:5173 >/dev/null && exit 0
+            sleep 2
+          done
+          echo "vite did not come up"; exit 1
+
+      - name: Cypress
+        run: cd frontend && npx cypress run
+
+      - name: Upload failure screenshots
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cypress-screenshots
+          path: frontend/cypress/screenshots
+          if-no-files-found: ignore
