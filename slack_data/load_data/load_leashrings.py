@@ -1,7 +1,12 @@
 
 
 from slack_data.database import SessionDep
-from slack_data.load_data._seed_io import read_seed_json, seed_path, to_bool
+from slack_data.load_data._seed_io import (
+    read_seed_json,
+    require_seed_id,
+    seed_path,
+    to_bool,
+)
 from slack_data.models.brands import Brand, get_brand
 from slack_data.models.leashrings import LeashRing, LeashRingCreate
 from slack_data.utilities.currencies import get_currency
@@ -60,6 +65,7 @@ def add_leashrings_to_db(leashrings: list[dict], session: SessionDep) -> None:
             active=leashring.get("active"),
         )
         db_leashring = LeashRing.model_validate(leashring_create)
+        db_leashring.id = require_seed_id(leashring, "leashrings.json")
         db_leashring.brand = session.get(Brand, brand_id)
         print(f"Adding leash ring: {db_leashring.name} by {db_leashring.brand.name}")
         session.add(db_leashring)

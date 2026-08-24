@@ -1,5 +1,6 @@
 [
     {
+        "id": 1,
         "name": "10 m Clip n Slack Set",
         "release_date": 1622032128158,
         "product_url": "https://www.slack-shop.de/10m-clip-n-slack-set.html",
@@ -18,6 +19,7 @@
         "active": false
     },
     {
+        "id": 2,
         "name": "10 m Fit n Slack Set",
         "release_date": 1622032185620,
         "product_url": "https://www.slack-shop.de/10m-fit-n-slack-set.html",
@@ -36,6 +38,7 @@
         "active": false
     },
     {
+        "id": 3,
         "name": "10 m Kids n Slack Set",
         "release_date": 1622037129475,
         "product_url": "https://www.slack-shop.de/10m-kids-n-slack-set.html",
@@ -54,6 +57,7 @@
         "active": false
     },
     {
+        "id": 4,
         "name": "15 m Clip n Slack Set",
         "release_date": 1622017821893,
         "product_url": "https://www.slack-shop.de/15m-clip-n-slack-set.html",
@@ -72,6 +76,7 @@
         "active": false
     },
     {
+        "id": 5,
         "name": "15 Meter Slackline Set – Includes Tree Protection",
         "release_date": 1622017617110,
         "product_url": "https://www.slacklineshop.co.nz/product/15-meter-slackline-set/",
@@ -90,6 +95,7 @@
         "active": true
     },
     {
+        "id": 6,
         "name": "15m kit",
         "release_date": 1617137277111,
         "product_url": "https://middlewayslacklines.com/15m-slackline-kit/",
@@ -108,6 +114,7 @@
         "active": true
     },
     {
+        "id": 7,
         "name": "15m kit",
         "release_date": 1617138105825,
         "product_url": "https://www.acrobatslackline.com/slackline-kit15",
@@ -126,6 +133,7 @@
         "active": true
     },
     {
+        "id": 8,
         "name": "20m Slackline Kit: 1 Practice Line",
         "release_date": 1622016403011,
         "product_url": null,
@@ -144,6 +152,7 @@
         "active": false
     },
     {
+        "id": 9,
         "name": "23m Active Slackline",
         "release_date": 1622018556659,
         "product_url": "https://www.viperslacklines.co.za/collections/slackline-kits/products/20m-active-slackline",
@@ -162,6 +171,7 @@
         "active": true
     },
     {
+        "id": 10,
         "name": "25m kit",
         "release_date": 1617137361406,
         "product_url": "https://middlewayslacklines.com/25m-slackline-kit/",
@@ -180,6 +190,7 @@
         "active": true
     },
     {
+        "id": 11,
         "name": "25m kit",
         "release_date": 1617138153764,
         "product_url": "https://www.acrobatslackline.com/slackline-kit25",
@@ -198,6 +209,7 @@
         "active": true
     },
     {
+        "id": 12,
         "name": "Aki Starter Classic Slacklineset",
         "release_date": 1622014771086,
         "product_url": "https://aki-slacklines.de/de/slacklinesets/ratsche/195/aki-starter-classic-slacklineset?c=5",
@@ -216,6 +228,7 @@
         "active": false
     },
     {
+        "id": 13,
         "name": "Aki Starter Comfort Slacklineset",
         "release_date": 1622028390356,
         "product_url": "https://aki-slacklines.de/de/slacklinesets/ratsche/199/aki-starter-comfort-slacklineset?c=7",
@@ -234,6 +247,7 @@
         "active": false
     },
     {
+        "id": 14,
         "name": "Allround Slackline | 15m Set",
         "release_date": 1622026941331,
         "product_url": "https://slacktivity.ch/shop/allround-slackline-15m/",
@@ -252,6 +266,7 @@
         "active": true
     },
     {
+        "id": 15,
         "name": "Base Line Kit",
         "release_date": 1622017528269,
         "product_url": "https://slacklineindustries.com/collections/all-products/products/base-line-kit",
@@ -270,6 +285,7 @@
         "active": true
     },
     {
+        "id": 16,
         "name": "Basic 6 25 M",
         "release_date": 1622032814548,
         "product_url": "https://slackstar.de/kinder-familie/2-baeume/komplettset-6-teilig/893/basic6?number=SL82668-25-F",
@@ -288,6 +304,7 @@
         "active": false
     },
     {
+        "id": 17,
         "name": "Basic2",
         "release_date": 1622018095316,
         "product_url": "https://slackstar.de/kinder-familie/2-baeume/komplettset-2-teilig/823/basic2?number=SL81792-15-F",
@@ -306,6 +323,7 @@
         "active": false
     },
     {
+        "id": 18,
         "name": "BC Prim-25 Slackline Kit",
         "release_date": 1622014899411,
         "product_url": "https://www.balancecommunity.com/products/bc-prim-25-slackline-kit?variant=31486157258810",
@@ -324,6 +342,7 @@
         "active": true
     },
     {
+        "id": 19,
         "name": "Beginner Primitive Slackline Kit",
         "release_date": 1622017432947,
         "product_url": "https://www.slacklifebc.com/product/primitive-beginner-slackline-kit/",
@@ -342,6 +361,7 @@
         "active": true
     },
     {
+        "id": 20,
         "name": "Breathe 20 Slackline Kit",
         "release_date": 1622028745268,
         "product_url": "https://www.balancecommunity.com/products/breathe-20-slackline-kit?variant=32226241085498",
@@ -360,6 +380,7 @@
         "active": false
     },
     {
+        "id": 21,
         "name": "Classic Line Red XL TreeWear",
         "release_date": 1622015902177,
         "product_url": "https://www.gibbon-slacklines.com/de/produkte/slackline-sets/classicline-red-xl-treewear-2019/",
@@ -378,6 +399,7 @@
         "active": true
     },
     {
+        "id": 22,
         "name": "Dragon 2 25 M",
         "release_date": 1622032494983,
         "product_url": "https://slackstar.de/kinder-familie/2-baeume/komplettset-2-teilig/876/dragon2?number=SL81800-25-DG",
@@ -396,6 +418,7 @@
         "active": false
     },
     {
+        "id": 23,
         "name": "Dragon 6",
         "release_date": 1622032920834,
         "product_url": "https://slackstar.de/kinder-familie/2-baeume/komplettset-6-teilig/917/dragon6?number=SL82668-25_DG",
@@ -414,6 +437,7 @@
         "active": false
     },
     {
+        "id": 24,
         "name": "Easy pack",
         "release_date": 1622029587030,
         "product_url": "https://laboutique.slack.fr/en/family-wide-slackline-15m/182-easy-pack.html",
@@ -432,6 +456,7 @@
         "active": false
     },
     {
+        "id": 25,
         "name": "ELINE SLACKLINE: LIGHT KIT",
         "release_date": 1622033435397,
         "product_url": "https://yogaslackers.com/shop/slackline/elinelight/",
@@ -450,6 +475,7 @@
         "active": true
     },
     {
+        "id": 26,
         "name": "Eline SlacklineE Kit",
         "release_date": 1622018679027,
         "product_url": "https://yogaslackers.com/shop/slackline/eline-slackline-kit/",
@@ -468,6 +494,7 @@
         "active": true
     },
     {
+        "id": 27,
         "name": "EQB BALANCE 20 M",
         "release_date": 1622029982523,
         "product_url": "https://www.slackshop.cz/en/for-beginners/10-balance-20-m.html",
@@ -486,6 +513,7 @@
         "active": true
     },
     {
+        "id": 28,
         "name": "EQB STEP 12 M",
         "release_date": 1622029901988,
         "product_url": "https://www.slackshop.cz/en/for-beginners/9-eqb-step-12-m.html",
@@ -504,6 +532,7 @@
         "active": true
     },
     {
+        "id": 29,
         "name": "EQB TRICK 20 M",
         "release_date": 1622030068544,
         "product_url": "https://www.slackshop.cz/en/for-beginners/8-eqb-trick-20-m.html",
@@ -522,6 +551,7 @@
         "active": true
     },
     {
+        "id": 30,
         "name": "EQB Yoga15 M",
         "release_date": 1622015317566,
         "product_url": "https://www.slackshop.cz/en/for-beginners/93-eqb-yoga-15-m.html",
@@ -540,6 +570,7 @@
         "active": true
     },
     {
+        "id": 31,
         "name": "Experience Slackline | 30m Set",
         "release_date": 1622027013441,
         "product_url": "https://slacktivity.ch/shop/experience-slackline-30m/",
@@ -558,6 +589,7 @@
         "active": true
     },
     {
+        "id": 32,
         "name": "Firestarter 35m",
         "release_date": 1622016776936,
         "product_url": "http://www.slackgear.co.za/product/firestarter-35m/",
@@ -576,6 +608,7 @@
         "active": true
     },
     {
+        "id": 33,
         "name": "FUN Kit - Beginner Slackline Set 20m",
         "release_date": 1622016206095,
         "product_url": "https://raed-slacklines.com/fun-kit-beginner-slackline-set-20m",
@@ -594,6 +627,7 @@
         "active": true
     },
     {
+        "id": 34,
         "name": "Guide 2 20 M",
         "release_date": 1622032981894,
         "product_url": "https://slackstar.de/fun-performance/2-baeume/komplettset-2-teilig/866/guide2?number=SL81792-20_35",
@@ -612,6 +646,7 @@
         "active": false
     },
     {
+        "id": 35,
         "name": "Guide 6 20 M",
         "release_date": 1622033183474,
         "product_url": "https://slackstar.de/fun-performance/2-baeume/komplettset-6-teilig/864/guide6?number=SL81775-20",
@@ -630,6 +665,7 @@
         "active": false
     },
     {
+        "id": 36,
         "name": "Kit Cruise 15m",
         "release_date": 1622029407968,
         "product_url": "https://laboutique.slack.fr/en/family-wide-slackline-15m/23-kit-cruise-slackline.html",
@@ -648,6 +684,7 @@
         "active": false
     },
     {
+        "id": 37,
         "name": "Kit Cruise Easy with handlerail",
         "release_date": 1622029515668,
         "product_url": "https://laboutique.slack.fr/en/family-wide-slackline-15m/189-kit-cruise-easy-slackline.html",
@@ -666,6 +703,7 @@
         "active": false
     },
     {
+        "id": 38,
         "name": "KIT EASY 15M",
         "release_date": 1622016525073,
         "product_url": "https://slack-mountain.com/en/slackline-beginner-kit/33-kit-easy-15m.html",
@@ -684,6 +722,7 @@
         "active": true
     },
     {
+        "id": 39,
         "name": "KIT IGLOO 25 M",
         "release_date": 1622030896238,
         "product_url": "https://slack-mountain.com/en/slackline-beginner-kit/35-kit-igloo-25-m.html",
@@ -702,6 +741,7 @@
         "active": true
     },
     {
+        "id": 40,
         "name": "KIT INUIT 30 M",
         "release_date": 1622030841000,
         "product_url": "https://slack-mountain.com/en/slackline-beginner-kit/34-kit-inuit-30-m.html",
@@ -720,6 +760,7 @@
         "active": true
     },
     {
+        "id": 41,
         "name": "Kit Primitiv 25",
         "release_date": 1622029718368,
         "product_url": "https://laboutique.slack.fr/en/mid-level-slack-2535m/205-kit-primitiv-25m.html",
@@ -738,6 +779,7 @@
         "active": false
     },
     {
+        "id": 42,
         "name": "Kit Primitive Compact Line",
         "release_date": 1620302322780,
         "product_url": "https://beraadventure.com.br/product/kit-primitivo-compact/",
@@ -756,6 +798,7 @@
         "active": true
     },
     {
+        "id": 43,
         "name": "KIT SLACK 15M (17M CUMULÉ)",
         "release_date": 1622030795297,
         "product_url": "https://slack-mountain.com/en/slackline-beginner-kit/36-kit-slack-15m-17m-cumule.html",
@@ -774,6 +817,7 @@
         "active": false
     },
     {
+        "id": 44,
         "name": "KIT SLACK DE 20M AVEC CLIQUET",
         "release_date": 1622030961254,
         "product_url": "https://slack-mountain.com/en/slackline-beginner-kit/37-kit-slack-de-20m-avec-cliquet.html",
@@ -792,6 +836,7 @@
         "active": true
     },
     {
+        "id": 45,
         "name": "KIT STREET BALANCE SLACK 10m",
         "release_date": 1620301111909,
         "product_url": "https://beraadventure.com.br/product/kit-street-balance-slack-10-metros-backup/",
@@ -810,6 +855,7 @@
         "active": true
     },
     {
+        "id": 46,
         "name": "Landcruising Aloha Rodeolineset",
         "release_date": 1622028557380,
         "product_url": "https://aki-slacklines.de/de/slacklinesets/rodeoline/2/landcruising-aloha-rodeolineset?c=5",
@@ -828,6 +874,7 @@
         "active": false
     },
     {
+        "id": 47,
         "name": "Minimum Slackline | 12m Set",
         "release_date": 1622027069399,
         "product_url": "https://slacktivity.ch/shop/minimum-slackline-12m/",
@@ -846,6 +893,7 @@
         "active": true
     },
     {
+        "id": 48,
         "name": "Nature 2 15M",
         "release_date": 1622032553343,
         "product_url": "https://slackstar.de/kinder-familie/2-baeume/komplettset-2-teilig/923/nature2?number=SL81792-15_NATURE",
@@ -864,6 +912,7 @@
         "active": false
     },
     {
+        "id": 49,
         "name": "Nature 6 15 M",
         "release_date": 1622032859889,
         "product_url": "https://slackstar.de/kinder-familie/2-baeume/komplettset-6-teilig/916/nature6?number=SL82668-15NATURE",
@@ -882,6 +931,7 @@
         "active": false
     },
     {
+        "id": 50,
         "name": "PACK CLICK 25 M",
         "release_date": 1622031045265,
         "product_url": "https://slack-mountain.com/en/slackline-beginner-kit/200-pack-click-25-m.html",
@@ -900,6 +950,7 @@
         "active": true
     },
     {
+        "id": 51,
         "name": "PLAY LINE",
         "release_date": 1622031567093,
         "product_url": "https://slacklineindustries.com/collections/all-products/products/play-line",
@@ -918,6 +969,7 @@
         "active": true
     },
     {
+        "id": 52,
         "name": "Primitive Pack 30m",
         "release_date": 1622015641458,
         "product_url": "https://gekoslacklines.mx/producto/primitivo-30m",
@@ -936,6 +988,7 @@
         "active": true
     },
     {
+        "id": 53,
         "name": "Primitive Slackline Kit | Light &amp; Easy Setup",
         "release_date": 1622018222439,
         "product_url": "https://slacktivity.com/shop/primitive-slackline-kit/",
@@ -954,6 +1007,7 @@
         "active": true
     },
     {
+        "id": 54,
         "name": "Sigma Impact Set",
         "release_date": 1622017983390,
         "product_url": "https://www.slackliner.de/de/Impact-Set.html",
@@ -972,6 +1026,7 @@
         "active": true
     },
     {
+        "id": 55,
         "name": "Sigma Slackline Set ( 35 mm ), 15m lang",
         "release_date": 1622032311590,
         "product_url": "https://www.slackliner.de/de/Sigma-Slackline-Set---35-mm----15m-lang-180.html",
@@ -990,6 +1045,7 @@
         "active": true
     },
     {
+        "id": 56,
         "name": "Sigma Slackline Set ( 35 mm breit ) 25m lang",
         "release_date": 1622032351234,
         "product_url": "https://www.slackliner.de/de/Sigma-Slackline-Set---35-mm---25-35m-lang-181.html",
@@ -1008,6 +1064,7 @@
         "active": true
     },
     {
+        "id": 57,
         "name": "SLACKLINE KIT - PIRATE 18",
         "release_date": 1622030443196,
         "product_url": "https://slack-inov.com/shop/en/slackline-kit/406-slackline-kit-pirate-18-9506919000.html",
@@ -1026,6 +1083,7 @@
         "active": false
     },
     {
+        "id": 58,
         "name": "SLACKLINE KIT - PLASMA 30",
         "release_date": 1622030515017,
         "product_url": "https://slack-inov.com/shop/en/slackline-kit/407-slackline-kit-pirate-30-9506919000.html",
@@ -1044,6 +1102,7 @@
         "active": false
     },
     {
+        "id": 59,
         "name": "Slackline Kit - Training LINE 18",
         "release_date": 1622018403875,
         "product_url": "https://spider-slacklines.com/shop/it/slackline-kit/11-542-slackline-kit-training-line-18-9506919000.html#/26-scegli_il_backup_kit-nessuno/28-scegli_le_protezioni_per_alberi-nessuna",
@@ -1062,6 +1121,7 @@
         "active": true
     },
     {
+        "id": 60,
         "name": "Slackline YOGA Set",
         "release_date": 1622027238631,
         "product_url": "https://slacktivity.ch/shop/slackline-yoga-set/",
@@ -1080,6 +1140,7 @@
         "active": true
     },
     {
+        "id": 61,
         "name": "Super Guide 6 30 M",
         "release_date": 1622033136331,
         "product_url": "https://slackstar.de/fun-performance/2-baeume/komplettset-6-teilig/870/super-guide6?number=SL81798-30",
@@ -1098,6 +1159,7 @@
         "active": false
     },
     {
+        "id": 62,
         "name": "Traveler | leichte Reise-Slackline",
         "release_date": 1622028030280,
         "product_url": "https://slacktivity.ch/shop/traveler-reise-slackline/",
@@ -1116,6 +1178,7 @@
         "active": true
     },
     {
+        "id": 63,
         "name": "Zebra 2 25 M",
         "release_date": 1622033030540,
         "product_url": "https://slackstar.de/fun-performance/2-baeume/komplettset-2-teilig/868/zebra2?number=SL81792-25_ZEBRA",
@@ -1134,6 +1197,7 @@
         "active": false
     },
     {
+        "id": 64,
         "name": "Zebra 6 25 M",
         "release_date": 1622032768717,
         "product_url": "https://slackstar.de/kinder-familie/2-baeume/komplettset-6-teilig/921/zebra6?number=SL82668-25_ZEBRA",

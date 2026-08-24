@@ -1,7 +1,7 @@
 
 
 from slack_data.database import SessionDep
-from slack_data.load_data._seed_io import read_seed_json, seed_path, to_bool
+from slack_data.load_data._seed_io import read_seed_json, require_seed_id, seed_path, to_bool
 from slack_data.models.brands import Brand, get_brand
 from slack_data.models.tricklinekits import TricklineKit, TricklineKitCreate, TensioningType
 from slack_data.utilities.currencies import get_currency
@@ -81,6 +81,7 @@ def add_tricklinekits_to_db(tricks: list[dict], session: SessionDep) -> None:
         )
 
         db_tk = TricklineKit.model_validate(trick_create)
+        db_tk.id = require_seed_id(t, "tricklinekits.json")
         db_tk.brand = session.get(Brand, brand_id)
         print(f"Adding trickline kit: {db_tk.name} by {db_tk.brand.name}")
         session.add(db_tk)

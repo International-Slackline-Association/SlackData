@@ -3,7 +3,7 @@ import json
 
 
 from slack_data.database import SessionDep
-from slack_data.load_data._seed_io import read_seed_json, seed_path
+from slack_data.load_data._seed_io import read_seed_json, require_seed_id, seed_path
 from slack_data.models.brands import Brand, get_brand
 from slack_data.models.webbing import (
     FiberMaterial,
@@ -87,6 +87,7 @@ def add_webbings_to_db(webbings: list[dict], session: SessionDep) -> None:
             active=webbing.get("active"),
         )
         db_webbing = Webbing.model_validate(webbing_create)
+        db_webbing.id = require_seed_id(webbing, "webbings.json")
         db_webbing.brand = session.get(Brand, brand_id)
         print(f"Adding webbing: {db_webbing.name} by {db_webbing.brand.name}")
         session.add(db_webbing)

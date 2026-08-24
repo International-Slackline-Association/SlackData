@@ -117,7 +117,9 @@ Root *.json seed files
 | `slack_data/models/brands.py` | `Brand` model + `get_brand()` upsert helper (central entity) |
 | `slack_data/models/<type>.py` | SQLModel schemas per gear type |
 | `slack_data/load_data/load_<type>s.py` | JSON → DB importers — copy this pattern for new types |
-| `slack_data/load_data/_seed_io.py` | `read_seed_json()` / `seed_path()` / `to_bool()` — shared by every loader |
+| `slack_data/load_data/_seed_io.py` | `read_seed_json()` / `seed_path()` / `to_bool()` / `require_seed_id()` — shared by every loader |
+| `slack_data/load_data/brand_ids.py` | `catalog_id` from `manufacturers.json` — the stable `Brand.id`, read lazily |
+| `scripts/backfill_seed_ids.py` | Writes/verifies the explicit ids in the seeds; `--check` for CI |
 | `slack_data/api/routers/_crud.py` | `crud_router()` — the CRUD factory every gear router is built from |
 | `slack_data/api/routers/<type>_router.py` | One `crud_router(...)` call per gear type |
 | `slack_data/api/routing.py` | Router registration + the READ_ONLY write-route filter (see below) |
@@ -215,7 +217,29 @@ converted in storage; see DESIGN.md § Currency & Prices.
 
 Each loader defines: `load_<type>s_json()` (one line — `read_seed_json("<type>s.json")`), `clean_<type>_data()` (normalizes blanks/types), `add_<type>s_to_db()` (maps JSON keys → `<X>Create`, resolves brand via `get_brand()`, `session.add()`, commit), and `load_<type>s(session)` orchestrating them. There's an `if __name__ == "__main__"` block for standalone inspection.
 
-Reading the file, locating the repo root, and coercing a seed's loose booleans are **not** per-type knowledge and live in `load_data/_seed_io.py` (`read_seed_json`, `seed_path`, `to_bool`). What stays in each loader is the part that genuinely differs: which JSON key maps onto which model field — including the traps below.
+Reading the file, locating the repo root, and coercing a seed's loose booleans are **not** per-type knowledge and live in `load_data/_seed_io.py` (`read_seed_json`, `seed_path`, `to_bool`, `require_seed_id`). What stays in each loader is the part that genuinely differs: which JSON key maps onto which model field — including the traps below.
+
+**Every seed item carries an explicit `id`** — the first key in each object, in all eight gear
+seeds — and the loaders assign it rather than letting SQLite autoincrement
+(`_seed_io.require_seed_id`, called right after each `model_validate`). It is the catalogue's stable
+identity: an id used to be a statement about where an item sat in its file, so inserting one product
+mid-file shifted every id after it and silently re-pointed ISA warning match blocks, brand
+credentials, submitted corrections and bookmarked links. A missing id is a hard error, never a
+fallback to autoincrement.
+
+**Brands work the same way**, one level up: `Brand.id` comes from `catalog_id` in
+`manufacturers.json` via `load_data/brand_ids.py`, which `get_brand()` calls when it creates a row.
+Left to autoincrement, a brand's id recorded which gear file named it first — and a manufacturer
+credential is scoped by `brand_id`, so that drift hands one company another's inventory. All 76
+entries have a `catalog_id`, including manufacturers we hold no gear for, so their first product
+renumbers nothing. A gear seed naming a brand with no entry is refused (`UnknownBrand`).
+
+`scripts/backfill_seed_ids.py` wrote today's assignment into the seeds — nothing was renumbered, so
+every id already recorded anywhere stayed correct — and is also how a newly appended item or
+manufacturer gets the next free number (`--check` verifies, exit 1 on drift).
+`tests/test_seed_ids.py` holds the invariants, including a full seed of the real files and one that
+loads `grips.json` **backwards** — the only check that fails if a loader goes back to letting SQLite
+choose.
 
 **JSON keys differ per type — always check the existing loader, don't assume:**
 - Brand field is `brand` for webbing, but `manufacturer` for grips/leashrings/rollers/treepro/kits.
@@ -264,11 +288,15 @@ a gear table.
 
 1. **Model** — `models/<type>.py`: `Base<X>`, `<X>(table=True)`, `<X>Public`/`<X>Create`/`<X>Update`, enums, `brand` Relationship.
 2. **Brand** — add `Brand._<type>` Relationship + `@computed_field` list in `brands.py`.
-3. **JSON** — `<type>s.json` at repo root (array of objects).
-4. **Loader** — `load_data/load_<type>s.py` following the pattern above.
+3. **JSON** — `<type>s.json` at repo root (array of objects), each with an explicit `id` (first
+   key) and a `brand`/`manufacturer` that has an entry in `manufacturers.json`.
+4. **Loader** — `load_data/load_<type>s.py` following the pattern above, including
+   `db_<x>.id = require_seed_id(<item>, "<type>s.json")` after `model_validate`.
 5. **Router** — `api/routers/<type>_router.py`: one `crud_router(...)` call.
 6. **Wire up** — in `main.py`: import + add empty-checked loader call in lifespan, and `include_router`.
-7. **Re-seed** — delete `slack_data/database.db`, restart.
+7. **Ids** — add the file to `SEEDS` in `scripts/backfill_seed_ids.py`, to `SEEDS`/`MODELS` in
+   `tests/test_seed_ids.py`, then run the script to number the new items.
+8. **Re-seed** — delete `slack_data/database.db`, restart.
 
 ## Frontend ↔ Backend contract rule
 
@@ -285,7 +313,7 @@ Before writing any of the above, open the relevant `models/<type>.py` and `utili
 ## Conventions
 
 - Imports are absolute (`from slack_data....`).
-- `manufacturers.json` (76 entries) at root **is loaded — but as an enrichment pass, not a creator**. Brand rows are still created on the fly by `get_brand()` with only a name; `load_manufacturers.py` then backfills `country` / `year_founded` / `website` / `socials` / `contact_email` / `active` / `slackline_focused` onto the rows that already exist, matching on `canonical_brand()`. It never inserts a brand (an entry with no matching row means we hold no gear for that manufacturer). It **must run last** in the lifespan, and is gated on "no brand has a country yet" rather than on an empty table. `contact_email` is the one field here that is **ours, not SlackDB's** — scraped from each manufacturer's own site (34/76 as of 2026-08-23; the rest publish a contact form only, or have no site left). `metadata.email_source` in the JSON records that provenance.
+- `manufacturers.json` (76 entries) at root **is loaded — but as an enrichment pass, not a creator**. Brand rows are still created on the fly by `get_brand()` with only a name; `load_manufacturers.py` then backfills `country` / `year_founded` / `website` / `socials` / `contact_email` / `active` / `slackline_focused` onto the rows that already exist, matching on `canonical_brand()`. Its `catalog_id` **is** read at creation time, though — that is where `Brand.id` comes from (see § Loader pattern). It never inserts a brand (an entry with no matching row means we hold no gear for that manufacturer). It **must run last** in the lifespan, and is gated on "no brand has a country yet" rather than on an empty table. `contact_email` is the one field here that is **ours, not SlackDB's** — scraped from each manufacturer's own site (34/76 as of 2026-08-23; the rest publish a contact form only, or have no site left). `metadata.email_source` in the JSON records that provenance.
 - Country is stored as the `Country` enum's **full display name** (`"Germany"`), not an ISO code; `get_country()` in `utilities/countries.py` maps the sources' alpha-2 codes onto the enum.
 - `BrandPublic` only declares `webbings` in its response schema — other gear lists exist on the ORM model via `@computed_field` but may not serialize in API responses.
 - No auth — all endpoints are open.

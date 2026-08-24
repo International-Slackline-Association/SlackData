@@ -2,6 +2,7 @@ from pydantic import computed_field
 from sqlmodel import select, Field, Relationship, SQLModel
 
 from slack_data.database import SessionDep
+from slack_data.load_data.brand_ids import brand_catalog_id
 from slack_data.utilities.brand_aliases import canonical_brand
 from slack_data.utilities.countries import Country
 
@@ -89,6 +90,14 @@ class Brand(BaseBrands, table=True):
         return [tricklinekit.name for tricklinekit in self._tricklinekits]
     
 def get_brand(session: SessionDep, brand_cache: dict[str, int] | None, item: dict) -> tuple[int,dict]:
+    """Upsert a brand by `item["brand"]`, returning `(brand_id, brand_cache)`.
+
+    The id is **not** SQLite's to choose: it comes from `catalog_id` in
+    manufacturers.json (see `load_data/brand_ids.py`). Left to autoincrement, a
+    brand's id recorded which gear file happened to name it first, so re-ordering
+    a load could hand a registered manufacturer credential another company's
+    inventory — the failure `verify_brand()` exists to catch.
+    """
     brand_name = canonical_brand(str(item.get("brand")))
     if brand_name not in brand_cache:
         # get brand_id from the database or create it if it doesn't exist
@@ -98,7 +107,8 @@ def get_brand(session: SessionDep, brand_cache: dict[str, int] | None, item: dic
             # Create a new brand entry if it doesn't exist
             brand_create = BrandCreate(name=brand_name)
             db_brand = Brand.model_validate(brand_create)
-            print(f"Adding brand: {db_brand.name}")
+            db_brand.id = brand_catalog_id(brand_name)
+            print(f"Adding brand: {db_brand.name} (#{db_brand.id})")
             session.add(db_brand)
             session.commit()
             session.refresh(db_brand)

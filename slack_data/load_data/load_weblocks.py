@@ -2,7 +2,7 @@ import re
 from typing import Any
 
 from slack_data.database import SessionDep
-from slack_data.load_data._seed_io import read_seed_json, seed_path
+from slack_data.load_data._seed_io import read_seed_json, require_seed_id, seed_path
 from slack_data.models.brands import Brand, get_brand
 from slack_data.models.weblocks import (
     AttachmentPoint,
@@ -58,6 +58,16 @@ def clean_weblock_data(weblock: dict[str, Any]) -> dict[str, Any]:
     """
     cleaned_data = {}
     specs = weblock.get("specifications", {})
+
+    # Unlike the other cleaners, this one builds a fresh dict rather than
+    # rewriting the seed's — so the stable `id` has to be carried across
+    # explicitly or `require_seed_id()` finds nothing.
+    cleaned_data["id"] = weblock.get("id")
+    # Carried through like raw_name below: this pass builds a FRESH dict from the
+    # nested scrape rather than copying the source, so any key not named here is
+    # dropped — and `add_weblocks_to_db` needs the seed id off the cleaned
+    # payload. Every other loader keeps it for free by passing the item along.
+    cleaned_data["id"] = weblock.get("id")
 
     cleaned_data["raw_name"] = weblock.get("name") 
     cleaned_data["raw_brand_name"] = weblock.get("brand") 
@@ -126,6 +136,7 @@ def add_weblocks_to_db(weblocks: list[dict], session: SessionDep) -> None:
             active=weblock.get("active"),
         )
         db_weblock = Weblock.model_validate(weblock_create)
+        db_weblock.id = require_seed_id(weblock, "weblocks.json")
         db_weblock.brand = session.get(Brand, brand_id)
         print(f"Adding weblock: {db_weblock.name} by {db_weblock.brand.name}")
         session.add(db_weblock)

@@ -1,7 +1,7 @@
 
 
 from slack_data.database import SessionDep
-from slack_data.load_data._seed_io import read_seed_json, seed_path, to_bool
+from slack_data.load_data._seed_io import read_seed_json, require_seed_id, seed_path, to_bool
 from slack_data.models.brands import Brand, get_brand
 from slack_data.models.grips import Grip, GripCreate, ConnectionType
 from slack_data.utilities.currencies import get_currency
@@ -62,6 +62,7 @@ def add_grips_to_db(grips: list[dict], session: SessionDep) -> None:
             active=grip.get("active"),
         )
         db_grip = Grip.model_validate(grip_create)
+        db_grip.id = require_seed_id(grip, "grips.json")
         db_grip.brand = session.get(Brand, brand_id)
         
         print(f"Adding grip: {db_grip.name} by {db_grip.brand.name}")

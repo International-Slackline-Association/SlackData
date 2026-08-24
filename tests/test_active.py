@@ -167,6 +167,10 @@ def test_patch_other_field_leaves_active_alone(client, brand, prefix):
 # an `active` key). Note the brand field name differs per type — `brand` for
 # webbing/weblock, `manufacturer` for everything else — which is exactly the
 # kind of per-loader divergence these tests exist to pin down.
+#
+# The brand is a real one: `get_brand()` takes a brand's id from `catalog_id` in
+# manufacturers.json (see load_data/brand_ids.py), so an invented manufacturer
+# has no id to be given and the load refuses rather than autoincrementing.
 
 LOADER_CASES = [
     (
@@ -174,7 +178,7 @@ LOADER_CASES = [
         clean_webbing_data,
         add_webbings_to_db,
         Webbing,
-        {"name": "Loaded Webbing", "brand": "Loader Brand", "materialType": "Nylon", "width": 25},
+        {"name": "Loaded Webbing", "brand": "Gibbon", "materialType": "Nylon", "width": 25},
     ),
     (
         "weblock",
@@ -183,7 +187,7 @@ LOADER_CASES = [
         Weblock,
         {
             "name": "Loaded Weblock",
-            "brand": "Loader Brand",
+            "brand": "Gibbon",
             "style": "Rodeo",
             "specifications": {
                 "Material": "Aluminum",
@@ -198,7 +202,7 @@ LOADER_CASES = [
         Roller,
         {
             "name": "Loaded Roller",
-            "manufacturer": "Loader Brand",
+            "manufacturer": "Gibbon",
             "material": "Aluminum",
             "roller_material": "Aluminum",
             "locking_type": "Screw Lock",
@@ -214,7 +218,7 @@ LOADER_CASES = [
         LeashRing,
         {
             "name": "Loaded Leash Ring",
-            "manufacturer": "Loader Brand",
+            "manufacturer": "Gibbon",
             "material": "Stainless Steel",
         },
     ),
@@ -225,7 +229,7 @@ LOADER_CASES = [
         Grip,
         {
             "name": "Loaded Grip",
-            "manufacturer": "Loader Brand",
+            "manufacturer": "Gibbon",
             "material": "Aluminum",
             "width_min": 25,
         },
@@ -235,7 +239,7 @@ LOADER_CASES = [
         clean_treepro_data,
         add_treepros_to_db,
         TreePro,
-        {"name": "Loaded TreePro", "manufacturer": "Loader Brand"},
+        {"name": "Loaded TreePro", "manufacturer": "Gibbon"},
     ),
     (
         "starterkit",
@@ -244,7 +248,7 @@ LOADER_CASES = [
         StarterKit,
         {
             "name": "Loaded Starter Kit",
-            "manufacturer": "Loader Brand",
+            "manufacturer": "Gibbon",
             "webbing_length": 15,
             "webbing_width": 25,
             "tensioning_type": "RAT1",
@@ -257,7 +261,7 @@ LOADER_CASES = [
         TricklineKit,
         {
             "name": "Loaded Trickline Kit",
-            "manufacturer": "Loader Brand",
+            "manufacturer": "Gibbon",
             "webbing_length": 15,
             "webbing_width": 25,
             "tensioning_type": "RAT1",
@@ -269,8 +273,14 @@ LOADER_IDS = [case[0] for case in LOADER_CASES]
 
 
 def _load_one(session, clean_fn, add_fn, Model, item):
-    """Run one raw JSON item through its loader and return the created row."""
-    add_fn([clean_fn(dict(item))], session)
+    """Run one raw JSON item through its loader and return the created row.
+
+    The `id` is supplied here rather than in each case because it is not what
+    these tests are about — but the loaders require it (see
+    `_seed_io.require_seed_id`), since a seed item's id is no longer SQLite's to
+    invent. One row per test, so #1 is always free.
+    """
+    add_fn([clean_fn(dict(item) | {"id": 1})], session)
     return session.exec(select(Model)).one()
 
 

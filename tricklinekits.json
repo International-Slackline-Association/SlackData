@@ -1,5 +1,6 @@
 [
     {
+        "id": 1,
         "name": "23m kit",
         "release_date": 1617137515463,
         "product_url": null,
@@ -18,6 +19,7 @@
         "active": false
     },
     {
+        "id": 2,
         "name": "Level 1 Kit",
         "release_date": 1621890885306,
         "product_url": "https://www.riggingventures.com/product-page/level-1-trickline-kit",
@@ -36,6 +38,7 @@
         "active": false
     },
     {
+        "id": 3,
         "name": "Level 2 Kit",
         "release_date": 1621891342589,
         "product_url": "https://www.riggingventures.com/product-page/rv-trickline-kit",
@@ -54,6 +57,7 @@
         "active": false
     },
     {
+        "id": 4,
         "name": "Level 3 Trickline kit",
         "release_date": 1621891420627,
         "product_url": "https://www.riggingventures.com/product-page/pro-trickline-kit-1",
@@ -72,6 +76,7 @@
         "active": false
     },
     {
+        "id": 5,
         "name": "Super Jumpline Slackline Set",
         "release_date": 1621916395405,
         "product_url": "https://slacktivity.com/shop/super-jumpline-slackline/",
@@ -90,6 +95,7 @@
         "active": true
     },
     {
+        "id": 6,
         "name": "Trickline Kit - Pro Line 25",
         "release_date": 1621927050057,
         "product_url": "https://spider-slacklines.com/shop/en/trickline-kit/15-544-trickline-kit-pro-line-25-9506919000.html#/26-select_backup_kit-none/29-select_tree_protections-tree_protections_xl_200_cm",
@@ -108,6 +114,7 @@
         "active": true
     },
     {
+        "id": 7,
         "name": "Kit Freestyle 22m - Andy Lewis X13",
         "release_date": 1621927211777,
         "product_url": "https://laboutique.slack.fr/en/mid-level-slack-2535m/327-kit-freestyle-andy-lewis-slackline.html?fbclid=IwAR2dNVp-afje4n2EDp3MmF23fT_mHKwvaHh9cUyVwPT1JJfJufXXGPbdcUY",
@@ -126,6 +133,7 @@
         "active": false
     },
     {
+        "id": 8,
         "name": "BOSS LINE KIT",
         "release_date": 1622133491808,
         "product_url": "https://slacklineindustries.com/collections/all-products/products/boss-line-kit",
@@ -144,6 +152,7 @@
         "active": true
     },
     {
+        "id": 9,
         "name": "25 m Air n Jump Set",
         "release_date": 1622133611412,
         "product_url": "https://www.slack-shop.de/25m-air-jump-set.html",
@@ -162,6 +171,7 @@
         "active": false
     },
     {
+        "id": 10,
         "name": "Level Two Kit",
         "release_date": 1620111600000,
         "product_url": "https://www.riggingventures.com/product-page/rv-trickline-kit",

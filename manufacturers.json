@@ -20,6 +20,7 @@
   },
   "manufacturers": {
     "1": {
+      "catalog_id": 23,
       "name": "Gibbon",
       "verified": true,
       "item_count": 4,
@@ -32,6 +33,7 @@
       "active": true
     },
     "2": {
+      "catalog_id": 1,
       "name": "Landcruising",
       "verified": true,
       "item_count": 25,
@@ -44,6 +46,7 @@
       "active": false
     },
     "3": {
+      "catalog_id": 3,
       "name": "Balance Community: Slackline Outfitters",
       "verified": true,
       "item_count": 38,
@@ -56,6 +59,7 @@
       "active": true
     },
     "4": {
+      "catalog_id": 10,
       "name": "Slack Mountain",
       "verified": true,
       "item_count": 37,
@@ -68,6 +72,7 @@
       "active": true
     },
     "5": {
+      "catalog_id": 6,
       "name": "lineGrip (formerly Slack Pro!)",
       "verified": true,
       "item_count": 10,
@@ -80,6 +85,7 @@
       "active": true
     },
     "6": {
+      "catalog_id": 14,
       "name": "Slacktivity",
       "verified": true,
       "item_count": 30,
@@ -92,6 +98,7 @@
       "active": true
     },
     "7": {
+      "catalog_id": 11,
       "name": "Slack Inov",
       "verified": true,
       "item_count": 21,
@@ -104,6 +111,7 @@
       "active": true
     },
     "8": {
+      "catalog_id": 20,
       "name": "Line Spirit",
       "verified": true,
       "item_count": 12,
@@ -116,6 +124,7 @@
       "active": false
     },
     "9": {
+      "catalog_id": 8,
       "name": "Equilibrium Slacklines (EQB)",
       "verified": true,
       "item_count": 45,
@@ -128,6 +137,7 @@
       "active": true
     },
     "10": {
+      "catalog_id": 5,
       "name": "Elephant",
       "verified": true,
       "item_count": 7,
@@ -140,6 +150,7 @@
       "active": false
     },
     "11": {
+      "catalog_id": 77,
       "name": "2 Trees",
       "verified": true,
       "item_count": 0,
@@ -152,6 +163,7 @@
       "active": null
     },
     "12": {
+      "catalog_id": 4,
       "name": "Slack.fr",
       "verified": true,
       "item_count": 18,
@@ -164,6 +176,7 @@
       "active": null
     },
     "13": {
+      "catalog_id": 22,
       "name": "Gambit",
       "verified": true,
       "item_count": 2,
@@ -176,6 +189,7 @@
       "active": false
     },
     "14": {
+      "catalog_id": 78,
       "name": "Slackline brothers",
       "verified": true,
       "item_count": 0,
@@ -188,6 +202,7 @@
       "active": null
     },
     "15": {
+      "catalog_id": 46,
       "name": "SlackTech",
       "verified": true,
       "item_count": 1,
@@ -200,6 +215,7 @@
       "active": false
     },
     "16": {
+      "catalog_id": 28,
       "name": "SlackGear",
       "verified": true,
       "item_count": 6,
@@ -212,6 +228,7 @@
       "active": true
     },
     "17": {
+      "catalog_id": 79,
       "name": "Slacklife",
       "verified": true,
       "item_count": 0,
@@ -224,6 +241,7 @@
       "active": null
     },
     "18": {
+      "catalog_id": 42,
       "name": "One Inch Dreams",
       "verified": true,
       "item_count": 2,
@@ -236,6 +254,7 @@
       "active": false
     },
     "19": {
+      "catalog_id": 18,
       "name": "Pure Slacklines",
       "verified": true,
       "item_count": 2,
@@ -248,6 +267,7 @@
       "active": false
     },
     "20": {
+      "catalog_id": 9,
       "name": "Yoga Slackers",
       "verified": true,
       "item_count": 2,
@@ -260,6 +280,7 @@
       "active": true
     },
     "21": {
+      "catalog_id": 27,
       "name": "Slackline Industries",
       "verified": true,
       "item_count": 8,
@@ -272,6 +293,7 @@
       "active": true
     },
     "22": {
+      "catalog_id": 17,
       "name": "Pump Slackline",
       "verified": true,
       "item_count": 2,
@@ -284,6 +306,7 @@
       "active": false
     },
     "23": {
+      "catalog_id": 26,
       "name": "Ambaradam",
       "verified": true,
       "item_count": 1,
@@ -296,6 +319,7 @@
       "active": false
     },
     "24": {
+      "catalog_id": 16,
       "name": "Spider slacklines",
       "verified": true,
       "item_count": 22,
@@ -308,6 +332,7 @@
       "active": true
     },
     "25": {
+      "catalog_id": 24,
       "name": "Slackline tools",
       "verified": true,
       "item_count": 8,
@@ -320,6 +345,7 @@
       "active": false
     },
     "26": {
+      "catalog_id": 13,
       "name": "Raed Slacklines",
       "verified": true,
       "item_count": 21,
@@ -332,6 +358,7 @@
       "active": true
     },
     "27": {
+      "catalog_id": 25,
       "name": "Slack house",
       "verified": true,
       "item_count": 13,
@@ -344,6 +371,7 @@
       "active": true
     },
     "28": {
+      "catalog_id": 19,
       "name": "Singing rock",
       "verified": true,
       "item_count": 1,
@@ -356,6 +384,7 @@
       "active": true
     },
     "29": {
+      "catalog_id": 21,
       "name": "Dakas",
       "verified": true,
       "item_count": 6,
@@ -368,6 +397,7 @@
       "active": false
     },
     "30": {
+      "catalog_id": 7,
       "name": "Slackliner.de",
       "verified": true,
       "item_count": 13,
@@ -380,6 +410,7 @@
       "active": true
     },
     "31": {
+      "catalog_id": 80,
       "name": "Petzl",
       "verified": true,
       "item_count": 10,
@@ -392,6 +423,7 @@
       "active": true
     },
     "32": {
+      "catalog_id": 37,
       "name": "Edelrid",
       "verified": true,
       "item_count": 4,
@@ -404,6 +436,7 @@
       "active": true
     },
     "33": {
+      "catalog_id": 81,
       "name": "Rock Exotica",
       "verified": true,
       "item_count": 0,
@@ -416,6 +449,7 @@
       "active": true
     },
     "34": {
+      "catalog_id": 82,
       "name": "SMC",
       "verified": true,
       "item_count": 1,
@@ -428,6 +462,7 @@
       "active": true
     },
     "35": {
+      "catalog_id": 50,
       "name": "Camp",
       "verified": true,
       "item_count": 2,
@@ -440,6 +475,7 @@
       "active": true
     },
     "36": {
+      "catalog_id": 49,
       "name": "Climbing Technology (CT)",
       "verified": true,
       "item_count": 5,
@@ -452,6 +488,7 @@
       "active": false
     },
     "37": {
+      "catalog_id": 83,
       "name": "Van Beest",
       "verified": true,
       "item_count": 6,
@@ -464,6 +501,7 @@
       "active": true
     },
     "38": {
+      "catalog_id": 84,
       "name": "Omega Pacific",
       "verified": true,
       "item_count": 0,
@@ -476,6 +514,7 @@
       "active": null
     },
     "39": {
+      "catalog_id": 85,
       "name": "Tendon",
       "verified": true,
       "item_count": 0,
@@ -488,6 +527,7 @@
       "active": true
     },
     "40": {
+      "catalog_id": 86,
       "name": "Slackline Animals",
       "verified": true,
       "item_count": 0,
@@ -500,6 +540,7 @@
       "active": null
     },
     "41": {
+      "catalog_id": 29,
       "name": "Slacklife BC",
       "verified": true,
       "item_count": 7,
@@ -512,6 +553,7 @@
       "active": false
     },
     "42": {
+      "catalog_id": 33,
       "name": "Absolute Slacklines",
       "verified": true,
       "item_count": 2,
@@ -524,6 +566,7 @@
       "active": false
     },
     "43": {
+      "catalog_id": 32,
       "name": "Slackline Shop NZ",
       "verified": true,
       "item_count": 3,
@@ -536,6 +579,7 @@
       "active": true
     },
     "44": {
+      "catalog_id": 30,
       "name": "Balancing Earth Slacklines",
       "verified": true,
       "item_count": 2,
@@ -548,6 +592,7 @@
       "active": false
     },
     "45": {
+      "catalog_id": 35,
       "name": "Petram Slacklines",
       "verified": true,
       "item_count": 11,
@@ -560,6 +605,7 @@
       "active": true
     },
     "46": {
+      "catalog_id": 31,
       "name": "Middle Way Slacklines",
       "verified": true,
       "item_count": 6,
@@ -572,6 +618,7 @@
       "active": true
     },
     "47": {
+      "catalog_id": 87,
       "name": "ISC",
       "verified": true,
       "item_count": 2,
@@ -584,6 +631,7 @@
       "active": true
     },
     "48": {
+      "catalog_id": 88,
       "name": "Trango",
       "verified": true,
       "item_count": 1,
@@ -596,6 +644,7 @@
       "active": true
     },
     "49": {
+      "catalog_id": 89,
       "name": "Episwiss Rigging",
       "verified": true,
       "item_count": 1,
@@ -608,6 +657,7 @@
       "active": true
     },
     "50": {
+      "catalog_id": 34,
       "name": "Slacklining Canada",
       "verified": true,
       "item_count": 1,
@@ -620,6 +670,7 @@
       "active": false
     },
     "51": {
+      "catalog_id": 41,
       "name": "Cat on slack",
       "verified": true,
       "item_count": 5,
@@ -632,6 +683,7 @@
       "active": false
     },
     "52": {
+      "catalog_id": 48,
       "name": "Kong",
       "verified": true,
       "item_count": 1,
@@ -644,6 +696,7 @@
       "active": true
     },
     "53": {
+      "catalog_id": 44,
       "name": "ZERGE outdoor",
       "verified": true,
       "item_count": 6,
@@ -656,6 +709,7 @@
       "active": false
     },
     "54": {
+      "catalog_id": 51,
       "name": "Fusion Climb",
       "verified": true,
       "item_count": 1,
@@ -668,6 +722,7 @@
       "active": true
     },
     "55": {
+      "catalog_id": 54,
       "name": "Slackstar",
       "verified": true,
       "item_count": 13,
@@ -680,6 +735,7 @@
       "active": true
     },
     "58": {
+      "catalog_id": 90,
       "name": "CMC Rescue",
       "verified": true,
       "item_count": 1,
@@ -692,6 +748,7 @@
       "active": true
     },
     "59": {
+      "catalog_id": 12,
       "name": "Mammut",
       "verified": true,
       "item_count": 1,
@@ -704,6 +761,7 @@
       "active": true
     },
     "60": {
+      "catalog_id": 43,
       "name": "Krok",
       "verified": true,
       "item_count": 1,
@@ -716,6 +774,7 @@
       "active": true
     },
     "61": {
+      "catalog_id": 91,
       "name": "BananasColombia",
       "verified": true,
       "item_count": 0,
@@ -728,6 +787,7 @@
       "active": null
     },
     "62": {
+      "catalog_id": 36,
       "name": "Souz Slackline",
       "verified": true,
       "item_count": 13,
@@ -740,6 +800,7 @@
       "active": false
     },
     "63": {
+      "catalog_id": 15,
       "name": "Balanceur",
       "verified": true,
       "item_count": 2,
@@ -752,6 +813,7 @@
       "active": false
     },
     "64": {
+      "catalog_id": 2,
       "name": "Aki Slacklines",
       "verified": true,
       "item_count": 12,
@@ -764,6 +826,7 @@
       "active": false
     },
     "65": {
+      "catalog_id": 53,
       "name": "Slack Mitra",
       "verified": true,
       "item_count": 2,
@@ -776,6 +839,7 @@
       "active": true
     },
     "66": {
+      "catalog_id": 47,
       "name": "Viper Slacklines",
       "verified": true,
       "item_count": 1,
@@ -788,6 +852,7 @@
       "active": true
     },
     "67": {
+      "catalog_id": 45,
       "name": "Radrigs",
       "verified": true,
       "item_count": 1,
@@ -800,6 +865,7 @@
       "active": true
     },
     "68": {
+      "catalog_id": 92,
       "name": "Shaoline Slack",
       "verified": true,
       "item_count": 0,
@@ -812,6 +878,7 @@
       "active": true
     },
     "69": {
+      "catalog_id": 93,
       "name": "A-Zero Slackline",
       "verified": true,
       "item_count": 0,
@@ -824,6 +891,7 @@
       "active": true
     },
     "70": {
+      "catalog_id": 94,
       "name": "Slackear",
       "verified": true,
       "item_count": 0,
@@ -836,6 +904,7 @@
       "active": true
     },
     "71": {
+      "catalog_id": 95,
       "name": "Dnd_Line",
       "verified": true,
       "item_count": 0,
@@ -848,6 +917,7 @@
       "active": true
     },
     "72": {
+      "catalog_id": 39,
       "name": "Geko Slacklines",
       "verified": true,
       "item_count": 1,
@@ -860,6 +930,7 @@
       "active": true
     },
     "73": {
+      "catalog_id": 55,
       "name": "Easy Slackline",
       "verified": true,
       "item_count": 4,
@@ -872,6 +943,7 @@
       "active": false
     },
     "74": {
+      "catalog_id": 38,
       "name": "Acrobat Slackline",
       "verified": true,
       "item_count": 3,
@@ -884,6 +956,7 @@
       "active": true
     },
     "75": {
+      "catalog_id": 96,
       "name": "BLOACS",
       "verified": true,
       "item_count": 0,
@@ -896,6 +969,7 @@
       "active": true
     },
     "76": {
+      "catalog_id": 40,
       "name": "Bera Adventure",
       "verified": true,
       "item_count": 3,
@@ -908,6 +982,7 @@
       "active": true
     },
     "local_space_age_slacklines": {
+      "catalog_id": 52,
       "name": "Space Age Slacklines",
       "verified": false,
       "item_count": 1,
@@ -920,6 +995,7 @@
       "active": false
     },
     "local_rigging_ventures": {
+      "catalog_id": 56,
       "name": "Rigging Ventures",
       "verified": false,
       "item_count": 4,

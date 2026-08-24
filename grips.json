@@ -1,5 +1,6 @@
 [
     {
+        "id": 1,
         "name": "LineGrip Alu G4",
         "material": "Aluminum",
         "width_min": 24,
@@ -18,6 +19,7 @@
         "active": false
     },
     {
+        "id": 2,
         "name": "Snatch 2.2",
         "material": "Aluminum",
         "width_min": 24,
@@ -36,6 +38,7 @@
         "active": false
     },
     {
+        "id": 3,
         "name": "Wafer",
         "material": "Aluminum",
         "width_min": 16,
@@ -54,6 +57,7 @@
         "active": false
     },
     {
+        "id": 4,
         "name": "Snatch 2.2T",
         "material": "Aluminum",
         "width_min": 49,
@@ -72,6 +76,7 @@
         "active": false
     },
     {
+        "id": 5,
         "name": "LineGrip nano",
         "material": "Other",
         "width_min": 24,
@@ -90,6 +95,7 @@
         "active": false
     },
     {
+        "id": 6,
         "name": "LineGrip G5",
         "material": "Aluminum",
         "width_min": 24,
@@ -108,6 +114,7 @@
         "active": true
     },
     {
+        "id": 7,
         "name": "TricklineGrip G1",
         "material": "Aluminum",
         "width_min": 24,
@@ -126,6 +133,7 @@
         "active": false
     },
     {
+        "id": 8,
         "name": "TricklineGrip G2",
         "material": "Aluminum",
         "width_min": 24,
@@ -144,6 +152,7 @@
         "active": true
     },
     {
+        "id": 9,
         "name": "HighlineGrip G2",
         "material": "Aluminum",
         "width_min": 24,
@@ -162,6 +171,7 @@
         "active": true
     },
     {
+        "id": 10,
         "name": "Grippen",
         "material": "Stainless Steel",
         "width_min": 24,
@@ -180,6 +190,7 @@
         "active": false
     },
     {
+        "id": 11,
         "name": "Cito",
         "material": "Aluminum",
         "width_min": 24,
@@ -198,6 +209,7 @@
         "active": true
     },
     {
+        "id": 12,
         "name": "Line Mitra Webbing Gripper",
         "material": "Steel",
         "width_min": 24,
@@ -216,6 +228,7 @@
         "active": false
     },
     {
+        "id": 13,
         "name": "SHARK",
         "material": "Stainless Steel",
         "width_min": 17,
@@ -234,6 +247,7 @@
         "active": true
     },
     {
+        "id": 14,
         "name": "MOUSE GRIP",
         "material": "Aluminum",
         "width_min": 16,
@@ -252,6 +266,7 @@
         "active": true
     },
     {
+        "id": 15,
         "name": "Wafer 2.0",
         "material": "Aluminum",
         "width_min": 23,
@@ -270,6 +285,7 @@
         "active": true
     },
     {
+        "id": 16,
         "name": "Wafer XL",
         "material": "Aluminum",
         "width_min": 16,
@@ -288,6 +304,7 @@
         "active": true
     },
     {
+        "id": 17,
         "name": "T-Grip Light",
         "material": "Aluminum",
         "width_min": 16,
@@ -306,6 +323,7 @@
         "active": true
     },
     {
+        "id": 18,
         "name": "T-Grip",
         "material": "Aluminum",
         "width_min": 20,
@@ -324,6 +342,7 @@
         "active": false
     },
     {
+        "id": 19,
         "name": "Grippex",
         "material": "Aluminum",
         "width_min": 20,
@@ -342,6 +361,7 @@
         "active": true
     },
     {
+        "id": 20,
         "name": "BeraGrip 50mm",
         "material": "Other",
         "width_min": 50,

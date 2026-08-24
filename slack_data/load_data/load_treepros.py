@@ -1,7 +1,12 @@
 
 
 from slack_data.database import SessionDep
-from slack_data.load_data._seed_io import read_seed_json, seed_path, to_bool
+from slack_data.load_data._seed_io import (
+    read_seed_json,
+    require_seed_id,
+    seed_path,
+    to_bool,
+)
 from slack_data.models.brands import Brand, get_brand
 from slack_data.models.treepro import TreePro, TreeProCreate
 from slack_data.utilities.currencies import get_currency
@@ -70,6 +75,7 @@ def add_treepros_to_db(treepros: list[dict], session: SessionDep) -> None:
         )
 
         db_treepro = TreePro.model_validate(treepro_create)
+        db_treepro.id = require_seed_id(treepro, "treepros.json")
         db_treepro.brand = session.get(Brand, brand_id)
         print(f"Adding TreePro: {db_treepro.name} by {db_treepro.brand.name}")
         session.add(db_treepro)
