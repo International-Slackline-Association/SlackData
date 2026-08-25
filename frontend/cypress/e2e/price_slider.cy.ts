@@ -355,9 +355,18 @@ describe('Price slider — typed bounds', () => {
     cy.focused().clear().type('3.47{enter}')
 
     cy.url().should('include', 'price_min=3.47')
-    cy.get('[data-cy="gear-card"]').each($card => {
-      const raw = $card.attr('data-price-display')
-      if (raw) expect(Number(raw)).to.be.gte(3.47)
+    // One retrying assertion rather than a per-card `each`: the URL is written
+    // before React has re-rendered the grid against it, so `each` can read the
+    // PREVIOUS render and see a card the new bound excludes. `should` retries
+    // the whole check until the grid catches up, which is the barrier this
+    // needs — without weakening it, since a card below the bound that never
+    // goes away still fails.
+    cy.get('[data-cy="gear-card"]').should($cards => {
+      const below = [...$cards].filter($card => {
+        const raw = $card.getAttribute('data-price-display')
+        return raw != null && raw !== '' && Number(raw) < 3.47
+      })
+      expect(below, 'cards priced below the typed bound').to.have.length(0)
     })
   })
 
