@@ -1,4 +1,4 @@
-# Deploying SlackData (serverless, Phase 1 — public read-only)
+# Deploying SlackData (serverless — public read-only catalogue + submissions)
 
 Architecture recap (see [../LAUNCH_RUNBOOK.md §0.2](../LAUNCH_RUNBOOK.md) for the full picture):
 
@@ -110,8 +110,15 @@ applies any `serverless.yml` change.
 
 ```bash
 cd infra
+export TURNSTILE_SECRET='...'      # Phase 2 — see below. Not stored in this repo.
 npx serverless deploy --stage prod
 ```
+
+**`TURNSTILE_SECRET` is read from your shell at deploy time** (`${env:TURNSTILE_SECRET, ''}` in
+serverless.yml), so the captcha secret never lands in git. Deploying without it exported does not
+break the site: the submissions endpoint fails **closed** and answers 503, while the catalogue is
+untouched. That is the intended failure mode — a captcha that silently switches itself off is worse
+than one that refuses. Get the value from the Cloudflare Turnstile dashboard for `slackdata.org`.
 
 Two to four minutes for a normal redeploy. Only the **first** deploy takes 15–25 minutes, because
 creating the CloudFront distribution dominates it; that is done. A `serverless.yml` change that
@@ -128,6 +135,9 @@ npm run build     # uses .env.production → VITE_API_URL=/api (same-origin, no 
 build produces new filenames and an immutable cache is safe:
 
 ```bash
+# NOTE the --delete: anything in this bucket that is not build output is removed.
+# That is intended (stale fingerprinted assets must go), and it is why manufacturer
+# photo uploads go to slackdata-uploads-prod-* instead — see § Phase 4 uploads.
 aws s3 sync dist/ "s3://$BUCKET" --delete \
   --exclude "index.html" --cache-control "public,max-age=31536000,immutable"
 ```
@@ -169,7 +179,61 @@ curl -s -o /dev/null -w '%{http_code}\n' "$BASE/api/webbing/999999"   # 404, not
 # The catalogue publishes no write surface. Both must hold:
 curl -s -o /dev/null -w '%{http_code}\n' "$BASE/api/openapi.json"         # 404 — docs are off
 curl -s -o /dev/null -w '%{http_code}\n' -X DELETE "$BASE/api/webbing/1"  # 405 — route not mounted
+
+# Phase 2: submissions. The one *open* write endpoint, and the closed admin ones.
+curl -s -o /dev/null -w '%{http_code}\n' "$BASE/api/submissions/"              # 401 — admin only
+curl -s -o /dev/null -w '%{http_code}\n' -H 'Authorization: Bearer dev-admin-token' \
+     "$BASE/api/submissions/"                                                  # 401 — dev token is dead hosted
+curl -s -o /dev/null -w '%{http_code}\n' -X POST "$BASE/api/submissions/" \
+     -H 'Content-Type: application/json' -d '{"gear_type":"webbings","gear_id":1,"note":"test"}'
+                                                                               # 400 — captcha missing (NOT 201)
 ```
+
+Those last three are the Phase 2 equivalents of the write-surface check above, and the middle one
+matters most: **the local dev admin token must not work on the live site.** It is a constant in this
+repository, so a 200 there would mean the admin API's password is public. It returns 401 because a
+pool is configured; if the pool configuration were ever lost the answer becomes 503, never 200. See
+`slack_data/api/auth.py` and `tests/test_auth.py`.
+
+A **201** on the POST would mean the captcha is not being enforced — check that `TURNSTILE_SECRET`
+was exported for the deploy.
+
+```bash
+# Phase 4: the manufacturer API. Both must be JSON, not HTML.
+curl -s -o /dev/null -w '%{http_code} %{content_type}\n' "$BASE/api/manufacturer/me"
+                                                        # 401 application/json
+curl -s -o /dev/null -w '%{http_code} %{content_type}\n' \
+     -H 'Authorization: Bearer not-a-real-token' "$BASE/api/manufacturer/me"
+                                                        # 401 application/json
+```
+
+**Check the content type, not just the status.** CloudFront's `CustomErrorResponses` are
+distribution-wide, so a `403 -> 200 /index.html` mapping added for SPA deep links also rewrites the
+API's own 403s — and this API returns 403 for a revoked brand credential, a credential without
+permission, and gear belonging to another brand. A brand's integration would then read `200 OK` and
+a page of HTML as success. That mapping has been **removed**: deep links are handled by
+`SpaRoutingFunction` on the default cache behaviour instead, which cannot touch `/api/*`. If you ever
+re-add a `CustomErrorResponse`, check first what the API can return with that status.
+
+Confirm the deep-link handling still works after any distribution change — it is the thing that
+mapping used to do:
+
+```bash
+curl -s -o /dev/null -w '%{http_code}\n' "$BASE/webbings/1"        # 200 — SPA route
+curl -s -o /dev/null -w '%{http_code}\n' "$BASE/admin"             # 200 — SPA route
+curl -s -o /dev/null -w '%{http_code}\n' "$BASE/assets/nope.js"    # 403/404 — a real miss, NOT 200
+```
+
+End-to-end, in a browser, once half B is deployed:
+
+1. A gear detail page shows **Suggest a correction**. If it does not, `VITE_TURNSTILE_SITE_KEY` was
+   empty at build time — see § Turning Phase 2 on.
+2. The dialog shows a Cloudflare widget. Submitting gives a reference id.
+3. **No email arrives, and that is correct** — the app sends none. See § No email, below.
+4. `/admin` offers a Cognito sign-in (not a token prompt), and the submission is in the queue with
+   its **brand** shown next to the name.
+5. Approve it → a JSON patch appears with "Approved — but not live". Apply it to the root `*.json`,
+   redeploy half A, then **Mark handled**.
 
 The write routes are not registered at all in hosted mode ([slack_data/api/routing.py](../slack_data/api/routing.py)),
 so `DELETE` hits a path whose only method is `GET` and Starlette answers 405 without reaching a
@@ -227,9 +291,286 @@ curl -s "http://localhost:9000/2015-03-31/functions/function/invocations" -d '{
 docker rm -f sd-smoke
 ```
 
-## Not in Phase 1 (added later, additively)
+## Phase 2 — submissions and admin triage
 
-- **Submissions** (suggest-an-item / correction forms) → a DynamoDB table + `POST` routes.
-- **Admin login** to triage submissions → a single-user Cognito pool + a gated admin page.
+Added additively, exactly as anticipated: the read-only catalog and both deploy halves above are
+unchanged. What `serverless.yml` now also creates:
 
-Neither requires changing anything above — the read-only catalog and this deploy stay as-is.
+| Resource | Purpose |
+|---|---|
+| `slackdata-submissions-prod` (DynamoDB) | The submission store. On-demand, TTL on `expires_at`, PITR on. **Not the catalogue** — that is still a read-only file in the image. |
+| `status-created_at-index` (GSI) | The single query the app makes: pending, oldest first. |
+| `slackdata-admins-prod` (Cognito) | One admin user, self-signup off. Created by hand, see below. |
+| Route throttling | `POST /submissions` at 2/sec (burst 5); everything else 50/sec. |
+
+The `/api/*` CloudFront behaviour needed **no change** — it already forwards all query strings and
+strips the `/api` prefix, so `/api/submissions` routes correctly. Verified rather than assumed; a
+distribution change would have cost ~15 minutes of propagation.
+
+### Turning Phase 2 on — the order matters
+
+The frontend needs three values that **do not exist until half A has run**, and Vite inlines them at
+build time. So this is a there-and-back-again, not a single pass:
+
+```bash
+# 0. Preflight. Checks the things that fail quietly or halfway — an unset
+#    TURNSTILE_SECRET (which deploys fine and 503s forever), a dirty working
+#    tree (the image is built from it), and which AWS account you are in.
+cd infra
+export TURNSTILE_SECRET='...'              # Cloudflare dashboard, slackdata.org
+./preflight.sh
+
+# 1. Half A. Creates both DynamoDB tables, the Cognito pool, and the uploads bucket.
+npx serverless deploy --stage prod
+
+# 2. Read back what it created.
+out() { aws cloudformation describe-stacks --stack-name slackdata-prod \
+  --query "Stacks[0].Outputs[?OutputKey=='$1'].OutputValue" --output text; }
+echo "authority: https://cognito-idp.eu-central-1.amazonaws.com/$(out AdminUserPoolId)"
+echo "client id: $(out AdminUserPoolClientId)"
+
+# 3. Fill frontend/.env.production. `./sync-env.sh` writes the two Cognito values
+#    in place (keeping the comments around them), plus the Turnstile SITE key
+#    from $TURNSTILE_SITE_KEY — so both Turnstile halves come from this one
+#    shell and cannot drift apart. See § Turnstile.
+./sync-env.sh prod
+
+# 4. Then run half B (build + sync + invalidate).
+```
+
+**The manufacturer API (Phase 4) is off by default — turn it on for this deploy.** Its Cognito
+resource server needs `cognito-idp:CreateResourceServer` on your own SSO identity (not the Lambda
+role, which holds no Cognito action at all). Earlier revisions of this file said that action was not
+granted. **It is** — confirmed 2026-08-24 by direct API call against a throwaway pool, along with the
+three tier-1 Cognito actions that had also never been exercised. So:
+
+```bash
+DEPLOY_MANUFACTURER_API=true npx serverless deploy --stage prod
+```
+
+Leave the resource to CloudFormation; do not create it by hand, or the next deploy collides with it.
+With the flag off instead, the brand-clients table is still created and the routes are still
+mounted — no brand can authenticate, because no app client can carry a scope that does not exist.
+That is the same dormant state the API is in anyway until a brand is onboarded by hand, so
+forgetting the flag costs nothing but a second stack update. See
+[LAMBDA_ROLE_PERMISSIONS.md](LAMBDA_ROLE_PERMISSIONS.md) § Deploy-time permissions.
+
+**Both of the empty values in `.env.production` fail *dark*, not loudly**, which is the behaviour to
+know about before you go looking for a bug:
+
+| Left empty | What happens |
+|---|---|
+| `VITE_TURNSTILE_SITE_KEY` | The suggestion form is **not rendered at all** — and is tree-shaken out of the bundle entirely. Deliberate: the API rejects every un-captcha'd submission when hosted, so shipping the form without a key would mean a visibly broken feature rather than an absent one. A console warning explains it. |
+| `VITE_COGNITO_AUTHORITY` / `_CLIENT_ID` | `/admin` renders "sign-in is not configured" instead of the local dev-token prompt, which the API would reject anyway once a pool exists. |
+
+Neither is a security control — the server enforces both independently (`utilities/turnstile.py`
+fails closed, `api/auth.py` rejects the dev token whenever a pool is configured). They exist so a
+half-finished deploy looks unfinished rather than broken.
+
+### Turnstile — why it needs three checks, not one
+
+The suggestion form needs two values that live in different places and are
+applied by **different halves of the deploy**:
+
+| | Where it lives | Applied by |
+|---|---|---|
+| `TURNSTILE_SECRET` | your shell → `serverless.yml` → Lambda env | half A |
+| `TURNSTILE_SITE_KEY` | your shell → `.env.production` → JS bundle | half B |
+
+`serverless.yml` reads the secret as `${env:TURNSTILE_SECRET, ''}` — that `''`
+is a **default, not an error**, so a deploy with no secret succeeds, goes green,
+and warns nobody. At runtime `turnstile.py` fails **closed**, so every
+`POST /submissions/` answers 503. Nothing else changes: catalogue, search,
+detail pages and `/admin` all work. The site looks healthy.
+
+Only one of the four combinations actually hurts:
+
+| Secret | Site key | Result |
+|---|---|---|
+| unset | unset | Form never renders (tree-shaken out). Ships dark — fine. |
+| set | unset | Endpoint works, nothing calls it. Harmless. |
+| set | set | Working. |
+| **unset** | **set** | **The bad one.** A visitor fills the form in, solves the challenge, submits — and gets a 503. Looks like our bug, and what they typed is gone. |
+
+That last row is easy to reach because the secret lives only in a shell, so it
+is gone in every new terminal, while the site key sits in a committed file.
+
+**So the safeguard is three layers, and the first one is structural:**
+
+1. **One source.** `./sync-env.sh` writes `VITE_TURNSTILE_SITE_KEY` from
+   `$TURNSTILE_SITE_KEY`, so both halves come from the same shell at the same
+   moment. Reaching the bad row now takes two separate mistakes instead of one
+   omission — and the script refuses outright if you hand it a site key with no
+   secret exported.
+2. **Before deploying:** `./preflight.sh` hard-fails on the bad row (checking
+   both the shell and the committed file), and warns on the merely-invisible
+   ones.
+3. **After deploying:** `./verify-deploy.sh` checks the **live site**, because
+   intent checks can still be wrong — a secret exported but not picked up, a
+   half B built from a stale env file. It cannot solve a captcha, and does not
+   need to: `POST /submissions/` with **no** token separates the two states
+   exactly and stores nothing either way —
+
+       secret set     -> 400 "captcha verification failed"   (healthy)
+       secret not set -> 503 "temporarily unavailable"       (broken)
+
+   which is the inverse of how it reads. It then fetches the deployed bundle,
+   checks whether the Turnstile widget is in it, and fails if the two disagree.
+   Those two status codes are a contract; `tests/test_submissions.py`
+   ::`test_a_tokenless_post_separates_the_two_captcha_configurations` pins them
+   so the check cannot silently start lying about production.
+
+A fourth, weaker signal: the function logs a `WARNING` naming
+`TURNSTILE_SECRET` on every cold start in that state. It is the only one of the
+four emitted by the running thing itself, so it is the one that still fires when
+somebody deploys by hand. It lives in `lambda_handler.py` rather than
+`main.py`'s lifespan, because Mangum runs with `lifespan="off"` and a check in
+the lifespan is silent in exactly the environment it exists for.
+
+    export TURNSTILE_SECRET='...' TURNSTILE_SITE_KEY='0x4AAA...'   # both, together
+
+### No email — and why there is nothing to set up
+
+**SlackData sends no email.** There is no SES identity to verify, no DKIM to keep valid, no sending
+reputation attached to `slackdata.org`, and nothing to check when an alert fails to arrive. New
+submissions are found at `/admin`, which shows an outstanding-work counter for approved-but-unapplied
+rows; a manufacturer's batch lands in the same place.
+
+This replaced an SES alert that was built and then removed. The reasoning, so it is not rebuilt by
+the next person who notices the queue is silent:
+
+- The setup cost is **permanent and ours** — an identity to verify, DKIM records to keep valid, and
+  a domain reputation to manage — for one recipient.
+- An execution role that can `ses:SendEmail` from `*@slackdata.org` means a compromised Lambda can
+  send mail **as our own domain**, with our domain's reputation behind it. That is a phishing vector
+  bought for the convenience of one notification.
+- The sibling project solves the human-contact half without AWS at all:
+  `slackmap@slacklineinternational.org` is a Google-Workspace alias that forwards to a person. It
+  needs no verification, survives an AWS account changing hands, and is visible to the ISA rather
+  than to whoever holds the credentials.
+
+**If a contact address is wanted for SlackData**, the same shape applies — ask Thomas for
+`slackdata@slacklineinternational.org` forwarding to the maintainer. It is the natural front door for
+manufacturer onboarding (a brand mails it, you verify who they are, then run
+`python -m slack_data.manufacturers.register`). Nothing in this repository needs to change for it to
+exist, which is the point.
+
+The Lambda role still carries `ses:SendEmail` / `ses:SendRawEmail` from the Phase 2 policy request.
+It is **unused**. Removing it is queued for the next revision of that policy rather than a round-trip
+of its own — see [LAMBDA_ROLE_PERMISSIONS.md](LAMBDA_ROLE_PERMISSIONS.md).
+
+### Creating the admin user (once, by hand)
+
+Self-signup is disabled, so the account is created with the CLI. There is no sign-up page to gate.
+
+```bash
+POOL=$(out AdminUserPoolId)
+aws cognito-idp admin-create-user \
+  --user-pool-id "$POOL" --username 'you@example.org' \
+  --user-attributes Name=email,Value='you@example.org' Name=email_verified,Value=true
+```
+
+Cognito emails a temporary password; the first login forces a change. Turn on MFA from the hosted
+login page — the pool allows it (`OPTIONAL` + TOTP) and this is the account that can read everything
+the public has submitted.
+
+### Onboarding a manufacturer (Phase 4, by hand and on purpose)
+
+Minting a brand's credentials is the moment we decide a company speaks for a brand. That is a
+judgement, not a deploy, which is why there is no route for it — see
+[MANUFACTURER_API_PLAN.md](../MANUFACTURER_API_PLAN.md) § Open questions 2. Three steps:
+
+1. **Verify who they are.** A mail from `sales@brand.com` is not proof. This is the open question;
+   until it has an answer, no brand should be onboarded.
+2. **Create the app client** in the Cognito console, in the *same* pool as the admin:
+   - **Generate a client secret: yes** (a machine can keep one; the SPA client cannot and must not).
+   - **OAuth flows: `client_credentials` only.**
+   - **Custom scope: `slackdata/gear.write`** — this requires the resource server to exist, i.e.
+     `DEPLOY_MANUFACTURER_API=true` deployed or the same resource server created by hand (see above).
+     Otherwise the scope is not there to select.
+3. **Map it to a brand**, which is what actually grants access:
+
+   ```bash
+   BRAND_CLIENTS_TABLE=slackdata-brand-clients-prod \
+     python -m slack_data.manufacturers.register \
+       --client-id '<from the console>' --brand 'Balance Community' --contact 'them@brand.com'
+   ```
+
+> **The one thing not to get wrong in the console.** The admin sign-in client
+> (`slackdata-admin-spa-prod`) and the brand clients live in the same user pool. Never enable
+> `client_credentials` on the SPA client, and never generate a secret for it — a browser cannot keep
+> one, and the PKCE exchange breaks outright if it has one. They are different kinds of credential
+> that happen to share a pool.
+
+Revoking is one command and takes effect on the very next request — no redeploy, no waiting out a
+token lifetime, which is the whole reason the brand mapping lives in data rather than in a per-brand
+Cognito scope:
+
+```bash
+BRAND_CLIENTS_TABLE=slackdata-brand-clients-prod \
+  python -m slack_data.manufacturers.register --client-id '<id>' --deactivate
+```
+
+**A manufacturer's updates arrive auto-approved and never expire.** That is deliberate — the sender
+makes the product, so the record is work outstanding rather than a decision — but it means a
+compromised brand credential writes permanent rows. Bounded by the route throttle (1/sec, burst 10)
+and the 50-item batch cap; unbounded in total. If a credential is ever suspected, deactivate it
+first and triage what it wrote second: rejecting those rows restores their TTL and they age out.
+
+### One-time prerequisites
+
+- **The Lambda role must be extended first** — see [ISA_ROLE_REQUEST_PHASE2.md](ISA_ROLE_REQUEST_PHASE2.md).
+  **Done: granted and applied 2026-08-23.** Without it the deploy's CloudFormation succeeds and every
+  submission then fails at runtime with an `AccessDeniedException`. Confirm with:
+
+  ```bash
+  aws iam get-role-policy --role-name slackdata-prod-eu-central-1-lambdaRole \
+    --policy-name slackdata-prod-lambda --query 'PolicyDocument.Statement[?Sid==`SlackDataTables`]'
+  ```
+
+  The resource must be `table/slackdata-*` (plus `/index/*`), not just the submissions table —
+  Phase 4's `slackdata-brand-clients-prod` is read on every authenticated manufacturer request.
+- **A Cloudflare Turnstile site key + secret** for `slackdata.org`. The secret is exported at deploy
+  time (half A above); the site key is public and belongs in `frontend/.env.production`.
+
+### Registering a brand — the id that can be wrong
+
+`python -m slack_data.manufacturers.register` resolves `--brand` against **whatever catalogue the
+machine running it has**, then writes that `brand_id` to the hosted table. Brand ids are SQLite
+autoincrements assigned by seed order, so a local catalogue seeded from a different commit than the
+deployed image can produce a different id — which would point a brand's credential at another
+company.
+
+`matching.verify_brand()` catches it: the stored `brand_name` is re-checked against the id on every
+manufacturer request, and a disagreement is a **503** ("these credentials need re-registering")
+rather than a confident answer about the wrong brand. The CLI also prints a warning when it writes
+to a hosted store. Before handing credentials over, confirm:
+
+```bash
+curl -H 'Authorization: Bearer <their token>' "$BASE/api/manufacturer/me"
+# must report the brand_id and brand_name you registered. A 503 means re-run the
+# CLI against a catalogue seeded from the deployed commit.
+```
+
+### Phase 4 uploads — a bucket the deploy must never touch
+
+`slackdata-uploads-prod-<accountId>` (`UploadsBucketName` in the stack outputs) holds photos sent in
+through the manufacturer API. **Nothing syncs it, and nothing should start.** The website bucket is
+synced with `--delete`, so a file placed there that is not in `dist/` is destroyed on the next
+deploy; gear images are build output (`frontend/public/gear-images/`, resolved through a build-time
+manifest), so an upload would be deleted *and* would not render in the meantime.
+
+Treat it as a quarantine. Reviewing a photo is the same shape as reviewing a spec correction:
+
+```bash
+aws s3 cp "s3://$(out UploadsBucketName)/<key>" frontend/public/gear-images/<type>/
+# regenerate the image manifest, commit, then run half B
+```
+
+Objects expire after 90 days by lifecycle rule, so rejected uploads clear themselves.
+
+### Approving a submission does not change the site
+
+Worth repeating here because it is the thing people expect to be automatic. Approving records the
+outcome and hands the admin a JSON patch. Making it live is the ordinary flow: edit the root
+`*.json`, commit, and run **half A** again to re-bake the catalog into the image.

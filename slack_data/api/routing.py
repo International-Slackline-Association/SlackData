@@ -28,8 +28,10 @@ from slack_data.api.routers.fx_router import fx_router
 from slack_data.api.routers.grip_router import grip_router
 from slack_data.api.routers.isa_warning_router import isa_warning_router
 from slack_data.api.routers.leashring_router import leashring_router
+from slack_data.api.routers.manufacturer_router import manufacturer_router
 from slack_data.api.routers.roller_router import roller_router
 from slack_data.api.routers.starterkit_router import starterkit_router
+from slack_data.api.routers.submissions_router import submissions_router
 from slack_data.api.routers.treepro_router import treepro_router
 from slack_data.api.routers.tricklinekit_router import tricklinekit_router
 from slack_data.api.routers.webbing_router import webbing_router
@@ -57,13 +59,23 @@ CATALOG_ROUTERS: tuple[APIRouter, ...] = (
     weblock_router,
 )
 
-# Phase 2 adds a second list here: routers over a *different* store, mounted in
-# full in every mode. `POST /submissions/` will have to work on the live site
-# even though the catalogue is read-only, because it writes to DynamoDB rather
-# than to the SQLite file. That is why the guard below is phrased as "the
-# catalogue publishes no writes" rather than "the app publishes no writes" —
-# those stop being the same statement the moment submissions land.
-ROUTERS: tuple[APIRouter, ...] = CATALOG_ROUTERS
+# Routers over a *different* store, mounted in full in every mode.
+#
+# `POST /submissions/` has to work on the live site, where the catalogue is
+# opened read-only — it writes to DynamoDB, which is a separate database that
+# knows nothing about the SQLite file. This split is the whole reason the guard
+# above is expressed as "the catalogue publishes no writes" rather than "the app
+# publishes no writes": Phase 2 is precisely the moment those stop being the
+# same statement.
+# `manufacturer_router` belongs here for the same reason, with one wrinkle: it
+# *reads* the catalogue (to answer "which of your products is this?") while
+# writing only to the submission store. Reads are fine hosted — every GET route
+# in the app reads through the same read-only session — so it is the write side
+# that decides which list it goes in, and its writes are not the catalogue's.
+WRITABLE_ROUTERS: tuple[APIRouter, ...] = (submissions_router, manufacturer_router)
+
+# Kept as the union so a caller iterating "every router" still gets every router.
+ROUTERS: tuple[APIRouter, ...] = CATALOG_ROUTERS + WRITABLE_ROUTERS
 
 
 def read_only_view(router: APIRouter) -> APIRouter:
@@ -86,6 +98,8 @@ def register_routers(app: FastAPI, *, read_only: bool) -> None:
     """Mount every router on `app`, dropping the catalogue writes when read-only."""
     for router in CATALOG_ROUTERS:
         app.include_router(read_only_view(router) if read_only else router)
+    for router in WRITABLE_ROUTERS:
+        app.include_router(router)
 
 
 def docs_kwargs(read_only: bool) -> dict[str, str | None]:

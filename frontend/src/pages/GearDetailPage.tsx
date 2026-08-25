@@ -9,6 +9,7 @@ import { Link, useParams } from 'react-router-dom'
 import { fetchGearItem } from '@/api/gear'
 import GearDetailBody from '@/components/gear/GearDetailBody'
 import SafetyNotice from '@/components/layout/SafetyNotice'
+import SuggestButton from '@/components/submissions/SuggestButton'
 import { getGearType } from '@/config/gearTypes'
 import { type AnyItem } from '@/utils/format'
 import NotFoundPage from './NotFoundPage'
@@ -66,6 +67,13 @@ export default function GearDetailPage() {
           GearDetailBody: that body is shared with the listing's Detailed view,
           which would repeat this callout once per visible item. */}
       <SafetyNotice variant="callout" className="mt-4" />
+
+      {/* Below the spec sheet, for the same reason the callout is: this is the
+          page where someone is looking at the individual number they think is
+          wrong. Not on the card — see DESIGN.md § Entry points. */}
+      <div className="mt-4 flex justify-end">
+        <SuggestButton gearType={meta.slug} variant="correction" item={item} />
+      </div>
     </div>
   )
 }

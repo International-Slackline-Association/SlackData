@@ -29,6 +29,7 @@ import GearGrid from '@/components/gear/GearGrid'
 import GearDetailedList from '@/components/gear/GearDetailedList'
 import CompareBar from '@/components/gear/CompareBar'
 import DataAccuracyNote from '@/components/layout/DataAccuracyNote'
+import SuggestButton from '@/components/submissions/SuggestButton'
 import NotFoundPage from './NotFoundPage'
 
 type View = 'cards' | 'detailed'
@@ -385,8 +386,9 @@ export default function GearListingPage() {
             {/* Next to the count: the moment a visitor reads how much data there
                 is, is the moment to say what it's worth. */}
             <DataAccuracyNote variant="inline" />
-            {/* Phase 2's "Missing something?" link belongs here — restored with
-                the rest of the submissions work from stash / feat/submissions-phase2. */}
+            {/* The other half of that thought: if the data is incomplete, say
+                where to report what's missing. */}
+            <SuggestButton gearType={meta.slug} variant="new-item" />
 
             <div className="ml-auto flex items-center gap-3">
               <div className="flex overflow-hidden rounded-lg border border-gray-300">

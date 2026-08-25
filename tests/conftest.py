@@ -22,6 +22,10 @@ from sqlmodel.pool import StaticPool
 from slack_data.api.routing import register_routers
 from slack_data.database import get_session
 from slack_data.models.brands import Brand
+from slack_data.manufacturers.clients import InMemoryBrandClientRepository
+from slack_data.manufacturers.store import get_client_repository
+from slack_data.submissions.repository import InMemorySubmissionRepository
+from slack_data.submissions.store import get_repository
 
 
 def _build_test_app(read_only: bool = False) -> FastAPI:
@@ -55,20 +59,33 @@ def session(engine):
 
 
 @pytest.fixture
-def client(session):
+def client(session, submissions, brand_clients):
     app = _build_test_app()
 
     def get_session_override():
         yield session
 
     app.dependency_overrides[get_session] = get_session_override
+    app.dependency_overrides[get_repository] = lambda: submissions
+    app.dependency_overrides[get_client_repository] = lambda: brand_clients
 
     with TestClient(app) as c:
         yield c
 
 
 @pytest.fixture
-def read_only_client(session):
+def submissions():
+    """An empty submission store, isolated per test.
+
+    Every client fixture wires this in. Without it the default store would be
+    picked from the environment and a test run would create (and accumulate
+    into) a real `submissions.db` in the working directory.
+    """
+    return InMemorySubmissionRepository()
+
+
+@pytest.fixture
+def read_only_client(session, submissions, brand_clients):
     """A client for the hosted catalogue's shape: GET routes and nothing else.
 
     The session is still writable — the point of the guard is that the routes
@@ -81,9 +98,22 @@ def read_only_client(session):
         yield session
 
     app.dependency_overrides[get_session] = get_session_override
+    app.dependency_overrides[get_repository] = lambda: submissions
+    app.dependency_overrides[get_client_repository] = lambda: brand_clients
 
     with TestClient(app) as c:
         yield c
+
+
+@pytest.fixture
+def brand_clients():
+    """An empty brand-client store, isolated per test.
+
+    Wired into every client fixture for the same reason `submissions` is: left
+    to the environment, a test run would create a real `brand_clients.db` in the
+    working directory and carry credentials between tests.
+    """
+    return InMemoryBrandClientRepository()
 
 
 @pytest.fixture
