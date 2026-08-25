@@ -428,10 +428,19 @@ GEAR_TYPES.forEach(({ slug, apiPath, label }) => {
             // bounds check matches exactly what was committed.
             const scope = `[data-cy="filter-group"][data-group="${group}"]`
             const attr = valueAttr ?? `data-${group.replace(/_/g, '-')}`
-            cy.get(scope).find('[data-cy="range-min"]').invoke('val').then((aLo) => {
-              cy.get(scope).find('[data-cy="range-max"]').invoke('val').then((aHi) => {
-                const min = Number(aLo)
-                const max = Number(aHi)
+            cy.get(scope).find('[data-cy="range-min"]').then(($lo) => {
+              cy.get(scope).find('[data-cy="range-max"]').then(($hi) => {
+                // A thumb parked at its DOMAIN bound imposes no constraint at all
+                // (FilterSidebar deletes the URL param), so it is not a bound to
+                // check against. That distinction matters because the domain is
+                // snapped to the nearest step, not outward (utils/range.ts): a
+                // converted price of 382.980642 gives a domain max of 382.98, and
+                // the item is rightly still on screen. Checking it against the
+                // parked thumb would fail by a rate-dependent fraction of a cent.
+                const domainLo = Number($lo.attr('min'))
+                const domainHi = Number($hi.attr('max'))
+                const min = Number($lo.val()) <= domainLo ? -Infinity : Number($lo.val())
+                const max = Number($hi.val()) >= domainHi ? Infinity : Number($hi.val())
                 cy.get('[data-cy="gear-card"]').each(($card) => {
                   const raw = $card.attr(attr)
                   if (raw && raw !== '') {
