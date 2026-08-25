@@ -122,9 +122,13 @@ export default function ManufacturerCard({ brand }: { brand: BrandWithCounts }) 
             to={`/manufacturers/${brand.id}`}
             className="rounded-sm outline-none after:absolute after:inset-0 after:z-0 after:content-[''] focus-visible:ring-2 focus-visible:ring-teal-primary"
           >
+            {/* Above the overlay, which is anchored to the CARD (the nearest
+                positioned ancestor) and so paints over this heading — its own
+                link text — as readily as over the rest of the card. Unlifted,
+                the name is unselectable and hit-tests as the bare <a>. */}
             <h2
               data-cy="manufacturer-name"
-              className="font-bold text-gray-900 group-hover:text-teal-primary"
+              className="relative z-10 font-bold text-gray-900 group-hover:text-teal-primary"
             >
               {brand.name}
             </h2>
