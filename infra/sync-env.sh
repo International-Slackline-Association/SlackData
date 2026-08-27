@@ -33,15 +33,27 @@ STAGE="${1:-prod}"
 STACK="slackdata-${STAGE}"
 ENV_FILE="../frontend/.env.production"
 
+# Resolved BEFORE any call, and passed explicitly to every one of them.
+# `serverless` cannot resolve an SSO profile, so deploying means exporting raw
+# credentials into the shell — which carries the keys but NOT the profile's
+# region. Every unqualified aws call then errors instead of defaulting, and the
+# whole script dies one line later with no output at all.
+REGION="${AWS_REGION:-${AWS_DEFAULT_REGION:-$(aws configure get region 2>/dev/null || true)}}"
+REGION="${REGION:-eu-central-1}"
+
+# stderr is kept, and the exit status is returned rather than swallowed. The
+# guard below prints a diagnostic worth reading, and `set -e` on a failed
+# command substitution would kill the script before it could ever run — so the
+# one message written for this exact moment was unreachable precisely when the
+# call failed. `|| true` keeps us alive long enough to say something useful.
 out() {
-  aws cloudformation describe-stacks --stack-name "$STACK" \
-    --query "Stacks[0].Outputs[?OutputKey=='$1'].OutputValue" --output text 2>/dev/null
+  aws cloudformation describe-stacks --stack-name "$STACK" --region "$REGION" \
+    --query "Stacks[0].Outputs[?OutputKey=='$1'].OutputValue" --output text || true
 }
 
-echo "Reading outputs from $STACK…"
+echo "Reading outputs from $STACK (region $REGION)…"
 POOL_ID="$(out AdminUserPoolId)"
 CLIENT_ID="$(out AdminUserPoolClientId)"
-REGION="$(aws configure get region || echo eu-central-1)"
 
 if [ -z "$POOL_ID" ] || [ "$POOL_ID" = "None" ]; then
   echo "error: no AdminUserPoolId output on $STACK." >&2
