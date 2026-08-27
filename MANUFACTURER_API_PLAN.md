@@ -444,20 +444,22 @@ submissions work alone.
 
 1. ~~**Does a manufacturer's update still need review?**~~ **Answered: no** — auto-approved on
    arrival. See § Status.
-2. **Onboarding — still open, and it gates the whole phase.** Who verifies that someone emailing
-   from `sales@brand.com` speaks for that brand? This is a trust question, not a technical one.
-   The *mechanism* is built and waiting for the answer: a Cognito app client created by hand in the
-   console, then `python -m slack_data.manufacturers.register --client-id … --brand …`. Nothing can
-   authenticate until somebody runs that, which is the correct default — but it means the phase is
-   shipped and dormant, not shipped and live.
+2. ~~**Onboarding — who verifies that someone emailing from `sales@brand.com` speaks for that
+   brand?**~~ **Answered 2026-08-25: confirm out-of-band, to an address we already held.** The
+   request must come from the brand's own domain (the `website` domain in `manufacturers.json`),
+   and the confirmation goes to the `contact_email` we scraped for them — or to their public
+   contact form or socials where we hold none. An impostor can send us mail; they cannot read the
+   brand's. Every decision is recorded in `infra/onboarded-brands.md`. The full policy, and why the
+   bar is set there, is `infra/README.md` § Onboarding policy. The mechanism was always built; this
+   was the missing half.
 3. ~~**Bulk updates.**~~ **Answered: one call, N rows, shared `batch_id`.** See § Status.
-4. **Scope of `slackdata-brand-clients` data — still open.** A brand contact is personal data; the
-   same GDPR constraints as `SUBMISSIONS_PLAN.md` § Privacy apply, and the ISA should see it before
-   it ships. As built, `contact_email` is the only such field, it is optional, and nothing requires
-   it — a client works with it null. Unlike a submission the record has **no TTL**, because a
-   credential mapping that expired on its own would lock a brand out silently; deletion is
-   therefore a manual act, and there is no `DeleteItem` grant to perform it with. That combination
-   is the thing to put in front of them.
+4. ~~**Scope of `slackdata-brand-clients` data.**~~ **Answered 2026-08-25: don't store it.**
+   `contact_email` is the only personal data in the record, it is optional, and nothing reads it —
+   so brands are registered with `--contact` omitted. That resolves the combination that made it a
+   question: no TTL (deliberately — an expiring credential mapping locks a brand out silently) and
+   no `DeleteItem` grant, i.e. data we could not erase on request. The correspondence lives in the
+   mailbox and in `infra/onboarded-brands.md`, where a deletion request can be honoured. Revisiting
+   costs a scoped `dynamodb:DeleteItem` grant and a `--forget` flag on `register.py`.
 
 ---
 
