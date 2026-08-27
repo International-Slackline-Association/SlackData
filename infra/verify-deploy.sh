@@ -9,6 +9,11 @@
 # where the intent was right and the result was not — a secret that was exported
 # but not picked up, a half B built from a stale env file, a half A rolled back.
 #
+# Covers Phase 1 (the catalogue is up and read-only), Phase 2 (admin auth,
+# Turnstile's two halves) and Phase 4 (the manufacturer routes exist and answer
+# as JSON). It cannot cover the authenticated happy paths: those need a real
+# Cognito token, which is a credential, not a check.
+#
 # ## How the Turnstile probe works, since it looks like it cannot
 #
 # We cannot solve a captcha from a shell, so we cannot test the happy path. We do
@@ -37,6 +42,9 @@ bad()  { printf '  \033[31m✗\033[0m %s\n' "$1"; FAIL=1; }
 warn() { printf '  \033[33m!\033[0m %s\n' "$1"; }
 
 code() { curl -s -o /dev/null -w '%{http_code}' "$@"; }
+# Status AND content type, because "401" alone does not distinguish a JSON error
+# from CloudFront handing back the SPA. Prints e.g. `401 application/json`.
+code_type() { curl -s -o /dev/null -w '%{http_code} %{content_type}' "$@" | cut -d';' -f1; }
 
 echo "Verifying $SITE"
 echo
@@ -68,6 +76,68 @@ elif [ "$STATUS" = "503" ]; then
       admin auth is shut and nobody can triage. Half A did not set it — check the
       AdminUserPool resource and redeploy."
 else bad "GET /api/submissions/ -> $STATUS (expected 401)."; fi
+
+echo
+echo "Phase 4 — the manufacturer API answers as an API, not as the website"
+#
+# Two things at once, and the SECOND is the one worth the check.
+#
+# 1. The routes exist at all. A 404 here means half A shipped without them —
+#    which is exactly what the live site looked like before 2026-08-25.
+# 2. The body is JSON. CloudFront's CustomErrorResponses are distribution-wide,
+#    so any `403 -> 200 /index.html` mapping added for SPA deep links also
+#    rewrites this API's own errors — and this API returns 403 for a REVOKED
+#    credential, for one without permission, and for gear belonging to another
+#    brand. A brand's integration would read `200 OK` plus a page of HTML as
+#    success and go on posting into the void. Deep links are handled by
+#    SpaRoutingFunction on the default cache behaviour instead, which cannot
+#    touch /api/*. This is the guard on that staying true.
+# Checked twice: with no credential and with a junk one. They can fail
+# differently — an absent Authorization header is rejected by FastAPI's security
+# dependency, a malformed bearer token by auth.py's verifier.
+check_manufacturer_me() {
+  label="$1"; shift
+  RESULT="$(code_type "$@" "$API/manufacturer/me")"
+  STATUS="${RESULT%% *}"; CTYPE="${RESULT#* }"
+  case "$STATUS/$CTYPE" in
+    401/application/json)
+      ok "GET /api/manufacturer/me $label -> 401 application/json" ;;
+    404/*)
+      bad "GET /api/manufacturer/me $label -> 404. The manufacturer routes are NOT
+      deployed. Half A shipped without Phase 4 — redeploy with
+      DEPLOY_MANUFACTURER_API=true." ;;
+    503/*)
+      bad "GET /api/manufacturer/me $label -> 503. No Cognito pool on the function, so
+      no brand can authenticate. Same cause as the admin 503 above." ;;
+    */text/html*)
+      bad "GET /api/manufacturer/me $label -> $STATUS $CTYPE. CloudFront IS REWRITING API
+      ERRORS INTO THE SPA. A revoked or cross-brand credential would read as 200 OK
+      with a page of HTML, and a brand's integration would treat that as success.
+      Remove the CustomErrorResponses mapping from the distribution." ;;
+    200/*)
+      bad "GET /api/manufacturer/me $label -> 200. An unauthenticated caller is being
+      answered. Investigate immediately." ;;
+    *)
+      bad "GET /api/manufacturer/me $label -> $STATUS $CTYPE (expected 401 application/json)." ;;
+  esac
+}
+
+check_manufacturer_me "unauthenticated"
+check_manufacturer_me "with a junk token" -H 'Authorization: Bearer not-a-real-token'
+
+# The write route, which is the one that is throttled by name — a 404 here after
+# a green /manufacturer/me would mean the RouteSettings/route mismatch that froze
+# the stack on 2026-08-25 has recurred. See infra/check-routes.py.
+RESULT="$(code_type -X POST -H 'Content-Type: application/json' -d '{"items":[]}' "$API/manufacturer/gear")"
+STATUS="${RESULT%% *}"; CTYPE="${RESULT#* }"
+case "$STATUS/$CTYPE" in
+  401/application/json) ok "POST /api/manufacturer/gear unauthenticated -> 401 application/json" ;;
+  404/*) bad "POST /api/manufacturer/gear -> 404 while GET /manufacturer/me works. The
+      explicit throttled route is missing from the stage. Run infra/check-routes.py." ;;
+  2*|422/*) bad "POST /api/manufacturer/gear -> $STATUS WITHOUT a credential. The brand
+      write endpoint is open. Investigate immediately." ;;
+  *) bad "POST /api/manufacturer/gear -> $STATUS $CTYPE (expected 401 application/json)." ;;
+esac
 
 echo
 echo "Turnstile — the API half"

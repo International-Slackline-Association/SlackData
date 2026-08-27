@@ -118,10 +118,18 @@ functions:
       # catch-all. They exist solely so the stage can throttle them by name:
       # route settings key on a route key, and '*' compiles to a single
       # $default route that cannot be targeted (see RouteSettings below).
-      # FastAPI 307-redirects /submissions to /submissions/, so both spellings
-      # are declared — otherwise the un-slashed one falls through to $default
-      # and is throttled at the generous global rate instead.
-      - httpApi: 'POST /submissions'
+      #
+      # FastAPI 307-redirects /submissions to /submissions/, so BOTH spellings
+      # need a route key — otherwise the un-slashed one falls through to
+      # $default and is throttled at the generous global rate instead. Only the
+      # slashed one is declared here, because Serverless normalises the two
+      # route keys to the SAME logical id: naming.js::normalizePath splits on
+      # '/', so the trailing empty segment contributes nothing and both become
+      # `HttpApiRoutePostSubmissions`. The last declaration silently won, the
+      # template carried one route (`POST /submissions/`), and RouteSettings
+      # named a route key that did not exist — a hard deploy failure. The
+      # un-slashed route is hand-declared under its own logical id in
+      # resources.Resources below (HttpApiRoutePostSubmissionsNoSlash).
       - httpApi: 'POST /submissions/'
       # Authenticated, but still the largest body the API accepts (256 KB) and
       # still a write. Named for the same reason: a route key is the only thing
@@ -141,6 +149,22 @@ resources:
   # syntax for it — hence the extension.
   extensions:
     HttpApiStage:
+      # RouteSettings keys on a route key, and API Gateway rejects a key whose
+      # route does not exist yet — `Unable to find Route by key POST
+      # /manufacturer/gear within the provided RouteSettings (404)`. Nothing
+      # otherwise orders the stage after the routes: they DependsOn the
+      # integration, the stage depends on neither, and on the first deploy that
+      # adds a route AND its throttle together CloudFormation is free to update
+      # the stage first. It did, 1.3s early, and the failed rollback froze the
+      # stack in UPDATE_ROLLBACK_FAILED.
+      #
+      # So: every route named in RouteSettings below must ALSO be listed here.
+      # Serverless v3 spreads this list onto the resource's own DependsOn
+      # (merge-custom-provider-resources.js — it must be a list, not a string).
+      DependsOn:
+        - HttpApiRoutePostSubmissions
+        - HttpApiRoutePostSubmissionsNoSlash
+        - HttpApiRoutePostManufacturerGear
       Properties:
         DefaultRouteSettings:
           # A ceiling for the whole API so no single client can run up a bill.
@@ -175,6 +199,21 @@ resources:
             ThrottlingBurstLimit: 10
 
   Resources:
+
+    # ---- The un-slashed submissions route -----------------------------------
+    # `POST /submissions` cannot be declared as an httpApi event: it collides
+    # with `POST /submissions/` on one logical id (see the events block above).
+    # Declared by hand so both spellings get their own route key and can be
+    # throttled by name. The integration and the Lambda permission are the ones
+    # Serverless already generates — the permission's SourceArn is `<apiId>/*`,
+    # so it covers this route without a second one.
+    HttpApiRoutePostSubmissionsNoSlash:
+      Type: AWS::ApiGatewayV2::Route
+      DependsOn: HttpApiIntegrationApi
+      Properties:
+        ApiId: !Ref HttpApi
+        RouteKey: 'POST /submissions'
+        Target: !Join ['/', ['integrations', !Ref HttpApiIntegrationApi]]
 
     # ---- Submissions store (Phase 2) ----------------------------------------
     # NOT the catalogue. The catalogue is a read-only SQLite file in the image,

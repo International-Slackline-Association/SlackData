@@ -14,6 +14,9 @@
 #                              so uncommitted code ships and nothing records what.
 # - Wrong AWS account       -> this repo targets the ISA's account, not a personal
 #                              one. Getting this wrong is expensive to undo.
+# - Route/throttle mismatch -> a RouteSettings key naming a route that does not
+#                              exist 404s the stage update, and the ROLLBACK
+#                              fails too, freezing the stack (2026-08-25).
 # - Manufacturer API flag   -> off by default, but the permission it needed is
 #                              confirmed (2026-08-24), so it SHOULD be on. Off
 #                              means shipping Phase 4 dormant for no reason.
@@ -80,6 +83,21 @@ else
       because cognito-idp:CreateResourceServer was believed un-granted; it is granted
       (confirmed 2026-08-24). Unless you mean to ship it dormant, deploy with
       DEPLOY_MANUFACTURER_API=true."
+fi
+
+echo
+echo "API Gateway routes agree with their throttles"
+#
+# The 2026-08-25 failure: RouteSettings named a route key that the same template
+# had not created yet, API Gateway 404'd the stage update, and the rollback
+# failed too — slackdata-prod sat in UPDATE_ROLLBACK_FAILED until it was
+# recovered by hand. Cheap to check, expensive to discover. Same script CI runs
+# (tests/test_infra_routes.py), so the gate and the suite cannot drift.
+if ROUTES="$(python3 ./check-routes.py 2>&1)"; then
+  ok "every throttled route is declared, uniquely named, and waited for"
+else
+  bad "serverless.yml would fail to deploy:
+$(printf '%s\n' "$ROUTES" | sed 's/^/      /')"
 fi
 
 echo
