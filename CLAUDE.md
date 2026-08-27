@@ -80,9 +80,10 @@ ruff check .
 CI runs all of this on every PR (`.github/workflows/ci.yml`), but it is the last check, not the first — run them yourself before pushing:
 
 ```bash
-python -m pytest tests/ -q          # 646 backend tests (23 files: gear types, loaders, read-only guard,
+python -m pytest tests/ -q          # 699 backend tests (25 files: gear types, loaders, read-only guard,
                                     #   submissions, auth, manufacturer API, live server, DynamoDB,
-                                    #   manufacturer contact emails, seed ids)
+                                    #   manufacturer contact emails, seed ids, infra route/throttle
+                                    #   agreement, brand onboarding)
 # tests/test_live_api.py boots THREE real uvicorn processes (local-dev, hosted
 # READ_ONLY, and hosted-with-a-Cognito-pool) and hits them over HTTP. It builds its
 # own minimal catalogue, so it adds ~9s and needs no seeded database.db, no network.
@@ -154,7 +155,7 @@ Root *.json seed files
 | `slack_data/submissions/` | The submission store: `repository.py` (Protocol + SQLite + in-memory), `dynamo.py`, `store.py` (env selection), `fields.py` (allowed field names, derived from the models) |
 | `slack_data/api/auth.py` | Cognito token verification (admin **ID** tokens + manufacturer **access** tokens) + the local dev-token modes |
 | `slack_data/models/brand_clients.py` | `BrandClient` / `BrandPermission` / `ManufacturerPrincipal` — the account linkage `Brand` never had |
-| `slack_data/manufacturers/` | The manufacturer API's stores: `clients.py` (Protocol + SQLite + in-memory), `dynamo.py`, `store.py`, `matching.py` (gear identity), `register.py` (onboarding CLI) |
+| `slack_data/manufacturers/` | The manufacturer API's stores: `clients.py` (Protocol + SQLite + in-memory), `dynamo.py`, `store.py`, `matching.py` (gear identity), `register.py` (onboarding CLI), `onboard.py` (the CLI's AWS half — dossier, Cognito app client, ledger, end-to-end proof) |
 | `slack_data/utilities/turnstile.py` | Captcha verification — **fails closed**, unlike `fx.py` |
 
 There are `__init__.py` files in `models/`, `api/`, and `utilities/`. No `tests/`, no `.github/`, no Docker, no migrations (SQLModel `create_all` only).
@@ -410,6 +411,17 @@ Register every new router in `main.py` via `app.include_router(...)`, and add it
 
 `isa_warning_router`, `fx_router` and `submissions_router` are hand-written — they are not CRUD over
 a gear table.
+
+### The API Gateway route/throttle invariant
+
+`infra/serverless.yml` throttles three routes by name, and API Gateway rejects a `RouteSettings` key
+whose route does not exist. Two ways that breaks, both of which took down a deploy on 2026-08-25:
+the stage updating before the routes are created (fixed with an explicit `DependsOn`), and two route
+keys normalising to one CloudFormation logical id (`POST /submissions` and `POST /submissions/`, so
+the un-slashed one is now hand-declared in `resources.Resources`). `infra/check-routes.py` checks
+both on the source — no AWS credentials, no `serverless package` — and is run by both
+`infra/preflight.sh` and `tests/test_infra_routes.py`. **Adding a throttled route means adding it to
+`RouteSettings` and to `HttpApiStage.DependsOn`.**
 
 ## Adding a new gear type (checklist)
 

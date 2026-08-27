@@ -1,5 +1,6 @@
 // Route table. Route ranking (not JSX order) resolves overlaps: the static
-// segments `/manufacturers`, `/safety`, `/admin` and `:slug/compare` outrank the dynamic
+// segments `/manufacturers`, `/safety`, `/for-manufacturers`, `/admin` and `:slug/compare`
+// outrank the dynamic
 // `:slug` and `:slug/:id` patterns — so `/manufacturers/:id` (brand detail) wins
 // over `:slug/:id` (gear detail) for a URL like /manufacturers/7, and `/safety`
 // resolves to the safety page rather than being read as a gear-type slug.
@@ -14,6 +15,7 @@ import ComparePage from '@/pages/ComparePage'
 import ManufacturersPage from '@/pages/ManufacturersPage'
 import BrandDetailPage from '@/pages/BrandDetailPage'
 import SafetyPage from '@/pages/SafetyPage'
+import ManufacturerApiPage from '@/pages/ManufacturerApiPage'
 import NotFoundPage from '@/pages/NotFoundPage'
 
 // Lazy, so react-oidc-context + oidc-client-ts stay out of the chunk every
@@ -32,6 +34,7 @@ export default function App() {
         <Route element={<AppLayout />}>
           <Route index element={<Navigate to="/webbings" replace />} />
           <Route path="safety" element={<SafetyPage />} />
+          <Route path="for-manufacturers" element={<ManufacturerApiPage />} />
           {/*
             Static, so it outranks the `:slug` gear-type pattern — /admin must
             not be read as a gear type.
