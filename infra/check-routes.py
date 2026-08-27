@@ -117,14 +117,31 @@ def problems(text: str) -> list[str]:
                 "Declare one of them by hand in resources.Resources under its own logical id."
             )
 
-    # 2. A throttle for a route that is never created: a 404 at deploy time.
+    # 2. A route key API Gateway will not accept at all. A trailing slash (or
+    #    any `//`) leaves an empty path segment, and the create fails with
+    #    "Part of the given route key path is empty" — discovered the hard way
+    #    on the first staging deploy, 2026-08-27, after this checker had passed.
+    #    It is legal YAML, a legal logical id, and an illegal route.
+    for key in sorted(routes):
+        if key == "*":
+            continue
+        _, _, path = key.partition(" ")
+        if not path.startswith("/") or (len(path) > 1 and path.endswith("/")) or "//" in path:
+            found.append(
+                f"ILLEGAL: route key {key!r} has an empty path segment. API Gateway"
+                " refuses it — a route key may not end in '/' or contain '//'."
+                " Note this is NOT the same as the URL clients call: FastAPI may"
+                " still serve a trailing-slash path, but it cannot be throttled by name."
+            )
+
+    # 3. A throttle for a route that is never created: a 404 at deploy time.
     for key in sorted(throttled - set(routes)):
         found.append(
             f"ORPHANED: RouteSettings names '{key}', which no route declares. "
             "API Gateway rejects the whole stage update with a 404."
         )
 
-    # 3. A throttled route the stage does not wait for: a race, lost once already.
+    # 4. A throttled route the stage does not wait for: a race, lost once already.
     for key in sorted(throttled & set(routes)):
         if routes[key] not in depends:
             found.append(

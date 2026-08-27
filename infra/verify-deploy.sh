@@ -17,7 +17,7 @@
 # ## How the Turnstile probe works, since it looks like it cannot
 #
 # We cannot solve a captcha from a shell, so we cannot test the happy path. We do
-# not need to. `POST /submissions/` with **no** captcha token separates the two
+# not need to. `POST /submissions` with **no** captcha token separates the two
 # configurations exactly, and creates nothing either way:
 #
 #   secret configured    -> turnstile.verify(None) returns False  -> 400
@@ -69,13 +69,13 @@ else warn "/api/openapi.json -> $STATUS; ENABLE_DOCS may be set on the function.
 
 echo
 echo "Admin auth is wired to a real pool"
-STATUS="$(code "$API/submissions/")"
-if [ "$STATUS" = "401" ]; then ok "GET /api/submissions/ -> 401 (authentication required)"
+STATUS="$(code "$API/submissions")"
+if [ "$STATUS" = "401" ]; then ok "GET /api/submissions -> 401 (authentication required)"
 elif [ "$STATUS" = "503" ]; then
-  bad "GET /api/submissions/ -> 503. The function has NO COGNITO_USER_POOL_ID, so
+  bad "GET /api/submissions -> 503. The function has NO COGNITO_USER_POOL_ID, so
       admin auth is shut and nobody can triage. Half A did not set it — check the
       AdminUserPool resource and redeploy."
-else bad "GET /api/submissions/ -> $STATUS (expected 401)."; fi
+else bad "GET /api/submissions -> $STATUS (expected 401)."; fi
 
 echo
 echo "Phase 4 — the manufacturer API answers as an API, not as the website"
@@ -142,19 +142,19 @@ esac
 echo
 echo "Turnstile — the API half"
 BODY='{"gear_type":"webbings","gear_id":1,"changes":{"weight":"71"}}'
-STATUS="$(code -X POST -H 'Content-Type: application/json' -d "$BODY" "$API/submissions/")"
+STATUS="$(code -X POST -H 'Content-Type: application/json' -d "$BODY" "$API/submissions")"
 SECRET_LIVE=unknown
 case "$STATUS" in
-  400) ok "POST /api/submissions/ -> 400 (captcha rejected an absent token: the SECRET IS SET)"
+  400) ok "POST /api/submissions -> 400 (captcha rejected an absent token: the SECRET IS SET)"
        SECRET_LIVE=yes ;;
-  503) bad "POST /api/submissions/ -> 503. TURNSTILE_SECRET is NOT set on the function,
+  503) bad "POST /api/submissions -> 503. TURNSTILE_SECRET is NOT set on the function,
       so EVERY submission is refused. Re-export it and redeploy half A:
         export TURNSTILE_SECRET='...' && npx serverless deploy --stage prod"
        SECRET_LIVE=no ;;
-  201) bad "POST /api/submissions/ -> 201 without a captcha token. The abuse control is
+  201) bad "POST /api/submissions -> 201 without a captcha token. The abuse control is
       OFF on a public write endpoint, and that submission was stored. Investigate now."
        SECRET_LIVE=off ;;
-  *)   warn "POST /api/submissions/ -> $STATUS (expected 400). Cannot tell whether the
+  *)   warn "POST /api/submissions -> $STATUS (expected 400). Cannot tell whether the
       secret is set; check the function's environment by hand." ;;
 esac
 

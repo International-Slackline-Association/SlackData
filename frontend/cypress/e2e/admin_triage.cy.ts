@@ -30,7 +30,7 @@ function submitCorrection(note: string) {
   return cy.fetchAllItems(API).then(items => {
     const id = (items[0] as { id: number }).id
     return cy
-      .request('POST', `${Cypress.env('apiUrl')}/submissions/`, {
+      .request('POST', `${Cypress.env('apiUrl')}/submissions`, {
         kind: 'correction',
         gear_type: SLUG,
         gear_id: id,

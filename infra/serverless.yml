@@ -128,18 +128,20 @@ functions:
       # route settings key on a route key, and '*' compiles to a single
       # $default route that cannot be targeted (see RouteSettings below).
       #
-      # FastAPI 307-redirects /submissions to /submissions/, so BOTH spellings
-      # need a route key — otherwise the un-slashed one falls through to
-      # $default and is throttled at the generous global rate instead. Only the
-      # slashed one is declared here, because Serverless normalises the two
-      # route keys to the SAME logical id: naming.js::normalizePath splits on
-      # '/', so the trailing empty segment contributes nothing and both become
-      # `HttpApiRoutePostSubmissions`. The last declaration silently won, the
-      # template carried one route (`POST /submissions/`), and RouteSettings
-      # named a route key that did not exist — a hard deploy failure. The
-      # un-slashed route is hand-declared under its own logical id in
-      # resources.Resources below (HttpApiRoutePostSubmissionsNoSlash).
-      - httpApi: 'POST /submissions/'
+      # ONE spelling, and it is the un-slashed one, because that is the only
+      # one API Gateway will accept: a route key may not end in '/' (it rejects
+      # the empty path segment with "Part of the given route key path is
+      # empty"). `POST /submissions/` is therefore unthrottleable by
+      # construction — which is why `submissions_router.py` serves the canonical
+      # path at `/submissions` and the SPA calls that. FastAPI still answers the
+      # slashed spelling via a 307, but a request that arrives that way lands on
+      # $default and pays the generous global rate.
+      #
+      # Declaring both also collided: Serverless normalises the two route keys
+      # to the same logical id (naming.js::normalizePath splits on '/', so a
+      # trailing empty segment contributes nothing), and the last declaration
+      # silently won. infra/check-routes.py now catches both faults.
+      - httpApi: 'POST /submissions'
       # Authenticated, but still the largest body the API accepts (256 KB) and
       # still a write. Named for the same reason: a route key is the only thing
       # RouteSettings can throttle.
@@ -178,7 +180,6 @@ resources:
       # (merge-custom-provider-resources.js — it must be a list, not a string).
       DependsOn:
         - HttpApiRoutePostSubmissions
-        - HttpApiRoutePostSubmissionsNoSlash
         - HttpApiRoutePostManufacturerGear
       Properties:
         DefaultRouteSettings:
@@ -201,9 +202,6 @@ resources:
           'POST /submissions':
             ThrottlingRateLimit: 2
             ThrottlingBurstLimit: 5
-          'POST /submissions/':
-            ThrottlingRateLimit: 2
-            ThrottlingBurstLimit: 5
           # A brand posts their whole line in one call, so the useful rate is
           # low and the burst matters more than the sustained rate — a first
           # integration run is a handful of calls in a few seconds, then
@@ -214,21 +212,6 @@ resources:
             ThrottlingBurstLimit: 10
 
   Resources:
-
-    # ---- The un-slashed submissions route -----------------------------------
-    # `POST /submissions` cannot be declared as an httpApi event: it collides
-    # with `POST /submissions/` on one logical id (see the events block above).
-    # Declared by hand so both spellings get their own route key and can be
-    # throttled by name. The integration and the Lambda permission are the ones
-    # Serverless already generates — the permission's SourceArn is `<apiId>/*`,
-    # so it covers this route without a second one.
-    HttpApiRoutePostSubmissionsNoSlash:
-      Type: AWS::ApiGatewayV2::Route
-      DependsOn: HttpApiIntegrationApi
-      Properties:
-        ApiId: !Ref HttpApi
-        RouteKey: 'POST /submissions'
-        Target: !Join ['/', ['integrations', !Ref HttpApiIntegrationApi]]
 
     # ---- Submissions store (Phase 2) ----------------------------------------
     # NOT the catalogue. The catalogue is a read-only SQLite file in the image,

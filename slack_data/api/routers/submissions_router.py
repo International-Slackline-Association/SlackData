@@ -144,8 +144,16 @@ def _check_captcha(token: str | None) -> None:
         )
 
 
+# `""`, not `"/"`, so the canonical path is `/submissions` with no trailing
+# slash. That is not cosmetic: API Gateway refuses a route key with an empty
+# path segment ("Part of the given route key path is empty"), so `POST
+# /submissions/` cannot be named in `RouteSettings` and therefore cannot be
+# throttled. The public write endpoint is the one route where that matters most.
+# FastAPI still serves `/submissions/` — `redirect_slashes` sends it here with a
+# 307 — so anything already calling the old spelling keeps working, it simply
+# spends an extra round trip and lands unthrottled. See infra/serverless.yml.
 @submissions_router.post(
-    "/",
+    "",
     response_model=SubmissionReceipt,
     status_code=status.HTTP_201_CREATED,
     dependencies=[Depends(enforce_body_size)],
@@ -191,8 +199,13 @@ def create_submission(submission: SubmissionCreate, repository: RepositoryDep):
     return SubmissionReceipt(submission_id=record.submission_id)
 
 
+# `""` for the same reason as the POST above, and also *because* of it: with a
+# route still mounted at `/submissions/`, a POST to that spelling matched this
+# path and answered 405 instead of redirecting. Both canonical paths are now
+# un-slashed, so `/submissions/` matches nothing and Starlette's
+# `redirect_slashes` 307s either verb to the right place.
 @submissions_router.get(
-    "/",
+    "",
     response_model=list[Submission],
     dependencies=[Depends(require_admin)],
 )

@@ -87,19 +87,35 @@ def test_catches_a_stage_that_does_not_wait_for_its_routes(template: str) -> Non
 
 
 def test_catches_two_route_keys_that_compile_to_one_resource(template: str) -> None:
-    """Defect 2b — the collision, restored by re-declaring the un-slashed route
-    as an event and deleting the hand-written resource that gives it its own id."""
+    """Defect 2b — the collision. Re-created by declaring both spellings as
+    events again, which is what the template did until 2026-08-25."""
     broken = template.replace(
-        "      - httpApi: 'POST /submissions/'",
+        "      - httpApi: 'POST /submissions'",
         "      - httpApi: 'POST /submissions'\n      - httpApi: 'POST /submissions/'",
         1,
     )
-    start = broken.index("    HttpApiRoutePostSubmissionsNoSlash:")
-    end = broken.index("    # ---- Submissions store (Phase 2)", start)
-    broken = broken[:start] + broken[end:]
-
     found = check_routes.problems(broken)
     assert any("COLLISION" in line for line in found), found
+
+
+def test_catches_a_route_key_api_gateway_will_not_accept(template: str) -> None:
+    """The one this checker did NOT catch, until it cost a deploy on 2026-08-27.
+
+    A trailing slash leaves an empty path segment and API Gateway refuses the
+    route outright — "Part of the given route key path is empty". It is legal
+    YAML and a legal logical id, so nothing upstream of the create objects. The
+    fault is easy to reintroduce, because the FastAPI path it mirrors *did* end
+    in a slash for a year.
+    """
+    broken = template.replace(
+        "      - httpApi: 'POST /submissions'",
+        "      - httpApi: 'POST /submissions/'",
+        1,
+    ).replace("          'POST /submissions':", "          'POST /submissions/':", 1)
+
+    found = check_routes.problems(broken)
+    assert any("ILLEGAL" in line for line in found), found
+    assert any("empty path segment" in line for line in found), found
 
 
 def test_catches_a_throttle_for_a_route_nobody_declares(template: str) -> None:

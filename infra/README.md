@@ -181,10 +181,10 @@ curl -s -o /dev/null -w '%{http_code}\n' "$BASE/api/openapi.json"         # 404 
 curl -s -o /dev/null -w '%{http_code}\n' -X DELETE "$BASE/api/webbing/1"  # 405 — route not mounted
 
 # Phase 2: submissions. The one *open* write endpoint, and the closed admin ones.
-curl -s -o /dev/null -w '%{http_code}\n' "$BASE/api/submissions/"              # 401 — admin only
+curl -s -o /dev/null -w '%{http_code}\n' "$BASE/api/submissions"              # 401 — admin only
 curl -s -o /dev/null -w '%{http_code}\n' -H 'Authorization: Bearer dev-admin-token' \
-     "$BASE/api/submissions/"                                                  # 401 — dev token is dead hosted
-curl -s -o /dev/null -w '%{http_code}\n' -X POST "$BASE/api/submissions/" \
+     "$BASE/api/submissions"                                                  # 401 — dev token is dead hosted
+curl -s -o /dev/null -w '%{http_code}\n' -X POST "$BASE/api/submissions" \
      -H 'Content-Type: application/json' -d '{"gear_type":"webbings","gear_id":1,"note":"test"}'
                                                                                # 400 — captcha missing (NOT 201)
 ```

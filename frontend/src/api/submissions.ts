@@ -16,7 +16,12 @@ import { getAuthed, patchJson, postJson } from './client'
 
 /** Public. No token — this is the one open write endpoint on the site. */
 export function createSubmission(body: SubmissionCreate): Promise<SubmissionReceipt> {
-  return postJson<SubmissionReceipt>('/submissions/', body)
+  // No trailing slash, deliberately: `POST /submissions` is the API Gateway route
+  // key the 2/sec throttle is attached to, and a route key cannot end in one.
+  // `/submissions/` still reaches this handler — nothing is mounted there now, so
+  // Starlette 307s it here — but that costs a round trip and the redirected
+  // request lands on $default, unthrottled. So we call the throttled spelling.
+  return postJson<SubmissionReceipt>('/submissions', body)
 }
 
 /** Admin. Oldest first — the server orders it; do not re-sort here. */
@@ -25,7 +30,7 @@ export function fetchSubmissions(
   status: SubmissionStatus = 'pending',
   limit = 50,
 ): Promise<Submission[]> {
-  return getAuthed<Submission[]>(`/submissions/?status=${status}&limit=${limit}`, token)
+  return getAuthed<Submission[]>(`/submissions?status=${status}&limit=${limit}`, token)
 }
 
 /** Admin. Records the outcome; changes nothing in the catalogue. */
