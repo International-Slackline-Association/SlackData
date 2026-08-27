@@ -57,7 +57,7 @@ from slack_data.models.treepro import TreePro
 from slack_data.models.tricklinekits import TricklineKit
 from slack_data.models.webbing import Webbing
 from slack_data.models.weblocks import Weblock
-from slack_data.submissions.fields import CORRECTABLE_FIELDS
+from slack_data.submissions.fields import manufacturer_fields
 
 # Keyed by the frontend's gear slug — the same keys `submissions/fields.py`
 # uses, so a gear type is either fully supported by both or by neither.
@@ -132,6 +132,28 @@ class AmbiguousGear(MatchError):
     status_code = 409
 
 
+class UnresolvableGear(MatchError):
+    """An id **and** a name were sent, they disagree, and the name matches nothing.
+
+    This used to be filed as a new product, on the reasoning that a name we do
+    not hold is a product we do not hold. That is right when a name arrives
+    alone, and wrong the moment an id arrives with it: the commonest way to
+    reach this state is a brand that renamed a product on their side, so their
+    integration now sends our id next to *their* new name. Filing that as new
+    put a product we already hold in front of the admin as a candidate for a
+    second catalogue row — silently, behind a 201 — and it recurred on every
+    later call until the rename shipped.
+
+    Both handles are good here; they simply disagree, and we can see exactly
+    what was meant. So it is refused with the fix in the message. 409, sharing
+    `AmbiguousGear`'s meaning: we cannot tell which product you mean, and you
+    can settle it. A genuinely new product still has a path — send it with no
+    `gear_id`, which is what the message says.
+    """
+
+    status_code = 409
+
+
 class BrandMismatch(MatchError):
     """The credential's `brand_id` no longer names the brand it was registered to.
 
@@ -189,10 +211,10 @@ def current_spec(item, gear_type: str) -> dict:
     """The values a brand may change, as we currently hold them.
 
     **The keys are the derived correctable field list, not the model's columns.**
-    That is the whole point: the same names `POST /manufacturer/gear` accepts,
-    so a brand can edit this dict and send it straight back, and a field added
-    to a model becomes readable and writable in the same commit with nothing to
-    remember. It also means the two fields the write refuses — `brand_id` (a
+    That is the whole point: the same names `POST /manufacturer/gear` accepts in
+    `changes`, so a brand can edit this dict and send it straight back, and a
+    field added to a model becomes readable and writable in the same commit with
+    nothing to remember. It also means the fields the write refuses — `brand_id` (a
     submitter knows a name, not a key) and `classification` (derived on every
     seed, so a hand-edit is overwritten) — are absent here rather than being
     offered for editing and then rejected.
@@ -207,7 +229,14 @@ def current_spec(item, gear_type: str) -> dict:
     read has no such excuse, and stringifying `40.0` here would make the
     round-trip lossy.
     """
-    return {name: getattr(item, name, None) for name in sorted(CORRECTABLE_FIELDS[gear_type])}
+    # `manufacturer_fields` is the same set the write validates against, which
+    # is what makes "edit this dict and post it back" true rather than nearly
+    # true — this dict goes into `changes` untouched.
+    #
+    # `name` is deliberately absent: it is the handle the item is matched by,
+    # not one of its specs, and it is already on the row above. Having it in
+    # both places invited a brand to edit the copy that cannot be edited.
+    return {name: getattr(item, name, None) for name in sorted(manufacturer_fields(gear_type))}
 
 
 def brand_gear(
@@ -241,6 +270,12 @@ def brand_gear(
                 "active": getattr(item, "active", None),
             }
             if include_spec:
+                # `rename_to` rides with `spec` rather than appearing on the
+                # bare call: it is part of "here is what you may change", and a
+                # null slot on a pure id-discovery row would mean nothing. It
+                # sits beside `name` because that is where it sits on the item
+                # posted back — the row and the item share one shape.
+                row["rename_to"] = None
                 row["spec"] = current_spec(item, slug)
             rows.append(row)
     rows.sort(key=lambda row: (row["gear_type"], normalize(row["name"])))
@@ -306,8 +341,19 @@ def resolve(
                 f" (ids {', '.join(str(row.id) for row in matched)});"
                 " send the gear_id from GET /manufacturer/gear"
             )
-        # No id and no name match: a genuinely new product, sent with a stale id.
-        return Match(Resolution.UNMATCHED, None, name, gear_id)
+        # Nothing of theirs by that name either. See `UnresolvableGear`: with an
+        # id in hand this is a contradiction we can describe, not a new product.
+        if existing is not None:
+            raise UnresolvableGear(
+                f"{gear_type} #{gear_id} is {existing.name!r} in our catalogue,"
+                f" and nothing of yours is named {name!r}."
+                f" If you have renamed it, send name={existing.name!r} with"
+                f" rename_to={name!r}; if it is a new product, send it with no gear_id"
+            )
+        raise UnresolvableGear(
+            f"we hold no {gear_type} #{gear_id}, and nothing of yours is named"
+            f" {name!r}. Send it with no gear_id if it is a new product"
+        )
 
     if not name:
         raise MatchError("an item needs a gear_id or a name")

@@ -47,6 +47,17 @@ _EXCLUDED = frozenset(
 _SYNTHETIC = frozenset({"brand_name"})
 
 
+# Correctable everywhere except the manufacturer API. `name` is the handle
+# `manufacturers/matching.py` resolves an item by, so one key cannot be both
+# "which product is this" and "what should it be called" — a brand renames a
+# product with the `rename_to` field beside `name`, not through `changes`.
+#
+# The public suggestion box has no such problem (nothing is matched by name
+# there), so it goes on correcting `name` directly. This is the only field the
+# two writers disagree about.
+MANUFACTURER_EXCLUDED = frozenset({"name"})
+
+
 def _correctable(schema: type[BaseModel]) -> frozenset[str]:
     return (frozenset(schema.model_fields) - _EXCLUDED) | _SYNTHETIC
 
@@ -67,7 +78,40 @@ CORRECTABLE_FIELDS: dict[str, frozenset[str]] = {
 GEAR_TYPES: frozenset[str] = frozenset(CORRECTABLE_FIELDS)
 
 
-def unknown_fields(gear_type: str, names) -> list[str]:
-    """The submitted field names this gear type has no such field for."""
-    allowed = CORRECTABLE_FIELDS.get(gear_type, frozenset())
+def manufacturer_fields(gear_type: str) -> frozenset[str]:
+    """Every key the manufacturer API hands back **and** accepts. One set.
+
+    This is the round trip stated as code: the `spec` object of
+    `GET /manufacturer/gear?include=spec` holds exactly these keys, and
+    `POST /manufacturer/gear` accepts exactly these keys in `changes`, so a
+    brand can read the dict, edit it, and post it back verbatim. That promise is
+    the whole reason `?include=spec` exists, and it only holds while the read
+    and the write are computed from one place.
+
+    Every key here is a real correctable field. The two name-shaped things a
+    brand deals with — `name` and `rename_to` — are deliberately NOT in this set
+    and not in `changes` at all: they live beside it, on the row and on the item,
+    because they say *which product this is* and *what it should be called*
+    rather than what one of its specs should be. Putting `rename_to` through
+    `changes` meant pushing a control key down a `dict[str, str]` pipe that
+    stringifies its values, so a JSON `null` arrived as the word "null" and had
+    to be matched back out at the far end.
+
+    See MANUFACTURER_API.md § Gear types and field names, which is the contract
+    this serves, and `tests/test_manufacturer_api_docs.py`, which holds the
+    published document to it.
+    """
+    return CORRECTABLE_FIELDS.get(gear_type, frozenset()) - MANUFACTURER_EXCLUDED
+
+
+def unknown_fields(gear_type: str, names, allowed=None) -> list[str]:
+    """The submitted field names this gear type has no such field for.
+
+    `allowed` overrides the set to check against — `manufacturer_fields()` for
+    the manufacturer API, which accepts one field fewer. It is a parameter
+    rather than a second list so that neither writer can inherit the other's
+    rules by accident.
+    """
+    if allowed is None:
+        allowed = CORRECTABLE_FIELDS.get(gear_type, frozenset())
     return sorted(name for name in names if name not in allowed)

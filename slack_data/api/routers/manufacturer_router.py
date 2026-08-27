@@ -265,6 +265,61 @@ def _note_for(item: ManufacturerGearItem, batch: ManufacturerUpdateBatch) -> str
     return "\n\n".join(parts)[:MAX_NOTE_LENGTH]
 
 
+# What a null `rename_to` arrives as. `changes` values are stringified on the
+# way in (an explicit null is meaningful for every *other* field — "we no longer
+# publish a price"), so the untouched `rename_to: null` that
+# `?include=spec` hands back reaches us as this. It means "no rename", not "a
+# product called null".
+def _patch_for(index: int, item: ManufacturerGearItem, match) -> dict[str, str]:
+    """The JSON patch to store for one item: its `changes`, plus any rename.
+
+    `changes` arrives holding only real correctable fields — `name` is refused
+    by the model, because it is the identity handle. So the only work here is
+    the rename, which is a field on the item and becomes an ordinary `name`
+    change in the stored record: the separation is a wire concern, and what the
+    admin does with it is edit one key in the root `*.json`. The queue therefore
+    sees a normal field change and needs no rendering of its own.
+
+    **A rename to the name we already hold is dropped, not refused.** An
+    integration that keeps a shipped rename in its nightly template would
+    otherwise have one stale row reject the other thirty-nine, under
+    all-or-nothing.
+    """
+    changes = dict(item.changes)
+
+    if item.rename_to:
+        if match.gear_id is None:
+            raise HTTPException(
+                status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+                detail=(
+                    f"items[{index}]: cannot rename {item.name!r} — we hold no such"
+                    " product of yours. Send it as a new product instead, with no"
+                    " rename_to"
+                ),
+            )
+        if matching.normalize(item.rename_to) != matching.normalize(match.gear_name):
+            changes["name"] = item.rename_to
+
+    if not changes and not item.note:
+        raise HTTPException(
+            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            detail=(
+                f"items[{index}]: nothing to change — every value sent already"
+                " matches what we hold, and there is no note"
+            ),
+        )
+    return changes
+
+
+def _patches_for(batch: ManufacturerUpdateBatch, matches) -> list[dict[str, str]]:
+    """Every item's patch, built before any of them is written. Same
+    all-or-nothing rule as resolution: a 422 here stores nothing."""
+    return [
+        _patch_for(index, item, match)
+        for index, (item, match) in enumerate(zip(batch.items, matches))
+    ]
+
+
 def _resolve_all(session, principal: ManufacturerPrincipal, batch: ManufacturerUpdateBatch):
     """Match every item before writing any of them. See the module docstring on
     all-or-nothing: a partial batch cannot be safely retried."""
@@ -315,6 +370,7 @@ def submit_gear(
     """
     _verified_brand(session, principal)
     matches = _resolve_all(session, principal, batch)
+    patches = _patches_for(batch, matches)
 
     # One id for the call, so triage can group N rows back into the request the
     # manufacturer actually made. A ULID, so the group sorts with its members.
@@ -322,7 +378,7 @@ def submit_gear(
     applied = may_write_directly(principal)  # False today, structurally — see brand_clients.py
 
     records: list[Submission] = []
-    for item, match in zip(batch.items, matches):
+    for item, match, patch in zip(batch.items, matches, patches):
         records.append(
             Submission(
                 submission_id=new_ulid(),
@@ -333,7 +389,7 @@ def submit_gear(
                 # Their own name, from the verified credential — not a string
                 # they sent. This is attribution, so it must not be assertable.
                 gear_brand=principal.brand_name,
-                changes=item.changes,
+                changes=patch,
                 note=_note_for(item, batch),
                 source_url=item.source_url,
                 # No contact address is collected here: the brand is reachable
