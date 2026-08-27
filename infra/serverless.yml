@@ -60,7 +60,16 @@ provider:
   # (no DeleteItem, no Scan, no Cognito, no `Resource: "*"`), is in
   # LAMBDA_ROLE_PERMISSIONS.md. See also LAUNCH_RUNBOOK.md §5.4.
   iam:
-    role: arn:aws:iam::${aws:accountId}:role/${self:service}-${self:provider.stage}-${aws:region}-lambdaRole
+    #
+    # **Pinned to the `prod` role on every stage**, which looks wrong and is not.
+    # This identity is denied `iam:CreateRole` (see above), so a `staging` stack
+    # cannot mint `slackdata-staging-…-lambdaRole`, and asking the ISA for a new
+    # role per throwaway stage defeats the point of having one. The role is a
+    # Lambda execution role — any function may assume it — and the only resources
+    # it grants reach `table/slackdata-*`, which covers every stage's tables by
+    # construction. A staging stack therefore shares prod's *permissions*, never
+    # prod's *data*: the table names carry the stage.
+    role: arn:aws:iam::${aws:accountId}:role/${self:service}-prod-${aws:region}-lambdaRole
   architecture: x86_64                             # matches this WSL2 build host (x86_64).
                                                    # Deploying from Apple silicon? Switch this and
                                                    # the image to arm64, or build --platform
@@ -143,6 +152,12 @@ resources:
     # See `custom.manufacturerApi` above. String comparison because Serverless
     # variables always resolve to strings.
     EnableManufacturerApi: !Equals ['${self:custom.manufacturerApi}', 'true']
+    # Everything that can only exist once in the account: the slackdata.org
+    # CNAMEs and the certificate issued for them. A second distribution claiming
+    # the same aliases is refused by CloudFront (CNAMEAlreadyExists), so a
+    # non-prod stage takes its default *.cloudfront.net domain instead and is
+    # reachable without touching DNS.
+    IsProd: !Equals ['${self:provider.stage}', 'prod']
 
   # Patch the stage Serverless generates, to add throttling. RouteSettings is
   # the only per-route control an HTTP API has, and there is no Serverless v3
@@ -409,12 +424,22 @@ resources:
           - email
         SupportedIdentityProviders:
           - COGNITO
-        CallbackURLs:
-          - https://slackdata.org/admin
-          - http://localhost:5173/admin            # local dev against the real pool
-        LogoutURLs:
-          - https://slackdata.org/
-          - http://localhost:5173/
+        # Cognito matches these exactly — no wildcards — so they have to name the
+        # domain this stage is actually served from. On a non-prod stage that is
+        # the distribution's own CloudFront name, which is why this reads its
+        # domain rather than repeating a literal.
+        CallbackURLs: !If
+          - IsProd
+          - - https://slackdata.org/admin
+            - http://localhost:5173/admin          # local dev against the real pool
+          - - !Sub 'https://${Cdn.DomainName}/admin'
+            - http://localhost:5173/admin
+        LogoutURLs: !If
+          - IsProd
+          - - https://slackdata.org/
+            - http://localhost:5173/
+          - - !Sub 'https://${Cdn.DomainName}/'
+            - http://localhost:5173/
         # The API verifies the ID token; refresh keeps a triage session alive.
         ExplicitAuthFlows:
           - ALLOW_REFRESH_TOKEN_AUTH
@@ -605,13 +630,21 @@ resources:
           # for the apex + www and validated through the slackdata.org hosted zone
           # in this account. The ARN is built from ${aws:accountId} rather than
           # written out, to keep the account id out of this public repo.
-          Aliases:
-            - slackdata.org
-            - www.slackdata.org
-          ViewerCertificate:
-            AcmCertificateArn: arn:aws:acm:us-east-1:${aws:accountId}:certificate/577c4142-3d31-4229-b53f-2f89e54287da
-            SslSupportMethod: sni-only
-            MinimumProtocolVersion: TLSv1.2_2021
+          #
+          # Prod only. Omitted on other stages, where CloudFront serves its own
+          # *.cloudfront.net name under the default certificate — which is what
+          # makes a staging stack deployable at all, since these CNAMEs and this
+          # certificate can belong to exactly one distribution.
+          Aliases: !If
+            - IsProd
+            - [slackdata.org, www.slackdata.org]
+            - !Ref 'AWS::NoValue'
+          ViewerCertificate: !If
+            - IsProd
+            - AcmCertificateArn: arn:aws:acm:us-east-1:${aws:accountId}:certificate/577c4142-3d31-4229-b53f-2f89e54287da
+              SslSupportMethod: sni-only
+              MinimumProtocolVersion: TLSv1.2_2021
+            - !Ref 'AWS::NoValue'
           Origins:
             - Id: web-s3
               DomainName: !GetAtt WebBucket.RegionalDomainName
