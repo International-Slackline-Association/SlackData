@@ -603,10 +603,22 @@ resources:
       Properties:
         OriginRequestPolicyConfig:
           Name: ${self:service}-api-origin-req-${self:provider.stage}
-          Comment: All query strings + CloudFront-Viewer-Country; no Host, no cookies
+          Comment: Authorization + all query strings + Viewer-Country; no Host, no cookies
           HeadersConfig:
             HeaderBehavior: whitelist
             Headers:
+              # Without this, CloudFront strips Authorization and every
+              # authenticated call reaches the API anonymous — admin triage and
+              # the whole manufacturer API answer 401 "authentication required"
+              # while the token is perfectly valid. The failure names the
+              # caller, not the CDN, so it reads as a broken login.
+              #
+              # Safe to forward only because /api/* uses Managed-CachingDisabled
+              # (see the Cdn behaviour below). Forwarding an auth header through
+              # a CACHING behaviour would let one user's authenticated response
+              # be served to another; if that cache policy ever changes, this
+              # header must be in the cache key or this line must go.
+              - Authorization
               - CloudFront-Viewer-Country
           CookiesConfig:
             CookieBehavior: none

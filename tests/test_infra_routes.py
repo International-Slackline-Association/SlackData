@@ -128,3 +128,46 @@ def test_catches_a_throttle_for_a_route_nobody_declares(template: str) -> None:
 
     found = check_routes.problems(broken)
     assert any("ORPHANED" in line and "POST /manufacturer/gear" in line for line in found), found
+
+
+# --- CloudFront must not strip the credential off an authenticated call ------
+#
+# Also a real failure, on 2026-08-27: signing in to /admin on the staging site
+# answered 401 "admin authentication required" with a perfectly valid Cognito
+# token. `ApiOriginRequestPolicy` whitelists the headers CloudFront forwards to
+# the API, and `Authorization` was not among them — so every authenticated
+# request arrived anonymous. Admin triage and the ENTIRE manufacturer API were
+# unreachable through the CDN, which is the only way a browser reaches them.
+#
+# It hid well. The API's own 401 names the caller, not the CDN, so it reads as a
+# broken login; and a test that asserts "401 without a token" passes identically
+# whether the auth path works or is severed, because both answer 401. Only the
+# body distinguishes them ("authentication required" = no credential arrived,
+# "malformed token" = one did). The whitelist is the thing worth pinning.
+
+
+def test_cloudfront_forwards_the_authorization_header(template: str) -> None:
+    """Without this, every authenticated request reaches the API anonymous."""
+    policy = template.split("ApiOriginRequestPolicy:")[1].split("Cdn:")[0]
+    headers = policy.split("HeadersConfig:")[1].split("CookiesConfig:")[0]
+    assert "- Authorization" in headers, (
+        "ApiOriginRequestPolicy does not forward Authorization. Admin triage "
+        "and the manufacturer API will answer 401 through CloudFront even with "
+        "a valid token."
+    )
+
+
+def test_the_api_behaviour_does_not_cache(template: str) -> None:
+    """Forwarding Authorization is only safe while /api/* is uncacheable.
+
+    `Managed-CachingDisabled`. If the API behaviour is ever given a caching
+    policy while Authorization is forwarded and absent from the cache key,
+    CloudFront can serve one signed-in user's response to another. That is a
+    data leak, not a performance regression, so the two settings are pinned
+    together and this test names the reason.
+    """
+    assert "4135ea2d-6df8-44a3-9df3-4b5a84be39ad" in template, (
+        "the /api/* behaviour no longer uses Managed-CachingDisabled — either "
+        "restore it, or add Authorization to the cache key, or stop forwarding "
+        "it (see ApiOriginRequestPolicy)."
+    )
