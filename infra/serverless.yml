@@ -38,6 +38,18 @@ service: slackdata
 custom:
   manufacturerApi: ${env:DEPLOY_MANUFACTURER_API, 'false'}
 
+  # The slackdata.org certificate, resolved PER STAGE so that a non-prod
+  # template never names it at all. A CloudFormation `!If` would not achieve
+  # that: the ARN stays textually in the template even in the branch that is
+  # not taken, and CloudFormation's early-validation hook
+  # (AWS::EarlyValidation::ResourceExistenceCheck) reads it there — a us-east-1
+  # certificate referenced from a eu-central-1 stack, which fails change-set
+  # creation before a single resource is touched. Resolving it here means the
+  # staging template contains an empty string instead.
+  certByStage:
+    prod: arn:aws:acm:us-east-1:${aws:accountId}:certificate/577c4142-3d31-4229-b53f-2f89e54287da
+  certificateArn: ${self:custom.certByStage.${self:provider.stage}, ''}
+
 provider:
   name: aws
   region: ${opt:region, 'eu-central-1'}          # confirmed with the ISA (2026-08-16)
@@ -624,7 +636,7 @@ resources:
             - !Ref 'AWS::NoValue'
           ViewerCertificate: !If
             - IsProd
-            - AcmCertificateArn: arn:aws:acm:us-east-1:${aws:accountId}:certificate/577c4142-3d31-4229-b53f-2f89e54287da
+            - AcmCertificateArn: ${self:custom.certificateArn}
               SslSupportMethod: sni-only
               MinimumProtocolVersion: TLSv1.2_2021
             - !Ref 'AWS::NoValue'
