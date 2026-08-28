@@ -32,7 +32,21 @@
 # alone exit 0.
 set -uo pipefail
 
-STAGE="${2:-prod}"
+# Accepts `--stage staging` and a bare `staging`, and REFUSES anything else.
+# `STAGE="${2:-prod}"` alone silently ignored `./preflight.sh staging` and
+# checked prod — which the orphan-trap check below turns from harmless into
+# misleading, since it then reports on the wrong stage's tables under a header
+# confidently naming the stage you asked for. A stage argument that is quietly
+# discarded is worse than one that is rejected.
+STAGE=prod
+case "${1:-}" in
+  "")            ;;
+  --stage)       STAGE="${2:?--stage needs a value}" ;;
+  --stage=*)     STAGE="${1#--stage=}" ;;
+  -*)            echo "usage: ./preflight.sh [--stage <stage>]" >&2; exit 2 ;;
+  *)             STAGE="$1" ;;
+esac
+
 FAIL=0
 WARN=0
 
