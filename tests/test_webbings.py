@@ -247,6 +247,41 @@ def test_pagination_limit_over_100_rejected(client):
     assert response.status_code == 422
 
 
+def test_pagination_negative_limit_is_rejected(client, session):
+    """A negative limit must not mean "no limit".
+
+    `le=100` alone left the bottom of the range open, and SQL reads a NEGATIVE
+    limit as unbounded — so `?limit=-1` walked straight past the documented cap
+    and returned the entire table, on every gear type, to any anonymous caller.
+    Found against the deployed staging API on 2026-08-28: `?limit=-1` answered
+    with all 246 webbing rows.
+
+    The cap that is written down has to be the cap that is enforced; a bound
+    with one open end is not a bound.
+    """
+    brand = make_brand(session)
+    _create_webbings(session, brand, 20)
+
+    for limit in (-1, -5, 0):
+        response = client.get(f"/webbing/?limit={limit}")
+        assert response.status_code == 422, f"limit={limit} was accepted"
+
+
+def test_an_id_larger_than_sqlite_can_hold_is_a_422_not_a_500(client):
+    """Ids are bounded above as well as below.
+
+    A path id is handed to SQLite as a bound parameter, and SQLite integers are
+    signed 64-bit. Python's are arbitrary precision, so a larger value parsed
+    cleanly, reached the driver, and raised there — surfacing as a 500 on an
+    unauthenticated GET. 2**63-1 is the largest value SQLite can actually hold,
+    so it is the boundary: it must 404 (well-formed, no such row) while the
+    value above it must 422 (not a usable id at all).
+    """
+    assert client.get(f"/webbing/{2**63 - 1}").status_code == 404
+    assert client.get(f"/webbing/{2**63}").status_code == 422
+    assert client.get("/webbing/99999999999999999999").status_code == 422
+
+
 def test_pagination_offset_past_end_returns_empty(client, session):
     brand = make_brand(session)
     _create_webbings(session, brand, 3)

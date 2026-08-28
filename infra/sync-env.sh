@@ -33,15 +33,27 @@ STAGE="${1:-prod}"
 STACK="slackdata-${STAGE}"
 ENV_FILE="../frontend/.env.production"
 
+# Resolved BEFORE any call, and passed explicitly to every one of them.
+# `serverless` cannot resolve an SSO profile, so deploying means exporting raw
+# credentials into the shell — which carries the keys but NOT the profile's
+# region. Every unqualified aws call then errors instead of defaulting, and the
+# whole script dies one line later with no output at all.
+REGION="${AWS_REGION:-${AWS_DEFAULT_REGION:-$(aws configure get region 2>/dev/null || true)}}"
+REGION="${REGION:-eu-central-1}"
+
+# stderr is kept, and the exit status is returned rather than swallowed. The
+# guard below prints a diagnostic worth reading, and `set -e` on a failed
+# command substitution would kill the script before it could ever run — so the
+# one message written for this exact moment was unreachable precisely when the
+# call failed. `|| true` keeps us alive long enough to say something useful.
 out() {
-  aws cloudformation describe-stacks --stack-name "$STACK" \
-    --query "Stacks[0].Outputs[?OutputKey=='$1'].OutputValue" --output text 2>/dev/null
+  aws cloudformation describe-stacks --stack-name "$STACK" --region "$REGION" \
+    --query "Stacks[0].Outputs[?OutputKey=='$1'].OutputValue" --output text || true
 }
 
-echo "Reading outputs from $STACK…"
+echo "Reading outputs from $STACK (region $REGION)…"
 POOL_ID="$(out AdminUserPoolId)"
 CLIENT_ID="$(out AdminUserPoolClientId)"
-REGION="$(aws configure get region || echo eu-central-1)"
 
 if [ -z "$POOL_ID" ] || [ "$POOL_ID" = "None" ]; then
   echo "error: no AdminUserPoolId output on $STACK." >&2
@@ -81,12 +93,30 @@ if [ -n "${TURNSTILE_SITE_KEY:-}" ]; then
 else
   SITE_KEY="$(grep -E '^VITE_TURNSTILE_SITE_KEY=' "$ENV_FILE" | cut -d= -f2-)"
   if [ -n "$SITE_KEY" ] && [ -z "${TURNSTILE_SECRET:-}" ]; then
-    echo
-    echo "  ✗ $ENV_FILE already carries a site key, but TURNSTILE_SECRET is not set"
-    echo "    in this shell. If half A was just deployed from here, the API now has"
-    echo "    NO secret and will 503 every submission the form sends."
-    echo "    Export TURNSTILE_SECRET and redeploy half A, or clear the site key."
-    exit 1
+    # An empty shell is not evidence the API has no secret — it is only evidence
+    # that THIS shell did not deploy half A. Someone else's did, or an earlier
+    # one, and refusing on that basis blocks a correct deploy while a genuinely
+    # broken one that happens to export the variable sails through. So ask the
+    # deployed function what it actually holds. The shell stays the fallback for
+    # when the answer cannot be fetched (no credentials, function not yet
+    # created), because failing closed is the whole point of this check.
+    DEPLOYED_SECRET="$(aws lambda get-function-configuration \
+        --function-name "slackdata-${STAGE}-api" --region "$REGION" \
+        --query 'Environment.Variables.TURNSTILE_SECRET' --output text 2>/dev/null || true)"
+    case "$DEPLOYED_SECRET" in
+      0x????????????????????????????*)
+        echo "  ✓ TURNSTILE_SECRET is not in this shell, but slackdata-${STAGE}-api"
+        echo "    already carries a well-formed one — half A was deployed elsewhere."
+        ;;
+      *)
+        echo
+        echo "  ✗ $ENV_FILE carries a site key, but no usable TURNSTILE_SECRET was"
+        echo "    found in this shell OR on slackdata-${STAGE}-api. The form would"
+        echo "    render and the API would reject every submission it sends."
+        echo "    Export TURNSTILE_SECRET and redeploy half A, or clear the site key."
+        exit 1
+        ;;
+    esac
   fi
   if [ -z "$SITE_KEY" ]; then
     echo

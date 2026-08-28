@@ -379,7 +379,7 @@ def test_the_store_is_chosen_from_the_environment(live):
     """
     client, _, _ = live
     assert client.get("/manufacturer/me", headers=BRAND).status_code == 200
-    assert client.get("/submissions/", headers=ADMIN).status_code == 200
+    assert client.get("/submissions", headers=ADMIN).status_code == 200
 
 
 def test_discovery_over_http_returns_only_the_callers_gear(live):
@@ -416,7 +416,7 @@ def test_a_full_batch_round_trip(live):
     # Sent as JSON scalars, stored as the prose the admin hand-applies.
     batch_id = receipt["batch_id"]
 
-    queued = client.get("/submissions/?status=approved", headers=ADMIN).json()
+    queued = client.get("/submissions?status=approved", headers=ADMIN).json()
     mine = [row for row in queued if row["batch_id"] == batch_id]
     assert len(mine) == 2
     assert mine[0]["changes"] == {"breaking_strength": "31.2", "active": "true"}
@@ -469,11 +469,35 @@ def test_an_oversized_body_is_refused_by_the_real_server(live):
     assert response.status_code == 413
 
 
+def test_the_old_trailing_slash_path_still_reaches_the_handler(live):
+    """`/submissions/` was the canonical path until 2026-08-27, and anything
+    written against it must keep working.
+
+    It moved because API Gateway refuses a route key with an empty path segment,
+    so `POST /submissions/` could not be named in `RouteSettings` and could not
+    be throttled — see infra/serverless.yml. Nothing is mounted at the slashed
+    spelling now, so Starlette redirects it here.
+
+    The redirect is a **307**, which is what makes this safe for a POST: it
+    preserves the method and the body, where a 301/302 would turn it into a GET
+    and silently drop the submission. Hosted, the redirected request lands on
+    `$default` and pays the global rate rather than the 2/sec one, which is why
+    our own client calls the un-slashed path.
+    """
+    client, _, _ = live
+
+    response = client.post("/submissions/", json={})
+    assert response.status_code == 307
+    assert response.headers["location"].endswith("/submissions")
+
+    assert client.get("/submissions/", headers=ADMIN).status_code == 307
+
+
 def test_the_public_submission_box_still_works_over_http(live):
     """Phase 2's one open write endpoint, unaffected by Phase 4."""
     client, ids, _ = live
     response = client.post(
-        "/submissions/",
+        "/submissions",
         json={"gear_type": "webbings", "gear_id": ids["alpha_webbing"],
               "changes": {"weight": "71"}, "note": "Live check."},
     )
@@ -512,7 +536,7 @@ def test_the_hosted_server_locks_out_the_dev_tokens(hosted):
     paths. Never a fall-through to the static token.
     """
     client, _, _ = hosted
-    assert client.get("/submissions/", headers=ADMIN).status_code == 503
+    assert client.get("/submissions", headers=ADMIN).status_code == 503
     assert client.get("/manufacturer/me", headers=BRAND).status_code == 503
     assert client.post(
         "/manufacturer/gear",
@@ -528,7 +552,7 @@ def test_the_hosted_public_submission_box_is_reachable(hosted):
     captcha check rather than 404ing."""
     client, _, _ = hosted
     response = client.post(
-        "/submissions/",
+        "/submissions",
         json={"gear_type": "webbings", "gear_id": 1, "changes": {"weight": "71"}},
     )
     assert response.status_code == 503
@@ -541,7 +565,7 @@ def test_a_configured_pool_disables_the_dev_tokens_hosted(hosted_with_pool):
     """Configuring Cognito closes the dev door rather than adding a second one —
     asserted in a real hosted process, not by monkeypatching a module global."""
     client, _, _ = hosted_with_pool
-    assert client.get("/submissions/", headers=ADMIN).status_code == 401
+    assert client.get("/submissions", headers=ADMIN).status_code == 401
     assert client.get("/manufacturer/me", headers=BRAND).status_code == 401
 
 
@@ -555,7 +579,7 @@ def test_an_unverifiable_token_is_401_not_500(hosted_with_pool):
     """
     client, _, _ = hosted_with_pool
     for token in ("not.a.jwt", "junk", "a.b.c"):
-        for path in ("/submissions/", "/manufacturer/me"):
+        for path in ("/submissions", "/manufacturer/me"):
             response = client.get(path, headers={"Authorization": f"Bearer {token}"})
             assert response.status_code == 401, f"{path} with {token!r} -> {response.status_code}"
 
@@ -565,7 +589,7 @@ def test_the_public_write_path_is_unaffected_by_the_pool(hosted_with_pool):
     and running its captcha check, not 404ing and not 500ing."""
     client, _, _ = hosted_with_pool
     response = client.post(
-        "/submissions/",
+        "/submissions",
         json={"gear_type": "webbings", "gear_id": 1, "changes": {"weight": "71"}},
     )
     assert response.status_code == 503

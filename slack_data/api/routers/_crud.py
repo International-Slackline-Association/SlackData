@@ -55,7 +55,12 @@ def _named(func: Callable, name: str, id_param: str | None = None) -> Callable:
             inspect.Parameter(
                 id_param,
                 inspect.Parameter.KEYWORD_ONLY,
-                annotation=Annotated[int, Path(gt=0)],
+                # `le` as well as `gt`, because an id is eventually handed to
+                # SQLite as a bound parameter and SQLite integers are signed
+                # 64-bit. Python's are not: a larger literal parses cleanly here
+                # and then raises inside the driver, which surfaces as a 500 on
+                # an unauthenticated GET. The bound turns that into a 422.
+                annotation=Annotated[int, Path(gt=0, le=2**63 - 1)],
             )
         )
         func.__signature__ = signature.replace(parameters=params)  # type: ignore[attr-defined]
@@ -102,7 +107,12 @@ def crud_router(
     def read_items(
         session: SessionDep,
         offset: Annotated[int, Query(ge=0)] = 0,
-        limit: Annotated[int, Query(le=100)] = 10,
+        # `ge=1` is not symmetry for its own sake. `le=100` alone leaves the
+        # bottom open, and SQL treats a NEGATIVE limit as "no limit" — so
+        # `?limit=-1` returned the whole table on every gear type, to anyone,
+        # unauthenticated. The cap that was written down was not the cap that
+        # was enforced.
+        limit: Annotated[int, Query(ge=1, le=100)] = 10,
     ):
         return session.exec(select(model).offset(offset).limit(limit)).all()
 

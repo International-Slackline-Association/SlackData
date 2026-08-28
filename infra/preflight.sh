@@ -14,15 +14,39 @@
 #                              so uncommitted code ships and nothing records what.
 # - Wrong AWS account       -> this repo targets the ISA's account, not a personal
 #                              one. Getting this wrong is expensive to undo.
+# - Route/throttle mismatch -> a RouteSettings key naming a route that does not
+#                              exist 404s the stage update, and the ROLLBACK
+#                              fails too, freezing the stack (2026-08-25).
 # - Manufacturer API flag   -> off by default, but the permission it needed is
 #                              confirmed (2026-08-24), so it SHOULD be on. Off
 #                              means shipping Phase 4 dormant for no reason.
+# - Orphaned retained table -> a DeletionPolicy: Retain resource that exists in
+#                              the account but not in the stack. Every later
+#                              deploy is then rejected at CHANGE SET creation by
+#                              AWS::EarlyValidation::ResourceExistenceCheck,
+#                              which names no resource and writes no stack event
+#                              — hours to diagnose cold. See README § Retained
+#                              resources and the orphan trap.
 #
 # Exits non-zero if anything is a hard problem, so it can gate a deploy. Warnings
 # alone exit 0.
 set -uo pipefail
 
-STAGE="${2:-prod}"
+# Accepts `--stage staging` and a bare `staging`, and REFUSES anything else.
+# `STAGE="${2:-prod}"` alone silently ignored `./preflight.sh staging` and
+# checked prod — which the orphan-trap check below turns from harmless into
+# misleading, since it then reports on the wrong stage's tables under a header
+# confidently naming the stage you asked for. A stage argument that is quietly
+# discarded is worse than one that is rejected.
+STAGE=prod
+case "${1:-}" in
+  "")            ;;
+  --stage)       STAGE="${2:?--stage needs a value}" ;;
+  --stage=*)     STAGE="${1#--stage=}" ;;
+  -*)            echo "usage: ./preflight.sh [--stage <stage>]" >&2; exit 2 ;;
+  *)             STAGE="$1" ;;
+esac
+
 FAIL=0
 WARN=0
 
@@ -52,8 +76,60 @@ ENV_FILE="../frontend/.env.production"
 FILE_SITE_KEY="$(grep -E '^VITE_TURNSTILE_SITE_KEY=' "$ENV_FILE" 2>/dev/null | cut -d= -f2-)"
 SITE_KEY="${TURNSTILE_SITE_KEY:-$FILE_SITE_KEY}"
 
-if [ -n "${TURNSTILE_SECRET:-}" ] && [ -n "$SITE_KEY" ]; then
-  ok "both halves present — the suggestion form will render AND be accepted"
+# Shape, before pairing. "Set" is not "valid": on 2026-08-28 a documented
+# command was pasted with its own placeholder still in it, and
+# TURNSTILE_SECRET='<your real secret>' deployed clean. Every check here passed
+# — both halves were present and agreed — and the result would have been THE BAD
+# ONE anyway: the form renders, Cloudflare answers invalid-input-secret, and
+# every real submission 400s. A pairing check cannot see that; only the shape
+# can. Cloudflare keys are `0x` followed by 30+ URL-safe characters.
+# A LIVE key is `0x` + 30 or more URL-safe characters. Cloudflare's published
+# DUMMY keys are `1x`/`2x`/`3x` followed by zeros — they are valid and useful
+# (staging used them to prove the plumbing), but the 1x pair accepts ANY token,
+# so shipping them is shipping no captcha at all. Allowed, and always said out
+# loud. Anything matching neither shape is a paste accident.
+# The two halves are NOT the same length — the site key is the shorter one
+# (0x + ~22) and the secret is longer (0x + ~33). A single threshold tuned to
+# the secret rejects a perfectly good site key, so they get their own minimums.
+LIVE_SITE_RE='^0x[0-9A-Za-z_-]{18,}$'
+LIVE_SECRET_RE='^0x[0-9A-Za-z_-]{28,}$'
+TEST_RE='^[123]x0{20,}[0-9A-Za-z]*$'
+SHAPE_BAD=0
+IS_TEST=0
+
+check_shape() {  # $1 = label, $2 = value, $3 = 1 to echo the value, $4 = live regex
+  local label="$1" value="$2" public="$3" live_re="$4"
+  if printf '%s' "$value" | grep -qE "$live_re"; then
+    return 0
+  elif printf '%s' "$value" | grep -qE "$TEST_RE"; then
+    IS_TEST=1
+    return 0
+  fi
+  if [ "$public" = "1" ]; then
+    bad "the Turnstile $label does not look like a Cloudflare key: '$value'
+      Expected 0x + 18 or more characters (live), or a 1x/2x/3x dummy key."
+  else
+    bad "the Turnstile $label does not look like a Cloudflare key (expected 0x +
+      28 or more characters; got ${#value}). A placeholder or truncated paste
+      deploys perfectly and then rejects every submission — this exact check
+      exists because TURNSTILE_SECRET='<your real secret>' once shipped clean.
+      The value is NOT printed here; check it in your shell."
+  fi
+  SHAPE_BAD=1
+}
+
+[ -n "${TURNSTILE_SECRET:-}" ] && check_shape "SECRET" "$TURNSTILE_SECRET" 0 "$LIVE_SECRET_RE"
+[ -n "$SITE_KEY" ]             && check_shape "SITE key" "$SITE_KEY" 1 "$LIVE_SITE_RE"
+
+if [ "$IS_TEST" = "1" ] && [ "$SHAPE_BAD" = "0" ]; then
+  warn "these are Cloudflare TEST keys. The 1x pair accepts any token, so the
+      form works end to end and blocks nothing. Fine for staging; never prod."
+fi
+
+if [ "$SHAPE_BAD" = "1" ]; then
+  :   # already reported; do not also claim the halves agree
+elif [ -n "${TURNSTILE_SECRET:-}" ] && [ -n "$SITE_KEY" ]; then
+  ok "both halves present and well-formed — the form will render AND be accepted"
 elif [ -n "${TURNSTILE_SECRET:-}" ] && [ -z "$SITE_KEY" ]; then
   warn "TURNSTILE_SECRET is set but there is no site key. The API will accept
       submissions, but the form is not rendered (and is tree-shaken out), so
@@ -80,6 +156,21 @@ else
       because cognito-idp:CreateResourceServer was believed un-granted; it is granted
       (confirmed 2026-08-24). Unless you mean to ship it dormant, deploy with
       DEPLOY_MANUFACTURER_API=true."
+fi
+
+echo
+echo "API Gateway routes agree with their throttles"
+#
+# The 2026-08-25 failure: RouteSettings named a route key that the same template
+# had not created yet, API Gateway 404'd the stage update, and the rollback
+# failed too — slackdata-prod sat in UPDATE_ROLLBACK_FAILED until it was
+# recovered by hand. Cheap to check, expensive to discover. Same script CI runs
+# (tests/test_infra_routes.py), so the gate and the suite cannot drift.
+if ROUTES="$(python3 ./check-routes.py 2>&1)"; then
+  ok "every throttled route is declared, uniquely named, and waited for"
+else
+  bad "serverless.yml would fail to deploy:
+$(printf '%s\n' "$ROUTES" | sed 's/^/      /')"
 fi
 
 echo
@@ -111,6 +202,52 @@ if command -v aws >/dev/null 2>&1; then
   fi
 else
   bad "the aws CLI is not on PATH"
+fi
+
+echo
+echo "Retained resources are stack-managed (the orphan trap)"
+#
+# SubmissionsTable, BrandClientsTable and AdminUserPool are DeletionPolicy:
+# Retain, correctly — each holds something git cannot regenerate. The cost is
+# that a stack update which CREATES one and then fails for any unrelated reason
+# rolls back everything else and leaves that resource standing, orphaned. The
+# next deploy tries to create a table name that is already taken and is refused
+# before a single resource is touched, with an error that names nothing.
+#
+# Only the DynamoDB tables can spring it: their names are account-unique. A
+# user pool's name is not, so a retained pool causes no conflict (it strands the
+# admin account instead, which is a data problem, not a deploy one).
+#
+# This is a live check — skipped, not failed, without AWS access, so preflight
+# still runs offline.
+STACK="slackdata-${STAGE}"
+if command -v aws >/dev/null 2>&1 && [ -n "${ACCOUNT:-}" ] && [ "${ACCOUNT:-None}" != "None" ]; then
+  # Names come from the template, so renaming a table cannot leave this checking
+  # the old one.
+  for pair in "SubmissionsTable:submissions" "BrandClientsTable:brand-clients"; do
+    LOGICAL="${pair%%:*}"
+    TABLE="slackdata-${pair##*:}-${STAGE}"
+
+    if ! aws dynamodb describe-table --table-name "$TABLE" >/dev/null 2>&1; then
+      ok "$TABLE does not exist yet — nothing to orphan (expected before the first deploy)"
+      continue
+    fi
+
+    if aws cloudformation describe-stack-resource \
+         --stack-name "$STACK" --logical-resource-id "$LOGICAL" >/dev/null 2>&1; then
+      ok "$TABLE exists and is managed by $STACK"
+    else
+      bad "ORPHAN: $TABLE exists in this account but is NOT in $STACK.
+      Every deploy from here is rejected at change-set creation by
+      AWS::EarlyValidation::ResourceExistenceCheck — no stack events, no resource
+      named, nothing to read. Do NOT delete the table to unblock it; it may hold
+      real submissions or every brand credential mapping.
+      Import it back into the stack instead: README § Retained resources and the
+      orphan trap."
+    fi
+  done
+else
+  warn "skipped — no AWS access. This check needs the account to compare against."
 fi
 
 echo

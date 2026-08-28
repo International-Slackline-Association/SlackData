@@ -34,7 +34,11 @@ from slack_data.models.submissions import (
     MAX_VALUE_LENGTH,
     SubmissionStatus,
 )
-from slack_data.submissions.fields import GEAR_TYPES, unknown_fields
+from slack_data.submissions.fields import (
+    GEAR_TYPES,
+    manufacturer_fields,
+    unknown_fields,
+)
 
 # --- Caps -------------------------------------------------------------------
 # Higher than the public box's, because the caller is authenticated and is
@@ -82,14 +86,29 @@ class ManufacturerGearItem(BaseModel):
 
     gear_type: str
     # Our id, from `GET /manufacturer/gear`. Optional, and never trusted alone:
-    # ids shift when the seed JSON is reordered, so the matcher verifies this
-    # against `name` and re-resolves if they disagree. See matching.py.
+    # the catalogue's ids are stable now (every seed carries an explicit `id`),
+    # but the caller's copy of them is not, so the matcher verifies this against
+    # `name` and re-resolves if they disagree. See matching.py.
     gear_id: int | None = None
     # Their name for it. Worth sending even with an id — it is what makes a
     # drifted id recoverable instead of an error.
     name: str | None = None
     # Their part number. Stored, not matched on; see models/submissions.py.
     manufacturer_sku: str | None = None
+    # A new name for the product, beside the `name` that says which product it
+    # is. Its own field rather than a `changes` key, and that is not a stylistic
+    # choice: `changes` is `dict[str, str]` and stringifies its values, so a
+    # JSON `null` arrived there as the word "null" and the router had to match
+    # it back out — which also meant a product could never be renamed to the
+    # literal string "null". Here a null is a null.
+    #
+    # `?include=spec` mirrors this exactly: `name` and `rename_to` sit on the
+    # ROW, `spec` holds only real fields. So the row a brand reads has the same
+    # shape as the item they post, and the spec dict goes straight into
+    # `changes` untouched.
+    rename_to: str | None = None
+    # Only real correctable fields. `name` is refused here — see
+    # `_check_changes` — because it is the handle this item is matched by.
     changes: dict[str, str] = Field(default_factory=dict)
     note: str | None = None
     source_url: str | None = None
@@ -138,7 +157,7 @@ class ManufacturerGearItem(BaseModel):
             raise ValueError(f"unknown gear type {value!r}")
         return value
 
-    @field_validator("name", "manufacturer_sku", "note", "source_url", mode="before")
+    @field_validator("name", "rename_to", "manufacturer_sku", "note", "source_url", mode="before")
     @classmethod
     def _blank_is_absent(cls, value):
         if isinstance(value, str) and not value.strip():
@@ -152,7 +171,7 @@ class ManufacturerGearItem(BaseModel):
             raise ValueError("gear_id must be a positive integer")
         return value
 
-    @field_validator("name")
+    @field_validator("name", "rename_to")
     @classmethod
     def _name_length(cls, value: str | None) -> str | None:
         if value is not None and len(value) > MAX_NAME_LENGTH:
@@ -186,13 +205,27 @@ class ManufacturerGearItem(BaseModel):
 
     @model_validator(mode="after")
     def _check_changes(self) -> "ManufacturerGearItem":
-        if len(self.changes) > MAX_ITEM_CHANGES:
+        # Named before the generic unknown-field check, because `name` IS a real
+        # correctable field everywhere else and "webbings has no field 'name'"
+        # would be a confusing lie. This is the one rule that differs between
+        # the public box and this API, so it gets its own sentence.
+        if "name" in self.changes:
+            raise ValueError(
+                "name cannot be sent in `changes` — it is how the item is matched."
+                " Send the name we currently hold as `name`, and any new name as"
+                " `rename_to`"
+            )
+        # The rename counts against the cap: it becomes a change in the stored
+        # record, and a cap that ignored it would be off by one.
+        if len(self.changes) + bool(self.rename_to) > MAX_ITEM_CHANGES:
             raise ValueError(f"at most {MAX_ITEM_CHANGES} fields per item")
 
-        # The same derived list the public box validates against and the
-        # catalogue's own PATCH routes use. Never a second hand-written copy —
-        # see submissions/fields.py and tests/test_frontend_contract.py.
-        bad = unknown_fields(self.gear_type, self.changes)
+        # Derived from the same `<X>Update` schemas the catalogue's own PATCH
+        # routes use, less the one field above. Never a hand-written copy — see
+        # submissions/fields.py and tests/test_manufacturer_api_docs.py.
+        bad = unknown_fields(
+            self.gear_type, self.changes, allowed=manufacturer_fields(self.gear_type)
+        )
         if bad:
             raise ValueError(f"{self.gear_type} has no field(s): {', '.join(bad)}")
 
@@ -206,8 +239,8 @@ class ManufacturerGearItem(BaseModel):
 
         if self.gear_id is None and not self.name:
             raise ValueError("an item needs a gear_id or a name")
-        if not self.changes and not self.note:
-            raise ValueError("an item needs at least one change or a note")
+        if not self.changes and not self.note and not self.rename_to:
+            raise ValueError("an item needs at least one change, a rename or a note")
         return self
 
 
@@ -323,6 +356,12 @@ class ManufacturerGearRow(BaseModel):
     gear_type: str
     gear_id: int
     name: str
+    # Always null, and present whenever `spec` is: the empty slot for a new
+    # name, sitting beside the `name` it would replace. A brand editing this row
+    # sees that renaming is possible and how, without reading anything — and it
+    # is in the same position on the item they post back, so the row and the
+    # item have one shape between them.
+    rename_to: str | None = None
     active: bool | None = None
     # Present only for `?include=spec`: the values we currently hold, keyed by
     # the same derived field names the write accepts, so this dict can be edited

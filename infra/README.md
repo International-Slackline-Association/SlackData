@@ -181,10 +181,10 @@ curl -s -o /dev/null -w '%{http_code}\n' "$BASE/api/openapi.json"         # 404 
 curl -s -o /dev/null -w '%{http_code}\n' -X DELETE "$BASE/api/webbing/1"  # 405 — route not mounted
 
 # Phase 2: submissions. The one *open* write endpoint, and the closed admin ones.
-curl -s -o /dev/null -w '%{http_code}\n' "$BASE/api/submissions/"              # 401 — admin only
+curl -s -o /dev/null -w '%{http_code}\n' "$BASE/api/submissions"              # 401 — admin only
 curl -s -o /dev/null -w '%{http_code}\n' -H 'Authorization: Bearer dev-admin-token' \
-     "$BASE/api/submissions/"                                                  # 401 — dev token is dead hosted
-curl -s -o /dev/null -w '%{http_code}\n' -X POST "$BASE/api/submissions/" \
+     "$BASE/api/submissions"                                                  # 401 — dev token is dead hosted
+curl -s -o /dev/null -w '%{http_code}\n' -X POST "$BASE/api/submissions" \
      -H 'Content-Type: application/json' -d '{"gear_type":"webbings","gear_id":1,"note":"test"}'
                                                                                # 400 — captcha missing (NOT 201)
 ```
@@ -367,6 +367,113 @@ Neither is a security control — the server enforces both independently (`utili
 fails closed, `api/auth.py` rejects the dev token whenever a pool is configured). They exist so a
 half-finished deploy looks unfinished rather than broken.
 
+### Retained resources and the orphan trap
+
+Three resources carry `DeletionPolicy: Retain` and `UpdateReplacePolicy: Retain`, because each holds
+something git cannot regenerate:
+
+| Resource | What is lost without it |
+|---|---|
+| `SubmissionsTable` | what the public typed — corrections and tips |
+| `BrandClientsTable` | every brand credential mapping |
+| `AdminUserPool` | a real person's login, and their MFA enrolment |
+
+Those policies are right and should stay. **The trap is their consequence.** If a stack update
+creates one of them and then fails for any unrelated reason, the rollback deletes everything else and
+leaves that resource standing, orphaned from the stack. Every deploy after that tries to create a
+resource whose name is already taken, and CloudFormation refuses the change set before touching a
+single resource.
+
+Only the two DynamoDB tables can actually spring it — their names are account-unique. A retained user
+pool collides with nothing (pool names need not be unique); it strands the admin account instead,
+which is a data problem rather than a deploy one.
+
+**This already happened on staging, exactly this way.** The first staging deploy failed on an
+unrelated route-key bug (§ the route/throttle invariant). The rollback retained both tables. The next
+three deploys failed at change-set creation, and were only recoverable because the tables were empty
+and could be deleted. **On prod that escape does not exist**: the submissions table may hold real
+public submissions, so deleting it to unblock a deploy is not an option.
+
+#### Why it is hard to diagnose cold
+
+The error tells you to use the `DescribeEvents` API — but a change-set *creation* failure produces no
+stack events at all, because the stack never enters an update. `describe-change-set-hooks` returns an
+empty list. You get the hook's name (`AWS::EarlyValidation::ResourceExistenceCheck`) and no
+indication of which resource it objected to.
+
+On staging this was resolved by bisecting the template: computing each resource's transitive
+`Ref`/`GetAtt`/`DependsOn` closure, building a minimal valid template around it, and creating a
+throwaway change set per resource until the offending ones named themselves. Budget for that if you
+meet it without this section.
+
+#### Prevention — do this, rather than the recovery below
+
+The trap only springs when a retained resource is created by a deploy that later fails. So create
+them in a deploy that does nothing else and can barely fail:
+
+```bash
+# 0. Both of the checks for the defect class that caused the staging failure.
+cd infra && ./preflight.sh --stage prod && python3 ./check-routes.py
+
+# 1. The retained resources ALONE, with the rest of Phase 2/4 still off.
+#    Small, isolated, nothing to conflict with.
+npx serverless deploy --stage prod
+
+# 2. Confirm all three are CREATE_COMPLETE and stack-managed before going on.
+aws cloudformation describe-stack-resources --stack-name slackdata-prod \
+  --query "StackResources[?LogicalResourceId=='SubmissionsTable' ||
+                           LogicalResourceId=='BrandClientsTable' ||
+                           LogicalResourceId=='AdminUserPool'].[LogicalResourceId,ResourceStatus]" \
+  --output table
+
+# 3. Then deploy the remainder normally. A failure from here is safe: the
+#    resources already exist IN the stack, so a rollback has no reason to
+#    re-create them and no reason to orphan them.
+DEPLOY_MANUFACTURER_API=true npx serverless deploy --stage prod
+```
+
+`preflight.sh` also checks the orphan condition itself on every run — a retained table that exists in
+the account but not in the stack is a hard ✗, because it means the next deploy is already blocked.
+
+#### Recovery — if it springs anyway
+
+**Do not delete the resources.** Import them back into the stack:
+
+```bash
+# 0. First, a restore point. The tables are on-demand billing with PITR enabled
+#    for precisely this moment.
+aws dynamodb export-table-to-point-in-time --table-arn <arn> ...   # or take an on-demand backup:
+aws dynamodb create-backup --table-name slackdata-submissions-prod \
+  --backup-name pre-import-$(date +%Y%m%d)
+
+# 1. The template CloudFormation will import INTO.
+npx serverless package --stage prod          # → .serverless/cloudformation-template-update-stack.json
+
+# 2. A change set of type IMPORT, mapping each orphan to its logical id.
+aws cloudformation create-change-set \
+  --stack-name slackdata-prod --change-set-name import-retained \
+  --change-set-type IMPORT \
+  --template-body file://.serverless/cloudformation-template-update-stack.json \
+  --capabilities CAPABILITY_NAMED_IAM \
+  --resources-to-import '[
+    {"ResourceType":"AWS::DynamoDB::Table",
+     "LogicalResourceId":"SubmissionsTable",
+     "ResourceIdentifier":{"TableName":"slackdata-submissions-prod"}},
+    {"ResourceType":"AWS::DynamoDB::Table",
+     "LogicalResourceId":"BrandClientsTable",
+     "ResourceIdentifier":{"TableName":"slackdata-brand-clients-prod"}}
+  ]'
+
+# 3. Read it before executing it, then execute.
+aws cloudformation describe-change-set --stack-name slackdata-prod --change-set-name import-retained
+aws cloudformation execute-change-set --stack-name slackdata-prod --change-set-name import-retained
+```
+
+The resources become stack-managed again with their data intact, and normal `serverless deploy`
+resumes. Confirm the import is genuinely non-destructive for the table holding real submissions
+before you run it — an import must describe the table as it actually is, so a template property that
+disagrees with the live table is the thing to check first.
+
 ### Turnstile — why it needs three checks, not one
 
 The suggestion form needs two values that live in different places and are
@@ -474,33 +581,133 @@ Cognito emails a temporary password; the first login forces a change. Turn on MF
 login page — the pool allows it (`OPTIONAL` + TOTP) and this is the account that can read everything
 the public has submitted.
 
+**Then put the user in the admin group — being in the pool is not being an admin.** The API requires
+`COGNITO_ADMIN_GROUP` (default `admins`, created by the template as `AdminUserPoolGroup`) in the ID
+token's `cognito:groups` claim; without it every triage route answers 403. Cognito adds the claim
+itself, so the SPA needs nothing.
+
+```bash
+aws cognito-idp admin-add-user-to-group \
+  --user-pool-id "$POOL" --username 'you@example.org' --group-name admins
+```
+
+Sign out and back in afterwards: the claim is stamped into the token at sign-in, so an existing
+session keeps the old, group-less one until it refreshes.
+
+**On a stage that already has an admin, do this in the same sitting as the deploy that adds the
+group** — the moment the new Lambda is live, an account outside the group is locked out of triage.
+
 ### Onboarding a manufacturer (Phase 4, by hand and on purpose)
 
 Minting a brand's credentials is the moment we decide a company speaks for a brand. That is a
-judgement, not a deploy, which is why there is no route for it — see
-[MANUFACTURER_API_PLAN.md](../MANUFACTURER_API_PLAN.md) § Open questions 2. Three steps:
+judgement, not a deploy, which is why there is no route for it. **Two commands, with your own
+verification in between.**
 
-1. **Verify who they are.** A mail from `sales@brand.com` is not proof. This is the open question;
-   until it has an answer, no brand should be onboarded.
-2. **Create the app client** in the Cognito console, in the *same* pool as the admin:
-   - **Generate a client secret: yes** (a machine can keep one; the SPA client cannot and must not).
-   - **OAuth flows: `client_credentials` only.**
-   - **Custom scope: `slackdata/gear.write`** — this requires the resource server to exist, i.e.
-     `DEPLOY_MANUFACTURER_API=true` deployed or the same resource server created by hand (see above).
-     Otherwise the scope is not there to select.
-3. **Map it to a brand**, which is what actually grants access:
+```bash
+export AWS_PROFILE=isa-slackdata
+export BRAND_CLIENTS_TABLE=slackdata-brand-clients-prod   # hosted store, not the local SQLite
 
-   ```bash
-   BRAND_CLIENTS_TABLE=slackdata-brand-clients-prod \
-     python -m slack_data.manufacturers.register \
-       --client-id '<from the console>' --brand 'Balance Community' --contact 'them@brand.com'
-   ```
+# 1. Before you reply to them: what do we already know about this brand?
+python -m slack_data.manufacturers.register --check 'Balance Community'
+```
 
-> **The one thing not to get wrong in the console.** The admin sign-in client
-> (`slackdata-admin-spa-prod`) and the brand clients live in the same user pool. Never enable
-> `client_credentials` on the SPA client, and never generate a secret for it — a browser cannot keep
-> one, and the PKCE exchange breaks outright if it has one. They are different kinds of credential
-> that happen to share a pool.
+That prints the brand's recorded website, contact email and Facebook page, whether the email is on
+the same domain as the website, and any credentials they already hold. **Now do the verification** —
+challenge an address or channel the brand controls, per the policy below. Then:
+
+```bash
+# 2. Once they have answered on a channel you chose:
+python -m slack_data.manufacturers.register --onboard \
+    --brand 'Balance Community' \
+    --verified-via 'replied to info@balancecommunity.com (manufacturers.json)'
+```
+
+That one command re-shows the dossier, asks you to confirm, and then:
+
+1. resolves the user pool **from the stack's `AdminUserPoolId` output**, never by name;
+2. creates the Cognito app client with a secret, `client_credentials` only, and exactly the
+   `slackdata/gear.write` scope;
+3. maps the client to the brand in `slackdata-brand-clients-prod` (no `--contact` — see below);
+4. mints a token and calls `GET /manufacturer/me`, failing if it does not answer with the brand you
+   named — so a credential is never handed over untested;
+5. appends the row to [onboarded-brands.md](onboarded-brands.md);
+6. writes the credential to a **0600 file under `~/.slackdata/credentials/`** and prints only the
+   path. Nothing secret reaches your terminal. Send it to the brand, point them at
+   <https://slackdata.org/for-manufacturers>, then delete the file.
+
+If any step after the app client fails, the client is **deleted again** — a half-onboarded brand
+never leaves a live credential in the pool with nothing recording that it exists.
+
+`--verified-via` is required. It is the audit trail, and a ledger you have to remember to write is
+one that is complete right up until the day it matters. `--yes` skips the confirmation prompt;
+`--no-verify` skips step 4 (only useful before the API is deployed).
+
+> **Why the console step moved into the tool.** The console picks a pool by *name*, and a failed
+> rollback can leave a second pool with the identical name behind — one did, on 2026-08-25. Choosing
+> the wrong one fails **silently**: the client is created, tokens mint, and every request 401s
+> because the API verifies against the other pool's JWKS. Resolving the pool from a stack output
+> cannot make that mistake.
+>
+> The other thing not to get wrong is still true and is now unreachable by accident: the admin
+> sign-in client (`slackdata-admin-spa-prod`) lives in the same pool and must **never** have a secret
+> or the `client_credentials` grant — a browser cannot keep a secret and PKCE breaks outright if it
+> has one. The tool only ever creates new clients; it never edits an existing one.
+
+**Registering a client you made by hand** (recovery, or a console-created client) still works —
+that is `--client-id` *without* `--onboard`:
+
+```bash
+python -m slack_data.manufacturers.register --client-id '<from the console>' --brand 'Balance Community'
+```
+
+#### Onboarding policy
+
+*Adopted 2026-08-25. Answers MANUFACTURER_API_PLAN.md § Open questions 2, which gated the phase.*
+
+We hold 76 manufacturers and expect to onboard maybe a dozen a year. The bar is therefore set at
+"a challenge only the real brand can answer", not at document checks — proportionate to a database
+of gear specifications where the worst case is a competitor filing a wrong weight, and every change
+still lands in an admin's queue as a JSON patch before it is applied.
+
+1. **Prefer a request from the brand's own domain** — the same domain as the `website` field
+   recorded for them in `manufacturers.json`. `--check` computes that comparison and shows it. Treat
+   a mismatch as a reason to look, not a reason to stop: **the recorded contact for several real
+   brands is not on their own domain** (Slack Mountain publishes `slackmountain.com@gmail.com`, Yoga
+   Slackers a gmail, Raed Slacklines an address at `raed-sports.com`), so a hard rule here would
+   refuse the genuine company. What must never be skipped is step 2 — an inbound address is a claim
+   whatever its domain, and only the out-of-band reply is confirmation.
+2. **Confirm out-of-band, to an address we already held.** 34 of the 76 entries in
+   `manufacturers.json` carry a scraped `contact_email` (`metadata.email_source` records where each
+   came from). Where one exists, reply *to that address*, not to whoever wrote in. That is what
+   turns an inbound claim into a challenge — an impostor can send us mail, but cannot read the
+   brand's.
+3. **Where we hold no contact email**, use the brand's own public contact form, or a direct message
+   to a socials account listed for them in `manufacturers.json`. Same property: we choose the
+   channel, and it is one the brand controls.
+4. **Record the decision.** `register.py --onboard` does this for you from `--verified-via`, which
+   it refuses to run without: date, brand, client id, the channel the confirmation went to, and who
+   approved it, appended to `infra/onboarded-brands.md`. If a credential is ever disputed, that row
+   is the whole audit trail — so say *which* address or channel answered, not "email".
+5. **When in doubt, do not mint.** Nothing breaks if a brand waits a week. A credential handed to
+   the wrong person writes permanent, auto-approved rows against another company's products.
+
+The person who approves is whoever holds the ISA's slackdata mailbox. This is deliberately a human
+decision with no route behind it — see MANUFACTURER_API_PLAN.md § Onboarding.
+
+#### What we store about a brand contact
+
+*Adopted 2026-08-25. Answers MANUFACTURER_API_PLAN.md § Open questions 4.*
+
+**Register the first brands with `--contact` omitted.** `contact_email` is personal data, and the
+`slackdata-brand-clients` record has no TTL (deliberately — a credential mapping that expired on its
+own would lock a brand out silently) and no `DeleteItem` grant on the Lambda role, so erasing one
+today would need an IAM change. Rather than store personal data we cannot yet delete, we do not
+store it: the field is optional, a client works with it null, and nothing in the API reads it.
+
+The onboarding correspondence lives in the mailbox and in `infra/onboarded-brands.md`, which is
+where a deletion request can actually be honoured. Revisit this if an operational need for the field
+appears — the work is a scoped `dynamodb:DeleteItem` grant plus a `--forget` flag on `register.py`,
+not a redesign.
 
 Revoking is one command and takes effect on the very next request — no redeploy, no waiting out a
 token lifetime, which is the whole reason the brand mapping lives in data rather than in a per-brand

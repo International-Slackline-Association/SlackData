@@ -130,7 +130,7 @@ def test_the_route_table_walk_actually_reaches_the_routes():
     for expected in (
         "/webbing/{webbing_id}",
         "/brand/",
-        "/submissions/",
+        "/submissions",
         "/manufacturer/gear",
     ):
         assert expected in paths, f"the route walk cannot see {expected}"
@@ -168,7 +168,7 @@ def test_submissions_are_writable_while_the_catalogue_is_not(read_only_client):
     be broken by a careless reuse of the catalogue's SessionDep.
     """
     posted = read_only_client.post(
-        "/submissions/",
+        "/submissions",
         json={"gear_type": "webbings", "gear_id": 1, "changes": {"breaking_strength": "44"}},
     )
     assert posted.status_code == 201, posted.text

@@ -653,17 +653,19 @@ def test_the_bare_discovery_call_carries_no_spec(client, gear):
 def test_include_spec_returns_the_current_values(client, gear):
     row = _one_spec_row(client, "webbings", "Mantra MK2")
     assert row["spec"]["width"] == 25
-    assert row["spec"]["name"] == "Mantra MK2"
+    # The name is on the ROW, not in the spec — it says which product this is,
+    # not what one of its specs is.
+    assert row["name"] == "Mantra MK2"
 
 
-def test_the_spec_is_exactly_the_correctable_fields(client, gear):
+def test_the_spec_is_exactly_the_fields_the_post_accepts(client, gear):
     """Symmetry with the POST, and the reason it cannot drift.
 
-    The keys are the derived `<X>Update` field list — so a field added to a
-    model becomes both correctable and visible in the same commit, and a brand
-    can round-trip the dict without filtering it.
+    The keys are the derived `<X>Update` field list less `name` — so a field
+    added to a model becomes both correctable and visible in the same commit,
+    and a brand can post the dict straight into `changes` without filtering it.
     """
-    from slack_data.submissions.fields import CORRECTABLE_FIELDS
+    from slack_data.submissions.fields import manufacturer_fields
 
     for slug in ("webbings", "weblocks"):
         rows = client.get(
@@ -671,15 +673,30 @@ def test_the_spec_is_exactly_the_correctable_fields(client, gear):
         ).json()
         assert rows
         for row in rows:
-            assert set(row["spec"]) == set(CORRECTABLE_FIELDS[slug])
+            assert set(row["spec"]) == set(manufacturer_fields(slug))
 
 
 def test_the_spec_omits_the_fields_the_post_refuses(client, gear):
     """`brand_id` and `classification` are closed on the way in, so they must not
-    appear in a payload whose whole purpose is to be edited and sent back."""
+    appear in a payload whose whole purpose is to be edited and sent back.
+
+    `name` is now in that company, for a different reason: it is the handle the
+    item is matched by, so it is readable on the row and not editable at all.
+    Holding it in both places invited a brand to edit the copy that cannot be
+    edited."""
     row = _one_spec_row(client, "webbings", "Mantra MK2")
     assert "brand_id" not in row["spec"]
     assert "classification" not in row["spec"]
+    assert "name" not in row["spec"]
+
+
+def test_the_rename_slot_sits_beside_the_name_on_the_row(client, gear):
+    """The affordance a brand reads before they read any documentation: an empty
+    `rename_to` next to the `name` it would replace, in the same position it
+    occupies on the item they post back."""
+    row = _one_spec_row(client, "webbings", "Mantra MK2")
+    assert row["name"] == "Mantra MK2"
+    assert row["rename_to"] is None
 
 
 def test_the_spec_carries_brand_name_which_is_not_a_column(client, gear):
@@ -975,6 +992,184 @@ def test_the_wire_resolution_enum_matches_the_matcher(client):
     two files; they must agree, and this is cheaper than importing one into the
     other and letting an internal state leak onto the wire."""
     assert {r.value for r in Resolution} == {r.value for r in matching.Resolution}
+
+
+# --- Renaming a product -----------------------------------------------------
+#
+# A rename is the one correction where the field being changed is also the
+# handle we match on. It travels as `changes["rename_to"]` — a key that is not a
+# model field — because `?include=spec` hands a brand a dict holding both `name`
+# and `rename_to: null`, and that dict has to stay postable verbatim.
+
+
+def test_a_rename_travels_as_rename_to(client, gear):
+    response = post(
+        client,
+        [{"gear_type": "webbings", "gear_id": gear["alpha_unique"].id,
+          "name": "Mantra MK2", "rename_to": "Mantra MK3"}],
+    )
+    assert response.status_code == 201
+
+    result = response.json()["results"][0]
+    assert result["resolution"] == Resolution.BY_ID.value
+    assert result["gear_id"] == gear["alpha_unique"].id
+    # Identity stays the name we hold; the stored patch is an ordinary field
+    # edit, because "set name" is what the admin applies to the JSON.
+    assert result["gear_name"] == "Mantra MK2"
+    assert approved(client)[0]["changes"] == {"name": "Mantra MK3"}
+
+
+def test_a_name_change_through_changes_is_refused(client, gear):
+    """`name` is not a key of `changes` at all — it is the handle the item is
+    matched by, so `?include=spec` does not hand it back and the write does not
+    take it. Refused by the model with the right key named."""
+    response = post(
+        client,
+        [{"gear_type": "webbings", "gear_id": gear["alpha_unique"].id,
+          "name": "Mantra MK2", "changes": {"name": "Mantra MK3"}}],
+    )
+    assert response.status_code == 422
+    detail = json.dumps(response.json())
+    assert "rename_to" in detail
+    assert approved(client) == []
+
+
+def test_a_null_rename_to_asks_for_no_rename(client, gear):
+    """The row hands back `rename_to: null`; posting it back must mean "no
+    rename". A real null now, not the string "null" — the reason `rename_to` is
+    a field of its own rather than a `changes` key, where every value is text."""
+    response = post(
+        client,
+        [{"gear_type": "webbings", "gear_id": gear["alpha_unique"].id,
+          "name": "Mantra MK2", "rename_to": None, "changes": {"weight": "70"}}],
+    )
+    assert response.status_code == 201
+    assert approved(client)[0]["changes"] == {"weight": "70"}
+
+
+def test_a_product_can_be_renamed_to_the_literal_word_null(client, gear):
+    """Silly, and the point. While `rename_to` rode inside `changes` its value
+    was stringified, so a JSON null and the string "null" were the same four
+    characters and one of them had to lose. A field of its own has no such
+    ambiguity."""
+    response = post(
+        client,
+        [{"gear_type": "webbings", "gear_id": gear["alpha_unique"].id,
+          "name": "Mantra MK2", "rename_to": "null"}],
+    )
+    assert response.status_code == 201
+    assert approved(client)[0]["changes"] == {"name": "null"}
+
+
+def test_a_rename_needs_no_other_change(client, gear):
+    response = post(
+        client,
+        [{"gear_type": "webbings", "gear_id": gear["alpha_unique"].id,
+          "name": "Mantra MK2", "rename_to": "Mantra MK3"}],
+    )
+    assert response.status_code == 201
+
+
+def test_a_rename_to_the_name_we_already_hold_is_dropped_not_refused(client, gear):
+    """An integration that leaves a shipped rename in its template resends it
+    forever. Under all-or-nothing, refusing it would let that one stale row
+    reject every other item in the batch."""
+    response = post(
+        client,
+        [{"gear_type": "webbings", "gear_id": gear["alpha_unique"].id,
+          "name": "Mantra MK2", "rename_to": " mantra   mk2 ", "changes": {"weight": "70"}}],
+    )
+    assert response.status_code == 201
+    assert approved(client)[0]["changes"] == {"weight": "70"}
+
+
+def test_an_item_left_with_nothing_to_say_is_refused(client, gear):
+    """Everything sent already matches what we hold, and there is no note. Storing
+    it would put a row asking for nothing in front of the admin."""
+    response = post(
+        client,
+        [{"gear_type": "webbings", "gear_id": gear["alpha_unique"].id,
+          "name": "Mantra MK2", "changes": {"rename_to": "Mantra MK2"}}],
+    )
+    assert response.status_code == 422
+    assert approved(client) == []
+
+
+def test_a_product_we_do_not_hold_cannot_be_renamed(client, gear):
+    """Nothing to rename. Recording it would queue a rename of a product that
+    does not exist."""
+    response = post(
+        client,
+        [{"gear_type": "webbings", "name": "Brand New Line",
+          "changes": {"rename_to": "Newer Line"}}],
+    )
+    assert response.status_code == 422
+    assert approved(client) == []
+
+
+def test_a_rename_is_length_capped_like_any_other_value(client, gear):
+    response = post(
+        client,
+        [{"gear_type": "webbings", "gear_id": gear["alpha_unique"].id,
+          "name": "Mantra MK2", "changes": {"rename_to": "x" * 500}}],
+    )
+    assert response.status_code == 422
+
+
+def test_rename_to_is_not_offered_to_the_public_box(client, gear):
+    """It is a manufacturer-only key. The public form matches nothing by name, so
+    it corrects `name` directly and has no business with this one."""
+    from slack_data.submissions.fields import CORRECTABLE_FIELDS, unknown_fields
+
+    assert "rename_to" not in CORRECTABLE_FIELDS["webbings"]
+    assert unknown_fields("webbings", ["rename_to"]) == ["rename_to"]
+
+
+# --- The guard: an id and a name that disagree, matching nothing -------------
+
+
+def test_the_new_name_sent_as_identity_is_refused_not_filed_as_new(client, gear):
+    """**The phantom-product path.** The brand renamed it on their side, so their
+    integration now sends the new name with our id. Both handles are good; they
+    simply disagree, and we can see exactly what they meant — so this is a 409
+    naming the fix, not a 201 filing a product we already hold as new."""
+    response = post(
+        client,
+        [{"gear_type": "webbings", "gear_id": gear["alpha_unique"].id,
+          "name": "Mantra MK3", "changes": {"weight": "70"}}],
+    )
+    assert response.status_code == 409
+
+    detail = response.json()["detail"]
+    assert "items[0]" in detail
+    assert "Mantra MK2" in detail      # what we hold
+    assert "rename_to" in detail       # what to do about it
+    assert approved(client) == []
+
+
+def test_an_unknown_id_with_an_unmatchable_name_is_refused(client, gear):
+    """The same refusal without the helpful half: we hold no such id and nothing
+    of theirs by that name. Sending no id at all is how a new product is filed,
+    and the message says so."""
+    response = post(
+        client,
+        [{"gear_type": "webbings", "gear_id": 99999, "name": "Brand New Line",
+          "changes": {"weight": "70"}}],
+    )
+    assert response.status_code == 409
+    assert "items[0]" in response.json()["detail"]
+    assert approved(client) == []
+
+
+def test_a_new_product_is_still_filed_when_no_id_is_sent(client, gear):
+    """The guard above must not close the new-product path — it only fires when
+    an id was sent, because only then is there a contradiction to report."""
+    response = post(
+        client,
+        [{"gear_type": "webbings", "name": "Brand New Line", "changes": {"weight": "70"}}],
+    )
+    assert response.status_code == 201
+    assert response.json()["results"][0]["resolution"] == Resolution.UNMATCHED.value
 
 
 # --- What gets stored -------------------------------------------------------

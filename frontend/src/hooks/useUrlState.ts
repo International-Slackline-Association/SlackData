@@ -32,11 +32,35 @@ export function useUrlState() {
   // Mirror of the latest INTENDED params. react-router does not compose rapid
   // functional setParams calls — each `prev` is the last committed location, so
   // back-to-back writes (two slider thumbs, fast typing) clobber each other.
-  // Building each mutation from this ref instead composes correctly; the effect
-  // resyncs it after every commit (covers clear-all / back-forward).
+  // Building each mutation from this ref instead composes correctly.
   const pendingRef = useRef(params)
+
+  // What we most recently asked the router for, or null once it has landed.
+  //
+  // The resync below cannot be unconditional, which is the bug this guards. A
+  // write is not applied synchronously: renders happen between `setParams` and
+  // the router committing the new location, and in those renders `params` still
+  // holds the OLD query string. Copying that back over `pendingRef` discards the
+  // write, and the *next* mutation is then built from params that never saw it —
+  // so the first of two quick writes vanishes.
+  //
+  // It cost a real failure: dragging one slider thumb and then the other fast
+  // enough dropped the first bound, and `FilterSidebar` reads a missing bound as
+  // "no constraint", so the filter silently reverted to the domain edge. It
+  // showed up as a flaky range_slider.cy.ts — flaky because it needs the two
+  // writes to land inside the same uncommitted window, which a busy machine
+  // makes far more likely than a quiet one.
+  //
+  // So: adopt `params` only when it is not our own write still in flight.
+  // External navigation (back/forward, clear-all, a link) has no pending write
+  // and is adopted immediately, which is what the resync was always for.
+  const pendingWriteRef = useRef<string | null>(null)
   useEffect(() => {
-    pendingRef.current = params
+    const landed = pendingWriteRef.current
+    if (landed === null || params.toString() === landed) {
+      pendingRef.current = params
+      pendingWriteRef.current = null
+    }
   }, [params])
 
   const q = params.get('q') ?? ''
@@ -58,6 +82,9 @@ export function useUrlState() {
       const next = new URLSearchParams(pendingRef.current)
       fn(next)
       pendingRef.current = next
+      // Recorded before the call so the effect above can tell this write's own
+      // echo from an external navigation.
+      pendingWriteRef.current = next.toString()
       setParams(next, { replace: true })
     },
     [setParams],

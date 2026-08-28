@@ -38,6 +38,26 @@ service: slackdata
 custom:
   manufacturerApi: ${env:DEPLOY_MANUFACTURER_API, 'false'}
 
+  # The Cognito group that makes a pool member an admin. Named ONCE, here, and
+  # read by both the group resource and the Lambda's environment — a literal
+  # rather than a `!Ref` to the group, because the two must be the same string
+  # and that is easier to see than it is to look up what Ref returns for a user
+  # pool group. Must match the fallback in slack_data/api/auth.py, which is what
+  # applies if this variable ever reaches the Lambda blank.
+  adminGroup: admins
+
+  # The slackdata.org certificate, resolved PER STAGE so that a non-prod
+  # template never names it at all. A CloudFormation `!If` would not achieve
+  # that: the ARN stays textually in the template even in the branch that is
+  # not taken, and CloudFormation's early-validation hook
+  # (AWS::EarlyValidation::ResourceExistenceCheck) reads it there — a us-east-1
+  # certificate referenced from a eu-central-1 stack, which fails change-set
+  # creation before a single resource is touched. Resolving it here means the
+  # staging template contains an empty string instead.
+  certByStage:
+    prod: arn:aws:acm:us-east-1:${aws:accountId}:certificate/577c4142-3d31-4229-b53f-2f89e54287da
+  certificateArn: ${self:custom.certByStage.${self:provider.stage}, ''}
+
 provider:
   name: aws
   region: ${opt:region, 'eu-central-1'}          # confirmed with the ISA (2026-08-16)
@@ -60,7 +80,16 @@ provider:
   # (no DeleteItem, no Scan, no Cognito, no `Resource: "*"`), is in
   # LAMBDA_ROLE_PERMISSIONS.md. See also LAUNCH_RUNBOOK.md §5.4.
   iam:
-    role: arn:aws:iam::${aws:accountId}:role/${self:service}-${self:provider.stage}-${aws:region}-lambdaRole
+    #
+    # **Pinned to the `prod` role on every stage**, which looks wrong and is not.
+    # This identity is denied `iam:CreateRole` (see above), so a `staging` stack
+    # cannot mint `slackdata-staging-…-lambdaRole`, and asking the ISA for a new
+    # role per throwaway stage defeats the point of having one. The role is a
+    # Lambda execution role — any function may assume it — and the only resources
+    # it grants reach `table/slackdata-*`, which covers every stage's tables by
+    # construction. A staging stack therefore shares prod's *permissions*, never
+    # prod's *data*: the table names carry the stage.
+    role: arn:aws:iam::${aws:accountId}:role/${self:service}-prod-${aws:region}-lambdaRole
   architecture: x86_64                             # matches this WSL2 build host (x86_64).
                                                    # Deploying from Apple silicon? Switch this and
                                                    # the image to arm64, or build --platform
@@ -95,6 +124,11 @@ functions:
       COGNITO_USER_POOL_ID: !Ref AdminUserPool
       COGNITO_CLIENT_ID: !Ref AdminUserPoolClient
       COGNITO_REGION: ${aws:region}
+      # Membership of this group — not mere existence in the pool — is what
+      # makes someone an admin. Named from the group resource below so the two
+      # cannot drift. Unsetting it does NOT disable the check: auth.py falls
+      # back to the same default. See slack_data/api/auth.py.
+      COGNITO_ADMIN_GROUP: ${self:custom.adminGroup}
       SUBMISSION_RETENTION_DAYS: '365'             # pending the ISA's answer
       # Read from the deployer's shell at deploy time, so the secret is never in
       # this repo. If it is unset the app fails CLOSED — `POST /submissions`
@@ -118,11 +152,21 @@ functions:
       # catch-all. They exist solely so the stage can throttle them by name:
       # route settings key on a route key, and '*' compiles to a single
       # $default route that cannot be targeted (see RouteSettings below).
-      # FastAPI 307-redirects /submissions to /submissions/, so both spellings
-      # are declared — otherwise the un-slashed one falls through to $default
-      # and is throttled at the generous global rate instead.
+      #
+      # ONE spelling, and it is the un-slashed one, because that is the only
+      # one API Gateway will accept: a route key may not end in '/' (it rejects
+      # the empty path segment with "Part of the given route key path is
+      # empty"). `POST /submissions/` is therefore unthrottleable by
+      # construction — which is why `submissions_router.py` serves the canonical
+      # path at `/submissions` and the SPA calls that. FastAPI still answers the
+      # slashed spelling via a 307, but a request that arrives that way lands on
+      # $default and pays the generous global rate.
+      #
+      # Declaring both also collided: Serverless normalises the two route keys
+      # to the same logical id (naming.js::normalizePath splits on '/', so a
+      # trailing empty segment contributes nothing), and the last declaration
+      # silently won. infra/check-routes.py now catches both faults.
       - httpApi: 'POST /submissions'
-      - httpApi: 'POST /submissions/'
       # Authenticated, but still the largest body the API accepts (256 KB) and
       # still a write. Named for the same reason: a route key is the only thing
       # RouteSettings can throttle.
@@ -135,12 +179,33 @@ resources:
     # See `custom.manufacturerApi` above. String comparison because Serverless
     # variables always resolve to strings.
     EnableManufacturerApi: !Equals ['${self:custom.manufacturerApi}', 'true']
+    # Everything that can only exist once in the account: the slackdata.org
+    # CNAMEs and the certificate issued for them. A second distribution claiming
+    # the same aliases is refused by CloudFront (CNAMEAlreadyExists), so a
+    # non-prod stage takes its default *.cloudfront.net domain instead and is
+    # reachable without touching DNS.
+    IsProd: !Equals ['${self:provider.stage}', 'prod']
 
   # Patch the stage Serverless generates, to add throttling. RouteSettings is
   # the only per-route control an HTTP API has, and there is no Serverless v3
   # syntax for it — hence the extension.
   extensions:
     HttpApiStage:
+      # RouteSettings keys on a route key, and API Gateway rejects a key whose
+      # route does not exist yet — `Unable to find Route by key POST
+      # /manufacturer/gear within the provided RouteSettings (404)`. Nothing
+      # otherwise orders the stage after the routes: they DependsOn the
+      # integration, the stage depends on neither, and on the first deploy that
+      # adds a route AND its throttle together CloudFormation is free to update
+      # the stage first. It did, 1.3s early, and the failed rollback froze the
+      # stack in UPDATE_ROLLBACK_FAILED.
+      #
+      # So: every route named in RouteSettings below must ALSO be listed here.
+      # Serverless v3 spreads this list onto the resource's own DependsOn
+      # (merge-custom-provider-resources.js — it must be a list, not a string).
+      DependsOn:
+        - HttpApiRoutePostSubmissions
+        - HttpApiRoutePostManufacturerGear
       Properties:
         DefaultRouteSettings:
           # A ceiling for the whole API so no single client can run up a bill.
@@ -160,9 +225,6 @@ resources:
           # alternative (WAF rate-based rules) is a monthly bill for a feature
           # nobody has yet abused. Revisit if it is ever actually abused.
           'POST /submissions':
-            ThrottlingRateLimit: 2
-            ThrottlingBurstLimit: 5
-          'POST /submissions/':
             ThrottlingRateLimit: 2
             ThrottlingBurstLimit: 5
           # A brand posts their whole line in one call, so the useful rate is
@@ -354,6 +416,29 @@ resources:
       DeletionPolicy: Retain
       UpdateReplacePolicy: Retain
 
+    # Being in the pool is authentication; being in this group is
+    # authorisation. Declared here rather than made by hand in the console so
+    # every stage has it, identically, and a new stage is not one forgotten
+    # click away from "any pool member is an admin".
+    #
+    # Cognito adds the group name to the `cognito:groups` claim of a member's
+    # ID token by itself, so the SPA sends nothing new for this.
+    #
+    # Adding a user to it is a separate, deliberate act:
+    #   aws cognito-idp admin-add-user-to-group --user-pool-id <pool> \
+    #       --username <email> --group-name admins
+    # Do that BEFORE deploying this to a stage that already has an admin, or
+    # the deploy locks them out of triage.
+    AdminUserPoolGroup:
+      Type: AWS::Cognito::UserPoolGroup
+      Properties:
+        GroupName: ${self:custom.adminGroup}
+        UserPoolId: !Ref AdminUserPool
+        Description: May triage submissions — read, approve, reject, mark handled.
+      # No Retain: the group holds no data. Its memberships live on the pool,
+      # which is retained, and re-creating the group does not restore them —
+      # which is exactly why deleting it is not something to do casually.
+
     AdminUserPoolClient:
       Type: AWS::Cognito::UserPoolClient
       Properties:
@@ -370,12 +455,31 @@ resources:
           - email
         SupportedIdentityProviders:
           - COGNITO
-        CallbackURLs:
-          - https://slackdata.org/admin
-          - http://localhost:5173/admin            # local dev against the real pool
-        LogoutURLs:
-          - https://slackdata.org/
-          - http://localhost:5173/
+        # Cognito matches these exactly — no wildcards — so they have to name the
+        # domain this stage is actually served from. On a non-prod stage that is
+        # the distribution's own CloudFront name, which is why this reads its
+        # domain rather than repeating a literal.
+        # BOTH hostnames, because the distribution answers on both. The
+        # Aliases below list slackdata.org AND www.slackdata.org, and www is
+        # served directly rather than redirected — so a visitor who reaches
+        # /admin via www sends redirect_uri=https://www.slackdata.org/admin and
+        # Cognito answers `redirect_mismatch`, which reads as a broken login
+        # rather than a missing entry in this list. Listing only the apex means
+        # login works or not depending on how the user typed the domain.
+        CallbackURLs: !If
+          - IsProd
+          - - https://slackdata.org/admin
+            - https://www.slackdata.org/admin
+            - http://localhost:5173/admin          # local dev against the real pool
+          - - !Sub 'https://${Cdn.DomainName}/admin'
+            - http://localhost:5173/admin
+        LogoutURLs: !If
+          - IsProd
+          - - https://slackdata.org/
+            - https://www.slackdata.org/
+            - http://localhost:5173/
+          - - !Sub 'https://${Cdn.DomainName}/'
+            - http://localhost:5173/
         # The API verifies the ID token; refresh keeps a triage session alive.
         ExplicitAuthFlows:
           - ALLOW_REFRESH_TOKEN_AUTH
@@ -544,10 +648,22 @@ resources:
       Properties:
         OriginRequestPolicyConfig:
           Name: ${self:service}-api-origin-req-${self:provider.stage}
-          Comment: All query strings + CloudFront-Viewer-Country; no Host, no cookies
+          Comment: Authorization + all query strings + Viewer-Country; no Host, no cookies
           HeadersConfig:
             HeaderBehavior: whitelist
             Headers:
+              # Without this, CloudFront strips Authorization and every
+              # authenticated call reaches the API anonymous — admin triage and
+              # the whole manufacturer API answer 401 "authentication required"
+              # while the token is perfectly valid. The failure names the
+              # caller, not the CDN, so it reads as a broken login.
+              #
+              # Safe to forward only because /api/* uses Managed-CachingDisabled
+              # (see the Cdn behaviour below). Forwarding an auth header through
+              # a CACHING behaviour would let one user's authenticated response
+              # be served to another; if that cache policy ever changes, this
+              # header must be in the cache key or this line must go.
+              - Authorization
               - CloudFront-Viewer-Country
           CookiesConfig:
             CookieBehavior: none
@@ -566,13 +682,21 @@ resources:
           # for the apex + www and validated through the slackdata.org hosted zone
           # in this account. The ARN is built from ${aws:accountId} rather than
           # written out, to keep the account id out of this public repo.
-          Aliases:
-            - slackdata.org
-            - www.slackdata.org
-          ViewerCertificate:
-            AcmCertificateArn: arn:aws:acm:us-east-1:${aws:accountId}:certificate/577c4142-3d31-4229-b53f-2f89e54287da
-            SslSupportMethod: sni-only
-            MinimumProtocolVersion: TLSv1.2_2021
+          #
+          # Prod only. Omitted on other stages, where CloudFront serves its own
+          # *.cloudfront.net name under the default certificate — which is what
+          # makes a staging stack deployable at all, since these CNAMEs and this
+          # certificate can belong to exactly one distribution.
+          Aliases: !If
+            - IsProd
+            - [slackdata.org, www.slackdata.org]
+            - !Ref 'AWS::NoValue'
+          ViewerCertificate: !If
+            - IsProd
+            - AcmCertificateArn: ${self:custom.certificateArn}
+              SslSupportMethod: sni-only
+              MinimumProtocolVersion: TLSv1.2_2021
+            - !Ref 'AWS::NoValue'
           Origins:
             - Id: web-s3
               DomainName: !GetAtt WebBucket.RegionalDomainName
@@ -623,6 +747,8 @@ resources:
       Value: !Ref AdminUserPool
     AdminUserPoolClientId:
       Value: !Ref AdminUserPoolClient
+    AdminUserPoolGroupName:
+      Value: ${self:custom.adminGroup}
     AdminLoginDomain:
       Value: !Sub '${AdminUserPoolDomain}.auth.${AWS::Region}.amazoncognito.com'
     SubmissionsTableName:

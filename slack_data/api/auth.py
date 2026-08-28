@@ -9,7 +9,7 @@ Three modes, chosen by configuration:
 
 | condition | behaviour |
 |---|---|
-| `COGNITO_USER_POOL_ID` set | verify the Cognito ID token: RS256 against the pool's JWKS, plus `iss`, `aud`, `exp` and `token_use`. |
+| `COGNITO_USER_POOL_ID` set | verify the Cognito ID token: RS256 against the pool's JWKS, plus `iss`, `aud`, `exp`, `token_use` — **and membership of the admin group**. |
 | unset, but `READ_ONLY` (hosted) | **reject everything.** A hosted deploy that lost its pool configuration must not fall back to anything. |
 | unset, local dev | accept a static bearer token (`ADMIN_DEV_TOKEN`), so `fastapi dev` and Cypress work with no AWS account. |
 
@@ -22,6 +22,25 @@ asserts it.
 The JWKS cache is a module-level dict with a TTL, the same pattern (and for the
 same reason) as `slack_data/utilities/fx.py`: Lambda's filesystem is read-only,
 so a module global is the only cache available.
+
+## Authentic is not the same as authorised
+
+Verifying a token proves the pool signed it for our app client. It does not say
+the holder may triage submissions. Without a second check the security boundary
+would be "exists in the pool" — so anyone added to it for any other reason, ever,
+would silently gain read access to every correction the public has submitted plus
+the ability to approve, reject and close them.
+
+So an ID token must also carry `COGNITO_ADMIN_GROUP` in its `cognito:groups`
+claim. Cognito populates that claim itself for group members, so the SPA sends
+nothing new.
+
+**The guard cannot be switched off by configuration.** `COGNITO_ADMIN_GROUP`
+names the group, and an unset *or blank* value falls back to `admins` rather
+than to "no group required". A guard that disables itself when a variable goes
+missing is worse than no guard, because it still reads as protection —
+`utilities/turnstile.py` fails closed for the same reason, and so does the row
+above it in that table. Removing the check is a code change, deliberately.
 
 ## Two verifiers, not one loosened verifier
 
@@ -64,6 +83,12 @@ COGNITO_REGION = os.getenv("COGNITO_REGION", os.getenv("AWS_REGION", "eu-central
 # and the Cypress suite working with no setup, and is safe precisely because the
 # branch that reads it cannot execute in a hosted deploy.
 ADMIN_DEV_TOKEN = os.getenv("ADMIN_DEV_TOKEN", "dev-admin-token")
+
+# The Cognito group an ID token must belong to. Not a `getenv` default: a blank
+# or whitespace value — an unset shell variable expanded into the Lambda
+# environment, say — must land on the group name too, never on "no group
+# required". There is deliberately no value that turns the check off.
+COGNITO_ADMIN_GROUP = (os.getenv("COGNITO_ADMIN_GROUP") or "").strip() or "admins"
 
 # The scope the manufacturer resource server declares. A brand's token must
 # carry it — an access token from the same pool with any other scope (a future
@@ -130,7 +155,11 @@ def signing_key(kid: str) -> jwt.PyJWK:
 
 
 def verify_cognito_token(token: str) -> dict:
-    """Decode and fully verify a Cognito **ID** token. Raises 401 otherwise."""
+    """Decode and fully verify a Cognito **ID** token, and require the admin group.
+
+    401 if the token is not a valid ID token from our pool; 403 if it is, but
+    the holder is not in `COGNITO_ADMIN_GROUP`.
+    """
     try:
         header = jwt.get_unverified_header(token)
     except jwt.PyJWTError as error:
@@ -161,6 +190,19 @@ def verify_cognito_token(token: str) -> dict:
     if claims.get("token_use") != "id":
         raise _unauthorized("expected an id token")
 
+    # Authorisation, not authenticity — see the module docstring. A token with
+    # no `cognito:groups` claim at all is the common case (any pool member who
+    # was never put in a group) and is rejected by the same expression.
+    groups = claims.get("cognito:groups") or []
+    if COGNITO_ADMIN_GROUP not in groups:
+        # 403, not 401: the token is genuine and signing in again produces an
+        # identical one. Nothing is wrong with the credential — the person
+        # simply is not an admin.
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="this account is not an admin",
+        )
+
     return claims
 
 
@@ -186,7 +228,12 @@ def require_admin(
 
     if token != ADMIN_DEV_TOKEN:
         raise _unauthorized("invalid dev admin token")
-    return {"sub": "dev-admin", "token_use": "id", "dev": True}
+    return {
+        "sub": "dev-admin",
+        "token_use": "id",
+        "cognito:groups": [COGNITO_ADMIN_GROUP],
+        "dev": True,
+    }
 
 
 def _hosted() -> bool:

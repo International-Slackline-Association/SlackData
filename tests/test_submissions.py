@@ -52,11 +52,11 @@ NEW_ITEM = {
 
 
 def submit(client, **overrides):
-    return client.post("/submissions/", json={**CORRECTION, **overrides})
+    return client.post("/submissions", json={**CORRECTION, **overrides})
 
 
 def pending(client):
-    return client.get("/submissions/", headers=ADMIN).json()
+    return client.get("/submissions", headers=ADMIN).json()
 
 
 # --- The happy path ---------------------------------------------------------
@@ -78,7 +78,7 @@ def test_a_correction_is_accepted_and_appears_in_triage(client):
 
 
 def test_a_new_item_tip_is_accepted(client):
-    assert client.post("/submissions/", json=NEW_ITEM).status_code == 201
+    assert client.post("/submissions", json=NEW_ITEM).status_code == 201
     assert pending(client)[0]["kind"] == "new_item"
 
 
@@ -271,12 +271,12 @@ def test_a_correction_must_name_the_item_it_corrects(client):
 
 def test_a_new_item_cannot_claim_an_existing_id(client):
     """Otherwise it reads as a correction to whatever row holds that id."""
-    response = client.post("/submissions/", json={**NEW_ITEM, "gear_id": 12})
+    response = client.post("/submissions", json={**NEW_ITEM, "gear_id": 12})
     assert response.status_code == 422
 
 
 def test_a_new_item_needs_a_name(client):
-    response = client.post("/submissions/", json={**NEW_ITEM, "gear_name": ""})
+    response = client.post("/submissions", json={**NEW_ITEM, "gear_name": ""})
     assert response.status_code == 422
 
 
@@ -320,7 +320,7 @@ def test_too_many_changed_fields_are_rejected(client):
     assert len(names) == MAX_CHANGES + 1, "weblocks must have enough fields to exceed the cap"
 
     response = client.post(
-        "/submissions/",
+        "/submissions",
         json={
             "gear_type": "weblocks",
             "gear_id": 3,
@@ -333,7 +333,7 @@ def test_too_many_changed_fields_are_rejected(client):
     # ...and the boundary itself is allowed.
     assert (
         client.post(
-            "/submissions/",
+            "/submissions",
             json={
                 "gear_type": "weblocks",
                 "gear_id": 3,
@@ -356,7 +356,7 @@ def test_an_overlong_note_is_rejected(client):
 def test_an_oversized_body_is_rejected_before_it_is_read(client):
     """A 413 on Content-Length, so the payload never costs us anything."""
     response = client.post(
-        "/submissions/",
+        "/submissions",
         content=b'{"gear_type": "webbings", "padding": "' + b"x" * 20_000 + b'"}',
         headers={"Content-Type": "application/json"},
     )
@@ -575,9 +575,9 @@ def test_submissions_never_touch_the_catalogue_session(submissions):
     app.dependency_overrides[get_repository] = lambda: submissions
 
     with TestClient(app) as unwired:
-        created = unwired.post("/submissions/", json=CORRECTION)
+        created = unwired.post("/submissions", json=CORRECTION)
         assert created.status_code == 201
-        assert unwired.get("/submissions/", headers=ADMIN).status_code == 200
+        assert unwired.get("/submissions", headers=ADMIN).status_code == 200
         assert (
             unwired.patch(
                 f"/submissions/{created.json()['submission_id']}",
@@ -594,8 +594,8 @@ def test_submissions_stay_mounted_when_the_catalogue_is_read_only(read_only_clie
     It writes to DynamoDB, a different store entirely — see
     slack_data/api/routing.py § WRITABLE_ROUTERS.
     """
-    assert read_only_client.post("/submissions/", json=CORRECTION).status_code == 201
-    assert read_only_client.get("/submissions/", headers=ADMIN).status_code == 200
+    assert read_only_client.post("/submissions", json=CORRECTION).status_code == 201
+    assert read_only_client.get("/submissions", headers=ADMIN).status_code == 200
     # ...while the catalogue write next door is still gone.
     assert read_only_client.delete("/webbing/1").status_code == 405
 
@@ -603,7 +603,7 @@ def test_submissions_stay_mounted_when_the_catalogue_is_read_only(read_only_clie
 def test_submissions_are_in_the_openapi_schema_when_hosted(read_only_client):
     """The public POST is a documented route; the read-only filter must spare it."""
     paths = read_only_client.get("/openapi.json").json()["paths"]
-    assert "post" in paths["/submissions/"]
+    assert "post" in paths["/submissions"]
     assert "patch" in paths["/submissions/{submission_id}"]
 
 
