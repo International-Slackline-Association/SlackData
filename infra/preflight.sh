@@ -62,8 +62,60 @@ ENV_FILE="../frontend/.env.production"
 FILE_SITE_KEY="$(grep -E '^VITE_TURNSTILE_SITE_KEY=' "$ENV_FILE" 2>/dev/null | cut -d= -f2-)"
 SITE_KEY="${TURNSTILE_SITE_KEY:-$FILE_SITE_KEY}"
 
-if [ -n "${TURNSTILE_SECRET:-}" ] && [ -n "$SITE_KEY" ]; then
-  ok "both halves present — the suggestion form will render AND be accepted"
+# Shape, before pairing. "Set" is not "valid": on 2026-08-28 a documented
+# command was pasted with its own placeholder still in it, and
+# TURNSTILE_SECRET='<your real secret>' deployed clean. Every check here passed
+# — both halves were present and agreed — and the result would have been THE BAD
+# ONE anyway: the form renders, Cloudflare answers invalid-input-secret, and
+# every real submission 400s. A pairing check cannot see that; only the shape
+# can. Cloudflare keys are `0x` followed by 30+ URL-safe characters.
+# A LIVE key is `0x` + 30 or more URL-safe characters. Cloudflare's published
+# DUMMY keys are `1x`/`2x`/`3x` followed by zeros — they are valid and useful
+# (staging used them to prove the plumbing), but the 1x pair accepts ANY token,
+# so shipping them is shipping no captcha at all. Allowed, and always said out
+# loud. Anything matching neither shape is a paste accident.
+# The two halves are NOT the same length — the site key is the shorter one
+# (0x + ~22) and the secret is longer (0x + ~33). A single threshold tuned to
+# the secret rejects a perfectly good site key, so they get their own minimums.
+LIVE_SITE_RE='^0x[0-9A-Za-z_-]{18,}$'
+LIVE_SECRET_RE='^0x[0-9A-Za-z_-]{28,}$'
+TEST_RE='^[123]x0{20,}[0-9A-Za-z]*$'
+SHAPE_BAD=0
+IS_TEST=0
+
+check_shape() {  # $1 = label, $2 = value, $3 = 1 to echo the value, $4 = live regex
+  local label="$1" value="$2" public="$3" live_re="$4"
+  if printf '%s' "$value" | grep -qE "$live_re"; then
+    return 0
+  elif printf '%s' "$value" | grep -qE "$TEST_RE"; then
+    IS_TEST=1
+    return 0
+  fi
+  if [ "$public" = "1" ]; then
+    bad "the Turnstile $label does not look like a Cloudflare key: '$value'
+      Expected 0x + 18 or more characters (live), or a 1x/2x/3x dummy key."
+  else
+    bad "the Turnstile $label does not look like a Cloudflare key (expected 0x +
+      28 or more characters; got ${#value}). A placeholder or truncated paste
+      deploys perfectly and then rejects every submission — this exact check
+      exists because TURNSTILE_SECRET='<your real secret>' once shipped clean.
+      The value is NOT printed here; check it in your shell."
+  fi
+  SHAPE_BAD=1
+}
+
+[ -n "${TURNSTILE_SECRET:-}" ] && check_shape "SECRET" "$TURNSTILE_SECRET" 0 "$LIVE_SECRET_RE"
+[ -n "$SITE_KEY" ]             && check_shape "SITE key" "$SITE_KEY" 1 "$LIVE_SITE_RE"
+
+if [ "$IS_TEST" = "1" ] && [ "$SHAPE_BAD" = "0" ]; then
+  warn "these are Cloudflare TEST keys. The 1x pair accepts any token, so the
+      form works end to end and blocks nothing. Fine for staging; never prod."
+fi
+
+if [ "$SHAPE_BAD" = "1" ]; then
+  :   # already reported; do not also claim the halves agree
+elif [ -n "${TURNSTILE_SECRET:-}" ] && [ -n "$SITE_KEY" ]; then
+  ok "both halves present and well-formed — the form will render AND be accepted"
 elif [ -n "${TURNSTILE_SECRET:-}" ] && [ -z "$SITE_KEY" ]; then
   warn "TURNSTILE_SECRET is set but there is no site key. The API will accept
       submissions, but the form is not rendered (and is tree-shaken out), so
