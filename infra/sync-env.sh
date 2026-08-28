@@ -93,12 +93,30 @@ if [ -n "${TURNSTILE_SITE_KEY:-}" ]; then
 else
   SITE_KEY="$(grep -E '^VITE_TURNSTILE_SITE_KEY=' "$ENV_FILE" | cut -d= -f2-)"
   if [ -n "$SITE_KEY" ] && [ -z "${TURNSTILE_SECRET:-}" ]; then
-    echo
-    echo "  ✗ $ENV_FILE already carries a site key, but TURNSTILE_SECRET is not set"
-    echo "    in this shell. If half A was just deployed from here, the API now has"
-    echo "    NO secret and will 503 every submission the form sends."
-    echo "    Export TURNSTILE_SECRET and redeploy half A, or clear the site key."
-    exit 1
+    # An empty shell is not evidence the API has no secret — it is only evidence
+    # that THIS shell did not deploy half A. Someone else's did, or an earlier
+    # one, and refusing on that basis blocks a correct deploy while a genuinely
+    # broken one that happens to export the variable sails through. So ask the
+    # deployed function what it actually holds. The shell stays the fallback for
+    # when the answer cannot be fetched (no credentials, function not yet
+    # created), because failing closed is the whole point of this check.
+    DEPLOYED_SECRET="$(aws lambda get-function-configuration \
+        --function-name "slackdata-${STAGE}-api" --region "$REGION" \
+        --query 'Environment.Variables.TURNSTILE_SECRET' --output text 2>/dev/null || true)"
+    case "$DEPLOYED_SECRET" in
+      0x????????????????????????????*)
+        echo "  ✓ TURNSTILE_SECRET is not in this shell, but slackdata-${STAGE}-api"
+        echo "    already carries a well-formed one — half A was deployed elsewhere."
+        ;;
+      *)
+        echo
+        echo "  ✗ $ENV_FILE carries a site key, but no usable TURNSTILE_SECRET was"
+        echo "    found in this shell OR on slackdata-${STAGE}-api. The form would"
+        echo "    render and the API would reject every submission it sends."
+        echo "    Export TURNSTILE_SECRET and redeploy half A, or clear the site key."
+        exit 1
+        ;;
+    esac
   fi
   if [ -z "$SITE_KEY" ]; then
     echo
