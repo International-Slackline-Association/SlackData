@@ -474,6 +474,22 @@ Cognito emails a temporary password; the first login forces a change. Turn on MF
 login page — the pool allows it (`OPTIONAL` + TOTP) and this is the account that can read everything
 the public has submitted.
 
+**Then put the user in the admin group — being in the pool is not being an admin.** The API requires
+`COGNITO_ADMIN_GROUP` (default `admins`, created by the template as `AdminUserPoolGroup`) in the ID
+token's `cognito:groups` claim; without it every triage route answers 403. Cognito adds the claim
+itself, so the SPA needs nothing.
+
+```bash
+aws cognito-idp admin-add-user-to-group \
+  --user-pool-id "$POOL" --username 'you@example.org' --group-name admins
+```
+
+Sign out and back in afterwards: the claim is stamped into the token at sign-in, so an existing
+session keeps the old, group-less one until it refreshes.
+
+**On a stage that already has an admin, do this in the same sitting as the deploy that adds the
+group** — the moment the new Lambda is live, an account outside the group is locked out of triage.
+
 ### Onboarding a manufacturer (Phase 4, by hand and on purpose)
 
 Minting a brand's credentials is the moment we decide a company speaks for a brand. That is a

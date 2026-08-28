@@ -38,6 +38,14 @@ service: slackdata
 custom:
   manufacturerApi: ${env:DEPLOY_MANUFACTURER_API, 'false'}
 
+  # The Cognito group that makes a pool member an admin. Named ONCE, here, and
+  # read by both the group resource and the Lambda's environment — a literal
+  # rather than a `!Ref` to the group, because the two must be the same string
+  # and that is easier to see than it is to look up what Ref returns for a user
+  # pool group. Must match the fallback in slack_data/api/auth.py, which is what
+  # applies if this variable ever reaches the Lambda blank.
+  adminGroup: admins
+
   # The slackdata.org certificate, resolved PER STAGE so that a non-prod
   # template never names it at all. A CloudFormation `!If` would not achieve
   # that: the ARN stays textually in the template even in the branch that is
@@ -116,6 +124,11 @@ functions:
       COGNITO_USER_POOL_ID: !Ref AdminUserPool
       COGNITO_CLIENT_ID: !Ref AdminUserPoolClient
       COGNITO_REGION: ${aws:region}
+      # Membership of this group — not mere existence in the pool — is what
+      # makes someone an admin. Named from the group resource below so the two
+      # cannot drift. Unsetting it does NOT disable the check: auth.py falls
+      # back to the same default. See slack_data/api/auth.py.
+      COGNITO_ADMIN_GROUP: ${self:custom.adminGroup}
       SUBMISSION_RETENTION_DAYS: '365'             # pending the ISA's answer
       # Read from the deployer's shell at deploy time, so the secret is never in
       # this repo. If it is unset the app fails CLOSED — `POST /submissions`
@@ -402,6 +415,29 @@ resources:
       # triage, and it holds a real person's credentials.
       DeletionPolicy: Retain
       UpdateReplacePolicy: Retain
+
+    # Being in the pool is authentication; being in this group is
+    # authorisation. Declared here rather than made by hand in the console so
+    # every stage has it, identically, and a new stage is not one forgotten
+    # click away from "any pool member is an admin".
+    #
+    # Cognito adds the group name to the `cognito:groups` claim of a member's
+    # ID token by itself, so the SPA sends nothing new for this.
+    #
+    # Adding a user to it is a separate, deliberate act:
+    #   aws cognito-idp admin-add-user-to-group --user-pool-id <pool> \
+    #       --username <email> --group-name admins
+    # Do that BEFORE deploying this to a stage that already has an admin, or
+    # the deploy locks them out of triage.
+    AdminUserPoolGroup:
+      Type: AWS::Cognito::UserPoolGroup
+      Properties:
+        GroupName: ${self:custom.adminGroup}
+        UserPoolId: !Ref AdminUserPool
+        Description: May triage submissions — read, approve, reject, mark handled.
+      # No Retain: the group holds no data. Its memberships live on the pool,
+      # which is retained, and re-creating the group does not restore them —
+      # which is exactly why deleting it is not something to do casually.
 
     AdminUserPoolClient:
       Type: AWS::Cognito::UserPoolClient
@@ -702,6 +738,8 @@ resources:
       Value: !Ref AdminUserPool
     AdminUserPoolClientId:
       Value: !Ref AdminUserPoolClient
+    AdminUserPoolGroupName:
+      Value: ${self:custom.adminGroup}
     AdminLoginDomain:
       Value: !Sub '${AdminUserPoolDomain}.auth.${AWS::Region}.amazoncognito.com'
     SubmissionsTableName:

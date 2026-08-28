@@ -14,8 +14,11 @@ at `verify_cognito_token` — which would test nothing, since that function *is*
 the security boundary.
 """
 
+import importlib
 import json
+import os
 import time
+from unittest import mock
 
 import jwt
 import pytest
@@ -149,10 +152,17 @@ def cognito(monkeypatch):
             "aud": "test-client-id",
             "iss": auth.issuer(),
             "token_use": "id",
+            # Cognito puts this on a group member's ID token by itself.
+            "cognito:groups": [auth.COGNITO_ADMIN_GROUP],
             "exp": int(time.time()) + 3600,
             "iat": int(time.time()),
-            **overrides,
+            **{k.replace("_", ":", 1) if k.startswith("cognito_") else k: v
+               for k, v in overrides.items()},
         }
+        # An override of None DROPS the claim — the only way to build the token
+        # of a pool member who was never put in any group, which is the exact
+        # shape this codebase accepted before the group check existed.
+        claims = {k: v for k, v in claims.items() if v is not None}
         return jwt.encode(claims, key, algorithm="RS256", headers={"kid": kid})
 
     return token
@@ -184,6 +194,86 @@ def test_bad_claims_are_rejected(client, cognito, overrides, reason):
         "/submissions/", headers={"Authorization": f"Bearer {cognito(**overrides)}"}
     )
     assert response.status_code == 401, reason
+
+
+# --- Authentic is not authorised: the admin group ---------------------------
+
+
+def test_a_pool_member_with_no_groups_claim_is_rejected(client, cognito):
+    """The one that matters: this is precisely what used to be accepted.
+
+    A valid, unexpired, correctly-audienced ID token from our own pool, for a
+    user who is simply not in the admin group — which, before the group check,
+    was every user in the pool.
+    """
+    response = client.get(
+        "/submissions/",
+        headers={"Authorization": f"Bearer {cognito(cognito_groups=None)}"},
+    )
+    assert response.status_code == 403
+
+
+def test_a_member_of_other_groups_only_is_rejected(client, cognito):
+    response = client.get(
+        "/submissions/",
+        headers={
+            "Authorization": f"Bearer {cognito(cognito_groups=['readers', 'brands'])}"
+        },
+    )
+    assert response.status_code == 403
+
+
+def test_a_member_of_the_admin_group_is_accepted(client, cognito):
+    response = client.get(
+        "/submissions/",
+        headers={
+            "Authorization": f"Bearer {cognito(cognito_groups=[auth.COGNITO_ADMIN_GROUP])}"
+        },
+    )
+    assert response.status_code == 200
+
+
+def test_the_group_name_is_configurable(client, cognito, monkeypatch):
+    monkeypatch.setattr(auth, "COGNITO_ADMIN_GROUP", "triagers")
+    assert (
+        client.get(
+            "/submissions/",
+            headers={"Authorization": f"Bearer {cognito(cognito_groups=['admins'])}"},
+        ).status_code
+        == 403
+    )
+    assert (
+        client.get(
+            "/submissions/",
+            headers={"Authorization": f"Bearer {cognito(cognito_groups=['triagers'])}"},
+        ).status_code
+        == 200
+    )
+
+
+def test_a_blank_group_setting_does_not_disable_the_check():
+    """Fail closed. A guard that switches itself off when a variable goes
+    missing is worse than no guard, because it still reads as protection.
+
+    Loaded as a *separate* module object rather than reloaded in place, so
+    prodding the environment cannot leave the shared `auth` other tests import
+    holding a different group name.
+    """
+    for environment in ({}, {"COGNITO_ADMIN_GROUP": ""}, {"COGNITO_ADMIN_GROUP": "  "}):
+        base = {k: v for k, v in os.environ.items() if k != "COGNITO_ADMIN_GROUP"}
+        with mock.patch.dict(os.environ, {**base, **environment}, clear=True):
+            spec = importlib.util.find_spec("slack_data.api.auth")
+            fresh = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(fresh)
+            assert fresh.COGNITO_ADMIN_GROUP == "admins"
+
+
+def test_the_group_is_declared_in_the_template_not_made_by_hand():
+    """A stage created later must not be one forgotten console click away from
+    'any pool member is an admin'."""
+    template = open("infra/serverless.yml").read()
+    assert "AWS::Cognito::UserPoolGroup" in template
+    assert "COGNITO_ADMIN_GROUP" in template
 
 
 def test_a_token_signed_by_a_different_key_is_rejected(client, cognito):
