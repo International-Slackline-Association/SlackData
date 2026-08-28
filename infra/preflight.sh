@@ -20,6 +20,13 @@
 # - Manufacturer API flag   -> off by default, but the permission it needed is
 #                              confirmed (2026-08-24), so it SHOULD be on. Off
 #                              means shipping Phase 4 dormant for no reason.
+# - Orphaned retained table -> a DeletionPolicy: Retain resource that exists in
+#                              the account but not in the stack. Every later
+#                              deploy is then rejected at CHANGE SET creation by
+#                              AWS::EarlyValidation::ResourceExistenceCheck,
+#                              which names no resource and writes no stack event
+#                              — hours to diagnose cold. See README § Retained
+#                              resources and the orphan trap.
 #
 # Exits non-zero if anything is a hard problem, so it can gate a deploy. Warnings
 # alone exit 0.
@@ -129,6 +136,52 @@ if command -v aws >/dev/null 2>&1; then
   fi
 else
   bad "the aws CLI is not on PATH"
+fi
+
+echo
+echo "Retained resources are stack-managed (the orphan trap)"
+#
+# SubmissionsTable, BrandClientsTable and AdminUserPool are DeletionPolicy:
+# Retain, correctly — each holds something git cannot regenerate. The cost is
+# that a stack update which CREATES one and then fails for any unrelated reason
+# rolls back everything else and leaves that resource standing, orphaned. The
+# next deploy tries to create a table name that is already taken and is refused
+# before a single resource is touched, with an error that names nothing.
+#
+# Only the DynamoDB tables can spring it: their names are account-unique. A
+# user pool's name is not, so a retained pool causes no conflict (it strands the
+# admin account instead, which is a data problem, not a deploy one).
+#
+# This is a live check — skipped, not failed, without AWS access, so preflight
+# still runs offline.
+STACK="slackdata-${STAGE}"
+if command -v aws >/dev/null 2>&1 && [ -n "${ACCOUNT:-}" ] && [ "${ACCOUNT:-None}" != "None" ]; then
+  # Names come from the template, so renaming a table cannot leave this checking
+  # the old one.
+  for pair in "SubmissionsTable:submissions" "BrandClientsTable:brand-clients"; do
+    LOGICAL="${pair%%:*}"
+    TABLE="slackdata-${pair##*:}-${STAGE}"
+
+    if ! aws dynamodb describe-table --table-name "$TABLE" >/dev/null 2>&1; then
+      ok "$TABLE does not exist yet — nothing to orphan (expected before the first deploy)"
+      continue
+    fi
+
+    if aws cloudformation describe-stack-resource \
+         --stack-name "$STACK" --logical-resource-id "$LOGICAL" >/dev/null 2>&1; then
+      ok "$TABLE exists and is managed by $STACK"
+    else
+      bad "ORPHAN: $TABLE exists in this account but is NOT in $STACK.
+      Every deploy from here is rejected at change-set creation by
+      AWS::EarlyValidation::ResourceExistenceCheck — no stack events, no resource
+      named, nothing to read. Do NOT delete the table to unblock it; it may hold
+      real submissions or every brand credential mapping.
+      Import it back into the stack instead: README § Retained resources and the
+      orphan trap."
+    fi
+  done
+else
+  warn "skipped — no AWS access. This check needs the account to compare against."
 fi
 
 echo

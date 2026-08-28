@@ -367,6 +367,113 @@ Neither is a security control — the server enforces both independently (`utili
 fails closed, `api/auth.py` rejects the dev token whenever a pool is configured). They exist so a
 half-finished deploy looks unfinished rather than broken.
 
+### Retained resources and the orphan trap
+
+Three resources carry `DeletionPolicy: Retain` and `UpdateReplacePolicy: Retain`, because each holds
+something git cannot regenerate:
+
+| Resource | What is lost without it |
+|---|---|
+| `SubmissionsTable` | what the public typed — corrections and tips |
+| `BrandClientsTable` | every brand credential mapping |
+| `AdminUserPool` | a real person's login, and their MFA enrolment |
+
+Those policies are right and should stay. **The trap is their consequence.** If a stack update
+creates one of them and then fails for any unrelated reason, the rollback deletes everything else and
+leaves that resource standing, orphaned from the stack. Every deploy after that tries to create a
+resource whose name is already taken, and CloudFormation refuses the change set before touching a
+single resource.
+
+Only the two DynamoDB tables can actually spring it — their names are account-unique. A retained user
+pool collides with nothing (pool names need not be unique); it strands the admin account instead,
+which is a data problem rather than a deploy one.
+
+**This already happened on staging, exactly this way.** The first staging deploy failed on an
+unrelated route-key bug (§ the route/throttle invariant). The rollback retained both tables. The next
+three deploys failed at change-set creation, and were only recoverable because the tables were empty
+and could be deleted. **On prod that escape does not exist**: the submissions table may hold real
+public submissions, so deleting it to unblock a deploy is not an option.
+
+#### Why it is hard to diagnose cold
+
+The error tells you to use the `DescribeEvents` API — but a change-set *creation* failure produces no
+stack events at all, because the stack never enters an update. `describe-change-set-hooks` returns an
+empty list. You get the hook's name (`AWS::EarlyValidation::ResourceExistenceCheck`) and no
+indication of which resource it objected to.
+
+On staging this was resolved by bisecting the template: computing each resource's transitive
+`Ref`/`GetAtt`/`DependsOn` closure, building a minimal valid template around it, and creating a
+throwaway change set per resource until the offending ones named themselves. Budget for that if you
+meet it without this section.
+
+#### Prevention — do this, rather than the recovery below
+
+The trap only springs when a retained resource is created by a deploy that later fails. So create
+them in a deploy that does nothing else and can barely fail:
+
+```bash
+# 0. Both of the checks for the defect class that caused the staging failure.
+cd infra && ./preflight.sh --stage prod && python3 ./check-routes.py
+
+# 1. The retained resources ALONE, with the rest of Phase 2/4 still off.
+#    Small, isolated, nothing to conflict with.
+npx serverless deploy --stage prod
+
+# 2. Confirm all three are CREATE_COMPLETE and stack-managed before going on.
+aws cloudformation describe-stack-resources --stack-name slackdata-prod \
+  --query "StackResources[?LogicalResourceId=='SubmissionsTable' ||
+                           LogicalResourceId=='BrandClientsTable' ||
+                           LogicalResourceId=='AdminUserPool'].[LogicalResourceId,ResourceStatus]" \
+  --output table
+
+# 3. Then deploy the remainder normally. A failure from here is safe: the
+#    resources already exist IN the stack, so a rollback has no reason to
+#    re-create them and no reason to orphan them.
+DEPLOY_MANUFACTURER_API=true npx serverless deploy --stage prod
+```
+
+`preflight.sh` also checks the orphan condition itself on every run — a retained table that exists in
+the account but not in the stack is a hard ✗, because it means the next deploy is already blocked.
+
+#### Recovery — if it springs anyway
+
+**Do not delete the resources.** Import them back into the stack:
+
+```bash
+# 0. First, a restore point. The tables are on-demand billing with PITR enabled
+#    for precisely this moment.
+aws dynamodb export-table-to-point-in-time --table-arn <arn> ...   # or take an on-demand backup:
+aws dynamodb create-backup --table-name slackdata-submissions-prod \
+  --backup-name pre-import-$(date +%Y%m%d)
+
+# 1. The template CloudFormation will import INTO.
+npx serverless package --stage prod          # → .serverless/cloudformation-template-update-stack.json
+
+# 2. A change set of type IMPORT, mapping each orphan to its logical id.
+aws cloudformation create-change-set \
+  --stack-name slackdata-prod --change-set-name import-retained \
+  --change-set-type IMPORT \
+  --template-body file://.serverless/cloudformation-template-update-stack.json \
+  --capabilities CAPABILITY_NAMED_IAM \
+  --resources-to-import '[
+    {"ResourceType":"AWS::DynamoDB::Table",
+     "LogicalResourceId":"SubmissionsTable",
+     "ResourceIdentifier":{"TableName":"slackdata-submissions-prod"}},
+    {"ResourceType":"AWS::DynamoDB::Table",
+     "LogicalResourceId":"BrandClientsTable",
+     "ResourceIdentifier":{"TableName":"slackdata-brand-clients-prod"}}
+  ]'
+
+# 3. Read it before executing it, then execute.
+aws cloudformation describe-change-set --stack-name slackdata-prod --change-set-name import-retained
+aws cloudformation execute-change-set --stack-name slackdata-prod --change-set-name import-retained
+```
+
+The resources become stack-managed again with their data intact, and normal `serverless deploy`
+resumes. Confirm the import is genuinely non-destructive for the table holding real submissions
+before you run it — an import must describe the table as it actually is, so a template property that
+disagrees with the live table is the thing to check first.
+
 ### Turnstile — why it needs three checks, not one
 
 The suggestion form needs two values that live in different places and are
