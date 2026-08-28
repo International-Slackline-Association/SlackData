@@ -459,15 +459,24 @@ resources:
         # domain this stage is actually served from. On a non-prod stage that is
         # the distribution's own CloudFront name, which is why this reads its
         # domain rather than repeating a literal.
+        # BOTH hostnames, because the distribution answers on both. The
+        # Aliases below list slackdata.org AND www.slackdata.org, and www is
+        # served directly rather than redirected — so a visitor who reaches
+        # /admin via www sends redirect_uri=https://www.slackdata.org/admin and
+        # Cognito answers `redirect_mismatch`, which reads as a broken login
+        # rather than a missing entry in this list. Listing only the apex means
+        # login works or not depending on how the user typed the domain.
         CallbackURLs: !If
           - IsProd
           - - https://slackdata.org/admin
+            - https://www.slackdata.org/admin
             - http://localhost:5173/admin          # local dev against the real pool
           - - !Sub 'https://${Cdn.DomainName}/admin'
             - http://localhost:5173/admin
         LogoutURLs: !If
           - IsProd
           - - https://slackdata.org/
+            - https://www.slackdata.org/
             - http://localhost:5173/
           - - !Sub 'https://${Cdn.DomainName}/'
             - http://localhost:5173/
