@@ -29,6 +29,7 @@ import { useCurrency } from '@/context/CurrencyContext'
 import { useIsaWarnings } from '@/hooks/useIsaWarnings'
 import { type AnyItem } from '@/utils/format'
 import { imageUrls } from '@/utils/images'
+import BrandLink from '@/components/brand/BrandLink'
 import CardImageCarousel from './CardImageCarousel'
 import ClassificationBubble from './ClassificationBubble'
 import IsaApprovedBadge from './IsaApprovedBadge'
@@ -89,7 +90,7 @@ export default function GearDetailBody({
             data-cy="detail-brand"
             className="text-xs font-medium uppercase tracking-wide text-gray-500"
           >
-            {String(item.brand_name)}
+            <BrandLink name={item.brand_name} />
           </div>
           <div className="mt-1 flex flex-wrap items-center gap-2.5">
             {nameHref ? (

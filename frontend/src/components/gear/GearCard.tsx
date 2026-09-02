@@ -17,6 +17,7 @@ import { CARD_DATA_FIELDS, INLINE_SPECS } from '@/config/gearFields'
 import { useCurrency } from '@/context/CurrencyContext'
 import { dataAttrs, formatValue, type AnyItem } from '@/utils/format'
 import { imageUrls } from '@/utils/images'
+import BrandLink from '@/components/brand/BrandLink'
 import CardImageCarousel from './CardImageCarousel'
 import ClassificationBubble from './ClassificationBubble'
 import IsaApprovedBadge from './IsaApprovedBadge'
@@ -123,7 +124,7 @@ export default function GearCard({
           data-cy="gear-card-brand"
           className="text-[11px] font-medium uppercase tracking-wide text-gray-500"
         >
-          {String(item.brand_name)}
+          <BrandLink name={item.brand_name} />
         </div>
 
         <Link

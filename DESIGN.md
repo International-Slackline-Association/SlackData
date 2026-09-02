@@ -785,6 +785,46 @@ and disappears entirely when none are (see the note in `manufacturers.cy.ts`; th
 - **ISA Certified** always uses the official ISA Approved stamp badge (charcoal frame, teal + coral ISA mark, white "APPROVED", teal checkmark). On cards: miniature stamp ~28px tall, top-right of image area (below the classification bubble when the webbing has one — a letter bubble only ever appears on a certified item, so the stamp is always its neighbour), only shown when true. On detail page: ~80px wide block above specs, "Not ISA Certified" in subdued gray when false. Never use a plain checkmark or generic pill — the stamp is the trust signal.
 - **Empty states**: centered gray icon + short message — e.g. "No webbings match your filters" with a "Clear filters" teal link
 
+### Manufacturer names are links
+
+**Wherever a manufacturer's name is printed next to something they make, it is a link to
+`/manufacturers/{id}` — their page on this site.** A brand name is an identity, and a reader who
+has just noticed "Balance Community" on a card is one click from wanting the rest of what they
+make; leaving it as inert gray text made the manufacturer directory reachable only from the top
+nav. The sites this applies to today:
+
+| Where | `data-cy` |
+|---|---|
+| Gear card, above the product name | `gear-card-brand` |
+| Gear detail page header | `detail-brand` |
+| Detailed view panels (same component as the detail page) | `detail-brand` |
+| Compare table column header | `compare-col-brand` |
+
+The link itself is `data-cy="brand-link"` and carries `data-brand-id`, inside the existing element
+in every case — the small-caps brand line keeps its own hook, so nothing that reads the *text* has
+to know it became a link.
+
+Treatment: inherits the surrounding type (small caps, gray) and only gains `hover:text-teal-primary`
+plus underline on hover — the same restraint as the product-name link. A brand line that shouted in
+teal at rest would out-rank the product name, which is the card's actual heading.
+
+**Three cases render plain text instead of a link**, and they are the whole of the rule's
+subtlety:
+
+1. **On that brand's own page.** `/manufacturers/7` prints "Balance Community" on every card in the
+   grid; each one linking back to the page you are reading is noise, so `BrandLink` suppresses
+   itself when the current route is already that brand's detail page. (This is what "not their
+   page" means — the name still links from a gear detail page reached *via* a brand page.)
+2. **Before the brand index has loaded.** The gear `*Public` schemas carry `brand_name`, not
+   `brand_id`, so the id is resolved by name against `/brand` — fetched once per page load and
+   cached module-side, exactly like the ISA warnings index. Until it resolves, the name renders as
+   it always did.
+3. **A name with no matching brand row.** Never a dead link, never a guess.
+
+Not covered, deliberately: the brand names in the **admin triage queue** and the correction form.
+Those are strings a *submitter* typed, not a catalogue brand — the whole point of the queue is that
+they have not been reconciled yet, so linking them would assert an identity nobody has checked.
+
 ### The two clear actions
 
 They are deliberately different, and both are `data-cy="clear-filters"`:

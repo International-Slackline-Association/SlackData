@@ -25,6 +25,7 @@ import { useCurrency } from '@/context/CurrencyContext'
 import { SPEC_ROWS, type PriceFormatter } from '@/config/specRows'
 import type { AnyItem } from '@/utils/format'
 import type { GearSlug } from '@/types'
+import BrandLink from '@/components/brand/BrandLink'
 import NotFoundPage from './NotFoundPage'
 
 export default function ComparePage() {
@@ -106,8 +107,11 @@ export default function ComparePage() {
                     data-id={String(item.id)}
                     className="min-w-[7rem] border-b border-gray-200 px-3 py-3 text-left align-bottom sm:min-w-[10rem] sm:px-4"
                   >
-                    <div className="text-[11px] font-medium uppercase tracking-wide text-gray-500">
-                      {String(item.brand_name)}
+                    <div
+                      data-cy="compare-col-brand"
+                      className="text-[11px] font-medium uppercase tracking-wide text-gray-500"
+                    >
+                      <BrandLink name={item.brand_name} />
                     </div>
                     <Link
                       data-cy="compare-col-name"
