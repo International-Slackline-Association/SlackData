@@ -814,3 +814,109 @@ GEAR_TYPES.forEach(({ slug, apiPath, label }) => {
     })
   })
 })
+
+// ── Whole-card link ───────────────────────────────────────────────────────────
+// DESIGN.md § Gear Card Anatomy → "The whole card is the link": everything on a
+// card that is not one of its own controls navigates to the detail page. Only
+// the product name used to, which is a ~150px target inside a ~300x340px object
+// that already reads as pressable.
+//
+// It is a stretched overlay anchor, so the coverage assertion is geometric: the
+// overlay's rect must equal the card's. Cypress cannot usefully click *through*
+// it (clicking the image band would fail its own actionability check — the
+// overlay is a sibling, not a descendant, so Cypress reports it as a covering
+// element), and that same fact is what the control tests exploit: if the overlay
+// sat above Compare or the carousel arrows, clicking those would fail exactly
+// that way rather than silently doing nothing.
+//
+// Two types, not all eight: the card component is shared, so the second one only
+// guards the per-type config (different specs, different price row).
+;[
+  { slug: 'webbings', label: 'Webbings' },
+  { slug: 'weblocks', label: 'Weblocks' },
+].forEach(({ slug, label }) => {
+  describe(`Whole-card link — ${label}`, () => {
+    beforeEach(() => {
+      cy.visit(`/${slug}`)
+      cy.get('[data-cy="gear-card"]').should('have.length.greaterThan', 0)
+    })
+
+    it('covers the entire card with a link to the detail page', () => {
+      cy.get('[data-cy="gear-card"]').first().then(($card) => {
+        const card = $card[0].getBoundingClientRect()
+        cy.wrap($card).find('[data-cy="gear-card-link"]').then(($link) => {
+          const link = $link[0].getBoundingClientRect()
+          // A stretched overlay, not a strip. The tolerance is the card's own
+          // 1px border on each side: `inset-0` spans the padding box, so the
+          // overlay is 2px shy of the card's border-box in each dimension.
+          expect(link.top, 'top').to.be.closeTo(card.top, 2)
+          expect(link.left, 'left').to.be.closeTo(card.left, 2)
+          expect(link.width, 'width').to.be.closeTo(card.width, 2.5)
+          expect(link.height, 'height').to.be.closeTo(card.height, 2.5)
+        })
+      })
+    })
+
+    it('points the overlay at the same detail page as the product name', () => {
+      cy.get('[data-cy="gear-card"]').each(($card) => {
+        const name = $card.find('[data-cy="gear-card-name"]').attr('href')
+        expect($card.find('[data-cy="gear-card-link"]').attr('href')).to.eq(name)
+        expect(name).to.match(new RegExp(`^/${slug}/\\d+$`))
+      })
+    })
+
+    it('navigates to the detail page when the card is clicked', () => {
+      cy.get('[data-cy="gear-card"]').first().then(($card) => {
+        const href = $card.find('[data-cy="gear-card-name"]').attr('href')
+        // 'left' — over the image band's dead space, nowhere near the name.
+        cy.wrap($card).find('[data-cy="gear-card-link"]').click('left')
+        cy.location('pathname').should('eq', href)
+      })
+    })
+
+    // ── The controls the card owns still win ────────────────────────────────
+    // Each of these fails with Cypress's "covered by another element" if the
+    // overlay is ever stacked above the control.
+
+    it('does not navigate when Compare is clicked', () => {
+      cy.get('[data-cy="gear-card"]').first().find('[data-cy="btn-compare"]').click()
+      cy.location('pathname').should('eq', `/${slug}`)
+      cy.get('[data-cy="compare-bar"]').should('exist')
+    })
+
+    it('does not navigate when the carousel arrows or dots are clicked', () => {
+      cy.get('[data-cy="gear-card"]:has([data-cy="card-image-next"])').first().within(() => {
+        cy.get('[data-cy="card-image-next"]').click()
+        cy.get('[data-cy="card-image-dot"]').last().click()
+      })
+      cy.location('pathname').should('eq', `/${slug}`)
+    })
+
+    it('keeps View product pointing off-site, and clickable', () => {
+      cy.get('[data-cy="gear-card"]:has([data-cy="btn-product"])').first()
+        .find('[data-cy="btn-product"]')
+        .should('have.attr', 'target', '_blank')
+        .and('have.attr', 'href')
+        .and('match', /^https?:\/\//)
+      // Not clicked: it leaves for a third-party site. That it is reachable at
+      // all is covered by the overlay's stacking order, asserted above.
+    })
+
+    it('still reaches the detail page by the product name', () => {
+      cy.get('[data-cy="gear-card"]').first().find('[data-cy="gear-card-name"]').click()
+      cy.url().should('match', new RegExp(`/${slug}/\\d+`))
+    })
+
+    // ── Accessibility: one card, one stop in the tab order ──────────────────
+
+    it('exposes the overlay to the mouse only — the name stays the a11y route', () => {
+      cy.get('[data-cy="gear-card"]').first().within(() => {
+        cy.get('[data-cy="gear-card-link"]')
+          .should('have.attr', 'aria-hidden', 'true')
+          .and('have.attr', 'tabindex', '-1')
+        cy.get('[data-cy="gear-card-name"]').should('not.have.attr', 'aria-hidden')
+        cy.get('[data-cy="gear-card-name"]').should('not.have.attr', 'tabindex')
+      })
+    })
+  })
+})

@@ -415,7 +415,8 @@ columns, which meant the specs that actually distinguish products were the ones 
 
 **Content area** (bottom ~60%):
 - Brand name: small-caps gray, ~11px, ~4px below image area
-- Product name: bold near-black, ~15px, clickable → detail page
+- Product name: bold near-black, ~15px, clickable → detail page (and the sole keyboard-focusable
+  route there — see **The whole card is the link** below)
 - Key specs inline row: small gray text with `·` separators — e.g. `25mm · 280g/m · MBS 32kN`.
   A segment is normally one field, but it may be a **composite** where a single field is a
   half-truth: **weblocks show the full range of webbing widths the device accepts**
@@ -431,6 +432,21 @@ columns, which meant the specs that actually distinguish products were the ones 
   Webbings append `/m`. The card shows only the converted figure — the as-sold original lives on the
   detail page and in the compare cell, where there's room for it.
 - **Bottom action row**: equal-width outlined buttons spanning full card width — `View product ↗` (only when the item records a `product_url`; roughly half the catalogue does) and `⧉ Compare`. Light gray border, gray text. Hover: teal border + teal text. The link opens in a new tab with `rel="noopener"`, since it leaves for a third-party manufacturer site.
+
+**The whole card is the link.** Every part of a card that is not itself a control navigates to the
+detail page on click — the image band, the brand line, the product name, the inline specs, the price,
+and all the dead space between them. A card is one object about one product; making only its title
+clickable gives a mouse a ~150px target inside a ~300×340px thing that already looks pressable.
+The exceptions are the controls the card owns, which keep their own behaviour and never navigate:
+the carousel's prev/next arrows and dots, `Compare`, and `View product ↗` (which leaves the site).
+The decorative overlays — the Legacy pill and the top-right ISA/classification stack — are *not*
+controls: clicking one navigates like the rest of the card.
+
+Implemented as a stretched overlay link covering the card, with the controls raised above it, rather
+than by wrapping the card in an anchor — the card contains buttons and an outbound link, and nesting
+those inside an `<a>` is invalid HTML. The overlay is `aria-hidden` and out of the tab order: the
+product-name link is the same destination, and keyboard and screen-reader users should meet each card
+once, not twice. So the visible focus target on a card is still its name.
 
   `♡ Save` and `🔔 Alert` used to sit here and were removed. They had no handler, no state and nowhere for the intent to go — a card should not offer an action the product cannot perform. If saved items or price alerts arrive later they come back with an account system behind them, not as furniture.
 

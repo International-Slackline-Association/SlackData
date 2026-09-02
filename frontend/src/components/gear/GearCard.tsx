@@ -86,8 +86,24 @@ export default function GearCard({
       data-cy="gear-card"
       {...dataAttrs(item, CARD_DATA_FIELDS[slug] ?? [])}
       {...stretchAttr}
-      className="flex flex-col overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-shadow hover:shadow-md"
+      className="relative flex flex-col overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-shadow hover:shadow-md"
     >
+      {/* Whole-card link. A stretched overlay rather than wrapping the card in an
+          <a>: the card contains its own controls (carousel arrows and dots,
+          Compare, the outbound product link), and nesting those inside an anchor
+          is invalid HTML. Everything interactive is lifted to z-10 above this;
+          the decorative badge stacks are pointer-events-none so the dead space
+          around them still navigates. aria-hidden + tabIndex -1 because the name
+          link below is the same destination — the overlay is a mouse
+          affordance, and duplicating it in the tab order and the a11y tree
+          would make every card announce itself twice. */}
+      <Link
+        data-cy="gear-card-link"
+        to={`/${slug}/${item.id}`}
+        aria-hidden="true"
+        tabIndex={-1}
+        className="absolute inset-0 z-[1]"
+      />
       {/* `group` drives the carousel arrows, which stay hidden until hover/focus
           so a resting grid isn't peppered with chevrons. */}
       <div
@@ -104,8 +120,8 @@ export default function GearCard({
             component as the detail page, so the colors can't drift apart. */}
         {/* Top-left: lifecycle status. Legacy = no longer sold; nothing renders
             for active/unknown gear. Mirrors the manufacturer card's Inactive pill. */}
-        <LegacyBadge active={item.active} className="absolute left-2 top-2 z-10" />
-        <div className="absolute right-2 top-2 z-10 flex flex-col items-end gap-1.5">
+        <LegacyBadge active={item.active} className="pointer-events-none absolute left-2 top-2 z-10" />
+        <div className="pointer-events-none absolute right-2 top-2 z-10 flex flex-col items-end gap-1.5">
           {/* Severity first, above the class: a recalled Type A webbing must not
               read as "Type A" before it reads as "RECALL". */}
           <IsaWarningBadge value={meta.hasISAWarning ? item.isa_warning : null} />
@@ -130,7 +146,8 @@ export default function GearCard({
         <Link
           data-cy="gear-card-name"
           to={`/${slug}/${item.id}`}
-          className="font-bold leading-snug text-gray-900 hover:text-teal-primary"
+          // relative z-10: the real, focusable link, kept above the overlay.
+          className="relative z-10 font-bold leading-snug text-gray-900 hover:text-teal-primary"
         >
           {String(item.name)}
         </Link>
@@ -158,7 +175,7 @@ export default function GearCard({
             their place: it is the one thing a reader actually wants from a card
             they have decided on, and it is the only outbound action the
             catalogue can honestly offer today. */}
-        <div className="flex gap-2 pt-2">
+        <div className="relative z-10 flex gap-2 pt-2">
           {productUrl && (
             <a
               data-cy="btn-product"
