@@ -1,0 +1,34 @@
+MBS AND CAPACITY,,,,,,,,
+EN - To know more about your static (MBS) and dynamic (Capacity) setup strength,,,,,,,,
+FR - Pour en savoir plus sur les résistances statique (MBS) et dynamique (Capacité) de ton setup,,,,,,,,
+IT - Per approfondire il carico statico (MBS) e dinamico (Capacità di assorbimento) del tuo setup,,,,,,,,
+,,,ORDER BY CAPACITY,,,,,
+"STATUS 
+[ACTIVE - INACTIVE]",PRODUCT NAME,BRAND,C - CAPACITY [J/m],"MBS
+80 MM DIVERTER 
+(kN)","MIN LENGTH
+to be rigged in highline","MIN LENGTH
+to be rigged with SPLIT 50","MIN LENGTH
+to be rigged with SPLIT 100",Price at 02/09/2026 including European VAT
+A,ABYSSES (PA),INOV,4803,32,10,50,100,2.6
+A,PANTHER (PA),SPIDER,4692,24,10,50,100,2.2
+A,NYLOVE (PA),SPIDER,4443,31,10,50,100,1.9
+I,BOOM BOOM (PA),INOV,3470,27,10,50,100,
+A,ZAO (PES),SPIDER,3392,31,10,50,100,1.65
+A,JUMBO (PES),SPIDER,3290,35,10,50,100,2.1
+I,SOLID(PES),INOV,2743,31,,,,
+I,RODEO LINE NOVA (PA),INOV,2669,27,,,,
+A,JOKER (PES+PA),INOV,2641,27,10,50,100,1.99
+A,EDGE (PES),SPIDER,2600,35,10,50,100,1.8
+A,TENDER (PES),SPIDER,2482,23,11,50,100,1.3
+A,FLY (PES),SPIDER,2300,33,14,50,100,1.5
+A,LEMON HAZE (UHMPE-PES),SPIDER,2261,31,15,50,100,3.5
+A,COSMIC (PES),INOV,2003,31,26,50,100,1.7
+A,GREEN MAMBA(PES) ,SPIDER,1938,28,31,61,106,1.3
+A,SKY D (UHMPE),INOV,1405,32,0,108,194,5.4
+I,PLASMA (PES),INOV,,40,,,,
+I,DONKEY (PA),INOV,,32,,,,
+I,BOOM BOOM 3 (PA),INOV,,21,,,,
+A,REGGAE (PES),INOV,2525.3,24.5,,,,1.5
+A,FUNKY (PA),INOV,4535,28,,,,2.04
+A,JUMANJI (UHMPE),SPIDER,968.5,40,,,,2.89
