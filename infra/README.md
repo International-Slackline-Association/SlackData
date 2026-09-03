@@ -388,6 +388,28 @@ Only the two DynamoDB tables can actually spring it — their names are account-
 pool collides with nothing (pool names need not be unique); it strands the admin account instead,
 which is a data problem rather than a deploy one.
 
+**A retained pool has a second cost, found on staging 2026-09-03.** Deploys stay green, so nothing
+ever surfaces it, and it accumulates: the account ended up with two pools both named
+`slackdata-admins-staging`. The damage is to the *manual* path — creating a brand app client in the
+console (§ Onboarding policy) now offers two identical names, and picking the wrong one produces
+credentials that mint tokens successfully and 401 on every request, because the API verifies against
+the other pool's JWKS. `register.py --onboard` is immune (it resolves the pool from the stack's
+`AdminUserPoolId` output), but the console is not.
+
+**Tags cannot tell them apart.** CloudFormation stamps `aws:cloudformation:stack-name` at creation
+and a retained resource keeps it, so a pool orphaned by an `UpdateReplacePolicy` replacement still
+advertises the stack that abandoned it. The stack's output — or `describe-stack-resource
+--logical-resource-id AdminUserPool` — is the only evidence of ownership. `preflight.sh` checks this
+for `slackdata-admins-<stage>` on every run.
+
+Removing a whole stage is `npx serverless remove --stage <stage>`, **not** deleting its resources by
+hand — deleting a stack-managed resource leaves drift that fails the next update. Expect `remove` to
+fail once with `DELETE_FAILED` on `WebBucket` if the site was ever synced: a non-empty S3 bucket
+cannot be deleted, and the buckets are not `Retain`. Empty it (`aws s3 rm s3://<bucket> --recursive`;
+neither bucket is versioned, so this is sufficient) and re-run. The tables and the pool *are*
+`Retain` and will still be standing afterwards — genuinely orphaned at that point, and yours to
+delete, domain first for the pool.
+
 **This already happened on staging, exactly this way.** The first staging deploy failed on an
 unrelated route-key bug (§ the route/throttle invariant). The rollback retained both tables. The next
 three deploys failed at change-set creation, and were only recoverable because the tables were empty
