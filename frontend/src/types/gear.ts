@@ -48,7 +48,7 @@ export interface Webbing extends GearBase {
 
 export interface Weblock extends GearBase {
   style: WeblockStyle | null
-  material: MetalMaterial
+  material: MetalMaterial[] // JSON column: frame and pins can be different metals
   width_min: number
   width_max: number | null
   breaking_strength: number | null

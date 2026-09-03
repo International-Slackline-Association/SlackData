@@ -11,7 +11,7 @@ from slack_data.models.weblocks import (
     WeblockCreate,
     WeblockStyle,
 )
-from slack_data.utilities.materials import get_metal_material
+from slack_data.utilities.materials import get_metal_materials
 from slack_data.utilities.currencies import Currency, get_currency
 
 WEBLOCKS_FILE = seed_path("weblocks.json")
@@ -73,7 +73,7 @@ def clean_weblock_data(weblock: dict[str, Any]) -> dict[str, Any]:
     cleaned_data["raw_brand_name"] = weblock.get("brand") 
 
     cleaned_data["style"] = get_weblock_style(weblock.get("style"))
-    cleaned_data["material"] = get_metal_material(specs.get("Material"))
+    cleaned_data["material"] = get_metal_materials(specs.get("Material"))
     
     # Parse width range
     width_min, width_max = parse_width_range(specs.get("Compatible webbing width"))

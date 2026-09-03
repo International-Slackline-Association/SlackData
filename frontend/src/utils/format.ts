@@ -26,7 +26,7 @@ export function dataAttrs(item: AnyItem, fields: string[]): Record<string, strin
 // amount without saying it was one of fourteen different currencies.
 
 // A spec value with an optional unit appended, e.g. "25 mm". "" when null.
-// Multi-select fields (webbing `material`, roller `material`) arrive as arrays;
+// Multi-select fields (webbing / weblock / roller `material`) arrive as arrays;
 // they join with " + " so a composition reads as one spec — "Polyester +
 // Dyneema/HMPE" — and stays distinct from the " · " that separates specs.
 export function formatValue(value: unknown, unit?: string): string {
