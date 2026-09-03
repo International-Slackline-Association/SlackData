@@ -63,7 +63,7 @@ def _payloads(brand_id: int) -> dict[str, dict]:
         },
         "/weblock": {
             "name": "Active Weblock",
-            "material": "Aluminum",
+            "material": ["Aluminum"],
             "width_min": 25,
             "brand_id": brand_id,
         },

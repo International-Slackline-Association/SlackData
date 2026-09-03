@@ -326,7 +326,12 @@ describe('Card inline width range — Weblocks', () => {
         .invoke('text')
         .then((text) => {
           const width = text.indexOf(`${full.width_min}`)
-          expect(text.indexOf(String(full.material))).to.be.lessThan(width)
+          // `material` is a list (titanium frame + steel pins); the card joins it
+          // with " + ". String(array) would be "Titanium,Steel", find nothing,
+          // and pass on the -1 — a weaker check that looks green.
+          const material = (full.material as string[]).join(' + ')
+          expect(text.indexOf(material)).to.be.at.least(0)
+          expect(text.indexOf(material)).to.be.lessThan(width)
           expect(width).to.be.lessThan(text.indexOf(`${full.breaking_strength} kN`))
         })
     })

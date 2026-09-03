@@ -1,6 +1,7 @@
 from enum import Enum
 from pydantic import computed_field
-from sqlmodel import Field, Relationship, SQLModel
+from sqlalchemy import JSON
+from sqlmodel import Column, Field, Relationship, SQLModel
 
 from slack_data.utilities.currencies import Currency
 from slack_data.utilities.isa_warnings import ISAWarning
@@ -45,7 +46,9 @@ class BaseWeblock(SQLModel):
     """
     name: str | None = Field(default=None, index=True)
     style: WeblockStyle | None = Field(default=None, index=True)
-    material: MetalMaterial | None = None
+    # multi-select, same as BaseRoller: a weblock can be built from several
+    # metals — a titanium frame with steel pins is one product, not two facts.
+    material: list[MetalMaterial] | None = Field(default=None, sa_column=Column(JSON))
     width_min: int | None = None          # mm
     width_max: int | None = None          # mm
     release_date: int | None = None
@@ -80,7 +83,7 @@ class WeblockPublic(BaseWeblock):
     """Model for public weblock data."""
     id: int
     name: str
-    material: MetalMaterial
+    material: list[MetalMaterial]
     width_min: int
     brand_name: str
 
@@ -92,7 +95,7 @@ class WeblockPublic(BaseWeblock):
 class WeblockCreate(BaseWeblock):
     """Model for creating a new weblock entry."""
     name: str
-    material: MetalMaterial
+    material: list[MetalMaterial]
     width_min: int
     brand_id: int
 

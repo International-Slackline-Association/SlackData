@@ -12,7 +12,7 @@ from slack_data.utilities.materials import MetalMaterial
 def make_weblock(session, brand, *, name="Test Weblock", width_min=25, **kwargs) -> Weblock:
     w = Weblock(
         name=name,
-        material=MetalMaterial.ALUMINUM,
+        material=[MetalMaterial.ALUMINUM],
         width_min=width_min,
         brand_id=brand.id,
         **kwargs,
@@ -57,7 +57,7 @@ def test_get_weblock_not_found(client):
 def test_create_weblock(client, brand):
     r = client.post("/weblock/", json={
         "name": "New Weblock",
-        "material": "Aluminum",
+        "material": ["Aluminum"],
         "width_min": 25,
         "brand_id": brand.id,
     })
@@ -66,10 +66,40 @@ def test_create_weblock(client, brand):
     assert r.json()["brand_name"] == brand.name
 
 
+def test_weblock_material_round_trips_every_metal(client, brand):
+    """`material` is a list because one weblock is often several metals.
+
+    The TiLock ships with a titanium frame and a choice of titanium or
+    high-strength steel pins; the steel build has to be able to say so. A scalar
+    column could only publish the first metal, which is what it used to do.
+    """
+    r = client.post("/weblock/", json={
+        "name": "Two Metal Weblock",
+        "material": ["Titanium", "Steel"],
+        "width_min": 25,
+        "brand_id": brand.id,
+    })
+    assert r.status_code == 200
+    assert r.json()["material"] == ["Titanium", "Steel"]
+
+    assert client.get(f"/weblock/{r.json()['id']}").json()["material"] == ["Titanium", "Steel"]
+
+
+def test_patch_weblock_material_replaces_the_whole_list(client, session, brand):
+    """A PATCH sets the composition, it does not append to it."""
+    w = make_weblock(session, brand)
+    r = client.patch(f"/weblock/{w.id}", json={"material": ["Titanium", "Steel"]})
+    assert r.status_code == 200
+    assert r.json()["material"] == ["Titanium", "Steel"]
+
+    r = client.patch(f"/weblock/{w.id}", json={"material": ["Titanium"]})
+    assert r.json()["material"] == ["Titanium"]
+
+
 def test_create_weblock_with_optional_fields(client, brand):
     r = client.post("/weblock/", json={
         "name": "Full Weblock",
-        "material": "Stainless Steel",
+        "material": ["Stainless Steel"],
         "width_min": 20,
         "width_max": 35,
         "front_pin": "Push Pin",
@@ -94,7 +124,7 @@ def test_create_weblock_missing_required_field_rejected(client, brand):
 def test_create_weblock_optional_fields_default_null(client, brand):
     r = client.post("/weblock/", json={
         "name": "Minimal",
-        "material": "Steel",
+        "material": ["Steel"],
         "width_min": 25,
         "brand_id": brand.id,
     })
@@ -137,7 +167,7 @@ def test_weblock_style_defaults_to_null(client, session, brand):
 def test_create_weblock_with_style(client, brand):
     r = client.post("/weblock/", json={
         "name": "Locker",
-        "material": "Aluminum",
+        "material": ["Aluminum"],
         "width_min": 25,
         "style": "Fixed Linelocker",
         "brand_id": brand.id,
@@ -149,7 +179,7 @@ def test_create_weblock_with_style(client, brand):
 def test_create_weblock_rejects_unknown_style(client, brand):
     r = client.post("/weblock/", json={
         "name": "Bogus",
-        "material": "Aluminum",
+        "material": ["Aluminum"],
         "width_min": 25,
         "style": "Ratchet",
         "brand_id": brand.id,
