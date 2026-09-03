@@ -2700,7 +2700,7 @@
         },
         "date_introduced": null,
         "name": "Paddle SH",
-        "product_url": "http://www.slackshop.cz/en/lockers/83-eqb-paddle.html",
+        "product_url": "https://web.archive.org/web/20150801130032/http://www.slackshop.cz/en/lockers/83-eqb-paddle.html",
         "active": false,
         "style": "Tensionable Weblock"
     },
@@ -2889,7 +2889,7 @@
         },
         "date_introduced": null,
         "name": "PRO Weblock",
-        "product_url": "https://raed-slacklines.com/pro-weblock",
+        "product_url": "https://web.archive.org/web/20220928094114/https://raed-slacklines.com/pro-weblock",
         "active": false,
         "style": "Tensionable Weblock"
     },
@@ -3069,7 +3069,7 @@
         },
         "date_introduced": null,
         "name": "RamLock",
-        "product_url": null,
+        "product_url": "https://web.archive.org/web/20190511213516/https://www.slacklinetechnology.com/shop/ramlock-slackline-anchor",
         "active": false,
         "style": "Tensionable Weblock"
     },
