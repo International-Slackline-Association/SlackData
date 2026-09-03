@@ -32,6 +32,8 @@ tsconfig → **no TS `enum`s / parameter-properties**; use string-literal unions
 # Backend — port 8000 (must be up + seeded for Cypress)
 cd slack_data && fastapi dev main.py
 # Reseed after JSON/loader edits: rm slack_data/database.db then restart (seeding is one-shot per type)
+# — this is REQUIRED, not optional: without it the server keeps serving the pre-edit rows and the
+#   change is invisible in the API, in the frontend and in Cypress. Re-seed as part of the edit.
 
 # Frontend dev server — port 5173
 cd frontend && npm run dev

@@ -1080,13 +1080,16 @@
         "version": null,
         "notes": null,
         "manufacturer": "Slack Inov",
+        "gear_sellers": [
+            "Spider Slacklines"
+        ],
         "active": false
     },
     {
         "id": 58,
         "name": "SLACKLINE KIT - PLASMA 30",
         "release_date": 1622030515017,
-        "product_url": "https://slack-inov.com/shop/en/slackline-kit/407-slackline-kit-pirate-30-9506919000.html",
+        "product_url": "https://web.archive.org/web/20210928074452/https://slack-inov.com/shop/en/slackline-kit/407-slackline-kit-pirate-30-9506919000.html",
         "webbing_length": 30,
         "webbing_width": 25,
         "weight": null,
@@ -1099,6 +1102,9 @@
         "version": null,
         "notes": null,
         "manufacturer": "Slack Inov",
+        "gear_sellers": [
+            "Spider Slacklines"
+        ],
         "active": false
     },
     {
@@ -1118,6 +1124,9 @@
         "version": null,
         "notes": null,
         "manufacturer": "Spider slacklines",
+        "gear_sellers": [
+            "Slack Inov"
+        ],
         "active": true
     },
     {

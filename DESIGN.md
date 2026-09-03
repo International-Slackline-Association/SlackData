@@ -457,13 +457,16 @@ once, not twice. So the visible focus target on a card is still its name.
 Max-width centered container (~1024px), left-aligned back link. The body is a **two-column split**:
 image carousel on the left (~320px), and on the right the brand / product name (+ classification
 bubble) / price header, the ISA warning banner, the ISA certification block and the specification
-grid — so the specs wrap around the title rather than sitting in a slab beneath it. Description and
-`View product →` run full width below the split. Collapses to a single column below `sm`.
+grid — so the specs wrap around the title rather than sitting in a slab beneath it. **Also sold by**
+sits in that right column too, under the price. Description and `View product →` run full width
+below the split. Collapses to a single column below `sm`.
 
 **Order within the right column matters** and is asserted geometrically by `isa_certification.cy.ts`:
-name → ISA warning banner → ISA certification block → spec grid. Keeping the banner and cert block
-inside the right column (rather than below the whole split) is deliberate: it holds a safety warning
-next to the product name instead of burying it under the spec grid.
+name → price → ISA warning banner → **Also sold by** → ISA certification block → spec grid. Keeping
+the banner and cert block inside the right column (rather than below the whole split) is deliberate:
+it holds a safety warning next to the product name instead of burying it under the spec grid. The
+seller block goes *after* the banner for the same reason — a list of shops must never push a recall
+further from the name of the thing recalled.
 
 **Back link**: `← Webbings` in small gray text, hover teal.
 
@@ -546,6 +549,45 @@ Options are derived from the loaded data, so **a status no item of that type car
 If the detail fetch fails, the banner falls back to the severity word alone — a lost request downgrades the warning, it never hides it.
 
 ---
+
+### Also sold by
+
+One product can be sold by shops other than the one that makes it — Slack Inov and Spider Slacklines
+co-list each other's whole range, each on their own site. The catalogue holds that as a list of
+seller brand names on the gear row itself (`gear_sellers`, CLAUDE.md § Co-listings), never as a
+second product, and this block is the only place a reader sees it.
+
+In the detail page's **right column**, directly under the price and above the ISA certification block
+(`data-cy="also-sold-by"`). That position is the point: the block answers the question the price just
+raised — this is what it costs, and here is who else sells it. It first sat full width below the spec
+grid, where the price it belongs to was a whole spec table away, and read as an afterthought.
+
+Its one hard constraint is the ISA warning banner above it. The banner is pinned next to the product
+name deliberately (§ Gear Detail Page), so the seller list goes below it and never between it and the
+title: a list of shops must not push a recall further from the name of the thing recalled.
+`co_listings.cy.ts` asserts both halves of the position geometrically.
+
+One row per seller (`data-cy="seller-listing"`, carrying `data-brand`), separated by hairlines,
+holding **the seller's name** as a `BrandLink` to their page here — same treatment as a maker's name
+anywhere else on the site (§ Manufacturer names are links).
+
+**A name is the whole row, deliberately.** There is no per-shop price, product link or stock chip,
+because the catalogue holds none: these co-listings were recorded from the two companies' own
+statement that they carry each other's range, not from a per-product scrape. A price or a `View →`
+here would be a claim about a real shop that nobody checked. If per-seller prices are ever sourced,
+that is the moment to widen the row — not before.
+
+**The maker is never in this list.** The header block above already names them and links to their
+product page; repeating them here would read as though the manufacturer were one reseller among
+several. The seed pass refuses a maker listed among its own sellers, so this is a fact about the data
+rather than a filter applied in the component.
+
+**The whole block is absent, not empty, when there are no sellers** — most of the catalogue has no
+co-listing at all, and a bare heading with nothing under it reads as a failed fetch. The names arrive
+with the item itself, so there is no second request that can fail here.
+
+Nothing about a co-listing appears on the **card** yet — see BACKLOG.md; the card shows the maker,
+because the specs are the maker's.
 
 ### Spec rows per gear type
 

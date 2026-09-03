@@ -267,6 +267,9 @@
         "currency": "EUR",
         "notes": null,
         "manufacturer": "Slack Inov",
+        "gear_sellers": [
+            "Spider Slacklines"
+        ],
         "date_introduced": null,
         "product_url": "https://slack-inov.com/shop/en/leashes/315-slackisur-highline-ring.html",
         "active": false
@@ -420,6 +423,9 @@
         "currency": "EUR",
         "notes": "Forged anodized aluminium, 10 mm thick (outer diameter derived as 60 + 20 mm). Dimensions, weight and 35 kN strength are per ring; sold by the single unit at EUR 9.96, but the manufacturer states the rings are always used as a pair (taped together) to spread leash-fall energy over more webbing surface, so the price recorded here is for two. Not to be used as an anchor.",
         "manufacturer": "Spider slacklines",
+        "gear_sellers": [
+            "Slack Inov"
+        ],
         "date_introduced": null,
         "product_url": "https://spider-slacklines.com/shop/en/rings/163-anello-alluminio-forgiato-highline.html",
         "active": true
@@ -471,6 +477,9 @@
         "currency": "EUR",
         "notes": null,
         "manufacturer": "Slack Inov",
+        "gear_sellers": [
+            "Spider Slacklines"
+        ],
         "date_introduced": null,
         "product_url": null,
         "active": false
@@ -539,6 +548,9 @@
         "currency": "USD",
         "notes": "Drop-forged anodized aluminium, no welds; flat sliding surface and oval inner geometry, 10 mm thick (outer diameter derived as 80 + 10 mm — not published as such). Every ring individually proof-tested at 6 kN (leaves two pressure marks). Used as a single ring, not in pairs. Fits over a weblock including the front pin. Leash ring only — not to be used as an anchor.",
         "manufacturer": "Spider slacklines",
+        "gear_sellers": [
+            "Slack Inov"
+        ],
         "date_introduced": null,
         "product_url": "https://slacklines.us/products/highline-leash-ring",
         "active": true
@@ -556,6 +568,9 @@
         "currency": "EUR",
         "notes": "Clip-and-go ring: anodized aluminium body with a stainless steel wire gate, 20 mm thick (outer diameter derived as 65 + 20 mm — not published as such), letting the leash be fitted or removed after the line is rigged. The leash threads around the outer diameter and covers ~3/4 of the outside surface as padding. Successor to Slack Inov's Vortex (65 mm vs 60 mm inner diameter, 77 g vs 100 g) — both kept. Not a PPE device; no breaking strength published. Price is Slack Inov's own listing; Spider Slackline US resells it at USD 74.95.",
         "manufacturer": "Slack Inov",
+        "gear_sellers": [
+            "Spider Slacklines"
+        ],
         "date_introduced": null,
         "product_url": "https://slack-inov.com/shop/en/leashes/314-4422-vortex-highline-ring-3926909790.html",
         "active": true
