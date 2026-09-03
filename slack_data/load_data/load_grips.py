@@ -25,6 +25,11 @@ def clean_grip_data(grip: dict) -> dict:
             cleaned_grip[key] = None
         elif key == "isa_certified":
             cleaned_grip[key] = to_bool(value)
+        elif key == "gear_sellers":
+            # A list of brand names, bound for a JSON column. The str()
+            # branch below would store the Python repr of it, which reads
+            # back as a string and matches no brand.
+            cleaned_grip[key] = value or None
         else:
             cleaned_grip[key] = str(value) if value is not None else None
     return cleaned_grip
@@ -60,6 +65,8 @@ def add_grips_to_db(grips: list[dict], session: SessionDep) -> None:
             price=grip.get("price"),
             currency=currency,
             active=grip.get("active"),
+            # Brand names only — see the model. Absent stays None, not [].
+            gear_sellers=grip.get("gear_sellers") or None,
         )
         db_grip = Grip.model_validate(grip_create)
         db_grip.id = require_seed_id(grip, "grips.json")

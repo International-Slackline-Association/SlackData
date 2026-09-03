@@ -72,6 +72,8 @@ def add_treepros_to_db(treepros: list[dict], session: SessionDep) -> None:
             version=treepro.get("version"),
             notes=treepro.get("notes"),
             active=treepro.get("active"),
+            # Brand names only — see the model. Absent stays None, not [].
+            gear_sellers=treepro.get("gear_sellers") or None,
         )
 
         db_treepro = TreePro.model_validate(treepro_create)

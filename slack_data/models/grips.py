@@ -1,6 +1,7 @@
 from enum import Enum
 from pydantic import computed_field
-from sqlmodel import Field, Relationship, SQLModel
+from sqlalchemy import JSON
+from sqlmodel import Column, Field, Relationship, SQLModel
 
 from slack_data.utilities.currencies import Currency
 from slack_data.utilities.isa_warnings import ISAWarning
@@ -36,6 +37,22 @@ class BaseGrip(SQLModel):
     version: str | None = None
     notes: str | None = None
     active: bool | None = Field(default=None, index=True)
+
+    # The brands that SELL this product without making it — the co-listing half
+    # of `brand_id`, which only ever says who makes it. Slack Inov and Spider
+    # Slacklines each carry the other's full range on their own site, and a
+    # shopper picking a brand wants what they can buy from it, not what came off
+    # its own loom.
+    #
+    # Brand NAMES, stored on the product itself, because a listing is a fact
+    # about this row and nothing else: no second gear row (an id is the
+    # catalogue's stable identity, already recorded in ISA match blocks,
+    # manufacturer credentials and submitted corrections), and no side table
+    # keyed by `(gear_type, gear_id)` to keep in step with it. Each name must
+    # have an entry in `manufacturers.json`; `load_seller_brands.py` checks that
+    # on every seed and creates the `Brand` row for a shop that makes nothing we
+    # hold. None = not researched, `[]` never written.
+    gear_sellers: list[str] | None = Field(default=None, sa_column=Column(JSON))
 
 class Grip(BaseGrip, table=True):
     id: int | None = Field(default=None, primary_key=True)

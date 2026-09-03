@@ -111,6 +111,9 @@
         "version": null,
         "notes": null,
         "manufacturer": "Spider slacklines",
+        "gear_sellers": [
+            "Slack Inov"
+        ],
         "active": true
     },
     {

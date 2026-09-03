@@ -27,6 +27,11 @@ def clean_roller_data(rollers: dict) -> dict:
             cleaned_rollers[key] = None
         elif key == "isa_approved":
             cleaned_rollers[key] = to_bool(value)
+        elif key == "gear_sellers":
+            # A list of brand names, bound for a JSON column. The str()
+            # branch below would store the Python repr of it, which reads
+            # back as a string and matches no brand.
+            cleaned_rollers[key] = value or None
         else:
             cleaned_rollers[key] = str(value) if value is not None else None
     return cleaned_rollers
@@ -67,6 +72,8 @@ def add_rollers_to_db(rollers: list[dict], session: SessionDep) -> None:
             price=roller.get("price"),
             currency=currency,
             active=roller.get("active"),
+            # Brand names only — see the model. Absent stays None, not [].
+            gear_sellers=roller.get("gear_sellers") or None,
         )
         db_roller = Roller.model_validate(roller_create)
         db_roller.id = require_seed_id(roller, "rollers.json")

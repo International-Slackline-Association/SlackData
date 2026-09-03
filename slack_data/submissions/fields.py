@@ -36,6 +36,11 @@ _EXCLUDED = frozenset(
         # material + breaking_strength on every seed, so a hand-edit to it is
         # overwritten by the next deploy. Correct the inputs instead.
         "classification",
+        # Who ELSE sells this product. Ours to record, not the maker's to
+        # state — a brand does not get to declare (or delete) a competitor's
+        # shelf — and it is a list, which `changes` (a dict of strings) has no
+        # way to carry. See any model's `gear_sellers`.
+        "gear_sellers",
     }
 )
 

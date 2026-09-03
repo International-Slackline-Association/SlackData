@@ -30,6 +30,10 @@ export interface GearBase {
   // null = unknown/not yet verified.
   active: boolean | null
   brand_name: string
+  // The brands that SELL this product without making it — `brand_name` is only
+  // ever the maker. Names, resolved to the catalogue's own spelling at seed
+  // time. null when none are recorded. See CLAUDE.md § Co-listings.
+  gear_sellers: string[] | null
 }
 
 export interface Webbing extends GearBase {

@@ -254,6 +254,9 @@
         "outer_bearing_diameter": null,
         "isa_approved": null,
         "manufacturer": "Spider Slacklines",
+        "gear_sellers": [
+            "Slack Inov"
+        ],
         "price": 84.95,
         "price_unit": "USD",
         "roller_material": "Aluminum",
@@ -279,6 +282,9 @@
         "outer_bearing_diameter": null,
         "isa_approved": null,
         "manufacturer": "Spider Slacklines",
+        "gear_sellers": [
+            "Slack Inov"
+        ],
         "price": 65.94,
         "price_unit": "USD",
         "roller_material": "Aluminum",
@@ -303,6 +309,9 @@
         "outer_bearing_diameter": null,
         "isa_approved": null,
         "manufacturer": "Spider Slacklines",
+        "gear_sellers": [
+            "Slack Inov"
+        ],
         "price": 54.95,
         "price_unit": "USD",
         "roller_material": "Aluminum",
@@ -375,6 +384,9 @@
         "outer_bearing_diameter": null,
         "isa_approved": null,
         "manufacturer": "Slack Inov",
+        "gear_sellers": [
+            "Spider Slacklines"
+        ],
         "price": 30.0,
         "price_unit": "EUR",
         "roller_material": "Nylon (Polyamide)",
@@ -443,6 +455,9 @@
         "outer_bearing_diameter": null,
         "isa_approved": null,
         "manufacturer": "Spider Slacklines",
+        "gear_sellers": [
+            "Slack Inov"
+        ],
         "price": 39.9,
         "price_unit": "USD",
         "roller_material": "Aluminum",

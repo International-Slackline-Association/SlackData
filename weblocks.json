@@ -590,6 +590,9 @@
         "image_url": "/api/gear/image_thumb/524",
         "details_url": "/gear_details/BanditSH",
         "brand": "Spider slacklines",
+        "gear_sellers": [
+            "Slack Inov"
+        ],
         "full_name": "Spider slacklines Bandit SH",
         "manufacturer_info": {
             "name": "Spider slacklines",
@@ -673,6 +676,9 @@
         "image_url": "/api/gear/image_thumb/525",
         "details_url": "/gear_details/BanditSL",
         "brand": "Spider slacklines",
+        "gear_sellers": [
+            "Slack Inov"
+        ],
         "full_name": "Spider slacklines Bandit SL",
         "manufacturer_info": {
             "name": "Spider slacklines",
@@ -1198,6 +1204,9 @@
         "image_url": "/api/gear/image_thumb/523",
         "details_url": "/gear_details/Chili",
         "brand": "Spider slacklines",
+        "gear_sellers": [
+            "Slack Inov"
+        ],
         "full_name": "Spider slacklines Chili",
         "manufacturer_info": {
             "name": "Spider slacklines",
@@ -1232,6 +1241,9 @@
         "image_url": "/api/gear/image_thumb/549",
         "details_url": "/gear_details/CHILI20",
         "brand": "Spider slacklines",
+        "gear_sellers": [
+            "Slack Inov"
+        ],
         "full_name": "Spider slacklines CHILI 2.0",
         "manufacturer_info": {
             "name": "Spider slacklines",
@@ -1840,6 +1852,9 @@
         "image_url": "/api/gear/image_thumb/561",
         "details_url": "/gear_details/LimeLinelock",
         "brand": "Spider slacklines",
+        "gear_sellers": [
+            "Slack Inov"
+        ],
         "full_name": "Spider slacklines Lime",
         "manufacturer_info": {
             "name": "Spider slacklines",
@@ -2363,6 +2378,9 @@
         "image_url": "/api/gear/image_thumb/3065",
         "details_url": "/gear_details/mint",
         "brand": "Spider slacklines",
+        "gear_sellers": [
+            "Slack Inov"
+        ],
         "full_name": "Spider slacklines Mint",
         "manufacturer_info": {
             "name": "Spider slacklines",
@@ -2537,6 +2555,9 @@
         "image_url": "/api/gear/image_thumb/3251",
         "details_url": "/gear_details/orange_1",
         "brand": "Radrigs",
+        "gear_sellers": [
+            "SlackX"
+        ],
         "full_name": "Radrigs Orange",
         "manufacturer_info": {
             "name": "Radrigs",
@@ -2625,6 +2646,9 @@
         "image_url": "/api/gear/image_thumb/560",
         "details_url": "/gear_details/PaddleLinelock",
         "brand": "Spider slacklines",
+        "gear_sellers": [
+            "Slack Inov"
+        ],
         "full_name": "Spider slacklines Paddle Linelock",
         "manufacturer_info": {
             "name": "Spider slacklines",
@@ -3932,6 +3956,9 @@
         "image_url": "/api/gear/image_thumb/538",
         "details_url": "/gear_details/Slackibloc31",
         "brand": "Slack Inov",
+        "gear_sellers": [
+            "Spider Slacklines"
+        ],
         "full_name": "Slack Inov Slackibloc 3.1",
         "manufacturer_info": {
             "name": "Slack Inov",
@@ -3979,6 +4006,9 @@
         "image_url": "/api/gear/image_thumb/3012",
         "details_url": "/gear_details/slackibloc_4",
         "brand": "Slack Inov",
+        "gear_sellers": [
+            "Spider Slacklines"
+        ],
         "full_name": "Slack Inov Slackibloc 4",
         "manufacturer_info": {
             "name": "Slack Inov",
@@ -4024,6 +4054,9 @@
         "image_url": "/api/gear/image_thumb/539",
         "details_url": "/gear_details/SlackiblocJump12",
         "brand": "Slack Inov",
+        "gear_sellers": [
+            "Spider Slacklines"
+        ],
         "full_name": "Slack Inov Slackibloc Jump 1.2",
         "manufacturer_info": {
             "name": "Slack Inov",
@@ -4063,6 +4096,9 @@
         "image_url": "/api/gear/image_thumb/3152",
         "details_url": "/gear_details/slackibloc_sr",
         "brand": "Slack Inov",
+        "gear_sellers": [
+            "Spider Slacklines"
+        ],
         "full_name": "Slack Inov Slackibloc SR Pull pin",
         "manufacturer_info": {
             "name": "Slack Inov",
@@ -4102,6 +4138,9 @@
         "image_url": "/api/gear/image_thumb/3153",
         "details_url": "/gear_details/slackibloc_srquickpin",
         "brand": "Slack Inov",
+        "gear_sellers": [
+            "Spider Slacklines"
+        ],
         "full_name": "Slack Inov Slackibloc SR Quick Pin",
         "manufacturer_info": {
             "name": "Slack Inov",
@@ -4141,6 +4180,9 @@
         "image_url": "/api/gear/image_thumb/3069",
         "details_url": "/gear_details/slackijump",
         "brand": "Slack Inov",
+        "gear_sellers": [
+            "Spider Slacklines"
+        ],
         "full_name": "Slack Inov Slackijump",
         "manufacturer_info": {
             "name": "Slack Inov",
@@ -4671,6 +4713,9 @@
     {
         "id": 108,
         "brand": "Radrigs",
+        "gear_sellers": [
+            "SlackX"
+        ],
         "name": "Slackfriend",
         "specifications": {
             "Material": "Aluminum",
@@ -4755,6 +4800,9 @@
     {
         "id": 112,
         "brand": "Slack Inov",
+        "gear_sellers": [
+            "Spider Slacklines"
+        ],
         "name": "ZENLOCK",
         "specifications": {
             "Material": "Aluminum",
@@ -4777,6 +4825,9 @@
     {
         "id": 113,
         "brand": "Slack Inov",
+        "gear_sellers": [
+            "Spider Slacklines"
+        ],
         "name": "Diamond Lock",
         "specifications": {
             "Material": "Aluminum",
@@ -4799,6 +4850,9 @@
     {
         "id": 114,
         "brand": "Spider Slacklines",
+        "gear_sellers": [
+            "Slack Inov"
+        ],
         "name": "Blueberry SR",
         "specifications": {
             "Material": "Aluminum",
@@ -4820,6 +4874,9 @@
     {
         "id": 115,
         "brand": "Spider Slacklines",
+        "gear_sellers": [
+            "Slack Inov"
+        ],
         "name": "Blueberry",
         "specifications": {
             "Material": "Aluminum",
@@ -4841,6 +4898,9 @@
     {
         "id": 116,
         "brand": "Spider Slacklines",
+        "gear_sellers": [
+            "Slack Inov"
+        ],
         "name": "Linelock Aluminum Ring",
         "specifications": {
             "Material": "Aluminum",
