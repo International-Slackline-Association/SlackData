@@ -224,8 +224,30 @@ def test_an_undeployed_stack_refuses_rather_than_falling_back_to_a_name():
 
 @pytest.fixture
 def ledger(tmp_path, monkeypatch):
+    """The real ledger, wound back to the state it had before anyone was onboarded.
+
+    These tests are about what `append_ledger_row` does, not about who happens
+    to hold a credential today — and reading the live file conflated the two:
+    the first brand onboarded consumed the placeholder row, and the placeholder
+    test started failing on a file nobody had broken.
+
+    The copy is still taken from the real ledger, so the table header and the
+    prose after it are the ones we actually ship (that prose is the operator's
+    instructions, and one test exists to check it survives an append). Only the
+    data rows are wound back.
+    """
+    lines = onboard.LEDGER.read_text(encoding="utf-8").splitlines()
+    separator = next(i for i, line in enumerate(lines) if line.startswith("|-"))
+    rows = [i for i, line in enumerate(lines) if i > separator and line.startswith("| ")]
+    emptied = (
+        lines[: separator + 1]
+        + [f"{onboard.LEDGER_PLACEHOLDER} — the first row is the moment Phase 4 "
+           "stops being dormant)_ | | | | | |"]
+        + lines[(rows[-1] if rows else separator) + 1 :]
+    )
+
     copy = tmp_path / "onboarded-brands.md"
-    copy.write_text(onboard.LEDGER.read_text(encoding="utf-8"), encoding="utf-8")
+    copy.write_text("\n".join(emptied) + "\n", encoding="utf-8")
     monkeypatch.setattr(onboard, "LEDGER", copy)
     return copy
 

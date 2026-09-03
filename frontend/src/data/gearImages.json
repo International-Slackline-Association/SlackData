@@ -1600,14 +1600,49 @@
       "raed_pro-weblock-4.jpg",
       "raed_pro-weblock-5.jpg"
     ],
+    "raed_riglock": [
+      "raed_riglock.jpg"
+    ],
     "raed_rodeo-weblock": [
       "raed_rodeo-weblock.jpg",
       "raed_rodeo-weblock-2.jpg",
       "raed_rodeo-weblock-3.jpg"
     ],
-    "raed_tilock-25mm": [
-      "raed_tilock-25mm.jpg",
-      "raed_tilock-25mm-2.jpg"
+    "raed_tilock-19mm-steel-pins": [
+      "raed_tilock-19mm-steel-pins.jpg",
+      "raed_tilock-19mm-steel-pins-2.jpg",
+      "raed_tilock-19mm-steel-pins-3.jpg",
+      "raed_tilock-19mm-steel-pins-4.jpg",
+      "raed_tilock-19mm-steel-pins-5.jpg",
+      "raed_tilock-19mm-steel-pins-6.jpg",
+      "raed_tilock-19mm-steel-pins-7.jpg"
+    ],
+    "raed_tilock-19mm-titanium-pins": [
+      "raed_tilock-19mm-titanium-pins.jpg",
+      "raed_tilock-19mm-titanium-pins-2.jpg",
+      "raed_tilock-19mm-titanium-pins-3.jpg",
+      "raed_tilock-19mm-titanium-pins-4.jpg",
+      "raed_tilock-19mm-titanium-pins-5.jpg",
+      "raed_tilock-19mm-titanium-pins-6.jpg",
+      "raed_tilock-19mm-titanium-pins-7.jpg"
+    ],
+    "raed_tilock-25mm-steel-pins": [
+      "raed_tilock-25mm-steel-pins.jpg",
+      "raed_tilock-25mm-steel-pins-2.jpg",
+      "raed_tilock-25mm-steel-pins-3.jpg",
+      "raed_tilock-25mm-steel-pins-4.jpg",
+      "raed_tilock-25mm-steel-pins-5.jpg",
+      "raed_tilock-25mm-steel-pins-6.jpg",
+      "raed_tilock-25mm-steel-pins-7.jpg"
+    ],
+    "raed_tilock-25mm-titanium-pins": [
+      "raed_tilock-25mm-titanium-pins.jpg",
+      "raed_tilock-25mm-titanium-pins-2.jpg",
+      "raed_tilock-25mm-titanium-pins-3.jpg",
+      "raed_tilock-25mm-titanium-pins-4.jpg",
+      "raed_tilock-25mm-titanium-pins-5.jpg",
+      "raed_tilock-25mm-titanium-pins-6.jpg",
+      "raed_tilock-25mm-titanium-pins-7.jpg"
     ],
     "slackde_easylock": [
       "slackde_easylock.jpg"
@@ -1620,6 +1655,9 @@
       "slackde_linelocker-50mm.jpg",
       "slackde_linelocker-50mm-2.jpg",
       "slackde_linelocker-50mm-3.jpg"
+    ],
+    "slackfr_sladlock-light": [
+      "slackfr_sladlock-light.jpg"
     ],
     "slackgear_baboonlock": [
       "slackgear_baboonlock.jpg"

@@ -34,6 +34,7 @@ from sqlmodel import Session, SQLModel, create_engine, select
 from sqlmodel.pool import StaticPool
 
 from slack_data.load_data.load_grips import add_grips_to_db, clean_grip_data
+from slack_data.load_data.load_isa_warnings import WARNABLE_MODELS
 from slack_data.models.brands import Brand
 from slack_data.models.grips import Grip
 from slack_data.models.leashrings import LeashRing
@@ -223,3 +224,36 @@ def test_a_reordered_seed_keeps_its_ids(session) -> None:
     wrong = {grip["name"]: (grip["id"], rows.get(grip["name"])) for grip in grips
              if rows.get(grip["name"]) != grip["id"]}
     assert not wrong, f"reversing grips.json moved ids: {wrong}"
+
+
+def test_isa_match_blocks_point_at_the_products_they_name(seeded) -> None:
+    """Every ISA match block's `gearIds[i]` is the row `gearNames[i]` names.
+
+    `load_isa_warnings.py` makes this check at seed time and *reports* a
+    mismatch rather than re-pointing the recall — which means the failure mode
+    is a warning that silently stops being applied. Nothing pinned it, so
+    renaming a product (as the TiLock configuration split did: "TiLock 25mm"
+    became "TiLock 25mm - Titanium Pins") could drop a safety notice off the
+    catalogue with a green suite.
+
+    The pairing is positional, exactly as the loader reads it.
+    """
+    entries = json.loads((ROOT / "isa_gear_warnings.json").read_text(encoding="utf-8"))["items"]
+
+    wrong: list[str] = []
+    for entry in entries:
+        match = entry.get("match") or {}
+        gear_type, ids, names = match.get("gearType"), match.get("gearIds") or [], match.get("gearNames") or []
+        if not gear_type or not ids or gear_type not in WARNABLE_MODELS:
+            continue  # unmatched, or a type with no isa_warning column — both are the loader's business
+        for index, gear_id in enumerate(ids):
+            row = seeded.get(WARNABLE_MODELS[gear_type], gear_id)
+            actual = f"{row.brand.name} {row.name}" if row else None
+            expected = names[index] if index < len(names) else None
+            if expected and expected != actual:
+                wrong.append(f"warning {entry.get('id')}: {gear_type} {gear_id} is {actual!r}, not {expected!r}")
+
+    assert not wrong, (
+        "ISA match block(s) no longer name the row they point at — the warning would be dropped:\n"
+        + "\n".join(wrong)
+    )
