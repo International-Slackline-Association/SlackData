@@ -14,10 +14,11 @@ import { useCurrency } from '@/context/CurrencyContext'
 import { useUrlState } from '@/hooks/useUrlState'
 import { filterBySearch } from '@/utils/search'
 import { sortItems } from '@/utils/sort'
-import { filterGroupsFor } from '@/config/filterGroups'
+import { BRAND_GROUP, filterGroupsFor } from '@/config/filterGroups'
 import { activeFilterCount, applyFilters, type RangeBounds } from '@/utils/filter'
 import { percentAtKn, topKnPoints } from '@/utils/stretch'
 import { useIsDesktop } from '@/hooks/useMediaQuery'
+import { brandsFor } from '@/utils/sellers'
 import type { AnyItem } from '@/utils/format'
 import FilterSidebar from '@/components/gear/FilterSidebar'
 import type { Status } from '@/components/gear/StatusToggle'
@@ -195,12 +196,19 @@ export default function GearListingPage() {
   // Both are null when the item has no price or its currency isn't in the table,
   // which is exactly the null-last / excluded-by-a-bound behaviour already in
   // place for every other numeric field.
+  //
+  // A third joins them: `brands` — the maker plus every name in the item's own
+  // `gear_sellers`. It is what the Brand filter group compares (see
+  // filterGroups.ts → BRAND_GROUP), so picking a brand finds what that brand
+  // SELLS, not only what it makes. Derived here, beside the money fields,
+  // because the filter machinery already handles an array-valued field.
   const items = useMemo<AnyItem[]>(
     () =>
       (rawItems as unknown as AnyItem[]).map(it => ({
         ...it,
         price_base: basePrice(it),
         price_display: displayPrice(it),
+        brands: brandsFor(it),
       })),
     [rawItems, basePrice, displayPrice],
   )
@@ -211,8 +219,10 @@ export default function GearListingPage() {
     if (meta) {
       for (const g of filterGroupsFor(meta.slug)) {
         if (g.type === 'pill') {
+          // Same split as the ranges below: the URL key is the group, the field
+          // compared may differ (brand → the derived `brands` list).
           const values = url.getPillValues(g.group)
-          if (values.length) activePills[g.group] = values
+          if (values.length) activePills[g.valueField ?? g.group] = values
         } else {
           // The URL key is the group; the field compared may differ (price).
           const r = url.getRange(g.group)
@@ -246,6 +256,23 @@ export default function GearListingPage() {
       ),
     [scopedItems, query, activePills, activeRanges],
   )
+
+  // The brand facet: every OTHER control applied, but not the brand group
+  // itself. Excluding its own selection is the whole trick — folded in, picking
+  // "Spider Slacklines" would leave Spider as the only pill in the group and
+  // there would be no way to add a second brand. Excluding the stretch widget
+  // too, for the same reason its own kN counts exclude it (see contextItems):
+  // that widget re-derives its pills from `contextItems`, and making the two
+  // facets depend on each other's selection makes both jump as you click.
+  const brandFacetItems = useMemo(() => {
+    const withoutBrand = { ...activePills }
+    delete withoutBrand[BRAND_GROUP.valueField ?? BRAND_GROUP.group]
+    return applyFilters(
+      filterBySearch(scopedItems as never, query) as unknown as AnyItem[],
+      withoutBrand,
+      activeRanges,
+    )
+  }, [scopedItems, query, activePills, activeRanges])
 
   const visible = useMemo(() => {
     let filtered = contextItems
@@ -346,6 +373,7 @@ export default function GearListingPage() {
           <FilterSidebar
             meta={meta}
             items={scopedItems as unknown as AnyItem[]}
+            brandItems={brandFacetItems}
             url={url}
             status={status}
             onStatusChange={setStatus}
@@ -500,6 +528,7 @@ export default function GearListingPage() {
           <FilterSidebar
             meta={meta}
             items={scopedItems as unknown as AnyItem[]}
+            brandItems={brandFacetItems}
             url={url}
             status={status}
             onStatusChange={setStatus}

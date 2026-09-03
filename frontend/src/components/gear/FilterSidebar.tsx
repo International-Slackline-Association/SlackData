@@ -8,12 +8,18 @@
 // pinned to the top; the header and every group live in one inner scroll region
 // (data-cy="filter-scroll") that slides beneath it.
 
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 import type { GearTypeMeta } from '@/config/gearTypes'
-import { filterGroupsFor, type FilterGroupMeta } from '@/config/filterGroups'
+import { BRAND_GROUP, filterGroupsFor, type FilterGroupMeta } from '@/config/filterGroups'
 import { useCurrency } from '@/context/CurrencyContext'
 import { moneyPrecision, symbolFor } from '@/utils/money'
-import { derivePillOptions, NO_VALUE_PILL } from '@/utils/filter'
+import {
+  derivePillOptions,
+  foldPillOptions,
+  NO_VALUE_PILL,
+  PILL_FOLD_THRESHOLD,
+  withSelectedOptions,
+} from '@/utils/filter'
 import { rangeDomain } from '@/utils/range'
 import type { useUrlState } from '@/hooks/useUrlState'
 import type { AnyItem } from '@/utils/format'
@@ -44,9 +50,25 @@ function pillGroupVisible(meta: FilterGroupMeta, items: AnyItem[]): boolean {
 // back to "all". Groups with 3+ options are multi-select (OR within the group)
 // and get subtle All / None shortcuts.
 function PillGroup({ meta, url, items }: { meta: FilterGroupMeta; url: UrlState; items: AnyItem[] }) {
-  const options = derivePillOptions(items, meta)
-  const single = options.length === 2
   const selected = url.getPillValues(meta.group)
+  // `withSelectedOptions` is a no-op for every group whose options come from the
+  // whole scope — a value cannot be selected there without existing. It earns
+  // its keep on the faceted Brand group, where the other filters can narrow a
+  // selected brand out of its own list; see the function's own note.
+  const options = withSelectedOptions(derivePillOptions(items, meta), selected)
+  const single = options.length === 2
+
+  // A long group (Brand: 45 webbing brands) searches and folds. Both bits of
+  // state are LOCAL and deliberately not in the URL — they are ways of looking
+  // at the control, not part of the view being shared, and a shared link that
+  // reopened someone else's half-typed brand search would be noise. Only groups
+  // that declare `searchable` and actually have a long list get either.
+  const [query, setQuery] = useState('')
+  const [expanded, setExpanded] = useState(false)
+  const foldable = (meta.searchable ?? false) && options.length > PILL_FOLD_THRESHOLD
+  const { shown, hidden } = foldable
+    ? foldPillOptions(options, { query, expanded, selected })
+    : { shown: options, hidden: 0 }
 
   // Both branches decide inside the hook, off the pending-params mirror — never
   // from `selected` here, which reflects the last committed URL and lags a fast
@@ -58,6 +80,16 @@ function PillGroup({ meta, url, items }: { meta: FilterGroupMeta; url: UrlState;
 
   return (
     <div data-cy="pill-group" data-select={single ? 'single' : 'multi'}>
+      {foldable && (
+        <input
+          data-cy="pill-search"
+          type="search"
+          value={query}
+          onChange={e => setQuery(e.target.value)}
+          placeholder={`Search ${meta.label.toLowerCase()}…`}
+          className="mb-2 w-full rounded-lg border border-gray-300 px-2.5 py-1.5 text-xs focus:border-teal-primary focus:outline-none"
+        />
+      )}
       {options.length >= 3 && (
         <div className="mb-1.5 flex gap-2 text-[10px] font-medium uppercase tracking-wide text-gray-400">
           <button
@@ -80,7 +112,7 @@ function PillGroup({ meta, url, items }: { meta: FilterGroupMeta; url: UrlState;
         </div>
       )}
       <div className="flex flex-wrap gap-1.5">
-        {options.map(opt => (
+        {shown.map(opt => (
           <Pill
             key={opt.value}
             value={opt.value}
@@ -90,6 +122,24 @@ function PillGroup({ meta, url, items }: { meta: FilterGroupMeta; url: UrlState;
           />
         ))}
       </div>
+      {/* The fold's own control. Shown while folded (there is more to see) and
+          while expanded (there is a way back), but never while searching — a
+          result set the viewer narrowed themselves is shown whole. */}
+      {foldable && query.trim() === '' && (hidden > 0 || expanded) && (
+        <button
+          data-cy="pill-more"
+          type="button"
+          onClick={() => setExpanded(e => !e)}
+          className="mt-2 text-[11px] font-medium text-teal-primary hover:underline"
+        >
+          {expanded ? 'Show fewer' : `Show all ${options.length}`}
+        </button>
+      )}
+      {foldable && shown.length === 0 && (
+        <p data-cy="pill-no-match" className="text-xs text-gray-400">
+          No {meta.label.toLowerCase()} matches “{query.trim()}”.
+        </p>
+      )}
     </div>
   )
 }
@@ -192,6 +242,7 @@ function RangeControl({
 export default function FilterSidebar({
   meta,
   items,
+  brandItems,
   url,
   status,
   onStatusChange,
@@ -201,6 +252,13 @@ export default function FilterSidebar({
 }: {
   meta: GearTypeMeta
   items: AnyItem[]
+  // The items the Brand group derives its pills from: everything the OTHER
+  // controls leave in play, so the brand list answers "who still has something
+  // here" rather than listing 45 brands most of which no longer match. Every
+  // other group derives from `items` (the whole status scope) on purpose — a
+  // spec axis that reshuffled its own pills on every click would be unusable.
+  // Falls back to `items` when the page does not supply it.
+  brandItems?: AnyItem[]
   url: UrlState
   status: Status
   onStatusChange: (next: Status) => void
@@ -213,6 +271,14 @@ export default function FilterSidebar({
   children?: React.ReactNode // webbing stretch widget slots in here
 }) {
   const groups = filterGroupsFor(meta.slug)
+  // Brand renders after everything else INCLUDING the webbing stretch widget,
+  // which slots in as `children` between the config groups and the end of the
+  // list. It is the longest group in the sidebar and the least specific, so it
+  // sits at the bottom rather than pushing the spec filters people came for
+  // under a wall of brand pills. Config order already puts it last; this is
+  // what keeps it below the widget too.
+  const ordered = groups.filter(g => g.group !== BRAND_GROUP.group)
+  const brand = groups.find(g => g.group === BRAND_GROUP.group)
   const { display, rates } = useCurrency()
   // How finely the price slider moves, in the currency on screen — cents for the
   // dollar, whole yen for the yen. Recomputed when either changes.
@@ -270,7 +336,7 @@ export default function FilterSidebar({
         </div>
 
         <div className="rounded-xl border border-gray-200 bg-white px-4">
-          {groups
+          {ordered
             .filter(g => pillGroupVisible(g, items))
             .map(g => (
               <FilterGroup key={g.group} group={g.group} label={g.label}>
@@ -295,6 +361,11 @@ export default function FilterSidebar({
               </FilterGroup>
             ))}
           {children}
+          {brand && (
+            <FilterGroup key={brand.group} group={brand.group} label={brand.label}>
+              <PillGroup meta={brand} url={url} items={brandItems ?? items} />
+            </FilterGroup>
+          )}
         </div>
       </div>
     </aside>
