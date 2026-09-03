@@ -49,7 +49,11 @@ function rank(value: string): number {
 }
 
 export function derivePillOptions(items: AnyItem[], meta: FilterGroupMeta): PillOption[] {
-  const { group: field, capitalize = false, order, includeNone = false } = meta
+  const { capitalize = false, order, includeNone = false } = meta
+  // The field READ is not always the group's own name — `brand` reads the
+  // derived `brands` array (maker + sellers) while keeping the singular URL
+  // key. Same `valueField` indirection the price range group uses.
+  const field = meta.valueField ?? meta.group
   const kind = meta.pillKind ?? 'enum'
   const seen = new Set<string>()
   let anyMissing = false
@@ -171,4 +175,58 @@ export function activeFilterCount(
   if (extras.statusScoped) n += 1
   if (extras.stretchEngaged) n += 1
   return n
+}
+
+// ── Folding a long pill group ────────────────────────────────────────────────
+//
+// Most pill groups have a handful of options. Brand has 45 on webbings, which
+// is a wall of pills in a 280px column, so a long group searches and folds.
+// Kept here, out of the sidebar component, because the one rule that matters is
+// invisible in a screenshot: a SELECTED pill is never hidden — not by the fold,
+// not by a search term that does not match it. A filter you cannot see is a
+// filter you cannot undo.
+
+/** Above this many options, a group grows a search box and folds. */
+export const PILL_FOLD_THRESHOLD = 10
+
+/** How many pills a folded group shows, before its selected ones. */
+export const PILL_FOLD_VISIBLE = 12
+
+export function foldPillOptions(
+  options: PillOption[],
+  { query, expanded, selected }: { query: string; expanded: boolean; selected: string[] },
+): { shown: PillOption[]; hidden: number } {
+  const needle = query.trim().toLowerCase()
+  const isSelected = (o: PillOption) => selected.includes(o.value)
+  const matches = needle
+    ? options.filter(o => isSelected(o) || o.label.toLowerCase().includes(needle))
+    : options
+
+  // Searching replaces the fold: a result set the viewer narrowed themselves is
+  // shown whole, with no "show all" toggle to explain.
+  if (needle || expanded || matches.length <= PILL_FOLD_VISIBLE) {
+    return { shown: matches, hidden: 0 }
+  }
+  const shown = matches.filter((o, i) => i < PILL_FOLD_VISIBLE || isSelected(o))
+  return { shown, hidden: matches.length - shown.length }
+}
+
+/**
+ * The options a group must offer, given what is currently selected in it.
+ *
+ * Only matters for a FACETED group — one whose options are derived from the
+ * items the other filters leave in play (Brand). Narrow the rest of the sidebar
+ * far enough and a brand you had already picked can drop out of its own option
+ * list: the filter stays applied, the pill vanishes, and there is no way left
+ * to switch it off except Clear all. So a selected value that no longer appears
+ * is appended rather than dropped — it renders active, matches nothing, and one
+ * click undoes it.
+ *
+ * Appended at the END, not sorted in: it is a dead option, and the sorted list
+ * above it is the set that still has items behind it.
+ */
+export function withSelectedOptions(options: PillOption[], selected: string[]): PillOption[] {
+  const present = new Set(options.map(o => o.value))
+  const missing = selected.filter(v => !present.has(v)).map(value => ({ value, label: value }))
+  return missing.length ? [...options, ...missing] : options
 }
