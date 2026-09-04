@@ -196,15 +196,32 @@ describe('Brand filter — webbings', () => {
     // that still have a webbing in the grid — not the whole 45.
     cy.get('[data-cy="filter-group"][data-group="material"]')
       .find('[data-cy="filter-pill"]').first().invoke('attr', 'data-value').then(material => {
+        const matching = items.filter(i => String(i.material).includes(String(material)))
+        const expected = brandsIn(matching)
         cy.get('[data-cy="filter-group"][data-group="material"]')
           .find('[data-cy="filter-pill"]').first().click()
-        const expected = brandsIn(
-          items.filter(i => String(i.material).includes(String(material))),
-        )
-        cy.get(GROUP).find('[data-cy="pill-more"]').then($more => {
-          if ($more.length) cy.wrap($more).click()
+        // Wait for the narrowing to land in the grid first: the fold below is
+        // decided from the brand list as it stands, and reading it while the
+        // page still holds the whole catalogue asks the wrong question.
+        cy.get('[data-cy="gear-card"]').should('have.length', matching.length)
+        // The fold only exists past 12 brands, and narrowing can take the list
+        // under that — so open it if it is there, and don't demand it. `.find()`
+        // on the command itself would retry for five seconds and fail instead.
+        //
+        // The click has to re-query, too: a `cy.wrap`ped element is frozen, so
+        // the click under it keeps aiming at a snapshot. When the sidebar
+        // re-rendered between the read and the click, that button was in a tree
+        // no longer in the page and Cypress failed with "they disappeared from
+        // the page" rather than retrying. Reading existence off the live body
+        // and clicking through a fresh `cy.get` keeps the chain retryable.
+        cy.get('body').then($body => {
+          if ($body.find(`${GROUP} [data-cy="pill-more"]`).length) {
+            cy.get(GROUP).find('[data-cy="pill-more"]').click()
+          }
         })
-        cy.get(GROUP).find('[data-cy="filter-pill"]').then($pills => {
+        // `should`, not `then`: the brand list is derived from the narrowed
+        // grid, so a one-shot read can catch it a render before it settles.
+        cy.get(GROUP).find('[data-cy="filter-pill"]').should($pills => {
           expect([...$pills].map(el => el.getAttribute('data-value'))).to.deep.equal(expected)
         })
       })
