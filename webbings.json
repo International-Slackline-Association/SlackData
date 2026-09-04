@@ -1586,7 +1586,7 @@
         "weight": 58,
         "breakingStrength": 28,
         "date_introduced": 1507150800000,
-        "product_url": "http://www.balancecommunity.com/lift",
+        "product_url": "https://web.archive.org/web/20190526173651/http://www.balancecommunity.com/lift",
         "width": 25,
         "thickness": 3.18,
         "webbing_construction": "Flat",
@@ -3986,8 +3986,8 @@
             }
         ],
         "materialType": "Nylon",
-        "weight": 48,
-        "breakingStrength": 23.6,
+        "weight": 54,
+        "breakingStrength": 25.6,
         "date_introduced": 1503349200000,
         "product_url": "https://slacktivity.com/shop/pinktube-slackline-tubular-webbing/",
         "width": 25.5,
@@ -4153,7 +4153,7 @@
         ],
         "materialType": "Nylon",
         "weight": 76,
-        "breakingStrength": 32,
+        "breakingStrength": 36,
         "date_introduced": null,
         "product_url": "https://www.slacktivity.com/redtube-30m-200m",
         "width": 25,
@@ -6351,7 +6351,7 @@
         "id": 112,
         "name": "Tube Line",
         "brand": "Gibbon",
-        "materialType": "Other",
+        "materialType": "Polyester",
         "width": 25,
         "weight": 64,
         "breakingStrength": 30,
@@ -6764,7 +6764,51 @@
         "breakingStrength": 42,
         "stretch": [
             {
-                "percent": 8.3,
+                "percent": 0.58,
+                "kn": 1
+            },
+            {
+                "percent": 1.27,
+                "kn": 2
+            },
+            {
+                "percent": 1.82,
+                "kn": 3
+            },
+            {
+                "percent": 2.5,
+                "kn": 4
+            },
+            {
+                "percent": 3.25,
+                "kn": 5
+            },
+            {
+                "percent": 4.34,
+                "kn": 6
+            },
+            {
+                "percent": 5.17,
+                "kn": 7
+            },
+            {
+                "percent": 5.94,
+                "kn": 8
+            },
+            {
+                "percent": 6.67,
+                "kn": 9
+            },
+            {
+                "percent": 7.34,
+                "kn": 10
+            },
+            {
+                "percent": 7.76,
+                "kn": 11
+            },
+            {
+                "percent": 8.31,
                 "kn": 12
             }
         ],
@@ -6923,7 +6967,7 @@
             }
         ],
         "date_introduced": null,
-        "product_url": null,
+        "product_url": "https://web.archive.org/web/20170107031334/http://www.balancingearthslacklines.com/slackline_webbing_flat_nylon_type_18_cg4_slackline_p/cg4.htm",
         "thickness": 3,
         "webbing_construction": "Flat",
         "isa_certified": false,
@@ -6941,7 +6985,7 @@
         "breakingStrength": 20,
         "stretch": null,
         "date_introduced": null,
-        "product_url": null,
+        "product_url": "https://web.archive.org/web/20160806161225/http://www.balancingearthslacklines.com/webbing_tubular_rasta_slackline_balancing_earth_p/rtw.htm",
         "thickness": 2.2,
         "webbing_construction": "Tubular",
         "isa_certified": false,
@@ -8481,7 +8525,7 @@
         "brand": "Slacktivity",
         "materialType": "Nylon",
         "width": 25.5,
-        "weight": 49.5,
+        "weight": 54,
         "breakingStrength": 25,
         "stretch": [
             {
@@ -11485,7 +11529,7 @@
         "width": 25,
         "thickness": 2.3,
         "weight": 49,
-        "breakingStrength": 24.5,
+        "breakingStrength": 23.6,
         "webbing_construction": "Tubular",
         "isa_certified": false,
         "product_url": "https://slack-inov.com/shop/en/longline-webbings/1202-6543-reggae-9506919000.html",

@@ -49,13 +49,14 @@ const FILTER_GROUPS: Record<string, FilterGroup[]> = {
   ],
 
   // ── Weblock ───────────────────────────────────────────────────────────────
-  // Fields: style(enum|None) material(enum) width_min(int) width_max(int|None) weight(float)
+  // Fields: style(enum|None) material(enum[] — multi-select, a titanium frame can
+  //         carry steel pins) width_min(int) width_max(int|None) weight(float)
   //         breaking_strength(float) front_pin(enum|None) attachment_point(enum|None)
   //         isa_certified(bool) isa_warning(enum) colors(excluded)
   weblocks: [
     { group: 'price',             label: 'Price',             type: 'range', valueAttr: 'data-price-display' },
     { group: 'style',             label: 'Style',             type: 'pill'  }, // Tensionable Weblock / Fixed Linelocker
-    { group: 'material',          label: 'Material',          type: 'pill'  }, // MetalMaterial
+    { group: 'material',          label: 'Material',          type: 'pill'  }, // MetalMaterial[]
     { group: 'width_min',         label: 'Min Width',         type: 'range', unit: 'mm' }, // dual-thumb slider
     { group: 'front_pin',         label: 'Front Pin',         type: 'pill'  }, // Push/Pull/Captive/Fixed Bolt/Other
     { group: 'attachment_point',  label: 'Attachment Point',  type: 'pill'  }, // Universal/Hole/Pin/Bolt/Bent Plate/Sling/Other

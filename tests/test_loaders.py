@@ -23,6 +23,7 @@ from slack_data.load_data.load_weblocks import (
 from slack_data.models.brands import get_brand
 from slack_data.models.webbing import FiberMaterial
 from slack_data.models.weblocks import WeblockStyle
+from slack_data.utilities.materials import MetalMaterial, get_metal_materials
 
 
 # ---------------------------------------------------------------------------
@@ -178,6 +179,70 @@ def test_weblocks_seed_declares_a_style_for_every_item():
     assert None not in styles
     assert WeblockStyle.LINELOCKER in styles
     assert WeblockStyle.TENSIONABLE in styles
+
+
+# ---------------------------------------------------------------------------
+# get_metal_materials() — the multi-select mapper behind `material`
+# ---------------------------------------------------------------------------
+# A weblock is rarely one metal: a titanium frame can carry steel pins, and an
+# aluminium body stainless hardware. The scalar `get_metal_material()` kept the
+# FIRST entry and dropped the rest silently, which is how 14 seeded weblocks
+# came to publish one metal each while their seeds named two or three.
+
+
+@pytest.mark.parametrize("raw,expected", [
+    ("Titanium, Steel", [MetalMaterial.TITANIUM, MetalMaterial.STEEL]),
+    (["Titanium", "Steel"], [MetalMaterial.TITANIUM, MetalMaterial.STEEL]),
+    ("Aluminum & Stainless Steel", [MetalMaterial.ALUMINUM, MetalMaterial.STAINLESS_STEEL]),
+    ("Aluminum and Steel", [MetalMaterial.ALUMINUM, MetalMaterial.STEEL]),
+    # "stainless" is checked before "steel", so the two stay distinct members
+    ("Stainless Steel, Steel", [MetalMaterial.STAINLESS_STEEL, MetalMaterial.STEEL]),
+    ("Steel, Steel", [MetalMaterial.STEEL]),                    # duplicates collapse
+    ("Nylon, Aluminum", [MetalMaterial.ALUMINUM]),              # OTHER drops once a metal resolves
+    ("Unobtainium", [MetalMaterial.OTHER]),                     # ...but survives alone
+    (None, [MetalMaterial.OTHER]),
+    ("", [MetalMaterial.OTHER]),
+])
+def test_get_metal_materials(raw, expected):
+    assert get_metal_materials(raw) == expected
+
+
+def test_clean_weblock_keeps_every_metal():
+    """The regression guard: a two-metal weblock must not come back as one.
+
+    This is the TiLock configuration split — a titanium frame with high-strength
+    steel pins. Under the old scalar mapping the steel silently vanished and the
+    steel-pin build was indistinguishable from the titanium-pin one.
+    """
+    item = _weblock_item(specifications={"Material": ["Titanium", "Steel"]})
+    assert clean_weblock_data(item)["material"] == [
+        MetalMaterial.TITANIUM,
+        MetalMaterial.STEEL,
+    ]
+
+
+def test_clean_weblock_material_is_always_a_list():
+    """Single-metal weblocks — the other 115 — still load, as a 1-item list."""
+    assert clean_weblock_data(_weblock_item())["material"] == [MetalMaterial.ALUMINUM]
+
+
+def test_weblocks_seed_resolves_a_material_for_every_item():
+    """No seeded weblock loses its metals on the way in.
+
+    Checked against the raw seed rather than a fixed list, so it keeps holding
+    as products are added: whatever a seed names, that many distinct metals come
+    out. A revert to first-item-only fails here on the 14 multi-metal rows.
+    """
+    from slack_data.load_data.load_weblocks import load_weblocks_json
+
+    thin = {}
+    for item in load_weblocks_json():
+        raw = (item.get("specifications") or {}).get("Material")
+        resolved = clean_weblock_data(dict(item))["material"]
+        assert resolved, f"{item.get('name')}: no material resolved at all"
+        if isinstance(raw, list) and len(get_metal_materials(raw)) != len(resolved):
+            thin[item.get("name")] = (raw, resolved)
+    assert not thin, f"weblock(s) lost a metal between seed and model: {thin}"
 
 
 # ---------------------------------------------------------------------------

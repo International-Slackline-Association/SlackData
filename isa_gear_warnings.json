@@ -979,11 +979,15 @@
             "description": "The Weblock is not made for tensioned slacklines, this is a lightweight, low tension weblock. The pin mechanism is prone to failures. Several incidents ranging from webbing damage to complete failures have been reported.",
             "solution": "For professional use only. Not recommended for general highline use.",
             "match": {
-                "gearType": null,
-                "gearIds": [],
-                "gearNames": [],
-                "confidence": "none",
-                "note": "SladLock light is a distinct low-tension model; not in the catalogue (weblock 96 SladLock Power is a different product)"
+                "gearType": "weblock",
+                "gearIds": [
+                    131
+                ],
+                "gearNames": [
+                    "Slack.fr SladLock Light"
+                ],
+                "confidence": "exact",
+                "note": "added 2026-09-02 from the archived shop page; still distinct from weblock 96 SladLock Power"
             }
         },
         {
@@ -1877,14 +1881,18 @@
                 "gearType": "weblock",
                 "gearIds": [
                     101,
-                    102
+                    102,
+                    128,
+                    129
                 ],
                 "gearNames": [
-                    "Raed Slacklines TiLock 19mm",
-                    "Raed Slacklines TiLock 25mm"
+                    "Raed Slacklines TiLock 19mm - Titanium Pins",
+                    "Raed Slacklines TiLock 25mm - Titanium Pins",
+                    "Raed Slacklines TiLock 19mm - Steel Pins",
+                    "Raed Slacklines TiLock 25mm - Steel Pins"
                 ],
                 "confidence": "ambiguous",
-                "note": "TiLock held in 19mm and 25mm"
+                "note": "TiLock held as four configurations: 19mm/25mm x steel/titanium PushPins. The sidewall edge is on the frame, so the notice applies to all of them."
             }
         },
         {
@@ -1899,11 +1907,15 @@
             "solution": "align the weblock perfectly, so the webbing comes out of the weblock straight. check regularly",
             "link1": "https://www.facebook.com/groups/slackchat/posts/23983097978004087/",
             "match": {
-                "gearType": null,
-                "gearIds": [],
-                "gearNames": [],
-                "confidence": "none",
-                "note": "Raed RigLock not in catalogue (only named in a webbing note)"
+                "gearType": "weblock",
+                "gearIds": [
+                    130
+                ],
+                "gearNames": [
+                    "Raed Slacklines RigLock"
+                ],
+                "confidence": "exact",
+                "note": "added 2026-09-02 from the archived manufacturer page (raed-slacklines.com/riglock)"
             }
         }
     ]
