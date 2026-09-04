@@ -20,6 +20,10 @@
 # - Manufacturer API flag   -> off by default, but the permission it needed is
 #                              confirmed (2026-08-24), so it SHOULD be on. Off
 #                              means shipping Phase 4 dormant for no reason.
+# - Orphaned admin pool    -> a retained Cognito pool sharing the live pool's
+#                              NAME. Deploys are unaffected; a hand-created brand
+#                              client against the wrong one mints tokens that 401
+#                              forever. Tags do not distinguish them (2026-08-27).
 # - Orphaned retained table -> a DeletionPolicy: Retain resource that exists in
 #                              the account but not in the stack. Every later
 #                              deploy is then rejected at CHANGE SET creation by
@@ -246,6 +250,47 @@ if command -v aws >/dev/null 2>&1 && [ -n "${ACCOUNT:-}" ] && [ "${ACCOUNT:-None
       orphan trap."
     fi
   done
+
+  # The user pool cannot spring the change-set trap above — pool names are not
+  # account-unique, so a retained one collides with nothing. It fails the OTHER
+  # way: two pools wearing the same name, and someone reaching for the console
+  # picks the wrong one. The brand client is created, tokens mint, and every
+  # request 401s because the API verifies against the live pool's JWKS. Silent,
+  # and it looks like a broken credential rather than a wrong pool.
+  #
+  # Do NOT try to tell them apart by tag. A pool retained through an
+  # UpdateReplacePolicy replacement keeps the CloudFormation tags it was stamped
+  # with at creation — `aws:cloudformation:stack-name` included — so the corpse
+  # and the live pool are tag-identical. This happened on staging (two
+  # `slackdata-admins-staging` pools, 2026-08-27, cleaned up 2026-09-03). The
+  # stack's own view of the resource is the only evidence that means anything.
+  POOL_NAME="slackdata-admins-${STAGE}"
+  LIVE_POOL="$(aws cloudformation describe-stack-resource \
+      --stack-name "$STACK" --logical-resource-id AdminUserPool \
+      --query 'StackResourceDetail.PhysicalResourceId' --output text 2>/dev/null)"
+  FOUND_POOLS="$(aws cognito-idp list-user-pools --max-results 60 \
+      --query "UserPools[?Name=='${POOL_NAME}'].Id" --output text 2>/dev/null)"
+
+  if [ -z "$FOUND_POOLS" ]; then
+    ok "no $POOL_NAME pool yet — nothing to orphan (expected before the first deploy)"
+  else
+    for pool in $FOUND_POOLS; do
+      if [ "$pool" = "$LIVE_POOL" ]; then
+        ok "$POOL_NAME $pool is managed by $STACK"
+      else
+        bad "ORPHAN POOL: $pool is named $POOL_NAME but $STACK does not claim it
+      (the stack's AdminUserPool is ${LIVE_POOL:-<none — the stack has no pool at all>}).
+      Deploys still succeed; the damage is that the console now offers two
+      identical names when a brand app client is created by hand, and choosing
+      wrong 401s every request with nothing visibly broken. Its tags may still
+      name this stack — they are stamped at creation and survive retention, so
+      ignore them.
+      Check it holds no users, clients or resource server, then delete it:
+        aws cognito-idp delete-user-pool --user-pool-id $pool
+      (delete-user-pool-domain first if it has a domain, or the delete is refused)."
+      fi
+    done
+  fi
 else
   warn "skipped — no AWS access. This check needs the account to compare against."
 fi

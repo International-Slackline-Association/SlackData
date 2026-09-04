@@ -18,7 +18,7 @@ is the only one that has been attempted.
 | Phase 2 (submissions) hosted | **Not live.** `POST /api/submissions/` → 404 (route never created) |
 | Phase 4 (manufacturer API) hosted | **Not live.** `/api/manufacturer/me` → 404 |
 | Phase 2/4 DynamoDB tables, uploads bucket, SPA routing function | **Not created**, and verified gone after the rollback |
-| The admin Cognito pool | **Orphaned, not created.** A pool named `slackdata-admins-prod` survives outside the stack — delete it, see § 1 |
+| The admin Cognito pool | **Created and stack-managed** (`eu-central-1_Fzl6ssZOQ`), matching `frontend/.env.production`. The earlier orphan was deleted; see § 1 |
 | Branch | PR #69 **merged to `main`** (squashed, `8992b7a`). The local branch keeps one later commit (`a2184b4`, a Cypress fix) plus the Phase 4 ship work; nothing else differs from `main`. |
 
 Nothing shipped half-way. The rollback cancelled every new resource before it existed, so the
@@ -64,6 +64,60 @@ Two things that read differently now that the account has been looked at:
 
   (`slackdata-permcheck`, `eu-central-1_xaIj2Vgjx`, is the throwaway pool from the 2026-08-24
   permission test referenced in `serverless.yml`'s header comment. Also disposable, unrelated.)
+
+  **DONE 2026-09-03 — and there were four orphans, not one.** The account held six user pools; two
+  belong to the ISA (`isa-rankings-admin`, `isa-users`) and are not ours to touch. Of the four that
+  were: `eu-central-1_kIHciXdAG` (deleted earlier, per the command above), `slackdata-permcheck`,
+  and **two** pools both named `slackdata-admins-staging` — a pair this section did not predict,
+  produced by an `UpdateReplacePolicy: Retain` *replacement* rather than a failed rollback. See
+  § 1c. What remains is one pool per live stack, which is the invariant:
+
+  ```
+  eu-central-1_Fzl6ssZOQ   slackdata-admins-prod    <- live, matches .env.production
+  eu-central-1_L8dfx8S42   isa-rankings-admin       <- the ISA's, untouched
+  eu-central-1_iGaYGKeyJ   isa-users                <- the ISA's, untouched
+  ```
+
+  `preflight.sh` now checks this on every deploy (§ the orphan-pool check), because the manual
+  version of it was written down twice and performed neither time.
+
+### 1c. The staging stack, and why "delete the orphan" is not always the fix
+
+A staging stage was deployed 2026-08-27 and **removed 2026-09-03** (`npx serverless remove --stage
+staging`). Two things from it are worth keeping.
+
+**The two staging pools were not both orphans, and tags could not tell them apart.** Both carried
+identical `aws:cloudformation:stack-name: slackdata-staging` tags, because CloudFormation stamps
+tags at creation and a retained resource keeps them — the corpse advertises the same ownership as
+the live pool. Only the contents distinguished them: `eu-central-1_8NDlxh8Z4` (15:18) held no users,
+no clients, no resource server and no domain; `eu-central-1_A1Qo7cieQ` (16:35) held the admin user,
+the `slackdata-admin-spa-staging` client, the `slackdata` resource server and the hosted-UI domain.
+**The authority is the stack's `AdminUserPoolId` output, never the tags.**
+
+**A stack-managed pool is removed by removing the stack, not by deleting the pool.** Deleting it in
+the console leaves the stack referencing a resource that no longer exists, and the drift surfaces on
+the next update. `serverless remove` is the right instrument — with two snags met in practice:
+`DELETE_FAILED` on `WebBucket` because a non-empty S3 bucket cannot be deleted (empty it and re-run;
+the buckets are *not* `Retain`, unlike the tables and the pool), and `NoSuchBucket` on
+`UploadsBucket`, which the staging stack predated and so never had.
+
+**What staging proved, since the evidence is now gone with it.** The submissions table held ten rows
+from a 2026-08-28 smoke test — the only end-to-end run of Phase 2 and Phase 4 against real AWS. Five
+survived being read before deletion:
+
+| kind | gear | change | status | note |
+|---|---|---|---|---|
+| `manufacturer` | Feather Pro (webbings 12) | `price: 3.0` | `approved` | auto-approved: sent by Balance Community through the manufacturer API |
+| `manufacturer` | Alpine WebLock 6.1 (weblocks 5) | `price: 189.0` | **`applied`** | has a `reviewed_at` — the admin triage path ran too |
+| `manufacturer` | Alpine WebLock 6.1 (weblocks 5) | `price: 189.0` | `approved` | second batch, same product |
+| `manufacturer` | Axiom (webbings 213) | `price: 3.15` | `approved` | |
+| `correction` | Axiom (webbings 213) | `price: 3.25` | `pending` | anonymous, "staging smoke test via Turnstile test keys" |
+
+All four manufacturer rows authenticated as `brand-client:19do52helicnau2addsgt09pl8` → `brand_id: 3`
+(Balance Community), each with its own `batch_id`, arriving `approved` with the exact `review_note`
+`manufacturer_router` writes — so client-credentials auth, brand resolution, gear matching,
+auto-approval, the admin transition to `applied`, and the anonymous Turnstile path all worked hosted.
+The other five rows were not read before the table was dropped.
 
 ### What was run
 

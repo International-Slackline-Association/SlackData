@@ -3072,19 +3072,64 @@
             {
                 "kn": 20,
                 "percent": 8.4
+            },
+            {
+                "kn": 21,
+                "percent": 8.7
+            },
+            {
+                "kn": 22,
+                "percent": 9.0
+            },
+            {
+                "kn": 23,
+                "percent": 9.2
+            },
+            {
+                "kn": 24,
+                "percent": 9.5
+            },
+            {
+                "kn": 25,
+                "percent": 9.8
+            },
+            {
+                "kn": 26,
+                "percent": 10.0
+            },
+            {
+                "kn": 27,
+                "percent": 10.4
+            },
+            {
+                "kn": 28,
+                "percent": 10.6
+            },
+            {
+                "kn": 29,
+                "percent": 11.0
+            },
+            {
+                "kn": 30,
+                "percent": 11.2
+            },
+            {
+                "kn": 31,
+                "percent": 11.8
             }
         ],
         "materialType": "Polyester",
         "weight": 50,
-        "breakingStrength": 31,
+        "breakingStrength": 31.0,
         "date_introduced": 1470528000000,
-        "product_url": "http://slack-inov.com/gb/webbing/69-cosmic",
+        "product_url": "https://slack-inov.com/shop/en/longline-webbings/359-4493-cosmic-longline-9506919000.html",
         "width": 25,
         "webbing_construction": "Tubular",
         "isa_certified": false,
-        "priceMeter": 1.6,
+        "priceMeter": 1.7,
         "currency": "EUR",
-        "active": true
+        "active": true,
+        "notes": "Slack Inov / Spider 2026 datasheet (2026-09-02): MBS 80 mm diverter 31.0 kN; 3σ MBS weblock 27.4 kN; 3σ MBS sewn loop 28.7 kN; 3σ MBS linelock ring 28.7 kN; 3σ MBS after 6 months outdoor exposure 20.5 kN; energy absorption capacity 2003 J/m; min rigging length 26 m highline / 50 m SPLIT 50 / 100 m SPLIT 100."
     },
     {
         "id": 53,
@@ -3092,33 +3137,98 @@
         "brand": "Slack Inov",
         "stretch": [
             {
+                "kn": 1,
+                "percent": 2.5
+            },
+            {
+                "kn": 2,
+                "percent": 4.0
+            },
+            {
                 "kn": 3,
-                "percent": 7
+                "percent": 6.0
+            },
+            {
+                "kn": 4,
+                "percent": 6.6
             },
             {
                 "kn": 5,
-                "percent": 9.5
+                "percent": 7.2
             },
             {
-                "kn": 7.5,
-                "percent": 11.5
+                "kn": 6,
+                "percent": 8.0
+            },
+            {
+                "kn": 7,
+                "percent": 8.8
+            },
+            {
+                "kn": 8,
+                "percent": 9.6
+            },
+            {
+                "kn": 9,
+                "percent": 10.4
             },
             {
                 "kn": 10,
-                "percent": 13
+                "percent": 11.2
+            },
+            {
+                "kn": 11,
+                "percent": 11.8
+            },
+            {
+                "kn": 12,
+                "percent": 12.4
+            },
+            {
+                "kn": 13,
+                "percent": 13.0
+            },
+            {
+                "kn": 14,
+                "percent": 13.5
+            },
+            {
+                "kn": 15,
+                "percent": 14.0
+            },
+            {
+                "kn": 16,
+                "percent": 14.4
+            },
+            {
+                "kn": 17,
+                "percent": 14.8
+            },
+            {
+                "kn": 18,
+                "percent": 15.2
+            },
+            {
+                "kn": 19,
+                "percent": 15.6
+            },
+            {
+                "kn": 20,
+                "percent": 16.0
             }
         ],
         "materialType": "Nylon",
         "weight": 66,
-        "breakingStrength": 32,
+        "breakingStrength": 32.0,
         "date_introduced": null,
-        "product_url": "https://slack-inov.com/gb/longline/144-donkey",
+        "product_url": null,
         "width": 25.4,
         "webbing_construction": "Flat",
         "isa_certified": false,
         "priceMeter": 2.9,
         "currency": "EUR",
-        "active": false
+        "active": false,
+        "notes": "Slack Inov / Spider 2026 datasheet (2026-09-02): MBS 80 mm diverter 32.0 kN; 3σ MBS weblock 30.7 kN; 3σ MBS sewn loop 33.7 kN; 3σ MBS linelock ring 33.7 kN; 3σ MBS after 6 months outdoor exposure 22.8 kN. The product page linked here previously (https://slack-inov.com/gb/longline/144-donkey) now 404s; the shops no longer carry it."
     },
     {
         "id": 54,
@@ -3126,32 +3236,98 @@
         "brand": "Slack Inov",
         "stretch": [
             {
+                "kn": 1,
+                "percent": 3.0
+            },
+            {
+                "kn": 2,
+                "percent": 4.0
+            },
+            {
                 "kn": 3,
-                "percent": 9.2
+                "percent": 6.0
+            },
+            {
+                "kn": 4,
+                "percent": 8.0
             },
             {
                 "kn": 5,
-                "percent": 14.9
+                "percent": 9.2
             },
             {
-                "kn": 7.5,
-                "percent": 19.2
+                "kn": 6,
+                "percent": 10.2
+            },
+            {
+                "kn": 7,
+                "percent": 11.2
+            },
+            {
+                "kn": 8,
+                "percent": 12.2
+            },
+            {
+                "kn": 9,
+                "percent": 13.1
             },
             {
                 "kn": 10,
-                "percent": 23.1
+                "percent": 14.0
+            },
+            {
+                "kn": 11,
+                "percent": 14.8
+            },
+            {
+                "kn": 12,
+                "percent": 15.5
+            },
+            {
+                "kn": 13,
+                "percent": 16.1
+            },
+            {
+                "kn": 14,
+                "percent": 16.7
+            },
+            {
+                "kn": 15,
+                "percent": 17.2
+            },
+            {
+                "kn": 16,
+                "percent": 17.8
+            },
+            {
+                "kn": 17,
+                "percent": 18.4
+            },
+            {
+                "kn": 18,
+                "percent": 19.0
+            },
+            {
+                "kn": 19,
+                "percent": 19.5
+            },
+            {
+                "kn": 20,
+                "percent": 20.0
             }
         ],
         "materialType": "Nylon",
-        "weight": 56,
-        "breakingStrength": 27,
-        "date_introduced": null,
-        "product_url": "https://slack-inov.com/gb/longline/145-nova",
         "width": 25.4,
+        "thickness": 3.5,
+        "weight": 56,
+        "breakingStrength": 27.0,
         "webbing_construction": "Flat",
         "isa_certified": false,
+        "product_url": null,
+        "date_introduced": null,
         "priceMeter": 2.7,
         "currency": "EUR",
+        "notes": "Slack Inov / Spider 2026 datasheet (2026-09-02): MBS 80 mm diverter 27.0 kN; 3σ MBS sewn loop 25.0 kN; 3σ MBS linelock ring 25.0 kN; 3σ MBS after 6 months outdoor exposure 17.0 kN; energy absorption capacity 2669 J/m. The datasheet carries this as \"RODEO LINE NOVA\", which is this product. A duplicate row \"Rodeo\" (#206, priced 1.62 EUR/m, thickness 3.5 mm — carried over here) was merged into this one on 2026-09-02 and removed from the catalogue. Neither price is verified and the product is discontinued. The product page linked here previously (https://slack-inov.com/gb/longline/145-nova) now 404s; the shops no longer carry it.",
         "active": false
     },
     {
@@ -4674,11 +4850,11 @@
     {
         "id": 68,
         "name": "Tender",
-        "brand": "Spider slacklines",
+        "brand": "Spider Slacklines",
         "materialType": "Polyester",
         "width": 25,
         "weight": 48,
-        "breakingStrength": 23,
+        "breakingStrength": 23.0,
         "stretch": [
             {
                 "kn": 1,
@@ -4759,25 +4935,34 @@
             {
                 "kn": 20,
                 "percent": 18.0
+            },
+            {
+                "kn": 21,
+                "percent": 18.4
+            },
+            {
+                "kn": 22,
+                "percent": 19.2
             }
         ],
         "date_introduced": null,
-        "product_url": "https://spider-slacklines.com/shop/en/longline-webbings/76-tender-line.html",
+        "product_url": "https://spider-slacklines.com/shop/en/longline-webbings/76-4518-tender-longline-9506919000.html",
         "thickness": 2.5,
         "webbing_construction": "Tubular",
         "isa_certified": false,
-        "priceMeter": 1.1,
+        "priceMeter": 1.3,
         "currency": "EUR",
-        "active": true
+        "active": true,
+        "notes": "Slack Inov / Spider 2026 datasheet (2026-09-02): MBS 80 mm diverter 23.0 kN; 3σ MBS weblock 21.4 kN; 3σ MBS sewn loop 20.9 kN; 3σ MBS linelock ring 20.9 kN; 3σ MBS after 6 months outdoor exposure 20.4 kN; energy absorption capacity 2482 J/m; min rigging length 11 m highline / 50 m SPLIT 50 / 100 m SPLIT 100."
     },
     {
         "id": 69,
         "name": "Fly",
-        "brand": "Spider slacklines",
+        "brand": "Spider Slacklines",
         "materialType": "Polyester",
         "width": 25,
         "weight": 58,
-        "breakingStrength": 33,
+        "breakingStrength": 33.0,
         "stretch": [
             {
                 "kn": 1,
@@ -4858,24 +5043,69 @@
             {
                 "kn": 20,
                 "percent": 9.9
+            },
+            {
+                "kn": 21,
+                "percent": 9.9
+            },
+            {
+                "kn": 22,
+                "percent": 10.3
+            },
+            {
+                "kn": 23,
+                "percent": 10.7
+            },
+            {
+                "kn": 24,
+                "percent": 11.0
+            },
+            {
+                "kn": 25,
+                "percent": 11.3
+            },
+            {
+                "kn": 26,
+                "percent": 11.7
+            },
+            {
+                "kn": 27,
+                "percent": 12.0
+            },
+            {
+                "kn": 28,
+                "percent": 12.4
+            },
+            {
+                "kn": 29,
+                "percent": 12.8
+            },
+            {
+                "kn": 30,
+                "percent": 13.2
+            },
+            {
+                "kn": 31,
+                "percent": 13.8
             }
         ],
         "date_introduced": null,
-        "product_url": "http://spider-slacklines.com/shop/en/longline-webbings/77-fly-line.html",
+        "product_url": "https://spider-slacklines.com/shop/en/longline-webbings/77-4490-fly-longline-9506919000.html",
         "webbing_construction": "Flat",
         "isa_certified": false,
-        "priceMeter": 1.37,
+        "priceMeter": 1.5,
         "currency": "EUR",
-        "active": true
+        "active": true,
+        "notes": "Slack Inov / Spider 2026 datasheet (2026-09-02): MBS 80 mm diverter 33.0 kN; 3σ MBS weblock 32.3 kN; 3σ MBS sewn loop 30.4 kN; 3σ MBS linelock ring 30.4 kN; 3σ MBS after 6 months outdoor exposure 29.6 kN; energy absorption capacity 2300 J/m; min rigging length 14 m highline / 50 m SPLIT 50 / 100 m SPLIT 100."
     },
     {
         "id": 70,
         "name": "Zao",
-        "brand": "Spider slacklines",
+        "brand": "Spider Slacklines",
         "materialType": "Polyester",
         "width": 25,
         "weight": 65,
-        "breakingStrength": 32,
+        "breakingStrength": 31.0,
         "stretch": [
             {
                 "kn": 1,
@@ -4959,13 +5189,14 @@
             }
         ],
         "date_introduced": null,
-        "product_url": "http://spider-slacklines.com/shop/en/longline-webbings/69-zao-line.html",
+        "product_url": "https://spider-slacklines.com/shop/en/longline-webbings/69-4491-zao-line-9506919000.html",
         "thickness": 3.2,
         "webbing_construction": "Flat",
         "isa_certified": false,
-        "priceMeter": 1.4,
+        "priceMeter": 1.65,
         "currency": "EUR",
-        "active": true
+        "active": true,
+        "notes": "Slack Inov / Spider 2026 datasheet (2026-09-02): MBS 80 mm diverter 31.0 kN; 3σ MBS weblock 30.3 kN; 3σ MBS sewn loop 29.1 kN; 3σ MBS linelock ring 29.1 kN; 3σ MBS after 6 months outdoor exposure 27.0 kN; energy absorption capacity 3392 J/m; min rigging length 10 m highline / 50 m SPLIT 50 / 100 m SPLIT 100. The datasheet's stretch continuation above 20 kN is a second test run reading below the first, so only the 1-20 kN series is stored."
     },
     {
         "id": 71,
@@ -5055,16 +5286,17 @@
         ],
         "materialType": "Polyester",
         "weight": 62,
-        "breakingStrength": 35,
+        "breakingStrength": 35.0,
         "date_introduced": null,
-        "product_url": "http://spider-slacklines.com/shop/en/longline-webbings/74-edge-line.html",
+        "product_url": "https://spider-slacklines.com/shop/en/longline-webbings/74-4565-edge-line-9506919000.html",
         "width": 25.4,
         "thickness": 2.7,
         "webbing_construction": "Flat",
         "isa_certified": false,
-        "priceMeter": 1.48,
+        "priceMeter": 1.8,
         "currency": "EUR",
-        "active": true
+        "active": true,
+        "notes": "Slack Inov / Spider 2026 datasheet (2026-09-02): MBS 80 mm diverter 35.0 kN; 3σ MBS weblock 32.7 kN; 3σ MBS sewn loop 34.1 kN; 3σ MBS linelock ring 34.1 kN; 3σ MBS after 6 months outdoor exposure 31.0 kN; energy absorption capacity 2600 J/m; min rigging length 10 m highline / 50 m SPLIT 50 / 100 m SPLIT 100."
     },
     {
         "id": 72,
@@ -5150,20 +5382,81 @@
             {
                 "kn": 20,
                 "percent": 10.5
+            },
+            {
+                "kn": 21,
+                "percent": 11.0
+            },
+            {
+                "kn": 22,
+                "percent": 11.3
+            },
+            {
+                "kn": 23,
+                "percent": 11.6
+            },
+            {
+                "kn": 24,
+                "percent": 12.0
+            },
+            {
+                "kn": 25,
+                "percent": 12.2
+            },
+            {
+                "kn": 26,
+                "percent": 12.5
+            },
+            {
+                "kn": 27,
+                "percent": 12.8
+            },
+            {
+                "kn": 28,
+                "percent": 13.0
+            },
+            {
+                "kn": 29,
+                "percent": 13.3
+            },
+            {
+                "kn": 30,
+                "percent": 13.6
+            },
+            {
+                "kn": 31,
+                "percent": 14.0
+            },
+            {
+                "kn": 32,
+                "percent": 14.3
+            },
+            {
+                "kn": 33,
+                "percent": 14.6
+            },
+            {
+                "kn": 34,
+                "percent": 14.9
+            },
+            {
+                "kn": 35,
+                "percent": 15.3
             }
         ],
         "materialType": "Polyester",
         "weight": 83,
-        "breakingStrength": 35,
+        "breakingStrength": 35.0,
         "date_introduced": null,
-        "product_url": "http://spider-slacklines.com/shop/en/longline-webbings/73-jumbo-line.html",
+        "product_url": "https://spider-slacklines.com/shop/en/longline-webbings/73-4556-jumbo-longline-9506919000.html",
         "width": 25.4,
         "thickness": 4,
         "webbing_construction": "Tubular",
         "isa_certified": false,
-        "priceMeter": 1.89,
+        "priceMeter": 2.1,
         "currency": "EUR",
-        "active": true
+        "active": true,
+        "notes": "Slack Inov / Spider 2026 datasheet (2026-09-02): MBS 80 mm diverter 35.0 kN; 3σ MBS weblock 29.6 kN; 3σ MBS sewn loop 33.3 kN; 3σ MBS linelock ring 33.3 kN; 3σ MBS after 6 months outdoor exposure 27.0 kN; energy absorption capacity 3290 J/m; min rigging length 10 m highline / 50 m SPLIT 50 / 100 m SPLIT 100."
     },
     {
         "id": 73,
@@ -5253,16 +5546,17 @@
         ],
         "materialType": "Nylon",
         "weight": 62,
-        "breakingStrength": 31,
+        "breakingStrength": 31.0,
         "date_introduced": null,
-        "product_url": "https://spider-slacklines.com/shop/en/longline-webbings/245-nylove-longline-price-per-meter.html",
+        "product_url": "https://spider-slacklines.com/shop/en/webbings/245-4547-nylove-longline-9506919000.html",
         "width": 25,
         "thickness": 3.4,
         "webbing_construction": "Tubular",
         "isa_certified": false,
-        "priceMeter": 1.6,
+        "priceMeter": 1.9,
         "currency": "EUR",
-        "active": true
+        "active": true,
+        "notes": "Slack Inov / Spider 2026 datasheet (2026-09-02): MBS 80 mm diverter 31.0 kN; 3σ MBS weblock 27.2 kN; 3σ MBS sewn loop 26.2 kN; 3σ MBS linelock ring 26.2 kN; 3σ MBS after 6 months outdoor exposure 22.5 kN; energy absorption capacity 4443 J/m; min rigging length 10 m highline / 50 m SPLIT 50 / 100 m SPLIT 100."
     },
     {
         "id": 74,
@@ -6829,7 +7123,7 @@
     {
         "id": 148,
         "name": "Mamba",
-        "brand": "Spider slacklines",
+        "brand": "Spider Slacklines",
         "materialType": "Nylon",
         "width": 25,
         "weight": 65,
@@ -6868,104 +7162,6 @@
         "webbing_construction": "Flat",
         "isa_certified": false,
         "priceMeter": 1,
-        "currency": "EUR",
-        "active": false
-    },
-    {
-        "id": 150,
-        "name": "Abysses",
-        "brand": "Slack Inov",
-        "materialType": "Nylon",
-        "width": 25,
-        "weight": 63,
-        "breakingStrength": 32,
-        "stretch": [
-            {
-                "kn": 1,
-                "percent": 3.0
-            },
-            {
-                "kn": 2,
-                "percent": 4.5
-            },
-            {
-                "kn": 3,
-                "percent": 6.0
-            },
-            {
-                "kn": 4,
-                "percent": 8.0
-            },
-            {
-                "kn": 5,
-                "percent": 10.0
-            },
-            {
-                "kn": 6,
-                "percent": 11.5
-            },
-            {
-                "kn": 7,
-                "percent": 13.0
-            },
-            {
-                "kn": 8,
-                "percent": 13.8
-            },
-            {
-                "kn": 9,
-                "percent": 14.5
-            },
-            {
-                "kn": 10,
-                "percent": 15.3
-            },
-            {
-                "kn": 11,
-                "percent": 16.0
-            },
-            {
-                "kn": 12,
-                "percent": 16.6
-            },
-            {
-                "kn": 13,
-                "percent": 17.2
-            },
-            {
-                "kn": 14,
-                "percent": 17.8
-            },
-            {
-                "kn": 15,
-                "percent": 18.4
-            },
-            {
-                "kn": 16,
-                "percent": 18.9
-            },
-            {
-                "kn": 17,
-                "percent": 19.4
-            },
-            {
-                "kn": 18,
-                "percent": 19.9
-            },
-            {
-                "kn": 19,
-                "percent": 20.4
-            },
-            {
-                "kn": 20,
-                "percent": 20.8
-            }
-        ],
-        "date_introduced": null,
-        "product_url": null,
-        "webbing_construction": "Flat",
-        "isa_certified": false,
-        "priceMeter": 2.3,
         "currency": "EUR",
         "active": false
     },
@@ -7231,20 +7427,97 @@
         "materialType": "Polyester",
         "width": 25,
         "weight": 73,
-        "breakingStrength": 40,
+        "breakingStrength": 40.0,
         "stretch": [
             {
-                "percent": 6.2,
-                "kn": 10
+                "kn": 1,
+                "percent": 1.0
+            },
+            {
+                "kn": 2,
+                "percent": 1.5
+            },
+            {
+                "kn": 3,
+                "percent": 2.5
+            },
+            {
+                "kn": 4,
+                "percent": 2.8
+            },
+            {
+                "kn": 5,
+                "percent": 3.2
+            },
+            {
+                "kn": 6,
+                "percent": 3.6
+            },
+            {
+                "kn": 7,
+                "percent": 4.0
+            },
+            {
+                "kn": 8,
+                "percent": 4.6
+            },
+            {
+                "kn": 9,
+                "percent": 5.3
+            },
+            {
+                "kn": 10,
+                "percent": 6.0
+            },
+            {
+                "kn": 11,
+                "percent": 6.6
+            },
+            {
+                "kn": 12,
+                "percent": 7.2
+            },
+            {
+                "kn": 13,
+                "percent": 7.9
+            },
+            {
+                "kn": 14,
+                "percent": 8.6
+            },
+            {
+                "kn": 15,
+                "percent": 9.2
+            },
+            {
+                "kn": 16,
+                "percent": 9.6
+            },
+            {
+                "kn": 17,
+                "percent": 10.1
+            },
+            {
+                "kn": 18,
+                "percent": 10.5
+            },
+            {
+                "kn": 19,
+                "percent": 11.0
+            },
+            {
+                "kn": 20,
+                "percent": 11.6
             }
         ],
         "date_introduced": null,
-        "product_url": "http://slack-inov.com/gb/webbing/92-flamme3-webbing",
+        "product_url": null,
         "webbing_construction": "Flat",
         "isa_certified": false,
         "priceMeter": 1.2,
         "currency": "EUR",
-        "active": false
+        "active": false,
+        "notes": "Slack Inov / Spider 2026 datasheet (2026-09-02): MBS 80 mm diverter 40.0 kN; 3σ MBS weblock 32.6 kN; 3σ MBS sewn loop 34.8 kN; 3σ MBS linelock ring 34.8 kN; 3σ MBS after 6 months outdoor exposure 31.8 kN. The product page linked here previously (http://slack-inov.com/gb/webbing/92-flamme3-webbing) now 404s; the shops no longer carry it."
     },
     {
         "id": 160,
@@ -7397,7 +7670,7 @@
         ],
         "width": 25.4,
         "weight": 54,
-        "breakingStrength": 27,
+        "breakingStrength": 27.0,
         "stretch": [
             {
                 "kn": 1,
@@ -7478,15 +7751,52 @@
             {
                 "kn": 20,
                 "percent": 12.4
+            },
+            {
+                "kn": 21,
+                "percent": 12.7
+            },
+            {
+                "kn": 22,
+                "percent": 13.0
+            },
+            {
+                "kn": 23,
+                "percent": 13.4
+            },
+            {
+                "kn": 24,
+                "percent": 13.8
+            },
+            {
+                "kn": 25,
+                "percent": 14.2
+            },
+            {
+                "kn": 26,
+                "percent": 14.6
+            },
+            {
+                "kn": 27,
+                "percent": 15.3
+            },
+            {
+                "kn": 28,
+                "percent": 15.6
+            },
+            {
+                "kn": 29,
+                "percent": 16.0
             }
         ],
         "date_introduced": 1533934800000,
-        "product_url": "http://slack-inov.com/gb/webbing/110-joker-sold-by-meter",
+        "product_url": "https://slack-inov.com/shop/en/longline-webbings/338-4504-joker-longline-9506919000.html",
         "webbing_construction": "Flat",
         "isa_certified": false,
         "priceMeter": 1.99,
         "currency": "EUR",
-        "active": true
+        "active": true,
+        "notes": "Slack Inov / Spider 2026 datasheet (2026-09-02): MBS 80 mm diverter 27.0 kN; 3σ MBS weblock 26.0 kN; 3σ MBS sewn loop 25.2 kN; 3σ MBS linelock ring 25.2 kN; 3σ MBS after 6 months outdoor exposure 21.4 kN; energy absorption capacity 2641 J/m; min rigging length 10 m highline / 50 m SPLIT 50 / 100 m SPLIT 100."
     },
     {
         "id": 167,
@@ -7905,11 +8215,123 @@
         "materialType": "Nylon",
         "width": 25,
         "weight": 63,
-        "breakingStrength": 32,
+        "breakingStrength": 32.0,
         "stretch": [
             {
-                "percent": 15.2,
-                "kn": 10
+                "kn": 1,
+                "percent": 3.0
+            },
+            {
+                "kn": 2,
+                "percent": 4.5
+            },
+            {
+                "kn": 3,
+                "percent": 6.0
+            },
+            {
+                "kn": 4,
+                "percent": 8.0
+            },
+            {
+                "kn": 5,
+                "percent": 10.0
+            },
+            {
+                "kn": 6,
+                "percent": 11.5
+            },
+            {
+                "kn": 7,
+                "percent": 13.0
+            },
+            {
+                "kn": 8,
+                "percent": 13.8
+            },
+            {
+                "kn": 9,
+                "percent": 14.5
+            },
+            {
+                "kn": 10,
+                "percent": 15.3
+            },
+            {
+                "kn": 11,
+                "percent": 16.0
+            },
+            {
+                "kn": 12,
+                "percent": 16.6
+            },
+            {
+                "kn": 13,
+                "percent": 17.2
+            },
+            {
+                "kn": 14,
+                "percent": 17.8
+            },
+            {
+                "kn": 15,
+                "percent": 18.4
+            },
+            {
+                "kn": 16,
+                "percent": 18.9
+            },
+            {
+                "kn": 17,
+                "percent": 19.4
+            },
+            {
+                "kn": 18,
+                "percent": 19.9
+            },
+            {
+                "kn": 19,
+                "percent": 20.4
+            },
+            {
+                "kn": 20,
+                "percent": 20.8
+            },
+            {
+                "kn": 21,
+                "percent": 21.2
+            },
+            {
+                "kn": 22,
+                "percent": 21.5
+            },
+            {
+                "kn": 23,
+                "percent": 22.0
+            },
+            {
+                "kn": 24,
+                "percent": 22.5
+            },
+            {
+                "kn": 25,
+                "percent": 22.8
+            },
+            {
+                "kn": 26,
+                "percent": 23.4
+            },
+            {
+                "kn": 27,
+                "percent": 23.9
+            },
+            {
+                "kn": 28,
+                "percent": 24.4
+            },
+            {
+                "kn": 29,
+                "percent": 27.0
             }
         ],
         "date_introduced": null,
@@ -7918,7 +8340,8 @@
         "isa_certified": false,
         "priceMeter": 2.6,
         "currency": "EUR",
-        "active": true
+        "active": true,
+        "notes": "Slack Inov / Spider 2026 datasheet (2026-09-02): MBS 80 mm diverter 32.0 kN; 3σ MBS weblock 28.8 kN; 3σ MBS sewn loop 39.2 kN; 3σ MBS linelock ring 30.2 kN; 3σ MBS after 6 months outdoor exposure 26.5 kN; energy absorption capacity 4803 J/m; min rigging length 10 m highline / 50 m SPLIT 50 / 100 m SPLIT 100. The datasheet lists one \"ABYSSES\", which is this product. A duplicate row \"Abysses\" (#150, priced 2.30 EUR/m) was merged into this one on 2026-09-02 and removed from the catalogue."
     },
     {
         "id": 183,
@@ -8601,11 +9024,11 @@
     {
         "id": 205,
         "name": "Sky Diamond",
-        "brand": "Spider slacklines",
+        "brand": "Slack Inov",
         "materialType": "Dyneema/HMPE",
         "width": 17,
         "weight": 33,
-        "breakingStrength": 35,
+        "breakingStrength": 32.0,
         "stretch": [
             {
                 "kn": 1,
@@ -8686,39 +9109,77 @@
             {
                 "kn": 20,
                 "percent": 4.8
-            }
-        ],
-        "date_introduced": null,
-        "product_url": "https://spider-slacklines.com/shop/en/highline-webbing/426-2764-sky-diamond-longline-presale.html#/306-select_model-price_by_meter",
-        "thickness": 3.5,
-        "webbing_construction": "Flat",
-        "isa_certified": false,
-        "priceMeter": 4.97,
-        "currency": "EUR",
-        "active": true
-    },
-    {
-        "id": 206,
-        "name": "Rodeo",
-        "brand": "Spider slacklines",
-        "materialType": "Nylon",
-        "width": 25,
-        "weight": null,
-        "breakingStrength": 27,
-        "stretch": [
+            },
             {
-                "percent": 23.1,
-                "kn": 10
+                "kn": 21,
+                "percent": 4.8
+            },
+            {
+                "kn": 22,
+                "percent": 4.8
+            },
+            {
+                "kn": 23,
+                "percent": 4.8
+            },
+            {
+                "kn": 24,
+                "percent": 4.9
+            },
+            {
+                "kn": 25,
+                "percent": 4.9
+            },
+            {
+                "kn": 26,
+                "percent": 4.9
+            },
+            {
+                "kn": 27,
+                "percent": 4.9
+            },
+            {
+                "kn": 28,
+                "percent": 4.9
+            },
+            {
+                "kn": 29,
+                "percent": 4.9
+            },
+            {
+                "kn": 30,
+                "percent": 5.0
+            },
+            {
+                "kn": 31,
+                "percent": 5.0
+            },
+            {
+                "kn": 32,
+                "percent": 5.0
+            },
+            {
+                "kn": 33,
+                "percent": 5.0
+            },
+            {
+                "kn": 34,
+                "percent": 5.0
+            },
+            {
+                "kn": 35,
+                "percent": 5.0
             }
         ],
         "date_introduced": null,
-        "product_url": "https://spider-slacklines.com/shop/en/products/344-3723-rodeo-line.html",
+        "product_url": "https://slack-inov.com/shop/en/highline-webbing/426-5105-sky-diamond-longline-presale-9506919000.html",
         "thickness": 3.5,
         "webbing_construction": "Flat",
         "isa_certified": false,
-        "priceMeter": 1.62,
+        "priceMeter": 5.4,
         "currency": "EUR",
-        "active": false
+        "active": true,
+        "notes": "Slack Inov / Spider 2026 datasheet (2026-09-02): MBS 80 mm diverter 32.0 kN; 3σ MBS sewn loop 31.0 kN; 3σ MBS linelock ring 19.0 kN; 3σ MBS after 6 months outdoor exposure 30.45 kN; energy absorption capacity 1405 J/m; min rigging length 0 m highline / 108 m SPLIT 50 / 194 m SPLIT 100."
     },
     {
         "id": 207,
@@ -9530,7 +9991,7 @@
     {
         "id": 226,
         "name": "LEMON HAZE",
-        "brand": "Spider slacklines",
+        "brand": "Spider Slacklines",
         "materialType": "Hybrid",
         "materialComposition": [
             "Dyneema/HMPE",
@@ -9539,13 +10000,13 @@
         "width": 20,
         "thickness": 2.0,
         "weight": 39.5,
-        "breakingStrength": 32.0,
+        "breakingStrength": 31.0,
         "webbing_construction": "Tubular",
         "isa_certified": false,
-        "product_url": "https://slacklines.us/products/lemon-haze",
+        "product_url": "https://spider-slacklines.com/shop/en/highline-webbing/1059-6479-lemon-haze.html",
         "date_introduced": null,
-        "priceMeter": 3.9,
-        "currency": "USD",
+        "priceMeter": 3.5,
+        "currency": "EUR",
         "stretch": [
             {
                 "kn": 1,
@@ -9626,16 +10087,60 @@
             {
                 "kn": 20,
                 "percent": 8.8
+            },
+            {
+                "kn": 21,
+                "percent": 8.8
+            },
+            {
+                "kn": 22,
+                "percent": 9.1
+            },
+            {
+                "kn": 23,
+                "percent": 9.2
+            },
+            {
+                "kn": 24,
+                "percent": 9.4
+            },
+            {
+                "kn": 25,
+                "percent": 9.6
+            },
+            {
+                "kn": 26,
+                "percent": 9.8
+            },
+            {
+                "kn": 27,
+                "percent": 9.8
+            },
+            {
+                "kn": 28,
+                "percent": 10.0
+            },
+            {
+                "kn": 29,
+                "percent": 10.2
+            },
+            {
+                "kn": 30,
+                "percent": 10.4
+            },
+            {
+                "kn": 31,
+                "percent": 10.5
             }
         ],
         "description": "20mm tubular highline backup webbing blending UHMWPE (Dyneema) white fibers with coloured PES fibers. High stretch, anti-slip inside the weblock and underfoot, and narrow enough to cut wind reaction ~1.5x vs 25mm. Designed, tested and made in Italy.",
-        "notes": "MBS 32 kN confirmed by owner. Datasheet (slacklines.us, 2026-08): thickness 2 mm, 39.5 g/m, suggested length 50-1000 m, suggested backup length 11% longer than the main line, energy absorption capacity 2261 J/m, anti-twist black-and-green stripes, made in Italy. MBS by termination: 28 kN over an 80mm diverter; 3-sigma 31 kN sewn loop, 25 kN Zenlock, 32.7 kN Zenlock 1.5 wraps, 34 kN Zenlock 2x wraps, 27 kN Diamondlock, 22 kN in weblock after 6 months perma-rig sun exposure. Sold by the meter (USD 3.90/m, SKU HWS02) or pre-made SPLIT50 (USD 195, LWS02.S50) / SPLIT100 (USD 389, HWS02.S100) with sewn loops both ends. Stretch curve is published only as a chart, no numeric readings.",
+        "notes": "MBS 32 kN confirmed by owner. Datasheet (slacklines.us, 2026-08): thickness 2 mm, 39.5 g/m, suggested length 50-1000 m, suggested backup length 11% longer than the main line, energy absorption capacity 2261 J/m, anti-twist black-and-green stripes, made in Italy. MBS by termination: 28 kN over an 80mm diverter; 3-sigma 31 kN sewn loop, 25 kN Zenlock, 32.7 kN Zenlock 1.5 wraps, 34 kN Zenlock 2x wraps, 27 kN Diamondlock, 22 kN in weblock after 6 months perma-rig sun exposure. Sold by the meter (USD 3.90/m, SKU HWS02) or pre-made SPLIT50 (USD 195, LWS02.S50) / SPLIT100 (USD 389, HWS02.S100) with sewn loops both ends. Slack Inov / Spider 2026 datasheet (2026-09-02): MBS 80 mm diverter 31.0 kN; 3σ MBS weblock 25.0 kN; 3σ MBS sewn loop 31.0 kN; 3σ MBS linelock ring 27.0 kN; 3σ MBS after 6 months outdoor exposure 22.0 kN; energy absorption capacity 2261 J/m; min rigging length 15 m highline / 50 m SPLIT 50 / 100 m SPLIT 100.",
         "active": true
     },
     {
         "id": 227,
         "name": "PANTHER",
-        "brand": "Spider slacklines",
+        "brand": "Spider Slacklines",
         "materialType": "Nylon",
         "width": 25,
         "thickness": 3.1,
@@ -9643,10 +10148,10 @@
         "breakingStrength": 24.0,
         "webbing_construction": "Tubular",
         "isa_certified": false,
-        "product_url": "https://slacklines.us/products/panther",
+        "product_url": "https://spider-slacklines.com/shop/en/highline-webbing/1117-6517-panther-9506919000.html",
         "date_introduced": null,
-        "priceMeter": 2.0,
-        "currency": "USD",
+        "priceMeter": 2.2,
+        "currency": "EUR",
         "stretch": [
             {
                 "kn": 1,
@@ -9727,16 +10232,32 @@
             {
                 "kn": 20,
                 "percent": 29.7
+            },
+            {
+                "kn": 21,
+                "percent": 30.5
+            },
+            {
+                "kn": 22,
+                "percent": 31.8
+            },
+            {
+                "kn": 23,
+                "percent": 33.0
+            },
+            {
+                "kn": 24,
+                "percent": 34.0
             }
         ],
         "description": "Tubular nylon polyamide core freestyle/highline webbing with improved grip surface and abrasion resistance. Made in Italy/France.",
-        "notes": "MBS 24 kN confirmed by owner (the on-page datasheet's 31 kN is wrong). Tubular nylon polyamide core freestyle/highline webbing with improved grip surface and abrasion resistance. Made in Italy/France. Weight/thickness from product copy; stretch curve not published.",
+        "notes": "MBS 24 kN confirmed by owner (the on-page datasheet's 31 kN is wrong). Tubular nylon polyamide core freestyle/highline webbing with improved grip surface and abrasion resistance. Made in Italy/France. Weight/thickness from product copy. Slack Inov / Spider 2026 datasheet (2026-09-02): MBS 80 mm diverter 24.0 kN; 3σ MBS weblock 23.2 kN; 3σ MBS sewn loop 21.0 kN; 3σ MBS linelock ring 20.0 kN; 3σ MBS after 6 months outdoor exposure 18.0 kN; energy absorption capacity 4692 J/m; min rigging length 10 m highline / 50 m SPLIT 50 / 100 m SPLIT 100.",
         "active": true
     },
     {
         "id": 228,
         "name": "GREEN MAMBA",
-        "brand": "Spider slacklines",
+        "brand": "Spider Slacklines",
         "materialType": "Polyester",
         "width": 20,
         "thickness": 2.8,
@@ -9744,10 +10265,10 @@
         "breakingStrength": 28.0,
         "webbing_construction": "Flat",
         "isa_certified": false,
-        "product_url": "https://slacklines.us/products/highline-webbing-greenmamba",
+        "product_url": "https://spider-slacklines.com/shop/en/webbings/627-5732-green-mamba-9506919000.html",
         "date_introduced": null,
-        "priceMeter": 1.69,
-        "currency": "USD",
+        "priceMeter": 1.3,
+        "currency": "EUR",
         "stretch": [
             {
                 "kn": 1,
@@ -9828,10 +10349,42 @@
             {
                 "kn": 20,
                 "percent": 9.6
+            },
+            {
+                "kn": 21,
+                "percent": 9.6
+            },
+            {
+                "kn": 22,
+                "percent": 10.1
+            },
+            {
+                "kn": 23,
+                "percent": 10.5
+            },
+            {
+                "kn": 24,
+                "percent": 10.8
+            },
+            {
+                "kn": 25,
+                "percent": 11.2
+            },
+            {
+                "kn": 26,
+                "percent": 11.7
+            },
+            {
+                "kn": 27,
+                "percent": 12.2
+            },
+            {
+                "kn": 28,
+                "percent": 12.8
             }
         ],
         "description": "High-tenacity polyester highline backup webbing, flat core with soft edges. Green top / black bottom for twist detection.",
-        "notes": "Does not fit standard weblocks; anchors via LINELOCK ALUMINUM RING. Max 180 days UV exposure.",
+        "notes": "Does not fit standard weblocks; anchors via LINELOCK ALUMINUM RING. Max 180 days UV exposure. Slack Inov / Spider 2026 datasheet (2026-09-02): MBS 80 mm diverter 28.0 kN; 3σ MBS weblock 26.0 kN; 3σ MBS sewn loop 27.0 kN; 3σ MBS linelock ring 27.0 kN; 3σ MBS after 6 months outdoor exposure 22.0 kN; energy absorption capacity 1938 J/m; min rigging length 31 m highline / 61 m SPLIT 50 / 106 m SPLIT 100.",
         "active": true
     },
     {
@@ -10533,16 +11086,692 @@
         "width": 25,
         "thickness": null,
         "weight": 52,
-        "breakingStrength": 27,
+        "breakingStrength": 27.0,
         "webbing_construction": "Tubular",
         "isa_certified": false,
         "product_url": null,
         "date_introduced": 1672272000000,
         "priceMeter": null,
         "currency": null,
-        "stretch": null,
+        "stretch": [
+            {
+                "kn": 1,
+                "percent": 3.0
+            },
+            {
+                "kn": 2,
+                "percent": 4.5
+            },
+            {
+                "kn": 3,
+                "percent": 6.5
+            },
+            {
+                "kn": 4,
+                "percent": 9.0
+            },
+            {
+                "kn": 5,
+                "percent": 11.5
+            },
+            {
+                "kn": 6,
+                "percent": 12.5
+            },
+            {
+                "kn": 7,
+                "percent": 13.5
+            },
+            {
+                "kn": 8,
+                "percent": 14.5
+            },
+            {
+                "kn": 9,
+                "percent": 15.3
+            },
+            {
+                "kn": 10,
+                "percent": 16.0
+            },
+            {
+                "kn": 11,
+                "percent": 16.5
+            },
+            {
+                "kn": 12,
+                "percent": 16.9
+            },
+            {
+                "kn": 13,
+                "percent": 17.3
+            },
+            {
+                "kn": 14,
+                "percent": 17.6
+            },
+            {
+                "kn": 15,
+                "percent": 17.8
+            },
+            {
+                "kn": 16,
+                "percent": 18.1
+            },
+            {
+                "kn": 17,
+                "percent": 18.5
+            },
+            {
+                "kn": 18,
+                "percent": 18.9
+            },
+            {
+                "kn": 19,
+                "percent": 19.5
+            },
+            {
+                "kn": 20,
+                "percent": 20.5
+            }
+        ],
         "description": null,
-        "notes": "Stub created for ISA warning 78 (a sample broke at 7 kN after 7 months of use). No published specs.",
+        "notes": "Stub created for ISA warning 78 (a sample broke at 7 kN after 7 months of use). No published specs. Slack Inov / Spider 2026 datasheet (2026-09-02): MBS 80 mm diverter 27.0 kN; 3σ MBS weblock 27.6 kN; 3σ MBS sewn loop 27.0 kN; 3σ MBS linelock ring 27.0 kN; energy absorption capacity 3470 J/m; min rigging length 10 m highline / 50 m SPLIT 50 / 100 m SPLIT 100. A separate datasheet row \"BOOM BOOM 3 (PA)\" (MBS 80 mm diverter 21 kN, no other data) was held here as \"BoomBoom 3\" (#252) and merged into this row on 2026-09-02. The vendor lists the two as separate lines and their MBS figures disagree — 27 kN here against 21 kN for BOOM BOOM 3 — so the breaking strength on this row is unconfirmed and needs checking with Slack Inov.",
         "active": false
+    },
+    {
+        "id": 247,
+        "name": "Jumanji",
+        "brand": "Spider Slacklines",
+        "stretch": [
+            {
+                "kn": 1,
+                "percent": 0.5
+            },
+            {
+                "kn": 2,
+                "percent": 0.8
+            },
+            {
+                "kn": 3,
+                "percent": 1.2
+            },
+            {
+                "kn": 4,
+                "percent": 1.6
+            },
+            {
+                "kn": 5,
+                "percent": 1.9
+            },
+            {
+                "kn": 6,
+                "percent": 2.2
+            },
+            {
+                "kn": 7,
+                "percent": 2.5
+            },
+            {
+                "kn": 8,
+                "percent": 2.7
+            },
+            {
+                "kn": 9,
+                "percent": 2.8
+            },
+            {
+                "kn": 10,
+                "percent": 2.9
+            },
+            {
+                "kn": 11,
+                "percent": 2.9
+            },
+            {
+                "kn": 12,
+                "percent": 3.0
+            },
+            {
+                "kn": 13,
+                "percent": 3.0
+            },
+            {
+                "kn": 14,
+                "percent": 3.0
+            },
+            {
+                "kn": 15,
+                "percent": 3.1
+            },
+            {
+                "kn": 16,
+                "percent": 3.1
+            },
+            {
+                "kn": 17,
+                "percent": 3.1
+            },
+            {
+                "kn": 18,
+                "percent": 3.2
+            },
+            {
+                "kn": 19,
+                "percent": 3.2
+            },
+            {
+                "kn": 20,
+                "percent": 3.2
+            },
+            {
+                "kn": 21,
+                "percent": 3.3
+            },
+            {
+                "kn": 22,
+                "percent": 3.3
+            },
+            {
+                "kn": 23,
+                "percent": 3.3
+            },
+            {
+                "kn": 24,
+                "percent": 3.4
+            },
+            {
+                "kn": 25,
+                "percent": 3.4
+            },
+            {
+                "kn": 26,
+                "percent": 3.4
+            },
+            {
+                "kn": 27,
+                "percent": 3.5
+            },
+            {
+                "kn": 28,
+                "percent": 3.5
+            },
+            {
+                "kn": 29,
+                "percent": 3.5
+            },
+            {
+                "kn": 30,
+                "percent": 3.5
+            },
+            {
+                "kn": 31,
+                "percent": 3.6
+            },
+            {
+                "kn": 32,
+                "percent": 3.6
+            },
+            {
+                "kn": 33,
+                "percent": 3.6
+            },
+            {
+                "kn": 34,
+                "percent": 3.6
+            },
+            {
+                "kn": 35,
+                "percent": 3.6
+            },
+            {
+                "kn": 36,
+                "percent": 3.7
+            },
+            {
+                "kn": 37,
+                "percent": 3.7
+            },
+            {
+                "kn": 38,
+                "percent": 3.7
+            },
+            {
+                "kn": 39,
+                "percent": 3.7
+            },
+            {
+                "kn": 40,
+                "percent": 3.8
+            }
+        ],
+        "materialType": "Dyneema/HMPE",
+        "width": 20,
+        "thickness": 1.8,
+        "weight": 31,
+        "breakingStrength": 40.0,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "product_url": "https://spider-slacklines.com/shop/en/highline-webbing/1369-jumanji.html",
+        "date_introduced": null,
+        "priceMeter": 2.89,
+        "currency": "EUR",
+        "description": "20 mm flat highline webbing built for extreme lengths: a 100% UHMWPE (Dyneema) core at 40 kN MBS, near-zero stretch (2.9% at 10 kN) and only 31 g/m. Ribbed texture on the orange side, two contrasting colours for twist detection. Its narrow section cuts sail effect by about 20% against a classic 25 mm line. Designed, tested and produced in Italy.",
+        "notes": "Slack Inov / Spider 2026 datasheet (2026-09-02): MBS 80 mm diverter 40.0 kN; energy absorption capacity 968.5 J/m. Product page datasheet: 3σ MBS sewn loop 40 kN; not compatible with Zenlock or Diamondlock weblocks. Suggested length 200-2000 m; suggested backup 8% longer than the main line. Reference HWS04, made in Italy.",
+        "active": true
+    },
+    {
+        "id": 248,
+        "name": "Funky",
+        "brand": "Slack Inov",
+        "materialType": "Nylon",
+        "width": 20,
+        "thickness": 3.0,
+        "weight": 54,
+        "breakingStrength": 28.0,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "product_url": "https://slack-inov.com/shop/en/highline-webbing/1366-7337-funky.html",
+        "date_introduced": null,
+        "priceMeter": 2.04,
+        "currency": "EUR",
+        "description": "20 mm longline/highline webbing in high-tenacity polyamide with a thick 3 mm flat body and soft rounded edges. Very high stretch at low tension makes it bouncy and forgiving underfoot, while the high-density weave keeps out dust and moisture. Two contrasting colours for twist detection.",
+        "notes": "Slack Inov / Spider 2026 datasheet (2026-09-02): MBS 80 mm diverter 28.0 kN; energy absorption capacity 4535 J/m. Product page datasheet: 3σ MBS sewn loop 26 kN, Zenlock weblock 25 kN. Suggested length 30-400 m. Reference HWI06. The product copy says it is produced in France by Slack Inov while the on-page data sheet says Italy. No stretch curve is published for this webbing.",
+        "active": true
+    },
+    {
+        "id": 249,
+        "name": "Reggae",
+        "brand": "Slack Inov",
+        "stretch": [
+            {
+                "kn": 1,
+                "percent": 1.6
+            },
+            {
+                "kn": 2,
+                "percent": 3.9
+            },
+            {
+                "kn": 3,
+                "percent": 4.5
+            },
+            {
+                "kn": 4,
+                "percent": 5.5
+            },
+            {
+                "kn": 5,
+                "percent": 5.8
+            },
+            {
+                "kn": 6,
+                "percent": 7.0
+            },
+            {
+                "kn": 7,
+                "percent": 7.8
+            },
+            {
+                "kn": 8,
+                "percent": 9.2
+            },
+            {
+                "kn": 9,
+                "percent": 10.1
+            },
+            {
+                "kn": 10,
+                "percent": 10.7
+            },
+            {
+                "kn": 11,
+                "percent": 11.0
+            },
+            {
+                "kn": 12,
+                "percent": 12.1
+            },
+            {
+                "kn": 13,
+                "percent": 12.5
+            },
+            {
+                "kn": 14,
+                "percent": 13.6
+            },
+            {
+                "kn": 15,
+                "percent": 14.0
+            },
+            {
+                "kn": 16,
+                "percent": 14.4
+            },
+            {
+                "kn": 17,
+                "percent": 15.2
+            },
+            {
+                "kn": 18,
+                "percent": 15.9
+            },
+            {
+                "kn": 19,
+                "percent": 16.9
+            },
+            {
+                "kn": 20,
+                "percent": 17.1
+            },
+            {
+                "kn": 21,
+                "percent": 18.6
+            },
+            {
+                "kn": 22,
+                "percent": 19.4
+            },
+            {
+                "kn": 23,
+                "percent": 20.1
+            },
+            {
+                "kn": 24,
+                "percent": 20.9
+            }
+        ],
+        "materialType": "Polyester",
+        "width": 25,
+        "thickness": 2.3,
+        "weight": 49,
+        "breakingStrength": 24.5,
+        "webbing_construction": "Tubular",
+        "isa_certified": false,
+        "product_url": "https://slack-inov.com/shop/en/longline-webbings/1202-6543-reggae-9506919000.html",
+        "date_introduced": null,
+        "priceMeter": 1.5,
+        "currency": "EUR",
+        "description": "A 25 mm tubular polyester webbing and a long-standing reference in slacklining: soft, flexible and very stretchy (about 14% at 15 kN). Comfortable enough for barefoot walking and well suited to surf, controlled bounces and static tricks such as drop knee. Made in France.",
+        "notes": "Slack Inov / Spider 2026 datasheet (2026-09-02): MBS 80 mm diverter 24.5 kN (the DB sheet's 23.6 kN is superseded by the product page); 3σ MBS weblock 21.5 kN; 3σ MBS sewn loop 18.8 kN; 3σ MBS linelock ring 16.6 kN; energy absorption capacity 2525.3 J/m. Product page datasheet: 3σ MBS sewn loop 19.5 kN, Zenlock weblock 24.5 kN, Diamondlock 16.5 kN. Suggested length 20-150 m; suggested backup 9% longer than the main line. Reference LWI02, made in France.",
+        "active": true
+    },
+    {
+        "id": 250,
+        "name": "Solid",
+        "brand": "Slack Inov",
+        "stretch": [
+            {
+                "kn": 1,
+                "percent": 0.5
+            },
+            {
+                "kn": 2,
+                "percent": 1.0
+            },
+            {
+                "kn": 3,
+                "percent": 1.5
+            },
+            {
+                "kn": 4,
+                "percent": 2.0
+            },
+            {
+                "kn": 5,
+                "percent": 2.5
+            },
+            {
+                "kn": 6,
+                "percent": 3.5
+            },
+            {
+                "kn": 7,
+                "percent": 4.5
+            },
+            {
+                "kn": 8,
+                "percent": 5.5
+            },
+            {
+                "kn": 9,
+                "percent": 7.0
+            },
+            {
+                "kn": 10,
+                "percent": 7.5
+            },
+            {
+                "kn": 11,
+                "percent": 8.5
+            },
+            {
+                "kn": 12,
+                "percent": 8.8
+            },
+            {
+                "kn": 13,
+                "percent": 9.2
+            },
+            {
+                "kn": 14,
+                "percent": 10.0
+            },
+            {
+                "kn": 15,
+                "percent": 10.3
+            },
+            {
+                "kn": 16,
+                "percent": 10.5
+            },
+            {
+                "kn": 17,
+                "percent": 11.0
+            },
+            {
+                "kn": 18,
+                "percent": 11.3
+            },
+            {
+                "kn": 19,
+                "percent": 11.9
+            },
+            {
+                "kn": 20,
+                "percent": 12.2
+            },
+            {
+                "kn": 21,
+                "percent": 12.5
+            },
+            {
+                "kn": 22,
+                "percent": 12.8
+            },
+            {
+                "kn": 23,
+                "percent": 13.2
+            },
+            {
+                "kn": 24,
+                "percent": 13.7
+            },
+            {
+                "kn": 25,
+                "percent": 14.1
+            },
+            {
+                "kn": 26,
+                "percent": 14.6
+            },
+            {
+                "kn": 27,
+                "percent": 15.2
+            },
+            {
+                "kn": 28,
+                "percent": 15.6
+            },
+            {
+                "kn": 29,
+                "percent": 16.4
+            },
+            {
+                "kn": 30,
+                "percent": 17.5
+            }
+        ],
+        "materialType": "Polyester",
+        "width": 20.5,
+        "thickness": 3.0,
+        "weight": 59,
+        "breakingStrength": 31.0,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "product_url": "https://slack-inov.com/shop/en/out-of-collection/541-solid-9506919000.html",
+        "date_introduced": null,
+        "priceMeter": null,
+        "currency": null,
+        "description": "A 20.5 mm flat polyester webbing, strong and narrow, sold as a long solid backup line. Out of collection: the product page is still reachable but it is no longer listed in any category.",
+        "notes": "Slack Inov / Spider 2026 datasheet (2026-09-02): MBS 80 mm diverter 31.0 kN; 3σ MBS weblock 25.0 kN; 3σ MBS sewn loop 25.0 kN; 3σ MBS linelock ring 25.0 kN; energy absorption capacity 2743 J/m. Product page datasheet: 3σ MBS sewn loop 25 kN, Zenlock weblock 25 kN. Suggested length 1-1000 m; suggested backup 6% longer than the main line. Reference LWI10, made in Germany. Marked OUT OF COLLECTION; no 2026 price.",
+        "active": false
+    },
+    {
+        "id": 251,
+        "name": "Donkey 20",
+        "brand": "Slack Inov",
+        "stretch": [
+            {
+                "kn": 1,
+                "percent": 3.1
+            },
+            {
+                "kn": 2,
+                "percent": 4.9
+            },
+            {
+                "kn": 3,
+                "percent": 6.8
+            },
+            {
+                "kn": 4,
+                "percent": 8.1
+            },
+            {
+                "kn": 5,
+                "percent": 9.0
+            },
+            {
+                "kn": 6,
+                "percent": 10.0
+            },
+            {
+                "kn": 7,
+                "percent": 11.2
+            },
+            {
+                "kn": 8,
+                "percent": 12.5
+            },
+            {
+                "kn": 9,
+                "percent": 13.2
+            },
+            {
+                "kn": 10,
+                "percent": 14.0
+            },
+            {
+                "kn": 11,
+                "percent": 14.5
+            },
+            {
+                "kn": 12,
+                "percent": 15.0
+            },
+            {
+                "kn": 13,
+                "percent": 15.5
+            },
+            {
+                "kn": 14,
+                "percent": 16.0
+            },
+            {
+                "kn": 15,
+                "percent": 16.5
+            },
+            {
+                "kn": 16,
+                "percent": 17.0
+            },
+            {
+                "kn": 17,
+                "percent": 17.4
+            },
+            {
+                "kn": 18,
+                "percent": 17.8
+            },
+            {
+                "kn": 19,
+                "percent": 18.2
+            },
+            {
+                "kn": 20,
+                "percent": 18.5
+            },
+            {
+                "kn": 21,
+                "percent": 19.1
+            },
+            {
+                "kn": 22,
+                "percent": 19.6
+            },
+            {
+                "kn": 23,
+                "percent": 20.2
+            },
+            {
+                "kn": 24,
+                "percent": 20.7
+            },
+            {
+                "kn": 25,
+                "percent": 21.2
+            },
+            {
+                "kn": 26,
+                "percent": 21.8
+            },
+            {
+                "kn": 27,
+                "percent": 22.4
+            },
+            {
+                "kn": 28,
+                "percent": 23.0
+            },
+            {
+                "kn": 29,
+                "percent": 23.5
+            }
+        ],
+        "materialType": "Nylon",
+        "width": 20,
+        "thickness": null,
+        "weight": null,
+        "breakingStrength": null,
+        "webbing_construction": null,
+        "isa_certified": false,
+        "product_url": null,
+        "date_introduced": null,
+        "priceMeter": null,
+        "currency": null,
+        "description": null,
+        "notes": "Slack Inov / Spider 2026 datasheet (2026-09-02): listed as active with a full 1-29 kN stretch curve, but no MBS, capacity or price is given and no product page exists on either the Slack Inov or Spider storefront. Width 20 mm is inferred from the product name, not published.",
+        "active": true
     }
 ]

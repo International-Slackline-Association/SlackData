@@ -352,6 +352,17 @@ aws cognito-idp list-user-pools --max-results 20 --query "UserPools[?Name=='slac
 aws dynamodb list-tables --query "TableNames[?contains(@, 'permcheck')]"
 ```
 
+**This warning was written and then not followed.** `slackdata-permcheck`
+(`eu-central-1_xaIj2Vgjx`) survived in the account until **2026-09-03**, ten days after the check it
+existed to prove. The failure is worth recording because it is not the one the paragraph above
+anticipates: the domain *was* deleted, which is the step that ordinarily blocks the delete — and
+then `delete-user-pool` was simply never re-run, so the pool sat there with no domain, no users, no
+clients and no tags, looking exactly like the cleanup had worked. Nothing surfaced it, because
+nothing looks. The verification command above only helps if someone runs it; `preflight.sh` now
+checks for orphaned pools on every deploy, but only for ones named `slackdata-admins-<stage>` —
+a scratch pool under any other name is still invisible. **Delete it in the same shell you create it
+in.**
+
 ### What to do with the flag now
 
 Nothing needs creating by hand. CloudFormation can make the resource server in the real pool during

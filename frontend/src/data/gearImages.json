@@ -1103,14 +1103,12 @@
     "slackinds_sugoi": [
       "slackinds_sugoi.jpg"
     ],
-    "slackinov_abysses": [
-      "slackinov_abysses.jpg",
-      "slackinov_abysses-2.jpg"
-    ],
     "slackinov_abysses-bounce": [
       "slackinov_abysses-bounce.jpg",
       "slackinov_abysses-bounce-2.jpg",
-      "slackinov_abysses-bounce-3.jpg"
+      "slackinov_abysses-bounce-3.jpg",
+      "slackinov_abysses-bounce-4.jpg",
+      "slackinov_abysses-bounce-5.jpg"
     ],
     "slackinov_boomboom": [
       "slackinov_boomboom.jpg"
@@ -1129,17 +1127,47 @@
       "slackinov_flamme-iii.jpg",
       "slackinov_flamme-iii-2.jpg"
     ],
+    "slackinov_funky": [
+      "slackinov_funky.jpg",
+      "slackinov_funky-2.jpg",
+      "slackinov_funky-3.jpg",
+      "slackinov_funky-4.jpg",
+      "slackinov_funky-5.jpg",
+      "slackinov_funky-6.jpg"
+    ],
     "slackinov_joker": [
       "slackinov_joker.jpg",
       "slackinov_joker-2.jpg"
     ],
     "slackinov_nova": [
       "slackinov_nova.jpg",
-      "slackinov_nova-2.jpg"
+      "slackinov_nova-2.jpg",
+      "slackinov_nova-3.jpg",
+      "slackinov_nova-4.jpg"
     ],
     "slackinov_plasma": [
       "slackinov_plasma.jpg",
       "slackinov_plasma-2.jpg"
+    ],
+    "slackinov_reggae": [
+      "slackinov_reggae.jpg",
+      "slackinov_reggae-2.jpg",
+      "slackinov_reggae-3.jpg",
+      "slackinov_reggae-4.jpg",
+      "slackinov_reggae-5.jpg",
+      "slackinov_reggae-6.jpg"
+    ],
+    "slackinov_sky-diamond": [
+      "slackinov_sky-diamond.jpg",
+      "slackinov_sky-diamond-2.jpg",
+      "slackinov_sky-diamond-3.jpg",
+      "slackinov_sky-diamond-4.jpg"
+    ],
+    "slackinov_solid": [
+      "slackinov_solid.jpg",
+      "slackinov_solid-2.jpg",
+      "slackinov_solid-3.jpg",
+      "slackinov_solid-4.jpg"
     ],
     "slackmtn_artic-fox": [
       "slackmtn_artic-fox.jpg"
@@ -1304,6 +1332,14 @@
       "spider_green-mamba-4.jpg",
       "spider_green-mamba-5.jpg"
     ],
+    "spider_jumanji": [
+      "spider_jumanji.jpg",
+      "spider_jumanji-2.jpg",
+      "spider_jumanji-3.jpg",
+      "spider_jumanji-4.jpg",
+      "spider_jumanji-5.jpg",
+      "spider_jumanji-6.jpg"
+    ],
     "spider_jumbo": [
       "spider_jumbo.jpg"
     ],
@@ -1328,16 +1364,6 @@
       "spider_panther-4.jpg",
       "spider_panther-5.jpg",
       "spider_panther-6.jpg"
-    ],
-    "spider_rodeo": [
-      "spider_rodeo.jpg",
-      "spider_rodeo-2.jpg"
-    ],
-    "spider_sky-diamond": [
-      "spider_sky-diamond.jpg",
-      "spider_sky-diamond-2.jpg",
-      "spider_sky-diamond-3.jpg",
-      "spider_sky-diamond-4.jpg"
     ],
     "spider_tender": [
       "spider_tender.jpg"

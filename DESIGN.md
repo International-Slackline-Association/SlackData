@@ -415,7 +415,8 @@ columns, which meant the specs that actually distinguish products were the ones 
 
 **Content area** (bottom ~60%):
 - Brand name: small-caps gray, ~11px, ~4px below image area
-- Product name: bold near-black, ~15px, clickable → detail page
+- Product name: bold near-black, ~15px, clickable → detail page (and the sole keyboard-focusable
+  route there — see **The whole card is the link** below)
 - Key specs inline row: small gray text with `·` separators — e.g. `25mm · 280g/m · MBS 32kN`.
   A segment is normally one field, but it may be a **composite** where a single field is a
   half-truth: **weblocks show the full range of webbing widths the device accepts**
@@ -431,6 +432,21 @@ columns, which meant the specs that actually distinguish products were the ones 
   Webbings append `/m`. The card shows only the converted figure — the as-sold original lives on the
   detail page and in the compare cell, where there's room for it.
 - **Bottom action row**: equal-width outlined buttons spanning full card width — `View product ↗` (only when the item records a `product_url`; roughly half the catalogue does) and `⧉ Compare`. Light gray border, gray text. Hover: teal border + teal text. The link opens in a new tab with `rel="noopener"`, since it leaves for a third-party manufacturer site.
+
+**The whole card is the link.** Every part of a card that is not itself a control navigates to the
+detail page on click — the image band, the brand line, the product name, the inline specs, the price,
+and all the dead space between them. A card is one object about one product; making only its title
+clickable gives a mouse a ~150px target inside a ~300×340px thing that already looks pressable.
+The exceptions are the controls the card owns, which keep their own behaviour and never navigate:
+the carousel's prev/next arrows and dots, `Compare`, and `View product ↗` (which leaves the site).
+The decorative overlays — the Legacy pill and the top-right ISA/classification stack — are *not*
+controls: clicking one navigates like the rest of the card.
+
+Implemented as a stretched overlay link covering the card, with the controls raised above it, rather
+than by wrapping the card in an anchor — the card contains buttons and an outbound link, and nesting
+those inside an `<a>` is invalid HTML. The overlay is `aria-hidden` and out of the tab order: the
+product-name link is the same destination, and keyboard and screen-reader users should meet each card
+once, not twice. So the visible focus target on a card is still its name.
 
   `♡ Save` and `🔔 Alert` used to sit here and were removed. They had no handler, no state and nowhere for the intent to go — a card should not offer an action the product cannot perform. If saved items or price alerts arrive later they come back with an account system behind them, not as furniture.
 
@@ -784,6 +800,46 @@ and disappears entirely when none are (see the note in `manufacturers.cy.ts`; th
 - **No sharp rectangles anywhere** — even the large CTA buttons are rounded
 - **ISA Certified** always uses the official ISA Approved stamp badge (charcoal frame, teal + coral ISA mark, white "APPROVED", teal checkmark). On cards: miniature stamp ~28px tall, top-right of image area (below the classification bubble when the webbing has one — a letter bubble only ever appears on a certified item, so the stamp is always its neighbour), only shown when true. On detail page: ~80px wide block above specs, "Not ISA Certified" in subdued gray when false. Never use a plain checkmark or generic pill — the stamp is the trust signal.
 - **Empty states**: centered gray icon + short message — e.g. "No webbings match your filters" with a "Clear filters" teal link
+
+### Manufacturer names are links
+
+**Wherever a manufacturer's name is printed next to something they make, it is a link to
+`/manufacturers/{id}` — their page on this site.** A brand name is an identity, and a reader who
+has just noticed "Balance Community" on a card is one click from wanting the rest of what they
+make; leaving it as inert gray text made the manufacturer directory reachable only from the top
+nav. The sites this applies to today:
+
+| Where | `data-cy` |
+|---|---|
+| Gear card, above the product name | `gear-card-brand` |
+| Gear detail page header | `detail-brand` |
+| Detailed view panels (same component as the detail page) | `detail-brand` |
+| Compare table column header | `compare-col-brand` |
+
+The link itself is `data-cy="brand-link"` and carries `data-brand-id`, inside the existing element
+in every case — the small-caps brand line keeps its own hook, so nothing that reads the *text* has
+to know it became a link.
+
+Treatment: inherits the surrounding type (small caps, gray) and only gains `hover:text-teal-primary`
+plus underline on hover — the same restraint as the product-name link. A brand line that shouted in
+teal at rest would out-rank the product name, which is the card's actual heading.
+
+**Three cases render plain text instead of a link**, and they are the whole of the rule's
+subtlety:
+
+1. **On that brand's own page.** `/manufacturers/7` prints "Balance Community" on every card in the
+   grid; each one linking back to the page you are reading is noise, so `BrandLink` suppresses
+   itself when the current route is already that brand's detail page. (This is what "not their
+   page" means — the name still links from a gear detail page reached *via* a brand page.)
+2. **Before the brand index has loaded.** The gear `*Public` schemas carry `brand_name`, not
+   `brand_id`, so the id is resolved by name against `/brand` — fetched once per page load and
+   cached module-side, exactly like the ISA warnings index. Until it resolves, the name renders as
+   it always did.
+3. **A name with no matching brand row.** Never a dead link, never a guess.
+
+Not covered, deliberately: the brand names in the **admin triage queue** and the correction form.
+Those are strings a *submitter* typed, not a catalogue brand — the whole point of the queue is that
+they have not been reconciled yet, so linking them would assert an identity nobody has checked.
 
 ### The two clear actions
 
