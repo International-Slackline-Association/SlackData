@@ -26,6 +26,7 @@ import { SPEC_ROWS, type PriceFormatter } from '@/config/specRows'
 import type { AnyItem } from '@/utils/format'
 import type { GearSlug } from '@/types'
 import BrandLink from '@/components/brand/BrandLink'
+import StretchChart, { STRETCH_CHART_MIN_SERIES, stretchSeries } from '@/components/gear/StretchChart'
 import NotFoundPage from './NotFoundPage'
 
 export default function ComparePage() {
@@ -58,15 +59,24 @@ export default function ComparePage() {
     return ids.map(id => byId.get(id)).filter((it): it is AnyItem => it != null)
   }, [items, ids])
 
+  // Webbing stretch leaves the table when there are two curves to draw: it is a
+  // shape, and the chart below IS that row (DESIGN.md § Compare View). With
+  // fewer than two curves there is no comparison to plot, so the row stays.
+  const charted = useMemo(
+    () => stretchSeries(columns).length >= STRETCH_CHART_MIN_SERIES,
+    [columns],
+  )
+
   // Rows that at least one item in the whole dataset populates. Keyed off
   // `items`, not `columns`, so which rows exist is a property of the gear type
   // and doesn't shift as you add or remove compare picks.
   const rows = useMemo(() => {
     const all = SPEC_ROWS[meta?.slug as GearSlug] ?? []
     const data = items as unknown as AnyItem[]
-    if (data.length === 0) return all
-    return all.filter(row => data.some(it => row.value(it, money) !== ''))
-  }, [meta?.slug, items, money])
+    const shown = charted ? all.filter(row => row.field !== 'stretch') : all
+    if (data.length === 0) return shown
+    return shown.filter(row => data.some(it => row.value(it, money) !== ''))
+  }, [meta?.slug, items, money, charted])
 
   if (!meta) return <NotFoundPage />
 
@@ -165,6 +175,7 @@ export default function ComparePage() {
             </tbody>
           </table>
           </div>
+          <StretchChart items={columns} />
         </>
       )}
     </div>
