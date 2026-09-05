@@ -11,7 +11,7 @@ from slack_data.models.weblocks import (
     WeblockCreate,
     WeblockStyle,
 )
-from slack_data.utilities.materials import get_metal_material
+from slack_data.utilities.materials import get_metal_materials
 from slack_data.utilities.currencies import Currency, get_currency
 
 WEBLOCKS_FILE = seed_path("weblocks.json")
@@ -71,9 +71,13 @@ def clean_weblock_data(weblock: dict[str, Any]) -> dict[str, Any]:
 
     cleaned_data["raw_name"] = weblock.get("name") 
     cleaned_data["raw_brand_name"] = weblock.get("brand") 
+    # Same reason as the id above: the co-listing names would be dropped by
+    # this fresh-dict rebuild, and every weblock Slack Inov and Spider sell for
+    # each other would silently lose its sellers.
+    cleaned_data["gear_sellers"] = weblock.get("gear_sellers")
 
     cleaned_data["style"] = get_weblock_style(weblock.get("style"))
-    cleaned_data["material"] = get_metal_material(specs.get("Material"))
+    cleaned_data["material"] = get_metal_materials(specs.get("Material"))
     
     # Parse width range
     width_min, width_max = parse_width_range(specs.get("Compatible webbing width"))
@@ -134,6 +138,8 @@ def add_weblocks_to_db(weblocks: list[dict], session: SessionDep) -> None:
             version=weblock.get("version"),
             notes=weblock.get("notes"),
             active=weblock.get("active"),
+            # Brand names only — see the model. Absent stays None, not [].
+            gear_sellers=weblock.get("gear_sellers") or None,
         )
         db_weblock = Weblock.model_validate(weblock_create)
         db_weblock.id = require_seed_id(weblock, "weblocks.json")

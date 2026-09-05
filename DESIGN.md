@@ -255,23 +255,70 @@ every other range filter.
 
 On webbings the group is labelled **"Price per meter"** (see § Currency & Prices).
 
+**Brand is the LAST group in every gear type's sidebar** — below every spec filter, and on webbings
+below the stretch widget too. It applies to all 8 types and needs no knowledge of the gear at all
+("show me what Spider and Slack Inov sell"), which is exactly why it does not go at the top: it is
+the longest group there is, and putting 45 brand pills above Material would push the filters people
+actually scrolled for off the screen.
+
+It is a multi-select pill group (`data-group="brand"`, URL key `?brand=`), with three behaviours of
+its own:
+
+- **A pill matches the makers *and* the sellers.** `Brand.id` on a gear row says who *makes* the
+  thing; the item's own `gear_sellers` list says who else *sells* it (see CLAUDE.md § Co-listings). Spider
+  Slacklines and Slack Inov co-list most of each other's range, so a "Brand" filter that only read
+  the maker would answer a question nobody asked — the shopper wants what they can buy from that
+  brand, not what came out of its own loom. So the values compared are the item's **maker plus
+  every brand listed as selling it**, and picking `Spider Slacklines` returns both the webbings
+  Spider makes and the Slack Inov webbings Spider stocks. The card still shows the **maker**: the
+  specs are the maker's, and a reseller does not get to restate them.
+- **The options are a live facet.** Like every other pill group its values come from the data, never
+  from the 76-entry manufacturer list (most of those brands have no webbing) — but unlike the spec
+  groups, which derive from the whole status scope, Brand derives from **what every other control
+  leaves in play**. Filter to Dyneema and the group lists the brands that still have a Dyneema
+  webbing, alphabetically. Two consequences follow, and both are deliberate:
+  - **Its own selection is excluded from that narrowing.** Folded in, picking one brand would leave
+    that brand as the only pill in the group and a second could never be added. The webbing stretch
+    widget is excluded too, for the reason its own kN counts exclude themselves — two facets that
+    each narrow the other jump on every click.
+  - **A selected brand that the other filters narrow away stays on screen**, active, appended at the
+    end of the list. The alternative is a filter that is applied but has no visible control, undoable
+    only through Clear all.
+- **It is searchable, and long lists are folded.** Webbings alone come from 45 brands, which is a
+  wall of pills in a 280px column. Above 10 options the group grows a small text box
+  (`data-cy="pill-search"`, substring match, case-insensitive) and shows only the first 12 pills,
+  with a `Show all 45` / `Show fewer` toggle (`data-cy="pill-more"`) beneath. **Selected pills are
+  always visible** regardless of the fold or the search term — a filter you cannot see is a filter
+  you cannot undo. Every other pill group is under 10 options and renders exactly as before.
+
+The detail page renders the other half of this — see § Also sold by. Nothing about a seller listing
+appears on the **card** (see BACKLOG.md): the card shows the maker, because the specs are the
+maker's.
+
+This group is no longer a maker filter in practice. Slack Inov and Spider Slacklines co-list each
+other's entire range, so picking **either** pill returns both brands' gear of that type — 26 of the
+webbing pills' items answer to both. That is exactly what the group was built for, and it is worth
+knowing before reading a count off the grid: the number of results under "Spider Slacklines" is not
+the number of webbings Spider makes.
+
+
 Excluded from filters: `name`/`description`/`notes` (search), `release_date`, `product_url`, `version`, `currency` (the top-nav **selector** governs currency site-wide — filtering by the seller's currency would be filtering by an accident of where the shop is), `colors` (comma-separated string needing split logic — future work), `stretch` on webbing (JSON blob of {kn,percent} pairs — exposed as a "has stretch data" pill instead), `width` on rollers (raw string like "25–35mm", not a numeric field), **`classification` on webbing** (an ISA grant, not an independent axis of the catalogue — see § Classification bubble; filter by **ISA Certified** instead).
 
-**Webbings:** **Price per meter** [range] · Material Type [pill] · Width mm [range] · ISA Certified [pill] · ISA Warning [pill] · Weight g/m [range] · Breaking Strength kN [range] · **Stretch at X kN** [custom — see below]
+**Webbings:** **Price per meter** [range] · Material Type [pill] · Width mm [range] · ISA Certified [pill] · ISA Warning [pill] · Weight g/m [range] · Breaking Strength kN [range] · **Stretch at X kN** [custom — see below] · **Brand** [pill]
 
-**Weblocks:** **Price** [range] · Material [pill] · Min Width mm [range] · Front Pin [pill] · Attachment Point [pill] · ISA Certified [pill] · ISA Warning [pill] · Weight g [range] · Breaking Strength kN [range]
+**Weblocks:** **Price** [range] · Material [pill] · Min Width mm [range] · Front Pin [pill] · Attachment Point [pill] · ISA Certified [pill] · ISA Warning [pill] · Weight g [range] · Breaking Strength kN [range] · **Brand** [pill]
 
-**Leash Rings:** **Price** [range] · Material [pill] · ISA Certified [pill] · ISA Warning [pill] · Inner Diameter mm [range] · Outer Diameter mm [range] · Weight g [range] · Breaking Strength kN [range]
+**Leash Rings:** **Price** [range] · Material [pill] · ISA Certified [pill] · ISA Warning [pill] · Inner Diameter mm [range] · Outer Diameter mm [range] · Weight g [range] · Breaking Strength kN [range] · **Brand** [pill]
 
-**Grips:** **Price** [range] · Material [pill] · Min Width mm [pill] · Connection Type [pill] · ISA Certified [pill] · ISA Warning [pill] · Weight g [range] · WLL kN [range] · MBS kN [range] · Slipping Threshold kN [range]
+**Grips:** **Price** [range] · Material [pill] · Min Width mm [pill] · Connection Type [pill] · ISA Certified [pill] · ISA Warning [pill] · Weight g [range] · WLL kN [range] · MBS kN [range] · Slipping Threshold kN [range] · **Brand** [pill]
 
-**Rollers:** **Price** [range] · Frame Material [pill] · Roller Material [pill] · Slider Type [pill] · Lock Type [pill] · Bearing Material [pill] · ISA Warning [pill] · Weight g [range] · Breaking Strength kN [range]  _(ISA Certified hidden — no roller is certified)_
+**Rollers:** **Price** [range] · Frame Material [pill] · Roller Material [pill] · Slider Type [pill] · Lock Type [pill] · Bearing Material [pill] · ISA Warning [pill] · Weight g [range] · Breaking Strength kN [range] · **Brand** [pill]  _(ISA Certified hidden — no roller is certified)_
 
-**Tree Protectors:** **Price** [range] · Sling Attachment [pill] · Sold As [pill — labels title-cased: Pair / Single] · Weight g [range] · Width cm [range] · Length cm [range] · Thickness mm [range]
+**Tree Protectors:** **Price** [range] · Sling Attachment [pill] · Sold As [pill — labels title-cased: Pair / Single] · Weight g [range] · Width cm [range] · Length cm [range] · Thickness mm [range] · **Brand** [pill]
 
-**Starter Kits:** **Price** [range] · Tensioning [pill] · Webbing Width mm [pill] · Webbing Length m [pill] · Includes Tree Pro [pill] · Kit Weight g [range]  _(ISA Certified hidden — none certified)_
+**Starter Kits:** **Price** [range] · Tensioning [pill] · Webbing Width mm [pill] · Webbing Length m [pill] · Includes Tree Pro [pill] · Kit Weight g [range] · **Brand** [pill]  _(ISA Certified hidden — none certified)_
 
-**Trickline Kits:** **Price** [range] · Tensioning [pill] · Webbing Width mm [pill] · Webbing Length m [pill] · Includes Tree Pro [pill]  _(ISA Certified hidden — none certified; Kit Weight NOT filterable — only 2 of 9 have weight data)_
+**Trickline Kits:** **Price** [range] · Tensioning [pill] · Webbing Width mm [pill] · Webbing Length m [pill] · Includes Tree Pro [pill] · **Brand** [pill]  _(ISA Certified hidden — none certified; Kit Weight NOT filterable — only 2 of 9 have weight data)_
 
 **Manufacturers sidebar:** Continent [pill] · Slackline-Focused [pill]
 
@@ -457,13 +504,16 @@ once, not twice. So the visible focus target on a card is still its name.
 Max-width centered container (~1024px), left-aligned back link. The body is a **two-column split**:
 image carousel on the left (~320px), and on the right the brand / product name (+ classification
 bubble) / price header, the ISA warning banner, the ISA certification block and the specification
-grid — so the specs wrap around the title rather than sitting in a slab beneath it. Description and
-`View product →` run full width below the split. Collapses to a single column below `sm`.
+grid — so the specs wrap around the title rather than sitting in a slab beneath it. **Also sold by**
+sits in that right column too, under the price. Description and `View product →` run full width
+below the split. Collapses to a single column below `sm`.
 
 **Order within the right column matters** and is asserted geometrically by `isa_certification.cy.ts`:
-name → ISA warning banner → ISA certification block → spec grid. Keeping the banner and cert block
-inside the right column (rather than below the whole split) is deliberate: it holds a safety warning
-next to the product name instead of burying it under the spec grid.
+name → price → ISA warning banner → **Also sold by** → ISA certification block → spec grid. Keeping
+the banner and cert block inside the right column (rather than below the whole split) is deliberate:
+it holds a safety warning next to the product name instead of burying it under the spec grid. The
+seller block goes *after* the banner for the same reason — a list of shops must never push a recall
+further from the name of the thing recalled.
 
 **Back link**: `← Webbings` in small gray text, hover teal.
 
@@ -546,6 +596,45 @@ Options are derived from the loaded data, so **a status no item of that type car
 If the detail fetch fails, the banner falls back to the severity word alone — a lost request downgrades the warning, it never hides it.
 
 ---
+
+### Also sold by
+
+One product can be sold by shops other than the one that makes it — Slack Inov and Spider Slacklines
+co-list each other's whole range, each on their own site. The catalogue holds that as a list of
+seller brand names on the gear row itself (`gear_sellers`, CLAUDE.md § Co-listings), never as a
+second product, and this block is the only place a reader sees it.
+
+In the detail page's **right column**, directly under the price and above the ISA certification block
+(`data-cy="also-sold-by"`). That position is the point: the block answers the question the price just
+raised — this is what it costs, and here is who else sells it. It first sat full width below the spec
+grid, where the price it belongs to was a whole spec table away, and read as an afterthought.
+
+Its one hard constraint is the ISA warning banner above it. The banner is pinned next to the product
+name deliberately (§ Gear Detail Page), so the seller list goes below it and never between it and the
+title: a list of shops must not push a recall further from the name of the thing recalled.
+`co_listings.cy.ts` asserts both halves of the position geometrically.
+
+One row per seller (`data-cy="seller-listing"`, carrying `data-brand`), separated by hairlines,
+holding **the seller's name** as a `BrandLink` to their page here — same treatment as a maker's name
+anywhere else on the site (§ Manufacturer names are links).
+
+**A name is the whole row, deliberately.** There is no per-shop price, product link or stock chip,
+because the catalogue holds none: these co-listings were recorded from the two companies' own
+statement that they carry each other's range, not from a per-product scrape. A price or a `View →`
+here would be a claim about a real shop that nobody checked. If per-seller prices are ever sourced,
+that is the moment to widen the row — not before.
+
+**The maker is never in this list.** The header block above already names them and links to their
+product page; repeating them here would read as though the manufacturer were one reseller among
+several. The seed pass refuses a maker listed among its own sellers, so this is a fact about the data
+rather than a filter applied in the component.
+
+**The whole block is absent, not empty, when there are no sellers** — most of the catalogue has no
+co-listing at all, and a bare heading with nothing under it reads as a failed fetch. The names arrive
+with the item itself, so there is no second request that can fail here.
+
+Nothing about a co-listing appears on the **card** yet — see BACKLOG.md; the card shows the maker,
+because the specs are the maker's.
 
 ### Spec rows per gear type
 

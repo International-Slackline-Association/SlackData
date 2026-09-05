@@ -56,7 +56,14 @@ def clean_manufacturer_data(raw: dict) -> dict[str, dict]:
             "country": get_country(entry.get("country")),
             "year_founded": entry.get("year_established"),
             "website": blank_to_none(entry.get("website")),
-            "socials": blank_to_none(entry.get("facebook")) or blank_to_none(entry.get("tiktok")),
+            # One social link, first one the entry actually has. Facebook is
+            # what SlackDB's dump carried; the others are brands we added
+            # ourselves, some of which never had a Facebook page.
+            "socials": (
+                blank_to_none(entry.get("facebook"))
+                or blank_to_none(entry.get("instagram"))
+                or blank_to_none(entry.get("tiktok"))
+            ),
             "contact_email": blank_to_none(entry.get("email")),
             "active": entry.get("active"),
             "slackline_focused": entry.get("slackline_oriented"),

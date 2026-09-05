@@ -21,7 +21,9 @@
 // The ISA banner and certification block stay INSIDE the right column, above
 // the specs: that keeps a safety warning next to the product name (and
 // preserves the name → banner → cert → specs order isa_certification.cy.ts
-// asserts geometrically). Stacks to a single column below `sm`.
+// asserts geometrically). "Also sold by" sits in that column too, between the
+// banner and the cert block — under the price it belongs to, and never above
+// the banner. Stacks to a single column below `sm`.
 
 import { Link } from 'react-router-dom'
 import type { GearTypeMeta } from '@/config/gearTypes'
@@ -30,6 +32,7 @@ import { useIsaWarnings } from '@/hooks/useIsaWarnings'
 import { type AnyItem } from '@/utils/format'
 import { imageUrls } from '@/utils/images'
 import BrandLink from '@/components/brand/BrandLink'
+import AlsoSoldBy from './AlsoSoldBy'
 import CardImageCarousel from './CardImageCarousel'
 import ClassificationBubble from './ClassificationBubble'
 import IsaApprovedBadge from './IsaApprovedBadge'
@@ -71,7 +74,6 @@ export default function GearDetailBody({
   // The full ISA entries behind that status word — description, what to do,
   // date, sources. Shared index, fetched once (see useIsaWarnings).
   const isaWarnings = useIsaWarnings(meta.apiPath, item.id as number)
-
   const nameClass = 'text-2xl font-bold text-gray-900'
 
   return (
@@ -140,6 +142,18 @@ export default function GearDetailBody({
           {isaWarning !== null && (
             <IsaWarningPanel status={isaWarning} warnings={isaWarnings} />
           )}
+
+          {/* Directly under the price, because that is the question it answers:
+              this is what the thing costs HERE, and here is who else sells it.
+              Below the split — where it first sat — it was separated from the
+              price by the whole spec grid and read as an afterthought.
+
+              It goes AFTER the ISA warning banner and not before it. The banner
+              is deliberately pinned next to the product name (see the layout
+              note at the top of this file, asserted geometrically by
+              isa_certification.cy.ts), and a list of shops must never push a
+              recall further from the name of the thing recalled. */}
+          <AlsoSoldBy sellers={item.gear_sellers as string[] | null} />
 
           {meta.hasISA && (
             <div data-cy="isa-certification-block" className="mt-5">

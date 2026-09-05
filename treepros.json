@@ -3,7 +3,7 @@
         "id": 1,
         "name": "TreePRO",
         "release_date": 1617139074436,
-        "product_url": "https://raed-slacklines.com/treepro",
+        "product_url": "https://web.archive.org/web/20210728175703/https://raed-slacklines.com/treepro",
         "weight": 300.0,
         "width": null,
         "length": null,
@@ -136,7 +136,7 @@
         "id": 8,
         "name": "Treepro XL",
         "release_date": 1621856486086,
-        "product_url": "https://slacklineindustries.com/products/treepro-xl",
+        "product_url": "https://web.archive.org/web/20230326221220/https://slacklineindustries.com/products/treepro-xl",
         "weight": null,
         "width": 25,
         "length": 198,
@@ -244,6 +244,9 @@
         "version": null,
         "notes": null,
         "manufacturer": "Spider slacklines",
+        "gear_sellers": [
+            "Slack Inov"
+        ],
         "active": true
     },
     {
@@ -345,7 +348,7 @@
         "id": 19,
         "name": "Baumschutz Easy",
         "release_date": 1621874301952,
-        "product_url": "https://slackstar.de/lines-zubehoer/baumschutz/865/baumschutz-easy",
+        "product_url": "https://web.archive.org/web/20241108222245/https://slackstar.de/lines-zubehoer/baumschutz/865/baumschutz-easy",
         "weight": null,
         "width": 12,
         "length": 300,
@@ -396,6 +399,9 @@
         "version": null,
         "notes": null,
         "manufacturer": "Spider slacklines",
+        "gear_sellers": [
+            "Slack Inov"
+        ],
         "active": true
     },
     {

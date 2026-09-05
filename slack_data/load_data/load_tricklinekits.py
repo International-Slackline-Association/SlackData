@@ -78,6 +78,8 @@ def add_tricklinekits_to_db(tricks: list[dict], session: SessionDep) -> None:
             version=t.get("version"),
             notes=t.get("notes"),
             active=t.get("active"),
+            # Brand names only — see the model. Absent stays None, not [].
+            gear_sellers=t.get("gear_sellers") or None,
         )
 
         db_tk = TricklineKit.model_validate(trick_create)

@@ -30,6 +30,10 @@ export interface GearBase {
   // null = unknown/not yet verified.
   active: boolean | null
   brand_name: string
+  // The brands that SELL this product without making it — `brand_name` is only
+  // ever the maker. Names, resolved to the catalogue's own spelling at seed
+  // time. null when none are recorded. See CLAUDE.md § Co-listings.
+  gear_sellers: string[] | null
 }
 
 export interface Webbing extends GearBase {
@@ -48,7 +52,7 @@ export interface Webbing extends GearBase {
 
 export interface Weblock extends GearBase {
   style: WeblockStyle | null
-  material: MetalMaterial
+  material: MetalMaterial[] // JSON column: frame and pins can be different metals
   width_min: number
   width_max: number | null
   breaking_strength: number | null

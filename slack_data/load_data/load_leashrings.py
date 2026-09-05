@@ -30,6 +30,11 @@ def clean_leashring_data(leashring: dict) -> dict:
             cleaned_leashring[key] = None
         elif key == "isa_certified":
             cleaned_leashring[key] = to_bool(value)
+        elif key == "gear_sellers":
+            # A list of brand names, bound for a JSON column. The str()
+            # branch below would store the Python repr of it, which reads
+            # back as a string and matches no brand.
+            cleaned_leashring[key] = value or None
         else:
             cleaned_leashring[key] = str(value) if value is not None else None
     return cleaned_leashring
@@ -63,6 +68,8 @@ def add_leashrings_to_db(leashrings: list[dict], session: SessionDep) -> None:
             currency=currency,
             notes=leashring.get("notes"),
             active=leashring.get("active"),
+            # Brand names only — see the model. Absent stays None, not [].
+            gear_sellers=leashring.get("gear_sellers") or None,
         )
         db_leashring = LeashRing.model_validate(leashring_create)
         db_leashring.id = require_seed_id(leashring, "leashrings.json")

@@ -38,6 +38,11 @@ def clean_webbing_data(webbing: dict) -> dict:
             # fiber names) are stored as valid JSON — the generic str() branch
             # below would emit a Python repr with single quotes, not JSON.
             cleaned_webbing[key] = json.dumps(value) if value else None
+        elif key == "gear_sellers":
+            # A list of brand names, bound for a JSON column. The str()
+            # branch below would store the Python repr of it, which reads
+            # back as a string and matches no brand.
+            cleaned_webbing[key] = value or None
         elif key not in {"name", "brand", "materialType"} and value == "":
             cleaned_webbing[key] = None
         else:
@@ -85,6 +90,8 @@ def add_webbings_to_db(webbings: list[dict], session: SessionDep) -> None:
             price=parse_price(webbing.get("priceMeter")),
             currency=parse_currency(webbing.get("currency")),
             active=webbing.get("active"),
+            # Brand names only — see the model. Absent stays None, not [].
+            gear_sellers=webbing.get("gear_sellers") or None,
         )
         db_webbing = Webbing.model_validate(webbing_create)
         db_webbing.id = require_seed_id(webbing, "webbings.json")

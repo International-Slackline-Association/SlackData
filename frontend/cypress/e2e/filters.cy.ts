@@ -4,6 +4,10 @@ import { GEAR_TYPES } from '../support/gear_types'
 //   'pill'  — enum or boolean field; values become toggle buttons
 //   'range' — numeric field (float or int); rendered as min + max inputs
 //
+// Brand appears in every type's list here so the sidebar-structure tests cover
+// it, but its own behaviour — matching co-listing sellers as well as the maker,
+// the search box, the fold — lives in brand_filter.cy.ts.
+//
 // Webbing stretch is handled separately — see the dedicated describe block below.
 // It is a JSON array of {kn, percent} pairs, not a scalar, so it needs a
 // custom two-part widget: a kN reference selector + a % range.
@@ -46,16 +50,18 @@ const FILTER_GROUPS: Record<string, FilterGroup[]> = {
     // stretch has its own widget — see the dedicated describe block below FILTER_GROUPS
     { group: 'weight',            label: 'Weight',            type: 'range', unit: 'g/m' },
     { group: 'breaking_strength', label: 'Breaking Strength', type: 'range', unit: 'kN' },
+    { group: 'brand',             label: 'Brand',             type: 'pill'  }, // maker OR co-listing seller — see brand_filter.cy.ts
   ],
 
   // ── Weblock ───────────────────────────────────────────────────────────────
-  // Fields: style(enum|None) material(enum) width_min(int) width_max(int|None) weight(float)
+  // Fields: style(enum|None) material(enum[] — multi-select, a titanium frame can
+  //         carry steel pins) width_min(int) width_max(int|None) weight(float)
   //         breaking_strength(float) front_pin(enum|None) attachment_point(enum|None)
   //         isa_certified(bool) isa_warning(enum) colors(excluded)
   weblocks: [
     { group: 'price',             label: 'Price',             type: 'range', valueAttr: 'data-price-display' },
     { group: 'style',             label: 'Style',             type: 'pill'  }, // Tensionable Weblock / Fixed Linelocker
-    { group: 'material',          label: 'Material',          type: 'pill'  }, // MetalMaterial
+    { group: 'material',          label: 'Material',          type: 'pill'  }, // MetalMaterial[]
     { group: 'width_min',         label: 'Min Width',         type: 'range', unit: 'mm' }, // dual-thumb slider
     { group: 'front_pin',         label: 'Front Pin',         type: 'pill'  }, // Push/Pull/Captive/Fixed Bolt/Other
     { group: 'attachment_point',  label: 'Attachment Point',  type: 'pill'  }, // Universal/Hole/Pin/Bolt/Bent Plate/Sling/Other
@@ -63,6 +69,7 @@ const FILTER_GROUPS: Record<string, FilterGroup[]> = {
     { group: 'isa_warning',       label: 'ISA Warning',       type: 'pill'  },
     { group: 'weight',            label: 'Weight',            type: 'range', unit: 'g'  },
     { group: 'breaking_strength', label: 'Breaking Strength', type: 'range', unit: 'kN' },
+    { group: 'brand',             label: 'Brand',             type: 'pill'  }, // maker OR co-listing seller — see brand_filter.cy.ts
   ],
 
   // ── Leash Ring ────────────────────────────────────────────────────────────
@@ -77,6 +84,7 @@ const FILTER_GROUPS: Record<string, FilterGroup[]> = {
     { group: 'outer_diameter',    label: 'Outer Diameter',    type: 'range', unit: 'mm' },
     { group: 'weight',            label: 'Weight',            type: 'range', unit: 'g'  },
     { group: 'breaking_strength', label: 'Breaking Strength', type: 'range', unit: 'kN' },
+    { group: 'brand',             label: 'Brand',             type: 'pill'  }, // maker OR co-listing seller — see brand_filter.cy.ts
   ],
 
   // ── Grip ──────────────────────────────────────────────────────────────────
@@ -94,6 +102,7 @@ const FILTER_GROUPS: Record<string, FilterGroup[]> = {
     { group: 'wll',                       label: 'WLL',                 type: 'range', unit: 'kN' },
     { group: 'mbs',                       label: 'MBS',                 type: 'range', unit: 'kN' },
     { group: 'common_slipping_threshold', label: 'Slipping Threshold',  type: 'range', unit: 'kN' },
+    { group: 'brand',             label: 'Brand',             type: 'pill'  }, // maker OR co-listing seller — see brand_filter.cy.ts
   ],
 
   // ── Roller ────────────────────────────────────────────────────────────────
@@ -115,6 +124,7 @@ const FILTER_GROUPS: Record<string, FilterGroup[]> = {
     { group: 'isa_warning',      label: 'ISA Warning',       type: 'pill'  },
     { group: 'weight',           label: 'Weight',            type: 'range', unit: 'g'  },
     { group: 'breaking_strength',label: 'Breaking Strength', type: 'range', unit: 'kN' },
+    { group: 'brand',             label: 'Brand',             type: 'pill'  }, // maker OR co-listing seller — see brand_filter.cy.ts
   ],
 
   // ── Tree Protector ────────────────────────────────────────────────────────
@@ -129,6 +139,7 @@ const FILTER_GROUPS: Record<string, FilterGroup[]> = {
     { group: 'width',                label: 'Width',            type: 'range', unit: 'cm'  },
     { group: 'length',               label: 'Length',           type: 'range', unit: 'cm'  },
     { group: 'thickness',            label: 'Thickness',        type: 'range', unit: 'mm'  },
+    { group: 'brand',             label: 'Brand',             type: 'pill'  }, // maker OR co-listing seller — see brand_filter.cy.ts
   ],
 
   // ── Starter Kit ───────────────────────────────────────────────────────────
@@ -144,6 +155,7 @@ const FILTER_GROUPS: Record<string, FilterGroup[]> = {
     { group: 'includes_treepro', label: 'Includes Tree Pro', type: 'pill'  },
     // isa_certified HIDDEN — no starter kit is ISA certified.
     { group: 'weight',           label: 'Kit Weight',        type: 'range', unit: 'g' },
+    { group: 'brand',             label: 'Brand',             type: 'pill'  }, // maker OR co-listing seller — see brand_filter.cy.ts
   ],
 
   // ── Trickline Kit ─────────────────────────────────────────────────────────
@@ -160,6 +172,7 @@ const FILTER_GROUPS: Record<string, FilterGroup[]> = {
     // isa_certified HIDDEN — no trickline kit is ISA certified.
     // Kit Weight is NOT filterable for trickline kits — only 2 of 9 have weight
     // data, so a slider would mislead (see filterGroups.ts).
+    { group: 'brand',             label: 'Brand',             type: 'pill'  }, // maker OR co-listing seller — see brand_filter.cy.ts
   ],
 }
 
@@ -484,9 +497,13 @@ GEAR_TYPES.forEach(({ slug, apiPath, label }) => {
       // enum fields are all-null in the data → zero pills). Stacking these
       // incompatible constraints drives the list toward empty.
       pills.forEach(({ group }) => {
-        cy.get(`[data-cy="filter-group"][data-group="${group}"]`).then(($g) => {
-          const $pills = $g.find('[data-cy="filter-pill"]')
-          if ($pills.length > 0) cy.wrap($pills.last()).click()
+        const scope = `[data-cy="filter-group"][data-group="${group}"]`
+        cy.get(scope).then(($g) => {
+          if ($g.find('[data-cy="filter-pill"]').length === 0) return
+          // Re-query at click time rather than clicking a wrapped snapshot: the
+          // Brand group is faceted off the other filters, so each click here can
+          // re-derive its pill list and detach a node captured a moment ago.
+          cy.get(scope).find('[data-cy="filter-pill"]').last().click()
         })
       })
       cy.get('body').then(($body) => {

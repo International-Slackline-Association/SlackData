@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "total_manufacturers": 76,
+    "total_manufacturers": 77,
     "known_manufacturers": 74,
     "missing_manufacturers": 0,
     "total_gear_items": 533,
@@ -15,8 +15,8 @@
       "active",
       "email"
     ],
-    "email_source": "scraped from each manufacturer's own website (2026-08-23)",
-    "email_coverage": "34/76"
+    "email_source": "scraped from each manufacturer's own website (2026-08-23); additions 2026-08-28, 2026-09-02. email_alt: a second address the brand also answers on, present only where one is known",
+    "email_coverage": "38/77"
   },
   "manufacturers": {
     "1": {
@@ -81,7 +81,7 @@
       "slackline_oriented": true,
       "website": "linegrip.com",
       "facebook": "https://www.facebook.com/Slackpro-157374974272544",
-      "email": null,
+      "email": "office@linegrip.com",
       "active": true
     },
     "6": {
@@ -134,6 +134,7 @@
       "website": "https://www.slackshop.cz/en/",
       "facebook": "https://www.facebook.com/eqb.cz",
       "email": "info@slackshop.cz",
+      "email_alt": "info@eqb.cz",
       "active": true
     },
     "10": {
@@ -144,7 +145,7 @@
       "country": "DE",
       "year_established": 2010,
       "slackline_oriented": true,
-      "website": null,
+      "website": "https://web.archive.org/web/20210619092524/http://www.elephant-slackline.com",
       "facebook": "https://www.facebook.com/ElephantSlacklines",
       "email": null,
       "active": false
@@ -209,7 +210,7 @@
       "country": "US",
       "year_established": 2013,
       "slackline_oriented": true,
-      "website": null,
+      "website": "https://web.archive.org/web/20250421040630/http://slacklinetechnology.com",
       "facebook": "https://www.facebook.com/slacklinetechnology",
       "email": null,
       "active": false
@@ -261,7 +262,7 @@
       "country": "AU",
       "year_established": null,
       "slackline_oriented": true,
-      "website": null,
+      "website": "https://web.archive.org/web/20191120015904/http://pureslacklines.com.au",
       "facebook": "https://www.facebook.com/PureSlacklines",
       "email": null,
       "active": false
@@ -313,7 +314,7 @@
       "country": "ES",
       "year_established": null,
       "slackline_oriented": true,
-      "website": null,
+      "website": "https://web.archive.org/web/20200924024415/http://ambaradam.net",
       "facebook": "https://www.facebook.com/AmbaradaMLongLineLab",
       "email": null,
       "active": false
@@ -406,7 +407,7 @@
       "slackline_oriented": true,
       "website": "https://www.slackliner.de",
       "facebook": "https://www.facebook.com/Slackliner.de",
-      "email": null,
+      "email": "shop@slackliner.de",
       "active": true
     },
     "31": {
@@ -586,7 +587,7 @@
       "country": "US",
       "year_established": null,
       "slackline_oriented": true,
-      "website": null,
+      "website": "https://web.archive.org/web/20221209233701/http://www.balancingearthslacklines.com",
       "facebook": "https://www.facebook.com/balancingearthslacklines",
       "email": null,
       "active": false
@@ -601,7 +602,7 @@
       "slackline_oriented": true,
       "website": "https://petramslacklines.site123.me/",
       "facebook": "https://www.facebook.com/Petram.Slackline",
-      "email": null,
+      "email": "petram.slack@gmail.com",
       "active": true
     },
     "46": {
@@ -615,6 +616,7 @@
       "website": "http://www.middlewayslacklines.com",
       "facebook": "https://www.facebook.com/MiddleWaySlacklines",
       "email": "info@middlewayslacklines.com",
+      "email_alt": "info@slackline.co.il",
       "active": true
     },
     "47": {
@@ -664,7 +666,7 @@
       "country": "CA",
       "year_established": null,
       "slackline_oriented": true,
-      "website": null,
+      "website": "https://web.archive.org/web/20160129035653/http://www.slacklining.ca",
       "facebook": "https://www.facebook.com/slackliningcanada",
       "email": null,
       "active": false
@@ -703,7 +705,7 @@
       "country": "GB",
       "year_established": null,
       "slackline_oriented": true,
-      "website": null,
+      "website": "https://web.archive.org/web/20250617142000/http://zergeoutdoor.com",
       "facebook": "https://www.facebook.com/zergeoutdoor",
       "email": null,
       "active": false
@@ -794,7 +796,7 @@
       "country": "RU",
       "year_established": 2018,
       "slackline_oriented": true,
-      "website": null,
+      "website": "https://web.archive.org/web/20230207140021/https://souzslackline.com",
       "facebook": null,
       "email": null,
       "active": false
@@ -1007,6 +1009,20 @@
       "tiktok": "https://www.tiktok.com/@riggingventures",
       "email": null,
       "active": false
+    },
+    "local_slackx": {
+      "catalog_id": 97,
+      "name": "SlackX",
+      "verified": false,
+      "item_count": 0,
+      "country": "DE",
+      "year_established": null,
+      "slackline_oriented": true,
+      "website": "https://slackx.eu",
+      "facebook": null,
+      "instagram": "https://instagram.com/slackx.slacklines",
+      "email": "info@slackx.eu",
+      "active": true
     }
   }
 }

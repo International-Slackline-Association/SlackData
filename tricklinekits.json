@@ -41,7 +41,7 @@
         "id": 3,
         "name": "Level 2 Kit",
         "release_date": 1621891342589,
-        "product_url": "https://www.riggingventures.com/product-page/rv-trickline-kit",
+        "product_url": "https://web.archive.org/web/20210401235649/https://www.riggingventures.com/product-page/rv-trickline-kit",
         "webbing_length": 30,
         "webbing_width": 50,
         "weight": null,
@@ -60,7 +60,7 @@
         "id": 4,
         "name": "Level 3 Trickline kit",
         "release_date": 1621891420627,
-        "product_url": "https://www.riggingventures.com/product-page/pro-trickline-kit-1",
+        "product_url": "https://web.archive.org/web/20231119172124/https://www.riggingventures.com/product-page/pro-trickline-kit-1",
         "webbing_length": 45,
         "webbing_width": 50,
         "weight": null,
@@ -111,6 +111,9 @@
         "version": null,
         "notes": null,
         "manufacturer": "Spider slacklines",
+        "gear_sellers": [
+            "Slack Inov"
+        ],
         "active": true
     },
     {
@@ -174,7 +177,7 @@
         "id": 10,
         "name": "Level Two Kit",
         "release_date": 1620111600000,
-        "product_url": "https://www.riggingventures.com/product-page/rv-trickline-kit",
+        "product_url": "https://web.archive.org/web/20210401235649/https://www.riggingventures.com/product-page/rv-trickline-kit",
         "webbing_length": 30,
         "webbing_width": 50,
         "weight": null,

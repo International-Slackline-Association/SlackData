@@ -3,7 +3,7 @@
 
 Every other value in manufacturers.json arrived from `slackdb.com/api/manufacturers`
 and can be re-derived by re-running that enrichment. The emails cannot: they were
-scraped from each manufacturer's own site by hand-checked pass, 34 of 76, and a
+scraped from each manufacturer's own site by hand-checked pass, 38 of 77, and a
 wrong one is invisible — it fails silently, in someone else's inbox, months later.
 So the seed is checked here rather than trusted.
 
@@ -24,7 +24,7 @@ strictly wider exposure, so the line has to be drawn tighter:
     when, and can judge whether it is stale or should be dropped.
 
 See DESIGN.md § Manufacturers Page → "Contact email" for the display-side half
-of the same argument (detail page only, never the 76-card grid).
+of the same argument (detail page only, never the 77-card grid).
 """
 
 import json
@@ -59,7 +59,9 @@ ROLE_LOCAL_PARTS = {
 # A local part may be the brand name plus one of these and still be a brand
 # mailbox ("slackmountain.com@"). Anything ELSE trailing the brand name is a
 # person sitting behind it — "krok.ellena@" is Krok's owner, not Krok.
-BRAND_LOCAL_SUFFIXES = {"", "com", "shop", "info", "slackline", "slacklines", "team"}
+BRAND_LOCAL_SUFFIXES = {
+    "", "com", "shop", "info", "slack", "slackline", "slacklines", "team",
+}
 
 # Slack.fr, Slack Inov and Easy Slackline are one operation behind three brand
 # names — slack.fr's own about page is titled "Slack Inov" and carries this
@@ -78,6 +80,12 @@ def seeded_emails(entries) -> dict[str, str]:
     return {e["name"]: e["email"] for e in entries if e.get("email")}
 
 
+@pytest.fixture(scope="module")
+def alt_emails(entries) -> dict[str, str]:
+    """brand name -> email_alt, for the few entries that carry a second address."""
+    return {e["name"]: e["email_alt"] for e in entries if e.get("email_alt")}
+
+
 def _squash(value: str) -> str:
     return re.sub(r"[^a-z0-9]", "", value.lower())
 
@@ -93,12 +101,17 @@ def _is_personal(brand_name: str, email: str) -> bool:
     local = email.split("@", 1)[0]
     if set(re.split(r"[^a-z0-9]+", local)) & ROLE_LOCAL_PARTS:
         return False
-    squashed_local, squashed_brand = _squash(local), _squash(brand_name)
-    if (
-        squashed_local.startswith(squashed_brand)
-        and squashed_local[len(squashed_brand):] in BRAND_LOCAL_SUFFIXES
-    ):
-        return False
+    squashed_local = _squash(local)
+    # The whole brand name, and its first word alone — brands shorten themselves
+    # in a mailbox ("petram.slack@" for Petram Slacklines) as readily as they
+    # pad themselves ("slackmountain.com@"). The suffix set is what keeps this
+    # narrow: "krok.ellena@" is still Krok's first word plus a person's name.
+    for stem in (_squash(brand_name), _squash(brand_name.split()[0])):
+        if (
+            squashed_local.startswith(stem)
+            and squashed_local[len(stem):] in BRAND_LOCAL_SUFFIXES
+        ):
+            return False
     return True
 
 
@@ -161,6 +174,8 @@ def test_no_seeded_email_belongs_to_a_named_individual(seeded_emails):
         ("Krok", "krok.ellena@gmail.com"),                   # the brand, then a person
         ("Acrobat Slackline", "shaigat@gmail.com"),          # an owner's personal mailbox
         ("Yoga Slackers", "poweredbyyoga@gmail.com"),        # a mailbox that isn't the brand's
+        # The first-word rule widened this check; it must not have opened it.
+        ("Petram Slacklines", "petram.laura@gmail.com"),     # brand's first word, then a person
     ],
 )
 def test_the_personal_address_check_catches_what_the_scrape_dropped(brand, email):
@@ -180,10 +195,35 @@ def test_the_personal_address_check_catches_what_the_scrape_dropped(brand, email
         ("Slack Mountain", "slackmountain.com@gmail.com"),   # brand + an allowed suffix
         ("Yoga Slackers", "yogaslackers@gmail.com"),         # the brand itself
         ("Krok", "krok@krok.biz"),                           # short brand, exact match
+        # A brand shortens itself in a mailbox as readily as it pads itself.
+        ("Petram Slacklines", "petram.slack@gmail.com"),     # first word + an allowed suffix
     ],
 )
 def test_the_personal_address_check_allows_brand_and_role_mailboxes(brand, email):
     assert not _is_personal(brand, email)
+
+
+def test_alt_addresses_are_held_to_the_same_bar_as_the_primary(alt_emails):
+    """`email_alt` is a second address the brand also answers on.
+
+    It is not read by the loader today, so nothing publishes it — which is
+    exactly why it needs pinning here. The day it is wired to a Brand column
+    is the day an unguarded field would put a scraped personal mailbox on a
+    public page, and by then nobody would remember it had never been checked.
+    """
+    for name, email in alt_emails.items():
+        assert email == email.strip().lower(), f"{name}: {email!r} is not normalised"
+        assert EMAIL_RE.match(email), f"{name}: {email!r} is not a valid address"
+        assert not _is_personal(name, email), f"{name}: {email!r} looks personal"
+
+
+def test_an_alt_address_is_not_a_copy_of_its_own_primary(entries):
+    """A duplicated primary is a mistake; `email_alt` exists to hold a second."""
+    for e in entries:
+        if e.get("email_alt"):
+            assert e["email_alt"] != e.get("email"), (
+                f"{e['name']}: email_alt merely repeats email"
+            )
 
 
 def test_a_shared_address_is_only_ever_a_shared_operation(seeded_emails):
@@ -263,7 +303,7 @@ def test_a_hand_corrected_email_outranks_the_seed(session: Session):
 
 
 def test_a_brand_with_no_scraped_email_keeps_a_null(session: Session):
-    """42 of 76 publish no address; that must stay None, not "" or a guess."""
+    """39 of 77 publish no address; that must stay None, not "" or a guess."""
     session.add(Brand(name="Landcruising"))
     session.commit()
 

@@ -590,6 +590,9 @@
         "image_url": "/api/gear/image_thumb/524",
         "details_url": "/gear_details/BanditSH",
         "brand": "Spider slacklines",
+        "gear_sellers": [
+            "Slack Inov"
+        ],
         "full_name": "Spider slacklines Bandit SH",
         "manufacturer_info": {
             "name": "Spider slacklines",
@@ -673,6 +676,9 @@
         "image_url": "/api/gear/image_thumb/525",
         "details_url": "/gear_details/BanditSL",
         "brand": "Spider slacklines",
+        "gear_sellers": [
+            "Slack Inov"
+        ],
         "full_name": "Spider slacklines Bandit SL",
         "manufacturer_info": {
             "name": "Spider slacklines",
@@ -1198,6 +1204,9 @@
         "image_url": "/api/gear/image_thumb/523",
         "details_url": "/gear_details/Chili",
         "brand": "Spider slacklines",
+        "gear_sellers": [
+            "Slack Inov"
+        ],
         "full_name": "Spider slacklines Chili",
         "manufacturer_info": {
             "name": "Spider slacklines",
@@ -1232,6 +1241,9 @@
         "image_url": "/api/gear/image_thumb/549",
         "details_url": "/gear_details/CHILI20",
         "brand": "Spider slacklines",
+        "gear_sellers": [
+            "Slack Inov"
+        ],
         "full_name": "Spider slacklines CHILI 2.0",
         "manufacturer_info": {
             "name": "Spider slacklines",
@@ -1840,6 +1852,9 @@
         "image_url": "/api/gear/image_thumb/561",
         "details_url": "/gear_details/LimeLinelock",
         "brand": "Spider slacklines",
+        "gear_sellers": [
+            "Slack Inov"
+        ],
         "full_name": "Spider slacklines Lime",
         "manufacturer_info": {
             "name": "Spider slacklines",
@@ -2363,6 +2378,9 @@
         "image_url": "/api/gear/image_thumb/3065",
         "details_url": "/gear_details/mint",
         "brand": "Spider slacklines",
+        "gear_sellers": [
+            "Slack Inov"
+        ],
         "full_name": "Spider slacklines Mint",
         "manufacturer_info": {
             "name": "Spider slacklines",
@@ -2537,6 +2555,9 @@
         "image_url": "/api/gear/image_thumb/3251",
         "details_url": "/gear_details/orange_1",
         "brand": "Radrigs",
+        "gear_sellers": [
+            "SlackX"
+        ],
         "full_name": "Radrigs Orange",
         "manufacturer_info": {
             "name": "Radrigs",
@@ -2625,6 +2646,9 @@
         "image_url": "/api/gear/image_thumb/560",
         "details_url": "/gear_details/PaddleLinelock",
         "brand": "Spider slacklines",
+        "gear_sellers": [
+            "Slack Inov"
+        ],
         "full_name": "Spider slacklines Paddle Linelock",
         "manufacturer_info": {
             "name": "Spider slacklines",
@@ -2700,7 +2724,7 @@
         },
         "date_introduced": null,
         "name": "Paddle SH",
-        "product_url": "http://www.slackshop.cz/en/lockers/83-eqb-paddle.html",
+        "product_url": "https://web.archive.org/web/20150801130032/http://www.slackshop.cz/en/lockers/83-eqb-paddle.html",
         "active": false,
         "style": "Tensionable Weblock"
     },
@@ -2889,7 +2913,7 @@
         },
         "date_introduced": null,
         "name": "PRO Weblock",
-        "product_url": "https://raed-slacklines.com/pro-weblock",
+        "product_url": "https://web.archive.org/web/20220928094114/https://raed-slacklines.com/pro-weblock",
         "active": false,
         "style": "Tensionable Weblock"
     },
@@ -3069,7 +3093,7 @@
         },
         "date_introduced": null,
         "name": "RamLock",
-        "product_url": null,
+        "product_url": "https://web.archive.org/web/20190511213516/https://www.slacklinetechnology.com/shop/ramlock-slackline-anchor",
         "active": false,
         "style": "Tensionable Weblock"
     },
@@ -3932,6 +3956,9 @@
         "image_url": "/api/gear/image_thumb/538",
         "details_url": "/gear_details/Slackibloc31",
         "brand": "Slack Inov",
+        "gear_sellers": [
+            "Spider Slacklines"
+        ],
         "full_name": "Slack Inov Slackibloc 3.1",
         "manufacturer_info": {
             "name": "Slack Inov",
@@ -3979,6 +4006,9 @@
         "image_url": "/api/gear/image_thumb/3012",
         "details_url": "/gear_details/slackibloc_4",
         "brand": "Slack Inov",
+        "gear_sellers": [
+            "Spider Slacklines"
+        ],
         "full_name": "Slack Inov Slackibloc 4",
         "manufacturer_info": {
             "name": "Slack Inov",
@@ -4024,6 +4054,9 @@
         "image_url": "/api/gear/image_thumb/539",
         "details_url": "/gear_details/SlackiblocJump12",
         "brand": "Slack Inov",
+        "gear_sellers": [
+            "Spider Slacklines"
+        ],
         "full_name": "Slack Inov Slackibloc Jump 1.2",
         "manufacturer_info": {
             "name": "Slack Inov",
@@ -4063,6 +4096,9 @@
         "image_url": "/api/gear/image_thumb/3152",
         "details_url": "/gear_details/slackibloc_sr",
         "brand": "Slack Inov",
+        "gear_sellers": [
+            "Spider Slacklines"
+        ],
         "full_name": "Slack Inov Slackibloc SR Pull pin",
         "manufacturer_info": {
             "name": "Slack Inov",
@@ -4102,6 +4138,9 @@
         "image_url": "/api/gear/image_thumb/3153",
         "details_url": "/gear_details/slackibloc_srquickpin",
         "brand": "Slack Inov",
+        "gear_sellers": [
+            "Spider Slacklines"
+        ],
         "full_name": "Slack Inov Slackibloc SR Quick Pin",
         "manufacturer_info": {
             "name": "Slack Inov",
@@ -4141,6 +4180,9 @@
         "image_url": "/api/gear/image_thumb/3069",
         "details_url": "/gear_details/slackijump",
         "brand": "Slack Inov",
+        "gear_sellers": [
+            "Spider Slacklines"
+        ],
         "full_name": "Slack Inov Slackijump",
         "manufacturer_info": {
             "name": "Slack Inov",
@@ -4394,7 +4436,7 @@
         "image_url": "/api/gear/image_thumb/3253",
         "details_url": "/gear_details/tilock_19mm",
         "brand": "Raed Slacklines",
-        "full_name": "Raed Slacklines TiLock 19mm",
+        "full_name": "Raed Slacklines TiLock 19mm - Titanium Pins",
         "manufacturer_info": {
             "name": "Raed Slacklines",
             "url": "/manufacturer_details/RaedSlacklines#TAB-IMAGES",
@@ -4425,17 +4467,20 @@
             "Price (per unit)": "1 unit and above : 229.95 EUR"
         },
         "date_introduced": null,
-        "name": "TiLock 19mm",
+        "name": "TiLock 19mm - Titanium Pins",
         "product_url": "https://raed-slacklines.com/tilock",
         "active": true,
-        "style": "Tensionable Weblock"
+        "style": "Tensionable Weblock",
+        "version": "Titanium Pins",
+        "notes": "Manufacturer page (raed-sports.com/tilock): the TiLock is configured on order — webbing width 19mm or 25mm, and PushPins in high-strength steel or titanium. The titanium frame is the same in every configuration; only the pins differ. Steel-pin price is the listed base (129.95 EUR); titanium pins are the 229.95 EUR option. Held as four rows because a configuration that changes the price and the weight is a product, not a note on one.",
+        "description": "Titanium-framed push-pin weblock for 19mm webbing, in the titanium-PushPin configuration — the lighter and more expensive of the two pin options Raed offer."
     },
     {
         "id": 102,
         "image_url": "/api/gear/image_thumb/3254",
         "details_url": "/gear_details/tilock_25mm",
         "brand": "Raed Slacklines",
-        "full_name": "Raed Slacklines TiLock 25mm",
+        "full_name": "Raed Slacklines TiLock 25mm - Titanium Pins",
         "manufacturer_info": {
             "name": "Raed Slacklines",
             "url": "/manufacturer_details/RaedSlacklines#TAB-IMAGES",
@@ -4466,10 +4511,13 @@
             "Price (per unit)": "1 unit and above : 229.95 EUR"
         },
         "date_introduced": null,
-        "name": "TiLock 25mm",
+        "name": "TiLock 25mm - Titanium Pins",
         "product_url": "https://raed-slacklines.com/tilock",
         "active": true,
-        "style": "Tensionable Weblock"
+        "style": "Tensionable Weblock",
+        "version": "Titanium Pins",
+        "notes": "Manufacturer page (raed-sports.com/tilock): the TiLock is configured on order — webbing width 19mm or 25mm, and PushPins in high-strength steel or titanium. The titanium frame is the same in every configuration; only the pins differ. Steel-pin price is the listed base (129.95 EUR); titanium pins are the 229.95 EUR option. Held as four rows because a configuration that changes the price and the weight is a product, not a note on one.",
+        "description": "Titanium-framed push-pin weblock for 25mm webbing, in the titanium-PushPin configuration — the lighter and more expensive of the two pin options Raed offer."
     },
     {
         "id": 103,
@@ -4665,6 +4713,9 @@
     {
         "id": 108,
         "brand": "Radrigs",
+        "gear_sellers": [
+            "SlackX"
+        ],
         "name": "Slackfriend",
         "specifications": {
             "Material": "Aluminum",
@@ -4749,6 +4800,9 @@
     {
         "id": 112,
         "brand": "Slack Inov",
+        "gear_sellers": [
+            "Spider Slacklines"
+        ],
         "name": "ZENLOCK",
         "specifications": {
             "Material": "Aluminum",
@@ -4771,6 +4825,9 @@
     {
         "id": 113,
         "brand": "Slack Inov",
+        "gear_sellers": [
+            "Spider Slacklines"
+        ],
         "name": "Diamond Lock",
         "specifications": {
             "Material": "Aluminum",
@@ -4793,6 +4850,9 @@
     {
         "id": 114,
         "brand": "Spider Slacklines",
+        "gear_sellers": [
+            "Slack Inov"
+        ],
         "name": "Blueberry SR",
         "specifications": {
             "Material": "Aluminum",
@@ -4814,6 +4874,9 @@
     {
         "id": 115,
         "brand": "Spider Slacklines",
+        "gear_sellers": [
+            "Slack Inov"
+        ],
         "name": "Blueberry",
         "specifications": {
             "Material": "Aluminum",
@@ -4835,6 +4898,9 @@
     {
         "id": 116,
         "brand": "Spider Slacklines",
+        "gear_sellers": [
+            "Slack Inov"
+        ],
         "name": "Linelock Aluminum Ring",
         "specifications": {
             "Material": "Aluminum",
@@ -5077,5 +5143,197 @@
         "description": "A galvanised bent-steel hook for shortening thick 50 mm slacklines. Slackliner.de's argument against the usual chain-link method is that the hook lets the webbing clamp against itself rather than being crushed, which is gentler on the band and costs less breaking strength.",
         "notes": "Manufacturer specs (slackliner.de): galvanised bent steel, 12 mm stock, 15 mm centre bar, 480 g, for webbing up to 50 mm of any thickness. Shipping weight 0.48 kg. Slackliner.de state 'belastbar bis 5000 kg' (~49 kN) — that is a load rating of unstated type, not a published MBS, so breaking_strength is left null rather than guessed.",
         "style": "Fixed Linelocker"
+    },
+    {
+        "id": 128,
+        "brand": "Raed Slacklines",
+        "full_name": "Raed Slacklines TiLock 19mm - Steel Pins",
+        "manufacturer_info": {
+            "name": "Raed Slacklines",
+            "url": "/manufacturer_details/RaedSlacklines#TAB-IMAGES",
+            "country": "Germany",
+            "country_flag_url": "/img/flags/DE.png"
+        },
+        "product_page_url": "https://raed-slacklines.com/tilock",
+        "pricing": [
+            {
+                "text": "1 unit and above : 129.95 EUR"
+            }
+        ],
+        "specifications": {
+            "Material": [
+                "Titanium",
+                "Steel"
+            ],
+            "Weight": "N/A",
+            "WLL": "10kN",
+            "MBS": "30kN",
+            "Anchor connection type": "Push Pin",
+            "Webbing connection type": "Push Pin",
+            "Compatible webbing width": "19mm - 19mm",
+            "Diverter diameter": "N/A",
+            "Efficiency": "N/A",
+            "Usage": "N/A",
+            "ISA approved": "N/A",
+            "Date introduced": "N/A",
+            "Manufacturer": "Raed Slacklines",
+            "Manufacturer Product Page": "Manufacturer product page",
+            "Price (per unit)": "1 unit and above : 129.95 EUR"
+        },
+        "date_introduced": null,
+        "name": "TiLock 19mm - Steel Pins",
+        "product_url": "https://raed-slacklines.com/tilock",
+        "active": true,
+        "style": "Tensionable Weblock",
+        "version": "Steel Pins",
+        "notes": "Manufacturer page (raed-sports.com/tilock): the TiLock is configured on order — webbing width 19mm or 25mm, and PushPins in high-strength steel or titanium. The titanium frame is the same in every configuration; only the pins differ. Steel-pin price is the listed base (129.95 EUR); titanium pins are the 229.95 EUR option. Held as four rows because a configuration that changes the price and the weight is a product, not a note on one.",
+        "description": "Titanium-framed push-pin weblock for 19mm webbing, in the high-strength-steel PushPin configuration — heavier than the titanium pins, and considerably cheaper."
+    },
+    {
+        "id": 129,
+        "brand": "Raed Slacklines",
+        "full_name": "Raed Slacklines TiLock 25mm - Steel Pins",
+        "manufacturer_info": {
+            "name": "Raed Slacklines",
+            "url": "/manufacturer_details/RaedSlacklines#TAB-IMAGES",
+            "country": "Germany",
+            "country_flag_url": "/img/flags/DE.png"
+        },
+        "product_page_url": "https://raed-slacklines.com/tilock",
+        "pricing": [
+            {
+                "text": "1 unit and above : 129.95 EUR"
+            }
+        ],
+        "specifications": {
+            "Material": [
+                "Titanium",
+                "Steel"
+            ],
+            "Weight": "N/A",
+            "WLL": "10kN",
+            "MBS": "30kN",
+            "Anchor connection type": "Push Pin",
+            "Webbing connection type": "Push Pin",
+            "Compatible webbing width": "24mm - 26mm",
+            "Diverter diameter": "N/A",
+            "Efficiency": "N/A",
+            "Usage": "N/A",
+            "ISA approved": "N/A",
+            "Date introduced": "N/A",
+            "Manufacturer": "Raed Slacklines",
+            "Manufacturer Product Page": "Manufacturer product page",
+            "Price (per unit)": "1 unit and above : 129.95 EUR"
+        },
+        "date_introduced": null,
+        "name": "TiLock 25mm - Steel Pins",
+        "product_url": "https://raed-slacklines.com/tilock",
+        "active": true,
+        "style": "Tensionable Weblock",
+        "version": "Steel Pins",
+        "notes": "Manufacturer page (raed-sports.com/tilock): the TiLock is configured on order — webbing width 19mm or 25mm, and PushPins in high-strength steel or titanium. The titanium frame is the same in every configuration; only the pins differ. Steel-pin price is the listed base (129.95 EUR); titanium pins are the 229.95 EUR option. Held as four rows because a configuration that changes the price and the weight is a product, not a note on one.",
+        "description": "Titanium-framed push-pin weblock for 25mm webbing, in the high-strength-steel PushPin configuration — heavier than the titanium pins, and considerably cheaper."
+    },
+    {
+        "id": 130,
+        "brand": "Raed Slacklines",
+        "full_name": "Raed Slacklines RigLock",
+        "manufacturer_info": {
+            "name": "Raed Slacklines",
+            "url": "/manufacturer_details/RaedSlacklines#TAB-IMAGES",
+            "country": "Germany",
+            "country_flag_url": "/img/flags/DE.png"
+        },
+        "product_page_url": "https://web.archive.org/web/20210612145114/https://raed-slacklines.com/riglock",
+        "pricing": [
+            {
+                "text": "1 unit and above : 119.95 EUR"
+            }
+        ],
+        "specifications": {
+            "Material": [
+                "High Strength Steel",
+                "Aluminum"
+            ],
+            "Weight": "N/A",
+            "WLL": "10kN",
+            "MBS": "62kN",
+            "Anchor connection type": [
+                "Mounting Hole",
+                "Push Pin"
+            ],
+            "Webbing connection type": "Push Pin",
+            "Compatible webbing width": "24mm - 26mm",
+            "Diverter diameter": "N/A",
+            "Efficiency": "95%",
+            "Usage": [
+                "Slackline",
+                "Highline",
+                "Longline",
+                "Rodeoline"
+            ],
+            "ISA approved": "N/A",
+            "Date introduced": "N/A",
+            "Manufacturer": "Raed Slacklines",
+            "Manufacturer Product Page": "Manufacturer product page",
+            "Price (per unit)": "1 unit and above : 119.95 EUR"
+        },
+        "date_introduced": null,
+        "name": "RigLock",
+        "product_url": "https://web.archive.org/web/20210612145114/https://raed-slacklines.com/riglock",
+        "active": false,
+        "style": "Tensionable Weblock",
+        "colors": "Red",
+        "notes": "Specs from the archived manufacturer page (web.archive.org capture of raed-slacklines.com/riglock, 2021-06-12). That page states the 62 kN breaking strength and ~95% webbing efficiency; the 10 kN WLL is read off the product label in Raed's own photo. Weight and diverter diameter are published nowhere we can source, and the webbing width is inherited from the PRO Weblock the page says it is built on — Raed also listed a 19mm RigLock separately.",
+        "description": "Raed's most versatile weblock: a BLNC weblock and a rigging plate in one body, so the line can be tensioned directly off the lock. Steel frame with a large hollow aluminium diverter, a 17-4 PH steel Quick Lock PushPin, oversized holes for shackling under awkward rigging, and the SLIP LOCK anti-slippage feature that stops webbing creeping out under bounces and leash falls."
+    },
+    {
+        "id": 131,
+        "brand": "Slack.fr",
+        "full_name": "Slack.fr SladLock Light",
+        "manufacturer_info": {
+            "name": "Slack.fr",
+            "url": "/manufacturer_details/Slackfr#TAB-IMAGES",
+            "country": "France",
+            "country_flag_url": "/img/flags/FR.png"
+        },
+        "product_page_url": "https://web.archive.org/web/20220930232250/https://laboutique.slack.fr/282-sladlock-light.html",
+        "pricing": [
+            {
+                "text": "1 unit and above : 19.90 EUR"
+            }
+        ],
+        "specifications": {
+            "Material": [
+                "Aluminum",
+                "Stainless Steel"
+            ],
+            "Weight": "135gr",
+            "WLL": "5kN",
+            "MBS": "16kN",
+            "Anchor connection type": "Mounting Hole",
+            "Webbing connection type": "Captive Pin",
+            "Compatible webbing width": "25mm",
+            "Diverter diameter": "16mm",
+            "Efficiency": "N/A",
+            "Usage": [
+                "Slackline",
+                "Rodeoline",
+                "Low Tension lines"
+            ],
+            "ISA approved": "N/A",
+            "Date introduced": "N/A",
+            "Manufacturer": "Slack.fr",
+            "Manufacturer Product Page": "Manufacturer product page",
+            "Price (per unit)": "1 unit and above : 19.90 EUR"
+        },
+        "date_introduced": null,
+        "name": "SladLock Light",
+        "product_url": "https://web.archive.org/web/20220930232250/https://laboutique.slack.fr/282-sladlock-light.html",
+        "active": false,
+        "style": "Tensionable Weblock",
+        "colors": "Grey",
+        "notes": "Specs from the archived shop page (web.archive.org captures of laboutique.slack.fr/282-sladlock-light.html, 2020-09-30 and 2022-09-30): Zicral 7075 alloy with SS 304 stainless, 5 kN WLL / 16 kN MBS, 135 g, 16 mm internal locking radius, captive pin. Price is 19.90 EUR incl. French VAT — the page displays 16.58 EUR ex-VAT, with no active reduction. Slack.fr warn that the laser marking on the part reads 18 kN, which is wrong: the breaking strength is 16 kN. Slack.fr later re-listed the same product as the \"Mini Sladlock\"; the URL, the laser marking and the product photo all still say Sladlock Light.",
+        "description": "The light, minimal version of Slack.fr's SladLock — a self-blocking 25mm webbing lock for low-tension lines, taking up slack to set line length without a ratchet. Rated to a 5 kN working load only: Slack.fr rule out highline, trickline, pulley systems and lines over 50 m, pointing those at the SladLock Power or a banana instead."
     }
 ]

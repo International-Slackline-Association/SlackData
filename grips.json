@@ -72,7 +72,7 @@
         "currency": "RUB",
         "manufacturer": "Souz Slackline",
         "date_introduced": null,
-        "product_url": null,
+        "product_url": "https://web.archive.org/web/20201204205209/https://souzslackline.com/product/snatch-2-2trickline-50mm/",
         "active": false
     },
     {
@@ -241,7 +241,10 @@
         "isa_certified": false,
         "price": 149.17,
         "currency": "EUR",
-        "manufacturer": "Spider Slacklines",
+        "manufacturer": "Slack Inov",
+        "gear_sellers": [
+            "Spider Slacklines"
+        ],
         "date_introduced": null,
         "product_url": "https://spider-slacklines.com/shop/en/tensioning-systems/550-shark.html",
         "active": true
@@ -261,6 +264,9 @@
         "price": 99.95,
         "currency": "USD",
         "manufacturer": "Spider Slacklines",
+        "gear_sellers": [
+            "Slack Inov"
+        ],
         "date_introduced": null,
         "product_url": "https://slacklines.us/products/mousegrip",
         "active": true

@@ -120,7 +120,7 @@ describe('Manufacturers page', () => {
 
   // ── Brand detail: contact email ───────────────────────────────────────────
   //
-  // 34 of 76 brands publish one; the rest render nothing at all rather than a
+  // ~50% of brands publish one; the rest render nothing at all rather than a
   // placeholder (same rule as the card's missing flag). It lives on the detail
   // page ONLY — the last spec here is the anti-harvesting one, and it is the
   // reason the directory grid was left alone.
