@@ -549,11 +549,24 @@ describe('Price sort', () => {
     })
   })
 
-  it('labels the webbing sort per meter', () => {
+  // The sort menu says plain "Price" on webbings. The per-meter qualifier lives
+  // in the sidebar's price filter (above), which sits directly beside this menu
+  // — repeating it here only costs width in a row the search bar competes with.
+  it('leaves the per-meter wording to the sidebar on webbings', () => {
     cy.visit('/webbings')
     cy.get('[data-cy="sort-dropdown"]').click()
     cy.get('[data-cy="sort-option"][data-field="price"]').first()
-      .should('contain.text', 'meter')
+      .should('contain.text', 'Price')
+      .and('not.contain.text', 'meter')
+  })
+
+  // Tree protectors keep theirs: single vs pair are two prices for one product,
+  // and nothing else on the page says which one the sort ranks on.
+  it('still labels the tree protector sort per protector', () => {
+    cy.visit('/treepros')
+    cy.get('[data-cy="sort-dropdown"]').click()
+    cy.get('[data-cy="sort-option"][data-field="price"]').first()
+      .should('contain.text', 'per protector')
   })
 })
 

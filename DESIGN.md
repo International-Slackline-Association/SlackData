@@ -659,7 +659,7 @@ spec grid — the row is declared for compare and suppressed in `SpecTable`.
 | Width | `width` | Append "mm" |
 | Weight | `weight` | Append "g/m"; omit if null |
 | Breaking Strength | `breaking_strength` | Append "kN"; omit if null |
-| Stretch | `stretch` | JSON array of {kn, percent} points. **≥ 3 measured points** → a two-row table spanning the full grid width: `Load` across the top, `Stretch` beneath, **one column per measured point** — nothing interpolated, no fixed column set. Ascending by kN; **0 kN is dropped** (every curve reads 0% there); long curves scroll horizontally with the row-label stub pinned left. **1–2 points** → inline text instead, e.g. `3.4% @ 10 kN · 4.7% @ 15 kN` (a one- or two-column table is all chrome, no signal). Row is omitted when there are no *measured* points — note this is stricter than `stretch != null`: a curve like `[{"percent": 8}]` (no `kn`) has nothing to show. |
+| Stretch | `stretch` | JSON array of {kn, percent} points. **≥ 3 measured points** → a two-row table spanning the full grid width: `Load` across the top, `Stretch` beneath, **one column per measured point** — nothing interpolated, no fixed column set. Ascending by kN; **0 kN is dropped** (every curve reads 0% there); long curves scroll horizontally with the row-label stub pinned left. **1–2 points** → inline text instead, e.g. `3.4% @ 10 kN · 4.7% @ 15 kN` (a one- or two-column table is all chrome, no signal). Row is omitted when there are no *measured* points — note this is stricter than `stretch != null`: a curve like `[{"percent": 8}]` (no `kn`) has nothing to show. **On the compare page this row is replaced by a chart** — see § Compare View → Stretch is a chart, not a table. |
 | Classification | `classification` | **Not a spec row.** Renders as a colored bubble beside the product name, and only when the webbing is ISA certified or under 22 kN — see § Classification bubble below. |
 | Colors | `colors` | Comma-separated string — render as small color-name chips |
 | ISA Certified | `isa_certified` | Handled by the ISA Certification block above the spec table — no row needed here |
@@ -749,6 +749,140 @@ spec grid — the row is declared for compare and suppressed in `SpecTable`.
 **Footer block** (same for all types):
 - Description paragraph in gray, with relaxed line-height — omit if null
 - "View product →" button: solid teal pill, white text — links to `product_url`. Omit if null.
+
+---
+
+## Compare View
+
+`/{slug}/compare?ids=1,2,3` — the selection lives in the URL, so the page is deep-linkable. One
+column per compared item, rows driven by the same `SPEC_ROWS` the detail page uses (see § Spec rows
+per gear type).
+
+**Up to ten items** (`COMPARE_MAX` in `GearListingPage.tsx`): past ten the Compare button on every
+unselected card and detailed panel is disabled. Four was too few for the question people actually
+bring here — a brand's whole range, or every 25mm webbing on the market — and columns are cheap,
+because the table scrolls sideways with the label column pinned. The **chart** is the one part with
+a lower limit: it plots eight curves (§ below).
+
+Cell rules: a blank value reads `—` rather than dropping the row; a row **no item of that gear type
+populates anywhere** is dropped entirely.
+
+### Stretch is a chart, not a table (webbings)
+
+A stretch curve is the one spec on this page that is not a number — it is a *shape*, and reading
+four shapes off four columns of `5.9% @ 10 kN · 7.1% @ 15 kN · …` is the thing this view exists to
+avoid. On compare, webbing stretch therefore leaves the table and renders as a **multi-series line
+chart**: load (kN) across the x-axis, stretch (%) up the y, one line per compared webbing.
+
+- The `stretch` **row is removed from the compare table** for webbings — the chart *is* that row.
+  It is not printed twice.
+- The chart panel (`data-cy="stretch-chart"`) sits **below the table**, in a white card with the
+  same radius as everything else, headed `STRETCH UNDER LOAD` in the small-caps + teal-dot style
+  used by the detail page's section labels.
+- **Only for webbings, and only when at least two compared items have measured points.** One curve
+  alone is a detail-page question, not a comparison; zero is nothing to draw. Otherwise the stretch
+  row stays in the table exactly as it is today.
+- **A compared webbing with no measured points is named below the chart** (`data-cy="stretch-chart-missing"`),
+  e.g. "No stretch data: Nylon Rebel". Silently omitting a line would read as "flat at 0%".
+- **Nothing is interpolated.** Each line joins that webbing's own measured points, and each measured
+  point carries a visible marker (≥8px hit target). Curves are sampled at different loads by
+  different manufacturers, so the lines legitimately start and stop at different x positions — that
+  mismatch is information, not a defect to smooth over.
+- **0 kN is dropped**, exactly as in `displayPoints()` — every curve reads 0% there.
+
+**The default window is 1–20 kN.** Slackline working loads live there, and it is the range people
+actually compare on; a curve measured out to 50 or 100 kN squashes the whole interesting part of
+every line into the first fifth of the plot. So by default the chart plots **only points at or below
+20 kN** — the axis ends there, and points beyond it are not drawn.
+
+- When any compared webbing has a point above 20 kN, an **expand control** appears beside the
+  Chart|Table toggle (`data-cy="stretch-chart-expand"`), reading `Show all loads →`. It switches the
+  panel to the full measured range, and then reads `Show 1–20 kN` to switch back. When nothing
+  exceeds 20 kN the control is absent — there is nothing to expand to.
+- The window applies to the **whole panel**, table view included: the toggle is a statement about
+  which loads are under discussion, not a chart-only zoom.
+- **A webbing measured only above 20 kN is named, not silently dropped** — it joins the note below
+  the plot (`data-cy="stretch-chart-out-of-range"`), e.g. "Measured only above 20 kN: Type 18". The
+  expand control is how you see it.
+- The two-curve minimum is evaluated **on the window in force**: if only one webbing has points
+  inside 1–20 kN, there is no comparison to draw there, and the panel expands to the full range
+  rather than disappearing.
+
+**Axes.** x is linear in kN spanning the union of every point *in the current window*, y linear in % from 0 to the
+maximum plotted value, both extended to a *nice* round tick step (1/2/5 × 10ⁿ). y starts at 0
+always: a stretch chart with a truncated baseline exaggerates the difference between two webbings,
+which is exactly the misreading this page must not cause. Grid lines are recessive (`#E5E7EB`,
+1px), axis labels in secondary gray, axis titles `Load (kN)` and `Stretch (%)`.
+
+**Series color** — fixed slot order, never cycled, assigned by column position so a colour follows
+the item and does not repaint when another is removed:
+
+| Slot | Hex | | Slot | Hex |
+|---|---|---|---|---|
+| 1 | `#2A78D6` blue | | 3 | `#1BAF7A` aqua |
+| 2 | `#EB6834` orange | | 4 | `#EDA100` yellow |
+| 5 | `#E87BA4` magenta | | 7 | `#4A3AA7` violet |
+| 6 | `#008300` green | | 8 | `#E34948` red |
+
+Validated as a set against the white card surface (worst adjacent pair: CVD ΔE 9.1, normal-vision
+ΔE 19.6). **Eight slots is where the scale ends**, so although ten items can be compared, the plot
+draws the first **eight** curves in column order and names the rest below it
+(`data-cy="stretch-chart-over-cap"`, "Not plotted — 8 lines is the readable limit: …"), pointing at
+the Table view, which carries every compared curve. A ninth line would mean either a repeated hue —
+which would say two different products are the same thing — or an indistinguishable gray.
+
+Three of the eight sit below 3:1 contrast on white, so colour is **never** the only carrier of
+identity: every series is also **direct-labelled** at the end of its line (`data-cy="stretch-chart-label"`)
+and listed in a legend (`data-cy="stretch-chart-legend-item"`, carrying `data-id`) with a swatch and
+the item's name. Lines are 2px; markers get a 2px white ring so overlapping points stay countable.
+
+**Labels stay next to their own line, and nothing is drawn between them and it.** A label parked in
+a gutter with a leader back to its endpoint puts a horizontal stroke in the series colour onto the
+plot — and on a webbing measured at a **single load** that stroke is indistinguishable from the
+curve itself, reading as "stretch stops changing here", which is a claim about the product. Only the
+data draws lines here.
+
+Collisions are therefore solved by **searching for a free slot**, not by moving the label away
+(`placeLabels()` in `utils/chart.ts`). Each label takes the nearest candidate position around its
+endpoint — right, then right-and-up / right-and-down, then left for a curve that ends at the plot's
+right edge — that covers **neither a plotted line segment nor a label already placed**, staying
+inside the canvas. Slots are taken in column order, so the result is deterministic across renders
+and a label never swaps lines between two paints. When a plot is genuinely too crowded for any clean
+slot the search degrades to the least-bad position, and a **white halo** (`paint-order: stroke`)
+keeps the name legible over whatever it lands on. Axis labels live in the left and bottom pads.
+
+**Hover.** A vertical crosshair snapped to the nearest plotted load, with a tooltip
+(`data-cy="stretch-chart-tooltip"`) listing every series that has a measured point at that load —
+name, swatch, and `%`. Series with no point there are omitted rather than shown as 0. The tooltip
+is the one thing allowed above the plot, because it is transient and pointer-driven; it flips to
+whichever side of the crosshair has room, so it never covers the point being read.
+
+**Table view.** A `Chart | Table` toggle (`data-cy="stretch-chart-toggle"`, buttons
+`data-cy="stretch-view-chart"` / `data-cy="stretch-view-table"`) switches the panel to the same data
+as a grid (`data-cy="stretch-chart-table"`): one row per compared webbing, one column per load in
+the union, `—` where that webbing has no measurement. This is the accessible equivalent of the
+chart, and where the curves past the plot's eight-line cap are read.
+
+**Responsive.** The chart is a `viewBox`-scaled inline SVG that fits its container at every width —
+it never scrolls sideways. Below `sm` the direct labels drop (the legend carries identity there) and
+the plot keeps a 4:3 aspect.
+
+### The chart generator
+
+The chart is built from a **generic, gear-agnostic core**, not one-off SVG:
+
+- `src/utils/chart.ts` — pure geometry: `niceScale()` (domain → rounded bounds + tick step),
+  `project()` (value → pixel), `polylinePoints()`, `seriesColor()`, and the label-placement search
+  (`placeLabels()`, `segmentHitsBox()`, `boxesOverlap()`, `segmentsOf()`). No React, no DOM; unit-tested in
+  `frontend/tests/unit/chart.test.ts`, which is where the arithmetic a screenshot cannot show is
+  pinned.
+- `src/components/charts/LineChart.tsx` — an inline-SVG multi-series line chart taking
+  `{ id, label, color, points }[]` plus axis titles and formatters. It knows nothing about webbings,
+  and is the component any later chart (price history, brand inventory) should extend rather than
+  fork.
+- `src/components/gear/StretchChart.tsx` — the webbing adapter: compared items → series, plus the
+  legend, the missing-data and out-of-range notes, the 20 kN window (`DEFAULT_MAX_KN`) with its
+  expand control, and the table toggle.
 
 ---
 
@@ -1164,19 +1298,25 @@ Under 16px, iOS Safari zooms the page on focus and never zooms back out.
 
 ### Tables
 
-Compare and the webbing stretch curve stay tables — side-by-side is the whole point — and scroll
+Compare and the detail page's stretch curve stay tables — side-by-side is the whole point — and scroll
 horizontally inside an `overflow-x-auto` wrapper with the row-label column pinned (`sticky left-0`).
 Below `sm` they bleed into the page gutter (`-mx-4 px-4`) to buy back 32px of column width, the
 label stub is capped at `w-24`, and compare columns drop to `min-w-[7rem]`. Compare shows a "Swipe
 the table to see every column →" hint below `sm`, because an overflow with no visible edge is not
 discoverable.
 
+Compare's **stretch chart** is the exception, and deliberately so: an SVG scales to its container,
+so it fits a 390px screen without scrolling at all (§ Compare View). The chart is what makes several
+curves readable on a phone, where the same number of table columns is not.
+
 ### Fixed bottom bar
 
 The CompareBar measures itself and publishes `--compare-bar-h`, which the app shell turns into
 bottom padding on the **outer** column — padding `<main>` alone still leaves the footer underneath
 the bar. Below `sm` the bar reflows to count + actions on one row with the item chips on their own
-horizontally scrolling line, so the CTA is never pushed off-screen by four selections.
+horizontally scrolling line, so the CTA is never pushed off-screen by ten selections. On desktop the
+chips wrap, capped at two rows with vertical scroll past that — ten of them would otherwise wrap to
+three rows and eat the grid behind the bar.
 
 ### Testing
 
