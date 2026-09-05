@@ -50,6 +50,15 @@ export NVM_DIR="$HOME/.nvm" && source "$NVM_DIR/nvm.sh"
 export LD_LIBRARY_PATH="$HOME/.local/lib/cypress-deps:$LD_LIBRARY_PATH"
 unset ELECTRON_RUN_AS_NODE
 npx cypress run --spec cypress/e2e/<spec>.cy.ts
+
+# In a HEADLESS shell (an agent session, ssh, anything without WSLg attached),
+# prefix that with `xvfb-run -a`. DISPLAY is :0 here, so Cypress does NOT start
+# its own Xvfb — it tries to reach WSLg's X server, hangs, and dies with exit
+# 133 and no output at all, which reads like a Cypress bug rather than a missing
+# display. `npx cypress verify` is the quick way to tell: it reports the smoke
+# test timing out. CI needs none of this — ubuntu-latest sets no DISPLAY, so
+# Cypress starts Xvfb itself.
+xvfb-run -a npx cypress run --spec cypress/e2e/<spec>.cy.ts
 ```
 
 **Verify the app compiles before running tests:** `npm run build` (tsc + vite) and `npm run lint`.
