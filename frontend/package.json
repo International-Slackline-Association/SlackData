@@ -10,7 +10,10 @@
     "test:unit": "node --experimental-strip-types --test tests/unit/*.test.ts",
     "preview": "vite preview",
     "cypress:open": "cypress open",
-    "cypress:run": "cypress run"
+    "cypress:run": "cypress run",
+    "shards": "node scripts/check-shards.mjs",
+    "build:e2e": "NODE_ENV=development vite build --mode development --sourcemap",
+    "serve:e2e": "vite preview --port 5173 --strictPort"
   },
   "dependencies": {
     "oidc-client-ts": "^3.5.0",

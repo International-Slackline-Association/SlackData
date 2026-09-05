@@ -11895,5 +11895,41 @@
         "description": null,
         "notes": "Slack Inov / Spider 2026 datasheet (2026-09-02): listed as active with a full 1-29 kN stretch curve, but no MBS, capacity or price is given and no product page exists on either the Slack Inov or Spider storefront. Width 20 mm is inferred from the product name, not published.",
         "active": true
+    },
+    {
+        "id": 252,
+        "name": "Anima",
+        "brand": "Aki Slacklines",
+        "materialType": "Hybrid",
+        "materialComposition": [
+            "Dyneema/HMPE",
+            "Polyester"
+        ],
+        "width": 20,
+        "weight": 38,
+        "breakingStrength": 30,
+        "stretch": [
+            {
+                "kn": 3,
+                "percent": 1
+            },
+            {
+                "kn": 6,
+                "percent": 2
+            },
+            {
+                "kn": 10,
+                "percent": 3
+            }
+        ],
+        "thickness": 3,
+        "webbing_construction": "Core/Sheath",
+        "isa_certified": false,
+        "product_url": "https://web.archive.org/web/20240919215816/https://aki-slacklines.de/en/products/aki-anima-slacklineband",
+        "date_introduced": null,
+        "priceMeter": 3.75,
+        "currency": "EUR",
+        "notes": "Specs from the Aki Slacklines product page as captured 2024-09-19. product_url is the Wayback capture, not the live page: aki-slacklines.de/en/products/aki-anima-slacklineband now answers \"Aki Slacklines is closed, we are no longer processing orders\" (checked 2026-09-04), so the archive is the only place the product is still visible - hence active false. Maker's own wording: webbing type flat, webbing construction \"Multi-Zone CS+\" (recorded here as Core/Sheath), surface uncoated, Tenesta HMPE + polyester hybrid weave, WLL 6 kN, colours white-blue and white-grey with red edges, country of manufacture EU. Marketed for highlines over 100 m. Stretch is the maker's three approximate figures (3 kN ~1%, 6 kN ~2%, 10 kN ~3%), not a measured curve. Price is the 3.75 EUR/m regular price; the capture shows a 3.00 EUR/m sale.",
+        "active": false
     }
 ]

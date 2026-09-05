@@ -97,10 +97,16 @@ docker run -d --name ddb-local -p 8765:8000 amazon/dynamodb-local
 pip install '-e.[aws]'      # boto3; the app still imports it lazily
 cd frontend && npm run build        # tsc -b + vite build
 cd frontend && npm run lint         # oxlint
-cd frontend && npm run test:unit    # 211 unit tests — node:test on the pure utils, no servers, no deps
+cd frontend && npm run test:unit    # 214 unit tests — node:test on the pure utils, no servers, no deps
 # Cypress e2e (23 specs) needs BOTH servers up — see PLAN.md → "Running things"
 cd frontend && env -u ELECTRON_RUN_AS_NODE npx cypress run --spec cypress/e2e/<spec>.cy.ts
 # (the `env -u` is required under VS Code, or Cypress dies with SIGILL / exit 132)
+
+# In CI the e2e job is SHARDED — six runners, packed by measured spec duration
+# from frontend/cypress/shards.json. Adding a spec to cypress/e2e/ means adding
+# it to that manifest, or it silently never runs; `npm run shards` (also run by
+# test:unit and by CI before the matrix is built) is what stops that.
+cd frontend && npm run shards       # every spec is in exactly one shard
 
 # admin_triage.cy.ts needs a submissions store it hasn't already filled. The
 # triage list is a queue — oldest first, one page of 50 — so fixtures the spec
