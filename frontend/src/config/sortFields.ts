@@ -19,28 +19,28 @@ export const UNIVERSAL_SORT_FIELDS: SortFieldMeta[] = [
   { field: 'weight', label: 'Weight', nullLast: true },
 ]
 
-// Two types don't price "one item", and their price sort is therefore a
-// different quantity from every other type's — so it says so. Webbing is priced
-// per meter; tree protectors come singly or in pairs and rank on what one
-// protector costs (see DESIGN.md § Units survive conversion).
+// Tree protectors don't price "one item" — they come singly or in pairs and
+// rank on what one protector costs (see DESIGN.md § Units survive conversion),
+// so their price row says so. Webbing is priced per meter but says plain
+// "Price": the row sits in a menu the search bar competes with for width, and
+// the sidebar's price filter already carries the per-meter wording.
 const PRICE_LABELS: Partial<Record<GearSlug, string>> = {
-  webbings: 'Price per meter',
   treepros: 'Price per protector',
 }
 
 export const EXTRA_SORT_FIELDS: Record<GearSlug, SortFieldMeta[]> = {
   webbings: [
     { field: 'width',             label: 'Width',             nullLast: false },
-    { field: 'breaking_strength', label: 'Breaking Strength', nullLast: true },
+    { field: 'breaking_strength', label: 'MBS',               nullLast: true },
   ],
   weblocks: [
     { field: 'width_min',         label: 'Min Width',         nullLast: false },
-    { field: 'breaking_strength', label: 'Breaking Strength', nullLast: true },
+    { field: 'breaking_strength', label: 'MBS',               nullLast: true },
   ],
   leashrings: [
     { field: 'inner_diameter',    label: 'Inner Diameter',    nullLast: true },
     { field: 'outer_diameter',    label: 'Outer Diameter',    nullLast: true },
-    { field: 'breaking_strength', label: 'Breaking Strength', nullLast: true },
+    { field: 'breaking_strength', label: 'MBS',               nullLast: true },
   ],
   grips: [
     { field: 'width_min',                 label: 'Min Width',          nullLast: false },
@@ -49,7 +49,7 @@ export const EXTRA_SORT_FIELDS: Record<GearSlug, SortFieldMeta[]> = {
     { field: 'common_slipping_threshold', label: 'Slipping Threshold', nullLast: true },
   ],
   rollers: [
-    { field: 'breaking_strength', label: 'Breaking Strength', nullLast: true },
+    { field: 'breaking_strength', label: 'MBS',               nullLast: true },
   ],
   treepros: [
     { field: 'width',     label: 'Width',     nullLast: true },

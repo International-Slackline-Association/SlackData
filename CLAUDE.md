@@ -80,10 +80,10 @@ ruff check .
 CI runs all of this on every PR (`.github/workflows/ci.yml`), but it is the last check, not the first — run them yourself before pushing:
 
 ```bash
-python -m pytest tests/ -q          # 699 backend tests (25 files: gear types, loaders, read-only guard,
+python -m pytest tests/ -q          # 795 backend tests (26 files: gear types, loaders, read-only guard,
                                     #   submissions, auth, manufacturer API, live server, DynamoDB,
                                     #   manufacturer contact emails, seed ids, infra route/throttle
-                                    #   agreement, brand onboarding)
+                                    #   agreement, brand onboarding, co-listings)
 # tests/test_live_api.py boots THREE real uvicorn processes (local-dev, hosted
 # READ_ONLY, and hosted-with-a-Cognito-pool) and hits them over HTTP. It builds its
 # own minimal catalogue, so it adds ~9s and needs no seeded database.db, no network.
@@ -97,8 +97,8 @@ docker run -d --name ddb-local -p 8765:8000 amazon/dynamodb-local
 pip install '-e.[aws]'      # boto3; the app still imports it lazily
 cd frontend && npm run build        # tsc -b + vite build
 cd frontend && npm run lint         # oxlint
-cd frontend && npm run test:unit    # 130 unit tests — node:test on the pure utils, no servers, no deps
-# Cypress e2e (19 specs) needs BOTH servers up — see PLAN.md → "Running things"
+cd frontend && npm run test:unit    # 211 unit tests — node:test on the pure utils, no servers, no deps
+# Cypress e2e (23 specs) needs BOTH servers up — see PLAN.md → "Running things"
 cd frontend && env -u ELECTRON_RUN_AS_NODE npx cypress run --spec cypress/e2e/<spec>.cy.ts
 # (the `env -u` is required under VS Code, or Cypress dies with SIGILL / exit 132)
 

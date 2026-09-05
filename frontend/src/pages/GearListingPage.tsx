@@ -35,7 +35,12 @@ import NotFoundPage from './NotFoundPage'
 
 type View = 'cards' | 'detailed'
 
-const COMPARE_MAX = 4
+// How many items one comparison may hold. The table scrolls sideways with the
+// label column pinned, so columns are cheap; the chart is the binding
+// constraint, and it plots the first eight curves (MAX_PLOTTED_SERIES) and names
+// the rest. Ten is what people actually want to line up — a brand's whole
+// range, or every 25mm webbing on the market.
+const COMPARE_MAX = 10
 
 function LoadingSkeleton() {
   return (

@@ -92,11 +92,12 @@ describe('Compare bar — selection', () => {
     cy.get('[data-cy="compare-bar-view-btn"]').should('not.be.disabled')
   })
 
-  it('max 4 items can be selected; the 5th card\'s Compare button is disabled', () => {
-    for (let i = 0; i < 4; i++) {
+  it('max 10 items can be selected; the 11th card\'s Compare button is disabled', () => {
+    for (let i = 0; i < 10; i++) {
       cy.get('[data-cy="gear-card"]').eq(i).find('[data-cy="btn-compare"]').click()
     }
-    cy.get('[data-cy="gear-card"]').eq(4)
+    cy.get('[data-cy="compare-bar-count"]').should('contain.text', '10')
+    cy.get('[data-cy="gear-card"]').eq(10)
       .find('[data-cy="btn-compare"]').should('be.disabled')
   })
 
@@ -128,6 +129,14 @@ describe('Compare view — side-by-side table', () => {
 
   it('shows one column per selected item', () => {
     cy.get('[data-cy="compare-col"]').should('have.length', 2)
+  })
+
+  it('carries ten columns — the cap, not four', () => {
+    cy.request(`${Cypress.env('apiUrl')}/webbing/?limit=10`).then(({ body }) => {
+      const ids = (body as { id: number }[]).map(r => r.id)
+      cy.visit(`/webbings/compare?ids=${ids.join(',')}`)
+      cy.get('[data-cy="compare-col"]').should('have.length', 10)
+    })
   })
 
   it('each column header shows the item name', () => {
@@ -244,15 +253,15 @@ describe('Compare — Detailed view', () => {
     cy.get('[data-cy="compare-col"]').should('have.length', 2)
   })
 
-  it('honours the 4-item cap — the 5th panel\'s Compare button is disabled', () => {
-    for (let i = 0; i < 4; i++) detailedCompare(i).click()
-    cy.get('[data-cy="compare-bar-count"]').should('contain.text', '4')
-    detailedCompare(4).should('be.disabled')
+  it('honours the 10-item cap — the 11th panel\'s Compare button is disabled', () => {
+    for (let i = 0; i < 10; i++) detailedCompare(i).click()
+    cy.get('[data-cy="compare-bar-count"]').should('contain.text', '10')
+    detailedCompare(10).should('be.disabled')
   })
 
   it('an unselected panel stays enabled below the cap', () => {
     detailedCompare(0).click()
-    detailedCompare(4).should('not.be.disabled')
+    detailedCompare(10).should('not.be.disabled')
   })
 })
 
@@ -291,5 +300,356 @@ describe('Compare — selection shared across Cards and Detailed views', () => {
     cy.get('[data-cy="view-cards"]').click()
     cy.get('[data-cy="gear-card"]').eq(0)
       .find('[data-cy="btn-compare"]').should('have.attr', 'data-active', 'false')
+  })
+})
+
+// The stretch curve on compare — DESIGN.md § Compare View → "Stretch is a chart,
+// not a table". Four columns of "5.9% @ 10 kN · 7.1% @ 15 kN · …" is the thing a
+// comparison view exists to avoid: a curve is a shape, so it is drawn.
+//
+// data-cy contract:
+//   stretch-chart              — the whole panel (webbings, ≥2 curves)
+//   stretch-chart-svg          — the plot itself
+//   stretch-chart-line         — one polyline per compared webbing (data-id)
+//   stretch-chart-point        — one marker per MEASURED point (data-id, data-kn)
+//   stretch-chart-label        — direct label at the end of a line (data-id)
+//   stretch-chart-legend-item  — legend entry (data-id)
+//   stretch-chart-missing      — "No stretch data: …" note for uncharted picks
+//   stretch-chart-out-of-range — note naming a webbing measured only above 20 kN
+//   stretch-chart-expand       — "Show all loads →" / "Show 1–20 kN" window toggle
+//   stretch-chart-toggle       — Chart | Table switch
+//   stretch-view-chart / stretch-view-table — its two buttons
+//   stretch-chart-table        — the same data as a grid (the accessible view)
+describe('Compare — webbing stretch renders as a chart', () => {
+  const api = () => Cypress.env('apiUrl')
+
+  // Mirrors displayPoints() in src/utils/stretch.ts (see gear_detail.cy.ts).
+  const displayPoints = (raw: unknown): { kn: number; percent: number }[] => {
+    if (typeof raw !== 'string' || raw === '') return []
+    let pts: { kn: number; percent: number }[] = []
+    try {
+      const parsed = JSON.parse(raw)
+      if (!Array.isArray(parsed)) return []
+      pts = parsed.filter(
+        (p: unknown): p is { kn: number; percent: number } =>
+          !!p && typeof p === 'object' &&
+          typeof (p as { kn: unknown }).kn === 'number' &&
+          typeof (p as { percent: unknown }).percent === 'number',
+      )
+    } catch {
+      return []
+    }
+    const nonZero = pts.filter(p => p.kn !== 0)
+    return [...(nonZero.length ? nonZero : pts)].sort((a, b) => a.kn - b.kn)
+  }
+
+  type Row = Record<string, unknown>
+  const webbings = (fn: (rows: Row[]) => void) =>
+    cy.request(`${api()}/webbing/?limit=100`).then(({ body }) => fn(body as Row[]))
+
+  // Two webbings that both carry a real curve — the case the chart is for.
+  const withCurves = (fn: (a: Row, b: Row) => void) =>
+    webbings(rows => {
+      const curved = rows.filter(r => displayPoints(r.stretch).length >= 2)
+      expect(curved.length, 'webbings with a stretch curve').to.be.greaterThan(1)
+      fn(curved[0], curved[1])
+    })
+
+  const compare = (...ids: unknown[]) => cy.visit(`/webbings/compare?ids=${ids.join(',')}`)
+
+  it('draws the chart panel instead of a stretch row in the table', () => {
+    withCurves((a, b) => {
+      compare(a.id, b.id)
+      cy.get('[data-cy="stretch-chart"]').should('be.visible')
+      // The chart IS the row — it must not also be printed as text above it.
+      cy.get('[data-cy="compare-row"][data-field="stretch"]').should('not.exist')
+    })
+  })
+
+  it('draws one line per compared webbing, and one marker per measured point', () => {
+    withCurves((a, b) => {
+      compare(a.id, b.id)
+      cy.get('[data-cy="stretch-chart-line"]').should('have.length', 2)
+      cy.get(`[data-cy="stretch-chart-line"][data-id="${a.id}"]`).should('exist')
+      cy.get(`[data-cy="stretch-chart-point"][data-id="${a.id}"]`)
+        .should('have.length', displayPoints(a.stretch).length)
+      // Nothing is interpolated: no marker sits at a load this webbing never
+      // measured, and 0 kN is dropped from every curve.
+      cy.get(`[data-cy="stretch-chart-point"][data-id="${a.id}"]`).each(($p) => {
+        const kn = Number($p.attr('data-kn'))
+        expect(displayPoints(a.stretch).map(p => p.kn)).to.include(kn)
+      })
+      cy.get('[data-cy="stretch-chart-point"][data-kn="0"]').should('not.exist')
+    })
+  })
+
+  it('identifies every series by name, not by colour alone', () => {
+    withCurves((a, b) => {
+      compare(a.id, b.id)
+      cy.get('[data-cy="stretch-chart-legend-item"]').should('have.length', 2)
+      cy.get(`[data-cy="stretch-chart-legend-item"][data-id="${b.id}"]`)
+        .should('contain.text', String(b.name))
+      cy.get(`[data-cy="stretch-chart-label"][data-id="${b.id}"]`).should('exist')
+    })
+  })
+
+  // Two curves ending at nearly the same stretch is the interesting case, not an
+  // edge case — near-identical webbings are what people compare. Their direct
+  // labels must not print on top of each other.
+  it('never overlaps two direct labels, however close the curves end', () => {
+    webbings(rows => {
+      const curved = rows.filter(r => displayPoints(r.stretch).length >= 2)
+      const end = (r: Row) => {
+        const pts = displayPoints(r.stretch)
+        return pts[pts.length - 1]
+      }
+      // The closest-ending pair measured at the same final load — the worst
+      // case the declutter pass has to handle.
+      let pair: [Row, Row] | null = null
+      let best = Infinity
+      for (let i = 0; i < curved.length; i++) {
+        for (let j = i + 1; j < curved.length; j++) {
+          const a = end(curved[i]); const b = end(curved[j])
+          if (a.kn !== b.kn) continue
+          const d = Math.abs(a.percent - b.percent)
+          if (d < best) { best = d; pair = [curved[i], curved[j]] }
+        }
+      }
+      if (!pair) return
+      compare(pair[0].id, pair[1].id)
+      cy.get('[data-cy="stretch-chart-label"]').then(($labels) => {
+        const boxes = [...$labels].map(l => l.getBoundingClientRect())
+        for (let i = 0; i < boxes.length; i++) {
+          for (let j = i + 1; j < boxes.length; j++) {
+            const overlap =
+              boxes[i].left < boxes[j].right && boxes[j].left < boxes[i].right &&
+              boxes[i].top < boxes[j].bottom && boxes[j].top < boxes[i].bottom
+            expect(overlap, `labels ${i} and ${j} overlap`).to.eq(false)
+          }
+        }
+      })
+    })
+  })
+
+  // A label belongs beside the point it names — a leader line out to a gutter is
+  // a horizontal stroke in the series colour, which on a webbing measured at one
+  // load reads as a flat curve. So: close to its endpoint, and clear of every
+  // drawn line.
+  it('keeps each label beside its own line and off every curve', () => {
+    withCurves((a, b) => {
+      compare(a.id, b.id)
+      cy.get('[data-cy="stretch-chart-label"]').each(($l) => {
+        const id = $l.attr('data-id')
+        cy.get(`[data-cy="stretch-chart-point"][data-id="${id}"]`).last().then(($pt) => {
+          const label = $l[0].getBoundingClientRect()
+          const point = $pt[0].getBoundingClientRect()
+          expect(label.left - point.right, 'gap from its last point, px')
+            .to.be.within(0, 60)
+        })
+      })
+      // Whether a label covers a LINE is geometry, not layout, and is pinned
+      // exactly in tests/unit/chart.test.ts (segmentHitsBox / placeLabels) —
+      // a polyline's bounding box is not its line, so asserting it here would
+      // only produce a flaky approximation.
+    })
+  })
+
+  it('gives each series its own colour, assigned by column and never repeated', () => {
+    withCurves((a, b) => {
+      compare(a.id, b.id)
+      cy.get('[data-cy="stretch-chart-line"]').then(($lines) => {
+        const colors = [...$lines].map(l => l.getAttribute('stroke'))
+        expect(new Set(colors).size, 'distinct series colours').to.eq(colors.length)
+      })
+    })
+  })
+
+  it('y starts at zero — a truncated baseline would exaggerate the difference', () => {
+    withCurves((a, b) => {
+      compare(a.id, b.id)
+      cy.get('[data-cy="stretch-chart-y-tick"]').first().should('have.text', '0%')
+    })
+  })
+
+  it('names a compared webbing that has no curve rather than dropping it silently', () => {
+    webbings(rows => {
+      const curved = rows.filter(r => displayPoints(r.stretch).length >= 2)
+      const bare = rows.find(r => displayPoints(r.stretch).length === 0)
+      if (!bare) return
+      compare(curved[0].id, curved[1].id, bare.id)
+      cy.get('[data-cy="stretch-chart-missing"]').should('contain.text', String(bare.name))
+      cy.get(`[data-cy="stretch-chart-line"][data-id="${bare.id}"]`).should('not.exist')
+    })
+  })
+
+  it('offers the same data as a table — the accessible equivalent of the chart', () => {
+    withCurves((a, b) => {
+      compare(a.id, b.id)
+      cy.get('[data-cy="stretch-chart-table"]').should('not.exist')
+      cy.get('[data-cy="stretch-view-table"]').click()
+      cy.get('[data-cy="stretch-chart-svg"]').should('not.exist')
+      cy.get('[data-cy="stretch-chart-table"]').should('be.visible')
+      cy.get('[data-cy="stretch-chart-table"]').should('contain.text', String(a.name))
+      const pt = displayPoints(a.stretch)[0]
+      cy.get(`[data-cy="stretch-table-cell"][data-id="${a.id}"][data-kn="${pt.kn}"]`)
+        .should('contain.text', String(pt.percent))
+      cy.get('[data-cy="stretch-view-chart"]').click()
+      cy.get('[data-cy="stretch-chart-svg"]').should('be.visible')
+    })
+  })
+
+  it('reports every series measured at a load when the plot is hovered', () => {
+    withCurves((a, b) => {
+      compare(a.id, b.id)
+      cy.get('[data-cy="stretch-chart-point"]').first().trigger('mouseover')
+      cy.get('[data-cy="stretch-chart-tooltip"]').should('be.visible')
+        .and('contain.text', 'kN')
+    })
+  })
+
+  // One curve is a detail-page question; the comparison starts at two. And no
+  // other gear type carries a curve at all.
+  it('keeps the table row when only one compared webbing has a curve', () => {
+    webbings(rows => {
+      const curved = rows.find(r => displayPoints(r.stretch).length >= 2)
+      const bare = rows.find(r => displayPoints(r.stretch).length === 0)
+      if (!curved || !bare) return
+      compare(curved.id, bare.id)
+      cy.get('[data-cy="stretch-chart"]').should('not.exist')
+      cy.get('[data-cy="compare-row"][data-field="stretch"]').should('exist')
+    })
+  })
+
+  // The default window: 1–20 kN. Slackline working loads live there, and a curve
+  // measured to 100 kN otherwise squashes the interesting part of every line
+  // into the first fifth of the plot. DESIGN.md § Compare View.
+  describe('the 1–20 kN window', () => {
+    // Two webbings that both have points inside the window AND at least one
+    // point beyond it — the only case where the expand control means anything.
+    const withLongCurves = (fn: (a: Row, b: Row) => void) =>
+      webbings(rows => {
+        const long = rows.filter(r => {
+          const pts = displayPoints(r.stretch)
+          return pts.some(p => p.kn <= 20) && pts.some(p => p.kn > 20)
+        })
+        if (long.length < 2) return
+        fn(long[0], long[1])
+      })
+
+    it('plots nothing above 20 kN by default', () => {
+      withLongCurves((a, b) => {
+        compare(a.id, b.id)
+        cy.get('[data-cy="stretch-chart-point"]').each(($p) => {
+          expect(Number($p.attr('data-kn'))).to.be.at.most(20)
+        })
+        cy.get(`[data-cy="stretch-chart-point"][data-id="${a.id}"]`)
+          .should('have.length', displayPoints(a.stretch).filter(p => p.kn <= 20).length)
+      })
+    })
+
+    it('the x axis ends at the window, not at the longest curve', () => {
+      withLongCurves((a, b) => {
+        compare(a.id, b.id)
+        cy.get('[data-cy="stretch-chart-x-tick"]').last().invoke('text').then((t) => {
+          expect(Number(t.replace(' kN', ''))).to.be.at.most(20)
+        })
+      })
+    })
+
+    it('expands to the full measured range, and back again', () => {
+      withLongCurves((a, b) => {
+        const beyond = displayPoints(a.stretch).find(p => p.kn > 20)!
+        compare(a.id, b.id)
+        cy.get(`[data-cy="stretch-chart-point"][data-kn="${beyond.kn}"]`).should('not.exist')
+        cy.get('[data-cy="stretch-chart-expand"]').should('be.visible').click()
+        cy.get(`[data-cy="stretch-chart-point"][data-id="${a.id}"][data-kn="${beyond.kn}"]`)
+          .should('exist')
+        cy.get('[data-cy="stretch-chart-expand"]').click()
+        cy.get(`[data-cy="stretch-chart-point"][data-kn="${beyond.kn}"]`).should('not.exist')
+      })
+    })
+
+    // The window is a statement about which loads are under discussion, so the
+    // table view honours it too rather than quietly showing a different dataset.
+    it('the table view shows the same window as the chart', () => {
+      withLongCurves((a, b) => {
+        const beyond = displayPoints(a.stretch).find(p => p.kn > 20)!
+        compare(a.id, b.id)
+        cy.get('[data-cy="stretch-view-table"]').click()
+        cy.get(`[data-cy="stretch-table-load"][data-kn="${beyond.kn}"]`).should('not.exist')
+        cy.get('[data-cy="stretch-chart-expand"]').click()
+        cy.get(`[data-cy="stretch-table-load"][data-kn="${beyond.kn}"]`).should('exist')
+      })
+    })
+
+    it('offers no expand control when nothing was measured above 20 kN', () => {
+      webbings(rows => {
+        const short = rows.filter(r => {
+          const pts = displayPoints(r.stretch)
+          return pts.length >= 2 && pts.every(p => p.kn <= 20)
+        })
+        if (short.length < 2) return
+        compare(short[0].id, short[1].id)
+        cy.get('[data-cy="stretch-chart"]').should('exist')
+        cy.get('[data-cy="stretch-chart-expand"]').should('not.exist')
+      })
+    })
+
+    it('names a webbing measured only above the window rather than dropping it', () => {
+      webbings(rows => {
+        const inside = rows.filter(r => displayPoints(r.stretch).filter(p => p.kn <= 20).length >= 2)
+        const outside = rows.find(r => {
+          const pts = displayPoints(r.stretch)
+          return pts.length > 0 && pts.every(p => p.kn > 20)
+        })
+        if (inside.length < 2 || !outside) return
+        compare(inside[0].id, inside[1].id, outside.id)
+        cy.get('[data-cy="stretch-chart-out-of-range"]').should('contain.text', String(outside.name))
+        cy.get(`[data-cy="stretch-chart-line"][data-id="${outside.id}"]`).should('not.exist')
+        cy.get('[data-cy="stretch-chart-expand"]').click()
+        cy.get(`[data-cy="stretch-chart-line"][data-id="${outside.id}"]`).should('exist')
+      })
+    })
+
+    // Clamping must never turn a comparison into a single line: if only one
+    // webbing has readings inside the window, the panel opens on the full range.
+    it('opens on the full range when the window leaves only one curve', () => {
+      webbings(rows => {
+        const inside = rows.find(r => displayPoints(r.stretch).filter(p => p.kn <= 20).length >= 2)
+        const outside = rows.find(r => {
+          const pts = displayPoints(r.stretch)
+          return pts.length >= 2 && pts.every(p => p.kn > 20)
+        })
+        if (!inside || !outside) return
+        compare(inside.id, outside.id)
+        cy.get('[data-cy="stretch-chart-line"]').should('have.length', 2)
+      })
+    })
+  })
+
+  // Ten items can be compared, but eight is where a validated categorical colour
+  // scale ends — a ninth line would be an indistinguishable gray or a repeated
+  // hue. The plot draws eight and names the rest; the table carries them all.
+  it('plots at most eight lines and names the ones it left out', () => {
+    webbings(rows => {
+      const curved = rows.filter(r => displayPoints(r.stretch).length >= 2).slice(0, 10)
+      if (curved.length < 9) return
+      compare(...curved.map(r => r.id))
+      cy.get('[data-cy="stretch-chart-line"]').should('have.length', 8)
+      cy.get('[data-cy="stretch-chart-over-cap"]')
+        .should('contain.text', String(curved[8].name))
+      cy.get('[data-cy="stretch-view-table"]').click()
+      // Nothing is lost — the table still holds every compared curve.
+      cy.get(`[data-cy="stretch-table-cell"][data-id="${curved[8].id}"]`).should('exist')
+    })
+  })
+
+  it('draws no chart for a gear type with no stretch field', () => {
+    cy.request(`${api()}/weblock/?limit=2`).then(({ body }) => {
+      const rows = body as Row[]
+      cy.visit(`/weblocks/compare?ids=${rows[0].id},${rows[1].id}`)
+      cy.get('[data-cy="compare-table"]').should('exist')
+      cy.get('[data-cy="stretch-chart"]').should('not.exist')
+    })
   })
 })

@@ -285,3 +285,32 @@ def test_the_documented_rename_shape_is_the_one_that_works(client, webbing):
     assert stored[0]["changes"]["name"] == "Doc Webbing II", (
         "§ 3 says rename_to becomes the stored name change"
     )
+
+
+# --- 4. The SPA page and the markdown ---------------------------------------
+#
+# `/manufacturer-api` on slackdata.org is the document a brand actually reads;
+# MANUFACTURER_API.md is the one this file holds the API to. They are written by
+# hand, separately, and nothing kept them in step — which is how the SPA page
+# drifted from it before. These do not compare the two prose-for-prose (they
+# are different media, deliberately); they check that every *name a caller has to type* which
+# the markdown documents also appears on the page.
+
+SPA_PAGE = (
+    Path(__file__).parent.parent / "frontend" / "src" / "pages" / "ManufacturerApiPage.tsx"
+)
+
+
+def test_the_spa_page_exists_to_be_checked():
+    """Guards the two assertions below from passing on a moved file."""
+    assert SPA_PAGE.exists(), f"{SPA_PAGE} is gone — update this test or the path"
+    assert "/manufacturer/gear" in SPA_PAGE.read_text(encoding="utf-8")
+
+
+def test_the_spa_page_names_every_gear_type_the_api_serves():
+    page = SPA_PAGE.read_text(encoding="utf-8")
+    missing = sorted(slug for slug in CORRECTABLE_FIELDS if slug not in page)
+    assert not missing, (
+        f"ManufacturerApiPage.tsx never mentions {missing} — a brand reading the site"
+        " cannot discover a gear type it is allowed to send"
+    )
