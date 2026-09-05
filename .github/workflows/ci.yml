@@ -17,6 +17,10 @@
 # actually hit: a cold-start ImportError, and DynamoDB code that had never
 # executed anywhere.
 #
+# The e2e job is a MATRIX, one runner per shard, packed by measured duration from
+# frontend/cypress/shards.json. A spec missing from that manifest would silently
+# stop running while CI stayed green, so check-shards.mjs fails the build first.
+#
 # Cypress runs against a PREBUILT bundle, not `vite dev`. In dev mode Vite serves
 # the app as 107 separate ES modules, 97 of them `Cache-Control: no-cache` — so
 # every one of ~1,900 page loads re-fetched all 97. The built bundle is one file.
@@ -91,10 +95,37 @@ jobs:
       - run: npm run build       # tsc -b && vite build — type errors fail here
       - run: npm run test:unit
 
-  e2e:
-    name: cypress
+  # The shard split, read from its one source of truth so the matrix and the
+  # coverage guard cannot disagree. Runs alongside backend/frontend, so it costs
+  # no wall clock.
+  shards:
+    name: plan shards
     runs-on: ubuntu-latest
-    needs: [backend, frontend]
+    outputs:
+      matrix: ${{ steps.plan.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v4
+
+      # Fails if any spec in cypress/e2e/ is in no shard (it would never run,
+      # and CI would stay green) or in two (it would run twice). The frontend
+      # job asserts the same thing via tests/unit/shards.test.ts; this is here
+      # so a bad manifest cannot produce a matrix at all.
+      - name: Every spec is in exactly one shard
+        run: node frontend/scripts/check-shards.mjs
+
+      - id: plan
+        run: echo "matrix=$(node frontend/scripts/check-shards.mjs --matrix)" >> "$GITHUB_OUTPUT"
+
+  e2e:
+    name: cypress (${{ matrix.shard.name }})
+    runs-on: ubuntu-latest
+    needs: [backend, frontend, shards]
+    strategy:
+      # One shard failing must not cancel the rest — a partial picture of which
+      # specs broke is exactly what makes a red run expensive to diagnose.
+      fail-fast: false
+      matrix:
+        shard: ${{ fromJSON(needs.shards.outputs.matrix) }}
     steps:
       - uses: actions/checkout@v4
 
@@ -106,6 +137,17 @@ jobs:
           node-version: '22'
           cache: npm
           cache-dependency-path: frontend/package-lock.json
+
+      # setup-node caches the npm registry tarballs, but the Cypress *binary*
+      # lives in ~/.cache/Cypress and was re-downloaded on every run ("It looks
+      # like this is your first time using Cypress"). ~20 s, which mattered
+      # little once but is now paid by every shard.
+      - name: Cache the Cypress binary
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/Cypress
+          key: cypress-${{ runner.os }}-${{ hashFiles('frontend/package-lock.json') }}
+          restore-keys: cypress-${{ runner.os }}-
 
       - name: Install
         run: |
@@ -156,12 +198,13 @@ jobs:
           echo "the static server did not come up"; exit 1
 
       - name: Cypress
-        run: cd frontend && npx cypress run
+        run: cd frontend && npx cypress run --spec "${{ matrix.shard.specs }}"
 
       - name: Upload failure screenshots
         if: failure()
         uses: actions/upload-artifact@v4
         with:
-          name: cypress-screenshots
+          # Per shard: upload-artifact v4 refuses a name that already exists.
+          name: cypress-screenshots-${{ matrix.shard.name }}
           path: frontend/cypress/screenshots
           if-no-files-found: ignore

@@ -1,0 +1,59 @@
+{
+  "note": [
+    "The Cypress specs, packed into balanced shards for CI. One GitHub Actions",
+    "runner per shard, each booting its own API + frontend.",
+    "",
+    "The packing is derived from measured per-spec durations — see",
+    "E2E_PERFORMANCE_PLAN.md § 1 for the table and how to refresh it. Do NOT",
+    "split alphabetically or by file count: filters.cy.ts and",
+    "manufacturer_api_docs.cy.ts are ~125x apart, and the job is only as fast as",
+    "its slowest shard. `estimate` is the pre-sharding cost of that shard's",
+    "specs, kept here so the balance is reviewable in a diff.",
+    "",
+    "EVERY spec in cypress/e2e/ must appear in exactly one shard. A spec left out",
+    "would silently stop running while CI stayed green, so",
+    "scripts/check-shards.mjs enforces it — run by `npm run test:unit` and by",
+    "CI's shard-planning job. Adding a spec means adding it here."
+  ],
+  "shards": [
+    {
+      "name": "filters",
+      "estimate": "6:16",
+      "specs": ["filters"]
+    },
+    {
+      "name": "search",
+      "estimate": "6:02",
+      "specs": ["search_sort", "navigation", "brand_links"]
+    },
+    {
+      "name": "cards",
+      "estimate": "5:58",
+      "specs": ["gear_cards", "mobile", "gear_status", "manufacturer_api_docs"]
+    },
+    {
+      "name": "detail",
+      "estimate": "5:52",
+      "specs": ["gear_detail", "isa_warnings", "safety_notices"]
+    },
+    {
+      "name": "listing",
+      "estimate": "5:51",
+      "specs": ["gear_listing", "compare", "submissions", "range_slider"]
+    },
+    {
+      "name": "money",
+      "estimate": "6:05",
+      "specs": [
+        "currency",
+        "isa_certification",
+        "manufacturers",
+        "price_slider",
+        "admin_triage",
+        "url_state",
+        "brand_filter",
+        "co_listings"
+      ]
+    }
+  ]
+}
