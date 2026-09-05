@@ -45,7 +45,7 @@ export default function GearCard({
   item: AnyItem
   meta: GearTypeMeta
   compareSelected?: boolean
-  // The 4-item cap is full and this card isn't one of the selected — its button
+  // The compare cap is full and this card isn't one of the selected — its button
   // is disabled so a 5th can't be added.
   compareDisabled?: boolean
   onToggleCompare?: (id: number) => void

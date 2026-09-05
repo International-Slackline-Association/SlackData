@@ -2,7 +2,7 @@
 // when ≥1 item is selected (the parent guards on that — the bar's very existence
 // is part of the contract: compare.cy.ts asserts it does NOT exist at 0).
 //
-// Selection state (and the 4-item cap) lives in GearListingPage; this component
+// Selection state (and the item cap) lives in GearListingPage; this component
 // is presentational. The "Compare" CTA is disabled below 2 items — you can't
 // compare a single thing.
 //
@@ -68,8 +68,10 @@ export default function CompareBar({
         </span>
 
         {/* Chips scroll sideways on a phone rather than stacking the bar to half
-            the screen height when four are selected. */}
-        <div className="order-3 -mx-1 flex w-full items-center gap-2 overflow-x-auto scrollbar-none px-1 sm:order-2 sm:mx-0 sm:w-auto sm:flex-1 sm:flex-wrap sm:overflow-visible sm:px-0">
+            the screen height when several are selected. On desktop they wrap,
+            but ten of them would wrap to three rows and eat the grid, so the
+            strip is capped at two rows and scrolls vertically past that. */}
+        <div className="order-3 -mx-1 flex w-full items-center gap-2 overflow-x-auto scrollbar-none px-1 sm:order-2 sm:mx-0 sm:w-auto sm:max-h-[4.75rem] sm:flex-1 sm:flex-wrap sm:overflow-x-visible sm:overflow-y-auto sm:px-0">
           {items.map(item => (
             <span
               key={String(item.id)}
