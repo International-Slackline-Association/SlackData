@@ -130,8 +130,25 @@ describe('URL state — range filters', () => {
   // (data-cy="range-{min,max}-value"), which is the Phase-4 contract in filters.cy.ts.
   const weight = '[data-cy="filter-group"][data-group="weight"]'
 
+  // A range domain is derived from the items, so until the fetch lands both
+  // thumbs sit on a placeholder domain. Editing a bound before then is not a
+  // slow test but a wrong one: the typed value can BE the placeholder domain's
+  // edge, an edge bound is dropped from the URL as a no-op (asserted two tests
+  // below), and the thumb then springs to the real domain's edge when the items
+  // arrive. That is exactly how this spec failed on main — an entered 50 read
+  // back as 19, the real minimum weight, with no `weight_min` in the URL.
+  //
+  // Waiting on the domain rather than on the fetch: `max` and `min` are equal
+  // (both 0) until real numbers arrive. filters.cy.ts guards every editable-bound
+  // test the same way.
+  const domainReady = () =>
+    cy.get(weight).find('[data-cy="range-max"]').should(($el) => {
+      expect(Number($el.attr('max'))).to.be.greaterThan(Number($el.attr('min')))
+    })
+
   it('entering a weight min writes ?weight_min= to the URL', () => {
     cy.visit('/webbings')
+    domainReady()
     cy.get(weight).find('[data-cy="range-min-value"]').click()
     cy.get(weight).find('input[data-cy="range-min-value"]').clear().type('50{enter}')
     // Wait for the commit to round-trip through the URL back onto the thumb before
@@ -142,6 +159,7 @@ describe('URL state — range filters', () => {
 
   it('entering a weight max writes ?weight_max= to the URL', () => {
     cy.visit('/webbings')
+    domainReady()
     cy.get(weight).find('[data-cy="range-max-value"]').click()
     cy.get(weight).find('input[data-cy="range-max-value"]').clear().type('150{enter}')
     cy.get(weight).find('[data-cy="range-max"]').should('have.value', '150')
