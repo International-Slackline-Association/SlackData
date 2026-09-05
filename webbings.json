@@ -2992,6 +2992,9 @@
         "id": 52,
         "name": "Cosmic",
         "brand": "Slack Inov",
+        "gear_sellers": [
+            "Spider Slacklines"
+        ],
         "stretch": [
             {
                 "kn": 1,
@@ -3135,6 +3138,9 @@
         "id": 53,
         "name": "Donkey",
         "brand": "Slack Inov",
+        "gear_sellers": [
+            "Spider Slacklines"
+        ],
         "stretch": [
             {
                 "kn": 1,
@@ -3234,6 +3240,9 @@
         "id": 54,
         "name": "Nova",
         "brand": "Slack Inov",
+        "gear_sellers": [
+            "Spider Slacklines"
+        ],
         "stretch": [
             {
                 "kn": 1,
@@ -4851,6 +4860,9 @@
         "id": 68,
         "name": "Tender",
         "brand": "Spider Slacklines",
+        "gear_sellers": [
+            "Slack Inov"
+        ],
         "materialType": "Polyester",
         "width": 25,
         "weight": 48,
@@ -4959,6 +4971,9 @@
         "id": 69,
         "name": "Fly",
         "brand": "Spider Slacklines",
+        "gear_sellers": [
+            "Slack Inov"
+        ],
         "materialType": "Polyester",
         "width": 25,
         "weight": 58,
@@ -5102,6 +5117,9 @@
         "id": 70,
         "name": "Zao",
         "brand": "Spider Slacklines",
+        "gear_sellers": [
+            "Slack Inov"
+        ],
         "materialType": "Polyester",
         "width": 25,
         "weight": 65,
@@ -5202,6 +5220,9 @@
         "id": 71,
         "name": "Edge",
         "brand": "Spider Slacklines",
+        "gear_sellers": [
+            "Slack Inov"
+        ],
         "stretch": [
             {
                 "kn": 1,
@@ -5302,6 +5323,9 @@
         "id": 72,
         "name": "Jumbo",
         "brand": "Spider Slacklines",
+        "gear_sellers": [
+            "Slack Inov"
+        ],
         "stretch": [
             {
                 "kn": 1,
@@ -5462,6 +5486,9 @@
         "id": 73,
         "name": "Nylove",
         "brand": "Spider Slacklines",
+        "gear_sellers": [
+            "Slack Inov"
+        ],
         "stretch": [
             {
                 "kn": 1,
@@ -5963,6 +5990,9 @@
         "id": 94,
         "name": "Flamme II",
         "brand": "Slack Inov",
+        "gear_sellers": [
+            "Spider Slacklines"
+        ],
         "materialType": "Polyester",
         "width": 25,
         "weight": 76,
@@ -5983,6 +6013,9 @@
         "id": 95,
         "name": "Emeraude",
         "brand": "Slack Inov",
+        "gear_sellers": [
+            "Spider Slacklines"
+        ],
         "materialType": "Polyester",
         "width": 50,
         "weight": 95,
@@ -7168,6 +7201,9 @@
         "id": 148,
         "name": "Mamba",
         "brand": "Spider Slacklines",
+        "gear_sellers": [
+            "Slack Inov"
+        ],
         "materialType": "Nylon",
         "width": 25,
         "weight": 65,
@@ -7191,6 +7227,9 @@
         "id": 149,
         "name": "Flamme III",
         "brand": "Slack Inov",
+        "gear_sellers": [
+            "Spider Slacklines"
+        ],
         "materialType": "Polyester",
         "width": 25,
         "weight": 76,
@@ -7468,6 +7507,9 @@
         "id": 159,
         "name": "Plasma",
         "brand": "Slack Inov",
+        "gear_sellers": [
+            "Spider Slacklines"
+        ],
         "materialType": "Polyester",
         "width": 25,
         "weight": 73,
@@ -7707,6 +7749,9 @@
         "id": 166,
         "name": "Joker",
         "brand": "Slack Inov",
+        "gear_sellers": [
+            "Spider Slacklines"
+        ],
         "materialType": "Hybrid",
         "materialComposition": [
             "Nylon",
@@ -8256,6 +8301,9 @@
         "id": 182,
         "name": "Abysses Bounce",
         "brand": "Slack Inov",
+        "gear_sellers": [
+            "Spider Slacklines"
+        ],
         "materialType": "Nylon",
         "width": 25,
         "weight": 63,
@@ -9069,6 +9117,9 @@
         "id": 205,
         "name": "Sky Diamond",
         "brand": "Slack Inov",
+        "gear_sellers": [
+            "Spider Slacklines"
+        ],
         "materialType": "Dyneema/HMPE",
         "width": 17,
         "weight": 33,
@@ -10036,6 +10087,9 @@
         "id": 226,
         "name": "LEMON HAZE",
         "brand": "Spider Slacklines",
+        "gear_sellers": [
+            "Slack Inov"
+        ],
         "materialType": "Hybrid",
         "materialComposition": [
             "Dyneema/HMPE",
@@ -10185,6 +10239,9 @@
         "id": 227,
         "name": "PANTHER",
         "brand": "Spider Slacklines",
+        "gear_sellers": [
+            "Slack Inov"
+        ],
         "materialType": "Nylon",
         "width": 25,
         "thickness": 3.1,
@@ -10302,6 +10359,9 @@
         "id": 228,
         "name": "GREEN MAMBA",
         "brand": "Spider Slacklines",
+        "gear_sellers": [
+            "Slack Inov"
+        ],
         "materialType": "Polyester",
         "width": 20,
         "thickness": 2.8,
@@ -11126,6 +11186,9 @@
         "id": 246,
         "name": "BoomBoom",
         "brand": "Slack Inov",
+        "gear_sellers": [
+            "Spider Slacklines"
+        ],
         "materialType": "Nylon",
         "width": 25,
         "thickness": null,
@@ -11220,13 +11283,16 @@
             }
         ],
         "description": null,
-        "notes": "Stub created for ISA warning 78 (a sample broke at 7 kN after 7 months of use). No published specs. Slack Inov / Spider 2026 datasheet (2026-09-02): MBS 80 mm diverter 27.0 kN; 3σ MBS weblock 27.6 kN; 3σ MBS sewn loop 27.0 kN; 3σ MBS linelock ring 27.0 kN; energy absorption capacity 3470 J/m; min rigging length 10 m highline / 50 m SPLIT 50 / 100 m SPLIT 100. A separate datasheet row \"BOOM BOOM 3 (PA)\" (MBS 80 mm diverter 21 kN, no other data) was held here as \"BoomBoom 3\" (#252) and merged into this row on 2026-09-02. The vendor lists the two as separate lines and their MBS figures disagree — 27 kN here against 21 kN for BOOM BOOM 3 — so the breaking strength on this row is unconfirmed and needs checking with Slack Inov.",
+        "notes": "",
         "active": false
     },
     {
         "id": 247,
         "name": "Jumanji",
         "brand": "Spider Slacklines",
+        "gear_sellers": [
+            "Slack Inov"
+        ],
         "stretch": [
             {
                 "kn": 1,
@@ -11408,6 +11474,9 @@
         "id": 248,
         "name": "Funky",
         "brand": "Slack Inov",
+        "gear_sellers": [
+            "Spider Slacklines"
+        ],
         "materialType": "Nylon",
         "width": 20,
         "thickness": 3.0,
@@ -11427,6 +11496,9 @@
         "id": 249,
         "name": "Reggae",
         "brand": "Slack Inov",
+        "gear_sellers": [
+            "Spider Slacklines"
+        ],
         "stretch": [
             {
                 "kn": 1,
@@ -11537,13 +11609,16 @@
         "priceMeter": 1.5,
         "currency": "EUR",
         "description": "A 25 mm tubular polyester webbing and a long-standing reference in slacklining: soft, flexible and very stretchy (about 14% at 15 kN). Comfortable enough for barefoot walking and well suited to surf, controlled bounces and static tricks such as drop knee. Made in France.",
-        "notes": "Slack Inov / Spider 2026 datasheet (2026-09-02): MBS 80 mm diverter 24.5 kN (the DB sheet's 23.6 kN is superseded by the product page); 3σ MBS weblock 21.5 kN; 3σ MBS sewn loop 18.8 kN; 3σ MBS linelock ring 16.6 kN; energy absorption capacity 2525.3 J/m. Product page datasheet: 3σ MBS sewn loop 19.5 kN, Zenlock weblock 24.5 kN, Diamondlock 16.5 kN. Suggested length 20-150 m; suggested backup 9% longer than the main line. Reference LWI02, made in France.",
+        "notes": "Slack Inov / Spider 2026 datasheet (2026-09-02): MBS 80 mm diverter 23.6 kN (the product page's 24.5 kN differs; the datasheet is the figure of record here); 3σ MBS weblock 21.5 kN; 3σ MBS sewn loop 18.8 kN; 3σ MBS linelock ring 16.6 kN; energy absorption capacity 2525.3 J/m. Product page datasheet: 3σ MBS sewn loop 19.5 kN, Zenlock weblock 24.5 kN, Diamondlock 16.5 kN. Suggested length 20-150 m; suggested backup 9% longer than the main line. Reference LWI02, made in France.",
         "active": true
     },
     {
         "id": 250,
         "name": "Solid",
         "brand": "Slack Inov",
+        "gear_sellers": [
+            "Spider Slacklines"
+        ],
         "stretch": [
             {
                 "kn": 1,
@@ -11685,6 +11760,9 @@
         "id": 251,
         "name": "Donkey 20",
         "brand": "Slack Inov",
+        "gear_sellers": [
+            "Spider Slacklines"
+        ],
         "stretch": [
             {
                 "kn": 1,

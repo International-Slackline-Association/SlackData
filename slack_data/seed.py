@@ -18,6 +18,7 @@ from slack_data.load_data.load_isa_warnings import has_isa_warnings, load_isa_wa
 from slack_data.load_data.load_leashrings import load_leashrings
 from slack_data.load_data.load_manufacturers import load_manufacturers
 from slack_data.load_data.load_rollers import load_rollers
+from slack_data.load_data.load_seller_brands import load_seller_brands
 from slack_data.load_data.load_starterkits import load_starterkits
 from slack_data.load_data.load_treepros import load_treepros
 from slack_data.load_data.load_tricklinekits import load_tricklinekits
@@ -72,10 +73,28 @@ def seed_catalog(session: Session) -> None:
     if existing_tricklinekits is None: # Only load from `tricklinekits.json` if the database is empty
         print("Loading trickline kit data into the database...")
         load_tricklinekits(session=session)
-    # MUST come last: Brand rows are created by the gear loaders above (via
-    # get_brand(), name-only), and this pass backfills their metadata. Gated on
-    # "no brand has a country yet" rather than on an empty table, because the
-    # table is never empty by this point.
+    loaded_gear = any(
+        existing is None
+        for existing in (
+            existing_webbings, existing_weblocks, existing_rollers, existing_leashrings,
+            existing_grips, existing_treepros, existing_starterkits, existing_tricklinekits,
+        )
+    )
+    # After every gear loader, before the brand enrichment. It reads the
+    # `gear_sellers` names off the rows those loaders just wrote, and it can
+    # CREATE a brand (a shop that resells and makes nothing has no gear loader
+    # to be born in), so it has to run while the enrichment pass can still
+    # reach that new row with a country and a contact address. Skipped when
+    # every gear table was already populated: the names are part of the gear
+    # seeds now, so nothing can have changed without a re-seed.
+    if loaded_gear:
+        print("Resolving co-listing sellers from the gear seeds...")
+        load_seller_brands(session=session)
+    # MUST come after everything that creates a Brand row — the gear loaders
+    # above (via get_brand(), name-only) and the seller pass just above (a
+    # reseller with no gear of its own). This pass only backfills metadata
+    # onto rows that already exist. Gated on "no brand has a country yet"
+    # rather than on an empty table, because the table is never empty here.
     needs_enrichment = session.exec(
         select(Brand).where(Brand.country.is_not(None))
     ).first() is None

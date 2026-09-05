@@ -16,6 +16,9 @@
 
 import type { GearSlug } from '@/types'
 import { WEBLOCK_STYLES } from '@/types/enums'
+import { BRAND_GROUP } from './brandGroup'
+
+export { BRAND_GROUP }
 
 export type FilterType = 'pill' | 'range'
 
@@ -29,16 +32,21 @@ export interface FilterGroupMeta {
   label: string        // human label shown in the sidebar (asserted by tests)
   type: FilterType
   unit?: string        // shown next to range inputs / int pills (mm, kN, g, …)
-  // The item field the filter READS, when it isn't `group`. Price is the only
-  // one: the URL key and data-group stay `price` (so ?price_min= reads the way
-  // every other range filter does), but the values compared are the
-  // display-currency ones the listing attaches — comparing raw amounts across
-  // fourteen currencies is meaningless. See DESIGN.md § Currency & Prices.
+  // The item field the filter READS, when it isn't `group`. Two groups use it,
+  // both keeping a URL key that reads the way the sidebar does while comparing
+  // a value the listing derives:
+  //   price → price_display, because comparing raw amounts across fourteen
+  //           currencies is meaningless (DESIGN.md § Currency & Prices);
+  //   brand → brands, the maker plus every brand co-listing the item
+  //           (utils/sellers.ts), because "who sells it" is the question.
   valueField?: string
   // Range groups only: the unit follows the viewer's display currency rather
   // than being a fixed string like "mm". Price is the only such group.
   currencyUnit?: boolean
   pillKind?: PillKind  // pills only; defaults to 'enum'
+  // pills only; a group whose option list can grow long enough to need a search
+  // box + a fold (see foldPillOptions). Brand is the only one.
+  searchable?: boolean
   capitalize?: boolean // pills only; title-case the display labels (e.g. pair→Pair)
   // pills only; canonical value order for fields whose domain order is meaningful
   // rather than alphabetical. Values not listed here sort after, alphabetically.
@@ -76,6 +84,11 @@ export const FILTER_GROUPS: Record<GearSlug, FilterGroupMeta[]> = {
     { group: 'weight',            label: 'Weight',            type: 'range', unit: 'g/m' },
     { group: 'breaking_strength', label: 'Breaking Strength', type: 'range', unit: 'kN' },
     // + the Stretch widget (StretchFilter), appended in the sidebar for webbings
+    // Brand comes LAST — and on webbings the sidebar puts it below the stretch
+    // widget as well (see FilterSidebar): it is the longest group there is and
+    // the least specific, so it sits under the spec filters people scroll for
+    // rather than pushing them beneath a wall of brand pills.
+    BRAND_GROUP,
   ],
 
   weblocks: [
@@ -91,6 +104,10 @@ export const FILTER_GROUPS: Record<GearSlug, FilterGroupMeta[]> = {
       order: ISA_WARNING_ORDER, includeNone: true },
     { group: 'weight',            label: 'Weight',            type: 'range', unit: 'g' },
     { group: 'breaking_strength', label: 'Breaking Strength', type: 'range', unit: 'kN' },
+    // Brand comes LAST: it is the longest group in the sidebar (45 brands on
+    // webbings, even folded) and the least specific, so it sits below the spec
+    // filters people scroll for rather than pushing them under a wall of pills.
+    BRAND_GROUP,
   ],
 
   leashrings: [
@@ -103,6 +120,10 @@ export const FILTER_GROUPS: Record<GearSlug, FilterGroupMeta[]> = {
     { group: 'outer_diameter',    label: 'Outer Diameter',    type: 'range', unit: 'mm' },
     { group: 'weight',            label: 'Weight',            type: 'range', unit: 'g' },
     { group: 'breaking_strength', label: 'Breaking Strength', type: 'range', unit: 'kN' },
+    // Brand comes LAST: it is the longest group in the sidebar (45 brands on
+    // webbings, even folded) and the least specific, so it sits below the spec
+    // filters people scroll for rather than pushing them under a wall of pills.
+    BRAND_GROUP,
   ],
 
   grips: [
@@ -117,6 +138,10 @@ export const FILTER_GROUPS: Record<GearSlug, FilterGroupMeta[]> = {
     { group: 'wll',                       label: 'WLL',                type: 'range', unit: 'kN' },
     { group: 'mbs',                       label: 'MBS',                type: 'range', unit: 'kN' },
     { group: 'common_slipping_threshold', label: 'Slipping Threshold', type: 'range', unit: 'kN' },
+    // Brand comes LAST: it is the longest group in the sidebar (45 brands on
+    // webbings, even folded) and the least specific, so it sits below the spec
+    // filters people scroll for rather than pushing them under a wall of pills.
+    BRAND_GROUP,
   ],
 
   rollers: [
@@ -131,6 +156,10 @@ export const FILTER_GROUPS: Record<GearSlug, FilterGroupMeta[]> = {
       order: ISA_WARNING_ORDER, includeNone: true },
     { group: 'weight',            label: 'Weight',            type: 'range', unit: 'g' },
     { group: 'breaking_strength', label: 'Breaking Strength', type: 'range', unit: 'kN' },
+    // Brand comes LAST: it is the longest group in the sidebar (45 brands on
+    // webbings, even folded) and the least specific, so it sits below the spec
+    // filters people scroll for rather than pushing them under a wall of pills.
+    BRAND_GROUP,
   ],
 
   treepros: [
@@ -141,6 +170,10 @@ export const FILTER_GROUPS: Record<GearSlug, FilterGroupMeta[]> = {
     { group: 'width',                label: 'Width',            type: 'range', unit: 'cm' },
     { group: 'length',               label: 'Length',           type: 'range', unit: 'cm' },
     { group: 'thickness',            label: 'Thickness',        type: 'range', unit: 'mm' },
+    // Brand comes LAST: it is the longest group in the sidebar (45 brands on
+    // webbings, even folded) and the least specific, so it sits below the spec
+    // filters people scroll for rather than pushing them under a wall of pills.
+    BRAND_GROUP,
   ],
 
   starterkits: [
@@ -151,6 +184,10 @@ export const FILTER_GROUPS: Record<GearSlug, FilterGroupMeta[]> = {
     { group: 'includes_treepro', label: 'Includes Tree Pro', type: 'pill', pillKind: 'bool' },
     { group: 'isa_certified',    label: 'ISA Certified',     type: 'pill', pillKind: 'bool' },
     { group: 'weight',           label: 'Kit Weight',        type: 'range', unit: 'g' },
+    // Brand comes LAST: it is the longest group in the sidebar (45 brands on
+    // webbings, even folded) and the least specific, so it sits below the spec
+    // filters people scroll for rather than pushing them under a wall of pills.
+    BRAND_GROUP,
   ],
 
   tricklinekits: [
@@ -162,6 +199,10 @@ export const FILTER_GROUPS: Record<GearSlug, FilterGroupMeta[]> = {
     { group: 'isa_certified',    label: 'ISA Certified',     type: 'pill', pillKind: 'bool' },
     // Kit Weight is intentionally NOT filterable for trickline kits: only 2 of 9
     // carry weight data, so a slider would be misleading.
+    // Brand comes LAST: it is the longest group in the sidebar (45 brands on
+    // webbings, even folded) and the least specific, so it sits below the spec
+    // filters people scroll for rather than pushing them under a wall of pills.
+    BRAND_GROUP,
   ],
 
   // Upcoming types have no data / no listing yet.

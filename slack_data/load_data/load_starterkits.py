@@ -86,6 +86,8 @@ def add_starterkits_to_db(starterkits: list[dict], session: SessionDep) -> None:
             version=sk.get("version"),
             notes=sk.get("notes"),
             active=sk.get("active"),
+            # Brand names only — see the model. Absent stays None, not [].
+            gear_sellers=sk.get("gear_sellers") or None,
         )
 
         db_sk = StarterKit.model_validate(starterkit_create)

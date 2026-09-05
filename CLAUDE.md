@@ -151,6 +151,7 @@ Root *.json seed files
 | `slack_data/api/routers/<type>_router.py` | One `crud_router(...)` call per gear type |
 | `slack_data/api/routing.py` | Router registration + the READ_ONLY write-route filter (see below) |
 | `slack_data/utilities/` | shared enums/helpers (currency, country, materials, ISA warnings) |
+| `slack_data/load_data/load_seller_brands.py` | Resolves each gear row's `gear_sellers` names; the one place a seller-only `Brand` is created |
 | `slack_data/models/submissions.py` | Submission schemas — **pydantic, not SQLModel**; never in the catalogue DB |
 | `slack_data/submissions/` | The submission store: `repository.py` (Protocol + SQLite + in-memory), `dynamo.py`, `store.py` (env selection), `fields.py` (allowed field names, derived from the models) |
 | `slack_data/api/auth.py` | Cognito token verification (admin **ID** tokens + manufacturer **access** tokens) + the local dev-token modes |
@@ -165,6 +166,21 @@ There are `__init__.py` files in `models/`, `api/`, and `utilities/`. No `tests/
 1. `create_db_and_tables()` creates the SQLite engine and all tables. It raises if called twice (`DATABASE_ENGINE` is a module global).
 2. For each gear type: `select(<Model>).first()` — **if the table is empty**, run the matching `load_*(session)`.
 3. **Seeding is one-shot.** Once any row exists for a gear type, its JSON is never re-read. To re-seed after editing JSON: delete `slack_data/database.db` and restart the server.
+
+**Editing a seed `*.json` is not finished until the database is re-seeded and the server restarted.**
+Because seeding is one-shot, a running dev server keeps serving the *old* rows — so the change looks
+like it did nothing, in the API and on the site. Every edit to a root `*.json` (gear seeds,
+`manufacturers.json`, `isa_gear_warnings.json`) ends with:
+
+```bash
+rm -f slack_data/database.db
+cd slack_data && fastapi dev main.py    # re-seeds on boot; watch the log for loader errors
+```
+
+Do this yourself as the last step of the change, don't just tell the user to — the loaders are where
+a bad seed value surfaces (unknown brand, unparseable currency, a name that no longer matches an ISA
+match block), and those errors are only visible on a re-seed. Then confirm the new data is actually
+served (`curl localhost:8000/<prefix>/<id>`) before reporting the work done.
 
 `database.py` creates the engine with `echo=True`, so SQL is logged verbosely on every run.
 
@@ -219,6 +235,86 @@ reported instead of silently re-pointing a recall. The pass writes two things:
 
 Seeding is gated on the `ISAGearWarning` table being empty. Eight entries match nothing we hold —
 tracked in BACKLOG.md.
+
+### Co-listings — one product, several sellers
+
+`brand_id` on a gear row says who **makes** the thing. It could not say "…and
+Spider Slacklines sells the same webbing on their own site", which is true of
+most of the Slack Inov range: the two companies co-list each other's gear, each
+with their own product page. **`gear_sellers`**, a column on every gear model,
+is that second statement — a list of seller brand NAMES, stored on the product.
+
+- **The gear row stays one row.** A second row per seller would split the things
+  that must not split — a correction filed against one copy, or an ISA recall
+  landing on it, would leave the other displayed with a clean record. (That
+  failure is already live for the EQB/Spider `Bandit SH`/`SL` twins; see
+  BACKLOG.md.) Ids are untouched, and so is every id already recorded in an ISA
+  match block, a manufacturer credential or a bookmarked link.
+- **It lives beside the item, in the item's own seed.** `"gear_sellers":
+  ["Slack Inov"]` sits next to `"brand"` in `webbings.json`, `weblocks.json` and
+  the rest — not in a side file of `(gear_type, gear_id)` cross-references,
+  which is a second thing to keep in step with the seeds and a fresh chance to
+  mistype an id on every line. The trade is deliberate: there is no per-seller
+  price, product URL or stock flag, because a name is all we actually hold (see
+  the provenance below).
+- **A JSON column** (`list[str] | None`, `sa_column=Column(JSON)`), so a row
+  with no sellers holds JSON `null`, not SQL NULL — filter it in Python, never
+  with `.is_not(None)` in SQL. `[]` is never written: null is "none recorded".
+- **Names are resolved at seed time**, by `load_data/load_seller_brands.py`,
+  which runs **after every gear loader and just before the brand enrichment**
+  (it reads the rows they wrote, and it can create a brand the enrichment must
+  then reach). It canonicalizes each name (`weblocks.json` spells one maker
+  "Spider slacklines"; the frontend compares against `brand_name`, so a variant
+  matches nothing and errors nowhere), and reports-then-drops three things: a
+  name with no `manufacturers.json` entry, a maker listed among its own sellers,
+  and a duplicate. One bad name costs that name, not the boot.
+- **A seller that makes nothing we hold is created there**, from its
+  `catalog_id` in `manufacturers.json`. This is the one place a `Brand` row is
+  born outside a gear loader, and it has to be: a shop that resells and
+  manufactures nothing has no product to arrive with, so it would otherwise be
+  the single kind of brand co-listings cannot name. `brand_catalog_id()` bounds
+  it — an unrecognised name is a typo far more often than a new shop. Such a
+  brand shows on the directory page with zero items, because inventory counts
+  group gear rows by maker and know nothing about sellers.
+- **Nobody may edit it through the API.** `gear_sellers` is in `_EXCLUDED` in
+  `submissions/fields.py`, so it is absent from both the public suggestion box
+  and the manufacturer API: who resells a product is ours to record, a maker
+  does not get to declare (or delete) a competitor's shelf, and `changes` is a
+  dict of strings that could not carry a list anyway.
+
+**On the frontend** the sellers arrive with the item — no second fetch, no
+index — and `utils/sellers.ts` is one function (`brandsFor`: maker first, then
+the sellers, deduped). Two surfaces read it:
+
+- the listing sidebar's **Brand** filter, whose pills match an item's maker
+  *plus* every brand co-listing it (`config/brandGroup.ts`, via the derived
+  `brands` field the listing page attaches);
+- **"Also sold by"** on the gear detail page
+  (`components/gear/AlsoSoldBy.tsx`, rendered by `GearDetailBody.tsx` under the
+  price and above the ISA certification block) — each shop's name, linked to its
+  brand page. DESIGN.md § Also sold by.
+
+Seeded today: **64 co-listings**, from two sources with very different
+provenance.
+
+- **SlackX** (`slackx.eu`, catalog_id 97) sells both Radrigs weblocks — the
+  `Orange` and the `Slackfriend`. Recorded by hand from their shop. SlackX
+  continues the Radrigs line and makes nothing else we hold, which is exactly
+  the seller-only brand case above.
+- **Slack Inov ↔ Spider Slacklines**, 62: the two companies each sell the
+  other's entire range, so every item made by one names the other, across all
+  eight gear types. Recorded in bulk from the operator's statement, not from a
+  per-product scrape — which is precisely why a name is the whole claim. No
+  price, URL or per-shop stock flag is stored for any co-listing: none was
+  sourced, and "does this shop still stock it" is a different question from the
+  product's own `active`, which for a fair part of this range is `false`.
+
+**Not done here:** the rebadge half (EQB/Spider `Bandit`, Landcruising/Aki
+`Unicorn` — two rows that are one product and should be merged with a
+redirect), and anything on the **card** — the card shows the maker, because the
+specs are the maker's, and inventory counts still assume one row is one product,
+so a seller-only brand like SlackX reads as "0 items" on the manufacturers page
+even though it sells two. See BACKLOG.md.
 
 ### Read-only mode (`api/routing.py`)
 
@@ -452,7 +548,7 @@ Before writing any of the above, open the relevant `models/<type>.py` and `utili
 ## Conventions
 
 - Imports are absolute (`from slack_data....`).
-- `manufacturers.json` (76 entries) at root **is loaded — but as an enrichment pass, not a creator**. Brand rows are still created on the fly by `get_brand()` with only a name; `load_manufacturers.py` then backfills `country` / `year_founded` / `website` / `socials` / `contact_email` / `active` / `slackline_focused` onto the rows that already exist, matching on `canonical_brand()`. Its `catalog_id` **is** read at creation time, though — that is where `Brand.id` comes from (see § Loader pattern). It never inserts a brand (an entry with no matching row means we hold no gear for that manufacturer). It **must run last** in the lifespan, and is gated on "no brand has a country yet" rather than on an empty table. `contact_email` is the one field here that is **ours, not SlackDB's** — scraped from each manufacturer's own site (34/76 as of 2026-08-23; the rest publish a contact form only, or have no site left). `metadata.email_source` in the JSON records that provenance.
+- `manufacturers.json` (77 entries) at root **is loaded — but as an enrichment pass, not a creator**. Brand rows are still created on the fly by `get_brand()` with only a name; `load_manufacturers.py` then backfills `country` / `year_founded` / `website` / `socials` / `contact_email` / `active` / `slackline_focused` onto the rows that already exist, matching on `canonical_brand()`. Its `catalog_id` **is** read at creation time, though — that is where `Brand.id` comes from (see § Loader pattern). It never inserts a brand (an entry with no matching row means we hold no gear for that manufacturer — `load_seller_brands.py` is the one pass that will insert one, for a seller-only brand). It **must run after every pass that creates a brand row** — the gear loaders and the seller-name pass, and is gated on "no brand has a country yet" rather than on an empty table. `contact_email` is the one field here that is **ours, not SlackDB's** — scraped from each manufacturer's own site (38/77 as of 2026-09-02; the rest publish a contact form only, or have no site left). `metadata.email_source` in the JSON records that provenance.
 - Country is stored as the `Country` enum's **full display name** (`"Germany"`), not an ISO code; `get_country()` in `utilities/countries.py` maps the sources' alpha-2 codes onto the enum.
 - `BrandPublic` only declares `webbings` in its response schema — other gear lists exist on the ORM model via `@computed_field` but may not serialize in API responses.
 - No auth — all endpoints are open.
