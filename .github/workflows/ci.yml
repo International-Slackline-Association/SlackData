@@ -16,6 +16,12 @@
 # The backend job is the one that would have caught the bugs this repo has
 # actually hit: a cold-start ImportError, and DynamoDB code that had never
 # executed anywhere.
+#
+# Cypress runs against a PREBUILT bundle, not `vite dev`. In dev mode Vite serves
+# the app as 107 separate ES modules, 97 of them `Cache-Control: no-cache` — so
+# every one of ~1,900 page loads re-fetched all 97. The built bundle is one file.
+# See "Build the frontend" below for why it is built in development mode and not
+# production. Measured same-machine: 2.25x on the specs it was A/B'd against.
 
 name: CI
 
@@ -106,6 +112,21 @@ jobs:
           pip install '-e.[dev]'
           cd frontend && npm ci
 
+      # Built in DEVELOPMENT mode on purpose, and this is not a detail:
+      # .env.development is what lets submissions.cy.ts and admin_triage.cy.ts
+      # run with no AWS account. A production build loads .env.production
+      # instead (VITE_API_URL=/api, a real Cognito pool, a real Turnstile key)
+      # and flips import.meta.env.PROD, which hides SuggestButton and swaps
+      # AdminAuthProvider's DevBridge for the "not configured" screen. So:
+      #   --mode development   loads .env.development
+      #   NODE_ENV=development keeps import.meta.env.PROD false
+      # Both are needed — `vite build` sets NODE_ENV=production regardless of
+      # --mode. The result behaves exactly like `npm run dev`, in one file.
+      # `tsc -b` is skipped: the frontend job already ran it, and this job is
+      # gated on that one, so a type error never reaches here.
+      - name: Build the frontend
+        run: cd frontend && npm run build:e2e
+
       - name: Start the API
         # Scratch stores in /tmp, not the repo: admin_triage.cy.ts works a queue,
         # and a store that persisted between runs would fill up and push the
@@ -121,15 +142,18 @@ jobs:
           done
           echo "the API did not come up"; exit 1
 
-      - name: Start the frontend
+      - name: Serve the frontend
+        # `vite preview` over the built bundle, on the port cypress.config.ts's
+        # baseUrl already points at. It serves the SPA history fallback, so deep
+        # links like /webbings/1 work.
         run: |
           cd frontend
-          npm run dev &
+          npm run serve:e2e &
           for i in $(seq 1 30); do
             curl -sf localhost:5173 >/dev/null && exit 0
             sleep 2
           done
-          echo "vite did not come up"; exit 1
+          echo "the static server did not come up"; exit 1
 
       - name: Cypress
         run: cd frontend && npx cypress run

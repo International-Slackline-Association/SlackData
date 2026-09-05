@@ -38,6 +38,12 @@ cd slack_data && fastapi dev main.py
 # Frontend dev server — port 5173
 cd frontend && npm run dev
 
+# ...or serve a prebuilt bundle instead, which is what CI does. Vite dev serves
+# the app as 107 separate no-cache ES modules, so every cy.visit re-fetches all
+# 97 of the /src ones; the bundle is one file. Worth it for a long spec run.
+# The mode flags are load-bearing — see .github/workflows/ci.yml.
+cd frontend && npm run build:e2e && npm run serve:e2e   # also port 5173
+
 # Cypress (this WSL box needs the X11 libs + ELECTRON var unset)
 cd frontend
 export NVM_DIR="$HOME/.nvm" && source "$NVM_DIR/nvm.sh"
