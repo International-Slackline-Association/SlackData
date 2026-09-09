@@ -34,7 +34,7 @@ const apiPath = gearType.replace(/s$/, '')
 const brandKeyFor = (brand: string) => abbrevMap[brand] ?? slugify(brand)
 
 // The first (gear type, brand abbrev) the range-wide manifest holds.
-const [brandType, brandAbbrev] = (() => {
+const [brandType, rangeKey] = (() => {
   const type = Object.keys(brandManifest).find(t => Object.keys(brandManifest[t]).length > 0)!
   return [type, Object.keys(brandManifest[type])[0]]
 })()
@@ -112,19 +112,19 @@ describe('Range-wide manuals', () => {
   type Row = Item & { id: number }
 
   const withBrandManual = (all: Row[]) =>
-    all.filter(i => brandKeyFor(i.brand_name) === brandAbbrev)
+    all.filter(i => brandKeyFor(i.brand_name) === rangeKey)
 
   it('shows the maker\'s document on a product that has none of its own', () => {
     cy.fetchAllItems(brandApiPath).then(all => {
       const rows = withBrandManual(all as Row[])
-      expect(rows.length, `the catalogue still holds ${brandAbbrev} ${brandType}`).to.be.greaterThan(0)
+      expect(rows.length, `the catalogue still holds ${rangeKey} ${brandType}`).to.be.greaterThan(0)
       const bare = rows.find(i => !manifest[brandType]?.[keyFor(i.brand_name, i.name)])!
       expect(bare, 'a product of theirs with no manual of its own').to.not.be.undefined
 
       cy.visit(`/${brandType}/${bare.id}`)
       cy.get('[data-cy="product-manuals"]').should('be.visible')
       cy.get('[data-cy="manual-listing"]')
-        .should('have.length', brandManifest[brandType][brandAbbrev].length)
+        .should('have.length', brandManifest[brandType][rangeKey].length)
         .and('have.attr', 'data-scope', 'brand')
       // The caption is what stops "User manual" reading as a claim about this
       // one product.
@@ -139,7 +139,7 @@ describe('Range-wide manuals', () => {
     cy.fetchAllItems(brandApiPath).then(all => {
       const rows = withBrandManual(all as Row[])
       const bare = rows.find(i => !manifest[brandType]?.[keyFor(i.brand_name, i.name)])!
-      const file = brandManifest[brandType][brandAbbrev][0]
+      const file = brandManifest[brandType][rangeKey][0]
       const url = `/gear-manuals/${brandType}/brand/${file}`
 
       cy.visit(`/${brandType}/${bare.id}`)
@@ -155,7 +155,7 @@ describe('Range-wide manuals', () => {
 
   it('lists the product\'s own document first, the range-wide one after', () => {
     // Order is what the inline embed reads: the specific document wins.
-    const own = Object.keys(manifest[brandType] ?? {}).find(k => k.startsWith(`${brandAbbrev}_`))
+    const own = Object.keys(manifest[brandType] ?? {}).find(k => k.startsWith(`${rangeKey}_`))
     if (!own) return // no product of this maker has its own PDF yet
 
     cy.fetchAllItems(brandApiPath).then(all => {
@@ -163,7 +163,7 @@ describe('Range-wide manuals', () => {
       cy.visit(`/${brandType}/${item.id}`)
       cy.get('[data-cy="manual-listing"]').should(
         'have.length',
-        manifest[brandType][own].length + brandManifest[brandType][brandAbbrev].length,
+        manifest[brandType][own].length + brandManifest[brandType][rangeKey].length,
       )
       cy.get('[data-cy="manual-listing"]').first().should('have.attr', 'data-scope', 'product')
       cy.get('[data-cy="manual-listing"]').last().should('have.attr', 'data-scope', 'brand')
