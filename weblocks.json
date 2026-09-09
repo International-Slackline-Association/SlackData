@@ -4183,7 +4183,7 @@
         "gear_sellers": [
             "Spider Slacklines"
         ],
-        "full_name": "Slack Inov Slackijump",
+        "full_name": "Slack Inov Slackibloc Jump",
         "manufacturer_info": {
             "name": "Slack Inov",
             "url": "/manufacturer_details/SlackInov#TAB-IMAGES",
@@ -4212,7 +4212,7 @@
             "Price (per unit)": "1 unit and above : 65.00 EUR"
         },
         "date_introduced": 1531947600000,
-        "name": "Slackijump",
+        "name": "Slackibloc Jump",
         "product_url": null,
         "active": false,
         "style": "Tensionable Weblock"
@@ -4986,7 +4986,7 @@
     },
     {
         "id": 120,
-        "brand": "Yoga Slackers",
+        "brand": "YogaSlackers",
         "name": "Line Lock",
         "specifications": {
             "Material": "Aluminum",

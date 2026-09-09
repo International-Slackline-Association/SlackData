@@ -2552,8 +2552,12 @@
     {
         "id": 38,
         "name": "eLine",
-        "brand": "yogaslackers",
+        "brand": "YogaSlackers",
         "stretch": [
+            {
+                "kn": 4,
+                "percent": 3.5
+            },
             {
                 "kn": 4.5,
                 "percent": 6.5
@@ -2576,7 +2580,9 @@
         "thickness": 2.08,
         "webbing_construction": "Tubular",
         "active": true,
-        "isa_certified": false
+        "isa_certified": false,
+        "priceMeter": 4.2,
+        "currency": "USD"
     },
     {
         "id": 39,
@@ -6087,14 +6093,20 @@
             {
                 "percent": 4.7,
                 "kn": 10
+            },
+            {
+                "percent": 5.5,
+                "kn": 15
             }
         ],
         "date_introduced": null,
-        "product_url": null,
+        "product_url": "https://web.archive.org/web/20140829212119/http://shop.slack.fr/collections/lines/products/superflat-dark-blue-100m",
         "webbing_construction": "Flat",
         "isa_certified": false,
-        "priceMeter": 1.96,
+        "priceMeter": 1.45,
         "currency": "EUR",
+        "description": "Slack.fr's \"Superflat\" webbing in dark blue: 100 % polyester, flat, marketed as general purpose - shortline, longline and highline - and recommended above all for longlining. The maker's own strong points: strong and long-lasting, with no sharp edges, soft and comfortable underfoot. Sold as made-up lines in 25 m, 50 m and 100 m.",
+        "notes": "Specs from Slack.fr's own shop page as captured 2014-08-29; product_url is that Wayback capture, because shop.slack.fr is long gone (Slack.fr's catalogue is now carried by Slack Inov) - hence active false. The capture confirms, unchanged, the four figures this row already held from the SlackDB import: flat, 100 % polyester, 25 mm, 62 g/m, MBS 28 kN. Two things it adds. (1) Elongation: the maker states 5.5 % at 15 kN, recorded as a second stretch point beside the inherited 4.7 % at 10 kN - two single quoted figures, not a measured curve. (2) Price: the shop sells three lengths, 25 m at 49 EUR, 50 m at 79 EUR and 100 m at 145 EUR, i.e. 1.96, 1.58 and 1.45 EUR/m. priceMeter was 1.96, which is exactly the 25 m tier - the dearest per metre of the three. It is set here to 1.45, the 100 m line this capture is the page for, matching the 2FACES entry's rule of taking the longest length's regular price; the ladder is recorded above so the other tiers are not lost. Prices include the made-up line, not bulk webbing by the metre. The maker calls the product Superflat \"Dark Blue\"; the catalogue name stays \"Dark Blue\" because the id and name are already recorded elsewhere. Polyester at 28 kN derives Type B.",
         "active": false
     },
     {
@@ -11930,6 +11942,142 @@
         "priceMeter": 3.75,
         "currency": "EUR",
         "notes": "Specs from the Aki Slacklines product page as captured 2024-09-19. product_url is the Wayback capture, not the live page: aki-slacklines.de/en/products/aki-anima-slacklineband now answers \"Aki Slacklines is closed, we are no longer processing orders\" (checked 2026-09-04), so the archive is the only place the product is still visible - hence active false. Maker's own wording: webbing type flat, webbing construction \"Multi-Zone CS+\" (recorded here as Core/Sheath), surface uncoated, Tenesta HMPE + polyester hybrid weave, WLL 6 kN, colours white-blue and white-grey with red edges, country of manufacture EU. Marketed for highlines over 100 m. Stretch is the maker's three approximate figures (3 kN ~1%, 6 kN ~2%, 10 kN ~3%), not a measured curve. Price is the 3.75 EUR/m regular price; the capture shows a 3.00 EUR/m sale.",
+        "active": false
+    },
+    {
+        "id": 253,
+        "name": "Steel Cable",
+        "brand": "Wall Ace",
+        "materialType": "Hybrid",
+        "materialComposition": [
+            "Dyneema/HMPE",
+            "Nylon"
+        ],
+        "width": 25,
+        "weight": 27.5,
+        "breakingStrength": null,
+        "stretch": [
+            {
+                "kn": 5,
+                "percent": 2.5
+            }
+        ],
+        "thickness": null,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "product_url": null,
+        "date_introduced": null,
+        "priceMeter": null,
+        "currency": null,
+        "notes": "Specs from Wall Ace's own announcement post (2026-09-05), the only source: the first length has reached Australia and the main shipment is about a month out, so there is no product page yet and product_url is null. Maker's own wording: Dyneema centre with purple nylon edges, 25 mm, 27.5 g/m, stretch \"about 2-3%\" at 5 kN - recorded here as a single 2.5% point, an approximate figure and not a measured curve. Breaking strength is not stated anywhere and is left null, which is why the derived classification reads Not for Highline; it is unknown, not a judgement. Sold ONLY as a complete highline kit - 75 m main plus 81 m backup, 4 loops included - at an indicative, not-yet-finalised ~580 AUD for the kit. No priceMeter is recorded: `price` on a webbing is per metre, and dividing an unfinalised kit price by 156 m would invent a number the maker has not quoted.",
+        "active": true
+    },
+    {
+        "id": 254,
+        "name": "Spider Silk MK1",
+        "brand": "Balance Community: Slackline Outfitters",
+        "materialType": "Other",
+        "width": 25,
+        "weight": null,
+        "breakingStrength": null,
+        "stretch": null,
+        "thickness": null,
+        "webbing_construction": null,
+        "isa_certified": false,
+        "product_url": "https://www.balancecommunity.com/products/spider-silk-mk1",
+        "date_introduced": null,
+        "priceMeter": 5.0,
+        "currency": "USD",
+        "notes": "The first of the Spider Silk line. Balance Community's product page (checked 2026-09-05) carries nothing but \"Legacy product, no longer for sale\", a 5.00 USD price and a sold-out button - its \"View Specs\" section is empty, and the Shopify product JSON adds nothing - so width and price are the whole record and everything else is genuinely unknown, not un-transcribed. materialType is \"Other\" for that reason: the rest of the line is Vectran (MK2), Vectran + Dyneema (MK3), Dyneema + polyester (MK4) and Vectran + polyester (MK5), so the family does not settle what MK1 was woven from, and `material` is NOT NULL in the model. Width 25 mm and 5.00 USD/m as supplied by the operator and confirmed on the page.",
+        "active": false
+    },
+    {
+        "id": 255,
+        "name": "Aeon",
+        "brand": "Landcruising",
+        "materialType": "Dyneema/HMPE",
+        "width": 25.8,
+        "weight": 37,
+        "breakingStrength": 60,
+        "stretch": [
+            {
+                "kn": 20,
+                "percent": 1.37
+            }
+        ],
+        "thickness": 2.8,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "product_url": null,
+        "date_introduced": 1262304000000,
+        "priceMeter": null,
+        "currency": null,
+        "notes": "Specs transcribed from Landcruising's own Aeon product-archive PDF (2 pages, supplied 2026-09-05); Landcruising is defunct and there is no live product page, hence product_url null and active false. Maker's own wording: flat webbing, 25.8 mm (1 inch), 99 % Dyneema fibers with a red contrast thread, no labels or prints, made in Germany, 37 g/m, minimum break strength 60 kN, 1.3-1.4 % elongation at 20 kN, marketed as the webbing for superlonglines and big projects. Page 2 is the mill's tensile certificate (Gurtband-Zertifikat, 26.05.2010, n = 1, KMW 100 kN): break force 6385 daN (63.85 kN), elongation 1.37 % at 20 kN, thickness 2.80 mm, width 25.8 mm - those measured figures are the source for thickness and for the single 1.37 % / 20 kN stretch point. breakingStrength records the stated 60 kN minimum, not the 63.85 kN of that one specimen. The certificate's F=f(s) diagram is crosshead travel in mm (with the slack take-up toe), not strain, so no stretch curve is derived from it. date_introduced is the PDF's \"Release 2010\" - only the year is known; the certificate puts it in production by May 2010. No price was ever recorded.",
+        "active": false
+    },
+    {
+        "id": 256,
+        "name": "Type 9800",
+        "brand": "Sterling Rope",
+        "materialType": "Nylon",
+        "width": 25.4,
+        "weight": null,
+        "breakingStrength": 43.5,
+        "stretch": null,
+        "thickness": null,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "product_url": "https://sterlingrope.com/1-type-9800-webbing/",
+        "date_introduced": null,
+        "priceMeter": 3.59,
+        "currency": "USD",
+        "description": "Flat, solid-woven 1\" nylon webbing, abrasion resistant, sold for anchor building, hauling and harness making. Sterling notes the solid weave handles less easily than a tubular webbing. Yellow, red or blue.",
+        "notes": "Specs from Sterling's own product page (checked 2026-09-05). It is a rigging/rescue webbing, not a slackline product: the page publishes exactly one number, MBS 9,800 lb / 43.5 kN, and no weight, thickness or elongation figure exists to record - hence the nulls. Width is the 1\" nominal, carried as 25.4 mm like the other imperial webbings (the loader truncates it to the model's int mm). priceMeter is DERIVED, not quoted: the only length sold is a 150 ft web wheel at 163.99 USD, and 163.99 / 45.72 m = 3.59 USD/m. Sterling rounds the wheel to \"46 m\" on the page, which would give 3.57; the exact conversion of 150 ft is used here. Nylon at 43.5 kN derives classification A+, but nothing about this webbing is ISA-certified or marketed for highline.",
+        "active": true
+    },
+    {
+        "id": 257,
+        "name": "2FACES",
+        "brand": "Slacktivity",
+        "materialType": "Polyester",
+        "width": 26,
+        "weight": 55,
+        "breakingStrength": 23.7,
+        "stretch": [
+            {
+                "kn": 10,
+                "percent": 7.2
+            }
+        ],
+        "thickness": null,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "product_url": "https://web.archive.org/web/20250209053319/https://slacktivity.com/shop/2faces-polyester-slackline/",
+        "date_introduced": null,
+        "priceMeter": 2.25,
+        "currency": "EUR",
+        "description": "Two-sided polyester longline webbing: a blue/white grip face and a black face, with the edges woven slightly bent down so the black side sits round underfoot. Sold as a finished line with sewn loops at both ends and a T-Loop backup point integrated into one loop. Marketed for park longlining and freestyle, with noticeably less stretch than Slacktivity's pinkTube or redTube. Slacktivity recommends the seaHorse weblock, or the KingPin for the sewn loops.",
+        "notes": "Specs from Slacktivity's own product page as captured 2025-02-09; product_url is that Wayback capture, not the live page, because slacktivity.com/shop/2faces-polyester-slackline/ now 301s to a shop category listing (checked 2026-09-05) - hence active false. Maker's own figures: polyester, 26 mm, 55 g/m, stretch approx 7.2% at 10 kN (\"comparable to Marathon PLAY\"), MBS webbing batch 2020 23.7 kN, MBS of the sewn main loop 23 kN. Stretch is that single approximate point, not a measured curve. Sold only as made-up lines, not by the metre: the capture offers 80 m at 179 EUR (145 on sale) and 100 m at 225 EUR (174 on sale, out of stock), so priceMeter is the 100 m regular price divided by its length, 2.25 EUR/m; the 80 m works out to 2.24. Sale prices are not used, matching the Anima entry. That price includes the sewn terminations, which bulk webbing prices elsewhere in this file do not. The two shipping weights corroborate the stated 55 g/m exactly (4.4 kg / 80 m and 5.5 kg / 100 m). Polyester at 23.7 kN derives Not for Highline, which is right: this is a park and longline webbing, and Slacktivity does not market it for highline.",
+        "active": false
+    },
+    {
+        "id": 258,
+        "name": "Line Long Way",
+        "brand": "Slackstar",
+        "materialType": "Other",
+        "width": 25,
+        "weight": 84,
+        "breakingStrength": 44.1,
+        "stretch": null,
+        "thickness": null,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "product_url": "https://web.archive.org/web/20130624115006/http://slackstar.de:80/hp1789/Line-Long-Way-SL80240-25-A.htm",
+        "date_introduced": null,
+        "priceMeter": 2.13,
+        "currency": "EUR",
+        "description": "25 mm violet flatband with a single stripe, article SL80240/25-A. Cut to order in 5 m steps from 5 m to 250 m. Slackstar recommended it either short (to 15 m) or as a longline out to 250 m.",
+        "notes": "Specs from Slackstar's own product page as captured 2013-06-24 (the only capture); product_url is that Wayback capture. The product is gone: slackstar.de now redirects to sicherungsprofi.de/slackstar/, whose range is Tartan, Distance, Nature and Basic with no Long Way among them (checked 2026-09-05) - hence active false. Maker's own figures: width 25 mm flatband, violet with 1 stripe, weight 84 g/m, breaking load 4500 kg. That is recorded as 44.1 kN (4500 x 9.80665 / 1000); BACKLOG.md carried it as \"10,000 lbs (~44.5 kN)\", which is the same claim converted twice - 4500 kg is 9,921 lb. Stretch is left null on purpose: the page says \"3 - 4 %\" with NO load, and a percentage without a kN figure cannot become a point on the stretch curve. materialType is \"Other\" because the page never states the fiber and `material` is NOT NULL in the model; 3-4% at 25 mm suggests polyester but the source does not say so. Sold by the metre on a length-price schedule: 5 m 9.10 EUR through 100 m 213.00 EUR to 250 m 534.70 EUR. priceMeter is the 100 m price over its length, 2.13 EUR/m; short lengths are cheaper per metre (1.82 at 5 m) and the marginal rate above 100 m is about 2.15.",
         "active": false
     }
 ]

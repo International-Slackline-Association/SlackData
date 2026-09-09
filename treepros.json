@@ -479,5 +479,24 @@
         "notes": "Sold as a pair. Included velcro straps join the two protectors together for larger trees or boulders — they do not carry a sling.",
         "manufacturer": "Viper Slacklines",
         "active": true
+    },
+    {
+        "id": 26,
+        "name": "Tree Pro",
+        "release_date": null,
+        "product_url": "https://yogaslackers.com/shop/slackline/tree-pro/",
+        "weight": null,
+        "width": 15,
+        "length": 183,
+        "thickness": null,
+        "has_sling_attachment": false,
+        "price": 12.0,
+        "price_unit": "pair",
+        "currency": "USD",
+        "description": "Tree protection cut from heavy outdoor carpeting rather than felt, for more durability against bark and against wear on the webbing. Sold as a set of two.",
+        "version": null,
+        "notes": "Manufacturer specs (yogaslackers.com): 6 ft (183 cm) long, 6 in (15 cm) wide; no weight or thickness published. Every order is a pair, and each piece carries a strip of velcro to hold it in place \u2014 the velcro joins the protector around the tree, it does not carry a sling.",
+        "manufacturer": "YogaSlackers",
+        "active": true
     }
 ]
