@@ -34,7 +34,7 @@
     {
       "name": "detail",
       "estimate": "5:52",
-      "specs": ["gear_detail", "isa_warnings", "safety_notices"]
+      "specs": ["gear_detail", "isa_warnings", "safety_notices", "manuals"]
     },
     {
       "name": "listing",

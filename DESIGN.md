@@ -636,6 +636,97 @@ with the item itself, so there is no second request that can fail here.
 Nothing about a co-listing appears on the **card** yet — see BACKLOG.md; the card shows the maker,
 because the specs are the maker's.
 
+### Manuals & documents
+
+Manufacturers publish PDFs about their gear — user manuals, datasheets, product archives. Where we
+hold one it is shown on the item's detail page as **its own white card below the spec sheet**, above
+the safety callout (`data-cy="product-manuals"`). It is a document, not a spec: too wide to sit
+beside the image, and it belongs after the numbers rather than between them.
+
+It is rendered by `GearDetailPage`, **not** by the shared `GearDetailBody` — for the same reason the
+safety callout is (§ Detailed View): the body is reused once per item in the listing's Detailed view,
+and an embedded PDF viewer per row there would be absurd.
+
+**Stored exactly the way images are** — a curated folder tree plus a generated manifest, same key,
+same one-line hosting switch:
+
+```
+frontend/public/gear-manuals/<gear type>/<brand-abbrev>_<name-slug>[-<title>].pdf
+frontend/src/data/gearManuals.json          # generated, never hand-edited
+```
+
+`scripts/build_gear_manifest.py` derives both manifests (images and manuals) from whatever is in
+`public/`, and `--check` fails on drift. The folder is the source of truth; the script only reads it.
+
+**The filename carries the document's title.** `landcruise_aeon.pdf` is "User manual" — the default,
+because that is what most of these are. Anything after the product key is the label, de-slugified:
+`landcruise_aeon-product-archive.pdf` reads **Product archive**. A bare numeric tail keeps the image
+convention (`-2` → "User manual 2"), so a product with two unnamed PDFs never renders two identical
+rows.
+
+**Shown, not just linked.** The first document is embedded inline (`<object type="application/pdf">`,
+~34rem tall, rounded and bordered like a card) so the thing can be read without leaving the page.
+Every browser that cannot render a PDF inline — mobile Safari and Chrome on Android, notably —
+substitutes the `<object>`'s fallback, which is the same "Open ↗" link. So the link is never the
+inline viewer's decoration; it is the whole feature on the platforms that need it, and it always
+opens in a new tab.
+
+Above the embed, one row per document (`data-cy="manual-listing"`): a 📄 mark, the title, and
+`Open ↗` (`data-cy="manual-link"`). With a single document the list is that one row — kept rather
+than special-cased, because the row is where the download lives.
+
+**Absent, not empty, when we hold nothing** — as with § Also sold by, a heading with no rows under it
+reads as a failed fetch, and most of the catalogue has no PDF. Nothing about manuals appears on the card
+either — a page-sized object does not belong in a grid cell.
+
+#### Range-wide manuals — one document for a whole product line
+
+Most manufacturers do not write a manual per product. Balance Community, Spider Slacklines /
+Slack Inov, Bera Adventure and Raed each publish **one webbing manual covering everything they
+make** — how to rig it, how to inspect it, when to retire it. Copying that PDF onto forty product
+keys would be forty files to re-upload when version 1.1 lands, and forty chances for one of them to
+stay on 1.0.
+
+So it is filed **once, under the brand**:
+
+```
+frontend/public/gear-manuals/<gear type>/brand/<brand-abbrev>[-<title>].pdf
+frontend/src/data/brandManuals.json         # generated, never hand-edited
+```
+
+- **Keyed by the brand abbreviation alone** — `bc.pdf`, `bc-webbing-manual.pdf`. That can never
+  collide with a product key, because a product key always contains an underscore
+  (`bc_mightylock`). Several brand *names* share one abbreviation ("Balance Community",
+  "BalanceCommunity", "Balance Community: Slackline Outfitters"), which is the point: the document
+  is filed once and every spelling of the maker finds it.
+- **Scoped by the folder it sits in, not by the company.** A webbing manual goes in
+  `gear-manuals/webbings/brand/`, and it reaches that maker's webbings only. A generic manual is
+  always about a *class* of product — how you rig a webbing has nothing to say about a tree
+  protector — so there is no brand-wide-everything shelf, and a maker whose manual genuinely covers
+  two classes files it under both.
+- **Its own manifest**, not a reserved key inside `gearManuals.json`, because it is a different
+  claim: "this document is about the whole range", not "this document is about this item". Both are
+  built by `scripts/build_gear_manifest.py` from whatever is in `public/`, and `--check` fails on
+  drift. A file whose stem matches no abbreviation in `brandAbbrev.json` is warned about rather than
+  filed silently.
+- **Titled by the same rule**, so one list never shows two title conventions: `bc.pdf` is
+  "User manual", `bc-webbing-manual.pdf` is "Webbing manual".
+- **Spider Slacklines and Slack Inov file the same PDF twice**, once under each abbreviation. They
+  are two companies publishing one document (and co-listing each other's gear — see § Also sold by),
+  and an alias table mapping one brand's manuals onto another's would be a second place for the
+  brand relationships to be stated, and to go stale. Two brands is two files; that is the whole
+  duplication the folder allows.
+
+**On the page they are rows in the same card**, appended after the item's own documents, and each
+carries a small gray caption under its title — *Applies to all Balance Community webbings*
+(`data-cy="manual-scope"`; the row is `data-scope="brand"`, an item's own is `data-scope="product"`).
+The caption is not decoration: "User manual" on a page about one product otherwise claims to be
+about that product.
+
+**Order is item-first, and the inline embed reads the first row.** A product with a manual of its own
+shows that manual; a product with none — the common case, and the reason this exists — still shows
+its maker's, rather than showing nothing.
+
 ### Spec rows per gear type
 
 **Every table below is preceded by a shared Price row** — it is not repeated in each table:
