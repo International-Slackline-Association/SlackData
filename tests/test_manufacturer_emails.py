@@ -173,7 +173,7 @@ def test_no_seeded_email_belongs_to_a_named_individual(seeded_emails):
         ("Fusion Climb", "julie@fusionclimb.com"),          # first name at the brand domain
         ("Krok", "krok.ellena@gmail.com"),                   # the brand, then a person
         ("Acrobat Slackline", "shaigat@gmail.com"),          # an owner's personal mailbox
-        ("Yoga Slackers", "poweredbyyoga@gmail.com"),        # a mailbox that isn't the brand's
+        ("YogaSlackers", "poweredbyyoga@gmail.com"),        # a mailbox that isn't the brand's
         # The first-word rule widened this check; it must not have opened it.
         ("Petram Slacklines", "petram.laura@gmail.com"),     # brand's first word, then a person
     ],
@@ -193,7 +193,7 @@ def test_the_personal_address_check_catches_what_the_scrape_dropped(brand, email
     [
         ("Gibbon", "info@gibbon-slacklines.com"),            # role prefix
         ("Slack Mountain", "slackmountain.com@gmail.com"),   # brand + an allowed suffix
-        ("Yoga Slackers", "yogaslackers@gmail.com"),         # the brand itself
+        ("YogaSlackers", "yogaslackers@gmail.com"),         # the brand itself
         ("Krok", "krok@krok.biz"),                           # short brand, exact match
         # A brand shortens itself in a mailbox as readily as it pads itself.
         ("Petram Slacklines", "petram.slack@gmail.com"),     # first word + an allowed suffix

@@ -1,9 +1,9 @@
 {
   "metadata": {
-    "total_manufacturers": 77,
+    "total_manufacturers": 79,
     "known_manufacturers": 74,
     "missing_manufacturers": 0,
-    "total_gear_items": 533,
+    "total_gear_items": 539,
     "coverage_percentage": 100.0,
     "enriched_from": "slackdb.com/api/manufacturers",
     "enriched_fields": [
@@ -16,7 +16,7 @@
       "email"
     ],
     "email_source": "scraped from each manufacturer's own website (2026-08-23); additions 2026-08-28, 2026-09-02. email_alt: a second address the brand also answers on, present only where one is known",
-    "email_coverage": "38/77"
+    "email_coverage": "38/79"
   },
   "manufacturers": {
     "1": {
@@ -269,7 +269,7 @@
     },
     "20": {
       "catalog_id": 9,
-      "name": "Yoga Slackers",
+      "name": "YogaSlackers",
       "verified": true,
       "item_count": 2,
       "country": "US",
@@ -1022,6 +1022,34 @@
       "facebook": null,
       "instagram": "https://instagram.com/slackx.slacklines",
       "email": "info@slackx.eu",
+      "active": true
+    },
+    "local_wall_ace": {
+      "catalog_id": 98,
+      "name": "Wall Ace",
+      "verified": false,
+      "item_count": 1,
+      "country": "AU",
+      "year_established": null,
+      "slackline_oriented": true,
+      "website": "https://www.wallaceclimbing.com",
+      "facebook": "https://www.facebook.com/WallAceClimbing/",
+      "instagram": "https://www.instagram.com/wallaceclimbing/",
+      "email": null,
+      "active": true
+    },
+    "local_sterling_rope": {
+      "catalog_id": 99,
+      "name": "Sterling Rope",
+      "verified": false,
+      "item_count": 1,
+      "country": "US",
+      "year_established": 1992,
+      "slackline_oriented": false,
+      "website": "https://sterlingrope.com",
+      "facebook": null,
+      "instagram": "https://instagram.com/sterlingrope",
+      "email": null,
       "active": true
     }
   }
