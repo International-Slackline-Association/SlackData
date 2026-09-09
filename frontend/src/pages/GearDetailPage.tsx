@@ -8,10 +8,12 @@ import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { fetchGearItem } from '@/api/gear'
 import GearDetailBody from '@/components/gear/GearDetailBody'
+import ProductManuals from '@/components/gear/ProductManuals'
 import SafetyNotice from '@/components/layout/SafetyNotice'
 import SuggestButton from '@/components/submissions/SuggestButton'
 import { getGearType } from '@/config/gearTypes'
 import { type AnyItem } from '@/utils/format'
+import { manualsFor } from '@/utils/images'
 import NotFoundPage from './NotFoundPage'
 
 export default function GearDetailPage() {
@@ -61,6 +63,15 @@ export default function GearDetailPage() {
       <article className="mt-4 rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
         <GearDetailBody item={item} meta={meta} />
       </article>
+
+      {/* Its own card below the spec sheet: a manual is a document, not a
+          spec, and the embedded viewer is page-wide. Here rather than in
+          GearDetailBody for the same reason the callout below is — the body is
+          shared with the listing's Detailed view, which would embed one PDF
+          viewer per visible item. */}
+      <ProductManuals
+        manuals={manualsFor(meta.slug, String(item.brand_name), String(item.name))}
+      />
 
       {/* Sits below the spec sheet, on the page where someone is reading the
           individual numbers they might act on. Deliberately here rather than in

@@ -457,7 +457,7 @@
     },
     {
         "id": 25,
-        "name": "ELINE SLACKLINE: LIGHT KIT",
+        "name": "eLine Light Kit",
         "release_date": 1622033435397,
         "product_url": "https://yogaslackers.com/shop/slackline/elinelight/",
         "webbing_length": 15,
@@ -471,12 +471,12 @@
         "description": null,
         "version": null,
         "notes": null,
-        "manufacturer": "Yoga Slackers",
+        "manufacturer": "YogaSlackers",
         "active": true
     },
     {
         "id": 26,
-        "name": "Eline SlacklineE Kit",
+        "name": "eLine Full Kit",
         "release_date": 1622018679027,
         "product_url": "https://yogaslackers.com/shop/slackline/eline-slackline-kit/",
         "webbing_length": 15,
@@ -487,10 +487,10 @@
         "isa_certified": false,
         "price": 120.0,
         "currency": "USD",
-        "description": null,
+        "description": "The complete eLine setup: 15 m of tubular polyester webbing, locking carabiners, two adjustable anchors, a line lock, tree protection and a storage bag.",
         "version": null,
-        "notes": null,
-        "manufacturer": "Yoga Slackers",
+        "notes": "The Pro Kit (id 66) is the same kit without the tree protection. Webbing is the 25.4 mm tubular polyester eLine, MBS 21.5 kN.",
+        "manufacturer": "YogaSlackers",
         "active": true
     },
     {
@@ -1223,5 +1223,43 @@
         "notes": null,
         "manufacturer": "Slackstar",
         "active": false
+    },
+    {
+        "id": 65,
+        "name": "eLine 108ft Kit",
+        "release_date": null,
+        "product_url": "https://yogaslackers.com/shop/slackline/eline-slackline-108-kit/",
+        "webbing_length": 33,
+        "webbing_width": 25,
+        "weight": null,
+        "tensioning_type": "Primitive",
+        "includes_treepro": false,
+        "isa_certified": false,
+        "price": 180.0,
+        "currency": "USD",
+        "description": "The eLine kit on a longer line \u2014 108 ft (33 m) of the same tubular polyester webbing, for a longer training line or a double-stacked setup.",
+        "version": null,
+        "notes": "Manufacturer specs (yogaslackers.com): 1x 108 ft (33 m) eLine slackline, 3x oval locking carabiners, 2x 8 ft (2.4 m) red adjustable anchor, 1x line lock, 1x pair of velcro for DIY tree pro, 1x mesh storage bag, 1x instruction sheet. No tree protection included. Webbing is the 25.4 mm tubular polyester eLine, MBS 21.5 kN.",
+        "manufacturer": "YogaSlackers",
+        "active": true
+    },
+    {
+        "id": 66,
+        "name": "eLine Pro Kit",
+        "release_date": null,
+        "product_url": "https://yogaslackers.com/shop/slackline/eline-slackline-pro-kit/",
+        "webbing_length": 15,
+        "webbing_width": 25,
+        "weight": null,
+        "tensioning_type": "Primitive",
+        "includes_treepro": false,
+        "isa_certified": false,
+        "price": 110.0,
+        "currency": "USD",
+        "description": "The Light Kit with three locking carabiners and a second anchor. Same contents as the Full Kit but without the tree protection, which is left out to cut shipping cost \u2014 velcro and instructions for making your own are included.",
+        "notes": "Manufacturer specs (yogaslackers.com): 1x 50 ft (15 m) eLine slackline, 3x oval locking carabiners, 2x 8 ft (2.4 m) red adjustable anchor, 1x line lock, 1x pair of velcro for DIY tree pro, 1x mesh storage bag, 1x instruction sheet. Webbing is the 25.4 mm tubular polyester eLine, MBS 21.5 kN.",
+        "version": null,
+        "manufacturer": "YogaSlackers",
+        "active": true
     }
 ]

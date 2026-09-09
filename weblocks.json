@@ -4073,23 +4073,25 @@
             "Material": "High Strength Steel",
             "Weight": "580gr",
             "WLL": "N/A",
-            "MBS": "95kN",
+            "MBS": "80kN",
             "Anchor connection type": "Double Mounting Hole",
             "Webbing connection type": "Rotatable Side Plates",
-            "Compatible webbing width": "24mm - 51mm",
+            "Compatible webbing width": "30mm - 52mm",
             "Diverter diameter": "30mm",
             "Efficiency": "N/A",
             "Usage": "Trickline",
             "ISA approved": "N/A",
-            "Date introduced": "N/A",
+            "Date introduced": "Jul 2018",
             "Manufacturer": "Slack Inov",
             "Price (per unit)": "1 unit and above : 60.00 EUR"
         },
-        "date_introduced": null,
+        "date_introduced": 1531947600000,
         "name": "Slackibloc Jump 1.2",
         "product_url": null,
         "active": false,
-        "style": "Tensionable Weblock"
+        "style": "Tensionable Weblock",
+        "description": "Tensionable weblock for trickline and jumpline tension, closed around the webbing with a rotating plate and no moving parts. Two connection eyes: one to back up or to pull on pulleys, the second the eye it must be tensioned by when slacking. Takes flat polyester and polyamide webbing as standard, and a reinforced wrap around the large roller holds slippery webbing (Dyneema, Vectran) at the cost of adjustability.",
+        "notes": "Specs from Slack Inov's own \"Notice d'utilisation SLACKIBLOC JUMP\" (5 pp., filed as the product's manual). This row and the row formerly at id 95 (\"Slackijump\") were two SlackDB scrapes of ONE product; 95 is removed and this row is the survivor, keeping the maker's \"1.2\" in the name. The manual settles which scrape described the hardware: it states 580 g and a rotating plate with two connection eyes, which is this row's 580 g, Rotatable Side Plates and Double Mounting Hole - 95 claimed 517 g, a captive pin and a single mounting hole. It also corrects BOTH scrapes on two figures. MBS is 80 kN per the manual; this row carried 95 kN and 95 carried 100 kN, and neither appears in the maker's own document. Compatible width is 30-52 mm: the manual gives 40-52 mm with no shims and 30-42 mm with two, so the range recorded here is the union of the two configurations, not a single quoted span - this row carried 24-51 mm and 95 carried 49-51 mm. The manual adds that connectors up to 20 mm diameter fit, and that thickness may be 0-10 mm in either configuration; the model has no column for either. date_introduced (Jul 2018) is carried over from 95, the only place it was recorded, and the manual does not contradict it. Price is this row's 60.00 EUR; 95 listed 65.00 EUR, and the manual quotes no price, so the cheaper of two undated scrapes of a product that is no longer sold is not a safe correction to make - both figures are recorded here."
     },
     {
         "id": 93,
@@ -4171,48 +4173,6 @@
         },
         "date_introduced": null,
         "name": "Slackibloc SR Quick Pin",
-        "product_url": null,
-        "active": false,
-        "style": "Tensionable Weblock"
-    },
-    {
-        "id": 95,
-        "image_url": "/api/gear/image_thumb/3069",
-        "details_url": "/gear_details/slackijump",
-        "brand": "Slack Inov",
-        "gear_sellers": [
-            "Spider Slacklines"
-        ],
-        "full_name": "Slack Inov Slackijump",
-        "manufacturer_info": {
-            "name": "Slack Inov",
-            "url": "/manufacturer_details/SlackInov#TAB-IMAGES",
-            "country": "France",
-            "country_flag_url": "/img/flags/FR.png"
-        },
-        "pricing": [
-            {
-                "text": "1 unit and above : 65.00 EUR"
-            }
-        ],
-        "specifications": {
-            "Material": "High Strength Steel",
-            "Weight": "517gr",
-            "WLL": "12kN",
-            "MBS": "100kN",
-            "Anchor connection type": "Mounting Hole",
-            "Webbing connection type": "Captive Pin",
-            "Compatible webbing width": "49mm - 51mm",
-            "Diverter diameter": "N/A",
-            "Efficiency": "N/A",
-            "Usage": "Trickline",
-            "ISA approved": "N/A",
-            "Date introduced": "Jul 2018",
-            "Manufacturer": "Slack Inov",
-            "Price (per unit)": "1 unit and above : 65.00 EUR"
-        },
-        "date_introduced": 1531947600000,
-        "name": "Slackijump",
         "product_url": null,
         "active": false,
         "style": "Tensionable Weblock"
@@ -4986,7 +4946,7 @@
     },
     {
         "id": 120,
-        "brand": "Yoga Slackers",
+        "brand": "YogaSlackers",
         "name": "Line Lock",
         "specifications": {
             "Material": "Aluminum",

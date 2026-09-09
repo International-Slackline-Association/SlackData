@@ -22,7 +22,8 @@ BRAND_ALIASES: dict[str, str] = {
     "slackPro": "lineGrip (formerly Slack Pro!)",
     "Slack Pro!": "lineGrip (formerly Slack Pro!)",
     "Spider slacklines": "Spider Slacklines",
-    "yogaslackers": "Yoga Slackers",
+    "Yoga Slackers": "YogaSlackers",
+    "yogaslackers": "YogaSlackers",
 }
 
 

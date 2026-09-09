@@ -31,6 +31,11 @@
       "petram_cito-4.jpg",
       "petram_cito-5.jpg"
     ],
+    "slackinov_shark": [
+      "slackinov_shark.jpg",
+      "slackinov_shark-2.jpg",
+      "slackinov_shark-3.jpg"
+    ],
     "slackmitra_line-mitra-webbing-gripper": [
       "slackmitra_line-mitra-webbing-gripper.jpg",
       "slackmitra_line-mitra-webbing-gripper-2.jpg",
@@ -75,11 +80,6 @@
       "spider_mouse-grip.jpg",
       "spider_mouse-grip-2.jpg",
       "spider_mouse-grip-3.jpg"
-    ],
-    "spider_shark": [
-      "spider_shark.jpg",
-      "spider_shark-2.jpg",
-      "spider_shark-3.jpg"
     ],
     "viper_grippex": [
       "viper_grippex.jpg",
@@ -450,11 +450,17 @@
     "viper_23m-active-slackline": [
       "viper_23m-active-slackline.jpg"
     ],
-    "yogaslack_eline-slackline-light-kit": [
-      "yogaslack_eline-slackline-light-kit.jpg"
+    "yogaslack_eline-108ft-kit": [
+      "yogaslack_eline-108ft-kit.jpg"
     ],
-    "yogaslack_eline-slacklinee-kit": [
-      "yogaslack_eline-slacklinee-kit.jpg"
+    "yogaslack_eline-full-kit": [
+      "yogaslack_eline-full-kit.jpg"
+    ],
+    "yogaslack_eline-light-kit": [
+      "yogaslack_eline-light-kit.jpg"
+    ],
+    "yogaslack_eline-pro-kit": [
+      "yogaslack_eline-pro-kit.jpg"
     ]
   },
   "treepros": {
@@ -538,6 +544,9 @@
       "viper_boomslang-tree-protectors.jpg",
       "viper_boomslang-tree-protectors-2.jpg",
       "viper_boomslang-tree-protectors-3.jpg"
+    ],
+    "yogaslack_tree-pro": [
+      "yogaslack_tree-pro.jpg"
     ]
   },
   "tricklinekits": {
@@ -876,6 +885,10 @@
     "gibbon_tube-line": [
       "gibbon_tube-line.jpg"
     ],
+    "landcruise_aeon": [
+      "landcruise_aeon.jpg",
+      "landcruise_aeon-2.jpg"
+    ],
     "landcruise_aloha-aka-aki-tidal": [
       "landcruise_aloha-aka-aki-tidal.jpg",
       "landcruise_aloha-aka-aki-tidal-2.jpg",
@@ -892,9 +905,7 @@
     "landcruise_core-2-ls": [
       "landcruise_core-2-ls.jpg",
       "landcruise_core-2-ls-2.jpg",
-      "landcruise_core-2-ls-3.jpg",
-      "landcruise_core-2-ls-4.jpg",
-      "landcruise_core-2-ls-5.jpg"
+      "landcruise_core-2-ls-3.jpg"
     ],
     "landcruise_matrix": [
       "landcruise_matrix.jpg"
@@ -1255,6 +1266,10 @@
     "slacktools_strong-ii": [
       "slacktools_strong-ii.jpg"
     ],
+    "slacktvty_2faces": [
+      "slacktvty_2faces.jpg",
+      "slacktvty_2faces-2.jpg"
+    ],
     "slacktvty_acroline": [
       "slacktvty_acroline.jpg",
       "slacktvty_acroline-2.jpg",
@@ -1374,6 +1389,10 @@
     ],
     "spider_zao": [
       "spider_zao.jpg"
+    ],
+    "wallace_steel-cable": [
+      "wallace_steel-cable.jpg",
+      "wallace_steel-cable-2.jpg"
     ],
     "yogaslack_eline": [
       "yogaslack_eline.jpg"
