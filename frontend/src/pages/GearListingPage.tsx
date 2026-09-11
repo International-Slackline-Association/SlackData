@@ -8,6 +8,8 @@
 
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
+import { OriginProvider, useCurrentOrigin } from '@/context/OriginContext'
+import { originState } from '@/utils/origin'
 import { getGearType } from '@/config/gearTypes'
 import { useGearList } from '@/hooks/useGearList'
 import { useCurrency } from '@/context/CurrencyContext'
@@ -87,6 +89,11 @@ export default function GearListingPage() {
   // that's no longer sold (active === false).
   const [status, setStatus] = useState<Status>('all')
   const navigate = useNavigate()
+
+  // What a link leaving this page should offer as the way back: this listing,
+  // filters and sort included, under the gear type's own name. Every card link
+  // below picks it up through the provider around the results.
+  const origin = useCurrentOrigin(meta?.label ?? '')
 
   // Below `lg` the sidebar has nowhere to live, so filters and sort move into a
   // bottom sheet. `isDesktop` (matchMedia, not a `hidden lg:block` pair) decides
@@ -307,20 +314,18 @@ export default function GearListingPage() {
   }, [items, selectedIds])
 
   const viewComparison = () =>
-    navigate(`/${meta?.slug}/compare?ids=${selectedIds.join(',')}`)
+    navigate(`/${meta?.slug}/compare?ids=${selectedIds.join(',')}`, {
+      state: originState(origin),
+    })
 
   // The two clear actions. Both drop every filter and put the status scope back
   // to All; they differ on the search term — the empty state's button keeps it
   // (you asked for those words; the filters are what dead-ended), the sidebar's
   // "Clear all" wipes it.
-  const clearFilters = () => {
-    url.clearFilters()
-    setStatus('all')
-  }
-  const clearAll = () => {
-    url.clearAll()
-    setStatus('all')
-  }
+  // Both wipe ?status= and the stretch params along with the rest of the query
+  // string, so neither needs to reset anything by hand.
+  const clearFilters = () => url.clearFilters()
+  const clearAll = () => url.clearAll()
 
   // How many filters are engaged, for the mobile "Filters (n)" badge — the only
   // signal, once the sidebar is behind a sheet, that the list is narrowed at all.
@@ -358,6 +363,10 @@ export default function GearListingPage() {
   }
 
   return (
+    // Everything below links out under this page's identity: a card opened from
+    // here comes back to HERE — this gear type, these filters, this sort — and
+    // not to the bare listing (see context/OriginContext.tsx).
+    <OriginProvider origin={origin}>
     <div data-cy="gear-listing">
       <h1 className="mb-4 text-2xl font-bold text-gray-900 lg:mb-6">{meta.label}</h1>
 
@@ -561,5 +570,6 @@ export default function GearListingPage() {
         </Sheet>
       )}
     </div>
+    </OriginProvider>
   )
 }

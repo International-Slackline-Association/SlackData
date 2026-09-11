@@ -286,6 +286,18 @@ Non-phase engineering tasks not tracked in [PLAN.md](PLAN.md) (frontend roadmap)
 
 ## ✅ Shipped (kept here briefly so the entries above don't get re-opened)
 
+- **Back goes where you actually were.** Three parts of one complaint, all fixed.
+
+  - **The back link on a detail page was `/${slug}`** — the gear type's bare listing, whoever sent
+    you. Open a webbing from Balance Community's page and it said "← Webbings" and meant it; open
+    one from a filtered listing and the filters were gone. Links into a detail page now carry the
+    page they were clicked on in `location.state` (`utils/origin.ts`, `context/OriginContext.tsx`),
+    so the link reads "← Balance Community" or "← Compare Webbings" and returns there, filters and
+    sort intact. `components/layout/BackLink.tsx` is a real `<Link>` with a real href — middle-click
+    and copy-link work — but a plain left click prefers `history.back()` when we know we arrived by
+    PUSH, so the scroll offset `useScrollRestoration` keeps is not thrown away by re-pushing the URL.
+    An origin out of history state is validated before it becomes an href
+    (`tests/unit/origin.test.ts`): a protocol-relative path is not a same-site path.
 - **Listing toolbar: fixed-size search, and the accuracy note moved out.** The search input was
   `min-w-0 flex-1 max-w-64` — sized from whatever the flex-wrap row had left over, which made it a
   residue of everything else on the row rather than a control with a size. At ~1200px it resolved to

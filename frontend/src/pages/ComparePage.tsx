@@ -25,7 +25,10 @@ import { useCurrency } from '@/context/CurrencyContext'
 import { SPEC_ROWS, type PriceFormatter } from '@/config/specRows'
 import type { AnyItem } from '@/utils/format'
 import type { GearSlug } from '@/types'
+import BackLink from '@/components/layout/BackLink'
 import BrandLink from '@/components/brand/BrandLink'
+import { OriginProvider, useCurrentOrigin } from '@/context/OriginContext'
+import { originState } from '@/utils/origin'
 import StretchChart, { STRETCH_CHART_MIN_SERIES, stretchSeries } from '@/components/gear/StretchChart'
 import NotFoundPage from './NotFoundPage'
 
@@ -35,6 +38,10 @@ export default function ComparePage() {
   const [params] = useSearchParams()
   const { items, loading } = useGearList(meta?.slug ?? '', !!meta?.available)
   const { priceText } = useCurrency()
+  // This table as a back-link target. The column links are written here, in the
+  // page itself, so they can't read it off the provider below them — they take
+  // it straight from the same value.
+  const origin = useCurrentOrigin(meta ? `Compare ${meta.label}` : '')
 
   // Every compared price is shown in the one display currency — comparing a
   // 5377 RUB grip against an 89 USD one side by side is exactly the question
@@ -81,14 +88,14 @@ export default function ComparePage() {
   if (!meta) return <NotFoundPage />
 
   return (
+    <OriginProvider origin={origin}>
     <div data-cy="compare-page">
-      <Link
+      {/* Back to the listing the picks were made on, filters intact. */}
+      <BackLink
         data-cy="compare-back-link"
-        to={`/${meta.slug}`}
+        fallback={{ path: `/${meta.slug}`, label: meta.label }}
         className="inline-flex items-center gap-1 text-sm text-teal-primary hover:underline"
-      >
-        ← {meta.label}
-      </Link>
+      />
 
       <h1 className="mb-6 mt-3 text-2xl font-bold text-gray-900">Compare {meta.label}</h1>
 
@@ -126,6 +133,7 @@ export default function ComparePage() {
                     <Link
                       data-cy="compare-col-name"
                       to={`/${meta.slug}/${item.id}`}
+                      state={originState(origin)}
                       className="font-bold text-gray-900 hover:text-teal-primary"
                     >
                       {String(item.name)}
@@ -179,5 +187,6 @@ export default function ComparePage() {
         </>
       )}
     </div>
+    </OriginProvider>
   )
 }

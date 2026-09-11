@@ -3,11 +3,16 @@
 // The card body itself lives in GearDetailBody, shared with the listing page's
 // Detailed view so the two can't drift. This page owns the fetch, the loading /
 // missing states and the back link; everything below that is the shared body.
+//
+// The back link is NOT `/${slug}`: an item is opened from a filtered listing, a
+// manufacturer's inventory or the compare table, and going back to the bare
+// listing threw all three away. See utils/origin.ts.
 
 import { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { fetchGearItem } from '@/api/gear'
 import GearDetailBody from '@/components/gear/GearDetailBody'
+import BackLink from '@/components/layout/BackLink'
 import ProductManuals from '@/components/gear/ProductManuals'
 import SafetyNotice from '@/components/layout/SafetyNotice'
 import SuggestButton from '@/components/submissions/SuggestButton'
@@ -52,13 +57,14 @@ export default function GearDetailPage() {
 
   return (
     <div data-cy="gear-detail" className="mx-auto max-w-5xl">
-      <Link
+      {/* Back to whatever opened this item — the filtered listing, the
+          manufacturer's page, the compare table — falling back to the gear
+          type's own listing for a link that arrived from outside the site. */}
+      <BackLink
         data-cy="detail-back-link"
-        to={`/${meta.slug}`}
+        fallback={{ path: `/${meta.slug}`, label: meta.label }}
         className="text-sm text-gray-500 hover:text-teal-primary"
-      >
-        ← {meta.label}
-      </Link>
+      />
 
       <article className="mt-4 rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
         <GearDetailBody item={item} meta={meta} />

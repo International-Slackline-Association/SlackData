@@ -162,3 +162,83 @@ describe('Scroll restoration', () => {
     cy.window().its('scrollY').should('be.lessThan', 50)
   })
 })
+    cy.get('[data-cy="gear-card"]').first().find('[data-cy="brand-link"]').click()
+    // Same wait as above: the brand page renders its back link once the whole
+    // directory has loaded.
+    cy.get('[data-cy="brand-back-link"]', { timeout: 30000 })
+      .should('contain.text', 'Webbings')
+      .and('have.attr', 'href')
+      .and('include', 'q=core')
+  })
+
+  it('falls back to the gear type for an item opened by a bare link', () => {
+    // No origin in history state — a pasted link, or a search result.
+    cy.visit('/webbings')
+    cy.get('[data-cy="gear-card-name"]').first().invoke('attr', 'href').then((href) => {
+      cy.visit(href as string)
+      cy.get('[data-cy="detail-back-link"]')
+        .should('contain.text', 'Webbings')
+        .and('have.attr', 'href', '/webbings')
+      cy.get('[data-cy="detail-back-link"]').click()
+      cy.url().should('match', /\/webbings$/)
+    })
+  })
+})
+
+// The two filters that used to live in component state, and so silently
+// reverted when you came back to the listing. Both are query params now
+// (?status=, ?kn=/?stretch_min=/?stretch_max=) — see hooks/useUrlState.ts.
+describe('Back restores the filters that were not in the URL', () => {
+  it('brings the status scope back', () => {
+    cy.visit('/webbings')
+    cy.get('[data-cy="status-historic"]').click()
+    cy.url().should('include', 'status=historic')
+    cy.get('[data-cy="gear-card"]').should('have.length.greaterThan', 0)
+
+    cy.get('[data-cy="gear-card-name"]').first().click()
+    cy.url().should('match', /\/webbings\/\d+$/)
+    cy.go('back')
+
+    cy.get('[data-cy="status-historic"]').should('have.attr', 'data-active', 'true')
+    // Historic scope = legacy gear only, so every card wears the red badge.
+    cy.get('[data-cy="gear-card"]').should('have.length.greaterThan', 0)
+    cy.get('[data-cy="gear-card"]').first().find('[data-cy="legacy-badge"]').should('exist')
+  })
+
+  it('brings the compare selection back', () => {
+    cy.visit('/webbings')
+    cy.get('[data-cy="gear-card"]').should('have.length.greaterThan', 2)
+    cy.get('[data-cy="gear-card"]').eq(0).find('[data-cy="btn-compare"]').click()
+    cy.get('[data-cy="gear-card"]').eq(1).find('[data-cy="btn-compare"]').click()
+    cy.get('[data-cy="compare-bar-count"]').should('contain.text', '2')
+
+    // The detour that used to empty the bar: open one of the picks to check a
+    // number, then come back.
+    cy.get('[data-cy="gear-card-name"]').eq(0).click()
+    cy.url().should('match', /\/webbings\/\d+$/)
+    cy.go('back')
+
+    cy.get('[data-cy="compare-bar-count"]').should('contain.text', '2')
+    cy.get('[data-cy="gear-card"]').eq(0)
+      .find('[data-cy="btn-compare"]').should('have.attr', 'data-active', 'true')
+  })
+
+  it('brings the engaged stretch kN back', () => {
+    const stretch = '[data-cy="filter-group"][data-group="stretch"]'
+    cy.visit('/webbings')
+    cy.get(stretch).find('[data-cy="stretch-kn-pill"]').first().click()
+    cy.url().should('include', 'kn=')
+    cy.get(stretch).find('[data-cy="stretch-kn-pill"][data-active="true"]')
+      .invoke('attr', 'data-kn')
+      .then((kn) => {
+        cy.get('[data-cy="gear-card-name"]').first().click()
+        cy.go('back')
+        cy.get(stretch)
+          .find(`[data-cy="stretch-kn-pill"][data-kn="${kn}"][data-active="true"]`)
+          .should('exist')
+        // The filter it drives is back too: every card carries a stretch % at
+        // that kN, which is only attached while a pill is engaged.
+        cy.get('[data-cy="gear-card"]').first().should('have.attr', 'data-stretch-percent')
+      })
+  })
+})

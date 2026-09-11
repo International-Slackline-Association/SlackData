@@ -15,6 +15,7 @@ import { Link } from 'react-router-dom'
 import type { GearTypeMeta } from '@/config/gearTypes'
 import { CARD_DATA_FIELDS, INLINE_SPECS } from '@/config/gearFields'
 import { useCurrency } from '@/context/CurrencyContext'
+import { useOriginState } from '@/context/OriginContext'
 import { dataAttrs, formatValue, type AnyItem } from '@/utils/format'
 import { imageUrls } from '@/utils/images'
 import BrandLink from '@/components/brand/BrandLink'
@@ -51,6 +52,9 @@ export default function GearCard({
   onToggleCompare?: (id: number) => void
 }) {
   const { slug, hasISA } = meta
+  // Where this card is being shown — the filtered listing, a manufacturer's
+  // page — so the item it opens can offer the way back to it.
+  const originState = useOriginState()
   // The card shows the converted figure only — the as-sold original lives on
   // the detail page and in the compare cell, where there's room for it.
   const price = useCurrency().priceText(item, slug)
@@ -107,6 +111,7 @@ export default function GearCard({
       <Link
         data-cy="gear-card-link"
         to={`/${slug}/${item.id}`}
+        state={originState}
         aria-hidden="true"
         tabIndex={-1}
         className="absolute inset-0 z-[1]"
@@ -153,6 +158,7 @@ export default function GearCard({
         <Link
           data-cy="gear-card-name"
           to={`/${slug}/${item.id}`}
+          state={originState}
           // relative z-10: the real, focusable link, kept above the overlay.
           className="relative z-10 font-bold leading-snug text-gray-900 hover:text-teal-primary"
         >

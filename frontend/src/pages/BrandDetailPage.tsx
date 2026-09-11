@@ -15,8 +15,10 @@
 // long catalogue, not something worth putting in the URL.
 
 import { useMemo, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
+import BackLink from '@/components/layout/BackLink'
 import GearGrid from '@/components/gear/GearGrid'
+import { OriginProvider, useCurrentOrigin } from '@/context/OriginContext'
 import { GEAR_TYPES } from '@/config/gearTypes'
 import { useBrandDirectory } from '@/hooks/useBrandDirectory'
 import { buildBrandSections } from '@/utils/brandSections'
@@ -43,6 +45,10 @@ export default function BrandDetailPage() {
     )
   }, [brand, gearBySlug])
 
+  // This brand's page as the way back from any item opened on it — the one case
+  // where "← Webbings" was plainly the wrong answer.
+  const origin = useCurrentOrigin(brand?.name ?? '')
+
   const toggle = (slug: string) =>
     setCollapsed(prev => ({ ...prev, [slug]: !prev[slug] }))
 
@@ -61,14 +67,15 @@ export default function BrandDetailPage() {
   if (!brand) return <NotFoundPage />
 
   return (
+    <OriginProvider origin={origin}>
     <div data-cy="brand-detail-page">
-      <Link
+      {/* Back to whatever opened this brand — the directory, or the listing
+          whose card carried its name. */}
+      <BackLink
         data-cy="brand-back-link"
-        to="/manufacturers"
+        fallback={{ path: '/manufacturers', label: 'Manufacturers' }}
         className="inline-flex items-center gap-1 text-sm text-teal-primary hover:underline"
-      >
-        ← Manufacturers
-      </Link>
+      />
 
       {brand.website ? (
         <a
@@ -159,5 +166,6 @@ export default function BrandDetailPage() {
         })
       )}
     </div>
+    </OriginProvider>
   )
 }

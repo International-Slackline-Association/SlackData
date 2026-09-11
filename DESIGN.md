@@ -515,7 +515,11 @@ it holds a safety warning next to the product name instead of burying it under t
 seller block goes *after* the banner for the same reason — a list of shops must never push a recall
 further from the name of the thing recalled.
 
-**Back link**: `← Webbings` in small gray text, hover teal.
+**Back link**: small gray text, hover teal — and it names **where you came from**, not the gear
+type. Opened from a filtered listing it reads `← Webbings` and returns to that listing with its
+search, sort and filters intact; opened from a manufacturer's page it reads `← Balance Community`;
+from the compare table, `← Compare Webbings`. Only an item reached by a bare link — pasted, or from
+a search engine — falls back to the plain gear-type listing. See § Back links.
 
 **Main card** (white, rounded, shadow):
 
@@ -853,6 +857,26 @@ spec grid — the row is declared for compare and suppressed in `SpecTable`.
 **Footer block** (same for all types):
 - Description paragraph in gray, with relaxed line-height — omit if null
 - "View product →" button: solid teal pill, white text — links to `product_url`. Omit if null.
+
+---
+
+## Back links
+
+Every page that shows one thing — a gear item, a manufacturer, a comparison — opens with a
+`← <somewhere>` link, and that somewhere is **the page it was opened from**, not a fixed parent.
+
+- A link into a detail page carries the URL and name of the page it was clicked on, in history
+  state (`utils/origin.ts`). So the back link says `← Webbings` (with the filters that were in play),
+  or `← Balance Community`, or `← Compare Webbings`, and goes there.
+- **Only the current page's own filters come back with it** — they are in the query string, which is
+  what gets carried. Nothing is remembered about pages further back.
+- **A bare link falls back** to the obvious parent: the gear type's listing for an item, the
+  directory for a manufacturer. That is what an arrival from outside the site gets, and it is what
+  every one of these links used to do in every case.
+- It is a **real link** with a real href, so middle-click and "copy link address" work. A plain
+  left click prefers the browser's own Back when we know that is where the origin is, so the
+  listing's scroll position (§ scroll restoration, `useScrollRestoration`) is restored rather than
+  thrown away by pushing the same URL afresh.
 
 ---
 
