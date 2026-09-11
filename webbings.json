@@ -5611,7 +5611,7 @@
         "date_introduced": 1534744800000,
         "product_url": "https://www.slacktivity.com/y2k",
         "width": 25.4,
-        "webbing_construction": "Flat",
+        "webbing_construction": "Core/Sheath",
         "isa_certified": true,
         "priceMeter": 4.6,
         "currency": "EUR",
@@ -11954,14 +11954,9 @@
             "Nylon"
         ],
         "width": 25,
-        "weight": 27.5,
-        "breakingStrength": null,
-        "stretch": [
-            {
-                "kn": 5,
-                "percent": 2.5
-            }
-        ],
+        "weight": 36,
+        "breakingStrength": 27,
+        "stretch": null,
         "thickness": null,
         "webbing_construction": "Flat",
         "isa_certified": false,
@@ -11969,8 +11964,8 @@
         "date_introduced": null,
         "priceMeter": null,
         "currency": null,
-        "notes": "Specs from Wall Ace's own announcement post (2026-09-05), the only source: the first length has reached Australia and the main shipment is about a month out, so there is no product page yet and product_url is null. Maker's own wording: Dyneema centre with purple nylon edges, 25 mm, 27.5 g/m, stretch \"about 2-3%\" at 5 kN - recorded here as a single 2.5% point, an approximate figure and not a measured curve. Breaking strength is not stated anywhere and is left null, which is why the derived classification reads Not for Highline; it is unknown, not a judgement. Sold ONLY as a complete highline kit - 75 m main plus 81 m backup, 4 loops included - at an indicative, not-yet-finalised ~580 AUD for the kit. No priceMeter is recorded: `price` on a webbing is per metre, and dividing an unfinalised kit price by 156 m would invent a number the maker has not quoted.",
-        "active": true
+        "notes": "Specs confirmed direct by Wall Ace (2026-09-10), superseding the announcement-post figures this entry was first built from: 25 mm, 36 g/m (not 27.5), MBS 27 kN. That MBS is the strength of the webbing terminated in loops - the way the product is actually sold and used - not a raw tensile figure for the band, and it is what the derived classification is computed from. Construction is a Dyneema centre with purple nylon edges. Production has stopped - the maker's own summary of this webbing and its thinner twin, Duct Tape, is \"comfortable and cheap but not exactly high tech\" - so active is false, and there is no product page (product_url null). The announcement post this entry was first built from, which had a first length reaching Australia and a main shipment a month out, described the end of the run rather than the start of one. Sizing: sold only as a complete highline kit, and always in the same two segments - a 75 m main and an 83 m backup (4 loops included), at an indicative, not-yet-finalised ~580 AUD for the kit. No priceMeter is recorded: `price` on a webbing is per metre, and dividing an unfinalised kit price by 158 m would invent a number the maker has not quoted. Stretch is recorded as null, deliberately. The maker's own account is that it is very hard to put one figure on: roughly 5% between 1 and 3 kN, then about 2.5% more between 3 and 5 kN - so on the order of 7.5% total at 5 kN - with the curve flattening off as load climbs further. That is a shape described from memory, not a measured curve, and the earlier single 2.5% at 5 kN point taken from the announcement post was wrong by a factor of three. A wrong curve on a chart is worse than no curve. Photos: the two Wall Ace webbing images we hold are shared between Steel Cable and Duct Tape. The products are the same weave in two thicknesses, and the maker's own view is that the same picture serves both - and that the one filed under Steel Cable may in fact be Duct Tape. Which image is which is not settled.",
+        "active": false
     },
     {
         "id": 254,
@@ -12079,5 +12074,51 @@
         "description": "25 mm violet flatband with a single stripe, article SL80240/25-A. Cut to order in 5 m steps from 5 m to 250 m. Slackstar recommended it either short (to 15 m) or as a longline out to 250 m.",
         "notes": "Specs from Slackstar's own product page as captured 2013-06-24 (the only capture); product_url is that Wayback capture. The product is gone: slackstar.de now redirects to sicherungsprofi.de/slackstar/, whose range is Tartan, Distance, Nature and Basic with no Long Way among them (checked 2026-09-05) - hence active false. Maker's own figures: width 25 mm flatband, violet with 1 stripe, weight 84 g/m, breaking load 4500 kg. That is recorded as 44.1 kN (4500 x 9.80665 / 1000); BACKLOG.md carried it as \"10,000 lbs (~44.5 kN)\", which is the same claim converted twice - 4500 kg is 9,921 lb. Stretch is left null on purpose: the page says \"3 - 4 %\" with NO load, and a percentage without a kN figure cannot become a point on the stretch curve. materialType is \"Other\" because the page never states the fiber and `material` is NOT NULL in the model; 3-4% at 25 mm suggests polyester but the source does not say so. Sold by the metre on a length-price schedule: 5 m 9.10 EUR through 100 m 213.00 EUR to 250 m 534.70 EUR. priceMeter is the 100 m price over its length, 2.13 EUR/m; short lengths are cheaper per metre (1.82 at 5 m) and the marginal rate above 100 m is about 2.15.",
         "active": false
+    },
+    {
+        "id": 259,
+        "name": "Duct Tape",
+        "brand": "Wall Ace",
+        "materialType": "Hybrid",
+        "materialComposition": [
+            "Dyneema/HMPE",
+            "Nylon"
+        ],
+        "width": 25,
+        "weight": 27,
+        "breakingStrength": 13,
+        "stretch": null,
+        "thickness": null,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "product_url": null,
+        "date_introduced": null,
+        "priceMeter": null,
+        "currency": null,
+        "notes": "Specs direct from Wall Ace (2026-09-10), the only source - there is no product page. In the maker's words this is exactly the same webbing as their Steel Cable, just thinner: the same 25 mm Dyneema-centre, nylon-edge weave, at 27 g/m with an MBS of 13 kN. As with Steel Cable that MBS is the looped, terminated strength rather than a raw tensile figure. Production has stopped, as it has for Steel Cable - the maker's own summary of both is \"comfortable and cheap but not exactly high tech\", which is why - so active is false. Sizing: sold only as a complete highline kit, and always in the same two segments - a 75 m main and an 83 m backup (4 loops included), at an indicative, not-yet-finalised ~580 AUD for the kit. No priceMeter is recorded: `price` on a webbing is per metre, and dividing an unfinalised kit price by 158 m would invent a number the maker has not quoted. Stretch is recorded as null, deliberately. The maker's own account is that it is very hard to put one figure on: roughly 5% between 1 and 3 kN, then about 2.5% more between 3 and 5 kN - so on the order of 7.5% total at 5 kN - with the curve flattening off as load climbs further. That is a shape described from memory, not a measured curve, and the earlier single 2.5% at 5 kN point taken from the announcement post was wrong by a factor of three. A wrong curve on a chart is worse than no curve. Photos: the two Wall Ace webbing images we hold are shared between Steel Cable and Duct Tape. The products are the same weave in two thicknesses, and the maker's own view is that the same picture serves both - and that the one filed under Steel Cable may in fact be Duct Tape. Which image is which is not settled.",
+        "active": false
+    },
+    {
+        "id": 260,
+        "name": "Path",
+        "brand": "Cong Gear",
+        "materialType": "Hybrid",
+        "materialComposition": [
+            "Polyester",
+            "Dyneema/HMPE"
+        ],
+        "width": 20,
+        "weight": 31,
+        "breakingStrength": 40,
+        "stretch": null,
+        "thickness": null,
+        "webbing_construction": null,
+        "isa_certified": true,
+        "product_url": null,
+        "date_introduced": null,
+        "priceMeter": null,
+        "currency": null,
+        "notes": "Added 2026-09-10 from the ISA's own approval graphic (wp-content/uploads/2026/09/path2.jpg), which is the only source: ISA APPROVED, Highline Webbing, ISA:41:A+, and the maker's specs printed on it - 20 mm, 31 g/m, MBS/WLL 40 / 12 kN. This closes the \"Cong Gear Path\" entry that sat unmatched on the ISA-approved list, and \"The Path\" among the named-but-unsourced webbings; they are one product, not two. Only the MBS is stored: the 12 kN WLL is the ISA's working load limit, which we hold no column for and which is not a property of the weave. Fibers are recorded as Polyester + Dyneema/HMPE on the operator's information, not from a published spec sheet - the graphic names no material, and 40 kN at 31 g/m in 20 mm is light for either fiber alone. Either fiber grades A+ at 40 kN, so the derived classification agrees with the badge. webbing_construction, thickness, stretch, price and product URL are null: the graphic states none of them, and Cong Gear has no product page we hold. Colour is not stored either: `colors` is a model field no webbing loader maps, so a value there would be dead seed data - the webbing is white with one red and one blue edge thread. Country of origin is unknown too - the manufacturers.json entry carries a null country rather than a guess from the 道 (dao, \"path\") glyph on the graphic.",
+        "active": true
     }
 ]

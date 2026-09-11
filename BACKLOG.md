@@ -10,6 +10,30 @@ Non-phase engineering tasks not tracked in [PLAN.md](PLAN.md) (frontend roadmap)
   still need a keep/reject call before they can be. Follow the per-type schema notes in that file's
   "Approved" section — the webbing and weblock loaders take different object shapes.
 
+- [ ] **Named webbings we know exist but hold no specs for.** Twelve products surfaced by name only
+  — no manufacturer confirmed for most, no width, MBS, weight, stretch or price. None of them are in
+  `webbings.json` today. They are recorded here rather than seeded as stubs: a webbing row needs
+  `width` NOT NULL, and the two ISA stubs in the entry below already show what that costs (BoomBoom seeds as
+  **0 mm**). Source each one, then add it the normal way — id, brand with a `manufacturers.json`
+  entry, `active` flag.
+
+  - [ ] **Mystery Tube**
+  - [x] **The Path** — added 2026-09-10 as webbing **260**, Cong Gear "Path".
+  - [ ] **TWTSNBN** ("the webbing that shall not be named")
+  - [ ] **Float**
+  - [ ] **PHAT**
+  - [ ] **Pure**
+  - [ ] **PowerLine** (HopOn) — reviewed at
+    <https://www.outdoorgearlab.com/reviews/climbing/slackline/hopon-powerline>, which is a
+    sourceable spec sheet. HopOn is not one of our manufacturers yet.
+  - [ ] **Marmot Tube** (Mammot Tubular)
+  - [ ] **Nathan Paulin castle special** — a one-off/limited line rather than a catalogue product;
+    decide whether it belongs in the catalogue at all before sourcing it. (Techni Sangles)
+  - [ ] **Dynosaur** (Santi)
+  - [ ] **Bearsling**
+  - [x] **Duct Tape** (Wall Ace) — added 2026-09-10 as webbing **259**, from the maker direct:
+    the same 25 mm Dyneema-centre/nylon-edge weave as their Steel Cable, just thinner.
+
 - [ ] **Add the gear items the ISA warnings point at.** Every entry in
   [isa_gear_warnings.json](isa_gear_warnings.json) now carries a `match` block (`gearType`,
   `gearIds`, `gearNames`, `confidence`, `note`) resolving it against the catalogue — 53 exact,
@@ -37,12 +61,19 @@ Non-phase engineering tasks not tracked in [PLAN.md](PLAN.md) (frontend roadmap)
   - [ ] **Grigri** (Petzl) — ISA 42, brake, still in production. Neither a brake type nor Petzl as
     a brand; the only entry from outside the slackline industry.
 
-  Two stubs were already created this way and are seeded from the root JSON with `active: false` and
-  no specs beyond what the ISA entry itself states: **Slacktivity Hangover 1.0**
-  (`rollers.json`, roller 22, `slider_type: Carabiner`) for ISA 45, and **Slack Inov BoomBoom**
-  (`webbings.json`, webbing 246) for ISA 78. Both carry a wart worth fixing when specs surface:
-  the required NOT NULL columns fall to their fallback buckets (`roller_material`/`lock_type`/
-  `bearing_material` → `Other`, `material` → `["Other"]`, and BoomBoom's `width` seeds as **0 mm**).
+  *A stub that still has to be sourced:*
+  - [ ] **Slacktivity Hangover 1.0** (`rollers.json`, roller 22) for ISA 45. Created so the warning
+    had something to point at, and `slider_type: Carabiner` plus `active: false` is the whole of
+    what it states — every other field in the seed is `null`. That is not neutral on the site:
+    `load_rollers.py` runs the three NOT NULL enums through `get_roller_material` / `get_lock_type` /
+    `get_bearing_material`, which fall to **`Other`** on an empty string, so the detail page prints
+    three specs the seed never claimed. Source it (Slacktivity's own page or a capture), or decide
+    the fallbacks should be nullable columns.
+
+  The other stub, **Slack Inov BoomBoom** (`webbings.json` 246, ISA 78), is done — it carries real
+  manufacturer specs now (25 mm tubular nylon, 52 g/m, 27 kN, a full 1–20 kN stretch curve, the
+  Spider Slacklines co-listing). Only price and product URL are still unknown, and it stays
+  `active: false`.
 
   The 10 `ambiguous` matches are a separate, smaller call: the ISA names one product where we hold
   several rows (EQB Katana/Katana FX, Mithril Pull/Quick Pin, Slacktivity SlackDuck/-DP, Raed TiLock
@@ -56,9 +87,18 @@ Non-phase engineering tasks not tracked in [PLAN.md](PLAN.md) (frontend roadmap)
   reconciles it against the DB, setting `isa_certified` (top-level bool on webbing / leashring /
   grip / starterkit / tricklinekit; `specifications["ISA approved"]` string `"true"` on weblock;
   `isa_approved` on roller). Match on brand + model. Report/queue items on the ISA list that have
-  no matching row so the catalog can be filled in (as of last manual sync these were unmatched:
-  BC Wafer 2.0, BC Wafer XL, BC Loop, BC Threaded Highline Leash, Cong Gear Path,
-  Slack Inov Zenlock, SlackX Orange, Slacktivity HighlineLeash).
+  no matching row so the catalog can be filled in. Four of the eight items unmatched at the last
+  manual sync are now held — **BC Wafer 2.0** and **BC Wafer XL** (grips 15, 16), **Slack Inov
+  Zenlock** (weblock 112) and **Cong Gear Path** (webbing 260). What is left:
+
+  - **SlackX Orange** — held, as `Radrigs Orange` (weblock 58). The approval names the **seller**,
+    so a brand+model match closes it only if it consults `gear_sellers` (SlackX is named there).
+    This is the one unmatched entry that is a matching bug rather than missing data.
+  - **BC Loop** — the BC Aluminum Leash Ring
+  - **BC Threaded Highline Leash** and **Slacktivity HighlineLeash** — leashes, a gear type we do
+    not model at all. Nothing to match until one exists.
+  - ~~**Cong Gear Path**~~ — closed 2026-09-10: held as webbing **260**, and Cong Gear is now a
+    manufacturer (catalog_id 100). A brand+model match reaches it.
 
 - [ ] **Add bungees as a gear type.** The `Bungee` model already exists on branch
   `bungees_ringpadding` (`slack_data/models/bungees.py`) but has **no seed JSON, no loader, no
