@@ -24,11 +24,13 @@ export const STRETCH_CHART_MIN_SERIES = 2
 // run past it are reachable through the expand control, never lost.
 export const DEFAULT_MAX_KN = 20
 
-// Up to ten items can be compared, but eight is where a validated categorical
-// colour scale ends — a ninth line would either repeat a hue that already means
-// something else or arrive as an indistinguishable gray. So the plot draws the
-// first eight curves in column order and names the rest, which the table view
-// shows in full. Ten overlapping lines is not a readable chart anyway.
+// The palette has one validated slot per comparable item (ten), so every
+// compared webbing that has a curve is plotted — nothing is silently left off.
+// The cap is still the palette's length rather than COMPARE_MAX: slot 11+ is
+// gray, and two gray lines would be two items sharing an identity. So if the
+// comparison cap ever rises past the palette, the plot draws what it can colour
+// and NAMES the rest (the over-cap note below), which is why that path stays
+// even though nothing reaches it today.
 export const MAX_PLOTTED_SERIES = SERIES_COLORS.length
 
 export function stretchSeries(items: AnyItem[], maxKn = Infinity): Series[] {
@@ -67,8 +69,8 @@ export default function StretchChart({ items }: { items: AnyItem[] }) {
   // Clamping must never turn a comparison into a single line: if only one
   // webbing was measured inside the window, open on the full range instead.
   const expanded = expandedChoice ?? inWindow.length < STRETCH_CHART_MIN_SERIES
-  // The table shows every curve in the current window; the plot shows the first
-  // eight of them, because that is where a validated colour scale ends.
+  // The table shows every curve in the current window; the plot shows the ones
+  // the palette can give a distinct colour — today, all of them.
   const tableSeries = expanded ? allCurves : inWindow
   const series = useMemo(() => tableSeries.slice(0, MAX_PLOTTED_SERIES), [tableSeries])
   const loads = useMemo(() => xUnion(tableSeries), [tableSeries])
@@ -116,7 +118,7 @@ export default function StretchChart({ items }: { items: AnyItem[] }) {
             </button>
           )}
           {/* The table is the accessible equivalent of the plot, not a fallback
-              for a failure — two palette hues sit below 3:1 on white, and some
+              for a failure — four palette hues sit below 3:1 on white, and some
               readers want the numbers regardless. */}
           <div data-cy="stretch-chart-toggle" className="flex rounded-lg bg-gray-100 p-0.5">
             <button
@@ -222,8 +224,8 @@ export default function StretchChart({ items }: { items: AnyItem[] }) {
 
       {overCap.length > 0 && view === 'chart' && (
         <p data-cy="stretch-chart-over-cap" className="mt-3 text-xs text-gray-400">
-          Not plotted — {MAX_PLOTTED_SERIES} lines is the readable limit: {overCap.join(', ')}. They
-          are in the Table view.
+          Not plotted — {MAX_PLOTTED_SERIES} lines is the limit a distinct colour can be
+          given to: {overCap.join(', ')}. They are in the Table view.
         </p>
       )}
 

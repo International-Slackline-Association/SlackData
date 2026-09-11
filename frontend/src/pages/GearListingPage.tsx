@@ -36,10 +36,12 @@ import NotFoundPage from './NotFoundPage'
 type View = 'cards' | 'detailed'
 
 // How many items one comparison may hold. The table scrolls sideways with the
-// label column pinned, so columns are cheap; the chart is the binding
-// constraint, and it plots the first eight curves (MAX_PLOTTED_SERIES) and names
-// the rest. Ten is what people actually want to line up — a brand's whole
-// range, or every 25mm webbing on the market.
+// label column pinned, so columns are cheap; the chart used to be the binding
+// constraint at eight, and the palette was widened to ten so it no longer is —
+// every compared webbing with a curve gets its own line (MAX_PLOTTED_SERIES).
+// Ten is what people actually want to line up — a brand's whole range, or every
+// 25mm webbing on the market. Raising this past ten means widening the palette
+// first, or the extra lines arrive gray.
 const COMPARE_MAX = 10
 
 function LoadingSkeleton() {

@@ -859,8 +859,8 @@ per gear type).
 **Up to ten items** (`COMPARE_MAX` in `GearListingPage.tsx`): past ten the Compare button on every
 unselected card and detailed panel is disabled. Four was too few for the question people actually
 bring here — a brand's whole range, or every 25mm webbing on the market — and columns are cheap,
-because the table scrolls sideways with the label column pinned. The **chart** is the one part with
-a lower limit: it plots eight curves (§ below).
+because the table scrolls sideways with the label column pinned. The **chart** used to cap lower at
+eight; the palette now carries ten validated slots, so it plots every compared curve (§ below).
 
 Cell rules: a blank value reads `—` rather than dropping the row; a row **no item of that gear type
 populates anywhere** is dropped entirely.
@@ -921,15 +921,20 @@ the item and does not repaint when another is removed:
 | 2 | `#EB6834` orange | | 4 | `#EDA100` yellow |
 | 5 | `#E87BA4` magenta | | 7 | `#4A3AA7` violet |
 | 6 | `#008300` green | | 8 | `#E34948` red |
+| 9 | `#00A6C0` cyan | | 10 | `#A05A2C` brown |
 
-Validated as a set against the white card surface (worst adjacent pair: CVD ΔE 9.1, normal-vision
-ΔE 19.6). **Eight slots is where the scale ends**, so although ten items can be compared, the plot
-draws the first **eight** curves in column order and names the rest below it
-(`data-cy="stretch-chart-over-cap"`, "Not plotted — 8 lines is the readable limit: …"), pointing at
-the Table view, which carries every compared curve. A ninth line would mean either a repeated hue —
-which would say two different products are the same thing — or an indistinguishable gray.
+**Ten slots — one per comparable item**, so a full comparison plots in full and no compared webbing
+is demoted to a footnote. Validated as a set against the white card surface on **adjacent** pairs
+(worst: CVD ΔE 9.1 protan, normal-vision ΔE 19.6) — the bar that applies to a legended, direct-labelled
+line chart. It does **not** clear all-pairs separation, and neither did the original eight (red↔orange
+ΔE 7.1 normal; brown↔green ΔE 2.0 deutan), which is why the redundancy below is not optional.
 
-Three of the eight sit below 3:1 contrast on white, so colour is **never** the only carrier of
+Slots 1–8 are exactly what they were: a colour belongs to a column position, so re-stepping one
+would repaint items in every comparison already using it. Slot 11+ is gray, and the plot still draws
+what it can colour and names the rest (`data-cy="stretch-chart-over-cap"`) — a path that survives for
+the day `COMPARE_MAX` outgrows the palette, and is unreachable while the two match at ten.
+
+Four of the ten sit below 3:1 contrast on white, so colour is **never** the only carrier of
 identity: every series is also **direct-labelled** at the end of its line (`data-cy="stretch-chart-label"`)
 and listed in a legend (`data-cy="stretch-chart-legend-item"`, carrying `data-id`) with a swatch and
 the item's name. Lines are 2px; markers get a 2px white ring so overlapping points stay countable.
@@ -959,7 +964,7 @@ whichever side of the crosshair has room, so it never covers the point being rea
 `data-cy="stretch-view-chart"` / `data-cy="stretch-view-table"`) switches the panel to the same data
 as a grid (`data-cy="stretch-chart-table"`): one row per compared webbing, one column per load in
 the union, `—` where that webbing has no measurement. This is the accessible equivalent of the
-chart, and where the curves past the plot's eight-line cap are read.
+chart, and where the numbers themselves — or any curve the plot could not colour — are read.
 
 **Responsive.** The chart is a `viewBox`-scaled inline SVG that fits its container at every width —
 it never scrolls sideways. Below `sm` the direct labels drop (the legend carries identity there) and
