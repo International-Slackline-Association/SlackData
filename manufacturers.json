@@ -1,9 +1,9 @@
 {
   "metadata": {
-    "total_manufacturers": 79,
+    "total_manufacturers": 80,
     "known_manufacturers": 74,
     "missing_manufacturers": 0,
-    "total_gear_items": 539,
+    "total_gear_items": 540,
     "coverage_percentage": 100.0,
     "enriched_from": "slackdb.com/api/manufacturers",
     "enriched_fields": [
@@ -16,7 +16,7 @@
       "email"
     ],
     "email_source": "scraped from each manufacturer's own website (2026-08-23); additions 2026-08-28, 2026-09-02. email_alt: a second address the brand also answers on, present only where one is known",
-    "email_coverage": "38/79"
+    "email_coverage": "38/80"
   },
   "manufacturers": {
     "1": {
@@ -1028,7 +1028,7 @@
       "catalog_id": 98,
       "name": "Wall Ace",
       "verified": false,
-      "item_count": 1,
+      "item_count": 2,
       "country": "AU",
       "year_established": null,
       "slackline_oriented": true,
@@ -1049,6 +1049,19 @@
       "website": "https://sterlingrope.com",
       "facebook": null,
       "instagram": "https://instagram.com/sterlingrope",
+      "email": null,
+      "active": true
+    },
+    "local_cong_gear": {
+      "catalog_id": 100,
+      "name": "Cong Gear",
+      "verified": false,
+      "item_count": 1,
+      "country": null,
+      "year_established": null,
+      "slackline_oriented": true,
+      "website": null,
+      "facebook": null,
       "email": null,
       "active": true
     }

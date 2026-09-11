@@ -10,6 +10,30 @@ Non-phase engineering tasks not tracked in [PLAN.md](PLAN.md) (frontend roadmap)
   still need a keep/reject call before they can be. Follow the per-type schema notes in that file's
   "Approved" section — the webbing and weblock loaders take different object shapes.
 
+- [ ] **Named webbings we know exist but hold no specs for.** Twelve products surfaced by name only
+  — no manufacturer confirmed for most, no width, MBS, weight, stretch or price. None of them are in
+  `webbings.json` today. They are recorded here rather than seeded as stubs: a webbing row needs
+  `width` NOT NULL, and the two ISA stubs in the entry below already show what that costs (BoomBoom seeds as
+  **0 mm**). Source each one, then add it the normal way — id, brand with a `manufacturers.json`
+  entry, `active` flag.
+
+  - [ ] **Mystery Tube**
+  - [x] **The Path** — added 2026-09-10 as webbing **260**, Cong Gear "Path".
+  - [ ] **TWTSNBN** ("the webbing that shall not be named")
+  - [ ] **Float**
+  - [ ] **PHAT**
+  - [ ] **Pure**
+  - [ ] **PowerLine** (HopOn) — reviewed at
+    <https://www.outdoorgearlab.com/reviews/climbing/slackline/hopon-powerline>, which is a
+    sourceable spec sheet. HopOn is not one of our manufacturers yet.
+  - [ ] **Marmot Tube** (Mammot Tubular)
+  - [ ] **Nathan Paulin castle special** — a one-off/limited line rather than a catalogue product;
+    decide whether it belongs in the catalogue at all before sourcing it. (Techni Sangles)
+  - [ ] **Dynosaur** (Santi)
+  - [ ] **Bearsling**
+  - [x] **Duct Tape** (Wall Ace) — added 2026-09-10 as webbing **259**, from the maker direct:
+    the same 25 mm Dyneema-centre/nylon-edge weave as their Steel Cable, just thinner.
+
 - [ ] **Add the gear items the ISA warnings point at.** Every entry in
   [isa_gear_warnings.json](isa_gear_warnings.json) now carries a `match` block (`gearType`,
   `gearIds`, `gearNames`, `confidence`, `note`) resolving it against the catalogue — 53 exact,
@@ -37,12 +61,19 @@ Non-phase engineering tasks not tracked in [PLAN.md](PLAN.md) (frontend roadmap)
   - [ ] **Grigri** (Petzl) — ISA 42, brake, still in production. Neither a brake type nor Petzl as
     a brand; the only entry from outside the slackline industry.
 
-  Two stubs were already created this way and are seeded from the root JSON with `active: false` and
-  no specs beyond what the ISA entry itself states: **Slacktivity Hangover 1.0**
-  (`rollers.json`, roller 22, `slider_type: Carabiner`) for ISA 45, and **Slack Inov BoomBoom**
-  (`webbings.json`, webbing 246) for ISA 78. Both carry a wart worth fixing when specs surface:
-  the required NOT NULL columns fall to their fallback buckets (`roller_material`/`lock_type`/
-  `bearing_material` → `Other`, `material` → `["Other"]`, and BoomBoom's `width` seeds as **0 mm**).
+  *A stub that still has to be sourced:*
+  - [ ] **Slacktivity Hangover 1.0** (`rollers.json`, roller 22) for ISA 45. Created so the warning
+    had something to point at, and `slider_type: Carabiner` plus `active: false` is the whole of
+    what it states — every other field in the seed is `null`. That is not neutral on the site:
+    `load_rollers.py` runs the three NOT NULL enums through `get_roller_material` / `get_lock_type` /
+    `get_bearing_material`, which fall to **`Other`** on an empty string, so the detail page prints
+    three specs the seed never claimed. Source it (Slacktivity's own page or a capture), or decide
+    the fallbacks should be nullable columns.
+
+  The other stub, **Slack Inov BoomBoom** (`webbings.json` 246, ISA 78), is done — it carries real
+  manufacturer specs now (25 mm tubular nylon, 52 g/m, 27 kN, a full 1–20 kN stretch curve, the
+  Spider Slacklines co-listing). Only price and product URL are still unknown, and it stays
+  `active: false`.
 
   The 10 `ambiguous` matches are a separate, smaller call: the ISA names one product where we hold
   several rows (EQB Katana/Katana FX, Mithril Pull/Quick Pin, Slacktivity SlackDuck/-DP, Raed TiLock
@@ -56,9 +87,18 @@ Non-phase engineering tasks not tracked in [PLAN.md](PLAN.md) (frontend roadmap)
   reconciles it against the DB, setting `isa_certified` (top-level bool on webbing / leashring /
   grip / starterkit / tricklinekit; `specifications["ISA approved"]` string `"true"` on weblock;
   `isa_approved` on roller). Match on brand + model. Report/queue items on the ISA list that have
-  no matching row so the catalog can be filled in (as of last manual sync these were unmatched:
-  BC Wafer 2.0, BC Wafer XL, BC Loop, BC Threaded Highline Leash, Cong Gear Path,
-  Slack Inov Zenlock, SlackX Orange, Slacktivity HighlineLeash).
+  no matching row so the catalog can be filled in. Four of the eight items unmatched at the last
+  manual sync are now held — **BC Wafer 2.0** and **BC Wafer XL** (grips 15, 16), **Slack Inov
+  Zenlock** (weblock 112) and **Cong Gear Path** (webbing 260). What is left:
+
+  - **SlackX Orange** — held, as `Radrigs Orange` (weblock 58). The approval names the **seller**,
+    so a brand+model match closes it only if it consults `gear_sellers` (SlackX is named there).
+    This is the one unmatched entry that is a matching bug rather than missing data.
+  - **BC Loop** — the BC Aluminum Leash Ring
+  - **BC Threaded Highline Leash** and **Slacktivity HighlineLeash** — leashes, a gear type we do
+    not model at all. Nothing to match until one exists.
+  - ~~**Cong Gear Path**~~ — closed 2026-09-10: held as webbing **260**, and Cong Gear is now a
+    manufacturer (catalog_id 100). A brand+model match reaches it.
 
 - [ ] **Add bungees as a gear type.** The `Bungee` model already exists on branch
   `bungees_ringpadding` (`slack_data/models/bungees.py`) but has **no seed JSON, no loader, no
@@ -72,25 +112,6 @@ Non-phase engineering tasks not tracked in [PLAN.md](PLAN.md) (frontend roadmap)
   - <https://slackx.eu/Products/Bungee-Anchor/>
   - <https://slacktivity.com/shop/slackline-bungees/>
   - <https://spider-slacklines.com/shop/en/bungee/1284-7330-modular-bungee.html#/1362-select_model-soft_shackle_openable>
-
-- [x] **Onboard SlackX as a manufacturer.** *(done 2026-09-02.)* Entered in
-  [manufacturers.json](manufacturers.json) as `local_slackx`, `catalog_id` 97, carrying
-  `info@slackx.eu`, and named as a seller of both Radrigs weblocks — the `Orange` and the
-  `Slackfriend` — through `gear_sellers` on those two rows in [weblocks.json](weblocks.json).
-  SlackX continues the Radrigs line and makes nothing else we hold. (They list the `Orange` as
-  "Orange 1.0"; a per-seller product name is not something the schema stores.)
-
-  The blocker recorded here — nowhere to put the address, because `load_manufacturers.py` only
-  enriches rows a gear seed already created — was resolved by making `load_seller_brands.py` create
-  a *seller-only* brand from its `catalog_id`, and by running that pass ahead of the enrichment so
-  the new row still gets its country, site and email. A shop that resells and manufactures nothing
-  was otherwise the one brand co-listings could not name.
-
-  **Still open, and now visible:** SlackX reads as **0 items** on the manufacturers directory,
-  because inventory counts group gear rows by maker and know nothing about sellers — see the
-  co-listing entry below. And **SlackX Orange** stays on the unmatched-ISA-approvals list above:
-  the approval names the seller, the catalogue holds the item as `Radrigs Orange`, so the
-  auto-sync's brand+model match needs to consult `gear_sellers` to close it.
 
 - [ ] **Store production batches of the same product.** One row is currently one product, so every
   spec is a single value that silently claims to hold for everything ever sold under that name. It
@@ -144,28 +165,11 @@ Non-phase engineering tasks not tracked in [PLAN.md](PLAN.md) (frontend roadmap)
   Slacklines also sells", which is now true of most of the Slack Inov range. Rebadging and
   reselling are normal in this trade and we model neither.
 
-  **The seller half is built and seeded** — `gear_sellers`, a JSON column of seller brand NAMES on
-  every gear model, written in each gear seed beside the item it belongs to and resolved at load
-  time by `slack_data/load_data/load_seller_brands.py`. **64 co-listings** load with zero drops.
-  See CLAUDE.md § Co-listings.
+  **The seller half is built and seeded** — `gear_sellers`, 64 co-listings, the Brand filter and
+  "Also sold by" (§ Shipped, CLAUDE.md § Co-listings). What that leaves:
 
-  It replaced a `GearSeller` side table seeded from a root `gear_sellers.json` of
-  `(gear_type, gear_id, gear_name, brand, …)` cross-references. The table could hold a per-seller
-  price, currency, product URL and stock flag — but none was ever sourced for 62 of the 64 rows,
-  so what it actually held was a second file of hand-typed ids to keep in step with the seeds, for
-  data that is one name per listing. The names now live on the product, which is the only place
-  they can drift out of step with nothing.
+  **A. Data.**
 
-  **What is left**
-
-  **A. Data — done.**
-
-  - [x] **SlackX → Radrigs `Orange`, `Slackfriend`** (2026-09-02), recorded by hand from
-    slackx.eu. This is also the case that proves a seller-only brand can be created.
-  - [x] **Slack Inov ↔ Spider Slacklines, 62** (2026-09-03). The two companies sell each other's
-    full range with no exceptions, so every item made by one names the other, across all eight gear
-    types: 26 webbings, 18 weblocks, 5 leashrings, 5 rollers, 3 starterkits, 2 grips, 2 treepros,
-    1 tricklinekit.
   - [ ] **Per-seller prices and product URLs are not held at all**, and the schema no longer has
     anywhere to put them. That is the deliberate trade: nobody has sourced a per-product price or
     shop URL for this range, and a price on a public page that no shop ever quoted is worse than no
@@ -176,65 +180,25 @@ Non-phase engineering tasks not tracked in [PLAN.md](PLAN.md) (frontend roadmap)
     verified per product** — where Slack Inov and Spider both resell a third party's webbing, the
     schema has no honest answer and the current rows silently assert one. Worth a pass with the
     manufacturers.
-  - [x] **Re-seeded and verified.** `rm slack_data/database.db` + restart → `Resolved 64
-    co-listings`, no drops, and `GET /weblock/14` returns `"gear_sellers": ["Slack Inov"]`.
-    **The gotcha stays:** seeding is one-shot per gear table, so a `gear_sellers` edit does nothing
-    until the database is deleted.
 
-  **B. Frontend — the read side. Built, rendering real data.**
+  **B. Frontend.**
 
-  - [x] **The sellers arrive with the item**, so there is no type, fetch, hook or index of its own
-    any more — [utils/sellers.ts](frontend/src/utils/sellers.ts) is one function (`brandsFor`) over
-    one field, and `tests/unit/sellers.test.ts` pins its rules (maker first, deduped, blanks and
-    non-lists dropped).
-  - [x] **The Brand filter reads it.** The listing sidebar's Brand group matches an item's **maker
-    plus every brand co-listing it** ([config/brandGroup.ts](frontend/src/config/brandGroup.ts),
-    DESIGN.md § Left Filter Sidebar), so picking "Spider Slacklines" returns the Slack Inov gear
-    Spider stocks as well as Spider's own.
-  - [x] **"Also sold by" on the gear detail page** —
-    [AlsoSoldBy.tsx](frontend/src/components/gear/AlsoSoldBy.tsx), in the detail page's right column
-    under the price and above the ISA certification block, below the ISA warning banner (a list of
-    shops must not push a recall further from the name of the thing recalled). One row per seller,
-    the name linked to their brand page. **A name is the whole row** — no price, link or stock chip,
-    because none is held. Absent, not empty, when there are none. DESIGN.md § Also sold by.
   - [ ] **Answer counts and dedup before anything renders a seller on a card or in a list.**
     Manufacturer inventory counts ([brandSections.ts](frontend/src/utils/brandSections.ts),
     [useBrandDirectory.ts](frontend/src/hooks/useBrandDirectory.ts)), listing totals and
     [compare.ts](frontend/src/utils/compare.ts) all assume one row is one product. SlackX reads as
     **0 items** on the directory today for exactly this reason. Decide whether a seller's items
     count toward their inventory **before** the number is on screen and someone quotes it.
-  - [x] **Cypress spec** — [co_listings.cy.ts](frontend/cypress/e2e/co_listings.cy.ts), now entirely
-    against the real backend (the stubs it used to need existed only because the old side table
-    shipped empty). It covers the block on a co-listed product, the maker never appearing in it, its
-    absence elsewhere, both geometric position rules, and the Brand filter finding what a brand
-    sells rather than only what it makes.
-    **⚠ Not yet executed.** Cypress will not start in the environment it was written in — every
-    cached binary dies with SIGILL / SIGTRAP (exit 132 / 133), with `ELECTRON_RUN_AS_NODE` stripped
-    or not. It needs one run from a working terminal, or CI:
-    `cd frontend && env -u ELECTRON_RUN_AS_NODE npx cypress run --spec cypress/e2e/co_listings.cy.ts`
-  - [x] **[brand_filter.cy.ts](frontend/cypress/e2e/brand_filter.cy.ts) counts sellers too** — its
-    expectations derive from maker + `gear_sellers`, and it no longer asserts that every card names
-    the picked brand, because a co-listed card names the maker. Same ⚠ as above.
 
   **C. The write loop — not built, and deliberately so.**
 
-  - [x] **Nobody may edit `gear_sellers` through an API.** It is in `_EXCLUDED` in
-    `submissions/fields.py`, so neither the suggestion box nor the manufacturer API offers it. Who
-    resells a product is ours to record: a maker does not get to declare or delete a competitor's
-    shelf, and `changes` is a `dict[str, str]` that could not carry a list anyway.
   - [ ] **A seller has no way to correct anything about their own listing**, because there is
     nothing per-seller left to correct. The `matching.Role` maker/seller split, `SELLER_CHANGE_FIELDS`,
     the 403 on a spec change from a seller and `Submission.target` were all built against the side
     table and removed with it. Rebuild them **only** alongside per-seller price/URL data (A above) —
     they exist to bound an edit surface that does not currently exist.
 
-  **D. Deploy — nothing outstanding.**
-
-  `Dockerfile.lambda` copies the root `*.json` before baking the catalogue, and the sellers now ride
-  in those files, so there is no new file, no new table, no new route and no throttle entry to add.
-  A deployed frontend built before this change simply ignores the extra field.
-
-  **E. Deliberately not built.**
+  **D. Deliberately not built.**
 
   - [ ] **The rebadge half.** `gear_sellers` says "one product, two shops". It does **not** merge
     two rows that are one product, which is what the pairs below are, and the ISA split is still
@@ -282,26 +246,99 @@ Non-phase engineering tasks not tracked in [PLAN.md](PLAN.md) (frontend roadmap)
   currently claims to be one indivisible thing, and solving either one alone very likely means
   rewriting it to fit the other.
 
+- **Manuals we know exist but do not hold.**
+  - ~~**Raed's webbing manual.**~~ Held now (vers. 2.4 / 2024-12), fetched by hand: their
+    Cloudflare answers this network 429 for every automated request, browser headers included, so
+    anything further from raed-slacklines.com has to be downloaded in a real browser. Their
+    highline leash-system manual came in the same way and sits on the **Halo** leash ring, the one
+    product of the three it documents (HALO ring / PRO leash / ALPINE leash) that we carry.
+  - **A dead link on the maker's own site**: Bera's `certificados/anel_linelock.pdf` 404s as of
+    2026-09-09. Slacktivity's redTube manual did too — the manuals index still points at
+    `Manual_EN_HighlineWebbing_redTube-A_V1.pdf`, which is gone; the B revision was fetched by hand
+    and is what we hold. The rigging recommendation their page also carries is **not** a manual for
+    the webbing and is deliberately not shown under a heading that says "Manuals & documents".
+  - **Documents whose product we do not carry**, found while crawling and worth revisiting if those
+    gear types ever land: Spider/Slack Inov's manuals for the Slackimoufle, Infinity, Spacer, EVO,
+    Radix and their bungee and leash (bungees and leashes are unseeded types), and Slacktivity's
+    TreeSling and softRelease.
+  - **German-only manuals are held, titled as such** — Slacktivity's Super Jumpline and
+    Slackliner.de's ratchet-set manual (range-wide: all three of their starter kits are single
+    ratchet, and the document names no product). The **German** duplicates of documents we already
+    hold in English were not taken, nor were Slacktivity's DE-only pinkTube B and C sheets, which
+    describe webbing variants the catalogue holds as one `pinkTube`.
+  - **Balance Community links most manuals client-side**, so crawling their HTML found three of the
+    five we hold; the rest were confirmed by verified URL. A future sweep of that catalogue needs a
+    real browser, not curl.
+
 ## ✅ Shipped (kept here briefly so the entries above don't get re-opened)
 
-- **Mobile & responsive (PLAN.md Phase 12).** The listing page was unusable below ~900px: an
-  uncollapsed `flex gap-8` row with a fixed 280px sidebar. Now `lg` is the structural break, filters
-  and sort live in a bottom sheet below it, and the nav tabs scroll in one row instead of wrapping
-  onto five. **Two decisions not to undo:** (1) the gear-tab strip scrolls rather than wraps — the
-  older code comment said the opposite, deliberately reversed; (2) layouts that need different DOM
-  switch on `useIsDesktop()`, not `hidden lg:block`, because a CSS-hidden duplicate still doubles
-  every `data-cy` the Cypress suite selects on. See DESIGN.md § Responsive & Mobile.
+- **Compare draws the stretch curve, and holds ten items** (#76). Four columns of
+  "5.9% @ 10 kN · 7.1% @ 15 kN · …" is the reading compare exists to spare you, so on compare
+  webbing stretch leaves the table and becomes a multi-series line chart — load across, elongation
+  up, one line per column in the column's own colour — suppressed back to a table row when there
+  are fewer than two curves to plot. Inline SVG built here (`utils/chart.ts` +
+  `components/charts/LineChart.tsx`), not a charting dependency: the arithmetic that decides whether
+  it is readable (nice-numbered ticks, a domain that ignores one outlying curve, the eight-series
+  cap) is unit-testable in a way a picture is not — `chart.test.ts`. **`COMPARE_MAX` went 4 → 10**;
+  the chart is the binding constraint, so it plots the first eight curves and names the rest.
+  DESIGN.md § Stretch is a chart, not a table. Landing it on main also fixed a **range-domain race**
+  that reddened the spec: the slider domain and the drawn domain were computed from two different
+  snapshots of the fetch.
 
-- **Gear lifecycle status.** Shipped as **`active`**, not the `available` this backlog originally
-  specified, and with real data rather than the `null`-everywhere rollout that was planned: a
-  web-verification pass filled in all 498 items (227 active / 271 legacy). On all 8 gear models,
-  through the loaders and seed JSON. Frontend: red "Legacy" card badge + the ALL / CURRENT / HISTORIC
-  scope bubble pinned at the top of the filter sidebar. See CLAUDE.md § Data model and
-  DESIGN.md § Left Filter Sidebar. Manufacturer lifecycle was already separately captured by `active`
-  in `manufacturers.json` (from SlackDB's `isActive`; see `slackdb.md`).
+- **Manuals & documents on the detail page.** Manufacturers publish PDFs about their gear and we now
+  hold **42** of them — 36 filed against a product, 6 filed against a brand — shown as their own card
+  below the spec sheet, first document embedded inline with an "Open ↗" fallback that *is* the
+  feature on mobile. Stored exactly like images: a curated folder tree under
+  `frontend/public/gear-manuals/` plus a manifest generated by `scripts/build_gear_manifest.py`
+  (`--check` fails on drift), with the document's title carried in the filename and a non-English
+  document saying so in its own title. **Range-wide manuals are filed once under the brand**
+  (`brandManuals.json`) — BC, Spider/Slack Inov, Bera and Raed each publish one webbing manual for
+  everything they make, and copying it onto forty product keys is forty chances to leave one on the
+  old version. Absent, not empty, when we hold nothing. DESIGN.md § Manuals & documents. What we
+  know exists and still do not hold is recorded under Backend / data above.
 
-- **Sticky filter sidebar.** The `<aside>` pins below the top nav and self-scrolls. Implemented close
-  to the spec that used to live here, with two deviations: the bottom reserve is `6rem` (not `2rem`)
-  to clear the fixed CompareBar, and the aside splits into a pinned status bubble plus a separate
-  inner scroll region (`data-cy="filter-scroll"`) rather than scrolling as one box. `TopNav.tsx`
-  publishes `--header-h` via a `ResizeObserver`. Recorded in PLAN.md as a post-Phase-9 entry.
+- **Catalogue data: two manufacturers, six webbings, the YogaSlackers range** (#78). Wall Ace
+  (`catalog_id` 98, AU) and Sterling Rope (99, US) — Sterling the first entry here that is not
+  slackline-oriented — plus webbings 253–258 (Wall Ace Steel Cable, BC Spider Silk MK1, Landcruising
+  Aeon, Sterling Type 9800, Slacktivity 2FACES, Slackstar Line Long Way), starterkits 65/66 and
+  treepro 26 for YogaSlackers. Each row is transcribed from the maker's own page or the only capture
+  of it, with the provenance in `notes`: a stated percentage with no load is **not** recorded as a
+  stretch point, an unstated breaking strength stays null rather than being inferred, and prices are
+  per metre off the longest length's regular price, never a sale price. "Yoga Slackers" became
+  **YogaSlackers**, the old spelling kept as an alias so seeds, scraped image filenames and anything
+  already recorded still resolve. Corrections to rows already held: webbing 38 gains a price and a
+  stretch point, Slack.fr Dark Blue's `priceMeter` drops 1.96 → 1.45 (1.96 was the 25 m tier),
+  weblock 95 becomes "Slackibloc Jump", starterkits 25/26 lose their scraper-shouted names.
+
+- **The e2e job went from ~37 minutes to ~7, without dropping a test** (#77). Cypress runs sharded
+  across six runners packed by measured spec duration from `frontend/cypress/shards.json`. The cost
+  is a manifest that has to be kept in step with the spec directory — a spec absent from it silently
+  never runs — so `npm run shards` verifies every spec is in exactly one shard, and is run by
+  `test:unit` and by CI before the matrix is built.
+
+- **SlackX onboarded as a seller-only manufacturer** (2026-09-02). `local_slackx`, `catalog_id` 97,
+  `info@slackx.eu`, named through `gear_sellers` as the seller of both Radrigs weblocks — the
+  `Orange` and the `Slackfriend`. It continues the Radrigs line and makes nothing else we hold, so
+  the recorded blocker (nowhere to put the address, since `load_manufacturers.py` only enriches rows
+  a gear seed already created) was closed by letting `load_seller_brands.py` create a seller-only
+  brand from its `catalog_id`, ahead of the enrichment pass. Two consequences are still open and
+  tracked where they belong: SlackX reads **0 items** on the directory (co-listings, § B) and
+  **SlackX Orange** is still an unmatched ISA approval (§ Auto-sync ISA certification).
+
+- **Co-listings — one product, several sellers** (#75). `gear_sellers`, a JSON column of seller brand
+  NAMES on every gear model, written in each gear seed beside the item it belongs to and resolved at
+  load time by `load_data/load_seller_brands.py` — which also creates a *seller-only* brand from its
+  `catalog_id`, the one place a `Brand` is born outside a gear loader. **64 co-listings** load with
+  zero drops: SlackX → Radrigs `Orange`/`Slackfriend`, and the 62 Slack Inov ↔ Spider listings across
+  all eight gear types. It replaced a `GearSeller` side table of `(gear_type, gear_id, …)`
+  cross-references, which would have been a second file of hand-typed ids to keep in step with the
+  seeds for data that is one name per listing. On the frontend the sellers arrive with the item —
+  [utils/sellers.ts](frontend/src/utils/sellers.ts) is one function over one field — feeding the
+  sidebar's **Brand** filter (which matches an item's maker *plus* every brand co-listing it,
+  [config/brandGroup.ts](frontend/src/config/brandGroup.ts)) and **"Also sold by"** on the detail page
+  ([AlsoSoldBy.tsx](frontend/src/components/gear/AlsoSoldBy.tsx)), a name per row because a name is
+  all we hold. `co_listings.cy.ts` and `brand_filter.cy.ts` cover both, sharded and green in CI.
+  Nobody may edit it through an API — `gear_sellers` is in `_EXCLUDED` in `submissions/fields.py` —
+  and deploy needed nothing: the sellers ride in the root `*.json` the Lambda image already bakes.
+  CLAUDE.md § Co-listings. **What is still open is above**: per-seller prices/URLs, who actually
+  makes what, inventory counts that read a seller as 0 items, and the rebadge half.

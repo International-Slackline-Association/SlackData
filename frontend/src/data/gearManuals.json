@@ -1,5 +1,11 @@
 {
   "grips": {
+    "bc_wafer-2-0": [
+      "bc_wafer-2-0.pdf"
+    ],
+    "bc_wafer-xl": [
+      "bc_wafer-xl.pdf"
+    ],
     "slacktvty_t-grip": [
       "slacktvty_t-grip.pdf"
     ],
@@ -13,6 +19,9 @@
   "leashrings": {
     "bc_bc-aluminum-leash-ring": [
       "bc_bc-aluminum-leash-ring.pdf"
+    ],
+    "raed_halo": [
+      "raed_halo.pdf"
     ],
     "slackinov_vortex-2": [
       "slackinov_vortex-2.pdf"
@@ -49,6 +58,11 @@
       "slacktvty_minimum-slackline-12m-set.pdf"
     ]
   },
+  "tricklinekits": {
+    "slacktvty_super-jumpline-slackline-set": [
+      "slacktvty_super-jumpline-slackline-set-german-user-manual.pdf"
+    ]
+  },
   "webbings": {
     "landcruise_aeon": [
       "landcruise_aeon-product-archive.pdf"
@@ -61,6 +75,9 @@
     ],
     "slacktvty_pinktube": [
       "slacktvty_pinktube.pdf"
+    ],
+    "slacktvty_redtube": [
+      "slacktvty_redtube.pdf"
     ],
     "slacktvty_y2k": [
       "slacktvty_y2k.pdf"
