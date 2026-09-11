@@ -1206,7 +1206,7 @@ so the wording physically cannot drift between surfaces (same reasoning as `Lega
 | Notice | Component | Placements |
 |---|---|---|
 | Safety disclaimer | `layout/SafetyNotice.tsx` | site footer (`variant="footer"`), gear detail page (`variant="callout"`) |
-| Data-accuracy note | `layout/DataAccuracyNote.tsx` | site footer (`variant="footer"`), listing toolbar beside the item count (`variant="inline"`) |
+| Data-accuracy note | `layout/DataAccuracyNote.tsx` | site footer only (it used to be repeated on the listing toolbar; see SAFETY_AND_ACCURACY.md §B1) |
 
 - **Neither notice is dismissible.** A notice with a close button is one most readers have already
   closed by the time it matters. There is no "don't show again" and no local-storage state.

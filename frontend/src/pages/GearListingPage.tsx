@@ -29,7 +29,6 @@ import Sheet from '@/components/layout/Sheet'
 import GearGrid from '@/components/gear/GearGrid'
 import GearDetailedList from '@/components/gear/GearDetailedList'
 import CompareBar from '@/components/gear/CompareBar'
-import DataAccuracyNote from '@/components/layout/DataAccuracyNote'
 import SuggestButton from '@/components/submissions/SuggestButton'
 import NotFoundPage from './NotFoundPage'
 
@@ -403,29 +402,27 @@ export default function GearListingPage() {
               value={query}
               onChange={e => onSearchChange(e.target.value)}
               placeholder={`Search ${meta.label}…`}
-              // Takes whatever the row has left, up to its old w-64, instead of
-              // a fixed width. The toolbar is one flex-wrap row, so a fixed
-              // width one pixel too large wraps the entire right-hand group
-              // onto a second line — and the exact ceiling depends on the
-              // width of the copy beside it, which is not this file's business
-              // to track. `flex-1` gives a 0 flex-basis, so the input never
-              // contributes to line-breaking and the row cannot wrap because of
-              // it; `min-w-0` lets it actually shrink. Today that resolves to
-              // ~130px in the 920px content column; shorten anything else on
-              // the row and it grows back on its own.
-              className="min-w-0 flex-1 max-w-64 rounded-lg border border-gray-300 px-3 py-1.5 text-sm focus:border-teal-primary focus:outline-none"
+              // FIXED width, deliberately. This used to be `min-w-0 flex-1
+              // max-w-64`, sized from whatever the row had left over — which
+              // meant the search box shrank as the copy beside it grew, and at
+              // ~1200px it resolved to about 130px: too narrow to show even the
+              // word "Search" in its own placeholder. Elastic sizing made the
+              // box a residue of everything else on the row instead of a
+              // control with a size. `w-64` is that size; keeping the row from
+              // wrapping is now a question of what else is allowed on it, which
+              // is why the accuracy note left (it lives in the footer) and
+              // "Missing something?" moved into the right-hand group.
+              className="w-64 shrink-0 rounded-lg border border-gray-300 px-3 py-1.5 text-sm focus:border-teal-primary focus:outline-none"
             />
             <span data-cy="item-count" className="text-sm text-gray-500">
               {visible.length} {visible.length === 1 ? 'item' : 'items'}
             </span>
-            {/* Next to the count: the moment a visitor reads how much data there
-                is, is the moment to say what it's worth. */}
-            <DataAccuracyNote variant="inline" />
-            {/* The other half of that thought: if the data is incomplete, say
-                where to report what's missing. */}
-            <SuggestButton gearType={meta.slug} variant="new-item" />
 
             <div className="ml-auto flex items-center gap-3">
+              {/* If the data is incomplete, say where to report what's missing —
+                  but from the right-hand group, not wedged between the count and
+                  the view toggle. */}
+              <SuggestButton gearType={meta.slug} variant="new-item" />
               <div className="flex overflow-hidden rounded-lg border border-gray-300">
                 <button
                   data-cy="view-cards"

@@ -270,7 +270,31 @@ Non-phase engineering tasks not tracked in [PLAN.md](PLAN.md) (frontend roadmap)
     five we hold; the rest were confirmed by verified URL. A future sweep of that catalogue needs a
     real browser, not curl.
 
+## Frontend / UX
+
+- [ ] **Universal search (considered, deferred).** Search is per gear type: the box on the webbings
+  page searches webbings. Someone who knows a product name but not its category — which is most
+  people who arrive from outside — has to guess the tab first. Two shapes were weighed: one search
+  box in `TopNav` searching all eight types with a grouped results surface, or the same box with an
+  Amazon-style category selector fused to its left, defaulting to the category being browsed.
+
+  Deferred rather than dropped. The immediate complaint behind it was that the listing toolbar was
+  overloaded and the search box was being squeezed to ~130px, and that is fixed (§ Shipped) without
+  moving search anywhere. Doing it properly needs a cross-type search surface — a results page that
+  can rank a webbing against a weblock, which we have no relevance model for — and that is a feature,
+  not a layout change. Revisit once there is a homepage/dashboard to hang it off (PLAN.md).
+
 ## ✅ Shipped (kept here briefly so the entries above don't get re-opened)
+
+- **Listing toolbar: fixed-size search, and the accuracy note moved out.** The search input was
+  `min-w-0 flex-1 max-w-64` — sized from whatever the flex-wrap row had left over, which made it a
+  residue of everything else on the row rather than a control with a size. At ~1200px it resolved to
+  about 130px, too narrow to show the word "Search" in its own placeholder. It is now `w-64
+  shrink-0`. Two things left the row to make that fit: the inline "Community-sourced — may be
+  incomplete." note (it is a standing notice and the footer already carries it on every page —
+  SAFETY_AND_ACCURACY.md §B1 was updated, and `safety_notices.cy.ts` now asserts its ABSENCE from the
+  toolbar so it is not quietly reinstated), and "Missing something?", which moved into the
+  right-hand group beside the view toggle and Sort.
 
 - **Card content no longer paints over the sticky filter bar.** Reported as a Firefox-on-Mac bug at
   narrow widths; it reproduces in Chromium too, ~2000 times in a single scroll sweep. Width was only

@@ -65,6 +65,11 @@ Notes on choices made, and what still needs a decision, are at the bottom.
 
 ## B. Data-accuracy note
 
-### B1. Short form — near the item count on listing pages, and in the footer
+### B1. Short form — in the footer of every page
+
+(It was also repeated inline on listing toolbars, beside the item count. Removed
+2026-09-09: that toolbar is a single flex-wrap row and this was the longest thing
+on it, squeezing the search box to ~130px at ~1200px wide. It is a standing
+notice, so the footer — which every listing page carries — is enough.)
 
 > **Community-sourced — may be incomplete.**

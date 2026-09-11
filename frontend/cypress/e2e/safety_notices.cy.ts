@@ -118,21 +118,15 @@ describe('Safety & data-accuracy notices', () => {
     })
   })
 
-  describe('data-accuracy note on the listing', () => {
-    it('sits immediately after the item count', () => {
+  // The note is a FOOTER notice and nothing else. It used to be repeated inline
+  // on the listing toolbar; that row is one flex-wrap line and this was the
+  // longest thing on it, so it starved the search box (~130px at 1200px wide).
+  // Asserted as an absence so the inline copy is not quietly reinstated.
+  describe('data-accuracy note is not repeated on the listing toolbar', () => {
+    it('appears in the footer only', () => {
       cy.visit(`/${SLUG}`)
-      cy.get('[data-cy="data-accuracy-inline"]')
-        .should('be.visible')
-        .and('contain', ACCURACY_TEXT)
-      cy.get('[data-cy="item-count"]')
-        .next('[data-cy="data-accuracy-inline"]')
-        .should('exist')
-    })
-
-    it('stays put while filtering changes the count', () => {
-      cy.visit(`/${SLUG}`)
-      cy.get('[data-cy="search-input"]').type('core')
-      cy.get('[data-cy="data-accuracy-inline"]').should('contain', ACCURACY_TEXT)
+      cy.get('[data-cy="data-accuracy-inline"]').should('not.exist')
+      cy.get('[data-cy="data-accuracy-footer"]').should('contain', ACCURACY_TEXT)
     })
   })
 
