@@ -322,6 +322,30 @@ Non-phase engineering tasks not tracked in [PLAN.md](PLAN.md) (frontend roadmap)
   currently claims to be one indivisible thing, and solving either one alone very likely means
   rewriting it to fit the other.
 
+- **Manuals we know exist but do not hold.**
+  - ~~**Raed's webbing manual.**~~ Held now (vers. 2.4 / 2024-12), fetched by hand: their
+    Cloudflare answers this network 429 for every automated request, browser headers included, so
+    anything further from raed-slacklines.com has to be downloaded in a real browser. Their
+    highline leash-system manual came in the same way and sits on the **Halo** leash ring, the one
+    product of the three it documents (HALO ring / PRO leash / ALPINE leash) that we carry.
+  - **A dead link on the maker's own site**: Bera's `certificados/anel_linelock.pdf` 404s as of
+    2026-09-09. Slacktivity's redTube manual did too — the manuals index still points at
+    `Manual_EN_HighlineWebbing_redTube-A_V1.pdf`, which is gone; the B revision was fetched by hand
+    and is what we hold. The rigging recommendation their page also carries is **not** a manual for
+    the webbing and is deliberately not shown under a heading that says "Manuals & documents".
+  - **Documents whose product we do not carry**, found while crawling and worth revisiting if those
+    gear types ever land: Spider/Slack Inov's manuals for the Slackimoufle, Infinity, Spacer, EVO,
+    Radix and their bungee and leash (bungees and leashes are unseeded types), and Slacktivity's
+    TreeSling and softRelease.
+  - **German-only manuals are held, titled as such** — Slacktivity's Super Jumpline and
+    Slackliner.de's ratchet-set manual (range-wide: all three of their starter kits are single
+    ratchet, and the document names no product). The **German** duplicates of documents we already
+    hold in English were not taken, nor were Slacktivity's DE-only pinkTube B and C sheets, which
+    describe webbing variants the catalogue holds as one `pinkTube`.
+  - **Balance Community links most manuals client-side**, so crawling their HTML found three of the
+    five we hold; the rest were confirmed by verified URL. A future sweep of that catalogue needs a
+    real browser, not curl.
+
 ## ✅ Shipped (kept here briefly so the entries above don't get re-opened)
 
 - **Mobile & responsive (PLAN.md Phase 12).** The listing page was unusable below ~900px: an

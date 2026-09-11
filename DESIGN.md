@@ -664,6 +664,13 @@ because that is what most of these are. Anything after the product key is the la
 convention (`-2` → "User manual 2"), so a product with two unnamed PDFs never renders two identical
 rows.
 
+**A document that is not in English says so in its title**, because the row is a link a reader
+follows: `…-german-user-manual.pdf` reads **German user manual**. This is a filename convention, not
+a language field — nothing parses it, and it costs nothing at the point where it matters, which is
+the moment before the reader opens a PDF they cannot read. Where a maker publishes both, we hold the
+English one and the title stays the plain default; German-only is the case this exists for
+(Slacktivity's Super Jumpline, Slackliner.de's ratchet-set manual).
+
 **Shown, not just linked.** The first document is embedded inline (`<object type="application/pdf">`,
 ~34rem tall, rounded and bordered like a card) so the thing can be read without leaving the page.
 Every browser that cannot render a PDF inline — mobile Safari and Chrome on Android, notably —

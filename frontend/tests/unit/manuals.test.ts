@@ -41,6 +41,17 @@ test('a title in the filename is the label, de-slugified', () => {
   assert.equal(manualLabel('bc_type-18-datasheet.pdf', 'bc_type-18'), 'Datasheet')
 })
 
+test('a language in the tail is part of the title, and survives the default', () => {
+  // A row is a link the reader is about to follow. Where the only document a
+  // maker publishes is German (Slacktivity's Super Jumpline, Slackliner.de's
+  // ratchet sets), the title has to say so before the PDF opens.
+  assert.equal(
+    manualLabel('slacktvty_super-jumpline-slackline-set-german-user-manual.pdf', 'slacktvty_super-jumpline-slackline-set'),
+    'German user manual',
+  )
+  assert.equal(manualLabel('slackde-german-user-manual.pdf', 'slackde'), 'German user manual')
+})
+
 test('a numeric tail keeps the image convention rather than reading as a title', () => {
   // Two untitled PDFs for one product must not render two rows both saying
   // "User manual".

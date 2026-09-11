@@ -1,10 +1,18 @@
 {
+  "starterkits": {
+    "slackde": [
+      "slackde-german-user-manual.pdf"
+    ]
+  },
   "webbings": {
     "bc": [
       "bc-webbing-manual.pdf"
     ],
     "bera": [
       "bera-webbing-manual.pdf"
+    ],
+    "raed": [
+      "raed-webbing-manual.pdf"
     ],
     "slackinov": [
       "slackinov-webbing-manual.pdf"
