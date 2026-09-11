@@ -14,7 +14,7 @@ not just featured items:
   Industries, Viper). Raed/`raed-sports.com` rate-limited (429) on every attempt — its items are already
   deep in the DB from Sweep 1, so its still-missing kits are carried from there.
 - **WooCommerce** brands — pulled the full `/wp-json/wc/store/v1/products` feed with category names
-  (Slacktivity 119, Slack house 128, Bera Adventure 149, SlackGear 35, Yoga Slackers 42, lineGrip 35,
+  (Slacktivity 119, Slack house 128, Bera Adventure 149, SlackGear 35, YogaSlackers 42, lineGrip 35,
   Middle Way 18).
 - **PrestaShop / custom / Wix** brands — fetched shop + category pages (Slack Mountain, EQB/slackshop.cz,
   Slackliner.de, Radrigs, Petram). Spider & Slack Inov block automated fetches (403) — their still-missing
@@ -136,7 +136,7 @@ shape, so those model columns could never be populated from JSON.
 | [x] | [Simplex Locker](https://slackhouseshop.pl/produkt/simplex-locker/) | ~~Slack house~~ → **Petram Slacklines** | slackhouseshop.pl | MBS 36 kN, 40 g, inside width 21/26 mm → width 20–26 mm. €20. |
 | [x] | [Weblock 50mm (Soft Release)](https://www.beraadventure.com.br/product/weblock-50mm-soft-release-50mm/) | Bera Adventure | beraadventure.com.br | trickline. Stored as `Weblock 50mm`. 600 g, WLL 10 kN, inner width 51 mm. **No MBS published** → `breaking_strength: null`. R$399.00 is the bundle price (weblock + 5 m webbing + soft release) and overstates the weblock alone. |
 | [x] | [Anel Linelock – Bera](https://www.beraadventure.com.br/product/anel-linelock-bera/) | Bera Adventure | beraadventure.com.br | Stored as `Anel Linelock`. MBS 47 kN, 43 g, R$55.00. Out of stock but still catalogued → `active: true`. |
-| [x] | [Line Lock](https://yogaslackers.com/shop/slackline/linelock/) | Yoga Slackers | yogaslackers.com | $9. Aluminium is the only spec YogaSlackers publish — weight, MBS and dimensions are all null. |
+| [x] | [Line Lock](https://yogaslackers.com/shop/slackline/linelock/) | YogaSlackers | yogaslackers.com | $9. Aluminium is the only spec YogaSlackers publish — weight, MBS and dimensions are all null. |
 | [x] | [lineLoose Buckle](https://www.linegrip.com/shop/slackpro-lineloose-buckle/) | lineGrip | linegrip.com | ex-Slack Pro! — seeded as `Slack Pro!`, canonicalised to `lineGrip (formerly Slack Pro!)`. MBS 45 kN, 430 g, zinc-plated steel, 24–32 mm. `active: false` (discontinued last-stock sell-off); price is the €30.00 net sell-off, was €42.10. |
 | [x] | [Boa – Weblock for 25mm](https://www.viperslacklines.co.za/products/boa-constrictor-slackline-weblock) | Viper Slacklines | viperslacklines.co.za | Stored as `Boa Constrictor`. 343 g, captured pin, R1650.00. **No MBS published** → null. |
 | [x] | [Aluminium Static Linelock Ring](https://www.viperslacklines.co.za/products/aluminium-static-slackline-linelock) | Viper Slacklines | viperslacklines.co.za | MBS 25 kN, 37 g, 60 mm outer / 40 mm inner, R220.00. |
@@ -245,9 +245,9 @@ Re-seed to pick them up. Every one of these is sold as a **non-PPE** tensioning 
 | [ ] | [Kit Primitivo Double Face](https://www.beraadventure.com.br/product/kit-primitivo-double-face-start-40-metros/) | Bera Adventure | beraadventure.com.br | primitive kit (30m/40m Start; also a [Sky 2.0 version](https://www.beraadventure.com.br/product/kit-primitivo-double-face-sky-2-0-40-50-ou-70-metros-vinho-e-lilas/)) |
 | [ ] | [Compact Pulley System](http://www.slackgear.co.za/product/compact-pulley-system/) | SlackGear | slackgear.co.za | |
 | [ ] | [Highline Leash Kit](http://www.slackgear.co.za/product/highline-leash-kit/) | SlackGear | slackgear.co.za | |
-| [ ] | [eLine Slackline: Eco Kit](https://yogaslackers.com/shop/slackline/eline-slackline-eco-kit/) | Yoga Slackers | yogaslackers.com | |
-| [ ] | [eLine Slackline Pro Kit](https://yogaslackers.com/shop/slackline/eline-slackline-pro-kit/) | Yoga Slackers | yogaslackers.com | |
-| [ ] | [eLine Slackline Full Kit](https://yogaslackers.com/shop/slackline/eline-slackline-kit/) | Yoga Slackers | yogaslackers.com | |
+| [ ] | [eLine Slackline: Eco Kit](https://yogaslackers.com/shop/slackline/eline-slackline-eco-kit/) | YogaSlackers | yogaslackers.com | |
+| [x] | [eLine Slackline Pro Kit](https://yogaslackers.com/shop/slackline/eline-slackline-pro-kit/) | YogaSlackers | yogaslackers.com | |
+| [x] | [eLine Slackline Full Kit](https://yogaslackers.com/shop/slackline/eline-slackline-kit/) | YogaSlackers | yogaslackers.com | |
 | [ ] | [50M Slackline w/ 3:1 Tensioning Kit](https://www.viperslacklines.co.za/products/50m-slackline-with-3-1-tensioning-kit) | Viper Slacklines | viperslacklines.co.za | |
 | [ ] | [30m Lightweight Primitive Kit](https://www.viperslacklines.co.za/products/30m-lightweight-slackline-kit-primitive-tension) | Viper Slacklines | viperslacklines.co.za | |
 | [ ] | [Ultra-Light Rodeo Slackline](https://www.viperslacklines.co.za/products/ultra-light-rodeo-slackline) | Viper Slacklines | viperslacklines.co.za | rodeo kit |
@@ -463,7 +463,7 @@ Rows marked **⚠ similar to `X`** closely resemble an existing DB row — confi
 
 Swept all 42 active manufacturers with a website from `manufacturers.json`. This section holds **73 candidates** across 17 brands, diffed against the DB. **Name / URL / guessed type only.**
 
-Method: Shopify/WooCommerce JSON feeds where available (Gibbon, Viper, Slackline Industries, Middle Way, Yoga Slackers, SlackGear, Bera, Slack house), WebFetch for the rest. Non-Latin names (Hebrew) left as-is.
+Method: Shopify/WooCommerce JSON feeds where available (Gibbon, Viper, Slackline Industries, Middle Way, YogaSlackers, SlackGear, Bera, Slack house), WebFetch for the rest. Non-Latin names (Hebrew) left as-is.
 
 **Scope notes:** the 16 general climbing/PPE brands (Petzl, CAMP, Kong, Edelrid, Mammut, ISC, SMC, Rock Exotica, Van Beest, Singing Rock, Tendon, Trango, Fusion Climb, CMC Rescue, Krok, Episwiss) were **not** deep-swept — their slackline-specific gear is already in the DB and their catalogs are overwhelmingly non-slackline. Unreachable: a-zero.com.ar (DNS fail), slacklineshop.co.nz (403), bloacs.de (B2B installs, no retail products). Length variants collapsed to one row per product.
 
@@ -475,7 +475,7 @@ Method: Shopify/WooCommerce JSON feeds where available (Gibbon, Viper, Slackline
 | [ ] | [FireFly](https://slack-mountain.com/fr/sangles-slackline/185-4504-firefly.html) | Slack Mountain | slack-mountain.com | `webbing` |
 | [ ] | [Sigma N (Jormungand)](https://www.slackliner.de/de/Sigma-N-jormungand-270.html) | Slackliner.de | slackliner.de | `webbing` |
 | [ ] | [50M 25mm Slackline Webbing](https://www.viperslacklines.co.za/products/50m-25mm-slackline-webbing) | Viper Slacklines | viperslacklines.co.za | `webbing` |
-| [ ] | [eLine Webbing: Now available at 49 or](https://yogaslackers.com/shop/slackline/eline-webbing/) | Yoga Slackers | yogaslackers.com | `webbing` |
+| [ ] | [eLine Webbing: Now available at 49 or](https://yogaslackers.com/shop/slackline/eline-webbing/) | YogaSlackers | yogaslackers.com | `webbing` |
 
 ### Weblock (12)
 
@@ -491,7 +491,7 @@ Method: Shopify/WooCommerce JSON feeds where available (Gibbon, Viper, Slackline
 | [ ] | [Boa - Slackline Weblock for](https://www.viperslacklines.co.za/products/boa-constrictor-slackline-weblock) | Viper Slacklines | viperslacklines.co.za | `weblock` |
 | [ ] | [Aluminium Slackline Linelock Ring](https://www.viperslacklines.co.za/products/aluminium-static-slackline-linelock) | Viper Slacklines | viperslacklines.co.za | `weblock` |
 | [ ] | [Viper Constrictor](https://www.viperslacklines.co.za/products/viper-constrictor-25mm-linelock) | Viper Slacklines | viperslacklines.co.za | `weblock` |
-| [ ] | [Line Lock](https://yogaslackers.com/shop/slackline/linelock/) | Yoga Slackers | yogaslackers.com | `weblock` |
+| [ ] | [Line Lock](https://yogaslackers.com/shop/slackline/linelock/) | YogaSlackers | yogaslackers.com | `weblock` |
 | [ ] | [lineLoose Buckle](https://www.linegrip.com/shop/slackpro-lineloose-buckle/) | lineGrip (formerly Slack Pro!) | linegrip.com | `weblock` |
 
 ### Roller (4)
@@ -563,11 +563,11 @@ Method: Shopify/WooCommerce JSON feeds where available (Gibbon, Viper, Slackline
 | [ ] | [DoubleLine Basic](https://sicherungsprofi.de/doubleline-basic/SL81809) | Slackstar | sicherungsprofi.de | `starterkit` |
 | [ ] | [30m Lightweight Slackline Kit - Primitive Tension](https://www.viperslacklines.co.za/products/30m-lightweight-slackline-kit-primitive-tension) | Viper Slacklines | viperslacklines.co.za | `starterkit` |
 | [ ] | [20m Lightweight Slackline Kit - Primitive Tension](https://www.viperslacklines.co.za/products/20m-25mm-slackline-kit) | Viper Slacklines | viperslacklines.co.za | `starterkit` |
-| [ ] | [eLine SlackLine: Eco Kit](https://yogaslackers.com/shop/slackline/eline-slackline-eco-kit/) | Yoga Slackers | yogaslackers.com | `starterkit` |
-| [ ] | [eLine Slackline Pro Kit](https://yogaslackers.com/shop/slackline/eline-slackline-pro-kit/) | Yoga Slackers | yogaslackers.com | `starterkit` |
-| [ ] | [eLine Slackline](https://yogaslackers.com/shop/slackline/eline-slackline-108-kit/) | Yoga Slackers | yogaslackers.com | `starterkit` |
-| [ ] | [eLine Slackline Full Kit](https://yogaslackers.com/shop/slackline/eline-slackline-kit/) | Yoga Slackers | yogaslackers.com | `starterkit` |
-| [ ] | [Tree Pro (Set of 2)](https://yogaslackers.com/shop/slackline/tree-pro/) | Yoga Slackers | yogaslackers.com | `starterkit` |
+| [ ] | [eLine SlackLine: Eco Kit](https://yogaslackers.com/shop/slackline/eline-slackline-eco-kit/) | YogaSlackers | yogaslackers.com | `starterkit` |
+| [x] | [eLine Slackline Pro Kit](https://yogaslackers.com/shop/slackline/eline-slackline-pro-kit/) | YogaSlackers | yogaslackers.com | `starterkit` |
+| [x] | [eLine Slackline](https://yogaslackers.com/shop/slackline/eline-slackline-108-kit/) | YogaSlackers | yogaslackers.com | `starterkit` |
+| [x] | [eLine Slackline Full Kit](https://yogaslackers.com/shop/slackline/eline-slackline-kit/) | YogaSlackers | yogaslackers.com | `starterkit` |
+| [x] | [Tree Pro (Set of 2)](https://yogaslackers.com/shop/slackline/tree-pro/) | YogaSlackers | yogaslackers.com | `starterkit` |
 
 ### Trickline Kit (6)
 

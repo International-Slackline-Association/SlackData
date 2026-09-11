@@ -114,14 +114,53 @@ the same divergence: an orphan image almost always corresponds to a SlackDB item
 brand doesn't match our seed. Reconcile orphans against SlackDB the same way — the orphan's
 brand-abbrev + name tells you which SlackDB item the scraper pulled it from.
 
-## Snapshot (last audited 2026-07-17)
+## Snapshot (last audited 2026-09-09)
 
-Counts (SlackDB / ours): WEB 204/208 · WLCK 109/109 · SKT 64/64 · LRNG 31/31 · TRP 24/23 ·
-SLD 13/19 · WGP 12/12 · TLK 9/9. (We exceed SlackDB in a few categories from other sources.)
+Counts (SlackDB / ours): WEB 204/256 · WLCK 109/130 · SKT 64/66 · LRNG 31/34 · TRP 24/26 ·
+SLD 13/22 · WGP 12/20 · TLK 9/10. We exceed SlackDB everywhere, from the other sweeps.
 
-Genuine gaps found this pass:
-- **Webbings** — missing `Unicorn` & `White Magic` (Aki Slacklines, mfr 64), `Neon` (Equilibrium, mfr 9).
-- **Tricklinekits** — `Level Two Kit` (mfr unset in SlackDB).
-- **Data bugs** (product present but broken): two `treepros` rows have `manufacturer: null`
-  (`Treeskin` → should be *Elephant*/mfr 10; `Treewear XL - Edition` → *Gibbon*/mfr 1);
-  `ROLLEX` brand disagreement (ours *Spider Slacklines* vs SlackDB *Equilibrium*/mfr 9).
+**Nothing further is to be imported from SlackDB.** The full diff was re-run this pass and every
+one of its 466 items in a modeled category has been adjudicated: each either matches a row of ours
+outright, or appears in the do-not-import table below. A future audit that re-runs the diff will
+still see 23 hits — they are all resolved, and the table is the answer.
+
+The only change made this pass was a fix, not an import: five Slack Mountain webbings were seeded
+with lower-cased names (`spectre`, `morpheus`, `rubalise`, `wallaby`, `plum`) — a scrape artifact,
+since SlackDB itself title-cases all five. They render as the name now, not as the slug.
+
+### 🚫 Do not import — adjudicated
+
+The normalized-name diff reports these 23 as missing. They are not. **Do not re-surface them, and
+do not add them to the seeds.** Anything here has already been looked at and rejected.
+
+Most are name-format variants of a row we already hold. The first three are the ones that look
+most like real gaps and are not — they were adjudicated as duplicates or incorrect data by the
+maintainer, on 2026-09-09, and reverted after being briefly imported.
+
+| SlackDB name | Type | Verdict |
+|--------------|------|---------|
+| `Rodeo` | webbing | **Duplicate / incorrect.** Do not import. |
+| `Abysses` | webbing | **Duplicate / incorrect.** Do not import — SlackDB's specs are near-identical to our `Abysses Bounce` (Nylon, 25mm, 63 g/m, 32 kN), and slack-inov.com sells only the Bounce. |
+| `LIime SR` | weblock | **Duplicate / incorrect.** Do not import. |
+| `Flax NY` | webbing | Variant of `Flax` (Slack Mountain) — identical specs |
+| `SuperFL Maverick V2` | webbing | Variant of `Maverick` (Slack.fr) — identical specs |
+| `Sonic 2.0` | webbing | Variant of `Sonic 2` (Aki) |
+| `Sigma X (HeliX)` | webbing | Variant of `Sigma X` (Slackliner.de) — same product URL |
+| `FLY Line` / `Tender Line` / `Zao Line` | webbing | Variants of `Fly` / `Tender` / `Zao` (Spider) |
+| `Aero` | webbing | Variant of `Aero 1` (BC) — SlackDB's separate `Aero 2` is our `Aero 2` |
+| `Mantra MKIII` / `Spider Silk MKII` | webbing | Variants of `Mantra MK3` / `Spider Silk MK2` (BC) |
+| `Slackijump` | weblock | Variant of `Slackibloc Jump 1.2` (Slack Inov) — adjudicated in 51ba044 |
+| `TiLock 19mm` / `TiLock 25mm` | weblock | We split these by pin type: `… - Steel Pins` / `… - Titanium Pins` (Raed) |
+| `Eline SlacklineE Kit` / `ELINE SLACKLINE: LIGHT KIT` | starterkit | Variants of `eLine Full Kit` / `eLine Light Kit` (YogaSlackers) |
+| `HighlineRing Green` | leashring | Colour variant of `HighlineRing` (Slacktivity) — collapsed by policy |
+| `Space Age Slacklines SATURN ring` | leashring | Our `SATURN ring` — SlackDB prefixes the brand into the name |
+| `Adjustable Tree Wear - Bera` | treepro | Variant of `Adjustable Tree Wear` (Bera) |
+| `Tree'skin` | treepro | Variant of `Treeskin` (Elephant) — apostrophe |
+| `Webbling Pulley` | roller | Our `High-way` (Slack Inov) — **deliberately renamed** in 207b67d, which also corrected its MBS from SlackDB's wrong 15 kN to 21 kN. Importing it re-creates the bug that commit fixed. |
+
+### Out of scope, still
+
+SlackDB's three unmodeled categories are untouched: `BRK` rope brakes (24), `CON` connectors (28),
+`GEN` general (15). Rope brakes are the only one of the three the product vision names as a gear
+type we intend to have — see CLAUDE.md § Product Vision. Adding them is a full new-gear-type
+checklist, not an import.
