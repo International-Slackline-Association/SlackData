@@ -304,6 +304,48 @@ Non-phase engineering tasks not tracked in [PLAN.md](PLAN.md) (frontend roadmap)
     `GearListingPage`; both are query params now, so Back restores them, they are deep-linkable, and
     the two clears drop them along with the rest of the query string rather than resetting them by
     hand. `navigation.cy.ts` covers both, plus every back-link route above.
+- **Table view — the listing's third mode.** `?view=table`, a peer of Cards and Detailed, built to
+  the spec that was in this section: columns are the FULL spec set from `config/specRows.ts` in its
+  declared order (which is the relevance order — the file now says so, because a column's position
+  is the only thing that decides whether anyone scrolls to it), minus the ones no item populates;
+  header clicks write the same single-field `?sort=` the dropdown writes; one frozen identity column;
+  a compare checkbox per row; and the whole row a real link through to the item, as the whole card is
+  — one anchor filling each cell, since a `<tr>` cannot host the card's stretched overlay and a bare
+  click handler gives no context menu, no new-tab and no middle click. Headers carry the label alone — the unit is already on every line.
+  The identity header carries two sorts, `Name · Manufacturer`, since the cell stacks both — which
+  needed an alphabetical branch in `sortItems`, as the numeric path Number()s every brand to NaN and
+  would have left the rows in name order under a header claiming otherwise.
+  **Webbing stretch is one column per kN**, expanded in place where specRows puts the curve: a
+  series in one cell can be read but not ranked, and ranking the catalogue at a given load is the
+  question the mode exists for. The columns are headed by the load alone under one spanning
+  `STRETCH @ KN` heading, and the block's ceiling follows the FILTER rather than the catalogue —
+  only 29 of 230 curves pass 20 kN, so an unfiltered block is empty at the top. Readings recorded off-integer (14
+  of 230 curves) round into the nearest column; an exact reading always beats a rounded one; display
+  and sort share the one accessor so the column can't rank on a number it didn't print. The
+  sidebar's kN pills stay exact-match — a pill saying 10 kN must mean measured at 10 kN. Below `lg` the button is absent and a deep-linked `?view=table` renders
+  Cards without rewriting the URL. DESIGN.md § Table View, `table.cy.ts` (42 tests), and
+  `tests/unit/table.test.ts` for the column/sort-state arithmetic.
+
+  Three things worth knowing, none of them in the plan above:
+
+  - **The listing mode moved into the URL** — for all three modes, not just the table. It was
+    `useState`, so it could not be shared and did not survive Back — the first of the fields the
+    Back entry below moved into the URL.
+  - **The sticky header forces an inner scroll region.** A wrapper that scrolls only horizontally
+    becomes the sticky containing block, so a header pinned inside it scrolls away with the page —
+    `overflow-x: auto` cannot be paired with `overflow-y: visible`, the spec computes that to `auto`.
+    So the table scrolls in both axes inside a `max-h` region under the nav.
+  - **Two rapid header clicks did not flip the direction**, because `sort` arrives through
+    `useSearchParams` and lags a render: the second click read the pre-click sort and re-applied
+    ascending. Fixed with a local `pendingSort` held until the echo lands — the same trap
+    `SortDropdown` documents for its stretch row. `table.cy.ts` caught it.
+
+  **Not done, and deliberately:** multi-column sort (the moment `?sort=` is a list, the dropdown
+  can't represent it), and any table at all below `lg`.
+
+  Adding it also **repacked `cypress/shards.json`**: every shard was already ~6:00, so a 2:00 spec
+  had nowhere to land without making one runner 7:51.
+
 - **Listing toolbar: fixed-size search, and the accuracy note moved out.** The search input was
   `min-w-0 flex-1 max-w-64` — sized from whatever the flex-wrap row had left over, which made it a
   residue of everything else on the row rather than a control with a size. At ~1200px it resolved to

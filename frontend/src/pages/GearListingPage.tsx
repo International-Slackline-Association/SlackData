@@ -1,8 +1,9 @@
 // Gear listing page: filter sidebar + toolbar (search / count / view toggle /
-// sort) + card grid or detailed spec panels.
+// sort) + card grid, detailed spec panels, or the spec table.
 //
-// The grid stays mounted and is hidden (display:none) when Detailed is active;
-// the detailed list mounts only while active (see the Results block for why).
+// The grid stays mounted and is hidden (display:none) when another view is
+// active; the detailed list and the table mount only while active (see the
+// Results block for why).
 // When there are no results, an empty state with a clear-filters action
 // replaces both.
 
@@ -29,6 +30,7 @@ import MobileFilterBar from '@/components/gear/MobileFilterBar'
 import Sheet from '@/components/layout/Sheet'
 import GearGrid from '@/components/gear/GearGrid'
 import GearDetailedList from '@/components/gear/GearDetailedList'
+import GearTable from '@/components/gear/GearTable'
 import CompareBar from '@/components/gear/CompareBar'
 import SuggestButton from '@/components/submissions/SuggestButton'
 import NotFoundPage from './NotFoundPage'
@@ -451,6 +453,15 @@ export default function GearListingPage() {
                 >
                   Detailed
                 </button>
+                <button
+                  data-cy="view-table"
+                  type="button"
+                  data-active={view === 'table' ? 'true' : 'false'}
+                  onClick={() => setView('table')}
+                  className={`border-l border-gray-300 ${viewBtn(view === 'table')}`}
+                >
+                  Table
+                </button>
               </div>
               <SortDropdown
                 slug={meta.slug}
@@ -485,7 +496,7 @@ export default function GearListingPage() {
                   render a full spec table each, so keeping N of them in the DOM
                   behind display:none would both cost real work and double the
                   element counts gear_cards.cy.ts reads off the grid. */}
-              <div className={view === 'detailed' ? 'hidden' : ''}>
+              <div className={view === 'cards' ? '' : 'hidden'}>
                 <GearGrid
                   items={visible}
                   meta={meta}
@@ -501,6 +512,20 @@ export default function GearListingPage() {
                 <GearDetailedList
                   items={visible}
                   meta={meta}
+                  selectedIds={selectedIds}
+                  compareFull={selectedIds.length >= COMPARE_MAX}
+                  onToggleCompare={toggleCompare}
+                />
+              )}
+              {/* `allItems` is the whole gear type, not `visible`: it decides
+                  which COLUMNS exist, which must not change as you filter. */}
+              {view === 'table' && (
+                <GearTable
+                  items={visible}
+                  allItems={items}
+                  meta={meta}
+                  sort={sort}
+                  onSortChange={setSort}
                   selectedIds={selectedIds}
                   compareFull={selectedIds.length >= COMPARE_MAX}
                   onToggleCompare={toggleCompare}

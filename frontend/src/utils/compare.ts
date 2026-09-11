@@ -21,6 +21,16 @@ export function compareByName(a: NamedItem, b: NamedItem): number {
   return String(a.name ?? '').localeCompare(String(b.name ?? ''))
 }
 
+/**
+ * Alphabetical by MANUFACTURER only, ascending — the table view's Manufacturer
+ * column sort. Brand only, so the caller can flip its direction while leaving
+ * the within-brand name tie-break ascending, which is the listing's standing
+ * rule for every other sort (see utils/sort.ts).
+ */
+export function compareByBrand(a: NamedItem, b: NamedItem): number {
+  return String(a.brand_name ?? '').localeCompare(String(b.brand_name ?? ''))
+}
+
 export function sortByName<T extends NamedItem>(items: readonly T[]): T[] {
   return [...items].sort(compareByName)
 }

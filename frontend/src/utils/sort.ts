@@ -10,8 +10,8 @@
 
 import type { SortSpec } from '@/hooks/useUrlState'
 import type { AnyItem } from '@/utils/format'
-import { compareByName as byName } from '@/utils/compare'
-import { percentAtKn } from '@/utils/stretch'
+import { compareByBrand as byBrand, compareByName as byName } from '@/utils/compare'
+import { percentAtRoundedKn } from '@/utils/stretch'
 
 // Compare two nullable numbers with the shared listing rules: nulls last in both
 // directions, ties (incl. both-null) fall back to name ascending.
@@ -38,6 +38,16 @@ export function sortItems(items: AnyItem[], sort: SortSpec | null): AnyItem[] {
 
   const { field, direction } = sort
   const factor = direction === 'asc' ? 1 : -1
+
+  // Manufacturer: the table view's other identity sort. Alphabetical, not
+  // numeric — falling through to the numeric path below would Number() every
+  // brand name to NaN, read them all as null, and leave the list in name order
+  // while the header claimed it was sorted by maker. Names stay ascending
+  // inside a brand whichever way the brand runs, which is the same tie-break
+  // rule the numeric sorts follow.
+  if (field === 'brand_name') {
+    return [...items].sort((a, b) => factor * byBrand(a, b) || byName(a, b))
+  }
   // Price is the one field whose stored number can't be compared item to item:
   // it's in whatever currency the seller charges, so "Price Low→High" on the raw
   // values ranks a 5377 RUB grip against an 89 USD one. Order on the normalized
@@ -48,10 +58,12 @@ export function sortItems(items: AnyItem[], sort: SortSpec | null): AnyItem[] {
   // Webbing stretch sort. The field carries the reference kN (`stretch@10`), so
   // sorting by stretch is self-contained — it reads the % at that kN straight off
   // each item's curve, independent of whichever kN the filter widget is showing.
+  // The lookup is the ROUNDED one, because the table view's per-kN columns are
+  // sorted through this same field and must rank on the number they print.
   if (field.startsWith('stretch@')) {
     const kn = Number(field.slice('stretch@'.length))
     return [...items].sort((a, b) =>
-      compareNumeric(a, b, percentAtKn(a.stretch, kn), percentAtKn(b.stretch, kn), factor),
+      compareNumeric(a, b, percentAtRoundedKn(a.stretch, kn), percentAtRoundedKn(b.stretch, kn), factor),
     )
   }
 

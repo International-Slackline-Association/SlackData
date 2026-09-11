@@ -399,7 +399,9 @@ Null-last in both directions: items where the field is null always appear below 
 
 Full-width search bar (rounded, light border, teal focus ring) on the left.
 
-Right side: `Cards | Detailed` toggle (two pill buttons, Cards active by default) + item count (`145 items`) + `SORT BY` dropdown.
+Right side: `Cards | Detailed | Table` toggle (three segmented buttons, Cards active by default) +
+item count (`145 items`) + `SORT BY` dropdown. The Table button is present from `lg` up only — see
+§ Table View.
 
 Below this row, a subtle `145 items` count left-aligned, above the grid itself.
 
@@ -415,8 +417,10 @@ Hover: shadow deepens slightly.
 
 The second listing mode. Where Cards give a scannable summary, Detailed gives the **whole spec
 sheet for every match at once** — you scroll the list instead of clicking into items one at a time.
-This replaces the old `Chart` table view: a table forced every gear type into the same handful of
-columns, which meant the specs that actually distinguish products were the ones it dropped.
+This replaced the old `Chart` table view, which forced every gear type into the same handful of
+columns and so dropped exactly the specs that distinguish products. § Table View brings a table back
+on the opposite terms — every spec the type has, in relevance order — rather than restoring that
+one.
 
 - **One full-width panel per item**, stacked vertically with the same 20px gutter as the grid.
   Panel chrome matches a card exactly: white, ~14px radius, thin `#E5E7EB` border, subtle shadow
@@ -439,6 +443,87 @@ The view choice lives in the **URL** (`?view=detailed`, `?view=table`; Cards is 
 writes no param), so a mode is shareable and survives Back. It used to be local state, which meant
 opening an item from Detailed and pressing Back landed you in Cards. Both clear actions keep it: a
 listing mode is not a filter.
+
+### Table View
+
+The third listing mode, and the one for the question the other two can't answer: *show me all 245
+webbings ranked by MBS, with the numbers next to each other*. Cards are for browsing, Detailed for
+reading one item at a time.
+
+- **Columns are the full spec set for the gear type**, in `config/specRows.ts` order — the same
+  definitions the detail page and the compare table use, so a spec added there becomes a column here
+  and the three can never disagree about a label, a unit or a formatter. There is no hand-picked
+  subset: deciding which six specs matter is exactly the judgement a table exists to avoid making on
+  the visitor's behalf. The declared order carries the opinion, horizontal scroll carries the rest,
+  and a column no item of that type populates is dropped (`colors` today) — an all-"—" stripe is
+  permanent scroll cost for nothing.
+- **Headers carry the label alone.** The unit lives in the value (`25 mm`, `5.9%`), so a `Width (mm)`
+  header repeated it on every one of 250 lines below it.
+- **Webbing stretch is one column per kN, not one cell**, expanded in place where `specRows.ts` puts
+  stretch in the relevance order. A curve is a series, and a cell holding `5% @ 10 kN · 8% @ 20 kN …`
+  can be read but not ranked; "which webbing stretches least at 10 kN" is the question the table
+  exists for.
+  - **The columns are headed by their load alone** — `1`, `2`, `3` … under one spanning
+    `STRETCH @ KN` group heading, with a hairline where the block starts. Repeating the words on
+    every column sized each of them to its heading instead of to its numbers, which across forty
+    columns is most of the scrolling. The group row pins above the label row, so the two travel
+    together as you scroll.
+  - **The ceiling follows the filter.** Columns run up to the highest load the rows ON SCREEN are
+    measured at, not the highest in the catalogue — unfiltered webbings reach 40 kN, but only 29 of
+    230 curves go past 20, so the top of an unfiltered block is nearly empty. Narrow to a brand and
+    the block narrows with it. This is the deliberate exception to the stable-columns rule above:
+    which SPECS exist is a property of the gear type, but which LOADS are worth a column is a
+    property of what you are looking at.
+  - A column takes the **exact** reading at that load where there is one. Failing that it takes a
+    reading that **rounds** to it — 14 of the 230 curves were recorded off-integer (2.5, 5.34, 6.67,
+    13.3 …) and would otherwise appear in no column at all. Nearest wins within a bucket; 0 kN never
+    participates, because every curve reads 0% there.
+  - Display and sort share that one accessor (`percentAtRoundedKn`). A column that prints a rounded
+    reading and ranks on an exact one is a table that lies.
+  - The **filter sidebar's kN pills are unaffected and stay exact** (`percentAtKn`): a pill that says
+    10 kN must select the webbings actually measured at 10 kN.
+- **One frozen identity column on the left**, pinned with `sticky left-0`: compare checkbox,
+  thumbnail, brand (small caps, linked) and product name (linked), plus the Legacy badge. It is one
+  cell rather than four sticky columns, which would each need a left offset computed from the widths
+  before it — a number that changes with the longest product name on the page. Its header carries
+  **two** sort controls, `NAME · MANUFACTURER`, because the cell stacks both: heading them as two
+  columns would promise a split the body doesn't have. Manufacturer sorts alphabetically, with names
+  still ascending inside a maker whichever way the makers run — and the Sort control labels it
+  **`Brand: A→Z` / `Brand: Z→A`**, not the numeric "Low→High" wording, which is what a field with no
+  entry in `sortFields.ts` fell through to.
+- **Sticky header row**, and the region therefore **scrolls in both axes inside itself**
+  (`max-height: 100vh − --header-h − --compare-bar-h − 2rem`). That is forced, not chosen: a
+  wrapper that scrolls only horizontally becomes the sticky containing block, and a header pinned
+  inside it would scroll away with the page. The region carries `isolate` so its internal z-indices
+  (header 20, frozen column 10, their corner 30) never compete with the nav (20) or CompareBar (30)
+  — the lesson from the card-overlay bug in § Shipped.
+- **Column-header sorting is the same state as the Sort dropdown.** A header click writes the same
+  single-field `?sort=field-direction`, so the two controls can never disagree and a sorted table is
+  shareable. First click on a column is ascending, clicking the active column flips it; there is no
+  third "unsorted" click, because the listing has no unsorted state (a null sort *is* Name A→Z).
+  Deliberately single-column: widening the param to a list is the moment the dropdown can no longer
+  represent the sort. Headers with nothing to rank on — enums, booleans, the stretch curve — render
+  as plain labels. A composite (`width_range`) sorts on the bound the dropdown offers (`width_min`).
+- **The whole row opens the item**, as the whole card does — and it is a real link, not a click
+  handler. A handler alone is not a link: no context menu, no "open in a new tab", no middle click,
+  no URL in the status bar. The card gets this from one stretched `<Link>` overlay; a `<tr>` cannot
+  host one (an absolutely positioned child of a table row has no reliable containing block, and the
+  frozen identity cell is itself positioned), so **every cell carries its own anchor**, with the
+  padding moved off the `<td>` onto the anchor (`p-0` + `h-px` on the cell, `h-full` on the link) so
+  the clickable area is the whole cell and not the word in the middle of it.
+  - Those anchors are `aria-hidden` + `tabIndex={-1}`, exactly as the card's overlay is: one
+    destination repeated forty-odd times per row would otherwise make a screen reader read each row
+    as a wall of identical links. The **product name** is the one that stays focusable.
+  - A click handler survives only as a fallback for the few pixels of gap inside the identity cell
+    that no anchor can fill — a link may not be nested in a link, and that cell holds three
+    (thumbnail, brand, name). It stands aside for anything interactive, for a modified click, and
+    for the end of a drag that selected text.
+- **A compare checkbox per row**, feeding the same selection the cards and detailed panels do, so
+  switching modes keeps your picks.
+- **Below `lg` the Table button is absent** and a deep-linked `?view=table` renders Cards. A
+  frozen-column table has nowhere to freeze on a 390px screen. The fallback is a render decision and
+  not a URL rewrite, so widening the window brings the table back rather than having silently lost
+  the link's intent.
 
 ---
 
@@ -1448,6 +1533,9 @@ Under 16px, iOS Safari zooms the page on focus and never zooms back out.
 
 Compare and the detail page's stretch curve stay tables — side-by-side is the whole point — and scroll
 horizontally inside an `overflow-x-auto` wrapper with the row-label column pinned (`sticky left-0`).
+The listing's Table view is the one table that does **not** go to a phone at all (§ Table View): its
+columns are the whole spec set rather than the two or three items you chose, so there is nothing
+left once the frozen identity column has taken the width.
 Below `sm` they bleed into the page gutter (`-mx-4 px-4`) to buy back 32px of column width, the
 label stub is capped at `w-24`, and compare columns drop to `min-w-[7rem]`. Compare shows a "Swipe
 the table to see every column →" hint below `sm`, because an overflow with no visible edge is not

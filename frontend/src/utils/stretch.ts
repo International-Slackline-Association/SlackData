@@ -7,8 +7,28 @@ export interface StretchPoint {
   percent: number
 }
 
+// Parsed curves, keyed by the raw JSON string. The catalogue holds 230 distinct
+// curves and the strings are stable object fields, so this is bounded by the
+// dataset, not by how long the page has been open.
+//
+// It exists because the table view asks the same question thousands of times per
+// render: forty per-kN columns x 258 rows is ~10,000 parses of the same 230
+// strings, every time anything re-renders the table.
+//
+// Callers must not mutate what comes back — it is now shared. The three here
+// don't: knValues maps, percentAt* find, displayPoints copies before sorting.
+const parsed = new Map<string, StretchPoint[]>()
+
 export function parseStretch(json: unknown): StretchPoint[] {
   if (typeof json !== 'string' || json === '') return []
+  const hit = parsed.get(json)
+  if (hit) return hit
+  const points = parseUncached(json)
+  parsed.set(json, points)
+  return points
+}
+
+function parseUncached(json: string): StretchPoint[] {
   try {
     const pts = JSON.parse(json)
     if (!Array.isArray(pts)) return []
@@ -27,9 +47,32 @@ export function knValues(json: unknown): number[] {
 }
 
 // The stretch % at an exact kN, or null if the curve has no point there.
+// Exact, deliberately: this drives the listing's kN filter pills, and a pill
+// that says "10 kN" must select the webbings that were MEASURED at 10 kN.
 export function percentAtKn(json: unknown, kn: number): number | null {
   const match = parseStretch(json).find(p => p.kn === kn)
   return match ? match.percent : null
+}
+
+// The stretch % for an integer-kN COLUMN in the table view — and for sorting on
+// one, which is why the two must share this function: a column that displays a
+// rounded reading and ranks on an exact one is a table that lies.
+//
+// An exact reading always wins. Failing that, a reading that rounds to this kN
+// counts: 14 of the 230 curves we hold were recorded at a non-integer load
+// (2.5, 5.34, 6.67, 13.3 …), and without this they would appear in no column at
+// all. Nearest wins when a curve somehow has two in the same bucket. 0 kN never
+// participates — every curve reads 0% there.
+export function percentAtRoundedKn(json: unknown, kn: number): number | null {
+  const pts = parseStretch(json)
+  const exact = pts.find(p => p.kn === kn)
+  if (exact) return exact.percent
+  let best: StretchPoint | null = null
+  for (const p of pts) {
+    if (p.kn === 0 || Math.round(p.kn) !== kn) continue
+    if (!best || Math.abs(p.kn - kn) < Math.abs(best.kn - kn)) best = p
+  }
+  return best ? best.percent : null
 }
 
 // The points one item's curve should DISPLAY, ascending by load. 0 kN is dropped

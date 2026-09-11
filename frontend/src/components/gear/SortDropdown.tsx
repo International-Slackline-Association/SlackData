@@ -30,6 +30,11 @@ export function labelFor(sort: SortSpec | null, slug: GearSlug): string {
   // This function returns the VALUE; the eyebrow is the caller's business.
   if (!sort) return 'Name: A→Z'
   if (sort.field === 'name') return sort.direction === 'asc' ? 'Name: A→Z' : 'Name: Z→A'
+  // Alphabetical, like name — and reached from the table view's Manufacturer
+  // column header, not from this menu. Without this it fell through to the
+  // numeric wording below and read "brand_name: Low→High", which is wrong twice
+  // over: it is not a number, and that is not a label.
+  if (sort.field === 'brand_name') return sort.direction === 'asc' ? 'Brand: A→Z' : 'Brand: Z→A'
   const kn = stretchKnOf(sort)
   if (kn != null) {
     return `Stretch at ${kn} kN: ${sort.direction === 'asc' ? 'Low→High' : 'High→Low'}`
