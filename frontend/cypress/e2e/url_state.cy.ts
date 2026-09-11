@@ -6,6 +6,12 @@
 // URL param contract:
 //   ?q=term                        — search query
 //   ?sort=field-direction          — e.g. ?sort=weight-asc, ?sort=name-desc
+//   ?view=detailed|table           — listing mode (Cards writes no param)
+//   ?status=current|historic       — lifecycle scope (ALL writes no param)
+//   ?compare=3,1,9                 — a compare selection to OPEN WITH (read on
+//                                    mount only; ticking a box never writes it)
+//   ?kn=10                         — webbing stretch: the engaged reference kN
+//   ?stretch_min=&?stretch_max=    — webbing stretch: % bounds at that kN
 //   ?{field}=value1,value2         — pill filter (comma-separated for multi-select)
 //   ?{field}_min=val&{field}_max=val — range filter bounds
 //
@@ -248,5 +254,164 @@ describe('Unknown routes', () => {
     cy.visit('/this-route-does-not-exist', { failOnStatusCode: false })
     cy.get('[data-cy="not-found-home-link"]').should('be.visible').click()
     cy.url().should('include', '/webbings')
+  })
+})
+
+// ── Status scope + the stretch widget → URL ───────────────────────────────────
+//
+// Both were component state until they cost a real complaint: a filter that is
+// not in the URL cannot be shared, and quietly reverts when you come back to the
+// listing from an item. See navigation.cy.ts for the Back half of this.
+
+describe('URL state — status scope', () => {
+  it('picking a scope writes ?status=', () => {
+    cy.visit('/webbings')
+    cy.get('[data-cy="status-historic"]').click()
+    cy.url().should('include', 'status=historic')
+  })
+
+  it('ALL writes no param — a bare listing URL stays canonical', () => {
+    cy.visit('/webbings?status=historic')
+    cy.get('[data-cy="status-all"]').click()
+    cy.url().should('not.include', 'status=')
+  })
+
+  it('visiting a URL with ?status= applies that scope', () => {
+    cy.visit('/webbings?status=historic')
+    cy.get('[data-cy="status-historic"]').should('have.attr', 'data-active', 'true')
+    cy.get('[data-cy="gear-card"]').should('have.length.greaterThan', 0)
+    cy.get('[data-cy="gear-card"]').first().find('[data-cy="legacy-badge"]').should('exist')
+  })
+
+  it('an unrecognised ?status= shows the listing at ALL rather than 404ing', () => {
+    cy.visit('/webbings?status=nonsense')
+    cy.get('[data-cy="status-all"]').should('have.attr', 'data-active', 'true')
+    cy.get('[data-cy="gear-card"]').should('have.length.greaterThan', 0)
+  })
+})
+
+describe('URL state — webbing stretch widget', () => {
+  const stretch = '[data-cy="filter-group"][data-group="stretch"]'
+
+  it('engaging a kN pill writes ?kn=, and deselecting it drops the params', () => {
+    cy.visit('/webbings')
+    cy.get(stretch).find('[data-cy="stretch-kn-pill"]').first().click()
+    cy.url().should('include', 'kn=')
+    cy.get(stretch).find('[data-cy="stretch-kn-pill"][data-active="true"]').click()
+    cy.url().should('not.include', 'kn=')
+  })
+
+  it('a deep-linked ?kn= engages that pill and its filter', () => {
+    cy.visit('/webbings')
+    cy.get(stretch).find('[data-cy="stretch-kn-pill"]').first()
+      .invoke('attr', 'data-kn')
+      .then((kn) => {
+        cy.visit(`/webbings?kn=${kn}`)
+        cy.get(stretch)
+          .find(`[data-cy="stretch-kn-pill"][data-kn="${kn}"][data-active="true"]`)
+          .should('exist')
+        // The % slider only exists once a kN is engaged, and cards only carry a
+        // stretch % then — so both are proof the deep link engaged the widget.
+        cy.get(stretch).find('[data-cy="range-min"]').should('exist')
+        cy.get('[data-cy="gear-card"]').first().should('have.attr', 'data-stretch-percent')
+      })
+  })
+
+  // The % bounds are a dual-thumb slider (dragging it is range_slider.cy.ts's
+  // job); what matters here is that the params it writes are read back.
+  it('a deep-linked % bound seeds the slider and narrows the grid', () => {
+    cy.visit('/webbings')
+    cy.get(stretch).find('[data-cy="stretch-kn-pill"]').first()
+      .invoke('attr', 'data-kn')
+      .then((kn) => {
+        cy.visit(`/webbings?kn=${kn}`)
+        cy.get(stretch).find('[data-cy="range-min"]').should('exist')
+        // Read the count only once the grid has actually arrived — the toolbar
+        // says "0 items" while the fetch is in flight.
+        cy.get('[data-cy="gear-card"]').should('have.length.greaterThan', 0)
+        cy.get('[data-cy="item-count"]').invoke('text').then((countText) => {
+          const engaged = Number(countText.replace(/\D/g, ''))
+          cy.get(stretch).find('[data-cy="range-min"]').then(($min) => {
+            const lo = Number($min.attr('min'))
+            const hi = Number($min.attr('max'))
+            const mid = Math.round(lo + (hi - lo) / 2)
+            cy.visit(`/webbings?kn=${kn}&stretch_min=${mid}`)
+            cy.get(stretch).find('[data-cy="range-min"]').should('have.value', String(mid))
+            cy.get('[data-cy="gear-card"]').should('have.length.greaterThan', 0)
+            cy.get('[data-cy="item-count"]').invoke('text').should((t) => {
+              expect(Number(t.replace(/\D/g, ''))).to.be.lessThan(engaged)
+            })
+          })
+        })
+      })
+  })
+
+  it('deselecting the kN drops the % bounds with it', () => {
+    cy.visit('/webbings')
+    cy.get(stretch).find('[data-cy="stretch-kn-pill"]').first()
+      .invoke('attr', 'data-kn')
+      .then((kn) => {
+        cy.visit(`/webbings?kn=${kn}&stretch_min=4`)
+        cy.get(stretch).find('[data-cy="stretch-kn-pill"][data-active="true"]').click()
+        cy.url().should('not.include', 'stretch_min=')
+      })
+  })
+})
+
+// ── Compare selection ─────────────────────────────────────────────────────────
+//
+// The picks are a list you build over several minutes. They live in component
+// state and the URL is READ for them but never written: a param write re-runs
+// every memo keyed off the query string — both filter passes, the sort, and the
+// table view's column set — so ticking one box re-ran the whole listing
+// pipeline and re-rendered 12,000 table cells. The box took about a second to
+// look ticked.
+
+describe('URL state — compare selection', () => {
+  const compareBtn = (i: number) =>
+    cy.get('[data-cy="gear-card"]').eq(i).find('[data-cy="btn-compare"]')
+
+  // The performance guard. If this fails, ticking a box has become slow again.
+  it('picking items does not touch the URL', () => {
+    cy.visit('/webbings')
+    cy.get('[data-cy="gear-card"]').should('have.length.greaterThan', 2)
+    compareBtn(2).click()
+    compareBtn(0).click()
+    cy.get('[data-cy="compare-bar-count"]').should('contain.text', '2')
+    cy.url().should('not.include', 'compare=')
+    cy.url().should('eq', `${Cypress.config('baseUrl')}/webbings`)
+  })
+
+  it('a deep-linked ?compare= fills the bar', () => {
+    cy.visit('/webbings')
+    cy.get('[data-cy="gear-card-name"]').eq(0).invoke('attr', 'href').then((href) => {
+      const id = String(href).split('/').pop()
+      cy.visit(`/webbings?compare=${id}`)
+      cy.get('[data-cy="compare-bar"]').should('be.visible')
+      cy.get('[data-cy="compare-bar-count"]').should('contain.text', '1')
+      // And the card it names shows itself as picked.
+      cy.get(`[data-cy="gear-card"]:has([data-cy="gear-card-name"][href="/webbings/${id}"])`)
+        .find('[data-cy="btn-compare"]')
+        .should('have.attr', 'data-active', 'true')
+    })
+  })
+
+  it('the selection survives a Clear all — it is not a filter', () => {
+    cy.visit('/webbings?q=core')
+    cy.get('[data-cy="gear-card"]').should('have.length.greaterThan', 0)
+    compareBtn(0).click()
+    cy.get('[data-cy="filter-sidebar"]').find('[data-cy="clear-filters"]').click()
+    cy.url().should('not.include', 'q=')
+    cy.get('[data-cy="compare-bar-count"]').should('contain.text', '1')
+  })
+
+  // The picks belong to the gear type they were made in.
+  it('switching gear type clears the selection', () => {
+    cy.visit('/webbings')
+    compareBtn(0).click()
+    cy.get('[data-cy="compare-bar"]').should('be.visible')
+    cy.get('[data-cy="nav-tab"]').contains('Weblocks').click()
+    cy.get('[data-cy="gear-card"]').should('have.length.greaterThan', 0)
+    cy.get('[data-cy="compare-bar"]').should('not.exist')
   })
 })

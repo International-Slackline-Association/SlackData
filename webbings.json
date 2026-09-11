@@ -10603,7 +10603,7 @@
     },
     {
         "id": 231,
-        "name": "Yolo T-1",
+        "name": "Yolo T1",
         "brand": "Geko Slacklines",
         "materialType": "Polyester",
         "width": 25,
@@ -10612,7 +10612,7 @@
         "breakingStrength": 26.5,
         "webbing_construction": "Tubular",
         "isa_certified": false,
-        "product_url": "https://gekoslacklines.mx/producto/yolo-t-1-por-metro",
+        "product_url": "https://web.archive.org/web/20260421003137/https://gekoslacklines.mx/producto/yolo-t-1-por-metro",
         "date_introduced": null,
         "priceMeter": 40.0,
         "currency": "MXN",

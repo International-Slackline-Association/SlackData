@@ -90,13 +90,23 @@ function fmt(v: number): string {
   return String(Math.round(v * 100) / 100)
 }
 
-// The categorical palette, in fixed slot order — validated as a set against a
-// white surface (worst adjacent pair: CVD ΔE 9.1, normal-vision ΔE 19.6). The
-// order IS the safety mechanism, so never sort, shuffle or cycle it: a colour is
-// assigned by column position and stays with that item, and slot 9+ falls back
-// to gray rather than repeating a hue that already means something else on the
-// plot. Eight is where a validated categorical scale ends; a chart with more
-// series than this should be plotting fewer, not inventing hues (see
+// The categorical palette, in fixed slot order — ten slots, one per item a
+// comparison can hold, so every compared webbing gets a line. Validated as a set
+// against a white surface by the data-viz validator on ADJACENT pairs (worst:
+// CVD ΔE 9.1 protan, normal-vision ΔE 19.6) — the same bar the first eight
+// passed, and the bar that applies to a legended line chart. It does NOT pass
+// all-pairs separation, which the first eight did not either: on an all-pairs
+// run red↔orange is ΔE 7.1 and brown↔green is ΔE 2.0 under deuteranopia. That is
+// why identity here is never colour alone — the legend names every line, the
+// crosshair labels the one under the pointer, and the Table view carries the
+// numbers.
+//
+// The order IS the safety mechanism, so never sort, shuffle or cycle it: a
+// colour is assigned by column position and stays with that item, and slot 11+
+// falls back to gray rather than repeating a hue that already means something
+// else on the plot. The first eight slots are unchanged and must stay that way —
+// re-stepping one repaints items in every comparison that already used it.
+// Adding an eleventh hue is not a palette question but a chart-form one (see
 // MAX_PLOTTED_SERIES in StretchChart).
 export const SERIES_COLORS = [
   '#2A78D6', // blue
@@ -107,6 +117,8 @@ export const SERIES_COLORS = [
   '#008300', // green
   '#4A3AA7', // violet
   '#E34948', // red
+  '#00A6C0', // cyan
+  '#A05A2C', // brown
 ] as const
 export const SERIES_FALLBACK = '#6B7280'
 

@@ -13,21 +13,54 @@
 // Each section header is a collapse toggle (DESIGN.md § Detail page gear
 // sections). Collapse state is transient component state — a reading aid for a
 // long catalogue, not something worth putting in the URL.
+//
+// The page carries the listing's Cards | Detailed | Table toggle, applied to
+// every section at once (?view=, the same param the listing reads, so a
+// preference survives Back and is shareable). What it does NOT carry is
+// Compare: the sections here are different gear types, and a compare table of a
+// webbing beside a tree protector has no shared spec to line up. So every view
+// is rendered with `showCompare={false}` — the button is absent rather than
+// present and inert, which is what it used to be.
+//
+// Table sort is per section and local. One ?sort= across the page would mean
+// ranking webbings by MBS also reorders the weblocks below them, and the field
+// clicked often doesn't exist on the next section's table at all.
 
 import { useMemo, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
+import BackLink from '@/components/layout/BackLink'
 import GearGrid from '@/components/gear/GearGrid'
+import GearDetailedList from '@/components/gear/GearDetailedList'
+import GearTable from '@/components/gear/GearTable'
+import { OriginProvider, useCurrentOrigin } from '@/context/OriginContext'
 import { GEAR_TYPES } from '@/config/gearTypes'
 import { useBrandDirectory } from '@/hooks/useBrandDirectory'
+import { useIsDesktop } from '@/hooks/useMediaQuery'
+import { useUrlState, type SortSpec } from '@/hooks/useUrlState'
 import { buildBrandSections } from '@/utils/brandSections'
+import { sortItems } from '@/utils/sort'
 import type { AnyItem } from '@/utils/format'
 import NotFoundPage from './NotFoundPage'
+
+// Same treatment as the listing's toggle, so the control reads as one control
+// wherever it appears.
+const viewBtn = (active: boolean) =>
+  `px-3 py-1.5 text-sm ${active ? 'bg-teal-primary text-white' : 'bg-white text-gray-600 hover:text-gray-900'}`
 
 export default function BrandDetailPage() {
   const { id } = useParams()
   const { brands, gearBySlug, loading } = useBrandDirectory()
   // Slugs the reader has collapsed; absent = expanded, so sections default open.
   const [collapsed, setCollapsed] = useState<Record<string, boolean>>({})
+  // Per-section table sort, keyed by slug; absent = the table's own default
+  // (Name A→Z, which is also the order buildBrandSections hands us).
+  const [sorts, setSorts] = useState<Record<string, SortSpec | null>>({})
+  const { view: urlView, setView } = useUrlState()
+  // A frozen-column table needs width the phone hasn't got — the listing makes
+  // the same call, and for the same reason it is a render decision, not a
+  // rewrite of the URL.
+  const isDesktop = useIsDesktop()
+  const view = !isDesktop && urlView === 'table' ? 'cards' : urlView
 
   const brand = useMemo(
     () => brands.find(b => String(b.id) === String(id)),
@@ -43,8 +76,15 @@ export default function BrandDetailPage() {
     )
   }, [brand, gearBySlug])
 
+  // This brand's page as the way back from any item opened on it — the one case
+  // where "← Webbings" was plainly the wrong answer.
+  const origin = useCurrentOrigin(brand?.name ?? '')
+
   const toggle = (slug: string) =>
     setCollapsed(prev => ({ ...prev, [slug]: !prev[slug] }))
+
+  const setSort = (slug: string, spec: SortSpec) =>
+    setSorts(prev => ({ ...prev, [slug]: spec }))
 
   if (loading) {
     return (
@@ -61,14 +101,15 @@ export default function BrandDetailPage() {
   if (!brand) return <NotFoundPage />
 
   return (
+    <OriginProvider origin={origin}>
     <div data-cy="brand-detail-page">
-      <Link
+      {/* Back to whatever opened this brand — the directory, or the listing
+          whose card carried its name. */}
+      <BackLink
         data-cy="brand-back-link"
-        to="/manufacturers"
+        fallback={{ path: '/manufacturers', label: 'Manufacturers' }}
         className="inline-flex items-center gap-1 text-sm text-teal-primary hover:underline"
-      >
-        ← Manufacturers
-      </Link>
+      />
 
       {brand.website ? (
         <a
@@ -113,6 +154,44 @@ export default function BrandDetailPage() {
         </a>
       ) : null}
 
+      {/* Cards | Detailed | Table, for the whole page. No Compare anywhere
+          below it — see the note at the top of this file. */}
+      {sections.length > 0 && (
+        <div className="mt-5 flex">
+          <div className="flex overflow-hidden rounded-lg border border-gray-300">
+            <button
+              data-cy="view-cards"
+              type="button"
+              data-active={view === 'cards' ? 'true' : 'false'}
+              onClick={() => setView('cards')}
+              className={viewBtn(view === 'cards')}
+            >
+              Cards
+            </button>
+            <button
+              data-cy="view-detailed"
+              type="button"
+              data-active={view === 'detailed' ? 'true' : 'false'}
+              onClick={() => setView('detailed')}
+              className={`border-l border-gray-300 ${viewBtn(view === 'detailed')}`}
+            >
+              Detailed
+            </button>
+            {isDesktop && (
+              <button
+                data-cy="view-table"
+                type="button"
+                data-active={view === 'table' ? 'true' : 'false'}
+                onClick={() => setView('table')}
+                className={`border-l border-gray-300 ${viewBtn(view === 'table')}`}
+              >
+                Table
+              </button>
+            )}
+          </div>
+        </div>
+      )}
+
       <div className="mb-8" />
 
       {sections.length === 0 ? (
@@ -153,11 +232,33 @@ export default function BrandDetailPage() {
                   </svg>
                 </button>
               </h2>
-              {isOpen && <GearGrid items={items} meta={type} />}
+              {isOpen && view === 'cards' && (
+                <GearGrid items={items} meta={type} showCompare={false} />
+              )}
+              {isOpen && view === 'detailed' && (
+                // showActions is what draws the Compare pill in a detailed
+                // panel, so leaving it off is how this view drops it — the same
+                // rendering the standalone detail page uses.
+                <GearDetailedList items={items} meta={type} showCompare={false} />
+              )}
+              {isOpen && view === 'table' && (
+                <GearTable
+                  items={sortItems(items, sorts[type.slug] ?? null)}
+                  // Columns come from this brand's items of this type — on this
+                  // page that IS the whole population being shown, and nothing
+                  // filters it, so nothing can make a column appear or vanish.
+                  allItems={items}
+                  meta={type}
+                  sort={sorts[type.slug] ?? null}
+                  onSortChange={spec => setSort(type.slug, spec)}
+                  showCompare={false}
+                />
+              )}
             </section>
           )
         })
       )}
     </div>
+    </OriginProvider>
   )
 }

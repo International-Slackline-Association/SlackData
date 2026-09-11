@@ -74,3 +74,26 @@ export function sortFieldsFor(slug: GearSlug): SortFieldMeta[] {
   )
   return [...universal, ...(EXTRA_SORT_FIELDS[slug] ?? [])]
 }
+
+// ── Table view: which spec-row columns are clickable headers ─────────────────
+// The table's columns come from SPEC_ROWS (config/specRows.ts), its sorting from
+// the list above — two configs keyed by field name, which agree everywhere
+// except where a spec row is a COMPOSITE. `width_range` folds width_min +
+// width_max into one cell; there is no such column in the data, so the header
+// sorts on the bound the Sort dropdown already offers. Anything not resolved
+// here renders as a plain, unclickable label — including `stretch`, which needs
+// a reference kN to mean anything (see sortItems' `stretch@N`) and so stays the
+// dropdown's business.
+const SPEC_SORT_ALIAS: Record<string, string> = {
+  width_range: 'width_min',
+}
+
+// The sortable field behind a spec-row field, or null if that column can't sort.
+export function sortFieldForSpec(slug: GearSlug, field: string): string | null {
+  // The table's per-kN stretch columns sort on themselves: `stretch@N` is a
+  // field sortItems resolves against the curve, not a column in the data, so it
+  // is in no per-type list here (see utils/table.ts § stretchColumns).
+  if (field.startsWith('stretch@')) return field
+  const target = SPEC_SORT_ALIAS[field] ?? field
+  return sortFieldsFor(slug).some(f => f.field === target) ? target : null
+}

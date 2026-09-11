@@ -270,7 +270,136 @@ Non-phase engineering tasks not tracked in [PLAN.md](PLAN.md) (frontend roadmap)
     five we hold; the rest were confirmed by verified URL. A future sweep of that catalogue needs a
     real browser, not curl.
 
+## Frontend / UX
+
+- [ ] **Universal search (considered, deferred).** Search is per gear type: the box on the webbings
+  page searches webbings. Someone who knows a product name but not its category — which is most
+  people who arrive from outside — has to guess the tab first. Two shapes were weighed: one search
+  box in `TopNav` searching all eight types with a grouped results surface, or the same box with an
+  Amazon-style category selector fused to its left, defaulting to the category being browsed.
+
+  Deferred rather than dropped. The immediate complaint behind it was that the listing toolbar was
+  overloaded and the search box was being squeezed to ~130px, and that is fixed (§ Shipped) without
+  moving search anywhere. Doing it properly needs a cross-type search surface — a results page that
+  can rank a webbing against a weblock, which we have no relevance model for — and that is a feature,
+  not a layout change. Revisit once there is a homepage/dashboard to hang it off (PLAN.md).
+
 ## ✅ Shipped (kept here briefly so the entries above don't get re-opened)
+
+- **Back goes where you actually were.** Three parts of one complaint, all fixed.
+
+  - **The back link on a detail page was `/${slug}`** — the gear type's bare listing, whoever sent
+    you. Open a webbing from Balance Community's page and it said "← Webbings" and meant it; open
+    one from a filtered listing and the filters were gone. Links into a detail page now carry the
+    page they were clicked on in `location.state` (`utils/origin.ts`, `context/OriginContext.tsx`),
+    so the link reads "← Balance Community" or "← Compare Webbings" and returns there, filters and
+    sort intact. `components/layout/BackLink.tsx` is a real `<Link>` with a real href — middle-click
+    and copy-link work — but a plain left click prefers `history.back()` when we know we arrived by
+    PUSH, so the scroll offset `useScrollRestoration` keeps is not thrown away by re-pushing the URL.
+    An origin out of history state is validated before it becomes an href
+    (`tests/unit/origin.test.ts`): a protocol-relative path is not a same-site path.
+  - **Two filters were not in the URL and so silently reverted**, which is the "Local listing state
+    does not survive Back" entry this replaces. The webbing stretch widget (`?kn=`, `?stretch_min=`,
+    `?stretch_max=`) and the ALL/CURRENT/HISTORIC status scope (`?status=`) were `useState` in
+    `GearListingPage`; both are query params now, so Back restores them, they are deep-linkable, and
+    the two clears drop them along with the rest of the query string rather than resetting them by
+    hand. `navigation.cy.ts` covers both, plus every back-link route above.
+  - **The compare selection went the same way, and then came back.** It was `?compare=3,1,9` in
+    selection order, for a good reason: the detour that emptied the bar was opening one of the picks
+    to check a number. The cost turned out to be about a second per tick. A param write goes through
+    `useSearchParams`, and every memo on the listing keyed off `url.params` recomputes with it — both
+    `applyFilters` passes, the sort, and the table view's column set — so one checkbox re-ran the
+    whole listing pipeline and re-rendered 12,000 table cells. It is component state again.
+    `?compare=` is still READ on mount, so a link carrying one opens with the bar filled and
+    `utils/compare.ts` → `parseIdList` stays shared with the compare page's `?ids=`
+    (`tests/unit/compareIds.test.ts`); nothing writes it. Both clears still keep it and it still
+    clears on a gear-type switch — the latter needs an effect now that the nav's empty query string
+    isn't doing it for free. `url_state.cy.ts` asserts the URL does not change while you pick, which
+    is the guard against this regressing.
+
+    Surviving the detour is still worth having. The way to get it is somewhere that is not a render
+    input — the entry's `history.state`, or a context above the listing — not by paying for it on
+    every click.
+
+- **Table view — the listing's third mode.** `?view=table`, a peer of Cards and Detailed, built to
+  the spec that was in this section: columns are the FULL spec set from `config/specRows.ts` in its
+  declared order (which is the relevance order — the file now says so, because a column's position
+  is the only thing that decides whether anyone scrolls to it), minus the ones no item populates;
+  header clicks write the same single-field `?sort=` the dropdown writes; one frozen identity column;
+  a compare checkbox per row; and the whole row a real link through to the item, as the whole card is
+  — one anchor filling each cell, since a `<tr>` cannot host the card's stretched overlay and a bare
+  click handler gives no context menu, no new-tab and no middle click. Headers carry the label alone — the unit is already on every line.
+  The identity header carries two sorts, `Name · Manufacturer`, since the cell stacks both — which
+  needed an alphabetical branch in `sortItems`, as the numeric path Number()s every brand to NaN and
+  would have left the rows in name order under a header claiming otherwise.
+  **Webbing stretch is one column per kN**, expanded in place where specRows puts the curve: a
+  series in one cell can be read but not ranked, and ranking the catalogue at a given load is the
+  question the mode exists for. The columns are headed by the load alone under one spanning
+  `STRETCH @ KN` heading, and the block's ceiling follows the FILTER rather than the catalogue —
+  only 29 of 230 curves pass 20 kN, so an unfiltered block is empty at the top. Readings recorded off-integer (14
+  of 230 curves) round into the nearest column; an exact reading always beats a rounded one; display
+  and sort share the one accessor so the column can't rank on a number it didn't print. The
+  sidebar's kN pills stay exact-match — a pill saying 10 kN must mean measured at 10 kN. Below `lg` the button is absent and a deep-linked `?view=table` renders
+  Cards without rewriting the URL. DESIGN.md § Table View, `table.cy.ts` (42 tests), and
+  `tests/unit/table.test.ts` for the column/sort-state arithmetic.
+
+  Three things worth knowing, none of them in the plan above:
+
+  - **The listing mode moved into the URL** — for all three modes, not just the table. It was
+    `useState`, so it could not be shared and did not survive Back — the first of the fields the
+    Back entry below moved into the URL.
+  - **The sticky header forces an inner scroll region.** A wrapper that scrolls only horizontally
+    becomes the sticky containing block, so a header pinned inside it scrolls away with the page —
+    `overflow-x: auto` cannot be paired with `overflow-y: visible`, the spec computes that to `auto`.
+    So the table scrolls in both axes inside a `max-h` region under the nav.
+  - **Two rapid header clicks did not flip the direction**, because `sort` arrives through
+    `useSearchParams` and lags a render: the second click read the pre-click sort and re-applied
+    ascending. Fixed with a local `pendingSort` held until the echo lands — the same trap
+    `SortDropdown` documents for its stretch row. `table.cy.ts` caught it.
+
+  **Not done, and deliberately:** multi-column sort (the moment `?sort=` is a list, the dropdown
+  can't represent it), and any table at all below `lg`.
+
+  Adding it also **repacked `cypress/shards.json`**: every shard was already ~6:00, so a 2:00 spec
+  had nowhere to land without making one runner 7:51.
+
+- **Listing toolbar: fixed-size search, and the accuracy note moved out.** The search input was
+  `min-w-0 flex-1 max-w-64` — sized from whatever the flex-wrap row had left over, which made it a
+  residue of everything else on the row rather than a control with a size. At ~1200px it resolved to
+  about 130px, too narrow to show the word "Search" in its own placeholder. It is now `w-64
+  shrink-0`. Two things left the row to make that fit: the inline "Community-sourced — may be
+  incomplete." note (it is a standing notice and the footer already carries it on every page —
+  SAFETY_AND_ACCURACY.md §B1 was updated, and `safety_notices.cy.ts` now asserts its ABSENCE from the
+  toolbar so it is not quietly reinstated), and "Missing something?", which moved into the
+  right-hand group beside the view toggle and Sort.
+
+- **Card content no longer paints over the sticky filter bar.** Reported as a Firefox-on-Mac bug at
+  narrow widths; it reproduces in Chromium too, ~2000 times in a single scroll sweep. Width was only
+  the trigger — `MobileFilterBar` mounts below `lg`, so the bug can only appear there. The cause was
+  a z-index tie: `GearCard`'s root was `relative` with **no** z-index, so it opened no stacking
+  context and its `relative z-10` title link and action buttons landed in the ROOT stacking context,
+  tying with the bar's own `z-10` and winning on DOM order because the cards come after it. Fixed
+  with `isolate` on the card — not by giving the bar a bigger number, which would only move the
+  collision. `mobile.cy.ts` guards it with `elementFromPoint` across a sweep of scroll offsets,
+  because overlap is the question "what is painted here?" and rectangles cannot answer it.
+
+- **"Sort by Sort by".** `labelFor()` returned the literal string `'Sort by'` when no sort was set,
+  and both triggers print their own eyebrow above it — so the desktop button read "Sort by Sort by"
+  and the mobile one "Sort Sort by". No sort is not "unsorted": `sortItems()` falls through to
+  alphabetical, so the default now labels itself **Name: A→Z**, which is what it actually does.
+
+- **Scroll restoration on back/forward.** Every navigation used to land at the top, so opening the
+  180th webbing and pressing Back dropped you at webbing #1. `hooks/useScrollRestoration.ts`, mounted
+  once on `AppLayout`. It is a hook rather than react-router's `<ScrollRestoration>` because that
+  component requires a data router and `main.tsx` mounts a plain `<BrowserRouter>` — adopting
+  `createBrowserRouter` to get it would rewrite App.tsx's route table for one behaviour. Three things
+  make it work rather than nearly work: `history.scrollRestoration = 'manual'` (the browser's own
+  runs before React has rendered the list and clamps to 0 against a page one spinner tall); keyed by
+  `location.key` rather than pathname (two visits to /webbings with different filters are different
+  entries and must not inherit each other's offset); and re-applied every animation frame until the
+  offset sticks or a 1.5s budget runs out, because the listing is still fetching and still growing at
+  restore time. PUSH/REPLACE still go to the top. Filters, sort and search come back on their own —
+  they live in the query string — with two exceptions recorded above.
 
 - **Compare draws the stretch curve, and holds ten items** (#76). Four columns of
   "5.9% @ 10 kN · 7.1% @ 15 kN · …" is the reading compare exists to spare you, so on compare

@@ -4,14 +4,47 @@
 // Param contract:
 //   ?q=term                          search query
 //   ?sort=field-direction            e.g. ?sort=weight-asc  (Name A→Z = no param)
+//   ?view=detailed|table             listing mode (Cards = no param)
+//   ?status=current|historic         lifecycle scope (All = no param)
+//   ?compare=3,1,9                   a compare selection to OPEN WITH (read on
+//                                    mount only — ticking a box never writes it)
+//   ?kn=10                           webbing stretch: the engaged reference kN
+//   ?stretch_min=&?stretch_max=      webbing stretch: % bounds at that kN
 //   ?{field}=value1,value2           pill filter (comma-separated multi-select)
 //   ?{field}_min=val&{field}_max=val range filter bounds
+//
+// Status and the stretch widget joined the contract late, and for a reason
+// beyond deep-linking: they were `useState` on the listing page, so opening an
+// item and pressing Back silently dropped them. A filter that reverts on its own
+// reads as wrong data rather than as lost state.
 //
 // The hook is generic: `q` and `sort` are fixed keys; pill/range accessors take
 // the field name, and the calling page supplies those from its filter config.
 
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
+import { parseIdList } from '@/utils/compare'
+
+// The listing's three modes. Cards is the default and writes NO param, so a
+// bare /webbings link is still the canonical listing URL.
+export const VIEWS = ['cards', 'detailed', 'table'] as const
+export type View = (typeof VIEWS)[number]
+
+// Lifecycle scope — the sidebar's ALL / CURRENT / HISTORIC bubble. `all` is the
+// default and writes no param, so a bare /webbings stays the canonical listing
+// URL. (StatusToggle re-exports the type; it lives here because the URL is where
+// the value lives.)
+export const STATUSES = ['all', 'current', 'historic'] as const
+export type Status = (typeof STATUSES)[number]
+
+/** The listing's compare selection. The compare PAGE carries the same list as
+ *  `?ids=` — a different name because it is a different statement: `?compare=`
+ *  is what you have picked, `?ids=` is what you are comparing. */
+export const COMPARE_PARAM = 'compare'
+
+/** The stretch widget's URL keys, so the page and the tests name them once. */
+export const STRETCH_KN_PARAM = 'kn'
+export const STRETCH_RANGE_FIELD = 'stretch'
 
 export type SortDirection = 'asc' | 'desc'
 export interface SortSpec {
@@ -65,6 +98,14 @@ export function useUrlState() {
 
   const q = params.get('q') ?? ''
 
+  // An unrecognised ?view= is Cards rather than a 404 — the param is a display
+  // preference, and a stale link from a future/renamed mode should still show
+  // the listing.
+  const view = useMemo<View>(() => {
+    const raw = params.get('view')
+    return (VIEWS as readonly string[]).includes(raw ?? '') ? (raw as View) : 'cards'
+  }, [params])
+
   const sort = useMemo<SortSpec | null>(() => {
     const raw = params.get('sort')
     if (!raw) return null
@@ -74,6 +115,31 @@ export function useUrlState() {
     if (direction !== 'asc' && direction !== 'desc') return null
     return { field: raw.slice(0, idx), direction }
   }, [params])
+
+  // An unrecognised ?status= is All, for the same reason an unrecognised ?view=
+  // is Cards: a display/scope param from a stale link should show the listing,
+  // not a 404.
+  const status = useMemo<Status>(() => {
+    const raw = params.get('status')
+    return (STATUSES as readonly string[]).includes(raw ?? '') ? (raw as Status) : 'all'
+  }, [params])
+
+  // The engaged stretch reference point, or null when the widget is off —
+  // which is the load state: no pill active, no % slider, no stretch filtering.
+  const stretchKn = useMemo<number | null>(() => {
+    const raw = params.get(STRETCH_KN_PARAM)
+    if (!raw) return null
+    const n = Number(raw)
+    return Number.isFinite(n) ? n : null
+  }, [params])
+
+  // The compare selection, in the order it was picked — that order is the
+  // column order downstream, so it is data, not presentation.
+  // Read-only. The listing seeds its selection from this once and then keeps it
+  // in component state: a param write re-runs every memo keyed off `params` —
+  // both filter passes, the sort, and the table's column set — so ticking a
+  // compare box used to re-run the whole listing pipeline. See GearListingPage.
+  const compareIds = useMemo(() => parseIdList(params.get(COMPARE_PARAM)), [params])
 
   // All mutations replace history (typing a search term shouldn't spam the
   // back button) and operate on a copy of the current params.
@@ -100,6 +166,41 @@ export function useUrlState() {
       mutate(next =>
         spec ? next.set('sort', `${spec.field}-${spec.direction}`) : next.delete('sort'),
       ),
+    [mutate],
+  )
+
+  const setView = useCallback(
+    (next: View) =>
+      mutate(p => (next === 'cards' ? p.delete('view') : p.set('view', next))),
+    [mutate],
+  )
+
+  const setStatus = useCallback(
+    (next: Status) =>
+      mutate(p => (next === 'all' ? p.delete('status') : p.set('status', next))),
+    [mutate],
+  )
+
+  // Takes a TRANSFORM, not a list, and applies it inside the mutation — same
+  // reasoning as setPillExclusive above. Deciding "is this id already selected?"
+  // outside reads the last COMMITTED params, so two Compare clicks landing
+  // inside one uncommitted window both compute from the same list and the first
+  // one vanishes. Ten cards clicked in a row is exactly that case, and it is a
+  // real user gesture, not just a fast test.
+  // Turning the widget off drops its % bounds in the SAME mutation: the slider
+  // is unmounted with no kN engaged, so bounds left behind would be a filter
+  // nobody can see, sitting in a URL somebody might share.
+  const setStretchKn = useCallback(
+    (kn: number | null) =>
+      mutate(next => {
+        if (kn == null) {
+          next.delete(STRETCH_KN_PARAM)
+          next.delete(`${STRETCH_RANGE_FIELD}_min`)
+          next.delete(`${STRETCH_RANGE_FIELD}_max`)
+        } else {
+          next.set(STRETCH_KN_PARAM, String(kn))
+        }
+      }),
     [mutate],
   )
 
@@ -197,9 +298,19 @@ export function useUrlState() {
   )
 
   // Clears search + all filters but stays on the current route.
+  // Both clears KEEP ?view= and ?compare=. Neither is a filter: being thrown
+  // back to Cards because you cleared the sidebar would read as the page losing
+  // your place, and clearing the filters to go find the fourth thing you wanted
+  // to compare must not throw away the first three. Neither can empty a result
+  // set by being left alone.
   const clearAll = useCallback(() => {
-    pendingRef.current = new URLSearchParams()
-    setParams(new URLSearchParams(), { replace: true })
+    const next = new URLSearchParams()
+    const keptView = pendingRef.current.get('view')
+    const keptCompare = pendingRef.current.get(COMPARE_PARAM)
+    if (keptView) next.set('view', keptView)
+    if (keptCompare) next.set(COMPARE_PARAM, keptCompare)
+    pendingRef.current = next
+    setParams(next, { replace: true })
     setReset(r => ({ nonce: r.nonce + 1, q: '' }))
   }, [setParams])
 
@@ -212,8 +323,12 @@ export function useUrlState() {
     const next = new URLSearchParams()
     const keptQ = pendingRef.current.get('q')
     const keptSort = pendingRef.current.get('sort')
+    const keptView = pendingRef.current.get('view')
+    const keptCompare = pendingRef.current.get(COMPARE_PARAM)
     if (keptQ) next.set('q', keptQ)
     if (keptSort) next.set('sort', keptSort)
+    if (keptView) next.set('view', keptView)
+    if (keptCompare) next.set(COMPARE_PARAM, keptCompare)
     pendingRef.current = next
     setParams(next, { replace: true })
     setReset(r => ({ nonce: r.nonce + 1, q: keptQ ?? '' }))
@@ -227,6 +342,13 @@ export function useUrlState() {
     setQ,
     sort,
     setSort,
+    view,
+    setView,
+    status,
+    setStatus,
+    compareIds,
+    stretchKn,
+    setStretchKn,
     getPillValues,
     setPillValues,
     togglePill,

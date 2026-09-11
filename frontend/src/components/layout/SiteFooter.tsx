@@ -16,7 +16,7 @@ export default function SiteFooter() {
     >
       <div className="mx-auto flex max-w-7xl flex-col gap-2">
         <SafetyNotice variant="footer" />
-        <DataAccuracyNote variant="footer" />
+        <DataAccuracyNote />
         {/*
           The only route into the manufacturer API docs. A brand arrives here
           from a product page having noticed a wrong spec, so the footer — on

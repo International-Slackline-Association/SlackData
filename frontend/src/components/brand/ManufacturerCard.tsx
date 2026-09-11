@@ -15,6 +15,7 @@
 
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { useOriginState } from '@/context/OriginContext'
 import { GEAR_TYPES } from '@/config/gearTypes'
 import type { BrandWithCounts } from '@/hooks/useBrandDirectory'
 import { manufacturerLogo } from '@/utils/manufacturerImages'
@@ -66,6 +67,8 @@ function Logo({ brandName }: { brandName: string }) {
 }
 
 export default function ManufacturerCard({ brand }: { brand: BrandWithCounts }) {
+  // The directory, filtered as the reader left it, as the brand page's way back.
+  const originState = useOriginState()
   const countAttrs = Object.fromEntries(
     GEAR_TYPES.map(t => [`data-count-${t.slug}`, String(brand.counts[t.slug] ?? 0)]),
   )
@@ -120,6 +123,7 @@ export default function ManufacturerCard({ brand }: { brand: BrandWithCounts }) 
               z-10 so it stays clickable above this overlay. */}
           <Link
             to={`/manufacturers/${brand.id}`}
+            state={originState}
             className="rounded-sm outline-none after:absolute after:inset-0 after:z-0 after:content-[''] focus-visible:ring-2 focus-visible:ring-teal-primary"
           >
             {/* Above the overlay, which is anchored to the CARD (the nearest

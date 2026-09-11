@@ -14,6 +14,7 @@
 //    (the trap Phase 6.5 hit with the detailed list).
 
 import { useEffect, useMemo, useState } from 'react'
+import { OriginProvider, useCurrentOrigin } from '@/context/OriginContext'
 import FilterGroup from '@/components/gear/FilterGroup'
 import Sheet from '@/components/layout/Sheet'
 import { useIsDesktop } from '@/hooks/useMediaQuery'
@@ -33,6 +34,8 @@ const SORT_OPTIONS: { value: SortKey; label: string }[] = [
 
 export default function ManufacturersPage() {
   const { brands, loading } = useBrandDirectory()
+  // This directory as the brand pages' way back.
+  const origin = useCurrentOrigin('Manufacturers')
   const [sort, setSort] = useState<SortKey>('gear')
   const [query, setQuery] = useState('')
   const [countries, setCountries] = useState<string[]>([])
@@ -92,6 +95,7 @@ export default function ManufacturersPage() {
     )
 
   return (
+    <OriginProvider origin={origin}>
     <div data-cy="manufacturers-page">
       <h1 className="mb-6 text-2xl font-bold text-gray-900">Manufacturers</h1>
 
@@ -246,5 +250,6 @@ export default function ManufacturersPage() {
         </Sheet>
       )}
     </div>
+    </OriginProvider>
   )
 }

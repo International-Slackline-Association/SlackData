@@ -166,6 +166,10 @@ outside the scroll region. A single full-width pill ("bubble") split into equal 
 - **Defaults to ALL** — the listing opens on the whole catalogue, current and historic together.
   Scope is the *first* narrowing applied: search, the filter groups, their facet counts, the item
   count and the grid all work off it.
+- **It lives in the URL** (`?status=current|historic`; ALL is the default and writes no param), like
+  every other filter — so it is shareable and comes back with Back. It was local state, which meant
+  opening a legacy item from HISTORIC and pressing Back put you in ALL with the item nowhere near
+  where you left it.
 - `ALL` = every item · `CURRENT` = still sold, i.e. `active !== false` (true or unknown) ·
   `HISTORIC` = retired only, `active === false`.
 - **One color per third**: ALL amber-orange `#E8770A`, CURRENT green `#15803D`, HISTORIC red
@@ -347,6 +351,12 @@ Rules:
 - Changing the selected kN resets the % range inputs
 - Cards carry a `data-stretch-percent` attribute (% at the engaged kN) **only while a kN pill is engaged** — on a fresh load no card carries it
 - Sorting by stretch is handled by the sort dropdown's own secondary kN picker, **decoupled** from this filter widget — see Sort options below
+- **The widget's state is in the URL** — `?kn=<kn>` for the engaged pill, `?stretch_min=` /
+  `?stretch_max=` for the % bounds, all absent when it is disengaged. So a stretch view is
+  shareable, and — the reason it moved out of component state — it survives Back: engaging a
+  stretch filter, opening a webbing and returning used to bring the cards back unfiltered, which
+  reads as wrong data rather than as lost state. Deselecting the kN drops the % bounds with it, in
+  the same write: the slider is unmounted, so bounds left behind would be a filter nobody can see.
 
 ---
 
@@ -389,7 +399,9 @@ Null-last in both directions: items where the field is null always appear below 
 
 Full-width search bar (rounded, light border, teal focus ring) on the left.
 
-Right side: `Cards | Detailed` toggle (two pill buttons, Cards active by default) + item count (`145 items`) + `SORT BY` dropdown.
+Right side: `Cards | Detailed | Table` toggle (three segmented buttons, Cards active by default) +
+item count (`145 items`) + `SORT BY` dropdown. The Table button is present from `lg` up only — see
+§ Table View.
 
 Below this row, a subtle `145 items` count left-aligned, above the grid itself.
 
@@ -405,8 +417,10 @@ Hover: shadow deepens slightly.
 
 The second listing mode. Where Cards give a scannable summary, Detailed gives the **whole spec
 sheet for every match at once** — you scroll the list instead of clicking into items one at a time.
-This replaces the old `Chart` table view: a table forced every gear type into the same handful of
-columns, which meant the specs that actually distinguish products were the ones it dropped.
+This replaced the old `Chart` table view, which forced every gear type into the same handful of
+columns and so dropped exactly the specs that distinguish products. § Table View brings a table back
+on the opposite terms — every spec the type has, in relevance order — rather than restoring that
+one.
 
 - **One full-width panel per item**, stacked vertically with the same 20px gutter as the grid.
   Panel chrome matches a card exactly: white, ~14px radius, thin `#E5E7EB` border, subtle shadow
@@ -422,9 +436,94 @@ columns, which meant the specs that actually distinguish products were the ones 
 - Two wiring differences from the standalone detail page: the **product name is a link** to that
   item's detail page, and the panel carries the card's **`⧉ Compare`** action
   (next to `View product →`), so those actions work from either view.
-- Filters, search and sort apply identically in both modes — same items, same order, different
-  density. The view choice is **local state**: it resets to Cards on navigation and is not encoded
-  in the URL.
+- Filters, search and sort apply identically in every mode — same items, same order, different
+  density.
+
+The view choice lives in the **URL** (`?view=detailed`, `?view=table`; Cards is the default and
+writes no param), so a mode is shareable and survives Back. It used to be local state, which meant
+opening an item from Detailed and pressing Back landed you in Cards. Both clear actions keep it: a
+listing mode is not a filter.
+
+### Table View
+
+The third listing mode, and the one for the question the other two can't answer: *show me all 245
+webbings ranked by MBS, with the numbers next to each other*. Cards are for browsing, Detailed for
+reading one item at a time.
+
+- **Columns are the full spec set for the gear type**, in `config/specRows.ts` order — the same
+  definitions the detail page and the compare table use, so a spec added there becomes a column here
+  and the three can never disagree about a label, a unit or a formatter. There is no hand-picked
+  subset: deciding which six specs matter is exactly the judgement a table exists to avoid making on
+  the visitor's behalf. The declared order carries the opinion, horizontal scroll carries the rest,
+  and a column no item of that type populates is dropped (`colors` today) — an all-"—" stripe is
+  permanent scroll cost for nothing.
+- **Headers carry the label alone.** The unit lives in the value (`25 mm`, `5.9%`), so a `Width (mm)`
+  header repeated it on every one of 250 lines below it.
+- **Webbing stretch is one column per kN, not one cell**, expanded in place where `specRows.ts` puts
+  stretch in the relevance order. A curve is a series, and a cell holding `5% @ 10 kN · 8% @ 20 kN …`
+  can be read but not ranked; "which webbing stretches least at 10 kN" is the question the table
+  exists for.
+  - **The columns are headed by their load alone** — `1`, `2`, `3` … under one spanning
+    `STRETCH @ KN` group heading, with a hairline where the block starts. Repeating the words on
+    every column sized each of them to its heading instead of to its numbers, which across forty
+    columns is most of the scrolling. The group row pins above the label row, so the two travel
+    together as you scroll.
+  - **The ceiling follows the filter.** Columns run up to the highest load the rows ON SCREEN are
+    measured at, not the highest in the catalogue — unfiltered webbings reach 40 kN, but only 29 of
+    230 curves go past 20, so the top of an unfiltered block is nearly empty. Narrow to a brand and
+    the block narrows with it. This is the deliberate exception to the stable-columns rule above:
+    which SPECS exist is a property of the gear type, but which LOADS are worth a column is a
+    property of what you are looking at.
+  - A column takes the **exact** reading at that load where there is one. Failing that it takes a
+    reading that **rounds** to it — 14 of the 230 curves were recorded off-integer (2.5, 5.34, 6.67,
+    13.3 …) and would otherwise appear in no column at all. Nearest wins within a bucket; 0 kN never
+    participates, because every curve reads 0% there.
+  - Display and sort share that one accessor (`percentAtRoundedKn`). A column that prints a rounded
+    reading and ranks on an exact one is a table that lies.
+  - The **filter sidebar's kN pills are unaffected and stay exact** (`percentAtKn`): a pill that says
+    10 kN must select the webbings actually measured at 10 kN.
+- **One frozen identity column on the left**, pinned with `sticky left-0`: compare checkbox,
+  thumbnail, brand (small caps, linked) and product name (linked), plus the Legacy badge. It is one
+  cell rather than four sticky columns, which would each need a left offset computed from the widths
+  before it — a number that changes with the longest product name on the page. Its header carries
+  **two** sort controls, `NAME · MANUFACTURER`, because the cell stacks both: heading them as two
+  columns would promise a split the body doesn't have. Manufacturer sorts alphabetically, with names
+  still ascending inside a maker whichever way the makers run — and the Sort control labels it
+  **`Brand: A→Z` / `Brand: Z→A`**, not the numeric "Low→High" wording, which is what a field with no
+  entry in `sortFields.ts` fell through to.
+- **Sticky header row**, and the region therefore **scrolls in both axes inside itself**
+  (`max-height: 100vh − --header-h − --compare-bar-h − 2rem`). That is forced, not chosen: a
+  wrapper that scrolls only horizontally becomes the sticky containing block, and a header pinned
+  inside it would scroll away with the page. The region carries `isolate` so its internal z-indices
+  (header 20, frozen column 10, their corner 30) never compete with the nav (20) or CompareBar (30)
+  — the lesson from the card-overlay bug in § Shipped.
+- **Column-header sorting is the same state as the Sort dropdown.** A header click writes the same
+  single-field `?sort=field-direction`, so the two controls can never disagree and a sorted table is
+  shareable. First click on a column is ascending, clicking the active column flips it; there is no
+  third "unsorted" click, because the listing has no unsorted state (a null sort *is* Name A→Z).
+  Deliberately single-column: widening the param to a list is the moment the dropdown can no longer
+  represent the sort. Headers with nothing to rank on — enums, booleans, the stretch curve — render
+  as plain labels. A composite (`width_range`) sorts on the bound the dropdown offers (`width_min`).
+- **The whole row opens the item**, as the whole card does — and it is a real link, not a click
+  handler. A handler alone is not a link: no context menu, no "open in a new tab", no middle click,
+  no URL in the status bar. The card gets this from one stretched `<Link>` overlay; a `<tr>` cannot
+  host one (an absolutely positioned child of a table row has no reliable containing block, and the
+  frozen identity cell is itself positioned), so **every cell carries its own anchor**, with the
+  padding moved off the `<td>` onto the anchor (`p-0` + `h-px` on the cell, `h-full` on the link) so
+  the clickable area is the whole cell and not the word in the middle of it.
+  - Those anchors are `aria-hidden` + `tabIndex={-1}`, exactly as the card's overlay is: one
+    destination repeated forty-odd times per row would otherwise make a screen reader read each row
+    as a wall of identical links. The **product name** is the one that stays focusable.
+  - A click handler survives only as a fallback for the few pixels of gap inside the identity cell
+    that no anchor can fill — a link may not be nested in a link, and that cell holds three
+    (thumbnail, brand, name). It stands aside for anything interactive, for a modified click, and
+    for the end of a drag that selected text.
+- **A compare checkbox per row**, feeding the same selection the cards and detailed panels do, so
+  switching modes keeps your picks.
+- **Below `lg` the Table button is absent** and a deep-linked `?view=table` renders Cards. A
+  frozen-column table has nowhere to freeze on a 390px screen. The fallback is a render decision and
+  not a URL rewrite, so widening the window brings the table back rather than having silently lost
+  the link's intent.
 
 ---
 
@@ -456,9 +555,9 @@ columns, which meant the specs that actually distinguish products were the ones 
 - **No gear-type badge.** Each listing shows a single gear type, so labelling every card "ROLLER" on the rollers page is redundant. Reintroduce a coral gear-type pill (top-left, absolute) only on views that mix types — e.g. manufacturer pages.
 - **Legacy badge, top-left overlay** (absolute, ~8px from the top-**left** corner) — a small red uppercase `Legacy` pill, shown only when `active` is false (discontinued / no longer sold). Nothing renders for active or unknown (`active` true/null) gear — an active card carries no status pill. Because the listing defaults to ALL, a grid routinely mixes badged and unbadged cards — the badge is what tells them apart, so it is never suppressed by the sidebar's status scope. This occupies the **top-left** slot (the one reserved above for a future gear-type pill), mirroring the manufacturer card's top-left **Inactive** pill (see § Manufacturer card anatomy), so both card types read the same way: lifecycle status on the left, classification/ISA on the right.
 - **Top-right overlay stack** (absolute, ~8px from the top-right corner, stacked vertically with ~6px gaps, right-aligned):
-  1. **ISA warning bubble** — a small uppercase pill (`RECALL` / `WARNING` / `NOTICE`) whenever `isa_warning` is set, coloured by severity (see § ISA Warnings). It sits **above the classification bubble**, at the very top of the stack: a recalled webbing's Type A grant is the second thing you need to know, not the first. Omit entirely when `isa_warning` is null or `No Warning`, and on the three types with no `isa_warning` field (tree protectors, starter kits, trickline kits).
-  2. **Classification bubble** — webbing only, and only in the two cases § Classification bubble defines: an **ISA-certified** webbing shows its granted class, and a webbing under **22 kN** shows the gray **Not for Highline** pill. Identical component, colors and shape to the detail page's bubble — the highline class is the fastest read on a webbing card, so it belongs in the grid, not just one click deep. Omit entirely otherwise (including an uncertified `Not for Highline` webbing at 22 kN or more, and any null `classification`). Other gear types have no `classification` field and never show it. So a letter bubble always has the ISA stamp beneath it, while a `Not for Highline` pill usually stands alone.
-  3. **ISA Approved badge** — the miniature stamp, when `isa_certified` is true (see below).
+  1. **ISA Approved badge** — the miniature stamp, when `isa_certified` is true (see below). It leads the stack: certification is the question a reader brings to the grid, and every pill below it refines that answer rather than replacing it.
+  2. **ISA warning bubble** — a small uppercase pill (`RECALL` / `WARNING` / `NOTICE`) whenever `isa_warning` is set, coloured by severity (see § ISA Warnings). It sits **above the classification bubble**: a recalled webbing's Type A grant is the second thing you need to know, not the first. Omit entirely when `isa_warning` is null or `No Warning`, and on the three types with no `isa_warning` field (tree protectors, starter kits, trickline kits).
+  3. **Classification bubble, or the `Uncertified` pill** — the class itself is webbing only, in the two cases § Classification bubble defines: an **ISA-certified** webbing shows its granted class, and a webbing under **22 kN** shows the gray **Not for Highline** pill. Identical component, colors and shape to the detail page's bubble — the highline class is the fastest read on a webbing card, so it belongs in the grid, not just one click deep. Any other uncertified item on a **`showsUncertified`** type (webbing, weblock, leash ring, grip, roller) shows the outlined gray **`Uncertified`** pill in the same slot; kits and tree protectors show nothing. So a letter bubble always has the ISA stamp above it, and a card carries exactly one certification statement: the stamp, `Not for Highline`, or `Uncertified`.
 
 **Content area** (bottom ~60%):
 - Brand name: small-caps gray, ~11px, ~4px below image area
@@ -473,7 +572,7 @@ columns, which meant the specs that actually distinguish products were the ones 
   single-width lock is not dressed up as a range. Same rule, same formatter as the detail page's
   **Width Range** row.
 - Feature tag pills: light gray bg, dark-gray text, small rounded pills — e.g. `Dyneema`, `Tubular`
-- **ISA Approved badge** — if `isa_certified` is true, show a miniature version of the ISA Approved stamp in the top-right overlay stack of the image area (under the classification bubble when both are present). The stamp replicates the official badge: dark charcoal frame, ISA geometric mark (teal + coral), bold white "APPROVED" text, teal checkmark in the V. If false, omit entirely — no "Not certified" label on cards.
+- **ISA Approved badge** — if `isa_certified` is true, show a miniature version of the ISA Approved stamp at the **top** of the top-right overlay stack of the image area (above the warning bubble and the classification bubble when those are present). The stamp replicates the official badge: dark charcoal frame, ISA geometric mark (teal + coral), bold white "APPROVED" text, teal checkmark in the V. If false, the `Uncertified` pill takes its place lower in the stack on the five `showsUncertified` types (see § Classification bubble) — an empty corner read as "nobody has looked" rather than "not certified".
 - Price: bold amber-orange in the **display currency** — e.g. `≈ $84 → Buy` (the "→ Buy" in slightly
   smaller amber text). The `≈` is dropped when the item is already priced in the display currency.
   Webbings append `/m`. The card shows only the converted figure — the as-sold original lives on the
@@ -515,7 +614,11 @@ it holds a safety warning next to the product name instead of burying it under t
 seller block goes *after* the banner for the same reason — a list of shops must never push a recall
 further from the name of the thing recalled.
 
-**Back link**: `← Webbings` in small gray text, hover teal.
+**Back link**: small gray text, hover teal — and it names **where you came from**, not the gear
+type. Opened from a filtered listing it reads `← Webbings` and returns to that listing with its
+search, sort and filters intact; opened from a manufacturer's page it reads `← Balance Community`;
+from the compare table, `← Compare Webbings`. Only an item reached by a bare link — pasted, or from
+a search engine — falls back to the plain gear-type listing. See § Back links.
 
 **Main card** (white, rounded, shadow):
 
@@ -551,12 +654,18 @@ never by editing one side.
 | A | `#93C47D` (light green) | | Not for Highline | `#E5E7EB` (neutral gray — not on the ISA chart) |
 | B | `#FFD966` (yellow) | | | |
 
-**When the bubble is shown.** Two cases, and only two — both gated inside the bubble component itself, so the card and the detail page cannot diverge:
+**When the bubble is shown.** Three cases, and only three — all gated inside the bubble component itself, so the card and the detail page cannot diverge:
 
 1. **ISA certified** (`isa_certified === true`) → the bubble is its granted class. A+/A/B/C is an ISA grant, so an **uncertified** webbing never shows a letter class, even though the backend computes a `classification` for every webbing from its fibers and strength: a class ISA never granted, rendered in ISA's own colors, reads as certification.
 2. **Breaking strength under 22 kN** → the gray **Not for Highline** pill, certified or not. 22 kN is the Type C floor in `_classify_fiber()` (`slack_data/models/webbing.py`); below it no fiber earns any class, so this is a fact about the webbing rather than a withheld grant, and the warning is worth carrying on every such item.
 
-Anything else shows nothing — including an uncertified `Not for Highline` webbing at **22 kN or more** (a 25 kN polyester, say, which misses Type C only because ISA doesn't certify PES that low: that is a certification gap, not a strength warning). Unknown `breaking_strength` counts as *not* below the floor — no data, no claim. On a sub-22 kN item the `title` reads "Not for highline — breaking strength under 22 kN" rather than "ISA Type …", since nothing about it is an ISA type.
+3. **Neither, on a `showsUncertified` type** → the **`Uncertified`** pill: an outlined white pill, gray-300 border, gray-500 text, no fill. It is deliberately the plainest thing in the stack — most of the catalogue is uncertified, and a grid of loud pills would say nothing — but it is *something*, where an empty corner read as "nobody has looked". `showsUncertified` is true for webbing, weblock, leash ring, grip and roller (the five types that hold a person up) and false for starter kits, trickline kits and tree protectors: a kit carries the `isa_certified` field but is a bundle rather than a certified component, so the label would be noise on every card.
+
+   This is where an uncertified `Not for Highline` webbing at **22 kN or more** lands (a 25 kN polyester, say, which misses Type C only because ISA doesn't certify PES that low): its missing class is a certification gap, not a strength warning, so it reads `Uncertified` rather than `Not for Highline`. Unknown `breaking_strength` counts as *not* below the floor — no data, no claim. So does a null `classification`.
+
+On a sub-22 kN item the `title` reads "Not for highline — breaking strength under 22 kN" rather than "ISA Type …", since nothing about it is an ISA type; the `Uncertified` pill's reads "Not ISA certified — no ISA certification on record".
+
+**The pill is a card affordance only.** The detail page shows the class bubble beside the name but never `Uncertified`, because its **ISA Certification block** already says "Not ISA Certified" in full a few hundred pixels below — two statements of one fact on one screen is one too many. The card has no such block, which is why it gets the pill.
 
 Classification is still **not a sidebar filter**: as a letter class it is an attribute of certification rather than an independent axis of the catalogue (filter by **ISA Certified**), and as a warning it is already implied by the Breaking Strength range.
 
@@ -850,17 +959,51 @@ spec grid — the row is declared for compare and suppressed in `SpecTable`.
 
 ---
 
+## Back links
+
+Every page that shows one thing — a gear item, a manufacturer, a comparison — opens with a
+`← <somewhere>` link, and that somewhere is **the page it was opened from**, not a fixed parent.
+
+- A link into a detail page carries the URL and name of the page it was clicked on, in history
+  state (`utils/origin.ts`). So the back link says `← Webbings` (with the filters that were in play),
+  or `← Balance Community`, or `← Compare Webbings`, and goes there.
+- **Only the current page's own filters come back with it** — they are in the query string, which is
+  what gets carried. Nothing is remembered about pages further back.
+- **A bare link falls back** to the obvious parent: the gear type's listing for an item, the
+  directory for a manufacturer. That is what an arrival from outside the site gets, and it is what
+  every one of these links used to do in every case.
+- It is a **real link** with a real href, so middle-click and "copy link address" work. A plain
+  left click prefers the browser's own Back when we know that is where the origin is, so the
+  listing's scroll position (§ scroll restoration, `useScrollRestoration`) is restored rather than
+  thrown away by pushing the same URL afresh.
+
+---
+
 ## Compare View
 
 `/{slug}/compare?ids=1,2,3` — the selection lives in the URL, so the page is deep-linkable. One
 column per compared item, rows driven by the same `SPEC_ROWS` the detail page uses (see § Spec rows
 per gear type).
 
+**Before it gets here it is component state on the listing**, in selection order. `?compare=` is
+still READ on mount — a link carrying one opens with the bar filled, through the same parser as
+`?ids=` (`utils/compare.ts` → `parseIdList`, which drops junk and never repeats an id: two identical
+columns compare nothing) — but **ticking a box never writes it**.
+
+It was URL state for a while, so the picks survived a detour into an item. The cost was not worth
+it: a param write goes through `useSearchParams`, and every memo on the listing keyed off
+`url.params` then recomputes — both `applyFilters` passes, the sort, and the table view's column
+set. Ticking one box re-ran the whole listing pipeline and re-rendered 12,000 table cells, and the
+box took about a second to look ticked. A selection is neither a filter nor a view: nothing
+downstream of the URL depends on it, so nothing needs it there. Both clears still keep it (it is not
+a filter), and it still empties when you switch gear type. `url_state.cy.ts` asserts the URL stays
+untouched while you pick — that assertion is the performance guard.
+
 **Up to ten items** (`COMPARE_MAX` in `GearListingPage.tsx`): past ten the Compare button on every
 unselected card and detailed panel is disabled. Four was too few for the question people actually
 bring here — a brand's whole range, or every 25mm webbing on the market — and columns are cheap,
-because the table scrolls sideways with the label column pinned. The **chart** is the one part with
-a lower limit: it plots eight curves (§ below).
+because the table scrolls sideways with the label column pinned. The **chart** used to cap lower at
+eight; the palette now carries ten validated slots, so it plots every compared curve (§ below).
 
 Cell rules: a blank value reads `—` rather than dropping the row; a row **no item of that gear type
 populates anywhere** is dropped entirely.
@@ -921,15 +1064,20 @@ the item and does not repaint when another is removed:
 | 2 | `#EB6834` orange | | 4 | `#EDA100` yellow |
 | 5 | `#E87BA4` magenta | | 7 | `#4A3AA7` violet |
 | 6 | `#008300` green | | 8 | `#E34948` red |
+| 9 | `#00A6C0` cyan | | 10 | `#A05A2C` brown |
 
-Validated as a set against the white card surface (worst adjacent pair: CVD ΔE 9.1, normal-vision
-ΔE 19.6). **Eight slots is where the scale ends**, so although ten items can be compared, the plot
-draws the first **eight** curves in column order and names the rest below it
-(`data-cy="stretch-chart-over-cap"`, "Not plotted — 8 lines is the readable limit: …"), pointing at
-the Table view, which carries every compared curve. A ninth line would mean either a repeated hue —
-which would say two different products are the same thing — or an indistinguishable gray.
+**Ten slots — one per comparable item**, so a full comparison plots in full and no compared webbing
+is demoted to a footnote. Validated as a set against the white card surface on **adjacent** pairs
+(worst: CVD ΔE 9.1 protan, normal-vision ΔE 19.6) — the bar that applies to a legended, direct-labelled
+line chart. It does **not** clear all-pairs separation, and neither did the original eight (red↔orange
+ΔE 7.1 normal; brown↔green ΔE 2.0 deutan), which is why the redundancy below is not optional.
 
-Three of the eight sit below 3:1 contrast on white, so colour is **never** the only carrier of
+Slots 1–8 are exactly what they were: a colour belongs to a column position, so re-stepping one
+would repaint items in every comparison already using it. Slot 11+ is gray, and the plot still draws
+what it can colour and names the rest (`data-cy="stretch-chart-over-cap"`) — a path that survives for
+the day `COMPARE_MAX` outgrows the palette, and is unreachable while the two match at ten.
+
+Four of the ten sit below 3:1 contrast on white, so colour is **never** the only carrier of
 identity: every series is also **direct-labelled** at the end of its line (`data-cy="stretch-chart-label"`)
 and listed in a legend (`data-cy="stretch-chart-legend-item"`, carrying `data-id`) with a swatch and
 the item's name. Lines are 2px; markers get a 2px white ring so overlapping points stay countable.
@@ -959,7 +1107,7 @@ whichever side of the crosshair has room, so it never covers the point being rea
 `data-cy="stretch-view-chart"` / `data-cy="stretch-view-table"`) switches the panel to the same data
 as a grid (`data-cy="stretch-chart-table"`): one row per compared webbing, one column per load in
 the union, `—` where that webbing has no measurement. This is the accessible equivalent of the
-chart, and where the curves past the plot's eight-line cap are read.
+chart, and where the numbers themselves — or any curve the plot could not colour — are read.
 
 **Responsive.** The chart is a `viewBox`-scaled inline SVG that fits its container at every width —
 it never scrolls sideways. Below `sm` the direct labels drop (the legend carries identity there) and
@@ -1075,6 +1223,19 @@ per gear type, in the nav's gear-type order; types the brand has none of are omi
   The section root carries `data-collapsed`, and the button `aria-expanded`, so the state is
   readable to both tests and assistive tech.
 
+**Views, and no Compare.** The brand page carries the listing's **Cards | Detailed | Table** toggle,
+above the sections and applied to all of them at once. It writes the same `?view=` param the listing
+reads, so the choice survives Back and is shareable; below `lg` the Table button is absent and a
+deep-linked `?view=table` renders as Cards, exactly as on the listing. Table sort is per section and
+local — one sort across the page would mean ranking the webbings by MBS also reordered the weblocks
+below them, and the clicked field usually doesn't exist on the next section's table at all.
+
+What the page does **not** offer, in any of the three views, is **Compare**. Its sections are
+different gear types, and a compare table holding a webbing beside a tree protector has no shared
+spec to line up — the compare page is built per gear type. So the card's Compare pill, the detailed
+panel's action row and the table's checkbox column are all absent here rather than present and
+inert, which is what they were.
+
 **Grid only, with a sort control.** There is no Cards/List view toggle — the directory is a card
 grid, and that toolbar slot holds a **Sort by** dropdown instead. Options:
 
@@ -1119,7 +1280,7 @@ and disappears entirely when none are (see the note in `manufacturers.cy.ts`; th
 - **All interactive elements**: cursor pointer, teal focus ring on keyboard nav
 - **Border radius**: consistent ~8px for pills, ~14px for cards, ~6px for buttons
 - **No sharp rectangles anywhere** — even the large CTA buttons are rounded
-- **ISA Certified** always uses the official ISA Approved stamp badge (charcoal frame, teal + coral ISA mark, white "APPROVED", teal checkmark). On cards: miniature stamp ~28px tall, top-right of image area (below the classification bubble when the webbing has one — a letter bubble only ever appears on a certified item, so the stamp is always its neighbour), only shown when true. On detail page: ~80px wide block above specs, "Not ISA Certified" in subdued gray when false. Never use a plain checkmark or generic pill — the stamp is the trust signal.
+- **ISA Certified** always uses the official ISA Approved stamp badge (charcoal frame, teal + coral ISA mark, white "APPROVED", teal checkmark). On cards: miniature stamp ~28px tall, at the top of the top-right overlay stack of the image area (above the classification bubble when the webbing has one — a letter bubble only ever appears on a certified item, so the stamp is always its neighbour), only shown when true; uncertified items on the five `showsUncertified` types carry the plain `Uncertified` pill instead. On detail page: ~80px wide block above specs, "Not ISA Certified" in subdued gray when false. Never use a plain checkmark or generic pill — the stamp is the trust signal.
 - **Empty states**: centered gray icon + short message — e.g. "No webbings match your filters" with a "Clear filters" teal link
 
 ### Manufacturer names are links
@@ -1171,6 +1332,13 @@ They are deliberately different, and both are `data-cy="clear-filters"`:
 | Filter pills / ranges / stretch widget | cleared | cleared |
 | Search term (`?q=`) | cleared | **kept** |
 | Status bubble | reset to **ALL** | reset to **ALL** |
+| Listing mode (`?view=`) | **kept** | **kept** |
+| Compare selection (component state) | **kept** | **kept** |
+
+The last two rows are not filters, and neither can empty a result set by being left alone. Being
+thrown back to Cards because you cleared the sidebar would read as the page losing your place, and
+clearing the filters to go find the fourth thing you want to compare must not throw away the first
+three.
 
 The empty-state button's job is "show me what this *search* can find" — a dead end is nearly always
 the filters or a narrow status scope, not the words typed, so wiping the search too threw away the
@@ -1195,7 +1363,7 @@ so the wording physically cannot drift between surfaces (same reasoning as `Lega
 | Notice | Component | Placements |
 |---|---|---|
 | Safety disclaimer | `layout/SafetyNotice.tsx` | site footer (`variant="footer"`), gear detail page (`variant="callout"`) |
-| Data-accuracy note | `layout/DataAccuracyNote.tsx` | site footer (`variant="footer"`), listing toolbar beside the item count (`variant="inline"`) |
+| Data-accuracy note | `layout/DataAccuracyNote.tsx` | site footer only (it used to be repeated on the listing toolbar; see SAFETY_AND_ACCURACY.md §B1) |
 
 - **Neither notice is dismissible.** A notice with a close button is one most readers have already
   closed by the time it matters. There is no "don't show again" and no local-storage state.
@@ -1398,6 +1566,9 @@ Under 16px, iOS Safari zooms the page on focus and never zooms back out.
 
 Compare and the detail page's stretch curve stay tables — side-by-side is the whole point — and scroll
 horizontally inside an `overflow-x-auto` wrapper with the row-label column pinned (`sticky left-0`).
+The listing's Table view is the one table that does **not** go to a phone at all (§ Table View): its
+columns are the whole spec set rather than the two or three items you chose, so there is nothing
+left once the frozen identity column has taken the width.
 Below `sm` they bleed into the page gutter (`-mx-4 px-4`) to buy back 32px of column width, the
 label stub is capped at `w-24`, and compare columns drop to `min-w-[7rem]`. Compare shows a "Swipe
 the table to see every column →" hint below `sm`, because an overflow with no visible edge is not

@@ -205,6 +205,30 @@ describe('ISA warning bubble — gear cards', () => {
       })
     })
 
+    it('sits BELOW the ISA stamp when the item is certified', () => {
+      cy.fetchAllItems('webbing').then((all) => {
+        const both = (all as Item[]).find(
+          i => i.isa_warning != null && i.isa_warning !== 'No Warning' && i.isa_certified === true,
+        )
+        if (!both) return
+        cy.visit('/webbings')
+        cy.get('[data-cy="gear-card"]')
+          .contains('[data-cy="gear-card-name"]', both.name as string)
+          .closest('[data-cy="gear-card"]')
+          .within(() => {
+            // Certification leads the stack (DESIGN.md § Gear Card Anatomy) —
+            // the warning is second, above the class.
+            cy.get('[data-cy="isa-approved-badge"]').then(($stamp) => {
+              cy.get('[data-cy="isa-warning-badge"]').then(($badge) => {
+                expect($stamp[0].getBoundingClientRect().bottom).to.be.lte(
+                  $badge[0].getBoundingClientRect().top + 1,
+                )
+              })
+            })
+          })
+      })
+    })
+
     it('does not collide with the Legacy pill, which stays on the left', () => {
       cy.fetchAllItems('webbing').then((all) => {
         const legacyWarned = (all as Item[]).find(

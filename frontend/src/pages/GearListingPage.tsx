@@ -1,17 +1,20 @@
 // Gear listing page: filter sidebar + toolbar (search / count / view toggle /
-// sort) + card grid or detailed spec panels.
+// sort) + card grid, detailed spec panels, or the spec table.
 //
-// The grid stays mounted and is hidden (display:none) when Detailed is active;
-// the detailed list mounts only while active (see the Results block for why).
+// The grid stays mounted and is hidden (display:none) when another view is
+// active; the detailed list and the table mount only while active (see the
+// Results block for why).
 // When there are no results, an empty state with a clear-filters action
 // replaces both.
 
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
+import { OriginProvider, useCurrentOrigin } from '@/context/OriginContext'
+import { originState } from '@/utils/origin'
 import { getGearType } from '@/config/gearTypes'
 import { useGearList } from '@/hooks/useGearList'
 import { useCurrency } from '@/context/CurrencyContext'
-import { useUrlState } from '@/hooks/useUrlState'
+import { STRETCH_RANGE_FIELD, useUrlState } from '@/hooks/useUrlState'
 import { filterBySearch } from '@/utils/search'
 import { sortItems } from '@/utils/sort'
 import { BRAND_GROUP, filterGroupsFor } from '@/config/filterGroups'
@@ -21,25 +24,24 @@ import { useIsDesktop } from '@/hooks/useMediaQuery'
 import { brandsFor } from '@/utils/sellers'
 import type { AnyItem } from '@/utils/format'
 import FilterSidebar from '@/components/gear/FilterSidebar'
-import type { Status } from '@/components/gear/StatusToggle'
 import StretchFilter from '@/components/gear/StretchFilter'
 import SortDropdown, { labelFor } from '@/components/gear/SortDropdown'
 import MobileFilterBar from '@/components/gear/MobileFilterBar'
 import Sheet from '@/components/layout/Sheet'
 import GearGrid from '@/components/gear/GearGrid'
 import GearDetailedList from '@/components/gear/GearDetailedList'
+import GearTable from '@/components/gear/GearTable'
 import CompareBar from '@/components/gear/CompareBar'
-import DataAccuracyNote from '@/components/layout/DataAccuracyNote'
 import SuggestButton from '@/components/submissions/SuggestButton'
 import NotFoundPage from './NotFoundPage'
 
-type View = 'cards' | 'detailed'
-
 // How many items one comparison may hold. The table scrolls sideways with the
-// label column pinned, so columns are cheap; the chart is the binding
-// constraint, and it plots the first eight curves (MAX_PLOTTED_SERIES) and names
-// the rest. Ten is what people actually want to line up — a brand's whole
-// range, or every 25mm webbing on the market.
+// label column pinned, so columns are cheap; the chart used to be the binding
+// constraint at eight, and the palette was widened to ten so it no longer is —
+// every compared webbing with a curve gets its own line (MAX_PLOTTED_SERIES).
+// Ten is what people actually want to line up — a brand's whole range, or every
+// 25mm webbing on the market. Raising this past ten means widening the palette
+// first, or the extra lines arrive gray.
 const COMPARE_MAX = 10
 
 function LoadingSkeleton() {
@@ -78,14 +80,18 @@ export default function GearListingPage() {
   const { items: rawItems, loading } = useGearList(meta?.slug ?? '', available)
   const { basePrice, displayPrice } = useCurrency()
   const url = useUrlState()
-  const { q, setQ, sort, setSort } = url
-  const [view, setView] = useState<View>('cards')
-  // Lifecycle scope, owned here but controlled from the sidebar's status bubble.
-  // All = everything (the default — the listing opens on the whole catalogue).
-  // Current = still sold (active true, or unknown/null). Historic = legacy gear
-  // that's no longer sold (active === false).
-  const [status, setStatus] = useState<Status>('all')
+  const { q, setQ, sort, setSort, setView } = url
+  // Lifecycle scope, controlled from the sidebar's status bubble and held in the
+  // URL (?status=). All = everything (the default — the listing opens on the
+  // whole catalogue). Current = still sold (active true, or unknown/null).
+  // Historic = legacy gear that's no longer sold (active === false).
+  const { status, setStatus } = url
   const navigate = useNavigate()
+
+  // What a link leaving this page should offer as the way back: this listing,
+  // filters and sort included, under the gear type's own name. Every card link
+  // below picks it up through the provider around the results.
+  const origin = useCurrentOrigin(meta?.label ?? '')
 
   // Below `lg` the sidebar has nowhere to live, so filters and sort move into a
   // bottom sheet. `isDesktop` (matchMedia, not a `hidden lg:block` pair) decides
@@ -93,6 +99,17 @@ export default function GearListingPage() {
   // [data-cy="filter-sidebar"] / [data-cy="sort-option"] sets in the DOM and
   // break every selector the Cypress suite is built on.
   const isDesktop = useIsDesktop()
+
+  // The listing mode lives in the URL (?view=detailed|table), so it is
+  // shareable and survives Back — unlike the local state it used to be.
+  //
+  // Below `lg` the Table button is absent and a deep-linked ?view=table falls
+  // back to Cards. A frozen-column table needs room the phone doesn't have, and
+  // the fallback is deliberately a RENDER decision rather than a rewrite of the
+  // URL: rotating the device or widening the window brings the table back
+  // rather than having silently lost the link's intent.
+  const view = !isDesktop && url.view === 'table' ? 'cards' : url.view
+
   const [sheet, setSheet] = useState<'none' | 'filters' | 'sort'>('none')
   const closeSheet = () => setSheet('none')
   // A sheet left open while the window grows past `lg` would sit on top of a
@@ -102,12 +119,27 @@ export default function GearListingPage() {
   }, [isDesktop])
 
   // Compare selection: an ordered list of item ids (order = the columns/chips
-  // order downstream). Lives in local state, capped at COMPARE_MAX. It clears on
-  // a gear-type switch — the component stays mounted across the same :slug route,
-  // so a slug change is the signal (see the effect below). The compare page is
-  // reached by handing these ids off through the ?ids= query param, which is what
-  // makes that page deep-linkable independent of this state.
-  const [selectedIds, setSelectedIds] = useState<number[]>([])
+  // order downstream), capped at COMPARE_MAX.
+  //
+  // LOCAL state, and writing it to the URL on every tick is exactly what this
+  // must not do. It was ?compare= for a while, so the picks survived a detour
+  // into an item — but a param write goes through useSearchParams, and every
+  // memo on this page that keys off `url.params` then recomputes: the two
+  // applyFilters passes, the sort, and the table view's column set. Ticking one
+  // box re-ran the entire listing pipeline and re-rendered 12,000 table cells,
+  // and the box took about a second to look checked. A selection is not a
+  // filter, and it is not a view: nothing downstream of the URL depends on it.
+  //
+  // Seeded once from ?compare= so a link that carries one still fills the bar,
+  // and the compare PAGE is still reached by handing the ids off as ?ids= —
+  // that is what makes that page deep-linkable on its own. Sliced on the way in
+  // as well as capped on the way out: a URL can name any number of items, and
+  // eleven columns is eleven columns however they were asked for.
+  const [selectedIds, setSelectedIds] = useState<number[]>(() =>
+    url.compareIds.slice(0, COMPARE_MAX),
+  )
+  // The picks belong to the gear type they were made in. As URL state that came
+  // free (a nav tab carries no query string); as local state it needs saying.
   const prevCompareSlug = useRef(slug)
   useEffect(() => {
     if (prevCompareSlug.current === slug) return
@@ -115,16 +147,24 @@ export default function GearListingPage() {
     setSelectedIds([])
   }, [slug])
 
-  const toggleCompare = (id: number) =>
-    setSelectedIds(prev =>
-      prev.includes(id)
-        ? prev.filter(x => x !== id)
-        : prev.length >= COMPARE_MAX
-          ? prev
-          : [...prev, id],
-    )
-  const removeCompare = (id: number) => setSelectedIds(prev => prev.filter(x => x !== id))
-  const clearCompare = () => setSelectedIds([])
+  // Stable identities: GearTable memoizes its rows, and a fresh callback on
+  // every render would defeat that and re-render all 258 of them per tick.
+  const toggleCompare = useCallback(
+    (id: number) =>
+      setSelectedIds(ids =>
+        ids.includes(id)
+          ? ids.filter(x => x !== id)
+          : ids.length >= COMPARE_MAX
+            ? ids
+            : [...ids, id],
+      ),
+    [],
+  )
+  const removeCompare = useCallback(
+    (id: number) => setSelectedIds(ids => ids.filter(x => x !== id)),
+    [],
+  )
+  const clearCompare = useCallback(() => setSelectedIds([]), [])
 
   // Search box holds LOCAL state and drives filtering directly; the URL is kept
   // in sync for bookmarking but is NOT the input's value. Binding value={q}
@@ -161,34 +201,27 @@ export default function GearListingPage() {
     setQ(value)
   }
 
-  // Webbing stretch widget state (owned here so it also drives filtering, the
-  // contextual sort option, and the cards' data-stretch-percent). NOTHING is
-  // selected on load: no pill is active, the % slider is inert, cards carry no
-  // stretch %, and the contextual stretch sort is absent until a kN is picked.
+  // Webbing stretch widget state (it drives filtering, the contextual sort
+  // option, and the cards' data-stretch-percent). NOTHING is selected on load:
+  // no pill is active, the % slider is inert, cards carry no stretch %, and the
+  // contextual stretch sort is absent until a kN is picked.
+  //
+  // It lives in the URL (?kn=, ?stretch_min=, ?stretch_max=) like every other
+  // filter. As local state it was the one filter that silently reverted on Back
+  // — you came back from a webbing to an unfiltered grid, which reads as wrong
+  // data rather than as lost state. The two clears drop the params with
+  // everything else, so no reset signal is needed here any more.
   const isWebbing = meta?.slug === 'webbings'
-  const [stretchKn, setStretchKn] = useState<number | null>(null)
-  const [stretchMin, setStretchMin] = useState('')
-  const [stretchMax, setStretchMax] = useState('')
-  // One value now: the engaged kN, or null when the widget is off. (There is no
+  const stretchRange = url.getRange(STRETCH_RANGE_FIELD)
+  const stretchMin = stretchRange.min == null ? '' : String(stretchRange.min)
+  const stretchMax = stretchRange.max == null ? '' : String(stretchRange.max)
+  // One value: the engaged kN, or null when the widget is off. (There is no
   // separate "display" kN — a pre-selected default hint would render a pill
   // active on load, which it must not.)
-  const selectedKn = isWebbing ? stretchKn : null
-
-  // Reset the stretch widget only when clear-all actually bumps the nonce.
-  // Comparing the previous value (not a mounted flag) survives StrictMode's
-  // double-invoked mount effect.
-  const prevNonce = useRef(url.resetNonce)
-  useEffect(() => {
-    if (prevNonce.current === url.resetNonce) return
-    prevNonce.current = url.resetNonce
-    // clear-all: deselect the kN (no pill active) and clear the % range.
-    setStretchKn(null)
-    setStretchMin('')
-    setStretchMax('')
-  }, [url.resetNonce])
+  const selectedKn = isWebbing ? url.stretchKn : null
 
   // Clicking the engaged pill toggles the widget off; any other pill engages it.
-  const selectKn = (kn: number) => setStretchKn(prev => (prev === kn ? null : kn))
+  const selectKn = (kn: number) => url.setStretchKn(selectedKn === kn ? null : kn)
 
   // Every item gains two derived money fields, the same way the stretch widget
   // attaches stretch_percent below:
@@ -306,20 +339,18 @@ export default function GearListingPage() {
   }, [items, selectedIds])
 
   const viewComparison = () =>
-    navigate(`/${meta?.slug}/compare?ids=${selectedIds.join(',')}`)
+    navigate(`/${meta?.slug}/compare?ids=${selectedIds.join(',')}`, {
+      state: originState(origin),
+    })
 
   // The two clear actions. Both drop every filter and put the status scope back
   // to All; they differ on the search term — the empty state's button keeps it
   // (you asked for those words; the filters are what dead-ended), the sidebar's
   // "Clear all" wipes it.
-  const clearFilters = () => {
-    url.clearFilters()
-    setStatus('all')
-  }
-  const clearAll = () => {
-    url.clearAll()
-    setStatus('all')
-  }
+  // Both wipe ?status= and the stretch params along with the rest of the query
+  // string, so neither needs to reset anything by hand.
+  const clearFilters = () => url.clearFilters()
+  const clearAll = () => url.clearAll()
 
   // How many filters are engaged, for the mobile "Filters (n)" badge — the only
   // signal, once the sidebar is behind a sheet, that the list is narrowed at all.
@@ -338,8 +369,8 @@ export default function GearListingPage() {
       onSelectKn={selectKn}
       min={stretchMin}
       max={stretchMax}
-      onMinChange={setStretchMin}
-      onMaxChange={setStretchMax}
+      onMinChange={v => url.setRangeBound(STRETCH_RANGE_FIELD, 'min', v)}
+      onMaxChange={v => url.setRangeBound(STRETCH_RANGE_FIELD, 'max', v)}
     />
   )
 
@@ -357,6 +388,10 @@ export default function GearListingPage() {
   }
 
   return (
+    // Everything below links out under this page's identity: a card opened from
+    // here comes back to HERE — this gear type, these filters, this sort — and
+    // not to the bare listing (see context/OriginContext.tsx).
+    <OriginProvider origin={origin}>
     <div data-cy="gear-listing">
       <h1 className="mb-4 text-2xl font-bold text-gray-900 lg:mb-6">{meta.label}</h1>
 
@@ -401,29 +436,27 @@ export default function GearListingPage() {
               value={query}
               onChange={e => onSearchChange(e.target.value)}
               placeholder={`Search ${meta.label}…`}
-              // Takes whatever the row has left, up to its old w-64, instead of
-              // a fixed width. The toolbar is one flex-wrap row, so a fixed
-              // width one pixel too large wraps the entire right-hand group
-              // onto a second line — and the exact ceiling depends on the
-              // width of the copy beside it, which is not this file's business
-              // to track. `flex-1` gives a 0 flex-basis, so the input never
-              // contributes to line-breaking and the row cannot wrap because of
-              // it; `min-w-0` lets it actually shrink. Today that resolves to
-              // ~130px in the 920px content column; shorten anything else on
-              // the row and it grows back on its own.
-              className="min-w-0 flex-1 max-w-64 rounded-lg border border-gray-300 px-3 py-1.5 text-sm focus:border-teal-primary focus:outline-none"
+              // FIXED width, deliberately. This used to be `min-w-0 flex-1
+              // max-w-64`, sized from whatever the row had left over — which
+              // meant the search box shrank as the copy beside it grew, and at
+              // ~1200px it resolved to about 130px: too narrow to show even the
+              // word "Search" in its own placeholder. Elastic sizing made the
+              // box a residue of everything else on the row instead of a
+              // control with a size. `w-64` is that size; keeping the row from
+              // wrapping is now a question of what else is allowed on it, which
+              // is why the accuracy note left (it lives in the footer) and
+              // "Missing something?" moved into the right-hand group.
+              className="w-64 shrink-0 rounded-lg border border-gray-300 px-3 py-1.5 text-sm focus:border-teal-primary focus:outline-none"
             />
             <span data-cy="item-count" className="text-sm text-gray-500">
               {visible.length} {visible.length === 1 ? 'item' : 'items'}
             </span>
-            {/* Next to the count: the moment a visitor reads how much data there
-                is, is the moment to say what it's worth. */}
-            <DataAccuracyNote variant="inline" />
-            {/* The other half of that thought: if the data is incomplete, say
-                where to report what's missing. */}
-            <SuggestButton gearType={meta.slug} variant="new-item" />
 
             <div className="ml-auto flex items-center gap-3">
+              {/* If the data is incomplete, say where to report what's missing —
+                  but from the right-hand group, not wedged between the count and
+                  the view toggle. */}
+              <SuggestButton gearType={meta.slug} variant="new-item" />
               <div className="flex overflow-hidden rounded-lg border border-gray-300">
                 <button
                   data-cy="view-cards"
@@ -442,6 +475,15 @@ export default function GearListingPage() {
                   className={`border-l border-gray-300 ${viewBtn(view === 'detailed')}`}
                 >
                   Detailed
+                </button>
+                <button
+                  data-cy="view-table"
+                  type="button"
+                  data-active={view === 'table' ? 'true' : 'false'}
+                  onClick={() => setView('table')}
+                  className={`border-l border-gray-300 ${viewBtn(view === 'table')}`}
+                >
+                  Table
                 </button>
               </div>
               <SortDropdown
@@ -477,7 +519,7 @@ export default function GearListingPage() {
                   render a full spec table each, so keeping N of them in the DOM
                   behind display:none would both cost real work and double the
                   element counts gear_cards.cy.ts reads off the grid. */}
-              <div className={view === 'detailed' ? 'hidden' : ''}>
+              <div className={view === 'cards' ? '' : 'hidden'}>
                 <GearGrid
                   items={visible}
                   meta={meta}
@@ -493,6 +535,20 @@ export default function GearListingPage() {
                 <GearDetailedList
                   items={visible}
                   meta={meta}
+                  selectedIds={selectedIds}
+                  compareFull={selectedIds.length >= COMPARE_MAX}
+                  onToggleCompare={toggleCompare}
+                />
+              )}
+              {/* `allItems` is the whole gear type, not `visible`: it decides
+                  which COLUMNS exist, which must not change as you filter. */}
+              {view === 'table' && (
+                <GearTable
+                  items={visible}
+                  allItems={items}
+                  meta={meta}
+                  sort={sort}
+                  onSortChange={setSort}
                   selectedIds={selectedIds}
                   compareFull={selectedIds.length >= COMPARE_MAX}
                   onToggleCompare={toggleCompare}
@@ -562,5 +618,6 @@ export default function GearListingPage() {
         </Sheet>
       )}
     </div>
+    </OriginProvider>
   )
 }

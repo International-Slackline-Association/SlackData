@@ -2,6 +2,7 @@
 
 import { Outlet } from 'react-router-dom'
 import { useCurrency } from '@/context/CurrencyContext'
+import useScrollRestoration from '@/hooks/useScrollRestoration'
 import TopNav from './TopNav'
 import SiteFooter from './SiteFooter'
 
@@ -22,6 +23,10 @@ function StaleRatesNotice() {
 
 export default function AppLayout() {
   const { stale } = useCurrency()
+  // Back/forward returns you to where you were on the page, not to the top.
+  // Lives on the shell so it covers every route at once — see the hook for why
+  // it is a hook and not react-router's <ScrollRestoration>.
+  useScrollRestoration()
 
   return (
     // flex column so the footer sits at the bottom of the viewport on short

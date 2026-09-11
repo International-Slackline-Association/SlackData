@@ -231,6 +231,72 @@ describe('Manufacturers page', () => {
     })
   })
 
+  // ── Brand detail: views, and the absence of Compare ───────────────────────
+  //
+  // The page offers the listing's Cards | Detailed | Table toggle, and offers
+  // no Compare anywhere: its sections are different gear types, so a compare
+  // table built from them would have no shared spec to line up. The buttons
+  // used to render and do nothing at all.
+
+  it('shows no compare control in any view', () => {
+    visitBiggestBrand()
+    cy.get('[data-cy="btn-compare"]').should('not.exist')
+    cy.get('[data-cy="compare-bar"]').should('not.exist')
+
+    cy.get('[data-cy="view-detailed"]').click()
+    cy.get('[data-cy="gear-detailed-row"]').should('have.length.gte', 1)
+    cy.get('[data-cy="btn-compare"]').should('not.exist')
+
+    cy.get('[data-cy="view-table"]').click()
+    cy.get('[data-cy="gear-table-row"]').should('have.length.gte', 1)
+    cy.get('[data-cy="table-compare"]').should('not.exist')
+  })
+
+  it('switches every section between cards, detailed and table', () => {
+    visitBiggestBrand()
+    cy.get('[data-cy="brand-gear-section"]').its('length').then((sections) => {
+      cy.get('[data-cy="view-cards"]').should('have.attr', 'data-active', 'true')
+      cy.get('[data-cy="gear-grid"]').should('have.length', sections)
+
+      cy.get('[data-cy="view-detailed"]').click()
+      cy.get('[data-cy="view-detailed"]').should('have.attr', 'data-active', 'true')
+      cy.get('[data-cy="gear-detailed-list"]').should('have.length', sections)
+      cy.get('[data-cy="gear-grid"]').should('not.exist')
+
+      cy.get('[data-cy="view-table"]').click()
+      cy.get('[data-cy="gear-table"]').should('have.length', sections)
+      cy.get('[data-cy="gear-detailed-list"]').should('not.exist')
+    })
+  })
+
+  it('keeps the chosen view in the URL, and a collapsed section stays collapsed', () => {
+    visitBiggestBrand()
+    cy.get('[data-cy="view-table"]').click()
+    cy.location('search').should('contain', 'view=table')
+    cy.reload()
+    cy.get('[data-cy="gear-table"]').should('have.length.gte', 1)
+
+    cy.get('[data-cy="brand-gear-section"]').first().as('section')
+    cy.get('@section').find('[data-cy="brand-section-toggle"]').click()
+    cy.get('@section').should('have.attr', 'data-collapsed', 'true')
+    cy.get('@section').find('[data-cy="gear-table"]').should('not.exist')
+  })
+
+  it('sorts one section\'s table without touching the next one', () => {
+    visitBiggestBrand()
+    cy.get('[data-cy="view-table"]').click()
+    cy.get('[data-cy="brand-gear-section"]').then(($sections) => {
+      if ($sections.length < 2) return // one gear type — nothing to keep apart
+      cy.get('[data-cy="brand-gear-section"]').eq(1)
+        .find('[data-cy="gear-table-name"]').first().invoke('text').then((second) => {
+          cy.get('[data-cy="brand-gear-section"]').first()
+            .find('[data-cy="gear-table-sort"][data-field="name"]').click()
+          cy.get('[data-cy="brand-gear-section"]').eq(1)
+            .find('[data-cy="gear-table-name"]').first().should('have.text', second)
+        })
+    })
+  })
+
   it('each card shows a gear-count row listing how many items the brand has', () => {
     cy.get('[data-cy="manufacturers-card"]').first()
       .find('[data-cy="manufacturer-gear-counts"]')

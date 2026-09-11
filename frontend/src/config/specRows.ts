@@ -1,4 +1,15 @@
-// Spec-table row definitions for the detail page, per gear type.
+// Spec-table row definitions for the detail page, per gear type — and, since
+// the Table view landed, for the listing's table columns too.
+//
+// THE ORDER OF EACH LIST IS THE RELEVANCE ORDER. It always was, read top-down on
+// the detail page; the table makes it load-bearing, because a column's position
+// is the only thing that decides whether a reader ever scrolls to it. Identity
+// (image / brand / name) is not in here — it is the table's own frozen column
+// and the detail page's header block — so each list starts at price and runs
+// through the specs people actually rank on (width, MBS, weight) into the long
+// tail. Reordering a list therefore reorders columns for everyone: do it on
+// purpose. `utils/table.ts` drops the rows no item populates; nothing else
+// reshapes the list.
 //
 // Contract: `gear_detail.cy.ts` reads [data-cy="spec-row"][data-field="<field>"]
 // and (where a unit is declared) asserts the unit text is inside the row. The

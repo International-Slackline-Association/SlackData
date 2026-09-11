@@ -26,11 +26,14 @@ test('the shards cover the whole suite and nothing twice', () => {
 
 test('a shard becomes a Cypress --spec argument', () => {
   const { shards } = readManifest()
-  assert.equal(
-    specGlobs(shards.find((s: { name: string }) => s.name === 'filters')),
-    'cypress/e2e/filters.cy.ts',
-  )
+  // Expectations built from each shard's OWN spec list, not from a hardcoded
+  // shard name. This used to assert that the shard called "filters" was the
+  // lone-spec one, which made a packing decision into a test: rebalancing the
+  // shards then failed here for no reason to do with globs.
+  for (const shard of shards as { specs: string[] }[]) {
+    assert.equal(specGlobs(shard), shard.specs.map(s => `cypress/e2e/${s}.cy.ts`).join(','))
+  }
   // Multi-spec shards are comma-joined, which is what `cypress run --spec` takes.
-  const multi = shards.find((s: { specs: string[] }) => s.specs.length > 1)
+  const multi = (shards as { specs: string[] }[]).find(s => s.specs.length > 1)
   assert.match(specGlobs(multi), /^cypress\/e2e\/\S+\.cy\.ts(,cypress\/e2e\/\S+\.cy\.ts)+$/)
 })

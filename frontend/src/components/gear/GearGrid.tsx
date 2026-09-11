@@ -13,6 +13,7 @@ export default function GearGrid({
   selectedIds = [],
   compareFull = false,
   onToggleCompare,
+  showCompare = true,
 }: {
   items: AnyItem[]
   meta: GearTypeMeta
@@ -20,6 +21,7 @@ export default function GearGrid({
   selectedIds?: number[]
   compareFull?: boolean
   onToggleCompare?: (id: number) => void
+  showCompare?: boolean
 }) {
   return (
     <div
@@ -36,6 +38,7 @@ export default function GearGrid({
             compareSelected={selected}
             compareDisabled={compareFull && !selected}
             onToggleCompare={onToggleCompare}
+            showCompare={showCompare}
           />
         )
       })}

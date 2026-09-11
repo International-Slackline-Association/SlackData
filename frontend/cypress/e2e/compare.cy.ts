@@ -627,20 +627,27 @@ describe('Compare — webbing stretch renders as a chart', () => {
     })
   })
 
-  // Ten items can be compared, but eight is where a validated categorical colour
-  // scale ends — a ninth line would be an indistinguishable gray or a repeated
-  // hue. The plot draws eight and names the rest; the table carries them all.
-  it('plots at most eight lines and names the ones it left out', () => {
+  // A full comparison plots in full: the palette carries one validated colour per
+  // comparable item, so ten compared webbings are ten lines, with none demoted to
+  // the "not plotted" note and none arriving gray.
+  it('plots all ten of a full comparison, leaving none out', () => {
     webbings(rows => {
-      const curved = rows.filter(r => displayPoints(r.stretch).length >= 2).slice(0, 10)
-      if (curved.length < 9) return
+      // Inside the default 1–20 kN window, so the chart opens with all ten drawn
+      // rather than some deferred to the "measured only above 20 kN" note.
+      const curved = rows
+        .filter(r => {
+          const pts = displayPoints(r.stretch)
+          return pts.length >= 2 && pts.filter(p => p.kn <= 20).length >= 2
+        })
+        .slice(0, 10)
+      if (curved.length < 10) return
       compare(...curved.map(r => r.id))
-      cy.get('[data-cy="stretch-chart-line"]').should('have.length', 8)
-      cy.get('[data-cy="stretch-chart-over-cap"]')
-        .should('contain.text', String(curved[8].name))
+      cy.get('[data-cy="stretch-chart-line"]').should('have.length', 10)
+      cy.get('[data-cy="stretch-chart-over-cap"]').should('not.exist')
+      // Identity is never colour alone — every plotted line is named in the legend.
+      cy.get('[data-cy="stretch-chart-legend-item"]').should('have.length', 10)
       cy.get('[data-cy="stretch-view-table"]').click()
-      // Nothing is lost — the table still holds every compared curve.
-      cy.get(`[data-cy="stretch-table-cell"][data-id="${curved[8].id}"]`).should('exist')
+      cy.get(`[data-cy="stretch-table-cell"][data-id="${curved[9].id}"]`).should('exist')
     })
   })
 
@@ -650,6 +657,118 @@ describe('Compare — webbing stretch renders as a chart', () => {
       cy.visit(`/weblocks/compare?ids=${rows[0].id},${rows[1].id}`)
       cy.get('[data-cy="compare-table"]').should('exist')
       cy.get('[data-cy="stretch-chart"]').should('not.exist')
+    })
+  })
+})
+
+// Selecting an item must not move the page.
+//
+// Compare is state, not navigation: the listing you were reading is still the
+// listing you are reading. But the selection lives in the query string, and
+// every URL-state write goes through `setParams(..., { replace: true })` —
+// which mints a NEW history key, so useScrollRestoration saw a fresh entry and
+// sent the window to the top. Ticking the 40th card threw you back to the 1st,
+// which is exactly the scroll you did to find the 40th in the first place.
+//
+// Every click here is `{ scrollBehavior: false }` on purpose: Cypress otherwise
+// scrolls the target to the top of the viewport itself, which would move the
+// window and mask (or fake) the very thing being measured. The card is put in
+// view first, so the button is clickable without Cypress's help.
+describe('Compare keeps your place on the page', () => {
+  const CARD = '[data-cy="gear-card"]'
+
+  // Scrolls the nth card into view and hands the resulting offset to `fn`,
+  // asserting first that we really did leave the top — a test that measures
+  // "still at 0" would pass against the bug.
+  function atCard(n: number, fn: (before: number) => void) {
+    cy.get(CARD).eq(n).scrollIntoView()
+    cy.window().its('scrollY').should('be.greaterThan', 200)
+    cy.window().its('scrollY').then(before => fn(before))
+  }
+
+  // Cards reflow as the compare bar appears (it takes height at the bottom), so
+  // a few pixels of drift is the layout, not a jump to the top.
+  function stillAt(before: number) {
+    cy.window().its('scrollY').should('be.closeTo', before, 20)
+  }
+
+  beforeEach(() => {
+    cy.visit('/webbings')
+    cy.get(CARD).should('have.length.greaterThan', 8)
+  })
+
+  it('does not scroll to the top when a card is selected', () => {
+    atCard(8, before => {
+      cy.get(CARD).eq(8).find('[data-cy="btn-compare"]').click({ scrollBehavior: false })
+      cy.get('[data-cy="compare-bar"]').should('be.visible')
+      stillAt(before)
+    })
+  })
+
+  it('does not scroll to the top when a card is deselected', () => {
+    atCard(8, before => {
+      const btn = () => cy.get(CARD).eq(8).find('[data-cy="btn-compare"]')
+      btn().click({ scrollBehavior: false }).should('have.attr', 'data-active', 'true')
+      btn().click({ scrollBehavior: false }).should('have.attr', 'data-active', 'false')
+      cy.get('[data-cy="compare-bar"]').should('not.exist')
+      stillAt(before)
+    })
+  })
+
+  it('does not scroll to the top when a second card joins the selection', () => {
+    atCard(8, before => {
+      cy.get(CARD).eq(8).find('[data-cy="btn-compare"]').click({ scrollBehavior: false })
+      cy.get('[data-cy="compare-bar-count"]').should('contain.text', '1')
+      cy.get(CARD).eq(9).find('[data-cy="btn-compare"]').click({ scrollBehavior: false })
+      cy.get('[data-cy="compare-bar-count"]').should('contain.text', '2')
+      stillAt(before)
+    })
+  })
+
+  it('does not scroll to the top when an item is removed from the bar', () => {
+    atCard(8, before => {
+      cy.get(CARD).eq(8).find('[data-cy="btn-compare"]').click({ scrollBehavior: false })
+      cy.get(CARD).eq(9).find('[data-cy="btn-compare"]').click({ scrollBehavior: false })
+      cy.get('[data-cy="compare-bar-remove"]').first().click({ scrollBehavior: false })
+      cy.get('[data-cy="compare-bar-count"]').should('contain.text', '1')
+      stillAt(before)
+    })
+  })
+
+  it('does not scroll to the top when the bar is cleared', () => {
+    atCard(8, before => {
+      cy.get(CARD).eq(8).find('[data-cy="btn-compare"]').click({ scrollBehavior: false })
+      cy.get('[data-cy="compare-bar-clear"]').click({ scrollBehavior: false })
+      cy.get('[data-cy="compare-bar"]').should('not.exist')
+      stillAt(before)
+    })
+  })
+
+  it('does not scroll to the top when selecting in the detailed view', () => {
+    cy.visit('/webbings?view=detailed')
+    const ROW = '[data-cy="gear-detailed-row"]'
+    cy.get(ROW).should('have.length.greaterThan', 3)
+    cy.get(ROW).eq(3).scrollIntoView()
+    cy.window().its('scrollY').should('be.greaterThan', 200)
+    cy.window().its('scrollY').then(before => {
+      cy.get(ROW).eq(3).find('[data-cy="btn-compare"]').click({ scrollBehavior: false })
+      cy.get('[data-cy="compare-bar"]').should('be.visible')
+      stillAt(before)
+    })
+  })
+
+  // The other half of the contract: a real navigation still lands at the top,
+  // and coming BACK still restores where you were. Turning the compare fix into
+  // "never scroll" would break both.
+  it('still lands at the top on a real navigation, and restores on Back', () => {
+    atCard(8, before => {
+      cy.get(CARD).eq(8).find('[data-cy="btn-compare"]').click({ scrollBehavior: false })
+      cy.get(CARD).eq(8).find('[data-cy="gear-card-name"]').click({ scrollBehavior: false })
+      cy.get('[data-cy="gear-detail"]').should('exist')
+      cy.window().its('scrollY').should('be.lessThan', 50)
+      cy.go('back')
+      cy.get(CARD).should('exist')
+      cy.window().its('scrollY').should('be.closeTo', before, 50)
     })
   })
 })

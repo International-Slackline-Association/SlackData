@@ -138,10 +138,12 @@ describe('seriesColor', () => {
     assert.equal(seriesColor(n), seriesColor(n + 5))
   })
 
-  // Ten items can be compared; eight is where a validated categorical scale
-  // ends, so the chart plots at most eight lines (see StretchChart).
+  // Ten items can be compared and the palette now has ten validated slots, so
+  // every compared webbing with a curve gets a colour of its own rather than
+  // being named in the over-cap note (see StretchChart). Dropping below ten
+  // silently starts leaving compared items off the plot again.
   test('carries a slot for every line the chart will draw', () => {
-    assert.ok(SERIES_COLORS.length >= 8)
+    assert.ok(SERIES_COLORS.length >= 10)
   })
 
   test('the palette has no duplicate hues', () => {

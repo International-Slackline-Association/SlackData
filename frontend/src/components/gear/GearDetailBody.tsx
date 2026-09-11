@@ -28,6 +28,7 @@
 import { Link } from 'react-router-dom'
 import type { GearTypeMeta } from '@/config/gearTypes'
 import { useCurrency } from '@/context/CurrencyContext'
+import { useOriginState } from '@/context/OriginContext'
 import { useIsaWarnings } from '@/hooks/useIsaWarnings'
 import { type AnyItem } from '@/utils/format'
 import { imageUrls } from '@/utils/images'
@@ -69,6 +70,9 @@ export default function GearDetailBody({
   onToggleCompare?: (id: number) => void
 }) {
   const price = useCurrency().priceText(item, meta.slug)
+  // Only used when `nameHref` is set, i.e. in the listing's Detailed view: the
+  // panel's title links to the standalone page, which then knows the way back.
+  const originState = useOriginState()
   const images = imageUrls(meta.slug, String(item.brand_name), String(item.name))
   const isaWarning = isaWarningStatus(meta.hasISAWarning ? item.isa_warning : null)
   // The full ISA entries behind that status word — description, what to do,
@@ -99,6 +103,7 @@ export default function GearDetailBody({
               <Link
                 data-cy="detail-name"
                 to={nameHref}
+                state={originState}
                 className={`${nameClass} hover:text-teal-primary`}
               >
                 {String(item.name)}
@@ -108,6 +113,10 @@ export default function GearDetailBody({
                 {String(item.name)}
               </h1>
             )}
+            {/* No showUncertified here, unlike the card: the certification
+                block further down already says "Not ISA Certified" in full, and
+                two statements of the same fact within one screen is one too
+                many. The card has no such block, which is why it gets the pill. */}
             <ClassificationBubble
               value={item.classification}
               certified={meta.hasISA && item.isa_certified === true}

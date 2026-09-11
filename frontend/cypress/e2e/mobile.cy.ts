@@ -273,3 +273,45 @@ describe('Mobile — detail page', () => {
     })
   })
 })
+
+// The sticky filter bar is chrome: nothing scrolling past it may paint over it.
+//
+// It did, and not because of a measurement or a browser quirk. GearCard's root
+// was `relative` with no z-index, so it opened no stacking context and its
+// `relative z-10` title link and action buttons landed in the ROOT one — tying
+// with this bar's own z-10 and winning on DOM order, since the cards come after
+// it. Card titles and Save/Compare buttons therefore drew straight over the
+// pinned search box. The fix is `isolate` on the card, not a bigger z on the bar.
+//
+// Asserted with elementFromPoint rather than by comparing rectangles: overlap is
+// exactly the question "what is painted here?", and rectangles cannot answer it.
+describe('Mobile — nothing paints over the sticky filter bar', () => {
+  beforeEach(() => cy.viewport(...PHONE))
+
+  it('owns every point inside itself while cards scroll past', () => {
+    cy.visit('/webbings')
+    cy.get('[data-cy="gear-card"]').should('have.length.greaterThan', 3)
+
+    // Sweep offsets: the intruders are narrow bands (a title line, a button
+    // row), so a single scroll position can easily miss them.
+    for (let y = 300; y <= 2200; y += 100) {
+      cy.scrollTo(0, y)
+      cy.window().then((w) => {
+        const bar = w.document.querySelector('[data-cy="mobile-filter-bar"]') as HTMLElement
+        const r = bar.getBoundingClientRect()
+        const intruders: string[] = []
+        for (let fx = 0.1; fx < 1; fx += 0.2) {
+          for (let dy = 3; dy < r.height; dy += 8) {
+            const el = w.document.elementFromPoint(r.left + r.width * fx, r.top + dy)
+            if (el && !bar.contains(el)) {
+              intruders.push(`${el.tagName}.${(el as HTMLElement).className.slice(0, 40)}`)
+            }
+          }
+        }
+        expect(intruders, `scrolled to ${y}px: elements painting over the sticky bar`).to.deep.equal(
+          [],
+        )
+      })
+    }
+  })
+})

@@ -11,6 +11,7 @@
 // which is the card's real heading.
 
 import { Link, useMatch } from 'react-router-dom'
+import { useOriginState } from '@/context/OriginContext'
 import { useBrandIndex } from '@/hooks/useBrandIndex'
 import { brandHref } from '@/utils/brandLinks'
 
@@ -22,6 +23,9 @@ export default function BrandLink({
   className?: string
 }) {
   const index = useBrandIndex()
+  // Carries the page it was clicked on, so the brand page's back link returns
+  // to that listing (filters and all) rather than to the directory.
+  const originState = useOriginState()
   // The brand page we may already be on — its own cards must not link back to
   // it. `useMatch` rather than reading the route's params, because BrandLink
   // renders deep inside components that know nothing about the route.
@@ -36,6 +40,7 @@ export default function BrandLink({
       data-cy="brand-link"
       data-brand-id={href.slice(href.lastIndexOf('/') + 1)}
       to={href}
+      state={originState}
       // relative z-10: the gear card lays a stretched overlay link across
       // itself, and an unlifted brand link is unclickable beneath it.
       className={`relative z-10 hover:text-teal-primary hover:underline ${className}`}
