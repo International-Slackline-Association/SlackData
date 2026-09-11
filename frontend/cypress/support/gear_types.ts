@@ -4,6 +4,9 @@ export interface GearTypeConfig {
   label: string
   hasISA: boolean
   hasISAWarning: boolean
+  // Uncertified items on this type carry the "Uncertified" pill on their card
+  // (mirrors GearTypeMeta.showsUncertified in src/config/gearTypes.ts).
+  showsUncertified: boolean
   // spec fields expected on the detail page, keyed by data-field attribute value
   specFields: {
     field: string
@@ -20,6 +23,7 @@ export const GEAR_TYPES: GearTypeConfig[] = [
     label: 'Webbings',
     hasISA: true,
     hasISAWarning: true,
+    showsUncertified: true,
     specFields: [
       { field: 'material',           label: 'Material',           alwaysPresent: true  },
       { field: 'width',              label: 'Width',              unit: 'mm', alwaysPresent: true  },
@@ -43,6 +47,7 @@ export const GEAR_TYPES: GearTypeConfig[] = [
     label: 'Weblocks',
     hasISA: true,
     hasISAWarning: true,
+    showsUncertified: true,
     specFields: [
       { field: 'material',           label: 'Material',           alwaysPresent: true  },
       { field: 'width_range',        label: 'Width Range',        unit: 'mm', alwaysPresent: true  },
@@ -59,6 +64,7 @@ export const GEAR_TYPES: GearTypeConfig[] = [
     label: 'Leash Rings',
     hasISA: true,
     hasISAWarning: true,
+    showsUncertified: true,
     specFields: [
       { field: 'material',           label: 'Material',           alwaysPresent: true  },
       { field: 'inner_diameter',     label: 'Inner Diameter',     unit: 'mm', alwaysPresent: false },
@@ -73,6 +79,7 @@ export const GEAR_TYPES: GearTypeConfig[] = [
     label: 'Grips',
     hasISA: true,
     hasISAWarning: true,
+    showsUncertified: true,
     specFields: [
       { field: 'material',                  label: 'Material',            alwaysPresent: true  },
       { field: 'width_range',               label: 'Width Range',         unit: 'mm', alwaysPresent: true  },
@@ -89,6 +96,7 @@ export const GEAR_TYPES: GearTypeConfig[] = [
     label: 'Rollers',
     hasISA: true,
     hasISAWarning: true,
+    showsUncertified: true,
     specFields: [
       { field: 'material',          label: 'Frame Material',    alwaysPresent: true  },
       { field: 'roller_material',   label: 'Roller Material',   alwaysPresent: true  },
@@ -107,6 +115,7 @@ export const GEAR_TYPES: GearTypeConfig[] = [
     label: 'Tree Protectors',
     hasISA: false,
     hasISAWarning: false,
+    showsUncertified: false,
     specFields: [
       { field: 'weight',               label: 'Weight',     unit: 'g',  alwaysPresent: false },
       { field: 'width',                label: 'Width',      unit: 'cm', alwaysPresent: false },
@@ -121,6 +130,7 @@ export const GEAR_TYPES: GearTypeConfig[] = [
     label: 'Starter Kits',
     hasISA: true,
     hasISAWarning: false,
+    showsUncertified: false,
     specFields: [
       { field: 'webbing_length', label: 'Webbing Length', unit: 'm',  alwaysPresent: true  },
       { field: 'webbing_width',  label: 'Webbing Width',  unit: 'mm', alwaysPresent: true  },
@@ -135,6 +145,7 @@ export const GEAR_TYPES: GearTypeConfig[] = [
     label: 'Trickline Kits',
     hasISA: true,
     hasISAWarning: false,
+    showsUncertified: false,
     specFields: [
       { field: 'webbing_length', label: 'Webbing Length', unit: 'm',  alwaysPresent: true  },
       { field: 'webbing_width',  label: 'Webbing Width',  unit: 'mm', alwaysPresent: true  },

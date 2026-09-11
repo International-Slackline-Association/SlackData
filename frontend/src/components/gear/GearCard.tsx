@@ -1,7 +1,7 @@
 // A single gear card. Anatomy (top→bottom) per DESIGN.md and gear_cards.cy.ts:
-//   image · top-right overlay: ISA warning bubble (recall/warning/notice) ·
-//     classification bubble (ISA-certified, or sub-22 kN "Not for Highline") ·
-//     ISA stamp (if certified)
+//   image · top-right overlay, in order: ISA stamp (if certified) · ISA warning
+//     bubble (recall/warning/notice) · classification bubble (granted class,
+//     sub-22 kN "Not for Highline", or "Uncertified")
 //   brand (small caps) · product name (link) · inline specs · price (amber)
 // No gear-type badge: every listing is single-type, so it would be redundant.
 // (Revisit when manufacturer pages mix types — see DESIGN.md card anatomy.)
@@ -120,24 +120,24 @@ export default function GearCard({
         // backdrop is scaled past its edges — both must be clipped to the band.
         className="group relative flex h-40 items-center justify-center overflow-hidden bg-gray-50"
       >
-        {/* Top-right stack: any ISA warning first, then the highline class (the
-            fastest read on an unwarned webbing card), the ISA stamp under it. The bubble appears on
-            certified webbings and on sub-22 kN "Not for Highline" ones (see
-            ClassificationBubble); the stamp only on certified. Same bubble
-            component as the detail page, so the colors can't drift apart. */}
         {/* Top-left: lifecycle status. Legacy = no longer sold; nothing renders
             for active/unknown gear. Mirrors the manufacturer card's Inactive pill. */}
         <LegacyBadge active={item.active} className="pointer-events-none absolute left-2 top-2 z-10" />
+        {/* Top-right stack: certification first, then any ISA warning, then the
+            highline class. Certification is the question a reader brings to the
+            grid, so it leads; the class refines it and sits last. Same bubble
+            component as the detail page, so the colors can't drift apart. */}
         <div className="pointer-events-none absolute right-2 top-2 z-10 flex flex-col items-end gap-1.5">
-          {/* Severity first, above the class: a recalled Type A webbing must not
-              read as "Type A" before it reads as "RECALL". */}
+          {isaCertified && <IsaApprovedBadge />}
+          {/* Severity above the class: a recalled Type A webbing must not read
+              as "Type A" before it reads as "RECALL". */}
           <IsaWarningBadge value={meta.hasISAWarning ? item.isa_warning : null} />
           <ClassificationBubble
             value={item.classification}
             certified={isaCertified}
             breakingStrength={item.breaking_strength}
+            showUncertified={meta.showsUncertified}
           />
-          {isaCertified && <IsaApprovedBadge />}
         </div>
         <CardImageCarousel urls={images} alt={String(item.name)} />
       </div>

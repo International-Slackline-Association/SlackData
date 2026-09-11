@@ -108,6 +108,10 @@ export default function GearDetailBody({
                 {String(item.name)}
               </h1>
             )}
+            {/* No showUncertified here, unlike the card: the certification
+                block further down already says "Not ISA Certified" in full, and
+                two statements of the same fact within one screen is one too
+                many. The card has no such block, which is why it gets the pill. */}
             <ClassificationBubble
               value={item.classification}
               certified={meta.hasISA && item.isa_certified === true}
