@@ -272,6 +272,16 @@ Non-phase engineering tasks not tracked in [PLAN.md](PLAN.md) (frontend roadmap)
 
 ## ✅ Shipped (kept here briefly so the entries above don't get re-opened)
 
+- **Card content no longer paints over the sticky filter bar.** Reported as a Firefox-on-Mac bug at
+  narrow widths; it reproduces in Chromium too, ~2000 times in a single scroll sweep. Width was only
+  the trigger — `MobileFilterBar` mounts below `lg`, so the bug can only appear there. The cause was
+  a z-index tie: `GearCard`'s root was `relative` with **no** z-index, so it opened no stacking
+  context and its `relative z-10` title link and action buttons landed in the ROOT stacking context,
+  tying with the bar's own `z-10` and winning on DOM order because the cards come after it. Fixed
+  with `isolate` on the card — not by giving the bar a bigger number, which would only move the
+  collision. `mobile.cy.ts` guards it with `elementFromPoint` across a sweep of scroll offsets,
+  because overlap is the question "what is painted here?" and rectangles cannot answer it.
+
 - **Compare draws the stretch curve, and holds ten items** (#76). Four columns of
   "5.9% @ 10 kN · 7.1% @ 15 kN · …" is the reading compare exists to spare you, so on compare
   webbing stretch leaves the table and becomes a multi-series line chart — load across, elongation

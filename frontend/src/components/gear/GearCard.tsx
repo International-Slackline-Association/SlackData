@@ -86,7 +86,14 @@ export default function GearCard({
       data-cy="gear-card"
       {...dataAttrs(item, CARD_DATA_FIELDS[slug] ?? [])}
       {...stretchAttr}
-      className="relative flex flex-col overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-shadow hover:shadow-md"
+      // `isolate` is load-bearing, not decoration. The interactive bits below
+      // are `relative z-10` so they sit above the whole-card overlay link; with
+      // the card itself merely `relative` (z-index auto) that z-10 escapes into
+      // the ROOT stacking context, where it ties with the sticky MobileFilterBar
+      // (also z-10) and wins on DOM order — so card titles and Save/Compare
+      // buttons painted straight over the pinned search bar on every narrow
+      // viewport. Isolating the card keeps its z-10 children its own business.
+      className="relative isolate flex flex-col overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-shadow hover:shadow-md"
     >
       {/* Whole-card link. A stretched overlay rather than wrapping the card in an
           <a>: the card contains its own controls (carousel arrows and dots,
