@@ -7,7 +7,11 @@
 // segment with rounded ends, the other two stay transparent on the white bubble
 // and wear their color as text.
 
-export type Status = 'all' | 'current' | 'historic'
+// The value itself lives in the URL (?status=), so its type is defined beside
+// the param contract in useUrlState and re-exported here for the components
+// that only ever see the control.
+import type { Status } from '@/hooks/useUrlState'
+export type { Status }
 
 const OPTIONS: { value: Status; label: string; color: string }[] = [
   { value: 'all', label: 'All', color: '#E8770A' },

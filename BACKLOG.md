@@ -298,6 +298,12 @@ Non-phase engineering tasks not tracked in [PLAN.md](PLAN.md) (frontend roadmap)
     PUSH, so the scroll offset `useScrollRestoration` keeps is not thrown away by re-pushing the URL.
     An origin out of history state is validated before it becomes an href
     (`tests/unit/origin.test.ts`): a protocol-relative path is not a same-site path.
+  - **Two filters were not in the URL and so silently reverted**, which is the "Local listing state
+    does not survive Back" entry this replaces. The webbing stretch widget (`?kn=`, `?stretch_min=`,
+    `?stretch_max=`) and the ALL/CURRENT/HISTORIC status scope (`?status=`) were `useState` in
+    `GearListingPage`; both are query params now, so Back restores them, they are deep-linkable, and
+    the two clears drop them along with the rest of the query string rather than resetting them by
+    hand. `navigation.cy.ts` covers both, plus every back-link route above.
 - **Listing toolbar: fixed-size search, and the accuracy note moved out.** The search input was
   `min-w-0 flex-1 max-w-64` — sized from whatever the flex-wrap row had left over, which made it a
   residue of everything else on the row rather than a control with a size. At ~1200px it resolved to

@@ -162,6 +162,82 @@ describe('Scroll restoration', () => {
     cy.window().its('scrollY').should('be.lessThan', 50)
   })
 })
+
+// Back goes to the page you were ACTUALLY on, not to a generic listing.
+//
+// A gear item is reached from at least four places — a filtered listing, a
+// manufacturer's inventory, the compare table, or a bare link — and the detail
+// page's back link used to be `/${slug}` in every one of them. Opening a webbing
+// from Balance Community's page and pressing it landed you in the unfiltered
+// webbing listing: the filters, the sort and the manufacturer all gone.
+//
+// The link carries the origin in history state (src/utils/origin.ts); these are
+// its contract. The href matters as much as the click — it is a real link, so
+// middle-click and "copy link address" have to work on it.
+describe('Back link — where you came from', () => {
+  it('returns to the filtered listing an item was opened from', () => {
+    cy.visit('/webbings')
+    cy.get('[data-cy="search-input"]').type('core')
+    cy.get('[data-cy="gear-card"]').should('have.length.greaterThan', 0)
+    cy.get('[data-cy="gear-card-name"]').first().click()
+
+    cy.get('[data-cy="detail-back-link"]')
+      .should('contain.text', 'Webbings')
+      .and('have.attr', 'href')
+      .and('include', 'q=core')
+
+    cy.get('[data-cy="detail-back-link"]').click()
+    cy.url().should('include', 'q=core')
+    cy.get('[data-cy="search-input"]').should('have.value', 'core')
+  })
+
+  it('returns to the manufacturer whose page the item was opened from', () => {
+    cy.visit('/manufacturers')
+    // The directory is built from every gear type at once, so it can take a
+    // while to arrive on a cold cache — longer than the 5s default.
+    cy.get('[data-cy="manufacturers-card"]', { timeout: 30000 })
+      .first().find('a').first().click()
+    cy.url().should('match', /\/manufacturers\/\d+$/)
+
+    cy.url().then((brandUrl) => {
+      cy.get('[data-cy="brand-detail-name"]', { timeout: 30000 }).invoke('text').then((brandName) => {
+        cy.get('[data-cy="gear-card-name"]').first().click()
+        // The manufacturer's own name, not the gear type's.
+        cy.get('[data-cy="detail-back-link"]').should('contain.text', brandName.trim())
+        cy.get('[data-cy="detail-back-link"]').click()
+        cy.url().should('eq', brandUrl)
+      })
+    })
+  })
+
+  it('returns to the compare table an item was opened from', () => {
+    cy.visit('/webbings')
+    cy.get('[data-cy="gear-card"]').should('have.length.greaterThan', 2)
+    cy.get('[data-cy="gear-card"]').eq(0).find('[data-cy="btn-compare"]').click()
+    cy.get('[data-cy="gear-card"]').eq(1).find('[data-cy="btn-compare"]').click()
+    cy.get('[data-cy="compare-bar-view-btn"]').click()
+    cy.url().should('include', '/webbings/compare')
+
+    cy.get('[data-cy="compare-col-name"]').first().click()
+    cy.get('[data-cy="detail-back-link"]').should('contain.text', 'Compare Webbings')
+    cy.get('[data-cy="detail-back-link"]').click()
+    cy.url().should('include', '/webbings/compare')
+  })
+
+  it('sends the compare table itself back to the listing it was built from', () => {
+    cy.visit('/webbings?q=core')
+    cy.get('[data-cy="gear-card"]').should('have.length.greaterThan', 1)
+    cy.get('[data-cy="gear-card"]').eq(0).find('[data-cy="btn-compare"]').click()
+    cy.get('[data-cy="gear-card"]').eq(1).find('[data-cy="btn-compare"]').click()
+    cy.get('[data-cy="compare-bar-view-btn"]').click()
+
+    cy.get('[data-cy="compare-back-link"]')
+      .should('have.attr', 'href')
+      .and('include', 'q=core')
+  })
+
+  it('sends a brand page back to the listing its name was clicked on', () => {
+    cy.visit('/webbings?q=core')
     cy.get('[data-cy="gear-card"]').first().find('[data-cy="brand-link"]').click()
     // Same wait as above: the brand page renders its back link once the whole
     // directory has loaded.

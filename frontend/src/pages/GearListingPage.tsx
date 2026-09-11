@@ -13,7 +13,7 @@ import { originState } from '@/utils/origin'
 import { getGearType } from '@/config/gearTypes'
 import { useGearList } from '@/hooks/useGearList'
 import { useCurrency } from '@/context/CurrencyContext'
-import { useUrlState } from '@/hooks/useUrlState'
+import { STRETCH_RANGE_FIELD, useUrlState } from '@/hooks/useUrlState'
 import { filterBySearch } from '@/utils/search'
 import { sortItems } from '@/utils/sort'
 import { BRAND_GROUP, filterGroupsFor } from '@/config/filterGroups'
@@ -23,7 +23,6 @@ import { useIsDesktop } from '@/hooks/useMediaQuery'
 import { brandsFor } from '@/utils/sellers'
 import type { AnyItem } from '@/utils/format'
 import FilterSidebar from '@/components/gear/FilterSidebar'
-import type { Status } from '@/components/gear/StatusToggle'
 import StretchFilter from '@/components/gear/StretchFilter'
 import SortDropdown, { labelFor } from '@/components/gear/SortDropdown'
 import MobileFilterBar from '@/components/gear/MobileFilterBar'
@@ -33,8 +32,6 @@ import GearDetailedList from '@/components/gear/GearDetailedList'
 import CompareBar from '@/components/gear/CompareBar'
 import SuggestButton from '@/components/submissions/SuggestButton'
 import NotFoundPage from './NotFoundPage'
-
-type View = 'cards' | 'detailed'
 
 // How many items one comparison may hold. The table scrolls sideways with the
 // label column pinned, so columns are cheap; the chart used to be the binding
@@ -81,13 +78,12 @@ export default function GearListingPage() {
   const { items: rawItems, loading } = useGearList(meta?.slug ?? '', available)
   const { basePrice, displayPrice } = useCurrency()
   const url = useUrlState()
-  const { q, setQ, sort, setSort } = url
-  const [view, setView] = useState<View>('cards')
-  // Lifecycle scope, owned here but controlled from the sidebar's status bubble.
-  // All = everything (the default — the listing opens on the whole catalogue).
-  // Current = still sold (active true, or unknown/null). Historic = legacy gear
-  // that's no longer sold (active === false).
-  const [status, setStatus] = useState<Status>('all')
+  const { q, setQ, sort, setSort, setView } = url
+  // Lifecycle scope, controlled from the sidebar's status bubble and held in the
+  // URL (?status=). All = everything (the default — the listing opens on the
+  // whole catalogue). Current = still sold (active true, or unknown/null).
+  // Historic = legacy gear that's no longer sold (active === false).
+  const { status, setStatus } = url
   const navigate = useNavigate()
 
   // What a link leaving this page should offer as the way back: this listing,
@@ -101,6 +97,17 @@ export default function GearListingPage() {
   // [data-cy="filter-sidebar"] / [data-cy="sort-option"] sets in the DOM and
   // break every selector the Cypress suite is built on.
   const isDesktop = useIsDesktop()
+
+  // The listing mode lives in the URL (?view=detailed|table), so it is
+  // shareable and survives Back — unlike the local state it used to be.
+  //
+  // Below `lg` the Table button is absent and a deep-linked ?view=table falls
+  // back to Cards. A frozen-column table needs room the phone doesn't have, and
+  // the fallback is deliberately a RENDER decision rather than a rewrite of the
+  // URL: rotating the device or widening the window brings the table back
+  // rather than having silently lost the link's intent.
+  const view = !isDesktop && url.view === 'table' ? 'cards' : url.view
+
   const [sheet, setSheet] = useState<'none' | 'filters' | 'sort'>('none')
   const closeSheet = () => setSheet('none')
   // A sheet left open while the window grows past `lg` would sit on top of a
@@ -169,34 +176,27 @@ export default function GearListingPage() {
     setQ(value)
   }
 
-  // Webbing stretch widget state (owned here so it also drives filtering, the
-  // contextual sort option, and the cards' data-stretch-percent). NOTHING is
-  // selected on load: no pill is active, the % slider is inert, cards carry no
-  // stretch %, and the contextual stretch sort is absent until a kN is picked.
+  // Webbing stretch widget state (it drives filtering, the contextual sort
+  // option, and the cards' data-stretch-percent). NOTHING is selected on load:
+  // no pill is active, the % slider is inert, cards carry no stretch %, and the
+  // contextual stretch sort is absent until a kN is picked.
+  //
+  // It lives in the URL (?kn=, ?stretch_min=, ?stretch_max=) like every other
+  // filter. As local state it was the one filter that silently reverted on Back
+  // — you came back from a webbing to an unfiltered grid, which reads as wrong
+  // data rather than as lost state. The two clears drop the params with
+  // everything else, so no reset signal is needed here any more.
   const isWebbing = meta?.slug === 'webbings'
-  const [stretchKn, setStretchKn] = useState<number | null>(null)
-  const [stretchMin, setStretchMin] = useState('')
-  const [stretchMax, setStretchMax] = useState('')
-  // One value now: the engaged kN, or null when the widget is off. (There is no
+  const stretchRange = url.getRange(STRETCH_RANGE_FIELD)
+  const stretchMin = stretchRange.min == null ? '' : String(stretchRange.min)
+  const stretchMax = stretchRange.max == null ? '' : String(stretchRange.max)
+  // One value: the engaged kN, or null when the widget is off. (There is no
   // separate "display" kN — a pre-selected default hint would render a pill
   // active on load, which it must not.)
-  const selectedKn = isWebbing ? stretchKn : null
-
-  // Reset the stretch widget only when clear-all actually bumps the nonce.
-  // Comparing the previous value (not a mounted flag) survives StrictMode's
-  // double-invoked mount effect.
-  const prevNonce = useRef(url.resetNonce)
-  useEffect(() => {
-    if (prevNonce.current === url.resetNonce) return
-    prevNonce.current = url.resetNonce
-    // clear-all: deselect the kN (no pill active) and clear the % range.
-    setStretchKn(null)
-    setStretchMin('')
-    setStretchMax('')
-  }, [url.resetNonce])
+  const selectedKn = isWebbing ? url.stretchKn : null
 
   // Clicking the engaged pill toggles the widget off; any other pill engages it.
-  const selectKn = (kn: number) => setStretchKn(prev => (prev === kn ? null : kn))
+  const selectKn = (kn: number) => url.setStretchKn(selectedKn === kn ? null : kn)
 
   // Every item gains two derived money fields, the same way the stretch widget
   // attaches stretch_percent below:
@@ -344,8 +344,8 @@ export default function GearListingPage() {
       onSelectKn={selectKn}
       min={stretchMin}
       max={stretchMax}
-      onMinChange={setStretchMin}
-      onMaxChange={setStretchMax}
+      onMinChange={v => url.setRangeBound(STRETCH_RANGE_FIELD, 'min', v)}
+      onMaxChange={v => url.setRangeBound(STRETCH_RANGE_FIELD, 'max', v)}
     />
   )
 

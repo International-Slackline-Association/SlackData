@@ -166,6 +166,10 @@ outside the scroll region. A single full-width pill ("bubble") split into equal 
 - **Defaults to ALL** — the listing opens on the whole catalogue, current and historic together.
   Scope is the *first* narrowing applied: search, the filter groups, their facet counts, the item
   count and the grid all work off it.
+- **It lives in the URL** (`?status=current|historic`; ALL is the default and writes no param), like
+  every other filter — so it is shareable and comes back with Back. It was local state, which meant
+  opening a legacy item from HISTORIC and pressing Back put you in ALL with the item nowhere near
+  where you left it.
 - `ALL` = every item · `CURRENT` = still sold, i.e. `active !== false` (true or unknown) ·
   `HISTORIC` = retired only, `active === false`.
 - **One color per third**: ALL amber-orange `#E8770A`, CURRENT green `#15803D`, HISTORIC red
@@ -347,6 +351,12 @@ Rules:
 - Changing the selected kN resets the % range inputs
 - Cards carry a `data-stretch-percent` attribute (% at the engaged kN) **only while a kN pill is engaged** — on a fresh load no card carries it
 - Sorting by stretch is handled by the sort dropdown's own secondary kN picker, **decoupled** from this filter widget — see Sort options below
+- **The widget's state is in the URL** — `?kn=<kn>` for the engaged pill, `?stretch_min=` /
+  `?stretch_max=` for the % bounds, all absent when it is disengaged. So a stretch view is
+  shareable, and — the reason it moved out of component state — it survives Back: engaging a
+  stretch filter, opening a webbing and returning used to bring the cards back unfiltered, which
+  reads as wrong data rather than as lost state. Deselecting the kN drops the % bounds with it, in
+  the same write: the slider is unmounted, so bounds left behind would be a filter nobody can see.
 
 ---
 
@@ -422,9 +432,13 @@ columns, which meant the specs that actually distinguish products were the ones 
 - Two wiring differences from the standalone detail page: the **product name is a link** to that
   item's detail page, and the panel carries the card's **`⧉ Compare`** action
   (next to `View product →`), so those actions work from either view.
-- Filters, search and sort apply identically in both modes — same items, same order, different
-  density. The view choice is **local state**: it resets to Cards on navigation and is not encoded
-  in the URL.
+- Filters, search and sort apply identically in every mode — same items, same order, different
+  density.
+
+The view choice lives in the **URL** (`?view=detailed`, `?view=table`; Cards is the default and
+writes no param), so a mode is shareable and survives Back. It used to be local state, which meant
+opening an item from Detailed and pressing Back landed you in Cards. Both clear actions keep it: a
+listing mode is not a filter.
 
 ---
 
@@ -1206,6 +1220,7 @@ They are deliberately different, and both are `data-cy="clear-filters"`:
 | Filter pills / ranges / stretch widget | cleared | cleared |
 | Search term (`?q=`) | cleared | **kept** |
 | Status bubble | reset to **ALL** | reset to **ALL** |
+| Listing mode (`?view=`) | **kept** | **kept** |
 
 The empty-state button's job is "show me what this *search* can find" — a dead end is nearly always
 the filters or a narrow status scope, not the words typed, so wiping the search too threw away the
