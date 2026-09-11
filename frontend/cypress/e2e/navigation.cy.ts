@@ -261,9 +261,11 @@ describe('Back link — where you came from', () => {
   })
 })
 
-// The two filters that used to live in component state, and so silently
+// The two FILTERS that used to live in component state, and so silently
 // reverted when you came back to the listing. Both are query params now
 // (?status=, ?kn=/?stretch_min=/?stretch_max=) — see hooks/useUrlState.ts.
+//
+// The compare selection is the deliberate exception, asserted below.
 describe('Back restores the filters that were not in the URL', () => {
   it('brings the status scope back', () => {
     cy.visit('/webbings')
@@ -281,22 +283,37 @@ describe('Back restores the filters that were not in the URL', () => {
     cy.get('[data-cy="gear-card"]').first().find('[data-cy="legacy-badge"]').should('exist')
   })
 
-  it('brings the compare selection back', () => {
+  // The compare selection does NOT come back, and that is the current answer
+  // rather than an oversight. It was `?compare=` for a while, precisely so the
+  // detour below would survive — and a param write goes through
+  // useSearchParams, so every memo on the listing keyed off `url.params`
+  // recomputed on every tick: both filter passes, the sort, and the table's
+  // column set. One checkbox re-ran the whole pipeline and the box took about a
+  // second to look ticked. So it is component state, seeded from `?compare=` on
+  // mount and never written back (url_state.cy.ts covers both halves).
+  //
+  // Pinned here so the trade is visible: getting the selection through a
+  // navigation means putting it somewhere that is not a render input, not
+  // paying for it on every click. BACKLOG.md § Frontend / UX.
+  it('does not bring the compare selection back — it is not URL state', () => {
     cy.visit('/webbings')
     cy.get('[data-cy="gear-card"]').should('have.length.greaterThan', 2)
     cy.get('[data-cy="gear-card"]').eq(0).find('[data-cy="btn-compare"]').click()
     cy.get('[data-cy="gear-card"]').eq(1).find('[data-cy="btn-compare"]').click()
     cy.get('[data-cy="compare-bar-count"]').should('contain.text', '2')
+    // Picking does not touch the URL — the guard against re-introducing the
+    // per-tick re-render.
+    cy.url().should('not.include', 'compare=')
 
-    // The detour that used to empty the bar: open one of the picks to check a
-    // number, then come back.
     cy.get('[data-cy="gear-card-name"]').eq(0).click()
     cy.url().should('match', /\/webbings\/\d+$/)
     cy.go('back')
 
-    cy.get('[data-cy="compare-bar-count"]').should('contain.text', '2')
+    // Back to a listing with the bar gone and no pick still active.
+    cy.get('[data-cy="gear-card"]').should('have.length.greaterThan', 2)
+    cy.get('[data-cy="compare-bar-count"]').should('not.exist')
     cy.get('[data-cy="gear-card"]').eq(0)
-      .find('[data-cy="btn-compare"]').should('have.attr', 'data-active', 'true')
+      .find('[data-cy="btn-compare"]').should('have.attr', 'data-active', 'false')
   })
 
   it('brings the engaged stretch kN back', () => {
