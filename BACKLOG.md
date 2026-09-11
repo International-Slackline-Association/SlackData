@@ -282,6 +282,10 @@ Non-phase engineering tasks not tracked in [PLAN.md](PLAN.md) (frontend roadmap)
   collision. `mobile.cy.ts` guards it with `elementFromPoint` across a sweep of scroll offsets,
   because overlap is the question "what is painted here?" and rectangles cannot answer it.
 
+- **"Sort by Sort by".** `labelFor()` returned the literal string `'Sort by'` when no sort was set,
+  and both triggers print their own eyebrow above it — so the desktop button read "Sort by Sort by"
+  and the mobile one "Sort Sort by". No sort is not "unsorted": `sortItems()` falls through to
+  alphabetical, so the default now labels itself **Name: A→Z**, which is what it actually does.
 - **Compare draws the stretch curve, and holds ten items** (#76). Four columns of
   "5.9% @ 10 kN · 7.1% @ 15 kN · …" is the reading compare exists to spare you, so on compare
   webbing stretch leaves the table and becomes a multi-series line chart — load across, elongation

@@ -667,3 +667,28 @@ describe('Search + filter combination', () => {
     })
   })
 })
+
+// The sort trigger prints a small "Sort by" eyebrow and, beside it, the current
+// choice. With no sort applied the choice used to render as the literal string
+// "Sort by", so the desktop button read "Sort by Sort by" and the mobile one
+// "Sort Sort by". No sort is not "unsorted" — sortItems() falls through to
+// alphabetical — so the honest default label is the one it actually sorts by.
+describe('Sort trigger label', () => {
+  it('names the real default instead of repeating the eyebrow', () => {
+    cy.visit('/webbings')
+    cy.get('[data-cy="sort-dropdown"]')
+      .should('contain.text', 'Name: A→Z')
+      .invoke('text')
+      .should((text) => {
+        expect(text.match(/Sort by/g) || [], 'the words "Sort by" appear once').to.have.length(1)
+      })
+  })
+
+  it('does not repeat it on the mobile sort button either', () => {
+    cy.viewport(390, 844)
+    cy.visit('/webbings')
+    cy.get('[data-cy="mobile-sort-btn"]')
+      .should('contain.text', 'Name: A→Z')
+      .and('not.contain.text', 'Sort by')
+  })
+})

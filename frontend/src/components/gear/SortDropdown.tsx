@@ -23,7 +23,12 @@ function stretchKnOf(sort: SortSpec | null): number | null {
 // Exported so MobileFilterBar can label its Sort button with the current choice
 // without duplicating the formatting rules.
 export function labelFor(sort: SortSpec | null, slug: GearSlug): string {
-  if (!sort) return 'Sort by'
+  // No sort is not "unsorted" — sortItems() falls through to alphabetical, so
+  // the default IS Name A→Z and the trigger says so. It used to return the
+  // literal 'Sort by', which the desktop trigger then printed under its own
+  // 'Sort by' eyebrow ("Sort by Sort by") and the mobile button under "Sort".
+  // This function returns the VALUE; the eyebrow is the caller's business.
+  if (!sort) return 'Name: A→Z'
   if (sort.field === 'name') return sort.direction === 'asc' ? 'Name: A→Z' : 'Name: Z→A'
   const kn = stretchKnOf(sort)
   if (kn != null) {
