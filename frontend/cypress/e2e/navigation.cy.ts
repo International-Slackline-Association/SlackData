@@ -86,3 +86,79 @@ describe('Top navigation', () => {
     cy.get('[data-cy="wordmark"]').should('be.visible')
   })
 })
+
+// Back returns you to where you were on the page, not to the top of it.
+//
+// This is the site's most-repeated action — scroll a 245-card listing, open one,
+// press Back — and without restoration it costs the whole scroll every time.
+// react-router's <ScrollRestoration> is data-router-only and main.tsx mounts a
+// plain <BrowserRouter>, so hooks/useScrollRestoration.ts does it instead; these
+// are its contract.
+describe('Scroll restoration', () => {
+  it('returns to the previous scroll position after Back', () => {
+    cy.visit('/webbings')
+    cy.get('[data-cy="gear-card"]').should('have.length.greaterThan', 10)
+
+    const LEFT_AT = 1800
+    cy.scrollTo(0, LEFT_AT)
+
+    // Click a card that is ALREADY on screen, with scrollBehavior disabled.
+    // cypress.config.ts sets scrollBehavior: 'center' globally, which scrolls
+    // the target into the middle of the viewport before clicking — a real
+    // scroll, recorded like any other, so the offset restored afterwards would
+    // be that one and not the one we set up. A visitor clicking a card they can
+    // already see does no scrolling, which is what this reproduces.
+    cy.window()
+      .then((w) => {
+        const cards = Array.from(w.document.querySelectorAll('[data-cy="gear-card"]'))
+        const onScreen = cards.findIndex((c) => {
+          const r = c.getBoundingClientRect()
+          return r.top >= 0 && r.bottom <= w.innerHeight
+        })
+        expect(onScreen, 'a card is fully in view at this offset').to.be.greaterThan(-1)
+        return onScreen
+      })
+      .then((i) => {
+        cy.get('[data-cy="gear-card"]').eq(i).find('a').first().click({ scrollBehavior: false })
+        cy.url().should('match', /\/webbings\/\d+$/)
+        // A forward navigation still starts at the top.
+        cy.window().its('scrollY').should('be.lessThan', 50)
+
+        cy.go('back')
+        cy.get('[data-cy="gear-card"]').should('have.length.greaterThan', 10)
+        // Restoration is retried across frames while the list refetches, so the
+        // offset arrives a little after the cards do. Within a few pixels: the
+        // browser clamps to whatever document height it has at that instant.
+        cy.window()
+          .its('scrollY')
+          .should((y) => expect(Math.abs(y - LEFT_AT)).to.be.lessThan(5))
+      })
+  })
+
+  it('brings search, sort and filters back with it', () => {
+    cy.visit('/webbings')
+    cy.get('[data-cy="search-input"]').type('core')
+    cy.get('[data-cy="sort-dropdown"]').click()
+    cy.get('[data-cy="sort-option"]').contains(/name.*z.*a/i).click()
+    cy.get('[data-cy="gear-card"]').should('have.length.greaterThan', 0)
+
+    cy.get('[data-cy="gear-card"]').first().find('a').first().click()
+    cy.url().should('match', /\/webbings\/\d+$/)
+
+    cy.go('back')
+    // The query string is the state, and the search box re-seeds from it on
+    // mount — so both the URL and the input have to come back.
+    cy.url().should('include', 'q=core')
+    cy.get('[data-cy="search-input"]').should('have.value', 'core')
+    cy.get('[data-cy="sort-dropdown"]').should('contain.text', 'Z→A')
+  })
+
+  it('opens a fresh navigation at the top', () => {
+    cy.visit('/webbings')
+    cy.get('[data-cy="gear-card"]').should('have.length.greaterThan', 10)
+    cy.scrollTo(0, 1800)
+    cy.get('[data-cy="nav-tab"][data-type="weblocks"]').click()
+    cy.get('[data-cy="gear-card"]').should('have.length.greaterThan', 0)
+    cy.window().its('scrollY').should('be.lessThan', 50)
+  })
+})

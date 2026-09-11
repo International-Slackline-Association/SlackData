@@ -310,6 +310,20 @@ Non-phase engineering tasks not tracked in [PLAN.md](PLAN.md) (frontend roadmap)
   and both triggers print their own eyebrow above it — so the desktop button read "Sort by Sort by"
   and the mobile one "Sort Sort by". No sort is not "unsorted": `sortItems()` falls through to
   alphabetical, so the default now labels itself **Name: A→Z**, which is what it actually does.
+
+- **Scroll restoration on back/forward.** Every navigation used to land at the top, so opening the
+  180th webbing and pressing Back dropped you at webbing #1. `hooks/useScrollRestoration.ts`, mounted
+  once on `AppLayout`. It is a hook rather than react-router's `<ScrollRestoration>` because that
+  component requires a data router and `main.tsx` mounts a plain `<BrowserRouter>` — adopting
+  `createBrowserRouter` to get it would rewrite App.tsx's route table for one behaviour. Three things
+  make it work rather than nearly work: `history.scrollRestoration = 'manual'` (the browser's own
+  runs before React has rendered the list and clamps to 0 against a page one spinner tall); keyed by
+  `location.key` rather than pathname (two visits to /webbings with different filters are different
+  entries and must not inherit each other's offset); and re-applied every animation frame until the
+  offset sticks or a 1.5s budget runs out, because the listing is still fetching and still growing at
+  restore time. PUSH/REPLACE still go to the top. Filters, sort and search come back on their own —
+  they live in the query string — with two exceptions recorded above.
+
 - **Compare draws the stretch curve, and holds ten items** (#76). Four columns of
   "5.9% @ 10 kN · 7.1% @ 15 kN · …" is the reading compare exists to spare you, so on compare
   webbing stretch leaves the table and becomes a multi-series line chart — load across, elongation
