@@ -304,6 +304,23 @@ Non-phase engineering tasks not tracked in [PLAN.md](PLAN.md) (frontend roadmap)
     `GearListingPage`; both are query params now, so Back restores them, they are deep-linkable, and
     the two clears drop them along with the rest of the query string rather than resetting them by
     hand. `navigation.cy.ts` covers both, plus every back-link route above.
+  - **The compare selection went the same way, and then came back.** It was `?compare=3,1,9` in
+    selection order, for a good reason: the detour that emptied the bar was opening one of the picks
+    to check a number. The cost turned out to be about a second per tick. A param write goes through
+    `useSearchParams`, and every memo on the listing keyed off `url.params` recomputes with it — both
+    `applyFilters` passes, the sort, and the table view's column set — so one checkbox re-ran the
+    whole listing pipeline and re-rendered 12,000 table cells. It is component state again.
+    `?compare=` is still READ on mount, so a link carrying one opens with the bar filled and
+    `utils/compare.ts` → `parseIdList` stays shared with the compare page's `?ids=`
+    (`tests/unit/compareIds.test.ts`); nothing writes it. Both clears still keep it and it still
+    clears on a gear-type switch — the latter needs an effect now that the nav's empty query string
+    isn't doing it for free. `url_state.cy.ts` asserts the URL does not change while you pick, which
+    is the guard against this regressing.
+
+    Surviving the detour is still worth having. The way to get it is somewhere that is not a render
+    input — the entry's `history.state`, or a context above the listing — not by paying for it on
+    every click.
+
 - **Table view — the listing's third mode.** `?view=table`, a peer of Cards and Detailed, built to
   the spec that was in this section: columns are the FULL spec set from `config/specRows.ts` in its
   declared order (which is the relevance order — the file now says so, because a column's position

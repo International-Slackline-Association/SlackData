@@ -20,12 +20,17 @@ export default function GearDetailedList({
   selectedIds = [],
   compareFull = false,
   onToggleCompare,
+  showCompare = true,
 }: {
   items: AnyItem[]
   meta: GearTypeMeta
   selectedIds?: number[]
   compareFull?: boolean
   onToggleCompare?: (id: number) => void
+  // False on a manufacturer's page: the panel's action row is the only place
+  // Compare appears in this view, so dropping `showActions` drops it — which
+  // renders each panel exactly as the standalone detail page does.
+  showCompare?: boolean
 }) {
   return (
     <div data-cy="gear-detailed-list" className="flex flex-col gap-5">
@@ -44,7 +49,7 @@ export default function GearDetailedList({
               item={item}
               meta={meta}
               nameHref={`/${meta.slug}/${item.id}`}
-              showActions
+              showActions={showCompare}
               compareSelected={selected}
               compareDisabled={compareFull && !selected}
               onToggleCompare={onToggleCompare}

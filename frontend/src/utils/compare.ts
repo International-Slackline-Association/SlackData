@@ -34,3 +34,32 @@ export function compareByBrand(a: NamedItem, b: NamedItem): number {
 export function sortByName<T extends NamedItem>(items: readonly T[]): T[] {
   return [...items].sort(compareByName)
 }
+
+/**
+ * The compare selection as it travels in a URL: `"3,1,9"` → `[3, 1, 9]`.
+ *
+ * Order is the selection order and is preserved — it decides the column order
+ * downstream — but an id is never repeated, because two identical columns
+ * compare nothing. Anything that isn't a finite number is dropped rather than
+ * failing the parse: this string arrives from a URL, so it is whatever someone
+ * pasted, and a listing that renders with one bad id ignored beats a blank page.
+ *
+ * Shared by the listing's `?compare=` (the selection) and the compare page's
+ * `?ids=` (the comparison), which are the same list at two moments of its life.
+ */
+export function parseIdList(raw: string | null | undefined): number[] {
+  if (!raw) return []
+  const out: number[] = []
+  const seen = new Set<number>()
+  for (const part of raw.split(',')) {
+    const n = Number(part)
+    // Number('') is 0 and Number(' ') is 0, so an empty field would parse as a
+    // real id — hence the explicit trim-and-test rather than Number.isFinite
+    // alone.
+    if (part.trim() === '' || !Number.isFinite(n)) continue
+    if (seen.has(n)) continue
+    seen.add(n)
+    out.push(n)
+  }
+  return out
+}

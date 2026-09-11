@@ -10,6 +10,23 @@
     "its slowest shard. `estimate` is the pre-sharding cost of that shard's",
     "specs, kept here so the balance is reviewable in a diff.",
     "",
+    "REPACKED when table.cy.ts landed. At 5:23 it is the second longest spec in",
+    "the suite, and every shard was already ~6:00, so there was no headroom",
+    "anywhere to drop it into: on the smallest it made that runner 11:14 and the",
+    "whole job with it. The 22 specs that have CI numbers are packed longest-first",
+    "from that table; filters.cy.ts is no longer alone on a runner, which is why",
+    "tests/unit/shards.test.ts stopped hardcoding that.",
+    "",
+    "table.cy.ts was 5:23 when this was packed and measures 4:13 since the",
+    "compare selection stopped writing the URL — a LOCAL number either way, and",
+    "manuals/brand_filter/co_listings are still residuals — refresh all four from",
+    "the next green run. The packing is only as good as those four numbers.",
+    "",
+    "admin_triage and submissions stay in DIFFERENT shards on purpose: they share",
+    "one API process per runner, and the triage queue is one page of the oldest",
+    "50 pending rows, so a spec that files submissions first can push the",
+    "fixtures triage looks for off the page (CLAUDE.md § Commands).",
+    "",
     "EVERY spec in cypress/e2e/ must appear in exactly one shard. A spec left out",
     "would silently stop running while CI stayed green, so",
     "scripts/check-shards.mjs enforces it — run by `npm run test:unit` and by",
@@ -18,41 +35,63 @@
   "shards": [
     {
       "name": "filters",
-      "estimate": "6:16",
-      "specs": ["filters"]
+      "estimate": "6:54",
+      "specs": [
+        "filters",
+        "brand_filter",
+        "co_listings",
+        "manufacturer_api_docs"
+      ]
     },
     {
       "name": "search",
-      "estimate": "6:02",
-      "specs": ["search_sort", "navigation", "brand_links"]
+      "estimate": "6:54",
+      "specs": [
+        "search_sort",
+        "isa_certification",
+        "safety_notices"
+      ]
     },
     {
       "name": "cards",
-      "estimate": "5:58",
-      "specs": ["gear_cards", "mobile", "gear_status", "manufacturer_api_docs"]
+      "estimate": "6:50",
+      "specs": [
+        "gear_cards",
+        "manufacturers",
+        "range_slider",
+        "brand_links",
+        "gear_status"
+      ]
     },
     {
-      "name": "detail",
-      "estimate": "5:52",
-      "specs": ["gear_detail", "isa_warnings", "safety_notices", "manuals"]
+      "name": "table",
+      "estimate": "5:40",
+      "specs": [
+        "table",
+        "currency"
+      ]
     },
     {
       "name": "listing",
-      "estimate": "5:51",
-      "specs": ["gear_listing", "compare", "submissions", "range_slider"]
+      "estimate": "7:12",
+      "specs": [
+        "gear_listing",
+        "compare",
+        "price_slider",
+        "mobile",
+        "admin_triage"
+      ]
     },
     {
-      "name": "money",
-      "estimate": "6:05",
+      "name": "detail",
+      "estimate": "7:07",
       "specs": [
-        "currency",
-        "isa_certification",
-        "manufacturers",
-        "price_slider",
-        "admin_triage",
+        "gear_detail",
+        "isa_warnings",
+        "submissions",
+        "manuals",
         "url_state",
-        "brand_filter",
-        "co_listings"
+        "navigation"
       ]
     }
   ]

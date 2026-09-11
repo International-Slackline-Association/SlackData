@@ -6,6 +6,8 @@
 //   ?sort=field-direction            e.g. ?sort=weight-asc  (Name A→Z = no param)
 //   ?view=detailed|table             listing mode (Cards = no param)
 //   ?status=current|historic         lifecycle scope (All = no param)
+//   ?compare=3,1,9                   a compare selection to OPEN WITH (read on
+//                                    mount only — ticking a box never writes it)
 //   ?kn=10                           webbing stretch: the engaged reference kN
 //   ?stretch_min=&?stretch_max=      webbing stretch: % bounds at that kN
 //   ?{field}=value1,value2           pill filter (comma-separated multi-select)
@@ -21,6 +23,8 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
+import { parseIdList } from '@/utils/compare'
+
 // The listing's three modes. Cards is the default and writes NO param, so a
 // bare /webbings link is still the canonical listing URL.
 export const VIEWS = ['cards', 'detailed', 'table'] as const
@@ -32,6 +36,11 @@ export type View = (typeof VIEWS)[number]
 // the value lives.)
 export const STATUSES = ['all', 'current', 'historic'] as const
 export type Status = (typeof STATUSES)[number]
+
+/** The listing's compare selection. The compare PAGE carries the same list as
+ *  `?ids=` — a different name because it is a different statement: `?compare=`
+ *  is what you have picked, `?ids=` is what you are comparing. */
+export const COMPARE_PARAM = 'compare'
 
 /** The stretch widget's URL keys, so the page and the tests name them once. */
 export const STRETCH_KN_PARAM = 'kn'
@@ -123,6 +132,14 @@ export function useUrlState() {
     const n = Number(raw)
     return Number.isFinite(n) ? n : null
   }, [params])
+
+  // The compare selection, in the order it was picked — that order is the
+  // column order downstream, so it is data, not presentation.
+  // Read-only. The listing seeds its selection from this once and then keeps it
+  // in component state: a param write re-runs every memo keyed off `params` —
+  // both filter passes, the sort, and the table's column set — so ticking a
+  // compare box used to re-run the whole listing pipeline. See GearListingPage.
+  const compareIds = useMemo(() => parseIdList(params.get(COMPARE_PARAM)), [params])
 
   // All mutations replace history (typing a search term shouldn't spam the
   // back button) and operate on a copy of the current params.
@@ -281,10 +298,17 @@ export function useUrlState() {
   )
 
   // Clears search + all filters but stays on the current route.
+  // Both clears KEEP ?view= and ?compare=. Neither is a filter: being thrown
+  // back to Cards because you cleared the sidebar would read as the page losing
+  // your place, and clearing the filters to go find the fourth thing you wanted
+  // to compare must not throw away the first three. Neither can empty a result
+  // set by being left alone.
   const clearAll = useCallback(() => {
     const next = new URLSearchParams()
     const keptView = pendingRef.current.get('view')
+    const keptCompare = pendingRef.current.get(COMPARE_PARAM)
     if (keptView) next.set('view', keptView)
+    if (keptCompare) next.set(COMPARE_PARAM, keptCompare)
     pendingRef.current = next
     setParams(next, { replace: true })
     setReset(r => ({ nonce: r.nonce + 1, q: '' }))
@@ -300,9 +324,11 @@ export function useUrlState() {
     const keptQ = pendingRef.current.get('q')
     const keptSort = pendingRef.current.get('sort')
     const keptView = pendingRef.current.get('view')
+    const keptCompare = pendingRef.current.get(COMPARE_PARAM)
     if (keptQ) next.set('q', keptQ)
     if (keptSort) next.set('sort', keptSort)
     if (keptView) next.set('view', keptView)
+    if (keptCompare) next.set(COMPARE_PARAM, keptCompare)
     pendingRef.current = next
     setParams(next, { replace: true })
     setReset(r => ({ nonce: r.nonce + 1, q: keptQ ?? '' }))
@@ -320,6 +346,7 @@ export function useUrlState() {
     setView,
     status,
     setStatus,
+    compareIds,
     stretchKn,
     setStretchKn,
     getPillValues,

@@ -42,6 +42,7 @@ export default function GearCard({
   compareSelected = false,
   compareDisabled = false,
   onToggleCompare,
+  showCompare = true,
 }: {
   item: AnyItem
   meta: GearTypeMeta
@@ -50,6 +51,11 @@ export default function GearCard({
   // is disabled so a 5th can't be added.
   compareDisabled?: boolean
   onToggleCompare?: (id: number) => void
+  // Compare only makes sense where every card is the same kind of thing. A
+  // manufacturer's page stacks webbings, weblocks and kits in one column, and
+  // a compare table of those has no shared spec to line up — so that page hides
+  // the button rather than showing one that leads nowhere.
+  showCompare?: boolean
 }) {
   const { slug, hasISA } = meta
   // Where this card is being shown — the filtered listing, a manufacturer's
@@ -202,6 +208,7 @@ export default function GearCard({
               View product ↗
             </a>
           )}
+          {showCompare && (
           <button
             data-cy="btn-compare"
             type="button"
@@ -212,6 +219,7 @@ export default function GearCard({
           >
             Compare
           </button>
+          )}
         </div>
       </div>
     </article>

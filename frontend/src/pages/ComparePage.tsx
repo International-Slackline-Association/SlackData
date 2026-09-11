@@ -23,6 +23,7 @@ import { getGearType } from '@/config/gearTypes'
 import { useGearList } from '@/hooks/useGearList'
 import { useCurrency } from '@/context/CurrencyContext'
 import { SPEC_ROWS, type PriceFormatter } from '@/config/specRows'
+import { parseIdList } from '@/utils/compare'
 import type { AnyItem } from '@/utils/format'
 import type { GearSlug } from '@/types'
 import BackLink from '@/components/layout/BackLink'
@@ -51,14 +52,11 @@ export default function ComparePage() {
     [priceText, meta?.slug],
   )
 
-  const ids = useMemo(() => {
-    const raw = params.get('ids')
-    if (!raw) return []
-    return raw
-      .split(',')
-      .map(s => Number(s))
-      .filter(n => Number.isFinite(n))
-  }, [params])
+  // Same parser the listing's ?compare= uses (utils/compare.ts): the two params
+  // carry the same list at two moments of its life, so they must read it the
+  // same way — including refusing to repeat an id, since two identical columns
+  // compare nothing.
+  const ids = useMemo(() => parseIdList(params.get('ids')), [params])
 
   // The requested items, in URL order, dropping any id that isn't in the dataset.
   const columns = useMemo(() => {

@@ -985,6 +985,20 @@ Every page that shows one thing — a gear item, a manufacturer, a comparison �
 column per compared item, rows driven by the same `SPEC_ROWS` the detail page uses (see § Spec rows
 per gear type).
 
+**Before it gets here it is component state on the listing**, in selection order. `?compare=` is
+still READ on mount — a link carrying one opens with the bar filled, through the same parser as
+`?ids=` (`utils/compare.ts` → `parseIdList`, which drops junk and never repeats an id: two identical
+columns compare nothing) — but **ticking a box never writes it**.
+
+It was URL state for a while, so the picks survived a detour into an item. The cost was not worth
+it: a param write goes through `useSearchParams`, and every memo on the listing keyed off
+`url.params` then recomputes — both `applyFilters` passes, the sort, and the table view's column
+set. Ticking one box re-ran the whole listing pipeline and re-rendered 12,000 table cells, and the
+box took about a second to look ticked. A selection is neither a filter nor a view: nothing
+downstream of the URL depends on it, so nothing needs it there. Both clears still keep it (it is not
+a filter), and it still empties when you switch gear type. `url_state.cy.ts` asserts the URL stays
+untouched while you pick — that assertion is the performance guard.
+
 **Up to ten items** (`COMPARE_MAX` in `GearListingPage.tsx`): past ten the Compare button on every
 unselected card and detailed panel is disabled. Four was too few for the question people actually
 bring here — a brand's whole range, or every 25mm webbing on the market — and columns are cheap,
@@ -1209,6 +1223,19 @@ per gear type, in the nav's gear-type order; types the brand has none of are omi
   The section root carries `data-collapsed`, and the button `aria-expanded`, so the state is
   readable to both tests and assistive tech.
 
+**Views, and no Compare.** The brand page carries the listing's **Cards | Detailed | Table** toggle,
+above the sections and applied to all of them at once. It writes the same `?view=` param the listing
+reads, so the choice survives Back and is shareable; below `lg` the Table button is absent and a
+deep-linked `?view=table` renders as Cards, exactly as on the listing. Table sort is per section and
+local — one sort across the page would mean ranking the webbings by MBS also reordered the weblocks
+below them, and the clicked field usually doesn't exist on the next section's table at all.
+
+What the page does **not** offer, in any of the three views, is **Compare**. Its sections are
+different gear types, and a compare table holding a webbing beside a tree protector has no shared
+spec to line up — the compare page is built per gear type. So the card's Compare pill, the detailed
+panel's action row and the table's checkbox column are all absent here rather than present and
+inert, which is what they were.
+
 **Grid only, with a sort control.** There is no Cards/List view toggle — the directory is a card
 grid, and that toolbar slot holds a **Sort by** dropdown instead. Options:
 
@@ -1306,6 +1333,12 @@ They are deliberately different, and both are `data-cy="clear-filters"`:
 | Search term (`?q=`) | cleared | **kept** |
 | Status bubble | reset to **ALL** | reset to **ALL** |
 | Listing mode (`?view=`) | **kept** | **kept** |
+| Compare selection (component state) | **kept** | **kept** |
+
+The last two rows are not filters, and neither can empty a result set by being left alone. Being
+thrown back to Cards because you cleared the sidebar would read as the page losing your place, and
+clearing the filters to go find the fourth thing you want to compare must not throw away the first
+three.
 
 The empty-state button's job is "show me what this *search* can find" — a dead end is nearly always
 the filters or a narrow status scope, not the words typed, so wiping the search too threw away the

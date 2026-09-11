@@ -7,7 +7,7 @@
 // When there are no results, an empty state with a clear-filters action
 // replaces both.
 
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { OriginProvider, useCurrentOrigin } from '@/context/OriginContext'
 import { originState } from '@/utils/origin'
@@ -119,12 +119,27 @@ export default function GearListingPage() {
   }, [isDesktop])
 
   // Compare selection: an ordered list of item ids (order = the columns/chips
-  // order downstream). Lives in local state, capped at COMPARE_MAX. It clears on
-  // a gear-type switch — the component stays mounted across the same :slug route,
-  // so a slug change is the signal (see the effect below). The compare page is
-  // reached by handing these ids off through the ?ids= query param, which is what
-  // makes that page deep-linkable independent of this state.
-  const [selectedIds, setSelectedIds] = useState<number[]>([])
+  // order downstream), capped at COMPARE_MAX.
+  //
+  // LOCAL state, and writing it to the URL on every tick is exactly what this
+  // must not do. It was ?compare= for a while, so the picks survived a detour
+  // into an item — but a param write goes through useSearchParams, and every
+  // memo on this page that keys off `url.params` then recomputes: the two
+  // applyFilters passes, the sort, and the table view's column set. Ticking one
+  // box re-ran the entire listing pipeline and re-rendered 12,000 table cells,
+  // and the box took about a second to look checked. A selection is not a
+  // filter, and it is not a view: nothing downstream of the URL depends on it.
+  //
+  // Seeded once from ?compare= so a link that carries one still fills the bar,
+  // and the compare PAGE is still reached by handing the ids off as ?ids= —
+  // that is what makes that page deep-linkable on its own. Sliced on the way in
+  // as well as capped on the way out: a URL can name any number of items, and
+  // eleven columns is eleven columns however they were asked for.
+  const [selectedIds, setSelectedIds] = useState<number[]>(() =>
+    url.compareIds.slice(0, COMPARE_MAX),
+  )
+  // The picks belong to the gear type they were made in. As URL state that came
+  // free (a nav tab carries no query string); as local state it needs saying.
   const prevCompareSlug = useRef(slug)
   useEffect(() => {
     if (prevCompareSlug.current === slug) return
@@ -132,16 +147,24 @@ export default function GearListingPage() {
     setSelectedIds([])
   }, [slug])
 
-  const toggleCompare = (id: number) =>
-    setSelectedIds(prev =>
-      prev.includes(id)
-        ? prev.filter(x => x !== id)
-        : prev.length >= COMPARE_MAX
-          ? prev
-          : [...prev, id],
-    )
-  const removeCompare = (id: number) => setSelectedIds(prev => prev.filter(x => x !== id))
-  const clearCompare = () => setSelectedIds([])
+  // Stable identities: GearTable memoizes its rows, and a fresh callback on
+  // every render would defeat that and re-render all 258 of them per tick.
+  const toggleCompare = useCallback(
+    (id: number) =>
+      setSelectedIds(ids =>
+        ids.includes(id)
+          ? ids.filter(x => x !== id)
+          : ids.length >= COMPARE_MAX
+            ? ids
+            : [...ids, id],
+      ),
+    [],
+  )
+  const removeCompare = useCallback(
+    (id: number) => setSelectedIds(ids => ids.filter(x => x !== id)),
+    [],
+  )
+  const clearCompare = useCallback(() => setSelectedIds([]), [])
 
   // Search box holds LOCAL state and drives filtering directly; the URL is kept
   // in sync for bookmarking but is NOT the input's value. Binding value={q}

@@ -367,3 +367,51 @@ describe('URL state — webbing stretch widget', () => {
 // pipeline and re-rendered 12,000 table cells. The box took about a second to
 // look ticked.
 
+describe('URL state — compare selection', () => {
+  const compareBtn = (i: number) =>
+    cy.get('[data-cy="gear-card"]').eq(i).find('[data-cy="btn-compare"]')
+
+  // The performance guard. If this fails, ticking a box has become slow again.
+  it('picking items does not touch the URL', () => {
+    cy.visit('/webbings')
+    cy.get('[data-cy="gear-card"]').should('have.length.greaterThan', 2)
+    compareBtn(2).click()
+    compareBtn(0).click()
+    cy.get('[data-cy="compare-bar-count"]').should('contain.text', '2')
+    cy.url().should('not.include', 'compare=')
+    cy.url().should('eq', `${Cypress.config('baseUrl')}/webbings`)
+  })
+
+  it('a deep-linked ?compare= fills the bar', () => {
+    cy.visit('/webbings')
+    cy.get('[data-cy="gear-card-name"]').eq(0).invoke('attr', 'href').then((href) => {
+      const id = String(href).split('/').pop()
+      cy.visit(`/webbings?compare=${id}`)
+      cy.get('[data-cy="compare-bar"]').should('be.visible')
+      cy.get('[data-cy="compare-bar-count"]').should('contain.text', '1')
+      // And the card it names shows itself as picked.
+      cy.get(`[data-cy="gear-card"]:has([data-cy="gear-card-name"][href="/webbings/${id}"])`)
+        .find('[data-cy="btn-compare"]')
+        .should('have.attr', 'data-active', 'true')
+    })
+  })
+
+  it('the selection survives a Clear all — it is not a filter', () => {
+    cy.visit('/webbings?q=core')
+    cy.get('[data-cy="gear-card"]').should('have.length.greaterThan', 0)
+    compareBtn(0).click()
+    cy.get('[data-cy="filter-sidebar"]').find('[data-cy="clear-filters"]').click()
+    cy.url().should('not.include', 'q=')
+    cy.get('[data-cy="compare-bar-count"]').should('contain.text', '1')
+  })
+
+  // The picks belong to the gear type they were made in.
+  it('switching gear type clears the selection', () => {
+    cy.visit('/webbings')
+    compareBtn(0).click()
+    cy.get('[data-cy="compare-bar"]').should('be.visible')
+    cy.get('[data-cy="nav-tab"]').contains('Weblocks').click()
+    cy.get('[data-cy="gear-card"]').should('have.length.greaterThan', 0)
+    cy.get('[data-cy="compare-bar"]').should('not.exist')
+  })
+})
