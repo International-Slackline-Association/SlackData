@@ -46,10 +46,11 @@ from slack_data.models.brand_clients import (
 from slack_data.models.brands import Brand
 from slack_data.models.manufacturer_updates import (
     MAX_BATCH_ITEMS,
+    MAX_IMAGE_URLS,
     MAX_ITEM_CHANGES,
     Resolution,
 )
-from slack_data.models.submissions import SubmissionKind, SubmissionStatus
+from slack_data.models.submissions import MAX_URL_LENGTH, SubmissionKind, SubmissionStatus
 from slack_data.models.webbing import FiberMaterial, Webbing
 from slack_data.models.weblocks import Weblock
 from slack_data.submissions.store import get_repository
@@ -1455,6 +1456,152 @@ def test_a_note_alone_is_enough(client, gear):
 def test_too_many_fields_in_one_item_is_refused(client, gear):
     changes = {f"field_{i}": "x" for i in range(MAX_ITEM_CHANGES + 1)}
     assert post(client, [{"gear_type": "webbings", "name": "X", "changes": changes}]).status_code == 422
+
+
+# --- Photos, as links -------------------------------------------------------
+# MANUFACTURER_API_PLAN.md § Step 4 — photos as links. A brand sends URLs of
+# photos it already publishes; the API records them and fetches nothing. The
+# operator files them later with scripts/fetch_submission_images.py.
+
+PHOTO = "https://alpha.example/img/mantra-front.jpg"
+PHOTO_2 = "https://alpha.example/img/mantra-detail.png"
+
+
+def _photos(client, image_urls, **item):
+    return post(client, [{"gear_type": "webbings", "name": "Mantra MK2",
+                          "image_urls": image_urls, **item}])
+
+
+def test_photo_links_are_stored_on_the_record(client, gear):
+    response = _photos(client, [PHOTO, PHOTO_2], changes={"weight": "70"})
+    assert response.status_code == 201, response.json()
+    assert approved(client)[0]["image_urls"] == [PHOTO, PHOTO_2]
+
+
+def test_photos_alone_are_a_complete_item(client, gear):
+    """Like a note alone or a rename alone: it asks for something."""
+    response = _photos(client, [PHOTO])
+    assert response.status_code == 201, response.json()
+    stored = approved(client)[0]
+    assert stored["changes"] == {}
+    assert stored["image_urls"] == [PHOTO]
+
+
+def test_photos_keep_an_item_whose_rename_was_dropped(client, gear):
+    """A rename to the name we already hold is dropped, and an item left with
+    nothing is refused. Photos are something, so this one must survive."""
+    response = _photos(client, [PHOTO], rename_to="Mantra MK2")
+    assert response.status_code == 201, response.json()
+
+
+def test_a_record_without_photos_stores_an_empty_list(client, gear):
+    post(client, [{"gear_type": "webbings", "name": "Mantra MK2", "changes": {"weight": "70"}}])
+    assert approved(client)[0]["image_urls"] == []
+
+
+def test_null_image_urls_means_no_photos(client, gear):
+    """`null` is what an integration's template sends when a product has none."""
+    response = _photos(client, None, note="nothing new to show")
+    assert response.status_code == 201, response.json()
+    assert approved(client)[0]["image_urls"] == []
+
+
+def test_a_brand_reads_back_the_photo_links_it_sent(client, gear):
+    _photos(client, [PHOTO])
+    rows = client.get("/manufacturer/submissions", headers=dev_headers()).json()
+    assert rows[0]["image_urls"] == [PHOTO]
+
+
+def test_photo_links_are_capped_per_item(client, gear):
+    links = [f"https://alpha.example/img/{n}.jpg" for n in range(MAX_IMAGE_URLS + 1)]
+    assert _photos(client, links[:MAX_IMAGE_URLS]).status_code == 201
+    assert _photos(client, links).status_code == 422
+
+
+@pytest.mark.parametrize(
+    "link",
+    ["ftp://alpha.example/a.jpg", "javascript:alert(1)", "/img/a.jpg", "alpha.example/a.jpg"],
+)
+def test_a_photo_link_must_be_http(client, gear, link):
+    response = _photos(client, [PHOTO, link])
+    assert response.status_code == 422
+    # The position is the point, as with `items[n]`: a caller with ten links
+    # must not have to guess which one we meant.
+    assert "image_urls[1]" in response.text
+
+
+def test_a_photo_link_is_length_capped(client, gear):
+    long_link = "https://alpha.example/" + "a" * MAX_URL_LENGTH
+    assert _photos(client, [long_link]).status_code == 422
+
+
+@pytest.mark.parametrize("blank", ["", "   "])
+def test_a_blank_photo_link_is_refused_not_dropped(client, gear, blank):
+    """A blank entry in a list is a bug in the caller's template, and dropping
+    it silently would hide that from them."""
+    response = _photos(client, [PHOTO, blank])
+    assert response.status_code == 422
+    assert "image_urls[1]" in response.text
+
+
+def test_a_photo_link_that_is_not_a_string_is_refused(client, gear):
+    assert _photos(client, [PHOTO, {"url": PHOTO_2}]).status_code == 422
+
+
+def test_photo_links_are_trimmed(client, gear):
+    _photos(client, [f"  {PHOTO}\n"])
+    assert approved(client)[0]["image_urls"] == [PHOTO]
+
+
+def test_a_repeated_photo_link_is_dropped_keeping_order(client, gear):
+    """A nightly integration re-sending its list must not double the work."""
+    _photos(client, [PHOTO_2, PHOTO, PHOTO_2, f" {PHOTO} "])
+    assert approved(client)[0]["image_urls"] == [PHOTO_2, PHOTO]
+
+
+def test_image_urls_is_not_a_changes_key(client, gear):
+    """It adds photos; it corrects no spec. As a `changes` key it would name a
+    field no gear type has."""
+    response = post(client, [{"gear_type": "webbings", "name": "Mantra MK2",
+                              "changes": {"image_urls": PHOTO}}])
+    assert response.status_code == 422
+
+
+def test_one_bad_photo_link_rejects_the_whole_batch(client, gear):
+    """All-or-nothing, like resolution: a retry after the fix is always safe."""
+    response = post(client, [
+        {"gear_type": "webbings", "name": "Mantra MK2", "image_urls": [PHOTO]},
+        {"gear_type": "weblocks", "name": "Alpha Lock", "image_urls": ["not a link"]},
+    ])
+    assert response.status_code == 422
+    assert approved(client) == []
+
+
+def test_the_api_does_not_fetch_the_photo_links(client, gear, monkeypatch):
+    """The Lambda records the URLs and nothing more. An outbound fetch of a
+    caller-chosen URL would be a request-forgery surface."""
+    import socket
+    import urllib.request
+
+    def refuse(*args, **kwargs):
+        raise AssertionError("the manufacturer API made an outbound request")
+
+    monkeypatch.setattr(urllib.request, "urlopen", refuse)
+    monkeypatch.setattr(socket, "create_connection", refuse)
+    assert _photos(client, [PHOTO]).status_code == 201
+
+
+def test_the_public_box_does_not_take_photo_links(client):
+    """Anonymous photo links are a moderation problem the authenticated path
+    does not have. The key is ignored, not stored."""
+    response = client.post(
+        "/submissions",
+        json={"kind": "correction", "gear_type": "webbings", "gear_id": 1,
+              "changes": {"weight": "70"}, "image_urls": [PHOTO]},
+    )
+    assert response.status_code == 201, response.json()
+    stored = client.get("/submissions", headers=ADMIN).json()
+    assert stored[0]["image_urls"] == []
 
 
 # --- Separation from the catalogue ------------------------------------------

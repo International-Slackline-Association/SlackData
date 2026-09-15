@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 SlackData is a **better, open-source replacement for [SlackDB](https://slackdb.com/)** — a community database of slackline gear. Goals vs SlackDB: stronger/simpler backend, modern UX design, and an account system (manufacturer accounts with edit access, general user accounts with suggest access, admin accounts for approvals).
 
-Current state: FastAPI + SQLModel + SQLite backend, plus a React/TypeScript/Vite frontend that is well underway (Phases 1–8 of [PLAN.md](PLAN.md) are done: listing, filters, search/sort, detail, compare, manufacturers). There is a pytest suite (622 tests) and a Cypress e2e suite, and the public read-only catalogue is **live at https://slackdata.org** (Phase 1). **CI runs on every PR** (`.github/workflows/ci.yml`): pytest with a dynamodb-local service, the frontend build/lint/unit suite, and Cypress against both real servers.
+Current state: FastAPI + SQLModel + SQLite backend, plus a React/TypeScript/Vite frontend that is well underway (Phases 1–8 of [PLAN.md](PLAN.md) are done: listing, filters, search/sort, detail, compare, manufacturers). There is a pytest suite (795 tests) and a Cypress e2e suite, and the public read-only catalogue is **live at https://slackdata.org** (Phase 1). **CI runs on every PR** (`.github/workflows/ci.yml`): pytest with a dynamodb-local service, the frontend build/lint/unit suite, and Cypress against both real servers.
 
 **Stack:** Python ≥3.10 backend (FastAPI, SQLModel, SQLite) + React/TypeScript/Vite frontend (in progress).
 
@@ -80,7 +80,7 @@ ruff check .
 CI runs all of this on every PR (`.github/workflows/ci.yml`), but it is the last check, not the first — run them yourself before pushing:
 
 ```bash
-python -m pytest tests/ -q          # 795 backend tests (26 files: gear types, loaders, read-only guard,
+python -m pytest tests/ -q          # 795 backend tests, 776 run + 19 DynamoDB skips (26 files: gear types, loaders, read-only guard,
                                     #   submissions, auth, manufacturer API, live server, DynamoDB,
                                     #   manufacturer contact emails, seed ids, infra route/throttle
                                     #   agreement, brand onboarding, co-listings)
@@ -97,8 +97,8 @@ docker run -d --name ddb-local -p 8765:8000 amazon/dynamodb-local
 pip install '-e.[aws]'      # boto3; the app still imports it lazily
 cd frontend && npm run build        # tsc -b + vite build
 cd frontend && npm run lint         # oxlint
-cd frontend && npm run test:unit    # 214 unit tests — node:test on the pure utils, no servers, no deps
-# Cypress e2e (23 specs) needs BOTH servers up — see PLAN.md → "Running things"
+cd frontend && npm run test:unit    # 276 unit tests — node:test on the pure utils, no servers, no deps
+# Cypress e2e (25 specs) needs BOTH servers up — see PLAN.md → "Running things"
 cd frontend && env -u ELECTRON_RUN_AS_NODE npx cypress run --spec cypress/e2e/<spec>.cy.ts
 # (the `env -u` is required under VS Code, or Cypress dies with SIGILL / exit 132)
 
@@ -164,6 +164,7 @@ Root *.json seed files
 | `slack_data/models/brand_clients.py` | `BrandClient` / `BrandPermission` / `ManufacturerPrincipal` — the account linkage `Brand` never had |
 | `slack_data/manufacturers/` | The manufacturer API's stores: `clients.py` (Protocol + SQLite + in-memory), `dynamo.py`, `store.py`, `matching.py` (gear identity), `register.py` (onboarding CLI), `onboard.py` (the CLI's AWS half — dossier, Cognito app client, ledger, end-to-end proof) |
 | `slack_data/utilities/turnstile.py` | Captcha verification — **fails closed**, unlike `fx.py` |
+| `scripts/fetch_submission_images.py` | Files a manufacturer record's `image_urls` into `frontend/public/gear-images/` under the right key, then rebuilds the manifest |
 
 There are `__init__.py` files in `models/`, `api/`, and `utilities/`. No `tests/`, no `.github/`, no Docker, no migrations (SQLModel `create_all` only).
 
@@ -419,6 +420,14 @@ derived field list (`submissions/fields.py`). What differs is trust and shape.
   response already reports `applied: true/false`, so the day it flips, brands'
   integrations need no new field — and a test pins the current answer so the
   flip is deliberate.
+- **Photos arrive as links, never as files.** `image_urls` on an item (up to
+  `MAX_IMAGE_URLS`, http(s), added never replaced) is stored on the
+  `Submission` and **not fetched by the API**, which leaves no outbound request
+  to abuse. The operator files them with `scripts/fetch_submission_images.py`,
+  whose exact invocation the approved triage row shows. Images are keyed by
+  `<brand-abbrev>_<name-slug>`, so the command uses the name **after** any
+  rename in the patch. The uploads bucket exists and is unused. See
+  MANUFACTURER_API_PLAN.md § Step 4 — photos as links.
 
 Onboarding is a **CLI, not a route** (`python -m slack_data.manufacturers.register`):
 minting credentials decides whose data a token can change, it happens a dozen

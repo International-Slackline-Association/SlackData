@@ -781,10 +781,30 @@ curl -H 'Authorization: Bearer <their token>' "$BASE/api/manufacturer/me"
 # CLI against a catalogue seeded from the deployed commit.
 ```
 
+### Manufacturer photos arrive as links
+
+Brands send `image_urls`, links to photos they already publish, not files
+(MANUFACTURER_API_PLAN.md § Step 4 — photos as links). The approved row in `/admin` shows the
+command that files them; run it from the repo root, then commit and run **half B**:
+
+```bash
+python3 scripts/fetch_submission_images.py --gear-type webbings \
+  --brand 'Balance Community' --name 'Aero 1' 'https://…/aero-1.jpg'
+# writes frontend/public/gear-images/webbings/<key>[-n].<ext> and rebuilds gearImages.json
+```
+
+Apply the record's JSON patch **first** when it renames the product or adds a new one. The script
+warns when the image key matches no product in the seed, and in that case the photos will not
+render.
+
 ### Phase 4 uploads — a bucket the deploy must never touch
 
-`slackdata-uploads-prod-<accountId>` (`UploadsBucketName` in the stack outputs) holds photos sent in
-through the manufacturer API. **Nothing syncs it, and nothing should start.** The website bucket is
+**Unused.** Photos arrive as links (above), and no route writes here. The bucket was created for a
+binary upload design that was never built, and is kept in case a brand ever has photos it cannot
+host anywhere.
+
+`slackdata-uploads-prod-<accountId>` (`UploadsBucketName` in the stack outputs) would hold photos
+sent in through the manufacturer API. **Nothing syncs it, and nothing should start.** The website bucket is
 synced with `--delete`, so a file placed there that is not in `dist/` is destroyed on the next
 deploy; gear images are build output (`frontend/public/gear-images/`, resolved through a build-time
 manifest), so an upload would be deleted *and* would not render in the meantime.

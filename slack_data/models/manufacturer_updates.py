@@ -24,6 +24,7 @@ second batch, which triage shows as two groups rather than hiding.)
 
 from enum import Enum
 from typing import Any
+from urllib.parse import urlparse
 
 from pydantic import BaseModel, Field, field_validator, model_validator
 
@@ -50,6 +51,10 @@ MAX_BATCH_ITEMS = 50
 # complete product — it exists to catch a caller looping something it shouldn't.
 MAX_ITEM_CHANGES = 60
 MAX_SKU_LENGTH = 100
+# Photo links per item. Above what any product page carries, so it only ever
+# stops a caller looping; published in MANUFACTURER_API.md and held to it by
+# tests/test_manufacturer_api_docs.py.
+MAX_IMAGE_URLS = 10
 
 
 class Resolution(str, Enum):
@@ -112,6 +117,50 @@ class ManufacturerGearItem(BaseModel):
     changes: dict[str, str] = Field(default_factory=dict)
     note: str | None = None
     source_url: str | None = None
+    # Links to photos the brand already publishes. **Recorded, never fetched**:
+    # the API makes no outbound request for them, so a caller-chosen URL is not
+    # a request-forgery surface. The operator files them with
+    # scripts/fetch_submission_images.py when applying the update. Beside
+    # `changes` rather than in it, because a photo adds to a product and
+    # corrects no spec. See MANUFACTURER_API_PLAN.md § Step 4 — photos as links.
+    image_urls: list[str] = Field(default_factory=list)
+
+    @field_validator("image_urls", mode="before")
+    @classmethod
+    def _clean_image_urls(cls, value):
+        """`null` is none; each entry is checked and trimmed; repeats are dropped.
+
+        A blank entry is refused rather than dropped, unlike a blank `note`: an
+        empty string inside a list is a bug in the caller's template, and
+        swallowing it hides that. A repeat is dropped, because a nightly run
+        re-sending its list must not double the operator's work. Every message
+        names the position, as `items[n]` does for the batch.
+        """
+        if value is None:
+            return []
+        if not isinstance(value, list):
+            return value  # pydantic's own list error is the right answer here
+        cleaned: list[str] = []
+        for index, raw in enumerate(value):
+            if not isinstance(raw, str):
+                # ValueError, not TypeError: pydantic turns ValueError into a 422
+                # and lets a TypeError escape as a 500. Same as `_stringify`.
+                raise ValueError(f"image_urls[{index}] must be a URL string")  # noqa: TRY004
+            url = raw.strip()
+            if not url:
+                raise ValueError(f"image_urls[{index}] is empty")
+            if len(url) > MAX_URL_LENGTH:
+                raise ValueError(
+                    f"image_urls[{index}] must be at most {MAX_URL_LENGTH} characters"
+                )
+            parsed = urlparse(url)
+            if parsed.scheme not in ("http", "https") or not parsed.netloc:
+                raise ValueError(f"image_urls[{index}] must be an http(s) URL")
+            if url not in cleaned:
+                cleaned.append(url)
+        if len(cleaned) > MAX_IMAGE_URLS:
+            raise ValueError(f"at most {MAX_IMAGE_URLS} image_urls per item")
+        return cleaned
 
     @field_validator("changes", mode="before")
     @classmethod
@@ -239,8 +288,8 @@ class ManufacturerGearItem(BaseModel):
 
         if self.gear_id is None and not self.name:
             raise ValueError("an item needs a gear_id or a name")
-        if not self.changes and not self.note and not self.rename_to:
-            raise ValueError("an item needs at least one change, a rename or a note")
+        if not self.changes and not self.note and not self.rename_to and not self.image_urls:
+            raise ValueError("an item needs at least one change, a rename, a note or a photo")
         return self
 
 
@@ -340,6 +389,7 @@ class ManufacturerSubmissionRow(BaseModel):
     changes: dict[str, str] = Field(default_factory=dict)
     note: str | None = None
     source_url: str | None = None
+    image_urls: list[str] = Field(default_factory=list)
     status: SubmissionStatus
     created_at: str
     reviewed_at: str | None = None

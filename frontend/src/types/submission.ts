@@ -57,6 +57,10 @@ export interface Submission {
   changes: Record<string, string>
   note: string | null
   source_url: string | null
+  /** Links to photos, from the manufacturer API only. Never null — empty when
+   *  there are none. Recorded, not fetched: scripts/fetch_submission_images.py
+   *  files them, and utils/imageFetch.ts builds that command. */
+  image_urls: string[]
   submitter_email: string | null
   /** Null for the public box. A manufacturer submission carries
    *  `brand-client:<cognito app client id>`. */

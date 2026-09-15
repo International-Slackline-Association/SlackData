@@ -140,6 +140,48 @@ def test_every_field_the_api_accepts_is_documented(slug):
     )
 
 
+# --- Photos -----------------------------------------------------------------
+
+
+def _item_field_rows() -> dict[str, str]:
+    """§ 3's item-field table, as field name -> the rest of its row."""
+    section = _section("## 3. `POST /manufacturer/gear` — send corrections")
+    return dict(re.findall(r"^\| `(\w+)` \|(.+)$", section, re.MULTILINE))
+
+
+def test_the_item_table_documents_image_urls():
+    rows = _item_field_rows()
+    assert "source_url" in rows, "§ 3's item table did not parse"
+    assert "image_urls" in rows, "MANUFACTURER_API.md § 3 does not document `image_urls`"
+
+
+def test_the_documented_photo_cap_is_the_one_the_api_enforces():
+    """A brand sizes its payload from the document. A smaller real cap is a 422
+    on their first full product page."""
+    from slack_data.models.manufacturer_updates import MAX_IMAGE_URLS
+
+    row = _item_field_rows()["image_urls"]
+    stated = re.search(r"Up to (\d+)", row)
+    assert stated, f"the image_urls row states no cap: {row!r}"
+    assert int(stated.group(1)) == MAX_IMAGE_URLS
+
+    sending = _section("### Sending photos")
+    assert f"Up to **{MAX_IMAGE_URLS}** per item" in sending
+
+
+def test_the_document_says_what_sending_a_photo_grants():
+    """Image rights must be stated, not implied by the existence of the field."""
+    sending = _section("### Sending photos")
+    assert "By sending a link you confirm that SlackData may display that image" in sending
+
+
+def test_the_spa_page_documents_image_urls():
+    assert "image_urls" in SPA_PAGE.read_text(encoding="utf-8"), (
+        "ManufacturerApiPage.tsx never mentions image_urls — a brand reading the site"
+        " cannot discover how to send photos"
+    )
+
+
 # --- 3. The status codes ----------------------------------------------------
 
 

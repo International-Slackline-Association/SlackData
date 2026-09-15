@@ -293,6 +293,37 @@ def test_a_manufacturer_submission_round_trips(submissions):
     assert back.expires_at is None
 
 
+def test_photo_links_round_trip_through_dynamodb(submissions):
+    """A list attribute: no table, index or IAM change. Order is the brand's
+    and must survive the serializer."""
+    links = ["https://bc.example/aero-2.png", "https://bc.example/aero-1.jpg"]
+    record = a_submission(
+        submission_id="01J0000000000000000000PHOTO",
+        kind=SubmissionKind.MANUFACTURER,
+        status=SubmissionStatus.APPROVED,
+        changes={},
+        image_urls=links,
+        expires_at=None,
+    )
+    submissions.create(record)
+    assert submissions.get(record.submission_id).image_urls == links
+
+
+def test_an_item_written_before_photo_links_reads_back_with_none(submissions, tables):
+    """Every record stored before this field existed has no attribute at all."""
+    item = {
+        "submission_id": "01J00000000000000000NOPHOTO",
+        "kind": "correction",
+        "gear_type": "webbings",
+        "gear_id": 12,
+        "changes": {"weight": "62"},
+        "status": "pending",
+        "created_at": now_iso(),
+    }
+    tables["SubmissionsTable"].put_item(Item=item)
+    assert submissions.get(item["submission_id"]).image_urls == []
+
+
 def test_a_missing_submission_is_none(submissions):
     assert submissions.get("01J0000000000000000MISSING") is None
 

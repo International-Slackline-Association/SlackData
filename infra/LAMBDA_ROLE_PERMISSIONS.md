@@ -202,6 +202,12 @@ Worth flagging before this tier is granted:
 
 ## Tier 3 — photo uploads on the manufacturer API (granted, not yet used)
 
+**Update 2026-09-15: not planned either.** Manufacturer photos arrive as *links* (`image_urls`),
+downloaded by the operator when applying an update, so the Lambda neither receives nor fetches a
+binary. See MANUFACTURER_API_PLAN.md § Step 4 — photos as links. The grant below is harmless while
+unused. It is left in place rather than handed back, because a brand with photos it cannot host is
+the case that would bring uploads back.
+
 **Corrected 2026-08-19.** This tier was previously written the wrong way round — as SlackData
 fetching data *from* manufacturers' APIs. It is the opposite: **we publish an API that brands call**
 to keep their own gear data and product photos current, instead of the data being transcribed by

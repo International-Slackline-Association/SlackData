@@ -21,6 +21,7 @@ import { getGearType } from '@/config/gearTypes'
 import type { Submission, SubmissionStatus } from '@/types'
 import { relativeAge } from '@/utils/age'
 import { batchBrand, groupByBatch, type SubmissionGroup } from '@/utils/batches'
+import { imageFetchCommand, photoLabel } from '@/utils/imageFetch'
 
 // Queue order, not alphabetical: `approved` sits second because it is the
 // bucket with outstanding work — corrections agreed but not yet shipped.
@@ -420,6 +421,33 @@ function SubmissionRow({
         </a>
       )}
 
+      {submission.image_urls.length > 0 && (
+        // Links, not thumbnails: a thumbnail would load a third-party resource
+        // in the admin's browser the moment the queue renders, and the link
+        // shows exactly the URL the fetch command will download.
+        <div data-cy="submission-row-images" className="mt-3 text-sm">
+          <p className="font-medium text-gray-700">
+            Photos ({submission.image_urls.length})
+          </p>
+          <ul className="mt-1 space-y-0.5">
+            {submission.image_urls.map(url => (
+              <li key={url}>
+                <a
+                  data-cy="submission-row-image"
+                  href={url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title={url}
+                  className="break-all text-teal-700 hover:text-teal-800"
+                >
+                  {photoLabel(url)} ↗
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
       {approved || submission.status === 'approved' ? (
         <ApprovedPatch
           submission={submission}
@@ -497,7 +525,9 @@ function ApprovedPatch({
   busy: boolean
 }) {
   const patch = JSON.stringify(submission.changes, null, 2)
+  const photoCommand = imageFetchCommand(submission)
   const [copied, setCopied] = useState(false)
+  const [commandCopied, setCommandCopied] = useState(false)
   const [sha, setSha] = useState('')
 
   return (
@@ -542,6 +572,37 @@ function ApprovedPatch({
           Reject instead
         </button>
       </div>
+
+      {photoCommand && (
+        // The other half of a photo link: nothing fetches it until this runs.
+        // Built by utils/imageFetch.ts, which quotes every argument and uses the
+        // name the product has AFTER the patch above — images are keyed by it.
+        <div className="mt-3 border-t border-amber-200 pt-3">
+          <p className="text-sm text-amber-900">
+            <strong className="font-semibold">Photos.</strong> From the repository root, run this
+            to file them under{' '}
+            <code className="font-mono text-xs">frontend/public/gear-images/</code>, then commit
+            and redeploy the website (half B). Apply the JSON above first if it renames the product.
+          </p>
+          <pre
+            data-cy="image-fetch-command"
+            className="mt-2 overflow-x-auto rounded bg-white p-2 font-mono text-xs whitespace-pre-wrap break-all text-gray-800"
+          >
+            {photoCommand}
+          </pre>
+          <button
+            type="button"
+            data-cy="copy-image-command"
+            onClick={() => {
+              void navigator.clipboard?.writeText(photoCommand)
+              setCommandCopied(true)
+            }}
+            className="mt-2 cursor-pointer rounded-full border border-amber-300 px-3 py-1 text-sm font-medium text-amber-900 hover:bg-amber-100"
+          >
+            {commandCopied ? 'Copied' : 'Copy command'}
+          </button>
+        </div>
+      )}
 
       {/*
         The step that actually closes the loop. Until this is clicked the record

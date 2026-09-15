@@ -948,3 +948,69 @@ def test_an_existing_sqlite_file_gains_new_columns(tmp_path):
     )
     repo.create(record)
     assert repo.get(record.submission_id).gear_brand == "Balance Community"
+
+
+def test_photo_links_round_trip_through_sqlite(tmp_path):
+    """`image_urls` is a list in a TEXT column, encoded like `changes`."""
+    from slack_data.models.submissions import Submission
+    from slack_data.submissions.repository import SqliteSubmissionRepository
+    from slack_data.utilities.ulid import new_ulid
+
+    repo = SqliteSubmissionRepository(str(tmp_path / "photos.db"))
+    links = ["https://a.example/1.jpg", "https://a.example/2.png"]
+    with_photos = Submission(
+        submission_id=new_ulid(), kind="manufacturer", gear_type="webbings",
+        gear_id=1, changes={}, image_urls=links, status="approved",
+        created_at="2026-09-15T10:00:00.000Z",
+    )
+    without = Submission(
+        submission_id=new_ulid(), kind="correction", gear_type="webbings",
+        gear_id=1, changes={"weight": "62"}, created_at="2026-09-15T10:00:00.001Z",
+    )
+    repo.create(with_photos)
+    repo.create(without)
+
+    assert repo.get(with_photos.submission_id).image_urls == links
+    assert repo.get(without.submission_id).image_urls == []
+    assert [s.image_urls for s in repo.list_by_status(SubmissionStatus.APPROVED)] == [links]
+
+
+def test_a_store_that_predates_photo_links_reads_its_rows_as_having_none(tmp_path):
+    """The Phase 4 schema, before `image_urls`. Its rows must still read back —
+    as `[]`, not as a validation error on a NULL column — and new rows must
+    still write."""
+    import sqlite3
+
+    from slack_data.models.submissions import Submission
+    from slack_data.submissions.repository import SqliteSubmissionRepository
+    from slack_data.utilities.ulid import new_ulid
+
+    path = tmp_path / "phase4.db"
+    old_id = new_ulid()
+    legacy = sqlite3.connect(path)
+    legacy.execute(
+        "CREATE TABLE submissions ("
+        " submission_id TEXT PRIMARY KEY, kind TEXT NOT NULL, gear_type TEXT NOT NULL,"
+        " gear_id INTEGER, gear_name TEXT, gear_brand TEXT, changes TEXT NOT NULL, note TEXT,"
+        " source_url TEXT, submitter_email TEXT, submitted_by TEXT, brand_id INTEGER,"
+        " batch_id TEXT, manufacturer_sku TEXT, status TEXT NOT NULL,"
+        " created_at TEXT NOT NULL, reviewed_at TEXT, review_note TEXT, expires_at INTEGER)"
+    )
+    legacy.execute(
+        "INSERT INTO submissions (submission_id, kind, gear_type, changes, status, created_at)"
+        " VALUES (?, 'manufacturer', 'webbings', '{}', 'approved', '2026-09-01T00:00:00.000Z')",
+        (old_id,),
+    )
+    legacy.commit()
+    legacy.close()
+
+    repo = SqliteSubmissionRepository(str(path))
+    assert repo.get(old_id).image_urls == []
+
+    record = Submission(
+        submission_id=new_ulid(), kind="manufacturer", gear_type="webbings",
+        changes={}, image_urls=["https://a.example/1.jpg"], status="approved",
+        created_at="2026-09-15T10:00:00.000Z",
+    )
+    repo.create(record)
+    assert repo.get(record.submission_id).image_urls == ["https://a.example/1.jpg"]

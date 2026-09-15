@@ -141,6 +141,7 @@ CREATE TABLE IF NOT EXISTS submissions (
     brand_id        INTEGER,
     batch_id        TEXT,
     manufacturer_sku TEXT,
+    image_urls      TEXT,
     status          TEXT NOT NULL,
     created_at      TEXT NOT NULL,
     reviewed_at     TEXT,
@@ -177,6 +178,9 @@ _ADDED_COLUMNS: dict[str, str] = {
     "brand_id": "INTEGER",
     "batch_id": "TEXT",
     "manufacturer_sku": "TEXT",
+    # Step 4 (photos as links). A JSON list, encoded like `changes`; NULL on
+    # every older row, which `_from_row` reads back as no photos.
+    "image_urls": "TEXT",
 }
 
 
@@ -229,12 +233,14 @@ class SqliteSubmissionRepository:
     def _to_row(submission: Submission) -> dict:
         row = submission.model_dump(mode="json")
         row["changes"] = json.dumps(row["changes"])
+        row["image_urls"] = json.dumps(row["image_urls"])
         return row
 
     @staticmethod
     def _from_row(row: sqlite3.Row) -> Submission:
         data = dict(row)
         data["changes"] = json.loads(data["changes"])
+        data["image_urls"] = json.loads(data["image_urls"]) if data.get("image_urls") else []
         return Submission(**data)
 
     def create(self, submission: Submission) -> Submission:

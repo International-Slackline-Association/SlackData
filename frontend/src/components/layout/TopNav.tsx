@@ -95,13 +95,35 @@ export default function TopNav() {
     >
       {/* Tier 1 — fixed upper area */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between gap-2 sm:gap-4">
-        <Link
-          to="/webbings"
-          data-cy="wordmark"
-          className="font-bold text-gray-900 text-lg shrink-0"
-        >
-          SlackData
-        </Link>
+        <div className="flex items-center gap-3 sm:gap-5 min-w-0">
+          <Link
+            to="/webbings"
+            data-cy="wordmark"
+            className="font-bold text-gray-900 text-lg shrink-0"
+          >
+            SlackData
+          </Link>
+          {/* Supported-by credit, as SlackDB carries it. The label drops on a
+              phone so tier 1 keeps its fixed height beside the currency picker. */}
+          <a
+            href="https://www.slacklineinternational.org"
+            target="_blank"
+            rel="noopener noreferrer"
+            data-cy="isa-supported-by"
+            className="flex items-center gap-2 shrink-0 opacity-80 hover:opacity-100 transition-opacity"
+          >
+            <span className="hidden sm:inline text-[11px] uppercase tracking-wide text-gray-400">
+              Supported by
+            </span>
+            <img
+              src="/isa-logo.png"
+              alt="International Slackline Association"
+              width={298}
+              height={58}
+              className="h-6 w-auto"
+            />
+          </a>
+        </div>
         {/* Right side: the currency selector sits beside Manufacturers on every
             page, not just listings — prices appear on detail and compare too. */}
         <div className="flex items-center gap-2 sm:gap-4">
