@@ -11065,7 +11065,7 @@
         "thickness": 2.0,
         "weight": 26.0,
         "breakingStrength": 30.0,
-        "webbing_construction": "Flat",
+        "webbing_construction": "Core/Sheath",
         "isa_certified": false,
         "product_url": "https://balancecommunity.com/products/spider-silk-mk4",
         "date_introduced": null,
