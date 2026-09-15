@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 SlackData is a **better, open-source replacement for [SlackDB](https://slackdb.com/)** — a community database of slackline gear. Goals vs SlackDB: stronger/simpler backend, modern UX design, and an account system (manufacturer accounts with edit access, general user accounts with suggest access, admin accounts for approvals).
 
-Current state: FastAPI + SQLModel + SQLite backend, plus a React/TypeScript/Vite frontend that is well underway (Phases 1–8 of [PLAN.md](PLAN.md) are done: listing, filters, search/sort, detail, compare, manufacturers). There is a pytest suite (622 tests) and a Cypress e2e suite, and the public read-only catalogue is **live at https://slackdata.org** (Phase 1). **CI runs on every PR** (`.github/workflows/ci.yml`): pytest with a dynamodb-local service, the frontend build/lint/unit suite, and Cypress against both real servers.
+Current state: FastAPI + SQLModel + SQLite backend, plus a React/TypeScript/Vite frontend that is well underway (Phases 1–8 of [PLAN.md](PLAN.md) are done: listing, filters, search/sort, detail, compare, manufacturers). There is a pytest suite (795 tests) and a Cypress e2e suite, and the public read-only catalogue is **live at https://slackdata.org** (Phase 1). **CI runs on every PR** (`.github/workflows/ci.yml`): pytest with a dynamodb-local service, the frontend build/lint/unit suite, and Cypress against both real servers.
 
 **Stack:** Python ≥3.10 backend (FastAPI, SQLModel, SQLite) + React/TypeScript/Vite frontend (in progress).
 
@@ -80,7 +80,7 @@ ruff check .
 CI runs all of this on every PR (`.github/workflows/ci.yml`), but it is the last check, not the first — run them yourself before pushing:
 
 ```bash
-python -m pytest tests/ -q          # 795 backend tests (26 files: gear types, loaders, read-only guard,
+python -m pytest tests/ -q          # 795 backend tests, 776 run + 19 DynamoDB skips (26 files: gear types, loaders, read-only guard,
                                     #   submissions, auth, manufacturer API, live server, DynamoDB,
                                     #   manufacturer contact emails, seed ids, infra route/throttle
                                     #   agreement, brand onboarding, co-listings)
@@ -97,8 +97,8 @@ docker run -d --name ddb-local -p 8765:8000 amazon/dynamodb-local
 pip install '-e.[aws]'      # boto3; the app still imports it lazily
 cd frontend && npm run build        # tsc -b + vite build
 cd frontend && npm run lint         # oxlint
-cd frontend && npm run test:unit    # 214 unit tests — node:test on the pure utils, no servers, no deps
-# Cypress e2e (23 specs) needs BOTH servers up — see PLAN.md → "Running things"
+cd frontend && npm run test:unit    # 276 unit tests — node:test on the pure utils, no servers, no deps
+# Cypress e2e (25 specs) needs BOTH servers up — see PLAN.md → "Running things"
 cd frontend && env -u ELECTRON_RUN_AS_NODE npx cypress run --spec cypress/e2e/<spec>.cy.ts
 # (the `env -u` is required under VS Code, or Cypress dies with SIGILL / exit 132)
 
