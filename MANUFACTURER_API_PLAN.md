@@ -8,7 +8,7 @@ let the two drift.
 
 ## Status (2026-08-21)
 
-**Steps 1–3 are built and tested; step 4 (photos) is not started.** 565 pytest / 130 node unit tests
+**Steps 1–3 are built and tested; step 4 (photos) is built as *links*, not uploads — see § Step 4.** 565 pytest / 130 node unit tests
 pass, and **CI now runs all of it** (`.github/workflows/ci.yml`) including Cypress against both
 real servers.
 
@@ -47,7 +47,8 @@ real servers.
 
 ### What is deliberately not built
 
-- **Photos** (step 4). The `UploadsBucket` exists in `serverless.yml`; no route writes to it.
+- **Photo uploads.** Step 4 became *links* instead (§ Step 4 — photos as links). The
+  `UploadsBucket` exists in `serverless.yml`; no route writes to it, and none is planned.
 - **Direct catalogue writes.** `BrandPermission.WRITE` is declared and **not honoured**:
   `may_write_directly()` returns False structurally, because the hosted catalogue is opened
   `mode=ro&immutable=1`. The per-item response already carries `applied: true/false` so the day it
@@ -188,21 +189,156 @@ drift is reported instead of silently re-pointing a recall.
 
 ### Photos
 
-`POST` to the API, which writes to **`slackdata-uploads-prod-<acct>`** — *not* the website bucket.
+See **§ Step 4 — photos as links** below. The original plan here was a binary upload into
+`slackdata-uploads-prod-<acct>`; it was replaced before any of it was built.
 
-Deploy half B runs `aws s3 sync dist/ --delete` over the web bucket, and gear images are build output
-(`frontend/public/gear-images/`, resolved through a build-time manifest). An upload written there
-would be deleted by the next deploy and would not render before then. The uploads bucket is a
-quarantine: private, encrypted, synced by nothing, 90-day lifecycle.
+---
 
-Cap size and MIME type **in the route**, not in IAM. This is the first endpoint on the site that
-accepts a binary from outside; `MAX_BODY_BYTES` in `submissions_router.py` is the pattern, but a
-16 KB cap is obviously wrong for a photo — pick a real number and reject early on `Content-Length`.
+## Step 4 — photos as links (`image_urls`)
 
-Promoting a photo to the site is manual today: download, drop into `public/gear-images/<type>/`,
-regenerate the manifest, commit, deploy. If that becomes the bottleneck, `frontend/src/utils/images.ts`
-has a documented one-line switch (`VITE_IMAGE_BASE_URL`) to serve images from a CDN prefix instead of
-the build — that, not automation of the manual loop, is the fix.
+**Status: built 2026-09-15, not yet committed or run through CI.** Replaces the upload design that
+used to sit under § Photos. The plan below is what was built. The one addition is a test that the
+route makes no outbound request.
+
+### The decision: links, not binaries
+
+A brand sends **URLs of photos it already publishes**, as a list on each item. We fetch them
+when applying the update, the same way the current 870 images were collected. No binary ever
+reaches the API.
+
+The reason is where the work actually is. Getting a photo onto the site is manual whichever way
+it arrives: someone looks at it, puts it in `frontend/public/gear-images/<type>/` under the right
+key, rebuilds the manifest, commits and runs deploy half B. An upload only changes who holds the
+bytes while that happens, and it costs a lot to build:
+
+- **It is the first route that accepts a file from outside.** That means sniffing the content type,
+  size caps, and abuse handling. A JSON list of URLs needs none of it.
+- **Lambda caps a synchronous request at ~6 MB**, so a real upload has to be a pre-signed POST
+  straight to S3 (pre-signed PUT cannot bound the size). That means a new route, boto3 outside
+  `submissions/`, and a real-S3 test.
+- **The uploads bucket deletes objects after 90 days, but approved manufacturer records never
+  expire.** An upload could vanish while its record still said "to do".
+
+What the list costs: no infrastructure, no IAM, no binary, and it fits the existing 256 KB body
+cap. The part that genuinely saves time is the other half, **a script that turns a record's URLs
+into correctly named files**, because naming is where a photo silently fails to render.
+
+The uploads bucket and its `s3:PutObject/GetObject` grant stay in place, unused. Removing them is a
+separate infra change with its own ISA conversation, and a brand with photos it cannot host
+anywhere is the case that would bring uploads back.
+
+### The wire shape
+
+`image_urls` on `ManufacturerGearItem`, beside `source_url` and `rename_to` — **not** a key of
+`changes`. It adds photos; it does not correct a spec, and `changes` is a `dict[str, str]` that
+cannot carry a list anyway.
+
+| Rule | Behaviour |
+|---|---|
+| Absent or `null` | No photos. Same as `[]`. |
+| Up to `MAX_IMAGE_URLS` (10) per item | 11 is a **422** naming the item. Ten is more than any product page carries. |
+| Each entry | `http(s)` only, whitespace stripped, at most `MAX_URL_LENGTH` (500). Anything else is a **422** naming the entry's position. |
+| A blank entry | **422**, not silently dropped: an empty string in a list is a bug in the caller's template. |
+| A repeated URL | Dropped, first occurrence kept, order preserved. A nightly integration re-sending its list must not double the work. |
+| An item with only photos | Valid. It asks for something, like a note alone or a rename alone. |
+
+**Semantics are "add these".** Removing or reordering an existing photo is not expressible, and is
+said in `note`. A replace-the-set field would let one bad nightly run strip a product's imagery.
+
+**The API does not fetch the URLs.** It records them. An outbound fetch from the Lambda would be a
+server-side request forgery surface, and a dead link is found when the admin runs the script,
+which is when it matters.
+
+**Image rights.** MANUFACTURER_API.md says plainly that sending a URL grants SlackData permission to
+display the image. A link on the brand's own domain, sent with the brand's own credential, is good
+evidence of that. The document should not leave it implied.
+
+The public suggestion box does **not** get the field. Anonymous photo links are a moderation
+problem the authenticated path does not have, and `SubmissionCreate` ignoring the key is pinned by
+a test.
+
+### Storage
+
+`Submission.image_urls: list[str]`, default empty.
+
+- **SQLite:** one entry in `_ADDED_COLUMNS` (`image_urls TEXT`), JSON-encoded like `changes`. Rows
+  that predate it read back as `[]`.
+- **DynamoDB:** a list attribute on the item. No table, index or IAM change. Items that predate it
+  have no attribute and read back as `[]`.
+- **Read-back:** `ManufacturerSubmissionRow` carries it, so a brand can confirm what it sent.
+- The receipt is unchanged.
+
+### Triage
+
+`SubmissionRow` lists the URLs as plain links (`data-cy="submission-row-images"`, one
+`submission-row-image` per URL, new tab, `rel="noopener noreferrer"`). They are **links, not
+thumbnails**. A thumbnail loads a third-party resource in the admin's browser the moment the queue
+renders, and the link shows exactly the URL the script will fetch.
+
+The approved panel adds **the exact command to run** (`data-cy="image-fetch-command"`, with a copy
+button), built by `frontend/src/utils/imageFetch.ts`:
+
+    python3 scripts/fetch_submission_images.py --gear-type webbings \
+      --brand 'Balance Community' --name 'Aero 1' 'https://…/aero-1.jpg'
+
+- **The name is the one the product will have after the patch**: `changes.name` when the record
+  renames it, otherwise `gear_name`. Images are keyed by name, so fetching under the old name
+  after a rename would file them under a key nothing renders.
+- **Arguments are single-quoted for a POSIX shell**, with embedded quotes escaped. The brand, the
+  name and the URLs all come from outside, so the builder is unit-tested rather than trusted.
+
+### The script — `scripts/fetch_submission_images.py`
+
+    python3 scripts/fetch_submission_images.py --gear-type T --brand B --name N URL [URL ...]
+                                                [--dry-run]
+
+1. Computes the key exactly as the frontend does: `<brand-abbrev>_<name-slug>`, via
+   `brandAbbrev.json` and `build_gear_manifest.slugify`, never a third copy of either.
+2. Finds the files already held under that key and **appends**: the first photo of a product with
+   none becomes `<key>.<ext>`, later ones `<key>-<n>.<ext>` after the highest index held.
+   Uses `build_gear_manifest.parse` with the seed's keys, so a product *named* "Blue 20" is not
+   mistaken for image 20 of "Blue".
+3. For each URL: downloads with a timeout and a **15 MB cap**, and decides the extension by
+   **sniffing the bytes** (JPEG, PNG, WebP, GIF), never by the URL or the `Content-Type`. A product
+   *page* sent in place of an image URL is the likeliest mistake, and it arrives as `text/html`
+   under a URL ending in something plausible.
+4. **Never overwrites.** A download byte-identical to a file already held for that key is skipped
+   and reported, so re-running on the same record is safe.
+5. Rebuilds `gearImages.json` through `build_gear_manifest` unless `--dry-run`.
+6. **Warns when the key matches no product in the seed.** That is a rename or a new product whose
+   JSON patch has not been applied yet, and the images will not render until it is.
+7. Exits 1 if any URL failed, after writing the ones that succeeded and naming each failure.
+
+The downloader is a module-level `fetch` function, so tests replace it. **No test touches the
+network.**
+
+### Tests (red first)
+
+- `tests/test_manufacturer_api.py` § Photos: accepted and stored, read back, only-photos item is
+  valid, the cap, `http(s)` only, per-URL length, a blank entry, `null` means none, duplicates
+  dropped with order kept, the field is not a `changes` key, one bad item still rejects the batch,
+  the public box ignores it.
+- `tests/test_submissions.py`: a SQLite file created **before** the column still opens and reads
+  old rows back as `[]`, and a new row round-trips its list.
+- `tests/test_dynamo_stores.py`: a manufacturer record round-trips `image_urls` through real
+  DynamoDB, and a record without it reads back as `[]`.
+- `tests/test_manufacturer_api_docs.py`: MANUFACTURER_API.md's item table documents `image_urls`,
+  the cap it states equals `MAX_IMAGE_URLS`, the rights sentence is present, and the SPA page
+  mentions the field.
+- `tests/test_fetch_submission_images.py`: key building, next index, index-looking product names,
+  sniffing, refusing HTML and oversized bodies, no overwrite, byte-identical skip, dry run writes
+  nothing, the unknown-key warning, exit code on partial failure.
+- `frontend/tests/unit/imageFetch.test.ts`: the command's name after a rename, quoting of `'` and
+  shell metacharacters, and no command for a record without photos.
+
+### Not done, deliberately
+
+- **Thumbnails in triage.** See above.
+- **`?include=photos`** on discovery. The backend does not know the image manifest; it is a
+  frontend build artifact. That needs its own design.
+- **Cypress coverage of the triage links.** CI's e2e job registers no brand client, so no spec can
+  create a manufacturer record. The rendering logic that can go wrong (the command) is unit-tested.
+- **Removing the uploads bucket** and its grant.
 
 ---
 
@@ -473,7 +609,6 @@ submissions work alone.
    `manufacturer_sku`.~~ **Done.**
 3. ~~**Triage UI** for the new kind.~~ **Done** — batch grouping, a manufacturer badge, the SKU, and
    a reject path on approved rows. Not yet covered by Cypress.
-4. **Photos — still to do.** The only part needing new infrastructure thinking, and everything above
-   is useful without it. `UploadsBucket` is already in `serverless.yml`; `MAX_BODY_BYTES` in
-   `manufacturer_router.py` (256 KB) is sized for JSON, not for a photo, so pick a real number for
-   that route rather than reusing this one.
+4. **Photos — as links.** See § Step 4 — photos as links. No new infrastructure: brands send URLs of
+   photos they already publish, and `scripts/fetch_submission_images.py` files them under the right
+   key. `UploadsBucket` stays in `serverless.yml`, unused.

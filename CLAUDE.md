@@ -164,6 +164,7 @@ Root *.json seed files
 | `slack_data/models/brand_clients.py` | `BrandClient` / `BrandPermission` / `ManufacturerPrincipal` — the account linkage `Brand` never had |
 | `slack_data/manufacturers/` | The manufacturer API's stores: `clients.py` (Protocol + SQLite + in-memory), `dynamo.py`, `store.py`, `matching.py` (gear identity), `register.py` (onboarding CLI), `onboard.py` (the CLI's AWS half — dossier, Cognito app client, ledger, end-to-end proof) |
 | `slack_data/utilities/turnstile.py` | Captcha verification — **fails closed**, unlike `fx.py` |
+| `scripts/fetch_submission_images.py` | Files a manufacturer record's `image_urls` into `frontend/public/gear-images/` under the right key, then rebuilds the manifest |
 
 There are `__init__.py` files in `models/`, `api/`, and `utilities/`. No `tests/`, no `.github/`, no Docker, no migrations (SQLModel `create_all` only).
 
@@ -419,6 +420,14 @@ derived field list (`submissions/fields.py`). What differs is trust and shape.
   response already reports `applied: true/false`, so the day it flips, brands'
   integrations need no new field — and a test pins the current answer so the
   flip is deliberate.
+- **Photos arrive as links, never as files.** `image_urls` on an item (up to
+  `MAX_IMAGE_URLS`, http(s), added never replaced) is stored on the
+  `Submission` and **not fetched by the API**, which leaves no outbound request
+  to abuse. The operator files them with `scripts/fetch_submission_images.py`,
+  whose exact invocation the approved triage row shows. Images are keyed by
+  `<brand-abbrev>_<name-slug>`, so the command uses the name **after** any
+  rename in the patch. The uploads bucket exists and is unused. See
+  MANUFACTURER_API_PLAN.md § Step 4 — photos as links.
 
 Onboarding is a **CLI, not a route** (`python -m slack_data.manufacturers.register`):
 minting credentials decides whose data a token can change, it happens a dozen

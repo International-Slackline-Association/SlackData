@@ -233,6 +233,13 @@ export default function ManufacturerApiPage() {
           <p>
             <code className={CODE}>applied</code> is false until the change ships in a release.
           </p>
+          <p>
+            To add photos, send <code className={CODE}>image_urls</code> on the item: up to 10 links
+            to images you already publish, pointing at the image file itself rather than the page it
+            is on. They are added, never replaced, and an item may carry photos alone. We download
+            them when the update is applied, so keep the links working until then. Sending a link
+            confirms that SlackData may display that image alongside your product.
+          </p>
 
           <h3 className="pt-2 text-sm font-bold text-gray-900">Renaming a product</h3>
           <p>

@@ -428,9 +428,9 @@ which makes it frontend work, not just a markdown file.
 
 Record them so they are not rediscovered as surprises:
 
-- **Photos are not built.** `MANUFACTURER_API_PLAN.md` § Suggested order 4. `UploadsBucket` is in
-  `serverless.yml` and will be created, but nothing writes to it. `MAX_BODY_BYTES` (256 KB) is sized
-  for JSON, not images.
+- **Photos arrive as links, not uploads.** `MANUFACTURER_API_PLAN.md` § Step 4 — photos as links:
+  `image_urls` on each item, filed by `scripts/fetch_submission_images.py`. `UploadsBucket` is in
+  `serverless.yml` and will be created, but nothing writes to it.
 - **The triage UI's manufacturer path has no Cypress coverage** (§ Suggested order 3). Batch
   grouping, the manufacturer badge, the SKU and the reject-an-approved-row path are all untested
   end-to-end.

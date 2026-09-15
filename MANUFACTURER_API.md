@@ -168,10 +168,11 @@ One call, up to **50 products**. Body:
 | `gear_type` | **yes** | One of the eight slugs in the table below. |
 | `gear_id` | one of these two | Our id, from `GET /manufacturer/gear`. |
 | `name` | one of these two | Your name for it. **Send it even when you send an id** — see below. |
-| `changes` | one of these three | Field name → new value, straight from `spec`. Up to 60 per item. **`name` is not accepted here** — see below. |
-| `rename_to` | one of these three | A new name for the product. See below. |
+| `changes` | one of these four | Field name → new value, straight from `spec`. Up to 60 per item. **`name` is not accepted here** — see below. |
+| `rename_to` | one of these four | A new name for the product. See below. |
+| `image_urls` | one of these four | Up to 10 links to photos of the product that you already publish. See [Sending photos](#sending-photos). |
 | `manufacturer_sku` | no | Your part number. Stored with the record so you never have to re-send it; we do not match on it yet. |
-| `note` | one of these three | Free text for the administrator; also useful when you have nothing to change but something to say. |
+| `note` | one of these four | Free text for the administrator; also useful when you have nothing to change but something to say. |
 | `source_url` | no | Where the correct value is published. Must be `http(s)`. |
 
 `changes` values may be strings, numbers, booleans, `null`, or a flat list (some fields really are
@@ -201,7 +202,41 @@ already matches the name we hold (the rename shipped; there is nothing left to d
 
 Two are refused, both **422**: renaming a product we do not hold — there is nothing to rename, so
 send it as a new product with no `rename_to` — and an item where everything sent already matches
-what we hold and there is no note, which asks for nothing.
+what we hold and there is no note and no photo, which asks for nothing.
+
+### Sending photos
+
+Send links, not files. `image_urls` is a list of photos of the product that are already on the web
+— normally the images on your own product page:
+
+```json
+{
+  "items": [
+    {
+      "gear_type": "webbings", "gear_id": 42, "name": "Aero",
+      "image_urls": [
+        "https://www.balancecommunity.com/images/aero-1-front.jpg",
+        "https://www.balancecommunity.com/images/aero-1-detail.jpg"
+      ]
+    }
+  ]
+}
+```
+
+- **A link must point at the image itself**, not at the page it appears on. Right-click the photo
+  and copy the *image* address. A page link is the commonest mistake and the one we cannot use.
+- Up to **10** per item, `http(s)` only, each at most 500 characters. A blank entry is a **422**;
+  a repeated link is dropped.
+- Photos on their own are a complete item: you need send no other change.
+- **They are added, never replaced.** To remove or reorder a photo we already show, say so in
+  `note`.
+- **We do not fetch the links when you send them.** An administrator downloads them when applying
+  your update, so keep them working until [`GET /manufacturer/submissions`](#get-manufacturersubmissions)
+  shows the record as `applied`.
+- JPEG, PNG, WebP or GIF, up to 15 MB each. Larger photos are refused when we download them.
+
+**By sending a link you confirm that SlackData may display that image** on slackdata.org alongside
+your product. Send only photos you have the right to license that way.
 
 ### Why send `name` as well as `gear_id`
 
@@ -287,6 +322,7 @@ Your own submissions, newest first. `?batch_id=01JXQ8...` narrows it to one call
     "gear_type": "webbings", "gear_id": 42, "gear_name": "Type 18 Mk III",
     "manufacturer_sku": "BC-T18-MK3",
     "changes": { "weight": "71" },
+    "image_urls": [],
     "status": "approved", "created_at": "2026-08-25T09:14:02Z",
     "reviewed_at": null,
     "review_note": "auto-approved: sent by Balance Community through the manufacturer API"
@@ -310,7 +346,7 @@ rejection; we send no email.
 | **403** | Your credential is not registered, has been deactivated, or the item names **another brand's** gear. | Not retryable. Check the `gear_id`s came from your own `GET /manufacturer/gear`; otherwise contact us. |
 | **409** | We cannot tell which product you mean: either two of your own answer to that name, or you sent a `gear_id` and a `name` that disagree and the name matches nothing of yours. | For the first, send the `gear_id`. For the second, the message says what we hold under that id — send that as `name`, and `rename_to` if you have renamed it. |
 | **413** | Body over 256 KB. | Split the batch. |
-| **422** | The body is malformed, a field name isn't real, `name` was sent inside `changes` (use `rename_to`), a value is empty or too long, a rename has nothing to rename, an item asks for nothing, or `include=` was mistyped. | The message names the item index and the field. Fix and resend — nothing was stored. |
+| **422** | The body is malformed, a field name isn't real, `name` was sent inside `changes` (use `rename_to`), a value is empty or too long, an image link is blank, not `http(s)` or one of more than 10, a rename has nothing to rename, an item asks for nothing, or `include=` was mistyped. | The message names the item index and the field. Fix and resend — nothing was stored. |
 | **429** | Rate limited. This endpoint allows roughly 1 request/second with a small burst. | Back off; you should not be near this outside a first bulk run. |
 | **502** | **Partial write.** Some items were stored before something failed. | **Do not blind-retry** — the message says how many landed and names the `batch_id`. Either resend only the items after that index, or quote the `batch_id` to us. |
 | **503** | Our record of your brand id is stale (nothing is wrong with your credential). | Contact us; an operator re-runs the registration. Nothing you can do from your side. |

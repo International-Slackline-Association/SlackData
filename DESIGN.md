@@ -1491,6 +1491,26 @@ This is the screen's most important design decision. Approve reads like "apply",
 approving records a decision and nothing else. The patch and the sentence are what stop an admin
 believing the catalogue changed.
 
+### Photos from a manufacturer
+
+A manufacturer record can carry `image_urls`: links to photos the brand already publishes
+(MANUFACTURER_API_PLAN.md § Step 4 — photos as links).
+
+- **In the row**, under the note: a "Photos" list (`data-cy="submission-row-images"`), one link per
+  URL (`data-cy="submission-row-image"`, new tab, `rel="noopener noreferrer"`), labelled by the
+  URL's last path segment. **Links, not thumbnails.** A thumbnail would load a third-party resource
+  in the admin's browser as soon as the queue renders, and the link shows exactly the URL that will
+  be fetched.
+- **In the approved panel**, below the JSON patch: the shell command that files those photos
+  (`data-cy="image-fetch-command"`), with a **Copy command** button (`data-cy="copy-image-command"`).
+  It names the product by the name it will have **after** the patch, since images are keyed by name.
+  The block carries its own sentence: the photos go into `frontend/public/gear-images/` and ship with
+  **half B** (the website), not half A, and a rename in the patch is applied first.
+- A record with photos and no field changes shows an empty patch (`{}`) and the command. The patch
+  block stays, so the panel keeps one shape.
+
+Absent, not empty, when the record has no photos: no list, no command.
+
 ---
 
 
