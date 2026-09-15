@@ -18,6 +18,7 @@ secret is written to a 0600 file under `~/.slackdata/credentials/` and never sto
 |------|--------------------------------------------|-----------|---------------|-------------|--------|
 | 2026-08-28 | Balance Community | 27tbg5ks6fqcbiprj4su2n40lp | Know the owner personally, verified through messenger and email | 83649802-e031-70c9-2c2c-1b9d384dabfa | active |
 | 2026-09-02 | Raed Slacklines | 4rf6f6a1gpl9sopvgj5acouuls | replied to shop@raed-sports.com (manufacturers.json) and Facebook DM @raedslacklines (linked from raed-slacklines.com) | ebragard | active |
+| 2026-09-15 | Petram Slacklines | 4qop48b6ieqdtgmpju98rv3g27 | replied to petram.slack@gmail.com (manufacturers.json; matches the contact page on petramslacklines.site123.me) | ebragard | active |
 
 **Confirmed via** — the channel the out-of-band challenge went to, e.g. `contact_email
 info@brand.com (manufacturers.json)`, `contact form brand.com/contact`, `Instagram DM @brand`. Not
