@@ -300,12 +300,14 @@ def _patch_for(index: int, item: ManufacturerGearItem, match) -> dict[str, str]:
         if matching.normalize(item.rename_to) != matching.normalize(match.gear_name):
             changes["name"] = item.rename_to
 
-    if not changes and not item.note:
+    # Photos count as asking for something: an item whose only rename was
+    # dropped above is still worth storing if it carries links.
+    if not changes and not item.note and not item.image_urls:
         raise HTTPException(
             status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
             detail=(
                 f"items[{index}]: nothing to change — every value sent already"
-                " matches what we hold, and there is no note"
+                " matches what we hold, and there is no note and no photo"
             ),
         )
     return changes
@@ -392,6 +394,8 @@ def submit_gear(
                 changes=patch,
                 note=_note_for(item, batch),
                 source_url=item.source_url,
+                # Stored as sent (cleaned by the model), never fetched here.
+                image_urls=item.image_urls,
                 # No contact address is collected here: the brand is reachable
                 # through the client record, and copying it onto every
                 # submission would spread personal data across 40 rows for no
