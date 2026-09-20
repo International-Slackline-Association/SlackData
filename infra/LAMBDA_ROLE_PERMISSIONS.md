@@ -369,30 +369,17 @@ checks for orphaned pools on every deploy, but only for ones named `slackdata-ad
 a scratch pool under any other name is still invisible. **Delete it in the same shell you create it
 in.**
 
-### What to do with the flag now
+### The flag is gone
 
-Nothing needs creating by hand. CloudFormation can make the resource server in the real pool during
-half A, which is where it belongs — so **deploy with the flag on**:
+`DEPLOY_MANUFACTURER_API` used to gate the resource server, as insurance against the permission above.
+With the permission confirmed it was a switch nobody would set to `false` again — only a way to
+deploy the wrong thing by forgetting it — so the resource is now unconditional and half A is a plain
+`npx serverless deploy --stage prod`.
 
-```bash
-DEPLOY_MANUFACTURER_API=true npx serverless deploy --stage prod
-```
+Do **not** create the resource server by hand: CloudFormation would try to create identifier
+`slackdata` in a pool that already has it, and fail the stack.
 
-The default stays `false` until half A has actually succeeded once. The flag was insurance against an
-unproven permission; that reason is gone, but "proven by CLI" and "proven by this template" are not
-the same claim, and the cost of keeping the switch one more deploy is zero. **Once half A is green
-with it on, delete the `EnableManufacturerApi` condition** and let the resource be unconditional like
-everything else — a flag nobody will ever set to `false` again is just a way to deploy the wrong
-thing by forgetting it.
-
-Do **not** create the resource server by hand now that the flag works. It would collide: CloudFormation
-would try to create identifier `slackdata` in a pool that already has it, and fail the stack.
-
-The `BrandClientsTable` is deliberately *not* conditional — the function's environment does
-`!Ref BrandClientsTable`, and a `Ref` to a resource whose condition is false fails the template. An
-empty on-demand table costs nothing.
-
-**The flag is not the last thing between here and a live manufacturer API.** Turning it on only makes
+**Deploying is not the last thing between here and a live manufacturer API.** It only makes
 `slackdata/gear.write` a scope Cognito will mint. A brand still cannot authenticate until someone
 creates its app client by hand and runs `python -m slack_data.manufacturers.register` — and
 MANUFACTURER_API_PLAN.md § Open questions 2 (who verifies that a company speaks for a brand) has no

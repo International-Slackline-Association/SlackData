@@ -1,6 +1,6 @@
 # Deploy
 
-Two independently deployable halves. Full detail — failure modes, Phase 2/4 setup,
+Two independently deployable halves. Full detail — failure modes, first-deploy setup,
 rollback, the orphan trap — is in [infra/README.md](infra/README.md).
 
 | You changed | Run |
@@ -34,7 +34,7 @@ Expired token → `aws sso login --profile isa-slackdata`, then re-run the `eval
 cd infra
 export TURNSTILE_SECRET='...'      # Cloudflare dashboard, slackdata.org. Never in git.
 ./preflight.sh                     # dirty tree, unset secret, wrong account
-DEPLOY_MANUFACTURER_API=true npx serverless deploy --stage prod
+npx serverless deploy --stage prod
 cd ..
 ```
 

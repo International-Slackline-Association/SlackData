@@ -8,8 +8,8 @@ is deliberately excluded. If the two ever disagree, the JSON below is what is re
 
 **Note what is absent: any `cognito-idp:*` action.** That is deliberate — the Lambda verifies both
 admin and manufacturer tokens against the pool's *public* JWKS over ordinary HTTPS, which is not an
-AWS API call. It is also why this policy has nothing to do with the `DEPLOY_MANUFACTURER_API` flag:
-that gate is about `cognito-idp:CreateResourceServer` on the **deploying** identity, a different
+AWS API call. It is also why this policy has nothing to do with the manufacturer API's resource
+server: that needs `cognito-idp:CreateResourceServer` on the **deploying** identity, a different
 principal that no role grant can supply. See
 [LAMBDA_ROLE_PERMISSIONS.md](LAMBDA_ROLE_PERMISSIONS.md) § Deploy-time permissions.
 

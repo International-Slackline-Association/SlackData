@@ -238,9 +238,9 @@ def resolve_pool(outputs: dict[str, str]) -> tuple[str, str]:
     token_url = outputs.get("ManufacturerTokenUrl")
     if not pool or not token_url:
         raise OnboardError(
-            "the stack has no AdminUserPoolId/ManufacturerTokenUrl output, so Phase 4\n"
-            "  is not deployed yet. Deploy half A first:\n"
-            "      cd infra && DEPLOY_MANUFACTURER_API=true npx serverless deploy --stage prod"
+            "the stack has no AdminUserPoolId/ManufacturerTokenUrl output, so the\n"
+            "  manufacturer API is not deployed yet. Deploy half A first:\n"
+            "      cd infra && npx serverless deploy --stage prod"
         )
     return pool, token_url
 
@@ -282,7 +282,7 @@ def create_app_client(
         if "ScopeDoesNotExistException" in message or "scope" in message.lower():
             raise OnboardError(
                 f"the pool has no {GEAR_SCOPE!r} scope, which means the resource server\n"
-                "  was never created. Redeploy half A with DEPLOY_MANUFACTURER_API=true."
+                "  was never created. Redeploy half A: cd infra && npx serverless deploy --stage prod"
             ) from error
         raise OnboardError(f"could not create the app client: {error}") from error
 

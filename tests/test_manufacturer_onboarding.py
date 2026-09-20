@@ -182,8 +182,8 @@ def test_the_client_name_identifies_the_brand_in_the_console(monkeypatch):
 
 
 def test_a_missing_scope_says_the_resource_server_was_never_deployed(monkeypatch):
-    """The likeliest real failure: half A deployed without
-    DEPLOY_MANUFACTURER_API=true, so the scope is not there to grant."""
+    """The likeliest real failure: half A predates the resource server, so the
+    scope is not there to grant."""
 
     class Boom:
         def create_user_pool_client(self, **_):
@@ -191,7 +191,7 @@ def test_a_missing_scope_says_the_resource_server_was_never_deployed(monkeypatch
 
     monkeypatch.setattr(onboard, "_boto3", lambda: _FakeBoto3(Boom()))
 
-    with pytest.raises(onboard.OnboardError, match="DEPLOY_MANUFACTURER_API"):
+    with pytest.raises(onboard.OnboardError, match="Redeploy half A"):
         onboard.create_app_client("pool", "Gibbon")
 
 
@@ -210,7 +210,7 @@ def test_the_pool_is_resolved_from_stack_outputs():
 
 
 def test_an_undeployed_stack_refuses_rather_than_falling_back_to_a_name():
-    """Today's real state: Phase 4 is not deployed, so there is no pool output.
+    """A stack without the manufacturer API has no pool output.
 
     The tempting fallback is to look a pool up by name — which is exactly how
     the orphaned `slackdata-admins-prod` gets chosen. So there is no fallback.
