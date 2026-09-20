@@ -78,7 +78,7 @@ elif [ "$STATUS" = "503" ]; then
 else bad "GET /api/submissions -> $STATUS (expected 401)."; fi
 
 echo
-echo "Phase 4 — the manufacturer API answers as an API, not as the website"
+echo "The manufacturer API answers as an API, not as the website"
 #
 # Two things at once, and the SECOND is the one worth the check.
 #
@@ -104,8 +104,7 @@ check_manufacturer_me() {
       ok "GET /api/manufacturer/me $label -> 401 application/json" ;;
     404/*)
       bad "GET /api/manufacturer/me $label -> 404. The manufacturer routes are NOT
-      deployed. Half A shipped without Phase 4 — redeploy with
-      DEPLOY_MANUFACTURER_API=true." ;;
+      deployed. Half A is out of date — redeploy it." ;;
     503/*)
       bad "GET /api/manufacturer/me $label -> 503. No Cognito pool on the function, so
       no brand can authenticate. Same cause as the admin 503 above." ;;

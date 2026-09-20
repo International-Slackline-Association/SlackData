@@ -17,9 +17,6 @@
 # - Route/throttle mismatch -> a RouteSettings key naming a route that does not
 #                              exist 404s the stage update, and the ROLLBACK
 #                              fails too, freezing the stack (2026-08-25).
-# - Manufacturer API flag   -> off by default, but the permission it needed is
-#                              confirmed (2026-08-24), so it SHOULD be on. Off
-#                              means shipping Phase 4 dormant for no reason.
 # - Orphaned admin pool    -> a retained Cognito pool sharing the live pool's
 #                              NAME. Deploys are unaffected; a hand-created brand
 #                              client against the wrong one mints tokens that 401
@@ -149,17 +146,6 @@ else
   warn "neither Turnstile value is set — submissions ship DARK (form never renders).
       That is a legitimate first-deploy state. Export BOTH to turn the feature on:
         export TURNSTILE_SECRET='...' TURNSTILE_SITE_KEY='0x4AAA...'"
-fi
-
-if [ "${DEPLOY_MANUFACTURER_API:-false}" = "true" ]; then
-  ok "DEPLOY_MANUFACTURER_API=true — creates the Cognito resource server (permission
-      confirmed 2026-08-24). Do not also create it by hand: CloudFormation would hit a
-      name conflict on identifier 'slackdata' and fail the stack."
-else
-  warn "DEPLOY_MANUFACTURER_API is off — Phase 4 will deploy DORMANT. That gate existed
-      because cognito-idp:CreateResourceServer was believed un-granted; it is granted
-      (confirmed 2026-08-24). Unless you mean to ship it dormant, deploy with
-      DEPLOY_MANUFACTURER_API=true."
 fi
 
 echo

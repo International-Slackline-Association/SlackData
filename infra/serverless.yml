@@ -15,29 +15,7 @@
 
 service: slackdata
 
-# Phase 4's Cognito resource server needs `cognito-idp:CreateResourceServer` on
-# the DEPLOYING identity — your SSO session, NOT the Lambda execution role. No
-# role grant can supply it; the role holds no cognito-idp action at all, by
-# design (tokens are checked against the pool's public JWKS, not via an AWS API).
-#
-# That action IS granted — confirmed 2026-08-24 by direct API call against a
-# throwaway pool. Earlier revisions of this comment said it was not, which is
-# why the flag exists at all. So DEPLOY IT ON:
-#
-#   DEPLOY_MANUFACTURER_API=true npx serverless deploy --stage prod
-#
-# The default stays 'false' only until half A has succeeded once with it on.
-# After that, delete this condition and make the resource unconditional — a
-# flag nobody will set to 'false' again is just a way to deploy the wrong thing
-# by forgetting it. See LAMBDA_ROLE_PERMISSIONS.md § Deploy-time permissions.
-#
-# With it off, everything else deploys and the manufacturer API is simply
-# dormant — which it is anyway until a brand is onboarded by hand. Do NOT create
-# the resource server by hand as well: CloudFormation would hit a name conflict
-# on identifier `slackdata` and fail the stack.
 custom:
-  manufacturerApi: ${env:DEPLOY_MANUFACTURER_API, 'false'}
-
   # The Cognito group that makes a pool member an admin. Named ONCE, here, and
   # read by both the group resource and the Lambda's environment — a literal
   # rather than a `!Ref` to the group, because the two must be the same string
@@ -176,9 +154,6 @@ functions:
 resources:
 
   Conditions:
-    # See `custom.manufacturerApi` above. String comparison because Serverless
-    # variables always resolve to strings.
-    EnableManufacturerApi: !Equals ['${self:custom.manufacturerApi}', 'true']
     # Everything that can only exist once in the account: the slackdata.org
     # CNAMEs and the certificate issued for them. A second distribution claiming
     # the same aliases is refused by CloudFront (CNAMEAlreadyExists), so a
@@ -364,12 +339,10 @@ resources:
     # `python -m slack_data.manufacturers.register` to map it to a brand.
     ManufacturerResourceServer:
       Type: AWS::Cognito::UserPoolResourceServer
-      # Off unless DEPLOY_MANUFACTURER_API=true — see `custom.manufacturerApi`.
-      # The BrandClientsTable above is deliberately NOT gated: the function's
-      # environment does `!Ref BrandClientsTable`, and a Ref to a resource whose
-      # condition is false fails the whole template. An empty on-demand table
-      # costs nothing, so it is always created and simply sits unused.
-      Condition: EnableManufacturerApi
+      # Needs cognito-idp:CreateResourceServer on the DEPLOYING identity (your
+      # SSO session), not the Lambda role — confirmed granted 2026-08-24. Leave
+      # it to CloudFormation: one created by hand collides on identifier
+      # `slackdata` and fails the stack.
       Properties:
         UserPoolId: !Ref AdminUserPool
         Identifier: slackdata

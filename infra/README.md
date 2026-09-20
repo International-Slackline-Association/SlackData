@@ -338,21 +338,11 @@ echo "client id: $(out AdminUserPoolClientId)"
 # 4. Then run half B (build + sync + invalidate).
 ```
 
-**The manufacturer API (Phase 4) is off by default — turn it on for this deploy.** Its Cognito
-resource server needs `cognito-idp:CreateResourceServer` on your own SSO identity (not the Lambda
-role, which holds no Cognito action at all). Earlier revisions of this file said that action was not
-granted. **It is** — confirmed 2026-08-24 by direct API call against a throwaway pool, along with the
-three tier-1 Cognito actions that had also never been exercised. So:
-
-```bash
-DEPLOY_MANUFACTURER_API=true npx serverless deploy --stage prod
-```
-
-Leave the resource to CloudFormation; do not create it by hand, or the next deploy collides with it.
-With the flag off instead, the brand-clients table is still created and the routes are still
-mounted — no brand can authenticate, because no app client can carry a scope that does not exist.
-That is the same dormant state the API is in anyway until a brand is onboarded by hand, so
-forgetting the flag costs nothing but a second stack update. See
+**The manufacturer API deploys with everything else** — no flag. Its Cognito resource server needs
+`cognito-idp:CreateResourceServer` on your own SSO identity (not the Lambda role, which holds no
+Cognito action at all); that is granted, confirmed 2026-08-24. Leave the resource to CloudFormation —
+one created by hand collides with it on the next deploy. Deployed is not onboarded: no brand can
+authenticate until its app client exists (§ Onboarding a manufacturer). See
 [LAMBDA_ROLE_PERMISSIONS.md](LAMBDA_ROLE_PERMISSIONS.md) § Deploy-time permissions.
 
 **Both of the empty values in `.env.production` fail *dark*, not loudly**, which is the behaviour to
@@ -437,8 +427,8 @@ them in a deploy that does nothing else and can barely fail:
 # 0. Both of the checks for the defect class that caused the staging failure.
 cd infra && ./preflight.sh --stage prod && python3 ./check-routes.py
 
-# 1. The retained resources ALONE, with the rest of Phase 2/4 still off.
-#    Small, isolated, nothing to conflict with.
+# 1. First deploy of the retained resources. Nothing else in the stack changes
+#    alongside them, so there is little that can fail the update.
 npx serverless deploy --stage prod
 
 # 2. Confirm all three are CREATE_COMPLETE and stack-managed before going on.
@@ -448,10 +438,9 @@ aws cloudformation describe-stack-resources --stack-name slackdata-prod \
                            LogicalResourceId=='AdminUserPool'].[LogicalResourceId,ResourceStatus]" \
   --output table
 
-# 3. Then deploy the remainder normally. A failure from here is safe: the
-#    resources already exist IN the stack, so a rollback has no reason to
-#    re-create them and no reason to orphan them.
-DEPLOY_MANUFACTURER_API=true npx serverless deploy --stage prod
+# 3. Any deploy from here is safe: the resources already exist IN the stack,
+#    so a rollback has no reason to re-create them and no reason to orphan them.
+npx serverless deploy --stage prod
 ```
 
 `preflight.sh` also checks the orphan condition itself on every run — a retained table that exists in
