@@ -12120,5 +12120,34 @@
         "currency": null,
         "notes": "Added 2026-09-10 from the ISA's own approval graphic (wp-content/uploads/2026/09/path2.jpg), which is the only source: ISA APPROVED, Highline Webbing, ISA:41:A+, and the maker's specs printed on it - 20 mm, 31 g/m, MBS/WLL 40 / 12 kN. This closes the \"Cong Gear Path\" entry that sat unmatched on the ISA-approved list, and \"The Path\" among the named-but-unsourced webbings; they are one product, not two. Only the MBS is stored: the 12 kN WLL is the ISA's working load limit, which we hold no column for and which is not a property of the weave. Fibers are recorded as Polyester + Dyneema/HMPE on the operator's information, not from a published spec sheet - the graphic names no material, and 40 kN at 31 g/m in 20 mm is light for either fiber alone. Either fiber grades A+ at 40 kN, so the derived classification agrees with the badge. webbing_construction, thickness, stretch, price and product URL are null: the graphic states none of them, and Cong Gear has no product page we hold. Colour is not stored either: `colors` is a model field no webbing loader maps, so a value there would be dead seed data - the webbing is white with one red and one blue edge thread. Country of origin is unknown too - the manufacturers.json entry carries a null country rather than a guess from the 道 (dao, \"path\") glyph on the graphic.",
         "active": true
+    },
+    {
+        "id": 261,
+        "name": "Axiom MK2",
+        "brand": "Balance Community: Slackline Outfitters",
+        "materialType": "Dyneema/HMPE",
+        "width": 18.4,
+        "thickness": 2.5,
+        "weight": 31,
+        "breakingStrength": 39.0,
+        "webbing_construction": "Flat",
+        "isa_certified": false,
+        "product_url": "https://balancecommunity.com/products/axiom-mk2",
+        "date_introduced": 1789680070000,
+        "priceMeter": 2.9,
+        "currency": "USD",
+        "stretch": [
+            {
+                "kn": 5,
+                "percent": 1.25
+            },
+            {
+                "kn": 10,
+                "percent": 2.08
+            }
+        ],
+        "description": "The next iteration of Balance Community's Axiom high-tech webbing: a little lighter and significantly stronger at the same price per metre. 100% HMPE right down to the green and orange marker yarns — one on each face, offset to the same edge — so the whole webbing floats indefinitely. Built for the body of a bigline, or as its backup, not for the hardware-handling ends.",
+        "notes": "Manufacturer specs (balancecommunity.com): 18.4 mm × 2.5 mm, 31 g/m, MBS 39 kN, sewn-loop MBS 46 kN, WLL 13 kN, 100 % UHMWPE (HMPE) in a flat single-layer, single-zone weave. The current production batch (W26DZ, Aug 2026) measured 39.93 kN MBS and 46.85 kN sewn loop; BC restates those per batch, so the catalogue records the published nominal 39 kN. Optimum tension 1.0–4.5 kN, preferred lengths 200 m+, backup 7 % longer than the main — HMPE creeps, so a permarig main grows into that backup. ISA stretch 1.25 % @ 5 kN and 2.08 % @ 10 kN (standardised ISA method, 200 mm gauge); BC's stretch chart publishes only those two points, so REVISIT and replace this two-point curve if a full load–elongation curve is released. BC labels it highline-approved; that is the maker's own statement, not an ISA certification. Hardware compatibility is the caveat that defines this webbing: NOT compatible with any weblock (slips single-wrapped in all of them, bends the front pin from about 24 kN double-wrapped) except a MightyLock on a Van Beest 1/2\" 2-tonne shackle, double-wrapped, pin side; not compatible with any webbing grip (micro grips slip at 0.2 kN, full-size at 7 kN, Wafer XL at 12 kN). Anchor it on its sewn loops, with a soft thimble under any soft connector — without one the loop loses up to 50 % of its strength. Sewn loops are Pattern 504 (160 × 16 mm, 200 stitches) sewn with Dyneema thread; naked, sleeveless loops are also offered. Price is the custom per-metre rate ($2.90/m, on sale at $2.61 as of 2026-09-19); cut lengths are 50 / 60 / 100 m. Woven in China; measured, cut and sewn in Colorado. Released 2026-09-17 (Shopify listing publish date). Supersedes the original Axiom (id 213), which BC's own stretch comparison now flags as legacy.",
+        "active": true
     }
 ]
