@@ -4,9 +4,10 @@ export interface GearTypeConfig {
   label: string
   hasISA: boolean
   hasISAWarning: boolean
-  // Uncertified items on this type carry the "Uncertified" pill on their card
-  // (mirrors GearTypeMeta.showsUncertified in src/config/gearTypes.ts).
-  showsUncertified: boolean
+  // The ISA certifies this type, so an uncertified item carries the red
+  // "Not ISA Certified" pill on its card (mirrors GearTypeMeta.certifiable in
+  // src/config/gearTypes.ts).
+  certifiable: boolean
   // spec fields expected on the detail page, keyed by data-field attribute value
   specFields: {
     field: string
@@ -23,15 +24,15 @@ export const GEAR_TYPES: GearTypeConfig[] = [
     label: 'Webbings',
     hasISA: true,
     hasISAWarning: true,
-    showsUncertified: true,
+    certifiable: true,
     specFields: [
       { field: 'material',           label: 'Material',           alwaysPresent: true  },
       { field: 'width',              label: 'Width',              unit: 'mm', alwaysPresent: true  },
       { field: 'weight',             label: 'Weight',             unit: 'g/m', alwaysPresent: false },
       { field: 'breaking_strength',  label: 'Breaking Strength',  unit: 'kN', alwaysPresent: false },
-      // stretch and classification are deliberately NOT in this generic list —
+      // stretch and the ISA class are deliberately NOT in this generic list —
       // both have dedicated tests in gear_detail.cy.ts:
-      //   · classification renders as a colored bubble beside the product name,
+      //   · isa_class renders as a colored bubble beside the product name,
       //     not as a spec row at all.
       //   · stretch's row visibility is driven by the count of MEASURED points,
       //     not by `stretch != null`. The generic loop's null-check predicate
@@ -47,7 +48,7 @@ export const GEAR_TYPES: GearTypeConfig[] = [
     label: 'Weblocks',
     hasISA: true,
     hasISAWarning: true,
-    showsUncertified: true,
+    certifiable: true,
     specFields: [
       { field: 'material',           label: 'Material',           alwaysPresent: true  },
       { field: 'width_range',        label: 'Width Range',        unit: 'mm', alwaysPresent: true  },
@@ -64,7 +65,7 @@ export const GEAR_TYPES: GearTypeConfig[] = [
     label: 'Leash Rings',
     hasISA: true,
     hasISAWarning: true,
-    showsUncertified: true,
+    certifiable: true,
     specFields: [
       { field: 'material',           label: 'Material',           alwaysPresent: true  },
       { field: 'inner_diameter',     label: 'Inner Diameter',     unit: 'mm', alwaysPresent: false },
@@ -79,7 +80,7 @@ export const GEAR_TYPES: GearTypeConfig[] = [
     label: 'Grips',
     hasISA: true,
     hasISAWarning: true,
-    showsUncertified: true,
+    certifiable: true,
     specFields: [
       { field: 'material',                  label: 'Material',            alwaysPresent: true  },
       { field: 'width_range',               label: 'Width Range',         unit: 'mm', alwaysPresent: true  },
@@ -96,7 +97,7 @@ export const GEAR_TYPES: GearTypeConfig[] = [
     label: 'Rollers',
     hasISA: true,
     hasISAWarning: true,
-    showsUncertified: true,
+    certifiable: true,
     specFields: [
       { field: 'material',          label: 'Frame Material',    alwaysPresent: true  },
       { field: 'roller_material',   label: 'Roller Material',   alwaysPresent: true  },
@@ -115,7 +116,7 @@ export const GEAR_TYPES: GearTypeConfig[] = [
     label: 'Tree Protectors',
     hasISA: false,
     hasISAWarning: false,
-    showsUncertified: false,
+    certifiable: false,
     specFields: [
       { field: 'weight',               label: 'Weight',     unit: 'g',  alwaysPresent: false },
       { field: 'width',                label: 'Width',      unit: 'cm', alwaysPresent: false },
@@ -128,9 +129,9 @@ export const GEAR_TYPES: GearTypeConfig[] = [
     slug: 'starterkits',
     apiPath: 'starterkit',
     label: 'Starter Kits',
-    hasISA: true,
+    hasISA: false,
     hasISAWarning: false,
-    showsUncertified: false,
+    certifiable: false,
     specFields: [
       { field: 'webbing_length', label: 'Webbing Length', unit: 'm',  alwaysPresent: true  },
       { field: 'webbing_width',  label: 'Webbing Width',  unit: 'mm', alwaysPresent: true  },
@@ -143,9 +144,9 @@ export const GEAR_TYPES: GearTypeConfig[] = [
     slug: 'tricklinekits',
     apiPath: 'tricklinekit',
     label: 'Trickline Kits',
-    hasISA: true,
+    hasISA: false,
     hasISAWarning: false,
-    showsUncertified: false,
+    certifiable: false,
     specFields: [
       { field: 'webbing_length', label: 'Webbing Length', unit: 'm',  alwaysPresent: true  },
       { field: 'webbing_width',  label: 'Webbing Width',  unit: 'mm', alwaysPresent: true  },

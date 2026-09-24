@@ -168,7 +168,7 @@ outside the scroll region. A single full-width pill ("bubble") split into equal 
   count and the grid all work off it.
 - **It lives in the URL** (`?status=current|historic`; ALL is the default and writes no param), like
   every other filter — so it is shareable and comes back with Back. It was local state, which meant
-  opening a legacy item from HISTORIC and pressing Back put you in ALL with the item nowhere near
+  opening a historic item from HISTORIC and pressing Back put you in ALL with the item nowhere near
   where you left it.
 - `ALL` = every item · `CURRENT` = still sold, i.e. `active !== false` (true or unknown) ·
   `HISTORIC` = retired only, `active === false`.
@@ -225,7 +225,7 @@ Three filter control types:
 **Pill order within a group** — values are alphabetical by default, with catch-all buckets ("Other",
 "Unknown") always sinking to the bottom. Groups whose domain is *ranked* rather than alphabetical
 may declare an explicit order instead, and values absent from that order sort after it,
-alphabetically. No group uses this today (classification, the one ranked domain, is not a filter —
+alphabetically. No group uses this today (the ISA class letter, the one ranked domain, is not a filter —
 see below); the mechanism stays in `filterGroups.ts` for the next ranked enum.
 
 **Price is the first group in every gear type's sidebar** — above Material, above everything. It is
@@ -306,7 +306,7 @@ knowing before reading a count off the grid: the number of results under "Spider
 the number of webbings Spider makes.
 
 
-Excluded from filters: `name`/`description`/`notes` (search), `release_date`, `product_url`, `version`, `currency` (the top-nav **selector** governs currency site-wide — filtering by the seller's currency would be filtering by an accident of where the shop is), `colors` (comma-separated string needing split logic — future work), `stretch` on webbing (JSON blob of {kn,percent} pairs — exposed as a "has stretch data" pill instead), `width` on rollers (raw string like "25–35mm", not a numeric field), **`classification` on webbing** (an ISA grant, not an independent axis of the catalogue — see § Classification bubble; filter by **ISA Certified** instead).
+Excluded from filters: `name`/`description`/`notes` (search), `release_date`, `product_url`, `version`, `currency` (the top-nav **selector** governs currency site-wide — filtering by the seller's currency would be filtering by an accident of where the shop is), `colors` (comma-separated string needing split logic — future work), `stretch` on webbing (JSON blob of {kn,percent} pairs — exposed as a "has stretch data" pill instead), `width` on rollers (raw string like "25–35mm", not a numeric field), **`isa_class` on webbing** (an attribute of certification, not an independent axis of the catalogue — see § ISA status label; filter by **ISA Certified** instead).
 
 **Webbings:** **Price per meter** [range] · Material Type [pill] · Width mm [range] · ISA Certified [pill] · ISA Warning [pill] · Weight g/m [range] · Breaking Strength kN [range] · **Stretch at X kN** [custom — see below] · **Brand** [pill]
 
@@ -362,7 +362,7 @@ Rules:
 
 ### Sort options
 
-Rule: **only numeric fields are sortable**. Enums (material, front pin, etc.) and booleans (isa_certified, etc.) are filter-only — they appear as pills in the sidebar but never in the sort dropdown. (Classification is neither: not sortable, and not a filter either — see § Classification bubble.)
+Rule: **only numeric fields are sortable**. Enums (material, front pin, etc.) and booleans (isa_certified, etc.) are filter-only — they appear as pills in the sidebar but never in the sort dropdown. (The ISA class letter is neither: not sortable, and not a filter either — see § ISA status label.)
 
 Sort options use `data-field` + `data-direction` attributes on the `[data-cy="sort-option"]` elements so tests can target them precisely. Cards carry `data-{field-name}="<value>"` attributes (empty string when null) for order verification.
 
@@ -430,7 +430,7 @@ one.
 - **Every panel is fully expanded.** Nothing is collapsed or behind a disclosure — the point of the
   mode is that you never have to click to see a spec.
 - Panel content is **identical to the Gear Detail Page body** (see below): image carousel left;
-  brand, product name, classification bubble, price, ISA warning banner, ISA certification block
+  brand, product name, ISA class letter, price, ISA warning banner, ISA certification block
   and the full specification grid right; description and `View product →` full width beneath. The
   two are literally the same component, so a spec row added to one appears in the other.
 - Two wiring differences from the standalone detail page: the **product name is a link** to that
@@ -483,7 +483,7 @@ reading one item at a time.
   - The **filter sidebar's kN pills are unaffected and stay exact** (`percentAtKn`): a pill that says
     10 kN must select the webbings actually measured at 10 kN.
 - **One frozen identity column on the left**, pinned with `sticky left-0`: compare checkbox,
-  thumbnail, brand (small caps, linked) and product name (linked), plus the Legacy badge. It is one
+  thumbnail, brand (small caps, linked) and product name (linked), plus the Historic badge. It is one
   cell rather than four sticky columns, which would each need a left offset computed from the widths
   before it — a number that changes with the longest product name on the page. Its header carries
   **two** sort controls, `NAME · MANUFACTURER`, because the cell stacks both: heading them as two
@@ -553,11 +553,11 @@ reading one item at a time.
   currently on, so it changes with the arrows and dots. Products with **no** image fall back to the
   flat light-gray band with the low-opacity `No image` placeholder.
 - **No gear-type badge.** Each listing shows a single gear type, so labelling every card "ROLLER" on the rollers page is redundant. Reintroduce a coral gear-type pill (top-left, absolute) only on views that mix types — e.g. manufacturer pages.
-- **Legacy badge, top-left overlay** (absolute, ~8px from the top-**left** corner) — a small red uppercase `Legacy` pill, shown only when `active` is false (discontinued / no longer sold). Nothing renders for active or unknown (`active` true/null) gear — an active card carries no status pill. Because the listing defaults to ALL, a grid routinely mixes badged and unbadged cards — the badge is what tells them apart, so it is never suppressed by the sidebar's status scope. This occupies the **top-left** slot (the one reserved above for a future gear-type pill), mirroring the manufacturer card's top-left **Inactive** pill (see § Manufacturer card anatomy), so both card types read the same way: lifecycle status on the left, classification/ISA on the right.
-- **Top-right overlay stack** (absolute, ~8px from the top-right corner, stacked vertically with ~6px gaps, right-aligned):
-  1. **ISA Approved badge** — the miniature stamp, when `isa_certified` is true (see below). It leads the stack: certification is the question a reader brings to the grid, and every pill below it refines that answer rather than replacing it.
-  2. **ISA warning bubble** — a small uppercase pill (`RECALL` / `WARNING` / `NOTICE`) whenever `isa_warning` is set, coloured by severity (see § ISA Warnings). It sits **above the classification bubble**: a recalled webbing's Type A grant is the second thing you need to know, not the first. Omit entirely when `isa_warning` is null or `No Warning`, and on the three types with no `isa_warning` field (tree protectors, starter kits, trickline kits).
-  3. **Classification bubble, or the `Uncertified` pill** — the class itself is webbing only, in the two cases § Classification bubble defines: an **ISA-certified** webbing shows its granted class, and a webbing under **22 kN** shows the gray **Not for Highline** pill. Identical component, colors and shape to the detail page's bubble — the highline class is the fastest read on a webbing card, so it belongs in the grid, not just one click deep. Any other uncertified item on a **`showsUncertified`** type (webbing, weblock, leash ring, grip, roller) shows the outlined gray **`Uncertified`** pill in the same slot; kits and tree protectors show nothing. So a letter bubble always has the ISA stamp above it, and a card carries exactly one certification statement: the stamp, `Not for Highline`, or `Uncertified`.
+- **Historic badge, top-left overlay** (absolute, ~8px from the top-**left** corner) — a small red uppercase `Historic` pill, shown only when `active` is false (discontinued / no longer sold). Nothing renders for active or unknown (`active` true/null) gear — an active card carries no status pill. Because the listing defaults to ALL, a grid routinely mixes badged and unbadged cards — the badge is what tells them apart, so it is never suppressed by the sidebar's status scope. This occupies the **top-left** slot (the one reserved above for a future gear-type pill), mirroring the manufacturer card's top-left **Inactive** pill (see § Manufacturer card anatomy), so both card types read the same way: lifecycle status on the left, ISA certification on the right.
+- **Top-right overlay cluster** (absolute, ~8px from the top-right corner, ~6px gaps): the ISA stamp holds the corner, and **to its left** a right-aligned column holds, top to bottom, the `Not ISA Certified` pill (uncertified), the warning bubble, and the class letter (certified webbing). Side by side, not one tall stack: the carousel arrows are 36px and centred in the 160px band (y ≈ 62–98), and a letter stacked under the stamp sat right behind the right arrow. Everything stays in the top ~68px.
+  1. **ISA Approved badge** — the stamp PNG, **60px square** (`h-15`), when `isa_certified` is true (see below). It takes the corner: certification is the question a reader brings to the grid, and every pill beside it refines that answer rather than replacing it.
+  2. **ISA warning bubble** — a small uppercase pill (`RECALL` / `WARNING` / `NOTICE`) whenever `isa_warning` is set, coloured by severity (see § ISA Warnings). It sits **above the class letter**: a recalled webbing's Type A grant is the second thing you need to know, not the first. On an uncertified item it sits **below** the `Not ISA Certified` pill, which stands in the stamp's place, so the certification statement always leads. Omit entirely when `isa_warning` is null or `No Warning`, and on the three types with no `isa_warning` field (tree protectors, starter kits, trickline kits).
+  3. **Class letter, or the `Not ISA Certified` pill** (see § ISA status label) — a certified **webbing** shows its ISA class letter (`isa_class`), identical to the detail page's bubble. Any uncertified item on a **`certifiable`** type (webbing, weblock, leash ring, grip, roller) shows the solid red **Not ISA Certified** pill in the same slot — the Historic badge's colours and its 10px type, so the two labels on a card read as one family; kits and tree protectors show nothing. So a letter bubble always has the ISA stamp to its right, and a certifiable card carries exactly one certification statement: the stamp, or `Not ISA Certified`. The manufacturer's not-for-highline statement is never on the card.
 
 **Content area** (bottom ~60%):
 - Brand name: small-caps gray, ~11px, ~4px below image area
@@ -572,7 +572,7 @@ reading one item at a time.
   single-width lock is not dressed up as a range. Same rule, same formatter as the detail page's
   **Width Range** row.
 - Feature tag pills: light gray bg, dark-gray text, small rounded pills — e.g. `Dyneema`, `Tubular`
-- **ISA Approved badge** — if `isa_certified` is true, show a miniature version of the ISA Approved stamp at the **top** of the top-right overlay stack of the image area (above the warning bubble and the classification bubble when those are present). The stamp replicates the official badge: dark charcoal frame, ISA geometric mark (teal + coral), bold white "APPROVED" text, teal checkmark in the V. If false, the `Uncertified` pill takes its place lower in the stack on the five `showsUncertified` types (see § Classification bubble) — an empty corner read as "nobody has looked" rather than "not certified".
+- **ISA Approved badge** — if `isa_certified` is true, show the ISA Approved stamp (60px) in the top-right corner of the image area, with the warning bubble and the class letter in a column to its left. If false, the red `Not ISA Certified` pill heads that column, above any warning bubble, on the five `certifiable` types (see § ISA status label).
 - Price: bold amber-orange in the **display currency** — e.g. `≈ $84 → Buy` (the "→ Buy" in slightly
   smaller amber text). The `≈` is dropped when the item is already priced in the display currency.
   Webbings append `/m`. The card shows only the converted figure — the as-sold original lives on the
@@ -585,7 +585,7 @@ and all the dead space between them. A card is one object about one product; mak
 clickable gives a mouse a ~150px target inside a ~300×340px thing that already looks pressable.
 The exceptions are the controls the card owns, which keep their own behaviour and never navigate:
 the carousel's prev/next arrows and dots, `Compare`, and `View product ↗` (which leaves the site).
-The decorative overlays — the Legacy pill and the top-right ISA/classification stack — are *not*
+The decorative overlays — the Historic pill and the top-right ISA stack — are *not*
 controls: clicking one navigates like the rest of the card.
 
 Implemented as a stretched overlay link covering the card, with the controls raised above it, rather
@@ -601,8 +601,8 @@ once, not twice. So the visible focus target on a card is still its name.
 ## Gear Detail Page
 
 Max-width centered container (~1024px), left-aligned back link. The body is a **two-column split**:
-image carousel on the left (~320px), and on the right the brand / product name (+ classification
-bubble) / price header, the ISA warning banner, the ISA certification block and the specification
+image carousel on the left (~320px), and on the right the brand / product name (+ ISA class
+letter) / price header, the ISA warning banner, the ISA certification block and the specification
 grid — so the specs wrap around the title rather than sitting in a slab beneath it. **Also sold by**
 sits in that right column too, under the price. Description and `View product →` run full width
 below the split. Collapses to a single column below `sm`.
@@ -646,32 +646,30 @@ never by editing one side.
 
 **"SPECIFICATIONS" label** — small-caps gray with teal dot, then the spec grid: **two balanced columns** of label/value pairs (`gap-x-10`), collapsing to one column on narrow screens. Within each cell: label left (gray), value right (dark), `border-bottom: 1px solid #E5E7EB`, `padding: 10px 0`. Omit any row where the value is null. The webbing stretch curve is the one full-width entry — it spans both columns.
 
-**Classification bubble** — the ISA highline class sits as a colored bubble immediately right of the product name, not in the spec grid. The same bubble is overlaid top-right on the card's image area in the listing grid (see § Gear Card Anatomy) — one component, so the two can never drift apart. Colors are taken from the ISA's own [webbing type graphic](https://www.slacklineinternational.org/wp-content/uploads/2020/02/webbing_type_graphic.png) so they match the chart people already know:
+**ISA status label** (`IsaStatusLabel.tsx`, formerly the classification bubble) — two certification labels only, and both come from the ISA's approved-gear list (`isa_certified.json` → the gear row's loader-set `isa_certified` / `isa_certificate` / `isa_class`). Nothing about certification is computed from the gear's own specs any more: the backend's `classification` and its 22 kN "Not for Highline" rule are gone.
+
+1. **ISA Approved** (`isa_certified === true`) → the stamp (`IsaApprovedBadge`, drawn by the caller), plus on **webbing** the class letter as a colored bubble. The letter is `isa_class`: the certificate's own letter (`ISA:41:A+` → `A+`), or — when the certificate carries none — derived by the loader from `breaking_strength` (A+ ≥ 40, A ≥ 30, B ≥ 26, C ≥ 22 kN). Other types carry no letter.
+2. **Not ISA Certified**, on a **`certifiable`** type (webbing, weblock, leash ring, grip, roller) → a solid pill in the **Historic badge's colour scheme**: `bg-red-600` fill, **white text** — the same Tailwind classes as `HistoricBadge`, not a copied hex, so the two reds cannot drift apart (white on red-600 is ~4.8:1, clearing WCAG AA). It keeps its own shape — mixed case, `text-xs` — so it reads as a label, not as a second lifecycle badge; and the two never crowd each other, because Historic is pinned top-**left** and this pill sits in the top-**right** stack. Anything the ISA list does not match reads this way — there is no third, "unknown" state.
+3. **Kits and tree protectors** → nothing. The ISA does not certify either, and neither carries an `isa_certified` field.
+
+Letter colours are taken from the ISA's own [webbing type graphic](https://www.slacklineinternational.org/wp-content/uploads/2020/02/webbing_type_graphic.png) so they match the chart people already know:
 
 | Class | Fill | | Class | Fill |
 |---|---|---|---|---|
-| A+ | `#6AA84F` (dark green) | | C | `#F6B26B` (orange) |
-| A | `#93C47D` (light green) | | Not for Highline | `#E5E7EB` (neutral gray — not on the ISA chart) |
-| B | `#FFD966` (yellow) | | | |
+| A+ | `#6AA84F` (dark green) | | B | `#FFD966` (yellow) |
+| A | `#93C47D` (light green) | | C | `#F6B26B` (orange) |
 
-**When the bubble is shown.** Three cases, and only three — all gated inside the bubble component itself, so the card and the detail page cannot diverge:
+The letter is **dark ink `#1F2937` on every fill**: white text fails WCAG AA on all four ISA colors (contrast 1.37–2.87), while `#1F2937` clears AA on each (5.12–11.86). The letter itself carries the meaning, so identity is never colour-alone, and a `title` ("ISA Type A+") spells it out for screen readers.
 
-1. **ISA certified** (`isa_certified === true`) → the bubble is its granted class. A+/A/B/C is an ISA grant, so an **uncertified** webbing never shows a letter class, even though the backend computes a `classification` for every webbing from its fibers and strength: a class ISA never granted, rendered in ISA's own colors, reads as certification.
-2. **Breaking strength under 22 kN** → the gray **Not for Highline** pill, certified or not. 22 kN is the Type C floor in `_classify_fiber()` (`slack_data/models/webbing.py`); below it no fiber earns any class, so this is a fact about the webbing rather than a withheld grant, and the warning is worth carrying on every such item.
+The letter bubble sits immediately right of the product name on the detail page, and in the card's top-right stack in the grid — one component, so the two can never drift apart. **The red pill is a card affordance only**: the detail page's ISA Certification block already says "Not ISA Certified" in full, and two statements of one fact on one screen is one too many.
 
-3. **Neither, on a `showsUncertified` type** → the **`Uncertified`** pill: an outlined white pill, gray-300 border, gray-500 text, no fill. It is deliberately the plainest thing in the stack — most of the catalogue is uncertified, and a grid of loud pills would say nothing — but it is *something*, where an empty corner read as "nobody has looked". `showsUncertified` is true for webbing, weblock, leash ring, grip and roller (the five types that hold a person up) and false for starter kits, trickline kits and tree protectors: a kit carries the `isa_certified` field but is a bundle rather than a certified component, so the label would be noise on every card.
+The class is **not a sidebar filter** — it is an attribute of certification rather than an independent axis of the catalogue; filter by **ISA Certified** instead.
 
-   This is where an uncertified `Not for Highline` webbing at **22 kN or more** lands (a 25 kN polyester, say, which misses Type C only because ISA doesn't certify PES that low): its missing class is a certification gap, not a strength warning, so it reads `Uncertified` rather than `Not for Highline`. Unknown `breaking_strength` counts as *not* below the floor — no data, no claim. So does a null `classification`.
+**ISA stamp** (certified items only) — the ISA Approved stamp (112px) sits in the **header row, to the right of** the brand / name / class letter / price block, top-aligned, and **links to the ISA's [approved-gear list](https://data.slacklineinternational.org/safety/isa-approved-gear/)** in a new tab (`data-cy="isa-stamp-link"`). The ISA's list is a single embedded app with no per-certificate page we can address, so every stamp links to the list itself; its label names the primary certificate (`isa_certificate` — the plain Webbing certificate where there is one, else the Sewn Loop one). **The certificate details are not repeated on the page** (certificate no., lab, test date, …): they are the ISA's record, one click away. `/isacertification` still serves them; the frontend no longer fetches it.
 
-On a sub-22 kN item the `title` reads "Not for highline — breaking strength under 22 kN" rather than "ISA Type …", since nothing about it is an ISA type; the `Uncertified` pill's reads "Not ISA certified — no ISA certification on record".
+**ISA Certification block** (where applicable, before the spec table) — if `isa_certified` is true, a short gray note (`data-cy="isa-certification-note"`, copy in [SAFETY_AND_ACCURACY.md §C](SAFETY_AND_ACCURACY.md)): "Certified to an ISA gear standard." plus two teal links — the ISA's [gear standards page](https://www.slacklineinternational.org/isa-gear-standards/) (new tab) and `/safety#isa-certification`. Certified items only. If false, show a small gray text line "Not ISA Certified" — subdued, not alarming. Kits and tree protectors have no `isa_certified` field — omit this block entirely.
 
-**The pill is a card affordance only.** The detail page shows the class bubble beside the name but never `Uncertified`, because its **ISA Certification block** already says "Not ISA Certified" in full a few hundred pixels below — two statements of one fact on one screen is one too many. The card has no such block, which is why it gets the pill.
-
-Classification is still **not a sidebar filter**: as a letter class it is an attribute of certification rather than an independent axis of the catalogue (filter by **ISA Certified**), and as a warning it is already implied by the Breaking Strength range.
-
-The letter is **dark ink `#1F2937` on every fill**: white text fails WCAG AA on all four ISA colors (contrast 1.37–2.87), while `#1F2937` clears AA on each (5.12–11.86). A+/A/B/C render as round bubbles; the long "Not for Highline" stays a full pill so it isn't truncated. The letter itself carries the meaning, so identity is never colour-alone, and a `title` spells it out for screen readers. For hybrids the class is derived from the strongest component fiber (see Material Composition).
-
-**ISA Certification block** (where applicable, before the spec table) — if `isa_certified` is true, show a larger version of the ISA Approved stamp badge (same visual: charcoal frame, teal + coral ISA mark, white "APPROVED" text with teal checkmark in the V), left-aligned, ~80px wide. If false, show a small gray text line "Not ISA Certified" — subdued, not alarming. Tree protectors have no `isa_certified` field — omit this block entirely.
+**Manufacturer states not for highlining** (`data-cy="manufacturer-not-for-highline"`) — its own line **directly under the ISA Certification block**, only when `manufacturer_not_for_highline === true`, linked (new tab) to `manufacturer_not_for_highline_source`. It is the maker's own statement, researched from their product page, so it is worded as theirs. `false` (marketed for highlining) and `null` (not yet checked, or the page is silent) render nothing. The field is on all eight types, so on kits and tree protectors — which have no certification block — the line sits where that block would be. **Never on the card.**
 
 ---
 
@@ -687,7 +685,7 @@ The ISA publishes a [gear warnings database](https://data.slacklineinternational
 | `Warning` | `#FBBF24` fill, `#1F2937` ink | amber border `#FCD34D`, `#FFFBEB` ground, `#78350F` text | A known failure mode; usable with care or in a narrower role. |
 | `Notice` | `#E5E7EB` fill, `#1F2937` ink | gray border `#D1D5DB`, `#F9FAFB` ground, `#374151` text | Something to be aware of. Present because dropping it would hide safety information, muted because it is not an alarm. |
 
-Red is deliberately the same `#DC2626` as the **Legacy** pill — but the two never compete for the eye, because Legacy is pinned top-**left** and the warning bubble top-**right** (see § Gear Card Anatomy). Dark ink `#1F2937` on the amber and gray fills for the same reason the classification bubble uses it: white fails WCAG AA on both.
+Red is deliberately the same `#DC2626` as the **Historic** pill — but the two never compete for the eye, because Historic is pinned top-**left** and the warning bubble top-**right** (see § Gear Card Anatomy). The **Not ISA Certified** pill uses the same red too, and it *does* share the top-right stack with this bubble — so a recalled, uncertified item carries two red marks there; the ⚠ bubble and the worded pill are told apart by shape and text, not colour. Dark ink `#1F2937` on the amber and gray fills for the same reason the ISA class letter uses it: white fails WCAG AA on both.
 
 **The word is the badge.** `RECALL` / `WARNING` / `NOTICE` is spelled out rather than encoded as an icon or a bare colour, so severity is never carried by colour alone. The bubble also sets `data-isa-warning="<status>"` for tests and for anyone reading the DOM.
 
@@ -867,7 +865,7 @@ spec grid — the row is declared for compare and suppressed in `SpecTable`.
 | Weight | `weight` | Append "g/m"; omit if null |
 | Breaking Strength | `breaking_strength` | Append "kN"; omit if null |
 | Stretch | `stretch` | JSON array of {kn, percent} points. **≥ 3 measured points** → a two-row table spanning the full grid width: `Load` across the top, `Stretch` beneath, **one column per measured point** — nothing interpolated, no fixed column set. Ascending by kN; **0 kN is dropped** (every curve reads 0% there); long curves scroll horizontally with the row-label stub pinned left. **1–2 points** → inline text instead, e.g. `3.4% @ 10 kN · 4.7% @ 15 kN` (a one- or two-column table is all chrome, no signal). Row is omitted when there are no *measured* points — note this is stricter than `stretch != null`: a curve like `[{"percent": 8}]` (no `kn`) has nothing to show. **On the compare page this row is replaced by a chart** — see § Compare View → Stretch is a chart, not a table. |
-| Classification | `classification` | **Not a spec row.** Renders as a colored bubble beside the product name, and only when the webbing is ISA certified or under 22 kN — see § Classification bubble below. |
+| ISA class | `isa_class` | **Not a spec row.** Renders as a colored letter bubble beside the product name, only on an ISA-certified webbing — see § ISA status label below. |
 | Colors | `colors` | Comma-separated string — render as small color-name chips |
 | ISA Certified | `isa_certified` | Handled by the ISA Certification block above the spec table — no row needed here |
 
@@ -1140,7 +1138,7 @@ Card grid (3 columns, same layout as gear listing).
 same radius, border, shadow, hover lift, and the same `h-40` centered image area on a
 `bg-gray-50` field with absolutely-positioned overlays in **both top corners**. What changes is
 only what fills those slots: the product shot becomes the **manufacturer logo**, the gear card's
-top-left category badge becomes the **Inactive pill**, and its top-right classification/ISA
+top-left category badge becomes the **Inactive pill**, and its top-right ISA
 overlay becomes a single **country flag**.
 
 Manufacturer card anatomy (top → bottom):
@@ -1151,7 +1149,7 @@ Manufacturer card anatomy (top → bottom):
 - **Inactive pill, top-left overlay** — red, uppercase, shown only when `active` is false. See
   "Active / inactive" below.
 - **Country flag, top-right overlay** — a small (~24×16) rounded flag chip with a hairline border,
-  in the exact slot the gear card's classification bubble occupies. Flag only, no country label:
+  in the exact slot the gear card's ISA labels occupy. Flag only, no country label:
   the name is redundant next to the flag and the row has no space for it. The country name goes on
   the flag's `title`/`alt` so it stays available to hover and to screen readers.
 - **Brand name** — bold, ~16px, the card's primary line, and a link to the brand's detail page.
@@ -1253,7 +1251,7 @@ gear listing's null-last rule.
 **Active / inactive.** `Brand.active` is backfilled from a reviewed `manufacturers.json`. A brand
 that is no longer trading gets a **red `Inactive` pill in the card's top-LEFT corner** — the same
 slot the gear card uses for its category badge, so the two card types read the same way (top-right
-stays the flag, mirroring the gear card's classification bubble). The whole card is also dimmed, but
+stays the flag, mirroring the gear card's ISA labels). The whole card is also dimmed, but
 it is *not* hidden: its gear is still real and still worth browsing, it just can't be bought new.
 The card root carries `data-active`.
 
@@ -1280,7 +1278,8 @@ and disappears entirely when none are (see the note in `manufacturers.cy.ts`; th
 - **All interactive elements**: cursor pointer, teal focus ring on keyboard nav
 - **Border radius**: consistent ~8px for pills, ~14px for cards, ~6px for buttons
 - **No sharp rectangles anywhere** — even the large CTA buttons are rounded
-- **ISA Certified** always uses the official ISA Approved stamp badge (charcoal frame, teal + coral ISA mark, white "APPROVED", teal checkmark). On cards: miniature stamp ~28px tall, at the top of the top-right overlay stack of the image area (above the classification bubble when the webbing has one — a letter bubble only ever appears on a certified item, so the stamp is always its neighbour), only shown when true; uncertified items on the five `showsUncertified` types carry the plain `Uncertified` pill instead. On detail page: ~80px wide block above specs, "Not ISA Certified" in subdued gray when false. Never use a plain checkmark or generic pill — the stamp is the trust signal.
+- **ISA Certified** always uses the official ISA Approved stamp badge (charcoal frame, teal + coral ISA mark, white "APPROVED", teal checkmark). On cards: the stamp PNG at 60px square, in the top-right corner of the image area (with the class letter to its left when the webbing has one — a letter bubble only ever appears on a certified item, so the stamp is always its neighbour), only shown when true; uncertified items on the five `certifiable` types carry the red `Not ISA Certified` pill instead. On detail page: the stamp at 112px, right of the name and price, linking to the ISA's approved-gear list; "Not ISA Certified" in subdued gray (in the certification block above the specs) when false. Never use a plain checkmark or generic pill — the stamp is the trust signal.
+  - **The stamp is the ISA's own PNG**, one per standard (`frontend/public/isa-labels/`, e.g. `ISA51.png`), and per class on ISA:41 webbing (`ISA41A.png`, `ISA41Aplus.png` — `+` is spelled `plus` so no path ever needs encoding). `IsaApprovedBadge` picks it from the row's `isa_certificate`, with the letter from the certificate or else the row's strength-derived `isa_class` (`utils/isaStamp.ts`), so every certified item has one. The PNGs are square: **60px** on cards (at 40px its lettering was mush; the letter bubble beside it still carries the class), and **112px** on the detail page, the smallest size at which the certificate line on the stamp is legible. A certificate with no file, or an image that fails to load, falls back to the drawn badge above — a missing PNG never blanks the certification.
 - **Empty states**: centered gray icon + short message — e.g. "No webbings match your filters" with a "Clear filters" teal link
 
 ### Manufacturer names are links
@@ -1358,7 +1357,7 @@ text, reviewed and approved by the ISA because it is published under their name.
 there first, then mirror it into the components.
 
 Each notice is **one component rendered in two places**, with a `variant` prop for presentation only,
-so the wording physically cannot drift between surfaces (same reasoning as `LegacyBadge`).
+so the wording physically cannot drift between surfaces (same reasoning as `HistoricBadge`).
 
 | Notice | Component | Placements |
 |---|---|---|
@@ -1380,19 +1379,27 @@ so the wording physically cannot drift between surfaces (same reasoning as `Lega
 
 Full safety text, static JSX (no markdown renderer — one route doesn't justify the dependency).
 Covers: breaking strength is not a working load (and where to find one), stretch curves are
-indicative and not comparable between brands, certification/warning data is a periodically-updated
-copy rather than a live feed, Legacy gear is not a fitness-for-use claim, and slacklining carries
+indicative and not comparable between brands, **ISA certification** (section id `isa-certification`
+— what "ISA Approved" / "Not ISA Certified" mean here, linking to the ISA's gear standards and
+approved-gear list), certification/warning data is a periodically-updated
+copy rather than a live feed, Historic gear is not a fitness-for-use claim, and slacklining carries
 risk.
 
 The route is a **static** segment, so React Router ranks it above the dynamic `:slug` gear-type
 pattern — `/safety` must not be read as a gear type. It links out to the ISA's own warnings database
 as the authoritative source.
 
-> **Known data limitation the copy has to work around:** `isa_certified` is `bool = False` on every
-> gear model, so the data cannot distinguish *not certified* from *unknown*, and every unrecorded
-> product reads as uncertified. The `/safety` copy addresses this in prose. The real fix is a nullable
-> three-state field — a model change, tracked in LAUNCH_RUNBOOK.md §10, deliberately out of scope for
-> launch.
+Deep links to a section (`/safety#isa-certification`, from every certified detail page) are
+scrolled into view by `useScrollRestoration` — it turns the browser's own restoration off, which
+also turns off its fragment handling. Sections carry `scroll-mt` of the header height so the
+sticky nav doesn't cover the heading.
+
+> **Where certification comes from:** `isa_certified` is set only from the ISA's own approved-gear
+> list (`isa_certified.json`, CLAUDE.md § ISA certifications), never from our seeds. So "not
+> certified" now means "not on the ISA's list" — which is the ISA's statement, not a gap in ours. A
+> three-state field was considered and rejected (ISA_CERTIFICATION_PLAN.md § Decisions): anything
+> the list does not match reads **Not ISA Certified**. Only webbing / weblock / roller / leash ring /
+> grip carry the field; kits and tree protectors cannot be certified.
 
 ---
 

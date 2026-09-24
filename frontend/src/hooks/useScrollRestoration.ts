@@ -26,7 +26,9 @@
 //     which also covers images loading in and changing the layout underneath.
 //
 // PUSH navigations still go to the top, which is what a fresh navigation should
-// do. POP (back/forward) restores. REPLACE stays exactly where it is — see the
+// do — unless the URL carries a fragment (/safety#isa-certification), in which
+// case they land on that element. With the browser's restoration turned off
+// (point 1), nothing else would honour the fragment. POP (back/forward) restores. REPLACE stays exactly where it is — see the
 // note on the restore effect below.
 
 import { useEffect, useRef } from 'react'
@@ -109,6 +111,30 @@ export default function useScrollRestoration() {
 
     const target = navigationType === 'POP' ? load(location.key) : 0
 
+    // No offset to restore, but the URL names a fragment (/safety#isa-certification
+    // — a link click, or a deep link opened cold, which arrives as a POP with
+    // nothing saved): land on that element. Retried across frames for the same
+    // reason as the restore below — it may not have rendered on the first one.
+    if (!target && location.hash) {
+      const id = decodeURIComponent(location.hash.slice(1))
+      let raf = 0
+      const deadline = performance.now() + RESTORE_BUDGET_MS
+      const tick = () => {
+        const el = document.getElementById(id)
+        if (el) {
+          el.scrollIntoView()
+          return
+        }
+        if (performance.now() > deadline) {
+          window.scrollTo(0, 0)
+          return
+        }
+        raf = requestAnimationFrame(tick)
+      }
+      raf = requestAnimationFrame(tick)
+      return () => cancelAnimationFrame(raf)
+    }
+
     if (!target) {
       window.scrollTo(0, 0)
       return
@@ -126,5 +152,6 @@ export default function useScrollRestoration() {
     raf = requestAnimationFrame(tick)
     return () => cancelAnimationFrame(raf)
     // location.key alone identifies the entry; pathname/search are implied by it.
-  }, [location.key, navigationType])
+    // hash is too, but is read above, so it is listed rather than suppressed.
+  }, [location.key, location.hash, navigationType])
 }

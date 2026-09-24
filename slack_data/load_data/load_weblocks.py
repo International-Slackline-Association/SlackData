@@ -89,7 +89,6 @@ def clean_weblock_data(weblock: dict[str, Any]) -> dict[str, Any]:
     
     cleaned_data["front_pin"] = get_front_pin_type(specs.get("Webbing connection type"))
     cleaned_data["attachment_point"] = get_attachment_point(specs.get("Anchor connection type"))
-    cleaned_data["isa_certified"] = parse_boolean_isa(specs.get("ISA approved"))
     
     price, currency = parse_price_and_currency_from_weblock(weblock)
     cleaned_data["price"] = price
@@ -101,7 +100,10 @@ def clean_weblock_data(weblock: dict[str, Any]) -> dict[str, Any]:
 
     # Free-text/optional columns carried straight through from the seed. The
     # SlackDB scrape never populated these, so they are absent on older rows.
-    for passthrough in ("description", "notes", "colors", "version", "isa_warning"):
+    for passthrough in (
+        "description", "notes", "colors", "version",
+        "manufacturer_not_for_highline", "manufacturer_not_for_highline_source",
+    ):
         cleaned_data[passthrough] = weblock.get(passthrough)
 
     return cleaned_data
@@ -129,8 +131,6 @@ def add_weblocks_to_db(weblocks: list[dict], session: SessionDep) -> None:
             breaking_strength=weblock.get("breaking_strength"),
             front_pin=weblock.get("front_pin"),
             attachment_point=weblock.get("attachment_point"),
-            isa_certified=weblock.get("isa_certified", False),
-            isa_warning=weblock.get("isa_warning"),
             colors=weblock.get("colors"),
             price=weblock.get("price"),
             currency=weblock.get("currency"),
@@ -138,6 +138,8 @@ def add_weblocks_to_db(weblocks: list[dict], session: SessionDep) -> None:
             version=weblock.get("version"),
             notes=weblock.get("notes"),
             active=weblock.get("active"),
+            manufacturer_not_for_highline=weblock.get("manufacturer_not_for_highline"),
+            manufacturer_not_for_highline_source=weblock.get("manufacturer_not_for_highline_source"),
             # Brand names only — see the model. Absent stays None, not [].
             gear_sellers=weblock.get("gear_sellers") or None,
         )
@@ -278,14 +280,6 @@ def parse_price_and_currency_from_weblock(weblock_data: dict) -> tuple[float | N
         return found
 
     return None, None
-
-def parse_boolean_isa(value_str: str | None) -> bool:
-    if not value_str:
-        return False
-    s = value_str.strip().lower()
-    if s == "yes" or s == "true" or s == "approved": 
-        return True
-    return False
 
 def load_weblocks_json() -> list[dict]:
     return read_seed_json("weblocks.json")

@@ -1,9 +1,9 @@
 """
 Tests for the `active` field across every gear type.
 
-`active` is a three-state flag (`True` = still sold, `False` = legacy,
+`active` is a three-state flag (`True` = still sold, `False` = historic,
 `None` = unknown) that lives on every `Base<X>` and drives the frontend's
-"Legacy" badge and the ALL / CURRENT / HISTORIC scope bubble.
+"Historic" badge and the ALL / CURRENT / HISTORIC scope bubble.
 
 Two things are covered here, per gear type:
 

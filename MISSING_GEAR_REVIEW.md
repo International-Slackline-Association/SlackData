@@ -49,7 +49,7 @@ CLAUDE.md → "Frontend ↔ Backend contract rule"). Add objects to the matching
 using the key names that type's loader already reads — **the two loaders take different shapes, see
 below.** Re-seed by deleting `slack_data/database.db` and restarting.
 
-Set `active` on every new row: `true` = still sold, `false` = legacy/discontinued.
+Set `active` on every new row: `true` = still sold, `false` = historic/discontinued.
 
 **Webbing** — `models/webbing.py` · `webbings.json` · `load_webbings.py`. Flat objects; brand key is
 `brand`. `materialType` → `FiberMaterial`, `stretch` stored as a JSON *string*, `date_introduced` →

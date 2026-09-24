@@ -215,9 +215,9 @@ def current_spec(item, gear_type: str) -> dict:
     `changes`, so a brand can edit this dict and send it straight back, and a
     field added to a model becomes readable and writable in the same commit with
     nothing to remember. It also means the fields the write refuses — `brand_id` (a
-    submitter knows a name, not a key) and `classification` (derived on every
-    seed, so a hand-edit is overwritten) — are absent here rather than being
-    offered for editing and then rejected.
+    submitter knows a name, not a key) and the ISA certification fields (set
+    from the ISA's list on every seed, so a hand-edit is overwritten) — are
+    absent here rather than being offered for editing and then rejected.
 
     `brand_name` is the one key that is not a column: it is a computed field
     over the `Brand` relationship, which is exactly why it is correctable —

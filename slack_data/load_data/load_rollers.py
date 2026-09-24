@@ -1,7 +1,7 @@
 
 
 from slack_data.database import SessionDep
-from slack_data.load_data._seed_io import read_seed_json, require_seed_id, seed_path, to_bool
+from slack_data.load_data._seed_io import read_seed_json, require_seed_id, seed_path
 from slack_data.models.brands import Brand, get_brand
 from slack_data.models.rollers import BearingMaterial, LockType, SliderType, Roller, RollerCreate
 from slack_data.utilities.currencies import get_currency
@@ -25,8 +25,6 @@ def clean_roller_data(rollers: dict) -> dict:
             cleaned_rollers[key] = 0
         elif key not in {"name", "brand", "materialType"} and value == "":
             cleaned_rollers[key] = None
-        elif key == "isa_approved":
-            cleaned_rollers[key] = to_bool(value)
         elif key == "gear_sellers":
             # A list of brand names, bound for a JSON column. The str()
             # branch below would store the Python repr of it, which reads
@@ -68,10 +66,11 @@ def add_rollers_to_db(rollers: list[dict], session: SessionDep) -> None:
             weight=float(w) if (w := roller.get("weight")) is not None else None,
             breaking_strength=roller.get("mbs"),
             slider_type=get_slider_type(str(roller.get("slider_type", ""))),
-            isa_certified=roller.get("isa_approved", False),
             price=roller.get("price"),
             currency=currency,
             active=roller.get("active"),
+            manufacturer_not_for_highline=roller.get("manufacturer_not_for_highline"),
+            manufacturer_not_for_highline_source=roller.get("manufacturer_not_for_highline_source"),
             # Brand names only — see the model. Absent stays None, not [].
             gear_sellers=roller.get("gear_sellers") or None,
         )

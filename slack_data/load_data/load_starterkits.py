@@ -30,7 +30,7 @@ def clean_starterkit_data(starterkit: dict) -> dict:
             cleaned_kits[key] = value
 
     # Booleans
-    for key in ("includes_treepro", "isa_certified"):
+    for key in ("includes_treepro",):
         if key in cleaned_kits:
             cleaned_kits[key] = to_bool(cleaned_kits.get(key))
 
@@ -79,13 +79,14 @@ def add_starterkits_to_db(starterkits: list[dict], session: SessionDep) -> None:
             weight=sk.get("weight"),
             tensioning_type=sk.get("tensioning_type"),
             includes_treepro=sk.get("includes_treepro", False),
-            isa_certified=sk.get("isa_certified", False),
             price=sk.get("price"),
             currency=currency,
             description=sk.get("description"),
             version=sk.get("version"),
             notes=sk.get("notes"),
             active=sk.get("active"),
+            manufacturer_not_for_highline=sk.get("manufacturer_not_for_highline"),
+            manufacturer_not_for_highline_source=sk.get("manufacturer_not_for_highline_source"),
             # Brand names only — see the model. Absent stays None, not [].
             gear_sellers=sk.get("gear_sellers") or None,
         )

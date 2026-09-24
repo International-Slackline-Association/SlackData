@@ -1,0 +1,1054 @@
+{
+    "items": [
+        {
+            "cert_id": "approved_gear_1",
+            "certificate": "ISA:41:A",
+            "standard_number": 41,
+            "isa_class": "A",
+            "product_type": "Webbing",
+            "manufacturer": "Slacktivity",
+            "model": "Redtube Type A",
+            "model_version": "1",
+            "release_year": 2018,
+            "standard_version": "1.0",
+            "testing_lab": "Siebert Consulting, Vienna, Austria",
+            "test_date": "2020-01",
+            "product_url": "https://www.slacktivity.com/redtube-30m-200m",
+            "manual_url": "https://slacktivity.ch/wp-content/uploads/2021/03/Manual-EN-Highline-Webbing-redTube-A-V1.pdf",
+            "pictures": [
+                "https://www.slacklineinternational.org/wp-content/uploads/2023/07/Slacktivity_redTube_1_01.jpg",
+                "https://www.slacklineinternational.org/wp-content/uploads/2023/07/Slacktivity_redTube_1_02.jpg"
+            ],
+            "manufacturer_email": "info@slacktivity.ch",
+            "source_notes": [],
+            "match": {
+                "gearType": "webbing",
+                "gearIds": [
+                    62
+                ],
+                "gearNames": [
+                    "Slacktivity redTube"
+                ],
+                "confidence": "exact",
+                "note": "Webbing certificate"
+            }
+        },
+        {
+            "cert_id": "approved_gear_2",
+            "certificate": "ISA:41",
+            "standard_number": 41,
+            "isa_class": null,
+            "product_type": "Webbing - Sewn Loop",
+            "manufacturer": "Slacktivity",
+            "model": "Redtube Type A - Sewn Loops",
+            "model_version": "1",
+            "release_year": 2018,
+            "standard_version": "1.0",
+            "testing_lab": "Siebert Consulting, Vienna, Austria",
+            "test_date": "2020-01",
+            "product_url": "https://www.slacktivity.com/redtube-30m-200m",
+            "manual_url": "https://slacktivity.ch/wp-content/uploads/2021/03/Manual-EN-Highline-Webbing-redTube-A-V1.pdf",
+            "pictures": [
+                "https://www.slacklineinternational.org/wp-content/uploads/2023/07/Slacktivity_redTube_1_01.jpg",
+                "https://www.slacklineinternational.org/wp-content/uploads/2023/07/Slacktivity_redTube_1_02.jpg"
+            ],
+            "manufacturer_email": "info@slacktivity.ch",
+            "source_notes": [],
+            "match": {
+                "gearType": "webbing",
+                "gearIds": [
+                    62
+                ],
+                "gearNames": [
+                    "Slacktivity redTube"
+                ],
+                "confidence": "exact",
+                "note": "Sewn Loop certificate for the same webbing; certifies the same row"
+            }
+        },
+        {
+            "cert_id": "approved_gear_3",
+            "certificate": "ISA:37",
+            "standard_number": 37,
+            "isa_class": null,
+            "product_type": "Leashring",
+            "manufacturer": "Slacktivity",
+            "model": "HighlineRing",
+            "model_version": "1",
+            "release_year": 2019,
+            "standard_version": "1.0",
+            "testing_lab": null,
+            "test_date": "2020-01",
+            "product_url": "https://www.slacktivity.com/highlinering",
+            "manual_url": "https://slacktivity.ch/wp-content/uploads/2021/03/Manual-EN-Highline-Leash-V1.pdf",
+            "pictures": [
+                "https://www.slacklineinternational.org/wp-content/uploads/2023/07/Slacktivity_HighlineRing_1_01.jpg",
+                "https://www.slacklineinternational.org/wp-content/uploads/2023/07/Slacktivity_HighlineRing_1_02.jpg"
+            ],
+            "manufacturer_email": "info@slacktivity.ch",
+            "source_notes": [
+                "testing_lab: source says 'not needed'",
+                "manual_url: source scheme 'httpa://' corrected to 'https://'"
+            ],
+            "match": {
+                "gearType": "leashring",
+                "gearIds": [
+                    26
+                ],
+                "gearNames": [
+                    "Slacktivity HighlineRing"
+                ],
+                "confidence": "exact",
+                "note": ""
+            }
+        },
+        {
+            "cert_id": "approved_gear_4",
+            "certificate": "ISA:37",
+            "standard_number": 37,
+            "isa_class": null,
+            "product_type": "Leash Teather",
+            "manufacturer": "Slacktivity",
+            "model": "HighlineLeash",
+            "model_version": "1",
+            "release_year": 2019,
+            "standard_version": "1.0",
+            "testing_lab": "Siebert Consulting, Vienna, Austria",
+            "test_date": "2020-01",
+            "product_url": "https://slacktivity.com/shop/highline-leash/",
+            "manual_url": "https://slacktivity.ch/wp-content/uploads/2021/03/Manual-EN-Highline-Leash-V1.pdf",
+            "pictures": [
+                "https://www.slacklineinternational.org/wp-content/uploads/2023/07/Slacktivity_HighlineLeash_1_01.jpg",
+                "https://www.slacklineinternational.org/wp-content/uploads/2023/07/Slacktivity_HighlineLeash_1_02.jpg"
+            ],
+            "manufacturer_email": "info@slacktivity.ch",
+            "source_notes": [
+                "manual_url: source scheme 'httpa://' corrected to 'https://'"
+            ],
+            "match": {
+                "gearType": null,
+                "gearIds": [],
+                "gearNames": [],
+                "confidence": "none",
+                "note": "Leash — a gear type we do not hold yet (BACKLOG: leashes gear type)"
+            }
+        },
+        {
+            "cert_id": "approved_gear_5",
+            "certificate": "ISA:51",
+            "standard_number": 51,
+            "isa_class": null,
+            "product_type": "Webbing Locker",
+            "manufacturer": "Balance Community",
+            "model": "Alpine Weblock 5",
+            "model_version": "5",
+            "release_year": 2020,
+            "standard_version": "1.0",
+            "testing_lab": "Siebert Consulting, Vienna, Austria",
+            "test_date": "2020-06",
+            "product_url": "https://www.balancecommunity.com/products/alpine-weblock-5",
+            "manual_url": null,
+            "pictures": [
+                "https://www.slacklineinternational.org/wp-content/uploads/2023/07/BalanceCommunity_Alpine5.0_1_01.jpg",
+                "https://www.slacklineinternational.org/wp-content/uploads/2023/07/BalanceCommunity_Alpine5.0_1_02.jpg"
+            ],
+            "manufacturer_email": "info@balance-community.com",
+            "source_notes": [],
+            "match": {
+                "gearType": "weblock",
+                "gearIds": [
+                    4
+                ],
+                "gearNames": [
+                    "Balance Community Alpine WebLock 5.0"
+                ],
+                "confidence": "exact",
+                "note": ""
+            }
+        },
+        {
+            "cert_id": "approved_gear_6",
+            "certificate": "ISA:51",
+            "standard_number": 51,
+            "isa_class": null,
+            "product_type": "Webbing Locker",
+            "manufacturer": "Slacktivity",
+            "model": "Seahorse",
+            "model_version": "1.5",
+            "release_year": 2019,
+            "standard_version": "1.0",
+            "testing_lab": "Siebert Consulting, Vienna, Austria",
+            "test_date": "2020-06",
+            "product_url": "https://www.slacktivity.com/seahorse-dp",
+            "manual_url": "http://slacktivity.ch/wp-content/uploads/2021/03/Manual-EN-Highline-Weblock-seaHorse-1-5-V4.pdf",
+            "pictures": [
+                "https://www.slacklineinternational.org/wp-content/uploads/2023/07/Slacktivity_seaHorse_1_01.jpg",
+                "https://www.slacklineinternational.org/wp-content/uploads/2023/07/Slacktivity_seaHorse_1_02.jpg"
+            ],
+            "manufacturer_email": "info@slacktivity.ch",
+            "source_notes": [],
+            "match": {
+                "gearType": "weblock",
+                "gearIds": [
+                    84
+                ],
+                "gearNames": [
+                    "Slacktivity SeaHorse DP 1.5"
+                ],
+                "confidence": "exact",
+                "note": "Model version 1.5"
+            }
+        },
+        {
+            "cert_id": "approved_gear_7",
+            "certificate": "ISA:61",
+            "standard_number": 61,
+            "isa_class": null,
+            "product_type": "Webbing Grab",
+            "manufacturer": "Balance Community",
+            "model": "Wafer",
+            "model_version": "1",
+            "release_year": 2019,
+            "standard_version": "1.0",
+            "testing_lab": "Siebert Consulting, Vienna, Austria",
+            "test_date": "2020-06",
+            "product_url": "https://www.balancecommunity.com/products/wafer?variant=31265207484474",
+            "manual_url": null,
+            "pictures": [
+                "https://www.slacklineinternational.org/wp-content/uploads/2026/09/wafer-hero.jpg",
+                "https://www.slacklineinternational.org/wp-content/uploads/2026/09/wafer-splice.jpg"
+            ],
+            "manufacturer_email": "info@balance-community.com",
+            "source_notes": [],
+            "match": {
+                "gearType": "grip",
+                "gearIds": [
+                    3
+                ],
+                "gearNames": [
+                    "Balance Community Wafer"
+                ],
+                "confidence": "exact",
+                "note": ""
+            }
+        },
+        {
+            "cert_id": "approved_gear_8",
+            "certificate": "ISA:41:C",
+            "standard_number": 41,
+            "isa_class": "C",
+            "product_type": "Webbing",
+            "manufacturer": "Slacktivity",
+            "model": "Pinktube",
+            "model_version": "1",
+            "release_year": 2020,
+            "standard_version": "1.0",
+            "testing_lab": "Siebert Consulting, Vienna, Austria",
+            "test_date": "2020-04",
+            "product_url": "https://slacktivity.com/shop/pinktube-slackline-tubular-webbing/",
+            "manual_url": "https://slacktivity.com/wp-content/uploads/2022/02/Manual-EN-HighlineWebbing-pinkTube-A-V1-1.pdf",
+            "pictures": [
+                "https://www.slacklineinternational.org/wp-content/uploads/2023/07/Slacktivity_Pinktube_1_01.jpg",
+                "https://www.slacklineinternational.org/wp-content/uploads/2023/07/Slacktivity_Pinktube_1_02.jpg"
+            ],
+            "manufacturer_email": "info@slacktivity.ch",
+            "source_notes": [],
+            "match": {
+                "gearType": null,
+                "gearIds": [],
+                "gearNames": [],
+                "confidence": "none",
+                "note": "Superseded by approved_gear_23 (newest certificate only)"
+            }
+        },
+        {
+            "cert_id": "approved_gear_9",
+            "certificate": "ISA:37",
+            "standard_number": 37,
+            "isa_class": null,
+            "product_type": "Leashring",
+            "manufacturer": "raed Slacklines",
+            "model": "HALO leash ring",
+            "model_version": "1",
+            "release_year": 2021,
+            "standard_version": "1.0",
+            "testing_lab": "BLOCK Materialprüfungsgesellschaft, Berlin, Germany",
+            "test_date": "2021-04",
+            "product_url": "https://raed-slacklines.com/halo-titanium-highline-leash-ring",
+            "manual_url": "https://raed-slacklines.com/media/attachment/file/r/a/raed-leash-manual.pdf",
+            "pictures": [
+                "https://www.slacklineinternational.org/wp-content/uploads/2023/07/raed_halo_1_01.jpg",
+                "https://www.slacklineinternational.org/wp-content/uploads/2023/07/raed_halo_1_02.jpg"
+            ],
+            "manufacturer_email": "info@raed-slacklines.com",
+            "source_notes": [],
+            "match": {
+                "gearType": "leashring",
+                "gearIds": [
+                    29
+                ],
+                "gearNames": [
+                    "Raed Slacklines Halo"
+                ],
+                "confidence": "exact",
+                "note": ""
+            }
+        },
+        {
+            "cert_id": "approved_gear_10",
+            "certificate": "ISA:37",
+            "standard_number": 37,
+            "isa_class": null,
+            "product_type": "Leash",
+            "manufacturer": "raed Slacklines",
+            "model": "PRO leash",
+            "model_version": "1",
+            "release_year": 2021,
+            "standard_version": "1.0",
+            "testing_lab": "BLOCK Materialprüfungsgesellschaft, Berlin, Germany",
+            "test_date": "2021-04",
+            "product_url": "https://raed-slacklines.com/pro-leash-set",
+            "manual_url": "https://raed-slacklines.com/media/attachment/file/r/a/raed-leash-manual.pdf",
+            "pictures": [
+                "https://raed-slacklines.com/media/catalog/product/cache/80d417dc14c830b3202247f531338ea1/r/a/raed-pro-highline-leash-set_1.jpg"
+            ],
+            "manufacturer_email": "info@raed-slacklines.com",
+            "source_notes": [],
+            "match": {
+                "gearType": null,
+                "gearIds": [],
+                "gearNames": [],
+                "confidence": "none",
+                "note": "Leash — a gear type we do not hold yet (BACKLOG: leashes gear type)"
+            }
+        },
+        {
+            "cert_id": "approved_gear_11",
+            "certificate": "ISA:37",
+            "standard_number": 37,
+            "isa_class": null,
+            "product_type": "Leash",
+            "manufacturer": "raed Slacklines",
+            "model": "ALPINE leash",
+            "model_version": "1",
+            "release_year": 2021,
+            "standard_version": "1.0",
+            "testing_lab": "BLOCK Materialprüfungsgesellschaft, Berlin, Germany",
+            "test_date": "2021-04",
+            "product_url": "https://raed-slacklines.com/alpine-leash-set",
+            "manual_url": "https://raed-slacklines.com/media/attachment/file/r/a/raed-leash-manual.pdf",
+            "pictures": [
+                "https://raed-slacklines.com/media/catalog/product/cache/80d417dc14c830b3202247f531338ea1/r/a/raed-alpine-highline-leash-set.jpg"
+            ],
+            "manufacturer_email": "info@raed-slacklines.com",
+            "source_notes": [],
+            "match": {
+                "gearType": null,
+                "gearIds": [],
+                "gearNames": [],
+                "confidence": "none",
+                "note": "Leash — a gear type we do not hold yet (BACKLOG: leashes gear type)"
+            }
+        },
+        {
+            "cert_id": "approved_gear_12",
+            "certificate": "ISA:51",
+            "standard_number": 51,
+            "isa_class": null,
+            "product_type": "Webbing Locker",
+            "manufacturer": "SlackX",
+            "model": "Orange",
+            "model_version": "B1/B2",
+            "release_year": 2020,
+            "standard_version": "1.0",
+            "testing_lab": "Siebert Consulting, Vienna, Austria",
+            "test_date": "2021-05",
+            "product_url": "https://slackx.eu/Products/Orange/",
+            "manual_url": "https://slackx.eu/.cm4all/uproc.php/0/Manual%20Orange%20v1.0.pdf?cdp=a&_=187fd373b20",
+            "pictures": [
+                "https://www.slacklineinternational.org/wp-content/uploads/2023/07/Radrigs_Orange_B1-B2_01.jpg",
+                "https://www.slacklineinternational.org/wp-content/uploads/2023/07/Radrigs_Orange_B1-B2_02.jpg"
+            ],
+            "manufacturer_email": "info@slackx.eu",
+            "source_notes": [],
+            "match": {
+                "gearType": "weblock",
+                "gearIds": [
+                    58
+                ],
+                "gearNames": [
+                    "Radrigs Orange"
+                ],
+                "confidence": "exact",
+                "note": "Certified under seller SlackX, which continues the Radrigs line; hand-matched to the Radrigs row"
+            }
+        },
+        {
+            "cert_id": "approved_gear_13",
+            "certificate": "ISA:51",
+            "standard_number": 51,
+            "isa_class": null,
+            "product_type": "Webbing Locker",
+            "manufacturer": "Aki Slacklines",
+            "model": "Lynx 5",
+            "model_version": "1",
+            "release_year": 2021,
+            "standard_version": "1.0",
+            "testing_lab": "Siebert Consulting, Vienna, Austria",
+            "test_date": "2021-06",
+            "product_url": "https://aki-slacklines.de/en/hardware/weblocks/203/aki-lynx-5-webbing-locker",
+            "manual_url": "https://aki-slacklines.de/en/hardware/weblocks/203/aki-lynx-5-webbing-locker",
+            "pictures": [
+                "https://www.slacklineinternational.org/wp-content/uploads/2023/07/Aki_Lynx5.0_1_01.jpg",
+                "https://www.slacklineinternational.org/wp-content/uploads/2023/07/Aki_Lynx5.0_1_02.jpg"
+            ],
+            "manufacturer_email": "info@aki-slacklines.de",
+            "source_notes": [],
+            "match": {
+                "gearType": "weblock",
+                "gearIds": [
+                    53
+                ],
+                "gearNames": [
+                    "Aki Slacklines Lynx 5"
+                ],
+                "confidence": "exact",
+                "note": ""
+            }
+        },
+        {
+            "cert_id": "approved_gear_14",
+            "certificate": "ISA:41:C",
+            "standard_number": 41,
+            "isa_class": "C",
+            "product_type": "Webbing",
+            "manufacturer": "Slacktivity",
+            "model": "LSD",
+            "model_version": "1",
+            "release_year": 2023,
+            "standard_version": "2023",
+            "testing_lab": "Siebert Consulting, Vienna, Austria",
+            "test_date": "2022",
+            "product_url": "https://slacktivity.com/shop/lsdtube-webbing/",
+            "manual_url": "https://slacktivity.com/wp-content/uploads/2022/06/Manual-EN-Highline-Webbing-LSDTube-V1.pdf",
+            "pictures": [
+                "https://www.slacklineinternational.org/wp-content/uploads/2023/07/Slacktivity_LSD_1_01.jpg",
+                "https://www.slacklineinternational.org/wp-content/uploads/2023/07/Slacktivity_LSD_1_02.jpg"
+            ],
+            "manufacturer_email": "info@slacktivity.ch",
+            "source_notes": [],
+            "match": {
+                "gearType": "webbing",
+                "gearIds": [
+                    189
+                ],
+                "gearNames": [
+                    "Slacktivity LSDTube"
+                ],
+                "confidence": "exact",
+                "note": "Webbing certificate"
+            }
+        },
+        {
+            "cert_id": "approved_gear_15",
+            "certificate": "ISA:41",
+            "standard_number": 41,
+            "isa_class": null,
+            "product_type": "Webbing - Sewn Loop",
+            "manufacturer": "Slacktivity",
+            "model": "LSD - Sewn Loops",
+            "model_version": "1",
+            "release_year": 2023,
+            "standard_version": "2023",
+            "testing_lab": "Siebert Consulting, Vienna, Austria",
+            "test_date": "2022",
+            "product_url": "https://slacktivity.com/shop/lsdtube-webbing/",
+            "manual_url": "https://slacktivity.com/wp-content/uploads/2022/06/Manual-EN-Highline-Webbing-LSDTube-V1.pdf",
+            "pictures": [
+                "https://www.slacklineinternational.org/wp-content/uploads/2023/07/Slacktivity_LSD_1_01.jpg",
+                "https://www.slacklineinternational.org/wp-content/uploads/2023/07/Slacktivity_LSD_1_02.jpg"
+            ],
+            "manufacturer_email": "info@slacktivity.ch",
+            "source_notes": [],
+            "match": {
+                "gearType": "webbing",
+                "gearIds": [
+                    189
+                ],
+                "gearNames": [
+                    "Slacktivity LSDTube"
+                ],
+                "confidence": "exact",
+                "note": "Sewn Loop certificate for the same webbing; certifies the same row"
+            }
+        },
+        {
+            "cert_id": "approved_gear_16",
+            "certificate": "ISA:41",
+            "standard_number": 41,
+            "isa_class": null,
+            "product_type": "Webbing - Intermittent Connection",
+            "manufacturer": "Slacktivity",
+            "model": "LSD - Intermittent Connection",
+            "model_version": "1",
+            "release_year": 2023,
+            "standard_version": "2023",
+            "testing_lab": "Siebert Consulting, Vienna, Austria",
+            "test_date": "2022",
+            "product_url": "https://slacktivity.com/shop/lsdtube-webbing/",
+            "manual_url": "https://slacktivity.com/wp-content/uploads/2022/06/Manual-EN-Highline-Webbing-LSDTube-V1.pdf",
+            "pictures": [
+                "https://www.slacklineinternational.org/wp-content/uploads/2023/07/Slacktivity_LSD_1_01.jpg",
+                "https://www.slacklineinternational.org/wp-content/uploads/2023/07/Slacktivity_LSD_1_02.jpg"
+            ],
+            "manufacturer_email": "info@slacktivity.ch",
+            "source_notes": [],
+            "match": {
+                "gearType": null,
+                "gearIds": [],
+                "gearNames": [],
+                "confidence": "none",
+                "note": "Intermittent Connection certificate — does not count toward certification"
+            }
+        },
+        {
+            "cert_id": "approved_gear_17",
+            "certificate": "ISA:41:A+",
+            "standard_number": 41,
+            "isa_class": "A+",
+            "product_type": "Webbing",
+            "manufacturer": "Slacktivity",
+            "model": "Marathon",
+            "model_version": "1",
+            "release_year": 2023,
+            "standard_version": "2023",
+            "testing_lab": "Siebert Consulting, Vienna, Austria",
+            "test_date": "2022",
+            "product_url": "https://slacktivity.com/shop/marathon-1-inch-slackline/",
+            "manual_url": "https://slacktivity.com/wp-content/uploads/2023/05/Manual-EN-Highline-Webbing-Marathon-V1.pdf",
+            "pictures": [
+                "https://www.slacklineinternational.org/wp-content/uploads/2023/07/Slacktivity_Marathon_1_01.jpg",
+                "https://www.slacklineinternational.org/wp-content/uploads/2023/07/Slacktivity_Marathon_1_02.jpg"
+            ],
+            "manufacturer_email": "info@slacktivity.ch",
+            "source_notes": [],
+            "match": {
+                "gearType": "webbing",
+                "gearIds": [
+                    63
+                ],
+                "gearNames": [
+                    "Slacktivity Marathon"
+                ],
+                "confidence": "exact",
+                "note": "Webbing certificate"
+            }
+        },
+        {
+            "cert_id": "approved_gear_18",
+            "certificate": "ISA:41",
+            "standard_number": 41,
+            "isa_class": null,
+            "product_type": "Webbing - Sewn Loop",
+            "manufacturer": "Slacktivity",
+            "model": "Marathon - Sewn Loops",
+            "model_version": "1",
+            "release_year": 2023,
+            "standard_version": "2023",
+            "testing_lab": "Siebert Consulting, Vienna, Austria",
+            "test_date": "2022",
+            "product_url": "https://slacktivity.com/shop/marathon-1-inch-slackline/",
+            "manual_url": "https://slacktivity.com/wp-content/uploads/2023/05/Manual-EN-Highline-Webbing-Marathon-V1.pdf",
+            "pictures": [
+                "https://www.slacklineinternational.org/wp-content/uploads/2023/07/Slacktivity_Marathon_1_01.jpg",
+                "https://www.slacklineinternational.org/wp-content/uploads/2023/07/Slacktivity_Marathon_1_02.jpg"
+            ],
+            "manufacturer_email": "info@slacktivity.ch",
+            "source_notes": [],
+            "match": {
+                "gearType": "webbing",
+                "gearIds": [
+                    63
+                ],
+                "gearNames": [
+                    "Slacktivity Marathon"
+                ],
+                "confidence": "exact",
+                "note": "Sewn Loop certificate for the same webbing; certifies the same row"
+            }
+        },
+        {
+            "cert_id": "approved_gear_19",
+            "certificate": "ISA:41",
+            "standard_number": 41,
+            "isa_class": null,
+            "product_type": "Webbing - Intermittent Connection",
+            "manufacturer": "Slacktivity",
+            "model": "Marathon - Intermittent Connection",
+            "model_version": "1",
+            "release_year": 2023,
+            "standard_version": "2023",
+            "testing_lab": "Siebert Consulting, Vienna, Austria",
+            "test_date": "2022",
+            "product_url": "https://slacktivity.com/shop/marathon-1-inch-slackline/",
+            "manual_url": "https://slacktivity.com/wp-content/uploads/2023/05/Manual-EN-Highline-Webbing-Marathon-V1.pdf",
+            "pictures": [
+                "https://www.slacklineinternational.org/wp-content/uploads/2023/07/Slacktivity_Marathon_1_01.jpg",
+                "https://www.slacklineinternational.org/wp-content/uploads/2023/07/Slacktivity_Marathon_1_02.jpg"
+            ],
+            "manufacturer_email": "info@slacktivity.ch",
+            "source_notes": [],
+            "match": {
+                "gearType": null,
+                "gearIds": [],
+                "gearNames": [],
+                "confidence": "none",
+                "note": "Intermittent Connection certificate — does not count toward certification"
+            }
+        },
+        {
+            "cert_id": "approved_gear_20",
+            "certificate": "ISA:41:A",
+            "standard_number": 41,
+            "isa_class": "A",
+            "product_type": "Webbing",
+            "manufacturer": "Slacktivity",
+            "model": "Y2K",
+            "model_version": "1",
+            "release_year": 2023,
+            "standard_version": "2023",
+            "testing_lab": "Siebert Consulting, Vienna, Austria",
+            "test_date": "2022",
+            "product_url": "https://slacktivity.com/shop/y2k-high-tech-slackline-webbing/",
+            "manual_url": "https://slacktivity.com/wp-content/uploads/2023/05/Manual-EN-Highline-Webbing-Y2K-V1.pdf",
+            "pictures": [
+                "https://www.slacklineinternational.org/wp-content/uploads/2023/07/Slacktivity_Y2K_1_01.jpg",
+                "https://www.slacklineinternational.org/wp-content/uploads/2023/07/Slacktivity_Y2K_1_02.jpg"
+            ],
+            "manufacturer_email": "info@slacktivity.ch",
+            "source_notes": [],
+            "match": {
+                "gearType": "webbing",
+                "gearIds": [
+                    74
+                ],
+                "gearNames": [
+                    "Slacktivity Y2K"
+                ],
+                "confidence": "exact",
+                "note": "Webbing certificate"
+            }
+        },
+        {
+            "cert_id": "approved_gear_21",
+            "certificate": "ISA:41:A",
+            "standard_number": 41,
+            "isa_class": "A",
+            "product_type": "Webbing - Sewn Loop",
+            "manufacturer": "Slacktivity",
+            "model": "Y2K - Sewn Loops",
+            "model_version": "1",
+            "release_year": 2023,
+            "standard_version": "2023",
+            "testing_lab": "Siebert Consulting, Vienna, Austria",
+            "test_date": "2022",
+            "product_url": "https://slacktivity.com/shop/y2k-high-tech-slackline-webbing/",
+            "manual_url": "https://slacktivity.com/wp-content/uploads/2023/05/Manual-EN-Highline-Webbing-Y2K-V1.pdf",
+            "pictures": [
+                "https://www.slacklineinternational.org/wp-content/uploads/2023/07/Slacktivity_Y2K_1_01.jpg",
+                "https://www.slacklineinternational.org/wp-content/uploads/2023/07/Slacktivity_Y2K_1_02.jpg"
+            ],
+            "manufacturer_email": "info@slacktivity.ch",
+            "source_notes": [],
+            "match": {
+                "gearType": "webbing",
+                "gearIds": [
+                    74
+                ],
+                "gearNames": [
+                    "Slacktivity Y2K"
+                ],
+                "confidence": "exact",
+                "note": "Sewn Loop certificate for the same webbing; certifies the same row"
+            }
+        },
+        {
+            "cert_id": "approved_gear_22",
+            "certificate": "ISA:41:A",
+            "standard_number": 41,
+            "isa_class": "A",
+            "product_type": "Webbing - Intermittent Connection",
+            "manufacturer": "Slacktivity",
+            "model": "Y2K - Intermittent Connection",
+            "model_version": "1",
+            "release_year": 2023,
+            "standard_version": "2023",
+            "testing_lab": "Siebert Consulting, Vienna, Austria",
+            "test_date": "2022",
+            "product_url": "https://slacktivity.com/shop/y2k-high-tech-slackline-webbing/",
+            "manual_url": "https://slacktivity.com/wp-content/uploads/2023/05/Manual-EN-Highline-Webbing-Y2K-V1.pdf",
+            "pictures": [
+                "https://www.slacklineinternational.org/wp-content/uploads/2023/07/Slacktivity_Y2K_1_01.jpg",
+                "https://www.slacklineinternational.org/wp-content/uploads/2023/07/Slacktivity_Y2K_1_02.jpg"
+            ],
+            "manufacturer_email": "info@slacktivity.ch",
+            "source_notes": [],
+            "match": {
+                "gearType": null,
+                "gearIds": [],
+                "gearNames": [],
+                "confidence": "none",
+                "note": "Intermittent Connection certificate — does not count toward certification"
+            }
+        },
+        {
+            "cert_id": "approved_gear_23",
+            "certificate": "ISA:41:C",
+            "standard_number": 41,
+            "isa_class": "C",
+            "product_type": "Webbing",
+            "manufacturer": "Slacktivity",
+            "model": "Pinktube",
+            "model_version": "1",
+            "release_year": 2023,
+            "standard_version": "2020",
+            "testing_lab": "Siebert Consulting, Vienna, Austria",
+            "test_date": "2020",
+            "product_url": "https://slacktivity.com/shop/pinktube-slackline-tubular-webbing/",
+            "manual_url": "https://slacktivity.com/wp-content/uploads/2022/02/Manual-EN-HighlineWebbing-pinkTube-A-V1-1.pdf",
+            "pictures": [
+                "https://www.slacklineinternational.org/wp-content/uploads/2023/07/Slacktivity_Pinktube_1_01.jpg",
+                "https://www.slacklineinternational.org/wp-content/uploads/2023/07/Slacktivity_Pinktube_1_02.jpg"
+            ],
+            "manufacturer_email": "info@slacktivity.ch",
+            "source_notes": [],
+            "match": {
+                "gearType": "webbing",
+                "gearIds": [
+                    61
+                ],
+                "gearNames": [
+                    "Slacktivity pinkTube"
+                ],
+                "confidence": "exact",
+                "note": "Webbing certificate; newest Pinktube certificate (supersedes approved_gear_8)"
+            }
+        },
+        {
+            "cert_id": "approved_gear_24",
+            "certificate": "ISA:41",
+            "standard_number": 41,
+            "isa_class": null,
+            "product_type": "Webbing - Sewn Loop",
+            "manufacturer": "Slacktivity",
+            "model": "Pinktube - Sewn Loops",
+            "model_version": "1",
+            "release_year": 2023,
+            "standard_version": "2020",
+            "testing_lab": "Siebert Consulting, Vienna, Austria",
+            "test_date": "2020",
+            "product_url": "https://slacktivity.com/shop/pinktube-slackline-tubular-webbing/",
+            "manual_url": "https://slacktivity.com/wp-content/uploads/2022/02/Manual-EN-HighlineWebbing-pinkTube-A-V1-1.pdf",
+            "pictures": [
+                "https://www.slacklineinternational.org/wp-content/uploads/2023/07/Slacktivity_Pinktube_1_01.jpg",
+                "https://www.slacklineinternational.org/wp-content/uploads/2023/07/Slacktivity_Pinktube_1_02.jpg"
+            ],
+            "manufacturer_email": "info@slacktivity.ch",
+            "source_notes": [],
+            "match": {
+                "gearType": "webbing",
+                "gearIds": [
+                    61
+                ],
+                "gearNames": [
+                    "Slacktivity pinkTube"
+                ],
+                "confidence": "exact",
+                "note": "Sewn Loop certificate for the same webbing; certifies the same row"
+            }
+        },
+        {
+            "cert_id": "approved_gear_25",
+            "certificate": "ISA:41",
+            "standard_number": 41,
+            "isa_class": null,
+            "product_type": "Webbing - Intermittent Connection",
+            "manufacturer": "Slacktivity",
+            "model": "Pinktube - Intermittent Connection",
+            "model_version": "1",
+            "release_year": 2023,
+            "standard_version": "2020",
+            "testing_lab": "Siebert Consulting, Vienna, Austria",
+            "test_date": "2020",
+            "product_url": "https://slacktivity.com/shop/pinktube-slackline-tubular-webbing/",
+            "manual_url": "https://slacktivity.com/wp-content/uploads/2022/02/Manual-EN-HighlineWebbing-pinkTube-A-V1-1.pdf",
+            "pictures": [
+                "https://www.slacklineinternational.org/wp-content/uploads/2023/07/Slacktivity_Pinktube_1_01.jpg",
+                "https://www.slacklineinternational.org/wp-content/uploads/2023/07/Slacktivity_Pinktube_1_02.jpg"
+            ],
+            "manufacturer_email": "info@slacktivity.ch",
+            "source_notes": [],
+            "match": {
+                "gearType": null,
+                "gearIds": [],
+                "gearNames": [],
+                "confidence": "none",
+                "note": "Intermittent Connection certificate — does not count toward certification"
+            }
+        },
+        {
+            "cert_id": "approved_gear_26",
+            "certificate": "ISA:41",
+            "standard_number": 41,
+            "isa_class": null,
+            "product_type": "Webbing - Intermittent Connection",
+            "manufacturer": "Slacktivity",
+            "model": "Pinktube - Intermittent Connection",
+            "model_version": "1",
+            "release_year": 2023,
+            "standard_version": "2020",
+            "testing_lab": "Siebert Consulting, Vienna, Austria",
+            "test_date": "2020",
+            "product_url": "https://slacktivity.com/shop/pinktube-slackline-tubular-webbing/",
+            "manual_url": "https://slacktivity.com/wp-content/uploads/2022/02/Manual-EN-HighlineWebbing-pinkTube-A-V1-1.pdf",
+            "pictures": [
+                "https://www.slacklineinternational.org/wp-content/uploads/2023/07/Slacktivity_Pinktube_1_01.jpg",
+                "https://www.slacklineinternational.org/wp-content/uploads/2023/07/Slacktivity_Pinktube_1_02.jpg"
+            ],
+            "manufacturer_email": "info@slacktivity.ch",
+            "source_notes": [],
+            "match": {
+                "gearType": null,
+                "gearIds": [],
+                "gearNames": [],
+                "confidence": "none",
+                "note": "Intermittent Connection certificate — does not count toward certification"
+            }
+        },
+        {
+            "cert_id": "approved_gear_27",
+            "certificate": "ISA:52",
+            "standard_number": 52,
+            "isa_class": null,
+            "product_type": "Connector",
+            "manufacturer": "Slacktivity",
+            "model": "KingPin - Aluminium Pushpin Shackle",
+            "model_version": "2",
+            "release_year": 2023,
+            "standard_version": "2023",
+            "testing_lab": "Siebert Consulting, Vienna, Austria",
+            "test_date": "2023",
+            "product_url": "https://slacktivity.com/shop/kingpin-aluminium-shackle/",
+            "manual_url": "https://slacktivity.com/wp-content/uploads/2021/02/Manual-EN-KingPin-V1.pdf",
+            "pictures": [
+                "https://www.slacklineinternational.org/wp-content/uploads/2024/02/Slacktivity_KingPinShackle_1_01.jpg",
+                "https://www.slacklineinternational.org/wp-content/uploads/2024/02/Slacktivity_KingPinShackle_1_02.jpg"
+            ],
+            "manufacturer_email": "info@slacktivity.ch",
+            "source_notes": [],
+            "match": {
+                "gearType": null,
+                "gearIds": [],
+                "gearNames": [],
+                "confidence": "none",
+                "note": "Connector (shackle) — a gear type we do not hold (BACKLOG)"
+            }
+        },
+        {
+            "cert_id": "approved_gear_28",
+            "certificate": "ISA:51",
+            "standard_number": 51,
+            "isa_class": null,
+            "product_type": "Webbing Locker",
+            "manufacturer": "Slack Inov",
+            "model": "Zenlock",
+            "model_version": "1",
+            "release_year": 2025,
+            "standard_version": "2024",
+            "testing_lab": "Siebert Consulting, Vienna, Austria",
+            "test_date": "2024",
+            "product_url": "https://slack-inov.com/shop/fr/bananas/989-6420-zenlock-weblock-7616999009.html",
+            "manual_url": "https://slack-inov.com/shop/fr/index.php?controller=attachment&id_attachment=30",
+            "pictures": [
+                "https://www.slacklineinternational.org/wp-content/uploads/2025/04/zenlock.jpg",
+                "https://www.slacklineinternational.org/wp-content/uploads/2025/04/zenlock2.jpg"
+            ],
+            "manufacturer_email": "development@slackit.it",
+            "source_notes": [],
+            "match": {
+                "gearType": "weblock",
+                "gearIds": [
+                    112
+                ],
+                "gearNames": [
+                    "Slack Inov ZENLOCK"
+                ],
+                "confidence": "exact",
+                "note": ""
+            }
+        },
+        {
+            "cert_id": "approved_gear_29",
+            "certificate": "ISA:61",
+            "standard_number": 61,
+            "isa_class": null,
+            "product_type": "Webbing Grab",
+            "manufacturer": "Balance Community",
+            "model": "Wafer 2.0",
+            "model_version": "2",
+            "release_year": 2025,
+            "standard_version": "2024",
+            "testing_lab": "Siebert Consulting, Vienna, Austria",
+            "test_date": "2024",
+            "product_url": "https://www.balancecommunity.com/products/wafer-2-0?variant=39920846012474",
+            "manual_url": "https://www.balancecommunity.com/cdn/shop/files/Wafer-2.0-Manual-v1.5.pdf?v=13881911036479759168",
+            "pictures": [
+                "https://www.slacklineinternational.org/wp-content/uploads/2026/04/BalanceCommunity_Wafer2.0_2_01.webp",
+                "https://www.slacklineinternational.org/wp-content/uploads/2026/04/BalanceCommunity_Wafer2.0_2_02.webp"
+            ],
+            "manufacturer_email": "info@balance-community.com",
+            "source_notes": [],
+            "match": {
+                "gearType": "grip",
+                "gearIds": [
+                    15
+                ],
+                "gearNames": [
+                    "Balance Community Wafer 2.0"
+                ],
+                "confidence": "exact",
+                "note": ""
+            }
+        },
+        {
+            "cert_id": "approved_gear_30",
+            "certificate": "ISA:61",
+            "standard_number": 61,
+            "isa_class": null,
+            "product_type": "Webbing Grab",
+            "manufacturer": "Balance Community",
+            "model": "Wafer XL",
+            "model_version": "1",
+            "release_year": 2025,
+            "standard_version": "2024",
+            "testing_lab": "Siebert Consulting, Vienna, Austria",
+            "test_date": "2024",
+            "product_url": "https://www.balancecommunity.com/products/wafer-xl?variant=40456701870138",
+            "manual_url": "https://www.balancecommunity.com/cdn/shop/files/Wafer-XL-Manual-v1.3.pdf?v=16345089136561165735",
+            "pictures": [
+                "https://www.slacklineinternational.org/wp-content/uploads/2026/04/BalanceCommunity_WaferXL_2_01.webp",
+                "https://www.slacklineinternational.org/wp-content/uploads/2026/04/BalanceCommunity_WaferXL_1_02.webp"
+            ],
+            "manufacturer_email": "info@balance-community.com",
+            "source_notes": [],
+            "match": {
+                "gearType": "grip",
+                "gearIds": [
+                    16
+                ],
+                "gearNames": [
+                    "Balance Community Wafer XL"
+                ],
+                "confidence": "exact",
+                "note": ""
+            }
+        },
+        {
+            "cert_id": "approved_gear_31",
+            "certificate": "ISA:37",
+            "standard_number": 37,
+            "isa_class": null,
+            "product_type": "Leashring",
+            "manufacturer": "Balance Community",
+            "model": "Loop",
+            "model_version": "1",
+            "release_year": 2025,
+            "standard_version": "2024",
+            "testing_lab": "Siebert Consulting, Vienna, Austria",
+            "test_date": "2024",
+            "product_url": "https://www.balancecommunity.com/collections/leash-rings/products/bc-aluminum-leash-ring?variant=40773586190394",
+            "manual_url": "https://www.balancecommunity.com/cdn/shop/files/Loop-Manual-v1.3.pdf?v=6832458307453720302",
+            "pictures": [
+                "https://www.slacklineinternational.org/wp-content/uploads/2026/05/BalanceCommunity_LOOP_1_1.webp",
+                "https://www.slacklineinternational.org/wp-content/uploads/2026/05/BalanceCommunity_LOOP_1_2.webp"
+            ],
+            "manufacturer_email": "info@balance-community.com",
+            "source_notes": [],
+            "match": {
+                "gearType": "leashring",
+                "gearIds": [
+                    27
+                ],
+                "gearNames": [
+                    "Balance Community BC Aluminum Leash Ring"
+                ],
+                "confidence": "exact",
+                "note": "ISA lists it as 'Loop'; the product was renamed"
+            }
+        },
+        {
+            "cert_id": "approved_gear_32",
+            "certificate": "ISA:37",
+            "standard_number": 37,
+            "isa_class": null,
+            "product_type": "Leash Teather",
+            "manufacturer": "Balance Community",
+            "model": "Threaded Highline Leash",
+            "model_version": "1",
+            "release_year": 2026,
+            "standard_version": "2024",
+            "testing_lab": null,
+            "test_date": "2025",
+            "product_url": "https://www.balancecommunity.com/products/threaded-highline-leash-kit?variant=19289117589573",
+            "manual_url": "https://www.balancecommunity.com/cdn/shop/files/Loop-Manual-v1.3.pdf?v=6832458307453720302",
+            "pictures": [
+                "https://www.slacklineinternational.org/wp-content/uploads/2026/04/BalanceCommunity_ThreadedHighlineLeash_1_01.webp",
+                "https://www.slacklineinternational.org/wp-content/uploads/2026/04/BalanceCommunity_ThreadedHighlineLeash_1_02.webp"
+            ],
+            "manufacturer_email": "info@balance-community.com",
+            "source_notes": [
+                "testing_lab: source says 'not needed'"
+            ],
+            "match": {
+                "gearType": null,
+                "gearIds": [],
+                "gearNames": [],
+                "confidence": "none",
+                "note": "Leash — a gear type we do not hold yet (BACKLOG: leashes gear type)"
+            }
+        },
+        {
+            "cert_id": "approved_gear_33",
+            "certificate": "ISA:41",
+            "standard_number": 41,
+            "isa_class": null,
+            "product_type": "Webbing - Sewn Loop",
+            "manufacturer": "Cong Gear / Shanghai Balance Sports Development Co., Ltd.",
+            "model": "Path",
+            "model_version": "1",
+            "release_year": 2026,
+            "standard_version": "2026",
+            "testing_lab": "Siebert Consulting, Vienna, Austria",
+            "test_date": "2026",
+            "product_url": "https://www.instagram.com/cong_gear/",
+            "manual_url": "https://drive.google.com/file/d/1xCVMeXOjyR8m8FacjDK1GF4hDiHC8NJz/view",
+            "pictures": [
+                "https://www.slacklineinternational.org/wp-content/uploads/2026/09/path2.jpg",
+                "https://www.slacklineinternational.org/wp-content/uploads/2026/09/path.jpg"
+            ],
+            "manufacturer_email": "riodinho.x@gmail.com",
+            "source_notes": [],
+            "match": {
+                "gearType": "webbing",
+                "gearIds": [
+                    260
+                ],
+                "gearNames": [
+                    "Cong Gear Path"
+                ],
+                "confidence": "exact",
+                "note": "Sewn Loop certificate, the only one for Path; it carries no class letter, so the letter is derived from breaking strength (40 kN → A+)"
+            }
+        }
+    ]
+}

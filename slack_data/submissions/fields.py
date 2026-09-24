@@ -32,10 +32,18 @@ _EXCLUDED = frozenset(
         # and an id from a different environment is worse than no answer at all.
         # `brand_name` below is the field they actually mean.
         "brand_id",
-        # Derived, not stored knowledge: load_webbings.py computes it from
-        # material + breaking_strength on every seed, so a hand-edit to it is
-        # overwritten by the next deploy. Correct the inputs instead.
-        "classification",
+        # Derived from the ISA's approved-gear list, not stored knowledge:
+        # load_isa_certifications.py sets all three from `isa_certified.json`
+        # on every seed, so a hand-edit is overwritten by the next deploy, and
+        # certification is the ISA's to state — not a maker's or a visitor's.
+        "isa_certified",
+        "isa_certificate",
+        "isa_class",
+        # The same, for recalls: load_isa_warnings.py sets it from
+        # `isa_gear_warnings.json`, and no gear seed carries it, so a value sent
+        # here could never be applied — and a maker does not get to clear an
+        # ISA warning on their own product.
+        "isa_warning",
         # Who ELSE sells this product. Ours to record, not the maker's to
         # state — a brand does not get to declare (or delete) a competitor's
         # shelf — and it is a list, which `changes` (a dict of strings) has no

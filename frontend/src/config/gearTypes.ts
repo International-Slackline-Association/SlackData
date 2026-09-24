@@ -15,30 +15,30 @@ export interface GearTypeMeta {
   label: string          // human label shown in the nav + headings
   hasISA: boolean        // has an isa_certified field
   hasISAWarning: boolean // has an isa_warning field
-  // Label an uncertified item "Uncertified" on the card (see
-  // ClassificationBubble). True for the five types that hold a person up — a
-  // webbing, weblock, leash ring, grip or roller with no ISA grant is worth
-  // saying out loud. False for kits and tree protectors: a kit carries the
-  // field but is a bundle, not a certified component, and a tree protector has
-  // no ISA field at all — in both cases the pill would be noise on every card.
-  showsUncertified: boolean
+  // The ISA certifies this kind of gear, so an item not on its approved-gear
+  // list reads "Not ISA Certified" on the card (see IsaStatusLabel). The five
+  // types that hold a person up. Kits and tree protectors cannot be ISA
+  // certified at all, so they carry no field and no label. Today this equals
+  // hasISA; it is kept separate because one says what the data has and the
+  // other what the card says.
+  certifiable: boolean
   available: boolean      // false = no data/router yet (coming soon)
 }
 
 export const GEAR_TYPES: GearTypeMeta[] = [
-  { slug: 'webbings',      apiPath: 'webbing',      label: 'Webbings',        hasISA: true,  hasISAWarning: true,  showsUncertified: true,  available: true },
-  { slug: 'weblocks',      apiPath: 'weblock',      label: 'Weblocks',        hasISA: true,  hasISAWarning: true,  showsUncertified: true,  available: true },
-  { slug: 'leashrings',    apiPath: 'leashring',    label: 'Leash Rings',     hasISA: true,  hasISAWarning: true,  showsUncertified: true,  available: true },
-  { slug: 'grips',         apiPath: 'grip',         label: 'Grips',           hasISA: true,  hasISAWarning: true,  showsUncertified: true,  available: true },
-  { slug: 'rollers',       apiPath: 'roller',       label: 'Rollers',         hasISA: true,  hasISAWarning: true,  showsUncertified: true,  available: true },
-  { slug: 'treepros',      apiPath: 'treepro',      label: 'Tree Protectors', hasISA: false, hasISAWarning: false, showsUncertified: false, available: true },
-  { slug: 'starterkits',   apiPath: 'starterkit',   label: 'Starter Kits',    hasISA: true,  hasISAWarning: false, showsUncertified: false, available: true },
-  { slug: 'tricklinekits', apiPath: 'tricklinekit', label: 'Trickline Kits',  hasISA: true,  hasISAWarning: false, showsUncertified: false, available: true },
+  { slug: 'webbings',      apiPath: 'webbing',      label: 'Webbings',        hasISA: true,  hasISAWarning: true,  certifiable: true,  available: true },
+  { slug: 'weblocks',      apiPath: 'weblock',      label: 'Weblocks',        hasISA: true,  hasISAWarning: true,  certifiable: true,  available: true },
+  { slug: 'leashrings',    apiPath: 'leashring',    label: 'Leash Rings',     hasISA: true,  hasISAWarning: true,  certifiable: true,  available: true },
+  { slug: 'grips',         apiPath: 'grip',         label: 'Grips',           hasISA: true,  hasISAWarning: true,  certifiable: true,  available: true },
+  { slug: 'rollers',       apiPath: 'roller',       label: 'Rollers',         hasISA: true,  hasISAWarning: true,  certifiable: true,  available: true },
+  { slug: 'treepros',      apiPath: 'treepro',      label: 'Tree Protectors', hasISA: false, hasISAWarning: false, certifiable: false, available: true },
+  { slug: 'starterkits',   apiPath: 'starterkit',   label: 'Starter Kits',    hasISA: false,  hasISAWarning: false, certifiable: false, available: true },
+  { slug: 'tricklinekits', apiPath: 'tricklinekit', label: 'Trickline Kits',  hasISA: false,  hasISAWarning: false, certifiable: false, available: true },
 ]
 
 export const UPCOMING_GEAR_TYPES: GearTypeMeta[] = [
-  { slug: 'bungees',      apiPath: 'bungee',      label: 'Bungees',        hasISA: false, hasISAWarning: false, showsUncertified: false, available: false },
-  { slug: 'leashringpro', apiPath: 'ringpadding', label: 'Leash Ring Pro', hasISA: false, hasISAWarning: false, showsUncertified: false, available: false },
+  { slug: 'bungees',      apiPath: 'bungee',      label: 'Bungees',        hasISA: false, hasISAWarning: false, certifiable: false, available: false },
+  { slug: 'leashringpro', apiPath: 'ringpadding', label: 'Leash Ring Pro', hasISA: false, hasISAWarning: false, certifiable: false, available: false },
 ]
 
 export const ALL_GEAR_TYPES: GearTypeMeta[] = [...GEAR_TYPES, ...UPCOMING_GEAR_TYPES]

@@ -29,7 +29,12 @@ class BaseGrip(SQLModel):
     mbs: float | None = None              # kN
     common_slipping_threshold: float | None = None # kN
     connection_type: ConnectionType | None = None
+    # Both set ONLY by load_isa_certifications.py, from the ISA's approved-gear
+    # list (`isa_certified.json`) — never read from this type's seed. Not
+    # matched there means not certified. `isa_certificate` is the certificate
+    # number (`ISA:51`), which is what picks the stamp image.
     isa_certified: bool = False
+    isa_certificate: str | None = None
     isa_warning: ISAWarning | None = None
     price: float | None = None
     currency: Currency | None = None
@@ -37,6 +42,15 @@ class BaseGrip(SQLModel):
     version: str | None = None
     notes: str | None = None
     active: bool | None = Field(default=None, index=True)
+
+    # Whether the MAKER says this is not for highlining — a researched fact,
+    # sourced from their own product page, and never computed from a spec
+    # (a low breaking strength is our inference, not their statement). True =
+    # they say so explicitly, False = they market it for highlining, None = not
+    # yet checked, or the page is gone or silent. The URL is the page that says
+    # it, so the claim can be re-checked.
+    manufacturer_not_for_highline: bool | None = None
+    manufacturer_not_for_highline_source: str | None = None
 
     # The brands that SELL this product without making it — the co-listing half
     # of `brand_id`, which only ever says who makes it. Slack Inov and Spider

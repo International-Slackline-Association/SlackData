@@ -30,6 +30,15 @@ class BaseTreePro(SQLModel):
     notes: str | None = None
     active: bool | None = Field(default=None, index=True)
 
+    # Whether the MAKER says this is not for highlining — a researched fact,
+    # sourced from their own product page, and never computed from a spec
+    # (a low breaking strength is our inference, not their statement). True =
+    # they say so explicitly, False = they market it for highlining, None = not
+    # yet checked, or the page is gone or silent. The URL is the page that says
+    # it, so the claim can be re-checked.
+    manufacturer_not_for_highline: bool | None = None
+    manufacturer_not_for_highline_source: str | None = None
+
     # The brands that SELL this product without making it — the co-listing half
     # of `brand_id`, which only ever says who makes it. Slack Inov and Spider
     # Slacklines each carry the other's full range on their own site, and a

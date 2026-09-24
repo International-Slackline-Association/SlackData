@@ -37,6 +37,21 @@ Notes on choices made, and what still needs a decision, are at the bottom.
 > conditions that are rarely stated and rarely comparable between brands. Treat them as a rough
 > guide to how a webbing behaves, not as a specification you can calculate against.
 >
+> ### ISA certification
+>
+> *(Added 2026-09-24 — **not yet ISA-reviewed**; send to the ISA before this ships. Anchored at
+> `/safety#isa-certification`, which every ISA-approved gear detail page links to.)*
+>
+> The International Slackline Association (ISA) publishes gear standards for slackline equipment,
+> and certifies products tested against them. A product marked **ISA Approved** here is one we have
+> matched to an entry on the ISA's approved-gear list. Everything else reads **Not ISA Certified** -
+> including products we simply hold no ISA record for.
+>
+> **A certificate covers a specific model and version.** Check that the gear in your hands is the
+> one that was certified, and read what each standard does and does not cover, on the ISA's own
+> pages: ISA gear standards (https://www.slacklineinternational.org/isa-gear-standards/) and the
+> ISA approved-gear list (https://data.slacklineinternational.org/safety/isa-approved-gear/).
+>
 > ### Certification and warnings
 >
 > SlackData records whether we believe a product is ISA-certified, and whether it is subject to an
@@ -49,7 +64,7 @@ Notes on choices made, and what still needs a decision, are at the bottom.
 >
 > ### Discontinued gear
 >
-> SlackData deliberately includes gear that is no longer sold, marked **Legacy**, because knowing
+> SlackData deliberately includes gear that is no longer sold, marked **Historic**, because knowing
 > what a discontinued product was is useful. Its presence here is not a suggestion that it is still
 > fit to use. Equipment degrades with age, use, and storage, and older gear may predate current
 > standards. Inspect and retire gear according to the manufacturer's guidance, not according to
@@ -73,3 +88,12 @@ on it, squeezing the search box to ~130px at ~1200px wide. It is a standing
 notice, so the footer — which every listing page carries — is enough.)
 
 > **Community-sourced — may be incomplete.**
+
+---
+
+## C. Detail-page certification note
+
+*(Added 2026-09-24 — not yet ISA-reviewed.)* Shown under the ISA Approved stamp on every certified
+gear detail page, and nowhere else:
+
+> Certified to an ISA gear standard. [What the standards cover](https://www.slacklineinternational.org/isa-gear-standards/) · [How we record certification](/safety#isa-certification)

@@ -259,7 +259,7 @@ Candidates, ranked by the e2e time they relieve:
 | Component | Relieves | What moves | What must stay e2e |
 |-----------|----------|------------|--------------------|
 | `RangeSlider.tsx` | `range_slider` (0:16) + the 6-tests-per-range-group loop in `filters` | min/max inputs render, unit label, thumb drag, clamping an out-of-range typed value | "filtering by this range actually removes cards" |
-| `GearCard.tsx` | `gear_cards` (5:12) | badge/brand/name/spec-row/tag/price render, Legacy badge, ISA badge | the card renders correctly from **real API rows** — one pass per gear type |
+| `GearCard.tsx` | `gear_cards` (5:12) | badge/brand/name/spec-row/tag/price render, Historic badge, ISA badge | the card renders correctly from **real API rows** — one pass per gear type |
 | `CurrencySelector.tsx` | `currency` (1:27) | auto-entry first, exactly-one-active, code in the closed selector | conversion applied across cards/detail/compare, persistence across reload |
 | `StretchFilter.tsx` / `StretchChart.tsx` | the stretch block in `filters` (~30 tests) | pill rendering, top-5 selection, single-select behaviour | pill **counts** against the real webbing set |
 | `SpecTable.tsx` | `gear_detail` (3:08) | unit suffixes, null-row omission, label text | one real-data pass per gear type — see the warning below |

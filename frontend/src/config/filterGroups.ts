@@ -3,7 +3,7 @@
 // Mirrors the FILTER_GROUPS map in cypress/e2e/filters.cy.ts, which was verified
 // against slack_data/models/*.py + utilities/. RENDER FROM THIS CONFIG, not from
 // model field presence: treepro has an isa_warning model field but no ISA filter
-// group here, and kits have isa_certified but no isa_warning — matching the spec.
+// group here, and kits have neither (the ISA does not certify a kit) — matching the spec.
 //
 //   'pill'  — enum / boolean / discrete-int field → multi-select toggle buttons
 //   'range' — numeric field → a min + max input pair with a unit label
@@ -50,8 +50,7 @@ export interface FilterGroupMeta {
   capitalize?: boolean // pills only; title-case the display labels (e.g. pair→Pair)
   // pills only; canonical value order for fields whose domain order is meaningful
   // rather than alphabetical. Values not listed here sort after, alphabetically.
-  // No group uses it today (classification, the one ranked domain, is no longer a
-  // filter) — kept for the next ranked enum.
+  // No group uses it today — kept for the next ranked enum.
   order?: readonly string[]
   // pills only; offer an explicit "None" pill for items with no value in this
   // field, instead of silently excluding them. Only isa_warning uses it: an
@@ -182,7 +181,6 @@ export const FILTER_GROUPS: Record<GearSlug, FilterGroupMeta[]> = {
     { group: 'webbing_width',    label: 'Webbing Width',     type: 'pill', pillKind: 'int', unit: 'mm' },
     { group: 'webbing_length',   label: 'Webbing Length',    type: 'pill', pillKind: 'int', unit: 'm' },
     { group: 'includes_treepro', label: 'Includes Tree Pro', type: 'pill', pillKind: 'bool' },
-    { group: 'isa_certified',    label: 'ISA Certified',     type: 'pill', pillKind: 'bool' },
     { group: 'weight',           label: 'Kit Weight',        type: 'range', unit: 'g' },
     // Brand comes LAST: it is the longest group in the sidebar (45 brands on
     // webbings, even folded) and the least specific, so it sits below the spec
@@ -196,7 +194,6 @@ export const FILTER_GROUPS: Record<GearSlug, FilterGroupMeta[]> = {
     { group: 'webbing_width',    label: 'Webbing Width',     type: 'pill', pillKind: 'int', unit: 'mm' },
     { group: 'webbing_length',   label: 'Webbing Length',    type: 'pill', pillKind: 'int', unit: 'm' },
     { group: 'includes_treepro', label: 'Includes Tree Pro', type: 'pill', pillKind: 'bool' },
-    { group: 'isa_certified',    label: 'ISA Certified',     type: 'pill', pillKind: 'bool' },
     // Kit Weight is intentionally NOT filterable for trickline kits: only 2 of 9
     // carry weight data, so a slider would be misleading.
     // Brand comes LAST: it is the longest group in the sidebar (45 brands on

@@ -27,7 +27,7 @@ def clean_tricklinekit_data(trick: dict) -> dict:
         cleaned[k] = None if v == "" else v
 
     # Booleans
-    for key in ("includes_treepro", "isa_certified"):
+    for key in ("includes_treepro",):
         if key in cleaned:
             cleaned[key] = to_bool(cleaned.get(key))
 
@@ -71,13 +71,14 @@ def add_tricklinekits_to_db(tricks: list[dict], session: SessionDep) -> None:
             weight=t.get("weight"),
             tensioning_type=t.get("tensioning_type"),
             includes_treepro=t.get("includes_treepro", False),
-            isa_certified=t.get("isa_certified", False),
             price=t.get("price"),
             currency=currency,
             description=t.get("description"),
             version=t.get("version"),
             notes=t.get("notes"),
             active=t.get("active"),
+            manufacturer_not_for_highline=t.get("manufacturer_not_for_highline"),
+            manufacturer_not_for_highline_source=t.get("manufacturer_not_for_highline_source"),
             # Brand names only — see the model. Absent stays None, not [].
             gear_sellers=t.get("gear_sellers") or None,
         )

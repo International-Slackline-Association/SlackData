@@ -25,10 +25,6 @@ export const FIBER_MATERIALS = [
 ] as const
 export type FiberMaterial = (typeof FIBER_MATERIALS)[number]
 
-// models/webbing.py — Classification
-export const CLASSIFICATIONS = ['A+', 'A', 'B', 'C', 'Not for Highline'] as const
-export type Classification = (typeof CLASSIFICATIONS)[number]
-
 // models/webbing.py — WebbingConstruction
 export const WEBBING_CONSTRUCTIONS = ['Flat', 'Tubular', 'Core/Sheath', 'Other'] as const
 export type WebbingConstruction = (typeof WEBBING_CONSTRUCTIONS)[number]

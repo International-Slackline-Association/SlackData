@@ -1,14 +1,32 @@
-// The /safety page. Content is SAFETY_AND_ACCURACY.md §A3, verbatim.
+// The /safety page. Content is SAFETY_AND_ACCURACY.md §A3, verbatim. The ISA
+// certification section is deep-linked from certified detail pages
+// (/safety#isa-certification); useScrollRestoration scrolls to the fragment.
 //
 // Kept as plain JSX rather than rendered markdown: it's one static page, and
 // pulling in a markdown renderer to display it would add a dependency and a
 // bundle cost for a single route. If more prose pages appear, revisit.
 
-const ISA_WARNINGS_URL = 'https://data.slacklineinternational.org/safety/isa-gear-warnings/'
+import {
+  ISA_APPROVED_GEAR_URL,
+  ISA_CERTIFICATION_ANCHOR,
+  ISA_STANDARDS_URL,
+  ISA_WARNINGS_URL,
+} from '@/config/isaLinks'
 
-function Section({ title, children }: { title: string; children: React.ReactNode }) {
+const extLink = 'font-medium text-teal-primary hover:underline'
+
+function Section({
+  id,
+  title,
+  children,
+}: {
+  id?: string
+  title: string
+  children: React.ReactNode
+}) {
   return (
-    <section className="mt-8">
+    // scroll-mt clears the sticky top nav when a detail page deep-links here.
+    <section id={id} className="mt-8 scroll-mt-[calc(var(--header-h,96px)+1rem)]">
       <h2 className="text-lg font-bold text-gray-900">{title}</h2>
       <div className="mt-3 space-y-4 text-sm leading-relaxed text-gray-700">{children}</div>
     </section>
@@ -48,6 +66,44 @@ export default function SafetyPage() {
           </p>
         </Section>
 
+        <Section id={ISA_CERTIFICATION_ANCHOR} title="ISA certification">
+          <p>
+            The International Slackline Association (ISA) publishes gear standards for slackline
+            equipment, and certifies products tested against them. A product marked{' '}
+            <strong className="font-semibold text-gray-900">ISA Approved</strong> here is one we
+            have matched to an entry on the ISA&apos;s approved-gear list. Everything else reads{' '}
+            <strong className="font-semibold text-gray-900">Not ISA Certified</strong> - including
+            products we simply hold no ISA record for.
+          </p>
+          <p>
+            <strong className="font-semibold text-gray-900">
+              A certificate covers a specific model and version.
+            </strong>{' '}
+            Check that the gear in your hands is the one that was certified, and read what each
+            standard does and does not cover, on the ISA&apos;s own pages:{' '}
+            <a
+              data-cy="isa-standards-link"
+              href={ISA_STANDARDS_URL}
+              target="_blank"
+              rel="noreferrer"
+              className={extLink}
+            >
+              ISA gear standards
+            </a>{' '}
+            and the{' '}
+            <a
+              data-cy="isa-approved-gear-link"
+              href={ISA_APPROVED_GEAR_URL}
+              target="_blank"
+              rel="noreferrer"
+              className={extLink}
+            >
+              ISA approved-gear list
+            </a>
+            .
+          </p>
+        </Section>
+
         <Section title="Certification and warnings">
           <p>
             SlackData records whether we believe a product is ISA-certified, and whether it is
@@ -69,7 +125,7 @@ export default function SafetyPage() {
               href={ISA_WARNINGS_URL}
               target="_blank"
               rel="noreferrer"
-              className="font-medium text-teal-primary hover:underline"
+              className={extLink}
             >
               data.slacklineinternational.org/safety/isa-gear-warnings
             </a>
@@ -79,7 +135,7 @@ export default function SafetyPage() {
         <Section title="Discontinued gear">
           <p>
             SlackData deliberately includes gear that is no longer sold, marked{' '}
-            <strong className="font-semibold text-gray-900">Legacy</strong>, because knowing what a
+            <strong className="font-semibold text-gray-900">Historic</strong>, because knowing what a
             discontinued product was is useful. Its presence here is not a suggestion that it is
             still fit to use. Equipment degrades with age, use, and storage, and older gear may
             predate current standards. Inspect and retire gear according to the manufacturer&apos;s

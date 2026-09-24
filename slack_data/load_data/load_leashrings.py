@@ -5,7 +5,6 @@ from slack_data.load_data._seed_io import (
     read_seed_json,
     require_seed_id,
     seed_path,
-    to_bool,
 )
 from slack_data.models.brands import Brand, get_brand
 from slack_data.models.leashrings import LeashRing, LeashRingCreate
@@ -26,10 +25,8 @@ def clean_leashring_data(leashring: dict) -> dict:
     """
     cleaned_leashring = leashring
     for key, value in leashring.items():
-        if key not in {"name", "brand_id", "material", "isa_certified"} and value == "":
+        if key not in {"name", "brand_id", "material"} and value == "":
             cleaned_leashring[key] = None
-        elif key == "isa_certified":
-            cleaned_leashring[key] = to_bool(value)
         elif key == "gear_sellers":
             # A list of brand names, bound for a JSON column. The str()
             # branch below would store the Python repr of it, which reads
@@ -63,11 +60,12 @@ def add_leashrings_to_db(leashrings: list[dict], session: SessionDep) -> None:
             outer_diameter=leashring.get("outer_diameter"),
             weight=leashring.get("weight"),
             breaking_strength=leashring.get("breaking_strength"),
-            isa_certified=leashring.get("isa_certified", False),
             price=leashring.get("price"),
             currency=currency,
             notes=leashring.get("notes"),
             active=leashring.get("active"),
+            manufacturer_not_for_highline=leashring.get("manufacturer_not_for_highline"),
+            manufacturer_not_for_highline_source=leashring.get("manufacturer_not_for_highline_source"),
             # Brand names only — see the model. Absent stays None, not [].
             gear_sellers=leashring.get("gear_sellers") or None,
         )

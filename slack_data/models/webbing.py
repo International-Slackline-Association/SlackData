@@ -16,94 +16,6 @@ class FiberMaterial(str, Enum):
     # No HYBRID member: `Webbing.material` is a list, so a hybrid is spelled out
     # as its component fibers, e.g. ["Polyester", "Dyneema/HMPE"].
 
-class Classification(str, Enum):
-    A_PLUS = "A+"
-    A = "A"
-    B = "B"
-    C = "C"
-    NOT_FOR_HIGHLINE = "Not for Highline"
-
-
-# Best-to-worst ordering, used to pick the strongest class of a hybrid's fibers.
-_CLASSIFICATION_RANK = {
-    Classification.A_PLUS: 4,
-    Classification.A: 3,
-    Classification.B: 2,
-    Classification.C: 1,
-    Classification.NOT_FOR_HIGHLINE: 0,
-}
-
-
-def classify_webbing(
-    material: "list[FiberMaterial] | None",
-    breaking_strength: float | None,
-) -> Classification:
-    """Derive the ISA highline classification from a webbing's fibers + breaking
-    strength (kN).
-
-    `material` is the full fiber list. A multi-fiber (formerly "hybrid") webbing is
-    graded on its *strongest* component fiber: a Polyester/Dyneema webbing is graded
-    on its polyester, because the HMPE strand contributes no ISA class of its own.
-
-    Missing fibers or strength -> Not for Highline.
-    """
-    if not material or breaking_strength is None:
-        return Classification.NOT_FOR_HIGHLINE
-
-    return max(
-        (_classify_fiber(fiber, breaking_strength) for fiber in material),
-        key=lambda c: _CLASSIFICATION_RANK[c],
-    )
-
-
-def _classify_fiber(
-    material: "FiberMaterial",
-    breaking_strength: float,
-) -> Classification:
-    """Classification of a single fiber at a given breaking strength.
-
-    ISA certifies single webbings by strength class, gated by fiber material:
-      - Nylon (PA):      eligible for all classes (C/B/A/A+) by strength.
-      - Polyester (PES): eligible for B/A/A+ only; Type C is NOT certified for PES.
-      - HMPE (Dyneema/UHMWPE and Vectran): ISA does not certify these as single
-        webbings below 30 kN (the Type B/C cells read "not certified as single
-        webbings"); at 30 kN+ they take the strength-based class -> A (>=30),
-        A+ (>=40). No Type B or C for HMPE.
-      - Everything else (Other): never certified -> Not for Highline.
-
-    Strength thresholds (inclusive): A+ >= 40, A >= 30, B >= 26, C >= 22 kN.
-    """
-    # HMPE fibers (Dyneema/UHMWPE, Vectran): not certified as single webbings
-    # under 30 kN; at 30 kN+ take the strength class (A >=30, A+ >=40). No B/C.
-    if material in (FiberMaterial.DYNEEMA, FiberMaterial.VECTRAN):
-        if breaking_strength >= 40:
-            return Classification.A_PLUS
-        if breaking_strength >= 30:
-            return Classification.A
-        return Classification.NOT_FOR_HIGHLINE
-
-    if material == FiberMaterial.NYLON:
-        if breaking_strength >= 40:
-            return Classification.A_PLUS
-        if breaking_strength >= 30:
-            return Classification.A
-        if breaking_strength >= 26:
-            return Classification.B
-        if breaking_strength >= 22:
-            return Classification.C
-        return Classification.NOT_FOR_HIGHLINE
-
-    if material == FiberMaterial.POLYESTER:
-        if breaking_strength >= 40:
-            return Classification.A_PLUS
-        if breaking_strength >= 30:
-            return Classification.A
-        if breaking_strength >= 26:
-            return Classification.B
-        return Classification.NOT_FOR_HIGHLINE  # no Type C for polyester
-
-    return Classification.NOT_FOR_HIGHLINE
-
 class WebbingConstruction(str, Enum):
     FLAT = "Flat"
     TUBULAR = "Tubular"
@@ -128,8 +40,15 @@ class BaseWebbing(SQLModel):
     weight: float | None = None           # g/m
     breaking_strength: float | None = None # kN
     stretch: str | None = None            # like [{"kn":0, "percent": 0.0}, ...]
+    # All three set ONLY by load_isa_certifications.py, from the ISA's
+    # approved-gear list (`isa_certified.json`) — never read from the seed. Not
+    # matched there means not certified. `isa_certificate` is the plain Webbing
+    # certificate when there is one, else the Sewn Loop one. `isa_class` is the
+    # certificate's letter (`ISA:41:A+` -> "A+"), or, when the certificate has
+    # none, the letter its breaking strength earns; None on uncertified rows.
     isa_certified: bool = False
-    classification: Classification | None = None
+    isa_certificate: str | None = None
+    isa_class: str | None = None
     isa_warning: ISAWarning | None = None
     colors: str | None = None
     price: float | None = None
@@ -138,6 +57,15 @@ class BaseWebbing(SQLModel):
     version: str | None = None
     notes: str | None = None
     active: bool | None = Field(default=None, index=True)
+
+    # Whether the MAKER says this is not for highlining — a researched fact,
+    # sourced from their own product page, and never computed from a spec
+    # (a low breaking strength is our inference, not their statement). True =
+    # they say so explicitly, False = they market it for highlining, None = not
+    # yet checked, or the page is gone or silent. The URL is the page that says
+    # it, so the claim can be re-checked.
+    manufacturer_not_for_highline: bool | None = None
+    manufacturer_not_for_highline_source: str | None = None
 
     # The brands that SELL this product without making it — the co-listing half
     # of `brand_id`, which only ever says who makes it. Slack Inov and Spider

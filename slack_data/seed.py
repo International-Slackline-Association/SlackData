@@ -14,6 +14,10 @@ Importing this module also imports every table model + loader, so
 from sqlmodel import Session, select
 
 from slack_data.load_data.load_grips import load_grips
+from slack_data.load_data.load_isa_certifications import (
+    has_isa_certifications,
+    load_isa_certifications,
+)
 from slack_data.load_data.load_isa_warnings import has_isa_warnings, load_isa_warnings
 from slack_data.load_data.load_leashrings import load_leashrings
 from slack_data.load_data.load_manufacturers import load_manufacturers
@@ -108,3 +112,10 @@ def seed_catalog(session: Session) -> None:
     if not has_isa_warnings(session):
         print("Applying ISA gear warnings from isa_gear_warnings.json...")
         load_isa_warnings(session=session)
+    # Beside the warnings pass and for the same reasons: it addresses gear rows
+    # by primary key, so every gear table must be populated first, and it is
+    # gated on its own detail table being empty. This is the ONLY place
+    # `isa_certified` is ever set — the gear seeds no longer carry it.
+    if not has_isa_certifications(session):
+        print("Applying ISA certifications from isa_certified.json...")
+        load_isa_certifications(session=session)

@@ -6,7 +6,7 @@
 // over the image), the Detailed-view panel and the standalone detail page (both
 // inline next to the product name) — so the colors can't drift apart.
 
-export default function LegacyBadge({
+export default function HistoricBadge({
   active,
   className = '',
 }: {
@@ -16,10 +16,10 @@ export default function LegacyBadge({
   if (active !== false) return null
   return (
     <span
-      data-cy="legacy-badge"
+      data-cy="historic-badge"
       className={`rounded-full bg-red-600 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-white shadow-sm ${className}`}
     >
-      Legacy
+      Historic
     </span>
   )
 }

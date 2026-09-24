@@ -158,7 +158,6 @@ export default function ManufacturerApiPage() {
     "breaking_strength": 33.4,
     "material": "Polyester",
     "webbing_construction": "Flat",
-    "isa_certified": false,
     "price": 2.5,
     "currency": "USD",
     "product_url": "https://www.balancecommunity.com/products/aero-1",

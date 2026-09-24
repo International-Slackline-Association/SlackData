@@ -338,34 +338,16 @@ describe('Card inline width range — Weblocks', () => {
   })
 })
 
-// ── Classification bubble on the card ─────────────────────────────────────────
-// [data-cy="classification-pill"] is an ISA CLASS statement, and webbing only.
-// Two cases put one on a card (see src/.../ClassificationBubble.tsx):
-//   · the webbing is ISA certified → its granted class (A+/A/B/C). A letter
-//     class is an ISA grant, so an uncertified webbing must not show one even
-//     though the backend computes a class for every webbing — the bubble would
-//     read as certification.
-//   · breaking_strength < 22 kN → the gray "Not for Highline" pill, certified or
-//     not. Below the Type C floor no fiber is highline-rated, so that's a fact
-//     about the webbing, not a withheld grant.
-// Anything else uncertified gets [data-cy="uncertified-pill"] instead, on the
-// five showsUncertified types — including an uncertified "Not for Highline" at
-// 22 kN+ (e.g. 25 kN polyester, which misses Type C only because ISA doesn't
-// certify PES that low), and any webbing whose strength is unknown. The two
-// pills are mutually exclusive; that suite is below this one.
-// On items that do qualify, the same bubble the detail page shows beside the
-// product name is overlaid on the card's image area, top-right — so the class is
-// readable while scanning the grid.
+// ── ISA class letter on the card ──────────────────────────────────────────────
+// [data-cy="isa-class-pill"] is the ISA class of a CERTIFIED webbing, and
+// webbing only (see src/components/gear/IsaStatusLabel.tsx). It is `isa_class`
+// from the API: the certificate's own letter, else the loader's
+// strength-derived one. An uncertified webbing never shows a letter, and there
+// is no longer a strength-based "Not for Highline" pill of any kind.
 
-const HIGHLINE_MIN_KN = 22
-const NOT_FOR_HIGHLINE = 'Not for Highline'
-
-describe('Card classification bubble — Webbings', () => {
-  let withClass: Record<string, unknown> | undefined
-  let uncertifiedWithClass: Record<string, unknown> | undefined
-  let weakUncertified: Record<string, unknown> | undefined
-  let strongUncertifiedNfh: Record<string, unknown> | undefined
-  let withoutClass: Record<string, unknown> | undefined
+describe('Card ISA class letter — Webbings', () => {
+  let certified: Record<string, unknown> | undefined
+  let uncertified: Record<string, unknown> | undefined
 
   const cardFor = (id: unknown) =>
     cy.get(`[data-cy="gear-card"]:has([data-cy="gear-card-name"][href="/webbings/${id}"])`)
@@ -373,34 +355,8 @@ describe('Card classification bubble — Webbings', () => {
   before(() => {
     cy.fetchAllItems('webbing').then((all) => {
       const items = all as Record<string, unknown>[]
-      const classed = (i: Record<string, unknown>) =>
-        i.classification != null && i.classification !== ''
-      const kn = (i: Record<string, unknown>) =>
-        typeof i.breaking_strength === 'number' ? i.breaking_strength : null
-      const weak = (i: Record<string, unknown>) => {
-        const v = kn(i)
-        return v !== null && v < HIGHLINE_MIN_KN
-      }
-
-      withClass = items.find(i => classed(i) && i.isa_certified === true)
-      // Uncertified with a LETTER class — the case that must stay hidden. Its
-      // strength is irrelevant: a sub-22 kN webbing is never a letter class.
-      uncertifiedWithClass = items.find(
-        i => classed(i) && i.isa_certified !== true && i.classification !== NOT_FOR_HIGHLINE,
-      )
-      // Uncertified and under the floor — the case the pill must come back for.
-      weakUncertified = items.find(
-        i => i.isa_certified !== true && i.classification === NOT_FOR_HIGHLINE && weak(i),
-      )
-      // "Not for Highline" for a certification reason rather than a strength one
-      // (>= 22 kN, or strength unknown) — still hidden.
-      strongUncertifiedNfh = items.find(
-        i => i.isa_certified !== true && i.classification === NOT_FOR_HIGHLINE && !weak(i),
-      )
-      // The dataset currently classifies every webbing (the class is computed
-      // from fibers + strength), so this one usually finds nothing and the
-      // test below bails — it guards the null path for when it doesn't.
-      withoutClass = items.find(i => !classed(i))
+      certified = items.find(i => i.isa_certified === true && typeof i.isa_class === 'string')
+      uncertified = items.find(i => i.isa_certified !== true)
     })
   })
 
@@ -408,80 +364,37 @@ describe('Card classification bubble — Webbings', () => {
     cy.visit('/webbings')
   })
 
-  it('shows the bubble with the item’s class on a certified, classified webbing', () => {
-    if (!withClass) return
-    cardFor(withClass.id)
-      .find('[data-cy="classification-pill"]')
+  it('shows the letter on a certified webbing', () => {
+    expect(certified, 'a certified webbing with a class').to.be.an('object')
+    cardFor(certified!.id)
+      .find('[data-cy="isa-class-pill"]')
       .should('be.visible')
-      .and('have.attr', 'data-classification', String(withClass.classification))
-      .and('contain.text', String(withClass.classification))
+      .and('have.attr', 'data-isa-class', String(certified!.isa_class))
+      .and('contain.text', String(certified!.isa_class))
   })
 
-  it('omits the letter class on a webbing that is not ISA certified', () => {
-    if (!uncertifiedWithClass) return
-    cardFor(uncertifiedWithClass.id).within(() => {
-      cy.get('[data-cy="classification-pill"]').should('not.exist')
-      // …and says so, rather than leaving the corner empty.
-      cy.get('[data-cy="uncertified-pill"]').should('be.visible')
+  it('shows no letter on an uncertified webbing', () => {
+    if (!uncertified) return
+    cardFor(uncertified.id).within(() => {
+      cy.get('[data-cy="isa-class-pill"]').should('not.exist')
+      cy.get('[data-cy="isa-not-certified-pill"]').should('be.visible')
     })
   })
 
-  it('shows "Not for Highline" on an uncertified webbing under 22 kN', () => {
-    if (!weakUncertified) return
-    cardFor(weakUncertified.id)
-      .find('[data-cy="classification-pill"]')
-      .should('be.visible')
-      .and('have.attr', 'data-classification', NOT_FOR_HIGHLINE)
-      .and('contain.text', NOT_FOR_HIGHLINE)
-  })
-
-  it('omits "Not for Highline" when the webbing is 22 kN or more', () => {
-    if (!strongUncertifiedNfh) return
-    cardFor(strongUncertifiedNfh.id).within(() => {
-      cy.get('[data-cy="classification-pill"]').should('not.exist')
-      // A certification gap, not a strength warning — so "Uncertified".
-      cy.get('[data-cy="uncertified-pill"]').should('be.visible')
-    })
-  })
-
-  it('omits the bubble entirely when the webbing has no classification', () => {
-    if (!withoutClass) return
-    cardFor(withoutClass.id)
-      .find('[data-cy="classification-pill"]')
-      .should('not.exist')
-  })
-
-  it('shows a bubble only where certification or sub-22 kN justifies it', () => {
-    // Sweep the whole grid: every rendered bubble is either a letter class on a
-    // card that also carries the ISA stamp, or a "Not for Highline" pill on a
-    // card whose data-breaking-strength is under the floor. (dataAttrs() spells
-    // field names with dashes, and writes "" for a null value.)
+  it('shows a letter only on cards that carry the ISA stamp', () => {
     cy.get('[data-cy="gear-card"]').should('exist')
     cy.get('[data-cy="gear-card"]').each(($card) => {
-      const $pill = $card.find('[data-cy="classification-pill"]')
-      if ($pill.length === 0) return
-      const cls = $pill.attr('data-classification')
-      const certified = $card.find('[data-cy="isa-approved-badge"]').length > 0
-      if (cls === NOT_FOR_HIGHLINE) {
-        // A certified webbing shows its granted class at any strength; an
-        // uncertified one only as the sub-22 kN warning.
-        if (certified) return
-        const raw = $card.attr('data-breaking-strength')
-        expect(raw, `${NOT_FOR_HIGHLINE} pill card states a breaking strength`)
-          .to.not.be.oneOf([undefined, ''])
-        expect(Number(raw), `${NOT_FOR_HIGHLINE} pill is on a sub-22 kN card`)
-          .to.be.lessThan(HIGHLINE_MIN_KN)
-      } else {
-        expect(certified, `letter class ${cls} is on a certified card`).to.equal(true)
-      }
+      if ($card.find('[data-cy="isa-class-pill"]').length === 0) return
+      expect($card.find('[data-cy="isa-approved-badge"]').length, 'stamp beside the letter')
+        .to.be.greaterThan(0)
     })
   })
 
-  it('overlays the bubble on the top-right of the image area', () => {
-    if (!withClass) return
-    cardFor(withClass.id).within(() => {
+  it('overlays the letter on the top-right of the image area', () => {
+    if (!certified) return
+    cardFor(certified.id).within(() => {
       cy.get('[data-cy="gear-card-image-area"]').then(($area) => {
-        cy.get('[data-cy="classification-pill"]').then(($pill) => {
+        cy.get('[data-cy="isa-class-pill"]').then(($pill) => {
           const area = $area[0].getBoundingClientRect()
           const pill = $pill[0].getBoundingClientRect()
           // Inside the image area …
@@ -496,31 +409,39 @@ describe('Card classification bubble — Webbings', () => {
     })
   })
 
-  it('stacks the ISA stamp above the class bubble when the item is certified', () => {
-    cy.fetchAllItems('webbing').then((all) => {
-      const both = (all as Record<string, unknown>[]).find(
-        i => i.classification != null && i.classification !== '' && i.isa_certified === true,
-      )
-      if (!both) return
-      cardFor(both.id).within(() => {
-        cy.get('[data-cy="isa-approved-badge"]').then(($badge) => {
-          cy.get('[data-cy="classification-pill"]').then(($pill) => {
-            expect($badge[0].getBoundingClientRect().bottom)
-              .to.be.lte($pill[0].getBoundingClientRect().top + 1)
-          })
+  // Left of the stamp, not under it: stacked below, the letter sat behind the
+  // carousel's right arrow, which is centred in the image band.
+  it('puts the class letter to the left of the ISA stamp, clear of the carousel arrows', () => {
+    if (!certified) return
+    cardFor(certified.id).within(() => {
+      cy.get('[data-cy="isa-approved-badge"]').then(($badge) => {
+        cy.get('[data-cy="isa-class-pill"]').then(($pill) => {
+          const stamp = $badge[0].getBoundingClientRect()
+          const pill = $pill[0].getBoundingClientRect()
+          expect(pill.right).to.be.lte(stamp.left + 1)
+          // Beside the stamp, not below it.
+          expect(pill.top).to.be.lt(stamp.bottom)
+        })
+      })
+      cy.get('[data-cy="gear-card-image-area"]').then(($area) => {
+        cy.get('[data-cy="isa-class-pill"]').then(($pill) => {
+          const area = $area[0].getBoundingClientRect()
+          // The arrows are h-9 (36px) centred vertically: keep above them.
+          const arrowTop = area.top + area.height / 2 - 18
+          expect($pill[0].getBoundingClientRect().bottom).to.be.lte(arrowTop)
         })
       })
     })
   })
 })
 
-// Non-webbing types have no classification field at all — nothing should render.
+// Only webbing carries a class letter.
 GEAR_TYPES.filter(g => g.slug !== 'webbings').forEach(({ slug, label }) => {
-  describe(`Card classification bubble — ${label} (none expected)`, () => {
-    it('never renders a classification bubble', () => {
+  describe(`Card ISA class letter — ${label} (none expected)`, () => {
+    it('never renders a class letter', () => {
       cy.visit(`/${slug}`)
       cy.get('[data-cy="gear-card"]').should('exist')
-      cy.get('[data-cy="classification-pill"]').should('not.exist')
+      cy.get('[data-cy="isa-class-pill"]').should('not.exist')
     })
   })
 })
@@ -933,84 +854,91 @@ GEAR_TYPES.forEach(({ slug, apiPath, label }) => {
   })
 })
 
-// ── "Uncertified" pill ────────────────────────────────────────────────────────
-// Certification used to be shown by its absence: a certified card carried the
-// ISA stamp, an uncertified one carried nothing, which reads as "nobody has
-// looked" rather than "not certified". Now the five life-supporting types
-// (showsUncertified in support/gear_types.ts — webbing, weblock, leash ring,
-// grip, roller) say it: [data-cy="uncertified-pill"], the quietest thing in the
-// stack. Kits and tree protectors are excluded — a kit is a bundle rather than
-// a certified component, so the label would be noise on every card.
-//
-// On webbing it competes with the sub-22 kN "Not for Highline" classification
-// pill, which is the more specific statement and wins; the two are never both
-// on one card.
+// ── "Not ISA Certified" pill ─────────────────────────────────────────────────
+// Two certification labels only, both from the ISA's approved-gear list: the
+// ISA stamp, or the solid red "Not ISA Certified" pill. On the five certifiable
+// types (support/gear_types.ts — webbing, weblock, leash ring, grip, roller)
+// every card carries exactly one of the two. Kits and tree protectors cannot be
+// ISA certified and carry neither. The old outlined "Uncertified" pill and the
+// strength-computed gray "Not for Highline" pill are gone.
 
-const UNCERTIFIED_TYPES = GEAR_TYPES.filter(t => t.showsUncertified)
-const PLAIN_TYPES = GEAR_TYPES.filter(t => !t.showsUncertified)
+const CERTIFIABLE_TYPES = GEAR_TYPES.filter(t => t.certifiable)
+const PLAIN_TYPES = GEAR_TYPES.filter(t => !t.certifiable)
 
-UNCERTIFIED_TYPES.forEach(({ slug, apiPath, label }) => {
-  describe(`Uncertified pill — ${label}`, () => {
+CERTIFIABLE_TYPES.forEach(({ slug, apiPath, label }) => {
+  describe(`Not ISA Certified pill — ${label}`, () => {
     const cardFor = (id: unknown) =>
       cy.get(`[data-cy="gear-card"]:has([data-cy="gear-card-name"][href="/${slug}/${id}"])`)
 
-    it('labels an item with no ISA grant "Uncertified"', () => {
+    it('labels an item the ISA has not approved "Not ISA Certified", in solid red', () => {
       cy.fetchAllItems(apiPath).then((all) => {
-        // Not the sub-22 kN webbing case — that one shows "Not for Highline".
-        const item = (all as Record<string, unknown>[]).find(
-          i => i.isa_certified !== true
-            && !(typeof i.breaking_strength === 'number' && i.breaking_strength < 22),
-        )
+        const item = (all as Record<string, unknown>[]).find(i => i.isa_certified !== true)
         if (!item) return
         cy.visit(`/${slug}`)
         cardFor(item.id)
-          .find('[data-cy="uncertified-pill"]')
+          .find('[data-cy="isa-not-certified-pill"]')
           .should('be.visible')
-          .and('contain.text', 'Uncertified')
+          .and('have.text', 'Not ISA Certified')
+          .and('have.css', 'color', 'rgb(255, 255, 255)')
       })
     })
 
-    it('never labels a certified item "Uncertified"', () => {
+    // Same colour scheme as the Historic badge. Compared against a rendered
+    // Historic badge rather than a literal: Tailwind v4 serialises red-600 as
+    // oklch, and what matters is that the two reds are one red.
+    it('uses the Historic badge\'s red', () => {
+      cy.fetchAllItems(apiPath).then((all) => {
+        const items = all as Record<string, unknown>[]
+        const item = items.find(i => i.isa_certified !== true && i.active === false)
+        if (!item) return
+        cy.visit(`/${slug}`)
+        cardFor(item.id).within(() => {
+          cy.get('[data-cy="historic-badge"]').then(($historic) => {
+            const historicBg = getComputedStyle($historic[0]).backgroundColor
+            cy.get('[data-cy="isa-not-certified-pill"]')
+              .should('have.css', 'background-color', historicBg)
+          })
+        })
+      })
+    })
+
+    it('never labels a certified item "Not ISA Certified"', () => {
       cy.fetchAllItems(apiPath).then((all) => {
         const certified = (all as Record<string, unknown>[]).find(i => i.isa_certified === true)
         if (!certified) return
         cy.visit(`/${slug}`)
         cardFor(certified.id).within(() => {
           cy.get('[data-cy="isa-approved-badge"]').should('exist')
-          cy.get('[data-cy="uncertified-pill"]').should('not.exist')
+          cy.get('[data-cy="isa-not-certified-pill"]').should('not.exist')
         })
       })
     })
 
     it('gives every card exactly one certification statement', () => {
-      // Sweep the grid: a card carries the stamp, or the Uncertified pill, or —
-      // webbing under the highline floor — the "Not for Highline" pill. Never
-      // two of them, and never none.
       cy.visit(`/${slug}`)
       cy.get('[data-cy="gear-card"]').should('exist')
       cy.get('[data-cy="gear-card"]').each(($card) => {
         const stamp = $card.find('[data-cy="isa-approved-badge"]').length
-        const uncertified = $card.find('[data-cy="uncertified-pill"]').length
-        const nfh = $card
-          .find('[data-cy="classification-pill"][data-classification="Not for Highline"]').length
-        expect(stamp + uncertified + nfh, 'one of stamp / Uncertified / Not for Highline')
-          .to.equal(1)
+        const notCertified = $card.find('[data-cy="isa-not-certified-pill"]').length
+        expect(stamp + notCertified, 'one of stamp / Not ISA Certified').to.equal(1)
       })
+      // …and none of the retired labels.
+      cy.get('[data-cy="uncertified-pill"]').should('not.exist')
+      cy.get('[data-cy="classification-pill"]').should('not.exist')
     })
 
-    it('stacks the Uncertified pill under the ISA warning bubble', () => {
+    it('stacks the pill above the ISA warning bubble', () => {
       cy.fetchAllItems(apiPath).then((all) => {
         const warned = (all as Record<string, unknown>[]).find(
-          i => i.isa_warning != null && i.isa_warning !== 'No Warning' && i.isa_certified !== true
-            && !(typeof i.breaking_strength === 'number' && i.breaking_strength < 22),
+          i => i.isa_warning != null && i.isa_warning !== 'No Warning' && i.isa_certified !== true,
         )
         if (!warned) return
         cy.visit(`/${slug}`)
         cardFor(warned.id).within(() => {
           cy.get('[data-cy="isa-warning-badge"]').then(($badge) => {
-            cy.get('[data-cy="uncertified-pill"]').then(($pill) => {
-              expect($badge[0].getBoundingClientRect().bottom)
-                .to.be.lte($pill[0].getBoundingClientRect().top + 1)
+            cy.get('[data-cy="isa-not-certified-pill"]').then(($pill) => {
+              expect($pill[0].getBoundingClientRect().bottom)
+                .to.be.lte($badge[0].getBoundingClientRect().top + 1)
             })
           })
         })
@@ -1020,11 +948,12 @@ UNCERTIFIED_TYPES.forEach(({ slug, apiPath, label }) => {
 })
 
 PLAIN_TYPES.forEach(({ slug, label }) => {
-  describe(`Uncertified pill — ${label} (none expected)`, () => {
-    it('never labels a card "Uncertified"', () => {
+  describe(`Not ISA Certified pill — ${label} (none expected)`, () => {
+    it('carries no certification label at all', () => {
       cy.visit(`/${slug}`)
       cy.get('[data-cy="gear-card"]').should('exist')
-      cy.get('[data-cy="uncertified-pill"]').should('not.exist')
+      cy.get('[data-cy="isa-not-certified-pill"]').should('not.exist')
+      cy.get('[data-cy="isa-approved-badge"]').should('not.exist')
     })
   })
 })

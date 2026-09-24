@@ -10,7 +10,6 @@ from slack_data.models.webbing import (
     Webbing,
     WebbingConstruction,
     WebbingCreate,
-    classify_webbing,
 )
 from slack_data.utilities.currencies import Currency
 
@@ -31,8 +30,6 @@ def clean_webbing_data(webbing: dict) -> dict:
     for key, value in webbing.items():
         if key in {"width", "weight"} and value == "":
             cleaned_webbing[key] = 0
-        elif key == "isa_certified":
-            cleaned_webbing[key] = bool(value) if isinstance(value, str) else value
         elif key in {"stretch", "materialComposition"}:
             # stretch (list of {kn, percent}) and materialComposition (list of
             # fiber names) are stored as valid JSON — the generic str() branch
@@ -82,14 +79,14 @@ def add_webbings_to_db(webbings: list[dict], session: SessionDep) -> None:
             # some null weights, so pass None through instead of float(None).
             weight=float(webbing.get("weight")) if webbing.get("weight") not in (None, "") else None,
             breaking_strength=breaking_strength,
-            classification=classify_webbing(material, breaking_strength),
             stretch=webbing.get("stretch"),
             thickness=float(webbing.get("thickness")) if webbing.get("thickness") not in (None, "") else None,
             webbing_construction=get_webbing_construction(webbing.get("webbing_construction")),
-            isa_certified=webbing.get("isa_certified", False),
             price=parse_price(webbing.get("priceMeter")),
             currency=parse_currency(webbing.get("currency")),
             active=webbing.get("active"),
+            manufacturer_not_for_highline=webbing.get("manufacturer_not_for_highline"),
+            manufacturer_not_for_highline_source=webbing.get("manufacturer_not_for_highline_source"),
             # Brand names only — see the model. Absent stays None, not [].
             gear_sellers=webbing.get("gear_sellers") or None,
         )
