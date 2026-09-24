@@ -21,7 +21,7 @@
 //     colour-blind reader.
 //
 // Ink is #1F2937 on the amber and gray fills for the same reason
-// ClassificationBubble uses it: white text fails WCAG AA on both.
+// IsaStatusLabel's class letter uses it: white text fails WCAG AA on both.
 
 const INK = '#1F2937'
 

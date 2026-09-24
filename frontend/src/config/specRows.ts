@@ -116,8 +116,8 @@ export const SPEC_ROWS: Record<GearSlug, SpecRowDef[]> = {
     plain('weight', 'Weight', 'g/m'),
     plain('breaking_strength', 'Breaking Strength', 'kN'),
     stretchRow,
-    // classification is NOT a spec row — it renders as a colored bubble beside
-    // the product name (see ClassificationBubble).
+    // The ISA class letter is NOT a spec row — on a certified webbing it
+    // renders as a colored bubble beside the product name (see IsaStatusLabel).
     { ...plain('colors', 'Colors'), render: 'chips' },
   ],
   weblocks: [

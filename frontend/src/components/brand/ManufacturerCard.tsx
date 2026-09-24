@@ -3,7 +3,7 @@
 // It reuses GearCard's shell verbatim: same radius/border/shadow/hover, and the
 // same h-40 centered image area on bg-gray-50 with an absolutely-positioned
 // top-right overlay. Only the contents of those slots differ — the product shot
-// becomes the brand logo, and the classification/ISA overlay becomes a single
+// becomes the brand logo, and the ISA certification overlay becomes a single
 // country flag.
 //
 // The card root carries data-count-{slug} for ALL eight available gear types
@@ -91,15 +91,15 @@ export default function ManufacturerCard({ brand }: { brand: BrandWithCounts }) 
         brand.active ? '' : 'opacity-75'
       }`}
     >
-      {/* Image area — the gear card's, with the flag where the classification
-          bubble sits. */}
+      {/* Image area — the gear card's, with the flag where the ISA
+          certification labels sit. */}
       <div
         data-cy="manufacturer-image-area"
         className="relative flex h-40 shrink-0 items-center justify-center bg-gray-50"
       >
         {/* Top-LEFT: the status pill, in the same slot the gear card uses for its
             category badge — so the two card types read the same way. Top-RIGHT is
-            the flag, mirroring the gear card's classification bubble. */}
+            the flag, mirroring the gear card's ISA labels. */}
         {!brand.active && (
           <span
             data-cy="manufacturer-inactive"

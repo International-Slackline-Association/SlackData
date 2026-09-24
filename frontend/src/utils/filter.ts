@@ -78,7 +78,7 @@ export function derivePillOptions(items: AnyItem[], meta: FilterGroupMeta): Pill
   } else if (kind === 'bool') {
     values.sort((a, b) => (a === 'true' ? 0 : 1) - (b === 'true' ? 0 : 1)) // Yes before No
   } else if (order) {
-    // Explicit domain order (e.g. classification A+ → Not for Highline). Values
+    // Explicit domain order (a ranked enum, A+ → C). Values
     // outside the list sort after it, alphabetically.
     const idx = (v: string) => {
       const i = order.indexOf(v)

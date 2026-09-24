@@ -1,7 +1,7 @@
 // A single gear card. Anatomy (top→bottom) per DESIGN.md and gear_cards.cy.ts:
 //   image · top-right overlay, in order: ISA stamp (if certified) · ISA warning
-//     bubble (recall/warning/notice) · classification bubble (granted class,
-//     sub-22 kN "Not for Highline", or "Uncertified")
+//     bubble (recall/warning/notice) · IsaStatusLabel (webbing class letter
+//     when certified, or the red "Not ISA Certified" on certifiable types)
 //   brand (small caps) · product name (link) · inline specs · price (amber)
 // No gear-type badge: every listing is single-type, so it would be redundant.
 // (Revisit when manufacturer pages mix types — see DESIGN.md card anatomy.)
@@ -20,8 +20,8 @@ import { dataAttrs, formatValue, type AnyItem } from '@/utils/format'
 import { imageUrls } from '@/utils/images'
 import BrandLink from '@/components/brand/BrandLink'
 import CardImageCarousel from './CardImageCarousel'
-import ClassificationBubble from './ClassificationBubble'
 import IsaApprovedBadge from './IsaApprovedBadge'
+import IsaStatusLabel from './IsaStatusLabel'
 import IsaWarningBadge from './IsaWarningBadge'
 import HistoricBadge from './HistoricBadge'
 
@@ -134,21 +134,35 @@ export default function GearCard({
         {/* Top-left: lifecycle status. Historic = no longer sold; nothing renders
             for active/unknown gear. Mirrors the manufacturer card's Inactive pill. */}
         <HistoricBadge active={item.active} className="pointer-events-none absolute left-2 top-2 z-10" />
-        {/* Top-right stack: certification first, then any ISA warning, then the
-            highline class. Certification is the question a reader brings to the
-            grid, so it leads; the class refines it and sits last. Same bubble
-            component as the detail page, so the colors can't drift apart. */}
-        <div className="pointer-events-none absolute right-2 top-2 z-10 flex flex-col items-end gap-1.5">
-          {isaCertified && <IsaApprovedBadge />}
-          {/* Severity above the class: a recalled Type A webbing must not read
-              as "Type A" before it reads as "RECALL". */}
-          <IsaWarningBadge value={meta.hasISAWarning ? item.isa_warning : null} />
-          <ClassificationBubble
-            value={item.classification}
-            certified={isaCertified}
-            breakingStrength={item.breaking_strength}
-            showUncertified={meta.showsUncertified}
-          />
+        {/* Top-right cluster: the ISA stamp pinned in the corner, and to its
+            LEFT a column: the red "Not ISA Certified" pill when uncertified,
+            then any ISA warning, then (certified webbing) the class letter.
+            Side by side rather than one tall stack so everything stays in the
+            top ~68px: the carousel arrows are centred in the band (y ≈ 62–98),
+            and a letter stacked under the stamp sat right behind the right
+            arrow. The pill leads because it stands where the stamp would —
+            the certification statement comes first either way. Severity sits
+            above the class, so a recalled Type A webbing never reads as
+            "Type A" before it reads as "RECALL". Same label component as the
+            detail page, so the colors can't drift apart. */}
+        <div className="pointer-events-none absolute right-2 top-2 z-10 flex items-start gap-1.5">
+          <div className="flex flex-col items-end gap-1.5">
+            {!isaCertified && (
+              <IsaStatusLabel
+                certified={false}
+                isaClass={null}
+                showNotCertified={meta.certifiable}
+              />
+            )}
+            <IsaWarningBadge value={meta.hasISAWarning ? item.isa_warning : null} />
+            {isaCertified && <IsaStatusLabel certified isaClass={item.isa_class} />}
+          </div>
+          {isaCertified && (
+            <IsaApprovedBadge
+              certificate={item.isa_certificate as string | null | undefined}
+              isaClass={item.isa_class as string | null | undefined}
+            />
+          )}
         </div>
         <CardImageCarousel urls={images} alt={String(item.name)} />
       </div>

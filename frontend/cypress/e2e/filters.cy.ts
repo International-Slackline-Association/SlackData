@@ -32,8 +32,8 @@ interface FilterGroup {
 const FILTER_GROUPS: Record<string, FilterGroup[]> = {
   // ── Webbing ───────────────────────────────────────────────────────────────
   // Fields: material(enum) width(int) weight(float) breaking_strength(float)
-  //         stretch(str|None→pill) isa_certified(bool) classification(enum — excluded,
-  //         it's a badge, not an axis) isa_warning(enum)
+  //         stretch(str|None→pill) isa_certified(bool) isa_warning(enum)
+  //         isa_class / isa_certificate (loader-set — excluded, a badge, not an axis)
   //         colors(str, comma-sep — excluded, needs split logic)
   webbings: [
     // Price is the FIRST group in every sidebar (DESIGN.md § Left Filter Sidebar).
@@ -42,9 +42,9 @@ const FILTER_GROUPS: Record<string, FilterGroup[]> = {
     { group: 'price',             label: 'Price per meter',   type: 'range', valueAttr: 'data-price-display' },
     { group: 'material',          label: 'Material Type',     type: 'pill'  },
     { group: 'width',             label: 'Width',             type: 'range', unit: 'mm' }, // dual-thumb slider
-    // classification is deliberately NOT a filter group — it's a badge on the
-    // items that earn one (ISA-certified, or under 22 kN), not an axis of the
-    // catalogue (see the "is not a filter" describe below).
+    // The ISA class letter is deliberately NOT a filter group — it's a badge on
+    // certified webbings only, not an axis of the catalogue. ISA Certified is
+    // the filter.
     { group: 'isa_certified',     label: 'ISA Certified',     type: 'pill'  },
     { group: 'isa_warning',       label: 'ISA Warning',       type: 'pill'  }, // Recall/Warning/Notice/No Warning
     // stretch has its own widget — see the dedicated describe block below FILTER_GROUPS
@@ -145,15 +145,15 @@ const FILTER_GROUPS: Record<string, FilterGroup[]> = {
   // ── Starter Kit ───────────────────────────────────────────────────────────
   // Fields: webbing_length(int) webbing_width(int) weight(float)
   //         tensioning_type(enum: Single Ratchet/Double Ratchet/Primitive/Other)
-  //         includes_treepro(bool) isa_certified(bool)
-  // No isa_warning on this model.
+  //         includes_treepro(bool)
+  // No isa_certified and no isa_warning on this model — the ISA does not
+  // certify a kit.
   starterkits: [
     { group: 'price',            label: 'Price',             type: 'range', valueAttr: 'data-price-display' },
     { group: 'tensioning_type',  label: 'Tensioning',        type: 'pill'  }, // Single Ratchet/Double Ratchet/Primitive/Other
     { group: 'webbing_width',    label: 'Webbing Width',     type: 'pill', unit: 'mm' }, // discrete int
     { group: 'webbing_length',   label: 'Webbing Length',    type: 'pill', unit: 'm'  }, // discrete int
     { group: 'includes_treepro', label: 'Includes Tree Pro', type: 'pill'  },
-    // isa_certified HIDDEN — no starter kit is ISA certified.
     { group: 'weight',           label: 'Kit Weight',        type: 'range', unit: 'g' },
     { group: 'brand',             label: 'Brand',             type: 'pill'  }, // maker OR co-listing seller — see brand_filter.cy.ts
   ],
@@ -162,14 +162,13 @@ const FILTER_GROUPS: Record<string, FilterGroup[]> = {
   // Same shape as StarterKit but TensioningType has no "Primitive" value.
   // Fields: webbing_length(int) webbing_width(int) weight(float)
   //         tensioning_type(enum: Single Ratchet/Double Ratchet/Other)
-  //         includes_treepro(bool) isa_certified(bool)
+  //         includes_treepro(bool) — no isa_certified, as for starter kits
   tricklinekits: [
     { group: 'price',            label: 'Price',             type: 'range', valueAttr: 'data-price-display' },
     { group: 'tensioning_type',  label: 'Tensioning',        type: 'pill'  }, // Single Ratchet/Double Ratchet/Other (no Primitive)
     { group: 'webbing_width',    label: 'Webbing Width',     type: 'pill', unit: 'mm' },
     { group: 'webbing_length',   label: 'Webbing Length',    type: 'pill', unit: 'm'  },
     { group: 'includes_treepro', label: 'Includes Tree Pro', type: 'pill'  },
-    // isa_certified HIDDEN — no trickline kit is ISA certified.
     // Kit Weight is NOT filterable for trickline kits — only 2 of 9 have weight
     // data, so a slider would mislead (see filterGroups.ts).
     { group: 'brand',             label: 'Brand',             type: 'pill'  }, // maker OR co-listing seller — see brand_filter.cy.ts
@@ -538,24 +537,6 @@ GEAR_TYPES.forEach(({ slug, apiPath, label }) => {
           .should(($el) => expect($el.val()).to.eq($el.attr('min')))
       })
     })
-  })
-})
-
-// ── No classification filter ──────────────────────────────────────────────────
-// The ISA highline class is a property of ISA certification, not an independent
-// axis of the catalogue: an uncertified webbing may compute a class from its
-// fibers and strength, but ISA never granted it. Filtering the whole grid by it
-// would imply otherwise, so the sidebar has no Classification group at all —
-// ISA Certified is the filter for the letter classes, and Breaking Strength
-// already covers the sub-22 kN "Not for Highline" case. The class shows as a
-// badge on the items that earn one instead.
-
-describe('Webbing classification is not a filter', () => {
-  it('has no Classification group in the sidebar', () => {
-    cy.visit('/webbings')
-    cy.get('[data-cy="filter-sidebar"]').should('be.visible')
-    cy.get('[data-cy="filter-group"][data-group="classification"]').should('not.exist')
-    cy.get('[data-cy="filter-sidebar"]').should('not.contain.text', 'Classification')
   })
 })
 
@@ -1058,7 +1039,7 @@ describe('ISA Certified filter visibility', () => {
     cy.get('[data-cy="filter-group"][data-group="isa_certified"]').should('not.exist')
   })
 
-  it('is HIDDEN for starter kits and trickline kits (none certified)', () => {
+  it('is ABSENT for starter kits and trickline kits (the ISA does not certify kits)', () => {
     cy.visit('/starterkits')
     cy.get('[data-cy="filter-group"][data-group="isa_certified"]').should('not.exist')
     cy.visit('/tricklinekits')

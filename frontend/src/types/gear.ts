@@ -7,7 +7,7 @@
 // contract. Until Phase 0 lands, detail/compare features will not resolve.
 
 import type {
-  AttachmentPoint, BearingMaterial, Classification, ConnectionType, Currency,
+  AttachmentPoint, BearingMaterial, ConnectionType, Currency,
   FiberMaterial, FrontPin, ISAWarning, LockType, MetalMaterial, PriceUnit,
   RollerMaterial, SliderType, StarterKitTensioningType, TricklineKitTensioningType,
   WebbingConstruction, WeblockStyle,
@@ -34,6 +34,12 @@ export interface GearBase {
   // ever the maker. Names, resolved to the catalogue's own spelling at seed
   // time. null when none are recorded. See CLAUDE.md § Co-listings.
   gear_sellers: string[] | null
+  // The maker's own statement that this is not for highlining — researched from
+  // their product page, never computed from breaking strength. true = they say
+  // so, false = they market it for highlining, null = not yet checked or the
+  // page is silent. `_source` is the URL that supports the value.
+  manufacturer_not_for_highline: boolean | null
+  manufacturer_not_for_highline_source: string | null
 }
 
 export interface Webbing extends GearBase {
@@ -45,7 +51,10 @@ export interface Webbing extends GearBase {
   breaking_strength: number | null
   stretch: string | null // JSON array: [{"kn": 0, "percent": 0.0}, ...]
   isa_certified: boolean
-  classification: Classification | null
+  isa_certificate: string | null
+  // The ISA class letter (A+/A/B/C): the certificate's own, else derived from
+  // breaking_strength by the loader. Only ever set on a certified webbing.
+  isa_class: string | null
   isa_warning: ISAWarning | null
   colors: string | null
 }
@@ -59,6 +68,7 @@ export interface Weblock extends GearBase {
   front_pin: FrontPin | null
   attachment_point: AttachmentPoint | null
   isa_certified: boolean
+  isa_certificate: string | null
   isa_warning: ISAWarning | null
   colors: string | null
 }
@@ -69,6 +79,7 @@ export interface LeashRing extends GearBase {
   outer_diameter: number | null
   breaking_strength: number | null
   isa_certified: boolean
+  isa_certificate: string | null
   isa_warning: ISAWarning | null
 }
 
@@ -81,6 +92,7 @@ export interface Grip extends GearBase {
   common_slipping_threshold: number | null
   connection_type: ConnectionType | null
   isa_certified: boolean
+  isa_certificate: string | null
   isa_warning: ISAWarning | null
 }
 
@@ -93,6 +105,7 @@ export interface Roller extends GearBase {
   width: string | null // raw range text e.g. "25–35mm" — not numeric
   breaking_strength: number | null
   isa_certified: boolean
+  isa_certificate: string | null
   isa_warning: ISAWarning | null
   colors: string | null
 }
@@ -111,8 +124,8 @@ export interface StarterKit extends GearBase {
   webbing_width: number
   tensioning_type: StarterKitTensioningType
   includes_treepro: boolean
-  isa_certified: boolean
-  // NOTE: no isa_warning on this model.
+  // NOTE: no isa_certified and no isa_warning on this model — a kit is a
+  // bundle, not a component the ISA certifies.
 }
 
 export interface TricklineKit extends GearBase {
@@ -120,8 +133,8 @@ export interface TricklineKit extends GearBase {
   webbing_width: number
   tensioning_type: TricklineKitTensioningType
   includes_treepro: boolean
-  isa_certified: boolean
-  // NOTE: no isa_warning on this model.
+  // NOTE: no isa_certified and no isa_warning on this model — a kit is a
+  // bundle, not a component the ISA certifies.
 }
 
 // Union of every concrete gear item.

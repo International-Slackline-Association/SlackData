@@ -12,7 +12,7 @@ import { GEAR_TYPES } from '../support/gear_types'
 //      stops matching isa_gear_warnings.json onto gear rows.
 //   2. Severity is legible WITHOUT colour — the status word is in the DOM and
 //      in `data-isa-warning`, so a red/amber swap can't silently invert meaning.
-//   3. The bubble sits ABOVE the classification bubble. A recalled Type A
+//   3. The bubble sits ABOVE the ISA class letter. A recalled Type A
 //      webbing must not read as "Type A" first.
 //   4. The three types with no `isa_warning` model field never render any of it.
 
@@ -183,10 +183,10 @@ describe('ISA warning bubble — gear cards', () => {
       })
     })
 
-    it('sits ABOVE the classification bubble when both are present', () => {
+    it('sits ABOVE the ISA class letter when both are present', () => {
       cy.fetchAllItems('webbing').then((all) => {
         const both = (all as Item[]).find(
-          i => i.isa_warning != null && i.isa_certified === true && i.classification != null,
+          i => i.isa_warning != null && i.isa_certified === true && i.isa_class != null,
         )
         if (!both) return
         cy.visit('/webbings')
@@ -195,7 +195,7 @@ describe('ISA warning bubble — gear cards', () => {
           .closest('[data-cy="gear-card"]')
           .within(() => {
             cy.get('[data-cy="isa-warning-badge"]').then(($badge) => {
-              cy.get('[data-cy="classification-pill"]').then(($pill) => {
+              cy.get('[data-cy="isa-class-pill"]').then(($pill) => {
                 expect($badge[0].getBoundingClientRect().top).to.be.lessThan(
                   $pill[0].getBoundingClientRect().top,
                 )
@@ -205,7 +205,7 @@ describe('ISA warning bubble — gear cards', () => {
       })
     })
 
-    it('sits BELOW the ISA stamp when the item is certified', () => {
+    it('sits LEFT of the ISA stamp when the item is certified', () => {
       cy.fetchAllItems('webbing').then((all) => {
         const both = (all as Item[]).find(
           i => i.isa_warning != null && i.isa_warning !== 'No Warning' && i.isa_certified === true,
@@ -216,12 +216,12 @@ describe('ISA warning bubble — gear cards', () => {
           .contains('[data-cy="gear-card-name"]', both.name as string)
           .closest('[data-cy="gear-card"]')
           .within(() => {
-            // Certification leads the stack (DESIGN.md § Gear Card Anatomy) —
-            // the warning is second, above the class.
+            // The stamp holds the corner (DESIGN.md § Gear Card Anatomy); the
+            // warning heads the column beside it, above the class letter.
             cy.get('[data-cy="isa-approved-badge"]').then(($stamp) => {
               cy.get('[data-cy="isa-warning-badge"]').then(($badge) => {
-                expect($stamp[0].getBoundingClientRect().bottom).to.be.lte(
-                  $badge[0].getBoundingClientRect().top + 1,
+                expect($badge[0].getBoundingClientRect().right).to.be.lte(
+                  $stamp[0].getBoundingClientRect().left + 1,
                 )
               })
             })

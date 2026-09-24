@@ -27,6 +27,11 @@
 
 import { Link } from 'react-router-dom'
 import type { GearTypeMeta } from '@/config/gearTypes'
+import {
+  ISA_APPROVED_GEAR_URL,
+  ISA_CERTIFICATION_ANCHOR,
+  ISA_STANDARDS_URL,
+} from '@/config/isaLinks'
 import { useCurrency } from '@/context/CurrencyContext'
 import { useOriginState } from '@/context/OriginContext'
 import { useIsaWarnings } from '@/hooks/useIsaWarnings'
@@ -35,8 +40,8 @@ import { imageUrls } from '@/utils/images'
 import BrandLink from '@/components/brand/BrandLink'
 import AlsoSoldBy from './AlsoSoldBy'
 import CardImageCarousel from './CardImageCarousel'
-import ClassificationBubble from './ClassificationBubble'
 import IsaApprovedBadge from './IsaApprovedBadge'
+import IsaStatusLabel from './IsaStatusLabel'
 import { isaWarningStatus } from './IsaWarningBadge'
 import IsaWarningPanel from './IsaWarningPanel'
 import HistoricBadge from './HistoricBadge'
@@ -78,6 +83,16 @@ export default function GearDetailBody({
   // The full ISA entries behind that status word — description, what to do,
   // date, sources. Shared index, fetched once (see useIsaWarnings).
   const isaWarnings = useIsaWarnings(meta.apiPath, item.id as number)
+  const isaCertified = meta.hasISA && item.isa_certified === true
+  // The maker's own "not for highlining", researched from their page — never
+  // derived from strength. Only a `true` is drawn: `false` (marketed for
+  // highlining) and `null` (not checked, or the page is silent) say nothing.
+  const notForHighline = item.manufacturer_not_for_highline === true
+  const notForHighlineSource =
+    typeof item.manufacturer_not_for_highline_source === 'string' &&
+    item.manufacturer_not_for_highline_source !== ''
+      ? item.manufacturer_not_for_highline_source
+      : null
   const nameClass = 'text-2xl font-bold text-gray-900'
 
   return (
@@ -92,59 +107,81 @@ export default function GearDetailBody({
         </div>
 
         <div className="min-w-0">
-          <div
-            data-cy="detail-brand"
-            className="text-xs font-medium uppercase tracking-wide text-gray-500"
-          >
-            <BrandLink name={item.brand_name} />
-          </div>
-          <div className="mt-1 flex flex-wrap items-center gap-2.5">
-            {nameHref ? (
-              <Link
-                data-cy="detail-name"
-                to={nameHref}
-                state={originState}
-                className={`${nameClass} hover:text-teal-primary`}
-              >
-                {String(item.name)}
-              </Link>
-            ) : (
-              <h1 data-cy="detail-name" className={nameClass}>
-                {String(item.name)}
-              </h1>
-            )}
-            {/* No showUncertified here, unlike the card: the certification
-                block further down already says "Not ISA Certified" in full, and
-                two statements of the same fact within one screen is one too
-                many. The card has no such block, which is why it gets the pill. */}
-            <ClassificationBubble
-              value={item.classification}
-              certified={meta.hasISA && item.isa_certified === true}
-              breakingStrength={item.breaking_strength}
-            />
-            {/* Same pill as the listing card, inline here since there's no
-                image corner to pin it to. */}
-            <HistoricBadge active={item.active} />
-          </div>
-          {price && (
-            <div className="mt-2">
+          {/* Header row: brand / name / price on the left, the ISA stamp on the
+              right. The stamp links to the ISA's approved-gear list — the ISA's
+              own record of the certificate, which is where the details belong
+              (we no longer repeat them here). Its alt/title name the primary
+              certificate, `isa_certificate`: the plain Webbing certificate
+              where there is one, else the Sewn Loop one (set by the loader). */}
+          <div className="flex items-start gap-4">
+            <div className="min-w-0 flex-1">
               <div
-                data-cy="detail-price"
-                data-approx={price.approx ? 'true' : 'false'}
-                className="text-xl font-bold"
-                style={{ color: '#E8770A' }}
+                data-cy="detail-brand"
+                className="text-xs font-medium uppercase tracking-wide text-gray-500"
               >
-                {price.text}
+                <BrandLink name={item.brand_name} />
               </div>
-              {/* What the manufacturer actually charges, kept visible so a
-                  converted figure is never mistaken for the sticker price. */}
-              {price.original && (
-                <div data-cy="detail-price-original" className="text-xs text-gray-500">
-                  {price.original} as sold
+              <div className="mt-1 flex flex-wrap items-center gap-2.5">
+                {nameHref ? (
+                  <Link
+                    data-cy="detail-name"
+                    to={nameHref}
+                    state={originState}
+                    className={`${nameClass} hover:text-teal-primary`}
+                  >
+                    {String(item.name)}
+                  </Link>
+                ) : (
+                  <h1 data-cy="detail-name" className={nameClass}>
+                    {String(item.name)}
+                  </h1>
+                )}
+                {/* No showNotCertified here, unlike the card: the certification
+                    block further down already says "Not ISA Certified" in full, and
+                    two statements of the same fact within one screen is one too
+                    many. The card has no such block, which is why it gets the pill. */}
+                <IsaStatusLabel certified={isaCertified} isaClass={item.isa_class} />
+                {/* Same pill as the listing card, inline here since there's no
+                    image corner to pin it to. */}
+                <HistoricBadge active={item.active} />
+              </div>
+              {price && (
+                <div className="mt-2">
+                  <div
+                    data-cy="detail-price"
+                    data-approx={price.approx ? 'true' : 'false'}
+                    className="text-xl font-bold"
+                    style={{ color: '#E8770A' }}
+                  >
+                    {price.text}
+                  </div>
+                  {/* What the manufacturer actually charges, kept visible so a
+                      converted figure is never mistaken for the sticker price. */}
+                  {price.original && (
+                    <div data-cy="detail-price-original" className="text-xs text-gray-500">
+                      {price.original} as sold
+                    </div>
+                  )}
                 </div>
               )}
             </div>
-          )}
+            {isaCertified && (
+              <a
+                data-cy="isa-stamp-link"
+                href={ISA_APPROVED_GEAR_URL}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={`ISA Approved${item.isa_certificate ? ` (${String(item.isa_certificate)})` : ''} — view on the ISA's approved-gear list`}
+                className="shrink-0 rounded-md transition-opacity hover:opacity-80"
+              >
+                <IsaApprovedBadge
+                  size="detail"
+                  certificate={item.isa_certificate as string | null | undefined}
+                  isaClass={item.isa_class as string | null | undefined}
+                />
+              </a>
+            )}
+          </div>
 
           {/* Severity-coloured, from the same table as the card bubble — a
               recall must not be delivered in the same amber as a notice. */}
@@ -166,14 +203,65 @@ export default function GearDetailBody({
 
           {meta.hasISA && (
             <div data-cy="isa-certification-block" className="mt-5">
-              {item.isa_certified === true ? (
-                <IsaApprovedBadge className="scale-125 origin-left" />
+              {isaCertified ? (
+                <>
+                  {/* The stamp itself is up in the header row. What a certificate covers is the ISA's to say, not ours, so
+                      the note points there — and at /safety for how we record
+                      it. On certified items only: an uncertified one has no
+                      certificate to explain. */}
+                  <p data-cy="isa-certification-note" className="text-xs text-gray-500">
+                    Certified to an ISA gear standard.{' '}
+                    <a
+                      data-cy="isa-certification-note-standards"
+                      href={ISA_STANDARDS_URL}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="font-medium text-teal-primary hover:underline"
+                    >
+                      What the standards cover
+                    </a>
+                    {' · '}
+                    <Link
+                      data-cy="isa-certification-note-safety"
+                      to={`/safety#${ISA_CERTIFICATION_ANCHOR}`}
+                      className="font-medium text-teal-primary hover:underline"
+                    >
+                      How we record certification
+                    </Link>
+                  </p>
+                </>
               ) : (
                 <span data-cy="isa-not-certified-text" className="text-sm text-gray-400">
                   Not ISA Certified
                 </span>
               )}
             </div>
+          )}
+
+          {/* Directly under the certification block, and on the page only —
+              never on the card. It is the manufacturer's statement, so it is
+              worded as theirs and links to where they made it. Rendered on
+              every type (the field is on all eight), including kits and tree
+              protectors, which have no certification block above it. */}
+          {notForHighline && (
+            <p
+              data-cy="manufacturer-not-for-highline"
+              className={`${meta.hasISA ? 'mt-2' : 'mt-5'} text-sm font-medium text-gray-900`}
+            >
+              {notForHighlineSource ? (
+                <a
+                  data-cy="manufacturer-not-for-highline-source"
+                  href={notForHighlineSource}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="hover:underline"
+                >
+                  Manufacturer states not for highlining ↗
+                </a>
+              ) : (
+                'Manufacturer states not for highlining'
+              )}
+            </p>
           )}
 
           <SpecTable item={item} slug={meta.slug} />
