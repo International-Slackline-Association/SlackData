@@ -77,6 +77,8 @@ def add_tricklinekits_to_db(tricks: list[dict], session: SessionDep) -> None:
             version=t.get("version"),
             notes=t.get("notes"),
             active=t.get("active"),
+            manufacturer_not_for_highline=t.get("manufacturer_not_for_highline"),
+            manufacturer_not_for_highline_source=t.get("manufacturer_not_for_highline_source"),
             # Brand names only — see the model. Absent stays None, not [].
             gear_sellers=t.get("gear_sellers") or None,
         )

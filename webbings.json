@@ -873,7 +873,9 @@
         "webbing_construction": "Flat",
         "priceMeter": 1.8,
         "currency": "USD",
-        "active": true
+        "active": true,
+        "manufacturer_not_for_highline": true,
+        "manufacturer_not_for_highline_source": "https://www.balancecommunity.com/products/feather"
     },
     {
         "id": 12,
@@ -2336,7 +2338,9 @@
         "webbing_construction": "Flat",
         "priceMeter": 25,
         "currency": "CZK",
-        "active": true
+        "active": true,
+        "manufacturer_not_for_highline": true,
+        "manufacturer_not_for_highline_source": "https://www.slackshop.cz/en/polyamide/142-eqb-bounce.html"
     },
     {
         "id": 34,
@@ -2406,7 +2410,9 @@
         "webbing_construction": "Tubular",
         "priceMeter": 29,
         "currency": "CZK",
-        "active": true
+        "active": true,
+        "manufacturer_not_for_highline": true,
+        "manufacturer_not_for_highline_source": "https://www.eqb.cz/element-en.html"
     },
     {
         "id": 36,
@@ -2543,6 +2549,8 @@
         "thickness": 2.08,
         "webbing_construction": "Tubular",
         "active": true,
+        "manufacturer_not_for_highline": true,
+        "manufacturer_not_for_highline_source": "https://yogaslackers.com/shop/slackline/eline-webbing/",
         "priceMeter": 4.2,
         "currency": "USD"
     },
@@ -2941,7 +2949,9 @@
         "webbing_construction": "Flat",
         "priceMeter": 1.67,
         "currency": "EUR",
-        "active": true
+        "active": true,
+        "manufacturer_not_for_highline": true,
+        "manufacturer_not_for_highline_source": "https://slack-mountain.com/en/webbing-slackline/7-plum.html"
     },
     {
         "id": 52,
@@ -4648,7 +4658,9 @@
         "webbing_construction": "Flat",
         "priceMeter": 0.85,
         "currency": "EUR",
-        "active": false
+        "active": false,
+        "manufacturer_not_for_highline": true,
+        "manufacturer_not_for_highline_source": "https://www.balanceur.ro/slackshop/benzi/pana-corbului/"
     },
     {
         "id": 67,
@@ -5656,7 +5668,9 @@
         "webbing_construction": "Flat",
         "priceMeter": 18,
         "currency": "CZK",
-        "active": true
+        "active": true,
+        "manufacturer_not_for_highline": true,
+        "manufacturer_not_for_highline_source": "https://www.slackshop.cz/en/custom-length/29-eqb-slim.html"
     },
     {
         "id": 81,
@@ -6095,7 +6109,9 @@
         "webbing_construction": "Tubular",
         "priceMeter": 2.24,
         "currency": "EUR",
-        "active": false
+        "active": false,
+        "manufacturer_not_for_highline": true,
+        "manufacturer_not_for_highline_source": "https://laboutique.slack.fr/fr/sangle-tubulaire/158-supertube-15m-tubulaire.html"
     },
     {
         "id": 103,
@@ -6624,7 +6640,9 @@
         "webbing_construction": "Tubular",
         "priceMeter": 2.0,
         "currency": "USD",
-        "active": true
+        "active": true,
+        "manufacturer_not_for_highline": true,
+        "manufacturer_not_for_highline_source": "https://www.balancecommunity.com/products/11-16-slack-spec-tubular"
     },
     {
         "id": 129,
@@ -6963,7 +6981,9 @@
         "webbing_construction": "Flat",
         "priceMeter": 1.98,
         "currency": "NZD",
-        "active": true
+        "active": true,
+        "manufacturer_not_for_highline": true,
+        "manufacturer_not_for_highline_source": "https://www.slacklineshop.co.nz/product/25mm-flat-slackline-webbing/"
     },
     {
         "id": 143,
@@ -7292,7 +7312,9 @@
         "webbing_construction": "Tubular",
         "priceMeter": 2.24,
         "currency": "EUR",
-        "active": false
+        "active": false,
+        "manufacturer_not_for_highline": true,
+        "manufacturer_not_for_highline_source": "https://laboutique.slack.fr/143-reggae-tubulaire.html"
     },
     {
         "id": 156,
@@ -7314,7 +7336,9 @@
         "webbing_construction": "Tubular",
         "priceMeter": 2.24,
         "currency": "EUR",
-        "active": false
+        "active": false,
+        "manufacturer_not_for_highline": true,
+        "manufacturer_not_for_highline_source": "https://laboutique.slack.fr/fr/sangle-debutant-15-25m/146-rvd-tubulaire.html"
     },
     {
         "id": 157,
@@ -8346,7 +8370,9 @@
         "priceMeter": 1.49,
         "currency": "EUR",
         "notes": "Specs from raed webbing manual Annex A.",
-        "active": true
+        "active": true,
+        "manufacturer_not_for_highline": true,
+        "manufacturer_not_for_highline_source": "https://cdn.shopify.com/s/files/1/0931/7397/3325/files/raed-webbing-manual.pdf"
     },
     {
         "id": 187,
@@ -8678,7 +8704,9 @@
         "priceMeter": 0.69,
         "currency": "EUR",
         "notes": "Specs from raed webbing manual Annex A.",
-        "active": true
+        "active": true,
+        "manufacturer_not_for_highline": true,
+        "manufacturer_not_for_highline_source": "https://raed-sports.com/products/eclipse-lightweight-polyester-webbing"
     },
     {
         "id": 198,
@@ -8744,7 +8772,9 @@
         "webbing_construction": "Tubular",
         "priceMeter": 2,
         "currency": "USD",
-        "active": false
+        "active": false,
+        "manufacturer_not_for_highline": true,
+        "manufacturer_not_for_highline_source": "https://www.balancecommunity.com/products/jelly-webbing"
     },
     {
         "id": 199,
@@ -9170,7 +9200,9 @@
         "webbing_construction": "Flat",
         "priceMeter": 27,
         "currency": "CZK",
-        "active": true
+        "active": true,
+        "manufacturer_not_for_highline": true,
+        "manufacturer_not_for_highline_source": "https://www.slackshop.cz/en/polyester/30-eqb-neon.html"
     },
     {
         "id": 209,
@@ -9350,7 +9382,9 @@
         ],
         "description": "Custom Paradigm rig tuned to Ian Eisenberg's specifications: more stretch, 10% lighter. Freestyle use only.",
         "notes": "Manufacturer marks this FOR EXPERT USE ONLY due to its lower MBS.",
-        "active": true
+        "active": true,
+        "manufacturer_not_for_highline": false,
+        "manufacturer_not_for_highline_source": "https://www.balancecommunity.com/products/paradigm-signature-1"
     },
     {
         "id": 213,
@@ -9870,7 +9904,9 @@
         "stretch": null,
         "description": "20mm soft-stretch nylon webbing with colored sublimation print, sold in 20m lengths. Travel line or home rodeoline.",
         "notes": null,
-        "active": true
+        "active": true,
+        "manufacturer_not_for_highline": true,
+        "manufacturer_not_for_highline_source": "https://slacktivity.com/shop/green-t20/"
     },
     {
         "id": 226,
@@ -11839,7 +11875,8 @@
         "priceMeter": null,
         "currency": null,
         "notes": "Specs direct from Wall Ace (2026-09-10), the only source - there is no product page. In the maker's words this is exactly the same webbing as their Steel Cable, just thinner: the same 25 mm Dyneema-centre, nylon-edge weave, at 27 g/m with an MBS of 13 kN. As with Steel Cable that MBS is the looped, terminated strength rather than a raw tensile figure. Production has stopped, as it has for Steel Cable - the maker's own summary of both is \"comfortable and cheap but not exactly high tech\", which is why - so active is false. Sizing: sold only as a complete highline kit, and always in the same two segments - a 75 m main and an 83 m backup (4 loops included), at an indicative, not-yet-finalised ~580 AUD for the kit. No priceMeter is recorded: `price` on a webbing is per metre, and dividing an unfinalised kit price by 158 m would invent a number the maker has not quoted. Stretch is recorded as null, deliberately. The maker's own account is that it is very hard to put one figure on: roughly 5% between 1 and 3 kN, then about 2.5% more between 3 and 5 kN - so on the order of 7.5% total at 5 kN - with the curve flattening off as load climbs further. That is a shape described from memory, not a measured curve, and the earlier single 2.5% at 5 kN point taken from the announcement post was wrong by a factor of three. A wrong curve on a chart is worse than no curve. Photos: the two Wall Ace webbing images we hold are shared between Steel Cable and Duct Tape. The products are the same weave in two thicknesses, and the maker's own view is that the same picture serves both - and that the one filed under Steel Cable may in fact be Duct Tape. Which image is which is not settled.",
-        "active": false
+        "active": false,
+        "manufacturer_not_for_highline": true
     },
     {
         "id": 260,
