@@ -23,7 +23,6 @@ class BaseTricklineKit(SQLModel):
     product_url: str | None = None
     weight: float | None = None           # g
     includes_treepro: bool = False
-    isa_certified: bool = False
     price: float | None = None
     currency: Currency | None = None
     description: str | None = None

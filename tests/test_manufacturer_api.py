@@ -678,8 +678,9 @@ def test_the_spec_is_exactly_the_fields_the_post_accepts(client, gear):
 
 
 def test_the_spec_omits_the_fields_the_post_refuses(client, gear):
-    """`brand_id` and `classification` are closed on the way in, so they must not
-    appear in a payload whose whole purpose is to be edited and sent back.
+    """`brand_id` and the ISA certification and warning fields are closed on the
+    way in, so they must not appear in a payload whose whole purpose is to be
+    edited and sent back. Both are the ISA's to state, read from its own lists.
 
     `name` is now in that company, for a different reason: it is the handle the
     item is matched by, so it is readable on the row and not editable at all.
@@ -687,7 +688,8 @@ def test_the_spec_omits_the_fields_the_post_refuses(client, gear):
     edited."""
     row = _one_spec_row(client, "webbings", "Mantra MK2")
     assert "brand_id" not in row["spec"]
-    assert "classification" not in row["spec"]
+    for field in ("isa_certified", "isa_certificate", "isa_class", "isa_warning"):
+        assert field not in row["spec"]
     assert "name" not in row["spec"]
 
 
@@ -1394,11 +1396,11 @@ def test_numbers_and_booleans_are_accepted_and_stored_as_json_text(client, gear)
     response = client.post(
         "/manufacturer/gear",
         json={"items": [{"gear_type": "webbings", "name": "Mantra MK2",
-                         "changes": {"weight": 70, "isa_certified": True}}]},
+                         "changes": {"weight": 70, "active": True}}]},
         headers=dev_headers(),
     )
     assert response.status_code == 201
-    assert approved(client)[0]["changes"] == {"weight": "70", "isa_certified": "true"}
+    assert approved(client)[0]["changes"] == {"weight": "70", "active": "true"}
 
 
 def test_a_list_of_scalars_becomes_prose(client, gear):

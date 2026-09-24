@@ -1,7 +1,7 @@
 
 
 from slack_data.database import SessionDep
-from slack_data.load_data._seed_io import read_seed_json, require_seed_id, seed_path, to_bool
+from slack_data.load_data._seed_io import read_seed_json, require_seed_id, seed_path
 from slack_data.models.brands import Brand, get_brand
 from slack_data.models.grips import Grip, GripCreate, ConnectionType
 from slack_data.utilities.currencies import get_currency
@@ -21,10 +21,8 @@ def clean_grip_data(grip: dict) -> dict:
     """
     cleaned_grip = grip
     for key, value in grip.items():
-        if key not in {"name", "manufacturer", "material", "isa_certified"} and value == "":
+        if key not in {"name", "manufacturer", "material"} and value == "":
             cleaned_grip[key] = None
-        elif key == "isa_certified":
-            cleaned_grip[key] = to_bool(value)
         elif key == "gear_sellers":
             # A list of brand names, bound for a JSON column. The str()
             # branch below would store the Python repr of it, which reads
@@ -61,7 +59,6 @@ def add_grips_to_db(grips: list[dict], session: SessionDep) -> None:
             mbs=grip.get("mbs"),
             common_slipping_threshold=grip.get("common_slipping_threshold"),
             connection_type=get_connection_type(str(grip.get("connection_type", ""))),
-            isa_certified=grip.get("isa_certified", False),
             price=grip.get("price"),
             currency=currency,
             active=grip.get("active"),

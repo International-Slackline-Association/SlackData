@@ -26,6 +26,7 @@ from fastapi import APIRouter, FastAPI
 from slack_data.api.routers.brand_router import brand_router
 from slack_data.api.routers.fx_router import fx_router
 from slack_data.api.routers.grip_router import grip_router
+from slack_data.api.routers.isa_certification_router import isa_certification_router
 from slack_data.api.routers.isa_warning_router import isa_warning_router
 from slack_data.api.routers.leashring_router import leashring_router
 from slack_data.api.routers.manufacturer_router import manufacturer_router
@@ -41,14 +42,16 @@ from slack_data.api.routers.weblock_router import weblock_router
 # middleware rather than by a route, so it doesn't belong here.
 SAFE_METHODS = frozenset({"GET", "HEAD"})
 
-# Routers over the catalogue — filtered when READ_ONLY. `fx_router` and
-# `isa_warning_router` are already read-only, so filtering them is a no-op;
-# they're in this list so that a write route added to either one in future is
-# covered by default rather than by remembering to move it.
+# Routers over the catalogue — filtered when READ_ONLY. `fx_router`,
+# `isa_warning_router` and `isa_certification_router` are already read-only, so
+# filtering them is a no-op; they're in this list so that a write route added to
+# any of them in future is covered by default rather than by remembering to
+# move it.
 CATALOG_ROUTERS: tuple[APIRouter, ...] = (
     brand_router,
     fx_router,
     grip_router,
+    isa_certification_router,
     isa_warning_router,
     leashring_router,
     roller_router,

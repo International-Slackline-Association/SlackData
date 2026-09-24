@@ -109,17 +109,6 @@ def test_clean_webbing_empty_optional_field_becomes_none():
     assert result["product_url"] is None
 
 
-def test_clean_webbing_isa_certified_string_true_becomes_bool():
-    result = clean_webbing_data(_base_item(isa_certified="true"))
-    assert result["isa_certified"] is True
-
-
-def test_clean_webbing_isa_certified_empty_string():
-    # isa_certified="" in the JSON means "not certified" — should become False.
-    result = clean_webbing_data(_base_item(isa_certified=""))
-    assert result["isa_certified"] is False
-
-
 def test_clean_webbing_none_value_stays_none():
     result = clean_webbing_data(_base_item(product_url=None))
     assert result["product_url"] is None

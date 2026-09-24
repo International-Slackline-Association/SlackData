@@ -19,7 +19,12 @@ class BaseLeashRing(SQLModel):
     product_url: str | None = None
     weight: float | None = None           # g
     breaking_strength: float | None = None # kN
+    # Both set ONLY by load_isa_certifications.py, from the ISA's approved-gear
+    # list (`isa_certified.json`) — never read from this type's seed. Not
+    # matched there means not certified. `isa_certificate` is the certificate
+    # number (`ISA:51`), which is what picks the stamp image.
     isa_certified: bool = False
+    isa_certificate: str | None = None
     isa_warning: ISAWarning | None = None
     price: float | None = None
     currency: Currency | None = None

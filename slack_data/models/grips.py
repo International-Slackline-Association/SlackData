@@ -29,7 +29,12 @@ class BaseGrip(SQLModel):
     mbs: float | None = None              # kN
     common_slipping_threshold: float | None = None # kN
     connection_type: ConnectionType | None = None
+    # Both set ONLY by load_isa_certifications.py, from the ISA's approved-gear
+    # list (`isa_certified.json`) — never read from this type's seed. Not
+    # matched there means not certified. `isa_certificate` is the certificate
+    # number (`ISA:51`), which is what picks the stamp image.
     isa_certified: bool = False
+    isa_certificate: str | None = None
     isa_warning: ISAWarning | None = None
     price: float | None = None
     currency: Currency | None = None

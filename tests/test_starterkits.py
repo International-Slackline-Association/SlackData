@@ -72,7 +72,6 @@ def test_create_starterkit_with_optional_fields(client, brand):
         "webbing_width": 50,
         "tensioning_type": "Double Ratchet",
         "includes_treepro": True,
-        "isa_certified": True,
         "price": 145.0,
         "currency": "EUR",
         "brand_id": brand.id,
@@ -80,7 +79,6 @@ def test_create_starterkit_with_optional_fields(client, brand):
     assert r.status_code == 200
     data = r.json()
     assert data["includes_treepro"] is True
-    assert data["isa_certified"] is True
 
 
 def test_create_starterkit_missing_required_field_rejected(client, brand):
@@ -105,7 +103,8 @@ def test_create_starterkit_optional_fields_default_null(client, brand):
     data = r.json()
     assert data["price"] is None
     assert data["includes_treepro"] is False
-    assert data["isa_certified"] is False
+    # Kits cannot be ISA certified, so they carry no certification field at all.
+    assert "isa_certified" not in data
 
 
 # --- PATCH ---

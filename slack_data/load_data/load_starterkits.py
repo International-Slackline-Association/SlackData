@@ -30,7 +30,7 @@ def clean_starterkit_data(starterkit: dict) -> dict:
             cleaned_kits[key] = value
 
     # Booleans
-    for key in ("includes_treepro", "isa_certified"):
+    for key in ("includes_treepro",):
         if key in cleaned_kits:
             cleaned_kits[key] = to_bool(cleaned_kits.get(key))
 
@@ -79,7 +79,6 @@ def add_starterkits_to_db(starterkits: list[dict], session: SessionDep) -> None:
             weight=sk.get("weight"),
             tensioning_type=sk.get("tensioning_type"),
             includes_treepro=sk.get("includes_treepro", False),
-            isa_certified=sk.get("isa_certified", False),
             price=sk.get("price"),
             currency=currency,
             description=sk.get("description"),
