@@ -5,6 +5,7 @@ pre-written, red-first Cypress suite that runs on the **real backend** (no mocks
 
 - **Design spec** (visual + per-type filter/sort/spec-row definitions): [DESIGN.md](DESIGN.md)
 - **Architecture / backend conventions**: [CLAUDE.md](CLAUDE.md)
+- **ISA certification overhaul** (two labels, `isa_certified.json`, stamps — S0–S6): [ISA_CERTIFICATION_PLAN.md](ISA_CERTIFICATION_PLAN.md)
 - **Schema is canonical in the Python models** — always read `slack_data/models/*.py` before
   writing frontend code that depends on field names, enums, or nullability. Never trust this doc,
   DESIGN.md, or memory as the schema source.

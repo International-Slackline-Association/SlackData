@@ -83,22 +83,36 @@ Non-phase engineering tasks not tracked in [PLAN.md](PLAN.md) (frontend roadmap)
 
 - [ ] **Auto-sync ISA certification (every 24h).** Build a scheduled job that fetches the
   official ISA-approved gear list from
-  <https://data.slacklineinternational.org/safety/isa-approved-gear/> once per day and
-  reconciles it against the DB, setting `isa_certified` (top-level bool on webbing / leashring /
-  grip / starterkit / tricklinekit; `specifications["ISA approved"]` string `"true"` on weblock;
-  `isa_approved` on roller). Match on brand + model. Report/queue items on the ISA list that have
-  no matching row so the catalog can be filled in. Four of the eight items unmatched at the last
-  manual sync are now held — **BC Wafer 2.0** and **BC Wafer XL** (grips 15, 16), **Slack Inov
-  Zenlock** (weblock 112) and **Cong Gear Path** (webbing 260). What is left:
+  <https://data.slacklineinternational.org/safety/isa-approved-gear/> once per day and refreshes
+  `isa_approved_data.csv`, then rebuilds `isa_certified.json` with `scripts/build_isa_certified.py`
+  (which keeps every hand-written `match` block and reports new certificates with an empty one).
+  Certification is **derived** from that file by `load_isa_certifications.py` — no gear seed
+  carries a flag any more (CLAUDE.md § ISA certifications, [ISA_CERTIFICATION_PLAN.md](ISA_CERTIFICATION_PLAN.md)).
+  So the job's real output is a queue of new certificates to adjudicate, not a DB write. All 17
+  certificates we can hold are matched today, including **BC Loop** (leashring 27, the renamed BC
+  Aluminum Leash Ring) and **SlackX Orange** (hand-matched to weblock 58 `Radrigs Orange`: the
+  approval names the seller). What stays unmatched is tracked in the entries below.
 
-  - **SlackX Orange** — held, as `Radrigs Orange` (weblock 58). The approval names the **seller**,
-    so a brand+model match closes it only if it consults `gear_sellers` (SlackX is named there).
-    This is the one unmatched entry that is a matching bug rather than missing data.
-  - **BC Loop** — the BC Aluminum Leash Ring
-  - **BC Threaded Highline Leash** and **Slacktivity HighlineLeash** — leashes, a gear type we do
-    not model at all. Nothing to match until one exists.
-  - ~~**Cong Gear Path**~~ — closed 2026-09-10: held as webbing **260**, and Cong Gear is now a
-    manufacturer (catalog_id 100). A brand+model match reaches it.
+- [ ] **Leashes as a gear type.** Four ISA:37 certificates wait on it: **BC Threaded Highline
+  Leash**, **Slacktivity HighlineLeash**, **raed PRO leash** and **raed ALPINE leash**
+  (`approved_gear_4`, `10`, `11`, `32` in `isa_certified.json`). Needs the full new-gear-type
+  checklist (CLAUDE.md), then `match` blocks for those four and a rebuild/re-seed.
+
+- [ ] **"Not for highline" research for the other gear types.** `manufacturer_not_for_highline`
+  (+ `_source`) exists on all eight gear models, but the first research pass covered only the 35
+  sub-22 kN webbings (ISA_CERTIFICATION_PLAN.md Appendix A). Still to check against each maker's own
+  page: weblocks, rollers, leash rings, grips, tree protectors, starter kits, trickline kits. `true`
+  only on an explicit statement, `false` when marketed for highlining, `null` when silent or gone.
+
+- [ ] **ISA certificates with no gear row to land on.** Left unmatched, each with a note:
+  - **Slacktivity KingPin** — `approved_gear_27`, ISA:52 **Connector**. We *do* hold a Slacktivity
+    KingPin, as **weblock 41** (style "Tensionable Weblock"); it was left unmatched because a
+    connector certificate is not a weblock certificate. Decide whether it is the same product and
+    whether an ISA:52 certificate should certify a weblock row — matching it would make 18
+    certified rows, not 17.
+  - **Intermittent Connection** webbing certificates (`approved_gear_16`, `19`, `22`, `25`, `26`) —
+    they certify a way of joining webbing, not the webbing, so they never count (the loader refuses
+    them even if matched). Revisit only if we ever model connection methods.
 
 - [ ] **Add bungees as a gear type.** The `Bungee` model already exists on branch
   `bungees_ringpadding` (`slack_data/models/bungees.py`) but has **no seed JSON, no loader, no
@@ -137,8 +151,9 @@ Non-phase engineering tasks not tracked in [PLAN.md](PLAN.md) (frontend roadmap)
   the batch in the wild: a date range, a serial/lot pattern, a colour run. Open questions:
 
   - **Which fields are per-batch?** `breaking_strength`, `stretch`, `weight`, `thickness`,
-    `isa_certified`, `classification`, `isa_warning` are the candidates. `name`, `brand_id`,
-    `width`, `price` almost certainly are not. Getting this list wrong in either direction is what
+    `isa_warning` are the candidates (certification is per certificate, set from
+    `isa_certified.json`, so a batch-scoped one would need the certificate to say which batch).
+    `name`, `brand_id`, `width`, `price` almost certainly are not. Getting this list wrong in either direction is what
     makes the feature either useless or unfillable.
   - **`ISAGearWarning` links by `(gear_type, gear_id)` with no FK** — deliberately, because a
     warning can land on any of five tables. A batch-scoped warning needs a third component, or a

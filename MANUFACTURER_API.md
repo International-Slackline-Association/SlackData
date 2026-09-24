@@ -377,29 +377,37 @@ build, but the endpoint is the thing that cannot go stale.
 are identity. Both sit on the row you read and on the item you post, next to `gear_id` — see § 2.
 Everything below is a key of `changes`.
 
+Nor is anything ISA: certification (`isa_certified`, `isa_certificate`, `isa_class`) and ISA
+warnings (`isa_warning`) come from the ISA's own approved-gear list and warnings database, and are
+not settable here. If our record disagrees with the ISA's, tell us and we'll re-check it against
+their list.
+
 - **`webbings`** — `active`, `brand_name`, `breaking_strength`, `colors`, `currency`, `description`,
-  `isa_certified`, `isa_warning`, `material`, `notes`, `price`, `product_url`,
-  `release_date`, `stretch`, `thickness`, `version`, `webbing_construction`, `weight`, `width`
-- **`weblocks`** — `active`, `attachment_point`, `brand_name`, `breaking_strength`, `colors`,
-  `currency`, `description`, `front_pin`, `isa_certified`, `isa_warning`, `material`,
-  `notes`, `price`, `product_url`, `release_date`, `style`, `version`, `weight`, `width_max`,
-  `width_min`
-- **`leashrings`** — `active`, `brand_name`, `breaking_strength`, `currency`, `description`,
-  `inner_diameter`, `isa_certified`, `isa_warning`, `material`, `notes`, `outer_diameter`,
-  `price`, `product_url`, `release_date`, `version`, `weight`
-- **`grips`** — `active`, `brand_name`, `common_slipping_threshold`, `connection_type`, `currency`,
-  `description`, `isa_certified`, `isa_warning`, `material`, `mbs`, `notes`, `price`,
-  `product_url`, `release_date`, `version`, `weight`, `width_max`, `width_min`, `wll`
-- **`rollers`** — `active`, `bearing_material`, `brand_name`, `breaking_strength`, `colors`,
-  `currency`, `description`, `isa_certified`, `isa_warning`, `lock_type`, `material`,
-  `notes`, `price`, `product_url`, `release_date`, `roller_material`, `slider_type`, `version`,
+  `manufacturer_not_for_highline`, `manufacturer_not_for_highline_source`, `material`, `notes`,
+  `price`, `product_url`, `release_date`, `stretch`, `thickness`, `version`, `webbing_construction`,
   `weight`, `width`
+- **`weblocks`** — `active`, `attachment_point`, `brand_name`, `breaking_strength`, `colors`,
+  `currency`, `description`, `front_pin`, `manufacturer_not_for_highline`,
+  `manufacturer_not_for_highline_source`, `material`, `notes`, `price`, `product_url`,
+  `release_date`, `style`, `version`, `weight`, `width_max`, `width_min`
+- **`leashrings`** — `active`, `brand_name`, `breaking_strength`, `currency`, `description`,
+  `inner_diameter`, `manufacturer_not_for_highline`, `manufacturer_not_for_highline_source`,
+  `material`, `notes`, `outer_diameter`, `price`, `product_url`, `release_date`, `version`, `weight`
+- **`grips`** — `active`, `brand_name`, `common_slipping_threshold`, `connection_type`, `currency`,
+  `description`, `manufacturer_not_for_highline`, `manufacturer_not_for_highline_source`,
+  `material`, `mbs`, `notes`, `price`, `product_url`, `release_date`, `version`, `weight`,
+  `width_max`, `width_min`, `wll`
+- **`rollers`** — `active`, `bearing_material`, `brand_name`, `breaking_strength`, `colors`,
+  `currency`, `description`, `lock_type`, `manufacturer_not_for_highline`,
+  `manufacturer_not_for_highline_source`, `material`, `notes`, `price`, `product_url`,
+  `release_date`, `roller_material`, `slider_type`, `version`, `weight`, `width`
 - **`treepros`** — `active`, `brand_name`, `currency`, `description`, `has_sling_attachment`,
-  `length`, `notes`, `price`, `price_unit`, `product_url`, `release_date`, `thickness`,
-  `version`, `weight`, `width`
+  `length`, `manufacturer_not_for_highline`, `manufacturer_not_for_highline_source`, `notes`,
+  `price`, `price_unit`, `product_url`, `release_date`, `thickness`, `version`, `weight`, `width`
 - **`starterkits`** — `active`, `brand_name`, `currency`, `description`, `includes_treepro`,
-  `isa_certified`, `notes`, `price`, `product_url`, `release_date`, `tensioning_type`,
-  `version`, `webbing_length`, `webbing_width`, `weight`
+  `manufacturer_not_for_highline`, `manufacturer_not_for_highline_source`, `notes`, `price`,
+  `product_url`, `release_date`, `tensioning_type`, `version`, `webbing_length`, `webbing_width`,
+  `weight`
 - **`tricklinekits`** — same as `starterkits`.
 
 ### Units and conventions, so a correct number isn't recorded wrongly
@@ -427,7 +435,8 @@ tells you the unit faster than this table does.
 | `material` | a list, e.g. `["Polyester"]` — a plain string is accepted too |
 | `colors` | free text |
 | `stretch` on `webbings` | a JSON string of load/elongation readings, `[{"kn": 5, "percent": 1.2}, ...]`. Send the curve you publish; leave it out if you don't publish one. |
-| `isa_certified` | boolean. This is your ISA certification status, not our opinion of it. |
+| `manufacturer_not_for_highline` | `true` if you state the product is not for highlining, `false` if you market it for highlining, `null` if you say neither |
+| `manufacturer_not_for_highline_source` | the URL of your page that says so |
 
 `brand_name` is accepted but is not something you can set directly — send it only if our spelling of
 your brand is wrong, and an administrator will fix the underlying record.

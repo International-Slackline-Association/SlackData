@@ -108,6 +108,13 @@ cd frontend && env -u ELECTRON_RUN_AS_NODE npx cypress run --spec cypress/e2e/<s
 # test:unit and by CI before the matrix is built) is what stops that.
 cd frontend && npm run shards       # every spec is in exactly one shard
 
+# isa_certified.json is DERIVED from isa_approved_data.csv (the raw ISA
+# approved-gear capture, committed as provenance). Edit or re-scrape the CSV,
+# then rebuild; only the per-certificate `match` blocks are hand-written, and a
+# rebuild keeps them. New certificates are reported with an empty match.
+python3 scripts/build_isa_certified.py            # rewrite isa_certified.json
+python3 scripts/build_isa_certified.py --check    # exit 1 if the JSON is stale
+
 # admin_triage.cy.ts needs a submissions store it hasn't already filled. The
 # triage list is a queue — oldest first, one page of 50 — so fixtures the spec
 # creates land at the bottom and drop off the page once ~50 pending rows have
@@ -129,6 +136,17 @@ Cypress. `frontend/tests/` has its own tsconfig (`types: ["node"]`) exactly like
 it stays out of `tsc -b`.
 
 The README's install snippet says `uv venv` then `source venv/bin/activate`, but `uv` actually creates `.venv` — use `source .venv/bin/activate` for the uv path.
+
+## Commits and pull requests
+
+- **Claude is credited once per PR, never per commit.** Commits carry **no** `Co-Authored-By`
+  trailer. The PR description ends with a single
+  `Co-Authored-By: Claude <model> <noreply@anthropic.com>` line, and nothing else by way of
+  attribution. PRs are squash-merged, so per-commit trailers would pile up in the merged commit.
+- **A PR holds one piece of work.** Unrelated changes sitting in the same working tree (a data
+  fix, a runbook edit, another session's feature) stay out of it and get their own PR, even when
+  they touch the same files. Stage by hunk rather than by file.
+- **Commits are granular and logical inside a PR**: few PRs, several commits each.
 
 ## Architecture
 
@@ -153,6 +171,8 @@ Root *.json seed files
 | `slack_data/load_data/_seed_io.py` | `read_seed_json()` / `seed_path()` / `to_bool()` / `require_seed_id()` — shared by every loader |
 | `slack_data/load_data/brand_ids.py` | `catalog_id` from `manufacturers.json` — the stable `Brand.id`, read lazily |
 | `scripts/backfill_seed_ids.py` | Writes/verifies the explicit ids in the seeds; `--check` for CI |
+| `slack_data/load_data/load_isa_certifications.py` | The **only** place `isa_certified` is set — from `isa_certified.json`, exact matches only (see § ISA certifications) |
+| `scripts/build_isa_certified.py` | Rebuilds `isa_certified.json` from the committed ISA capture `isa_approved_data.csv`, keeping each hand-written `match` block (keyed by `cert_id`); `--check` exits 1 on drift |
 | `slack_data/api/routers/_crud.py` | `crud_router()` — the CRUD factory every gear router is built from |
 | `slack_data/api/routers/<type>_router.py` | One `crud_router(...)` call per gear type |
 | `slack_data/api/routing.py` | Router registration + the READ_ONLY write-route filter (see below) |
@@ -177,7 +197,7 @@ There are `__init__.py` files in `models/`, `api/`, and `utilities/`. No `tests/
 **Editing a seed `*.json` is not finished until the database is re-seeded and the server restarted.**
 Because seeding is one-shot, a running dev server keeps serving the *old* rows — so the change looks
 like it did nothing, in the API and on the site. Every edit to a root `*.json` (gear seeds,
-`manufacturers.json`, `isa_gear_warnings.json`) ends with:
+`manufacturers.json`, `isa_gear_warnings.json`, `isa_certified.json`) ends with:
 
 ```bash
 rm -f slack_data/database.db
@@ -223,6 +243,7 @@ Every gear type carries an **`active: bool | None`** field on its `Base<X>` (so 
 | StarterKit | `/starterkit` | `starterkits.json` | 64 |
 | TricklineKit | `/tricklinekit` | `tricklinekits.json` | 10 |
 | ISAGearWarning | `/isawarning` | `isa_gear_warnings.json` | 88 |
+| ISAGearCertification | `/isacertification` | `isa_certified.json` | 22 |
 
 ### ISA gear warnings
 
@@ -242,6 +263,39 @@ reported instead of silently re-pointing a recall. The pass writes two things:
 
 Seeding is gated on the `ISAGearWarning` table being empty. Eight entries match nothing we hold —
 tracked in BACKLOG.md.
+
+### ISA certifications
+
+**Certification is derived, never hand-set.** The gear seeds carry no certification flag; a row is
+ISA certified if and only if an entry in `isa_certified.json` matches it. That file is the ISA's
+approved-gear list (one entry per certificate), built from the committed raw capture
+`isa_approved_data.csv` by `scripts/build_isa_certified.py`, with the same hand-adjudicated `match`
+block as the warnings (the script keeps them across rebuilds). See
+[ISA_CERTIFICATION_PLAN.md](ISA_CERTIFICATION_PLAN.md) for the decisions behind it.
+
+`load_data/load_isa_certifications.py` runs right after the warnings pass, gated on the
+`ISAGearCertification` table being empty, and verifies ids against `"<brand> <name>"` the same way.
+Its rules:
+
+- **Only `exact` matches certify.** Anything else is reported and skipped.
+- **Webbing and Webbing – Sewn Loop certificates** both certify the webbing row; **Intermittent
+  Connection** certificates never do (the build leaves them unmatched, and the loader refuses them
+  even if matched). Superseded certificates stay unmatched — newest only.
+- **Five types can be certified**: webbing / weblock / roller / leashring / grip. Kits and tree
+  protectors have no certification field at all.
+
+It writes, per certified row: `isa_certified = True`; `isa_certificate`, the primary certificate
+number (on webbing the plain Webbing one, else the Sewn Loop one), which is what picks the stamp
+image; and on **webbing only** `isa_class` — the certificate's letter (`ISA:41:A+` → `A+`), or, when
+no certificate carries one, the letter its breaking strength earns (A+ ≥ 40, A ≥ 30, B ≥ 26,
+C ≥ 22 kN, inclusive). Plus one `ISAGearCertification` row per (certificate × gear id) —
+`models/isa_gear_certifications.py`, served read-only by `/isacertification` — with the full
+certificate (standard version, lab, test date, manual, pictures as links). No FK, as with warnings.
+
+All three gear-row fields are in `_EXCLUDED` (`submissions/fields.py`): certification is the ISA's
+to state, and a hand-edit would be overwritten on the next seed. The old computed webbing
+`classification` is gone. 17 rows are certified today; 11 certificates match nothing (leashes, a
+connector, Intermittent Connection, one superseded) — tracked in BACKLOG.md.
 
 ### Co-listings — one product, several sellers
 
@@ -520,7 +574,7 @@ per-type rather than generic, and `tests/test_read_only.py` asserts the exact pa
 Register every new router in `main.py` via `app.include_router(...)`, and add it to
 `CATALOG_ROUTERS` in `api/routing.py` so read-only mode strips its writes.
 
-`isa_warning_router`, `fx_router` and `submissions_router` are hand-written — they are not CRUD over
+`isa_warning_router`, `isa_certification_router`, `fx_router` and `submissions_router` are hand-written — they are not CRUD over
 a gear table.
 
 ### The API Gateway route/throttle invariant
