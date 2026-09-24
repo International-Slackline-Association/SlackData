@@ -204,7 +204,7 @@ describe('ISA stamp — gear detail page', () => {
   })
 
   it('no longer lists the certificate details', () => {
-    cy.visit('/webbing/63') // Marathon: a Webbing and a Sewn Loop certificate
+    cy.visit('/webbings/63') // Marathon: a Webbing and a Sewn Loop certificate
     cy.get('[data-cy="isa-stamp-link"]').should('be.visible')
     cy.get('[data-cy="isa-certificates"]').should('not.exist')
     cy.get('[data-cy="isa-certificate"]').should('not.exist')
@@ -308,7 +308,7 @@ describe('ISA stamp images', () => {
   // `+` is spelled `plus` in the filename — the one stamp whose path could be
   // mangled by encoding. Marathon (webbing 63) holds ISA:41:A+.
   it('an A+ webbing (Marathon) wears the A+ stamp', () => {
-    cy.visit('/webbing/63')
+    cy.visit('/webbings/63')
     cy.get('[data-cy="isa-stamp-link"] [data-cy="isa-approved-badge"]')
       .should('have.attr', 'src', '/isa-labels/ISA41Aplus.png')
   })
