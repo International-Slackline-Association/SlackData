@@ -162,6 +162,32 @@ describe('Safety & data-accuracy notices', () => {
         .and('contain', 'slacklineinternational.org')
     })
 
+    // The ISA certification section is the target of the note on every
+    // certified detail page, so its id is load-bearing, not decoration.
+    it('has an ISA certification section linking to the ISA standards and approved-gear list', () => {
+      cy.visit('/safety')
+      cy.get('#isa-certification')
+        .should('contain', 'ISA certification')
+        .and('contain', 'approved-gear list')
+        .and('contain', 'covers a specific model and version')
+      cy.get('[data-cy="isa-standards-link"]')
+        .should('have.attr', 'href', 'https://www.slacklineinternational.org/isa-gear-standards/')
+      cy.get('[data-cy="isa-approved-gear-link"]')
+        .should('have.attr', 'href')
+        .and('contain', 'isa-approved-gear')
+    })
+
+    it('lands on the ISA certification section when deep-linked', () => {
+      cy.visit('/safety#isa-certification')
+      // In the viewport, not merely in the DOM: the scroll-restoration hook
+      // turns the browser's own fragment handling off, so it has to do this.
+      cy.get('#isa-certification').should(($section) => {
+        const { top } = $section[0].getBoundingClientRect()
+        expect(top).to.be.gte(0)
+        expect(top).to.be.lt(Cypress.config('viewportHeight') / 2)
+      })
+    })
+
     it('is reachable from the footer notice on any page', () => {
       cy.visit(`/${SLUG}`)
       cy.get('[data-cy="safety-notice-footer"]')
