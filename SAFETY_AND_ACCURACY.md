@@ -49,7 +49,7 @@ Notes on choices made, and what still needs a decision, are at the bottom.
 >
 > ### Discontinued gear
 >
-> SlackData deliberately includes gear that is no longer sold, marked **Legacy**, because knowing
+> SlackData deliberately includes gear that is no longer sold, marked **Historic**, because knowing
 > what a discontinued product was is useful. Its presence here is not a suggestion that it is still
 > fit to use. Equipment degrades with age, use, and storage, and older gear may predate current
 > standards. Inspect and retire gear according to the manufacturer's guidance, not according to

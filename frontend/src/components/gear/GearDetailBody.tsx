@@ -39,7 +39,7 @@ import ClassificationBubble from './ClassificationBubble'
 import IsaApprovedBadge from './IsaApprovedBadge'
 import { isaWarningStatus } from './IsaWarningBadge'
 import IsaWarningPanel from './IsaWarningPanel'
-import LegacyBadge from './LegacyBadge'
+import HistoricBadge from './HistoricBadge'
 import SpecTable from './SpecTable'
 
 // Kept byte-identical to GearCard's pair so the same button can't look like two
@@ -124,7 +124,7 @@ export default function GearDetailBody({
             />
             {/* Same pill as the listing card, inline here since there's no
                 image corner to pin it to. */}
-            <LegacyBadge active={item.active} />
+            <HistoricBadge active={item.active} />
           </div>
           {price && (
             <div className="mt-2">

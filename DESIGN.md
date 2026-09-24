@@ -168,7 +168,7 @@ outside the scroll region. A single full-width pill ("bubble") split into equal 
   count and the grid all work off it.
 - **It lives in the URL** (`?status=current|historic`; ALL is the default and writes no param), like
   every other filter — so it is shareable and comes back with Back. It was local state, which meant
-  opening a legacy item from HISTORIC and pressing Back put you in ALL with the item nowhere near
+  opening a historic item from HISTORIC and pressing Back put you in ALL with the item nowhere near
   where you left it.
 - `ALL` = every item · `CURRENT` = still sold, i.e. `active !== false` (true or unknown) ·
   `HISTORIC` = retired only, `active === false`.
@@ -483,7 +483,7 @@ reading one item at a time.
   - The **filter sidebar's kN pills are unaffected and stay exact** (`percentAtKn`): a pill that says
     10 kN must select the webbings actually measured at 10 kN.
 - **One frozen identity column on the left**, pinned with `sticky left-0`: compare checkbox,
-  thumbnail, brand (small caps, linked) and product name (linked), plus the Legacy badge. It is one
+  thumbnail, brand (small caps, linked) and product name (linked), plus the Historic badge. It is one
   cell rather than four sticky columns, which would each need a left offset computed from the widths
   before it — a number that changes with the longest product name on the page. Its header carries
   **two** sort controls, `NAME · MANUFACTURER`, because the cell stacks both: heading them as two
@@ -553,7 +553,7 @@ reading one item at a time.
   currently on, so it changes with the arrows and dots. Products with **no** image fall back to the
   flat light-gray band with the low-opacity `No image` placeholder.
 - **No gear-type badge.** Each listing shows a single gear type, so labelling every card "ROLLER" on the rollers page is redundant. Reintroduce a coral gear-type pill (top-left, absolute) only on views that mix types — e.g. manufacturer pages.
-- **Legacy badge, top-left overlay** (absolute, ~8px from the top-**left** corner) — a small red uppercase `Legacy` pill, shown only when `active` is false (discontinued / no longer sold). Nothing renders for active or unknown (`active` true/null) gear — an active card carries no status pill. Because the listing defaults to ALL, a grid routinely mixes badged and unbadged cards — the badge is what tells them apart, so it is never suppressed by the sidebar's status scope. This occupies the **top-left** slot (the one reserved above for a future gear-type pill), mirroring the manufacturer card's top-left **Inactive** pill (see § Manufacturer card anatomy), so both card types read the same way: lifecycle status on the left, classification/ISA on the right.
+- **Historic badge, top-left overlay** (absolute, ~8px from the top-**left** corner) — a small red uppercase `Historic` pill, shown only when `active` is false (discontinued / no longer sold). Nothing renders for active or unknown (`active` true/null) gear — an active card carries no status pill. Because the listing defaults to ALL, a grid routinely mixes badged and unbadged cards — the badge is what tells them apart, so it is never suppressed by the sidebar's status scope. This occupies the **top-left** slot (the one reserved above for a future gear-type pill), mirroring the manufacturer card's top-left **Inactive** pill (see § Manufacturer card anatomy), so both card types read the same way: lifecycle status on the left, classification/ISA on the right.
 - **Top-right overlay stack** (absolute, ~8px from the top-right corner, stacked vertically with ~6px gaps, right-aligned):
   1. **ISA Approved badge** — the miniature stamp, when `isa_certified` is true (see below). It leads the stack: certification is the question a reader brings to the grid, and every pill below it refines that answer rather than replacing it.
   2. **ISA warning bubble** — a small uppercase pill (`RECALL` / `WARNING` / `NOTICE`) whenever `isa_warning` is set, coloured by severity (see § ISA Warnings). It sits **above the classification bubble**: a recalled webbing's Type A grant is the second thing you need to know, not the first. Omit entirely when `isa_warning` is null or `No Warning`, and on the three types with no `isa_warning` field (tree protectors, starter kits, trickline kits).
@@ -585,7 +585,7 @@ and all the dead space between them. A card is one object about one product; mak
 clickable gives a mouse a ~150px target inside a ~300×340px thing that already looks pressable.
 The exceptions are the controls the card owns, which keep their own behaviour and never navigate:
 the carousel's prev/next arrows and dots, `Compare`, and `View product ↗` (which leaves the site).
-The decorative overlays — the Legacy pill and the top-right ISA/classification stack — are *not*
+The decorative overlays — the Historic pill and the top-right ISA/classification stack — are *not*
 controls: clicking one navigates like the rest of the card.
 
 Implemented as a stretched overlay link covering the card, with the controls raised above it, rather
@@ -687,7 +687,7 @@ The ISA publishes a [gear warnings database](https://data.slacklineinternational
 | `Warning` | `#FBBF24` fill, `#1F2937` ink | amber border `#FCD34D`, `#FFFBEB` ground, `#78350F` text | A known failure mode; usable with care or in a narrower role. |
 | `Notice` | `#E5E7EB` fill, `#1F2937` ink | gray border `#D1D5DB`, `#F9FAFB` ground, `#374151` text | Something to be aware of. Present because dropping it would hide safety information, muted because it is not an alarm. |
 
-Red is deliberately the same `#DC2626` as the **Legacy** pill — but the two never compete for the eye, because Legacy is pinned top-**left** and the warning bubble top-**right** (see § Gear Card Anatomy). Dark ink `#1F2937` on the amber and gray fills for the same reason the classification bubble uses it: white fails WCAG AA on both.
+Red is deliberately the same `#DC2626` as the **Historic** pill — but the two never compete for the eye, because Historic is pinned top-**left** and the warning bubble top-**right** (see § Gear Card Anatomy). Dark ink `#1F2937` on the amber and gray fills for the same reason the classification bubble uses it: white fails WCAG AA on both.
 
 **The word is the badge.** `RECALL` / `WARNING` / `NOTICE` is spelled out rather than encoded as an icon or a bare colour, so severity is never carried by colour alone. The bubble also sets `data-isa-warning="<status>"` for tests and for anyone reading the DOM.
 
@@ -1358,7 +1358,7 @@ text, reviewed and approved by the ISA because it is published under their name.
 there first, then mirror it into the components.
 
 Each notice is **one component rendered in two places**, with a `variant` prop for presentation only,
-so the wording physically cannot drift between surfaces (same reasoning as `LegacyBadge`).
+so the wording physically cannot drift between surfaces (same reasoning as `HistoricBadge`).
 
 | Notice | Component | Placements |
 |---|---|---|
@@ -1381,7 +1381,7 @@ so the wording physically cannot drift between surfaces (same reasoning as `Lega
 Full safety text, static JSX (no markdown renderer — one route doesn't justify the dependency).
 Covers: breaking strength is not a working load (and where to find one), stretch curves are
 indicative and not comparable between brands, certification/warning data is a periodically-updated
-copy rather than a live feed, Legacy gear is not a fitness-for-use claim, and slacklining carries
+copy rather than a live feed, Historic gear is not a fitness-for-use claim, and slacklining carries
 risk.
 
 The route is a **static** segment, so React Router ranks it above the dynamic `:slug` gear-type

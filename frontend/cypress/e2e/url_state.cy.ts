@@ -280,7 +280,7 @@ describe('URL state — status scope', () => {
     cy.visit('/webbings?status=historic')
     cy.get('[data-cy="status-historic"]').should('have.attr', 'data-active', 'true')
     cy.get('[data-cy="gear-card"]').should('have.length.greaterThan', 0)
-    cy.get('[data-cy="gear-card"]').first().find('[data-cy="legacy-badge"]').should('exist')
+    cy.get('[data-cy="gear-card"]').first().find('[data-cy="historic-badge"]').should('exist')
   })
 
   it('an unrecognised ?status= shows the listing at ALL rather than 404ing', () => {

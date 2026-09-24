@@ -229,22 +229,22 @@ describe('ISA warning bubble — gear cards', () => {
       })
     })
 
-    it('does not collide with the Legacy pill, which stays on the left', () => {
+    it('does not collide with the Historic pill, which stays on the left', () => {
       cy.fetchAllItems('webbing').then((all) => {
-        const legacyWarned = (all as Item[]).find(
+        const historicWarned = (all as Item[]).find(
           i => i.isa_warning != null && i.active === false,
         )
-        if (!legacyWarned) return
+        if (!historicWarned) return
         cy.visit('/webbings')
         cy.get('[data-cy="gear-card"]')
-          .contains('[data-cy="gear-card-name"]', legacyWarned.name as string)
+          .contains('[data-cy="gear-card-name"]', historicWarned.name as string)
           .closest('[data-cy="gear-card"]')
           .within(() => {
-            cy.get('[data-cy="legacy-badge"]').then(($legacy) => {
+            cy.get('[data-cy="historic-badge"]').then(($historic) => {
               cy.get('[data-cy="isa-warning-badge"]').then(($badge) => {
-                const l = $legacy[0].getBoundingClientRect()
+                const l = $historic[0].getBoundingClientRect()
                 const b = $badge[0].getBoundingClientRect()
-                expect(l.right, 'legacy pill ends before the warning bubble starts')
+                expect(l.right, 'historic pill ends before the warning bubble starts')
                   .to.be.lessThan(b.left)
               })
             })

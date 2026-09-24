@@ -37,7 +37,7 @@ export interface IsaWarningStyle {
 
 export const ISA_WARNING_STYLES: Record<string, IsaWarningStyle> = {
   Recall: {
-    bubbleBg: '#DC2626', // same red as the Legacy pill — they never share a corner
+    bubbleBg: '#DC2626', // same red as the Historic pill — they never share a corner
     bubbleFg: '#FFFFFF',
     bannerBg: '#FEF2F2',
     bannerBorder: '#FCA5A5',

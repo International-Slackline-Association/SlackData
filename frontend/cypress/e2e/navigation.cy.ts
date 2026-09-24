@@ -278,9 +278,9 @@ describe('Back restores the filters that were not in the URL', () => {
     cy.go('back')
 
     cy.get('[data-cy="status-historic"]').should('have.attr', 'data-active', 'true')
-    // Historic scope = legacy gear only, so every card wears the red badge.
+    // Historic scope = historic gear only, so every card wears the red badge.
     cy.get('[data-cy="gear-card"]').should('have.length.greaterThan', 0)
-    cy.get('[data-cy="gear-card"]').first().find('[data-cy="legacy-badge"]').should('exist')
+    cy.get('[data-cy="gear-card"]').first().find('[data-cy="historic-badge"]').should('exist')
   })
 
   // The compare selection does NOT come back, and that is the current answer

@@ -23,7 +23,7 @@ import CardImageCarousel from './CardImageCarousel'
 import ClassificationBubble from './ClassificationBubble'
 import IsaApprovedBadge from './IsaApprovedBadge'
 import IsaWarningBadge from './IsaWarningBadge'
-import LegacyBadge from './LegacyBadge'
+import HistoricBadge from './HistoricBadge'
 
 // flex-1 + min-h-10: three equal-width buttons spanning the card, at a size a
 // thumb can actually hit. DESIGN.md § Card Anatomy always specified equal-width
@@ -131,9 +131,9 @@ export default function GearCard({
         // backdrop is scaled past its edges — both must be clipped to the band.
         className="group relative flex h-40 items-center justify-center overflow-hidden bg-gray-50"
       >
-        {/* Top-left: lifecycle status. Legacy = no longer sold; nothing renders
+        {/* Top-left: lifecycle status. Historic = no longer sold; nothing renders
             for active/unknown gear. Mirrors the manufacturer card's Inactive pill. */}
-        <LegacyBadge active={item.active} className="pointer-events-none absolute left-2 top-2 z-10" />
+        <HistoricBadge active={item.active} className="pointer-events-none absolute left-2 top-2 z-10" />
         {/* Top-right stack: certification first, then any ISA warning, then the
             highline class. Certification is the question a reader brings to the
             grid, so it leads; the class refines it and sits last. Same bubble

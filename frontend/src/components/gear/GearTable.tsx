@@ -51,7 +51,7 @@ import {
   STRETCH_GROUP_LABEL,
 } from '@/utils/table'
 import BrandLink from '@/components/brand/BrandLink'
-import LegacyBadge from './LegacyBadge'
+import HistoricBadge from './HistoricBadge'
 
 // A null sort is not "unsorted" — sortItems falls through to Name A→Z, so the
 // Name header shows ascending on a fresh load and its first click flips to
@@ -206,7 +206,7 @@ const GearTableRow = memo(function GearTableRow({
                     >
                       {String(item.name)}
                     </Link>
-                    <LegacyBadge active={item.active} />
+                    <HistoricBadge active={item.active} />
                   </div>
                 </div>
               </div>

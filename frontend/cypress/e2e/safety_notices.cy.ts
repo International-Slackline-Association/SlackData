@@ -151,7 +151,7 @@ describe('Safety & data-accuracy notices', () => {
         // Certification data is a snapshot, and absence is not a negative claim.
         .and('contain', 'not a live feed')
         .and('contain', 'does not mean one does not exist')
-        // Legacy gear is not a fitness-for-use claim.
+        // Historic gear is not a fitness-for-use claim.
         .and('contain', 'not a suggestion that it is still')
     })
 

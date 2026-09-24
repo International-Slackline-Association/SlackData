@@ -84,7 +84,7 @@ export default function GearListingPage() {
   // Lifecycle scope, controlled from the sidebar's status bubble and held in the
   // URL (?status=). All = everything (the default — the listing opens on the
   // whole catalogue). Current = still sold (active true, or unknown/null).
-  // Historic = legacy gear that's no longer sold (active === false).
+  // Historic = gear that is no longer sold (active === false).
   const { status, setStatus } = url
   const navigate = useNavigate()
 

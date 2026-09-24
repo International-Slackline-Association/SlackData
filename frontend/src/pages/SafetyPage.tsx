@@ -79,7 +79,7 @@ export default function SafetyPage() {
         <Section title="Discontinued gear">
           <p>
             SlackData deliberately includes gear that is no longer sold, marked{' '}
-            <strong className="font-semibold text-gray-900">Legacy</strong>, because knowing what a
+            <strong className="font-semibold text-gray-900">Historic</strong>, because knowing what a
             discontinued product was is useful. Its presence here is not a suggestion that it is
             still fit to use. Equipment degrades with age, use, and storage, and older gear may
             predate current standards. Inspect and retire gear according to the manufacturer&apos;s

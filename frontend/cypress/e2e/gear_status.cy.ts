@@ -1,22 +1,22 @@
 // Gear status — the ALL / CURRENT / HISTORIC segmented control at the top of the
 // filter sidebar, which scopes the grid by the `active` field, plus the red
-// "Legacy" card badge shown only for retired gear. Driven by the real backend.
-// Webbings is the fixture — the dataset has both active (still-sold) and legacy
+// "Historic" card badge shown only for retired gear. Driven by the real backend.
+// Webbings is the fixture — the dataset has both active (still-sold) and historic
 // (active === false) items.
 
 const SLUG = 'webbings'
 const API = 'webbing'
 
 // "All" shows everything; "Current" shows still-sold + unknown (active !== false);
-// "Historic" shows only legacy (active === false). Mirror that split from the API
+// "Historic" shows only historic (active === false). Mirror that split from the API
 // so the counts are asserted against the source of truth, not a hard-coded number.
 function partition(all: Record<string, unknown>[]) {
-  const legacy = all.filter((it) => it.active === false)
+  const historic = all.filter((it) => it.active === false)
   const current = all.filter((it) => it.active !== false)
-  return { legacy, current }
+  return { historic, current }
 }
 
-describe('Gear status — all/current/historic control + legacy badge', () => {
+describe('Gear status — all/current/historic control + historic badge', () => {
   let all: Record<string, unknown>[]
 
   before(() => {
@@ -105,46 +105,46 @@ describe('Gear status — all/current/historic control + legacy badge', () => {
     }
   })
 
-  it('All shows every item, badging only the legacy ones', () => {
+  it('All shows every item, badging only the historic ones', () => {
     cy.get('[data-cy="item-count"]').should('contain.text', String(all.length))
     // A mixed grid: some cards badged, some not — the badge is the discriminator.
     cy.get('[data-cy="gear-card"]').should('have.length.greaterThan', 0)
     cy.get('[data-cy="gear-card"]').then(($cards) => {
-      const badged = $cards.find('[data-cy="legacy-badge"]').length
+      const badged = $cards.find('[data-cy="historic-badge"]').length
       expect(badged).to.be.greaterThan(0)
       expect(badged).to.be.lessThan($cards.length)
     })
   })
 
-  it('Current view shows the still-sold count and no legacy badges', () => {
+  it('Current view shows the still-sold count and no historic badges', () => {
     const { current } = partition(all)
     cy.get('[data-cy="status-current"]').click()
     cy.get('[data-cy="status-current"]').should('have.attr', 'data-active', 'true')
     cy.get('[data-cy="item-count"]').should('contain.text', String(current.length))
-    // No card in the current scope is legacy, so no badge should render.
+    // No card in the current scope is retired, so no badge should render.
     cy.get('[data-cy="gear-card"]').should('have.length.greaterThan', 0)
-    cy.get('[data-cy="legacy-badge"]').should('not.exist')
+    cy.get('[data-cy="historic-badge"]').should('not.exist')
   })
 
-  it('Historic view shows the legacy count and a legacy badge on cards', () => {
-    const { legacy } = partition(all)
+  it('Historic view shows the historic count and a historic badge on cards', () => {
+    const { historic } = partition(all)
     cy.get('[data-cy="status-historic"]').click()
     cy.get('[data-cy="status-historic"]').should('have.attr', 'data-active', 'true')
-    cy.get('[data-cy="item-count"]').should('contain.text', String(legacy.length))
-    // Every card in the historic scope is legacy → each carries the red badge.
+    cy.get('[data-cy="item-count"]').should('contain.text', String(historic.length))
+    // Every card in the historic scope is retired → each carries the red badge.
     cy.get('[data-cy="gear-card"]').should('have.length.greaterThan', 0)
     cy.get('[data-cy="gear-card"]').first()
-      .find('[data-cy="legacy-badge"]')
+      .find('[data-cy="historic-badge"]')
       .should('be.visible')
-      .and('contain.text', 'Legacy')
+      .and('contain.text', 'Historic')
   })
 
-  it('positions the legacy badge in the top-LEFT of the card', () => {
+  it('positions the historic badge in the top-LEFT of the card', () => {
     cy.get('[data-cy="status-historic"]').click()
     cy.get('[data-cy="gear-card"]').first().then(($card) => {
       const card = $card[0].getBoundingClientRect()
       cy.wrap($card)
-        .find('[data-cy="legacy-badge"]')
+        .find('[data-cy="historic-badge"]')
         .then(($b) => {
           const badge = $b[0].getBoundingClientRect()
           // Anchored to the left edge, not the right: the badge's left sits in the
