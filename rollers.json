@@ -34,10 +34,11 @@
         "inner_width": 27.8,
         "outer_bearing_diameter": null,
         "manufacturer": "Slacktivity",
-        "price": 44.95,
+        "price": 50,
         "price_unit": "EUR",
-        "roller_material": "Steel",
+        "roller_material": "Aluminum",
         "locking_type": "Non-locking",
+        "bearing_material": "Steel",
         "date_introduced": null,
         "product_url": "https://www.slacktivity.com/default/longline-highline/hangover",
         "active": true
@@ -495,22 +496,24 @@
     {
         "id": 22,
         "name": "Hangover 1.0",
-        "material": null,
-        "weight": null,
-        "wll": null,
-        "mbs": null,
-        "compatible_webbing_width": null,
+        "material": "Aluminum",
+        "weight": 152,
+        "wll": 4,
+        "mbs": 22,
+        "compatible_webbing_width": [
+            25
+        ],
         "slider_type": "Carabiner",
-        "inner_width": null,
-        "outer_bearing_diameter": null,
+        "inner_width": 27.8,
+        "outer_bearing_diameter": 19,
         "manufacturer": "Slacktivity",
-        "price": null,
-        "price_unit": null,
-        "roller_material": null,
-        "locking_type": null,
-        "bearing_material": null,
+        "price": 55,
+        "price_unit": "EUR",
+        "roller_material": "Aluminum",
+        "locking_type": "Non-locking",
+        "bearing_material": "Steel",
         "date_introduced": null,
-        "product_url": null,
-        "active": false
+        "product_url": "https://slacktivity.com/shop/hangover-color-edition/",
+        "active": true
     }
 ]
