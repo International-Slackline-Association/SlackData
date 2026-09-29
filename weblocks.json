@@ -5165,5 +5165,99 @@
         "colors": "Grey",
         "notes": "Specs from the archived shop page (web.archive.org captures of laboutique.slack.fr/282-sladlock-light.html, 2020-09-30 and 2022-09-30): Zicral 7075 alloy with SS 304 stainless, 5 kN WLL / 16 kN MBS, 135 g, 16 mm internal locking radius, captive pin. Price is 19.90 EUR incl. French VAT — the page displays 16.58 EUR ex-VAT, with no active reduction. Slack.fr warn that the laser marking on the part reads 18 kN, which is wrong: the breaking strength is 16 kN. Slack.fr later re-listed the same product as the \"Mini Sladlock\"; the URL, the laser marking and the product photo all still say Sladlock Light.",
         "description": "The light, minimal version of Slack.fr's SladLock — a self-blocking 25mm webbing lock for low-tension lines, taking up slack to set line length without a ratchet. Rated to a 5 kN working load only: Slack.fr rule out highline, trickline, pulley systems and lines over 50 m, pointing those at the SladLock Power or a banana instead."
+    },
+    {
+        "id": 132,
+        "brand": "Balance Community: Slackline Outfitters",
+        "full_name": "Balance Community: Slackline Outfitters Alpine WebLock 6.2",
+        "manufacturer_info": {
+            "name": "Balance Community: Slackline Outfitters",
+            "url": "/manufacturer_details/BalanceCommunity#TAB-IMAGES",
+            "country": "United States",
+            "country_flag_url": "/img/flags/US.png"
+        },
+        "product_page_url": "https://www.balancecommunity.com/products/alpine-weblock-6-2",
+        "pricing": [
+            {
+                "text": "1 unit and above : 125.10 USD"
+            }
+        ],
+        "specifications": {
+            "Material": [
+                "Aluminum",
+                "Stainless Steel"
+            ],
+            "Weight": "242gr",
+            "WLL": "12kN",
+            "MBS": "60kN",
+            "Anchor connection type": [
+                "Soft Release",
+                "XL Mounting Hole"
+            ],
+            "Webbing connection type": "Push Pin",
+            "Compatible webbing width": "24mm - 26mm",
+            "Diverter diameter": "38mm",
+            "Efficiency": "N/A",
+            "Usage": "N/A",
+            "Date introduced": "Sep 2026",
+            "Manufacturer": "Balance Community: Slackline Outfitters",
+            "Manufacturer Product Page": "Manufacturer product page",
+            "Price (per unit)": "1 unit and above : 125.10 USD"
+        },
+        "date_introduced": 1789354182000,
+        "name": "Alpine WebLock 6.2",
+        "product_url": "https://www.balancecommunity.com/products/alpine-weblock-6-2",
+        "active": true,
+        "style": "Tensionable Weblock",
+        "colors": "Black",
+        "notes": "Specs from the manufacturer's product page (balancecommunity.com, read 2026-09-24): 7075 anodized aluminium body, 17-4 PH stainless pin with a 2024 aluminium handle and 440C stainless locking balls; 60 kN MBS / 12 kN WLL (5:1 design factor); upper becket 56 kN MBS / 8 kN WLL, lower becket 70 kN MBS / 10 kN WLL; 24-26 mm webbing, 20 mm webbing only with the Alpine Weblock Spacers (Balance list the Axiom, Axiom MK2 and Silk 99 as not compatible). 242 g; 126.0 x 74.2 mm, 44.2 mm body thickness, 12 mm pin. Date introduced is the store listing date (2026-09-13). Price 125.10 USD.",
+        "description": "The next iteration of the Alpine WebLock 6: the 38 mm centre diverter now has sidewalls all the way round, the front pin is fully round so it spins while you tension with the Buckingham method, and the pin gets a parking spot on the body so it can be pre-installed without dropping mid-rig. Keeps the AWL6's large anchor hole with soft-release rails and its two beckets. Made in China, assembled in Colorado."
+    },
+    {
+        "id": 133,
+        "brand": "Balance Community: Slackline Outfitters",
+        "full_name": "Balance Community: Slackline Outfitters Alpine WebLock 6.2 - Double Pin",
+        "manufacturer_info": {
+            "name": "Balance Community: Slackline Outfitters",
+            "url": "/manufacturer_details/BalanceCommunity#TAB-IMAGES",
+            "country": "United States",
+            "country_flag_url": "/img/flags/US.png"
+        },
+        "product_page_url": "https://www.balancecommunity.com/products/alpine-weblock-6-2-double-pin",
+        "pricing": [
+            {
+                "text": "1 unit and above : 125.10 USD"
+            }
+        ],
+        "specifications": {
+            "Material": [
+                "Aluminum",
+                "Stainless Steel"
+            ],
+            "Weight": "278gr",
+            "WLL": "12kN",
+            "MBS": "60kN",
+            "Anchor connection type": [
+                "Soft Release",
+                "Push Pin"
+            ],
+            "Webbing connection type": "Push Pin",
+            "Compatible webbing width": "24mm - 26mm",
+            "Diverter diameter": "38mm",
+            "Efficiency": "N/A",
+            "Usage": "N/A",
+            "Date introduced": "Sep 2026",
+            "Manufacturer": "Balance Community: Slackline Outfitters",
+            "Manufacturer Product Page": "Manufacturer product page",
+            "Price (per unit)": "1 unit and above : 125.10 USD"
+        },
+        "date_introduced": 1789670624000,
+        "name": "Alpine WebLock 6.2 - Double Pin",
+        "product_url": "https://www.balancecommunity.com/products/alpine-weblock-6-2-double-pin",
+        "active": true,
+        "style": "Tensionable Weblock",
+        "colors": "Black",
+        "notes": "Specs from the manufacturer's product page (balancecommunity.com, read 2026-09-24): 7075 anodized aluminium body, 17-4 PH stainless pin with a 2024 aluminium handle and 440C stainless locking balls; 60 kN MBS / 12 kN WLL (5:1 design factor); upper becket 56 kN MBS / 8 kN WLL, lower becket 70 kN MBS / 10 kN WLL; 24-26 mm webbing, 20 mm webbing only with the Alpine Weblock Spacers (Balance list the Axiom, Axiom MK2 and Silk 99 as not compatible). 278 g; 123.6 x 71.2 mm, 44.2 mm body thickness, 12 mm pins. Date introduced is the store listing date (2026-09-17). Price 125.10 USD.",
+        "description": "The Alpine WebLock 6.2 with a second quick-release pin at the rear in place of the anchor hole, for direct attachment to soft releases and other gear. Both pins are round, free to spin, and have their own parking spot; same fully walled 38 mm diverter, upper and lower beckets and ratings as the standard AWL6.2. Made in China, assembled in Colorado."
     }
 ]
