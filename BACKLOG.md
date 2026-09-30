@@ -5,10 +5,12 @@ Non-phase engineering tasks not tracked in [PLAN.md](PLAN.md) (frontend roadmap)
 ## Backend / data
 
 - [ ] **Adjudicate the remaining missing-gear candidates.** [MISSING_GEAR_REVIEW.md](MISSING_GEAR_REVIEW.md)
-  carries **70 unticked candidates** (tree protectors, starter/longline/highline kits, and more) from
-  the 2026-07-31 deep sweep, alongside 9 already rejected. The approved batch has been imported; these
-  still need a keep/reject call before they can be. Follow the per-type schema notes in that file's
-  "Approved" section — the webbing and weblock loaders take different object shapes.
+  has one section left from the 2026-07-31 deep sweep: **Starter / Longline / Highline Kit, 56
+  rows**. 54 still need a keep/reject call; the two YogaSlackers eLine kits are ticked but not yet
+  imported. Every other type is done: the approved webbing, weblock, leash ring, tree protector,
+  roller, grip and trickline kit batches are all imported (trickline kits on 2026-09-29), and 11
+  items are on the rejected list. Follow the per-type schema notes in that file's "Approved"
+  section — the loaders take different object shapes (kits use `manufacturer`, not `brand`).
 
 - [ ] **Named webbings we know exist but hold no specs for.** Twelve products surfaced by name only
   — no manufacturer confirmed for most, no width, MBS, weight, stretch or price. None of them are in
@@ -61,14 +63,13 @@ Non-phase engineering tasks not tracked in [PLAN.md](PLAN.md) (frontend roadmap)
   - [ ] **Grigri** (Petzl) — ISA 42, brake, still in production. Neither a brake type nor Petzl as
     a brand; the only entry from outside the slackline industry.
 
-  *A stub that still has to be sourced:*
-  - [ ] **Slacktivity Hangover 1.0** (`rollers.json`, roller 22) for ISA 45. Created so the warning
-    had something to point at, and `slider_type: Carabiner` plus `active: false` is the whole of
-    what it states — every other field in the seed is `null`. That is not neutral on the site:
-    `load_rollers.py` runs the three NOT NULL enums through `get_roller_material` / `get_lock_type` /
-    `get_bearing_material`, which fall to **`Other`** on an empty string, so the detail page prints
-    three specs the seed never claimed. Source it (Slacktivity's own page or a capture), or decide
-    the fallbacks should be nullable columns.
+  *A stub, now sourced:*
+  - [x] **Slacktivity Hangover 1.0** (`rollers.json`, roller 22) for ISA 45. Specs, price (55 EUR)
+    and two photos come from Slacktivity's own
+    [HangOver Color-Edition](https://slacktivity.com/shop/hangover-color-edition/) page, which
+    still sells V1.0 ("small gaps between the ball bearings") beside V2.0 — so it is `active: true`,
+    even though the 2019 ISA entry says `inProduction: "No"`. Aluminium body as the roller material,
+    steel bearings, per the operator (the same holds for Hangover 2.0, roller 2).
 
   The other stub, **Slack Inov BoomBoom** (`webbings.json` 246, ISA 78), is done — it carries real
   manufacturer specs now (25 mm tubular nylon, 52 g/m, 27 kN, a full 1–20 kN stretch curve, the

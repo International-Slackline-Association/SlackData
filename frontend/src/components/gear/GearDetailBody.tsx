@@ -270,6 +270,7 @@ export default function GearDetailBody({
 
       {item.description ? (
         <p data-cy="detail-description" className="mt-6 leading-relaxed text-gray-600">
+          <strong className="font-semibold text-gray-900">Manufacturer Description:</strong>{' '}
           {String(item.description)}
         </p>
       ) : null}

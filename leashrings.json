@@ -28,7 +28,7 @@
         "notes": null,
         "manufacturer": "Slackline tools",
         "date_introduced": null,
-        "product_url": "http://www.slack-shop.de/stahl-ring.html",
+        "product_url": "https://web.archive.org/web/20220927065716/https://www.slack-shop.de/stahl-ring.html",
         "active": false
     },
     {
@@ -194,6 +194,7 @@
     {
         "id": 13,
         "name": "RING77",
+        "description": "Steel ring with 57 mm internal diameter. Made of drop forged steel with no welded connections. Galvanized for better protection against corrosion. Smooth surface and 57 mm internal diameter allows for excellent gliding over the webbing and tapes.",
         "material": "Steel",
         "inner_diameter": 57,
         "outer_diameter": 77,
@@ -204,12 +205,13 @@
         "notes": null,
         "manufacturer": "Slack house",
         "date_introduced": null,
-        "product_url": "https://slackhouseshop.pl/produkt/ring-f-fe/",
+        "product_url": "https://slackhouseshop.pl/en/produkt/highline-ring-f-fe/",
         "active": true
     },
     {
         "id": 14,
         "name": "Access",
+        "description": "Aluminum alloy connector ring that is useful for the connection of various fall arrest components and can be inserted into the bridge system of the Camp Tree Access harness. Available in two color-coded sizes with different diameters.",
         "material": "Aluminum",
         "inner_diameter": 45,
         "outer_diameter": 69,
@@ -226,6 +228,7 @@
     {
         "id": 15,
         "name": "Leash Ring",
+        "description": "Doubled-up, these make for perfect highline leash rings.",
         "material": "Stainless Steel",
         "inner_diameter": 50,
         "outer_diameter": 70,
@@ -261,6 +264,7 @@
     {
         "id": 17,
         "name": "ZERO Silver",
+        "description": "The way ZERO is designed to distribute the load is allowing it to be more compact. For additional safety it is forged from a solid block of high-strength stainless steel, which makes it extremely durable and bomb-proof and still lighter than many other steel rings on the market.",
         "material": "Stainless Steel",
         "inner_diameter": 40,
         "outer_diameter": null,
@@ -277,6 +281,7 @@
     {
         "id": 18,
         "name": "ZERO Black",
+        "description": "The way ZERO is designed to distribute the load is allowing it to be more compact. For additional safety it is forged from a solid block of high-strength stainless steel, which makes it extremely durable and bomb-proof and still lighter than many other steel rings on the market.",
         "material": "Aluminum",
         "inner_diameter": 40,
         "outer_diameter": null,
@@ -325,6 +330,7 @@
     {
         "id": 21,
         "name": "LeashRing",
+        "description": "Lightweight high-strength leash ring made of aluminium alloy with polished surface.",
         "material": "Aluminum",
         "inner_diameter": 60,
         "outer_diameter": 80,
@@ -341,6 +347,7 @@
     {
         "id": 22,
         "name": "ZERO Gold",
+        "description": "ZERO GOLD is the improved version of the earlier ZERO SILVER and ZERO BLACK. It's machined from 7075 high grade aluminium alloy. The hard anodized finish for additional strength, endurance, and wear resistance. It weighs less than 80 grams, which is less than half of the weight of the lightest steel ring on the market. It's really a \"must have\" piece in every ultralight system.",
         "material": "Aluminum",
         "inner_diameter": 40,
         "outer_diameter": null,
@@ -389,6 +396,7 @@
     {
         "id": 25,
         "name": "60mm Aluminium Ring",
+        "description": "This ultra-light aluminum ring is forged to ensure a smooth sliding surface and is anodized for enhanced resistance.",
         "material": "Aluminum",
         "inner_diameter": 60,
         "outer_diameter": 80,
@@ -408,6 +416,7 @@
     {
         "id": 26,
         "name": "HighlineRing",
+        "description": "Lightweight Highline Ring, made of hot forged anodized aluminium 6061-T6, certified and approved by the International Slackline Association – ISA.",
         "material": "Aluminum",
         "inner_diameter": 60,
         "outer_diameter": 80,
@@ -424,6 +433,7 @@
     {
         "id": 27,
         "name": "BC Aluminum Leash Ring",
+        "description": "Sold as a pair. A forged 6061 aluminum leash ring and a clean attachment point for your highline leash. Light at 50 g each, sold as a taped pair so you can double them up for more line contact and added redundancy.",
         "material": "Aluminum",
         "inner_diameter": 60,
         "outer_diameter": 80.8,
@@ -459,6 +469,7 @@
     {
         "id": 29,
         "name": "Halo",
+        "description": "The raed HALO Titanium Highline Leash Ring is an ultralight, yet big and extremely strong ring for your highline leash. It's completely made of Titanium, the metal with the best mechanic properties for engineering ultralight high strength gear. Compared to Aluminium and Steel it has by far the best strength to weight ratio - this allows us to design the HALO leash ring with the least amount of material at a maximum of strength. Titanium has no significant fatigue effects, so it won't crack under cyclic loading. This property, combined with a breaking strength of 88 kN provides full confidence to only use one leash ring in your highline leash. The huge inner diameter of 72 mm lets the HALO Leashring easily pass across split connections and backup loops. The optimized inner geometry provides a big contact surface between ring and webbing - a feature that minimizes the wear of your webbing in leashfalls.",
         "material": "Titanium",
         "inner_diameter": 72,
         "outer_diameter": null,
@@ -491,6 +502,7 @@
     {
         "id": 31,
         "name": "BigLoop",
+        "description": "80mm ID Aluminum Leash Ring. A leash ring designed for modern day highline rigging. Passing segment connections and a big contact area make this leash ring a great partner for your highline sessions.",
         "material": "Aluminum",
         "inner_diameter": 80,
         "outer_diameter": 103,
@@ -507,6 +519,7 @@
     {
         "id": 32,
         "name": "80mm HighRing",
+        "description": "Our HIGHRING is a modern highline ring with innovative geometry and a large inner diameter of 3.1 inches, allowing for easy passage of split connections and backup loops. Made from drop forged aluminum with no welded connections, it offers a smooth sliding surface.",
         "material": "Aluminum",
         "inner_diameter": 80,
         "outer_diameter": 90,
@@ -526,6 +539,7 @@
     {
         "id": 33,
         "name": "Vortex 2",
+        "description": "VORTEX is the first clip-and-go connector for leashes and highlines. Simply thread the leash through the VORTEX, clip it into your tensioned highline setup, and follow the manual to securely knot and lock it. Its innovative design allows for walking without the sensation of being followed by a ring. The feather-light weight and rope padding help prevent serious impacts during falls.",
         "material": "Aluminum",
         "inner_diameter": 65,
         "outer_diameter": 85,
