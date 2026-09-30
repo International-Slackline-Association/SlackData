@@ -85,6 +85,7 @@ def add_webbings_to_db(webbings: list[dict], session: SessionDep) -> None:
             price=parse_price(webbing.get("priceMeter")),
             currency=parse_currency(webbing.get("currency")),
             active=webbing.get("active"),
+            description=webbing.get("description"),
             manufacturer_not_for_highline=webbing.get("manufacturer_not_for_highline"),
             manufacturer_not_for_highline_source=webbing.get("manufacturer_not_for_highline_source"),
             # Brand names only — see the model. Absent stays None, not [].

@@ -2,6 +2,7 @@
     {
         "id": 1,
         "name": "LineGrip Alu G4",
+        "description": "In 2015 we introduced the oval load eye to offer better flexibility for connection gear, and hollow clamping plates to reduce weight! This major upgrade called for new model designations: lineGrip G4 & highlineGrip G2.",
         "material": "Aluminum",
         "width_min": 24,
         "width_max": 26,
@@ -20,6 +21,7 @@
     {
         "id": 2,
         "name": "Snatch 2.2",
+        "description": "With weight of just 110 grams, Snatch V2.2 is the perfect softpointing tool for all your ultralight highline projects.",
         "material": "Aluminum",
         "width_min": 24,
         "width_max": 26,
@@ -32,12 +34,13 @@
         "currency": "RUB",
         "manufacturer": "Souz Slackline",
         "date_introduced": null,
-        "product_url": "https://www.slackshop.cz/en/linegrip/125-snatch-v22.html",
+        "product_url": "https://web.archive.org/web/20210124030114/https://www.slackshop.cz/en/linegrip/125-snatch-v22.html",
         "active": false
     },
     {
         "id": 3,
         "name": "Wafer",
+        "description": "Micro Webbing Grip. A right-sized webbing grip that fits in the palm of your hand. Easily grab and tension your lines with a simple action. A right-sized device to carry with you on your harness.",
         "material": "Aluminum",
         "width_min": 16,
         "width_max": 27,
@@ -56,6 +59,7 @@
     {
         "id": 4,
         "name": "Snatch 2.2T",
+        "description": "Device for grip the webbing. It’s intermediate element between pulley system and webbing for tension the line.",
         "material": "Aluminum",
         "width_min": 49,
         "width_max": 51,
@@ -74,6 +78,7 @@
     {
         "id": 5,
         "name": "LineGrip nano",
+        "description": "This tiny gem is specifically aimed at users of the \"buckingham\" tensioning technique, who care to save even the last bit of weight and space in their backpack.",
         "material": "Other",
         "width_min": 24,
         "width_max": 26,
@@ -86,12 +91,13 @@
         "currency": "EUR",
         "manufacturer": "Slack Pro!",
         "date_introduced": null,
-        "product_url": "https://www.linegrip.com/linegrip-model-archive-history-chronology/",
+        "product_url": "https://www.linegrip.com/linegrip-nano/",
         "active": false
     },
     {
         "id": 6,
         "name": "LineGrip G5",
+        "description": "Generation-5 aluminum webbing clamp for 25mm slacklines – 15kN SWL. Equipped with spring-ball-retainer (SBR) and brand new 2020 Type-4 rubber plates. Featuring neat weight saving pockets and all-round beveled edges.",
         "material": "Aluminum",
         "width_min": 24,
         "width_max": 26,
@@ -110,6 +116,7 @@
     {
         "id": 7,
         "name": "TricklineGrip G1",
+        "description": "In 2016 we introduced the eagerly awaited and long requested first 2″ lineGrip - the tricklineGrip G1, as well as the MK2-series G4 and HLG, which featured upgraded tether-cord and retainer-pin.",
         "material": "Aluminum",
         "width_min": 24,
         "width_max": 52,
@@ -128,6 +135,7 @@
     {
         "id": 8,
         "name": "TricklineGrip G2",
+        "description": "Generation-2 aluminum webbing clamp for 50mm slacklines – 15kN SWL. Equipped with spring-ball-retainer and brand new 2020 Type-4 rubber plates. Featuring neat weight saving pockets and all-round beveled edges.",
         "material": "Aluminum",
         "width_min": 24,
         "width_max": 52,
@@ -146,6 +154,7 @@
     {
         "id": 9,
         "name": "HighlineGrip G2",
+        "description": "The feather weight for 1″ highlines",
         "material": "Aluminum",
         "width_min": 24,
         "width_max": 26,
@@ -164,6 +173,7 @@
     {
         "id": 10,
         "name": "Grippen",
+        "description": "Lightweight and compact \"linegrip\" device for rigging with pulley carabiner Rollex.",
         "material": "Stainless Steel",
         "width_min": 24,
         "width_max": 26,
@@ -176,7 +186,7 @@
         "currency": "EUR",
         "manufacturer": "Equilibrium Slacklines (EQB)",
         "date_introduced": 1580248800000,
-        "product_url": "https://www.slackshop.cz/en/linegrip/166-396-eqb-grippen.html",
+        "product_url": "https://web.archive.org/web/20200814165054/https://www.slackshop.cz/en/linegrip/166-396-eqb-grippen.html",
         "active": false
     },
     {
@@ -239,6 +249,7 @@
     {
         "id": 14,
         "name": "MOUSE GRIP",
+        "description": "The innovative MOUSE GRIP is a compact, ultralight, and strong alternative to traditional LineGrips. Easy to attach to your harness, this gear won't slow you down. With two-colored plates, it's straightforward to use on any polyester or nylon slackline webbing.",
         "material": "Aluminum",
         "width_min": 16,
         "width_max": 26,
@@ -260,6 +271,7 @@
     {
         "id": 15,
         "name": "Wafer 2.0",
+        "description": "Micro Webbing Grip. A right-sized webbing grip that fits in the palm of your hand. Easily grab and tension your lines with a simple action. A right-sized device to carry with you on your harness.",
         "material": "Aluminum",
         "width_min": 23,
         "width_max": 27,
@@ -278,6 +290,7 @@
     {
         "id": 16,
         "name": "Wafer XL",
+        "description": "Full-Sized Webbing Grip. A full-sized webbing grip with a lightweight constuction and optimal gripping strength. Works well with all low tech webbings and select high tech webbings. The Wafer XL is the right grip for tensioning your lines, no matter the length.",
         "material": "Aluminum",
         "width_min": 16,
         "width_max": 27,
@@ -296,6 +309,7 @@
     {
         "id": 17,
         "name": "T-Grip Light",
+        "description": "T-Grip Light – the ultra-lightweight (only 91 g!) and highly efficient webbing grabber for use in your slackline tensioning system.",
         "material": "Aluminum",
         "width_min": 16,
         "width_max": 26,
@@ -314,6 +328,7 @@
     {
         "id": 18,
         "name": "T-Grip",
+        "description": "Webbing Grip with a unique lightweight design optimized for use in HangOverPulley. The T-Grip is easier to reposition than any other clamping device.",
         "material": "Aluminum",
         "width_min": 20,
         "width_max": 26,
@@ -326,12 +341,13 @@
         "currency": "EUR",
         "manufacturer": "Slacktivity",
         "date_introduced": null,
-        "product_url": "https://slacktivity.com/shop/t-grip-webbing-grip-tool/",
+        "product_url": "https://web.archive.org/web/20260414091235/https://slacktivity.com/shop/t-grip-webbing-grip-tool/",
         "active": false
     },
     {
         "id": 19,
         "name": "Grippex",
+        "description": "Get a hold of your webbing safely and securely with the Grippex. This incredibly light line grab is an essential part of your slackline kit when aiming to setup lines longer than 20 meters. Combined with a Rolley, it gives you the power of mechanical advantage to tension your slackline.",
         "material": "Aluminum",
         "width_min": 20,
         "width_max": 25,

@@ -64,6 +64,7 @@ def add_leashrings_to_db(leashrings: list[dict], session: SessionDep) -> None:
             currency=currency,
             notes=leashring.get("notes"),
             active=leashring.get("active"),
+            description=leashring.get("description"),
             manufacturer_not_for_highline=leashring.get("manufacturer_not_for_highline"),
             manufacturer_not_for_highline_source=leashring.get("manufacturer_not_for_highline_source"),
             # Brand names only — see the model. Absent stays None, not [].

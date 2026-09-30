@@ -297,6 +297,15 @@ to state, and a hand-edit would be overwritten on the next seed. The old compute
 `classification` is gone. 17 rows are certified today; 11 certificates match nothing (leashes, a
 connector, Intermittent Connection, one superseded) — tracked in BACKLOG.md.
 
+### Gear descriptions
+
+Every gear seed can carry a `description`, loaded as-is and rendered on the detail page under the
+specs, labelled "Manufacturer Description:". So it is the **maker's own product blurb, verbatim** —
+never our paraphrase or translation. Leave out warning labels, ALL-CAPS disclaimers, site-wide
+footer/legal text, stock notices and spec lists; trim only at the start or end, never splice out
+the middle; whitespace may be tidied. English only: use the brand's English page, and if there is
+none, leave the field unset. A shop's copy of the maker's text is fine.
+
 ### Co-listings — one product, several sellers
 
 `brand_id` on a gear row says who **makes** the thing. It could not say "…and

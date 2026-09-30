@@ -46,6 +46,7 @@
         },
         "date_introduced": 1506117600000,
         "name": "Aeris P Weblock",
+        "description": "Our most advanced webbing anchor for 25mm webbing and soft release attachement.",
         "product_url": "https://petramslacklines.site123.me/shop-1/aeris-p-weblock-2",
         "active": true,
         "style": "Tensionable Weblock"
@@ -186,6 +187,7 @@
         },
         "date_introduced": 1579816800000,
         "name": "Alpine WebLock 5.0",
+        "description": "A New Kind of Webbing Anchor. The weblock, reimagined. Built for the modern day highlines with low tensions and minimal tensioning gear. With built-in anti-slippage and excellent pretension-ability, the Alpine WebLock 5.0 is your true tensioning-side companion.",
         "product_url": "https://www.balancecommunity.com/products/alpine-weblock-5",
         "active": false,
         "style": "Tensionable Weblock"
@@ -226,6 +228,7 @@
         },
         "date_introduced": null,
         "name": "Alpine WebLock 6.1",
+        "description": "Diverse, general purpose webbing anchor. A webbing anchor that was built for the modern day highlines with low tensions and minimal tensioning gear as well as longlines and water lines. A general purpose workhorse of a weblock that you can rely on!",
         "product_url": "https://www.balancecommunity.com/collections/webbing-anchors/products/alpine-weblock-6-0",
         "active": true,
         "style": "Tensionable Weblock"
@@ -266,6 +269,7 @@
         },
         "date_introduced": null,
         "name": "Alpine WebLock 6.1 20mm",
+        "description": "Diverse, general purpose webbing anchor. A webbing anchor that was built for the modern day highlines with low tensions and minimal tensioning gear as well as longlines and water lines. A general purpose workhorse of a weblock that you can rely on!",
         "product_url": "https://www.balancecommunity.com/collections/webbing-anchors/products/alpine-weblock-6-0",
         "active": true,
         "style": "Tensionable Weblock"
@@ -313,6 +317,7 @@
         },
         "date_introduced": null,
         "name": "BaboonLock",
+        "description": "The BaboonLock is our go-to webbing anchor. Solidly built and rigourously tested, this versatile webbing anchor is a must for every slackliner.",
         "product_url": "http://www.slackgear.co.za/product/baboonlock/",
         "active": true,
         "style": "Tensionable Weblock"
@@ -438,6 +443,7 @@
         },
         "date_introduced": null,
         "name": "BANANA! 3.0 SR",
+        "description": "Lightweight and compact webbing anchor device. Small dimensions and low weight makes it perfect all-rounder. Equipped with movable captive front pin for fast and simple webbing installation with no chance of loosing the pin. Great care was taken to ensure no sharp edges remains, to avoid the risk of webbing abrasion or damage. Permanent riveting makes all elements the solid unity.",
         "product_url": "https://slackhouseshop.pl/en/produkt/banana-3-0-sr/",
         "active": false,
         "style": "Tensionable Weblock"
@@ -482,6 +488,7 @@
         },
         "date_introduced": null,
         "name": "BANANA! 3.1",
+        "description": "Lightweight and compact webbing anchor device. Small dimensions and low weight makes it perfect all-rounder. Equipped with movable captive front pin for fast and simple webbing installation with no chance of loosing it. Great care was taken to ensure no sharp edges remains, to avoid the risk of webbing abrasion or damage. Permanent riveting makes all elements the solid unity.",
         "product_url": "https://slackhouseshop.pl/en/produkt/banana-3-1-weblock/",
         "active": false,
         "style": "Tensionable Weblock"
@@ -833,7 +840,8 @@
         },
         "date_introduced": null,
         "name": "Canon FX",
-        "product_url": "https://www.slackshop.cz/en/weblocks/24-eqb-canon-fx.html",
+        "description": "A weblock so strong it hurt a lab member’s of staff ego while trying to tear it apart. Oh, and unlike the unharmed weblock, the pull tester had to be fixed.",
+        "product_url": "https://web.archive.org/web/20251116004853/https://www.slackshop.cz/en/weblocks/24-eqb-canon-fx.html",
         "active": false,
         "style": "Tensionable Weblock"
     },
@@ -1458,7 +1466,8 @@
         },
         "date_introduced": null,
         "name": "Equilocker",
-        "product_url": "http://www.slackliner.de/Verbindungselemente/Linelocker/Equilocker.html",
+        "description": "The Equilocker by Sigma Slacklines - the high-quality longline linelock for 25 mm slacklines. Thanks to its generous dimensions it also takes thick webbing or doubled slacklines. Direct connection to 12 mm stainless steel shackles or 2 t steel shackles, no loops or slings needed. The front pin (12 mm, freely rotating) allows comfortable pre-tensioning by hand. The large central redirect made of anodised 7075 aluminium ensures maximum use of the breaking strength. Framed by 4 mm thick, deburred and glass-bead-blasted stainless steel plates.",
+        "product_url": "https://slackliner.de/en/products/equilocker-longline-linelock-25mm",
         "active": true,
         "style": "Tensionable Weblock"
     },
@@ -1552,6 +1561,7 @@
         },
         "date_introduced": null,
         "name": "Frog",
+        "description": "The Frog is the first webbing anchor in high-strength stainless steel, very lightweight for a MBS of 60 kN, compatible with all connectors from 8 mm to 20 mm and even with slings. And the shape of the main diverter allows you to use your webbing to 98% of its strength.",
         "product_url": "https://slack-mountain.com/en/webbing-anchor/231-4047-frogx.html",
         "active": true,
         "style": "Tensionable Weblock"
@@ -1604,6 +1614,7 @@
         },
         "date_introduced": null,
         "name": "Ginkgo",
+        "description": "The Ginkgo is a trickline anchor, built to be extra strength solid, with a MBS of 100 kN, it is aimed at all those who want to pull off high amplitude tricks without fear. This has been designed and built to be the highest breaking strength webbing anchor on the market. Intended for webbings of between 40 – 50 mm, it has (WLL) of 00 kN, a 30 mm central diverter and a 16 mm steel front bolt pin",
         "product_url": "https://slack-mountain.com/en/tricklines/166-paire-de-ginkgo-745-l-unite.html",
         "active": true,
         "style": "Tensionable Weblock"
@@ -1762,6 +1773,7 @@
         },
         "date_introduced": null,
         "name": "Katana FX",
+        "description": "Katana is a cutting-edge piece for the most immense tricks and flights. When partnered with EQB Ninja line, it will take you to another trickline level.",
         "product_url": "https://www.slackshop.cz/en/weblocks/27-eqb-katana-fx.html",
         "active": true,
         "style": "Tensionable Weblock"
@@ -1802,6 +1814,7 @@
         },
         "date_introduced": null,
         "name": "KingPin",
+        "description": "The KingPin Weblock is high-tech solution for 20mm slackline webbings. It is super light, has a high breaking load efficiency and allows you to pre-tension the line.",
         "product_url": "https://slacktivity.com/shop/kingpin-weblock/",
         "active": true,
         "style": "Tensionable Weblock"
@@ -1852,6 +1865,7 @@
         },
         "date_introduced": null,
         "name": "Lime",
+        "description": "Designed and produced entirely in Italy by Spider Slackline. Lime line lock is developed to be versatile with any type of connector, light and resistant with a working load up to 12kN. A line lock is essential for tensioning slacklines longer than 50 meters.",
         "product_url": "https://renegadejuggling.com/products/spider-lime-line-lock",
         "active": true,
         "style": "Tensionable Weblock"
@@ -1903,6 +1917,7 @@
         },
         "date_introduced": null,
         "name": "LineLock AL MK4",
+        "description": "The lineLock AL was first introduced in 2012 and is still today one of the smallest and lightest longline compliant slackline anchoring devices on the market.",
         "product_url": "https://www.linegrip.com/shop/slackpro-linelock-al/",
         "active": false,
         "style": "Tensionable Weblock"
@@ -2036,7 +2051,8 @@
         },
         "date_introduced": null,
         "name": "Linelocker",
-        "product_url": "https://www.slackshop.cz/cs/kotvitka/132-linelocker.html",
+        "description": "The simplest and lightest weblock on the market. Classic linelocker that is used for slackline rigging for more than 10 years now. Ultralight aluminium version weighs only 24 grams!",
+        "product_url": "https://www.slackshop.cz/en/weblocks/132-linelocker.html",
         "active": true,
         "style": "Fixed Linelocker"
     },
@@ -2456,6 +2472,7 @@
         },
         "date_introduced": null,
         "name": "Mithril - Quick Pin",
+        "description": "Aluminium weblock with 2 quick pins. Ideal for highline projects or for travels.",
         "product_url": "https://www.slackshop.cz/en/weblocks/145-350-eqb-mithril.html#/165-pin_version-quick_pin",
         "active": true,
         "style": "Tensionable Weblock"
@@ -2537,6 +2554,7 @@
         },
         "date_introduced": null,
         "name": "Orange",
+        "description": "The Orange is a technological masterpiece with lots of functions which makes it the perfect highline weblock.",
         "product_url": "https://www.radrigs.co.uk/product-page/orange",
         "active": true,
         "style": "Tensionable Weblock"
@@ -2578,6 +2596,7 @@
         },
         "date_introduced": null,
         "name": "Paddle FX",
+        "description": "Having a properly strung trickline is a must. If you are an enthusiastic trickliner who goes nuts every time you grab a ratchet, then grab a Paddle!",
         "product_url": "https://www.slackshop.cz/en/weblocks/25-eqb-paddle-fx.html",
         "active": true,
         "style": "Tensionable Weblock"
@@ -2663,6 +2682,7 @@
         },
         "date_introduced": null,
         "name": "Paddle SH",
+        "description": "World unique anchor tool for locking 50 mm trickline webbing. Adequate solution for rigging todays modern tricklines.",
         "product_url": "https://web.archive.org/web/20150801130032/http://www.slackshop.cz/en/lockers/83-eqb-paddle.html",
         "active": false,
         "style": "Tensionable Weblock"
@@ -2750,6 +2770,7 @@
         },
         "date_introduced": null,
         "name": "Pirat PP",
+        "description": "Light, yet sufficiently strong allround 1-inch weblock. If you are looking for \"all in one\" solution for all your projects, throw Pirat in your backpack for your next adventure!",
         "product_url": "https://www.slackshop.cz/en/weblocks/155-369-eqb-pirat.html#/164-pin_version-pull_pin",
         "active": true,
         "style": "Tensionable Weblock"
@@ -2795,6 +2816,7 @@
         },
         "date_introduced": null,
         "name": "Pirat QP",
+        "description": "Light, yet sufficiently strong allround 1-inch weblock. If you are looking for \"all in one\" solution for all your projects, throw Pirat in your backpack for your next adventure!",
         "product_url": "https://www.slackshop.cz/en/weblocks/155-368-eqb-pirat.html#/165-pin_version-quick_pin",
         "active": true,
         "style": "Tensionable Weblock"
@@ -2848,6 +2870,7 @@
         },
         "date_introduced": null,
         "name": "PRO Weblock",
+        "description": "The PRO Weblock is the result of many years of development at raed slacklines. In this version we added all our technologies to equip you with the best weblock we can imagine.",
         "product_url": "https://web.archive.org/web/20220928094114/https://raed-slacklines.com/pro-weblock",
         "active": false,
         "style": "Tensionable Weblock"
@@ -3024,6 +3047,7 @@
         },
         "date_introduced": null,
         "name": "RamLock",
+        "description": "The SlackTech RamLock is the most advanced slackline weblock available to date. The RamLock is the first ever, low profile slackline weblock that has deviated from the standard, 19 year-old banana style design. Our goal with this slackline weblock was to create an incredibly strong, yet highly versatile 1 inch webbing anchor that any slacker can use regardless of their slackin' style.",
         "product_url": "https://web.archive.org/web/20190511213516/https://www.slacklinetechnology.com/shop/ramlock-slackline-anchor",
         "active": false,
         "style": "Tensionable Weblock"
@@ -3123,7 +3147,8 @@
         },
         "date_introduced": 1512946800000,
         "name": "Rhino Minion",
-        "product_url": "https://slack-mountain.com/fr/bloqueur-longline-highline/190-rhino-minion.html",
+        "description": "The Rhino Minion is the mix breeding between the Rhino and Frog, both lightweight 281g and strong with its 60 kN MBS entirely in stainless steel hand welded and tested in independent laboratory. Moreover the Rhino Minion keeps a pin of 12 mm and a central diverter big enough to exploit the strength of the webbing up to 95% as with the Rhino. 100% Made in France",
+        "product_url": "https://web.archive.org/web/20190724083143/https://slack-mountain.com/en/anchors-longline-highline/190-rhino-minion.html",
         "active": false,
         "style": "Tensionable Weblock"
     },
@@ -3167,6 +3192,7 @@
         },
         "date_introduced": null,
         "name": "RhinoLock",
+        "description": "The RhinoLock is super solid and built to last, this versatile webbing anchor is for those wanting to go longer!",
         "product_url": "http://www.slackgear.co.za/product/rhinolock/",
         "active": false,
         "style": "Tensionable Weblock"
@@ -3205,6 +3231,7 @@
         },
         "date_introduced": 1513720800000,
         "name": "RODEO weblock",
+        "description": "You don't want any additional weight dangling around in your loose rodeoline. An incredible weight of merely 57 gram makes RODEO without any doubt the lightest fully functional weblock on the planet. And yet it's strong: With a MBS of 17 kN this weblock is precisely engineered for your surfy rodeo lines. The cnc milled 7075 aluminium body provides a high safety margin and a soft shackle attachment point allows for the lowest weighing setup ever. Of course it's easy to pretension too.",
         "product_url": "https://raed-sports.com/products/rodeo-weblock",
         "active": true,
         "style": "Tensionable Weblock"
@@ -3654,6 +3681,7 @@
         },
         "date_introduced": null,
         "name": "SeaHorse DP 1.5",
+        "description": "The seaHorse is the world’s first ISA 51 certified HighTech Highline Weblock. Made from a single piece of aluminium, has a versatile HollowCenterDiverter and a excellent PreTension-Ability. This WebLock also impresses with its low weight and, at the same time, the generous dimensioning, which allows comfortable handling (even with up to 8mm thick slackline webbing).",
         "product_url": "https://slacktivity.com/shop/slacktivity-seahorse/",
         "active": true,
         "style": "Tensionable Weblock"
@@ -3907,6 +3935,7 @@
         },
         "date_introduced": null,
         "name": "Slackibloc 3.1",
+        "description": "The weblocks allow to anchor your slackline webbing in an adjustable way and without decreasing its strength. Essential for longlines and Highlines. Smart and easy to use, the Slackiblock3 accept standard dimensions webbing up to 28mm wide and 10mm thickness. Economic release made from painted steel with stainless steel lockable pin.",
         "product_url": "https://slack-inov.com/gb/gear/95-slackiblock-31",
         "active": false,
         "style": "Tensionable Weblock"
@@ -4603,7 +4632,7 @@
         "date_introduced": 1590364800000,
         "product_url": "https://balancecommunity.com/products/mightylock",
         "active": true,
-        "description": "A square line-locker ring with rounded bars from Balance Community. The geometry retains over 85 % of the webbing's strength — far better than a frost knot or a plain chain link — making it viable as a static, backup or longline anchor. One side is sized for 25 mm webbing, the other for 20 mm. Ships with a catch cord.",
+        "description": "High strength retention line-lock ring. The line-lock ring reinvented. The unique shape and geometry of the MightyLock give it unprecedented strength rentention with optimized fitting on shackle pins. Great for static ends, backups, and longlines!",
         "notes": "Manufacturer specs (balancecommunity.com): MBS 42 kN, WLL 10 kN, 54.0 g. Inner length 26.0 mm, inner width 20.0 mm, height/thickness 12.0 mm. Anodised aluminium. 25 mm side pairs with the pin of a 12 mm bow shackle; 20 mm side with a 10 mm bow or 1/2\" anchor shackle. Works on the bow side of most shackles. Catch cord is 2.75 mm Sterling GloCord. Colours: black, blue, orange, purple. No pin of its own — recorded as connection type Other. Date introduced is the Shopify listing publish date (2020-05-25).",
         "colors": "Black, Blue, Orange, Purple",
         "style": "Fixed Linelocker"
@@ -4623,7 +4652,7 @@
         "date_introduced": 1580083200000,
         "product_url": "https://balancecommunity.com/products/aluminum-line-locker-ring",
         "active": true,
-        "description": "A drop-forged aluminium ring dimensioned for building line-lockers with 1-inch webbing. Intended for line-lockers on a carabiner or the bow side of a shackle.",
+        "description": "1-inch aluminum line-locker ring. A drop-forged aluminum ring sized perfectly for building 1-inch line-lockers. Ideal for setting up line-lockers on carabiners or the bow-side of a shackle!",
         "notes": "Manufacturer specs (balancecommunity.com): MBS 15 kN, WLL 3 kN, drop-forged anodised aluminium alloy 6061. No weight published (the 91 g Shopify figure is shipping weight, not product weight) — left null. Date introduced is the Shopify listing publish date (2020-01-27).",
         "style": "Fixed Linelocker"
     },
@@ -5211,7 +5240,7 @@
         "style": "Tensionable Weblock",
         "colors": "Black",
         "notes": "Specs from the manufacturer's product page (balancecommunity.com, read 2026-09-24): 7075 anodized aluminium body, 17-4 PH stainless pin with a 2024 aluminium handle and 440C stainless locking balls; 60 kN MBS / 12 kN WLL (5:1 design factor); upper becket 56 kN MBS / 8 kN WLL, lower becket 70 kN MBS / 10 kN WLL; 24-26 mm webbing, 20 mm webbing only with the Alpine Weblock Spacers (Balance list the Axiom, Axiom MK2 and Silk 99 as not compatible). 242 g; 126.0 x 74.2 mm, 44.2 mm body thickness, 12 mm pin. Date introduced is the store listing date (2026-09-13). Price 125.10 USD.",
-        "description": "The next iteration of the Alpine WebLock 6: the 38 mm centre diverter now has sidewalls all the way round, the front pin is fully round so it spins while you tension with the Buckingham method, and the pin gets a parking spot on the body so it can be pre-installed without dropping mid-rig. Keeps the AWL6's large anchor hole with soft-release rails and its two beckets. Made in China, assembled in Colorado."
+        "description": "Our general purpose webbing anchor, refined. The next iteration of the Alpine WebLock 6: full diverter sidewalls, a round front pin that spins while you tension, and a pin parking spot so it never drops mid-rig."
     },
     {
         "id": 133,
@@ -5258,6 +5287,6 @@
         "style": "Tensionable Weblock",
         "colors": "Black",
         "notes": "Specs from the manufacturer's product page (balancecommunity.com, read 2026-09-24): 7075 anodized aluminium body, 17-4 PH stainless pin with a 2024 aluminium handle and 440C stainless locking balls; 60 kN MBS / 12 kN WLL (5:1 design factor); upper becket 56 kN MBS / 8 kN WLL, lower becket 70 kN MBS / 10 kN WLL; 24-26 mm webbing, 20 mm webbing only with the Alpine Weblock Spacers (Balance list the Axiom, Axiom MK2 and Silk 99 as not compatible). 278 g; 123.6 x 71.2 mm, 44.2 mm body thickness, 12 mm pins. Date introduced is the store listing date (2026-09-17). Price 125.10 USD.",
-        "description": "The Alpine WebLock 6.2 with a second quick-release pin at the rear in place of the anchor hole, for direct attachment to soft releases and other gear. Both pins are round, free to spin, and have their own parking spot; same fully walled 38 mm diverter, upper and lower beckets and ratings as the standard AWL6.2. Made in China, assembled in Colorado."
+        "description": "Two pins, one weblock. The Alpine WebLock 6.2 with a second quick pin at the rear, for direct attachment to slings, soft shackles and soft releases — same diverter, same beckets, same strength."
     }
 ]

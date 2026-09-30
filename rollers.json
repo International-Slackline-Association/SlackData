@@ -2,6 +2,7 @@
     {
         "id": 1,
         "name": "AIDMAN",
+        "description": "Ball bearing pulley for 25 mm wide webbing.",
         "material": null,
         "weight": 139,
         "wll": 2,
@@ -22,6 +23,7 @@
     {
         "id": 2,
         "name": "Hangover 2.0",
+        "description": "SLACKTIVITY's HangOver is the first slackline carabiners for highlining and thanks to 4 ball bearings - strong enough to be used in a webbing pulley system for rigging.",
         "material": "Aluminum, Steel",
         "weight": 152,
         "wll": 4,
@@ -40,12 +42,13 @@
         "locking_type": "Non-locking",
         "bearing_material": "Steel",
         "date_introduced": null,
-        "product_url": "https://www.slacktivity.com/default/longline-highline/hangover",
+        "product_url": "https://web.archive.org/web/20211018144835/https://slacktivity.com/category/slackline-tensioning-gear/hangovers/?add-to-cart=3180",
         "active": true
     },
     {
         "id": 3,
         "name": "HangOver Stainless",
+        "description": "Indispensable for any highliner and anyone who wants to stretch the longlines efficiently with as little material as possible (HangOverPulley). NEW now with stainless steel ball bearing.",
         "material": "Aluminum, Stainless Steel",
         "weight": 152,
         "wll": 4,
@@ -70,6 +73,7 @@
     {
         "id": 4,
         "name": "HangOver-S",
+        "description": "Indispensable for any Highliner and all low weight tensioning systems (HangOver Pulley Systems). World’s first Highline-specific product with PSA certification. The screw-gate HangOver version offers additional safety.",
         "material": "Aluminum, Steel",
         "weight": 157,
         "wll": 4,
@@ -93,6 +97,7 @@
     {
         "id": 5,
         "name": "HangOver Royal",
+        "description": "“Rolling like a King” with the new HangOver «Royal» by SLACKTIVITY – no gaps, no rusting. Perfect for sliding over a Highline near sea or as pulley carabiner to tension your slackline.",
         "material": "Aluminum",
         "weight": 154,
         "wll": 4,
@@ -140,6 +145,7 @@
     {
         "id": 7,
         "name": "LineBuggy",
+        "description": "Webbing transport pulley and for use with Ellington/Primitive tensioning system for increased efficiency",
         "material": "Stainless Steel",
         "weight": 140,
         "wll": 3,
@@ -163,6 +169,7 @@
     {
         "id": 8,
         "name": "Motum webbing pulley",
+        "description": "Webbing pulley, made for transport or multiplication in tensioning systems.",
         "material": "Stainless Steel",
         "weight": 85,
         "wll": 2,
@@ -186,6 +193,7 @@
     {
         "id": 9,
         "name": "Pulley",
+        "description": "The Slack Mountain webbing pulley is compatible on all 18mm to 28mm webbing and minimizes friction thanks to its stainless steel ball bearings. Flask with rounded edge. Compatible for use with oval carabiner. CMU 5 kN. 135 g",
         "material": "Stainless Steel",
         "weight": 135,
         "wll": 5,
@@ -232,6 +240,7 @@
     {
         "id": 11,
         "name": "ROLLEX SS",
+        "description": "ROLLEX is the lightest aluminum carabiner with a 1-inch roll. Equipped with ball bearings (stainless steel in the SS version), it ensures smooth sliding movements. The single surface aluminum roll prevents jamming and keeps the line smooth without pressure marks.",
         "material": "Aluminum, Stainless Steel",
         "weight": 129,
         "wll": 4,
@@ -259,6 +268,7 @@
     {
         "id": 12,
         "name": "ROLLEX SG",
+        "description": "ROLLEX is the lightest aluminum carabiner with a 1-inch roll. Equipped with ball bearings (stainless steel in the SS version), it ensures smooth sliding movements. The single surface aluminum roll prevents jamming and keeps the line smooth without pressure marks.",
         "material": "Aluminum, Steel",
         "weight": 129,
         "wll": 4,
@@ -285,6 +295,7 @@
     {
         "id": 13,
         "name": "ROLLEX",
+        "description": "Lightest aluminium carabiner with 1 inch roll. The roll runs on 2 ball bearings (SS version has stainless steel bearings), that guarantee a smooth movement. Aluminium roll also prevents jamming the line between bearings that was usual in older version of these carabiners. Surface of the roll is perfectly smooth so it leaves no pressure marks on the webbing.",
         "material": "Aluminum, Steel",
         "weight": 129,
         "wll": 4,
@@ -311,6 +322,7 @@
     {
         "id": 14,
         "name": "SKIP",
+        "description": "SKIP is the first full Stainless Steel highly efficient webbing pulley on the market. Suitable for 1 inch / 25 mm wide flat webbing. It can be used as a multiplier in an Ellington tightening system or as a transport pulley.",
         "material": "Stainless Steel",
         "weight": 165,
         "wll": 5,
@@ -334,6 +346,7 @@
     {
         "id": 15,
         "name": "SKIP UL",
+        "description": "SKIP UL is the first full Stainless Steel highly efficient webbing pulley on the market. Suitable for 1inch / 25mm wide flat webbings. It can be used as a multiplier in an Ellington tightening system or as a transport pulley.",
         "material": "Stainless Steel",
         "weight": 108,
         "wll": 3,
@@ -383,6 +396,7 @@
     {
         "id": 17,
         "name": "BC Roller - Straight Gate",
+        "description": "Small, lightweight webbing carabiner. A webbing roller carabiner that fits nicely on the harness and works well with most hardware. Stainless steel bearings and two gate-types.",
         "material": "Aluminum, Stainless Steel",
         "weight": 121,
         "wll": 4,
@@ -404,6 +418,7 @@
     {
         "id": 18,
         "name": "BC Roller - 2-Stage Twist Lock",
+        "description": "Small, lightweight webbing carabiner. A webbing roller carabiner that fits nicely on the harness and works well with most hardware. Stainless steel bearings and two gate-types.",
         "material": "Aluminum, Stainless Steel",
         "weight": 136,
         "wll": 4,
@@ -425,6 +440,7 @@
     {
         "id": 19,
         "name": "HIGHWHEEL Longline Flat Pulley",
+        "description": "The HIGHWHEEL is an aluminum pulley with a 1 inch (2.5cm) roller base that slides on two steel ball bearings to ensure smooth movement. The special aluminum roller prevents jamming between the webbing and the bearings. The roller is completely smooth and leaves no marks on the webbing when sliding.",
         "material": "Aluminum, Steel",
         "weight": 91,
         "wll": 4,
@@ -452,6 +468,7 @@
     {
         "id": 20,
         "name": "Rolley",
+        "description": "Roll along webbing and make the magic of mechanical advantage possible. By arranging your Rolley as a pulley using a Grippex in a buckingham system you get an ideal mechanical advantage of 3:1. In reality, this means you can tension your slackline as if you had an extra pair of hands helping.",
         "material": null,
         "weight": null,
         "wll": null,

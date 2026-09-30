@@ -258,6 +258,7 @@
     {
         "id": 5,
         "name": "Sonic 2",
+        "description": "Sonic 2 - the legend is back! Unique polyamide webbing that was especially designed for all-round use in slacklining. This webbing is characterized mainly by the safe 3-layer structure, the very fine and robust weaving surface and the smooth rounded edges. The webbing is very soft and flexible, thus optimal to handle and has excellent pretensionability in weblocks. A special PU coating protects the webbing for a long time against abrasion and provides excellent grip underfoot.",
         "brand": "Aki Slacklines",
         "materialType": "Nylon",
         "width": 25,
@@ -410,7 +411,7 @@
             }
         ],
         "date_introduced": null,
-        "product_url": "https://aki-slacklines.de/en/webbing/polyamide/137/aki-sonic-2-slackline-webbing?c=12&fbclid=IwAR1eTq7La_8P4pp3HW0hq4rE2LNuzA2ZAbm-Vyx4gXORVdZU1EmhrtBbLAo",
+        "product_url": "https://web.archive.org/web/20221209100749/https://aki-slacklines.de/en/webbing/polyamide/137/aki-sonic-2-slackline-webbing-fixed-length",
         "webbing_construction": "Core/Sheath",
         "priceMeter": 1.99,
         "currency": "EUR",
@@ -722,6 +723,7 @@
     {
         "id": 10,
         "name": "Aero 2",
+        "description": "Deluxe mid-stretch webbing. Bounce, surf, walk, and send!",
         "brand": "BalanceCommunity",
         "stretch": [
             {
@@ -820,6 +822,7 @@
     {
         "id": 11,
         "name": "Feather",
+        "description": "An ultra-lightweight polyester webbing for low-tension and rodeo lines, a smooth black walking surface that stands out on any terrain and barely stretches, ideal for traveling slackliners who want a featherweight rig. Feather is absolutely not meant for highlines, main or backup.",
         "brand": "BalanceCommunity",
         "stretch": [
             {
@@ -880,6 +883,7 @@
     {
         "id": 12,
         "name": "Feather Pro",
+        "description": "Lightweight and Stretchy Polyester. Ideal for low tension highlines",
         "brand": "BalanceCommunity",
         "stretch": [
             {
@@ -1252,6 +1256,7 @@
     {
         "id": 16,
         "name": "Mantra MK4 Flight",
+        "description": "Low stretch for longline rigging. Built for those that love walking the big lines",
         "brand": "BalanceCommunity",
         "stretch": [
             {
@@ -1704,6 +1709,7 @@
     {
         "id": 22,
         "name": "Moonwalk",
+        "description": "The Moonwalk is our high tech webbing - Made in France - The purpose was to offer to the slackliners an ultra light (34g/m) and ultra resistant (31kN) webbing to set up huge lines. She's also the solution for those who want to carry as light as possible when backpacking. It's a flat webbing, composed of 50% polyester/50% HMPE which gives it high resistance and low stretch. Light, easy to tighten and store!",
         "brand": "Slack.fr",
         "stretch": [
             {
@@ -1728,10 +1734,10 @@
             "Polyester",
             "Dyneema/HMPE"
         ],
-        "weight": 34,
+        "weight": 31,
         "breakingStrength": 35,
         "date_introduced": null,
-        "product_url": "https://laboutique.slack.fr/en/slackline-webbings/41-moonwalk-flat-hybride.html",
+        "product_url": "https://web.archive.org/web/20220124035350/https://laboutique.slack.fr/en/slackline-webbings/41-moonwalk-flat-hybride.html",
         "width": 25,
         "thickness": 2,
         "webbing_construction": "Flat",
@@ -1772,6 +1778,7 @@
     {
         "id": 24,
         "name": "Bluewing",
+        "description": "Armed with the revolutionary Wing technology, this light-weight webbing is perfect for long- and highlining. Its low stretch makes it easy to tension longer lines, while the soft tubular edges prevent injuries when catching a highline. The successor of our popular on’sight line, the blueWing is also great for surfing.",
         "brand": "Elephant Slacklines",
         "stretch": [
             {
@@ -2007,6 +2014,7 @@
     {
         "id": 27,
         "name": "Sigma N",
+        "description": "Jormungand - the snake. Soft, smooth, snappy. The first polyamide webbing of slackliner / sigma Slacklines The soft and very flexible hose band is very easy to catch due to the thick edges, so it works well for Water and highlines. Also for longlining, it is up to 100m suitable. An ideal exercise webbing",
         "brand": "slackliner.de",
         "stretch": [
             {
@@ -2058,7 +2066,7 @@
         "weight": 55,
         "breakingStrength": 26,
         "date_introduced": null,
-        "product_url": "http://www.slackliner.de/Webbing/Nylon/Sigma-N-jormungand-270.html",
+        "product_url": "https://web.archive.org/web/20191121195728/https://www.slackliner.de/Webbing/Nylon/Sigma-N-jormungand-270.html",
         "width": 25,
         "webbing_construction": "Tubular",
         "priceMeter": 1.49,
@@ -2120,7 +2128,7 @@
             }
         ],
         "date_introduced": null,
-        "product_url": "http://www.slackliner.de/Slackline-Band/Schlauchband/Sigma-X.html",
+        "product_url": "https://web.archive.org/web/20170502080317/http://www.slackliner.de:80/Slackline-Band/Schlauchband/Sigma-X.html",
         "webbing_construction": "Tubular",
         "priceMeter": 1.49,
         "currency": "EUR",
@@ -2129,6 +2137,7 @@
     {
         "id": 29,
         "name": "Sigma Impact",
+        "description": "When two worlds collide! Our new flat polyester webbing Impact has been manufactured in a way that combines the best qualities of PES and PAD in one slackline. It has PAD's high stretch for powerful bounces, endless surfing and a dynamic walking experience whilst being made entirely of PES for high abrasion resistance and to remain affordable for the broke slackliner you surely are. The quality weave has rounded edges for more comfort on your feet and hands. Combined with the high energy absorption and a more than decent break strength it is the perfect highline webbing. We use a digital printing process to ensure brilliant colours. Polyester has never been so good. The Sigma Impact. Try it now.",
         "brand": "slackliner.de",
         "stretch": [
             {
@@ -2176,7 +2185,7 @@
         "weight": 64,
         "breakingStrength": 35,
         "date_introduced": null,
-        "product_url": "http://www.slackliner.de/Webbing/Flat-Webbing/Sigma-Impact.html",
+        "product_url": "https://web.archive.org/web/20191121200233/https://www.slackliner.de/Webbing/Flat-Webbing/Sigma-Impact.html",
         "width": 25,
         "thickness": 2.7,
         "webbing_construction": "Flat",
@@ -2233,6 +2242,7 @@
     {
         "id": 31,
         "name": "Dragon",
+        "description": "This re-dressed three-tonner is timeless. Several Czech records were broken on this line. Multi-layer design provides sufficient strengths even for lines over 100m.",
         "brand": "Equilibrium",
         "stretch": [
             {
@@ -2309,6 +2319,7 @@
     {
         "id": 33,
         "name": "Bounce",
+        "description": "The enthusiast’s line. Highly addictable webbing with excellent stretch suitable for travelling and dynamic tricks alike.",
         "brand": "Equilibrium",
         "stretch": [
             {
@@ -2381,6 +2392,7 @@
     {
         "id": 35,
         "name": "Element",
+        "description": "Tubular 25 mm webbing designed for progressive tricks, surfing, and jumps alike. High stretch destined the webbing for dynamic tricks application, as well as rode line. Thinner tubular webbing can be threaded through the Element to create an extremely strong and yet quite stretchy line.",
         "brand": "Equilibrium",
         "stretch": [
             {
@@ -2417,6 +2429,7 @@
     {
         "id": 36,
         "name": "Skye",
+        "description": "A lightweight 3,5ton polyester webbing that boasts with “core/weave” and extra rounded edges. No detail was omitted.",
         "brand": "Equilibrium",
         "stretch": [
             {
@@ -2472,7 +2485,7 @@
         "weight": 62,
         "breakingStrength": 31,
         "date_introduced": 1492041600000,
-        "product_url": "https://www.slackshop.cz/en/webbing/78-eqb-skye.html",
+        "product_url": "https://web.archive.org/web/20191120204352/https://www.slackshop.cz/en/webbing/78-eqb-skye.html",
         "width": 25,
         "thickness": 2.6,
         "webbing_construction": "Flat",
@@ -2521,6 +2534,7 @@
     {
         "id": 38,
         "name": "eLine",
+        "description": "The YogaSlackers eLine webbing is perfect for beginner to advanced slackliners. This versatile 1” line offers lower tension for a safe and fun way to work both static and dynamic poses.",
         "brand": "YogaSlackers",
         "stretch": [
             {
@@ -2557,6 +2571,7 @@
     {
         "id": 39,
         "name": "Cobalt",
+        "description": "The COBALT is slack mountain's classical webbing. 49g/m for all kinds of uses. With 25 kN Breaking, it will be use in all domains.",
         "brand": "SlackMountain",
         "stretch": [
             {
@@ -2578,7 +2593,7 @@
         ],
         "materialType": "Polyester",
         "weight": 60,
-        "breakingStrength": 30,
+        "breakingStrength": 25,
         "date_introduced": null,
         "product_url": "http://slack-mountain.com/en/webbing-slackline/1-cobalt.html",
         "width": 25,
@@ -2586,7 +2601,9 @@
         "webbing_construction": "Flat",
         "priceMeter": 2,
         "currency": "EUR",
-        "active": true
+        "active": true,
+        "manufacturer_not_for_highline": true,
+        "manufacturer_not_for_highline_source": "http://slack-mountain.com/en/webbing-slackline/1-cobalt.html"
     },
     {
         "id": 40,
@@ -2625,6 +2642,7 @@
     {
         "id": 41,
         "name": "Snake Tub",
+        "description": "The tubular webbing 25 mm of Slack-Mountain, realized in Polyester, her will be completed for those who look for a comfort under the foot. His elasticity will allow to make you the a little harder spot. Thanks to his black central line on a single face you can make the flat easily. With 52g / m.",
         "brand": "Slack Mountain",
         "materialType": "Polyester",
         "width": 25,
@@ -2655,6 +2673,7 @@
     {
         "id": 42,
         "name": "Diablo2",
+        "description": "The DIABLO 2 with new weaving and new color, it is the webbing which is going to torment you, with its 96 g/m the difficulty will be supreme. In case it would not be sufficient we can always double it and find itself with 192g / m. The webbing is weaved from fiber tinged in the mass so that over time it remains devilish.",
         "brand": "Slack Mountain",
         "materialType": "Polyester",
         "width": 25,
@@ -2679,7 +2698,7 @@
             }
         ],
         "date_introduced": null,
-        "product_url": "http://slack-mountain.com/en/webbing-slackline/132-diablo2.html",
+        "product_url": "https://web.archive.org/web/20210419021302/https://slack-mountain.com/en/webbing-slackline/132-diablo2.html",
         "thickness": 3.6,
         "webbing_construction": "Core/Sheath",
         "priceMeter": 1,
@@ -2689,6 +2708,7 @@
     {
         "id": 43,
         "name": "Goku 2",
+        "description": "The GOKU 2 Hybrid 2.5 cm Slack Mountain, high performance composed of high-tech fiber webbing, light and very strong to do all your lengths and beat your records. With 41g/m you can take it everywhere and will also practice on your short lengths as a travel your webbing.",
         "brand": "SlackMountain",
         "stretch": [
             {
@@ -2816,6 +2836,7 @@
     {
         "id": 47,
         "name": "Spectre",
+        "description": "The webbing polyamide which will make you discover a New World, with its design in soul + girdle and his round edges, it will offer you a flexibility and a unique elasticity. His 70 g/m and his resistance of more than 30 kN shall allow you to take advantage of his 13.5 % of elasticity even low-voltage. Made in France",
         "brand": "SlackMountain",
         "stretch": [
             {
@@ -2839,7 +2860,7 @@
         "weight": 70,
         "breakingStrength": 30,
         "date_introduced": 1486425600000,
-        "product_url": "http://slack-mountain.com/en/webbing-slackline/168-spectre.html",
+        "product_url": "https://web.archive.org/web/20250515062247/https://slack-mountain.com/en/webbing-slackline/168-spectre.html",
         "width": 25,
         "thickness": 3,
         "webbing_construction": "Core/Sheath",
@@ -2876,6 +2897,7 @@
     {
         "id": 49,
         "name": "Wallaby",
+        "description": "Our Wallaby trickline, is the bounciest yet. A high breaking strength. The low initial elasticity is then met by the dynamic reserve and is ideally rigged with pulleys, but can just as easily be setup on ratchets. The extra thickness compared to most lines is from the increased resistance allowing you to get more height to help stick new tricks.",
         "brand": "SlackMountain",
         "stretch": [
             {
@@ -2928,6 +2950,7 @@
     {
         "id": 51,
         "name": "Plum",
+        "description": "One of the webbing most light of the market with 25g / m it will be completed to be taken in kits light. Ideal during the travels.",
         "brand": "SlackMountain",
         "stretch": [
             {
@@ -2956,6 +2979,7 @@
     {
         "id": 52,
         "name": "Cosmic",
+        "description": "COSMIC is semi-challenging tubular webbing, known for its strength, light weight, and smooth edges. It offers a great bounce with limited stretch, making it ideal for longlining in parks and safe for highlining. COSMIC's unique smoothness and specific stretch make it excellent for both static and dynamic trick training.",
         "brand": "Slack Inov",
         "gear_sellers": [
             "Spider Slacklines"
@@ -3398,6 +3422,7 @@
     {
         "id": 56,
         "name": "Rainbow",
+        "description": "The Unicorn won't fly anymore. Let’s dance on the Rainbow now! Rainbow is the next generation highline webbing. Its rounded edges and the tight weave make it feel very soft and smooth to your hand and feet. Take a look at the stretch characteristics: it’s easy to tension but still playful enough for nice surfbounces and bouncetricks. The dual color design helps you to prevent twists while taping and rigging. Rainbow is coated for protection against water, dust and dirt, so you will have long time fun with this webbing.",
         "brand": "Raed Slacklines",
         "stretch": [
             {
@@ -3480,6 +3505,7 @@
     {
         "id": 57,
         "name": "Parsec",
+        "description": "Parsec is our awesome Polyester Webbing for all your ambitious longline and highline projects. Its low stretch makes it very easy to tension which is ideal for longlines from 100 m and more.",
         "brand": "Raed Slacklines",
         "stretch": [
             {
@@ -3567,7 +3593,7 @@
         "weight": 59,
         "breakingStrength": 34,
         "date_introduced": null,
-        "product_url": "https://raed-slacklines.com/parsec-longline-webbing",
+        "product_url": "https://web.archive.org/web/20230129023244/https://raed-slacklines.com/parsec-longline-webbing",
         "width": 25,
         "webbing_construction": "Flat",
         "priceMeter": 0.99,
@@ -3578,6 +3604,7 @@
     {
         "id": 58,
         "name": "MOTM",
+        "description": "Have you seen the man on the moon? We have and he was looking amazing. Bouncing weightless between the stars and the earth in an endless flow. This extraordinary fabric will give you some alien fun right where you choose the experience to take place - even without NASA's budget. The sky is not the limit, your imagination is. And fun is what you make of it. That’s the truth about this fantastic webbing. Your turn.",
         "brand": "Raed Slacklines",
         "stretch": [
             {
@@ -3676,6 +3703,7 @@
     {
         "id": 59,
         "name": "Helium",
+        "description": "Helium is some very interesting slackline webbing. With its 38 g/m it is very lightweight. With its stretch of 3% at 8 kN it is very low stretch as well. Third it is some very flat webbing. This makes it packing very small. This combination makes it an ideal choice for your travel webbing because you have a lightweight webbing that's very easy to tension and packs very small in your travel package. With a minimum breaking strength of 24 kN Helium is strong too. You can use it for your low tension longline projects as well as for waterlines or lowlines.",
         "brand": "Raed Slacklines",
         "stretch": [
             {
@@ -3761,7 +3789,7 @@
         ],
         "materialType": "Polyester",
         "weight": 38,
-        "breakingStrength": 23,
+        "breakingStrength": 24,
         "date_introduced": null,
         "product_url": "https://raed-slacklines.com/helium-lightweight-polyester-slackline-webbing",
         "width": 25,
@@ -3774,6 +3802,7 @@
     {
         "id": 60,
         "name": "Cumulus",
+        "description": "CUMULUS is the fluffy roundhouse ass kick for your bouncy sessions! Soft, round, thick, smooth edges make it perfect for your bare feet and catches. With a weight of just 66g/m but 35 kN strength plus robust core/sheath design this webbing is also perfect for your remote highline spots. And the best of it: More than 8% stretch at 5 kN combined with a therma stretch/hydro shield covering makes your bounce sessions smoother and more controlled than ever before. This awesome new fluffyness feels like walking and bouncing on fluffy cumulus clouds. You will love it!",
         "brand": "Raed Slacklines",
         "stretch": [
             {
@@ -3841,7 +3870,7 @@
         "weight": 66,
         "breakingStrength": 35,
         "date_introduced": 1563919200000,
-        "product_url": "https://raed-slacklines.com/cumulus-nylon-highline-webbing",
+        "product_url": "https://web.archive.org/web/20210117061819/https://raed-slacklines.com/cumulus-nylon-highline-webbing",
         "width": 25,
         "webbing_construction": "Flat",
         "priceMeter": 1.99,
@@ -3851,6 +3880,7 @@
     {
         "id": 61,
         "name": "pinkTube",
+        "description": "Just WOOWOWOOOOOOOW! That’s how it feels like when you first time walk on a pinkTube. This webbing is the stretchiest and bounciest line available. No matter whether you just want to walk or do crazy tricks, the pinkTube guarantees endless fun.",
         "brand": "Slacktivity",
         "stretch": [
             {
@@ -3964,6 +3994,7 @@
     {
         "id": 62,
         "name": "redTube",
+        "description": "The perfect feel-good slackline. The polyamide (= nylon) redTube is the perfect slackline for anyone who likes soft, high-stretch webbing. Version A is certified according safety standard ISA 41.",
         "brand": "Slacktivity",
         "stretch": [
             {
@@ -4129,6 +4160,7 @@
     {
         "id": 63,
         "name": "Marathon",
+        "description": "The Marathon is a high-tech polyester webbing designed with low stretch and soft edges. Its pleasant dynamics ensure perfect performance and an exceptional walking experience. In addition to these outstanding qualities, this classic webbing is now an ISA Certified Highline Webbing, classified under Strength Class A.",
         "brand": "Slacktivity",
         "stretch": [
             {
@@ -4451,6 +4483,7 @@
     {
         "id": 65,
         "name": "Half-Marathon",
+        "description": "HighTech polyester webbing with low packing mass and weight. Which is perfect for alpine products as main or backup line. The low weight also makes it easy to control for longline tricks like bouncing or surfing.",
         "brand": "Slacktivity",
         "stretch": [
             {
@@ -4800,7 +4833,7 @@
         "weight": 63,
         "breakingStrength": 32,
         "date_introduced": 1562706000000,
-        "product_url": "https://www.balanceur.ro/slackshop/benzi/milky-way/",
+        "product_url": "https://web.archive.org/web/20241006014024/https://www.balanceur.ro/slackshop/benzi/milky-way/",
         "width": 25,
         "webbing_construction": "Flat",
         "priceMeter": 0.99,
@@ -4810,6 +4843,7 @@
     {
         "id": 68,
         "name": "Tender",
+        "description": "TENDER is a webbing specifically produced for longline set-ups, its light polyester fiber was designed to create a tender walking experience.",
         "brand": "Spider Slacklines",
         "gear_sellers": [
             "Slack Inov"
@@ -4920,6 +4954,7 @@
     {
         "id": 69,
         "name": "Fly",
+        "description": "Our FLY line is a strong and quite resisting webbing with its high breaking strength (33 kN) and its simply flat woven character. Even though it's very strong, it is also a very lightweight line and therefore ideal for those who are ready to rigg 30+ m set-ups.",
         "brand": "Spider Slacklines",
         "gear_sellers": [
             "Slack Inov"
@@ -5065,6 +5100,7 @@
     {
         "id": 70,
         "name": "Zao",
+        "description": "ZAO is a highly appreciated slackline: it was designed based on feedback from some of our best longline and highline athletes. A flat woven central body and tubular edges ensure simultaneously softer catching and handling for the hands and a solid line feeling underneath your feet.",
         "brand": "Spider Slacklines",
         "gear_sellers": [
             "Slack Inov"
@@ -5167,6 +5203,7 @@
     {
         "id": 71,
         "name": "Edge",
+        "description": "EDGE is a polyester webbing made of three woven layers: a high-resistance central core (35 kN MBS) and two soft edge layers for a gentle feel even under high tension.",
         "brand": "Spider Slacklines",
         "gear_sellers": [
             "Slack Inov"
@@ -5269,6 +5306,7 @@
     {
         "id": 72,
         "name": "Jumbo",
+        "description": "The idea for the JUMBO line originated from a desire to practice and train on a heavier webbing. Our development process allowed us to come up with the innovative solution; to create a tubular webbing with the strength of a heavy webbing (83g). JUMBO is the first longline with external tubular and interior flat weaving. This combination creates an amazing three layers longline that demands real dedication.",
         "brand": "Spider Slacklines",
         "gear_sellers": [
             "Slack Inov"
@@ -5431,6 +5469,7 @@
     {
         "id": 73,
         "name": "Nylove",
+        "description": "NYLOVE is the product of extensive research and development to create an ideal highline slackline. Featuring a tubular core of nylon polyamide, it is shiny, bright, and soft. The solid central woven core achieves an MBS of 30 kN(6,744 lbs).",
         "brand": "Spider Slacklines",
         "gear_sellers": [
             "Slack Inov"
@@ -5533,6 +5572,7 @@
     {
         "id": 74,
         "name": "Y2K",
+        "description": "The Y2K is a groundbreaking high-tech webbing – actually a highline system with perfectly optimized backup length that is connected every 50/100m to the main line. Unlike most other high-tech webbings, the Y2K can be used in a single wrap in weblocks. The Y2K is an ISA Certified Highline Webbing, classified under Strength Class A.",
         "brand": "Slacktivity",
         "stretch": [
             {
@@ -5591,6 +5631,7 @@
     {
         "id": 77,
         "name": "Tape",
+        "description": "Ideal webbing for all kind of slackline",
         "brand": "Singing rock",
         "materialType": "Polyester",
         "width": 25,
@@ -5609,6 +5650,7 @@
     {
         "id": 78,
         "name": "Ninja",
+        "description": "Vicious 35 mm line designed for extreme trickline shows. Trickline specialty is what we call it. The line is designed to be used with Katana locker in extreme trickline shows and competitions. The Ninja is an extra strong and dynamic line for massive flights.",
         "brand": "Equilibrium Slacklines (EQB)",
         "materialType": "Nylon",
         "width": 35,
@@ -5621,7 +5663,7 @@
             }
         ],
         "date_introduced": null,
-        "product_url": "https://www.eqb.cz/ninja-en.html",
+        "product_url": "https://web.archive.org/web/20210419032543/https://www.eqb.cz/ninja-en.html",
         "webbing_construction": "Flat",
         "priceMeter": 45,
         "currency": "CZK",
@@ -5651,6 +5693,7 @@
     {
         "id": 80,
         "name": "Slim Green",
+        "description": "The Slim is a lightweight webbing that has found its ground in tensioning systems. Enthusiasts however use it for special slackline styles such as rodeo line.",
         "brand": "Equilibrium Slacklines (EQB)",
         "materialType": "Polyester",
         "width": 25,
@@ -5938,6 +5981,7 @@
     {
         "id": 95,
         "name": "Emeraude",
+        "description": "Designed on the advice of Nathan Faure Vincent, who obviously tried and validated it, Emeraude webbing is made for hight level practice.",
         "brand": "Slack Inov",
         "gear_sellers": [
             "Spider Slacklines"
@@ -6201,6 +6245,7 @@
     {
         "id": 107,
         "name": "EcoLine",
+        "description": "You cannot get any more basic than that. No colour, no accessories, but 100 % fun at an unbeatable price. We saved on everything but the necessary – the quality of the slackline and the ratchet. The fantastic price/performance ratio is perfect for quality-conscious beginners. The no-frills 12 meter long ecoLine is our lightest product and is ideal to take on trips.",
         "brand": "Elephant",
         "materialType": "Polyester",
         "width": 50,
@@ -6213,7 +6258,7 @@
             }
         ],
         "date_introduced": null,
-        "product_url": "http://elephant-slacklines.com",
+        "product_url": "https://elephant-slacklines.com/products/ecoline-12m",
         "webbing_construction": "Flat",
         "priceMeter": 1.95,
         "currency": "EUR",
@@ -6281,6 +6326,7 @@
     {
         "id": 111,
         "name": "Flow Line",
+        "description": "The FLOW LINE is ideal for all longliners or those who strive to go the distance. Thanks to the low flexibility, the amount of webbing to be pulled out for tensioning is very little. Due to its direct power transmission the FLOW LINE is also suitable for distances up to 150 m. Its weaving technique makes it a reliable slackline withstanding everyday wear by our professional athletes.",
         "brand": "Gibbon",
         "materialType": "Polyester",
         "width": 25,
@@ -6293,13 +6339,14 @@
             }
         ],
         "date_introduced": null,
-        "product_url": "http://www.gibbon-slacklines.com/en/products/longline-modules/flowline/index.html",
+        "product_url": "https://web.archive.org/web/20151120095503/http://www.gibbon-slacklines.com:80/en/products/longline-modules/flowline/index.html",
         "webbing_construction": "Flat",
         "active": false
     },
     {
         "id": 112,
         "name": "Tube Line",
+        "description": "The Gibbon Tube Line Set is a Slackline with 25mm running width, which is equipped with a tubular tape. This tubular tape has very soft edges and is very comfortable to run on.",
         "brand": "Gibbon",
         "materialType": "Polyester",
         "width": 25,
@@ -6440,6 +6487,7 @@
     {
         "id": 119,
         "name": "Sigma Impact LS",
+        "description": "The popular Sigma Impact webbing - now in a low stretch version. For everyone who has been put off by the high stretch of the Impact so far: the same soft webbing, with low stretch. Soft and comfortable in the hand, hardly any edges thanks to the webbing thickness. An ideal longline webbing with only 4 % stretch at 10 kN. Deliberately undyed: the webbing is pure, brilliant white.",
         "brand": "Slackliner.de",
         "materialType": "Polyester",
         "width": 25,
@@ -6452,7 +6500,7 @@
             }
         ],
         "date_introduced": null,
-        "product_url": "http://www.slackliner.de/Slackline-Band/Flachband/Sigma-Impact-lowstretch.html",
+        "product_url": "https://slackliner.de/en/products/sigma-impact-low-stretch-webbing-25mm",
         "thickness": 2.7,
         "webbing_construction": "Flat",
         "priceMeter": 0.9,
@@ -6474,7 +6522,7 @@
             }
         ],
         "date_introduced": null,
-        "product_url": "https://www.slack-shop.de/baender-schlingen/bander/strong/slacklineband-strong-ii.html",
+        "product_url": "https://web.archive.org/web/20160620222535/http://www.slack-shop.de/baender-schlingen/bander/strong/slacklineband-strong-ii.html",
         "webbing_construction": "Flat",
         "priceMeter": 1.99,
         "currency": "EUR",
@@ -6483,6 +6531,7 @@
     {
         "id": 121,
         "name": "Octopussy MKV",
+        "description": "The timeless classic from Slackhouse. All round slackline webbing used by beginners and professionals. Basic yet versatile polyester webbing mostly valued for pleasant bounce combined with low weight and high strength.",
         "brand": "Slack house",
         "materialType": "Polyester",
         "width": 25,
@@ -6505,6 +6554,7 @@
     {
         "id": 122,
         "name": "Rubber Band MKIII BLU",
+        "description": "A classic, flat, nylon (polyamide) webbing with high stretch and incredible energy. Created to fulfill dreams of sky-high bounces and wild surfs. Do not get scared of high stretch demanding more effort while tensioning - end result is worth it. Rubber Band works perfectly at short highlines introducing more bouncy feeling also increasing their safety margin. Yet it gives the most fun at medium lengths even at low tension.",
         "brand": "Slack house",
         "materialType": "Nylon",
         "width": 25,
@@ -6517,7 +6567,7 @@
             }
         ],
         "date_introduced": null,
-        "product_url": "https://slackhouseshop.pl/produkt/rubber-band-blu",
+        "product_url": "https://slackhouseshop.pl/en/produkt/rubber-band-blu/",
         "thickness": 3.35,
         "webbing_construction": "Flat",
         "priceMeter": 7.5,
@@ -6527,6 +6577,7 @@
     {
         "id": 123,
         "name": "Rubber Band MKIII SOL",
+        "description": "A classic, flat, nylon (polyamide) webbing with high stretch and incredible energy. Created to fulfill dreams of sky-high bounces and wild surfs. Do not get scared of high stretch demanding more effort while tensioning - end result is worth it. Rubber Band works perfectly at short highlines introducing more bouncy feeling also increasing their safety margin. Yet it gives the most fun at medium lengths even at low tension.",
         "brand": "Slack house",
         "materialType": "Nylon",
         "width": 25,
@@ -6549,6 +6600,7 @@
     {
         "id": 124,
         "name": "Blue Mile",
+        "description": "Blue Mile is a strong and lightweight polyester webbing aimed for longlining. It's main advantage is very low elongation - tensioning even longer lines requires less effort and shorter tenstioning systems. High strength provides better safety margin. Reasonable choice for highline backup.",
         "brand": "Slack house",
         "materialType": "Polyester",
         "width": 25,
@@ -6561,7 +6613,7 @@
             }
         ],
         "date_introduced": null,
-        "product_url": "https://slackhouseshop.pl/produkt/blue-mile/",
+        "product_url": "https://slackhouseshop.pl/en/produkt/blue-mile-25mm/",
         "thickness": 2.6,
         "webbing_construction": "Flat",
         "priceMeter": 4.8,
@@ -6629,6 +6681,7 @@
     {
         "id": 128,
         "name": "Slack-Spec 11/16\"",
+        "description": "By the Meter. A soft, stretchy 11/16\" tubular built for short park lines and rodeo lines.",
         "brand": "Balance Community: Slackline Outfitters",
         "materialType": "Nylon",
         "width": 17.5,
@@ -6753,6 +6806,7 @@
     {
         "id": 132,
         "name": "CoreTek",
+        "description": "CORETEK takes standard tubular webbing to the next level with a second piece of polyester webbing threaded through the center. This gives the line a supportive core offering a solid, but responsive feel ideal for slacklining.",
         "brand": "Slackline Industries",
         "materialType": "Polyester",
         "width": 25,
@@ -6765,7 +6819,7 @@
             }
         ],
         "date_introduced": null,
-        "product_url": "https://slacklineindustries.com/collections/1-inch/products/coretek",
+        "product_url": "https://web.archive.org/web/20211207002332/https://slacklineindustries.com/collections/1-inch/products/coretek",
         "thickness": 2.7,
         "webbing_construction": "Tubular",
         "priceMeter": 2.3,
@@ -6775,6 +6829,7 @@
     {
         "id": 133,
         "name": "Sugoi",
+        "description": "SUGOI (pronounced \"sue-GOY\") meaning awesome, is a flat polyester webbing with low stretch and high strength; the perfect weave for long and highlines.",
         "brand": "Slackline Industries",
         "materialType": "Polyester",
         "width": 25,
@@ -6787,7 +6842,7 @@
             }
         ],
         "date_introduced": null,
-        "product_url": "https://slacklineindustries.com/collections/all-products/products/sugoi",
+        "product_url": "https://web.archive.org/web/20211207001126/https://slacklineindustries.com/collections/all-products/products/sugoi",
         "thickness": 2.5,
         "webbing_construction": "Flat",
         "priceMeter": 2.3,
@@ -6797,6 +6852,7 @@
     {
         "id": 134,
         "name": "Great White",
+        "description": "This is South Africa’s first ever Slackline-Specific Webbing – made for longlining and highlining",
         "brand": "SlackGear",
         "materialType": "Polyester",
         "width": 25,
@@ -6819,6 +6875,7 @@
     {
         "id": 135,
         "name": "Tantalus",
+        "description": "It's time to smile and share the happiness. Tantalus, polyester webbing is here and it comes with a record weight of just 53g /m, so light you can control the line at any length. The newly designed weave is developed to provide an unforgettable slackline experience in any scenario, whether you are cruising in the park high in the air. Rounded edges take away the need to worry about catching, sharp edges, cuts, and bruises, just relax and enjoy. Even better, this webbing is called the \"red carpet\" of all polyester slackline webbing. The softness and beautiful light feeling will keep you on the line forever. The stuff, dreams are made of.",
         "brand": "Slacklife BC",
         "materialType": "Polyester",
         "width": 25.4,
@@ -6831,7 +6888,7 @@
             }
         ],
         "date_introduced": null,
-        "product_url": "https://www.slacklifebc.com/product-category/webbing/tantalus-polyester-webbing/",
+        "product_url": "https://web.archive.org/web/20191115233508/https://www.slacklifebc.com/product-category/webbing/tantalus-polyester-webbing/",
         "thickness": 3.2,
         "webbing_construction": "Flat",
         "priceMeter": 2.6,
@@ -6881,6 +6938,7 @@
     {
         "id": 138,
         "name": "Type 18 CG4",
+        "description": "Like the mystery of how globule CG4 was formed, Balancing Earth is seeking the mystery of what pushes us to try new things. This is why we chose to name our 1 inch flat webbing after the mysterious. Type 18 CG4 is a flat nylon webbing made from the highest quality 66 nylon available. Type 18 CG4 is extremely soft and dynamic making it the perfect slackline webbing. With it's high stretch* and super strength the CG4 webbing is a great choice no matter what type of slackin you do.",
         "brand": "Balancing Earth Slacklines",
         "materialType": "Nylon",
         "width": 25.4,
@@ -6903,6 +6961,7 @@
     {
         "id": 139,
         "name": "Rasta Tubelar",
+        "description": "Tubular webbing is the type of webbing that started the sport, back in Yosemite Valley in the 80's. Balancing Earth kept that in mind when putting together our tubular webbing. Balancing Earth's 1\" slackline tubular webbing is made from top quality nylon threading. Our slackline tubular webbing is super soft and the bounce is incredible. Making it perfect for every aspect of the sport whether surfing, walking, yoga, even tricks (under the right tension), our slackline tubular webbing is the best. The quality of the nylon fibers and the weave of the construction make it the softest slackline webbing available.",
         "brand": "Balancing Earth Slacklines",
         "materialType": "Nylon",
         "width": 25.4,
@@ -6964,6 +7023,7 @@
     {
         "id": 142,
         "name": "Flat",
+        "description": "50 meters of 25mm wide flat polyester webbing.",
         "brand": "Slackline Shop NZ",
         "materialType": "Polyester",
         "width": 25,
@@ -6988,6 +7048,7 @@
     {
         "id": 143,
         "name": "Sky Pilot (Black/White)",
+        "description": "Get ready for the ride of your life. Introducing SlacklifeBC's new nylon webbing, Sky Pilot - a line that transforms walking into flying. Taking control and floating in the air on this webbing is a chance to create your own aerial playground. Like to surf, bounce and dance 1000ft up in the air? Sky Pilot is your new friend. And, as any good friend would, it will catch you in the most gentle way possible with its soft, silky smooth edges. You guys are going to have a lot of fun!",
         "brand": "Slacklife BC",
         "materialType": "Nylon",
         "width": 25.4,
@@ -7000,7 +7061,7 @@
             }
         ],
         "date_introduced": null,
-        "product_url": "https://www.slacklifebc.com/product/skypilot-nylon",
+        "product_url": "https://web.archive.org/web/20190214184613/https://www.slacklifebc.com/product/skypilot-nylon/",
         "webbing_construction": "Flat",
         "priceMeter": 4.2,
         "currency": "CAD",
@@ -7009,6 +7070,7 @@
     {
         "id": 144,
         "name": "Lion Line",
+        "description": "High Tech does not equal high maintenance anymore! Experience the perfect relationship with SlacklifeBC's new high tech webbing. Lions is a no-fuss rig. It holds with one wrap in a weblock and grips with the linegrip allowing you to pretension at any time. Light as a cloud at 35 g/m and firm but soft on your feet, it is the perfect support for your long journeys across mountains, canyons, cities or just in the park. The search is over, Lions is the one!",
         "brand": "Slacklife BC",
         "materialType": "Dyneema/HMPE",
         "width": 25.4,
@@ -7016,7 +7078,7 @@
         "breakingStrength": 35.6,
         "stretch": null,
         "date_introduced": null,
-        "product_url": "https://www.slacklifebc.com/product/lions-line-hightech-webbing/",
+        "product_url": "https://web.archive.org/web/20191215113421/https://www.slacklifebc.com/product/lions-line-hightech-webbing/",
         "webbing_construction": "Flat",
         "priceMeter": 8.99,
         "currency": "CAD",
@@ -7025,6 +7087,7 @@
     {
         "id": 145,
         "name": "Tube #1",
+        "description": "High quality European made 25mm tubular nylon Slackline webbing in your custom length cut by the meter. The weave is custom made for us and uses a larger than normal amount of thread to create not only a smooth soft finish but is also thicker and stronger than other makes of tubular webbing on the market.",
         "brand": "Slackline Shop NZ",
         "materialType": "Nylon",
         "width": 25,
@@ -7146,7 +7209,7 @@
             }
         ],
         "date_introduced": null,
-        "product_url": "https://aki-slacklines.de/en/webbing/polyester/11/landcruising-verve-25-mm-slackline-30m?c=6",
+        "product_url": "https://web.archive.org/web/20200806010018/https://aki-slacklines.de/de/slacklineband/polyester/11/landcruising-verve-25-mm-slackline-30m?c=6",
         "thickness": 2.5,
         "webbing_construction": "Flat",
         "priceMeter": 1.33,
@@ -7219,6 +7282,7 @@
     {
         "id": 155,
         "name": "Reggae",
+        "description": "The Reggae is a tubular webbing, stretchy and smooth. Historical slackline webbing. It's light and flexible, nice to carry in your backpack. Super fast, controlled and small jump movements are possible. Super suitable for deep and soft waves, bouncing and surfing. It has an incredible flex. The line appears like a wave during bouncing, which takes one away, floats and catches again with a soft move. It doesn’t shake even in case of strong oscillations. A special type of floating feeling.",
         "brand": "Slack.fr",
         "materialType": "Polyester",
         "width": 25,
@@ -7307,14 +7371,14 @@
             }
         ],
         "date_introduced": null,
-        "product_url": "https://laboutique.slack.fr/en/tubular-webbing/143-reggae-tubular.html",
+        "product_url": "https://web.archive.org/web/20190825022148/https://laboutique.slack.fr/en/tubular-webbing/143-reggae-tubular.html",
         "thickness": 2,
         "webbing_construction": "Tubular",
         "priceMeter": 2.24,
         "currency": "EUR",
         "active": false,
         "manufacturer_not_for_highline": true,
-        "manufacturer_not_for_highline_source": "https://laboutique.slack.fr/143-reggae-tubulaire.html"
+        "manufacturer_not_for_highline_source": "https://web.archive.org/web/20250120001155/https://laboutique.slack.fr/143-reggae-tubulaire.html"
     },
     {
         "id": 156,
@@ -7331,7 +7395,7 @@
             }
         ],
         "date_introduced": null,
-        "product_url": "https://laboutique.slack.fr/en/tubular-webbing/146-rvd-tubular.html",
+        "product_url": "https://web.archive.org/web/20240812172323/https://laboutique.slack.fr/en/146-rvd-tubular.html?search_query=freestyle&results=45",
         "thickness": 2,
         "webbing_construction": "Tubular",
         "priceMeter": 2.24,
@@ -7486,13 +7550,14 @@
     {
         "id": 160,
         "name": "Firefly (phosphorescent)",
+        "description": "The Firefly the only phosphorescent slackline webbing. You want to slackline in the dark, it will be perfect for your night pictures. Designed with the core + sheath technology, its weight of 56 g / m and its resistance of 30 kN make it versatile. Made in France",
         "brand": "Slack Mountain",
         "materialType": "Hybrid",
         "materialComposition": [
             "Polyester"
         ],
         "width": 25,
-        "weight": 60,
+        "weight": 56,
         "breakingStrength": 30,
         "stretch": [
             {
@@ -7501,7 +7566,7 @@
             }
         ],
         "date_introduced": 1510700400000,
-        "product_url": "https://slack-mountain.com/fr/sangle-hybride/185-firefly.html",
+        "product_url": "https://slack-mountain.com/en/webbing-slackline/185-firefly.html",
         "thickness": 2,
         "webbing_construction": "Core/Sheath",
         "priceMeter": 1.79,
@@ -7523,7 +7588,7 @@
             }
         ],
         "date_introduced": 1512946800000,
-        "product_url": "https://slack-mountain.com/fr/sangles-slackline/189-french-line.html",
+        "product_url": "https://web.archive.org/web/20190917164439/https://slack-mountain.com/fr/sangles-slackline/189-french-line.html",
         "thickness": 2,
         "webbing_construction": "Core/Sheath",
         "priceMeter": 1.34,
@@ -7533,6 +7598,7 @@
     {
         "id": 162,
         "name": "Pop-Art",
+        "description": "New webbing, new weave, new vision; Pop-art is the trickline for your creative invention. With its unique design propel you in color. With a new weave even finer that gives a unique touch sensation and give you broad bounces. 100% Made in France",
         "brand": "Slack Mountain",
         "materialType": "Polyester",
         "width": 50,
@@ -7540,7 +7606,7 @@
         "breakingStrength": 30,
         "stretch": null,
         "date_introduced": 1513465200000,
-        "product_url": "https://slack-mountain.com/fr/jumplines/191-pop-art.html",
+        "product_url": "https://slack-mountain.com/en/tricklines/191-pop-art.html",
         "thickness": 1.8,
         "webbing_construction": "Flat",
         "priceMeter": 2.4,
@@ -7550,6 +7616,7 @@
     {
         "id": 163,
         "name": "Project 44",
+        "description": "The only braided tubular slackline webbing! Discover new sensations on a slackline, a webbing that has the ability to expand from 23mm to 40mm wide depending on the tension. Without any edge it will be ultra comfortable. It also has a resistance of 25 kN and strong resistance to abrasion with its braiding in double walls. Made in France, registered at INPI",
         "brand": "Slack Mountain",
         "materialType": "Polyester",
         "width": 25,
@@ -7562,7 +7629,7 @@
             }
         ],
         "date_introduced": 1519340400000,
-        "product_url": "https://slack-mountain.com/fr/sangles-slackline/194-project-44.html",
+        "product_url": "https://slack-mountain.com/en/webbing-slackline/194-project-44.html",
         "thickness": 1.8,
         "webbing_construction": "Tubular",
         "priceMeter": 1.65,
@@ -7594,6 +7661,7 @@
     {
         "id": 165,
         "name": "Panda",
+        "description": "Panda is flat polyester/dyneema blended webbing with low stretch, lightweight and high strength; the perfect for long and highlines at low tensions.",
         "brand": "Slackline Industries",
         "materialType": "Hybrid",
         "materialComposition": [
@@ -7610,7 +7678,7 @@
             }
         ],
         "date_introduced": 1493758800000,
-        "product_url": "https://slacklineindustries.com/collections/1-inch/products/panda",
+        "product_url": "https://web.archive.org/web/20211207011123/https://slacklineindustries.com/collections/1-inch/products/panda",
         "thickness": 2.1,
         "webbing_construction": "Flat",
         "priceMeter": 4.59,
@@ -7620,6 +7688,7 @@
     {
         "id": 166,
         "name": "Joker",
+        "description": "JOKER is an exceptional slackline webbing, designed for those who want more than just walking lines. Its hybrid construction (half polyester, half nylon) makes it a versatile option for fun training in the park, a medium stretch waterline, a bouncy highline for tricks, or for setting personal long-distance records. JOKER is the multi-purpose line to suit everyone needs.",
         "brand": "Slack Inov",
         "gear_sellers": [
             "Spider Slacklines"
@@ -7761,6 +7830,7 @@
     {
         "id": 167,
         "name": "Y.a.w",
+        "description": "The lightweight, yet very strong 25mm webbing is excellently suited as a lightweight travel slackline webbing, as a backup for highlining or as a rodeo webbing. With a meter weight of only 38g / m, it fits in every backpack traveling. Due to the low elongation of about 3% at 8kN, it can be clamped very easily.",
         "brand": "Slackliner.de",
         "materialType": "Polyester",
         "width": 25,
@@ -7773,7 +7843,7 @@
             }
         ],
         "date_introduced": 1541368800000,
-        "product_url": "https://www.slackliner.de/Webbing/Flat-Webbing/yaw.html?language=en",
+        "product_url": "https://web.archive.org/web/20191017213341/https://www.slackliner.de/Webbing/Flat-Webbing/yaw.html",
         "webbing_construction": "Flat",
         "priceMeter": 0.59,
         "currency": "EUR",
@@ -7804,6 +7874,7 @@
     {
         "id": 169,
         "name": "Skyway",
+        "description": "For those who want a comfortable strap, ideal for walking long distance in slackline. Its 11% at 10 kN will bring you a nice bounce. Its 27kN resistance and its core + sheath structure with round edges will make it safe. Made in France",
         "brand": "Slack Mountain",
         "materialType": "Polyester",
         "width": 25,
@@ -7826,6 +7897,7 @@
     {
         "id": 170,
         "name": "Totally Tubular",
+        "description": "Totally Tubular is loved by both professional and beginner slackliners alike. The affordability makes this webbing excellent for a begging looking to walking a short line. The stretchy, bounciness of the webbing is enjoyed by professionals around the world when doing bounce tricks. Affordable, lightweight, extreme stretching and bouncy, a great standard webbing.",
         "brand": "Slacklife BC",
         "materialType": "Nylon",
         "width": 25,
@@ -7833,7 +7905,7 @@
         "breakingStrength": 17.7,
         "stretch": null,
         "date_introduced": null,
-        "product_url": "https://www.slacklifebc.com/product/totally-tubular/",
+        "product_url": "https://web.archive.org/web/20190721211141/https://www.slacklifebc.com/product/totally-tubular/",
         "webbing_construction": "Tubular",
         "priceMeter": 1.55,
         "currency": "CAD",
@@ -7842,6 +7914,7 @@
     {
         "id": 171,
         "name": "FIREFOX",
+        "description": "The polyamide (Nylon) tubular webbing that will make you rediscover the true capacity of the Bounce and with its 2.3% to 50 kg it will work even in rodeo. Its 26 kN resistance will make it safe for all slackline practice and will remain lightweight with a weight of 52 g / m. Thanks to its 2 black bands you will be able to make the dish easily. Made in France",
         "brand": "Slack Mountain",
         "materialType": "Nylon",
         "width": 25,
@@ -7854,7 +7927,7 @@
             }
         ],
         "date_introduced": 1543618800000,
-        "product_url": "https://slack-mountain.com/fr/sangles-slackline/214-firefox.html",
+        "product_url": "https://slack-mountain.com/en/webbing-slackline/214-firefox.html",
         "thickness": 2,
         "webbing_construction": "Tubular",
         "priceMeter": 1.5,
@@ -7907,6 +7980,7 @@
     {
         "id": 174,
         "name": "S.O.S - Sunset Over Seas",
+        "description": "The SOS Sunset Over Seas, the TENESTA® hybrid webbing with a 100% polyester sheath, fully developed with the ATA Slack team for the realization of Highline long distance. To reduce its wind resistance the width has been modified to reach 22 mm, while maintaining a resistance of more than 32 kN. Its low elasticity of 3.4% and its weight of 33.65 g / m make it perfect for long approaches. And the technology core + polyester sheath ensures a better resistance over time. Only the sewn loops offered in the S.O.S variations are compatible because they are made directly in the factory and certified for resistance. 100% made in France",
         "brand": "Slack Mountain",
         "materialType": "Hybrid",
         "materialComposition": [
@@ -7933,6 +8007,7 @@
     {
         "id": 175,
         "name": "Blue",
+        "description": "Light and low stretch highline webbing. Ideal for long and stable highlines",
         "brand": "Balance Community: Slackline Outfitters",
         "materialType": "Polyester",
         "width": 25.4,
@@ -7999,6 +8074,7 @@
     {
         "id": 176,
         "name": "Green",
+        "description": "Soft and stable nylon highline webbing. Ideal for long and stable highlines",
         "brand": "Balance Community: Slackline Outfitters",
         "materialType": "Nylon",
         "width": 25.4,
@@ -8109,6 +8185,7 @@
     {
         "id": 179,
         "name": "SuperTape 19mm",
+        "description": "Flat webbing made of robust and durable polyamide. Every marker fleck represents 5 kN minimum tensile strength.",
         "brand": "Edelrid",
         "materialType": "Nylon",
         "width": 19,
@@ -8116,13 +8193,14 @@
         "breakingStrength": 15,
         "stretch": null,
         "date_introduced": null,
-        "product_url": "https://www.edelrid.de/en/sports/flat-webbings1/flachband-supertape-19mm.html",
+        "product_url": "https://web.archive.org/web/20211129004156/https://www.edelrid.de/en/sports/flat-webbings1/flachband-supertape-19mm.html",
         "webbing_construction": "Flat",
         "active": false
     },
     {
         "id": 180,
         "name": "X-Tuble 16mm",
+        "description": "Flat tubular webbing made of robust and durable polyamide. Every marker fleck represents 5 kN minimum tensile strength.",
         "brand": "Edelrid",
         "materialType": "Nylon",
         "width": 16,
@@ -8130,13 +8208,14 @@
         "breakingStrength": 15,
         "stretch": null,
         "date_introduced": null,
-        "product_url": "https://www.edelrid.de/en/sports/tubular-webbings/x-tube-16mm.html",
+        "product_url": "https://web.archive.org/web/20211021185055/https://www.edelrid.de/en/sports/tubular-webbings/x-tube-16mm.html",
         "webbing_construction": "Tubular",
         "active": false
     },
     {
         "id": 181,
         "name": "X-Tube 25mm",
+        "description": "Flat tubular webbing made of robust and durable polyamide. Every marker fleck represents 5 kN minimum tensile strength.",
         "brand": "Edelrid",
         "materialType": "Nylon",
         "width": 25,
@@ -8156,6 +8235,7 @@
     {
         "id": 182,
         "name": "Abysses Bounce",
+        "description": "The ABYSSES slackline webbing is crafted for extreme bounce sessions. Bounce enthusiasts can now push their limits with vertical maneuvers.",
         "brand": "Slack Inov",
         "gear_sellers": [
             "Spider Slacklines"
@@ -8293,11 +8373,12 @@
     {
         "id": 183,
         "name": "Photon",
+        "description": "The photon 100% polyester and with its weight of 54 g / m and its 24 kN of resistance, it will be ideal in longline waterline highline. Even with its reduced price, quality and resistance will be there. Made in France",
         "brand": "Slack Mountain",
         "materialType": "Polyester",
         "width": 25,
-        "weight": 50,
-        "breakingStrength": 29,
+        "weight": 54,
+        "breakingStrength": 24,
         "stretch": [
             {
                 "percent": 4.1,
@@ -8305,7 +8386,7 @@
             }
         ],
         "date_introduced": null,
-        "product_url": "https://slack-mountain.com/en/webbing-slackline/233-photon.html",
+        "product_url": "https://web.archive.org/web/20240221192610/https://slack-mountain.com/en/webbing-slackline/233-photon.html",
         "webbing_construction": "Flat",
         "priceMeter": 0.96,
         "currency": "EUR",
@@ -8314,6 +8395,7 @@
     {
         "id": 184,
         "name": "Rubber Band PUR",
+        "description": "A real oldschool nylon (polyamide) webbing with high stretch and incredible dynamics! Created to fulfill dreams of sky-high bounces and wild surfs. Do not get scared of high stretch demanding more effort while tensioning - end result is worth it. Rubber Band works perfectly at short highlines introducing more bouncy feeling also increasing their safety margin. The most fun however reveals at medium lengths even at low tension. Going even further, super long projects can be curiously demanding.",
         "brand": "Slack house",
         "materialType": "Nylon",
         "width": 25,
@@ -8326,7 +8408,7 @@
             }
         ],
         "date_introduced": null,
-        "product_url": "https://slackhouseshop.pl/produkt/rubber-band-pur/",
+        "product_url": "https://slackhouseshop.pl/en/produkt/rubber-band-pur/",
         "thickness": 3.35,
         "webbing_construction": "Flat",
         "priceMeter": 10.0,
@@ -8336,6 +8418,7 @@
     {
         "id": 185,
         "name": "Levitation",
+        "description": "Light, two-tone polyester webbing. Easy to tension due to low stretch, but with a pleasant bounce. Levitation works great as the first longline up to 100 m. Alternatively, it can be used as a lightweight backup for projects where low weight matters more.",
         "brand": "Slack house",
         "materialType": "Polyester",
         "width": 25,
@@ -8358,6 +8441,7 @@
     {
         "id": 186,
         "name": "MOTM light",
+        "description": "MOTM light is a 19mm wide ultralight tubular nylon webbing for the most lightweight travel kits. A weight of only 33g/m and high stretch bounce makes it a fun companion for your travels to the farthest places on planet earth.",
         "brand": "Raed Slacklines",
         "materialType": "Nylon",
         "width": 19,
@@ -8365,7 +8449,7 @@
         "breakingStrength": 15,
         "stretch": null,
         "date_introduced": null,
-        "product_url": "https://raed-slacklines.com/motm-light",
+        "product_url": "https://web.archive.org/web/20230922044116/https://raed-slacklines.com/motm-light-19mm-ultralight-tubular-nylon-webbing",
         "webbing_construction": "Tubular",
         "priceMeter": 1.49,
         "currency": "EUR",
@@ -8377,6 +8461,7 @@
     {
         "id": 187,
         "name": "Ocean",
+        "description": "EQB Ocean is a high-stretch webbing with soft edges. Ideal highline companion for bouncy sessions.",
         "brand": "Equilibrium Slacklines (EQB)",
         "materialType": "Nylon",
         "width": 25,
@@ -8389,7 +8474,7 @@
             }
         ],
         "date_introduced": 1590008400000,
-        "product_url": "https://www.slackshop.cz/en/webbing/176-eqb-ocean.html",
+        "product_url": "https://web.archive.org/web/20201027230558/https://www.slackshop.cz/en/polyamide/176-eqb-ocean.html",
         "thickness": 2.8,
         "webbing_construction": "Flat",
         "priceMeter": 1.74,
@@ -8399,6 +8484,7 @@
     {
         "id": 188,
         "name": "Skye2",
+        "description": "A lightweight 3ton polyester webbing that boasts with “core/weave” and extra rounded edges. No detail was omitted.",
         "brand": "Equilibrium Slacklines (EQB)",
         "materialType": "Polyester",
         "width": 25,
@@ -8421,6 +8507,7 @@
     {
         "id": 189,
         "name": "LSDTube",
+        "description": "It feels like you are walking on the rainbow with the brand new LSDTube! Guaranteed maximum playfulness, both visually and performance of the slackline. This light and stretchy slackline is multifunctional as it is ideal to let off steam creatively with hard bouncing tricks and surfing sessions or if you just want to have a relaxing session, doing meditative walks.",
         "brand": "Slacktivity",
         "materialType": "Nylon",
         "width": 25.5,
@@ -8433,7 +8520,7 @@
             }
         ],
         "date_introduced": 1597006800000,
-        "product_url": "https://www.slacktivity.com/lsdtube",
+        "product_url": "https://web.archive.org/web/20210303060933/https://www.slacktivity.com/lsdtube",
         "webbing_construction": "Tubular",
         "priceMeter": 2.65,
         "currency": "EUR",
@@ -8442,6 +8529,7 @@
     {
         "id": 190,
         "name": "Spider Silk MK3",
+        "description": "Super lightweight hitech webbing. Great for monster lines or an ultralight backup",
         "brand": "Balance Community: Slackline Outfitters",
         "materialType": "Hybrid",
         "materialComposition": [
@@ -8512,6 +8600,7 @@
     {
         "id": 191,
         "name": "Dyneemite",
+        "description": "BOOM. Your old personal best just got blasted: Walking this webbing feels like cheating - on speed... Dyneemite is an ultralight Dyneema-Polyester hybrid webbing for your BIG highline projects.",
         "brand": "Raed Slacklines",
         "materialType": "Hybrid",
         "materialComposition": [
@@ -8528,7 +8617,7 @@
             }
         ],
         "date_introduced": 1598734800000,
-        "product_url": "https://raed-slacklines.com/dyneemite-ultralight-highline-project-webbing",
+        "product_url": "https://web.archive.org/web/20220928104559/https://raed-slacklines.com/dyneemite-ultralight-highline-project-webbing",
         "webbing_construction": "Flat",
         "priceMeter": 2.99,
         "currency": "EUR",
@@ -8538,11 +8627,12 @@
     {
         "id": 192,
         "name": "Aurora",
+        "description": "Aurora makes you shine like magic in the sky. This is the most fun, bounciest, softest, roundest polyester highline webbing we've ever made. The puffed edges feel like velvet during catches. And the 31 kN MBS gives you the comfort of high safety even in your craziest bounce tricks. Shine in the sky!",
         "brand": "Raed Slacklines",
         "materialType": "Polyester",
         "width": 26,
         "weight": 61,
-        "breakingStrength": 29,
+        "breakingStrength": 31,
         "stretch": [
             {
                 "kn": 5,
@@ -8560,14 +8650,15 @@
     {
         "id": 193,
         "name": "ReBL",
+        "description": "The Sigma ReBL is our ultimate development of the longline webbings - a high-quality highline webbing with an outstanding weight-to-strength ratio. Densely and robustly woven, very easy to rig thanks to its low stretch. Comfortable edges, light and still extremely strong. 34 kN breaking strength at only 56 g/m: that is why the ReBL is our webbing for long and high lines.",
         "brand": "Slackliner.de",
         "materialType": "Polyester",
         "width": 25,
         "weight": 56,
-        "breakingStrength": 36,
+        "breakingStrength": 34,
         "stretch": null,
         "date_introduced": 1603490400000,
-        "product_url": "https://www.slackliner.de/en/Sigma-ReBL.html",
+        "product_url": "https://slackliner.de/en/products/sigma-rebl-slackline-webbing",
         "thickness": 2.6,
         "webbing_construction": "Flat",
         "priceMeter": 1.05,
@@ -8598,6 +8689,7 @@
     {
         "id": 195,
         "name": "Lift 2be",
+        "description": "Super High Stretch Tubular Webbing. Up your bounce-trick game to 9000!",
         "brand": "Balance Community: Slackline Outfitters",
         "materialType": "Nylon",
         "width": 25.4,
@@ -8664,6 +8756,7 @@
     {
         "id": 196,
         "name": "Candy",
+        "description": "A delicacy for the picky ones, that´s Candy - a lightweight low stretch 3,5ton polyester webbing that boasts with “core/weave” and extra rounded edges. No detail was omitted.",
         "brand": "Equilibrium Slacklines (EQB)",
         "materialType": "Polyester",
         "width": 25,
@@ -8676,7 +8769,7 @@
             }
         ],
         "date_introduced": 1604354400000,
-        "product_url": "https://www.slackshop.cz/en/polyester/195-eqb-candy.html",
+        "product_url": "https://web.archive.org/web/20251212121709/https://www.slackshop.cz/en/polyester/195-eqb-candy.html",
         "thickness": 2.6,
         "webbing_construction": "Flat",
         "priceMeter": 1.61,
@@ -8686,6 +8779,7 @@
     {
         "id": 197,
         "name": "Eclipse",
+        "description": "Eclipse is black - of course. It's a lightweight polyester webbing with 16 kN breaking strength and mid stretch properties. So this is an ideal webbing for small packing travel lines, rodeo lines and soft releases.",
         "brand": "Raed Slacklines",
         "materialType": "Polyester",
         "width": 25,
@@ -8711,6 +8805,7 @@
     {
         "id": 198,
         "name": "Jelly",
+        "description": "Light, low stretch, soft, tubular polyester. Ideal for park lines and low tension longlines",
         "brand": "Balance Community: Slackline Outfitters",
         "materialType": "Polyester",
         "width": 25.4,
@@ -8801,6 +8896,7 @@
     {
         "id": 200,
         "name": "Green 20",
+        "description": "Ultra-soft, super stretch nylon webbing. Ideal for long and stable highlines",
         "brand": "Balance Community: Slackline Outfitters",
         "materialType": "Nylon",
         "width": 20,
@@ -8933,6 +9029,7 @@
     {
         "id": 204,
         "name": "Sonic Light",
+        "description": "Sonic Light is a lightweight polyamide webbing in a modern and comfortable design. Aki Sonic Light has a round, very finely woven and padded edge design, which ensures a noticeable softness. The securing edge yarn on one side was kept very small in size and pulled around to the side, so it is extremely minimally noticeable. Sonic Light is a slackline webbing with a little more stretch for a wide range of uses.",
         "brand": "Aki Slacklines",
         "materialType": "Nylon",
         "width": 25,
@@ -8945,7 +9042,7 @@
             }
         ],
         "date_introduced": 1600030800000,
-        "product_url": "https://aki-slacklines.de/en/webbing/polyamide/176/aki-sonic-light-webbing",
+        "product_url": "https://web.archive.org/web/20240919205635/https://aki-slacklines.de/en/products/aki-sonic-light-webbing",
         "thickness": 2.8,
         "webbing_construction": "Core/Sheath",
         "priceMeter": 2.3,
@@ -8955,6 +9052,7 @@
     {
         "id": 205,
         "name": "Sky Diamond",
+        "description": "17 mm webbing in SPLITS, specific for very long highline set-ups.",
         "brand": "Slack Inov",
         "gear_sellers": [
             "Spider Slacklines"
@@ -9117,6 +9215,7 @@
     {
         "id": 207,
         "name": "Heavy",
+        "description": "Heavy, strong, AND stretchy! The best webbing for bounce training and stability.",
         "brand": "Balance Community: Slackline Outfitters",
         "materialType": "Nylon",
         "width": 25.4,
@@ -9183,6 +9282,7 @@
     {
         "id": 208,
         "name": "Neon",
+        "description": "Neon is a lightweight two-ton webbing perfect for lines up to 60m or wherever every gram counts.",
         "brand": "Equilibrium Slacklines (EQB)",
         "materialType": "Polyester",
         "width": 25,
@@ -9312,7 +9412,7 @@
                 "percent": 23.59
             }
         ],
-        "description": "Lightweight, high-stretch, abrasion-resistant tubular nylon freestyle highline webbing developed with Ian Eisenberg. Made in the US.",
+        "description": "BIG Bounces, HUGE surfs, Elevated Freestyle. The Unprecedented Freestyle Highline Experience",
         "notes": null,
         "active": false
     },
@@ -9380,7 +9480,7 @@
                 "percent": 22.13
             }
         ],
-        "description": "Custom Paradigm rig tuned to Ian Eisenberg's specifications: more stretch, 10% lighter. Freestyle use only.",
+        "description": "The Ultimate in Freestyle Highline Webbing. Light, fast, extreme stretch, freestyle highline webbing. Freestyle use only.",
         "notes": "Manufacturer marks this FOR EXPERT USE ONLY due to its lower MBS.",
         "active": true,
         "manufacturer_not_for_highline": false,
@@ -9450,7 +9550,7 @@
                 "percent": 4.62
             }
         ],
-        "description": "100% HMPE webbing; single layer, single zone weave. White HMPE with green HMPE marker. Woven in China, finished in Colorado.",
+        "description": "Affordable High Tech. Amazing for big gaps and backups for freestyle",
         "notes": null,
         "active": true
     },
@@ -9518,7 +9618,7 @@
                 "percent": 13.87
             }
         ],
-        "description": "Mid-stretch 20mm polyester webbing, flat weave with pillowed TruRound edges and four-zone construction. Made in the US.",
+        "description": "Mid-stretch and lightweight polyester webbing. Ideal for low tension highlines",
         "notes": null,
         "active": true
     },
@@ -9586,7 +9686,7 @@
                 "percent": 10.88
             }
         ],
-        "description": "Tubular woven polyester, mid-stretch. Born from the BREATHE festival. Thickness expands to ~7.0mm under tension.",
+        "description": "Fluffy and playful highline webbing. Ideal for easy to rig, but fun to walk park lines and highlines",
         "notes": "MBS 25 kN confirmed by owner (product copy's 26 kN rejected). Jelly, Jelly PRO Classic and Jelly PRO Desert are three distinct products; Classic and Desert share an identical published spec sheet and stretch curve and differ by colourway.",
         "active": true
     },
@@ -9605,7 +9705,7 @@
         "priceMeter": 1.7,
         "currency": "USD",
         "stretch": null,
-        "description": "Backup webbing; single zone weave with black marker yarns. Stiffer than the original Secondaire to prevent candy-caning.",
+        "description": "Lightweight Polyester webbing for backups. An affordable and lightweight polyester webbing that's great for backups or low stretch longlines",
         "notes": "Stretch chart on the product page is empty; no stretch data published.",
         "active": true
     },
@@ -9677,7 +9777,7 @@
                 "percent": 4.18
             }
         ],
-        "description": "Dual layer weave with dual strength zones. Mostly Vectran with polyester edges and marker line. Made in the US.",
+        "description": "Bombproof Vectran webbing. Burly biglines or stable longlines",
         "notes": null,
         "active": true
     },
@@ -9745,7 +9845,7 @@
                 "percent": 2.53
             }
         ],
-        "description": "Dyneema SK99 and black HMPE, single layer single zone weave. Built for giga-lines; enhanced creep performance. Made in the US.",
+        "description": "Extreme Tech Highline Webbing. Amazing for big gaps and backups for freestyle",
         "notes": null,
         "active": true
     },
@@ -10405,7 +10505,7 @@
                 "percent": 10.88
             }
         ],
-        "description": "Tubular woven polyester, mid-stretch, in the original Jelly PRO colourway. 25 kN and 55 g/m; thickness expands to ~7.0mm under tension. Stronger, highline-capable successor to the original Jelly.",
+        "description": "Fluffy and playful highline webbing. Ideal for easy to rig, but fun to walk park lines and highlines",
         "notes": "Jelly, Jelly PRO Classic and Jelly PRO Desert are three distinct products. Classic and Desert share an identical published spec sheet and stretch curve — they differ by colourway — but are sold and tracked separately.",
         "active": true
     },
@@ -10775,7 +10875,7 @@
                 "percent": 17.5
             }
         ],
-        "description": "The next iteration of Balance Community's Paradigm freestyle webbing. High-stretch nylon tubular at 25 kN and 49 g/m — built for freestyle but burly with it. UV-treated nylon fibres in a dense plain tubular weave, dyed pink/purple. Designed, inspected and sewn in the US; woven in Taiwan.",
+        "description": "BIG Bounces, HUGE surfs, Elevated Freestyle. The Unprecedented Freestyle Highline Experience",
         "notes": "Manufacturer specs (balancecommunity.com): 25.0 mm × 2.44 mm, 49.0 g/m, MBS 25 kN, sewn-loop MBS 23 kN, WLL 8 kN, 100 % nylon (polyamide) tubular weave with coloured edges, single zone. Optimum tension 1.8–2.2 kN, preferred lengths 15–100 m, backup 18 % longer than the main. Holding strengths: Alpine WebLock 24 kN, MightyLock 23 kN. ISA stretch 11.5 % @ 5 kN and 17.5 % @ 10 kN — BC states the full stretch chart is 'coming soon', so REVISIT and replace this two-point curve once released-product data is published. BC labels it highline-approved; that is the maker's own statement, not an ISA certification. Price is the custom per-metre rate ($2.40/m); cut lengths run 40–100 m. Released 2026-07-23 (Shopify listing publish date).",
         "active": true
     },
@@ -10843,7 +10943,7 @@
                 "percent": 12.45
             }
         ],
-        "description": "\"Just A Simple Polyester\" — plain weave, single-zone construction with a ridged design. Low-cost entry line, park longline and highline backup; pairs with JYBN. Made in the US.",
+        "description": "Mid-weight, low stretch, highline webbing. An affordable, low stretch webbing for backups and longlines.",
         "notes": "WLL 5 kN.",
         "active": false
     },
@@ -10915,7 +11015,7 @@
                 "percent": 4.67
             }
         ],
-        "description": "3-layer weave with a full polyester jacket, three-zone construction with strength and protective zones. No high-tech fibers exposed on the exterior, so it handles and weblocks like a standard webbing. Contrasting orange/blue faces for twist spotting. Made in the US.",
+        "description": "Lightweight Hitech Webbing with a Jacket. Great for monster lines or an ultralight backup",
         "notes": "WLL 10 kN. Unlike MK3 (Vectran + Dyneema) and MK5 (Vectran + Polyester), MK4 is UHMWPE/Dyneema + Polyester.",
         "active": false
     },
@@ -10983,7 +11083,7 @@
                 "percent": 18.65
             }
         ],
-        "description": "Lightweight polyester highline backup webbing. Plain weave with a low pick count for a high strength-to-weight ratio; single-zone weave with black marker yarns. Made in the US.",
+        "description": "Lightweight Polyester webbing for backups. An affordable and lightweight polyester webbing that's great for backups or low stretch longlines",
         "notes": "WLL 8 kN; 24 kN through an Alpine WebLock. Superseded by Secondaire MK2.",
         "active": false
     },
@@ -11698,6 +11798,7 @@
     {
         "id": 252,
         "name": "Anima",
+        "description": "Aki Anima is a 20 mm wide and lightweight high-performance slackline webbing, especially for highlines over 100 m length. A hybrid weave construction using Tenesta-HPPE and polyester ensures state-of-the-art functionality. The 20 mm width offers enormous precision when walking, lower wind load and a greater webbing thickness, resulting in more comfortable edges and greater robustness against abrasion.",
         "brand": "Aki Slacklines",
         "materialType": "Hybrid",
         "materialComposition": [
@@ -11924,7 +12025,7 @@
                 "percent": 2.08
             }
         ],
-        "description": "The next iteration of Balance Community's Axiom high-tech webbing: a little lighter and significantly stronger at the same price per metre. 100% HMPE right down to the green and orange marker yarns — one on each face, offset to the same edge — so the whole webbing floats indefinitely. Built for the body of a bigline, or as its backup, not for the hardware-handling ends.",
+        "description": "Affordable High Tech. Amazing for big gaps and backups for freestyle. Built for the body of a bigline, or as its backup, not for the hardware-handling ends.",
         "notes": "Manufacturer specs (balancecommunity.com): 18.4 mm × 2.5 mm, 31 g/m, MBS 39 kN, sewn-loop MBS 46 kN, WLL 13 kN, 100 % UHMWPE (HMPE) in a flat single-layer, single-zone weave. The current production batch (W26DZ, Aug 2026) measured 39.93 kN MBS and 46.85 kN sewn loop; BC restates those per batch, so the catalogue records the published nominal 39 kN. Optimum tension 1.0–4.5 kN, preferred lengths 200 m+, backup 7 % longer than the main — HMPE creeps, so a permarig main grows into that backup. ISA stretch 1.25 % @ 5 kN and 2.08 % @ 10 kN (standardised ISA method, 200 mm gauge); BC's stretch chart publishes only those two points, so REVISIT and replace this two-point curve if a full load–elongation curve is released. BC labels it highline-approved; that is the maker's own statement, not an ISA certification. Hardware compatibility is the caveat that defines this webbing: NOT compatible with any weblock (slips single-wrapped in all of them, bends the front pin from about 24 kN double-wrapped) except a MightyLock on a Van Beest 1/2\" 2-tonne shackle, double-wrapped, pin side; not compatible with any webbing grip (micro grips slip at 0.2 kN, full-size at 7 kN, Wafer XL at 12 kN). Anchor it on its sewn loops, with a soft thimble under any soft connector — without one the loop loses up to 50 % of its strength. Sewn loops are Pattern 504 (160 × 16 mm, 200 stitches) sewn with Dyneema thread; naked, sleeveless loops are also offered. Price is the custom per-metre rate ($2.90/m, on sale at $2.61 as of 2026-09-19); cut lengths are 50 / 60 / 100 m. Woven in China; measured, cut and sewn in Colorado. Released 2026-09-17 (Shopify listing publish date). Supersedes the original Axiom (id 213), which BC's own stretch comparison now flags as legacy.",
         "active": true
     },

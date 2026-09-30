@@ -272,6 +272,7 @@ GEAR_TYPES.forEach(({ slug, apiPath, label, hasISAWarning, specFields }) => {
         if (!withDesc) return
         cy.visit(`/${slug}/${withDesc.id}`)
         cy.get('[data-cy="detail-description"]').should('be.visible')
+          .find('strong').should('have.text', 'Manufacturer Description:')
       })
     })
 
