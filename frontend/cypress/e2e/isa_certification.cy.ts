@@ -306,9 +306,10 @@ describe('ISA stamp images', () => {
   })
 
   // `+` is spelled `plus` in the filename — the one stamp whose path could be
-  // mangled by encoding. Marathon (webbing 63) holds ISA:41:A+.
-  it('an A+ webbing (Marathon) wears the A+ stamp', () => {
-    cy.visit('/webbings/63')
+  // mangled by encoding. Cong Gear Path (webbing 260) holds a letterless ISA:41
+  // and earns A+ from its 40 kN strength.
+  it('an A+ webbing (Path) wears the A+ stamp', () => {
+    cy.visit('/webbings/260')
     cy.get('[data-cy="isa-stamp-link"] [data-cy="isa-approved-badge"]')
       .should('have.attr', 'src', '/isa-labels/ISA41Aplus.png')
   })
