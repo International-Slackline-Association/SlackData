@@ -5,10 +5,12 @@ Non-phase engineering tasks not tracked in [PLAN.md](PLAN.md) (frontend roadmap)
 ## Backend / data
 
 - [ ] **Adjudicate the remaining missing-gear candidates.** [MISSING_GEAR_REVIEW.md](MISSING_GEAR_REVIEW.md)
-  carries **70 unticked candidates** (tree protectors, starter/longline/highline kits, and more) from
-  the 2026-07-31 deep sweep, alongside 9 already rejected. The approved batch has been imported; these
-  still need a keep/reject call before they can be. Follow the per-type schema notes in that file's
-  "Approved" section — the webbing and weblock loaders take different object shapes.
+  has one section left from the 2026-07-31 deep sweep: **Starter / Longline / Highline Kit, 56
+  rows**. 54 still need a keep/reject call; the two YogaSlackers eLine kits are ticked but not yet
+  imported. Every other type is done: the approved webbing, weblock, leash ring, tree protector,
+  roller, grip and trickline kit batches are all imported (trickline kits on 2026-09-29), and 11
+  items are on the rejected list. Follow the per-type schema notes in that file's "Approved"
+  section — the loaders take different object shapes (kits use `manufacturer`, not `brand`).
 
 - [ ] **Named webbings we know exist but hold no specs for.** Twelve products surfaced by name only
   — no manufacturer confirmed for most, no width, MBS, weight, stretch or price. None of them are in

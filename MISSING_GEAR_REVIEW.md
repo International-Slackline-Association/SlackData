@@ -207,6 +207,25 @@ Re-seed to pick them up. Every one of these is sold as a **non-PPE** tensioning 
 | [x] | [Grippex](https://www.viperslacklines.co.za/products/grippex-25mm-slackline-webbing-grip) | Viper Slacklines | viperslacklines.co.za | 65 g, WLL 5 kN (engraved "GRIPPEX WLL5KN"), 20–25 mm, 44 × 44 × 25 mm, R1795.00. Gold-anodised aluminium body with an HMPE tail → `Dyneema Sling Loop`. MBS not published. |
 | [x] | [BeraGrip 50mm](https://www.beraadventure.com.br/product/beragrip-50mm/) | Bera Adventure | beraadventure.com.br | trickline grip. 615 g, WLL 4 kN, MBS 8 kN, 50 mm webbing (52 mm rubber face), 120 × 90 mm, R$450.00. Body is **plastic** (visibly 3D-printed in Bera's own photos) — no `MetalMaterial` fits, so `material: "Other"`. Separate 8 mm polyester/spectra cordelete rated 21 kN → `Sling Loop`, not `Dyneema Sling Loop`. Warranty is void unless assembled per Bera's tutorial video. ⚠ the published spec says MBS 8 kN but the unit in Bera's photos is engraved **"MBS 7.0kN"** (2021 images) — recorded the current published 8 kN; worth confirming with Bera. |
 
+### Trickline Kit (8) — ✔ **imported 2026-09-29**
+
+Six new rows in `tricklinekits.json` (16 rows). Bella Ciao went to `webbings.json` instead, and
+Middle Way's kit turned out to be the existing `23m kit`, which was updated in place. Images are in
+`public/gear-images/tricklinekits/` (manifest rebuilt), except for the two Spider items, whose shop
+rate-limited every fetch. Descriptions are filled only where an English maker page existed (see the
+description rule).
+
+| ✓ | Item | Brand | Source | Import notes |
+|---|------|-------|--------|--------------|
+| [x] | [TRICK LINE KIT](https://www.slacklineindustries.com/products/trick-line-kit) | Slackline Industries | slacklineindustries.com | 15 m × 50 mm, webbing 29.89 kN, felt tree wraps and a backup line included, $89.99. The page doesn't give a ratchet count; the product photo shows **one** ratchet, so `RAT1`. |
+| [x] | [BELLA CIAO – TRICKLINE](https://slacklines.us/products/bella-ciao-trickline) | Spider Slacklines | slacklines.us | **Not a kit**: webbing sold by the metre. Imported as **webbing** (`webbings.json` id 262), not as a trickline kit. 47 mm polyester, flat, 3σ MBS 26 kN with a Tricklock. `priceMeter` is null because the shop's per-metre price could not be read reliably. `gear_sellers: ["Slack Inov"]`. |
+| [x] | [TRICKLINE KIT – TRICK LINE 30](https://slacklines.us/products/trickline-kit-trick-line-30) | Spider Slacklines | slacklines.us | This is a different product from `Trickline Kit - Pro Line 25`: it uses the Trick Line webbing and a single Hummer ratchet. 30 m total (25 m webbing), $179, tree pro sold separately. `gear_sellers: ["Slack Inov"]`. No description because the shop's 429 rate-limiting blocked a verbatim copy. |
+| [x] | [DUOred](https://web.archive.org/web/20230128071156/https://www.slackliner.de/de/DUOred8.html) | Slackliner.de | slackliner.de (Wayback) | Live page is a 404, so the Wayback snapshot is used and `active: false`. 25 m version recorded (a 15 m version also existed). Single ratchet, felt tree protection included, €69.95. |
+| [x] | [Kit Elastic Line 50mm](https://www.beraadventure.com.br/product/kit-elastic-line-50mm-x-30-metros/) | Bera Adventure | beraadventure.com.br | 30 m × 50 mm printed polyester, **two** Ergo 50 ratchets, Bera tree protectors, R$669. The 25 m variant is still in stock, so `active: true`. The 9 kg figure is shipping weight, so `weight` is null. |
+| [x] | [Andy Lewis Trickline](https://slackhouseshop.pl/produkt/zestaw-andy-lewis-trickline/) | ~~Slack house~~ → **Gibbon** | slackhouseshop.pl | The shop names Gibbon as the producer (retailer rule). `active: false`. 22 m line, two ratchets, MBS 30 kN, 6.6 kg, 849 PLN. The tree wraps were a Slackhouse giveaway and are not part of the set. |
+| [x] | [Jibline](https://slackhouseshop.pl/produkt/zestaw-jibline/) | ~~Slack house~~ → **Gibbon** | slackhouseshop.pl | The shop names Gibbon as the producer. **`active: false` at the owner's call**, even though Gibbon still sells a "JIBLINE TREEWEAR SET". 15 m (12.5 m + 2.5 m ratchet loop), one ratchet, 30 kN, 389 PLN. |
+| [x] | [Trickline](https://middlewayslacklines.com/trickline/) | Middle Way | middlewayslacklines.com | **Same product as the existing `23m kit`** (id 1: 23 m, ₪600, tree pro), so no new row. Updated id 1 in place: `product_url` set, `active: true`, specs moved into `notes`. The "double gear" ERGO is one ratchet, so it stays `RAT1`. |
+
 ---
 
 ## Candidates — still to adjudicate
@@ -272,22 +291,9 @@ Re-seed to pick them up. Every one of these is sold as a **non-PPE** tensioning 
 | [ ] | [DoubleLine Basic](https://sicherungsprofi.de/doubleline-basic/SL81809) | Slackstar | sicherungsprofi.de | |
 | [ ] | [Slack-Kit](https://www.radrigs.co.uk/product-page/slack-kit) | Radrigs | radrigs.co.uk | |
 
-### Trickline Kit (8)
-
-| ✓ | Item | Brand | Source | Note |
-|---|------|-------|--------|------|
-| [ ] | [TRICK LINE KIT](https://www.slacklineindustries.com/products/trick-line-kit) | Slackline Industries | slacklineindustries.com | |
-| [ ] | [BELLA CIAO – TRICKLINE](https://slacklines.us/products/bella-ciao-trickline) | Spider Slacklines | slacklines.us | |
-| [ ] | [TRICKLINE KIT – TRICK LINE 30](https://slacklines.us/products/trickline-kit-trick-line-30) | Spider Slacklines | slacklines.us | |
-| [ ] | [DUOred](https://www.slackliner.de/de/DUOred8.html) | Slackliner.de | slackliner.de | |
-| [ ] | [Kit Elastic Line 50mm](https://www.beraadventure.com.br/product/kit-elastic-line-50mm-x-30-metros/) | Bera Adventure | beraadventure.com.br | elastic trickline |
-| [ ] | [Zestaw Andy Lewis Trickline](https://slackhouseshop.pl/produkt/zestaw-andy-lewis-trickline/) | Slack house | slackhouseshop.pl | |
-| [ ] | [Jibline (trickline set)](https://slackhouseshop.pl/produkt/zestaw-jibline/) | Slack house | slackhouseshop.pl | |
-| [ ] | [Trickline](https://middlewayslacklines.com/trickline/) | Middle Way | middlewayslacklines.com | ⚠ vs DB `23m kit` — confirm distinct |
-
-**Master list total: 125 items across 8 gear types** — 47 approved (**all imported**: Webbing 2026-08-01,
-Weblock + Leash Ring 2026-08-04, Tree Protector + Roller + Grip 2026-08-05), plus the rejected list below
-and 64 kit rows still to adjudicate (the two kit sections are all that is left).
+**Master list total: 125 items across 8 gear types** — 55 approved (**all imported**: Webbing 2026-08-01,
+Weblock + Leash Ring 2026-08-04, Tree Protector + Roller + Grip 2026-08-05, Trickline Kit 2026-09-29), plus
+the rejected list below and 56 kit rows still to adjudicate (only the starter/longline kit section is left).
 
 Brands confirmed **fully covered** by this sweep (no new items — catalog already in DB): Slack Mountain,
 Slack Inov, Spider (webbings), Slackliner.de (webbings), Middle Way (Chi/Zen/Classic), plus all Sweep-1

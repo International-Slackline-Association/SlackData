@@ -554,15 +554,30 @@
     ]
   },
   "tricklinekits": {
+    "bera_kit-elastic-line-50mm": [
+      "bera_kit-elastic-line-50mm.png"
+    ],
+    "gibbon_andy-lewis-trickline": [
+      "gibbon_andy-lewis-trickline.jpg"
+    ],
+    "gibbon_jibline": [
+      "gibbon_jibline.jpg"
+    ],
     "middleway_23m-kit": [
       "middleway_23m-kit.jpg",
       "middleway_23m-kit-2.jpg"
+    ],
+    "slackde_duored": [
+      "slackde_duored.jpg"
     ],
     "slackfr_kit-freestyle-22m-andy-lewis-x13": [
       "slackfr_kit-freestyle-22m-andy-lewis-x13.jpg"
     ],
     "slackinds_boss-line-kit": [
       "slackinds_boss-line-kit.jpg"
+    ],
+    "slackinds_trick-line-kit": [
+      "slackinds_trick-line-kit.jpg"
     ],
     "slacktools_25-m-air-n-jump-set": [
       "slacktools_25-m-air-n-jump-set.jpg"
