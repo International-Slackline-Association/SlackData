@@ -513,9 +513,9 @@
         },
         {
             "cert_id": "approved_gear_17",
-            "certificate": "ISA:41:A+",
+            "certificate": "ISA:41:A",
             "standard_number": 41,
-            "isa_class": "A+",
+            "isa_class": "A",
             "product_type": "Webbing",
             "manufacturer": "Slacktivity",
             "model": "Marathon",
