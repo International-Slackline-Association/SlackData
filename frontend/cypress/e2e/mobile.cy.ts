@@ -179,6 +179,19 @@ describe('Mobile — navigation strip', () => {
     })
   })
 
+  // The ISA credit used to paint over the Manufacturers link at phone width.
+  it('keeps the ISA credit clear of the Manufacturers link', () => {
+    cy.get('[data-cy="isa-supported-by"]').then(($credit) => {
+      cy.get('[data-cy="manufacturers-link"]').then(($mfr) => {
+        const c = $credit[0].getBoundingClientRect()
+        const m = $mfr[0].getBoundingClientRect()
+        const overlaps = c.left < m.right && m.left < c.right && c.top < m.bottom && m.top < c.bottom
+        expect(overlaps, 'credit overlaps Manufacturers').to.equal(false)
+        expect(c.right, 'credit on screen').to.be.at.most(390)
+      })
+    })
+  })
+
   it('scrolls the active tab into view on a later category', () => {
     cy.get('[data-cy="nav-tab"][data-type="tricklinekits"]').click({ force: true })
     cy.get('[data-cy="nav-tab"][data-active="true"]').then(($tab) => {

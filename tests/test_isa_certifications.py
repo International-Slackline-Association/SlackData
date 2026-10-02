@@ -221,8 +221,8 @@ def test_every_certified_row_has_a_certificate_and_detail_rows(seeded):
 
 def test_marathon_lists_both_its_certificates(seeded):
     marathon = seeded.get(Webbing, 63)
-    assert marathon.isa_certificate == "ISA:41:A+"
-    assert marathon.isa_class == "A+"
+    assert marathon.isa_certificate == "ISA:41:A"
+    assert marathon.isa_class == "A"
     certs = seeded.exec(
         select(ISAGearCertification).where(
             ISAGearCertification.gear_type == "webbing", ISAGearCertification.gear_id == 63

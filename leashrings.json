@@ -82,9 +82,9 @@
     {
         "id": 6,
         "name": "Bomber Ring",
-        "material": "Stainless Steel",
+        "material": "Steel",
         "inner_diameter": 76,
-        "outer_diameter": 102,
+        "outer_diameter": 100,
         "weight": 250,
         "breaking_strength": 150,
         "price": 10.5,
@@ -92,8 +92,11 @@
         "notes": null,
         "manufacturer": "Landcruising",
         "date_introduced": null,
-        "product_url": null,
-        "active": false
+        "product_url": "https://web.archive.org/web/20130428013656/http://www.landcruising-slacklines.de/en/shop/16-ringe--platten/318-bomber-ring-76mm",
+        "active": false,
+        "manufacturer_not_for_highline": false,
+        "manufacturer_not_for_highline_source": "https://web.archive.org/web/20130428013656/http://www.landcruising-slacklines.de/en/shop/16-ringe--platten/318-bomber-ring-76mm",
+        "description": "This ultra strong ring is the allround weapon for serious rigging in the highline area, e.g. leash ring, spaceline ... This component is used \"normally\" in the military helicopter sector and was certified by the German armed forces."
     },
     {
         "id": 7,

@@ -24,7 +24,7 @@ const DOC_URL = 'https://github.com/International-Slackline-Association/SlackDat
 // Where a brand asks for a credential. A personal address until the ISA has a
 // role address for SlackData — declared once here, and in MANUFACTURER_API.md
 // § Getting a credential, so swapping it is one edit in each.
-const CONTACT_EMAIL = 'emile.bragard@gmail.com'
+const CONTACT_EMAIL = 'emile@slacklineinternational.org'
 
 function Section({ id, title, children }: { id: string; title: string; children: React.ReactNode }) {
   return (

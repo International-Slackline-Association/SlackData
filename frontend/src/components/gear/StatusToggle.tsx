@@ -3,9 +3,9 @@
 //
 // Scope is the first narrowing the listing applies, ahead of search and the
 // filter groups, so it also drives their facet counts. Each third owns a color
-// (amber / green / red); the selected one is filled with it and is the only
-// segment with rounded ends, the other two stay transparent on the white bubble
-// and wear their color as text.
+// (ISA blue / green / orange — the Historic badge's fill); the
+// selected one is filled with it and is the only segment with rounded ends, the
+// other two stay transparent on the white bubble and wear their color as text.
 
 // The value itself lives in the URL (?status=), so its type is defined beside
 // the param contract in useUrlState and re-exported here for the components
@@ -14,9 +14,9 @@ import type { Status } from '@/hooks/useUrlState'
 export type { Status }
 
 const OPTIONS: { value: Status; label: string; color: string }[] = [
-  { value: 'all', label: 'All', color: '#E8770A' },
+  { value: 'all', label: 'All', color: '#13A89E' },
   { value: 'current', label: 'Current', color: '#15803D' },
-  { value: 'historic', label: 'Historic', color: '#DC2626' },
+  { value: 'historic', label: 'Historic', color: '#E8770A' },
 ]
 
 export default function StatusToggle({

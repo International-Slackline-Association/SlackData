@@ -1,4 +1,5 @@
 import { GEAR_TYPES } from '../support/gear_types'
+import { RED_600 } from '../support/colors'
 import { imageFilesFor } from '../support/images'
 
 // Tests the visual anatomy of a gear card against the DESIGN.md spec.
@@ -883,21 +884,20 @@ CERTIFIABLE_TYPES.forEach(({ slug, apiPath, label }) => {
       })
     })
 
-    // Same colour scheme as the Historic badge. Compared against a rendered
-    // Historic badge rather than a literal: Tailwind v4 serialises red-600 as
-    // oklch, and what matters is that the two reds are one red.
-    it('uses the Historic badge\'s red', () => {
+    // Red-600, the ISA Recall red — and NOT the Historic badge's orange: a
+    // retired, uncertified card carries both, and certification is the safety
+    // statement of the two. Tailwind v4 serialises red-600 as oklch.
+    it('is red, not the Historic badge\'s orange', () => {
       cy.fetchAllItems(apiPath).then((all) => {
         const items = all as Record<string, unknown>[]
         const item = items.find(i => i.isa_certified !== true && i.active === false)
         if (!item) return
         cy.visit(`/${slug}`)
         cardFor(item.id).within(() => {
-          cy.get('[data-cy="historic-badge"]').then(($historic) => {
-            const historicBg = getComputedStyle($historic[0]).backgroundColor
-            cy.get('[data-cy="isa-not-certified-pill"]')
-              .should('have.css', 'background-color', historicBg)
-          })
+          cy.get('[data-cy="isa-not-certified-pill"]')
+            .should('have.css', 'background-color', RED_600)
+          cy.get('[data-cy="historic-badge"]')
+            .should('not.have.css', 'background-color', RED_600)
         })
       })
     })

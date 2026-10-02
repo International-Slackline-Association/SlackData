@@ -52,6 +52,7 @@ import {
 } from '@/utils/table'
 import BrandLink from '@/components/brand/BrandLink'
 import HistoricBadge from './HistoricBadge'
+import IsaStatusLabel from './IsaStatusLabel'
 
 // A null sort is not "unsorted" — sortItems falls through to Name A→Z, so the
 // Name header shows ascending on a fresh load and its first click flips to
@@ -98,6 +99,7 @@ const GearTableRow = memo(function GearTableRow({
   item,
   id,
   slug,
+  certifiable,
   columns,
   money,
   originState,
@@ -111,6 +113,7 @@ const GearTableRow = memo(function GearTableRow({
   item: AnyItem
   id: number
   slug: string
+  certifiable: boolean
   columns: SpecRowDef[]
   money: PriceFormatter
   originState: { origin: Origin } | undefined
@@ -207,6 +210,13 @@ const GearTableRow = memo(function GearTableRow({
                       {String(item.name)}
                     </Link>
                     <HistoricBadge active={item.active} />
+                    {/* The card's red pill, so a table ranked on MBS never
+                        puts an uncertified item first without saying so. */}
+                    <IsaStatusLabel
+                      certified={item.isa_certified}
+                      isaClass={null}
+                      showNotCertified={certifiable}
+                    />
                   </div>
                 </div>
               </div>
@@ -500,6 +510,7 @@ export default function GearTable({
                 item={item}
                 id={id}
                 slug={meta.slug}
+                certifiable={meta.certifiable}
                 columns={columns}
                 money={money}
                 originState={originState}

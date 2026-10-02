@@ -182,7 +182,7 @@ Copy the pattern of `load_data/load_isa_warnings.py`, `models/isa_gear_warnings.
 - **Fallback.** Any certificate still without a PNG falls back to today's drawn badge. A missing image never blanks the badge.
 - Card ~28px tall, detail ~80px wide (DESIGN.md L1283). Check the text is readable at card size.
 - Commit `frontend/public/isa-labels/`.
-- **Done (2026-09-24, uncommitted).** `utils/isaStamp.ts` maps certificate → file (`+` renamed to `plus`: `ISA41Aplus.png`). `IsaApprovedBadge` takes `certificate` / `isaClass` / `size`, and falls back to the drawn badge on no file or a load error. Card 60px, detail 112px: at the planned 28px / 80px the square PNG's lettering is unreadable (40px was tried on cards and was still mush). Tests: `tests/unit/isaStamp.test.ts` (every file on disk is mapped; every certificate in `isa_certified.json` resolves) and a new "ISA stamp images" block in `isa_certification.cy.ts` (each certified item's stamp loads, Marathon → A+).
+- **Done (2026-09-24, uncommitted).** `utils/isaStamp.ts` maps certificate → file (`+` renamed to `plus`: `ISA41Aplus.png`). `IsaApprovedBadge` takes `certificate` / `isaClass` / `size`, and falls back to the drawn badge on no file or a load error. Card 60px, detail 112px: at the planned 28px / 80px the square PNG's lettering is unreadable (40px was tried on cards and was still mush). Tests: `tests/unit/isaStamp.test.ts` (every file on disk is mapped; every certificate in `isa_certified.json` resolves) and a new "ISA stamp images" block in `isa_certification.cy.ts` (each certified item's stamp loads, Path → A+; Marathon was the A+ case until the ISA regraded it to A on 2026-09-30).
 
 ---
 
@@ -196,7 +196,7 @@ Copy the pattern of `load_data/load_isa_warnings.py`, `models/isa_gear_warnings.
   - `scripts/build_isa_certified.py --check` and `scripts/backfill_seed_ids.py --check` pass.
   - Re-seed, and confirm the loader log shows the 17 certified rows and the expected unmatched list.
   - `curl localhost:8000/isacertification/` returns rows.
-  - `/webbing/63` (Marathon) has `isa_certificate: "ISA:41:A+"`.
+  - `/webbing/63` (Marathon) has `isa_certificate: "ISA:41:A"` (A+ until the ISA regraded it, 2026-09-30).
   - `/starterkit/1` has no `isa_certified`.
   - CI green.
 - **PR 2.**
@@ -258,7 +258,7 @@ Copy the pattern of `load_data/load_isa_warnings.py`, `models/isa_gear_warnings.
 | 1 / 2 | Slacktivity Redtube Type A (41:A) / Sewn Loops (41) | webbing 62 redTube | exact |
 | 23 / 24 | Pinktube (41:C, newest) / Sewn Loops (41) | webbing 61 pinkTube | exact |
 | 8 | Pinktube (41:C, 2020) | — | superseded by 23 |
-| 17 / 18 | Marathon (41:A+) / Sewn Loops (41) | webbing 63 Marathon | exact |
+| 17 / 18 | Marathon (41:A, was A+ until 2026-09-30) / Sewn Loops (41) | webbing 63 Marathon | exact |
 | 20 / 21 | Y2K (41:A) / Sewn Loops (41:A) | webbing 74 Y2K | exact |
 | 14 / 15 | LSD (41:C) / Sewn Loops (41) | webbing 189 LSDTube | exact |
 | 33 | Cong Gear Path, Sewn Loop (41) | webbing 260 Path | exact (no letter on cert → strength 40 kN → **A+**) |

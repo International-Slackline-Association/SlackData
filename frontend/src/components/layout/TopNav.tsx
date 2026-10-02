@@ -16,13 +16,42 @@
 //
 // A gear tab is active on its listing page and any nested route (detail/compare).
 
-import { useLayoutEffect, useRef } from 'react'
+import { useLayoutEffect, useRef, useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { ALL_GEAR_TYPES } from '@/config/gearTypes'
 import CurrencySelector from './CurrencySelector'
 
 function isSectionActive(pathname: string, base: string): boolean {
   return pathname === base || pathname.startsWith(`${base}/`)
+}
+
+// The ISA supported-by credit. One element, rendered in one of two places —
+// inline beside the wordmark, or on a slim row of its own below tier 1.
+function IsaCredit({ creditRef, below }: { creditRef: React.Ref<HTMLAnchorElement>; below: boolean }) {
+  return (
+    <a
+      ref={creditRef}
+      href="https://www.slacklineinternational.org"
+      target="_blank"
+      rel="noopener noreferrer"
+      data-cy="isa-supported-by"
+      data-placement={below ? 'below' : 'inline'}
+      className="flex items-center gap-2 shrink-0 opacity-80 hover:opacity-100 transition-opacity"
+    >
+      <span
+        className={`${below ? 'inline' : 'hidden sm:inline'} text-[11px] uppercase tracking-wide text-gray-400`}
+      >
+        Supported by
+      </span>
+      <img
+        src="/isa-logo.png"
+        alt="International Slackline Association"
+        width={298}
+        height={58}
+        className={below ? 'h-5 w-auto' : 'h-6 w-auto'}
+      />
+    </a>
+  )
 }
 
 const tabClass = (active: boolean, muted = false) =>
@@ -45,6 +74,50 @@ export default function TopNav() {
   const headerRef = useRef<HTMLElement>(null)
   const stripRef = useRef<HTMLElement>(null)
   const activeTabRef = useRef<HTMLAnchorElement>(null)
+
+  // The credit sits inline beside the wordmark when tier 1 has room for it, and
+  // drops to its own row below when it doesn't — rather than overlapping the
+  // Manufacturers link, which it did on a phone. Measured, not a breakpoint:
+  // what fits depends on the wordmark, the currency picker and the font, and a
+  // fixed breakpoint would be wrong as soon as any of those changes. The inline
+  // width is cached while it is inline, because once it has moved down there is
+  // nothing inline left to measure.
+  const rowRef = useRef<HTMLDivElement>(null)
+  const leftRef = useRef<HTMLDivElement>(null)
+  const wordmarkRef = useRef<HTMLAnchorElement>(null)
+  const rightRef = useRef<HTMLDivElement>(null)
+  const creditRef = useRef<HTMLAnchorElement>(null)
+  const inlineCreditWidth = useRef(0)
+  const [creditBelow, setCreditBelow] = useState(false)
+
+  useLayoutEffect(() => {
+    const row = rowRef.current
+    const left = leftRef.current
+    const wordmark = wordmarkRef.current
+    const right = rightRef.current
+    if (!row || !left || !wordmark || !right) return
+    const fit = () => {
+      if (!creditBelow && creditRef.current) {
+        inlineCreditWidth.current = creditRef.current.offsetWidth
+      }
+      const rowStyle = getComputedStyle(row)
+      const available =
+        row.clientWidth - parseFloat(rowStyle.paddingLeft) - parseFloat(rowStyle.paddingRight)
+      const needed =
+        wordmark.offsetWidth +
+        parseFloat(getComputedStyle(left).columnGap || '0') +
+        inlineCreditWidth.current +
+        parseFloat(rowStyle.columnGap || '0') +
+        right.offsetWidth
+      setCreditBelow(needed > available)
+    }
+    fit()
+    const ro = new ResizeObserver(fit)
+    ro.observe(row)
+    ro.observe(wordmark)
+    ro.observe(right)
+    return () => ro.disconnect()
+  }, [creditBelow])
 
   // Centre the active tab in the scroll strip whenever the route changes, so the
   // category you are on is always visible even though the strip overflows on a
@@ -94,9 +167,13 @@ export default function TopNav() {
       className="bg-white border-b border-gray-200 sticky top-0 z-20"
     >
       {/* Tier 1 — fixed upper area */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between gap-2 sm:gap-4">
-        <div className="flex items-center gap-3 sm:gap-5 min-w-0">
+      <div
+        ref={rowRef}
+        className="max-w-7xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between gap-2 sm:gap-4"
+      >
+        <div ref={leftRef} className="flex items-center gap-3 sm:gap-5 min-w-0">
           <Link
+            ref={wordmarkRef}
             to="/webbings"
             data-cy="wordmark"
             className="font-bold text-gray-900 text-lg shrink-0"
@@ -104,29 +181,12 @@ export default function TopNav() {
             SlackData
           </Link>
           {/* Supported-by credit, as SlackDB carries it. The label drops on a
-              phone so tier 1 keeps its fixed height beside the currency picker. */}
-          <a
-            href="https://www.slacklineinternational.org"
-            target="_blank"
-            rel="noopener noreferrer"
-            data-cy="isa-supported-by"
-            className="flex items-center gap-2 shrink-0 opacity-80 hover:opacity-100 transition-opacity"
-          >
-            <span className="hidden sm:inline text-[11px] uppercase tracking-wide text-gray-400">
-              Supported by
-            </span>
-            <img
-              src="/isa-logo.png"
-              alt="International Slackline Association"
-              width={298}
-              height={58}
-              className="h-6 w-auto"
-            />
-          </a>
+              phone; the whole credit drops a row when even the logo won't fit. */}
+          {!creditBelow && <IsaCredit creditRef={creditRef} below={false} />}
         </div>
         {/* Right side: the currency selector sits beside Manufacturers on every
             page, not just listings — prices appear on detail and compare too. */}
-        <div className="flex items-center gap-2 sm:gap-4">
+        <div ref={rightRef} className="flex items-center gap-2 sm:gap-4 shrink-0">
           <Link
             to="/manufacturers"
             data-cy="manufacturers-link"
@@ -138,6 +198,12 @@ export default function TopNav() {
           <CurrencySelector />
         </div>
       </div>
+
+      {creditBelow && (
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 pb-1.5 -mt-1 flex">
+          <IsaCredit creditRef={creditRef} below />
+        </div>
+      )}
 
       {/* Tier 2 — category tabs, wrap on small screens */}
       <nav

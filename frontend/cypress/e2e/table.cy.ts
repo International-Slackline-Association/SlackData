@@ -464,6 +464,41 @@ describe('Table view — filters, search and compare', () => {
   })
 })
 
+// The card's red "Not ISA Certified" pill, beside the name in the identity
+// column — the same IsaStatusLabel, so the two cannot disagree. Sorted by MBS,
+// a table would otherwise rank an uncertified webbing first without a word.
+GEAR_TYPES.forEach(({ slug, apiPath, label, certifiable }) => {
+  describe(`Table view — Not ISA Certified pill — ${label}`, () => {
+    if (!certifiable) {
+      it('shows no pill on a type the ISA does not certify', () => {
+        cy.visit(`/${slug}?view=table`)
+        cy.get(ROW).should('have.length.greaterThan', 0)
+        cy.get(`${ROW} [data-cy="isa-not-certified-pill"]`).should('not.exist')
+      })
+      return
+    }
+
+    it('pills exactly the rows the ISA has not certified, in solid red', () => {
+      cy.fetchAllItems(apiPath).then((all) => {
+        const items = all as Record<string, unknown>[]
+        if (items.length === 0) return
+        cy.visit(`/${slug}?view=table`)
+        cy.get(ROW).should('have.length', items.length)
+        cy.get(ROW).each(($row) => {
+          const item = items.find(i => String(i.id) === $row.attr('data-id'))!
+          const $pill = $row.find('[data-cy="isa-not-certified-pill"]')
+          expect($pill.length, `pill on ${String(item.name)}`)
+            .to.equal(item.isa_certified === true ? 0 : 1)
+          if ($pill.length) {
+            expect($pill.text()).to.equal('Not ISA Certified')
+            expect(getComputedStyle($pill[0]).color).to.equal('rgb(255, 255, 255)')
+          }
+        })
+      })
+    })
+  })
+})
+
 describe('Table view — the wide sets scroll sideways, the page does not', () => {
   it('the table scrolls inside its own region', () => {
     cy.viewport(1024, 900) // the narrowest desktop: sidebar + table share the row

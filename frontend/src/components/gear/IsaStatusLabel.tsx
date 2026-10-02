@@ -22,10 +22,9 @@
 // The letter is dark ink on every fill: white fails WCAG AA on all four
 // (1.37–2.87), while #1F2937 clears AA on each (5.12–10.74).
 //
-// The red pill uses the Historic badge's colour scheme — `bg-red-600` with white
-// text, the same Tailwind classes rather than a copied hex, so the two reds
-// cannot drift apart. Same 10px type and padding as that badge too, so the
-// two read as one family of labels. White on red-600 is ~4.8:1, which clears WCAG AA.
+// The red pill is `bg-red-600` with white text — the ISA Recall red. Same 10px
+// type and padding as the Historic badge, so the two read as one family of
+// labels. White on red-600 is ~4.8:1, which clears WCAG AA.
 
 const CLASS_COLORS: Record<string, string> = {
   'A+': '#6AA84F',
