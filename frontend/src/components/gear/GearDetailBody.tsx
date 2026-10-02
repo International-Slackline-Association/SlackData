@@ -248,6 +248,7 @@ export default function GearDetailBody({
               data-cy="manufacturer-not-for-highline"
               className={`${meta.hasISA ? 'mt-2' : 'mt-5'} text-sm font-medium text-gray-900`}
             >
+              <span aria-hidden>⚠️ </span>
               {notForHighlineSource ? (
                 <a
                   data-cy="manufacturer-not-for-highline-source"
