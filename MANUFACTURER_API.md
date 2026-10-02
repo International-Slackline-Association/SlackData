@@ -445,7 +445,7 @@ your brand is wrong, and an administrator will fix the underlying record.
 
 ## Getting a credential
 
-Mail <emile.bragard@gmail.com> from an address **at your brand's own domain**. We will confirm
+Mail <emile@slacklineinternational.org> from an address **at your brand's own domain**. We will confirm
 out-of-band — to the contact address or channel already published on your own site — before issuing
 anything. That is not a comment on you; it is the only way we can tell a brand from someone claiming
 to be one, and it is why nobody can request a credential through this API.
