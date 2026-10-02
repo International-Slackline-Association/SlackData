@@ -485,7 +485,9 @@ reading one item at a time.
   - The **filter sidebar's kN pills are unaffected and stay exact** (`percentAtKn`): a pill that says
     10 kN must select the webbings actually measured at 10 kN.
 - **One frozen identity column on the left**, pinned with `sticky left-0`: compare checkbox,
-  thumbnail, brand (small caps, linked) and product name (linked), plus the Historic badge. It is one
+  thumbnail, brand (small caps, linked) and product name (linked), plus the Historic badge and, on the
+  five `certifiable` types, the red `Not ISA Certified` pill — the card's own `IsaStatusLabel`, beside
+  the name, so a table sorted by MBS cannot rank an uncertified webbing first without saying so. It is one
   cell rather than four sticky columns, which would each need a left offset computed from the widths
   before it — a number that changes with the longest product name on the page. Its header carries
   **two** sort controls, `NAME · MANUFACTURER`, because the cell stacks both: heading them as two
@@ -663,7 +665,7 @@ Letter colours are taken from the ISA's own [webbing type graphic](https://www.s
 
 The letter is **dark ink `#1F2937` on every fill**: white text fails WCAG AA on all four ISA colors (contrast 1.37–2.87), while `#1F2937` clears AA on each (5.12–11.86). The letter itself carries the meaning, so identity is never colour-alone, and a `title` ("ISA Type A+") spells it out for screen readers.
 
-The letter bubble sits immediately right of the product name on the detail page, and in the card's top-right stack in the grid — one component, so the two can never drift apart. **The red pill is a card affordance only**: the detail page's ISA Certification block already says "Not ISA Certified" in full, and two statements of one fact on one screen is one too many.
+The letter bubble sits immediately right of the product name on the detail page, and in the card's top-right stack in the grid — one component, so the two can never drift apart. **The red pill is a listing affordance** (cards and the Table view's identity column), never the detail page's: the detail page's ISA Certification block already says "Not ISA Certified" in full, and two statements of one fact on one screen is one too many.
 
 The class is **not a sidebar filter** — it is an attribute of certification rather than an independent axis of the catalogue; filter by **ISA Certified** instead.
 
