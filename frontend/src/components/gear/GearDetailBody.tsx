@@ -26,6 +26,7 @@
 // the banner. Stacks to a single column below `sm`.
 
 import { Link } from 'react-router-dom'
+import { descriptionParts, splitDescription } from '@/utils/description'
 import type { GearTypeMeta } from '@/config/gearTypes'
 import {
   ISA_APPROVED_GEAR_URL,
@@ -269,12 +270,32 @@ export default function GearDetailBody({
         </div>
       </div>
 
-      {item.description ? (
-        <p data-cy="detail-description" className="mt-6 leading-relaxed text-gray-600">
-          <strong className="font-semibold text-gray-900">Manufacturer Description:</strong>{' '}
-          {String(item.description)}
-        </p>
-      ) : null}
+      {item.description ? (() => {
+        const { blurb, note } = splitDescription(String(item.description))
+        const render = (text: string) =>
+          descriptionParts(text).map((part, i) =>
+            part.to ? (
+              <Link key={i} data-cy="detail-description-link" to={part.to} className="font-medium text-teal-primary hover:underline">
+                {part.text}
+              </Link>
+            ) : (
+              part.text
+            ),
+          )
+        return (
+          <>
+            <p data-cy="detail-description" className="mt-6 leading-relaxed text-gray-600">
+              <strong className="font-semibold text-gray-900">Manufacturer Description:</strong>{' '}
+              {render(blurb)}
+            </p>
+            {note ? (
+              <p data-cy="detail-description-note" className="mt-2 font-medium leading-relaxed text-red-600">
+                {render(note)}
+              </p>
+            ) : null}
+          </>
+        )
+      })() : null}
 
       {/* Only rendered when it has something in it — an empty row would still
           push its mt-6 of dead space under the specs. */}

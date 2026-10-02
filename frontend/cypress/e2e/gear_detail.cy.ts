@@ -1,5 +1,6 @@
 import { GEAR_TYPES } from '../support/gear_types'
 import { imageFilesFor } from '../support/images'
+import { RED_600 } from '../support/colors'
 
 // Detail page tests run for every gear type.
 // The `before` hook fetches a real item from the API so assertions
@@ -435,6 +436,44 @@ GEAR_TYPES.forEach(({ slug, apiPath, label, hasISAWarning, specFields }) => {
     it('shows a not-found message for an unknown item ID', () => {
       cy.visit(`/${slug}/999999`)
       cy.get('[data-cy="not-found"]').should('be.visible')
+    })
+  })
+})
+
+// The DOM half of tests/unit/description.test.ts: a description's final
+// "Note:" paragraph is ours, not the maker's, so it renders apart from the
+// blurb, in red; and `[text](/path)` in either half is an in-app link.
+describe('Gear detail page — our note and internal links in a description', () => {
+  it('splits the note off in red and links its internal path', () => {
+    cy.fetchAllItems('webbing').then((all) => {
+      const item = (all as Record<string, unknown>[])
+        .find(i => typeof i.description === 'string' && /\n\nNote: .*\]\(\/[^/]/.test(i.description))
+      if (!item) return
+      const description = item.description as string
+      const [, text, path] = description.match(/\[([^\]]+)\]\((\/[^)\s]*)\)/)!
+
+      cy.visit(`/webbings/${item.id}`)
+      cy.get('[data-cy="detail-description"]').should('not.contain.text', 'Note:')
+      cy.get('[data-cy="detail-description-note"]')
+        .should('contain.text', 'Note:')
+        .and('have.css', 'color', RED_600)
+        .and('not.contain.text', '](')
+        .find('[data-cy="detail-description-link"]')
+        .should('have.text', text)
+        .and('have.attr', 'href', path)
+        .click()
+      cy.location('pathname').should('eq', path)
+    })
+  })
+
+  it('renders no note when the description has none', () => {
+    cy.fetchAllItems('webbing').then((all) => {
+      const item = (all as Record<string, unknown>[])
+        .find(i => typeof i.description === 'string' && !i.description.includes('\n\nNote: '))
+      if (!item) return
+      cy.visit(`/webbings/${item.id}`)
+      cy.get('[data-cy="detail-description"]').should('be.visible')
+      cy.get('[data-cy="detail-description-note"]').should('not.exist')
     })
   })
 })
