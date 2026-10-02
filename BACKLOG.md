@@ -286,10 +286,13 @@ Non-phase engineering tasks not tracked in [PLAN.md](PLAN.md) (frontend roadmap)
     creating one is a claim about somebody else's product.
 
   **The data already carries the problem**, from before anyone tried to. Nine product names are
-  held by two brands each, and at least three pairs are plainly one product twice:
+  held by two brands each, and at least four pairs are plainly one product twice:
   **EQB / Spider `Bandit SH` and `Bandit SL`** (`weblocks.json` 13+14, 15+16),
   **Landcruising / Aki `Unicorn` and `White Magic`** (`webbings.json` 6+210, 7+209), and
-  **Slack.fr / Slack Pro! `Neon Light`** (100+154). The Bandit pair shows what that costs: the ISA
+  **Slack.fr / Slack Pro! `Neon Light`** (100+154), and **Landcruising `Core 2 HS` / Raed
+  `TWTMNBN (The Webbing That Must Not Be Named)`** (`webbings.json` 1+263 — Raed's 2019 end-of-stock
+  resale under the old slackshop.de nickname, added 2026-10-01; its description links to row 1 via
+  the `[text](/path)` internal-link syntax in `utils/description.ts` as a stopgap until merged). The Bandit pair shows what that costs: the ISA
   pushpin warning is matched to weblocks **12, 13, 15 — all EQB** — so the Spider-badged 14 and 16
   are the same hardware displayed with a clean record. Whichever of the twins a visitor happens to
   open decides whether they are warned. (The specific Slack Inov ↔ Spider overlap is *not* visible
