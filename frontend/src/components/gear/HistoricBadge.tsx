@@ -5,6 +5,10 @@
 // One component for every surface — the listing card (absolutely positioned
 // over the image), the Detailed-view panel and the standalone detail page (both
 // inline next to the product name) — so the colors can't drift apart.
+//
+// The fill is orange (`amber-price`, #E8770A) — the same color as the sidebar's
+// HISTORIC scope. Deliberately not the red of "Not ISA Certified" beside it:
+// lifecycle is not a safety statement.
 
 export default function HistoricBadge({
   active,
@@ -17,7 +21,7 @@ export default function HistoricBadge({
   return (
     <span
       data-cy="historic-badge"
-      className={`rounded-full bg-red-600 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-white shadow-sm ${className}`}
+      className={`rounded-full bg-amber-price px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-white shadow-sm ${className}`}
     >
       Historic
     </span>

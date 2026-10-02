@@ -85,12 +85,12 @@ describe('Gear status — all/current/historic control + historic badge', () => 
   })
 
   it('colors each third and fills only the selected one', () => {
-    // ALL orange / CURRENT green / HISTORIC red. Selected = filled with its own
-    // color + white text; the others sit on white with their color as the text.
+    // ALL ISA blue / CURRENT green / HISTORIC orange. Selected = filled with
+    // its own color + white text; the others sit on white with their color as the text.
     const expected: Record<string, string> = {
-      'status-all': 'rgb(232, 119, 10)',
+      'status-all': 'rgb(19, 168, 158)',
       'status-current': 'rgb(21, 128, 61)',
-      'status-historic': 'rgb(220, 38, 38)',
+      'status-historic': 'rgb(232, 119, 10)',
     }
     for (const [cy_, color] of Object.entries(expected)) {
       cy.get(`[data-cy="${cy_}"]`).click()
@@ -131,12 +131,22 @@ describe('Gear status — all/current/historic control + historic badge', () => 
     cy.get('[data-cy="status-historic"]').click()
     cy.get('[data-cy="status-historic"]').should('have.attr', 'data-active', 'true')
     cy.get('[data-cy="item-count"]').should('contain.text', String(historic.length))
-    // Every card in the historic scope is retired → each carries the red badge.
+    // Every card in the historic scope is retired → each carries the orange badge.
     cy.get('[data-cy="gear-card"]').should('have.length.greaterThan', 0)
     cy.get('[data-cy="gear-card"]').first()
       .find('[data-cy="historic-badge"]')
       .should('be.visible')
       .and('contain.text', 'Historic')
+  })
+
+  // The orange ALL wore before it went ISA blue — and the HISTORIC scope's own
+  // color, so the bubble and the badge it selects for match.
+  it('fills the historic badge orange, with white text', () => {
+    cy.get('[data-cy="status-historic"]').click()
+    cy.get('[data-cy="gear-card"]').first()
+      .find('[data-cy="historic-badge"]')
+      .should('have.css', 'background-color', 'rgb(232, 119, 10)')
+      .and('have.css', 'color', 'rgb(255, 255, 255)')
   })
 
   it('positions the historic badge in the top-LEFT of the card', () => {

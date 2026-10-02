@@ -1,4 +1,5 @@
 import { GEAR_TYPES } from '../support/gear_types'
+import { RED_600 } from '../support/colors'
 
 // ISA Approved badge behaviour.
 // Reference: DESIGN.md — the stamp badge (charcoal frame, teal + coral ISA mark,
@@ -132,7 +133,7 @@ describe('ISA certification block — gear detail page', () => {
         })
       })
 
-      it('shows subdued "Not ISA Certified" text (no badge) for a non-certified item', () => {
+      it('shows "Not ISA Certified" text (no badge) for a non-certified item', () => {
         cy.fetchAllItems(apiPath).then((all) => {
           const notCertified = (all as Record<string, unknown>[]).find(i => i.isa_certified === false)
           if (!notCertified) return
@@ -141,6 +142,19 @@ describe('ISA certification block — gear detail page', () => {
           cy.get('[data-cy="isa-certification-block"]').should('be.visible')
           cy.get('[data-cy="isa-not-certified-text"]').should('be.visible')
           cy.get('[data-cy="isa-approved-badge"]').should('not.exist')
+        })
+      })
+
+      // Red-600, the card pill's red. Tailwind v4 serialises it as oklch.
+      it('writes "Not ISA Certified" in red', () => {
+        cy.fetchAllItems(apiPath).then((all) => {
+          const item = (all as Record<string, unknown>[]).find(i => i.isa_certified === false)
+          if (!item) return
+
+          cy.visit(`/${slug}/${item.id}`)
+          cy.get('[data-cy="isa-not-certified-text"]')
+            .should('have.text', 'Not ISA Certified')
+            .and('have.css', 'color', RED_600)
         })
       })
 

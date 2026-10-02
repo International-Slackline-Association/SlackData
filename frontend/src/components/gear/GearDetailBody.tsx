@@ -231,7 +231,7 @@ export default function GearDetailBody({
                   </p>
                 </>
               ) : (
-                <span data-cy="isa-not-certified-text" className="text-sm text-gray-400">
+                <span data-cy="isa-not-certified-text" className="text-sm font-medium text-red-600">
                   Not ISA Certified
                 </span>
               )}
