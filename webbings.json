@@ -59,7 +59,12 @@
         "width": 25,
         "thickness": 3.5,
         "webbing_construction": "Core/Sheath",
-        "active": false
+        "active": false,
+        "product_url": "https://web.archive.org/web/20140815113503/http://www.landcruising-slacklines.de/en/shop/34-neue-produkte/442-core-2-hs-25mm-meterware",
+        "date_introduced": 1391212800000,
+        "priceMeter": 2.2,
+        "currency": "EUR",
+        "description": "Core 2 High Stretch (HS) - the new reference amongst allround slackline webbing and the Landcruising masterpiece. This webbing delivers a whole bunch of innovative details. Perfectly balanced features allow you to push the limits. The HS version offers an extended stretch and is especially suitable for more dynamic applications like bouncy longlines. The higher stretch absorbs impact forces in the case of shock loads. Core - no limits!"
     },
     {
         "id": 2,
@@ -121,7 +126,12 @@
         "width": 25,
         "thickness": 3.2,
         "webbing_construction": "Core/Sheath",
-        "active": false
+        "active": false,
+        "product_url": "https://web.archive.org/web/20140815125142/http://www.landcruising-slacklines.de/en/shop/34-neue-produkte/441-core-2-ls-25mm-meterware",
+        "date_introduced": 1391212800000,
+        "priceMeter": 2.2,
+        "currency": "EUR",
+        "description": "Core 2 Low Stretch (LS) - the new reference amongst longline webbing and the Landcruising masterpiece. This webbing delivers a whole bunch of innovative details. Perfectly balanced features allow you to push the limits. The LS version offers the lowest possible stretch in the range of Polyester webbings and is especially suited for longlines beyond 100 m in length. The very low stretch reduces the tensioning way together with the time used to tension and thus results in a lower amount of rope required inside rope pulley systems. Lower stretch means lower stored energy too an added safety benefit. Core - no limits!"
     },
     {
         "id": 3,
@@ -183,7 +193,11 @@
         "width": 25,
         "thickness": 3.9,
         "webbing_construction": "Core/Sheath",
-        "active": false
+        "active": false,
+        "product_url": "https://web.archive.org/web/20160610171527/http://www.landcruising-slacklines.de/en/shop/25-restposten/463-",
+        "priceMeter": 1.99,
+        "currency": "EUR",
+        "description": "Core - the Landcruising masterpiece. This webbing is the essence of our experience in the longline sector. Perfectly balanced features let you push the limits.\n\nThe 4 ply construction with two inner and two outer layers guarantee a maximum of safety and provide long lasting protection against abrasion. The ultra low stretch saves energy while tightening longlines and the well balanced weight to strength ratio gives a precise dynamic with a powerful bounce.\n\nThanks to our new Gentle Edge Design and a fine weave, this webbing is very friendly to hands and knees while catching the line. We equipped the line with different colour traces on the opposite sides, this prevents twists in the line. The high-contrast color design provides excellent visibility over all terrains. Core - no limits!"
     },
     {
         "id": 4,
@@ -195,8 +209,16 @@
                 "percent": 3.1
             },
             {
+                "kn": 3,
+                "percent": 5.1
+            },
+            {
                 "kn": 4,
                 "percent": 7.2
+            },
+            {
+                "kn": 5,
+                "percent": 8.8
             },
             {
                 "kn": 6,
@@ -241,17 +263,25 @@
             {
                 "kn": 16,
                 "percent": 18.4
+            },
+            {
+                "kn": 17,
+                "percent": 19
+            },
+            {
+                "kn": 18,
+                "percent": 19.4
             }
         ],
         "materialType": "Nylon",
         "weight": 80,
         "breakingStrength": 38,
         "date_introduced": null,
-        "product_url": null,
+        "product_url": "https://web.archive.org/web/20120822071950/http://www.landcruising-slacklines.de/de/shop/2-slackline-band/29-polyamid/276-t-wave-25mm-meterware",
         "width": 25,
         "thickness": 4.5,
         "webbing_construction": "Tubular",
-        "priceMeter": 3.33,
+        "priceMeter": 3.29,
         "currency": "EUR",
         "active": false
     },
@@ -479,12 +509,14 @@
         "weight": 58,
         "breakingStrength": 32.5,
         "date_introduced": null,
-        "product_url": "https://aki-slacklines.de/en/webbing/polyester/4/aki-white-magic-webbing?c=6",
+        "product_url": "https://web.archive.org/web/20140704004416/http://www.landcruising-slacklines.de/en/shop/2-slackline-band/26-polyester/141-white-magic-25mm-meterware?vmcchk=1",
         "width": 25,
         "webbing_construction": "Flat",
-        "priceMeter": 1.3,
+        "priceMeter": 1.39,
         "currency": "EUR",
-        "active": false
+        "active": false,
+        "thickness": 2.4,
+        "description": "Our favorite line in the width of 25 mm / 1 inch. We use White Magic since 2006 for all our beautiful highline, longline and waterline projects. In our experience White Magic offers a superior combination of low elongation, high-strength, extended dynamic range, low weight and durability. The snow-white color with black contour borders ensures an optimum of visibility over all terrains."
     },
     {
         "id": 7,
@@ -544,13 +576,14 @@
         "weight": 61.5,
         "breakingStrength": 32,
         "date_introduced": 1489363200000,
-        "product_url": null,
+        "product_url": "https://web.archive.org/web/20180512055411/http://landcruising-slacklines.de/en/webbing/polyester/257/landcruising-unicorn-webbing",
         "width": 25,
         "thickness": 2.7,
         "webbing_construction": "Core/Sheath",
-        "priceMeter": 1.79,
+        "priceMeter": 1.99,
         "currency": "EUR",
-        "active": false
+        "active": false,
+        "description": "Unicorn is the new all-round slackline by Landcruising. We have placed special emphasis on safety, comfort and pleasant walking characteristics. Based on the webbing design of Core 2, we have implemented a new innovative edge design, which provides a distinctly noticeable softness. The so-called Soft-Cushion padding is located on both edges of the line and provides a significantly softer haptic under the sole of the foot. Soft Cushion also dampens the edge effect while catching the line. All in all, this offers a considerable comfort gain.\n\nThe core-sheath construction combined with the very fine fabric design guarantees high resistance to dirt and abrasion. The moderate weight of 61 g together with the high stretch of 9% at 10 kN ensures easy controllability and a lot of fun with dynamic movements like bounces and surfs. Unicorn is the ideal slackline webbing for versatile applications, whether Highline, Longline or Waterline."
     },
     {
         "id": 8,
@@ -6364,18 +6397,21 @@
         "brand": "Landcruising",
         "materialType": "Polyester",
         "width": 35,
-        "weight": 69,
+        "weight": 67,
         "breakingStrength": 35,
         "stretch": [
             {
-                "percent": 7,
-                "kn": 10
+                "kn": 11.6,
+                "percent": 8.5
             }
         ],
         "date_introduced": null,
-        "product_url": null,
+        "product_url": "https://web.archive.org/web/20140705141401/http://www.landcruising-slacklines.de/en/shop/2-slackline-band/26-polyester/420-",
         "webbing_construction": "Flat",
-        "active": false
+        "active": false,
+        "priceMeter": 1.59,
+        "currency": "EUR",
+        "description": "The 35 mm wide slackline with soft touch and extended stretch gives more surface under the feet and fantastic dynamic pleasure, even on shorter lines. This webbing is ideally for beginners, recreational use and jumpliners."
     },
     {
         "id": 114,
@@ -6392,12 +6428,13 @@
             }
         ],
         "date_introduced": null,
-        "product_url": null,
+        "product_url": "https://web.archive.org/web/20140815103853/http://www.landcruising-slacklines.de/en/shop/34-neue-produkte/293-matrix-32mm-meterware",
         "thickness": 4,
         "webbing_construction": "Tubular",
         "priceMeter": 3.95,
         "currency": "EUR",
-        "active": false
+        "active": false,
+        "description": "The Matrix jumpline is the benchmark for tricklining with an extremely dynamic and powerful rebound. The unique combination of high breaking strength, high stretch and a big safety margin while pretension with high power guarantees a new quality regarding flight level and airtime and set back every other known.\n\nThe line needs to be very tight (beyond 10kN) for powerful jumplining. So far a high risk (line break, snap) was involved. Trickling with the Matrix is more safe due to the redundant tube in tube double line approach and the high break strength in absolute and relative meanings (Matrix is world leading in jumpline strength).\n\n100% Polyamide guarantee in contrast to the known Polyester lines a pressureful dynamic without lower death point. The rich and full thrust until take-off provides pure bounce experience. The webbing width of 32mm gives better foot placement und jump precision. The great mass inertia and damping characteristic of threaded lines ensure more time and tolerance for dynamic control.\n\nMatrix - unleash your power!"
     },
     {
         "id": 115,
@@ -6414,9 +6451,12 @@
             }
         ],
         "date_introduced": null,
-        "product_url": null,
+        "product_url": "https://web.archive.org/web/20140814193542/http://www.landcruising-slacklines.de/en/shop/2-slackline-band/29-polyamid/317-matrix-outer-32mm-meterware",
         "webbing_construction": "Tubular",
-        "active": false
+        "active": false,
+        "priceMeter": 1.95,
+        "currency": "EUR",
+        "description": "The Matrix Outer webbing can be used in many different ways. It offers as single line very good dynamic properties on shorter distances. The Matrix Outer transforms into a powerful jumpline by reinforcing it with 25 mm polyamide webbing. And lastly the 32mm wide webbing is suitable as protection padding for 25 mm lines."
     },
     {
         "id": 116,
@@ -6428,17 +6468,18 @@
         "breakingStrength": 20,
         "stretch": [
             {
-                "percent": 17,
-                "kn": 10
+                "kn": 7,
+                "percent": 14.5
             }
         ],
         "date_introduced": null,
-        "product_url": null,
+        "product_url": "https://web.archive.org/web/20130410035108/http://www.landcruising-slacklines.de/en/shop/2-slackline-band/29-polyamid/271-wave-25mm-meterware",
         "thickness": 2.3,
         "webbing_construction": "Tubular",
-        "priceMeter": 1.69,
+        "priceMeter": 1.65,
         "currency": "EUR",
-        "active": false
+        "active": false,
+        "description": "Slackline was born on nylon tubular webbing back in the early eighties. The soft touch and the fine weave give a genious dynamic and balance feeling (thanks to the Nylon fibers). This webbing will guarantee pure slackline fun. Even for moderate longlines suitable if threaded with our 19mm Wave-Tape."
     },
     {
         "id": 117,
@@ -6469,7 +6510,7 @@
         "materialType": "Nylon",
         "width": 19,
         "weight": 36,
-        "breakingStrength": 16,
+        "breakingStrength": 17,
         "stretch": [
             {
                 "percent": 14,
@@ -6477,12 +6518,13 @@
             }
         ],
         "date_introduced": null,
-        "product_url": null,
+        "product_url": "https://web.archive.org/web/20130415235313/http://www.landcruising-slacklines.de/en/shop/34-neue-produkte/327-wave-tube-19mm-meterware",
         "thickness": 2.4,
         "webbing_construction": "Tubular",
         "priceMeter": 1.35,
         "currency": "EUR",
-        "active": false
+        "active": false,
+        "description": "This 19 mm wide tubular webbing is very suitable for making a threaded leash. 10 mm to 10,5 mm dynamic rope fits ideally inside and giving a highline leash with superiour handling and strength. The webbing is additionally suitable as single walking line or reinforcement for 25 mm tubular webbing."
     },
     {
         "id": 119,
@@ -7209,12 +7251,13 @@
             }
         ],
         "date_introduced": null,
-        "product_url": "https://web.archive.org/web/20200806010018/https://aki-slacklines.de/de/slacklineband/polyester/11/landcruising-verve-25-mm-slackline-30m?c=6",
+        "product_url": "https://web.archive.org/web/20140902053505/http://www.landcruising-slacklines.de/en/shop/2-slackline-band/26-polyester/421-?vmcchk=1",
         "thickness": 2.5,
         "webbing_construction": "Flat",
         "priceMeter": 1.33,
         "currency": "EUR",
-        "active": false
+        "active": false,
+        "description": "The 25 mm wide slackline with soft touch and extended stretch gives a fantastic dynamic pleasure, even on shorter lines."
     },
     {
         "id": 152,
@@ -11887,11 +11930,11 @@
         ],
         "thickness": 2.8,
         "webbing_construction": "Flat",
-        "product_url": null,
-        "date_introduced": 1262304000000,
-        "priceMeter": null,
-        "currency": null,
-        "notes": "Specs transcribed from Landcruising's own Aeon product-archive PDF (2 pages, supplied 2026-09-05); Landcruising is defunct and there is no live product page, hence product_url null and active false. Maker's own wording: flat webbing, 25.8 mm (1 inch), 99 % Dyneema fibers with a red contrast thread, no labels or prints, made in Germany, 37 g/m, minimum break strength 60 kN, 1.3-1.4 % elongation at 20 kN, marketed as the webbing for superlonglines and big projects. Page 2 is the mill's tensile certificate (Gurtband-Zertifikat, 26.05.2010, n = 1, KMW 100 kN): break force 6385 daN (63.85 kN), elongation 1.37 % at 20 kN, thickness 2.80 mm, width 25.8 mm - those measured figures are the source for thickness and for the single 1.37 % / 20 kN stretch point. breakingStrength records the stated 60 kN minimum, not the 63.85 kN of that one specimen. The certificate's F=f(s) diagram is crosshead travel in mm (with the slack take-up toe), not strain, so no stretch curve is derived from it. date_introduced is the PDF's \"Release 2010\" - only the year is known; the certificate puts it in production by May 2010. No price was ever recorded.",
+        "product_url": "https://web.archive.org/web/20101120213347/http://www.landcruising-slacklines.de/03-05-01-aeon-meterware.html",
+        "date_introduced": 1283299200000,
+        "priceMeter": 5.95,
+        "currency": "EUR",
+        "notes": "Specs transcribed from Landcruising's own Aeon product-archive PDF (2 pages, supplied 2026-09-05); Landcruising is defunct; product_url is the archived Landcruising shop page (Wayback, Nov 2010), active false. Maker's own wording: flat webbing, 25.8 mm (1 inch), 99 % Dyneema fibers with a red contrast thread, no labels or prints, made in Germany, 37 g/m, minimum break strength 60 kN, 1.3-1.4 % elongation at 20 kN, marketed as the webbing for superlonglines and big projects. Page 2 is the mill's tensile certificate (Gurtband-Zertifikat, 26.05.2010, n = 1, KMW 100 kN): break force 6385 daN (63.85 kN), elongation 1.37 % at 20 kN, thickness 2.80 mm, width 25.8 mm - those measured figures are the source for thickness and for the single 1.37 % / 20 kN stretch point. breakingStrength records the stated 60 kN minimum, not the 63.85 kN of that one specimen. The certificate's F=f(s) diagram is crosshead travel in mm (with the slack take-up toe), not strain, so no stretch curve is derived from it. date_introduced is September 2010: the archived shop page took pre-orders and said it ships from mid-September 2010 (the PDF says \"Release 2010\"; the certificate puts it in production by May 2010). Price is that page's 5.95 EUR per metre.",
         "active": false
     },
     {

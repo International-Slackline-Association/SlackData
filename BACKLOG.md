@@ -4,6 +4,69 @@ Non-phase engineering tasks not tracked in [PLAN.md](PLAN.md) (frontend roadmap)
 
 ## Backend / data
 
+- [ ] **Landcruising gear we don't hold, and loose ends from the archive pass (2026-10-01).** The
+  existing 23 Landcruising rows were updated from the Wayback copy of landcruising-slacklines.de
+  (archive links, maker blurbs, prices, not-for-highline from the Lynx/Zilla manuals, manuals and
+  test certificates in `gear-manuals/`). The products below are Landcruising's own and have no row.
+  "(DE)" means the only working capture is German, so there is no description to take.
+
+  - Webbings
+    - [ ] **Nova Magic 25** — red White Magic, PES flat, 31 kN, 57 g/m, 6 % at ⅓ MBS (DE):
+      <https://web.archive.org/web/20100328221304/http://www.landcruising-slacklines.de/03-02-01-nova-magic-25mm-meterware.html>
+    - [ ] **White Magic 35mm** — 35 kN, sold as 16 m with sewn loop (DE):
+      <https://web.archive.org/web/20121026070842/http://www.landcruising-slacklines.de/de/shop/2-slackline-band/26-polyester/132-white-magic-35mm-mit-schlaufe>
+    - [ ] **Nova Magic 35** — no working capture (the only one is "product not found"); the Starter
+      Flex page names it as the red 35 mm line.
+    - [ ] **Sonic** (1st gen) — PA core-sheath, 31.5 kN, 63 g/m, 13.4 % at 10 kN (DE):
+      <https://web.archive.org/web/20120822061828/http://www.landcruising-slacklines.de/de/shop/2-slackline-band/29-polyamid/283-sonic-25mm-meterware>.
+      Sonic 2.0 is held already, as Aki Slacklines **#5**.
+    - [ ] **Verve 25, red (2010)** — 31 kN, 58 g/m, 7 % at 10 kN. A different product from the
+      yellow Verve 25 we hold as **#151** (11 % at 10 kN):
+      <https://web.archive.org/web/20110722171318/http://www.landcruising-slacklines.de/en/shop/2-slackline-band/26-flachband-25/148-verve-25mm-meterware?limitstart=0>
+  - Weblocks
+    - [ ] **Lockman** — stainless pin, 75 g, >30 kN, 10 kN WLL:
+      <https://web.archive.org/web/20141231113021/http://www.landcruising-slacklines.de/en/shop/12-bandhalter/48-landcruising-lockman>
+    - [ ] **Lockman 2.0** — 93 g, >30 kN, 8 kN WLL:
+      <https://web.archive.org/web/20161007043044/http://www.landcruising-slacklines.de/en/shop/34-neue-produkte/486-landcruising-lockman-20>
+    - [ ] **Lockman Air** — no page of its own; sold as a combo on the AirBow page:
+      <https://web.archive.org/web/20161009010520/http://www.landcruising-slacklines.de/en/shop/6-/38-/491-landcruising-airbow>
+    - [ ] **Puma 32** (1st gen) — 30–32 mm, 380 g, >59 kN, 14 kN WLL:
+      <https://web.archive.org/web/20120822095728/http://www.landcruising-slacklines.de/en/shop/4-harte-ware/12-fixierer/285-landcruising-puma>
+    - [ ] **Linelocker 25** — chain link, 60 g, 31.5 kN WLL:
+      <https://web.archive.org/web/20130415083232/http://www.landcruising-slacklines.de/en/shop/12-fixierer/29-landcruising-linelocker-25mm>
+    - [ ] **Linelocker 35** — 130 g, 53 kN WLL (DE):
+      <https://web.archive.org/web/20140507075500/http://www.landcruising-slacklines.de/de/shop/12-fixierer/30-landcruising-linelocker-35mm>
+  - Starter kits
+    - [ ] **Starter Flex** — 35 mm × 16 m, ratchet, 3.3 kg:
+      <https://web.archive.org/web/20130212093429/http://www.landcruising-slacklines.de/en/shop/1-slackline-sets/30-starter-serie/4-starter-flex-slackline-set-16m?vmcchk=1>
+    - [ ] **Starter Aerial** — 35 mm × 16 m, ratchet, 4.45 kg:
+      <https://web.archive.org/web/20120802062120/http://www.landcruising-slacklines.de/en/shop/1-slackline-sets/30-starter-serie/6-starter-aerial-slackline-set-16m?vmcchk=1>
+    - [ ] **StarterPlus** — 35 mm × 16 m, ratchet (DE):
+      <https://web.archive.org/web/20100328221014/http://www.landcruising-slacklines.de/01-02-landcruising-starterplus.html>
+    - [ ] **Cruiser** — 25 mm × 30 m, Ellington, 4.3 kg:
+      <https://web.archive.org/web/20110722151940/http://www.landcruising-slacklines.de/en/shop/1-slackline-sets/31-cruiser-serie/113-cruiser-slackline-set-30m>
+    - [ ] **Cruiser 2.0 Classic** — 25 mm × 30 m yellow Verve, Ellington, 5.4 kg:
+      <https://web.archive.org/web/20161007043021/http://www.landcruising-slacklines.de/en/shop/34-neue-produkte/369-cruiser-20-classic-slackline-set-33m>
+    - [ ] **Cruiser 2.0 Vari** — capture not yet opened; check it shows the product:
+      <https://web.archive.org/web/20161007042747/http://www.landcruising-slacklines.de/en/shop/34-neue-produkte/370-cruiser-20-vari-25mm-slackline-set>
+  - Tree protectors
+    - [ ] **TreePlus 2.0** — 2 m × 18 cm, 600 g/pair:
+      <https://web.archive.org/web/20110722120010/http://www.landcruising-slacklines.de/en/shop/3-baumschutz/73-treeplus-20-baumschuetzer>
+    - [ ] **TreeBuddies** — 1.6 m × 14 cm, 270 g/pair (DE):
+      <https://web.archive.org/web/20100717061247/http://www.landcruising-slacklines.de/04-04-treebuddies-baumschuetzer.html>
+  - Longline kits (Conveyor, Ronin, Sensei 1–3, Ninja) are archived too but fit no gear type we have.
+  - Loose ends on rows we hold
+    - [ ] **Webbing #152 "Wave Tube  32"** looks like a garbled duplicate of **Matrix Outer #115**
+      (same 27 kN, 58 g/m, 1.95 €, but recorded as 25.4 mm polyester). Confirm and remove.
+    - [ ] **Aloha #164** still links the live `aki-slacklines.de` Tidal page; it was never archived.
+    - [ ] **Photos still missing**: Unicorn, Matrix Outer, Puma 2.0 (the archive fetches failed;
+      worth a slower retry), and Wizard and Wave Tape 19, which have no usable capture at all.
+    - [ ] **Stretch curves that disagree with the maker's own table** were left as they are: White
+      Magic #6 (maker gives 4.8 % at 10 kN, the seed 5.1 %) and Core 1 #3 (maker gives 2.7 % at
+      10 kN, the seed 2.8 %). The differences are small, but a decision is needed on which source wins.
+    - [ ] **Unicorn #7 highline status** was left null: the maker markets it for highlines, but also
+      says they "officially do not sell slacklines for use in highlines".
+
 - [ ] **Adjudicate the remaining missing-gear candidates.** [MISSING_GEAR_REVIEW.md](MISSING_GEAR_REVIEW.md)
   has one section left from the 2026-07-31 deep sweep: **Starter / Longline / Highline Kit, 56
   rows**. 54 still need a keep/reject call; the two YogaSlackers eLine kits are ticked but not yet

@@ -2127,9 +2127,11 @@
         },
         "date_introduced": 1262300400000,
         "name": "Lynx 1",
-        "product_url": null,
+        "product_url": "https://web.archive.org/web/20101121001421/http://www.landcruising-slacklines.de/060310-landcruising-lynx.html",
         "active": false,
-        "style": "Tensionable Weblock"
+        "style": "Tensionable Weblock",
+        "manufacturer_not_for_highline": true,
+        "manufacturer_not_for_highline_source": "https://web.archive.org/web/20140513204501/http://www.landcruising-slacklines.de/data/docu/manuals/lynx%20manual-rev1.0.pdf"
     },
     {
         "id": 49,
@@ -2143,7 +2145,11 @@
             "country": "Germany",
             "country_flag_url": "/img/flags/DE.png"
         },
-        "pricing": [],
+        "pricing": [
+            {
+                "text": "1 unit and above : 59.95 EUR"
+            }
+        ],
         "specifications": {
             "Material": "High Strength Steel",
             "Weight": "290.2gr",
@@ -2159,13 +2165,19 @@
                 "Longline"
             ],
             "Date introduced": "Jan 2011",
-            "Manufacturer": "Landcruising"
+            "Manufacturer": "Landcruising",
+            "Price (per unit)": "1 unit and above : 59.95 EUR"
         },
-        "date_introduced": 1293836400000,
+        "date_introduced": null,
         "name": "Lynx 2.1",
-        "product_url": null,
+        "product_url": "https://web.archive.org/web/20130415081609/http://www.landcruising-slacklines.de/en/shop/12-fixierer/178-landcruising-lynx-21",
         "active": false,
-        "style": "Tensionable Weblock"
+        "style": "Tensionable Weblock",
+        "notes": "date_introduced cleared: the SlackDB value (Jan 2011) predates Landcruising's own Lynx 2.0 release post (1 Dec 2011), and 2.1 is the later revision of 2.0.",
+        "colors": "blue side plates, gold roller (\"blue jewel\")",
+        "manufacturer_not_for_highline": true,
+        "manufacturer_not_for_highline_source": "https://web.archive.org/web/20160528034123/http://www.landcruising-slacklines.de/data/docu/manuals/lynx%20manual-rev2.1-en.pdf",
+        "description": "Our Lynx embodies elegance and lightness paired with powerful strength and sophisticated functionality. The main application field are slackline setups up to 100m length and 12 kN preload.\n\nThe slackline can be fixed very fast and conveniently with the Lynx, now in the updated version 2.1. The possibility of pretighten the slackline with the hand gives superior precision and control while using rope pulley systems as tighteners. Thus, the static rope is used at maximum efficiency. Naturally, the Lynx 2.1 ensures a low strength reduction of the webbing."
     },
     {
         "id": 50,
@@ -2179,10 +2191,14 @@
             "country": "Germany",
             "country_flag_url": "/img/flags/DE.png"
         },
-        "pricing": [],
+        "pricing": [
+            {
+                "text": "1 unit and above : 69.95 EUR"
+            }
+        ],
         "specifications": {
             "Material": "High Strength Steel",
-            "Weight": "310gr",
+            "Weight": "312gr",
             "WLL": "12kN",
             "MBS": "70kN",
             "Anchor connection type": "Mounting Hole",
@@ -2198,13 +2214,18 @@
                 "Low Tension lines"
             ],
             "Date introduced": "N/A",
-            "Manufacturer": "Landcruising"
+            "Manufacturer": "Landcruising",
+            "Price (per unit)": "1 unit and above : 69.95 EUR"
         },
         "date_introduced": null,
         "name": "Lynx 3.0",
-        "product_url": null,
+        "product_url": "https://web.archive.org/web/20141231113010/http://www.landcruising-slacklines.de/en/shop/12-bandhalter/386-landcruising-lynx-30",
         "active": false,
-        "style": "Tensionable Weblock"
+        "style": "Tensionable Weblock",
+        "colors": "Anthracite, Orange, Steel",
+        "manufacturer_not_for_highline": true,
+        "manufacturer_not_for_highline_source": "https://web.archive.org/web/20140521011149/http://www.landcruising-slacklines.de/data/docu/manuals/lynx3%20manual-rev1.0-en.pdf",
+        "description": "The newly developed and completely revised 3rd generation of our classic webbing anchor comes up with new highlights and innovations.\n\nThe optimized strength to weight ratio makes the Lynx 3.0 to the absolute allrounder amongst webbing anchors.\n\nThe direct fit to the compact and highly secure Green Pin shackles (1.5 To WLL and 2 To WLL) ensures a consistently high safety standard and a great long-term fatigue resistance in slackline anchors and setups. The large rear connection hole in combination with the universal width allows for the use of the common stainless steel shackles.\n\nThe new push button front pin made from high strength stainless steel provides safe anchorage due to the high pullout resistance. The quick-release design enables fast and gentle installing and removing of the webbing.\n\nThe new larger middle diverter with an outer diameter of 28 mm increases the breaking efficiency of every webbing. The diverter is now equipped with the innovative R-Lock principle. R-Lock effectively prevents any rotation of the diverter under very high shock loads, thus minimizing the risk of webbing slippage under extreme loading.\n\nThe new spacious design of the side plates ensures the excellent guidance of very thick webbings (e.g. threaded lines) or double layup techniques (double line training)."
     },
     {
         "id": 51,
@@ -2225,7 +2246,7 @@
         ],
         "specifications": {
             "Material": "Aluminum",
-            "Weight": "196gr",
+            "Weight": "197gr",
             "WLL": "12kN",
             "MBS": "75kN",
             "Anchor connection type": "Mounting Hole",
@@ -2246,9 +2267,10 @@
         },
         "date_introduced": null,
         "name": "Lynx 4.0 SH",
-        "product_url": null,
+        "product_url": "https://web.archive.org/web/20170527215238/http://landcruising-slacklines.de/en/hardware/weblocks/23/landcruising-lynx-4-sh-weblock",
         "active": false,
-        "style": "Tensionable Weblock"
+        "style": "Tensionable Weblock",
+        "description": "Innovative 25 mm allround weblock for direct attachment to various shackles and connection components. The Lynx 4 SH represents a new leap forward in the field of slackline weblocks. A unique combination of innovative design, powerful mix of materials and top level production methods creating a weblock with leading performance.\n\nOf particular note are the very low weight of less than 200 grams and the high strength of about 75 kN along with a highly efficient main diverter, utilizing the patented Evolve principle, and the generous side plate dimensions for secure webbing position."
     },
     {
         "id": 52,
@@ -2264,7 +2286,7 @@
         },
         "pricing": [
             {
-                "text": "1 unit and above : 90.00 EUR"
+                "text": "1 unit and above : 89.95 EUR"
             }
         ],
         "specifications": {
@@ -2288,13 +2310,15 @@
             ],
             "Date introduced": "N/A",
             "Manufacturer": "Landcruising",
-            "Price (per unit)": "1 unit and above : 90.00 EUR"
+            "Price (per unit)": "1 unit and above : 89.95 EUR"
         },
         "date_introduced": null,
         "name": "Lynx 4.0 Vari",
-        "product_url": null,
+        "product_url": "https://web.archive.org/web/20161007043039/http://www.landcruising-slacklines.de/en/shop/34-neue-produkte/485-landcruising-lynx-4-vari",
         "active": false,
-        "style": "Tensionable Weblock"
+        "style": "Tensionable Weblock",
+        "colors": "brightblue, orange",
+        "description": "The Lynx 4 variable version represents a new leap forward in the field of slackline weblocks. A unique combination of innovative design, powerful mix of materials and top level production methods creating a weblock with leading performance.\n\nOf particular note are the very low weight of less than 230 grams and the high strength of about 70 kN along with a highly efficient main diverter, utilizing the patented Evolve principle, and the generous side plate dimensions for secure webbing position.\n\nThe Evolve diverter grants the gentle webbing fixation of a 36 mm diamter cylinder in extremely compact dimensions. The R-Lock pin securely protects the diverter against rotation. The Lynx 4 uses only corrosion-resistant materials such as anodized aerospace aluminium and high-strength stainless steel.\n\nThe variable version of the Lynx 4 features rearpin interface. With this design diverse connection and tensioning components can be attached directly to the Lynx 4 in fast \"plug and play\" manner. Thus, the Lynx 4 can be configured in a variety of setup situations. The direct attachment of our Soft-release system or the direct attachment of pulleys or rigging plates, using the ZenTube, is possible."
     },
     {
         "id": 53,
@@ -2889,7 +2913,7 @@
         },
         "pricing": [
             {
-                "text": "1 unit and above : 80.00 EUR"
+                "text": "1 unit and above : 79.95 EUR"
             }
         ],
         "specifications": {
@@ -2911,13 +2935,15 @@
             ],
             "Date introduced": "N/A",
             "Manufacturer": "Landcruising",
-            "Price (per unit)": "1 unit and above : 80.00 EUR"
+            "Price (per unit)": "1 unit and above : 79.95 EUR"
         },
         "date_introduced": null,
         "name": "Puma 2.0",
-        "product_url": null,
+        "product_url": "https://web.archive.org/web/20160526100700/http://www.landcruising-slacklines.de/en/shop/12-bandhalter/469-landcruising-puma-20",
         "active": false,
-        "style": "Tensionable Weblock"
+        "style": "Tensionable Weblock",
+        "colors": "orange",
+        "description": "The Puma is our specially developed webbing anchor for professional jump- and tricklining, now in the 2. generation. We set a special focus on the very robust and yet lightweight design with the direct shackle interface.\n\nThe Puma is the ideal partner for hard workouts thanks to the high breaking load of more than 7 tons. The main diverter with 28 mm diameter gives a high break strength efiiciency of the jumpline webbing. The webbing can be quickly assembled and disassembled due to the pushbutton frontpin. More precise setup thanks to the ablity for pretightening the webbing belong to the standard repertoire of the Puma.\n\nThe highlights of the 2. generation are the direct shackle interface to VanBeest GreenPin shackles (2T and 1.5T modells), the frontpin made of high strength 17-4 PH stainless steel and the larger main diverter with roller lock."
     },
     {
         "id": 67,
@@ -4510,9 +4536,11 @@
         },
         "date_introduced": 1262300400000,
         "name": "Zilla 1.0",
-        "product_url": null,
+        "product_url": "https://web.archive.org/web/20101121122851/http://www.landcruising-slacklines.de/060315-landcruising-zilla.html?pop=0",
         "active": false,
-        "style": "Tensionable Weblock"
+        "style": "Tensionable Weblock",
+        "manufacturer_not_for_highline": true,
+        "manufacturer_not_for_highline_source": "https://web.archive.org/web/20110818032716/http://www.landcruising-slacklines.de/data/docu/manuals/zilla%20manual-rev1.1.pdf"
     },
     {
         "id": 106,
@@ -4526,7 +4554,11 @@
             "country": "Germany",
             "country_flag_url": "/img/flags/DE.png"
         },
-        "pricing": [],
+        "pricing": [
+            {
+                "text": "1 unit and above : 109.95 EUR"
+            }
+        ],
         "specifications": {
             "Material": "Aluminum",
             "Weight": "530gr",
@@ -4542,13 +4574,17 @@
                 "Longline"
             ],
             "Date introduced": "Jan 2011",
-            "Manufacturer": "Landcruising"
+            "Manufacturer": "Landcruising",
+            "Price (per unit)": "1 unit and above : 109.95 EUR"
         },
-        "date_introduced": 1293836400000,
+        "date_introduced": 1322697600000,
         "name": "Zilla 2.0",
-        "product_url": null,
+        "product_url": "https://web.archive.org/web/20130415083207/http://www.landcruising-slacklines.de/en/shop/12-fixierer/182-landcruising-zilla-20",
         "active": false,
-        "style": "Tensionable Weblock"
+        "style": "Tensionable Weblock",
+        "manufacturer_not_for_highline": true,
+        "manufacturer_not_for_highline_source": "https://web.archive.org/web/20151028152949/http://www.landcruising-slacklines.de/data/docu/manuals/zilla%20manual-rev2.0.pdf",
+        "description": "Our Zilla 2.0 is the vigorous leader among the slackline anchor devices. The application range of the Zilla includes longlines over 100 meter up to 16 kN pretension. Despite its massive structure there isn´t any ounce too much. Weight and function optimization was one of our main goals.\n\nThe most striking feature of the Zilla 2.0 is the great and handy Quickpin, which allows a rapid fixation of the line. The possibility of pre-tightening the line with hand power gives great precision and efficiency when using a pulley tightening system. Thanks to the 36 mm diameter of the main deviator - the Zilla 2.0 defines a very high maximum breaking load factor."
     },
     {
         "id": 107,
@@ -4564,7 +4600,7 @@
         },
         "pricing": [
             {
-                "text": "1 unit and above : 110.00 EUR"
+                "text": "1 unit and above : 109.95 EUR"
             }
         ],
         "specifications": {
@@ -4585,13 +4621,16 @@
             ],
             "Date introduced": "N/A",
             "Manufacturer": "Landcruising",
-            "Price (per unit)": "1 unit and above : 110.00 EUR"
+            "Price (per unit)": "1 unit and above : 109.95 EUR"
         },
         "date_introduced": null,
         "name": "Zilla 3.0",
-        "product_url": null,
+        "product_url": "https://web.archive.org/web/20150101054313/http://www.landcruising-slacklines.de/en/shop/12-bandhalter/443-landcruising-zilla-30?vmcchk=1",
         "active": false,
-        "style": "Tensionable Weblock"
+        "style": "Tensionable Weblock",
+        "manufacturer_not_for_highline": true,
+        "manufacturer_not_for_highline_source": "https://web.archive.org/web/20140722032643/http://www.landcruising-slacklines.de/data/docu/manuals/zilla3-manual-rev1.0-eng-lock.pdf",
+        "description": "The newly developed and completely revised 3rd generation of our high-tension weblock, the Zilla, comes up with new highlights and innovations. High-strength and ultra-robust structure was our main priority. The Zilla 3 is the worldwide leader in terms of breaking strength and also webbing strength reduction and is intended for very long longline projects and slackline rigs demanding a high degree of safety.\n\nThe most striking novelty is the middle diverter, realised with a new geometry for the webbing to wrap around. This Evolve -technology, registered for patent approval, allows us to maximise the breaking strength efficiency of the slackline while staying within minimal dimensions. This makes it possible to have a middle diverter with the efficiency of Ø60 mm using a smaller area than the previous Ø36 mm Zilla 2 diverter integrated in the device. The R-Lock-Design very efficiently prevents any rotation of the middle diverter under very high and sudden shockloads and thus minimises the danger of the slackline slipping under such extreme loads.\n\nThe direct fit to the compact and highly secure Green-Pin shackles ( 2to WLL and 3.25to WLL ) creates a consistently high safety standard and a high fatigue resistance in slackline anchors and tensioning systems. The spacious eyes at the back of the device (Versat Eye) allow for shackles to be passed through, so that the Zilla 3 can be positioned on the shackle bow. This is a great advantage in special rigging systems (9:1 interface, mounting to pulleys and rigging plates). The pin connecting the side-plates in the back prevents any nonlinear loading of the structure.\n\nThe large 4-ball-pushpin, made from high tensile and highly rigid stainless steel,facilitates a safe anchorage with high pull-out resistance. The Quick-release-concept allows for a fast installing and taking out of the webbing.\n\nThe generously spacious design of the side-plates excellently guides very thick webbing (e.g. threaded lines) or doubled up layers (Double layup training)."
     },
     {
         "id": 108,

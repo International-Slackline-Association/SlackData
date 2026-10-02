@@ -134,13 +134,16 @@
         "inner_width": 28,
         "outer_bearing_diameter": 22,
         "manufacturer": "Landcruising",
-        "price": 25.0,
+        "price": 24.95,
         "price_unit": "EUR",
         "roller_material": null,
         "locking_type": "Non-locking",
         "date_introduced": null,
-        "product_url": null,
-        "active": false
+        "product_url": "https://web.archive.org/web/20160102204555/http://www.landcruising-slacklines.de/en/shop/37-highline/226-landcruising-highslide-20?vmcchk=1",
+        "active": false,
+        "manufacturer_not_for_highline": true,
+        "manufacturer_not_for_highline_source": "https://web.archive.org/web/20160102204555/http://www.landcruising-slacklines.de/en/shop/37-highline/226-landcruising-highslide-20?vmcchk=1",
+        "description": "This unique ball-bearing pulley for 1 inch wide webbings is the absolute hint for tuning your Ellington tightening system. The HighSlide works as a deviator in the multiplyer. In this function the total tightening power of the Ellington is dramatically increased (over 50%) compared to standard methods. Thus its possible to rig moderate longlines and tight jumplines up to 800 kg preload (with 1 person) while using an Ellington system like our Cruiser Slackline-Kit."
     },
     {
         "id": 7,
