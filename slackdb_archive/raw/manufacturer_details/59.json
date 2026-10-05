@@ -1,0 +1,31 @@
+{
+ "manufacturerDetail": {
+  "_id": 59,
+  "name": "Mammut",
+  "location": {
+   "countryCode": "CH",
+   "lat": 46.818188,
+   "lng": 8.227512
+  },
+  "isActive": true,
+  "url": "https://www.mammut.com/",
+  "fbPage": "https://www.facebook.com/Mammut/",
+  "contributors": [
+   {
+    "id": "1811540145542689",
+    "name": "Helmut Netzwerker"
+   }
+  ],
+  "creatorId": "1811540145542689",
+  "creationDate": 1503315775178,
+  "slug": "mammut",
+  "imageFilename": "mammut.jpg",
+  "imagesCount": 0,
+  "gearStats": [
+   {
+    "itemTypeId": "WEB",
+    "count": 1
+   }
+  ]
+ }
+}

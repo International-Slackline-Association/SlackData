@@ -1,0 +1,56 @@
+{
+ "gearDetail": {
+  "_id": 3071,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "WLCK",
+  "slug": "ginkgo_mini",
+  "creatorId": "10154430595665625",
+  "creationDate": 1542153979958,
+  "name": "Ginkgo Mini",
+  "material": [
+   "SS"
+  ],
+  "weight": 560,
+  "wll": 20,
+  "mbs": 105,
+  "anchorConnectionType": [
+   "MH"
+  ],
+  "webbingConnectionType": [
+   "QP"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 30,
+   "max": 51
+  },
+  "diverterDiameter": 26,
+  "usage": [
+   "TL"
+  ],
+  "productionStatus": "DC",
+  "manufacturerId": 4,
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "EX",
+     "price": 65
+    },
+    {
+     "q": 2,
+     "qt": "AA",
+     "price": 60
+    }
+   ]
+  },
+  "lastEditDate": 1712937245634,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

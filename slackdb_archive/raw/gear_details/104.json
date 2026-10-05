@@ -1,0 +1,63 @@
+{
+ "gearDetail": {
+  "_id": 104,
+  "slug": "Tantalus",
+  "itemTypeId": "WEB",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "656760621184025",
+    "name": "Eli Szendro Brown"
+   }
+  ],
+  "lastEditDate": 1587249294250,
+  "name": "Tantalus",
+  "webbingType": "FL",
+  "material": [
+   "PL"
+  ],
+  "dWidth": 25.4,
+  "weight": 53,
+  "wll": 6.7,
+  "mbs": 34.7,
+  "dDepth": 3.2,
+  "elongation": {
+   "percent": 8,
+   "force": 10
+  },
+  "productionStatus": "DC",
+  "manufacturerId": 41,
+  "pricing": {
+   "currency": "CAD",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 2.6
+    }
+   ],
+   "hasAddOpts": true
+  },
+  "imagesCount": 0
+ },
+ "similarGear": [
+  {
+   "_id": 85,
+   "slug": "SinMs",
+   "itemTypeId": "WEB",
+   "name": "Sin Más",
+   "manufacturerId": 23,
+   "manufacturer": {
+    "name": "Ambaradam",
+    "url": "http://ambaradam.net",
+    "countryTxt": "Spain",
+    "countryCode": "ES"
+   }
+  }
+ ]
+}

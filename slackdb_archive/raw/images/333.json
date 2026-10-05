@@ -1,0 +1,22 @@
+{
+ "_id": 333,
+ "description": "Computer generated model",
+ "gearId": 3079,
+ "takenDate": 1558558800000,
+ "imageScope": "ITM",
+ "imageSource": "OFF",
+ "imageSourceUrl": "https://www.facebook.com/eqb.cz/photos/a.245341192246550/2224976470949669/?type=3&theater",
+ "imageType": "RG",
+ "contributors": [
+  {
+   "id": "10154430595665625",
+   "name": "Nir Avneyon"
+  }
+ ],
+ "creationDate": 1558622269091,
+ "creatorId": "10154430595665625",
+ "filename": "333.jpg",
+ "width": 1080,
+ "height": 905,
+ "creatorName": "Nir Avneyon"
+}

@@ -1,0 +1,59 @@
+{
+ "gearDetail": {
+  "_id": 509,
+  "slug": "PaddleSH",
+  "itemTypeId": "WLCK",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "10220734815258954",
+    "name": "Jakub Dostál"
+   }
+  ],
+  "lastEditDate": 1617108368678,
+  "name": "Paddle SH",
+  "material": [
+   "SS"
+  ],
+  "weight": 317,
+  "wll": 14,
+  "mbs": 50,
+  "anchorConnectionType": [
+   "MH"
+  ],
+  "webbingConnectionType": [
+   "QP",
+   "SP"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 49,
+   "max": 51
+  },
+  "diverterDiameter": 16,
+  "efficiency": 80,
+  "usage": [
+   "TL"
+  ],
+  "productionStatus": "DC",
+  "manufacturerId": 9,
+  "url": "http://www.slackshop.cz/en/lockers/83-eqb-paddle.html",
+  "pricing": {
+   "currency": "CZK",
+   "hasAddOpts": true,
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 1090
+    }
+   ]
+  },
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

@@ -1,0 +1,73 @@
+{
+ "gearDetail": {
+  "_id": 3052,
+  "name": "Panda",
+  "webbingType": "FL",
+  "material": [
+   "PL",
+   "DY"
+  ],
+  "dWidth": 25,
+  "weight": 34.3,
+  "wll": 6.4,
+  "mbs": 32,
+  "dDepth": 2.1,
+  "elongation": {
+   "percent": 3,
+   "force": 6.4
+  },
+  "dateIntroduced": 1493758800000,
+  "productionStatus": "AC",
+  "manufacturerId": 21,
+  "url": "https://slacklineindustries.com/collections/1-inch/products/panda",
+  "pricing": {
+   "currency": "USD",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 4.59
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "WEB",
+  "slug": "panda",
+  "creatorId": "10154430595665625",
+  "creationDate": 1530634601224,
+  "imagesCount": 1
+ },
+ "similarGear": [
+  {
+   "_id": 33,
+   "slug": "Goku",
+   "itemTypeId": "WEB",
+   "name": "Goku",
+   "manufacturerId": 4,
+   "manufacturer": {
+    "name": "Slack Mountain",
+    "url": "http://slack-mountain.com",
+    "countryTxt": "France",
+    "countryCode": "FR"
+   }
+  },
+  {
+   "_id": 42,
+   "slug": "Moonwalk",
+   "itemTypeId": "WEB",
+   "name": "Moonwalk",
+   "manufacturerId": 12,
+   "manufacturer": {
+    "name": "Slack.fr",
+    "url": "http://slack.fr",
+    "countryTxt": "France",
+    "countryCode": "FR"
+   }
+  }
+ ]
+}

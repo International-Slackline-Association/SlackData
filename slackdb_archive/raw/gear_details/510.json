@@ -1,0 +1,54 @@
+{
+ "gearDetail": {
+  "_id": 510,
+  "slug": "PaddleFX",
+  "itemTypeId": "WLCK",
+  "shopUrl": "http://www.slackshop.cz/en/funxion-progear/180-eqb-paddle-fx.html",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1712945420014,
+  "name": "Paddle FX",
+  "material": [
+   "SS"
+  ],
+  "weight": 326,
+  "wll": 14,
+  "mbs": 70,
+  "anchorConnectionType": [
+   "MH"
+  ],
+  "webbingConnectionType": [
+   "CP"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 49,
+   "max": 51
+  },
+  "diverterDiameter": 16,
+  "efficiency": 80,
+  "usage": [
+   "TL"
+  ],
+  "productionStatus": "AC",
+  "manufacturerId": 9,
+  "url": "https://www.slackshop.cz/en/weblocks/25-eqb-paddle-fx.html",
+  "pricing": {
+   "currency": "CZK",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 1574
+    }
+   ]
+  },
+  "imagesCount": 4
+ },
+ "similarGear": []
+}

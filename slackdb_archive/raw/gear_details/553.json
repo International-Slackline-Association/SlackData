@@ -1,0 +1,66 @@
+{
+ "gearDetail": {
+  "_id": 553,
+  "slug": "CatlockPromini",
+  "itemTypeId": "WLCK",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "2259321817488648",
+    "name": "Michał Guz"
+   }
+  ],
+  "lastEditDate": 1712933362779,
+  "name": "Catlock mini",
+  "material": [
+   "SS",
+   "AL"
+  ],
+  "weight": 225,
+  "wll": 10,
+  "mbs": 50,
+  "anchorConnectionType": [
+   "MH"
+  ],
+  "webbingConnectionType": [
+   "QP"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 24,
+   "max": 26
+  },
+  "diverterDiameter": 25,
+  "usage": [
+   "SL",
+   "HL",
+   "LL",
+   "RL",
+   "LTL"
+  ],
+  "productionStatus": "AC",
+  "manufacturerId": 51,
+  "url": "https://catonslack.com/product/34629326-slackline-weblock-catlock-mini",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "EX",
+     "price": 44.95
+    },
+    {
+     "q": 2,
+     "qt": "AA",
+     "price": 42.5
+    }
+   ]
+  },
+  "imagesCount": 3
+ },
+ "similarGear": []
+}

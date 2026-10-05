@@ -1,0 +1,40 @@
+{
+ "gearDetail": {
+  "_id": 108,
+  "slug": "RastaTubelar",
+  "itemTypeId": "WEB",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "name": "Rasta Tubelar",
+  "webbingType": "TB",
+  "material": [
+   "NY"
+  ],
+  "dWidth": 25.4,
+  "wll": 4,
+  "mbs": 20,
+  "dDepth": 2.2,
+  "productionStatus": "AC",
+  "manufacturerId": 44,
+  "url": "http://www.balancingearthslacklines.com/webbing_tubular_rasta_slackline_balancing_earth_p/rtw.htm",
+  "pricing": {
+   "currency": "USD",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 1.38
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1499082598449,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

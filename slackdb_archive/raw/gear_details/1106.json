@@ -1,0 +1,112 @@
+{
+ "gearDetail": {
+  "_id": 1106,
+  "slug": "Hangover20",
+  "itemTypeId": "SLD",
+  "psaCert": true,
+  "reviews": [
+   {
+    "creatorId": "10155361109487970",
+    "pros": [
+     "Easy to use",
+     "Fast",
+     "Can be used for tensioning combined with a line-grip"
+    ],
+    "rating": {
+     "lst": {
+      "VFM": 10,
+      "QU": 10,
+      "VER": 10,
+      "EOU": 10
+     },
+     "overall": 10
+    },
+    "creationDate": 1499723466303,
+    "creatorName": "Ilia Oshmiansky"
+   }
+  ],
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "10155361109487970",
+    "name": "Ilia Oshmiansky"
+   }
+  ],
+  "lastEditDate": 1542144436011,
+  "name": "Hangover 2.0",
+  "material": [
+   "AL",
+   "S"
+  ],
+  "weight": 152,
+  "wll": 4,
+  "mbs": 24,
+  "compatibleWebbingWidth": {
+   "min": 25,
+   "max": 26
+  },
+  "sliderType": "CA",
+  "innerWidth": 27.8,
+  "productionStatus": "AC",
+  "manufacturerId": 6,
+  "url": "https://www.slacktivity.com/default/longline-highline/hangover",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 44.95
+    }
+   ],
+   "hasAddOpts": true
+  },
+  "ratingsAverages": {
+   "overall": {
+    "nativeCount": 1,
+    "nativeValue": 10,
+    "value": 10,
+    "count": 1
+   },
+   "lst": {
+    "VFM": {
+     "count": 1,
+     "value": 10
+    },
+    "QU": {
+     "count": 1,
+     "value": 10
+    },
+    "VER": {
+     "count": 1,
+     "value": 10
+    },
+    "EOU": {
+     "count": 1,
+     "value": 10
+    }
+   }
+  },
+  "imagesCount": 1
+ },
+ "similarGear": [
+  {
+   "_id": 1107,
+   "slug": "HangOverS",
+   "itemTypeId": "SLD",
+   "name": "HangOver-S",
+   "manufacturerId": 6,
+   "manufacturer": {
+    "name": "Slacktivity",
+    "url": "http://www.slacktivity.com",
+    "countryTxt": "Switzerland",
+    "countryCode": "CH"
+   }
+  }
+ ]
+}

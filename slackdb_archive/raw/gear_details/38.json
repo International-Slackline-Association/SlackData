@@ -1,0 +1,107 @@
+{
+ "gearDetail": {
+  "_id": 38,
+  "slug": "Windu",
+  "itemTypeId": "WEB",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "10155267793869667",
+    "name": "Romain Schempf"
+   }
+  ],
+  "lastEditDate": 1587336631772,
+  "name": "Windu",
+  "webbingType": "FL",
+  "material": [
+   "PL"
+  ],
+  "dWidth": 25,
+  "weight": 65,
+  "wll": 12.5,
+  "mbs": 25,
+  "dDepth": 2.5,
+  "elongation": {
+   "percent": 6.5,
+   "force": 10
+  },
+  "usage": [
+   "SL",
+   "HL",
+   "LL",
+   "RL",
+   "LTL",
+   "TL",
+   "SR"
+  ],
+  "productionStatus": "DC",
+  "manufacturerId": 4,
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 15,
+     "qt": "EX",
+     "price": 1.33
+    },
+    {
+     "q": 20,
+     "qt": "EX",
+     "price": 1.35
+    },
+    {
+     "q": 25,
+     "qt": "EX",
+     "price": 1.5
+    },
+    {
+     "q": 30,
+     "qt": "EX",
+     "price": 1.33
+    },
+    {
+     "q": 40,
+     "qt": "EX",
+     "price": 1.13
+    },
+    {
+     "q": 50,
+     "qt": "EX",
+     "price": 1.1
+    },
+    {
+     "q": 60,
+     "qt": "EX",
+     "price": 1.08
+    },
+    {
+     "q": 70,
+     "qt": "EX",
+     "price": 1.07
+    },
+    {
+     "q": 100,
+     "qt": "EX",
+     "price": 1.05
+    },
+    {
+     "q": 150,
+     "qt": "EX",
+     "price": 1.07
+    },
+    {
+     "q": 200,
+     "qt": "EX",
+     "price": 1.02
+    }
+   ]
+  },
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

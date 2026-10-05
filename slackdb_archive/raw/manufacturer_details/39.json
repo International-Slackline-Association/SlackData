@@ -1,0 +1,38 @@
+{
+ "manufacturerDetail": {
+  "_id": 39,
+  "slug": "Tendon",
+  "manufacturerStatus": "ACT",
+  "imageFilename": "tendon.jpg",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "name": "Tendon",
+  "location": {
+   "countryCode": "CZ",
+   "address": "Hlučínská 96/1 747 23 Bolatice",
+   "lat": 49.95263290405273,
+   "lng": 18.08158111572266,
+   "isExact": true
+  },
+  "isActive": true,
+  "url": "http://www.mytendon.com",
+  "fbPage": "https://www.facebook.com/mytendon",
+  "lastEditDate": 1498724435396,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "ratingsAverages": {
+   "overall": {
+    "externalValue": 9,
+    "externalCount": 65,
+    "value": 9,
+    "count": 65
+   }
+  },
+  "imagesCount": 0,
+  "gearStats": null
+ }
+}

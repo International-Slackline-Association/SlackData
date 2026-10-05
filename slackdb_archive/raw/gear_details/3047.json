@@ -1,0 +1,61 @@
+{
+ "gearDetail": {
+  "_id": 3047,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "1541853415834804",
+    "name": "Stephan Chalkowski"
+   },
+   {
+    "id": "1811540145542689",
+    "name": "Helmut Netzwerker"
+   }
+  ],
+  "itemTypeId": "WLCK",
+  "slug": "rodeo_weblock",
+  "creatorId": "10154430595665625",
+  "creationDate": 1513795420927,
+  "lastEditDate": 1712946465596,
+  "name": "RODEO weblock",
+  "material": [
+   "AL"
+  ],
+  "weight": 57,
+  "wll": 4,
+  "mbs": 17,
+  "anchorConnectionType": [
+   "MH"
+  ],
+  "webbingConnectionType": [
+   "QP"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 24,
+   "max": 26
+  },
+  "diverterDiameter": 30,
+  "efficiency": 90,
+  "usage": [
+   "RL"
+  ],
+  "dateIntroduced": 1513720800000,
+  "productionStatus": "DC",
+  "manufacturerId": 26,
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 64.95
+    }
+   ]
+  },
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

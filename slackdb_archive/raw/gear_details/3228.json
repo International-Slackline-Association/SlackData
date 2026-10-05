@@ -1,0 +1,33 @@
+{
+ "gearDetail": {
+  "_id": 3228,
+  "name": "PLAY LINE",
+  "webbingLength": 15,
+  "webbingWidth": 50,
+  "productionStatus": "AC",
+  "manufacturerId": 21,
+  "url": "https://slacklineindustries.com/collections/all-products/products/play-line",
+  "pricing": {
+   "currency": "USD",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 100
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "play_line",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622031567093,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

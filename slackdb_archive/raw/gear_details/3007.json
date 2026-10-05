@@ -1,0 +1,20 @@
+{
+ "gearDetail": {
+  "_id": 3007,
+  "slug": "1TSpanset",
+  "itemTypeId": "GEN",
+  "name": "1T Spanset",
+  "wll": 10,
+  "mbs": 70,
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "imagesCount": 2
+ },
+ "similarGear": []
+}

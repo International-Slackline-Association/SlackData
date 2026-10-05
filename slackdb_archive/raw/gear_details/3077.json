@@ -1,0 +1,47 @@
+{
+ "gearDetail": {
+  "_id": 3077,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "WEB",
+  "slug": "sos_-sunsetoverseas",
+  "creatorId": "10154430595665625",
+  "creationDate": 1554226416809,
+  "lastEditDate": 1587291258121,
+  "name": "S.O.S - Sunset Over Seas",
+  "webbingType": "CS",
+  "material": [
+   "PL",
+   "DY"
+  ],
+  "dWidth": 22,
+  "weight": 33.6,
+  "mbs": 32,
+  "dDepth": 2.14,
+  "elongation": {
+   "percent": 3.4,
+   "force": 10
+  },
+  "dateIntroduced": 1554152400000,
+  "productionStatus": "AC",
+  "manufacturerId": 4,
+  "url": "https://slack-mountain.com/en/hybrid-webbing/221-cloud.html#/242-swen_loop-with/65-longueur-55_m",
+  "pricing": {
+   "currency": "EUR",
+   "hasAddOpts": true,
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 3.2
+    }
+   ]
+  },
+  "imagesCount": 2
+ },
+ "similarGear": []
+}

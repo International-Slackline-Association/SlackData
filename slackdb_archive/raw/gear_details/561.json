@@ -1,0 +1,79 @@
+{
+ "gearDetail": {
+  "_id": 561,
+  "slug": "LimeLinelock",
+  "itemTypeId": "WLCK",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1712937774415,
+  "name": "Lime",
+  "material": [
+   "SS",
+   "AL"
+  ],
+  "weight": 275,
+  "wll": 12,
+  "mbs": 48,
+  "anchorConnectionType": [
+   "MH"
+  ],
+  "webbingConnectionType": [
+   "CP"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 24,
+   "max": 26
+  },
+  "usage": [
+   "SL",
+   "HL",
+   "LL",
+   "RL",
+   "LTL"
+  ],
+  "productionStatus": "DC",
+  "manufacturerId": 24,
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 39.95
+    },
+    {
+     "price": 36.95,
+     "qt": "AA",
+     "q": 2
+    },
+    {
+     "price": 33.95,
+     "qt": "AA",
+     "q": 4
+    }
+   ]
+  },
+  "imagesCount": 2
+ },
+ "similarGear": [
+  {
+   "_id": 529,
+   "slug": "SladLockPower",
+   "itemTypeId": "WLCK",
+   "name": "SladLock Power",
+   "manufacturerId": 12,
+   "manufacturer": {
+    "name": "Slack.fr",
+    "url": "http://slack.fr",
+    "countryTxt": "France",
+    "countryCode": "FR"
+   }
+  }
+ ]
+}

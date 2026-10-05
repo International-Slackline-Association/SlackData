@@ -1,0 +1,35 @@
+{
+ "gearDetail": {
+  "_id": 3192,
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "20m_slacklinekit1quotpracticeline",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622016403011,
+  "name": "20m Slackline Kit: 1 Practice Line",
+  "webbingLength": 20,
+  "webbingWidth": 25,
+  "tensioningType": "PRIM",
+  "productionStatus": "AC",
+  "manufacturerId": 65,
+  "url": "https://www.instamojo.com/slackmitra/slackline-kit-1-practice-line/?ref=store",
+  "pricing": {
+   "currency": "INR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 5000
+    }
+   ]
+  },
+  "lastEditDate": 1622030563057,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

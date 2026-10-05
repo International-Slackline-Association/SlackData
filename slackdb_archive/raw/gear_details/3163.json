@@ -1,0 +1,34 @@
+{
+ "gearDetail": {
+  "_id": 3163,
+  "name": "Treewear XL – Edition",
+  "dWidth": 25,
+  "dLength": 200,
+  "hasSlingAttachment": true,
+  "productionStatus": "AC",
+  "manufacturerId": 1,
+  "url": "https://www.gibbon-slacklines.com/de/produkte/zubehoer/treewear-xl/",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 24.95
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "TRP",
+  "slug": "treewear_xledition",
+  "creatorId": "2824084041240796",
+  "creationDate": 1621856012879,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

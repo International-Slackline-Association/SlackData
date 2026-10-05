@@ -1,0 +1,127 @@
+{
+ "gearDetail": {
+  "_id": 542,
+  "slug": "Frog",
+  "itemTypeId": "WLCK",
+  "fieldsRemarks": {
+   "weight": "283-297 grams depending on version"
+  },
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "10155267793869667",
+    "name": "Romain Schempf"
+   },
+   {
+    "id": "10156383168804695",
+    "name": "Johanna Glasse"
+   }
+  ],
+  "lastEditDate": 1712937199583,
+  "reviews": [
+   {
+    "creatorId": "10156383168804695",
+    "text": "Top",
+    "rating": {
+     "lst": {
+      "VFM": 10,
+      "QU": 10,
+      "VER": 10,
+      "EOU": 10,
+      "PRT": 10
+     },
+     "overall": 10
+    },
+    "pros": [],
+    "cons": [],
+    "creationDate": 1522520347133,
+    "creatorName": "Johanna Glasse"
+   }
+  ],
+  "name": "Frog",
+  "material": [
+   "SS",
+   "HSS"
+  ],
+  "weight": 296,
+  "wll": 15,
+  "mbs": 60,
+  "anchorConnectionType": [
+   "MH",
+   "SL",
+   "XLMH"
+  ],
+  "webbingConnectionType": [
+   "QP"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 20,
+   "max": 27
+  },
+  "diverterDiameter": 60,
+  "efficiency": 98,
+  "usage": [
+   "SL",
+   "HL",
+   "LL",
+   "RL",
+   "LTL"
+  ],
+  "productionStatus": "AC",
+  "manufacturerId": 4,
+  "url": "https://slack-mountain.com/en/webbing-anchor/231-4047-frogx.html",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 79
+    },
+    {
+     "q": 2,
+     "qt": "EX",
+     "price": 67.5
+    }
+   ],
+   "hasAddOpts": true
+  },
+  "ratingsAverages": {
+   "overall": {
+    "nativeCount": 1,
+    "nativeValue": 10,
+    "value": 10,
+    "count": 1
+   },
+   "lst": {
+    "VFM": {
+     "count": 1,
+     "value": 10
+    },
+    "QU": {
+     "count": 1,
+     "value": 10
+    },
+    "VER": {
+     "count": 1,
+     "value": 10
+    },
+    "EOU": {
+     "count": 1,
+     "value": 10
+    },
+    "PRT": {
+     "count": 1,
+     "value": 10
+    }
+   }
+  },
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

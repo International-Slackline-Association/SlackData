@@ -1,0 +1,151 @@
+{
+ "gearDetail": {
+  "_id": 3012,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "1965817623686037",
+    "name": "Radwin Bodnic"
+   },
+   {
+    "id": "157046135120641",
+    "name": "Benoit Crera"
+   }
+  ],
+  "itemTypeId": "WLCK",
+  "slug": "slackibloc_4",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "reviews": [
+   {
+    "creatorId": "1965817623686037",
+    "text": "The lightest traditional weblock on earth.\nWide variety of compatible connectors.\nVery good finish.\nLow design quickpin.",
+    "rating": {
+     "lst": {
+      "VFM": 10,
+      "QU": 8,
+      "VER": 8,
+      "EOU": 8,
+      "PRT": 10
+     },
+     "overall": 9
+    },
+    "pros": [
+     "Compact",
+     "Very light",
+     "Cheap",
+     "Easy to pre tension",
+     "Finish"
+    ],
+    "cons": [
+     "Light anodisation"
+    ],
+    "creationDate": 1501754421669,
+    "creatorName": "Radwin Bodnic"
+   },
+   {
+    "creatorId": "157046135120641",
+    "text": "Toutes les sangles glissent dedans mais si cela est plus cher le lynx est beaucoup mieux",
+    "rating": {
+     "lst": {
+      "VFM": 4,
+      "QU": 6,
+      "EOU": 4,
+      "PRT": 6,
+      "VER": 2
+     },
+     "overall": 4
+    },
+    "pros": [],
+    "cons": [],
+    "creationDate": 1522738672091,
+    "creatorName": "Benoit Crera"
+   }
+  ],
+  "lastEditDate": 1712947103981,
+  "name": "Slackibloc 4",
+  "material": [
+   "AL"
+  ],
+  "weight": 165,
+  "mbs": 60,
+  "anchorConnectionType": [
+   "MH"
+  ],
+  "webbingConnectionType": [
+   "QP"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 24,
+   "max": 26
+  },
+  "usage": [
+   "SL",
+   "HL",
+   "LL",
+   "RL",
+   "LTL"
+  ],
+  "productionStatus": "DC",
+  "manufacturerId": 7,
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 60
+    }
+   ]
+  },
+  "ratingsAverages": {
+   "overall": {
+    "nativeCount": 2,
+    "nativeValue": 7,
+    "value": 7,
+    "count": 2
+   },
+   "lst": {
+    "VFM": {
+     "count": 2,
+     "value": 7
+    },
+    "QU": {
+     "count": 2,
+     "value": 7
+    },
+    "VER": {
+     "count": 2,
+     "value": 5
+    },
+    "EOU": {
+     "count": 2,
+     "value": 6
+    },
+    "PRT": {
+     "count": 2,
+     "value": 8
+    }
+   }
+  },
+  "imagesCount": 3
+ },
+ "similarGear": [
+  {
+   "_id": 3059,
+   "itemTypeId": "WLCK",
+   "slug": "rowan_10quickpin",
+   "name": "Rowan 1.1",
+   "manufacturerId": 62,
+   "manufacturer": {
+    "name": "Souz Slackline",
+    "url": "https://souzslackline.com",
+    "countryTxt": "Russian Federation",
+    "countryCode": "RU"
+   }
+  }
+ ]
+}

@@ -1,0 +1,60 @@
+{
+ "gearDetail": {
+  "_id": 524,
+  "slug": "BanditSH",
+  "itemTypeId": "WLCK",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "name": "Bandit SH",
+  "material": [
+   "SS"
+  ],
+  "weight": 230,
+  "wll": 12,
+  "mbs": 36,
+  "anchorConnectionType": [
+   "MH"
+  ],
+  "webbingConnectionType": [
+   "SP"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 24,
+   "max": 26
+  },
+  "diverterDiameter": 20,
+  "efficiency": 85,
+  "usage": [
+   "SL",
+   "HL",
+   "LL",
+   "RL",
+   "LTL"
+  ],
+  "productionStatus": "DC",
+  "manufacturerId": 24,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1498940790377,
+  "imagesCount": 0
+ },
+ "similarGear": [
+  {
+   "_id": 500,
+   "slug": "BanditSH",
+   "itemTypeId": "WLCK",
+   "name": "Bandit SH",
+   "manufacturerId": 9,
+   "manufacturer": {
+    "name": "Equilibrium Slacklines (EQB)",
+    "url": "https://www.slackshop.cz/en/",
+    "countryTxt": "Czech Republic",
+    "countryCode": "CZ"
+   }
+  }
+ ]
+}

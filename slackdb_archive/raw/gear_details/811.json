@@ -1,0 +1,27 @@
+{
+ "gearDetail": {
+  "_id": 811,
+  "slug": "LargeSteelRing",
+  "itemTypeId": "LRNG",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1542142608021,
+  "name": "Large Steel Ring",
+  "material": [
+   "SS"
+  ],
+  "weight": 155,
+  "mbs": 22.2,
+  "innerDiameter": 79,
+  "productionStatus": "DC",
+  "manufacturerId": 3,
+  "imagesCount": 0
+ },
+ "similarGear": []
+}

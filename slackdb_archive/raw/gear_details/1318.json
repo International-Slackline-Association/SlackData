@@ -1,0 +1,54 @@
+{
+ "gearDetail": {
+  "_id": 1318,
+  "name": "Cinch",
+  "slug": "Cinch",
+  "manufacturerId": 48,
+  "itemTypeId": "BRK",
+  "weight": 182,
+  "productionStatus": "AC",
+  "remarks": "Hard to detension with high tension",
+  "breakingMethod": "CAM",
+  "compatibleRopeDiameter": {
+   "min": 9.4,
+   "max": 11
+  },
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "imagesCount": 0
+ },
+ "similarGear": [
+  {
+   "_id": 1301,
+   "name": "GRIGRI 2",
+   "slug": "GRIGRI2",
+   "manufacturerId": 31,
+   "itemTypeId": "BRK",
+   "manufacturer": {
+    "name": "Petzl",
+    "url": "http://www.petzl.com/en?l=INT",
+    "countryTxt": "France",
+    "countryCode": "FR"
+   }
+  },
+  {
+   "_id": 1322,
+   "slug": "GRIGRI",
+   "itemTypeId": "BRK",
+   "name": "GRIGRI+",
+   "manufacturerId": 31,
+   "manufacturer": {
+    "name": "Petzl",
+    "url": "http://www.petzl.com/en?l=INT",
+    "countryTxt": "France",
+    "countryCode": "FR"
+   }
+  }
+ ]
+}

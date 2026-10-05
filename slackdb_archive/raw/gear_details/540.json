@@ -1,0 +1,59 @@
+{
+ "gearDetail": {
+  "_id": 540,
+  "slug": "LineLockALMKIII",
+  "itemTypeId": "WLCK",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1712937876396,
+  "name": "LineLock AL MK4",
+  "material": [
+   "AL"
+  ],
+  "weight": 197,
+  "wll": 15,
+  "mbs": 45,
+  "anchorConnectionType": [
+   "FB",
+   "SR",
+   "SL",
+   "PLB"
+  ],
+  "webbingConnectionType": [
+   "CP"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 24,
+   "max": 26
+  },
+  "diverterDiameter": 22,
+  "usage": [
+   "SL",
+   "HL",
+   "LL",
+   "RL",
+   "LTL"
+  ],
+  "productionStatus": "AC",
+  "manufacturerId": 5,
+  "url": "https://www.linegrip.com/shop/slackpro-linelock-al/",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 76.3
+    }
+   ]
+  },
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

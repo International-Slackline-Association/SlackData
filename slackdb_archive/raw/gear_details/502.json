@@ -1,0 +1,114 @@
+{
+ "gearDetail": {
+  "_id": 502,
+  "slug": "BanditFX",
+  "itemTypeId": "WLCK",
+  "shopUrl": "http://www.slackshop.cz/en/lockers/175-eqb-bandit-fx.html",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "647219135700034",
+    "name": "Pla Tin"
+   }
+  ],
+  "lastEditDate": 1587244054898,
+  "name": "Bandit FX",
+  "material": [
+   "SS"
+  ],
+  "weight": 207,
+  "wll": 12,
+  "mbs": 60,
+  "anchorConnectionType": [
+   "MH"
+  ],
+  "webbingConnectionType": [
+   "CP"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 24,
+   "max": 26
+  },
+  "diverterDiameter": 20,
+  "efficiency": 85,
+  "usage": [
+   "SL",
+   "HL",
+   "LL",
+   "RL",
+   "LTL"
+  ],
+  "productionStatus": "DC",
+  "manufacturerId": 9,
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 43
+    }
+   ]
+  },
+  "imagesCount": 1
+ },
+ "similarGear": [
+  {
+   "_id": 556,
+   "slug": "Campoweblock",
+   "itemTypeId": "WLCK",
+   "name": "Campo weblock",
+   "manufacturerId": 45,
+   "manufacturer": {
+    "name": "Petram Slacklines",
+    "url": "https://petramslacklines.site123.me/",
+    "countryTxt": "Poland",
+    "countryCode": "PL"
+   }
+  },
+  {
+   "_id": 544,
+   "slug": "BANANA",
+   "itemTypeId": "WLCK",
+   "name": "BANANA! 2.0",
+   "manufacturerId": 27,
+   "manufacturer": {
+    "name": "Slack house",
+    "url": "http://slackhouseshop.pl",
+    "countryTxt": "Poland",
+    "countryCode": "PL"
+   }
+  },
+  {
+   "_id": 3106,
+   "itemTypeId": "WLCK",
+   "slug": "rowan_31",
+   "name": "Rowan 3.1",
+   "manufacturerId": 62,
+   "manufacturer": {
+    "name": "Souz Slackline",
+    "url": "https://souzslackline.com",
+    "countryTxt": "Russian Federation",
+    "countryCode": "RU"
+   }
+  },
+  {
+   "_id": 3118,
+   "itemTypeId": "WLCK",
+   "slug": "banana_31",
+   "name": "BANANA! 3.1",
+   "manufacturerId": 27,
+   "manufacturer": {
+    "name": "Slack house",
+    "url": "http://slackhouseshop.pl",
+    "countryTxt": "Poland",
+    "countryCode": "PL"
+   }
+  }
+ ]
+}

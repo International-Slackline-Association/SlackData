@@ -1,0 +1,33 @@
+{
+ "gearDetail": {
+  "_id": 3174,
+  "name": "Baumschutz Basic",
+  "dWidth": 18,
+  "dLength": 300,
+  "productionStatus": "AC",
+  "manufacturerId": 55,
+  "url": "https://slackstar.de/lines-zubehoer/baumschutz/847/baumschutz-basic",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 10.8
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "TRP",
+  "slug": "baumschutz_basic",
+  "creatorId": "2824084041240796",
+  "creationDate": 1621874060665,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

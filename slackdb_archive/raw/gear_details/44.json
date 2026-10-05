@@ -1,0 +1,48 @@
+{
+ "gearDetail": {
+  "_id": 44,
+  "slug": "SuperFLKillBill",
+  "itemTypeId": "WEB",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1587244754089,
+  "name": "SuperFL Kill Bill",
+  "webbingType": "FL",
+  "material": [
+   "PL"
+  ],
+  "dWidth": 25,
+  "weight": 146,
+  "mbs": 54,
+  "dDepth": 5,
+  "elongation": {
+   "percent": 2.5,
+   "force": 10
+  },
+  "productionStatus": "DC",
+  "manufacturerId": 12,
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 2.7
+    },
+    {
+     "q": 200,
+     "qt": "AA",
+     "price": 2.6
+    }
+   ]
+  },
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

@@ -1,0 +1,122 @@
+{
+ "gearDetail": {
+  "_id": 3042,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "1190879851271184",
+    "name": "Matthieu Chivas"
+   }
+  ],
+  "itemTypeId": "WEB",
+  "slug": "lift",
+  "creatorId": "10154430595665625",
+  "creationDate": 1507232806786,
+  "lastEditDate": 1623833137918,
+  "name": "Lift",
+  "webbingType": "FL",
+  "material": [
+   "NY"
+  ],
+  "dWidth": 25,
+  "weight": 58,
+  "wll": 5.6,
+  "mbs": 28,
+  "dDepth": 3.18,
+  "elongation": {
+   "percent": 17.4,
+   "force": 10
+  },
+  "usage": [
+   "SL",
+   "HL",
+   "RL",
+   "LTL",
+   "TL"
+  ],
+  "dateIntroduced": 1507150800000,
+  "productionStatus": "DC",
+  "manufacturerId": 3,
+  "url": "http://www.balancecommunity.com/lift",
+  "pricing": {
+   "currency": "USD",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 2.46
+    },
+    {
+     "q": 15,
+     "qt": "EX",
+     "price": 2.5
+    },
+    {
+     "q": 30,
+     "qt": "EX",
+     "price": 2.5
+    },
+    {
+     "q": 50,
+     "qt": "EX",
+     "price": 2.46
+    },
+    {
+     "q": 60,
+     "qt": "EX",
+     "price": 2.47
+    },
+    {
+     "q": 75,
+     "qt": "EX",
+     "price": 2.45
+    },
+    {
+     "q": 100,
+     "qt": "EX",
+     "price": 2.42
+    },
+    {
+     "q": 120,
+     "qt": "EX",
+     "price": 2.43
+    },
+    {
+     "q": 150,
+     "qt": "EX",
+     "price": 2.43
+    },
+    {
+     "q": 200,
+     "qt": "EX",
+     "price": 2.4
+    },
+    {
+     "q": 250,
+     "qt": "EX",
+     "price": 2.38
+    },
+    {
+     "q": 300,
+     "qt": "EX",
+     "price": 2.42
+    },
+    {
+     "q": 400,
+     "qt": "EX",
+     "price": 2.37
+    },
+    {
+     "q": 500,
+     "qt": "EX",
+     "price": 2.37
+    }
+   ]
+  },
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

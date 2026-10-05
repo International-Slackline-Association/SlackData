@@ -1,0 +1,46 @@
+{
+ "gearDetail": {
+  "_id": 3094,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "WGP",
+  "slug": "linegrip_alug4",
+  "creatorId": "10154430595665625",
+  "creationDate": 1586818387863,
+  "name": "LineGrip Alu G4",
+  "material": [
+   "AL"
+  ],
+  "weight": 464,
+  "wll": 15,
+  "cst": 25,
+  "mbs": 45,
+  "connectionType": [
+   "MH"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 24,
+   "max": 26
+  },
+  "productionStatus": "AC",
+  "manufacturerId": 5,
+  "url": "https://www.linegrip.com/shop/custom-color-design-linegrip-g4-sbr/",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 193.7
+    }
+   ]
+  },
+  "lastEditDate": 1586939250209,
+  "imagesCount": 2
+ },
+ "similarGear": []
+}

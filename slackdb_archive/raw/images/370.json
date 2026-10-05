@@ -1,0 +1,22 @@
+{
+ "_id": 370,
+ "gearId": 3091,
+ "imageScope": "ITM",
+ "imageSource": "OFF",
+ "imageSourceUrl": "https://slack-inov.com/gb/longline/145-nova",
+ "gearCondition": "NEW",
+ "ImageEnvType": "STD",
+ "imageType": "RG",
+ "contributors": [
+  {
+   "id": "10154430595665625",
+   "name": "Nir Avneyon"
+  }
+ ],
+ "creationDate": 1583108875390,
+ "creatorId": "10154430595665625",
+ "filename": "370.jpg",
+ "width": 570,
+ "height": 570,
+ "creatorName": "Nir Avneyon"
+}

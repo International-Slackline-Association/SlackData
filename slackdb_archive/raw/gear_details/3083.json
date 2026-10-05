@@ -1,0 +1,189 @@
+{
+ "gearDetail": {
+  "_id": 3083,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "10211949994419911",
+    "name": "Paul Ionut Anton"
+   }
+  ],
+  "itemTypeId": "WEB",
+  "slug": "milky_way",
+  "creatorId": "10154430595665625",
+  "creationDate": 1563143407028,
+  "name": "Milky Way",
+  "webbingType": "FL",
+  "material": [
+   "PL"
+  ],
+  "dWidth": 25,
+  "weight": 63,
+  "mbs": 32,
+  "elongation": {
+   "percent": 5.73,
+   "force": 10
+  },
+  "dateIntroduced": 1562706000000,
+  "productionStatus": "AC",
+  "manufacturerId": 63,
+  "url": "https://www.balanceur.ro/slackshop/benzi/milky-way/",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "qt": "EX",
+     "q": 10,
+     "price": 0.99
+    },
+    {
+     "qt": "EX",
+     "q": 50,
+     "price": 0.99
+    },
+    {
+     "qt": "EX",
+     "q": 100,
+     "price": 0.99
+    },
+    {
+     "qt": "EX",
+     "q": 200,
+     "price": 0.99
+    },
+    {
+     "qt": "EX",
+     "q": 300,
+     "price": 0.99
+    },
+    {
+     "q": 400,
+     "qt": "EX",
+     "price": 0.99
+    }
+   ]
+  },
+  "lastEditDate": 1569782691750,
+  "imagesCount": 2
+ },
+ "similarGear": [
+  {
+   "_id": 5,
+   "slug": "Dragon",
+   "itemTypeId": "WEB",
+   "name": "Dragon",
+   "manufacturerId": 9,
+   "manufacturer": {
+    "name": "Equilibrium Slacklines (EQB)",
+    "url": "https://www.slackshop.cz/en/",
+    "countryTxt": "Czech Republic",
+    "countryCode": "CZ"
+   }
+  },
+  {
+   "_id": 115,
+   "slug": "Mirage",
+   "itemTypeId": "WEB",
+   "name": "Mirage",
+   "manufacturerId": 42,
+   "manufacturer": {
+    "name": "Absolute Slacklines",
+    "url": "http://www.absoluteslacklines.com",
+    "countryTxt": "Canada",
+    "countryCode": "CA"
+   }
+  },
+  {
+   "_id": 127,
+   "slug": "FFF",
+   "itemTypeId": "WEB",
+   "name": "#FFF",
+   "manufacturerId": 26,
+   "manufacturer": {
+    "name": "Raed Slacklines",
+    "url": "https://raed-slacklines.com",
+    "countryTxt": "Germany",
+    "countryCode": "DE"
+   }
+  },
+  {
+   "_id": 56,
+   "slug": "SkillshotHS",
+   "itemTypeId": "WEB",
+   "name": "Skillshot HS",
+   "manufacturerId": 13,
+   "manufacturer": {
+    "name": "Gambit",
+    "countryTxt": "Germany",
+    "countryCode": "DE"
+   }
+  },
+  {
+   "_id": 3145,
+   "name": "Green Magic",
+   "manufacturerId": 74,
+   "itemTypeId": "WEB",
+   "slug": "green_magic",
+   "manufacturer": {
+    "name": "Acrobat Slackline",
+    "url": "https://www.acrobatslackline.com",
+    "countryTxt": "Israel",
+    "countryCode": "IL"
+   }
+  },
+  {
+   "_id": 21,
+   "slug": "Vercors",
+   "itemTypeId": "WEB",
+   "name": "Vercors",
+   "manufacturerId": 8,
+   "manufacturer": {
+    "name": "Line Spirit",
+    "countryTxt": "France",
+    "countryCode": "FR"
+   }
+  },
+  {
+   "_id": 103,
+   "slug": "GreatWhite",
+   "itemTypeId": "WEB",
+   "name": "Great White",
+   "manufacturerId": 16,
+   "manufacturer": {
+    "name": "SlackGear",
+    "url": "http://www.slackgear.co.za",
+    "countryTxt": "South Africa",
+    "countryCode": "ZA"
+   }
+  },
+  {
+   "_id": 109,
+   "slug": "Chi",
+   "itemTypeId": "WEB",
+   "name": "Chi",
+   "manufacturerId": 46,
+   "manufacturer": {
+    "name": "Middle Way Slacklines",
+    "url": "http://www.middlewayslacklines.com",
+    "countryTxt": "Israel",
+    "countryCode": "IL"
+   }
+  },
+  {
+   "_id": 71,
+   "slug": "WhiteMagic",
+   "itemTypeId": "WEB",
+   "name": "White Magic",
+   "manufacturerId": 64,
+   "manufacturer": {
+    "name": "Aki Slacklines",
+    "url": "https://aki-slacklines.de",
+    "countryTxt": "Germany",
+    "countryCode": "DE"
+   }
+  }
+ ]
+}

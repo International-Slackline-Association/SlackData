@@ -1,0 +1,26 @@
+{
+ "gearDetail": {
+  "_id": 2005,
+  "name": "10mm 1T D Stainless Steel Shackle",
+  "slug": "10mm1TDStainlessSteelShackle",
+  "material": [
+   "SS"
+  ],
+  "itemTypeId": "CON",
+  "weight": 116,
+  "wll": 10,
+  "mbs": 40,
+  "productionStatus": "AC",
+  "connectorType": "DS",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "imagesCount": 0
+ },
+ "similarGear": []
+}

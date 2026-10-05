@@ -1,0 +1,56 @@
+{
+ "gearDetail": {
+  "_id": 3110,
+  "name": "Abysses Bounce",
+  "webbingType": "FL",
+  "material": [
+   "NY"
+  ],
+  "dWidth": 25,
+  "weight": 63,
+  "mbs": 32,
+  "elongation": {
+   "percent": 15.2,
+   "force": 10
+  },
+  "productionStatus": "AC",
+  "manufacturerId": 7,
+  "url": "https://slack-inov.com/gb/longline/106-abysses-bounce-sold-by-meter",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 2.6
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "WEB",
+  "slug": "abysses_bounce",
+  "creatorId": "10154430595665625",
+  "creationDate": 1587238523265,
+  "imagesCount": 3
+ },
+ "similarGear": [
+  {
+   "_id": 3086,
+   "name": "Cumulus",
+   "manufacturerId": 26,
+   "itemTypeId": "WEB",
+   "slug": "cumulus",
+   "manufacturer": {
+    "name": "Raed Slacklines",
+    "url": "https://raed-slacklines.com",
+    "countryTxt": "Germany",
+    "countryCode": "DE"
+   }
+  }
+ ]
+}

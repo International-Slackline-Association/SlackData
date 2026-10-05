@@ -1,0 +1,62 @@
+{
+ "gearDetail": {
+  "_id": 3152,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "WLCK",
+  "slug": "slackibloc_sr",
+  "creatorId": "10154430595665625",
+  "creationDate": 1617145349038,
+  "lastEditDate": 1712947199480,
+  "name": "Slackibloc SR Pull pin",
+  "material": [
+   "AL"
+  ],
+  "weight": 173,
+  "wll": 15,
+  "mbs": 50,
+  "anchorConnectionType": [
+   "PP"
+  ],
+  "webbingConnectionType": [
+   "PP"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 24,
+   "max": 26
+  },
+  "productionStatus": "DC",
+  "manufacturerId": 7,
+  "pricing": {
+   "currency": "EUR",
+   "hasAddOpts": true,
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 59.95
+    }
+   ]
+  },
+  "imagesCount": 1
+ },
+ "similarGear": [
+  {
+   "_id": 3085,
+   "itemTypeId": "WLCK",
+   "slug": "mithril_-pullpin",
+   "name": "Mithril - Pull Pin",
+   "manufacturerId": 9,
+   "manufacturer": {
+    "name": "Equilibrium Slacklines (EQB)",
+    "url": "https://www.slackshop.cz/en/",
+    "countryTxt": "Czech Republic",
+    "countryCode": "CZ"
+   }
+  }
+ ]
+}

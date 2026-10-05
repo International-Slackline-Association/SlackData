@@ -1,0 +1,34 @@
+{
+ "gearDetail": {
+  "_id": 3240,
+  "name": "Zebra 2 25 M",
+  "webbingLength": 25,
+  "webbingWidth": 50,
+  "tensioningType": "RAT1",
+  "productionStatus": "AC",
+  "manufacturerId": 55,
+  "url": "https://slackstar.de/fun-performance/2-baeume/komplettset-2-teilig/868/zebra2?number=SL81792-25_ZEBRA",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 85
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "zebra_225m",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622033030540,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

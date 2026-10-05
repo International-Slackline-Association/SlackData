@@ -1,0 +1,104 @@
+{
+ "manufacturerDetail": {
+  "_id": 12,
+  "slug": "Slackfr",
+  "manufacturerStatus": "ACT",
+  "imageFilename": "slack_fr.jpg",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "lastEditDate": 1600708868522,
+  "reviews": [
+   {
+    "creatorId": "1574892945909720",
+    "text": "Shipped to Australia, postage got delayed, they sent free gear to say sorry, been using their longline pulley kit for a number of years without fail! AWESOME!",
+    "rating": {
+     "lst": {
+      "OP": 10,
+      "SP": 10,
+      "PQ": 10,
+      "CS": 10
+     },
+     "overall": 10
+    },
+    "creationDate": 1502069999317,
+    "creatorName": "Gaston Armand"
+   }
+  ],
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "1574892945909720",
+    "name": "Gaston Armand"
+   },
+   {
+    "id": "10211802848940671",
+    "name": "Thomas Buckingham"
+   }
+  ],
+  "name": "Slack.fr",
+  "location": {
+   "countryCode": "FR",
+   "lat": 45.74699401855469,
+   "lng": 6.321059226989746,
+   "isExact": true
+  },
+  "yearEstablished": 2005,
+  "isSlacklineOriented": true,
+  "url": "http://slack.fr",
+  "fbPage": "https://www.facebook.com/Slack.fr",
+  "ratingsAverages": {
+   "overall": {
+    "nativeCount": 1,
+    "nativeValue": 10,
+    "externalValue": 9,
+    "externalCount": 167,
+    "count": 168,
+    "value": 9
+   },
+   "lst": {
+    "OP": {
+     "count": 1,
+     "value": 10
+    },
+    "SP": {
+     "count": 1,
+     "value": 10
+    },
+    "PQ": {
+     "count": 1,
+     "value": 10
+    },
+    "CS": {
+     "count": 1,
+     "value": 10
+    }
+   }
+  },
+  "imagesCount": 0,
+  "gearStats": [
+   {
+    "itemTypeId": "TRP",
+    "count": 1
+   },
+   {
+    "itemTypeId": "WLCK",
+    "count": 1
+   },
+   {
+    "itemTypeId": "LRNG",
+    "count": 1
+   },
+   {
+    "itemTypeId": "WEB",
+    "count": 14
+   },
+   {
+    "itemTypeId": "TLK",
+    "count": 1
+   }
+  ]
+ }
+}

@@ -1,0 +1,48 @@
+{
+ "manufacturerDetail": {
+  "_id": 15,
+  "slug": "SlackTech",
+  "manufacturerStatus": "ACT",
+  "imageFilename": "slacktech.jpg",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "lastEditDate": 1600709101641,
+  "name": "SlackTech",
+  "location": {
+   "countryCode": "US",
+   "address": "Redmond, Oregon",
+   "lat": 44.27281188964844,
+   "lng": -121.173957824707,
+   "isExact": false
+  },
+  "yearEstablished": 2013,
+  "isSlacklineOriented": true,
+  "url": "http://slacklinetechnology.com",
+  "fbPage": "https://www.facebook.com/slacklinetechnology",
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "10211802848940671",
+    "name": "Thomas Buckingham"
+   }
+  ],
+  "ratingsAverages": {
+   "overall": {
+    "externalValue": 10,
+    "externalCount": 5,
+    "value": 10,
+    "count": 5
+   }
+  },
+  "imagesCount": 0,
+  "gearStats": [
+   {
+    "itemTypeId": "WLCK",
+    "count": 1
+   }
+  ]
+ }
+}

@@ -1,0 +1,63 @@
+{
+ "gearDetail": {
+  "_id": 85,
+  "slug": "SinMs",
+  "itemTypeId": "WEB",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "name": "Sin Más",
+  "webbingType": "FL",
+  "material": [
+   "PL"
+  ],
+  "dWidth": 25,
+  "weight": 52,
+  "wll": 10,
+  "mbs": 36,
+  "elongation": {
+   "percent": 7,
+   "force": 10
+  },
+  "productionStatus": "AC",
+  "manufacturerId": 23,
+  "url": "http://ambaradam.net/product/sin-mas/",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 0.95
+    },
+    {
+     "q": 200,
+     "qt": "AA",
+     "price": 0.85
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1499088611347,
+  "imagesCount": 1
+ },
+ "similarGear": [
+  {
+   "_id": 104,
+   "slug": "Tantalus",
+   "itemTypeId": "WEB",
+   "name": "Tantalus",
+   "manufacturerId": 41,
+   "manufacturer": {
+    "name": "Slacklife BC",
+    "url": "http://slacklifebc.com",
+    "countryTxt": "Canada",
+    "countryCode": "CA"
+   }
+  }
+ ]
+}

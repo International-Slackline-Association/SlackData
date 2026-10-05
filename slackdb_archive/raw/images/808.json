@@ -1,0 +1,40 @@
+{
+ "_id": 808,
+ "imageScope": "STP",
+ "imageSource": "OFF",
+ "imageSourceUrl": "https://www.eqb.cz",
+ "ImageEnvType": "STD",
+ "imageType": "CLS",
+ "gearTags": [
+  {
+   "x": 272,
+   "y": 43,
+   "width": 280,
+   "height": 474,
+   "gearId": 3135
+  },
+  {
+   "x": 8,
+   "y": 111,
+   "width": 265,
+   "height": 248,
+   "gearId": 5
+  }
+ ],
+ "gearId": [
+  3135,
+  5
+ ],
+ "contributors": [
+  {
+   "id": "10154430595665625",
+   "name": "Nir Avneyon"
+  }
+ ],
+ "creationDate": 1712938172340,
+ "creatorId": "10154430595665625",
+ "filename": "808.jpg",
+ "width": 1060,
+ "height": 690,
+ "creatorName": "Nir Avneyon"
+}

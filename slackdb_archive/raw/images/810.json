@@ -1,0 +1,32 @@
+{
+ "_id": 810,
+ "imageScope": "STP",
+ "imageSource": "OFF",
+ "imageSourceUrl": "https://www.radrigs.co.uk/",
+ "ImageEnvType": "STD",
+ "imageType": "RG",
+ "gearTags": [
+  {
+   "x": 399,
+   "y": 217,
+   "width": 195,
+   "height": 167,
+   "gearId": 3251
+  }
+ ],
+ "gearId": [
+  3251
+ ],
+ "contributors": [
+  {
+   "id": "10154430595665625",
+   "name": "Nir Avneyon"
+  }
+ ],
+ "creationDate": 1712945364074,
+ "creatorId": "10154430595665625",
+ "filename": "810.jpg",
+ "width": 980,
+ "height": 551,
+ "creatorName": "Nir Avneyon"
+}

@@ -1,0 +1,33 @@
+{
+ "gearDetail": {
+  "_id": 3171,
+  "name": "TreePRO",
+  "weight": 300,
+  "hasSlingAttachment": true,
+  "productionStatus": "AC",
+  "manufacturerId": 26,
+  "url": "https://raed-slacklines.com/treepro",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "price": 49.9,
+     "qt": "AA"
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "TRP",
+  "slug": "treepro_1",
+  "creatorId": "2824084041240796",
+  "creationDate": 1621867538787,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

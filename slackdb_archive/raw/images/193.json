@@ -1,0 +1,22 @@
+{
+ "_id": 193,
+ "gearId": 3005,
+ "takenDate": 1505941200000,
+ "imageScope": "ITM",
+ "imageSource": "UOFF",
+ "gearCondition": "HUSD",
+ "ImageEnvType": "STD",
+ "imageType": "RG",
+ "contributors": [
+  {
+   "id": "10154430595665625",
+   "name": "Nir Avneyon"
+  }
+ ],
+ "creationDate": 1506007996043,
+ "creatorId": "10154430595665625",
+ "filename": "193.jpg",
+ "width": 900,
+ "height": 799,
+ "creatorName": "Nir Avneyon"
+}

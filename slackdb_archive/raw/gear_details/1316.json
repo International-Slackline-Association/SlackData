@@ -1,0 +1,97 @@
+{
+ "gearDetail": {
+  "_id": 1316,
+  "name": "Eddy",
+  "slug": "Eddy",
+  "manufacturerId": 32,
+  "material": [
+   "S",
+   "AL"
+  ],
+  "itemTypeId": "BRK",
+  "weight": 360,
+  "wll": 2.8,
+  "mbs": 14,
+  "productionStatus": "AC",
+  "url": "http://www.edelrid.de/en/sports/eddy-night.html",
+  "remarks": "Also sold by Singing Rock as Lory and by Anthron as SIR",
+  "breakingMethod": "CAM",
+  "compatibleRopeDiameter": {
+   "min": 9,
+   "max": 11
+  },
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "reviews": [
+   {
+    "creatorId": "656760621184025",
+    "text": "I have been using it with 5:1 SMCs and love it. it is a bit hard to embed due to the wide profile. easy to release under tension, great handle with a lot of control. I dislike the panic mechanism of the handle, where if it is pulled over a threshold it stops releasing. I experienced no slippage with it at all. in order to use at low tensions, it needs to be engaged with a slight tug of the rope.",
+    "rating": {
+     "lst": {
+      "VER": 10,
+      "EOU": 10,
+      "QU": 10,
+      "VFM": 8
+     },
+     "overall": 10
+    },
+    "pros": [],
+    "cons": [],
+    "creationDate": 1500143178505,
+    "creatorName": "Eli Szendro Brown"
+   }
+  ],
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "656760621184025",
+    "name": "Eli Szendro Brown"
+   }
+  ],
+  "ratingsAverages": {
+   "overall": {
+    "nativeCount": 1,
+    "nativeValue": 10,
+    "value": 10,
+    "count": 1
+   },
+   "lst": {
+    "VER": {
+     "count": 1,
+     "value": 10
+    },
+    "EOU": {
+     "count": 1,
+     "value": 10
+    },
+    "QU": {
+     "count": 1,
+     "value": 10
+    },
+    "VFM": {
+     "count": 1,
+     "value": 8
+    }
+   }
+  },
+  "imagesCount": 2
+ },
+ "similarGear": [
+  {
+   "_id": 1304,
+   "name": "RIG",
+   "slug": "RIG",
+   "manufacturerId": 31,
+   "itemTypeId": "BRK",
+   "manufacturer": {
+    "name": "Petzl",
+    "url": "http://www.petzl.com/en?l=INT",
+    "countryTxt": "France",
+    "countryCode": "FR"
+   }
+  }
+ ]
+}

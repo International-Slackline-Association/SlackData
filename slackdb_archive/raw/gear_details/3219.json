@@ -1,0 +1,34 @@
+{
+ "gearDetail": {
+  "_id": 3219,
+  "name": "EQB BALANCE 20 M",
+  "webbingLength": 20,
+  "webbingWidth": 25,
+  "tensioningType": "RAT1",
+  "productionStatus": "AC",
+  "manufacturerId": 9,
+  "url": "https://www.slackshop.cz/en/for-beginners/10-balance-20-m.html",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 63
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "eqb_balance20m",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622029982523,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

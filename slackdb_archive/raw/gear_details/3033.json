@@ -1,0 +1,25 @@
+{
+ "gearDetail": {
+  "_id": 3033,
+  "name": "12mm Twist Shackle",
+  "material": [
+   "SS"
+  ],
+  "weight": 234,
+  "wll": 25,
+  "mbs": 80,
+  "connectorType": "TS",
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "CON",
+  "slug": "12mm_twistshackle",
+  "creatorId": "10154430595665625",
+  "creationDate": 1506002173594,
+  "imagesCount": 0
+ },
+ "similarGear": []
+}

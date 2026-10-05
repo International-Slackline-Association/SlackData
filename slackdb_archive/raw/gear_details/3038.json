@@ -1,0 +1,25 @@
+{
+ "gearDetail": {
+  "_id": 3038,
+  "name": "8mm Square Quicklink",
+  "material": [
+   "SS"
+  ],
+  "weight": 87,
+  "wll": 5.5,
+  "mbs": 27.5,
+  "connectorType": "SQL",
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "CON",
+  "slug": "8mm_squarequicklink",
+  "creatorId": "10154430595665625",
+  "creationDate": 1506006748557,
+  "imagesCount": 0
+ },
+ "similarGear": []
+}

@@ -1,0 +1,59 @@
+{
+ "manufacturerDetail": {
+  "_id": 7,
+  "slug": "SlackInov",
+  "manufacturerStatus": "ACT",
+  "imageFilename": "slack_inov.jpg",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "name": "Slack Inov",
+  "location": {
+   "countryCode": "FR",
+   "lat": 45.18862915039063,
+   "lng": 5.72456693649292,
+   "isExact": false
+  },
+  "isActive": true,
+  "isSlacklineOriented": true,
+  "url": "http://slack-inov.com/gb",
+  "fbPage": "https://www.facebook.com/slack.inov",
+  "lastEditDate": 1498723891001,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "ratingsAverages": {
+   "overall": {
+    "externalValue": 10,
+    "externalCount": 7,
+    "value": 10,
+    "count": 7
+   }
+  },
+  "imagesCount": 0,
+  "gearStats": [
+   {
+    "itemTypeId": "SKT",
+    "count": 2
+   },
+   {
+    "itemTypeId": "WLCK",
+    "count": 6
+   },
+   {
+    "itemTypeId": "WEB",
+    "count": 10
+   },
+   {
+    "itemTypeId": "LRNG",
+    "count": 2
+   },
+   {
+    "itemTypeId": "SLD",
+    "count": 1
+   }
+  ]
+ }
+}

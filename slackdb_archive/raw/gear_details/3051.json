@@ -1,0 +1,47 @@
+{
+ "gearDetail": {
+  "_id": 3051,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "SLD",
+  "slug": "hangover_stainless",
+  "creatorId": "10154430595665625",
+  "creationDate": 1519648737560,
+  "lastEditDate": 1587235821145,
+  "name": "HangOver stainless",
+  "material": [
+   "AL",
+   "SS"
+  ],
+  "weight": 152,
+  "wll": 4,
+  "mbs": 22,
+  "compatibleWebbingWidth": {
+   "min": 25,
+   "max": 26
+  },
+  "sliderType": "CA",
+  "innerWidth": 27.8,
+  "outerBearingDiameter": 19,
+  "dateIntroduced": 1507064400000,
+  "productionStatus": "AC",
+  "manufacturerId": 6,
+  "url": "https://www.slacktivity.com/hangover-stainless",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 59.95
+    }
+   ]
+  },
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

@@ -1,0 +1,26 @@
+{
+ "gearDetail": {
+  "_id": 2004,
+  "name": "8mm 0.65T D Stainless Steel Shackle",
+  "slug": "8mm065TDStainlessSteelShackle",
+  "material": [
+   "SS"
+  ],
+  "itemTypeId": "CON",
+  "weight": 58,
+  "wll": 6.25,
+  "mbs": 25,
+  "productionStatus": "AC",
+  "connectorType": "DS",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

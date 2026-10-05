@@ -1,0 +1,18 @@
+{
+ "gearDetail": {
+  "_id": 3005,
+  "name": "10mm Hanger",
+  "slug": "10mmHanger",
+  "itemTypeId": "GEN",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "imagesCount": 2
+ },
+ "similarGear": []
+}

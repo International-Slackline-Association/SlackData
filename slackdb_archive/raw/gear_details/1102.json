@@ -1,0 +1,44 @@
+{
+ "gearDetail": {
+  "_id": 1102,
+  "slug": "RocknRoll",
+  "itemTypeId": "SLD",
+  "psaCert": false,
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1542144668341,
+  "name": "Rock'n'Roll",
+  "material": [
+   "AL",
+   "SS"
+  ],
+  "weight": 210,
+  "wll": 2,
+  "compatibleWebbingWidth": {
+   "min": 25,
+   "max": 26
+  },
+  "sliderType": "MP",
+  "innerWidth": 26,
+  "productionStatus": "DC",
+  "manufacturerId": 9,
+  "pricing": {
+   "currency": "CZK",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 1290
+    }
+   ]
+  },
+  "imagesCount": 0
+ },
+ "similarGear": []
+}

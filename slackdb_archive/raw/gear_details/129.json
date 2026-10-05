@@ -1,0 +1,194 @@
+{
+ "gearDetail": {
+  "_id": 129,
+  "slug": "McFly",
+  "itemTypeId": "WEB",
+  "reviews": [
+   {
+    "creatorId": "10155361109487970",
+    "rating": {
+     "lst": {
+      "VFM": 10,
+      "QU": 10,
+      "VER": 8,
+      "SFT": 8,
+      "EOU": 10
+     },
+     "overall": 9
+    },
+    "pros": [
+     "Nice stretch and bounce",
+     "Feels very duable"
+    ],
+    "cons": [
+     "Very thick",
+     "Hard to say which way is up and detect twists when rigging"
+    ],
+    "creationDate": 1499723466303,
+    "lastEditDate": 1528741987507,
+    "creatorName": "Ilia Oshmiansky"
+   },
+   {
+    "creatorId": "656760621184025",
+    "text": "Amazing in terms of dynamics, but with rough texture (annoying for water&#x2F;high lines).",
+    "rating": {
+     "lst": {
+      "VFM": 6,
+      "QU": 10,
+      "VER": 4,
+      "EOU": 8,
+      "SFT": 4
+     },
+     "overall": 6
+    },
+    "pros": [
+     "Very stretchy, great to bounce on",
+     "Abrasion resistant",
+     "Packble"
+    ],
+    "cons": [
+     "Very rough on your skin (can be frustrating on highlines and waterlines)",
+     "Tough to detect twists",
+     "Takes time to tension"
+    ],
+    "creationDate": 1500236309142,
+    "creatorName": "Eli Szendro Brown"
+   }
+  ],
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "10155361109487970",
+    "name": "Ilia Oshmiansky"
+   },
+   {
+    "id": "656760621184025",
+    "name": "Eli Szendro Brown"
+   }
+  ],
+  "lastEditDate": 1587290161669,
+  "name": "McFly",
+  "webbingType": "FL",
+  "material": [
+   "NY"
+  ],
+  "dWidth": 25,
+  "weight": 65,
+  "wll": 10.3,
+  "mbs": 31,
+  "dDepth": 3,
+  "elongation": {
+   "percent": 12.5,
+   "force": 10
+  },
+  "productionStatus": "DC",
+  "manufacturerId": 12,
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 2.29
+    },
+    {
+     "q": 100,
+     "qt": "AA",
+     "price": 2.25
+    },
+    {
+     "q": 150,
+     "qt": "AA",
+     "price": 2.2
+    },
+    {
+     "q": 200,
+     "price": 2.15,
+     "qt": "AA"
+    },
+    {
+     "q": 300,
+     "qt": "AA",
+     "price": 2.1
+    }
+   ]
+  },
+  "ratingsAverages": {
+   "overall": {
+    "nativeCount": 2,
+    "nativeValue": 8,
+    "value": 8,
+    "count": 2
+   },
+   "lst": {
+    "VFM": {
+     "count": 2,
+     "value": 8
+    },
+    "QU": {
+     "count": 2,
+     "value": 10
+    },
+    "VER": {
+     "count": 2,
+     "value": 6
+    },
+    "SFT": {
+     "count": 2,
+     "value": 6
+    },
+    "EOU": {
+     "count": 2,
+     "value": 9
+    }
+   }
+  },
+  "imagesCount": 2
+ },
+ "similarGear": [
+  {
+   "_id": 51,
+   "slug": "Passionred",
+   "itemTypeId": "WEB",
+   "name": "Passion red",
+   "manufacturerId": 10,
+   "manufacturer": {
+    "name": "Elephant",
+    "url": "http://www.elephant-slackline.com",
+    "countryTxt": "Germany",
+    "countryCode": "DE"
+   }
+  },
+  {
+   "_id": 7,
+   "slug": "Flash",
+   "itemTypeId": "WEB",
+   "name": "Flash",
+   "manufacturerId": 9,
+   "manufacturer": {
+    "name": "Equilibrium Slacklines (EQB)",
+    "url": "https://www.slackshop.cz/en/",
+    "countryTxt": "Czech Republic",
+    "countryCode": "CZ"
+   }
+  },
+  {
+   "_id": 3092,
+   "name": "Donkey",
+   "manufacturerId": 7,
+   "itemTypeId": "WEB",
+   "slug": "donkey",
+   "manufacturer": {
+    "name": "Slack Inov",
+    "url": "http://slack-inov.com/gb",
+    "countryTxt": "France",
+    "countryCode": "FR"
+   }
+  }
+ ]
+}

@@ -1,0 +1,173 @@
+{
+ "gearDetail": {
+  "_id": 3075,
+  "contributors": [
+   {
+    "id": "10155267793869667",
+    "name": "Romain Schempf"
+   },
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "WEB",
+  "slug": "spice",
+  "creatorId": "10155267793869667",
+  "creationDate": 1545647159197,
+  "name": "Spice",
+  "webbingType": "FL",
+  "material": [
+   "PL"
+  ],
+  "dWidth": 25,
+  "weight": 62,
+  "wll": 10,
+  "mbs": 30,
+  "dDepth": 2.5,
+  "elongation": {
+   "percent": 3.9,
+   "force": 10
+  },
+  "usage": [
+   "SL",
+   "HL",
+   "LL",
+   "RL",
+   "LTL",
+   "SR"
+  ],
+  "dateIntroduced": 1541026800000,
+  "productionStatus": "DC",
+  "manufacturerId": 4,
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "qt": "AA",
+     "q": 1,
+     "price": 1.1
+    }
+   ]
+  },
+  "lastEditDate": 1587234003418,
+  "imagesCount": 0
+ },
+ "similarGear": [
+  {
+   "_id": 140,
+   "slug": "Skye",
+   "itemTypeId": "WEB",
+   "name": "Skye",
+   "manufacturerId": 9,
+   "manufacturer": {
+    "name": "Equilibrium Slacklines (EQB)",
+    "url": "https://www.slackshop.cz/en/",
+    "countryTxt": "Czech Republic",
+    "countryCode": "CZ"
+   }
+  },
+  {
+   "_id": 3076,
+   "name": "Orange",
+   "manufacturerId": 62,
+   "itemTypeId": "WEB",
+   "slug": "orange",
+   "manufacturer": {
+    "name": "Souz Slackline",
+    "url": "https://souzslackline.com",
+    "countryTxt": "Russian Federation",
+    "countryCode": "RU"
+   }
+  },
+  {
+   "_id": 28,
+   "slug": "Cobalt",
+   "itemTypeId": "WEB",
+   "name": "Cobalt",
+   "manufacturerId": 4,
+   "manufacturer": {
+    "name": "Slack Mountain",
+    "url": "http://slack-mountain.com",
+    "countryTxt": "France",
+    "countryCode": "FR"
+   }
+  },
+  {
+   "_id": 84,
+   "slug": "BlueMile",
+   "itemTypeId": "WEB",
+   "name": "Blue Mile",
+   "manufacturerId": 27,
+   "manufacturer": {
+    "name": "Slack house",
+    "url": "http://slackhouseshop.pl",
+    "countryTxt": "Poland",
+    "countryCode": "PL"
+   }
+  },
+  {
+   "_id": 3122,
+   "name": "Skye2",
+   "manufacturerId": 9,
+   "itemTypeId": "WEB",
+   "slug": "skye2",
+   "manufacturer": {
+    "name": "Equilibrium Slacklines (EQB)",
+    "url": "https://www.slackshop.cz/en/",
+    "countryTxt": "Czech Republic",
+    "countryCode": "CZ"
+   }
+  },
+  {
+   "_id": 57,
+   "slug": "SkillshotLS",
+   "itemTypeId": "WEB",
+   "name": "Skillshot LS",
+   "manufacturerId": 13,
+   "manufacturer": {
+    "name": "Gambit",
+    "countryTxt": "Germany",
+    "countryCode": "DE"
+   }
+  },
+  {
+   "_id": 45,
+   "slug": "SuperFLMaverickV2",
+   "itemTypeId": "WEB",
+   "name": "SuperFL Maverick V2",
+   "manufacturerId": 12,
+   "manufacturer": {
+    "name": "Slack.fr",
+    "url": "http://slack.fr",
+    "countryTxt": "France",
+    "countryCode": "FR"
+   }
+  },
+  {
+   "_id": 15,
+   "slug": "Elia",
+   "itemTypeId": "WEB",
+   "name": "Elia",
+   "manufacturerId": 8,
+   "manufacturer": {
+    "name": "Line Spirit",
+    "countryTxt": "France",
+    "countryCode": "FR"
+   }
+  },
+  {
+   "_id": 40,
+   "slug": "DarkBlue",
+   "itemTypeId": "WEB",
+   "name": "Dark Blue",
+   "manufacturerId": 12,
+   "manufacturer": {
+    "name": "Slack.fr",
+    "url": "http://slack.fr",
+    "countryTxt": "France",
+    "countryCode": "FR"
+   }
+  }
+ ]
+}

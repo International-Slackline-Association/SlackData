@@ -1,0 +1,18 @@
+{
+ "_id": 488,
+ "description": "Seahorse v1",
+ "gearId": 545,
+ "imageScope": "ITM",
+ "contributors": [
+  {
+   "id": "10211802848940671",
+   "name": "Thomas Buckingham"
+  }
+ ],
+ "creationDate": 1610888821425,
+ "creatorId": "10211802848940671",
+ "filename": "488.jpg",
+ "width": 624,
+ "height": 403,
+ "creatorName": "Thomas Buckingham"
+}

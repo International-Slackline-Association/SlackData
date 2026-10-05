@@ -1,0 +1,32 @@
+{
+ "gearDetail": {
+  "_id": 17,
+  "name": "Fuji",
+  "slug": "Fuji",
+  "manufacturerId": 8,
+  "material": [
+   "DY"
+  ],
+  "itemTypeId": "WEB",
+  "weight": 37,
+  "wll": 10,
+  "mbs": 40,
+  "dWidth": 25,
+  "productionStatus": "DC",
+  "webbingType": "FL",
+  "elongation": {
+   "percent": 3,
+   "force": 10
+  },
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "imagesCount": 0
+ },
+ "similarGear": []
+}

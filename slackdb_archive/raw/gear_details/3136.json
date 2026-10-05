@@ -1,0 +1,44 @@
+{
+ "gearDetail": {
+  "_id": 3136,
+  "name": "Eclipse",
+  "webbingType": "FL",
+  "material": [
+   "PL"
+  ],
+  "dWidth": 25,
+  "weight": 30,
+  "mbs": 16,
+  "dDepth": 1.5,
+  "elongation": {
+   "percent": 5,
+   "force": 5
+  },
+  "dateIntroduced": 1617051600000,
+  "productionStatus": "AC",
+  "manufacturerId": 26,
+  "url": "https://raed-slacklines.com/eclipse-lightweight-polyester-webbing",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 0.69
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "WEB",
+  "slug": "eclipse",
+  "creatorId": "10154430595665625",
+  "creationDate": 1617125991398,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

@@ -1,0 +1,50 @@
+{
+ "gearDetail": {
+  "_id": 1104,
+  "slug": "SlackMountainpulley",
+  "itemTypeId": "SLD",
+  "psaCert": false,
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "lastEditDate": 1510580426527,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "10155267793869667",
+    "name": "Romain Schempf"
+   }
+  ],
+  "name": "Pulley",
+  "material": [
+   "SS"
+  ],
+  "weight": 135,
+  "wll": 5,
+  "mbs": 25,
+  "compatibleWebbingWidth": {
+   "min": 18,
+   "max": 28
+  },
+  "sliderType": "MP",
+  "innerWidth": 27,
+  "outerBearingDiameter": 24,
+  "productionStatus": "AC",
+  "manufacturerId": 4,
+  "url": "http://slack-mountain.com/en/pulley-and-tension/61-poulie-de-sangle-slack-mountain.html",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 22
+    }
+   ]
+  },
+  "imagesCount": 2
+ },
+ "similarGear": []
+}

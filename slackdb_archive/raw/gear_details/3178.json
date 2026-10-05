@@ -1,0 +1,34 @@
+{
+ "gearDetail": {
+  "_id": 3178,
+  "name": "Tree Protection",
+  "dWidth": 13,
+  "dLength": 100,
+  "weight": 200,
+  "productionStatus": "AC",
+  "manufacturerId": 24,
+  "url": "https://spider-slacklines.com/shop/en/slackline-accessories/240-tree-protection-s-slackline-9506919000.html",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 7.95
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "TRP",
+  "slug": "tree_protection",
+  "creatorId": "2824084041240796",
+  "creationDate": 1621874664162,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

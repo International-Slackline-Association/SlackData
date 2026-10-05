@@ -1,0 +1,76 @@
+{
+ "gearDetail": {
+  "_id": 77,
+  "slug": "StrongII",
+  "itemTypeId": "WEB",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "1811540145542689",
+    "name": "Helmut Netzwerker"
+   }
+  ],
+  "lastEditDate": 1587251663364,
+  "name": "Strong II",
+  "webbingType": "FL",
+  "material": [
+   "PL"
+  ],
+  "dWidth": 25,
+  "weight": 67,
+  "mbs": 36,
+  "elongation": {
+   "percent": 4.5,
+   "force": 6
+  },
+  "productionStatus": "AC",
+  "manufacturerId": 25,
+  "url": "https://www.slack-shop.de/baender-schlingen/bander/strong/slacklineband-strong-ii.html",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "qt": "EX",
+     "q": 30,
+     "price": 1.99
+    },
+    {
+     "qt": "EX",
+     "q": 50,
+     "price": 1.99
+    },
+    {
+     "q": 75,
+     "qt": "EX",
+     "price": 1.99
+    },
+    {
+     "q": 100,
+     "price": 2.2,
+     "qt": "EX"
+    }
+   ]
+  },
+  "imagesCount": 1
+ },
+ "similarGear": [
+  {
+   "_id": 41,
+   "slug": "MILF",
+   "itemTypeId": "WEB",
+   "name": "MILF",
+   "manufacturerId": 12,
+   "manufacturer": {
+    "name": "Slack.fr",
+    "url": "http://slack.fr",
+    "countryTxt": "France",
+    "countryCode": "FR"
+   }
+  }
+ ]
+}

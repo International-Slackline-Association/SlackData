@@ -1,0 +1,117 @@
+{
+ "gearDetail": {
+  "_id": 32,
+  "slug": "ArticFox",
+  "itemTypeId": "WEB",
+  "fieldsRemarks": {
+   "material": "Sewn Tubular, cannot be opened"
+  },
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "10155267793869667",
+    "name": "Romain Schempf"
+   }
+  ],
+  "lastEditDate": 1542300322245,
+  "name": "Artic Fox",
+  "webbingType": "TB",
+  "material": [
+   "PL"
+  ],
+  "dWidth": 25,
+  "weight": 52,
+  "wll": 10.5,
+  "mbs": 21,
+  "dDepth": 2,
+  "elongation": {
+   "percent": 10,
+   "force": 10
+  },
+  "usage": [
+   "SL",
+   "HL",
+   "LL",
+   "RL",
+   "LTL",
+   "SR"
+  ],
+  "productionStatus": "DC",
+  "manufacturerId": 4,
+  "pricing": {
+   "lst": [
+    {
+     "q": 20,
+     "qt": "EX",
+     "price": 1.3
+    },
+    {
+     "q": 35,
+     "qt": "EX",
+     "price": 1.3
+    }
+   ],
+   "currency": "EUR"
+  },
+  "imagesCount": 1
+ },
+ "similarGear": [
+  {
+   "_id": 36,
+   "slug": "SnakeTub",
+   "itemTypeId": "WEB",
+   "name": "Snake Tub",
+   "manufacturerId": 4,
+   "manufacturer": {
+    "name": "Slack Mountain",
+    "url": "http://slack-mountain.com",
+    "countryTxt": "France",
+    "countryCode": "FR"
+   }
+  },
+  {
+   "_id": 132,
+   "slug": "Reggae",
+   "itemTypeId": "WEB",
+   "name": "Reggae",
+   "manufacturerId": 12,
+   "manufacturer": {
+    "name": "Slack.fr",
+    "url": "http://slack.fr",
+    "countryTxt": "France",
+    "countryCode": "FR"
+   }
+  },
+  {
+   "_id": 46,
+   "slug": "SupertubeNorway",
+   "itemTypeId": "WEB",
+   "name": "Supertube Norway",
+   "manufacturerId": 12,
+   "manufacturer": {
+    "name": "Slack.fr",
+    "url": "http://slack.fr",
+    "countryTxt": "France",
+    "countryCode": "FR"
+   }
+  },
+  {
+   "_id": 133,
+   "slug": "RVD",
+   "itemTypeId": "WEB",
+   "name": "RVD",
+   "manufacturerId": 12,
+   "manufacturer": {
+    "name": "Slack.fr",
+    "url": "http://slack.fr",
+    "countryTxt": "France",
+    "countryCode": "FR"
+   }
+  }
+ ]
+}

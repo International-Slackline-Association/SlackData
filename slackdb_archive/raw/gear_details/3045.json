@@ -1,0 +1,44 @@
+{
+ "gearDetail": {
+  "_id": 3045,
+  "name": "Pop-Art",
+  "webbingType": "FL",
+  "material": [
+   "PL"
+  ],
+  "dWidth": 50,
+  "weight": 71,
+  "wll": 15,
+  "mbs": 30,
+  "dDepth": 1.8,
+  "usage": [
+   "TL"
+  ],
+  "dateIntroduced": 1513465200000,
+  "productionStatus": "AC",
+  "manufacturerId": 4,
+  "url": "https://slack-mountain.com/fr/jumplines/191-pop-art.html",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "price": 2.4,
+     "qt": "AA"
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "10155267793869667",
+    "name": "Romain Schempf"
+   }
+  ],
+  "itemTypeId": "WEB",
+  "slug": "pop-art",
+  "creatorId": "10155267793869667",
+  "creationDate": 1513536161578,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

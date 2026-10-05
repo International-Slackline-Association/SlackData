@@ -1,0 +1,37 @@
+{
+ "gearDetail": {
+  "_id": 3119,
+  "name": "MOTM light",
+  "webbingType": "TB",
+  "material": [
+   "NY"
+  ],
+  "dWidth": 19,
+  "weight": 33,
+  "productionStatus": "AC",
+  "manufacturerId": 26,
+  "url": "https://raed-slacklines.com/motm-light",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 1.49
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "WEB",
+  "slug": "motm_light",
+  "creatorId": "10154430595665625",
+  "creationDate": 1587290948632,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

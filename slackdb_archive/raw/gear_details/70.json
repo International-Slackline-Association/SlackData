@@ -1,0 +1,43 @@
+{
+ "gearDetail": {
+  "_id": 70,
+  "slug": "WaveTube19",
+  "itemTypeId": "WEB",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1587249416820,
+  "name": "Wave Tube 19",
+  "webbingType": "TB",
+  "material": [
+   "NY"
+  ],
+  "dWidth": 19,
+  "weight": 36,
+  "mbs": 16,
+  "dDepth": 2.4,
+  "elongation": {
+   "percent": 14,
+   "force": 6
+  },
+  "productionStatus": "DC",
+  "manufacturerId": 2,
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 1.35
+    }
+   ]
+  },
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

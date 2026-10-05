@@ -1,0 +1,36 @@
+{
+ "gearDetail": {
+  "_id": 3025,
+  "name": "Mammut",
+  "webbingType": "CS",
+  "material": [
+   "PL"
+  ],
+  "dWidth": 25.8,
+  "weight": 76.8,
+  "mbs": 25,
+  "dDepth": 4.2,
+  "elongation": {
+   "force": 10,
+   "percent": 9.5
+  },
+  "usage": [
+   "SL",
+   "LTL"
+  ],
+  "productionStatus": "DC",
+  "manufacturerId": 59,
+  "contributors": [
+   {
+    "id": "1811540145542689",
+    "name": "Helmut Netzwerker"
+   }
+  ],
+  "itemTypeId": "WEB",
+  "slug": "mammut",
+  "creatorId": "1811540145542689",
+  "creationDate": 1503316236763,
+  "imagesCount": 2
+ },
+ "similarGear": []
+}

@@ -1,0 +1,19 @@
+{
+ "_id": 489,
+ "description": "Lynx 1",
+ "gearId": 3024,
+ "imageScope": "ITM",
+ "imageType": "RG",
+ "contributors": [
+  {
+   "id": "10211802848940671",
+   "name": "Thomas Buckingham"
+  }
+ ],
+ "creationDate": 1610889235472,
+ "creatorId": "10211802848940671",
+ "filename": "489.jpg",
+ "width": 760,
+ "height": 493,
+ "creatorName": "Thomas Buckingham"
+}

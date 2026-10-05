@@ -1,0 +1,95 @@
+{
+ "gearDetail": {
+  "_id": 113,
+  "slug": "LionLine",
+  "itemTypeId": "WEB",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1542959950791,
+  "name": "Lion Line",
+  "webbingType": "FL",
+  "material": [
+   "DY"
+  ],
+  "dWidth": 25.4,
+  "weight": 35,
+  "wll": 7.12,
+  "mbs": 35.6,
+  "productionStatus": "AC",
+  "manufacturerId": 41,
+  "url": "https://www.slacklifebc.com/product/lions-line-hightech-webbing/",
+  "pricing": {
+   "currency": "CAD",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 8.99
+    },
+    {
+     "q": 50,
+     "qt": "EX",
+     "price": 6.56
+    },
+    {
+     "q": 100,
+     "qt": "EX",
+     "price": 6.56
+    },
+    {
+     "q": 150,
+     "price": 5.96,
+     "qt": "EX"
+    },
+    {
+     "price": 6.56,
+     "q": 200,
+     "qt": "EX"
+    },
+    {
+     "price": 6.56,
+     "qt": "EX",
+     "q": 250
+    },
+    {
+     "q": 300,
+     "price": 6.56,
+     "qt": "EX"
+    },
+    {
+     "q": 400,
+     "qt": "EX",
+     "price": 6.56
+    },
+    {
+     "q": 500,
+     "qt": "EX",
+     "price": 6.56
+    },
+    {
+     "q": 600,
+     "qt": "EX",
+     "price": 6.56
+    },
+    {
+     "q": 750,
+     "qt": "EX",
+     "price": 6.56
+    },
+    {
+     "q": 1000,
+     "qt": "EX",
+     "price": 6.56
+    }
+   ]
+  },
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

@@ -1,0 +1,35 @@
+{
+ "manufacturerDetail": {
+  "_id": 51,
+  "slug": "Catonslack",
+  "manufacturerStatus": "ACT",
+  "imageFilename": "cat_on_slack.jpg",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "name": "Cat on slack",
+  "location": {
+   "countryCode": "PL",
+   "lat": 51.96945190429688,
+   "lng": 19.07363128662109,
+   "isExact": false
+  },
+  "isActive": true,
+  "isSlacklineOriented": true,
+  "url": "http://www.catonslack.com",
+  "fbPage": "https://www.facebook.com/CatOnSlack",
+  "lastEditDate": 1498718825381,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "imagesCount": 0,
+  "gearStats": [
+   {
+    "itemTypeId": "WLCK",
+    "count": 5
+   }
+  ]
+ }
+}

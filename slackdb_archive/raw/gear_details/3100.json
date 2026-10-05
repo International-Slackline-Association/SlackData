@@ -1,0 +1,47 @@
+{
+ "gearDetail": {
+  "_id": 3100,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "WGP",
+  "slug": "tricklinegrip_g1-sbr",
+  "creatorId": "10154430595665625",
+  "creationDate": 1586938682723,
+  "name": "TricklineGrip G1",
+  "material": [
+   "AL"
+  ],
+  "weight": 784,
+  "wll": 15,
+  "cst": 20,
+  "mbs": 45,
+  "connectionType": [
+   "MH"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 24,
+   "max": 52
+  },
+  "dateIntroduced": 1501534800000,
+  "productionStatus": "AC",
+  "manufacturerId": 5,
+  "url": "https://www.linegrip.com/shop/tricklinegrip-g1-sbr/",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 305
+    }
+   ]
+  },
+  "lastEditDate": 1586939413836,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

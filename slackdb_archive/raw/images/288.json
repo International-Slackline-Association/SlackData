@@ -1,0 +1,38 @@
+{
+ "_id": 288,
+ "takenDate": 1534744800000,
+ "imageScope": "STP",
+ "imageSource": "OFF",
+ "imageSourceUrl": "https://www.slacktivity.com/y2k",
+ "ImageEnvType": "STD",
+ "imageType": "RG",
+ "lineLength": 50,
+ "tags": [
+  "highline",
+  "modular"
+ ],
+ "gearTags": [
+  {
+   "x": 121,
+   "y": 447,
+   "width": 874,
+   "height": 542,
+   "gearId": 3055
+  }
+ ],
+ "gearId": [
+  3055
+ ],
+ "contributors": [
+  {
+   "id": "10154430595665625",
+   "name": "Nir Avneyon"
+  }
+ ],
+ "creationDate": 1537998453031,
+ "creatorId": "10154430595665625",
+ "filename": "288.jpg",
+ "width": 1200,
+ "height": 1200,
+ "creatorName": "Nir Avneyon"
+}

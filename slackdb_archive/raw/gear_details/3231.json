@@ -1,0 +1,34 @@
+{
+ "gearDetail": {
+  "_id": 3231,
+  "name": "Sigma Slackline Set ( 35 mm ), 15m lang",
+  "webbingLength": 15,
+  "webbingWidth": 35,
+  "tensioningType": "RAT1",
+  "productionStatus": "AC",
+  "manufacturerId": 30,
+  "url": "https://www.slackliner.de/de/Sigma-Slackline-Set---35-mm----15m-lang-180.html",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 56
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "sigma_slacklineset35mm15mlang",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622032311590,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

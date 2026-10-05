@@ -1,0 +1,35 @@
+{
+ "gearDetail": {
+  "_id": 3159,
+  "name": "TreeHugger Classic",
+  "dWidth": 15,
+  "dLength": 150,
+  "dDepth": 5,
+  "hasSlingAttachment": true,
+  "productionStatus": "AC",
+  "manufacturerId": 3,
+  "url": "https://www.balancecommunity.com/collections/tree-pro/products/treehugger-classic?variant=31955901939770",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 14.9
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "TRP",
+  "slug": "treehugger_classic",
+  "creatorId": "2824084041240796",
+  "creationDate": 1621854064394,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

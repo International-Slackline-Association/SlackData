@@ -1,0 +1,39 @@
+{
+ "manufacturerDetail": {
+  "_id": 14,
+  "slug": "Slacklinebrothers",
+  "manufacturerStatus": "ACT",
+  "imageFilename": "slackline_brothers.jpg",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "lastEditDate": 1587250354328,
+  "name": "Slackline brothers",
+  "location": {
+   "countryCode": "US",
+   "address": "38 Laderman lane Greenbrae, California",
+   "lat": 37.944977,
+   "lng": -122.524922,
+   "isExact": true
+  },
+  "yearEstablished": 2012,
+  "isSlacklineOriented": true,
+  "fbPage": "https://www.facebook.com/slacklinebrothers",
+  "description": "Was SBI",
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "ratingsAverages": {
+   "overall": {
+    "externalValue": 10,
+    "externalCount": 9,
+    "value": 10,
+    "count": 9
+   }
+  },
+  "imagesCount": 0,
+  "gearStats": null
+ }
+}

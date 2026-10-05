@@ -1,0 +1,50 @@
+{
+ "gearDetail": {
+  "_id": 3060,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "WLCK",
+  "slug": "rowan_10softrelease",
+  "creatorId": "10154430595665625",
+  "creationDate": 1538002943323,
+  "lastEditDate": 1712946638442,
+  "name": "Rowan 1.3",
+  "material": [
+   "AL"
+  ],
+  "weight": 270,
+  "wll": 12,
+  "mbs": 50,
+  "anchorConnectionType": [
+   "SR",
+   "QP"
+  ],
+  "webbingConnectionType": [
+   "QP"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 24,
+   "max": 26
+  },
+  "diverterDiameter": 30,
+  "dateIntroduced": 1533189600000,
+  "productionStatus": "DC",
+  "manufacturerId": 62,
+  "pricing": {
+   "currency": "USD",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 52.49
+    }
+   ]
+  },
+  "imagesCount": 3
+ },
+ "similarGear": []
+}

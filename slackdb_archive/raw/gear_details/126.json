@@ -1,0 +1,55 @@
+{
+ "gearDetail": {
+  "_id": 126,
+  "slug": "Morpheus",
+  "itemTypeId": "WEB",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "10155267793869667",
+    "name": "Romain Schempf"
+   }
+  ],
+  "lastEditDate": 1587251540831,
+  "name": "Morpheus",
+  "webbingType": "CS",
+  "material": [
+   "PL"
+  ],
+  "dWidth": 25,
+  "weight": 57,
+  "wll": 8.33,
+  "mbs": 25,
+  "dDepth": 2.1,
+  "elongation": {
+   "percent": 6.4,
+   "force": 10
+  },
+  "usage": [
+   "SL",
+   "HL",
+   "LL",
+   "RL",
+   "LTL"
+  ],
+  "productionStatus": "DC",
+  "manufacturerId": 4,
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 1.49
+    }
+   ]
+  },
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

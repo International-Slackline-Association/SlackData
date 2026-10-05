@@ -1,0 +1,35 @@
+{
+ "gearDetail": {
+  "_id": 3245,
+  "name": "BOSS LINE KIT",
+  "webbingLength": 25,
+  "webbingWidth": 50,
+  "tensioningType": "RAT2",
+  "includesTreePro": true,
+  "productionStatus": "AC",
+  "manufacturerId": 21,
+  "url": "https://slacklineindustries.com/collections/all-products/products/boss-line-kit",
+  "pricing": {
+   "currency": "USD",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 250
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "TLK",
+  "slug": "boss_linekit",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622133491808,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

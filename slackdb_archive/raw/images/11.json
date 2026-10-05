@@ -1,0 +1,52 @@
+{
+ "_id": 11,
+ "imageScope": "STP",
+ "gearTags": [
+  {
+   "x": 209,
+   "y": 876,
+   "width": 498,
+   "height": 167,
+   "gearId": 3000
+  },
+  {
+   "x": 218,
+   "y": 45,
+   "width": 1319,
+   "height": 910,
+   "gearId": 546
+  },
+  {
+   "x": 1584,
+   "y": 190,
+   "width": 321,
+   "height": 159,
+   "gearId": 63
+  }
+ ],
+ "tags": [
+  "soft release"
+ ],
+ "takenDate": 1472763600000,
+ "ImageEnvType": "US",
+ "imageType": "RG",
+ "imageSource": "UOFF",
+ "setupType": "HL",
+ "gearId": [
+  3000,
+  546,
+  63
+ ],
+ "creationDate": 1499896266303,
+ "creatorId": "10154430595665625",
+ "filename": "11.jpg",
+ "width": 1920,
+ "height": 1280,
+ "creatorName": "Nir Avneyon",
+ "contributors": [
+  {
+   "id": "10154430595665625",
+   "name": "Nir Avneyon"
+  }
+ ]
+}

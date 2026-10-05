@@ -1,0 +1,105 @@
+{
+ "gearDetail": {
+  "_id": 80,
+  "slug": "ZaoLine",
+  "itemTypeId": "WEB",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "name": "Zao Line",
+  "webbingType": "FL",
+  "material": [
+   "PL"
+  ],
+  "dWidth": 25,
+  "weight": 65,
+  "wll": 12,
+  "mbs": 32,
+  "dDepth": 3.2,
+  "elongation": {
+   "percent": 9,
+   "force": 12
+  },
+  "productionStatus": "AC",
+  "manufacturerId": 24,
+  "url": "http://spider-slacklines.com/shop/en/longline-webbings/69-zao-line.html",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 1.4
+    },
+    {
+     "q": 80,
+     "qt": "AA",
+     "price": 1.37
+    },
+    {
+     "q": 120,
+     "price": 1.33,
+     "qt": "AA"
+    },
+    {
+     "q": 200,
+     "price": 1.25,
+     "qt": "AA"
+    },
+    {
+     "q": 350,
+     "price": 1.14,
+     "qt": "AA"
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1499108952885,
+  "imagesCount": 1
+ },
+ "similarGear": [
+  {
+   "_id": 2,
+   "slug": "Bloodline",
+   "itemTypeId": "WEB",
+   "name": "Bloodline",
+   "manufacturerId": 19,
+   "manufacturer": {
+    "name": "Pure Slacklines",
+    "url": "http://pureslacklines.com.au",
+    "countryTxt": "Australia",
+    "countryCode": "AU"
+   }
+  },
+  {
+   "_id": 58,
+   "slug": "FlowLine",
+   "itemTypeId": "WEB",
+   "name": "Flow Line",
+   "manufacturerId": 1,
+   "manufacturer": {
+    "name": "Gibbon",
+    "url": "http://www.gibbon-slacklines.com",
+    "countryTxt": "Germany",
+    "countryCode": "DE"
+   }
+  },
+  {
+   "_id": 81,
+   "slug": "OctopussyMKV",
+   "itemTypeId": "WEB",
+   "name": "Octopussy MKV",
+   "manufacturerId": 27,
+   "manufacturer": {
+    "name": "Slack house",
+    "url": "http://slackhouseshop.pl",
+    "countryTxt": "Poland",
+    "countryCode": "PL"
+   }
+  }
+ ]
+}

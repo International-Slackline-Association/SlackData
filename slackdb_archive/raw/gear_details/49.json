@@ -1,0 +1,49 @@
+{
+ "gearDetail": {
+  "_id": 49,
+  "slug": "JumplineProSeries",
+  "itemTypeId": "WEB",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1587239207621,
+  "name": "Jumpline Pro Series",
+  "webbingType": "FL",
+  "material": [
+   "PL"
+  ],
+  "dWidth": 40,
+  "weight": 74,
+  "wll": 13.3,
+  "mbs": 40,
+  "dDepth": 2,
+  "elongation": {
+   "percent": 4.5,
+   "force": 10
+  },
+  "productionStatus": "DC",
+  "manufacturerId": 12,
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 20,
+     "qt": "EX",
+     "price": 2.75
+    },
+    {
+     "q": 30,
+     "qt": "EX",
+     "price": 2.63
+    }
+   ]
+  },
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

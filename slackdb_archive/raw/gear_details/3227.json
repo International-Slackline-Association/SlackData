@@ -1,0 +1,34 @@
+{
+ "gearDetail": {
+  "_id": 3227,
+  "name": "PACK CLICK 25 M",
+  "webbingLength": 25,
+  "webbingWidth": 25,
+  "tensioningType": "RAT2",
+  "productionStatus": "AC",
+  "manufacturerId": 4,
+  "url": "https://slack-mountain.com/en/slackline-beginner-kit/200-pack-click-25-m.html",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 78
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "pack_click25m",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622031045265,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

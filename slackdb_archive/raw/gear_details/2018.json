@@ -1,0 +1,26 @@
+{
+ "gearDetail": {
+  "_id": 2018,
+  "slug": "12mmQuicklinkDelta",
+  "itemTypeId": "CON",
+  "productionStatus": "AC",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "name": "12mm Delta Quicklink",
+  "material": [
+   "S"
+  ],
+  "wll": 11,
+  "mbs": 55,
+  "connectorType": "DQL",
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1506007240795,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

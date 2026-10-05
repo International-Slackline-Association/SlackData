@@ -1,0 +1,48 @@
+{
+ "manufacturerDetail": {
+  "_id": 43,
+  "slug": "SlacklineShopNZ",
+  "manufacturerStatus": "ACT",
+  "imageFilename": "slackline_shop_nz.jpg",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "name": "Slackline Shop NZ",
+  "location": {
+   "countryCode": "NZ",
+   "address": "4/109 Majori Banks Street Mt Victoria",
+   "lat": -41.29513168334961,
+   "lng": 174.7903442382813,
+   "isExact": true
+  },
+  "isActive": true,
+  "isSlacklineOriented": true,
+  "url": "http://www.slacklineshop.co.nz",
+  "fbPage": "https://www.facebook.com/SlacklineshopNZ",
+  "lastEditDate": 1498724182306,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "ratingsAverages": {
+   "overall": {
+    "externalValue": 6,
+    "externalCount": 19,
+    "value": 6,
+    "count": 19
+   }
+  },
+  "imagesCount": 0,
+  "gearStats": [
+   {
+    "itemTypeId": "SKT",
+    "count": 1
+   },
+   {
+    "itemTypeId": "WEB",
+    "count": 2
+   }
+  ]
+ }
+}

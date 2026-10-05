@@ -1,0 +1,43 @@
+{
+ "manufacturerDetail": {
+  "_id": 28,
+  "slug": "Singingrock",
+  "manufacturerStatus": "ACT",
+  "imageFilename": "singing_rock.jpg",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "name": "Singing rock",
+  "location": {
+   "countryCode": "CZ",
+   "address": "Poniklá 317 514 01 Poniklá",
+   "lat": 50.66558456420898,
+   "lng": 15.45039176940918,
+   "isExact": true
+  },
+  "isActive": true,
+  "url": "http://www.singingrock.com",
+  "fbPage": "https://www.facebook.com/singingrock.page",
+  "lastEditDate": 1498723844068,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "ratingsAverages": {
+   "overall": {
+    "externalValue": 10,
+    "externalCount": 38,
+    "value": 10,
+    "count": 38
+   }
+  },
+  "imagesCount": 0,
+  "gearStats": [
+   {
+    "itemTypeId": "WEB",
+    "count": 1
+   }
+  ]
+ }
+}

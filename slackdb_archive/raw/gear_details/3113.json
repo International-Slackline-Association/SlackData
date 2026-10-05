@@ -1,0 +1,45 @@
+{
+ "gearDetail": {
+  "_id": 3113,
+  "name": "Cito",
+  "material": [
+   "AL"
+  ],
+  "weight": 50,
+  "wll": 4,
+  "mbs": 12,
+  "connectionType": [
+   "DSL"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 24,
+   "max": 26
+  },
+  "dateIntroduced": 1558818000000,
+  "productionStatus": "AC",
+  "manufacturerId": 45,
+  "url": "https://petramslacklines.site123.me/shop-1/cito-webbing-grip",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 79.9
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "WGP",
+  "slug": "cito",
+  "creatorId": "10154430595665625",
+  "creationDate": 1587246878708,
+  "imagesCount": 5
+ },
+ "similarGear": []
+}

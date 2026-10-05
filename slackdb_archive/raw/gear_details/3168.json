@@ -1,0 +1,36 @@
+{
+ "gearDetail": {
+  "_id": 3168,
+  "name": "Tree Protection | 3L",
+  "dWidth": 13,
+  "dLength": 240,
+  "dDepth": 3,
+  "weight": 332,
+  "hasSlingAttachment": true,
+  "productionStatus": "AC",
+  "manufacturerId": 6,
+  "url": "https://slacktivity.com/shop/tree-protection-3l/",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "price": 23.9,
+     "q": 1,
+     "qt": "AA"
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "TRP",
+  "slug": "tree_protection3l",
+  "creatorId": "2824084041240796",
+  "creationDate": 1621858969366,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

@@ -1,0 +1,42 @@
+{
+ "gearDetail": {
+  "_id": 3135,
+  "contributors": [
+   {
+    "id": "10220734815258954",
+    "name": "Jakub Dostál"
+   },
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "WLCK",
+  "slug": "linelocker",
+  "creatorId": "10220734815258954",
+  "creationDate": 1617110268253,
+  "name": "Linelocker",
+  "material": [
+   "AL"
+  ],
+  "weight": 24,
+  "wll": 6,
+  "mbs": 35,
+  "productionStatus": "AC",
+  "manufacturerId": 9,
+  "url": "https://www.slackshop.cz/cs/kotvitka/132-linelocker.html",
+  "pricing": {
+   "currency": "CZK",
+   "lst": [
+    {
+     "price": 219,
+     "q": 1,
+     "qt": "EX"
+    }
+   ]
+  },
+  "lastEditDate": 1712938001487,
+  "imagesCount": 2
+ },
+ "similarGear": []
+}

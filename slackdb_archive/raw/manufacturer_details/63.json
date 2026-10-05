@@ -1,0 +1,37 @@
+{
+ "manufacturerDetail": {
+  "_id": 63,
+  "contributors": [
+   {
+    "id": "10211949994419911",
+    "name": "Paul Ionut Anton"
+   }
+  ],
+  "creatorId": "10211949994419911",
+  "creationDate": 1554106338400,
+  "slug": "balanceur",
+  "name": "Balanceur",
+  "location": {
+   "countryCode": "RO",
+   "address": "Iasi",
+   "lat": 47.1584549,
+   "lng": 27.6014418,
+   "isExact": true
+  },
+  "yearEstablished": 2017,
+  "imageFilename": "balanceur.jpg",
+  "isActive": true,
+  "isSlacklineOriented": true,
+  "url": "https://www.balanceur.ro/",
+  "fbPage": "https://www.facebook.com/balanceur.slackshop/",
+  "description": "We are Eastern Europe&#x27;s baby slackshop.",
+  "lastEditDate": 1554106595466,
+  "imagesCount": 0,
+  "gearStats": [
+   {
+    "itemTypeId": "WEB",
+    "count": 2
+   }
+  ]
+ }
+}

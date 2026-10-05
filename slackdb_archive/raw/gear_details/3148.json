@@ -1,0 +1,73 @@
+{
+ "gearDetail": {
+  "_id": 3148,
+  "name": "Nomad",
+  "webbingType": "FL",
+  "material": [
+   "PL"
+  ],
+  "dWidth": 25,
+  "weight": 38,
+  "wll": 4,
+  "mbs": 23.5,
+  "dDepth": 1.5,
+  "elongation": {
+   "percent": 4,
+   "force": 10
+  },
+  "dateIntroduced": 1605391200000,
+  "productionStatus": "AC",
+  "manufacturerId": 64,
+  "url": "https://aki-slacklines.de/en/webbing/polyester/187/aki-nomad-webbing",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 1
+    }
+   ],
+   "hasAddOpts": true
+  },
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "WEB",
+  "slug": "nomad",
+  "creatorId": "10154430595665625",
+  "creationDate": 1617142598655,
+  "imagesCount": 4
+ },
+ "similarGear": [
+  {
+   "_id": 3063,
+   "name": "Y.a.w",
+   "manufacturerId": 30,
+   "itemTypeId": "WEB",
+   "slug": "yaw",
+   "manufacturer": {
+    "name": "Slackliner.de",
+    "url": "https://www.slackliner.de",
+    "countryTxt": "Germany",
+    "countryCode": "DE"
+   }
+  },
+  {
+   "_id": 3027,
+   "itemTypeId": "WEB",
+   "slug": "helium",
+   "name": "Helium",
+   "manufacturerId": 26,
+   "manufacturer": {
+    "name": "Raed Slacklines",
+    "url": "https://raed-slacklines.com",
+    "countryTxt": "Germany",
+    "countryCode": "DE"
+   }
+  }
+ ]
+}

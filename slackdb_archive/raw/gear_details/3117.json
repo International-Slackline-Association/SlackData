@@ -1,0 +1,51 @@
+{
+ "gearDetail": {
+  "_id": 3117,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "WLCK",
+  "slug": "banana_30sr",
+  "creatorId": "10154430595665625",
+  "creationDate": 1587289886607,
+  "name": "BANANA! 3.0 SR",
+  "material": [
+   "SS",
+   "AL"
+  ],
+  "weight": 262,
+  "wll": 10,
+  "mbs": 50,
+  "anchorConnectionType": [
+   "SR"
+  ],
+  "webbingConnectionType": [
+   "CSP"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 24,
+   "max": 26
+  },
+  "diverterDiameter": 20,
+  "efficiency": 83,
+  "productionStatus": "AC",
+  "manufacturerId": 27,
+  "url": "https://slackhouseshop.pl/en/produkt/banana-3-0-sr/",
+  "pricing": {
+   "currency": "PLN",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "EX",
+     "price": 278
+    }
+   ]
+  },
+  "lastEditDate": 1712932644199,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

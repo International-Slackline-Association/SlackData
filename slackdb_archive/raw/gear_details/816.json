@@ -1,0 +1,44 @@
+{
+ "gearDetail": {
+  "_id": 816,
+  "slug": "Slackisr",
+  "itemTypeId": "LRNG",
+  "flags": [
+   "RM"
+  ],
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "1811540145542689",
+    "name": "Helmut Netzwerker"
+   }
+  ],
+  "lastEditDate": 1611059248809,
+  "name": "Slackisûr",
+  "material": [
+   "SS"
+  ],
+  "weight": 400,
+  "mbs": 60,
+  "productionStatus": "AC",
+  "manufacturerId": 7,
+  "url": "https://slack-inov.com/shop/en/leashes/315-slackisur-highline-ring.html",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 28
+    }
+   ]
+  },
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

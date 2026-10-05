@@ -1,0 +1,57 @@
+{
+ "gearDetail": {
+  "_id": 3072,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "10211802848940671",
+    "name": "Thomas Buckingham"
+   }
+  ],
+  "itemTypeId": "WEB",
+  "slug": "skyway",
+  "creatorId": "10154430595665625",
+  "creationDate": 1542634943793,
+  "name": "Skyway",
+  "webbingType": "CS",
+  "material": [
+   "PL"
+  ],
+  "dWidth": 25,
+  "weight": 56.2,
+  "wll": 7,
+  "mbs": 27,
+  "dDepth": 2.3,
+  "elongation": {
+   "percent": 11,
+   "force": 10
+  },
+  "usage": [
+   "SL",
+   "HL",
+   "LL",
+   "RL",
+   "LTL"
+  ],
+  "dateIntroduced": 1542232800000,
+  "productionStatus": "AC",
+  "manufacturerId": 4,
+  "url": "https://slack-mountain.com/en/webbing-slackline/213-skyway.html",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 1.53
+    }
+   ]
+  },
+  "lastEditDate": 1600769765604,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

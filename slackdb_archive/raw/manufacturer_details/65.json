@@ -1,0 +1,35 @@
+{
+ "manufacturerDetail": {
+  "_id": 65,
+  "name": "Slack Mitra",
+  "location": {
+   "countryCode": "IN",
+   "lat": 22.3511148,
+   "lng": 78.6677428
+  },
+  "isActive": true,
+  "isSlacklineOriented": true,
+  "url": "https://www.instamojo.com/slackmitra",
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "creatorId": "10154430595665625",
+  "creationDate": 1587458007491,
+  "slug": "slack_mitra",
+  "imageFilename": "slack_mitra.jpg",
+  "imagesCount": 0,
+  "gearStats": [
+   {
+    "itemTypeId": "SKT",
+    "count": 1
+   },
+   {
+    "itemTypeId": "WGP",
+    "count": 1
+   }
+  ]
+ }
+}

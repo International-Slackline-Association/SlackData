@@ -1,0 +1,32 @@
+{
+ "gearDetail": {
+  "_id": 13,
+  "name": "Chartreuse",
+  "slug": "Chartreuse",
+  "manufacturerId": 8,
+  "material": [
+   "PL"
+  ],
+  "itemTypeId": "WEB",
+  "weight": 30,
+  "wll": 6,
+  "mbs": 20,
+  "dWidth": 25,
+  "productionStatus": "DC",
+  "webbingType": "FL",
+  "elongation": {
+   "percent": 8,
+   "force": 10
+  },
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "imagesCount": 0
+ },
+ "similarGear": []
+}

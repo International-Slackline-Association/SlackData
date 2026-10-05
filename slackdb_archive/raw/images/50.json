@@ -1,0 +1,66 @@
+{
+ "_id": 50,
+ "takenDate": 1498856400000,
+ "imageScope": "STP",
+ "imageSource": "UOFF",
+ "ImageEnvType": "US",
+ "imageType": "RG",
+ "lineLength": 80,
+ "gearTags": [
+  {
+   "x": 53,
+   "y": 419,
+   "width": 732,
+   "height": 495,
+   "gearId": 516
+  },
+  {
+   "x": 948,
+   "y": 963,
+   "width": 384,
+   "height": 223,
+   "gearId": 110
+  },
+  {
+   "x": 482,
+   "y": 349,
+   "width": 924,
+   "height": 447,
+   "gearId": 3009
+  },
+  {
+   "x": 1364,
+   "y": 510,
+   "width": 500,
+   "height": 182,
+   "gearId": 2002
+  },
+  {
+   "x": 1698,
+   "y": 460,
+   "width": 222,
+   "height": 278,
+   "gearId": 3007
+  }
+ ],
+ "gearId": [
+  516,
+  110,
+  3009,
+  2002,
+  3007
+ ],
+ "contributors": [
+  {
+   "id": "10154430595665625",
+   "name": "Nir Avneyon"
+  }
+ ],
+ "creationDate": 1499896266303,
+ "creatorId": "10154430595665625",
+ "filename": "50.jpg",
+ "width": 1920,
+ "height": 1280,
+ "comments": [],
+ "creatorName": "Nir Avneyon"
+}

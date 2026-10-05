@@ -1,0 +1,89 @@
+{
+ "gearDetail": {
+  "_id": 90,
+  "slug": "Feather",
+  "itemTypeId": "WEB",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1587244238583,
+  "name": "Feather",
+  "webbingType": "FL",
+  "material": [
+   "PL"
+  ],
+  "dWidth": 25,
+  "weight": 34,
+  "wll": 4,
+  "mbs": 20,
+  "dDepth": 1.5,
+  "elongation": {
+   "percent": 10.3,
+   "force": 10
+  },
+  "productionStatus": "DC",
+  "manufacturerId": 3,
+  "pricing": {
+   "currency": "USD",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 1.61
+    },
+    {
+     "q": 15,
+     "qt": "EX",
+     "price": 1.63
+    },
+    {
+     "q": 30,
+     "qt": "EX",
+     "price": 1.62
+    },
+    {
+     "q": 50,
+     "qt": "EX",
+     "price": 1.59
+    },
+    {
+     "q": 60,
+     "qt": "EX",
+     "price": 1.6
+    },
+    {
+     "q": 75,
+     "qt": "EX",
+     "price": 1.59
+    },
+    {
+     "q": 100,
+     "qt": "EX",
+     "price": 1.57
+    },
+    {
+     "q": 120,
+     "qt": "EX",
+     "price": 1.58
+    },
+    {
+     "q": 150,
+     "qt": "EX",
+     "price": 1.58
+    },
+    {
+     "q": 200,
+     "qt": "EX",
+     "price": 1.55
+    }
+   ]
+  },
+  "imagesCount": 2
+ },
+ "similarGear": []
+}

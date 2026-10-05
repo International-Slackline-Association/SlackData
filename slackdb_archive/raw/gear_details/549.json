@@ -1,0 +1,78 @@
+{
+ "gearDetail": {
+  "_id": 549,
+  "slug": "CHILI20",
+  "itemTypeId": "WLCK",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1712933637031,
+  "name": "CHILI 2.0",
+  "material": [
+   "SS"
+  ],
+  "weight": 275,
+  "wll": 15,
+  "mbs": 70,
+  "anchorConnectionType": [
+   "MH"
+  ],
+  "webbingConnectionType": [
+   "CP"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 24,
+   "max": 26
+  },
+  "usage": [
+   "SL",
+   "HL",
+   "LL",
+   "RL",
+   "LTL"
+  ],
+  "productionStatus": "DC",
+  "manufacturerId": 24,
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 49.95
+    },
+    {
+     "q": 2,
+     "qt": "AA",
+     "price": 45.95
+    },
+    {
+     "q": 4,
+     "qt": "AA",
+     "price": 42.95
+    }
+   ]
+  },
+  "imagesCount": 1
+ },
+ "similarGear": [
+  {
+   "_id": 551,
+   "slug": "Catlock",
+   "itemTypeId": "WLCK",
+   "name": "Catlock classic",
+   "manufacturerId": 51,
+   "manufacturer": {
+    "name": "Cat on slack",
+    "url": "http://www.catonslack.com",
+    "countryTxt": "Poland",
+    "countryCode": "PL"
+   }
+  }
+ ]
+}

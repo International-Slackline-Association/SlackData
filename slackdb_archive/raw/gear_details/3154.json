@@ -1,0 +1,43 @@
+{
+ "gearDetail": {
+  "_id": 3154,
+  "name": "SeaHorse Sling 1",
+  "material": [
+   "AL"
+  ],
+  "anchorConnectionType": [
+   "SL"
+  ],
+  "usage": [
+   "SL",
+   "HL",
+   "LL",
+   "RL",
+   "LTL"
+  ],
+  "productionStatus": "DC",
+  "manufacturerId": 6,
+  "pricing": {
+   "currency": "CHF",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "EX",
+     "price": 109
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "10211802848940671",
+    "name": "Thomas Buckingham"
+   }
+  ],
+  "itemTypeId": "WLCK",
+  "slug": "seahorse_sling1",
+  "creatorId": "10211802848940671",
+  "creationDate": 1617435512177,
+  "imagesCount": 0
+ },
+ "similarGear": []
+}

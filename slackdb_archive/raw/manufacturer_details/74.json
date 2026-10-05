@@ -1,0 +1,36 @@
+{
+ "manufacturerDetail": {
+  "_id": 74,
+  "name": "Acrobat Slackline",
+  "location": {
+   "countryCode": "IL",
+   "lat": 31.5313113,
+   "lng": 34.8667654
+  },
+  "imageFilename": "acrobat_slackline.jpg",
+  "isActive": true,
+  "isSlacklineOriented": true,
+  "url": "https://www.acrobatslackline.com",
+  "fbPage": "https://www.facebook.com/acrobatslackline",
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "creatorId": "10154430595665625",
+  "creationDate": 1617137838497,
+  "slug": "acrobat_slackline",
+  "imagesCount": 0,
+  "gearStats": [
+   {
+    "itemTypeId": "WEB",
+    "count": 1
+   },
+   {
+    "itemTypeId": "SKT",
+    "count": 2
+   }
+  ]
+ }
+}

@@ -1,0 +1,65 @@
+{
+ "gearDetail": {
+  "_id": 79,
+  "slug": "TenderLine",
+  "itemTypeId": "WEB",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1538410521693,
+  "name": "Tender Line",
+  "webbingType": "TB",
+  "material": [
+   "PL"
+  ],
+  "dWidth": 25,
+  "weight": 48,
+  "wll": 8,
+  "mbs": 23,
+  "dDepth": 2.5,
+  "elongation": {
+   "percent": 6,
+   "force": 8
+  },
+  "productionStatus": "AC",
+  "manufacturerId": 24,
+  "url": "https://spider-slacklines.com/shop/en/longline-webbings/76-tender-line.html",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 1.1
+    },
+    {
+     "q": 80,
+     "qt": "AA",
+     "price": 1.06
+    },
+    {
+     "q": 120,
+     "qt": "AA",
+     "price": 1
+    },
+    {
+     "q": 200,
+     "qt": "AA",
+     "price": 0.98
+    },
+    {
+     "q": 350,
+     "qt": "AA",
+     "price": 0.96
+    }
+   ]
+  },
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

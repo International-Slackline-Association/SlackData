@@ -1,0 +1,55 @@
+{
+ "gearDetail": {
+  "_id": 558,
+  "slug": "Fortisweblock",
+  "itemTypeId": "WLCK",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "1393453644035268",
+    "name": "Kuba Bałdych"
+   }
+  ],
+  "lastEditDate": 1587239224705,
+  "name": "Fortis weblock",
+  "material": [
+   "SS"
+  ],
+  "weight": 365,
+  "wll": 14,
+  "mbs": 70,
+  "anchorConnectionType": [
+   "MH"
+  ],
+  "webbingConnectionType": [
+   "SP"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 49,
+   "max": 51
+  },
+  "diverterDiameter": 15,
+  "usage": [
+   "TL"
+  ],
+  "productionStatus": "DC",
+  "manufacturerId": 45,
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 39.9
+    }
+   ]
+  },
+  "imagesCount": 4
+ },
+ "similarGear": []
+}

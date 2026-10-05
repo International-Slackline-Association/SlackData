@@ -1,0 +1,114 @@
+{
+ "manufacturerDetail": {
+  "_id": 2,
+  "slug": "Landcruising",
+  "manufacturerStatus": "ACT",
+  "imageFilename": "landcruising.jpg",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "lastEditDate": 1587290167296,
+  "reviews": [
+   {
+    "creatorId": "757816924399230",
+    "text": "I have ordered from Landcruzing 3 times, all orders had no problems, they have great products, Shipment is fast, I have ordered and changed my order after a few hours and have got my money back for what i cancelled with no problems, got a cool calender and stickers with my order. all in all 5&#x2F;5",
+    "rating": {
+     "lst": {
+      "OP": 10,
+      "SP": 10,
+      "PQ": 10,
+      "CS": 10
+     },
+     "overall": 10
+    },
+    "creationDate": 1500224125890,
+    "creatorName": "Moshe Klasovsky"
+   },
+   {
+    "creatorId": "10160004374565647",
+    "text": "Blown away with their customer support. Excellent products as well for very reasonable price. Shipping to my country can be tricky and expensive depending on package weight, but Landcruising were more than willing to help me make it all work out.",
+    "rating": {
+     "lst": {
+      "OP": 10,
+      "SP": 10,
+      "PQ": 10,
+      "CS": 10
+     },
+     "overall": 10
+    },
+    "creationDate": 1518106741571,
+    "creatorName": "Andrés Rojas"
+   }
+  ],
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "757816924399230",
+    "name": "Moshe Klasovsky"
+   },
+   {
+    "id": "10160004374565647",
+    "name": "Andrés Rojas"
+   }
+  ],
+  "name": "Landcruising",
+  "location": {
+   "countryCode": "DE",
+   "lat": 51.08504104614258,
+   "lng": 13.76804065704346,
+   "isExact": true
+  },
+  "yearEstablished": 2007,
+  "isSlacklineOriented": true,
+  "fbPage": "https://www.facebook.com/landcruising.slackline",
+  "ratingsAverages": {
+   "overall": {
+    "nativeCount": 2,
+    "nativeValue": 10,
+    "externalValue": 9,
+    "externalCount": 27,
+    "count": 29,
+    "value": 9
+   },
+   "lst": {
+    "OP": {
+     "count": 2,
+     "value": 10
+    },
+    "SP": {
+     "count": 2,
+     "value": 10
+    },
+    "PQ": {
+     "count": 2,
+     "value": 10
+    },
+    "CS": {
+     "count": 2,
+     "value": 10
+    }
+   }
+  },
+  "imagesCount": 0,
+  "gearStats": [
+   {
+    "itemTypeId": "SLD",
+    "count": 1
+   },
+   {
+    "itemTypeId": "WEB",
+    "count": 14
+   },
+   {
+    "itemTypeId": "WLCK",
+    "count": 9
+   },
+   {
+    "itemTypeId": "LRNG",
+    "count": 1
+   }
+  ]
+ }
+}

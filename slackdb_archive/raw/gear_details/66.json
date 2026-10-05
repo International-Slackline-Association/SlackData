@@ -1,0 +1,128 @@
+{
+ "gearDetail": {
+  "_id": 66,
+  "slug": "Sonic20",
+  "itemTypeId": "WEB",
+  "reviews": [
+   {
+    "creatorId": "10154768518631235",
+    "pros": [
+     "Nice and soft - ideal for waterline",
+     "Very stretchy, great to bounce on"
+    ],
+    "rating": {
+     "lst": {
+      "VFM": 10,
+      "QU": 10,
+      "EOU": 8,
+      "SFT": 10,
+      "VER": 6
+     },
+     "overall": 9
+    },
+    "creationDate": 1499723466303,
+    "creatorName": "Gat Haneman"
+   },
+   {
+    "creatorId": "656760621184025",
+    "text": "Great webbing, soft, stretchy, and visually pleasing.",
+    "rating": {
+     "lst": {
+      "SFT": 10,
+      "EOU": 10,
+      "VER": 10,
+      "QU": 10,
+      "VFM": 10
+     },
+     "overall": 10
+    },
+    "pros": [
+     "Very stretchy, great to bounce on",
+     "Nice and soft - ideal for waterline"
+    ],
+    "cons": [],
+    "creationDate": 1500148769857,
+    "creatorName": "Eli Szendro Brown"
+   }
+  ],
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "10154768518631235",
+    "name": "Gat Haneman"
+   },
+   {
+    "id": "656760621184025",
+    "name": "Eli Szendro Brown"
+   },
+   {
+    "id": "10155267793869667",
+    "name": "Romain Schempf"
+   }
+  ],
+  "lastEditDate": 1563141876761,
+  "name": "Sonic 2.0",
+  "webbingType": "CS",
+  "material": [
+   "NY"
+  ],
+  "dWidth": 25,
+  "weight": 68,
+  "wll": 7,
+  "mbs": 34,
+  "elongation": {
+   "percent": 15,
+   "force": 10
+  },
+  "productionStatus": "AC",
+  "manufacturerId": 64,
+  "url": "https://aki-slacklines.de/en/webbing/polyamide/137/aki-sonic-2-slackline-webbing?c=12&fbclid=IwAR1eTq7La_8P4pp3HW0hq4rE2LNuzA2ZAbm-Vyx4gXORVdZU1EmhrtBbLAo",
+  "pricing": {
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 1.99
+    }
+   ],
+   "currency": "EUR"
+  },
+  "ratingsAverages": {
+   "overall": {
+    "nativeCount": 2,
+    "nativeValue": 9,
+    "value": 9,
+    "count": 2
+   },
+   "lst": {
+    "VFM": {
+     "count": 2,
+     "value": 10
+    },
+    "QU": {
+     "count": 2,
+     "value": 10
+    },
+    "EOU": {
+     "count": 2,
+     "value": 9
+    },
+    "SFT": {
+     "count": 2,
+     "value": 10
+    },
+    "VER": {
+     "count": 2,
+     "value": 8
+    }
+   }
+  },
+  "imagesCount": 2
+ },
+ "similarGear": []
+}

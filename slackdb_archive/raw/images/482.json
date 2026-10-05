@@ -1,0 +1,23 @@
+{
+ "_id": 482,
+ "gearId": 3130,
+ "takenDate": 1596834000000,
+ "imageScope": "ITM",
+ "imageSource": "OFF",
+ "imageSourceUrl": "https://www.balancecommunity.com/products/lift-2b",
+ "gearCondition": "NEW",
+ "ImageEnvType": "STD",
+ "imageType": "RG",
+ "contributors": [
+  {
+   "id": "10154430595665625",
+   "name": "Nir Avneyon"
+  }
+ ],
+ "creationDate": 1604318992414,
+ "creatorId": "10154430595665625",
+ "filename": "482.jpg",
+ "width": 959,
+ "height": 1280,
+ "creatorName": "Nir Avneyon"
+}

@@ -1,0 +1,35 @@
+{
+ "manufacturerDetail": {
+  "_id": 37,
+  "slug": "VanBeest",
+  "manufacturerStatus": "ACT",
+  "imageFilename": "van_beest.jpg",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "name": "Van Beest",
+  "location": {
+   "countryCode": "NL",
+   "address": "Industrieweg 6 3361 HJ Sliedrecht",
+   "lat": 51.81785583496094,
+   "lng": 4.767495155334473,
+   "isExact": true
+  },
+  "isActive": true,
+  "url": "http://www.vanbeest.com",
+  "fbPage": "https://www.facebook.com/VanBeestInternational",
+  "lastEditDate": 1498724489744,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "imagesCount": 0,
+  "gearStats": [
+   {
+    "itemTypeId": "CON",
+    "count": 6
+   }
+  ]
+ }
+}

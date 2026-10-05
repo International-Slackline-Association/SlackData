@@ -1,0 +1,43 @@
+{
+ "manufacturerDetail": {
+  "_id": 64,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "creatorId": "10154430595665625",
+  "creationDate": 1555436801704,
+  "slug": "aki_slacklines",
+  "name": "Aki Slacklines",
+  "location": {
+   "countryCode": "DE",
+   "address": "Lohrmannstr. 20, 01237 Dresden",
+   "lat": 51.0183288,
+   "lng": 13.788624
+  },
+  "imageFilename": "aki_slacklines.jpg",
+  "isActive": true,
+  "isSlacklineOriented": true,
+  "url": "https://aki-slacklines.de",
+  "fbPage": "https://www.facebook.com/AkiSlack/",
+  "description": "Reincarnation of the legendary Landcruising",
+  "lastEditDate": 1555436841624,
+  "imagesCount": 0,
+  "gearStats": [
+   {
+    "itemTypeId": "WLCK",
+    "count": 2
+   },
+   {
+    "itemTypeId": "SKT",
+    "count": 3
+   },
+   {
+    "itemTypeId": "WEB",
+    "count": 7
+   }
+  ]
+ }
+}

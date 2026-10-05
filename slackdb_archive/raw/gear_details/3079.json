@@ -1,0 +1,57 @@
+{
+ "gearDetail": {
+  "_id": 3079,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "10220734815258954",
+    "name": "Jakub Dostál"
+   }
+  ],
+  "itemTypeId": "WLCK",
+  "slug": "mithril",
+  "creatorId": "10154430595665625",
+  "creationDate": 1558622072498,
+  "lastEditDate": 1712938456297,
+  "name": "Mithril - Quick Pin",
+  "material": [
+   "AL"
+  ],
+  "weight": 175,
+  "wll": 8,
+  "mbs": 40,
+  "anchorConnectionType": [
+   "QP"
+  ],
+  "webbingConnectionType": [
+   "QP"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 24,
+   "max": 26
+  },
+  "usage": [
+   "SL",
+   "HL",
+   "LL"
+  ],
+  "productionStatus": "AC",
+  "manufacturerId": 9,
+  "url": "https://www.slackshop.cz/en/weblocks/145-350-eqb-mithril.html#/165-pin_version-quick_pin",
+  "pricing": {
+   "currency": "CZK",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 2149
+    }
+   ]
+  },
+  "imagesCount": 2
+ },
+ "similarGear": []
+}

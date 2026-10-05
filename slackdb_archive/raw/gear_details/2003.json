@@ -1,0 +1,23 @@
+{
+ "gearDetail": {
+  "_id": 2003,
+  "name": "6mm D Stainless Steel Shackle",
+  "slug": "6mmDStainlessSteelShackle",
+  "material": [
+   "SS"
+  ],
+  "itemTypeId": "CON",
+  "productionStatus": "AC",
+  "connectorType": "DS",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

@@ -1,0 +1,63 @@
+{
+ "gearDetail": {
+  "_id": 552,
+  "slug": "CatlockPro",
+  "itemTypeId": "WLCK",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "2259321817488648",
+    "name": "Michał Guz"
+   }
+  ],
+  "lastEditDate": 1712933467093,
+  "name": "Catlock Pro",
+  "material": [
+   "SS"
+  ],
+  "weight": 340,
+  "wll": 12,
+  "mbs": 60,
+  "anchorConnectionType": [
+   "MH",
+   "RMH"
+  ],
+  "webbingConnectionType": [
+   "QP"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 24,
+   "max": 26
+  },
+  "diverterDiameter": 30,
+  "efficiency": 86,
+  "usage": [
+   "SL",
+   "HL",
+   "LL",
+   "RL",
+   "LTL"
+  ],
+  "dateIntroduced": 1519858800000,
+  "productionStatus": "DC",
+  "manufacturerId": 51,
+  "pricing": {
+   "currency": "PLN",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 204
+    }
+   ],
+   "hasAddOpts": true
+  },
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

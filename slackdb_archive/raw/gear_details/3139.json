@@ -1,0 +1,45 @@
+{
+ "gearDetail": {
+  "_id": 3139,
+  "name": "Green 20",
+  "webbingType": "FL",
+  "material": [
+   "NY"
+  ],
+  "dWidth": 20,
+  "weight": 53,
+  "wll": 5,
+  "mbs": 25,
+  "dDepth": 3.38,
+  "elongation": {
+   "percent": 11.72,
+   "force": 10
+  },
+  "dateIntroduced": 1614290400000,
+  "productionStatus": "PO",
+  "manufacturerId": 3,
+  "url": "https://www.balancecommunity.com/collections/20mm-webbing/products/green-20?variant",
+  "pricing": {
+   "currency": "USD",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 2.45
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "WEB",
+  "slug": "green_20",
+  "creatorId": "10154430595665625",
+  "creationDate": 1617127406966,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

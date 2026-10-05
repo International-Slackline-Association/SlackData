@@ -1,0 +1,54 @@
+{
+ "gearDetail": {
+  "_id": 810,
+  "slug": "BomberSteelRing",
+  "itemTypeId": "LRNG",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "name": "Bomber Steel Ring",
+  "material": [
+   "SS"
+  ],
+  "weight": 266,
+  "mbs": 44.4,
+  "materialDiameter": 12.7,
+  "innerDiameter": 76.2,
+  "outerDiameter": 101.6,
+  "productionStatus": "AC",
+  "manufacturerId": 3,
+  "url": "http://www.balancecommunity.com/bomber-steel-ring",
+  "pricing": {
+   "currency": "USD",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 15.95
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1498976844732,
+  "imagesCount": 1
+ },
+ "similarGear": [
+  {
+   "_id": 803,
+   "slug": "LeashringV20",
+   "itemTypeId": "LRNG",
+   "name": "Leashring V2.0",
+   "manufacturerId": 12,
+   "manufacturer": {
+    "name": "Slack.fr",
+    "url": "http://slack.fr",
+    "countryTxt": "France",
+    "countryCode": "FR"
+   }
+  }
+ ]
+}

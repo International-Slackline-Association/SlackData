@@ -1,0 +1,67 @@
+{
+ "manufacturerDetail": {
+  "_id": 6,
+  "slug": "Slacktivity",
+  "manufacturerStatus": "ACT",
+  "imageFilename": "slacktivity.jpg",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "name": "Slacktivity",
+  "location": {
+   "countryCode": "CH",
+   "lat": 47.35876083374023,
+   "lng": 8.552663803100586,
+   "isExact": true
+  },
+  "isActive": true,
+  "isSlacklineOriented": true,
+  "url": "http://www.slacktivity.com",
+  "fbPage": "https://www.facebook.com/slacklinetechnology",
+  "lastEditDate": 1498724315575,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "ratingsAverages": {
+   "overall": {
+    "externalValue": 10,
+    "externalCount": 5,
+    "value": 10,
+    "count": 5
+   }
+  },
+  "imagesCount": 0,
+  "gearStats": [
+   {
+    "itemTypeId": "SKT",
+    "count": 6
+   },
+   {
+    "itemTypeId": "TRP",
+    "count": 3
+   },
+   {
+    "itemTypeId": "WLCK",
+    "count": 6
+   },
+   {
+    "itemTypeId": "TLK",
+    "count": 1
+   },
+   {
+    "itemTypeId": "SLD",
+    "count": 3
+   },
+   {
+    "itemTypeId": "LRNG",
+    "count": 2
+   },
+   {
+    "itemTypeId": "WEB",
+    "count": 9
+   }
+  ]
+ }
+}

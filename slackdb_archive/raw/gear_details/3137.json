@@ -1,0 +1,45 @@
+{
+ "gearDetail": {
+  "_id": 3137,
+  "name": "Jelly",
+  "webbingType": "TB",
+  "material": [
+   "PL"
+  ],
+  "dWidth": 25.4,
+  "weight": 45,
+  "wll": 4,
+  "mbs": 20,
+  "dDepth": 2.3,
+  "elongation": {
+   "percent": 7.01,
+   "force": 10
+  },
+  "dateIntroduced": 1616450400000,
+  "productionStatus": "PO",
+  "manufacturerId": 3,
+  "url": "https://www.balancecommunity.com/products/jelly-webbing",
+  "pricing": {
+   "currency": "USD",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 2
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "WEB",
+  "slug": "jelly",
+  "creatorId": "10154430595665625",
+  "creationDate": 1617126263501,
+  "imagesCount": 2
+ },
+ "similarGear": []
+}

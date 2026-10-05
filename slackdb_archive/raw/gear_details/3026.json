@@ -1,0 +1,69 @@
+{
+ "gearDetail": {
+  "_id": 3026,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "WEB",
+  "slug": "pinktube",
+  "creatorId": "10154430595665625",
+  "creationDate": 1503412710569,
+  "name": "PinkTube",
+  "webbingType": "TB",
+  "material": [
+   "NY"
+  ],
+  "dWidth": 25.5,
+  "weight": 48,
+  "mbs": 23.6,
+  "elongation": {
+   "percent": 18,
+   "force": 10
+  },
+  "dateIntroduced": 1503349200000,
+  "productionStatus": "AC",
+  "manufacturerId": 6,
+  "url": "https://www.slacktivity.com/pinktube-25m-200m",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 30,
+     "qt": "EX",
+     "price": 1.83
+    },
+    {
+     "q": 100,
+     "qt": "EX",
+     "price": 1.8
+    },
+    {
+     "q": 200,
+     "qt": "EX",
+     "price": 1.8
+    }
+   ],
+   "hasAddOpts": true
+  },
+  "lastEditDate": 1587243685639,
+  "imagesCount": 4
+ },
+ "similarGear": [
+  {
+   "_id": 3123,
+   "name": "LSDTube",
+   "manufacturerId": 6,
+   "itemTypeId": "WEB",
+   "slug": "lsdtube",
+   "manufacturer": {
+    "name": "Slacktivity",
+    "url": "http://www.slacktivity.com",
+    "countryTxt": "Switzerland",
+    "countryCode": "CH"
+   }
+  }
+ ]
+}

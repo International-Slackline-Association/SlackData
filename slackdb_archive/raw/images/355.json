@@ -1,0 +1,39 @@
+{
+ "_id": 355,
+ "takenDate": 1579816800000,
+ "imageScope": "STP",
+ "ImageEnvType": "STD",
+ "imageType": "RG",
+ "gearTags": [
+  {
+   "x": 944,
+   "y": 441,
+   "width": 227,
+   "height": 216,
+   "gearId": 3089
+  },
+  {
+   "x": 158,
+   "y": 590,
+   "width": 278,
+   "height": 199,
+   "gearId": 118
+  }
+ ],
+ "gearId": [
+  3089,
+  118
+ ],
+ "contributors": [
+  {
+   "id": "10154430595665625",
+   "name": "Nir Avneyon"
+  }
+ ],
+ "creationDate": 1579988155678,
+ "creatorId": "10154430595665625",
+ "filename": "355.jpg",
+ "width": 1801,
+ "height": 1200,
+ "creatorName": "Nir Avneyon"
+}

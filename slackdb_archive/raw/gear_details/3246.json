@@ -1,0 +1,36 @@
+{
+ "gearDetail": {
+  "_id": 3246,
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "TLK",
+  "slug": "25_mairx27njumpsetslide2of4",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622133611412,
+  "lastEditDate": 1622133639374,
+  "name": "25 m Air n Jump Set",
+  "webbingLength": 25,
+  "webbingWidth": 45,
+  "tensioningType": "RAT2",
+  "includesTreePro": true,
+  "productionStatus": "AC",
+  "manufacturerId": 25,
+  "url": "https://www.slack-shop.de/25m-air-jump-set.html",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 180
+    }
+   ]
+  },
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

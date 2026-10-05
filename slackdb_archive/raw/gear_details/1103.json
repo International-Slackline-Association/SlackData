@@ -1,0 +1,46 @@
+{
+ "gearDetail": {
+  "_id": 1103,
+  "slug": "SlackInovSlackPulley",
+  "itemTypeId": "SLD",
+  "flags": [
+   "IB"
+  ],
+  "psaCert": false,
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1587250079977,
+  "name": "Webbling Pulley",
+  "material": [
+   "NY",
+   "AL"
+  ],
+  "weight": 67,
+  "mbs": 15,
+  "compatibleWebbingWidth": {
+   "min": 25,
+   "max": 26
+  },
+  "sliderType": "MP",
+  "productionStatus": "DC",
+  "manufacturerId": 7,
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 30
+    }
+   ]
+  },
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

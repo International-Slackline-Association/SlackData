@@ -1,0 +1,34 @@
+{
+ "gearDetail": {
+  "_id": 3235,
+  "name": "Zebra 6 25 M",
+  "webbingLength": 25,
+  "webbingWidth": 50,
+  "tensioningType": "RAT1",
+  "productionStatus": "AC",
+  "manufacturerId": 55,
+  "url": "https://slackstar.de/kinder-familie/2-baeume/komplettset-6-teilig/921/zebra6?number=SL82668-25_ZEBRA",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 115
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "zebra_625m",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622032768717,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

@@ -1,0 +1,174 @@
+{
+ "gearDetail": {
+  "_id": 36,
+  "slug": "SnakeTub",
+  "itemTypeId": "WEB",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "name": "Snake Tub",
+  "webbingType": "TB",
+  "material": [
+   "PL"
+  ],
+  "dWidth": 25,
+  "weight": 52,
+  "wll": 10.5,
+  "mbs": 21,
+  "dDepth": 2.1,
+  "elongation": {
+   "percent": 10,
+   "force": 10
+  },
+  "usage": [
+   "SL",
+   "HL",
+   "LL",
+   "RL",
+   "LTL"
+  ],
+  "productionStatus": "AC",
+  "manufacturerId": 4,
+  "url": "http://slack-mountain.com/en/webbing-slackline/5-snake-tub.html",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 1.5
+    },
+    {
+     "q": 15,
+     "qt": "EX",
+     "price": 2
+    },
+    {
+     "q": 25,
+     "qt": "EX",
+     "price": 1.8
+    },
+    {
+     "q": 30,
+     "qt": "EX",
+     "price": 1.83
+    },
+    {
+     "q": 40,
+     "qt": "EX",
+     "price": 1.63
+    },
+    {
+     "q": 50,
+     "qt": "EX",
+     "price": 1.5
+    },
+    {
+     "q": 60,
+     "qt": "EX",
+     "price": 1.5
+    },
+    {
+     "q": 70,
+     "qt": "EX",
+     "price": 1.5
+    },
+    {
+     "q": 90,
+     "qt": "EX",
+     "price": 1.5
+    },
+    {
+     "q": 100,
+     "qt": "EX",
+     "price": 1.5
+    },
+    {
+     "q": 120,
+     "qt": "EX",
+     "price": 1.5
+    },
+    {
+     "q": 130,
+     "qt": "EX",
+     "price": 1.5
+    },
+    {
+     "q": 150,
+     "qt": "EX",
+     "price": 1.5
+    },
+    {
+     "q": 200,
+     "qt": "EX",
+     "price": 1.65
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "10155267793869667",
+    "name": "Romain Schempf"
+   }
+  ],
+  "lastEditDate": 1501840304263,
+  "imagesCount": 1
+ },
+ "similarGear": [
+  {
+   "_id": 32,
+   "slug": "ArticFox",
+   "itemTypeId": "WEB",
+   "name": "Artic Fox",
+   "manufacturerId": 4,
+   "manufacturer": {
+    "name": "Slack Mountain",
+    "url": "http://slack-mountain.com",
+    "countryTxt": "France",
+    "countryCode": "FR"
+   }
+  },
+  {
+   "_id": 132,
+   "slug": "Reggae",
+   "itemTypeId": "WEB",
+   "name": "Reggae",
+   "manufacturerId": 12,
+   "manufacturer": {
+    "name": "Slack.fr",
+    "url": "http://slack.fr",
+    "countryTxt": "France",
+    "countryCode": "FR"
+   }
+  },
+  {
+   "_id": 46,
+   "slug": "SupertubeNorway",
+   "itemTypeId": "WEB",
+   "name": "Supertube Norway",
+   "manufacturerId": 12,
+   "manufacturer": {
+    "name": "Slack.fr",
+    "url": "http://slack.fr",
+    "countryTxt": "France",
+    "countryCode": "FR"
+   }
+  },
+  {
+   "_id": 133,
+   "slug": "RVD",
+   "itemTypeId": "WEB",
+   "name": "RVD",
+   "manufacturerId": 12,
+   "manufacturer": {
+    "name": "Slack.fr",
+    "url": "http://slack.fr",
+    "countryTxt": "France",
+    "countryCode": "FR"
+   }
+  }
+ ]
+}

@@ -1,0 +1,25 @@
+{
+ "gearDetail": {
+  "_id": 3034,
+  "name": "8mm Twist Shackle",
+  "material": [
+   "SS"
+  ],
+  "weight": 76,
+  "wll": 10,
+  "mbs": 35,
+  "connectorType": "TS",
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "CON",
+  "slug": "8mm_twistshackle",
+  "creatorId": "10154430595665625",
+  "creationDate": 1506002197324,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

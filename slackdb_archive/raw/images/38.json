@@ -1,0 +1,22 @@
+{
+ "_id": 38,
+ "takenDate": 1499634000000,
+ "imageScope": "ITM",
+ "imageSource": "UOFF",
+ "gearCondition": "NEW",
+ "ImageEnvType": "STD",
+ "imageType": "CLS",
+ "gearId": 139,
+ "contributors": [
+  {
+   "id": "10154430595665625",
+   "name": "Nir Avneyon"
+  }
+ ],
+ "creationDate": 1499896266303,
+ "creatorId": "10154430595665625",
+ "filename": "38.jpg",
+ "width": 1919,
+ "height": 1280,
+ "creatorName": "Nir Avneyon"
+}

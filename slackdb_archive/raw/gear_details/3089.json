@@ -1,0 +1,56 @@
+{
+ "gearDetail": {
+  "_id": 3089,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "10211802848940671",
+    "name": "Thomas Buckingham"
+   }
+  ],
+  "itemTypeId": "WLCK",
+  "slug": "alpine_weblock50",
+  "creatorId": "10154430595665625",
+  "creationDate": 1579987856462,
+  "lastEditDate": 1712932431346,
+  "name": "Alpine WebLock 5.0",
+  "material": [
+   "AL"
+  ],
+  "weight": 188,
+  "wll": 12,
+  "mbs": 60,
+  "anchorConnectionType": [
+   "SR",
+   "XLMH"
+  ],
+  "webbingConnectionType": [
+   "QP"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 24,
+   "max": 26
+  },
+  "diverterDiameter": 28.6,
+  "isaApproved": true,
+  "dateIntroduced": 1579816800000,
+  "productionStatus": "DC",
+  "manufacturerId": 3,
+  "url": "https://www.balancecommunity.com/products/alpine-weblock-5",
+  "pricing": {
+   "currency": "USD",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 129
+    }
+   ]
+  },
+  "imagesCount": 4
+ },
+ "similarGear": []
+}

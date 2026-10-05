@@ -1,0 +1,35 @@
+{
+ "gearDetail": {
+  "_id": 3166,
+  "name": "Slackline Tree Protection Set",
+  "dWidth": 13,
+  "dLength": 240,
+  "dDepth": 3,
+  "weight": 340,
+  "productionStatus": "AC",
+  "manufacturerId": 6,
+  "url": "https://slacktivity.com/shop/slackline-tree-protection-set-3-0/",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "price": 39.95,
+     "q": 1,
+     "qt": "AA"
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "TRP",
+  "slug": "slackline_treeprotectionset",
+  "creatorId": "2824084041240796",
+  "creationDate": 1621858087063,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

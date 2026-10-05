@@ -1,0 +1,48 @@
+{
+ "_id": 402,
+ "imageScope": "STP",
+ "imageSource": "OFF",
+ "imageSourceUrl": "https://www.slackshop.cz/en/linegrip/166-396-eqb-grippen.html",
+ "ImageEnvType": "STD",
+ "imageType": "RG",
+ "gearTags": [
+  {
+   "x": 117,
+   "y": 139,
+   "width": 294,
+   "height": 234,
+   "gearId": 3082
+  },
+  {
+   "x": 666,
+   "y": 303,
+   "width": 244,
+   "height": 187,
+   "gearId": 3112
+  },
+  {
+   "x": 946,
+   "y": 385,
+   "width": 97,
+   "height": 114,
+   "gearId": 141
+  }
+ ],
+ "gearId": [
+  3082,
+  3112,
+  141
+ ],
+ "contributors": [
+  {
+   "id": "10154430595665625",
+   "name": "Nir Avneyon"
+  }
+ ],
+ "creationDate": 1587249071826,
+ "creatorId": "10154430595665625",
+ "filename": "402.jpg",
+ "width": 1060,
+ "height": 690,
+ "creatorName": "Nir Avneyon"
+}

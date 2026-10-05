@@ -1,0 +1,36 @@
+{
+ "gearDetail": {
+  "_id": 3197,
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "15_meterslacklinesetincludestreeprotection",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622017617110,
+  "lastEditDate": 1622037280324,
+  "name": "15 Meter Slackline Set – Includes Tree Protection",
+  "webbingLength": 15,
+  "webbingWidth": 50,
+  "tensioningType": "RAT1",
+  "includesTreePro": true,
+  "productionStatus": "AC",
+  "manufacturerId": 43,
+  "url": "https://www.slacklineshop.co.nz/product/15-meter-slackline-set/",
+  "pricing": {
+   "currency": "USD",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 90
+    }
+   ]
+  },
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

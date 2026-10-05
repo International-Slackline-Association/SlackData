@@ -1,0 +1,127 @@
+{
+ "gearDetail": {
+  "_id": 546,
+  "slug": "SeaHorsesDP",
+  "itemTypeId": "WLCK",
+  "flags": [
+   "IRP",
+   "WH"
+  ],
+  "fieldsRemarks": {
+   "mbs": "36kN using the provided sling",
+   "webbingWidth": "for < 24mm spacers are required"
+  },
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "656760621184025",
+    "name": "Eli Szendro Brown"
+   },
+   {
+    "id": "10211802848940671",
+    "name": "Thomas Buckingham"
+   }
+  ],
+  "lastEditDate": 1712946912815,
+  "reviews": [
+   {
+    "creatorId": "656760621184025",
+    "text": "I have one and love it.. but. needs to have an eye kept on it due to slippage. would recommend for longline and situations where it can be easily and frequently maintained and adjusted.",
+    "rating": {
+     "lst": {
+      "VER": 8,
+      "QU": 10,
+      "VFM": 8,
+      "EOU": 10,
+      "PRT": 10
+     },
+     "overall": 9
+    },
+    "pros": [
+     "Easy to pre tension",
+     "Nice options with the center hole",
+     "Double pin for soft release"
+    ],
+    "cons": [
+     "Slippage",
+     "Heavy"
+    ],
+    "creationDate": 1500153266839,
+    "creatorName": "Eli Szendro Brown"
+   }
+  ],
+  "name": "SeaHorse DP 1.5",
+  "material": [
+   "AL"
+  ],
+  "weight": 260,
+  "wll": 12,
+  "mbs": 60,
+  "anchorConnectionType": [
+   "SR",
+   "QP",
+   "SL",
+   "XLMH"
+  ],
+  "webbingConnectionType": [
+   "QP"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 19,
+   "max": 27
+  },
+  "diverterDiameter": 36,
+  "isaApproved": true,
+  "productionStatus": "AC",
+  "manufacturerId": 6,
+  "url": "https://slacktivity.com/shop/slacktivity-seahorse/",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 130
+    }
+   ],
+   "hasAddOpts": true
+  },
+  "ratingsAverages": {
+   "overall": {
+    "nativeCount": 1,
+    "nativeValue": 9,
+    "value": 9,
+    "count": 1
+   },
+   "lst": {
+    "VER": {
+     "count": 1,
+     "value": 8
+    },
+    "QU": {
+     "count": 1,
+     "value": 10
+    },
+    "VFM": {
+     "count": 1,
+     "value": 8
+    },
+    "EOU": {
+     "count": 1,
+     "value": 10
+    },
+    "PRT": {
+     "count": 1,
+     "value": 10
+    }
+   }
+  },
+  "imagesCount": 4
+ },
+ "similarGear": []
+}

@@ -1,0 +1,34 @@
+{
+ "gearDetail": {
+  "_id": 3220,
+  "name": "EQB TRICK 20 M",
+  "webbingLength": 20,
+  "webbingWidth": 50,
+  "tensioningType": "RAT1",
+  "productionStatus": "AC",
+  "manufacturerId": 9,
+  "url": "https://www.slackshop.cz/en/for-beginners/8-eqb-trick-20-m.html",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 63
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "eqb_trick20m",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622030068544,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

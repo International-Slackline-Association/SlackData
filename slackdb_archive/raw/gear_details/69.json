@@ -1,0 +1,44 @@
+{
+ "gearDetail": {
+  "_id": 69,
+  "slug": "WaveTape19",
+  "itemTypeId": "WEB",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1536593231463,
+  "name": "Wave Tape 19",
+  "webbingType": "FL",
+  "material": [
+   "NY"
+  ],
+  "dWidth": 19,
+  "weight": 38,
+  "wll": 6,
+  "mbs": 18,
+  "dDepth": 2.4,
+  "elongation": {
+   "percent": 14,
+   "force": 6
+  },
+  "productionStatus": "DC",
+  "manufacturerId": 2,
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 1.35
+    }
+   ]
+  },
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

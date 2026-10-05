@@ -1,0 +1,65 @@
+{
+ "manufacturerDetail": {
+  "_id": 4,
+  "slug": "SlackMountain",
+  "manufacturerStatus": "ACT",
+  "imageFilename": "slack_mountain.jpg",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "lastEditDate": 1501840818774,
+  "name": "Slack Mountain",
+  "location": {
+   "countryCode": "FR",
+   "address": "9 bd carlone nice",
+   "lat": 43.6936148,
+   "lng": 7.2422023,
+   "isExact": true
+  },
+  "yearEstablished": 2010,
+  "isActive": true,
+  "isSlacklineOriented": true,
+  "url": "http://slack-mountain.com",
+  "fbPage": "https://www.facebook.com/slackmountain",
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "10155267793869667",
+    "name": "Romain Schempf"
+   }
+  ],
+  "ratingsAverages": {
+   "overall": {
+    "externalValue": 10,
+    "externalCount": 38,
+    "value": 10,
+    "count": 38
+   }
+  },
+  "imagesCount": 0,
+  "gearStats": [
+   {
+    "itemTypeId": "TRP",
+    "count": 1
+   },
+   {
+    "itemTypeId": "SLD",
+    "count": 1
+   },
+   {
+    "itemTypeId": "WLCK",
+    "count": 6
+   },
+   {
+    "itemTypeId": "WEB",
+    "count": 23
+   },
+   {
+    "itemTypeId": "SKT",
+    "count": 6
+   }
+  ]
+ }
+}

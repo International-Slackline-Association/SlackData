@@ -1,0 +1,33 @@
+{
+ "gearDetail": {
+  "_id": 22,
+  "slug": "Vesuve",
+  "itemTypeId": "WEB",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1503917255421,
+  "name": "Vesuve",
+  "webbingType": "FL",
+  "material": [
+   "PL"
+  ],
+  "dWidth": 25,
+  "weight": 56,
+  "wll": 8,
+  "mbs": 24,
+  "elongation": {
+   "percent": 7,
+   "force": 10
+  },
+  "productionStatus": "DC",
+  "manufacturerId": 8,
+  "imagesCount": 0
+ },
+ "similarGear": []
+}

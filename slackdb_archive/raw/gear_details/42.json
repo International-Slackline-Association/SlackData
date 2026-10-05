@@ -1,0 +1,64 @@
+{
+ "gearDetail": {
+  "_id": 42,
+  "slug": "Moonwalk",
+  "itemTypeId": "WEB",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "10155267793869667",
+    "name": "Romain Schempf"
+   }
+  ],
+  "lastEditDate": 1587239306374,
+  "name": "Moonwalk",
+  "webbingType": "FL",
+  "material": [
+   "PL",
+   "DY"
+  ],
+  "dWidth": 25,
+  "weight": 34,
+  "wll": 9,
+  "mbs": 35,
+  "dDepth": 2,
+  "elongation": {
+   "percent": 3.4,
+   "force": 10
+  },
+  "productionStatus": "AC",
+  "manufacturerId": 12,
+  "url": "https://laboutique.slack.fr/en/slackline-webbings/41-moonwalk-flat-hybride.html",
+  "pricing": {
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 3.2
+    }
+   ],
+   "currency": "EUR"
+  },
+  "imagesCount": 1
+ },
+ "similarGear": [
+  {
+   "_id": 33,
+   "slug": "Goku",
+   "itemTypeId": "WEB",
+   "name": "Goku",
+   "manufacturerId": 4,
+   "manufacturer": {
+    "name": "Slack Mountain",
+    "url": "http://slack-mountain.com",
+    "countryTxt": "France",
+    "countryCode": "FR"
+   }
+  }
+ ]
+}

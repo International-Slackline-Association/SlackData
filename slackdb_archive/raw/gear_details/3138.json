@@ -1,0 +1,45 @@
+{
+ "gearDetail": {
+  "_id": 3138,
+  "name": "Blue 20",
+  "webbingType": "FL",
+  "material": [
+   "PL"
+  ],
+  "dWidth": 20,
+  "weight": 53,
+  "wll": 5,
+  "mbs": 25,
+  "dDepth": 3,
+  "elongation": {
+   "percent": 7.51,
+   "force": 10
+  },
+  "dateIntroduced": 1614290400000,
+  "productionStatus": "PO",
+  "manufacturerId": 3,
+  "url": "https://www.balancecommunity.com/collections/20mm-webbing/products/blue-20",
+  "pricing": {
+   "currency": "USD",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 2
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "WEB",
+  "slug": "blue_20",
+  "creatorId": "10154430595665625",
+  "creationDate": 1617126561853,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

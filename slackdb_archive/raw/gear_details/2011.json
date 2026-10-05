@@ -1,0 +1,28 @@
+{
+ "gearDetail": {
+  "_id": 2011,
+  "name": "2T OMEGA Shackle",
+  "slug": "2TOMEGAShackle",
+  "manufacturerId": 37,
+  "material": [
+   "S"
+  ],
+  "itemTypeId": "CON",
+  "weight": 285,
+  "wll": 20,
+  "mbs": 120,
+  "productionStatus": "AC",
+  "remarks": "Van Beest Rating",
+  "connectorType": "OS",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "imagesCount": 0
+ },
+ "similarGear": []
+}

@@ -1,0 +1,55 @@
+{
+ "gearDetail": {
+  "_id": 547,
+  "slug": "PureLock",
+  "itemTypeId": "WLCK",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1587291413877,
+  "name": "PureLock",
+  "material": [
+   "AL"
+  ],
+  "weight": 243,
+  "wll": 12,
+  "mbs": 60,
+  "anchorConnectionType": [
+   "IS"
+  ],
+  "webbingConnectionType": [
+   "CSP"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 24,
+   "max": 26
+  },
+  "usage": [
+   "SL",
+   "HL",
+   "LL",
+   "RL",
+   "LTL"
+  ],
+  "dateIntroduced": 1475971200000,
+  "productionStatus": "DC",
+  "manufacturerId": 19,
+  "pricing": {
+   "currency": "USD",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 129
+    }
+   ]
+  },
+  "imagesCount": 0
+ },
+ "similarGear": []
+}

@@ -1,0 +1,61 @@
+{
+ "gearDetail": {
+  "_id": 33,
+  "slug": "Goku",
+  "itemTypeId": "WEB",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1587244003666,
+  "name": "Goku",
+  "webbingType": "FL",
+  "material": [
+   "PL",
+   "DY"
+  ],
+  "dWidth": 25,
+  "weight": 32,
+  "wll": 11,
+  "mbs": 35,
+  "elongation": {
+   "percent": 3.8,
+   "force": 10
+  },
+  "productionStatus": "DC",
+  "manufacturerId": 4,
+  "imagesCount": 1
+ },
+ "similarGear": [
+  {
+   "_id": 42,
+   "slug": "Moonwalk",
+   "itemTypeId": "WEB",
+   "name": "Moonwalk",
+   "manufacturerId": 12,
+   "manufacturer": {
+    "name": "Slack.fr",
+    "url": "http://slack.fr",
+    "countryTxt": "France",
+    "countryCode": "FR"
+   }
+  },
+  {
+   "_id": 3052,
+   "name": "Panda",
+   "manufacturerId": 21,
+   "itemTypeId": "WEB",
+   "slug": "panda",
+   "manufacturer": {
+    "name": "Slackline Industries",
+    "url": "http://www.slacklineindustries.com",
+    "countryTxt": "United States",
+    "countryCode": "US"
+   }
+  }
+ ]
+}

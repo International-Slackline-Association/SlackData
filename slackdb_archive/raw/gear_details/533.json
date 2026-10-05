@@ -1,0 +1,118 @@
+{
+ "gearDetail": {
+  "_id": 533,
+  "slug": "AlpineWebLock40",
+  "itemTypeId": "WLCK",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "lastEditDate": 1712932279417,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "656760621184025",
+    "name": "Eli Szendro Brown"
+   }
+  ],
+  "reviews": [
+   {
+    "creatorId": "656760621184025",
+    "text": "Favorite one in my collection.",
+    "rating": {
+     "lst": {
+      "VFM": 10,
+      "QU": 10,
+      "VER": 10,
+      "EOU": 10,
+      "PRT": 10
+     },
+     "overall": 10
+    },
+    "pros": [
+     "Easy to pre tension",
+     "Big connector hole, allows many ocnfigurations",
+     "Can be used without a shackle"
+    ],
+    "cons": [
+     "A bit heavy",
+     "Price"
+    ],
+    "creationDate": 1500152535490,
+    "lastEditDate": 1500152676923,
+    "creatorName": "Eli Szendro Brown"
+   }
+  ],
+  "name": "Alpine WebLock 4.0",
+  "material": [
+   "AL"
+  ],
+  "weight": 335,
+  "wll": 12,
+  "mbs": 60,
+  "anchorConnectionType": [
+   "MH"
+  ],
+  "webbingConnectionType": [
+   "QP"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 24,
+   "max": 26
+  },
+  "efficiency": 100,
+  "usage": [
+   "SL",
+   "HL",
+   "LL",
+   "RL",
+   "LTL"
+  ],
+  "productionStatus": "DC",
+  "manufacturerId": 3,
+  "url": "https://www.balancecommunity.com/blogs/slack-science/tagged/alpine-weblock-4-0",
+  "pricing": {
+   "currency": "USD",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 124.95
+    }
+   ]
+  },
+  "ratingsAverages": {
+   "overall": {
+    "nativeCount": 1,
+    "nativeValue": 10,
+    "value": 10,
+    "count": 1
+   },
+   "lst": {
+    "VFM": {
+     "count": 1,
+     "value": 10
+    },
+    "QU": {
+     "count": 1,
+     "value": 10
+    },
+    "VER": {
+     "count": 1,
+     "value": 10
+    },
+    "EOU": {
+     "count": 1,
+     "value": 10
+    },
+    "PRT": {
+     "count": 1,
+     "value": 10
+    }
+   }
+  },
+  "imagesCount": 3
+ },
+ "similarGear": []
+}

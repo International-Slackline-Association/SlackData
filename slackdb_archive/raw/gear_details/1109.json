@@ -1,0 +1,46 @@
+{
+ "gearDetail": {
+  "_id": 1109,
+  "slug": "SKIPUL",
+  "itemTypeId": "SLD",
+  "psaCert": false,
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1542144706335,
+  "name": "SKIP UL",
+  "material": [
+   "SS"
+  ],
+  "weight": 108,
+  "wll": 3,
+  "mbs": 18,
+  "compatibleWebbingWidth": {
+   "min": 25,
+   "max": 26
+  },
+  "sliderType": "MP",
+  "innerWidth": 28,
+  "outerBearingDiameter": 19,
+  "productionStatus": "AC",
+  "manufacturerId": 53,
+  "url": "http://zergeoutdoor.com/product/skip-ul-the-ultralight-stainless-steel-webbing-pulley/",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 37.05
+    }
+   ]
+  },
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

@@ -1,0 +1,38 @@
+{
+ "gearDetail": {
+  "_id": 3125,
+  "name": "BC Aluminum Leash Ring",
+  "weight": 50,
+  "wll": 6,
+  "mbs": 24,
+  "materialDiameter": 10.4,
+  "innerDiameter": 60,
+  "outerDiameter": 80.8,
+  "dateIntroduced": 1597093200000,
+  "productionStatus": "AC",
+  "manufacturerId": 3,
+  "url": "https://www.balancecommunity.com/products/bc-aluminum-leash-ring",
+  "pricing": {
+   "currency": "USD",
+   "lst": [
+    {
+     "q": 2,
+     "qt": "EX",
+     "price": 12.45
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "LRNG",
+  "slug": "bc_aluminumleashring",
+  "creatorId": "10154430595665625",
+  "creationDate": 1597264646643,
+  "imagesCount": 0
+ },
+ "similarGear": []
+}

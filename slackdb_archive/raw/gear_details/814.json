@@ -1,0 +1,54 @@
+{
+ "gearDetail": {
+  "_id": 814,
+  "slug": "Access",
+  "itemTypeId": "LRNG",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "name": "Access",
+  "material": [
+   "AL"
+  ],
+  "weight": 59,
+  "mbs": 30,
+  "materialDiameter": 12,
+  "innerDiameter": 45,
+  "outerDiameter": 69,
+  "productionStatus": "AC",
+  "manufacturerId": 35,
+  "url": "https://www.rocknrescue.com/product/camp-safety-access-ring",
+  "pricing": {
+   "currency": "USD",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 7.95
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1498976778693,
+  "imagesCount": 1
+ },
+ "similarGear": [
+  {
+   "_id": 819,
+   "slug": "ORING",
+   "itemTypeId": "LRNG",
+   "name": "O-RING",
+   "manufacturerId": 54,
+   "manufacturer": {
+    "name": "Fusion Climb",
+    "url": "http://www.fusionclimb.com",
+    "countryTxt": "United States",
+    "countryCode": "US"
+   }
+  }
+ ]
+}

@@ -1,0 +1,40 @@
+{
+ "gearDetail": {
+  "_id": 39,
+  "slug": "ClubS",
+  "itemTypeId": "WEB",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1587243968579,
+  "name": "Club S",
+  "webbingType": "TR",
+  "dWidth": 25,
+  "weight": 75,
+  "wll": 10,
+  "mbs": 30,
+  "elongation": {
+   "percent": 7,
+   "force": 10
+  },
+  "productionStatus": "DC",
+  "manufacturerId": 12,
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 30,
+     "qt": "EX",
+     "price": 2.06
+    }
+   ]
+  },
+  "imagesCount": 0
+ },
+ "similarGear": []
+}

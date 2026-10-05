@@ -1,0 +1,36 @@
+{
+ "gearDetail": {
+  "_id": 3156,
+  "name": "Kit Primitive Compact Line",
+  "webbingLength": 10,
+  "webbingWidth": 25,
+  "tensioningType": "PRIM",
+  "includesTreePro": true,
+  "productionStatus": "AC",
+  "manufacturerId": 76,
+  "url": "https://beraadventure.com.br/product/kit-primitivo-compact/",
+  "pricing": {
+   "currency": "BRL",
+   "hasAddOpts": true,
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 189.99
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "4078196375580695",
+    "name": "Francisco Vanzuita"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "kit_primitivecompactline",
+  "creatorId": "4078196375580695",
+  "creationDate": 1620302322780,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

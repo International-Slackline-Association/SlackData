@@ -1,0 +1,50 @@
+{
+ "gearDetail": {
+  "_id": 3124,
+  "name": "Spider Silk MK3",
+  "webbingType": "FL",
+  "material": [
+   "DY"
+  ],
+  "dWidth": 20,
+  "weight": 31,
+  "wll": 7.6,
+  "mbs": 38,
+  "dDepth": 3,
+  "elongation": {
+   "percent": 1.8,
+   "force": 6
+  },
+  "dateIntroduced": 1592341200000,
+  "productionStatus": "AC",
+  "manufacturerId": 3,
+  "url": "https://www.balancecommunity.com/products/spider-silk-mk3",
+  "pricing": {
+   "currency": "USD",
+   "lst": [
+    {
+     "q": 60,
+     "qt": "EX",
+     "price": 4.17
+    },
+    {
+     "q": 120,
+     "qt": "EX",
+     "price": 4.16
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "WEB",
+  "slug": "spider_silkmk3",
+  "creatorId": "10154430595665625",
+  "creationDate": 1597264489012,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

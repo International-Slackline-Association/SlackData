@@ -1,0 +1,105 @@
+{
+ "gearDetail": {
+  "_id": 61,
+  "slug": "Core1",
+  "itemTypeId": "WEB",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "reviews": [
+   {
+    "creatorId": "1559496084101329",
+    "text": "Only available as used, but the quality and longevity is so good, that it&#x27;s worth getting anyways. One of the best longline webbings so far. Very low stretch, very low fuss. Meditative walking experience with decent weight and edges.",
+    "rating": {
+     "lst": {
+      "VFM": 10,
+      "QU": 10,
+      "VER": 6,
+      "EOU": 6,
+      "SFT": 8
+     },
+     "overall": 8
+    },
+    "pros": [
+     "Durable",
+     "Heavy"
+    ],
+    "cons": [],
+    "creationDate": 1501693896119,
+    "creatorName": "Philipp Gesing"
+   }
+  ],
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "1559496084101329",
+    "name": "Philipp Gesing"
+   },
+   {
+    "id": "1811540145542689",
+    "name": "Helmut Netzwerker"
+   },
+   {
+    "id": "10155267793869667",
+    "name": "Romain Schempf"
+   }
+  ],
+  "lastEditDate": 1536593134806,
+  "name": "Core 1",
+  "webbingType": "CS",
+  "material": [
+   "PL"
+  ],
+  "dWidth": 25,
+  "weight": 76,
+  "mbs": 40,
+  "dDepth": 3.9,
+  "elongation": {
+   "percent": 2.8,
+   "force": 10
+  },
+  "usage": [
+   "SL",
+   "HL",
+   "LL",
+   "RL",
+   "LTL"
+  ],
+  "productionStatus": "DC",
+  "manufacturerId": 2,
+  "ratingsAverages": {
+   "overall": {
+    "nativeCount": 1,
+    "nativeValue": 8,
+    "value": 8,
+    "count": 1
+   },
+   "lst": {
+    "VFM": {
+     "count": 1,
+     "value": 10
+    },
+    "QU": {
+     "count": 1,
+     "value": 10
+    },
+    "VER": {
+     "count": 1,
+     "value": 6
+    },
+    "EOU": {
+     "count": 1,
+     "value": 6
+    },
+    "SFT": {
+     "count": 1,
+     "value": 8
+    }
+   }
+  },
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

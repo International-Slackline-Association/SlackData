@@ -1,0 +1,85 @@
+{
+ "gearDetail": {
+  "_id": 53,
+  "slug": "BlueWing",
+  "itemTypeId": "WEB",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "1811540145542689",
+    "name": "Helmut Netzwerker"
+   }
+  ],
+  "lastEditDate": 1554935551269,
+  "name": "BlueWing",
+  "webbingType": "FL",
+  "material": [
+   "PL"
+  ],
+  "dWidth": 25,
+  "weight": 63,
+  "mbs": 30,
+  "elongation": {
+   "percent": 11,
+   "force": 10
+  },
+  "productionStatus": "DC",
+  "manufacturerId": 10,
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 1.49
+    }
+   ]
+  },
+  "imagesCount": 3
+ },
+ "similarGear": [
+  {
+   "_id": 124,
+   "slug": "Verve25mm",
+   "itemTypeId": "WEB",
+   "name": "Verve 25mm",
+   "manufacturerId": 2,
+   "manufacturer": {
+    "name": "Landcruising",
+    "countryTxt": "Germany",
+    "countryCode": "DE"
+   }
+  },
+  {
+   "_id": 116,
+   "slug": "Alfa",
+   "itemTypeId": "WEB",
+   "name": "Alfa",
+   "manufacturerId": 50,
+   "manufacturer": {
+    "name": "Slacklining Canada",
+    "url": "http://www.slacklining.ca",
+    "countryTxt": "Canada",
+    "countryCode": "CA"
+   }
+  },
+  {
+   "_id": 3068,
+   "itemTypeId": "WEB",
+   "slug": "coelum",
+   "name": "Coelum",
+   "manufacturerId": 45,
+   "manufacturer": {
+    "name": "Petram Slacklines",
+    "url": "https://petramslacklines.site123.me/",
+    "countryTxt": "Poland",
+    "countryCode": "PL"
+   }
+  }
+ ]
+}

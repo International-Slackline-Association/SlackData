@@ -1,0 +1,108 @@
+{
+ "gearDetail": {
+  "_id": 3116,
+  "name": "Levitation",
+  "webbingType": "FL",
+  "material": [
+   "PL"
+  ],
+  "dWidth": 25,
+  "weight": 48,
+  "wll": 5,
+  "mbs": 22,
+  "dDepth": 2,
+  "elongation": {
+   "percent": 7,
+   "force": 10
+  },
+  "productionStatus": "AC",
+  "manufacturerId": 27,
+  "url": "https://slackhouseshop.pl/en/produkt/levitation/",
+  "pricing": {
+   "currency": "PLN",
+   "lst": [
+    {
+     "qt": "AA",
+     "price": 2.93,
+     "q": 1
+    },
+    {
+     "qt": "EX",
+     "q": 50,
+     "price": 2.89
+    },
+    {
+     "qt": "EX",
+     "q": 75,
+     "price": 2.87
+    },
+    {
+     "qt": "EX",
+     "q": 100,
+     "price": 2.85
+    },
+    {
+     "qt": "EX",
+     "q": 125,
+     "price": 2.83
+    },
+    {
+     "qt": "EX",
+     "q": 150,
+     "price": 2.8
+    },
+    {
+     "qt": "EX",
+     "q": 200,
+     "price": 2.76
+    },
+    {
+     "q": 250,
+     "qt": "EX",
+     "price": 2.72
+    },
+    {
+     "q": 300,
+     "qt": "EX",
+     "price": 2.68
+    },
+    {
+     "q": 400,
+     "qt": "EX",
+     "price": 2.6
+    },
+    {
+     "q": 500,
+     "qt": "EX",
+     "price": 2.52
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "WEB",
+  "slug": "levitation",
+  "creatorId": "10154430595665625",
+  "creationDate": 1587289599798,
+  "imagesCount": 1
+ },
+ "similarGear": [
+  {
+   "_id": 111,
+   "slug": "Flat",
+   "itemTypeId": "WEB",
+   "name": "Flat",
+   "manufacturerId": 43,
+   "manufacturer": {
+    "name": "Slackline Shop NZ",
+    "url": "http://www.slacklineshop.co.nz",
+    "countryTxt": "New Zealand",
+    "countryCode": "NZ"
+   }
+  }
+ ]
+}

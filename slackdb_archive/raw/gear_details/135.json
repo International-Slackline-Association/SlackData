@@ -1,0 +1,63 @@
+{
+ "gearDetail": {
+  "_id": 135,
+  "slug": "MOTM",
+  "itemTypeId": "WEB",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "1541853415834804",
+    "name": "Stephan Chalkowski"
+   }
+  ],
+  "lastEditDate": 1501670564849,
+  "name": "MOTM",
+  "webbingType": "TB",
+  "material": [
+   "NY"
+  ],
+  "dWidth": 25,
+  "weight": 56,
+  "mbs": 27,
+  "elongation": {
+   "percent": 14,
+   "force": 9
+  },
+  "usage": [
+   "SL",
+   "HL",
+   "LL",
+   "LTL"
+  ],
+  "productionStatus": "AC",
+  "manufacturerId": 26,
+  "url": "https://raed-slacklines.com/motm-tubular-nylon-slackline-webbing",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 1.49
+    },
+    {
+     "q": 50,
+     "qt": "AA",
+     "price": 1.47
+    },
+    {
+     "q": 100,
+     "qt": "AA",
+     "price": 1.45
+    }
+   ]
+  },
+  "imagesCount": 2
+ },
+ "similarGear": []
+}

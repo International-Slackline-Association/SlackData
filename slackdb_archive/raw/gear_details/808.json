@@ -1,0 +1,29 @@
+{
+ "gearDetail": {
+  "_id": 808,
+  "slug": "SteelRing200kN",
+  "itemTypeId": "LRNG",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "name": "Steel Ring 200kN",
+  "material": [
+   "SS"
+  ],
+  "weight": 312,
+  "mbs": 200,
+  "materialDiameter": 14,
+  "innerDiameter": 76,
+  "outerDiameter": 104,
+  "productionStatus": "DC",
+  "manufacturerId": 29,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1587241832945,
+  "imagesCount": 0
+ },
+ "similarGear": []
+}

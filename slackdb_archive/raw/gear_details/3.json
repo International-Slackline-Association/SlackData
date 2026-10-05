@@ -1,0 +1,31 @@
+{
+ "gearDetail": {
+  "_id": 3,
+  "name": "Tape",
+  "slug": "Tape",
+  "manufacturerId": 28,
+  "material": [
+   "PL"
+  ],
+  "itemTypeId": "WEB",
+  "weight": 59,
+  "mbs": 30,
+  "dWidth": 25,
+  "productionStatus": "AC",
+  "url": "http://www.singingrock.com/slackline-webbing-yellowblack",
+  "webbingType": "FL",
+  "elongation": {
+   "percent": 8
+  },
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

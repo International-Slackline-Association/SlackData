@@ -1,0 +1,52 @@
+{
+ "gearDetail": {
+  "_id": 514,
+  "slug": "Lynx30",
+  "itemTypeId": "WLCK",
+  "fieldsRemarks": {
+   "mbs": "Larger than"
+  },
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "1811540145542689",
+    "name": "Helmut Netzwerker"
+   }
+  ],
+  "lastEditDate": 1536593384724,
+  "name": "Lynx 3.0",
+  "material": [
+   "HSS"
+  ],
+  "weight": 310,
+  "wll": 12,
+  "mbs": 70,
+  "anchorConnectionType": [
+   "MH"
+  ],
+  "webbingConnectionType": [
+   "QP"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 24,
+   "max": 26
+  },
+  "diverterDiameter": 28,
+  "usage": [
+   "SL",
+   "HL",
+   "LL",
+   "RL",
+   "LTL"
+  ],
+  "productionStatus": "DC",
+  "manufacturerId": 2,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

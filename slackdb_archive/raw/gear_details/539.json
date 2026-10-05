@@ -1,0 +1,50 @@
+{
+ "gearDetail": {
+  "_id": 539,
+  "slug": "SlackiblocJump12",
+  "itemTypeId": "WLCK",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1542154042423,
+  "name": "Slackibloc Jump 1.2",
+  "material": [
+   "HSS"
+  ],
+  "weight": 580,
+  "mbs": 95,
+  "anchorConnectionType": [
+   "DMH"
+  ],
+  "webbingConnectionType": [
+   "RSP"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 24,
+   "max": 51
+  },
+  "diverterDiameter": 30,
+  "usage": [
+   "TL"
+  ],
+  "productionStatus": "DC",
+  "manufacturerId": 7,
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 60
+    }
+   ]
+  },
+  "imagesCount": 0
+ },
+ "similarGear": []
+}

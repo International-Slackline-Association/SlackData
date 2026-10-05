@@ -1,0 +1,48 @@
+{
+ "gearDetail": {
+  "_id": 3055,
+  "name": "Y2K",
+  "webbingType": "FL",
+  "material": [
+   "PL",
+   "DY"
+  ],
+  "dWidth": 25.4,
+  "weight": 33.1,
+  "mbs": 34,
+  "elongation": {
+   "percent": 1,
+   "force": 10
+  },
+  "usage": [
+   "HL"
+  ],
+  "dateIntroduced": 1534744800000,
+  "productionStatus": "AC",
+  "manufacturerId": 6,
+  "url": "https://www.slacktivity.com/y2k",
+  "pricing": {
+   "currency": "EUR",
+   "hasAddOpts": true,
+   "lst": [
+    {
+     "q": 50,
+     "qt": "EX",
+     "price": 4.6
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "WEB",
+  "slug": "y2k",
+  "creatorId": "10154430595665625",
+  "creationDate": 1537997835149,
+  "imagesCount": 2
+ },
+ "similarGear": []
+}

@@ -1,0 +1,72 @@
+{
+ "gearDetail": {
+  "_id": 3062,
+  "name": "Rainbow",
+  "webbingType": "CS",
+  "material": [
+   "PL"
+  ],
+  "dWidth": 25.4,
+  "weight": 62,
+  "mbs": 36,
+  "elongation": {
+   "percent": 7,
+   "force": 10
+  },
+  "dateIntroduced": 1539118800000,
+  "productionStatus": "AC",
+  "manufacturerId": 26,
+  "url": "https://raed-slacklines.com/rainbow-polyester-highline-webbing",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 1.65
+    },
+    {
+     "q": 150,
+     "qt": "AA",
+     "price": 1.62
+    },
+    {
+     "q": 250,
+     "qt": "AA",
+     "price": 1.59
+    },
+    {
+     "q": 400,
+     "qt": "AA",
+     "price": 1.56
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "WEB",
+  "slug": "rainbow",
+  "creatorId": "10154430595665625",
+  "creationDate": 1539277281772,
+  "imagesCount": 3
+ },
+ "similarGear": [
+  {
+   "_id": 137,
+   "slug": "MarathonPlay",
+   "itemTypeId": "WEB",
+   "name": "Marathon Play",
+   "manufacturerId": 6,
+   "manufacturer": {
+    "name": "Slacktivity",
+    "url": "http://www.slacktivity.com",
+    "countryTxt": "Switzerland",
+    "countryCode": "CH"
+   }
+  }
+ ]
+}

@@ -1,0 +1,46 @@
+{
+ "gearDetail": {
+  "_id": 112,
+  "slug": "SkyPilotBlackWhite",
+  "itemTypeId": "WEB",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1542963939493,
+  "name": "Sky Pilot (Black/White)",
+  "webbingType": "FL",
+  "material": [
+   "NY"
+  ],
+  "dWidth": 25.4,
+  "weight": 53,
+  "wll": 6.4,
+  "mbs": 32,
+  "elongation": {
+   "percent": 12,
+   "force": 10,
+   "isEstimated": true
+  },
+  "productionStatus": "AC",
+  "manufacturerId": 41,
+  "url": "https://www.slacklifebc.com/product/skypilot-nylon",
+  "pricing": {
+   "currency": "CAD",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 4.2
+    }
+   ],
+   "hasAddOpts": true
+  },
+  "imagesCount": 2
+ },
+ "similarGear": []
+}

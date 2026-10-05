@@ -1,0 +1,61 @@
+{
+ "gearDetail": {
+  "_id": 505,
+  "slug": "CanonFX",
+  "itemTypeId": "WLCK",
+  "shopUrl": "http://www.slackshop.cz/en/lockers/176-eqb-canon-fx.html",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "10220734815258954",
+    "name": "Jakub Dostál"
+   }
+  ],
+  "lastEditDate": 1617107732858,
+  "name": "Canon FX",
+  "material": [
+   "SS"
+  ],
+  "weight": 455,
+  "wll": 18,
+  "mbs": 90,
+  "anchorConnectionType": [
+   "MH"
+  ],
+  "webbingConnectionType": [
+   "CP"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 24,
+   "max": 26
+  },
+  "diverterDiameter": 36,
+  "efficiency": 95,
+  "usage": [
+   "SL",
+   "HL",
+   "LL",
+   "LTL"
+  ],
+  "productionStatus": "DC",
+  "manufacturerId": 9,
+  "url": "https://www.slackshop.cz/en/weblocks/24-eqb-canon-fx.html",
+  "pricing": {
+   "currency": "CZK",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 1599
+    }
+   ]
+  },
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

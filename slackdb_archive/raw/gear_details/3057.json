@@ -1,0 +1,63 @@
+{
+ "gearDetail": {
+  "_id": 3057,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "WLCK",
+  "slug": "rowan_10captivepin",
+  "creatorId": "10154430595665625",
+  "creationDate": 1538002519630,
+  "lastEditDate": 1587241007267,
+  "name": "Rowan 1.0 Captive pin",
+  "material": [
+   "AL"
+  ],
+  "weight": 190,
+  "wll": 12,
+  "mbs": 50,
+  "anchorConnectionType": [
+   "MH"
+  ],
+  "webbingConnectionType": [
+   "CP"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 24,
+   "max": 26
+  },
+  "diverterDiameter": 30,
+  "dateIntroduced": 1533189600000,
+  "productionStatus": "DC",
+  "manufacturerId": 62,
+  "pricing": {
+   "currency": "USD",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 30
+    }
+   ]
+  },
+  "imagesCount": 2
+ },
+ "similarGear": [
+  {
+   "_id": 3041,
+   "itemTypeId": "WLCK",
+   "slug": "linelock_mini",
+   "name": "LineLock mini",
+   "manufacturerId": 60,
+   "manufacturer": {
+    "name": "Krok",
+    "url": "https://krok.biz",
+    "countryTxt": "Russian Federation",
+    "countryCode": "RU"
+   }
+  }
+ ]
+}

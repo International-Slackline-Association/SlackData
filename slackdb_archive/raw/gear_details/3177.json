@@ -1,0 +1,34 @@
+{
+ "gearDetail": {
+  "_id": 3177,
+  "name": "Tree Eco",
+  "dWidth": 15,
+  "dLength": 200,
+  "weight": 300,
+  "productionStatus": "AC",
+  "manufacturerId": 12,
+  "url": "https://laboutique.slack.fr/en/slackline-gear/80-treeco-tree-protection.html",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 9.92
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "TRP",
+  "slug": "tree_eco",
+  "creatorId": "2824084041240796",
+  "creationDate": 1621874513966,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

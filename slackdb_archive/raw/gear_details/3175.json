@@ -1,0 +1,34 @@
+{
+ "gearDetail": {
+  "_id": 3175,
+  "name": "Tree Pad",
+  "dWidth": 12,
+  "dLength": 200,
+  "weight": 240,
+  "productionStatus": "AC",
+  "manufacturerId": 9,
+  "url": "https://www.eqb.cz/accesories.html",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 9.59
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "TRP",
+  "slug": "tree_pad",
+  "creatorId": "2824084041240796",
+  "creationDate": 1621874165015,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

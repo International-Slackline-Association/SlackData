@@ -1,0 +1,95 @@
+{
+ "gearDetail": {
+  "_id": 556,
+  "slug": "Campoweblock",
+  "itemTypeId": "WLCK",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1587243942631,
+  "name": "Campo weblock",
+  "material": [
+   "SS"
+  ],
+  "weight": 225,
+  "wll": 10,
+  "mbs": 50,
+  "anchorConnectionType": [
+   "MH"
+  ],
+  "webbingConnectionType": [
+   "CP"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 24,
+   "max": 26
+  },
+  "diverterDiameter": 25,
+  "usage": [
+   "SL",
+   "HL",
+   "LL",
+   "RL",
+   "LTL"
+  ],
+  "productionStatus": "DC",
+  "manufacturerId": 45,
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 33.9
+    }
+   ]
+  },
+  "imagesCount": 2
+ },
+ "similarGear": [
+  {
+   "_id": 544,
+   "slug": "BANANA",
+   "itemTypeId": "WLCK",
+   "name": "BANANA! 2.0",
+   "manufacturerId": 27,
+   "manufacturer": {
+    "name": "Slack house",
+    "url": "http://slackhouseshop.pl",
+    "countryTxt": "Poland",
+    "countryCode": "PL"
+   }
+  },
+  {
+   "_id": 3118,
+   "itemTypeId": "WLCK",
+   "slug": "banana_31",
+   "name": "BANANA! 3.1",
+   "manufacturerId": 27,
+   "manufacturer": {
+    "name": "Slack house",
+    "url": "http://slackhouseshop.pl",
+    "countryTxt": "Poland",
+    "countryCode": "PL"
+   }
+  },
+  {
+   "_id": 502,
+   "slug": "BanditFX",
+   "itemTypeId": "WLCK",
+   "name": "Bandit FX",
+   "manufacturerId": 9,
+   "manufacturer": {
+    "name": "Equilibrium Slacklines (EQB)",
+    "url": "https://www.slackshop.cz/en/",
+    "countryTxt": "Czech Republic",
+    "countryCode": "CZ"
+   }
+  }
+ ]
+}

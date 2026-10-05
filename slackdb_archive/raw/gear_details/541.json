@@ -1,0 +1,58 @@
+{
+ "gearDetail": {
+  "_id": 541,
+  "slug": "LineLockVAMKIII",
+  "itemTypeId": "WLCK",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1542150919924,
+  "name": "LineLock VA MKIII",
+  "material": [
+   "HSS"
+  ],
+  "weight": 330,
+  "wll": 15,
+  "mbs": 45,
+  "anchorConnectionType": [
+   "FB",
+   "SL",
+   "PLB"
+  ],
+  "webbingConnectionType": [
+   "CP"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 24,
+   "max": 26
+  },
+  "diverterDiameter": 22,
+  "usage": [
+   "SL",
+   "HL",
+   "LL",
+   "RL",
+   "LTL"
+  ],
+  "productionStatus": "DC",
+  "manufacturerId": 5,
+  "pricing": {
+   "currency": "EUR",
+   "hasAddOpts": true,
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 59.9
+    }
+   ]
+  },
+  "imagesCount": 0
+ },
+ "similarGear": []
+}

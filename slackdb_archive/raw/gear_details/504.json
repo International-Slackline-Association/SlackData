@@ -1,0 +1,59 @@
+{
+ "gearDetail": {
+  "_id": 504,
+  "slug": "CanonSL",
+  "itemTypeId": "WLCK",
+  "shopUrl": "http://www.slackshop.cz/en/lockers/37-slack-canon.html",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1542150220700,
+  "name": "Canon SL",
+  "material": [
+   "SS"
+  ],
+  "weight": 590,
+  "wll": 16,
+  "mbs": 50,
+  "anchorConnectionType": [
+   "FB",
+   "QP"
+  ],
+  "webbingConnectionType": [
+   "QP",
+   "SP"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 24,
+   "max": 26
+  },
+  "diverterDiameter": 36,
+  "efficiency": 85,
+  "usage": [
+   "SL",
+   "HL",
+   "LL",
+   "LTL"
+  ],
+  "productionStatus": "DC",
+  "manufacturerId": 9,
+  "pricing": {
+   "currency": "CZK",
+   "hasAddOpts": true,
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 1190
+    }
+   ]
+  },
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

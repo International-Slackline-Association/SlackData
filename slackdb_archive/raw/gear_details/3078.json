@@ -1,0 +1,64 @@
+{
+ "gearDetail": {
+  "_id": 3078,
+  "contributors": [
+   {
+    "id": "10211949994419911",
+    "name": "Paul Ionut Anton"
+   },
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "WEB",
+  "slug": "balanceur_raven",
+  "creatorId": "10211949994419911",
+  "creationDate": 1555044153130,
+  "lastEditDate": 1563142973943,
+  "name": "Raven",
+  "webbingType": "FL",
+  "material": [
+   "PL"
+  ],
+  "dWidth": 25,
+  "weight": 45,
+  "mbs": 16,
+  "dDepth": 2,
+  "elongation": {
+   "force": 10,
+   "percent": 9.73
+  },
+  "usage": [
+   "RL",
+   "LTL",
+   "SR"
+  ],
+  "productionStatus": "AC",
+  "manufacturerId": 63,
+  "url": "https://www.balanceur.ro/slackshop/benzi/pana-corbului/",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "price": 0.85,
+     "q": 30,
+     "qt": "EX"
+    },
+    {
+     "qt": "AA",
+     "q": 50,
+     "price": 0.8
+    },
+    {
+     "q": 100,
+     "price": 0.75,
+     "qt": "AA"
+    }
+   ],
+   "hasAddOpts": true
+  },
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

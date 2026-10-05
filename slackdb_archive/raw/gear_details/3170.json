@@ -1,0 +1,34 @@
+{
+ "gearDetail": {
+  "_id": 3170,
+  "name": "Protect Abre Pillow",
+  "dWidth": 15,
+  "dLength": 150,
+  "weight": 280,
+  "productionStatus": "AC",
+  "manufacturerId": 4,
+  "url": "https://slack-mountain.com/en/gear/83-protect-arbre-pillow.html",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "price": 11,
+     "qt": "AA",
+     "q": 1
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "TRP",
+  "slug": "protect_abrepillow",
+  "creatorId": "2824084041240796",
+  "creationDate": 1621864692831,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

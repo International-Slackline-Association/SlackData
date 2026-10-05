@@ -1,0 +1,40 @@
+{
+ "gearDetail": {
+  "_id": 818,
+  "slug": "ZEROBlack",
+  "itemTypeId": "LRNG",
+  "flags": [
+   "ILR"
+  ],
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "name": "ZERO Black",
+  "material": [
+   "AL"
+  ],
+  "weight": 77,
+  "innerDiameter": 40,
+  "productionStatus": "DC",
+  "manufacturerId": 53,
+  "url": "http://zergeoutdoor.com/product/zero-black-ultralight-ring/",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 79
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1498978788722,
+  "imagesCount": 0
+ },
+ "similarGear": []
+}

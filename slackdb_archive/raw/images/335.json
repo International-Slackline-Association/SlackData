@@ -1,0 +1,21 @@
+{
+ "_id": 335,
+ "description": "3D model of ROLLEX",
+ "gearId": 3082,
+ "imageScope": "ITM",
+ "imageSource": "OFF",
+ "imageSourceUrl": "https://www.facebook.com/eqb.cz/videos/402450987257511/",
+ "imageType": "RG",
+ "contributors": [
+  {
+   "id": "10154430595665625",
+   "name": "Nir Avneyon"
+  }
+ ],
+ "creationDate": 1563142775299,
+ "creatorId": "10154430595665625",
+ "filename": "335.jpg",
+ "width": 1280,
+ "height": 710,
+ "creatorName": "Nir Avneyon"
+}

@@ -1,0 +1,54 @@
+{
+ "gearDetail": {
+  "_id": 508,
+  "slug": "PaddleSL",
+  "itemTypeId": "WLCK",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1587243384086,
+  "name": "Paddle SL",
+  "material": [
+   "SS"
+  ],
+  "weight": 410,
+  "wll": 14,
+  "mbs": 50,
+  "anchorConnectionType": [
+   "FB"
+  ],
+  "webbingConnectionType": [
+   "QP",
+   "SP"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 49,
+   "max": 51
+  },
+  "diverterDiameter": 16,
+  "efficiency": 80,
+  "usage": [
+   "TL"
+  ],
+  "productionStatus": "DC",
+  "manufacturerId": 9,
+  "pricing": {
+   "currency": "CZK",
+   "hasAddOpts": true,
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 1090
+    }
+   ]
+  },
+  "imagesCount": 0
+ },
+ "similarGear": []
+}

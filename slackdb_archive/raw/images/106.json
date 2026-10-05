@@ -1,0 +1,25 @@
+{
+ "_id": 106,
+ "imageScope": "ITM",
+ "imageSource": "UOFF",
+ "gearCondition": "NEW",
+ "ImageEnvType": "STD",
+ "imageType": "RG",
+ "lineLength": 100,
+ "tags": [
+  "webbing"
+ ],
+ "gearId": 102,
+ "contributors": [
+  {
+   "id": "1729285390418520",
+   "name": "Grant Mercer"
+  }
+ ],
+ "creationDate": 1501690424360,
+ "creatorId": "1729285390418520",
+ "filename": "106.jpg",
+ "width": 1706,
+ "height": 1280,
+ "creatorName": "Grant Mercer"
+}

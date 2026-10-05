@@ -1,0 +1,21 @@
+{
+ "_id": 192,
+ "gearId": 2017,
+ "takenDate": 1505941200000,
+ "imageScope": "ITM",
+ "imageSource": "UOFF",
+ "gearCondition": "USD",
+ "imageType": "RG",
+ "contributors": [
+  {
+   "id": "10154430595665625",
+   "name": "Nir Avneyon"
+  }
+ ],
+ "creationDate": 1506007995443,
+ "creatorId": "10154430595665625",
+ "filename": "192.jpg",
+ "width": 1146,
+ "height": 1280,
+ "creatorName": "Nir Avneyon"
+}

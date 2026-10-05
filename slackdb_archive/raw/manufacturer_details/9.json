@@ -1,0 +1,69 @@
+{
+ "manufacturerDetail": {
+  "_id": 9,
+  "slug": "EQB",
+  "manufacturerStatus": "ACT",
+  "imageFilename": "eqb.jpg",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "lastEditDate": 1617107666237,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "10220734815258954",
+    "name": "Jakub Dostál"
+   }
+  ],
+  "name": "Equilibrium Slacklines (EQB)",
+  "location": {
+   "countryCode": "CZ",
+   "address": "Prosecska 117, Jablonec nad Nisou",
+   "lat": 50.7249375,
+   "lng": 15.1252275,
+   "isExact": true
+  },
+  "yearEstablished": 2008,
+  "isActive": true,
+  "isSlacklineOriented": true,
+  "url": "https://www.slackshop.cz/en/",
+  "fbPage": "https://www.facebook.com/eqb.cz",
+  "imagesCount": 0,
+  "gearStats": [
+   {
+    "itemTypeId": "SKT",
+    "count": 4
+   },
+   {
+    "itemTypeId": "WGP",
+    "count": 1
+   },
+   {
+    "itemTypeId": "TRP",
+    "count": 1
+   },
+   {
+    "itemTypeId": "LRNG",
+    "count": 2
+   },
+   {
+    "itemTypeId": "WLCK",
+    "count": 19
+   },
+   {
+    "itemTypeId": "BRK",
+    "count": 1
+   },
+   {
+    "itemTypeId": "WEB",
+    "count": 14
+   },
+   {
+    "itemTypeId": "SLD",
+    "count": 3
+   }
+  ]
+ }
+}

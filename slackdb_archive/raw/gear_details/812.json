@@ -1,0 +1,38 @@
+{
+ "gearDetail": {
+  "_id": 812,
+  "slug": "MediumSteelRing",
+  "itemTypeId": "LRNG",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "name": "Medium Steel Ring",
+  "material": [
+   "SS"
+  ],
+  "weight": 120,
+  "mbs": 22.2,
+  "innerDiameter": 59,
+  "productionStatus": "AC",
+  "manufacturerId": 3,
+  "url": "http://www.balancecommunity.com/medium-steel-ring",
+  "pricing": {
+   "currency": "USD",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 7.95
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1498977459581,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

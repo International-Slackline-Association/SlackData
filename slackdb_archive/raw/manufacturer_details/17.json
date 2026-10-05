@@ -1,0 +1,27 @@
+{
+ "manufacturerDetail": {
+  "_id": 17,
+  "slug": "Slacklife",
+  "manufacturerStatus": "ACT",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "name": "Slacklife",
+  "location": {
+   "countryCode": "BR",
+   "address": "Belo Horizonte",
+   "lat": -19.91935920715332,
+   "lng": -43.93666458129883,
+   "isExact": false
+  },
+  "isSlacklineOriented": true,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1587249269393,
+  "imagesCount": 0,
+  "gearStats": null
+ }
+}

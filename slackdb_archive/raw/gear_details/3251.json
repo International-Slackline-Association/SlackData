@@ -1,0 +1,53 @@
+{
+ "gearDetail": {
+  "_id": 3251,
+  "name": "Orange",
+  "material": [
+   "AL"
+  ],
+  "weight": 380,
+  "wll": 12,
+  "mbs": 50,
+  "anchorConnectionType": [
+   "SL"
+  ],
+  "webbingConnectionType": [
+   "RP"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 24,
+   "max": 26
+  },
+  "usage": [
+   "SL",
+   "HL",
+   "LL"
+  ],
+  "isaApproved": true,
+  "productionStatus": "AC",
+  "manufacturerId": 67,
+  "url": "https://www.radrigs.co.uk/product-page/orange",
+  "pricing": {
+   "currency": "GBP",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "EX",
+     "price": 100
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "10211802848940671",
+    "name": "Thomas Buckingham"
+   }
+  ],
+  "itemTypeId": "WLCK",
+  "slug": "orange_1",
+  "creatorId": "10211802848940671",
+  "creationDate": 1707990027873,
+  "imagesCount": 3
+ },
+ "similarGear": []
+}

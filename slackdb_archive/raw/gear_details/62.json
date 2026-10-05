@@ -1,0 +1,103 @@
+{
+ "gearDetail": {
+  "_id": 62,
+  "slug": "Core2HS",
+  "itemTypeId": "WEB",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "656760621184025",
+    "name": "Eli Szendro Brown"
+   },
+   {
+    "id": "1811540145542689",
+    "name": "Helmut Netzwerker"
+   },
+   {
+    "id": "10155267793869667",
+    "name": "Romain Schempf"
+   }
+  ],
+  "lastEditDate": 1536593144730,
+  "reviews": [
+   {
+    "creatorId": "656760621184025",
+    "rating": {
+     "lst": {
+      "VFM": 10,
+      "QU": 10,
+      "VER": 8,
+      "EOU": 4,
+      "SFT": 8
+     },
+     "overall": 8
+    },
+    "pros": [
+     "Nice to walk on"
+    ],
+    "cons": [],
+    "creationDate": 1500148970326,
+    "creatorName": "Eli Szendro Brown"
+   }
+  ],
+  "name": "Core 2 HS",
+  "webbingType": "CS",
+  "material": [
+   "PL"
+  ],
+  "dWidth": 25,
+  "weight": 71.5,
+  "mbs": 44,
+  "dDepth": 3.5,
+  "elongation": {
+   "percent": 6,
+   "force": 10
+  },
+  "usage": [
+   "SL",
+   "HL",
+   "LL",
+   "RL",
+   "LTL"
+  ],
+  "productionStatus": "DC",
+  "manufacturerId": 2,
+  "ratingsAverages": {
+   "overall": {
+    "nativeCount": 1,
+    "nativeValue": 8,
+    "value": 8,
+    "count": 1
+   },
+   "lst": {
+    "VFM": {
+     "count": 1,
+     "value": 10
+    },
+    "QU": {
+     "count": 1,
+     "value": 10
+    },
+    "VER": {
+     "count": 1,
+     "value": 8
+    },
+    "EOU": {
+     "count": 1,
+     "value": 4
+    },
+    "SFT": {
+     "count": 1,
+     "value": 8
+    }
+   }
+  },
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

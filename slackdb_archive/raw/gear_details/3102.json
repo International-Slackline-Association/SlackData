@@ -1,0 +1,35 @@
+{
+ "gearDetail": {
+  "_id": 3102,
+  "name": "HighlineGrip G2",
+  "material": [
+   "AL"
+  ],
+  "weight": 378,
+  "wll": 7,
+  "cst": 20,
+  "mbs": 25,
+  "connectionType": [
+   "MH"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 24,
+   "max": 26
+  },
+  "productionStatus": "DC",
+  "manufacturerId": 5,
+  "url": "https://www.linegrip.com/highlinegrip/",
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "WGP",
+  "slug": "highlinegrip_g2",
+  "creatorId": "10154430595665625",
+  "creationDate": 1586939175291,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

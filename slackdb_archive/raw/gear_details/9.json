@@ -1,0 +1,48 @@
+{
+ "gearDetail": {
+  "_id": 9,
+  "slug": "Ninja",
+  "itemTypeId": "WEB",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "1190879851271184",
+    "name": "Matthieu Chivas"
+   }
+  ],
+  "lastEditDate": 1598888949703,
+  "name": "Ninja",
+  "webbingType": "FL",
+  "material": [
+   "NY"
+  ],
+  "dWidth": 35,
+  "weight": 86,
+  "wll": 15,
+  "mbs": 45,
+  "elongation": {
+   "percent": 11,
+   "force": 10
+  },
+  "productionStatus": "AC",
+  "manufacturerId": 9,
+  "url": "https://www.eqb.cz/ninja-en.html",
+  "pricing": {
+   "currency": "CZK",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 45
+    }
+   ]
+  },
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

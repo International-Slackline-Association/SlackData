@@ -1,0 +1,35 @@
+{
+ "gearDetail": {
+  "_id": 3210,
+  "name": "Traveler | leichte Reise-Slackline",
+  "weight": 1040,
+  "webbingLength": 15,
+  "webbingWidth": 20,
+  "tensioningType": "PRIM",
+  "productionStatus": "AC",
+  "manufacturerId": 6,
+  "url": "https://slacktivity.ch/shop/traveler-reise-slackline/",
+  "pricing": {
+   "currency": "CHF",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 129
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "traveler_leichtereise-slackline",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622028030280,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

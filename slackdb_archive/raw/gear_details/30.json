@@ -1,0 +1,71 @@
+{
+ "gearDetail": {
+  "_id": 30,
+  "slug": "Diablo2",
+  "itemTypeId": "WEB",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "10155267793869667",
+    "name": "Romain Schempf"
+   }
+  ],
+  "lastEditDate": 1502958854269,
+  "name": "Diablo2",
+  "webbingType": "CS",
+  "material": [
+   "PL"
+  ],
+  "dWidth": 25,
+  "weight": 96,
+  "wll": 15,
+  "mbs": 30,
+  "dDepth": 3.6,
+  "elongation": {
+   "percent": 3.5,
+   "force": 10
+  },
+  "usage": [
+   "SL",
+   "HL",
+   "LL",
+   "RL",
+   "LTL"
+  ],
+  "productionStatus": "AC",
+  "manufacturerId": 4,
+  "url": "http://slack-mountain.com/en/webbing-slackline/132-diablo2.html",
+  "pricing": {
+   "lst": [
+    {
+     "q": 10,
+     "qt": "EX",
+     "price": 1
+    },
+    {
+     "q": 15,
+     "qt": "EX",
+     "price": 1
+    },
+    {
+     "q": 20,
+     "qt": "EX",
+     "price": 1
+    },
+    {
+     "q": 50,
+     "qt": "AA",
+     "price": 1.49
+    }
+   ],
+   "currency": "EUR"
+  },
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

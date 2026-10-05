@@ -1,0 +1,50 @@
+{
+ "gearDetail": {
+  "_id": 3128,
+  "contributors": [
+   {
+    "id": "3529973117060416",
+    "name": "Michael Weiß"
+   },
+   {
+    "id": "10211802848940671",
+    "name": "Thomas Buckingham"
+   }
+  ],
+  "itemTypeId": "WEB",
+  "slug": "rebl",
+  "creatorId": "3529973117060416",
+  "creationDate": 1603869008906,
+  "name": "ReBL",
+  "webbingType": "FL",
+  "material": [
+   "PL"
+  ],
+  "dWidth": 25,
+  "weight": 56,
+  "mbs": 36,
+  "dDepth": 2.6,
+  "usage": [
+   "SL",
+   "HL",
+   "LL"
+  ],
+  "dateIntroduced": 1603490400000,
+  "productionStatus": "AC",
+  "manufacturerId": 30,
+  "url": "https://www.slackliner.de/en/Sigma-ReBL.html",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "price": 1.05,
+     "qt": "AA"
+    }
+   ]
+  },
+  "lastEditDate": 1617355347048,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

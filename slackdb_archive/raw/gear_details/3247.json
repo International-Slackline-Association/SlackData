@@ -1,0 +1,45 @@
+{
+ "gearDetail": {
+  "_id": 3247,
+  "name": "Heavy",
+  "webbingType": "FL",
+  "material": [
+   "NY"
+  ],
+  "dWidth": 25,
+  "weight": 100,
+  "wll": 9,
+  "mbs": 45,
+  "dDepth": 5,
+  "elongation": {
+   "percent": 13.12,
+   "force": 10
+  },
+  "dateIntroduced": 1623358800000,
+  "productionStatus": "AC",
+  "manufacturerId": 3,
+  "url": "https://www.balancecommunity.com/products/heavy",
+  "pricing": {
+   "currency": "USD",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 3.5
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "WEB",
+  "slug": "heavy",
+  "creatorId": "10154430595665625",
+  "creationDate": 1627149811435,
+  "imagesCount": 4
+ },
+ "similarGear": []
+}

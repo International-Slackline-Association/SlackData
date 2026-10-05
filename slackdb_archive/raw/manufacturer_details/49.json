@@ -1,0 +1,35 @@
+{
+ "manufacturerDetail": {
+  "_id": 49,
+  "slug": "EpiswissRigging",
+  "manufacturerStatus": "ACT",
+  "imageFilename": "episwiss.jpg",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "name": "Episwiss Rigging",
+  "location": {
+   "countryCode": "CH",
+   "address": "Zürich",
+   "lat": 47.37688446044922,
+   "lng": 8.541666030883789,
+   "isExact": false
+  },
+  "isActive": true,
+  "url": "http://www.episwiss.com",
+  "fbPage": "https://www.facebook.com/Episwiss",
+  "lastEditDate": 1498722626476,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "imagesCount": 0,
+  "gearStats": [
+   {
+    "itemTypeId": "BRK",
+    "count": 1
+   }
+  ]
+ }
+}

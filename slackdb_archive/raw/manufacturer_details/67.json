@@ -1,0 +1,36 @@
+{
+ "manufacturerDetail": {
+  "_id": 67,
+  "imageFilename": "radrigs.jpg",
+  "contributors": [
+   {
+    "id": "3758933350801249",
+    "name": "Joshua Leupolz"
+   }
+  ],
+  "creatorId": "3758933350801249",
+  "creationDate": 1600713161544,
+  "slug": "radrigs",
+  "name": "Radrigs",
+  "location": {
+   "countryCode": "GB",
+   "address": "s4 7yy, 53 sussex street",
+   "lat": 53.3874885,
+   "lng": -1.4558776,
+   "isExact": true
+  },
+  "yearEstablished": 2018,
+  "isActive": true,
+  "isSlacklineOriented": true,
+  "url": "https://www.radrigs.co.uk/",
+  "fbPage": "https://www.facebook.com/Radrigs-Slackline-Equipment-101532338172670/?modal=admin_todo_tour",
+  "lastEditDate": 1621848746741,
+  "imagesCount": 0,
+  "gearStats": [
+   {
+    "itemTypeId": "WLCK",
+    "count": 1
+   }
+  ]
+ }
+}

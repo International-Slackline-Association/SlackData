@@ -1,0 +1,37 @@
+{
+ "manufacturerDetail": {
+  "_id": 76,
+  "name": "Bera Adventure",
+  "location": {
+   "countryCode": "BR",
+   "address": "Rua Petrobrás, 278 São Paulo&#x2F;SP",
+   "lat": -23.557066,
+   "lng": -46.650021
+  },
+  "yearEstablished": 2013,
+  "isActive": true,
+  "isSlacklineOriented": true,
+  "url": "https://beraadventure.com.br/",
+  "fbPage": "https://m.facebook.com/BeraAdventure/",
+  "contributors": [
+   {
+    "id": "4078196375580695",
+    "name": "Francisco Vanzuita"
+   }
+  ],
+  "creatorId": "4078196375580695",
+  "creationDate": 1620301853445,
+  "slug": "bera_adventure",
+  "imagesCount": 0,
+  "gearStats": [
+   {
+    "itemTypeId": "TRP",
+    "count": 1
+   },
+   {
+    "itemTypeId": "SKT",
+    "count": 2
+   }
+  ]
+ }
+}

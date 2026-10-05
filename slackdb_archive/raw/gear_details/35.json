@@ -1,0 +1,53 @@
+{
+ "gearDetail": {
+  "_id": 35,
+  "slug": "Plum",
+  "itemTypeId": "WEB",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "10155267793869667",
+    "name": "Romain Schempf"
+   }
+  ],
+  "lastEditDate": 1504424738983,
+  "name": "Plum",
+  "webbingType": "FL",
+  "material": [
+   "PL"
+  ],
+  "dWidth": 25,
+  "weight": 25,
+  "wll": 4,
+  "mbs": 10,
+  "dDepth": 1,
+  "elongation": {
+   "percent": 7.5,
+   "force": 5
+  },
+  "usage": [
+   "SL",
+   "RL"
+  ],
+  "productionStatus": "AC",
+  "manufacturerId": 4,
+  "url": "http://slack-mountain.com/en/webbing-slackline/7-plum.html",
+  "pricing": {
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 1.67
+    }
+   ],
+   "currency": "EUR"
+  },
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

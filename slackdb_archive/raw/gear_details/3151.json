@@ -1,0 +1,44 @@
+{
+ "gearDetail": {
+  "_id": 3151,
+  "name": "Rodeo",
+  "webbingType": "FL",
+  "material": [
+   "NY"
+  ],
+  "dWidth": 25,
+  "wll": 5,
+  "mbs": 27,
+  "dDepth": 3.5,
+  "elongation": {
+   "percent": 23.1,
+   "force": 10
+  },
+  "productionStatus": "AC",
+  "manufacturerId": 24,
+  "url": "https://spider-slacklines.com/shop/en/products/344-3723-rodeo-line.html",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "price": 1.62,
+     "q": 1,
+     "qt": "AA"
+    }
+   ],
+   "hasAddOpts": true
+  },
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "WEB",
+  "slug": "rodeo",
+  "creatorId": "10154430595665625",
+  "creationDate": 1617143956646,
+  "imagesCount": 2
+ },
+ "similarGear": []
+}

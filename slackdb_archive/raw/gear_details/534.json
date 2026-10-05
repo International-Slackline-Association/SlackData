@@ -1,0 +1,57 @@
+{
+ "gearDetail": {
+  "_id": 534,
+  "slug": "RAGElock",
+  "itemTypeId": "WLCK",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "1811540145542689",
+    "name": "Helmut Netzwerker"
+   }
+  ],
+  "lastEditDate": 1712945709519,
+  "name": "RAGElock",
+  "material": [
+   "HSS"
+  ],
+  "weight": 598,
+  "wll": 12,
+  "mbs": 57,
+  "anchorConnectionType": [
+   "MH"
+  ],
+  "webbingConnectionType": [
+   "QP"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 31,
+   "max": 33
+  },
+  "diverterDiameter": 28.5,
+  "efficiency": 95,
+  "usage": [
+   "TL"
+  ],
+  "productionStatus": "DC",
+  "manufacturerId": 3,
+  "url": "http://www.balancecommunity.com/ragelock",
+  "pricing": {
+   "currency": "USD",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 119.95
+    }
+   ]
+  },
+  "imagesCount": 0
+ },
+ "similarGear": []
+}

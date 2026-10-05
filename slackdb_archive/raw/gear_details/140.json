@@ -1,0 +1,214 @@
+{
+ "gearDetail": {
+  "_id": 140,
+  "slug": "Skye",
+  "itemTypeId": "WEB",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1514402861304,
+  "name": "Skye",
+  "webbingType": "FL",
+  "material": [
+   "PL"
+  ],
+  "dWidth": 25,
+  "weight": 62,
+  "wll": 12,
+  "mbs": 31,
+  "dDepth": 2.6,
+  "elongation": {
+   "percent": 4,
+   "force": 10
+  },
+  "dateIntroduced": 1492041600000,
+  "productionStatus": "AC",
+  "manufacturerId": 9,
+  "url": "https://www.slackshop.cz/en/webbing/78-eqb-skye.html",
+  "pricing": {
+   "currency": "CZK",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 45
+    }
+   ]
+  },
+  "imagesCount": 1
+ },
+ "similarGear": [
+  {
+   "_id": 3076,
+   "name": "Orange",
+   "manufacturerId": 62,
+   "itemTypeId": "WEB",
+   "slug": "orange",
+   "manufacturer": {
+    "name": "Souz Slackline",
+    "url": "https://souzslackline.com",
+    "countryTxt": "Russian Federation",
+    "countryCode": "RU"
+   }
+  },
+  {
+   "_id": 3122,
+   "name": "Skye2",
+   "manufacturerId": 9,
+   "itemTypeId": "WEB",
+   "slug": "skye2",
+   "manufacturer": {
+    "name": "Equilibrium Slacklines (EQB)",
+    "url": "https://www.slackshop.cz/en/",
+    "countryTxt": "Czech Republic",
+    "countryCode": "CZ"
+   }
+  },
+  {
+   "_id": 57,
+   "slug": "SkillshotLS",
+   "itemTypeId": "WEB",
+   "name": "Skillshot LS",
+   "manufacturerId": 13,
+   "manufacturer": {
+    "name": "Gambit",
+    "countryTxt": "Germany",
+    "countryCode": "DE"
+   }
+  },
+  {
+   "_id": 3075,
+   "itemTypeId": "WEB",
+   "slug": "spice",
+   "name": "Spice",
+   "manufacturerId": 4,
+   "manufacturer": {
+    "name": "Slack Mountain",
+    "url": "http://slack-mountain.com",
+    "countryTxt": "France",
+    "countryCode": "FR"
+   }
+  },
+  {
+   "_id": 78,
+   "slug": "FLYLine",
+   "itemTypeId": "WEB",
+   "name": "FLY Line",
+   "manufacturerId": 24,
+   "manufacturer": {
+    "name": "Spider slacklines",
+    "url": "http://www.spider-slacklines.com",
+    "countryTxt": "Italy",
+    "countryCode": "IT"
+   }
+  },
+  {
+   "_id": 28,
+   "slug": "Cobalt",
+   "itemTypeId": "WEB",
+   "name": "Cobalt",
+   "manufacturerId": 4,
+   "manufacturer": {
+    "name": "Slack Mountain",
+    "url": "http://slack-mountain.com",
+    "countryTxt": "France",
+    "countryCode": "FR"
+   }
+  },
+  {
+   "_id": 84,
+   "slug": "BlueMile",
+   "itemTypeId": "WEB",
+   "name": "Blue Mile",
+   "manufacturerId": 27,
+   "manufacturer": {
+    "name": "Slack house",
+    "url": "http://slackhouseshop.pl",
+    "countryTxt": "Poland",
+    "countryCode": "PL"
+   }
+  },
+  {
+   "_id": 131,
+   "slug": "SlackProNeonLight",
+   "itemTypeId": "WEB",
+   "name": "Neon Light",
+   "manufacturerId": 5,
+   "manufacturer": {
+    "name": "Slack Pro!",
+    "url": "http://www.slackpro.de",
+    "countryTxt": "Germany",
+    "countryCode": "DE"
+   }
+  },
+  {
+   "_id": 45,
+   "slug": "SuperFLMaverickV2",
+   "itemTypeId": "WEB",
+   "name": "SuperFL Maverick V2",
+   "manufacturerId": 12,
+   "manufacturer": {
+    "name": "Slack.fr",
+    "url": "http://slack.fr",
+    "countryTxt": "France",
+    "countryCode": "FR"
+   }
+  },
+  {
+   "_id": 15,
+   "slug": "Elia",
+   "itemTypeId": "WEB",
+   "name": "Elia",
+   "manufacturerId": 8,
+   "manufacturer": {
+    "name": "Line Spirit",
+    "countryTxt": "France",
+    "countryCode": "FR"
+   }
+  },
+  {
+   "_id": 40,
+   "slug": "DarkBlue",
+   "itemTypeId": "WEB",
+   "name": "Dark Blue",
+   "manufacturerId": 12,
+   "manufacturer": {
+    "name": "Slack.fr",
+    "url": "http://slack.fr",
+    "countryTxt": "France",
+    "countryCode": "FR"
+   }
+  },
+  {
+   "_id": 109,
+   "slug": "Chi",
+   "itemTypeId": "WEB",
+   "name": "Chi",
+   "manufacturerId": 46,
+   "manufacturer": {
+    "name": "Middle Way Slacklines",
+    "url": "http://www.middlewayslacklines.com",
+    "countryTxt": "Israel",
+    "countryCode": "IL"
+   }
+  },
+  {
+   "_id": 71,
+   "slug": "WhiteMagic",
+   "itemTypeId": "WEB",
+   "name": "White Magic",
+   "manufacturerId": 64,
+   "manufacturer": {
+    "name": "Aki Slacklines",
+    "url": "https://aki-slacklines.de",
+    "countryTxt": "Germany",
+    "countryCode": "DE"
+   }
+  }
+ ]
+}

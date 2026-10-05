@@ -1,0 +1,44 @@
+{
+ "manufacturerDetail": {
+  "_id": 53,
+  "slug": "ZERGEoutdoor",
+  "manufacturerStatus": "ACT",
+  "imageFilename": "zerge_outdoor.jpg",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "name": "ZERGE outdoor",
+  "location": {
+   "countryCode": "GB",
+   "address": "Manchester",
+   "lat": 53.48075866699219,
+   "lng": -2.242630958557129,
+   "isExact": false
+  },
+  "isActive": true,
+  "isSlacklineOriented": true,
+  "url": "http://zergeoutdoor.com",
+  "fbPage": "https://www.facebook.com/zergeoutdoor",
+  "lastEditDate": 1498724527875,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "imagesCount": 0,
+  "gearStats": [
+   {
+    "itemTypeId": "LRNG",
+    "count": 3
+   },
+   {
+    "itemTypeId": "WLCK",
+    "count": 1
+   },
+   {
+    "itemTypeId": "SLD",
+    "count": 2
+   }
+  ]
+ }
+}

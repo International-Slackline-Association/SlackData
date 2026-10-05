@@ -1,0 +1,32 @@
+{
+ "_id": 806,
+ "imageScope": "STP",
+ "imageSource": "OFF",
+ "imageSourceUrl": "https://www.slackliner.de/",
+ "ImageEnvType": "US",
+ "imageType": "RG",
+ "gearTags": [
+  {
+   "x": 85,
+   "y": 55,
+   "width": 336,
+   "height": 207,
+   "gearId": 520
+  }
+ ],
+ "gearId": [
+  520
+ ],
+ "contributors": [
+  {
+   "id": "10154430595665625",
+   "name": "Nir Avneyon"
+  }
+ ],
+ "creationDate": 1712935483938,
+ "creatorId": "10154430595665625",
+ "filename": "806.jpg",
+ "width": 564,
+ "height": 423,
+ "creatorName": "Nir Avneyon"
+}

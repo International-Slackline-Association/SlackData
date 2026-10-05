@@ -1,0 +1,48 @@
+{
+ "gearDetail": {
+  "_id": 3114,
+  "name": "Photon",
+  "webbingType": "FL",
+  "material": [
+   "PL"
+  ],
+  "dWidth": 25,
+  "weight": 50,
+  "wll": 5,
+  "mbs": 29,
+  "elongation": {
+   "percent": 4.1,
+   "force": 10
+  },
+  "productionStatus": "AC",
+  "manufacturerId": 4,
+  "url": "https://slack-mountain.com/en/webbing-slackline/233-photon.html",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 0.96
+    },
+    {
+     "q": 500,
+     "qt": "AA",
+     "price": 0.9
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "WEB",
+  "slug": "photon",
+  "creatorId": "10154430595665625",
+  "creationDate": 1587250880066,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

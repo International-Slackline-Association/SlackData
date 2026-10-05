@@ -1,0 +1,85 @@
+{
+ "gearDetail": {
+  "_id": 107,
+  "slug": "Type18CG4",
+  "itemTypeId": "WEB",
+  "maxLength": 426,
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "name": "Type 18 CG4",
+  "webbingType": "FL",
+  "material": [
+   "NY"
+  ],
+  "dWidth": 25.4,
+  "weight": 60,
+  "wll": 6,
+  "mbs": 31,
+  "dDepth": 3,
+  "elongation": {
+   "percent": 10,
+   "force": 6
+  },
+  "productionStatus": "AC",
+  "manufacturerId": 44,
+  "url": "http://www.balancingearthslacklines.com/slackline_webbing_flat_nylon_type_18_cg4_slackline_p/cg4.htm",
+  "pricing": {
+   "currency": "USD",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 2.3
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1499108118705,
+  "imagesCount": 1
+ },
+ "similarGear": [
+  {
+   "_id": 24,
+   "slug": "RedZebra",
+   "itemTypeId": "WEB",
+   "name": "Red Zebra",
+   "manufacturerId": 29,
+   "manufacturer": {
+    "name": "Dakas",
+    "countryTxt": "France",
+    "countryCode": "FR"
+   }
+  },
+  {
+   "_id": 3042,
+   "itemTypeId": "WEB",
+   "slug": "lift",
+   "name": "Lift",
+   "manufacturerId": 3,
+   "manufacturer": {
+    "name": "Balance Community: Slackline Outfitters",
+    "url": "http://www.balancecommunity.com",
+    "countryTxt": "United States",
+    "countryCode": "US"
+   }
+  },
+  {
+   "_id": 3110,
+   "name": "Abysses Bounce",
+   "manufacturerId": 7,
+   "itemTypeId": "WEB",
+   "slug": "abysses_bounce",
+   "manufacturer": {
+    "name": "Slack Inov",
+    "url": "http://slack-inov.com/gb",
+    "countryTxt": "France",
+    "countryCode": "FR"
+   }
+  }
+ ]
+}

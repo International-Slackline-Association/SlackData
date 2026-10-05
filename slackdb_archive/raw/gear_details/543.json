@@ -1,0 +1,50 @@
+{
+ "gearDetail": {
+  "_id": 543,
+  "slug": "Constatweblock",
+  "itemTypeId": "WLCK",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1587234224369,
+  "name": "Constat weblock",
+  "material": [
+   "PC"
+  ],
+  "weight": 60,
+  "wll": 2.5,
+  "mbs": 7.5,
+  "anchorConnectionType": [
+   "MH"
+  ],
+  "webbingConnectionType": [
+   "CP"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 24,
+   "max": 26
+  },
+  "usage": [
+   "RL"
+  ],
+  "productionStatus": "DC",
+  "manufacturerId": 45,
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 13.9
+    }
+   ]
+  },
+  "imagesCount": 0
+ },
+ "similarGear": []
+}

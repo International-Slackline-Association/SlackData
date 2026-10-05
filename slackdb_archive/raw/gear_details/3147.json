@@ -1,0 +1,46 @@
+{
+ "gearDetail": {
+  "_id": 3147,
+  "name": "Purple Gold",
+  "webbingType": "TB",
+  "material": [
+   "NY"
+  ],
+  "dWidth": 25,
+  "weight": 65.5,
+  "wll": 6,
+  "mbs": 30.5,
+  "dDepth": 3.4,
+  "elongation": {
+   "percent": 17,
+   "force": 10
+  },
+  "dateIntroduced": 1605132000000,
+  "productionStatus": "AC",
+  "manufacturerId": 64,
+  "url": "https://aki-slacklines.de/en/detail/index/sArticle/188/sCategory/6",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 2.3
+    }
+   ],
+   "hasAddOpts": true
+  },
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "WEB",
+  "slug": "purple_gold",
+  "creatorId": "10154430595665625",
+  "creationDate": 1617142420902,
+  "imagesCount": 4
+ },
+ "similarGear": []
+}

@@ -1,0 +1,31 @@
+{
+ "gearDetail": {
+  "_id": 1304,
+  "name": "RIG",
+  "slug": "RIG",
+  "manufacturerId": 31,
+  "material": [
+   "AL"
+  ],
+  "itemTypeId": "BRK",
+  "weight": 380,
+  "mbs": 14,
+  "productionStatus": "AC",
+  "url": "http://www.petzl.com/en/Professional/Descenders/RIG?l=INT",
+  "breakingMethod": "CAM",
+  "compatibleRopeDiameter": {
+   "min": 10.5,
+   "max": 11.5
+  },
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "imagesCount": 0
+ },
+ "similarGear": []
+}

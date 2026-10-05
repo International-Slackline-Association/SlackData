@@ -1,0 +1,43 @@
+{
+ "manufacturerDetail": {
+  "_id": 31,
+  "slug": "Petzl",
+  "manufacturerStatus": "ACT",
+  "imageFilename": "petzl.jpg",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "name": "Petzl",
+  "location": {
+   "countryCode": "FR",
+   "address": "Crolles",
+   "lat": 45.28490447998047,
+   "lng": 5.882983207702637,
+   "isExact": false
+  },
+  "isActive": true,
+  "url": "http://www.petzl.com/en?l=INT",
+  "fbPage": "https://www.facebook.com/Petzl",
+  "lastEditDate": 1498723724058,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "ratingsAverages": {
+   "overall": {
+    "externalValue": 9,
+    "externalCount": 308,
+    "value": 9,
+    "count": 308
+   }
+  },
+  "imagesCount": 0,
+  "gearStats": [
+   {
+    "itemTypeId": "BRK",
+    "count": 10
+   }
+  ]
+ }
+}

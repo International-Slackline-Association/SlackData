@@ -1,0 +1,38 @@
+{
+ "gearDetail": {
+  "_id": 23,
+  "slug": "SatElite",
+  "itemTypeId": "WEB",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1587241000878,
+  "name": "Sat'Elite",
+  "webbingType": "FL",
+  "material": [
+   "NY"
+  ],
+  "dWidth": 50,
+  "weight": 145,
+  "mbs": 75,
+  "productionStatus": "DC",
+  "manufacturerId": 29,
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 25,
+     "qt": "EX",
+     "price": 2.72
+    }
+   ]
+  },
+  "imagesCount": 0
+ },
+ "similarGear": []
+}

@@ -1,0 +1,34 @@
+{
+ "gearDetail": {
+  "_id": 3172,
+  "name": "Tree-Shirt S TreePro",
+  "dWidth": 16,
+  "dLength": 100,
+  "weight": 100,
+  "productionStatus": "AC",
+  "manufacturerId": 27,
+  "url": "https://slackhouseshop.pl/en/produkt/tree-shirt-s-treepro/",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 3.36
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "TRP",
+  "slug": "tree-shirt_streepro",
+  "creatorId": "2824084041240796",
+  "creationDate": 1621873842322,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

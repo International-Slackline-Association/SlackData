@@ -1,0 +1,59 @@
+{
+ "gearDetail": {
+  "_id": 1105,
+  "slug": "LineBuggy",
+  "itemTypeId": "SLD",
+  "psaCert": false,
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1542144502878,
+  "name": "LineBuggy",
+  "material": [
+   "SS"
+  ],
+  "weight": 140,
+  "wll": 3,
+  "mbs": 25,
+  "compatibleWebbingWidth": {
+   "min": 25,
+   "max": 26
+  },
+  "sliderType": "MP",
+  "innerWidth": 29,
+  "productionStatus": "AC",
+  "manufacturerId": 16,
+  "url": "http://www.slackgear.co.za/product/linebuggy/",
+  "pricing": {
+   "currency": "ZAR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 310
+    }
+   ]
+  },
+  "imagesCount": 1
+ },
+ "similarGear": [
+  {
+   "_id": 1108,
+   "slug": "SKIP",
+   "itemTypeId": "SLD",
+   "name": "SKIP",
+   "manufacturerId": 53,
+   "manufacturer": {
+    "name": "ZERGE outdoor",
+    "url": "http://zergeoutdoor.com",
+    "countryTxt": "United Kingdom",
+    "countryCode": "GB"
+   }
+  }
+ ]
+}

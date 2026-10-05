@@ -1,0 +1,55 @@
+{
+ "gearDetail": {
+  "_id": 807,
+  "slug": "ForgedAluminiumRing",
+  "itemTypeId": "LRNG",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1542142479529,
+  "name": "Arbo Ring L",
+  "material": [
+   "AL"
+  ],
+  "weight": 57,
+  "mbs": 25,
+  "materialDiameter": 13,
+  "innerDiameter": 46,
+  "outerDiameter": 72,
+  "productionStatus": "AC",
+  "manufacturerId": 36,
+  "url": "https://spider-slacklines.com/shop/en/rings/127-322-anello-forgiato-alluminio-ct-46-mm.html",
+  "pricing": {
+   "currency": "EUR",
+   "hasAddOpts": true,
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 13.95
+    }
+   ]
+  },
+  "imagesCount": 2
+ },
+ "similarGear": [
+  {
+   "_id": 800,
+   "slug": "KongAna",
+   "itemTypeId": "LRNG",
+   "name": "Ana",
+   "manufacturerId": 52,
+   "manufacturer": {
+    "name": "Kong",
+    "url": "http://www.kong.it",
+    "countryTxt": "Italy",
+    "countryCode": "IT"
+   }
+  }
+ ]
+}

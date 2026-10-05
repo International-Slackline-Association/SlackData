@@ -1,0 +1,36 @@
+{
+ "gearDetail": {
+  "_id": 3190,
+  "name": "Classic Line Red XL TreeWear",
+  "weight": 4000,
+  "webbingLength": 25,
+  "webbingWidth": 50,
+  "tensioningType": "RAT1",
+  "includesTreePro": true,
+  "productionStatus": "AC",
+  "manufacturerId": 1,
+  "url": "https://www.gibbon-slacklines.com/de/produkte/slackline-sets/classicline-red-xl-treewear-2019/",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 118
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "classic_lineredxltreewear",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622015902177,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

@@ -1,0 +1,84 @@
+{
+ "gearDetail": {
+  "_id": 46,
+  "slug": "SupertubeNorway",
+  "itemTypeId": "WEB",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1587238911241,
+  "name": "Supertube Norway",
+  "webbingType": "TB",
+  "material": [
+   "PL"
+  ],
+  "dWidth": 25,
+  "weight": 54,
+  "wll": 7,
+  "mbs": 21,
+  "dDepth": 2,
+  "elongation": {
+   "percent": 10,
+   "force": 10
+  },
+  "productionStatus": "DC",
+  "manufacturerId": 12,
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "price": 2.24,
+     "qt": "EX",
+     "q": 25
+    }
+   ]
+  },
+  "imagesCount": 0
+ },
+ "similarGear": [
+  {
+   "_id": 132,
+   "slug": "Reggae",
+   "itemTypeId": "WEB",
+   "name": "Reggae",
+   "manufacturerId": 12,
+   "manufacturer": {
+    "name": "Slack.fr",
+    "url": "http://slack.fr",
+    "countryTxt": "France",
+    "countryCode": "FR"
+   }
+  },
+  {
+   "_id": 36,
+   "slug": "SnakeTub",
+   "itemTypeId": "WEB",
+   "name": "Snake Tub",
+   "manufacturerId": 4,
+   "manufacturer": {
+    "name": "Slack Mountain",
+    "url": "http://slack-mountain.com",
+    "countryTxt": "France",
+    "countryCode": "FR"
+   }
+  },
+  {
+   "_id": 32,
+   "slug": "ArticFox",
+   "itemTypeId": "WEB",
+   "name": "Artic Fox",
+   "manufacturerId": 4,
+   "manufacturer": {
+    "name": "Slack Mountain",
+    "url": "http://slack-mountain.com",
+    "countryTxt": "France",
+    "countryCode": "FR"
+   }
+  }
+ ]
+}

@@ -1,0 +1,66 @@
+{
+ "gearDetail": {
+  "_id": 528,
+  "slug": "Gingko2",
+  "itemTypeId": "WLCK",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "10155267793869667",
+    "name": "Romain Schempf"
+   }
+  ],
+  "lastEditDate": 1712937413239,
+  "name": "Ginkgo",
+  "material": [
+   "SS",
+   "HSS"
+  ],
+  "weight": 850,
+  "wll": 30,
+  "mbs": 100,
+  "anchorConnectionType": [
+   "MH"
+  ],
+  "webbingConnectionType": [
+   "QP",
+   "SP"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 40,
+   "max": 51
+  },
+  "diverterDiameter": 30,
+  "efficiency": 95,
+  "usage": [
+   "HL",
+   "TL"
+  ],
+  "productionStatus": "AC",
+  "manufacturerId": 4,
+  "url": "https://slack-mountain.com/en/tricklines/166-paire-de-ginkgo-745-l-unite.html",
+  "pricing": {
+   "currency": "EUR",
+   "hasAddOpts": true,
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 100
+    },
+    {
+     "price": 92.5,
+     "qt": "EX",
+     "q": 2
+    }
+   ]
+  },
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

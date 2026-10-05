@@ -1,0 +1,59 @@
+{
+ "gearDetail": {
+  "_id": 3064,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "WLCK",
+  "slug": "liime_sr",
+  "creatorId": "10154430595665625",
+  "creationDate": 1542140928687,
+  "name": "LIime SR",
+  "material": [
+   "HSS",
+   "AL"
+  ],
+  "weight": 220,
+  "wll": 12,
+  "mbs": 48,
+  "anchorConnectionType": [
+   "SL"
+  ],
+  "webbingConnectionType": [
+   "SR",
+   "CP"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 24,
+   "max": 26
+  },
+  "productionStatus": "DC",
+  "manufacturerId": 24,
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "price": 42.95,
+     "qt": "AA"
+    },
+    {
+     "q": 2,
+     "price": 39.95,
+     "qt": "AA"
+    },
+    {
+     "q": 4,
+     "price": 36.95,
+     "qt": "AA"
+    }
+   ]
+  },
+  "lastEditDate": 1587234176050,
+  "imagesCount": 0
+ },
+ "similarGear": []
+}

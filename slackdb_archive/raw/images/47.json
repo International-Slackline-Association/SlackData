@@ -1,0 +1,60 @@
+{
+ "_id": 47,
+ "takenDate": 1499634000000,
+ "imageScope": "OTR",
+ "imageSource": "UOFF",
+ "ImageEnvType": "STD",
+ "imageType": "CLS",
+ "tags": [
+  "quickpin",
+  "comparison"
+ ],
+ "gearTags": [
+  {
+   "x": 1250,
+   "y": 0,
+   "width": 670,
+   "height": 280,
+   "gearId": 515
+  },
+  {
+   "x": 0,
+   "y": 0,
+   "width": 528,
+   "height": 346,
+   "gearId": 553
+  }
+ ],
+ "infoTags": [
+  {
+   "x": 710,
+   "y": 106,
+   "width": 454,
+   "height": 108,
+   "text": "I find the locking balls design to be much better than the locking plates design as with the locking balls design it&#x27;s much easier to release the pin from the weblock when derigging while the locking plates design usually gets stuck in the webbing especially when there is some tension left on the line"
+  },
+  {
+   "x": 341,
+   "y": 498,
+   "width": 1069,
+   "height": 546,
+   "text": "The aluminum handle of the Lynx 4 feels much more solid than the plastic handle on the Catlock"
+  }
+ ],
+ "gearId": [
+  515,
+  553
+ ],
+ "contributors": [
+  {
+   "id": "10154430595665625",
+   "name": "Nir Avneyon"
+  }
+ ],
+ "creationDate": 1499896266303,
+ "creatorId": "10154430595665625",
+ "filename": "47.jpg",
+ "width": 1920,
+ "height": 1280,
+ "creatorName": "Nir Avneyon"
+}

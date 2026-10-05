@@ -1,0 +1,81 @@
+{
+ "gearDetail": {
+  "_id": 3016,
+  "name": "Plasma",
+  "webbingType": "FL",
+  "material": [
+   "PL"
+  ],
+  "dWidth": 25,
+  "weight": 73,
+  "mbs": 40,
+  "elongation": {
+   "percent": 6.2,
+   "force": 10
+  },
+  "productionStatus": "AC",
+  "manufacturerId": 7,
+  "url": "http://slack-inov.com/gb/webbing/92-flamme3-webbing",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 1.2
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "WEB",
+  "slug": "plasma",
+  "creatorId": "10154430595665625",
+  "creationDate": 1501278338215,
+  "imagesCount": 2
+ },
+ "similarGear": [
+  {
+   "_id": 25,
+   "slug": "SlackSwan",
+   "itemTypeId": "WEB",
+   "name": "Slack Swan",
+   "manufacturerId": 29,
+   "manufacturer": {
+    "name": "Dakas",
+    "countryTxt": "France",
+    "countryCode": "FR"
+   }
+  },
+  {
+   "_id": 41,
+   "slug": "MILF",
+   "itemTypeId": "WEB",
+   "name": "MILF",
+   "manufacturerId": 12,
+   "manufacturer": {
+    "name": "Slack.fr",
+    "url": "http://slack.fr",
+    "countryTxt": "France",
+    "countryCode": "FR"
+   }
+  },
+  {
+   "_id": 120,
+   "slug": "FlammeIII",
+   "itemTypeId": "WEB",
+   "name": "Flamme III",
+   "manufacturerId": 7,
+   "manufacturer": {
+    "name": "Slack Inov",
+    "url": "http://slack-inov.com/gb",
+    "countryTxt": "France",
+    "countryCode": "FR"
+   }
+  }
+ ]
+}

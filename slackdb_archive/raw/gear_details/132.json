@@ -1,0 +1,182 @@
+{
+ "gearDetail": {
+  "_id": 132,
+  "slug": "Reggae",
+  "itemTypeId": "WEB",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "name": "Reggae",
+  "webbingType": "TB",
+  "material": [
+   "PL"
+  ],
+  "dWidth": 25,
+  "weight": 54,
+  "wll": 7,
+  "mbs": 21,
+  "dDepth": 2,
+  "elongation": {
+   "percent": 10,
+   "force": 10
+  },
+  "productionStatus": "AC",
+  "manufacturerId": 12,
+  "url": "https://laboutique.slack.fr/en/tubular-webbing/143-reggae-tubular.html",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 25,
+     "qt": "EX",
+     "price": 2.24
+    },
+    {
+     "q": 35,
+     "qt": "EX",
+     "price": 2.25
+    },
+    {
+     "q": 50,
+     "qt": "EX",
+     "price": 2.18
+    },
+    {
+     "q": 100,
+     "qt": "EX",
+     "price": 1.99
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "1729285390418520",
+    "name": "Grant Mercer"
+   },
+   {
+    "id": "157046135120641",
+    "name": "Benoit Crera"
+   }
+  ],
+  "lastEditDate": 1499083114822,
+  "reviews": [
+   {
+    "creatorId": "1729285390418520",
+    "rating": {
+     "lst": {
+      "VFM": 10,
+      "QU": 8,
+      "VER": 10,
+      "EOU": 6,
+      "SFT": 10
+     },
+     "overall": 9
+    },
+    "pros": [
+     "Amazingly soft",
+     "Fun to walk, bouncy",
+     "Great price"
+    ],
+    "cons": [
+     "No protective coating, won&#x27;t last as long",
+     "Difficult to rig in parks due to stretch"
+    ],
+    "creationDate": 1501690712684,
+    "creatorName": "Grant Mercer"
+   },
+   {
+    "creatorId": "157046135120641",
+    "text": "Surement une des meilleurs tub mais trop cher",
+    "rating": {
+     "lst": {
+      "EOU": 6,
+      "VFM": 4,
+      "QU": 8,
+      "VER": 6,
+      "SFT": 8
+     },
+     "overall": 6
+    },
+    "pros": [],
+    "cons": [],
+    "creationDate": 1523100558352,
+    "creatorName": "Benoit Crera"
+   }
+  ],
+  "ratingsAverages": {
+   "overall": {
+    "nativeCount": 2,
+    "nativeValue": 8,
+    "value": 8,
+    "count": 2
+   },
+   "lst": {
+    "VFM": {
+     "count": 2,
+     "value": 7
+    },
+    "QU": {
+     "count": 2,
+     "value": 8
+    },
+    "VER": {
+     "count": 2,
+     "value": 8
+    },
+    "EOU": {
+     "count": 2,
+     "value": 6
+    },
+    "SFT": {
+     "count": 2,
+     "value": 9
+    }
+   }
+  },
+  "imagesCount": 1
+ },
+ "similarGear": [
+  {
+   "_id": 46,
+   "slug": "SupertubeNorway",
+   "itemTypeId": "WEB",
+   "name": "Supertube Norway",
+   "manufacturerId": 12,
+   "manufacturer": {
+    "name": "Slack.fr",
+    "url": "http://slack.fr",
+    "countryTxt": "France",
+    "countryCode": "FR"
+   }
+  },
+  {
+   "_id": 36,
+   "slug": "SnakeTub",
+   "itemTypeId": "WEB",
+   "name": "Snake Tub",
+   "manufacturerId": 4,
+   "manufacturer": {
+    "name": "Slack Mountain",
+    "url": "http://slack-mountain.com",
+    "countryTxt": "France",
+    "countryCode": "FR"
+   }
+  },
+  {
+   "_id": 32,
+   "slug": "ArticFox",
+   "itemTypeId": "WEB",
+   "name": "Artic Fox",
+   "manufacturerId": 4,
+   "manufacturer": {
+    "name": "Slack Mountain",
+    "url": "http://slack-mountain.com",
+    "countryTxt": "France",
+    "countryCode": "FR"
+   }
+  }
+ ]
+}

@@ -1,0 +1,70 @@
+{
+ "gearDetail": {
+  "_id": 51,
+  "slug": "Passionred",
+  "itemTypeId": "WEB",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1587330775316,
+  "name": "Passion red",
+  "webbingType": "FL",
+  "material": [
+   "NY"
+  ],
+  "dWidth": 25,
+  "weight": 69,
+  "mbs": 33,
+  "dDepth": 3.6,
+  "elongation": {
+   "percent": 12.3,
+   "force": 10
+  },
+  "productionStatus": "DC",
+  "manufacturerId": 10,
+  "pricing": {
+   "currency": "CAD",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 3
+    }
+   ]
+  },
+  "imagesCount": 2
+ },
+ "similarGear": [
+  {
+   "_id": 129,
+   "slug": "McFly",
+   "itemTypeId": "WEB",
+   "name": "McFly",
+   "manufacturerId": 12,
+   "manufacturer": {
+    "name": "Slack.fr",
+    "url": "http://slack.fr",
+    "countryTxt": "France",
+    "countryCode": "FR"
+   }
+  },
+  {
+   "_id": 3092,
+   "name": "Donkey",
+   "manufacturerId": 7,
+   "itemTypeId": "WEB",
+   "slug": "donkey",
+   "manufacturer": {
+    "name": "Slack Inov",
+    "url": "http://slack-inov.com/gb",
+    "countryTxt": "France",
+    "countryCode": "FR"
+   }
+  }
+ ]
+}

@@ -1,0 +1,63 @@
+{
+ "gearDetail": {
+  "_id": 520,
+  "slug": "Equilocker",
+  "itemTypeId": "WLCK",
+  "fieldsRemarks": {
+   "mbs": "Larger than"
+  },
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "1811540145542689",
+    "name": "Helmut Netzwerker"
+   }
+  ],
+  "lastEditDate": 1515458102269,
+  "name": "Equilocker",
+  "material": [
+   "SS"
+  ],
+  "weight": 380,
+  "mbs": 34,
+  "anchorConnectionType": [
+   "MH"
+  ],
+  "webbingConnectionType": [
+   "QP"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 24,
+   "max": 26
+  },
+  "diverterDiameter": 34,
+  "efficiency": 90,
+  "usage": [
+   "SL",
+   "HL",
+   "LL",
+   "RL",
+   "LTL"
+  ],
+  "productionStatus": "AC",
+  "manufacturerId": 30,
+  "url": "http://www.slackliner.de/Verbindungselemente/Linelocker/Equilocker.html",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 55.5
+    }
+   ]
+  },
+  "imagesCount": 2
+ },
+ "similarGear": []
+}

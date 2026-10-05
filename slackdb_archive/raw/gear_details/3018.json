@@ -1,0 +1,61 @@
+{
+ "gearDetail": {
+  "_id": 3018,
+  "contributors": [
+   {
+    "id": "1393453644035268",
+    "name": "Kuba Bałdych"
+   },
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "WLCK",
+  "slug": "petram_slacklinesspatiumweblock",
+  "creatorId": "1393453644035268",
+  "creationDate": 1501703779652,
+  "lastEditDate": 1587281033010,
+  "name": "Spatium weblock",
+  "material": [
+   "SS"
+  ],
+  "weight": 325,
+  "wll": 14,
+  "mbs": 70,
+  "anchorConnectionType": [
+   "MH",
+   "XLMH"
+  ],
+  "webbingConnectionType": [
+   "CP"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 24,
+   "max": 26
+  },
+  "diverterDiameter": 36,
+  "efficiency": 95,
+  "usage": [
+   "SL",
+   "HL",
+   "LL",
+   "RL",
+   "LTL"
+  ],
+  "productionStatus": "DC",
+  "manufacturerId": 45,
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 39.9
+    }
+   ]
+  },
+  "imagesCount": 2
+ },
+ "similarGear": []
+}

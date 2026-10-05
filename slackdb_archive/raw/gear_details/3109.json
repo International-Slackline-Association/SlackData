@@ -1,0 +1,48 @@
+{
+ "gearDetail": {
+  "_id": 3109,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "WLCK",
+  "slug": "rowan_33",
+  "creatorId": "10154430595665625",
+  "creationDate": 1587233367733,
+  "lastEditDate": 1712946674285,
+  "name": "Rowan 3.3",
+  "material": [
+   "SS"
+  ],
+  "weight": 240,
+  "wll": 12,
+  "mbs": 50,
+  "anchorConnectionType": [
+   "QP"
+  ],
+  "webbingConnectionType": [
+   "QP"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 24,
+   "max": 26
+  },
+  "diverterDiameter": 25,
+  "productionStatus": "DC",
+  "manufacturerId": 62,
+  "pricing": {
+   "currency": "RUB",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 4632
+    }
+   ]
+  },
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

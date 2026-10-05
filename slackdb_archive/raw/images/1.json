@@ -1,0 +1,22 @@
+{
+ "_id": 1,
+ "imageScope": "ITM",
+ "gearId": 100,
+ "ImageEnvType": "US",
+ "imageType": "RG",
+ "imageSource": "UOFF",
+ "gearCondition": "USD",
+ "takenDate": 1472763600000,
+ "creationDate": 1499896266303,
+ "creatorId": "10154430595665625",
+ "filename": "1.jpg",
+ "width": 1920,
+ "height": 1280,
+ "creatorName": "Nir Avneyon",
+ "contributors": [
+  {
+   "id": "10154430595665625",
+   "name": "Nir Avneyon"
+  }
+ ]
+}

@@ -1,0 +1,82 @@
+{
+ "gearDetail": {
+  "_id": 3046,
+  "contributors": [
+   {
+    "id": "10155267793869667",
+    "name": "Romain Schempf"
+   },
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "WLCK",
+  "slug": "minion",
+  "creatorId": "10155267793869667",
+  "creationDate": 1513536978889,
+  "lastEditDate": 1712945925555,
+  "name": "Rhino Minion",
+  "material": [
+   "SS"
+  ],
+  "weight": 281,
+  "wll": 15,
+  "mbs": 60,
+  "anchorConnectionType": [
+   "MH",
+   "XLMH"
+  ],
+  "webbingConnectionType": [
+   "QP"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 20,
+   "max": 26
+  },
+  "diverterDiameter": 33.4,
+  "efficiency": 95,
+  "usage": [
+   "SL",
+   "HL",
+   "LL",
+   "RL",
+   "LTL"
+  ],
+  "dateIntroduced": 1512946800000,
+  "productionStatus": "DC",
+  "manufacturerId": 4,
+  "url": "https://slack-mountain.com/fr/bloqueur-longline-highline/190-rhino-minion.html",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "qt": "EX",
+     "price": 57.9,
+     "q": 1
+    },
+    {
+     "q": 2,
+     "qt": "AA",
+     "price": 55
+    }
+   ]
+  },
+  "imagesCount": 1
+ },
+ "similarGear": [
+  {
+   "_id": 542,
+   "slug": "Frog",
+   "itemTypeId": "WLCK",
+   "name": "Frog",
+   "manufacturerId": 4,
+   "manufacturer": {
+    "name": "Slack Mountain",
+    "url": "http://slack-mountain.com",
+    "countryTxt": "France",
+    "countryCode": "FR"
+   }
+  }
+ ]
+}

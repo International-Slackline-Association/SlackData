@@ -1,0 +1,48 @@
+{
+ "manufacturerDetail": {
+  "_id": 27,
+  "slug": "Slackhouse",
+  "manufacturerStatus": "ACT",
+  "imageFilename": "slack_house.jpg",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "name": "Slack house",
+  "location": {
+   "countryCode": "PL",
+   "address": "Czeremcha 11, 91-866 Lodz",
+   "lat": 51.8066291809082,
+   "lng": 19.46814727783203,
+   "isExact": true
+  },
+  "isActive": true,
+  "isSlacklineOriented": true,
+  "url": "http://slackhouseshop.pl",
+  "fbPage": "https://www.facebook.com/slackhouse.official",
+  "lastEditDate": 1498723868937,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "imagesCount": 0,
+  "gearStats": [
+   {
+    "itemTypeId": "TRP",
+    "count": 3
+   },
+   {
+    "itemTypeId": "WEB",
+    "count": 6
+   },
+   {
+    "itemTypeId": "WLCK",
+    "count": 3
+   },
+   {
+    "itemTypeId": "LRNG",
+    "count": 1
+   }
+  ]
+ }
+}

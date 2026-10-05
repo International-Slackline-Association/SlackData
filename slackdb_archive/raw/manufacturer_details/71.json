@@ -1,0 +1,25 @@
+{
+ "manufacturerDetail": {
+  "_id": 71,
+  "name": "Dnd_Line",
+  "location": {
+   "countryCode": "AR",
+   "lat": -34.9964963,
+   "lng": -64.9672817
+  },
+  "isActive": true,
+  "isSlacklineOriented": true,
+  "fbPage": "https://www.facebook.com/trickline.dnd",
+  "contributors": [
+   {
+    "id": "10211802848940671",
+    "name": "Thomas Buckingham"
+   }
+  ],
+  "creatorId": "10211802848940671",
+  "creationDate": 1600714439157,
+  "slug": "dnd_line",
+  "imagesCount": 0,
+  "gearStats": null
+ }
+}

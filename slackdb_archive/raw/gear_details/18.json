@@ -1,0 +1,29 @@
+{
+ "gearDetail": {
+  "_id": 18,
+  "slug": "Krakatoa",
+  "itemTypeId": "WEB",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "name": "Krakatoa",
+  "webbingType": "FL",
+  "material": [
+   "PL"
+  ],
+  "dWidth": 45,
+  "weight": 96,
+  "wll": 8.5,
+  "mbs": 45,
+  "productionStatus": "DC",
+  "manufacturerId": 8,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1503918385218,
+  "imagesCount": 0
+ },
+ "similarGear": []
+}

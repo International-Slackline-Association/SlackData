@@ -1,0 +1,46 @@
+{
+ "gearDetail": {
+  "_id": 503,
+  "slug": "CanonSH",
+  "itemTypeId": "WLCK",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "name": "Canon SH",
+  "material": [
+   "SS"
+  ],
+  "weight": 515,
+  "wll": 16,
+  "mbs": 50,
+  "anchorConnectionType": [
+   "MH"
+  ],
+  "webbingConnectionType": [
+   "QP",
+   "SP"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 24,
+   "max": 26
+  },
+  "diverterDiameter": 36,
+  "efficiency": 95,
+  "usage": [
+   "SL",
+   "HL",
+   "LL",
+   "LTL"
+  ],
+  "productionStatus": "DC",
+  "manufacturerId": 9,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1498940568888,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

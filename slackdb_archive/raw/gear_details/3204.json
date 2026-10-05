@@ -1,0 +1,34 @@
+{
+ "gearDetail": {
+  "_id": 3204,
+  "name": "Eline SlacklineE Kit",
+  "webbingLength": 15,
+  "webbingWidth": 25,
+  "includesTreePro": true,
+  "productionStatus": "AC",
+  "manufacturerId": 20,
+  "url": "https://yogaslackers.com/shop/slackline/eline-slackline-kit/",
+  "pricing": {
+   "currency": "USD",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 120
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "eline_slacklineekit",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622018679027,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

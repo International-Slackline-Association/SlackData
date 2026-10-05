@@ -1,0 +1,66 @@
+{
+ "gearDetail": {
+  "_id": 3044,
+  "name": "French Line",
+  "webbingType": "CS",
+  "material": [
+   "PL"
+  ],
+  "dWidth": 25,
+  "weight": 52,
+  "wll": 10,
+  "mbs": 30,
+  "dDepth": 2,
+  "elongation": {
+   "percent": 8,
+   "force": 10
+  },
+  "usage": [
+   "SL",
+   "HL",
+   "LL",
+   "RL",
+   "LTL"
+  ],
+  "dateIntroduced": 1512946800000,
+  "productionStatus": "AC",
+  "manufacturerId": 4,
+  "url": "https://slack-mountain.com/fr/sangles-slackline/189-french-line.html",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "qt": "AA",
+     "price": 1.34,
+     "q": 1
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "10155267793869667",
+    "name": "Romain Schempf"
+   }
+  ],
+  "itemTypeId": "WEB",
+  "slug": "french_line",
+  "creatorId": "10155267793869667",
+  "creationDate": 1513536057985,
+  "imagesCount": 1
+ },
+ "similarGear": [
+  {
+   "_id": 3090,
+   "itemTypeId": "WEB",
+   "slug": "polar",
+   "name": "Polar",
+   "manufacturerId": 64,
+   "manufacturer": {
+    "name": "Aki Slacklines",
+    "url": "https://aki-slacklines.de",
+    "countryTxt": "Germany",
+    "countryCode": "DE"
+   }
+  }
+ ]
+}

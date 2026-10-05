@@ -1,0 +1,34 @@
+{
+ "gearDetail": {
+  "_id": 3173,
+  "name": "Tree-Guard Set",
+  "dWidth": 15,
+  "dLength": 280,
+  "weight": 700,
+  "productionStatus": "AC",
+  "manufacturerId": 25,
+  "url": "https://www.berg-freunde.ch/slackline-tools-tree-guard-set-baumschutz/",
+  "pricing": {
+   "currency": "CHF",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 31.95
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "TRP",
+  "slug": "tree-guard_set",
+  "creatorId": "2824084041240796",
+  "creationDate": 1621873958410,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

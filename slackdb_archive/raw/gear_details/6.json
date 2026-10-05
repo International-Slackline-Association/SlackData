@@ -1,0 +1,114 @@
+{
+ "gearDetail": {
+  "_id": 6,
+  "slug": "Element",
+  "itemTypeId": "WEB",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "name": "Element",
+  "webbingType": "TB",
+  "material": [
+   "NY"
+  ],
+  "dWidth": 25,
+  "weight": 42,
+  "wll": 7,
+  "mbs": 20,
+  "dDepth": 2.4,
+  "elongation": {
+   "percent": 16,
+   "force": 10
+  },
+  "productionStatus": "AC",
+  "manufacturerId": 9,
+  "url": "http://www.eqb.cz/element-en.html",
+  "pricing": {
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 29
+    }
+   ],
+   "currency": "CZK"
+  },
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "656760621184025",
+    "name": "Eli Szendro Brown"
+   }
+  ],
+  "lastEditDate": 1499032590844,
+  "reviews": [
+   {
+    "creatorId": "656760621184025",
+    "rating": {
+     "lst": {
+      "VFM": 10,
+      "QU": 10,
+      "VER": 10,
+      "EOU": 10,
+      "SFT": 10
+     },
+     "overall": 10
+    },
+    "pros": [
+     "Packble",
+     "Very stretchy, great to bounce on"
+    ],
+    "cons": [],
+    "creationDate": 1500149075703,
+    "creatorName": "Eli Szendro Brown"
+   }
+  ],
+  "ratingsAverages": {
+   "overall": {
+    "nativeCount": 1,
+    "nativeValue": 10,
+    "value": 10,
+    "count": 1
+   },
+   "lst": {
+    "VFM": {
+     "count": 1,
+     "value": 10
+    },
+    "QU": {
+     "count": 1,
+     "value": 10
+    },
+    "VER": {
+     "count": 1,
+     "value": 10
+    },
+    "EOU": {
+     "count": 1,
+     "value": 10
+    },
+    "SFT": {
+     "count": 1,
+     "value": 10
+    }
+   }
+  },
+  "imagesCount": 3
+ },
+ "similarGear": [
+  {
+   "_id": 68,
+   "slug": "WaveTube",
+   "itemTypeId": "WEB",
+   "name": "Wave Tube",
+   "manufacturerId": 2,
+   "manufacturer": {
+    "name": "Landcruising",
+    "countryTxt": "Germany",
+    "countryCode": "DE"
+   }
+  }
+ ]
+}

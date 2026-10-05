@@ -1,0 +1,48 @@
+{
+ "gearDetail": {
+  "_id": 1308,
+  "name": "JAG Traxion",
+  "slug": "JAGTraxion",
+  "manufacturerId": 31,
+  "material": [
+   "AL"
+  ],
+  "itemTypeId": "BRK",
+  "weight": 145,
+  "wll": 1.6,
+  "mbs": 4,
+  "productionStatus": "AC",
+  "url": "http://www.petzl.com/en/Professional/Pulleys/JAG-TRAXION?l=INT#.VjxrsN_tlBc",
+  "remarks": "Very efficient but almost impossible to detension - requires soft release system",
+  "breakingMethod": "TCAM",
+  "efficiency": 91,
+  "compatibleRopeDiameter": {
+   "min": 8,
+   "max": 11
+  },
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "imagesCount": 0
+ },
+ "similarGear": [
+  {
+   "_id": 1306,
+   "name": "Mini Traxion",
+   "slug": "MiniTraxion",
+   "manufacturerId": 31,
+   "itemTypeId": "BRK",
+   "manufacturer": {
+    "name": "Petzl",
+    "url": "http://www.petzl.com/en?l=INT",
+    "countryTxt": "France",
+    "countryCode": "FR"
+   }
+  }
+ ]
+}

@@ -1,0 +1,50 @@
+{
+ "gearDetail": {
+  "_id": 3248,
+  "name": "RODEO weblock",
+  "material": [
+   "AL"
+  ],
+  "weight": 57,
+  "mbs": 17,
+  "anchorConnectionType": [
+   "SL"
+  ],
+  "webbingConnectionType": [
+   "QP"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 24,
+   "max": 26
+  },
+  "usage": [
+   "RL"
+  ],
+  "dateIntroduced": 1627074000000,
+  "productionStatus": "AC",
+  "manufacturerId": 26,
+  "url": "https://raed-slacklines.com/rodeo-weblock",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 65
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "WLCK",
+  "slug": "rodeo_weblock_1",
+  "creatorId": "10154430595665625",
+  "creationDate": 1627150141939,
+  "imagesCount": 3
+ },
+ "similarGear": []
+}

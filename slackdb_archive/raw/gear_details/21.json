@@ -1,0 +1,176 @@
+{
+ "gearDetail": {
+  "_id": 21,
+  "slug": "Vercors",
+  "itemTypeId": "WEB",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1503917262290,
+  "name": "Vercors",
+  "webbingType": "FL",
+  "material": [
+   "PL"
+  ],
+  "dWidth": 25,
+  "weight": 60,
+  "wll": 8.5,
+  "mbs": 30,
+  "elongation": {
+   "percent": 6,
+   "force": 10
+  },
+  "productionStatus": "DC",
+  "manufacturerId": 8,
+  "imagesCount": 0
+ },
+ "similarGear": [
+  {
+   "_id": 3145,
+   "name": "Green Magic",
+   "manufacturerId": 74,
+   "itemTypeId": "WEB",
+   "slug": "green_magic",
+   "manufacturer": {
+    "name": "Acrobat Slackline",
+    "url": "https://www.acrobatslackline.com",
+    "countryTxt": "Israel",
+    "countryCode": "IL"
+   }
+  },
+  {
+   "_id": 56,
+   "slug": "SkillshotHS",
+   "itemTypeId": "WEB",
+   "name": "Skillshot HS",
+   "manufacturerId": 13,
+   "manufacturer": {
+    "name": "Gambit",
+    "countryTxt": "Germany",
+    "countryCode": "DE"
+   }
+  },
+  {
+   "_id": 5,
+   "slug": "Dragon",
+   "itemTypeId": "WEB",
+   "name": "Dragon",
+   "manufacturerId": 9,
+   "manufacturer": {
+    "name": "Equilibrium Slacklines (EQB)",
+    "url": "https://www.slackshop.cz/en/",
+    "countryTxt": "Czech Republic",
+    "countryCode": "CZ"
+   }
+  },
+  {
+   "_id": 115,
+   "slug": "Mirage",
+   "itemTypeId": "WEB",
+   "name": "Mirage",
+   "manufacturerId": 42,
+   "manufacturer": {
+    "name": "Absolute Slacklines",
+    "url": "http://www.absoluteslacklines.com",
+    "countryTxt": "Canada",
+    "countryCode": "CA"
+   }
+  },
+  {
+   "_id": 3083,
+   "itemTypeId": "WEB",
+   "slug": "milky_way",
+   "name": "Milky Way",
+   "manufacturerId": 63,
+   "manufacturer": {
+    "name": "Balanceur",
+    "url": "https://www.balanceur.ro/",
+    "countryTxt": "Romania",
+    "countryCode": "RO"
+   }
+  },
+  {
+   "_id": 103,
+   "slug": "GreatWhite",
+   "itemTypeId": "WEB",
+   "name": "Great White",
+   "manufacturerId": 16,
+   "manufacturer": {
+    "name": "SlackGear",
+    "url": "http://www.slackgear.co.za",
+    "countryTxt": "South Africa",
+    "countryCode": "ZA"
+   }
+  },
+  {
+   "_id": 81,
+   "slug": "OctopussyMKV",
+   "itemTypeId": "WEB",
+   "name": "Octopussy MKV",
+   "manufacturerId": 27,
+   "manufacturer": {
+    "name": "Slack house",
+    "url": "http://slackhouseshop.pl",
+    "countryTxt": "Poland",
+    "countryCode": "PL"
+   }
+  },
+  {
+   "_id": 109,
+   "slug": "Chi",
+   "itemTypeId": "WEB",
+   "name": "Chi",
+   "manufacturerId": 46,
+   "manufacturer": {
+    "name": "Middle Way Slacklines",
+    "url": "http://www.middlewayslacklines.com",
+    "countryTxt": "Israel",
+    "countryCode": "IL"
+   }
+  },
+  {
+   "_id": 71,
+   "slug": "WhiteMagic",
+   "itemTypeId": "WEB",
+   "name": "White Magic",
+   "manufacturerId": 64,
+   "manufacturer": {
+    "name": "Aki Slacklines",
+    "url": "https://aki-slacklines.de",
+    "countryTxt": "Germany",
+    "countryCode": "DE"
+   }
+  },
+  {
+   "_id": 58,
+   "slug": "FlowLine",
+   "itemTypeId": "WEB",
+   "name": "Flow Line",
+   "manufacturerId": 1,
+   "manufacturer": {
+    "name": "Gibbon",
+    "url": "http://www.gibbon-slacklines.com",
+    "countryTxt": "Germany",
+    "countryCode": "DE"
+   }
+  },
+  {
+   "_id": 2,
+   "slug": "Bloodline",
+   "itemTypeId": "WEB",
+   "name": "Bloodline",
+   "manufacturerId": 19,
+   "manufacturer": {
+    "name": "Pure Slacklines",
+    "url": "http://pureslacklines.com.au",
+    "countryTxt": "Australia",
+    "countryCode": "AU"
+   }
+  }
+ ]
+}

@@ -1,0 +1,39 @@
+{
+ "manufacturerDetail": {
+  "_id": 55,
+  "slug": "StackStar",
+  "manufacturerStatus": "ACT",
+  "imageFilename": "slackstar.jpg",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "name": "Slackstar",
+  "location": {
+   "countryCode": "DE",
+   "address": "Am Grünberg 8 92318 Neumarkt/Opf.",
+   "lat": 49.29862976074219,
+   "lng": 11.40809059143066,
+   "isExact": true
+  },
+  "isActive": true,
+  "isSlacklineOriented": true,
+  "url": "http://slackstar.de",
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1587457271955,
+  "imagesCount": 0,
+  "gearStats": [
+   {
+    "itemTypeId": "SKT",
+    "count": 11
+   },
+   {
+    "itemTypeId": "TRP",
+    "count": 2
+   }
+  ]
+ }
+}

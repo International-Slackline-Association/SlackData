@@ -1,0 +1,91 @@
+{
+ "manufacturerDetail": {
+  "_id": 1,
+  "slug": "Gibbon",
+  "manufacturerStatus": "ACT",
+  "imageFilename": "gibbon.jpg",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "name": "Gibbon",
+  "location": {
+   "countryCode": "DE",
+   "lat": 48.77256774902344,
+   "lng": 9.168012619018555,
+   "isExact": true
+  },
+  "yearEstablished": 2007,
+  "isActive": true,
+  "isSlacklineOriented": true,
+  "url": "http://www.gibbon-slacklines.com",
+  "fbPage": "https://www.facebook.com/Gibbon-Slacklines-85859466425",
+  "lastEditDate": 1498722714594,
+  "reviews": [
+   {
+    "creatorId": "1574892945909720",
+    "text": "Great brand, been using their Surf Line for a while now, so much fun!",
+    "rating": {
+     "lst": {
+      "OP": 10,
+      "SP": 10,
+      "PQ": 10,
+      "CS": 10
+     },
+     "overall": 10
+    },
+    "creationDate": 1502070083319,
+    "creatorName": "Gaston Armand"
+   }
+  ],
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "1574892945909720",
+    "name": "Gaston Armand"
+   }
+  ],
+  "ratingsAverages": {
+   "overall": {
+    "nativeCount": 1,
+    "nativeValue": 10,
+    "value": 10,
+    "count": 1
+   },
+   "lst": {
+    "OP": {
+     "count": 1,
+     "value": 10
+    },
+    "SP": {
+     "count": 1,
+     "value": 10
+    },
+    "PQ": {
+     "count": 1,
+     "value": 10
+    },
+    "CS": {
+     "count": 1,
+     "value": 10
+    }
+   }
+  },
+  "imagesCount": 0,
+  "gearStats": [
+   {
+    "itemTypeId": "SKT",
+    "count": 1
+   },
+   {
+    "itemTypeId": "TRP",
+    "count": 1
+   },
+   {
+    "itemTypeId": "WEB",
+    "count": 2
+   }
+  ]
+ }
+}

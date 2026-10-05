@@ -1,0 +1,60 @@
+{
+ "gearDetail": {
+  "_id": 3088,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "WEB",
+  "slug": "green",
+  "creatorId": "10154430595665625",
+  "creationDate": 1568378289902,
+  "name": "Green",
+  "webbingType": "FL",
+  "material": [
+   "NY"
+  ],
+  "dWidth": 25.4,
+  "weight": 53,
+  "wll": 5.4,
+  "mbs": 27,
+  "dDepth": 2.46,
+  "elongation": {
+   "percent": 11.72,
+   "force": 10
+  },
+  "dateIntroduced": 1567976400000,
+  "productionStatus": "AC",
+  "manufacturerId": 3,
+  "url": "https://www.balancecommunity.com/products/green",
+  "pricing": {
+   "currency": "USD",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 2.3
+    }
+   ]
+  },
+  "lastEditDate": 1587401393766,
+  "imagesCount": 3
+ },
+ "similarGear": [
+  {
+   "_id": 3121,
+   "name": "Ocean",
+   "manufacturerId": 9,
+   "itemTypeId": "WEB",
+   "slug": "ocean",
+   "manufacturer": {
+    "name": "Equilibrium Slacklines (EQB)",
+    "url": "https://www.slackshop.cz/en/",
+    "countryTxt": "Czech Republic",
+    "countryCode": "CZ"
+   }
+  }
+ ]
+}

@@ -1,0 +1,23 @@
+{
+ "_id": 800,
+ "gearId": 3247,
+ "takenDate": 1623358800000,
+ "imageScope": "ITM",
+ "imageSource": "OFF",
+ "imageSourceUrl": "https://www.balancecommunity.com/products/heavy",
+ "gearCondition": "NEW",
+ "ImageEnvType": "STD",
+ "imageType": "RG",
+ "contributors": [
+  {
+   "id": "10154430595665625",
+   "name": "Nir Avneyon"
+  }
+ ],
+ "creationDate": 1627151439733,
+ "creatorId": "10154430595665625",
+ "filename": "800.jpg",
+ "width": 800,
+ "height": 1200,
+ "creatorName": "Nir Avneyon"
+}

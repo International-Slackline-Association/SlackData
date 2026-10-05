@@ -1,0 +1,111 @@
+{
+ "manufacturerDetail": {
+  "_id": 3,
+  "slug": "BalanceCommunity",
+  "manufacturerStatus": "ACT",
+  "imageFilename": "balance_community.jpg",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "lastEditDate": 1519413436765,
+  "reviews": [
+   {
+    "creatorId": "10160004374565647",
+    "text": "Excelent products, outstanding customer support. First purchase I made was over 3 years ago. They have only improved what was already a really good company.",
+    "rating": {
+     "lst": {
+      "OP": 10,
+      "SP": 10,
+      "PQ": 10,
+      "CS": 10
+     },
+     "overall": 10
+    },
+    "creationDate": 1518106501950,
+    "creatorName": "Andrés Rojas"
+   }
+  ],
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "10160004374565647",
+    "name": "Andrés Rojas"
+   },
+   {
+    "id": "2229492147076866",
+    "name": "Jerry Miszewski"
+   }
+  ],
+  "name": "Balance Community: Slackline Outfitters",
+  "location": {
+   "countryCode": "US",
+   "address": "2023 W Carroll Ave STE C209D Chicago, IL 60612",
+   "lat": 36.778261,
+   "lng": -119.4179324,
+   "isExact": true
+  },
+  "yearEstablished": 2009,
+  "isActive": true,
+  "isSlacklineOriented": true,
+  "url": "http://www.balancecommunity.com",
+  "fbPage": "https://www.facebook.com/BalanceCommunity",
+  "description": "Designer and retailer of slackline-specific equipment.",
+  "ratingsAverages": {
+   "overall": {
+    "nativeCount": 1,
+    "nativeValue": 10,
+    "externalValue": 10,
+    "externalCount": 71,
+    "count": 72,
+    "value": 10
+   },
+   "lst": {
+    "OP": {
+     "count": 1,
+     "value": 10
+    },
+    "SP": {
+     "count": 1,
+     "value": 10
+    },
+    "PQ": {
+     "count": 1,
+     "value": 10
+    },
+    "CS": {
+     "count": 1,
+     "value": 10
+    }
+   }
+  },
+  "imagesCount": 0,
+  "gearStats": [
+   {
+    "itemTypeId": "SKT",
+    "count": 2
+   },
+   {
+    "itemTypeId": "WGP",
+    "count": 1
+   },
+   {
+    "itemTypeId": "WLCK",
+    "count": 5
+   },
+   {
+    "itemTypeId": "WEB",
+    "count": 23
+   },
+   {
+    "itemTypeId": "TRP",
+    "count": 3
+   },
+   {
+    "itemTypeId": "LRNG",
+    "count": 4
+   }
+  ]
+ }
+}

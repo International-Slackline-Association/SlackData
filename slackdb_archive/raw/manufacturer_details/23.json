@@ -1,0 +1,41 @@
+{
+ "manufacturerDetail": {
+  "_id": 23,
+  "slug": "Ambaradam",
+  "manufacturerStatus": "ACT",
+  "imageFilename": "ambaradam.jpg",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "lastEditDate": 1600709151113,
+  "reviews": [],
+  "comments": [],
+  "name": "Ambaradam",
+  "location": {
+   "countryCode": "ES",
+   "address": "Calle Cardeñosa 63, 1c 28053 Madrid",
+   "lat": 40.38210296630859,
+   "lng": -3.672614097595215,
+   "isExact": true
+  },
+  "isSlacklineOriented": true,
+  "url": "http://ambaradam.net",
+  "fbPage": "https://www.facebook.com/AmbaradaMLongLineLab",
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "10211802848940671",
+    "name": "Thomas Buckingham"
+   }
+  ],
+  "imagesCount": 0,
+  "gearStats": [
+   {
+    "itemTypeId": "WEB",
+    "count": 1
+   }
+  ]
+ }
+}

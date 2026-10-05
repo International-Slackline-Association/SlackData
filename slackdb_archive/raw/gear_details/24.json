@@ -1,0 +1,74 @@
+{
+ "gearDetail": {
+  "_id": 24,
+  "slug": "RedZebra",
+  "itemTypeId": "WEB",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1587237673664,
+  "name": "Red Zebra",
+  "webbingType": "FL",
+  "material": [
+   "NY"
+  ],
+  "dWidth": 25,
+  "weight": 62,
+  "mbs": 30.9,
+  "elongation": {
+   "percent": 16.5,
+   "force": 10
+  },
+  "productionStatus": "DC",
+  "manufacturerId": 29,
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 25,
+     "price": 1.19,
+     "qt": "EX"
+    },
+    {
+     "q": 50,
+     "qt": "EX",
+     "price": 1.19
+    }
+   ]
+  },
+  "imagesCount": 0
+ },
+ "similarGear": [
+  {
+   "_id": 107,
+   "slug": "Type18CG4",
+   "itemTypeId": "WEB",
+   "name": "Type 18 CG4",
+   "manufacturerId": 44,
+   "manufacturer": {
+    "name": "Balancing Earth Slacklines",
+    "url": "http://www.balancingearthslacklines.com",
+    "countryTxt": "United States",
+    "countryCode": "US"
+   }
+  },
+  {
+   "_id": 3042,
+   "itemTypeId": "WEB",
+   "slug": "lift",
+   "name": "Lift",
+   "manufacturerId": 3,
+   "manufacturer": {
+    "name": "Balance Community: Slackline Outfitters",
+    "url": "http://www.balancecommunity.com",
+    "countryTxt": "United States",
+    "countryCode": "US"
+   }
+  }
+ ]
+}

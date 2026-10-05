@@ -1,0 +1,20 @@
+{
+ "gearDetail": {
+  "_id": 3008,
+  "slug": "2TSpanset",
+  "itemTypeId": "GEN",
+  "name": "2T Spanset",
+  "wll": 20,
+  "mbs": 70,
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

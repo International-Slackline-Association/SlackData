@@ -1,0 +1,35 @@
+{
+ "gearDetail": {
+  "_id": 3144,
+  "name": "25m kit",
+  "webbingLength": 25,
+  "webbingWidth": 50,
+  "tensioningType": "RAT1",
+  "includesTreePro": true,
+  "productionStatus": "AC",
+  "manufacturerId": 74,
+  "url": "https://www.acrobatslackline.com/slackline-kit25",
+  "pricing": {
+   "currency": "ILS",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 249
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "25m_kit_1",
+  "creatorId": "10154430595665625",
+  "creationDate": 1617138153764,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

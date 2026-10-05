@@ -1,0 +1,93 @@
+{
+ "gearDetail": {
+  "_id": 3074,
+  "contributors": [
+   {
+    "id": "10155267793869667",
+    "name": "Romain Schempf"
+   }
+  ],
+  "itemTypeId": "WEB",
+  "slug": "firefox",
+  "creatorId": "10155267793869667",
+  "creationDate": 1545646876557,
+  "name": "FIREFOX",
+  "webbingType": "TB",
+  "material": [
+   "NY"
+  ],
+  "dWidth": 25,
+  "weight": 52,
+  "wll": 8,
+  "mbs": 26,
+  "dDepth": 2,
+  "elongation": {
+   "percent": 17,
+   "force": 10
+  },
+  "usage": [
+   "SL",
+   "HL",
+   "LL",
+   "RL",
+   "LTL"
+  ],
+  "dateIntroduced": 1543618800000,
+  "productionStatus": "AC",
+  "manufacturerId": 4,
+  "url": "https://slack-mountain.com/fr/sangles-slackline/214-firefox.html",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "qt": "AA",
+     "q": 1,
+     "price": 1.5
+    }
+   ]
+  },
+  "lastEditDate": 1554055013087,
+  "imagesCount": 1
+ },
+ "similarGear": [
+  {
+   "_id": 75,
+   "slug": "SigmaN",
+   "itemTypeId": "WEB",
+   "name": "Sigma N",
+   "manufacturerId": 30,
+   "manufacturer": {
+    "name": "Slackliner.de",
+    "url": "https://www.slackliner.de",
+    "countryTxt": "Germany",
+    "countryCode": "DE"
+   }
+  },
+  {
+   "_id": 3123,
+   "name": "LSDTube",
+   "manufacturerId": 6,
+   "itemTypeId": "WEB",
+   "slug": "lsdtube",
+   "manufacturer": {
+    "name": "Slacktivity",
+    "url": "http://www.slacktivity.com",
+    "countryTxt": "Switzerland",
+    "countryCode": "CH"
+   }
+  },
+  {
+   "_id": 3026,
+   "itemTypeId": "WEB",
+   "slug": "pinktube",
+   "name": "PinkTube",
+   "manufacturerId": 6,
+   "manufacturer": {
+    "name": "Slacktivity",
+    "url": "http://www.slacktivity.com",
+    "countryTxt": "Switzerland",
+    "countryCode": "CH"
+   }
+  }
+ ]
+}

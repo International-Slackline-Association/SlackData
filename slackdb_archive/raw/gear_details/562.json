@@ -1,0 +1,83 @@
+{
+ "gearDetail": {
+  "_id": 562,
+  "slug": "SherriffFX",
+  "itemTypeId": "WLCK",
+  "shopUrl": "http://www.slackshop.cz/en/lockers/177-slack-sheriff.html",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1712946949473,
+  "name": "Sherriff FX",
+  "material": [
+   "SS"
+  ],
+  "weight": 326,
+  "wll": 12,
+  "mbs": 60,
+  "anchorConnectionType": [
+   "SR"
+  ],
+  "webbingConnectionType": [
+   "CP"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 24,
+   "max": 26
+  },
+  "diverterDiameter": 20,
+  "usage": [
+   "SL",
+   "HL",
+   "LL",
+   "LTL",
+   "SR"
+  ],
+  "productionStatus": "DC",
+  "manufacturerId": 9,
+  "pricing": {
+   "currency": "CZK",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 1599
+    }
+   ]
+  },
+  "imagesCount": 3
+ },
+ "similarGear": [
+  {
+   "_id": 557,
+   "slug": "Solverisweblock",
+   "itemTypeId": "WLCK",
+   "name": "Solveris weblock",
+   "manufacturerId": 45,
+   "manufacturer": {
+    "name": "Petram Slacklines",
+    "url": "https://petramslacklines.site123.me/",
+    "countryTxt": "Poland",
+    "countryCode": "PL"
+   }
+  },
+  {
+   "_id": 550,
+   "slug": "CatlockSR",
+   "itemTypeId": "WLCK",
+   "name": "Catlock SR",
+   "manufacturerId": 51,
+   "manufacturer": {
+    "name": "Cat on slack",
+    "url": "http://www.catonslack.com",
+    "countryTxt": "Poland",
+    "countryCode": "PL"
+   }
+  }
+ ]
+}

@@ -1,0 +1,27 @@
+{
+ "manufacturerDetail": {
+  "_id": 68,
+  "name": "Shaoline Slack",
+  "location": {
+   "countryCode": "AR",
+   "address": "cordoba",
+   "lat": -31.4173391,
+   "lng": -64.183319
+  },
+  "imageFilename": "shaoline.jpg",
+  "isActive": true,
+  "isSlacklineOriented": true,
+  "fbPage": "https://www.facebook.com/ShaoLine-319592072005126",
+  "contributors": [
+   {
+    "id": "10211802848940671",
+    "name": "Thomas Buckingham"
+   }
+  ],
+  "creatorId": "10211802848940671",
+  "creationDate": 1600714125255,
+  "slug": "shaoline_slack",
+  "imagesCount": 0,
+  "gearStats": null
+ }
+}

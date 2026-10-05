@@ -1,0 +1,83 @@
+{
+ "gearDetail": {
+  "_id": 72,
+  "slug": "SigmaImpact",
+  "itemTypeId": "WEB",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "name": "Sigma Impact",
+  "webbingType": "FL",
+  "material": [
+   "PL"
+  ],
+  "dWidth": 25,
+  "weight": 64,
+  "mbs": 35,
+  "dDepth": 2.7,
+  "elongation": {
+   "percent": 10.3,
+   "force": 10
+  },
+  "productionStatus": "AC",
+  "manufacturerId": 30,
+  "url": "http://www.slackliner.de/Webbing/Flat-Webbing/Sigma-Impact.html",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 1.05
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1499087391629,
+  "imagesCount": 1
+ },
+ "similarGear": [
+  {
+   "_id": 116,
+   "slug": "Alfa",
+   "itemTypeId": "WEB",
+   "name": "Alfa",
+   "manufacturerId": 50,
+   "manufacturer": {
+    "name": "Slacklining Canada",
+    "url": "http://www.slacklining.ca",
+    "countryTxt": "Canada",
+    "countryCode": "CA"
+   }
+  },
+  {
+   "_id": 89,
+   "slug": "Aero",
+   "itemTypeId": "WEB",
+   "name": "Aero",
+   "manufacturerId": 3,
+   "manufacturer": {
+    "name": "Balance Community: Slackline Outfitters",
+    "url": "http://www.balancecommunity.com",
+    "countryTxt": "United States",
+    "countryCode": "US"
+   }
+  },
+  {
+   "_id": 124,
+   "slug": "Verve25mm",
+   "itemTypeId": "WEB",
+   "name": "Verve 25mm",
+   "manufacturerId": 2,
+   "manufacturer": {
+    "name": "Landcruising",
+    "countryTxt": "Germany",
+    "countryCode": "DE"
+   }
+  }
+ ]
+}

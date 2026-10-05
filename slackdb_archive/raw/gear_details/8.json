@@ -1,0 +1,58 @@
+{
+ "gearDetail": {
+  "_id": 8,
+  "slug": "Neon",
+  "itemTypeId": "WEB",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1587251398832,
+  "name": "Neon",
+  "webbingType": "FL",
+  "material": [
+   "PL"
+  ],
+  "dWidth": 25,
+  "weight": 48,
+  "wll": 7,
+  "mbs": 20,
+  "dDepth": 2.2,
+  "elongation": {
+   "percent": 9,
+   "force": 10
+  },
+  "productionStatus": "AC",
+  "manufacturerId": 9,
+  "url": "https://www.slackshop.cz/en/webbing/30-eqb-neon.html",
+  "pricing": {
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 27
+    }
+   ],
+   "currency": "CZK"
+  },
+  "imagesCount": 1
+ },
+ "similarGear": [
+  {
+   "_id": 3050,
+   "itemTypeId": "WEB",
+   "slug": "aloha",
+   "name": "Aloha (Aka Aki Tidal)",
+   "manufacturerId": 2,
+   "manufacturer": {
+    "name": "Landcruising",
+    "countryTxt": "Germany",
+    "countryCode": "DE"
+   }
+  }
+ ]
+}

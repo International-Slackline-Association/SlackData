@@ -1,0 +1,31 @@
+{
+ "manufacturerDetail": {
+  "_id": 72,
+  "name": "Geko Slacklines",
+  "location": {
+   "countryCode": "MX",
+   "lat": 19.4326296,
+   "lng": -99.1331785
+  },
+  "imageFilename": "geko_slacklines.jpg",
+  "isActive": true,
+  "isSlacklineOriented": true,
+  "url": "http://www.gekoslacklines.mx",
+  "contributors": [
+   {
+    "id": "10211802848940671",
+    "name": "Thomas Buckingham"
+   }
+  ],
+  "creatorId": "10211802848940671",
+  "creationDate": 1600714465714,
+  "slug": "geko_slacklines",
+  "imagesCount": 0,
+  "gearStats": [
+   {
+    "itemTypeId": "SKT",
+    "count": 1
+   }
+  ]
+ }
+}

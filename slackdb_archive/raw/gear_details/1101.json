@@ -1,0 +1,32 @@
+{
+ "gearDetail": {
+  "_id": 1101,
+  "slug": "AIDMAN",
+  "itemTypeId": "SLD",
+  "psaCert": false,
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "name": "AIDMAN",
+  "weight": 139,
+  "wll": 2,
+  "mbs": 12,
+  "compatibleWebbingWidth": {
+   "min": 25,
+   "max": 26
+  },
+  "sliderType": "MP",
+  "innerWidth": 28,
+  "productionStatus": "DC",
+  "manufacturerId": 9,
+  "url": "http://www.slackshop.cz/en/rigging-equipment/81-kladka-aidman.html",
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1498977793402,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

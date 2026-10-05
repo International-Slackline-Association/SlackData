@@ -1,0 +1,22 @@
+{
+ "_id": 86,
+ "description": "Raed PRO weblock",
+ "imageScope": "ITM",
+ "imageSource": "OFF",
+ "gearCondition": "NEW",
+ "ImageEnvType": "STD",
+ "imageType": "RG",
+ "gearId": 554,
+ "contributors": [
+  {
+   "id": "1541853415834804",
+   "name": "Stephan Chalkowski"
+  }
+ ],
+ "creationDate": 1501673646096,
+ "creatorId": "1541853415834804",
+ "filename": "86.jpg",
+ "width": 1000,
+ "height": 667,
+ "creatorName": "Stephan Chalkowski"
+}

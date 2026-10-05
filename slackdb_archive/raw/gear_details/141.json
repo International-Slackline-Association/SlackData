@@ -1,0 +1,86 @@
+{
+ "gearDetail": {
+  "_id": 141,
+  "slug": "Fresh",
+  "itemTypeId": "WEB",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1514402928849,
+  "name": "Fresh",
+  "webbingType": "FL",
+  "material": [
+   "NY"
+  ],
+  "dWidth": 25,
+  "weight": 67,
+  "wll": 10,
+  "mbs": 32,
+  "dDepth": 4,
+  "elongation": {
+   "percent": 11,
+   "force": 10
+  },
+  "dateIntroduced": 1496188800000,
+  "productionStatus": "AC",
+  "manufacturerId": 9,
+  "url": "https://www.slackshop.cz/en/webbing/76-157-eqb-fresh.html",
+  "pricing": {
+   "currency": "CZK",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 42
+    }
+   ]
+  },
+  "imagesCount": 2
+ },
+ "similarGear": [
+  {
+   "_id": 121,
+   "slug": "Abysses",
+   "itemTypeId": "WEB",
+   "name": "Abysses",
+   "manufacturerId": 7,
+   "manufacturer": {
+    "name": "Slack Inov",
+    "url": "http://slack-inov.com/gb",
+    "countryTxt": "France",
+    "countryCode": "FR"
+   }
+  },
+  {
+   "_id": 3092,
+   "name": "Donkey",
+   "manufacturerId": 7,
+   "itemTypeId": "WEB",
+   "slug": "donkey",
+   "manufacturer": {
+    "name": "Slack Inov",
+    "url": "http://slack-inov.com/gb",
+    "countryTxt": "France",
+    "countryCode": "FR"
+   }
+  },
+  {
+   "_id": 7,
+   "slug": "Flash",
+   "itemTypeId": "WEB",
+   "name": "Flash",
+   "manufacturerId": 9,
+   "manufacturer": {
+    "name": "Equilibrium Slacklines (EQB)",
+    "url": "https://www.slackshop.cz/en/",
+    "countryTxt": "Czech Republic",
+    "countryCode": "CZ"
+   }
+  }
+ ]
+}

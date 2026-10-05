@@ -1,0 +1,34 @@
+{
+ "gearDetail": {
+  "_id": 3200,
+  "name": "Basic2",
+  "webbingLength": 15,
+  "webbingWidth": 50,
+  "tensioningType": "RAT1",
+  "productionStatus": "AC",
+  "manufacturerId": 55,
+  "url": "https://slackstar.de/kinder-familie/2-baeume/komplettset-2-teilig/823/basic2?number=SL81792-15-F",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 64
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "basic2",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622018095316,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

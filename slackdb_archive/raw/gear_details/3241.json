@@ -1,0 +1,34 @@
+{
+ "gearDetail": {
+  "_id": 3241,
+  "name": "Super Guide 6 30 M",
+  "webbingLength": 30,
+  "webbingWidth": 35,
+  "tensioningType": "RAT1",
+  "productionStatus": "AC",
+  "manufacturerId": 55,
+  "url": "https://slackstar.de/fun-performance/2-baeume/komplettset-6-teilig/870/super-guide6?number=SL81798-30",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 137
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "super_guide630m",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622033136331,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

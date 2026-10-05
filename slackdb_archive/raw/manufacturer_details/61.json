@@ -1,0 +1,36 @@
+{
+ "manufacturerDetail": {
+  "_id": 61,
+  "contributors": [
+   {
+    "id": "471570123344147",
+    "name": "Slackline MalagaTrick"
+   },
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "creatorId": "471570123344147",
+  "creationDate": 1536436944511,
+  "slug": "bananascolombia",
+  "lastEditDate": 1622028919632,
+  "name": "BananasColombia",
+  "location": {
+   "countryCode": "CO",
+   "address": "carrera 9 # 146- 45",
+   "lat": 4.6570664,
+   "lng": -74.0562368,
+   "isExact": true
+  },
+  "yearEstablished": 2015,
+  "isSlacklineOriented": true,
+  "fbPage": "https://www.facebook.com/BananasColombia",
+  "imagesCount": 0,
+  "gearStats": null
+ }
+}

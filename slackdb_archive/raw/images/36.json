@@ -1,0 +1,61 @@
+{
+ "_id": 36,
+ "takenDate": 1499634000000,
+ "imageScope": "OTR",
+ "imageSource": "UOFF",
+ "ImageEnvType": "STD",
+ "imageType": "RG",
+ "tags": [
+  "leash ring",
+  "comparison"
+ ],
+ "gearTags": [
+  {
+   "x": 581,
+   "y": 391,
+   "width": 513,
+   "height": 518,
+   "gearId": 801
+  },
+  {
+   "x": 53,
+   "y": 353,
+   "width": 568,
+   "height": 594,
+   "gearId": 806
+  },
+  {
+   "x": 1039,
+   "y": 427,
+   "width": 467,
+   "height": 470,
+   "gearId": 807
+  },
+  {
+   "x": 1438,
+   "y": 473,
+   "width": 430,
+   "height": 419,
+   "gearId": 805
+  }
+ ],
+ "gearId": [
+  801,
+  806,
+  807,
+  805
+ ],
+ "contributors": [
+  {
+   "id": "10154430595665625",
+   "name": "Nir Avneyon"
+  }
+ ],
+ "creationDate": 1499896266303,
+ "creatorId": "10154430595665625",
+ "filename": "36.jpg",
+ "width": 1920,
+ "height": 1280,
+ "comments": [],
+ "creatorName": "Nir Avneyon"
+}

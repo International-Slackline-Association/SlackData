@@ -1,0 +1,43 @@
+{
+ "manufacturerDetail": {
+  "_id": 54,
+  "slug": "FusionClimb",
+  "manufacturerStatus": "ACT",
+  "imageFilename": "fusion_climb.jpg",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "name": "Fusion Climb",
+  "location": {
+   "countryCode": "US",
+   "address": "Chino Hills, CA. 91709",
+   "lat": 33.98189926147461,
+   "lng": -117.7131423950195,
+   "isExact": true
+  },
+  "isActive": true,
+  "url": "http://www.fusionclimb.com",
+  "fbPage": "https://www.facebook.com/FusionClimbUSA",
+  "lastEditDate": 1498722671237,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "ratingsAverages": {
+   "overall": {
+    "externalValue": 9,
+    "externalCount": 9,
+    "value": 9,
+    "count": 9
+   }
+  },
+  "imagesCount": 0,
+  "gearStats": [
+   {
+    "itemTypeId": "LRNG",
+    "count": 1
+   }
+  ]
+ }
+}

@@ -1,0 +1,35 @@
+{
+ "gearDetail": {
+  "_id": 3209,
+  "name": "Slackline YOGA Set",
+  "webbingLength": 30,
+  "webbingWidth": 26,
+  "tensioningType": "PRIM",
+  "includesTreePro": true,
+  "productionStatus": "AC",
+  "manufacturerId": 6,
+  "url": "https://slacktivity.ch/shop/slackline-yoga-set/",
+  "pricing": {
+   "currency": "CHF",
+   "lst": [
+    {
+     "price": 479,
+     "qt": "AA",
+     "q": 1
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "slackline_yogaset",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622027238631,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

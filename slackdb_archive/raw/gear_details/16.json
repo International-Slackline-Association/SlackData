@@ -1,0 +1,33 @@
+{
+ "gearDetail": {
+  "_id": 16,
+  "slug": "EtnaII",
+  "itemTypeId": "WEB",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1503917431414,
+  "name": "Etna II",
+  "webbingType": "FL",
+  "material": [
+   "PL"
+  ],
+  "dWidth": 25,
+  "weight": 90,
+  "wll": 10,
+  "mbs": 50,
+  "elongation": {
+   "percent": 2,
+   "force": 10
+  },
+  "productionStatus": "DC",
+  "manufacturerId": 8,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

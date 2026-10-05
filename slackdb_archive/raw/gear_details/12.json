@@ -1,0 +1,106 @@
+{
+ "gearDetail": {
+  "_id": 12,
+  "slug": "SlimGreen",
+  "itemTypeId": "WEB",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "656760621184025",
+    "name": "Eli Szendro Brown"
+   }
+  ],
+  "lastEditDate": 1587252158702,
+  "reviews": [
+   {
+    "creatorId": "656760621184025",
+    "text": "Great as rodeo, soft release and small lines. super fun to surf.",
+    "rating": {
+     "lst": {
+      "VFM": 10,
+      "QU": 8,
+      "SFT": 6,
+      "EOU": 10,
+      "VER": 10
+     },
+     "overall": 9
+    },
+    "pros": [
+     "Not to stretchy not to static",
+     "Light and compact."
+    ],
+    "cons": [],
+    "creationDate": 1500149238684,
+    "creatorName": "Eli Szendro Brown"
+   }
+  ],
+  "name": "Slim Green",
+  "webbingType": "FL",
+  "material": [
+   "PL"
+  ],
+  "dWidth": 25,
+  "weight": 26,
+  "mbs": 11,
+  "dDepth": 1.6,
+  "elongation": {
+   "percent": 7,
+   "force": 3
+  },
+  "usage": [
+   "RL",
+   "LTL",
+   "SR"
+  ],
+  "productionStatus": "AC",
+  "manufacturerId": 9,
+  "url": "https://www.slackshop.cz/en/webbing/29-eqb-slim.html",
+  "pricing": {
+   "currency": "CZK",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 18
+    }
+   ]
+  },
+  "ratingsAverages": {
+   "overall": {
+    "nativeCount": 1,
+    "nativeValue": 9,
+    "value": 9,
+    "count": 1
+   },
+   "lst": {
+    "VFM": {
+     "count": 1,
+     "value": 10
+    },
+    "QU": {
+     "count": 1,
+     "value": 8
+    },
+    "SFT": {
+     "count": 1,
+     "value": 6
+    },
+    "EOU": {
+     "count": 1,
+     "value": 10
+    },
+    "VER": {
+     "count": 1,
+     "value": 10
+    }
+   }
+  },
+  "imagesCount": 2
+ },
+ "similarGear": []
+}

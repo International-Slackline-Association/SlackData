@@ -1,0 +1,76 @@
+{
+ "gearDetail": {
+  "_id": 821,
+  "slug": "LeashRing",
+  "itemTypeId": "LRNG",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "444238142624058",
+    "name": "Robi Wan"
+   }
+  ],
+  "lastEditDate": 1542144361340,
+  "name": "Leash Ring",
+  "material": [
+   "AL"
+  ],
+  "weight": 51,
+  "mbs": 35,
+  "materialDiameter": 10,
+  "innerDiameter": 60,
+  "outerDiameter": 80,
+  "productionStatus": "AC",
+  "manufacturerId": 9,
+  "url": "https://www.slackshop.cz/en/42-rings",
+  "pricing": {
+   "currency": "CZK",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "EX",
+     "price": 207
+    },
+    {
+     "q": 2,
+     "qt": "AA",
+     "price": 372
+    }
+   ]
+  },
+  "imagesCount": 1
+ },
+ "similarGear": [
+  {
+   "_id": 3067,
+   "name": "60mm Aluminium Ring",
+   "manufacturerId": 24,
+   "itemTypeId": "LRNG",
+   "slug": "60mm_aluminiumring",
+   "manufacturer": {
+    "name": "Spider slacklines",
+    "url": "http://www.spider-slacklines.com",
+    "countryTxt": "Italy",
+    "countryCode": "IT"
+   }
+  },
+  {
+   "_id": 3111,
+   "itemTypeId": "LRNG",
+   "slug": "highlinering",
+   "name": "HighlineRing",
+   "manufacturerId": 6,
+   "manufacturer": {
+    "name": "Slacktivity",
+    "url": "http://www.slacktivity.com",
+    "countryTxt": "Switzerland",
+    "countryCode": "CH"
+   }
+  }
+ ]
+}

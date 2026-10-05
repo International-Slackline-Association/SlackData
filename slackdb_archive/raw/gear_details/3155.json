@@ -1,0 +1,36 @@
+{
+ "gearDetail": {
+  "_id": 3155,
+  "contributors": [
+   {
+    "id": "4078196375580695",
+    "name": "Francisco Vanzuita"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "kit_streetbalanceslack10m",
+  "creatorId": "4078196375580695",
+  "creationDate": 1620301111909,
+  "name": "KIT STREET BALANCE SLACK 10m",
+  "webbingLength": 10,
+  "webbingWidth": 50,
+  "tensioningType": "RAT1",
+  "includesTreePro": true,
+  "productionStatus": "AC",
+  "manufacturerId": 76,
+  "url": "https://beraadventure.com.br/product/kit-street-balance-slack-10-metros-backup/",
+  "pricing": {
+   "currency": "BRL",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 189
+    }
+   ]
+  },
+  "lastEditDate": 1620302348793,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

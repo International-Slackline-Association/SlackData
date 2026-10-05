@@ -1,0 +1,34 @@
+{
+ "gearDetail": {
+  "_id": 3193,
+  "name": "KIT EASY 15M",
+  "webbingLength": 15,
+  "webbingWidth": 25,
+  "tensioningType": "PRIM",
+  "productionStatus": "AC",
+  "manufacturerId": 4,
+  "url": "https://slack-mountain.com/en/slackline-beginner-kit/33-kit-easy-15m.html",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 55
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "kit_easy15m",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622016525073,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

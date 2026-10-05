@@ -1,0 +1,29 @@
+{
+ "manufacturerDetail": {
+  "_id": 33,
+  "slug": "RockExotica",
+  "manufacturerStatus": "ACT",
+  "imageFilename": "rock_exotica.jpg",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "name": "Rock Exotica",
+  "location": {
+   "countryCode": "US",
+   "lat": 41.09926986694336,
+   "lng": -112.0299377441406,
+   "isExact": true
+  },
+  "isActive": true,
+  "url": "http://www.rockexotica.com",
+  "fbPage": "https://www.facebook.com/Rock-Exotica-147747201953857",
+  "lastEditDate": 1498723793379,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "imagesCount": 0,
+  "gearStats": null
+ }
+}

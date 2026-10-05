@@ -1,0 +1,127 @@
+{
+ "gearDetail": {
+  "_id": 83,
+  "slug": "RubberBandMKIII",
+  "itemTypeId": "WEB",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1587403364416,
+  "name": "Rubber Band MKIII SOL",
+  "webbingType": "FL",
+  "material": [
+   "NY"
+  ],
+  "dWidth": 25,
+  "weight": 60,
+  "wll": 7,
+  "mbs": 30,
+  "dDepth": 3.35,
+  "elongation": {
+   "percent": 14,
+   "force": 10
+  },
+  "productionStatus": "AC",
+  "manufacturerId": 27,
+  "url": "https://slackhouseshop.pl/en/produkt/slackhouse-rubber-band-25mm-sol/",
+  "pricing": {
+   "currency": "PLN",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 4.47
+    },
+    {
+     "q": 40,
+     "qt": "EX",
+     "price": 4.46
+    },
+    {
+     "q": 60,
+     "qt": "EX",
+     "price": 4.43
+    },
+    {
+     "q": 80,
+     "qt": "EX",
+     "price": 4.41
+    },
+    {
+     "q": 100,
+     "qt": "EX",
+     "price": 4.39
+    },
+    {
+     "q": 120,
+     "qt": "EX",
+     "price": 4.37
+    },
+    {
+     "q": 150,
+     "qt": "EX",
+     "price": 4.35
+    },
+    {
+     "q": 200,
+     "qt": "EX",
+     "price": 4.31
+    },
+    {
+     "q": 250,
+     "qt": "EX",
+     "price": 4.27
+    },
+    {
+     "q": 300,
+     "qt": "EX",
+     "price": 4.23
+    },
+    {
+     "q": 400,
+     "qt": "EX",
+     "price": 4.15
+    },
+    {
+     "q": 500,
+     "qt": "EX",
+     "price": 4.07
+    }
+   ]
+  },
+  "imagesCount": 3
+ },
+ "similarGear": [
+  {
+   "_id": 3115,
+   "name": "Rubber Band PUR",
+   "manufacturerId": 27,
+   "itemTypeId": "WEB",
+   "slug": "rubber_bandpur",
+   "manufacturer": {
+    "name": "Slack house",
+    "url": "http://slackhouseshop.pl",
+    "countryTxt": "Poland",
+    "countryCode": "PL"
+   }
+  },
+  {
+   "_id": 82,
+   "slug": "RubberBandMKIIIBLU",
+   "itemTypeId": "WEB",
+   "name": "Rubber Band MKIII BLU",
+   "manufacturerId": 27,
+   "manufacturer": {
+    "name": "Slack house",
+    "url": "http://slackhouseshop.pl",
+    "countryTxt": "Poland",
+    "countryCode": "PL"
+   }
+  }
+ ]
+}

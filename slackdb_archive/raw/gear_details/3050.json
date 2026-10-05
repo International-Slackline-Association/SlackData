@@ -1,0 +1,60 @@
+{
+ "gearDetail": {
+  "_id": 3050,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "WEB",
+  "slug": "aloha",
+  "creatorId": "10154430595665625",
+  "creationDate": 1519639867486,
+  "lastEditDate": 1555437378767,
+  "name": "Aloha (Aka Aki Tidal)",
+  "webbingType": "FL",
+  "material": [
+   "PL"
+  ],
+  "dWidth": 25,
+  "weight": 48,
+  "wll": 4,
+  "mbs": 20,
+  "dDepth": 2,
+  "elongation": {
+   "percent": 9,
+   "force": 10
+  },
+  "dateIntroduced": 1511128800000,
+  "productionStatus": "AC",
+  "manufacturerId": 2,
+  "url": "https://aki-slacklines.de/en/webbing/polyester/99/aki-tidal-webbing?c=6",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 1.19
+    }
+   ]
+  },
+  "imagesCount": 5
+ },
+ "similarGear": [
+  {
+   "_id": 8,
+   "slug": "Neon",
+   "itemTypeId": "WEB",
+   "name": "Neon",
+   "manufacturerId": 9,
+   "manufacturer": {
+    "name": "Equilibrium Slacklines (EQB)",
+    "url": "https://www.slackshop.cz/en/",
+    "countryTxt": "Czech Republic",
+    "countryCode": "CZ"
+   }
+  }
+ ]
+}

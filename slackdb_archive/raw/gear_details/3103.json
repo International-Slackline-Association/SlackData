@@ -1,0 +1,28 @@
+{
+ "gearDetail": {
+  "_id": 3103,
+  "name": "SuperTape 19mm",
+  "webbingType": "FL",
+  "material": [
+   "NY"
+  ],
+  "dWidth": 18,
+  "weight": 35,
+  "mbs": 15,
+  "productionStatus": "AC",
+  "manufacturerId": 32,
+  "url": "https://www.edelrid.de/en/sports/flat-webbings1/flachband-supertape-19mm.html",
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "WEB",
+  "slug": "supertape_19mm",
+  "creatorId": "10154430595665625",
+  "creationDate": 1587038225786,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

@@ -1,0 +1,86 @@
+[
+    {
+        "_id": "ARC",
+        "description": "Category",
+        "entries": {
+            "REV": "Review",
+            "INF": "Info",
+            "KN": "Knowledge",
+            "TECH": "Techniques",
+            "CALC": "Calculator",
+            "PGUIDE": "Purchase guide",
+            "TOPO": "Slackline spots",
+            "GINT": "Gear introduction",
+            "DB": "Database",
+            "BLG": "Blog",
+            "FRM": "Forum"
+        }
+    },
+    {
+        "_id": "ARCT",
+        "description": "Content Type",
+        "entries": {
+            "AR": "Article",
+            "VD": "Video",
+            "MP": "Map",
+            "ARG": "Article Group",
+            "CALC": "Calculator",
+            "CHRT": "Chart",
+            "SHT": "Sheet",
+            "DC": "Document",
+            "FRM": "Forum"
+        }
+    },
+    {
+        "_id": "LNG",
+        "description": "Language",
+        "entries": {
+            "EN": "English",
+            "FR": "French",
+            "DE": "German",
+            "ES": "Spanish",
+            "IT": "Italian",
+            "PT": "Portuguese",
+            "RU": "Russian",
+            "PL": "Polish",
+            "TR": "Turkish",
+            "RO": "Romanian"
+        }
+    },
+    {
+        "_id": "WSC",
+        "description": "Website category",
+        "entries": {
+            "KN": "Knowledge",
+            "ASC": "Association",
+            "SHP": "Shop",
+            "BLG": "Blog",
+            "TP": "Topos",
+            "REV": "Reviews",
+            "NEWS": "News",
+            "TEAM": "Team",
+            "MRKT": "Market",
+            "COM": "Community",
+            "CAMP": "Camp"
+        }
+    },
+    {
+        "_id": "GRT",
+        "description": "Gear types",
+        "entries": {
+            "WEB": "Webbing",
+            "WLCK": "Weblock",
+            "BRK": "Rope Brake",
+            "PUL": "Pulley",
+            "SLD": "Slider",
+            "ROPE": "Rope",
+            "LRNG": "Leash Ring",
+            "CON": "Connector",
+            "GEN": "General",
+            "WGP": "Webbing grip",
+            "SKT": "Starter kit",
+            "TLK": "Trickline kit",
+            "TRP": "Tree protectors"
+        }
+    }
+]

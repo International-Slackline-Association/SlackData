@@ -1,0 +1,66 @@
+{
+ "gearDetail": {
+  "_id": 3039,
+  "contributors": [
+   {
+    "id": "1393453644035268",
+    "name": "Kuba Bałdych"
+   },
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "WLCK",
+  "slug": "aeris_pweblock",
+  "creatorId": "1393453644035268",
+  "creationDate": 1506630938220,
+  "lastEditDate": 1712932027324,
+  "name": "Aeris P Weblock",
+  "material": [
+   "SS",
+   "HSS",
+   "AL"
+  ],
+  "weight": 185,
+  "wll": 10,
+  "mbs": 50,
+  "anchorConnectionType": [
+   "QP"
+  ],
+  "webbingConnectionType": [
+   "QP"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 24,
+   "max": 27
+  },
+  "diverterDiameter": 35,
+  "efficiency": 90,
+  "usage": [
+   "SL",
+   "HL",
+   "LL",
+   "RL",
+   "LTL",
+   "SR"
+  ],
+  "dateIntroduced": 1506117600000,
+  "productionStatus": "AC",
+  "manufacturerId": 45,
+  "url": "https://petramslacklines.site123.me/shop-1/aeris-p-weblock-2",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 84.4
+    }
+   ],
+   "hasAddOpts": true
+  },
+  "imagesCount": 4
+ },
+ "similarGear": []
+}

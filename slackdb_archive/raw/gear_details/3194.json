@@ -1,0 +1,37 @@
+{
+ "gearDetail": {
+  "_id": 3194,
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "firestarter_35m",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622016776936,
+  "name": "Firestarter 35m",
+  "weight": 5000,
+  "webbingLength": 35,
+  "webbingWidth": 25,
+  "tensioningType": "PRIM",
+  "includesTreePro": true,
+  "productionStatus": "AC",
+  "manufacturerId": 16,
+  "url": "http://www.slackgear.co.za/product/firestarter-35m/",
+  "pricing": {
+   "currency": "ZAR",
+   "lst": [
+    {
+     "price": 3250,
+     "q": 1,
+     "qt": "AA"
+    }
+   ]
+  },
+  "lastEditDate": 1622037347514,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

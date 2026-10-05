@@ -1,0 +1,67 @@
+{
+ "gearDetail": {
+  "_id": 554,
+  "slug": "PROWeblock",
+  "itemTypeId": "WLCK",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "1541853415834804",
+    "name": "Stephan Chalkowski"
+   },
+   {
+    "id": "1811540145542689",
+    "name": "Helmut Netzwerker"
+   }
+  ],
+  "lastEditDate": 1712945651147,
+  "name": "PRO Weblock",
+  "material": [
+   "HSS"
+  ],
+  "weight": 306,
+  "wll": 15,
+  "mbs": 100,
+  "anchorConnectionType": [
+   "OT",
+   "SR",
+   "QP"
+  ],
+  "webbingConnectionType": [
+   "QP",
+   "RP"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 24,
+   "max": 26
+  },
+  "diverterDiameter": 35,
+  "usage": [
+   "SL",
+   "HL",
+   "LL",
+   "RL",
+   "LTL"
+  ],
+  "productionStatus": "DC",
+  "manufacturerId": 26,
+  "url": "https://raed-slacklines.com/pro-weblock",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 119.95
+    }
+   ]
+  },
+  "imagesCount": 5
+ },
+ "similarGear": []
+}

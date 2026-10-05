@@ -1,0 +1,41 @@
+{
+ "_id": 186,
+ "description": "12mm Omega Shackle Vs 10mm Omega Shackle",
+ "takenDate": 1505941200000,
+ "imageScope": "OTR",
+ "imageSource": "UOFF",
+ "ImageEnvType": "STD",
+ "imageType": "RG",
+ "gearTags": [
+  {
+   "x": 26,
+   "y": 154,
+   "width": 889,
+   "height": 866,
+   "gearId": 2001
+  },
+  {
+   "x": 917,
+   "y": 8,
+   "width": 922,
+   "height": 1056,
+   "gearId": 2002
+  }
+ ],
+ "gearId": [
+  2001,
+  2002
+ ],
+ "contributors": [
+  {
+   "id": "10154430595665625",
+   "name": "Nir Avneyon"
+  }
+ ],
+ "creationDate": 1506006600196,
+ "creatorId": "10154430595665625",
+ "filename": "186.jpg",
+ "width": 1920,
+ "height": 1137,
+ "creatorName": "Nir Avneyon"
+}

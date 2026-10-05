@@ -1,0 +1,33 @@
+{
+ "gearDetail": {
+  "_id": 3164,
+  "name": "Treepro XL",
+  "dWidth": 25,
+  "dLength": 198,
+  "productionStatus": "AC",
+  "manufacturerId": 21,
+  "url": "https://slacklineindustries.com/products/treepro-xl",
+  "pricing": {
+   "currency": "USD",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 29.99
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "TRP",
+  "slug": "treepro_xl",
+  "creatorId": "2824084041240796",
+  "creationDate": 1621856486086,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

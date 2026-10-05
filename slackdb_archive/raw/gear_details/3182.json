@@ -1,0 +1,36 @@
+{
+ "gearDetail": {
+  "_id": 3182,
+  "contributors": [
+   {
+    "id": "10226447140071894",
+    "name": "Eric Hake"
+   }
+  ],
+  "itemTypeId": "TLK",
+  "slug": "level_3tricklinekit",
+  "creatorId": "10226447140071894",
+  "creationDate": 1621891420627,
+  "name": "Level 3 Trickline kit",
+  "webbingLength": 45,
+  "webbingWidth": 50,
+  "tensioningType": "OT",
+  "includesTreePro": true,
+  "dateIntroduced": 1620111600000,
+  "productionStatus": "AC",
+  "url": "https://www.riggingventures.com/product-page/pro-trickline-kit-1",
+  "pricing": {
+   "currency": "USD",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "EX",
+     "price": 750
+    }
+   ]
+  },
+  "lastEditDate": 1621891438961,
+  "imagesCount": 0
+ },
+ "similarGear": []
+}

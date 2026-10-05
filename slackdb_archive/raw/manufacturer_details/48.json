@@ -1,0 +1,35 @@
+{
+ "manufacturerDetail": {
+  "_id": 48,
+  "slug": "Trango",
+  "manufacturerStatus": "ACT",
+  "imageFilename": "trango.jpg",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "name": "Trango",
+  "location": {
+   "countryCode": "US",
+   "address": "740 S Pierce Ave Suite 15 Louisville, CO 80027",
+   "lat": 39.95905303955078,
+   "lng": -105.1210021972656,
+   "isExact": true
+  },
+  "isActive": true,
+  "url": "http://www.trango.com",
+  "fbPage": "http://www.facebook.com/pages/Trango-Extraordinary-Climbing/158158420882901",
+  "lastEditDate": 1498724469584,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "imagesCount": 0,
+  "gearStats": [
+   {
+    "itemTypeId": "BRK",
+    "count": 1
+   }
+  ]
+ }
+}

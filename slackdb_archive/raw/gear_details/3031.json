@@ -1,0 +1,18 @@
+{
+ "gearDetail": {
+  "_id": 3031,
+  "name": "10mm Nut",
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "GEN",
+  "slug": "10mm_nut",
+  "creatorId": "10154430595665625",
+  "creationDate": 1505999393063,
+  "imagesCount": 2
+ },
+ "similarGear": []
+}

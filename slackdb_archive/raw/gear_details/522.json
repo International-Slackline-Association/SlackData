@@ -1,0 +1,58 @@
+{
+ "gearDetail": {
+  "_id": 522,
+  "slug": "Dreamcatcher",
+  "itemTypeId": "WLCK",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "1811540145542689",
+    "name": "Helmut Netzwerker"
+   }
+  ],
+  "lastEditDate": 1587249250951,
+  "name": "Dreamcatcher",
+  "material": [
+   "SS"
+  ],
+  "weight": 350,
+  "wll": 15,
+  "anchorConnectionType": [
+   "RMH"
+  ],
+  "webbingConnectionType": [
+   "CP"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 24,
+   "max": 26
+  },
+  "diverterDiameter": 30,
+  "usage": [
+   "SL",
+   "HL",
+   "LL",
+   "RL",
+   "LTL"
+  ],
+  "productionStatus": "DC",
+  "manufacturerId": 18,
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 84.9
+    }
+   ]
+  },
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

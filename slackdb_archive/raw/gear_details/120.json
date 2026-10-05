@@ -1,0 +1,81 @@
+{
+ "gearDetail": {
+  "_id": 120,
+  "slug": "FlammeIII",
+  "itemTypeId": "WEB",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1542301307819,
+  "name": "Flamme III",
+  "webbingType": "FL",
+  "material": [
+   "PL"
+  ],
+  "dWidth": 25,
+  "weight": 76,
+  "mbs": 40,
+  "elongation": {
+   "percent": 5.4,
+   "force": 10
+  },
+  "productionStatus": "DC",
+  "manufacturerId": 7,
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 1
+    }
+   ]
+  },
+  "imagesCount": 2
+ },
+ "similarGear": [
+  {
+   "_id": 25,
+   "slug": "SlackSwan",
+   "itemTypeId": "WEB",
+   "name": "Slack Swan",
+   "manufacturerId": 29,
+   "manufacturer": {
+    "name": "Dakas",
+    "countryTxt": "France",
+    "countryCode": "FR"
+   }
+  },
+  {
+   "_id": 11,
+   "slug": "Sumo",
+   "itemTypeId": "WEB",
+   "name": "Sumo",
+   "manufacturerId": 9,
+   "manufacturer": {
+    "name": "Equilibrium Slacklines (EQB)",
+    "url": "https://www.slackshop.cz/en/",
+    "countryTxt": "Czech Republic",
+    "countryCode": "CZ"
+   }
+  },
+  {
+   "_id": 3016,
+   "name": "Plasma",
+   "manufacturerId": 7,
+   "itemTypeId": "WEB",
+   "slug": "plasma",
+   "manufacturer": {
+    "name": "Slack Inov",
+    "url": "http://slack-inov.com/gb",
+    "countryTxt": "France",
+    "countryCode": "FR"
+   }
+  }
+ ]
+}

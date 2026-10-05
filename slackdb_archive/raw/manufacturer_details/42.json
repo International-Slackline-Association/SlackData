@@ -1,0 +1,53 @@
+{
+ "manufacturerDetail": {
+  "_id": 42,
+  "slug": "AbsoluteSlacklines",
+  "manufacturerStatus": "ACT",
+  "imageFilename": "absolute_slacklines.jpg",
+  "comments": [],
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "lastEditDate": 1622028122762,
+  "reviews": [],
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "name": "Absolute Slacklines",
+  "location": {
+   "countryCode": "CA",
+   "address": "807-1875 Robson St., Vancouver, BC, V6G 1E5",
+   "lat": 49.2922782897949,
+   "lng": -123.136306762695,
+   "isExact": true
+  },
+  "isSlacklineOriented": true,
+  "url": "http://www.absoluteslacklines.com",
+  "fbPage": "https://www.facebook.com/AbsoluteSlacklines",
+  "ratingsAverages": {
+   "overall": {
+    "externalValue": 9,
+    "externalCount": 26,
+    "value": 9,
+    "count": 26
+   }
+  },
+  "imagesCount": 0,
+  "gearStats": [
+   {
+    "itemTypeId": "WEB",
+    "count": 1
+   },
+   {
+    "itemTypeId": "WLCK",
+    "count": 1
+   }
+  ]
+ }
+}

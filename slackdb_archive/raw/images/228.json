@@ -1,0 +1,49 @@
+{
+ "_id": 228,
+ "takenDate": 1506805200000,
+ "imageScope": "STP",
+ "imageSource": "OFF",
+ "imageSourceUrl": "https://krok.biz/slackline/layn-lok-mini",
+ "ImageEnvType": "STD",
+ "imageType": "RG",
+ "gearTags": [
+  {
+   "x": 32,
+   "y": 499,
+   "width": 121,
+   "height": 71,
+   "gearId": 3007
+  },
+  {
+   "x": 228,
+   "y": 490,
+   "width": 137,
+   "height": 113,
+   "gearId": 2002
+  },
+  {
+   "x": 273,
+   "y": 465,
+   "width": 173,
+   "height": 114,
+   "gearId": 3041
+  }
+ ],
+ "gearId": [
+  3007,
+  2002,
+  3041
+ ],
+ "contributors": [
+  {
+   "id": "10154430595665625",
+   "name": "Nir Avneyon"
+  }
+ ],
+ "creationDate": 1506872932888,
+ "creatorId": "10154430595665625",
+ "filename": "228.jpg",
+ "width": 800,
+ "height": 800,
+ "creatorName": "Nir Avneyon"
+}

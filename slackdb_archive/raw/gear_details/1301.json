@@ -1,0 +1,135 @@
+{
+ "gearDetail": {
+  "_id": 1301,
+  "name": "GRIGRI 2",
+  "slug": "GRIGRI2",
+  "manufacturerId": 31,
+  "material": [
+   "SS",
+   "AL",
+   "NY"
+  ],
+  "itemTypeId": "BRK",
+  "weight": 170,
+  "productionStatus": "AC",
+  "url": "http://www.petzl.com/en/Sport/Belay-devices--descenders/GRIGRI-2?l=INT",
+  "breakingMethod": "CAM",
+  "efficiency": 45,
+  "compatibleRopeDiameter": {
+   "min": 8.9,
+   "max": 11
+  },
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "reviews": [
+   {
+    "creatorId": "157046135120641",
+    "text": "Le mien a cassé en slack sur 60 m",
+    "rating": {
+     "lst": {
+      "VFM": 2,
+      "QU": 2,
+      "VER": 6,
+      "EOU": 10
+     },
+     "overall": 5
+    },
+    "pros": [],
+    "cons": [],
+    "creationDate": 1523100473274,
+    "creatorName": "Benoit Crera"
+   }
+  ],
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "157046135120641",
+    "name": "Benoit Crera"
+   }
+  ],
+  "ratingsAverages": {
+   "overall": {
+    "nativeCount": 1,
+    "nativeValue": 5,
+    "value": 5,
+    "count": 1
+   },
+   "lst": {
+    "VFM": {
+     "count": 1,
+     "value": 2
+    },
+    "QU": {
+     "count": 1,
+     "value": 2
+    },
+    "VER": {
+     "count": 1,
+     "value": 6
+    },
+    "EOU": {
+     "count": 1,
+     "value": 10
+    }
+   }
+  },
+  "imagesCount": 0
+ },
+ "similarGear": [
+  {
+   "_id": 1318,
+   "name": "Cinch",
+   "slug": "Cinch",
+   "manufacturerId": 48,
+   "itemTypeId": "BRK",
+   "manufacturer": {
+    "name": "Trango",
+    "url": "http://www.trango.com",
+    "countryTxt": "United States",
+    "countryCode": "US"
+   }
+  },
+  {
+   "_id": 1322,
+   "slug": "GRIGRI",
+   "itemTypeId": "BRK",
+   "name": "GRIGRI+",
+   "manufacturerId": 31,
+   "manufacturer": {
+    "name": "Petzl",
+    "url": "http://www.petzl.com/en?l=INT",
+    "countryTxt": "France",
+    "countryCode": "FR"
+   }
+  },
+  {
+   "_id": 1306,
+   "name": "Mini Traxion",
+   "slug": "MiniTraxion",
+   "manufacturerId": 31,
+   "itemTypeId": "BRK",
+   "manufacturer": {
+    "name": "Petzl",
+    "url": "http://www.petzl.com/en?l=INT",
+    "countryTxt": "France",
+    "countryCode": "FR"
+   }
+  },
+  {
+   "_id": 1308,
+   "name": "JAG Traxion",
+   "slug": "JAGTraxion",
+   "manufacturerId": 31,
+   "itemTypeId": "BRK",
+   "manufacturer": {
+    "name": "Petzl",
+    "url": "http://www.petzl.com/en?l=INT",
+    "countryTxt": "France",
+    "countryCode": "FR"
+   }
+  }
+ ]
+}

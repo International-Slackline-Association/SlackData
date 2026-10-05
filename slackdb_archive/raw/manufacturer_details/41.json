@@ -1,0 +1,41 @@
+{
+ "manufacturerDetail": {
+  "_id": 41,
+  "slug": "SlacklifeBC",
+  "manufacturerStatus": "ACT",
+  "imageFilename": "slacklife_bc.jpg",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "name": "Slacklife BC",
+  "location": {
+   "countryCode": "CA",
+   "address": "Vancouver BC",
+   "lat": 49.28273010253906,
+   "lng": -123.120735168457,
+   "isExact": false
+  },
+  "yearEstablished": 2013,
+  "isActive": true,
+  "isSlacklineOriented": true,
+  "url": "http://slacklifebc.com",
+  "fbPage": "https://www.facebook.com/SlacklifeBC",
+  "lastEditDate": 1498724040526,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "imagesCount": 0,
+  "gearStats": [
+   {
+    "itemTypeId": "SKT",
+    "count": 1
+   },
+   {
+    "itemTypeId": "WEB",
+    "count": 6
+   }
+  ]
+ }
+}

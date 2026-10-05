@@ -1,0 +1,50 @@
+{
+ "gearDetail": {
+  "_id": 1110,
+  "slug": "Motumwebbingpulley",
+  "itemTypeId": "SLD",
+  "psaCert": false,
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "1393453644035268",
+    "name": "Kuba Bałdych"
+   }
+  ],
+  "lastEditDate": 1587290312998,
+  "name": "Motum webbing pulley",
+  "material": [
+   "SS"
+  ],
+  "weight": 85,
+  "wll": 2,
+  "mbs": 14,
+  "compatibleWebbingWidth": {
+   "min": 25,
+   "max": 32
+  },
+  "sliderType": "MP",
+  "innerWidth": 33,
+  "outerBearingDiameter": 25,
+  "productionStatus": "AC",
+  "manufacturerId": 45,
+  "url": "https://petramslacklines.site123.me/shop-1/motum-pulley",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 19.9
+    }
+   ]
+  },
+  "imagesCount": 2
+ },
+ "similarGear": []
+}

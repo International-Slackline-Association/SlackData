@@ -1,0 +1,40 @@
+{
+ "gearDetail": {
+  "_id": 27,
+  "slug": "Emeraude",
+  "itemTypeId": "WEB",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "name": "Emeraude",
+  "webbingType": "TB",
+  "material": [
+   "PL"
+  ],
+  "dWidth": 50,
+  "weight": 95,
+  "wll": 2.3,
+  "mbs": 40,
+  "productionStatus": "AC",
+  "manufacturerId": 7,
+  "url": "http://slack-inov.com/gb/webbing/9-emeraude",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 20,
+     "qt": "AA",
+     "price": 2
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1499033301189,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}
