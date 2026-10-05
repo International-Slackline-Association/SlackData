@@ -271,7 +271,8 @@ ISA certified if and only if an entry in `isa_certified.json` matches it. That f
 approved-gear list (one entry per certificate), built from the committed raw capture
 `isa_approved_data.csv` by `scripts/build_isa_certified.py`, with the same hand-adjudicated `match`
 block as the warnings (the script keeps them across rebuilds). See
-[ISA_CERTIFICATION_PLAN.md](ISA_CERTIFICATION_PLAN.md) for the decisions behind it.
+[PR #83](https://github.com/International-Slackline-Association/SlackData/pull/83) for what changed, and the [plan it was built from](https://github.com/International-Slackline-Association/SlackData/blob/5be24c10402cd1917d83385a9af001c142b622cc/ISA_CERTIFICATION_PLAN.md) (since
+deleted) for the decisions behind it.
 
 `load_data/load_isa_certifications.py` runs right after the warnings pass, gated on the
 `ISAGearCertification` table being empty, and verifies ids against `"<brand> <name>"` the same way.

@@ -1,7 +1,6 @@
 # Safety disclaimer & data-accuracy note — DRAFTS
 
-Source text for the two notices SlackData needs before launch
-([LAUNCH_RUNBOOK.md §10](LAUNCH_RUNBOOK.md)). **These are drafts for review** — Emile to edit, and the
+Source text for the two notices SlackData needed before launch. **These are drafts for review** — Emile to edit, and the
 ISA to approve before they go live, since they are published under the ISA's name.
 
 Each notice has a **short form** (fits a banner or footer) and a **full form** (a dedicated page).

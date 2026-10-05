@@ -1,6 +1,6 @@
 # Deploying SlackData (serverless — public read-only catalogue + submissions)
 
-Architecture recap (see [../LAUNCH_RUNBOOK.md §0.2](../LAUNCH_RUNBOOK.md) for the full picture):
+Architecture recap:
 
 - **API** — FastAPI as a container-image **Lambda** behind an **HTTP API**. The gear catalog is
   baked into a **read-only SQLite** file inside the image at build time, so there's no database to
@@ -16,6 +16,9 @@ Everything is pay-per-use / ≈$0 idle. No RDS, no container left running.
 - AWS credentials for the target account (the ISA's), with permission to deploy the stack.
 - Docker (Serverless builds the Lambda image locally and pushes to ECR).
 - Node + `npx serverless`, and Python + this repo's deps for the frontend/catalog builds.
+
+First time on a new machine? Set up the AWS CLI profile first — § First-time setup, at the end of
+this file.
 
 ### Serverless Framework version + account
 
@@ -50,6 +53,16 @@ npx serverless deploy --stage prod
 npm install
 export SERVERLESS_ACCESS_KEY=<key from app.serverless.com>
 ```
+
+Two v4 credentials have confusingly similar names, and the wrong one leads to a paywall:
+
+| | What it is | Cost |
+|---|---|---|
+| `SERVERLESS_LICENSE_KEY` | CLI-only auth for teams | **Requires a paid subscription** — not our path |
+| `SERVERLESS_ACCESS_KEY` | Generated from a free dashboard account (Settings → Access Keys) | **Free** under $2M revenue, no proof of eligibility asked |
+
+Prefer the access key over `serverless login`, which opens a browser WSL does not have. If signup
+asks for a credit card, you are on a paid plan — back out.
 
 Do that reasonably soon. v3 is EOL and receives no security updates — it still bundles the
 end-of-support AWS SDK v2. When you do register, **register under the ISA, not an individual**: the
@@ -91,7 +104,7 @@ aws sts get-caller-identity        # sanity: expect the ISA account
 If that errors with an expired token, `aws sso login --profile isa-slackdata` and re-run the `eval`.
 
 Then resolve the stack's resource names. **Derive them, don't hardcode them** — the bucket name
-embeds the AWS account id, which stays out of this public repo (LAUNCH_RUNBOOK.md §2):
+embeds the AWS account id, which stays out of this public repo (§ First-time setup):
 
 ```bash
 out() { aws cloudformation describe-stacks --stack-name slackdata-prod --region eu-central-1 \
@@ -246,7 +259,7 @@ it is an environment flip, not a code change.
 
 Use **GET, not `curl -I`,** for that last one: the routers declare GET only, so HEAD returns 405 on
 every API path and tells you nothing. A JSON 404 here (rather than HTML 200) is what proves
-CloudFront isn't rewriting API errors into the SPA — see LAUNCH_RUNBOOK.md §1.2.
+CloudFront isn't rewriting API errors into the SPA — see *Check the content type* above.
 
 Then in a browser: the listing loads, filters work, a detail page opens, the currency selector
 changes prices, and **DevTools shows no requests to `localhost:8000`** (which would mean the build
@@ -270,26 +283,41 @@ images.
 
 ## Local check before deploying
 
-See [../LAUNCH_RUNBOOK.md](../LAUNCH_RUNBOOK.md) §5.1 for the full smoke test (four endpoints,
-including the checks for a missing Python dep and an unbaked catalog). The short version — note the
-event must be a **complete** API Gateway v2 payload; omitting `requestContext.http.sourceIp` makes
-Mangum raise `KeyError: 'sourceIp'` before FastAPI is ever reached:
+Run this before **every** deploy. It catches an image-level failure in seconds instead of after a
+deploy. It invokes the image the way API Gateway would, through the AWS Lambda runtime emulator
+built into the base image. The event must be a **complete** API Gateway v2 payload: omitting
+`requestContext.http.sourceIp` makes Mangum raise `KeyError: 'sourceIp'` before FastAPI is ever
+reached, which looks like an application bug.
 
 ```bash
-# Build the Lambda image and invoke it like API Gateway would (uses the AWS RIE
-# built into the base image):
 docker build -f ../Dockerfile.lambda -t slackdata-api ..
 docker run -d --rm --name sd-smoke -p 9000:8080 slackdata-api
-curl -s "http://localhost:9000/2015-03-31/functions/function/invocations" -d '{
-  "version":"2.0","routeKey":"$default","rawPath":"/webbing/","rawQueryString":"limit=1",
-  "headers":{"accept":"application/json","host":"example.com"},
-  "requestContext":{"accountId":"123456789012","apiId":"abc","domainName":"example.com",
-    "stage":"$default","requestId":"r1","timeEpoch":1767225600000,
-    "http":{"method":"GET","path":"/webbing/","protocol":"HTTP/1.1",
-            "sourceIp":"1.2.3.4","userAgent":"smoke"}},
-  "isBase64Encoded":false}'
+
+ev() { cat <<EOF
+{"version":"2.0","routeKey":"\$default","rawPath":"$1","rawQueryString":"$2",
+ "headers":{"accept":"application/json","host":"example.com","cloudfront-viewer-country":"DE"},
+ "requestContext":{"accountId":"123456789012","apiId":"abc","domainName":"example.com",
+   "stage":"\$default","requestId":"r1","time":"01/Jan/2026:00:00:00 +0000","timeEpoch":1767225600000,
+   "http":{"method":"GET","path":"$1","protocol":"HTTP/1.1","sourceIp":"1.2.3.4","userAgent":"smoke"}},
+ "isBase64Encoded":false}
+EOF
+}
+inv() { curl -s "http://localhost:9000/2015-03-31/functions/function/invocations" -d "$(ev "$1" "$2")"; }
+
+inv "/webbing/" "limit=1"    # 200 + a real webbing row  → catalog baked correctly
+inv "/fx/rates" ""           # 200 + rates, "stale":false → httpx present, egress works
+inv "/webbing/999999" ""     # 404 + {"detail":"Webbing 999999 not found"}
+inv "/brand/" "limit=1"      # 200 + a real brand         → manufacturer enrichment ran
+
 docker rm -f sd-smoke
 ```
+
+Every call must return a `statusCode` and a JSON body — never `errorType`. An `ImportModuleError` or
+`ModuleNotFoundError` means a Python dependency is missing from the image: **the image pins its
+runtime deps by hand rather than installing the project**, so any new third-party import in
+`slack_data/` must be added to [Dockerfile.lambda](../Dockerfile.lambda) as well as
+[pyproject.toml](../pyproject.toml). (The first launch nearly shipped without `httpx`, which would
+have 502'd every request.) An empty list from the first call means the catalog didn't bake.
 
 ## Phase 2 — submissions and admin triage
 
@@ -812,3 +840,100 @@ Objects expire after 90 days by lifecycle rule, so rejected uploads clear themse
 Worth repeating here because it is the thing people expect to be automatic. Approving records the
 outcome and hands the admin a JSON patch. Making it live is the ordinary flow: edit the root
 `*.json`, commit, and run **half A** again to re-bake the catalog into the image.
+
+## First-time setup — credentials, WSL and the AWS CLI
+
+Done once per machine. Phase 1 went live on `slackdata.org` on 2026-08-17; the step-by-step launch
+record is in git history (`LAUNCH_RUNBOOK.md`, removed 2026-10-04). What still applies is here.
+
+### Ground rules on credentials
+
+**An agent never receives the AWS credentials** — not the portal password, the one-time password,
+an access key or a session token. They belong to a third-party organisation, the ISA.
+
+| Task | Who |
+|------|-----|
+| First browser login to the AWS access portal, password reset, MFA enrolment | **Human only** |
+| `aws configure sso` (opens a browser, human approves) | **Human only** |
+| Everything after that (`aws …`, `serverless deploy`, builds) | An agent may run it, using the **named profile** the human created |
+
+An agent works by referencing the profile (`--profile isa-slackdata`). If the session has expired it
+stops and asks the human to run `aws sso login --profile isa-slackdata`. It never asks for
+credentials in a chat; if they are pasted anyway, it says so, stores them nowhere, and asks for them
+to be rotated.
+
+**This repository is public.** The account id, portal URL and permission-set name live in
+`~/.aws/config` and nowhere else — `aws configure sso` writes them there, and everything downstream
+refers to the profile name. A scratch note inside the working tree is one `git add -A` away from a
+public commit; keep it outside (`~/isa-aws-notes.md`). The template builds every ARN with
+`${aws:accountId}` so the id never needs writing down; pasting a literal ARN over one quietly
+publishes it.
+
+### The AWS CLI profile
+
+Install the official v2 CLI **inside WSL** — not the Windows installer (see the shadowing problem
+below), not `apt install awscli` (CLI v1: no `aws sso login`, cannot read an `sso_session` profile),
+and not the snap (confines its view of `~/.aws`):
+
+```bash
+sudo apt install -y unzip
+curl -s "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o /tmp/awscliv2.zip
+unzip -q /tmp/awscliv2.zip -d /tmp && sudo /tmp/aws/install
+
+aws configure sso
+# SSO session name:  isa
+# SSO start URL:     <the default portal URL>   (the dual-stack one is for IPv6-only networks)
+# SSO region:        <region from the portal>
+# SSO registration scopes: sso:account:access   (accept the default)
+# Account / Role:    <the ISA account> / <the permission set>
+# CLI default region: eu-central-1
+# Profile name:      isa-slackdata
+
+aws sts get-caller-identity --profile isa-slackdata     # the only output an agent needs to see
+```
+
+Sessions last 8–12 h; renew with `aws sso login --profile isa-slackdata`.
+
+### WSL pitfalls — each one looks like a different problem
+
+- **`~/.aws` owned by root** makes `aws configure sso` fail with what reads like a CLI bug:
+  `sudo chown -R "$USER:$USER" ~/.aws`.
+- **No browser inside WSL.** `sudo apt install -y wslu && export BROWSER=wslview`, or
+  `aws sso login --profile isa-slackdata --no-browser` and paste the URL yourself. **Check the code
+  on screen matches the one in the browser** before approving — that is the step's whole security
+  value.
+- **Two AWS CLIs.** WSL puts Windows executables on `PATH`, so `aws` may be `aws.exe`, which reads
+  `C:\Users\<you>\.aws\config`. Symptom: a profile that "doesn't exist" moments after you created
+  it. `which aws` should be `/usr/local/bin/aws`.
+- **Docker** comes from Docker Desktop with WSL integration enabled for this distro (Settings →
+  Resources → WSL integration). Don't also install `docker-ce` inside the distro — two daemons.
+- **Clock drift after the host sleeps** makes AWS reject signatures (`InvalidSignatureException`, or
+  a token "expired" seconds after login). `sudo hwclock -s` before debugging anything else.
+- **CRLF.** Editing from a Windows-side editor can turn a one-line change into a whole-file diff.
+  Edit from inside WSL.
+
+### The Lambda execution role is the ISA's to create
+
+The SSO permission set (`slackdata-dev-access`) is `Allow *` with a short deny list. One entry,
+`DenyIdentitySelfEscalation`, blocks `iam:CreateRole`, `iam:PutRolePolicy`, `iam:AttachRolePolicy`,
+`iam:CreatePolicy` and friends, so a compromised dev session cannot mint itself an admin role.
+**Don't ask for `iam:CreateRole` to be granted** — it defeats the guardrail. `iam:PassRole` is not
+denied: using a role is fine, creating one is not.
+
+So an ISA admin created `slackdata-prod-eu-central-1-lambdaRole` once, and `serverless.yml`
+references it via `provider.iam.role`, reproducing the name Serverless would have generated. Any
+change to what the Lambda may do is therefore a request to the ISA —
+[ISA_ROLE_REQUEST_PHASE2.md](ISA_ROLE_REQUEST_PHASE2.md) is what the role holds today, and
+[LAMBDA_ROLE_PERMISSIONS.md](LAMBDA_ROLE_PERMISSIONS.md) the reasoning.
+
+- **Don't borrow another service's role.** Every role in the account scopes its logging to its own
+  prefix (`slackmap-prod-…`), so the API would run and write **no logs at all** — Lambda doesn't
+  error when it cannot log, it goes silent.
+- **The alternative,** if the ISA would rather not manage the role: `provider.cfnRole` set to a
+  CloudFormation execution role, so CloudFormation creates the Lambda role. The only such role today
+  is the CDK bootstrap role, and borrowing it couples deploys to the CDK toolkit; a dedicated CFN
+  deploy role would avoid that.
+
+The permission set also denies **`budgets:*` and `ce:*`** (so the budget alarm needs an ISA admin —
+see BACKLOG.md) and **`ec2:*`** (so no VPC attachment is possible, and the Lambda runs outside one,
+which the FX endpoint's outbound call needs).

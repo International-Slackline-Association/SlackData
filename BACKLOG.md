@@ -231,7 +231,7 @@ Non-phase engineering tasks not tracked in [PLAN.md](PLAN.md) (frontend roadmap)
   `isa_approved_data.csv`, then rebuilds `isa_certified.json` with `scripts/build_isa_certified.py`
   (which keeps every hand-written `match` block and reports new certificates with an empty one).
   Certification is **derived** from that file by `load_isa_certifications.py` — no gear seed
-  carries a flag any more (CLAUDE.md § ISA certifications, [ISA_CERTIFICATION_PLAN.md](ISA_CERTIFICATION_PLAN.md)).
+  carries a flag any more (CLAUDE.md § ISA certifications, [PR #83](https://github.com/International-Slackline-Association/SlackData/pull/83)).
   So the job's real output is a queue of new certificates to adjudicate, not a DB write. All 17
   certificates we can hold are matched today, including **BC Loop** (leashring 27, the renamed BC
   Aluminum Leash Ring) and **SlackX Orange** (hand-matched to weblock 58 `Radrigs Orange`: the
@@ -244,7 +244,7 @@ Non-phase engineering tasks not tracked in [PLAN.md](PLAN.md) (frontend roadmap)
 
 - [ ] **"Not for highline" research for the other gear types.** `manufacturer_not_for_highline`
   (+ `_source`) exists on all eight gear models, but the first research pass covered only the 35
-  sub-22 kN webbings (ISA_CERTIFICATION_PLAN.md Appendix A). Still to check against each maker's own
+  sub-22 kN webbings (Appendix A of the [certification plan](https://github.com/International-Slackline-Association/SlackData/blob/5be24c10402cd1917d83385a9af001c142b622cc/ISA_CERTIFICATION_PLAN.md#appendix-a-the-35-sub-22-kn-webbings-s3-research-list), PR #83). Still to check against each maker's own
   page: weblocks, rollers, leash rings, grips, tree protectors, starter kits, trickline kits. `true`
   only on an explicit statement, `false` when marketed for highlining, `null` when silent or gone.
 
@@ -432,6 +432,27 @@ Non-phase engineering tasks not tracked in [PLAN.md](PLAN.md) (frontend roadmap)
   - **Balance Community links most manuals client-side**, so crawling their HTML found three of the
     five we hold; the rest were confirmed by verified URL. A future sweep of that catalogue needs a
     real browser, not curl.
+
+## Infrastructure / deploy
+
+Carried over from LAUNCH_RUNBOOK.md and PHASE4_SHIP_PLAN.md when both were removed (2026-10-04).
+
+- [ ] **Serverless Framework v3 → v4, and who runs deploys.** Pinned to v3 so launch did not wait
+  on deciding who owns a Serverless account; v3 is EOL and gets no security updates. The same
+  answer decides both: whether we deploy into the ISA's account or they deploy from this config,
+  and whose account the Serverless org lives under (it should be ISA-owned, not personal).
+  Migration itself is a version bump and one env var — infra/README.md § Serverless Framework
+  version + account.
+- [ ] **Budget alarm.** Needs an ISA admin: `budgets:*` and `ce:*` are denied to our permission
+  set. Suggested: a $20/month `COST` budget named `slackdata`.
+- [ ] **Delete the orphaned Cognito pool `eu-central-1_kIHciXdAG`** — left over from the failed
+  2026-08-25 deploy (the stack-managed admin pool is `eu-central-1_Fzl6ssZOQ`). Check first whether
+  it is already gone.
+- [ ] **ISA sign-off on the manufacturer onboarding policy** (infra/README.md § Onboarding policy)
+  from whoever holds the ISA's slackdata mailbox. Three brands have been onboarded under it since
+  2026-08-28; check whether this was given and record it.
+- [ ] **No Cypress coverage of the triage UI's manufacturer path**: batch grouping, the manufacturer
+  badge, the SKU and rejecting an already-approved row. The grouping logic is unit-tested only.
 
 ## Frontend / UX
 

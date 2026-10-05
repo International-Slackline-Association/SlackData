@@ -10,8 +10,8 @@
 # The frontend is built + synced separately (see infra/README.md) — Serverless
 # manages the API + AWS resources, not the SPA upload.
 #
-# The ISA-specific values (region, custom domain, ACM certificate) are filled in
-# — see LAUNCH_RUNBOOK.md §5.2. This template deploys as-is into that account.
+# The ISA-specific values (region, custom domain, ACM certificate) are filled in.
+# This template deploys as-is into that account.
 
 service: slackdata
 
@@ -56,7 +56,8 @@ provider:
   # and is never written. **Applied 2026-08-23.** The exact policy is in
   # ISA_ROLE_REQUEST_PHASE2.md; the reasoning, and what is deliberately excluded
   # (no DeleteItem, no Scan, no Cognito, no `Resource: "*"`), is in
-  # LAMBDA_ROLE_PERMISSIONS.md. See also LAUNCH_RUNBOOK.md §5.4.
+  # LAMBDA_ROLE_PERMISSIONS.md. Why the ISA creates the role: infra/README.md
+  # § The Lambda execution role is the ISA's to create.
   iam:
     #
     # **Pinned to the `prod` role on every stage**, which looks wrong and is not.

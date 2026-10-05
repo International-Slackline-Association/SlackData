@@ -1,10 +1,10 @@
 # SUBMISSIONS_PLAN.md — Phase 2: submit-a-change + admin triage
 
 Implementation plan for the next agent. Phase 1 (public read-only catalogue) is **live** at
-`https://slackdata.org` — see [LAUNCH_RUNBOOK.md](LAUNCH_RUNBOOK.md) for how it got there and
-[infra/README.md](infra/README.md) § Deploying to live for how to ship changes.
+`https://slackdata.org` — see [infra/README.md](infra/README.md) § Deploying to live for how to
+ship changes.
 
-Read [LAUNCH_RUNBOOK.md §0.2](LAUNCH_RUNBOOK.md) before starting. Its two-data-domains principle is the reason
+Read [CLAUDE.md](CLAUDE.md) § Submissions before starting. Its two-data-domains principle is the reason
 this phase is additive, and the reason it must not become a catalogue rewrite.
 
 ---
@@ -70,7 +70,8 @@ start the rest.
 **The Lambda execution role is owned by the ISA, not by this repo.** Emile's SSO permission set denies
 `iam:CreateRole` under a `DenyIdentitySelfEscalation` guardrail, so the role
 `slackdata-prod-eu-central-1-lambdaRole` was created by an ISA admin and is referenced via
-`provider.iam.role` in [infra/serverless.yml](infra/serverless.yml). See LAUNCH_RUNBOOK.md §5.4.
+`provider.iam.role` in [infra/serverless.yml](infra/serverless.yml). See
+[infra/README.md](infra/README.md) § The Lambda execution role is the ISA's to create.
 
 **Done — granted and applied 2026-08-23, re-confirmed 2026-08-24.** It held CloudWatch Logs and
 nothing else; it now also carries DynamoDB. What was actually granted is **broader than the sketch
@@ -204,7 +205,7 @@ same way `/safety` and `/manufacturers` do; see the comment at the top of
 
 ## Abuse, spam and cost control
 
-Public unauthenticated `POST` will attract bots. From [LAUNCH_RUNBOOK.md §10](LAUNCH_RUNBOOK.md), all three
+Public unauthenticated `POST` will attract bots. All three
 from day one:
 
 1. **Cloudflare Turnstile** — free, no account friction. Verify the token server-side; a token that
