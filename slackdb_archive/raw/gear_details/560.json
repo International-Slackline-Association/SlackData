@@ -1,0 +1,64 @@
+{
+ "gearDetail": {
+  "_id": 560,
+  "slug": "PaddleLinelock",
+  "itemTypeId": "WLCK",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1542140353169,
+  "name": "Paddle Linelock",
+  "material": [
+   "SS"
+  ],
+  "weight": 317,
+  "wll": 14,
+  "mbs": 50,
+  "anchorConnectionType": [
+   "MH"
+  ],
+  "webbingConnectionType": [
+   "SP"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 49,
+   "max": 51
+  },
+  "usage": [
+   "TL"
+  ],
+  "productionStatus": "DC",
+  "manufacturerId": 24,
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 42.95
+    }
+   ]
+  },
+  "imagesCount": 0
+ },
+ "similarGear": [
+  {
+   "_id": 509,
+   "slug": "PaddleSH",
+   "itemTypeId": "WLCK",
+   "name": "Paddle SH",
+   "manufacturerId": 9,
+   "manufacturer": {
+    "name": "Equilibrium Slacklines (EQB)",
+    "url": "https://www.slackshop.cz/en/",
+    "countryTxt": "Czech Republic",
+    "countryCode": "CZ"
+   }
+  }
+ ]
+}

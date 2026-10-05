@@ -1,0 +1,40 @@
+{
+ "gearDetail": {
+  "_id": 3185,
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   },
+   {
+    "id": "10211802848940671",
+    "name": "Thomas Buckingham"
+   }
+  ],
+  "itemTypeId": "TLK",
+  "slug": "kit_freestyle22m-andylewisx13",
+  "creatorId": "2824084041240796",
+  "creationDate": 1621927211777,
+  "name": "Kit Freestyle 22m - Andy Lewis X13",
+  "weight": 7800,
+  "webbingLength": 22,
+  "webbingWidth": 5,
+  "tensioningType": "RAT2",
+  "productionStatus": "AC",
+  "manufacturerId": 12,
+  "url": "https://laboutique.slack.fr/en/mid-level-slack-2535m/327-kit-freestyle-andy-lewis-slackline.html?fbclid=IwAR2dNVp-afje4n2EDp3MmF23fT_mHKwvaHh9cUyVwPT1JJfJufXXGPbdcUY",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 200
+    }
+   ]
+  },
+  "lastEditDate": 1622013150680,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

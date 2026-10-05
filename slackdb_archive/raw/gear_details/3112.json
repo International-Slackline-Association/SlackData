@@ -1,0 +1,46 @@
+{
+ "gearDetail": {
+  "_id": 3112,
+  "name": "Grippen",
+  "material": [
+   "SS",
+   "PETG"
+  ],
+  "weight": 115,
+  "wll": 3,
+  "mbs": 6,
+  "connectionType": [
+   "SL"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 24,
+   "max": 26
+  },
+  "dateIntroduced": 1580248800000,
+  "productionStatus": "AC",
+  "manufacturerId": 9,
+  "url": "https://www.slackshop.cz/en/linegrip/166-396-eqb-grippen.html",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 39.95
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "WGP",
+  "slug": "grippen",
+  "creatorId": "10154430595665625",
+  "creationDate": 1587246615572,
+  "imagesCount": 2
+ },
+ "similarGear": []
+}

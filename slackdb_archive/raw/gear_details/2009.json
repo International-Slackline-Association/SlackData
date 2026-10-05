@@ -1,0 +1,28 @@
+{
+ "gearDetail": {
+  "_id": 2009,
+  "name": "3.25T D Shackle",
+  "slug": "325TDShackle",
+  "manufacturerId": 37,
+  "material": [
+   "S"
+  ],
+  "itemTypeId": "CON",
+  "weight": 577,
+  "wll": 32.5,
+  "mbs": 195,
+  "productionStatus": "AC",
+  "remarks": "Van Beest Rating",
+  "connectorType": "DS",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "imagesCount": 0
+ },
+ "similarGear": []
+}

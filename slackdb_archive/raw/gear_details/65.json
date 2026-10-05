@@ -1,0 +1,33 @@
+{
+ "gearDetail": {
+  "_id": 65,
+  "slug": "MatrixOuter",
+  "itemTypeId": "WEB",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "name": "Matrix Outer",
+  "webbingType": "TR",
+  "material": [
+   "NY"
+  ],
+  "dWidth": 32,
+  "weight": 58,
+  "wll": 8,
+  "mbs": 27,
+  "elongation": {
+   "percent": 14,
+   "force": 9
+  },
+  "productionStatus": "DC",
+  "manufacturerId": 2,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1536593172706,
+  "imagesCount": 0
+ },
+ "similarGear": []
+}

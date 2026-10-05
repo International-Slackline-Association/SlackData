@@ -1,0 +1,32 @@
+{
+ "manufacturerDetail": {
+  "_id": 73,
+  "name": "Easy Slackline",
+  "location": {
+   "countryCode": "FR",
+   "lat": 46.603354,
+   "lng": 1.8883335
+  },
+  "imageFilename": "easy_slackline.jpg",
+  "isActive": true,
+  "isSlacklineOriented": true,
+  "url": "http://www.easy-slackline.fr",
+  "fbPage": "https://www.facebook.com/EasySlackline.CO",
+  "contributors": [
+   {
+    "id": "10211802848940671",
+    "name": "Thomas Buckingham"
+   }
+  ],
+  "creatorId": "10211802848940671",
+  "creationDate": 1600765469983,
+  "slug": "easy_slackline",
+  "imagesCount": 0,
+  "gearStats": [
+   {
+    "itemTypeId": "SKT",
+    "count": 4
+   }
+  ]
+ }
+}

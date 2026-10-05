@@ -1,0 +1,36 @@
+{
+ "manufacturerDetail": {
+  "_id": 69,
+  "imageFilename": "a_zero.jpg",
+  "contributors": [
+   {
+    "id": "10211802848940671",
+    "name": "Thomas Buckingham"
+   },
+   {
+    "id": "10225070182092522",
+    "name": "Emiliano Benito"
+   }
+  ],
+  "creatorId": "10211802848940671",
+  "creationDate": 1600714318165,
+  "slug": "a-zero",
+  "name": "A-Zero Slackline",
+  "location": {
+   "countryCode": "AR",
+   "address": "Río Juramento 2635, Godoy Cruz, Mendoza",
+   "lat": -32.872518,
+   "lng": -68.831643,
+   "isExact": true
+  },
+  "yearEstablished": 2018,
+  "isActive": true,
+  "isSlacklineOriented": true,
+  "url": "https://www.a-zero.com.ar/",
+  "fbPage": "https://www.facebook.com/A-Zero-175969599786013",
+  "description": "Fabricación de productos de anclaje, manipulación de las cintas y rescate, como así también productos relacionados y accesorios para Slackline",
+  "lastEditDate": 1616431403804,
+  "imagesCount": 0,
+  "gearStats": null
+ }
+}

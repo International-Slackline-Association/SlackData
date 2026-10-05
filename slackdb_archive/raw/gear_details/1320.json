@@ -1,0 +1,24 @@
+{
+ "gearDetail": {
+  "_id": 1320,
+  "name": "Tapir",
+  "slug": "Tapir",
+  "manufacturerId": 18,
+  "itemTypeId": "BRK",
+  "wll": 2,
+  "productionStatus": "AC",
+  "url": "https://www.facebook.com/OneInchDreams/photos/a.324531780929337.70200.319972641385251/881873901861786/?type=3&__mref=message_bubble",
+  "remarks": "Sold as part of a pulley system set",
+  "breakingMethod": "CAM",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

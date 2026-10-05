@@ -1,0 +1,35 @@
+{
+ "gearDetail": {
+  "_id": 3198,
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "15_mclipx27nslackset",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622017821893,
+  "name": "15 m Clip n Slack Set",
+  "webbingLength": 15,
+  "webbingWidth": 25,
+  "tensioningType": "RAT2",
+  "productionStatus": "AC",
+  "manufacturerId": 25,
+  "url": "https://www.slack-shop.de/15m-clip-n-slack-set.html",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 120
+    }
+   ]
+  },
+  "lastEditDate": 1622026079644,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

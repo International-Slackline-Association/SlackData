@@ -1,0 +1,39 @@
+{
+ "gearDetail": {
+  "_id": 114,
+  "slug": "Tube1",
+  "itemTypeId": "WEB",
+  "maxLength": 90,
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "name": "Tube #1",
+  "webbingType": "TB",
+  "material": [
+   "NY"
+  ],
+  "dWidth": 25,
+  "mbs": 18,
+  "productionStatus": "AC",
+  "manufacturerId": 43,
+  "url": "http://www.slacklineshop.co.nz/product/25-mm-tubular-nylon-slackline-webbing-assorted-colors-order-by-the-metre/",
+  "pricing": {
+   "currency": "NZD",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 2.7
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1499107997405,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

@@ -1,0 +1,126 @@
+{
+ "gearDetail": {
+  "_id": 118,
+  "slug": "FeatherPro",
+  "itemTypeId": "WEB",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "name": "Feather Pro",
+  "webbingType": "FL",
+  "material": [
+   "PL"
+  ],
+  "dWidth": 25,
+  "weight": 51,
+  "wll": 5.4,
+  "mbs": 27,
+  "dDepth": 2.46,
+  "elongation": {
+   "percent": 10.48,
+   "force": 10
+  },
+  "dateIntroduced": 1459900800000,
+  "productionStatus": "AC",
+  "manufacturerId": 3,
+  "url": "http://www.balancecommunity.com/feather-pro",
+  "pricing": {
+   "currency": "USD",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 2.36
+    },
+    {
+     "q": 15,
+     "qt": "EX",
+     "price": 2.4
+    },
+    {
+     "q": 30,
+     "qt": "EX",
+     "price": 2.4
+    },
+    {
+     "q": 50,
+     "qt": "EX",
+     "price": 2.36
+    },
+    {
+     "q": 60,
+     "qt": "EX",
+     "price": 2.38
+    },
+    {
+     "q": 75,
+     "qt": "EX",
+     "price": 2.37
+    },
+    {
+     "q": 100,
+     "qt": "EX",
+     "price": 2.35
+    },
+    {
+     "q": 120,
+     "qt": "EX",
+     "price": 2.37
+    },
+    {
+     "q": 150,
+     "qt": "EX",
+     "price": 2.37
+    },
+    {
+     "q": 200,
+     "qt": "EX",
+     "price": 2.34
+    },
+    {
+     "q": 250,
+     "qt": "EX",
+     "price": 2.32
+    },
+    {
+     "q": 300,
+     "qt": "EX",
+     "price": 2.33
+    },
+    {
+     "q": 400,
+     "qt": "EX",
+     "price": 2.28
+    },
+    {
+     "q": 500,
+     "qt": "EX",
+     "price": 2.28
+    },
+    {
+     "q": 600,
+     "qt": "EX",
+     "price": 2.28
+    },
+    {
+     "q": 750,
+     "qt": "EX",
+     "price": 2.27
+    },
+    {
+     "q": 1000,
+     "qt": "EX",
+     "price": 2.2
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1500449755800,
+  "imagesCount": 2
+ },
+ "similarGear": []
+}

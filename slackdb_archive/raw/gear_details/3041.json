@@ -1,0 +1,54 @@
+{
+ "gearDetail": {
+  "_id": 3041,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "1926834980912587",
+    "name": "Shizz Wh"
+   }
+  ],
+  "itemTypeId": "WLCK",
+  "slug": "linelock_mini",
+  "creatorId": "10154430595665625",
+  "creationDate": 1506858889612,
+  "lastEditDate": 1712937944248,
+  "name": "LineLock mini",
+  "material": [
+   "HSS",
+   "AL"
+  ],
+  "weight": 175,
+  "wll": 30,
+  "mbs": 60,
+  "anchorConnectionType": [
+   "MH"
+  ],
+  "webbingConnectionType": [
+   "CP"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 24,
+   "max": 26
+  },
+  "dateIntroduced": 1506805200000,
+  "productionStatus": "AC",
+  "manufacturerId": 60,
+  "url": "https://krok.biz/slackline/layn-lok-mini",
+  "pricing": {
+   "currency": "RUB",
+   "lst": [
+    {
+     "qt": "AA",
+     "q": 1,
+     "price": 1730
+    }
+   ]
+  },
+  "imagesCount": 4
+ },
+ "similarGear": []
+}

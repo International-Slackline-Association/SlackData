@@ -1,0 +1,63 @@
+{
+ "_id": 264,
+ "takenDate": 1519794000000,
+ "imageScope": "STP",
+ "imageSource": "UOFF",
+ "ImageEnvType": "US",
+ "imageType": "RG",
+ "lineLength": 35,
+ "tags": [
+  "landcruising",
+  "lynx",
+  "lynx vari",
+  "aloha"
+ ],
+ "gearTags": [
+  {
+   "x": 665,
+   "y": 736,
+   "width": 43,
+   "height": 22,
+   "gearId": 516
+  },
+  {
+   "x": 1233,
+   "y": 483,
+   "width": 46,
+   "height": 34,
+   "gearId": 2012
+  },
+  {
+   "x": 621,
+   "y": 1017,
+   "width": 57,
+   "height": 50,
+   "gearId": 131
+  },
+  {
+   "x": 915,
+   "y": 965,
+   "width": 56,
+   "height": 40,
+   "gearId": 3050
+  }
+ ],
+ "gearId": [
+  516,
+  2012,
+  131,
+  3050
+ ],
+ "contributors": [
+  {
+   "id": "10160004374565647",
+   "name": "Andrés Rojas"
+  }
+ ],
+ "creationDate": 1519850699053,
+ "creatorId": "10160004374565647",
+ "filename": "264.jpg",
+ "width": 1706,
+ "height": 1280,
+ "creatorName": "Andrés Rojas"
+}

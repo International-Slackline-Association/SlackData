@@ -1,0 +1,31 @@
+{
+ "manufacturerDetail": {
+  "_id": 75,
+  "contributors": [
+   {
+    "id": "10225855618075562",
+    "name": "Bernd Lohmueller"
+   }
+  ],
+  "creatorId": "10225855618075562",
+  "creationDate": 1620242712583,
+  "slug": "bloacs",
+  "lastEditDate": 1622099333905,
+  "name": "BLOACS",
+  "location": {
+   "countryCode": "DE",
+   "address": "Zülpicher Str. 381 50935 Köln",
+   "lat": 50.843152,
+   "lng": 7.106556,
+   "isExact": true
+  },
+  "yearEstablished": 2016,
+  "isActive": true,
+  "isSlacklineOriented": true,
+  "url": "https://bloacs.de/",
+  "fbPage": "https://m.facebook.com/BLOACS/",
+  "description": "Permanently installed &amp; usable Slackline-Systems for Public areas",
+  "imagesCount": 0,
+  "gearStats": null
+ }
+}

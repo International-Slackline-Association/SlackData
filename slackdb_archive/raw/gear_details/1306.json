@@ -1,0 +1,46 @@
+{
+ "gearDetail": {
+  "_id": 1306,
+  "name": "Mini Traxion",
+  "slug": "MiniTraxion",
+  "manufacturerId": 31,
+  "material": [
+   "AL"
+  ],
+  "itemTypeId": "BRK",
+  "weight": 165,
+  "mbs": 20,
+  "productionStatus": "AC",
+  "url": "http://www.petzl.com/en/Sport/Pulleys/MICRO-TRAXION?l=INT#.Vjz3wX4wiUk",
+  "remarks": "Very efficient but almost impossible to detension - requires soft release system",
+  "breakingMethod": "TCAM",
+  "compatibleRopeDiameter": {
+   "min": 8,
+   "max": 13
+  },
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "imagesCount": 0
+ },
+ "similarGear": [
+  {
+   "_id": 1308,
+   "name": "JAG Traxion",
+   "slug": "JAGTraxion",
+   "manufacturerId": 31,
+   "itemTypeId": "BRK",
+   "manufacturer": {
+    "name": "Petzl",
+    "url": "http://www.petzl.com/en?l=INT",
+    "countryTxt": "France",
+    "countryCode": "FR"
+   }
+  }
+ ]
+}

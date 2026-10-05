@@ -18,5 +18,6 @@ frontend/dist
 
 # Local/dev-only material not needed at runtime.
 scraper
+slackdb_archive
 scripts/.cache
 scratchpad_dl

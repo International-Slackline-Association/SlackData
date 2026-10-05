@@ -1,0 +1,51 @@
+{
+ "gearDetail": {
+  "_id": 3017,
+  "contributors": [
+   {
+    "id": "1541853415834804",
+    "name": "Stephan Chalkowski"
+   },
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "BRK",
+  "slug": "raed_propulleysystem",
+  "creatorId": "1541853415834804",
+  "creationDate": 1501677284982,
+  "name": "Raed PRO Pulley System",
+  "material": [
+   "VC",
+   "PL",
+   "DY",
+   "KV",
+   "HSS"
+  ],
+  "wll": 15,
+  "compatibleRopeDiameter": {
+   "min": 5,
+   "max": 6
+  },
+  "breakingMethod": "TCAM",
+  "efficiency": 95,
+  "productionStatus": "AC",
+  "manufacturerId": 26,
+  "url": "https://raed-slacklines.com/pro-9-1-slackline-pulley-system",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "price": 499,
+     "q": 1,
+     "qt": "EX"
+    }
+   ],
+   "hasAddOpts": true
+  },
+  "lastEditDate": 1587236045065,
+  "imagesCount": 9
+ },
+ "similarGear": []
+}

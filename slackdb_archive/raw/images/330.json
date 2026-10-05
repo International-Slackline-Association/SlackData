@@ -1,0 +1,28 @@
+{
+ "_id": 330,
+ "description": "One of the first Raven prototypes.",
+ "gearId": 3078,
+ "imageScope": "ITM",
+ "imageSource": "OFF",
+ "gearCondition": "NEW",
+ "ImageEnvType": "STD",
+ "imageType": "CLS",
+ "tags": [
+  "rodeo",
+  "rodeoline",
+  "travel kit",
+  "raven"
+ ],
+ "contributors": [
+  {
+   "id": "10211949994419911",
+   "name": "Paul Ionut Anton"
+  }
+ ],
+ "creationDate": 1555045070048,
+ "creatorId": "10211949994419911",
+ "filename": "330.jpg",
+ "width": 1706,
+ "height": 1280,
+ "creatorName": "Paul Ionut Anton"
+}

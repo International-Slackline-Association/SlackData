@@ -1,0 +1,44 @@
+{
+ "manufacturerDetail": {
+  "_id": 62,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "creatorId": "10154430595665625",
+  "creationDate": 1538000482926,
+  "slug": "souz_slackline",
+  "lastEditDate": 1712946529797,
+  "name": "Souz Slackline",
+  "location": {
+   "countryCode": "RU",
+   "address": "Saint Petersburg",
+   "lat": 59.9342802,
+   "lng": 30.3350986
+  },
+  "yearEstablished": 2018,
+  "isSlacklineOriented": true,
+  "url": "https://souzslackline.com",
+  "imagesCount": 0,
+  "gearStats": [
+   {
+    "itemTypeId": "WGP",
+    "count": 2
+   },
+   {
+    "itemTypeId": "WEB",
+    "count": 1
+   },
+   {
+    "itemTypeId": "WLCK",
+    "count": 9
+   },
+   {
+    "itemTypeId": "LRNG",
+    "count": 1
+   }
+  ]
+ }
+}

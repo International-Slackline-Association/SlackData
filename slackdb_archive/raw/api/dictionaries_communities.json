@@ -1,0 +1,37 @@
+[
+    {
+        "_id": "ESS",
+        "description": "Entity size string",
+        "entries": {
+            "T": "Tiny",
+            "S": "Small",
+            "M": "Medium",
+            "L": "Large",
+            "H": "Huge"
+        }
+    },
+    {
+        "_id": "CONT",
+        "description": "Continents",
+        "entries": {
+            "AS": "Asia",
+            "AF": "Africa",
+            "NA": "North America",
+            "SA": "South America",
+            "EU": "Europe",
+            "OC": "Oceania",
+            "ANT": "Antarctica"
+        }
+    },
+    {
+        "_id": "COMT",
+        "description": "Community Type",
+        "entries": {
+            "ASC": "Association",
+            "TEAM": "Team",
+            "MRKT": "Market",
+            "CAMP": "Camp",
+            "COM": "Community"
+        }
+    }
+]

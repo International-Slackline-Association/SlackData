@@ -1,0 +1,36 @@
+{
+ "gearDetail": {
+  "_id": 3187,
+  "name": "BC Prim-25 Slackline Kit",
+  "weight": 2000,
+  "webbingLength": 25,
+  "webbingWidth": 25,
+  "tensioningType": "PRIM",
+  "includesTreePro": true,
+  "productionStatus": "AC",
+  "manufacturerId": 3,
+  "url": "https://www.balancecommunity.com/products/bc-prim-25-slackline-kit?variant=31486157258810",
+  "pricing": {
+   "currency": "USD",
+   "lst": [
+    {
+     "price": 99,
+     "qt": "AA",
+     "q": 1
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "bc_prim-25slacklinekit",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622014899411,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

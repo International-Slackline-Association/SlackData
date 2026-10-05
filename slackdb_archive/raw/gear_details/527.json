@@ -1,0 +1,65 @@
+{
+ "gearDetail": {
+  "_id": 527,
+  "slug": "Rhino",
+  "itemTypeId": "WLCK",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "10155267793869667",
+    "name": "Romain Schempf"
+   }
+  ],
+  "lastEditDate": 1542151168550,
+  "name": "Rhino",
+  "material": [
+   "SS"
+  ],
+  "weight": 410,
+  "wll": 20,
+  "mbs": 60,
+  "anchorConnectionType": [
+   "MH"
+  ],
+  "webbingConnectionType": [
+   "QP"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 20,
+   "max": 27
+  },
+  "diverterDiameter": 35,
+  "efficiency": 95,
+  "usage": [
+   "SL",
+   "HL",
+   "LL",
+   "RL",
+   "LTL"
+  ],
+  "productionStatus": "DC",
+  "manufacturerId": 4,
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 45
+    },
+    {
+     "q": 2,
+     "qt": "EX",
+     "price": 40
+    }
+   ]
+  },
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

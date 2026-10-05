@@ -1,0 +1,33 @@
+{
+ "gearDetail": {
+  "_id": 14,
+  "slug": "Dibona",
+  "itemTypeId": "WEB",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1503917417362,
+  "name": "Dibona",
+  "webbingType": "TB",
+  "material": [
+   "PL"
+  ],
+  "dWidth": 25,
+  "weight": 65,
+  "wll": 8,
+  "mbs": 25,
+  "elongation": {
+   "percent": 10,
+   "force": 10
+  },
+  "productionStatus": "DC",
+  "manufacturerId": 8,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

@@ -1,0 +1,70 @@
+{
+ "gearDetail": {
+  "_id": 3129,
+  "name": "Zen 2",
+  "webbingType": "FL",
+  "material": [
+   "PL"
+  ],
+  "dWidth": 25.4,
+  "weight": 64,
+  "mbs": 32,
+  "elongation": {
+   "percent": 9,
+   "force": 10
+  },
+  "dateIntroduced": 1604181600000,
+  "productionStatus": "PO",
+  "manufacturerId": 46,
+  "url": "https://middlewayslacklines.com/product/zen25mm/",
+  "pricing": {
+   "currency": "ILS",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 6.9
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "WEB",
+  "slug": "zen_2",
+  "creatorId": "10154430595665625",
+  "creationDate": 1604316927102,
+  "imagesCount": 1
+ },
+ "similarGear": [
+  {
+   "_id": 3068,
+   "itemTypeId": "WEB",
+   "slug": "coelum",
+   "name": "Coelum",
+   "manufacturerId": 45,
+   "manufacturer": {
+    "name": "Petram Slacklines",
+    "url": "https://petramslacklines.site123.me/",
+    "countryTxt": "Poland",
+    "countryCode": "PL"
+   }
+  },
+  {
+   "_id": 89,
+   "slug": "Aero",
+   "itemTypeId": "WEB",
+   "name": "Aero",
+   "manufacturerId": 3,
+   "manufacturer": {
+    "name": "Balance Community: Slackline Outfitters",
+    "url": "http://www.balancecommunity.com",
+    "countryTxt": "United States",
+    "countryCode": "US"
+   }
+  }
+ ]
+}

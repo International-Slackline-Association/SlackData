@@ -1,0 +1,33 @@
+{
+ "gearDetail": {
+  "_id": 3176,
+  "name": "Baumschutz Easy",
+  "dWidth": 12,
+  "dLength": 300,
+  "productionStatus": "AC",
+  "manufacturerId": 55,
+  "url": "https://slackstar.de/lines-zubehoer/baumschutz/865/baumschutz-easy",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "price": 59.6,
+     "q": 1,
+     "qt": "AA"
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "TRP",
+  "slug": "baumschutz_easy",
+  "creatorId": "2824084041240796",
+  "creationDate": 1621874301952,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

@@ -1,0 +1,46 @@
+{
+ "gearDetail": {
+  "_id": 3097,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "WGP",
+  "slug": "snatch_22t",
+  "creatorId": "10154430595665625",
+  "creationDate": 1586858579730,
+  "name": "Snatch 2.2T",
+  "material": [
+   "AL",
+   "DY"
+  ],
+  "weight": 190,
+  "wll": 10,
+  "mbs": 35,
+  "connectionType": [
+   "DSL"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 49,
+   "max": 51
+  },
+  "productionStatus": "AC",
+  "manufacturerId": 62,
+  "url": "https://souzslackline.com/product/snatch-2-2trickline-50mm/",
+  "pricing": {
+   "currency": "RUB",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 8481
+    }
+   ]
+  },
+  "lastEditDate": 1587333125390,
+  "imagesCount": 2
+ },
+ "similarGear": []
+}

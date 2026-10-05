@@ -1,0 +1,26 @@
+{
+ "gearDetail": {
+  "_id": 2014,
+  "name": "10mm Oval Quicklink",
+  "slug": "10mmOvalQuicklink",
+  "material": [
+   "S"
+  ],
+  "itemTypeId": "CON",
+  "weight": 137,
+  "wll": 11,
+  "mbs": 55,
+  "productionStatus": "AC",
+  "connectorType": "OQL",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "imagesCount": 0
+ },
+ "similarGear": []
+}

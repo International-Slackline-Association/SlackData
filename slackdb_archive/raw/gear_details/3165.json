@@ -1,0 +1,34 @@
+{
+ "gearDetail": {
+  "_id": 3165,
+  "name": "Tree Pro",
+  "dWidth": 13,
+  "dLength": 198,
+  "hasSlingAttachment": true,
+  "productionStatus": "AC",
+  "manufacturerId": 21,
+  "url": "https://slacklineindustries.com/products/treepro",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 19.99
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "TRP",
+  "slug": "tree_pro",
+  "creatorId": "2824084041240796",
+  "creationDate": 1621857635496,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

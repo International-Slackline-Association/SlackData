@@ -1,0 +1,54 @@
+{
+ "gearDetail": {
+  "_id": 555,
+  "name": "LINK",
+  "slug": "LINK",
+  "manufacturerId": 53,
+  "material": [
+   "SS"
+  ],
+  "itemTypeId": "WLCK",
+  "weight": 328,
+  "wll": 15,
+  "mbs": 70,
+  "productionStatus": "DC",
+  "fieldsRemarks": {
+   "mbs": "Larger than"
+  },
+  "anchorConnectionType": [
+   "MH"
+  ],
+  "webbingConnectionType": [
+   "QP"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 24,
+   "max": 26
+  },
+  "diverterDiameter": 28,
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "imagesCount": 0
+ },
+ "similarGear": [
+  {
+   "_id": 552,
+   "slug": "CatlockPro",
+   "itemTypeId": "WLCK",
+   "name": "Catlock Pro",
+   "manufacturerId": 51,
+   "manufacturer": {
+    "name": "Cat on slack",
+    "url": "http://www.catonslack.com",
+    "countryTxt": "Poland",
+    "countryCode": "PL"
+   }
+  }
+ ]
+}

@@ -1,0 +1,34 @@
+{
+ "gearDetail": {
+  "_id": 3142,
+  "name": "23m kit",
+  "webbingLength": 23,
+  "webbingWidth": 50,
+  "tensioningType": "RAT1",
+  "includesTreePro": true,
+  "productionStatus": "AC",
+  "manufacturerId": 46,
+  "pricing": {
+   "currency": "ILS",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 600
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "TLK",
+  "slug": "23m_kit",
+  "creatorId": "10154430595665625",
+  "creationDate": 1617137515463,
+  "imagesCount": 2
+ },
+ "similarGear": []
+}

@@ -1,0 +1,38 @@
+{
+ "gearDetail": {
+  "_id": 92,
+  "slug": "MantraMKIII",
+  "itemTypeId": "WEB",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "1641872089157651",
+    "name": "Sarah Gmeiner"
+   }
+  ],
+  "lastEditDate": 1587251565666,
+  "name": "Mantra MKIII",
+  "webbingType": "FL",
+  "material": [
+   "PL"
+  ],
+  "dWidth": 25,
+  "weight": 83,
+  "wll": 8.4,
+  "mbs": 42,
+  "dDepth": 4.1,
+  "elongation": {
+   "percent": 8.8,
+   "force": 10
+  },
+  "productionStatus": "DC",
+  "manufacturerId": 3,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

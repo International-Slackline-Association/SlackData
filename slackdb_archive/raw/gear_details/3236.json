@@ -1,0 +1,34 @@
+{
+ "gearDetail": {
+  "_id": 3236,
+  "name": "Basic 6 25 M",
+  "webbingLength": 25,
+  "webbingWidth": 50,
+  "tensioningType": "RAT1",
+  "productionStatus": "AC",
+  "manufacturerId": 55,
+  "url": "https://slackstar.de/kinder-familie/2-baeume/komplettset-6-teilig/893/basic6?number=SL82668-25-F",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 110
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "basic_625m",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622032814548,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

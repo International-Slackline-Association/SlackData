@@ -1,0 +1,109 @@
+{
+ "gearDetail": {
+  "_id": 3092,
+  "name": "Donkey",
+  "webbingType": "FL",
+  "material": [
+   "NY"
+  ],
+  "dWidth": 25.4,
+  "weight": 66,
+  "mbs": 32,
+  "elongation": {
+   "percent": 11.5,
+   "force": 10
+  },
+  "productionStatus": "AC",
+  "manufacturerId": 7,
+  "url": "https://slack-inov.com/gb/longline/144-donkey",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 2.9
+    }
+   ],
+   "hasAddOpts": true
+  },
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "WEB",
+  "slug": "donkey",
+  "creatorId": "10154430595665625",
+  "creationDate": 1583108704482,
+  "imagesCount": 2
+ },
+ "similarGear": [
+  {
+   "_id": 141,
+   "slug": "Fresh",
+   "itemTypeId": "WEB",
+   "name": "Fresh",
+   "manufacturerId": 9,
+   "manufacturer": {
+    "name": "Equilibrium Slacklines (EQB)",
+    "url": "https://www.slackshop.cz/en/",
+    "countryTxt": "Czech Republic",
+    "countryCode": "CZ"
+   }
+  },
+  {
+   "_id": 121,
+   "slug": "Abysses",
+   "itemTypeId": "WEB",
+   "name": "Abysses",
+   "manufacturerId": 7,
+   "manufacturer": {
+    "name": "Slack Inov",
+    "url": "http://slack-inov.com/gb",
+    "countryTxt": "France",
+    "countryCode": "FR"
+   }
+  },
+  {
+   "_id": 7,
+   "slug": "Flash",
+   "itemTypeId": "WEB",
+   "name": "Flash",
+   "manufacturerId": 9,
+   "manufacturer": {
+    "name": "Equilibrium Slacklines (EQB)",
+    "url": "https://www.slackshop.cz/en/",
+    "countryTxt": "Czech Republic",
+    "countryCode": "CZ"
+   }
+  },
+  {
+   "_id": 51,
+   "slug": "Passionred",
+   "itemTypeId": "WEB",
+   "name": "Passion red",
+   "manufacturerId": 10,
+   "manufacturer": {
+    "name": "Elephant",
+    "url": "http://www.elephant-slackline.com",
+    "countryTxt": "Germany",
+    "countryCode": "DE"
+   }
+  },
+  {
+   "_id": 129,
+   "slug": "McFly",
+   "itemTypeId": "WEB",
+   "name": "McFly",
+   "manufacturerId": 12,
+   "manufacturer": {
+    "name": "Slack.fr",
+    "url": "http://slack.fr",
+    "countryTxt": "France",
+    "countryCode": "FR"
+   }
+  }
+ ]
+}

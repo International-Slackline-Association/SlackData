@@ -1,0 +1,26 @@
+{
+ "gearDetail": {
+  "_id": 2019,
+  "name": "Steel Oval Carabiner",
+  "slug": "SteelOvalCarabiner",
+  "material": [
+   "S"
+  ],
+  "itemTypeId": "CON",
+  "weight": 176,
+  "wll": 5,
+  "mbs": 30,
+  "productionStatus": "AC",
+  "connectorType": "OC",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "imagesCount": 0
+ },
+ "similarGear": []
+}

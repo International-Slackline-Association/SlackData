@@ -1,0 +1,33 @@
+{
+ "gearDetail": {
+  "_id": 530,
+  "name": "Spirit Lock",
+  "slug": "SpiritLock",
+  "manufacturerId": 8,
+  "material": [
+   "AL"
+  ],
+  "itemTypeId": "WLCK",
+  "weight": 180,
+  "wll": 16,
+  "mbs": 36,
+  "productionStatus": "DC",
+  "anchorConnectionType": [
+   "SL"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 24,
+   "max": 26
+  },
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "imagesCount": 0
+ },
+ "similarGear": []
+}

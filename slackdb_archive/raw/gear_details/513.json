@@ -1,0 +1,116 @@
+{
+ "gearDetail": {
+  "_id": 513,
+  "slug": "Zilla30",
+  "itemTypeId": "WLCK",
+  "fieldsRemarks": {
+   "mbs": "Larger than"
+  },
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "757816924399230",
+    "name": "Moshe Klasovsky"
+   }
+  ],
+  "lastEditDate": 1536593428108,
+  "reviews": [
+   {
+    "creatorId": "757816924399230",
+    "text": "I like it because it gives me peace of mind, might be the strongest weblock in the world. i had one of them paint scrape off by a red pin  shackle, make sure you use a suitable sized shackle.",
+    "rating": {
+     "lst": {
+      "VFM": 10,
+      "QU": 10,
+      "VER": 6,
+      "EOU": 4,
+      "PRT": 10
+     },
+     "overall": 8
+    },
+    "pros": [
+     "18 kn WLL feels Bomber"
+    ],
+    "cons": [
+     "When carrying the Weblock you reallize that 1&#x2F;2 Kg is really heavy"
+    ],
+    "creationDate": 1500225228239,
+    "lastEditDate": 1500282111529,
+    "creatorName": "Moshe Klasovsky"
+   }
+  ],
+  "name": "Zilla 3.0",
+  "material": [
+   "HSS"
+  ],
+  "weight": 525,
+  "wll": 18,
+  "mbs": 100,
+  "anchorConnectionType": [
+   "MH"
+  ],
+  "webbingConnectionType": [
+   "QP"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 24,
+   "max": 26
+  },
+  "diverterDiameter": 60,
+  "usage": [
+   "SL",
+   "HL",
+   "LL",
+   "LTL"
+  ],
+  "productionStatus": "DC",
+  "manufacturerId": 2,
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 110
+    }
+   ]
+  },
+  "ratingsAverages": {
+   "overall": {
+    "nativeCount": 1,
+    "nativeValue": 8,
+    "value": 8,
+    "count": 1
+   },
+   "lst": {
+    "VFM": {
+     "count": 1,
+     "value": 10
+    },
+    "QU": {
+     "count": 1,
+     "value": 10
+    },
+    "VER": {
+     "count": 1,
+     "value": 6
+    },
+    "EOU": {
+     "count": 1,
+     "value": 4
+    },
+    "PRT": {
+     "count": 1,
+     "value": 10
+    }
+   }
+  },
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

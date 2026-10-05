@@ -1,0 +1,78 @@
+[
+    {
+        "_id": "IMET",
+        "description": "Image environment type",
+        "entries": {
+            "STD": "Studio/Indoor image",
+            "US": "Actual usage image"
+        }
+    },
+    {
+        "_id": "IMSC",
+        "description": "Image Scope",
+        "entries": {
+            "STP": "Setup",
+            "ITM": "Gear piece",
+            "OTR": "Other"
+        }
+    },
+    {
+        "_id": "IMT",
+        "description": "Image type",
+        "entries": {
+            "CLS": "Close-Up/Macro",
+            "RG": "Regular",
+            "LD": "Long distance"
+        }
+    },
+    {
+        "_id": "GRC",
+        "description": "Gear condition",
+        "entries": {
+            "NEW": "New",
+            "USD": "Used",
+            "HUSD": "Heavily used",
+            "DEF": "Defective"
+        }
+    },
+    {
+        "_id": "IMSRC",
+        "description": "Image Source",
+        "entries": {
+            "OFF": "Official manufacturer image",
+            "UOFF": "Unofficial image"
+        }
+    },
+    {
+        "_id": "GRT",
+        "description": "Gear types",
+        "entries": {
+            "WEB": "Webbing",
+            "WLCK": "Weblock",
+            "BRK": "Rope Brake",
+            "PUL": "Pulley",
+            "SLD": "Slider",
+            "ROPE": "Rope",
+            "LRNG": "Leash Ring",
+            "CON": "Connector",
+            "GEN": "General",
+            "WGP": "Webbing grip",
+            "SKT": "Starter kit",
+            "TLK": "Trickline kit",
+            "TRP": "Tree protectors"
+        }
+    },
+    {
+        "_id": "USE",
+        "description": "Usage",
+        "entries": {
+            "SL": "Slackline",
+            "HL": "Highline",
+            "LL": "Longline",
+            "RL": "Rodeoline",
+            "LTL": "Low Tension lines",
+            "TL": "Trickline",
+            "SR": "Soft Release"
+        }
+    }
+]

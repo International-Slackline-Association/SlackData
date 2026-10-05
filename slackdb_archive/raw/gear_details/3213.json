@@ -1,0 +1,36 @@
+{
+ "gearDetail": {
+  "_id": 3213,
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "breathe_20slacklinekit",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622028745268,
+  "name": "Breathe 20 Slackline Kit",
+  "webbingLength": 20,
+  "webbingWidth": 25,
+  "tensioningType": "PRIM",
+  "includesTreePro": true,
+  "productionStatus": "AC",
+  "manufacturerId": 3,
+  "url": "https://www.balancecommunity.com/products/breathe-20-slackline-kit?variant=32226241085498",
+  "pricing": {
+   "currency": "USD",
+   "lst": [
+    {
+     "price": 99,
+     "q": 1,
+     "qt": "AA"
+    }
+   ]
+  },
+  "lastEditDate": 1622037321510,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

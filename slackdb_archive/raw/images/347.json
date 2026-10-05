@@ -1,0 +1,23 @@
+{
+ "_id": 347,
+ "gearId": 3088,
+ "takenDate": 1567976400000,
+ "imageScope": "ITM",
+ "imageSource": "OFF",
+ "imageSourceUrl": "https://www.balancecommunity.com/products/green",
+ "gearCondition": "NEW",
+ "ImageEnvType": "STD",
+ "imageType": "CLS",
+ "contributors": [
+  {
+   "id": "10154430595665625",
+   "name": "Nir Avneyon"
+  }
+ ],
+ "creationDate": 1568378835075,
+ "creatorId": "10154430595665625",
+ "filename": "347.jpg",
+ "width": 1200,
+ "height": 900,
+ "creatorName": "Nir Avneyon"
+}

@@ -1,0 +1,26 @@
+{
+ "_id": 64,
+ "description": "Reggae out of the box, featuring my cat",
+ "imageScope": "ITM",
+ "imageSource": "UOFF",
+ "gearCondition": "NEW",
+ "ImageEnvType": "STD",
+ "imageType": "RG",
+ "lineLength": 100,
+ "tags": [
+  "webbing"
+ ],
+ "gearId": 132,
+ "contributors": [
+  {
+   "id": "1729285390418520",
+   "name": "Grant Mercer"
+  }
+ ],
+ "creationDate": 1501611237822,
+ "creatorId": "1729285390418520",
+ "filename": "64.jpg",
+ "width": 1920,
+ "height": 1080,
+ "creatorName": "Grant Mercer"
+}

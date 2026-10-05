@@ -1,0 +1,64 @@
+{
+ "gearDetail": {
+  "_id": 3249,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "WLCK",
+  "slug": "lynx_5",
+  "creatorId": "10154430595665625",
+  "creationDate": 1627150431416,
+  "name": "Lynx 5",
+  "material": [
+   "AL"
+  ],
+  "weight": 210,
+  "wll": 12,
+  "mbs": 72,
+  "anchorConnectionType": [
+   "QP"
+  ],
+  "webbingConnectionType": [
+   "QP"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 24,
+   "max": 26
+  },
+  "diverterDiameter": 36,
+  "isaApproved": true,
+  "dateIntroduced": 1626901200000,
+  "productionStatus": "AC",
+  "manufacturerId": 64,
+  "url": "https://aki-slacklines.de/en/hardware/weblocks/203/aki-lynx-5-webbing-locker",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 134.95
+    }
+   ]
+  },
+  "lastEditDate": 1712938226679,
+  "imagesCount": 3
+ },
+ "similarGear": [
+  {
+   "_id": 516,
+   "slug": "Lynx40Vari",
+   "itemTypeId": "WLCK",
+   "name": "Lynx 4.0 Vari",
+   "manufacturerId": 2,
+   "manufacturer": {
+    "name": "Landcruising",
+    "countryTxt": "Germany",
+    "countryCode": "DE"
+   }
+  }
+ ]
+}

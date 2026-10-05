@@ -1,0 +1,64 @@
+{
+ "_id": 12,
+ "imageScope": "STP",
+ "bad": true,
+ "gearId": [
+  3000,
+  63,
+  546
+ ],
+ "gearTags": [
+  {
+   "x": 41,
+   "y": 566,
+   "width": 334,
+   "height": 164,
+   "gearId": 3000
+  },
+  {
+   "x": 1430,
+   "y": 407,
+   "width": 470,
+   "height": 266,
+   "gearId": 63
+  },
+  {
+   "x": 371,
+   "y": 468,
+   "width": 1089,
+   "height": 473,
+   "gearId": 546
+  }
+ ],
+ "infoTags": [
+  {
+   "x": 715,
+   "y": 129,
+   "width": 824,
+   "height": 329,
+   "text": "Webbing slippage"
+  }
+ ],
+ "tags": [
+  "slippage",
+  "low tension"
+ ],
+ "ImageEnvType": "US",
+ "imageType": "RG",
+ "imageSource": "UOFF",
+ "setupType": "HL",
+ "takenDate": 1472763600000,
+ "description": "Webbing slippage",
+ "creationDate": 1499896266303,
+ "creatorId": "10154430595665625",
+ "filename": "12.jpg",
+ "width": 1920,
+ "height": 1280,
+ "creatorName": "Nir Avneyon",
+ "contributors": [
+  {
+   "id": "10154430595665625",
+   "name": "Nir Avneyon"
+  }
+ ]
+}

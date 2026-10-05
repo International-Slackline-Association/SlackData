@@ -1,0 +1,62 @@
+{
+ "gearDetail": {
+  "_id": 87,
+  "slug": "Marathon",
+  "itemTypeId": "WEB",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "656760621184025",
+    "name": "Eli Szendro Brown"
+   }
+  ],
+  "lastEditDate": 1587249371320,
+  "name": "Marathon",
+  "webbingType": "CS",
+  "material": [
+   "PL"
+  ],
+  "dWidth": 25,
+  "weight": 61.5,
+  "mbs": 37,
+  "elongation": {
+   "percent": 4,
+   "force": 10
+  },
+  "productionStatus": "AC",
+  "manufacturerId": 6,
+  "url": "https://www.slacktivity.com/marathon-50m-500m",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 50,
+     "qt": "EX",
+     "price": 1.8
+    },
+    {
+     "q": 80,
+     "qt": "EX",
+     "price": 1.8
+    },
+    {
+     "q": 100,
+     "qt": "EX",
+     "price": 1.8
+    },
+    {
+     "q": 150,
+     "qt": "EX",
+     "price": 1.8
+    }
+   ]
+  },
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

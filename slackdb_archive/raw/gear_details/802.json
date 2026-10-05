@@ -1,0 +1,38 @@
+{
+ "gearDetail": {
+  "_id": 802,
+  "slug": "SteelRing",
+  "itemTypeId": "LRNG",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "name": "Steel Ring",
+  "material": [
+   "SS"
+  ],
+  "mbs": 30,
+  "materialDiameter": 10,
+  "innerDiameter": 57,
+  "productionStatus": "AC",
+  "manufacturerId": 25,
+  "url": "http://www.slack-shop.de/stahl-ring.html",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 9.95
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1498977658197,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

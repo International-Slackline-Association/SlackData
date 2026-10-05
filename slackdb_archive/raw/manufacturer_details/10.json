@@ -1,0 +1,56 @@
+{
+ "manufacturerDetail": {
+  "_id": 10,
+  "slug": "Elephant",
+  "manufacturerStatus": "ACT",
+  "imageFilename": "elephant.jpg",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "lastEditDate": 1600710147470,
+  "name": "Elephant",
+  "location": {
+   "countryCode": "DE",
+   "address": "Hermann-Köhl-Straße 2 D-89160 Dornstadt",
+   "lat": 48.4592819213867,
+   "lng": 9.96664047241211,
+   "isExact": true
+  },
+  "yearEstablished": 2010,
+  "isSlacklineOriented": true,
+  "url": "http://www.elephant-slackline.com",
+  "fbPage": "https://www.facebook.com/ElephantSlacklines",
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "10211802848940671",
+    "name": "Thomas Buckingham"
+   }
+  ],
+  "ratingsAverages": {
+   "overall": {
+    "externalValue": 10,
+    "externalCount": 37,
+    "value": 10,
+    "count": 37
+   }
+  },
+  "imagesCount": 0,
+  "gearStats": [
+   {
+    "itemTypeId": "TRP",
+    "count": 1
+   },
+   {
+    "itemTypeId": "WEB",
+    "count": 5
+   },
+   {
+    "itemTypeId": "WLCK",
+    "count": 1
+   }
+  ]
+ }
+}

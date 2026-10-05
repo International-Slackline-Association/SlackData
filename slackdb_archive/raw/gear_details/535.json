@@ -1,0 +1,58 @@
+{
+ "gearDetail": {
+  "_id": 535,
+  "slug": "RamLock",
+  "itemTypeId": "WLCK",
+  "flags": [
+   "IRP"
+  ],
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1712945891106,
+  "name": "RamLock",
+  "material": [
+   "AL"
+  ],
+  "weight": 272,
+  "wll": 9,
+  "mbs": 44,
+  "anchorConnectionType": [
+   "XLMH"
+  ],
+  "webbingConnectionType": [
+   "QP"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 24,
+   "max": 26
+  },
+  "usage": [
+   "SL",
+   "HL",
+   "LL",
+   "RL",
+   "LTL"
+  ],
+  "productionStatus": "DC",
+  "manufacturerId": 15,
+  "url": "https://www.slacklinetechnology.com/shop/ramlock-slackline-anchor",
+  "pricing": {
+   "currency": "USD",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 114.95
+    }
+   ]
+  },
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

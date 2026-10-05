@@ -1,0 +1,57 @@
+{
+ "gearDetail": {
+  "_id": 511,
+  "slug": "Sherriff",
+  "itemTypeId": "WLCK",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1542152033434,
+  "name": "Sherriff",
+  "material": [
+   "SS"
+  ],
+  "weight": 373,
+  "wll": 12,
+  "mbs": 40,
+  "anchorConnectionType": [
+   "SR"
+  ],
+  "webbingConnectionType": [
+   "QP",
+   "SP"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 24,
+   "max": 26
+  },
+  "diverterDiameter": 20,
+  "efficiency": 85,
+  "usage": [
+   "SL",
+   "HL",
+   "LL",
+   "LTL",
+   "SR"
+  ],
+  "productionStatus": "DC",
+  "manufacturerId": 9,
+  "pricing": {
+   "currency": "CZK",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 950
+    }
+   ]
+  },
+  "imagesCount": 0
+ },
+ "similarGear": []
+}

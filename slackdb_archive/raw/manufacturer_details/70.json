@@ -1,0 +1,32 @@
+{
+ "manufacturerDetail": {
+  "_id": 70,
+  "imageFilename": "slackear.jpg",
+  "contributors": [
+   {
+    "id": "10211802848940671",
+    "name": "Thomas Buckingham"
+   },
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "creatorId": "10211802848940671",
+  "creationDate": 1600714360101,
+  "slug": "slackear",
+  "name": "Slackear",
+  "location": {
+   "countryCode": "AR",
+   "lat": -34.9964963,
+   "lng": -64.9672817
+  },
+  "yearEstablished": 2013,
+  "isActive": true,
+  "isSlacklineOriented": true,
+  "fbPage": "https://www.facebook.com/Slackear",
+  "lastEditDate": 1602268111136,
+  "imagesCount": 0,
+  "gearStats": null
+ }
+}

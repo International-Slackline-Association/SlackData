@@ -1,0 +1,22 @@
+{
+ "_id": 369,
+ "gearId": 3092,
+ "imageScope": "ITM",
+ "imageSource": "OFF",
+ "imageSourceUrl": "https://slack-inov.com/gb/longline/144-donkey",
+ "gearCondition": "NEW",
+ "ImageEnvType": "STD",
+ "imageType": "RG",
+ "contributors": [
+  {
+   "id": "10154430595665625",
+   "name": "Nir Avneyon"
+  }
+ ],
+ "creationDate": 1583108874992,
+ "creatorId": "10154430595665625",
+ "filename": "369.jpg",
+ "width": 570,
+ "height": 570,
+ "creatorName": "Nir Avneyon"
+}

@@ -1,0 +1,86 @@
+{
+ "gearDetail": {
+  "_id": 133,
+  "slug": "RVD",
+  "itemTypeId": "WEB",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "1190879851271184",
+    "name": "Matthieu Chivas"
+   }
+  ],
+  "lastEditDate": 1617649456812,
+  "name": "RVD",
+  "webbingType": "TB",
+  "material": [
+   "PL"
+  ],
+  "dWidth": 25,
+  "weight": 48,
+  "wll": 7,
+  "mbs": 21,
+  "dDepth": 2,
+  "elongation": {
+   "percent": 10,
+   "force": 10
+  },
+  "productionStatus": "AC",
+  "manufacturerId": 12,
+  "url": "https://laboutique.slack.fr/en/tubular-webbing/146-rvd-tubular.html",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 25,
+     "price": 2.24,
+     "qt": "EX"
+    },
+    {
+     "q": 50,
+     "qt": "EX",
+     "price": 2.18
+    },
+    {
+     "q": 100,
+     "qt": "EX",
+     "price": 1.99
+    }
+   ]
+  },
+  "imagesCount": 1
+ },
+ "similarGear": [
+  {
+   "_id": 36,
+   "slug": "SnakeTub",
+   "itemTypeId": "WEB",
+   "name": "Snake Tub",
+   "manufacturerId": 4,
+   "manufacturer": {
+    "name": "Slack Mountain",
+    "url": "http://slack-mountain.com",
+    "countryTxt": "France",
+    "countryCode": "FR"
+   }
+  },
+  {
+   "_id": 32,
+   "slug": "ArticFox",
+   "itemTypeId": "WEB",
+   "name": "Artic Fox",
+   "manufacturerId": 4,
+   "manufacturer": {
+    "name": "Slack Mountain",
+    "url": "http://slack-mountain.com",
+    "countryTxt": "France",
+    "countryCode": "FR"
+   }
+  }
+ ]
+}

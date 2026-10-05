@@ -1,0 +1,24 @@
+{
+ "_id": 3,
+ "imageScope": "ITM",
+ "gearId": 63,
+ "tags": [
+  "figure eight-knot"
+ ],
+ "ImageEnvType": "US",
+ "imageType": "RG",
+ "imageSource": "UOFF",
+ "takenDate": 1472763600000,
+ "creationDate": 1499896266303,
+ "creatorId": "10154430595665625",
+ "filename": "3.jpg",
+ "width": 1920,
+ "height": 1280,
+ "creatorName": "Nir Avneyon",
+ "contributors": [
+  {
+   "id": "10154430595665625",
+   "name": "Nir Avneyon"
+  }
+ ]
+}

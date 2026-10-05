@@ -1,0 +1,120 @@
+{
+ "gearDetail": {
+  "_id": 116,
+  "slug": "Alfa",
+  "itemTypeId": "WEB",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "name": "Alfa",
+  "webbingType": "FL",
+  "material": [
+   "PL"
+  ],
+  "dWidth": 25,
+  "weight": 62,
+  "wll": 6.4,
+  "mbs": 32,
+  "dDepth": 3.1,
+  "elongation": {
+   "percent": 10.5,
+   "force": 10
+  },
+  "productionStatus": "AC",
+  "manufacturerId": 50,
+  "url": "http://www.slacklining.ca/shop/alfa/",
+  "pricing": {
+   "currency": "CAD",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 2.3
+    },
+    {
+     "q": 75,
+     "qt": "EX",
+     "price": 2.2
+    },
+    {
+     "q": 100,
+     "price": 2.2,
+     "qt": "EX"
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1499011026921,
+  "imagesCount": 1
+ },
+ "similarGear": [
+  {
+   "_id": 72,
+   "slug": "SigmaImpact",
+   "itemTypeId": "WEB",
+   "name": "Sigma Impact",
+   "manufacturerId": 30,
+   "manufacturer": {
+    "name": "Slackliner.de",
+    "url": "https://www.slackliner.de",
+    "countryTxt": "Germany",
+    "countryCode": "DE"
+   }
+  },
+  {
+   "_id": 3068,
+   "itemTypeId": "WEB",
+   "slug": "coelum",
+   "name": "Coelum",
+   "manufacturerId": 45,
+   "manufacturer": {
+    "name": "Petram Slacklines",
+    "url": "https://petramslacklines.site123.me/",
+    "countryTxt": "Poland",
+    "countryCode": "PL"
+   }
+  },
+  {
+   "_id": 53,
+   "slug": "BlueWing",
+   "itemTypeId": "WEB",
+   "name": "BlueWing",
+   "manufacturerId": 10,
+   "manufacturer": {
+    "name": "Elephant",
+    "url": "http://www.elephant-slackline.com",
+    "countryTxt": "Germany",
+    "countryCode": "DE"
+   }
+  },
+  {
+   "_id": 89,
+   "slug": "Aero",
+   "itemTypeId": "WEB",
+   "name": "Aero",
+   "manufacturerId": 3,
+   "manufacturer": {
+    "name": "Balance Community: Slackline Outfitters",
+    "url": "http://www.balancecommunity.com",
+    "countryTxt": "United States",
+    "countryCode": "US"
+   }
+  },
+  {
+   "_id": 124,
+   "slug": "Verve25mm",
+   "itemTypeId": "WEB",
+   "name": "Verve 25mm",
+   "manufacturerId": 2,
+   "manufacturer": {
+    "name": "Landcruising",
+    "countryTxt": "Germany",
+    "countryCode": "DE"
+   }
+  }
+ ]
+}

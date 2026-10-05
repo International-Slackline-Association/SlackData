@@ -1,0 +1,17 @@
+{
+ "_id": 123,
+ "imageScope": "ITM",
+ "gearId": 36,
+ "contributors": [
+  {
+   "id": "10155267793869667",
+   "name": "Romain Schempf"
+  }
+ ],
+ "creationDate": 1501839595264,
+ "creatorId": "10155267793869667",
+ "filename": "123.jpg",
+ "width": 589,
+ "height": 591,
+ "creatorName": "Romain Schempf"
+}

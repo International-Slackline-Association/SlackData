@@ -1,0 +1,87 @@
+{
+ "gearDetail": {
+  "_id": 548,
+  "slug": "Beast10",
+  "itemTypeId": "WLCK",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1587250147582,
+  "name": "Beast 1.0",
+  "material": [
+   "SS"
+  ],
+  "weight": 347,
+  "wll": 15,
+  "mbs": 60,
+  "anchorConnectionType": [
+   "MH"
+  ],
+  "webbingConnectionType": [
+   "CP"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 24,
+   "max": 26
+  },
+  "diverterDiameter": 30,
+  "usage": [
+   "SL",
+   "HL",
+   "LL",
+   "RL",
+   "LTL"
+  ],
+  "productionStatus": "DC",
+  "manufacturerId": 42,
+  "pricing": {
+   "currency": "CAD",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 104.99
+    },
+    {
+     "q": 2,
+     "qt": "EX",
+     "price": 99.99
+    }
+   ]
+  },
+  "imagesCount": 1
+ },
+ "similarGear": [
+  {
+   "_id": 3018,
+   "itemTypeId": "WLCK",
+   "slug": "petram_slacklinesspatiumweblock",
+   "name": "Spatium weblock",
+   "manufacturerId": 45,
+   "manufacturer": {
+    "name": "Petram Slacklines",
+    "url": "https://petramslacklines.site123.me/",
+    "countryTxt": "Poland",
+    "countryCode": "PL"
+   }
+  },
+  {
+   "_id": 551,
+   "slug": "Catlock",
+   "itemTypeId": "WLCK",
+   "name": "Catlock classic",
+   "manufacturerId": 51,
+   "manufacturer": {
+    "name": "Cat on slack",
+    "url": "http://www.catonslack.com",
+    "countryTxt": "Poland",
+    "countryCode": "PL"
+   }
+  }
+ ]
+}

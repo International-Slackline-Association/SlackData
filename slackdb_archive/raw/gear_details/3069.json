@@ -1,0 +1,51 @@
+{
+ "gearDetail": {
+  "_id": 3069,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "WLCK",
+  "slug": "slackijump",
+  "creatorId": "10154430595665625",
+  "creationDate": 1542152698895,
+  "name": "Slackijump",
+  "material": [
+   "HSS"
+  ],
+  "weight": 517,
+  "wll": 12,
+  "mbs": 100,
+  "anchorConnectionType": [
+   "MH"
+  ],
+  "webbingConnectionType": [
+   "CSP"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 49,
+   "max": 51
+  },
+  "usage": [
+   "TL"
+  ],
+  "dateIntroduced": 1531947600000,
+  "productionStatus": "DC",
+  "manufacturerId": 7,
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "qt": "AA",
+     "q": 1,
+     "price": 65
+    }
+   ]
+  },
+  "lastEditDate": 1712947248729,
+  "imagesCount": 0
+ },
+ "similarGear": []
+}

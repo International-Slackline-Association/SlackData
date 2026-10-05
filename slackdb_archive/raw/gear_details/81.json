@@ -1,0 +1,226 @@
+{
+ "gearDetail": {
+  "_id": 81,
+  "slug": "OctopussyMKV",
+  "itemTypeId": "WEB",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1587289377618,
+  "name": "Octopussy MKV",
+  "webbingType": "FL",
+  "material": [
+   "PL"
+  ],
+  "dWidth": 25,
+  "weight": 60,
+  "wll": 7,
+  "mbs": 30,
+  "dDepth": 2.85,
+  "elongation": {
+   "percent": 7,
+   "force": 10
+  },
+  "productionStatus": "AC",
+  "manufacturerId": 27,
+  "url": "https://slackhouseshop.pl/en/produkt/octopussy-en",
+  "pricing": {
+   "currency": "PLN",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 3.66
+    },
+    {
+     "q": 40,
+     "qt": "EX",
+     "price": 3.65
+    },
+    {
+     "q": 60,
+     "qt": "EX",
+     "price": 3.61
+    },
+    {
+     "q": 80,
+     "qt": "EX",
+     "price": 3.59
+    },
+    {
+     "q": 100,
+     "qt": "EX",
+     "price": 3.58
+    },
+    {
+     "q": 120,
+     "qt": "EX",
+     "price": 3.56
+    },
+    {
+     "q": 150,
+     "qt": "EX",
+     "price": 3.54
+    },
+    {
+     "q": 200,
+     "qt": "EX",
+     "price": 3.5
+    },
+    {
+     "q": 250,
+     "qt": "EX",
+     "price": 3.46
+    },
+    {
+     "qt": "EX",
+     "q": 300,
+     "price": 3.41
+    },
+    {
+     "qt": "EX",
+     "q": 400,
+     "price": 3.33
+    },
+    {
+     "qt": "EX",
+     "q": 500,
+     "price": 3.25
+    },
+    {
+     "q": 600,
+     "qt": "EX",
+     "price": 3.21
+    },
+    {
+     "q": 700,
+     "price": 3.17,
+     "qt": "EX"
+    }
+   ]
+  },
+  "imagesCount": 2
+ },
+ "similarGear": [
+  {
+   "_id": 58,
+   "slug": "FlowLine",
+   "itemTypeId": "WEB",
+   "name": "Flow Line",
+   "manufacturerId": 1,
+   "manufacturer": {
+    "name": "Gibbon",
+    "url": "http://www.gibbon-slacklines.com",
+    "countryTxt": "Germany",
+    "countryCode": "DE"
+   }
+  },
+  {
+   "_id": 2,
+   "slug": "Bloodline",
+   "itemTypeId": "WEB",
+   "name": "Bloodline",
+   "manufacturerId": 19,
+   "manufacturer": {
+    "name": "Pure Slacklines",
+    "url": "http://pureslacklines.com.au",
+    "countryTxt": "Australia",
+    "countryCode": "AU"
+   }
+  },
+  {
+   "_id": 103,
+   "slug": "GreatWhite",
+   "itemTypeId": "WEB",
+   "name": "Great White",
+   "manufacturerId": 16,
+   "manufacturer": {
+    "name": "SlackGear",
+    "url": "http://www.slackgear.co.za",
+    "countryTxt": "South Africa",
+    "countryCode": "ZA"
+   }
+  },
+  {
+   "_id": 80,
+   "slug": "ZaoLine",
+   "itemTypeId": "WEB",
+   "name": "Zao Line",
+   "manufacturerId": 24,
+   "manufacturer": {
+    "name": "Spider slacklines",
+    "url": "http://www.spider-slacklines.com",
+    "countryTxt": "Italy",
+    "countryCode": "IT"
+   }
+  },
+  {
+   "_id": 3145,
+   "name": "Green Magic",
+   "manufacturerId": 74,
+   "itemTypeId": "WEB",
+   "slug": "green_magic",
+   "manufacturer": {
+    "name": "Acrobat Slackline",
+    "url": "https://www.acrobatslackline.com",
+    "countryTxt": "Israel",
+    "countryCode": "IL"
+   }
+  },
+  {
+   "_id": 21,
+   "slug": "Vercors",
+   "itemTypeId": "WEB",
+   "name": "Vercors",
+   "manufacturerId": 8,
+   "manufacturer": {
+    "name": "Line Spirit",
+    "countryTxt": "France",
+    "countryCode": "FR"
+   }
+  },
+  {
+   "_id": 56,
+   "slug": "SkillshotHS",
+   "itemTypeId": "WEB",
+   "name": "Skillshot HS",
+   "manufacturerId": 13,
+   "manufacturer": {
+    "name": "Gambit",
+    "countryTxt": "Germany",
+    "countryCode": "DE"
+   }
+  },
+  {
+   "_id": 5,
+   "slug": "Dragon",
+   "itemTypeId": "WEB",
+   "name": "Dragon",
+   "manufacturerId": 9,
+   "manufacturer": {
+    "name": "Equilibrium Slacklines (EQB)",
+    "url": "https://www.slackshop.cz/en/",
+    "countryTxt": "Czech Republic",
+    "countryCode": "CZ"
+   }
+  },
+  {
+   "_id": 115,
+   "slug": "Mirage",
+   "itemTypeId": "WEB",
+   "name": "Mirage",
+   "manufacturerId": 42,
+   "manufacturer": {
+    "name": "Absolute Slacklines",
+    "url": "http://www.absoluteslacklines.com",
+    "countryTxt": "Canada",
+    "countryCode": "CA"
+   }
+  }
+ ]
+}

@@ -1,0 +1,37 @@
+{
+ "gearDetail": {
+  "_id": 559,
+  "slug": "Xylon",
+  "itemTypeId": "WLCK",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "name": "Xylon",
+  "material": [
+   "SS"
+  ],
+  "weight": 280,
+  "wll": 15,
+  "mbs": 38,
+  "anchorConnectionType": [
+   "SL"
+  ],
+  "webbingConnectionType": [
+   "CP"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 24,
+   "max": 26
+  },
+  "productionStatus": "DC",
+  "manufacturerId": 22,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1587236858647,
+  "imagesCount": 0
+ },
+ "similarGear": []
+}

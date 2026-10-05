@@ -1,0 +1,42 @@
+{
+ "manufacturerDetail": {
+  "_id": 47,
+  "slug": "ISC",
+  "manufacturerStatus": "ACT",
+  "imageFilename": "isc.jpg",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "name": "ISC",
+  "location": {
+   "countryCode": "GB",
+   "lat": 53.21799850463867,
+   "lng": -4.111491203308106,
+   "isExact": true
+  },
+  "isActive": true,
+  "url": "http://www.iscwales.com",
+  "fbPage": "https://www.facebook.com/iscwalesuk",
+  "lastEditDate": 1498722749355,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "ratingsAverages": {
+   "overall": {
+    "externalValue": 10,
+    "externalCount": 34,
+    "value": 10,
+    "count": 34
+   }
+  },
+  "imagesCount": 0,
+  "gearStats": [
+   {
+    "itemTypeId": "BRK",
+    "count": 2
+   }
+  ]
+ }
+}

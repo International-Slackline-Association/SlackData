@@ -1,0 +1,26 @@
+{
+ "gearDetail": {
+  "_id": 2001,
+  "name": "10mm 1T Omega Stainless Steel Shackle",
+  "slug": "10mm1TOmegaStainlessSteelShackle",
+  "material": [
+   "SS"
+  ],
+  "itemTypeId": "CON",
+  "weight": 125,
+  "wll": 10,
+  "mbs": 40,
+  "productionStatus": "AC",
+  "connectorType": "OS",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "imagesCount": 2
+ },
+ "similarGear": []
+}

@@ -1,0 +1,62 @@
+{
+ "gearDetail": {
+  "_id": 139,
+  "slug": "Unicorn",
+  "itemTypeId": "WEB",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "10155267793869667",
+    "name": "Romain Schempf"
+   }
+  ],
+  "lastEditDate": 1587288317864,
+  "name": "Unicorn",
+  "webbingType": "CS",
+  "material": [
+   "PL"
+  ],
+  "dWidth": 25,
+  "weight": 61.5,
+  "mbs": 32,
+  "dDepth": 2.7,
+  "elongation": {
+   "percent": 9,
+   "force": 10
+  },
+  "dateIntroduced": 1489363200000,
+  "productionStatus": "DC",
+  "manufacturerId": 64,
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 1.79
+    }
+   ]
+  },
+  "imagesCount": 4
+ },
+ "similarGear": [
+  {
+   "_id": 3127,
+   "itemTypeId": "WEB",
+   "slug": "aurora",
+   "name": "Aurora",
+   "manufacturerId": 26,
+   "manufacturer": {
+    "name": "Raed Slacklines",
+    "url": "https://raed-slacklines.com",
+    "countryTxt": "Germany",
+    "countryCode": "DE"
+   }
+  }
+ ]
+}

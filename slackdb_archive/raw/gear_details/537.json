@@ -1,0 +1,57 @@
+{
+ "gearDetail": {
+  "_id": 537,
+  "slug": "BaboonLock",
+  "itemTypeId": "WLCK",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1712932475499,
+  "name": "BaboonLock",
+  "material": [
+   "SS"
+  ],
+  "weight": 360,
+  "wll": 12,
+  "mbs": 40,
+  "anchorConnectionType": [
+   "FB"
+  ],
+  "webbingConnectionType": [
+   "SP"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 24,
+   "max": 26
+  },
+  "diverterDiameter": 24,
+  "efficiency": 80,
+  "usage": [
+   "SL",
+   "HL",
+   "LL",
+   "RL",
+   "LTL"
+  ],
+  "productionStatus": "AC",
+  "manufacturerId": 16,
+  "url": "http://www.slackgear.co.za/product/baboonlock/",
+  "pricing": {
+   "currency": "ZAR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 500
+    }
+   ]
+  },
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

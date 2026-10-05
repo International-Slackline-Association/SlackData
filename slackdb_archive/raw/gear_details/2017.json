@@ -1,0 +1,26 @@
+{
+ "gearDetail": {
+  "_id": 2017,
+  "slug": "10mmQuicklinkDelta",
+  "itemTypeId": "CON",
+  "productionStatus": "AC",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "name": "10mm Delta Quicklink",
+  "material": [
+   "S"
+  ],
+  "wll": 9,
+  "mbs": 45,
+  "connectorType": "DQL",
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1506007228040,
+  "imagesCount": 3
+ },
+ "similarGear": []
+}

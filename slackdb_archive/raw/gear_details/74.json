@@ -1,0 +1,97 @@
+{
+ "gearDetail": {
+  "_id": 74,
+  "slug": "SigmaLG",
+  "itemTypeId": "WEB",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1587238821374,
+  "name": "Sigma LG",
+  "webbingType": "FL",
+  "material": [
+   "PL"
+  ],
+  "dWidth": 25,
+  "weight": 66,
+  "wll": 12,
+  "mbs": 38,
+  "dDepth": 2.8,
+  "elongation": {
+   "percent": 3.8,
+   "force": 12
+  },
+  "productionStatus": "DC",
+  "manufacturerId": 30,
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 1.05
+    }
+   ]
+  },
+  "imagesCount": 0
+ },
+ "similarGear": [
+  {
+   "_id": 3131,
+   "name": "Candy",
+   "manufacturerId": 9,
+   "itemTypeId": "WEB",
+   "slug": "candy",
+   "manufacturer": {
+    "name": "Equilibrium Slacklines (EQB)",
+    "url": "https://www.slackshop.cz/en/",
+    "countryTxt": "Czech Republic",
+    "countryCode": "CZ"
+   }
+  },
+  {
+   "_id": 73,
+   "slug": "SigmaImpactLS",
+   "itemTypeId": "WEB",
+   "name": "Sigma Impact LS",
+   "manufacturerId": 30,
+   "manufacturer": {
+    "name": "Slackliner.de",
+    "url": "https://www.slackliner.de",
+    "countryTxt": "Germany",
+    "countryCode": "DE"
+   }
+  },
+  {
+   "_id": 110,
+   "slug": "Zen",
+   "itemTypeId": "WEB",
+   "name": "Zen",
+   "manufacturerId": 46,
+   "manufacturer": {
+    "name": "Middle Way Slacklines",
+    "url": "http://www.middlewayslacklines.com",
+    "countryTxt": "Israel",
+    "countryCode": "IL"
+   }
+  },
+  {
+   "_id": 122,
+   "slug": "EDGE",
+   "itemTypeId": "WEB",
+   "name": "EDGE",
+   "manufacturerId": 24,
+   "manufacturer": {
+    "name": "Spider slacklines",
+    "url": "http://www.spider-slacklines.com",
+    "countryTxt": "Italy",
+    "countryCode": "IT"
+   }
+  }
+ ]
+}

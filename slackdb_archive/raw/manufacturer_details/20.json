@@ -1,0 +1,35 @@
+{
+ "manufacturerDetail": {
+  "_id": 20,
+  "slug": "YogaSlackers",
+  "manufacturerStatus": "ACT",
+  "imageFilename": "yoga_slackers.jpg",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "name": "Yoga Slackers",
+  "location": {
+   "countryCode": "US",
+   "lat": 36.8076286315918,
+   "lng": -95.87574005126953,
+   "isExact": false
+  },
+  "isActive": true,
+  "isSlacklineOriented": true,
+  "url": "http://www.yogaslackers.com",
+  "fbPage": "https://www.facebook.com/yogaslackers",
+  "lastEditDate": 1498724508625,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "imagesCount": 0,
+  "gearStats": [
+   {
+    "itemTypeId": "SKT",
+    "count": 2
+   }
+  ]
+ }
+}

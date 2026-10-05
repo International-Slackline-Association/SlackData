@@ -1,0 +1,55 @@
+{
+ "manufacturerDetail": {
+  "_id": 30,
+  "slug": "Sigma",
+  "manufacturerStatus": "ACT",
+  "imageFilename": "sigma.jpg",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "lastEditDate": 1611056189119,
+  "comments": [
+   {
+    "creatorId": "2946356748795279",
+    "text": "&lt;a href=&quot;https:&#x2F;&#x2F;assignmentman.co.uk&#x2F;coursework&#x2F;&quot;&gt;coursework help&lt;&#x2F;a&gt;\n\n\n&lt;a rel=&quot;dofollow&quot; href=&quot;https:&#x2F;&#x2F;bestonlinewritingservice.com&#x2F;personal-statement-writing-services&#x2F;&quot;&gt;personal statement writing services&lt;&#x2F;a&gt;\n\n\n[URL=https:&#x2F;&#x2F;www.aussiessay.com&#x2F;]topcv review[&#x2F;URL] \n\n\n[australia writings](https:&#x2F;&#x2F;www.australian-writings.net&#x2F;)\n\n\n[url=https:&#x2F;&#x2F;www.myassignmentwriting.com.au&#x2F;research-paper&#x2F;]research paper help[&#x2F;url]\n\n\n&quot;best assignment help websites uk&quot;:https:&#x2F;&#x2F;assignmentman.co.uk&#x2F;\n\n[https:&#x2F;&#x2F;www.bestessayservicereviews.com&#x2F;essay-writing&#x2F;proessaywriting-com-review&#x2F; proessaywriting reviews]\n\n\n[[ https:&#x2F;&#x2F;www.10bestseo.com&#x2F;url-opener&#x2F; | Google ]]",
+    "creationDate": 1593540612185,
+    "creatorName": "Aone Abbas"
+   }
+  ],
+  "name": "Slackliner.de",
+  "location": {
+   "countryCode": "DE",
+   "lat": 51.04526901245117,
+   "lng": 7.018837928771973,
+   "isExact": false
+  },
+  "isActive": true,
+  "isSlacklineOriented": true,
+  "url": "https://www.slackliner.de",
+  "fbPage": "https://www.facebook.com/Slackliner.de",
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "1811540145542689",
+    "name": "Helmut Netzwerker"
+   }
+  ],
+  "imagesCount": 0,
+  "gearStats": [
+   {
+    "itemTypeId": "WLCK",
+    "count": 3
+   },
+   {
+    "itemTypeId": "WEB",
+    "count": 7
+   },
+   {
+    "itemTypeId": "SKT",
+    "count": 3
+   }
+  ]
+ }
+}

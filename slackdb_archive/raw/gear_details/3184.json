@@ -1,0 +1,39 @@
+{
+ "gearDetail": {
+  "_id": 3184,
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   },
+   {
+    "id": "10211802848940671",
+    "name": "Thomas Buckingham"
+   }
+  ],
+  "itemTypeId": "TLK",
+  "slug": "trickline_kit-proline25",
+  "creatorId": "2824084041240796",
+  "creationDate": 1621927050057,
+  "name": "Trickline Kit - Pro Line 25",
+  "webbingLength": 25,
+  "webbingWidth": 50,
+  "tensioningType": "RAT2",
+  "productionStatus": "AC",
+  "manufacturerId": 24,
+  "url": "https://spider-slacklines.com/shop/en/trickline-kit/15-544-trickline-kit-pro-line-25-9506919000.html#/26-select_backup_kit-none/29-select_tree_protections-tree_protections_xl_200_cm",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 150
+    }
+   ]
+  },
+  "lastEditDate": 1622013102850,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

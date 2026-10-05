@@ -1,0 +1,54 @@
+{
+ "gearDetail": {
+  "_id": 819,
+  "slug": "ORING",
+  "itemTypeId": "LRNG",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1587244736036,
+  "name": "O-RING",
+  "material": [
+   "AL"
+  ],
+  "weight": 50,
+  "wll": 2,
+  "mbs": 32,
+  "materialDiameter": 12,
+  "innerDiameter": 45,
+  "outerDiameter": 69,
+  "productionStatus": "DC",
+  "manufacturerId": 54,
+  "pricing": {
+   "currency": "USD",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 5.75
+    }
+   ]
+  },
+  "imagesCount": 1
+ },
+ "similarGear": [
+  {
+   "_id": 814,
+   "slug": "Access",
+   "itemTypeId": "LRNG",
+   "name": "Access",
+   "manufacturerId": 35,
+   "manufacturer": {
+    "name": "Camp",
+    "url": "http://www.camp.it",
+    "countryTxt": "Italy",
+    "countryCode": "IT"
+   }
+  }
+ ]
+}

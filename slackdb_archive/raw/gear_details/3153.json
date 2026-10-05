@@ -1,0 +1,74 @@
+{
+ "gearDetail": {
+  "_id": 3153,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "WLCK",
+  "slug": "slackibloc_srquickpin",
+  "creatorId": "10154430595665625",
+  "creationDate": 1617145574764,
+  "name": "Slackibloc SR Quick Pin",
+  "material": [
+   "AL"
+  ],
+  "weight": 173,
+  "wll": 15,
+  "mbs": 50,
+  "anchorConnectionType": [
+   "QP"
+  ],
+  "webbingConnectionType": [
+   "QP"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 24,
+   "max": 26
+  },
+  "productionStatus": "DC",
+  "manufacturerId": 7,
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 84.54
+    }
+   ]
+  },
+  "lastEditDate": 1712947204535,
+  "imagesCount": 1
+ },
+ "similarGear": [
+  {
+   "_id": 3079,
+   "itemTypeId": "WLCK",
+   "slug": "mithril",
+   "name": "Mithril - Quick Pin",
+   "manufacturerId": 9,
+   "manufacturer": {
+    "name": "Equilibrium Slacklines (EQB)",
+    "url": "https://www.slackshop.cz/en/",
+    "countryTxt": "Czech Republic",
+    "countryCode": "CZ"
+   }
+  },
+  {
+   "_id": 3039,
+   "itemTypeId": "WLCK",
+   "slug": "aeris_pweblock",
+   "name": "Aeris P Weblock",
+   "manufacturerId": 45,
+   "manufacturer": {
+    "name": "Petram Slacklines",
+    "url": "https://petramslacklines.site123.me/",
+    "countryTxt": "Poland",
+    "countryCode": "PL"
+   }
+  }
+ ]
+}

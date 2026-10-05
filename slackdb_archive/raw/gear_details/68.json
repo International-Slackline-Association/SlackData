@@ -1,0 +1,58 @@
+{
+ "gearDetail": {
+  "_id": 68,
+  "slug": "WaveTube",
+  "itemTypeId": "WEB",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1536593240766,
+  "name": "Wave Tube",
+  "webbingType": "TB",
+  "material": [
+   "NY"
+  ],
+  "dWidth": 25,
+  "weight": 42,
+  "wll": 5,
+  "mbs": 20,
+  "dDepth": 2.3,
+  "elongation": {
+   "percent": 17,
+   "force": 10
+  },
+  "productionStatus": "DC",
+  "manufacturerId": 2,
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "EX",
+     "price": 1.69
+    }
+   ]
+  },
+  "imagesCount": 1
+ },
+ "similarGear": [
+  {
+   "_id": 6,
+   "slug": "Element",
+   "itemTypeId": "WEB",
+   "name": "Element",
+   "manufacturerId": 9,
+   "manufacturer": {
+    "name": "Equilibrium Slacklines (EQB)",
+    "url": "https://www.slackshop.cz/en/",
+    "countryTxt": "Czech Republic",
+    "countryCode": "CZ"
+   }
+  }
+ ]
+}

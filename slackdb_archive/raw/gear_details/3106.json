@@ -1,0 +1,62 @@
+{
+ "gearDetail": {
+  "_id": 3106,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "WLCK",
+  "slug": "rowan_31",
+  "creatorId": "10154430595665625",
+  "creationDate": 1587233180234,
+  "lastEditDate": 1712946701810,
+  "name": "Rowan 3.1",
+  "material": [
+   "SS"
+  ],
+  "weight": 185,
+  "wll": 12,
+  "mbs": 55,
+  "anchorConnectionType": [
+   "MH"
+  ],
+  "webbingConnectionType": [
+   "CP"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 24,
+   "max": 26
+  },
+  "diverterDiameter": 25,
+  "productionStatus": "DC",
+  "manufacturerId": 62,
+  "pricing": {
+   "currency": "RUB",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 2316
+    }
+   ]
+  },
+  "imagesCount": 1
+ },
+ "similarGear": [
+  {
+   "_id": 502,
+   "slug": "BanditFX",
+   "itemTypeId": "WLCK",
+   "name": "Bandit FX",
+   "manufacturerId": 9,
+   "manufacturer": {
+    "name": "Equilibrium Slacklines (EQB)",
+    "url": "https://www.slackshop.cz/en/",
+    "countryTxt": "Czech Republic",
+    "countryCode": "CZ"
+   }
+  }
+ ]
+}

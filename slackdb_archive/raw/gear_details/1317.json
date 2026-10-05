@@ -1,0 +1,34 @@
+{
+ "gearDetail": {
+  "_id": 1317,
+  "name": "Roll'n'Lock",
+  "slug": "RollnLock",
+  "manufacturerId": 36,
+  "material": [
+   "S",
+   "AL"
+  ],
+  "itemTypeId": "BRK",
+  "weight": 80,
+  "wll": 2.5,
+  "mbs": 10,
+  "productionStatus": "AC",
+  "url": "http://www.climbingtechnology.com/en/professional-work/pulleys-and-rope-clamps/pulleys-rope-clamps/rollnlock",
+  "remarks": "Very efficient but almost impossible to detension - requires soft release system. Also sold by CMC",
+  "breakingMethod": "RCAM",
+  "compatibleRopeDiameter": {
+   "min": 8,
+   "max": 14
+  },
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "imagesCount": 0
+ },
+ "similarGear": []
+}

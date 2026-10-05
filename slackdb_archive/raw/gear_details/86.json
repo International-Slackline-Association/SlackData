@@ -1,0 +1,56 @@
+{
+ "gearDetail": {
+  "_id": 86,
+  "slug": "BlackWhite",
+  "itemTypeId": "WEB",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1542300491257,
+  "name": "Black-White",
+  "webbingType": "FL",
+  "material": [
+   "PL"
+  ],
+  "dWidth": 25,
+  "weight": 88,
+  "mbs": 43,
+  "elongation": {
+   "percent": 6,
+   "force": 10
+  },
+  "productionStatus": "DC",
+  "manufacturerId": 6,
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 100,
+     "qt": "EX",
+     "price": 2.3
+    }
+   ]
+  },
+  "imagesCount": 1
+ },
+ "similarGear": [
+  {
+   "_id": 11,
+   "slug": "Sumo",
+   "itemTypeId": "WEB",
+   "name": "Sumo",
+   "manufacturerId": 9,
+   "manufacturer": {
+    "name": "Equilibrium Slacklines (EQB)",
+    "url": "https://www.slackshop.cz/en/",
+    "countryTxt": "Czech Republic",
+    "countryCode": "CZ"
+   }
+  }
+ ]
+}

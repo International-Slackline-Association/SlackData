@@ -1,0 +1,65 @@
+{
+ "gearDetail": {
+  "_id": 94,
+  "name": "Slack-Spec 11/16\"",
+  "slug": "SlackSpec1116",
+  "manufacturerId": 3,
+  "material": [
+   "NY"
+  ],
+  "itemTypeId": "WEB",
+  "weight": 28,
+  "wll": 2.7,
+  "mbs": 13.3,
+  "dWidth": 17.5,
+  "productionStatus": "AC",
+  "url": "http://www.balancecommunity.com/11-16-slack-spec-tubular",
+  "webbingType": "TB",
+  "elongation": {},
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "pricing": {
+   "currency": "USD",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 1.18
+    },
+    {
+     "q": 15,
+     "qt": "EX",
+     "price": 1.2
+    },
+    {
+     "q": 30,
+     "qt": "EX",
+     "price": 1.2
+    },
+    {
+     "q": 50,
+     "qt": "EX",
+     "price": 1.18
+    },
+    {
+     "q": 60,
+     "qt": "EX",
+     "price": 1.18
+    },
+    {
+     "q": 75,
+     "qt": "EX",
+     "price": 1.17
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

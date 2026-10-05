@@ -1,0 +1,45 @@
+{
+ "gearDetail": {
+  "_id": 52,
+  "slug": "Flashline",
+  "itemTypeId": "WEB",
+  "flags": [
+   "CT"
+  ],
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1542301346656,
+  "name": "Flash'line",
+  "webbingType": "FL",
+  "material": [
+   "PL"
+  ],
+  "dWidth": 50,
+  "weight": 86,
+  "elongation": {
+   "percent": 2,
+   "force": 7.5
+  },
+  "productionStatus": "AC",
+  "manufacturerId": 10,
+  "url": "http://elephant-slacklines.com",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 2.35
+    }
+   ]
+  },
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

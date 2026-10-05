@@ -1,0 +1,34 @@
+{
+ "gearDetail": {
+  "_id": 3226,
+  "name": "KIT SLACK DE 20M AVEC CLIQUET",
+  "webbingLength": 20,
+  "webbingWidth": 50,
+  "tensioningType": "RAT1",
+  "productionStatus": "AC",
+  "manufacturerId": 4,
+  "url": "https://slack-mountain.com/en/slackline-beginner-kit/37-kit-slack-de-20m-avec-cliquet.html",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 48
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "kit_slackde20maveccliquet",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622030961254,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

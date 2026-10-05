@@ -1,0 +1,22 @@
+{
+ "_id": 332,
+ "gearId": 3027,
+ "takenDate": 1557522000000,
+ "imageScope": "ITM",
+ "imageSource": "UOFF",
+ "gearCondition": "USD",
+ "ImageEnvType": "US",
+ "imageType": "CLS",
+ "contributors": [
+  {
+   "id": "10154430595665625",
+   "name": "Nir Avneyon"
+  }
+ ],
+ "creationDate": 1557746608929,
+ "creatorId": "10154430595665625",
+ "filename": "332.jpg",
+ "width": 928,
+ "height": 594,
+ "creatorName": "Nir Avneyon"
+}

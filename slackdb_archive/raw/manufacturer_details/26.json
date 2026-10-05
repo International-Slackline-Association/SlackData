@@ -1,0 +1,62 @@
+{
+ "manufacturerDetail": {
+  "_id": 26,
+  "slug": "RaedSlacklines",
+  "manufacturerStatus": "ACT",
+  "imageFilename": "raed_slacklines.jpg",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "lastEditDate": 1501670446512,
+  "name": "Raed Slacklines",
+  "location": {
+   "countryCode": "DE",
+   "address": "Kottwiesenring 58, 18184, Broderstorf",
+   "lat": 54.08347,
+   "lng": 12.26086,
+   "isExact": true
+  },
+  "yearEstablished": 2015,
+  "isActive": true,
+  "isSlacklineOriented": true,
+  "url": "https://raed-slacklines.com",
+  "fbPage": "https://www.facebook.com/raedslacklines",
+  "description": "Raed slacklines produces innovative slackline pulley systems, weblocks, longline sets, whoopie slings, slackline webbings and TreePRO",
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "1541853415834804",
+    "name": "Stephan Chalkowski"
+   }
+  ],
+  "imagesCount": 0,
+  "gearStats": [
+   {
+    "itemTypeId": "WEB",
+    "count": 11
+   },
+   {
+    "itemTypeId": "TRP",
+    "count": 2
+   },
+   {
+    "itemTypeId": "WLCK",
+    "count": 5
+   },
+   {
+    "itemTypeId": "BRK",
+    "count": 1
+   },
+   {
+    "itemTypeId": "LRNG",
+    "count": 1
+   },
+   {
+    "itemTypeId": "SKT",
+    "count": 1
+   }
+  ]
+ }
+}

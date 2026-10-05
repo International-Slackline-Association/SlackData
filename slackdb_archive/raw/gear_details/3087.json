@@ -1,0 +1,70 @@
+{
+ "gearDetail": {
+  "_id": 3087,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "10156924709555759",
+    "name": "Gernot Mueller"
+   }
+  ],
+  "itemTypeId": "WEB",
+  "slug": "blue",
+  "creatorId": "10154430595665625",
+  "creationDate": 1568378164598,
+  "lastEditDate": 1589008388567,
+  "name": "Blue",
+  "webbingType": "FL",
+  "material": [
+   "PL"
+  ],
+  "dWidth": 25.4,
+  "weight": 55,
+  "wll": 5.6,
+  "mbs": 28,
+  "dDepth": 2.46,
+  "elongation": {
+   "force": 10,
+   "percent": 3
+  },
+  "usage": [
+   "HL",
+   "LL",
+   "LTL"
+  ],
+  "dateIntroduced": 1567976400000,
+  "productionStatus": "AC",
+  "manufacturerId": 3,
+  "url": "https://www.balancecommunity.com/products/blue",
+  "pricing": {
+   "currency": "USD",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 2
+    }
+   ],
+   "hasAddOpts": true
+  },
+  "imagesCount": 4
+ },
+ "similarGear": [
+  {
+   "_id": 28,
+   "slug": "Cobalt",
+   "itemTypeId": "WEB",
+   "name": "Cobalt",
+   "manufacturerId": 4,
+   "manufacturer": {
+    "name": "Slack Mountain",
+    "url": "http://slack-mountain.com",
+    "countryTxt": "France",
+    "countryCode": "FR"
+   }
+  }
+ ]
+}

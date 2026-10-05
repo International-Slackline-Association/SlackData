@@ -1,0 +1,52 @@
+{
+ "manufacturerDetail": {
+  "_id": 16,
+  "slug": "SlackGear",
+  "manufacturerStatus": "ACT",
+  "imageFilename": "slackgear.jpg",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "name": "SlackGear",
+  "location": {
+   "countryCode": "ZA",
+   "address": "Cape Town",
+   "lat": -33.92723083496094,
+   "lng": 18.42595481872559,
+   "isExact": false
+  },
+  "isActive": true,
+  "isSlacklineOriented": true,
+  "url": "http://www.slackgear.co.za",
+  "fbPage": "https://www.facebook.com/slackgear",
+  "lastEditDate": 1498724007241,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "imagesCount": 0,
+  "gearStats": [
+   {
+    "itemTypeId": "WLCK",
+    "count": 2
+   },
+   {
+    "itemTypeId": "LRNG",
+    "count": 1
+   },
+   {
+    "itemTypeId": "WEB",
+    "count": 1
+   },
+   {
+    "itemTypeId": "SKT",
+    "count": 1
+   },
+   {
+    "itemTypeId": "SLD",
+    "count": 1
+   }
+  ]
+ }
+}

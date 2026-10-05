@@ -1,0 +1,40 @@
+{
+ "gearDetail": {
+  "_id": 805,
+  "slug": "ForgedSteelRing",
+  "itemTypeId": "LRNG",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1542142295474,
+  "name": "Arbo Steel Ring L",
+  "material": [
+   "SS"
+  ],
+  "weight": 161,
+  "mbs": 30,
+  "materialDiameter": 12,
+  "innerDiameter": 46,
+  "outerDiameter": 70,
+  "productionStatus": "AC",
+  "manufacturerId": 36,
+  "url": "https://spider-slacklines.com/shop/en/rings/202-anello-forgiato-alluminio-ct-46-mm.html",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 8.95
+    }
+   ]
+  },
+  "imagesCount": 2
+ },
+ "similarGear": []
+}

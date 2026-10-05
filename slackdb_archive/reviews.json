@@ -1,0 +1,1225 @@
+[
+ {
+  "subjectType": "gear",
+  "subjectId": 6,
+  "subjectName": "Element",
+  "gearType": "WEB",
+  "manufacturer": "Equilibrium Slacklines (EQB)",
+  "creatorId": "656760621184025",
+  "rating": {
+   "lst": {
+    "VFM": 10,
+    "QU": 10,
+    "VER": 10,
+    "EOU": 10,
+    "SFT": 10
+   },
+   "overall": 10
+  },
+  "pros": [
+   "Packble",
+   "Very stretchy, great to bounce on"
+  ],
+  "cons": [],
+  "creationDate": 1500149075703,
+  "creatorName": "Eli Szendro Brown"
+ },
+ {
+  "subjectType": "gear",
+  "subjectId": 12,
+  "subjectName": "Slim Green",
+  "gearType": "WEB",
+  "manufacturer": "Equilibrium Slacklines (EQB)",
+  "creatorId": "656760621184025",
+  "text": "Great as rodeo, soft release and small lines. super fun to surf.",
+  "rating": {
+   "lst": {
+    "VFM": 10,
+    "QU": 8,
+    "SFT": 6,
+    "EOU": 10,
+    "VER": 10
+   },
+   "overall": 9
+  },
+  "pros": [
+   "Not to stretchy not to static",
+   "Light and compact."
+  ],
+  "cons": [],
+  "creationDate": 1500149238684,
+  "creatorName": "Eli Szendro Brown"
+ },
+ {
+  "subjectType": "gear",
+  "subjectId": 45,
+  "subjectName": "SuperFL Maverick V2",
+  "gearType": "WEB",
+  "manufacturer": "Slack.fr",
+  "creatorId": "10155361109487970",
+  "pros": [
+   "Cheap",
+   "Soft",
+   "Comfortable and easy to walk"
+  ],
+  "cons": [
+   "Lacks character",
+   "All white - it's hard to say which way is up and detect twists when rigging",
+   "Feels like a regular strap for towing cars"
+  ],
+  "rating": {
+   "lst": {
+    "VFM": 8,
+    "QU": 8,
+    "VER": 6,
+    "EOU": 10,
+    "SFT": 8
+   },
+   "overall": 8
+  },
+  "creationDate": 1499723466303,
+  "creatorName": "Ilia Oshmiansky"
+ },
+ {
+  "subjectType": "gear",
+  "subjectId": 61,
+  "subjectName": "Core 1",
+  "gearType": "WEB",
+  "manufacturer": "Landcruising",
+  "creatorId": "1559496084101329",
+  "text": "Only available as used, but the quality and longevity is so good, that it's worth getting anyways. One of the best longline webbings so far. Very low stretch, very low fuss. Meditative walking experience with decent weight and edges.",
+  "rating": {
+   "lst": {
+    "VFM": 10,
+    "QU": 10,
+    "VER": 6,
+    "EOU": 6,
+    "SFT": 8
+   },
+   "overall": 8
+  },
+  "pros": [
+   "Durable",
+   "Heavy"
+  ],
+  "cons": [],
+  "creationDate": 1501693896119,
+  "creatorName": "Philipp Gesing"
+ },
+ {
+  "subjectType": "gear",
+  "subjectId": 62,
+  "subjectName": "Core 2 HS",
+  "gearType": "WEB",
+  "manufacturer": "Landcruising",
+  "creatorId": "656760621184025",
+  "rating": {
+   "lst": {
+    "VFM": 10,
+    "QU": 10,
+    "VER": 8,
+    "EOU": 4,
+    "SFT": 8
+   },
+   "overall": 8
+  },
+  "pros": [
+   "Nice to walk on"
+  ],
+  "cons": [],
+  "creationDate": 1500148970326,
+  "creatorName": "Eli Szendro Brown"
+ },
+ {
+  "subjectType": "gear",
+  "subjectId": 63,
+  "subjectName": "Core 2 LS",
+  "gearType": "WEB",
+  "manufacturer": "Landcruising",
+  "creatorId": "157046135120641",
+  "text": "Bonne sangle",
+  "rating": {
+   "lst": {
+    "VFM": 6,
+    "QU": 10,
+    "SFT": 10,
+    "EOU": 10,
+    "VER": 8
+   },
+   "overall": 9
+  },
+  "pros": [],
+  "cons": [],
+  "creationDate": 1522738504586,
+  "creatorName": "Benoit Crera"
+ },
+ {
+  "subjectType": "gear",
+  "subjectId": 66,
+  "subjectName": "Sonic 2.0",
+  "gearType": "WEB",
+  "manufacturer": "Aki Slacklines",
+  "creatorId": "10154768518631235",
+  "pros": [
+   "Nice and soft - ideal for waterline",
+   "Very stretchy, great to bounce on"
+  ],
+  "rating": {
+   "lst": {
+    "VFM": 10,
+    "QU": 10,
+    "EOU": 8,
+    "SFT": 10,
+    "VER": 6
+   },
+   "overall": 9
+  },
+  "creationDate": 1499723466303,
+  "creatorName": "Gat Haneman"
+ },
+ {
+  "subjectType": "gear",
+  "subjectId": 66,
+  "subjectName": "Sonic 2.0",
+  "gearType": "WEB",
+  "manufacturer": "Aki Slacklines",
+  "creatorId": "656760621184025",
+  "text": "Great webbing, soft, stretchy, and visually pleasing.",
+  "rating": {
+   "lst": {
+    "SFT": 10,
+    "EOU": 10,
+    "VER": 10,
+    "QU": 10,
+    "VFM": 10
+   },
+   "overall": 10
+  },
+  "pros": [
+   "Very stretchy, great to bounce on",
+   "Nice and soft - ideal for waterline"
+  ],
+  "cons": [],
+  "creationDate": 1500148769857,
+  "creatorName": "Eli Szendro Brown"
+ },
+ {
+  "subjectType": "gear",
+  "subjectId": 71,
+  "subjectName": "White Magic",
+  "gearType": "WEB",
+  "manufacturer": "Aki Slacklines",
+  "creatorId": "10213773283512968",
+  "text": "I like the fact that you can tension it really easily, before I bought a pulley system I managed to use a primitive system to tension a 60m line with about 3m of sag with no problems what so ever. \nI think its not very versatile because of it's low stretch, even when you tension it a lot it doesn't feel very stretchy and playable.\nOverall this line is great, I've had it for about a year and a half, and it's been used for around 3 years, used it for highline several times and it work out great.",
+  "rating": {
+   "lst": {
+    "VFM": 8,
+    "QU": 8,
+    "VER": 4,
+    "EOU": 10,
+    "SFT": 6
+   },
+   "overall": 7
+  },
+  "pros": [
+   "Very easy to tension",
+   "Doesn't take a lot of room",
+   "Fairly visible",
+   "Great grip, doesn't slip at all"
+  ],
+  "cons": [
+   "Not very versatile",
+   "Edges become sharp under high tension"
+  ],
+  "creationDate": 1500305241185,
+  "creatorName": "Raz Rimon"
+ },
+ {
+  "subjectType": "gear",
+  "subjectId": 88,
+  "subjectName": "RedTUBE",
+  "gearType": "WEB",
+  "manufacturer": "Slacktivity",
+  "creatorId": "656760621184025",
+  "text": "A bit expansive but worth every penny. Amazing bounce, super soft on the feet and the hands. This is one of my favorite webbings so far.. the only disadvantages are that it is a bit hard to rig as a longline due to its stretch and a little heavy in the backpack. comes with a very convenient sewn loop on one side, making rigging easier.",
+  "rating": {
+   "lst": {
+    "VFM": 10,
+    "QU": 10,
+    "VER": 8,
+    "EOU": 10,
+    "SFT": 10
+   },
+   "overall": 10
+  },
+  "pros": [],
+  "cons": [],
+  "creationDate": 1500148525663,
+  "creatorName": "Eli Szendro Brown"
+ },
+ {
+  "subjectType": "gear",
+  "subjectId": 100,
+  "subjectName": "Aero 2",
+  "gearType": "WEB",
+  "manufacturer": "Balance Community: Slackline Outfitters",
+  "creatorId": "1559496084101329",
+  "text": "If you can only have one webbing, it NEEDS to be Aero 2. It is easily the best all-around webbing for lines up to 60m. For very long lines I'd go for Mantra on the ground or Unicorn in the air.",
+  "rating": {
+   "lst": {
+    "VFM": 6,
+    "QU": 10,
+    "VER": 10,
+    "EOU": 10,
+    "SFT": 10
+   },
+   "overall": 9
+  },
+  "pros": [],
+  "cons": [],
+  "creationDate": 1501693672851,
+  "creatorName": "Philipp Gesing"
+ },
+ {
+  "subjectType": "gear",
+  "subjectId": 102,
+  "subjectName": "Sugoi",
+  "gearType": "WEB",
+  "manufacturer": "Slackline Industries",
+  "creatorId": "1729285390418520",
+  "rating": {
+   "lst": {
+    "VFM": 8,
+    "QU": 8,
+    "VER": 6,
+    "EOU": 10,
+    "SFT": 4
+   },
+   "overall": 7
+  },
+  "pros": [
+   "Light",
+   "Markers every 10 feet",
+   "Low stretch, perfect park line",
+   "Durable"
+  ],
+  "cons": [
+   "Sharp (wouldn't highline on mine)"
+  ],
+  "creationDate": 1501690607868,
+  "creatorName": "Grant Mercer"
+ },
+ {
+  "subjectType": "gear",
+  "subjectId": 110,
+  "subjectName": "Zen",
+  "gearType": "WEB",
+  "manufacturer": "Middle Way Slacklines",
+  "creatorId": "10154768518631235",
+  "pros": [
+   "Comfortable and easy to walk",
+   "Very soft"
+  ],
+  "rating": {
+   "lst": {
+    "VFM": 8,
+    "QU": 10,
+    "VER": 6,
+    "EOU": 10,
+    "SFT": 10
+   },
+   "overall": 9
+  },
+  "creationDate": 1499723466303,
+  "creatorName": "Gat Haneman"
+ },
+ {
+  "subjectType": "gear",
+  "subjectId": 110,
+  "subjectName": "Zen",
+  "gearType": "WEB",
+  "manufacturer": "Middle Way Slacklines",
+  "creatorId": "656760621184025",
+  "rating": {
+   "lst": {
+    "SFT": 10,
+    "EOU": 10,
+    "VER": 8,
+    "QU": 10,
+    "VFM": 10
+   },
+   "overall": 10
+  },
+  "pros": [
+   "Very easy to tension",
+   "Soft",
+   "Packble"
+  ],
+  "cons": [
+   "Static at short - medium lengths."
+  ],
+  "creationDate": 1500236550687,
+  "creatorName": "Eli Szendro Brown"
+ },
+ {
+  "subjectType": "gear",
+  "subjectId": 119,
+  "subjectName": "Cosmic",
+  "gearType": "WEB",
+  "manufacturer": "Slack Inov",
+  "creatorId": "1559496084101329",
+  "text": "Best polyester tube. Edges are better than most webbings, stretch is decent and it's very easy to walk. Great waterline and also good choice for medium long highlines. Would recommend 30 m or more. It packs very easily and is surprisingly robust for a tube. If you want a slackline that is different from the ones everyone else has, this is the choice for you!",
+  "rating": {
+   "lst": {
+    "VFM": 8,
+    "QU": 8,
+    "VER": 10,
+    "EOU": 10,
+    "SFT": 8
+   },
+   "overall": 9
+  },
+  "pros": [
+   "Versatile",
+   "Lightweight",
+   "Compact"
+  ],
+  "cons": [],
+  "creationDate": 1501694133595,
+  "creatorName": "Philipp Gesing"
+ },
+ {
+  "subjectType": "gear",
+  "subjectId": 128,
+  "subjectName": "Spectre",
+  "gearType": "WEB",
+  "manufacturer": "Slack Mountain",
+  "creatorId": "10156383168804695",
+  "text": "Best for highline polyamide",
+  "rating": {
+   "lst": {
+    "VFM": 10,
+    "QU": 10,
+    "VER": 10,
+    "EOU": 10,
+    "SFT": 10
+   },
+   "overall": 10
+  },
+  "pros": [],
+  "cons": [],
+  "creationDate": 1522520434211,
+  "creatorName": "Johanna Glasse"
+ },
+ {
+  "subjectType": "gear",
+  "subjectId": 129,
+  "subjectName": "McFly",
+  "gearType": "WEB",
+  "manufacturer": "Slack.fr",
+  "creatorId": "10155361109487970",
+  "rating": {
+   "lst": {
+    "VFM": 10,
+    "QU": 10,
+    "VER": 8,
+    "SFT": 8,
+    "EOU": 10
+   },
+   "overall": 9
+  },
+  "pros": [
+   "Nice stretch and bounce",
+   "Feels very duable"
+  ],
+  "cons": [
+   "Very thick",
+   "Hard to say which way is up and detect twists when rigging"
+  ],
+  "creationDate": 1499723466303,
+  "lastEditDate": 1528741987507,
+  "creatorName": "Ilia Oshmiansky"
+ },
+ {
+  "subjectType": "gear",
+  "subjectId": 129,
+  "subjectName": "McFly",
+  "gearType": "WEB",
+  "manufacturer": "Slack.fr",
+  "creatorId": "656760621184025",
+  "text": "Amazing in terms of dynamics, but with rough texture (annoying for water/high lines).",
+  "rating": {
+   "lst": {
+    "VFM": 6,
+    "QU": 10,
+    "VER": 4,
+    "EOU": 8,
+    "SFT": 4
+   },
+   "overall": 6
+  },
+  "pros": [
+   "Very stretchy, great to bounce on",
+   "Abrasion resistant",
+   "Packble"
+  ],
+  "cons": [
+   "Very rough on your skin (can be frustrating on highlines and waterlines)",
+   "Tough to detect twists",
+   "Takes time to tension"
+  ],
+  "creationDate": 1500236309142,
+  "creatorName": "Eli Szendro Brown"
+ },
+ {
+  "subjectType": "gear",
+  "subjectId": 132,
+  "subjectName": "Reggae",
+  "gearType": "WEB",
+  "manufacturer": "Slack.fr",
+  "creatorId": "1729285390418520",
+  "rating": {
+   "lst": {
+    "VFM": 10,
+    "QU": 8,
+    "VER": 10,
+    "EOU": 6,
+    "SFT": 10
+   },
+   "overall": 9
+  },
+  "pros": [
+   "Amazingly soft",
+   "Fun to walk, bouncy",
+   "Great price"
+  ],
+  "cons": [
+   "No protective coating, won't last as long",
+   "Difficult to rig in parks due to stretch"
+  ],
+  "creationDate": 1501690712684,
+  "creatorName": "Grant Mercer"
+ },
+ {
+  "subjectType": "gear",
+  "subjectId": 132,
+  "subjectName": "Reggae",
+  "gearType": "WEB",
+  "manufacturer": "Slack.fr",
+  "creatorId": "157046135120641",
+  "text": "Surement une des meilleurs tub mais trop cher",
+  "rating": {
+   "lst": {
+    "EOU": 6,
+    "VFM": 4,
+    "QU": 8,
+    "VER": 6,
+    "SFT": 8
+   },
+   "overall": 6
+  },
+  "pros": [],
+  "cons": [],
+  "creationDate": 1523100558352,
+  "creatorName": "Benoit Crera"
+ },
+ {
+  "subjectType": "gear",
+  "subjectId": 513,
+  "subjectName": "Zilla 3.0",
+  "gearType": "WLCK",
+  "manufacturer": "Landcruising",
+  "creatorId": "757816924399230",
+  "text": "I like it because it gives me peace of mind, might be the strongest weblock in the world. i had one of them paint scrape off by a red pin  shackle, make sure you use a suitable sized shackle.",
+  "rating": {
+   "lst": {
+    "VFM": 10,
+    "QU": 10,
+    "VER": 6,
+    "EOU": 4,
+    "PRT": 10
+   },
+   "overall": 8
+  },
+  "pros": [
+   "18 kn WLL feels Bomber"
+  ],
+  "cons": [
+   "When carrying the Weblock you reallize that 1/2 Kg is really heavy"
+  ],
+  "creationDate": 1500225228239,
+  "lastEditDate": 1500282111529,
+  "creatorName": "Moshe Klasovsky"
+ },
+ {
+  "subjectType": "gear",
+  "subjectId": 515,
+  "subjectName": "Lynx 4.0 SH",
+  "gearType": "WLCK",
+  "manufacturer": "Landcruising",
+  "creatorId": "10155361109487970",
+  "pros": [
+   "Easy to pre tension",
+   "Light",
+   "Nice pin lock"
+  ],
+  "cons": [
+   "Can't rig without a shackle (like alpine weblock for example)"
+  ],
+  "rating": {
+   "lst": {
+    "VFM": 10,
+    "QU": 10,
+    "VER": 8,
+    "EOU": 10,
+    "PRT": 10
+   },
+   "overall": 10
+  },
+  "creationDate": 1499723466303,
+  "creatorName": "Ilia Oshmiansky",
+  "text": "Overall very happy with this one"
+ },
+ {
+  "subjectType": "gear",
+  "subjectId": 515,
+  "subjectName": "Lynx 4.0 SH",
+  "gearType": "WLCK",
+  "manufacturer": "Landcruising",
+  "creatorId": "10154768518631235",
+  "pros": [
+   "Very comfortable to use",
+   "Very light"
+  ],
+  "rating": {
+   "lst": {
+    "VFM": 10,
+    "QU": 10,
+    "VER": 8,
+    "EOU": 10,
+    "PRT": 10
+   },
+   "overall": 10
+  },
+  "creationDate": 1499727066303,
+  "creatorName": "Gat Haneman",
+  "text": "Great weblock"
+ },
+ {
+  "subjectType": "gear",
+  "subjectId": 515,
+  "subjectName": "Lynx 4.0 SH",
+  "gearType": "WLCK",
+  "manufacturer": "Landcruising",
+  "creatorId": "656760621184025",
+  "text": "Great weblock :) I have 2 and love them",
+  "rating": {
+   "lst": {
+    "VER": 8,
+    "QU": 10,
+    "VFM": 10,
+    "EOU": 10,
+    "PRT": 10
+   },
+   "overall": 10
+  },
+  "pros": [
+   "Light",
+   "No slippage"
+  ],
+  "cons": [
+   "Not suitable for soft shackles",
+   "Can't rig without a shackle (like alpine weblock for example)"
+  ],
+  "creationDate": 1500152897260,
+  "creatorName": "Eli Szendro Brown"
+ },
+ {
+  "subjectType": "gear",
+  "subjectId": 515,
+  "subjectName": "Lynx 4.0 SH",
+  "gearType": "WLCK",
+  "manufacturer": "Landcruising",
+  "creatorId": "1965817623686037",
+  "text": "One of my favourite piece of gear.\nIt sucks at pretensionning but won't slip too much on highlines.",
+  "rating": {
+   "lst": {
+    "VFM": 10,
+    "QU": 10,
+    "VER": 8,
+    "EOU": 8,
+    "PRT": 6
+   },
+   "overall": 8
+  },
+  "pros": [
+   "Light and compact.",
+   "Finish",
+   "Quality"
+  ],
+  "cons": [
+   "Pretension"
+  ],
+  "creationDate": 1501754564705,
+  "creatorName": "Radwin Bodnic"
+ },
+ {
+  "subjectType": "gear",
+  "subjectId": 515,
+  "subjectName": "Lynx 4.0 SH",
+  "gearType": "WLCK",
+  "manufacturer": "Landcruising",
+  "creatorId": "157046135120641",
+  "text": "Bien mais cher",
+  "rating": {
+   "lst": {
+    "VFM": 4,
+    "QU": 10,
+    "EOU": 6,
+    "PRT": 10,
+    "VER": 8
+   },
+   "overall": 8
+  },
+  "pros": [],
+  "cons": [],
+  "creationDate": 1522738750464,
+  "creatorName": "Benoit Crera"
+ },
+ {
+  "subjectType": "gear",
+  "subjectId": 516,
+  "subjectName": "Lynx 4.0 Vari",
+  "gearType": "WLCK",
+  "manufacturer": "Landcruising",
+  "creatorId": "10155361109487970",
+  "pros": [
+   "Light",
+   "Fits any soft release perfectly",
+   "Comfortable to use"
+  ],
+  "rating": {
+   "lst": {
+    "QU": 8,
+    "VFM": 10,
+    "VER": 10,
+    "EOU": 10,
+    "PRT": 10
+   },
+   "overall": 10
+  },
+  "date": 1498251532652,
+  "creationDate": 1499723466303,
+  "creatorName": "Ilia Oshmiansky"
+ },
+ {
+  "subjectType": "gear",
+  "subjectId": 516,
+  "subjectName": "Lynx 4.0 Vari",
+  "gearType": "WLCK",
+  "manufacturer": "Landcruising",
+  "creatorId": "1965817623686037",
+  "text": "It does not pretension well. But it doesn't slip on highlines. I love how it fits into RE's p21d with a centering tube.",
+  "rating": {
+   "lst": {
+    "VFM": 8,
+    "QU": 10,
+    "VER": 8,
+    "EOU": 8,
+    "PRT": 6
+   },
+   "overall": 8
+  },
+  "pros": [
+   "Finish",
+   "Quality",
+   "Light"
+  ],
+  "cons": [
+   "Pretension"
+  ],
+  "creationDate": 1501754695061,
+  "creatorName": "Radwin Bodnic"
+ },
+ {
+  "subjectType": "gear",
+  "subjectId": 533,
+  "subjectName": "Alpine WebLock 4.0",
+  "gearType": "WLCK",
+  "manufacturer": "Balance Community: Slackline Outfitters",
+  "creatorId": "656760621184025",
+  "text": "Favorite one in my collection.",
+  "rating": {
+   "lst": {
+    "VFM": 10,
+    "QU": 10,
+    "VER": 10,
+    "EOU": 10,
+    "PRT": 10
+   },
+   "overall": 10
+  },
+  "pros": [
+   "Easy to pre tension",
+   "Big connector hole, allows many ocnfigurations",
+   "Can be used without a shackle"
+  ],
+  "cons": [
+   "A bit heavy",
+   "Price"
+  ],
+  "creationDate": 1500152535490,
+  "lastEditDate": 1500152676923,
+  "creatorName": "Eli Szendro Brown"
+ },
+ {
+  "subjectType": "gear",
+  "subjectId": 542,
+  "subjectName": "Frog",
+  "gearType": "WLCK",
+  "manufacturer": "Slack Mountain",
+  "creatorId": "10156383168804695",
+  "text": "Top",
+  "rating": {
+   "lst": {
+    "VFM": 10,
+    "QU": 10,
+    "VER": 10,
+    "EOU": 10,
+    "PRT": 10
+   },
+   "overall": 10
+  },
+  "pros": [],
+  "cons": [],
+  "creationDate": 1522520347133,
+  "creatorName": "Johanna Glasse"
+ },
+ {
+  "subjectType": "gear",
+  "subjectId": 544,
+  "subjectName": "BANANA! 2.0",
+  "gearType": "WLCK",
+  "manufacturer": "Slack house",
+  "creatorId": "656760621184025",
+  "rating": {
+   "lst": {
+    "VFM": 10,
+    "QU": 10,
+    "VER": 8,
+    "EOU": 8,
+    "PRT": 10
+   },
+   "overall": 9
+  },
+  "pros": [
+   "Cheap",
+   "Keep it simple (and it works)"
+  ],
+  "cons": [
+   "Not quickpin"
+  ],
+  "creationDate": 1500149575817,
+  "creatorName": "Eli Szendro Brown"
+ },
+ {
+  "subjectType": "gear",
+  "subjectId": 544,
+  "subjectName": "BANANA! 2.0",
+  "gearType": "WLCK",
+  "manufacturer": "Slack house",
+  "creatorId": "656760621184025",
+  "rating": {
+   "lst": {
+    "VFM": 10,
+    "QU": 10,
+    "VER": 8,
+    "EOU": 8,
+    "PRT": 10
+   },
+   "overall": 9
+  },
+  "pros": [
+   "Cheap",
+   "Keep it simple (and it works)"
+  ],
+  "cons": [
+   "Not quickpin"
+  ],
+  "creationDate": 1500149575817,
+  "creatorName": "Eli Szendro Brown"
+ },
+ {
+  "subjectType": "gear",
+  "subjectId": 546,
+  "subjectName": "SeaHorse DP 1.5",
+  "gearType": "WLCK",
+  "manufacturer": "Slacktivity",
+  "creatorId": "656760621184025",
+  "text": "I have one and love it.. but. needs to have an eye kept on it due to slippage. would recommend for longline and situations where it can be easily and frequently maintained and adjusted.",
+  "rating": {
+   "lst": {
+    "VER": 8,
+    "QU": 10,
+    "VFM": 8,
+    "EOU": 10,
+    "PRT": 10
+   },
+   "overall": 9
+  },
+  "pros": [
+   "Easy to pre tension",
+   "Nice options with the center hole",
+   "Double pin for soft release"
+  ],
+  "cons": [
+   "Slippage",
+   "Heavy"
+  ],
+  "creationDate": 1500153266839,
+  "creatorName": "Eli Szendro Brown"
+ },
+ {
+  "subjectType": "gear",
+  "subjectId": 551,
+  "subjectName": "Catlock classic",
+  "gearType": "WLCK",
+  "manufacturer": "Cat on slack",
+  "creatorId": "10213773283512968",
+  "text": "Good for long lines and all kinds of lines in the park.",
+  "rating": {
+   "lst": {
+    "VFM": 10,
+    "QU": 6,
+    "VER": 6,
+    "EOU": 6,
+    "PRT": 8
+   },
+   "overall": 7
+  },
+  "pros": [
+   "Very cheap"
+  ],
+  "cons": [
+   "Not for highline",
+   "The metal curving differentiates from one lock to another"
+  ],
+  "creationDate": 1500305980321,
+  "creatorName": "Raz Rimon"
+ },
+ {
+  "subjectType": "gear",
+  "subjectId": 803,
+  "subjectName": "Leashring V2.0",
+  "gearType": "LRNG",
+  "manufacturer": "Slack.fr",
+  "creatorId": "10155361109487970",
+  "pros": [
+   "Big, easily passes through the webbing",
+   "Can fit most weblocks"
+  ],
+  "cons": [
+   "Heavy",
+   "You dont want these hitting your face :)",
+   "Overkill for highine leash rings"
+  ],
+  "rating": {
+   "lst": {
+    "VFM": 6,
+    "QU": 6,
+    "VER": 10,
+    "EOU": 10
+   },
+   "overall": 8
+  },
+  "creationDate": 1499723466303,
+  "creatorName": "Ilia Oshmiansky"
+ },
+ {
+  "subjectType": "gear",
+  "subjectId": 1106,
+  "subjectName": "Hangover 2.0",
+  "gearType": "SLD",
+  "manufacturer": "Slacktivity",
+  "creatorId": "10155361109487970",
+  "pros": [
+   "Easy to use",
+   "Fast",
+   "Can be used for tensioning combined with a line-grip"
+  ],
+  "rating": {
+   "lst": {
+    "VFM": 10,
+    "QU": 10,
+    "VER": 10,
+    "EOU": 10
+   },
+   "overall": 10
+  },
+  "creationDate": 1499723466303,
+  "creatorName": "Ilia Oshmiansky"
+ },
+ {
+  "subjectType": "gear",
+  "subjectId": 1301,
+  "subjectName": "GRIGRI 2",
+  "gearType": "BRK",
+  "manufacturer": "Petzl",
+  "creatorId": "157046135120641",
+  "text": "Le mien a cassé en slack sur 60 m",
+  "rating": {
+   "lst": {
+    "VFM": 2,
+    "QU": 2,
+    "VER": 6,
+    "EOU": 10
+   },
+   "overall": 5
+  },
+  "pros": [],
+  "cons": [],
+  "creationDate": 1523100473274,
+  "creatorName": "Benoit Crera"
+ },
+ {
+  "subjectType": "gear",
+  "subjectId": 1305,
+  "subjectName": "Micro Traxion",
+  "gearType": "BRK",
+  "manufacturer": "Petzl",
+  "creatorId": "656760621184025",
+  "text": "I use it with 6mm rope and a linegrip. I love how small and efficient it is, but when rigging high (parklines) I find it hard to release. Can be useful to pull thick taglines across. I would not recommend using it W/O softpointing due to the tooth cam.",
+  "rating": {
+   "lst": {
+    "VER": 10,
+    "EOU": 6,
+    "QU": 10,
+    "VFM": 10
+   },
+   "overall": 9
+  },
+  "pros": [],
+  "cons": [],
+  "creationDate": 1500143564377,
+  "creatorName": "Eli Szendro Brown"
+ },
+ {
+  "subjectType": "gear",
+  "subjectId": 1316,
+  "subjectName": "Eddy",
+  "gearType": "BRK",
+  "manufacturer": "Edelrid",
+  "creatorId": "656760621184025",
+  "text": "I have been using it with 5:1 SMCs and love it. it is a bit hard to embed due to the wide profile. easy to release under tension, great handle with a lot of control. I dislike the panic mechanism of the handle, where if it is pulled over a threshold it stops releasing. I experienced no slippage with it at all. in order to use at low tensions, it needs to be engaged with a slight tug of the rope.",
+  "rating": {
+   "lst": {
+    "VER": 10,
+    "EOU": 10,
+    "QU": 10,
+    "VFM": 8
+   },
+   "overall": 10
+  },
+  "pros": [],
+  "cons": [],
+  "creationDate": 1500143178505,
+  "creatorName": "Eli Szendro Brown"
+ },
+ {
+  "subjectType": "gear",
+  "subjectId": 3012,
+  "subjectName": "Slackibloc 4",
+  "gearType": "WLCK",
+  "manufacturer": "Slack Inov",
+  "creatorId": "1965817623686037",
+  "text": "The lightest traditional weblock on earth.\nWide variety of compatible connectors.\nVery good finish.\nLow design quickpin.",
+  "rating": {
+   "lst": {
+    "VFM": 10,
+    "QU": 8,
+    "VER": 8,
+    "EOU": 8,
+    "PRT": 10
+   },
+   "overall": 9
+  },
+  "pros": [
+   "Compact",
+   "Very light",
+   "Cheap",
+   "Easy to pre tension",
+   "Finish"
+  ],
+  "cons": [
+   "Light anodisation"
+  ],
+  "creationDate": 1501754421669,
+  "creatorName": "Radwin Bodnic"
+ },
+ {
+  "subjectType": "gear",
+  "subjectId": 3012,
+  "subjectName": "Slackibloc 4",
+  "gearType": "WLCK",
+  "manufacturer": "Slack Inov",
+  "creatorId": "157046135120641",
+  "text": "Toutes les sangles glissent dedans mais si cela est plus cher le lynx est beaucoup mieux",
+  "rating": {
+   "lst": {
+    "VFM": 4,
+    "QU": 6,
+    "EOU": 4,
+    "PRT": 6,
+    "VER": 2
+   },
+   "overall": 4
+  },
+  "pros": [],
+  "cons": [],
+  "creationDate": 1522738672091,
+  "creatorName": "Benoit Crera"
+ },
+ {
+  "subjectType": "gear",
+  "subjectId": 3048,
+  "subjectName": "Project 44",
+  "gearType": "WEB",
+  "manufacturer": "Slack Mountain",
+  "creatorId": "10156383168804695",
+  "text": "Top",
+  "rating": {
+   "lst": {
+    "VFM": 10,
+    "QU": 10,
+    "VER": 10,
+    "EOU": 10,
+    "SFT": 10
+   },
+   "overall": 10
+  },
+  "pros": [],
+  "cons": [],
+  "creationDate": 1522520500207,
+  "creatorName": "Johanna Glasse"
+ },
+ {
+  "subjectType": "manufacturer",
+  "subjectId": 1,
+  "subjectName": "Gibbon",
+  "gearType": null,
+  "manufacturer": "Gibbon",
+  "creatorId": "1574892945909720",
+  "text": "Great brand, been using their Surf Line for a while now, so much fun!",
+  "rating": {
+   "lst": {
+    "OP": 10,
+    "SP": 10,
+    "PQ": 10,
+    "CS": 10
+   },
+   "overall": 10
+  },
+  "creationDate": 1502070083319,
+  "creatorName": "Gaston Armand"
+ },
+ {
+  "subjectType": "manufacturer",
+  "subjectId": 2,
+  "subjectName": "Landcruising",
+  "gearType": null,
+  "manufacturer": "Landcruising",
+  "creatorId": "757816924399230",
+  "text": "I have ordered from Landcruzing 3 times, all orders had no problems, they have great products, Shipment is fast, I have ordered and changed my order after a few hours and have got my money back for what i cancelled with no problems, got a cool calender and stickers with my order. all in all 5/5",
+  "rating": {
+   "lst": {
+    "OP": 10,
+    "SP": 10,
+    "PQ": 10,
+    "CS": 10
+   },
+   "overall": 10
+  },
+  "creationDate": 1500224125890,
+  "creatorName": "Moshe Klasovsky"
+ },
+ {
+  "subjectType": "manufacturer",
+  "subjectId": 2,
+  "subjectName": "Landcruising",
+  "gearType": null,
+  "manufacturer": "Landcruising",
+  "creatorId": "10160004374565647",
+  "text": "Blown away with their customer support. Excellent products as well for very reasonable price. Shipping to my country can be tricky and expensive depending on package weight, but Landcruising were more than willing to help me make it all work out.",
+  "rating": {
+   "lst": {
+    "OP": 10,
+    "SP": 10,
+    "PQ": 10,
+    "CS": 10
+   },
+   "overall": 10
+  },
+  "creationDate": 1518106741571,
+  "creatorName": "Andrés Rojas"
+ },
+ {
+  "subjectType": "manufacturer",
+  "subjectId": 3,
+  "subjectName": "Balance Community: Slackline Outfitters",
+  "gearType": null,
+  "manufacturer": "Balance Community: Slackline Outfitters",
+  "creatorId": "10160004374565647",
+  "text": "Excelent products, outstanding customer support. First purchase I made was over 3 years ago. They have only improved what was already a really good company.",
+  "rating": {
+   "lst": {
+    "OP": 10,
+    "SP": 10,
+    "PQ": 10,
+    "CS": 10
+   },
+   "overall": 10
+  },
+  "creationDate": 1518106501950,
+  "creatorName": "Andrés Rojas"
+ },
+ {
+  "subjectType": "manufacturer",
+  "subjectId": 12,
+  "subjectName": "Slack.fr",
+  "gearType": null,
+  "manufacturer": "Slack.fr",
+  "creatorId": "1574892945909720",
+  "text": "Shipped to Australia, postage got delayed, they sent free gear to say sorry, been using their longline pulley kit for a number of years without fail! AWESOME!",
+  "rating": {
+   "lst": {
+    "OP": 10,
+    "SP": 10,
+    "PQ": 10,
+    "CS": 10
+   },
+   "overall": 10
+  },
+  "creationDate": 1502069999317,
+  "creatorName": "Gaston Armand"
+ },
+ {
+  "subjectType": "manufacturer",
+  "subjectId": 19,
+  "subjectName": "Pure Slacklines",
+  "gearType": null,
+  "manufacturer": "Pure Slacklines",
+  "creatorId": "1574892945909720",
+  "text": "Great quality primitive gear, worth the price, for beginners to professionals.",
+  "rating": {
+   "lst": {
+    "OP": 10,
+    "SP": 10,
+    "PQ": 10,
+    "CS": 10
+   },
+   "overall": 10
+  },
+  "creationDate": 1502069907116,
+  "creatorName": "Gaston Armand"
+ }
+]

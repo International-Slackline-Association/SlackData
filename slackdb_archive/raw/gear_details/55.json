@@ -1,0 +1,35 @@
+{
+ "gearDetail": {
+  "_id": 55,
+  "slug": "Wing35",
+  "itemTypeId": "WEB",
+  "flags": [
+   "CT"
+  ],
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "name": "Wing 3.5",
+  "webbingType": "FL",
+  "material": [
+   "PL"
+  ],
+  "dWidth": 35,
+  "weight": 54,
+  "mbs": 30,
+  "elongation": {
+   "percent": 5.9,
+   "force": 7.5
+  },
+  "productionStatus": "DC",
+  "manufacturerId": 10,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1587282833232,
+  "imagesCount": 0
+ },
+ "similarGear": []
+}

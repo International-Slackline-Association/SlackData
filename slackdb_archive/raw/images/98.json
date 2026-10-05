@@ -1,0 +1,22 @@
+{
+ "_id": 98,
+ "description": "Multiplier of the raed PRO Pulley System",
+ "imageScope": "ITM",
+ "imageSource": "OFF",
+ "gearCondition": "NEW",
+ "ImageEnvType": "STD",
+ "imageType": "CLS",
+ "gearId": 3017,
+ "contributors": [
+  {
+   "id": "1541853415834804",
+   "name": "Stephan Chalkowski"
+  }
+ ],
+ "creationDate": 1501677900575,
+ "creatorId": "1541853415834804",
+ "filename": "98.jpg",
+ "width": 1500,
+ "height": 1000,
+ "creatorName": "Stephan Chalkowski"
+}

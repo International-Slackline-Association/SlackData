@@ -1,0 +1,34 @@
+{
+ "gearDetail": {
+  "_id": 48,
+  "slug": "Jumpline",
+  "itemTypeId": "WEB",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "name": "Jumpline",
+  "webbingType": "FL",
+  "material": [
+   "PL"
+  ],
+  "dWidth": 30,
+  "weight": 60,
+  "wll": 10,
+  "mbs": 30,
+  "dDepth": 2,
+  "elongation": {
+   "percent": 4,
+   "force": 10
+  },
+  "productionStatus": "DC",
+  "manufacturerId": 12,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1587285363231,
+  "imagesCount": 0
+ },
+ "similarGear": []
+}

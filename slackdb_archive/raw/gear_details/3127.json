@@ -1,0 +1,85 @@
+{
+ "gearDetail": {
+  "_id": 3127,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "WEB",
+  "slug": "aurora",
+  "creatorId": "10154430595665625",
+  "creationDate": 1602529731686,
+  "name": "Aurora",
+  "webbingType": "CS",
+  "material": [
+   "PL"
+  ],
+  "dWidth": 25.4,
+  "weight": 61,
+  "mbs": 31,
+  "elongation": {
+   "percent": 4,
+   "force": 5
+  },
+  "dateIntroduced": 1602190800000,
+  "productionStatus": "AC",
+  "manufacturerId": 26,
+  "url": "https://raed-slacklines.com/aurora-polyester-highline-webbing",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 1.99
+    }
+   ],
+   "hasAddOpts": true
+  },
+  "lastEditDate": 1602529760957,
+  "imagesCount": 1
+ },
+ "similarGear": [
+  {
+   "_id": 3043,
+   "itemTypeId": "WEB",
+   "slug": "firefly",
+   "name": "Firefly (phosphorescent)",
+   "manufacturerId": 4,
+   "manufacturer": {
+    "name": "Slack Mountain",
+    "url": "http://slack-mountain.com",
+    "countryTxt": "France",
+    "countryCode": "FR"
+   }
+  },
+  {
+   "_id": 3090,
+   "itemTypeId": "WEB",
+   "slug": "polar",
+   "name": "Polar",
+   "manufacturerId": 64,
+   "manufacturer": {
+    "name": "Aki Slacklines",
+    "url": "https://aki-slacklines.de",
+    "countryTxt": "Germany",
+    "countryCode": "DE"
+   }
+  },
+  {
+   "_id": 139,
+   "slug": "Unicorn",
+   "itemTypeId": "WEB",
+   "name": "Unicorn",
+   "manufacturerId": 64,
+   "manufacturer": {
+    "name": "Aki Slacklines",
+    "url": "https://aki-slacklines.de",
+    "countryTxt": "Germany",
+    "countryCode": "DE"
+   }
+  }
+ ]
+}

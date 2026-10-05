@@ -1,0 +1,111 @@
+{
+ "gearDetail": {
+  "_id": 128,
+  "slug": "Spectre",
+  "itemTypeId": "WEB",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "10155267793869667",
+    "name": "Romain Schempf"
+   },
+   {
+    "id": "10156383168804695",
+    "name": "Johanna Glasse"
+   }
+  ],
+  "lastEditDate": 1502921295803,
+  "name": "Spectre",
+  "webbingType": "CS",
+  "material": [
+   "NY"
+  ],
+  "dWidth": 25,
+  "weight": 70,
+  "wll": 10,
+  "mbs": 30,
+  "dDepth": 3,
+  "elongation": {
+   "percent": 13.5,
+   "force": 10
+  },
+  "usage": [
+   "SL",
+   "HL",
+   "LL",
+   "RL",
+   "LTL"
+  ],
+  "dateIntroduced": 1486425600000,
+  "productionStatus": "AC",
+  "manufacturerId": 4,
+  "url": "http://slack-mountain.com/en/webbing-slackline/168-spectre.html",
+  "pricing": {
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 1.66
+    }
+   ],
+   "currency": "EUR"
+  },
+  "reviews": [
+   {
+    "creatorId": "10156383168804695",
+    "text": "Best for highline polyamide",
+    "rating": {
+     "lst": {
+      "VFM": 10,
+      "QU": 10,
+      "VER": 10,
+      "EOU": 10,
+      "SFT": 10
+     },
+     "overall": 10
+    },
+    "pros": [],
+    "cons": [],
+    "creationDate": 1522520434211,
+    "creatorName": "Johanna Glasse"
+   }
+  ],
+  "ratingsAverages": {
+   "overall": {
+    "nativeCount": 1,
+    "nativeValue": 10,
+    "value": 10,
+    "count": 1
+   },
+   "lst": {
+    "VFM": {
+     "count": 1,
+     "value": 10
+    },
+    "QU": {
+     "count": 1,
+     "value": 10
+    },
+    "VER": {
+     "count": 1,
+     "value": 10
+    },
+    "EOU": {
+     "count": 1,
+     "value": 10
+    },
+    "SFT": {
+     "count": 1,
+     "value": 10
+    }
+   }
+  },
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

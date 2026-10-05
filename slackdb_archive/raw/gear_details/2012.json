@@ -1,0 +1,28 @@
+{
+ "gearDetail": {
+  "_id": 2012,
+  "name": "3.25T OMEGA Shackle",
+  "slug": "325TOMEGAShackle",
+  "manufacturerId": 37,
+  "material": [
+   "S"
+  ],
+  "itemTypeId": "CON",
+  "weight": 634,
+  "wll": 32.5,
+  "mbs": 195,
+  "productionStatus": "AC",
+  "remarks": "Van Beest Rating",
+  "connectorType": "OS",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

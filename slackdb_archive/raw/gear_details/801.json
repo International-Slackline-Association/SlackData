@@ -1,0 +1,77 @@
+{
+ "gearDetail": {
+  "_id": 801,
+  "slug": "HighlineRingGreen",
+  "itemTypeId": "LRNG",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "10211802848940671",
+    "name": "Thomas Buckingham"
+   }
+  ],
+  "lastEditDate": 1603048651532,
+  "name": "HighlineRing Green",
+  "material": [
+   "AL"
+  ],
+  "weight": 48,
+  "wll": 5,
+  "mbs": 20,
+  "materialDiameter": 10,
+  "innerDiameter": 60,
+  "outerDiameter": 80,
+  "productionStatus": "DC",
+  "manufacturerId": 6,
+  "isaApproved": true,
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 10.95
+    },
+    {
+     "q": 2,
+     "qt": "AA",
+     "price": 9.95
+    }
+   ]
+  },
+  "imagesCount": 2
+ },
+ "similarGear": [
+  {
+   "_id": 3028,
+   "itemTypeId": "LRNG",
+   "slug": "petram_aluminiumring",
+   "name": "Petram Aluminium ring",
+   "manufacturerId": 45,
+   "manufacturer": {
+    "name": "Petram Slacklines",
+    "url": "https://petramslacklines.site123.me/",
+    "countryTxt": "Poland",
+    "countryCode": "PL"
+   }
+  },
+  {
+   "_id": 3061,
+   "itemTypeId": "LRNG",
+   "slug": "leash_protector",
+   "name": "Leash Protector",
+   "manufacturerId": 62,
+   "manufacturer": {
+    "name": "Souz Slackline",
+    "url": "https://souzslackline.com",
+    "countryTxt": "Russian Federation",
+    "countryCode": "RU"
+   }
+  }
+ ]
+}

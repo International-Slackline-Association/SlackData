@@ -1,0 +1,51 @@
+{
+ "gearDetail": {
+  "_id": 518,
+  "slug": "Yang",
+  "itemTypeId": "WLCK",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "name": "Yang",
+  "material": [
+   "SS"
+  ],
+  "weight": 227,
+  "wll": 10,
+  "mbs": 30,
+  "anchorConnectionType": [
+   "MH"
+  ],
+  "webbingConnectionType": [
+   "QP"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 24,
+   "max": 26
+  },
+  "productionStatus": "DC",
+  "manufacturerId": 30,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1542153086044,
+  "imagesCount": 0
+ },
+ "similarGear": [
+  {
+   "_id": 500,
+   "slug": "BanditSH",
+   "itemTypeId": "WLCK",
+   "name": "Bandit SH",
+   "manufacturerId": 9,
+   "manufacturer": {
+    "name": "Equilibrium Slacklines (EQB)",
+    "url": "https://www.slackshop.cz/en/",
+    "countryTxt": "Czech Republic",
+    "countryCode": "CZ"
+   }
+  }
+ ]
+}

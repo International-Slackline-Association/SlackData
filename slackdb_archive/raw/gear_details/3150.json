@@ -1,0 +1,45 @@
+{
+ "gearDetail": {
+  "_id": 3150,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "WEB",
+  "slug": "sky_diamond",
+  "creatorId": "10154430595665625",
+  "creationDate": 1617143348067,
+  "name": "Sky Diamond",
+  "webbingType": "FL",
+  "material": [
+   "DY"
+  ],
+  "dWidth": 17,
+  "weight": 33,
+  "wll": 5,
+  "mbs": 35,
+  "dDepth": 3.5,
+  "elongation": {
+   "percent": 3,
+   "force": 10
+  },
+  "productionStatus": "AC",
+  "manufacturerId": 24,
+  "url": "https://spider-slacklines.com/shop/en/highline-webbing/426-2764-sky-diamond-longline-presale.html#/306-select_model-price_by_meter",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 4.97
+    }
+   ]
+  },
+  "lastEditDate": 1617143677215,
+  "imagesCount": 4
+ },
+ "similarGear": []
+}

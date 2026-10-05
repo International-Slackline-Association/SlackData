@@ -1,0 +1,46 @@
+{
+ "gearDetail": {
+  "_id": 3101,
+  "name": "TricklineGrip G2",
+  "material": [
+   "AL"
+  ],
+  "weight": 729,
+  "wll": 15,
+  "cst": 20,
+  "mbs": 45,
+  "connectionType": [
+   "MH"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 24,
+   "max": 52
+  },
+  "dateIntroduced": 1512079200000,
+  "productionStatus": "AC",
+  "manufacturerId": 5,
+  "url": "https://www.linegrip.com/shop/tricklinegrip-g2/",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 327.9
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "WGP",
+  "slug": "tricklinegrip_g2",
+  "creatorId": "10154430595665625",
+  "creationDate": 1586938847308,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

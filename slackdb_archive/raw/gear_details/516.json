@@ -1,0 +1,143 @@
+{
+ "gearDetail": {
+  "_id": 516,
+  "slug": "Lynx40Vari",
+  "itemTypeId": "WLCK",
+  "fieldsRemarks": {
+   "mbs": "Larger than"
+  },
+  "reviews": [
+   {
+    "creatorId": "10155361109487970",
+    "pros": [
+     "Light",
+     "Fits any soft release perfectly",
+     "Comfortable to use"
+    ],
+    "rating": {
+     "lst": {
+      "QU": 8,
+      "VFM": 10,
+      "VER": 10,
+      "EOU": 10,
+      "PRT": 10
+     },
+     "overall": 10
+    },
+    "date": 1498251532652,
+    "creationDate": 1499723466303,
+    "creatorName": "Ilia Oshmiansky"
+   },
+   {
+    "creatorId": "1965817623686037",
+    "text": "It does not pretension well. But it doesn&#x27;t slip on highlines. I love how it fits into RE&#x27;s p21d with a centering tube.",
+    "rating": {
+     "lst": {
+      "VFM": 8,
+      "QU": 10,
+      "VER": 8,
+      "EOU": 8,
+      "PRT": 6
+     },
+     "overall": 8
+    },
+    "pros": [
+     "Finish",
+     "Quality",
+     "Light"
+    ],
+    "cons": [
+     "Pretension"
+    ],
+    "creationDate": 1501754695061,
+    "creatorName": "Radwin Bodnic"
+   }
+  ],
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "10155361109487970",
+    "name": "Ilia Oshmiansky"
+   },
+   {
+    "id": "1965817623686037",
+    "name": "Radwin Bodnic"
+   }
+  ],
+  "lastEditDate": 1542150939207,
+  "name": "Lynx 4.0 Vari",
+  "material": [
+   "AL"
+  ],
+  "weight": 230,
+  "wll": 12,
+  "mbs": 70,
+  "anchorConnectionType": [
+   "SR",
+   "QP"
+  ],
+  "webbingConnectionType": [
+   "QP"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 24,
+   "max": 26
+  },
+  "diverterDiameter": 36,
+  "usage": [
+   "SL",
+   "HL",
+   "LL",
+   "LTL"
+  ],
+  "productionStatus": "DC",
+  "manufacturerId": 2,
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 90
+    }
+   ]
+  },
+  "ratingsAverages": {
+   "overall": {
+    "nativeCount": 2,
+    "nativeValue": 9,
+    "value": 9,
+    "count": 2
+   },
+   "lst": {
+    "QU": {
+     "count": 2,
+     "value": 9
+    },
+    "VFM": {
+     "count": 2,
+     "value": 9
+    },
+    "VER": {
+     "count": 2,
+     "value": 9
+    },
+    "EOU": {
+     "count": 2,
+     "value": 9
+    },
+    "PRT": {
+     "count": 2,
+     "value": 8
+    }
+   }
+  },
+  "imagesCount": 5
+ },
+ "similarGear": []
+}

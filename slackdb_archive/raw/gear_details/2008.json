@@ -1,0 +1,28 @@
+{
+ "gearDetail": {
+  "_id": 2008,
+  "name": "2T D Shackle",
+  "slug": "2TDShackle",
+  "manufacturerId": 37,
+  "material": [
+   "S"
+  ],
+  "itemTypeId": "CON",
+  "weight": 330,
+  "wll": 20,
+  "mbs": 120,
+  "productionStatus": "AC",
+  "remarks": "Van Beest Rating",
+  "connectorType": "DS",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "imagesCount": 0
+ },
+ "similarGear": []
+}

@@ -1,0 +1,58 @@
+{
+ "gearDetail": {
+  "_id": 3043,
+  "contributors": [
+   {
+    "id": "10155267793869667",
+    "name": "Romain Schempf"
+   },
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "WEB",
+  "slug": "firefly",
+  "creatorId": "10155267793869667",
+  "creationDate": 1510772365792,
+  "lastEditDate": 1513536695890,
+  "name": "Firefly (phosphorescent)",
+  "webbingType": "CS",
+  "material": [
+   "PL",
+   "PLP"
+  ],
+  "dWidth": 25,
+  "weight": 60,
+  "wll": 10,
+  "mbs": 30,
+  "dDepth": 2,
+  "elongation": {
+   "percent": 7.8,
+   "force": 10
+  },
+  "usage": [
+   "SL",
+   "HL",
+   "LL",
+   "RL",
+   "LTL"
+  ],
+  "dateIntroduced": 1510700400000,
+  "productionStatus": "AC",
+  "manufacturerId": 4,
+  "url": "https://slack-mountain.com/fr/sangle-hybride/185-firefly.html",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "price": 1.79,
+     "q": 1,
+     "qt": "AA"
+    }
+   ]
+  },
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

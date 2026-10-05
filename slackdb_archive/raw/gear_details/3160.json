@@ -1,0 +1,35 @@
+{
+ "gearDetail": {
+  "_id": 3160,
+  "name": "TreeHugger Cosmic",
+  "dWidth": 20,
+  "dLength": 200,
+  "dDepth": 6,
+  "hasSlingAttachment": true,
+  "productionStatus": "AC",
+  "manufacturerId": 3,
+  "url": "https://www.balancecommunity.com/collections/tree-pro/products/treehugger-cosmic?variant=31955910983738",
+  "pricing": {
+   "currency": "USD",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 17.9
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "TRP",
+  "slug": "treehugger_cosmic",
+  "creatorId": "2824084041240796",
+  "creationDate": 1621854639664,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

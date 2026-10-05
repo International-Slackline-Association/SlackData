@@ -1,0 +1,43 @@
+{
+ "gearDetail": {
+  "_id": 64,
+  "slug": "Matrix",
+  "itemTypeId": "WEB",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1536593164258,
+  "name": "Matrix",
+  "webbingType": "TB",
+  "material": [
+   "NY"
+  ],
+  "dWidth": 32,
+  "weight": 102,
+  "mbs": 43,
+  "dDepth": 4,
+  "elongation": {
+   "percent": 14.5,
+   "force": 12
+  },
+  "productionStatus": "DC",
+  "manufacturerId": 2,
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 3.95
+    }
+   ]
+  },
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

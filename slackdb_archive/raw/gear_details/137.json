@@ -1,0 +1,80 @@
+{
+ "gearDetail": {
+  "_id": 137,
+  "slug": "MarathonPlay",
+  "itemTypeId": "WEB",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "656760621184025",
+    "name": "Eli Szendro Brown"
+   }
+  ],
+  "lastEditDate": 1587243423456,
+  "name": "Marathon Play",
+  "webbingType": "CS",
+  "material": [
+   "PL"
+  ],
+  "dWidth": 25,
+  "weight": 65,
+  "mbs": 37,
+  "elongation": {
+   "percent": 7,
+   "force": 10
+  },
+  "productionStatus": "DC",
+  "manufacturerId": 6,
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "qt": "EX",
+     "q": 50,
+     "price": 1.9
+    },
+    {
+     "qt": "EX",
+     "q": 80,
+     "price": 1.87
+    },
+    {
+     "qt": "EX",
+     "q": 100,
+     "price": 1.8
+    },
+    {
+     "qt": "EX",
+     "q": 150,
+     "price": 1.8
+    },
+    {
+     "q": 200,
+     "qt": "EX",
+     "price": 1.8
+    }
+   ]
+  },
+  "imagesCount": 1
+ },
+ "similarGear": [
+  {
+   "_id": 3062,
+   "name": "Rainbow",
+   "manufacturerId": 26,
+   "itemTypeId": "WEB",
+   "slug": "rainbow",
+   "manufacturer": {
+    "name": "Raed Slacklines",
+    "url": "https://raed-slacklines.com",
+    "countryTxt": "Germany",
+    "countryCode": "DE"
+   }
+  }
+ ]
+}

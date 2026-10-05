@@ -1,0 +1,53 @@
+{
+ "manufacturerDetail": {
+  "_id": 25,
+  "slug": "Slacklinetools",
+  "manufacturerStatus": "ACT",
+  "imageFilename": "slackline_tools.jpg",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "lastEditDate": 1587250226837,
+  "name": "Slackline tools",
+  "location": {
+   "countryCode": "DE",
+   "address": "Eichhornstr. 19  78464 Konstanz",
+   "lat": 47.66942977905273,
+   "lng": 9.191108703613281,
+   "isExact": true
+  },
+  "yearEstablished": 2007,
+  "isActive": true,
+  "isSlacklineOriented": true,
+  "url": "https://www.slackline-tools.de",
+  "fbPage": "https://www.facebook.com/SlacklineTools",
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "imagesCount": 0,
+  "gearStats": [
+   {
+    "itemTypeId": "TRP",
+    "count": 1
+   },
+   {
+    "itemTypeId": "TLK",
+    "count": 1
+   },
+   {
+    "itemTypeId": "SKT",
+    "count": 4
+   },
+   {
+    "itemTypeId": "LRNG",
+    "count": 1
+   },
+   {
+    "itemTypeId": "WEB",
+    "count": 1
+   }
+  ]
+ }
+}

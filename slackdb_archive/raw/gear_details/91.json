@@ -1,0 +1,131 @@
+{
+ "gearDetail": {
+  "_id": 91,
+  "name": "Mantra MK4: Flight",
+  "slug": "MantraMK4Flight",
+  "manufacturerId": 3,
+  "material": [
+   "PL"
+  ],
+  "itemTypeId": "WEB",
+  "weight": 76,
+  "wll": 8.4,
+  "mbs": 42,
+  "dWidth": 25,
+  "dDepth": 3.5,
+  "productionStatus": "AC",
+  "url": "http://www.balancecommunity.com/mantra-mk4-flight",
+  "webbingType": "FL",
+  "elongation": {
+   "percent": 4.2,
+   "force": 10
+  },
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "pricing": {
+   "currency": "USD",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 2.46
+    },
+    {
+     "q": 30,
+     "qt": "EX",
+     "price": 2.5
+    },
+    {
+     "q": 50,
+     "qt": "EX",
+     "price": 2.46
+    },
+    {
+     "q": 60,
+     "qt": "EX",
+     "price": 2.47
+    },
+    {
+     "q": 75,
+     "qt": "EX",
+     "price": 2.45
+    },
+    {
+     "q": 100,
+     "qt": "EX",
+     "price": 2.42
+    },
+    {
+     "q": 120,
+     "qt": "EX",
+     "price": 2.44
+    },
+    {
+     "q": 150,
+     "qt": "EX",
+     "price": 2.44
+    },
+    {
+     "q": 200,
+     "qt": "EX",
+     "price": 2.41
+    },
+    {
+     "q": 250,
+     "qt": "EX",
+     "price": 2.4
+    },
+    {
+     "q": 300,
+     "qt": "EX",
+     "price": 2.43
+    },
+    {
+     "q": 400,
+     "qt": "EX",
+     "price": 2.37
+    },
+    {
+     "q": 500,
+     "qt": "EX",
+     "price": 2.36
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "imagesCount": 1
+ },
+ "similarGear": [
+  {
+   "_id": 26,
+   "slug": "FlammeII",
+   "itemTypeId": "WEB",
+   "name": "Flamme II",
+   "manufacturerId": 7,
+   "manufacturer": {
+    "name": "Slack Inov",
+    "url": "http://slack-inov.com/gb",
+    "countryTxt": "France",
+    "countryCode": "FR"
+   }
+  },
+  {
+   "_id": 130,
+   "slug": "SlackPro42kN",
+   "itemTypeId": "WEB",
+   "name": "SlackPro 42kN",
+   "manufacturerId": 5,
+   "manufacturer": {
+    "name": "Slack Pro!",
+    "url": "http://www.slackpro.de",
+    "countryTxt": "Germany",
+    "countryCode": "DE"
+   }
+  }
+ ]
+}

@@ -1,0 +1,32 @@
+{
+ "gearDetail": {
+  "_id": 3146,
+  "name": "TreePRO",
+  "weight": 300,
+  "productionStatus": "AC",
+  "manufacturerId": 26,
+  "url": "https://raed-slacklines.com/treepro",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 50
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "TRP",
+  "slug": "treepro",
+  "creatorId": "10154430595665625",
+  "creationDate": 1617139074436,
+  "imagesCount": 3
+ },
+ "similarGear": []
+}

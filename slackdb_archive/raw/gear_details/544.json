@@ -1,0 +1,129 @@
+{
+ "gearDetail": {
+  "_id": 544,
+  "slug": "BANANA",
+  "itemTypeId": "WLCK",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "656760621184025",
+    "name": "Eli Szendro Brown"
+   }
+  ],
+  "lastEditDate": 1712932564678,
+  "reviews": [
+   {
+    "creatorId": "656760621184025",
+    "rating": {
+     "lst": {
+      "VFM": 10,
+      "QU": 10,
+      "VER": 8,
+      "EOU": 8,
+      "PRT": 10
+     },
+     "overall": 9
+    },
+    "pros": [
+     "Cheap",
+     "Keep it simple (and it works)"
+    ],
+    "cons": [
+     "Not quickpin"
+    ],
+    "creationDate": 1500149575817,
+    "creatorName": "Eli Szendro Brown"
+   }
+  ],
+  "name": "BANANA! 2.0",
+  "material": [
+   "SS",
+   "AL"
+  ],
+  "weight": 228,
+  "wll": 10,
+  "mbs": 50,
+  "anchorConnectionType": [
+   "MH"
+  ],
+  "webbingConnectionType": [
+   "CP"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 24,
+   "max": 26
+  },
+  "diverterDiameter": 20,
+  "efficiency": 85,
+  "usage": [
+   "SL",
+   "HL",
+   "LL",
+   "RL",
+   "LTL"
+  ],
+  "productionStatus": "DC",
+  "manufacturerId": 27,
+  "pricing": {
+   "currency": "PLN",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 135
+    }
+   ]
+  },
+  "ratingsAverages": {
+   "overall": {
+    "nativeCount": 1,
+    "nativeValue": 9,
+    "value": 9,
+    "count": 1
+   },
+   "lst": {
+    "VFM": {
+     "count": 1,
+     "value": 10
+    },
+    "QU": {
+     "count": 1,
+     "value": 10
+    },
+    "VER": {
+     "count": 1,
+     "value": 8
+    },
+    "EOU": {
+     "count": 1,
+     "value": 8
+    },
+    "PRT": {
+     "count": 1,
+     "value": 10
+    }
+   }
+  },
+  "imagesCount": 1
+ },
+ "similarGear": [
+  {
+   "_id": 3118,
+   "itemTypeId": "WLCK",
+   "slug": "banana_31",
+   "name": "BANANA! 3.1",
+   "manufacturerId": 27,
+   "manufacturer": {
+    "name": "Slack house",
+    "url": "http://slackhouseshop.pl",
+    "countryTxt": "Poland",
+    "countryCode": "PL"
+   }
+  }
+ ]
+}

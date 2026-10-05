@@ -1,0 +1,44 @@
+{
+ "_id": 185,
+ "description": "12mm Nut Vs 10mm Nut",
+ "takenDate": 1505941200000,
+ "imageScope": "OTR",
+ "imageSource": "UOFF",
+ "ImageEnvType": "STD",
+ "imageType": "RG",
+ "tags": [
+  "nut"
+ ],
+ "gearTags": [
+  {
+   "x": 233,
+   "y": 34,
+   "width": 1425,
+   "height": 635,
+   "gearId": 3030
+  },
+  {
+   "x": 268,
+   "y": 702,
+   "width": 1257,
+   "height": 519,
+   "gearId": 3031
+  }
+ ],
+ "gearId": [
+  3030,
+  3031
+ ],
+ "contributors": [
+  {
+   "id": "10154430595665625",
+   "name": "Nir Avneyon"
+  }
+ ],
+ "creationDate": 1506006598836,
+ "creatorId": "10154430595665625",
+ "filename": "185.jpg",
+ "width": 1864,
+ "height": 1280,
+ "creatorName": "Nir Avneyon"
+}

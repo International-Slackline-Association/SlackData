@@ -1,0 +1,716 @@
+[
+ {
+  "_id": 1100,
+  "slug": "HighSlide20",
+  "itemTypeId": "SLD",
+  "psaCert": false,
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1536593496357,
+  "name": "HighSlide 2.0",
+  "material": [
+   "AL"
+  ],
+  "weight": 110,
+  "wll": 4,
+  "mbs": 23,
+  "compatibleWebbingWidth": {
+   "min": 25,
+   "max": 26
+  },
+  "sliderType": "MP",
+  "innerWidth": 28,
+  "outerBearingDiameter": 22,
+  "productionStatus": "DC",
+  "manufacturerId": 2,
+  "_manufacturerName": "Landcruising",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 25
+    }
+   ]
+  },
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 1,
+  "_slackdbUrl": "https://slackdb.com/gear_details/HighSlide20",
+  "_imageIds": [
+   787
+  ],
+  "_coverImageId": 787,
+  "_coverFile": "image_files/gear/787.jpg"
+ },
+ {
+  "_id": 1101,
+  "slug": "AIDMAN",
+  "itemTypeId": "SLD",
+  "psaCert": false,
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "name": "AIDMAN",
+  "weight": 139,
+  "wll": 2,
+  "mbs": 12,
+  "compatibleWebbingWidth": {
+   "min": 25,
+   "max": 26
+  },
+  "sliderType": "MP",
+  "innerWidth": 28,
+  "productionStatus": "DC",
+  "manufacturerId": 9,
+  "_manufacturerName": "Equilibrium Slacklines (EQB)",
+  "url": "http://www.slackshop.cz/en/rigging-equipment/81-kladka-aidman.html",
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1498977793402,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 1,
+  "_slackdbUrl": "https://slackdb.com/gear_details/AIDMAN",
+  "_imageIds": [
+   426
+  ],
+  "_coverImageId": 426,
+  "_coverFile": "image_files/gear/426.jpg"
+ },
+ {
+  "_id": 1102,
+  "slug": "RocknRoll",
+  "itemTypeId": "SLD",
+  "psaCert": false,
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1542144668341,
+  "name": "Rock'n'Roll",
+  "material": [
+   "AL",
+   "SS"
+  ],
+  "weight": 210,
+  "wll": 2,
+  "compatibleWebbingWidth": {
+   "min": 25,
+   "max": 26
+  },
+  "sliderType": "MP",
+  "innerWidth": 26,
+  "productionStatus": "DC",
+  "manufacturerId": 9,
+  "_manufacturerName": "Equilibrium Slacklines (EQB)",
+  "pricing": {
+   "currency": "CZK",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 1290
+    }
+   ]
+  },
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 0,
+  "_slackdbUrl": "https://slackdb.com/gear_details/RocknRoll",
+  "_imageIds": [],
+  "_coverImageId": null,
+  "_coverFile": null
+ },
+ {
+  "_id": 1103,
+  "slug": "SlackInovSlackPulley",
+  "itemTypeId": "SLD",
+  "flags": [
+   "IB"
+  ],
+  "psaCert": false,
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1587250079977,
+  "name": "Webbling Pulley",
+  "material": [
+   "NY",
+   "AL"
+  ],
+  "weight": 67,
+  "mbs": 15,
+  "compatibleWebbingWidth": {
+   "min": 25,
+   "max": 26
+  },
+  "sliderType": "MP",
+  "productionStatus": "DC",
+  "manufacturerId": 7,
+  "_manufacturerName": "Slack Inov",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 30
+    }
+   ]
+  },
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 1,
+  "_slackdbUrl": "https://slackdb.com/gear_details/SlackInovSlackPulley",
+  "_imageIds": [
+   792
+  ],
+  "_coverImageId": 792,
+  "_coverFile": "image_files/gear/792.jpg"
+ },
+ {
+  "_id": 1104,
+  "slug": "SlackMountainpulley",
+  "itemTypeId": "SLD",
+  "psaCert": false,
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "lastEditDate": 1510580426527,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "10155267793869667",
+    "name": "Romain Schempf"
+   }
+  ],
+  "name": "Pulley",
+  "material": [
+   "SS"
+  ],
+  "weight": 135,
+  "wll": 5,
+  "mbs": 25,
+  "compatibleWebbingWidth": {
+   "min": 18,
+   "max": 28
+  },
+  "sliderType": "MP",
+  "innerWidth": 27,
+  "outerBearingDiameter": 24,
+  "productionStatus": "AC",
+  "manufacturerId": 4,
+  "_manufacturerName": "Slack Mountain",
+  "url": "http://slack-mountain.com/en/pulley-and-tension/61-poulie-de-sangle-slack-mountain.html",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 22
+    }
+   ]
+  },
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 2,
+  "_slackdbUrl": "https://slackdb.com/gear_details/SlackMountainpulley",
+  "_imageIds": [
+   130,
+   229
+  ],
+  "_coverImageId": 229,
+  "_coverFile": "image_files/gear/229.jpg"
+ },
+ {
+  "_id": 1105,
+  "slug": "LineBuggy",
+  "itemTypeId": "SLD",
+  "psaCert": false,
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1542144502878,
+  "name": "LineBuggy",
+  "material": [
+   "SS"
+  ],
+  "weight": 140,
+  "wll": 3,
+  "mbs": 25,
+  "compatibleWebbingWidth": {
+   "min": 25,
+   "max": 26
+  },
+  "sliderType": "MP",
+  "innerWidth": 29,
+  "productionStatus": "AC",
+  "manufacturerId": 16,
+  "_manufacturerName": "SlackGear",
+  "url": "http://www.slackgear.co.za/product/linebuggy/",
+  "pricing": {
+   "currency": "ZAR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 310
+    }
+   ]
+  },
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 1,
+  "_slackdbUrl": "https://slackdb.com/gear_details/LineBuggy",
+  "_imageIds": [
+   578
+  ],
+  "_coverImageId": 578,
+  "_coverFile": "image_files/gear/578.jpg"
+ },
+ {
+  "_id": 1106,
+  "slug": "Hangover20",
+  "itemTypeId": "SLD",
+  "psaCert": true,
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "10155361109487970",
+    "name": "Ilia Oshmiansky"
+   }
+  ],
+  "lastEditDate": 1542144436011,
+  "name": "Hangover 2.0",
+  "material": [
+   "AL",
+   "S"
+  ],
+  "weight": 152,
+  "wll": 4,
+  "mbs": 24,
+  "compatibleWebbingWidth": {
+   "min": 25,
+   "max": 26
+  },
+  "sliderType": "CA",
+  "innerWidth": 27.8,
+  "productionStatus": "AC",
+  "manufacturerId": 6,
+  "_manufacturerName": "Slacktivity",
+  "url": "https://www.slacktivity.com/default/longline-highline/hangover",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 44.95
+    }
+   ],
+   "hasAddOpts": true
+  },
+  "ratingsAverages": {
+   "overall": {
+    "nativeCount": 1,
+    "nativeValue": 10,
+    "value": 10,
+    "count": 1
+   },
+   "lst": {
+    "VFM": {
+     "count": 1,
+     "value": 10
+    },
+    "QU": {
+     "count": 1,
+     "value": 10
+    },
+    "VER": {
+     "count": 1,
+     "value": 10
+    },
+    "EOU": {
+     "count": 1,
+     "value": 10
+    }
+   }
+  },
+  "commentsCount": 0,
+  "reviewsCount": 1,
+  "imagesCount": 1,
+  "reviews": [
+   {
+    "creatorId": "10155361109487970",
+    "pros": [
+     "Easy to use",
+     "Fast",
+     "Can be used for tensioning combined with a line-grip"
+    ],
+    "rating": {
+     "lst": {
+      "VFM": 10,
+      "QU": 10,
+      "VER": 10,
+      "EOU": 10
+     },
+     "overall": 10
+    },
+    "creationDate": 1499723466303,
+    "creatorName": "Ilia Oshmiansky"
+   }
+  ],
+  "_slackdbUrl": "https://slackdb.com/gear_details/Hangover20",
+  "_imageIds": [
+   580
+  ],
+  "_coverImageId": 580,
+  "_coverFile": "image_files/gear/580.jpg"
+ },
+ {
+  "_id": 1107,
+  "slug": "HangOverS",
+  "itemTypeId": "SLD",
+  "psaCert": true,
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1587236375954,
+  "name": "HangOver-S",
+  "material": [
+   "AL",
+   "S"
+  ],
+  "weight": 157,
+  "wll": 4,
+  "mbs": 24,
+  "compatibleWebbingWidth": {
+   "min": 25,
+   "max": 26
+  },
+  "sliderType": "LCA",
+  "innerWidth": 27.8,
+  "productionStatus": "AC",
+  "manufacturerId": 6,
+  "_manufacturerName": "Slacktivity",
+  "url": "https://www.slacktivity.com/hangover-s",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 54.95
+    }
+   ]
+  },
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 1,
+  "_slackdbUrl": "https://slackdb.com/gear_details/HangOverS",
+  "_imageIds": [
+   581
+  ],
+  "_coverImageId": 581,
+  "_coverFile": "image_files/gear/581.jpg"
+ },
+ {
+  "_id": 1108,
+  "slug": "SKIP",
+  "itemTypeId": "SLD",
+  "psaCert": false,
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "name": "SKIP",
+  "material": [
+   "SS"
+  ],
+  "weight": 165,
+  "wll": 5,
+  "mbs": 30,
+  "compatibleWebbingWidth": {
+   "min": 25,
+   "max": 26
+  },
+  "sliderType": "MP",
+  "innerWidth": 26,
+  "outerBearingDiameter": 24,
+  "productionStatus": "AC",
+  "manufacturerId": 53,
+  "_manufacturerName": "ZERGE outdoor",
+  "url": "http://zergeoutdoor.com/product/skip-the-high-efficiency-webbing-pulley/",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 49
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1498978288514,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 1,
+  "_slackdbUrl": "https://slackdb.com/gear_details/SKIP",
+  "_imageIds": [
+   788
+  ],
+  "_coverImageId": 788,
+  "_coverFile": "image_files/gear/788.jpg"
+ },
+ {
+  "_id": 1109,
+  "slug": "SKIPUL",
+  "itemTypeId": "SLD",
+  "psaCert": false,
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1542144706335,
+  "name": "SKIP UL",
+  "material": [
+   "SS"
+  ],
+  "weight": 108,
+  "wll": 3,
+  "mbs": 18,
+  "compatibleWebbingWidth": {
+   "min": 25,
+   "max": 26
+  },
+  "sliderType": "MP",
+  "innerWidth": 28,
+  "outerBearingDiameter": 19,
+  "productionStatus": "AC",
+  "manufacturerId": 53,
+  "_manufacturerName": "ZERGE outdoor",
+  "url": "http://zergeoutdoor.com/product/skip-ul-the-ultralight-stainless-steel-webbing-pulley/",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 37.05
+    }
+   ]
+  },
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 1,
+  "_slackdbUrl": "https://slackdb.com/gear_details/SKIPUL",
+  "_imageIds": [
+   789
+  ],
+  "_coverImageId": 789,
+  "_coverFile": "image_files/gear/789.jpg"
+ },
+ {
+  "_id": 1110,
+  "slug": "Motumwebbingpulley",
+  "itemTypeId": "SLD",
+  "psaCert": false,
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "1393453644035268",
+    "name": "Kuba Bałdych"
+   }
+  ],
+  "lastEditDate": 1587290312998,
+  "name": "Motum webbing pulley",
+  "material": [
+   "SS"
+  ],
+  "weight": 85,
+  "wll": 2,
+  "mbs": 14,
+  "compatibleWebbingWidth": {
+   "min": 25,
+   "max": 32
+  },
+  "sliderType": "MP",
+  "innerWidth": 33,
+  "outerBearingDiameter": 25,
+  "productionStatus": "AC",
+  "manufacturerId": 45,
+  "_manufacturerName": "Petram Slacklines",
+  "url": "https://petramslacklines.site123.me/shop-1/motum-pulley",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 19.9
+    }
+   ]
+  },
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 2,
+  "_slackdbUrl": "https://slackdb.com/gear_details/Motumwebbingpulley",
+  "_imageIds": [
+   74,
+   75
+  ],
+  "_coverImageId": 75,
+  "_coverFile": "image_files/gear/75.jpg"
+ },
+ {
+  "_id": 3051,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "SLD",
+  "slug": "hangover_stainless",
+  "creatorId": "10154430595665625",
+  "creationDate": 1519648737560,
+  "lastEditDate": 1587235821145,
+  "name": "HangOver stainless",
+  "material": [
+   "AL",
+   "SS"
+  ],
+  "weight": 152,
+  "wll": 4,
+  "mbs": 22,
+  "compatibleWebbingWidth": {
+   "min": 25,
+   "max": 26
+  },
+  "sliderType": "CA",
+  "innerWidth": 27.8,
+  "outerBearingDiameter": 19,
+  "dateIntroduced": 1507064400000,
+  "productionStatus": "AC",
+  "manufacturerId": 6,
+  "_manufacturerName": "Slacktivity",
+  "url": "https://www.slacktivity.com/hangover-stainless",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 59.95
+    }
+   ]
+  },
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 1,
+  "_slackdbUrl": "https://slackdb.com/gear_details/hangover_stainless",
+  "_imageIds": [
+   579
+  ],
+  "_coverImageId": 579,
+  "_coverFile": "image_files/gear/579.jpg"
+ },
+ {
+  "_id": 3082,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "SLD",
+  "slug": "rollex",
+  "creatorId": "10154430595665625",
+  "creationDate": 1563142454340,
+  "lastEditDate": 1587291708170,
+  "name": "ROLLEX",
+  "material": [
+   "AL"
+  ],
+  "weight": 129,
+  "wll": 4,
+  "mbs": 22,
+  "sliderType": "CA",
+  "dateIntroduced": 1555189200000,
+  "productionStatus": "AC",
+  "manufacturerId": 9,
+  "_manufacturerName": "Equilibrium Slacklines (EQB)",
+  "url": "https://www.slackshop.cz/en/rollex/157-379-rollex.html",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 49.95
+    }
+   ]
+  },
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 2,
+  "_slackdbUrl": "https://slackdb.com/gear_details/rollex",
+  "_imageIds": [
+   335,
+   402
+  ],
+  "_coverImageId": 335,
+  "_coverFile": "image_files/gear/335.jpg"
+ }
+]

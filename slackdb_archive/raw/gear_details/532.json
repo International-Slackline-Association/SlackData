@@ -1,0 +1,35 @@
+{
+ "gearDetail": {
+  "_id": 532,
+  "name": "SlackDuck",
+  "slug": "SlackDuck",
+  "manufacturerId": 6,
+  "material": [
+   "SS"
+  ],
+  "itemTypeId": "WLCK",
+  "weight": 375,
+  "wll": 12,
+  "productionStatus": "DC",
+  "anchorConnectionType": [
+   "SL"
+  ],
+  "webbingConnectionType": [
+   "QP"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 24,
+   "max": 26
+  },
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "imagesCount": 0
+ },
+ "similarGear": []
+}

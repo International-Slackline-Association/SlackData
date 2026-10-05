@@ -1,0 +1,46 @@
+{
+ "gearDetail": {
+  "_id": 3095,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "WGP",
+  "slug": "snatch_221inch",
+  "creatorId": "10154430595665625",
+  "creationDate": 1586857429199,
+  "name": "Snatch 2.2",
+  "material": [
+   "AL",
+   "DY"
+  ],
+  "weight": 110,
+  "wll": 7,
+  "mbs": 25,
+  "connectionType": [
+   "DSL"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 24,
+   "max": 26
+  },
+  "productionStatus": "AC",
+  "manufacturerId": 62,
+  "url": "https://souzslackline.com/product/stropochvat-2-2/",
+  "pricing": {
+   "currency": "RUB",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 5377
+    }
+   ]
+  },
+  "lastEditDate": 1586858144686,
+  "imagesCount": 2
+ },
+ "similarGear": []
+}

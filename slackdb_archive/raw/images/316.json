@@ -1,0 +1,40 @@
+{
+ "_id": 316,
+ "imageScope": "STP",
+ "imageSource": "OFF",
+ "imageSourceUrl": "https://souzslackline.com",
+ "ImageEnvType": "US",
+ "imageType": "RG",
+ "gearTags": [
+  {
+   "x": 366,
+   "y": 148,
+   "width": 234,
+   "height": 150,
+   "gearId": 3076
+  },
+  {
+   "x": 11,
+   "y": 121,
+   "width": 370,
+   "height": 201,
+   "gearId": 3060
+  }
+ ],
+ "gearId": [
+  3076,
+  3060
+ ],
+ "contributors": [
+  {
+   "id": "10154430595665625",
+   "name": "Nir Avneyon"
+  }
+ ],
+ "creationDate": 1551043492194,
+ "creatorId": "10154430595665625",
+ "filename": "316.jpg",
+ "width": 600,
+ "height": 398,
+ "creatorName": "Nir Avneyon"
+}

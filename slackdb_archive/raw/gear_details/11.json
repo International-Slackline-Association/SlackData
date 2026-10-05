@@ -1,0 +1,82 @@
+{
+ "gearDetail": {
+  "_id": 11,
+  "slug": "Sumo",
+  "itemTypeId": "WEB",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1587251764651,
+  "name": "Sumo",
+  "webbingType": "FL",
+  "material": [
+   "PL"
+  ],
+  "dWidth": 25,
+  "weight": 82,
+  "mbs": 40,
+  "dDepth": 3.8,
+  "elongation": {
+   "percent": 6,
+   "force": 10
+  },
+  "productionStatus": "DC",
+  "manufacturerId": 9,
+  "pricing": {
+   "currency": "CZK",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 39
+    }
+   ]
+  },
+  "imagesCount": 2
+ },
+ "similarGear": [
+  {
+   "_id": 86,
+   "slug": "BlackWhite",
+   "itemTypeId": "WEB",
+   "name": "Black-White",
+   "manufacturerId": 6,
+   "manufacturer": {
+    "name": "Slacktivity",
+    "url": "http://www.slacktivity.com",
+    "countryTxt": "Switzerland",
+    "countryCode": "CH"
+   }
+  },
+  {
+   "_id": 25,
+   "slug": "SlackSwan",
+   "itemTypeId": "WEB",
+   "name": "Slack Swan",
+   "manufacturerId": 29,
+   "manufacturer": {
+    "name": "Dakas",
+    "countryTxt": "France",
+    "countryCode": "FR"
+   }
+  },
+  {
+   "_id": 120,
+   "slug": "FlammeIII",
+   "itemTypeId": "WEB",
+   "name": "Flamme III",
+   "manufacturerId": 7,
+   "manufacturer": {
+    "name": "Slack Inov",
+    "url": "http://slack-inov.com/gb",
+    "countryTxt": "France",
+    "countryCode": "FR"
+   }
+  }
+ ]
+}

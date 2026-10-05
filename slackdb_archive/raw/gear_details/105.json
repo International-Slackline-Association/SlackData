@@ -1,0 +1,34 @@
+{
+ "gearDetail": {
+  "_id": 105,
+  "slug": "SkyPilotGreenOrange",
+  "itemTypeId": "WEB",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1542963984977,
+  "name": "Sky Pilot (Green/Orange)",
+  "webbingType": "FL",
+  "material": [
+   "NY"
+  ],
+  "dWidth": 25.4,
+  "weight": 65,
+  "wll": 7.5,
+  "mbs": 36.4,
+  "dDepth": 3,
+  "elongation": {
+   "percent": 9,
+   "force": 10
+  },
+  "productionStatus": "DC",
+  "manufacturerId": 41,
+  "imagesCount": 0
+ },
+ "similarGear": []
+}

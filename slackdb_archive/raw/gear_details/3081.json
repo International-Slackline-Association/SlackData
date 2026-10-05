@@ -1,0 +1,63 @@
+{
+ "gearDetail": {
+  "_id": 3081,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "WLCK",
+  "slug": "multilock",
+  "creatorId": "10154430595665625",
+  "creationDate": 1563142112924,
+  "name": "MultiLock",
+  "material": [
+   "AL"
+  ],
+  "weight": 270,
+  "mbs": 60,
+  "anchorConnectionType": [
+   "QP"
+  ],
+  "webbingConnectionType": [
+   "QP"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 24,
+   "max": 26
+  },
+  "dateIntroduced": 1558904400000,
+  "productionStatus": "DC",
+  "manufacturerId": 64,
+  "lastEditDate": 1712938605729,
+  "imagesCount": 1
+ },
+ "similarGear": [
+  {
+   "_id": 3060,
+   "itemTypeId": "WLCK",
+   "slug": "rowan_10softrelease",
+   "name": "Rowan 1.3",
+   "manufacturerId": 62,
+   "manufacturer": {
+    "name": "Souz Slackline",
+    "url": "https://souzslackline.com",
+    "countryTxt": "Russian Federation",
+    "countryCode": "RU"
+   }
+  },
+  {
+   "_id": 516,
+   "slug": "Lynx40Vari",
+   "itemTypeId": "WLCK",
+   "name": "Lynx 4.0 Vari",
+   "manufacturerId": 2,
+   "manufacturer": {
+    "name": "Landcruising",
+    "countryTxt": "Germany",
+    "countryCode": "DE"
+   }
+  }
+ ]
+}

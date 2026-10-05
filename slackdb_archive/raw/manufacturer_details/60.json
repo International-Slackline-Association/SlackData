@@ -1,0 +1,32 @@
+{
+ "manufacturerDetail": {
+  "_id": 60,
+  "name": "Krok",
+  "location": {
+   "countryCode": "RU",
+   "address": "Луганская обл",
+   "lat": 48.574041,
+   "lng": 39.307815
+  },
+  "isActive": true,
+  "url": "https://krok.biz",
+  "fbPage": "https://www.facebook.com/tmkrok",
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "creatorId": "10154430595665625",
+  "creationDate": 1506858375680,
+  "slug": "krok",
+  "imageFilename": "krok.jpg",
+  "imagesCount": 0,
+  "gearStats": [
+   {
+    "itemTypeId": "WLCK",
+    "count": 1
+   }
+  ]
+ }
+}

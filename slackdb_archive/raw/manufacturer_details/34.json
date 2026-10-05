@@ -1,0 +1,44 @@
+{
+ "manufacturerDetail": {
+  "_id": 34,
+  "slug": "SMC",
+  "manufacturerStatus": "ACT",
+  "imageFilename": "smc.jpg",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "name": "SMC",
+  "location": {
+   "countryCode": "US",
+   "address": "6930 Salashan Parkway Ferndale, Washington 98248",
+   "lat": 48.89472579956055,
+   "lng": -122.6079330444336,
+   "isExact": true
+  },
+  "yearEstablished": 1967,
+  "isActive": true,
+  "url": "http://smcgear.com",
+  "fbPage": "https://www.facebook.com/mySMCgear",
+  "lastEditDate": 1498724351001,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "ratingsAverages": {
+   "overall": {
+    "externalValue": 9,
+    "externalCount": 43,
+    "value": 9,
+    "count": 43
+   }
+  },
+  "imagesCount": 0,
+  "gearStats": [
+   {
+    "itemTypeId": "BRK",
+    "count": 1
+   }
+  ]
+ }
+}

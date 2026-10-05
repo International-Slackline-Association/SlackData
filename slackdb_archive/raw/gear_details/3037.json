@@ -1,0 +1,25 @@
+{
+ "gearDetail": {
+  "_id": 3037,
+  "name": "10mm Square Quicklink",
+  "material": [
+   "SS"
+  ],
+  "weight": 166,
+  "wll": 9,
+  "mbs": 45,
+  "connectorType": "SQL",
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "CON",
+  "slug": "10mm_squarequicklink",
+  "creatorId": "10154430595665625",
+  "creationDate": 1506006707569,
+  "imagesCount": 3
+ },
+ "similarGear": []
+}

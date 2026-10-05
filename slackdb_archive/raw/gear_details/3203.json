@@ -1,0 +1,35 @@
+{
+ "gearDetail": {
+  "_id": 3203,
+  "name": "23m Active Slackline",
+  "webbingLength": 23,
+  "webbingWidth": 50,
+  "tensioningType": "RAT1",
+  "includesTreePro": true,
+  "productionStatus": "AC",
+  "manufacturerId": 66,
+  "url": "https://www.viperslacklines.co.za/collections/slackline-kits/products/20m-active-slackline",
+  "pricing": {
+   "currency": "ZAR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 2000
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "23m_activeslackline",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622018556659,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

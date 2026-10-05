@@ -1,0 +1,22 @@
+{
+ "_id": 542,
+ "gearId": 3142,
+ "imageScope": "ITM",
+ "imageSource": "OFF",
+ "gearCondition": "NEW",
+ "ImageEnvType": "STD",
+ "imageType": "RG",
+ "lineLength": 23,
+ "contributors": [
+  {
+   "id": "10154430595665625",
+   "name": "Nir Avneyon"
+  }
+ ],
+ "creationDate": 1617138702785,
+ "creatorId": "10154430595665625",
+ "filename": "542.jpg",
+ "width": 746,
+ "height": 842,
+ "creatorName": "Nir Avneyon"
+}

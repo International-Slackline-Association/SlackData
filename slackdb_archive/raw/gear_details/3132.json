@@ -1,0 +1,33 @@
+{
+ "gearDetail": {
+  "_id": 3132,
+  "name": "Vortex",
+  "weight": 100,
+  "innerDiameter": 60,
+  "productionStatus": "AC",
+  "manufacturerId": 7,
+  "url": "https://slack-inov.com/shop/en/leashes/314-vortex-highline-ring.html",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "price": 44.95,
+     "qt": "EX"
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "10211802848940671",
+    "name": "Thomas Buckingham"
+   }
+  ],
+  "itemTypeId": "LRNG",
+  "slug": "vortex",
+  "creatorId": "10211802848940671",
+  "creationDate": 1610910024823,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

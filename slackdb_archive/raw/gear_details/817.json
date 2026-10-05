@@ -1,0 +1,40 @@
+{
+ "gearDetail": {
+  "_id": 817,
+  "slug": "ZEROSilver",
+  "itemTypeId": "LRNG",
+  "flags": [
+   "ILR"
+  ],
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1542143186556,
+  "name": "ZERO Silver",
+  "material": [
+   "SS"
+  ],
+  "weight": 144,
+  "innerDiameter": 40,
+  "productionStatus": "DC",
+  "manufacturerId": 53,
+  "url": "http://zergeoutdoor.com/product/zero-silver-stainless-ring/",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 69
+    }
+   ]
+  },
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

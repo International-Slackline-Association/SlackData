@@ -1,0 +1,26 @@
+{
+ "gearDetail": {
+  "_id": 2013,
+  "name": "8mm Oval Quicklink",
+  "slug": "8mmOvalQuicklink",
+  "material": [
+   "S"
+  ],
+  "itemTypeId": "CON",
+  "weight": 77,
+  "wll": 7,
+  "mbs": 35,
+  "productionStatus": "AC",
+  "connectorType": "OQL",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "imagesCount": 2
+ },
+ "similarGear": []
+}

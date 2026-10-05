@@ -1,0 +1,359 @@
+[
+ {
+  "_id": 3000,
+  "name": "Static Rope",
+  "slug": "StaticRope",
+  "itemTypeId": "GEN",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 3,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "_slackdbUrl": "https://slackdb.com/gear_details/StaticRope",
+  "_imageIds": [
+   11,
+   12,
+   18
+  ],
+  "_coverImageId": null,
+  "_coverFile": null
+ },
+ {
+  "_id": 3001,
+  "name": "Dynamic Rope",
+  "slug": "DynamicRope",
+  "itemTypeId": "GEN",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 0,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "_slackdbUrl": "https://slackdb.com/gear_details/DynamicRope",
+  "_imageIds": [],
+  "_coverImageId": null,
+  "_coverFile": null
+ },
+ {
+  "_id": 3002,
+  "name": "Tagline",
+  "slug": "Tagline",
+  "itemTypeId": "GEN",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 0,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "_slackdbUrl": "https://slackdb.com/gear_details/Tagline",
+  "_imageIds": [],
+  "_coverImageId": null,
+  "_coverFile": null
+ },
+ {
+  "_id": 3003,
+  "name": "10mm Bolt",
+  "slug": "10mmBolt",
+  "itemTypeId": "GEN",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 0,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "_slackdbUrl": "https://slackdb.com/gear_details/10mmBolt",
+  "_imageIds": [],
+  "_coverImageId": null,
+  "_coverFile": null
+ },
+ {
+  "_id": 3004,
+  "name": "12mm Bolt",
+  "slug": "12mmBolt",
+  "itemTypeId": "GEN",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 0,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "_slackdbUrl": "https://slackdb.com/gear_details/12mmBolt",
+  "_imageIds": [],
+  "_coverImageId": null,
+  "_coverFile": null
+ },
+ {
+  "_id": 3005,
+  "name": "10mm Hanger",
+  "slug": "10mmHanger",
+  "itemTypeId": "GEN",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 2,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "_slackdbUrl": "https://slackdb.com/gear_details/10mmHanger",
+  "_imageIds": [
+   18,
+   193
+  ],
+  "_coverImageId": 193,
+  "_coverFile": "image_files/gear/193.jpg"
+ },
+ {
+  "_id": 3006,
+  "name": "12mm Hanger",
+  "slug": "12mmHanger",
+  "itemTypeId": "GEN",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 1,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "_slackdbUrl": "https://slackdb.com/gear_details/12mmHanger",
+  "_imageIds": [
+   197
+  ],
+  "_coverImageId": 197,
+  "_coverFile": "image_files/gear/197.jpg"
+ },
+ {
+  "_id": 3007,
+  "slug": "1TSpanset",
+  "itemTypeId": "GEN",
+  "name": "1T Spanset",
+  "wll": 10,
+  "mbs": 70,
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 2,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "_slackdbUrl": "https://slackdb.com/gear_details/1TSpanset",
+  "_imageIds": [
+   50,
+   228
+  ],
+  "_coverImageId": null,
+  "_coverFile": null
+ },
+ {
+  "_id": 3008,
+  "slug": "2TSpanset",
+  "itemTypeId": "GEN",
+  "name": "2T Spanset",
+  "wll": 20,
+  "mbs": 70,
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 1,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "_slackdbUrl": "https://slackdb.com/gear_details/2TSpanset",
+  "_imageIds": [
+   18
+  ],
+  "_coverImageId": null,
+  "_coverFile": null
+ },
+ {
+  "_id": 3009,
+  "name": "Soft Release",
+  "slug": "soft_release",
+  "itemTypeId": "GEN",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 1,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "_slackdbUrl": "https://slackdb.com/gear_details/soft_release",
+  "_imageIds": [
+   50
+  ],
+  "_coverImageId": null,
+  "_coverFile": null
+ },
+ {
+  "_id": 3015,
+  "name": "Tree Protector",
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "GEN",
+  "slug": "tree_protector",
+  "creatorId": "10154430595665625",
+  "creationDate": 1500055956912,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 0,
+  "_slackdbUrl": "https://slackdb.com/gear_details/tree_protector",
+  "_imageIds": [],
+  "_coverImageId": null,
+  "_coverFile": null
+ },
+ {
+  "_id": 3030,
+  "name": "12mm Nut",
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "GEN",
+  "slug": "12mm_nut",
+  "creatorId": "10154430595665625",
+  "creationDate": 1505999381472,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 2,
+  "_slackdbUrl": "https://slackdb.com/gear_details/12mm_nut",
+  "_imageIds": [
+   185,
+   199
+  ],
+  "_coverImageId": 199,
+  "_coverFile": "image_files/gear/199.jpg"
+ },
+ {
+  "_id": 3031,
+  "name": "10mm Nut",
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "GEN",
+  "slug": "10mm_nut",
+  "creatorId": "10154430595665625",
+  "creationDate": 1505999393063,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 2,
+  "_slackdbUrl": "https://slackdb.com/gear_details/10mm_nut",
+  "_imageIds": [
+   185,
+   194
+  ],
+  "_coverImageId": 194,
+  "_coverFile": "image_files/gear/194.jpg"
+ },
+ {
+  "_id": 3056,
+  "name": "Snatch",
+  "material": [
+   "DY",
+   "AL"
+  ],
+  "weight": 175,
+  "wll": 10,
+  "mbs": 25,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "GEN",
+  "slug": "snatch",
+  "creatorId": "10154430595665625",
+  "creationDate": 1538001411109,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 0,
+  "_slackdbUrl": "https://slackdb.com/gear_details/snatch",
+  "_imageIds": [],
+  "_coverImageId": null,
+  "_coverFile": null
+ },
+ {
+  "_id": 3084,
+  "name": "LineGrip Nano",
+  "material": [
+   "NY"
+  ],
+  "weight": 100,
+  "wll": 4,
+  "mbs": 10,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "GEN",
+  "slug": "linegrip_nano",
+  "creatorId": "10154430595665625",
+  "creationDate": 1563143793658,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 2,
+  "_slackdbUrl": "https://slackdb.com/gear_details/linegrip_nano",
+  "_imageIds": [
+   386,
+   387
+  ],
+  "_coverImageId": 387,
+  "_coverFile": "image_files/gear/387.jpg"
+ }
+]

@@ -1,0 +1,44 @@
+{
+ "gearDetail": {
+  "_id": 67,
+  "slug": "TWave",
+  "itemTypeId": "WEB",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1536593193490,
+  "name": "T-Wave",
+  "webbingType": "TR",
+  "material": [
+   "NY"
+  ],
+  "dWidth": 25,
+  "weight": 80,
+  "wll": 10,
+  "mbs": 38,
+  "dDepth": 4.5,
+  "elongation": {
+   "percent": 14.3,
+   "force": 10
+  },
+  "productionStatus": "DC",
+  "manufacturerId": 2,
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 3.33
+    }
+   ]
+  },
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

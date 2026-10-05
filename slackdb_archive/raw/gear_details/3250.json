@@ -1,0 +1,25 @@
+{
+ "gearDetail": {
+  "_id": 3250,
+  "contributors": [
+   {
+    "id": "4549998958352576",
+    "name": "Owen Roll"
+   }
+  ],
+  "itemTypeId": "LRNG",
+  "slug": "saturn",
+  "creatorId": "4549998958352576",
+  "creationDate": 1628702860286,
+  "name": "Space Age Slacklines SATURN ring",
+  "material": [
+   "AL"
+  ],
+  "weight": 85,
+  "innerDiameter": 76,
+  "productionStatus": "DC",
+  "lastEditDate": 1628702924727,
+  "imagesCount": 0
+ },
+ "similarGear": []
+}

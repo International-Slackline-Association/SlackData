@@ -1,0 +1,59 @@
+{
+ "gearDetail": {
+  "_id": 26,
+  "slug": "FlammeII",
+  "itemTypeId": "WEB",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "name": "Flamme II",
+  "webbingType": "FL",
+  "material": [
+   "PL"
+  ],
+  "dWidth": 25,
+  "weight": 76,
+  "mbs": 43,
+  "elongation": {
+   "percent": 3.5,
+   "force": 10
+  },
+  "productionStatus": "DC",
+  "manufacturerId": 7,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1499033380275,
+  "imagesCount": 0
+ },
+ "similarGear": [
+  {
+   "_id": 130,
+   "slug": "SlackPro42kN",
+   "itemTypeId": "WEB",
+   "name": "SlackPro 42kN",
+   "manufacturerId": 5,
+   "manufacturer": {
+    "name": "Slack Pro!",
+    "url": "http://www.slackpro.de",
+    "countryTxt": "Germany",
+    "countryCode": "DE"
+   }
+  },
+  {
+   "_id": 91,
+   "name": "Mantra MK4: Flight",
+   "slug": "MantraMK4Flight",
+   "manufacturerId": 3,
+   "itemTypeId": "WEB",
+   "manufacturer": {
+    "name": "Balance Community: Slackline Outfitters",
+    "url": "http://www.balancecommunity.com",
+    "countryTxt": "United States",
+    "countryCode": "US"
+   }
+  }
+ ]
+}

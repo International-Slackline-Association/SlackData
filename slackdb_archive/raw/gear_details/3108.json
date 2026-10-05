@@ -1,0 +1,62 @@
+{
+ "gearDetail": {
+  "_id": 3108,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "WLCK",
+  "slug": "rowan_32",
+  "creatorId": "10154430595665625",
+  "creationDate": 1587233307713,
+  "lastEditDate": 1712946688150,
+  "name": "Rowan 3.2",
+  "material": [
+   "SS"
+  ],
+  "weight": 200,
+  "wll": 12,
+  "mbs": 50,
+  "anchorConnectionType": [
+   "MH"
+  ],
+  "webbingConnectionType": [
+   "QP"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 24,
+   "max": 26
+  },
+  "diverterDiameter": 25,
+  "productionStatus": "DC",
+  "manufacturerId": 62,
+  "pricing": {
+   "currency": "RUB",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 3213
+    }
+   ]
+  },
+  "imagesCount": 1
+ },
+ "similarGear": [
+  {
+   "_id": 553,
+   "slug": "CatlockPromini",
+   "itemTypeId": "WLCK",
+   "name": "Catlock mini",
+   "manufacturerId": 51,
+   "manufacturer": {
+    "name": "Cat on slack",
+    "url": "http://www.catonslack.com",
+    "countryTxt": "Poland",
+    "countryCode": "PL"
+   }
+  }
+ ]
+}

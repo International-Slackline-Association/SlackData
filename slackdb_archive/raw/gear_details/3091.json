@@ -1,0 +1,43 @@
+{
+ "gearDetail": {
+  "_id": 3091,
+  "name": "Nova",
+  "webbingType": "FL",
+  "material": [
+   "NY"
+  ],
+  "dWidth": 25.4,
+  "weight": 56,
+  "mbs": 27,
+  "elongation": {
+   "percent": 23.1,
+   "force": 10
+  },
+  "productionStatus": "AC",
+  "manufacturerId": 7,
+  "url": "https://slack-inov.com/gb/longline/145-nova",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 2.7
+    }
+   ],
+   "hasAddOpts": true
+  },
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "WEB",
+  "slug": "nova",
+  "creatorId": "10154430595665625",
+  "creationDate": 1583108616323,
+  "imagesCount": 2
+ },
+ "similarGear": []
+}

@@ -1,0 +1,47 @@
+{
+ "manufacturerDetail": {
+  "_id": 44,
+  "slug": "BalancingEarthSlacklines",
+  "manufacturerStatus": "ACT",
+  "imageFilename": "balancing_earth_slacklines.jpg",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "lastEditDate": 1622028894383,
+  "name": "Balancing Earth Slacklines",
+  "location": {
+   "countryCode": "US",
+   "address": "Warner Robins, Georgia 31095",
+   "lat": 32.59395217895508,
+   "lng": -83.64009094238281,
+   "isExact": true
+  },
+  "isSlacklineOriented": true,
+  "url": "http://www.balancingearthslacklines.com",
+  "fbPage": "https://www.facebook.com/balancingearthslacklines",
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "ratingsAverages": {
+   "overall": {
+    "externalValue": 10,
+    "externalCount": 10,
+    "value": 10,
+    "count": 10
+   }
+  },
+  "imagesCount": 0,
+  "gearStats": [
+   {
+    "itemTypeId": "WEB",
+    "count": 2
+   }
+  ]
+ }
+}

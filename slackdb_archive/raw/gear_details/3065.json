@@ -1,0 +1,61 @@
+{
+ "gearDetail": {
+  "_id": 3065,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "WLCK",
+  "slug": "mint",
+  "creatorId": "10154430595665625",
+  "creationDate": 1542141072803,
+  "name": "Mint",
+  "material": [
+   "HSS",
+   "AL"
+  ],
+  "weight": 275,
+  "wll": 12,
+  "mbs": 70,
+  "anchorConnectionType": [
+   "MH"
+  ],
+  "webbingConnectionType": [
+   "CP"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 49,
+   "max": 51
+  },
+  "usage": [
+   "TL"
+  ],
+  "productionStatus": "DC",
+  "manufacturerId": 24,
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 49.95
+    },
+    {
+     "q": 2,
+     "qt": "AA",
+     "price": 45.95
+    },
+    {
+     "q": 4,
+     "qt": "AA",
+     "price": 42.95
+    }
+   ]
+  },
+  "lastEditDate": 1712938311916,
+  "imagesCount": 0
+ },
+ "similarGear": []
+}

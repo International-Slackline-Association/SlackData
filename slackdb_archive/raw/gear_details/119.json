@@ -1,0 +1,102 @@
+{
+ "gearDetail": {
+  "_id": 119,
+  "slug": "Cosmic",
+  "itemTypeId": "WEB",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "name": "Cosmic",
+  "webbingType": "TB",
+  "material": [
+   "PL"
+  ],
+  "dWidth": 25,
+  "weight": 50,
+  "mbs": 31,
+  "elongation": {
+   "percent": 6.5,
+   "force": 10
+  },
+  "dateIntroduced": 1470528000000,
+  "productionStatus": "AC",
+  "manufacturerId": 7,
+  "url": "http://slack-inov.com/gb/webbing/69-cosmic",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 1.6
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "1559496084101329",
+    "name": "Philipp Gesing"
+   }
+  ],
+  "lastEditDate": 1499031161014,
+  "reviews": [
+   {
+    "creatorId": "1559496084101329",
+    "text": "Best polyester tube. Edges are better than most webbings, stretch is decent and it&#x27;s very easy to walk. Great waterline and also good choice for medium long highlines. Would recommend 30 m or more. It packs very easily and is surprisingly robust for a tube. If you want a slackline that is different from the ones everyone else has, this is the choice for you!",
+    "rating": {
+     "lst": {
+      "VFM": 8,
+      "QU": 8,
+      "VER": 10,
+      "EOU": 10,
+      "SFT": 8
+     },
+     "overall": 9
+    },
+    "pros": [
+     "Versatile",
+     "Lightweight",
+     "Compact"
+    ],
+    "cons": [],
+    "creationDate": 1501694133595,
+    "creatorName": "Philipp Gesing"
+   }
+  ],
+  "ratingsAverages": {
+   "overall": {
+    "nativeCount": 1,
+    "nativeValue": 9,
+    "value": 9,
+    "count": 1
+   },
+   "lst": {
+    "VFM": {
+     "count": 1,
+     "value": 8
+    },
+    "QU": {
+     "count": 1,
+     "value": 8
+    },
+    "VER": {
+     "count": 1,
+     "value": 10
+    },
+    "EOU": {
+     "count": 1,
+     "value": 10
+    },
+    "SFT": {
+     "count": 1,
+     "value": 8
+    }
+   }
+  },
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

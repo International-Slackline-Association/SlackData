@@ -1,0 +1,178 @@
+{
+ "gearDetail": {
+  "_id": 551,
+  "slug": "Catlock",
+  "itemTypeId": "WLCK",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "10213773283512968",
+    "name": "Raz Rimon"
+   },
+   {
+    "id": "2259321817488648",
+    "name": "Michał Guz"
+   }
+  ],
+  "lastEditDate": 1712932970205,
+  "reviews": [
+   {
+    "creatorId": "10213773283512968",
+    "text": "Good for long lines and all kinds of lines in the park.",
+    "rating": {
+     "lst": {
+      "VFM": 10,
+      "QU": 6,
+      "VER": 6,
+      "EOU": 6,
+      "PRT": 8
+     },
+     "overall": 7
+    },
+    "pros": [
+     "Very cheap"
+    ],
+    "cons": [
+     "Not for highline",
+     "The metal curving differentiates from one lock to another"
+    ],
+    "creationDate": 1500305980321,
+    "creatorName": "Raz Rimon"
+   }
+  ],
+  "name": "Catlock classic",
+  "material": [
+   "SS"
+  ],
+  "weight": 312,
+  "wll": 12,
+  "mbs": 60,
+  "anchorConnectionType": [
+   "MH"
+  ],
+  "webbingConnectionType": [
+   "CP"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 24,
+   "max": 26
+  },
+  "diverterDiameter": 30,
+  "efficiency": 86,
+  "usage": [
+   "SL",
+   "HL",
+   "LL",
+   "RL",
+   "LTL"
+  ],
+  "productionStatus": "AC",
+  "manufacturerId": 51,
+  "url": "https://catonslack.com/product/35390452-slackline-weblock-catlock-classic",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "EX",
+     "price": 37.5
+    },
+    {
+     "q": 2,
+     "qt": "AA",
+     "price": 33.75
+    }
+   ]
+  },
+  "ratingsAverages": {
+   "overall": {
+    "nativeCount": 1,
+    "nativeValue": 7,
+    "value": 7,
+    "count": 1
+   },
+   "lst": {
+    "VFM": {
+     "count": 1,
+     "value": 10
+    },
+    "QU": {
+     "count": 1,
+     "value": 6
+    },
+    "VER": {
+     "count": 1,
+     "value": 6
+    },
+    "EOU": {
+     "count": 1,
+     "value": 6
+    },
+    "PRT": {
+     "count": 1,
+     "value": 8
+    }
+   }
+  },
+  "imagesCount": 3
+ },
+ "similarGear": [
+  {
+   "_id": 3018,
+   "itemTypeId": "WLCK",
+   "slug": "petram_slacklinesspatiumweblock",
+   "name": "Spatium weblock",
+   "manufacturerId": 45,
+   "manufacturer": {
+    "name": "Petram Slacklines",
+    "url": "https://petramslacklines.site123.me/",
+    "countryTxt": "Poland",
+    "countryCode": "PL"
+   }
+  },
+  {
+   "_id": 548,
+   "slug": "Beast10",
+   "itemTypeId": "WLCK",
+   "name": "Beast 1.0",
+   "manufacturerId": 42,
+   "manufacturer": {
+    "name": "Absolute Slacklines",
+    "url": "http://www.absoluteslacklines.com",
+    "countryTxt": "Canada",
+    "countryCode": "CA"
+   }
+  },
+  {
+   "_id": 549,
+   "slug": "CHILI20",
+   "itemTypeId": "WLCK",
+   "name": "CHILI 2.0",
+   "manufacturerId": 24,
+   "manufacturer": {
+    "name": "Spider slacklines",
+    "url": "http://www.spider-slacklines.com",
+    "countryTxt": "Italy",
+    "countryCode": "IT"
+   }
+  },
+  {
+   "_id": 561,
+   "slug": "LimeLinelock",
+   "itemTypeId": "WLCK",
+   "name": "Lime",
+   "manufacturerId": 24,
+   "manufacturer": {
+    "name": "Spider slacklines",
+    "url": "http://www.spider-slacklines.com",
+    "countryTxt": "Italy",
+    "countryCode": "IT"
+   }
+  }
+ ]
+}

@@ -1,0 +1,46 @@
+{
+ "gearDetail": {
+  "_id": 1321,
+  "name": "Elephant",
+  "slug": "Elephant",
+  "manufacturerId": 9,
+  "material": [
+   "S"
+  ],
+  "itemTypeId": "BRK",
+  "weight": 130,
+  "wll": 2.5,
+  "productionStatus": "AC",
+  "url": "http://www.slackshop.cz/en/pulley-systems/106-kladkostroj-eqb-minima.html",
+  "remarks": "Sold as part of a pulley system set",
+  "breakingMethod": "CAM",
+  "compatibleRopeDiameter": {
+   "min": 8,
+   "max": 8
+  },
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "imagesCount": 0
+ },
+ "similarGear": [
+  {
+   "_id": 1308,
+   "name": "JAG Traxion",
+   "slug": "JAGTraxion",
+   "manufacturerId": 31,
+   "itemTypeId": "BRK",
+   "manufacturer": {
+    "name": "Petzl",
+    "url": "http://www.petzl.com/en?l=INT",
+    "countryTxt": "France",
+    "countryCode": "FR"
+   }
+  }
+ ]
+}

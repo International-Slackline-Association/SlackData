@@ -1,0 +1,40 @@
+{
+ "gearDetail": {
+  "_id": 820,
+  "slug": "StainlessSteelLeashRing",
+  "itemTypeId": "LRNG",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1542143106945,
+  "name": "Stainless Steel Leash Ring",
+  "material": [
+   "SS"
+  ],
+  "weight": 120,
+  "wll": 5,
+  "mbs": 15,
+  "materialDiameter": 10,
+  "innerDiameter": 50,
+  "outerDiameter": 70,
+  "productionStatus": "DC",
+  "manufacturerId": 9,
+  "pricing": {
+   "currency": "CZK",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 150
+    }
+   ]
+  },
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

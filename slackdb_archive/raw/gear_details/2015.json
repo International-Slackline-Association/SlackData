@@ -1,0 +1,26 @@
+{
+ "gearDetail": {
+  "_id": 2015,
+  "name": "12mm Oval Quicklink",
+  "slug": "12mmOvalQuicklink",
+  "material": [
+   "S"
+  ],
+  "itemTypeId": "CON",
+  "weight": 232,
+  "wll": 15,
+  "mbs": 75,
+  "productionStatus": "AC",
+  "connectorType": "OQL",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "imagesCount": 0
+ },
+ "similarGear": []
+}

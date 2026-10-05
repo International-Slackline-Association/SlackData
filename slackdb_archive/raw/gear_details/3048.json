@@ -1,0 +1,106 @@
+{
+ "gearDetail": {
+  "_id": 3048,
+  "name": "Project 44",
+  "webbingType": "TR",
+  "material": [
+   "PL"
+  ],
+  "dWidth": 25,
+  "weight": 54,
+  "wll": 7,
+  "mbs": 25,
+  "dDepth": 1.8,
+  "elongation": {
+   "percent": 9.2,
+   "force": 10
+  },
+  "usage": [
+   "SL",
+   "HL",
+   "LL",
+   "RL",
+   "LTL"
+  ],
+  "dateIntroduced": 1519340400000,
+  "productionStatus": "AC",
+  "manufacturerId": 4,
+  "url": "https://slack-mountain.com/fr/sangles-slackline/194-project-44.html",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "qt": "AA",
+     "price": 1.65,
+     "q": 1
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "10155267793869667",
+    "name": "Romain Schempf"
+   },
+   {
+    "id": "10156383168804695",
+    "name": "Johanna Glasse"
+   }
+  ],
+  "itemTypeId": "WEB",
+  "slug": "project_44",
+  "creatorId": "10155267793869667",
+  "creationDate": 1519402810526,
+  "reviews": [
+   {
+    "creatorId": "10156383168804695",
+    "text": "Top",
+    "rating": {
+     "lst": {
+      "VFM": 10,
+      "QU": 10,
+      "VER": 10,
+      "EOU": 10,
+      "SFT": 10
+     },
+     "overall": 10
+    },
+    "pros": [],
+    "cons": [],
+    "creationDate": 1522520500207,
+    "creatorName": "Johanna Glasse"
+   }
+  ],
+  "ratingsAverages": {
+   "overall": {
+    "nativeCount": 1,
+    "nativeValue": 10,
+    "value": 10,
+    "count": 1
+   },
+   "lst": {
+    "VFM": {
+     "count": 1,
+     "value": 10
+    },
+    "QU": {
+     "count": 1,
+     "value": 10
+    },
+    "VER": {
+     "count": 1,
+     "value": 10
+    },
+    "EOU": {
+     "count": 1,
+     "value": 10
+    },
+    "SFT": {
+     "count": 1,
+     "value": 10
+    }
+   }
+  },
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

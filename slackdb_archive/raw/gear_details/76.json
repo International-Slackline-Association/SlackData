@@ -1,0 +1,58 @@
+{
+ "gearDetail": {
+  "_id": 76,
+  "slug": "SigmaXHeliX",
+  "itemTypeId": "WEB",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "name": "Sigma X (HeliX)",
+  "webbingType": "TB",
+  "material": [
+   "NY"
+  ],
+  "dWidth": 25,
+  "weight": 44,
+  "wll": 8,
+  "mbs": 21,
+  "elongation": {
+   "percent": 15.5,
+   "force": 8
+  },
+  "productionStatus": "AC",
+  "manufacturerId": 30,
+  "url": "http://www.slackliner.de/Slackline-Band/Schlauchband/Sigma-X.html",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 1.49
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1499088515139,
+  "imagesCount": 1
+ },
+ "similarGear": [
+  {
+   "_id": 3105,
+   "name": "X-Tube 25mm",
+   "manufacturerId": 32,
+   "itemTypeId": "WEB",
+   "slug": "x-tube_25mm",
+   "manufacturer": {
+    "name": "Edelrid",
+    "url": "http://www.edelrid.de/en",
+    "countryTxt": "Germany",
+    "countryCode": "DE"
+   }
+  }
+ ]
+}

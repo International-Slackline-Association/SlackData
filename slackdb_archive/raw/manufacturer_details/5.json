@@ -1,0 +1,46 @@
+{
+ "manufacturerDetail": {
+  "_id": 5,
+  "slug": "SlackPro",
+  "manufacturerStatus": "ACT",
+  "imageFilename": "slack_pro.jpg",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "lastEditDate": 1600709112023,
+  "name": "Slack Pro!",
+  "location": {
+   "countryCode": "DE",
+   "lat": 49.38449859619141,
+   "lng": 7.45644998550415,
+   "isExact": true
+  },
+  "isSlacklineOriented": true,
+  "url": "http://www.slackpro.de",
+  "fbPage": "https://www.facebook.com/Slackpro-157374974272544",
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "10211802848940671",
+    "name": "Thomas Buckingham"
+   }
+  ],
+  "imagesCount": 0,
+  "gearStats": [
+   {
+    "itemTypeId": "WEB",
+    "count": 2
+   },
+   {
+    "itemTypeId": "WGP",
+    "count": 6
+   },
+   {
+    "itemTypeId": "WLCK",
+    "count": 2
+   }
+  ]
+ }
+}

@@ -1,0 +1,48 @@
+{
+ "gearDetail": {
+  "_id": 1307,
+  "name": "Pro Traxion",
+  "slug": "ProTraxion",
+  "manufacturerId": 31,
+  "material": [
+   "AL"
+  ],
+  "itemTypeId": "BRK",
+  "weight": 265,
+  "wll": 2.5,
+  "mbs": 4,
+  "productionStatus": "AC",
+  "url": "http://www.petzl.com/en/Sport/Pulleys/PRO-TRAXION?l=INT#.Vjz3jn4wiUk",
+  "remarks": "Very efficient but almost impossible to detension - requires soft release system",
+  "breakingMethod": "TCAM",
+  "efficiency": 95,
+  "compatibleRopeDiameter": {
+   "min": 8,
+   "max": 13
+  },
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "imagesCount": 0
+ },
+ "similarGear": [
+  {
+   "_id": 1319,
+   "slug": "AdvanceTechHXProgressCapturePulley",
+   "itemTypeId": "BRK",
+   "name": "Advance Tech HX Progress Capture Pulley",
+   "manufacturerId": 34,
+   "manufacturer": {
+    "name": "SMC",
+    "url": "http://smcgear.com",
+    "countryTxt": "United States",
+    "countryCode": "US"
+   }
+  }
+ ]
+}

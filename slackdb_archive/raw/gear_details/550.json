@@ -1,0 +1,59 @@
+{
+ "gearDetail": {
+  "_id": 550,
+  "slug": "CatlockSR",
+  "itemTypeId": "WLCK",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "2259321817488648",
+    "name": "Michał Guz"
+   }
+  ],
+  "lastEditDate": 1712933489835,
+  "name": "Catlock SR",
+  "material": [
+   "SS"
+  ],
+  "weight": 280,
+  "wll": 10,
+  "mbs": 50,
+  "anchorConnectionType": [
+   "FB",
+   "SR"
+  ],
+  "webbingConnectionType": [
+   "CP"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 24,
+   "max": 26
+  },
+  "diverterDiameter": 25,
+  "usage": [
+   "SL",
+   "HL",
+   "LL",
+   "LTL"
+  ],
+  "productionStatus": "DC",
+  "manufacturerId": 51,
+  "pricing": {
+   "currency": "PLN",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 158
+    }
+   ]
+  },
+  "imagesCount": 2
+ },
+ "similarGear": []
+}

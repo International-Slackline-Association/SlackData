@@ -1,0 +1,72 @@
+{
+ "gearDetail": {
+  "_id": 37,
+  "slug": "Wallaby",
+  "itemTypeId": "WEB",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "name": "Wallaby",
+  "webbingType": "FL",
+  "material": [
+   "PL"
+  ],
+  "dWidth": 48,
+  "weight": 118,
+  "wll": 30,
+  "mbs": 60,
+  "dDepth": 3.1,
+  "elongation": {
+   "percent": 2.4,
+   "force": 8
+  },
+  "usage": [
+   "TL"
+  ],
+  "productionStatus": "AC",
+  "manufacturerId": 4,
+  "url": "http://slack-mountain.com/en/jumplines/6-wallaby.html",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 20,
+     "qt": "EX",
+     "price": 2.2
+    },
+    {
+     "q": 25,
+     "qt": "EX",
+     "price": 2.2
+    },
+    {
+     "q": 30,
+     "qt": "EX",
+     "price": 2.2
+    },
+    {
+     "q": 40,
+     "qt": "EX",
+     "price": 2.2
+    },
+    {
+     "q": 50,
+     "qt": "EX",
+     "price": 2.2
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "10155267793869667",
+    "name": "Romain Schempf"
+   }
+  ],
+  "lastEditDate": 1501840445912,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

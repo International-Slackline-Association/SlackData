@@ -1,0 +1,44 @@
+{
+ "_id": 287,
+ "gearId": 3055,
+ "takenDate": 1534744800000,
+ "imageScope": "ITM",
+ "imageSource": "OFF",
+ "imageSourceUrl": "https://www.slacktivity.com/y2k",
+ "gearCondition": "NEW",
+ "ImageEnvType": "STD",
+ "imageType": "RG",
+ "lineLength": 50,
+ "tags": [
+  "highline",
+  "modular"
+ ],
+ "infoTags": [
+  {
+   "x": 257,
+   "y": 54,
+   "width": 680,
+   "height": 437,
+   "text": "Main version"
+  },
+  {
+   "x": 531,
+   "y": 437,
+   "width": 668,
+   "height": 491,
+   "text": "Backup version"
+  }
+ ],
+ "contributors": [
+  {
+   "id": "10154430595665625",
+   "name": "Nir Avneyon"
+  }
+ ],
+ "creationDate": 1537998451176,
+ "creatorId": "10154430595665625",
+ "filename": "287.jpg",
+ "width": 1200,
+ "height": 1200,
+ "creatorName": "Nir Avneyon"
+}

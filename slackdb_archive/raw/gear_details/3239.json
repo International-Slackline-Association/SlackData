@@ -1,0 +1,34 @@
+{
+ "gearDetail": {
+  "_id": 3239,
+  "name": "Guide 2 20 M",
+  "webbingLength": 20,
+  "webbingWidth": 50,
+  "tensioningType": "RAT1",
+  "productionStatus": "AC",
+  "manufacturerId": 55,
+  "url": "https://slackstar.de/fun-performance/2-baeume/komplettset-2-teilig/866/guide2?number=SL81792-20_35",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 48
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "guide_220m",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622032981894,
+  "imagesCount": 2
+ },
+ "similarGear": []
+}

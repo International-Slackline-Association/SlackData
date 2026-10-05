@@ -1,0 +1,46 @@
+{
+ "gearDetail": {
+  "_id": 3130,
+  "name": "Lift 2be",
+  "webbingType": "TB",
+  "material": [
+   "NY"
+  ],
+  "dWidth": 25.4,
+  "weight": 48,
+  "wll": 4.3,
+  "mbs": 21.5,
+  "dDepth": 3.2,
+  "elongation": {
+   "force": 10,
+   "percent": 16.9
+  },
+  "dateIntroduced": 1596834000000,
+  "productionStatus": "AC",
+  "manufacturerId": 3,
+  "url": "https://www.balancecommunity.com/products/lift-2be",
+  "pricing": {
+   "currency": "USD",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 2.25
+    }
+   ],
+   "hasAddOpts": true
+  },
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "WEB",
+  "slug": "lift_2be",
+  "creatorId": "10154430595665625",
+  "creationDate": 1604317628567,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

@@ -1,0 +1,57 @@
+{
+ "gearDetail": {
+  "_id": 3085,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "10220734815258954",
+    "name": "Jakub Dostál"
+   }
+  ],
+  "itemTypeId": "WLCK",
+  "slug": "mithril_-pullpin",
+  "creatorId": "10154430595665625",
+  "creationDate": 1564833283848,
+  "lastEditDate": 1712938422822,
+  "name": "Mithril - Pull Pin",
+  "material": [
+   "AL"
+  ],
+  "weight": 165,
+  "wll": 8,
+  "mbs": 40,
+  "anchorConnectionType": [
+   "PP"
+  ],
+  "webbingConnectionType": [
+   "PP"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 24,
+   "max": 26
+  },
+  "usage": [
+   "SL",
+   "HL",
+   "LL"
+  ],
+  "productionStatus": "AC",
+  "manufacturerId": 9,
+  "url": "https://www.slackshop.cz/en/weblocks/145-349-eqb-mithril.html#/164-pin_version-pull_pin",
+  "pricing": {
+   "currency": "CZK",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 1599
+    }
+   ]
+  },
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

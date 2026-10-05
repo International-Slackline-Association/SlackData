@@ -1,0 +1,50 @@
+{
+ "manufacturerDetail": {
+  "_id": 29,
+  "slug": "Dakas",
+  "manufacturerStatus": "ACT",
+  "imageFilename": "dakas.jpg",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "lastEditDate": 1587336646686,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "name": "Dakas",
+  "location": {
+   "countryCode": "FR",
+   "address": "2 rue de la Foulerie 11120 Bize-Minervois",
+   "lat": 43.31871032714844,
+   "lng": 2.873188972473145,
+   "isExact": true
+  },
+  "isSlacklineOriented": true,
+  "fbPage": "https://www.facebook.com/Dakas.Slackline",
+  "ratingsAverages": {
+   "overall": {
+    "externalValue": 9,
+    "externalCount": 16,
+    "value": 9,
+    "count": 16
+   }
+  },
+  "imagesCount": 0,
+  "gearStats": [
+   {
+    "itemTypeId": "WLCK",
+    "count": 1
+   },
+   {
+    "itemTypeId": "WEB",
+    "count": 3
+   },
+   {
+    "itemTypeId": "LRNG",
+    "count": 2
+   }
+  ]
+ }
+}

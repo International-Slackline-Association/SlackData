@@ -1,0 +1,65 @@
+{
+ "gearDetail": {
+  "_id": 3118,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "WLCK",
+  "slug": "banana_31",
+  "creatorId": "10154430595665625",
+  "creationDate": 1587289982625,
+  "name": "BANANA! 3.1",
+  "material": [
+   "SS",
+   "AL"
+  ],
+  "weight": 233,
+  "wll": 10,
+  "mbs": 50,
+  "anchorConnectionType": [
+   "MH"
+  ],
+  "webbingConnectionType": [
+   "CP"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 24,
+   "max": 26
+  },
+  "diverterDiameter": 22,
+  "efficiency": 85,
+  "productionStatus": "AC",
+  "manufacturerId": 27,
+  "url": "https://slackhouseshop.pl/en/produkt/banana-3-1-weblock/",
+  "pricing": {
+   "currency": "PLN",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 245
+    }
+   ]
+  },
+  "lastEditDate": 1712932698200,
+  "imagesCount": 1
+ },
+ "similarGear": [
+  {
+   "_id": 544,
+   "slug": "BANANA",
+   "itemTypeId": "WLCK",
+   "name": "BANANA! 2.0",
+   "manufacturerId": 27,
+   "manufacturer": {
+    "name": "Slack house",
+    "url": "http://slackhouseshop.pl",
+    "countryTxt": "Poland",
+    "countryCode": "PL"
+   }
+  }
+ ]
+}

@@ -1,0 +1,40 @@
+{
+ "gearDetail": {
+  "_id": 3082,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "SLD",
+  "slug": "rollex",
+  "creatorId": "10154430595665625",
+  "creationDate": 1563142454340,
+  "lastEditDate": 1587291708170,
+  "name": "ROLLEX",
+  "material": [
+   "AL"
+  ],
+  "weight": 129,
+  "wll": 4,
+  "mbs": 22,
+  "sliderType": "CA",
+  "dateIntroduced": 1555189200000,
+  "productionStatus": "AC",
+  "manufacturerId": 9,
+  "url": "https://www.slackshop.cz/en/rollex/157-379-rollex.html",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 49.95
+    }
+   ]
+  },
+  "imagesCount": 2
+ },
+ "similarGear": []
+}

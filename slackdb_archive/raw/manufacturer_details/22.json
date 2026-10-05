@@ -1,0 +1,39 @@
+{
+ "manufacturerDetail": {
+  "_id": 22,
+  "slug": "PumpSlackline",
+  "manufacturerStatus": "ACT",
+  "imageFilename": "pump_slackline.jpg",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "lastEditDate": 1587250287109,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "name": "Pump Slackline",
+  "location": {
+   "countryCode": "AR",
+   "lat": -38.41609573364258,
+   "lng": -63.61667251586914,
+   "isExact": false
+  },
+  "yearEstablished": 2008,
+  "isActive": true,
+  "isSlacklineOriented": true,
+  "fbPage": "https://www.facebook.com/PumpSlacklineArg",
+  "imagesCount": 0,
+  "gearStats": [
+   {
+    "itemTypeId": "WEB",
+    "count": 1
+   },
+   {
+    "itemTypeId": "WLCK",
+    "count": 1
+   }
+  ]
+ }
+}

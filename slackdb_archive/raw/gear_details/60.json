@@ -1,0 +1,32 @@
+{
+ "gearDetail": {
+  "_id": 60,
+  "slug": "Verve35mm",
+  "itemTypeId": "WEB",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1536593223460,
+  "name": "Verve 35mm",
+  "webbingType": "FL",
+  "material": [
+   "PL"
+  ],
+  "dWidth": 35,
+  "weight": 69,
+  "mbs": 35,
+  "elongation": {
+   "percent": 7,
+   "force": 10
+  },
+  "productionStatus": "DC",
+  "manufacturerId": 2,
+  "imagesCount": 0
+ },
+ "similarGear": []
+}

@@ -1,0 +1,34 @@
+{
+ "gearDetail": {
+  "_id": 3196,
+  "name": "Base Line Kit",
+  "webbingLength": 15,
+  "webbingWidth": 50,
+  "tensioningType": "RAT1",
+  "productionStatus": "AC",
+  "manufacturerId": 21,
+  "url": "https://slacklineindustries.com/collections/all-products/products/base-line-kit",
+  "pricing": {
+   "currency": "USD",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 80
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "base_linekit",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622017528269,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

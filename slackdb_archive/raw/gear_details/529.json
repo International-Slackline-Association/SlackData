@@ -1,0 +1,75 @@
+{
+ "gearDetail": {
+  "_id": 529,
+  "slug": "SladLockPower",
+  "itemTypeId": "WLCK",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "1811540145542689",
+    "name": "Helmut Netzwerker"
+   }
+  ],
+  "lastEditDate": 1542153018873,
+  "name": "SladLock Power",
+  "material": [
+   "SS",
+   "AL"
+  ],
+  "weight": 300,
+  "wll": 10,
+  "mbs": 45,
+  "anchorConnectionType": [
+   "MH"
+  ],
+  "webbingConnectionType": [
+   "CP"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 24,
+   "max": 26
+  },
+  "diverterDiameter": 38,
+  "efficiency": 95,
+  "usage": [
+   "SL",
+   "HL",
+   "LL",
+   "RL",
+   "LTL"
+  ],
+  "productionStatus": "DC",
+  "manufacturerId": 12,
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 45
+    }
+   ]
+  },
+  "imagesCount": 0
+ },
+ "similarGear": [
+  {
+   "_id": 561,
+   "slug": "LimeLinelock",
+   "itemTypeId": "WLCK",
+   "name": "Lime",
+   "manufacturerId": 24,
+   "manufacturer": {
+    "name": "Spider slacklines",
+    "url": "http://www.spider-slacklines.com",
+    "countryTxt": "Italy",
+    "countryCode": "IT"
+   }
+  }
+ ]
+}

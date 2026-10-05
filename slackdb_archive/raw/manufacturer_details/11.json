@@ -1,0 +1,31 @@
+{
+ "manufacturerDetail": {
+  "_id": 11,
+  "slug": "2Trees",
+  "manufacturerStatus": "ACT",
+  "imageFilename": "2_trees.jpg",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "lastEditDate": 1587240971335,
+  "reviews": [],
+  "comments": [],
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "name": "2 Trees",
+  "location": {
+   "countryCode": "PL",
+   "address": "Warsaw, Poland",
+   "lat": 52.2280731201172,
+   "lng": 21.0122299194336,
+   "isExact": false
+  },
+  "isSlacklineOriented": true,
+  "fbPage": "https://www.facebook.com/2TreesSlacklines",
+  "imagesCount": 0,
+  "gearStats": null
+ }
+}

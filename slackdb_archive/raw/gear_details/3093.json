@@ -1,0 +1,46 @@
+{
+ "gearDetail": {
+  "_id": 3093,
+  "name": "Jybn",
+  "webbingType": "FL",
+  "material": [
+   "NY"
+  ],
+  "dWidth": 25.4,
+  "weight": 51,
+  "wll": 5.2,
+  "mbs": 26,
+  "dDepth": 2.5,
+  "elongation": {
+   "percent": 19.6,
+   "force": 10
+  },
+  "dateIntroduced": 1583272800000,
+  "productionStatus": "AC",
+  "manufacturerId": 3,
+  "url": "https://www.balancecommunity.com/products/jybn",
+  "pricing": {
+   "currency": "USD",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 1.8
+    }
+   ],
+   "hasAddOpts": true
+  },
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "WEB",
+  "slug": "jybn",
+  "creatorId": "10154430595665625",
+  "creationDate": 1583345077453,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

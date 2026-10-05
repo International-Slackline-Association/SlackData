@@ -1,0 +1,37 @@
+{
+ "gearDetail": {
+  "_id": 1314,
+  "slug": "MPD",
+  "itemTypeId": "BRK",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "1811540145542689",
+    "name": "Helmut Netzwerker"
+   }
+  ],
+  "lastEditDate": 1502045315921,
+  "name": "MPD",
+  "material": [
+   "AL"
+  ],
+  "weight": 1100,
+  "wll": 8.8,
+  "mbs": 44,
+  "compatibleRopeDiameter": {
+   "min": 11,
+   "max": 11
+  },
+  "breakingMethod": "CAM",
+  "productionStatus": "AC",
+  "manufacturerId": 58,
+  "url": "http://www.cmcrescue.com/equipment/mpd/",
+  "imagesCount": 0
+ },
+ "similarGear": []
+}

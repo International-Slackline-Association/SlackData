@@ -1,0 +1,45 @@
+{
+ "gearDetail": {
+  "_id": 3126,
+  "name": "Dyneemite",
+  "webbingType": "FL",
+  "material": [
+   "PL",
+   "DY"
+  ],
+  "dWidth": 25,
+  "weight": 22,
+  "mbs": 30,
+  "elongation": {
+   "percent": 1,
+   "force": 5
+  },
+  "dateIntroduced": 1598734800000,
+  "productionStatus": "AC",
+  "manufacturerId": 26,
+  "url": "https://raed-slacklines.com/dyneemite-ultralight-highline-project-webbing",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 2.99
+    }
+   ],
+   "hasAddOpts": true
+  },
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "WEB",
+  "slug": "dyneemite",
+  "creatorId": "10154430595665625",
+  "creationDate": 1598801927724,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

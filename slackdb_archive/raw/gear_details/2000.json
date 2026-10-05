@@ -1,0 +1,26 @@
+{
+ "gearDetail": {
+  "_id": 2000,
+  "name": "8mm 0.65T Omega Stainless Steel Shackle",
+  "slug": "8mm065TOmegaStainlessSteelShackle",
+  "material": [
+   "SS"
+  ],
+  "itemTypeId": "CON",
+  "weight": 60,
+  "wll": 6.25,
+  "mbs": 25,
+  "productionStatus": "AC",
+  "connectorType": "OS",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "imagesCount": 0
+ },
+ "similarGear": []
+}

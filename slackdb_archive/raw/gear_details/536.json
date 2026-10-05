@@ -1,0 +1,51 @@
+{
+ "gearDetail": {
+  "_id": 536,
+  "slug": "RhinoLock",
+  "itemTypeId": "WLCK",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1712945999163,
+  "name": "RhinoLock",
+  "material": [
+   "SS"
+  ],
+  "weight": 775,
+  "wll": 16,
+  "mbs": 70,
+  "anchorConnectionType": [
+   "FB",
+   "SR"
+  ],
+  "webbingConnectionType": [
+   "SP"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 24,
+   "max": 26
+  },
+  "diverterDiameter": 40,
+  "efficiency": 90,
+  "productionStatus": "DC",
+  "manufacturerId": 16,
+  "url": "http://www.slackgear.co.za/product/rhinolock/",
+  "pricing": {
+   "currency": "ZAR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 650
+    }
+   ]
+  },
+  "imagesCount": 2
+ },
+ "similarGear": []
+}

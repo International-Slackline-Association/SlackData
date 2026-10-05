@@ -1,0 +1,85 @@
+{
+ "manufacturerDetail": {
+  "_id": 19,
+  "slug": "PureSlacklines",
+  "manufacturerStatus": "ACT",
+  "imageFilename": "pure_slacklines.jpg",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "lastEditDate": 1587291357278,
+  "reviews": [
+   {
+    "creatorId": "1574892945909720",
+    "text": "Great quality primitive gear, worth the price, for beginners to professionals.",
+    "rating": {
+     "lst": {
+      "OP": 10,
+      "SP": 10,
+      "PQ": 10,
+      "CS": 10
+     },
+     "overall": 10
+    },
+    "creationDate": 1502069907116,
+    "creatorName": "Gaston Armand"
+   }
+  ],
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "1574892945909720",
+    "name": "Gaston Armand"
+   }
+  ],
+  "name": "Pure Slacklines",
+  "location": {
+   "countryCode": "AU",
+   "lat": -33.66659164428711,
+   "lng": 150.8229675292969,
+   "isExact": false
+  },
+  "isSlacklineOriented": true,
+  "url": "http://pureslacklines.com.au",
+  "fbPage": "https://www.facebook.com/PureSlacklines",
+  "ratingsAverages": {
+   "overall": {
+    "nativeCount": 1,
+    "nativeValue": 10,
+    "value": 10,
+    "count": 1
+   },
+   "lst": {
+    "OP": {
+     "count": 1,
+     "value": 10
+    },
+    "SP": {
+     "count": 1,
+     "value": 10
+    },
+    "PQ": {
+     "count": 1,
+     "value": 10
+    },
+    "CS": {
+     "count": 1,
+     "value": 10
+    }
+   }
+  },
+  "imagesCount": 0,
+  "gearStats": [
+   {
+    "itemTypeId": "WEB",
+    "count": 1
+   },
+   {
+    "itemTypeId": "WLCK",
+    "count": 1
+   }
+  ]
+ }
+}

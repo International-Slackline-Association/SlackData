@@ -1,0 +1,65 @@
+{
+ "gearDetail": {
+  "_id": 123,
+  "slug": "JUMBO",
+  "itemTypeId": "WEB",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "name": "JUMBO",
+  "webbingType": "TB",
+  "material": [
+   "PL"
+  ],
+  "dWidth": 25.4,
+  "weight": 83,
+  "wll": 12,
+  "mbs": 35,
+  "dDepth": 4,
+  "elongation": {
+   "percent": 7,
+   "force": 10
+  },
+  "productionStatus": "AC",
+  "manufacturerId": 24,
+  "url": "http://spider-slacklines.com/shop/en/longline-webbings/73-jumbo-line.html",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 1.89
+    },
+    {
+     "q": 80,
+     "qt": "AA",
+     "price": 1.81
+    },
+    {
+     "q": 120,
+     "qt": "AA",
+     "price": 1.73
+    },
+    {
+     "q": 200,
+     "qt": "AA",
+     "price": 1.64
+    },
+    {
+     "q": 350,
+     "qt": "AA",
+     "price": 1.54
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1499035151593,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

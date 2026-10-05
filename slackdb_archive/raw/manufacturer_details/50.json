@@ -1,0 +1,39 @@
+{
+ "manufacturerDetail": {
+  "_id": 50,
+  "slug": "SlackliningCanada",
+  "manufacturerStatus": "ACT",
+  "imageFilename": "slacklining_canada.jpg",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "lastEditDate": 1622032375615,
+  "name": "Slacklining Canada",
+  "location": {
+   "countryCode": "CA",
+   "address": "206-1760, Surrey, BC, V4A 6E5",
+   "lat": 49.01710891723633,
+   "lng": -122.762321472168,
+   "isExact": false
+  },
+  "isSlacklineOriented": true,
+  "url": "http://www.slacklining.ca",
+  "fbPage": "https://www.facebook.com/slackliningcanada",
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "imagesCount": 0,
+  "gearStats": [
+   {
+    "itemTypeId": "WEB",
+    "count": 1
+   }
+  ]
+ }
+}

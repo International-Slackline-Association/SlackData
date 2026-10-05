@@ -1,0 +1,45 @@
+{
+ "gearDetail": {
+  "_id": 3149,
+  "name": "Sonic Light",
+  "webbingType": "CS",
+  "material": [
+   "NY"
+  ],
+  "dWidth": 25,
+  "weight": 53,
+  "wll": 5.4,
+  "mbs": 27,
+  "dDepth": 2.8,
+  "elongation": {
+   "percent": 13,
+   "force": 10
+  },
+  "dateIntroduced": 1600030800000,
+  "productionStatus": "AC",
+  "manufacturerId": 64,
+  "url": "https://aki-slacklines.de/en/webbing/polyamide/176/aki-sonic-light-webbing",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "price": 2.3,
+     "qt": "AA"
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "WEB",
+  "slug": "sonic_light",
+  "creatorId": "10154430595665625",
+  "creationDate": 1617142747555,
+  "imagesCount": 4
+ },
+ "similarGear": []
+}

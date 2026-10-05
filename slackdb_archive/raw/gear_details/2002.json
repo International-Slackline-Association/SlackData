@@ -1,0 +1,26 @@
+{
+ "gearDetail": {
+  "_id": 2002,
+  "name": "12mm 1.5T Omega Stainless Steel Shackle",
+  "slug": "12mm15TOmegaStainlessSteelShackle",
+  "material": [
+   "SS"
+  ],
+  "itemTypeId": "CON",
+  "weight": 204,
+  "wll": 15,
+  "mbs": 60,
+  "productionStatus": "AC",
+  "connectorType": "OS",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "imagesCount": 5
+ },
+ "similarGear": []
+}

@@ -1,0 +1,18 @@
+{
+ "gearDetail": {
+  "_id": 3015,
+  "name": "Tree Protector",
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "GEN",
+  "slug": "tree_protector",
+  "creatorId": "10154430595665625",
+  "creationDate": 1500055956912,
+  "imagesCount": 0
+ },
+ "similarGear": []
+}

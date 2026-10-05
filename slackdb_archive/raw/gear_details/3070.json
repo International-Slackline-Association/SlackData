@@ -1,0 +1,49 @@
+{
+ "gearDetail": {
+  "_id": 3070,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "WLCK",
+  "slug": "rowan_1031mm",
+  "creatorId": "10154430595665625",
+  "creationDate": 1542152906573,
+  "name": "Rowan 1.0 (31mm)",
+  "material": [
+   "AL"
+  ],
+  "weight": 175,
+  "wll": 12,
+  "mbs": 55,
+  "anchorConnectionType": [
+   "MH",
+   "XLMH"
+  ],
+  "webbingConnectionType": [
+   "CP"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 29,
+   "max": 32
+  },
+  "productionStatus": "DC",
+  "manufacturerId": 62,
+  "pricing": {
+   "currency": "USD",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 25.5
+    }
+   ],
+   "hasAddOpts": true
+  },
+  "lastEditDate": 1587232904856,
+  "imagesCount": 3
+ },
+ "similarGear": []
+}

@@ -1,0 +1,25 @@
+{
+ "gearDetail": {
+  "_id": 3036,
+  "name": "8mm Oval Twist Quicklink",
+  "material": [
+   "SS"
+  ],
+  "weight": 106,
+  "wll": 6,
+  "mbs": 32,
+  "connectorType": "TQL",
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "CON",
+  "slug": "8mm_ovaltwistquicklink",
+  "creatorId": "10154430595665625",
+  "creationDate": 1506006243709,
+  "imagesCount": 0
+ },
+ "similarGear": []
+}

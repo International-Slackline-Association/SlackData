@@ -1,0 +1,50 @@
+{
+ "manufacturerDetail": {
+  "_id": 18,
+  "slug": "OneInchDreams",
+  "manufacturerStatus": "ACT",
+  "imageFilename": "one_inch_dreams.jpg",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "lastEditDate": 1600710235626,
+  "name": "One Inch Dreams",
+  "location": {
+   "countryCode": "DE",
+   "lat": 47.85712432861328,
+   "lng": 12.11810207366943,
+   "isExact": false
+  },
+  "isSlacklineOriented": true,
+  "url": "http://www.oneinchdreams.com",
+  "fbPage": "https://www.facebook.com/OneInchDreams",
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "10211802848940671",
+    "name": "Thomas Buckingham"
+   }
+  ],
+  "ratingsAverages": {
+   "overall": {
+    "externalValue": 10,
+    "externalCount": 23,
+    "value": 10,
+    "count": 23
+   }
+  },
+  "imagesCount": 0,
+  "gearStats": [
+   {
+    "itemTypeId": "WLCK",
+    "count": 1
+   },
+   {
+    "itemTypeId": "BRK",
+    "count": 1
+   }
+  ]
+ }
+}

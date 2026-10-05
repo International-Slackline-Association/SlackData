@@ -1,0 +1,39 @@
+{
+ "gearDetail": {
+  "_id": 3205,
+  "name": "Halo",
+  "material": [
+   "TI"
+  ],
+  "weight": 58,
+  "mbs": 88,
+  "innerDiameter": 72,
+  "dateIntroduced": 1620680400000,
+  "productionStatus": "AC",
+  "manufacturerId": 26,
+  "url": "https://raed-slacklines.com/halo-titanium-highline-leash-ring",
+  "isaApproved": true,
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 74.95
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "LRNG",
+  "slug": "halo",
+  "creatorId": "10154430595665625",
+  "creationDate": 1622026545025,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

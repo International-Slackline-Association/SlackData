@@ -1,0 +1,45 @@
+{
+ "gearDetail": {
+  "_id": 3049,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "WEB",
+  "slug": "wizard",
+  "creatorId": "10154430595665625",
+  "creationDate": 1519639674507,
+  "name": "Wizard",
+  "webbingType": "CS",
+  "material": [
+   "PL"
+  ],
+  "dWidth": 25,
+  "weight": 55,
+  "wll": 6.6,
+  "mbs": 33,
+  "dDepth": 2.5,
+  "elongation": {
+   "percent": 4.5,
+   "force": 10
+  },
+  "dateIntroduced": 1518991200000,
+  "productionStatus": "DC",
+  "manufacturerId": 2,
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 1.79
+    }
+   ]
+  },
+  "lastEditDate": 1536593294766,
+  "imagesCount": 0
+ },
+ "similarGear": []
+}

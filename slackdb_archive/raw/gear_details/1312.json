@@ -1,0 +1,71 @@
+{
+ "gearDetail": {
+  "_id": 1312,
+  "name": "D4",
+  "slug": "D4",
+  "manufacturerId": 47,
+  "material": [
+   "AL"
+  ],
+  "itemTypeId": "BRK",
+  "weight": 655,
+  "wll": 2.4,
+  "productionStatus": "AC",
+  "url": "http://www.iscwales.com/Blog/NEW-D4-WorkRescue-Descender-an-evolutionary-development-in-the-world-of-descenders/",
+  "breakingMethod": "CAM",
+  "compatibleRopeDiameter": {
+   "min": 10.5,
+   "max": 11.5
+  },
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "imagesCount": 0
+ },
+ "similarGear": [
+  {
+   "_id": 1310,
+   "name": "Sparrow 200",
+   "slug": "Sparrow200",
+   "manufacturerId": 36,
+   "itemTypeId": "BRK",
+   "manufacturer": {
+    "name": "Climbing Technology (CT)",
+    "url": "http://www.climbingtechnology.com",
+    "countryTxt": "Italy",
+    "countryCode": "IT"
+   }
+  },
+  {
+   "_id": 1302,
+   "name": "I’D S",
+   "slug": "IDS",
+   "manufacturerId": 31,
+   "itemTypeId": "BRK",
+   "manufacturer": {
+    "name": "Petzl",
+    "url": "http://www.petzl.com/en?l=INT",
+    "countryTxt": "France",
+    "countryCode": "FR"
+   }
+  },
+  {
+   "_id": 1303,
+   "name": "I’D L",
+   "slug": "IDL",
+   "manufacturerId": 31,
+   "itemTypeId": "BRK",
+   "manufacturer": {
+    "name": "Petzl",
+    "url": "http://www.petzl.com/en?l=INT",
+    "countryTxt": "France",
+    "countryCode": "FR"
+   }
+  }
+ ]
+}

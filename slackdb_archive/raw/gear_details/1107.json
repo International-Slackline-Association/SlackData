@@ -1,0 +1,46 @@
+{
+ "gearDetail": {
+  "_id": 1107,
+  "slug": "HangOverS",
+  "itemTypeId": "SLD",
+  "psaCert": true,
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1587236375954,
+  "name": "HangOver-S",
+  "material": [
+   "AL",
+   "S"
+  ],
+  "weight": 157,
+  "wll": 4,
+  "mbs": 24,
+  "compatibleWebbingWidth": {
+   "min": 25,
+   "max": 26
+  },
+  "sliderType": "LCA",
+  "innerWidth": 27.8,
+  "productionStatus": "AC",
+  "manufacturerId": 6,
+  "url": "https://www.slacktivity.com/hangover-s",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 54.95
+    }
+   ]
+  },
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

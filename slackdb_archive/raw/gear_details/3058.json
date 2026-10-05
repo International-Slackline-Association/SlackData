@@ -1,0 +1,57 @@
+{
+ "gearDetail": {
+  "_id": 3058,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "10211802848940671",
+    "name": "Thomas Buckingham"
+   }
+  ],
+  "itemTypeId": "WLCK",
+  "slug": "rowan_10captivepinlight",
+  "creatorId": "10154430595665625",
+  "creationDate": 1538002693025,
+  "lastEditDate": 1603051955453,
+  "name": "Rowan 1.0 Captive Pin Light",
+  "material": [
+   "AL"
+  ],
+  "weight": 141,
+  "wll": 7,
+  "mbs": 35,
+  "anchorConnectionType": [
+   "MH"
+  ],
+  "webbingConnectionType": [
+   "CP"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 24,
+   "max": 26
+  },
+  "diverterDiameter": 30,
+  "usage": [
+   "RL",
+   "LTL"
+  ],
+  "dateIntroduced": 1533189600000,
+  "productionStatus": "DC",
+  "manufacturerId": 62,
+  "pricing": {
+   "currency": "USD",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 40
+    }
+   ]
+  },
+  "imagesCount": 0
+ },
+ "similarGear": []
+}

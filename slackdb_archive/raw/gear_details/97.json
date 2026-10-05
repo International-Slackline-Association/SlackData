@@ -1,0 +1,49 @@
+{
+ "gearDetail": {
+  "_id": 97,
+  "slug": "SpiderSilkMKII",
+  "itemTypeId": "WEB",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "1190879851271184",
+    "name": "Matthieu Chivas"
+   }
+  ],
+  "lastEditDate": 1623833278685,
+  "name": "Spider Silk MKII",
+  "webbingType": "FL",
+  "material": [
+   "VC"
+  ],
+  "dWidth": 25,
+  "weight": 48,
+  "wll": 13.4,
+  "mbs": 67,
+  "dDepth": 2.5,
+  "elongation": {
+   "percent": 1.22,
+   "force": 10
+  },
+  "productionStatus": "DC",
+  "manufacturerId": 3,
+  "url": "http://www.balancecommunity.com/spider-silk-mkii",
+  "pricing": {
+   "currency": "USD",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 9.68
+    }
+   ]
+  },
+  "imagesCount": 0
+ },
+ "similarGear": []
+}

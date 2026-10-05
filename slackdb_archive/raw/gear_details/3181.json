@@ -1,0 +1,35 @@
+{
+ "gearDetail": {
+  "_id": 3181,
+  "name": "Level Two Kit",
+  "webbingLength": 30,
+  "webbingWidth": 50,
+  "tensioningType": "RAT2",
+  "includesTreePro": true,
+  "dateIntroduced": 1620111600000,
+  "productionStatus": "AC",
+  "url": "https://www.riggingventures.com/product-page/rv-trickline-kit",
+  "pricing": {
+   "currency": "USD",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "EX",
+     "price": 185
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "10226447140071894",
+    "name": "Eric Hake"
+   }
+  ],
+  "itemTypeId": "TLK",
+  "slug": "level_twokit",
+  "creatorId": "10226447140071894",
+  "creationDate": 1621891342589,
+  "imagesCount": 0
+ },
+ "similarGear": []
+}

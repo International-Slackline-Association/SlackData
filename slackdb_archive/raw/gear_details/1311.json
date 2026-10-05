@@ -1,0 +1,59 @@
+{
+ "gearDetail": {
+  "_id": 1311,
+  "name": "D2",
+  "slug": "D2",
+  "manufacturerId": 47,
+  "material": [
+   "AL"
+  ],
+  "itemTypeId": "BRK",
+  "weight": 292,
+  "wll": 1.4,
+  "mbs": 13.5,
+  "productionStatus": "AC",
+  "url": "http://www.iscwales.com/Blog/D2-Escape-Descender/",
+  "breakingMethod": "CAM",
+  "compatibleRopeDiameter": {
+   "min": 7,
+   "max": 8
+  },
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "imagesCount": 0
+ },
+ "similarGear": [
+  {
+   "_id": 1319,
+   "slug": "AdvanceTechHXProgressCapturePulley",
+   "itemTypeId": "BRK",
+   "name": "Advance Tech HX Progress Capture Pulley",
+   "manufacturerId": 34,
+   "manufacturer": {
+    "name": "SMC",
+    "url": "http://smcgear.com",
+    "countryTxt": "United States",
+    "countryCode": "US"
+   }
+  },
+  {
+   "_id": 1307,
+   "name": "Pro Traxion",
+   "slug": "ProTraxion",
+   "manufacturerId": 31,
+   "itemTypeId": "BRK",
+   "manufacturer": {
+    "name": "Petzl",
+    "url": "http://www.petzl.com/en?l=INT",
+    "countryTxt": "France",
+    "countryCode": "FR"
+   }
+  }
+ ]
+}

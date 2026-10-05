@@ -1,0 +1,221 @@
+{
+ "gearDetail": {
+  "_id": 515,
+  "slug": "Lynx40SH",
+  "itemTypeId": "WLCK",
+  "fieldsRemarks": {
+   "mbs": "Larger than"
+  },
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "10155361109487970",
+    "name": "Ilia Oshmiansky"
+   },
+   {
+    "id": "10154768518631235",
+    "name": "Gat Haneman"
+   },
+   {
+    "id": "656760621184025",
+    "name": "Eli Szendro Brown"
+   },
+   {
+    "id": "1965817623686037",
+    "name": "Radwin Bodnic"
+   },
+   {
+    "id": "157046135120641",
+    "name": "Benoit Crera"
+   }
+  ],
+  "lastEditDate": 1536593393121,
+  "reviews": [
+   {
+    "creatorId": "10155361109487970",
+    "pros": [
+     "Easy to pre tension",
+     "Light",
+     "Nice pin lock"
+    ],
+    "cons": [
+     "Can't rig without a shackle (like alpine weblock for example)"
+    ],
+    "txt": "Overall very happy with this one",
+    "rating": {
+     "lst": {
+      "VFM": 10,
+      "QU": 10,
+      "VER": 8,
+      "EOU": 10,
+      "PRT": 10
+     },
+     "overall": 10
+    },
+    "creationDate": 1499723466303,
+    "creatorName": "Ilia Oshmiansky"
+   },
+   {
+    "creatorId": "10154768518631235",
+    "pros": [
+     "Very comfortable to use",
+     "Very light"
+    ],
+    "txt": "Great weblock",
+    "rating": {
+     "lst": {
+      "VFM": 10,
+      "QU": 10,
+      "VER": 8,
+      "EOU": 10,
+      "PRT": 10
+     },
+     "overall": 10
+    },
+    "creationDate": 1499727066303,
+    "creatorName": "Gat Haneman"
+   },
+   {
+    "creatorId": "656760621184025",
+    "text": "Great weblock :) I have 2 and love them",
+    "rating": {
+     "lst": {
+      "VER": 8,
+      "QU": 10,
+      "VFM": 10,
+      "EOU": 10,
+      "PRT": 10
+     },
+     "overall": 10
+    },
+    "pros": [
+     "Light",
+     "No slippage"
+    ],
+    "cons": [
+     "Not suitable for soft shackles",
+     "Can&#x27;t rig without a shackle (like alpine weblock for example)"
+    ],
+    "creationDate": 1500152897260,
+    "creatorName": "Eli Szendro Brown"
+   },
+   {
+    "creatorId": "1965817623686037",
+    "text": "One of my favourite piece of gear.\nIt sucks at pretensionning but won&#x27;t slip too much on highlines.",
+    "rating": {
+     "lst": {
+      "VFM": 10,
+      "QU": 10,
+      "VER": 8,
+      "EOU": 8,
+      "PRT": 6
+     },
+     "overall": 8
+    },
+    "pros": [
+     "Light and compact.",
+     "Finish",
+     "Quality"
+    ],
+    "cons": [
+     "Pretension"
+    ],
+    "creationDate": 1501754564705,
+    "creatorName": "Radwin Bodnic"
+   },
+   {
+    "creatorId": "157046135120641",
+    "text": "Bien mais cher",
+    "rating": {
+     "lst": {
+      "VFM": 4,
+      "QU": 10,
+      "EOU": 6,
+      "PRT": 10,
+      "VER": 8
+     },
+     "overall": 8
+    },
+    "pros": [],
+    "cons": [],
+    "creationDate": 1522738750464,
+    "creatorName": "Benoit Crera"
+   }
+  ],
+  "comments": [],
+  "name": "Lynx 4.0 SH",
+  "material": [
+   "AL"
+  ],
+  "weight": 196,
+  "wll": 12,
+  "mbs": 75,
+  "anchorConnectionType": [
+   "MH"
+  ],
+  "webbingConnectionType": [
+   "QP"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 24,
+   "max": 26
+  },
+  "diverterDiameter": 36,
+  "usage": [
+   "SL",
+   "HL",
+   "LL",
+   "RL",
+   "LTL"
+  ],
+  "productionStatus": "DC",
+  "manufacturerId": 2,
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 80
+    }
+   ]
+  },
+  "ratingsAverages": {
+   "overall": {
+    "nativeCount": 5,
+    "nativeValue": 9,
+    "value": 9,
+    "count": 5
+   },
+   "lst": {
+    "VFM": {
+     "count": 5,
+     "value": 9
+    },
+    "QU": {
+     "count": 5,
+     "value": 10
+    },
+    "VER": {
+     "count": 5,
+     "value": 8
+    },
+    "EOU": {
+     "count": 5,
+     "value": 9
+    },
+    "PRT": {
+     "count": 5,
+     "value": 9
+    }
+   }
+  },
+  "imagesCount": 3
+ },
+ "similarGear": []
+}

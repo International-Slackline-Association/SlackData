@@ -1,0 +1,28 @@
+{
+ "gearDetail": {
+  "_id": 3104,
+  "name": "X-Tuble 16mm",
+  "webbingType": "TB",
+  "material": [
+   "NY"
+  ],
+  "dWidth": 16,
+  "weight": 34,
+  "mbs": 15,
+  "productionStatus": "AC",
+  "manufacturerId": 32,
+  "url": "https://www.edelrid.de/en/sports/tubular-webbings/x-tube-16mm.html",
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "WEB",
+  "slug": "x-tuble_16mm",
+  "creatorId": "10154430595665625",
+  "creationDate": 1587038288028,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

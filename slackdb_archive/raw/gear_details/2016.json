@@ -1,0 +1,26 @@
+{
+ "gearDetail": {
+  "_id": 2016,
+  "slug": "8mmQuicklinkDelta",
+  "itemTypeId": "CON",
+  "productionStatus": "AC",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "name": "8mm Delta Quicklink",
+  "material": [
+   "S"
+  ],
+  "wll": 5.5,
+  "mbs": 27,
+  "connectorType": "DQL",
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1506007252672,
+  "imagesCount": 2
+ },
+ "similarGear": []
+}

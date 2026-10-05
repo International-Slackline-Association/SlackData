@@ -1,0 +1,51 @@
+{
+ "gearDetail": {
+  "_id": 3099,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "1190879851271184",
+    "name": "Matthieu Chivas"
+   }
+  ],
+  "itemTypeId": "WGP",
+  "slug": "linegrip_g5",
+  "creatorId": "10154430595665625",
+  "creationDate": 1586938363420,
+  "lastEditDate": 1622496048029,
+  "name": "LineGrip G5",
+  "material": [
+   "AL"
+  ],
+  "weight": 418,
+  "wll": 15,
+  "cst": 25,
+  "mbs": 45,
+  "connectionType": [
+   "MH"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 24,
+   "max": 26
+  },
+  "dateIntroduced": 1512079200000,
+  "productionStatus": "AC",
+  "manufacturerId": 5,
+  "url": "https://www.linegrip.com/shop/linegrip-g5/",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 214
+    }
+   ]
+  },
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

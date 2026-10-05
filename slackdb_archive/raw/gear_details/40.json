@@ -1,0 +1,71 @@
+{
+ "gearDetail": {
+  "_id": 40,
+  "slug": "DarkBlue",
+  "itemTypeId": "WEB",
+  "minLength": 25,
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1587244814674,
+  "name": "Dark Blue",
+  "webbingType": "FL",
+  "material": [
+   "PL"
+  ],
+  "dWidth": 25,
+  "weight": 62,
+  "wll": 15,
+  "mbs": 28,
+  "elongation": {
+   "percent": 4.7,
+   "force": 10
+  },
+  "productionStatus": "DC",
+  "manufacturerId": 12,
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 25,
+     "qt": "EX",
+     "price": 1.96
+    }
+   ]
+  },
+  "imagesCount": 1
+ },
+ "similarGear": [
+  {
+   "_id": 3075,
+   "itemTypeId": "WEB",
+   "slug": "spice",
+   "name": "Spice",
+   "manufacturerId": 4,
+   "manufacturer": {
+    "name": "Slack Mountain",
+    "url": "http://slack-mountain.com",
+    "countryTxt": "France",
+    "countryCode": "FR"
+   }
+  },
+  {
+   "_id": 28,
+   "slug": "Cobalt",
+   "itemTypeId": "WEB",
+   "name": "Cobalt",
+   "manufacturerId": 4,
+   "manufacturer": {
+    "name": "Slack Mountain",
+    "url": "http://slack-mountain.com",
+    "countryTxt": "France",
+    "countryCode": "FR"
+   }
+  }
+ ]
+}

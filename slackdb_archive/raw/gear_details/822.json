@@ -1,0 +1,40 @@
+{
+ "gearDetail": {
+  "_id": 822,
+  "slug": "ZEROGold",
+  "itemTypeId": "LRNG",
+  "flags": [
+   "ILR"
+  ],
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1542143149596,
+  "name": "ZERO Gold",
+  "material": [
+   "AL"
+  ],
+  "weight": 77,
+  "innerDiameter": 40,
+  "productionStatus": "AC",
+  "manufacturerId": 53,
+  "url": "http://zergeoutdoor.com/product/zero-gold-ultralight-ring/",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 75.05
+    }
+   ]
+  },
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

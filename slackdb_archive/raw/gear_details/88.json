@@ -1,0 +1,118 @@
+{
+ "gearDetail": {
+  "_id": 88,
+  "slug": "RedTUBE",
+  "itemTypeId": "WEB",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "656760621184025",
+    "name": "Eli Szendro Brown"
+   }
+  ],
+  "lastEditDate": 1602267143312,
+  "reviews": [
+   {
+    "creatorId": "656760621184025",
+    "text": "A bit expansive but worth every penny. Amazing bounce, super soft on the feet and the hands. This is one of my favorite webbings so far.. the only disadvantages are that it is a bit hard to rig as a longline due to its stretch and a little heavy in the backpack. comes with a very convenient sewn loop on one side, making rigging easier.",
+    "rating": {
+     "lst": {
+      "VFM": 10,
+      "QU": 10,
+      "VER": 8,
+      "EOU": 10,
+      "SFT": 10
+     },
+     "overall": 10
+    },
+    "pros": [],
+    "cons": [],
+    "creationDate": 1500148525663,
+    "creatorName": "Eli Szendro Brown"
+   }
+  ],
+  "name": "RedTUBE",
+  "webbingType": "TB",
+  "material": [
+   "NY"
+  ],
+  "dWidth": 25,
+  "weight": 76,
+  "mbs": 32,
+  "elongation": {
+   "percent": 18,
+   "force": 10
+  },
+  "productionStatus": "AC",
+  "manufacturerId": 6,
+  "url": "https://www.slacktivity.com/redtube-30m-200m",
+  "isaApproved": true,
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 30,
+     "price": 2.5,
+     "qt": "EX"
+    },
+    {
+     "q": 50,
+     "qt": "EX",
+     "price": 2.4
+    },
+    {
+     "q": 80,
+     "qt": "EX",
+     "price": 2.18
+    },
+    {
+     "q": 100,
+     "qt": "EX",
+     "price": 2.3
+    },
+    {
+     "q": 200,
+     "qt": "EX",
+     "price": 2.25
+    }
+   ]
+  },
+  "ratingsAverages": {
+   "overall": {
+    "nativeCount": 1,
+    "nativeValue": 10,
+    "value": 10,
+    "count": 1
+   },
+   "lst": {
+    "VFM": {
+     "count": 1,
+     "value": 10
+    },
+    "QU": {
+     "count": 1,
+     "value": 10
+    },
+    "VER": {
+     "count": 1,
+     "value": 8
+    },
+    "EOU": {
+     "count": 1,
+     "value": 10
+    },
+    "SFT": {
+     "count": 1,
+     "value": 10
+    }
+   }
+  },
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

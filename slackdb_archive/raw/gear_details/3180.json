@@ -1,0 +1,35 @@
+{
+ "gearDetail": {
+  "_id": 3180,
+  "name": "Level 1 Kit",
+  "webbingLength": 23,
+  "webbingWidth": 50,
+  "tensioningType": "RAT1",
+  "includesTreePro": true,
+  "dateIntroduced": 1620111600000,
+  "productionStatus": "AC",
+  "url": "https://www.riggingventures.com/product-page/level-1-trickline-kit",
+  "pricing": {
+   "currency": "USD",
+   "lst": [
+    {
+     "q": 1,
+     "price": 75,
+     "qt": "EX"
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "10226447140071894",
+    "name": "Eric Hake"
+   }
+  ],
+  "itemTypeId": "TLK",
+  "slug": "level_1kit",
+  "creatorId": "10226447140071894",
+  "creationDate": 1621890885306,
+  "imagesCount": 0
+ },
+ "similarGear": []
+}

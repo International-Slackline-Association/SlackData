@@ -1,0 +1,75 @@
+{
+ "gearDetail": {
+  "_id": 3123,
+  "name": "LSDTube",
+  "webbingType": "TB",
+  "material": [
+   "NY"
+  ],
+  "dWidth": 25.5,
+  "weight": 49.5,
+  "mbs": 25,
+  "elongation": {
+   "percent": 18,
+   "force": 10
+  },
+  "dateIntroduced": 1597006800000,
+  "productionStatus": "AC",
+  "manufacturerId": 6,
+  "url": "https://www.slacktivity.com/lsdtube",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 30,
+     "qt": "EX",
+     "price": 2.65
+    },
+    {
+     "q": 80,
+     "qt": "EX",
+     "price": 2.5
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "WEB",
+  "slug": "lsdtube",
+  "creatorId": "10154430595665625",
+  "creationDate": 1597237387717,
+  "imagesCount": 2
+ },
+ "similarGear": [
+  {
+   "_id": 3026,
+   "itemTypeId": "WEB",
+   "slug": "pinktube",
+   "name": "PinkTube",
+   "manufacturerId": 6,
+   "manufacturer": {
+    "name": "Slacktivity",
+    "url": "http://www.slacktivity.com",
+    "countryTxt": "Switzerland",
+    "countryCode": "CH"
+   }
+  },
+  {
+   "_id": 3074,
+   "itemTypeId": "WEB",
+   "slug": "firefox",
+   "name": "FIREFOX",
+   "manufacturerId": 4,
+   "manufacturer": {
+    "name": "Slack Mountain",
+    "url": "http://slack-mountain.com",
+    "countryTxt": "France",
+    "countryCode": "FR"
+   }
+  }
+ ]
+}

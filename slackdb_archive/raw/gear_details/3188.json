@@ -1,0 +1,35 @@
+{
+ "gearDetail": {
+  "_id": 3188,
+  "name": "EQB Yoga15 M",
+  "weight": 1600,
+  "webbingLength": 15,
+  "webbingWidth": 35,
+  "tensioningType": "RAT1",
+  "productionStatus": "AC",
+  "manufacturerId": 9,
+  "url": "https://www.slackshop.cz/en/for-beginners/93-eqb-yoga-15-m.html",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 56
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "eqb_yoga15m",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622015317566,
+  "imagesCount": 2
+ },
+ "similarGear": []
+}

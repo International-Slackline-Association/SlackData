@@ -1,0 +1,61 @@
+{
+ "manufacturerDetail": {
+  "_id": 21,
+  "slug": "SlacklineIndustries",
+  "manufacturerStatus": "ACT",
+  "imageFilename": "slackline_industries.jpg",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "lastEditDate": 1501621655074,
+  "name": "Slackline Industries",
+  "location": {
+   "countryCode": "US",
+   "address": "5277 Manhattan Circle, Suite 200, Bouder CO 80303",
+   "lat": 39.9850595,
+   "lng": -105.2294599,
+   "isExact": true
+  },
+  "yearEstablished": 2014,
+  "isActive": true,
+  "isSlacklineOriented": true,
+  "url": "http://www.slacklineindustries.com",
+  "fbPage": "https://www.facebook.com/SlacklineIndustries",
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "841055102350",
+    "name": "Frankie Najera"
+   }
+  ],
+  "ratingsAverages": {
+   "overall": {
+    "externalValue": 9,
+    "externalCount": 495,
+    "value": 9,
+    "count": 495
+   }
+  },
+  "imagesCount": 0,
+  "gearStats": [
+   {
+    "itemTypeId": "SKT",
+    "count": 2
+   },
+   {
+    "itemTypeId": "TRP",
+    "count": 2
+   },
+   {
+    "itemTypeId": "WEB",
+    "count": 3
+   },
+   {
+    "itemTypeId": "TLK",
+    "count": 1
+   }
+  ]
+ }
+}

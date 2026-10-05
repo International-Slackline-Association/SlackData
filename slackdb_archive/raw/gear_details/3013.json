@@ -1,0 +1,90 @@
+{
+ "gearDetail": {
+  "_id": 3013,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "10155267793869667",
+    "name": "Romain Schempf"
+   }
+  ],
+  "itemTypeId": "WEB",
+  "slug": "storm",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "lastEditDate": 1587250620586,
+  "name": "Storm",
+  "webbingType": "FL",
+  "material": [
+   "PL"
+  ],
+  "dWidth": 50,
+  "weight": 80,
+  "wll": 7.5,
+  "mbs": 30,
+  "dDepth": 1.7,
+  "elongation": {
+   "percent": 3.2,
+   "force": 10
+  },
+  "usage": [
+   "TL"
+  ],
+  "productionStatus": "DC",
+  "manufacturerId": 4,
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 15,
+     "qt": "EX",
+     "price": 2.2
+    },
+    {
+     "q": 20,
+     "qt": "EX",
+     "price": 2.2
+    },
+    {
+     "q": 25,
+     "qt": "EX",
+     "price": 2.2
+    },
+    {
+     "q": 30,
+     "qt": "EX",
+     "price": 2.2
+    },
+    {
+     "q": 40,
+     "qt": "EX",
+     "price": 2.2
+    },
+    {
+     "q": 50,
+     "qt": "EX",
+     "price": 2.2
+    }
+   ]
+  },
+  "imagesCount": 1
+ },
+ "similarGear": [
+  {
+   "_id": 3020,
+   "itemTypeId": "WEB",
+   "slug": "rubalise",
+   "name": "Rubalise",
+   "manufacturerId": 4,
+   "manufacturer": {
+    "name": "Slack Mountain",
+    "url": "http://slack-mountain.com",
+    "countryTxt": "France",
+    "countryCode": "FR"
+   }
+  }
+ ]
+}

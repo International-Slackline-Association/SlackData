@@ -1,0 +1,35 @@
+{
+ "gearDetail": {
+  "_id": 3167,
+  "name": "TreeProtection Set | V2",
+  "dWidth": 13,
+  "dLength": 240,
+  "dDepth": 3,
+  "weight": 680,
+  "productionStatus": "AC",
+  "manufacturerId": 6,
+  "url": "https://slacktivity.com/shop/treeprotection-set/",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 34.95
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "TRP",
+  "slug": "treeprotection_setv2",
+  "creatorId": "2824084041240796",
+  "creationDate": 1621858498619,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

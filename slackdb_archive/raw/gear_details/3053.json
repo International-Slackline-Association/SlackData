@@ -1,0 +1,44 @@
+{
+ "gearDetail": {
+  "_id": 3053,
+  "name": "Joker",
+  "webbingType": "FL",
+  "material": [
+   "NY",
+   "PL"
+  ],
+  "dWidth": 25.4,
+  "weight": 54,
+  "mbs": 27,
+  "elongation": {
+   "percent": 9,
+   "force": 10
+  },
+  "dateIntroduced": 1533934800000,
+  "productionStatus": "AC",
+  "manufacturerId": 7,
+  "url": "http://slack-inov.com/gb/webbing/110-joker-sold-by-meter",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 1.99
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "WEB",
+  "slug": "joker",
+  "creatorId": "10154430595665625",
+  "creationDate": 1534453902823,
+  "imagesCount": 2
+ },
+ "similarGear": []
+}

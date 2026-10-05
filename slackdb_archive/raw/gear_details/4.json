@@ -1,0 +1,45 @@
+{
+ "gearDetail": {
+  "_id": 4,
+  "slug": "Bounce",
+  "itemTypeId": "WEB",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1587251790401,
+  "name": "Bounce",
+  "webbingType": "FL",
+  "material": [
+   "NY"
+  ],
+  "dWidth": 19,
+  "weight": 38,
+  "wll": 5,
+  "mbs": 16,
+  "dDepth": 2,
+  "elongation": {
+   "percent": 17,
+   "force": 10
+  },
+  "productionStatus": "AC",
+  "manufacturerId": 9,
+  "url": "https://www.slackshop.cz/en/for-advanced/142-eqb-bounce.html",
+  "pricing": {
+   "currency": "CZK",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 25
+    }
+   ]
+  },
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

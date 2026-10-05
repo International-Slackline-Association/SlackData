@@ -1,0 +1,23 @@
+{
+ "_id": 484,
+ "gearId": 3131,
+ "takenDate": 1604354400000,
+ "imageScope": "ITM",
+ "imageSource": "OFF",
+ "imageSourceUrl": "https://www.slackshop.cz/en/polyester/195-eqb-candy.html",
+ "gearCondition": "NEW",
+ "ImageEnvType": "STD",
+ "imageType": "RG",
+ "contributors": [
+  {
+   "id": "10154430595665625",
+   "name": "Nir Avneyon"
+  }
+ ],
+ "creationDate": 1604514169514,
+ "creatorId": "10154430595665625",
+ "filename": "484.jpg",
+ "width": 346,
+ "height": 578,
+ "creatorName": "Nir Avneyon"
+}

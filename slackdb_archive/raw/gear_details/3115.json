@@ -1,0 +1,76 @@
+{
+ "gearDetail": {
+  "_id": 3115,
+  "name": "Rubber Band PUR",
+  "webbingType": "FL",
+  "material": [
+   "NY"
+  ],
+  "dWidth": 25,
+  "weight": 60,
+  "wll": 7,
+  "mbs": 30,
+  "dDepth": 3.35,
+  "elongation": {
+   "percent": 14,
+   "force": 10
+  },
+  "productionStatus": "AC",
+  "manufacturerId": 27,
+  "url": "https://slackhouseshop.pl/produkt/rubber-band-pur/",
+  "pricing": {
+   "currency": "PLN",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 4.47
+    },
+    {
+     "q": 70,
+     "qt": "EX",
+     "price": 4.41
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "WEB",
+  "slug": "rubber_bandpur",
+  "creatorId": "10154430595665625",
+  "creationDate": 1587289102461,
+  "imagesCount": 1
+ },
+ "similarGear": [
+  {
+   "_id": 83,
+   "slug": "RubberBandMKIII",
+   "itemTypeId": "WEB",
+   "name": "Rubber Band MKIII SOL",
+   "manufacturerId": 27,
+   "manufacturer": {
+    "name": "Slack house",
+    "url": "http://slackhouseshop.pl",
+    "countryTxt": "Poland",
+    "countryCode": "PL"
+   }
+  },
+  {
+   "_id": 82,
+   "slug": "RubberBandMKIIIBLU",
+   "itemTypeId": "WEB",
+   "name": "Rubber Band MKIII BLU",
+   "manufacturerId": 27,
+   "manufacturer": {
+    "name": "Slack house",
+    "url": "http://slackhouseshop.pl",
+    "countryTxt": "Poland",
+    "countryCode": "PL"
+   }
+  }
+ ]
+}

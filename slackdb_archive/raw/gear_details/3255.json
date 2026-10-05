@@ -1,0 +1,48 @@
+{
+ "gearDetail": {
+  "_id": 3255,
+  "name": "Alpine WebLock 6.1",
+  "material": [
+   "AL"
+  ],
+  "weight": 210,
+  "wll": 12,
+  "mbs": 84,
+  "anchorConnectionType": [
+   "XLMH"
+  ],
+  "webbingConnectionType": [
+   "QP"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 24,
+   "max": 26
+  },
+  "diverterDiameter": 38,
+  "productionStatus": "AC",
+  "manufacturerId": 3,
+  "url": "https://www.balancecommunity.com/collections/webbing-anchors/products/alpine-weblock-6-0",
+  "pricing": {
+   "currency": "USD",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 139
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "WLCK",
+  "slug": "alpine_weblock61",
+  "creatorId": "10154430595665625",
+  "creationDate": 1712951183230,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

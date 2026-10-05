@@ -1,0 +1,35 @@
+{
+ "gearDetail": {
+  "_id": 96,
+  "slug": "SpiderSilk78",
+  "itemTypeId": "WEB",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "name": "Spider Silk 7/8\"",
+  "webbingType": "FL",
+  "material": [
+   "VC"
+  ],
+  "dWidth": 22.2,
+  "weight": 44,
+  "wll": 10.2,
+  "mbs": 51.2,
+  "dDepth": 2.8,
+  "elongation": {
+   "percent": 1.6,
+   "force": 10,
+   "isEstimated": true
+  },
+  "productionStatus": "DC",
+  "manufacturerId": 3,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1499106605829,
+  "imagesCount": 0
+ },
+ "similarGear": []
+}

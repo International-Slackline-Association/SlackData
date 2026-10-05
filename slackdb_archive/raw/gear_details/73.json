@@ -1,0 +1,137 @@
+{
+ "gearDetail": {
+  "_id": 73,
+  "slug": "SigmaImpactLS",
+  "itemTypeId": "WEB",
+  "minLength": 15,
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "name": "Sigma Impact LS",
+  "webbingType": "FL",
+  "material": [
+   "PL"
+  ],
+  "dWidth": 25,
+  "weight": 64,
+  "mbs": 37,
+  "dDepth": 2.7,
+  "elongation": {
+   "percent": 4,
+   "force": 10
+  },
+  "productionStatus": "AC",
+  "manufacturerId": 30,
+  "url": "http://www.slackliner.de/Slackline-Band/Flachband/Sigma-Impact-lowstretch.html",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 0.9
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1499087443023,
+  "imagesCount": 1
+ },
+ "similarGear": [
+  {
+   "_id": 110,
+   "slug": "Zen",
+   "itemTypeId": "WEB",
+   "name": "Zen",
+   "manufacturerId": 46,
+   "manufacturer": {
+    "name": "Middle Way Slacklines",
+    "url": "http://www.middlewayslacklines.com",
+    "countryTxt": "Israel",
+    "countryCode": "IL"
+   }
+  },
+  {
+   "_id": 122,
+   "slug": "EDGE",
+   "itemTypeId": "WEB",
+   "name": "EDGE",
+   "manufacturerId": 24,
+   "manufacturer": {
+    "name": "Spider slacklines",
+    "url": "http://www.spider-slacklines.com",
+    "countryTxt": "Italy",
+    "countryCode": "IT"
+   }
+  },
+  {
+   "_id": 43,
+   "slug": "NeonLight",
+   "itemTypeId": "WEB",
+   "name": "Neon Light",
+   "manufacturerId": 12,
+   "manufacturer": {
+    "name": "Slack.fr",
+    "url": "http://slack.fr",
+    "countryTxt": "France",
+    "countryCode": "FR"
+   }
+  },
+  {
+   "_id": 102,
+   "slug": "Sugoi",
+   "itemTypeId": "WEB",
+   "name": "Sugoi",
+   "manufacturerId": 21,
+   "manufacturer": {
+    "name": "Slackline Industries",
+    "url": "http://www.slacklineindustries.com",
+    "countryTxt": "United States",
+    "countryCode": "US"
+   }
+  },
+  {
+   "_id": 134,
+   "slug": "Parsec",
+   "itemTypeId": "WEB",
+   "name": "Parsec",
+   "manufacturerId": 26,
+   "manufacturer": {
+    "name": "Raed Slacklines",
+    "url": "https://raed-slacklines.com",
+    "countryTxt": "Germany",
+    "countryCode": "DE"
+   }
+  },
+  {
+   "_id": 74,
+   "slug": "SigmaLG",
+   "itemTypeId": "WEB",
+   "name": "Sigma LG",
+   "manufacturerId": 30,
+   "manufacturer": {
+    "name": "Slackliner.de",
+    "url": "https://www.slackliner.de",
+    "countryTxt": "Germany",
+    "countryCode": "DE"
+   }
+  },
+  {
+   "_id": 3131,
+   "name": "Candy",
+   "manufacturerId": 9,
+   "itemTypeId": "WEB",
+   "slug": "candy",
+   "manufacturer": {
+    "name": "Equilibrium Slacklines (EQB)",
+    "url": "https://www.slackshop.cz/en/",
+    "countryTxt": "Czech Republic",
+    "countryCode": "CZ"
+   }
+  }
+ ]
+}

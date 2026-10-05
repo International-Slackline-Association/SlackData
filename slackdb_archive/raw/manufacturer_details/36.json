@@ -1,0 +1,47 @@
+{
+ "manufacturerDetail": {
+  "_id": 36,
+  "slug": "CT",
+  "manufacturerStatus": "ACT",
+  "imageFilename": "ct.jpg",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "name": "Climbing Technology (CT)",
+  "location": {
+   "countryCode": "IT",
+   "address": "Via Torchio, 22 - 24034 Cisano Bergamasco",
+   "lat": 45.73601531982422,
+   "lng": 9.460609436035156,
+   "isExact": true
+  },
+  "isActive": true,
+  "url": "http://www.climbingtechnology.com",
+  "fbPage": "https://www.facebook.com/ClimbingTechnologyItaly",
+  "lastEditDate": 1498718893204,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "ratingsAverages": {
+   "overall": {
+    "externalValue": 10,
+    "externalCount": 104,
+    "value": 10,
+    "count": 104
+   }
+  },
+  "imagesCount": 0,
+  "gearStats": [
+   {
+    "itemTypeId": "LRNG",
+    "count": 2
+   },
+   {
+    "itemTypeId": "BRK",
+    "count": 3
+   }
+  ]
+ }
+}

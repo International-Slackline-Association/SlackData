@@ -1,0 +1,46 @@
+{
+ "manufacturerDetail": {
+  "_id": 32,
+  "slug": "Edelrid",
+  "manufacturerStatus": "ACT",
+  "imageFilename": "edelrid.jpg",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "name": "Edelrid",
+  "location": {
+   "countryCode": "DE",
+   "lat": 47.69496917724609,
+   "lng": 10.04195690155029,
+   "isExact": false
+  },
+  "isActive": true,
+  "url": "http://www.edelrid.de/en",
+  "fbPage": "https://www.facebook.com/EDELRIDClimbing",
+  "lastEditDate": 1498722558168,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "ratingsAverages": {
+   "overall": {
+    "externalValue": 10,
+    "externalCount": 76,
+    "value": 10,
+    "count": 76
+   }
+  },
+  "imagesCount": 0,
+  "gearStats": [
+   {
+    "itemTypeId": "WEB",
+    "count": 3
+   },
+   {
+    "itemTypeId": "BRK",
+    "count": 1
+   }
+  ]
+ }
+}

@@ -1,0 +1,65 @@
+{
+ "gearDetail": {
+  "_id": 1313,
+  "slug": "Matik",
+  "itemTypeId": "BRK",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "name": "Matik",
+  "material": [
+   "AL",
+   "S"
+  ],
+  "weight": 267,
+  "wll": 5,
+  "mbs": 22,
+  "compatibleRopeDiameter": {
+   "min": 8.6,
+   "max": 10.2
+  },
+  "breakingMethod": "CAM",
+  "productionStatus": "AC",
+  "manufacturerId": 35,
+  "url": "http://www.camp-usa.com/products/rope-tools/matik/",
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "10155267793869667",
+    "name": "Romain Schempf"
+   }
+  ],
+  "lastEditDate": 1501840715630,
+  "imagesCount": 0
+ },
+ "similarGear": [
+  {
+   "_id": 1307,
+   "name": "Pro Traxion",
+   "slug": "ProTraxion",
+   "manufacturerId": 31,
+   "itemTypeId": "BRK",
+   "manufacturer": {
+    "name": "Petzl",
+    "url": "http://www.petzl.com/en?l=INT",
+    "countryTxt": "France",
+    "countryCode": "FR"
+   }
+  },
+  {
+   "_id": 1300,
+   "name": "GRIGRI",
+   "slug": "GRIGRI",
+   "manufacturerId": 31,
+   "itemTypeId": "BRK",
+   "manufacturer": {
+    "name": "Petzl",
+    "url": "http://www.petzl.com/en?l=INT",
+    "countryTxt": "France",
+    "countryCode": "FR"
+   }
+  }
+ ]
+}

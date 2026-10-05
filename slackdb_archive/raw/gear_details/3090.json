@@ -1,0 +1,76 @@
+{
+ "gearDetail": {
+  "_id": 3090,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "50154430595665000",
+    "name": "Tantea Nia Seltsam"
+   }
+  ],
+  "itemTypeId": "WEB",
+  "slug": "polar",
+  "creatorId": "10154430595665625",
+  "creationDate": 1582736938023,
+  "name": "Polar",
+  "webbingType": "CS",
+  "material": [
+   "PL"
+  ],
+  "dWidth": 25.4,
+  "weight": 56,
+  "mbs": 28,
+  "dDepth": 2.4,
+  "elongation": {
+   "percent": 8.5,
+   "force": 10
+  },
+  "dateIntroduced": 1582668000000,
+  "productionStatus": "DC",
+  "manufacturerId": 64,
+  "url": "https://aki-slacklines.de/en/detail/index/sArticle/162",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 1.89
+    }
+   ]
+  },
+  "lastEditDate": 1707691278611,
+  "imagesCount": 6
+ },
+ "similarGear": [
+  {
+   "_id": 3044,
+   "name": "French Line",
+   "manufacturerId": 4,
+   "itemTypeId": "WEB",
+   "slug": "french_line",
+   "manufacturer": {
+    "name": "Slack Mountain",
+    "url": "http://slack-mountain.com",
+    "countryTxt": "France",
+    "countryCode": "FR"
+   }
+  },
+  {
+   "_id": 3043,
+   "itemTypeId": "WEB",
+   "slug": "firefly",
+   "name": "Firefly (phosphorescent)",
+   "manufacturerId": 4,
+   "manufacturer": {
+    "name": "Slack Mountain",
+    "url": "http://slack-mountain.com",
+    "countryTxt": "France",
+    "countryCode": "FR"
+   }
+  }
+ ]
+}

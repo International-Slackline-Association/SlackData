@@ -1,0 +1,68 @@
+{
+ "gearDetail": {
+  "_id": 507,
+  "slug": "KatanaFX",
+  "itemTypeId": "WLCK",
+  "shopUrl": "http://www.slackshop.cz/en/lockers/179-eqb-katana.html",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1712937716279,
+  "name": "Katana FX",
+  "material": [
+   "SS"
+  ],
+  "weight": 415,
+  "wll": 16,
+  "mbs": 80,
+  "anchorConnectionType": [
+   "MH"
+  ],
+  "webbingConnectionType": [
+   "CP"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 34,
+   "max": 36
+  },
+  "diverterDiameter": 24,
+  "efficiency": 90,
+  "usage": [
+   "TL"
+  ],
+  "productionStatus": "AC",
+  "manufacturerId": 9,
+  "url": "https://www.slackshop.cz/en/weblocks/27-eqb-katana-fx.html",
+  "pricing": {
+   "currency": "CZK",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 1119
+    }
+   ]
+  },
+  "imagesCount": 1
+ },
+ "similarGear": [
+  {
+   "_id": 506,
+   "slug": "Katana",
+   "itemTypeId": "WLCK",
+   "name": "Katana",
+   "manufacturerId": 9,
+   "manufacturer": {
+    "name": "Equilibrium Slacklines (EQB)",
+    "url": "https://www.slackshop.cz/en/",
+    "countryTxt": "Czech Republic",
+    "countryCode": "CZ"
+   }
+  }
+ ]
+}

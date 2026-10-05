@@ -1,0 +1,26 @@
+{
+ "gearDetail": {
+  "_id": 1315,
+  "slug": "Softbrake",
+  "itemTypeId": "BRK",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "name": "Soft brake",
+  "material": [
+   "DY",
+   "KV"
+  ],
+  "breakingMethod": "CHK",
+  "productionStatus": "DC",
+  "manufacturerId": 49,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1587236348320,
+  "imagesCount": 0
+ },
+ "similarGear": []
+}

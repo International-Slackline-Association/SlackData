@@ -1,0 +1,43 @@
+{
+ "manufacturerDetail": {
+  "_id": 52,
+  "slug": "Kong",
+  "manufacturerStatus": "ACT",
+  "imageFilename": "kong.jpg",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "name": "Kong",
+  "location": {
+   "countryCode": "IT",
+   "address": "Via XXV Aprile, 4, 23804 Levata, Monte Marenzo LC",
+   "lat": 45.76240539550781,
+   "lng": 9.446121215820312,
+   "isExact": true
+  },
+  "isActive": true,
+  "url": "http://www.kong.it",
+  "fbPage": "https://www.facebook.com/kongitaly",
+  "lastEditDate": 1498722786480,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "ratingsAverages": {
+   "overall": {
+    "externalValue": 9,
+    "externalCount": 65,
+    "value": 9,
+    "count": 65
+   }
+  },
+  "imagesCount": 0,
+  "gearStats": [
+   {
+    "itemTypeId": "LRNG",
+    "count": 1
+   }
+  ]
+ }
+}

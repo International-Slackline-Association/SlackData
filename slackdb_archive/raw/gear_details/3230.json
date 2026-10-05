@@ -1,0 +1,33 @@
+{
+ "gearDetail": {
+  "_id": 3230,
+  "name": "10 m Fit n Slack Set",
+  "webbingLength": 10,
+  "webbingWidth": 30,
+  "productionStatus": "AC",
+  "manufacturerId": 25,
+  "url": "https://www.slack-shop.de/10m-fit-n-slack-set.html",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 200
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "10_mfitnslackset",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622032185620,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

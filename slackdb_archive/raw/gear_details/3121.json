@@ -1,0 +1,59 @@
+{
+ "gearDetail": {
+  "_id": 3121,
+  "name": "Ocean",
+  "webbingType": "FL",
+  "material": [
+   "NY"
+  ],
+  "dWidth": 25,
+  "weight": 53,
+  "wll": 6,
+  "mbs": 27,
+  "dDepth": 2.8,
+  "elongation": {
+   "percent": 12,
+   "force": 10
+  },
+  "dateIntroduced": 1590008400000,
+  "productionStatus": "AC",
+  "manufacturerId": 9,
+  "url": "https://www.slackshop.cz/en/webbing/176-eqb-ocean.html",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 1.74
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "WEB",
+  "slug": "ocean",
+  "creatorId": "10154430595665625",
+  "creationDate": 1590094498980,
+  "imagesCount": 2
+ },
+ "similarGear": [
+  {
+   "_id": 3088,
+   "itemTypeId": "WEB",
+   "slug": "green",
+   "name": "Green",
+   "manufacturerId": 3,
+   "manufacturer": {
+    "name": "Balance Community: Slackline Outfitters",
+    "url": "http://www.balancecommunity.com",
+    "countryTxt": "United States",
+    "countryCode": "US"
+   }
+  }
+ ]
+}

@@ -1,0 +1,39 @@
+{
+ "manufacturerDetail": {
+  "_id": 35,
+  "slug": "Camp",
+  "manufacturerStatus": "ACT",
+  "imageFilename": "camp.jpg",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "name": "Camp",
+  "location": {
+   "countryCode": "IT",
+   "address": "Via Roma, 23, Premana, 23834 Province of Lecco,",
+   "lat": 46.05486679077148,
+   "lng": 9.415282249450684,
+   "isExact": true
+  },
+  "isActive": true,
+  "url": "http://www.camp.it",
+  "fbPage": "https://www.facebook.com/camp1889",
+  "lastEditDate": 1498718797810,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "imagesCount": 0,
+  "gearStats": [
+   {
+    "itemTypeId": "LRNG",
+    "count": 1
+   },
+   {
+    "itemTypeId": "BRK",
+    "count": 1
+   }
+  ]
+ }
+}

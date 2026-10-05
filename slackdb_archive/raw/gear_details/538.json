@@ -1,0 +1,55 @@
+{
+ "gearDetail": {
+  "_id": 538,
+  "slug": "Slackibloc31",
+  "itemTypeId": "WLCK",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1542152216653,
+  "name": "Slackibloc 3.1",
+  "material": [
+   "HSS"
+  ],
+  "weight": 285,
+  "mbs": 60,
+  "anchorConnectionType": [
+   "MH"
+  ],
+  "webbingConnectionType": [
+   "RSP"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 24,
+   "max": 26
+  },
+  "diverterDiameter": 30,
+  "usage": [
+   "SL",
+   "HL",
+   "LL",
+   "RL",
+   "LTL"
+  ],
+  "productionStatus": "AC",
+  "manufacturerId": 7,
+  "url": "https://slack-inov.com/gb/gear/95-slackiblock-31",
+  "pricing": {
+   "lst": [
+    {
+     "price": 50,
+     "q": 1,
+     "qt": "AA"
+    }
+   ],
+   "currency": "EUR"
+  },
+  "imagesCount": 0
+ },
+ "similarGear": []
+}

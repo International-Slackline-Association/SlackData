@@ -1,0 +1,34 @@
+{
+ "gearDetail": {
+  "_id": 3242,
+  "name": "Guide 6 20 M",
+  "webbingLength": 20,
+  "webbingWidth": 35,
+  "tensioningType": "RAT1",
+  "productionStatus": "AC",
+  "manufacturerId": 55,
+  "url": "https://slackstar.de/fun-performance/2-baeume/komplettset-6-teilig/864/guide6?number=SL81775-20",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "price": 88,
+     "qt": "AA"
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "guide_620m",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622033183474,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

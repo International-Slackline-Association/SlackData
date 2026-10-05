@@ -1,0 +1,46 @@
+{
+ "gearDetail": {
+  "_id": 3105,
+  "name": "X-Tube 25mm",
+  "webbingType": "TB",
+  "material": [
+   "NY"
+  ],
+  "dWidth": 25,
+  "weight": 43,
+  "mbs": 20,
+  "elongation": {
+   "force": 8,
+   "percent": 15.5
+  },
+  "productionStatus": "AC",
+  "manufacturerId": 32,
+  "url": "https://www.edelrid.de/en/sports/tubular-webbings/x-tube-25mm.html",
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "WEB",
+  "slug": "x-tube_25mm",
+  "creatorId": "10154430595665625",
+  "creationDate": 1587038405812,
+  "imagesCount": 1
+ },
+ "similarGear": [
+  {
+   "_id": 76,
+   "slug": "SigmaXHeliX",
+   "itemTypeId": "WEB",
+   "name": "Sigma X (HeliX)",
+   "manufacturerId": 30,
+   "manufacturer": {
+    "name": "Slackliner.de",
+    "url": "https://www.slackliner.de",
+    "countryTxt": "Germany",
+    "countryCode": "DE"
+   }
+  }
+ ]
+}

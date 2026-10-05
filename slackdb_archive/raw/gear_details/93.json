@@ -1,0 +1,75 @@
+{
+ "gearDetail": {
+  "_id": 93,
+  "name": "Slack-Spec Tubelar",
+  "slug": "SlackSpecTubelar",
+  "manufacturerId": 3,
+  "material": [
+   "NY"
+  ],
+  "itemTypeId": "WEB",
+  "weight": 40,
+  "wll": 4,
+  "mbs": 20,
+  "dWidth": 25,
+  "productionStatus": "AC",
+  "url": "http://www.balancecommunity.com/1-slack-spec-tubular",
+  "webbingType": "TB",
+  "elongation": {},
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "pricing": {
+   "currency": "USD",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 1.38
+    },
+    {
+     "q": 15,
+     "qt": "EX",
+     "price": 1.5
+    },
+    {
+     "q": 30,
+     "qt": "EX",
+     "price": 1.5
+    },
+    {
+     "q": 50,
+     "qt": "EX",
+     "price": 1.48
+    },
+    {
+     "q": 60,
+     "qt": "EX",
+     "price": 1.48
+    },
+    {
+     "q": 75,
+     "qt": "EX",
+     "price": 1.48
+    },
+    {
+     "q": 100,
+     "qt": "EX",
+     "price": 1.46
+    },
+    {
+     "q": 120,
+     "qt": "EX",
+     "price": 1.47
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

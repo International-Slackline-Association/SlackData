@@ -1,0 +1,72 @@
+{
+ "gearDetail": {
+  "_id": 136,
+  "slug": "HalfMarathon",
+  "itemTypeId": "WEB",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "656760621184025",
+    "name": "Eli Szendro Brown"
+   }
+  ],
+  "lastEditDate": 1587244146794,
+  "name": "Half-Marathon",
+  "webbingType": "CS",
+  "material": [
+   "PL"
+  ],
+  "dWidth": 20,
+  "weight": 48.5,
+  "mbs": 28,
+  "elongation": {
+   "percent": 4.5,
+   "force": 10
+  },
+  "productionStatus": "AC",
+  "manufacturerId": 6,
+  "url": "https://www.slacktivity.com/halfmarathon-50m-500m",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 50,
+     "qt": "EX",
+     "price": 1.8
+    },
+    {
+     "q": 100,
+     "qt": "EX",
+     "price": 1.78
+    },
+    {
+     "q": 150,
+     "qt": "EX",
+     "price": 1.8
+    },
+    {
+     "q": 200,
+     "qt": "EX",
+     "price": 1.8
+    },
+    {
+     "q": 250,
+     "qt": "EX",
+     "price": 1.8
+    },
+    {
+     "q": 300,
+     "qt": "EX",
+     "price": 1.8
+    }
+   ]
+  },
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

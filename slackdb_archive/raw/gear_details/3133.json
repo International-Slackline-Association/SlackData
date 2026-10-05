@@ -1,0 +1,54 @@
+{
+ "gearDetail": {
+  "_id": 3133,
+  "contributors": [
+   {
+    "id": "10220734815258954",
+    "name": "Jakub Dostál"
+   },
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "WLCK",
+  "slug": "eqb_piratpp",
+  "creatorId": "10220734815258954",
+  "creationDate": 1617108705683,
+  "lastEditDate": 1712945489270,
+  "name": "Pirat PP",
+  "material": [
+   "SS"
+  ],
+  "weight": 265,
+  "wll": 10,
+  "mbs": 50,
+  "anchorConnectionType": [
+   "MH"
+  ],
+  "webbingConnectionType": [
+   "PP"
+  ],
+  "diverterDiameter": 26,
+  "usage": [
+   "SL",
+   "HL",
+   "LL"
+  ],
+  "productionStatus": "AC",
+  "manufacturerId": 9,
+  "url": "https://www.slackshop.cz/en/weblocks/155-369-eqb-pirat.html#/164-pin_version-pull_pin",
+  "pricing": {
+   "currency": "CZK",
+   "lst": [
+    {
+     "price": 1409,
+     "q": 1,
+     "qt": "EX"
+    }
+   ]
+  },
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

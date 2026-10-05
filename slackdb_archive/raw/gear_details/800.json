@@ -1,0 +1,61 @@
+{
+ "gearDetail": {
+  "_id": 800,
+  "slug": "KongAna",
+  "itemTypeId": "LRNG",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "1811540145542689",
+    "name": "Helmut Netzwerker"
+   }
+  ],
+  "lastEditDate": 1502197732704,
+  "name": "Ana",
+  "material": [
+   "AL"
+  ],
+  "weight": 60,
+  "mbs": 25,
+  "innerDiameter": 46,
+  "productionStatus": "AC",
+  "manufacturerId": 52,
+  "url": "http://www.kong.it/en/2-products/items/f17-anchorage/p160-ana",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 8.5
+    },
+    {
+     "q": 2,
+     "qt": "EX",
+     "price": 7.5
+    }
+   ]
+  },
+  "imagesCount": 1
+ },
+ "similarGear": [
+  {
+   "_id": 807,
+   "slug": "ForgedAluminiumRing",
+   "itemTypeId": "LRNG",
+   "name": "Arbo Ring L",
+   "manufacturerId": 36,
+   "manufacturer": {
+    "name": "Climbing Technology (CT)",
+    "url": "http://www.climbingtechnology.com",
+    "countryTxt": "Italy",
+    "countryCode": "IT"
+   }
+  }
+ ]
+}

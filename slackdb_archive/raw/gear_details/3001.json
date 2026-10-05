@@ -1,0 +1,18 @@
+{
+ "gearDetail": {
+  "_id": 3001,
+  "name": "Dynamic Rope",
+  "slug": "DynamicRope",
+  "itemTypeId": "GEN",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "imagesCount": 0
+ },
+ "similarGear": []
+}

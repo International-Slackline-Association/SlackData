@@ -1,0 +1,37 @@
+{
+ "manufacturerDetail": {
+  "_id": 40,
+  "slug": "SlacklineAnimals",
+  "manufacturerStatus": "ACT",
+  "imageFilename": "slackline_animals.jpg",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "lastEditDate": 1587249911821,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "name": "Slackline Animals",
+  "location": {
+   "countryCode": "CA",
+   "address": "1403-2050 Nelson Street.Vancouver BC",
+   "lat": 49.29177856445313,
+   "lng": -123.1429443359375,
+   "isExact": true
+  },
+  "isSlacklineOriented": true,
+  "fbPage": "https://www.facebook.com/slacklineanimals",
+  "ratingsAverages": {
+   "overall": {
+    "externalValue": 10,
+    "externalCount": 1,
+    "value": 10,
+    "count": 1
+   }
+  },
+  "imagesCount": 0,
+  "gearStats": null
+ }
+}

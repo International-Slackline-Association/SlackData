@@ -1,0 +1,52 @@
+{
+ "manufacturerDetail": {
+  "_id": 46,
+  "slug": "MiddleWaySlacklines",
+  "manufacturerStatus": "ACT",
+  "imageFilename": "middle_way_slackline.jpg",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "name": "Middle Way Slacklines",
+  "location": {
+   "countryCode": "IL",
+   "address": "Jerusalem, Israel",
+   "lat": 31.76968002319336,
+   "lng": 35.19475173950195,
+   "isExact": false
+  },
+  "isActive": true,
+  "isSlacklineOriented": true,
+  "url": "http://www.middlewayslacklines.com",
+  "fbPage": "https://www.facebook.com/MiddleWaySlacklines",
+  "lastEditDate": 1498723658770,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "ratingsAverages": {
+   "overall": {
+    "externalValue": 10,
+    "externalCount": 16,
+    "value": 10,
+    "count": 16
+   }
+  },
+  "imagesCount": 0,
+  "gearStats": [
+   {
+    "itemTypeId": "TLK",
+    "count": 1
+   },
+   {
+    "itemTypeId": "SKT",
+    "count": 2
+   },
+   {
+    "itemTypeId": "WEB",
+    "count": 3
+   }
+  ]
+ }
+}

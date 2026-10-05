@@ -1,0 +1,219 @@
+{
+ "gearDetail": {
+  "_id": 110,
+  "slug": "Zen",
+  "itemTypeId": "WEB",
+  "reviews": [
+   {
+    "creatorId": "10154768518631235",
+    "pros": [
+     "Comfortable and easy to walk",
+     "Very soft"
+    ],
+    "rating": {
+     "lst": {
+      "VFM": 8,
+      "QU": 10,
+      "VER": 6,
+      "EOU": 10,
+      "SFT": 10
+     },
+     "overall": 9
+    },
+    "creationDate": 1499723466303,
+    "creatorName": "Gat Haneman"
+   },
+   {
+    "creatorId": "656760621184025",
+    "rating": {
+     "lst": {
+      "SFT": 10,
+      "EOU": 10,
+      "VER": 8,
+      "QU": 10,
+      "VFM": 10
+     },
+     "overall": 10
+    },
+    "pros": [
+     "Very easy to tension",
+     "Soft",
+     "Packble"
+    ],
+    "cons": [
+     "Static at short - medium lengths."
+    ],
+    "creationDate": 1500236550687,
+    "creatorName": "Eli Szendro Brown"
+   }
+  ],
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "10154768518631235",
+    "name": "Gat Haneman"
+   },
+   {
+    "id": "656760621184025",
+    "name": "Eli Szendro Brown"
+   }
+  ],
+  "name": "Zen",
+  "webbingType": "FL",
+  "material": [
+   "PL"
+  ],
+  "dWidth": 25.4,
+  "weight": 62,
+  "mbs": 37,
+  "dDepth": 2.9,
+  "elongation": {
+   "percent": 4,
+   "force": 10
+  },
+  "dateIntroduced": 1454371200000,
+  "productionStatus": "AC",
+  "manufacturerId": 46,
+  "url": "http://www.middlewayslacklines.com/?gclid=CNuN-J2FrssCFS8z0wodUssKNQ#!product-page/q2heq/175dcc60-c3b2-604d-301a-41aa51e3fc68",
+  "pricing": {
+   "currency": "ILS",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 9
+    }
+   ]
+  },
+  "lastEditDate": 1499037136747,
+  "ratingsAverages": {
+   "overall": {
+    "nativeCount": 2,
+    "nativeValue": 9,
+    "value": 9,
+    "count": 2
+   },
+   "lst": {
+    "VFM": {
+     "count": 2,
+     "value": 9
+    },
+    "QU": {
+     "count": 2,
+     "value": 10
+    },
+    "VER": {
+     "count": 2,
+     "value": 7
+    },
+    "EOU": {
+     "count": 2,
+     "value": 10
+    },
+    "SFT": {
+     "count": 2,
+     "value": 10
+    }
+   }
+  },
+  "imagesCount": 6
+ },
+ "similarGear": [
+  {
+   "_id": 122,
+   "slug": "EDGE",
+   "itemTypeId": "WEB",
+   "name": "EDGE",
+   "manufacturerId": 24,
+   "manufacturer": {
+    "name": "Spider slacklines",
+    "url": "http://www.spider-slacklines.com",
+    "countryTxt": "Italy",
+    "countryCode": "IT"
+   }
+  },
+  {
+   "_id": 73,
+   "slug": "SigmaImpactLS",
+   "itemTypeId": "WEB",
+   "name": "Sigma Impact LS",
+   "manufacturerId": 30,
+   "manufacturer": {
+    "name": "Slackliner.de",
+    "url": "https://www.slackliner.de",
+    "countryTxt": "Germany",
+    "countryCode": "DE"
+   }
+  },
+  {
+   "_id": 43,
+   "slug": "NeonLight",
+   "itemTypeId": "WEB",
+   "name": "Neon Light",
+   "manufacturerId": 12,
+   "manufacturer": {
+    "name": "Slack.fr",
+    "url": "http://slack.fr",
+    "countryTxt": "France",
+    "countryCode": "FR"
+   }
+  },
+  {
+   "_id": 102,
+   "slug": "Sugoi",
+   "itemTypeId": "WEB",
+   "name": "Sugoi",
+   "manufacturerId": 21,
+   "manufacturer": {
+    "name": "Slackline Industries",
+    "url": "http://www.slacklineindustries.com",
+    "countryTxt": "United States",
+    "countryCode": "US"
+   }
+  },
+  {
+   "_id": 134,
+   "slug": "Parsec",
+   "itemTypeId": "WEB",
+   "name": "Parsec",
+   "manufacturerId": 26,
+   "manufacturer": {
+    "name": "Raed Slacklines",
+    "url": "https://raed-slacklines.com",
+    "countryTxt": "Germany",
+    "countryCode": "DE"
+   }
+  },
+  {
+   "_id": 74,
+   "slug": "SigmaLG",
+   "itemTypeId": "WEB",
+   "name": "Sigma LG",
+   "manufacturerId": 30,
+   "manufacturer": {
+    "name": "Slackliner.de",
+    "url": "https://www.slackliner.de",
+    "countryTxt": "Germany",
+    "countryCode": "DE"
+   }
+  },
+  {
+   "_id": 3131,
+   "name": "Candy",
+   "manufacturerId": 9,
+   "itemTypeId": "WEB",
+   "slug": "candy",
+   "manufacturer": {
+    "name": "Equilibrium Slacklines (EQB)",
+    "url": "https://www.slackshop.cz/en/",
+    "countryTxt": "Czech Republic",
+    "countryCode": "CZ"
+   }
+  }
+ ]
+}

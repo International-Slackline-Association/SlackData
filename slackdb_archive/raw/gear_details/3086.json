@@ -1,0 +1,74 @@
+{
+ "gearDetail": {
+  "_id": 3086,
+  "name": "Cumulus",
+  "webbingType": "FL",
+  "material": [
+   "NY"
+  ],
+  "dWidth": 25,
+  "weight": 66,
+  "mbs": 35,
+  "elongation": {
+   "force": 5,
+   "percent": 8
+  },
+  "usage": [
+   "HL",
+   "LTL"
+  ],
+  "dateIntroduced": 1563919200000,
+  "productionStatus": "AC",
+  "manufacturerId": 26,
+  "url": "https://raed-slacklines.com/cumulus-nylon-highline-webbing",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "price": 1.99,
+     "qt": "AA"
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "1530522003668811",
+    "name": "Kamil Dudek"
+   }
+  ],
+  "itemTypeId": "WEB",
+  "slug": "cumulus",
+  "creatorId": "1530522003668811",
+  "creationDate": 1565891732492,
+  "imagesCount": 1
+ },
+ "similarGear": [
+  {
+   "_id": 3110,
+   "name": "Abysses Bounce",
+   "manufacturerId": 7,
+   "itemTypeId": "WEB",
+   "slug": "abysses_bounce",
+   "manufacturer": {
+    "name": "Slack Inov",
+    "url": "http://slack-inov.com/gb",
+    "countryTxt": "France",
+    "countryCode": "FR"
+   }
+  },
+  {
+   "_id": 98,
+   "slug": "Type18MKII",
+   "itemTypeId": "WEB",
+   "name": "Type 18 MKII",
+   "manufacturerId": 3,
+   "manufacturer": {
+    "name": "Balance Community: Slackline Outfitters",
+    "url": "http://www.balancecommunity.com",
+    "countryTxt": "United States",
+    "countryCode": "US"
+   }
+  }
+ ]
+}

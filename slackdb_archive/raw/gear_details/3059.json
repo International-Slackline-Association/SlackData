@@ -1,0 +1,67 @@
+{
+ "gearDetail": {
+  "_id": 3059,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "10211802848940671",
+    "name": "Thomas Buckingham"
+   }
+  ],
+  "itemTypeId": "WLCK",
+  "slug": "rowan_10quickpin",
+  "creatorId": "10154430595665625",
+  "creationDate": 1538002833288,
+  "lastEditDate": 1603051933584,
+  "name": "Rowan 1.1",
+  "material": [
+   "AL"
+  ],
+  "weight": 187,
+  "wll": 12,
+  "mbs": 50,
+  "anchorConnectionType": [
+   "MH"
+  ],
+  "webbingConnectionType": [
+   "QP"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 24,
+   "max": 26
+  },
+  "diverterDiameter": 30,
+  "dateIntroduced": 1533189600000,
+  "productionStatus": "DC",
+  "manufacturerId": 62,
+  "pricing": {
+   "currency": "USD",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 43.49
+    }
+   ]
+  },
+  "imagesCount": 2
+ },
+ "similarGear": [
+  {
+   "_id": 3012,
+   "itemTypeId": "WLCK",
+   "slug": "slackibloc_4",
+   "name": "Slackibloc 4",
+   "manufacturerId": 7,
+   "manufacturer": {
+    "name": "Slack Inov",
+    "url": "http://slack-inov.com/gb",
+    "countryTxt": "France",
+    "countryCode": "FR"
+   }
+  }
+ ]
+}

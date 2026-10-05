@@ -1,0 +1,33 @@
+{
+ "gearDetail": {
+  "_id": 19,
+  "slug": "MaunaKea",
+  "itemTypeId": "WEB",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1503917289256,
+  "name": "Mauna Kea",
+  "webbingType": "TB",
+  "material": [
+   "PL"
+  ],
+  "dWidth": 26,
+  "weight": 116,
+  "wll": 14,
+  "mbs": 42,
+  "elongation": {
+   "percent": 4,
+   "force": 10
+  },
+  "productionStatus": "DC",
+  "manufacturerId": 8,
+  "imagesCount": 0
+ },
+ "similarGear": []
+}

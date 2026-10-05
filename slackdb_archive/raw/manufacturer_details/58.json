@@ -1,0 +1,31 @@
+{
+ "manufacturerDetail": {
+  "_id": 58,
+  "name": "CMC Rescue",
+  "location": {
+   "countryCode": "US",
+   "lat": 37.09024,
+   "lng": -95.712891
+  },
+  "isActive": true,
+  "url": "http://www.cmcrescue.com/",
+  "fbPage": "https://www.facebook.com/cmcrescue",
+  "contributors": [
+   {
+    "id": "1811540145542689",
+    "name": "Helmut Netzwerker"
+   }
+  ],
+  "creatorId": "1811540145542689",
+  "creationDate": 1502045274943,
+  "slug": "cmc_rescue",
+  "imageFilename": "cmc_rescue.jpg",
+  "imagesCount": 0,
+  "gearStats": [
+   {
+    "itemTypeId": "BRK",
+    "count": 1
+   }
+  ]
+ }
+}

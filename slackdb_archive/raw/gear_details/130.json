@@ -1,0 +1,78 @@
+{
+ "gearDetail": {
+  "_id": 130,
+  "slug": "SlackPro42kN",
+  "itemTypeId": "WEB",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "name": "SlackPro 42kN",
+  "webbingType": "FL",
+  "material": [
+   "PL"
+  ],
+  "dWidth": 25,
+  "weight": 72,
+  "mbs": 42,
+  "dDepth": 2.7,
+  "elongation": {
+   "percent": 3.5,
+   "force": 10
+  },
+  "productionStatus": "DC",
+  "manufacturerId": 5,
+  "url": "http://www.slackpro.de/en/products/2542slackline.shtml",
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "10211802848940671",
+    "name": "Thomas Buckingham"
+   }
+  ],
+  "lastEditDate": 1600770043675,
+  "imagesCount": 1
+ },
+ "similarGear": [
+  {
+   "_id": 26,
+   "slug": "FlammeII",
+   "itemTypeId": "WEB",
+   "name": "Flamme II",
+   "manufacturerId": 7,
+   "manufacturer": {
+    "name": "Slack Inov",
+    "url": "http://slack-inov.com/gb",
+    "countryTxt": "France",
+    "countryCode": "FR"
+   }
+  },
+  {
+   "_id": 74,
+   "slug": "SigmaLG",
+   "itemTypeId": "WEB",
+   "name": "Sigma LG",
+   "manufacturerId": 30,
+   "manufacturer": {
+    "name": "Slackliner.de",
+    "url": "https://www.slackliner.de",
+    "countryTxt": "Germany",
+    "countryCode": "DE"
+   }
+  },
+  {
+   "_id": 91,
+   "name": "Mantra MK4: Flight",
+   "slug": "MantraMK4Flight",
+   "manufacturerId": 3,
+   "itemTypeId": "WEB",
+   "manufacturer": {
+    "name": "Balance Community: Slackline Outfitters",
+    "url": "http://www.balancecommunity.com",
+    "countryTxt": "United States",
+    "countryCode": "US"
+   }
+  }
+ ]
+}

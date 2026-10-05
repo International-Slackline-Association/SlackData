@@ -1,0 +1,18 @@
+{
+ "gearDetail": {
+  "_id": 3030,
+  "name": "12mm Nut",
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "GEN",
+  "slug": "12mm_nut",
+  "creatorId": "10154430595665625",
+  "creationDate": 1505999381472,
+  "imagesCount": 2
+ },
+ "similarGear": []
+}

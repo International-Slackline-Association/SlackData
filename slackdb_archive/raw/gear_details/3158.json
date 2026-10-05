@@ -1,0 +1,35 @@
+{
+ "gearDetail": {
+  "_id": 3158,
+  "name": "Tree-Shirt  L TreePro",
+  "dWidth": 25,
+  "dLength": 250,
+  "weight": 360,
+  "hasSlingAttachment": true,
+  "productionStatus": "AC",
+  "manufacturerId": 27,
+  "url": "https://slackhouseshop.pl/en/produkt/treeprotection-tree-shirt-l/",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 10.34
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "TRP",
+  "slug": "tree-shirt_ltreepro",
+  "creatorId": "2824084041240796",
+  "creationDate": 1621849666849,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

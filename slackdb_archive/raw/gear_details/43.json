@@ -1,0 +1,230 @@
+{
+ "gearDetail": {
+  "_id": 43,
+  "slug": "NeonLight",
+  "itemTypeId": "WEB",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1587281004180,
+  "name": "Neon Light",
+  "webbingType": "FL",
+  "material": [
+   "PL"
+  ],
+  "dWidth": 25,
+  "weight": 62,
+  "mbs": 35,
+  "elongation": {
+   "percent": 4.5,
+   "force": 10
+  },
+  "productionStatus": "DC",
+  "manufacturerId": 12,
+  "pricing": {
+   "lst": [
+    {
+     "q": 1,
+     "price": 1.4,
+     "qt": "AA"
+    },
+    {
+     "q": 50,
+     "price": 1.34,
+     "qt": "AA"
+    },
+    {
+     "q": 100,
+     "price": 1.3,
+     "qt": "AA"
+    },
+    {
+     "q": 150,
+     "qt": "AA",
+     "price": 1.25
+    },
+    {
+     "q": 200,
+     "qt": "AA",
+     "price": 1.2
+    }
+   ],
+   "currency": "EUR"
+  },
+  "imagesCount": 0
+ },
+ "similarGear": [
+  {
+   "_id": 102,
+   "slug": "Sugoi",
+   "itemTypeId": "WEB",
+   "name": "Sugoi",
+   "manufacturerId": 21,
+   "manufacturer": {
+    "name": "Slackline Industries",
+    "url": "http://www.slacklineindustries.com",
+    "countryTxt": "United States",
+    "countryCode": "US"
+   }
+  },
+  {
+   "_id": 15,
+   "slug": "Elia",
+   "itemTypeId": "WEB",
+   "name": "Elia",
+   "manufacturerId": 8,
+   "manufacturer": {
+    "name": "Line Spirit",
+    "countryTxt": "France",
+    "countryCode": "FR"
+   }
+  },
+  {
+   "_id": 122,
+   "slug": "EDGE",
+   "itemTypeId": "WEB",
+   "name": "EDGE",
+   "manufacturerId": 24,
+   "manufacturer": {
+    "name": "Spider slacklines",
+    "url": "http://www.spider-slacklines.com",
+    "countryTxt": "Italy",
+    "countryCode": "IT"
+   }
+  },
+  {
+   "_id": 110,
+   "slug": "Zen",
+   "itemTypeId": "WEB",
+   "name": "Zen",
+   "manufacturerId": 46,
+   "manufacturer": {
+    "name": "Middle Way Slacklines",
+    "url": "http://www.middlewayslacklines.com",
+    "countryTxt": "Israel",
+    "countryCode": "IL"
+   }
+  },
+  {
+   "_id": 3076,
+   "name": "Orange",
+   "manufacturerId": 62,
+   "itemTypeId": "WEB",
+   "slug": "orange",
+   "manufacturer": {
+    "name": "Souz Slackline",
+    "url": "https://souzslackline.com",
+    "countryTxt": "Russian Federation",
+    "countryCode": "RU"
+   }
+  },
+  {
+   "_id": 73,
+   "slug": "SigmaImpactLS",
+   "itemTypeId": "WEB",
+   "name": "Sigma Impact LS",
+   "manufacturerId": 30,
+   "manufacturer": {
+    "name": "Slackliner.de",
+    "url": "https://www.slackliner.de",
+    "countryTxt": "Germany",
+    "countryCode": "DE"
+   }
+  },
+  {
+   "_id": 109,
+   "slug": "Chi",
+   "itemTypeId": "WEB",
+   "name": "Chi",
+   "manufacturerId": 46,
+   "manufacturer": {
+    "name": "Middle Way Slacklines",
+    "url": "http://www.middlewayslacklines.com",
+    "countryTxt": "Israel",
+    "countryCode": "IL"
+   }
+  },
+  {
+   "_id": 57,
+   "slug": "SkillshotLS",
+   "itemTypeId": "WEB",
+   "name": "Skillshot LS",
+   "manufacturerId": 13,
+   "manufacturer": {
+    "name": "Gambit",
+    "countryTxt": "Germany",
+    "countryCode": "DE"
+   }
+  },
+  {
+   "_id": 78,
+   "slug": "FLYLine",
+   "itemTypeId": "WEB",
+   "name": "FLY Line",
+   "manufacturerId": 24,
+   "manufacturer": {
+    "name": "Spider slacklines",
+    "url": "http://www.spider-slacklines.com",
+    "countryTxt": "Italy",
+    "countryCode": "IT"
+   }
+  },
+  {
+   "_id": 71,
+   "slug": "WhiteMagic",
+   "itemTypeId": "WEB",
+   "name": "White Magic",
+   "manufacturerId": 64,
+   "manufacturer": {
+    "name": "Aki Slacklines",
+    "url": "https://aki-slacklines.de",
+    "countryTxt": "Germany",
+    "countryCode": "DE"
+   }
+  },
+  {
+   "_id": 84,
+   "slug": "BlueMile",
+   "itemTypeId": "WEB",
+   "name": "Blue Mile",
+   "manufacturerId": 27,
+   "manufacturer": {
+    "name": "Slack house",
+    "url": "http://slackhouseshop.pl",
+    "countryTxt": "Poland",
+    "countryCode": "PL"
+   }
+  },
+  {
+   "_id": 131,
+   "slug": "SlackProNeonLight",
+   "itemTypeId": "WEB",
+   "name": "Neon Light",
+   "manufacturerId": 5,
+   "manufacturer": {
+    "name": "Slack Pro!",
+    "url": "http://www.slackpro.de",
+    "countryTxt": "Germany",
+    "countryCode": "DE"
+   }
+  },
+  {
+   "_id": 127,
+   "slug": "FFF",
+   "itemTypeId": "WEB",
+   "name": "#FFF",
+   "manufacturerId": 26,
+   "manufacturer": {
+    "name": "Raed Slacklines",
+    "url": "https://raed-slacklines.com",
+    "countryTxt": "Germany",
+    "countryCode": "DE"
+   }
+  }
+ ]
+}

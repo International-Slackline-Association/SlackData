@@ -1,0 +1,28 @@
+{
+ "gearDetail": {
+  "_id": 1,
+  "slug": "Ribera",
+  "itemTypeId": "WEB",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "name": "Ribera",
+  "webbingType": "FL",
+  "material": [
+   "PL"
+  ],
+  "dWidth": 26,
+  "weight": 80,
+  "mbs": 42,
+  "productionStatus": "DC",
+  "manufacturerId": 22,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1587241694496,
+  "imagesCount": 0
+ },
+ "similarGear": []
+}

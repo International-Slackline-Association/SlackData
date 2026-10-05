@@ -1,0 +1,34 @@
+{
+ "gearDetail": {
+  "_id": 3218,
+  "name": "EQB STEP 12 M",
+  "webbingLength": 25,
+  "webbingWidth": 35,
+  "tensioningType": "RAT1",
+  "productionStatus": "AC",
+  "manufacturerId": 9,
+  "url": "https://www.slackshop.cz/en/for-beginners/9-eqb-step-12-m.html",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 43
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "eqb_step12m",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622029901988,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

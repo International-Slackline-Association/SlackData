@@ -1,0 +1,52 @@
+{
+ "gearDetail": {
+  "_id": 806,
+  "slug": "BomberRing",
+  "itemTypeId": "LRNG",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1536593470371,
+  "name": "Bomber Ring",
+  "material": [
+   "SS"
+  ],
+  "weight": 250,
+  "mbs": 150,
+  "materialDiameter": 13,
+  "innerDiameter": 76,
+  "outerDiameter": 102,
+  "productionStatus": "DC",
+  "manufacturerId": 2,
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 10.5
+    }
+   ]
+  },
+  "imagesCount": 2
+ },
+ "similarGear": [
+  {
+   "_id": 809,
+   "slug": "SteelRing150kN",
+   "itemTypeId": "LRNG",
+   "name": "Steel Ring 150kN",
+   "manufacturerId": 29,
+   "manufacturer": {
+    "name": "Dakas",
+    "countryTxt": "France",
+    "countryCode": "FR"
+   }
+  }
+ ]
+}

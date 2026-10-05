@@ -1,0 +1,46 @@
+{
+ "gearDetail": {
+  "_id": 3253,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "WLCK",
+  "slug": "tilock_19mm",
+  "creatorId": "10154430595665625",
+  "creationDate": 1712949705502,
+  "name": "TiLock 19mm",
+  "material": [
+   "TI"
+  ],
+  "anchorConnectionType": [
+   "QP"
+  ],
+  "webbingConnectionType": [
+   "QP"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 24,
+   "max": 26
+  },
+  "productionStatus": "AC",
+  "manufacturerId": 26,
+  "url": "https://raed-slacklines.com/tilock",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 229.95
+    }
+   ],
+   "hasAddOpts": true
+  },
+  "lastEditDate": 1712949791178,
+  "imagesCount": 0
+ },
+ "similarGear": []
+}

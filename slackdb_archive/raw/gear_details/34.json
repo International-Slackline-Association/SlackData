@@ -1,0 +1,101 @@
+{
+ "gearDetail": {
+  "_id": 34,
+  "slug": "Goku2",
+  "itemTypeId": "WEB",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "10155267793869667",
+    "name": "Romain Schempf"
+   }
+  ],
+  "lastEditDate": 1501840169317,
+  "name": "Goku 2",
+  "webbingType": "FL",
+  "material": [
+   "PL",
+   "DY"
+  ],
+  "dWidth": 25,
+  "weight": 41,
+  "wll": 11,
+  "mbs": 40,
+  "dDepth": 2,
+  "elongation": {
+   "percent": 3.8,
+   "force": 10
+  },
+  "usage": [
+   "SL",
+   "HL",
+   "LL",
+   "RL"
+  ],
+  "productionStatus": "AC",
+  "manufacturerId": 4,
+  "url": "http://slack-mountain.com/en/webbing-slackline/136-goku2.html",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 15,
+     "qt": "EX",
+     "price": 2.66
+    },
+    {
+     "q": 30,
+     "qt": "EX",
+     "price": 2.5
+    },
+    {
+     "q": 50,
+     "qt": "EX",
+     "price": 2.4
+    },
+    {
+     "q": 100,
+     "qt": "EX",
+     "price": 2.4
+    },
+    {
+     "q": 150,
+     "qt": "EX",
+     "price": 2.4
+    },
+    {
+     "q": 200,
+     "qt": "EX",
+     "price": 2.4
+    },
+    {
+     "q": 240,
+     "qt": "EX",
+     "price": 2.04
+    },
+    {
+     "q": 250,
+     "qt": "EX",
+     "price": 2
+    },
+    {
+     "q": 300,
+     "qt": "EX",
+     "price": 2.4
+    },
+    {
+     "q": 400,
+     "qt": "EX",
+     "price": 2.4
+    }
+   ]
+  },
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

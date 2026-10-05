@@ -1,0 +1,90 @@
+{
+ "gearDetail": {
+  "_id": 98,
+  "slug": "Type18MKII",
+  "itemTypeId": "WEB",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "name": "Type 18 MKII",
+  "webbingType": "FL",
+  "material": [
+   "NY"
+  ],
+  "dWidth": 25,
+  "weight": 62,
+  "wll": 7.1,
+  "mbs": 35.6,
+  "dDepth": 3,
+  "elongation": {
+   "percent": 14.8,
+   "force": 10
+  },
+  "productionStatus": "AC",
+  "manufacturerId": 3,
+  "url": "http://www.balancecommunity.com/type-18-mkii",
+  "pricing": {
+   "currency": "USD",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 2.36
+    },
+    {
+     "q": 15,
+     "qt": "EX",
+     "price": 2.4
+    },
+    {
+     "q": 30,
+     "qt": "EX",
+     "price": 2.4
+    },
+    {
+     "q": 50,
+     "qt": "EX",
+     "price": 2.38
+    },
+    {
+     "q": 60,
+     "qt": "EX",
+     "price": 2.38
+    },
+    {
+     "q": 75,
+     "qt": "EX",
+     "price": 2.37
+    },
+    {
+     "q": 100,
+     "qt": "EX",
+     "price": 2.35
+    },
+    {
+     "q": 120,
+     "qt": "EX",
+     "price": 2.37
+    },
+    {
+     "q": 150,
+     "qt": "EX",
+     "price": 2.35
+    },
+    {
+     "q": 200,
+     "qt": "EX",
+     "price": 2.27
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1499000334250,
+  "imagesCount": 4
+ },
+ "similarGear": []
+}

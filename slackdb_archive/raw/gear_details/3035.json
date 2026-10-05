@@ -1,0 +1,25 @@
+{
+ "gearDetail": {
+  "_id": 3035,
+  "name": "10mm Oval Twist Quicklink",
+  "material": [
+   "SS"
+  ],
+  "weight": 152,
+  "wll": 10,
+  "mbs": 50,
+  "connectorType": "TQL",
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "CON",
+  "slug": "10mm_ovaltwistquicklink",
+  "creatorId": "10154430595665625",
+  "creationDate": 1506006200443,
+  "imagesCount": 2
+ },
+ "similarGear": []
+}

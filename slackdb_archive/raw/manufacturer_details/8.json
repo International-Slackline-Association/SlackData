@@ -1,0 +1,51 @@
+{
+ "manufacturerDetail": {
+  "_id": 8,
+  "slug": "LineSpirit",
+  "manufacturerStatus": "ACT",
+  "imageFilename": "line_spirit.jpg",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "lastEditDate": 1587290153546,
+  "reviews": [],
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "name": "Line Spirit",
+  "location": {
+   "countryCode": "FR",
+   "address": "122 avenue Général Frère 69008 LYON",
+   "lat": 45.72918701171875,
+   "lng": 4.879298210144043,
+   "isExact": true
+  },
+  "isSlacklineOriented": true,
+  "fbPage": "https://www.facebook.com/LineSpirit",
+  "ratingsAverages": {
+   "overall": {
+    "externalValue": 10,
+    "externalCount": 1,
+    "value": 10,
+    "count": 1
+   }
+  },
+  "imagesCount": 0,
+  "gearStats": [
+   {
+    "itemTypeId": "LRNG",
+    "count": 1
+   },
+   {
+    "itemTypeId": "WEB",
+    "count": 10
+   },
+   {
+    "itemTypeId": "WLCK",
+    "count": 1
+   }
+  ]
+ }
+}

@@ -1,0 +1,35 @@
+{
+ "gearDetail": {
+  "_id": 3141,
+  "name": "25m kit",
+  "webbingLength": 25,
+  "webbingWidth": 50,
+  "tensioningType": "RAT1",
+  "includesTreePro": true,
+  "productionStatus": "AC",
+  "manufacturerId": 46,
+  "url": "https://middlewayslacklines.com/25m-slackline-kit/",
+  "pricing": {
+   "currency": "ILS",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 269
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "25m_kit",
+  "creatorId": "10154430595665625",
+  "creationDate": 1617137361406,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

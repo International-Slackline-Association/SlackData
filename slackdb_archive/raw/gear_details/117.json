@@ -1,0 +1,64 @@
+{
+ "gearDetail": {
+  "_id": 117,
+  "slug": "Mamba",
+  "itemTypeId": "WEB",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1587245024345,
+  "name": "Mamba",
+  "webbingType": "FL",
+  "material": [
+   "NY"
+  ],
+  "dWidth": 25,
+  "weight": 65,
+  "wll": 10,
+  "mbs": 22,
+  "dDepth": 3.2,
+  "elongation": {
+   "percent": 13.5,
+   "force": 10
+  },
+  "productionStatus": "DC",
+  "manufacturerId": 24,
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 1.59
+    },
+    {
+     "q": 80,
+     "qt": "AA",
+     "price": 1.55
+    },
+    {
+     "q": 120,
+     "qt": "AA",
+     "price": 1.52
+    },
+    {
+     "q": 200,
+     "qt": "AA",
+     "price": 1.44
+    },
+    {
+     "q": 350,
+     "qt": "AA",
+     "price": 1.33
+    }
+   ]
+  },
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

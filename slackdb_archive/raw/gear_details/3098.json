@@ -1,0 +1,47 @@
+{
+ "gearDetail": {
+  "_id": 3098,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "WGP",
+  "slug": "linegrip_nano_1",
+  "creatorId": "10154430595665625",
+  "creationDate": 1586859537546,
+  "name": "LineGrip nano",
+  "material": [
+   "DY",
+   "NY"
+  ],
+  "weight": 100,
+  "wll": 4,
+  "cst": 8,
+  "mbs": 10,
+  "connectionType": [
+   "DSLR"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 24,
+   "max": 26
+  },
+  "productionStatus": "AC",
+  "manufacturerId": 5,
+  "url": "https://www.linegrip.com/shop/linegrip-nano",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 83.95
+    }
+   ]
+  },
+  "lastEditDate": 1586938207585,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

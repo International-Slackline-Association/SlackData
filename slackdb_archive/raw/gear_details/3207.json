@@ -1,0 +1,35 @@
+{
+ "gearDetail": {
+  "_id": 3207,
+  "name": "Experience Slackline | 30m Set",
+  "webbingLength": 30,
+  "webbingWidth": 37,
+  "tensioningType": "RAT2",
+  "includesTreePro": true,
+  "productionStatus": "AC",
+  "manufacturerId": 6,
+  "url": "https://slacktivity.ch/shop/experience-slackline-30m/",
+  "pricing": {
+   "currency": "CHF",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 200
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "experience_slackline30mset",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622027013441,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

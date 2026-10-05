@@ -1,0 +1,42 @@
+{
+ "manufacturerDetail": {
+  "_id": 13,
+  "slug": "Gambit",
+  "manufacturerStatus": "ACT",
+  "imageFilename": "gambit.jpg",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "lastEditDate": 1587331290129,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "name": "Gambit",
+  "location": {
+   "countryCode": "DE",
+   "address": "Am Traugraben 8 97342 Marktsteft",
+   "lat": 49.68946075439453,
+   "lng": 10.14486694335938,
+   "isExact": true
+  },
+  "isSlacklineOriented": true,
+  "fbPage": "https://www.facebook.com/GAMBITSlacklines",
+  "ratingsAverages": {
+   "overall": {
+    "externalValue": 10,
+    "externalCount": 10,
+    "value": 10,
+    "count": 10
+   }
+  },
+  "imagesCount": 0,
+  "gearStats": [
+   {
+    "itemTypeId": "WEB",
+    "count": 2
+   }
+  ]
+ }
+}

@@ -1,0 +1,25 @@
+{
+ "gearDetail": {
+  "_id": 3056,
+  "name": "Snatch",
+  "material": [
+   "DY",
+   "AL"
+  ],
+  "weight": 175,
+  "wll": 10,
+  "mbs": 25,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "GEN",
+  "slug": "snatch",
+  "creatorId": "10154430595665625",
+  "creationDate": 1538001411109,
+  "imagesCount": 0
+ },
+ "similarGear": []
+}

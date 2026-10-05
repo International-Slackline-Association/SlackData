@@ -1,0 +1,35 @@
+{
+ "gearDetail": {
+  "_id": 3244,
+  "name": "10 m Kids n Slack Set",
+  "webbingLength": 10,
+  "webbingWidth": 45,
+  "tensioningType": "RAT1",
+  "includesTreePro": true,
+  "productionStatus": "AC",
+  "manufacturerId": 25,
+  "url": "https://www.slack-shop.de/10m-kids-n-slack-set.html",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 100
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "10_mkidsnslackset",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622037129475,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

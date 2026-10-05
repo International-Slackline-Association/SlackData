@@ -1,0 +1,41 @@
+{
+ "_id": 798,
+ "takenDate": 1627074000000,
+ "imageScope": "STP",
+ "imageSource": "OFF",
+ "imageSourceUrl": "https://raed-slacklines.com/rodeo-weblock",
+ "ImageEnvType": "US",
+ "imageType": "RG",
+ "gearTags": [
+  {
+   "x": 544,
+   "y": 318,
+   "width": 338,
+   "height": 478,
+   "gearId": 3248
+  },
+  {
+   "x": 173,
+   "y": 531,
+   "width": 631,
+   "height": 468,
+   "gearId": 3062
+  }
+ ],
+ "gearId": [
+  3248,
+  3062
+ ],
+ "contributors": [
+  {
+   "id": "10154430595665625",
+   "name": "Nir Avneyon"
+  }
+ ],
+ "creationDate": 1627151360763,
+ "creatorId": "10154430595665625",
+ "filename": "798.jpg",
+ "width": 1500,
+ "height": 1000,
+ "creatorName": "Nir Avneyon"
+}

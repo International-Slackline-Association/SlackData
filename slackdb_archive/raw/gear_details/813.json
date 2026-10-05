@@ -1,0 +1,40 @@
+{
+ "gearDetail": {
+  "_id": 813,
+  "slug": "RING77",
+  "itemTypeId": "LRNG",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1542143059145,
+  "name": "RING77",
+  "material": [
+   "SS"
+  ],
+  "weight": 130,
+  "mbs": 40,
+  "materialDiameter": 10,
+  "innerDiameter": 57,
+  "outerDiameter": 77,
+  "productionStatus": "AC",
+  "manufacturerId": 27,
+  "url": "http://slackhouseshop.pl/produkt/ring77/",
+  "pricing": {
+   "currency": "PLN",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 28
+    }
+   ]
+  },
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

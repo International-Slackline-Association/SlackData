@@ -1,0 +1,73 @@
+{
+ "gearDetail": {
+  "_id": 1322,
+  "slug": "GRIGRI",
+  "itemTypeId": "BRK",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "name": "GRIGRI+",
+  "material": [
+   "NY",
+   "AL",
+   "SS"
+  ],
+  "weight": 200,
+  "compatibleRopeDiameter": {
+   "min": 8.5,
+   "max": 11
+  },
+  "breakingMethod": "CAM",
+  "productionStatus": "PO",
+  "manufacturerId": 31,
+  "url": "https://www.petzl.com/GB/en/Sport/New/GRIGRI-PLUS#.WIpMWVOF6Uk",
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1498983758555,
+  "imagesCount": 0
+ },
+ "similarGear": [
+  {
+   "_id": 1301,
+   "name": "GRIGRI 2",
+   "slug": "GRIGRI2",
+   "manufacturerId": 31,
+   "itemTypeId": "BRK",
+   "manufacturer": {
+    "name": "Petzl",
+    "url": "http://www.petzl.com/en?l=INT",
+    "countryTxt": "France",
+    "countryCode": "FR"
+   }
+  },
+  {
+   "_id": 1306,
+   "name": "Mini Traxion",
+   "slug": "MiniTraxion",
+   "manufacturerId": 31,
+   "itemTypeId": "BRK",
+   "manufacturer": {
+    "name": "Petzl",
+    "url": "http://www.petzl.com/en?l=INT",
+    "countryTxt": "France",
+    "countryCode": "FR"
+   }
+  },
+  {
+   "_id": 1318,
+   "name": "Cinch",
+   "slug": "Cinch",
+   "manufacturerId": 48,
+   "itemTypeId": "BRK",
+   "manufacturer": {
+    "name": "Trango",
+    "url": "http://www.trango.com",
+    "countryTxt": "United States",
+    "countryCode": "US"
+   }
+  }
+ ]
+}

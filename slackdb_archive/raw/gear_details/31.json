@@ -1,0 +1,64 @@
+{
+ "gearDetail": {
+  "_id": 31,
+  "slug": "FlaxNY",
+  "itemTypeId": "WEB",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "10155267793869667",
+    "name": "Romain Schempf"
+   }
+  ],
+  "lastEditDate": 1587251711590,
+  "name": "Flax NY",
+  "webbingType": "FL",
+  "material": [
+   "NY"
+  ],
+  "dWidth": 25,
+  "weight": 38,
+  "wll": 6,
+  "mbs": 20,
+  "dDepth": 1.7,
+  "elongation": {
+   "percent": 13,
+   "force": 10
+  },
+  "usage": [
+   "SL",
+   "RL",
+   "LTL",
+   "SR"
+  ],
+  "productionStatus": "DC",
+  "manufacturerId": 4,
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 15,
+     "qt": "EX",
+     "price": 1.5
+    },
+    {
+     "q": 25,
+     "qt": "EX",
+     "price": 1.5
+    },
+    {
+     "q": 30,
+     "qt": "EX",
+     "price": 1.5
+    }
+   ]
+  },
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

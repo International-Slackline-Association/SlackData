@@ -1,0 +1,42 @@
+{
+ "gearDetail": {
+  "_id": 809,
+  "slug": "SteelRing150kN",
+  "itemTypeId": "LRNG",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "name": "Steel Ring 150kN",
+  "material": [
+   "SS"
+  ],
+  "weight": 250,
+  "mbs": 150,
+  "materialDiameter": 12,
+  "innerDiameter": 76,
+  "outerDiameter": 100,
+  "productionStatus": "DC",
+  "manufacturerId": 29,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1587249202047,
+  "imagesCount": 0
+ },
+ "similarGear": [
+  {
+   "_id": 806,
+   "slug": "BomberRing",
+   "itemTypeId": "LRNG",
+   "name": "Bomber Ring",
+   "manufacturerId": 2,
+   "manufacturer": {
+    "name": "Landcruising",
+    "countryTxt": "Germany",
+    "countryCode": "DE"
+   }
+  }
+ ]
+}

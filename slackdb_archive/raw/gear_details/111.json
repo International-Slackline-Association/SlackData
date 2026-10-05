@@ -1,0 +1,59 @@
+{
+ "gearDetail": {
+  "_id": 111,
+  "slug": "Flat",
+  "itemTypeId": "WEB",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1542301594104,
+  "name": "Flat",
+  "webbingType": "FL",
+  "material": [
+   "PL"
+  ],
+  "dWidth": 25,
+  "weight": 50,
+  "wll": 7,
+  "mbs": 21,
+  "dDepth": 1.8,
+  "elongation": {
+   "percent": 7,
+   "force": 10
+  },
+  "productionStatus": "AC",
+  "manufacturerId": 43,
+  "url": "https://www.slacklineshop.co.nz/product/25mm-flat-slackline-webbing/",
+  "pricing": {
+   "currency": "NZD",
+   "lst": [
+    {
+     "q": 50,
+     "qt": "EX",
+     "price": 1.98
+    }
+   ]
+  },
+  "imagesCount": 1
+ },
+ "similarGear": [
+  {
+   "_id": 3116,
+   "name": "Levitation",
+   "manufacturerId": 27,
+   "itemTypeId": "WEB",
+   "slug": "levitation",
+   "manufacturer": {
+    "name": "Slack house",
+    "url": "http://slackhouseshop.pl",
+    "countryTxt": "Poland",
+    "countryCode": "PL"
+   }
+  }
+ ]
+}

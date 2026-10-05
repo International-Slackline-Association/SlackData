@@ -1,0 +1,48 @@
+{
+ "gearDetail": {
+  "_id": 3024,
+  "contributors": [
+   {
+    "id": "1811540145542689",
+    "name": "Helmut Netzwerker"
+   },
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "WLCK",
+  "slug": "lynx_1",
+  "creatorId": "1811540145542689",
+  "creationDate": 1502089334324,
+  "name": "Lynx 1",
+  "material": [
+   "SS"
+  ],
+  "weight": 240,
+  "wll": 10,
+  "anchorConnectionType": [
+   "FVP",
+   "SL"
+  ],
+  "webbingConnectionType": [
+   "QP",
+   "RP"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 24,
+   "max": 26
+  },
+  "diverterDiameter": 14,
+  "usage": [
+   "SL",
+   "LL"
+  ],
+  "dateIntroduced": 1262300400000,
+  "productionStatus": "DC",
+  "manufacturerId": 2,
+  "lastEditDate": 1536593371398,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

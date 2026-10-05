@@ -1,0 +1,63 @@
+{
+ "gearDetail": {
+  "_id": 3027,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "10221503044069069",
+    "name": "Alexander Balaganov"
+   }
+  ],
+  "itemTypeId": "WEB",
+  "slug": "helium",
+  "creatorId": "10154430595665625",
+  "creationDate": 1504424042053,
+  "lastEditDate": 1631090325273,
+  "name": "Helium",
+  "webbingType": "FL",
+  "material": [
+   "VC",
+   "PL"
+  ],
+  "dWidth": 25,
+  "weight": 38,
+  "mbs": 24,
+  "elongation": {
+   "percent": 3.75,
+   "force": 10
+  },
+  "usage": [
+   "RL",
+   "LTL"
+  ],
+  "productionStatus": "AC",
+  "manufacturerId": 26,
+  "url": "https://raed-slacklines.com/helium-lightweight-polyester-slackline-webbing",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 0.69
+    },
+    {
+     "qt": "AA",
+     "q": 150,
+     "price": 0.66
+    },
+    {
+     "qt": "AA",
+     "q": 300,
+     "price": 0.63
+    }
+   ],
+   "hasAddOpts": true
+  },
+  "imagesCount": 5
+ },
+ "similarGear": []
+}

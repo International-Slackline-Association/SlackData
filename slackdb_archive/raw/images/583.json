@@ -1,0 +1,27 @@
+{
+ "_id": 583,
+ "description": "Starter Ratchet from Bera Adventure",
+ "imageScope": "STP",
+ "infoTags": [
+  {
+   "x": 575,
+   "y": 62,
+   "width": 225,
+   "height": 504,
+   "text": "Starter Ratchet"
+  }
+ ],
+ "gearId": [],
+ "contributors": [
+  {
+   "id": "4078196375580695",
+   "name": "Francisco Vanzuita"
+  }
+ ],
+ "creationDate": 1620301663083,
+ "creatorId": "4078196375580695",
+ "filename": "583.jpg",
+ "width": 800,
+ "height": 800,
+ "creatorName": "Francisco Vanzuita"
+}

@@ -1,0 +1,24 @@
+{
+ "gearDetail": {
+  "_id": 2020,
+  "name": "Lock Ring",
+  "slug": "LockRing",
+  "material": [
+   "S"
+  ],
+  "itemTypeId": "CON",
+  "mbs": 15,
+  "productionStatus": "AC",
+  "connectorType": "LR",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "imagesCount": 0
+ },
+ "similarGear": []
+}

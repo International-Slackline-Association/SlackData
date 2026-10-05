@@ -1,0 +1,72 @@
+{
+ "gearDetail": {
+  "_id": 3134,
+  "contributors": [
+   {
+    "id": "10220734815258954",
+    "name": "Jakub Dostál"
+   },
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "WLCK",
+  "slug": "pirar_qp",
+  "creatorId": "10220734815258954",
+  "creationDate": 1617109666231,
+  "lastEditDate": 1712945573623,
+  "name": "Pirat QP",
+  "material": [
+   "SS"
+  ],
+  "weight": 265,
+  "wll": 10,
+  "mbs": 50,
+  "anchorConnectionType": [
+   "MH"
+  ],
+  "webbingConnectionType": [
+   "QP"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 24,
+   "max": 26
+  },
+  "diverterDiameter": 24,
+  "usage": [
+   "SL",
+   "HL",
+   "LL"
+  ],
+  "productionStatus": "AC",
+  "manufacturerId": 9,
+  "url": "https://www.slackshop.cz/en/weblocks/155-368-eqb-pirat.html#/165-pin_version-quick_pin",
+  "pricing": {
+   "currency": "CZK",
+   "lst": [
+    {
+     "price": 1879,
+     "q": 1,
+     "qt": "EX"
+    }
+   ]
+  },
+  "imagesCount": 1
+ },
+ "similarGear": [
+  {
+   "_id": 523,
+   "name": "Chili",
+   "slug": "Chili",
+   "manufacturerId": 24,
+   "itemTypeId": "WLCK",
+   "manufacturer": {
+    "name": "Spider slacklines",
+    "url": "http://www.spider-slacklines.com",
+    "countryTxt": "Italy",
+    "countryCode": "IT"
+   }
+  }
+ ]
+}

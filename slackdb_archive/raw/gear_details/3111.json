@@ -1,0 +1,69 @@
+{
+ "gearDetail": {
+  "_id": 3111,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "LRNG",
+  "slug": "highlinering",
+  "creatorId": "10154430595665625",
+  "creationDate": 1587239170376,
+  "name": "HighlineRing",
+  "material": [
+   "AL"
+  ],
+  "weight": 51,
+  "wll": 6,
+  "mbs": 39,
+  "materialDiameter": 10,
+  "innerDiameter": 60,
+  "outerDiameter": 80,
+  "productionStatus": "AC",
+  "manufacturerId": 6,
+  "url": "https://www.slacktivity.com/highlinering",
+  "isaApproved": true,
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 16.95
+    }
+   ]
+  },
+  "lastEditDate": 1602267713212,
+  "imagesCount": 0
+ },
+ "similarGear": [
+  {
+   "_id": 3067,
+   "name": "60mm Aluminium Ring",
+   "manufacturerId": 24,
+   "itemTypeId": "LRNG",
+   "slug": "60mm_aluminiumring",
+   "manufacturer": {
+    "name": "Spider slacklines",
+    "url": "http://www.spider-slacklines.com",
+    "countryTxt": "Italy",
+    "countryCode": "IT"
+   }
+  },
+  {
+   "_id": 821,
+   "slug": "LeashRing",
+   "itemTypeId": "LRNG",
+   "name": "Leash Ring",
+   "manufacturerId": 9,
+   "manufacturer": {
+    "name": "Equilibrium Slacklines (EQB)",
+    "url": "https://www.slackshop.cz/en/",
+    "countryTxt": "Czech Republic",
+    "countryCode": "CZ"
+   }
+  }
+ ]
+}

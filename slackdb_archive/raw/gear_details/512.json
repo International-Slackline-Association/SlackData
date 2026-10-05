@@ -1,0 +1,50 @@
+{
+ "gearDetail": {
+  "_id": 512,
+  "slug": "Direct",
+  "itemTypeId": "WLCK",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1542150011104,
+  "name": "Direct",
+  "material": [
+   "SS"
+  ],
+  "weight": 245,
+  "wll": 12,
+  "mbs": 40,
+  "anchorConnectionType": [
+   "MH"
+  ],
+  "webbingConnectionType": [
+   "SR"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 24,
+   "max": 26
+  },
+  "usage": [
+   "SR"
+  ],
+  "productionStatus": "DC",
+  "manufacturerId": 9,
+  "pricing": {
+   "currency": "CZK",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 850
+    }
+   ]
+  },
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

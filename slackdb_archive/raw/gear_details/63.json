@@ -1,0 +1,114 @@
+{
+ "gearDetail": {
+  "_id": 63,
+  "slug": "Core2LS",
+  "itemTypeId": "WEB",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "lastEditDate": 1536593154148,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "1811540145542689",
+    "name": "Helmut Netzwerker"
+   },
+   {
+    "id": "10155267793869667",
+    "name": "Romain Schempf"
+   },
+   {
+    "id": "157046135120641",
+    "name": "Benoit Crera"
+   }
+  ],
+  "reviews": [
+   {
+    "creatorId": "157046135120641",
+    "text": "Bonne sangle",
+    "rating": {
+     "lst": {
+      "VFM": 6,
+      "QU": 10,
+      "SFT": 10,
+      "EOU": 10,
+      "VER": 8
+     },
+     "overall": 9
+    },
+    "pros": [],
+    "cons": [],
+    "creationDate": 1522738504586,
+    "creatorName": "Benoit Crera"
+   }
+  ],
+  "name": "Core 2 LS",
+  "webbingType": "CS",
+  "material": [
+   "PL"
+  ],
+  "dWidth": 25,
+  "weight": 69.9,
+  "mbs": 44,
+  "dDepth": 3.2,
+  "elongation": {
+   "percent": 2,
+   "force": 10
+  },
+  "usage": [
+   "SL",
+   "HL",
+   "LL",
+   "LTL"
+  ],
+  "productionStatus": "DC",
+  "manufacturerId": 2,
+  "ratingsAverages": {
+   "overall": {
+    "nativeCount": 1,
+    "nativeValue": 9,
+    "value": 9,
+    "count": 1
+   },
+   "lst": {
+    "VFM": {
+     "count": 1,
+     "value": 6
+    },
+    "QU": {
+     "count": 1,
+     "value": 10
+    },
+    "SFT": {
+     "count": 1,
+     "value": 10
+    },
+    "EOU": {
+     "count": 1,
+     "value": 10
+    },
+    "VER": {
+     "count": 1,
+     "value": 8
+    }
+   }
+  },
+  "imagesCount": 5
+ },
+ "similarGear": [
+  {
+   "_id": 61,
+   "slug": "Core1",
+   "itemTypeId": "WEB",
+   "name": "Core 1",
+   "manufacturerId": 2,
+   "manufacturer": {
+    "name": "Landcruising",
+    "countryTxt": "Germany",
+    "countryCode": "DE"
+   }
+  }
+ ]
+}

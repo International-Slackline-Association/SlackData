@@ -1,0 +1,55 @@
+{
+ "gearDetail": {
+  "_id": 517,
+  "slug": "Puma20",
+  "itemTypeId": "WLCK",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1536593409871,
+  "name": "Puma 2.0",
+  "material": [
+   "HSS"
+  ],
+  "weight": 350,
+  "wll": 12,
+  "mbs": 70,
+  "anchorConnectionType": [
+   "MH"
+  ],
+  "webbingConnectionType": [
+   "QP"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 31,
+   "max": 33
+  },
+  "diverterDiameter": 28,
+  "usage": [
+   "SL",
+   "HL",
+   "LL",
+   "RL",
+   "LTL"
+  ],
+  "productionStatus": "DC",
+  "manufacturerId": 2,
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 80
+    }
+   ]
+  },
+  "imagesCount": 0
+ },
+ "similarGear": []
+}

@@ -1,0 +1,70 @@
+{
+ "gearDetail": {
+  "_id": 3019,
+  "contributors": [
+   {
+    "id": "10155267793869667",
+    "name": "Romain Schempf"
+   },
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "WLCK",
+  "slug": "ginkgo_quickpin",
+  "creatorId": "10155267793869667",
+  "creationDate": 1501838616907,
+  "lastEditDate": 1712937476552,
+  "name": "Ginkgo Quickpin",
+  "material": [
+   "SS"
+  ],
+  "weight": 783,
+  "wll": 20,
+  "mbs": 110,
+  "anchorConnectionType": [
+   "MH"
+  ],
+  "webbingConnectionType": [
+   "QP"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 40,
+   "max": 51
+  },
+  "diverterDiameter": 35,
+  "efficiency": 95,
+  "usage": [
+   "TL"
+  ],
+  "productionStatus": "DC",
+  "manufacturerId": 4,
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 2,
+     "price": 69,
+     "qt": "AA"
+    }
+   ]
+  },
+  "imagesCount": 1
+ },
+ "similarGear": [
+  {
+   "_id": 528,
+   "slug": "Gingko2",
+   "itemTypeId": "WLCK",
+   "name": "Ginkgo",
+   "manufacturerId": 4,
+   "manufacturer": {
+    "name": "Slack Mountain",
+    "url": "http://slack-mountain.com",
+    "countryTxt": "France",
+    "countryCode": "FR"
+   }
+  }
+ ]
+}

@@ -1,0 +1,41 @@
+{
+ "gearDetail": {
+  "_id": 519,
+  "name": "Easylock",
+  "slug": "Easylock",
+  "manufacturerId": 30,
+  "material": [
+   "SS"
+  ],
+  "itemTypeId": "WLCK",
+  "weight": 280,
+  "wll": 10,
+  "mbs": 28.5,
+  "productionStatus": "DC",
+  "fieldsRemarks": {
+   "mbs": "Larger than"
+  },
+  "anchorConnectionType": [
+   "MH"
+  ],
+  "webbingConnectionType": [
+   "QP"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 24,
+   "max": 26
+  },
+  "diverterDiameter": 22,
+  "efficiency": 75,
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "imagesCount": 0
+ },
+ "similarGear": []
+}

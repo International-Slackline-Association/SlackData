@@ -1,0 +1,65 @@
+{
+ "manufacturerDetail": {
+  "_id": 45,
+  "slug": "PetramSlacklines",
+  "manufacturerStatus": "ACT",
+  "imageFilename": "petram_slackline.jpg",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "lastEditDate": 1505941195978,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "1393453644035268",
+    "name": "Kuba Bałdych"
+   }
+  ],
+  "name": "Petram Slacklines",
+  "location": {
+   "countryCode": "PL",
+   "address": "Wroclaw, Poland",
+   "lat": 51.10788345336914,
+   "lng": 17.03853797912598,
+   "isExact": false
+  },
+  "yearEstablished": 2014,
+  "isActive": true,
+  "isSlacklineOriented": true,
+  "url": "https://petramslacklines.site123.me/",
+  "fbPage": "https://www.facebook.com/Petram.Slackline",
+  "ratingsAverages": {
+   "overall": {
+    "externalValue": 10,
+    "externalCount": 1,
+    "value": 10,
+    "count": 1
+   }
+  },
+  "imagesCount": 0,
+  "gearStats": [
+   {
+    "itemTypeId": "WGP",
+    "count": 1
+   },
+   {
+    "itemTypeId": "WEB",
+    "count": 1
+   },
+   {
+    "itemTypeId": "LRNG",
+    "count": 1
+   },
+   {
+    "itemTypeId": "SLD",
+    "count": 1
+   },
+   {
+    "itemTypeId": "WLCK",
+    "count": 7
+   }
+  ]
+ }
+}

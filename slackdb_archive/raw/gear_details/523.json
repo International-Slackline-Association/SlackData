@@ -1,0 +1,63 @@
+{
+ "gearDetail": {
+  "_id": 523,
+  "name": "Chili",
+  "slug": "Chili",
+  "manufacturerId": 24,
+  "material": [
+   "SS"
+  ],
+  "itemTypeId": "WLCK",
+  "weight": 300,
+  "wll": 12,
+  "mbs": 50,
+  "productionStatus": "DC",
+  "anchorConnectionType": [
+   "MH"
+  ],
+  "webbingConnectionType": [
+   "QP"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 24,
+   "max": 26
+  },
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "imagesCount": 1
+ },
+ "similarGear": [
+  {
+   "_id": 3134,
+   "itemTypeId": "WLCK",
+   "slug": "pirar_qp",
+   "name": "Pirat QP",
+   "manufacturerId": 9,
+   "manufacturer": {
+    "name": "Equilibrium Slacklines (EQB)",
+    "url": "https://www.slackshop.cz/en/",
+    "countryTxt": "Czech Republic",
+    "countryCode": "CZ"
+   }
+  },
+  {
+   "_id": 552,
+   "slug": "CatlockPro",
+   "itemTypeId": "WLCK",
+   "name": "Catlock Pro",
+   "manufacturerId": 51,
+   "manufacturer": {
+    "name": "Cat on slack",
+    "url": "http://www.catonslack.com",
+    "countryTxt": "Poland",
+    "countryCode": "PL"
+   }
+  }
+ ]
+}

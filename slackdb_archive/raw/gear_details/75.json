@@ -1,0 +1,71 @@
+{
+ "gearDetail": {
+  "_id": 75,
+  "slug": "SigmaN",
+  "itemTypeId": "WEB",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "name": "Sigma N",
+  "webbingType": "TB",
+  "material": [
+   "NY"
+  ],
+  "dWidth": 25,
+  "weight": 55,
+  "wll": 10,
+  "mbs": 26,
+  "elongation": {
+   "percent": 17.3,
+   "force": 10
+  },
+  "productionStatus": "AC",
+  "manufacturerId": 30,
+  "url": "http://www.slackliner.de/Webbing/Nylon/Sigma-N-jormungand-270.html",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 1.49
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1499088494493,
+  "imagesCount": 1
+ },
+ "similarGear": [
+  {
+   "_id": 3074,
+   "itemTypeId": "WEB",
+   "slug": "firefox",
+   "name": "FIREFOX",
+   "manufacturerId": 4,
+   "manufacturer": {
+    "name": "Slack Mountain",
+    "url": "http://slack-mountain.com",
+    "countryTxt": "France",
+    "countryCode": "FR"
+   }
+  },
+  {
+   "_id": 3123,
+   "name": "LSDTube",
+   "manufacturerId": 6,
+   "itemTypeId": "WEB",
+   "slug": "lsdtube",
+   "manufacturer": {
+    "name": "Slacktivity",
+    "url": "http://www.slacktivity.com",
+    "countryTxt": "Switzerland",
+    "countryCode": "CH"
+   }
+  }
+ ]
+}

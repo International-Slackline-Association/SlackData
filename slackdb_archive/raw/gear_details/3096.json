@@ -1,0 +1,47 @@
+{
+ "gearDetail": {
+  "_id": 3096,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "WGP",
+  "slug": "wafer_1",
+  "creatorId": "10154430595665625",
+  "creationDate": 1586858419599,
+  "lastEditDate": 1602267747416,
+  "name": "Wafer",
+  "material": [
+   "AL",
+   "DY"
+  ],
+  "weight": 68,
+  "wll": 4,
+  "cst": 6,
+  "connectionType": [
+   "DSL"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 16,
+   "max": 27
+  },
+  "isaApproved": true,
+  "productionStatus": "AC",
+  "manufacturerId": 3,
+  "url": "https://www.balancecommunity.com/products/wafer",
+  "pricing": {
+   "currency": "USD",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 89
+    }
+   ]
+  },
+  "imagesCount": 3
+ },
+ "similarGear": []
+}

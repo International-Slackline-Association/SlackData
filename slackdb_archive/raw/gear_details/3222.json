@@ -1,0 +1,34 @@
+{
+ "gearDetail": {
+  "_id": 3222,
+  "name": "SLACKLINE KIT - PLASMA 30",
+  "webbingLength": 30,
+  "webbingWidth": 25,
+  "tensioningType": "RAT2",
+  "productionStatus": "AC",
+  "manufacturerId": 7,
+  "url": "https://slack-inov.com/shop/en/slackline-kit/407-slackline-kit-pirate-30-9506919000.html",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 100
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "slackline_kit-plasma30",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622030515017,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

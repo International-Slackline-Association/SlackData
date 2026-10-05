@@ -1,0 +1,33 @@
+{
+ "gearDetail": {
+  "_id": 95,
+  "slug": "SlackSpec",
+  "itemTypeId": "WEB",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1587245127376,
+  "name": "Slack-Spec Threaded Tubular",
+  "webbingType": "TR",
+  "material": [
+   "NY"
+  ],
+  "dWidth": 25.4,
+  "weight": 70,
+  "wll": 6.7,
+  "mbs": 33.4,
+  "elongation": {
+   "percent": 11.1,
+   "force": 6.7
+  },
+  "productionStatus": "DC",
+  "manufacturerId": 3,
+  "imagesCount": 0
+ },
+ "similarGear": []
+}

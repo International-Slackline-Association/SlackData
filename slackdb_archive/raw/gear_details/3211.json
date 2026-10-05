@@ -1,0 +1,35 @@
+{
+ "gearDetail": {
+  "_id": 3211,
+  "name": "Aki Starter Comfort Slacklineset",
+  "webbingLength": 16,
+  "webbingWidth": 35,
+  "tensioningType": "RAT1",
+  "includesTreePro": true,
+  "productionStatus": "AC",
+  "manufacturerId": 64,
+  "url": "https://aki-slacklines.de/de/slacklinesets/ratsche/199/aki-starter-comfort-slacklineset?c=7",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 125
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "aki_startercomfortslacklineset",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622028390356,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

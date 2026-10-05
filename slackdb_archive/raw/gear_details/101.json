@@ -1,0 +1,56 @@
+{
+ "gearDetail": {
+  "_id": 101,
+  "slug": "Coretek",
+  "itemTypeId": "WEB",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "841055102350",
+    "name": "Frankie Najera"
+   }
+  ],
+  "lastEditDate": 1542301077665,
+  "name": "CoreTek",
+  "webbingType": "TR",
+  "material": [
+   "PL"
+  ],
+  "dWidth": 25,
+  "weight": 56,
+  "wll": 5.34,
+  "mbs": 27.5,
+  "dDepth": 2.7,
+  "elongation": {
+   "percent": 2.5,
+   "force": 5.34
+  },
+  "usage": [
+   "SL",
+   "HL",
+   "LL",
+   "RL",
+   "LTL"
+  ],
+  "productionStatus": "AC",
+  "manufacturerId": 21,
+  "url": "https://slacklineindustries.com/collections/1-inch/products/coretek",
+  "pricing": {
+   "currency": "USD",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 2.3
+    }
+   ]
+  },
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

@@ -1,0 +1,19 @@
+{
+ "_id": 500,
+ "gearId": 506,
+ "imageScope": "ITM",
+ "imageSource": "OFF",
+ "imageSourceUrl": "https://youtube.com/c/EQBcz",
+ "contributors": [
+  {
+   "id": "10221559872998777",
+   "name": "Enthro Artist"
+  }
+ ],
+ "creationDate": 1610994546695,
+ "creatorId": "10221559872998777",
+ "filename": "500.jpg",
+ "width": 810,
+ "height": 565,
+ "creatorName": "Enthro Artist"
+}

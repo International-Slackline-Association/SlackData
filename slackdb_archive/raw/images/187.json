@@ -1,0 +1,46 @@
+{
+ "_id": 187,
+ "description": "Delta and Square Quicklinks",
+ "takenDate": 1505941200000,
+ "imageScope": "OTR",
+ "imageSource": "UOFF",
+ "ImageEnvType": "STD",
+ "imageType": "RG",
+ "tags": [
+  "delta",
+  "square",
+  "quicklinks"
+ ],
+ "gearTags": [
+  {
+   "x": 23,
+   "y": 30,
+   "width": 1005,
+   "height": 1194,
+   "gearId": 3037
+  },
+  {
+   "x": 1040,
+   "y": 78,
+   "width": 832,
+   "height": 1154,
+   "gearId": 2017
+  }
+ ],
+ "gearId": [
+  3037,
+  2017
+ ],
+ "contributors": [
+  {
+   "id": "10154430595665625",
+   "name": "Nir Avneyon"
+  }
+ ],
+ "creationDate": 1506007179693,
+ "creatorId": "10154430595665625",
+ "filename": "187.jpg",
+ "width": 1918,
+ "height": 1280,
+ "creatorName": "Nir Avneyon"
+}

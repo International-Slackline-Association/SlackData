@@ -1,0 +1,48 @@
+{
+ "gearDetail": {
+  "_id": 3021,
+  "contributors": [
+   {
+    "id": "1811540145542689",
+    "name": "Helmut Netzwerker"
+   },
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "WLCK",
+  "slug": "zilla_20",
+  "creatorId": "1811540145542689",
+  "creationDate": 1502044654957,
+  "lastEditDate": 1536593418628,
+  "name": "Zilla 2.0",
+  "material": [
+   "AL"
+  ],
+  "weight": 530,
+  "wll": 16,
+  "mbs": 70,
+  "anchorConnectionType": [
+   "SL"
+  ],
+  "webbingConnectionType": [
+   "QP"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 24,
+   "max": 26
+  },
+  "diverterDiameter": 36,
+  "efficiency": 98,
+  "usage": [
+   "SL",
+   "LL"
+  ],
+  "dateIntroduced": 1293836400000,
+  "productionStatus": "DC",
+  "manufacturerId": 2,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

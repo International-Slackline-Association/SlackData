@@ -1,0 +1,51 @@
+{
+ "gearDetail": {
+  "_id": 3120,
+  "contributors": [
+   {
+    "id": "10163592249200654",
+    "name": "Navin Torres"
+   },
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "WGP",
+  "slug": "slack_mitra-linemitrawebbinggripper",
+  "creatorId": "10163592249200654",
+  "creationDate": 1587451714246,
+  "lastEditDate": 1587461254090,
+  "name": "Line Mitra Webbing Gripper",
+  "material": [
+   "S"
+  ],
+  "weight": 175,
+  "wll": 5,
+  "cst": 10,
+  "mbs": 20,
+  "connectionType": [
+   "DSL"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 24,
+   "max": 26
+  },
+  "dateIntroduced": 1577817000000,
+  "productionStatus": "AC",
+  "manufacturerId": 65,
+  "url": "https://www.instamojo.com/slackmitra/line-mitra-webbing-gripper/?ref=store",
+  "pricing": {
+   "currency": "INR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 3990
+    }
+   ]
+  },
+  "imagesCount": 3
+ },
+ "similarGear": []
+}

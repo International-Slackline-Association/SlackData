@@ -1,0 +1,27 @@
+{
+ "manufacturerDetail": {
+  "_id": 38,
+  "slug": "OmegaPacific",
+  "manufacturerStatus": "ACT",
+  "imageFilename": "omega_pacific.jpg",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "lastEditDate": 1587290644584,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "name": "Omega Pacific",
+  "location": {
+   "countryCode": "US",
+   "lat": 47.63488006591797,
+   "lng": -117.5703964233398,
+   "isExact": true
+  },
+  "fbPage": "https://www.facebook.com/OmegaPacific",
+  "imagesCount": 0,
+  "gearStats": null
+ }
+}

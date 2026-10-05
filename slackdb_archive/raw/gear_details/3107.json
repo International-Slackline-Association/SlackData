@@ -1,0 +1,51 @@
+{
+ "gearDetail": {
+  "_id": 3107,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "WLCK",
+  "slug": "rowan_31t",
+  "creatorId": "10154430595665625",
+  "creationDate": 1587233243211,
+  "lastEditDate": 1712946654590,
+  "name": "Rowan 3.1T",
+  "material": [
+   "SS"
+  ],
+  "weight": 275,
+  "wll": 12,
+  "mbs": 50,
+  "anchorConnectionType": [
+   "MH"
+  ],
+  "webbingConnectionType": [
+   "CP"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 49,
+   "max": 51
+  },
+  "diverterDiameter": 25,
+  "usage": [
+   "TL"
+  ],
+  "productionStatus": "DC",
+  "manufacturerId": 62,
+  "pricing": {
+   "currency": "RUB",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 2914
+    }
+   ]
+  },
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

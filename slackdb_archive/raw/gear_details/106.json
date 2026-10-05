@@ -1,0 +1,33 @@
+{
+ "gearDetail": {
+  "_id": 106,
+  "name": "HighTech",
+  "slug": "HighTech",
+  "manufacturerId": 41,
+  "material": [
+   "DY"
+  ],
+  "itemTypeId": "WEB",
+  "weight": 48,
+  "wll": 10,
+  "mbs": 39.2,
+  "dWidth": 25.4,
+  "dDepth": 3,
+  "productionStatus": "DC",
+  "webbingType": "FL",
+  "elongation": {
+   "percent": 4.6,
+   "force": 10
+  },
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "imagesCount": 0
+ },
+ "similarGear": []
+}

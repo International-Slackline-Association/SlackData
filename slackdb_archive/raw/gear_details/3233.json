@@ -1,0 +1,34 @@
+{
+ "gearDetail": {
+  "_id": 3233,
+  "name": "Dragon 2 25 M",
+  "webbingLength": 25,
+  "webbingWidth": 50,
+  "tensioningType": "RAT1",
+  "productionStatus": "AC",
+  "manufacturerId": 55,
+  "url": "https://slackstar.de/kinder-familie/2-baeume/komplettset-2-teilig/876/dragon2?number=SL81800-25-DG",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 125
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "dragon_225m",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622032494983,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

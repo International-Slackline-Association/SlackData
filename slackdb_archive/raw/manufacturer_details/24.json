@@ -1,0 +1,64 @@
+{
+ "manufacturerDetail": {
+  "_id": 24,
+  "slug": "Spiderslacklines",
+  "manufacturerStatus": "ACT",
+  "imageFilename": "spider_slacklines.jpg",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "name": "Spider slacklines",
+  "location": {
+   "countryCode": "IT",
+   "address": "Via San Giovanni Bosco, 25 Leffe (BG), 24026",
+   "lat": 45.8026237487793,
+   "lng": 9.888205528259277,
+   "isExact": true
+  },
+  "isActive": true,
+  "isSlacklineOriented": true,
+  "url": "http://www.spider-slacklines.com",
+  "fbPage": "https://www.facebook.com/SpiderSlacklines",
+  "lastEditDate": 1498724371072,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "ratingsAverages": {
+   "overall": {
+    "externalValue": 10,
+    "externalCount": 71,
+    "value": 10,
+    "count": 71
+   }
+  },
+  "imagesCount": 0,
+  "gearStats": [
+   {
+    "itemTypeId": "SKT",
+    "count": 1
+   },
+   {
+    "itemTypeId": "TRP",
+    "count": 2
+   },
+   {
+    "itemTypeId": "LRNG",
+    "count": 1
+   },
+   {
+    "itemTypeId": "TLK",
+    "count": 1
+   },
+   {
+    "itemTypeId": "WLCK",
+    "count": 8
+   },
+   {
+    "itemTypeId": "WEB",
+    "count": 9
+   }
+  ]
+ }
+}

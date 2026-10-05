@@ -1,0 +1,46 @@
+{
+ "gearDetail": {
+  "_id": 138,
+  "slug": "LowstretchWebbing",
+  "itemTypeId": "WEB",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1587241775298,
+  "name": "Low stretch Webbing",
+  "webbingType": "FL",
+  "material": [
+   "PL"
+  ],
+  "dWidth": 37,
+  "weight": 64,
+  "elongation": {
+   "percent": 3,
+   "force": 10
+  },
+  "productionStatus": "DC",
+  "manufacturerId": 6,
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 75,
+     "qt": "EX",
+     "price": 2.79
+    },
+    {
+     "q": 100,
+     "qt": "EX",
+     "price": 2.69
+    }
+   ]
+  },
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

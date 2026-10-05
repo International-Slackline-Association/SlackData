@@ -1,0 +1,44 @@
+{
+ "gearDetail": {
+  "_id": 125,
+  "slug": "WaveTube32",
+  "itemTypeId": "WEB",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1587235944515,
+  "name": "Wave Tube  32",
+  "webbingType": "TB",
+  "material": [
+   "PL"
+  ],
+  "dWidth": 25.4,
+  "weight": 58,
+  "wll": 6,
+  "mbs": 27,
+  "dDepth": 2.3,
+  "elongation": {
+   "percent": 16,
+   "force": 10
+  },
+  "productionStatus": "DC",
+  "manufacturerId": 2,
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 1.95
+    }
+   ]
+  },
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

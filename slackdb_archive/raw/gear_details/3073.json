@@ -1,0 +1,38 @@
+{
+ "gearDetail": {
+  "_id": 3073,
+  "name": "Totally Tubular",
+  "webbingType": "TB",
+  "material": [
+   "NY"
+  ],
+  "dWidth": 25,
+  "weight": 40,
+  "mbs": 17.7,
+  "productionStatus": "AC",
+  "manufacturerId": 41,
+  "url": "https://www.slacklifebc.com/product/totally-tubular/",
+  "pricing": {
+   "currency": "CAD",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 1.55
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "WEB",
+  "slug": "totally_tubular",
+  "creatorId": "10154430595665625",
+  "creationDate": 1542964231779,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

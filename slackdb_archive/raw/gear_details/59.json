@@ -1,0 +1,30 @@
+{
+ "gearDetail": {
+  "_id": 59,
+  "slug": "TubeLine",
+  "itemTypeId": "WEB",
+  "maxLength": 150,
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "name": "Tube Line",
+  "webbingType": "TB",
+  "dWidth": 25,
+  "weight": 64,
+  "mbs": 30,
+  "productionStatus": "DC",
+  "manufacturerId": 1,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "1190879851271184",
+    "name": "Matthieu Chivas"
+   }
+  ],
+  "lastEditDate": 1623833417531,
+  "imagesCount": 0
+ },
+ "similarGear": []
+}

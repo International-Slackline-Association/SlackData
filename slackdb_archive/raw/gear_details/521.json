@@ -1,0 +1,52 @@
+{
+ "gearDetail": {
+  "_id": 521,
+  "slug": "TRig",
+  "itemTypeId": "WLCK",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "1811540145542689",
+    "name": "Helmut Netzwerker"
+   }
+  ],
+  "lastEditDate": 1542153065528,
+  "name": "T-Rig",
+  "material": [
+   "SS"
+  ],
+  "weight": 320,
+  "wll": 15,
+  "mbs": 30,
+  "anchorConnectionType": [
+   "FVP"
+  ],
+  "webbingConnectionType": [
+   "CP"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 24,
+   "max": 26
+  },
+  "diverterDiameter": 30,
+  "productionStatus": "DC",
+  "manufacturerId": 10,
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 95
+    }
+   ]
+  },
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

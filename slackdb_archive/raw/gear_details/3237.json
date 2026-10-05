@@ -1,0 +1,34 @@
+{
+ "gearDetail": {
+  "_id": 3237,
+  "name": "Nature 6 15 M",
+  "webbingLength": 15,
+  "webbingWidth": 50,
+  "tensioningType": "RAT1",
+  "productionStatus": "AC",
+  "manufacturerId": 55,
+  "url": "https://slackstar.de/kinder-familie/2-baeume/komplettset-6-teilig/916/nature6?number=SL82668-15NATURE",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 170
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "nature_615m",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622032859889,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

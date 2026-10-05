@@ -1,0 +1,18 @@
+{
+ "gearDetail": {
+  "_id": 3002,
+  "name": "Tagline",
+  "slug": "Tagline",
+  "itemTypeId": "GEN",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "imagesCount": 0
+ },
+ "similarGear": []
+}

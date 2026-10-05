@@ -1,0 +1,34 @@
+{
+ "gearDetail": {
+  "_id": 3157,
+  "name": "Adjustable Tree Wear - Bera",
+  "dWidth": 10,
+  "dLength": 170,
+  "hasSlingAttachment": true,
+  "productionStatus": "AC",
+  "manufacturerId": 76,
+  "url": "https://beraadventure.com.br/product/protetor-de-arvore-regulavel-bera/",
+  "pricing": {
+   "currency": "BRL",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "EX",
+     "price": 25
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "4078196375580695",
+    "name": "Francisco Vanzuita"
+   }
+  ],
+  "itemTypeId": "TRP",
+  "slug": "adjustable_treewear-bera",
+  "creatorId": "4078196375580695",
+  "creationDate": 1620302838962,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

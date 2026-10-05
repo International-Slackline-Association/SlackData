@@ -1,0 +1,64 @@
+{
+ "_id": 18,
+ "imageScope": "STP",
+ "gearId": [
+  3005,
+  3008,
+  3000,
+  2018
+ ],
+ "gearTags": [
+  {
+   "x": 599,
+   "y": 65,
+   "width": 210,
+   "height": 99,
+   "gearId": 3005
+  },
+  {
+   "x": 326,
+   "y": 728,
+   "width": 268,
+   "height": 139,
+   "gearId": 3008
+  },
+  {
+   "x": 852,
+   "y": 652,
+   "width": 151,
+   "height": 151,
+   "gearId": 3000
+  },
+  {
+   "x": 940,
+   "y": 263,
+   "width": 175,
+   "height": 157,
+   "gearId": 2018
+  }
+ ],
+ "tags": [
+  "sliding x",
+  "4 points",
+  "bolting"
+ ],
+ "takenDate": 1465851600000,
+ "ImageEnvType": "US",
+ "imageType": "RG",
+ "imageSource": "UOFF",
+ "setupType": "HL",
+ "description": "4 points sliding x anchor",
+ "creationDate": 1499896266303,
+ "creatorId": "10154430595665625",
+ "filename": "18.jpg",
+ "width": 1920,
+ "height": 1280,
+ "comments": [],
+ "creatorName": "Nir Avneyon",
+ "contributors": [
+  {
+   "id": "10154430595665625",
+   "name": "Nir Avneyon"
+  }
+ ]
+}

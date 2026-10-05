@@ -1,0 +1,23 @@
+{
+ "_id": 429,
+ "gearId": 3123,
+ "takenDate": 1597006800000,
+ "imageScope": "ITM",
+ "imageSource": "OFF",
+ "imageSourceUrl": "https://www.slacktivity.com/lsdtube",
+ "gearCondition": "NEW",
+ "ImageEnvType": "STD",
+ "imageType": "CLS",
+ "contributors": [
+  {
+   "id": "10154430595665625",
+   "name": "Nir Avneyon"
+  }
+ ],
+ "creationDate": 1597264243820,
+ "creatorId": "10154430595665625",
+ "filename": "429.jpg",
+ "width": 1200,
+ "height": 1200,
+ "creatorName": "Nir Avneyon"
+}

@@ -1,0 +1,96 @@
+{
+ "gearDetail": {
+  "_id": 41,
+  "slug": "MILF",
+  "itemTypeId": "WEB",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1587251685273,
+  "name": "MILF",
+  "webbingType": "FL",
+  "material": [
+   "PL"
+  ],
+  "dWidth": 25,
+  "weight": 73,
+  "wll": 10.3,
+  "mbs": 37,
+  "dDepth": 3,
+  "elongation": {
+   "percent": 7,
+   "force": 10
+  },
+  "productionStatus": "DC",
+  "manufacturerId": 12,
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "qt": "AA",
+     "q": 1,
+     "price": 2.15
+    },
+    {
+     "qt": "AA",
+     "q": 50,
+     "price": 2.1
+    },
+    {
+     "qt": "AA",
+     "q": 100,
+     "price": 2.05
+    },
+    {
+     "qt": "AA",
+     "q": 150,
+     "price": 1.99
+    },
+    {
+     "qt": "AA",
+     "q": 200,
+     "price": 1.94
+    },
+    {
+     "qt": "AA",
+     "q": 300,
+     "price": 1.9
+    }
+   ]
+  },
+  "imagesCount": 3
+ },
+ "similarGear": [
+  {
+   "_id": 77,
+   "slug": "StrongII",
+   "itemTypeId": "WEB",
+   "name": "Strong II",
+   "manufacturerId": 25,
+   "manufacturer": {
+    "name": "Slackline tools",
+    "url": "https://www.slackline-tools.de",
+    "countryTxt": "Germany",
+    "countryCode": "DE"
+   }
+  },
+  {
+   "_id": 3016,
+   "name": "Plasma",
+   "manufacturerId": 7,
+   "itemTypeId": "WEB",
+   "slug": "plasma",
+   "manufacturer": {
+    "name": "Slack Inov",
+    "url": "http://slack-inov.com/gb",
+    "countryTxt": "France",
+    "countryCode": "FR"
+   }
+  }
+ ]
+}

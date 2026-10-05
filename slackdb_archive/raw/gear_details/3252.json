@@ -1,0 +1,48 @@
+{
+ "gearDetail": {
+  "_id": 3252,
+  "name": "KingPin",
+  "material": [
+   "AL"
+  ],
+  "weight": 153,
+  "wll": 4,
+  "mbs": 17,
+  "anchorConnectionType": [
+   "IS"
+  ],
+  "webbingConnectionType": [
+   "QP"
+  ],
+  "compatibleWebbingWidth": {
+   "min": 19,
+   "max": 20
+  },
+  "productionStatus": "AC",
+  "manufacturerId": 6,
+  "url": "https://slacktivity.com/shop/kingpin-weblock/",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 60
+    }
+   ],
+   "hasAddOpts": true
+  },
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "WLCK",
+  "slug": "kingpin",
+  "creatorId": "10154430595665625",
+  "creationDate": 1712948470764,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

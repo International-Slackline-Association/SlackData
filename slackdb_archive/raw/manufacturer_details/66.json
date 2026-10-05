@@ -1,0 +1,34 @@
+{
+ "manufacturerDetail": {
+  "_id": 66,
+  "name": "Viper Slacklines",
+  "location": {
+   "countryCode": "ZA",
+   "address": "Cape Town",
+   "lat": -33.928992,
+   "lng": 18.417396
+  },
+  "yearEstablished": 2017,
+  "isActive": true,
+  "isSlacklineOriented": true,
+  "url": "https://www.viperslacklines.co.za",
+  "fbPage": "https://www.facebook.com/viperslacklines",
+  "description": "Viper Slacklines is a Cape Town, South Africa based slackline company. The business is run by two slackliners with slackliners in mind. What started out as a passion project quickly became a lifestyle and grew to the scale it is currently at with a ever growing active slackline community.",
+  "contributors": [
+   {
+    "id": "10221778802650251",
+    "name": "Anton Schroegendorfer"
+   }
+  ],
+  "creatorId": "10221778802650251",
+  "creationDate": 1589371563400,
+  "slug": "viper_slacklines",
+  "imagesCount": 0,
+  "gearStats": [
+   {
+    "itemTypeId": "SKT",
+    "count": 1
+   }
+  ]
+ }
+}

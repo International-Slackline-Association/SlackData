@@ -1,0 +1,41 @@
+{
+ "gearDetail": {
+  "_id": 3183,
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   },
+   {
+    "id": "10211802848940671",
+    "name": "Thomas Buckingham"
+   }
+  ],
+  "itemTypeId": "TLK",
+  "slug": "super_jumplineslacklineset",
+  "creatorId": "2824084041240796",
+  "creationDate": 1621916395405,
+  "name": "Super Jumpline Slackline Set",
+  "weight": 8300,
+  "webbingLength": 25,
+  "webbingWidth": 37,
+  "tensioningType": "RAT2",
+  "includesTreePro": true,
+  "productionStatus": "AC",
+  "manufacturerId": 6,
+  "url": "https://slacktivity.com/shop/super-jumpline-slackline/",
+  "pricing": {
+   "currency": "CHF",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 230
+    }
+   ]
+  },
+  "lastEditDate": 1622013137901,
+  "imagesCount": 1
+ },
+ "similarGear": []
+}

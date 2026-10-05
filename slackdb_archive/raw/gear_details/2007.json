@@ -1,0 +1,28 @@
+{
+ "gearDetail": {
+  "_id": 2007,
+  "name": "1.5T D Shackle",
+  "slug": "15TDShackle",
+  "manufacturerId": 37,
+  "material": [
+   "S"
+  ],
+  "itemTypeId": "CON",
+  "weight": 177,
+  "wll": 15,
+  "mbs": 90,
+  "productionStatus": "AC",
+  "remarks": "Van Beest Rating",
+  "connectorType": "DS",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "imagesCount": 0
+ },
+ "similarGear": []
+}
