@@ -451,6 +451,9 @@
         "id": 6,
         "name": "White Magic",
         "brand": "Landcruising",
+        "gear_sellers": [
+            "Aki Slacklines"
+        ],
         "stretch": [
             {
                 "kn": 2,
@@ -522,6 +525,9 @@
         "id": 7,
         "name": "Unicorn",
         "brand": "Landcruising",
+        "gear_sellers": [
+            "Aki Slacklines"
+        ],
         "stretch": [
             {
                 "kn": 2,
@@ -6462,6 +6468,9 @@
         "id": 116,
         "name": "Wave Tube",
         "brand": "Landcruising",
+        "gear_sellers": [
+            "Aki Slacklines"
+        ],
         "materialType": "Nylon",
         "width": 25,
         "weight": 42,
@@ -6507,6 +6516,9 @@
         "id": 118,
         "name": "Wave Tube 19",
         "brand": "Landcruising",
+        "gear_sellers": [
+            "Aki Slacklines"
+        ],
         "materialType": "Nylon",
         "width": 19,
         "weight": 36,
@@ -7240,6 +7252,9 @@
         "id": 151,
         "name": "Verve 25mm",
         "brand": "Landcruising",
+        "gear_sellers": [
+            "Aki Slacklines"
+        ],
         "materialType": "Polyester",
         "width": 25.4,
         "weight": 59,
@@ -7263,6 +7278,9 @@
         "id": 152,
         "name": "Wave Tube  32",
         "brand": "Landcruising",
+        "gear_sellers": [
+            "Aki Slacklines"
+        ],
         "materialType": "Polyester",
         "width": 25.4,
         "weight": 58,
@@ -7683,6 +7701,9 @@
         "id": 164,
         "name": "Aloha (Aka Aki Tidal)",
         "brand": "Landcruising",
+        "gear_sellers": [
+            "Aki Slacklines"
+        ],
         "materialType": "Polyester",
         "width": 25,
         "weight": 48,
@@ -9346,50 +9367,6 @@
         "active": true,
         "manufacturer_not_for_highline": true,
         "manufacturer_not_for_highline_source": "https://www.slackshop.cz/en/polyester/30-eqb-neon.html"
-    },
-    {
-        "id": 209,
-        "name": "White Magic",
-        "brand": "Aki Slacklines",
-        "materialType": "Polyester",
-        "width": 25,
-        "weight": 58,
-        "breakingStrength": 32.5,
-        "thickness": null,
-        "stretch": [
-            {
-                "percent": 5,
-                "kn": 10
-            }
-        ],
-        "date_introduced": null,
-        "product_url": "https://aki-slacklines.de/en/webbing/polyester/4/aki-white-magic-webbing?c=6",
-        "webbing_construction": "Flat",
-        "priceMeter": 1.3,
-        "currency": "EUR",
-        "active": false
-    },
-    {
-        "id": 210,
-        "name": "Unicorn",
-        "brand": "Aki Slacklines",
-        "materialType": "Polyester",
-        "width": 25,
-        "weight": 61.5,
-        "breakingStrength": 32,
-        "thickness": 2.7,
-        "stretch": [
-            {
-                "percent": 9,
-                "kn": 10
-            }
-        ],
-        "date_introduced": 1489363200000,
-        "product_url": null,
-        "webbing_construction": "Core/Sheath",
-        "priceMeter": 1.79,
-        "currency": "EUR",
-        "active": false
     },
     {
         "id": 211,
