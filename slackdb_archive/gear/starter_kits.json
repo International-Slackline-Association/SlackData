@@ -1,0 +1,2596 @@
+[
+ {
+  "_id": 3140,
+  "name": "15m kit",
+  "webbingLength": 15,
+  "webbingWidth": 50,
+  "tensioningType": "RAT1",
+  "includesTreePro": true,
+  "productionStatus": "AC",
+  "manufacturerId": 46,
+  "_manufacturerName": "Middle Way Slacklines",
+  "url": "https://middlewayslacklines.com/15m-slackline-kit/",
+  "pricing": {
+   "currency": "ILS",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 229
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "15m_kit",
+  "creatorId": "10154430595665625",
+  "creationDate": 1617137277111,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 1,
+  "_slackdbUrl": "https://slackdb.com/gear_details/15m_kit",
+  "_imageIds": [
+   539
+  ],
+  "_coverImageId": 539,
+  "_coverFile": "image_files/gear/539.jpg"
+ },
+ {
+  "_id": 3141,
+  "name": "25m kit",
+  "webbingLength": 25,
+  "webbingWidth": 50,
+  "tensioningType": "RAT1",
+  "includesTreePro": true,
+  "productionStatus": "AC",
+  "manufacturerId": 46,
+  "_manufacturerName": "Middle Way Slacklines",
+  "url": "https://middlewayslacklines.com/25m-slackline-kit/",
+  "pricing": {
+   "currency": "ILS",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 269
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "25m_kit",
+  "creatorId": "10154430595665625",
+  "creationDate": 1617137361406,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 1,
+  "_slackdbUrl": "https://slackdb.com/gear_details/25m_kit",
+  "_imageIds": [
+   540
+  ],
+  "_coverImageId": 540,
+  "_coverFile": "image_files/gear/540.jpg"
+ },
+ {
+  "_id": 3143,
+  "name": "15m kit",
+  "webbingLength": 15,
+  "webbingWidth": 50,
+  "tensioningType": "RAT1",
+  "includesTreePro": true,
+  "productionStatus": "AC",
+  "manufacturerId": 74,
+  "_manufacturerName": "Acrobat Slackline",
+  "url": "https://www.acrobatslackline.com/slackline-kit15",
+  "pricing": {
+   "currency": "ILS",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 199
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "15m_kit_1",
+  "creatorId": "10154430595665625",
+  "creationDate": 1617138105825,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 1,
+  "_slackdbUrl": "https://slackdb.com/gear_details/15m_kit_1",
+  "_imageIds": [
+   543
+  ],
+  "_coverImageId": 543,
+  "_coverFile": "image_files/gear/543.jpg"
+ },
+ {
+  "_id": 3144,
+  "name": "25m kit",
+  "webbingLength": 25,
+  "webbingWidth": 50,
+  "tensioningType": "RAT1",
+  "includesTreePro": true,
+  "productionStatus": "AC",
+  "manufacturerId": 74,
+  "_manufacturerName": "Acrobat Slackline",
+  "url": "https://www.acrobatslackline.com/slackline-kit25",
+  "pricing": {
+   "currency": "ILS",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 249
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "25m_kit_1",
+  "creatorId": "10154430595665625",
+  "creationDate": 1617138153764,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 1,
+  "_slackdbUrl": "https://slackdb.com/gear_details/25m_kit_1",
+  "_imageIds": [
+   544
+  ],
+  "_coverImageId": 544,
+  "_coverFile": "image_files/gear/544.jpg"
+ },
+ {
+  "_id": 3155,
+  "contributors": [
+   {
+    "id": "4078196375580695",
+    "name": "Francisco Vanzuita"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "kit_streetbalanceslack10m",
+  "creatorId": "4078196375580695",
+  "creationDate": 1620301111909,
+  "name": "KIT STREET BALANCE SLACK 10m",
+  "webbingLength": 10,
+  "webbingWidth": 50,
+  "tensioningType": "RAT1",
+  "includesTreePro": true,
+  "productionStatus": "AC",
+  "manufacturerId": 76,
+  "_manufacturerName": "Bera Adventure",
+  "url": "https://beraadventure.com.br/product/kit-street-balance-slack-10-metros-backup/",
+  "pricing": {
+   "currency": "BRL",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 189
+    }
+   ]
+  },
+  "lastEditDate": 1620302348793,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 1,
+  "_slackdbUrl": "https://slackdb.com/gear_details/kit_streetbalanceslack10m",
+  "_imageIds": [
+   584
+  ],
+  "_coverImageId": 584,
+  "_coverFile": "image_files/gear/584.jpg"
+ },
+ {
+  "_id": 3156,
+  "name": "Kit Primitive Compact Line",
+  "webbingLength": 10,
+  "webbingWidth": 25,
+  "tensioningType": "PRIM",
+  "includesTreePro": true,
+  "productionStatus": "AC",
+  "manufacturerId": 76,
+  "_manufacturerName": "Bera Adventure",
+  "url": "https://beraadventure.com.br/product/kit-primitivo-compact/",
+  "pricing": {
+   "currency": "BRL",
+   "hasAddOpts": true,
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 189.99
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "4078196375580695",
+    "name": "Francisco Vanzuita"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "kit_primitivecompactline",
+  "creatorId": "4078196375580695",
+  "creationDate": 1620302322780,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 1,
+  "_slackdbUrl": "https://slackdb.com/gear_details/kit_primitivecompactline",
+  "_imageIds": [
+   759
+  ],
+  "_coverImageId": 759,
+  "_coverFile": "image_files/gear/759.jpg"
+ },
+ {
+  "_id": 3186,
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "aki_starterclassicslacklineset",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622014771086,
+  "name": "Aki Starter Classic Slacklineset",
+  "webbingLength": 16,
+  "webbingWidth": 35,
+  "tensioningType": "RAT1",
+  "includesTreePro": true,
+  "productionStatus": "AC",
+  "manufacturerId": 64,
+  "_manufacturerName": "Aki Slacklines",
+  "url": "https://aki-slacklines.de/de/slacklinesets/ratsche/195/aki-starter-classic-slacklineset?c=5",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 110
+    }
+   ]
+  },
+  "lastEditDate": 1622037299396,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 1,
+  "_slackdbUrl": "https://slackdb.com/gear_details/aki_starterclassicslacklineset",
+  "_imageIds": [
+   721
+  ],
+  "_coverImageId": 721,
+  "_coverFile": "image_files/gear/721.jpg"
+ },
+ {
+  "_id": 3187,
+  "name": "BC Prim-25 Slackline Kit",
+  "weight": 2000,
+  "webbingLength": 25,
+  "webbingWidth": 25,
+  "tensioningType": "PRIM",
+  "includesTreePro": true,
+  "productionStatus": "AC",
+  "manufacturerId": 3,
+  "_manufacturerName": "Balance Community: Slackline Outfitters",
+  "url": "https://www.balancecommunity.com/products/bc-prim-25-slackline-kit?variant=31486157258810",
+  "pricing": {
+   "currency": "USD",
+   "lst": [
+    {
+     "price": 99,
+     "qt": "AA",
+     "q": 1
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "bc_prim-25slacklinekit",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622014899411,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 1,
+  "_slackdbUrl": "https://slackdb.com/gear_details/bc_prim-25slacklinekit",
+  "_imageIds": [
+   724
+  ],
+  "_coverImageId": 724,
+  "_coverFile": "image_files/gear/724.jpg"
+ },
+ {
+  "_id": 3188,
+  "name": "EQB Yoga15 M",
+  "weight": 1600,
+  "webbingLength": 15,
+  "webbingWidth": 35,
+  "tensioningType": "RAT1",
+  "productionStatus": "AC",
+  "manufacturerId": 9,
+  "_manufacturerName": "Equilibrium Slacklines (EQB)",
+  "url": "https://www.slackshop.cz/en/for-beginners/93-eqb-yoga-15-m.html",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 56
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "eqb_yoga15m",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622015317566,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 2,
+  "_slackdbUrl": "https://slackdb.com/gear_details/eqb_yoga15m",
+  "_imageIds": [
+   728,
+   750
+  ],
+  "_coverImageId": 728,
+  "_coverFile": "image_files/gear/728.jpg"
+ },
+ {
+  "_id": 3189,
+  "name": "Primitive Pack 30m",
+  "webbingLength": 30,
+  "webbingWidth": 25,
+  "tensioningType": "PRIM",
+  "includesTreePro": true,
+  "productionStatus": "AC",
+  "manufacturerId": 72,
+  "_manufacturerName": "Geko Slacklines",
+  "url": "https://gekoslacklines.mx/producto/primitivo-30m",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "qt": "AA",
+     "price": 115,
+     "q": 1
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "primitive_pack30m",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622015641458,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 1,
+  "_slackdbUrl": "https://slackdb.com/gear_details/primitive_pack30m",
+  "_imageIds": [
+   732
+  ],
+  "_coverImageId": 732,
+  "_coverFile": "image_files/gear/732.jpg"
+ },
+ {
+  "_id": 3190,
+  "name": "Classic Line Red XL TreeWear",
+  "weight": 4000,
+  "webbingLength": 25,
+  "webbingWidth": 50,
+  "tensioningType": "RAT1",
+  "includesTreePro": true,
+  "productionStatus": "AC",
+  "manufacturerId": 1,
+  "_manufacturerName": "Gibbon",
+  "url": "https://www.gibbon-slacklines.com/de/produkte/slackline-sets/classicline-red-xl-treewear-2019/",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 118
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "classic_lineredxltreewear",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622015902177,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 1,
+  "_slackdbUrl": "https://slackdb.com/gear_details/classic_lineredxltreewear",
+  "_imageIds": [
+   726
+  ],
+  "_coverImageId": 726,
+  "_coverFile": "image_files/gear/726.jpg"
+ },
+ {
+  "_id": 3191,
+  "name": "FUN Kit - Beginner Slackline Set 20m",
+  "webbingLength": 20,
+  "webbingWidth": 25,
+  "tensioningType": "PRIM",
+  "productionStatus": "AC",
+  "manufacturerId": 26,
+  "_manufacturerName": "Raed Slacklines",
+  "url": "https://raed-slacklines.com/fun-kit-beginner-slackline-set-20m",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 82
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "fun_kit-beginnerslacklineset20m",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622016206095,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 1,
+  "_slackdbUrl": "https://slackdb.com/gear_details/fun_kit-beginnerslacklineset20m",
+  "_imageIds": [
+   730
+  ],
+  "_coverImageId": 730,
+  "_coverFile": "image_files/gear/730.jpg"
+ },
+ {
+  "_id": 3192,
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "20m_slacklinekit1quotpracticeline",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622016403011,
+  "name": "20m Slackline Kit: 1 Practice Line",
+  "webbingLength": 20,
+  "webbingWidth": 25,
+  "tensioningType": "PRIM",
+  "productionStatus": "AC",
+  "manufacturerId": 65,
+  "_manufacturerName": "Slack Mitra",
+  "url": "https://www.instamojo.com/slackmitra/slackline-kit-1-practice-line/?ref=store",
+  "pricing": {
+   "currency": "INR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 5000
+    }
+   ]
+  },
+  "lastEditDate": 1622030563057,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 1,
+  "_slackdbUrl": "https://slackdb.com/gear_details/20m_slacklinekit1quotpracticeline",
+  "_imageIds": [
+   719
+  ],
+  "_coverImageId": 719,
+  "_coverFile": "image_files/gear/719.jpg"
+ },
+ {
+  "_id": 3193,
+  "name": "KIT EASY 15M",
+  "webbingLength": 15,
+  "webbingWidth": 25,
+  "tensioningType": "PRIM",
+  "productionStatus": "AC",
+  "manufacturerId": 4,
+  "_manufacturerName": "Slack Mountain",
+  "url": "https://slack-mountain.com/en/slackline-beginner-kit/33-kit-easy-15m.html",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 55
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "kit_easy15m",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622016525073,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 1,
+  "_slackdbUrl": "https://slackdb.com/gear_details/kit_easy15m",
+  "_imageIds": [
+   731
+  ],
+  "_coverImageId": 731,
+  "_coverFile": "image_files/gear/731.jpg"
+ },
+ {
+  "_id": 3194,
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "firestarter_35m",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622016776936,
+  "name": "Firestarter 35m",
+  "weight": 5000,
+  "webbingLength": 35,
+  "webbingWidth": 25,
+  "tensioningType": "PRIM",
+  "includesTreePro": true,
+  "productionStatus": "AC",
+  "manufacturerId": 16,
+  "_manufacturerName": "SlackGear",
+  "url": "http://www.slackgear.co.za/product/firestarter-35m/",
+  "pricing": {
+   "currency": "ZAR",
+   "lst": [
+    {
+     "price": 3250,
+     "q": 1,
+     "qt": "AA"
+    }
+   ]
+  },
+  "lastEditDate": 1622037347514,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 1,
+  "_slackdbUrl": "https://slackdb.com/gear_details/firestarter_35m",
+  "_imageIds": [
+   729
+  ],
+  "_coverImageId": 729,
+  "_coverFile": "image_files/gear/729.jpg"
+ },
+ {
+  "_id": 3195,
+  "name": "Beginner Primitive Slackline Kit",
+  "webbingLength": 30,
+  "webbingWidth": 25,
+  "tensioningType": "PRIM",
+  "productionStatus": "AC",
+  "manufacturerId": 41,
+  "_manufacturerName": "Slacklife BC",
+  "url": "https://www.slacklifebc.com/product/primitive-beginner-slackline-kit/",
+  "pricing": {
+   "currency": "BRL",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 245
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "beginner_primitiveslacklinekit",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622017432947,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 1,
+  "_slackdbUrl": "https://slackdb.com/gear_details/beginner_primitiveslacklinekit",
+  "_imageIds": [
+   725
+  ],
+  "_coverImageId": 725,
+  "_coverFile": "image_files/gear/725.jpg"
+ },
+ {
+  "_id": 3196,
+  "name": "Base Line Kit",
+  "webbingLength": 15,
+  "webbingWidth": 50,
+  "tensioningType": "RAT1",
+  "productionStatus": "AC",
+  "manufacturerId": 21,
+  "_manufacturerName": "Slackline Industries",
+  "url": "https://slacklineindustries.com/collections/all-products/products/base-line-kit",
+  "pricing": {
+   "currency": "USD",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 80
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "base_linekit",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622017528269,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 1,
+  "_slackdbUrl": "https://slackdb.com/gear_details/base_linekit",
+  "_imageIds": [
+   722
+  ],
+  "_coverImageId": 722,
+  "_coverFile": "image_files/gear/722.jpg"
+ },
+ {
+  "_id": 3197,
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "15_meterslacklinesetincludestreeprotection",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622017617110,
+  "lastEditDate": 1622037280324,
+  "name": "15 Meter Slackline Set – Includes Tree Protection",
+  "webbingLength": 15,
+  "webbingWidth": 50,
+  "tensioningType": "RAT1",
+  "includesTreePro": true,
+  "productionStatus": "AC",
+  "manufacturerId": 43,
+  "_manufacturerName": "Slackline Shop NZ",
+  "url": "https://www.slacklineshop.co.nz/product/15-meter-slackline-set/",
+  "pricing": {
+   "currency": "USD",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 90
+    }
+   ]
+  },
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 1,
+  "_slackdbUrl": "https://slackdb.com/gear_details/15_meterslacklinesetincludestreeprotection",
+  "_imageIds": [
+   718
+  ],
+  "_coverImageId": 718,
+  "_coverFile": "image_files/gear/718.jpg"
+ },
+ {
+  "_id": 3198,
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "15_mclipx27nslackset",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622017821893,
+  "name": "15 m Clip n Slack Set",
+  "webbingLength": 15,
+  "webbingWidth": 25,
+  "tensioningType": "RAT2",
+  "productionStatus": "AC",
+  "manufacturerId": 25,
+  "_manufacturerName": "Slackline tools",
+  "url": "https://www.slack-shop.de/15m-clip-n-slack-set.html",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 120
+    }
+   ]
+  },
+  "lastEditDate": 1622026079644,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 1,
+  "_slackdbUrl": "https://slackdb.com/gear_details/15_mclipx27nslackset",
+  "_imageIds": [
+   717
+  ],
+  "_coverImageId": 717,
+  "_coverFile": "image_files/gear/717.jpg"
+ },
+ {
+  "_id": 3199,
+  "name": "Sigma Impact Set",
+  "webbingLength": 20,
+  "webbingWidth": 25,
+  "tensioningType": "RAT1",
+  "productionStatus": "AC",
+  "manufacturerId": 30,
+  "_manufacturerName": "Slackliner.de",
+  "url": "https://www.slackliner.de/de/Impact-Set.html",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 66
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "sigma_impactset",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622017983390,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 1,
+  "_slackdbUrl": "https://slackdb.com/gear_details/sigma_impactset",
+  "_imageIds": [
+   734
+  ],
+  "_coverImageId": 734,
+  "_coverFile": "image_files/gear/734.jpg"
+ },
+ {
+  "_id": 3200,
+  "name": "Basic2",
+  "webbingLength": 15,
+  "webbingWidth": 50,
+  "tensioningType": "RAT1",
+  "productionStatus": "AC",
+  "manufacturerId": 55,
+  "_manufacturerName": "Slackstar",
+  "url": "https://slackstar.de/kinder-familie/2-baeume/komplettset-2-teilig/823/basic2?number=SL81792-15-F",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 64
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "basic2",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622018095316,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 1,
+  "_slackdbUrl": "https://slackdb.com/gear_details/basic2",
+  "_imageIds": [
+   723
+  ],
+  "_coverImageId": 723,
+  "_coverFile": "image_files/gear/723.jpg"
+ },
+ {
+  "_id": 3201,
+  "name": "Primitive Slackline Kit | Light & Easy Setup",
+  "webbingLength": 30,
+  "webbingWidth": 25,
+  "tensioningType": "PRIM",
+  "includesTreePro": true,
+  "productionStatus": "AC",
+  "manufacturerId": 6,
+  "_manufacturerName": "Slacktivity",
+  "url": "https://slacktivity.com/shop/primitive-slackline-kit/",
+  "pricing": {
+   "currency": "CHF",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 220
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "primitive_slacklinekitlightampeasysetup",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622018222439,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 1,
+  "_slackdbUrl": "https://slackdb.com/gear_details/primitive_slacklinekitlightampeasysetup",
+  "_imageIds": [
+   733
+  ],
+  "_coverImageId": 733,
+  "_coverFile": "image_files/gear/733.jpg"
+ },
+ {
+  "_id": 3202,
+  "name": "Slackline Kit - Training LINE 18",
+  "webbingLength": 18,
+  "webbingWidth": 50,
+  "tensioningType": "RAT1",
+  "productionStatus": "AC",
+  "manufacturerId": 24,
+  "_manufacturerName": "Spider slacklines",
+  "url": "https://spider-slacklines.com/shop/it/slackline-kit/11-542-slackline-kit-training-line-18-9506919000.html#/26-scegli_il_backup_kit-nessuno/28-scegli_le_protezioni_per_alberi-nessuna",
+  "pricing": {
+   "currency": "USD",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 75
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "slackline_kit-trainingline18",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622018403875,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 1,
+  "_slackdbUrl": "https://slackdb.com/gear_details/slackline_kit-trainingline18",
+  "_imageIds": [
+   735
+  ],
+  "_coverImageId": 735,
+  "_coverFile": "image_files/gear/735.jpg"
+ },
+ {
+  "_id": 3203,
+  "name": "23m Active Slackline",
+  "webbingLength": 23,
+  "webbingWidth": 50,
+  "tensioningType": "RAT1",
+  "includesTreePro": true,
+  "productionStatus": "AC",
+  "manufacturerId": 66,
+  "_manufacturerName": "Viper Slacklines",
+  "url": "https://www.viperslacklines.co.za/collections/slackline-kits/products/20m-active-slackline",
+  "pricing": {
+   "currency": "ZAR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 2000
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "23m_activeslackline",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622018556659,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 1,
+  "_slackdbUrl": "https://slackdb.com/gear_details/23m_activeslackline",
+  "_imageIds": [
+   720
+  ],
+  "_coverImageId": 720,
+  "_coverFile": "image_files/gear/720.jpg"
+ },
+ {
+  "_id": 3204,
+  "name": "Eline SlacklineE Kit",
+  "webbingLength": 15,
+  "webbingWidth": 25,
+  "includesTreePro": true,
+  "productionStatus": "AC",
+  "manufacturerId": 20,
+  "_manufacturerName": "Yoga Slackers",
+  "url": "https://yogaslackers.com/shop/slackline/eline-slackline-kit/",
+  "pricing": {
+   "currency": "USD",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 120
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "eline_slacklineekit",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622018679027,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 1,
+  "_slackdbUrl": "https://slackdb.com/gear_details/eline_slacklineekit",
+  "_imageIds": [
+   727
+  ],
+  "_coverImageId": 727,
+  "_coverFile": "image_files/gear/727.jpg"
+ },
+ {
+  "_id": 3206,
+  "name": "Allround Slackline | 15m Set",
+  "webbingLength": 15,
+  "webbingWidth": 37,
+  "tensioningType": "RAT1",
+  "includesTreePro": true,
+  "productionStatus": "AC",
+  "manufacturerId": 6,
+  "_manufacturerName": "Slacktivity",
+  "url": "https://slacktivity.ch/shop/allround-slackline-15m/",
+  "pricing": {
+   "currency": "CHF",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 170
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "allround_slackline15mset",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622026941331,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 1,
+  "_slackdbUrl": "https://slackdb.com/gear_details/allround_slackline15mset",
+  "_imageIds": [
+   740
+  ],
+  "_coverImageId": 740,
+  "_coverFile": "image_files/gear/740.jpg"
+ },
+ {
+  "_id": 3207,
+  "name": "Experience Slackline | 30m Set",
+  "webbingLength": 30,
+  "webbingWidth": 37,
+  "tensioningType": "RAT2",
+  "includesTreePro": true,
+  "productionStatus": "AC",
+  "manufacturerId": 6,
+  "_manufacturerName": "Slacktivity",
+  "url": "https://slacktivity.ch/shop/experience-slackline-30m/",
+  "pricing": {
+   "currency": "CHF",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 200
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "experience_slackline30mset",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622027013441,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 1,
+  "_slackdbUrl": "https://slackdb.com/gear_details/experience_slackline30mset",
+  "_imageIds": [
+   751
+  ],
+  "_coverImageId": 751,
+  "_coverFile": "image_files/gear/751.jpg"
+ },
+ {
+  "_id": 3208,
+  "name": "Minimum Slackline | 12m Set",
+  "webbingLength": 12,
+  "webbingWidth": 37,
+  "tensioningType": "RAT1",
+  "productionStatus": "AC",
+  "manufacturerId": 6,
+  "_manufacturerName": "Slacktivity",
+  "url": "https://slacktivity.ch/shop/minimum-slackline-12m/",
+  "pricing": {
+   "currency": "CHF",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 99
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "minimum_slackline12mset",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622027069399,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 1,
+  "_slackdbUrl": "https://slackdb.com/gear_details/minimum_slackline12mset",
+  "_imageIds": [
+   763
+  ],
+  "_coverImageId": 763,
+  "_coverFile": "image_files/gear/763.jpg"
+ },
+ {
+  "_id": 3209,
+  "name": "Slackline YOGA Set",
+  "webbingLength": 30,
+  "webbingWidth": 26,
+  "tensioningType": "PRIM",
+  "includesTreePro": true,
+  "productionStatus": "AC",
+  "manufacturerId": 6,
+  "_manufacturerName": "Slacktivity",
+  "url": "https://slacktivity.ch/shop/slackline-yoga-set/",
+  "pricing": {
+   "currency": "CHF",
+   "lst": [
+    {
+     "price": 479,
+     "qt": "AA",
+     "q": 1
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "slackline_yogaset",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622027238631,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 1,
+  "_slackdbUrl": "https://slackdb.com/gear_details/slackline_yogaset",
+  "_imageIds": [
+   772
+  ],
+  "_coverImageId": 772,
+  "_coverFile": "image_files/gear/772.jpg"
+ },
+ {
+  "_id": 3210,
+  "name": "Traveler | leichte Reise-Slackline",
+  "weight": 1040,
+  "webbingLength": 15,
+  "webbingWidth": 20,
+  "tensioningType": "PRIM",
+  "productionStatus": "AC",
+  "manufacturerId": 6,
+  "_manufacturerName": "Slacktivity",
+  "url": "https://slacktivity.ch/shop/traveler-reise-slackline/",
+  "pricing": {
+   "currency": "CHF",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 129
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "traveler_leichtereise-slackline",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622028030280,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 1,
+  "_slackdbUrl": "https://slackdb.com/gear_details/traveler_leichtereise-slackline",
+  "_imageIds": [
+   774
+  ],
+  "_coverImageId": 774,
+  "_coverFile": "image_files/gear/774.jpg"
+ },
+ {
+  "_id": 3211,
+  "name": "Aki Starter Comfort Slacklineset",
+  "webbingLength": 16,
+  "webbingWidth": 35,
+  "tensioningType": "RAT1",
+  "includesTreePro": true,
+  "productionStatus": "AC",
+  "manufacturerId": 64,
+  "_manufacturerName": "Aki Slacklines",
+  "url": "https://aki-slacklines.de/de/slacklinesets/ratsche/199/aki-starter-comfort-slacklineset?c=7",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 125
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "aki_startercomfortslacklineset",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622028390356,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 1,
+  "_slackdbUrl": "https://slackdb.com/gear_details/aki_startercomfortslacklineset",
+  "_imageIds": [
+   739
+  ],
+  "_coverImageId": 739,
+  "_coverFile": "image_files/gear/739.jpg"
+ },
+ {
+  "_id": 3212,
+  "name": "Landcruising Aloha Rodeolineset",
+  "webbingLength": 20,
+  "webbingWidth": 25,
+  "tensioningType": "PRIM",
+  "includesTreePro": true,
+  "productionStatus": "AC",
+  "manufacturerId": 64,
+  "_manufacturerName": "Aki Slacklines",
+  "url": "https://aki-slacklines.de/de/slacklinesets/rodeoline/2/landcruising-aloha-rodeolineset?c=5",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "price": 85,
+     "q": 1,
+     "qt": "AA"
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "landcruising_aloharodeolineset",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622028557380,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 1,
+  "_slackdbUrl": "https://slackdb.com/gear_details/landcruising_aloharodeolineset",
+  "_imageIds": [
+   778
+  ],
+  "_coverImageId": 778,
+  "_coverFile": "image_files/gear/778.jpg"
+ },
+ {
+  "_id": 3213,
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "breathe_20slacklinekit",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622028745268,
+  "name": "Breathe 20 Slackline Kit",
+  "webbingLength": 20,
+  "webbingWidth": 25,
+  "tensioningType": "PRIM",
+  "includesTreePro": true,
+  "productionStatus": "AC",
+  "manufacturerId": 3,
+  "_manufacturerName": "Balance Community: Slackline Outfitters",
+  "url": "https://www.balancecommunity.com/products/breathe-20-slackline-kit?variant=32226241085498",
+  "pricing": {
+   "currency": "USD",
+   "lst": [
+    {
+     "price": 99,
+     "q": 1,
+     "qt": "AA"
+    }
+   ]
+  },
+  "lastEditDate": 1622037321510,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 1,
+  "_slackdbUrl": "https://slackdb.com/gear_details/breathe_20slacklinekit",
+  "_imageIds": [
+   742
+  ],
+  "_coverImageId": 742,
+  "_coverFile": "image_files/gear/742.jpg"
+ },
+ {
+  "_id": 3214,
+  "name": "Kit Cruise 15m",
+  "webbingLength": 15,
+  "webbingWidth": 50,
+  "tensioningType": "RAT1",
+  "productionStatus": "AC",
+  "manufacturerId": 73,
+  "_manufacturerName": "Easy Slackline",
+  "url": "https://laboutique.slack.fr/en/family-wide-slackline-15m/23-kit-cruise-slackline.html",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 50
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "kit_cruise15m",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622029407968,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 1,
+  "_slackdbUrl": "https://slackdb.com/gear_details/kit_cruise15m",
+  "_imageIds": [
+   754
+  ],
+  "_coverImageId": 754,
+  "_coverFile": "image_files/gear/754.jpg"
+ },
+ {
+  "_id": 3215,
+  "name": "Kit Cruise Easy with handlerail",
+  "webbingLength": 15,
+  "webbingWidth": 50,
+  "tensioningType": "RAT2",
+  "productionStatus": "AC",
+  "manufacturerId": 73,
+  "_manufacturerName": "Easy Slackline",
+  "url": "https://laboutique.slack.fr/en/family-wide-slackline-15m/189-kit-cruise-easy-slackline.html",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "price": 90,
+     "q": 1,
+     "qt": "AA"
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "kit_cruiseeasywithhandlerail",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622029515668,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 1,
+  "_slackdbUrl": "https://slackdb.com/gear_details/kit_cruiseeasywithhandlerail",
+  "_imageIds": [
+   755
+  ],
+  "_coverImageId": 755,
+  "_coverFile": "image_files/gear/755.jpg"
+ },
+ {
+  "_id": 3216,
+  "name": "Easy pack",
+  "webbingLength": 15,
+  "webbingWidth": 25,
+  "tensioningType": "RAT1",
+  "productionStatus": "AC",
+  "manufacturerId": 73,
+  "_manufacturerName": "Easy Slackline",
+  "url": "https://laboutique.slack.fr/en/family-wide-slackline-15m/182-easy-pack.html",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 50
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "easy_pack",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622029587030,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 1,
+  "_slackdbUrl": "https://slackdb.com/gear_details/easy_pack",
+  "_imageIds": [
+   745
+  ],
+  "_coverImageId": 745,
+  "_coverFile": "image_files/gear/745.jpg"
+ },
+ {
+  "_id": 3217,
+  "name": "Kit Primitiv 25",
+  "webbingLength": 25,
+  "webbingWidth": 25,
+  "tensioningType": "PRIM",
+  "productionStatus": "AC",
+  "manufacturerId": 73,
+  "_manufacturerName": "Easy Slackline",
+  "url": "https://laboutique.slack.fr/en/mid-level-slack-2535m/205-kit-primitiv-25m.html",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 90
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "kit_primitiv25",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622029718368,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 1,
+  "_slackdbUrl": "https://slackdb.com/gear_details/kit_primitiv25",
+  "_imageIds": [
+   758
+  ],
+  "_coverImageId": 758,
+  "_coverFile": "image_files/gear/758.jpg"
+ },
+ {
+  "_id": 3218,
+  "name": "EQB STEP 12 M",
+  "webbingLength": 25,
+  "webbingWidth": 35,
+  "tensioningType": "RAT1",
+  "productionStatus": "AC",
+  "manufacturerId": 9,
+  "_manufacturerName": "Equilibrium Slacklines (EQB)",
+  "url": "https://www.slackshop.cz/en/for-beginners/9-eqb-step-12-m.html",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 43
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "eqb_step12m",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622029901988,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 1,
+  "_slackdbUrl": "https://slackdb.com/gear_details/eqb_step12m",
+  "_imageIds": [
+   748
+  ],
+  "_coverImageId": 748,
+  "_coverFile": "image_files/gear/748.jpg"
+ },
+ {
+  "_id": 3219,
+  "name": "EQB BALANCE 20 M",
+  "webbingLength": 20,
+  "webbingWidth": 25,
+  "tensioningType": "RAT1",
+  "productionStatus": "AC",
+  "manufacturerId": 9,
+  "_manufacturerName": "Equilibrium Slacklines (EQB)",
+  "url": "https://www.slackshop.cz/en/for-beginners/10-balance-20-m.html",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 63
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "eqb_balance20m",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622029982523,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 1,
+  "_slackdbUrl": "https://slackdb.com/gear_details/eqb_balance20m",
+  "_imageIds": [
+   747
+  ],
+  "_coverImageId": 747,
+  "_coverFile": "image_files/gear/747.jpg"
+ },
+ {
+  "_id": 3220,
+  "name": "EQB TRICK 20 M",
+  "webbingLength": 20,
+  "webbingWidth": 50,
+  "tensioningType": "RAT1",
+  "productionStatus": "AC",
+  "manufacturerId": 9,
+  "_manufacturerName": "Equilibrium Slacklines (EQB)",
+  "url": "https://www.slackshop.cz/en/for-beginners/8-eqb-trick-20-m.html",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 63
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "eqb_trick20m",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622030068544,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 1,
+  "_slackdbUrl": "https://slackdb.com/gear_details/eqb_trick20m",
+  "_imageIds": [
+   749
+  ],
+  "_coverImageId": 749,
+  "_coverFile": "image_files/gear/749.jpg"
+ },
+ {
+  "_id": 3221,
+  "name": "SLACKLINE KIT - PIRATE 18",
+  "webbingLength": 18,
+  "webbingWidth": 50,
+  "tensioningType": "RAT1",
+  "productionStatus": "AC",
+  "manufacturerId": 7,
+  "_manufacturerName": "Slack Inov",
+  "url": "https://slack-inov.com/shop/en/slackline-kit/406-slackline-kit-pirate-18-9506919000.html",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 80
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "slackline_kit-pirate18",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622030443196,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 1,
+  "_slackdbUrl": "https://slackdb.com/gear_details/slackline_kit-pirate18",
+  "_imageIds": [
+   770
+  ],
+  "_coverImageId": 770,
+  "_coverFile": "image_files/gear/770.jpg"
+ },
+ {
+  "_id": 3222,
+  "name": "SLACKLINE KIT - PLASMA 30",
+  "webbingLength": 30,
+  "webbingWidth": 25,
+  "tensioningType": "RAT2",
+  "productionStatus": "AC",
+  "manufacturerId": 7,
+  "_manufacturerName": "Slack Inov",
+  "url": "https://slack-inov.com/shop/en/slackline-kit/407-slackline-kit-pirate-30-9506919000.html",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 100
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "slackline_kit-plasma30",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622030515017,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 1,
+  "_slackdbUrl": "https://slackdb.com/gear_details/slackline_kit-plasma30",
+  "_imageIds": [
+   771
+  ],
+  "_coverImageId": 771,
+  "_coverFile": "image_files/gear/771.jpg"
+ },
+ {
+  "_id": 3223,
+  "name": "KIT SLACK 15M (17M CUMULÉ)",
+  "webbingLength": 15,
+  "webbingWidth": 50,
+  "tensioningType": "RAT1",
+  "productionStatus": "AC",
+  "manufacturerId": 4,
+  "_manufacturerName": "Slack Mountain",
+  "url": "https://slack-mountain.com/en/slackline-beginner-kit/36-kit-slack-15m-17m-cumule.html",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 35
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "kit_slack15m17mcumul",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622030795297,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 1,
+  "_slackdbUrl": "https://slackdb.com/gear_details/kit_slack15m17mcumul",
+  "_imageIds": [
+   760
+  ],
+  "_coverImageId": 760,
+  "_coverFile": "image_files/gear/760.jpg"
+ },
+ {
+  "_id": 3224,
+  "name": "KIT INUIT 30 M",
+  "webbingLength": 30,
+  "webbingWidth": 25,
+  "tensioningType": "PRIM",
+  "productionStatus": "AC",
+  "manufacturerId": 4,
+  "_manufacturerName": "Slack Mountain",
+  "url": "https://slack-mountain.com/en/slackline-beginner-kit/34-kit-inuit-30-m.html",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 90
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "kit_inuit30m",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622030841000,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 1,
+  "_slackdbUrl": "https://slackdb.com/gear_details/kit_inuit30m",
+  "_imageIds": [
+   757
+  ],
+  "_coverImageId": 757,
+  "_coverFile": "image_files/gear/757.jpg"
+ },
+ {
+  "_id": 3225,
+  "name": "KIT IGLOO 25 M",
+  "webbingLength": 25,
+  "webbingWidth": 25,
+  "tensioningType": "PRIM",
+  "productionStatus": "AC",
+  "manufacturerId": 4,
+  "_manufacturerName": "Slack Mountain",
+  "url": "https://slack-mountain.com/en/slackline-beginner-kit/35-kit-igloo-25-m.html",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 80
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "kit_igloo25m",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622030896238,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 1,
+  "_slackdbUrl": "https://slackdb.com/gear_details/kit_igloo25m",
+  "_imageIds": [
+   756
+  ],
+  "_coverImageId": 756,
+  "_coverFile": "image_files/gear/756.jpg"
+ },
+ {
+  "_id": 3226,
+  "name": "KIT SLACK DE 20M AVEC CLIQUET",
+  "webbingLength": 20,
+  "webbingWidth": 50,
+  "tensioningType": "RAT1",
+  "productionStatus": "AC",
+  "manufacturerId": 4,
+  "_manufacturerName": "Slack Mountain",
+  "url": "https://slack-mountain.com/en/slackline-beginner-kit/37-kit-slack-de-20m-avec-cliquet.html",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 48
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "kit_slackde20maveccliquet",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622030961254,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 1,
+  "_slackdbUrl": "https://slackdb.com/gear_details/kit_slackde20maveccliquet",
+  "_imageIds": [
+   761
+  ],
+  "_coverImageId": 761,
+  "_coverFile": "image_files/gear/761.jpg"
+ },
+ {
+  "_id": 3227,
+  "name": "PACK CLICK 25 M",
+  "webbingLength": 25,
+  "webbingWidth": 25,
+  "tensioningType": "RAT2",
+  "productionStatus": "AC",
+  "manufacturerId": 4,
+  "_manufacturerName": "Slack Mountain",
+  "url": "https://slack-mountain.com/en/slackline-beginner-kit/200-pack-click-25-m.html",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 78
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "pack_click25m",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622031045265,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 1,
+  "_slackdbUrl": "https://slackdb.com/gear_details/pack_click25m",
+  "_imageIds": [
+   766
+  ],
+  "_coverImageId": 766,
+  "_coverFile": "image_files/gear/766.jpg"
+ },
+ {
+  "_id": 3228,
+  "name": "PLAY LINE",
+  "webbingLength": 15,
+  "webbingWidth": 50,
+  "productionStatus": "AC",
+  "manufacturerId": 21,
+  "_manufacturerName": "Slackline Industries",
+  "url": "https://slacklineindustries.com/collections/all-products/products/play-line",
+  "pricing": {
+   "currency": "USD",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 100
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "play_line",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622031567093,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 1,
+  "_slackdbUrl": "https://slackdb.com/gear_details/play_line",
+  "_imageIds": [
+   767
+  ],
+  "_coverImageId": 767,
+  "_coverFile": "image_files/gear/767.jpg"
+ },
+ {
+  "_id": 3229,
+  "name": "10 m Clip n Slack Set",
+  "webbingLength": 10,
+  "webbingWidth": 30,
+  "tensioningType": "RAT1",
+  "productionStatus": "AC",
+  "manufacturerId": 25,
+  "_manufacturerName": "Slackline tools",
+  "url": "https://www.slack-shop.de/10m-clip-n-slack-set.html",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 90
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "10_mclipnslackset",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622032128158,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 1,
+  "_slackdbUrl": "https://slackdb.com/gear_details/10_mclipnslackset",
+  "_imageIds": [
+   737
+  ],
+  "_coverImageId": 737,
+  "_coverFile": "image_files/gear/737.jpg"
+ },
+ {
+  "_id": 3230,
+  "name": "10 m Fit n Slack Set",
+  "webbingLength": 10,
+  "webbingWidth": 30,
+  "productionStatus": "AC",
+  "manufacturerId": 25,
+  "_manufacturerName": "Slackline tools",
+  "url": "https://www.slack-shop.de/10m-fit-n-slack-set.html",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 200
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "10_mfitnslackset",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622032185620,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 1,
+  "_slackdbUrl": "https://slackdb.com/gear_details/10_mfitnslackset",
+  "_imageIds": [
+   738
+  ],
+  "_coverImageId": 738,
+  "_coverFile": "image_files/gear/738.jpg"
+ },
+ {
+  "_id": 3231,
+  "name": "Sigma Slackline Set ( 35 mm ), 15m lang",
+  "webbingLength": 15,
+  "webbingWidth": 35,
+  "tensioningType": "RAT1",
+  "productionStatus": "AC",
+  "manufacturerId": 30,
+  "_manufacturerName": "Slackliner.de",
+  "url": "https://www.slackliner.de/de/Sigma-Slackline-Set---35-mm----15m-lang-180.html",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 56
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "sigma_slacklineset35mm15mlang",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622032311590,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 1,
+  "_slackdbUrl": "https://slackdb.com/gear_details/sigma_slacklineset35mm15mlang",
+  "_imageIds": [
+   768
+  ],
+  "_coverImageId": 768,
+  "_coverFile": "image_files/gear/768.jpg"
+ },
+ {
+  "_id": 3232,
+  "name": "Sigma Slackline Set ( 35 mm breit ) 25m lang",
+  "webbingLength": 25,
+  "webbingWidth": 35,
+  "tensioningType": "RAT1",
+  "productionStatus": "AC",
+  "manufacturerId": 30,
+  "_manufacturerName": "Slackliner.de",
+  "url": "https://www.slackliner.de/de/Sigma-Slackline-Set---35-mm---25-35m-lang-181.html",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 70
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "sigma_slacklineset35mmbreit25mlang",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622032351234,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 1,
+  "_slackdbUrl": "https://slackdb.com/gear_details/sigma_slacklineset35mmbreit25mlang",
+  "_imageIds": [
+   769
+  ],
+  "_coverImageId": 769,
+  "_coverFile": "image_files/gear/769.jpg"
+ },
+ {
+  "_id": 3233,
+  "name": "Dragon 2 25 M",
+  "webbingLength": 25,
+  "webbingWidth": 50,
+  "tensioningType": "RAT1",
+  "productionStatus": "AC",
+  "manufacturerId": 55,
+  "_manufacturerName": "Slackstar",
+  "url": "https://slackstar.de/kinder-familie/2-baeume/komplettset-2-teilig/876/dragon2?number=SL81800-25-DG",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 125
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "dragon_225m",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622032494983,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 1,
+  "_slackdbUrl": "https://slackdb.com/gear_details/dragon_225m",
+  "_imageIds": [
+   743
+  ],
+  "_coverImageId": 743,
+  "_coverFile": "image_files/gear/743.jpg"
+ },
+ {
+  "_id": 3234,
+  "name": "Nature 2 15M",
+  "webbingLength": 15,
+  "webbingWidth": 50,
+  "tensioningType": "RAT1",
+  "productionStatus": "AC",
+  "manufacturerId": 55,
+  "_manufacturerName": "Slackstar",
+  "url": "https://slackstar.de/kinder-familie/2-baeume/komplettset-2-teilig/923/nature2?number=SL81792-15_NATURE",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 170
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "nature_215m",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622032553343,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 1,
+  "_slackdbUrl": "https://slackdb.com/gear_details/nature_215m",
+  "_imageIds": [
+   764
+  ],
+  "_coverImageId": 764,
+  "_coverFile": "image_files/gear/764.jpg"
+ },
+ {
+  "_id": 3235,
+  "name": "Zebra 6 25 M",
+  "webbingLength": 25,
+  "webbingWidth": 50,
+  "tensioningType": "RAT1",
+  "productionStatus": "AC",
+  "manufacturerId": 55,
+  "_manufacturerName": "Slackstar",
+  "url": "https://slackstar.de/kinder-familie/2-baeume/komplettset-6-teilig/921/zebra6?number=SL82668-25_ZEBRA",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 115
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "zebra_625m",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622032768717,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 1,
+  "_slackdbUrl": "https://slackdb.com/gear_details/zebra_625m",
+  "_imageIds": [
+   776
+  ],
+  "_coverImageId": 776,
+  "_coverFile": "image_files/gear/776.jpg"
+ },
+ {
+  "_id": 3236,
+  "name": "Basic 6 25 M",
+  "webbingLength": 25,
+  "webbingWidth": 50,
+  "tensioningType": "RAT1",
+  "productionStatus": "AC",
+  "manufacturerId": 55,
+  "_manufacturerName": "Slackstar",
+  "url": "https://slackstar.de/kinder-familie/2-baeume/komplettset-6-teilig/893/basic6?number=SL82668-25-F",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 110
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "basic_625m",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622032814548,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 1,
+  "_slackdbUrl": "https://slackdb.com/gear_details/basic_625m",
+  "_imageIds": [
+   741
+  ],
+  "_coverImageId": 741,
+  "_coverFile": "image_files/gear/741.jpg"
+ },
+ {
+  "_id": 3237,
+  "name": "Nature 6 15 M",
+  "webbingLength": 15,
+  "webbingWidth": 50,
+  "tensioningType": "RAT1",
+  "productionStatus": "AC",
+  "manufacturerId": 55,
+  "_manufacturerName": "Slackstar",
+  "url": "https://slackstar.de/kinder-familie/2-baeume/komplettset-6-teilig/916/nature6?number=SL82668-15NATURE",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 170
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "nature_615m",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622032859889,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 1,
+  "_slackdbUrl": "https://slackdb.com/gear_details/nature_615m",
+  "_imageIds": [
+   765
+  ],
+  "_coverImageId": 765,
+  "_coverFile": "image_files/gear/765.jpg"
+ },
+ {
+  "_id": 3238,
+  "name": "Dragon 6",
+  "webbingLength": 25,
+  "webbingWidth": 50,
+  "tensioningType": "RAT1",
+  "productionStatus": "AC",
+  "manufacturerId": 55,
+  "_manufacturerName": "Slackstar",
+  "url": "https://slackstar.de/kinder-familie/2-baeume/komplettset-6-teilig/917/dragon6?number=SL82668-25_DG",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 160
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "dragon_6",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622032920834,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 1,
+  "_slackdbUrl": "https://slackdb.com/gear_details/dragon_6",
+  "_imageIds": [
+   744
+  ],
+  "_coverImageId": 744,
+  "_coverFile": "image_files/gear/744.jpg"
+ },
+ {
+  "_id": 3239,
+  "name": "Guide 2 20 M",
+  "webbingLength": 20,
+  "webbingWidth": 50,
+  "tensioningType": "RAT1",
+  "productionStatus": "AC",
+  "manufacturerId": 55,
+  "_manufacturerName": "Slackstar",
+  "url": "https://slackstar.de/fun-performance/2-baeume/komplettset-2-teilig/866/guide2?number=SL81792-20_35",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 48
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "guide_220m",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622032981894,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 2,
+  "_slackdbUrl": "https://slackdb.com/gear_details/guide_220m",
+  "_imageIds": [
+   752,
+   753
+  ],
+  "_coverImageId": 753,
+  "_coverFile": "image_files/gear/753.jpg"
+ },
+ {
+  "_id": 3240,
+  "name": "Zebra 2 25 M",
+  "webbingLength": 25,
+  "webbingWidth": 50,
+  "tensioningType": "RAT1",
+  "productionStatus": "AC",
+  "manufacturerId": 55,
+  "_manufacturerName": "Slackstar",
+  "url": "https://slackstar.de/fun-performance/2-baeume/komplettset-2-teilig/868/zebra2?number=SL81792-25_ZEBRA",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 85
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "zebra_225m",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622033030540,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 1,
+  "_slackdbUrl": "https://slackdb.com/gear_details/zebra_225m",
+  "_imageIds": [
+   775
+  ],
+  "_coverImageId": 775,
+  "_coverFile": "image_files/gear/775.jpg"
+ },
+ {
+  "_id": 3241,
+  "name": "Super Guide 6 30 M",
+  "webbingLength": 30,
+  "webbingWidth": 35,
+  "tensioningType": "RAT1",
+  "productionStatus": "AC",
+  "manufacturerId": 55,
+  "_manufacturerName": "Slackstar",
+  "url": "https://slackstar.de/fun-performance/2-baeume/komplettset-6-teilig/870/super-guide6?number=SL81798-30",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 137
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "super_guide630m",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622033136331,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 1,
+  "_slackdbUrl": "https://slackdb.com/gear_details/super_guide630m",
+  "_imageIds": [
+   773
+  ],
+  "_coverImageId": 773,
+  "_coverFile": "image_files/gear/773.jpg"
+ },
+ {
+  "_id": 3242,
+  "name": "Guide 6 20 M",
+  "webbingLength": 20,
+  "webbingWidth": 35,
+  "tensioningType": "RAT1",
+  "productionStatus": "AC",
+  "manufacturerId": 55,
+  "_manufacturerName": "Slackstar",
+  "url": "https://slackstar.de/fun-performance/2-baeume/komplettset-6-teilig/864/guide6?number=SL81775-20",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "price": 88,
+     "qt": "AA"
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "guide_620m",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622033183474,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 1,
+  "_slackdbUrl": "https://slackdb.com/gear_details/guide_620m",
+  "_imageIds": [
+   777
+  ],
+  "_coverImageId": 777,
+  "_coverFile": "image_files/gear/777.jpg"
+ },
+ {
+  "_id": 3243,
+  "name": "ELINE SLACKLINE: LIGHT KIT",
+  "webbingLength": 15,
+  "webbingWidth": 25,
+  "tensioningType": "PRIM",
+  "productionStatus": "AC",
+  "manufacturerId": 20,
+  "_manufacturerName": "Yoga Slackers",
+  "url": "https://yogaslackers.com/shop/slackline/elinelight/",
+  "pricing": {
+   "currency": "USD",
+   "lst": [
+    {
+     "price": 90,
+     "q": 1,
+     "qt": "AA"
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "eline_slacklinelightkit",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622033435397,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 1,
+  "_slackdbUrl": "https://slackdb.com/gear_details/eline_slacklinelightkit",
+  "_imageIds": [
+   746
+  ],
+  "_coverImageId": 746,
+  "_coverFile": "image_files/gear/746.jpg"
+ },
+ {
+  "_id": 3244,
+  "name": "10 m Kids n Slack Set",
+  "webbingLength": 10,
+  "webbingWidth": 45,
+  "tensioningType": "RAT1",
+  "includesTreePro": true,
+  "productionStatus": "AC",
+  "manufacturerId": 25,
+  "_manufacturerName": "Slackline tools",
+  "url": "https://www.slack-shop.de/10m-kids-n-slack-set.html",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 100
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "SKT",
+  "slug": "10_mkidsnslackset",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622037129475,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 1,
+  "_slackdbUrl": "https://slackdb.com/gear_details/10_mkidsnslackset",
+  "_imageIds": [
+   780
+  ],
+  "_coverImageId": 780,
+  "_coverFile": "image_files/gear/780.jpg"
+ }
+]

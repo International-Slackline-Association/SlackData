@@ -1,0 +1,16 @@
+id,name,manufacturer,Material,Weight (grams),WLL (kN),MBS (kN),remarks,rating (/10),ratings,reviews,comments,images,image ids,cover image,contributors,created,last edited,slackdb url
+3000,Static Rope,,,,,,,,,0,0,3,11; 12; 18,,Nir Avneyon,2017-07-12T21:51:06Z,,https://slackdb.com/gear_details/StaticRope
+3001,Dynamic Rope,,,,,,,,,0,0,0,,,Nir Avneyon,2017-07-12T21:51:06Z,,https://slackdb.com/gear_details/DynamicRope
+3002,Tagline,,,,,,,,,0,0,0,,,Nir Avneyon,2017-07-12T21:51:06Z,,https://slackdb.com/gear_details/Tagline
+3003,10mm Bolt,,,,,,,,,0,0,0,,,Nir Avneyon,2017-07-12T21:51:06Z,,https://slackdb.com/gear_details/10mmBolt
+3004,12mm Bolt,,,,,,,,,0,0,0,,,Nir Avneyon,2017-07-12T21:51:06Z,,https://slackdb.com/gear_details/12mmBolt
+3005,10mm Hanger,,,,,,,,,0,0,2,18; 193,image_files/gear/193.jpg,Nir Avneyon,2017-07-12T21:51:06Z,,https://slackdb.com/gear_details/10mmHanger
+3006,12mm Hanger,,,,,,,,,0,0,1,197,image_files/gear/197.jpg,Nir Avneyon,2017-07-12T21:51:06Z,,https://slackdb.com/gear_details/12mmHanger
+3007,1T Spanset,,,,10,70,,,,0,0,2,50; 228,,Nir Avneyon,2017-07-12T21:51:06Z,,https://slackdb.com/gear_details/1TSpanset
+3008,2T Spanset,,,,20,70,,,,0,0,1,18,,Nir Avneyon,2017-07-12T21:51:06Z,,https://slackdb.com/gear_details/2TSpanset
+3009,Soft Release,,,,,,,,,0,0,1,50,,Nir Avneyon,2017-07-12T21:51:06Z,,https://slackdb.com/gear_details/soft_release
+3015,Tree Protector,,,,,,,,,0,0,0,,,Nir Avneyon,2017-07-14T18:12:36Z,,https://slackdb.com/gear_details/tree_protector
+3030,12mm Nut,,,,,,,,,0,0,2,185; 199,image_files/gear/199.jpg,Nir Avneyon,2017-09-21T13:09:41Z,,https://slackdb.com/gear_details/12mm_nut
+3031,10mm Nut,,,,,,,,,0,0,2,185; 194,image_files/gear/194.jpg,Nir Avneyon,2017-09-21T13:09:53Z,,https://slackdb.com/gear_details/10mm_nut
+3056,Snatch,,Dyneema; Aluminum,175,10,25,,,,0,0,0,,,Nir Avneyon,2018-09-26T22:36:51Z,,https://slackdb.com/gear_details/snatch
+3084,LineGrip Nano,,Nylon (Polyamide),100,4,10,,,,0,0,2,386; 387,image_files/gear/387.jpg,Nir Avneyon,2019-07-14T22:36:33Z,,https://slackdb.com/gear_details/linegrip_nano

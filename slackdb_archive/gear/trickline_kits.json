@@ -1,0 +1,379 @@
+[
+ {
+  "_id": 3142,
+  "name": "23m kit",
+  "webbingLength": 23,
+  "webbingWidth": 50,
+  "tensioningType": "RAT1",
+  "includesTreePro": true,
+  "productionStatus": "AC",
+  "manufacturerId": 46,
+  "_manufacturerName": "Middle Way Slacklines",
+  "pricing": {
+   "currency": "ILS",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 600
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "TLK",
+  "slug": "23m_kit",
+  "creatorId": "10154430595665625",
+  "creationDate": 1617137515463,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 2,
+  "_slackdbUrl": "https://slackdb.com/gear_details/23m_kit",
+  "_imageIds": [
+   541,
+   542
+  ],
+  "_coverImageId": 542,
+  "_coverFile": "image_files/gear/542.jpg"
+ },
+ {
+  "_id": 3180,
+  "name": "Level 1 Kit",
+  "webbingLength": 23,
+  "webbingWidth": 50,
+  "tensioningType": "RAT1",
+  "includesTreePro": true,
+  "dateIntroduced": 1620111600000,
+  "productionStatus": "AC",
+  "url": "https://www.riggingventures.com/product-page/level-1-trickline-kit",
+  "pricing": {
+   "currency": "USD",
+   "lst": [
+    {
+     "q": 1,
+     "price": 75,
+     "qt": "EX"
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "10226447140071894",
+    "name": "Eric Hake"
+   }
+  ],
+  "itemTypeId": "TLK",
+  "slug": "level_1kit",
+  "creatorId": "10226447140071894",
+  "creationDate": 1621890885306,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 0,
+  "_slackdbUrl": "https://slackdb.com/gear_details/level_1kit",
+  "_imageIds": [],
+  "_coverImageId": null,
+  "_coverFile": null
+ },
+ {
+  "_id": 3181,
+  "name": "Level Two Kit",
+  "webbingLength": 30,
+  "webbingWidth": 50,
+  "tensioningType": "RAT2",
+  "includesTreePro": true,
+  "dateIntroduced": 1620111600000,
+  "productionStatus": "AC",
+  "url": "https://www.riggingventures.com/product-page/rv-trickline-kit",
+  "pricing": {
+   "currency": "USD",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "EX",
+     "price": 185
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "10226447140071894",
+    "name": "Eric Hake"
+   }
+  ],
+  "itemTypeId": "TLK",
+  "slug": "level_twokit",
+  "creatorId": "10226447140071894",
+  "creationDate": 1621891342589,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 0,
+  "_slackdbUrl": "https://slackdb.com/gear_details/level_twokit",
+  "_imageIds": [],
+  "_coverImageId": null,
+  "_coverFile": null
+ },
+ {
+  "_id": 3182,
+  "contributors": [
+   {
+    "id": "10226447140071894",
+    "name": "Eric Hake"
+   }
+  ],
+  "itemTypeId": "TLK",
+  "slug": "level_3tricklinekit",
+  "creatorId": "10226447140071894",
+  "creationDate": 1621891420627,
+  "name": "Level 3 Trickline kit",
+  "webbingLength": 45,
+  "webbingWidth": 50,
+  "tensioningType": "OT",
+  "includesTreePro": true,
+  "dateIntroduced": 1620111600000,
+  "productionStatus": "AC",
+  "url": "https://www.riggingventures.com/product-page/pro-trickline-kit-1",
+  "pricing": {
+   "currency": "USD",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "EX",
+     "price": 750
+    }
+   ]
+  },
+  "lastEditDate": 1621891438961,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 0,
+  "_slackdbUrl": "https://slackdb.com/gear_details/level_3tricklinekit",
+  "_imageIds": [],
+  "_coverImageId": null,
+  "_coverFile": null
+ },
+ {
+  "_id": 3183,
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   },
+   {
+    "id": "10211802848940671",
+    "name": "Thomas Buckingham"
+   }
+  ],
+  "itemTypeId": "TLK",
+  "slug": "super_jumplineslacklineset",
+  "creatorId": "2824084041240796",
+  "creationDate": 1621916395405,
+  "name": "Super Jumpline Slackline Set",
+  "weight": 8300,
+  "webbingLength": 25,
+  "webbingWidth": 37,
+  "tensioningType": "RAT2",
+  "includesTreePro": true,
+  "productionStatus": "AC",
+  "manufacturerId": 6,
+  "_manufacturerName": "Slacktivity",
+  "url": "https://slacktivity.com/shop/super-jumpline-slackline/",
+  "pricing": {
+   "currency": "CHF",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 230
+    }
+   ]
+  },
+  "lastEditDate": 1622013137901,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 1,
+  "_slackdbUrl": "https://slackdb.com/gear_details/super_jumplineslacklineset",
+  "_imageIds": [
+   713
+  ],
+  "_coverImageId": 713,
+  "_coverFile": "image_files/gear/713.jpg"
+ },
+ {
+  "_id": 3184,
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   },
+   {
+    "id": "10211802848940671",
+    "name": "Thomas Buckingham"
+   }
+  ],
+  "itemTypeId": "TLK",
+  "slug": "trickline_kit-proline25",
+  "creatorId": "2824084041240796",
+  "creationDate": 1621927050057,
+  "name": "Trickline Kit - Pro Line 25",
+  "webbingLength": 25,
+  "webbingWidth": 50,
+  "tensioningType": "RAT2",
+  "productionStatus": "AC",
+  "manufacturerId": 24,
+  "_manufacturerName": "Spider slacklines",
+  "url": "https://spider-slacklines.com/shop/en/trickline-kit/15-544-trickline-kit-pro-line-25-9506919000.html#/26-select_backup_kit-none/29-select_tree_protections-tree_protections_xl_200_cm",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 150
+    }
+   ]
+  },
+  "lastEditDate": 1622013102850,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 1,
+  "_slackdbUrl": "https://slackdb.com/gear_details/trickline_kit-proline25",
+  "_imageIds": [
+   715
+  ],
+  "_coverImageId": 715,
+  "_coverFile": "image_files/gear/715.jpg"
+ },
+ {
+  "_id": 3185,
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   },
+   {
+    "id": "10211802848940671",
+    "name": "Thomas Buckingham"
+   }
+  ],
+  "itemTypeId": "TLK",
+  "slug": "kit_freestyle22m-andylewisx13",
+  "creatorId": "2824084041240796",
+  "creationDate": 1621927211777,
+  "name": "Kit Freestyle 22m - Andy Lewis X13",
+  "weight": 7800,
+  "webbingLength": 22,
+  "webbingWidth": 5,
+  "tensioningType": "RAT2",
+  "productionStatus": "AC",
+  "manufacturerId": 12,
+  "_manufacturerName": "Slack.fr",
+  "url": "https://laboutique.slack.fr/en/mid-level-slack-2535m/327-kit-freestyle-andy-lewis-slackline.html?fbclid=IwAR2dNVp-afje4n2EDp3MmF23fT_mHKwvaHh9cUyVwPT1JJfJufXXGPbdcUY",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 200
+    }
+   ]
+  },
+  "lastEditDate": 1622013150680,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 1,
+  "_slackdbUrl": "https://slackdb.com/gear_details/kit_freestyle22m-andylewisx13",
+  "_imageIds": [
+   714
+  ],
+  "_coverImageId": 714,
+  "_coverFile": "image_files/gear/714.jpg"
+ },
+ {
+  "_id": 3245,
+  "name": "BOSS LINE KIT",
+  "webbingLength": 25,
+  "webbingWidth": 50,
+  "tensioningType": "RAT2",
+  "includesTreePro": true,
+  "productionStatus": "AC",
+  "manufacturerId": 21,
+  "_manufacturerName": "Slackline Industries",
+  "url": "https://slacklineindustries.com/collections/all-products/products/boss-line-kit",
+  "pricing": {
+   "currency": "USD",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 250
+    }
+   ]
+  },
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "TLK",
+  "slug": "boss_linekit",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622133491808,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 1,
+  "_slackdbUrl": "https://slackdb.com/gear_details/boss_linekit",
+  "_imageIds": [
+   783
+  ],
+  "_coverImageId": 783,
+  "_coverFile": "image_files/gear/783.jpg"
+ },
+ {
+  "_id": 3246,
+  "contributors": [
+   {
+    "id": "2824084041240796",
+    "name": "Sto Rch"
+   }
+  ],
+  "itemTypeId": "TLK",
+  "slug": "25_mairx27njumpsetslide2of4",
+  "creatorId": "2824084041240796",
+  "creationDate": 1622133611412,
+  "lastEditDate": 1622133639374,
+  "name": "25 m Air n Jump Set",
+  "webbingLength": 25,
+  "webbingWidth": 45,
+  "tensioningType": "RAT2",
+  "includesTreePro": true,
+  "productionStatus": "AC",
+  "manufacturerId": 25,
+  "_manufacturerName": "Slackline tools",
+  "url": "https://www.slack-shop.de/25m-air-jump-set.html",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 180
+    }
+   ]
+  },
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 1,
+  "_slackdbUrl": "https://slackdb.com/gear_details/25_mairx27njumpsetslide2of4",
+  "_imageIds": [
+   782
+  ],
+  "_coverImageId": 782,
+  "_coverFile": "image_files/gear/782.jpg"
+ }
+]

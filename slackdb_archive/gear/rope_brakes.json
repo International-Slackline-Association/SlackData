@@ -1,0 +1,1055 @@
+[
+ {
+  "_id": 1301,
+  "name": "GRIGRI 2",
+  "slug": "GRIGRI2",
+  "manufacturerId": 31,
+  "_manufacturerName": "Petzl",
+  "material": [
+   "SS",
+   "AL",
+   "NY"
+  ],
+  "itemTypeId": "BRK",
+  "weight": 170,
+  "productionStatus": "AC",
+  "url": "http://www.petzl.com/en/Sport/Belay-devices--descenders/GRIGRI-2?l=INT",
+  "breakingMethod": "CAM",
+  "efficiency": 45,
+  "compatibleRopeDiameter": {
+   "min": 8.9,
+   "max": 11
+  },
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "157046135120641",
+    "name": "Benoit Crera"
+   }
+  ],
+  "ratingsAverages": {
+   "overall": {
+    "nativeCount": 1,
+    "nativeValue": 5,
+    "value": 5,
+    "count": 1
+   },
+   "lst": {
+    "VFM": {
+     "count": 1,
+     "value": 2
+    },
+    "QU": {
+     "count": 1,
+     "value": 2
+    },
+    "VER": {
+     "count": 1,
+     "value": 6
+    },
+    "EOU": {
+     "count": 1,
+     "value": 10
+    }
+   }
+  },
+  "commentsCount": 0,
+  "reviewsCount": 1,
+  "imagesCount": 0,
+  "reviews": [
+   {
+    "creatorId": "157046135120641",
+    "text": "Le mien a cassé en slack sur 60 m",
+    "rating": {
+     "lst": {
+      "VFM": 2,
+      "QU": 2,
+      "VER": 6,
+      "EOU": 10
+     },
+     "overall": 5
+    },
+    "pros": [],
+    "cons": [],
+    "creationDate": 1523100473274,
+    "creatorName": "Benoit Crera"
+   }
+  ],
+  "_slackdbUrl": "https://slackdb.com/gear_details/GRIGRI2",
+  "_imageIds": [],
+  "_coverImageId": null,
+  "_coverFile": null
+ },
+ {
+  "_id": 1302,
+  "name": "I’D S",
+  "slug": "IDS",
+  "manufacturerId": 31,
+  "_manufacturerName": "Petzl",
+  "material": [
+   "AL"
+  ],
+  "itemTypeId": "BRK",
+  "weight": 530,
+  "mbs": 14,
+  "productionStatus": "AC",
+  "url": "http://www.petzl.com/en/Professional/Descenders/I-D-S?l=INT#.Vjz4VX4wiUk",
+  "breakingMethod": "CAM",
+  "compatibleRopeDiameter": {
+   "min": 10,
+   "max": 11.5
+  },
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 2,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "_slackdbUrl": "https://slackdb.com/gear_details/IDS",
+  "_imageIds": [
+   167,
+   168
+  ],
+  "_coverImageId": 168,
+  "_coverFile": "image_files/gear/168.jpg"
+ },
+ {
+  "_id": 1303,
+  "name": "I’D L",
+  "slug": "IDL",
+  "manufacturerId": 31,
+  "_manufacturerName": "Petzl",
+  "material": [
+   "AL"
+  ],
+  "itemTypeId": "BRK",
+  "weight": 530,
+  "mbs": 22,
+  "productionStatus": "AC",
+  "url": "http://www.petzl.com/en/Professional/Descenders/I-D-L?l=INT#.Vjz4g34wiUk",
+  "breakingMethod": "CAM",
+  "compatibleRopeDiameter": {
+   "min": 11.5,
+   "max": 13
+  },
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 0,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "_slackdbUrl": "https://slackdb.com/gear_details/IDL",
+  "_imageIds": [],
+  "_coverImageId": null,
+  "_coverFile": null
+ },
+ {
+  "_id": 1304,
+  "name": "RIG",
+  "slug": "RIG",
+  "manufacturerId": 31,
+  "_manufacturerName": "Petzl",
+  "material": [
+   "AL"
+  ],
+  "itemTypeId": "BRK",
+  "weight": 380,
+  "mbs": 14,
+  "productionStatus": "AC",
+  "url": "http://www.petzl.com/en/Professional/Descenders/RIG?l=INT",
+  "breakingMethod": "CAM",
+  "compatibleRopeDiameter": {
+   "min": 10.5,
+   "max": 11.5
+  },
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 0,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "_slackdbUrl": "https://slackdb.com/gear_details/RIG",
+  "_imageIds": [],
+  "_coverImageId": null,
+  "_coverFile": null
+ },
+ {
+  "_id": 1305,
+  "name": "Micro Traxion",
+  "slug": "MicroTraxion",
+  "manufacturerId": 31,
+  "_manufacturerName": "Petzl",
+  "material": [
+   "AL"
+  ],
+  "itemTypeId": "BRK",
+  "weight": 85,
+  "wll": 2.5,
+  "mbs": 4,
+  "productionStatus": "AC",
+  "url": "http://www.petzl.com/en/Sport/Pulleys/MICRO-TRAXION?l=INT#.Vjz3434wiUk",
+  "remarks": "Very efficient but almost impossible to detension - requires soft release system",
+  "breakingMethod": "TCAM",
+  "efficiency": 91,
+  "compatibleRopeDiameter": {
+   "min": 8,
+   "max": 11
+  },
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "656760621184025",
+    "name": "Eli Szendro Brown"
+   }
+  ],
+  "ratingsAverages": {
+   "overall": {
+    "nativeCount": 1,
+    "nativeValue": 9,
+    "value": 9,
+    "count": 1
+   },
+   "lst": {
+    "VER": {
+     "count": 1,
+     "value": 10
+    },
+    "EOU": {
+     "count": 1,
+     "value": 6
+    },
+    "QU": {
+     "count": 1,
+     "value": 10
+    },
+    "VFM": {
+     "count": 1,
+     "value": 10
+    }
+   }
+  },
+  "commentsCount": 0,
+  "reviewsCount": 1,
+  "imagesCount": 1,
+  "reviews": [
+   {
+    "creatorId": "656760621184025",
+    "text": "I use it with 6mm rope and a linegrip. I love how small and efficient it is, but when rigging high (parklines) I find it hard to release. Can be useful to pull thick taglines across. I would not recommend using it W/O softpointing due to the tooth cam.",
+    "rating": {
+     "lst": {
+      "VER": 10,
+      "EOU": 6,
+      "QU": 10,
+      "VFM": 10
+     },
+     "overall": 9
+    },
+    "pros": [],
+    "cons": [],
+    "creationDate": 1500143564377,
+    "creatorName": "Eli Szendro Brown"
+   }
+  ],
+  "_slackdbUrl": "https://slackdb.com/gear_details/MicroTraxion",
+  "_imageIds": [
+   60
+  ],
+  "_coverImageId": 60,
+  "_coverFile": "image_files/gear/60.jpg"
+ },
+ {
+  "_id": 1306,
+  "name": "Mini Traxion",
+  "slug": "MiniTraxion",
+  "manufacturerId": 31,
+  "_manufacturerName": "Petzl",
+  "material": [
+   "AL"
+  ],
+  "itemTypeId": "BRK",
+  "weight": 165,
+  "mbs": 20,
+  "productionStatus": "AC",
+  "url": "http://www.petzl.com/en/Sport/Pulleys/MICRO-TRAXION?l=INT#.Vjz3wX4wiUk",
+  "remarks": "Very efficient but almost impossible to detension - requires soft release system",
+  "breakingMethod": "TCAM",
+  "compatibleRopeDiameter": {
+   "min": 8,
+   "max": 13
+  },
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 0,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "_slackdbUrl": "https://slackdb.com/gear_details/MiniTraxion",
+  "_imageIds": [],
+  "_coverImageId": null,
+  "_coverFile": null
+ },
+ {
+  "_id": 1307,
+  "name": "Pro Traxion",
+  "slug": "ProTraxion",
+  "manufacturerId": 31,
+  "_manufacturerName": "Petzl",
+  "material": [
+   "AL"
+  ],
+  "itemTypeId": "BRK",
+  "weight": 265,
+  "wll": 2.5,
+  "mbs": 4,
+  "productionStatus": "AC",
+  "url": "http://www.petzl.com/en/Sport/Pulleys/PRO-TRAXION?l=INT#.Vjz3jn4wiUk",
+  "remarks": "Very efficient but almost impossible to detension - requires soft release system",
+  "breakingMethod": "TCAM",
+  "efficiency": 95,
+  "compatibleRopeDiameter": {
+   "min": 8,
+   "max": 13
+  },
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 0,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "_slackdbUrl": "https://slackdb.com/gear_details/ProTraxion",
+  "_imageIds": [],
+  "_coverImageId": null,
+  "_coverFile": null
+ },
+ {
+  "_id": 1308,
+  "name": "JAG Traxion",
+  "slug": "JAGTraxion",
+  "manufacturerId": 31,
+  "_manufacturerName": "Petzl",
+  "material": [
+   "AL"
+  ],
+  "itemTypeId": "BRK",
+  "weight": 145,
+  "wll": 1.6,
+  "mbs": 4,
+  "productionStatus": "AC",
+  "url": "http://www.petzl.com/en/Professional/Pulleys/JAG-TRAXION?l=INT#.VjxrsN_tlBc",
+  "remarks": "Very efficient but almost impossible to detension - requires soft release system",
+  "breakingMethod": "TCAM",
+  "efficiency": 91,
+  "compatibleRopeDiameter": {
+   "min": 8,
+   "max": 11
+  },
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 0,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "_slackdbUrl": "https://slackdb.com/gear_details/JAGTraxion",
+  "_imageIds": [],
+  "_coverImageId": null,
+  "_coverFile": null
+ },
+ {
+  "_id": 1309,
+  "name": "Sparrow",
+  "slug": "Sparrow",
+  "manufacturerId": 36,
+  "_manufacturerName": "Climbing Technology (CT)",
+  "itemTypeId": "BRK",
+  "weight": 520,
+  "productionStatus": "AC",
+  "url": "http://www.climbingtechnology.com/en/professional-work/descenders/sparrow",
+  "breakingMethod": "CAM",
+  "compatibleRopeDiameter": {
+   "min": 10.5,
+   "max": 11
+  },
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 0,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "_slackdbUrl": "https://slackdb.com/gear_details/Sparrow",
+  "_imageIds": [],
+  "_coverImageId": null,
+  "_coverFile": null
+ },
+ {
+  "_id": 1310,
+  "name": "Sparrow 200",
+  "slug": "Sparrow200",
+  "manufacturerId": 36,
+  "_manufacturerName": "Climbing Technology (CT)",
+  "itemTypeId": "BRK",
+  "weight": 529,
+  "wll": 2.1,
+  "productionStatus": "AC",
+  "url": "http://www.climbingtechnology.com/en/professional-work/descenders/sparrow-200",
+  "breakingMethod": "CAM",
+  "compatibleRopeDiameter": {
+   "min": 11,
+   "max": 11
+  },
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 0,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "_slackdbUrl": "https://slackdb.com/gear_details/Sparrow200",
+  "_imageIds": [],
+  "_coverImageId": null,
+  "_coverFile": null
+ },
+ {
+  "_id": 1311,
+  "name": "D2",
+  "slug": "D2",
+  "manufacturerId": 47,
+  "_manufacturerName": "ISC",
+  "material": [
+   "AL"
+  ],
+  "itemTypeId": "BRK",
+  "weight": 292,
+  "wll": 1.4,
+  "mbs": 13.5,
+  "productionStatus": "AC",
+  "url": "http://www.iscwales.com/Blog/D2-Escape-Descender/",
+  "breakingMethod": "CAM",
+  "compatibleRopeDiameter": {
+   "min": 7,
+   "max": 8
+  },
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 0,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "_slackdbUrl": "https://slackdb.com/gear_details/D2",
+  "_imageIds": [],
+  "_coverImageId": null,
+  "_coverFile": null
+ },
+ {
+  "_id": 1312,
+  "name": "D4",
+  "slug": "D4",
+  "manufacturerId": 47,
+  "_manufacturerName": "ISC",
+  "material": [
+   "AL"
+  ],
+  "itemTypeId": "BRK",
+  "weight": 655,
+  "wll": 2.4,
+  "productionStatus": "AC",
+  "url": "http://www.iscwales.com/Blog/NEW-D4-WorkRescue-Descender-an-evolutionary-development-in-the-world-of-descenders/",
+  "breakingMethod": "CAM",
+  "compatibleRopeDiameter": {
+   "min": 10.5,
+   "max": 11.5
+  },
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 0,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "_slackdbUrl": "https://slackdb.com/gear_details/D4",
+  "_imageIds": [],
+  "_coverImageId": null,
+  "_coverFile": null
+ },
+ {
+  "_id": 1313,
+  "slug": "Matik",
+  "itemTypeId": "BRK",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "name": "Matik",
+  "material": [
+   "AL",
+   "S"
+  ],
+  "weight": 267,
+  "wll": 5,
+  "mbs": 22,
+  "compatibleRopeDiameter": {
+   "min": 8.6,
+   "max": 10.2
+  },
+  "breakingMethod": "CAM",
+  "productionStatus": "AC",
+  "manufacturerId": 35,
+  "_manufacturerName": "Camp",
+  "url": "http://www.camp-usa.com/products/rope-tools/matik/",
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "10155267793869667",
+    "name": "Romain Schempf"
+   }
+  ],
+  "lastEditDate": 1501840715630,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 0,
+  "_slackdbUrl": "https://slackdb.com/gear_details/Matik",
+  "_imageIds": [],
+  "_coverImageId": null,
+  "_coverFile": null
+ },
+ {
+  "_id": 1314,
+  "slug": "MPD",
+  "itemTypeId": "BRK",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "1811540145542689",
+    "name": "Helmut Netzwerker"
+   }
+  ],
+  "lastEditDate": 1502045315921,
+  "name": "MPD",
+  "material": [
+   "AL"
+  ],
+  "weight": 1100,
+  "wll": 8.8,
+  "mbs": 44,
+  "compatibleRopeDiameter": {
+   "min": 11,
+   "max": 11
+  },
+  "breakingMethod": "CAM",
+  "productionStatus": "AC",
+  "manufacturerId": 58,
+  "_manufacturerName": "CMC Rescue",
+  "url": "http://www.cmcrescue.com/equipment/mpd/",
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 0,
+  "_slackdbUrl": "https://slackdb.com/gear_details/MPD",
+  "_imageIds": [],
+  "_coverImageId": null,
+  "_coverFile": null
+ },
+ {
+  "_id": 1315,
+  "slug": "Softbrake",
+  "itemTypeId": "BRK",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "name": "Soft brake",
+  "material": [
+   "DY",
+   "KV"
+  ],
+  "breakingMethod": "CHK",
+  "productionStatus": "DC",
+  "manufacturerId": 49,
+  "_manufacturerName": "Episwiss Rigging",
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1587236348320,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 0,
+  "_slackdbUrl": "https://slackdb.com/gear_details/Softbrake",
+  "_imageIds": [],
+  "_coverImageId": null,
+  "_coverFile": null
+ },
+ {
+  "_id": 1316,
+  "name": "Eddy",
+  "slug": "Eddy",
+  "manufacturerId": 32,
+  "_manufacturerName": "Edelrid",
+  "material": [
+   "S",
+   "AL"
+  ],
+  "itemTypeId": "BRK",
+  "weight": 360,
+  "wll": 2.8,
+  "mbs": 14,
+  "productionStatus": "AC",
+  "url": "http://www.edelrid.de/en/sports/eddy-night.html",
+  "remarks": "Also sold by Singing Rock as Lory and by Anthron as SIR",
+  "breakingMethod": "CAM",
+  "compatibleRopeDiameter": {
+   "min": 9,
+   "max": 11
+  },
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   },
+   {
+    "id": "656760621184025",
+    "name": "Eli Szendro Brown"
+   }
+  ],
+  "ratingsAverages": {
+   "overall": {
+    "nativeCount": 1,
+    "nativeValue": 10,
+    "value": 10,
+    "count": 1
+   },
+   "lst": {
+    "VER": {
+     "count": 1,
+     "value": 10
+    },
+    "EOU": {
+     "count": 1,
+     "value": 10
+    },
+    "QU": {
+     "count": 1,
+     "value": 10
+    },
+    "VFM": {
+     "count": 1,
+     "value": 8
+    }
+   }
+  },
+  "commentsCount": 0,
+  "reviewsCount": 1,
+  "imagesCount": 2,
+  "reviews": [
+   {
+    "creatorId": "656760621184025",
+    "text": "I have been using it with 5:1 SMCs and love it. it is a bit hard to embed due to the wide profile. easy to release under tension, great handle with a lot of control. I dislike the panic mechanism of the handle, where if it is pulled over a threshold it stops releasing. I experienced no slippage with it at all. in order to use at low tensions, it needs to be engaged with a slight tug of the rope.",
+    "rating": {
+     "lst": {
+      "VER": 10,
+      "EOU": 10,
+      "QU": 10,
+      "VFM": 8
+     },
+     "overall": 10
+    },
+    "pros": [],
+    "cons": [],
+    "creationDate": 1500143178505,
+    "creatorName": "Eli Szendro Brown"
+   }
+  ],
+  "_slackdbUrl": "https://slackdb.com/gear_details/Eddy",
+  "_imageIds": [
+   170,
+   171
+  ],
+  "_coverImageId": 171,
+  "_coverFile": "image_files/gear/171.jpg"
+ },
+ {
+  "_id": 1317,
+  "name": "Roll'n'Lock",
+  "slug": "RollnLock",
+  "manufacturerId": 36,
+  "_manufacturerName": "Climbing Technology (CT)",
+  "material": [
+   "S",
+   "AL"
+  ],
+  "itemTypeId": "BRK",
+  "weight": 80,
+  "wll": 2.5,
+  "mbs": 10,
+  "productionStatus": "AC",
+  "url": "http://www.climbingtechnology.com/en/professional-work/pulleys-and-rope-clamps/pulleys-rope-clamps/rollnlock",
+  "remarks": "Very efficient but almost impossible to detension - requires soft release system. Also sold by CMC",
+  "breakingMethod": "RCAM",
+  "compatibleRopeDiameter": {
+   "min": 8,
+   "max": 14
+  },
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 0,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "_slackdbUrl": "https://slackdb.com/gear_details/RollnLock",
+  "_imageIds": [],
+  "_coverImageId": null,
+  "_coverFile": null
+ },
+ {
+  "_id": 1318,
+  "name": "Cinch",
+  "slug": "Cinch",
+  "manufacturerId": 48,
+  "_manufacturerName": "Trango",
+  "itemTypeId": "BRK",
+  "weight": 182,
+  "productionStatus": "AC",
+  "remarks": "Hard to detension with high tension",
+  "breakingMethod": "CAM",
+  "compatibleRopeDiameter": {
+   "min": 9.4,
+   "max": 11
+  },
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 0,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "_slackdbUrl": "https://slackdb.com/gear_details/Cinch",
+  "_imageIds": [],
+  "_coverImageId": null,
+  "_coverFile": null
+ },
+ {
+  "_id": 1319,
+  "slug": "AdvanceTechHXProgressCapturePulley",
+  "itemTypeId": "BRK",
+  "remarks": "Very efficient but almost impossible to detension - requires soft release system",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1587236216762,
+  "name": "Advance Tech HX Progress Capture Pulley",
+  "material": [
+   "AL"
+  ],
+  "weight": 270,
+  "mbs": 22,
+  "compatibleRopeDiameter": {
+   "min": 7,
+   "max": 12.5
+  },
+  "breakingMethod": "TCAM",
+  "productionStatus": "AC",
+  "manufacturerId": 34,
+  "_manufacturerName": "SMC",
+  "url": "https://smcgear.com/advance-tech-hx-progress-capture-pulley.html",
+  "pricing": {
+   "currency": "USD",
+   "lst": [
+    {
+     "q": 1,
+     "qt": "AA",
+     "price": 154
+    }
+   ]
+  },
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 0,
+  "_slackdbUrl": "https://slackdb.com/gear_details/AdvanceTechHXProgressCapturePulley",
+  "_imageIds": [],
+  "_coverImageId": null,
+  "_coverFile": null
+ },
+ {
+  "_id": 1320,
+  "name": "Tapir",
+  "slug": "Tapir",
+  "manufacturerId": 18,
+  "_manufacturerName": "One Inch Dreams",
+  "itemTypeId": "BRK",
+  "wll": 2,
+  "productionStatus": "AC",
+  "url": "https://www.facebook.com/OneInchDreams/photos/a.324531780929337.70200.319972641385251/881873901861786/?type=3&__mref=message_bubble",
+  "remarks": "Sold as part of a pulley system set",
+  "breakingMethod": "CAM",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 1,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "_slackdbUrl": "https://slackdb.com/gear_details/Tapir",
+  "_imageIds": [
+   151
+  ],
+  "_coverImageId": 151,
+  "_coverFile": "image_files/gear/151.jpg"
+ },
+ {
+  "_id": 1321,
+  "name": "Elephant",
+  "slug": "Elephant",
+  "manufacturerId": 9,
+  "_manufacturerName": "Equilibrium Slacklines (EQB)",
+  "material": [
+   "S"
+  ],
+  "itemTypeId": "BRK",
+  "weight": 130,
+  "wll": 2.5,
+  "productionStatus": "AC",
+  "url": "http://www.slackshop.cz/en/pulley-systems/106-kladkostroj-eqb-minima.html",
+  "remarks": "Sold as part of a pulley system set",
+  "breakingMethod": "CAM",
+  "compatibleRopeDiameter": {
+   "min": 8,
+   "max": 8
+  },
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 0,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "_slackdbUrl": "https://slackdb.com/gear_details/Elephant",
+  "_imageIds": [],
+  "_coverImageId": null,
+  "_coverFile": null
+ },
+ {
+  "_id": 1322,
+  "name": "GRIGRI+",
+  "slug": "GRIGRI",
+  "manufacturerId": 31,
+  "_manufacturerName": "Petzl",
+  "material": [
+   "NY",
+   "AL",
+   "SS"
+  ],
+  "itemTypeId": "BRK",
+  "weight": 200,
+  "productionStatus": "PO",
+  "breakingMethod": "CAM",
+  "compatibleRopeDiameter": {
+   "min": 8.5,
+   "max": 11
+  },
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 0,
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "url": "https://www.petzl.com/GB/en/Sport/New/GRIGRI-PLUS#.WIpMWVOF6Uk",
+  "lastEditDate": 1498983758555,
+  "_slackdbUrl": "https://slackdb.com/gear_details/GRIGRI",
+  "_imageIds": [],
+  "_coverImageId": null,
+  "_coverFile": null
+ },
+ {
+  "_id": 1322,
+  "slug": "GRIGRI",
+  "itemTypeId": "BRK",
+  "creatorId": "10154430595665625",
+  "creationDate": 1499896266303,
+  "name": "GRIGRI+",
+  "material": [
+   "NY",
+   "AL",
+   "SS"
+  ],
+  "weight": 200,
+  "compatibleRopeDiameter": {
+   "min": 8.5,
+   "max": 11
+  },
+  "breakingMethod": "CAM",
+  "productionStatus": "PO",
+  "manufacturerId": 31,
+  "_manufacturerName": "Petzl",
+  "url": "https://www.petzl.com/GB/en/Sport/New/GRIGRI-PLUS#.WIpMWVOF6Uk",
+  "contributors": [
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "lastEditDate": 1498983758555,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 0,
+  "_slackdbUrl": "https://slackdb.com/gear_details/GRIGRI",
+  "_imageIds": [],
+  "_coverImageId": null,
+  "_coverFile": null
+ },
+ {
+  "_id": 3017,
+  "contributors": [
+   {
+    "id": "1541853415834804",
+    "name": "Stephan Chalkowski"
+   },
+   {
+    "id": "10154430595665625",
+    "name": "Nir Avneyon"
+   }
+  ],
+  "itemTypeId": "BRK",
+  "slug": "raed_propulleysystem",
+  "creatorId": "1541853415834804",
+  "creationDate": 1501677284982,
+  "name": "Raed PRO Pulley System",
+  "material": [
+   "VC",
+   "PL",
+   "DY",
+   "KV",
+   "HSS"
+  ],
+  "wll": 15,
+  "compatibleRopeDiameter": {
+   "min": 5,
+   "max": 6
+  },
+  "breakingMethod": "TCAM",
+  "efficiency": 95,
+  "productionStatus": "AC",
+  "manufacturerId": 26,
+  "_manufacturerName": "Raed Slacklines",
+  "url": "https://raed-slacklines.com/pro-9-1-slackline-pulley-system",
+  "pricing": {
+   "currency": "EUR",
+   "lst": [
+    {
+     "price": 499,
+     "q": 1,
+     "qt": "EX"
+    }
+   ],
+   "hasAddOpts": true
+  },
+  "lastEditDate": 1587236045065,
+  "commentsCount": 0,
+  "reviewsCount": 0,
+  "imagesCount": 9,
+  "_slackdbUrl": "https://slackdb.com/gear_details/raed_propulleysystem",
+  "_imageIds": [
+   92,
+   93,
+   94,
+   95,
+   96,
+   97,
+   98,
+   99,
+   100
+  ],
+  "_coverImageId": 100,
+  "_coverFile": "image_files/gear/100.jpg"
+ }
+]

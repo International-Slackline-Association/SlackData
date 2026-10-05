@@ -1,0 +1,1726 @@
+[
+ {
+  "itemId": 820,
+  "itemType": "IMG",
+  "entityType": "IT",
+  "date": 1712951710207,
+  "action": "CR",
+  "userId": "10154430595665625",
+  "userName": "Nir Avneyon",
+  "txt": [
+   "added an ",
+   {
+    "txt": "Image",
+    "url": "/images/#itemId-820"
+   }
+  ],
+  "thumbUrl": "/user_content/img/gear/820_thm.jpg",
+  "details": [
+   {
+    "value": {
+     "txt": "Alpine WebLock 6.1 20mm"
+    },
+    "type": "TXT",
+    "caption": "Gear in image"
+   },
+   {
+    "value": {
+     "txt": "Gear piece"
+    },
+    "type": "TXT",
+    "caption": "Image Scope"
+   },
+   {
+    "value": {
+     "txt": "Official manufacturer image"
+    },
+    "type": "TXT",
+    "caption": "Image Source"
+   },
+   {
+    "value": {
+     "txt": "https://www.balancecommunity.com/"
+    },
+    "type": "TXT",
+    "caption": "ImageSourceUrl"
+   },
+   {
+    "value": {
+     "txt": "New"
+    },
+    "type": "TXT",
+    "caption": "Gear Condition"
+   },
+   {
+    "value": {
+     "txt": "Studio/Indoor image"
+    },
+    "type": "TXT",
+    "caption": "Image Environment"
+   },
+   {
+    "value": {
+     "txt": "Close-Up/Macro"
+    },
+    "type": "TXT",
+    "caption": "Image Type"
+   }
+  ],
+  "detailsViewType": "FL"
+ },
+ {
+  "itemId": 819,
+  "itemType": "IMG",
+  "entityType": "IT",
+  "date": 1712951573900,
+  "action": "CR",
+  "userId": "10154430595665625",
+  "userName": "Nir Avneyon",
+  "txt": [
+   "added an ",
+   {
+    "txt": "Image",
+    "url": "/images/#itemId-819"
+   }
+  ],
+  "thumbUrl": "/user_content/img/gear/819_thm.jpg",
+  "details": [
+   {
+    "value": {
+     "txt": "KingPin"
+    },
+    "type": "TXT",
+    "caption": "Gear in image"
+   },
+   {
+    "value": {
+     "txt": "Gear piece"
+    },
+    "type": "TXT",
+    "caption": "Image Scope"
+   },
+   {
+    "value": {
+     "txt": "Official manufacturer image"
+    },
+    "type": "TXT",
+    "caption": "Image Source"
+   },
+   {
+    "value": {
+     "txt": "https://slacktivity.com"
+    },
+    "type": "TXT",
+    "caption": "ImageSourceUrl"
+   },
+   {
+    "value": {
+     "txt": "New"
+    },
+    "type": "TXT",
+    "caption": "Gear Condition"
+   },
+   {
+    "value": {
+     "txt": "Studio/Indoor image"
+    },
+    "type": "TXT",
+    "caption": "Image Environment"
+   },
+   {
+    "value": {
+     "txt": "Regular"
+    },
+    "type": "TXT",
+    "caption": "Image Type"
+   }
+  ],
+  "detailsViewType": "FL"
+ },
+ {
+  "itemId": 818,
+  "itemType": "IMG",
+  "entityType": "IT",
+  "date": 1712951573275,
+  "action": "CR",
+  "userId": "10154430595665625",
+  "userName": "Nir Avneyon",
+  "txt": [
+   "added an ",
+   {
+    "txt": "Image",
+    "url": "/images/#itemId-818"
+   }
+  ],
+  "thumbUrl": "/user_content/img/gear/818_thm.jpg",
+  "details": [
+   {
+    "value": {
+     "txt": "TiLock 25mm"
+    },
+    "type": "TXT",
+    "caption": "Gear in image"
+   },
+   {
+    "value": {
+     "txt": "Gear piece"
+    },
+    "type": "TXT",
+    "caption": "Image Scope"
+   },
+   {
+    "value": {
+     "txt": "Official manufacturer image"
+    },
+    "type": "TXT",
+    "caption": "Image Source"
+   },
+   {
+    "value": {
+     "txt": "https://raed-slacklines.com/"
+    },
+    "type": "TXT",
+    "caption": "ImageSourceUrl"
+   },
+   {
+    "value": {
+     "txt": "New"
+    },
+    "type": "TXT",
+    "caption": "Gear Condition"
+   },
+   {
+    "value": {
+     "txt": "Studio/Indoor image"
+    },
+    "type": "TXT",
+    "caption": "Image Environment"
+   },
+   {
+    "value": {
+     "txt": "Close-Up/Macro"
+    },
+    "type": "TXT",
+    "caption": "Image Type"
+   }
+  ],
+  "detailsViewType": "FL"
+ },
+ {
+  "itemId": 817,
+  "itemType": "IMG",
+  "entityType": "IT",
+  "date": 1712951571909,
+  "action": "CR",
+  "userId": "10154430595665625",
+  "userName": "Nir Avneyon",
+  "txt": [
+   "added an ",
+   {
+    "txt": "Image",
+    "url": "/images/#itemId-817"
+   }
+  ],
+  "thumbUrl": "/user_content/img/gear/817_thm.jpg",
+  "details": [
+   {
+    "value": {
+     "txt": "TiLock 25mm"
+    },
+    "type": "TXT",
+    "caption": "Gear in image"
+   },
+   {
+    "value": {
+     "txt": "Setup"
+    },
+    "type": "TXT",
+    "caption": "Image Scope"
+   },
+   {
+    "value": {
+     "txt": "Official manufacturer image"
+    },
+    "type": "TXT",
+    "caption": "Image Source"
+   },
+   {
+    "value": {
+     "txt": "https://raed-slacklines.com/"
+    },
+    "type": "TXT",
+    "caption": "ImageSourceUrl"
+   },
+   {
+    "value": {
+     "txt": "Actual usage image"
+    },
+    "type": "TXT",
+    "caption": "Image Environment"
+   },
+   {
+    "value": {
+     "txt": "Regular"
+    },
+    "type": "TXT",
+    "caption": "Image Type"
+   }
+  ],
+  "detailsViewType": "FL"
+ },
+ {
+  "itemId": 815,
+  "itemType": "IMG",
+  "entityType": "IT",
+  "date": 1712951571032,
+  "action": "CR",
+  "userId": "10154430595665625",
+  "userName": "Nir Avneyon",
+  "txt": [
+   "added an ",
+   {
+    "txt": "Image",
+    "url": "/images/#itemId-815"
+   }
+  ],
+  "thumbUrl": "/user_content/img/gear/815_thm.jpg",
+  "details": [
+   {
+    "value": {
+     "txt": "Alpine WebLock 6.1"
+    },
+    "type": "TXT",
+    "caption": "Gear in image"
+   },
+   {
+    "value": {
+     "txt": "Gear piece"
+    },
+    "type": "TXT",
+    "caption": "Image Scope"
+   },
+   {
+    "value": {
+     "txt": "Official manufacturer image"
+    },
+    "type": "TXT",
+    "caption": "Image Source"
+   },
+   {
+    "value": {
+     "txt": "https://www.balancecommunity.com/"
+    },
+    "type": "TXT",
+    "caption": "ImageSourceUrl"
+   },
+   {
+    "value": {
+     "txt": "New"
+    },
+    "type": "TXT",
+    "caption": "Gear Condition"
+   },
+   {
+    "value": {
+     "txt": "Studio/Indoor image"
+    },
+    "type": "TXT",
+    "caption": "Image Environment"
+   },
+   {
+    "value": {
+     "txt": "Close-Up/Macro"
+    },
+    "type": "TXT",
+    "caption": "Image Type"
+   }
+  ],
+  "detailsViewType": "FL"
+ },
+ {
+  "itemId": 3256,
+  "itemType": "GR",
+  "entityType": "IT",
+  "date": 1712951277421,
+  "action": "CR",
+  "userId": "10154430595665625",
+  "userName": "Nir Avneyon",
+  "txt": [
+   "added a ",
+   {
+    "txt": "Weblock",
+    "url": "/gear_details/alpine_weblock6120mm"
+   },
+   " named ",
+   {
+    "txt": "Alpine WebLock 6.1 20mm",
+    "url": "/gear_details/alpine_weblock6120mm"
+   }
+  ],
+  "thumbUrl": "/user_content/img/gear/820_thm.jpg",
+  "details": [
+   {
+    "value": {
+     "txt": "Alpine WebLock 6.1 20mm"
+    },
+    "type": "TXT",
+    "caption": "Name"
+   },
+   {
+    "value": {
+     "txt": "Aluminum"
+    },
+    "type": "TXT",
+    "caption": "Material"
+   },
+   {
+    "value": {
+     "txt": "210gr"
+    },
+    "type": "TXT",
+    "caption": "Weight"
+   },
+   {
+    "value": {
+     "txt": "12kN"
+    },
+    "type": "TXT",
+    "caption": "WLL"
+   },
+   {
+    "value": {
+     "txt": "84kN"
+    },
+    "type": "TXT",
+    "caption": "MBS"
+   },
+   {
+    "value": {
+     "txt": "XL Mounting Hole"
+    },
+    "type": "TXT",
+    "caption": "Anchor connection type"
+   },
+   {
+    "value": {
+     "txt": "Quick Pin"
+    },
+    "type": "TXT",
+    "caption": "Webbing connection type"
+   },
+   {
+    "value": {
+     "txt": "19mm - 20mm"
+    },
+    "type": "TXT",
+    "caption": "Compatible webbing width"
+   },
+   {
+    "value": {
+     "txt": "38mm"
+    },
+    "type": "TXT",
+    "caption": "Diverter diameter"
+   },
+   {
+    "value": {
+     "txt": "Active"
+    },
+    "type": "TXT",
+    "caption": "Production Status"
+   },
+   {
+    "value": {
+     "txt": "Balance Community: Slackline Outfitters",
+     "url": "/manufacturer_details/BalanceCommunity",
+     "iconUrl": "/img/flags/US.png",
+     "iconTooltip": "United States"
+    },
+    "type": "URL",
+    "caption": "Manufacturer"
+   },
+   {
+    "value": {
+     "txt": "https://www.balancecommunity.com/collections/webbing-anchors/products/alpine-weblock-6-0",
+     "url": "https://www.balancecommunity.com/collections/webbing-anchors/products/alpine-weblock-6-0",
+     "blankTarget": true
+    },
+    "type": "URL",
+    "caption": "URL"
+   },
+   {
+    "value": [
+     "1 unit and above: 139 USD"
+    ],
+    "type": "LST",
+    "caption": "Price (per unit)"
+   }
+  ],
+  "detailsViewType": "FL"
+ },
+ {
+  "itemId": 3255,
+  "itemType": "GR",
+  "entityType": "IT",
+  "date": 1712951183230,
+  "action": "CR",
+  "userId": "10154430595665625",
+  "userName": "Nir Avneyon",
+  "txt": [
+   "added a ",
+   {
+    "txt": "Weblock",
+    "url": "/gear_details/alpine_weblock61"
+   },
+   " named ",
+   {
+    "txt": "Alpine WebLock 6.1",
+    "url": "/gear_details/alpine_weblock61"
+   }
+  ],
+  "thumbUrl": "/user_content/img/gear/815_thm.jpg",
+  "details": [
+   {
+    "value": {
+     "txt": "Alpine WebLock 6.1"
+    },
+    "type": "TXT",
+    "caption": "Name"
+   },
+   {
+    "value": {
+     "txt": "Aluminum"
+    },
+    "type": "TXT",
+    "caption": "Material"
+   },
+   {
+    "value": {
+     "txt": "210gr"
+    },
+    "type": "TXT",
+    "caption": "Weight"
+   },
+   {
+    "value": {
+     "txt": "12kN"
+    },
+    "type": "TXT",
+    "caption": "WLL"
+   },
+   {
+    "value": {
+     "txt": "84kN"
+    },
+    "type": "TXT",
+    "caption": "MBS"
+   },
+   {
+    "value": {
+     "txt": "XL Mounting Hole"
+    },
+    "type": "TXT",
+    "caption": "Anchor connection type"
+   },
+   {
+    "value": {
+     "txt": "Quick Pin"
+    },
+    "type": "TXT",
+    "caption": "Webbing connection type"
+   },
+   {
+    "value": {
+     "txt": "24mm - 26mm"
+    },
+    "type": "TXT",
+    "caption": "Compatible webbing width"
+   },
+   {
+    "value": {
+     "txt": "38mm"
+    },
+    "type": "TXT",
+    "caption": "Diverter diameter"
+   },
+   {
+    "value": {
+     "txt": "Active"
+    },
+    "type": "TXT",
+    "caption": "Production Status"
+   },
+   {
+    "value": {
+     "txt": "Balance Community: Slackline Outfitters",
+     "url": "/manufacturer_details/BalanceCommunity",
+     "iconUrl": "/img/flags/US.png",
+     "iconTooltip": "United States"
+    },
+    "type": "URL",
+    "caption": "Manufacturer"
+   },
+   {
+    "value": {
+     "txt": "https://www.balancecommunity.com/collections/webbing-anchors/products/alpine-weblock-6-0",
+     "url": "https://www.balancecommunity.com/collections/webbing-anchors/products/alpine-weblock-6-0",
+     "blankTarget": true
+    },
+    "type": "URL",
+    "caption": "URL"
+   },
+   {
+    "value": [
+     "1 unit and above: 139 USD"
+    ],
+    "type": "LST",
+    "caption": "Price (per unit)"
+   }
+  ],
+  "detailsViewType": "FL"
+ },
+ {
+  "itemId": 3253,
+  "itemType": "GR",
+  "entityType": "IT",
+  "date": 1712949791178,
+  "action": "UP",
+  "userId": "10154430595665625",
+  "userName": "Nir Avneyon",
+  "txt": [
+   "updated a ",
+   {
+    "txt": "Weblock",
+    "url": "/gear_details/tilock_19mm"
+   },
+   " named ",
+   {
+    "txt": "TiLock 19mm",
+    "url": "/gear_details/tilock_19mm"
+   }
+  ],
+  "details": {
+   "UP": [
+    {
+     "caption": "Price (per unit)",
+     "action": "UP",
+     "valueBefore": [
+      "1 unit and above: 229.95 EUR"
+     ],
+     "type": "LST",
+     "value": [
+      "1 unit and above: 229.95 EUR"
+     ]
+    }
+   ]
+  },
+  "detailsViewType": "FCS"
+ },
+ {
+  "itemId": 3254,
+  "itemType": "GR",
+  "entityType": "IT",
+  "date": 1712949774373,
+  "action": "CR",
+  "userId": "10154430595665625",
+  "userName": "Nir Avneyon",
+  "txt": [
+   "added a ",
+   {
+    "txt": "Weblock",
+    "url": "/gear_details/tilock_25mm"
+   },
+   " named ",
+   {
+    "txt": "TiLock 25mm",
+    "url": "/gear_details/tilock_25mm"
+   }
+  ],
+  "thumbUrl": "/user_content/img/gear/818_thm.jpg",
+  "details": [
+   {
+    "value": {
+     "txt": "TiLock 25mm"
+    },
+    "type": "TXT",
+    "caption": "Name"
+   },
+   {
+    "value": {
+     "txt": "Titanium"
+    },
+    "type": "TXT",
+    "caption": "Material"
+   },
+   {
+    "value": {
+     "txt": "Quick Pin"
+    },
+    "type": "TXT",
+    "caption": "Anchor connection type"
+   },
+   {
+    "value": {
+     "txt": "Quick Pin"
+    },
+    "type": "TXT",
+    "caption": "Webbing connection type"
+   },
+   {
+    "value": {
+     "txt": "24mm - 26mm"
+    },
+    "type": "TXT",
+    "caption": "Compatible webbing width"
+   },
+   {
+    "value": {
+     "txt": "Active"
+    },
+    "type": "TXT",
+    "caption": "Production Status"
+   },
+   {
+    "value": {
+     "txt": "Raed Slacklines",
+     "url": "/manufacturer_details/RaedSlacklines",
+     "iconUrl": "/img/flags/DE.png",
+     "iconTooltip": "Germany"
+    },
+    "type": "URL",
+    "caption": "Manufacturer"
+   },
+   {
+    "value": {
+     "txt": "https://raed-slacklines.com/tilock",
+     "url": "https://raed-slacklines.com/tilock",
+     "blankTarget": true
+    },
+    "type": "URL",
+    "caption": "URL"
+   },
+   {
+    "value": [
+     "1 unit and above: 229.95 EUR"
+    ],
+    "type": "LST",
+    "caption": "Price (per unit)"
+   }
+  ],
+  "detailsViewType": "FL"
+ },
+ {
+  "itemId": 3253,
+  "itemType": "GR",
+  "entityType": "IT",
+  "date": 1712949705502,
+  "action": "CR",
+  "userId": "10154430595665625",
+  "userName": "Nir Avneyon",
+  "txt": [
+   "added a ",
+   {
+    "txt": "Weblock",
+    "url": "/gear_details/tilock_19mm"
+   },
+   " named ",
+   {
+    "txt": "TiLock 19mm",
+    "url": "/gear_details/tilock_19mm"
+   }
+  ],
+  "details": [
+   {
+    "value": {
+     "txt": "TiLock 19mm"
+    },
+    "type": "TXT",
+    "caption": "Name"
+   },
+   {
+    "value": {
+     "txt": "Titanium"
+    },
+    "type": "TXT",
+    "caption": "Material"
+   },
+   {
+    "value": {
+     "txt": "Quick Pin"
+    },
+    "type": "TXT",
+    "caption": "Anchor connection type"
+   },
+   {
+    "value": {
+     "txt": "Quick Pin"
+    },
+    "type": "TXT",
+    "caption": "Webbing connection type"
+   },
+   {
+    "value": {
+     "txt": "24mm - 26mm"
+    },
+    "type": "TXT",
+    "caption": "Compatible webbing width"
+   },
+   {
+    "value": {
+     "txt": "Active"
+    },
+    "type": "TXT",
+    "caption": "Production Status"
+   },
+   {
+    "value": {
+     "txt": "Raed Slacklines",
+     "url": "/manufacturer_details/RaedSlacklines",
+     "iconUrl": "/img/flags/DE.png",
+     "iconTooltip": "Germany"
+    },
+    "type": "URL",
+    "caption": "Manufacturer"
+   },
+   {
+    "value": {
+     "txt": "https://raed-slacklines.com/tilock",
+     "url": "https://raed-slacklines.com/tilock",
+     "blankTarget": true
+    },
+    "type": "URL",
+    "caption": "URL"
+   },
+   {
+    "value": [
+     "1 unit and above: 229.95 EUR"
+    ],
+    "type": "LST",
+    "caption": "Price (per unit)"
+   }
+  ],
+  "detailsViewType": "FL"
+ },
+ {
+  "itemId": 3252,
+  "itemType": "GR",
+  "entityType": "IT",
+  "date": 1712948470764,
+  "action": "CR",
+  "userId": "10154430595665625",
+  "userName": "Nir Avneyon",
+  "txt": [
+   "added a ",
+   {
+    "txt": "Weblock",
+    "url": "/gear_details/kingpin"
+   },
+   " named ",
+   {
+    "txt": "KingPin",
+    "url": "/gear_details/kingpin"
+   }
+  ],
+  "thumbUrl": "/user_content/img/gear/819_thm.jpg",
+  "details": [
+   {
+    "value": {
+     "txt": "KingPin"
+    },
+    "type": "TXT",
+    "caption": "Name"
+   },
+   {
+    "value": {
+     "txt": "Aluminum"
+    },
+    "type": "TXT",
+    "caption": "Material"
+   },
+   {
+    "value": {
+     "txt": "153gr"
+    },
+    "type": "TXT",
+    "caption": "Weight"
+   },
+   {
+    "value": {
+     "txt": "4kN"
+    },
+    "type": "TXT",
+    "caption": "WLL"
+   },
+   {
+    "value": {
+     "txt": "17kN"
+    },
+    "type": "TXT",
+    "caption": "MBS"
+   },
+   {
+    "value": {
+     "txt": "Integrated Shackle"
+    },
+    "type": "TXT",
+    "caption": "Anchor connection type"
+   },
+   {
+    "value": {
+     "txt": "Quick Pin"
+    },
+    "type": "TXT",
+    "caption": "Webbing connection type"
+   },
+   {
+    "value": {
+     "txt": "19mm - 20mm"
+    },
+    "type": "TXT",
+    "caption": "Compatible webbing width"
+   },
+   {
+    "value": {
+     "txt": "Active"
+    },
+    "type": "TXT",
+    "caption": "Production Status"
+   },
+   {
+    "value": {
+     "txt": "Slacktivity",
+     "url": "/manufacturer_details/Slacktivity",
+     "iconUrl": "/img/flags/CH.png",
+     "iconTooltip": "Switzerland"
+    },
+    "type": "URL",
+    "caption": "Manufacturer"
+   },
+   {
+    "value": {
+     "txt": "https://slacktivity.com/shop/kingpin-weblock/",
+     "url": "https://slacktivity.com/shop/kingpin-weblock/",
+     "blankTarget": true
+    },
+    "type": "URL",
+    "caption": "URL"
+   },
+   {
+    "value": [
+     "1 unit and above: 60 EUR"
+    ],
+    "type": "LST",
+    "caption": "Price (per unit)"
+   }
+  ],
+  "detailsViewType": "FL"
+ },
+ {
+  "itemId": 3069,
+  "itemType": "GR",
+  "entityType": "IT",
+  "date": 1712947248729,
+  "action": "UP",
+  "userId": "10154430595665625",
+  "userName": "Nir Avneyon",
+  "txt": [
+   "updated a ",
+   {
+    "txt": "Weblock",
+    "url": "/gear_details/slackijump"
+   },
+   " named ",
+   {
+    "txt": "Slackijump",
+    "url": "/gear_details/slackijump"
+   }
+  ],
+  "details": {
+   "UP": [
+    {
+     "caption": "Production Status",
+     "action": "UP",
+     "valueBefore": {
+      "txt": "Active"
+     },
+     "type": "TXT",
+     "value": {
+      "txt": "Discontinued"
+     }
+    }
+   ],
+   "RM": [
+    {
+     "caption": "URL",
+     "action": "RM",
+     "valueBefore": {
+      "txt": "https://slack-inov.com/gb/weblocks/12-slackiblock-jump",
+      "url": "https://slack-inov.com/gb/weblocks/12-slackiblock-jump",
+      "blankTarget": true
+     },
+     "type": "URL"
+    }
+   ]
+  },
+  "detailsViewType": "FCS"
+ },
+ {
+  "itemId": 3153,
+  "itemType": "GR",
+  "entityType": "IT",
+  "date": 1712947204535,
+  "action": "UP",
+  "userId": "10154430595665625",
+  "userName": "Nir Avneyon",
+  "txt": [
+   "updated a ",
+   {
+    "txt": "Weblock",
+    "url": "/gear_details/slackibloc_srquickpin"
+   },
+   " named ",
+   {
+    "txt": "Slackibloc SR Quick Pin",
+    "url": "/gear_details/slackibloc_srquickpin"
+   }
+  ],
+  "thumbUrl": "/user_content/img/gear/574_thm.jpg",
+  "details": {
+   "UP": [
+    {
+     "caption": "Production Status",
+     "action": "UP",
+     "valueBefore": {
+      "txt": "Active"
+     },
+     "type": "TXT",
+     "value": {
+      "txt": "Discontinued"
+     }
+    }
+   ],
+   "RM": [
+    {
+     "caption": "URL",
+     "action": "RM",
+     "valueBefore": {
+      "txt": "https://slack-inov.com/shop/en/weblocks/428-3021-slackibloc-SR-linelock.html",
+      "url": "https://slack-inov.com/shop/en/weblocks/428-3021-slackibloc-SR-linelock.html",
+      "blankTarget": true
+     },
+     "type": "URL"
+    }
+   ]
+  },
+  "detailsViewType": "FCS"
+ },
+ {
+  "itemId": 3152,
+  "itemType": "GR",
+  "entityType": "IT",
+  "date": 1712947199480,
+  "action": "UP",
+  "userId": "10154430595665625",
+  "userName": "Nir Avneyon",
+  "txt": [
+   "updated a ",
+   {
+    "txt": "Weblock",
+    "url": "/gear_details/slackibloc_sr"
+   },
+   " named ",
+   {
+    "txt": "Slackibloc SR Pull pin",
+    "url": "/gear_details/slackibloc_sr"
+   }
+  ],
+  "thumbUrl": "/user_content/img/gear/573_thm.jpg",
+  "details": {
+   "UP": [
+    {
+     "caption": "Production Status",
+     "action": "UP",
+     "valueBefore": {
+      "txt": "Active"
+     },
+     "type": "TXT",
+     "value": {
+      "txt": "Discontinued"
+     }
+    }
+   ],
+   "RM": [
+    {
+     "caption": "URL",
+     "action": "RM",
+     "valueBefore": {
+      "txt": "https://slack-inov.com/shop/en/weblocks/428-3021-slackibloc-SR-linelock.html",
+      "url": "https://slack-inov.com/shop/en/weblocks/428-3021-slackibloc-SR-linelock.html",
+      "blankTarget": true
+     },
+     "type": "URL"
+    }
+   ]
+  },
+  "detailsViewType": "FCS"
+ },
+ {
+  "itemId": 3012,
+  "itemType": "GR",
+  "entityType": "IT",
+  "date": 1712947103981,
+  "action": "UP",
+  "userId": "10154430595665625",
+  "userName": "Nir Avneyon",
+  "txt": [
+   "updated a ",
+   {
+    "txt": "Weblock",
+    "url": "/gear_details/slackibloc_4"
+   },
+   " named ",
+   {
+    "txt": "Slackibloc 4",
+    "url": "/gear_details/slackibloc_4"
+   }
+  ],
+  "thumbUrl": "/user_content/img/gear/109_thm.jpg",
+  "details": {
+   "UP": [
+    {
+     "caption": "Production Status",
+     "action": "UP",
+     "valueBefore": {
+      "txt": "Active"
+     },
+     "type": "TXT",
+     "value": {
+      "txt": "Discontinued"
+     }
+    }
+   ],
+   "RM": [
+    {
+     "caption": "URL",
+     "action": "RM",
+     "valueBefore": {
+      "txt": "https://slack-inov.com/gb/gear/94-slackiblock-4",
+      "url": "https://slack-inov.com/gb/gear/94-slackiblock-4",
+      "blankTarget": true
+     },
+     "type": "URL"
+    }
+   ]
+  },
+  "detailsViewType": "FCS"
+ },
+ {
+  "itemId": 562,
+  "itemType": "GR",
+  "entityType": "IT",
+  "date": 1712946949473,
+  "action": "UP",
+  "userId": "10154430595665625",
+  "userName": "Nir Avneyon",
+  "txt": [
+   "updated a ",
+   {
+    "txt": "Weblock",
+    "url": "/gear_details/SherriffFX"
+   },
+   " named ",
+   {
+    "txt": "Sherriff FX",
+    "url": "/gear_details/SherriffFX"
+   }
+  ],
+  "thumbUrl": "/user_content/img/gear/520_thm.jpg",
+  "details": {
+   "UP": [
+    {
+     "caption": "Production Status",
+     "action": "UP",
+     "valueBefore": {
+      "txt": "Active"
+     },
+     "type": "TXT",
+     "value": {
+      "txt": "Discontinued"
+     }
+    }
+   ],
+   "RM": [
+    {
+     "caption": "URL",
+     "action": "RM",
+     "valueBefore": {
+      "txt": "https://www.slackshop.cz/en/weblocks/26-eqb-sheriff-fx.html",
+      "url": "https://www.slackshop.cz/en/weblocks/26-eqb-sheriff-fx.html",
+      "blankTarget": true
+     },
+     "type": "URL"
+    }
+   ]
+  },
+  "detailsViewType": "FCS"
+ },
+ {
+  "itemId": 546,
+  "itemType": "GR",
+  "entityType": "IT",
+  "date": 1712946912815,
+  "action": "UP",
+  "userId": "10154430595665625",
+  "userName": "Nir Avneyon",
+  "txt": [
+   "updated a ",
+   {
+    "txt": "Weblock",
+    "url": "/gear_details/SeaHorsesDP"
+   },
+   " named ",
+   {
+    "txt": "SeaHorse DP 1.5",
+    "url": "/gear_details/SeaHorsesDP"
+   }
+  ],
+  "thumbUrl": "/user_content/img/gear/577_thm.jpg",
+  "details": {
+   "UP": [
+    {
+     "caption": "Weight",
+     "action": "UP",
+     "valueBefore": {
+      "txt": "266gr"
+     },
+     "type": "TXT",
+     "value": {
+      "txt": "260gr"
+     }
+    },
+    {
+     "caption": "Compatible webbing width",
+     "action": "UP",
+     "valueBefore": {
+      "txt": "20mm - 26mm"
+     },
+     "type": "TXT",
+     "value": {
+      "txt": "19mm - 27mm"
+     }
+    },
+    {
+     "caption": "URL",
+     "action": "UP",
+     "valueBefore": {
+      "txt": "https://www.slacktivity.com/seahorse-dp",
+      "url": "https://www.slacktivity.com/seahorse-dp",
+      "blankTarget": true
+     },
+     "type": "URL",
+     "value": {
+      "txt": "https://slacktivity.com/shop/slacktivity-seahorse/",
+      "url": "https://slacktivity.com/shop/slacktivity-seahorse/",
+      "blankTarget": true
+     }
+    },
+    {
+     "caption": "Price (per unit)",
+     "action": "UP",
+     "valueBefore": [
+      "1 unit and above: 129.95 EUR"
+     ],
+     "type": "LST",
+     "value": [
+      "1 unit and above: 130 EUR"
+     ]
+    }
+   ]
+  },
+  "detailsViewType": "FCS"
+ },
+ {
+  "itemId": 3106,
+  "itemType": "GR",
+  "entityType": "IT",
+  "date": 1712946701810,
+  "action": "UP",
+  "userId": "10154430595665625",
+  "userName": "Nir Avneyon",
+  "txt": [
+   "updated a ",
+   {
+    "txt": "Weblock",
+    "url": "/gear_details/rowan_31"
+   },
+   " named ",
+   {
+    "txt": "Rowan 3.1",
+    "url": "/gear_details/rowan_31"
+   }
+  ],
+  "thumbUrl": "/user_content/img/gear/395_thm.jpg",
+  "details": {
+   "RM": [
+    {
+     "caption": "URL",
+     "action": "RM",
+     "valueBefore": {
+      "txt": "https://souzslackline.com/product/rowan-3-1/",
+      "url": "https://souzslackline.com/product/rowan-3-1/",
+      "blankTarget": true
+     },
+     "type": "URL"
+    }
+   ]
+  },
+  "detailsViewType": "FCS"
+ },
+ {
+  "itemId": 3108,
+  "itemType": "GR",
+  "entityType": "IT",
+  "date": 1712946688150,
+  "action": "UP",
+  "userId": "10154430595665625",
+  "userName": "Nir Avneyon",
+  "txt": [
+   "updated a ",
+   {
+    "txt": "Weblock",
+    "url": "/gear_details/rowan_32"
+   },
+   " named ",
+   {
+    "txt": "Rowan 3.2",
+    "url": "/gear_details/rowan_32"
+   }
+  ],
+  "thumbUrl": "/user_content/img/gear/393_thm.jpg",
+  "details": {
+   "RM": [
+    {
+     "caption": "URL",
+     "action": "RM",
+     "valueBefore": {
+      "txt": "https://souzslackline.com/product/rowan-3-2/",
+      "url": "https://souzslackline.com/product/rowan-3-2/",
+      "blankTarget": true
+     },
+     "type": "URL"
+    }
+   ]
+  },
+  "detailsViewType": "FCS"
+ },
+ {
+  "itemId": 3109,
+  "itemType": "GR",
+  "entityType": "IT",
+  "date": 1712946674285,
+  "action": "UP",
+  "userId": "10154430595665625",
+  "userName": "Nir Avneyon",
+  "txt": [
+   "updated a ",
+   {
+    "txt": "Weblock",
+    "url": "/gear_details/rowan_33"
+   },
+   " named ",
+   {
+    "txt": "Rowan 3.3",
+    "url": "/gear_details/rowan_33"
+   }
+  ],
+  "thumbUrl": "/user_content/img/gear/392_thm.jpg",
+  "details": {
+   "UP": [
+    {
+     "caption": "Production Status",
+     "action": "UP",
+     "valueBefore": {
+      "txt": "Active"
+     },
+     "type": "TXT",
+     "value": {
+      "txt": "Discontinued"
+     }
+    }
+   ]
+  },
+  "detailsViewType": "FCS"
+ },
+ {
+  "itemId": 3107,
+  "itemType": "GR",
+  "entityType": "IT",
+  "date": 1712946654590,
+  "action": "UP",
+  "userId": "10154430595665625",
+  "userName": "Nir Avneyon",
+  "txt": [
+   "updated a ",
+   {
+    "txt": "Weblock",
+    "url": "/gear_details/rowan_31t"
+   },
+   " named ",
+   {
+    "txt": "Rowan 3.1T",
+    "url": "/gear_details/rowan_31t"
+   }
+  ],
+  "thumbUrl": "/user_content/img/gear/394_thm.jpg",
+  "details": {
+   "RM": [
+    {
+     "caption": "URL",
+     "action": "RM",
+     "valueBefore": {
+      "txt": "https://souzslackline.com/product/rowan-3-1t/",
+      "url": "https://souzslackline.com/product/rowan-3-1t/",
+      "blankTarget": true
+     },
+     "type": "URL"
+    }
+   ]
+  },
+  "detailsViewType": "FCS"
+ },
+ {
+  "itemId": 3060,
+  "itemType": "GR",
+  "entityType": "IT",
+  "date": 1712946638442,
+  "action": "UP",
+  "userId": "10154430595665625",
+  "userName": "Nir Avneyon",
+  "txt": [
+   "updated a ",
+   {
+    "txt": "Weblock",
+    "url": "/gear_details/rowan_10softrelease"
+   },
+   " named ",
+   {
+    "txt": "Rowan 1.3",
+    "url": "/gear_details/rowan_10softrelease"
+   }
+  ],
+  "thumbUrl": "/user_content/img/gear/319_thm.jpg",
+  "details": {
+   "RM": [
+    {
+     "caption": "URL",
+     "action": "RM",
+     "valueBefore": {
+      "txt": "https://souzslackline.com/product/bird-1/",
+      "url": "https://souzslackline.com/product/bird-1/",
+      "blankTarget": true
+     },
+     "type": "URL"
+    }
+   ]
+  },
+  "detailsViewType": "FCS"
+ },
+ {
+  "itemId": 3109,
+  "itemType": "GR",
+  "entityType": "IT",
+  "date": 1712946603555,
+  "action": "UP",
+  "userId": "10154430595665625",
+  "userName": "Nir Avneyon",
+  "txt": [
+   "updated a ",
+   {
+    "txt": "Weblock",
+    "url": "/gear_details/rowan_33"
+   },
+   " named ",
+   {
+    "txt": "Rowan 3.3",
+    "url": "/gear_details/rowan_33"
+   }
+  ],
+  "thumbUrl": "/user_content/img/gear/392_thm.jpg",
+  "details": {
+   "RM": [
+    {
+     "caption": "URL",
+     "action": "RM",
+     "valueBefore": {
+      "txt": "https://souzslackline.com/product/rowan-3-3/",
+      "url": "https://souzslackline.com/product/rowan-3-3/",
+      "blankTarget": true
+     },
+     "type": "URL"
+    }
+   ]
+  },
+  "detailsViewType": "FCS"
+ },
+ {
+  "itemId": 3108,
+  "itemType": "GR",
+  "entityType": "IT",
+  "date": 1712946590675,
+  "action": "UP",
+  "userId": "10154430595665625",
+  "userName": "Nir Avneyon",
+  "txt": [
+   "updated a ",
+   {
+    "txt": "Weblock",
+    "url": "/gear_details/rowan_32"
+   },
+   " named ",
+   {
+    "txt": "Rowan 3.2",
+    "url": "/gear_details/rowan_32"
+   }
+  ],
+  "thumbUrl": "/user_content/img/gear/393_thm.jpg",
+  "details": {
+   "UP": [
+    {
+     "caption": "Production Status",
+     "action": "UP",
+     "valueBefore": {
+      "txt": "Active"
+     },
+     "type": "TXT",
+     "value": {
+      "txt": "Discontinued"
+     }
+    }
+   ]
+  },
+  "detailsViewType": "FCS"
+ },
+ {
+  "itemId": 3107,
+  "itemType": "GR",
+  "entityType": "IT",
+  "date": 1712946585444,
+  "action": "UP",
+  "userId": "10154430595665625",
+  "userName": "Nir Avneyon",
+  "txt": [
+   "updated a ",
+   {
+    "txt": "Weblock",
+    "url": "/gear_details/rowan_31t"
+   },
+   " named ",
+   {
+    "txt": "Rowan 3.1T",
+    "url": "/gear_details/rowan_31t"
+   }
+  ],
+  "thumbUrl": "/user_content/img/gear/394_thm.jpg",
+  "details": {
+   "UP": [
+    {
+     "caption": "Production Status",
+     "action": "UP",
+     "valueBefore": {
+      "txt": "Active"
+     },
+     "type": "TXT",
+     "value": {
+      "txt": "Discontinued"
+     }
+    }
+   ]
+  },
+  "detailsViewType": "FCS"
+ },
+ {
+  "itemId": 3106,
+  "itemType": "GR",
+  "entityType": "IT",
+  "date": 1712946580919,
+  "action": "UP",
+  "userId": "10154430595665625",
+  "userName": "Nir Avneyon",
+  "txt": [
+   "updated a ",
+   {
+    "txt": "Weblock",
+    "url": "/gear_details/rowan_31"
+   },
+   " named ",
+   {
+    "txt": "Rowan 3.1",
+    "url": "/gear_details/rowan_31"
+   }
+  ],
+  "thumbUrl": "/user_content/img/gear/395_thm.jpg",
+  "details": {
+   "UP": [
+    {
+     "caption": "Production Status",
+     "action": "UP",
+     "valueBefore": {
+      "txt": "Active"
+     },
+     "type": "TXT",
+     "value": {
+      "txt": "Discontinued"
+     }
+    }
+   ]
+  },
+  "detailsViewType": "FCS"
+ },
+ {
+  "itemId": 3060,
+  "itemType": "GR",
+  "entityType": "IT",
+  "date": 1712946577270,
+  "action": "UP",
+  "userId": "10154430595665625",
+  "userName": "Nir Avneyon",
+  "txt": [
+   "updated a ",
+   {
+    "txt": "Weblock",
+    "url": "/gear_details/rowan_10softrelease"
+   },
+   " named ",
+   {
+    "txt": "Rowan 1.3",
+    "url": "/gear_details/rowan_10softrelease"
+   }
+  ],
+  "thumbUrl": "/user_content/img/gear/319_thm.jpg",
+  "details": {
+   "UP": [
+    {
+     "caption": "Production Status",
+     "action": "UP",
+     "valueBefore": {
+      "txt": "Active"
+     },
+     "type": "TXT",
+     "value": {
+      "txt": "Discontinued"
+     }
+    }
+   ]
+  },
+  "detailsViewType": "FCS"
+ },
+ {
+  "itemId": 62,
+  "itemType": "MNF",
+  "entityType": "IT",
+  "date": 1712946529797,
+  "action": "UP",
+  "userId": "10154430595665625",
+  "userName": "Nir Avneyon",
+  "txt": [
+   "updated a ",
+   {
+    "txt": "Manufacturer",
+    "url": "/manufacturer_details/souz_slackline"
+   },
+   " named ",
+   {
+    "txt": "Souz Slackline",
+    "url": "/manufacturer_details/souz_slackline"
+   }
+  ],
+  "details": {
+   "RM": [
+    {
+     "caption": "Is Active",
+     "action": "RM",
+     "valueBefore": {
+      "txt": "Yes"
+     },
+     "type": "TXT"
+    }
+   ]
+  },
+  "detailsViewType": "FCS"
+ },
+ {
+  "itemId": 3047,
+  "itemType": "GR",
+  "entityType": "IT",
+  "date": 1712946465596,
+  "action": "UP",
+  "userId": "10154430595665625",
+  "userName": "Nir Avneyon",
+  "txt": [
+   "updated a ",
+   {
+    "txt": "Weblock",
+    "url": "/gear_details/rodeo_weblock"
+   },
+   " named ",
+   {
+    "txt": "RODEO weblock",
+    "url": "/gear_details/rodeo_weblock"
+   }
+  ],
+  "thumbUrl": "/user_content/img/gear/262_thm.jpg",
+  "details": {
+   "RM": [
+    {
+     "caption": "URL",
+     "action": "RM",
+     "valueBefore": {
+      "txt": "https://raed-slacklines.com/rodeo-weblock",
+      "url": "https://raed-slacklines.com/rodeo-weblock",
+      "blankTarget": true
+     },
+     "type": "URL"
+    }
+   ]
+  },
+  "detailsViewType": "FCS"
+ },
+ {
+  "itemId": 3047,
+  "itemType": "GR",
+  "entityType": "IT",
+  "date": 1712946441695,
+  "action": "UP",
+  "userId": "10154430595665625",
+  "userName": "Nir Avneyon",
+  "txt": [
+   "updated a ",
+   {
+    "txt": "Weblock",
+    "url": "/gear_details/rodeo_weblock"
+   },
+   " named ",
+   {
+    "txt": "RODEO weblock",
+    "url": "/gear_details/rodeo_weblock"
+   }
+  ],
+  "thumbUrl": "/user_content/img/gear/262_thm.jpg",
+  "details": {
+   "UP": [
+    {
+     "caption": "Production Status",
+     "action": "UP",
+     "valueBefore": {
+      "txt": "Active"
+     },
+     "type": "TXT",
+     "value": {
+      "txt": "Discontinued"
+     }
+    }
+   ]
+  },
+  "detailsViewType": "FCS"
+ }
+]

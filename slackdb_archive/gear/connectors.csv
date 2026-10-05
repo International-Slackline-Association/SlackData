@@ -1,0 +1,29 @@
+id,name,manufacturer,Material,Weight (grams),WLL (kN),MBS (kN),Connector type,Production Status,remarks,rating (/10),ratings,reviews,comments,images,image ids,cover image,contributors,created,last edited,slackdb url
+2000,8mm 0.65T Omega Stainless Steel Shackle,,Stainless Steel,60,6.25,25,Omega Shackle,Active,,,,0,0,0,,,Nir Avneyon,2017-07-12T21:51:06Z,,https://slackdb.com/gear_details/8mm065TOmegaStainlessSteelShackle
+2001,10mm 1T Omega Stainless Steel Shackle,,Stainless Steel,125,10,40,Omega Shackle,Active,,,,0,0,2,186; 195,image_files/gear/195.jpg,Nir Avneyon,2017-07-12T21:51:06Z,,https://slackdb.com/gear_details/10mm1TOmegaStainlessSteelShackle
+2002,12mm 1.5T Omega Stainless Steel Shackle,,Stainless Steel,204,15,60,Omega Shackle,Active,,,,0,0,5,50; 186; 200; 227; 228,image_files/gear/200.jpg,Nir Avneyon,2017-07-12T21:51:06Z,,https://slackdb.com/gear_details/12mm15TOmegaStainlessSteelShackle
+2003,6mm D Stainless Steel Shackle,,Stainless Steel,,,,D Shackle,Active,,,,0,0,1,189,image_files/gear/189.jpg,Nir Avneyon,2017-07-12T21:51:06Z,,https://slackdb.com/gear_details/6mmDStainlessSteelShackle
+2004,8mm 0.65T D Stainless Steel Shackle,,Stainless Steel,58,6.25,25,D Shackle,Active,,,,0,0,1,190,image_files/gear/190.jpg,Nir Avneyon,2017-07-12T21:51:06Z,,https://slackdb.com/gear_details/8mm065TDStainlessSteelShackle
+2005,10mm 1T D Stainless Steel Shackle,,Stainless Steel,116,10,40,D Shackle,Active,,,,0,0,0,,,Nir Avneyon,2017-07-12T21:51:06Z,,https://slackdb.com/gear_details/10mm1TDStainlessSteelShackle
+2006,12mm 1.5T D Stainless Steel Shackle,,Stainless Steel,200,15,60,D Shackle,Active,,,,0,0,0,,,Nir Avneyon,2017-07-12T21:51:06Z,,https://slackdb.com/gear_details/12mm15TDStainlessSteelShackle
+2007,1.5T D Shackle,Van Beest,Steel,177,15,90,D Shackle,Active,Van Beest Rating,,,0,0,0,,,Nir Avneyon,2017-07-12T21:51:06Z,,https://slackdb.com/gear_details/15TDShackle
+2008,2T D Shackle,Van Beest,Steel,330,20,120,D Shackle,Active,Van Beest Rating,,,0,0,0,,,Nir Avneyon,2017-07-12T21:51:06Z,,https://slackdb.com/gear_details/2TDShackle
+2009,3.25T D Shackle,Van Beest,Steel,577,32.5,195,D Shackle,Active,Van Beest Rating,,,0,0,0,,,Nir Avneyon,2017-07-12T21:51:06Z,,https://slackdb.com/gear_details/325TDShackle
+2010,1.5T OMEGA Shackle,Van Beest,Steel,187,15,90,Omega Shackle,Active,Van Beest Rating,,,0,0,0,,,Nir Avneyon,2017-07-12T21:51:06Z,,https://slackdb.com/gear_details/15TOMEGAShackle
+2011,2T OMEGA Shackle,Van Beest,Steel,285,20,120,Omega Shackle,Active,Van Beest Rating,,,0,0,0,,,Nir Avneyon,2017-07-12T21:51:06Z,,https://slackdb.com/gear_details/2TOMEGAShackle
+2012,3.25T OMEGA Shackle,Van Beest,Steel,634,32.5,195,Omega Shackle,Active,Van Beest Rating,,,0,0,1,264,,Nir Avneyon,2017-07-12T21:51:06Z,,https://slackdb.com/gear_details/325TOMEGAShackle
+2013,8mm Oval Quicklink,,Steel,77,7,35,Oval Quicklink,Active,,,,0,0,2,188; 198,image_files/gear/198.jpg,Nir Avneyon,2017-07-12T21:51:06Z,,https://slackdb.com/gear_details/8mmOvalQuicklink
+2014,10mm Oval Quicklink,,Steel,137,11,55,Oval Quicklink,Active,,,,0,0,0,,,Nir Avneyon,2017-07-12T21:51:06Z,,https://slackdb.com/gear_details/10mmOvalQuicklink
+2015,12mm Oval Quicklink,,Steel,232,15,75,Oval Quicklink,Active,,,,0,0,0,,,Nir Avneyon,2017-07-12T21:51:06Z,,https://slackdb.com/gear_details/12mmOvalQuicklink
+2016,8mm Delta Quicklink,,Steel,,5.5,27,Delta Quicklink,Active,,,,0,0,2,188; 196,image_files/gear/196.jpg,Nir Avneyon,2017-07-12T21:51:06Z,2017-09-21T15:20:52Z,https://slackdb.com/gear_details/8mmQuicklinkDelta
+2017,10mm Delta Quicklink,,Steel,,9,45,Delta Quicklink,Active,,,,0,0,3,187; 188; 192,image_files/gear/192.jpg,Nir Avneyon,2017-07-12T21:51:06Z,2017-09-21T15:20:28Z,https://slackdb.com/gear_details/10mmQuicklinkDelta
+2018,12mm Delta Quicklink,,Steel,,11,55,Delta Quicklink,Active,,,,0,0,1,18,,Nir Avneyon,2017-07-12T21:51:06Z,2017-09-21T15:20:40Z,https://slackdb.com/gear_details/12mmQuicklinkDelta
+2019,Steel Oval Carabiner,,Steel,176,5,30,Oval Carabiner,Active,,,,0,0,0,,,Nir Avneyon,2017-07-12T21:51:06Z,,https://slackdb.com/gear_details/SteelOvalCarabiner
+2020,Lock Ring,,Steel,,,15,Lock Ring,Active,,,,0,0,0,,,Nir Avneyon,2017-07-12T21:51:06Z,,https://slackdb.com/gear_details/LockRing
+3032,14mm Twist Shackle,,Stainless Steel,378,25,100,Twist Shackle,,,,,0,0,1,203,image_files/gear/203.jpg,Nir Avneyon,2017-09-21T13:54:46Z,,https://slackdb.com/gear_details/14mm_twistshackle
+3033,12mm Twist Shackle,,Stainless Steel,234,25,80,Twist Shackle,,,,,0,0,0,,,Nir Avneyon,2017-09-21T13:56:13Z,,https://slackdb.com/gear_details/12mm_twistshackle
+3034,8mm Twist Shackle,,Stainless Steel,76,10,35,Twist Shackle,,,,,0,0,1,191,image_files/gear/191.jpg,Nir Avneyon,2017-09-21T13:56:37Z,,https://slackdb.com/gear_details/8mm_twistshackle
+3035,10mm Oval Twist Quicklink,,Stainless Steel,152,10,50,Twist Quicklink,,,,,0,0,2,188; 201,image_files/gear/201.jpg,Nir Avneyon,2017-09-21T15:03:20Z,,https://slackdb.com/gear_details/10mm_ovaltwistquicklink
+3036,8mm Oval Twist Quicklink,,Stainless Steel,106,6,32,Twist Quicklink,,,,,0,0,0,,,Nir Avneyon,2017-09-21T15:04:03Z,,https://slackdb.com/gear_details/8mm_ovaltwistquicklink
+3037,10mm Square Quicklink,,Stainless Steel,166,9,45,Square Quicklink,,,,,0,0,3,187; 188; 202,image_files/gear/202.jpg,Nir Avneyon,2017-09-21T15:11:47Z,,https://slackdb.com/gear_details/10mm_squarequicklink
+3038,8mm Square Quicklink,,Stainless Steel,87,5.5,27.5,Square Quicklink,,,,,0,0,0,,,Nir Avneyon,2017-09-21T15:12:28Z,,https://slackdb.com/gear_details/8mm_squarequicklink

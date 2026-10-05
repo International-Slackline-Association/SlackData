@@ -1,0 +1,47 @@
+{
+ "itemsCount": {
+  "gear": 533,
+  "knowledge": 386,
+  "images": 632,
+  "manufactures": 74,
+  "communities": 562
+ },
+ "gearStats": {
+  "SLD": {
+   "count": 13,
+   "name": "Sliders"
+  },
+  "WLCK": {
+   "count": 109,
+   "name": "Weblocks"
+  },
+  "WEB": {
+   "count": 204,
+   "name": "Webbings"
+  },
+  "WGP": {
+   "count": 12,
+   "name": "Webbing grips"
+  },
+  "TRP": {
+   "count": 24,
+   "name": "Tree protectorss"
+  },
+  "TLK": {
+   "count": 9,
+   "name": "Trickline kits"
+  },
+  "BRK": {
+   "count": 24,
+   "name": "Rope Brakes"
+  },
+  "SKT": {
+   "count": 64,
+   "name": "Starter kits"
+  },
+  "LRNG": {
+   "count": 31,
+   "name": "Leash Rings"
+  }
+ }
+}
