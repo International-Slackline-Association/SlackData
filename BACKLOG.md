@@ -163,8 +163,10 @@ Non-phase engineering tasks not tracked in [PLAN.md](PLAN.md) (frontend roadmap)
   - [ ] **Mystery Tube**
   - [x] **The Path** — added 2026-09-10 as webbing **260**, Cong Gear "Path".
   - [ ] **TWTSNBN** ("the webbing that shall not be named")
-  - [ ] **Float**
-  - [ ] **PHAT**
+  - [x] **Float** (Balance Community) — not relevant: a prototype polypropylene/HMPE blend the
+    operator had a few meters made of, never a product. Not to be listed.
+  - [x] **PHAT** ("Polyester, Heavy, And Thicc", Balance Community) — not relevant: a prototype
+    heavy polyester webbing the operator made a few meters of, never a product. Not to be listed.
   - [ ] **Pure**
   - [ ] **PowerLine** (HopOn) — reviewed at
     <https://www.outdoorgearlab.com/reviews/climbing/slackline/hopon-powerline>, which is a
