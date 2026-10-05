@@ -451,6 +451,9 @@
         "id": 6,
         "name": "White Magic",
         "brand": "Landcruising",
+        "gear_sellers": [
+            "Aki Slacklines"
+        ],
         "stretch": [
             {
                 "kn": 2,
@@ -522,6 +525,9 @@
         "id": 7,
         "name": "Unicorn",
         "brand": "Landcruising",
+        "gear_sellers": [
+            "Aki Slacklines"
+        ],
         "stretch": [
             {
                 "kn": 2,
@@ -6462,6 +6468,9 @@
         "id": 116,
         "name": "Wave Tube",
         "brand": "Landcruising",
+        "gear_sellers": [
+            "Aki Slacklines"
+        ],
         "materialType": "Nylon",
         "width": 25,
         "weight": 42,
@@ -6507,6 +6516,9 @@
         "id": 118,
         "name": "Wave Tube 19",
         "brand": "Landcruising",
+        "gear_sellers": [
+            "Aki Slacklines"
+        ],
         "materialType": "Nylon",
         "width": 19,
         "weight": 36,
@@ -7240,6 +7252,9 @@
         "id": 151,
         "name": "Verve 25mm",
         "brand": "Landcruising",
+        "gear_sellers": [
+            "Aki Slacklines"
+        ],
         "materialType": "Polyester",
         "width": 25.4,
         "weight": 59,
@@ -7263,6 +7278,9 @@
         "id": 152,
         "name": "Wave Tube  32",
         "brand": "Landcruising",
+        "gear_sellers": [
+            "Aki Slacklines"
+        ],
         "materialType": "Polyester",
         "width": 25.4,
         "weight": 58,
@@ -7683,6 +7701,9 @@
         "id": 164,
         "name": "Aloha (Aka Aki Tidal)",
         "brand": "Landcruising",
+        "gear_sellers": [
+            "Aki Slacklines"
+        ],
         "materialType": "Polyester",
         "width": 25,
         "weight": 48,
@@ -9346,50 +9367,6 @@
         "active": true,
         "manufacturer_not_for_highline": true,
         "manufacturer_not_for_highline_source": "https://www.slackshop.cz/en/polyester/30-eqb-neon.html"
-    },
-    {
-        "id": 209,
-        "name": "White Magic",
-        "brand": "Aki Slacklines",
-        "materialType": "Polyester",
-        "width": 25,
-        "weight": 58,
-        "breakingStrength": 32.5,
-        "thickness": null,
-        "stretch": [
-            {
-                "percent": 5,
-                "kn": 10
-            }
-        ],
-        "date_introduced": null,
-        "product_url": "https://aki-slacklines.de/en/webbing/polyester/4/aki-white-magic-webbing?c=6",
-        "webbing_construction": "Flat",
-        "priceMeter": 1.3,
-        "currency": "EUR",
-        "active": false
-    },
-    {
-        "id": 210,
-        "name": "Unicorn",
-        "brand": "Aki Slacklines",
-        "materialType": "Polyester",
-        "width": 25,
-        "weight": 61.5,
-        "breakingStrength": 32,
-        "thickness": 2.7,
-        "stretch": [
-            {
-                "percent": 9,
-                "kn": 10
-            }
-        ],
-        "date_introduced": 1489363200000,
-        "product_url": null,
-        "webbing_construction": "Core/Sheath",
-        "priceMeter": 1.79,
-        "currency": "EUR",
-        "active": false
     },
     {
         "id": 211,
@@ -12160,6 +12137,29 @@
         ],
         "description": "The original webbing that must not be named that has been sold in the \"slackshop that must not be named\" store before. We found the last pieces of it and make them available for you at a very special price! We take the liberty to quote portions of the text that a former German \"slackshop that must not be named\" used to describe this webbing: \"The webbing that must not be named\" - this was the reference amongst allround slackline webbings back in 2016 and the \"slackshop that must not be named\" masterpiece. This webbing came with lots of innovative details back then. Its perfectly designed features still allow you to push the limits today. The high stretch version offers an extended stretch and is especially suitable for more dynamic applications like bouncy longlines while it's still easy to tension. The higher stretch absorbs impact forces more effectively in the case of shock loads. The webbing which must not be named - no limits!\"\n\nNote: this is Landcruising's [Core 2 HS](/webbings/1), resold by Raed under another name.",
         "notes": "Raed's end-of-stock resale of Landcruising's Core 2 HS (id 1) under its old nickname - Landcruising's former shop (slackshop.de, \"the slackshop that must not be named\") sold Core 2 as \"the webbing that must not be named\". Raed's page quotes that shop's copy: 2016, flat polyester kernmantle (core + sheath), SoftEdge, dual colour blue/yellow with black edges, high-stretch version, average MBS 44 kN, 7 % at 13 kN, 71.5 g/m, made in Germany - every figure matches the Core 2 HS row, so its thickness (3.5 mm) and stretch curve are copied from row 1. Raed's spec table: 25 mm, 6 % stretch at 1/3 MBS, optimised for highlines/longlines/waterlines, cut lengths 75/100/150/200 m; the product graphic says 6 % / 72 g/m / 45 kN, core/sheath, Hydro Shield, Therma Stretch, Soft Edge. Raed notes it was factory heat treated and is stiff when new. Price is the regular EUR 2.20/m incl. 19 % VAT (on sale at 1.54) from the Wayback capture of 2019-10-18; the live page is gone and the stock was 'the last pieces', so active is false.",
+        "active": false
+    },
+    {
+        "id": 264,
+        "name": "Mandril Line",
+        "brand": "Carlo Sovrini",
+        "materialType": "Hybrid",
+        "materialComposition": [
+            "Polyester",
+            "Dyneema/HMPE"
+        ],
+        "width": 18,
+        "weight": 32,
+        "breakingStrength": 28,
+        "stretch": null,
+        "thickness": null,
+        "webbing_construction": null,
+        "product_url": null,
+        "date_introduced": null,
+        "priceMeter": null,
+        "currency": null,
+        "description": "It was produced to rig what was then the Italian highline world record (1280 m), so only 2 km of this webbing were ever made.",
+        "notes": "Added 2026-10-04 from the operator's own sample and messages. The description is Carlo's account as relayed by the operator, not published text, the only source - there is no product page or spec sheet. Carlo Sovrini produced it himself (per his messages to the operator). 18 mm Dyneema/polyester blend; the 32 g/m weight is the operator's approximate figure, and the 28 kN MBS is what the operator was told, not a published or tested value. Thickness, construction, stretch, price and product URL are null: no source states them. Active is false: it was a one-off production run of about 2 km, made to rig what was then the Italian highline world record (1280 m). The webbing is two-faced - red/orange/yellow on one side, blue/orange/grey on the other - with black edges.",
         "active": false
     }
 ]

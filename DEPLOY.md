@@ -32,8 +32,8 @@ Expired token → `aws sso login --profile isa-slackdata`, then re-run the `eval
 
 ```bash
 cd infra
-export TURNSTILE_SECRET='...'      # Cloudflare dashboard, slackdata.org. Never in git.
-./preflight.sh                     # dirty tree, unset secret, wrong account
+export TURNSTILE_SECRET='...'
+./preflight.sh
 npx serverless deploy --stage prod
 cd ..
 ```

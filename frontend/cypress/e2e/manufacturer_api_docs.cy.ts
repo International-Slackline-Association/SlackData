@@ -1,4 +1,4 @@
-// The /for-manufacturers page — MANUFACTURER_API_PLAN.md § 6, PHASE4_SHIP_PLAN.md § 6.
+// The /for-manufacturers page — MANUFACTURER_API.md, rendered for brands.
 //
 // Not a prose test. Three things here are load-bearing, and each has cost
 // somebody something when it was missing:

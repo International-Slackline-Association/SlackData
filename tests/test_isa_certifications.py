@@ -177,7 +177,7 @@ def test_non_webbing_rows_get_the_certificate_but_no_class(session, brand):
 # ---------------------------------------------------------------------------
 
 # The 17 rows the gear seeds flagged by hand before certification moved to
-# `isa_certified.json` (ISA_CERTIFICATION_PLAN.md: all must match). A change
+# `isa_certified.json` (PR #83: all must match). A change
 # here is a change to which products we call ISA approved — deliberate only.
 EXPECTED_CERTIFIED = {
     ("webbing", 61), ("webbing", 62), ("webbing", 63), ("webbing", 74),

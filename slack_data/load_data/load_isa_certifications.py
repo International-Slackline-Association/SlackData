@@ -30,7 +30,7 @@ Three rules beyond the match block:
   - **Only `exact` matches certify.** Anything else is reported and skipped.
   - **Intermittent Connection certificates never certify**, even if matched:
     they certify a way of joining webbing, not the webbing (plan decision,
-    ISA_CERTIFICATION_PLAN.md). Webbing and Webbing – Sewn Loop certificates
+    PR #83). Webbing and Webbing – Sewn Loop certificates
     both certify the webbing row.
   - **Kits and tree protectors cannot be certified** — they have no column.
 
@@ -63,7 +63,7 @@ from slack_data.models.weblocks import Weblock
 ISA_CERTIFIED_FILE = seed_path("isa_certified.json")
 
 # The gear types that can be certified. Tree protectors, starter kits and
-# trickline kits cannot — see ISA_CERTIFICATION_PLAN.md § Decisions.
+# trickline kits cannot — a decision made in PR #83.
 CERTIFIABLE_MODELS = {
     "webbing": Webbing,
     "weblock": Weblock,

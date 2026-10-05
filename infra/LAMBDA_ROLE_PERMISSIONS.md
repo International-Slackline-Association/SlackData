@@ -63,7 +63,8 @@ than one — `PutLogEvents` is split out because it acts on the log *stream*, on
 
 That shape is not ours to tidy: it reproduces the Serverless Framework's own default execution-role
 policy statement-for-statement, which is the whole point of a hand-created role that the deploy then
-references (§ LAUNCH_RUNBOOK.md 5.4 — `iam:CreateRole` is denied, so the ISA creates the role and
+references ([README.md](README.md) § The Lambda execution role is the ISA's to create —
+`iam:CreateRole` is denied, so the ISA creates the role and
 `provider.iam.role` points at it). Note the prefix is `slackdata-prod*` with **no trailing hyphen**,
 so it matches the log group of every function this service deploys.
 
@@ -293,9 +294,9 @@ Earlier revisions of this file said `CreateResourceServer` "is not in the grante
 Phase 4 was written up as undeployable rather than merely un-onboarded. It was an **inference from
 the tier-1 row above**, read as though the deploying identity carried an enumerated allowlist the way
 the Lambda role does. It does not: `slackdata-dev-access` is **`Allow *` with a short deny list**
-(LAUNCH_RUNBOOK.md § 5.4), whose known entries are `DenyIdentitySelfEscalation` — `iam:CreateRole`
-and friends — and `ec2:*`. Cognito appears in neither. LAUNCH_RUNBOOK.md § 11 reaches the same
-conclusion from reading the permission set directly: *"Everything the deploy needs is permitted
+([README.md](README.md) § The Lambda execution role is the ISA's to create), whose known entries
+are `DenyIdentitySelfEscalation` — `iam:CreateRole` and friends — and `ec2:*`. Cognito appears in
+neither. The launch record reached the same conclusion from reading the permission set directly: *"Everything the deploy needs is permitted
 **except** IAM role creation."*
 
 **Tier 4 was not the only unexercised row, which is why the check below covers more than it.**

@@ -1355,7 +1355,7 @@ that left it engaged could still land on an empty grid.
 
 ## Safety & Data Notices
 
-Two standing notices, required before launch ([LAUNCH_RUNBOOK.md §10](LAUNCH_RUNBOOK.md)). The
+Two standing notices, required before launch and live since it. The
 **copy is not owned by the frontend** — [SAFETY_AND_ACCURACY.md](SAFETY_AND_ACCURACY.md) is the source
 text, reviewed and approved by the ISA because it is published under their name. Change the wording
 there first, then mirror it into the components.
@@ -1401,7 +1401,7 @@ sticky nav doesn't cover the heading.
 > **Where certification comes from:** `isa_certified` is set only from the ISA's own approved-gear
 > list (`isa_certified.json`, CLAUDE.md § ISA certifications), never from our seeds. So "not
 > certified" now means "not on the ISA's list" — which is the ISA's statement, not a gap in ours. A
-> three-state field was considered and rejected (ISA_CERTIFICATION_PLAN.md § Decisions): anything
+> three-state field was considered and rejected ([PR #83](https://github.com/International-Slackline-Association/SlackData/pull/83), plan § Decisions): anything
 > the list does not match reads **Not ISA Certified**. Only webbing / weblock / roller / leash ring /
 > grip carry the field; kits and tree protectors cannot be certified.
 

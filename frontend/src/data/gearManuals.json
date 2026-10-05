@@ -90,6 +90,9 @@
     ]
   },
   "weblocks": {
+    "aki_raptor": [
+      "aki_raptor.pdf"
+    ],
     "bc_alpine-weblock-6-1": [
       "bc_alpine-weblock-6-1.pdf"
     ],

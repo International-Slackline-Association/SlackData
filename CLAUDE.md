@@ -271,7 +271,8 @@ ISA certified if and only if an entry in `isa_certified.json` matches it. That f
 approved-gear list (one entry per certificate), built from the committed raw capture
 `isa_approved_data.csv` by `scripts/build_isa_certified.py`, with the same hand-adjudicated `match`
 block as the warnings (the script keeps them across rebuilds). See
-[ISA_CERTIFICATION_PLAN.md](ISA_CERTIFICATION_PLAN.md) for the decisions behind it.
+[PR #83](https://github.com/International-Slackline-Association/SlackData/pull/83) for what changed, and the [plan it was built from](https://github.com/International-Slackline-Association/SlackData/blob/5be24c10402cd1917d83385a9af001c142b622cc/ISA_CERTIFICATION_PLAN.md) (since
+deleted) for the decisions behind it.
 
 `load_data/load_isa_certifications.py` runs right after the warnings pass, gated on the
 `ISAGearCertification` table being empty, and verifies ids against `"<brand> <name>"` the same way.
@@ -364,24 +365,33 @@ the sellers, deduped). Two surfaces read it:
   price and above the ISA certification block) — each shop's name, linked to its
   brand page. DESIGN.md § Also sold by.
 
-Seeded today: **64 co-listings**, from two sources with very different
+Seeded today: **72 co-listings**, from three sources with very different
 provenance.
 
 - **SlackX** (`slackx.eu`, catalog_id 97) sells both Radrigs weblocks — the
   `Orange` and the `Slackfriend`. Recorded by hand from their shop. SlackX
   continues the Radrigs line and makes nothing else we hold, which is exactly
   the seller-only brand case above.
-- **Slack Inov ↔ Spider Slacklines**, 62: the two companies each sell the
+- **Slack Inov ↔ Spider Slacklines**, 63: the two companies each sell the
   other's entire range, so every item made by one names the other, across all
   eight gear types. Recorded in bulk from the operator's statement, not from a
   per-product scrape — which is precisely why a name is the whole claim. No
   price, URL or per-shop stock flag is stored for any co-listing: none was
   sourced, and "does this shop still stock it" is a different question from the
   product's own `active`, which for a fair part of this range is `false`.
+- **Aki Slacklines** sells 7 Landcruising webbings (White Magic, Unicorn, Wave
+  Tube, Wave Tube 19, Verve 25, Wave Tube 32, Aloha/Tidal). Aki's founder
+  founded and ran Landcruising (2008–2018), and Aki carried on part of the range.
+  Recorded per product from the Wayback copies of Aki's shops, one way only: Aki
+  sells Landcruising's webbing, not the reverse. White Magic and Unicorn were
+  each held twice, once under each brand (rows 6+209, 7+210); on 2026-10-05 the
+  Aki rows were folded into the Landcruising ones, along with their photos, so
+  ids 209 and 210 no longer exist. Two uncertain matches were left out (Matrix
+  Outer, Verve 35mm); BACKLOG.md § Aki has them.
 
-**Not done here:** the rebadge half (EQB/Spider `Bandit`, Landcruising/Aki
-`Unicorn` — two rows that are one product and should be merged with a
-redirect), and anything on the **card** — the card shows the maker, because the
+**Not done here:** the rebadge half (EQB/Spider `Bandit` — two rows that are
+one product and should be merged with a redirect; the Landcruising/Aki pairs
+were merged without one), and anything on the **card** — the card shows the maker, because the
 specs are the maker's, and inventory counts still assume one row is one product,
 so a seller-only brand like SlackX reads as "0 items" on the manufacturers page
 even though it sells two. See BACKLOG.md.

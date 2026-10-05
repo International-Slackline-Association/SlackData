@@ -56,16 +56,94 @@ Non-phase engineering tasks not tracked in [PLAN.md](PLAN.md) (frontend roadmap)
       <https://web.archive.org/web/20100717061247/http://www.landcruising-slacklines.de/04-04-treebuddies-baumschuetzer.html>
   - Longline kits (Conveyor, Ronin, Sensei 1–3, Ninja) are archived too but fit no gear type we have.
   - Loose ends on rows we hold
-    - [ ] **Webbing #152 "Wave Tube  32"** looks like a garbled duplicate of **Matrix Outer #115**
-      (same 27 kN, 58 g/m, 1.95 €, but recorded as 25.4 mm polyester). Confirm and remove.
+    - [ ] **Webbing #152 "Wave Tube  32"** is not a duplicate of Matrix Outer #115 after all: it is
+      Aki's Wave Tube 32, with the wrong brand, material and width. See the Aki item below.
     - [ ] **Aloha #164** still links the live `aki-slacklines.de` Tidal page; it was never archived.
-    - [ ] **Photos still missing**: Unicorn, Matrix Outer, Puma 2.0 (the archive fetches failed;
+    - [ ] **Photos still missing**: Matrix Outer, Puma 2.0 (the archive fetches failed;
       worth a slower retry), and Wizard and Wave Tape 19, which have no usable capture at all.
     - [ ] **Stretch curves that disagree with the maker's own table** were left as they are: White
       Magic #6 (maker gives 4.8 % at 10 kN, the seed 5.1 %) and Core 1 #3 (maker gives 2.7 % at
       10 kN, the seed 2.8 %). The differences are small, but a decision is needed on which source wins.
     - [ ] **Unicorn #7 highline status** was left null: the maker markets it for highlines, but also
       says they "officially do not sell slacklines for use in highlines".
+
+- [ ] **Aki Slacklines gear we don't hold, and loose ends from the archive pass (2026-10-05).** Aki
+  continued part of the Landcruising range, and its shop is now behind a password page, so
+  everything below comes from the Wayback copies of aki-slacklines.de: the old Shopware shop
+  (numbered URLs, mostly German captures, to 2024) and the Shopify shop that replaced it (2024–25).
+  Raptor was added as weblock **#134** in the same pass. "(DE)" means the only working capture is
+  German, so there is no description to take.
+
+  - Webbings
+    - [ ] **Soma** — PES flat 3-layer, 24.5 mm, 2.7 mm, 32.5 kN MBS (34 kN average), 6.5 kN WLL,
+      8.7 % at 10 kN, 62 g/m, 1.40 €/m on sale, made in Germany (DE); the page links a manual:
+      <https://web.archive.org/web/20240713154858/https://aki-slacklines.de/de/slacklineband/polyester/186/aki-soma-slacklineband?c=6>
+    - [ ] **Starter 35** — the webbing from the Starter kits: PES flat 3-layer, 35 mm, 2.3 mm,
+      34 kN (32 kN with sewn loop), 6 kN WLL, 72 g/m, 2.00 €/m (DE):
+      <https://web.archive.org/web/20221006062712/https://aki-slacklines.de/de/slacklineband/polyester/193/aki-starter-35-slacklineband>
+    - [ ] **Polar B-quality** — a fixed-length seconds version of Polar #177. Listed in the old
+      shop as `/en/webbing/polyester/217/aki-polar-webbing-b-quality-fixed-length`, but no capture
+      of the page itself. Probably a note on #177 rather than a row.
+  - Weblocks
+    - [ ] **Lockman 2** — Landcruising's Lockman 2.0 under Aki's name (same 93 g, 30 kN, 8 kN WLL;
+      64 × 18 × 18 mm, 12 mm diverter, stainless, made in Germany, 16.50 €). One product, so one
+      row: settle the brand before importing either entry (DE):
+      <https://web.archive.org/web/20210728193156/https://aki-slacklines.de/de/hardware/bandhalter/13/aki-lockman-2-bandhalter?c=13>
+    - [ ] **Lockman Air** — in the old shop's sitemap (`/de/hardware/bandhalter/81/aki-lockman-air-bandhalter`)
+      but no working capture; the Landcruising item above has the AirBow combo page.
+  - Tree protectors (we hold no Aki tree protectors). Polypropylene felt, 5 mm, Velcro closure, sold
+    singly, not in pairs.
+    - [ ] **Tree Protection Small** — 100 × 15 cm, no loops, 100 g, trees up to 0.9 m, blue or
+      orange, 6.50 €, made in Poland. The old shop's "Baumschutz S" is the same product:
+      <https://web.archive.org/web/20250121181919/https://aki-slacklines.de/en/products/aki-slackline-treepro-small>
+    - [ ] **Tree Protection Medium** — 150 × 20 cm, 2 sewn loops, 170 g, trees up to 1.3 m, black,
+      9.50 €, made in Poland:
+      <https://web.archive.org/web/20240919201753/https://aki-slacklines.de/en/products/aki-slackline-treepro-medium>
+    - [ ] **Tree Protection XL** — 250 × 25 cm, 4 sewn loops, 360 g, trees up to 2.3 m, black,
+      14.50 €:
+      <https://web.archive.org/web/20250121184542/https://aki-slacklines.de/en/products/aki-slackline-treepro-xl>
+    - [ ] **Tree Protection Large** — old shop only (`/en/soft-rigging/tree-protection/154/aki-tree-protection-large`),
+      no capture of the page. Possibly what became the XL; unconfirmed.
+  - Not a gear type we have: T-Leash Cobra, sewn loops, the T-Loop backup split, Backup Extenders,
+    Soft Release Light, Soft Thimble, slings, Zentube centering bushings, and the third-party gear
+    Aki resold (shackles, Ticket to the Moon hammocks).
+  - Loose ends on rows we hold
+    - [ ] **Aki is recorded as a seller** (`gear_sellers`) on the seven Landcruising webbings its
+      shops sold: White Magic #6, Unicorn #7, Wave Tube #116, Wave Tube 19 #118, Verve 25 #151,
+      Wave Tube 32 #152 and Aloha/Tidal #164. Aki's founder founded and ran Landcruising (2008–2018,
+      <https://web.archive.org/web/20241204015541/https://aki-slacklines.de/en/pages/about-aki-slacklines>).
+      The duplicate Aki rows White Magic #209 and Unicorn #210 were merged into #6 and #7
+      (2026-10-05). Their photos moved across; Aki's own prices (1.30 and 1.79 €/m) had nowhere to
+      go, since a co-listing stores no per-seller price. Old `/webbing/209` and `/webbing/210` links
+      now 404, because there is no redirect mechanism yet. Not added, since the match is unconfirmed: Matrix Outer #115
+      (see #152 below) and Verve 35mm #113 (the old Aki shop's "Landcruising Slackline 35mm 18m"
+      may be it).
+    - [ ] **Wave Tube #116 and Wave Tube 19 #118** have Aki pages with fuller specs and archive
+      links (both DE). Wave Tube 25: PA tubular, 25 mm, 2.3 mm, 21 kN, 4 kN WLL, 17 % at 10 kN,
+      42 g/m, 1.80 €/m
+      (<https://web.archive.org/web/20230930232851/https://aki-slacklines.de/de/slacklineband/polyamid/138/aki-wave-tube-25-slacklineband?c=6>).
+      Wave Tube 19: 2.4 mm, PU-coated, 17.5 kN, 3.5 kN WLL, 18 % at 10 kN, 36 g/m, 1.45 €/m; mainly
+      a sheath over dynamic rope
+      (<https://web.archive.org/web/20240528072644/https://aki-slacklines.de/de/slacklineband/polyamid/15/aki-wave-tube-19-slacklineband>).
+      The rows give 20 kN and 17 kN.
+    - [ ] **Webbing #152 "Wave Tube  32"** is Aki's **Wave Tube 32**, recorded wrongly as a
+      Landcruising 25.4 mm polyester webbing. Aki's page gives: PA tubular, 32 mm, 2.3 mm, 27 kN,
+      5.4 kN WLL, 16 % at 10 kN, 55 g/m, 2.00 €/m, made in the EU; 25 mm weblocks don't fit it, and
+      it threads over Wave Tube 25 to make a Matrix jumpline. Correct the brand, material, width,
+      weight and price, and add the link (DE):
+      <https://web.archive.org/web/20240528074507/https://aki-slacklines.de/de/slacklineband/polyamid/14/aki-wave-tube-32-slacklineband>.
+      Matrix Outer #115 (Landcruising, 32 mm PA, 27 kN, 58 g/m) looks like the same webbing's
+      earlier name. Decide whether they are one product.
+    - [ ] **Starter Comfort #13** was renamed **"Aki Starter Slackline Kit"** in the Shopify shop:
+      the same contents (adjustable tree slings, Tree Protection Medium), the same 30 kN / 5 kN /
+      4 kg, and an English blurb that translates the German one. The newer page gives the English
+      description, the 4 kg weight and 134.95 €:
+      <https://web.archive.org/web/20241204025754/https://aki-slacklines.de/en/products/aki-starter-slackline-kit>.
+      **Starter Classic #12**'s own capture gives its weight, 4.2 kg; the row has none.
+    - [ ] **Rows linking the live, now password-locked shop** need archive links: Polar #177,
+      Purple Gold #202, Nomad #203 and Lynx 5 #53. Shopify-era captures exist for Polar and Purple
+      Gold (`/en/products/aki-polar-slackline-webbing`, `/en/products/aki-purple-gold-slacklineband`).
+      Nomad's old page was never archived.
 
 - [ ] **Adjudicate the remaining missing-gear candidates.** [MISSING_GEAR_REVIEW.md](MISSING_GEAR_REVIEW.md)
   has one section left from the 2026-07-31 deep sweep: **Starter / Longline / Highline Kit, 56
@@ -85,8 +163,10 @@ Non-phase engineering tasks not tracked in [PLAN.md](PLAN.md) (frontend roadmap)
   - [ ] **Mystery Tube**
   - [x] **The Path** — added 2026-09-10 as webbing **260**, Cong Gear "Path".
   - [ ] **TWTSNBN** ("the webbing that shall not be named")
-  - [ ] **Float**
-  - [ ] **PHAT**
+  - [x] **Float** (Balance Community) — not relevant: a prototype polypropylene/HMPE blend the
+    operator had a few meters made of, never a product. Not to be listed.
+  - [x] **PHAT** ("Polyester, Heavy, And Thicc", Balance Community) — not relevant: a prototype
+    heavy polyester webbing the operator made a few meters of, never a product. Not to be listed.
   - [ ] **Pure**
   - [ ] **PowerLine** (HopOn) — reviewed at
     <https://www.outdoorgearlab.com/reviews/climbing/slackline/hopon-powerline>, which is a
@@ -151,7 +231,7 @@ Non-phase engineering tasks not tracked in [PLAN.md](PLAN.md) (frontend roadmap)
   `isa_approved_data.csv`, then rebuilds `isa_certified.json` with `scripts/build_isa_certified.py`
   (which keeps every hand-written `match` block and reports new certificates with an empty one).
   Certification is **derived** from that file by `load_isa_certifications.py` — no gear seed
-  carries a flag any more (CLAUDE.md § ISA certifications, [ISA_CERTIFICATION_PLAN.md](ISA_CERTIFICATION_PLAN.md)).
+  carries a flag any more (CLAUDE.md § ISA certifications, [PR #83](https://github.com/International-Slackline-Association/SlackData/pull/83)).
   So the job's real output is a queue of new certificates to adjudicate, not a DB write. All 17
   certificates we can hold are matched today, including **BC Loop** (leashring 27, the renamed BC
   Aluminum Leash Ring) and **SlackX Orange** (hand-matched to weblock 58 `Radrigs Orange`: the
@@ -164,7 +244,7 @@ Non-phase engineering tasks not tracked in [PLAN.md](PLAN.md) (frontend roadmap)
 
 - [ ] **"Not for highline" research for the other gear types.** `manufacturer_not_for_highline`
   (+ `_source`) exists on all eight gear models, but the first research pass covered only the 35
-  sub-22 kN webbings (ISA_CERTIFICATION_PLAN.md Appendix A). Still to check against each maker's own
+  sub-22 kN webbings (Appendix A of the [certification plan](https://github.com/International-Slackline-Association/SlackData/blob/5be24c10402cd1917d83385a9af001c142b622cc/ISA_CERTIFICATION_PLAN.md#appendix-a-the-35-sub-22-kn-webbings-s3-research-list), PR #83). Still to check against each maker's own
   page: weblocks, rollers, leash rings, grips, tree protectors, starter kits, trickline kits. `true`
   only on an explicit statement, `false` when marketed for highlining, `null` when silent or gone.
 
@@ -285,10 +365,11 @@ Non-phase engineering tasks not tracked in [PLAN.md](PLAN.md) (frontend roadmap)
   - [ ] **Adding or removing a co-listing is an operator edit to a seed**, never an API call:
     creating one is a claim about somebody else's product.
 
-  **The data already carries the problem**, from before anyone tried to. Nine product names are
+  **The data already carries the problem**, from before anyone tried to. Nine product names were
   held by two brands each, and at least four pairs are plainly one product twice:
   **EQB / Spider `Bandit SH` and `Bandit SL`** (`weblocks.json` 13+14, 15+16),
-  **Landcruising / Aki `Unicorn` and `White Magic`** (`webbings.json` 6+210, 7+209), and
+  **Landcruising / Aki `Unicorn` and `White Magic`** (`webbings.json` 6+209, 7+210; merged into
+  6 and 7 with Aki as seller on 2026-10-05, without a redirect), and
   **Slack.fr / Slack Pro! `Neon Light`** (100+154), and **Landcruising `Core 2 HS` / Raed
   `TWTMNBN (The Webbing That Must Not Be Named)`** (`webbings.json` 1+263 — Raed's 2019 end-of-stock
   resale under the old slackshop.de nickname, added 2026-10-01; its description links to row 1 via
@@ -351,6 +432,27 @@ Non-phase engineering tasks not tracked in [PLAN.md](PLAN.md) (frontend roadmap)
   - **Balance Community links most manuals client-side**, so crawling their HTML found three of the
     five we hold; the rest were confirmed by verified URL. A future sweep of that catalogue needs a
     real browser, not curl.
+
+## Infrastructure / deploy
+
+Carried over from LAUNCH_RUNBOOK.md and PHASE4_SHIP_PLAN.md when both were removed (2026-10-04).
+
+- [ ] **Serverless Framework v3 → v4, and who runs deploys.** Pinned to v3 so launch did not wait
+  on deciding who owns a Serverless account; v3 is EOL and gets no security updates. The same
+  answer decides both: whether we deploy into the ISA's account or they deploy from this config,
+  and whose account the Serverless org lives under (it should be ISA-owned, not personal).
+  Migration itself is a version bump and one env var — infra/README.md § Serverless Framework
+  version + account.
+- [ ] **Budget alarm.** Needs an ISA admin: `budgets:*` and `ce:*` are denied to our permission
+  set. Suggested: a $20/month `COST` budget named `slackdata`.
+- [ ] **Delete the orphaned Cognito pool `eu-central-1_kIHciXdAG`** — left over from the failed
+  2026-08-25 deploy (the stack-managed admin pool is `eu-central-1_Fzl6ssZOQ`). Check first whether
+  it is already gone.
+- [ ] **ISA sign-off on the manufacturer onboarding policy** (infra/README.md § Onboarding policy)
+  from whoever holds the ISA's slackdata mailbox. Three brands have been onboarded under it since
+  2026-08-28; check whether this was given and record it.
+- [ ] **No Cypress coverage of the triage UI's manufacturer path**: batch grouping, the manufacturer
+  badge, the SKU and rejecting an already-approved row. The grouping logic is unit-tested only.
 
 ## Frontend / UX
 

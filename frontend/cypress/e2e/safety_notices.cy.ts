@@ -1,5 +1,5 @@
 // Safety disclaimer + data-accuracy note — the two standing notices required
-// before launch (LAUNCH_RUNBOOK.md §10, DESIGN.md § Safety & Data Notices).
+// before launch (DESIGN.md § Safety & Data Notices).
 //
 // The point of these tests is not that some text exists somewhere. It is that
 // the notices are UNAVOIDABLE and CONSISTENT:

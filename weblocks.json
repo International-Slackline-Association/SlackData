@@ -5327,5 +5327,48 @@
         "colors": "Black",
         "notes": "Specs from the manufacturer's product page (balancecommunity.com, read 2026-09-24): 7075 anodized aluminium body, 17-4 PH stainless pin with a 2024 aluminium handle and 440C stainless locking balls; 60 kN MBS / 12 kN WLL (5:1 design factor); upper becket 56 kN MBS / 8 kN WLL, lower becket 70 kN MBS / 10 kN WLL; 24-26 mm webbing, 20 mm webbing only with the Alpine Weblock Spacers (Balance list the Axiom, Axiom MK2 and Silk 99 as not compatible). 278 g; 123.6 x 71.2 mm, 44.2 mm body thickness, 12 mm pins. Date introduced is the store listing date (2026-09-17). Price 125.10 USD.",
         "description": "Two pins, one weblock. The Alpine WebLock 6.2 with a second quick pin at the rear, for direct attachment to slings, soft shackles and soft releases — same diverter, same beckets, same strength."
+    },
+    {
+        "id": 134,
+        "brand": "Aki Slacklines",
+        "full_name": "Aki Slacklines Raptor",
+        "manufacturer_info": {
+            "name": "Aki Slacklines",
+            "url": "/manufacturer_details/aki_slacklines#TAB-IMAGES",
+            "country": "Germany",
+            "country_flag_url": "/img/flags/DE.png"
+        },
+        "product_page_url": "https://web.archive.org/web/20250814150645/https://aki-slacklines.de/en/products/aki-raptor-slackline-webbing-locker",
+        "pricing": [
+            {
+                "text": "1 unit and above : 124.95 EUR"
+            }
+        ],
+        "specifications": {
+            "Material": [
+                "Aluminum",
+                "Stainless Steel"
+            ],
+            "Weight": "133gr",
+            "WLL": "10kN",
+            "MBS": "64kN",
+            "Anchor connection type": "Push Pin",
+            "Webbing connection type": "Push Pin",
+            "Compatible webbing width": "24mm - 26mm",
+            "Diverter diameter": "30mm",
+            "Efficiency": "N/A",
+            "Usage": "N/A",
+            "Manufacturer": "Aki Slacklines",
+            "Manufacturer Product Page": "Manufacturer product page",
+            "Price (per unit)": "1 unit and above : 124.95 EUR"
+        },
+        "date_introduced": null,
+        "name": "Raptor",
+        "product_url": "https://web.archive.org/web/20250814150645/https://aki-slacklines.de/en/products/aki-raptor-slackline-webbing-locker",
+        "active": false,
+        "style": "Tensionable Weblock",
+        "colors": "Blue",
+        "notes": "Specs from the manufacturer's shop page (Wayback copy of 2025-08-14, in stock then at 124.95 EUR) and the Raptor manual Rev 1.0: one-piece CNC body of 7075 T651 aluminium, 17-4 PH stainless front and rear push pins (9.5 mm), hollow main diverter tapering from 30 mm to 18 mm; 24.5-26 mm webbing, max. 3 mm thick; 10 kN WLL; 133 g; 99 x 52 x 71 mm. MBS is the manual's 64 kN (3 sigma, ISA test method), which the shop's spec list repeats — the body engraving and the shop blurb say 68 kN. The rear interface takes soft shackles, soft releases, 0.5-1 t spansets, two strands of rope, 10/12 mm shackles and 8/10 mm quicklinks; the manual does not approve carabiners for highline use. Made in Germany, Taiwan and China. Aki's shop is behind a password page as of 2026-10-05.",
+        "description": "The Raptor is a slackline webbing locker with an ultra light weight (133 g), a large breaking strength (68 kN) and a wide range of connection options with a focus on textile elements, especially soft shackles."
     }
 ]
