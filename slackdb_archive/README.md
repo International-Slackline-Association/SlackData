@@ -23,6 +23,7 @@ Start with the CSVs to browse, and the JSON when you need everything a record he
 | `images.json` | Photo metadata: which gear, scope, source, condition, tags, gear-tag boxes | 632 |
 | `image_files/gear/<id>.jpg` | Every photo, original upload size | 632 |
 | `image_files/manufacturers/` | Manufacturer logos | 67 |
+| `image_files/site/` | The site's own graphics: favicons, logo, country flags, gear-type and section icons, map markers, rating stars, badges | 269 |
 | `communities.csv` / `.json` | Slackline groups, teams and associations worldwide, with map coordinates | 562 |
 | `knowledge.csv` / `.json` | Curated articles and videos, tagged to gear | 386 |
 | `knowledge_sites.json` | The sites those entries come from | 27 |
@@ -129,6 +130,7 @@ These are faithful to SlackDB, not archive errors:
 | `raw/images/<id>.json` | `/api/images/<id>`, which adds the gear-tag boxes and comments to the list record |
 | `raw/pages/` | JSON embedded in pages and served by no endpoint: `overviewData` (homepage stats + activity feed), `currencyRates`, `reviewsProsCons`, `itemTypeNames` |
 | `raw/gear_covers.json` | gear id → cover image id (see above) |
+| `raw/site_assets.json` | Every `/img/` path tried for `image_files/site/`, and whether the site had it. Flags and type icons are built from templates in the site's code, so every country and type was tried; the 45 "not on the site" are those guesses, not gaps |
 
 The detail pages also embedded site-wide config (type definitions, dictionaries), repeated
 on every page. `fetch.py` checked every copy was identical to the API's own before dropping it,
