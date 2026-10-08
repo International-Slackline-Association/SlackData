@@ -185,6 +185,7 @@ Root *.json seed files
 | `slack_data/manufacturers/` | The manufacturer API's stores: `clients.py` (Protocol + SQLite + in-memory), `dynamo.py`, `store.py`, `matching.py` (gear identity), `register.py` (onboarding CLI), `onboard.py` (the CLI's AWS half — dossier, Cognito app client, ledger, end-to-end proof) |
 | `slack_data/utilities/turnstile.py` | Captcha verification — **fails closed**, unlike `fx.py` |
 | `scripts/fetch_submission_images.py` | Files a manufacturer record's `image_urls` into `frontend/public/gear-images/` under the right key, then rebuilds the manifest |
+| `frontend/public/gear-manuals/` | Manufacturer PDFs (manuals, datasheets, test certificates), keyed like images: `<type>/<brand-abbrev>_<name-slug>[-<title>].pdf`, or `<type>/brand/<brand-abbrev>[-<title>].pdf` for a range-wide one. Rebuild the manifests with `scripts/build_gear_manifest.py` after adding one. Rules in DESIGN.md § Manuals & documents |
 
 There are `__init__.py` files in `models/`, `api/`, and `utilities/`. No `tests/`, no `.github/`, no Docker, no migrations (SQLModel `create_all` only).
 
