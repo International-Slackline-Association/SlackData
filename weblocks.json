@@ -5440,5 +5440,148 @@
         "colors": "Black/Green",
         "notes": "Specs from the manufacturer's shop page (balancecommunity.com, Wayback capture of 2012-07-10; SKU AN-ML; captured from 2012-07 to 2013-07). A large wrap-around roller (82.55 mm / 3.25\" diameter, 26.19 mm inner width) CNC-milled from two blocks of 6061-T6 aluminium, anodized green and joined by three alloy steel shoulder bolts; sideplates 1/4\" alloy 4130 steel, laser cut, bent and powder-coated black. 1,280 g; 100 kN MBS / 25 kN WLL; 7-1/8 x 4-13/16 x 3-3/4 in. Approved webbing widths 15/16\" to 1-1/16\". The webbing runs around the roller to a centre bolt, with three modes: zero wraps (adjusting only, holds no tension), one wrap (adjustable in one direction, slips at 31 kN) and two wraps (locked, 99.999% strength retention, recorded as 100%). The sideplates bolt directly to SMC 3\" double pulleys with the included grade-8 bolts (bent inwards for a 5:1, outwards for a 9:1), and the static side takes a 5/8\" or 3/4\" anchor shackle (optimised for the Van Beest 5/8\" bolt-type). Made in Sacramento, CA. Price 259.95 USD as a standalone; the bolt option added 10 USD and the shackle option 20 USD. None of the shop's product photos survive in the Wayback Machine; the two photos are user-supplied.",
         "description": "The MONSTER LOCK is the grand supreme webbing anchor. With a gigantic 3.25\" diameter diverter, this device will hold 99.999% of the strength of all 1\" webbings (including Spider Silk MKII)."
+    },
+    {
+        "id": 139,
+        "brand": "Landcruising",
+        "name": "Lockman",
+        "style": "Tensionable Weblock",
+        "specifications": {
+            "Material": [
+                "Stainless Steel"
+            ],
+            "Weight": "75gr",
+            "WLL": "10kN",
+            "MBS": "30kN",
+            "Webbing connection type": "Other",
+            "Anchor connection type": "Other",
+            "Compatible webbing width": "25mm - 26mm"
+        },
+        "pricing": [
+            {
+                "text": "1 unit and above : 16.95 EUR"
+            }
+        ],
+        "date_introduced": null,
+        "product_url": "https://web.archive.org/web/20141231113021/http://www.landcruising-slacklines.de/en/shop/12-bandhalter/48-landcruising-lockman",
+        "active": false,
+        "notes": "A dumbbell-shaped stainless pin that sits inside a shackle (23–26 mm mouth only, straight or bow, no carabiners or quicklinks) — the shackle is the weblock body, so pin/attachment types are recorded as Other. Maker's page (Wayback 2014-12-31, English; German 2013-03-18 capture agrees): inner width 26 mm, overall 52 mm, 12 mm roller, WLL 10 kN, strength >30 kN, 75 g, cord and side fixing screw, in use since 2008, made in Saxony. 16.95 € solo (26.50 / 28.50 € with a straight / bow 12 mm HW shackle). Manual rev 1.1 (German): 25 mm webbing up to 3.5 mm thick, not for highlines, max. rigging height 2 m, max. 10 kN; webbing strength depends on the line (e.g. new White Magic ≈23 kN).",
+        "description": "This unique pin is made from fine stainless steel and produced in small batches. The dumbbell shape gives a 25mm/1 inch slackline a safe position and guarantees a damage free fixation. The setup of the anchor is really fast and comfortable. The Lockman is fasten via a cord to the shackle. Thus the Lockman won´t get lost. Its really an ideal tool for anchoring slacklines without sewn loop.",
+        "manufacturer_not_for_highline": true,
+        "manufacturer_not_for_highline_source": "https://web.archive.org/web/20140702200322/http://www.landcruising-slacklines.de/data/docu/manuals/lockman%20manual-rev1.1.pdf"
+    },
+    {
+        "id": 140,
+        "brand": "Landcruising",
+        "name": "Lockman 2.0",
+        "style": "Tensionable Weblock",
+        "specifications": {
+            "Material": [
+                "Stainless Steel"
+            ],
+            "Weight": "93gr",
+            "WLL": "8kN",
+            "MBS": "30kN",
+            "Webbing connection type": "Other",
+            "Anchor connection type": "Other",
+            "Compatible webbing width": "25mm - 26mm"
+        },
+        "pricing": [
+            {
+                "text": "1 unit and above : 16.95 EUR"
+            }
+        ],
+        "date_introduced": null,
+        "product_url": "https://web.archive.org/web/20161103153205/http://www.landcruising-slacklines.de/en/shop/34-neue-produkte/486-landcruising-lockman-20",
+        "active": false,
+        "notes": "Made by Landcruising; Aki Slacklines sold the same product as 'Aki Lockman 2' (16.50 €, Wayback 2021-07-28: https://web.archive.org/web/20210728193156/https://aki-slacklines.de/de/hardware/bandhalter/13/aki-lockman-2-bandhalter?c=13), so this is one row with Aki as a seller. Maker's page (Wayback 2016-11-03, same as 2016-10-07): longer than the first Lockman, with an elastic catch cord and attachment notch; inner width 26 mm, overall 64 mm, 12 mm roller, WLL 8 kN, strength >30 kN, 93 g, made in Saxony; Aki's page adds 64 x 18 x 18 mm and CNC-turned. Shackles of 23–26 mm mouth only. 16.95 € solo. The page links its own manual ('Manual-Lockman 2.0'), not yet found.",
+        "description": "This unique pin is made from fine stainless steel and produced in small batches. The dumbbell shape gives a 25mm/1 inch slackline a safe position and guarantees a damage free fixation. The setup of the anchor is really fast and comfortable. For the 2nd generation, we have the Lockman designed a little longer and added an elastic catch cord including a practical attachment notch. The Lockman 2.0 can be easily fixed to the shackle. The attached slackline is also held in position by the cord. This results in a significant gain regarding handling and safety.",
+        "gear_sellers": [
+            "Aki Slacklines"
+        ]
+    },
+    {
+        "id": 141,
+        "brand": "Landcruising",
+        "name": "Puma 32",
+        "style": "Tensionable Weblock",
+        "specifications": {
+            "Material": [
+                "Aluminum",
+                "Stainless Steel",
+                "Steel"
+            ],
+            "Weight": "380gr",
+            "WLL": "14kN",
+            "MBS": "59kN",
+            "Webbing connection type": "Push Pin",
+            "Anchor connection type": "Mounting Hole",
+            "Compatible webbing width": "30mm - 32mm"
+        },
+        "pricing": [
+            {
+                "text": "1 unit and above : 69.95 EUR"
+            }
+        ],
+        "date_introduced": null,
+        "product_url": "https://web.archive.org/web/20120822095728/http://www.landcruising-slacklines.de/en/shop/4-harte-ware/12-fixierer/285-landcruising-puma",
+        "active": false,
+        "notes": "First-generation Puma (Puma 2.0 is #66), a jumpline weblock for 30–32 mm webbing incl. threaded tubular. Maker's page (Wayback 2012-08-22): Ø15 mm galvanized-steel quick-lock front pin, Ø24 mm 7075 aluminium main roller, 4 mm stainless side plates, M12 10.9 steel screws, direct shackle interface up to 15 mm bolt, 380 g solo, WLL 14 kN, metal body >59 kN, 43.5 kN tested with Matrix webbing; not for Dyneema or Dyneema-hybrid webbing. Made in Saxony. 69.95 € solo, 79.95 € with a 13 mm stainless shackle. The page links a manual (PDF) not yet fetched. Part of the Puma jumpline webbing anchor series: Puma 26, 35 and 50 versions (for 26, 35 and 50 mm webbing) were available on request, per the series photo; they are recorded here, not as rows of their own.",
+        "description": "The Puma is our dedicated jumpline webbing anchor for the professionals. We set the focus on a super sturdy approach with direct shackle interface and a lightweight and powerful design. Thanks to the high breaking strength of nearly 6 tons it is possible to rig and work out high tension lines with a sufficient safety margin. The big diameter of the main roller ensures a high efficiency of the webbing strength, specially for polyamide lines. The quick locking pin enables the fast setup and remove of the line. Precise rigging due to the possibility of hand adjustation before tightening is a standard task for the Puma."
+    },
+    {
+        "id": 142,
+        "brand": "Raed Slacklines",
+        "name": "BLNC Weblock",
+        "style": "Tensionable Weblock",
+        "specifications": {
+            "Material": [
+                "High Strength Steel",
+                "Aluminum"
+            ],
+            "Weight": "284gr",
+            "MBS": "62kN",
+            "Webbing connection type": "Push Pin",
+            "Anchor connection type": "Mounting Hole",
+            "Compatible webbing width": "25mm - 25mm"
+        },
+        "pricing": [
+            {
+                "text": "1 unit and above : 89.95 EUR"
+            }
+        ],
+        "date_introduced": null,
+        "product_url": "https://web.archive.org/web/20211126224802/https://raed-slacklines.com/blnc-weblock",
+        "active": false,
+        "colors": "Red",
+        "notes": "Maker's page (Wayback 2019-08-26 to 2021-11-26, English): steel frame, large hollow aluminium diverter on three steel axes, one 17-4 PH Quick Lock PushPin at the front and big holes instead of a second pin, for a shackle. 25 mm webbing. MBS 50 kN and 284 g on the 2019 page, 62 kN on the 2021 one (weight no longer listed); WLL 10 kN is read off the label in the maker's photo. 89.95 € throughout. Gone after 2021, when the RigLock (#130, \"a BLNC weblock and a rigging plate in one body\") took its place; Raed's Beginner Longline Set page still names it in 2025.",
+        "description": "The BLNC Weblock is a true working horse weblock. It provides all the best features known from our PRO weblock, like a big hollow diverter, a pushpin at the front, strong steel construction and easy pretensioning. But instead of a second PushPin it comes with really big holes for easiest attaching of a shackle even under difficult rigging circumstances."
+    },
+    {
+        "id": 143,
+        "brand": "Raed Slacklines",
+        "name": "RODEO Steel Weblock",
+        "style": "Tensionable Weblock",
+        "specifications": {
+            "Material": [
+                "High Strength Steel"
+            ],
+            "Weight": "136gr",
+            "MBS": "13kN",
+            "Webbing connection type": "Push Pin",
+            "Compatible webbing width": "25mm - 25mm"
+        },
+        "pricing": [
+            {
+                "text": "1 unit and above : 59.95 EUR"
+            }
+        ],
+        "date_introduced": 1513720800000,
+        "product_url": "https://web.archive.org/web/20210117055054/https://raed-slacklines.com/rodeo-weblock",
+        "active": false,
+        "notes": "The first RODEO, before the aluminium RODEO Ultralight Weblock (#73), which replaced it under the same URL in mid-2021. A ROCsolid steel frame with a hollowtech diverter. Launched at 114 g / MBS 9 kN (Wayback 2019-01-25: \"preorders available now, shipping starts end of January 2018\", 59.95 €). Redesigned in June 2019 (Raed's blog, 2019-06-13: smoother pretensioning, ball lock pin, higher webbing guidance, more strength) to 136 g, WLL 4 kN, MBS 13 kN, \"prohibited for tricklining and highlining\". Sold at 59.95 € (later 79.95 € marked down to 59.95 €) until the last steel capture, 2021-01-17, out of stock. The specs here are the 2019 redesign's.",
+        "description": "You don't want any additional weight dangling around in your loose rodeoline. That's why the ultralight RODEO weblock definitely contains more air than metal. An incredible weight of merely 136 gram makes this without any doubt the lightest fully functional weblock on the planet. And yet it's strong: With a MBS of 13 kN this weblock is precisely engineered for your surfy rodeo lines. ROCsolid steel provides a high safety margin and a huge hollowtech center diverter preserves the strength of your webbing. Of course it's easy to pretension too. So what are you waiting for? Go lightweight and surf BIIIG!",
+        "manufacturer_not_for_highline": true,
+        "manufacturer_not_for_highline_source": "https://web.archive.org/web/20190721132040/https://raed-slacklines.com/news/new-rodeo-weblock-released/"
     }
 ]
