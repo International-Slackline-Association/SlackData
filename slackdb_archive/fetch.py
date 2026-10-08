@@ -1,6 +1,7 @@
 """Snapshot everything SlackDB (slackdb.com) serves.
 
-Run once, before the site goes dark (`python3 fetch.py`, then `python3 fetch.py images`).
+Run once, before the site goes dark (`python3 fetch.py`, `python3 fetch.py images`, then
+`python3 fetch.py site`).
 Writes into this directory:
 
     raw/api/*.json         every read endpoint, byte-for-byte as served
@@ -11,6 +12,8 @@ Writes into this directory:
     raw/gear_covers.json   gear id → the image id the site showed as its cover
     image_files/gear/      every original photo, as uploaded
     image_files/manufacturers/  manufacturer logos
+    image_files/site/      the site's own graphics under /img/ (favicons, icons, markers)
+    raw/site_assets.json   every /img/ path tried, and whether the site had it
 
 `build.py` then turns raw/ into the readable files at the top level.
 Resumable: anything already on disk is skipped.
@@ -20,6 +23,7 @@ import json
 import re
 import sys
 import time
+import urllib.error
 import urllib.parse
 import urllib.request
 from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -175,9 +179,62 @@ def fetch_images() -> int:
     return 1 if failures else 0
 
 
+# The site's own graphics: every /img/ path in its HTML, JS and CSS, except the country
+# flags (not wanted). Templated paths are expanded below; a guess the site doesn't have
+# (an icon for every type) is a 404.
+SITE_IMG = [
+    "icons/sdb32x32.ico", "icons/sdb32x32.png", "icons/sdb48x48.png", "icons/sdb96x96.png",
+    "icons/sdb144x144.png", "logo.png", "isa_logo.png", "bg.jpg", "no_image_thumb.png",
+    "add_item_overlay.png", "add_item_overlay_bg.png", "fb_login_large.png",
+    "gallery_controlls.png", "stars_rate.png", "stars_rate_s.png",
+    "new_item.png", "inactive_item.png", "discontinued_item.png",
+    "charts/bar.jpg", "charts/pie.jpg", "charts/scatter_2axis.jpg", "charts/scatter_3axis.jpg",
+    *(f"markers/{m}.png" for m in (
+        "camp", "gear", "red-gear", "rope", "red-rope", "team",
+        "l-association", "l-community", "l-market", "w-association", "w-community", "w-market")),
+]
+
+
+def fetch_site_assets() -> int:
+    types = json.loads((RAW / "api" / "item_types_def.json").read_bytes())
+    paths = SITE_IMG + [f"gear_types/{t}.png" for t in sorted(types) if t != "BASE"] \
+        + [f"items_types/{t}.png" for t in sorted(types) if t != "BASE"]
+    status, failures = {}, []
+
+    def one(item):
+        path = item["path"]
+        out = FILES / "site" / path
+        if out.exists():
+            status[path] = "saved"
+            return
+        req = urllib.request.Request(f"{BASE}/img/{path}", headers=UA)
+        try:
+            with urllib.request.urlopen(req, timeout=60) as r:
+                body, ctype = r.read(), r.headers.get_content_type()
+        except urllib.error.HTTPError as e:
+            if e.code == 404:
+                status[path] = "not on the site"
+                return
+            raise
+        time.sleep(DELAY)
+        if ctype == "text/html":  # an error page served as 200 is not an image
+            status[path] = "not on the site"
+            return
+        write_bytes(out, body)
+        status[path] = "saved"
+
+    each("site", [{"path": p, "_id": p} for p in paths], one, failures)
+    save(RAW / "site_assets.json", dict(sorted(status.items())))
+    for f in failures:
+        print("FAILED", *f, file=sys.stderr)
+    return 1 if failures else 0
+
+
 def main() -> int:
     if sys.argv[1:] == ["images"]:
         return fetch_images()
+    if sys.argv[1:] == ["site"]:
+        return fetch_site_assets()
     failures = []
 
     for ep in API_ENDPOINTS:
