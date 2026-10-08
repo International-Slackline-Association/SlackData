@@ -6139,6 +6139,9 @@
         "id": 100,
         "name": "Neon Light",
         "brand": "Slack.fr",
+        "gear_sellers": [
+            "Slack Pro!"
+        ],
         "materialType": "Polyester",
         "width": 25,
         "weight": 57,
@@ -7289,26 +7292,6 @@
         "webbing_construction": "Flat",
         "priceMeter": 0.89,
         "currency": "EUR",
-        "active": false
-    },
-    {
-        "id": 154,
-        "name": "Neon Light",
-        "brand": "Slack Pro!",
-        "materialType": "Polyester",
-        "width": 25,
-        "weight": 57,
-        "breakingStrength": 33,
-        "stretch": [
-            {
-                "percent": 3.8,
-                "kn": 10
-            }
-        ],
-        "date_introduced": null,
-        "product_url": null,
-        "thickness": 2.4,
-        "webbing_construction": "Flat",
         "active": false
     },
     {
