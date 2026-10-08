@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "total_manufacturers": 81,
+    "total_manufacturers": 80,
     "known_manufacturers": 74,
     "missing_manufacturers": 0,
     "total_gear_items": 576,
@@ -16,7 +16,7 @@
       "email"
     ],
     "email_source": "scraped from each manufacturer's own website (2026-08-23); additions 2026-08-28, 2026-09-02. email_alt: a second address the brand also answers on, present only where one is known",
-    "email_coverage": "38/81"
+    "email_coverage": "37/80"
   },
   "manufacturers": {
     "1": {
@@ -855,15 +855,16 @@
     },
     "67": {
       "catalog_id": 45,
-      "name": "Radrigs",
+      "name": "SlackX (formerly RadRigs)",
       "verified": true,
       "item_count": 1,
-      "country": "GB",
+      "country": "DE",
       "year_established": 2018,
       "slackline_oriented": true,
-      "website": "https://www.radrigs.co.uk/",
+      "website": "https://slackx.eu",
       "facebook": "https://www.facebook.com/Radrigs-Slackline-Equipment-101532338172670/?modal=admin_todo_tour",
-      "email": "info@radrigs.co.uk",
+      "instagram": "https://instagram.com/slackx.slacklines",
+      "email": "info@slackx.eu",
       "active": true
     },
     "68": {
@@ -1009,20 +1010,6 @@
       "tiktok": "https://www.tiktok.com/@riggingventures",
       "email": null,
       "active": false
-    },
-    "local_slackx": {
-      "catalog_id": 97,
-      "name": "SlackX",
-      "verified": false,
-      "item_count": 0,
-      "country": "DE",
-      "year_established": null,
-      "slackline_oriented": true,
-      "website": "https://slackx.eu",
-      "facebook": null,
-      "instagram": "https://instagram.com/slackx.slacklines",
-      "email": "info@slackx.eu",
-      "active": true
     },
     "local_wall_ace": {
       "catalog_id": 98,

@@ -2,8 +2,8 @@
 // half on the listing page.
 //
 // One product can be sold by shops other than the one that makes it: Slack Inov
-// and Spider Slacklines co-list each other's full range, and SlackX carries the
-// two Radrigs weblocks. The catalogue records that as a list of brand names on
+// and Spider Slacklines co-list each other's full range, and Aki Slacklines carries part
+// of the Landcruising range. The catalogue records that as a list of brand names on
 // the gear row itself (`gear_sellers`, CLAUDE.md § Co-listings) — so unlike the
 // version of this spec that preceded it, there is nothing to stub: the sellers
 // arrive with the item, and every assertion below runs against the real

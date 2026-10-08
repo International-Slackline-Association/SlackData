@@ -595,6 +595,9 @@
         "id": 8,
         "name": "Wizard",
         "brand": "Landcruising",
+        "gear_sellers": [
+            "Aki Slacklines"
+        ],
         "stretch": [
             {
                 "kn": 2,
@@ -6491,28 +6494,6 @@
         "description": "Slackline was born on nylon tubular webbing back in the early eighties. The soft touch and the fine weave give a genious dynamic and balance feeling (thanks to the Nylon fibers). This webbing will guarantee pure slackline fun. Even for moderate longlines suitable if threaded with our 19mm Wave-Tape."
     },
     {
-        "id": 117,
-        "name": "Wave Tape 19",
-        "brand": "Landcruising",
-        "materialType": "Nylon",
-        "width": 19,
-        "weight": 38,
-        "breakingStrength": 18,
-        "stretch": [
-            {
-                "percent": 14,
-                "kn": 6
-            }
-        ],
-        "date_introduced": null,
-        "product_url": null,
-        "thickness": 2.4,
-        "webbing_construction": "Flat",
-        "priceMeter": 1.35,
-        "currency": "EUR",
-        "active": false
-    },
-    {
         "id": 118,
         "name": "Wave Tube 19",
         "brand": "Landcruising",
@@ -6536,7 +6517,8 @@
         "priceMeter": 1.35,
         "currency": "EUR",
         "active": false,
-        "description": "This 19 mm wide tubular webbing is very suitable for making a threaded leash. 10 mm to 10,5 mm dynamic rope fits ideally inside and giving a highline leash with superiour handling and strength. The webbing is additionally suitable as single walking line or reinforcement for 25 mm tubular webbing."
+        "description": "This 19 mm wide tubular webbing is very suitable for making a threaded leash. 10 mm to 10,5 mm dynamic rope fits ideally inside and giving a highline leash with superiour handling and strength. The webbing is additionally suitable as single walking line or reinforcement for 25 mm tubular webbing.",
+        "notes": "Specs from the maker's page (Wayback 2013-04-15): PA tubular, 19 mm, 2.4 mm, average break strength 17 kN, min. 16 kN, 14 % at 6 kN and 32 % at break, 36 g/m, made in the EU. 'Wave Tape 19' (#117, flat, 18 kN, 38 g/m, no source link) was the same product in red and was merged into this row on 2026-10-07; its photo moved across, and where the two disagreed the Wayback page won."
     },
     {
         "id": 119,
@@ -6970,26 +6952,6 @@
         "active": false
     },
     {
-        "id": 137,
-        "name": "HighTech",
-        "brand": "Slacklife BC",
-        "materialType": "Dyneema/HMPE",
-        "width": 25.4,
-        "weight": 48,
-        "breakingStrength": 39.2,
-        "stretch": [
-            {
-                "percent": 4.6,
-                "kn": 10
-            }
-        ],
-        "date_introduced": null,
-        "product_url": null,
-        "thickness": 3,
-        "webbing_construction": "Flat",
-        "active": false
-    },
-    {
         "id": 138,
         "name": "Type 18 CG4",
         "description": "Like the mystery of how globule CG4 was formed, Balancing Earth is seeking the mystery of what pushes us to try new things. This is why we chose to name our 1 inch flat webbing after the mysterious. Type 18 CG4 is a flat nylon webbing made from the highest quality 66 nylon available. Type 18 CG4 is extremely soft and dynamic making it the perfect slackline webbing. With it's high stretch* and super strength the CG4 webbing is a great choice no matter what type of slackin you do.",
@@ -7124,7 +7086,7 @@
     {
         "id": 144,
         "name": "Lion Line",
-        "description": "High Tech does not equal high maintenance anymore! Experience the perfect relationship with SlacklifeBC's new high tech webbing. Lions is a no-fuss rig. It holds with one wrap in a weblock and grips with the linegrip allowing you to pretension at any time. Light as a cloud at 35 g/m and firm but soft on your feet, it is the perfect support for your long journeys across mountains, canyons, cities or just in the park. The search is over, Lions is the one!",
+        "description": "High Tech does not equal high maintenance anymore! Experience the perfect relationship with SlacklifeBC’s new high tech webbing. Lions is a no-fuss rig. It holds with one wrap in a weblock and grips with the linegrip allowing you to pretension at any time. Light as a cloud at 35 g/m and firm but soft on your feet, it is the perfect support for your long journeys across mountains, canyons, cities or just in the park. The search is over, Lions is the one! Designed and manufactured in Canada offers you the chance to own the longest piece of webbing available. Lengths of over 1000 meter continuous is now reality. Turn your dreams into reality and experience the Lions for yourself.",
         "brand": "Slacklife BC",
         "materialType": "Dyneema/HMPE",
         "width": 25.4,
@@ -7132,11 +7094,13 @@
         "breakingStrength": 35.6,
         "stretch": null,
         "date_introduced": null,
-        "product_url": "https://web.archive.org/web/20191215113421/https://www.slacklifebc.com/product/lions-line-hightech-webbing/",
+        "product_url": "https://web.archive.org/web/20171008205524/http://slacklifebc.com/products/webbing/lions-line-hightech-webbing/",
         "webbing_construction": "Flat",
         "priceMeter": 8.99,
         "currency": "CAD",
-        "active": false
+        "active": false,
+        "colors": "Red and White",
+        "notes": "Specs from Slacklife BC's own product page (Wayback, 2017-10-08): MBS 35.6 kN (8000 lbs), WLL 7.12 kN (1600 lbs), 35 g/m, price 8.99 CAD/m (also sold by the foot, and in 50-1000 m lengths), colour red and white, designed and made 100% in Canada, continuous lengths over 1000 m. The page gives stretch only as \"1-4%\" with no load, so no stretch curve is recorded. A second Slacklife BC webbing, \"HighTech\" (#137: 48 g/m, 39.2 kN, 4.6% @ 10 kN, carried over from SlackDB), was a mistake: it is this same product, whose page titles it \"Lion Line - Hightech Webbing\". Confirmed with the Mayor of Squamish. #137 was removed on 2026-10-08 and its figures discarded, not merged; its id is not reused."
     },
     {
         "id": 145,
@@ -7250,29 +7214,30 @@
     },
     {
         "id": 151,
-        "name": "Verve 25mm",
+        "name": "Verve Red",
         "brand": "Landcruising",
         "gear_sellers": [
             "Aki Slacklines"
         ],
         "materialType": "Polyester",
-        "width": 25.4,
-        "weight": 59,
-        "breakingStrength": 32,
+        "width": 25,
+        "weight": 58,
+        "breakingStrength": 31,
         "stretch": [
             {
-                "percent": 11,
+                "percent": 7,
                 "kn": 10
             }
         ],
         "date_introduced": null,
-        "product_url": "https://web.archive.org/web/20140902053505/http://www.landcruising-slacklines.de/en/shop/2-slackline-band/26-polyester/421-?vmcchk=1",
+        "product_url": "https://web.archive.org/web/20110722171318/http://www.landcruising-slacklines.de/en/shop/2-slackline-band/26-flachband-25/148-verve-25mm-meterware?limitstart=0",
         "thickness": 2.5,
         "webbing_construction": "Flat",
-        "priceMeter": 1.33,
+        "priceMeter": 1.49,
         "currency": "EUR",
         "active": false,
-        "description": "The 25 mm wide slackline with soft touch and extended stretch gives a fantastic dynamic pleasure, even on shorter lines."
+        "description": "Our Verve slackline webbing is the red coloured counterpart to our classic White Magic. The Verve offers a superior combination of low strain, high-strength, low weight and durability. The dynamic behaviour is even more defined and perfected compared to White Magic. The true red color (no surface coating) and the soft touch finishing the new accents.",
+        "notes": "One row for Landcruising's 25 mm Verve, merged on 2026-10-07 from #151 'Verve 25mm' and the staged 'Verve 25mm Red'. Specs, price and description from the red Verve page (Wayback 2011-07-22): PES flat, MBS 31 kN, 7 % at 10 kN, 58 g/m, max. 10 kN pretension as a longline, made in Germany, 1.49 €/m (1.40 €/m from 100 m). The row previously carried the 2014 'Verve 25mm Slackline 30m loop' page (https://web.archive.org/web/20140902053505/http://www.landcruising-slacklines.de/en/shop/2-slackline-band/26-polyester/421-?vmcchk=1), which describes 'shiny yellow' webbing with av. >32 kN, min. 30 kN, 11 % at 10 kN, 59 g/m, 2-ply, 55.95 € for 30 m with a sewn loop; that page's blurb was: 'The 25 mm wide slackline with soft touch and extended stretch gives a fantastic dynamic pleasure, even on shorter lines.'"
     },
     {
         "id": 152,

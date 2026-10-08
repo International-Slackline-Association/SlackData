@@ -542,6 +542,9 @@
         "image_url": "/api/gear/image_thumb/500",
         "details_url": "/gear_details/BanditSH",
         "brand": "Equilibrium Slacklines (EQB)",
+        "gear_sellers": [
+            "Spider Slacklines"
+        ],
         "full_name": "Equilibrium Slacklines (EQB) Bandit SH",
         "manufacturer_info": {
             "name": "Equilibrium Slacklines (EQB)",
@@ -575,49 +578,7 @@
         },
         "date_introduced": null,
         "name": "Bandit SH",
-        "product_url": null,
-        "active": false,
-        "style": "Tensionable Weblock"
-    },
-    {
-        "id": 14,
-        "image_url": "/api/gear/image_thumb/524",
-        "details_url": "/gear_details/BanditSH",
-        "brand": "Spider slacklines",
-        "gear_sellers": [
-            "Slack Inov"
-        ],
-        "full_name": "Spider slacklines Bandit SH",
-        "manufacturer_info": {
-            "name": "Spider slacklines",
-            "url": "/manufacturer_details/Spiderslacklines#TAB-IMAGES",
-            "country": "Italy",
-            "country_flag_url": "/img/flags/IT.png"
-        },
-        "pricing": [],
-        "specifications": {
-            "Material": "Stainless Steel",
-            "Weight": "230gr",
-            "WLL": "12kN",
-            "MBS": "36kN",
-            "Anchor connection type": "Mounting Hole",
-            "Webbing connection type": "Screw Pin",
-            "Compatible webbing width": "24mm - 26mm",
-            "Diverter diameter": "20mm",
-            "Efficiency": "85%",
-            "Usage": [
-                "Slackline",
-                "Highline",
-                "Longline",
-                "Rodeoline",
-                "Low Tension lines"
-            ],
-            "Date introduced": "N/A",
-            "Manufacturer": "Spider slacklines"
-        },
-        "date_introduced": null,
-        "name": "Bandit SH",
-        "product_url": null,
+        "product_url": "https://web.archive.org/web/20140515125605/http://www.slackshop.cz/en/lockers/114-bandit.html",
         "active": false,
         "style": "Tensionable Weblock"
     },
@@ -626,6 +587,9 @@
         "image_url": "/api/gear/image_thumb/501",
         "details_url": "/gear_details/BanditSL",
         "brand": "Equilibrium Slacklines (EQB)",
+        "gear_sellers": [
+            "Spider Slacklines"
+        ],
         "full_name": "Equilibrium Slacklines (EQB) Bandit SL",
         "manufacturer_info": {
             "name": "Equilibrium Slacklines (EQB)",
@@ -659,49 +623,7 @@
         },
         "date_introduced": null,
         "name": "Bandit SL",
-        "product_url": null,
-        "active": false,
-        "style": "Tensionable Weblock"
-    },
-    {
-        "id": 16,
-        "image_url": "/api/gear/image_thumb/525",
-        "details_url": "/gear_details/BanditSL",
-        "brand": "Spider slacklines",
-        "gear_sellers": [
-            "Slack Inov"
-        ],
-        "full_name": "Spider slacklines Bandit SL",
-        "manufacturer_info": {
-            "name": "Spider slacklines",
-            "url": "/manufacturer_details/Spiderslacklines#TAB-IMAGES",
-            "country": "Italy",
-            "country_flag_url": "/img/flags/IT.png"
-        },
-        "pricing": [],
-        "specifications": {
-            "Material": "Stainless Steel",
-            "Weight": "293gr",
-            "WLL": "12kN",
-            "MBS": "36kN",
-            "Anchor connection type": "Fixed Bolt",
-            "Webbing connection type": "Screw Pin",
-            "Compatible webbing width": "24mm - 26mm",
-            "Diverter diameter": "20mm",
-            "Efficiency": "85%",
-            "Usage": [
-                "Slackline",
-                "Highline",
-                "Longline",
-                "Rodeoline",
-                "Low Tension lines"
-            ],
-            "Date introduced": "N/A",
-            "Manufacturer": "Spider slacklines"
-        },
-        "date_introduced": null,
-        "name": "Bandit SL",
-        "product_url": null,
+        "product_url": "https://web.archive.org/web/20140517015158/http://www.slackshop.cz/en/lockers/104-bandit.html",
         "active": false,
         "style": "Tensionable Weblock"
     },
@@ -2539,9 +2461,6 @@
         "image_url": "/api/gear/image_thumb/3251",
         "details_url": "/gear_details/orange_1",
         "brand": "Radrigs",
-        "gear_sellers": [
-            "SlackX"
-        ],
         "full_name": "Radrigs Orange",
         "manufacturer_info": {
             "name": "Radrigs",
@@ -2626,51 +2545,13 @@
         "style": "Tensionable Weblock"
     },
     {
-        "id": 60,
-        "image_url": "/api/gear/image_thumb/560",
-        "details_url": "/gear_details/PaddleLinelock",
-        "brand": "Spider slacklines",
-        "gear_sellers": [
-            "Slack Inov"
-        ],
-        "full_name": "Spider slacklines Paddle Linelock",
-        "manufacturer_info": {
-            "name": "Spider slacklines",
-            "url": "/manufacturer_details/Spiderslacklines#TAB-IMAGES",
-            "country": "Italy",
-            "country_flag_url": "/img/flags/IT.png"
-        },
-        "pricing": [
-            {
-                "text": "1 unit and above : 42.95 EUR"
-            }
-        ],
-        "specifications": {
-            "Material": "Stainless Steel",
-            "Weight": "317gr",
-            "WLL": "14kN",
-            "MBS": "50kN",
-            "Anchor connection type": "Mounting Hole",
-            "Webbing connection type": "Screw Pin",
-            "Compatible webbing width": "49mm - 51mm",
-            "Diverter diameter": "N/A",
-            "Efficiency": "N/A",
-            "Usage": "Trickline",
-            "Date introduced": "N/A",
-            "Manufacturer": "Spider slacklines",
-            "Price (per unit)": "1 unit and above : 42.95 EUR"
-        },
-        "date_introduced": null,
-        "name": "Paddle Linelock",
-        "product_url": null,
-        "active": false,
-        "style": "Tensionable Weblock"
-    },
-    {
         "id": 61,
         "image_url": "/api/gear/image_thumb/509",
         "details_url": "/gear_details/PaddleSH",
         "brand": "Equilibrium Slacklines (EQB)",
+        "gear_sellers": [
+            "Spider Slacklines"
+        ],
         "full_name": "Equilibrium Slacklines (EQB) Paddle SH",
         "manufacturer_info": {
             "name": "Equilibrium Slacklines (EQB)",
@@ -4635,9 +4516,6 @@
     {
         "id": 108,
         "brand": "Radrigs",
-        "gear_sellers": [
-            "SlackX"
-        ],
         "name": "Slackfriend",
         "specifications": {
             "Material": "Aluminum",

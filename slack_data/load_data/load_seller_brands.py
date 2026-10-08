@@ -13,8 +13,8 @@ true by construction:
    list through `canonical_brand()`.
 2. **A shop that sells other people's gear and makes none of its own still needs
    a `Brand` row.** Every other brand is born in a gear loader, holding a
-   product; SlackX resells the Radrigs line and manufactures nothing we hold, so
-   without this it would be the one kind of brand the catalogue cannot name.
+   product; a shop that resells and manufactures nothing we hold would, without
+   this, be the one kind of brand the catalogue cannot name.
    The row is created only from `manufacturers.json` (`brand_catalog_id()`), so
    an unrecognised seller — a typo, far likelier than a new shop — is reported
    and dropped instead of inventing a brand out of a misspelling.

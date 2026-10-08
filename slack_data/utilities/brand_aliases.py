@@ -19,6 +19,11 @@ BRAND_ALIASES: dict[str, str] = {
     # name, so both spellings must map to the new one directly — canonical_brand()
     # is a single dict lookup and does NOT chain, so pointing "slackPro" at
     # "Slack Pro!" would leave it stranded on the retired name.
+    # RadRigs continues as SlackX. Same rule as Slack Pro! below: the seeds and
+    # the ISA's own data spell it either way, and both must land on one row.
+    "Radrigs": "SlackX (formerly RadRigs)",
+    "RadRigs": "SlackX (formerly RadRigs)",
+    "SlackX": "SlackX (formerly RadRigs)",
     "slackPro": "lineGrip (formerly Slack Pro!)",
     "Slack Pro!": "lineGrip (formerly Slack Pro!)",
     "Spider slacklines": "Spider Slacklines",
