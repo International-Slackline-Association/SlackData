@@ -5248,5 +5248,194 @@
         "colors": "Blue",
         "notes": "Specs from the manufacturer's shop page (Wayback copy of 2025-08-14, in stock then at 124.95 EUR) and the Raptor manual Rev 1.0: one-piece CNC body of 7075 T651 aluminium, 17-4 PH stainless front and rear push pins (9.5 mm), hollow main diverter tapering from 30 mm to 18 mm; 24.5-26 mm webbing, max. 3 mm thick; 10 kN WLL; 133 g; 99 x 52 x 71 mm. MBS is the manual's 64 kN (3 sigma, ISA test method), which the shop's spec list repeats — the body engraving and the shop blurb say 68 kN. The rear interface takes soft shackles, soft releases, 0.5-1 t spansets, two strands of rope, 10/12 mm shackles and 8/10 mm quicklinks; the manual does not approve carabiners for highline use. Made in Germany, Taiwan and China. Aki's shop is behind a password page as of 2026-10-05.",
         "description": "The Raptor is a slackline webbing locker with an ultra light weight (133 g), a large breaking strength (68 kN) and a wide range of connection options with a focus on textile elements, especially soft shackles."
+    },
+    {
+        "id": 135,
+        "brand": "Slack Inov",
+        "gear_sellers": [
+            "Spider Slacklines"
+        ],
+        "full_name": "Slack Inov Slackibloc Slim SR",
+        "manufacturer_info": {
+            "name": "Slack Inov",
+            "url": "/manufacturer_details/SlackInov#TAB-IMAGES",
+            "country": "France",
+            "country_flag_url": "/img/flags/FR.png"
+        },
+        "product_page_url": "https://web.archive.org/web/20210915052239/https://slack-inov.com/shop/en/weblocks/458-slackibloc-slim-sr-7616999009.html",
+        "pricing": [
+            {
+                "text": "1 unit and above : 89.95 EUR"
+            }
+        ],
+        "specifications": {
+            "Material": [
+                "Aluminum",
+                "Stainless Steel"
+            ],
+            "Weight": "163gr",
+            "WLL": "15kN",
+            "MBS": "50kN",
+            "Anchor connection type": [
+                "Soft Release",
+                "Push Pin"
+            ],
+            "Webbing connection type": "Push Pin",
+            "Compatible webbing width": "17mm - 22mm",
+            "Diverter diameter": "30mm",
+            "Efficiency": "N/A",
+            "Usage": "N/A",
+            "Date introduced": "May 2021",
+            "Manufacturer": "Slack Inov",
+            "Manufacturer Product Page": "Manufacturer product page",
+            "Price (per unit)": "1 unit and above : 89.95 EUR"
+        },
+        "date_introduced": 1620838616000,
+        "name": "Slackibloc Slim SR",
+        "product_url": "https://web.archive.org/web/20210915052239/https://slack-inov.com/shop/en/weblocks/458-slackibloc-slim-sr-7616999009.html",
+        "active": null,
+        "style": "Tensionable Weblock",
+        "colors": "Red",
+        "notes": "Specs from the Spider Slacklines shop page (product 458, ref. LLILR; Wayback copies of 2021-09-15 in English and 2022-05-24 in Italian), which is the same listing as Slack Inov's own shop. The narrow version of the Slackibloc SR, for 17-22 mm webbing up to 10 mm thick (not compatible with standard 25 mm webbing); accepts 1.5 wraps for slippery Dyneema webbing. 4 mm tempered aluminium plates, anodized aluminium hollow diverter (30 mm), stainless steel pins; front pin either the CLASSIC quick-lock pin or the SAFETY push pin; the rear pin takes a soft release directly. The page contradicts itself on two figures. Weight: 163 g in the product's spec list, 173 g in the feature table and the prose (173 g is also the standard SR's weight); 163 g recorded. MBS: 50 kN in the English feature table and engraved on the product photos, 60 kN in the Italian feature table and 'above 60 kN' in the prose; 50 kN recorded. WLL is 15 kN in both feature tables but the photos are engraved 10 kN. Price 89.95 EUR (English page, 2021); the Italian page showed 81.93 EUR in 2022. Date introduced is the shop listing date (2021-05-12). Still listed in Wayback captures of 2023; current status unknown, since both shops refuse automated requests.",
+        "description": "The SLACKIBLOC Slim is a light and strong weblock, ideal for any thin webbing. It is almost the same than Slackibloc SR with Soft Release option but thinnest for high end webbings."
+    },
+    {
+        "id": 136,
+        "brand": "Balance Community: Slackline Outfitters",
+        "full_name": "Balance Community: Slackline Outfitters Alpine WebLock 3.0",
+        "manufacturer_info": {
+            "name": "Balance Community: Slackline Outfitters",
+            "url": "/manufacturer_details/BalanceCommunity#TAB-IMAGES",
+            "country": "United States",
+            "country_flag_url": "/img/flags/US.png"
+        },
+        "product_page_url": "https://web.archive.org/web/20140610021549/http://www.balancecommunity.com/alpine-weblock-3-0-kit-no-shackles",
+        "pricing": [
+            {
+                "text": "1 unit and above : 119.95 USD"
+            }
+        ],
+        "specifications": {
+            "Material": [
+                "Aluminum",
+                "Stainless Steel"
+            ],
+            "Weight": "332gr",
+            "WLL": "12kN",
+            "MBS": "60kN",
+            "Anchor connection type": "Mounting Hole",
+            "Webbing connection type": "Push Pin",
+            "Compatible webbing width": "25mm",
+            "Diverter diameter": "N/A",
+            "Efficiency": "90.2%",
+            "Usage": [
+                "Slackline",
+                "Highline",
+                "Longline",
+                "Trickline",
+                "Waterline",
+                "Rodeoline"
+            ],
+            "Date introduced": "N/A",
+            "Manufacturer": "Balance Community: Slackline Outfitters",
+            "Manufacturer Product Page": "Manufacturer product page",
+            "Price (per unit)": "1 unit and above : 119.95 USD"
+        },
+        "date_introduced": null,
+        "name": "Alpine WebLock 3.0",
+        "product_url": "https://web.archive.org/web/20140610021549/http://www.balancecommunity.com/alpine-weblock-3-0-kit-no-shackles",
+        "active": false,
+        "style": "Tensionable Weblock",
+        "colors": "Red/Black",
+        "notes": "Specs from the manufacturer's shop page (balancecommunity.com, Wayback capture of 2014-06-10; the page was also captured at /alpine-weblock-30 from 2013-02 to 2015-03). Two-piece body machined from solid aluminium blocks, so the centre diverter is fixed and cannot rotate. 60 kN MBS / 12 kN WLL (5:1); 332 g; 120.6 x 61.9 x 44.5 mm; approved for 1\" (25 mm) webbing. Quick-release front pin: 17-4 PH stainless steel, 2024 aluminium handle, four 440C stainless locking balls, 12.7 mm diameter, 38 mm long, 164.1 kN double-shear and 10.3 kN pull-out strength. The anchor hole takes a 7/16\" or 1/2\" bow shackle, the Van Beest 5/8\" bolt-type shackle, or an oval / modified-D carabiner. Strength retention 90.2% with Balance Community Mantra MKIII (37.8 kN); recorded as the efficiency. Made in the USA. Price 119.95 USD (114.95 each for 2, 109.95 each for 4). Succeeded by the Alpine WebLock 4.0.",
+        "description": "A new standard for webbing anchors. Beautiful two piece design with extremely versatile anchor hole. Rounded edges everywhere to protect your precious webbing, and a ultra high-strength front pin. The most advanced webbing anchor on the market."
+    },
+    {
+        "id": 137,
+        "brand": "Balance Community: Slackline Outfitters",
+        "full_name": "Balance Community: Slackline Outfitters Alpine WebLock 2.2",
+        "manufacturer_info": {
+            "name": "Balance Community: Slackline Outfitters",
+            "url": "/manufacturer_details/BalanceCommunity#TAB-IMAGES",
+            "country": "United States",
+            "country_flag_url": "/img/flags/US.png"
+        },
+        "product_page_url": "https://web.archive.org/web/20120801084811/http://www.balancecommunity.com/Alpine-WebLock",
+        "pricing": [
+            {
+                "text": "1 unit and above : 119.95 USD"
+            }
+        ],
+        "specifications": {
+            "Material": [
+                "High Strength Steel",
+                "Aluminum"
+            ],
+            "Weight": "576gr",
+            "WLL": "12kN",
+            "MBS": "57kN",
+            "Anchor connection type": "Integrated Shackle",
+            "Webbing connection type": "Push Pin",
+            "Compatible webbing width": "24mm - 27mm",
+            "Diverter diameter": "28.6mm",
+            "Efficiency": "93%",
+            "Usage": "N/A",
+            "Date introduced": "N/A",
+            "Manufacturer": "Balance Community: Slackline Outfitters",
+            "Manufacturer Product Page": "Manufacturer product page",
+            "Price (per unit)": "1 unit and above : 119.95 USD"
+        },
+        "date_introduced": null,
+        "name": "Alpine WebLock 2.2",
+        "product_url": "https://web.archive.org/web/20120801084811/http://www.balancecommunity.com/Alpine-WebLock",
+        "active": false,
+        "style": "Tensionable Weblock",
+        "colors": "Black/Green",
+        "notes": "Specs from the manufacturer's shop page (balancecommunity.com, Wayback capture of 2012-08-01; SKU AN-AWL2.2). Sideplates 1/8\" alloy 4130 steel, powder-coated black; diverter 6061-T6 aluminium, anodized green, 28.6 mm (1-1/8\") diameter, 1-1/32\" wide. 576 g total, which includes the 7/16\" forged 316 stainless bow shackle that comes fitted as the anchor connection (15,500 lbf); 57 kN MBS / 12 kN WLL; 6-1/2 x 2-1/4 x 3 in. Approved webbing widths 15/16\" to 1-1/16\" (about 24-27 mm). Quick-release front pin: 4130 steel, aluminium handle, 12.7 mm (1/2\") diameter, 32,800 lbf double shear, 1,160 lbf pull-out. Strength retention: polyester webbings keep at least 93% and nylon at least 98% of their rating; 93% recorded as the efficiency. An optional RAGElock Conversion Kit (19.95 USD) converts it to 1.25\" webbing. Made in Sacramento, CA. Price 119.95 USD. Successor of the Alpine WebLock 2.0, succeeded by the 3.0.",
+        "description": "The Alpine WebLock 2.2 (AWL2.2) is the next generation webbing anchor. With a super light construction that is stronger than nearly any slackline webbing on the market, the AWL2.2 is the perfect webbing anchor for all dedicated slackliners. Never before has such a small device been so useful in slacklining."
+    },
+    {
+        "id": 138,
+        "brand": "Balance Community: Slackline Outfitters",
+        "full_name": "Balance Community: Slackline Outfitters MONSTER Lock",
+        "manufacturer_info": {
+            "name": "Balance Community: Slackline Outfitters",
+            "url": "/manufacturer_details/BalanceCommunity#TAB-IMAGES",
+            "country": "United States",
+            "country_flag_url": "/img/flags/US.png"
+        },
+        "product_page_url": "https://web.archive.org/web/20120710013513/http://www.balancecommunity.com/MONSTER-Lock",
+        "pricing": [
+            {
+                "text": "1 unit and above : 259.95 USD"
+            }
+        ],
+        "specifications": {
+            "Material": [
+                "High Strength Steel",
+                "Aluminum"
+            ],
+            "Weight": "1280gr",
+            "WLL": "25kN",
+            "MBS": "100kN",
+            "Anchor connection type": "Mounting Hole",
+            "Webbing connection type": "Fixed Bolt",
+            "Compatible webbing width": "24mm - 27mm",
+            "Diverter diameter": "82.55mm",
+            "Efficiency": "100%",
+            "Usage": "N/A",
+            "Date introduced": "N/A",
+            "Manufacturer": "Balance Community: Slackline Outfitters",
+            "Manufacturer Product Page": "Manufacturer product page",
+            "Price (per unit)": "1 unit and above : 259.95 USD"
+        },
+        "date_introduced": null,
+        "name": "MONSTER Lock",
+        "product_url": "https://web.archive.org/web/20120710013513/http://www.balancecommunity.com/MONSTER-Lock",
+        "active": false,
+        "style": "Tensionable Weblock",
+        "colors": "Black/Green",
+        "notes": "Specs from the manufacturer's shop page (balancecommunity.com, Wayback capture of 2012-07-10; SKU AN-ML; captured from 2012-07 to 2013-07). A large wrap-around roller (82.55 mm / 3.25\" diameter, 26.19 mm inner width) CNC-milled from two blocks of 6061-T6 aluminium, anodized green and joined by three alloy steel shoulder bolts; sideplates 1/4\" alloy 4130 steel, laser cut, bent and powder-coated black. 1,280 g; 100 kN MBS / 25 kN WLL; 7-1/8 x 4-13/16 x 3-3/4 in. Approved webbing widths 15/16\" to 1-1/16\". The webbing runs around the roller to a centre bolt, with three modes: zero wraps (adjusting only, holds no tension), one wrap (adjustable in one direction, slips at 31 kN) and two wraps (locked, 99.999% strength retention, recorded as 100%). The sideplates bolt directly to SMC 3\" double pulleys with the included grade-8 bolts (bent inwards for a 5:1, outwards for a 9:1), and the static side takes a 5/8\" or 3/4\" anchor shackle (optimised for the Van Beest 5/8\" bolt-type). Made in Sacramento, CA. Price 259.95 USD as a standalone; the bolt option added 10 USD and the shackle option 20 USD. None of the shop's product photos survive in the Wayback Machine; the two photos are user-supplied.",
+        "description": "The MONSTER LOCK is the grand supreme webbing anchor. With a gigantic 3.25\" diameter diverter, this device will hold 99.999% of the strength of all 1\" webbings (including Spider Silk MKII)."
     }
 ]
