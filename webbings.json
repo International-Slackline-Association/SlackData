@@ -1465,6 +1465,7 @@
         "id": 18,
         "name": "Type 18 MKII",
         "brand": "Balance Community: Slackline Outfitters",
+        "colors": "White, Green, Orange, Blue",
         "materialType": "Nylon",
         "width": 25.4,
         "weight": 62,
@@ -2350,7 +2351,7 @@
         "weight": 82,
         "breakingStrength": 40,
         "date_introduced": null,
-        "product_url": null,
+        "product_url": "https://web.archive.org/web/20141007074211/http://www.slackshop.cz/en/webbing/160-eqb-sumo.html",
         "width": 25,
         "thickness": 3.8,
         "webbing_construction": "Flat",
@@ -2425,7 +2426,7 @@
         "weight": 61,
         "breakingStrength": 31,
         "date_introduced": null,
-        "product_url": null,
+        "product_url": "https://web.archive.org/web/20150214042131/http://www.slackshop.cz/en/webbing/162-eqb-flash.html",
         "width": 25,
         "thickness": 2.5,
         "webbing_construction": "Flat",
@@ -5639,7 +5640,7 @@
     },
     {
         "id": 75,
-        "name": "Ribera",
+        "name": "Rivera",
         "brand": "Pump Slackline",
         "materialType": "Polyester",
         "width": 26,
@@ -5726,7 +5727,7 @@
             }
         ],
         "date_introduced": null,
-        "product_url": null,
+        "product_url": "https://web.archive.org/web/20151022011726/http://www.slackshop.cz/en/webbing/172-eqb-nitro.html",
         "webbing_construction": "Flat",
         "priceMeter": 55.6,
         "currency": "CZK",
@@ -5772,7 +5773,7 @@
             }
         ],
         "date_introduced": null,
-        "product_url": null,
+        "product_url": "https://web.archive.org/web/20150810232120/http://line-spirit.com/gb/webbings/50-chartreuse.html",
         "webbing_construction": "Flat",
         "active": false
     },
@@ -5791,7 +5792,7 @@
             }
         ],
         "date_introduced": null,
-        "product_url": null,
+        "product_url": "https://web.archive.org/web/20170219025746/http://line-spirit.com/gb/tubular-polyester-webbing/51-dibona.html",
         "webbing_construction": "Tubular",
         "active": false
     },
@@ -5810,7 +5811,7 @@
             }
         ],
         "date_introduced": null,
-        "product_url": null,
+        "product_url": "https://web.archive.org/web/20150810011120/http://line-spirit.com/gb/flat-polyester-webbing/15-elia.html",
         "webbing_construction": "Flat",
         "active": false
     },
@@ -5829,7 +5830,7 @@
             }
         ],
         "date_introduced": null,
-        "product_url": null,
+        "product_url": "https://web.archive.org/web/20150810011214/http://line-spirit.com/gb/flat-polyester-webbing/31-etna-ii.html",
         "webbing_construction": "Flat",
         "active": false
     },
@@ -5848,7 +5849,7 @@
             }
         ],
         "date_introduced": null,
-        "product_url": null,
+        "product_url": "https://web.archive.org/web/20150811015304/http://line-spirit.com/gb/sangles-techniques/66-fuji.html",
         "webbing_construction": "Flat",
         "active": false
     },
@@ -5862,7 +5863,7 @@
         "breakingStrength": 45,
         "stretch": null,
         "date_introduced": null,
-        "product_url": null,
+        "product_url": "https://web.archive.org/web/20150810231834/http://line-spirit.com/gb/flat-polyester-webbing/20-krakatoa.html",
         "webbing_construction": "Flat",
         "active": false
     },
@@ -5881,7 +5882,7 @@
             }
         ],
         "date_introduced": null,
-        "product_url": null,
+        "product_url": "https://web.archive.org/web/20170219025704/http://line-spirit.com/gb/sangles-techniques/85-mauna-kea.html",
         "webbing_construction": "Tubular",
         "active": false
     },
@@ -5900,7 +5901,7 @@
             }
         ],
         "date_introduced": null,
-        "product_url": null,
+        "product_url": "https://web.archive.org/web/20150811015220/http://line-spirit.com/gb/polyamide-webbing/25-pierra-menta.html",
         "webbing_construction": "Flat",
         "active": false
     },
@@ -5919,7 +5920,7 @@
             }
         ],
         "date_introduced": null,
-        "product_url": null,
+        "product_url": "https://web.archive.org/web/20150810231840/http://line-spirit.com/gb/flat-polyester-webbing/47-vercors.html",
         "webbing_construction": "Flat",
         "active": false
     },
@@ -5938,7 +5939,7 @@
             }
         ],
         "date_introduced": null,
-        "product_url": null,
+        "product_url": "https://web.archive.org/web/20150810011129/http://line-spirit.com/gb/flat-polyester-webbing/24-vesuve.html",
         "webbing_construction": "Flat",
         "active": false
     },

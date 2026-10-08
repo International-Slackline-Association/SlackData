@@ -533,7 +533,7 @@
         },
         "date_introduced": null,
         "name": "Bandit FX",
-        "product_url": null,
+        "product_url": "https://web.archive.org/web/20190719170933/https://www.slackshop.cz/en/weblocks/3-eqb-bandit-fx.html",
         "active": false,
         "style": "Tensionable Weblock"
     },
@@ -804,7 +804,7 @@
         },
         "date_introduced": null,
         "name": "Canon SH",
-        "product_url": null,
+        "product_url": "https://web.archive.org/web/20140515125544/http://www.slackshop.cz/en/lockers/112-slack-canon.html",
         "active": false,
         "style": "Tensionable Weblock"
     },
@@ -854,7 +854,7 @@
         },
         "date_introduced": null,
         "name": "Canon SL",
-        "product_url": null,
+        "product_url": "https://web.archive.org/web/20130626143652/http://www.slackshop.cz/en/lockers/37-slack-canon.html",
         "active": false,
         "style": "Tensionable Weblock"
     },
@@ -1265,7 +1265,7 @@
         },
         "date_introduced": null,
         "name": "Direct",
-        "product_url": null,
+        "product_url": "https://web.archive.org/web/20170429150833/http://www.slackshop.cz/en/lockers/143-direct.html",
         "active": false,
         "style": "Tensionable Weblock"
     },
@@ -1654,7 +1654,7 @@
         },
         "date_introduced": null,
         "name": "Katana",
-        "product_url": null,
+        "product_url": "https://web.archive.org/web/20161020185506/http://www.slackshop.cz/en/lockers/165-eqb-katana.html",
         "active": false,
         "style": "Tensionable Weblock"
     },
@@ -1787,7 +1787,7 @@
         },
         "date_introduced": null,
         "name": "Lime",
-        "description": "Designed and produced entirely in Italy by Spider Slackline. Lime line lock is developed to be versatile with any type of connector, light and resistant with a working load up to 12kN. A line lock is essential for tensioning slacklines longer than 50 meters.",
+        "description": "Designed and produced entirely in Italy by Spider Slackline. Lime line lock is developed to be versatile with any type of connector, light and resistant with a working load up to 12kN. A line lock is essential for tensioning slacklines longer than 50 meters.\n\nNote: Based on the design from EQB, the Lime is a rebranded version of the [Bandit SH](/weblocks/13).",
         "product_url": "https://renegadejuggling.com/products/spider-lime-line-lock",
         "active": true,
         "style": "Tensionable Weblock"
@@ -2630,7 +2630,7 @@
         },
         "date_introduced": null,
         "name": "Paddle SL",
-        "product_url": null,
+        "product_url": "https://web.archive.org/web/20140517015200/http://www.slackshop.cz/en/lockers/113-eqb-paddle.html",
         "active": false,
         "style": "Tensionable Weblock"
     },
@@ -2883,7 +2883,7 @@
             "country": "United States",
             "country_flag_url": "/img/flags/US.png"
         },
-        "product_page_url": "http://www.balancecommunity.com/ragelock",
+        "product_page_url": "https://web.archive.org/web/20171012094449/http://www.balancecommunity.com/ragelock",
         "pricing": [
             {
                 "text": "1 unit and above : 119.95 USD"
@@ -2907,7 +2907,7 @@
         },
         "date_introduced": null,
         "name": "RAGElock",
-        "product_url": "http://www.balancecommunity.com/ragelock",
+        "product_url": "https://web.archive.org/web/20171012094449/http://www.balancecommunity.com/ragelock",
         "active": false,
         "style": "Tensionable Weblock"
     },
@@ -3682,7 +3682,7 @@
         },
         "date_introduced": null,
         "name": "Sherriff",
-        "product_url": null,
+        "product_url": "https://web.archive.org/web/20130626143647/http://www.slackshop.cz/en/lockers/36-slack-sheriff.html",
         "active": false,
         "style": "Tensionable Weblock"
     },
@@ -3727,7 +3727,7 @@
         },
         "date_introduced": null,
         "name": "Sherriff FX",
-        "product_url": null,
+        "product_url": "https://web.archive.org/web/20191112010050/https://www.slackshop.cz/en/weblocks/26-eqb-sheriff-fx.html",
         "active": false,
         "style": "Tensionable Weblock"
     },
@@ -4186,7 +4186,7 @@
         },
         "date_introduced": null,
         "name": "Spirit Lock",
-        "product_url": null,
+        "product_url": "https://web.archive.org/web/20140706034516/http://line-spirit.com/produit/spirit-lock/",
         "active": false,
         "style": "Tensionable Weblock"
     },
