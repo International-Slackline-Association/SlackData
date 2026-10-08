@@ -124,11 +124,13 @@ describe('Table view — columns', () => {
         'weight',
         'breaking_strength',
       ])
-      // …then the curve, expanded in place into one column per integer kN.
-      const stretch = fields.slice(8)
+      // …then the curve, expanded in place into one column per integer kN…
+      const stretch = fields.slice(8, 48)
       expect(stretch).to.deep.equal(
         Array.from({ length: 40 }, (_, i) => `stretch@${i + 1}`),
       )
+      // …and the rows after it.
+      expect(fields.slice(48)).to.deep.equal(['colors'])
     })
   })
 
@@ -144,10 +146,13 @@ describe('Table view — columns', () => {
       .should('exist')
   })
 
-  // `colors` is configured for webbings and null for every row we hold. On the
+  // `colors` is configured for rollers and null for every roller we hold. On the
   // detail page that costs nothing; here it would be a permanent empty stripe
-  // every reader scrolls past.
+  // every reader scrolls past. (Webbings were the example until some carried
+  // colours, which is the same filter letting the column back in.)
   it('a spec no item populates gets no column', () => {
+    cy.visit('/rollers?view=table')
+    cy.get(TABLE).should('be.visible')
     cy.get(`${HEADER}[data-field="colors"]`).should('not.exist')
   })
 

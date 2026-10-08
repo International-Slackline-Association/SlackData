@@ -185,6 +185,7 @@ Root *.json seed files
 | `slack_data/manufacturers/` | The manufacturer API's stores: `clients.py` (Protocol + SQLite + in-memory), `dynamo.py`, `store.py`, `matching.py` (gear identity), `register.py` (onboarding CLI), `onboard.py` (the CLI's AWS half — dossier, Cognito app client, ledger, end-to-end proof) |
 | `slack_data/utilities/turnstile.py` | Captcha verification — **fails closed**, unlike `fx.py` |
 | `scripts/fetch_submission_images.py` | Files a manufacturer record's `image_urls` into `frontend/public/gear-images/` under the right key, then rebuilds the manifest |
+| `frontend/public/gear-manuals/` | Manufacturer PDFs (manuals, datasheets, test certificates), keyed like images: `<type>/<brand-abbrev>_<name-slug>[-<title>].pdf`, or `<type>/brand/<brand-abbrev>[-<title>].pdf` for a range-wide one. Rebuild the manifests with `scripts/build_gear_manifest.py` after adding one. Rules in DESIGN.md § Manuals & documents |
 
 There are `__init__.py` files in `models/`, `api/`, and `utilities/`. No `tests/`, no `.github/`, no Docker, no migrations (SQLModel `create_all` only).
 
@@ -318,8 +319,8 @@ is that second statement — a list of seller brand NAMES, stored on the product
 - **The gear row stays one row.** A second row per seller would split the things
   that must not split — a correction filed against one copy, or an ISA recall
   landing on it, would leave the other displayed with a clean record. (That
-  failure is already live for the EQB/Spider `Bandit SH`/`SL` twins; see
-  BACKLOG.md.) Ids are untouched, and so is every id already recorded in an ISA
+  failure was live for the EQB/Spider `Bandit SH`/`SL` twins until they were
+  merged; see below.) Ids are untouched, and so is every id already recorded in an ISA
   match block, a manufacturer credential or a bookmarked link.
 - **It lives beside the item, in the item's own seed.** `"gear_sellers":
   ["Slack Inov"]` sits next to `"brand"` in `webbings.json`, `weblocks.json` and
@@ -365,22 +366,18 @@ the sellers, deduped). Two surfaces read it:
   price and above the ISA certification block) — each shop's name, linked to its
   brand page. DESIGN.md § Also sold by.
 
-Seeded today: **72 co-listings**, from three sources with very different
+Seeded today: **81 co-listings**, from five sources with very different
 provenance.
 
-- **SlackX** (`slackx.eu`, catalog_id 97) sells both Radrigs weblocks — the
-  `Orange` and the `Slackfriend`. Recorded by hand from their shop. SlackX
-  continues the Radrigs line and makes nothing else we hold, which is exactly
-  the seller-only brand case above.
-- **Slack Inov ↔ Spider Slacklines**, 63: the two companies each sell the
+- **Slack Inov ↔ Spider Slacklines**, 61: the two companies each sell the
   other's entire range, so every item made by one names the other, across all
   eight gear types. Recorded in bulk from the operator's statement, not from a
   per-product scrape — which is precisely why a name is the whole claim. No
   price, URL or per-shop stock flag is stored for any co-listing: none was
   sourced, and "does this shop still stock it" is a different question from the
   product's own `active`, which for a fair part of this range is `false`.
-- **Aki Slacklines** sells 7 Landcruising webbings (White Magic, Unicorn, Wave
-  Tube, Wave Tube 19, Verve 25, Wave Tube 32, Aloha/Tidal). Aki's founder
+- **Aki Slacklines** sells 8 Landcruising webbings (White Magic, Unicorn, Wizard,
+  Wave Tube, Wave Tube 19, Verve Red, Wave Tube 32, Aloha/Tidal). Aki's founder
   founded and ran Landcruising (2008–2018), and Aki carried on part of the range.
   Recorded per product from the Wayback copies of Aki's shops, one way only: Aki
   sells Landcruising's webbing, not the reverse. White Magic and Unicorn were
@@ -388,13 +385,32 @@ provenance.
   Aki rows were folded into the Landcruising ones, along with their photos, so
   ids 209 and 210 no longer exist. Two uncertain matches were left out (Matrix
   Outer, Verve 35mm); BACKLOG.md § Aki has them.
+- **Spider Slacklines** sells EQB's `Bandit SH` and `Bandit SL` (weblocks 13,
+  15). Each was held twice, once per brand (13+14, 15+16), and the ISA Bandit
+  warning reached only the EQB copies. On 2026-10-07 the Spider rows were folded
+  into the EQB ones, so ids 14 and 16 no longer exist. The Spider rows had named
+  Slack Inov as a seller (from the bulk Slack Inov ↔ Spider entry above); that
+  was not carried over, since it was a claim about Spider's range, not EQB's.
+  Spider also sells EQB's `Paddle SH` (weblock 61) as its "Paddle Linelock": on
+  2026-10-08 that Spider row (id 60, same 317 g / 14 kN / 50 kN) was folded into
+  the EQB one the same way, Slack Inov seller dropped, and its two photos moved
+  onto `eqb_paddle-sh` as `-2` and `-3`.
+- **Slacktivity** sells four grips made by others: Slack Pro!'s LineGrip Alu G4,
+  LineGrip G5 and HighlineGrip G2 (grips 1, 6, 9; Andy Riedrich's LineGrip in a
+  "Black Edition") and Souz's Snatch 2.2 (grip 2). Recorded on 2026-10-08 from
+  Slacktivity's own shop pages, live and archived.
+- **Slack Pro!** sells Slack.fr's `Neon Light` (webbing 100). It was held twice,
+  once per brand (100+154, same 25 mm / 57 g/m); on 2026-10-08 the Slack Pro!
+  row was folded into the Slack.fr one, Slack.fr's specs kept, and its photo
+  moved onto `slackfr_neon-light` as `-3`, so id 154 no longer exists.
 
-**Not done here:** the rebadge half (EQB/Spider `Bandit` — two rows that are
-one product and should be merged with a redirect; the Landcruising/Aki pairs
-were merged without one), and anything on the **card** — the card shows the maker, because the
+**Not done here:** a redirect for merged rows (the Landcruising/Aki,
+EQB/Spider `Bandit` and `Paddle`, and Slack.fr/Slack Pro! `Neon Light` pairs were merged without one, so their old ids 404), and anything on the **card** — the card shows the maker, because the
 specs are the maker's, and inventory counts still assume one row is one product,
-so a seller-only brand like SlackX reads as "0 items" on the manufacturers page
-even though it sells two. See BACKLOG.md.
+so a seller-only brand would read as "0 items" on the manufacturers page
+however much it sells. (SlackX was that case until 2026-10-07, when it and
+Radrigs became one brand, `SlackX (formerly RadRigs)` — SlackX continues the
+RadRigs line, so it is the maker, not a seller.) See BACKLOG.md.
 
 ### Read-only mode (`api/routing.py`)
 
@@ -636,7 +652,7 @@ Before writing any of the above, open the relevant `models/<type>.py` and `utili
 ## Conventions
 
 - Imports are absolute (`from slack_data....`).
-- `manufacturers.json` (77 entries) at root **is loaded — but as an enrichment pass, not a creator**. Brand rows are still created on the fly by `get_brand()` with only a name; `load_manufacturers.py` then backfills `country` / `year_founded` / `website` / `socials` / `contact_email` / `active` / `slackline_focused` onto the rows that already exist, matching on `canonical_brand()`. Its `catalog_id` **is** read at creation time, though — that is where `Brand.id` comes from (see § Loader pattern). It never inserts a brand (an entry with no matching row means we hold no gear for that manufacturer — `load_seller_brands.py` is the one pass that will insert one, for a seller-only brand). It **must run after every pass that creates a brand row** — the gear loaders and the seller-name pass, and is gated on "no brand has a country yet" rather than on an empty table. `contact_email` is the one field here that is **ours, not SlackDB's** — scraped from each manufacturer's own site (38/77 as of 2026-09-02; the rest publish a contact form only, or have no site left). `metadata.email_source` in the JSON records that provenance.
+- `manufacturers.json` (80 entries) at root **is loaded — but as an enrichment pass, not a creator**. Brand rows are still created on the fly by `get_brand()` with only a name; `load_manufacturers.py` then backfills `country` / `year_founded` / `website` / `socials` / `contact_email` / `active` / `slackline_focused` onto the rows that already exist, matching on `canonical_brand()`. Its `catalog_id` **is** read at creation time, though — that is where `Brand.id` comes from (see § Loader pattern). It never inserts a brand (an entry with no matching row means we hold no gear for that manufacturer — `load_seller_brands.py` is the one pass that will insert one, for a seller-only brand). It **must run after every pass that creates a brand row** — the gear loaders and the seller-name pass, and is gated on "no brand has a country yet" rather than on an empty table. `contact_email` is the one field here that is **ours, not SlackDB's** — scraped from each manufacturer's own site (38/77 as of 2026-09-02; the rest publish a contact form only, or have no site left). `metadata.email_source` in the JSON records that provenance.
 - Country is stored as the `Country` enum's **full display name** (`"Germany"`), not an ISO code; `get_country()` in `utilities/countries.py` maps the sources' alpha-2 codes onto the enum.
 - `BrandPublic` only declares `webbings` in its response schema — other gear lists exist on the ORM model via `@computed_field` but may not serialize in API responses.
 - No auth — all endpoints are open.

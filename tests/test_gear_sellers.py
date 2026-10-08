@@ -2,7 +2,7 @@
 
 `brand_id` says who MAKES a product; `gear_sellers` is the list of brand names
 that also sell it (Slack Inov and Spider Slacklines carry each other's whole
-range, SlackX continues the Radrigs line). It is a plain list of names stored on
+range, Aki Slacklines carries part of Landcruising's). It is a plain list of names stored on
 the product, so the two things that can go wrong are both about names:
 
 - a name that is not a brand we list, or is spelled a way nothing matches — the
@@ -181,14 +181,15 @@ def test_a_seller_name_is_canonicalized_to_the_catalogue_spelling(session):
 
 
 def test_a_shop_that_makes_nothing_we_hold_gets_a_brand_row(session):
-    """SlackX resells the Radrigs line and manufactures nothing, so no gear
-    loader ever creates it. This pass is the one place such a brand is born."""
-    make_grip(session, "Slack Inov", ["SlackX"])
+    """A shop that only resells makes nothing, so no gear loader ever creates
+    it. This pass is the one place such a brand is born. (Shaoline Slack is
+    listed in manufacturers.json and holds no gear — standing in for one.)"""
+    make_grip(session, "Slack Inov", ["Shaoline Slack"])
 
     assert resolve_sellers(session) == []
-    slackx = session.exec(select(Brand).where(Brand.name == "SlackX")).first()
-    assert slackx is not None
-    assert slackx.id == brand_catalog_id("SlackX"), "the id must come from manufacturers.json"
+    shop = session.exec(select(Brand).where(Brand.name == "Shaoline Slack")).first()
+    assert shop is not None
+    assert shop.id == brand_catalog_id("Shaoline Slack"), "the id must come from manufacturers.json"
 
 
 def test_an_unknown_seller_is_reported_and_dropped_not_invented(session):

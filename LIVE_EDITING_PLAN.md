@@ -601,8 +601,8 @@ transaction is authorised against the `PutItem` / `UpdateItem` of each item in i
 `SlackDataTables` already grants
 ([AWS docs](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/transaction-apis-iam.html)).
 
-**The draft email to the ISA**, with the complete rewritten role policy, is
-[infra/ISA_ROLE_REQUEST_LIVE_EDITING.md](infra/ISA_ROLE_REQUEST_LIVE_EDITING.md).
+**The request was sent** to the ISA's technical contact on 2026-10-07: the complete rewritten
+role policy, the app client, and a proposed table design for their review.
 
 Items 4, 6 and 7 are changes to the Lambda role, which only an ISA admin can make — our identity
 is denied `iam:*`. Everything else the design needs at deploy time — the new tables, the media

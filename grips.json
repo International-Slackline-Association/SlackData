@@ -14,6 +14,9 @@
         "price": 193.7,
         "currency": "EUR",
         "manufacturer": "Slack Pro!",
+        "gear_sellers": [
+            "Slacktivity"
+        ],
         "date_introduced": null,
         "product_url": "https://www.linegrip.com/linegrip-model-archive-history-chronology/",
         "active": false
@@ -33,6 +36,9 @@
         "price": 5377,
         "currency": "RUB",
         "manufacturer": "Souz Slackline",
+        "gear_sellers": [
+            "Slacktivity"
+        ],
         "date_introduced": null,
         "product_url": "https://web.archive.org/web/20210124030114/https://www.slackshop.cz/en/linegrip/125-snatch-v22.html",
         "active": false
@@ -109,6 +115,10 @@
         "price": 214,
         "currency": "EUR",
         "manufacturer": "Slack Pro!",
+        "gear_sellers": [
+            "Slacktivity",
+            "Raed Slacklines"
+        ],
         "date_introduced": 1512079200000,
         "product_url": "https://www.linegrip.com/shop/linegrip-g5/",
         "active": true
@@ -166,6 +176,9 @@
         "price": null,
         "currency": null,
         "manufacturer": "Slack Pro!",
+        "gear_sellers": [
+            "Slacktivity"
+        ],
         "date_introduced": null,
         "product_url": "https://www.linegrip.com/highlinegrip/",
         "active": true

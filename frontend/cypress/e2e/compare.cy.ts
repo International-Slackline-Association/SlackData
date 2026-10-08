@@ -159,9 +159,16 @@ describe('Compare view — side-by-side table', () => {
 
   // A row no item in the dataset populates can never distinguish anything, so
   // ComparePage drops it rather than drawing an all-"—" stripe. `colors` is the
-  // live example: on the webbing model, but null for every seeded row.
+  // live example on rollers: on the model, but null for every seeded roller.
+  // (Webbings were the example until some carried colours.) The table must have
+  // rendered first, or "not.exist" passes before there is anything to look at.
   it('omits spec rows that no item in the gear type populates', () => {
-    cy.get('[data-cy="compare-row"][data-field="colors"]').should('not.exist')
+    cy.request(`${Cypress.env('apiUrl')}/roller/?limit=2`).then(({ body }) => {
+      const ids = (body as { id: number }[]).map(r => r.id)
+      cy.visit(`/rollers/compare?ids=${ids.join(',')}`)
+      cy.get('[data-cy="compare-row"][data-field="price"]').should('exist')
+      cy.get('[data-cy="compare-row"][data-field="colors"]').should('not.exist')
+    })
   })
 
   it('each row has a field label in the left column', () => {

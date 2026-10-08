@@ -386,11 +386,19 @@ describe('Webbing stretch sort', () => {
     catch { return [] }
   }
 
+  // Mirror of src/utils/stretch.ts percentAtRoundedKn, which is what the sort
+  // ranks on: an exact reading wins, else the nearest non-zero reading that
+  // rounds to this kN (Nova Magic 25 has only 10.3 kN — it sorts at 10 kN).
   function percentAtKn(json: string | null, kn: number): number | null {
     if (!json) return null
     try {
       const pts = JSON.parse(json) as { kn: number; percent: number }[]
-      return pts.find(p => p.kn === kn)?.percent ?? null
+      const exact = pts.find(p => p.kn === kn)
+      if (exact) return exact.percent
+      const near = pts
+        .filter(p => p.kn !== 0 && Math.round(p.kn) === kn)
+        .sort((a, b) => Math.abs(a.kn - kn) - Math.abs(b.kn - kn))[0]
+      return near ? near.percent : null
     } catch { return null }
   }
 

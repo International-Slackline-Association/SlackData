@@ -58,6 +58,11 @@
       "slacktvty_minimum-slackline-12m-set.pdf"
     ]
   },
+  "treepros": {
+    "eqb_tree-pad": [
+      "eqb_tree-pad.pdf"
+    ]
+  },
   "tricklinekits": {
     "slacktvty_super-jumpline-slackline-set": [
       "slacktvty_super-jumpline-slackline-set-german-user-manual.pdf"
@@ -98,6 +103,30 @@
     ],
     "bc_mightylock": [
       "bc_mightylock.pdf"
+    ],
+    "eqb_bandit-fx": [
+      "eqb_bandit-fx-czech-user-manual.pdf"
+    ],
+    "eqb_canon-fx": [
+      "eqb_canon-fx.pdf"
+    ],
+    "eqb_katana-fx": [
+      "eqb_katana-fx.pdf"
+    ],
+    "eqb_paddle-fx": [
+      "eqb_paddle-fx.pdf"
+    ],
+    "eqb_pirat-pp": [
+      "eqb_pirat-pp.pdf"
+    ],
+    "eqb_pirat-qp": [
+      "eqb_pirat-qp.pdf"
+    ],
+    "eqb_sherriff-fx": [
+      "eqb_sherriff-fx.pdf"
+    ],
+    "landcruise_lockman": [
+      "landcruise_lockman-german-user-manual.pdf"
     ],
     "landcruise_lynx-1": [
       "landcruise_lynx-1-german-user-manual.pdf"

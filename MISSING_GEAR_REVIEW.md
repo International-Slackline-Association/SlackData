@@ -374,7 +374,7 @@ Rows marked **⚠ similar to `X`** closely resemble an existing DB row — confi
 | [ ] | [X-Wing - Highline Freestyle webbing](https://raed-sports.com/products/x-wing-webbing) | Raed Slacklines | raed-sports.com | `webbing` |
 | [ ] | [Y2K Light](https://slacktivity.com/shop/y2k-light-18mm-hightech-webbing/) | Slacktivity | slacktivity.com | `webbing` |
 | [ ] | [AcroLine Webbing](https://slacktivity.com/shop/acroline-webbing/) | Slacktivity | slacktivity.com | `webbing` |
-| [ ] | [PRO Webbing](https://slacktivity.com/shop/pro-low-stretch-webbing/) | Slacktivity | slacktivity.com | `webbing` |
+| [x] | [PRO Webbing](https://slacktivity.com/shop/pro-low-stretch-webbing/) | Slacktivity | slacktivity.com | Held as **webbing #223**. The old duplicate "Low stretch Webbing" #157 was merged into it (2026-10-08); slacktivity.ch now sells it as Playline. |
 | [ ] | [Experience Webbing](https://slacktivity.com/shop/experience-30m-70m/) | Slacktivity | slacktivity.com | `webbing` |
 | [ ] | [LEMON HAZE](https://slacklines.us/products/lemon-haze) | Spider Slacklines | slacklines.us | `webbing` |
 | [ ] | [PANTHER](https://slacklines.us/products/panther) | Spider Slacklines | slacklines.us | `webbing` |
@@ -457,7 +457,7 @@ Rows marked **⚠ similar to `X`** closely resemble an existing DB row — confi
 | ✓ | Item | Brand | Source | Type |
 |---|------|-------|--------|------|
 | [ ] | [BELLA CIAO - TRICKLINE](https://slacklines.us/products/bella-ciao-trickline) | Spider Slacklines | slacklines.us | `tricklinekit` |
-| [ ] | [Super Jumpline – Trickline Webbing](https://slacktivity.com/shop/super-jumpline-trickline-webbing/) | Slacktivity | slacktivity.com — ⚠ similar to `Super Jumpline Slackline Set` (tricklinekits.json) | `tricklinekit` |
+| [x] | [Super Jumpline – Trickline Webbing](https://slacktivity.com/shop/super-jumpline-trickline-webbing/) | Slacktivity | slacktivity.com | Added as **webbing #269** (2026-10-08): the webbing on its own, not the kit; the kit is held as tricklinekit #5. 37 mm, 36 kN, 5 % @10kN, 64 g/m; fibre and construction are not published. |
 | [ ] | [TRICKLINE KIT - TRICK LINE 30](https://slacklines.us/products/trickline-kit-trick-line-30) | Spider Slacklines | slacklines.us — ⚠ similar to `Trickline Kit - Pro Line 25` (tricklinekits.json) | `tricklinekit` |
 | [ ] | [SLACKLINE KIT - TRICK LINE 25](https://slacklines.us/products/slackline-kit-trick-line-25) | Spider Slacklines | slacklines.us — ⚠ similar to `SLACKLINE KIT - PIRATE 18` (starterkits.json) | `tricklinekit` |
 | [ ] | [SLACKLINE KIT - PRO LINE 20](https://slacklines.us/products/slackline-kit-pro-line-20) | Spider Slacklines | slacklines.us — ⚠ similar to `SLACKLINE KIT - PIRATE 18` (starterkits.json) | `tricklinekit` |

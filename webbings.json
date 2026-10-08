@@ -595,6 +595,9 @@
         "id": 8,
         "name": "Wizard",
         "brand": "Landcruising",
+        "gear_sellers": [
+            "Aki Slacklines"
+        ],
         "stretch": [
             {
                 "kn": 2,
@@ -1462,6 +1465,7 @@
         "id": 18,
         "name": "Type 18 MKII",
         "brand": "Balance Community: Slackline Outfitters",
+        "colors": "White, Green, Orange, Blue",
         "materialType": "Nylon",
         "width": 25.4,
         "weight": 62,
@@ -1910,7 +1914,8 @@
         "webbing_construction": "Flat",
         "priceMeter": 1.49,
         "currency": "EUR",
-        "active": false
+        "active": false,
+        "notes": "Elephant published three different stretch figures for blueWing: 3.6 % at 7 kN and 7.2 % at 15 kN (2012 product page, https://web.archive.org/web/20121016212106/http://www.elephant-slacklines.com:80/contents/en-uk/d104_bluewing.html); 7.2 % at 7 kN and 14.5 % at 15 kN (2014 meter-ware page, https://web.archive.org/web/20140609000002/http://elephant-slacklines.com:80/de/online-shop/zubehoer/meterware/meterware-blueWing-blau); and 5.9 % at 7.5 kN on today's shop page, which is the Wing 3.5's figure. The curve held here matches the 2014 page at 15 kN."
     },
     {
         "id": 25,
@@ -1963,11 +1968,11 @@
             }
         ],
         "date_introduced": null,
-        "product_url": null,
+        "product_url": "https://web.archive.org/web/20150416011542/http://elephant-slacklines.com:80/de/online-shop/zubehoer/meterware-elephantPassion",
         "thickness": 3.6,
         "webbing_construction": "Flat",
-        "priceMeter": 3,
-        "currency": "CAD",
+        "priceMeter": 2.2,
+        "currency": "EUR",
         "active": false
     },
     {
@@ -2347,7 +2352,7 @@
         "weight": 82,
         "breakingStrength": 40,
         "date_introduced": null,
-        "product_url": null,
+        "product_url": "https://web.archive.org/web/20141007074211/http://www.slackshop.cz/en/webbing/160-eqb-sumo.html",
         "width": 25,
         "thickness": 3.8,
         "webbing_construction": "Flat",
@@ -2422,7 +2427,7 @@
         "weight": 61,
         "breakingStrength": 31,
         "date_introduced": null,
-        "product_url": null,
+        "product_url": "https://web.archive.org/web/20150214042131/http://www.slackshop.cz/en/webbing/162-eqb-flash.html",
         "width": 25,
         "thickness": 2.5,
         "webbing_construction": "Flat",
@@ -5636,7 +5641,7 @@
     },
     {
         "id": 75,
-        "name": "Ribera",
+        "name": "Rivera",
         "brand": "Pump Slackline",
         "materialType": "Polyester",
         "width": 26,
@@ -5723,7 +5728,7 @@
             }
         ],
         "date_introduced": null,
-        "product_url": null,
+        "product_url": "https://web.archive.org/web/20151022011726/http://www.slackshop.cz/en/webbing/172-eqb-nitro.html",
         "webbing_construction": "Flat",
         "priceMeter": 55.6,
         "currency": "CZK",
@@ -5769,7 +5774,7 @@
             }
         ],
         "date_introduced": null,
-        "product_url": null,
+        "product_url": "https://web.archive.org/web/20150810232120/http://line-spirit.com/gb/webbings/50-chartreuse.html",
         "webbing_construction": "Flat",
         "active": false
     },
@@ -5788,7 +5793,7 @@
             }
         ],
         "date_introduced": null,
-        "product_url": null,
+        "product_url": "https://web.archive.org/web/20170219025746/http://line-spirit.com/gb/tubular-polyester-webbing/51-dibona.html",
         "webbing_construction": "Tubular",
         "active": false
     },
@@ -5807,7 +5812,7 @@
             }
         ],
         "date_introduced": null,
-        "product_url": null,
+        "product_url": "https://web.archive.org/web/20150810011120/http://line-spirit.com/gb/flat-polyester-webbing/15-elia.html",
         "webbing_construction": "Flat",
         "active": false
     },
@@ -5826,7 +5831,7 @@
             }
         ],
         "date_introduced": null,
-        "product_url": null,
+        "product_url": "https://web.archive.org/web/20150810011214/http://line-spirit.com/gb/flat-polyester-webbing/31-etna-ii.html",
         "webbing_construction": "Flat",
         "active": false
     },
@@ -5845,7 +5850,7 @@
             }
         ],
         "date_introduced": null,
-        "product_url": null,
+        "product_url": "https://web.archive.org/web/20150811015304/http://line-spirit.com/gb/sangles-techniques/66-fuji.html",
         "webbing_construction": "Flat",
         "active": false
     },
@@ -5859,7 +5864,7 @@
         "breakingStrength": 45,
         "stretch": null,
         "date_introduced": null,
-        "product_url": null,
+        "product_url": "https://web.archive.org/web/20150810231834/http://line-spirit.com/gb/flat-polyester-webbing/20-krakatoa.html",
         "webbing_construction": "Flat",
         "active": false
     },
@@ -5878,7 +5883,7 @@
             }
         ],
         "date_introduced": null,
-        "product_url": null,
+        "product_url": "https://web.archive.org/web/20170219025704/http://line-spirit.com/gb/sangles-techniques/85-mauna-kea.html",
         "webbing_construction": "Tubular",
         "active": false
     },
@@ -5897,7 +5902,7 @@
             }
         ],
         "date_introduced": null,
-        "product_url": null,
+        "product_url": "https://web.archive.org/web/20150811015220/http://line-spirit.com/gb/polyamide-webbing/25-pierra-menta.html",
         "webbing_construction": "Flat",
         "active": false
     },
@@ -5916,7 +5921,7 @@
             }
         ],
         "date_introduced": null,
-        "product_url": null,
+        "product_url": "https://web.archive.org/web/20150810231840/http://line-spirit.com/gb/flat-polyester-webbing/47-vercors.html",
         "webbing_construction": "Flat",
         "active": false
     },
@@ -5935,7 +5940,7 @@
             }
         ],
         "date_introduced": null,
-        "product_url": null,
+        "product_url": "https://web.archive.org/web/20150810011129/http://line-spirit.com/gb/flat-polyester-webbing/24-vesuve.html",
         "webbing_construction": "Flat",
         "active": false
     },
@@ -6134,6 +6139,9 @@
         "id": 100,
         "name": "Neon Light",
         "brand": "Slack.fr",
+        "gear_sellers": [
+            "Slack Pro!"
+        ],
         "materialType": "Polyester",
         "width": 25,
         "weight": 57,
@@ -6267,7 +6275,7 @@
         "materialType": "Polyester",
         "width": 50,
         "weight": 86,
-        "breakingStrength": null,
+        "breakingStrength": 45,
         "stretch": [
             {
                 "percent": 2,
@@ -6275,9 +6283,9 @@
             }
         ],
         "date_introduced": null,
-        "product_url": "http://elephant-slacklines.com",
+        "product_url": "https://web.archive.org/web/20151218163207/http://elephant-slacklines.com:80/de/online-shop/zubehoer/meterware/meterware-flashline-pink",
         "webbing_construction": "Flat",
-        "priceMeter": 2.35,
+        "priceMeter": 2.3,
         "currency": "EUR",
         "active": false
     },
@@ -6318,9 +6326,13 @@
             }
         ],
         "date_introduced": null,
-        "product_url": null,
+        "product_url": "https://web.archive.org/web/20121015235255/http://www.elephant-slacklines.com:80/contents/en-uk/d103_wing35.html",
         "webbing_construction": "Flat",
-        "active": false
+        "active": false,
+        "description": "The Wing 3.5 is the ultimate all-rounder for beginners, advanced slackliners and pros. Even during your first steps on a slackline, you will notice the pleasant dynamics of this webbing. The integrated Wing technology causes the tubular edges of the slackline to adapt to the sole of your foot. With a width of 35 mm/1.4\", the webbing forgives mistakes while walking. The considerable elasticity of the webbing allows ambitious jumps even at short distances.\n\nAt the same time, the Wing 3.5 is excellent for longlines of up to 50 m (165 ft) in length. Those of you who are into surfing, will absolutely love this line - its high elasticity allows for great surfs even on shorter lines.\n\nThere's no way around this webbing!",
+        "priceMeter": 1.6,
+        "currency": "EUR",
+        "notes": "Price is per meter from Elephant's 2015 meter-ware page, which also gives 54 g/m: https://web.archive.org/web/20150416011603/http://elephant-slacklines.com:80/de/online-shop/zubehoer/meterware/meterware-wing-3.5-orange"
     },
     {
         "id": 109,
@@ -6491,28 +6503,6 @@
         "description": "Slackline was born on nylon tubular webbing back in the early eighties. The soft touch and the fine weave give a genious dynamic and balance feeling (thanks to the Nylon fibers). This webbing will guarantee pure slackline fun. Even for moderate longlines suitable if threaded with our 19mm Wave-Tape."
     },
     {
-        "id": 117,
-        "name": "Wave Tape 19",
-        "brand": "Landcruising",
-        "materialType": "Nylon",
-        "width": 19,
-        "weight": 38,
-        "breakingStrength": 18,
-        "stretch": [
-            {
-                "percent": 14,
-                "kn": 6
-            }
-        ],
-        "date_introduced": null,
-        "product_url": null,
-        "thickness": 2.4,
-        "webbing_construction": "Flat",
-        "priceMeter": 1.35,
-        "currency": "EUR",
-        "active": false
-    },
-    {
         "id": 118,
         "name": "Wave Tube 19",
         "brand": "Landcruising",
@@ -6536,7 +6526,8 @@
         "priceMeter": 1.35,
         "currency": "EUR",
         "active": false,
-        "description": "This 19 mm wide tubular webbing is very suitable for making a threaded leash. 10 mm to 10,5 mm dynamic rope fits ideally inside and giving a highline leash with superiour handling and strength. The webbing is additionally suitable as single walking line or reinforcement for 25 mm tubular webbing."
+        "description": "This 19 mm wide tubular webbing is very suitable for making a threaded leash. 10 mm to 10,5 mm dynamic rope fits ideally inside and giving a highline leash with superiour handling and strength. The webbing is additionally suitable as single walking line or reinforcement for 25 mm tubular webbing.",
+        "notes": "Specs from the maker's page (Wayback 2013-04-15): PA tubular, 19 mm, 2.4 mm, average break strength 17 kN, min. 16 kN, 14 % at 6 kN and 32 % at break, 36 g/m, made in the EU. 'Wave Tape 19' (#117, flat, 18 kN, 38 g/m, no source link) was the same product in red and was merged into this row on 2026-10-07; its photo moved across, and where the two disagreed the Wayback page won."
     },
     {
         "id": 119,
@@ -6970,26 +6961,6 @@
         "active": false
     },
     {
-        "id": 137,
-        "name": "HighTech",
-        "brand": "Slacklife BC",
-        "materialType": "Dyneema/HMPE",
-        "width": 25.4,
-        "weight": 48,
-        "breakingStrength": 39.2,
-        "stretch": [
-            {
-                "percent": 4.6,
-                "kn": 10
-            }
-        ],
-        "date_introduced": null,
-        "product_url": null,
-        "thickness": 3,
-        "webbing_construction": "Flat",
-        "active": false
-    },
-    {
         "id": 138,
         "name": "Type 18 CG4",
         "description": "Like the mystery of how globule CG4 was formed, Balancing Earth is seeking the mystery of what pushes us to try new things. This is why we chose to name our 1 inch flat webbing after the mysterious. Type 18 CG4 is a flat nylon webbing made from the highest quality 66 nylon available. Type 18 CG4 is extremely soft and dynamic making it the perfect slackline webbing. With it's high stretch* and super strength the CG4 webbing is a great choice no matter what type of slackin you do.",
@@ -7124,7 +7095,7 @@
     {
         "id": 144,
         "name": "Lion Line",
-        "description": "High Tech does not equal high maintenance anymore! Experience the perfect relationship with SlacklifeBC's new high tech webbing. Lions is a no-fuss rig. It holds with one wrap in a weblock and grips with the linegrip allowing you to pretension at any time. Light as a cloud at 35 g/m and firm but soft on your feet, it is the perfect support for your long journeys across mountains, canyons, cities or just in the park. The search is over, Lions is the one!",
+        "description": "High Tech does not equal high maintenance anymore! Experience the perfect relationship with SlacklifeBC’s new high tech webbing. Lions is a no-fuss rig. It holds with one wrap in a weblock and grips with the linegrip allowing you to pretension at any time. Light as a cloud at 35 g/m and firm but soft on your feet, it is the perfect support for your long journeys across mountains, canyons, cities or just in the park. The search is over, Lions is the one! Designed and manufactured in Canada offers you the chance to own the longest piece of webbing available. Lengths of over 1000 meter continuous is now reality. Turn your dreams into reality and experience the Lions for yourself.",
         "brand": "Slacklife BC",
         "materialType": "Dyneema/HMPE",
         "width": 25.4,
@@ -7132,11 +7103,13 @@
         "breakingStrength": 35.6,
         "stretch": null,
         "date_introduced": null,
-        "product_url": "https://web.archive.org/web/20191215113421/https://www.slacklifebc.com/product/lions-line-hightech-webbing/",
+        "product_url": "https://web.archive.org/web/20171008205524/http://slacklifebc.com/products/webbing/lions-line-hightech-webbing/",
         "webbing_construction": "Flat",
         "priceMeter": 8.99,
         "currency": "CAD",
-        "active": false
+        "active": false,
+        "colors": "Red and White",
+        "notes": "Specs from Slacklife BC's own product page (Wayback, 2017-10-08): MBS 35.6 kN (8000 lbs), WLL 7.12 kN (1600 lbs), 35 g/m, price 8.99 CAD/m (also sold by the foot, and in 50-1000 m lengths), colour red and white, designed and made 100% in Canada, continuous lengths over 1000 m. The page gives stretch only as \"1-4%\" with no load, so no stretch curve is recorded. A second Slacklife BC webbing, \"HighTech\" (#137: 48 g/m, 39.2 kN, 4.6% @ 10 kN, carried over from SlackDB), was a mistake: it is this same product, whose page titles it \"Lion Line - Hightech Webbing\". Confirmed with the Mayor of Squamish. #137 was removed on 2026-10-08 and its figures discarded, not merged; its id is not reused."
     },
     {
         "id": 145,
@@ -7250,29 +7223,30 @@
     },
     {
         "id": 151,
-        "name": "Verve 25mm",
+        "name": "Verve Red",
         "brand": "Landcruising",
         "gear_sellers": [
             "Aki Slacklines"
         ],
         "materialType": "Polyester",
-        "width": 25.4,
-        "weight": 59,
-        "breakingStrength": 32,
+        "width": 25,
+        "weight": 58,
+        "breakingStrength": 31,
         "stretch": [
             {
-                "percent": 11,
+                "percent": 7,
                 "kn": 10
             }
         ],
         "date_introduced": null,
-        "product_url": "https://web.archive.org/web/20140902053505/http://www.landcruising-slacklines.de/en/shop/2-slackline-band/26-polyester/421-?vmcchk=1",
+        "product_url": "https://web.archive.org/web/20110722171318/http://www.landcruising-slacklines.de/en/shop/2-slackline-band/26-flachband-25/148-verve-25mm-meterware?limitstart=0",
         "thickness": 2.5,
         "webbing_construction": "Flat",
-        "priceMeter": 1.33,
+        "priceMeter": 1.49,
         "currency": "EUR",
         "active": false,
-        "description": "The 25 mm wide slackline with soft touch and extended stretch gives a fantastic dynamic pleasure, even on shorter lines."
+        "description": "Our Verve slackline webbing is the red coloured counterpart to our classic White Magic. The Verve offers a superior combination of low strain, high-strength, low weight and durability. The dynamic behaviour is even more defined and perfected compared to White Magic. The true red color (no surface coating) and the soft touch finishing the new accents.",
+        "notes": "One row for Landcruising's 25 mm Verve, merged on 2026-10-07 from #151 'Verve 25mm' and the staged 'Verve 25mm Red'. Specs, price and description from the red Verve page (Wayback 2011-07-22): PES flat, MBS 31 kN, 7 % at 10 kN, 58 g/m, max. 10 kN pretension as a longline, made in Germany, 1.49 €/m (1.40 €/m from 100 m). The row previously carried the 2014 'Verve 25mm Slackline 30m loop' page (https://web.archive.org/web/20140902053505/http://www.landcruising-slacklines.de/en/shop/2-slackline-band/26-polyester/421-?vmcchk=1), which describes 'shiny yellow' webbing with av. >32 kN, min. 30 kN, 11 % at 10 kN, 59 g/m, 2-ply, 55.95 € for 30 m with a sewn loop; that page's blurb was: 'The 25 mm wide slackline with soft touch and extended stretch gives a fantastic dynamic pleasure, even on shorter lines.'"
     },
     {
         "id": 152,
@@ -7318,26 +7292,6 @@
         "webbing_construction": "Flat",
         "priceMeter": 0.89,
         "currency": "EUR",
-        "active": false
-    },
-    {
-        "id": 154,
-        "name": "Neon Light",
-        "brand": "Slack Pro!",
-        "materialType": "Polyester",
-        "width": 25,
-        "weight": 57,
-        "breakingStrength": 33,
-        "stretch": [
-            {
-                "percent": 3.8,
-                "kn": 10
-            }
-        ],
-        "date_introduced": null,
-        "product_url": null,
-        "thickness": 2.4,
-        "webbing_construction": "Flat",
         "active": false
     },
     {
@@ -7466,27 +7420,6 @@
         "manufacturer_not_for_highline_source": "https://laboutique.slack.fr/fr/sangle-debutant-15-25m/146-rvd-tubulaire.html"
     },
     {
-        "id": 157,
-        "name": "Low stretch Webbing",
-        "brand": "Slacktivity",
-        "materialType": "Polyester",
-        "width": 37,
-        "weight": 64,
-        "breakingStrength": null,
-        "stretch": [
-            {
-                "percent": 3,
-                "kn": 10
-            }
-        ],
-        "date_introduced": null,
-        "product_url": null,
-        "webbing_construction": "Flat",
-        "priceMeter": 2.79,
-        "currency": "EUR",
-        "active": false
-    },
-    {
         "id": 158,
         "name": "SuperMOTM",
         "brand": "Raed Slacklines",
@@ -7501,7 +7434,7 @@
             }
         ],
         "date_introduced": null,
-        "product_url": null,
+        "product_url": "https://web.archive.org/web/20190718073229/https://raed-slacklines.com/supermotm-threaded-tubular-nylon-slackline-webbing",
         "webbing_construction": "Tubular",
         "priceMeter": 3.29,
         "currency": "EUR",
@@ -9980,7 +9913,7 @@
             }
         ],
         "description": "Low stretch 37mm park/longline webbing tensionable to 100m with ratchets alone. 1-meter distance markers.",
-        "notes": null,
+        "notes": "Merged with Low stretch Webbing #157 on 2026-10-08: one webbing that Slacktivity has sold as 'Low stretch 37mm webbing' (2017), 'lowStretch' / 'PRO 50m - 100m' (2019-21), PRO, and on slacktivity.ch as 'Playline' (https://slacktivity.ch/shop/playline-slacklineband/). Both rows gave 37 mm polyester flat, 64 g/m, 3 % at 10 kN. #157 carried no URL, no breaking strength and 2.79 EUR/m, and was marked historic; its photo was a thumbnail of this row's lead photo, so it was dropped. /webbing/157 now 404s, as there is no redirect mechanism yet.",
         "active": true
     },
     {
@@ -10447,7 +10380,7 @@
         "weight": 22,
         "breakingStrength": 34,
         "webbing_construction": "Flat",
-        "product_url": null,
+        "product_url": "https://web.archive.org/web/20250916235734/https://raed-slacklines.com/dyneemite-pro-ultralight-highline-project-webbing",
         "date_introduced": null,
         "priceMeter": null,
         "currency": "EUR",
@@ -10458,7 +10391,7 @@
             }
         ],
         "description": "19mm slim, 34 kN, ultralight 22 g/m Dyneema/polyester blend. Slimmer than Dyneemite but stronger and thicker at the same weight; the 19mm width significantly reduces wind drag on big lines compared to 25mm webbing. Recommended highline length up to 200m.",
-        "notes": "Specs from raed webbing manual Annex A. WLL1 6.8 kN (SF=5), WLL2 11.3 kN (SF=3); recommended weblock RigLock 19mm. ISA certification as Type A highline webbing is INTENDED but not yet granted — manufacturer states it is pending the final production batch, so isa_certified stays false. No live product page on raed-sports.com (appears in the shop only as used stock), hence no product_url or price.",
+        "notes": "Specs from raed webbing manual Annex A. WLL1 6.8 kN (SF=5), WLL2 11.3 kN (SF=3); recommended weblock RigLock 19mm. ISA certification as Type A highline webbing is INTENDED but not yet granted — manufacturer states it is pending the final production batch, so isa_certified stays false. Not on the live raed-sports.com shop except as used stock; product_url is the last Wayback capture of Raed's page (2025-09-16), where it sold new at 3.99 EUR/m.",
         "active": false
     },
     {
@@ -12161,5 +12094,115 @@
         "description": "It was produced to rig what was then the Italian highline world record (1280 m), so only 2 km of this webbing were ever made.",
         "notes": "Added 2026-10-04 from the operator's own sample and messages. The description is Carlo's account as relayed by the operator, not published text, the only source - there is no product page or spec sheet. Carlo Sovrini produced it himself (per his messages to the operator). 18 mm Dyneema/polyester blend; the 32 g/m weight is the operator's approximate figure, and the 28 kN MBS is what the operator was told, not a published or tested value. Thickness, construction, stretch, price and product URL are null: no source states them. Active is false: it was a one-off production run of about 2 km, made to rig what was then the Italian highline world record (1280 m). The webbing is two-faced - red/orange/yellow on one side, blue/orange/grey on the other - with black edges.",
         "active": false
+    },
+    {
+        "id": 265,
+        "name": "Nova Magic 25",
+        "brand": "Landcruising",
+        "materialType": "Polyester",
+        "width": 25,
+        "weight": 57,
+        "breakingStrength": 31,
+        "stretch": [
+            {
+                "percent": 6,
+                "kn": 10.3
+            }
+        ],
+        "date_introduced": null,
+        "product_url": "https://web.archive.org/web/20100328221304/http://www.landcruising-slacklines.de:80/03-02-01-nova-magic-25mm-meterware.html",
+        "webbing_construction": "Flat",
+        "priceMeter": 1.35,
+        "currency": "EUR",
+        "active": false,
+        "colors": "Red",
+        "notes": "Maker's page (German only, Wayback 2010-03-28): the red version of White Magic, same material and weave, slightly less stretch and a firmer grip. PES flat, MBS 31 kN, 6 % at 1/3 MBS (≈10.3 kN), 57 g/m, max. 10 kN pretension in longlines, made in Germany. 1.35 €/m (1.26 €/m from 150 m). No English capture, so no description."
+    },
+    {
+        "id": 266,
+        "name": "White Magic 35mm",
+        "brand": "Landcruising",
+        "materialType": "Polyester",
+        "width": 35,
+        "weight": null,
+        "breakingStrength": 35,
+        "stretch": [],
+        "date_introduced": null,
+        "product_url": "https://web.archive.org/web/20121026070842/http://www.landcruising-slacklines.de/de/shop/2-slackline-band/26-polyester/132-white-magic-35mm-mit-schlaufe",
+        "webbing_construction": "Flat",
+        "active": false,
+        "colors": "White",
+        "notes": "Maker's page (German only, Wayback 2012-10-26): White Magic in 35 mm, sold only as a 16 m line with one sewn, reinforced loop, 29.95 €; the page says the data are those of White Magic by the meter and lists none of its own. The 35 kN MBS is from the Starter Flex / Starter Aerial kit pages ('White Magic / Nova Magic webbing with 35 kN strength'). Weight, stretch and thickness unknown; no per-metre price."
+    },
+    {
+        "id": 267,
+        "name": "Sonic",
+        "brand": "Landcruising",
+        "materialType": "Nylon",
+        "width": 25,
+        "weight": 63,
+        "breakingStrength": 31.5,
+        "stretch": [
+            {
+                "percent": 13.4,
+                "kn": 10
+            }
+        ],
+        "date_introduced": null,
+        "product_url": "https://web.archive.org/web/20120822061828/http://www.landcruising-slacklines.de/de/shop/2-slackline-band/29-polyamid/283-sonic-25mm-meterware",
+        "webbing_construction": "Core/Sheath",
+        "priceMeter": 2.29,
+        "currency": "EUR",
+        "active": false,
+        "colors": "Orange-gold / ice blue with dark grey edges",
+        "notes": "First-generation Sonic; Sonic 2 is held as Aki Slacklines #5. Maker's page (German only, Wayback 2012-08-22): 25 mm PA (nylon) flat webbing, 3-layer core-sheath construction with edge binding, PU-coated, tested MBS >31.5 kN, 13.4 % at 10 kN, 27 % elongation at break (not recorded as a stretch point: no load given), 63 g/m, for 15–70 m lines, max. 9 kN pretension, made in the EU. 2.29 €/m. No English capture, so no description."
+    },
+    {
+        "id": 268,
+        "name": "Soma",
+        "brand": "Aki Slacklines",
+        "materialType": "Polyester",
+        "width": 24.5,
+        "thickness": 2.7,
+        "weight": 62,
+        "breakingStrength": 32.5,
+        "stretch": [
+            {
+                "percent": 8.7,
+                "kn": 10
+            }
+        ],
+        "date_introduced": null,
+        "product_url": "https://web.archive.org/web/20240713154858/https://aki-slacklines.de/de/slacklineband/polyester/186/aki-soma-slacklineband?c=6",
+        "webbing_construction": "Flat",
+        "priceMeter": 1.4,
+        "currency": "EUR",
+        "active": false,
+        "colors": "Blue / golden yellow with black edges",
+        "notes": "Maker's page (German only, Wayback 2024-07-13): PES flat, 3-layer, uncoated, 24.5 mm, 2.7 mm, MBS 32.5 kN (34 kN average), 6.5 kN WLL, 8.7 % at 10 kN, 62 g/m, made in Germany. 1.40 €/m list, 1.12 €/m on sale at capture. Marketed as an all-round longline webbing (from ~30 m) with enough reserve for highline backups. The page links a manual (PDF) not yet fetched. Width is stored as an integer, so 24.5 mm loads as 24."
+    },
+    {
+        "id": 269,
+        "name": "Super Jumpline",
+        "brand": "Slacktivity",
+        "materialType": null,
+        "width": 37,
+        "weight": 64,
+        "breakingStrength": 36,
+        "stretch": [
+            {
+                "kn": 10,
+                "percent": 5
+            }
+        ],
+        "date_introduced": null,
+        "product_url": "https://slacktivity.com/shop/super-jumpline-trickline-webbing/",
+        "webbing_construction": null,
+        "priceMeter": 2.98,
+        "currency": "EUR",
+        "active": true,
+        "colors": "Light orange with white grip print",
+        "notes": "Added 2026-10-08 from the Slacktivity archive pass. Maker's page (live; Wayback 2026-02-15 https://web.archive.org/web/20260215224124/https://slacktivity.com/shop/super-jumpline-trickline-webbing/, first archived as a separate webbing 2019-07 as 'superJumpline 25m - 70m'): 37 mm, MBS 36 kN, 5 % at 10 kN, 64 g/m, whiteGrip print, light orange. Two ratchets up to 50 m (70 m possible set higher); soft release recommended above 30 m. Sold as 25 m (79 €) or 50 m (149 €); priceMeter is the 50 m price over its length (the 25 m works out to 3.16 €/m). Fibre and construction are not stated anywhere in the archive, so both are left null. The same webbing is in the held Super Jumpline Slackline Set (tricklinekit #5) and in the 'Fire' version of the Ice & Fire 25m set.",
+        "description": "The Super Jumpline is a finely woven trickline webbing and it feels super nice under the foot and body, when landing air tricks and performing static positions. It has a smooth but very powerful bounce and amplitude. This trickline webbing has been used in official tricklinining competitions in Switzerland and, for example, at RedBull Slackship 2017, with great feedback from the riders!"
     }
 ]

@@ -100,6 +100,9 @@
     "bc_bomber-steel-ring": [
       "bc_bomber-steel-ring.jpg"
     ],
+    "bc_large-steel-ring": [
+      "bc_large-steel-ring.jpg"
+    ],
     "bc_medium-steel-ring": [
       "bc_medium-steel-ring.jpg"
     ],
@@ -185,6 +188,16 @@
       "spider_80mm-highring-2.jpg",
       "spider_80mm-highring-3.jpg"
     ],
+    "zerge_zero-black": [
+      "zerge_zero-black.jpg",
+      "zerge_zero-black-2.jpg",
+      "zerge_zero-black-3.jpg",
+      "zerge_zero-black-4.jpg",
+      "zerge_zero-black-5.jpg",
+      "zerge_zero-black-6.jpg",
+      "zerge_zero-black-7.jpg",
+      "zerge_zero-black-8.jpg"
+    ],
     "zerge_zero-gold": [
       "zerge_zero-gold.jpg"
     ],
@@ -205,6 +218,9 @@
     ],
     "eqb_aidman": [
       "eqb_aidman.jpg"
+    ],
+    "eqb_rock-n-roll": [
+      "eqb_rock-n-roll.png"
     ],
     "landcruise_highslide-2-0": [
       "landcruise_highslide-2-0.jpg"
@@ -305,6 +321,9 @@
     "easy_kit-primitiv-25": [
       "easy_kit-primitiv-25.jpg"
     ],
+    "elephant_on-sight": [
+      "elephant_on-sight.jpg"
+    ],
     "eqb_eqb-balance-20-m": [
       "eqb_eqb-balance-20-m.jpg"
     ],
@@ -324,6 +343,19 @@
     "gibbon_classic-line-red-xl-treewear": [
       "gibbon_classic-line-red-xl-treewear.jpg"
     ],
+    "landcruise_cruiser": [
+      "landcruise_cruiser.jpg",
+      "landcruise_cruiser-2.jpg"
+    ],
+    "landcruise_starter-aerial": [
+      "landcruise_starter-aerial.jpg"
+    ],
+    "landcruise_starter-flex": [
+      "landcruise_starter-flex.png"
+    ],
+    "landcruise_starterplus": [
+      "landcruise_starterplus.png"
+    ],
     "middleway_15m-kit": [
       "middleway_15m-kit.jpg"
     ],
@@ -332,6 +364,45 @@
     ],
     "raed_fun-kit-beginner-slackline-set-20m": [
       "raed_fun-kit-beginner-slackline-set-20m.jpg"
+    ],
+    "raed_helium-set": [
+      "raed_helium-set.jpg"
+    ],
+    "raed_humboldt-ultralight-travel-slackline-set": [
+      "raed_humboldt-ultralight-travel-slackline-set.jpg",
+      "raed_humboldt-ultralight-travel-slackline-set-2.jpg",
+      "raed_humboldt-ultralight-travel-slackline-set-3.jpg",
+      "raed_humboldt-ultralight-travel-slackline-set-4.jpg",
+      "raed_humboldt-ultralight-travel-slackline-set-5.jpg"
+    ],
+    "raed_ninja-slackline-set": [
+      "raed_ninja-slackline-set.jpg",
+      "raed_ninja-slackline-set-2.jpg"
+    ],
+    "raed_parkline-comfort-set": [
+      "raed_parkline-comfort-set.jpg",
+      "raed_parkline-comfort-set-2.jpg",
+      "raed_parkline-comfort-set-3.jpg",
+      "raed_parkline-comfort-set-4.jpg"
+    ],
+    "raed_rodeoline-beginner-set": [
+      "raed_rodeoline-beginner-set.jpg",
+      "raed_rodeoline-beginner-set-2.jpg",
+      "raed_rodeoline-beginner-set-3.jpg",
+      "raed_rodeoline-beginner-set-4.jpg",
+      "raed_rodeoline-beginner-set-5.jpg"
+    ],
+    "raed_travel-slackline-set-20-m": [
+      "raed_travel-slackline-set-20-m.jpg"
+    ],
+    "raed_ultralight-travel-slackline-set": [
+      "raed_ultralight-travel-slackline-set.jpg"
+    ],
+    "raed_yoga-slackline-set": [
+      "raed_yoga-slackline-set.jpg",
+      "raed_yoga-slackline-set-2.jpg",
+      "raed_yoga-slackline-set-3.jpg",
+      "raed_yoga-slackline-set-4.jpg"
     ],
     "slackde_sigma-impact-set": [
       "slackde_sigma-impact-set.jpg"
@@ -427,8 +498,16 @@
     "slacktools_15-m-clip-n-slack-set": [
       "slacktools_15-m-clip-n-slack-set.jpg"
     ],
+    "slacktvty_allround-light-inox-15m": [
+      "slacktvty_allround-light-inox-15m.jpg",
+      "slacktvty_allround-light-inox-15m-2.jpg",
+      "slacktvty_allround-light-inox-15m-3.jpg"
+    ],
     "slacktvty_allround-slackline-15m-set": [
       "slacktvty_allround-slackline-15m-set.jpg"
+    ],
+    "slacktvty_experience-light-inox-30m": [
+      "slacktvty_experience-light-inox-30m.jpg"
     ],
     "slacktvty_experience-slackline-30m-set": [
       "slacktvty_experience-slackline-30m-set.jpg"
@@ -468,6 +547,16 @@
     ]
   },
   "treepros": {
+    "aki_tree-protection-medium": [
+      "aki_tree-protection-medium.jpg"
+    ],
+    "aki_tree-protection-small": [
+      "aki_tree-protection-small.jpg",
+      "aki_tree-protection-small-2.jpg"
+    ],
+    "aki_tree-protection-xl": [
+      "aki_tree-protection-xl.jpg"
+    ],
     "bc_breathe-tree-pro": [
       "bc_breathe-tree-pro.jpg"
     ],
@@ -488,6 +577,12 @@
     ],
     "gibbon_treewear-xl-edition": [
       "gibbon_treewear-xl-edition.jpg"
+    ],
+    "landcruise_treebuddies": [
+      "landcruise_treebuddies.jpg"
+    ],
+    "landcruise_treeplus-2-0": [
+      "landcruise_treeplus-2-0.jpg"
     ],
     "raed_treepro": [
       "raed_treepro.jpg",
@@ -529,14 +624,23 @@
     "slacktools_tree-guard-set": [
       "slacktools_tree-guard-set.jpg"
     ],
-    "slacktvty_slackline-tree-protection-set": [
-      "slacktvty_slackline-tree-protection-set.jpg"
-    ],
     "slacktvty_tree-protection-3l": [
-      "slacktvty_tree-protection-3l.jpg"
+      "slacktvty_tree-protection-3l.jpg",
+      "slacktvty_tree-protection-3l-2.jpg"
     ],
-    "slacktvty_treeprotection-set-v2": [
-      "slacktvty_treeprotection-set-v2.jpg"
+    "slacktvty_treeprotection-set": [
+      "slacktvty_treeprotection-set.jpg"
+    ],
+    "slacktvty_treeprotector-2-0": [
+      "slacktvty_treeprotector-2-0.jpg",
+      "slacktvty_treeprotector-2-0-2.jpg"
+    ],
+    "slacktvty_treeprotector-3-0": [
+      "slacktvty_treeprotector-3-0.jpg",
+      "slacktvty_treeprotector-3-0-2.jpg",
+      "slacktvty_treeprotector-3-0-3.jpg",
+      "slacktvty_treeprotector-3-0-4.jpg",
+      "slacktvty_treeprotector-3-0-5.jpg"
     ],
     "spider_tree-protection": [
       "spider_tree-protection.jpg"
@@ -567,6 +671,12 @@
       "middleway_23m-kit.jpg",
       "middleway_23m-kit-2.jpg"
     ],
+    "rigvent_level-2-kit": [
+      "rigvent_level-2-kit.jpg"
+    ],
+    "rigvent_level-3-trickline-kit": [
+      "rigvent_level-3-trickline-kit.jpg"
+    ],
     "slackde_duored": [
       "slackde_duored.jpg"
     ],
@@ -587,6 +697,11 @@
     ],
     "spider_trickline-kit-pro-line-25": [
       "spider_trickline-kit-pro-line-25.jpg"
+    ],
+    "spider_trickline-kit-trick-line-30": [
+      "spider_trickline-kit-trick-line-30.jpg",
+      "spider_trickline-kit-trick-line-30-2.jpg",
+      "spider_trickline-kit-trick-line-30-3.jpg"
     ]
   },
   "webbings": {
@@ -619,6 +734,13 @@
       "aki_purple-gold-2.jpg",
       "aki_purple-gold-3.jpg",
       "aki_purple-gold-4.jpg"
+    ],
+    "aki_soma": [
+      "aki_soma.jpg",
+      "aki_soma-2.jpg",
+      "aki_soma-3.jpg",
+      "aki_soma-4.jpg",
+      "aki_soma-5.jpg"
     ],
     "aki_sonic-2": [
       "aki_sonic-2.jpg",
@@ -718,8 +840,16 @@
     "bc_lift-2be": [
       "bc_lift-2be.jpg"
     ],
+    "bc_mantra-mk1": [
+      "bc_mantra-mk1.jpg",
+      "bc_mantra-mk1-2.png"
+    ],
+    "bc_mantra-mk2": [
+      "bc_mantra-mk2.jpg"
+    ],
     "bc_mantra-mk3": [
-      "bc_mantra-mk3.jpg"
+      "bc_mantra-mk3.png",
+      "bc_mantra-mk3-2.jpg"
     ],
     "bc_mantra-mk4-flight": [
       "bc_mantra-mk4-flight.jpg"
@@ -742,6 +872,10 @@
       "bc_pharaoh-3.jpg",
       "bc_pharaoh-4.jpg"
     ],
+    "bc_rageline": [
+      "bc_rageline.jpg",
+      "bc_rageline-2.jpg"
+    ],
     "bc_secondaire": [
       "bc_secondaire.jpg",
       "bc_secondaire-2.jpg",
@@ -758,8 +892,20 @@
     "bc_slack-spec-11-16": [
       "bc_slack-spec-11-16.jpg"
     ],
+    "bc_slack-spec-threaded-tubular": [
+      "bc_slack-spec-threaded-tubular.jpg",
+      "bc_slack-spec-threaded-tubular-2.png"
+    ],
     "bc_slack-spec-tubelar": [
       "bc_slack-spec-tubelar.jpg"
+    ],
+    "bc_spider-silk-7-8": [
+      "bc_spider-silk-7-8.png",
+      "bc_spider-silk-7-8-2.png",
+      "bc_spider-silk-7-8-3.jpg"
+    ],
+    "bc_spider-silk-mk1": [
+      "bc_spider-silk-mk1.jpg"
     ],
     "bc_spider-silk-mk2": [
       "bc_spider-silk-mk2.jpg"
@@ -774,11 +920,17 @@
     "bc_spider-silk-mk5": [
       "bc_spider-silk-mk5.jpg"
     ],
+    "bc_type-18-mk1": [
+      "bc_type-18-mk1.png",
+      "bc_type-18-mk1-2.jpg",
+      "bc_type-18-mk1-3.jpg"
+    ],
     "bc_type-18-mkii": [
       "bc_type-18-mkii.jpg",
       "bc_type-18-mkii-2.jpg",
       "bc_type-18-mkii-3.jpg",
-      "bc_type-18-mkii-4.jpg"
+      "bc_type-18-mkii-4.jpg",
+      "bc_type-18-mkii-5.png"
     ],
     "bera_brasileirinha-nylon": [
       "bera_brasileirinha-nylon.jpg"
@@ -796,6 +948,10 @@
     "cong_path": [
       "cong_path.jpg"
     ],
+    "dakas_sat-elite": [
+      "dakas_sat-elite.jpg",
+      "dakas_sat-elite-2.jpg"
+    ],
     "edelrid_supertape-19mm": [
       "edelrid_supertape-19mm.jpg"
     ],
@@ -808,17 +964,29 @@
     "elephant_bluewing": [
       "elephant_bluewing.jpg",
       "elephant_bluewing-2.jpg",
-      "elephant_bluewing-3.jpg"
+      "elephant_bluewing-3.jpg",
+      "elephant_bluewing-4.jpg",
+      "elephant_bluewing-5.jpg",
+      "elephant_bluewing-6.jpg"
     ],
     "elephant_ecoline": [
-      "elephant_ecoline.jpg"
+      "elephant_ecoline.jpg",
+      "elephant_ecoline-2.jpg",
+      "elephant_ecoline-3.jpg",
+      "elephant_ecoline-4.jpg"
     ],
     "elephant_flash-line": [
-      "elephant_flash-line.jpg"
+      "elephant_flash-line.jpg",
+      "elephant_flash-line-2.jpg"
     ],
     "elephant_passion-red": [
       "elephant_passion-red.jpg",
       "elephant_passion-red-2.jpg"
+    ],
+    "elephant_wing-3-5": [
+      "elephant_wing-3-5.jpg",
+      "elephant_wing-3-5-2.jpg",
+      "elephant_wing-3-5-3.jpg"
     ],
     "eqb_bounce": [
       "eqb_bounce.jpg"
@@ -878,6 +1046,9 @@
       "gambit_skillshot-hs.jpg",
       "gambit_skillshot-hs-2.jpg"
     ],
+    "gambit_skillshot-ls": [
+      "gambit_skillshot-ls.jpg"
+    ],
     "geko_xiui-t1": [
       "geko_xiui-t1.jpg",
       "geko_xiui-t1-2.jpg",
@@ -927,6 +1098,18 @@
     "landcruise_matrix": [
       "landcruise_matrix.jpg"
     ],
+    "landcruise_matrix-outer": [
+      "landcruise_matrix-outer.jpg",
+      "landcruise_matrix-outer-2.jpg"
+    ],
+    "landcruise_nova-magic-25": [
+      "landcruise_nova-magic-25.jpg",
+      "landcruise_nova-magic-25-2.jpg"
+    ],
+    "landcruise_sonic": [
+      "landcruise_sonic.jpg",
+      "landcruise_sonic-2.jpg"
+    ],
     "landcruise_t-wave": [
       "landcruise_t-wave.jpg"
     ],
@@ -936,20 +1119,19 @@
       "landcruise_unicorn-3.jpg",
       "landcruise_unicorn-4.jpg"
     ],
-    "landcruise_verve-25mm": [
-      "landcruise_verve-25mm.jpg"
-    ],
     "landcruise_verve-35mm": [
       "landcruise_verve-35mm.jpg"
     ],
-    "landcruise_wave-tape-19": [
-      "landcruise_wave-tape-19.jpg"
+    "landcruise_verve-red": [
+      "landcruise_verve-red.jpg",
+      "landcruise_verve-red-2.jpg"
     ],
     "landcruise_wave-tube": [
       "landcruise_wave-tube.jpg"
     ],
     "landcruise_wave-tube-19": [
-      "landcruise_wave-tube-19.jpg"
+      "landcruise_wave-tube-19.jpg",
+      "landcruise_wave-tube-19-2.jpg"
     ],
     "landcruise_wave-tube-32": [
       "landcruise_wave-tube-32.jpg"
@@ -958,11 +1140,40 @@
       "landcruise_white-magic.jpg",
       "landcruise_white-magic-2.jpg"
     ],
+    "landcruise_white-magic-35mm": [
+      "landcruise_white-magic-35mm.png",
+      "landcruise_white-magic-35mm-2.png"
+    ],
+    "landcruise_wizard": [
+      "landcruise_wizard.png"
+    ],
+    "linespirit_chartreuse": [
+      "linespirit_chartreuse.jpg"
+    ],
     "linespirit_dibona": [
-      "linespirit_dibona.jpg"
+      "linespirit_dibona.jpg",
+      "linespirit_dibona-2.jpg"
+    ],
+    "linespirit_elia": [
+      "linespirit_elia.jpg",
+      "linespirit_elia-2.jpg"
     ],
     "linespirit_etna-ii": [
-      "linespirit_etna-ii.jpg"
+      "linespirit_etna-ii.jpg",
+      "linespirit_etna-ii-2.jpg"
+    ],
+    "linespirit_krakatoa": [
+      "linespirit_krakatoa.jpg",
+      "linespirit_krakatoa-2.jpg"
+    ],
+    "linespirit_mauna-kea": [
+      "linespirit_mauna-kea.jpg"
+    ],
+    "linespirit_pierra-menta": [
+      "linespirit_pierra-menta.jpg"
+    ],
+    "linespirit_vesuve": [
+      "linespirit_vesuve.jpg"
     ],
     "mammut_mammut": [
       "mammut_mammut.jpg",
@@ -987,6 +1198,12 @@
       "petram_coelum-2.jpg",
       "petram_coelum-3.jpg",
       "petram_coelum-4.jpg"
+    ],
+    "pump_rivera": [
+      "pump_rivera.png"
+    ],
+    "pure_bloodline": [
+      "pure_bloodline.jpg"
     ],
     "raed_aurora": [
       "raed_aurora.jpg"
@@ -1058,6 +1275,10 @@
     "slackde_sigma-impact-ls": [
       "slackde_sigma-impact-ls.jpg"
     ],
+    "slackde_sigma-lg": [
+      "slackde_sigma-lg.jpg",
+      "slackde_sigma-lg-2.jpg"
+    ],
     "slackde_sigma-n": [
       "slackde_sigma-n.jpg"
     ],
@@ -1066,6 +1287,10 @@
     ],
     "slackde_y-a-w": [
       "slackde_y-a-w.jpg"
+    ],
+    "slackfr_club-s": [
+      "slackfr_club-s.jpg",
+      "slackfr_club-s-2.jpg"
     ],
     "slackfr_dark-blue": [
       "slackfr_dark-blue.jpg"
@@ -1091,6 +1316,11 @@
     ],
     "slackfr_moonwalk": [
       "slackfr_moonwalk.jpg"
+    ],
+    "slackfr_neon-light": [
+      "slackfr_neon-light.jpg",
+      "slackfr_neon-light-2.jpg",
+      "slackfr_neon-light-3.jpg"
     ],
     "slackfr_reggae": [
       "slackfr_reggae.jpg"
@@ -1291,9 +1521,6 @@
     "slacknz_tube-1": [
       "slacknz_tube-1.jpg"
     ],
-    "slackpro_neon-light": [
-      "slackpro_neon-light.jpg"
-    ],
     "slackpro_slackpro-42kn": [
       "slackpro_slackpro-42kn.jpg"
     ],
@@ -1321,9 +1548,6 @@
     "slacktvty_half-marathon": [
       "slacktvty_half-marathon.jpg"
     ],
-    "slacktvty_low-stretch-webbing": [
-      "slacktvty_low-stretch-webbing.jpg"
-    ],
     "slacktvty_lsdtube": [
       "slacktvty_lsdtube.jpg",
       "slacktvty_lsdtube-2.jpg"
@@ -1347,6 +1571,11 @@
     "slacktvty_redtube": [
       "slacktvty_redtube.jpg"
     ],
+    "slacktvty_super-jumpline": [
+      "slacktvty_super-jumpline.jpg",
+      "slacktvty_super-jumpline-2.jpg",
+      "slacktvty_super-jumpline-3.jpg"
+    ],
     "slacktvty_y2k": [
       "slacktvty_y2k.jpg",
       "slacktvty_y2k-2.jpg"
@@ -1359,7 +1588,15 @@
     ],
     "slbc_sky-pilot-black-white": [
       "slbc_sky-pilot-black-white.jpg",
-      "slbc_sky-pilot-black-white-2.jpg"
+      "slbc_sky-pilot-black-white-2.jpg",
+      "slbc_sky-pilot-black-white-3.jpg"
+    ],
+    "slbc_sky-pilot-green-orange": [
+      "slbc_sky-pilot-green-orange.jpg",
+      "slbc_sky-pilot-green-orange-2.jpg",
+      "slbc_sky-pilot-green-orange-3.jpg",
+      "slbc_sky-pilot-green-orange-4.jpg",
+      "slbc_sky-pilot-green-orange-5.jpg"
     ],
     "slbc_tantalus": [
       "slbc_tantalus.jpg"
@@ -1434,6 +1671,11 @@
     "spider_zao": [
       "spider_zao.jpg"
     ],
+    "sterling_type-9800": [
+      "sterling_type-9800.png",
+      "sterling_type-9800-2.jpg",
+      "sterling_type-9800-3.jpg"
+    ],
     "wallace_duct-tape": [
       "wallace_duct-tape.jpg",
       "wallace_duct-tape-2.jpg"
@@ -1467,6 +1709,13 @@
       "aki_raptor-6.jpg",
       "aki_raptor-7.jpg",
       "aki_raptor-8.jpg"
+    ],
+    "bc_alpine-weblock-2-2": [
+      "bc_alpine-weblock-2-2.jpg"
+    ],
+    "bc_alpine-weblock-3-0": [
+      "bc_alpine-weblock-3-0.jpg",
+      "bc_alpine-weblock-3-0-2.jpg"
     ],
     "bc_alpine-weblock-4-0": [
       "bc_alpine-weblock-4-0.jpg",
@@ -1508,6 +1757,16 @@
       "bc_mightylock-3.jpg",
       "bc_mightylock-4.jpg"
     ],
+    "bc_monster-lock": [
+      "bc_monster-lock.jpg",
+      "bc_monster-lock-2.jpg"
+    ],
+    "bc_ragelock": [
+      "bc_ragelock.jpg",
+      "bc_ragelock-2.jpg",
+      "bc_ragelock-3.jpg",
+      "bc_ragelock-4.jpg"
+    ],
     "bera_anel-linelock": [
       "bera_anel-linelock.jpg"
     ],
@@ -1538,10 +1797,19 @@
       "catonslack_catlock-sr-pro-4.jpg"
     ],
     "elephant_t-rig": [
-      "elephant_t-rig.jpg"
+      "elephant_t-rig.jpg",
+      "elephant_t-rig-2.jpg",
+      "elephant_t-rig-3.jpg"
     ],
     "eqb_bandit-fx": [
       "eqb_bandit-fx.jpg"
+    ],
+    "eqb_bandit-sh": [
+      "eqb_bandit-sh.jpg",
+      "eqb_bandit-sh-2.jpg"
+    ],
+    "eqb_bandit-sl": [
+      "eqb_bandit-sl.jpg"
     ],
     "eqb_canon-fx": [
       "eqb_canon-fx.jpg"
@@ -1581,13 +1849,21 @@
       "eqb_paddle-fx-4.jpg"
     ],
     "eqb_paddle-sh": [
-      "eqb_paddle-sh.jpg"
+      "eqb_paddle-sh.jpg",
+      "eqb_paddle-sh-2.jpg",
+      "eqb_paddle-sh-3.png"
+    ],
+    "eqb_paddle-sl": [
+      "eqb_paddle-sl.jpg"
     ],
     "eqb_pirat-pp": [
       "eqb_pirat-pp.jpg"
     ],
     "eqb_pirat-qp": [
       "eqb_pirat-qp.jpg"
+    ],
+    "eqb_sherriff": [
+      "eqb_sherriff.jpg"
     ],
     "eqb_sherriff-fx": [
       "eqb_sherriff-fx.jpg",
@@ -1599,6 +1875,13 @@
       "krok_linelock-mini-2.jpg",
       "krok_linelock-mini-3.jpg",
       "krok_linelock-mini-4.jpg"
+    ],
+    "landcruise_lockman": [
+      "landcruise_lockman.jpg",
+      "landcruise_lockman-2.jpg"
+    ],
+    "landcruise_lockman-2-0": [
+      "landcruise_lockman-2-0.jpg"
     ],
     "landcruise_lynx-1": [
       "landcruise_lynx-1.jpg"
@@ -1621,6 +1904,13 @@
       "landcruise_lynx-4-0-vari-4.jpg",
       "landcruise_lynx-4-0-vari-5.jpg"
     ],
+    "landcruise_puma-2-0": [
+      "landcruise_puma-2-0.png"
+    ],
+    "landcruise_puma-32": [
+      "landcruise_puma-32.jpg",
+      "landcruise_puma-32-2.png"
+    ],
     "landcruise_zilla-1-0": [
       "landcruise_zilla-1-0.jpg",
       "landcruise_zilla-1-0-2.jpg"
@@ -1630,6 +1920,10 @@
     ],
     "landcruise_zilla-3-0": [
       "landcruise_zilla-3-0.jpg"
+    ],
+    "linespirit_spirit-lock": [
+      "linespirit_spirit-lock.jpg",
+      "linespirit_spirit-lock-2.jpg"
     ],
     "oneinch_dreamcatcher": [
       "oneinch_dreamcatcher.jpg"
@@ -1678,6 +1972,14 @@
       "petram_spatium-weblock.jpg",
       "petram_spatium-weblock-2.jpg"
     ],
+    "pump_xylon": [
+      "pump_xylon.png",
+      "pump_xylon-2.png"
+    ],
+    "pure_purelock": [
+      "pure_purelock.jpg",
+      "pure_purelock-2.jpg"
+    ],
     "radrigs_orange": [
       "radrigs_orange.jpg",
       "radrigs_orange-2.jpg",
@@ -1688,6 +1990,9 @@
       "radrigs_slackfriend-2.jpg",
       "radrigs_slackfriend-3.jpg"
     ],
+    "raed_blnc-weblock": [
+      "raed_blnc-weblock.jpg"
+    ],
     "raed_pro-weblock": [
       "raed_pro-weblock.jpg",
       "raed_pro-weblock-2.jpg",
@@ -1695,13 +2000,24 @@
       "raed_pro-weblock-4.jpg",
       "raed_pro-weblock-5.jpg"
     ],
+    "raed_pro-weblock-x-link": [
+      "raed_pro-weblock-x-link.jpg",
+      "raed_pro-weblock-x-link-2.jpg",
+      "raed_pro-weblock-x-link-3.jpg",
+      "raed_pro-weblock-x-link-4.jpg",
+      "raed_pro-weblock-x-link-5.jpg"
+    ],
     "raed_riglock": [
       "raed_riglock.jpg"
     ],
-    "raed_rodeo-weblock": [
-      "raed_rodeo-weblock.jpg",
-      "raed_rodeo-weblock-2.jpg",
-      "raed_rodeo-weblock-3.jpg"
+    "raed_rodeo-steel-weblock": [
+      "raed_rodeo-steel-weblock.jpg",
+      "raed_rodeo-steel-weblock-2.jpg"
+    ],
+    "raed_rodeo-ultralight-weblock": [
+      "raed_rodeo-ultralight-weblock.jpg",
+      "raed_rodeo-ultralight-weblock-2.jpg",
+      "raed_rodeo-ultralight-weblock-3.jpg"
     ],
     "raed_tilock-19mm-steel-pins": [
       "raed_tilock-19mm-steel-pins.jpg",
@@ -1754,6 +2070,10 @@
     "slackfr_sladlock-light": [
       "slackfr_sladlock-light.jpg"
     ],
+    "slackfr_sladlock-power": [
+      "slackfr_sladlock-power.jpg",
+      "slackfr_sladlock-power-2.jpg"
+    ],
     "slackgear_baboonlock": [
       "slackgear_baboonlock.jpg"
     ],
@@ -1784,10 +2104,29 @@
       "slackinov_diamond-lock-3.jpg",
       "slackinov_diamond-lock-4.jpg"
     ],
+    "slackinov_slackibloc-3-1": [
+      "slackinov_slackibloc-3-1.png",
+      "slackinov_slackibloc-3-1-2.png"
+    ],
     "slackinov_slackibloc-4": [
       "slackinov_slackibloc-4.jpg",
       "slackinov_slackibloc-4-2.jpg",
       "slackinov_slackibloc-4-3.jpg"
+    ],
+    "slackinov_slackibloc-jump-1-2": [
+      "slackinov_slackibloc-jump-1-2.png",
+      "slackinov_slackibloc-jump-1-2-2.png",
+      "slackinov_slackibloc-jump-1-2-3.png",
+      "slackinov_slackibloc-jump-1-2-4.png"
+    ],
+    "slackinov_slackibloc-slim-sr": [
+      "slackinov_slackibloc-slim-sr.jpg",
+      "slackinov_slackibloc-slim-sr-2.jpg",
+      "slackinov_slackibloc-slim-sr-3.jpg",
+      "slackinov_slackibloc-slim-sr-4.jpg",
+      "slackinov_slackibloc-slim-sr-5.jpg",
+      "slackinov_slackibloc-slim-sr-6.jpg",
+      "slackinov_slackibloc-slim-sr-7.jpg"
     ],
     "slackinov_slackibloc-sr-pull-pin": [
       "slackinov_slackibloc-sr-pull-pin.jpg"
@@ -1911,6 +2250,10 @@
       "spider_linelock-aluminum-ring-3.jpg",
       "spider_linelock-aluminum-ring-4.jpg"
     ],
+    "spider_mint": [
+      "spider_mint.jpg",
+      "spider_mint-2.jpg"
+    ],
     "viper_aluminium-static-linelock-ring": [
       "viper_aluminium-static-linelock-ring.jpg",
       "viper_aluminium-static-linelock-ring-2.jpg",
@@ -1930,6 +2273,10 @@
     ],
     "yogaslack_line-lock": [
       "yogaslack_line-lock.jpg"
+    ],
+    "zerge_link": [
+      "zerge_link.jpg",
+      "zerge_link-2.jpg"
     ]
   }
 }

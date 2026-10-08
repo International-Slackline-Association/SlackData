@@ -886,7 +886,9 @@ def test_bare_names_really_do_collide(client):
         duplicates[filename] = [n for n, count in names.items() if count > 1 and n]
 
     assert duplicates["webbings.json"], "webbings used to contain duplicate product names"
-    assert duplicates["weblocks.json"], "weblocks used to contain duplicate product names"
+    # Weblocks became name-unique on 2026-10-07: their only collisions were the
+    # EQB/Spider Bandit SH/SL twins, which were one product each and were merged.
+    assert duplicates["weblocks.json"] == []
 
 
 def test_brand_and_name_together_are_unique(client):
