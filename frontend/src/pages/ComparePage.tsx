@@ -14,8 +14,7 @@
 // pure noise: an all-"—" stripe that can never distinguish anything. Those are
 // dropped. This applies to every gear type, so a spec row can be configured
 // ahead of the data landing and simply stays invisible until it does. `colors`
-// is the current case: on the model for webbings/weblocks/rollers, but null for
-// all 367 rows because no seed JSON carries the key.
+// on rollers is the current case: on the model, but null for every roller.
 
 import { useCallback, useMemo } from 'react'
 import { Link, useParams, useSearchParams } from 'react-router-dom'
