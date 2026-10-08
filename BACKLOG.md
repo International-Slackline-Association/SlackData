@@ -356,10 +356,9 @@ Non-phase engineering tasks not tracked in [PLAN.md](PLAN.md) (frontend roadmap)
   where the photos of products still sold come from. We already held 25 Raed rows, and every Raed
   webbing in the archive turned out to be one of them.
 
-  Two weblocks were approved into `weblocks.json` (2026-10-08): **BLNC Weblock #142** and **RODEO
-  Steel Weblock #143**. The rest are staged for review the same way as the Landcruising ones
-  (`candidates/`, ids 9000+). Products still sold link the live page, with the Wayback capture in
-  their notes.
+  Everything found was approved into the seeds on 2026-10-08: three weblocks (#142–#144) and eight
+  starter kits (#74–#81). Only the Felt TreeProtection is held back, until a photo turns up.
+  Products still sold link the live page, with the Wayback capture in their notes.
 
   - Weblocks
     - [x] **BLNC Weblock**: approved, weblock **#142**. Steel, hollow aluminium diverter, one
@@ -372,41 +371,41 @@ Non-phase engineering tasks not tracked in [PLAN.md](PLAN.md) (frontend roadmap)
       June 2019 redesign, which Raed's blog marked "prohibited for tricklining and highlining". The
       same URL describes the aluminium #73 from 2021-07 on:
       <https://web.archive.org/web/20210117055054/https://raed-slacklines.com/rodeo-weblock>
-    - [ ] **PRO Weblock X-Link** (staged, #9008): a version of the PRO Weblock #65 with the pulley
+    - [x] **PRO Weblock X-Link**: approved, weblock **#144**, a version of the PRO Weblock #65 with the pulley
       system's X-Link, which takes a Dyneema whoopie directly with no shackle. 389 g, 109 €, 2019.
       Its own page gives no material, WLL, pin types, width, diverter or usage, so those are #65's.
       MBS is #65's 62 kN, though its own page said 75 kN:
       <https://web.archive.org/web/20191120052510/https://raed-slacklines.com/pro-weblock-x-link>
-  - Starter kits (all staged). Rodeoline Beginner, Yoga, Ninja and Parkline Comfort lead with a
+  - Starter kits, all approved. Rodeoline Beginner, Yoga, Ninja and Parkline Comfort lead with a
     composite of their components' own photos, followed by the kit's own photos. The felt tree
     protection is missing from these composites because no photo of it exists. Ninja's composite
     shows shackles, as its text says, though the 2025 configurator gave carabiners. FUN Kit #33,
     Helium, Ultralight Travel, HUMBOLDT and Travel Set keep their own photos, which already show
     every piece.
-    - [ ] **Travel Slackline Set 20 m**: 25 m MOTM, aluminium carabiners, D-ring linelockers,
+    - [x] **Travel Slackline Set 20 m** (#74): 25 m MOTM, aluminium carabiners, D-ring linelockers,
       slings, tree protectors, 2100 g, 139.95 €, 2018–19:
       <https://web.archive.org/web/20191120052521/https://raed-slacklines.com/travel-slackline-set-20m>
-    - [ ] **Helium Set**: 20 m Helium, Dyneema whoopies, aluminium carabiners, 1370 g, 179 €,
+    - [x] **Helium Set** (#75): 20 m Helium, Dyneema whoopies, aluminium carabiners, 1370 g, 179 €,
       2018–19:
       <https://web.archive.org/web/20191120052504/https://raed-slacklines.com/helium-ultralight-set>
-    - [ ] **Ultralight Travel Slackline Set**: 20 m MOTM light (19 mm), 6 mm quicklinks, Helium
+    - [x] **Ultralight Travel Slackline Set** (#76): 20 m MOTM light (19 mm), 6 mm quicklinks, Helium
       slings, 1090 g, 106.67 €, 2020–21, no tree protection:
       <https://web.archive.org/web/20210926134532/https://raed-slacklines.com/ultralight-travel-slackline-set>
-    - [ ] **HUMBOLDT – Ultralight Travel Slackline Set**: Eclipse webbing, RODEO weblock, Eclipse
+    - [x] **HUMBOLDT – Ultralight Travel Slackline Set** (#77): Eclipse webbing, RODEO weblock, Eclipse
       soft release, felt patches, 780 g. It was a 15 m kit in the archive (129.22 €) and is 20 m on
       the live shop (130 €). `manufacturer_not_for_highline` is set from the page's "RODEO may
       never be used in highlines":
       <https://raed-sports.com/products/humboldt-ultralight-travel-slackline-set>
-    - [ ] **Parkline Comfort Set**: 30 m Rainbow, RODEO weblock, soft release, soft shackles,
+    - [x] **Parkline Comfort Set** (#78): 30 m Rainbow, RODEO weblock, soft release, soft shackles,
       felt tree protection, 180 €, 2023–:
       <https://raed-sports.com/products/parkline-comfort-set>
-    - [ ] **Yoga Slackline Set**: 25 m MOTM, carabiners, D-rings, felt tree protection, 140 €,
+    - [x] **Yoga Slackline Set** (#79): 25 m MOTM, carabiners, D-rings, felt tree protection, 140 €,
       2020–: <https://raed-sports.com/products/yoga-slackline-set>
-    - [ ] **Ninja Slackline Set**: 30 m Rainbow (Cumulus in 2020), shackles, D-rings, felt tree
-      protection, 139 €, 2020–. It is pitched at "your first tricks", so **decide between starter
-      kit and trickline kit**. Raed files it with the beginner sets:
+    - [x] **Ninja Slackline Set** (#80): 30 m Rainbow (Cumulus in 2020), shackles, D-rings, felt
+      tree protection, 139 €, 2020–. Approved as a starter kit, where Raed files it, though it is
+      pitched at "your first tricks":
       <https://raed-sports.com/products/ninja-slackline-set>
-    - [ ] **Rodeoline Beginner Set**: 25 m Helium, RODEO weblock, 2 slings, 2 carabiners, 130 €,
+    - [x] **Rodeoline Beginner Set** (#81): 25 m Helium, RODEO weblock, 2 slings, 2 carabiners, 130 €,
       2020–. It has no tensioning system (`Other`):
       <https://raed-sports.com/products/rodeoline-beginner-set>
   - Tree protectors

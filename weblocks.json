@@ -5583,5 +5583,42 @@
         "description": "You don't want any additional weight dangling around in your loose rodeoline. That's why the ultralight RODEO weblock definitely contains more air than metal. An incredible weight of merely 136 gram makes this without any doubt the lightest fully functional weblock on the planet. And yet it's strong: With a MBS of 13 kN this weblock is precisely engineered for your surfy rodeo lines. ROCsolid steel provides a high safety margin and a huge hollowtech center diverter preserves the strength of your webbing. Of course it's easy to pretension too. So what are you waiting for? Go lightweight and surf BIIIG!",
         "manufacturer_not_for_highline": true,
         "manufacturer_not_for_highline_source": "https://web.archive.org/web/20190721132040/https://raed-slacklines.com/news/new-rodeo-weblock-released/"
+    },
+    {
+        "id": 144,
+        "brand": "Raed Slacklines",
+        "name": "PRO Weblock X-Link",
+        "style": "Tensionable Weblock",
+        "specifications": {
+            "Weight": "389gr",
+            "MBS": "62kN",
+            "Anchor connection type": "Sling",
+            "Material": "High Strength Steel",
+            "WLL": "15kN",
+            "Webbing connection type": [
+                "Push Pin",
+                "Removable pin"
+            ],
+            "Compatible webbing width": "24mm - 26mm",
+            "Diverter diameter": "35mm",
+            "Usage": [
+                "Slackline",
+                "Highline",
+                "Longline",
+                "Rodeoline",
+                "Low Tension lines"
+            ]
+        },
+        "pricing": [
+            {
+                "text": "1 unit and above : 109 EUR"
+            }
+        ],
+        "date_introduced": null,
+        "product_url": "https://web.archive.org/web/20191120052510/https://raed-slacklines.com/pro-weblock-x-link",
+        "active": false,
+        "notes": "A version of the PRO Weblock #65 with the X-Link anchor of the PRO pulley system, which takes a Dyneema whoopie sling directly with no shackle (patented, per the page). From its own page (Wayback 2019-01-25 to 2019-11-20, English and German): hollowtech centre diverter, 389 g, 109 €; that page gave MBS 75 kN, set here to #65's 62 kN like #65 itself. Material, WLL, pin types, webbing width, diverter and usage are #65's, which this page does not state.",
+        "description": "The PRO weblock is the perfect compagnon to our PRO pulley system. It doesn't need any shackle. Attach it directly to an ultralight Dyneema whoopie sling and you have a perfect slackline anchor. The hollowtech center diverter makes this masterpiece of engineering one of the lightest anchorpoints in the market. And with a MBS of 75 kN it is extremely strong.",
+        "version": "X-Link"
     }
 ]
