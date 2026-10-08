@@ -1,9 +1,8 @@
 # Proposal to the ISA — editing SlackData together
 
 **DRAFT, not sent.** A non-technical summary of [LIVE_EDITING_PLAN.md](LIVE_EDITING_PLAN.md), to
-get the ISA's input before anything technical is requested. The technical request
-([infra/ISA_ROLE_REQUEST_LIVE_EDITING.md](infra/ISA_ROLE_REQUEST_LIVE_EDITING.md)) waits until
-this has had feedback. The email is below the line.
+get the ISA's input. The technical request (role policy, app client, table design) was sent to
+the ISA's technical contact separately on 2026-10-07. The email is below the line.
 
 ---
 

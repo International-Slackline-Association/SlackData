@@ -10,26 +10,37 @@ Non-phase engineering tasks not tracked in [PLAN.md](PLAN.md) (frontend roadmap)
   test certificates in `gear-manuals/`). The products below are Landcruising's own and have no row.
   "(DE)" means the only working capture is German, so there is no description to take.
 
+  **Every product below is staged for review in the local dev DB** (2026-10-07): `candidates/`
+  (untracked, git-excluded) holds them in seed format with temporary ids 9001+, and
+  `python3 candidates/stage.py apply|revert|status` puts them in or takes them out. Items with
+  only a name and no working capture are in the next-but-one section instead.
+
+  Socials, for gear announcements with photos and specs: Facebook
+  <https://www.facebook.com/landcruising.slackline> (from `manufacturers.json`). No Instagram
+  found: Landcruising closed in 2018, and `@landcruising` is an unrelated account.
+
   - Webbings
     - [ ] **Nova Magic 25** — red White Magic, PES flat, 31 kN, 57 g/m, 6 % at ⅓ MBS (DE):
       <https://web.archive.org/web/20100328221304/http://www.landcruising-slacklines.de/03-02-01-nova-magic-25mm-meterware.html>
     - [ ] **White Magic 35mm** — 35 kN, sold as 16 m with sewn loop (DE):
       <https://web.archive.org/web/20121026070842/http://www.landcruising-slacklines.de/de/shop/2-slackline-band/26-polyester/132-white-magic-35mm-mit-schlaufe>
-    - [ ] **Nova Magic 35** — no working capture (the only one is "product not found"); the Starter
-      Flex page names it as the red 35 mm line.
     - [ ] **Sonic** (1st gen) — PA core-sheath, 31.5 kN, 63 g/m, 13.4 % at 10 kN (DE):
       <https://web.archive.org/web/20120822061828/http://www.landcruising-slacklines.de/de/shop/2-slackline-band/29-polyamid/283-sonic-25mm-meterware>.
       Sonic 2.0 is held already, as Aki Slacklines **#5**.
-    - [ ] **Verve 25, red (2010)** — 31 kN, 58 g/m, 7 % at 10 kN. A different product from the
-      yellow Verve 25 we hold as **#151** (11 % at 10 kN):
+    - [x] **Verve 25, red (2010)** — merged into **#151**, renamed **Verve Red** (2026-10-07). The
+      red page's specs won (31 kN, 7 % at 10 kN, 58 g/m, 1.49 €/m); the 2014 page #151 used to cite
+      ("shiny yellow", 11 % at 10 kN, 59 g/m) is kept in its notes:
       <https://web.archive.org/web/20110722171318/http://www.landcruising-slacklines.de/en/shop/2-slackline-band/26-flachband-25/148-verve-25mm-meterware?limitstart=0>
   - Weblocks
-    - [ ] **Lockman** — stainless pin, 75 g, >30 kN, 10 kN WLL:
+    - [ ] **Lockman** — stainless pin, 75 g, >30 kN, 10 kN WLL; not for highlines per its manual
+      (rev 1.1, German, staged as its manual):
       <https://web.archive.org/web/20141231113021/http://www.landcruising-slacklines.de/en/shop/12-bandhalter/48-landcruising-lockman>
-    - [ ] **Lockman 2.0** — 93 g, >30 kN, 8 kN WLL:
-      <https://web.archive.org/web/20161007043044/http://www.landcruising-slacklines.de/en/shop/34-neue-produkte/486-landcruising-lockman-20>
-    - [ ] **Lockman Air** — no page of its own; sold as a combo on the AirBow page:
-      <https://web.archive.org/web/20161009010520/http://www.landcruising-slacklines.de/en/shop/6-/38-/491-landcruising-airbow>
+      (German: <https://web.archive.org/web/20130318032941/http://www.landcruising-slacklines.de/index.php?category_id=12&page=shop.product_details&product_id=48&Itemid=34&option=com_virtuemart&vmcchk=1&Itemid=34>,
+      manual: <https://web.archive.org/web/20140702200322/http://www.landcruising-slacklines.de/data/docu/manuals/lockman%20manual-rev1.1.pdf>)
+    - [ ] **Lockman 2.0** — 93 g, >30 kN, 8 kN WLL. Also sold by Aki as "Aki Lockman 2": one
+      product, one row (Landcruising, Aki as seller). Only photo is 200 × 200; its own manual
+      ("Manual-Lockman 2.0") is linked from the page but not yet found:
+      <https://web.archive.org/web/20161103153205/http://www.landcruising-slacklines.de/en/shop/34-neue-produkte/486-landcruising-lockman-20>
     - [ ] **Puma 32** (1st gen) — 30–32 mm, 380 g, >59 kN, 14 kN WLL:
       <https://web.archive.org/web/20120822095728/http://www.landcruising-slacklines.de/en/shop/4-harte-ware/12-fixierer/285-landcruising-puma>
     - [ ] **Linelocker 25** — chain link, 60 g, 31.5 kN WLL:
@@ -47,7 +58,8 @@ Non-phase engineering tasks not tracked in [PLAN.md](PLAN.md) (frontend roadmap)
       <https://web.archive.org/web/20110722151940/http://www.landcruising-slacklines.de/en/shop/1-slackline-sets/31-cruiser-serie/113-cruiser-slackline-set-30m>
     - [ ] **Cruiser 2.0 Classic** — 25 mm × 30 m yellow Verve, Ellington, 5.4 kg:
       <https://web.archive.org/web/20161007043021/http://www.landcruising-slacklines.de/en/shop/34-neue-produkte/369-cruiser-20-classic-slackline-set-33m>
-    - [ ] **Cruiser 2.0 Vari** — capture not yet opened; check it shows the product:
+    - [ ] **Cruiser 2.0 Vari** — 25 mm, webbing chosen separately (none / 20–50 m), 2 Lockman 2,
+      ≈5.4 kg; the capture shows the product:
       <https://web.archive.org/web/20161007042747/http://www.landcruising-slacklines.de/en/shop/34-neue-produkte/370-cruiser-20-vari-25mm-slackline-set>
   - Tree protectors
     - [ ] **TreePlus 2.0** — 2 m × 18 cm, 600 g/pair:
@@ -59,8 +71,12 @@ Non-phase engineering tasks not tracked in [PLAN.md](PLAN.md) (frontend roadmap)
     - [ ] **Webbing #152 "Wave Tube  32"** is not a duplicate of Matrix Outer #115 after all: it is
       Aki's Wave Tube 32, with the wrong brand, material and width. See the Aki item below.
     - [ ] **Aloha #164** still links the live `aki-slacklines.de` Tidal page; it was never archived.
-    - [ ] **Photos still missing**: Matrix Outer, Puma 2.0 (the archive fetches failed;
-      worth a slower retry), and Wizard and Wave Tape 19, which have no usable capture at all.
+    - [ ] **Wave Tape 19 #117 was merged into Wave Tube 19 #118** (2026-10-07): one product in two
+      colours. Where they disagreed (flat vs tubular, 18 vs 17 kN, 38 vs 36 g/m) the Wayback page
+      of #118 won; #117's red photo is now #118's second. `/webbing/117` now 404s, as 209/210 do.
+    - [ ] **Photos too small**: Matrix Outer #115 has only two 150 × 85 thumbnails (the shop's
+      related-products images); larger ones would be better. (Wizard #8 and Puma 2.0 #66, missing
+      until now, have photos supplied by the operator, 2026-10-07.)
     - [ ] **Stretch curves that disagree with the maker's own table** were left as they are: White
       Magic #6 (maker gives 4.8 % at 10 kN, the seed 5.1 %) and Core 1 #3 (maker gives 2.7 % at
       10 kN, the seed 2.8 %). The differences are small, but a decision is needed on which source wins.
@@ -74,23 +90,21 @@ Non-phase engineering tasks not tracked in [PLAN.md](PLAN.md) (frontend roadmap)
   Raptor was added as weblock **#134** in the same pass. "(DE)" means the only working capture is
   German, so there is no description to take.
 
+  The products below are staged for review the same way as the Landcruising ones (`candidates/`,
+  ids 9001+).
+
+  Socials, for gear announcements with photos and specs (linked from Aki's own shop footer):
+  Facebook <https://www.facebook.com/akislack>, Instagram <https://www.instagram.com/akislack/>,
+  YouTube <https://www.youtube.com/channel/UCw5wJslJNS96DMOKNcg2LTA>.
+
   - Webbings
     - [ ] **Soma** — PES flat 3-layer, 24.5 mm, 2.7 mm, 32.5 kN MBS (34 kN average), 6.5 kN WLL,
       8.7 % at 10 kN, 62 g/m, 1.40 €/m on sale, made in Germany (DE); the page links a manual:
       <https://web.archive.org/web/20240713154858/https://aki-slacklines.de/de/slacklineband/polyester/186/aki-soma-slacklineband?c=6>
-    - [ ] **Starter 35** — the webbing from the Starter kits: PES flat 3-layer, 35 mm, 2.3 mm,
-      34 kN (32 kN with sewn loop), 6 kN WLL, 72 g/m, 2.00 €/m (DE):
-      <https://web.archive.org/web/20221006062712/https://aki-slacklines.de/de/slacklineband/polyester/193/aki-starter-35-slacklineband>
-    - [ ] **Polar B-quality** — a fixed-length seconds version of Polar #177. Listed in the old
-      shop as `/en/webbing/polyester/217/aki-polar-webbing-b-quality-fixed-length`, but no capture
-      of the page itself. Probably a note on #177 rather than a row.
   - Weblocks
-    - [ ] **Lockman 2** — Landcruising's Lockman 2.0 under Aki's name (same 93 g, 30 kN, 8 kN WLL;
-      64 × 18 × 18 mm, 12 mm diverter, stainless, made in Germany, 16.50 €). One product, so one
-      row: settle the brand before importing either entry (DE):
+    - [x] **Lockman 2** — settled: it is Landcruising's Lockman 2.0, staged under Landcruising with
+      Aki as a seller (see the Landcruising item). Aki's page (64 × 18 × 18 mm, 16.50 €, DE):
       <https://web.archive.org/web/20210728193156/https://aki-slacklines.de/de/hardware/bandhalter/13/aki-lockman-2-bandhalter?c=13>
-    - [ ] **Lockman Air** — in the old shop's sitemap (`/de/hardware/bandhalter/81/aki-lockman-air-bandhalter`)
-      but no working capture; the Landcruising item above has the AirBow combo page.
   - Tree protectors (we hold no Aki tree protectors). Polypropylene felt, 5 mm, Velcro closure, sold
     singly, not in pairs.
     - [ ] **Tree Protection Small** — 100 × 15 cm, no loops, 100 g, trees up to 0.9 m, blue or
@@ -102,14 +116,13 @@ Non-phase engineering tasks not tracked in [PLAN.md](PLAN.md) (frontend roadmap)
     - [ ] **Tree Protection XL** — 250 × 25 cm, 4 sewn loops, 360 g, trees up to 2.3 m, black,
       14.50 €:
       <https://web.archive.org/web/20250121184542/https://aki-slacklines.de/en/products/aki-slackline-treepro-xl>
-    - [ ] **Tree Protection Large** — old shop only (`/en/soft-rigging/tree-protection/154/aki-tree-protection-large`),
-      no capture of the page. Possibly what became the XL; unconfirmed.
-  - Not a gear type we have: T-Leash Cobra, sewn loops, the T-Loop backup split, Backup Extenders,
+  - Not a gear type we have: Starter 35 (the 35 mm line from the Starter kits, not a webbing
+    in its own right), T-Leash Cobra, sewn loops, the T-Loop backup split, Backup Extenders,
     Soft Release Light, Soft Thimble, slings, Zentube centering bushings, and the third-party gear
     Aki resold (shackles, Ticket to the Moon hammocks).
   - Loose ends on rows we hold
-    - [ ] **Aki is recorded as a seller** (`gear_sellers`) on the seven Landcruising webbings its
-      shops sold: White Magic #6, Unicorn #7, Wave Tube #116, Wave Tube 19 #118, Verve 25 #151,
+    - [ ] **Aki is recorded as a seller** (`gear_sellers`) on the eight Landcruising webbings its
+      shops sold: White Magic #6, Unicorn #7, Wizard #8 (on the operator's word, 2026-10-07), Wave Tube #116, Wave Tube 19 #118, Verve Red #151,
       Wave Tube 32 #152 and Aloha/Tidal #164. Aki's founder founded and ran Landcruising (2008–2018,
       <https://web.archive.org/web/20241204015541/https://aki-slacklines.de/en/pages/about-aki-slacklines>).
       The duplicate Aki rows White Magic #209 and Unicorn #210 were merged into #6 and #7
@@ -144,6 +157,188 @@ Non-phase engineering tasks not tracked in [PLAN.md](PLAN.md) (frontend roadmap)
       Purple Gold #202, Nomad #203 and Lynx 5 #53. Shopify-era captures exist for Polar and Purple
       Gold (`/en/products/aki-polar-slackline-webbing`, `/en/products/aki-purple-gold-slacklineband`).
       Nomad's old page was never archived.
+
+- [ ] **Aki / Landcruising gear known by name only — no working capture.** Not staged: each has
+  a name and a URL at most, no page with specs or a photo. Each needs a capture found (a
+  different Wayback timestamp, the Shopify-era URL, a dealer's copy) before it can become a row.
+  - [ ] **Nova Magic 35** (Landcruising) — the only capture is "product not found"; the Starter
+    Flex page names it as the red 35 mm line.
+  - [ ] **Lockman Air** (Landcruising) — no page of its own and no specs of its own; it appears
+    only as a +20 € combo option on the AirBow page (WLL 6 kN in combination):
+    <https://web.archive.org/web/20161009010520/http://www.landcruising-slacklines.de/en/shop/6-/38-/491-landcruising-airbow>.
+    A 200 × 200 photo survives from the later Landcruising site:
+    <https://web.archive.org/web/20180921083857im_/http://landcruising-slacklines.de/media/image/f3/53/63/Landcruising-Slacklines-Landcruising-Lockman-Air-Webbing-Anchor-01_200x200.jpg>
+  - [ ] **Lockman Air** (Aki) — in the old shop's sitemap
+    (`/de/hardware/bandhalter/81/aki-lockman-air-bandhalter`), no capture. Probably the same
+    product as the Landcruising one.
+  - [ ] **Polar B-quality** (Aki) — a fixed-length seconds version of Polar #177, listed in the old
+    shop as `/en/webbing/polyester/217/aki-polar-webbing-b-quality-fixed-length`, no capture.
+    Probably a note on #177 rather than a row.
+  - [ ] **Tree Protection Large** (Aki) — old shop only
+    (`/en/soft-rigging/tree-protection/154/aki-tree-protection-large`), no capture. Probably the
+    XL: the XL's photo file is named `…-Baumschutz-Large-black.jpg`.
+
+- [ ] **Slacktivity gear we don't hold, and loose ends from the archive pass (2026-10-08).** Every
+  Wayback capture of slacktivity.com, .ch, .de and .at was swept: the Joomla shop (2009–16), the
+  Magento shop (2015–21), the WooCommerce shop (2021–) and its product sitemaps (2022–26), and the
+  German Shopify shop on slacktivity.de. We already held 40 Slacktivity rows, so only five products
+  turned out to be missing. All five are still sold, so each row links the live page, with the
+  Wayback capture in its notes.
+
+  The products below are staged for review the same way as the Landcruising ones (`candidates/`,
+  ids 9000+; `stage.py` now handles leash rings too).
+
+  - Webbings
+    - [ ] **Super Jumpline**: 37 mm, 36 kN, 5 % at 10 kN, 64 g/m, 2.98 €/m. The fibre and the
+      construction are not stated anywhere, so both are null. It is the webbing in the held Super
+      Jumpline set (tricklinekit #5):
+      <https://slacktivity.com/shop/super-jumpline-trickline-webbing/>
+  - Leash rings
+    - [ ] **Slackline Ring**: aluminium, 60/80 mm, 51 g, 20 kN, not PSA certified, 11 €. It was
+      sold earlier as "HighlineRing Green" (2016–17) and "AluminiumRing" (2020–21). The 2017 page
+      offers it as a multiplier or "double as a set of leashrings". **Decide whether it is a leash
+      ring at all.** It is not the held HighlineRing #26, which is 39 kN and ISA certified:
+      <https://slacktivity.com/shop/slackline-ring/>
+  - Starter kits
+    - [ ] **Allround Light INOX | 15m**: 15 m × 37 mm, a stainless ratchet, V-Loops, no slings or
+      tree protectors (it is made for posts and wall mounts), 99 €:
+      <https://slacktivity.com/shop/allround-light/>
+    - [ ] **Ice & Fire | 25m Slackline Set**: 25 m × 38 mm, white or orange Super Jumpline, two
+      stainless ratchets, slings and tree protectors, 299 €. It is marketed for beginners, so it is
+      staged as a starter kit, but two ratchets on 25 m would fit tricklinekits as well:
+      <https://slacktivity.com/shop/ice-fire-25m-slackline-set/>
+    - [ ] **Experience Light INOX | 30m**: 30 m × 37 mm Experience webbing and two stainless
+      ratchets, no slings, 159 € (DE):
+      <https://slacktivity.de/products/experience-light>
+  - Looked at and not staged
+    - **Variants and renames of held rows**: the Screw-gate HangOver (= HangOver-S #4, also sold
+      with a "Black Gate"); Traveler-40m, Traveler-T20 40m and GREEN-T20 20m (lengths of GREEN T20
+      #225); Super Jumpline trickline kit 25/50/70 m and Slackline-Set superJumpline (= #5);
+      Allround, Allround-2, Allround-3 (= #14); Experience-2 (= #31); IUJ Slackline YOGA Set (the
+      same 30 m pinkTube and HangOver-pulley set as #60, with IUJ branding); TreeProtection 3.0, TreeProtector V3 and the 3L set (see the loose
+      ends); AcroLine 8 m and 12 m sets (sets of the held AcroLine #222, set up untensioned).
+    - **LSD-T20** (20 mm nylon tube, 14 m with a sewn loop, 12 kN, 28 g/m): the GREEN-T20 webbing
+      with an LSD sublimation print, and the line in the Traveler kit #62. It was not staged
+      because we merged Wave Tape 19 into Wave Tube 19 as one product in two colours. **Decide
+      whether it is a colourway of #225 or a row of its own**:
+      <https://web.archive.org/web/20200919192803/https://www.slacktivity.com/lsd-t20>
+    - **Type X Highline Webbing**: pinkTube #61 sewn to LSDTube #189 or to a 43 g/m PES backup. It
+      is an assembly of held webbings, not a new one:
+      <https://slacktivity.com/shop/type-x-highline-webbing/>
+    - **Longer than any starter kit we hold (max 35 m)**, like the Landcruising longline kits:
+      Expert 50/70 m and Expert Pro, Pro kit 50–100 m, Playline set 50–100 m, Lightning 40 m,
+      Rodeo 40 m, Park50/Park100, redPark/pinkPark/LSDpark longline kits, HangOverPulley longline
+      sets, Highline/Tree Highline/Rock Highline kits, Highline Trickzone Pro setup.
+    - **Not a gear type we have**: Weekend Warrior (ninja line), DaVinci, Saltonator, ActiveCube,
+      posts and wall mounts, the anti-theft slackline locks (small and large), bigGrip/smallGrip
+      rope ascenders, soft releases, rigging plates, static rope, slings, shackles, bungees, the
+      HighlineTool, and the X-Connection (a sewing service).
+    - **Made by someone else and resold by Slacktivity**, so possible co-listings rather than rows:
+      Slack Pro! LineGrip G4/G5 and HighlineGrip G2 (Andy Riedrich's LineGrip, "Black Edition"),
+      Souz Slackline Snatch 2.2, Edelrid Eddy.
+  - Loose ends on rows we hold
+    - [ ] **Low stretch Webbing #157 and PRO #223 look like one webbing**, both 37 mm PES, 3 % at
+      10 kN and 64 g/m. Slacktivity has called it "Low stretch 37 mm" (2017), "lowStretch" / "PRO
+      50m–100m" (2019–21) and now **Playline** (slacktivity.ch, 50–100 m, 32 kN, 1 m markers).
+      #157 is `active: false` with no URL, but the webbing is still sold:
+      <https://slacktivity.ch/shop/playline-slacklineband/>
+    - [ ] **Tree protector versions are tangled.** #10 matches today's TreeProtection Set (240 ×
+      16 cm, 5 mm, 340 g). #11 "V2" (13 cm, 3 mm) matches what the shop sold as TreeProtection
+      3.0 (SKU TREE-3, 12.5 cm, 340 g) and now sells on .ch as TreeProtector V3 (13.5 cm, 315 g).
+      #10 and #11 share a URL.
+    - [ ] **Slacktivity as a seller**: LineGrip G5 and HighlineGrip G2 (Slack Pro! rows) and Snatch
+      2.2 (Souz) are candidates for `gear_sellers`.
+
+- [ ] **Raed Slacklines gear we don't hold, and loose ends from the archive pass (2026-10-08).**
+  Every Wayback capture of raed-slacklines.com was swept: the Magento 1 shop (2018–19), the
+  Magento 2 shop (2020–25), its category pages year by year, and the German `/de/` pages. The
+  archive holds nothing before 2018 (raed.de, captured in 2011, is the climbing business). The live
+  Shopify shop on raed-sports.com was read through its `products.json` as a cross-check, and is
+  where the photos of products still sold come from. We already held 25 Raed rows, and every Raed
+  webbing in the archive turned out to be one of them.
+
+  The products below are staged for review the same way as the Landcruising ones (`candidates/`,
+  ids 9000+). Products still sold link the live page, with the Wayback capture in their notes.
+
+  - Weblocks
+    - [ ] **BLNC Weblock**: steel, hollow aluminium diverter, one PushPin plus big shackle holes,
+      284 g, 50 kN (2019) / 62 kN (2021), WLL 10 kN on its label, 89.95 €, 2019–21. The RigLock
+      #130 replaced it:
+      <https://web.archive.org/web/20211126224802/https://raed-slacklines.com/blnc-weblock>
+    - [ ] **PRO Weblock X-Link**: the PRO weblock with the pulley system's X-Link, which takes a
+      Dyneema whoopie directly with no shackle. 389 g, 75 kN, 109 €, 2019, sold alongside #65:
+      <https://web.archive.org/web/20191120052510/https://raed-slacklines.com/pro-weblock-x-link>
+    - [ ] **RODEO weblock (steel)**: the first RODEO, a steel frame, 114 g / 9 kN at its launch
+      (preorders Dec 2017), 136 g / 13 kN from mid-2019, 59.95 €. The same URL describes the
+      aluminium #73 from 2021-07 on. **Decide whether it is a row of its own or a `version` note on
+      #73**:
+      <https://web.archive.org/web/20210117055054/https://raed-slacklines.com/rodeo-weblock>
+  - Starter kits
+    - [ ] **Travel Slackline Set 20 m**: 25 m MOTM, aluminium carabiners, D-ring linelockers,
+      slings, tree protectors, 2100 g, 139.95 €, 2018–19:
+      <https://web.archive.org/web/20191120052521/https://raed-slacklines.com/travel-slackline-set-20m>
+    - [ ] **Helium Set**: 20 m Helium, Dyneema whoopies, aluminium carabiners, 1370 g, 179 €,
+      2018–19:
+      <https://web.archive.org/web/20191120052504/https://raed-slacklines.com/helium-ultralight-set>
+    - [ ] **Ultralight Travel Slackline Set**: 20 m MOTM light (19 mm), 6 mm quicklinks, Helium
+      slings, 1090 g, 106.67 €, 2020–21, no tree protection:
+      <https://web.archive.org/web/20210926134532/https://raed-slacklines.com/ultralight-travel-slackline-set>
+    - [ ] **HUMBOLDT – Ultralight Travel Slackline Set**: Eclipse webbing, RODEO weblock, Eclipse
+      soft release, felt patches, 780 g. It was a 15 m kit in the archive (129.22 €) and is 20 m on
+      the live shop (130 €). `manufacturer_not_for_highline` is set from the page's "RODEO may never be
+      used in highlines":
+      <https://raed-sports.com/products/humboldt-ultralight-travel-slackline-set>
+    - [ ] **Parkline Comfort Set**: 30 m Rainbow, RODEO weblock, soft release, soft shackles,
+      felt tree protection, 180 €, 2023–:
+      <https://raed-sports.com/products/parkline-comfort-set>
+    - [ ] **Yoga Slackline Set**: 25 m MOTM, carabiners, D-rings, felt tree protection, 140 €,
+      2020–: <https://raed-sports.com/products/yoga-slackline-set>
+    - [ ] **Ninja Slackline Set**: 30 m Rainbow (Cumulus in 2020), shackles, D-rings, felt tree
+      protection, 139 €, 2020–. It is pitched at "your first tricks", so **decide between starter
+      kit and trickline kit**. Raed files it with the beginner sets:
+      <https://raed-sports.com/products/ninja-slackline-set>
+    - [ ] **Rodeoline Beginner Set**: 25 m Helium, RODEO weblock, 2 slings, 2 carabiners, 130 €,
+      2020–. It has no tensioning system (`Other`):
+      <https://raed-sports.com/products/rodeoline-beginner-set>
+  - Tree protectors
+    - [ ] **Felt TreeProtection**: sold in pairs, 9.99 €, 300 g, 2020–. There are no dimensions
+      and no photo anywhere (the archive has only placeholders). In 2019 it was sold singly as
+      "treeprotection feltmat" for 7.99 €:
+      <https://raed-sports.com/products/2-felt-treeprotection>
+  - Looked at and not staged
+    - **Longline kits**, which fit no gear type we have (as with Landcruising and Slacktivity). They
+      come with pulley systems: **Beginner Longline Set** (BLNC 5:1, BLNC weblock, 50 m Parsec,
+      2019–, out of stock now), **Advanced Longline Set** (BLNC 9:1, TiLock, 2020–), **PRO
+      Longline Set** (formerly "PRO Longline-Set Alpha", PRO 9:1, PRO weblock, TreePRO, 2019–21)
+      and **Ultralight Longline Set** (PRO 5:1, Helium, 2020). The details, prices and photos for
+      all four were gathered before they were dropped and can be restored.
+    - **Variants and renames of held rows**: Fun Slackline Set 20 m (2019) is the FUN Kit #33.
+      "PRO weblock \*\*\* new \*\*\*" and `pro-highline-weblock` are #65. The TiLock Titanium
+      Alpine Highline Weblock is the TiLock rows. Dyneemite PRO 19mm is #229. Cumulus pure, MOTM
+      light pure and Helium incl. loop are #60, #186 and #59. Rainbow rest pieces and every
+      "used" or "B-Ware" listing are also covered by held rows.
+    - **Not a gear type we have**: the PRO, BLNC and TiPS pulley systems (5:1 and 9:1) and their
+      multipliers. Also the RopeGrabber, which grabs pulley rope, not webbing. Also rigging plates,
+      Eclipse and Helium soft releases, anchor slings (RED, Helium, Parsec, Ultra, Dyneema
+      whoopies), soft shackles, the PRO and ALPINE leashes and leash sets, TrickZone sleeves,
+      highline freestyle and split setups (assemblies of held webbings), PushPins, sewing and
+      testing services, and the ZAED climbing devices.
+    - **Rodeoline Set** (live shop only): an empty bundle placeholder with no content.
+    - **Made by someone else and resold by Raed**: Slack Pro! LineGrip G5 (held), the Seasure D-Ring
+      linelocker, Kong and Maillon Rapide quicklinks, Omega shackles, Gleistein, Teufelberger and
+      Skylotec ropes, Edelrid, and Spanset.
+  - Loose ends on rows we hold
+    - [ ] **RODEO #73's `date_introduced` (Dec 2017)** is the launch of the *steel* RODEO. The
+      aluminium one we hold first appears on 2021-07-25.
+    - [ ] **PRO Weblock #65 claims 100 kN** (from SlackDB). Raed's own page says 75 kN in 2019 and
+      62 kN from 2021, with 306 g throughout.
+    - [ ] **Dyneemite PRO #229 has no URL or price**, but raed-slacklines.com sold it new until at
+      least 2025-09 (3.79 €/m in 2022, 3.99 €/m in 2025):
+      <https://web.archive.org/web/20250916235734/https://raed-slacklines.com/dyneemite-pro-ultralight-highline-project-webbing>
+    - [ ] **SuperMOTM #158 has no URL**, and its page is archived:
+      <https://web.archive.org/web/20190718073229/https://raed-slacklines.com/supermotm-threaded-tubular-nylon-slackline-webbing>.
+      No page for **#FFF #153** turned up under any slug.
+    - [ ] **Raed as a seller**: LineGrip G5 (a Slack Pro! row) is a candidate for `gear_sellers`.
 
 - [ ] **Adjudicate the remaining missing-gear candidates.** [MISSING_GEAR_REVIEW.md](MISSING_GEAR_REVIEW.md)
   has one section left from the 2026-07-31 deep sweep: **Starter / Longline / Highline Kit, 56
@@ -234,8 +429,8 @@ Non-phase engineering tasks not tracked in [PLAN.md](PLAN.md) (frontend roadmap)
   carries a flag any more (CLAUDE.md § ISA certifications, [PR #83](https://github.com/International-Slackline-Association/SlackData/pull/83)).
   So the job's real output is a queue of new certificates to adjudicate, not a DB write. All 17
   certificates we can hold are matched today, including **BC Loop** (leashring 27, the renamed BC
-  Aluminum Leash Ring) and **SlackX Orange** (hand-matched to weblock 58 `Radrigs Orange`: the
-  approval names the seller). What stays unmatched is tracked in the entries below.
+  Aluminum Leash Ring) and **SlackX Orange** (weblock 58, now `SlackX (formerly RadRigs) Orange`
+  — the two brands were merged 2026-10-07). What stays unmatched is tracked in the entries below.
 
 - [ ] **Leashes as a gear type.** Four ISA:37 certificates wait on it: **BC Threaded Highline
   Leash**, **Slacktivity HighlineLeash**, **raed PRO leash** and **raed ALPINE leash**
@@ -345,8 +540,9 @@ Non-phase engineering tasks not tracked in [PLAN.md](PLAN.md) (frontend roadmap)
   - [ ] **Answer counts and dedup before anything renders a seller on a card or in a list.**
     Manufacturer inventory counts ([brandSections.ts](frontend/src/utils/brandSections.ts),
     [useBrandDirectory.ts](frontend/src/hooks/useBrandDirectory.ts)), listing totals and
-    [compare.ts](frontend/src/utils/compare.ts) all assume one row is one product. SlackX reads as
-    **0 items** on the directory today for exactly this reason. Decide whether a seller's items
+    [compare.ts](frontend/src/utils/compare.ts) all assume one row is one product. A seller-only brand would read
+    as **0 items** on the directory for exactly this reason (SlackX did, until it was merged with
+    Radrigs). Decide whether a seller's items
     count toward their inventory **before** the number is on screen and someone quotes it.
 
   **C. The write loop — not built, and deliberately so.**
@@ -367,16 +563,18 @@ Non-phase engineering tasks not tracked in [PLAN.md](PLAN.md) (frontend roadmap)
 
   **The data already carries the problem**, from before anyone tried to. Nine product names were
   held by two brands each, and at least four pairs are plainly one product twice:
-  **EQB / Spider `Bandit SH` and `Bandit SL`** (`weblocks.json` 13+14, 15+16),
+  **EQB / Spider `Bandit SH` and `Bandit SL`** (`weblocks.json` 13+14, 15+16; merged into 13 and
+  15 with Spider as seller on 2026-10-07, without a redirect),
   **Landcruising / Aki `Unicorn` and `White Magic`** (`webbings.json` 6+209, 7+210; merged into
-  6 and 7 with Aki as seller on 2026-10-05, without a redirect), and
+  6 and 7 with Aki as seller on 2026-10-05, without a redirect), Slacklife BC's `HighTech`
+  (`webbings.json` 137, a mistaken duplicate of the `Lion Line` #144; deleted 2026-10-08, without a
+  redirect), and
   **Slack.fr / Slack Pro! `Neon Light`** (100+154), and **Landcruising `Core 2 HS` / Raed
   `TWTMNBN (The Webbing That Must Not Be Named)`** (`webbings.json` 1+263 — Raed's 2019 end-of-stock
   resale under the old slackshop.de nickname, added 2026-10-01; its description links to row 1 via
-  the `[text](/path)` internal-link syntax in `utils/description.ts` as a stopgap until merged). The Bandit pair shows what that costs: the ISA
+  the `[text](/path)` internal-link syntax in `utils/description.ts` as a stopgap until merged). The Bandit pair showed what that costs: the ISA
   pushpin warning is matched to weblocks **12, 13, 15 — all EQB** — so the Spider-badged 14 and 16
-  are the same hardware displayed with a clean record. Whichever of the twins a visitor happens to
-  open decides whether they are warned. (The specific Slack Inov ↔ Spider overlap is *not* visible
+  were the same hardware displayed with a clean record, until the merge. (The specific Slack Inov ↔ Spider overlap is *not* visible
   in the seeds — our SlackDB-era snapshot predates the arrangement — so this one needs sourcing
   before it can be modelled.)
 
@@ -628,6 +826,24 @@ Carried over from LAUNCH_RUNBOOK.md and PHASE4_SHIP_PLAN.md when both were remov
   is a manifest that has to be kept in step with the spec directory — a spec absent from it silently
   never runs — so `npm run shards` verifies every spec is in exactly one shard, and is run by
   `test:unit` and by CI before the matrix is built.
+
+- **Slacklife BC `HighTech` #137 deleted — it was the `Lion Line` #144** (2026-10-08). SlackDB held
+  Slacklife BC's Lion Line twice: once by name, once under its page subtitle ("Lion Line – Hightech
+  Webbing"), with different figures (48 g/m, 39.2 kN, 4.6% @ 10 kN). Confirmed with the Mayor of
+  Squamish. #137 is gone, not merged — its figures were discarded — and #144 now carries the specs
+  from Slacklife BC's own 2017 page (Wayback): 35.6 kN MBS, 7.12 kN WLL, 35 g/m, 8.99 CAD/m, red and
+  white, with that page's description; its stated stretch ("1-4%", no load) is in `notes` only. Id
+  137 is not reused and `/webbings/137` now 404s. The SlackDB capture in `slackdb_archive/` is
+  left as captured.
+
+- **SlackX and Radrigs merged into one brand, `SlackX (formerly RadRigs)`** (2026-10-07). SlackX
+  continues the RadRigs line, so it is the maker of the `Orange` and the `Slackfriend`, not a seller
+  of them. One `manufacturers.json` entry now (Radrigs' `catalog_id` 45, so `/brand/45` and the
+  weblock rows are unchanged; 97 is retired), with SlackX's site, Instagram and address; `Radrigs`,
+  `RadRigs` and `SlackX` alias to it in `brand_aliases.py`, the same way `Slack Pro!` reaches
+  lineGrip. The two `gear_sellers: ["SlackX"]` entries are gone (a maker cannot sell its own gear),
+  the ISA Orange match names the new brand, and image keys stay `radrigs_*`. That closes the
+  "0 items" case below for SlackX.
 
 - **SlackX onboarded as a seller-only manufacturer** (2026-09-02). `local_slackx`, `catalog_id` 97,
   `info@slackx.eu`, named through `gear_sellers` as the seller of both Radrigs weblocks — the
