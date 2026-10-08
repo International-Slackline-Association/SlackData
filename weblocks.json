@@ -2748,7 +2748,7 @@
             "Material": "High Strength Steel",
             "Weight": "306gr",
             "WLL": "15kN",
-            "MBS": "100kN",
+            "MBS": "62kN",
             "Anchor connection type": [
                 "Other",
                 "Soft Release",
@@ -2778,7 +2778,8 @@
         "description": "The PRO Weblock is the result of many years of development at raed slacklines. In this version we added all our technologies to equip you with the best weblock we can imagine.",
         "product_url": "https://web.archive.org/web/20220928094114/https://raed-slacklines.com/pro-weblock",
         "active": false,
-        "style": "Tensionable Weblock"
+        "style": "Tensionable Weblock",
+        "notes": "MBS from Raed's own page: 62 kN (Wayback 2021-22; the 2019 page said 75 kN). SlackDB listed 100 kN. The PRO Weblock X-Link was an X-Link variant of this weblock, sold alongside it in 2019."
     },
     {
         "id": 66,
@@ -3109,7 +3110,7 @@
         "image_url": "/api/gear/image_thumb/3047",
         "details_url": "/gear_details/rodeo_weblock",
         "brand": "Raed Slacklines",
-        "full_name": "Raed Slacklines RODEO weblock",
+        "full_name": "Raed Slacklines RODEO Ultralight Weblock",
         "manufacturer_info": {
             "name": "Raed Slacklines",
             "url": "/manufacturer_details/RaedSlacklines#TAB-IMAGES",
@@ -3132,16 +3133,17 @@
             "Diverter diameter": "30mm",
             "Efficiency": "90%",
             "Usage": "Rodeoline",
-            "Date introduced": "Dec 2017",
+            "Date introduced": "Jul 2021",
             "Manufacturer": "Raed Slacklines",
             "Price (per unit)": "1 unit and above : 64.95 EUR"
         },
-        "date_introduced": 1513720800000,
-        "name": "RODEO weblock",
+        "date_introduced": 1627171200000,
+        "name": "RODEO Ultralight Weblock",
         "description": "You don't want any additional weight dangling around in your loose rodeoline. An incredible weight of merely 57 gram makes RODEO without any doubt the lightest fully functional weblock on the planet. And yet it's strong: With a MBS of 17 kN this weblock is precisely engineered for your surfy rodeo lines. The cnc milled 7075 aluminium body provides a high safety margin and a soft shackle attachment point allows for the lowest weighing setup ever. Of course it's easy to pretension too.",
         "product_url": "https://raed-sports.com/products/rodeo-weblock",
         "active": true,
-        "style": "Tensionable Weblock"
+        "style": "Tensionable Weblock",
+        "notes": "The aluminium RODEO, introduced mid-2021: first on raed-slacklines.com/rodeo-weblock in the Wayback capture of 2021-07-25, announced on Raed's blog 2021-08-14 (\"New RODEO weblock\"). It replaced the RODEO Steel Weblock (#143) under the same URL; the Dec 2017 date this row used to carry was the steel one's launch."
     },
     {
         "id": 74,
@@ -4224,9 +4226,10 @@
         },
         "date_introduced": null,
         "name": "T-Rig",
-        "product_url": null,
+        "product_url": "https://web.archive.org/web/20170426192615/http://www.elephant-slacklines.com:80/en/online-shop/slackline-sets/horizon/t-rig",
         "active": false,
-        "style": "Tensionable Weblock"
+        "style": "Tensionable Weblock",
+        "description": "As successor of our trusted T-Lock, the T-Rig is even lighter and can be directly Installed into your pulley sastem. It consists of 30 mm/1” main roller made of pressure-resistant plastic that minimises reduction of the breaking strength of the webbing. The webbing is easily inserted, pretensioned and retightened due to a rotable and removable, yet unlosable, bolt."
     },
     {
         "id": 101,
