@@ -366,7 +366,7 @@ the sellers, deduped). Two surfaces read it:
   price and above the ISA certification block) — each shop's name, linked to its
   brand page. DESIGN.md § Also sold by.
 
-Seeded today: **80 co-listings**, from four sources with very different
+Seeded today: **81 co-listings**, from five sources with very different
 provenance.
 
 - **Slack Inov ↔ Spider Slacklines**, 61: the two companies each sell the
@@ -399,9 +399,13 @@ provenance.
   LineGrip G5 and HighlineGrip G2 (grips 1, 6, 9; Andy Riedrich's LineGrip in a
   "Black Edition") and Souz's Snatch 2.2 (grip 2). Recorded on 2026-10-08 from
   Slacktivity's own shop pages, live and archived.
+- **Slack Pro!** sells Slack.fr's `Neon Light` (webbing 100). It was held twice,
+  once per brand (100+154, same 25 mm / 57 g/m); on 2026-10-08 the Slack Pro!
+  row was folded into the Slack.fr one, Slack.fr's specs kept, and its photo
+  moved onto `slackfr_neon-light` as `-3`, so id 154 no longer exists.
 
-**Not done here:** a redirect for merged rows (the Landcruising/Aki and
-EQB/Spider `Bandit` and `Paddle` pairs were merged without one, so their old ids 404), and anything on the **card** — the card shows the maker, because the
+**Not done here:** a redirect for merged rows (the Landcruising/Aki,
+EQB/Spider `Bandit` and `Paddle`, and Slack.fr/Slack Pro! `Neon Light` pairs were merged without one, so their old ids 404), and anything on the **card** — the card shows the maker, because the
 specs are the maker's, and inventory counts still assume one row is one product,
 so a seller-only brand would read as "0 items" on the manufacturers page
 however much it sells. (SlackX was that case until 2026-10-07, when it and

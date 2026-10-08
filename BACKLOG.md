@@ -683,8 +683,10 @@ Non-phase engineering tasks not tracked in [PLAN.md](PLAN.md) (frontend roadmap)
   **Landcruising / Aki `Unicorn` and `White Magic`** (`webbings.json` 6+209, 7+210; merged into
   6 and 7 with Aki as seller on 2026-10-05, without a redirect), Slacklife BC's `HighTech`
   (`webbings.json` 137, a mistaken duplicate of the `Lion Line` #144; deleted 2026-10-08, without a
-  redirect), and
-  **Slack.fr / Slack Pro! `Neon Light`** (100+154), and **Landcruising `Core 2 HS` / Raed
+  redirect),
+  **Slack.fr / Slack Pro! `Neon Light`** (`webbings.json` 100+154; merged into 100 with Slack Pro!
+  as seller on 2026-10-08, without a redirect — the Slack.fr specs were kept, so 154's 33 kN /
+  3.8 % @ 10 kN readings are gone), and **Landcruising `Core 2 HS` / Raed
   `TWTMNBN (The Webbing That Must Not Be Named)`** (`webbings.json` 1+263 — Raed's 2019 end-of-stock
   resale under the old slackshop.de nickname, added 2026-10-01; its description links to row 1 via
   the `[text](/path)` internal-link syntax in `utils/description.ts` as a stopgap until merged). The Bandit pair showed what that costs: the ISA
