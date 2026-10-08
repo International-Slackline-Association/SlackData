@@ -366,7 +366,7 @@ the sellers, deduped). Two surfaces read it:
   price and above the ISA certification block) — each shop's name, linked to its
   brand page. DESIGN.md § Also sold by.
 
-Seeded today: **70 co-listings**, from three sources with very different
+Seeded today: **80 co-listings**, from four sources with very different
 provenance.
 
 - **Slack Inov ↔ Spider Slacklines**, 61: the two companies each sell the
@@ -395,6 +395,10 @@ provenance.
   2026-10-08 that Spider row (id 60, same 317 g / 14 kN / 50 kN) was folded into
   the EQB one the same way, Slack Inov seller dropped, and its two photos moved
   onto `eqb_paddle-sh` as `-2` and `-3`.
+- **Slacktivity** sells four grips made by others: Slack Pro!'s LineGrip Alu G4,
+  LineGrip G5 and HighlineGrip G2 (grips 1, 6, 9; Andy Riedrich's LineGrip in a
+  "Black Edition") and Souz's Snatch 2.2 (grip 2). Recorded on 2026-10-08 from
+  Slacktivity's own shop pages, live and archived.
 
 **Not done here:** a redirect for merged rows (the Landcruising/Aki and
 EQB/Spider `Bandit` and `Paddle` pairs were merged without one, so their old ids 404), and anything on the **card** — the card shows the maker, because the
