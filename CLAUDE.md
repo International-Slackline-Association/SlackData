@@ -249,7 +249,7 @@ Every gear type carries an **`active: bool | None`** field on its `Base<X>` (so 
 
 **Connectors** (`models/connectors.py`) are the newest type: shackles, carabiners, quicklinks
 and soft shackles, as one model with three filter axes, `connector_style`, `closure` and
-`material` (`ConnectorMaterial`, which includes Dyneema). The decisions behind the fields are in
+`material` (`ConnectorMaterial`, which includes Dyneema/HMPE). The decisions behind the fields are in
 BACKLOG.md § "Connectors as a gear type". The candidates in CONNECTORS_REVIEW.md were reviewed
 on the frontend and approved on 2026-10-11:
 - ids 1–17 are slackline-specific connectors;

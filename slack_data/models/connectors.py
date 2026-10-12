@@ -39,7 +39,7 @@ class ConnectorMaterial(str, Enum):
     STEEL = "Steel"
     STAINLESS_STEEL = "Stainless Steel"
     TITANIUM = "Titanium"
-    DYNEEMA = "Dyneema"
+    DYNEEMA = "Dyneema/HMPE"  # Dyneema is a brand of HMPE; same value as FiberMaterial
     OTHER = "Other"
 
 

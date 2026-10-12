@@ -91,10 +91,10 @@ export const CONNECTOR_CLOSURES = [
 ] as const
 export type ConnectorClosure = (typeof CONNECTOR_CLOSURES)[number]
 
-// models/connectors.py — ConnectorMaterial (MetalMaterial plus Dyneema, for
+// models/connectors.py — ConnectorMaterial (MetalMaterial plus Dyneema/HMPE, for
 // soft shackles)
 export const CONNECTOR_MATERIALS = [
-  'Aluminum', 'Steel', 'Stainless Steel', 'Titanium', 'Dyneema', 'Other',
+  'Aluminum', 'Steel', 'Stainless Steel', 'Titanium', 'Dyneema/HMPE', 'Other',
 ] as const
 export type ConnectorMaterial = (typeof CONNECTOR_MATERIALS)[number]
 
