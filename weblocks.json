@@ -359,10 +359,10 @@
         "id": 9,
         "image_url": "/api/gear/image_thumb/544",
         "details_url": "/gear_details/BANANA",
-        "brand": "Slack house",
-        "full_name": "Slack house BANANA! 2.0",
+        "brand": "Slackhouse",
+        "full_name": "Slackhouse BANANA! 2.0",
         "manufacturer_info": {
-            "name": "Slack house",
+            "name": "Slackhouse",
             "url": "/manufacturer_details/Slackhouse#TAB-IMAGES",
             "country": "Poland",
             "country_flag_url": "/img/flags/PL.png"
@@ -394,7 +394,7 @@
                 "Low Tension lines"
             ],
             "Date introduced": "N/A",
-            "Manufacturer": "Slack house",
+            "Manufacturer": "Slackhouse",
             "Price (per unit)": "1 unit and above : 31.63 EUR"
         },
         "date_introduced": null,
@@ -407,10 +407,10 @@
         "id": 10,
         "image_url": "/api/gear/image_thumb/3117",
         "details_url": "/gear_details/banana_30sr",
-        "brand": "Slack house",
-        "full_name": "Slack house BANANA! 3.0 SR",
+        "brand": "Slackhouse",
+        "full_name": "Slackhouse BANANA! 3.0 SR",
         "manufacturer_info": {
-            "name": "Slack house",
+            "name": "Slackhouse",
             "url": "/manufacturer_details/Slackhouse#TAB-IMAGES",
             "country": "Poland",
             "country_flag_url": "/img/flags/PL.png"
@@ -437,7 +437,7 @@
             "Efficiency": "83%",
             "Usage": "N/A",
             "Date introduced": "N/A",
-            "Manufacturer": "Slack house",
+            "Manufacturer": "Slackhouse",
             "Manufacturer Product Page": "Manufacturer product page",
             "Price (per unit)": "1 unit : 65.13 EUR"
         },
@@ -452,10 +452,10 @@
         "id": 11,
         "image_url": "/api/gear/image_thumb/3118",
         "details_url": "/gear_details/banana_31",
-        "brand": "Slack house",
-        "full_name": "Slack house BANANA! 3.1",
+        "brand": "Slackhouse",
+        "full_name": "Slackhouse BANANA! 3.1",
         "manufacturer_info": {
-            "name": "Slack house",
+            "name": "Slackhouse",
             "url": "/manufacturer_details/Slackhouse#TAB-IMAGES",
             "country": "Poland",
             "country_flag_url": "/img/flags/PL.png"
@@ -482,7 +482,7 @@
             "Efficiency": "85%",
             "Usage": "N/A",
             "Date introduced": "N/A",
-            "Manufacturer": "Slack house",
+            "Manufacturer": "Slackhouse",
             "Manufacturer Product Page": "Manufacturer product page",
             "Price (per unit)": "1 unit and above : 57.40 EUR"
         },
@@ -4731,7 +4731,7 @@
         "product_url": "https://slackhouseshop.pl/en/produkt/simplex-locker/",
         "active": true,
         "description": "A minimalist rectangular locking ring: the shape lets you pick the inner width to match your webbing (~20 mm or ~25 mm) for optimal locking geometry, retaining more than 80 % of the webbing's original strength. Single-wrap locks in one direction while still allowing pre-tensioning the other way; a double wrap all but eliminates slippage.",
-        "notes": "Manufacturer specs (slackhouseshop.pl): MBS 36 kN, WLL 6 kN, 40 g, aluminium, 48 x 44 x 12 mm, inside width 21 / 26 mm. Made in Poland. Works best mounted directly to a shackle, preferably 'Kingpin' style — 12 mm shackle for ~25 mm webbing, 10 mm for ~20 mm. BRAND: sold by Slack house but the shop lists Petram as the producer — filed under the true maker per the retailer rule.",
+        "notes": "Manufacturer specs (slackhouseshop.pl): MBS 36 kN, WLL 6 kN, 40 g, aluminium, 48 x 44 x 12 mm, inside width 21 / 26 mm. Made in Poland. Works best mounted directly to a shackle, preferably 'Kingpin' style — 12 mm shackle for ~25 mm webbing, 10 mm for ~20 mm. BRAND: sold by Slackhouse but the shop lists Petram as the producer — filed under the true maker per the retailer rule.",
         "style": "Fixed Linelocker"
     },
     {

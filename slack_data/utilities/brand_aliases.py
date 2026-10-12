@@ -14,6 +14,8 @@ BRAND_ALIASES: dict[str, str] = {
     "Elephant": "Elephant Slacklines",
     "Equilibrium": "Equilibrium Slacklines (EQB)",
     "slackliner.de": "Slackliner.de",
+    # SlackDB split the name; the brand (and the ISA) write it as one word.
+    "Slack house": "Slackhouse",
     "SlackMountain": "Slack Mountain",
     # Slack Pro! rebranded to lineGrip. The gear seed files still carry the old
     # name, so both spellings must map to the new one directly — canonical_brand()
