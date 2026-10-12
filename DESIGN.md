@@ -920,6 +920,13 @@ frontend/src/data/brandManuals.json         # generated, never hand-edited
   and an alias table mapping one brand's manuals onto another's would be a second place for the
   brand relationships to be stated, and to go stale. Two brands is two files; that is the whole
   duplication the folder allows.
+- **A seller's manual reaches what it resells only where the seller opts in.** Aki Slacklines
+  carried on part of the Landcruising range, and its webbing manual's spec table lists those
+  webbings (Wave 19/25/32, White Magic, Wizard) beside Aki's own, so Aki's manual shows on every
+  webbing that names Aki in `gear_sellers`, whoever made it. Its caption says so: *Applies to all
+  webbings Aki Slacklines sells*. It is a list (`config/sellerManuals.ts`, today just Aki), not a
+  rule for every seller, because Spider and Slack Inov co-list each other's whole range and file
+  one PDF twice: a general rule would show it twice on every page of theirs.
 
 **On the page they are rows in the same card**, appended after the item's own documents, and each
 carries a small gray caption under its title — *Applies to all Balance Community webbings*

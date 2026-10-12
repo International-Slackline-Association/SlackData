@@ -20,6 +20,7 @@ import { getGearType } from '@/config/gearTypes'
 import { type AnyItem } from '@/utils/format'
 import { manualsFor } from '@/utils/images'
 import { groupFor } from '@/utils/groups'
+import { brandsFor } from '@/utils/sellers'
 import NotFoundPage from './NotFoundPage'
 
 export default function GearDetailPage() {
@@ -90,7 +91,7 @@ export default function GearDetailPage() {
           shared with the listing's Detailed view, which would embed one PDF
           viewer per visible item. */}
       <ProductManuals
-        manuals={manualsFor(meta.slug, String(item.brand_name), String(item.name))}
+        manuals={manualsFor(meta.slug, String(item.brand_name), String(item.name), brandsFor(item).slice(1))}
       />
 
       {/* Sits below the spec sheet, on the page where someone is reading the

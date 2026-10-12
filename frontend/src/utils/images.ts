@@ -20,6 +20,7 @@ import brandManuals from '@/data/brandManuals.json'
 import brandAbbrev from '@/data/brandAbbrev.json'
 import { brandManualEntries, manualEntries, type Manual } from './manuals'
 import { getGearType } from '@/config/gearTypes'
+import { SELLER_RANGE_MANUALS } from '@/config/sellerManuals'
 import { slugify } from './slugify'
 
 const manifest = gearImages as Record<string, Record<string, string[]>>
@@ -69,8 +70,9 @@ export function brandKey(brandName: string): string {
 }
 
 // The documents a brand publishes for a whole product class — their webbing
-// manual, not this webbing's manual. [] if none.
-export function brandManualsFor(gearType: string, brandName: string): Manual[] {
+// manual, not this webbing's manual. [] if none. `seller` captions it for a
+// product the brand sells rather than makes (SELLER_RANGE_MANUALS).
+export function brandManualsFor(gearType: string, brandName: string, seller = false): Manual[] {
   const key = brandKey(brandName)
   const files = brandManualManifest[gearType]?.[key] ?? []
   const label = getGearType(gearType)?.label.toLowerCase() ?? gearType
@@ -78,20 +80,29 @@ export function brandManualsFor(gearType: string, brandName: string): Manual[] {
     files,
     key,
     `${IMAGE_BASE_URL}/gear-manuals/${gearType}/brand`,
-    `Applies to all ${brandName} ${label}`,
+    seller ? `Applies to all ${label} ${brandName} sells` : `Applies to all ${brandName} ${label}`,
   )
 }
 
 // Every document we hold for an item, in manifest order, or [] if none: the
-// item's own first, then whatever its maker publishes for the whole range.
-// That order is what the inline embed reads, so a product with a manual of its
-// own shows it, and one with none still shows the range-wide document rather
-// than nothing.
-export function manualsFor(gearType: string, brandName: string, name: string): Manual[] {
+// item's own first, then whatever its maker publishes for the whole range, then
+// the range-wide documents of any seller in SELLER_RANGE_MANUALS. That order is
+// what the inline embed reads, so a product with a manual of its own shows it,
+// and one with none still shows the range-wide document rather than nothing.
+export function manualsFor(
+  gearType: string,
+  brandName: string,
+  name: string,
+  sellers: readonly string[] = [],
+): Manual[] {
   const key = imageKey(brandName, name)
   const files = manualManifest[gearType]?.[key] ?? []
+  const makerKey = brandKey(brandName)
   return [
     ...manualEntries(files, key, `${IMAGE_BASE_URL}/gear-manuals/${gearType}`),
     ...brandManualsFor(gearType, brandName),
+    ...sellers
+      .filter(s => SELLER_RANGE_MANUALS.includes(s) && brandKey(s) !== makerKey)
+      .flatMap(s => brandManualsFor(gearType, s, true)),
   ]
 }
