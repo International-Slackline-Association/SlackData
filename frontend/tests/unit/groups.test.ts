@@ -4,7 +4,7 @@
 
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { collapseGroups, groupFor, isGroupItem, rangeText } from '../../src/utils/groups.ts'
+import { collapseGroups, groupFor, isGroupItem, memberLabel, rangeText } from '../../src/utils/groups.ts'
 
 const row = (id: number, brand: string, extra: Record<string, unknown> = {}) => ({
   id, name: `D Shackle 8mm (${brand})`, brand_name: brand, product_group: 'D Shackle 8mm, Stainless',
@@ -126,4 +126,11 @@ test('a string spec in a numeric slot (a roller width) is left as stated', () =>
     { id: 2, name: 'R', brand_name: 'B', product_group: 'R', width: '15-35 mm' },
   ])
   assert.equal(g.width, '15-35 mm')
+})
+
+test('a group member is named with its maker (and batch); any other item by its name', () => {
+  const reggae = { id: 249, name: 'Reggae', brand_name: 'Slack Inov', product_group: 'Reggae' }
+  assert.equal(memberLabel(reggae), 'Slack Inov Reggae')
+  assert.equal(memberLabel({ ...reggae, version: '2019' }), 'Slack Inov Reggae 2019')
+  assert.equal(memberLabel({ id: 1, name: 'Wave', brand_name: 'Slack Inov' }), 'Wave')
 })

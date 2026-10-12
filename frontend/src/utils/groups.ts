@@ -224,3 +224,17 @@ export function rangeText(item: Item, field: string, unit?: string): string {
   }
   return unit ? `${text} ${unit}` : text
 }
+
+// What to call ONE member outside its group — a compare chip, a compare
+// column's legend entry. Its name alone says nothing there: both Reggae
+// versions are "Reggae", and the one left after the other is taken off the
+// comparison must still read "Slack Inov Reggae", not pass for the product.
+// So a group member always carries its brand (and its batch `version`, when
+// it has one); any other item is its plain name.
+export function memberLabel(item: Item): string {
+  const name = String(item.name ?? '')
+  const group = item.product_group
+  if (typeof group !== 'string' || group === '') return name
+  const version = typeof item.version === 'string' && item.version !== '' ? ` ${item.version}` : ''
+  return `${String(item.brand_name ?? '')} ${name}${version}`
+}

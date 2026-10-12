@@ -96,16 +96,35 @@ describe('Webbing groups (maker- or batch-dependent specs)', () => {
     // The chips share a name, so each carries its maker.
     cy.get('[data-cy="compare-bar-item-name"]').should('contain.text', `Slack.fr ${GROUP}`)
     cy.get('[data-cy="compare-bar-item-name"]').should('contain.text', `Slack Inov ${GROUP}`)
-    // One version removed from the bar: the card still reads as picked, and
-    // its button then takes the rest off.
-    cy.get('[data-cy="compare-bar-remove"]').first().click()
+    // One version removed from the bar — Slack.fr's — leaves Slack Inov's,
+    // still named with its maker rather than passing for the whole product.
+    cy.contains('[data-cy="compare-bar-item"]', `Slack.fr ${GROUP}`).find('[data-cy="compare-bar-remove"]').click()
     cy.get('[data-cy="compare-bar-count"]').should('contain.text', '1 item')
+    cy.get('[data-cy="compare-bar-item-name"]').should('have.length', 1).and('have.text', `Slack Inov ${GROUP}`)
+    // The card still reads as picked, and its button then takes the rest off.
     cy.contains('[data-cy="gear-card-name"]', new RegExp(`^${GROUP}$`))
       .parents('[data-cy="gear-card"]')
       .find('[data-cy="btn-compare"]')
       .should('have.attr', 'data-active', 'true')
       .click()
     cy.get('[data-cy="compare-bar"]').should('not.exist')
+  })
+
+  it('one version can be taken off the compare page, leaving the other named by its maker', () => {
+    const fr = members.find(m => m.brand_name === 'Slack.fr')!
+    const inov = members.find(m => m.brand_name === 'Slack Inov')!
+    cy.visit(`/webbings/compare?ids=${fr.id},${inov.id}`)
+    cy.get('[data-cy="compare-col"]').should('have.length', 2)
+    // Both curves are charted, each labelled with its maker.
+    cy.get('[data-cy="stretch-chart"]')
+      .should('contain.text', `Slack.fr ${GROUP}`)
+      .and('contain.text', `Slack Inov ${GROUP}`)
+    cy.get(`[data-cy="compare-col"][data-id="${fr.id}"] [data-cy="compare-col-remove"]`).click()
+    cy.location('search').should('eq', `?ids=${inov.id}`)
+    cy.get('[data-cy="compare-col"]').should('have.length', 1)
+    cy.get('[data-cy="compare-col"]').should('have.attr', 'data-id', String(inov.id))
+    cy.get('[data-cy="compare-col-brand"]').should('have.text', 'Slack Inov')
+    cy.get('[data-cy="compare-col-name"]').should('have.text', GROUP)
   })
 
   it('every version row with a page links to it', () => {
