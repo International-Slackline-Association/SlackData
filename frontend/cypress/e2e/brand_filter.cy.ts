@@ -10,6 +10,7 @@
 //
 // See DESIGN.md § Left Filter Sidebar → "Brand is the second group".
 
+import { listingUnits } from '../support/listing'
 import { GEAR_TYPES } from '../support/gear_types'
 
 const GROUP = '[data-cy="filter-group"][data-group="brand"]'
@@ -155,7 +156,7 @@ describe('Brand filter — webbings', () => {
     cy.get(GROUP).find('[data-cy="filter-pill"]').first().click()
     cy.get('[data-cy="filter-sidebar"] [data-cy="clear-filters"]').click()
     cy.location('search').should('not.include', 'brand=')
-    cy.get('[data-cy="gear-card"]').should('have.length', items.length)
+    cy.get('[data-cy="gear-card"]').should('have.length', listingUnits(items).length)
   })
 
   // ── The fold ───────────────────────────────────────────────────────────────

@@ -883,7 +883,9 @@ describe('Webbing stretch filter', () => {
       cy.get('[data-cy="filter-group"][data-group="stretch"]')
         .find(`[data-cy="stretch-kn-pill"][data-kn="${partial.kn}"]`).click()
 
-      cy.get('[data-cy="gear-card"]').should('have.length', partial.count)
+      // Cards, not rows: a product group (Reggae) is one card (utils/groups.ts).
+      const withData = webbings.filter(w => percentAtKn(w.stretch as string | null, partial.kn) != null)
+      cy.get('[data-cy="gear-card"]').should('have.length', listingUnits(withData).length)
     })
   })
 
@@ -992,7 +994,7 @@ describe('Webbing stretch filter', () => {
       cy.get('[data-cy="filter-group"][data-group="stretch"]')
         .find('[data-cy="stretch-kn-pill"]').first().click()
       cy.get('[data-cy="clear-filters"]').first().click()
-      cy.get('[data-cy="gear-card"]').should('have.length', all.length)
+      cy.get('[data-cy="gear-card"]').should('have.length', listingUnits(all).length)
     })
   })
 

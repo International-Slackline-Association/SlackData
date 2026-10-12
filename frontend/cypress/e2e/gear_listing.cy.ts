@@ -300,9 +300,9 @@ describe('Empty state — Clear filters keeps the search', () => {
       const norm = (s: unknown) =>
         String(s ?? '').normalize('NFD').replace(/[̀-ͯ]/g, '')
           .replace(/[.\-()/ ]/g, '').toLowerCase()
-      const matching = (all as Record<string, unknown>[]).filter(
+      const matching = listingUnits((all as Record<string, unknown>[]).filter(
         (it) => norm(it.name).includes('a') || norm(it.brand_name).includes('a'),
-      )
+      ))
       cy.get('[data-cy="item-count"]').should('contain.text', String(matching.length))
     })
   })

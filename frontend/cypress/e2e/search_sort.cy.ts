@@ -521,7 +521,7 @@ describe('Webbing stretch sort', () => {
       cy.get('[data-cy="sort-dropdown"]').click()
       cy.get('[data-cy="sort-stretch-row"] [data-cy="sort-option"][data-field="stretch"][data-direction="asc"]')
         .click()
-      cy.get('[data-cy="gear-card"]').should('have.length', all.length)
+      cy.get('[data-cy="gear-card"]').should('have.length', listingUnits(all).length)
     })
   })
 
@@ -600,9 +600,9 @@ describe('Search + filter combination', () => {
         .find(m => m != null && m.length > 0)?.[0]
       if (!material) return
 
-      const filterCount = webbings.filter(
+      const filterCount = listingUnits(webbings.filter(
         w => (w.material as string[] | null)?.includes(material),
-      ).length
+      )).length
 
       cy.visit('/webbings')
       cy.get('[data-cy="filter-group"][data-group="material"]')
