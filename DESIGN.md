@@ -830,6 +830,8 @@ carries its members.
   price, and the shop's page (*Archived page ↗* for a Wayback link).
 - **No stretch chart.** The table never overlays the members' curves; the spec sheet above shows
   one (see above).
+- **The whole row opens that member**, not just its name. That is the rule in § Every row that
+  names an item opens it, and the vendor table follows it exactly as the listing's Table view does.
 
 ### Manuals & documents
 
@@ -1409,6 +1411,40 @@ subtlety:
 Not covered, deliberately: the brand names in the **admin triage queue** and the correction form.
 Those are strings a *submitter* typed, not a catalogue brand — the whole point of the queue is that
 they have not been reconciled yet, so linking them would assert an identity nobody has checked.
+
+### Every row that names an item opens it
+
+> **This applies to every table, list or row that stands for one catalogue item — existing ones
+> and every new one. The whole row is the link, never just the name.** A reader aims at the row
+> they are reading, often at a number several columns from the name. Making them travel back to
+> one word to open the thing is a miss every time. New tables are not finished until they meet this.
+
+Where it holds today:
+
+| Where | Row hook |
+|---|---|
+| Listing, Table view (`GearTable.tsx`) | `gear-table-row` |
+| Detail page and Detailed view, the vendor table of a product group (`VendorTable.tsx`) | `vendor-row` |
+
+Cards get the same behaviour from one stretched `<Link>` overlay (§ Gear Card Anatomy).
+
+**How, in a table.** A `<tr>` cannot host a single stretched link: an absolutely positioned child of
+a table row has no reliable containing block. So:
+
+- **Every plain cell carries its own anchor** to the item. The padding moves off the `<td>` and onto
+  the anchor (`h-px p-0` on the cell, `h-full` on the anchor), so the target is the whole cell and
+  not just the text in it.
+- **Those anchors are `aria-hidden` with `tabIndex={-1}`.** They are one destination repeated per
+  cell. The **item's name** is the one link a keyboard or screen reader reaches.
+- **A real link, not just a click handler.** A handler alone loses the context menu, middle click,
+  "open in new tab" and the URL in the status bar.
+- **A click handler on the `<tr>` covers only the cells that hold links of their own** (a brand
+  name, a shop's page), because a link may not nest in a link. It stands aside when the click lands
+  on any `a, button, input, label`, and for a modified click.
+- **Hover marks the row** (`group` on the `<tr>`, a gray wash, `cursor-pointer`), so the target
+  reads as the row before the click.
+- **The row for the page you are already on is not a link.** In the vendor table that is the
+  highlighted current member.
 
 ### The two clear actions
 

@@ -16,8 +16,15 @@
 //
 // Rendered on the detail page of any member, and on a collapsed group in the
 // listing's Detailed view (which already carries its members).
+//
+// Every row but the one you are on opens that member, across its whole width —
+// the same rule, and the same mechanics, as the listing's Table view
+// (GearTable.tsx): a <tr> cannot host one stretched link, so each plain cell
+// carries its own hidden anchor, and a click handler covers the two cells that
+// hold links of their own (the shop's brand page, the shop's product page).
 
-import { Link } from 'react-router-dom'
+import type { MouseEvent as ReactMouseEvent, ReactNode } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import BrandLink from '@/components/brand/BrandLink'
 import type { GearTypeMeta } from '@/config/gearTypes'
 import { useCurrency } from '@/context/CurrencyContext'
@@ -70,6 +77,7 @@ export default function VendorTable({ item, meta }: { item: AnyItem; meta: GearT
   // Only fetch when the members aren't already on the item (the detail page).
   const { items: all } = useGearList(meta.slug, group != null && !carried)
   const { priceText } = useCurrency()
+  const navigate = useNavigate()
   if (group == null) return null
 
   const members = (carried
@@ -91,6 +99,16 @@ export default function VendorTable({ item, meta }: { item: AnyItem; meta: GearT
   // group; what each shop states it is certified to is shown per row.
   const standardsOf = (m: AnyItem) => (Array.isArray(m.standards) ? (m.standards as string[]) : [])
   const showStandards = members.some(m => standardsOf(m).length > 0)
+
+  // The fallback for the cells no hidden anchor can fill, because a link may
+  // not nest in a link. It stands aside for those links themselves and for a
+  // modified click, which the anchors already handle as a real link would.
+  const openRow = (event: ReactMouseEvent<HTMLTableRowElement>, id: unknown) => {
+    if (event.button !== 0) return
+    if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
+    if ((event.target as HTMLElement).closest('a, button, input, label')) return
+    navigate(`/${meta.slug}/${id}`)
+  }
 
   return (
     <section data-cy="vendor-table" data-group={group} className="mt-8">
@@ -123,6 +141,23 @@ export default function VendorTable({ item, meta }: { item: AnyItem; meta: GearT
               const current = carried ? Number(m.id) === Number(item._current) : Number(m.id) === Number(item.id)
               const price = priceText(m, meta.slug)
               const url = typeof m.product_url === 'string' && m.product_url !== '' ? m.product_url : null
+              // A plain cell's whole area as a link to this member, padding
+              // on the anchor so the cell, not just its text, is the target.
+              // aria-hidden + tabIndex -1: one destination repeated per cell;
+              // the "Listed as" name is the one a keyboard or screen reader
+              // reaches. The row you are on is not a link at all.
+              const cell = (className: string, children: ReactNode) => current ? (
+                <div className={`px-3 py-2 ${className}`}>{children}</div>
+              ) : (
+                <Link
+                  to={`/${meta.slug}/${m.id}`}
+                  aria-hidden="true"
+                  tabIndex={-1}
+                  className={`flex h-full items-center px-3 py-2 ${className}`}
+                >
+                  {children}
+                </Link>
+              )
               return (
                 <tr
                   key={String(m.id)}
@@ -130,7 +165,8 @@ export default function VendorTable({ item, meta }: { item: AnyItem; meta: GearT
                   data-id={String(m.id)}
                   data-brand={String(m.brand_name)}
                   data-current={current ? 'true' : 'false'}
-                  className={`border-t border-gray-100 ${current ? 'bg-amber-50' : ''}`}
+                  onClick={current ? undefined : event => openRow(event, m.id)}
+                  className={`group border-t border-gray-100 ${current ? 'bg-amber-50' : 'cursor-pointer hover:bg-gray-50'}`}
                 >
                   <td className="px-3 py-2 font-medium">
                     <BrandLink name={m.brand_name} />
@@ -146,31 +182,39 @@ export default function VendorTable({ item, meta }: { item: AnyItem; meta: GearT
                     {current ? (
                       <span className="text-gray-900">{String(m.name)}</span>
                     ) : (
-                      <Link to={`/${meta.slug}/${m.id}`} className="text-teal-primary hover:underline">
+                      <Link
+                        data-cy="vendor-name"
+                        to={`/${meta.slug}/${m.id}`}
+                        className="text-teal-primary hover:underline group-hover:underline"
+                      >
                         {String(m.name)}
                       </Link>
                     )}
                   </td>
+                  {/* h-px + p-0: a table cell treats a height as a minimum, so
+                      the anchor's h-full resolves to the full row height. */}
                   {showVersion && (
-                    <td data-field="version" className="px-3 py-2">
-                      {typeof m.version === 'string' && m.version !== '' ? m.version : '—'}
+                    <td data-field="version" className="h-px p-0">
+                      {cell('', typeof m.version === 'string' && m.version !== '' ? m.version : '—')}
                     </td>
                   )}
                   {columns.map(c => (
-                    <td key={c.field} data-field={c.field} className="whitespace-nowrap px-3 py-2 text-right tabular-nums">
-                      {rangeText(m, c.field, c.unit) || '—'}
+                    <td key={c.field} data-field={c.field} className="h-px whitespace-nowrap p-0 text-right tabular-nums">
+                      {cell('justify-end', rangeText(m, c.field, c.unit) || '—')}
                     </td>
                   ))}
                   {showStandards && (
-                    <td data-field="standards" className="px-3 py-2">
-                      {standardsOf(m).length ? standardsOf(m).join(', ') : '—'}
+                    <td data-field="standards" className="h-px p-0">
+                      {cell('', standardsOf(m).length ? standardsOf(m).join(', ') : '—')}
                     </td>
                   )}
                   {showCaptive && (
-                    <td data-field="captive_pin" className="px-3 py-2">{m.captive_pin === true ? 'Yes' : 'No'}</td>
+                    <td data-field="captive_pin" className="h-px p-0">
+                      {cell('', m.captive_pin === true ? 'Yes' : 'No')}
+                    </td>
                   )}
-                  <td data-field="price" className="whitespace-nowrap px-3 py-2 text-right">
-                    {price ? price.text : '—'}
+                  <td data-field="price" className="h-px whitespace-nowrap p-0 text-right">
+                    {cell('justify-end', price ? price.text : '—')}
                   </td>
                   <td className="px-3 py-2">
                     {url ? (

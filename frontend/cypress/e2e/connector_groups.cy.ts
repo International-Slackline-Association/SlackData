@@ -72,6 +72,25 @@ describe('Connector groups', () => {
     cy.get(`[data-cy="spec-row"][data-field="${disputed}"]`).should('not.exist')
   })
 
+  it('the whole of another shop\'s row opens that shop\'s listing', () => {
+    const [, members] = biggest
+    const [here, other] = members
+    cy.visit(`/connectors/${here.id}`)
+    // The current row is the page you are on: no link anywhere in its cells.
+    cy.get(`[data-cy="vendor-row"][data-id="${here.id}"] [data-field="price"] a`).should('not.exist')
+    // A plain spec cell, nowhere near the name, is a real link (new tab works)…
+    cy.get(`[data-cy="vendor-row"][data-id="${other.id}"] [data-field="price"] a`)
+      .should('have.attr', 'href', `/connectors/${other.id}`)
+      .click()
+    cy.location('pathname').should('eq', `/connectors/${other.id}`)
+    cy.get(`[data-cy="vendor-row"][data-id="${other.id}"]`).should('have.attr', 'data-current', 'true')
+    // …and the shop cell, which holds a brand link of its own, opens the row
+    // too when clicked beside that link.
+    cy.visit(`/connectors/${here.id}`)
+    cy.get(`[data-cy="vendor-row"][data-id="${other.id}"] td`).first().click('bottomRight')
+    cy.location('pathname').should('eq', `/connectors/${other.id}`)
+  })
+
   it('every vendor row with a page links to it', () => {
     const [, members] = biggest
     cy.visit(`/connectors/${members[0].id}`)
