@@ -14,6 +14,7 @@
 
 import { useLayoutEffect, useRef } from 'react'
 import type { AnyItem } from '@/utils/format'
+import { memberLabel } from '@/utils/groups'
 
 export default function CompareBar({
   items,
@@ -79,12 +80,15 @@ export default function CompareBar({
               className="flex shrink-0 items-center gap-1.5 rounded-full border border-gray-300 bg-gray-50 py-1 pl-3 pr-1 text-xs text-gray-700"
             >
               <span data-cy="compare-bar-item-name" className="max-w-[10rem] truncate">
-                {String(item.name)}
+                {/* Two versions of one group share a name (both Reggae); the
+                    brand is what tells their chips apart — and it stays when
+                    one is removed, so the survivor still says whose it is. */}
+                {memberLabel(item)}
               </span>
               <button
                 data-cy="compare-bar-remove"
                 type="button"
-                aria-label={`Remove ${String(item.name)}`}
+                aria-label={`Remove ${memberLabel(item)}`}
                 onClick={() => onRemove(Number(item.id))}
                 className="flex h-7 w-7 items-center justify-center rounded-full text-gray-500 hover:bg-gray-200 hover:text-gray-800"
               >

@@ -269,7 +269,9 @@ GEAR_TYPES.forEach(({ slug, apiPath, label, hasISAWarning, specFields }) => {
 
     it('shows the description when it is set', () => {
       cy.request(`${api()}/${apiPath}/?limit=100`).then(({ body }) => {
-        const withDesc = (body as Record<string, unknown>[]).find(i => i.description)
+        // Not a product group's member: its page renders the group, and a
+        // blurb belongs to one listing, so the group shows none (groups.ts).
+        const withDesc = (body as Record<string, unknown>[]).find(i => i.description && !i.product_group)
         if (!withDesc) return
         cy.visit(`/${slug}/${withDesc.id}`)
         cy.get('[data-cy="detail-description"]').should('be.visible')

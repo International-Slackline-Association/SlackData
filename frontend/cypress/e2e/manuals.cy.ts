@@ -16,16 +16,25 @@ const manifest = gearManuals as Record<string, Record<string, string[]>>
 const brandManifest = brandManuals as Record<string, Record<string, string[]>>
 const abbrevMap = brandAbbrev as Record<string, string>
 
-type Item = { id: number; name: string; brand_name: string }
+type Item = { id: number; name: string; brand_name: string; gear_sellers?: string[] | null }
 
 // Mirrors imageKey() in src/utils/images.ts — manuals share the product key.
 const keyFor = (brand: string, name: string) =>
   `${abbrevMap[brand] ?? slugify(brand)}_${slugify(name)}`
 
-// The first (gear type, key) the manifest holds, as an API path + key pair.
+// A range-wide manual is filed under the maker's abbreviation, and a product
+// key starts with it: `vanbeest` covers `vanbeest_bow-shackle-0-5-t`.
+const coveredByRange = (type: string, productKey: string) =>
+  Object.keys(brandManifest[type] ?? {}).some(b => productKey.startsWith(`${b}_`))
+
+// The first (gear type, key) the manifest holds whose maker files no range-wide
+// document for that type, so the page lists the product's own documents alone.
 const [gearType, key] = (() => {
-  const type = Object.keys(manifest).find(t => Object.keys(manifest[t]).length > 0)!
-  return [type, Object.keys(manifest[type])[0]]
+  for (const type of Object.keys(manifest)) {
+    const k = Object.keys(manifest[type]).find(k => !coveredByRange(type, k))
+    if (k) return [type, k]
+  }
+  throw new Error('no product manual outside a range-wide one')
 })()
 const apiPath = gearType.replace(/s$/, '')
 
@@ -33,12 +42,25 @@ const apiPath = gearType.replace(/s$/, '')
 // under the maker's abbreviation alone, with no product part.
 const brandKeyFor = (brand: string) => abbrevMap[brand] ?? slugify(brand)
 
-// The first (gear type, brand abbrev) the range-wide manifest holds.
-const [brandType, rangeKey] = (() => {
-  const type = Object.keys(brandManifest).find(t => Object.keys(brandManifest[t]).length > 0)!
-  return [type, Object.keys(brandManifest[type])[0]]
-})()
+const ownManualsOf = (type: string, brand: string) =>
+  Object.keys(manifest[type] ?? {}).filter(k => k.startsWith(`${brand}_`))
+
+// The first (gear type, brand abbrev) in the range-wide manifest matching `pick`.
+const firstRange = (pick: (type: string, brand: string) => boolean): [string, string] | null => {
+  for (const type of Object.keys(brandManifest)) {
+    const brand = Object.keys(brandManifest[type]).find(b => pick(type, b))
+    if (brand) return [type, brand]
+  }
+  return null
+}
+
+// A maker none of whose products has a document of its own, so every one of
+// them shows the range-wide document alone. (Van Beest files a PDF for every
+// connector it makes, so its range never shows by itself.)
+const [brandType, rangeKey] = firstRange((t, b) => ownManualsOf(t, b).length === 0)!
 const brandApiPath = brandType.replace(/s$/, '')
+// …and a maker with both, for the ordering of the two.
+const mixed = firstRange((t, b) => ownManualsOf(t, b).length > 0)
 
 describe('Manuals & documents', () => {
   it('lists every document we hold for the product, titled from its filename', () => {
@@ -155,22 +177,24 @@ describe('Range-wide manuals', () => {
 
   it('lists the product\'s own document first, the range-wide one after', () => {
     // Order is what the inline embed reads: the specific document wins.
-    const own = Object.keys(manifest[brandType] ?? {}).find(k => k.startsWith(`${rangeKey}_`))
-    if (!own) return // no product of this maker has its own PDF yet
+    if (!mixed) return // no maker with a range-wide document has one of its own yet
+    const [type, brand] = mixed
+    const own = ownManualsOf(type, brand)[0]
 
-    cy.fetchAllItems(brandApiPath).then(all => {
+    cy.fetchAllItems(type.replace(/s$/, '')).then(all => {
       const item = (all as Row[]).find(i => keyFor(i.brand_name, i.name) === own)!
-      cy.visit(`/${brandType}/${item.id}`)
+      expect(item, `the catalogue still holds ${own}`).to.not.be.undefined
+      cy.visit(`/${type}/${item.id}`)
       cy.get('[data-cy="manual-listing"]').should(
         'have.length',
-        manifest[brandType][own].length + brandManifest[brandType][rangeKey].length,
+        manifest[type][own].length + brandManifest[type][brand].length,
       )
       cy.get('[data-cy="manual-listing"]').first().should('have.attr', 'data-scope', 'product')
       cy.get('[data-cy="manual-listing"]').last().should('have.attr', 'data-scope', 'brand')
       cy.get('[data-cy="manual-embed"]').should(
         'have.attr',
         'data',
-        `/gear-manuals/${brandType}/${manifest[brandType][own][0]}`,
+        `/gear-manuals/${type}/${manifest[type][own][0]}`,
       )
     })
   })
@@ -182,11 +206,63 @@ describe('Range-wide manuals', () => {
       const other = (all as Row[]).find(
         i =>
           !brandManifest[brandType][brandKeyFor(i.brand_name)] &&
-          !manifest[brandType]?.[keyFor(i.brand_name, i.name)],
+          !manifest[brandType]?.[keyFor(i.brand_name, i.name)] &&
+          !(i.gear_sellers ?? []).some(s => brandManifest[brandType][brandKeyFor(s)]),
       )!
       cy.visit(`/${brandType}/${other.id}`)
       cy.get('[data-cy="gear-detail"]').should('exist')
       cy.get('[data-cy="product-manuals"]').should('not.exist')
+    })
+  })
+})
+
+describe('A seller\'s range-wide manual', () => {
+  // Aki Slacklines carried on part of the Landcruising range, and its webbing
+  // manual lists those webbings beside its own — so it shows on every webbing
+  // Aki sells, not only the ones it makes (config/sellerManuals.ts).
+  type Row = Item & { id: number }
+  const akiManuals = brandManifest.webbings?.aki ?? []
+
+  it('shows Aki\'s webbing manual on a webbing Aki sells but did not make', () => {
+    expect(akiManuals.length, 'Aki\'s webbing manual is filed').to.be.greaterThan(0)
+    cy.fetchAllItems('webbing').then(all => {
+      const sold = (all as Row[]).find(
+        i =>
+          brandKeyFor(i.brand_name) !== 'aki' &&
+          (i.gear_sellers ?? []).includes('Aki Slacklines') &&
+          !manifest.webbings?.[keyFor(i.brand_name, i.name)],
+      )!
+      expect(sold, 'a webbing Aki resells with no manual of its own').to.not.be.undefined
+
+      cy.visit(`/webbings/${sold.id}`)
+      cy.get('[data-cy="manual-listing"]')
+        .should('have.length', akiManuals.length)
+        .and('have.attr', 'data-scope', 'brand')
+      cy.get('[data-cy="manual-link"]')
+        .first()
+        .should('have.attr', 'href', `/gear-manuals/webbings/brand/${akiManuals[0]}`)
+      cy.get('[data-cy="manual-scope"]')
+        .first()
+        .should('contain.text', 'Applies to all webbings Aki Slacklines sells')
+    })
+  })
+
+  it('does not extend to sellers outside the opt-in list', () => {
+    // Spider and Slack Inov co-list each other's range and file one PDF twice;
+    // a Slack Inov webbing shows Slack Inov's manual, not Spider's as well.
+    cy.fetchAllItems('webbing').then(all => {
+      const item = (all as Row[]).find(
+        i =>
+          brandKeyFor(i.brand_name) === 'slackinov' &&
+          (i.gear_sellers ?? []).includes('Spider Slacklines') &&
+          !manifest.webbings?.[keyFor(i.brand_name, i.name)],
+      )
+      if (!item) return // no such co-listing held
+      cy.visit(`/webbings/${item.id}`)
+      cy.get('[data-cy="manual-listing"]').should(
+        'have.length',
+        brandManifest.webbings.slackinov.length,
+      )
     })
   })
 })

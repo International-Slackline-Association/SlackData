@@ -21,6 +21,7 @@
 
 import type { GearSlug } from '@/types'
 import { widthRangeText, type AnyItem } from '@/utils/format'
+import { rangeText } from '@/utils/groups'
 
 export const CARD_DATA_FIELDS: Record<GearSlug, string[]> = {
   webbings:      ['price', 'price_base', 'price_display', 'currency', 'weight', 'width', 'breaking_strength'],
@@ -33,6 +34,7 @@ export const CARD_DATA_FIELDS: Record<GearSlug, string[]> = {
   treepros:      ['price', 'price_unit', 'price_base', 'price_display', 'currency', 'weight', 'width', 'length', 'thickness'],
   starterkits:   ['price', 'price_base', 'price_display', 'currency', 'weight', 'webbing_length', 'webbing_width'],
   tricklinekits: ['price', 'price_base', 'price_display', 'currency', 'weight', 'webbing_length', 'webbing_width'],
+  connectors:    ['price', 'price_base', 'price_display', 'currency', 'weight', 'mbs_straight_pull', 'mbs_crossload', 'opening', 'pin_diameter'],
   // upcoming types have no data / cards yet
   bungees:       [],
   leashringpro:  [],
@@ -47,7 +49,14 @@ export interface InlineSpec {
 }
 
 export const INLINE_SPECS: Record<GearSlug, InlineSpec[]> = {
-  webbings:      [{ field: 'material' }, { field: 'width', unit: 'mm' }, { field: 'weight', unit: 'g/m' }, { field: 'breaking_strength', unit: 'kN' }],
+  // Ranged like connectors below: a maker- or batch-dependent group
+  // (utils/groups.ts) shows each number as its versions' range.
+  webbings:      [
+    { field: 'material' },
+    { field: 'width', value: item => rangeText(item, 'width', 'mm') },
+    { field: 'weight', value: item => rangeText(item, 'weight', 'g/m') },
+    { field: 'breaking_strength', value: item => rangeText(item, 'breaking_strength', 'kN') },
+  ],
   // A weblock takes a BAND of webbing widths — showing width_min alone reads as
   // "24 mm only", so the segment is the whole range (DESIGN.md § Card anatomy).
   weblocks:      [{ field: 'material' }, { field: 'width_range', value: widthRangeText }, { field: 'breaking_strength', unit: 'kN' }],
@@ -57,6 +66,13 @@ export const INLINE_SPECS: Record<GearSlug, InlineSpec[]> = {
   treepros:      [{ field: 'width', unit: 'cm' }, { field: 'length', unit: 'cm' }],
   starterkits:   [{ field: 'webbing_length', unit: 'm' }, { field: 'webbing_width', unit: 'mm' }, { field: 'tensioning_type' }],
   tricklinekits: [{ field: 'webbing_length', unit: 'm' }, { field: 'webbing_width', unit: 'mm' }, { field: 'tensioning_type' }],
+  // A collapsed generic-part group shows each number as its shops' range
+  // ("20–29 kN"); an ordinary row reads exactly as a plain field would.
+  connectors:    [
+    { field: 'material' },
+    { field: 'opening', value: item => rangeText(item, 'opening', 'mm') },
+    { field: 'mbs_straight_pull', value: item => rangeText(item, 'mbs_straight_pull', 'kN') },
+  ],
   bungees:       [],
   leashringpro:  [],
 }

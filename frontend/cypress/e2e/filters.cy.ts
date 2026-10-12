@@ -1,4 +1,5 @@
 import { GEAR_TYPES } from '../support/gear_types'
+import { listingUnits } from '../support/listing'
 
 // Two standard filter types:
 //   'pill'  — enum or boolean field; values become toggle buttons
@@ -171,6 +172,25 @@ const FILTER_GROUPS: Record<string, FilterGroup[]> = {
     { group: 'includes_treepro', label: 'Includes Tree Pro', type: 'pill'  },
     // Kit Weight is NOT filterable for trickline kits — only 2 of 9 have weight
     // data, so a slider would mislead (see filterGroups.ts).
+    { group: 'brand',             label: 'Brand',             type: 'pill'  }, // maker OR co-listing seller — see brand_filter.cy.ts
+  ],
+
+  // ── Connector ─────────────────────────────────────────────────────────────
+  // Fields: connector_style(enum) closure(enum) material(enum: ConnectorMaterial)
+  //         mbs_straight_pull/mbs_crossload/opening/pin_diameter/weight(float)
+  //         isa_certified(bool) isa_warning(enum)
+  connectors: [
+    { group: 'price',             label: 'Price',             type: 'range', valueAttr: 'data-price-display' },
+    { group: 'connector_style',   label: 'Type',              type: 'pill'  }, // Shackle/Carabiner/Quicklink/Soft shackle
+    { group: 'closure',           label: 'Closure',           type: 'pill'  },
+    { group: 'material',          label: 'Material',          type: 'pill'  }, // ConnectorMaterial
+    { group: 'isa_certified',     label: 'ISA Certified',     type: 'pill'  },
+    { group: 'isa_warning',       label: 'ISA Warning',       type: 'pill'  },
+    { group: 'mbs_straight_pull', label: 'MBS',               type: 'range', unit: 'kN' },
+    { group: 'mbs_crossload',     label: 'Crossload MBS',     type: 'range', unit: 'kN' },
+    { group: 'opening',           label: 'Opening',           type: 'range', unit: 'mm' },
+    { group: 'pin_diameter',      label: 'Pin Diameter',      type: 'range', unit: 'mm' },
+    { group: 'weight',            label: 'Weight',            type: 'range', unit: 'g'  },
     { group: 'brand',             label: 'Brand',             type: 'pill'  }, // maker OR co-listing seller — see brand_filter.cy.ts
   ],
 }
@@ -361,7 +381,7 @@ GEAR_TYPES.forEach(({ slug, apiPath, label }) => {
         cy.fetchAllItems(apiPath).then((allItems) => {
           cy.get(`[data-cy="filter-group"][data-group="${pills[0].group}"]`)
             .find('[data-cy="filter-pill"]').first().click().click()
-          cy.get('[data-cy="gear-card"]').should('have.length', allItems.length)
+          cy.get('[data-cy="gear-card"]').should('have.length', listingUnits(allItems).length)
         })
       })
     }
@@ -418,7 +438,7 @@ GEAR_TYPES.forEach(({ slug, apiPath, label }) => {
             setSlider(group, 'min', median)
             // Slide the min thumb back to its domain floor → constraint removed.
             clearSlider(group, 'min')
-            cy.get('[data-cy="gear-card"]').should('have.length', allItems.length)
+            cy.get('[data-cy="gear-card"]').should('have.length', listingUnits(allItems).length)
           })
         })
 
@@ -434,7 +454,7 @@ GEAR_TYPES.forEach(({ slug, apiPath, label }) => {
             setSlider(group, 'min', lo)
             setSlider(group, 'max', hi)
             // Barrier: wait for the filter to shrink the list before inspecting.
-            cy.get('[data-cy="gear-card"]').should('have.length.lessThan', allItems.length)
+            cy.get('[data-cy="gear-card"]').should('have.length.lessThan', listingUnits(allItems).length)
 
             // Read the actual thumb values (the slider snaps to its step), so the
             // bounds check matches exactly what was committed.
@@ -863,7 +883,9 @@ describe('Webbing stretch filter', () => {
       cy.get('[data-cy="filter-group"][data-group="stretch"]')
         .find(`[data-cy="stretch-kn-pill"][data-kn="${partial.kn}"]`).click()
 
-      cy.get('[data-cy="gear-card"]').should('have.length', partial.count)
+      // Cards, not rows: a product group (Reggae) is one card (utils/groups.ts).
+      const withData = webbings.filter(w => percentAtKn(w.stretch as string | null, partial.kn) != null)
+      cy.get('[data-cy="gear-card"]').should('have.length', listingUnits(withData).length)
     })
   })
 
@@ -972,7 +994,7 @@ describe('Webbing stretch filter', () => {
       cy.get('[data-cy="filter-group"][data-group="stretch"]')
         .find('[data-cy="stretch-kn-pill"]').first().click()
       cy.get('[data-cy="clear-filters"]').first().click()
-      cy.get('[data-cy="gear-card"]').should('have.length', all.length)
+      cy.get('[data-cy="gear-card"]').should('have.length', listingUnits(all).length)
     })
   })
 

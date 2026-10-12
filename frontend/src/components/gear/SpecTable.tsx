@@ -7,6 +7,7 @@ import { SPEC_ROWS, STRETCH_TABLE_MIN_POINTS, type SpecRowDef } from '@/config/s
 import type { GearSlug } from '@/types'
 import type { AnyItem } from '@/utils/format'
 import { displayPoints } from '@/utils/stretch'
+import { isGroupItem } from '@/utils/groups'
 
 function SpecValue({ row, text }: { row: SpecRowDef; text: string }) {
   if (row.render === 'chips') {
@@ -84,6 +85,9 @@ export default function SpecTable({ item, slug }: { item: AnyItem; slug: GearSlu
     // but it already sits in the header block right above this grid — repeating
     // it here would print the same number twice on one screen.
     .filter(row => !row.compareOnly)
+    // A generic part several shops sell states only what they all agree on;
+    // the rest is in the vendor table, shop by shop (utils/groups.ts).
+    .filter(row => !(isGroupItem(item) && item._varies.includes(row.field)))
     .map(row => ({ row, text: row.value(item) }))
     .filter(({ text }) => text !== '')
   const stretchPoints = displayPoints(item.stretch).length

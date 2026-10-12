@@ -34,8 +34,9 @@ from sqlmodel import Session, SQLModel, create_engine, select
 from sqlmodel.pool import StaticPool
 
 from slack_data.load_data.load_grips import add_grips_to_db, clean_grip_data
-from slack_data.load_data.load_isa_warnings import WARNABLE_MODELS
+from slack_data.load_data.load_isa_warnings import WARNABLE_MODELS, match_targets
 from slack_data.models.brands import Brand
+from slack_data.models.connectors import Connector
 from slack_data.models.grips import Grip
 from slack_data.models.leashrings import LeashRing
 from slack_data.models.rollers import Roller
@@ -60,6 +61,7 @@ SEEDS = {
     "treepros.json": "manufacturer",
     "starterkits.json": "manufacturer",
     "tricklinekits.json": "manufacturer",
+    "connectors.json": "manufacturer",
 }
 
 
@@ -99,6 +101,28 @@ def test_ids_are_unique(filename: str, brand_key: str) -> None:
     counts = Counter(item.get("id") for item in load(filename))
     duplicates = {gear_id: n for gear_id, n in counts.items() if n > 1}
     assert not duplicates, f"{filename}: id(s) used more than once: {duplicates}"
+
+
+# Ids of rows merged into another row. They answer 404 (no redirect yet), and
+# they must never be handed to a new product: a bookmark, an ISA match block or
+# a submitted correction recorded against the old row would silently land on it.
+RETIRED_IDS = {
+    "webbings.json": {
+        152,  # Wave Tube 32 -> 115 Wave Tube 32 (Matrix Outer), 2026-10-12
+        154,  # Slack Pro! Neon Light -> 100, 2026-10-08
+        209, 210,  # Aki White Magic / Unicorn -> Landcruising 6 / 7, 2026-10-05
+    },
+    "weblocks.json": {
+        14, 16,  # Spider Bandit SH / SL -> EQB 13 / 15, 2026-10-07
+        60,  # Spider Paddle Linelock -> EQB Paddle SH 61, 2026-10-08
+    },
+}
+
+
+@pytest.mark.parametrize("filename", RETIRED_IDS)
+def test_a_merged_rows_id_is_never_reused(filename: str) -> None:
+    reused = RETIRED_IDS[filename] & {item["id"] for item in load(filename)}
+    assert not reused, f"{filename}: retired id(s) back in use: {sorted(reused)}"
 
 
 @pytest.mark.parametrize("filename,brand_key", SEEDS.items())
@@ -150,6 +174,7 @@ MODELS = {
     "treepros.json": TreePro,
     "starterkits.json": StarterKit,
     "tricklinekits.json": TricklineKit,
+    "connectors.json": Connector,
 }
 
 
@@ -241,8 +266,9 @@ def test_isa_match_blocks_point_at_the_products_they_name(seeded) -> None:
     entries = json.loads((ROOT / "isa_gear_warnings.json").read_text(encoding="utf-8"))["items"]
 
     wrong: list[str] = []
-    for entry in entries:
-        match = entry.get("match") or {}
+    for entry, match in (
+        (e, target) for e in entries for target in match_targets(e.get("match") or {})
+    ):
         gear_type, ids, names = match.get("gearType"), match.get("gearIds") or [], match.get("gearNames") or []
         if not gear_type or not ids or gear_type not in WARNABLE_MODELS:
             continue  # unmatched, or a type with no isa_warning column — both are the loader's business

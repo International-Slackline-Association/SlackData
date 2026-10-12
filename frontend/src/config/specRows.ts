@@ -25,6 +25,7 @@
 import type { GearSlug } from '@/types'
 import { formatValue, widthRangeText, type AnyItem } from '@/utils/format'
 import { displayPoints } from '@/utils/stretch'
+import { rangeText } from '@/utils/groups'
 
 // How the value is drawn. 'text' is the default; the others get bespoke markup
 // in SpecTable (color-name chips, the stretch curve table).
@@ -77,9 +78,24 @@ function plain(field: string, label: string, unit?: string): SpecRowDef {
   return { field, label, unit, value: item => formatValue(item[field], unit) }
 }
 
+// A number that a collapsed generic-part group reports as its shops' range
+// ("20–29 kN", utils/groups.ts); on an ordinary row, the plain value.
+function ranged(field: string, label: string, unit?: string): SpecRowDef {
+  return { field, label, unit, value: item => rangeText(item, field, unit) }
+}
+
 // Boolean → Yes / No (never omitted; booleans are non-null in every model).
 function yesNo(field: string, label: string): SpecRowDef {
   return { field, label, value: item => (item[field] ? 'Yes' : 'No') }
+}
+
+// Only a shackle has a pin to lose, so the row is a shackle's alone. A group
+// whose shops disagree carries null here (utils/groups.ts) and drops the row;
+// the vendor table shows each shop's answer.
+const captivePinRow: SpecRowDef = {
+  field: 'captive_pin',
+  label: 'Captive Pin',
+  value: item => (item.connector_style !== 'Shackle' || item.captive_pin == null ? '' : item.captive_pin ? 'Yes' : 'No'),
 }
 
 // width_min + width_max → "25–35 mm", collapsing to "25 mm" when there is no
@@ -111,10 +127,10 @@ export const SPEC_ROWS: Record<GearSlug, SpecRowDef[]> = {
     priceRow('Price per meter'),
     plain('material', 'Material'),
     plain('webbing_construction', 'Construction'),
-    plain('width', 'Width', 'mm'),
-    plain('thickness', 'Thickness', 'mm'),
-    plain('weight', 'Weight', 'g/m'),
-    plain('breaking_strength', 'Breaking Strength', 'kN'),
+    ranged('width', 'Width', 'mm'),
+    ranged('thickness', 'Thickness', 'mm'),
+    ranged('weight', 'Weight', 'g/m'),
+    ranged('breaking_strength', 'Breaking Strength', 'kN'),
     stretchRow,
     // The ISA class letter is NOT a spec row — on a certified webbing it
     // renders as a colored bubble beside the product name (see IsaStatusLabel).
@@ -184,6 +200,22 @@ export const SPEC_ROWS: Record<GearSlug, SpecRowDef[]> = {
     plain('weight', 'Weight', 'g'),
     plain('tensioning_type', 'Tensioning'),
     yesNo('includes_treepro', 'Includes Tree Pro'),
+  ],
+  connectors: [
+    priceRow(),
+    plain('connector_style', 'Type'),
+    plain('closure', 'Closure'),
+    plain('material', 'Material'),
+    ranged('mbs_straight_pull', 'MBS', 'kN'),
+    ranged('mbs_crossload', 'Crossload MBS', 'kN'),
+    ranged('mbs_gate_open', 'Gate-open MBS', 'kN'),
+    ranged('opening', 'Opening', 'mm'),
+    ranged('pin_diameter', 'Pin Diameter', 'mm'),
+    captivePinRow,
+    ranged('rope_diameter', 'Rope Diameter', 'mm'),
+    ranged('weight', 'Weight', 'g'),
+    plain('alloy', 'Alloy'),
+    plain('standards', 'Stated Standards'),
   ],
   // upcoming types have no data yet
   bungees: [],

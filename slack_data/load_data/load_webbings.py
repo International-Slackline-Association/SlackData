@@ -86,11 +86,14 @@ def add_webbings_to_db(webbings: list[dict], session: SessionDep) -> None:
             currency=parse_currency(webbing.get("currency")),
             active=webbing.get("active"),
             description=webbing.get("description"),
+            version=webbing.get("version"),
+            notes=webbing.get("notes"),
             colors=webbing.get("colors"),
             manufacturer_not_for_highline=webbing.get("manufacturer_not_for_highline"),
             manufacturer_not_for_highline_source=webbing.get("manufacturer_not_for_highline_source"),
             # Brand names only — see the model. Absent stays None, not [].
             gear_sellers=webbing.get("gear_sellers") or None,
+            product_group=webbing.get("product_group"),
         )
         db_webbing = Webbing.model_validate(webbing_create)
         db_webbing.id = require_seed_id(webbing, "webbings.json")

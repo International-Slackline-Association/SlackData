@@ -51,9 +51,12 @@ describe('Manufacturer name links — gear cards', () => {
   })
 
   it('every card in the grid carries one', () => {
-    cy.get('[data-cy="gear-card"]').then(($cards) => {
-      cy.get('[data-cy="gear-card"] [data-cy="brand-link"]')
-        .should('have.length', $cards.length)
+    // At least one: a product group's card names every member's brand.
+    // `should`, not `each`: it retries until the brand directory has loaded
+    // and the names have become links.
+    cy.get('[data-cy="gear-card"]').should(($cards) => {
+      const bare = $cards.filter((_, card) => Cypress.$(card).find('[data-cy="brand-link"]').length === 0)
+      expect(bare.length, 'cards with no brand link').to.equal(0)
     })
   })
 

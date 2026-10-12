@@ -2,17 +2,17 @@
 
 Every catalogue item that has no photo in `frontend/public/gear-images/`, worked out from the files
 on disk with the manifest's own keying (`scripts/build_gear_manifest.py`): an item is listed when its
-`<brand-abbrev>_<name-slug>` key matches no image file. Generated 2026-10-08.
+`<brand-abbrev>_<name-slug>` key matches no image file. Generated 2026-10-08, updated 2026-10-12.
 
-**23 items**: 13 webbings, 6 weblocks, 3 leash rings, 1 trickline kit. Grips, rollers, tree
-protectors and starter kits are fully covered. 22 of the 23 are historic (`active: false`). None of
+**18 items**: 8 webbings, 6 weblocks, 3 leash rings, 1 trickline kit. Grips, rollers, tree
+protectors and starter kits are fully covered. All 18 are historic (`active: false`). None of
 them had a photo on SlackDB either (checked against `slackdb_archive/`).
 
 Kits are listed but were searched last.
 
-**Status:** every item has been searched, and the **23** left turned up nothing usable. Items whose
+**Status:** every item has been searched, and the **18** left turned up nothing usable. Items whose
 candidates were approved and filed into `public/gear-images/` have been taken off the list (most
-recently Pump's Rivera and Xylon, from photos the user supplied, Club S, Neon Light, Skillshot LS, LINK, Mint, SladLock Power, ZERO Black, and the Rigging
+recently EQB's Nitro and Flash, Slack Mountain's Spice, and Pump's Rivera and Xylon, from photos the user supplied, Elephant's Wing 3.5, Club S, Neon Light, Skillshot LS, LINK, Mint, SladLock Power, ZERO Black, and the Rigging
 Ventures Level 2 and Level 3 kits, and Sat'Elite).
 
 **Dakas:** every image the Wayback Machine holds for `dakas.fr` and its subdomains was listed and
@@ -56,22 +56,17 @@ far the trail went.
 
 ## The list
 
-### webbings (13)
+### webbings (8)
 
 | id | Brand | Name | Active | Image key | Candidates |
 |---|---|---|---|---|---|
-| 34 | Equilibrium | Flash | historic | `eqb_flash` | none found. Product pages archived (eqb.cz `flash.html`, slackshop.cz `162-eqb-flash`) but none of their photos were, and slackshop.cz no longer serves them. |
-| 79 | Equilibrium Slacklines (EQB) | Nitro | historic | `eqb_nitro` | none found. Product pages archived (eqb.cz `nitro.html`, slackshop.cz `172-eqb-nitro`, a 2011 set page) but none of their photos were, and slackshop.cz no longer serves them. |
 | 85 | Line Spirit | Fuji | historic | `linespirit_fuji` | none found. The product page (`66-fuji.html`, 2015) was archived but none of its photos were. |
 | 89 | Line Spirit | Vercors | historic | `linespirit_vercors` | none found. Seven product pages were archived (2013–2015) but none of their photos were. |
 | 92 | Dakas | Red Zebra | historic | `dakas_red-zebra` | none found. Four dakas.fr product pages were archived (25/50/100 m, 2015–2017) but none of their photos were. (The red/white homepage banner first offered here turned out to be the Sat'Elite and is filed there.) |
 | 93 | Dakas | Slack Swan | historic | `dakas_slack-swan` | none found. Three dakas.fr product pages were archived (2015) but none of their photos were. Every image the Archive holds for dakas.fr was checked (139; see the Dakas note below). |
-| 94 | Slack Inov | Flamme II | historic | `slackinov_flamme-ii` | none found. Its slack-inov.com page (`46-sangle-flamme` / `46-flamme2-webbing`, 2016) was archived, but its own photos (`123-*`) were not. The one archived `sangle-flamme.jpg` is the Flamme III. |
+| 94 | Slack Inov | Flamme II | historic | `slackinov_flamme-ii` | none found. Its slack-inov.com page (`46-sangle-flamme` / `46-flamme2-webbing`, 2016) was archived, but its own photos (`123-*`) were not (re-checked 2026-10-12: no `123-*` size of `flamme2-webbing.jpg` was ever captured). The one archived `sangle-flamme.jpg` is the Flamme III. |
 | 102 | Slack.fr | Supertube Norway | historic | `slackfr_supertube-norway` | none confirmed. laboutique.slack.fr had a 2011 `supertube-50m` page photographed with `norges_1.jpg` ("Norges" = Norway), but neither the Archive nor the Shopify CDN still has it. What survives is the plain Supertube (orange/black/pink, 480×480: `743-tm_home_default/supertube-15m-tubulaire.jpg`, `2383-…`), whose spec graphic says 48 g/m against Norway's 54 g/m, so not saved. |
 | 103 | Slack.fr | Jumpline | historic | `slackfr_jumpline` | none found. laboutique.slack.fr had 3 cm Jumpline pages from 2009–2016 (`products/jumpline`, photos `sangle_jumpline.jpg` and `Jumpline_480.jpg`), but neither the Archive nor the Shopify CDN still has those photos. The archived "jumpline" images are the 4 cm, AntiPop and Banger models, and discipline banners. |
-| 108 | Elephant | Wing 3.5 | historic | `elephant_wing-3-5` | none found. elephant-slackline.com listed its webbings on one JavaScript-driven products page ("Wing", "blueWing" appear in it), and the only images archived from the site are gallery photos and site graphics. |
-| 172 | Slack Mountain | Spice | historic | `slackmtn_spice` | none found. Nothing named "spice"/"épice" on slack-mountain.com, slack-mountain.fr or slackmountain.com in the Wayback; the live shop no longer lists it. |
-| 251 | Slack Inov | Donkey 20 | yes | `slackinov_donkey-20` | none found. Every archived "donkey" page and image on slack-inov.com (2019–2023) is the 25 mm Donkey (already photographed). slack-inov.com blocks direct fetches (403), and Spider does not list the Donkey 20. |
 | 258 | Slackstar | Line Long Way | historic | `slackstar_line-long-way` | none found. The slackstar.de product page (`Line-Long-Way-SL80240-25-A.htm`, 2013) was archived but its photo (`LineLongway_SL8024025-A.jpg`) was not. slackstar.de now redirects to sicherungsprofi.de, which sells other Slackstar lines but not this one. |
 
 ### weblocks (6)

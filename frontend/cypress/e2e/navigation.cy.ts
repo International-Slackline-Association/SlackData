@@ -15,8 +15,8 @@ describe('Top navigation', () => {
     cy.title().should('eq', 'SlackData')
   })
 
-  it('shows all 8 gear-type tabs', () => {
-    cy.get('[data-cy="nav-tab"]').should('have.length', 8)
+  it('shows a tab for every gear type', () => {
+    cy.get('[data-cy="nav-tab"]').should('have.length', GEAR_TYPES.length)
   })
 
   it('shows every expected gear-type label in the nav', () => {

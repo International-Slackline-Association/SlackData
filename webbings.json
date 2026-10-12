@@ -292,8 +292,8 @@
         "brand": "Aki Slacklines",
         "materialType": "Nylon",
         "width": 25,
-        "weight": 68,
-        "breakingStrength": 34,
+        "weight": 69,
+        "breakingStrength": 32,
         "stretch": [
             {
                 "kn": 1,
@@ -445,7 +445,8 @@
         "webbing_construction": "Core/Sheath",
         "priceMeter": 1.99,
         "currency": "EUR",
-        "active": false
+        "active": false,
+        "notes": "Weight 69 g/m (was 68, no source) from Aki's webbing manual (Rev. 1.9, 2021, held as the range-wide Aki webbing manual); it also gives MBS 34 kN, WLL 7 kN, 15 % at 10 kN, PA, 25 mm. MBS is the sewn end loop's, the lower figure: Aki's webbing manual (Rev. 1.9) gives 32 kN for \"Sonic II\" with a sewn end loop; the webbing itself is 34 kN."
     },
     {
         "id": 6,
@@ -510,7 +511,7 @@
         ],
         "materialType": "Polyester",
         "weight": 58,
-        "breakingStrength": 32.5,
+        "breakingStrength": 29,
         "date_introduced": null,
         "product_url": "https://web.archive.org/web/20140704004416/http://www.landcruising-slacklines.de/en/shop/2-slackline-band/26-polyester/141-white-magic-25mm-meterware?vmcchk=1",
         "width": 25,
@@ -519,7 +520,8 @@
         "currency": "EUR",
         "active": false,
         "thickness": 2.4,
-        "description": "Our favorite line in the width of 25 mm / 1 inch. We use White Magic since 2006 for all our beautiful highline, longline and waterline projects. In our experience White Magic offers a superior combination of low elongation, high-strength, extended dynamic range, low weight and durability. The snow-white color with black contour borders ensures an optimum of visibility over all terrains."
+        "description": "Our favorite line in the width of 25 mm / 1 inch. We use White Magic since 2006 for all our beautiful highline, longline and waterline projects. In our experience White Magic offers a superior combination of low elongation, high-strength, extended dynamic range, low weight and durability. The snow-white color with black contour borders ensures an optimum of visibility over all terrains.",
+        "notes": "Aki's webbing manual (Rev. 1.9, 2021, held as the range-wide Aki webbing manual) lists White Magic at MBS 34 kN, WLL 6.8 kN, 5 % at 10 kN, 61 g/m; this row keeps Landcruising's figures. MBS is the sewn end loop's, the lower figure: Aki's webbing manual (Rev. 1.9) gives 29 kN for \"White Magic\" with a sewn end loop; the webbing itself is 32.5 kN."
     },
     {
         "id": 7,
@@ -654,7 +656,7 @@
         ],
         "materialType": "Polyester",
         "weight": 55,
-        "breakingStrength": 33,
+        "breakingStrength": 32,
         "date_introduced": 1518991200000,
         "product_url": null,
         "width": 25,
@@ -662,7 +664,8 @@
         "webbing_construction": "Core/Sheath",
         "priceMeter": 1.79,
         "currency": "EUR",
-        "active": false
+        "active": false,
+        "notes": "Aki's webbing manual (Rev. 1.9, 2021, held as the range-wide Aki webbing manual) lists Wizard at MBS 34 kN, WLL 6.8 kN, 4.2 % at 10 kN, 55 g/m; this row keeps Landcruising's figures. MBS is the sewn end loop's, the lower figure: Aki's webbing manual (Rev. 1.9) gives 32 kN for \"Wizard ALB\" with a sewn end loop; the webbing itself is 33 kN."
     },
     {
         "id": 9,
@@ -6456,8 +6459,11 @@
     },
     {
         "id": 115,
-        "name": "Matrix Outer",
+        "name": "Wave Tube 32 (Matrix Outer)",
         "brand": "Landcruising",
+        "gear_sellers": [
+            "Aki Slacklines"
+        ],
         "materialType": "Nylon",
         "width": 32,
         "weight": 58,
@@ -6466,6 +6472,10 @@
             {
                 "percent": 14,
                 "kn": 9
+            },
+            {
+                "percent": 16,
+                "kn": 10
             }
         ],
         "date_introduced": null,
@@ -6474,7 +6484,9 @@
         "active": false,
         "priceMeter": 1.95,
         "currency": "EUR",
-        "description": "The Matrix Outer webbing can be used in many different ways. It offers as single line very good dynamic properties on shorter distances. The Matrix Outer transforms into a powerful jumpline by reinforcing it with 25 mm polyamide webbing. And lastly the 32mm wide webbing is suitable as protection padding for 25 mm lines."
+        "colors": "Orange / light blue",
+        "description": "The Matrix Outer webbing can be used in many different ways. It offers as single line very good dynamic properties on shorter distances. The Matrix Outer transforms into a powerful jumpline by reinforcing it with 25 mm polyamide webbing. And lastly the 32mm wide webbing is suitable as protection padding for 25 mm lines.",
+        "notes": "One webbing under two names: Landcruising sold it as \"Matrix Outer\" (32 mm), and Aki Slacklines, which carried on part of the Landcruising range, later sold it as \"Wave Tube 32\". Merged on 2026-10-12 from #115 Matrix Outer and #152 Wave Tube 32; id 152 no longer exists. Both are 32 mm polyamide tubes rated 27 kN and are sold for threading over 25 mm webbing as a jumpline. Width, weight (58 g/m) and MBS set by the operator; thickness left unknown (Aki's page gave 2.3 mm and 55 g/m). Stretch: 14 % at 9 kN from Landcruising, 16 % at 10 kN from Aki. Price and link are Landcruising's (1.95 €/m); Aki listed it at 2.00 €/m: https://web.archive.org/web/20240528074507/https://aki-slacklines.de/de/slacklineband/polyamid/14/aki-wave-tube-32-slacklineband. Aki's note: the 5.4 kN WLL holds only with webbing locks of high breaking-load efficiency (e.g. Puma 2); with knots or chain-link linelockers it must be well below 4 kN. Aki's webbing manual (Rev. 1.9, 2021, held as the range-wide Aki webbing manual) lists Wave 32 at MBS 27 kN, WLL 5 kN, 16 % at 10 kN, 55 g/m."
     },
     {
         "id": 116,
@@ -6491,6 +6503,10 @@
             {
                 "kn": 7,
                 "percent": 14.5
+            },
+            {
+                "kn": 10,
+                "percent": 17
             }
         ],
         "date_introduced": null,
@@ -6500,7 +6516,8 @@
         "priceMeter": 1.65,
         "currency": "EUR",
         "active": false,
-        "description": "Slackline was born on nylon tubular webbing back in the early eighties. The soft touch and the fine weave give a genious dynamic and balance feeling (thanks to the Nylon fibers). This webbing will guarantee pure slackline fun. Even for moderate longlines suitable if threaded with our 19mm Wave-Tape."
+        "description": "Slackline was born on nylon tubular webbing back in the early eighties. The soft touch and the fine weave give a genious dynamic and balance feeling (thanks to the Nylon fibers). This webbing will guarantee pure slackline fun. Even for moderate longlines suitable if threaded with our 19mm Wave-Tape.",
+        "notes": "Aki's later page (German, Wayback 2023-09-30: https://web.archive.org/web/20230930232851/https://aki-slacklines.de/de/slacklineband/polyamid/138/aki-wave-tube-25-slacklineband?c=6) sells it as 'Aki Wave Tube 25': PA tubular, 25 mm, 2.3 mm, 21 kN, 4 kN WLL, 17 % at 10 kN, 42 g/m, 1.80 €/m. Its 21 kN (Landcruising's page said 20) and the 10 kN stretch point were applied on 2026-10-11; the 7 kN point is Landcruising's. The price stays Landcruising's own. MBS is the sewn end loop's, the lower figure: Aki's webbing manual (Rev. 1.9) gives 20 kN for \"Wave 25\" with a sewn end loop; the webbing itself is 21 kN."
     },
     {
         "id": 118,
@@ -6512,11 +6529,15 @@
         "materialType": "Nylon",
         "width": 19,
         "weight": 36,
-        "breakingStrength": 17,
+        "breakingStrength": 17.5,
         "stretch": [
             {
                 "percent": 14,
                 "kn": 6
+            },
+            {
+                "kn": 10,
+                "percent": 18
             }
         ],
         "date_introduced": null,
@@ -6527,7 +6548,7 @@
         "currency": "EUR",
         "active": false,
         "description": "This 19 mm wide tubular webbing is very suitable for making a threaded leash. 10 mm to 10,5 mm dynamic rope fits ideally inside and giving a highline leash with superiour handling and strength. The webbing is additionally suitable as single walking line or reinforcement for 25 mm tubular webbing.",
-        "notes": "Specs from the maker's page (Wayback 2013-04-15): PA tubular, 19 mm, 2.4 mm, average break strength 17 kN, min. 16 kN, 14 % at 6 kN and 32 % at break, 36 g/m, made in the EU. 'Wave Tape 19' (#117, flat, 18 kN, 38 g/m, no source link) was the same product in red and was merged into this row on 2026-10-07; its photo moved across, and where the two disagreed the Wayback page won."
+        "notes": "Specs from the maker's page (Wayback 2013-04-15): PA tubular, 19 mm, 2.4 mm, average break strength 17 kN, min. 16 kN, 14 % at 6 kN and 32 % at break, 36 g/m, made in the EU. 'Wave Tape 19' (#117, flat, 18 kN, 38 g/m, no source link) was the same product in red and was merged into this row on 2026-10-07; its photo moved across, and where the two disagreed the Wayback page won. Aki's later page (German, Wayback 2024-05-28: https://web.archive.org/web/20240528072644/https://aki-slacklines.de/de/slacklineband/polyamid/15/aki-wave-tube-19-slacklineband) gives 2.4 mm, PU-coated, 17.5 kN, 3.5 kN WLL, 18 % at 10 kN, 36 g/m, 1.45 €/m, and calls it mainly a sheath over dynamic rope. Its 17.5 kN and the 10 kN stretch point were applied on 2026-10-11; the 6 kN point is Landcruising's. The price stays Landcruising's own. Aki's webbing manual (Rev. 1.9, 2021, held as the range-wide Aki webbing manual) lists Wave 19 at MBS 16 kN (the maker page's minimum), WLL 3 kN, 16 % at 10 kN, 36 g/m."
     },
     {
         "id": 119,
@@ -6577,7 +6598,7 @@
         "id": 121,
         "name": "Octopussy MKV",
         "description": "The timeless classic from Slackhouse. All round slackline webbing used by beginners and professionals. Basic yet versatile polyester webbing mostly valued for pleasant bounce combined with low weight and high strength.",
-        "brand": "Slack house",
+        "brand": "Slackhouse",
         "materialType": "Polyester",
         "width": 25,
         "weight": 60,
@@ -6600,7 +6621,7 @@
         "id": 122,
         "name": "Rubber Band MKIII BLU",
         "description": "A classic, flat, nylon (polyamide) webbing with high stretch and incredible energy. Created to fulfill dreams of sky-high bounces and wild surfs. Do not get scared of high stretch demanding more effort while tensioning - end result is worth it. Rubber Band works perfectly at short highlines introducing more bouncy feeling also increasing their safety margin. Yet it gives the most fun at medium lengths even at low tension.",
-        "brand": "Slack house",
+        "brand": "Slackhouse",
         "materialType": "Nylon",
         "width": 25,
         "weight": 60,
@@ -6623,7 +6644,7 @@
         "id": 123,
         "name": "Rubber Band MKIII SOL",
         "description": "A classic, flat, nylon (polyamide) webbing with high stretch and incredible energy. Created to fulfill dreams of sky-high bounces and wild surfs. Do not get scared of high stretch demanding more effort while tensioning - end result is worth it. Rubber Band works perfectly at short highlines introducing more bouncy feeling also increasing their safety margin. Yet it gives the most fun at medium lengths even at low tension.",
-        "brand": "Slack house",
+        "brand": "Slackhouse",
         "materialType": "Nylon",
         "width": 25,
         "weight": 60,
@@ -6646,7 +6667,7 @@
         "id": 124,
         "name": "Blue Mile",
         "description": "Blue Mile is a strong and lightweight polyester webbing aimed for longlining. It's main advantage is very low elongation - tensioning even longer lines requires less effort and shorter tenstioning systems. High strength provides better safety margin. Reasonable choice for highline backup.",
-        "brand": "Slack house",
+        "brand": "Slackhouse",
         "materialType": "Polyester",
         "width": 25,
         "weight": 59.7,
@@ -7249,31 +7270,6 @@
         "notes": "One row for Landcruising's 25 mm Verve, merged on 2026-10-07 from #151 'Verve 25mm' and the staged 'Verve 25mm Red'. Specs, price and description from the red Verve page (Wayback 2011-07-22): PES flat, MBS 31 kN, 7 % at 10 kN, 58 g/m, max. 10 kN pretension as a longline, made in Germany, 1.49 €/m (1.40 €/m from 100 m). The row previously carried the 2014 'Verve 25mm Slackline 30m loop' page (https://web.archive.org/web/20140902053505/http://www.landcruising-slacklines.de/en/shop/2-slackline-band/26-polyester/421-?vmcchk=1), which describes 'shiny yellow' webbing with av. >32 kN, min. 30 kN, 11 % at 10 kN, 59 g/m, 2-ply, 55.95 € for 30 m with a sewn loop; that page's blurb was: 'The 25 mm wide slackline with soft touch and extended stretch gives a fantastic dynamic pleasure, even on shorter lines.'"
     },
     {
-        "id": 152,
-        "name": "Wave Tube  32",
-        "brand": "Landcruising",
-        "gear_sellers": [
-            "Aki Slacklines"
-        ],
-        "materialType": "Polyester",
-        "width": 25.4,
-        "weight": 58,
-        "breakingStrength": 27,
-        "stretch": [
-            {
-                "percent": 16,
-                "kn": 10
-            }
-        ],
-        "date_introduced": null,
-        "product_url": null,
-        "thickness": 2.3,
-        "webbing_construction": "Tubular",
-        "priceMeter": 1.95,
-        "currency": "EUR",
-        "active": false
-    },
-    {
         "id": 153,
         "name": "#FFF",
         "brand": "Raed Slacklines",
@@ -7299,6 +7295,7 @@
         "name": "Reggae",
         "description": "The Reggae is a tubular webbing, stretchy and smooth. Historical slackline webbing. It's light and flexible, nice to carry in your backpack. Super fast, controlled and small jump movements are possible. Super suitable for deep and soft waves, bouncing and surfing. It has an incredible flex. The line appears like a wave during bouncing, which takes one away, floats and catches again with a soft move. It doesn’t shake even in case of strong oscillations. A special type of floating feeling.",
         "brand": "Slack.fr",
+        "product_group": "Reggae",
         "materialType": "Polyester",
         "width": 25,
         "weight": 54,
@@ -7648,7 +7645,7 @@
             }
         ],
         "date_introduced": 1511128800000,
-        "product_url": "https://aki-slacklines.de/en/webbing/polyester/99/aki-tidal-webbing?c=6",
+        "product_url": "https://web.archive.org/web/20230330091056/https://aki-slacklines.de/de/slacklinesets/rodeoline/2/landcruising-aloha-rodeolineset",
         "thickness": 2,
         "webbing_construction": "Flat",
         "priceMeter": 1.19,
@@ -8142,7 +8139,7 @@
         "materialType": "Polyester",
         "width": 25.4,
         "weight": 56,
-        "breakingStrength": 28,
+        "breakingStrength": 26,
         "stretch": [
             {
                 "percent": 8.5,
@@ -8150,12 +8147,13 @@
             }
         ],
         "date_introduced": 1582668000000,
-        "product_url": "https://aki-slacklines.de/en/detail/index/sArticle/162",
+        "product_url": "https://web.archive.org/web/20250325085453/https://aki-slacklines.de/en/products/aki-polar-slackline-webbing",
         "thickness": 2.4,
         "webbing_construction": "Core/Sheath",
         "priceMeter": 1.89,
         "currency": "EUR",
-        "active": false
+        "active": false,
+        "notes": "MBS 27 kN (was 28, no source) from Aki's webbing manual (Rev. 1.9, 2021, held as the range-wide Aki webbing manual); it also gives WLL 5.5 kN, 8 % at 10 kN (8.5 % kept), 56 g/m, PES, 25 mm. MBS is the sewn end loop's, the lower figure: Aki's webbing manual (Rev. 1.9) gives 26 kN for \"Polar ALB\" with a sewn end loop; the webbing itself is 27 kN."
     },
     {
         "id": 178,
@@ -8393,7 +8391,7 @@
         "id": 184,
         "name": "Rubber Band PUR",
         "description": "A real oldschool nylon (polyamide) webbing with high stretch and incredible dynamics! Created to fulfill dreams of sky-high bounces and wild surfs. Do not get scared of high stretch demanding more effort while tensioning - end result is worth it. Rubber Band works perfectly at short highlines introducing more bouncy feeling also increasing their safety margin. The most fun however reveals at medium lengths even at low tension. Going even further, super long projects can be curiously demanding.",
-        "brand": "Slack house",
+        "brand": "Slackhouse",
         "materialType": "Nylon",
         "width": 25,
         "weight": 60,
@@ -8416,7 +8414,7 @@
         "id": 185,
         "name": "Levitation",
         "description": "Light, two-tone polyester webbing. Easy to tension due to low stretch, but with a pleasant bounce. Levitation works great as the first longline up to 100 m. Alternatively, it can be used as a lightweight backup for projects where low weight matters more.",
-        "brand": "Slack house",
+        "brand": "Slackhouse",
         "materialType": "Polyester",
         "width": 25,
         "weight": 48,
@@ -8985,8 +8983,8 @@
         "brand": "Aki Slacklines",
         "materialType": "Nylon",
         "width": 25,
-        "weight": 65.5,
-        "breakingStrength": 30.5,
+        "weight": 66,
+        "breakingStrength": 25,
         "stretch": [
             {
                 "percent": 17,
@@ -8994,12 +8992,13 @@
             }
         ],
         "date_introduced": 1605132000000,
-        "product_url": "https://aki-slacklines.de/en/detail/index/sArticle/188/sCategory/6",
+        "product_url": "https://web.archive.org/web/20250417205135/https://aki-slacklines.de/en/products/aki-purple-gold-slacklineband",
         "thickness": 3.4,
         "webbing_construction": "Tubular",
         "priceMeter": 2.3,
         "currency": "EUR",
-        "active": false
+        "active": false,
+        "notes": "Weight 66 g/m (was 65.5, no source) from Aki's webbing manual (Rev. 1.9, 2021, held as the range-wide Aki webbing manual); it also gives MBS 30.5 kN, WLL 6 kN, 17 % at 10 kN, PA, 25 mm. MBS is the sewn end loop's, the lower figure: Aki's webbing manual (Rev. 1.9) gives 25 kN for \"Purple Gold\" with a sewn end loop; the webbing itself is 30.5 kN."
     },
     {
         "id": 203,
@@ -9008,20 +9007,21 @@
         "materialType": "Polyester",
         "width": 25,
         "weight": 38,
-        "breakingStrength": 23.5,
+        "breakingStrength": 20,
         "stretch": [
             {
-                "percent": 4,
+                "percent": 4.5,
                 "kn": 10
             }
         ],
         "date_introduced": 1605391200000,
-        "product_url": "https://aki-slacklines.de/en/webbing/polyester/187/aki-nomad-webbing",
+        "product_url": "https://web.archive.org/web/20210928075102/https://aki-slacklines.de/de/slacklineband/polyester/187/aki-nomad-slacklineband",
         "thickness": 1.5,
         "webbing_construction": "Flat",
         "priceMeter": 1,
         "currency": "EUR",
-        "active": false
+        "active": false,
+        "notes": "Stretch 4.5 % at 10 kN (was 4 %, no source) from Aki's webbing manual (Rev. 1.9, 2021, held as the range-wide Aki webbing manual); it also gives MBS 23.5 kN, WLL 4 kN, 38 g/m, PES, 25 mm. MBS is the sewn end loop's, the lower figure: Aki's webbing manual (Rev. 1.9) gives 20 kN for \"Nomad\" with a sewn end loop; the webbing itself is 23.5 kN."
     },
     {
         "id": 204,
@@ -9031,7 +9031,7 @@
         "materialType": "Nylon",
         "width": 25,
         "weight": 53,
-        "breakingStrength": 27,
+        "breakingStrength": 26,
         "stretch": [
             {
                 "percent": 13,
@@ -9044,7 +9044,8 @@
         "webbing_construction": "Core/Sheath",
         "priceMeter": 2.3,
         "currency": "EUR",
-        "active": false
+        "active": false,
+        "notes": "MBS is the sewn end loop's, the lower figure: Aki's webbing manual (Rev. 1.9) gives 26 kN for \"Sonic Light ALB\" with a sewn end loop; the webbing itself is 27 kN."
     },
     {
         "id": 205,
@@ -10517,7 +10518,7 @@
     {
         "id": 233,
         "name": "Flama",
-        "brand": "Slack house",
+        "brand": "Slackhouse",
         "materialType": "Nylon",
         "width": 20,
         "thickness": 3.2,
@@ -10536,7 +10537,7 @@
     {
         "id": 234,
         "name": "Tiger",
-        "brand": "Slack house",
+        "brand": "Slackhouse",
         "materialType": "Dyneema/HMPE",
         "width": 21.5,
         "thickness": 2.5,
@@ -10564,7 +10565,7 @@
     {
         "id": 235,
         "name": "Rubbit",
-        "brand": "Slack house",
+        "brand": "Slackhouse",
         "materialType": "Nylon",
         "width": 26,
         "thickness": 3.35,
@@ -11351,6 +11352,7 @@
         "id": 249,
         "name": "Reggae",
         "brand": "Slack Inov",
+        "product_group": "Reggae",
         "gear_sellers": [
             "Spider Slacklines"
         ],
@@ -11610,145 +11612,6 @@
         "active": false
     },
     {
-        "id": 251,
-        "name": "Donkey 20",
-        "brand": "Slack Inov",
-        "gear_sellers": [
-            "Spider Slacklines"
-        ],
-        "stretch": [
-            {
-                "kn": 1,
-                "percent": 3.1
-            },
-            {
-                "kn": 2,
-                "percent": 4.9
-            },
-            {
-                "kn": 3,
-                "percent": 6.8
-            },
-            {
-                "kn": 4,
-                "percent": 8.1
-            },
-            {
-                "kn": 5,
-                "percent": 9.0
-            },
-            {
-                "kn": 6,
-                "percent": 10.0
-            },
-            {
-                "kn": 7,
-                "percent": 11.2
-            },
-            {
-                "kn": 8,
-                "percent": 12.5
-            },
-            {
-                "kn": 9,
-                "percent": 13.2
-            },
-            {
-                "kn": 10,
-                "percent": 14.0
-            },
-            {
-                "kn": 11,
-                "percent": 14.5
-            },
-            {
-                "kn": 12,
-                "percent": 15.0
-            },
-            {
-                "kn": 13,
-                "percent": 15.5
-            },
-            {
-                "kn": 14,
-                "percent": 16.0
-            },
-            {
-                "kn": 15,
-                "percent": 16.5
-            },
-            {
-                "kn": 16,
-                "percent": 17.0
-            },
-            {
-                "kn": 17,
-                "percent": 17.4
-            },
-            {
-                "kn": 18,
-                "percent": 17.8
-            },
-            {
-                "kn": 19,
-                "percent": 18.2
-            },
-            {
-                "kn": 20,
-                "percent": 18.5
-            },
-            {
-                "kn": 21,
-                "percent": 19.1
-            },
-            {
-                "kn": 22,
-                "percent": 19.6
-            },
-            {
-                "kn": 23,
-                "percent": 20.2
-            },
-            {
-                "kn": 24,
-                "percent": 20.7
-            },
-            {
-                "kn": 25,
-                "percent": 21.2
-            },
-            {
-                "kn": 26,
-                "percent": 21.8
-            },
-            {
-                "kn": 27,
-                "percent": 22.4
-            },
-            {
-                "kn": 28,
-                "percent": 23.0
-            },
-            {
-                "kn": 29,
-                "percent": 23.5
-            }
-        ],
-        "materialType": "Nylon",
-        "width": 20,
-        "thickness": null,
-        "weight": null,
-        "breakingStrength": null,
-        "webbing_construction": null,
-        "product_url": null,
-        "date_introduced": null,
-        "priceMeter": null,
-        "currency": null,
-        "description": null,
-        "notes": "Slack Inov / Spider 2026 datasheet (2026-09-02): listed as active with a full 1-29 kN stretch curve, but no MBS, capacity or price is given and no product page exists on either the Slack Inov or Spider storefront. Width 20 mm is inferred from the product name, not published.",
-        "active": true
-    },
-    {
         "id": 252,
         "name": "Anima",
         "description": "Aki Anima is a 20 mm wide and lightweight high-performance slackline webbing, especially for highlines over 100 m length. A hybrid weave construction using Tenesta-HPPE and polyester ensures state-of-the-art functionality. The 20 mm width offers enormous precision when walking, lower wind load and a greater webbing thickness, resulting in more comfortable edges and greater robustness against abrasion.",
@@ -11760,7 +11623,7 @@
         ],
         "width": 20,
         "weight": 38,
-        "breakingStrength": 30,
+        "breakingStrength": 28,
         "stretch": [
             {
                 "kn": 3,
@@ -11781,7 +11644,7 @@
         "date_introduced": null,
         "priceMeter": 3.75,
         "currency": "EUR",
-        "notes": "Specs from the Aki Slacklines product page as captured 2024-09-19. product_url is the Wayback capture, not the live page: aki-slacklines.de/en/products/aki-anima-slacklineband now answers \"Aki Slacklines is closed, we are no longer processing orders\" (checked 2026-09-04), so the archive is the only place the product is still visible - hence active false. Maker's own wording: webbing type flat, webbing construction \"Multi-Zone CS+\" (recorded here as Core/Sheath), surface uncoated, Tenesta HMPE + polyester hybrid weave, WLL 6 kN, colours white-blue and white-grey with red edges, country of manufacture EU. Marketed for highlines over 100 m. Stretch is the maker's three approximate figures (3 kN ~1%, 6 kN ~2%, 10 kN ~3%), not a measured curve. Price is the 3.75 EUR/m regular price; the capture shows a 3.00 EUR/m sale.",
+        "notes": "Specs from the Aki Slacklines product page as captured 2024-09-19. product_url is the Wayback capture, not the live page: aki-slacklines.de/en/products/aki-anima-slacklineband now answers \"Aki Slacklines is closed, we are no longer processing orders\" (checked 2026-09-04), so the archive is the only place the product is still visible - hence active false. Maker's own wording: webbing type flat, webbing construction \"Multi-Zone CS+\" (recorded here as Core/Sheath), surface uncoated, Tenesta HMPE + polyester hybrid weave, WLL 6 kN, colours white-blue and white-grey with red edges, country of manufacture EU. Marketed for highlines over 100 m. Stretch is the maker's three approximate figures (3 kN ~1%, 6 kN ~2%, 10 kN ~3%), not a measured curve. Price is the 3.75 EUR/m regular price; the capture shows a 3.00 EUR/m sale. Aki's webbing manual (Rev. 1.9, 2021, held as the range-wide Aki webbing manual) lists Anima at MBS 30 kN, WLL 6 kN, 2 % at 10 kN, 38 g/m, PE, 20 mm; the 2024 product page's figures are kept. MBS is the sewn end loop's, the lower figure: Aki's webbing manual (Rev. 1.9) gives 28 kN for \"Anima ALB\" with a sewn end loop; the webbing itself is 30 kN.",
         "active": false
     },
     {
@@ -12165,7 +12028,7 @@
         "width": 24.5,
         "thickness": 2.7,
         "weight": 62,
-        "breakingStrength": 32.5,
+        "breakingStrength": 27,
         "stretch": [
             {
                 "percent": 8.7,
@@ -12179,7 +12042,7 @@
         "currency": "EUR",
         "active": false,
         "colors": "Blue / golden yellow with black edges",
-        "notes": "Maker's page (German only, Wayback 2024-07-13): PES flat, 3-layer, uncoated, 24.5 mm, 2.7 mm, MBS 32.5 kN (34 kN average), 6.5 kN WLL, 8.7 % at 10 kN, 62 g/m, made in Germany. 1.40 €/m list, 1.12 €/m on sale at capture. Marketed as an all-round longline webbing (from ~30 m) with enough reserve for highline backups. The page links a manual (PDF) not yet fetched. Width is stored as an integer, so 24.5 mm loads as 24."
+        "notes": "Maker's page (German only, Wayback 2024-07-13): PES flat, 3-layer, uncoated, 24.5 mm, 2.7 mm, MBS 32.5 kN (34 kN average), 6.5 kN WLL, 8.7 % at 10 kN, 62 g/m, made in Germany. 1.40 €/m list, 1.12 €/m on sale at capture. Marketed as an all-round longline webbing (from ~30 m) with enough reserve for highline backups. The page links Aki's German webbing manual; the English edition (Rev. 1.9, which lists Soma) is held as Aki's range-wide webbing manual: https://web.archive.org/web/20230204210342/https://aki-slacklines.de/media/pdf/e0/5d/58/aki-webbing-manual-web-en.pdf Width is stored as an integer, so 24.5 mm loads as 24. Aki's webbing manual (Rev. 1.9, 2021, held as the range-wide Aki webbing manual) lists Soma at MBS 32.5 kN, WLL 6.4 kN, 8 % at 10 kN, 62 g/m, 24 mm; the product page's 8.7 % is kept. MBS is the sewn end loop's, the lower figure: Aki's webbing manual (Rev. 1.9) gives 27 kN for \"Soma\" with a sewn end loop; the webbing itself is 32.5 kN."
     },
     {
         "id": 269,

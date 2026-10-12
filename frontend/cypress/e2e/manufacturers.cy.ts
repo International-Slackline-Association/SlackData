@@ -172,7 +172,7 @@ describe('Manufacturers page', () => {
     cy.get('[data-cy="brand-gear-section"]').each(($section) => {
       const names = Cypress.$($section).find('[data-cy="gear-card-name"]')
         .toArray().map(el => el.textContent!.trim())
-      const sorted = [...names].sort((a, b) => a.localeCompare(b))
+      const sorted = [...names].sort((a, b) => a.localeCompare(b, undefined, { numeric: true }))
       expect(names, `${$section.attr('data-slug')} is A→Z`).to.deep.equal(sorted)
     })
   })
@@ -414,7 +414,7 @@ describe('Manufacturers page', () => {
 
   const totalOn = ($card: JQuery<HTMLElement>) =>
     ['webbings', 'weblocks', 'rollers', 'leashrings',
-     'grips', 'treepros', 'starterkits', 'tricklinekits']
+     'grips', 'treepros', 'starterkits', 'tricklinekits', 'connectors']
       .reduce((sum, slug) => sum + Number($card.attr(`data-count-${slug}`) ?? '0'), 0)
 
   it('lists manufacturers by total gear count, descending, by default', () => {
@@ -709,6 +709,7 @@ describe('Manufacturers page', () => {
       { apiPath: 'treepro',      attr: 'data-count-treepros'      },
       { apiPath: 'starterkit',   attr: 'data-count-starterkits'   },
       { apiPath: 'tricklinekit', attr: 'data-count-tricklinekits' },
+      { apiPath: 'connector',    attr: 'data-count-connectors'    },
     ]
 
     // Pick the first brand from the API

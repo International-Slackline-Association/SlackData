@@ -70,10 +70,13 @@ def add_rollers_to_db(rollers: list[dict], session: SessionDep) -> None:
             currency=currency,
             active=roller.get("active"),
             description=roller.get("description"),
+            version=roller.get("version"),
+            notes=roller.get("notes"),
             manufacturer_not_for_highline=roller.get("manufacturer_not_for_highline"),
             manufacturer_not_for_highline_source=roller.get("manufacturer_not_for_highline_source"),
             # Brand names only — see the model. Absent stays None, not [].
             gear_sellers=roller.get("gear_sellers") or None,
+            product_group=roller.get("product_group"),
         )
         db_roller = Roller.model_validate(roller_create)
         db_roller.id = require_seed_id(roller, "rollers.json")

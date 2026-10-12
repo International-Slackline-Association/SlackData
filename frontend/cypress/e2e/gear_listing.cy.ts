@@ -1,4 +1,5 @@
 import { GEAR_TYPES } from '../support/gear_types'
+import { listingUnits } from '../support/listing'
 
 // Tests run against every gear type — all assertions use the real backend.
 GEAR_TYPES.forEach(({ slug, apiPath, label }) => {
@@ -39,13 +40,13 @@ GEAR_TYPES.forEach(({ slug, apiPath, label }) => {
 
     it('displays the correct total item count', () => {
       cy.fetchAllItems(apiPath).then((all) => {
-        cy.get('[data-cy="item-count"]').should('contain.text', String(all.length))
+        cy.get('[data-cy="item-count"]').should('contain.text', String(listingUnits(all).length))
       })
     })
 
     it('renders exactly as many cards as the backend has items', () => {
       cy.fetchAllItems(apiPath).then((all) => {
-        cy.get('[data-cy="gear-card"]').should('have.length', all.length)
+        cy.get('[data-cy="gear-card"]').should('have.length', listingUnits(all).length)
       })
     })
 
@@ -105,7 +106,7 @@ GEAR_TYPES.forEach(({ slug, apiPath, label }) => {
         cy.get('[data-cy="empty-state"]').should('be.visible')
         cy.get('[data-cy="filter-sidebar"]').find('[data-cy="clear-filters"]').click()
         cy.get('[data-cy="search-input"]').should('have.value', '')
-        cy.get('[data-cy="gear-card"]').should('have.length', all.length)
+        cy.get('[data-cy="gear-card"]').should('have.length', listingUnits(all).length)
       })
     })
 
@@ -138,7 +139,7 @@ GEAR_TYPES.forEach(({ slug, apiPath, label }) => {
   it('Detailed view shows the same number of items as Cards view', () => {
     cy.fetchAllItems(apiPath).then((all) => {
       cy.get('[data-cy="view-detailed"]').click()
-      cy.get('[data-cy="gear-detailed-row"]').should('have.length', all.length)
+      cy.get('[data-cy="gear-detailed-row"]').should('have.length', listingUnits(all).length)
     })
   })
 
@@ -299,9 +300,9 @@ describe('Empty state — Clear filters keeps the search', () => {
       const norm = (s: unknown) =>
         String(s ?? '').normalize('NFD').replace(/[̀-ͯ]/g, '')
           .replace(/[.\-()/ ]/g, '').toLowerCase()
-      const matching = (all as Record<string, unknown>[]).filter(
+      const matching = listingUnits((all as Record<string, unknown>[]).filter(
         (it) => norm(it.name).includes('a') || norm(it.brand_name).includes('a'),
-      )
+      ))
       cy.get('[data-cy="item-count"]').should('contain.text', String(matching.length))
     })
   })

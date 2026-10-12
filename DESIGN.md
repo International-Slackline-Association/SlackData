@@ -747,6 +747,92 @@ with the item itself, so there is no second request that can fail here.
 Nothing about a co-listing appears on the **card** yet — see BACKLOG.md; the card shows the maker,
 because the specs are the maker's.
 
+### Product groups
+
+Some products are stated more than once, and each statement keeps its own row: its own specs, price
+and link. Rows for one product share a `product_group` (on every gear type; CLAUDE.md § Connectors).
+There are two kinds, and the UI tells them apart by gear type.
+
+- **One generic part, several shops** (connectors). An 8 mm stainless D shackle from Slacktivity,
+  SlackGear and Balance Community is three rows. One says 20 kN and another 29 kN, so the rows are
+  never merged into one set of figures.
+- **One product, several makers or batches** (webbings today). Slack.fr's and Slack Inov's Reggae
+  are two rows with different specs. A batch is told apart by `version`.
+
+What is a group, and what it is called, is decided in the seed, not the frontend:
+
+- The value is both the key and the display name: shape + size + material, e.g.
+  *D Shackle 8mm, Stainless*. Steel is never named (galvanized and zinc-plated count as steel), so a
+  plain steel part reads *Delta Quicklink 10mm*.
+- A group needs **at least two rows**. A part only one shop sells has no group.
+- **A row of unknown material never groups.** A connector whose material is `Other` is a guess
+  waiting for a source, and grouping it would merge it with parts it may not be.
+- **A captive pin does not split a group.** It is a flag per row (`captive_pin`), shown in the
+  vendor table.
+- Péguet (Maillon Rapide) and Van Beest (Green Pin) are filed as the **maker**, with the shops that
+  resell them as `gear_sellers` (§ Also sold by). A reseller adds a name to the maker's row, not a
+  row of its own; in a vendor table that row reads "sold by …" under the maker.
+- Groups are ours to assign, so `product_group` is not correctable through the suggestion box or
+  the manufacturer API.
+
+**On the listing a group is one card** (`utils/groups.ts`, `collapseGroups`).
+
+- **Order of operations:** search and filters run on the member rows, then groups collapse, then
+  sort runs. So a group stays in the listing if **any** member matches the filters.
+- **The card's numbers are the minimum over the members still matching**, shown as a range
+  ("20–29 kN") where they differ. A range filter's bounds always hold for what the card reports,
+  and sort ranks a group by its lowest stated value.
+- **The card's price is the cheapest member's**, prefixed "from" when more than one member has a
+  price.
+- **The brand line lists the members' brands** (`data-cy="group-vendors"`), at most three, then
+  "+N".
+- **Historic only when every member is.** One current shop keeps the card current.
+- **No outbound link.** "View product" on the card would go to one shop of several. The vendor
+  table carries every shop's link instead.
+- **Compare adds every member, each as its own item.** The compare table is per product, so picking
+  Reggae's card adds both versions and the bar says *2 items*. Only members still matching the
+  filters are added, and only as many as fit under the 10-item cap. The card reads as picked while
+  any member is in the bar, and its button then removes them all. Chips that share a name carry
+  the brand ("Slack.fr Reggae"). Cards, Detailed and Table views all go through this one toggle
+  in `GearListingPage.tsx`.
+- **A lone survivor is a plain card.** If the filters leave only one member, it shows as that row
+  and does not collapse.
+- **Cypress counts with `listingUnits()`** (`cypress/support/listing.ts`), never raw API rows, when
+  it compares the number of cards to the data.
+
+**On the detail page a member renders as the group** (`groupFor`). The heading is the group name, and
+the brand line lists every member's brand. A blurb or a note belongs to one listing, so neither is
+shown at the group level. **The spec sheet holds only the fields every member states identically.**
+Anything they disagree on, or that some leave blank (`_varies`), is left out of the sheet and lives
+in the vendor table instead, so the sheet never shows one shop's figure as though it were the
+part's.
+
+**The webbing stretch curve is the one exception: the group shows one curve, never a comparison.**
+Versions of one webbing are nearly always the same curve. Reggae's two are identical to 20 kN, and
+Slack Inov's simply runs on to 24. Overlaying them drew two lines on top of each other, and dropping
+the row hid the curve altogether. So the sheet shows the opened member's own curve, or, when that
+member has none, the member's curve with the most points (`groupCurve` in `utils/groups.ts`). The
+listing's card, Detailed panel and Table row use the longest one.
+
+**The vendor table** (`components/gear/VendorTable.tsx`, `data-cy="vendor-table"`) sits below the
+detail body. It is also shown on a collapsed group in the listing's Detailed view, which already
+carries its members.
+
+- Heading: *Sold by N shops* for connectors, *N versions* otherwise, plus one line on why the figures
+  differ.
+- **One row per member** (`data-cy="vendor-row"`, carrying `data-id`, `data-brand` and
+  `data-current`). Current members come first, then brand A→Z, then name.
+- **The row of the page you are on** is highlighted amber and is not a link.
+- **Columns:** shop or brand (a `BrandLink`, the Historic badge, and "sold by …" for a maker row
+  like Péguet's), and *Listed as* (the member's own name). Then *Version* when any member has one,
+  then the gear type's spec columns (any column every member leaves blank is dropped). Then
+  *Certification* when any member states a standard, *Captive pin* when any member has one, the
+  price, and the shop's page (*Archived page ↗* for a Wayback link).
+- **No stretch chart.** The table never overlays the members' curves; the spec sheet above shows
+  one (see above).
+- **The whole row opens that member**, not just its name. That is the rule in § Every row that
+  names an item opens it, and the vendor table follows it exactly as the listing's Table view does.
+
 ### Manuals & documents
 
 Manufacturers publish PDFs about their gear — user manuals, datasheets, product archives. Where we
@@ -834,6 +920,13 @@ frontend/src/data/brandManuals.json         # generated, never hand-edited
   and an alias table mapping one brand's manuals onto another's would be a second place for the
   brand relationships to be stated, and to go stale. Two brands is two files; that is the whole
   duplication the folder allows.
+- **A seller's manual reaches what it resells only where the seller opts in.** Aki Slacklines
+  carried on part of the Landcruising range, and its webbing manual's spec table lists those
+  webbings (Wave 19/25/32, White Magic, Wizard) beside Aki's own, so Aki's manual shows on every
+  webbing that names Aki in `gear_sellers`, whoever made it. Its caption says so: *Applies to all
+  webbings Aki Slacklines sells*. It is a list (`config/sellerManuals.ts`, today just Aki), not a
+  rule for every seller, because Spider and Slack Inov co-list each other's whole range and file
+  one PDF twice: a general rule would show it twice on every page of theirs.
 
 **On the page they are rows in the same card**, appended after the item's own documents, and each
 carries a small gray caption under its title — *Applies to all Balance Community webbings*
@@ -1325,6 +1418,40 @@ subtlety:
 Not covered, deliberately: the brand names in the **admin triage queue** and the correction form.
 Those are strings a *submitter* typed, not a catalogue brand — the whole point of the queue is that
 they have not been reconciled yet, so linking them would assert an identity nobody has checked.
+
+### Every row that names an item opens it
+
+> **This applies to every table, list or row that stands for one catalogue item — existing ones
+> and every new one. The whole row is the link, never just the name.** A reader aims at the row
+> they are reading, often at a number several columns from the name. Making them travel back to
+> one word to open the thing is a miss every time. New tables are not finished until they meet this.
+
+Where it holds today:
+
+| Where | Row hook |
+|---|---|
+| Listing, Table view (`GearTable.tsx`) | `gear-table-row` |
+| Detail page and Detailed view, the vendor table of a product group (`VendorTable.tsx`) | `vendor-row` |
+
+Cards get the same behaviour from one stretched `<Link>` overlay (§ Gear Card Anatomy).
+
+**How, in a table.** A `<tr>` cannot host a single stretched link: an absolutely positioned child of
+a table row has no reliable containing block. So:
+
+- **Every plain cell carries its own anchor** to the item. The padding moves off the `<td>` and onto
+  the anchor (`h-px p-0` on the cell, `h-full` on the anchor), so the target is the whole cell and
+  not just the text in it.
+- **Those anchors are `aria-hidden` with `tabIndex={-1}`.** They are one destination repeated per
+  cell. The **item's name** is the one link a keyboard or screen reader reaches.
+- **A real link, not just a click handler.** A handler alone loses the context menu, middle click,
+  "open in new tab" and the URL in the status bar.
+- **A click handler on the `<tr>` covers only the cells that hold links of their own** (a brand
+  name, a shop's page), because a link may not nest in a link. It stands aside when the click lands
+  on any `a, button, input, label`, and for a modified click.
+- **Hover marks the row** (`group` on the `<tr>`, a gray wash, `cursor-pointer`), so the target
+  reads as the row before the click.
+- **The row for the page you are already on is not a link.** In the vendor table that is the
+  highlighted current member.
 
 ### The two clear actions
 

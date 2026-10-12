@@ -243,8 +243,45 @@ Every gear type carries an **`active: bool | None`** field on its `Base<X>` (so 
 | TreePro | `/treepro` | `treepros.json` | 25 |
 | StarterKit | `/starterkit` | `starterkits.json` | 64 |
 | TricklineKit | `/tricklinekit` | `tricklinekits.json` | 10 |
+| Connector | `/connector` | `connectors.json` | 120 |
 | ISAGearWarning | `/isawarning` | `isa_gear_warnings.json` | 88 |
 | ISAGearCertification | `/isacertification` | `isa_certified.json` | 22 |
+
+**Connectors** (`models/connectors.py`) are the newest type: shackles, carabiners, quicklinks
+and soft shackles, as one model with three filter axes, `connector_style`, `closure` and
+`material` (`ConnectorMaterial`, which includes Dyneema/HMPE). The decisions behind the fields are in
+BACKLOG.md § "Connectors as a gear type". The candidates in CONNECTORS_REVIEW.md were reviewed
+on the frontend and approved on 2026-10-11:
+- ids 1–17 are slackline-specific connectors;
+- ids from 18 are generic stock hardware.
+
+Three candidates with too little data and no photos were moved to the local staging file instead,
+`candidates/connectors.json` (ids 9069, 9115, 9116; see `candidates/stage.py`).
+
+**Generic parts several shops sell are grouped, not merged.** Each shop's listing stays its own row
+with that shop's stated specs, price and link, and rows for the same part share `product_group`.
+The value is the group's key and display name: shape + size + material, e.g. "D Shackle 8mm,
+Stainless". Steel is never named (no connector name says "Steel"; galvanized and zinc-plated
+count as steel), and a row of unknown material never groups. A captive pin does not split a group: it is the `captive_pin` flag (default false),
+shown per shop in the vendor table. The group is set only where at least two shops sell
+the part, and it is not correctable (`_EXCLUDED`). `frontend/src/utils/groups.ts` handles three
+things:
+- **The listing:** a group collapses to one card after filtering and before sorting. A group stays
+  when any shop matches the filters. The card's numbers are the minimum over the matching shops,
+  and it displays them as ranges.
+- **The detail page:** a member's page renders the part. Its spec sheet holds only the fields
+  every shop agrees on (`_varies`), and `VendorTable` lists each shop as it states itself.
+- **Cypress:** a test that counts cards against API rows uses `listingUnits()`
+  (`cypress/support/listing.ts`).
+
+**`product_group` is on every gear type**, not just connectors, for a product whose specs depend
+on its maker or batch: one row per version, each with its own specs, grouped exactly like the
+shops above. The first is webbing `Reggae` (Slack.fr id 155, Slack Inov id 249). `groups.ts` keeps
+one union list of numeric/text fields for all types; `VendorTable.tsx` has per-type columns,
+shows a `version` column when any member has one (how batches are told apart), and never
+overlays stretch curves: a webbing group's spec sheet shows one curve (the opened member's, else
+the longest), since versions of one webbing are nearly always one curve. Peguet (Maillon Rapide) and Van Beest
+(Green Pin) are filed as the maker, with the shops that sell them as `gear_sellers`.
 
 ### ISA gear warnings
 
@@ -256,7 +293,7 @@ ids are **verified against the recorded `"<brand> <name>"`** before use, so seed
 reported instead of silently re-pointing a recall. The pass writes two things:
 
 1. `isa_warning` (the `ISAWarning` enum) onto the gear row — worst severity wins. Only
-   webbing / weblock / roller / leashring / grip have the column.
+   webbing / weblock / roller / leashring / grip / connector have the column.
 2. One `ISAGearWarning` row per (entry x matched gear id) — `models/isa_gear_warnings.py`, served
    read-only by `/isawarning` — holding the full entry (description, solution, parsed date, source
    links, in-production flag, match confidence). It has **no FK**: `(gear_type, gear_id)` is the
@@ -283,8 +320,9 @@ Its rules:
 - **Webbing and Webbing – Sewn Loop certificates** both certify the webbing row; **Intermittent
   Connection** certificates never do (the build leaves them unmatched, and the loader refuses them
   even if matched). Superseded certificates stay unmatched — newest only.
-- **Five types can be certified**: webbing / weblock / roller / leashring / grip. Kits and tree
-  protectors have no certification field at all.
+- **Six types can be certified**: webbing / weblock / roller / leashring / grip / connector
+  (ISA:52 is the Highline Connector standard). Kits and tree protectors have no certification
+  field at all.
 
 It writes, per certified row: `isa_certified = True`; `isa_certificate`, the primary certificate
 number (on webbing the plain Webbing one, else the Sewn Loop one), which is what picks the stamp
@@ -296,8 +334,9 @@ certificate (standard version, lab, test date, manual, pictures as links). No FK
 
 All three gear-row fields are in `_EXCLUDED` (`submissions/fields.py`): certification is the ISA's
 to state, and a hand-edit would be overwritten on the next seed. The old computed webbing
-`classification` is gone. 17 rows are certified today; 11 certificates match nothing (leashes, a
-connector, Intermittent Connection, one superseded) — tracked in BACKLOG.md.
+`classification` is gone. 18 rows are certified today (the 18th is connector 1, the KingPin
+shackle); 10 certificates match nothing (leashes, Intermittent Connection, one superseded) —
+tracked in BACKLOG.md.
 
 ### Gear descriptions
 
@@ -377,14 +416,16 @@ provenance.
   sourced, and "does this shop still stock it" is a different question from the
   product's own `active`, which for a fair part of this range is `false`.
 - **Aki Slacklines** sells 8 Landcruising webbings (White Magic, Unicorn, Wizard,
-  Wave Tube, Wave Tube 19, Verve Red, Wave Tube 32, Aloha/Tidal). Aki's founder
+  Wave Tube, Wave Tube 19, Verve Red, Wave Tube 32 (Matrix Outer), Aloha/Tidal). Aki's founder
   founded and ran Landcruising (2008–2018), and Aki carried on part of the range.
   Recorded per product from the Wayback copies of Aki's shops, one way only: Aki
   sells Landcruising's webbing, not the reverse. White Magic and Unicorn were
   each held twice, once under each brand (rows 6+209, 7+210); on 2026-10-05 the
   Aki rows were folded into the Landcruising ones, along with their photos, so
-  ids 209 and 210 no longer exist. Two uncertain matches were left out (Matrix
-  Outer, Verve 35mm); BACKLOG.md § Aki has them.
+  ids 209 and 210 no longer exist. Matrix Outer (115) and Aki's Wave Tube 32
+  (152) proved to be one webbing and were merged on 2026-10-12 as
+  `Wave Tube 32 (Matrix Outer)`, id 115, so id 152 no longer exists. Verve
+  35mm is not co-listed: no Aki listing for it was found.
 - **Spider Slacklines** sells EQB's `Bandit SH` and `Bandit SL` (weblocks 13,
   15). Each was held twice, once per brand (13+14, 15+16), and the ISA Bandit
   warning reached only the EQB copies. On 2026-10-07 the Spider rows were folded
@@ -405,7 +446,7 @@ provenance.
   moved onto `slackfr_neon-light` as `-3`, so id 154 no longer exists.
 
 **Not done here:** a redirect for merged rows (the Landcruising/Aki,
-EQB/Spider `Bandit` and `Paddle`, and Slack.fr/Slack Pro! `Neon Light` pairs were merged without one, so their old ids 404), and anything on the **card** — the card shows the maker, because the
+EQB/Spider `Bandit` and `Paddle`, Slack.fr/Slack Pro! `Neon Light`, and Matrix Outer/Wave Tube 32 pairs were merged without one, so their old ids 404), and anything on the **card** — the card shows the maker, because the
 specs are the maker's, and inventory counts still assume one row is one product,
 so a seller-only brand would read as "0 items" on the manufacturers page
 however much it sells. (SlackX was that case until 2026-10-07, when it and
@@ -652,7 +693,7 @@ Before writing any of the above, open the relevant `models/<type>.py` and `utili
 ## Conventions
 
 - Imports are absolute (`from slack_data....`).
-- `manufacturers.json` (80 entries) at root **is loaded — but as an enrichment pass, not a creator**. Brand rows are still created on the fly by `get_brand()` with only a name; `load_manufacturers.py` then backfills `country` / `year_founded` / `website` / `socials` / `contact_email` / `active` / `slackline_focused` onto the rows that already exist, matching on `canonical_brand()`. Its `catalog_id` **is** read at creation time, though — that is where `Brand.id` comes from (see § Loader pattern). It never inserts a brand (an entry with no matching row means we hold no gear for that manufacturer — `load_seller_brands.py` is the one pass that will insert one, for a seller-only brand). It **must run after every pass that creates a brand row** — the gear loaders and the seller-name pass, and is gated on "no brand has a country yet" rather than on an empty table. `contact_email` is the one field here that is **ours, not SlackDB's** — scraped from each manufacturer's own site (38/77 as of 2026-09-02; the rest publish a contact form only, or have no site left). `metadata.email_source` in the JSON records that provenance.
+- `manufacturers.json` (81 entries) at root **is loaded — but as an enrichment pass, not a creator**. Brand rows are still created on the fly by `get_brand()` with only a name; `load_manufacturers.py` then backfills `country` / `year_founded` / `website` / `socials` / `contact_email` / `active` / `slackline_focused` onto the rows that already exist, matching on `canonical_brand()`. Its `catalog_id` **is** read at creation time, though — that is where `Brand.id` comes from (see § Loader pattern). It never inserts a brand (an entry with no matching row means we hold no gear for that manufacturer — `load_seller_brands.py` is the one pass that will insert one, for a seller-only brand). It **must run after every pass that creates a brand row** — the gear loaders and the seller-name pass, and is gated on "no brand has a country yet" rather than on an empty table. `contact_email` is the one field here that is **ours, not SlackDB's** — scraped from each manufacturer's own site (38/77 as of 2026-09-02; the rest publish a contact form only, or have no site left). `metadata.email_source` in the JSON records that provenance.
 - Country is stored as the `Country` enum's **full display name** (`"Germany"`), not an ISO code; `get_country()` in `utilities/countries.py` maps the sources' alpha-2 codes onto the enum.
 - `BrandPublic` only declares `webbings` in its response schema — other gear lists exist on the ORM model via `@computed_field` but may not serialize in API responses.
 - No auth — all endpoints are open.

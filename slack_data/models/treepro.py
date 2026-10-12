@@ -55,6 +55,14 @@ class BaseTreePro(SQLModel):
     # hold. None = not researched, `[]` never written.
     gear_sellers: list[str] | None = Field(default=None, sa_column=Column(JSON))
 
+    # Rows that are ONE product stated more than once — by different makers
+    # (Slack.fr's and Slack Inov's Reggae) or from different batches — each
+    # with its own specs, share this value, which is also the group's display
+    # name. The listing shows them as one card and the detail page as a table,
+    # exactly like the generic parts in `connectors.py`. Set only where at
+    # least two rows share it; ours to assign, so not correctable.
+    product_group: str | None = Field(default=None, index=True)
+
 
 class TreePro(BaseTreePro, table=True):
     id: int | None = Field(default=None, primary_key=True)

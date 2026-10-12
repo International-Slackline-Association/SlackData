@@ -50,6 +50,7 @@ Runs after every gear loader (it needs the rows to exist) — see
 from sqlmodel import Session, select
 
 from slack_data.load_data._seed_io import read_seed_json, seed_path
+from slack_data.models.connectors import Connector
 from slack_data.models.grips import Grip
 from slack_data.models.isa_gear_certifications import (
     ISAGearCertification,
@@ -63,13 +64,15 @@ from slack_data.models.weblocks import Weblock
 ISA_CERTIFIED_FILE = seed_path("isa_certified.json")
 
 # The gear types that can be certified. Tree protectors, starter kits and
-# trickline kits cannot — a decision made in PR #83.
+# trickline kits cannot — a decision made in PR #83. Connectors can: ISA:52 is
+# the ISA's Highline Connector standard.
 CERTIFIABLE_MODELS = {
     "webbing": Webbing,
     "weblock": Weblock,
     "roller": Roller,
     "leashring": LeashRing,
     "grip": Grip,
+    "connector": Connector,
 }
 
 # The webbing product type whose certificate is preferred as a webbing row's

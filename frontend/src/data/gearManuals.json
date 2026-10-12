@@ -1,4 +1,30 @@
 {
+  "connectors": {
+    "vanbeest_bow-shackle-0-5-t": [
+      "vanbeest_bow-shackle-0-5-t-technical-drawing.pdf"
+    ],
+    "vanbeest_bow-shackle-1-5-t-7-16": [
+      "vanbeest_bow-shackle-1-5-t-7-16-technical-drawing.pdf"
+    ],
+    "vanbeest_bow-shackle-1-t": [
+      "vanbeest_bow-shackle-1-t-technical-drawing.pdf"
+    ],
+    "vanbeest_bow-shackle-2-t-1-2": [
+      "vanbeest_bow-shackle-2-t-1-2-technical-drawing.pdf"
+    ],
+    "vanbeest_bow-shackle-3-25-t-5-8": [
+      "vanbeest_bow-shackle-3-25-t-5-8-technical-drawing.pdf"
+    ],
+    "vanbeest_d-shackle-0-5-t": [
+      "vanbeest_d-shackle-0-5-t-technical-drawing.pdf"
+    ],
+    "vanbeest_d-shackle-1-5-t": [
+      "vanbeest_d-shackle-1-5-t-technical-drawing.pdf"
+    ],
+    "vanbeest_d-shackle-1-t": [
+      "vanbeest_d-shackle-1-t-technical-drawing.pdf"
+    ]
+  },
   "grips": {
     "bc_wafer-2-0": [
       "bc_wafer-2-0.pdf"
@@ -128,6 +154,9 @@
     "landcruise_lockman": [
       "landcruise_lockman-german-user-manual.pdf"
     ],
+    "landcruise_lockman-2-0": [
+      "landcruise_lockman-2-0-german-user-manual.pdf"
+    ],
     "landcruise_lynx-1": [
       "landcruise_lynx-1-german-user-manual.pdf"
     ],
@@ -136,6 +165,9 @@
     ],
     "landcruise_lynx-3-0": [
       "landcruise_lynx-3-0.pdf"
+    ],
+    "landcruise_puma-32": [
+      "landcruise_puma-32-product-archive.pdf"
     ],
     "landcruise_zilla-1-0": [
       "landcruise_zilla-1-0-german-user-manual.pdf"
@@ -161,8 +193,8 @@
     "slackinov_zenlock": [
       "slackinov_zenlock.pdf"
     ],
-    "slacktvty_kingpin": [
-      "slacktvty_kingpin.pdf"
+    "slacktvty_kingpin-weblock": [
+      "slacktvty_kingpin-weblock.pdf"
     ],
     "slacktvty_seahorse-dp-1-5": [
       "slacktvty_seahorse-dp-1-5.pdf"

@@ -64,6 +64,12 @@ export const EXTRA_SORT_FIELDS: Record<GearSlug, SortFieldMeta[]> = {
     { field: 'webbing_length', label: 'Webbing Length', nullLast: false },
     { field: 'webbing_width',  label: 'Webbing Width',  nullLast: false },
   ],
+  connectors: [
+    { field: 'mbs_straight_pull', label: 'MBS',           nullLast: true },
+    { field: 'mbs_crossload',     label: 'Crossload MBS', nullLast: true },
+    { field: 'opening',           label: 'Opening',       nullLast: true },
+    { field: 'pin_diameter',      label: 'Pin Diameter',  nullLast: true },
+  ],
   bungees:      [],
   leashringpro: [],
 }

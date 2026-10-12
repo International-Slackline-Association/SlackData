@@ -14,7 +14,7 @@ not just featured items:
   Industries, Viper). Raed/`raed-sports.com` rate-limited (429) on every attempt — its items are already
   deep in the DB from Sweep 1, so its still-missing kits are carried from there.
 - **WooCommerce** brands — pulled the full `/wp-json/wc/store/v1/products` feed with category names
-  (Slacktivity 119, Slack house 128, Bera Adventure 149, SlackGear 35, YogaSlackers 42, lineGrip 35,
+  (Slacktivity 119, Slackhouse 128, Bera Adventure 149, SlackGear 35, YogaSlackers 42, lineGrip 35,
   Middle Way 18).
 - **PrestaShop / custom / Wix** brands — fetched shop + category pages (Slack Mountain, EQB/slackshop.cz,
   Slackliner.de, Radrigs, Petram). Spider & Slack Inov block automated fetches (403) — their still-missing
@@ -25,7 +25,7 @@ and matched *within its own gear type* against the DB. Only genuine gaps are lis
 carabiners, shackles, quicklinks, maillons, ropes/slings, rigging plates, ratchets/soft-releases,
 training boards (SlackBoard/SlackRack), apparel, courses, and general climbing/PPE hardware.
 
-**Retailer caveat:** Slack house, EQB and Slackliner.de also *resell* other brands (e.g. the Gibbon
+**Retailer caveat:** Slackhouse, EQB and Slackliner.de also *resell* other brands (e.g. the Gibbon
 BananaLama/Jibline/Funline sets, Petram's Coelum/Aeris). Where a product is really another brand's, it is
 listed once under its true maker, not the shop.
 
@@ -87,10 +87,10 @@ images (`frontend/public/gear-images/webbings/`, manifest rebuilt). Re-seed to p
 
 | ✓ | Item | Brand | Source | Import notes |
 |---|------|-------|--------|--------------|
-| [x] | [Flama](https://slackhouseshop.pl/en/produkt/flama/) | Slack house | slackhouseshop.pl | 20mm flat nylon, 23 kN, 52 g/m. **No stretch curve published** — `stretch: null`; revisit if Slackhouse publishes one. |
-| [x] | [Tiger](https://slackhouseshop.pl/en/produkt/tiger/) | Slack house | slackhouseshop.pl | 21.5mm flat UHMWPE, 30 kN, 29.8 g/m. Spec table (1.9 % @5kN / 2.8 % @10kN) preferred over the prose figures. |
-| [x] | [Rubbit](https://slackhouseshop.pl/en/produkt/rubbit/) | Slack house | slackhouseshop.pl | MK II, 26mm tubular nylon, 24 kN. 20-point stretch curve digitised from Slackhouse's own chart (matches the published 12.3 %/17.7 % anchors). X-Type is the same webbing, not a second row. |
-| [x] | [Slamina](https://slackhouseshop.pl/en/produkt/gibbon-slamina-trickline-50mm/) | ~~Slack house~~ → **Gibbon** | slackhouseshop.pl | `active: false`. **Brand corrected**: the shop lists Gibbon as producer (Jaan Roose signature line, Gibbon-branded box) — filed under the true maker per the retailer rule in [Method](#method). Fibre and g/m weight are unpublished → `materialType: "Other"`, `weight: null`. |
+| [x] | [Flama](https://slackhouseshop.pl/en/produkt/flama/) | Slackhouse | slackhouseshop.pl | 20mm flat nylon, 23 kN, 52 g/m. **No stretch curve published** — `stretch: null`; revisit if Slackhouse publishes one. |
+| [x] | [Tiger](https://slackhouseshop.pl/en/produkt/tiger/) | Slackhouse | slackhouseshop.pl | 21.5mm flat UHMWPE, 30 kN, 29.8 g/m. Spec table (1.9 % @5kN / 2.8 % @10kN) preferred over the prose figures. |
+| [x] | [Rubbit](https://slackhouseshop.pl/en/produkt/rubbit/) | Slackhouse | slackhouseshop.pl | MK II, 26mm tubular nylon, 24 kN. 20-point stretch curve digitised from Slackhouse's own chart (matches the published 12.3 %/17.7 % anchors). X-Type is the same webbing, not a second row. |
+| [x] | [Slamina](https://slackhouseshop.pl/en/produkt/gibbon-slamina-trickline-50mm/) | ~~Slackhouse~~ → **Gibbon** | slackhouseshop.pl | `active: false`. **Brand corrected**: the shop lists Gibbon as producer (Jaan Roose signature line, Gibbon-branded box) — filed under the true maker per the retailer rule in [Method](#method). Fibre and g/m weight are unpublished → `materialType: "Other"`, `weight: null`. |
 | [x] | [Brasileirinha (Nylon)](https://www.beraadventure.com.br/product/fita-flat-brasileirinha-nylon-25mm-x-50-metros/) | Bera Adventure | beraadventure.com.br | 25mm flat nylon, 28 kN, 60 g/m; length variants collapsed, 8.00 BRL/m. |
 | [x] | [Sky 2.0](https://www.beraadventure.com.br/product/fita-flat-double-face-sky-2-0-50-metros-vinho-e-lilas/) | Bera Adventure | beraadventure.com.br | 25mm flat double-face polyester, 35 kN, 68 g/m; 7.00 BRL/m. |
 | [x] | [Sky 2.0 3D](https://www.beraadventure.com.br/product/fita-flat-double-face-sky-2-0-3d-50-metros/) | Bera Adventure | beraadventure.com.br | Kept separate from `Sky 2.0` — 3D weave, lower MBS (33 kN); 5.50 BRL/m. |
@@ -110,7 +110,7 @@ Four brand/name corrections were made against the table below, all following the
 - **ZENLOCK** and **Diamond Lock** → **Slack Inov**, not Spider Slacklines. slacklines.us is the US
   storefront; its own vendor field on the Diamond Lock reads `SLACK-INOV'`, and Slack Inov's press
   photography for the Zenlock is filed under `slackinov`.
-- **Simplex Locker** → **Petram Slacklines**, not Slack house. The Slackhouse product page lists
+- **Simplex Locker** → **Petram Slacklines**, not Slackhouse. The Slackhouse product page lists
   Petram as the producer.
 - **lineLoose Buckle** → seeded as `Slack Pro!`, which `canonical_brand()` maps to
   `lineGrip (formerly Slack Pro!)`. lineGrip sell it as a slackPro! last-stock item under
@@ -133,7 +133,7 @@ shape, so those model columns could never be populated from JSON.
 | [x] | [BLUEBERRY SR WEBLOCK](https://slacklines.us/products/weblock-blueberry-sr) | Spider Slacklines | slacklines.us | Stored as `Blueberry SR`. 125 g, MBS 48 kN, 24–26 mm. Second bottom pin for soft-release/sling entry → attachment `Pin`. |
 | [x] | [BLUEBERRY WEBLOCK](https://slacklines.us/products/weblock-blueberry) | Spider Slacklines | slacklines.us | Stored as `Blueberry`. 165 g, MBS 48 kN, 24–26 mm, rear hole → attachment `Hole`. |
 | [x] | [LINELOCK ALUMINUM RING](https://slacklines.us/products/linelock-ring-slackline) | Spider Slacklines | slacklines.us | Stored as `Linelock Aluminum Ring`. 20 g, MBS 30 kN, forged lime-green aluminium. |
-| [x] | [Simplex Locker](https://slackhouseshop.pl/produkt/simplex-locker/) | ~~Slack house~~ → **Petram Slacklines** | slackhouseshop.pl | MBS 36 kN, 40 g, inside width 21/26 mm → width 20–26 mm. €20. |
+| [x] | [Simplex Locker](https://slackhouseshop.pl/produkt/simplex-locker/) | ~~Slackhouse~~ → **Petram Slacklines** | slackhouseshop.pl | MBS 36 kN, 40 g, inside width 21/26 mm → width 20–26 mm. €20. |
 | [x] | [Weblock 50mm (Soft Release)](https://www.beraadventure.com.br/product/weblock-50mm-soft-release-50mm/) | Bera Adventure | beraadventure.com.br | trickline. Stored as `Weblock 50mm`. 600 g, WLL 10 kN, inner width 51 mm. **No MBS published** → `breaking_strength: null`. R$399.00 is the bundle price (weblock + 5 m webbing + soft release) and overstates the weblock alone. |
 | [x] | [Anel Linelock – Bera](https://www.beraadventure.com.br/product/anel-linelock-bera/) | Bera Adventure | beraadventure.com.br | Stored as `Anel Linelock`. MBS 47 kN, 43 g, R$55.00. Out of stock but still catalogued → `active: true`. |
 | [x] | [Line Lock](https://yogaslackers.com/shop/slackline/linelock/) | YogaSlackers | yogaslackers.com | $9. Aluminium is the only spec YogaSlackers publish — weight, MBS and dimensions are all null. |
@@ -222,8 +222,8 @@ description rule).
 | [x] | [TRICKLINE KIT – TRICK LINE 30](https://slacklines.us/products/trickline-kit-trick-line-30) | Spider Slacklines | slacklines.us | This is a different product from `Trickline Kit - Pro Line 25`: it uses the Trick Line webbing and a single Hummer ratchet. 30 m total (25 m webbing), $179, tree pro sold separately. `gear_sellers: ["Slack Inov"]`. No description because the shop's 429 rate-limiting blocked a verbatim copy. |
 | [x] | [DUOred](https://web.archive.org/web/20230128071156/https://www.slackliner.de/de/DUOred8.html) | Slackliner.de | slackliner.de (Wayback) | Live page is a 404, so the Wayback snapshot is used and `active: false`. 25 m version recorded (a 15 m version also existed). Single ratchet, felt tree protection included, €69.95. |
 | [x] | [Kit Elastic Line 50mm](https://www.beraadventure.com.br/product/kit-elastic-line-50mm-x-30-metros/) | Bera Adventure | beraadventure.com.br | 30 m × 50 mm printed polyester, **two** Ergo 50 ratchets, Bera tree protectors, R$669. The 25 m variant is still in stock, so `active: true`. The 9 kg figure is shipping weight, so `weight` is null. |
-| [x] | [Andy Lewis Trickline](https://slackhouseshop.pl/produkt/zestaw-andy-lewis-trickline/) | ~~Slack house~~ → **Gibbon** | slackhouseshop.pl | The shop names Gibbon as the producer (retailer rule). `active: false`. 22 m line, two ratchets, MBS 30 kN, 6.6 kg, 849 PLN. The tree wraps were a Slackhouse giveaway and are not part of the set. |
-| [x] | [Jibline](https://slackhouseshop.pl/produkt/zestaw-jibline/) | ~~Slack house~~ → **Gibbon** | slackhouseshop.pl | The shop names Gibbon as the producer. **`active: false` at the owner's call**, even though Gibbon still sells a "JIBLINE TREEWEAR SET". 15 m (12.5 m + 2.5 m ratchet loop), one ratchet, 30 kN, 389 PLN. |
+| [x] | [Andy Lewis Trickline](https://slackhouseshop.pl/produkt/zestaw-andy-lewis-trickline/) | ~~Slackhouse~~ → **Gibbon** | slackhouseshop.pl | The shop names Gibbon as the producer (retailer rule). `active: false`. 22 m line, two ratchets, MBS 30 kN, 6.6 kg, 849 PLN. The tree wraps were a Slackhouse giveaway and are not part of the set. |
+| [x] | [Jibline](https://slackhouseshop.pl/produkt/zestaw-jibline/) | ~~Slackhouse~~ → **Gibbon** | slackhouseshop.pl | The shop names Gibbon as the producer. **`active: false` at the owner's call**, even though Gibbon still sells a "JIBLINE TREEWEAR SET". 15 m (12.5 m + 2.5 m ratchet loop), one ratchet, 30 kN, 389 PLN. |
 | [x] | [Trickline](https://middlewayslacklines.com/trickline/) | Middle Way | middlewayslacklines.com | **Same product as the existing `23m kit`** (id 1: 23 m, ₪600, tree pro), so no new row. Updated id 1 in place: `product_url` set, `active: true`, specs moved into `notes`. The "double gear" ERGO is one ratchet, so it stays `RAT1`. |
 
 ---
@@ -252,12 +252,12 @@ description rule).
 | [ ] | [REDPARK](https://slacktivity.com/shop/redpark-longline-kit/) / [PINKPARK](https://slacktivity.com/shop/pinkpark-longline-slackline-kit/) / [LSDPARK](https://slacktivity.com/shop/lsdpark-slackline-pulley-system-set/) | Slacktivity | slacktivity.com | 50m longline+pulley kits |
 | [ ] | [Rock Highline Kit](https://slacktivity.com/shop/rock-highline-kit/) | Slacktivity | slacktivity.com | highline kit |
 | [ ] | [Tree Highline Kit](https://slacktivity.com/shop/tree-highline-kit/) | Slacktivity | slacktivity.com | highline kit |
-| [ ] | [MonsterSet 25M](https://slackhouseshop.pl/produkt/monsterset/) | Slack house | slackhouseshop.pl | |
-| [ ] | [MonsterSet Plus 25M](https://slackhouseshop.pl/produkt/zestaw-monsterset-plus-25m/) | Slack house | slackhouseshop.pl | |
-| [ ] | [Buddha 25M](https://slackhouseshop.pl/produkt/zestaw-buddha-25m/) | Slack house | slackhouseshop.pl | |
-| [ ] | [Laser 15M](https://slackhouseshop.pl/produkt/laser-15m/) | Slack house | slackhouseshop.pl | |
-| [ ] | [Laser Plus 15M](https://slackhouseshop.pl/produkt/laser-plus/) | Slack house | slackhouseshop.pl | |
-| [ ] | [System Red 18:1](https://slackhouseshop.pl/produkt/system-red-181/) | Slack house | slackhouseshop.pl | pulley system kit |
+| [ ] | [MonsterSet 25M](https://slackhouseshop.pl/produkt/monsterset/) | Slackhouse | slackhouseshop.pl | |
+| [ ] | [MonsterSet Plus 25M](https://slackhouseshop.pl/produkt/zestaw-monsterset-plus-25m/) | Slackhouse | slackhouseshop.pl | |
+| [ ] | [Buddha 25M](https://slackhouseshop.pl/produkt/zestaw-buddha-25m/) | Slackhouse | slackhouseshop.pl | |
+| [ ] | [Laser 15M](https://slackhouseshop.pl/produkt/laser-15m/) | Slackhouse | slackhouseshop.pl | |
+| [ ] | [Laser Plus 15M](https://slackhouseshop.pl/produkt/laser-plus/) | Slackhouse | slackhouseshop.pl | |
+| [ ] | [System Red 18:1](https://slackhouseshop.pl/produkt/system-red-181/) | Slackhouse | slackhouseshop.pl | pulley system kit |
 | [ ] | [Kit Slack Camuflado](https://www.beraadventure.com.br/product/kit-camuflado-20-metros/) | Bera Adventure | beraadventure.com.br | |
 | [ ] | [Kit Pink Slack](https://www.beraadventure.com.br/product/kit-pink-slack-20-metros/) | Bera Adventure | beraadventure.com.br | |
 | [ ] | [Kit Bobslack](https://www.beraadventure.com.br/product/kit-bobslack-20-metros-backup/) | Bera Adventure | beraadventure.com.br | |
@@ -469,7 +469,7 @@ Rows marked **⚠ similar to `X`** closely resemble an existing DB row — confi
 
 Swept all 42 active manufacturers with a website from `manufacturers.json`. This section holds **73 candidates** across 17 brands, diffed against the DB. **Name / URL / guessed type only.**
 
-Method: Shopify/WooCommerce JSON feeds where available (Gibbon, Viper, Slackline Industries, Middle Way, YogaSlackers, SlackGear, Bera, Slack house), WebFetch for the rest. Non-Latin names (Hebrew) left as-is.
+Method: Shopify/WooCommerce JSON feeds where available (Gibbon, Viper, Slackline Industries, Middle Way, YogaSlackers, SlackGear, Bera, Slackhouse), WebFetch for the rest. Non-Latin names (Hebrew) left as-is.
 
 **Scope notes:** the 16 general climbing/PPE brands (Petzl, CAMP, Kong, Edelrid, Mammut, ISC, SMC, Rock Exotica, Van Beest, Singing Rock, Tendon, Trango, Fusion Climb, CMC Rescue, Krok, Episwiss) were **not** deep-swept — their slackline-specific gear is already in the DB and their catalogs are overwhelmingly non-slackline. Unreachable: a-zero.com.ar (DNS fail), slacklineshop.co.nz (403), bloacs.de (B2B installs, no retail products). Length variants collapsed to one row per product.
 
@@ -490,7 +490,7 @@ Method: Shopify/WooCommerce JSON feeds where available (Gibbon, Viper, Slackline
 | [ ] | [WEBLOCK](https://www.beraadventure.com.br/product/weblock-50mm-soft-release-50mm/) | Bera Adventure | beraadventure.com.br | `weblock` |
 | [ ] | [ANEL LINELOCK – BERA](https://www.beraadventure.com.br/product/anel-linelock-bera/) | Bera Adventure | beraadventure.com.br | `weblock` |
 | [ ] | [Slackfriend](https://www.radrigs.co.uk/product-page/slackfriend) | Radrigs | radrigs.co.uk | `weblock` |
-| [ ] | [Aeris Mono weblock](https://slackhouseshop.pl/produkt/aeris-mono-weblock/) | Slack house | slackhouseshop.pl | `weblock` |
+| [ ] | [Aeris Mono weblock](https://slackhouseshop.pl/produkt/aeris-mono-weblock/) | Slackhouse | slackhouseshop.pl | `weblock` |
 | [ ] | [Chainlink LineLocker](http://www.slackgear.co.za/product/chainlink-linelocker/) | SlackGear | slackgear.co.za | `weblock` |
 | [ ] | [Meercat LineLocker](http://www.slackgear.co.za/product/meercat-linelocker/) | SlackGear | slackgear.co.za | `weblock` |
 | [ ] | [Linelocker for 50mm](https://www.slackliner.de/de/Linelocker-fuer-50mm-Baender-251.html) | Slackliner.de | slackliner.de | `weblock` |
@@ -530,14 +530,14 @@ Method: Shopify/WooCommerce JSON feeds where available (Gibbon, Viper, Slackline
 |---|------|-------|--------|------|
 | [ ] | [Treewear XL](https://www.gibbon-slacklines.com/products/slackline-treewear-xl) | Gibbon | gibbon-slacklines.com | `treepro` |
 | [ ] | [Treewear](https://www.gibbon-slacklines.com/products/slackline-treewear) | Gibbon | gibbon-slacklines.com | `treepro` |
-| [ ] | [Owijka Treewear XL](https://slackhouseshop.pl/produkt/treewear-xl/) | Slack house | slackhouseshop.pl | `treepro` |
-| [ ] | [Owijka Treewear](https://slackhouseshop.pl/produkt/treewear/) | Slack house | slackhouseshop.pl | `treepro` |
-| [ ] | [Classic Line Treewear](https://slackhouseshop.pl/produkt/classic-line-treewear/) | Slack house | slackhouseshop.pl | `treepro` |
-| [ ] | [Classic Line XL Treewear](https://slackhouseshop.pl/produkt/classic-line-xl-treewear/) | Slack house | slackhouseshop.pl | `treepro` |
-| [ ] | [Jibline XL Treewear](https://slackhouseshop.pl/produkt/jibline-xl-treewear/) | Slack house | slackhouseshop.pl | `treepro` |
-| [ ] | [Jibline Treewear](https://slackhouseshop.pl/produkt/jibline-treewear/) | Slack house | slackhouseshop.pl | `treepro` |
-| [ ] | [Surfer Line Treewear](https://slackhouseshop.pl/produkt/zestaw-surfer-line/) | Slack house | slackhouseshop.pl | `treepro` |
-| [ ] | [Funline Treewear](https://slackhouseshop.pl/produkt/zestaw-funline/) | Slack house | slackhouseshop.pl | `treepro` |
+| [ ] | [Owijka Treewear XL](https://slackhouseshop.pl/produkt/treewear-xl/) | Slackhouse | slackhouseshop.pl | `treepro` |
+| [ ] | [Owijka Treewear](https://slackhouseshop.pl/produkt/treewear/) | Slackhouse | slackhouseshop.pl | `treepro` |
+| [ ] | [Classic Line Treewear](https://slackhouseshop.pl/produkt/classic-line-treewear/) | Slackhouse | slackhouseshop.pl | `treepro` |
+| [ ] | [Classic Line XL Treewear](https://slackhouseshop.pl/produkt/classic-line-xl-treewear/) | Slackhouse | slackhouseshop.pl | `treepro` |
+| [ ] | [Jibline XL Treewear](https://slackhouseshop.pl/produkt/jibline-xl-treewear/) | Slackhouse | slackhouseshop.pl | `treepro` |
+| [ ] | [Jibline Treewear](https://slackhouseshop.pl/produkt/jibline-treewear/) | Slackhouse | slackhouseshop.pl | `treepro` |
+| [ ] | [Surfer Line Treewear](https://slackhouseshop.pl/produkt/zestaw-surfer-line/) | Slackhouse | slackhouseshop.pl | `treepro` |
+| [ ] | [Funline Treewear](https://slackhouseshop.pl/produkt/zestaw-funline/) | Slackhouse | slackhouseshop.pl | `treepro` |
 | [ ] | [Tree Protectors](http://www.slackgear.co.za/product/tree-protectors/) | SlackGear | slackgear.co.za | `treepro` |
 | [ ] | [Flexitube](https://sicherungsprofi.de/flexitube/SL05-RS) | Slackstar | sicherungsprofi.de | `treepro` |
 | [ ] | [Impact Protection](https://sicherungsprofi.de/prallschutz/SL81803-A) | Slackstar | sicherungsprofi.de | `treepro` |
@@ -581,7 +581,7 @@ Method: Shopify/WooCommerce JSON feeds where available (Gibbon, Viper, Slackline
 |---|------|-------|--------|------|
 | [ ] | [Trick 20m](https://www.slackshop.cz/en/for-beginners/8-eqb-trick-20-m.html) | Equilibrium Slacklines (EQB) | slackshop.cz | `tricklinekit` |
 | [ ] | [ערכת טריקליין Trickline](https://middlewayslacklines.com/trickline/) | Middle Way Slacklines | middlewayslacklines.com | `tricklinekit` |
-| [ ] | [Zestaw Andy Lewis Trickline](https://slackhouseshop.pl/produkt/zestaw-andy-lewis-trickline/) | Slack house | slackhouseshop.pl | `tricklinekit` |
-| [ ] | [Jibline](https://slackhouseshop.pl/produkt/zestaw-jibline/) | Slack house | slackhouseshop.pl | `tricklinekit` |
+| [ ] | [Zestaw Andy Lewis Trickline](https://slackhouseshop.pl/produkt/zestaw-andy-lewis-trickline/) | Slackhouse | slackhouseshop.pl | `tricklinekit` |
+| [ ] | [Jibline](https://slackhouseshop.pl/produkt/zestaw-jibline/) | Slackhouse | slackhouseshop.pl | `tricklinekit` |
 | [ ] | [TRICK LINE KIT](https://www.slacklineindustries.com/products/trick-line-kit) | Slackline Industries | slacklineindustries.com | `tricklinekit` |
 | [ ] | [DUOred](https://www.slackliner.de/de/DUOred8.html) | Slackliner.de | slackliner.de | `tricklinekit` |

@@ -63,10 +63,13 @@ def add_grips_to_db(grips: list[dict], session: SessionDep) -> None:
             currency=currency,
             active=grip.get("active"),
             description=grip.get("description"),
+            version=grip.get("version"),
+            notes=grip.get("notes"),
             manufacturer_not_for_highline=grip.get("manufacturer_not_for_highline"),
             manufacturer_not_for_highline_source=grip.get("manufacturer_not_for_highline_source"),
             # Brand names only — see the model. Absent stays None, not [].
             gear_sellers=grip.get("gear_sellers") or None,
+            product_group=grip.get("product_group"),
         )
         db_grip = Grip.model_validate(grip_create)
         db_grip.id = require_seed_id(grip, "grips.json")

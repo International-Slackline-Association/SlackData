@@ -194,9 +194,16 @@ const GearTableRow = memo(function GearTableRow({
                   )}
                 </div>
                 <div className="min-w-0">
+                  {/* max-w is what makes `truncate` bite: a table cell grows to
+                      its content, and a collapsed generic part's brand line is
+                      every shop that sells it (utils/groups.ts), which
+                      unbounded widened the frozen column past the viewport
+                      and pushed every spec column off screen. The full list
+                      is in the tooltip and the detail page's vendor table. */}
                   <div
                     data-cy="gear-table-brand"
-                    className="truncate text-[11px] font-medium uppercase tracking-wide text-gray-500"
+                    title={String(item.brand_name ?? '')}
+                    className="max-w-xs truncate text-[11px] font-medium uppercase tracking-wide text-gray-500"
                   >
                     <BrandLink name={item.brand_name} />
                   </div>

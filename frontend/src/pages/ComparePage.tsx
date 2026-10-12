@@ -23,6 +23,7 @@ import { useGearList } from '@/hooks/useGearList'
 import { useCurrency } from '@/context/CurrencyContext'
 import { SPEC_ROWS, type PriceFormatter } from '@/config/specRows'
 import { parseIdList } from '@/utils/compare'
+import { memberLabel } from '@/utils/groups'
 import type { AnyItem } from '@/utils/format'
 import type { GearSlug } from '@/types'
 import BackLink from '@/components/layout/BackLink'
@@ -35,7 +36,7 @@ import NotFoundPage from './NotFoundPage'
 export default function ComparePage() {
   const { slug } = useParams()
   const meta = slug ? getGearType(slug) : undefined
-  const [params] = useSearchParams()
+  const [params, setParams] = useSearchParams()
   const { items, loading } = useGearList(meta?.slug ?? '', !!meta?.available)
   const { priceText } = useCurrency()
   // This table as a back-link target. The column links are written here, in the
@@ -57,6 +58,16 @@ export default function ComparePage() {
   // compare nothing.
   const ids = useMemo(() => parseIdList(params.get('ids')), [params])
 
+  // Taking one column off rewrites ?ids=, so the page stays its own deep link.
+  // This is how ONE version of a group leaves the table: picking the Reggae card
+  // brings both makers' versions, and either can go on its own. Replace, not
+  // push — Back returns to the listing, not through every removed column.
+  const removeColumn = (id: number) => {
+    const next = new URLSearchParams(params)
+    next.set('ids', ids.filter(x => x !== id).join(','))
+    setParams(next, { replace: true })
+  }
+
   // The requested items, in URL order, dropping any id that isn't in the dataset.
   const columns = useMemo(() => {
     const byId = new Map((items as unknown as AnyItem[]).map(it => [Number(it.id), it]))
@@ -70,6 +81,10 @@ export default function ComparePage() {
     () => stretchSeries(columns).length >= STRETCH_CHART_MIN_SERIES,
     [columns],
   )
+
+  // The chart's legend names a curve by its item's name, and two versions of
+  // one group share theirs (both Reggae) — so a member is named with its brand.
+  const legendItems = useMemo(() => columns.map(it => ({ ...it, name: memberLabel(it) })), [columns])
 
   // Rows that at least one item in the whole dataset populates. Keyed off
   // `items`, not `columns`, so which rows exist is a property of the gear type
@@ -121,11 +136,22 @@ export default function ComparePage() {
                     data-id={String(item.id)}
                     className="min-w-[7rem] border-b border-gray-200 px-3 py-3 text-left align-bottom sm:min-w-[10rem] sm:px-4"
                   >
-                    <div
-                      data-cy="compare-col-brand"
-                      className="text-[11px] font-medium uppercase tracking-wide text-gray-500"
-                    >
-                      <BrandLink name={item.brand_name} />
+                    <div className="flex items-start justify-between gap-2">
+                      <div
+                        data-cy="compare-col-brand"
+                        className="text-[11px] font-medium uppercase tracking-wide text-gray-500"
+                      >
+                        <BrandLink name={item.brand_name} />
+                      </div>
+                      <button
+                        data-cy="compare-col-remove"
+                        type="button"
+                        aria-label={`Remove ${memberLabel(item)} from the comparison`}
+                        onClick={() => removeColumn(Number(item.id))}
+                        className="-mr-1 -mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-gray-400 hover:bg-gray-100 hover:text-gray-800"
+                      >
+                        ×
+                      </button>
                     </div>
                     <Link
                       data-cy="compare-col-name"
@@ -180,7 +206,7 @@ export default function ComparePage() {
             </tbody>
           </table>
           </div>
-          <StretchChart items={columns} />
+          <StretchChart items={legendItems} />
         </>
       )}
     </div>
