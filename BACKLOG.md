@@ -559,14 +559,116 @@ Non-phase engineering tasks not tracked in [PLAN.md](PLAN.md) (frontend roadmap)
   only on an explicit statement, `false` when marketed for highlining, `null` when silent or gone.
 
 - [ ] **ISA certificates with no gear row to land on.** Left unmatched, each with a note:
-  - **Slacktivity KingPin** — `approved_gear_27`, ISA:52 **Connector**. We *do* hold a Slacktivity
-    KingPin, as **weblock 41** (style "Tensionable Weblock"); it was left unmatched because a
-    connector certificate is not a weblock certificate. Decide whether it is the same product and
-    whether an ISA:52 certificate should certify a weblock row — matching it would make 18
-    certified rows, not 17.
   - **Intermittent Connection** webbing certificates (`approved_gear_16`, `19`, `22`, `25`, `26`) —
     they certify a way of joining webbing, not the webbing, so they never count (the loader refuses
     them even if matched). Revisit only if we ever model connection methods.
+
+- [ ] **Connectors as a gear type.** We hold no connectors. Shackles only turn up as kit contents,
+  or under "not a gear type we have" in the archive passes. The category (operator, 2026-10-11):
+  - **aluminium shackles**: one historic, two current. One is Slacktivity's **KingPin**, see below.
+    The historic one is Landcruising's **AirBow** (about 2015). It appears only as a prototype and is
+    not in Landcruising's 2016 shop (CONNECTORS_REVIEW.md, Q8).
+  - **stainless steel shackles**: a dozen or so kinds, in different qualities.
+  - **slackline-specific (steel) carabiners**.
+  - **soft shackles** (Dyneema): BC 4/5/6 mm, Spider's, raed's.
+
+  **Two aluminium push-pin shackles recorded so far, besides the KingPin** (2026-10-11):
+  - **Balance Community Slackle**, current, a pre-order in October 2026 (US$45, "ships mid October")
+    (<https://www.balancecommunity.com/products/slackle>). It weighs 128 g, with an MBS of
+    60 kN straight pull and 30 kN side pull, and a 12 kN WLL. Body: CNC-machined 7075-T6. Quick pin:
+    17-4PH stainless, 12 mm × 77.4 mm, fully round and free-spinning, with a 2024 alloy handle and
+    a 440C ball. The jaw is 26.2 mm. Inside it is 40 × 51 mm, outside 62 × 86 mm, and the eye is
+    30 mm. One side arm has a parking spot that holds the pin captive during rigging (flip the
+    shackle to use it from the other side). The jaw is sized for BC's MightyLock, 1" and 20 mm sewn
+    loops, AWL 6-series weblocks and the soft release, and the bow takes several strands of Spanni or
+    9 mm rope. The page names no ISA or EN standard.
+  - **Cong Gear Falcon** (隼), current. The only source is a Facebook photo post
+    (<https://www.facebook.com/photo?fbid=10162586676227383&set=pcb.10162586676302383>, sent
+    by the operator; a plain fetch gets nothing but the login wall). The spec photo gives
+    144 g, MBS 60 kN and WLL 8 kN, and the same MBS and WLL are engraved on the body. Outside it
+    is 79 mm tall × 82 mm wide (the 82 mm is measured across the pin, head included). Inside it
+    is 44.8 mm tall × 38 mm wide, and the jaw is 26 mm. It has an aluminium body (alloy not
+    stated), anodised black, red or blue, and a stainless push pin with a black button head,
+    a red collar and a cord lanyard. "FALCON", "DESIGNED BY CONG GEAR" and the Cong Gear mark
+    are engraved on it. No price, standard or product page is known. We hold the six photos
+    the operator sent, but they are not filed, since there is no connector image folder yet.
+
+  **ISA standard: ISA:52, "Highline Connector".** It is the standard behind
+  `approved_gear_27` in `isa_certified.json`, the only connector certificate so far: Slacktivity
+  KingPin, ISA:52, tested 2023 by Siebert Consulting, Vienna. Slacktivity's page says it is
+  "Compliant with ISA52 Highline Connector Standard" and also with EN362:2005 (M-type connector).
+  It gives 107 g, a 48 kN MBS lengthwise and 28 kN across, an 8 kN WLL, an AL7075 body and a
+  17-4PH stainless 11.2 mm PushPin
+  (<https://slacktivity.com/shop/kingpin-aluminium-shackle/>). We have **not seen the text of
+  ISA:52**. The ISA's [gear standards page](https://www.slacklineinternational.org/isa-gear-standards/)
+  lists only ISA:21 (Highline System, 2023, free PDF), :37 Leash, :41 Webbing, :51 Webbing Locker
+  and :61 Webbing Grab. The paid standards are sold through
+  <https://data.slacklineinternational.org/safety/gear-standards/>. ISA:21 (2023) also allows
+  industrial and climbing equipment, used properly and backed up separately, so EN362 / EN12275
+  ratings matter as much as ISA:52 for most shackles and carabiners. To do: get ISA:52 (and check
+  whether it covers soft shackles), read ISA:21's connector section, and read the ISA publication
+  <https://data.slacklineinternational.org/publications/highline/connectors/> (JS-rendered, so
+  a plain fetch gets only the menus).
+
+  **Decisions (operator, 2026-10-11):**
+  - **One `Connector` type**, soft shackles included. Form and material are separate axes, each
+    with its own filter group:
+    - `connector_style`: Shackle / Carabiner / Quicklink / Soft shackle (4 forms). Push-pin vs
+      screw-pin is carried by `closure`, not by the style.
+    - `closure`: one enum across all forms. Screw pin / bolt + nut / push pin / screwgate /
+      twist-lock / triple-lock / quicklink sleeve / knot.
+    - `material`: a new `ConnectorMaterial` enum in `models/connectors.py`, with values
+      Aluminum / Steel / Stainless Steel / Titanium / Dyneema / Other. `MetalMaterial` stays
+      untouched. An optional free-text `alloy` holds grades such as 7075-T6 or 17-4PH.
+  - **Strengths, kN, nullable:** `mbs_straight_pull`, `mbs_crossload`, `mbs_gate_open`
+    (carabiners). **No WLL field.** A shackle that states only a WLL gets it in `notes` ("WLL
+    1.5 t, no MBS published"). MBS is never derived from WLL.
+  - **Dimensions, mm, nullable:** `opening`, one field for every style. For a shackle it is the jaw
+    width. For a carabiner or quicklink it is the gate opening. For a soft shackle it is the inner
+    size of the closed loop as the maker states it, with `notes` saying how it was measured when the
+    maker words it differently. This replaces the earlier `jaw_width` + soft-shackle `length`. Also
+    `pin_diameter`, `rope_diameter` (soft shackles) and `weight`. No inner/outer sizes.
+  - **Strength stated in tonnes** ("6-ton breaking strength", "Bruchlast 6,000 kg") is converted to
+    kN (× 9.81) as the MBS, with the original wording kept in `notes`. A **proof load** ("tested to
+    1500 kg") is not an MBS and goes in `notes` only.
+  - **Which rows:** connectors the brand designed or makes itself, plus generic stock hardware
+    **only where the shop publishes an MBS**. **One row per size** ("Twisted Shackle 12mm").
+  - **Named industrial makers become brands, with the shops as `gear_sellers`:** Peguet (Maillon
+    Rapide, a new `manufacturers.json` entry) and Van Beest / Green Pin (already an entry). This
+    includes BC's two Van Beest shackles. Kong, Petzl, Singing Rock, Climbing Technology, Edelrid,
+    Petersen and Wichard stay out.
+  - **Out:** rigging plates, rings, swivels, sewn textile links and rope-pulley carabiners.
+  - **Generic stock hardware is grouped, not merged** (operator, 2026-10-11). One row per shop
+    listing, each with that shop's specs, price and link. Rows naming the same part (shape + size
+    + material) share `product_group`; a captive pin is the `captive_pin` flag, not a split. The listing shows a group as one card (spec
+    ranges, "from" price, the shops as the brand line, linking to the first member). A member's
+    page shows the part: only the specs all shops agree on, then a vendor table with every shop,
+    historic ones marked. Only parts at least two shops sell are grouped. Peguet and Van Beest stay
+    their own products. Climbing makers' carabiners (CAMP, Climbing Technology) are out.
+  - **The Landcruising AirBow** is included with `active: false`. It was first taken for a
+    prototype that was never sold; the production shackle turned up (serial-numbered, on
+    Landcruising's archived shop), so the row holds its engraved figures: 70 kN along, 38 kN
+    across, WLL 8 kN.
+  - **Standards:** `standards: list[str]` holds what the maker claims (e.g. `["EN362:2005",
+    "ISA:52"]`), plus `standards_source`. ISA certification stays derived from
+    `isa_certified.json`, never from this list.
+  - **Scope:** all four forms. **Brand rule:** connectors a slackline brand sells under its own
+    name (the retailer rule), plus the Peguet / Van Beest exception below. No climbing makers (DMM,
+    Petzl), no "Unbranded" placeholder.
+  - **ISA warning #65** (KingPin shackle pin) lands on **both** the connector row (exact) and
+    weblock 41 (which ships with the same pin). A match block holds one `gearType`, so this needs
+    either two entries or multi-type matching in `load_isa_warnings.py`.
+  - **Nav:** the Connectors tab goes after Tree Protectors, before the kits.
+  - **Data:** Claude researches the slackline brands' shops (plus Wayback for historic items) and
+    brings back a sourced candidate list for operator review before anything enters
+    `connectors.json`.
+  - ~~Whether the KingPin moves off weblock 41.~~ Settled 2026-10-11 (operator): weblock 41 is the
+    **KingPin Weblock**, the shackle plus a weblock piece, and stays a weblock. The bare KingPin
+    shackle becomes a new connector row, and `approved_gear_27` matches that row.
+
+  Then follow the full new-gear-type checklist (CLAUDE.md), and certification becomes the sixth
+  certifiable type: add `isa_certified` / `isa_certificate` to the model, and teach
+  `load_isa_certifications.py` that `Connector` certificates land on it.
 
 - [ ] **Add bungees as a gear type.** The `Bungee` model already exists on branch
   `bungees_ringpadding` (`slack_data/models/bungees.py`) but has **no seed JSON, no loader, no
@@ -594,7 +696,7 @@ Non-phase engineering tasks not tracked in [PLAN.md](PLAN.md) (frontend roadmap)
   (`webbings.json` 61) carries two of them and is `active: true` — so we show a warning badge on a
   webbing you can buy new today, when only pre-April-2020 stock is affected. Over-warning is the
   safer failure of the two, but it is still false, and a catalogue that cries wolf on current stock
-  teaches people to scroll past the badge that is real. **Slacktivity KingPin** (`weblocks.json` 41,
+  teaches people to scroll past the badge that is real. **Slacktivity KingPin Weblock** (`weblocks.json` 41,
   also `active: true`) is the same shape.
 
   **The shape to decide.** Duplicating rows per batch is the one option to rule out up front — an id

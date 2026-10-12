@@ -243,8 +243,37 @@ Every gear type carries an **`active: bool | None`** field on its `Base<X>` (so 
 | TreePro | `/treepro` | `treepros.json` | 25 |
 | StarterKit | `/starterkit` | `starterkits.json` | 64 |
 | TricklineKit | `/tricklinekit` | `tricklinekits.json` | 10 |
+| Connector | `/connector` | `connectors.json` | 120 |
 | ISAGearWarning | `/isawarning` | `isa_gear_warnings.json` | 88 |
 | ISAGearCertification | `/isacertification` | `isa_certified.json` | 22 |
+
+**Connectors** (`models/connectors.py`) are the newest type: shackles, carabiners, quicklinks
+and soft shackles, as one model with three filter axes, `connector_style`, `closure` and
+`material` (`ConnectorMaterial`, which includes Dyneema). The decisions behind the fields are in
+BACKLOG.md § "Connectors as a gear type". The candidates in CONNECTORS_REVIEW.md were reviewed
+on the frontend and approved on 2026-10-11:
+- ids 1–17 are slackline-specific connectors;
+- ids from 18 are generic stock hardware.
+
+Three candidates with too little data and no photos were moved to the local staging file instead,
+`candidates/connectors.json` (ids 9069, 9115, 9116; see `candidates/stage.py`).
+
+**Generic parts several shops sell are grouped, not merged.** Each shop's listing stays its own row
+with that shop's stated specs, price and link, and rows for the same part share `product_group`.
+The value is the group's key and display name: shape + size + material, e.g. "D Shackle 8mm,
+Stainless". Steel is never named (no connector name says "Steel"; galvanized and zinc-plated
+count as steel), and a row of unknown material never groups. A captive pin does not split a group: it is the `captive_pin` flag (default false),
+shown per shop in the vendor table. The group is set only where at least two shops sell
+the part, and it is not correctable (`_EXCLUDED`). `frontend/src/utils/groups.ts` handles three
+things:
+- **The listing:** a group collapses to one card after filtering and before sorting. A group stays
+  when any shop matches the filters. The card's numbers are the minimum over the matching shops,
+  and it displays them as ranges.
+- **The detail page:** a member's page renders the part. Its spec sheet holds only the fields
+  every shop agrees on (`_varies`), and `VendorTable` lists each shop as it states itself.
+- **Cypress:** a test that counts cards against API rows uses `listingUnits()`
+  (`cypress/support/listing.ts`). Peguet (Maillon Rapide) and Van Beest
+(Green Pin) are filed as the maker, with the shops that sell them as `gear_sellers`.
 
 ### ISA gear warnings
 
@@ -256,7 +285,7 @@ ids are **verified against the recorded `"<brand> <name>"`** before use, so seed
 reported instead of silently re-pointing a recall. The pass writes two things:
 
 1. `isa_warning` (the `ISAWarning` enum) onto the gear row — worst severity wins. Only
-   webbing / weblock / roller / leashring / grip have the column.
+   webbing / weblock / roller / leashring / grip / connector have the column.
 2. One `ISAGearWarning` row per (entry x matched gear id) — `models/isa_gear_warnings.py`, served
    read-only by `/isawarning` — holding the full entry (description, solution, parsed date, source
    links, in-production flag, match confidence). It has **no FK**: `(gear_type, gear_id)` is the
@@ -283,8 +312,9 @@ Its rules:
 - **Webbing and Webbing – Sewn Loop certificates** both certify the webbing row; **Intermittent
   Connection** certificates never do (the build leaves them unmatched, and the loader refuses them
   even if matched). Superseded certificates stay unmatched — newest only.
-- **Five types can be certified**: webbing / weblock / roller / leashring / grip. Kits and tree
-  protectors have no certification field at all.
+- **Six types can be certified**: webbing / weblock / roller / leashring / grip / connector
+  (ISA:52 is the Highline Connector standard). Kits and tree protectors have no certification
+  field at all.
 
 It writes, per certified row: `isa_certified = True`; `isa_certificate`, the primary certificate
 number (on webbing the plain Webbing one, else the Sewn Loop one), which is what picks the stamp
