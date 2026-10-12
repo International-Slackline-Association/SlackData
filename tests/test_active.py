@@ -21,6 +21,10 @@ Two things are covered here, per gear type:
 import pytest
 from sqlmodel import select
 
+from slack_data.load_data.load_connectors import (
+    add_connectors_to_db,
+    clean_connector_data,
+)
 from slack_data.load_data.load_grips import add_grips_to_db, clean_grip_data
 from slack_data.load_data.load_leashrings import (
     add_leashrings_to_db,
@@ -38,6 +42,7 @@ from slack_data.load_data.load_tricklinekits import (
 )
 from slack_data.load_data.load_webbings import add_webbings_to_db, clean_webbing_data
 from slack_data.load_data.load_weblocks import add_weblocks_to_db, clean_weblock_data
+from slack_data.models.connectors import Connector
 from slack_data.models.grips import Grip
 from slack_data.models.leashrings import LeashRing
 from slack_data.models.rollers import Roller
@@ -46,7 +51,6 @@ from slack_data.models.treepro import TreePro
 from slack_data.models.tricklinekits import TricklineKit
 from slack_data.models.webbing import Webbing
 from slack_data.models.weblocks import Weblock
-
 
 # ---------------------------------------------------------------------------
 # API round trip — one minimal create payload per gear type
@@ -103,6 +107,12 @@ def _payloads(brand_id: int) -> dict[str, dict]:
             "webbing_length": 15,
             "webbing_width": 25,
             "tensioning_type": "Single Ratchet",
+            "brand_id": brand_id,
+        },
+        "/connector": {
+            "name": "Active Connector",
+            "connector_style": "Shackle",
+            "material": "Aluminum",
             "brand_id": brand_id,
         },
     }
@@ -267,6 +277,18 @@ LOADER_CASES = [
             "tensioning_type": "RAT1",
         },
     ),
+    (
+        "connector",
+        clean_connector_data,
+        add_connectors_to_db,
+        Connector,
+        {
+            "name": "Loaded Connector",
+            "manufacturer": "Gibbon",
+            "connector_style": "Shackle",
+            "material": "Stainless Steel",
+        },
+    ),
 ]
 
 LOADER_IDS = [case[0] for case in LOADER_CASES]
@@ -334,3 +356,4 @@ def test_seed_json_carries_active_on_every_item(json_loader):
     missing = [i.get("name") for i in items if "active" not in i]
     assert missing == [], f"{len(missing)} item(s) with no `active` key: {missing[:5]}"
     assert all(isinstance(i["active"], bool) for i in items)
+    pytest.param("load_connectors", id="connectors"),

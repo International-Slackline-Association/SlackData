@@ -49,6 +49,7 @@ from sqlmodel import Session, select
 
 from slack_data.models.brand_clients import ManufacturerPrincipal
 from slack_data.models.brands import Brand
+from slack_data.models.connectors import Connector
 from slack_data.models.grips import Grip
 from slack_data.models.leashrings import LeashRing
 from slack_data.models.rollers import Roller
@@ -70,6 +71,7 @@ GEAR_MODELS = {
     "treepros": TreePro,
     "starterkits": StarterKit,
     "tricklinekits": TricklineKit,
+    "connectors": Connector,
 }
 
 _WHITESPACE = re.compile(r"\s+")

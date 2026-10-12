@@ -367,6 +367,7 @@ rejection; we send no email.
 | `treepros` | Tree protection |
 | `starterkits` | Starter kits |
 | `tricklinekits` | Trickline kits |
+| `connectors` | Shackles, carabiners, quicklinks, soft shackles |
 
 **The authoritative list of field names for a type is what
 `GET /manufacturer/gear?include=spec` returns for your own products.** The lists below are the same
@@ -409,6 +410,11 @@ their list.
   `product_url`, `release_date`, `tensioning_type`, `version`, `webbing_length`, `webbing_width`,
   `weight`
 - **`tricklinekits`** — same as `starterkits`.
+- **`connectors`** — `active`, `alloy`, `brand_name`, `captive_pin`, `closure`, `connector_style`, `currency`,
+  `description`, `manufacturer_not_for_highline`, `manufacturer_not_for_highline_source`,
+  `material`, `mbs_crossload`, `mbs_gate_open`, `mbs_straight_pull`, `notes`, `opening`,
+  `pin_diameter`, `price`, `product_url`, `release_date`, `rope_diameter`, `standards`,
+  `standards_source`, `version`, `weight`
 
 ### Units and conventions, so a correct number isn't recorded wrongly
 
@@ -424,6 +430,9 @@ tells you the unit faster than this table does.
 | `width`, `thickness` on `webbings` | millimetres |
 | `width_min`, `width_max` on `weblocks` and `grips` | millimetres |
 | `inner_diameter`, `outer_diameter` on `leashrings` | millimetres |
+| `mbs_straight_pull`, `mbs_crossload`, `mbs_gate_open` on `connectors` | kilonewtons — breaking strengths only; send a WLL in `notes`, never in these |
+| `opening`, `pin_diameter`, `rope_diameter` on `connectors` | millimetres. `opening` is a shackle's jaw width, a carabiner's or quicklink's gate opening, a soft shackle's inner loop size |
+| `connector_style`, `closure`, `material` on `connectors` | one of a fixed list each, e.g. `"Shackle"`, `"Push pin"`, `"Aluminum"`; `standards` is a list, e.g. `["EN362:2005"]` |
 | `width` on `rollers` | **a string, not a number** — a range, e.g. `"19-25 mm"` |
 | `width`, `length` on `treepros` | **centimetres**; `thickness` on `treepros` is millimetres |
 | `webbing_length` on kits | metres; `webbing_width` on kits is millimetres |

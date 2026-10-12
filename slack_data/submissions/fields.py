@@ -16,6 +16,7 @@ applied to the backend's own boundary.
 
 from pydantic import BaseModel
 
+from slack_data.models.connectors import ConnectorUpdate
 from slack_data.models.grips import GripUpdate
 from slack_data.models.leashrings import LeashRingUpdate
 from slack_data.models.rollers import RollerUpdate
@@ -49,6 +50,9 @@ _EXCLUDED = frozenset(
         # shelf — and it is a list, which `changes` (a dict of strings) has no
         # way to carry. See any model's `gear_sellers`.
         "gear_sellers",
+        # Which shops' listings are the same generic part (connectors only).
+        # A grouping we make across brands — no one brand's to state.
+        "product_group",
     }
 )
 
@@ -86,6 +90,7 @@ CORRECTABLE_FIELDS: dict[str, frozenset[str]] = {
     "treepros": _correctable(TreeProUpdate),
     "starterkits": _correctable(StarterKitUpdate),
     "tricklinekits": _correctable(TricklineKitUpdate),
+    "connectors": _correctable(ConnectorUpdate),
 }
 
 GEAR_TYPES: frozenset[str] = frozenset(CORRECTABLE_FIELDS)

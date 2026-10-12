@@ -40,8 +40,8 @@ The pass writes two things:
     gets three rows pointing at it.
 
 This pass runs last, after every gear loader (it needs the rows to exist) — see
-`slack_data.seed`. Only five types have the field: webbing, weblock, roller,
-leashring, grip. Entries pointing at anything else (dogbones, slings, brakes,
+`slack_data.seed`. Only six types have the field: webbing, weblock, roller,
+leashring, grip, connector. Entries pointing at anything else (dogbones, slings, brakes,
 kits) are counted and reported, not applied.
 """
 
@@ -50,6 +50,7 @@ from datetime import datetime
 from sqlmodel import Session, select
 
 from slack_data.load_data._seed_io import read_seed_json, seed_path
+from slack_data.models.connectors import Connector
 from slack_data.models.grips import Grip
 from slack_data.models.isa_gear_warnings import ISAGearWarning, ISAGearWarningCreate
 from slack_data.models.leashrings import LeashRing
@@ -68,6 +69,7 @@ WARNABLE_MODELS = {
     "roller": Roller,
     "leashring": LeashRing,
     "grip": Grip,
+    "connector": Connector,
 }
 
 # Worst wins when several warnings land on one row: a product with both a recall
