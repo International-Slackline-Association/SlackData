@@ -1705,7 +1705,7 @@
         "image_url": "/api/gear/image_thumb/3252",
         "details_url": "/gear_details/kingpin",
         "brand": "Slacktivity",
-        "full_name": "Slacktivity KingPin",
+        "full_name": "Slacktivity KingPin Weblock",
         "manufacturer_info": {
             "name": "Slacktivity",
             "url": "/manufacturer_details/Slacktivity#TAB-IMAGES",
@@ -1735,7 +1735,7 @@
             "Price (per unit)": "1 unit and above : 60.00 EUR"
         },
         "date_introduced": null,
-        "name": "KingPin",
+        "name": "KingPin Weblock",
         "description": "The KingPin Weblock is high-tech solution for 20mm slackline webbings. It is super light, has a high breaking load efficiency and allows you to pre-tension the line.",
         "product_url": "https://slacktivity.com/shop/kingpin-weblock/",
         "active": true,
