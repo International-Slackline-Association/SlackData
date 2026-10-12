@@ -1,4 +1,10 @@
 {
+  "connectors": {
+    "vanbeest": [
+      "vanbeest-abs-design-assessment-certificate.pdf",
+      "vanbeest-dnv-type-approval-certificate.pdf"
+    ]
+  },
   "starterkits": {
     "eqb": [
       "eqb.pdf"

@@ -36,6 +36,7 @@ from sqlmodel.pool import StaticPool
 from slack_data.load_data.load_grips import add_grips_to_db, clean_grip_data
 from slack_data.load_data.load_isa_warnings import WARNABLE_MODELS
 from slack_data.models.brands import Brand
+from slack_data.models.connectors import Connector
 from slack_data.models.grips import Grip
 from slack_data.models.leashrings import LeashRing
 from slack_data.models.rollers import Roller
@@ -60,6 +61,7 @@ SEEDS = {
     "treepros.json": "manufacturer",
     "starterkits.json": "manufacturer",
     "tricklinekits.json": "manufacturer",
+    "connectors.json": "manufacturer",
 }
 
 
@@ -150,6 +152,7 @@ MODELS = {
     "treepros.json": TreePro,
     "starterkits.json": StarterKit,
     "tricklinekits.json": TricklineKit,
+    "connectors.json": Connector,
 }
 
 

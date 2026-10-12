@@ -847,11 +847,15 @@
             "manufacturer_email": "info@slacktivity.ch",
             "source_notes": [],
             "match": {
-                "gearType": null,
-                "gearIds": [],
-                "gearNames": [],
-                "confidence": "none",
-                "note": "Connector (shackle) — a gear type we do not hold (BACKLOG)"
+                "gearType": "connector",
+                "gearIds": [
+                    1
+                ],
+                "gearNames": [
+                    "Slacktivity KingPin"
+                ],
+                "confidence": "exact",
+                "note": "The bare KingPin shackle (connector 1); the KingPin Weblock (weblock 41) is that shackle plus a weblock piece"
             }
         },
         {

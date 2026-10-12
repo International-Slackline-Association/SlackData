@@ -13,6 +13,7 @@ Importing this module also imports every table model + loader, so
 
 from sqlmodel import Session, select
 
+from slack_data.load_data.load_connectors import load_connectors
 from slack_data.load_data.load_grips import load_grips
 from slack_data.load_data.load_isa_certifications import (
     has_isa_certifications,
@@ -30,6 +31,7 @@ from slack_data.load_data.load_webbings import load_webbings
 from slack_data.load_data.load_weblocks import load_weblocks
 
 from slack_data.models.brands import Brand
+from slack_data.models.connectors import Connector
 from slack_data.models.grips import Grip
 from slack_data.models.leashrings import LeashRing
 from slack_data.models.rollers import Roller
@@ -77,11 +79,16 @@ def seed_catalog(session: Session) -> None:
     if existing_tricklinekits is None: # Only load from `tricklinekits.json` if the database is empty
         print("Loading trickline kit data into the database...")
         load_tricklinekits(session=session)
+    existing_connectors = session.exec(select(Connector)).first()
+    if existing_connectors is None: # Only load from `connectors.json` if the database is empty
+        print("Loading connector data into the database...")
+        load_connectors(session=session)
     loaded_gear = any(
         existing is None
         for existing in (
             existing_webbings, existing_weblocks, existing_rollers, existing_leashrings,
             existing_grips, existing_treepros, existing_starterkits, existing_tricklinekits,
+            existing_connectors,
         )
     )
     # After every gear loader, before the brand enrichment. It reads the

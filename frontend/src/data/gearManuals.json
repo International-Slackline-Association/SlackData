@@ -1,4 +1,30 @@
 {
+  "connectors": {
+    "vanbeest_bow-shackle-0-5-t": [
+      "vanbeest_bow-shackle-0-5-t-technical-drawing.pdf"
+    ],
+    "vanbeest_bow-shackle-1-5-t-7-16": [
+      "vanbeest_bow-shackle-1-5-t-7-16-technical-drawing.pdf"
+    ],
+    "vanbeest_bow-shackle-1-t": [
+      "vanbeest_bow-shackle-1-t-technical-drawing.pdf"
+    ],
+    "vanbeest_bow-shackle-2-t-1-2": [
+      "vanbeest_bow-shackle-2-t-1-2-technical-drawing.pdf"
+    ],
+    "vanbeest_bow-shackle-3-25-t-5-8": [
+      "vanbeest_bow-shackle-3-25-t-5-8-technical-drawing.pdf"
+    ],
+    "vanbeest_d-shackle-0-5-t": [
+      "vanbeest_d-shackle-0-5-t-technical-drawing.pdf"
+    ],
+    "vanbeest_d-shackle-1-5-t": [
+      "vanbeest_d-shackle-1-5-t-technical-drawing.pdf"
+    ],
+    "vanbeest_d-shackle-1-t": [
+      "vanbeest_d-shackle-1-t-technical-drawing.pdf"
+    ]
+  },
   "grips": {
     "bc_wafer-2-0": [
       "bc_wafer-2-0.pdf"

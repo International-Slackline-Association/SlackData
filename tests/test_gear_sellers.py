@@ -41,6 +41,7 @@ SEED_FILES = {
     "treepros": "treepros.json",
     "starterkits": "starterkits.json",
     "tricklinekits": "tricklinekits.json",
+    "connectors": "connectors.json",
 }
 
 

@@ -38,6 +38,7 @@ SEED = {
     "starterkits.json": "manufacturer",
     "tricklinekits.json": "manufacturer",
     "rollers.json": "manufacturer",
+    "connectors.json": "manufacturer",
 }
 
 
