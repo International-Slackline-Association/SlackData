@@ -17,7 +17,7 @@ import { useCurrency } from '@/context/CurrencyContext'
 import { STRETCH_RANGE_FIELD, useUrlState } from '@/hooks/useUrlState'
 import { filterBySearch } from '@/utils/search'
 import { sortItems } from '@/utils/sort'
-import { collapseGroups } from '@/utils/groups'
+import { collapseGroups, isGroupItem } from '@/utils/groups'
 import { BRAND_GROUP, filterGroupsFor } from '@/config/filterGroups'
 import { activeFilterCount, applyFilters, type RangeBounds } from '@/utils/filter'
 import { percentAtKn, topKnPoints } from '@/utils/stretch'
@@ -148,17 +148,24 @@ export default function GearListingPage() {
     setSelectedIds([])
   }, [slug])
 
+  // A collapsed group (utils/groups.ts) is one card but several products, and
+  // the compare table is per product: Reggae is two columns, one per maker.
+  // So picking a group card picks every member still matching the filters, and
+  // the bar counts each one. Read through a ref so toggleCompare stays stable.
+  const groupMembersRef = useRef(new Map<number, number[]>())
   // Stable identities: GearTable memoizes its rows, and a fresh callback on
   // every render would defeat that and re-render all 258 of them per tick.
   const toggleCompare = useCallback(
-    (id: number) =>
+    (id: number) => {
+      const members = groupMembersRef.current.get(id) ?? [id]
       setSelectedIds(ids =>
-        ids.includes(id)
-          ? ids.filter(x => x !== id)
-          : ids.length >= COMPARE_MAX
-            ? ids
-            : [...ids, id],
-      ),
+        // Picked if ANY member is: a chip removed from the bar leaves the
+        // others, and the card's button then takes the rest off too.
+        members.some(m => ids.includes(m))
+          ? ids.filter(x => !members.includes(x))
+          : [...ids, ...members.filter(m => !ids.includes(m)).slice(0, Math.max(0, COMPARE_MAX - ids.length))],
+      )
+    },
     [],
   )
   const removeCompare = useCallback(
@@ -333,6 +340,23 @@ export default function GearListingPage() {
     // filters ran on the vendor rows, before sort (see utils/groups.ts).
     return sortItems(collapseGroups(filtered), sort)
   }, [contextItems, selectedKn, stretchMin, stretchMax, sort])
+
+  // Which card stands for which members, refreshed with every filter change.
+  // `shownSelectedIds` is what the views mark as picked: the selection, plus
+  // every group card with at least one of its members in it.
+  const groupMembers = useMemo(() => {
+    const map = new Map<number, number[]>()
+    for (const it of visible as unknown as AnyItem[]) {
+      if (isGroupItem(it)) map.set(Number(it.id), it._members.map(m => Number(m.id)))
+    }
+    return map
+  }, [visible])
+  groupMembersRef.current = groupMembers
+  const shownSelectedIds = useMemo(() => {
+    const picked = new Set(selectedIds)
+    const groups = [...groupMembers].filter(([, ms]) => ms.some(m => picked.has(m))).map(([id]) => id)
+    return groups.length ? [...new Set([...selectedIds, ...groups])] : selectedIds
+  }, [selectedIds, groupMembers])
 
   // The selected items, in selection order, resolved from the FULL list (not
   // `visible`) so a chip survives the item being filtered out of the grid.
@@ -526,7 +550,7 @@ export default function GearListingPage() {
                 <GearGrid
                   items={visible}
                   meta={meta}
-                  selectedIds={selectedIds}
+                  selectedIds={shownSelectedIds}
                   compareFull={selectedIds.length >= COMPARE_MAX}
                   onToggleCompare={toggleCompare}
                 />
@@ -538,7 +562,7 @@ export default function GearListingPage() {
                 <GearDetailedList
                   items={visible}
                   meta={meta}
-                  selectedIds={selectedIds}
+                  selectedIds={shownSelectedIds}
                   compareFull={selectedIds.length >= COMPARE_MAX}
                   onToggleCompare={toggleCompare}
                 />
@@ -552,7 +576,7 @@ export default function GearListingPage() {
                   meta={meta}
                   sort={sort}
                   onSortChange={setSort}
-                  selectedIds={selectedIds}
+                  selectedIds={shownSelectedIds}
                   compareFull={selectedIds.length >= COMPARE_MAX}
                   onToggleCompare={toggleCompare}
                 />

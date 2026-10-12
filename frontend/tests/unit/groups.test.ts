@@ -90,3 +90,40 @@ test('a group can mix captive and loose pins; the flag then varies', () => {
   assert.ok(g._varies.includes('captive_pin'))
   assert.equal(g.captive_pin, null)
 })
+
+// A product whose specs depend on its maker or batch (Slack.fr's and Slack
+// Inov's Reggae) groups the same way, over the webbing's own fields.
+test('a webbing group ranges its own numbers and keeps one stretch curve, the longest', () => {
+  const reggae = (id: number, brand: string, extra: Record<string, unknown>) => ({
+    id, name: 'Reggae', brand_name: brand, product_group: 'Reggae', ...extra,
+  })
+  const [g] = collapseGroups([
+    reggae(155, 'Slack.fr', { active: false, weight: 54, breaking_strength: 21, width: 25, stretch: '[{"kn":1,"percent":1.6}]' }),
+    reggae(249, 'Slack Inov', { active: true, weight: 49, breaking_strength: 23.6, width: 25, stretch: '[{"kn":1,"percent":1.6},{"kn":2,"percent":3.9}]' }),
+  ])
+  assert.ok(isGroupItem(g))
+  assert.equal(g.brand_name, 'Slack Inov, Slack.fr', 'the current maker first')
+  assert.equal(rangeText(g, 'weight', 'g/m'), '49–54 g/m')
+  assert.equal(rangeText(g, 'width', 'mm'), '25 mm')
+  // Versions of one webbing are one curve measured to different loads.
+  assert.ok(!g._varies.includes('stretch'))
+  assert.equal(g.stretch, '[{"kn":1,"percent":1.6},{"kn":2,"percent":3.9}]')
+  assert.ok(!g._varies.includes('width'))
+})
+
+test("a webbing member's detail page shows that member's own curve", () => {
+  const short = { id: 155, name: 'Reggae', brand_name: 'Slack.fr', product_group: 'Reggae', stretch: '[{"kn":1,"percent":1.6}]' }
+  const long = { id: 249, name: 'Reggae', brand_name: 'Slack Inov', product_group: 'Reggae', stretch: '[{"kn":1,"percent":1.6},{"kn":2,"percent":3.9}]' }
+  const silent = { id: 300, name: 'Reggae', brand_name: 'Other', product_group: 'Reggae' }
+  assert.equal(groupFor([short, long], short)!.stretch, short.stretch)
+  // A member with no curve of its own falls back to the longest.
+  assert.equal(groupFor([short, long, silent], silent)!.stretch, long.stretch)
+})
+
+test('a string spec in a numeric slot (a roller width) is left as stated', () => {
+  const [g] = collapseGroups([
+    { id: 1, name: 'R', brand_name: 'A', product_group: 'R', width: '15-35 mm' },
+    { id: 2, name: 'R', brand_name: 'B', product_group: 'R', width: '15-35 mm' },
+  ])
+  assert.equal(g.width, '15-35 mm')
+})

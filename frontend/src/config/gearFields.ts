@@ -49,7 +49,14 @@ export interface InlineSpec {
 }
 
 export const INLINE_SPECS: Record<GearSlug, InlineSpec[]> = {
-  webbings:      [{ field: 'material' }, { field: 'width', unit: 'mm' }, { field: 'weight', unit: 'g/m' }, { field: 'breaking_strength', unit: 'kN' }],
+  // Ranged like connectors below: a maker- or batch-dependent group
+  // (utils/groups.ts) shows each number as its versions' range.
+  webbings:      [
+    { field: 'material' },
+    { field: 'width', value: item => rangeText(item, 'width', 'mm') },
+    { field: 'weight', value: item => rangeText(item, 'weight', 'g/m') },
+    { field: 'breaking_strength', value: item => rangeText(item, 'breaking_strength', 'kN') },
+  ],
   // A weblock takes a BAND of webbing widths — showing width_min alone reads as
   // "24 mm only", so the segment is the whole range (DESIGN.md § Card anatomy).
   weblocks:      [{ field: 'material' }, { field: 'width_range', value: widthRangeText }, { field: 'breaking_strength', unit: 'kN' }],

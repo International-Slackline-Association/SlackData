@@ -79,7 +79,11 @@ export default function CompareBar({
               className="flex shrink-0 items-center gap-1.5 rounded-full border border-gray-300 bg-gray-50 py-1 pl-3 pr-1 text-xs text-gray-700"
             >
               <span data-cy="compare-bar-item-name" className="max-w-[10rem] truncate">
-                {String(item.name)}
+                {/* Two versions of one group share a name (both Reggae); the
+                    brand is what tells their chips apart. */}
+                {items.filter(o => o.name === item.name).length > 1
+                  ? `${String(item.brand_name)} ${String(item.name)}`
+                  : String(item.name)}
               </span>
               <button
                 data-cy="compare-bar-remove"

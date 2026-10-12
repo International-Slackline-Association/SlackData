@@ -747,6 +747,90 @@ with the item itself, so there is no second request that can fail here.
 Nothing about a co-listing appears on the **card** yet — see BACKLOG.md; the card shows the maker,
 because the specs are the maker's.
 
+### Product groups
+
+Some products are stated more than once, and each statement keeps its own row: its own specs, price
+and link. Rows for one product share a `product_group` (on every gear type; CLAUDE.md § Connectors).
+There are two kinds, and the UI tells them apart by gear type.
+
+- **One generic part, several shops** (connectors). An 8 mm stainless D shackle from Slacktivity,
+  SlackGear and Balance Community is three rows. One says 20 kN and another 29 kN, so the rows are
+  never merged into one set of figures.
+- **One product, several makers or batches** (webbings today). Slack.fr's and Slack Inov's Reggae
+  are two rows with different specs. A batch is told apart by `version`.
+
+What is a group, and what it is called, is decided in the seed, not the frontend:
+
+- The value is both the key and the display name: shape + size + material, e.g.
+  *D Shackle 8mm, Stainless*. Steel is never named (galvanized and zinc-plated count as steel), so a
+  plain steel part reads *Delta Quicklink 10mm*.
+- A group needs **at least two rows**. A part only one shop sells has no group.
+- **A row of unknown material never groups.** A connector whose material is `Other` is a guess
+  waiting for a source, and grouping it would merge it with parts it may not be.
+- **A captive pin does not split a group.** It is a flag per row (`captive_pin`), shown in the
+  vendor table.
+- Péguet (Maillon Rapide) and Van Beest (Green Pin) are filed as the **maker**, with the shops that
+  resell them as `gear_sellers` (§ Also sold by). A reseller adds a name to the maker's row, not a
+  row of its own; in a vendor table that row reads "sold by …" under the maker.
+- Groups are ours to assign, so `product_group` is not correctable through the suggestion box or
+  the manufacturer API.
+
+**On the listing a group is one card** (`utils/groups.ts`, `collapseGroups`).
+
+- **Order of operations:** search and filters run on the member rows, then groups collapse, then
+  sort runs. So a group stays in the listing if **any** member matches the filters.
+- **The card's numbers are the minimum over the members still matching**, shown as a range
+  ("20–29 kN") where they differ. A range filter's bounds always hold for what the card reports,
+  and sort ranks a group by its lowest stated value.
+- **The card's price is the cheapest member's**, prefixed "from" when more than one member has a
+  price.
+- **The brand line lists the members' brands** (`data-cy="group-vendors"`), at most three, then
+  "+N".
+- **Historic only when every member is.** One current shop keeps the card current.
+- **No outbound link.** "View product" on the card would go to one shop of several. The vendor
+  table carries every shop's link instead.
+- **Compare adds every member, each as its own item.** The compare table is per product, so picking
+  Reggae's card adds both versions and the bar says *2 items*. Only members still matching the
+  filters are added, and only as many as fit under the 10-item cap. The card reads as picked while
+  any member is in the bar, and its button then removes them all. Chips that share a name carry
+  the brand ("Slack.fr Reggae"). Cards, Detailed and Table views all go through this one toggle
+  in `GearListingPage.tsx`.
+- **A lone survivor is a plain card.** If the filters leave only one member, it shows as that row
+  and does not collapse.
+- **Cypress counts with `listingUnits()`** (`cypress/support/listing.ts`), never raw API rows, when
+  it compares the number of cards to the data.
+
+**On the detail page a member renders as the group** (`groupFor`). The heading is the group name, and
+the brand line lists every member's brand. A blurb or a note belongs to one listing, so neither is
+shown at the group level. **The spec sheet holds only the fields every member states identically.**
+Anything they disagree on, or that some leave blank (`_varies`), is left out of the sheet and lives
+in the vendor table instead, so the sheet never shows one shop's figure as though it were the
+part's.
+
+**The webbing stretch curve is the one exception: the group shows one curve, never a comparison.**
+Versions of one webbing are nearly always the same curve. Reggae's two are identical to 20 kN, and
+Slack Inov's simply runs on to 24. Overlaying them drew two lines on top of each other, and dropping
+the row hid the curve altogether. So the sheet shows the opened member's own curve, or, when that
+member has none, the member's curve with the most points (`groupCurve` in `utils/groups.ts`). The
+listing's card, Detailed panel and Table row use the longest one.
+
+**The vendor table** (`components/gear/VendorTable.tsx`, `data-cy="vendor-table"`) sits below the
+detail body. It is also shown on a collapsed group in the listing's Detailed view, which already
+carries its members.
+
+- Heading: *Sold by N shops* for connectors, *N versions* otherwise, plus one line on why the figures
+  differ.
+- **One row per member** (`data-cy="vendor-row"`, carrying `data-id`, `data-brand` and
+  `data-current`). Current members come first, then brand A→Z, then name.
+- **The row of the page you are on** is highlighted amber and is not a link.
+- **Columns:** shop or brand (a `BrandLink`, the Historic badge, and "sold by …" for a maker row
+  like Péguet's), and *Listed as* (the member's own name). Then *Version* when any member has one,
+  then the gear type's spec columns (any column every member leaves blank is dropped). Then
+  *Certification* when any member states a standard, *Captive pin* when any member has one, the
+  price, and the shop's page (*Archived page ↗* for a Wayback link).
+- **No stretch chart.** The table never overlays the members' curves; the spec sheet above shows
+  one (see above).
+
 ### Manuals & documents
 
 Manufacturers publish PDFs about their gear — user manuals, datasheets, product archives. Where we

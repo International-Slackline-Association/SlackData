@@ -1,8 +1,12 @@
-// Generic parts several shops sell — the same 8 mm stainless D shackle from
-// Slacktivity, SlackGear and Balance Community — are one row PER SHOP in the
-// catalogue, each with that shop's own specs, price and link, sharing a
-// `product_group` (slack_data/models/connectors.py). The listing shows such a
-// group as ONE card; the detail page lists its rows as a vendor table.
+// One product stated more than once is one row PER STATEMENT in the catalogue,
+// each with its own specs, price and link, sharing a `product_group` (any gear
+// model). Two kinds today:
+//   - generic parts several shops sell — the same 8 mm stainless D shackle from
+//     Slacktivity, SlackGear and Balance Community (connectors);
+//   - one product whose specs depend on its maker or batch — Slack.fr's and
+//     Slack Inov's Reggae (webbings).
+// The listing shows such a group as ONE card; the detail page lists its rows
+// as a vendor table.
 //
 // `collapseGroups` runs AFTER search and filters and BEFORE sort, which gives
 // the range semantics the card promises for free:
@@ -23,14 +27,32 @@ import { naturalCompare } from './compare.ts'
 
 type Item = Record<string, unknown>
 
-// Numeric fields a group reports as min (and min..max in `_ranges`).
+// Numeric fields a group reports as min (and min..max in `_ranges`). One list
+// for every gear type: a field a type lacks is simply absent on its members,
+// and a field that is a string on some type (a roller's `width`, "15-35 mm")
+// is never overwritten — only a field some member states as a number is.
 export const GROUP_NUMERIC_FIELDS = [
+  // connectors
   'mbs_straight_pull', 'mbs_crossload', 'mbs_gate_open',
-  'opening', 'pin_diameter', 'rope_diameter', 'weight',
+  'opening', 'pin_diameter', 'rope_diameter',
+  // shared
+  'weight', 'breaking_strength', 'width', 'thickness', 'length',
+  // weblocks, grips
+  'width_min', 'width_max', 'mbs', 'wll', 'common_slipping_threshold',
+  // leash rings
+  'inner_diameter', 'outer_diameter',
+  // kits
+  'webbing_length', 'webbing_width',
 ] as const
 
-// Text (and flag) specs a group shows only when every shop agrees on them.
-const GROUP_TEXT_FIELDS = ['connector_style', 'closure', 'material', 'alloy', 'standards', 'captive_pin'] as const
+// Text (and flag) specs a group shows only when every member agrees on them.
+const GROUP_TEXT_FIELDS = [
+  'connector_style', 'closure', 'material', 'alloy', 'standards', 'captive_pin',
+  'webbing_construction', 'colors',
+  'style', 'front_pin', 'attachment_point',
+  'roller_material', 'slider_type', 'lock_type', 'bearing_material', 'connection_type',
+  'tensioning_type', 'includes_treepro', 'has_sling_attachment',
+] as const
 
 export interface GroupMeta {
   _members: Item[]
@@ -65,15 +87,38 @@ export function vendorNames(members: Item[]): string[] {
 
 const same = (a: unknown, b: unknown) => JSON.stringify(a ?? null) === JSON.stringify(b ?? null)
 
+// A webbing's stretch curve is NOT a must-agree field. The versions of one
+// webbing (Slack.fr's and Slack Inov's Reggae) are nearly always one curve,
+// measured to different loads, so the group shows ONE curve rather than
+// dropping it or overlaying near-identical lines: the opened member's on its
+// detail page, else the member's curve with the most points.
+function curveLength(stretch: unknown): number {
+  if (typeof stretch !== 'string' || stretch === '') return 0
+  try {
+    const pts = JSON.parse(stretch)
+    return Array.isArray(pts) ? pts.length : 0
+  } catch {
+    return 0
+  }
+}
+
+function groupCurve(members: Item[], preferred?: Item): unknown {
+  if (preferred && curveLength(preferred.stretch) > 0) return preferred.stretch
+  let best: Item | null = null
+  for (const m of members) if (curveLength(m.stretch) > curveLength(best?.stretch)) best = m
+  return best ? best.stretch : null
+}
+
 function groupItem(group: string, members: Item[]): Item & GroupMeta {
   const sorted = [...members].sort(compareMembers)
   const first = sorted[0]
   const ranges: Record<string, [number, number]> = {}
-  const mins: Record<string, number | null> = {}
+  const mins: Record<string, number> = {}
   for (const field of GROUP_NUMERIC_FIELDS) {
+    if (!sorted.some(m => typeof m[field] === 'number')) continue
     const values = sorted.map(m => num(m[field])).filter((v): v is number => v != null)
-    mins[field] = values.length ? Math.min(...values) : null
-    if (values.length) ranges[field] = [Math.min(...values), Math.max(...values)]
+    mins[field] = Math.min(...values)
+    ranges[field] = [Math.min(...values), Math.max(...values)]
   }
   // Price comes from ONE vendor — the cheapest by the normalized price_base —
   // so the as-sold amount, its currency and both derived figures stay a set.
@@ -100,6 +145,7 @@ function groupItem(group: string, members: Item[]): Item & GroupMeta {
     ...first,
     ...mins,
     ...agreed,
+    stretch: groupCurve(sorted),
     // A blurb or note belongs to one shop's listing, not to the part.
     description: null,
     notes: null,
@@ -127,7 +173,12 @@ function groupItem(group: string, members: Item[]): Item & GroupMeta {
 export function groupFor(members: Item[], current: Item): (Item & GroupMeta) | null {
   const group = current.product_group
   if (typeof group !== 'string' || members.length < 2) return null
-  return { ...groupItem(group, members), id: current.id, _current: Number(current.id) }
+  return {
+    ...groupItem(group, members),
+    stretch: groupCurve(members, current),
+    id: current.id,
+    _current: Number(current.id),
+  }
 }
 
 export function collapseGroups<T extends Item>(items: T[]): T[] {

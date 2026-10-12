@@ -127,10 +127,10 @@ export const SPEC_ROWS: Record<GearSlug, SpecRowDef[]> = {
     priceRow('Price per meter'),
     plain('material', 'Material'),
     plain('webbing_construction', 'Construction'),
-    plain('width', 'Width', 'mm'),
-    plain('thickness', 'Thickness', 'mm'),
-    plain('weight', 'Weight', 'g/m'),
-    plain('breaking_strength', 'Breaking Strength', 'kN'),
+    ranged('width', 'Width', 'mm'),
+    ranged('thickness', 'Thickness', 'mm'),
+    ranged('weight', 'Weight', 'g/m'),
+    ranged('breaking_strength', 'Breaking Strength', 'kN'),
     stretchRow,
     // The ISA class letter is NOT a spec row — on a certified webbing it
     // renders as a colored bubble beside the product name (see IsaStatusLabel).

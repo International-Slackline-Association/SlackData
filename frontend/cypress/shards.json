@@ -69,7 +69,8 @@
       "specs": [
         "table",
         "currency",
-        "connector_groups"
+        "connector_groups",
+        "webbing_groups"
       ]
     },
     {

@@ -272,7 +272,15 @@ things:
 - **The detail page:** a member's page renders the part. Its spec sheet holds only the fields
   every shop agrees on (`_varies`), and `VendorTable` lists each shop as it states itself.
 - **Cypress:** a test that counts cards against API rows uses `listingUnits()`
-  (`cypress/support/listing.ts`). Peguet (Maillon Rapide) and Van Beest
+  (`cypress/support/listing.ts`).
+
+**`product_group` is on every gear type**, not just connectors, for a product whose specs depend
+on its maker or batch: one row per version, each with its own specs, grouped exactly like the
+shops above. The first is webbing `Reggae` (Slack.fr id 155, Slack Inov id 249). `groups.ts` keeps
+one union list of numeric/text fields for all types; `VendorTable.tsx` has per-type columns,
+shows a `version` column when any member has one (how batches are told apart), and never
+overlays stretch curves: a webbing group's spec sheet shows one curve (the opened member's, else
+the longest), since versions of one webbing are nearly always one curve. Peguet (Maillon Rapide) and Van Beest
 (Green Pin) are filed as the maker, with the shops that sell them as `gear_sellers`.
 
 ### ISA gear warnings
