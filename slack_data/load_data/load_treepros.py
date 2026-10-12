@@ -76,6 +76,7 @@ def add_treepros_to_db(treepros: list[dict], session: SessionDep) -> None:
             manufacturer_not_for_highline_source=treepro.get("manufacturer_not_for_highline_source"),
             # Brand names only — see the model. Absent stays None, not [].
             gear_sellers=treepro.get("gear_sellers") or None,
+            product_group=treepro.get("product_group"),
         )
 
         db_treepro = TreePro.model_validate(treepro_create)

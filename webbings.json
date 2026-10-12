@@ -7299,6 +7299,7 @@
         "name": "Reggae",
         "description": "The Reggae is a tubular webbing, stretchy and smooth. Historical slackline webbing. It's light and flexible, nice to carry in your backpack. Super fast, controlled and small jump movements are possible. Super suitable for deep and soft waves, bouncing and surfing. It has an incredible flex. The line appears like a wave during bouncing, which takes one away, floats and catches again with a soft move. It doesn’t shake even in case of strong oscillations. A special type of floating feeling.",
         "brand": "Slack.fr",
+        "product_group": "Reggae",
         "materialType": "Polyester",
         "width": 25,
         "weight": 54,
@@ -11351,6 +11352,7 @@
         "id": 249,
         "name": "Reggae",
         "brand": "Slack Inov",
+        "product_group": "Reggae",
         "gear_sellers": [
             "Spider Slacklines"
         ],

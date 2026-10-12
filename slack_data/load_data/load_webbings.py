@@ -93,6 +93,7 @@ def add_webbings_to_db(webbings: list[dict], session: SessionDep) -> None:
             manufacturer_not_for_highline_source=webbing.get("manufacturer_not_for_highline_source"),
             # Brand names only — see the model. Absent stays None, not [].
             gear_sellers=webbing.get("gear_sellers") or None,
+            product_group=webbing.get("product_group"),
         )
         db_webbing = Webbing.model_validate(webbing_create)
         db_webbing.id = require_seed_id(webbing, "webbings.json")

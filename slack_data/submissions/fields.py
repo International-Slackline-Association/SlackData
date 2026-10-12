@@ -50,7 +50,8 @@ _EXCLUDED = frozenset(
         # shelf — and it is a list, which `changes` (a dict of strings) has no
         # way to carry. See any model's `gear_sellers`.
         "gear_sellers",
-        # Which shops' listings are the same generic part (connectors only).
+        # Which rows are one product stated more than once — several shops'
+        # listings of a generic part, or several makers' or batches' versions.
         # A grouping we make across brands — no one brand's to state.
         "product_group",
     }

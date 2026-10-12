@@ -101,7 +101,7 @@ def clean_weblock_data(weblock: dict[str, Any]) -> dict[str, Any]:
     # Free-text/optional columns carried straight through from the seed. The
     # SlackDB scrape never populated these, so they are absent on older rows.
     for passthrough in (
-        "description", "notes", "colors", "version",
+        "description", "notes", "colors", "version", "product_group",
         "manufacturer_not_for_highline", "manufacturer_not_for_highline_source",
     ):
         cleaned_data[passthrough] = weblock.get(passthrough)
@@ -142,6 +142,7 @@ def add_weblocks_to_db(weblocks: list[dict], session: SessionDep) -> None:
             manufacturer_not_for_highline_source=weblock.get("manufacturer_not_for_highline_source"),
             # Brand names only — see the model. Absent stays None, not [].
             gear_sellers=weblock.get("gear_sellers") or None,
+            product_group=weblock.get("product_group"),
         )
         db_weblock = Weblock.model_validate(weblock_create)
         db_weblock.id = require_seed_id(weblock, "weblocks.json")

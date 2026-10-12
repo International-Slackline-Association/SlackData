@@ -89,6 +89,7 @@ def add_starterkits_to_db(starterkits: list[dict], session: SessionDep) -> None:
             manufacturer_not_for_highline_source=sk.get("manufacturer_not_for_highline_source"),
             # Brand names only — see the model. Absent stays None, not [].
             gear_sellers=sk.get("gear_sellers") or None,
+            product_group=sk.get("product_group"),
         )
 
         db_sk = StarterKit.model_validate(starterkit_create)

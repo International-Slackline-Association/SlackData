@@ -70,6 +70,7 @@ def add_leashrings_to_db(leashrings: list[dict], session: SessionDep) -> None:
             manufacturer_not_for_highline_source=leashring.get("manufacturer_not_for_highline_source"),
             # Brand names only — see the model. Absent stays None, not [].
             gear_sellers=leashring.get("gear_sellers") or None,
+            product_group=leashring.get("product_group"),
         )
         db_leashring = LeashRing.model_validate(leashring_create)
         db_leashring.id = require_seed_id(leashring, "leashrings.json")
