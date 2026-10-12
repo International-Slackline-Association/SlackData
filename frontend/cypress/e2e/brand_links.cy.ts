@@ -51,9 +51,9 @@ describe('Manufacturer name links — gear cards', () => {
   })
 
   it('every card in the grid carries one', () => {
-    cy.get('[data-cy="gear-card"]').then(($cards) => {
-      cy.get('[data-cy="gear-card"] [data-cy="brand-link"]')
-        .should('have.length', $cards.length)
+    // At least one: a product group's card names every member's brand.
+    cy.get('[data-cy="gear-card"]').each(($card) => {
+      expect($card.find('[data-cy="brand-link"]').length).to.be.greaterThan(0)
     })
   })
 

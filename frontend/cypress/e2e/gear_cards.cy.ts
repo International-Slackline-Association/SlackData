@@ -1,3 +1,4 @@
+import { listingUnits } from '../support/listing'
 import { GEAR_TYPES } from '../support/gear_types'
 import { RED_600 } from '../support/colors'
 import { imageFilesFor } from '../support/images'
@@ -74,7 +75,9 @@ GEAR_TYPES.forEach(({ slug, apiPath, label, hasISA }) => {
 
     it('omits the link entirely on items with no product URL', () => {
       cy.fetchAllItems(apiPath).then((all) => {
-        const withUrl = all.filter((i) => i.product_url).length
+        // Per card, not per row: a product group's card carries no outbound
+        // link (it would go to one shop of several), so count listing units.
+        const withUrl = listingUnits(all as Record<string, unknown>[]).filter((i) => i.product_url).length
         // A dead or disabled button would be the same furniture we just removed.
         cy.get('[data-cy="btn-product"]').should('have.length', withUrl)
       })

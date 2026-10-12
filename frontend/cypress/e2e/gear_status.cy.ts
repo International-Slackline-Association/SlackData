@@ -3,6 +3,7 @@
 // "Historic" card badge shown only for retired gear. Driven by the real backend.
 // Webbings is the fixture — the dataset has both active (still-sold) and historic
 // (active === false) items.
+import { listingUnits } from '../support/listing'
 
 const SLUG = 'webbings'
 const API = 'webbing'
@@ -11,8 +12,9 @@ const API = 'webbing'
 // "Historic" shows only historic (active === false). Mirror that split from the API
 // so the counts are asserted against the source of truth, not a hard-coded number.
 function partition(all: Record<string, unknown>[]) {
-  const historic = all.filter((it) => it.active === false)
-  const current = all.filter((it) => it.active !== false)
+  // Filtered first, then collapsed to cards, as the page does (utils/groups.ts).
+  const historic = listingUnits(all.filter((it) => it.active === false))
+  const current = listingUnits(all.filter((it) => it.active !== false))
   return { historic, current }
 }
 
@@ -106,7 +108,7 @@ describe('Gear status — all/current/historic control + historic badge', () => 
   })
 
   it('All shows every item, badging only the historic ones', () => {
-    cy.get('[data-cy="item-count"]').should('contain.text', String(all.length))
+    cy.get('[data-cy="item-count"]').should('contain.text', String(listingUnits(all).length))
     // A mixed grid: some cards badged, some not — the badge is the discriminator.
     cy.get('[data-cy="gear-card"]').should('have.length.greaterThan', 0)
     cy.get('[data-cy="gear-card"]').then(($cards) => {
@@ -170,6 +172,6 @@ describe('Gear status — all/current/historic control + historic badge', () => 
     cy.get('[data-cy="status-historic"]').click()
     cy.get('[data-cy="status-all"]').click()
     cy.get('[data-cy="status-all"]').should('have.attr', 'data-active', 'true')
-    cy.get('[data-cy="item-count"]').should('contain.text', String(all.length))
+    cy.get('[data-cy="item-count"]').should('contain.text', String(listingUnits(all).length))
   })
 })
