@@ -62,6 +62,7 @@ def add_leashrings_to_db(leashrings: list[dict], session: SessionDep) -> None:
             breaking_strength=leashring.get("breaking_strength"),
             price=leashring.get("price"),
             currency=currency,
+            version=leashring.get("version"),
             notes=leashring.get("notes"),
             active=leashring.get("active"),
             description=leashring.get("description"),

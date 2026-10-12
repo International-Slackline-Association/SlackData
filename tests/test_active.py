@@ -328,6 +328,26 @@ def test_loader_active_absent_from_json_is_none(session, clean_fn, add_fn, Model
     assert row.active is None
 
 
+@pytest.mark.parametrize(
+    "clean_fn, add_fn, Model, item",
+    [case[1:] for case in LOADER_CASES],
+    ids=LOADER_IDS,
+)
+def test_loader_carries_notes_and_version(session, clean_fn, add_fn, Model, item):
+    """`notes` and `version` reach the row on every gear type.
+
+    The webbing, roller and grip loaders once left both out of their
+    `<X>Create(...)` call, so a seed's notes (merge records, provenance) were
+    dropped at seed time with no error anywhere.
+    """
+    row = _load_one(
+        session, clean_fn, add_fn, Model,
+        item | {"notes": "Merged from #999.", "version": "v2"},
+    )
+    assert row.notes == "Merged from #999."
+    assert row.version == "v2"
+
+
 # ---------------------------------------------------------------------------
 # The seed files themselves — every item should carry an explicit `active`
 # ---------------------------------------------------------------------------

@@ -70,6 +70,8 @@ def add_rollers_to_db(rollers: list[dict], session: SessionDep) -> None:
             currency=currency,
             active=roller.get("active"),
             description=roller.get("description"),
+            version=roller.get("version"),
+            notes=roller.get("notes"),
             manufacturer_not_for_highline=roller.get("manufacturer_not_for_highline"),
             manufacturer_not_for_highline_source=roller.get("manufacturer_not_for_highline_source"),
             # Brand names only — see the model. Absent stays None, not [].

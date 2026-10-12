@@ -86,6 +86,8 @@ def add_webbings_to_db(webbings: list[dict], session: SessionDep) -> None:
             currency=parse_currency(webbing.get("currency")),
             active=webbing.get("active"),
             description=webbing.get("description"),
+            version=webbing.get("version"),
+            notes=webbing.get("notes"),
             colors=webbing.get("colors"),
             manufacturer_not_for_highline=webbing.get("manufacturer_not_for_highline"),
             manufacturer_not_for_highline_source=webbing.get("manufacturer_not_for_highline_source"),
