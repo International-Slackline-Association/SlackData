@@ -113,6 +113,18 @@ def test_the_seeds_actually_hold_co_listings():
     assert total > 50, f"only {total} co-listings in the seeds — did a seed lose the field?"
 
 
+def test_matrix_outer_and_wave_tube_32_are_one_row_sold_by_aki():
+    """One webbing under two names, merged 2026-10-12 into id 115: Landcruising
+    made it as Matrix Outer, Aki sold it on as Wave Tube 32. One row, so an ISA
+    recall or a correction cannot reach one name and miss the other."""
+    webbings = {w["id"]: w for w in seed_items("webbings")}
+    row = webbings[115]
+    assert row["name"] == "Wave Tube 32 (Matrix Outer)"
+    assert row["brand"] == "Landcruising"
+    assert row["gear_sellers"] == ["Aki Slacklines"]
+    assert not [w["id"] for w in webbings.values() if "Wave Tube 32" in w["name"] and w["id"] != 115]
+
+
 # ---------------------------------------------------------------------------
 # The loaders — a list has to arrive as a list
 # ---------------------------------------------------------------------------

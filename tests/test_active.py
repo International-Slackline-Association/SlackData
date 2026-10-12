@@ -333,19 +333,21 @@ def test_loader_active_absent_from_json_is_none(session, clean_fn, add_fn, Model
     [case[1:] for case in LOADER_CASES],
     ids=LOADER_IDS,
 )
-def test_loader_carries_notes_and_version(session, clean_fn, add_fn, Model, item):
-    """`notes` and `version` reach the row on every gear type.
+def test_loader_carries_notes_version_and_product_group(session, clean_fn, add_fn, Model, item):
+    """`notes`, `version` and `product_group` reach the row on every gear type.
 
-    The webbing, roller and grip loaders once left both out of their
-    `<X>Create(...)` call, so a seed's notes (merge records, provenance) were
-    dropped at seed time with no error anywhere.
+    The webbing, roller and grip loaders once left `notes` and `version` out of
+    their `<X>Create(...)` call, so a seed's notes (merge records, provenance)
+    were dropped at seed time with no error anywhere. `product_group` is mapped
+    by hand in every loader the same way, so it can be dropped the same way.
     """
     row = _load_one(
         session, clean_fn, add_fn, Model,
-        item | {"notes": "Merged from #999.", "version": "v2"},
+        item | {"notes": "Merged from #999.", "version": "v2", "product_group": "Reggae"},
     )
     assert row.notes == "Merged from #999."
     assert row.version == "v2"
+    assert row.product_group == "Reggae"
 
 
 # ---------------------------------------------------------------------------

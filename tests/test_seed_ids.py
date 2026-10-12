@@ -103,6 +103,28 @@ def test_ids_are_unique(filename: str, brand_key: str) -> None:
     assert not duplicates, f"{filename}: id(s) used more than once: {duplicates}"
 
 
+# Ids of rows merged into another row. They answer 404 (no redirect yet), and
+# they must never be handed to a new product: a bookmark, an ISA match block or
+# a submitted correction recorded against the old row would silently land on it.
+RETIRED_IDS = {
+    "webbings.json": {
+        152,  # Wave Tube 32 -> 115 Wave Tube 32 (Matrix Outer), 2026-10-12
+        154,  # Slack Pro! Neon Light -> 100, 2026-10-08
+        209, 210,  # Aki White Magic / Unicorn -> Landcruising 6 / 7, 2026-10-05
+    },
+    "weblocks.json": {
+        14, 16,  # Spider Bandit SH / SL -> EQB 13 / 15, 2026-10-07
+        60,  # Spider Paddle Linelock -> EQB Paddle SH 61, 2026-10-08
+    },
+}
+
+
+@pytest.mark.parametrize("filename", RETIRED_IDS)
+def test_a_merged_rows_id_is_never_reused(filename: str) -> None:
+    reused = RETIRED_IDS[filename] & {item["id"] for item in load(filename)}
+    assert not reused, f"{filename}: retired id(s) back in use: {sorted(reused)}"
+
+
 @pytest.mark.parametrize("filename,brand_key", SEEDS.items())
 def test_brand_and_name_is_unique(filename: str, brand_key: str) -> None:
     """The fallback handle, for everything that has to re-find a row without an id.
