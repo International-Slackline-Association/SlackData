@@ -2254,7 +2254,7 @@
             "country": "Germany",
             "country_flag_url": "/img/flags/DE.png"
         },
-        "product_page_url": "https://aki-slacklines.de/en/hardware/weblocks/203/aki-lynx-5-webbing-locker",
+        "product_page_url": "https://web.archive.org/web/20240919205839/https://aki-slacklines.de/en/products/aki-lynx-5-slackline-webbing-locker",
         "pricing": [
             {
                 "text": "1 unit and above : 134.95 EUR"
@@ -2278,7 +2278,7 @@
         },
         "date_introduced": 1626901200000,
         "name": "Lynx 5",
-        "product_url": "https://aki-slacklines.de/en/hardware/weblocks/203/aki-lynx-5-webbing-locker",
+        "product_url": "https://web.archive.org/web/20240919205839/https://aki-slacklines.de/en/products/aki-lynx-5-slackline-webbing-locker",
         "active": false,
         "style": "Tensionable Weblock"
     },
