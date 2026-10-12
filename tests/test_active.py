@@ -341,6 +341,7 @@ def test_loader_active_absent_from_json_is_none(session, clean_fn, add_fn, Model
     pytest.param("load_treepros", id="treepros"),
     pytest.param("load_starterkits", id="starterkits"),
     pytest.param("load_tricklinekits", id="tricklinekits"),
+    pytest.param("load_connectors", id="connectors"),
 ])
 def test_seed_json_carries_active_on_every_item(json_loader):
     """
@@ -356,4 +357,3 @@ def test_seed_json_carries_active_on_every_item(json_loader):
     missing = [i.get("name") for i in items if "active" not in i]
     assert missing == [], f"{len(missing)} item(s) with no `active` key: {missing[:5]}"
     assert all(isinstance(i["active"], bool) for i in items)
-    pytest.param("load_connectors", id="connectors"),
