@@ -1402,10 +1402,6 @@
     "landcruise_matrix": [
       "landcruise_matrix.jpg"
     ],
-    "landcruise_matrix-outer": [
-      "landcruise_matrix-outer.jpg",
-      "landcruise_matrix-outer-2.jpg"
-    ],
     "landcruise_nova-magic-25": [
       "landcruise_nova-magic-25.jpg",
       "landcruise_nova-magic-25-2.jpg"
@@ -1437,8 +1433,10 @@
       "landcruise_wave-tube-19.jpg",
       "landcruise_wave-tube-19-2.jpg"
     ],
-    "landcruise_wave-tube-32": [
-      "landcruise_wave-tube-32.jpg"
+    "landcruise_wave-tube-32-matrix-outer": [
+      "landcruise_wave-tube-32-matrix-outer.jpg",
+      "landcruise_wave-tube-32-matrix-outer-2.jpg",
+      "landcruise_wave-tube-32-matrix-outer-3.jpg"
     ],
     "landcruise_white-magic": [
       "landcruise_white-magic.jpg",

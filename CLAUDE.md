@@ -415,14 +415,16 @@ provenance.
   sourced, and "does this shop still stock it" is a different question from the
   product's own `active`, which for a fair part of this range is `false`.
 - **Aki Slacklines** sells 8 Landcruising webbings (White Magic, Unicorn, Wizard,
-  Wave Tube, Wave Tube 19, Verve Red, Wave Tube 32, Aloha/Tidal). Aki's founder
+  Wave Tube, Wave Tube 19, Verve Red, Wave Tube 32 (Matrix Outer), Aloha/Tidal). Aki's founder
   founded and ran Landcruising (2008–2018), and Aki carried on part of the range.
   Recorded per product from the Wayback copies of Aki's shops, one way only: Aki
   sells Landcruising's webbing, not the reverse. White Magic and Unicorn were
   each held twice, once under each brand (rows 6+209, 7+210); on 2026-10-05 the
   Aki rows were folded into the Landcruising ones, along with their photos, so
-  ids 209 and 210 no longer exist. Two uncertain matches were left out (Matrix
-  Outer, Verve 35mm); BACKLOG.md § Aki has them.
+  ids 209 and 210 no longer exist. Matrix Outer (115) and Aki's Wave Tube 32
+  (152) proved to be one webbing and were merged on 2026-10-12 as
+  `Wave Tube 32 (Matrix Outer)`, id 115, so id 152 no longer exists. Verve
+  35mm is not co-listed: no Aki listing for it was found.
 - **Spider Slacklines** sells EQB's `Bandit SH` and `Bandit SL` (weblocks 13,
   15). Each was held twice, once per brand (13+14, 15+16), and the ISA Bandit
   warning reached only the EQB copies. On 2026-10-07 the Spider rows were folded
@@ -443,7 +445,7 @@ provenance.
   moved onto `slackfr_neon-light` as `-3`, so id 154 no longer exists.
 
 **Not done here:** a redirect for merged rows (the Landcruising/Aki,
-EQB/Spider `Bandit` and `Paddle`, and Slack.fr/Slack Pro! `Neon Light` pairs were merged without one, so their old ids 404), and anything on the **card** — the card shows the maker, because the
+EQB/Spider `Bandit` and `Paddle`, Slack.fr/Slack Pro! `Neon Light`, and Matrix Outer/Wave Tube 32 pairs were merged without one, so their old ids 404), and anything on the **card** — the card shows the maker, because the
 specs are the maker's, and inventory counts still assume one row is one product,
 so a seller-only brand would read as "0 items" on the manufacturers page
 however much it sells. (SlackX was that case until 2026-10-07, when it and

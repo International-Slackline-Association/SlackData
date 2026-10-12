@@ -6456,8 +6456,11 @@
     },
     {
         "id": 115,
-        "name": "Matrix Outer",
+        "name": "Wave Tube 32 (Matrix Outer)",
         "brand": "Landcruising",
+        "gear_sellers": [
+            "Aki Slacklines"
+        ],
         "materialType": "Nylon",
         "width": 32,
         "weight": 58,
@@ -6466,6 +6469,10 @@
             {
                 "percent": 14,
                 "kn": 9
+            },
+            {
+                "percent": 16,
+                "kn": 10
             }
         ],
         "date_introduced": null,
@@ -6474,7 +6481,9 @@
         "active": false,
         "priceMeter": 1.95,
         "currency": "EUR",
-        "description": "The Matrix Outer webbing can be used in many different ways. It offers as single line very good dynamic properties on shorter distances. The Matrix Outer transforms into a powerful jumpline by reinforcing it with 25 mm polyamide webbing. And lastly the 32mm wide webbing is suitable as protection padding for 25 mm lines."
+        "colors": "Orange / light blue",
+        "description": "The Matrix Outer webbing can be used in many different ways. It offers as single line very good dynamic properties on shorter distances. The Matrix Outer transforms into a powerful jumpline by reinforcing it with 25 mm polyamide webbing. And lastly the 32mm wide webbing is suitable as protection padding for 25 mm lines.",
+        "notes": "One webbing under two names: Landcruising sold it as \"Matrix Outer\" (32 mm), and Aki Slacklines, which carried on part of the Landcruising range, later sold it as \"Wave Tube 32\". Merged on 2026-10-12 from #115 Matrix Outer and #152 Wave Tube 32; id 152 no longer exists. Both are 32 mm polyamide tubes rated 27 kN and are sold for threading over 25 mm webbing as a jumpline. Width, weight (58 g/m) and MBS set by the operator; thickness left unknown (Aki's page gave 2.3 mm and 55 g/m). Stretch: 14 % at 9 kN from Landcruising, 16 % at 10 kN from Aki. Price and link are Landcruising's (1.95 €/m); Aki listed it at 2.00 €/m: https://web.archive.org/web/20240528074507/https://aki-slacklines.de/de/slacklineband/polyamid/14/aki-wave-tube-32-slacklineband. Aki's note: the 5.4 kN WLL holds only with webbing locks of high breaking-load efficiency (e.g. Puma 2); with knots or chain-link linelockers it must be well below 4 kN. Aki's webbing manual (Rev. 1.9, 2021, held as the range-wide Aki webbing manual) lists Wave 32 at MBS 27 kN, WLL 5 kN, 16 % at 10 kN, 55 g/m."
     },
     {
         "id": 116,
@@ -7247,31 +7256,6 @@
         "active": false,
         "description": "Our Verve slackline webbing is the red coloured counterpart to our classic White Magic. The Verve offers a superior combination of low strain, high-strength, low weight and durability. The dynamic behaviour is even more defined and perfected compared to White Magic. The true red color (no surface coating) and the soft touch finishing the new accents.",
         "notes": "One row for Landcruising's 25 mm Verve, merged on 2026-10-07 from #151 'Verve 25mm' and the staged 'Verve 25mm Red'. Specs, price and description from the red Verve page (Wayback 2011-07-22): PES flat, MBS 31 kN, 7 % at 10 kN, 58 g/m, max. 10 kN pretension as a longline, made in Germany, 1.49 €/m (1.40 €/m from 100 m). The row previously carried the 2014 'Verve 25mm Slackline 30m loop' page (https://web.archive.org/web/20140902053505/http://www.landcruising-slacklines.de/en/shop/2-slackline-band/26-polyester/421-?vmcchk=1), which describes 'shiny yellow' webbing with av. >32 kN, min. 30 kN, 11 % at 10 kN, 59 g/m, 2-ply, 55.95 € for 30 m with a sewn loop; that page's blurb was: 'The 25 mm wide slackline with soft touch and extended stretch gives a fantastic dynamic pleasure, even on shorter lines.'"
-    },
-    {
-        "id": 152,
-        "name": "Wave Tube  32",
-        "brand": "Landcruising",
-        "gear_sellers": [
-            "Aki Slacklines"
-        ],
-        "materialType": "Polyester",
-        "width": 25.4,
-        "weight": 58,
-        "breakingStrength": 27,
-        "stretch": [
-            {
-                "percent": 16,
-                "kn": 10
-            }
-        ],
-        "date_introduced": null,
-        "product_url": null,
-        "thickness": 2.3,
-        "webbing_construction": "Tubular",
-        "priceMeter": 1.95,
-        "currency": "EUR",
-        "active": false
     },
     {
         "id": 153,
