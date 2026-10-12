@@ -1309,6 +1309,9 @@
       "eqb_element-2.jpg",
       "eqb_element-3.jpg"
     ],
+    "eqb_flash": [
+      "eqb_flash.png"
+    ],
     "eqb_fresh": [
       "eqb_fresh.jpg",
       "eqb_fresh-2.jpg"
@@ -1326,6 +1329,9 @@
     ],
     "eqb_ninja": [
       "eqb_ninja.jpg"
+    ],
+    "eqb_nitro": [
+      "eqb_nitro.jpg"
     ],
     "eqb_ocean": [
       "eqb_ocean.jpg",
@@ -1807,6 +1813,9 @@
     ],
     "slackmtn_spectre": [
       "slackmtn_spectre.jpg"
+    ],
+    "slackmtn_spice": [
+      "slackmtn_spice.jpg"
     ],
     "slackmtn_storm": [
       "slackmtn_storm.jpg"
