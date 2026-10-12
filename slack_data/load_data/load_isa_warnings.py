@@ -9,8 +9,16 @@ carries a hand-adjudicated `match` block written alongside the scrape:
         "gearIds": [13, 15],            # primary keys in that table
         "gearNames": ["EQB Bandit SH", "EQB Bandit SL"],
         "confidence": "exact",          # exact | likely | partial | ambiguous | none
-        "note": "..."
+        "note": "...",
+        "also": [                       # optional: the same entry on another table
+            {"gearType": "connector", "gearIds": [1], "gearNames": ["..."],
+             "confidence": "exact", "note": "..."}
+        ]
     }
+
+A block holds one `gearType`, so `also` is how one warning lands on two tables
+(the KingPin pin: the bare shackle is a connector, the KingPin Weblock a
+weblock). Each target is verified and written exactly like the primary one.
 
 **Why ids, and why they are also verified.** The ISA names products the way the
 manufacturer's website does ("Ginko mini", "Catlock SL", "AWL 5"), which often
@@ -132,6 +140,12 @@ def parse_in_production(raw: str | None) -> bool | None:
     return None
 
 
+def match_targets(match: dict) -> list[dict]:
+    """The block's own target, then each of its `also` targets."""
+    primary = {k: v for k, v in match.items() if k != "also"}
+    return [primary, *(match.get("also") or [])]
+
+
 def resolve_warnings(warnings: list[dict], session: Session) -> tuple[dict, list[str]]:
     """Resolve entries to `{(gear_type, id): ISAWarning}`, keeping the worst.
 
@@ -142,8 +156,9 @@ def resolve_warnings(warnings: list[dict], session: Session) -> tuple[dict, list
     resolved: dict[tuple[str, int], ISAWarning] = {}
     problems: list[str] = []
 
-    for entry in warnings:
-        match = entry.get("match") or {}
+    for entry, match in (
+        (e, target) for e in warnings for target in match_targets(e.get("match") or {})
+    ):
         gear_type = match.get("gearType")
         gear_ids = match.get("gearIds") or []
         gear_names = match.get("gearNames") or []
@@ -186,9 +201,15 @@ def resolve_warnings(warnings: list[dict], session: Session) -> tuple[dict, list
     return resolved, problems
 
 
-def build_warning_rows(entry: dict, gear_type: str, gear_id: int) -> ISAGearWarningCreate:
-    """Map one source entry + one resolved gear id onto a detail row."""
-    match = entry.get("match") or {}
+def build_warning_rows(
+    entry: dict, gear_type: str, gear_id: int, match: dict | None = None
+) -> ISAGearWarningCreate:
+    """Map one source entry + one resolved gear id onto a detail row.
+
+    `match` is the target the id came from (its confidence and note); the
+    entry's primary block when not given."""
+    if match is None:
+        match = entry.get("match") or {}
     links = [entry[key] for key in ("link1", "link2") if entry.get(key)]
     return ISAGearWarningCreate(
         source_id=str(entry.get("id")),
@@ -224,19 +245,19 @@ def add_isa_warnings_to_db(warnings: list[dict], session: Session) -> None:
     # warning the card doesn't show, or vice versa.
     detail_rows = 0
     for entry in warnings:
-        match = entry.get("match") or {}
-        gear_type = match.get("gearType")
-        if gear_type not in WARNABLE_MODELS:
-            continue
         if get_isa_warning(entry.get("status")) is None:
             continue
-        for gear_id in match.get("gearIds") or []:
-            if (gear_type, gear_id) not in resolved:
-                continue  # id failed verification — see resolve_warnings()
-            session.add(
-                ISAGearWarning.model_validate(build_warning_rows(entry, gear_type, gear_id))
-            )
-            detail_rows += 1
+        for match in match_targets(entry.get("match") or {}):
+            gear_type = match.get("gearType")
+            if gear_type not in WARNABLE_MODELS:
+                continue
+            for gear_id in match.get("gearIds") or []:
+                if (gear_type, gear_id) not in resolved:
+                    continue  # id failed verification — see resolve_warnings()
+                session.add(
+                    ISAGearWarning.model_validate(build_warning_rows(entry, gear_type, gear_id, match))
+                )
+                detail_rows += 1
 
     session.commit()
 

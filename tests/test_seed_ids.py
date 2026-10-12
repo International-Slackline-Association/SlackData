@@ -34,7 +34,7 @@ from sqlmodel import Session, SQLModel, create_engine, select
 from sqlmodel.pool import StaticPool
 
 from slack_data.load_data.load_grips import add_grips_to_db, clean_grip_data
-from slack_data.load_data.load_isa_warnings import WARNABLE_MODELS
+from slack_data.load_data.load_isa_warnings import WARNABLE_MODELS, match_targets
 from slack_data.models.brands import Brand
 from slack_data.models.connectors import Connector
 from slack_data.models.grips import Grip
@@ -266,8 +266,9 @@ def test_isa_match_blocks_point_at_the_products_they_name(seeded) -> None:
     entries = json.loads((ROOT / "isa_gear_warnings.json").read_text(encoding="utf-8"))["items"]
 
     wrong: list[str] = []
-    for entry in entries:
-        match = entry.get("match") or {}
+    for entry, match in (
+        (e, target) for e in entries for target in match_targets(e.get("match") or {})
+    ):
         gear_type, ids, names = match.get("gearType"), match.get("gearIds") or [], match.get("gearNames") or []
         if not gear_type or not ids or gear_type not in WARNABLE_MODELS:
             continue  # unmatched, or a type with no isa_warning column — both are the loader's business

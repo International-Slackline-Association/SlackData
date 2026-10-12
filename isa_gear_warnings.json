@@ -886,15 +886,28 @@
             "productImage": "https://www.slacklineinternational.org/2b1118f6-915c-48b4-b7d0-ca63578d47b8/",
             "link1": "https://m.facebook.com/photo.php?fbid=10100695211287975&id=17402980&set=gm.5156896224384213&source=57",
             "match": {
-                "gearType": "weblock",
+                "gearType": "connector",
                 "gearIds": [
-                    41
+                    1
                 ],
                 "gearNames": [
-                    "Slacktivity KingPin Weblock"
+                    "Slacktivity KingPin"
                 ],
-                "confidence": "likely",
-                "note": "The KingPin shackle's pin; the KingPin Weblock is that shackle plus a webbing piece"
+                "confidence": "exact",
+                "note": "The KingPin shackle's own pin",
+                "also": [
+                    {
+                        "gearType": "weblock",
+                        "gearIds": [
+                            41
+                        ],
+                        "gearNames": [
+                            "Slacktivity KingPin Weblock"
+                        ],
+                        "confidence": "likely",
+                        "note": "The KingPin shackle's pin; the KingPin Weblock is that shackle plus a webbing piece"
+                    }
+                ]
             }
         },
         {
