@@ -6,6 +6,8 @@
   --color-amber-price: #E8770A;
   --color-coral-badge: #D04A3E;
   --color-page-bg: #F8F7F4;
+  /* The SlackData wordmark's face (TopNav). */
+  --font-display: 'Montserrat', system-ui, 'Segoe UI', Roboto, sans-serif;
 }
 
 html {

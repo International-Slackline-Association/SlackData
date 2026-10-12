@@ -176,9 +176,9 @@ export default function TopNav() {
             ref={wordmarkRef}
             to="/webbings"
             data-cy="wordmark"
-            className="font-bold text-gray-900 text-lg shrink-0"
+            className="shrink-0 font-display font-black text-xl text-gray-900"
           >
-            SlackData
+            Slack<span className="text-teal-primary">Data</span>
           </Link>
           {/* Supported-by credit, as SlackDB carries it. The label drops on a
               phone; the whole credit drops a row when even the logo won't fit. */}
