@@ -202,6 +202,25 @@ export const FILTER_GROUPS: Record<GearSlug, FilterGroupMeta[]> = {
     BRAND_GROUP,
   ],
 
+  connectors: [
+    { group: 'price', label: 'Price', type: 'range', valueField: 'price_display', currencyUnit: true },
+    { group: 'connector_style',   label: 'Type',              type: 'pill', pillKind: 'enum' },
+    { group: 'closure',           label: 'Closure',           type: 'pill', pillKind: 'enum' },
+    { group: 'material',          label: 'Material',          type: 'pill', pillKind: 'enum' },
+    { group: 'isa_certified',     label: 'ISA Certified',     type: 'pill', pillKind: 'bool' },
+    { group: 'isa_warning',       label: 'ISA Warning',       type: 'pill', pillKind: 'enum',
+      order: ISA_WARNING_ORDER, includeNone: true },
+    { group: 'mbs_straight_pull', label: 'MBS',               type: 'range', unit: 'kN' },
+    { group: 'mbs_crossload',     label: 'Crossload MBS',     type: 'range', unit: 'kN' },
+    { group: 'opening',           label: 'Opening',           type: 'range', unit: 'mm' },
+    { group: 'pin_diameter',      label: 'Pin Diameter',      type: 'range', unit: 'mm' },
+    { group: 'weight',            label: 'Weight',            type: 'range', unit: 'g' },
+    // Brand comes LAST: it is the longest group in the sidebar (45 brands on
+    // webbings, even folded) and the least specific, so it sits below the spec
+    // filters people scroll for rather than pushing them under a wall of pills.
+    BRAND_GROUP,
+  ],
+
   // Upcoming types have no data / no listing yet.
   bungees: [],
   leashringpro: [],

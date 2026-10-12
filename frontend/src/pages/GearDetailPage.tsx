@@ -10,7 +10,7 @@
 
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { fetchGearItem } from '@/api/gear'
+import { fetchGearItem, fetchGearList } from '@/api/gear'
 import GearDetailBody from '@/components/gear/GearDetailBody'
 import BackLink from '@/components/layout/BackLink'
 import ProductManuals from '@/components/gear/ProductManuals'
@@ -19,6 +19,7 @@ import SuggestButton from '@/components/submissions/SuggestButton'
 import { getGearType } from '@/config/gearTypes'
 import { type AnyItem } from '@/utils/format'
 import { manualsFor } from '@/utils/images'
+import { groupFor } from '@/utils/groups'
 import NotFoundPage from './NotFoundPage'
 
 export default function GearDetailPage() {
@@ -26,6 +27,10 @@ export default function GearDetailPage() {
   const meta = slug ? getGearType(slug) : undefined
 
   const [item, setItem] = useState<AnyItem | null>(null)
+  // A member of a generic-part group renders as the GROUP — the part, sold by
+  // several shops — with this shop's row highlighted in the vendor table, rather
+  // than as one shop's listing passing itself off as the product.
+  const [shown, setShown] = useState<AnyItem | null>(null)
   const [missing, setMissing] = useState(false)
   const [loading, setLoading] = useState(true)
 
@@ -35,8 +40,17 @@ export default function GearDetailPage() {
     setLoading(true)
     setMissing(false)
     fetchGearItem(meta.slug, id)
-      .then(data => {
-        if (!cancelled) setItem(data as unknown as AnyItem)
+      .then(async data => {
+        const row = data as unknown as AnyItem
+        let view: AnyItem = row
+        if (typeof row.product_group === 'string' && row.product_group !== '') {
+          const all = (await fetchGearList(meta.slug)) as unknown as AnyItem[]
+          view = groupFor(all.filter(it => it.product_group === row.product_group), row) ?? row
+        }
+        if (!cancelled) {
+          setItem(row)
+          setShown(view)
+        }
       })
       .catch(() => {
         if (!cancelled) setMissing(true)
@@ -51,7 +65,7 @@ export default function GearDetailPage() {
 
   if (!meta) return <NotFoundPage />
   if (missing) return <NotFoundPage />
-  if (loading || !item) {
+  if (loading || !item || !shown) {
     return <div data-cy="detail-skeleton" className="py-24 text-center text-gray-400">Loading…</div>
   }
 
@@ -67,7 +81,7 @@ export default function GearDetailPage() {
       />
 
       <article className="mt-4 rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
-        <GearDetailBody item={item} meta={meta} />
+        <GearDetailBody item={shown} meta={meta} />
       </article>
 
       {/* Its own card below the spec sheet: a manual is a document, not a

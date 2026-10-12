@@ -40,6 +40,21 @@ export function imageUrls(gearType: string, brandName: string, name: string): st
   return files.map(f => `${IMAGE_BASE_URL}/gear-images/${gearType}/${f}`)
 }
 
+// Image URLs for a listing item. A collapsed generic-part group (utils/groups.ts)
+// has no image key of its own — its name is the group's and its brand a list of
+// shops — so it shows the photos of its first member that has any.
+export function itemImageUrls(gearType: string, item: Record<string, unknown>): string[] {
+  const members = item._members as Record<string, unknown>[] | undefined
+  if (Array.isArray(members)) {
+    for (const m of members) {
+      const urls = imageUrls(gearType, String(m.brand_name), String(m.name))
+      if (urls.length) return urls
+    }
+    return []
+  }
+  return imageUrls(gearType, String(item.brand_name), String(item.name))
+}
+
 // Convenience: the primary image URL, or null.
 export function primaryImage(gearType: string, brandName: string, name: string): string | null {
   return imageUrls(gearType, brandName, name)[0] ?? null

@@ -7,7 +7,8 @@
 // contract. Until Phase 0 lands, detail/compare features will not resolve.
 
 import type {
-  AttachmentPoint, BearingMaterial, ConnectionType, Currency,
+  AttachmentPoint, BearingMaterial, ConnectionType, ConnectorClosure, ConnectorMaterial,
+  ConnectorStyle, Currency,
   FiberMaterial, FrontPin, ISAWarning, LockType, MetalMaterial, PriceUnit,
   RollerMaterial, SliderType, StarterKitTensioningType, TricklineKitTensioningType,
   WebbingConstruction, WeblockStyle,
@@ -137,14 +138,39 @@ export interface TricklineKit extends GearBase {
   // bundle, not a component the ISA certifies.
 }
 
+export interface Connector extends GearBase {
+  connector_style: ConnectorStyle
+  closure: ConnectorClosure | null
+  material: ConnectorMaterial
+  alloy: string | null
+  // Breaking strengths as the maker states them, kN. Never a WLL.
+  mbs_straight_pull: number | null
+  mbs_crossload: number | null
+  mbs_gate_open: number | null
+  // mm: a shackle's jaw width, a carabiner's or quicklink's gate opening, a soft
+  // shackle's inner loop size.
+  opening: number | null
+  pin_diameter: number | null
+  // The pin stays in the body once unscrewed. false where the shop doesn't say.
+  captive_pin: boolean
+  rope_diameter: number | null
+  // What the MAKER claims (e.g. "EN362:2005") — not a certification.
+  standards: string[] | null
+  standards_source: string | null
+  isa_certified: boolean
+  isa_certificate: string | null
+  isa_warning: ISAWarning | null
+}
+
 // Union of every concrete gear item.
 export type GearItem =
   | Webbing | Weblock | LeashRing | Grip | Roller | TreePro | StarterKit | TricklineKit
+  | Connector
 
-// URL slugs (mirror config/gearTypes.ts). The first eight are data-backed and
+// URL slugs (mirror config/gearTypes.ts). The first nine are data-backed and
 // covered by the test suite; the last two are upcoming categories with no data
 // yet (shown in the nav, listing renders a "coming soon" state).
 export type GearSlug =
   | 'webbings' | 'weblocks' | 'leashrings' | 'grips'
-  | 'rollers' | 'treepros' | 'starterkits' | 'tricklinekits'
+  | 'rollers' | 'treepros' | 'starterkits' | 'tricklinekits' | 'connectors'
   | 'bungees' | 'leashringpro'

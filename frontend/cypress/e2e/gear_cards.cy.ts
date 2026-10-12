@@ -14,7 +14,7 @@ GEAR_TYPES.forEach(({ slug, apiPath, label, hasISA }) => {
       // the name-first item across the whole dataset — not the API's first row.
       cy.fetchAllItems(apiPath).then((all) => {
         firstItem = [...(all as Record<string, unknown>[])].sort((a, b) =>
-          String(a.name).localeCompare(String(b.name)),
+          String(a.name).localeCompare(String(b.name), undefined, { numeric: true }),
         )[0]
       })
     })

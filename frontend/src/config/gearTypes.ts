@@ -1,7 +1,7 @@
 // Central gear-type registry. Single source of truth for the nav tabs, routing,
 // and API path resolution.
 //
-// `GEAR_TYPES` are the eight data-backed types the test suite iterates over
+// `GEAR_TYPES` are the nine data-backed types the test suite iterates over
 // (mirrors cypress/support/gear_types.ts) and the only ones rendered as
 // [data-cy="nav-tab"]. `UPCOMING_GEAR_TYPES` are categories with no data yet —
 // shown in the nav (as [data-cy="nav-tab-upcoming"]) and routing to a
@@ -16,7 +16,7 @@ export interface GearTypeMeta {
   hasISA: boolean        // has an isa_certified field
   hasISAWarning: boolean // has an isa_warning field
   // The ISA certifies this kind of gear, so an item not on its approved-gear
-  // list reads "Not ISA Certified" on the card (see IsaStatusLabel). The five
+  // list reads "Not ISA Certified" on the card (see IsaStatusLabel). The six
   // types that hold a person up. Kits and tree protectors cannot be ISA
   // certified at all, so they carry no field and no label. Today this equals
   // hasISA; it is kept separate because one says what the data has and the
@@ -32,6 +32,7 @@ export const GEAR_TYPES: GearTypeMeta[] = [
   { slug: 'grips',         apiPath: 'grip',         label: 'Grips',           hasISA: true,  hasISAWarning: true,  certifiable: true,  available: true },
   { slug: 'rollers',       apiPath: 'roller',       label: 'Rollers',         hasISA: true,  hasISAWarning: true,  certifiable: true,  available: true },
   { slug: 'treepros',      apiPath: 'treepro',      label: 'Tree Protectors', hasISA: false, hasISAWarning: false, certifiable: false, available: true },
+  { slug: 'connectors',    apiPath: 'connector',    label: 'Connectors',      hasISA: true,  hasISAWarning: true,  certifiable: true,  available: true },
   { slug: 'starterkits',   apiPath: 'starterkit',   label: 'Starter Kits',    hasISA: false,  hasISAWarning: false, certifiable: false, available: true },
   { slug: 'tricklinekits', apiPath: 'tricklinekit', label: 'Trickline Kits',  hasISA: false,  hasISAWarning: false, certifiable: false, available: true },
 ]

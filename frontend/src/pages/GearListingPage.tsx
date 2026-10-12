@@ -17,6 +17,7 @@ import { useCurrency } from '@/context/CurrencyContext'
 import { STRETCH_RANGE_FIELD, useUrlState } from '@/hooks/useUrlState'
 import { filterBySearch } from '@/utils/search'
 import { sortItems } from '@/utils/sort'
+import { collapseGroups } from '@/utils/groups'
 import { BRAND_GROUP, filterGroupsFor } from '@/config/filterGroups'
 import { activeFilterCount, applyFilters, type RangeBounds } from '@/utils/filter'
 import { percentAtKn, topKnPoints } from '@/utils/stretch'
@@ -328,7 +329,9 @@ export default function GearListingPage() {
         return true
       })
     }
-    return sortItems(filtered, sort)
+    // Generic parts several shops sell collapse to one card here — after the
+    // filters ran on the vendor rows, before sort (see utils/groups.ts).
+    return sortItems(collapseGroups(filtered), sort)
   }, [contextItems, selectedKn, stretchMin, stretchMax, sort])
 
   // The selected items, in selection order, resolved from the FULL list (not

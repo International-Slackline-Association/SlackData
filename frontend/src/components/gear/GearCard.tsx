@@ -17,8 +17,9 @@ import { CARD_DATA_FIELDS, INLINE_SPECS } from '@/config/gearFields'
 import { useCurrency } from '@/context/CurrencyContext'
 import { useOriginState } from '@/context/OriginContext'
 import { dataAttrs, formatValue, type AnyItem } from '@/utils/format'
-import { imageUrls } from '@/utils/images'
-import BrandLink from '@/components/brand/BrandLink'
+import { itemImageUrls } from '@/utils/images'
+import { isGroupItem } from '@/utils/groups'
+import VendorBrands from '@/components/brand/VendorBrands'
 import CardImageCarousel from './CardImageCarousel'
 import IsaApprovedBadge from './IsaApprovedBadge'
 import IsaStatusLabel from './IsaStatusLabel'
@@ -68,7 +69,7 @@ export default function GearCard({
   const isaCertified = hasISA && item.isa_certified === true
 
   // Every image we hold for this product — the card browses the whole set.
-  const images = imageUrls(slug, String(item.brand_name), String(item.name))
+  const images = itemImageUrls(slug, item)
 
   // Roughly half the catalogue has no product_url (57/100 webbings, 36/100
   // weblocks; kits and grips are near-complete). The link is simply absent on
@@ -172,7 +173,7 @@ export default function GearCard({
           data-cy="gear-card-brand"
           className="text-[11px] font-medium uppercase tracking-wide text-gray-500"
         >
-          <BrandLink name={item.brand_name} />
+          <VendorBrands item={item} />
         </div>
 
         <Link
@@ -197,7 +198,8 @@ export default function GearCard({
               className="font-bold"
               style={{ color: '#E8770A' }}
             >
-              {price.text}
+              {/* A group's price is its cheapest shop's (utils/groups.ts). */}
+              {isGroupItem(item) && item._members.filter(m => m.price != null).length > 1 ? `from ${price.text}` : price.text}
             </span>
           )}
         </div>

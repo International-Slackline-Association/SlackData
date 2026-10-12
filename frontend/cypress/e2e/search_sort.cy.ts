@@ -1,4 +1,5 @@
 import { GEAR_TYPES } from '../support/gear_types'
+import { listingUnits } from '../support/listing'
 
 // Sort fields per gear type — derived from slack_data/models/*.py.
 // Rule: ONLY numeric fields (int or float) appear as sort options.
@@ -66,6 +67,12 @@ const EXTRA_SORT_FIELDS: Record<string, SortField[]> = {
     { field: 'webbing_length', label: 'Webbing Length', unit: 'm',  nullLast: false },
     { field: 'webbing_width',  label: 'Webbing Width',  unit: 'mm', nullLast: false },
   ],
+  connectors: [
+    { field: 'mbs_straight_pull', label: 'MBS',           unit: 'kN', nullLast: true },
+    { field: 'mbs_crossload',     label: 'Crossload MBS', unit: 'kN', nullLast: true },
+    { field: 'opening',           label: 'Opening',       unit: 'mm', nullLast: true },
+    { field: 'pin_diameter',      label: 'Pin Diameter',  unit: 'mm', nullLast: true },
+  ],
 }
 
 // ── Search tests (unchanged for every gear type) ──────────────────────────────
@@ -125,7 +132,7 @@ GEAR_TYPES.forEach(({ slug, apiPath, label }) => {
     it('restores the full list when the search input is cleared', () => {
       cy.fetchAllItems(apiPath).then((all) => {
         cy.get('[data-cy="search-input"]').type('xqzxqzxqzxqz_no_match').clear()
-        cy.get('[data-cy="gear-card"]').should('have.length', all.length)
+        cy.get('[data-cy="gear-card"]').should('have.length', listingUnits(all).length)
       })
     })
 
@@ -225,7 +232,7 @@ GEAR_TYPES.forEach(({ slug, label }) => {
     it('defaults to ascending alphabetical order on first load', () => {
       cy.get('[data-cy="gear-card-name"]').should(($els) => {
         const names = [...$els].map(el => el.textContent ?? '')
-        expect(names).to.deep.equal([...names].sort((a, b) => a.localeCompare(b)))
+        expect(names).to.deep.equal([...names].sort((a, b) => a.localeCompare(b, undefined, { numeric: true })))
       })
     })
 
@@ -262,7 +269,7 @@ GEAR_TYPES.forEach(({ slug, label }) => {
       cy.get('[data-cy="sort-option"]').contains(/name.*a.*z/i).click()
       cy.get('[data-cy="gear-card-name"]').should(($els) => {
         const names = [...$els].map(el => el.textContent ?? '')
-        expect(names).to.deep.equal([...names].sort((a, b) => a.localeCompare(b)))
+        expect(names).to.deep.equal([...names].sort((a, b) => a.localeCompare(b, undefined, { numeric: true })))
       })
     })
 
@@ -271,7 +278,7 @@ GEAR_TYPES.forEach(({ slug, label }) => {
       cy.get('[data-cy="sort-option"]').contains(/name.*z.*a/i).click()
       cy.get('[data-cy="gear-card-name"]').should(($els) => {
         const names = [...$els].map(el => el.textContent ?? '')
-        expect(names).to.deep.equal([...names].sort((a, b) => b.localeCompare(a)))
+        expect(names).to.deep.equal([...names].sort((a, b) => b.localeCompare(a, undefined, { numeric: true })))
       })
     })
 
@@ -319,7 +326,7 @@ GEAR_TYPES.forEach(({ slug, label }) => {
           // be in ascending alphabetical order.
           for (let i = 1; i < rows.length; i++) {
             if (rows[i].value !== '' && rows[i].value === rows[i - 1].value) {
-              expect(rows[i - 1].name.localeCompare(rows[i].name)).to.be.at.most(0)
+              expect(rows[i - 1].name.localeCompare(rows[i].name, undefined, { numeric: true })).to.be.at.most(0)
             }
           }
         })

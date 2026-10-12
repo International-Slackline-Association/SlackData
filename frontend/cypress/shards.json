@@ -68,7 +68,8 @@
       "estimate": "5:40",
       "specs": [
         "table",
-        "currency"
+        "currency",
+        "connector_groups"
       ]
     },
     {

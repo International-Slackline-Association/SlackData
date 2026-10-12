@@ -16,9 +16,19 @@ export interface NamedItem {
   brand_name?: unknown
 }
 
+/**
+ * Text order with numbers read as numbers: "D Shackle 8mm" before "D Shackle
+ * 10mm", which a plain localeCompare puts the other way round because "1" < "8".
+ * Connector names lead with type then size precisely so that A→Z groups and
+ * ranks them; this is what makes the size half of that work.
+ */
+export function naturalCompare(a: string, b: string): number {
+  return a.localeCompare(b, undefined, { numeric: true })
+}
+
 /** Alphabetical by name, ascending. Null/absent names sort as empty strings. */
 export function compareByName(a: NamedItem, b: NamedItem): number {
-  return String(a.name ?? '').localeCompare(String(b.name ?? ''))
+  return naturalCompare(String(a.name ?? ''), String(b.name ?? ''))
 }
 
 /**
@@ -28,7 +38,7 @@ export function compareByName(a: NamedItem, b: NamedItem): number {
  * rule for every other sort (see utils/sort.ts).
  */
 export function compareByBrand(a: NamedItem, b: NamedItem): number {
-  return String(a.brand_name ?? '').localeCompare(String(b.brand_name ?? ''))
+  return naturalCompare(String(a.brand_name ?? ''), String(b.brand_name ?? ''))
 }
 
 export function sortByName<T extends NamedItem>(items: readonly T[]): T[] {

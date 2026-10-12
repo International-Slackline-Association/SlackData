@@ -1,4 +1,5 @@
 import { GEAR_TYPES } from '../support/gear_types'
+import { listingUnits } from '../support/listing'
 
 // ISA gear warnings — the recall/warning/notice bubble on cards and the
 // severity-coloured banner on the item page.
@@ -426,7 +427,7 @@ describe('ISA Warning filter group', () => {
       it('None selects every unwarned item — and no bubbles are left on screen', () => {
         cy.fetchAllItems(apiPath).then((all) => {
           const items = all as Item[]
-          const clean = items.filter(i => i.isa_warning == null).length
+          const clean = listingUnits(items.filter(i => i.isa_warning == null)).length
           if (clean === 0 || clean === items.length) return
 
           group(slug).find('[data-cy="filter-pill"][data-value="none"]').click()
@@ -443,7 +444,7 @@ describe('ISA Warning filter group', () => {
             const matching = items.filter(i => i.isa_warning === status)
             if (matching.length === 0) continue
             group(slug).find(`[data-cy="filter-pill"][data-value="${status}"]`).click()
-            cy.get('[data-cy="item-count"]').should('contain', String(matching.length))
+            cy.get('[data-cy="item-count"]').should('contain', String(listingUnits(matching).length))
             // Asserted over the whole grid rather than card-by-card: iterating
             // cards races the re-render the click itself triggers, and this is
             // the stronger claim anyway — every badge on screen is this status,

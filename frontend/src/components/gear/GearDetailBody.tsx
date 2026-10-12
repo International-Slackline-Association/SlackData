@@ -37,8 +37,7 @@ import { useCurrency } from '@/context/CurrencyContext'
 import { useOriginState } from '@/context/OriginContext'
 import { useIsaWarnings } from '@/hooks/useIsaWarnings'
 import { type AnyItem } from '@/utils/format'
-import { imageUrls } from '@/utils/images'
-import BrandLink from '@/components/brand/BrandLink'
+import { itemImageUrls } from '@/utils/images'
 import AlsoSoldBy from './AlsoSoldBy'
 import CardImageCarousel from './CardImageCarousel'
 import IsaApprovedBadge from './IsaApprovedBadge'
@@ -47,6 +46,9 @@ import { isaWarningStatus } from './IsaWarningBadge'
 import IsaWarningPanel from './IsaWarningPanel'
 import HistoricBadge from './HistoricBadge'
 import SpecTable from './SpecTable'
+import VendorTable from './VendorTable'
+import VendorBrands from '@/components/brand/VendorBrands'
+import { isGroupItem } from '@/utils/groups'
 
 // Kept byte-identical to GearCard's pair so the same button can't look like two
 // different controls depending on which view you're in.
@@ -76,10 +78,11 @@ export default function GearDetailBody({
   onToggleCompare?: (id: number) => void
 }) {
   const price = useCurrency().priceText(item, meta.slug)
+  const group = isGroupItem(item)
   // Only used when `nameHref` is set, i.e. in the listing's Detailed view: the
   // panel's title links to the standalone page, which then knows the way back.
   const originState = useOriginState()
-  const images = imageUrls(meta.slug, String(item.brand_name), String(item.name))
+  const images = itemImageUrls(meta.slug, item)
   const isaWarning = isaWarningStatus(meta.hasISAWarning ? item.isa_warning : null)
   // The full ISA entries behind that status word — description, what to do,
   // date, sources. Shared index, fetched once (see useIsaWarnings).
@@ -120,7 +123,7 @@ export default function GearDetailBody({
                 data-cy="detail-brand"
                 className="text-xs font-medium uppercase tracking-wide text-gray-500"
               >
-                <BrandLink name={item.brand_name} />
+                <VendorBrands item={item} />
               </div>
               <div className="mt-1 flex flex-wrap items-center gap-2.5">
                 {nameHref ? (
@@ -154,11 +157,13 @@ export default function GearDetailBody({
                     className="text-xl font-bold"
                     style={{ color: '#E8770A' }}
                   >
-                    {price.text}
+                    {group ? `from ${price.text}` : price.text}
                   </div>
                   {/* What the manufacturer actually charges, kept visible so a
-                      converted figure is never mistaken for the sticker price. */}
-                  {price.original && (
+                      converted figure is never mistaken for the sticker price.
+                      Not on a generic-part group: its price is the cheapest of
+                      several shops, each listed with its own in the table. */}
+                  {price.original && !group && (
                     <div data-cy="detail-price-original" className="text-xs text-gray-500">
                       {price.original} as sold
                     </div>
@@ -296,6 +301,8 @@ export default function GearDetailBody({
           </>
         )
       })() : null}
+
+      <VendorTable item={item} meta={meta} />
 
       {/* Only rendered when it has something in it — an empty row would still
           push its mt-6 of dead space under the specs. */}

@@ -79,6 +79,25 @@ export const TRICKLINEKIT_TENSIONING_TYPES = [
 ] as const
 export type TricklineKitTensioningType = (typeof TRICKLINEKIT_TENSIONING_TYPES)[number]
 
+// models/connectors.py — ConnectorStyle. Push-pin vs screw-pin is `closure`,
+// not a style.
+export const CONNECTOR_STYLES = ['Shackle', 'Carabiner', 'Quicklink', 'Soft shackle'] as const
+export type ConnectorStyle = (typeof CONNECTOR_STYLES)[number]
+
+// models/connectors.py — ConnectorClosure
+export const CONNECTOR_CLOSURES = [
+  'Screw pin', 'Bolt + nut', 'Push pin', 'Screwgate', 'Twist-lock', 'Triple-lock',
+  'Quicklink sleeve', 'Knot',
+] as const
+export type ConnectorClosure = (typeof CONNECTOR_CLOSURES)[number]
+
+// models/connectors.py — ConnectorMaterial (MetalMaterial plus Dyneema, for
+// soft shackles)
+export const CONNECTOR_MATERIALS = [
+  'Aluminum', 'Steel', 'Stainless Steel', 'Titanium', 'Dyneema', 'Other',
+] as const
+export type ConnectorMaterial = (typeof CONNECTOR_MATERIALS)[number]
+
 // models/treepro.py — PriceUnit
 export const PRICE_UNITS = ['single', 'pair'] as const
 export type PriceUnit = (typeof PRICE_UNITS)[number]

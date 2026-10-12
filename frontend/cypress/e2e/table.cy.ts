@@ -1,4 +1,5 @@
 import { GEAR_TYPES } from '../support/gear_types'
+import { listingUnits } from '../support/listing'
 
 // Table view — the listing's third mode (DESIGN.md § Table View).
 //
@@ -413,7 +414,9 @@ describe('Table view — sorting from the column headers', () => {
       expect(brands, 'makers descending').to.deep.equal([...brands].sort().reverse())
       // Within the first maker, names still read A→Z.
       const first = pairs.filter((p) => p.brand === pairs[0].brand).map((p) => p.name)
-      expect(first, 'names ascending within a maker').to.deep.equal([...first].sort())
+      expect(first, 'names ascending within a maker').to.deep.equal(
+        [...first].sort((a, b) => a.localeCompare(b, undefined, { numeric: true })),
+      )
     })
   })
 
@@ -485,7 +488,8 @@ GEAR_TYPES.forEach(({ slug, apiPath, label, certifiable }) => {
 
     it('pills exactly the rows the ISA has not certified, in solid red', () => {
       cy.fetchAllItems(apiPath).then((all) => {
-        const items = all as Record<string, unknown>[]
+        // One row per listing unit: a generic part several shops sell is one row.
+        const items = listingUnits(all as Record<string, unknown>[])
         if (items.length === 0) return
         cy.visit(`/${slug}?view=table`)
         cy.get(ROW).should('have.length', items.length)
@@ -591,7 +595,7 @@ GEAR_TYPES.forEach(({ slug, apiPath, label }) => {
         cy.get(TABLE).should('be.visible')
         cy.get(HEADER).should('have.length.greaterThan', 2)
         cy.get(HEADER).first().should('have.attr', 'data-field', 'name')
-        cy.get(ROW).should('have.length', all.length)
+        cy.get(ROW).should('have.length', listingUnits(all).length)
       })
     })
   })

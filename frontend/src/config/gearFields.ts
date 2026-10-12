@@ -21,6 +21,7 @@
 
 import type { GearSlug } from '@/types'
 import { widthRangeText, type AnyItem } from '@/utils/format'
+import { rangeText } from '@/utils/groups'
 
 export const CARD_DATA_FIELDS: Record<GearSlug, string[]> = {
   webbings:      ['price', 'price_base', 'price_display', 'currency', 'weight', 'width', 'breaking_strength'],
@@ -33,6 +34,7 @@ export const CARD_DATA_FIELDS: Record<GearSlug, string[]> = {
   treepros:      ['price', 'price_unit', 'price_base', 'price_display', 'currency', 'weight', 'width', 'length', 'thickness'],
   starterkits:   ['price', 'price_base', 'price_display', 'currency', 'weight', 'webbing_length', 'webbing_width'],
   tricklinekits: ['price', 'price_base', 'price_display', 'currency', 'weight', 'webbing_length', 'webbing_width'],
+  connectors:    ['price', 'price_base', 'price_display', 'currency', 'weight', 'mbs_straight_pull', 'mbs_crossload', 'opening', 'pin_diameter'],
   // upcoming types have no data / cards yet
   bungees:       [],
   leashringpro:  [],
@@ -57,6 +59,13 @@ export const INLINE_SPECS: Record<GearSlug, InlineSpec[]> = {
   treepros:      [{ field: 'width', unit: 'cm' }, { field: 'length', unit: 'cm' }],
   starterkits:   [{ field: 'webbing_length', unit: 'm' }, { field: 'webbing_width', unit: 'mm' }, { field: 'tensioning_type' }],
   tricklinekits: [{ field: 'webbing_length', unit: 'm' }, { field: 'webbing_width', unit: 'mm' }, { field: 'tensioning_type' }],
+  // A collapsed generic-part group shows each number as its shops' range
+  // ("20–29 kN"); an ordinary row reads exactly as a plain field would.
+  connectors:    [
+    { field: 'material' },
+    { field: 'opening', value: item => rangeText(item, 'opening', 'mm') },
+    { field: 'mbs_straight_pull', value: item => rangeText(item, 'mbs_straight_pull', 'kN') },
+  ],
   bungees:       [],
   leashringpro:  [],
 }
