@@ -50,6 +50,7 @@ from sqlmodel import Session, SQLModel, create_engine
 from slack_data.api import auth
 from slack_data.models.brand_clients import BrandClient, now_iso
 from slack_data.models.brands import Brand
+from slack_data.models.connectors import Connector, ConnectorMaterial, ConnectorStyle
 from slack_data.models.grips import Grip
 from slack_data.models.isa_gear_warnings import ISAGearWarning
 from slack_data.models.leashrings import LeashRing
@@ -150,6 +151,10 @@ def _build_catalogue(path: Path) -> dict:
             "tricklinekit": TricklineKit(
                 name="K", webbing_length=25, webbing_width=25,
                 tensioning_type=TricklineTensioning.SINGLE_RATCHET, brand_id=alpha.id,
+            ),
+            "connector": Connector(
+                name="C", connector_style=ConnectorStyle.SHACKLE,
+                material=ConnectorMaterial.STEEL, brand_id=alpha.id,
             ),
         }
         for row in rows.values():
@@ -357,6 +362,28 @@ def test_the_seed_was_skipped(live):
     catalogue is not the one the assertions above describe."""
     _, _, log_path = live
     assert "Loading webbing data" not in log_path.read_text()
+
+
+def test_the_minimal_catalogue_has_a_row_in_every_gear_table(tmp_path):
+    """The same premise, checked in-process so it fails with a name, not a crash.
+
+    A new gear type with no row in `_build_catalogue` makes the real server seed
+    that type's whole seed file into the test catalogue on boot, where its
+    brands collide with Alpha's and Beta's ids and startup dies — every test
+    in this file then errors without saying why. A gear table is any table
+    with a `brand_id`, which is what every gear loader is gated on being empty.
+    """
+    from sqlalchemy import func, select
+
+    import slack_data.seed  # noqa: F401 — registers every gear model's table
+
+    _build_catalogue(tmp_path / "catalog.db")
+    engine = create_engine(f"sqlite:///{tmp_path / 'catalog.db'}")
+    gear_tables = [t for t in SQLModel.metadata.sorted_tables if "brand_id" in t.c]
+    assert len(gear_tables) >= 9
+    with engine.connect() as conn:
+        empty = [t.name for t in gear_tables if conn.execute(select(func.count()).select_from(t)).scalar() == 0]
+    assert empty == [], f"_build_catalogue needs a row in: {empty}"
 
 
 # --- The manufacturer API, over the wire ------------------------------------

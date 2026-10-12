@@ -53,7 +53,8 @@ def _slug_blocks() -> dict[str, str]:
 
 def _fields_in(block: str) -> set[str]:
     """Field names a spec-row block declares."""
-    names = set(re.findall(r"plain\('([a-z_]+)'", block))
+    # `ranged` is `plain` for a field a product group may report as a range.
+    names = set(re.findall(r"(?:plain|ranged)\('([a-z_]+)'", block))
     names |= set(re.findall(r"field: '([a-z_]+)'", block))
     if "widthRange" in block:
         names.add("width_range")
@@ -117,3 +118,34 @@ def test_synthetic_rows_are_not_offered_as_corrections():
             assert name not in allowed or name == "stretch", (
                 f"{name} should not be correctable on {slug}"
             )
+
+
+# --- Connector enums --------------------------------------------------------
+
+ENUMS_TS = FRONTEND.parent / "types" / "enums.ts"
+
+
+def _ts_string_array(name: str) -> list[str]:
+    """The string literals of `export const <name> = [...] as const`."""
+    source = _ts_source(ENUMS_TS)
+    start = source.index(f"export const {name} = [")
+    block = source[start : source.index("] as const", start)]
+    return re.findall(r"'([^']+)'", block)
+
+
+@pytest.mark.parametrize(
+    "ts_name, enum_name",
+    [
+        ("CONNECTOR_STYLES", "ConnectorStyle"),
+        ("CONNECTOR_CLOSURES", "ConnectorClosure"),
+        ("CONNECTOR_MATERIALS", "ConnectorMaterial"),
+    ],
+)
+def test_the_connector_filter_values_mirror_the_model(ts_name, enum_name):
+    """The sidebar's pills are these arrays; a value the API serves that is
+    missing here (or spelled the old way, "Dyneema") is a pill that matches
+    nothing."""
+    from slack_data.models import connectors
+
+    assert _ts_string_array(ts_name) == [m.value for m in getattr(connectors, enum_name)]
+

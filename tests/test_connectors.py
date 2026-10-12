@@ -2,7 +2,6 @@
 
 import pytest
 from conftest import persist
-from sqlmodel import select
 
 from slack_data.load_data.load_connectors import (
     add_connectors_to_db,
@@ -132,8 +131,9 @@ def test_delete_connector(client, session, brand):
 # --- Loader ---
 
 def _load(session, item: dict) -> Connector:
-    add_connectors_to_db([clean_connector_data({"id": 1} | item)], session)
-    return session.exec(select(Connector)).one()
+    item = {"id": 1} | item
+    add_connectors_to_db([clean_connector_data(item)], session)
+    return session.get(Connector, item["id"])
 
 
 def test_loader_maps_every_connector_field(session):
@@ -232,10 +232,19 @@ def test_every_seeded_group_has_at_least_two_members():
 def test_loader_maps_captive_pin_and_defaults_it_false(session):
     base = {"manufacturer": "Gibbon", "connector_style": "Shackle", "material": "Stainless Steel"}
     assert _load(session, {**base, "name": "Bow Shackle 12mm", "captive_pin": True}).captive_pin is True
-    assert _load(session, {**base, "name": "Bow Shackle 14mm"}).captive_pin is False
+    assert _load(session, {**base, "id": 2, "name": "Bow Shackle 14mm"}).captive_pin is False
 
 
 def test_captive_pin_does_not_split_a_group():
     """A captive pin is a flag on a shop's row, not a different part
     (operator, 2026-10-11): no group key names it."""
     assert not any("Captive" in (c.get("product_group") or "") for c in load_connectors_json())
+
+
+def test_soft_shackle_material_is_spelled_like_the_webbing_fibre():
+    """Dyneema is a brand of HMPE: one value for both, so a search or filter
+    for the fibre finds the soft shackle and the webbing alike."""
+    from slack_data.models.webbing import FiberMaterial
+
+    assert ConnectorMaterial.DYNEEMA.value == FiberMaterial.DYNEEMA.value == "Dyneema/HMPE"
+

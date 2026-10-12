@@ -185,6 +185,7 @@ EXPECTED_CERTIFIED = {
     ("weblock", 4), ("weblock", 53), ("weblock", 58), ("weblock", 84), ("weblock", 112),
     ("leashring", 26), ("leashring", 27), ("leashring", 29),
     ("grip", 3), ("grip", 15), ("grip", 16),
+    ("connector", 1),  # Slacktivity KingPin shackle, ISA:52
 }
 
 

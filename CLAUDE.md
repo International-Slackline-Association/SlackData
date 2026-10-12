@@ -334,8 +334,9 @@ certificate (standard version, lab, test date, manual, pictures as links). No FK
 
 All three gear-row fields are in `_EXCLUDED` (`submissions/fields.py`): certification is the ISA's
 to state, and a hand-edit would be overwritten on the next seed. The old computed webbing
-`classification` is gone. 17 rows are certified today; 11 certificates match nothing (leashes, a
-connector, Intermittent Connection, one superseded) — tracked in BACKLOG.md.
+`classification` is gone. 18 rows are certified today (the 18th is connector 1, the KingPin
+shackle); 10 certificates match nothing (leashes, Intermittent Connection, one superseded) —
+tracked in BACKLOG.md.
 
 ### Gear descriptions
 
@@ -692,7 +693,7 @@ Before writing any of the above, open the relevant `models/<type>.py` and `utili
 ## Conventions
 
 - Imports are absolute (`from slack_data....`).
-- `manufacturers.json` (80 entries) at root **is loaded — but as an enrichment pass, not a creator**. Brand rows are still created on the fly by `get_brand()` with only a name; `load_manufacturers.py` then backfills `country` / `year_founded` / `website` / `socials` / `contact_email` / `active` / `slackline_focused` onto the rows that already exist, matching on `canonical_brand()`. Its `catalog_id` **is** read at creation time, though — that is where `Brand.id` comes from (see § Loader pattern). It never inserts a brand (an entry with no matching row means we hold no gear for that manufacturer — `load_seller_brands.py` is the one pass that will insert one, for a seller-only brand). It **must run after every pass that creates a brand row** — the gear loaders and the seller-name pass, and is gated on "no brand has a country yet" rather than on an empty table. `contact_email` is the one field here that is **ours, not SlackDB's** — scraped from each manufacturer's own site (38/77 as of 2026-09-02; the rest publish a contact form only, or have no site left). `metadata.email_source` in the JSON records that provenance.
+- `manufacturers.json` (81 entries) at root **is loaded — but as an enrichment pass, not a creator**. Brand rows are still created on the fly by `get_brand()` with only a name; `load_manufacturers.py` then backfills `country` / `year_founded` / `website` / `socials` / `contact_email` / `active` / `slackline_focused` onto the rows that already exist, matching on `canonical_brand()`. Its `catalog_id` **is** read at creation time, though — that is where `Brand.id` comes from (see § Loader pattern). It never inserts a brand (an entry with no matching row means we hold no gear for that manufacturer — `load_seller_brands.py` is the one pass that will insert one, for a seller-only brand). It **must run after every pass that creates a brand row** — the gear loaders and the seller-name pass, and is gated on "no brand has a country yet" rather than on an empty table. `contact_email` is the one field here that is **ours, not SlackDB's** — scraped from each manufacturer's own site (38/77 as of 2026-09-02; the rest publish a contact form only, or have no site left). `metadata.email_source` in the JSON records that provenance.
 - Country is stored as the `Country` enum's **full display name** (`"Germany"`), not an ISO code; `get_country()` in `utilities/countries.py` maps the sources' alpha-2 codes onto the enum.
 - `BrandPublic` only declares `webbings` in its response schema — other gear lists exist on the ORM model via `@computed_field` but may not serialize in API responses.
 - No auth — all endpoints are open.
