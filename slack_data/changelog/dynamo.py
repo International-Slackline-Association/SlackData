@@ -1,0 +1,112 @@
+"""
+The hosted change log — DynamoDB (`slackdata-changelog-<stage>`).
+
+**The table name is fixed**: the ISA's deny statement (`ChangelogIsAppendOnly`)
+names `table/slackdata-changelog-prod` exactly, so renaming the table would
+silently drop the IAM half of the append-only guarantee.
+
+| key / index | answers |
+|---|---|
+| `id` (PK) | one record; the conditional put that refuses an overwrite |
+| `feed-index`: `feed` (always `all`) + `id` | Recent Changes, newest first |
+| `target-index`: `target` + `id` | one thing's History, newest first |
+
+A single `feed` partition is fine at this size — tens of changes a day — and is
+what makes "everything, newest first" a query rather than a `Scan`, which the
+role does not grant.
+"""
+
+import os
+from typing import TYPE_CHECKING
+
+from slack_data.changelog.repository import MAX_PAGE, RecordExists
+from slack_data.models.changes import ChangeRecord, TargetType, target_key
+
+if TYPE_CHECKING:  # pragma: no cover - typing only
+    from mypy_boto3_dynamodb.service_resource import Table
+
+FEED_INDEX = "feed-index"
+TARGET_INDEX = "target-index"
+FEED_ALL = "all"
+
+# The condition every append carries (§ 6.5).
+NEW_RECORD_ONLY = "attribute_not_exists(id)"
+
+
+def to_item(record: ChangeRecord) -> dict:
+    item = record.model_dump(mode="json")
+    item["changes"] = record.changes_json()
+    item["target"] = record.target
+    item["feed"] = FEED_ALL
+    return {key: value for key, value in item.items() if value is not None}
+
+
+def from_item(item: dict) -> ChangeRecord:
+    data = {key: value for key, value in item.items() if key not in {"target", "feed"}}
+    data["changes"] = ChangeRecord.parse_changes(data.get("changes"))
+    data["flags"] = list(data.get("flags") or [])
+    return ChangeRecord(**data)
+
+
+class DynamoChangeLogRepository:
+    def __init__(self, table_name: str | None = None, table: "Table | None" = None) -> None:
+        self._explicit_table = table
+        self._table_name = table_name
+        self._cached: Table | None = None
+
+    @property
+    def table(self) -> "Table":
+        if self._explicit_table is not None:
+            return self._explicit_table
+        if self._cached is None:
+            import boto3
+
+            name = self._table_name or os.environ["CHANGELOG_TABLE"]
+            self._cached = boto3.resource("dynamodb").Table(name)
+        return self._cached
+
+    def append(self, record: ChangeRecord) -> ChangeRecord:
+        from botocore.exceptions import ClientError
+
+        try:
+            self.table.put_item(Item=to_item(record), ConditionExpression=NEW_RECORD_ONLY)
+        except ClientError as error:
+            if error.response["Error"]["Code"] == "ConditionalCheckFailedException":
+                raise RecordExists(record.id) from error
+            raise
+        return record
+
+    def _query(self, index: str, key_name: str, key_value: str, limit: int, before: str | None):
+        from boto3.dynamodb.conditions import Key
+
+        condition = Key(key_name).eq(key_value)
+        if before is not None:
+            condition = condition & Key("id").lt(before)
+        response = self.table.query(
+            IndexName=index,
+            KeyConditionExpression=condition,
+            ScanIndexForward=False,  # newest first: ids are ULIDs
+            Limit=min(limit, MAX_PAGE),
+        )
+        return [from_item(item) for item in response.get("Items", [])]
+
+    def recent(self, limit: int = 50, before: str | None = None) -> list[ChangeRecord]:
+        return self._query(FEED_INDEX, "feed", FEED_ALL, limit, before)
+
+    def for_target(
+        self, target_type: TargetType, target_id: str, limit: int = 50
+    ) -> list[ChangeRecord]:
+        return self._query(TARGET_INDEX, "target", target_key(target_type, target_id), limit, None)
+
+
+def transaction_put(record: ChangeRecord, table_name: str) -> dict:
+    """The log half of a `TransactWriteItems` call (D28) — the same conditional
+    put `append` makes, as a transaction item."""
+    return {
+        "Put": {
+            "TableName": table_name,
+            "Item": to_item(record),
+            "ConditionExpression": NEW_RECORD_ONLY,
+        }
+    }
+
