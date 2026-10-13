@@ -24,9 +24,16 @@ the seeds exist.
 from slack_data.load_data._seed_io import read_seed_json
 from slack_data.utilities.brand_aliases import canonical_brand
 
-# canonical brand name -> catalog_id. Filled on first use, never invalidated —
-# a load runs against one revision of the seeds.
+# canonical brand name -> catalog_id. Filled on first use; `reset()` when a
+# load switches source (`_seed_io.seed_sources`).
 _CATALOG_IDS: dict[str, int] | None = None
+
+
+def reset() -> None:
+    """Forget the cached ids — a load from another revision of the catalogue
+    (the store, rebuilt after an edit) must read `manufacturers.json` again."""
+    global _CATALOG_IDS
+    _CATALOG_IDS = None
 
 
 class UnknownBrand(KeyError):

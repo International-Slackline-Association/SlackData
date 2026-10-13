@@ -15,7 +15,10 @@ type, and the part with the traps in it (`priceMeter`, rollers' `price_unit`) โ€
 stays in the loaders where it can be read next to the data it describes.
 """
 
+import copy
 import json
+from collections.abc import Iterator
+from contextlib import contextmanager
 from pathlib import Path
 from typing import Any
 
@@ -32,8 +35,43 @@ def seed_path(filename: str) -> Path:
     return SEED_DIR / filename
 
 
+# {filename: parsed content} while a load reads from the catalogue store rather
+# than from the files (LIVE_EDITING_PLAN.md ยง 5.2). None: read the files.
+_SOURCES: dict[str, Any] | None = None
+
+
+@contextmanager
+def seed_sources(sources: dict[str, Any]) -> Iterator[None]:
+    """Make every `read_seed_json` in this block answer from `sources`.
+
+    How the in-memory catalogue is built from the store with the loaders
+    unchanged: they still ask for "webbings.json", and get the store's
+    documents assembled into exactly that file's shape
+    (`slack_data/catalogue/documents.py`). Each read is a deep copy, because
+    several `clean_*_data()` passes edit what they are given in place.
+    """
+    from slack_data.load_data import brand_ids
+
+    global _SOURCES
+    previous = _SOURCES
+    _SOURCES = sources
+    brand_ids.reset()
+    try:
+        yield
+    finally:
+        _SOURCES = previous
+        brand_ids.reset()
+
+
 def read_seed_json(filename: str) -> Any:
-    """Parse a seed file at the repo root, or raise with the path that is missing."""
+    """Parse a seed file at the repo root, or raise with the path that is missing.
+
+    Inside `seed_sources(...)`, the store's copy of that file instead.
+    """
+    if _SOURCES is not None:
+        if filename not in _SOURCES:
+            raise FileNotFoundError(f"Seed {filename} is not in the catalogue store")
+        return copy.deepcopy(_SOURCES[filename])
     path = seed_path(filename)
     if not path.exists():
         raise FileNotFoundError(f"Seed file not found: {path}")

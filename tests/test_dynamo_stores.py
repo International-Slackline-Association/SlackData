@@ -44,6 +44,8 @@ import pytest
 # and the two template-agreement tests below are exactly the ones that must run
 # on a normal dev machine, where the `aws` extra is not installed. Only the
 # fixtures that need a live DynamoDB skip.
+from slack_data.catalogue.documents import Document
+from slack_data.catalogue.dynamo import DynamoCatalogueRepository
 from slack_data.changelog.dynamo import (
     FEED_INDEX,
     TARGET_INDEX,
@@ -230,6 +232,11 @@ def clients(tables):
 
 
 @pytest.fixture
+def catalogue(tables):
+    return DynamoCatalogueRepository(table=tables["CatalogTable"])
+
+
+@pytest.fixture
 def people(tables):
     return DynamoPeopleRepository(table=tables["PeopleTable"])
 
@@ -290,6 +297,10 @@ def test_the_primary_keys_match_what_the_code_addresses():
         {"AttributeName": "client_id", "KeyType": "HASH"}
     ]
     assert definitions["PeopleTable"]["KeySchema"] == [{"AttributeName": "sub", "KeyType": "HASH"}]
+    assert definitions["CatalogTable"]["KeySchema"] == [
+        {"AttributeName": "collection", "KeyType": "HASH"},
+        {"AttributeName": "key", "KeyType": "RANGE"},
+    ]
     assert definitions["ChangelogTable"]["KeySchema"] == [{"AttributeName": "id", "KeyType": "HASH"}]
 
 
@@ -713,3 +724,37 @@ def test_a_role_change_and_its_record_are_one_transaction(people, changelog):
         commit_person_change(people, changelog, revoked, record)  # same id: refused
     assert people.get("sub-tx").has(Role.ADMIN), "the person changed without a record"
 
+
+# --- The catalogue store (phase 2) ------------------------------------------
+
+
+def test_the_whole_real_catalogue_round_trips_through_dynamodb(catalogue):
+    """Every seed entry in, every one back out, exactly — floats, unicode and
+    nesting included (`data` is a JSON string precisely so numbers do not come
+    back as Decimal). The webbings collection is large enough to page."""
+    from slack_data.catalogue.build import sources_from_documents, sources_from_files
+    from slack_data.catalogue.importer import documents_from_files
+
+    documents = documents_from_files()
+    catalogue.put_many(documents)
+    assert sources_from_documents(catalogue.load()) == sources_from_files()
+
+
+def test_the_catalogue_version_starts_at_zero_and_bumps_atomically(tables):
+    fresh = DynamoCatalogueRepository(table=tables["CatalogTable"])
+    start = fresh.version()
+    assert fresh.bump_version() == start + 1
+    assert fresh.bump_version() == start + 2
+    assert fresh.version() == start + 2
+
+
+def test_a_retired_catalogue_document_is_skipped(catalogue):
+    catalogue.put_many([Document(collection="grips", key="99999", seq=999, data={"id": 99999}, retired=True)])
+    assert "99999" not in {d.key for d in catalogue.load() if d.collection == "grips"}
+    assert "99999" in {d.key for d in catalogue.load(include_retired=True) if d.collection == "grips"}
+
+
+def test_the_version_lives_outside_every_collection(catalogue):
+    """`_meta` is not a collection, so loading the catalogue never returns it."""
+    catalogue.bump_version()
+    assert "_meta" not in {d.collection for d in catalogue.load(include_retired=True)}
