@@ -67,6 +67,73 @@ def test_acknowledging_the_notice_is_recorded_once(client, isa, people):
     assert client.get("/me", headers=headers).json()["notice_seen_at"] == first
 
 
+# --- The name people type in ---------------------------------------------------
+
+
+def test_without_a_typed_name_a_person_shows_as_their_isa_id(client, isa):
+    """The ISA token gives SlackData no name, so until one is typed in the
+    ISA id is all there is to show."""
+    me = client.get("/me", headers=bearer(isa(name=None, family_name=None))).json()
+    assert me["name"] == me["isa_id"]
+    assert me["name_set"] is False
+
+
+def test_the_notice_saves_the_name_typed_in(client, isa, people):
+    headers = bearer(isa())
+    me = client.post("/me/notice", headers=headers, json={"name": "  Ada \t  Lovelace\n"}).json()
+    assert me["name"] == "Ada Lovelace", "whitespace is tidied"
+    assert me["name_set"] is True
+    assert me["notice_seen_at"] is not None
+    assert client.get("/me", headers=headers).json()["name"] == "Ada Lovelace"
+
+
+def test_the_typed_name_beats_the_token_and_survives_sign_in(client, isa):
+    headers = bearer(isa(name="Token", family_name="Name"))
+    client.post("/me/notice", headers=headers, json={"name": "Chosen Name"})
+    # A later sign-in refreshes the token's fields, never the typed-in name.
+    again = bearer(isa(name="Other", family_name="Token"))
+    assert client.get("/me", headers=again).json()["name"] == "Chosen Name"
+
+
+def test_a_name_can_be_changed_later(client, isa):
+    headers = bearer(isa())
+    client.post("/me/notice", headers=headers, json={"name": "First Name"})
+    seen = client.get("/me", headers=headers).json()["notice_seen_at"]
+    me = client.patch("/me/name", headers=headers, json={"name": "Second Name"}).json()
+    assert me["name"] == "Second Name"
+    assert me["notice_seen_at"] == seen, "renaming does not touch the notice"
+
+
+@pytest.mark.parametrize("bad", ["", "   ", "a" * 101, "nul\x00in", "del\x7fin"])
+def test_a_bad_name_is_refused(client, isa, bad):
+    headers = bearer(isa())
+    assert client.patch("/me/name", headers=headers, json={"name": bad}).status_code == 422
+    assert client.post("/me/notice", headers=headers, json={"name": bad}).status_code == 422
+    assert client.get("/me", headers=headers).json()["notice_seen_at"] is None
+
+
+def test_a_rename_needs_a_sign_in(client):
+    assert client.patch("/me/name", json={"name": "Anyone"}).status_code == 401
+
+
+def test_an_erased_person_cannot_type_a_name_back(client, isa, people):
+    headers = bearer(isa())
+    client.get("/me", headers=headers)
+    people.put(people.get("person-sub-1").model_copy(update={"anonymised": True}))
+    assert client.patch("/me/name", headers=headers, json={"name": "Back Again"}).status_code == 409
+    assert client.get("/me", headers=headers).json()["name"] == ANONYMISED_NAME
+
+
+def test_the_change_log_shows_the_typed_name(client, isa, people):
+    someone(people, 2)
+    headers = bearer(isa(email="boot@example.org"))
+    client.post("/me/notice", headers=headers, json={"name": "Typed Admin"})
+    actor = client.get("/me", headers=headers).json()
+    people.put(people.get(actor["sub"]).model_copy(update={"roles": [Role.ADMIN]}))
+    client.post("/admin/roles", headers=headers, json={"email": "person2@example.org"})
+    assert client.get("/changes").json()[0]["actor_name"] == "Typed Admin"
+
+
 def test_the_notice_informs_it_does_not_gate(client, isa, people):
     """An admin who has not acknowledged it still administers."""
     someone(people, 1, roles=[Role.ADMIN])

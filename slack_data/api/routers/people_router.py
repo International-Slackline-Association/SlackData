@@ -4,7 +4,8 @@ People and the change log, over HTTP (LIVE_EDITING_PLAN.md phase 1).
 | route | who | what |
 |---|---|---|
 | `GET /me` | anyone signed in | who SlackData thinks you are, and your roles |
-| `POST /me/notice` | anyone signed in | acknowledge the "your name is shown" notice |
+| `POST /me/notice` | anyone signed in | acknowledge the "your name is shown" notice, giving the name to show |
+| `PATCH /me/name` | anyone signed in | change the name shown with your changes |
 | `GET /admin/admins` | admins | the admin list |
 | `POST /admin/roles` | admins | grant or revoke admin — a logged change |
 | `GET /changes` | **anyone, no sign-in** (D3, D33) | the change log, newest first |
@@ -17,12 +18,18 @@ catalogue is read-only. It is in `WRITABLE_ROUTERS` for that reason.
 are told when they first sign in (LIVE_EDITING_PHASE_0.md § 1). The frontend
 shows it until `notice_seen_at` is set. It informs; it is not a gate — the
 API does not refuse a person who has not acknowledged it.
+
+**The name.** People type in the name shown with their changes, because the ISA
+token gives SlackData none (`models/people.py`). Until they do, they show as
+their ISA id. A rename shows on every record they made, old ones too: records
+hold an ISA id and names are looked up when the log is read (D43). It is not
+itself a logged change.
 """
 
 from typing import Annotated
 
 from fastapi import APIRouter, Depends, HTTPException, Query, status
-from pydantic import BaseModel, Field, model_validator
+from pydantic import BaseModel, Field, field_validator, model_validator
 
 from slack_data.api.auth import is_dev_person, require_admin, require_person
 from slack_data.changelog.repository import MAX_PAGE
@@ -38,7 +45,13 @@ from slack_data.models.changes import (
     FieldChange,
     TargetType,
 )
-from slack_data.models.people import Me, Person, Role
+from slack_data.models.people import (
+    MAX_DISPLAY_NAME_LENGTH,
+    Me,
+    Person,
+    Role,
+    clean_display_name,
+)
 from slack_data.people.store import PeopleRepositoryDep
 
 people_router = APIRouter(tags=["people"])
@@ -56,8 +69,36 @@ def _me(person: Person) -> Me:
         email_verified=person.email_verified,
         roles=person.roles,
         notice_seen_at=person.notice_seen_at,
+        name_set=bool(person.display_name),
         dev=is_dev_person(person),
     )
+
+
+class NameChange(BaseModel):
+    # Generous here; clean_display_name enforces the real limit after
+    # collapsing whitespace.
+    name: str = Field(max_length=MAX_DISPLAY_NAME_LENGTH * 2)
+
+    @field_validator("name")
+    @classmethod
+    def _clean(cls, value: str) -> str:
+        return clean_display_name(value)
+
+
+class NoticeAcknowledgement(BaseModel):
+    name: str | None = Field(default=None, max_length=MAX_DISPLAY_NAME_LENGTH * 2)
+
+    @field_validator("name")
+    @classmethod
+    def _clean(cls, value: str | None) -> str | None:
+        return None if value is None else clean_display_name(value)
+
+
+def _refuse_if_anonymised(person: Person) -> None:
+    # Erased (D11): the placeholder is shown whatever is stored, so a name
+    # typed in now would be kept and never shown — refuse it instead.
+    if person.anonymised:
+        raise HTTPException(status.HTTP_409_CONFLICT, "this account's name has been removed")
 
 
 @people_router.get("/me", response_model=Me)
@@ -66,11 +107,31 @@ def read_me(person: CurrentPerson) -> Me:
 
 
 @people_router.post("/me/notice", response_model=Me)
-def acknowledge_notice(person: CurrentPerson, people: PeopleRepositoryDep) -> Me:
-    """Idempotent: the first acknowledgement's time is kept."""
+def acknowledge_notice(
+    person: CurrentPerson,
+    people: PeopleRepositoryDep,
+    body: NoticeAcknowledgement | None = None,
+) -> Me:
+    """Idempotent: the first acknowledgement's time is kept. The name, when
+    given, is saved with it — the notice is where people type it in."""
+    updates: dict = {}
+    if body is not None and body.name is not None:
+        _refuse_if_anonymised(person)
+        if body.name != person.display_name:
+            updates["display_name"] = body.name
     if person.notice_seen_at is None:
+        updates["notice_seen_at"] = now_iso()
+    if updates:
+        person = people.put(person.model_copy(update={**updates, "updated_at": now_iso()}))
+    return _me(person)
+
+
+@people_router.patch("/me/name", response_model=Me)
+def change_name(change: NameChange, person: CurrentPerson, people: PeopleRepositoryDep) -> Me:
+    _refuse_if_anonymised(person)
+    if change.name != person.display_name:
         person = people.put(
-            person.model_copy(update={"notice_seen_at": now_iso(), "updated_at": now_iso()})
+            person.model_copy(update={"display_name": change.name, "updated_at": now_iso()})
         )
     return _me(person)
 

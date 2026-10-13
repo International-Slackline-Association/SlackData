@@ -10,11 +10,15 @@ Plain pydantic, not SQLModel, for the reason `models/submissions.py` gives:
 hosted these records live in DynamoDB, locally in a SQLite file of their own,
 and never in the catalogue database.
 
-**Personal data.** The name and email are copied from the ISA token so that
-pages and the export can show who changed what without asking the ISA's table
-(D43: the change log holds a `sub`, never a name). They are refreshed from the
-token on every sign-in, so an ISA account rename reaches SlackData the next
-time that person uses it. Anonymising someone (D11) is one change here.
+**Personal data.** The email, and the name where the token carries one, are
+copied from the ISA token so that pages and the export can show who changed
+what without asking the ISA's table (D43: the change log holds a `sub`, never a
+name). They are refreshed from the token on every sign-in.
+
+**The public name is typed in by the person** (`display_name`), at the
+first-sign-in notice, and changeable from their account menu. SlackData's ISA
+client is not given the name attributes, so the token alone would show every
+contributor as their ISA id. Anonymising someone (D11) is one change here.
 """
 
 import hashlib
@@ -25,6 +29,9 @@ from pydantic import BaseModel, Field
 from slack_data.models.brand_clients import now_iso
 
 MAX_NAME_LENGTH = 200
+# The public name a person types in: long enough for any real name, short
+# enough to sit in a change log row.
+MAX_DISPLAY_NAME_LENGTH = 100
 MAX_EMAIL_LENGTH = 320
 
 # What an erased person is shown as, everywhere their edits appear (D11, D14).
@@ -62,6 +69,9 @@ class Person(BaseModel):
     given_name: str | None = Field(default=None, max_length=MAX_NAME_LENGTH)
     family_name: str | None = Field(default=None, max_length=MAX_NAME_LENGTH)
     email: str | None = Field(default=None, max_length=MAX_EMAIL_LENGTH)
+    # The name the person typed in themselves — shown publicly with their
+    # changes. Never taken from, or overwritten by, the token.
+    display_name: str | None = Field(default=None, max_length=MAX_DISPLAY_NAME_LENGTH)
     # isa-users confirms an account at once and verifies the address later, by
     # a link it mails — so this can be false on a live account (§ 4.2). Only a
     # verified address may bootstrap an admin (§ 4.4).
@@ -81,9 +91,12 @@ class Person(BaseModel):
 
     @property
     def full_name(self) -> str:
-        """The public name (D37): full name, or the erased placeholder."""
+        """The public name (D37): the name they gave, else the token's, else
+        their ISA id — or the erased placeholder."""
         if self.anonymised:
             return ANONYMISED_NAME
+        if self.display_name:
+            return self.display_name
         name = " ".join(part for part in (self.given_name, self.family_name) if part)
         return name or self.isa_id
 
@@ -112,4 +125,19 @@ class Me(BaseModel):
     email_verified: bool
     roles: list[Role]
     notice_seen_at: str | None
+    # False until the person has typed in their public name.
+    name_set: bool = False
     dev: bool = False
+
+
+def clean_display_name(value: str) -> str:
+    """A typed-in name, tidied: whitespace collapsed, control characters and
+    blank names refused."""
+    name = " ".join(value.split())
+    if not name:
+        raise ValueError("enter your name")
+    if len(name) > MAX_DISPLAY_NAME_LENGTH:
+        raise ValueError(f"at most {MAX_DISPLAY_NAME_LENGTH} characters")
+    if any(ord(c) < 32 or ord(c) == 127 for c in name):
+        raise ValueError("the name contains a control character")
+    return name
