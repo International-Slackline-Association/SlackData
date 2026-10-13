@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "total_manufacturers": 81,
+    "total_manufacturers": 80,
     "known_manufacturers": 74,
     "missing_manufacturers": 0,
     "total_gear_items": 576,
@@ -16,7 +16,7 @@
       "email"
     ],
     "email_source": "scraped from each manufacturer's own website (2026-08-23); additions 2026-08-28, 2026-09-02. email_alt: a second address the brand also answers on, present only where one is known",
-    "email_coverage": "37/81"
+    "email_coverage": "37/80"
   },
   "manufacturers": {
     "1": {
@@ -1064,19 +1064,6 @@
       "facebook": null,
       "email": null,
       "active": null
-    },
-    "local_peguet": {
-      "catalog_id": 102,
-      "name": "Peguet",
-      "verified": false,
-      "item_count": 0,
-      "country": "FR",
-      "year_established": null,
-      "slackline_oriented": false,
-      "website": "https://www.peguet.com",
-      "facebook": null,
-      "email": null,
-      "active": true
     }
   }
 }

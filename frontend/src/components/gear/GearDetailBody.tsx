@@ -37,7 +37,7 @@ import { useCurrency } from '@/context/CurrencyContext'
 import { useOriginState } from '@/context/OriginContext'
 import { useIsaWarnings } from '@/hooks/useIsaWarnings'
 import { type AnyItem } from '@/utils/format'
-import { itemImageUrls } from '@/utils/images'
+import { detailImageUrls } from '@/utils/images'
 import AlsoSoldBy from './AlsoSoldBy'
 import CardImageCarousel from './CardImageCarousel'
 import IsaApprovedBadge from './IsaApprovedBadge'
@@ -82,7 +82,7 @@ export default function GearDetailBody({
   // Only used when `nameHref` is set, i.e. in the listing's Detailed view: the
   // panel's title links to the standalone page, which then knows the way back.
   const originState = useOriginState()
-  const images = itemImageUrls(meta.slug, item)
+  const images = detailImageUrls(meta.slug, item)
   const isaWarning = isaWarningStatus(meta.hasISAWarning ? item.isa_warning : null)
   // The full ISA entries behind that status word — description, what to do,
   // date, sources. Shared index, fetched once (see useIsaWarnings).
@@ -102,12 +102,14 @@ export default function GearDetailBody({
   return (
     <>
       <div className="grid gap-8 sm:grid-cols-[minmax(0,20rem)_1fr]">
-        {/* `group` drives the carousel arrows, matching the listing cards. */}
+        {/* `group` drives the carousel arrows, matching the listing cards. Keyed
+            on the photos so switching shop in the vendor table starts at the
+            first one rather than keeping an index into the old set. */}
         <div
           data-cy="detail-image-area"
           className="group relative flex h-52 items-center justify-center self-start overflow-hidden rounded-lg bg-gray-50 sm:h-72"
         >
-          <CardImageCarousel urls={images} alt={String(item.name)} imgDataCy="detail-img" />
+          <CardImageCarousel key={images.join('|')} urls={images} alt={String(item.name)} imgDataCy="detail-img" />
         </div>
 
         <div className="min-w-0">

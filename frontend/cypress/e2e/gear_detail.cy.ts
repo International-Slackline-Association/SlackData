@@ -104,8 +104,15 @@ GEAR_TYPES.forEach(({ slug, apiPath, label, hasISAWarning, specFields }) => {
         }
       } else {
         it(`shows the "${fieldLabel}" spec row when the field is non-null`, () => {
-          cy.request(`${api()}/${apiPath}/?limit=100`).then(({ body }) => {
-            const withField = (body as Record<string, unknown>[]).find(i => i[field] != null)
+          cy.fetchAllItems(apiPath).then((all) => {
+            const rows = all as Record<string, unknown>[]
+            // A group's spec sheet drops a field its shops disagree on (it moves
+            // to the vendor table — utils/groups.ts `_varies`), so the row is
+            // only promised on an item whose whole group shares the value.
+            const agreed = (i: Record<string, unknown>) =>
+              typeof i.product_group !== 'string' || i.product_group === '' ||
+              rows.filter(r => r.product_group === i.product_group).every(r => r[field] === i[field])
+            const withField = rows.find(i => i[field] != null && agreed(i))
             if (!withField) return
             cy.visit(`/${slug}/${withField.id}`)
             cy.get(`[data-cy="spec-row"][data-field="${field}"]`).should('be.visible')

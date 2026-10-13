@@ -4,6 +4,7 @@
 // Real backend, like every other spec: the groups are whatever connectors.json
 // holds, found through the API rather than hard-coded.
 
+import { imageFilesFor } from '../support/images'
 import { listingUnits } from '../support/listing'
 
 type Row = Record<string, unknown>
@@ -21,6 +22,10 @@ function groupsOf(rows: Row[]): Map<string, Row[]> {
 describe('Connector groups', () => {
   let rows: Row[]
   let biggest: [string, Row[]]
+  // A group in which at least two shops have photos of their own: the case
+  // where one shop's photos used to hide every other's.
+  let pictured: [string, Row[]] | undefined
+  const filesOf = (m: Row) => imageFilesFor('connectors', String(m.brand_name), String(m.name))
 
   before(() => {
     cy.fetchAllItems('connector').then((all) => {
@@ -28,6 +33,7 @@ describe('Connector groups', () => {
       const groups = [...groupsOf(rows)].filter(([, m]) => m.length >= 2)
       expect(groups.length, 'the seed holds at least one generic-part group').to.be.greaterThan(0)
       biggest = groups.sort((a, b) => b[1].length - a[1].length)[0]
+      pictured = groups.find(([, m]) => m.filter(r => filesOf(r).length > 0).length >= 2)
     })
   })
 
@@ -96,5 +102,27 @@ describe('Connector groups', () => {
     cy.visit(`/connectors/${members[0].id}`)
     const withUrl = members.filter(m => typeof m.product_url === 'string' && m.product_url !== '')
     cy.get('[data-cy="vendor-link"]').should('have.length', withUrl.length)
+  })
+
+  it('the card carries every shop\'s photos, not only the first shop\'s', function () {
+    if (!pictured) this.skip()
+    const [group, members] = pictured!
+    const total = new Set(members.flatMap(filesOf)).size
+    cy.visit(`/connectors?q=${encodeURIComponent(group.split(',')[0])}`)
+    cy.contains('[data-cy="gear-card-name"]', group)
+      .parents('[data-cy="gear-card"]')
+      .find('[data-cy="card-image-dot"]')
+      .should('have.length', total)
+  })
+
+  it('the detail carousel shows the opened shop\'s photos and switches with the vendor row', function () {
+    if (!pictured) this.skip()
+    const [, members] = pictured!
+    const [a, b] = members.filter(m => filesOf(m).length > 0)
+    cy.visit(`/connectors/${b.id}`)
+    cy.get('[data-cy="detail-img"]').should('have.attr', 'src').and('include', filesOf(b)[0])
+    cy.get(`[data-cy="vendor-row"][data-id="${a.id}"] [data-cy="vendor-name"]`).click()
+    cy.location('pathname').should('eq', `/connectors/${a.id}`)
+    cy.get('[data-cy="detail-img"]').should('have.attr', 'src').and('include', filesOf(a)[0])
   })
 })
