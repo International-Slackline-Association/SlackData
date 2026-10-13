@@ -12,6 +12,8 @@ export interface Me {
   email_verified: boolean
   roles: Role[]
   notice_seen_at: string | null
+  /** False until the person has typed in the name shown with their changes. */
+  name_set: boolean
   dev: boolean
 }
 

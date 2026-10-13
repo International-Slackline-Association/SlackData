@@ -4,15 +4,21 @@
 // on the live site while the catalogue is read-only.
 
 import type { AdminSummary, ChangeRecordPublic, Me, RoleChange } from '@/types'
-import { getAuthed, postJson, request } from './client'
+import { getAuthed, patchJson, postJson, request } from './client'
 
 export function fetchMe(token: string): Promise<Me> {
   return getAuthed<Me>('/me', token)
 }
 
-/** Acknowledge the "your name is shown with your changes" notice. Idempotent. */
-export function acknowledgeNotice(token: string): Promise<Me> {
-  return postJson<Me>('/me/notice', {}, token)
+/** Acknowledge the "your name is shown with your changes" notice, saving the
+ *  name typed into it. Idempotent. */
+export function acknowledgeNotice(token: string, name: string): Promise<Me> {
+  return postJson<Me>('/me/notice', { name }, token)
+}
+
+/** Change the name shown with your changes — on every change you made. */
+export function changeName(token: string, name: string): Promise<Me> {
+  return patchJson<Me>('/me/name', { name }, token)
 }
 
 export function fetchAdmins(token: string): Promise<AdminSummary[]> {

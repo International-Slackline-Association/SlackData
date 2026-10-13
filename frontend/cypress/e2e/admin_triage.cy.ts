@@ -24,7 +24,7 @@ function signIn() {
     method: 'POST',
     url: `${Cypress.env('apiUrl')}/me/notice`,
     headers: { Authorization: `Bearer ${DEV_TOKEN}` },
-    body: {},
+    body: { name: 'Local Admin' },
   })
   cy.window().then(win => win.sessionStorage.setItem(TOKEN_KEY, DEV_TOKEN))
 }

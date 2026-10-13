@@ -13,7 +13,7 @@ import { Suspense, createContext, lazy, useCallback, useContext, useEffect, useM
 import type { ReactNode } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ApiError } from '@/api/client'
-import { acknowledgeNotice, fetchMe } from '@/api/people'
+import { acknowledgeNotice, changeName, fetchMe } from '@/api/people'
 import type { Me } from '@/types'
 import {
   DEV_TOKEN_KEY,
@@ -39,7 +39,9 @@ export interface SiteAuth {
   /** Sign in, then come back to `returnTo` (default: this page). */
   signIn: (returnTo?: string) => void
   signOut: () => void
-  acknowledgeNotice: () => Promise<void>
+  /** Acknowledge the sign-in notice, saving the name typed into it. */
+  acknowledgeNotice: (name: string) => Promise<void>
+  changeName: (name: string) => Promise<void>
 }
 
 const AuthContext = createContext<SiteAuth | undefined>(undefined)
@@ -183,10 +185,21 @@ export function SiteAuthProvider({ children }: { children: ReactNode }) {
     else actions.current?.signOut()
   }, [mode, dev])
 
-  const acknowledge = useCallback(async () => {
-    if (!token) return
-    setMe(await acknowledgeNotice(token))
-  }, [token])
+  const acknowledge = useCallback(
+    async (name: string) => {
+      if (!token) return
+      setMe(await acknowledgeNotice(token, name))
+    },
+    [token],
+  )
+
+  const rename = useCallback(
+    async (name: string) => {
+      if (!token) return
+      setMe(await changeName(token, name))
+    },
+    [token],
+  )
 
   const value = useMemo<SiteAuth>(
     () => ({
@@ -203,8 +216,9 @@ export function SiteAuthProvider({ children }: { children: ReactNode }) {
       signIn,
       signOut,
       acknowledgeNotice: acknowledge,
+      changeName: rename,
     }),
-    [mode, token, me, isa, callbackPending, meError, signIn, signOut, acknowledge],
+    [mode, token, me, isa, callbackPending, meError, signIn, signOut, acknowledge, rename],
   )
 
   return (
