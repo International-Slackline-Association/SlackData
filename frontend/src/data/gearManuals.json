@@ -1,212 +1,212 @@
 {
   "connectors": {
-    "vanbeest_bow-shackle-0-5-t": [
-      "vanbeest_bow-shackle-0-5-t-technical-drawing.pdf"
+    "40": [
+      "40_bow-shackle-0-5-t/technical-drawing.pdf"
     ],
-    "vanbeest_bow-shackle-1-5-t-7-16": [
-      "vanbeest_bow-shackle-1-5-t-7-16-technical-drawing.pdf"
+    "41": [
+      "41_bow-shackle-1-t/technical-drawing.pdf"
     ],
-    "vanbeest_bow-shackle-1-t": [
-      "vanbeest_bow-shackle-1-t-technical-drawing.pdf"
+    "42": [
+      "42_bow-shackle-1-5-t-7-16/technical-drawing.pdf"
     ],
-    "vanbeest_bow-shackle-2-t-1-2": [
-      "vanbeest_bow-shackle-2-t-1-2-technical-drawing.pdf"
+    "43": [
+      "43_bow-shackle-2-t-1-2/technical-drawing.pdf"
     ],
-    "vanbeest_bow-shackle-3-25-t-5-8": [
-      "vanbeest_bow-shackle-3-25-t-5-8-technical-drawing.pdf"
+    "44": [
+      "44_bow-shackle-3-25-t-5-8/technical-drawing.pdf"
     ],
-    "vanbeest_d-shackle-0-5-t": [
-      "vanbeest_d-shackle-0-5-t-technical-drawing.pdf"
+    "45": [
+      "45_d-shackle-0-5-t/technical-drawing.pdf"
     ],
-    "vanbeest_d-shackle-1-5-t": [
-      "vanbeest_d-shackle-1-5-t-technical-drawing.pdf"
+    "46": [
+      "46_d-shackle-1-t/technical-drawing.pdf"
     ],
-    "vanbeest_d-shackle-1-t": [
-      "vanbeest_d-shackle-1-t-technical-drawing.pdf"
+    "47": [
+      "47_d-shackle-1-5-t/technical-drawing.pdf"
     ]
   },
   "grips": {
-    "bc_wafer-2-0": [
-      "bc_wafer-2-0.pdf"
+    "14": [
+      "14_mouse-grip/user-manual.pdf"
     ],
-    "bc_wafer-xl": [
-      "bc_wafer-xl.pdf"
+    "15": [
+      "15_wafer-2-0/user-manual.pdf"
     ],
-    "slacktvty_t-grip": [
-      "slacktvty_t-grip.pdf"
+    "16": [
+      "16_wafer-xl/user-manual.pdf"
     ],
-    "slacktvty_t-grip-light": [
-      "slacktvty_t-grip-light.pdf"
+    "17": [
+      "17_t-grip-light/user-manual.pdf"
     ],
-    "spider_mouse-grip": [
-      "spider_mouse-grip.pdf"
+    "18": [
+      "18_t-grip/user-manual.pdf"
     ]
   },
   "leashrings": {
-    "bc_bc-aluminum-leash-ring": [
-      "bc_bc-aluminum-leash-ring.pdf"
+    "27": [
+      "27_bc-aluminum-leash-ring/user-manual.pdf"
     ],
-    "raed_halo": [
-      "raed_halo.pdf"
+    "29": [
+      "29_halo/user-manual.pdf"
     ],
-    "slackinov_vortex-2": [
-      "slackinov_vortex-2.pdf"
+    "32": [
+      "32_80mm-highring/user-manual.pdf"
     ],
-    "spider_80mm-highring": [
-      "spider_80mm-highring.pdf"
+    "33": [
+      "33_vortex-2/user-manual.pdf"
     ]
   },
   "rollers": {
-    "bc_bc-roller-2-stage-twist-lock": [
-      "bc_bc-roller-2-stage-twist-lock.pdf"
+    "2": [
+      "2_hangover-2-0/user-manual.pdf"
     ],
-    "bc_bc-roller-straight-gate": [
-      "bc_bc-roller-straight-gate.pdf"
+    "4": [
+      "4_hangover-s/user-manual.pdf"
     ],
-    "slacktvty_hangover-1-0": [
-      "slacktvty_hangover-1-0.pdf"
+    "17": [
+      "17_bc-roller-straight-gate/user-manual.pdf"
     ],
-    "slacktvty_hangover-2-0": [
-      "slacktvty_hangover-2-0.pdf"
+    "18": [
+      "18_bc-roller-2-stage-twist-lock/user-manual.pdf"
     ],
-    "slacktvty_hangover-s": [
-      "slacktvty_hangover-s.pdf"
+    "22": [
+      "22_hangover-1-0/user-manual.pdf"
     ]
   },
   "starterkits": {
-    "slacktvty_allround-slackline-15m-set": [
-      "slacktvty_allround-slackline-15m-set.pdf"
+    "14": [
+      "14_allround-slackline-15m-set/user-manual.pdf"
     ],
-    "slacktvty_experience-slackline-30m-set": [
-      "slacktvty_experience-slackline-30m-set.pdf"
+    "31": [
+      "31_experience-slackline-30m-set/user-manual.pdf"
     ],
-    "slacktvty_minimum-slackline-12m-set": [
-      "slacktvty_minimum-slackline-12m-set.pdf"
+    "47": [
+      "47_minimum-slackline-12m-set/user-manual.pdf"
     ]
   },
   "treepros": {
-    "eqb_tree-pad": [
-      "eqb_tree-pad.pdf"
+    "18": [
+      "18_tree-pad/user-manual.pdf"
     ]
   },
   "tricklinekits": {
-    "slacktvty_super-jumpline-slackline-set": [
-      "slacktvty_super-jumpline-slackline-set-german-user-manual.pdf"
+    "5": [
+      "5_super-jumpline-slackline-set/german-user-manual.pdf"
     ]
   },
   "webbings": {
-    "landcruise_aeon": [
-      "landcruise_aeon-product-archive.pdf"
+    "3": [
+      "3_core-1/test-certificate.pdf"
     ],
-    "landcruise_core-1": [
-      "landcruise_core-1-test-certificate.pdf"
+    "6": [
+      "6_white-magic/test-certificate.pdf"
     ],
-    "landcruise_white-magic": [
-      "landcruise_white-magic-test-certificate.pdf"
+    "61": [
+      "61_pinktube/user-manual.pdf"
     ],
-    "slacktvty_lsdtube": [
-      "slacktvty_lsdtube.pdf"
+    "62": [
+      "62_redtube/user-manual.pdf"
     ],
-    "slacktvty_marathon": [
-      "slacktvty_marathon.pdf"
+    "63": [
+      "63_marathon/user-manual.pdf"
     ],
-    "slacktvty_pinktube": [
-      "slacktvty_pinktube.pdf"
+    "74": [
+      "74_y2k/user-manual.pdf"
     ],
-    "slacktvty_redtube": [
-      "slacktvty_redtube.pdf"
+    "189": [
+      "189_lsdtube/user-manual.pdf"
     ],
-    "slacktvty_y2k": [
-      "slacktvty_y2k.pdf"
+    "255": [
+      "255_aeon/product-archive.pdf"
     ]
   },
   "weblocks": {
-    "aki_raptor": [
-      "aki_raptor.pdf"
+    "5": [
+      "5_alpine-weblock-6-1/user-manual.pdf"
     ],
-    "bc_alpine-weblock-6-1": [
-      "bc_alpine-weblock-6-1.pdf"
+    "12": [
+      "12_bandit-fx/czech-user-manual.pdf"
     ],
-    "bc_mightylock": [
-      "bc_mightylock.pdf"
+    "19": [
+      "19_canon-fx/user-manual.pdf"
     ],
-    "eqb_bandit-fx": [
-      "eqb_bandit-fx-czech-user-manual.pdf"
+    "40": [
+      "40_katana-fx/user-manual.pdf"
     ],
-    "eqb_canon-fx": [
-      "eqb_canon-fx.pdf"
+    "41": [
+      "41_kingpin-weblock/user-manual.pdf"
     ],
-    "eqb_katana-fx": [
-      "eqb_katana-fx.pdf"
+    "42": [
+      "42_lime/user-manual.pdf"
     ],
-    "eqb_paddle-fx": [
-      "eqb_paddle-fx.pdf"
+    "48": [
+      "48_lynx-1/german-user-manual.pdf"
     ],
-    "eqb_pirat-pp": [
-      "eqb_pirat-pp.pdf"
+    "49": [
+      "49_lynx-2-1/user-manual.pdf"
     ],
-    "eqb_pirat-qp": [
-      "eqb_pirat-qp.pdf"
+    "50": [
+      "50_lynx-3-0/user-manual.pdf"
     ],
-    "eqb_sherriff-fx": [
-      "eqb_sherriff-fx.pdf"
+    "54": [
+      "54_mint/user-manual.pdf"
     ],
-    "landcruise_lockman": [
-      "landcruise_lockman-german-user-manual.pdf"
+    "58": [
+      "58_orange/user-manual.pdf"
     ],
-    "landcruise_lockman-2-0": [
-      "landcruise_lockman-2-0-german-user-manual.pdf"
+    "59": [
+      "59_paddle-fx/user-manual.pdf"
     ],
-    "landcruise_lynx-1": [
-      "landcruise_lynx-1-german-user-manual.pdf"
+    "63": [
+      "63_pirat-pp/user-manual.pdf"
     ],
-    "landcruise_lynx-2-1": [
-      "landcruise_lynx-2-1.pdf"
+    "64": [
+      "64_pirat-qp/user-manual.pdf"
     ],
-    "landcruise_lynx-3-0": [
-      "landcruise_lynx-3-0.pdf"
+    "84": [
+      "84_seahorse-dp-1-5/user-manual.pdf"
     ],
-    "landcruise_puma-32": [
-      "landcruise_puma-32-product-archive.pdf"
+    "87": [
+      "87_sherriff-fx/user-manual.pdf"
     ],
-    "landcruise_zilla-1-0": [
-      "landcruise_zilla-1-0-german-user-manual.pdf"
+    "91": [
+      "91_slackibloc-4/user-manual.pdf"
     ],
-    "landcruise_zilla-2-0": [
-      "landcruise_zilla-2-0-german-user-manual.pdf"
+    "92": [
+      "92_slackibloc-jump-1-2/user-manual.pdf"
     ],
-    "landcruise_zilla-3-0": [
-      "landcruise_zilla-3-0.pdf"
+    "105": [
+      "105_zilla-1-0/german-user-manual.pdf"
     ],
-    "radrigs_orange": [
-      "radrigs_orange.pdf"
+    "106": [
+      "106_zilla-2-0/german-user-manual.pdf"
     ],
-    "radrigs_slackfriend": [
-      "radrigs_slackfriend.pdf"
+    "107": [
+      "107_zilla-3-0/user-manual.pdf"
     ],
-    "slackinov_slackibloc-4": [
-      "slackinov_slackibloc-4.pdf"
+    "108": [
+      "108_slackfriend/user-manual.pdf"
     ],
-    "slackinov_slackibloc-jump-1-2": [
-      "slackinov_slackibloc-jump-1-2.pdf"
+    "109": [
+      "109_mightylock/user-manual.pdf"
     ],
-    "slackinov_zenlock": [
-      "slackinov_zenlock.pdf"
+    "112": [
+      "112_zenlock/user-manual.pdf"
     ],
-    "slacktvty_kingpin-weblock": [
-      "slacktvty_kingpin-weblock.pdf"
+    "115": [
+      "115_blueberry/user-manual.pdf"
     ],
-    "slacktvty_seahorse-dp-1-5": [
-      "slacktvty_seahorse-dp-1-5.pdf"
+    "134": [
+      "134_raptor/user-manual.pdf"
     ],
-    "spider_blueberry": [
-      "spider_blueberry.pdf"
+    "139": [
+      "139_lockman/german-user-manual.pdf"
     ],
-    "spider_lime": [
-      "spider_lime.pdf"
+    "140": [
+      "140_lockman-2-0/german-user-manual.pdf"
     ],
-    "spider_mint": [
-      "spider_mint.pdf"
+    "141": [
+      "141_puma-32/product-archive.pdf"
     ]
   }
 }
