@@ -46,10 +46,16 @@ every deploy; then switched over; the daily export to the data repo starts.
 - **An import is not logged in the change log** — it is not an edit anyone made.
 - **Per-type id counters (D26) are not built:** nothing creates items yet. They come with phase 3.
 
-**Found while testing:** renaming a product in the store loses its photo on the page, because
-images (and manuals) are keyed by `<brand-abbrev>_<name-slug>`. Harmless today — nobody renames
-through the store — but phase 3 opens renames to editors, so media keys must stop depending on the
-name before then (phase 4's media migration, D47, is the natural place; or key by id).
+**Found while testing, and fixed: media is filed by id.** Renaming a product in the store lost its
+photo on the page, because images and manuals were files named `<brand-abbrev>_<name-slug>` of the
+*current* name. All 1,343 files (1,269 photos, 74 PDFs) now sit in one folder per item,
+`gear-images/<type>/<id>_<name-slug>/1.jpg …` and `gear-manuals/<type>/<id>_<name-slug>/<title>.pdf`,
+and range-wide manuals in `gear-manuals/<type>/brand/<catalog_id>_<brand-slug>/`. Only the id is
+read, so renaming an item or its brand keeps them; the slug is a label and may go stale. The move
+was checked file by file: every item resolves to byte-identical files in the same order as before.
+`brandAbbrev.json` is gone (nothing reads it); `brandIds.json` maps brand names to `catalog_id` for
+range-wide manuals. `scripts/fetch_submission_images.py` now takes `--id`. Manufacturer **logos**
+are still keyed by brand name — a brand rename would drop one (phase 3).
 
 **Cost of a rebuild:** about 2 s for the whole catalogue, on a cold start and after each version
 change. Fine at today's edit rate; worth measuring on Lambda before phase 3.

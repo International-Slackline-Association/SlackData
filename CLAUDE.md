@@ -190,8 +190,8 @@ Root *.json seed files
 | `slack_data/models/brand_clients.py` | `BrandClient` / `BrandPermission` / `ManufacturerPrincipal` — the account linkage `Brand` never had |
 | `slack_data/manufacturers/` | The manufacturer API's stores: `clients.py` (Protocol + SQLite + in-memory), `dynamo.py`, `store.py`, `matching.py` (gear identity), `register.py` (onboarding CLI), `onboard.py` (the CLI's other half — dossier, key minting, ledger, end-to-end proof) |
 | `slack_data/utilities/turnstile.py` | Captcha verification — **fails closed**, unlike `fx.py` |
-| `scripts/fetch_submission_images.py` | Files a manufacturer record's `image_urls` into `frontend/public/gear-images/` under the right key, then rebuilds the manifest |
-| `frontend/public/gear-manuals/` | Manufacturer PDFs (manuals, datasheets, test certificates), keyed like images: `<type>/<brand-abbrev>_<name-slug>[-<title>].pdf`, or `<type>/brand/<brand-abbrev>[-<title>].pdf` for a range-wide one. Rebuild the manifests with `scripts/build_gear_manifest.py` after adding one. Rules in DESIGN.md § Manuals & documents |
+| `scripts/fetch_submission_images.py` | Files a manufacturer record's `image_urls` into the item's folder in `frontend/public/gear-images/` (`--id`), then rebuilds the manifest |
+| `frontend/public/gear-images/`, `frontend/public/gear-manuals/` | Gear photos and manufacturer PDFs (manuals, datasheets, test certificates), **one folder per item, named by id**: `<type>/<id>_<name-slug>/1.jpg, 2.jpg …` and `<type>/<id>_<name-slug>/<title>.pdf`, or `gear-manuals/<type>/brand/<catalog_id>_<brand-slug>/<title>.pdf` for a range-wide one. Only the id is read, so a rename keeps them; the slug is a label and may go stale. Rebuild the manifests with `scripts/build_gear_manifest.py` after adding one. Rules in DESIGN.md § Manuals & documents |
 
 There are `__init__.py` files in `models/`, `api/`, and `utilities/`. No `tests/`, no `.github/`, no Docker, no migrations (SQLModel `create_all` only).
 
@@ -568,9 +568,9 @@ derived field list (`submissions/fields.py`). What differs is trust and shape.
   `MAX_IMAGE_URLS`, http(s), added never replaced) is stored on the
   `Submission` and **not fetched by the API**, which leaves no outbound request
   to abuse. The operator files them with `scripts/fetch_submission_images.py`,
-  whose exact invocation the approved triage row shows. Images are keyed by
-  `<brand-abbrev>_<name-slug>`, so the command uses the name **after** any
-  rename in the patch. The uploads bucket exists and is unused. See
+  whose exact invocation the approved triage row shows. Photos are filed in
+  the item's folder by id (`--id`), so a rename in the same patch cannot
+  misfile them. The uploads bucket exists and is unused. See
   MANUFACTURER_API_PLAN.md § Step 4 — photos as links.
 
 Onboarding is a **CLI, not a route** (`python -m slack_data.manufacturers.register`):

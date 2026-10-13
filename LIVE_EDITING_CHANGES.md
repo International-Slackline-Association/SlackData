@@ -114,8 +114,9 @@ phase 2.
 
 ## 4. Open items and risks
 
-- **Rename loses the photo.** Images and manuals are keyed by product name, so renaming a product
-  in the store drops its photo on the page. Must be fixed before phase 3 opens renames.
+- **Rename lost the photo — fixed in phase 2** by filing media by id, one folder per item
+  (`<type>/<id>_<name-slug>/`); found on staging, where a rename in the store dropped the photo.
+  Manufacturer logos are still keyed by brand name.
 - **Deploy order matters for phase 1:** import the brands' secrets *before* the deploy that drops
   the pool; tell the three brands their token request stops working.
 - **After phase 2's switch-over, stop hand-editing the root seeds**; until phase 3, a correction is
