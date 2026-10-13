@@ -41,19 +41,35 @@ export function imageUrls(gearType: string, brandName: string, name: string): st
   return files.map(f => `${IMAGE_BASE_URL}/gear-images/${gearType}/${f}`)
 }
 
-// Image URLs for a listing item. A collapsed generic-part group (utils/groups.ts)
-// has no image key of its own — its name is the group's and its brand a list of
-// shops — so it shows the photos of its first member that has any.
+function rowImageUrls(gearType: string, row: Record<string, unknown>): string[] {
+  return imageUrls(gearType, String(row.brand_name), String(row.name))
+}
+
+// Image URLs for a listing item. A collapsed group (utils/groups.ts) has no
+// image key of its own — its name is the group's and its brand a list of shops —
+// so it shows every member's photos, shop by shop in vendor-table order. On the
+// listing that is the whole group whatever the filters (`_groupRows`, set by
+// withGroupRows), even when only one shop matched and the card is a plain row.
 export function itemImageUrls(gearType: string, item: Record<string, unknown>): string[] {
+  const members = (item._groupRows ?? item._members) as Record<string, unknown>[] | undefined
+  if (Array.isArray(members)) {
+    return [...new Set(members.flatMap(m => rowImageUrls(gearType, m)))]
+  }
+  return rowImageUrls(gearType, item)
+}
+
+// Image URLs for the detail page. A group opened at one member (`_current`, set
+// by groupFor) shows that member's own photos, so picking a shop in the vendor
+// table switches the carousel to that shop's. A member with none, or a group
+// with no member opened (the listing's Detailed view), shows the whole group's.
+export function detailImageUrls(gearType: string, item: Record<string, unknown>): string[] {
   const members = item._members as Record<string, unknown>[] | undefined
   if (Array.isArray(members)) {
-    for (const m of members) {
-      const urls = imageUrls(gearType, String(m.brand_name), String(m.name))
-      if (urls.length) return urls
-    }
-    return []
+    const current = members.find(m => Number(m.id) === Number(item._current))
+    const own = current ? rowImageUrls(gearType, current) : []
+    if (own.length) return own
   }
-  return imageUrls(gearType, String(item.brand_name), String(item.name))
+  return itemImageUrls(gearType, item)
 }
 
 // Convenience: the primary image URL, or null.

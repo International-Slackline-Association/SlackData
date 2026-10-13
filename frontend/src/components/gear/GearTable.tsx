@@ -41,7 +41,7 @@ import { useOriginState } from '@/context/OriginContext'
 import type { Origin } from '@/utils/origin'
 import type { SortSpec } from '@/hooks/useUrlState'
 import type { AnyItem } from '@/utils/format'
-import { primaryImage } from '@/utils/images'
+import { itemImageUrls } from '@/utils/images'
 import {
   ariaSort,
   isStretchColumn,
@@ -124,7 +124,8 @@ const GearTableRow = memo(function GearTableRow({
   onToggleCompare?: (id: number) => void
   onOpen: (event: ReactMouseEvent<HTMLTableRowElement>, id: number) => void
 }) {
-  const image = primaryImage(slug, String(item.brand_name), String(item.name))
+  // itemImageUrls, not the item's own key: a collapsed group has none.
+  const image = itemImageUrls(slug, item)[0] ?? null
 
   // A cell's whole area as a link to the item. The card gets this from one
   // stretched <Link> overlay; a table row cannot host one — an absolutely

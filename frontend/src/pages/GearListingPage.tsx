@@ -17,7 +17,7 @@ import { useCurrency } from '@/context/CurrencyContext'
 import { STRETCH_RANGE_FIELD, useUrlState } from '@/hooks/useUrlState'
 import { filterBySearch } from '@/utils/search'
 import { sortItems } from '@/utils/sort'
-import { collapseGroups, isGroupItem } from '@/utils/groups'
+import { collapseGroups, isGroupItem, withGroupRows } from '@/utils/groups'
 import { BRAND_GROUP, filterGroupsFor } from '@/config/filterGroups'
 import { activeFilterCount, applyFilters, type RangeBounds } from '@/utils/filter'
 import { percentAtKn, topKnPoints } from '@/utils/stretch'
@@ -337,9 +337,10 @@ export default function GearListingPage() {
       })
     }
     // Generic parts several shops sell collapse to one card here — after the
-    // filters ran on the vendor rows, before sort (see utils/groups.ts).
-    return sortItems(collapseGroups(filtered), sort)
-  }, [contextItems, selectedKn, stretchMin, stretchMax, sort])
+    // filters ran on the vendor rows, before sort (see utils/groups.ts). Each
+    // card then carries its whole group, unfiltered, for its photo carousel.
+    return withGroupRows(sortItems(collapseGroups(filtered), sort), items)
+  }, [contextItems, selectedKn, stretchMin, stretchMax, sort, items])
 
   // Which card stands for which members, refreshed with every filter change.
   // `shownSelectedIds` is what the views mark as picked: the selection, plus

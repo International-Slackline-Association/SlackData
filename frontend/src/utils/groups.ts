@@ -206,6 +206,23 @@ export function collapseGroups<T extends Item>(items: T[]): T[] {
   return out
 }
 
+// Every row of each listed item's group, from the UNFILTERED catalogue, as
+// `_groupRows`. The card's photos come from these (utils/images.ts), so a
+// filter that drops some shops — or all but one, which then shows as a plain
+// row — never drops their photos from the carousel. Numbers still come from
+// the matching shops only, as above.
+export function withGroupRows<T extends Item>(visible: T[], all: Item[]): T[] {
+  const byGroup = new Map<string, Item[]>()
+  for (const it of all) {
+    const g = it.product_group
+    if (typeof g === 'string' && g !== '') byGroup.set(g, [...(byGroup.get(g) ?? []), it])
+  }
+  return visible.map(it => {
+    const rows = typeof it.product_group === 'string' ? byGroup.get(it.product_group) : undefined
+    return rows && rows.length >= 2 ? { ...it, _groupRows: rows.slice().sort(compareMembers) } : it
+  })
+}
+
 export function isGroupItem(item: Item): item is Item & GroupMeta {
   return Array.isArray(item._members)
 }
