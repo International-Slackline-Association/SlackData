@@ -24,6 +24,7 @@ out() { aws cloudformation describe-stacks --stack-name slackdata-prod --region 
   --query "Stacks[0].Outputs[?OutputKey=='$1'].OutputValue" --output text; }
 BUCKET=$(out WebBucketName); DIST=$(out CdnDistributionId); CDN=$(out CdnDomain)
 echo "$BUCKET / $DIST / $CDN"
+cd ..
 ```
 
 Expired token → `aws sso login --profile isa-slackdata`, then re-run the `eval`.

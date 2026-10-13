@@ -695,6 +695,18 @@ Before writing any of the above, open the relevant `models/<type>.py` and `utili
 
 - Imports are absolute (`from slack_data....`).
 - `manufacturers.json` (80 entries) at root **is loaded — but as an enrichment pass, not a creator**. Brand rows are still created on the fly by `get_brand()` with only a name; `load_manufacturers.py` then backfills `country` / `year_founded` / `website` / `socials` / `contact_email` / `active` / `slackline_focused` onto the rows that already exist, matching on `canonical_brand()`. Its `catalog_id` **is** read at creation time, though — that is where `Brand.id` comes from (see § Loader pattern). It never inserts a brand (an entry with no matching row means we hold no gear for that manufacturer — `load_seller_brands.py` is the one pass that will insert one, for a seller-only brand). It **must run after every pass that creates a brand row** — the gear loaders and the seller-name pass, and is gated on "no brand has a country yet" rather than on an empty table. `contact_email` is the one field here that is **ours, not SlackDB's** — scraped from each manufacturer's own site (38/77 as of 2026-09-02; the rest publish a contact form only, or have no site left). `metadata.email_source` in the JSON records that provenance.
+- **Spider Slacklines data: default to their US Shopify, slacklines.us.** spider-slacklines.com
+  (and slack-inov.com, the same shop platform) sit behind a Cloudflare challenge and answer 403 to
+  scripts. Most of the old Wayback snapshots are dead or outdated, so don't spend time on them.
+  slacklines.us is open, and Shopify serves it as JSON:
+  `https://slacklines.us/products.json?limit=250&page=N` gives the whole catalogue (~108 products),
+  and `https://slacklines.us/products/<handle>.json` gives one product. Each product carries
+  variants (size and Spider's ref as `sku`, e.g. `LHSO2`), the description HTML, and every photo as
+  a `cdn.shopify.com` URL (`images[].src`). `variant_ids` on an image says which size it shows.
+  Append `&width=1200` to an image URL to match the photos already held, and file them with
+  `scripts/fetch_submission_images.py`. No screenshots are needed. Prices there are USD; for EUR
+  prices or a still-sold check, list the rows and ask the operator. Products only on Spider's EU
+  shop (e.g. the D shackles) need a browser.
 - Country is stored as the `Country` enum's **full display name** (`"Germany"`), not an ISO code; `get_country()` in `utilities/countries.py` maps the sources' alpha-2 codes onto the enum.
 - `BrandPublic` only declares `webbings` in its response schema — other gear lists exist on the ORM model via `@computed_field` but may not serialize in API responses.
 - No auth — all endpoints are open.
