@@ -81,6 +81,16 @@ for path in submissions me; do
 done
 
 echo
+echo "The catalogue store (live editing, phase 2)"
+INDEX="$(curl -s "$API/catalogue")"
+case "$INDEX" in
+  *'"source":"store"'*) ok "GET /api/catalogue -> the site reads the store ($(printf '%s' "$INDEX" | grep -o '"version":[0-9]*'))" ;;
+  *'"source":"store (shadow)"'*) ok "GET /api/catalogue -> the store runs in shadow ($(printf '%s' "$INDEX" | grep -o '"version":[0-9]*')); the site reads the baked catalogue" ;;
+  *) warn "GET /api/catalogue -> no store answer: ${INDEX:0:160}
+      Before phase 2's half A this is expected. After it, CATALOG_TABLE is missing
+      from the function, or the store was never filled (importer --apply)." ;;
+esac
+echo
 echo "The change log is public"
 RESULT="$(code_type "$API/changes")"
 case "$RESULT" in

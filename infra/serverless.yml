@@ -110,6 +110,15 @@ functions:
       ISA_REGION: eu-central-1
       PEOPLE_TABLE: !Ref PeopleTable
       CHANGELOG_TABLE: !Ref ChangelogTable
+      # Live editing, phase 2: the catalogue store, and what the site reads.
+      # `baked` (the default) serves the catalogue baked into the image, with
+      # the store running in shadow; `store` serves the store, built into memory
+      # and rebuilt when its version moves. Chosen in the deployer's shell, so
+      # the switch-over — and its rollback — is one variable and a redeploy:
+      #   CATALOG_SOURCE=store npx serverless deploy --stage prod
+      # See LIVE_EDITING_PHASE_2.md before flipping it.
+      CATALOG_TABLE: !Ref CatalogTable
+      CATALOG_SOURCE: ${env:CATALOG_SOURCE, 'baked'}
       # The first admins, by verified ISA email (§ 4.4). From the deployer's
       # shell, never written here: the repo is public and these are people's
       # addresses. Each grants admin once, logged as `bootstrap`; after that,
@@ -436,6 +445,32 @@ resources:
       DeletionPolicy: Retain
       UpdateReplacePolicy: Retain
 
+    # ---- The catalogue store (live editing, phase 2) -------------------------
+    # The source of truth for the catalogue once CATALOG_SOURCE=store (D4): one
+    # item per seed entry, verbatim, plus `_meta/version`, which every request
+    # reads and every write bumps (D30). Read with Query per collection — the
+    # role has no Scan. Keys must stay in step with slack_data/catalogue/dynamo.py.
+    CatalogTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:service}-catalog-${self:provider.stage}
+        BillingMode: PAY_PER_REQUEST
+        AttributeDefinitions:
+          - AttributeName: collection
+            AttributeType: S
+          - AttributeName: key
+            AttributeType: S
+        KeySchema:
+          - AttributeName: collection
+            KeyType: HASH
+          - AttributeName: key
+            KeyType: RANGE
+        PointInTimeRecoverySpecification:
+          PointInTimeRecoveryEnabled: true
+      # After the switch-over this IS the catalogue; the seeds stop being edited.
+      DeletionPolicy: Retain
+      UpdateReplacePolicy: Retain
+
     # No Cognito resources. SlackData's admin pool (`slackdata-admins-<stage>`),
     # its group, app client, hosted domain and the manufacturer resource server
     # were removed on 2026-10 (D62): people sign in through the ISA's pool and
@@ -705,5 +740,7 @@ resources:
       Value: !Ref PeopleTable
     ChangelogTableName:
       Value: !Ref ChangelogTable
+    CatalogTableName:
+      Value: !Ref CatalogTable
     UploadsBucketName:
       Value: !Ref UploadsBucket

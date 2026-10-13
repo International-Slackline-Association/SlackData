@@ -198,7 +198,7 @@ fi
 echo
 echo "Retained resources are stack-managed (the orphan trap)"
 #
-# SubmissionsTable, BrandClientsTable, PeopleTable and ChangelogTable are
+# SubmissionsTable, BrandClientsTable, PeopleTable, ChangelogTable and CatalogTable are
 # DeletionPolicy: Retain, correctly — each holds something git cannot regenerate. The cost is
 # that a stack update which CREATES one and then fails for any unrelated reason
 # rolls back everything else and leaves that resource standing, orphaned. The
@@ -214,7 +214,7 @@ if command -v aws >/dev/null 2>&1 && [ -n "${ACCOUNT:-}" ] && [ "${ACCOUNT:-None
   # Names come from the template, so renaming a table cannot leave this checking
   # the old one.
   for pair in "SubmissionsTable:submissions" "BrandClientsTable:brand-clients" \
-              "PeopleTable:people" "ChangelogTable:changelog"; do
+              "PeopleTable:people" "ChangelogTable:changelog" "CatalogTable:catalog"; do
     LOGICAL="${pair%%:*}"
     TABLE="slackdata-${pair##*:}-${STAGE}"
 
@@ -260,6 +260,32 @@ if command -v aws >/dev/null 2>&1 && [ -n "${ACCOUNT:-}" ] && [ "${ACCOUNT:-None
   fi
 else
   warn "skipped — no AWS access. This check needs the account to compare against."
+fi
+
+echo
+echo "The catalogue store (live editing, phase 2)"
+# While CATALOG_SOURCE is `baked` the store runs in shadow: the seeds are still
+# where data is edited, and the store must match them before every deploy —
+# that is the "compared on every deploy" of LIVE_EDITING_PLAN.md § 13. Once it
+# is `store`, the store IS the catalogue and the seeds stop being edited, so
+# there is nothing to compare against.
+SOURCE="${CATALOG_SOURCE:-baked}"
+if [ "$SOURCE" = "store" ]; then
+  ok "CATALOG_SOURCE=store — the site reads the store; nothing to shadow-check"
+elif command -v aws >/dev/null 2>&1 && [ -n "${ACCOUNT:-}" ] && [ "${ACCOUNT:-None}" != "None" ]; then
+  TABLE="slackdata-catalog-${STAGE}"
+  if ! aws dynamodb describe-table --table-name "$TABLE" >/dev/null 2>&1; then
+    warn "$TABLE does not exist yet — deploy half A, then fill it:
+      CATALOG_TABLE=$TABLE python -m slack_data.catalogue.importer --apply"
+  elif CHECK="$(cd .. && CATALOG_TABLE="$TABLE" SQL_ECHO=false python3 -m slack_data.catalogue.importer --check 2>&1)"; then
+    ok "${CHECK##*$'\n'}"
+  else
+    warn "the store differs from the seeds (shadow):
+$(printf '%s\n' "$CHECK" | tail -8 | sed 's/^/      /')
+      Refresh it before deploying: CATALOG_TABLE=$TABLE python -m slack_data.catalogue.importer --apply"
+  fi
+else
+  warn "skipped — no AWS access."
 fi
 
 echo
