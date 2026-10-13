@@ -18,6 +18,7 @@
 
 import { useLayoutEffect, useRef, useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
+import AccountMenu from '@/components/account/AccountMenu'
 import { ALL_GEAR_TYPES } from '@/config/gearTypes'
 import CurrencySelector from './CurrencySelector'
 
@@ -196,6 +197,7 @@ export default function TopNav() {
             Manufacturers
           </Link>
           <CurrencySelector />
+          <AccountMenu />
         </div>
       </div>
 

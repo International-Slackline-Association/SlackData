@@ -70,7 +70,8 @@
         "table",
         "currency",
         "connector_groups",
-        "webbing_groups"
+        "webbing_groups",
+        "account"
       ]
     },
     {

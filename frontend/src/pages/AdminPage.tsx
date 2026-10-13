@@ -15,7 +15,8 @@ import { useCallback, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ApiError } from '@/api/client'
 import { fetchSubmissions, reviewSubmission } from '@/api/submissions'
-import { useAdminAuth } from '@/auth/AdminAuthProvider'
+import { useSiteAuth } from '@/auth/AuthContext'
+import AdminsPanel from '@/components/account/AdminsPanel'
 import { fieldLabel } from '@/config/correctableFields'
 import { getGearType } from '@/config/gearTypes'
 import type { Submission, SubmissionStatus } from '@/types'
@@ -38,8 +39,8 @@ const PAGE_SIZE = 50
 const COLLAPSE_BATCH_OVER = 5
 
 export default function AdminPage() {
-  const auth = useAdminAuth()
-  const { token, isAuthenticated } = auth
+  const auth = useSiteAuth()
+  const { token, isAuthenticated, isAdmin } = auth
 
   const [status, setStatus] = useState<SubmissionStatus>('pending')
   const [rows, setRows] = useState<Submission[]>([])
@@ -48,7 +49,7 @@ export default function AdminPage() {
   const [error, setError] = useState<string | null>(null)
 
   const load = useCallback(async () => {
-    if (!token) return
+    if (!token || !isAdmin) return
     setLoading(true)
     setError(null)
     try {
@@ -70,7 +71,7 @@ export default function AdminPage() {
     } finally {
       setLoading(false)
     }
-  }, [token, status])
+  }, [token, isAdmin, status])
 
   useEffect(() => {
     void load()
@@ -82,6 +83,23 @@ export default function AdminPage() {
 
   if (!isAuthenticated) {
     return <LoginPrompt />
+  }
+
+  if (!auth.me) {
+    // Signed in, and still asking the API who this is — or it could not say.
+    return auth.error ? <LoginPrompt /> : <p className="p-8 text-sm text-gray-600">Signing in…</p>
+  }
+
+  if (!isAdmin) {
+    return (
+      <div data-cy="admin-not-admin" className="mx-auto max-w-md px-4 py-20 text-center">
+        <h1 className="text-2xl font-bold text-gray-900">Not an admin</h1>
+        <p className="mt-2 text-sm text-gray-600">
+          You&apos;re signed in as {auth.me.name}, and this account does not hold the admin role.
+          An existing admin can grant it.
+        </p>
+      </div>
+    )
   }
 
   return (
@@ -104,13 +122,13 @@ export default function AdminPage() {
         </button>
       </header>
 
-      {auth.isDevMode && (
+      {auth.mode === 'dev' && (
         <p
           data-cy="admin-dev-mode"
           className="mt-4 rounded-lg bg-amber-50 px-3 py-2 text-sm text-amber-900"
         >
-          Local development mode — the token comes from session storage, not from Cognito. The API
-          still decides whether it is valid.
+          Local development mode — the token comes from session storage, not from an ISA sign-in.
+          The API still decides whether it is valid.
         </p>
       )}
 
@@ -190,18 +208,20 @@ export default function AdminPage() {
           Showing the oldest {PAGE_SIZE}. More are waiting — work from the top.
         </p>
       )}
+
+      <AdminsPanel token={token!} />
     </div>
   )
 }
 
 function LoginPrompt() {
-  const auth = useAdminAuth()
+  const auth = useSiteAuth()
   return (
     <div data-cy="admin-login" className="mx-auto max-w-md px-4 py-20 text-center">
       <h1 className="text-2xl font-bold text-gray-900">Admin sign-in</h1>
       <p className="mt-2 text-sm text-gray-600">
-        Submission triage is restricted. Signing in here only renders the page — the API verifies
-        every request separately.
+        Sign in with your ISA account. Triage is for SlackData admins — signing in here only renders
+        the page; the API checks the admin role on every request.
       </p>
       {auth.error && (
         <p data-cy="admin-login-error" className="mt-4 text-sm text-red-700">
@@ -211,7 +231,7 @@ function LoginPrompt() {
       <button
         type="button"
         data-cy="admin-signin"
-        onClick={auth.signIn}
+        onClick={() => auth.signIn('/admin')}
         className="mt-6 rounded-full bg-teal-700 px-6 py-2.5 text-sm font-semibold text-white hover:bg-teal-800"
       >
         Sign in

@@ -1,11 +1,11 @@
 // Admin triage — DESIGN.md § Admin Triage.
 //
 // The token is the local dev token (`ADMIN_DEV_TOKEN` in slack_data/api/auth.py),
-// put into sessionStorage exactly the way AdminAuthProvider's dev mode reads it.
-// **No real credentials here, and none needed:** hosted, that token is dead —
-// auth.py stops accepting it the moment a Cognito pool is configured, and
-// tests/test_auth.py asserts that. So this drives the page without giving the
-// suite anything worth stealing.
+// put into sessionStorage exactly the way auth/AuthContext.tsx's dev mode reads
+// it. **No real credentials here, and none needed:** hosted, that token is dead —
+// auth.py refuses it whenever the ISA pool is configured or the process is
+// hosted, and tests/test_auth.py asserts that. So this drives the page without
+// giving the suite anything worth stealing.
 //
 // What these tests are for: that the page is a QUEUE (oldest first), that it is
 // closed when logged out, and that approving says — visibly — that nothing has
@@ -18,6 +18,14 @@ const SLUG = 'webbings'
 const API = 'webbing'
 
 function signIn() {
+  // The first-sign-in notice (account.cy.ts) would otherwise cover the page.
+  // Acknowledging it is idempotent, so this is safe on every run.
+  cy.request({
+    method: 'POST',
+    url: `${Cypress.env('apiUrl')}/me/notice`,
+    headers: { Authorization: `Bearer ${DEV_TOKEN}` },
+    body: {},
+  })
   cy.window().then(win => win.sessionStorage.setItem(TOKEN_KEY, DEV_TOKEN))
 }
 
@@ -278,13 +286,14 @@ describe('Admin triage', () => {
   })
 
   describe('a bad token', () => {
-    it('renders the page but the API refuses, and the error is shown', () => {
-      // The distinction the page is built around: signing in here only makes the
-      // page render. Authority is the server's.
+    it('the API refuses it, and the error is shown', () => {
+      // The distinction the page is built around: a token in the browser only
+      // asks. Authority is the server's — `GET /me` answers 401, so there is no
+      // signed-in person and the queue never loads.
       cy.visit('/admin')
       cy.window().then(win => win.sessionStorage.setItem(TOKEN_KEY, 'not-the-token'))
       cy.reload()
-      cy.getByData('admin-error', { timeout: 10000 }).should('contain', '401')
+      cy.getByData('admin-login-error', { timeout: 10000 }).should('contain', '401')
       cy.getByData('submission-row').should('not.exist')
     })
   })
