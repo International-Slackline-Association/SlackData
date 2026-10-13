@@ -595,14 +595,14 @@ function ApprovedPatch({
 
       {photoCommand && (
         // The other half of a photo link: nothing fetches it until this runs.
-        // Built by utils/imageFetch.ts, which quotes every argument and uses the
-        // name the product has AFTER the patch above — images are keyed by it.
+        // Built by utils/imageFetch.ts, which quotes every argument and files the
+        // photos in the product's own folder, by id.
         <div className="mt-3 border-t border-amber-200 pt-3">
           <p className="text-sm text-amber-900">
             <strong className="font-semibold">Photos.</strong> From the repository root, run this
             to file them under{' '}
             <code className="font-mono text-xs">frontend/public/gear-images/</code>, then commit
-            and redeploy the website (half B). Apply the JSON above first if it renames the product.
+            and redeploy the website (half B).
           </p>
           <pre
             data-cy="image-fetch-command"

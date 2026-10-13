@@ -4,9 +4,9 @@
 // files those photos (scripts/fetch_submission_images.py). The admin copies it
 // into a shell, and every argument in it came from outside: the brand's name,
 // the product's name, and URLs the brand chose. So the quoting is tested rather
-// than trusted. The other thing that can go wrong invisibly is the NAME: images
-// are keyed by it, so a record that renames the product must file its photos
-// under the new name or they never render.
+// than trusted. The other thing that can go wrong invisibly is WHERE the photos
+// land: by the product's id, so a record that also renames the product cannot
+// file them where nothing renders.
 
 import { test, describe } from 'node:test'
 import assert from 'node:assert/strict'
@@ -58,20 +58,23 @@ describe('shellQuote', () => {
 })
 
 describe('imageFetchCommand', () => {
-  test('names the script, the gear type, the brand, the name and every URL in order', () => {
+  test('names the script, the gear type, the id, the name and every URL in order', () => {
     const command = imageFetchCommand(
       record({ image_urls: ['https://bc.example/b.png', 'https://bc.example/a.jpg'] }),
     )
     assert.equal(
       command,
       "python3 scripts/fetch_submission_images.py --gear-type 'webbings'" +
-        " --brand 'Balance Community' --name 'Aero 1'" +
+        " --id '42' --name 'Aero 1'" +
         " 'https://bc.example/b.png' 'https://bc.example/a.jpg'",
     )
   })
 
-  test('uses the name the product will have after a rename in the patch', () => {
+  test('files by id, whatever the patch renames the product to', () => {
+    // The name only labels a folder the script has to create; it is the one the
+    // product will have after the patch.
     const command = imageFetchCommand(record({ changes: { name: 'Aero 2', weight: '61' } }))
+    assert.ok(command?.includes("--id '42'"), command ?? 'null')
     assert.ok(command?.includes("--name 'Aero 2'"), command ?? 'null')
     assert.ok(!command?.includes("'Aero 1'"), command ?? 'null')
   })
@@ -87,10 +90,10 @@ describe('imageFetchCommand', () => {
     assert.equal(imageFetchCommand(record({ image_urls: [] })), null)
   })
 
-  test('there is no command when the product cannot be named', () => {
-    // The key is `<brand>_<name>`; without both there is nowhere to file it.
+  test('there is no command when the product has no id', () => {
+    // Photos are filed in the item's folder, named by its id.
+    assert.equal(imageFetchCommand(record({ gear_id: null })), null)
     assert.equal(imageFetchCommand(record({ gear_name: null })), null)
-    assert.equal(imageFetchCommand(record({ gear_brand: null })), null)
   })
 })
 
