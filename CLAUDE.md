@@ -567,8 +567,11 @@ times a year, and an endpoint for it would be a permanent attack surface.
 Admin auth (`api/auth.py`) has three modes: a Cognito pool set → verify the RS256 **ID** token
 against the pool's JWKS; unset **and hosted** → reject everything with 503, never fall through;
 unset and local → a static `ADMIN_DEV_TOKEN`. That middle row is why the dev token is safe to have in
-the repo: reaching it requires no pool *and* no `CATALOG_DB_PATH`, and `Dockerfile.lambda` always
-sets the latter.
+the repo. "Hosted" is `slack_data/deployment.py`'s `is_hosted()`: any one of the Lambda runtime's
+`AWS_LAMBDA_FUNCTION_NAME`, `SLACKDATA_DEPLOYMENT=hosted` (set by `Dockerfile.lambda` and
+`infra/serverless.yml`) or `READ_ONLY`. It no longer rests on `CATALOG_DB_PATH` alone, because live
+editing stops baking the catalogue (LIVE_EDITING_PHASE_0.md). The captcha's fail-closed check asks
+the same function.
 
 ### Non-model routers
 
