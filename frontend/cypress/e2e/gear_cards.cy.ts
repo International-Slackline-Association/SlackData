@@ -469,7 +469,9 @@ GEAR_TYPES.forEach(({ slug, apiPath, label }) => {
 
     before(() => {
       cy.fetchAllItems(apiPath).then((all) => {
-        const withFiles = (all as Record<string, unknown>[]).map(item => ({
+        // Ungrouped rows only: a group's card carries every shop's photos, not
+        // this row's alone (connector_groups.cy.ts covers those).
+        const withFiles = (all as Record<string, unknown>[]).filter(i => !i.product_group).map(item => ({
           item,
           files: imageFilesFor(slug, String(item.brand_name), String(item.name)),
         }))
@@ -636,7 +638,9 @@ GEAR_TYPES.forEach(({ slug, apiPath, label }) => {
 
     before(() => {
       cy.fetchAllItems(apiPath).then((all) => {
-        const withFiles = (all as Record<string, unknown>[]).map(item => ({
+        // Ungrouped rows only: a group's card carries every shop's photos, not
+        // this row's alone (connector_groups.cy.ts covers those).
+        const withFiles = (all as Record<string, unknown>[]).filter(i => !i.product_group).map(item => ({
           item,
           files: imageFilesFor(slug, String(item.brand_name), String(item.name)),
         }))
