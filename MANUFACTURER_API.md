@@ -28,28 +28,25 @@ is where the two get introduced, and the whole design assumes you called it firs
 
 ---
 
-## 1. Get an access token
+## 1. Your API key
 
-Standard OAuth 2.0 client credentials against Cognito. You were given a `client_id` and a
-`client_secret`; the token URL is the `ManufacturerTokenUrl` we sent with them (it looks like
-`https://slackdata-admin-prod-<account>.auth.eu-central-1.amazoncognito.com/oauth2/token`).
+You were given a `client_id` and a `client_secret`. Your key is the two joined by a colon, and you
+send it as-is on every request below — there is no token to fetch first:
 
 ```bash
-curl -s -X POST "$TOKEN_URL" \
-  -H 'Content-Type: application/x-www-form-urlencoded' \
-  -u "$CLIENT_ID:$CLIENT_SECRET" \
-  -d 'grant_type=client_credentials&scope=slackdata/gear.write'
+KEY="$CLIENT_ID:$CLIENT_SECRET"
 ```
 
-```json
-{ "access_token": "eyJraWQ...", "expires_in": 3600, "token_type": "Bearer" }
+```
+Authorization: Bearer <client_id>:<client_secret>
 ```
 
-Send it as `Authorization: Bearer <access_token>` on every request below. Cache it until it expires
-— minting a fresh token per request works but is pointless.
+Keep it out of anything public — a repository, a front-end bundle, a support ticket. If it leaks,
+tell us: we revoke it, which takes effect on the next request, and issue a new one.
 
-The scope is exactly `slackdata/gear.write`. Ask for a scope you were not granted and Cognito
-refuses the token, not the request.
+**Credentials issued before October 2026** were OAuth client credentials exchanged for a token at a
+Cognito URL. That URL is gone. Your `client_id` and `client_secret` are unchanged; send them as the
+key above instead of requesting a token.
 
 ### Confirm it reached the right brand
 
@@ -57,7 +54,7 @@ Do this once, before you send any data. It costs one request; discovering the cr
 to the wrong brand a week later costs an apology to two companies.
 
 ```bash
-curl -s https://slackdata.org/api/manufacturer/me -H "Authorization: Bearer $TOKEN"
+curl -s https://slackdata.org/api/manufacturer/me -H "Authorization: Bearer $KEY"
 ```
 
 ```json
@@ -79,7 +76,7 @@ If `brand_name` is not you, **stop and tell us** — do not send data.
 Every catalogue row belonging to you.
 
 ```bash
-curl -s https://slackdata.org/api/manufacturer/gear -H "Authorization: Bearer $TOKEN"
+curl -s https://slackdata.org/api/manufacturer/gear -H "Authorization: Bearer $KEY"
 ```
 
 ```json
@@ -101,7 +98,7 @@ correctable like any other field.
 
 ```bash
 curl -s 'https://slackdata.org/api/manufacturer/gear?gear_type=webbings&include=spec' \
-  -H "Authorization: Bearer $TOKEN"
+  -H "Authorization: Bearer $KEY"
 ```
 
 ```json
@@ -309,7 +306,7 @@ The receipt from a `POST` is one-shot. This is where you look afterwards.
 
 ```bash
 curl -s 'https://slackdata.org/api/manufacturer/submissions?limit=50' \
-  -H "Authorization: Bearer $TOKEN"
+  -H "Authorization: Bearer $KEY"
 ```
 
 Your own submissions, newest first. `?batch_id=01JXQ8...` narrows it to one call; `?limit=` is
@@ -342,7 +339,7 @@ rejection; we send no email.
 | Code | Meaning | What to do |
 |---|---|---|
 | **201** | The batch was recorded. | Store the resolved `gear_id`s. Do not retry. |
-| **401** | No token, an expired one, or one we can't verify. | Get a new access token. |
+| **401** | No key, or one that does not match. | Check the key is exactly `client_id:client_secret`. |
 | **403** | Your credential is not registered, has been deactivated, or the item names **another brand's** gear. | Not retryable. Check the `gear_id`s came from your own `GET /manufacturer/gear`; otherwise contact us. |
 | **409** | We cannot tell which product you mean: either two of your own answer to that name, or you sent a `gear_id` and a `name` that disagree and the name matches nothing of yours. | For the first, send the `gear_id`. For the second, the message says what we hold under that id — send that as `name`, and `rename_to` if you have renamed it. |
 | **413** | Body over 256 KB. | Split the batch. |
@@ -459,7 +456,8 @@ out-of-band — to the contact address or channel already published on your own 
 anything. That is not a comment on you; it is the only way we can tell a brand from someone claiming
 to be one, and it is why nobody can request a credential through this API.
 
-You will receive a `client_id`, a `client_secret` (once — we do not keep a copy) and the token URL.
+You will receive a `client_id` and a `client_secret`. Your brand's representatives will also be able to
+see the key in their SlackData account once manufacturer accounts exist.
 
 To revoke: tell us, and it takes effect on the next request.
 

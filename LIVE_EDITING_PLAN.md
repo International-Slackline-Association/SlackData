@@ -1,7 +1,8 @@
 # Live editing with ISA accounts — the design
 
-**Status: design, decided 2026-10-04, revised 2026-10-05 to open editing. Phase 0 done
-2026-10-13 — [LIVE_EDITING_PHASE_0.md](LIVE_EDITING_PHASE_0.md).**
+**Status: design, decided 2026-10-04, revised 2026-10-05 to open editing. Phases 0 and 1 built
+2026-10-13 — [LIVE_EDITING_PHASE_0.md](LIVE_EDITING_PHASE_0.md),
+[LIVE_EDITING_PHASE_1.md](LIVE_EDITING_PHASE_1.md).**
 
 **The goal:** Wikipedia-style, mostly hands-off maintenance. **Anyone who signs in with an ISA
 account changes the catalogue live** — there is no suggestion or approval system. A per-account
