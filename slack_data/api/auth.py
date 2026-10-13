@@ -10,14 +10,15 @@ Three modes, chosen by configuration:
 | condition | behaviour |
 |---|---|
 | `COGNITO_USER_POOL_ID` set | verify the Cognito ID token: RS256 against the pool's JWKS, plus `iss`, `aud`, `exp`, `token_use` — **and membership of the admin group**. |
-| unset, but `READ_ONLY` (hosted) | **reject everything.** A hosted deploy that lost its pool configuration must not fall back to anything. |
+| unset, but hosted (`deployment.is_hosted()`) | **reject everything.** A hosted deploy that lost its pool configuration must not fall back to anything. |
 | unset, local dev | accept a static bearer token (`ADMIN_DEV_TOKEN`), so `fastapi dev` and Cypress work with no AWS account. |
 
 That middle row is the one that matters. The dev path is not "off by default in
 production" — it is unreachable in production, because reaching it requires the
-absence of a pool *and* the absence of `CATALOG_DB_PATH`, and the hosted image
-sets the latter unconditionally in Dockerfile.lambda. `tests/test_auth.py`
-asserts it.
+absence of a pool *and* that `deployment.is_hosted()` answers no, which takes
+the Lambda runtime's own `AWS_LAMBDA_FUNCTION_NAME`, the image's
+`SLACKDATA_DEPLOYMENT=hosted` and the baked catalogue all being absent at once.
+`tests/test_auth.py` asserts it.
 
 The JWKS cache is a module-level dict with a TTL, the same pattern (and for the
 same reason) as `slack_data/utilities/fx.py`: Lambda's filesystem is read-only,
@@ -238,9 +239,9 @@ def require_admin(
 
 def _hosted() -> bool:
     """Read at call time, not import time, so tests can set it per-case."""
-    from slack_data import database
+    from slack_data.deployment import is_hosted
 
-    return database.READ_ONLY
+    return is_hosted()
 
 
 # --- Manufacturers (Phase 4) ------------------------------------------------

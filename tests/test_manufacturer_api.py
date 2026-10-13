@@ -454,6 +454,21 @@ def test_hosted_without_a_pool_rejects_even_the_dev_token(
     assert call(client, method, path, dev_headers()).status_code == 503
 
 
+@pytest.mark.parametrize("method,path", MANUFACTURER_ROUTES)
+def test_on_lambda_without_a_baked_catalogue_the_dev_token_is_still_refused(
+    client, monkeypatch, gear, method, path
+):
+    """The Lambda runtime's own variable is enough on its own — no
+    `READ_ONLY`, no `SLACKDATA_DEPLOYMENT`. See slack_data/deployment.py."""
+    from slack_data import database
+
+    monkeypatch.setattr(database, "READ_ONLY", False)
+    monkeypatch.setattr(auth, "COGNITO_USER_POOL_ID", None)
+    monkeypatch.setenv("AWS_LAMBDA_FUNCTION_NAME", "slackdata-prod-api")
+
+    assert call(client, method, path, dev_headers()).status_code == 503
+
+
 # --- Real Cognito client-credentials tokens ---------------------------------
 
 

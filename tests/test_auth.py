@@ -112,15 +112,60 @@ def test_hosted_without_a_pool_rejects_even_the_dev_token(client, monkeypatch, m
     assert call(client, method, path).status_code == 503
 
 
-def test_hosted_lockout_is_unreachable_in_a_real_deploy():
-    """Belt and braces: the hosted image always sets CATALOG_DB_PATH.
+HOSTED_SIGNALS = [
+    pytest.param({"AWS_LAMBDA_FUNCTION_NAME": "slackdata-prod-api"}, False, id="lambda-runtime"),
+    pytest.param({"SLACKDATA_DEPLOYMENT": "hosted"}, False, id="explicit-variable"),
+    pytest.param({"SLACKDATA_DEPLOYMENT": " Hosted "}, False, id="explicit-variable-untidy"),
+    pytest.param({}, True, id="baked-catalogue"),
+]
 
-    Reaching the dev-token branch requires no pool *and* no CATALOG_DB_PATH.
-    Dockerfile.lambda sets the latter unconditionally, so the branch cannot
-    execute hosted. If that line ever leaves the Dockerfile, this fails.
+
+@pytest.mark.parametrize("env,read_only", HOSTED_SIGNALS)
+@pytest.mark.parametrize("method,path", ADMIN_ROUTES)
+def test_any_one_hosted_signal_alone_locks_out_the_dev_token(
+    client, monkeypatch, env, read_only, method, path
+):
+    """Each signal on its own is enough — the case live editing creates.
+
+    Phase 2 stops baking the catalogue, so `READ_ONLY` goes false hosted, and
+    phase 1 deletes the pool. If "hosted" still meant "a catalogue file was
+    baked in", that deploy would accept the dev token from this public repo.
     """
-    dockerfile = open("Dockerfile.lambda").read()
-    assert "CATALOG_DB_PATH" in dockerfile
+    from slack_data import database
+
+    monkeypatch.setattr(database, "READ_ONLY", read_only)
+    monkeypatch.setattr(auth, "COGNITO_USER_POOL_ID", None)
+    for name, value in env.items():
+        monkeypatch.setenv(name, value)
+
+    client.headers.update(DEV_HEADERS)
+    assert call(client, method, path).status_code == 503
+
+
+def test_no_hosted_signal_means_local(monkeypatch):
+    """The other side: with none of the three, the dev token is the local path."""
+    from slack_data import database
+    from slack_data.deployment import is_hosted
+
+    monkeypatch.setattr(database, "READ_ONLY", False)
+    assert not is_hosted()
+    monkeypatch.setenv("SLACKDATA_DEPLOYMENT", "local")
+    assert not is_hosted(), "only the word 'hosted' means hosted"
+
+
+def test_hosted_lockout_is_unreachable_in_a_real_deploy():
+    """Belt and braces: the deploy says it is hosted in two places of its own.
+
+    The Lambda runtime sets AWS_LAMBDA_FUNCTION_NAME regardless of us. On top
+    of it, the image and the template both set SLACKDATA_DEPLOYMENT=hosted, so
+    an edit to either one alone leaves the other. If both lines go, this fails.
+    """
+    with open("Dockerfile.lambda") as file:
+        dockerfile = file.read()
+    with open("infra/serverless.yml") as file:
+        template = file.read()
+    assert "SLACKDATA_DEPLOYMENT=hosted" in dockerfile
+    assert "SLACKDATA_DEPLOYMENT: hosted" in template
 
 
 # --- Real Cognito tokens ----------------------------------------------------

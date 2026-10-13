@@ -22,13 +22,14 @@ socket and no process boundary:
   never executed. Here it is: the server picks its own stores from the
   environment, exactly as the Lambda does.
 
-Two servers are started, because the two configurations that exist in
+Several servers are started, because the configurations that exist in
 production are genuinely different programs:
 
 | fixture | configuration | what it stands for |
 |---|---|---|
 | `live` | writable SQLite, no Cognito pool | local dev, and the shape the write paths are developed against |
 | `hosted` | `CATALOG_DB_PATH` set → `READ_ONLY` | the Lambda: catalogue writes unmounted, admin/manufacturer auth locked out |
+| `hosted_unbaked` | `SLACKDATA_DEPLOYMENT=hosted`, no `CATALOG_DB_PATH`, no pool | live editing's shape: dev tokens still locked out |
 
 The catalogue is a **hand-built minimum**, not the real seed. One row in each
 gear table is enough to make `seed_catalog` skip every loader, which turns a
@@ -209,6 +210,10 @@ def _start_server(work_dir: Path, extra_env: dict) -> tuple[subprocess.Popen, st
         # No pool: the dev-token branch. A hosted deploy sets these, and
         # `hosted_api` below asserts what happens when it does not.
         "COGNITO_USER_POOL_ID": "",
+        # Whatever shell the suite runs in, each server's hosted-ness is only
+        # what its fixture says (slack_data/deployment.py reads both).
+        "AWS_LAMBDA_FUNCTION_NAME": "",
+        "SLACKDATA_DEPLOYMENT": "",
         # Off, so nothing here calls Cloudflare. (Mail needs no such switch —
         # the app sends none; see test_submissions.test_the_app_sends_no_email.)
         "TURNSTILE_SECRET": "",
@@ -289,6 +294,27 @@ def hosted(tmp_path_factory):
     process, base_url, log_path = _start_server(
         work_dir, {"CATALOG_DB_PATH": str(catalogue)}
     )
+    try:
+        with httpx.Client(base_url=base_url, timeout=10.0) as client:
+            yield client, ids, log_path
+    finally:
+        _stop(process)
+
+
+@pytest.fixture(scope="module")
+def hosted_unbaked(tmp_path_factory):
+    """Hosted with **no baked catalogue and no pool** — the shape live editing
+    reaches: phase 1 deletes the pool, phase 2 stops baking `CATALOG_DB_PATH`.
+
+    Only `SLACKDATA_DEPLOYMENT=hosted` says it is the live site. The catalogue
+    is an ordinary writable file here, which is the point: `READ_ONLY` is
+    false, and the dev tokens must still be refused.
+    """
+    work_dir = tmp_path_factory.mktemp("hosted-unbaked-api")
+    ids = _build_catalogue(work_dir / "database.db")
+    _register_client(work_dir / "brand_clients.db", ids["alpha_brand"], "Alpha Slacklines")
+
+    process, base_url, log_path = _start_server(work_dir, {"SLACKDATA_DEPLOYMENT": "hosted"})
     try:
         with httpx.Client(base_url=base_url, timeout=10.0) as client:
             yield client, ids, log_path
@@ -570,6 +596,14 @@ def test_the_hosted_server_locks_out_the_dev_tokens(hosted):
         headers=BRAND,
         json={"items": [{"gear_type": "webbings", "name": "X", "changes": {"weight": "70"}}]},
     ).status_code == 503
+
+
+def test_hosted_without_a_baked_catalogue_still_locks_out_the_dev_tokens(hosted_unbaked):
+    """Live editing's phase-2 shape, in a real process: no `CATALOG_DB_PATH`,
+    no pool, and still 503 on both dev-token paths."""
+    client, _, _ = hosted_unbaked
+    assert client.get("/submissions", headers=ADMIN).status_code == 503
+    assert client.get("/manufacturer/me", headers=BRAND).status_code == 503
 
 
 def test_the_hosted_public_submission_box_is_reachable(hosted):

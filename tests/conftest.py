@@ -41,6 +41,19 @@ def _build_test_app(read_only: bool = False) -> FastAPI:
     return app
 
 
+@pytest.fixture(autouse=True)
+def _not_on_lambda(monkeypatch):
+    """Every test starts local, whatever shell it runs in.
+
+    `deployment.is_hosted()` reads two environment variables besides
+    `READ_ONLY`; a stray one in a developer's or CI's shell would silently flip
+    every "local dev" test into the hosted lockout. Tests that want hosted set
+    it themselves.
+    """
+    monkeypatch.delenv("AWS_LAMBDA_FUNCTION_NAME", raising=False)
+    monkeypatch.delenv("SLACKDATA_DEPLOYMENT", raising=False)
+
+
 @pytest.fixture
 def engine():
     engine = create_engine(

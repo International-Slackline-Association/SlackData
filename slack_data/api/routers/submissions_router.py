@@ -86,9 +86,7 @@ def warn_if_captcha_is_unconfigured() -> None:
     only one of the three emitted by the running thing itself, so it is also
     the only one that still fires when somebody deploys by hand.
     """
-    from slack_data import database
-
-    if database.READ_ONLY and not turnstile.is_enabled():
+    if _hosted() and not turnstile.is_enabled():
         logger.warning(
             "TURNSTILE_SECRET is not set: POST /submissions/ will answer 503 for"
             " every request. If the frontend was built with"
@@ -113,9 +111,9 @@ def enforce_body_size(request: Request) -> None:
 
 
 def _hosted() -> bool:
-    from slack_data import database
+    from slack_data.deployment import is_hosted
 
-    return database.READ_ONLY
+    return is_hosted()
 
 
 def _check_captcha(token: str | None) -> None:

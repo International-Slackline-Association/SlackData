@@ -87,6 +87,10 @@ functions:
     memorySize: 512
     timeout: 29                                    # API Gateway hard max
     environment:
+      # Tells the fail-closed guards (dev tokens, captcha) they are on the live
+      # site. Dockerfile.lambda sets it too, and the Lambda runtime's own
+      # AWS_LAMBDA_FUNCTION_NAME is a third signal: slack_data/deployment.py.
+      SLACKDATA_DEPLOYMENT: hosted
       # Phase 2 (submissions). The catalogue stays a read-only file baked into
       # the image; these point at the *separate* stores a submission uses.
       SUBMISSIONS_TABLE: !Ref SubmissionsTable

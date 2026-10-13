@@ -39,10 +39,13 @@ RUN cd ${LAMBDA_TASK_ROOT} \
     && PYTHONPATH=${LAMBDA_TASK_ROOT} python scripts/build_catalog_db.py ${LAMBDA_TASK_ROOT}/catalog.db \
     && rm -f ${LAMBDA_TASK_ROOT}/*.json
 
-# CATALOG_DB_PATH → read-only mode (no seeding). API_ROOT_PATH → the API is served
+# CATALOG_DB_PATH → read-only mode (no seeding). SLACKDATA_DEPLOYMENT → the
+# fail-closed guards (dev tokens, captcha) know they are on the live site, without
+# relying on the catalogue being a baked file (slack_data/deployment.py). API_ROOT_PATH → the API is served
 # under /api behind CloudFront (only affects /docs + openapi.json URLs; CloudFront
 # strips the /api prefix before the request reaches Lambda — see infra/).
 ENV CATALOG_DB_PATH=${LAMBDA_TASK_ROOT}/catalog.db \
+    SLACKDATA_DEPLOYMENT=hosted \
     API_ROOT_PATH=/api
 
 CMD ["slack_data.lambda_handler.handler"]
