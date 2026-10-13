@@ -184,6 +184,8 @@ Root *.json seed files
 | `slack_data/deployment.py` | `is_hosted()` — the one answer every fail-closed guard asks (dev tokens, captcha) |
 | `slack_data/models/people.py`, `slack_data/people/` | The people store (live editing phase 1): one record per ISA account, roles, the sign-in notice. Protocol + SQLite + in-memory + DynamoDB, chosen by `PEOPLE_TABLE` / `PEOPLE_DB_PATH` |
 | `slack_data/models/changes.py`, `slack_data/changelog/` | The change log: append-only (no update/delete in the Protocol; conditional puts), public via `GET /changes`. `writer.py` writes a change and its record in one DynamoDB transaction. `CHANGELOG_TABLE` / `CHANGELOG_DB_PATH` |
+| `slack_data/catalogue/` | The catalogue store (live editing phase 2): one document per seed entry, the importer + shadow check (`python -m slack_data.catalogue.importer [--apply|--check]`), the in-memory build, and the live catalogue read when `CATALOG_SOURCE=store`. See LIVE_EDITING_PHASE_2.md |
+| `slack_data/api/routers/catalogue_router.py`, `export/` | Public `GET /catalogue/{collection}` (each seed file, rebuilt from the store byte for byte) and the daily export script + workflow for the data repo |
 | `slack_data/api/routers/people_router.py` | `/me`, `/me/notice`, `/me/name` (the public name is typed in by the person, since the ISA token gives SlackData none, and can be changed once for life), `/admin/admins`, `/admin/roles`, public `/changes` — a writable router, no catalogue session |
 | `slack_data/models/brand_clients.py` | `BrandClient` / `BrandPermission` / `ManufacturerPrincipal` — the account linkage `Brand` never had |
 | `slack_data/manufacturers/` | The manufacturer API's stores: `clients.py` (Protocol + SQLite + in-memory), `dynamo.py`, `store.py`, `matching.py` (gear identity), `register.py` (onboarding CLI), `onboard.py` (the CLI's other half — dossier, key minting, ledger, end-to-end proof) |
@@ -198,6 +200,12 @@ There are `__init__.py` files in `models/`, `api/`, and `utilities/`. No `tests/
 1. `create_db_and_tables()` creates the SQLite engine and all tables. It raises if called twice (`DATABASE_ENGINE` is a module global).
 2. For each gear type: `select(<Model>).first()` — **if the table is empty**, run the matching `load_*(session)`.
 3. **Seeding is one-shot.** Once any row exists for a gear type, its JSON is never re-read. To re-seed after editing JSON: delete `slack_data/database.db` and restart the server.
+
+**Store mode (live editing phase 2).** With `CATALOG_SOURCE=store` the catalogue is not seeded from
+the files at all: it is built into memory from the catalogue store and rebuilt whenever the store's
+version moves, so an edit is served on the next request with no restart. Without it, everything
+below applies unchanged. While the store runs in shadow, a seed edit also needs
+`python -m slack_data.catalogue.importer --apply` against the store, and `--check` must be clean.
 
 **Editing a seed `*.json` is not finished until the database is re-seeded and the server restarted.**
 Because seeding is one-shot, a running dev server keeps serving the *old* rows — so the change looks

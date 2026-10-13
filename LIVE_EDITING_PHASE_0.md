@@ -8,7 +8,7 @@ this file is the checklist.
 catalogue, with its test.
 
 **Status (2026-10-13): done**, except the export repo's final home (§ 1, row 5), which phase 2
-needs and phase 0 does not.
+needs and phase 0 does not. Phase 1 is in [LIVE_EDITING_PHASE_1.md](LIVE_EDITING_PHASE_1.md).
 
 ---
 
