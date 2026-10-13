@@ -37,6 +37,7 @@ gear table is enough to make `seed_catalog` skip every loader, which turns a
 asserted here is about the catalogue's contents.
 """
 
+import json
 import os
 import socket
 import subprocess
@@ -324,6 +325,34 @@ def hosted_unbaked(tmp_path_factory):
     try:
         with httpx.Client(base_url=base_url, timeout=10.0) as client:
             yield client, ids, log_path
+    finally:
+        _stop(process)
+
+
+@pytest.fixture(scope="module")
+def store_mode(tmp_path_factory):
+    """Live editing phase 2's shape: `CATALOG_SOURCE=store`, the catalogue read
+    from a store filled with the **real** seeds, built into memory at start.
+
+    Local (not hosted), so the dev token still works — store mode alone must
+    not count as hosted (deployment.is_hosted reads READ_ONLY, which stays
+    "a baked file").
+    """
+    from slack_data.catalogue.importer import documents_from_files
+    from slack_data.catalogue.repository import SqliteCatalogueRepository
+
+    work_dir = tmp_path_factory.mktemp("store-api")
+    store = SqliteCatalogueRepository(str(work_dir / "catalog_store.db"))
+    store.put_many(documents_from_files())
+    store.bump_version()
+
+    process, base_url, log_path = _start_server(
+        work_dir,
+        {"CATALOG_SOURCE": "store", "CATALOG_STORE_PATH": str(work_dir / "catalog_store.db")},
+    )
+    try:
+        with httpx.Client(base_url=base_url, timeout=30.0) as client:
+            yield client, store, log_path
     finally:
         _stop(process)
 
@@ -697,3 +726,75 @@ def test_no_traceback_reached_the_log(hosted_with_pool):
     _, _, log_path = hosted_with_pool
     assert "Traceback" not in log_path.read_text()
 
+
+# --- Store mode: the catalogue read from the store (phase 2) -----------------
+
+
+def _seed(name: str):
+    return json.loads((REPO_ROOT / name).read_text(encoding="utf-8"))
+
+
+def test_store_mode_serves_the_real_catalogue(store_mode):
+    client, _, _ = store_mode
+    webbing = _seed("webbings.json")[0]
+    response = client.get(f"/webbing/{webbing['id']}")
+    assert response.status_code == 200, response.text
+    assert response.json()["name"] == webbing["name"]
+    # Derived at build time, not stored: the brand's enrichment is there.
+    brands = client.get("/brand/?limit=100").json()
+    assert any(brand.get("country") for brand in brands)
+
+
+def test_store_mode_mounts_no_catalogue_writes(store_mode):
+    """An edit to the in-memory copy would be thrown away at the next rebuild,
+    so the raw CRUD writes are not there to make one."""
+    client, _, _ = store_mode
+    assert client.post("/webbing/", json={"name": "x"}).status_code == 405
+    assert client.patch("/webbing/1", json={"name": "x"}).status_code == 405
+    assert client.delete("/webbing/1").status_code == 405
+
+
+def test_store_mode_alone_is_not_hosted(store_mode):
+    client, _, _ = store_mode
+    assert client.get("/me", headers=ADMIN).status_code == 200
+
+
+def test_the_export_script_reproduces_the_store(store_mode, tmp_path):
+    """export/export_catalogue.py against a real server: every file it writes
+    is the store's content in the seed's own format, and the change log is
+    there."""
+    import importlib.util
+
+    from slack_data.catalogue.documents import COLLECTIONS, assemble, render
+
+    client, store, _ = store_mode
+    spec = importlib.util.spec_from_file_location("export_catalogue", REPO_ROOT / "export" / "export_catalogue.py")
+    export = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(export)
+
+    assert export.main(["--api", str(client.base_url), "--out", str(tmp_path)]) == 0
+    documents = store.load()
+    for name, collection in COLLECTIONS.items():
+        assert (tmp_path / collection.filename).read_text(encoding="utf-8") == render(
+            name, assemble(name, documents)
+        ), name
+    assert json.loads((tmp_path / "changes.json").read_text()) == []
+    assert json.loads((tmp_path / "catalogue.json").read_text())["version"] == store.version()
+
+
+def test_an_edit_in_the_store_is_served_on_the_next_request(store_mode):
+    """D30, end to end: a document changes, the version moves, and the very
+    next request sees it — no restart, no redeploy."""
+    client, store, log_path = store_mode
+    grip = next(d for d in store.load() if d.collection == "grips")
+    edited = grip.model_copy(deep=True)
+    edited.data["name"] = "Edited in the store"
+    store.put_many([edited])
+
+    assert client.get(f"/grip/{grip.data['id']}").json()["name"] == grip.data["name"], (
+        "unchanged until the version moves"
+    )
+    version = store.bump_version()
+    assert client.get(f"/grip/{grip.data['id']}").json()["name"] == "Edited in the store"
+    assert client.get("/catalogue").json()["version"] == version
+    assert "Traceback" not in log_path.read_text()

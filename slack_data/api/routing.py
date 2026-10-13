@@ -24,6 +24,7 @@ import os
 from fastapi import APIRouter, FastAPI
 
 from slack_data.api.routers.brand_router import brand_router
+from slack_data.api.routers.catalogue_router import catalogue_router
 from slack_data.api.routers.connector_router import connector_router
 from slack_data.api.routers.fx_router import fx_router
 from slack_data.api.routers.grip_router import grip_router
@@ -51,6 +52,7 @@ SAFE_METHODS = frozenset({"GET", "HEAD"})
 # move it.
 CATALOG_ROUTERS: tuple[APIRouter, ...] = (
     brand_router,
+    catalogue_router,
     connector_router,
     fx_router,
     grip_router,
