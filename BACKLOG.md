@@ -556,9 +556,10 @@ Carried over from LAUNCH_RUNBOOK.md and PHASE4_SHIP_PLAN.md when both were remov
     1500 kg") is not an MBS and goes in `notes` only.
   - **Which rows:** connectors the brand designed or makes itself, plus generic stock hardware
     **only where the shop publishes an MBS**. **One row per size** ("Twisted Shackle 12mm").
-  - **Named industrial makers become brands, with the shops as `gear_sellers`:** Peguet (Maillon
-    Rapide, a new `manufacturers.json` entry) and Van Beest / Green Pin (already an entry). This
-    includes BC's two Van Beest shackles. Kong, Petzl, Singing Rock, Climbing Technology, Edelrid,
+  - **Named industrial makers become brands, with the shops as `gear_sellers`:** Van Beest / Green
+    Pin (already an entry). This includes BC's two Van Beest shackles. Peguet (Maillon Rapide) was
+    one too until 2026-10-12, when the operator reversed it: its quicklinks are now generic stock
+    hardware, one row per shop, and its `manufacturers.json` entry is gone. Kong, Petzl, Singing Rock, Climbing Technology, Edelrid,
     Petersen and Wichard stay out.
   - **Out:** rigging plates, rings, swivels, sewn textile links and rope-pulley carabiners.
   - **Generic stock hardware is grouped, not merged** (operator, 2026-10-11). One row per shop
@@ -566,8 +567,8 @@ Carried over from LAUNCH_RUNBOOK.md and PHASE4_SHIP_PLAN.md when both were remov
     + material) share `product_group`; a captive pin is the `captive_pin` flag, not a split. The listing shows a group as one card (spec
     ranges, "from" price, the shops as the brand line, linking to the first member). A member's
     page shows the part: only the specs all shops agree on, then a vendor table with every shop,
-    historic ones marked. Only parts at least two shops sell are grouped. Peguet and Van Beest stay
-    their own products. Climbing makers' carabiners (CAMP, Climbing Technology) are out.
+    historic ones marked. Only parts at least two shops sell are grouped. Van Beest stays its own
+    products. Climbing makers' carabiners (CAMP, Climbing Technology) are out.
   - **The Landcruising AirBow** is included with `active: false`. It was first taken for a
     prototype that was never sold; the production shackle turned up (serial-numbered, on
     Landcruising's archived shop), so the row holds its engraved figures: 70 kN along, 38 kN
@@ -576,7 +577,7 @@ Carried over from LAUNCH_RUNBOOK.md and PHASE4_SHIP_PLAN.md when both were remov
     "ISA:52"]`), plus `standards_source`. ISA certification stays derived from
     `isa_certified.json`, never from this list.
   - **Scope:** all four forms. **Brand rule:** connectors a slackline brand sells under its own
-    name (the retailer rule), plus the Peguet / Van Beest exception below. No climbing makers (DMM,
+    name (the retailer rule), plus the Van Beest exception below. No climbing makers (DMM,
     Petzl), no "Unbranded" placeholder.
   - **ISA warning #65** (KingPin shackle pin) lands on **both** the connector row (exact) and
     weblock 41 (which ships with the same pin). A match block holds one `gearType`, so this needs

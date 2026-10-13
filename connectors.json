@@ -95,7 +95,7 @@
     {
         "id": 6,
         "manufacturer": "Balance Community: Slackline Outfitters",
-        "name": "BC Aluminum Carabiner",
+        "name": "Oval Carabiner, Aluminium",
         "connector_style": "Carabiner",
         "material": "Aluminum",
         "alloy": "7075 (anodized)",
@@ -108,7 +108,8 @@
         "currency": "USD",
         "product_url": "https://www.balancecommunity.com/products/bc-aluminum-carabiner",
         "active": true,
-        "notes": "Opening is BC's 'opening size' (19 mm); their spec drawing also labels a 12 mm 'gate opening'. Closure not stated. Made in Taiwan."
+        "notes": "Opening is BC's 'opening size' (19 mm); their spec drawing also labels a 12 mm 'gate opening'. Closure not stated. Made in Taiwan.",
+        "product_group": "Oval Carabiner, Aluminium"
     },
     {
         "id": 7,
@@ -142,7 +143,8 @@
         "currency": "USD",
         "product_url": "https://www.balancecommunity.com/products/soft-shackle-5mm",
         "active": true,
-        "notes": "Listed as 'Soft Shackle - 5mm'. WLL 9 kN. Button knot. Sold in 10 cm and 20 cm lengths, with or without a sleeve (US$16–24)."
+        "notes": "Listed as 'Soft Shackle - 5mm'. WLL 9 kN. Button knot. Sold in 10 cm and 20 cm lengths, with or without a sleeve (US$16–24).",
+        "product_group": "Soft Shackle 5mm"
     },
     {
         "id": 9,
@@ -158,7 +160,8 @@
         "currency": "USD",
         "product_url": "https://www.balancecommunity.com/products/soft-shackle-6mm",
         "active": true,
-        "notes": "Listed as 'Soft Shackle - 6mm'. WLL 12 kN. Button knot. Sold in 10 cm and 20 cm lengths, with or without a sleeve (US$19–28)."
+        "notes": "Listed as 'Soft Shackle - 6mm'. WLL 12 kN. Button knot. Sold in 10 cm and 20 cm lengths, with or without a sleeve (US$19–28).",
+        "product_group": "Soft Shackle 6mm"
     },
     {
         "id": 10,
@@ -166,6 +169,7 @@
         "name": "Slackline Carabiner",
         "connector_style": "Carabiner",
         "material": "Steel",
+        "closure": "Twist-lock",
         "alloy": "carbon steel (40 ACR)",
         "mbs_straight_pull": 25,
         "mbs_crossload": 7,
@@ -175,7 +179,8 @@
         "currency": "EUR",
         "product_url": "https://slacktivity.com/shop/slackline-carabiner/",
         "active": true,
-        "notes": "WLL 7 kN. Opening 'ca. 21 mm'. Closure not stated. Slacktivity reports it the most triload-resistant carabiner in their tests."
+        "notes": "WLL 7 kN. Opening 'ca. 21 mm'. Closure not stated on the page; the photo shows an oval twist-lock, the same part as Viper's (operator, 2026-10-12). Slacktivity reports it the most triload-resistant carabiner in their tests.",
+        "product_group": "Oval Carabiner, Twist-lock"
     },
     {
         "id": 11,
@@ -207,7 +212,8 @@
         "active": true,
         "manufacturer_not_for_highline": true,
         "manufacturer_not_for_highline_source": "https://raed-sports.com/products/dyneema-soft-shackle-42-kn",
-        "notes": "Listed as 'Dyneema Soft Shackle 42 kN'. Spliced from coated 6 mm Dyneema, made in Germany."
+        "notes": "Listed as 'Dyneema Soft Shackle 42 kN'. Spliced from coated 6 mm Dyneema, made in Germany.",
+        "product_group": "Soft Shackle 6mm"
     },
     {
         "id": 13,
@@ -223,7 +229,8 @@
         "currency": "ZAR",
         "product_url": "https://www.viperslacklines.co.za/products/5mm-soft-shackle",
         "active": true,
-        "notes": "Listed as 'HMPE Soft Shackle 5mm'. Individually proof-tested to 1500 kg (a proof load, not a breaking strength). Button knot. 29 cm long open."
+        "notes": "Listed as 'HMPE Soft Shackle 5mm'. Individually proof-tested to 1500 kg (a proof load, not a breaking strength). Button knot. 29 cm long open.",
+        "product_group": "Soft Shackle 5mm"
     },
     {
         "id": 14,
@@ -240,7 +247,8 @@
         "currency": "BRL",
         "product_url": "https://www.beraadventure.com.br/product/soft-shackle-5mm/",
         "active": true,
-        "notes": "WLL 5 kN. Opening is Bera's 'espaço interno'. Knot diameter 21 mm. Portuguese page only."
+        "notes": "WLL 5 kN. Opening is Bera's 'espaço interno'. Knot diameter 21 mm. Portuguese page only.",
+        "product_group": "Soft Shackle 5mm"
     },
     {
         "id": 15,
@@ -262,17 +270,19 @@
     {
         "id": 16,
         "manufacturer": "Spider slacklines",
-        "name": "Soft Shackle",
+        "name": "Soft Shackle 6mm",
         "connector_style": "Soft shackle",
         "material": "Dyneema/HMPE",
+        "rope_diameter": 6,
         "price": 24.55,
         "currency": "EUR",
         "gear_sellers": [
             "Slack Inov"
         ],
         "product_url": "https://web.archive.org/web/20230302210025/https://spider-slacklines.com/shop/en/shackle/329-soft-shackle-dyneema.html",
-        "notes": "Listed as 'Soft Shackle Dyneema'. From Spider's archived shop (last snapshot 2023); specs not loaded — the snapshot was unreadable. Live shop blocks automated fetches. Not on Spider's shop when the operator checked on 2026-10-11.",
-        "active": false
+        "notes": "Listed as 'Soft Shackle Dyneema'. From Spider's archived shop (last snapshot 2023); specs not loaded — the snapshot was unreadable. Live shop blocks automated fetches. Not on Spider's shop when the operator checked on 2026-10-11. 6 mm rope (operator, 2026-10-12).",
+        "active": false,
+        "product_group": "Soft Shackle 6mm"
     },
     {
         "id": 17,
@@ -564,7 +574,8 @@
         "product_url": "https://web.archive.org/web/20240621101920/https://www.balancecommunity.com/products/10mm-oval-quicklink",
         "active": false,
         "description": "Steel Quicklinks are an excellent alternative to carabiners. They offer the same strength benefits of a steel carabiner for a fraction of the cost. Excellent for various connections within your pulley system or highline anchors.",
-        "notes": "Listed as '10mm Oval Quicklink'. Discontinued; specs from the archived page (2024-06-21): a Maillon Rapide, zinc-plated galvanized steel. MBS 53.9 kN, WLL 10.8 kN; stock 10 mm, opening 12 mm, inside 69 x 20.5 mm, outside 89 x 40.5 mm, 137 g. The page's description calls it a 'Delta Maillon Rapide', but the title, URL and dimensions are the oval. Last listed at US$12."
+        "notes": "Listed as '10mm Oval Quicklink'. Discontinued; specs from the archived page (2024-06-21): a Maillon Rapide, zinc-plated galvanized steel. MBS 53.9 kN, WLL 10.8 kN; stock 10 mm, opening 12 mm, inside 69 x 20.5 mm, outside 89 x 40.5 mm, 137 g. The page's description calls it a 'Delta Maillon Rapide', but the title, URL and dimensions are the oval. Last listed at US$12.",
+        "product_group": "Oval Quicklink 10mm"
     },
     {
         "id": 33,
@@ -605,7 +616,7 @@
     },
     {
         "id": 35,
-        "manufacturer": "Peguet",
+        "manufacturer": "Slacktivity",
         "name": "Oval Quicklink 6mm, Stainless",
         "connector_style": "Quicklink",
         "material": "Stainless Steel",
@@ -614,70 +625,66 @@
         "mbs_straight_pull": 26,
         "opening": 8,
         "weight": 37,
-        "gear_sellers": [
-            "Slacktivity"
-        ],
-        "active": true,
+        "price": 6.49,
+        "currency": "EUR",
         "product_url": "https://slacktivity.com/shop/6mm-quick-link-inox/",
-        "notes": "Listed as Slacktivity: '6mm Quick Link – Maillon Rapide – INOX'. Specs as Slacktivity lists them (WLL 6.5 kN, made in France). Slacktivity €6.49. Carried by Slacktivity."
+        "active": true,
+        "notes": "Listed as '6mm Quick Link – Maillon Rapide – INOX'. WLL 6.5 kN, made in France."
     },
     {
         "id": 36,
-        "manufacturer": "Peguet",
+        "manufacturer": "Slacktivity",
         "name": "Oval Quicklink 8mm, Stainless",
         "connector_style": "Quicklink",
         "material": "Stainless Steel",
         "closure": "Quicklink sleeve",
         "alloy": "316L",
+        "mbs_straight_pull": 44,
         "opening": 10.5,
         "weight": 78,
-        "gear_sellers": [
-            "Slacktivity"
-        ],
-        "active": true,
+        "price": 15.01,
+        "currency": "EUR",
         "product_url": "https://slacktivity.com/shop/8mm-quick-link/",
-        "notes": "Listed as Slacktivity: '8mm Quick Link – Maillon Rapide – INOX'. Slacktivity lists it twice and disagrees with itself on the MBS: 44 kN (WLL 11 kN, made in France, €15.01) as 'Maillon Rapide – INOX', 25 kN (WLL 6 kN, 316, 77 g, gate open '> 1 kN', €8.00, https://slacktivity.com/shop/quicklink-8mm/) as 'Rustproof', so it is left empty. Opening and weight from the Maillon Rapide listing. Carried by Slacktivity."
+        "active": true,
+        "notes": "Listed as '8mm Quick Link – Maillon Rapide – INOX'. WLL 11 kN, made in France. Slacktivity also lists an 8mm stainless quicklink as 'Rustproof' (https://slacktivity.com/shop/quicklink-8mm/): 25 kN, WLL 6 kN, 316, 77 g, gate open '> 1 kN', €8.00.",
+        "product_group": "Oval Quicklink 8mm, Stainless"
     },
     {
         "id": 37,
-        "manufacturer": "Peguet",
+        "manufacturer": "Slacktivity",
         "name": "Oval Quicklink 8mm",
         "connector_style": "Quicklink",
         "material": "Steel",
         "closure": "Quicklink sleeve",
+        "alloy": "galvanized steel",
+        "mbs_straight_pull": 28,
         "opening": 10.5,
         "weight": 77,
-        "gear_sellers": [
-            "Slacktivity",
-            "Balance Community: Slackline Outfitters",
-            "Spider slacklines"
-        ],
-        "active": true,
+        "price": 5.5,
+        "currency": "EUR",
         "product_url": "https://slacktivity.com/shop/8mm-quick-link-galvanized/",
-        "notes": "Listed as Slacktivity: '8mm Galvanized Quick Link | Maillon Rapide'; BC: '8mm Oval Quicklink'; Spider: 'Oval Quick Links - PPE', size 'Oval 8 mm 25 kN'. Sellers disagree on the MBS: Slacktivity 28 kN (WLL 7 kN), BC 34 kN (WLL 7 kN), Spider 25 kN (WLL 5 kN), so it is left empty. Spider (ref. LQCO8, PPE, EN 362 / EN 12275, UIAA): screw opening 12 mm, inner width 17 mm, 77 g. Slacktivity €5.50, BC US$8, Spider €5.04 (https://spider-slacklines.com/shop/en/connectors/309-oval-quick-links-ppe-peguet-7326909890.html). Carried by Slacktivity, Balance Community: Slackline Outfitters, Spider slacklines."
+        "active": true,
+        "notes": "Listed as '8mm Galvanized Quick Link | Maillon Rapide'. WLL 7 kN.",
+        "product_group": "Oval Quicklink 8mm"
     },
     {
         "id": 38,
-        "manufacturer": "Peguet",
+        "manufacturer": "Raed Slacklines",
         "name": "Oval Quicklink 7mm, Stainless",
         "connector_style": "Quicklink",
         "material": "Stainless Steel",
         "closure": "Quicklink sleeve",
-        "alloy": "316",
-        "opening": 9.5,
-        "weight": 51,
-        "gear_sellers": [
-            "Raed Slacklines",
-            "Slacktivity",
-            "Slackhouse"
-        ],
-        "active": true,
+        "mbs_straight_pull": 45,
+        "price": 12.9,
+        "currency": "EUR",
         "product_url": "https://raed-sports.com/products/maillon-rapide-quicklink-7mm-45-kn-stainless-steel",
-        "notes": "Listed as raed: 'Maillon Rapide Quicklink, 7mm, 45 kN, stainless steel'; Slacktivity: '7mm Quick Link – INOX'; Slackhouse: 'Maillon Oval 7 mm'. Sellers disagree on the MBS: raed 45 kN, Slacktivity 14 kN (WLL 3.5 kN, gate open '> 1 kN'), Slackhouse 27.5 kN, so it is left empty. Opening, weight and alloy as Slacktivity lists them. raed €12.90, Slacktivity €4.00 (https://slacktivity.com/shop/7mm-quick-link/). Slackhouse's 'Maillon Oval 7 mm' is this part too (operator, 2026-10-11): its spec table names Peguet, 27.5 kN, WLL 5.5 kN, gap 9 mm, outside 65 x 34 mm, inside 50 x 16 mm, 52 g, made in France; 15 PLN, out of stock on 2026-10-11 (https://slackhouseshop.pl/produkt/maillon-oval-7mm/). Carried by Raed Slacklines, Slacktivity, Slackhouse."
+        "active": true,
+        "notes": "Listed as 'Maillon Rapide Quicklink, 7mm, 45 kN, stainless steel'.",
+        "product_group": "Oval Quicklink 7mm, Stainless"
     },
     {
         "id": 39,
-        "manufacturer": "Peguet",
+        "manufacturer": "Spider slacklines",
         "name": "Oval Quicklink 5mm",
         "connector_style": "Quicklink",
         "material": "Steel",
@@ -689,12 +696,15 @@
             "CE",
             "EN 12275"
         ],
+        "price": 2.49,
+        "currency": "EUR",
         "gear_sellers": [
-            "Spider slacklines"
+            "Slack Inov"
         ],
         "active": true,
         "product_url": "https://spider-slacklines.com/shop/en/connectors/309-oval-quick-links-ppe-peguet-7326909890.html",
-        "notes": "Listed as Spider: 'Oval Quick Links - PPE', size 'Oval 5 mm 14 kN'. Specs as Spider lists them (shop page saved by the operator on 2026-10-11, price with 22% VAT added, ref. LQCO5): screw opening 8 mm, inner width 10 mm, MBS 14 kN, WLL 3 kN, 20 g, made in France, individually tested; not PPE. Spider €2.49. Carried by Spider slacklines."
+        "notes": "Listed as 'Oval Quick Links - PPE', size 'Oval 5 mm 14 kN' (ref. LQCO5; shop page saved by the operator on 2026-10-11, price with 22% VAT added). Screw opening 8 mm, inner width 10 mm, WLL 3 kN, made in France, individually tested; not PPE.",
+        "product_group": "Oval Quicklink 5mm"
     },
     {
         "id": 40,
@@ -704,6 +714,7 @@
         "material": "Steel",
         "closure": "Screw pin",
         "alloy": "Grade 6 high tensile steel, quenched and tempered, hot-dip galvanized",
+        "mbs_straight_pull": 29.4,
         "opening": 12,
         "pin_diameter": 8,
         "weight": 50,
@@ -719,7 +730,7 @@
         ],
         "active": true,
         "product_url": "https://www.greenpin.com/en/product/green-pinr-bow-shackle-sc",
-        "notes": "Green Pin Bow Shackle SC (G-4161) GPGHBB06, WLL 0.5 t. Van Beest: MBL equals 6 x WLL (no MBS stated per size). Listed as Spider: '0.5T Green Pin Bow Shackles Galvanized Steel'; Landcruising: 'Van Beest Green Pin Shackle 0.5 to'. Spider Slacklines is a historic seller: not on its shop when the operator checked on 2026-10-11."
+        "notes": "Green Pin Bow Shackle SC (G-4161) GPGHBB06, WLL 0.5 t. Van Beest: MBL equals 6 x WLL (no MBS stated per size), so MBS here is 6 x 0.5 t = 3 t = 29.4 kN. Listed as Spider: '0.5T Green Pin Bow Shackles Galvanized Steel'; Landcruising: 'Van Beest Green Pin Shackle 0.5 to'. Spider Slacklines is a historic seller: not on its shop when the operator checked on 2026-10-11."
     },
     {
         "id": 41,
@@ -729,6 +740,7 @@
         "material": "Steel",
         "closure": "Screw pin",
         "alloy": "Grade 6 high tensile steel, quenched and tempered, hot-dip galvanized",
+        "mbs_straight_pull": 58.9,
         "opening": 17,
         "pin_diameter": 11,
         "weight": 130,
@@ -743,7 +755,7 @@
         ],
         "active": true,
         "product_url": "https://www.greenpin.com/en/product/green-pinr-bow-shackle-sc",
-        "notes": "Green Pin Bow Shackle SC (G-4161) GPGHBB10, WLL 1 t. Van Beest: MBL equals 6 x WLL (no MBS stated per size). Listed as Landcruising: 'Van Beest Green Pin Shackle bow 1 to'."
+        "notes": "Green Pin Bow Shackle SC (G-4161) GPGHBB10, WLL 1 t. Van Beest: MBL equals 6 x WLL (no MBS stated per size), so MBS here is 6 x 1 t = 6 t = 58.9 kN. Listed as Landcruising: 'Van Beest Green Pin Shackle bow 1 to'."
     },
     {
         "id": 42,
@@ -753,6 +765,7 @@
         "material": "Steel",
         "closure": "Screw pin",
         "alloy": "Grade 6 high tensile steel, quenched and tempered, hot-dip galvanized",
+        "mbs_straight_pull": 88.3,
         "opening": 19,
         "pin_diameter": 13,
         "weight": 180,
@@ -769,7 +782,7 @@
         ],
         "active": true,
         "product_url": "https://www.greenpin.com/en/product/green-pinr-bow-shackle-sc",
-        "notes": "Green Pin Bow Shackle SC (G-4161) GPGHBB11, WLL 1.5 t. Van Beest: MBL equals 6 x WLL (no MBS stated per size). Listed as BC: 'Van Beest 7/16-inch Screw-Pin Shackle'; Spider: '1.5T Green Pin Bow Shackles Galvanized Steel'; Landcruising: 'Van Beest Green Pin Shackle 1,5 to bow'. BC lists MBS 80 kN, WLL 13 kN, 190 g, US$15. Spider Slacklines is a historic seller: not on its shop when the operator checked on 2026-10-11."
+        "notes": "Green Pin Bow Shackle SC (G-4161) GPGHBB11, WLL 1.5 t. Van Beest: MBL equals 6 x WLL (no MBS stated per size), so MBS here is 6 x 1.5 t = 9 t = 88.3 kN. Listed as BC: 'Van Beest 7/16-inch Screw-Pin Shackle'; Spider: '1.5T Green Pin Bow Shackles Galvanized Steel'; Landcruising: 'Van Beest Green Pin Shackle 1,5 to bow'. BC lists MBS 80 kN, WLL 13 kN, 190 g, US$15. Spider Slacklines is a historic seller: not on its shop when the operator checked on 2026-10-11."
     },
     {
         "id": 43,
@@ -779,6 +792,7 @@
         "material": "Steel",
         "closure": "Screw pin",
         "alloy": "Grade 6 high tensile steel, quenched and tempered, hot-dip galvanized",
+        "mbs_straight_pull": 117.7,
         "opening": 22,
         "pin_diameter": 16,
         "weight": 360,
@@ -796,7 +810,7 @@
         ],
         "active": true,
         "product_url": "https://www.greenpin.com/en/product/green-pinr-bow-shackle-sc",
-        "notes": "Green Pin Bow Shackle SC (G-4161) GPGHBB13, WLL 2 t. Van Beest: MBL equals 6 x WLL (no MBS stated per size). Listed as BC: 'Van Beest 1/2-inch Screw-Pin Shackle'; Spider: '2T Green Pin Bow Shackles Galvanized Steel'; Landcruising: 'Van Beest Green Pin Shackle bow 2 to'. BC lists MBS 107 kN, WLL 18 kN, 330 g, US$21. Spider Slacklines is a historic seller: not on its shop when the operator checked on 2026-10-11."
+        "notes": "Green Pin Bow Shackle SC (G-4161) GPGHBB13, WLL 2 t. Van Beest: MBL equals 6 x WLL (no MBS stated per size), so MBS here is 6 x 2 t = 12 t = 117.7 kN. Listed as BC: 'Van Beest 1/2-inch Screw-Pin Shackle'; Spider: '2T Green Pin Bow Shackles Galvanized Steel'; Landcruising: 'Van Beest Green Pin Shackle bow 2 to'. BC lists MBS 107 kN, WLL 18 kN, 330 g, US$21. Spider Slacklines is a historic seller: not on its shop when the operator checked on 2026-10-11."
     },
     {
         "id": 44,
@@ -806,6 +820,7 @@
         "material": "Steel",
         "closure": "Screw pin",
         "alloy": "Grade 6 high tensile steel, quenched and tempered, hot-dip galvanized",
+        "mbs_straight_pull": 191.3,
         "opening": 27,
         "pin_diameter": 19,
         "weight": 630,
@@ -822,7 +837,7 @@
         ],
         "active": true,
         "product_url": "https://www.greenpin.com/en/product/green-pinr-bow-shackle-sc",
-        "notes": "Green Pin Bow Shackle SC (G-4161) GPGHBB16, WLL 3.25 t. Van Beest: MBL equals 6 x WLL (no MBS stated per size). Listed as Spider: '3.25T Green Pin Galvanized Steel Bow Shackles'; Landcruising: 'Van Beest Green Pin Shackle bow 3,25 to'. Spider Slacklines is a historic seller: not on its shop when the operator checked on 2026-10-11."
+        "notes": "Green Pin Bow Shackle SC (G-4161) GPGHBB16, WLL 3.25 t. Van Beest: MBL equals 6 x WLL (no MBS stated per size), so MBS here is 6 x 3.25 t = 19.5 t = 191.3 kN. Listed as Spider: '3.25T Green Pin Galvanized Steel Bow Shackles'; Landcruising: 'Van Beest Green Pin Shackle bow 3,25 to'. Spider Slacklines is a historic seller: not on its shop when the operator checked on 2026-10-11."
     },
     {
         "id": 45,
@@ -832,6 +847,7 @@
         "material": "Steel",
         "closure": "Screw pin",
         "alloy": "Grade 6 high tensile steel, quenched and tempered, hot-dip galvanized",
+        "mbs_straight_pull": 29.4,
         "opening": 12,
         "pin_diameter": 8,
         "weight": 40,
@@ -846,7 +862,7 @@
         ],
         "active": true,
         "product_url": "https://www.greenpin.com/en/product/green-pinr-dee-shackle-sc",
-        "notes": "Green Pin Dee Shackle SC (G-4151) GPGDBB06, WLL 0.5 t. Van Beest: MBL equals 6 x WLL (no MBS stated per size). Listed as Spider: '0.5T Green Pin D Shackles Galvanized Steel'. Spider Slacklines is a historic seller: not on its shop when the operator checked on 2026-10-11."
+        "notes": "Green Pin Dee Shackle SC (G-4151) GPGDBB06, WLL 0.5 t. Van Beest: MBL equals 6 x WLL (no MBS stated per size), so MBS here is 6 x 0.5 t = 3 t = 29.4 kN. Listed as Spider: '0.5T Green Pin D Shackles Galvanized Steel'. Spider Slacklines is a historic seller: not on its shop when the operator checked on 2026-10-11."
     },
     {
         "id": 46,
@@ -856,6 +872,7 @@
         "material": "Steel",
         "closure": "Screw pin",
         "alloy": "Grade 6 high tensile steel, quenched and tempered, hot-dip galvanized",
+        "mbs_straight_pull": 58.9,
         "opening": 17,
         "pin_diameter": 11,
         "weight": 120,
@@ -871,7 +888,7 @@
         ],
         "active": true,
         "product_url": "https://www.greenpin.com/en/product/green-pinr-dee-shackle-sc",
-        "notes": "Green Pin Dee Shackle SC (G-4151) GPGDBB10, WLL 1 t. Van Beest: MBL equals 6 x WLL (no MBS stated per size). Listed as Spider: '1T Green Pin D Shackles Galvanized Steel'; Landcruising: 'Van Beest Green Pin Shackle straight 1 to'. Spider Slacklines is a historic seller: not on its shop when the operator checked on 2026-10-11."
+        "notes": "Green Pin Dee Shackle SC (G-4151) GPGDBB10, WLL 1 t. Van Beest: MBL equals 6 x WLL (no MBS stated per size), so MBS here is 6 x 1 t = 6 t = 58.9 kN. Listed as Spider: '1T Green Pin D Shackles Galvanized Steel'; Landcruising: 'Van Beest Green Pin Shackle straight 1 to'. Spider Slacklines is a historic seller: not on its shop when the operator checked on 2026-10-11."
     },
     {
         "id": 47,
@@ -881,6 +898,7 @@
         "material": "Steel",
         "closure": "Screw pin",
         "alloy": "Grade 6 high tensile steel, quenched and tempered, hot-dip galvanized",
+        "mbs_straight_pull": 88.3,
         "opening": 19,
         "pin_diameter": 13,
         "weight": 170,
@@ -896,7 +914,7 @@
         ],
         "active": true,
         "product_url": "https://www.greenpin.com/en/product/green-pinr-dee-shackle-sc",
-        "notes": "Green Pin Dee Shackle SC (G-4151) GPGDBB11, WLL 1.5 t. Van Beest: MBL equals 6 x WLL (no MBS stated per size). Listed as Spider: '1.5T Green Pin D Shackles Galvanized Steel'; Landcruising: 'Van Beest Green Pin Shackle straight 1,5 to'. Spider Slacklines is a historic seller: not on its shop when the operator checked on 2026-10-11."
+        "notes": "Green Pin Dee Shackle SC (G-4151) GPGDBB11, WLL 1.5 t. Van Beest: MBL equals 6 x WLL (no MBS stated per size), so MBS here is 6 x 1.5 t = 9 t = 88.3 kN. Listed as Spider: '1.5T Green Pin D Shackles Galvanized Steel'; Landcruising: 'Van Beest Green Pin Shackle straight 1,5 to'. Spider Slacklines is a historic seller: not on its shop when the operator checked on 2026-10-11."
     },
     {
         "id": 48,
@@ -993,7 +1011,8 @@
         "currency": "ZAR",
         "product_url": "https://www.viperslacklines.co.za/products/oval-carabiner",
         "active": true,
-        "notes": "Listed as 'Oval Auto-Locking Carabiner'."
+        "notes": "Listed as 'Oval Auto-Locking Carabiner'.",
+        "product_group": "Oval Carabiner, Twist-lock"
     },
     {
         "id": 54,
@@ -1144,12 +1163,13 @@
         "connector_style": "Shackle",
         "material": "Steel",
         "closure": "Screw pin",
+        "mbs_straight_pull": 88.3,
         "weight": 190,
         "price": 30,
         "currency": "ZAR",
         "product_url": "https://www.slackgear.co.za/product/1-5t-bow-shackle-screw-pin/",
         "active": true,
-        "notes": "Listed as '1.5t Bow-Shackle (Screw-Pin)'. WLL as listed: 15 kN; no MBS. The page does not state the material (rechecked 2026-10-12: WLL, weight and price only); steel per the operator, 2026-10-12."
+        "notes": "Listed as '1.5t Bow-Shackle (Screw-Pin)'. WLL as listed: 15 kN (1.5 t). The page states no MBS or material; steel per the operator, 2026-10-12. Marked GMC 6 (grade 6), per the operator, 2026-10-12. MBS derived from the grade-6 safety factor, MBL = 6 x WLL (EN 13889 / RR-C-271): 6 x 1.5 t = 9 t = 88.3 kN."
     },
     {
         "id": 64,
@@ -1158,12 +1178,13 @@
         "connector_style": "Shackle",
         "material": "Steel",
         "closure": "Screw pin",
+        "mbs_straight_pull": 117.7,
         "weight": 310,
         "price": 40,
         "currency": "ZAR",
         "product_url": "https://www.slackgear.co.za/product/2t-bow-shackle-screw-pin/",
         "active": true,
-        "notes": "Listed as '2t Bow-Shackle (Screw-Pin)'. WLL as listed: 20 kN; no MBS. The page does not state the material (rechecked 2026-10-12: WLL, weight and price only); steel per the operator, 2026-10-12."
+        "notes": "Listed as '2t Bow-Shackle (Screw-Pin)'. WLL as listed: 20 kN (2 t). The page states no MBS or material; steel per the operator, 2026-10-12. Marked GMC 6 (grade 6), per the operator, 2026-10-12. MBS derived from the grade-6 safety factor, MBL = 6 x WLL (EN 13889 / RR-C-271): 6 x 2 t = 12 t = 117.7 kN."
     },
     {
         "id": 65,
@@ -1172,12 +1193,13 @@
         "connector_style": "Shackle",
         "material": "Steel",
         "closure": "Screw pin",
+        "mbs_straight_pull": 191.3,
         "weight": 625,
         "price": 50,
         "currency": "ZAR",
         "product_url": "https://www.slackgear.co.za/product/3-25t-bow-shackle-screw-pin/",
         "active": true,
-        "notes": "Listed as '3.25t Bow-Shackle (Screw-Pin)'. WLL as listed: 32.5 kN; no MBS. The page does not state the material (rechecked 2026-10-12: WLL, weight and price only); steel per the operator, 2026-10-12."
+        "notes": "Listed as '3.25t Bow-Shackle (Screw-Pin)'. WLL as listed: 32.5 kN (3.25 t). The page states no MBS or material; steel per the operator, 2026-10-12. Marked GMC 6 (grade 6), per the operator, 2026-10-12. MBS derived from the grade-6 safety factor, MBL = 6 x WLL (EN 13889 / RR-C-271): 6 x 3.25 t = 19.5 t = 191.3 kN."
     },
     {
         "id": 66,
@@ -1293,7 +1315,8 @@
         ],
         "product_url": "https://web.archive.org/web/20200910035534/https://spider-slacklines.com/shop/en/carabiner/290-aluminium-carabiner-oval-slackline.html",
         "notes": "Listed as 'Aluminium Carabiner Oval'. From Spider's archived shop (2019); live shop blocks automated fetches. Key-lock nose. Not on Spider's shop when the operator checked on 2026-10-11.",
-        "active": false
+        "active": false,
+        "product_group": "Oval Carabiner, Aluminium"
     },
     {
         "id": 72,
@@ -1333,7 +1356,8 @@
         ],
         "active": false,
         "product_url": "https://web.archive.org/web/20200910183935/https://spider-slacklines.com/shop/en/quick-links/306-oval-quick-links.html",
-        "notes": "Listed as 'Oval Quick Link 8mm'. Galvanized steel. WLL 7 kN. Listed in Spider's shop as archived 2025-08. Not on Spider's shop when the operator checked on 2026-10-11."
+        "notes": "Listed as 'Oval Quick Link 8mm'. Galvanized steel. WLL 7 kN. Listed in Spider's shop as archived 2025-08. Not on Spider's shop when the operator checked on 2026-10-11.",
+        "product_group": "Oval Quicklink 8mm"
     },
     {
         "id": 74,
@@ -1351,7 +1375,8 @@
         ],
         "active": false,
         "product_url": "https://web.archive.org/web/20200910183935/https://spider-slacklines.com/shop/en/quick-links/306-oval-quick-links.html",
-        "notes": "Listed as 'Oval Quick Link 10mm'. Galvanized steel. WLL 11 kN. Listed in Spider's shop as archived 2025-08. Not on Spider's shop when the operator checked on 2026-10-11."
+        "notes": "Listed as 'Oval Quick Link 10mm'. Galvanized steel. WLL 11 kN. Listed in Spider's shop as archived 2025-08. Not on Spider's shop when the operator checked on 2026-10-11.",
+        "product_group": "Oval Quicklink 10mm"
     },
     {
         "id": 75,
@@ -1374,16 +1399,27 @@
     {
         "id": 76,
         "manufacturer": "Spider slacklines",
-        "name": "Oval Quicklink, Stainless",
+        "name": "Oval Quicklink 8mm, Stainless",
         "connector_style": "Quicklink",
         "material": "Stainless Steel",
         "closure": "Quicklink sleeve",
+        "mbs_straight_pull": 38,
+        "opening": 11,
+        "weight": 79,
+        "standards": [
+            "EN 362",
+            "EN 12275"
+        ],
+        "price": 6.05,
+        "currency": "EUR",
         "gear_sellers": [
             "Slack Inov"
         ],
         "active": false,
         "product_url": "https://web.archive.org/web/20230302205958/https://spider-slacklines.com/shop/en/quick-links/310-1598-oval-quick-links-stainless-steel-ppe-7326909890.html",
-        "notes": "Listed as 'Oval Quick Links Stainless Steel'. PPE. Listed in Spider's shop as archived 2025-08. Sizes and specs not loaded. Not on Spider's shop when the operator checked on 2026-10-11."
+        "description": "This oval shape quicklink is made of stainless steel in order to last longer than standardized zinc coated quick links, especially in salty marine environments. It has a PPE (Personal Protective Equipment) certificate, following standards of EN362 & EN 12275 and UIAA labeled.",
+        "notes": "Listed as 'Oval Quick Links Stainless Steel', size '8 mm 25 kN', the only size. From Spider's shop page as pasted by the operator on 2026-10-12 (price with 22% VAT added; the page showed €4.96 without). Technical sheet: screw opening 11 mm, inner width 17 mm, WLL 10 kN, MBS 38 kN, CE-certified breaking load 25 kN, 79 g, PPE, individually tested, UIAA labelled, made in China. MBS is the technical sheet's 38 kN; 25 kN is the certified figure. Spider's US shop (slacklines.us) also sells a 5 mm, which is not PPE. Not on Spider's shop when the operator checked on 2026-10-11.",
+        "product_group": "Oval Quicklink 8mm, Stainless"
     },
     {
         "id": 77,
@@ -1459,7 +1495,8 @@
         "closure": "Quicklink sleeve",
         "active": false,
         "product_url": "https://web.archive.org/web/20190917164659/https://slack-inov.com/gb/connectors/28-5t-quick-link",
-        "notes": "Listed as '5T Quick Link'. From Slack Inov's archived shop (about 2019). Specs not loaded."
+        "notes": "Listed as '5T Quick Link'. From Slack Inov's archived shop (about 2019). Specs not loaded. A 10 mm oval quicklink (operator, 2026-10-12).",
+        "product_group": "Oval Quicklink 10mm"
     },
     {
         "id": 83,
@@ -1475,7 +1512,8 @@
         "product_url": "https://web.archive.org/web/20191120101904/https://slack-inov.com/gb/connectors/42-mini-quick-link",
         "active": false,
         "description": "Peguet quicklink Ø5mm. To connect therope to pulley system, or for making mini leash for your highline gear.",
-        "notes": "Listed as 'Mini Quick Link' (product heading '14 kN quicklink', model SI027). From Slack Inov's archived shop (2019-11-20): Péguet quicklink, 5 mm, zinc-coated steel, 14 kN; shape not stated. €2.00."
+        "notes": "Listed as 'Mini Quick Link' (product heading '14 kN quicklink', model SI027). From Slack Inov's archived shop (2019-11-20): Péguet quicklink, 5 mm, zinc-coated steel, 14 kN; shape not stated. €2.00. The same part as Spider's Oval Quicklink 5mm (operator, 2026-10-12).",
+        "product_group": "Oval Quicklink 5mm"
     },
     {
         "id": 84,
@@ -2089,8 +2127,8 @@
     },
     {
         "id": 119,
-        "manufacturer": "Peguet",
-        "name": "Oval Quicklink 10mm",
+        "manufacturer": "Spider slacklines",
+        "name": "Oval Quicklink 10mm, PPE",
         "connector_style": "Quicklink",
         "material": "Steel",
         "closure": "Quicklink sleeve",
@@ -2101,12 +2139,15 @@
             "CE",
             "EN 12275"
         ],
+        "price": 7.06,
+        "currency": "EUR",
         "gear_sellers": [
-            "Spider slacklines"
+            "Slack Inov"
         ],
         "active": true,
         "product_url": "https://spider-slacklines.com/shop/en/connectors/309-oval-quick-links-ppe-peguet-7326909890.html",
-        "notes": "Listed as Spider: 'Oval Quick Links - PPE', size 'Oval 10 mm 40 kN'. Specs as Spider lists them (shop page saved by the operator on 2026-10-11, price with 22% VAT added, ref. LQCO1): screw opening 12 mm, inner width 21 mm, MBS 40 kN, WLL 12 kN, 139 g, made in France, individually tested, PPE (EN 362 / EN 12275, UIAA). Spider €7.06. Carried by Spider slacklines."
+        "notes": "Listed as 'Oval Quick Links - PPE', size 'Oval 10 mm 40 kN' (ref. LQCO1; shop page saved by the operator on 2026-10-11, price with 22% VAT added). Screw opening 12 mm, inner width 21 mm, WLL 12 kN, made in France, individually tested, PPE (EN 362 / EN 12275, UIAA).",
+        "product_group": "Oval Quicklink 10mm"
     },
     {
         "id": 120,
@@ -2146,5 +2187,83 @@
         "description": "Our STAINLESS STEEL TWISTED SHAKLE is a perfect connector for any set-up with a 90° rotation between pieces.\nIts high-strength steel is equipped with a shiny and smooth surface, which prevents cuts and damage on webbing and slings.\nOur choice \"Size 8 mm\" includes a CAPTIVE PIN, once unscrewed, the unlosable pin stays blocked inside the shackle body. No more risk of losing or dropoing it.\nThe \"Size 12 mm\" has a jaw opening of 25 mm, so it's suitable for soft releases where you wrap your longline around the shackle without damaging it.",
         "notes": "Listed as 'Twisted Shackles Stainless Steel', size 'Twisted Ø12 mm - 70 kN - 1,8 T WLL'. Technical sheet: jaw 25 mm, MBS 70 kN, WLL 18 kN, 220 g, no captive pin, made in Taiwan, no certification, not PPE. Suits a soft release. Slack Inov €14.96 without VAT.",
         "product_group": "Twisted Shackle 12mm, Stainless"
+    },
+    {
+        "id": 122,
+        "manufacturer": "Balance Community: Slackline Outfitters",
+        "name": "Oval Quicklink 8mm",
+        "connector_style": "Quicklink",
+        "material": "Steel",
+        "closure": "Quicklink sleeve",
+        "alloy": "zinc-plated galvanized steel",
+        "mbs_straight_pull": 34,
+        "opening": 11,
+        "weight": 77,
+        "price": 8,
+        "currency": "USD",
+        "product_url": "https://www.balancecommunity.com/products/8mm-oval-quicklink",
+        "active": true,
+        "notes": "Listed as '8mm Oval Quicklink'. WLL 7 kN. Inner width 17.5 mm, outside length 74 mm, inside length 58 mm.",
+        "product_group": "Oval Quicklink 8mm"
+    },
+    {
+        "id": 123,
+        "manufacturer": "Spider slacklines",
+        "name": "Oval Quicklink 8mm, PPE",
+        "connector_style": "Quicklink",
+        "material": "Steel",
+        "closure": "Quicklink sleeve",
+        "mbs_straight_pull": 25,
+        "opening": 12,
+        "weight": 77,
+        "standards": [
+            "CE",
+            "EN 362",
+            "EN 12275"
+        ],
+        "price": 5.04,
+        "currency": "EUR",
+        "gear_sellers": [
+            "Slack Inov"
+        ],
+        "active": true,
+        "product_url": "https://spider-slacklines.com/shop/en/connectors/309-oval-quick-links-ppe-peguet-7326909890.html",
+        "notes": "Listed as 'Oval Quick Links - PPE', size 'Oval 8 mm 25 kN' (ref. LQCO8; shop page saved by the operator on 2026-10-11, price with 22% VAT added). Screw opening 12 mm, inner width 17 mm, WLL 5 kN, PPE (EN 362 / EN 12275, UIAA).",
+        "product_group": "Oval Quicklink 8mm"
+    },
+    {
+        "id": 124,
+        "manufacturer": "Slacktivity",
+        "name": "Oval Quicklink 7mm, Stainless",
+        "connector_style": "Quicklink",
+        "material": "Stainless Steel",
+        "closure": "Quicklink sleeve",
+        "alloy": "316",
+        "mbs_straight_pull": 14,
+        "opening": 9.5,
+        "weight": 51,
+        "price": 4.0,
+        "currency": "EUR",
+        "product_url": "https://slacktivity.com/shop/7mm-quick-link/",
+        "active": true,
+        "notes": "Listed as '7mm Quick Link – INOX'. WLL 3.5 kN, gate open '> 1 kN'.",
+        "product_group": "Oval Quicklink 7mm, Stainless"
+    },
+    {
+        "id": 125,
+        "manufacturer": "Slackhouse",
+        "name": "Oval Quicklink 7mm, Stainless",
+        "connector_style": "Quicklink",
+        "material": "Stainless Steel",
+        "closure": "Quicklink sleeve",
+        "mbs_straight_pull": 27.5,
+        "opening": 9,
+        "weight": 52,
+        "price": 15,
+        "currency": "PLN",
+        "product_url": "https://slackhouseshop.pl/produkt/maillon-oval-7mm/",
+        "active": true,
+        "notes": "Listed as 'Maillon Oval 7 mm'. Its spec table: WLL 5.5 kN, outside 65 x 34 mm, inside 50 x 16 mm, made in France. Out of stock when the operator checked on 2026-10-11.",
+        "product_group": "Oval Quicklink 7mm, Stainless"
     }
 ]

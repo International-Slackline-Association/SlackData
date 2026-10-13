@@ -1,8 +1,5 @@
 {
   "connectors": {
-    "bc_bc-aluminum-carabiner": [
-      "bc_bc-aluminum-carabiner.jpg"
-    ],
     "bc_bc-shackle-ss": [
       "bc_bc-shackle-ss.jpg",
       "bc_bc-shackle-ss-2.jpg"
@@ -12,6 +9,9 @@
     ],
     "bc_delta-quicklink-10mm": [
       "bc_delta-quicklink-10mm.jpg"
+    ],
+    "bc_oval-carabiner-aluminium": [
+      "bc_oval-carabiner-aluminium.jpg"
     ],
     "bc_oval-quicklink-10mm": [
       "bc_oval-quicklink-10mm.jpg"
@@ -81,23 +81,6 @@
       "landcruise_airbow-3.jpg",
       "landcruise_airbow-4.jpg"
     ],
-    "peguet_oval-quicklink-6mm-stainless": [
-      "peguet_oval-quicklink-6mm-stainless.jpg"
-    ],
-    "peguet_oval-quicklink-7mm-stainless": [
-      "peguet_oval-quicklink-7mm-stainless.jpg",
-      "peguet_oval-quicklink-7mm-stainless-2.jpg",
-      "peguet_oval-quicklink-7mm-stainless-3.jpg",
-      "peguet_oval-quicklink-7mm-stainless-4.jpg"
-    ],
-    "peguet_oval-quicklink-8mm": [
-      "peguet_oval-quicklink-8mm.jpg"
-    ],
-    "peguet_oval-quicklink-8mm-stainless": [
-      "peguet_oval-quicklink-8mm-stainless.jpg",
-      "peguet_oval-quicklink-8mm-stainless-2.jpg",
-      "peguet_oval-quicklink-8mm-stainless-3.jpg"
-    ],
     "raed_bow-shackle-10mm": [
       "raed_bow-shackle-10mm.jpg"
     ],
@@ -112,6 +95,9 @@
     ],
     "raed_oval-carabiner-screwgate": [
       "raed_oval-carabiner-screwgate.jpg"
+    ],
+    "raed_oval-quicklink-7mm-stainless": [
+      "raed_oval-quicklink-7mm-stainless.jpg"
     ],
     "raed_soft-shackle-3mm": [
       "raed_soft-shackle-3mm.jpg"
@@ -164,6 +150,10 @@
     "slackhouse_delta-quicklink-10mm": [
       "slackhouse_delta-quicklink-10mm.jpg",
       "slackhouse_delta-quicklink-10mm-2.jpg"
+    ],
+    "slackhouse_oval-quicklink-7mm-stainless": [
+      "slackhouse_oval-quicklink-7mm-stainless.jpg",
+      "slackhouse_oval-quicklink-7mm-stainless-2.jpg"
     ],
     "slackhouse_twisted-shackle-10mm": [
       "slackhouse_twisted-shackle-10mm.jpg",
@@ -233,6 +223,20 @@
       "slacktvty_kingpin-3.jpg",
       "slacktvty_kingpin-4.jpg"
     ],
+    "slacktvty_oval-quicklink-6mm-stainless": [
+      "slacktvty_oval-quicklink-6mm-stainless.jpg"
+    ],
+    "slacktvty_oval-quicklink-7mm-stainless": [
+      "slacktvty_oval-quicklink-7mm-stainless.jpg"
+    ],
+    "slacktvty_oval-quicklink-8mm": [
+      "slacktvty_oval-quicklink-8mm.jpg"
+    ],
+    "slacktvty_oval-quicklink-8mm-stainless": [
+      "slacktvty_oval-quicklink-8mm-stainless.jpg",
+      "slacktvty_oval-quicklink-8mm-stainless-2.jpg",
+      "slacktvty_oval-quicklink-8mm-stainless-3.jpg"
+    ],
     "slacktvty_slackline-carabiner": [
       "slacktvty_slackline-carabiner.jpg",
       "slacktvty_slackline-carabiner-2.jpg"
@@ -258,8 +262,48 @@
       "spider_bow-shackle-14mm-3.jpg",
       "spider_bow-shackle-14mm-4.jpg"
     ],
+    "spider_delta-quicklink-10mm": [
+      "spider_delta-quicklink-10mm.jpg"
+    ],
+    "spider_oval-carabiner-aluminium": [
+      "spider_oval-carabiner-aluminium.jpg",
+      "spider_oval-carabiner-aluminium-2.jpg",
+      "spider_oval-carabiner-aluminium-3.jpg",
+      "spider_oval-carabiner-aluminium-4.jpg"
+    ],
     "spider_oval-carabiner-screwgate": [
-      "spider_oval-carabiner-screwgate.jpg"
+      "spider_oval-carabiner-screwgate.jpg",
+      "spider_oval-carabiner-screwgate-2.jpg",
+      "spider_oval-carabiner-screwgate-3.jpg",
+      "spider_oval-carabiner-screwgate-4.jpg"
+    ],
+    "spider_oval-quicklink-10mm": [
+      "spider_oval-quicklink-10mm.jpg"
+    ],
+    "spider_oval-quicklink-5mm": [
+      "spider_oval-quicklink-5mm.png"
+    ],
+    "spider_oval-quicklink-8mm": [
+      "spider_oval-quicklink-8mm.jpg"
+    ],
+    "spider_oval-quicklink-8mm-stainless": [
+      "spider_oval-quicklink-8mm-stainless.jpg"
+    ],
+    "spider_soft-shackle-6mm": [
+      "spider_soft-shackle-6mm.jpg",
+      "spider_soft-shackle-6mm-2.png",
+      "spider_soft-shackle-6mm-3.jpg"
+    ],
+    "spider_twisted-shackle-12mm": [
+      "spider_twisted-shackle-12mm.jpg",
+      "spider_twisted-shackle-12mm-2.jpg",
+      "spider_twisted-shackle-12mm-3.jpg",
+      "spider_twisted-shackle-12mm-4.jpg",
+      "spider_twisted-shackle-12mm-5.jpg"
+    ],
+    "spider_twisted-shackle-8mm": [
+      "spider_twisted-shackle-8mm.jpg",
+      "spider_twisted-shackle-8mm-2.jpg"
     ],
     "vanbeest_bow-shackle-0-5-t": [
       "vanbeest_bow-shackle-0-5-t.jpg"

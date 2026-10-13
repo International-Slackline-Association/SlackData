@@ -171,7 +171,7 @@ export default function VendorTable({ item, meta }: { item: AnyItem; meta: GearT
                   <td className="px-3 py-2 font-medium">
                     <BrandLink name={m.brand_name} />
                     {m.active === false && <HistoricBadge active={false} className="ml-2 align-middle" />}
-                    {/* A named maker's row (Peguet) is sold by the shops that resell it. */}
+                    {/* A row can name other shops that resell it (Spider's, co-listed by Slack Inov). */}
                     {Array.isArray(m.gear_sellers) && m.gear_sellers.length > 0 && (
                       <div data-cy="vendor-sellers" className="text-xs font-normal text-gray-500">
                         sold by {(m.gear_sellers as string[]).join(', ')}
