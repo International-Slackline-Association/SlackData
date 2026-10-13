@@ -5,7 +5,7 @@ People and the change log, over HTTP (LIVE_EDITING_PLAN.md phase 1).
 |---|---|---|
 | `GET /me` | anyone signed in | who SlackData thinks you are, and your roles |
 | `POST /me/notice` | anyone signed in | acknowledge the "your name is shown" notice, giving the name to show |
-| `PATCH /me/name` | anyone signed in | change the name shown with your changes |
+| `PATCH /me/name` | anyone signed in | change the name shown with your changes — once, for life |
 | `GET /admin/admins` | admins | the admin list |
 | `POST /admin/roles` | admins | grant or revoke admin — a logged change |
 | `GET /changes` | **anyone, no sign-in** (D3, D33) | the change log, newest first |
@@ -21,9 +21,10 @@ API does not refuse a person who has not acknowledged it.
 
 **The name.** People type in the name shown with their changes, because the ISA
 token gives SlackData none (`models/people.py`). Until they do, they show as
-their ISA id. A rename shows on every record they made, old ones too: records
-hold an ISA id and names are looked up when the log is read (D43). It is not
-itself a logged change.
+their ISA id. Typing it in the first time is free; after that it can be
+changed **once, for life**. A rename shows on every record they made, old ones
+too: records hold an ISA id and names are looked up when the log is read (D43).
+It is not itself a logged change.
 """
 
 from typing import Annotated
@@ -70,6 +71,7 @@ def _me(person: Person) -> Me:
         roles=person.roles,
         notice_seen_at=person.notice_seen_at,
         name_set=bool(person.display_name),
+        name_change_available=person.name_changed_at is None,
         dev=is_dev_person(person),
     )
 
@@ -115,10 +117,14 @@ def acknowledge_notice(
     """Idempotent: the first acknowledgement's time is kept. The name, when
     given, is saved with it — the notice is where people type it in."""
     updates: dict = {}
-    if body is not None and body.name is not None:
+    if body is not None and body.name is not None and body.name != person.display_name:
         _refuse_if_anonymised(person)
-        if body.name != person.display_name:
-            updates["display_name"] = body.name
+        if person.display_name:
+            # Already typed in: a different name here would be a free change.
+            raise HTTPException(
+                status.HTTP_409_CONFLICT, "your name is already set — change it from your account"
+            )
+        updates["display_name"] = body.name
     if person.notice_seen_at is None:
         updates["notice_seen_at"] = now_iso()
     if updates:
@@ -129,11 +135,17 @@ def acknowledge_notice(
 @people_router.patch("/me/name", response_model=Me)
 def change_name(change: NameChange, person: CurrentPerson, people: PeopleRepositoryDep) -> Me:
     _refuse_if_anonymised(person)
-    if change.name != person.display_name:
-        person = people.put(
-            person.model_copy(update={"display_name": change.name, "updated_at": now_iso()})
-        )
-    return _me(person)
+    if change.name == person.display_name:
+        return _me(person)
+    updates: dict = {"display_name": change.name, "updated_at": now_iso()}
+    if person.display_name:
+        # Setting a first name is free; replacing one uses the lifetime change.
+        if person.name_changed_at is not None:
+            raise HTTPException(
+                status.HTTP_409_CONFLICT, "you have already used your one change of name"
+            )
+        updates["name_changed_at"] = now_iso()
+    return _me(people.put(person.model_copy(update=updates)))
 
 
 # --- Admin ------------------------------------------------------------------

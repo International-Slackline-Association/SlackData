@@ -100,7 +100,7 @@ function NoticeDialog({ me }: { me: Me }) {
           onChange={event => setName(event.target.value)}
           className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-teal-700 focus:outline-none focus:ring-1 focus:ring-teal-700"
         />
-        <p className="mt-1 text-xs text-gray-500">You can change it later from the account menu.</p>
+        <p className="mt-1 text-xs text-gray-500">You can change it once later, from the account menu.</p>
         {error && (
           <p data-cy="sign-in-notice-error" className="mt-3 text-sm text-red-700">
             {error}

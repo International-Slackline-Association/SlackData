@@ -14,6 +14,8 @@ export interface Me {
   notice_seen_at: string | null
   /** False until the person has typed in the name shown with their changes. */
   name_set: boolean
+  /** True until they have used their one lifetime change of that name. */
+  name_change_available: boolean
   dev: boolean
 }
 

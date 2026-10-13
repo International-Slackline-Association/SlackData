@@ -19,7 +19,7 @@ ISA-made client.
 | People store: one record per ISA account, roles, notice, bootstrap | [models/people.py](slack_data/models/people.py), [people/](slack_data/people/) | D8, D30 |
 | Change log: append-only, conditional puts, role events | [models/changes.py](slack_data/models/changes.py), [changelog/](slack_data/changelog/) | D3, D28, D43 |
 | A role change and its record in one DynamoDB transaction | [changelog/writer.py](slack_data/changelog/writer.py) | D28 |
-| Routes: `GET /me`, `POST /me/notice` (with the name people type in), `PATCH /me/name`, `GET /admin/admins`, `POST /admin/roles`, public `GET /changes` | [people_router.py](slack_data/api/routers/people_router.py) | D3, D7 |
+| Routes: `GET /me`, `POST /me/notice` (with the name people type in), `PATCH /me/name` (once for life), `GET /admin/admins`, `POST /admin/roles`, public `GET /changes` | [people_router.py](slack_data/api/routers/people_router.py) | D3, D7 |
 | First admins by **verified** ISA email (`ADMIN_BOOTSTRAP_EMAILS`), granted once, logged as `bootstrap` | [auth.py](slack_data/api/auth.py) `sync_person` | § 4.4 |
 | Manufacturer API keys: `Bearer <client_id>:<secret>`, constant-time compare | [auth.py](slack_data/api/auth.py), [brand_clients.py](slack_data/models/brand_clients.py) | D63–D65 |
 | Onboarding mints keys locally — no Cognito | [onboard.py](slack_data/manufacturers/onboard.py), [register.py](slack_data/manufacturers/register.py) | D63 |

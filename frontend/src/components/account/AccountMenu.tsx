@@ -86,7 +86,11 @@ export default function AccountMenu() {
             {auth.isAdmin ? ' · admin' : ''}
             {auth.me.dev ? ' · local dev' : ''}
           </p>
-          {draft === null ? (
+          {auth.me.name_set && !auth.me.name_change_available ? (
+            <p data-cy="account-name-used" className="px-2 py-1.5 text-xs text-gray-500">
+              You have used your one change of name.
+            </p>
+          ) : draft === null ? (
             <button
               type="button"
               role="menuitem"
@@ -118,6 +122,11 @@ export default function AccountMenu() {
                   className="mt-1 w-full rounded-lg border border-gray-300 px-2 py-1 text-sm text-gray-900 focus:border-teal-700 focus:outline-none focus:ring-1 focus:ring-teal-700"
                 />
               </label>
+              {auth.me.name_set && (
+                <p data-cy="account-name-once" className="mt-1 text-xs font-medium text-amber-700">
+                  You can change your name only once.
+                </p>
+              )}
               {error && (
                 <p data-cy="account-name-error" className="mt-1 text-xs text-red-700">
                   {error}

@@ -16,7 +16,9 @@ what without asking the ISA's table (D43: the change log holds a `sub`, never a
 name). They are refreshed from the token on every sign-in.
 
 **The public name is typed in by the person** (`display_name`), at the
-first-sign-in notice, and changeable from their account menu. SlackData's ISA
+first-sign-in notice, and changeable from their account menu **once, for
+life** (`name_changed_at`) — a name is how others recognise whose edits they
+are reading, so it should not drift. SlackData's ISA
 client is not given the name attributes, so the token alone would show every
 contributor as their ISA id. Anonymising someone (D11) is one change here.
 """
@@ -72,6 +74,9 @@ class Person(BaseModel):
     # The name the person typed in themselves — shown publicly with their
     # changes. Never taken from, or overwritten by, the token.
     display_name: str | None = Field(default=None, max_length=MAX_DISPLAY_NAME_LENGTH)
+    # When the person used their one change of that name. Typing it in the
+    # first time is not a change.
+    name_changed_at: str | None = None
     # isa-users confirms an account at once and verifies the address later, by
     # a link it mails — so this can be false on a live account (§ 4.2). Only a
     # verified address may bootstrap an admin (§ 4.4).
@@ -127,6 +132,8 @@ class Me(BaseModel):
     notice_seen_at: str | None
     # False until the person has typed in their public name.
     name_set: bool = False
+    # True until they have used their one lifetime change of it.
+    name_change_available: bool = True
     dev: bool = False
 
 

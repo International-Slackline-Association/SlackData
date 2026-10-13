@@ -24,6 +24,7 @@ const ME = {
   roles: ['admin'],
   notice_seen_at: null,
   name_set: false,
+  name_change_available: true,
   dev: true,
 }
 
@@ -149,16 +150,25 @@ describe('Signing in', () => {
 
     it('changes the name', () => {
       cy.intercept('PATCH', '**/me/name', {
-        body: { ...ME, ...SEEN, name: 'Grace Hopper' },
+        body: { ...ME, ...SEEN, name: 'Grace Hopper', name_change_available: false },
       }).as('rename')
       cy.visit('/webbings', signedIn())
       cy.getByData('account-menu').click()
       cy.getByData('account-change-name').click()
+      cy.getByData('account-name-once').should('be.visible')
       cy.getByData('account-name-input').should('have.value', 'Local Admin').clear().type('Grace Hopper')
       cy.getByData('account-name-save').click()
       cy.wait('@rename').its('request.body').should('deep.equal', { name: 'Grace Hopper' })
       cy.getByData('account-name').should('have.text', 'Grace Hopper')
       cy.getByData('account-menu').should('have.text', 'GH')
+    })
+
+    it('offers no second change of name', () => {
+      cy.intercept('GET', '**/me', { body: { ...ME, ...SEEN, name_change_available: false } })
+      cy.visit('/webbings', signedIn())
+      cy.getByData('account-menu').click()
+      cy.getByData('account-name-used').should('be.visible')
+      cy.getByData('account-change-name').should('not.exist')
     })
 
     it('keeps the form open if a rename fails, and says so', () => {

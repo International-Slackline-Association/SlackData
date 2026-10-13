@@ -80,6 +80,7 @@ CREATE TABLE IF NOT EXISTS people (
     family_name     TEXT,
     email           TEXT,
     display_name    TEXT,
+    name_changed_at TEXT,
     email_key       TEXT,
     email_verified  INTEGER NOT NULL,
     roles           TEXT NOT NULL,
@@ -107,8 +108,9 @@ class SqlitePeopleRepository:
             conn.executescript(_SCHEMA)
             # A store created before people typed in their names.
             columns = {row["name"] for row in conn.execute("PRAGMA table_info(people)")}
-            if "display_name" not in columns:
-                conn.execute("ALTER TABLE people ADD COLUMN display_name TEXT")
+            for column in ("display_name", "name_changed_at"):
+                if column not in columns:
+                    conn.execute(f"ALTER TABLE people ADD COLUMN {column} TEXT")
 
     def _connect(self) -> sqlite3.Connection:
         conn = sqlite3.connect(self._path)

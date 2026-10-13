@@ -184,7 +184,7 @@ Root *.json seed files
 | `slack_data/deployment.py` | `is_hosted()` — the one answer every fail-closed guard asks (dev tokens, captcha) |
 | `slack_data/models/people.py`, `slack_data/people/` | The people store (live editing phase 1): one record per ISA account, roles, the sign-in notice. Protocol + SQLite + in-memory + DynamoDB, chosen by `PEOPLE_TABLE` / `PEOPLE_DB_PATH` |
 | `slack_data/models/changes.py`, `slack_data/changelog/` | The change log: append-only (no update/delete in the Protocol; conditional puts), public via `GET /changes`. `writer.py` writes a change and its record in one DynamoDB transaction. `CHANGELOG_TABLE` / `CHANGELOG_DB_PATH` |
-| `slack_data/api/routers/people_router.py` | `/me`, `/me/notice`, `/me/name` (the public name is typed in by the person: the ISA token gives SlackData none), `/admin/admins`, `/admin/roles`, public `/changes` — a writable router, no catalogue session |
+| `slack_data/api/routers/people_router.py` | `/me`, `/me/notice`, `/me/name` (the public name is typed in by the person, since the ISA token gives SlackData none, and can be changed once for life), `/admin/admins`, `/admin/roles`, public `/changes` — a writable router, no catalogue session |
 | `slack_data/models/brand_clients.py` | `BrandClient` / `BrandPermission` / `ManufacturerPrincipal` — the account linkage `Brand` never had |
 | `slack_data/manufacturers/` | The manufacturer API's stores: `clients.py` (Protocol + SQLite + in-memory), `dynamo.py`, `store.py`, `matching.py` (gear identity), `register.py` (onboarding CLI), `onboard.py` (the CLI's other half — dossier, key minting, ledger, end-to-end proof) |
 | `slack_data/utilities/turnstile.py` | Captcha verification — **fails closed**, unlike `fx.py` |

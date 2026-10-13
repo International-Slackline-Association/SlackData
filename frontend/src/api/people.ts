@@ -16,7 +16,8 @@ export function acknowledgeNotice(token: string, name: string): Promise<Me> {
   return postJson<Me>('/me/notice', { name }, token)
 }
 
-/** Change the name shown with your changes — on every change you made. */
+/** Change the name shown with your changes — on every change you made. Once
+ *  a name is set, it can be changed once, for life. */
 export function changeName(token: string, name: string): Promise<Me> {
   return patchJson<Me>('/me/name', { name }, token)
 }

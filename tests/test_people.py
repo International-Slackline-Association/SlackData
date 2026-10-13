@@ -95,13 +95,46 @@ def test_the_typed_name_beats_the_token_and_survives_sign_in(client, isa):
     assert client.get("/me", headers=again).json()["name"] == "Chosen Name"
 
 
-def test_a_name_can_be_changed_later(client, isa):
+def test_a_name_can_be_changed_once_for_life(client, isa):
     headers = bearer(isa())
-    client.post("/me/notice", headers=headers, json={"name": "First Name"})
-    seen = client.get("/me", headers=headers).json()["notice_seen_at"]
+    me = client.post("/me/notice", headers=headers, json={"name": "First Name"}).json()
+    assert me["name_change_available"] is True, "typing it in is not the change"
+    seen = me["notice_seen_at"]
+
     me = client.patch("/me/name", headers=headers, json={"name": "Second Name"}).json()
     assert me["name"] == "Second Name"
+    assert me["name_change_available"] is False
     assert me["notice_seen_at"] == seen, "renaming does not touch the notice"
+
+    refused = client.patch("/me/name", headers=headers, json={"name": "Third Name"})
+    assert refused.status_code == 409
+    assert client.get("/me", headers=headers).json()["name"] == "Second Name"
+
+
+def test_saving_the_same_name_again_costs_nothing(client, isa):
+    headers = bearer(isa())
+    client.post("/me/notice", headers=headers, json={"name": "Same Name"})
+    me = client.patch("/me/name", headers=headers, json={"name": " Same  Name "}).json()
+    assert me["name_change_available"] is True
+
+
+def test_a_first_name_set_from_the_account_menu_is_free(client, isa):
+    """Someone who acknowledged the notice before names were asked for."""
+    headers = bearer(isa())
+    client.post("/me/notice", headers=headers)
+    me = client.patch("/me/name", headers=headers, json={"name": "First Name"}).json()
+    assert me["name_set"] is True
+    assert me["name_change_available"] is True
+
+
+def test_the_notice_is_no_way_round_the_limit(client, isa):
+    headers = bearer(isa())
+    client.post("/me/notice", headers=headers, json={"name": "First Name"})
+    client.patch("/me/name", headers=headers, json={"name": "Second Name"})
+    assert client.post("/me/notice", headers=headers, json={"name": "Third Name"}).status_code == 409
+    # Re-sending the current name, as a re-acknowledgement would, is fine.
+    assert client.post("/me/notice", headers=headers, json={"name": "Second Name"}).status_code == 200
+    assert client.get("/me", headers=headers).json()["name"] == "Second Name"
 
 
 @pytest.mark.parametrize("bad", ["", "   ", "a" * 101, "nul\x00in", "del\x7fin"])
