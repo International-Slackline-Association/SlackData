@@ -16,7 +16,7 @@
       "email"
     ],
     "email_source": "scraped from each manufacturer's own website (2026-08-23); additions 2026-08-28, 2026-09-02. email_alt: a second address the brand also answers on, present only where one is known",
-    "email_coverage": "37/81"
+    "email_coverage": "37/80"
   },
   "manufacturers": {
     "1": {
