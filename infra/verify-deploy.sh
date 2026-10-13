@@ -11,8 +11,9 @@
 #
 # Covers Phase 1 (the catalogue is up and read-only), Phase 2 (admin auth,
 # Turnstile's two halves) and Phase 4 (the manufacturer routes exist and answer
-# as JSON). It cannot cover the authenticated happy paths: those need a real
-# Cognito token, which is a credential, not a check.
+# as JSON), and live editing's phase 1 (ISA sign-in configured, the public
+# change log served). It cannot cover the authenticated happy paths: those need
+# a real ISA sign-in or a brand's API key, which are credentials, not checks.
 #
 # ## How the Turnstile probe works, since it looks like it cannot
 #
@@ -68,14 +69,25 @@ if [ "$STATUS" = "404" ]; then ok "/api/openapi.json -> 404 (schema not publishe
 else warn "/api/openapi.json -> $STATUS; ENABLE_DOCS may be set on the function."; fi
 
 echo
-echo "Admin auth is wired to a real pool"
-STATUS="$(code "$API/submissions")"
-if [ "$STATUS" = "401" ]; then ok "GET /api/submissions -> 401 (authentication required)"
-elif [ "$STATUS" = "503" ]; then
-  bad "GET /api/submissions -> 503. The function has NO COGNITO_USER_POOL_ID, so
-      admin auth is shut and nobody can triage. Half A did not set it — check the
-      AdminUserPool resource and redeploy."
-else bad "GET /api/submissions -> $STATUS (expected 401)."; fi
+echo "Sign-in is wired to the ISA pool"
+for path in submissions me; do
+  STATUS="$(code "$API/$path")"
+  if [ "$STATUS" = "401" ]; then ok "GET /api/$path -> 401 (sign-in required)"
+  elif [ "$STATUS" = "503" ]; then
+    bad "GET /api/$path -> 503. The function has NO ISA_USER_POOL_ID, so sign-in is
+      shut and nobody can administer. Half A did not set it — check the ISA_*
+      environment in serverless.yml and redeploy."
+  else bad "GET /api/$path -> $STATUS (expected 401)."; fi
+done
+
+echo
+echo "The change log is public"
+RESULT="$(code_type "$API/changes")"
+case "$RESULT" in
+  "200 application/json"*) ok "GET /api/changes -> 200 application/json (no sign-in needed)" ;;
+  *) bad "GET /api/changes -> $RESULT (expected 200 application/json). The log is public
+      by design (D3); a 401 means the route lost its openness, a 500 the store." ;;
+esac
 
 echo
 echo "The manufacturer API answers as an API, not as the website"
@@ -94,7 +106,7 @@ echo "The manufacturer API answers as an API, not as the website"
 #    touch /api/*. This is the guard on that staying true.
 # Checked twice: with no credential and with a junk one. They can fail
 # differently — an absent Authorization header is rejected by FastAPI's security
-# dependency, a malformed bearer token by auth.py's verifier.
+# dependency, a malformed key by auth.py's verify_api_key.
 check_manufacturer_me() {
   label="$1"; shift
   RESULT="$(code_type "$@" "$API/manufacturer/me")"
@@ -105,9 +117,6 @@ check_manufacturer_me() {
     404/*)
       bad "GET /api/manufacturer/me $label -> 404. The manufacturer routes are NOT
       deployed. Half A is out of date — redeploy it." ;;
-    503/*)
-      bad "GET /api/manufacturer/me $label -> 503. No Cognito pool on the function, so
-      no brand can authenticate. Same cause as the admin 503 above." ;;
     */text/html*)
       bad "GET /api/manufacturer/me $label -> $STATUS $CTYPE. CloudFront IS REWRITING API
       ERRORS INTO THE SPA. A revoked or cross-brand credential would read as 200 OK

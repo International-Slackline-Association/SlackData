@@ -44,14 +44,35 @@ import pytest
 # and the two template-agreement tests below are exactly the ones that must run
 # on a normal dev machine, where the `aws` extra is not installed. Only the
 # fixtures that need a live DynamoDB skip.
+from slack_data.changelog.dynamo import (
+    FEED_INDEX,
+    TARGET_INDEX,
+    DynamoChangeLogRepository,
+)
+from slack_data.changelog.repository import RecordExists
+from slack_data.changelog.writer import commit_person_change
 from slack_data.manufacturers.dynamo import BRAND_INDEX, DynamoBrandClientRepository
 from slack_data.models.brand_clients import BrandClient, BrandPermission
 from slack_data.models.brand_clients import now_iso as client_now_iso
+from slack_data.models.changes import (
+    Action,
+    ChangeRecord,
+    Channel,
+    FieldChange,
+    TargetType,
+)
+from slack_data.models.people import Person, Role
 from slack_data.models.submissions import (
     Submission,
     SubmissionKind,
     SubmissionStatus,
     now_iso,
+)
+from slack_data.people.dynamo import (
+    ADMIN_INDEX,
+    EMAIL_INDEX,
+    ISA_ID_INDEX,
+    DynamoPeopleRepository,
 )
 from slack_data.submissions.dynamo import (
     BRAND_BATCH_INDEX,
@@ -208,6 +229,16 @@ def clients(tables):
     return DynamoBrandClientRepository(table=tables["BrandClientsTable"])
 
 
+@pytest.fixture
+def people(tables):
+    return DynamoPeopleRepository(table=tables["PeopleTable"])
+
+
+@pytest.fixture
+def changelog(tables):
+    return DynamoChangeLogRepository(table=tables["ChangelogTable"])
+
+
 def a_submission(**overrides) -> Submission:
     base = {
         "submission_id": overrides.pop("submission_id", "01J0000000000000000000000A"),
@@ -242,6 +273,13 @@ def test_the_index_names_match_the_template():
     assert BRAND_INDEX in clients_gsis, f"{BRAND_INDEX} not in {clients_gsis}"
     assert BRAND_BATCH_INDEX in submissions_gsis, f"{BRAND_BATCH_INDEX} not in {submissions_gsis}"
 
+    people_gsis = [g["IndexName"] for g in definitions["PeopleTable"]["GlobalSecondaryIndexes"]]
+    for index in (EMAIL_INDEX, ISA_ID_INDEX, ADMIN_INDEX):
+        assert index in people_gsis, f"{index} not in {people_gsis}"
+    log_gsis = [g["IndexName"] for g in definitions["ChangelogTable"]["GlobalSecondaryIndexes"]]
+    for index in (FEED_INDEX, TARGET_INDEX):
+        assert index in log_gsis, f"{index} not in {log_gsis}"
+
 
 def test_the_primary_keys_match_what_the_code_addresses():
     definitions = _table_definitions()
@@ -251,6 +289,18 @@ def test_the_primary_keys_match_what_the_code_addresses():
     assert definitions["BrandClientsTable"]["KeySchema"] == [
         {"AttributeName": "client_id", "KeyType": "HASH"}
     ]
+    assert definitions["PeopleTable"]["KeySchema"] == [{"AttributeName": "sub", "KeyType": "HASH"}]
+    assert definitions["ChangelogTable"]["KeySchema"] == [{"AttributeName": "id", "KeyType": "HASH"}]
+
+
+def test_the_change_log_table_has_the_name_the_isa_deny_names():
+    """`ChangelogIsAppendOnly` denies writes on `table/slackdata-changelog-prod`
+    by exact name. Renaming the table would silently drop that half of the
+    append-only guarantee, and nothing in AWS would say so."""
+    text = TEMPLATE.read_text()
+    block = text[text.index("    ChangelogTable:"):]
+    assert "TableName: ${self:service}-changelog-${self:provider.stage}" in block.split("\n\n")[0]
+    assert re.search(r"^service: slackdata$", text, re.MULTILINE)
 
 
 # --- Submissions ------------------------------------------------------------
@@ -530,3 +580,136 @@ def test_listing_a_brands_clients_uses_the_index(clients):
     assert {c.client_id for c in for_99} == {"c1", "c2"}
     assert all(c.brand_id == 99 for c in for_99)
     assert clients.list_for_brand(12345) == []
+
+
+def test_a_brand_clients_key_round_trips(clients):
+    """The API key's secret (D63) comes back exactly as stored."""
+    clients.put(a_client(client_id="client-key", secret="abc_-XYZ0123456789"))
+    assert clients.get("client-key").secret == "abc_-XYZ0123456789"
+
+
+# --- People -----------------------------------------------------------------
+
+
+def a_person(**overrides) -> Person:
+    base = {
+        "sub": "sub-1",
+        "isa_id": "ISA_0000AAAA",
+        "given_name": "Ada",
+        "family_name": "Lovelace",
+        "email": "Ada@Example.org",
+        "email_verified": True,
+    }
+    base.update(overrides)
+    return Person(**base)
+
+
+def test_a_person_round_trips(people):
+    people.put(a_person(roles=[Role.ADMIN], notice_seen_at="2026-10-13T00:00:00.000Z"))
+    back = people.get("sub-1")
+    assert back.full_name == "Ada Lovelace"
+    assert back.roles == [Role.ADMIN]
+    assert back.email_verified is True
+    assert back.notice_seen_at == "2026-10-13T00:00:00.000Z"
+
+
+def test_a_missing_person_is_none(people):
+    assert people.get("never-signed-in") is None
+
+
+def test_people_are_found_by_email_case_insensitively(people):
+    people.put(a_person(sub="sub-email", email="Case@Example.org"))
+    assert [p.sub for p in people.find_by_email("case@EXAMPLE.org")] == ["sub-email"]
+    assert people.find_by_email("nobody@example.org") == []
+
+
+def test_people_are_found_by_isa_id(people):
+    people.put(a_person(sub="sub-isa", isa_id="ISA_1234ABCD"))
+    assert people.find_by_isa_id("ISA_1234ABCD").sub == "sub-isa"
+    assert people.find_by_isa_id("ISA_FFFFFFFF") is None
+
+
+def test_the_admin_index_holds_admins_only_and_follows_revocation(people):
+    """Sparse: the attribute is written for admins and dropped on revocation,
+    so a put without it must take the person out of the index."""
+    people.put(a_person(sub="sub-admin", isa_id="ISA_A0000001", email="a@x.org", roles=[Role.ADMIN]))
+    people.put(a_person(sub="sub-editor", isa_id="ISA_A0000002", email="b@x.org"))
+    assert "sub-admin" in {p.sub for p in people.list_with_role(Role.ADMIN)}
+    assert "sub-editor" not in {p.sub for p in people.list_with_role(Role.ADMIN)}
+
+    people.put(people.get("sub-admin").model_copy(update={"roles": []}))
+    assert "sub-admin" not in {p.sub for p in people.list_with_role(Role.ADMIN)}
+
+
+# --- The change log ---------------------------------------------------------
+
+
+def a_record(**overrides) -> ChangeRecord:
+    base = {
+        "target_type": TargetType.PERSON,
+        "target_id": "ISA_0000AAAA",
+        "action": Action.ROLE_GRANT,
+        "actor_sub": "sub-admin",
+        "actor_isa_id": "ISA_A0000001",
+        "actor_role": "admin",
+        "channel": Channel.WEB,
+        "changes": {"roles": FieldChange(before=[], after=["admin"])},
+    }
+    base.update(overrides)
+    return ChangeRecord(**base)
+
+
+def test_a_record_round_trips_with_its_changes_intact(changelog):
+    """Changes are stored as one JSON string, so numbers stay numbers rather
+    than coming back as `Decimal` — which phase 3's spec edits will need."""
+    record = changelog.append(
+        a_record(changes={"breaking_strength": FieldChange(before=30, after=32.5)}, why="test")
+    )
+    [back] = [r for r in changelog.recent(100) if r.id == record.id]
+    assert back.changes["breaking_strength"].after == 32.5
+    assert isinstance(back.changes["breaking_strength"].before, int)
+    assert back.why == "test"
+
+
+def test_an_append_never_overwrites(changelog):
+    """The half of append-only that IAM cannot enforce (§ 6.5)."""
+    record = changelog.append(a_record())
+    with pytest.raises(RecordExists):
+        changelog.append(record.model_copy(update={"why": "rewritten history"}))
+    [back] = [r for r in changelog.recent(100) if r.id == record.id]
+    assert back.why is None
+
+
+def test_recent_is_newest_first_and_pages_backwards(changelog):
+    ids = [changelog.append(a_record(target_id=f"ISA_PAGE{n:04d}")).id for n in range(5)]
+    newest = changelog.recent(3)
+    assert [r.id for r in newest] == sorted([r.id for r in newest], reverse=True)
+    assert newest[0].id == ids[-1]
+    older = changelog.recent(2, before=newest[-1].id)
+    assert all(r.id < newest[-1].id for r in older)
+
+
+def test_a_targets_history_uses_the_index(changelog):
+    changelog.append(a_record(target_id="ISA_HIST0001"))
+    changelog.append(a_record(target_id="ISA_HIST0001", action=Action.ROLE_REVOKE))
+    changelog.append(a_record(target_id="ISA_HIST0002"))
+    history = changelog.for_target(TargetType.PERSON, "ISA_HIST0001")
+    assert [r.action for r in history] == [Action.ROLE_REVOKE, Action.ROLE_GRANT]
+
+
+def test_a_role_change_and_its_record_are_one_transaction(people, changelog):
+    """D28: both written, or neither. A record id that already exists cancels
+    the whole transaction — the person is NOT updated."""
+    person = people.put(a_person(sub="sub-tx", isa_id="ISA_TX000001", email="tx@x.org"))
+    granted = person.model_copy(update={"roles": [Role.ADMIN]})
+    record = a_record(target_id=person.isa_id)
+
+    commit_person_change(people, changelog, granted, record)
+    assert people.get("sub-tx").has(Role.ADMIN)
+    assert record.id in {r.id for r in changelog.for_target(TargetType.PERSON, person.isa_id)}
+
+    revoked = granted.model_copy(update={"roles": []})
+    with pytest.raises(RecordExists):
+        commit_person_change(people, changelog, revoked, record)  # same id: refused
+    assert people.get("sub-tx").has(Role.ADMIN), "the person changed without a record"
+

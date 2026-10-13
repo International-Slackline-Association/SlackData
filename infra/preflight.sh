@@ -17,10 +17,11 @@
 # - Route/throttle mismatch -> a RouteSettings key naming a route that does not
 #                              exist 404s the stage update, and the ROLLBACK
 #                              fails too, freezing the stack (2026-08-25).
-# - Orphaned admin pool    -> a retained Cognito pool sharing the live pool's
-#                              NAME. Deploys are unaffected; a hand-created brand
-#                              client against the wrong one mints tokens that 401
-#                              forever. Tags do not distinguish them (2026-08-27).
+# - Leftover admin pool    -> SlackData's own Cognito pool, retired by live
+#                              editing (D62) but DeletionPolicy: Retain, so the
+#                              deploy that drops it from the template orphans it.
+#                              It holds the old brand secrets until imported
+#                              (scripts/import_brand_keys_from_cognito.py).
 # - Orphaned retained table -> a DeletionPolicy: Retain resource that exists in
 #                              the account but not in the stack. Every later
 #                              deploy is then rejected at CHANGE SET creation by
@@ -197,16 +198,14 @@ fi
 echo
 echo "Retained resources are stack-managed (the orphan trap)"
 #
-# SubmissionsTable, BrandClientsTable and AdminUserPool are DeletionPolicy:
-# Retain, correctly — each holds something git cannot regenerate. The cost is
+# SubmissionsTable, BrandClientsTable, PeopleTable and ChangelogTable are
+# DeletionPolicy: Retain, correctly — each holds something git cannot regenerate. The cost is
 # that a stack update which CREATES one and then fails for any unrelated reason
 # rolls back everything else and leaves that resource standing, orphaned. The
 # next deploy tries to create a table name that is already taken and is refused
 # before a single resource is touched, with an error that names nothing.
 #
-# Only the DynamoDB tables can spring it: their names are account-unique. A
-# user pool's name is not, so a retained pool causes no conflict (it strands the
-# admin account instead, which is a data problem, not a deploy one).
+# Only the DynamoDB tables can spring it: their names are account-unique.
 #
 # This is a live check — skipped, not failed, without AWS access, so preflight
 # still runs offline.
@@ -214,7 +213,8 @@ STACK="slackdata-${STAGE}"
 if command -v aws >/dev/null 2>&1 && [ -n "${ACCOUNT:-}" ] && [ "${ACCOUNT:-None}" != "None" ]; then
   # Names come from the template, so renaming a table cannot leave this checking
   # the old one.
-  for pair in "SubmissionsTable:submissions" "BrandClientsTable:brand-clients"; do
+  for pair in "SubmissionsTable:submissions" "BrandClientsTable:brand-clients" \
+              "PeopleTable:people" "ChangelogTable:changelog"; do
     LOGICAL="${pair%%:*}"
     TABLE="slackdata-${pair##*:}-${STAGE}"
 
@@ -237,44 +237,25 @@ if command -v aws >/dev/null 2>&1 && [ -n "${ACCOUNT:-}" ] && [ "${ACCOUNT:-None
     fi
   done
 
-  # The user pool cannot spring the change-set trap above — pool names are not
-  # account-unique, so a retained one collides with nothing. It fails the OTHER
-  # way: two pools wearing the same name, and someone reaching for the console
-  # picks the wrong one. The brand client is created, tokens mint, and every
-  # request 401s because the API verifies against the live pool's JWKS. Silent,
-  # and it looks like a broken credential rather than a wrong pool.
-  #
-  # Do NOT try to tell them apart by tag. A pool retained through an
-  # UpdateReplacePolicy replacement keeps the CloudFormation tags it was stamped
-  # with at creation — `aws:cloudformation:stack-name` included — so the corpse
-  # and the live pool are tag-identical. This happened on staging (two
-  # `slackdata-admins-staging` pools, 2026-08-27, cleaned up 2026-09-03). The
-  # stack's own view of the resource is the only evidence that means anything.
+  # SlackData's own user pool was retired by live editing (D62): people sign
+  # in through the ISA's pool, brands send an API key. It was DeletionPolicy:
+  # Retain, so the first deploy without it ORPHANS it rather than deleting it —
+  # on purpose, because until the brands' secrets are copied out of it
+  # (scripts/import_brand_keys_from_cognito.py) it is the only place they exist.
+  # It cannot break a deploy, so it is a warning, never a failure.
   POOL_NAME="slackdata-admins-${STAGE}"
-  LIVE_POOL="$(aws cloudformation describe-stack-resource \
-      --stack-name "$STACK" --logical-resource-id AdminUserPool \
-      --query 'StackResourceDetail.PhysicalResourceId' --output text 2>/dev/null)"
   FOUND_POOLS="$(aws cognito-idp list-user-pools --max-results 60 \
       --query "UserPools[?Name=='${POOL_NAME}'].Id" --output text 2>/dev/null)"
-
   if [ -z "$FOUND_POOLS" ]; then
-    ok "no $POOL_NAME pool yet — nothing to orphan (expected before the first deploy)"
+    ok "no $POOL_NAME pool — nothing of SlackData's left in Cognito but the ISA's client"
   else
     for pool in $FOUND_POOLS; do
-      if [ "$pool" = "$LIVE_POOL" ]; then
-        ok "$POOL_NAME $pool is managed by $STACK"
-      else
-        bad "ORPHAN POOL: $pool is named $POOL_NAME but $STACK does not claim it
-      (the stack's AdminUserPool is ${LIVE_POOL:-<none — the stack has no pool at all>}).
-      Deploys still succeed; the damage is that the console now offers two
-      identical names when a brand app client is created by hand, and choosing
-      wrong 401s every request with nothing visibly broken. Its tags may still
-      name this stack — they are stamped at creation and survive retention, so
-      ignore them.
-      Check it holds no users, clients or resource server, then delete it:
-        aws cognito-idp delete-user-pool --user-pool-id $pool
-      (delete-user-pool-domain first if it has a domain, or the delete is refused)."
-      fi
+      warn "$POOL_NAME $pool still exists. SlackData no longer uses it (D62).
+      1. Import the brands' secrets while it still holds them:
+           python scripts/import_brand_keys_from_cognito.py --user-pool-id $pool --apply
+      2. After the deploy that drops it from the template, delete it:
+           aws cognito-idp delete-user-pool-domain --user-pool-id $pool --domain <its domain>
+           aws cognito-idp delete-user-pool --user-pool-id $pool"
     done
   fi
 else
@@ -284,14 +265,13 @@ fi
 echo
 echo "Frontend build inputs (half B — these are read at BUILD time by Vite)"
 # Turnstile is handled above; these two come from the stack, via ./sync-env.sh.
-for key in VITE_COGNITO_AUTHORITY VITE_COGNITO_CLIENT_ID; do
+for key in VITE_ISA_AUTHORITY VITE_ISA_CLIENT_ID; do
   value="$(grep -E "^${key}=" "$ENV_FILE" 2>/dev/null | cut -d= -f2-)"
   if [ -n "$value" ]; then
     ok "$key is set"
   else
-    warn "$key is EMPTY — that feature ships dark (see README § Turning Phase 2 on).
-      Expected on a FIRST deploy: these values only exist once half A has run.
-      Afterwards, run ./sync-env.sh to fill them in, then rebuild and deploy half B."
+    warn "$key is EMPTY — sign-in ships as \"not configured\".
+      Run ./sync-env.sh to fill it from the stack outputs, then rebuild half B."
   fi
 done
 

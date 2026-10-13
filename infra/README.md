@@ -243,7 +243,7 @@ End-to-end, in a browser, once half B is deployed:
    empty at build time — see § Turning Phase 2 on.
 2. The dialog shows a Cloudflare widget. Submitting gives a reference id.
 3. **No email arrives, and that is correct** — the app sends none. See § No email, below.
-4. `/admin` offers a Cognito sign-in (not a token prompt), and the submission is in the queue with
+4. `/admin` offers the ISA sign-in (not a token prompt), and the submission is in the queue with
    its **brand** shown next to the name.
 5. Approve it → a JSON patch appears with "Approved — but not live". Apply it to the root `*.json`,
    redeploy half A, then **Mark handled**.
@@ -328,7 +328,7 @@ unchanged. What `serverless.yml` now also creates:
 |---|---|
 | `slackdata-submissions-prod` (DynamoDB) | The submission store. On-demand, TTL on `expires_at`, PITR on. **Not the catalogue** — that is still a read-only file in the image. |
 | `status-created_at-index` (GSI) | The single query the app makes: pending, oldest first. |
-| `slackdata-admins-prod` (Cognito) | One admin user, self-signup off. Created by hand, see below. |
+| ~~`slackdata-admins-prod` (Cognito)~~ | Retired by live editing phase 1 (D62): people sign in through the ISA's `isa-users` pool, and roles live in `slackdata-people-prod`. See [LIVE_EDITING_PHASE_1.md](../LIVE_EDITING_PHASE_1.md). |
 | Route throttling | `POST /submissions` at 2/sec (burst 5); everything else 50/sec. |
 
 The `/api/*` CloudFront behaviour needed **no change** — it already forwards all query strings and
@@ -348,16 +348,17 @@ cd infra
 export TURNSTILE_SECRET='...'              # Cloudflare dashboard, slackdata.org
 ./preflight.sh
 
-# 1. Half A. Creates both DynamoDB tables, the Cognito pool, and the uploads bucket.
+# 1. Half A. Creates the DynamoDB tables and the uploads bucket. (Sign-in is the
+#    ISA's pool, which this stack only names — LIVE_EDITING_PLAN.md D61/D62.)
 npx serverless deploy --stage prod
 
-# 2. Read back what it created.
+# 2. Read back what it names.
 out() { aws cloudformation describe-stacks --stack-name slackdata-prod \
   --query "Stacks[0].Outputs[?OutputKey=='$1'].OutputValue" --output text; }
-echo "authority: https://cognito-idp.eu-central-1.amazonaws.com/$(out AdminUserPoolId)"
-echo "client id: $(out AdminUserPoolClientId)"
+echo "authority: https://cognito-idp.eu-central-1.amazonaws.com/$(out IsaUserPoolId)"
+echo "client id: $(out IsaClientId)"
 
-# 3. Fill frontend/.env.production. `./sync-env.sh` writes the two Cognito values
+# 3. Fill frontend/.env.production. `./sync-env.sh` writes the two sign-in values
 #    in place (keeping the comments around them), plus the Turnstile SITE key
 #    from $TURNSTILE_SITE_KEY — so both Turnstile halves come from this one
 #    shell and cannot drift apart. See § Turnstile.
@@ -366,12 +367,10 @@ echo "client id: $(out AdminUserPoolClientId)"
 # 4. Then run half B (build + sync + invalidate).
 ```
 
-**The manufacturer API deploys with everything else** — no flag. Its Cognito resource server needs
-`cognito-idp:CreateResourceServer` on your own SSO identity (not the Lambda role, which holds no
-Cognito action at all); that is granted, confirmed 2026-08-24. Leave the resource to CloudFormation —
-one created by hand collides with it on the next deploy. Deployed is not onboarded: no brand can
-authenticate until its app client exists (§ Onboarding a manufacturer). See
-[LAMBDA_ROLE_PERMISSIONS.md](LAMBDA_ROLE_PERMISSIONS.md) § Deploy-time permissions.
+**The manufacturer API deploys with everything else** — no flag, and since live editing phase 1 no
+Cognito resource either: a brand authenticates with an API key from `slackdata-brand-clients-prod`.
+Deployed is not onboarded: no brand can authenticate until it has a key (§ Onboarding a
+manufacturer).
 
 **Both of the empty values in `.env.production` fail *dark*, not loudly**, which is the behaviour to
 know about before you go looking for a bug:
@@ -379,22 +378,27 @@ know about before you go looking for a bug:
 | Left empty | What happens |
 |---|---|
 | `VITE_TURNSTILE_SITE_KEY` | The suggestion form is **not rendered at all** — and is tree-shaken out of the bundle entirely. Deliberate: the API rejects every un-captcha'd submission when hosted, so shipping the form without a key would mean a visibly broken feature rather than an absent one. A console warning explains it. |
-| `VITE_COGNITO_AUTHORITY` / `_CLIENT_ID` | `/admin` renders "sign-in is not configured" instead of the local dev-token prompt, which the API would reject anyway once a pool exists. |
+| `VITE_ISA_AUTHORITY` / `_CLIENT_ID` | Sign-in renders "not configured" instead of the local dev-token prompt, which the hosted API would reject anyway. |
 
 Neither is a security control — the server enforces both independently (`utilities/turnstile.py`
-fails closed, `api/auth.py` rejects the dev token whenever a pool is configured). They exist so a
+fails closed, `api/auth.py` rejects the dev token whenever it is hosted or the ISA pool is configured). They exist so a
 half-finished deploy looks unfinished rather than broken.
 
 ### Retained resources and the orphan trap
 
-Three resources carry `DeletionPolicy: Retain` and `UpdateReplacePolicy: Retain`, because each holds
+Four resources carry `DeletionPolicy: Retain` and `UpdateReplacePolicy: Retain`, because each holds
 something git cannot regenerate:
 
 | Resource | What is lost without it |
 |---|---|
 | `SubmissionsTable` | what the public typed — corrections and tips |
-| `BrandClientsTable` | every brand credential mapping |
-| `AdminUserPool` | a real person's login, and their MFA enrolment |
+| `BrandClientsTable` | every brand's API key and the brand it speaks for |
+| `PeopleTable` | every role grant — every admin locked out until re-bootstrapped |
+| `ChangelogTable` | the permanent public record of who changed what (kept forever, D11) |
+
+(`AdminUserPool` was the fifth until live editing phase 1 retired it, D62. Its retained corpse is
+what [LIVE_EDITING_PHASE_1.md](../LIVE_EDITING_PHASE_1.md) deletes by hand; the two paragraphs
+below on retained pools are its history.)
 
 Those policies are right and should stay. **The trap is their consequence.** If a stack update
 creates one of them and then fails for any unrelated reason, the rollback deletes everything else and
@@ -402,7 +406,7 @@ leaves that resource standing, orphaned from the stack. Every deploy after that 
 resource whose name is already taken, and CloudFormation refuses the change set before touching a
 single resource.
 
-Only the two DynamoDB tables can actually spring it — their names are account-unique. A retained user
+Only the DynamoDB tables can actually spring it — their names are account-unique. A retained user
 pool collides with nothing (pool names need not be unique); it strands the admin account instead,
 which is a data problem rather than a deploy one.
 
@@ -459,11 +463,12 @@ cd infra && ./preflight.sh --stage prod && python3 ./check-routes.py
 #    alongside them, so there is little that can fail the update.
 npx serverless deploy --stage prod
 
-# 2. Confirm all three are CREATE_COMPLETE and stack-managed before going on.
+# 2. Confirm all four are CREATE_COMPLETE and stack-managed before going on.
 aws cloudformation describe-stack-resources --stack-name slackdata-prod \
   --query "StackResources[?LogicalResourceId=='SubmissionsTable' ||
                            LogicalResourceId=='BrandClientsTable' ||
-                           LogicalResourceId=='AdminUserPool'].[LogicalResourceId,ResourceStatus]" \
+                           LogicalResourceId=='PeopleTable' ||
+                           LogicalResourceId=='ChangelogTable'].[LogicalResourceId,ResourceStatus]" \
   --output table
 
 # 3. Any deploy from here is safe: the resources already exist IN the stack,
@@ -605,36 +610,24 @@ The Lambda role still carries `ses:SendEmail` / `ses:SendRawEmail` from the Phas
 It is **unused**. Removing it is queued for the next revision of that policy rather than a round-trip
 of its own — see [LAMBDA_ROLE_PERMISSIONS.md](LAMBDA_ROLE_PERMISSIONS.md).
 
-### Creating the admin user (once, by hand)
+### The first admins (live editing, phase 1)
 
-Self-signup is disabled, so the account is created with the CLI. There is no sign-up page to gate.
+There is no SlackData user pool any more (D62): admins sign in with their **ISA account**, through
+SlackData's app client in the ISA's `isa-users` pool, and the admin role lives in
+`slackdata-people-prod`.
 
-```bash
-POOL=$(out AdminUserPoolId)
-aws cognito-idp admin-create-user \
-  --user-pool-id "$POOL" --username 'you@example.org' \
-  --user-attributes Name=email,Value='you@example.org' Name=email_verified,Value=true
-```
-
-Cognito emails a temporary password; the first login forces a change. Turn on MFA from the hosted
-login page — the pool allows it (`OPTIONAL` + TOTP) and this is the account that can read everything
-the public has submitted.
-
-**Then put the user in the admin group — being in the pool is not being an admin.** The API requires
-`COGNITO_ADMIN_GROUP` (default `admins`, created by the template as `AdminUserPoolGroup`) in the ID
-token's `cognito:groups` claim; without it every triage route answers 403. Cognito adds the claim
-itself, so the SPA needs nothing.
+The first admins are bootstrapped by **verified ISA email**: export them, comma separated, in the
+shell that deploys half A. They are never written in the repo, which is public.
 
 ```bash
-aws cognito-idp admin-add-user-to-group \
-  --user-pool-id "$POOL" --username 'you@example.org' --group-name admins
+export ADMIN_BOOTSTRAP_EMAILS='first@example.org,second@example.org'
+cd infra && npx serverless deploy --stage prod
 ```
 
-Sign out and back in afterwards: the claim is stamped into the token at sign-in, so an existing
-session keeps the old, group-less one until it refreshes.
-
-**On a stage that already has an admin, do this in the same sitting as the deploy that adds the
-group** — the moment the new Lambda is live, an account outside the group is locked out of triage.
+Each person on the list becomes admin the first time they sign in with that address verified — once,
+logged in the public change log as `bootstrap`. After that an admin grants and revokes admin on the
+`/admin` page; the allowlist never re-grants someone who was revoked. Removing an address from the
+list later changes nothing for someone it already granted.
 
 ### Onboarding a manufacturer (Phase 4, by hand and on purpose)
 
@@ -663,40 +656,32 @@ python -m slack_data.manufacturers.register --onboard \
 
 That one command re-shows the dossier, asks you to confirm, and then:
 
-1. resolves the user pool **from the stack's `AdminUserPoolId` output**, never by name;
-2. creates the Cognito app client with a secret, `client_credentials` only, and exactly the
-   `slackdata/gear.write` scope;
-3. maps the client to the brand in `slackdata-brand-clients-prod` (no `--contact` — see below);
-4. mints a token and calls `GET /manufacturer/me`, failing if it does not answer with the brand you
-   named — so a credential is never handed over untested;
-5. appends the row to [onboarded-brands.md](onboarded-brands.md);
-6. writes the credential to a **0600 file under `~/.slackdata/credentials/`** and prints only the
+1. mints a random API key (client id + secret) — nothing is created in AWS, so nothing can be
+   created in the wrong place;
+2. maps it to the brand in `slackdata-brand-clients-prod` (no `--contact` — see below);
+3. calls `GET /manufacturer/me` with the key, failing if it does not answer with the brand you named
+   — so a key is never handed over untested;
+4. appends the row to [onboarded-brands.md](onboarded-brands.md);
+5. writes the credential to a **0600 file under `~/.slackdata/credentials/`** and prints only the
    path. Nothing secret reaches your terminal. Send it to the brand, point them at
    <https://slackdata.org/for-manufacturers>, then delete the file.
 
-If any step after the app client fails, the client is **deleted again** — a half-onboarded brand
-never leaves a live credential in the pool with nothing recording that it exists.
+If any step after minting fails, the key is **revoked again** (secret cleared, inactive) — a
+half-onboarded brand never leaves a live key with nothing recording that it exists.
 
 `--verified-via` is required. It is the audit trail, and a ledger you have to remember to write is
 one that is complete right up until the day it matters. `--yes` skips the confirmation prompt;
-`--no-verify` skips step 4 (only useful before the API is deployed).
+`--no-verify` skips step 3 (only useful before the API is deployed).
 
-> **Why the console step moved into the tool.** The console picks a pool by *name*, and a failed
-> rollback can leave a second pool with the identical name behind — one did, on 2026-08-25. Choosing
-> the wrong one fails **silently**: the client is created, tokens mint, and every request 401s
-> because the API verifies against the other pool's JWKS. Resolving the pool from a stack output
-> cannot make that mistake.
->
-> The other thing not to get wrong is still true and is now unreachable by accident: the admin
-> sign-in client (`slackdata-admin-spa-prod`) lives in the same pool and must **never** have a secret
-> or the `client_credentials` grant — a browser cannot keep a secret and PKCE breaks outright if it
-> has one. The tool only ever creates new clients; it never edits an existing one.
+> **Keys, not Cognito clients, since live editing phase 1** (D63–D65). The key is stored readable
+> in the table (D64) so a brand's editors will be able to see it in their account; the brand sends
+> `Authorization: Bearer <client_id>:<secret>` on every call.
 
-**Registering a client you made by hand** (recovery, or a console-created client) still works —
-that is `--client-id` *without* `--onboard`:
+**Re-mapping an existing client** (its brand or permissions) is `--client-id` *without*
+`--onboard`. It keeps the client's key:
 
 ```bash
-python -m slack_data.manufacturers.register --client-id '<from the console>' --brand 'Balance Community'
+python -m slack_data.manufacturers.register --client-id '<client id>' --brand 'Balance Community'
 ```
 
 #### Onboarding policy
@@ -793,7 +778,7 @@ rather than a confident answer about the wrong brand. The CLI also prints a warn
 to a hosted store. Before handing credentials over, confirm:
 
 ```bash
-curl -H 'Authorization: Bearer <their token>' "$BASE/api/manufacturer/me"
+curl -H 'Authorization: Bearer <client_id>:<secret>' "$BASE/api/manufacturer/me"
 # must report the brand_id and brand_name you registered. A 503 means re-run the
 # CLI against a catalogue seeded from the deployed commit.
 ```

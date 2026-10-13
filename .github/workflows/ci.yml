@@ -177,6 +177,8 @@ jobs:
           cd slack_data
           SUBMISSIONS_DB_PATH=/tmp/cypress-submissions.db \
           BRAND_CLIENTS_DB_PATH=/tmp/cypress-brand-clients.db \
+          PEOPLE_DB_PATH=/tmp/cypress-people.db \
+          CHANGELOG_DB_PATH=/tmp/cypress-changelog.db \
           python -m uvicorn main:app --port 8000 &
           for i in $(seq 1 60); do
             curl -sf localhost:8000/webbing/?limit=1 >/dev/null && exit 0

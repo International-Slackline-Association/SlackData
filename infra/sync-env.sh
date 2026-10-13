@@ -4,13 +4,11 @@
 #
 #   cd infra && ./sync-env.sh [stage]
 #
-# Solves the there-and-back-again in README § Turning Phase 2 on: two of the three
-# values Vite inlines at build time do not exist until half A has created the
-# Cognito pool, so they have to be read back out of CloudFormation and written
-# into the env file before half B is built. Doing that by hand means copying two
-# opaque identifiers between a terminal and an editor, which is exactly the kind
-# of step that silently ships a half-configured frontend — and both failures are
-# DARK (see the table in the README), so nobody notices.
+# The sign-in values Vite inlines at build time — the ISA pool and SlackData's
+# app client in it (LIVE_EDITING_PLAN.md D61) — are read back out of the stack's
+# outputs rather than copied by hand, so the SPA and the API can never be built
+# against two different clients. Both are public values. (Until 2026-10 these
+# came from SlackData's own pool; that pool is gone, D62.)
 #
 # The Turnstile SITE key comes from Cloudflare rather than AWS, but it IS written
 # here — from `$TURNSTILE_SITE_KEY` — and that is deliberate. Both Turnstile
@@ -52,16 +50,18 @@ out() {
 }
 
 echo "Reading outputs from $STACK (region $REGION)…"
-POOL_ID="$(out AdminUserPoolId)"
-CLIENT_ID="$(out AdminUserPoolClientId)"
+POOL_ID="$(out IsaUserPoolId)"
+CLIENT_ID="$(out IsaClientId)"
 
 if [ -z "$POOL_ID" ] || [ "$POOL_ID" = "None" ]; then
-  echo "error: no AdminUserPoolId output on $STACK." >&2
-  echo "       Has half A been deployed? (npx serverless deploy --stage $STAGE)" >&2
+  echo "error: no IsaUserPoolId output on $STACK." >&2
+  echo "       Has half A been deployed since live editing phase 1?" >&2
+  echo "       (npx serverless deploy --stage $STAGE)" >&2
   exit 1
 fi
 
-AUTHORITY="https://cognito-idp.${REGION}.amazonaws.com/${POOL_ID}"
+# The ISA pool lives in eu-central-1 whatever region this stack is in.
+AUTHORITY="https://cognito-idp.eu-central-1.amazonaws.com/${POOL_ID}"
 
 # In place, key by key — the file is full of comments that explain each value,
 # and rewriting it wholesale would throw them away.
@@ -76,8 +76,8 @@ set_key() {
   echo "  $key=${value}"
 }
 
-set_key VITE_COGNITO_AUTHORITY "$AUTHORITY"
-set_key VITE_COGNITO_CLIENT_ID "$CLIENT_ID"
+set_key VITE_ISA_AUTHORITY "$AUTHORITY"
+set_key VITE_ISA_CLIENT_ID "$CLIENT_ID"
 
 # The site key, from the same shell that carried the secret into half A.
 if [ -n "${TURNSTILE_SITE_KEY:-}" ]; then
