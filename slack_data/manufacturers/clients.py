@@ -70,11 +70,13 @@ CREATE TABLE IF NOT EXISTS brand_clients (
 CREATE INDEX IF NOT EXISTS brand_clients_brand ON brand_clients (brand_id);
 """
 
-# Columns added after the first release. Empty today; kept so the next person
-# adds one here rather than discovering that CREATE TABLE IF NOT EXISTS did
-# nothing to their existing file. See the submissions repository for the same
+# Columns added after the first release — CREATE TABLE IF NOT EXISTS does
+# nothing to an existing file. See the submissions repository for the same
 # machinery and the reason it is not "just delete the database".
-_ADDED_COLUMNS: dict[str, str] = {}
+_ADDED_COLUMNS: dict[str, str] = {
+    # The API key's secret, once Cognito stopped holding it (D63).
+    "secret": "TEXT",
+}
 
 
 class SqliteBrandClientRepository:

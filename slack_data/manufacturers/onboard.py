@@ -1,30 +1,22 @@
 """
 Onboarding a brand in one command — the operator's half of the manufacturer API.
 
-`register.py` maps a Cognito client id onto a brand. That is one of five steps,
-and the other four were a console, a markdown table and two curl commands held
-together by a runbook. This module is the rest, so the whole thing is:
+`register.py` maps an API key onto a brand. That is one of five steps, and the
+other four were a console, a markdown table and two curl commands held together
+by a runbook. This module is the rest, so the whole thing is:
 
     python -m slack_data.manufacturers.register --check "Balance Community"
     # ...send the out-of-band challenge, wait for the reply...
     python -m slack_data.manufacturers.register --onboard \\
         --brand "Balance Community" --verified-via "replied to info@balancecommunity.com"
 
-## Why the console step moved in here
+## The key is minted here, not in Cognito
 
-Creating the app client by hand is where this goes wrong, and the failure is
-silent. The console asks for a pool by NAME, and a failed deploy can leave a
-second pool with the identical name behind (one did, on 2026-08-25). Pick the
-wrong one and everything still "works": the client is created, the brand gets a
-credential, tokens mint — and every request 401s, because the API verifies
-against the other pool's JWKS. Resolving the pool from the **stack output**
-instead of a name cannot make that mistake.
-
-The same call also pins the four settings that must be right and have no second
-chance: a secret (a machine can hold one), `client_credentials` only, the
-`slackdata/gear.write` scope, and nothing else. See `infra/serverless.yml`
-::AdminUserPoolClient for the *other* kind of client in this pool — the admin
-SPA, which must never have a secret or this grant.
+Until 2026-10 a brand's credential was a Cognito app client in SlackData's own
+user pool. That pool is gone (LIVE_EDITING_PLAN.md D62): a key is now a random
+client id and secret generated here and stored in the brand-clients table
+(D63). Nothing in AWS has to be created for one, so nothing can be created in
+the wrong place.
 
 ## What is deliberately NOT automated
 
@@ -51,6 +43,7 @@ from __future__ import annotations
 import json
 import os
 import re
+import secrets
 import stat
 from dataclasses import dataclass
 from datetime import datetime, timezone
@@ -65,31 +58,11 @@ LEDGER = ROOT / "infra" / "onboarded-brands.md"
 # committed by an absent-minded `git add -A`.
 CREDENTIALS_DIR = Path.home() / ".slackdata" / "credentials"
 
-DEFAULT_STACK = "slackdata-prod"
-DEFAULT_REGION = "eu-central-1"
 DEFAULT_API = "https://slackdata.org/api"
-GEAR_SCOPE = "slackdata/gear.write"
 
 
 class OnboardError(RuntimeError):
     """Anything that should stop the operator rather than be worked around."""
-
-
-def _boto3():
-    """Imported lazily, like every other AWS path in this repo.
-
-    The suite, the local server and Cypress all run without boto3 installed
-    (`submissions/repository.py`), and onboarding is the one workflow that
-    genuinely cannot. So the import failure has to name the fix.
-    """
-    try:
-        import boto3
-    except ModuleNotFoundError as error:  # pragma: no cover - environment-dependent
-        raise OnboardError(
-            "onboarding needs boto3, which is an optional dependency:\n"
-            "    pip install '-e.[aws]'"
-        ) from error
-    return boto3
 
 
 # --- The evidence -----------------------------------------------------------
@@ -213,144 +186,49 @@ def render_dossier(dossier: Dossier) -> str:
     return "\n".join(lines)
 
 
-# --- AWS --------------------------------------------------------------------
-
-
-def stack_outputs(stack: str = DEFAULT_STACK, region: str = DEFAULT_REGION) -> dict[str, str]:
-    """The deployed stack's outputs, which is where the pool id comes from."""
-    client = _boto3().client("cloudformation", region_name=region)
-    try:
-        stacks = client.describe_stacks(StackName=stack)["Stacks"]
-    except Exception as error:
-        raise OnboardError(f"could not read stack {stack!r}: {error}") from error
-    return {o["OutputKey"]: o["OutputValue"] for o in stacks[0].get("Outputs", [])}
-
-
-def resolve_pool(outputs: dict[str, str]) -> tuple[str, str]:
-    """(user pool id, token url) — both from the stack, never from a name.
-
-    The whole reason this function exists rather than a `--user-pool-id` the
-    operator types: a pool NAME is ambiguous (a failed rollback orphaned a
-    second `slackdata-admins-prod` on 2026-08-25) and picking the wrong one
-    fails silently at token-verification time.
-    """
-    pool = outputs.get("AdminUserPoolId")
-    token_url = outputs.get("ManufacturerTokenUrl")
-    if not pool or not token_url:
-        raise OnboardError(
-            "the stack has no AdminUserPoolId/ManufacturerTokenUrl output, so the\n"
-            "  manufacturer API is not deployed yet. Deploy half A first:\n"
-            "      cd infra && npx serverless deploy --stage prod"
-        )
-    return pool, token_url
+# --- The key ----------------------------------------------------------------
 
 
 def _slug(name: str) -> str:
     return re.sub(r"[^a-z0-9]+", "-", name.lower()).strip("-") or "brand"
 
 
-def create_app_client(
-    pool_id: str, brand_name: str, stage: str = "prod", region: str = DEFAULT_REGION
-) -> tuple[str, str]:
-    """Create the brand's Cognito app client. Returns (client_id, client_secret).
+def new_key() -> tuple[str, str]:
+    """A fresh (client_id, secret).
 
-    The four settings below are the ones with no second chance, and each is the
-    opposite of what the admin SPA client in the same pool needs:
-
-    - `GenerateSecret=True` — a machine can keep one; a browser cannot, and the
-      SPA's PKCE exchange breaks outright if it has one.
-    - `client_credentials` only — no user is signing in here.
-    - exactly the `slackdata/gear.write` scope, so a stolen token cannot be
-      replayed against anything else.
-    - no callback or logout URLs, because there is no browser redirect at all.
+    The client id is 26 hex characters, the length of the Cognito ids issued
+    before it, and contains no ':' — the separator in the header. The
+    secret is 256 bits from the OS's CSPRNG, URL-safe base64, so it also never
+    contains ':'.
     """
-    cognito = _boto3().client("cognito-idp", region_name=region)
-    name = f"slackdata-brand-{_slug(brand_name)}-{stage}"
-    try:
-        response = cognito.create_user_pool_client(
-            UserPoolId=pool_id,
-            ClientName=name,
-            GenerateSecret=True,
-            AllowedOAuthFlows=["client_credentials"],
-            AllowedOAuthFlowsUserPoolClient=True,
-            AllowedOAuthScopes=[GEAR_SCOPE],
-            SupportedIdentityProviders=["COGNITO"],
-            EnableTokenRevocation=True,
-        )
-    except Exception as error:
-        message = str(error)
-        if "ScopeDoesNotExistException" in message or "scope" in message.lower():
-            raise OnboardError(
-                f"the pool has no {GEAR_SCOPE!r} scope, which means the resource server\n"
-                "  was never created. Redeploy half A: cd infra && npx serverless deploy --stage prod"
-            ) from error
-        raise OnboardError(f"could not create the app client: {error}") from error
-
-    client = response["UserPoolClient"]
-    return client["ClientId"], client["ClientSecret"]
-
-
-def delete_app_client(pool_id: str, client_id: str, region: str = DEFAULT_REGION) -> None:
-    """Undo a create when a later step fails, so a half-onboarded brand has no
-    live credential sitting in the pool with nothing recording that it exists."""
-    try:
-        _boto3().client("cognito-idp", region_name=region).delete_user_pool_client(
-            UserPoolId=pool_id, ClientId=client_id
-        )
-    except Exception as error:  # noqa: BLE001 - best effort; the caller is already failing
-        # Reported, never raised: we are already unwinding a failed onboarding,
-        # and masking that with a cleanup error would hide the real cause. A
-        # leftover client is visible in the pool and revocable by hand.
-        print(f"  ! could not delete the app client {client_id}: {error}")
-        print("    delete it by hand, or it sits in the pool with nothing recording it.")
+    return secrets.token_hex(13), secrets.token_urlsafe(32)
 
 
 # --- Proving it works before anyone is told it does -------------------------
 
 
-def verify_end_to_end(
-    token_url: str, client_id: str, client_secret: str, api_base: str = DEFAULT_API
-) -> dict:
-    """Mint a token exactly as the brand will, and ask the API who it is.
+def verify_end_to_end(client_id: str, client_secret: str, api_base: str = DEFAULT_API) -> dict:
+    """Call the API exactly as the brand will, and ask who it is.
 
-    This is the check the runbook asked an operator to remember. Doing it here
-    means a credential is never handed over untested — and it catches the two
-    failures that otherwise surface as the brand's problem: a `brand_id` that
-    drifted between this machine's catalogue and the deployed image (503), and
-    an app client created against the wrong pool (401).
+    Doing it here means a key is never handed over untested — and it catches a
+    `brand_id` that drifted between this machine's catalogue and the deployed
+    image (503) before it becomes the brand's problem.
     """
     import httpx
 
     try:
-        token_response = httpx.post(
-            token_url,
-            data={"grant_type": "client_credentials", "scope": GEAR_SCOPE},
-            auth=(client_id, client_secret),
-            headers={"Content-Type": "application/x-www-form-urlencoded"},
+        identity = httpx.get(
+            f"{api_base.rstrip('/')}/manufacturer/me",
+            headers={"Authorization": f"Bearer {client_id}:{client_secret}"},
             timeout=15,
         )
     except Exception as error:
-        raise OnboardError(f"could not reach the token endpoint: {error}") from error
-
-    if token_response.status_code != 200:
-        raise OnboardError(
-            f"the token endpoint refused these credentials ({token_response.status_code}):\n"
-            f"    {token_response.text[:300]}"
-        )
-    token = token_response.json().get("access_token")
-    if not token:
-        raise OnboardError(f"no access_token in the response: {token_response.text[:300]}")
-
-    identity = httpx.get(
-        f"{api_base.rstrip('/')}/manufacturer/me",
-        headers={"Authorization": f"Bearer {token}"},
-        timeout=15,
-    )
+        raise OnboardError(f"could not reach the API: {error}") from error
     if identity.status_code == 503:
         raise OnboardError(
             "the API answered 503 — our record of this brand's id disagrees with the\n"
             "  deployed catalogue. Re-run against a catalogue seeded from the deployed\n"
-            "  commit. The credential is NOT usable yet; do not hand it over."
+            "  commit. The key is NOT usable yet; do not hand it over."
         )
     if identity.status_code != 200:
         raise OnboardError(
@@ -364,9 +242,9 @@ def verify_end_to_end(
 
 
 def write_credential_file(
-    brand_name: str, client_id: str, client_secret: str, token_url: str, api_base: str
+    brand_name: str, client_id: str, client_secret: str, api_base: str
 ) -> Path:
-    """Write the credential to a 0600 file and return the path.
+    """Write the key to a 0600 file and return the path.
 
     Not printed to the terminal: a secret on stdout lives in scrollback, in tmux
     history and in whatever the terminal logs, and this one grants write access
@@ -378,26 +256,22 @@ def write_credential_file(
 
     path = CREDENTIALS_DIR / f"{_slug(brand_name)}-{datetime.now(timezone.utc):%Y-%m-%d}.txt"
     path.write_text(
-        f"""SlackData gear API credentials — {brand_name}
-Issued {datetime.now(timezone.utc):%Y-%m-%d}. Send these to the brand, then DELETE this file.
+        f"""SlackData gear API key — {brand_name}
+Issued {datetime.now(timezone.utc):%Y-%m-%d}. Send this to the brand, then DELETE this file.
 
   client_id      {client_id}
   client_secret  {client_secret}
-  token_url      {token_url}
-  scope          {GEAR_SCOPE}
   api            {api_base}
 
-Getting a token:
+Every call sends both, joined by a colon:
 
-  curl -s -X POST '{token_url}' \\
-    -H 'Content-Type: application/x-www-form-urlencoded' \\
-    -u '{client_id}:{client_secret}' \\
-    -d 'grant_type=client_credentials&scope={GEAR_SCOPE}'
+  curl -s '{api_base.rstrip("/")}/manufacturer/me' \\
+    -H 'Authorization: Bearer {client_id}:{client_secret}'
 
 Documentation for them: https://slackdata.org/for-manufacturers
 
-We do not keep a copy of the secret. If it is lost, the client is revoked and a
-new one issued — see infra/README.md § Onboarding a manufacturer.
+If it is lost or leaked, the key is revoked and a new one issued — see
+infra/README.md § Onboarding a manufacturer.
 """,
         encoding="utf-8",
     )

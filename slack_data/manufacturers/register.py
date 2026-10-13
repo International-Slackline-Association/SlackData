@@ -1,5 +1,5 @@
 """
-Registering a brand's API client. `python -m slack_data.manufacturers.register`
+Registering a brand's API key. `python -m slack_data.manufacturers.register`
 
 The mechanism for onboarding a manufacturer, which is **not** the same thing as
 the decision to onboard one. Who verifies that someone mailing from
@@ -19,9 +19,10 @@ change — and it happens perhaps a dozen times a year. An endpoint for it would
 be a permanent attack surface in exchange for saving a command, and it would
 need its own authorization story on top of the admin's.
 
-    # register (or re-register) a client, resolving the brand by name
-    python -m slack_data.manufacturers.register \\
-        --client-id 3n4kf9... --brand "Balance Community"
+    # the usual path: check, challenge out of band, then onboard
+    python -m slack_data.manufacturers.register --check "Balance Community"
+    python -m slack_data.manufacturers.register --onboard \\
+        --brand "Balance Community" --verified-via "replied to info@..."
 
     # revoke: takes effect on the very next request, no redeploy
     python -m slack_data.manufacturers.register --client-id 3n4kf9... --deactivate
@@ -29,10 +30,10 @@ need its own authorization story on top of the admin's.
     # what does this brand hold?
     python -m slack_data.manufacturers.register --brand "Balance Community" --list
 
-The `client_id` is Cognito's, created in the console as an app client with the
-`client_credentials` grant and the `slackdata/gear.write` scope. **The secret is
-never handled here** — the brand gets it from the console operator once and we
-never store it, which is why no `secretsmanager:*` grant was requested.
+A key is a client id and a secret, both minted by `--onboard` (D63, D65); the
+brand sends `Authorization: Bearer <client_id>:<secret>`. The secret is stored
+readable in the brand-clients table (D64) and written once to a 0600 file under
+`~/.slackdata/credentials/` for handing over. It is never printed.
 
 Run against the same environment the API runs in: `BRAND_CLIENTS_TABLE` set
 targets the hosted DynamoDB table, unset writes the local SQLite file.
@@ -191,39 +192,30 @@ def _onboard(args, clients) -> int:
             print("  cancelled — nothing was created.")
             return 1
 
-    outputs = onboard.stack_outputs(args.stack, args.region)
-    pool_id, token_url = onboard.resolve_pool(outputs)
-    print(f"\n  pool          {pool_id}  (from {args.stack} outputs, not by name)")
-
-    client_id, client_secret = onboard.create_app_client(
-        pool_id, brand_name, stage=args.stage, region=args.region
+    client_id, client_secret = onboard.new_key()
+    client = BrandClient(
+        client_id=client_id,
+        brand_id=brand_id,
+        brand_name=brand_name,
+        permissions=list(DEFAULT_PERMISSIONS),
+        contact_email=None,  # see infra/README.md § What we store about a brand contact
+        secret=client_secret,
+        active=True,
+        created_at=now_iso(),
+        note=f"verified via {args.verified_via}",
     )
-    print(f"  ✓ app client created   {client_id}")
+    clients.put(client)
+    print(f"\n  ✓ key created and mapped to brand id {brand_id} ({brand_name})   {client_id}")
 
-    # From here on, a failure must not leave a live credential behind.
+    # From here on, a failure must not leave a live key behind.
     try:
-        client = BrandClient(
-            client_id=client_id,
-            brand_id=brand_id,
-            brand_name=brand_name,
-            permissions=list(DEFAULT_PERMISSIONS),
-            contact_email=None,  # see infra/README.md § What we store about a brand contact
-            active=True,
-            created_at=now_iso(),
-            note=f"verified via {args.verified_via}",
-        )
-        clients.put(client)
-        print(f"  ✓ mapped to brand id {brand_id} ({brand_name})")
-
         if args.verify:
-            identity = onboard.verify_end_to_end(
-                token_url, client_id, client_secret, args.api
-            )
+            identity = onboard.verify_end_to_end(client_id, client_secret, args.api)
             if identity.get("brand_id") != brand_id:
                 raise onboard.OnboardError(
-                    f"the API says these credentials are {identity.get('brand_name')!r}"
+                    f"the API says this key is {identity.get('brand_name')!r}"
                     f" (id {identity.get('brand_id')}), not {brand_name!r} (id {brand_id})."
-                    " Do NOT hand them over."
+                    " Do NOT hand it over."
                 )
             print(f"  ✓ /manufacturer/me -> {identity['brand_name']} (id {identity['brand_id']})")
         else:
@@ -235,23 +227,19 @@ def _onboard(args, clients) -> int:
         )
         print(f"  ✓ recorded in {onboard.LEDGER.relative_to(onboard.ROOT)}")
 
-        path = onboard.write_credential_file(
-            brand_name, client_id, client_secret, token_url, args.api
-        )
+        path = onboard.write_credential_file(brand_name, client_id, client_secret, args.api)
     except Exception:
-        print("\n  ! failed after creating the app client — deleting it again so no")
-        print("    live credential is left with nothing recording it.")
-        onboard.delete_app_client(pool_id, client_id, args.region)
+        print("\n  ! failed after creating the key — revoking it again so no live key is")
+        print("    left with nothing recording it.")
         clients.put(
-            BrandClient(
-                client_id=client_id, brand_id=brand_id, brand_name=brand_name,
-                permissions=[], contact_email=None, active=False,
-                created_at=now_iso(), note="rolled back: onboarding failed",
+            client.model_copy(
+                update={"permissions": [], "secret": None, "active": False,
+                        "note": "rolled back: onboarding failed"}
             )
         )
         raise
 
-    print(f"\n  Credential written to {path} (mode 0600).")
+    print(f"\n  Key written to {path} (mode 0600).")
     print("  Nothing secret was printed here. Send it to the brand, then delete the file.")
     print("  Point them at https://slackdata.org/for-manufacturers\n")
     return 0
@@ -259,7 +247,7 @@ def _onboard(args, clients) -> int:
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[1])
-    parser.add_argument("--client-id", help="the Cognito app client id")
+    parser.add_argument("--client-id", help="a key's client id (to revoke or re-map one)")
     parser.add_argument("--brand", help="brand name (preferred) or numeric id")
     parser.add_argument("--contact", help="an address to warn if the integration breaks")
     parser.add_argument(
@@ -284,7 +272,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument(
         "--onboard",
         action="store_true",
-        help="create the app client, map it, record it and prove it works",
+        help="mint a key, map it, record it and prove it works",
     )
     parser.add_argument(
         "--verified-via",
@@ -296,11 +284,8 @@ def main(argv: list[str] | None = None) -> int:
         "--no-verify",
         dest="verify",
         action="store_false",
-        help="skip the end-to-end token check (it needs the API to be deployed)",
+        help="skip the end-to-end check (it needs the API to be deployed)",
     )
-    parser.add_argument("--stack", default=onboard.DEFAULT_STACK)
-    parser.add_argument("--region", default=onboard.DEFAULT_REGION)
-    parser.add_argument("--stage", default="prod")
     parser.add_argument("--api", default=onboard.DEFAULT_API)
     args = parser.parse_args(argv)
 
@@ -318,10 +303,7 @@ def main(argv: list[str] | None = None) -> int:
                 " say. It goes in the ledger, and it is the whole audit trail."
             )
         if args.client_id:
-            parser.error(
-                "--onboard CREATES the app client; do not pass --client-id. To register a"
-                " client you made by hand in the console, use --client-id without --onboard."
-            )
+            parser.error("--onboard mints the key; do not pass --client-id.")
         try:
             return _onboard(args, clients)
         except onboard.OnboardError as error:
@@ -363,12 +345,18 @@ def main(argv: list[str] | None = None) -> int:
     except ValueError as error:
         sys.exit(f"unknown permission: {error}")
 
+    # Re-registering changes the mapping and permissions, never the key: a
+    # brand's integration must not break because its permissions were edited.
+    # A client registered here from scratch has no secret, so only the local
+    # dev token can use it — real keys come from --onboard.
+    existing = clients.get(args.client_id)
     client = BrandClient(
         client_id=args.client_id,
         brand_id=brand_id,
         brand_name=brand_name,
         permissions=permissions,
         contact_email=args.contact,
+        secret=existing.secret if existing else None,
         active=True,
         created_at=now_iso(),
         note=args.note,

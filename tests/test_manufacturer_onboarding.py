@@ -126,97 +126,28 @@ def test_an_unknown_brand_id_gives_an_empty_dossier_rather_than_raising():
 # --- The Cognito app client: the four settings with no second chance ---------
 
 
-class _FakeCognito:
-    def __init__(self):
-        self.calls = []
-
-    def create_user_pool_client(self, **kwargs):
-        self.calls.append(kwargs)
-        return {"UserPoolClient": {"ClientId": "abc123", "ClientSecret": "s3cr3t"}}
+# --- The key ----------------------------------------------------------------
 
 
-class _FakeBoto3:
-    def __init__(self, cognito):
-        self._cognito = cognito
-
-    def client(self, service, **_):
-        assert service == "cognito-idp"
-        return self._cognito
-
-
-def test_the_app_client_is_created_with_exactly_the_right_grant_and_scope(monkeypatch):
-    """Each assertion here is a different way to hand out a broken or unsafe
-    credential, and none of them announces itself."""
-    fake = _FakeCognito()
-    monkeypatch.setattr(onboard, "_boto3", lambda: _FakeBoto3(fake))
-
-    client_id, secret = onboard.create_app_client("eu-central-1_POOL", "Balance Community")
-
-    assert (client_id, secret) == ("abc123", "s3cr3t")
-    (call,) = fake.calls
-    assert call["UserPoolId"] == "eu-central-1_POOL"
-    # A machine can hold a secret. The admin SPA client in the SAME pool must
-    # not have one, and confusing the two breaks PKCE outright.
-    assert call["GenerateSecret"] is True
-    # No user signs in here. `code` would make this a login client.
-    assert call["AllowedOAuthFlows"] == ["client_credentials"]
-    # Exactly one scope: a stolen token cannot be replayed against anything else.
-    assert call["AllowedOAuthScopes"] == ["slackdata/gear.write"]
-    # No browser redirect exists, so no callback may.
-    assert "CallbackURLs" not in call
-    assert "LogoutURLs" not in call
+def test_a_new_key_is_random_and_safe_to_send():
+    """Minted here since the Cognito pool went (D62, D63). Neither half may
+    contain ':', the separator in `Bearer <client_id>:<secret>`."""
+    keys = [onboard.new_key() for _ in range(50)]
+    assert len({client_id for client_id, _ in keys}) == 50
+    assert len({secret for _, secret in keys}) == 50
+    for client_id, secret in keys:
+        assert ":" not in client_id and ":" not in secret
+        assert len(client_id) == 26
+        assert len(secret) >= 43, "256 bits, URL-safe base64"
 
 
-def test_the_client_name_identifies_the_brand_in_the_console(monkeypatch):
-    """The operator will one day look at this pool and need to tell the clients
-    apart; `slackdata-brand-<slug>-<stage>` is what makes that possible."""
-    fake = _FakeCognito()
-    monkeypatch.setattr(onboard, "_boto3", lambda: _FakeBoto3(fake))
+def test_onboarding_creates_nothing_in_aws():
+    """No pool, no app client, no boto3 — a key is a row in our own table."""
+    import inspect
 
-    onboard.create_app_client("pool", "Balance Community: Slackline Outfitters", stage="prod")
-
-    assert (
-        fake.calls[0]["ClientName"]
-        == "slackdata-brand-balance-community-slackline-outfitters-prod"
-    )
-
-
-def test_a_missing_scope_says_the_resource_server_was_never_deployed(monkeypatch):
-    """The likeliest real failure: half A predates the resource server, so the
-    scope is not there to grant."""
-
-    class Boom:
-        def create_user_pool_client(self, **_):
-            raise RuntimeError("ScopeDoesNotExistException: no such scope")
-
-    monkeypatch.setattr(onboard, "_boto3", lambda: _FakeBoto3(Boom()))
-
-    with pytest.raises(onboard.OnboardError, match="Redeploy half A"):
-        onboard.create_app_client("pool", "Gibbon")
-
-
-# --- The pool must come from the stack, never from a name -------------------
-
-
-def test_the_pool_is_resolved_from_stack_outputs():
-    pool, token_url = onboard.resolve_pool(
-        {
-            "AdminUserPoolId": "eu-central-1_REAL",
-            "ManufacturerTokenUrl": "https://x.auth.eu-central-1.amazoncognito.com/oauth2/token",
-        }
-    )
-    assert pool == "eu-central-1_REAL"
-    assert token_url.endswith("/oauth2/token")
-
-
-def test_an_undeployed_stack_refuses_rather_than_falling_back_to_a_name():
-    """A stack without the manufacturer API has no pool output.
-
-    The tempting fallback is to look a pool up by name — which is exactly how
-    the orphaned `slackdata-admins-prod` gets chosen. So there is no fallback.
-    """
-    with pytest.raises(onboard.OnboardError, match="not deployed yet"):
-        onboard.resolve_pool({"CdnDomain": "example.cloudfront.net"})
+    source = inspect.getsource(onboard)
+    assert "boto3" not in source
+    assert "user_pool" not in source
 
 
 # --- The ledger -------------------------------------------------------------
@@ -281,13 +212,11 @@ def test_the_credential_file_is_private_and_holds_everything_the_brand_needs(
 ):
     monkeypatch.setattr(onboard, "CREDENTIALS_DIR", tmp_path / "creds")
 
-    path = onboard.write_credential_file(
-        "Gibbon", "abc123", "s3cr3t", "https://x/oauth2/token", "https://slackdata.org/api"
-    )
+    path = onboard.write_credential_file("Gibbon", "abc123", "s3cr3t", "https://slackdata.org/api")
 
     assert stat.S_IMODE(path.stat().st_mode) == 0o600, "the secret must not be world-readable"
     body = path.read_text()
-    for needed in ("abc123", "s3cr3t", "https://x/oauth2/token", "slackdata/gear.write"):
+    for needed in ("abc123", "s3cr3t", "https://slackdata.org/api", "Bearer abc123:s3cr3t"):
         assert needed in body
     # It tells the operator to get rid of it, because we keep no copy.
     assert "DELETE this file" in body
