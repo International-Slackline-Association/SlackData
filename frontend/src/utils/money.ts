@@ -81,7 +81,7 @@ export function perUnit(price: number | null, priceUnit: unknown): number | null
  * The suffix that keeps a price honest about what it buys — appended to every
  * rendering of it, card, detail and compare alike.
  *
- * Webbing is priced per meter (the seed's `priceMeter`), which the model field
+ * Webbing is priced per meter, which the model field
  * name doesn't say; without `/m` a €2.40 webbing reads like a €2.40 product
  * next to an €89 weblock. Tree protectors say whether the money buys one or
  * two, which is the difference between the sticker price and the unit price.

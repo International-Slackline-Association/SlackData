@@ -167,7 +167,7 @@ Root *.json seed files
 | `slack_data/database.py` | `DATABASE_ENGINE`, `get_session()`, `SessionDep`, `create_db_and_tables()` |
 | `slack_data/models/brands.py` | `Brand` model + `get_brand()` upsert helper (central entity) |
 | `slack_data/models/<type>.py` | SQLModel schemas per gear type |
-| `slack_data/load_data/load_<type>s.py` | JSON → DB importers — copy this pattern for new types |
+| `slack_data/load_data/load_gear.py` | The one loader for all nine gear types: seed entry ↔ row (`to_row` / `to_entry`), the `GEAR` registry |
 | `slack_data/load_data/_seed_io.py` | `read_seed_json()` / `seed_path()` / `to_bool()` / `require_seed_id()` — shared by every loader |
 | `slack_data/load_data/brand_ids.py` | `catalog_id` from `manufacturers.json` — the stable `Brand.id`, read lazily |
 | `scripts/backfill_seed_ids.py` | Writes/verifies the explicit ids in the seeds; `--check` for CI |
@@ -228,7 +228,7 @@ served (`curl localhost:8000/<prefix>/<id>`) before reporting the work done.
 
 **`Brand`** (`models/brands.py`) is the central entity (manufacturers). Every gear type links to it via a `brand_id` FK. `Brand` holds a `_<type>` `Relationship` for each gear type plus a `@computed_field` returning member names.
 
-**`get_brand(session, brand_cache, item)`** — upserts a brand by `item["brand"]` name (creating the row if missing) and caches the resulting id in a per-load `brand_cache` dict. Loaders always resolve brands through this; if a loader's JSON names the brand differently (e.g. `manufacturer`), it maps that into `{"brand": ...}` before calling.
+**`get_brand(session, brand_cache, item)`** — upserts a brand by `item["brand"]` name (creating the row if missing) and caches the resulting id in a per-load `brand_cache` dict. The gear loader resolves every entry's `brand` through this.
 
 **Per-gear-type class shape** (every gear type follows this):
 - `Base<X>(SQLModel)` — shared fields
@@ -603,11 +603,33 @@ converted in storage; see DESIGN.md § Currency & Prices.
 
 `Bungee` (`models/bungees.py`) and `RingPadding` (`models/ringpadding.py`) have models defined but **no seed JSON, no loader, no router, and no `Brand` back-reference** — intentionally, because no source data exists yet. They are not imported in `main.py`. To wire one up once data exists: add the `Brand._<type>` Relationship + computed field, a `<type>s.json`, a loader, a router, and register both in `main.py`.
 
-## Loader pattern (`load_data/load_<type>s.py`)
+## Loader pattern (`load_data/load_gear.py`)
 
-Each loader defines: `load_<type>s_json()` (one line — `read_seed_json("<type>s.json")`), `clean_<type>_data()` (normalizes blanks/types), `add_<type>s_to_db()` (maps JSON keys → `<X>Create`, resolves brand via `get_brand()`, `session.add()`, commit), and `load_<type>s(session)` orchestrating them. There's an `if __name__ == "__main__"` block for standalone inspection.
+**A gear seed entry is the item in the model's own vocabulary** (live editing phase 3, P3-A): the
+`<X>Create` field names and enum values, plus `id` and `brand` (the maker's name) — `"id", "name",
+"brand"` first, then the model's field order, unset fields left out. One loader,
+`load_gear(session, collection)`, reads every type; `GEAR` maps a collection to its table model and
+`Create` schema. Not in an entry: `brand_id` (resolved from `brand`), and the ISA's statements
+(`isa_warning`, `isa_certified`, `isa_certificate`, `isa_class` — derived on every build). An entry
+naming any other field is refused (`UnknownField`), never dropped. `to_entry` is `to_row`'s exact
+inverse — `tests/test_loaders.py` round-trips every real entry — because the edit path writes
+entries back.
 
-Reading the file, locating the repo root, and coercing a seed's loose booleans are **not** per-type knowledge and live in `load_data/_seed_io.py` (`read_seed_json`, `seed_path`, `to_bool`, `require_seed_id`). What stays in each loader is the part that genuinely differs: which JSON key maps onto which model field — including the traps below.
+Until 2026-10-13 each type had its own loader translating a scraped shape (`priceMeter`,
+`breakingStrength`, weblocks' nested `specifications`/`pricing`, `manufacturer` as the brand key …).
+`scripts/convert_gear_seeds.py` rewrote the seeds once through those loaders, and its `--check`
+proved the built catalogue identical, every row of every table. The loaders are gone; the
+translation is in git history.
+
+Two exceptions to "the model's shape":
+- **`stretch` on webbing** is a list of `{kn, percent}` in the seed and a JSON string on the model
+  (`JSON_TEXT_FIELDS`).
+- **`unmodelled`** holds what the old seeds carried that no model field does — the weblocks' SlackDB
+  scrape (WLL, diverter diameter, efficiency, usage, its URLs) and four roller dimensions — kept
+  verbatim, never loaded or edited. Promoting a value from it is a model change.
+
+`[]` is never stored (null is "none recorded"). Reading the file and locating the repo root live in
+`load_data/_seed_io.py` (`read_seed_json`, `seed_path`, `seed_sources`, `require_seed_id`).
 
 **Every seed item carries an explicit `id`** — the first key in each object, in all eight gear
 seeds — and the loaders assign it rather than letting SQLite autoincrement
@@ -631,12 +653,8 @@ manufacturer gets the next free number (`--check` verifies, exit 1 on drift).
 loads `grips.json` **backwards** — the only check that fails if a loader goes back to letting SQLite
 choose.
 
-**JSON keys differ per type — always check the existing loader, don't assume:**
-- Brand field is `brand` for webbing, but `manufacturer` for grips/leashrings/rollers/treepro/kits.
-- Webbing: `materialType` → `FiberMaterial`; `stretch` stored as a JSON string; `date_introduced` → `release_date` (unix ms). **`priceMeter` → `price`** — webbing `price` is therefore **per meter**, not per item; the model field name doesn't say so.
-- Weblock: rich SlackDB scrape with nested `specifications`/`pricing`; heaviest parsing (width ranges, ISA yes/no, price/currency regex) in `load_weblocks.py`.
-- Rollers: JSON uses `locking_type`, `isa_approved`, `mbs`; loader maps to model enums. **`price_unit` in `rollers.json` holds the CURRENCY** (`"EUR"`), which `load_rollers.py` maps to `currency` — it does *not* mean what `price_unit` means on tree protectors (`single`/`pair`). Don't "fix" it.
-- Kits: `tensioning_type` normalized from strings like `RAT1`, `Double Ratchet`.
+**Webbing `price` is per meter**, not per item; the field name doesn't say so. On tree protectors
+`price_unit` says `single` or `pair`.
 
 Timestamps (`release_date`) are unix milliseconds (`int | None`).
 
@@ -689,12 +707,12 @@ both on the source — no AWS credentials, no `serverless package` — and is ru
 
 1. **Model** — `models/<type>.py`: `Base<X>`, `<X>(table=True)`, `<X>Public`/`<X>Create`/`<X>Update`, enums, `brand` Relationship.
 2. **Brand** — add `Brand._<type>` Relationship + `@computed_field` list in `brands.py`.
-3. **JSON** — `<type>s.json` at repo root (array of objects), each with an explicit `id` (first
-   key) and a `brand`/`manufacturer` that has an entry in `manufacturers.json`.
-4. **Loader** — `load_data/load_<type>s.py` following the pattern above, including
-   `db_<x>.id = require_seed_id(<item>, "<type>s.json")` after `model_validate`.
+3. **JSON** — `<type>s.json` at repo root (array of objects in the model's field names), each with
+   an explicit `id` (first key) and a `brand` that has an entry in `manufacturers.json`.
+4. **Loader** — add the type to `GEAR` in `load_data/load_gear.py` (load order is its order), and
+   to `COLLECTIONS` in `catalogue/documents.py`.
 5. **Router** — `api/routers/<type>_router.py`: one `crud_router(...)` call.
-6. **Wire up** — in `main.py`: import + add empty-checked loader call in lifespan, and `include_router`.
+6. **Wire up** — `include_router` in `main.py` (seeding follows `GEAR`).
 7. **Ids** — add the file to `SEEDS` in `scripts/backfill_seed_ids.py`, to `SEEDS`/`MODELS` in
    `tests/test_seed_ids.py`, then run the script to number the new items.
 8. **Re-seed** — delete `slack_data/database.db`, restart.
