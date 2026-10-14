@@ -9,7 +9,8 @@ History, Recent Changes, feeds, revert, hide and duplicate merge.
 every recommendation in § 4 except P3-H, which is dropped. Gate item 3 (0–2 merged, prod switched
 over) is not met yet: the build goes ahead on the stacked branch, and **ships only after it is**.
 
-**Progress:** 3a (the data layer) is built and tested — § 6. 3b (routes) is next.
+**Progress:** built and tested — 3a (data layer), 3b (routes), 3c (frontend). § 6 says what
+building it found; § 7 is the rollout.
 
 ---
 
@@ -311,13 +312,13 @@ Each step is one or more commits on `live-editing/3-admin-editing`, branched fro
 | ✅ **3a.2** Canonical documents (P3-A b) | Write the converter (seeds → built rows → canonical docs). Convert the root seeds in the same commit. Generic loader per type. The ISA and seller passes unchanged. `--check` compares old-format and new-format built catalogues | Every row of every type equal, before and after: the existing `compare()`. Round trip, export byte-identical to the new files. `test_seed_ids` adapted. The whole backend suite green |
 | ✅ **3a.3** Envelope and write path | `rev`, `hidden`, `merged_into`, counters. `commit_catalogue_change`, hosted and local | Dynamo: stale rev refused and nothing written; a duplicate record id cancels everything; the version bumps once; the counter never reissues an id; 100-item limit not reached by the largest merge |
 | ✅ **3a.4** The log grows | TargetTypes, Actions, Channels, `SAFETY_FIELDS`, `actor-index` GSI in `serverless.yml`. History, actor and flag queries | Dynamo table built from the template (drift fails). Safety flag on exactly the MBS fields |
-| **3b.1** Edit and create routes | `edit_router`: validation, field policy, conflicts, rename re-points ISA names (P3-B), skipped matches made loud | Per field type. ISA statements refused. Renaming a recalled product keeps its warning after the rebuild — **the hazard-2 test**. 409 shape. No catalogue session. Unauthenticated → 401, non-admin → 403 |
-| **3b.2** Hide, unhide, merge, revert | Lookups, 404 bodies, ISA re-point on merge | Hidden item absent from lists, present in History. Merged id → pointer. Merge without an explanation refused. Revert refused per moved field |
-| **3b.3** Brands, feeds | P3-G (a), Atom | Brand name not editable. Feeds validate as Atom |
-| **3b.4** Live-server tests | `test_live_api.py`: a real store-mode server; an admin edit served on the next request; a conflict; the export reproducing the edit | — |
-| **3c.1** Edit form, History, Revert | Frontend | Cypress `editing.cy.ts`, against the real API with a scratch store |
-| **3c.2** Recent Changes, Contributions, hidden/merged pages, admin actions, Add product | Frontend | Cypress `changes.cy.ts`. Both new specs added to `shards.json` |
-| **3c.3** Docs | This file's status, LIVE_EDITING_CHANGES.md, CLAUDE.md (seeding ritual, store mode, the canonical format), SAFETY_AND_ACCURACY.md (who can change what), plan § 16 | — |
+| ✅ **3b.1** Edit and create routes | `edit_router`: validation, field policy, conflicts, rename re-points ISA names (P3-B), skipped matches made loud | Per field type. ISA statements refused. Renaming a recalled product keeps its warning after the rebuild — **the hazard-2 test**. 409 shape. No catalogue session. Unauthenticated → 401, non-admin → 403 |
+| ✅ **3b.2** Hide, unhide, merge, revert | Lookups, 404 bodies, ISA re-point on merge | Hidden item absent from lists, present in History. Merged id → pointer. Merge without an explanation refused. Revert refused per moved field |
+| ✅ **3b.3** Brands, feeds | P3-G (a), Atom | Brand name not editable. Feeds validate as Atom |
+| ✅ **3b.4** Live-server tests | `test_live_api.py`: a real store-mode server; an admin edit served on the next request; a conflict; the export reproducing the edit | — |
+| ✅ **3c.1** Edit form, History, Revert | Frontend | Cypress `editing.cy.ts`, against the real API with a scratch store |
+| ✅ **3c.2** Recent Changes, Contributions, hidden/merged pages, admin actions, Add product | Frontend | Cypress `changes.cy.ts`. Both new specs added to `shards.json` |
+| ✅ **3c.3** Docs | This file's status, LIVE_EDITING_CHANGES.md, CLAUDE.md (seeding ritual, store mode, the canonical format), SAFETY_AND_ACCURACY.md (who can change what), plan § 16 | — |
 
 **What 3a found:**
 
@@ -332,6 +333,28 @@ Each step is one or more commits on `live-editing/3-admin-editing`, branched fro
   per-row flush, one validation per row). Lambda memory is set after measuring on staging.
 - **Safety fields**: D33's list plus the connectors' three MBS ratings (connectors post-date D33).
 - **The log**: two new indexes on `ChangelogTable`, `actor-index` and a sparse `safety-index`.
+
+**What 3b and 3c found:**
+
+- **The rename hazard is closed and guarded.** A rename re-points every ISA warning and certificate
+  naming the product, in the same transaction; a merge moves them to the survivor. Three tests
+  (`tests/test_edits.py`) fail when re-pointing is switched off. Any match a build still skips is
+  logged as an error and counted in `GET /catalogue` (`isa_skipped`), which `verify-deploy.sh`
+  holds to zero.
+- **The importer could have silently undone live edits.** `importer --apply` rewrites the store from
+  the frozen seeds. Every committed edit now adds one to `_meta/edits` in the same transaction, and
+  the importer refuses while it is above zero (`--overwrite-live-edits` to discard them on purpose).
+- **One new index per deploy.** DynamoDB creates only one GSI per update of an existing table, so a
+  second new index on `ChangelogTable` would fail the deploy. The safety feed is a filter over
+  `feed-index` instead of its own index.
+- **The edit form is generated from the models** (`GET /edit/{slug}/fields`), so it cannot drift
+  from them — CLAUDE.md's schema-first rule, applied to the form itself.
+- **"Re-apply my changes" must keep only the person's own changes.** The first version kept the
+  whole form, which silently put back the other editor's field; caught by `editing.cy.ts`.
+- **A merge keeps the duplicate's own data** in the store (it gains `merged_into`), so its record
+  holds `merged_into` rather than the whole entry as "before" (§ 5.3 said whole entry): nothing is
+  lost, and the export still carries it.
+- **CI's Cypress API runs in store mode** now, as the live site will, so every spec exercises it.
 
 Each step ends with the suite for what it touched. Each PR then gets the full backend suite, the
 frontend build, lint and unit tests, and the Cypress specs it touches, before it is pushed. CI then
@@ -350,13 +373,33 @@ runs everything.
 | Feeds | ✓ validator | A real feed reader subscribed to staging |
 | A real admin's edit, by ISA sign-in | localhost:5173 proxied to staging (as in phase 2) | — |
 
-**Staging rollout:**
-1. deploy;
-2. import the canonical store, then `--check`;
-3. on localhost:5173 proxied to staging: edit, rename a recalled product, hide, merge, revert;
-4. user testing break.
+**Rollout — staging first, then prod, in this order:**
 
-**Prod rollout** after that, using the runbook in this file's final version.
+1. **Phases 0–2 are live in that stage, with `CATALOG_SOURCE=store`.** Phase 3 has nothing to edit
+   without the store.
+2. **Deploy phase 3 serving the baked catalogue:** `CATALOG_SOURCE=baked npx serverless deploy
+   --stage <stage>`. The image bakes the catalogue from the converted seeds with the new loader, so
+   the site is unchanged; the edit routes answer 503 meanwhile (no store mode). This deploy also adds
+   `actor-index` to `ChangelogTable` — one new index, which is all DynamoDB allows in one update.
+   *Why not re-import first:* the seeds changed shape (P3-A), and phase 2's loaders cannot read the
+   new entries nor phase 3's the old ones. A container cold-starting in store mode between the two
+   would have nothing it can build. Serving the baked copy across the switch closes that window.
+3. **Re-import the store in the new shape, then switch back to it:**
+
+   ```bash
+   CATALOG_TABLE=slackdata-catalog-<stage> python -m slack_data.catalogue.importer          # dry run: every gear entry rewritten
+   CATALOG_TABLE=slackdata-catalog-<stage> python -m slack_data.catalogue.importer --apply
+   CATALOG_TABLE=slackdata-catalog-<stage> python -m slack_data.catalogue.importer --check
+   CATALOG_SOURCE=store npx serverless deploy --stage <stage>
+   ```
+
+4. **Check:** `./verify-deploy.sh` — `source: store`, `isa_skipped: 0`, `/changes` public; then
+   `importer --check` against the table (clean until the first edit).
+5. **Use it** (staging: localhost:5173 proxied to staging, as in phase 2): edit an item, rename a
+   recalled product and see its warning stay, hide and unhide, merge two test items, revert, add a
+   product and a brand, read `/changes` and both feeds.
+6. **From the first edit on, the store is the truth.** The importer refuses to overwrite it; the
+   root seeds and the data repo's export are copies.
 
 ---
 
@@ -364,10 +407,13 @@ runs everything.
 
 - `serverless.yml`:
   - the `actor-index` GSI on `ChangelogTable`;
-  - `memorySize` from step 3a.1;
+  - `memorySize` unchanged (512 MB): the build is ~0.8 s locally after 3a. Measure the Lambda's own
+    log line ("catalogue version N built … in X s") on staging, and raise it only if a rebuild
+    exceeds ~1.5 s;
   - no new table, no new IAM, no new throttled route.
-- `preflight.sh`: the shadow check understands the canonical format.
-- `verify-deploy.sh`: reports the skipped-match count and the counters.
+- `preflight.sh`: unchanged — in store mode it already skips the shadow check.
+- `verify-deploy.sh`: fails on a non-zero `isa_skipped`.
+- CI: the Cypress API runs in store mode, on a scratch store filled by the importer.
 - Nothing for the ISA. Every write is `PutItem` or `UpdateItem` on `slackdata-*`, already granted.
 
 ---
@@ -379,4 +425,4 @@ runs everything.
   supersedes D37's "full name from the ISA account". D61 says the client reads `name` /
   `family_name`, but staging tokens carried neither. Worth asking the ISA tech whether that is
   intended; the typed name stays either way.
-- The P3-A … P3-I outcomes (§ 4), as D72–D79.
+- The P3-A … P3-I outcomes (§ 4), as D72–D79 (recorded in LIVE_EDITING_PLAN.md).
