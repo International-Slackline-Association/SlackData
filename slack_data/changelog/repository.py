@@ -40,6 +40,14 @@ class ChangeLogRepository(Protocol):
         """Everything that happened to one thing, newest first — its History."""
         ...
 
+    def by_actor(self, isa_id: str, limit: int = 50, before: str | None = None) -> list[ChangeRecord]:
+        """One person's changes, newest first — their contributions page."""
+        ...
+
+    def flagged(self, flag: str, limit: int = 50, before: str | None = None) -> list[ChangeRecord]:
+        """Records carrying a flag, newest first — the safety feed."""
+        ...
+
 
 class InMemoryChangeLogRepository:
     def __init__(self) -> None:
@@ -64,6 +72,14 @@ class InMemoryChangeLogRepository:
         key = target_key(target_type, target_id)
         return [r for r in self._newest_first() if r.target == key][:limit]
 
+    def by_actor(self, isa_id: str, limit: int = 50, before: str | None = None) -> list[ChangeRecord]:
+        rows = [r for r in self._newest_first() if r.actor_isa_id == isa_id and (before is None or r.id < before)]
+        return rows[:limit]
+
+    def flagged(self, flag: str, limit: int = 50, before: str | None = None) -> list[ChangeRecord]:
+        rows = [r for r in self._newest_first() if flag in r.flags and (before is None or r.id < before)]
+        return rows[:limit]
+
 
 _SCHEMA = """
 CREATE TABLE IF NOT EXISTS changes (
@@ -79,9 +95,11 @@ CREATE TABLE IF NOT EXISTS changes (
     changes      TEXT NOT NULL,
     why          TEXT,
     flags        TEXT NOT NULL,
+    reverts      TEXT,
     created_at   TEXT NOT NULL
 );
 CREATE INDEX IF NOT EXISTS changes_target ON changes (target, id);
+CREATE INDEX IF NOT EXISTS changes_actor ON changes (actor_isa_id, id);
 """
 
 
@@ -92,6 +110,11 @@ class SqliteChangeLogRepository:
     def __init__(self, path: str) -> None:
         self._path = path
         with self._connect() as conn:
+            # A log created before phase 3 has no `reverts` column; add it
+            # before the script creates indexes over the table.
+            columns = {row["name"] for row in conn.execute("PRAGMA table_info(changes)")}
+            if columns and "reverts" not in columns:
+                conn.execute("ALTER TABLE changes ADD COLUMN reverts TEXT")
             conn.executescript(_SCHEMA)
 
     def _connect(self) -> sqlite3.Connection:
@@ -142,3 +165,19 @@ class SqliteChangeLogRepository:
                 (target_key(target_type, target_id), limit),
             ).fetchall()
         return [self._from_row(row) for row in rows]
+
+    def _page(self, where: str, args: tuple, limit: int, before: str | None) -> list[ChangeRecord]:
+        if before is not None:
+            where, args = f"{where} AND id < ?", (*args, before)
+        with self._connect() as conn:
+            rows = conn.execute(
+                f"SELECT * FROM changes WHERE {where} ORDER BY id DESC LIMIT ?", (*args, limit)
+            ).fetchall()
+        return [self._from_row(row) for row in rows]
+
+    def by_actor(self, isa_id: str, limit: int = 50, before: str | None = None) -> list[ChangeRecord]:
+        return self._page("actor_isa_id = ?", (isa_id,), limit, before)
+
+    def flagged(self, flag: str, limit: int = 50, before: str | None = None) -> list[ChangeRecord]:
+        # `flags` is a JSON list of plain words; matching the quoted word is exact.
+        return self._page("instr(flags, ?) > 0", (json.dumps(flag),), limit, before)

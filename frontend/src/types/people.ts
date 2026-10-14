@@ -42,15 +42,30 @@ export interface FieldChange {
 /** `GET /changes` — one public change log record. */
 export interface ChangeRecordPublic {
   id: string
-  target_type: 'person'
+  target_type: 'person' | 'item' | 'brand' | 'isa_warning' | 'isa_certificate'
+  /** For an item: "<collection>#<id>", e.g. "webbings#12". */
   target_id: string
-  action: 'role.grant' | 'role.revoke'
+  action:
+    | 'role.grant'
+    | 'role.revoke'
+    | 'item.create'
+    | 'item.edit'
+    | 'item.hide'
+    | 'item.unhide'
+    | 'item.merge'
+    | 'item.revert'
+    | 'brand.create'
+    | 'brand.edit'
+    | 'match.repoint'
   actor_isa_id: string
   actor_name: string
   actor_role: string
-  channel: 'web' | 'bootstrap' | 'manufacturer-api' | 'import'
+  channel: 'web' | 'bootstrap' | 'manufacturer-api' | 'import' | 'revert' | 'merge'
   changes: Record<string, FieldChange>
   why: string | null
+  /** 'safety' when a breaking strength changed. */
   flags: string[]
+  /** On a revert: the record whose change it undoes. */
+  reverts: string | null
   created_at: string
 }

@@ -196,3 +196,54 @@ def test_hidden_and_merged_entries_are_not_loaded(session):
     with seed_sources({"manufacturers.json": read_seed_json("manufacturers.json"), "grips.json": entries}):
         assert load_gear(session, "grips") == 1
     assert [g.name for g in session.exec(select(Grip))] == ["Shown"]
+
+
+# --- the log's phase 3 queries, on the local stores ---------------------------
+
+
+@pytest.fixture(params=["memory", "sqlite"])
+def log(request, tmp_path):
+    from slack_data.changelog.repository import SqliteChangeLogRepository
+
+    if request.param == "memory":
+        return InMemoryChangeLogRepository()
+    return SqliteChangeLogRepository(str(tmp_path / "log.db"))
+
+
+def test_by_actor_and_flagged_page_newest_first(log):
+    from slack_data.models.changes import SAFETY_FLAG
+
+    mine = [log.append(record().model_copy(update={"id": f"01J0000000000000000000000{n}", "flags": [SAFETY_FLAG] if n % 2 else []}))
+            for n in range(4)]
+    log.append(record().model_copy(update={"id": "01J00000000000000000000009", "actor_isa_id": "ISA_OTHER"}))
+    assert [r.id for r in log.by_actor("ISA_TEST")] == [r.id for r in reversed(mine)]
+    assert [r.id for r in log.by_actor("ISA_TEST", limit=2, before=mine[3].id)] == [mine[2].id, mine[1].id]
+    assert [r.id for r in log.flagged(SAFETY_FLAG)] == [mine[3].id, mine[1].id]
+
+
+def test_a_log_from_before_phase_3_gains_the_reverts_column(tmp_path):
+    import sqlite3
+
+    from slack_data.changelog.repository import SqliteChangeLogRepository
+
+    path = tmp_path / "old-log.db"
+    conn = sqlite3.connect(path)
+    conn.executescript(
+        "CREATE TABLE changes (id TEXT PRIMARY KEY, target TEXT NOT NULL, target_type TEXT NOT NULL,"
+        " target_id TEXT NOT NULL, action TEXT NOT NULL, actor_sub TEXT NOT NULL, actor_isa_id TEXT NOT NULL,"
+        " actor_role TEXT NOT NULL, channel TEXT NOT NULL, changes TEXT NOT NULL, why TEXT,"
+        " flags TEXT NOT NULL, created_at TEXT NOT NULL);"
+    )
+    conn.close()
+    log = SqliteChangeLogRepository(str(path))
+    log.append(record().model_copy(update={"reverts": "01J00000000000000000000001"}))
+    assert log.recent()[0].reverts == "01J00000000000000000000001"
+
+
+def test_every_safety_field_is_a_real_field_of_its_type():
+    from slack_data.load_data.load_gear import GEAR
+    from slack_data.submissions.fields import SAFETY_FIELDS
+
+    for collection, fields in SAFETY_FIELDS.items():
+        model, _ = GEAR[collection]
+        assert fields <= set(model.model_fields), (collection, fields - set(model.model_fields))

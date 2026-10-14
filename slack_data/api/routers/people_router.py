@@ -8,7 +8,7 @@ People and the change log, over HTTP (LIVE_EDITING_PLAN.md phase 1).
 | `PATCH /me/name` | anyone signed in | change the name shown with your changes — once, for life |
 | `GET /admin/admins` | admins | the admin list |
 | `POST /admin/roles` | admins | grant or revoke admin — a logged change |
-| `GET /changes` | **anyone, no sign-in** (D3, D33) | the change log, newest first |
+| `GET /changes` | **anyone, no sign-in** (D3, D33) | the change log, newest first; or one thing's History (`target_type` + `target_id`), one person's contributions (`actor`), the safety changes (`flag=safety`) |
 
 Like `submissions_router`, this takes **no catalogue session**: it writes only
 to the people and change log stores, so it works on the live site, where the
@@ -27,7 +27,7 @@ too: records hold an ISA id and names are looked up when the log is read (D43).
 It is not itself a logged change.
 """
 
-from typing import Annotated
+from typing import Annotated, Literal
 
 from fastapi import APIRouter, Depends, HTTPException, Query, status
 from pydantic import BaseModel, Field, field_validator, model_validator
@@ -267,17 +267,24 @@ def list_changes(
     before: str | None = Query(default=None, max_length=26),
     target_type: TargetType | None = None,
     target_id: str | None = Query(default=None, max_length=128),
+    actor: str | None = Query(default=None, max_length=32, description="an ISA id"),
+    flag: Literal["safety"] | None = None,
 ) -> list[ChangeRecordPublic]:
     """Public and unauthenticated. Names are looked up now, never stored in a
     record (D43), so an anonymised person shows as "former contributor"."""
     if (target_type is None) != (target_id is None):
         raise HTTPException(status.HTTP_422_UNPROCESSABLE_ENTITY, "give both target_type and target_id")
+    if sum(x is not None for x in (target_type, actor, flag)) > 1:
+        raise HTTPException(status.HTTP_422_UNPROCESSABLE_ENTITY, "filter by one of target, actor or flag")
 
-    records = (
-        log.for_target(target_type, target_id, limit)
-        if target_type is not None
-        else log.recent(limit, before)
-    )
+    if target_type is not None:
+        records = log.for_target(target_type, target_id, limit)
+    elif actor is not None:
+        records = log.by_actor(actor, limit, before)
+    elif flag is not None:
+        records = log.flagged(flag, limit, before)
+    else:
+        records = log.recent(limit, before)
 
     names: dict[str, str] = {}
 
@@ -300,6 +307,7 @@ def list_changes(
             changes=r.changes,
             why=r.why,
             flags=r.flags,
+            reverts=r.reverts,
             created_at=r.created_at,
         )
         for r in records

@@ -367,3 +367,53 @@ def test_people_routes_never_touch_the_catalogue_session(submissions, brand_clie
         assert unwired.post("/me/notice", headers=DEV).status_code == 200
         assert unwired.post("/admin/roles", headers=DEV, json={"email": "person2@example.org"}).status_code == 200
         assert unwired.get("/changes").status_code == 200
+
+
+# --- The log's phase 3 queries ----------------------------------------------
+
+
+def _item_record(**overrides):
+    from slack_data.models.changes import SAFETY_FLAG, ChangeRecord, TargetType
+
+    base = {
+        "target_type": TargetType.ITEM, "target_id": "grips#1", "action": Action.ITEM_EDIT,
+        "actor_sub": "person-sub-1", "actor_isa_id": "ISA_AAAA0001", "actor_role": "admin",
+        "channel": Channel.WEB, "flags": [SAFETY_FLAG],
+    }
+    return ChangeRecord(**(base | overrides))
+
+
+def test_changes_by_one_person(client, people, changelog):
+    log = changelog
+    someone(people, 1, isa_id="ISA_AAAA0001")
+    log.append(_item_record())
+    log.append(_item_record(actor_isa_id="ISA_BBBB0002", flags=[]))
+    rows = client.get("/changes", params={"actor": "ISA_AAAA0001"}).json()
+    assert [r["actor_isa_id"] for r in rows] == ["ISA_AAAA0001"]
+    assert rows[0]["actor_name"] == "Person1 Example"
+
+
+def test_the_safety_changes(client, changelog):
+    log = changelog
+    flagged = log.append(_item_record())
+    log.append(_item_record(flags=[]))
+    rows = client.get("/changes", params={"flag": "safety"}).json()
+    assert [r["id"] for r in rows] == [flagged.id]
+
+
+def test_an_unknown_flag_is_refused(client):
+    assert client.get("/changes", params={"flag": "spicy"}).status_code == 422
+
+
+def test_one_filter_at_a_time(client):
+    assert client.get("/changes", params={"actor": "ISA_X", "flag": "safety"}).status_code == 422
+
+
+def test_a_revert_names_the_record_it_undoes(client, changelog):
+    from slack_data.models.changes import Channel as C
+
+    log = changelog
+    original = log.append(_item_record(flags=[]))
+    log.append(_item_record(flags=[], action=Action.ITEM_REVERT, channel=C.REVERT, reverts=original.id))
+    newest = client.get("/changes").json()[0]
+    assert (newest["channel"], newest["reverts"]) == ("revert", original.id)
