@@ -49,7 +49,6 @@ from slack_data.catalogue.dynamo import DynamoCatalogueRepository
 from slack_data.changelog.dynamo import (
     ACTOR_INDEX,
     FEED_INDEX,
-    SAFETY_INDEX,
     TARGET_INDEX,
     DynamoChangeLogRepository,
 )
@@ -286,7 +285,7 @@ def test_the_index_names_match_the_template():
     for index in (EMAIL_INDEX, ISA_ID_INDEX, ADMIN_INDEX):
         assert index in people_gsis, f"{index} not in {people_gsis}"
     log_gsis = [g["IndexName"] for g in definitions["ChangelogTable"]["GlobalSecondaryIndexes"]]
-    for index in (FEED_INDEX, TARGET_INDEX, ACTOR_INDEX, SAFETY_INDEX):
+    for index in (FEED_INDEX, TARGET_INDEX, ACTOR_INDEX):
         assert index in log_gsis, f"{index} not in {log_gsis}"
 
 
@@ -842,7 +841,7 @@ def test_two_creates_cannot_take_one_id_in_dynamodb(catalogue):
     assert next_id(catalogue, "tricklinekits")[0] == new_id + 1
 
 
-def test_a_persons_changes_and_the_safety_feed_use_their_indexes(changelog):
+def test_a_persons_changes_and_the_safety_feed(changelog):
     from slack_data.models.changes import SAFETY_FLAG
 
     plain = changelog.append(a_record(actor_isa_id="ISA_ACTR0001"))
@@ -852,7 +851,7 @@ def test_a_persons_changes_and_the_safety_feed_use_their_indexes(changelog):
     safety = [r.id for r in changelog.flagged(SAFETY_FLAG, 100)]
     assert flagged.id in safety and plain.id not in safety
     [back] = [r for r in changelog.by_actor("ISA_ACTR0001") if r.id == flagged.id]
-    assert back.flags == [SAFETY_FLAG], "the index key is not read back as a field"
+    assert back.flags == [SAFETY_FLAG]
 
 
 def test_a_committed_edit_counts_in_the_same_transaction(catalogue, changelog):

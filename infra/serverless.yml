@@ -419,8 +419,6 @@ resources:
             AttributeType: S
           - AttributeName: actor_isa_id
             AttributeType: S
-          - AttributeName: flag_safety
-            AttributeType: S
         KeySchema:
           - AttributeName: id
             KeyType: HASH
@@ -443,20 +441,12 @@ resources:
                 KeyType: RANGE
             Projection:
               ProjectionType: ALL
-          # One person's contributions (live editing phase 3).
+          # One person's contributions (live editing phase 3). DynamoDB adds ONE
+          # index per update of an existing table: a second new index here
+          # needs its own deploy. (The safety feed is a filter over feed-index.)
           - IndexName: actor-index
             KeySchema:
               - AttributeName: actor_isa_id
-                KeyType: HASH
-              - AttributeName: id
-                KeyType: RANGE
-            Projection:
-              ProjectionType: ALL
-          # The safety feed: sparse, only records flagged `safety` carry
-          # flag_safety (D33, D57).
-          - IndexName: safety-index
-            KeySchema:
-              - AttributeName: flag_safety
                 KeyType: HASH
               - AttributeName: id
                 KeyType: RANGE

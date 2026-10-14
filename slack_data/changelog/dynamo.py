@@ -11,7 +11,11 @@ silently drop the IAM half of the append-only guarantee.
 | `feed-index`: `feed` (always `all`) + `id` | Recent Changes, newest first |
 | `target-index`: `target` + `id` | one thing's History, newest first |
 | `actor-index`: `actor_isa_id` + `id` | one person's contributions, newest first |
-| `safety-index`: `flag_safety` + `id`, sparse | the safety feed: only flagged records carry the key |
+
+The safety feed has no index of its own: it pages back through `feed-index`
+with a filter (`flagged`). DynamoDB creates one index per update of an
+existing table, and at tens of changes a day a filter over the recent pages
+costs nothing — so phase 3 adds a single index.
 
 A single `feed` partition is fine at this size — tens of changes a day — and is
 what makes "everything, newest first" a query rather than a `Scan`, which the
@@ -22,7 +26,7 @@ import os
 from typing import TYPE_CHECKING
 
 from slack_data.changelog.repository import MAX_PAGE, RecordExists
-from slack_data.models.changes import SAFETY_FLAG, ChangeRecord, TargetType, target_key
+from slack_data.models.changes import ChangeRecord, TargetType, target_key
 
 if TYPE_CHECKING:  # pragma: no cover - typing only
     from mypy_boto3_dynamodb.service_resource import Table
@@ -30,8 +34,8 @@ if TYPE_CHECKING:  # pragma: no cover - typing only
 FEED_INDEX = "feed-index"
 TARGET_INDEX = "target-index"
 ACTOR_INDEX = "actor-index"
-SAFETY_INDEX = "safety-index"
-SAFETY_KEY = "flag_safety"
+# How far back the safety feed looks, in pages of MAX_PAGE records.
+FLAGGED_MAX_PAGES = 20
 FEED_ALL = "all"
 
 # The condition every append carries (§ 6.5).
@@ -43,13 +47,11 @@ def to_item(record: ChangeRecord) -> dict:
     item["changes"] = record.changes_json()
     item["target"] = record.target
     item["feed"] = FEED_ALL
-    if SAFETY_FLAG in record.flags:
-        item[SAFETY_KEY] = SAFETY_FLAG
     return {key: value for key, value in item.items() if value is not None}
 
 
 def from_item(item: dict) -> ChangeRecord:
-    data = {key: value for key, value in item.items() if key not in {"target", "feed", SAFETY_KEY}}
+    data = {key: value for key, value in item.items() if key not in {"target", "feed"}}
     data["changes"] = ChangeRecord.parse_changes(data.get("changes"))
     data["flags"] = list(data.get("flags") or [])
     return ChangeRecord(**data)
@@ -113,9 +115,26 @@ class DynamoChangeLogRepository:
         return self._query(ACTOR_INDEX, "actor_isa_id", isa_id, limit, before)
 
     def flagged(self, flag: str, limit: int = 50, before: str | None = None) -> list[ChangeRecord]:
-        if flag != SAFETY_FLAG:
-            raise ValueError(f"no index for the flag {flag!r}")
-        return self._query(SAFETY_INDEX, SAFETY_KEY, SAFETY_FLAG, limit, before)
+        from boto3.dynamodb.conditions import Attr, Key
+
+        condition = Key("feed").eq(FEED_ALL)
+        if before is not None:
+            condition = condition & Key("id").lt(before)
+        kwargs = {
+            "IndexName": FEED_INDEX,
+            "KeyConditionExpression": condition,
+            "FilterExpression": Attr("flags").contains(flag),
+            "ScanIndexForward": False,
+            "Limit": MAX_PAGE,
+        }
+        found: list[ChangeRecord] = []
+        for _ in range(FLAGGED_MAX_PAGES):
+            page = self.table.query(**kwargs)
+            found.extend(from_item(item) for item in page.get("Items", []))
+            if len(found) >= limit or "LastEvaluatedKey" not in page:
+                break
+            kwargs["ExclusiveStartKey"] = page["LastEvaluatedKey"]
+        return found[:limit]
 
 
 def transaction_put(record: ChangeRecord, table_name: str) -> dict:
