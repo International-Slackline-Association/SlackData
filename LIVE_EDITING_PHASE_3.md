@@ -5,9 +5,9 @@ History, Recent Changes, feeds, revert, hide and duplicate merge.
 
 **Done when:** admins edit the catalogue without a developer.
 
-**Status (2026-10-13): planned, not started.** No code is written until the gate in § 0 is met.
-Every choice in § 4 is **UNDECIDED**. Claude recommends an option for each, but the decision is
-the operator's.
+**Status (2026-10-13): decided, building** on `live-editing/3-admin-editing`. The operator approved
+every recommendation in § 4 except P3-H, which is dropped. Gate item 3 (0–2 merged, prod switched
+over) is not met yet: the build goes ahead on the stacked branch, and **ships only after it is**.
 
 ---
 
@@ -111,7 +111,13 @@ These shape the decisions in § 4.
 
 ---
 
-## 4. Decisions — all UNDECIDED
+## 4. Decisions — decided 2026-10-13
+
+**Every recommended option was chosen**: P3-A (b), P3-B (a), P3-C (a) then (b) in phase 6 if needed,
+P3-D (a), P3-E (a), P3-F (a), P3-G (a), P3-I (a). **P3-H is dropped**: from phase 6 everyone edits,
+so an "apply as edit" button would serve the box only for its last months. Until then **the rule
+stands**: what the site cannot edit (photos, manuals, anything a suggestion asks for) goes through
+the suggestion box or a developer, applied by hand.
 
 ### P3-A What a stored document is, so an edit can be written back
 
@@ -229,8 +235,7 @@ Hosted, it is one `TransactWriteItems` (no new permission, D28):
 - **`Action`:** `item.create`, `item.edit`, `item.hide`, `item.unhide`, `item.merge`,
   `item.revert`; `brand.create`, `brand.edit`; `match.repoint` (an ISA match moved by a rename or
   merge).
-- **`Channel`:** adds `revert` (with `reverts: <record id>`), `merge` and `submission` (with the
-  suggestion id).
+- **`Channel`:** adds `revert` (with `reverts: <record id>`) and `merge`.
 - **`flags`:**
   - `safety` when `breaking_strength` (webbing, weblock, roller, leash ring) or `mbs` (grip)
     changed;
@@ -267,7 +272,6 @@ Hosted, it is one `TransactWriteItems` (no new permission, D28):
 | `POST /edit/{slug}/{id}/merge` | `{rev, into, into_rev, why}` | Why is mandatory, with a minimum length. The source becomes a marker and its ISA matches move |
 | `POST /changes/{record_id}/revert` | `{why?}` | Per-field check against the record's `after` |
 | `PATCH /edit/brand/{name}` · `POST /edit/brand` | as above | P3-G (a): every field except the name |
-| `POST /submissions/{id}/apply` | `{why?}` | P3-H (a) |
 | `GET /changes/feed.atom` · `GET /changes/safety.atom` | — | Public feeds (D17, D33) |
 
 - **No catalogue session, ever:** the writes go to the store. `tests/test_read_only.py` lists the
@@ -286,11 +290,10 @@ Hosted, it is one `TransactWriteItems` (no new permission, D28):
 | `/changes` | **Recent Changes**: filters (kind, role, safety); link to the feeds |
 | `/people/:isaId` | **Contributions** |
 | Hidden or merged URL | The page from P3-D / P3-E |
-| `/admin` | "Apply as edit" on approved suggestions (P3-H) |
 | Listing | An **Add product** button for admins (P3-I) |
 
-A new item's photos still come from the manifest by name (hazard 6). The edit form says so when a
-new item is renamed.
+A new item has no photos until they are filed under its id (`scripts/fetch_submission_images.py`);
+uploads are phase 4.
 
 ---
 
@@ -307,7 +310,7 @@ Each step is one or more commits on `live-editing/3-admin-editing`, branched fro
 | **3a.4** The log grows | TargetTypes, Actions, Channels, `SAFETY_FIELDS`, `actor-index` GSI in `serverless.yml`. History, actor and flag queries | Dynamo table built from the template (drift fails). Safety flag on exactly the MBS fields |
 | **3b.1** Edit and create routes | `edit_router`: validation, field policy, conflicts, rename re-points ISA names (P3-B), skipped matches made loud | Per field type. ISA statements refused. Renaming a recalled product keeps its warning after the rebuild — **the hazard-2 test**. 409 shape. No catalogue session. Unauthenticated → 401, non-admin → 403 |
 | **3b.2** Hide, unhide, merge, revert | Lookups, 404 bodies, ISA re-point on merge | Hidden item absent from lists, present in History. Merged id → pointer. Merge without an explanation refused. Revert refused per moved field |
-| **3b.3** Brands, apply-suggestion, feeds | P3-G (a), P3-H (a), Atom | Brand name not editable. A suggestion applied once only. Feeds validate as Atom |
+| **3b.3** Brands, feeds | P3-G (a), Atom | Brand name not editable. Feeds validate as Atom |
 | **3b.4** Live-server tests | `test_live_api.py`: a real store-mode server; an admin edit served on the next request; a conflict; the export reproducing the edit | — |
 | **3c.1** Edit form, History, Revert | Frontend | Cypress `editing.cy.ts`, against the real API with a scratch store |
 | **3c.2** Recent Changes, Contributions, hidden/merged pages, admin actions, Add product | Frontend | Cypress `changes.cy.ts`. Both new specs added to `shards.json` |
@@ -359,4 +362,4 @@ runs everything.
   supersedes D37's "full name from the ISA account". D61 says the client reads `name` /
   `family_name`, but staging tokens carried neither. Worth asking the ISA tech whether that is
   intended; the typed name stays either way.
-- The P3-A … P3-I outcomes, as D72 onwards.
+- The P3-A … P3-I outcomes (§ 4), as D72–D79.
