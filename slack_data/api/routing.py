@@ -26,6 +26,7 @@ from fastapi import APIRouter, FastAPI
 from slack_data.api.routers.brand_router import brand_router
 from slack_data.api.routers.catalogue_router import catalogue_router
 from slack_data.api.routers.connector_router import connector_router
+from slack_data.api.routers.edit_router import edit_router
 from slack_data.api.routers.fx_router import fx_router
 from slack_data.api.routers.grip_router import grip_router
 from slack_data.api.routers.isa_certification_router import isa_certification_router
@@ -82,7 +83,14 @@ CATALOG_ROUTERS: tuple[APIRouter, ...] = (
 # that decides which list it goes in, and its writes are not the catalogue's.
 # `people_router` (sign-in, roles, the public change log) writes only to the
 # people and change log stores, and takes no catalogue session at all.
-WRITABLE_ROUTERS: tuple[APIRouter, ...] = (submissions_router, manufacturer_router, people_router)
+# `edit_router` (live editing, phase 3) writes the catalogue STORE — never the
+# session the site reads, which is rebuilt from the store — and the log.
+WRITABLE_ROUTERS: tuple[APIRouter, ...] = (
+    submissions_router,
+    manufacturer_router,
+    people_router,
+    edit_router,
+)
 
 # Kept as the union so a caller iterating "every router" still gets every router.
 ROUTERS: tuple[APIRouter, ...] = CATALOG_ROUTERS + WRITABLE_ROUTERS

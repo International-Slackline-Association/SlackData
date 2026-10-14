@@ -17,12 +17,10 @@ time someone refactors router registration.
 """
 
 import pytest
-
-from slack_data.api.routing import docs_kwargs, read_only_view
-from slack_data.api.routers.webbing_router import webbing_router
-
 from test_active import PREFIXES, _payloads
 
+from slack_data.api.routers.webbing_router import webbing_router
+from slack_data.api.routing import docs_kwargs, read_only_view
 
 # ---------------------------------------------------------------------------
 # Read-only mode — the hosted shape
@@ -92,7 +90,7 @@ def test_read_only_schema_documents_no_catalogue_writes(read_only_client):
 
 # The routers that write to a store other than the catalogue, named rather than
 # pattern-matched so a new one is a deliberate edit here.
-WRITABLE_PREFIXES = ("/submissions", "/manufacturer", "/me/", "/admin/")
+WRITABLE_PREFIXES = ("/submissions", "/manufacturer", "/me/", "/admin/", "/edit/")
 
 
 def concrete_routes(routes):
@@ -190,6 +188,7 @@ def test_submissions_router_takes_no_catalogue_session():
     which in hosted mode is a read-only file — and the failure would appear only
     on the live site, never in a local test run.
     """
+    from slack_data.api.routers.edit_router import edit_router
     from slack_data.api.routers.people_router import people_router
     from slack_data.api.routers.submissions_router import submissions_router
     from slack_data.database import get_session
@@ -199,7 +198,7 @@ def test_submissions_router_takes_no_catalogue_session():
         for child in dependant.dependencies:
             yield from every_call(child)
 
-    for route in [*submissions_router.routes, *people_router.routes]:
+    for route in [*submissions_router.routes, *people_router.routes, *edit_router.routes]:
         assert get_session not in set(every_call(route.dependant)), route.path
 
 

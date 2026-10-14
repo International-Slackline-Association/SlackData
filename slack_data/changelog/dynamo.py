@@ -105,6 +105,10 @@ class DynamoChangeLogRepository:
     ) -> list[ChangeRecord]:
         return self._query(TARGET_INDEX, "target", target_key(target_type, target_id), limit, None)
 
+    def get(self, record_id: str) -> ChangeRecord | None:
+        item = self.table.get_item(Key={"id": record_id}, ConsistentRead=True).get("Item")
+        return from_item(item) if item else None
+
     def by_actor(self, isa_id: str, limit: int = 50, before: str | None = None) -> list[ChangeRecord]:
         return self._query(ACTOR_INDEX, "actor_isa_id", isa_id, limit, before)
 

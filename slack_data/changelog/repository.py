@@ -44,6 +44,10 @@ class ChangeLogRepository(Protocol):
         """One person's changes, newest first — their contributions page."""
         ...
 
+    def get(self, record_id: str) -> ChangeRecord | None:
+        """One record — what a revert undoes."""
+        ...
+
     def flagged(self, flag: str, limit: int = 50, before: str | None = None) -> list[ChangeRecord]:
         """Records carrying a flag, newest first — the safety feed."""
         ...
@@ -71,6 +75,9 @@ class InMemoryChangeLogRepository:
     ) -> list[ChangeRecord]:
         key = target_key(target_type, target_id)
         return [r for r in self._newest_first() if r.target == key][:limit]
+
+    def get(self, record_id: str) -> ChangeRecord | None:
+        return self._items.get(record_id)
 
     def by_actor(self, isa_id: str, limit: int = 50, before: str | None = None) -> list[ChangeRecord]:
         rows = [r for r in self._newest_first() if r.actor_isa_id == isa_id and (before is None or r.id < before)]
@@ -181,3 +188,8 @@ class SqliteChangeLogRepository:
     def flagged(self, flag: str, limit: int = 50, before: str | None = None) -> list[ChangeRecord]:
         # `flags` is a JSON list of plain words; matching the quoted word is exact.
         return self._page("instr(flags, ?) > 0", (json.dumps(flag),), limit, before)
+
+    def get(self, record_id: str) -> ChangeRecord | None:
+        with self._connect() as conn:
+            row = conn.execute("SELECT * FROM changes WHERE id = ?", (record_id,)).fetchone()
+        return self._from_row(row) if row else None
