@@ -1,173 +1,112 @@
 """
-Tests for data loading / normalisation logic.
+Tests for data loading logic.
 
 These tests do not go through HTTP — they call the loader functions directly.
-They cover the JSON→model mapping that is most likely to break silently:
-  - get_material_type(): string → FiberMaterial enum
-  - clean_webbing_data(): blank/null field normalisation
-  - get_brand(): upsert with cache (also tested in test_brands.py from the
-    API side; here we focus on the pure function behaviour)
+
+- **The gear loader** (`load_data/load_gear.py`): one loader for all nine types,
+  reading seed entries in the model's own vocabulary. What it must never do is
+  lose a value quietly — an unknown field, or a derived one typed by hand, is
+  refused — and `to_entry` must be its exact inverse, because the edit path
+  writes entries back.
+- get_metal_materials(): still the parser behind weblock and roller materials
+  in the manufacturer API and the importers.
+- get_brand(): upsert with cache (also tested in test_brands.py from the API
+  side; here we focus on the pure function behaviour).
+
+The per-type parsing these tests once covered (`materialType` synonyms, weblock
+style strings, blank-to-zero cleaning) ran once, in the phase 3 conversion of
+the seeds (`scripts/convert_gear_seeds.py`); the seeds now hold its results.
 """
 
-import pytest
+import json
 
-from slack_data.load_data.load_webbings import (
-    clean_webbing_data,
-    get_material_type,
-    get_material_types,
-)
-from slack_data.load_data.load_weblocks import (
-    clean_weblock_data,
-    get_weblock_style,
+import pytest
+from sqlmodel import select
+
+from slack_data.load_data._seed_io import read_seed_json
+from slack_data.load_data.load_gear import (
+    DERIVED_FIELDS,
+    GEAR,
+    UnknownField,
+    stored_fields,
+    to_entry,
+    to_row,
 )
 from slack_data.models.brands import get_brand
-from slack_data.models.webbing import FiberMaterial
-from slack_data.models.weblocks import WeblockStyle
 from slack_data.utilities.materials import MetalMaterial, get_metal_materials
 
-
 # ---------------------------------------------------------------------------
-# get_material_type()
-# ---------------------------------------------------------------------------
-
-@pytest.mark.parametrize("raw, expected", [
-    ("Nylon",        FiberMaterial.NYLON),
-    ("NYLON",        FiberMaterial.NYLON),      # case-insensitive
-    ("polyamid",     FiberMaterial.NYLON),       # synonym
-    ("Polyester",    FiberMaterial.POLYESTER),
-    ("PES",          FiberMaterial.POLYESTER),   # abbreviation
-    ("Dyneema",      FiberMaterial.DYNEEMA),
-    ("DYNEEMA SK75", FiberMaterial.DYNEEMA),     # with suffix
-    ("Vectran",      FiberMaterial.VECTRAN),
-    ("Hybrid",       FiberMaterial.OTHER),       # names no fibers on its own
-    ("Carbon Fibre", FiberMaterial.OTHER),       # unrecognised
-    ("",             FiberMaterial.OTHER),       # empty string
-])
-def test_get_material_type(raw, expected):
-    assert get_material_type(raw) == expected
-
-
-# ---------------------------------------------------------------------------
-# get_material_types() — the multi-select `material` list
+# The gear loader
 # ---------------------------------------------------------------------------
 
-@pytest.mark.parametrize("material_type, composition, expected", [
-    # no composition → single-fiber list off materialType
-    ("Nylon", None, [FiberMaterial.NYLON]),
-    ("PES",   None, [FiberMaterial.POLYESTER]),
-    # composition wins, and is the only source for former "Hybrid" rows
-    ("Hybrid", ["Polyester", "Dyneema/HMPE"],
-     [FiberMaterial.POLYESTER, FiberMaterial.DYNEEMA]),
-    ("Hybrid", ["Vectran", "Polyester"],
-     [FiberMaterial.VECTRAN, FiberMaterial.POLYESTER]),
-    # a JSON string (as clean_webbing_data produces) parses the same way
-    ("Hybrid", '["Nylon", "Polyester"]',
-     [FiberMaterial.NYLON, FiberMaterial.POLYESTER]),
-    # a one-element composition is not special — it is just that fiber
-    ("Hybrid", ["Polyester"], [FiberMaterial.POLYESTER]),
-    # duplicates collapse, order preserved
-    ("Hybrid", ["Nylon", "Nylon"], [FiberMaterial.NYLON]),
-    # unknown fibers are skipped; empty result falls back to materialType
-    ("Nylon", ["Kryptonite"], [FiberMaterial.NYLON]),
-    # nothing resolvable at all → [OTHER], never an empty list (NOT NULL column)
-    ("", None, [FiberMaterial.OTHER]),
-    ("Hybrid", None, [FiberMaterial.OTHER]),
-])
-def test_get_material_types(material_type, composition, expected):
-    assert get_material_types(material_type, composition) == expected
+GRIP = {"id": 7, "name": "Test Grip", "brand": "Gibbon", "material": "Aluminum", "width_min": 25}
 
 
-# ---------------------------------------------------------------------------
-# clean_webbing_data()
-# ---------------------------------------------------------------------------
-
-def _base_item(**overrides) -> dict:
-    """Minimal valid webbing dict with overrides applied."""
-    item = {
-        "name": "Test Webbing",
-        "brand": "Test Brand",
-        "materialType": "Nylon",
-        "width": 25,
-        "weight": 68,
-    }
-    item.update(overrides)
-    return item
+def test_an_unknown_field_is_refused_not_dropped():
+    with pytest.raises(UnknownField, match="breakingStrength"):
+        to_row("grips", GRIP | {"breakingStrength": 40}, brand_id=1)
 
 
-def test_clean_webbing_empty_width_becomes_zero():
-    result = clean_webbing_data(_base_item(width=""))
-    assert result["width"] == 0
+@pytest.mark.parametrize("field", sorted(DERIVED_FIELDS))
+def test_a_derived_isa_field_is_refused(field):
+    """The ISA passes set these on every build; a typed value would be a lie
+    that the next build silently overwrites."""
+    with pytest.raises(UnknownField):
+        to_row("grips", GRIP | {field: "x"}, brand_id=1)
 
 
-def test_clean_webbing_empty_weight_becomes_zero():
-    result = clean_webbing_data(_base_item(weight=""))
-    assert result["weight"] == 0
+def test_unmodelled_values_are_kept_out_of_the_row():
+    row = to_row("rollers", {
+        "id": 1, "name": "R", "brand": "Gibbon", "material": ["Aluminum"],
+        "roller_material": "Aluminum", "lock_type": "Screw Lock",
+        "bearing_material": "Steel", "slider_type": "Carabiner",
+        "unmodelled": {"wll": 2},
+    }, brand_id=1)
+    assert row.name == "R"
 
 
-def test_clean_webbing_empty_optional_field_becomes_none():
-    result = clean_webbing_data(_base_item(product_url=""))
-    assert result["product_url"] is None
+def test_webbing_stretch_is_a_list_in_the_seed_and_a_string_on_the_row():
+    curve = [{"kn": 4, "percent": 1.1}, {"kn": 8, "percent": 3}]
+    row = to_row("webbings", {"id": 1, "name": "W", "brand": "Gibbon", "material": ["Nylon"], "width": 25, "stretch": curve}, 1)
+    assert json.loads(row.stretch) == curve
+    assert to_entry("webbings", row, "Gibbon")["stretch"] == curve
 
 
-def test_clean_webbing_none_value_stays_none():
-    result = clean_webbing_data(_base_item(product_url=None))
-    assert result["product_url"] is None
+@pytest.mark.parametrize("collection", list(GEAR))
+def test_every_real_seed_entry_round_trips(collection):
+    """entry -> row -> entry is the identity, for every item we hold: the edit
+    path rebuilds entries from rows, so any loss here is a lost edit."""
+    for entry in read_seed_json(f"{collection}.json"):
+        row = to_row(collection, entry, brand_id=1)
+        back = to_entry(collection, row, entry["brand"], entry.get("unmodelled"))
+        assert back == entry, (collection, entry["id"])
 
 
-def test_clean_webbing_numeric_value_becomes_string():
-    # Non-special fields get str() applied
-    result = clean_webbing_data(_base_item(breaking_strength=32))
-    assert result["breaking_strength"] == "32"
+@pytest.mark.parametrize("collection", list(GEAR))
+def test_seed_entries_use_only_stored_fields(collection):
+    allowed = stored_fields(collection) | {"id", "brand", "unmodelled"}
+    for entry in read_seed_json(f"{collection}.json"):
+        assert set(entry) <= allowed, (collection, entry["id"], sorted(set(entry) - allowed))
+        assert list(entry)[:3] == ["id", "name", "brand"], (collection, entry["id"])
 
 
-# ---------------------------------------------------------------------------
-# get_weblock_style() — the `style` categoriser on weblocks
-# ---------------------------------------------------------------------------
-
-@pytest.mark.parametrize("raw, expected", [
-    ("Tensionable Weblock", WeblockStyle.TENSIONABLE),
-    ("tensionable weblock", WeblockStyle.TENSIONABLE),   # case-insensitive
-    ("Tensionable",         WeblockStyle.TENSIONABLE),
-    ("Fixed Linelocker",    WeblockStyle.LINELOCKER),
-    ("fixed linelocker",    WeblockStyle.LINELOCKER),
-    ("Line Locker",         WeblockStyle.LINELOCKER),    # spaced spelling
-    ("line-lock",           WeblockStyle.LINELOCKER),    # hyphenated spelling
-    ("Weblock",             None),                       # ambiguous → unset
-    ("something else",      None),                       # unrecognised
-    ("",                    None),
-    (None,                  None),
-])
-def test_get_weblock_style(raw, expected):
-    assert get_weblock_style(raw) == expected
+def test_weblocks_seed_declares_a_style_and_a_material_for_every_item():
+    """A missing style hides an item from the Style filter; a missing material
+    from the Material filter. Both used to be guarded at parse time."""
+    for item in read_seed_json("weblocks.json"):
+        assert item.get("style"), item["name"]
+        assert item.get("material"), item["name"]
 
 
-def _weblock_item(**overrides):
-    item = {
-        "name": "Test Weblock",
-        "brand": "Test Brand",
-        "specifications": {"Material": "Aluminum", "Compatible webbing width": "25mm"},
-    }
-    item.update(overrides)
-    return item
+def test_load_gear_writes_every_row(session):
+    from slack_data.load_data._seed_io import seed_sources
+    from slack_data.load_data.load_gear import load_gear
+    from slack_data.models.grips import Grip
 
-
-def test_clean_weblock_carries_style():
-    result = clean_weblock_data(_weblock_item(style="Fixed Linelocker"))
-    assert result["style"] == WeblockStyle.LINELOCKER
-
-
-def test_clean_weblock_missing_style_is_none():
-    assert clean_weblock_data(_weblock_item())["style"] is None
-
-
-def test_weblocks_seed_declares_a_style_for_every_item():
-    """Every seeded weblock is categorised — no silent Nones from the JSON."""
-    from slack_data.load_data.load_weblocks import load_weblocks_json
-
-    styles = [get_weblock_style(w.get("style")) for w in load_weblocks_json()]
-    assert None not in styles
-    assert WeblockStyle.LINELOCKER in styles
-    assert WeblockStyle.TENSIONABLE in styles
+    sources = {"manufacturers.json": read_seed_json("manufacturers.json"), "grips.json": [GRIP, GRIP | {"id": 8, "name": "Other"}]}
+    with seed_sources(sources):
+        assert load_gear(session, "grips") == 2
+    assert sorted(g.id for g in session.exec(select(Grip))) == [7, 8]
 
 
 # ---------------------------------------------------------------------------
@@ -194,44 +133,6 @@ def test_weblocks_seed_declares_a_style_for_every_item():
 ])
 def test_get_metal_materials(raw, expected):
     assert get_metal_materials(raw) == expected
-
-
-def test_clean_weblock_keeps_every_metal():
-    """The regression guard: a two-metal weblock must not come back as one.
-
-    This is the TiLock configuration split — a titanium frame with high-strength
-    steel pins. Under the old scalar mapping the steel silently vanished and the
-    steel-pin build was indistinguishable from the titanium-pin one.
-    """
-    item = _weblock_item(specifications={"Material": ["Titanium", "Steel"]})
-    assert clean_weblock_data(item)["material"] == [
-        MetalMaterial.TITANIUM,
-        MetalMaterial.STEEL,
-    ]
-
-
-def test_clean_weblock_material_is_always_a_list():
-    """Single-metal weblocks — the other 115 — still load, as a 1-item list."""
-    assert clean_weblock_data(_weblock_item())["material"] == [MetalMaterial.ALUMINUM]
-
-
-def test_weblocks_seed_resolves_a_material_for_every_item():
-    """No seeded weblock loses its metals on the way in.
-
-    Checked against the raw seed rather than a fixed list, so it keeps holding
-    as products are added: whatever a seed names, that many distinct metals come
-    out. A revert to first-item-only fails here on the 14 multi-metal rows.
-    """
-    from slack_data.load_data.load_weblocks import load_weblocks_json
-
-    thin = {}
-    for item in load_weblocks_json():
-        raw = (item.get("specifications") or {}).get("Material")
-        resolved = clean_weblock_data(dict(item))["material"]
-        assert resolved, f"{item.get('name')}: no material resolved at all"
-        if isinstance(raw, list) and len(get_metal_materials(raw)) != len(resolved):
-            thin[item.get("name")] = (raw, resolved)
-    assert not thin, f"weblock(s) lost a metal between seed and model: {thin}"
 
 
 # ---------------------------------------------------------------------------

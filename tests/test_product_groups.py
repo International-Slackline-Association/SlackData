@@ -8,10 +8,9 @@ Reggae). The frontend collapses a group into one card (src/utils/groups.ts).
 from collections import Counter
 
 import pytest
-from sqlmodel import select
 
 from slack_data.load_data._seed_io import read_seed_json
-from slack_data.load_data.load_webbings import add_webbings_to_db, clean_webbing_data
+from slack_data.load_data.load_gear import to_row
 from slack_data.models.connectors import Connector
 from slack_data.models.grips import Grip
 from slack_data.models.leashrings import LeashRing
@@ -61,9 +60,9 @@ def test_reggae_is_one_group_across_two_makers():
     assert sorted(w["brand"] for w in rows) == ["Slack Inov", "Slack.fr"]
 
 
-def test_webbing_loader_maps_product_group(session):
-    add_webbings_to_db([clean_webbing_data({
-        "id": 1, "name": "Reggae", "brand": "Slack.fr", "materialType": "Polyester",
+def test_webbing_loader_maps_product_group():
+    row = to_row("webbings", {
+        "id": 1, "name": "Reggae", "brand": "Slack.fr", "material": ["Polyester"],
         "width": 25, "product_group": "Reggae",
-    })], session)
-    assert session.exec(select(Webbing)).one().product_group == "Reggae"
+    }, brand_id=1)
+    assert row.product_group == "Reggae"

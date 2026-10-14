@@ -2,541 +2,627 @@
     {
         "id": 1,
         "name": "AIDMAN",
-        "description": "Ball bearing pulley for 25 mm wide webbing.",
-        "material": null,
-        "weight": 139,
-        "wll": 2,
-        "mbs": 12,
-        "compatible_webbing_width": null,
+        "brand": "Equilibrium Slacklines (EQB)",
+        "material": [
+            "Other"
+        ],
+        "roller_material": "Other",
         "slider_type": "Moving plates",
-        "inner_width": 28,
-        "outer_bearing_diameter": null,
-        "manufacturer": "Equilibrium Slacklines (EQB)",
-        "price": null,
-        "price_unit": null,
-        "roller_material": null,
-        "locking_type": "Non-locking",
-        "date_introduced": null,
+        "lock_type": "Non-locking",
+        "bearing_material": "Other",
         "product_url": "https://web.archive.org/web/20160528191238/http://www.slackshop.cz/en/rigging-equipment/81-kladka-aidman.html",
-        "active": false
+        "weight": 139.0,
+        "breaking_strength": 12.0,
+        "description": "Ball bearing pulley for 25 mm wide webbing.",
+        "active": false,
+        "unmodelled": {
+            "wll": 2,
+            "compatible_webbing_width": null,
+            "inner_width": 28,
+            "outer_bearing_diameter": null
+        }
     },
     {
         "id": 2,
         "name": "Hangover 2.0",
-        "description": "SLACKTIVITY's HangOver is the first slackline carabiners for highlining and thanks to 4 ball bearings - strong enough to be used in a webbing pulley system for rigging.",
-        "material": "Aluminum, Steel",
-        "weight": 152,
-        "wll": 4,
-        "mbs": 24,
-        "compatible_webbing_width": [
-            25,
-            26
+        "brand": "Slacktivity",
+        "material": [
+            "Aluminum",
+            "Steel"
         ],
-        "slider_type": "Carabiner",
-        "inner_width": 27.8,
-        "outer_bearing_diameter": null,
-        "manufacturer": "Slacktivity",
-        "price": 50,
-        "price_unit": "EUR",
         "roller_material": "Aluminum",
-        "locking_type": "Non-locking",
+        "slider_type": "Carabiner",
+        "lock_type": "Non-locking",
         "bearing_material": "Steel",
-        "date_introduced": null,
         "product_url": "https://web.archive.org/web/20211018144835/https://slacktivity.com/category/slackline-tensioning-gear/hangovers/?add-to-cart=3180",
-        "active": true
+        "weight": 152.0,
+        "breaking_strength": 24.0,
+        "price": 50.0,
+        "currency": "EUR",
+        "description": "SLACKTIVITY's HangOver is the first slackline carabiners for highlining and thanks to 4 ball bearings - strong enough to be used in a webbing pulley system for rigging.",
+        "active": true,
+        "unmodelled": {
+            "wll": 4,
+            "compatible_webbing_width": [
+                25,
+                26
+            ],
+            "inner_width": 27.8,
+            "outer_bearing_diameter": null
+        }
     },
     {
         "id": 3,
         "name": "HangOver Stainless",
-        "description": "Indispensable for any highliner and anyone who wants to stretch the longlines efficiently with as little material as possible (HangOverPulley). NEW now with stainless steel ball bearing.",
-        "material": "Aluminum, Stainless Steel",
-        "weight": 152,
-        "wll": 4,
-        "mbs": 22,
-        "compatible_webbing_width": [
-            25,
-            26
+        "brand": "Slacktivity",
+        "material": [
+            "Aluminum",
+            "Stainless Steel"
         ],
-        "slider_type": "Carabiner",
-        "inner_width": 27.8,
-        "outer_bearing_diameter": 19,
-        "manufacturer": "Slacktivity",
-        "price": 59.95,
-        "price_unit": "EUR",
         "roller_material": "Stainless Steel",
-        "locking_type": "Non-locking",
+        "slider_type": "Carabiner",
+        "lock_type": "Non-locking",
         "bearing_material": "Stainless Steel",
-        "date_introduced": 1507064400000,
+        "release_date": 1507064400000,
         "product_url": "https://www.slacktivity.com/hangover-stainless",
-        "active": true
+        "weight": 152.0,
+        "breaking_strength": 22.0,
+        "price": 59.95,
+        "currency": "EUR",
+        "description": "Indispensable for any highliner and anyone who wants to stretch the longlines efficiently with as little material as possible (HangOverPulley). NEW now with stainless steel ball bearing.",
+        "active": true,
+        "unmodelled": {
+            "wll": 4,
+            "compatible_webbing_width": [
+                25,
+                26
+            ],
+            "inner_width": 27.8,
+            "outer_bearing_diameter": 19
+        }
     },
     {
         "id": 4,
         "name": "HangOver-S",
-        "description": "Indispensable for any Highliner and all low weight tensioning systems (HangOver Pulley Systems). World’s first Highline-specific product with PSA certification. The screw-gate HangOver version offers additional safety.",
-        "material": "Aluminum, Steel",
-        "weight": 157,
-        "wll": 4,
-        "mbs": 24,
-        "compatible_webbing_width": [
-            25,
-            26
+        "brand": "Slacktivity",
+        "material": [
+            "Aluminum",
+            "Steel"
         ],
-        "slider_type": "Locking Carabiner",
-        "inner_width": 27.8,
-        "outer_bearing_diameter": null,
-        "manufacturer": "Slacktivity",
-        "price": 54.95,
-        "price_unit": "EUR",
         "roller_material": "Steel",
-        "locking_type": "screw lock",
-        "date_introduced": null,
+        "slider_type": "Carabiner",
+        "lock_type": "Screw Lock",
+        "bearing_material": "Other",
         "product_url": "https://www.slacktivity.com/hangover-s",
-        "active": true
+        "weight": 157.0,
+        "breaking_strength": 24.0,
+        "price": 54.95,
+        "currency": "EUR",
+        "description": "Indispensable for any Highliner and all low weight tensioning systems (HangOver Pulley Systems). World’s first Highline-specific product with PSA certification. The screw-gate HangOver version offers additional safety.",
+        "active": true,
+        "unmodelled": {
+            "wll": 4,
+            "compatible_webbing_width": [
+                25,
+                26
+            ],
+            "inner_width": 27.8,
+            "outer_bearing_diameter": null
+        }
     },
     {
         "id": 5,
         "name": "HangOver Royal",
-        "description": "“Rolling like a King” with the new HangOver «Royal» by SLACKTIVITY – no gaps, no rusting. Perfect for sliding over a Highline near sea or as pulley carabiner to tension your slackline.",
-        "material": "Aluminum",
-        "weight": 154,
-        "wll": 4,
-        "mbs": 18,
-        "compatible_webbing_width": [
-            25,
-            26
+        "brand": "Slacktivity",
+        "material": [
+            "Aluminum"
         ],
-        "slider_type": "Carabiner",
-        "inner_width": 28.7,
-        "outer_bearing_diameter": null,
-        "manufacturer": "Slacktivity",
-        "price": 75.0,
-        "price_unit": "EUR",
         "roller_material": "Stainless Steel",
+        "slider_type": "Carabiner",
+        "lock_type": "Non-locking",
         "bearing_material": "Stainless Steel",
-        "locking_type": "non-locking",
-        "date_introduced": null,
         "product_url": "https://slacktivity.com/shop/hangover-royal-pulley-carabiner/",
-        "active": true
+        "weight": 154.0,
+        "breaking_strength": 18.0,
+        "price": 75.0,
+        "currency": "EUR",
+        "description": "“Rolling like a King” with the new HangOver «Royal» by SLACKTIVITY – no gaps, no rusting. Perfect for sliding over a Highline near sea or as pulley carabiner to tension your slackline.",
+        "active": true,
+        "unmodelled": {
+            "wll": 4,
+            "compatible_webbing_width": [
+                25,
+                26
+            ],
+            "inner_width": 28.7,
+            "outer_bearing_diameter": null
+        }
     },
     {
         "id": 6,
         "name": "HighSlide 2.0",
-        "material": "Aluminum",
-        "weight": 110,
-        "wll": 4,
-        "mbs": 23,
-        "compatible_webbing_width": [
-            25,
-            26
+        "brand": "Landcruising",
+        "material": [
+            "Aluminum"
         ],
+        "roller_material": "Other",
         "slider_type": "Moving plates",
-        "inner_width": 28,
-        "outer_bearing_diameter": 22,
-        "manufacturer": "Landcruising",
-        "price": 24.95,
-        "price_unit": "EUR",
-        "roller_material": null,
-        "locking_type": "Non-locking",
-        "date_introduced": null,
+        "lock_type": "Non-locking",
+        "bearing_material": "Other",
         "product_url": "https://web.archive.org/web/20160102204555/http://www.landcruising-slacklines.de/en/shop/37-highline/226-landcruising-highslide-20?vmcchk=1",
+        "weight": 110.0,
+        "breaking_strength": 23.0,
+        "price": 24.95,
+        "currency": "EUR",
+        "description": "This unique ball-bearing pulley for 1 inch wide webbings is the absolute hint for tuning your Ellington tightening system. The HighSlide works as a deviator in the multiplyer. In this function the total tightening power of the Ellington is dramatically increased (over 50%) compared to standard methods. Thus its possible to rig moderate longlines and tight jumplines up to 800 kg preload (with 1 person) while using an Ellington system like our Cruiser Slackline-Kit.",
         "active": false,
         "manufacturer_not_for_highline": true,
         "manufacturer_not_for_highline_source": "https://web.archive.org/web/20160102204555/http://www.landcruising-slacklines.de/en/shop/37-highline/226-landcruising-highslide-20?vmcchk=1",
-        "description": "This unique ball-bearing pulley for 1 inch wide webbings is the absolute hint for tuning your Ellington tightening system. The HighSlide works as a deviator in the multiplyer. In this function the total tightening power of the Ellington is dramatically increased (over 50%) compared to standard methods. Thus its possible to rig moderate longlines and tight jumplines up to 800 kg preload (with 1 person) while using an Ellington system like our Cruiser Slackline-Kit."
+        "unmodelled": {
+            "wll": 4,
+            "compatible_webbing_width": [
+                25,
+                26
+            ],
+            "inner_width": 28,
+            "outer_bearing_diameter": 22
+        }
     },
     {
         "id": 7,
         "name": "LineBuggy",
-        "description": "Webbing transport pulley and for use with Ellington/Primitive tensioning system for increased efficiency",
-        "material": "Stainless Steel",
-        "weight": 140,
-        "wll": 3,
-        "mbs": 25,
-        "compatible_webbing_width": [
-            25,
-            26
+        "brand": "SlackGear",
+        "material": [
+            "Stainless Steel"
         ],
+        "roller_material": "Other",
         "slider_type": "Moving plates",
-        "inner_width": 29,
-        "outer_bearing_diameter": null,
-        "manufacturer": "SlackGear",
-        "price": 380.0,
-        "price_unit": "ZAR",
-        "roller_material": null,
-        "locking_type": "Non-locking",
-        "date_introduced": null,
+        "lock_type": "Non-locking",
+        "bearing_material": "Other",
         "product_url": "http://www.slackgear.co.za/product/linebuggy/",
-        "active": false
+        "weight": 140.0,
+        "breaking_strength": 25.0,
+        "price": 380.0,
+        "currency": "ZAR",
+        "description": "Webbing transport pulley and for use with Ellington/Primitive tensioning system for increased efficiency",
+        "active": false,
+        "unmodelled": {
+            "wll": 3,
+            "compatible_webbing_width": [
+                25,
+                26
+            ],
+            "inner_width": 29,
+            "outer_bearing_diameter": null
+        }
     },
     {
         "id": 8,
         "name": "Motum webbing pulley",
-        "description": "Webbing pulley, made for transport or multiplication in tensioning systems.",
-        "material": "Stainless Steel",
-        "weight": 85,
-        "wll": 2,
-        "mbs": 14,
-        "compatible_webbing_width": [
-            25,
-            32
+        "brand": "Petram Slacklines",
+        "material": [
+            "Stainless Steel"
         ],
+        "roller_material": "Other",
         "slider_type": "Moving plates",
-        "inner_width": 33,
-        "outer_bearing_diameter": 25,
-        "manufacturer": "Petram Slacklines",
-        "price": 19.9,
-        "price_unit": "EUR",
-        "roller_material": null,
-        "locking_type": "Non-locking",
-        "date_introduced": null,
+        "lock_type": "Non-locking",
+        "bearing_material": "Other",
         "product_url": "https://web.archive.org/web/20201111232204/https://petramslacklines.site123.me/shop-1/motum-pulley",
-        "active": false
+        "weight": 85.0,
+        "breaking_strength": 14.0,
+        "price": 19.9,
+        "currency": "EUR",
+        "description": "Webbing pulley, made for transport or multiplication in tensioning systems.",
+        "active": false,
+        "unmodelled": {
+            "wll": 2,
+            "compatible_webbing_width": [
+                25,
+                32
+            ],
+            "inner_width": 33,
+            "outer_bearing_diameter": 25
+        }
     },
     {
         "id": 9,
         "name": "Pulley",
-        "description": "The Slack Mountain webbing pulley is compatible on all 18mm to 28mm webbing and minimizes friction thanks to its stainless steel ball bearings. Flask with rounded edge. Compatible for use with oval carabiner. CMU 5 kN. 135 g",
-        "material": "Stainless Steel",
-        "weight": 135,
-        "wll": 5,
-        "mbs": 25,
-        "compatible_webbing_width": [
-            18,
-            28
+        "brand": "Slack Mountain",
+        "material": [
+            "Stainless Steel"
         ],
+        "roller_material": "Other",
         "slider_type": "Moving plates",
-        "inner_width": 27,
-        "outer_bearing_diameter": 24,
-        "manufacturer": "Slack Mountain",
-        "price": 22.0,
-        "price_unit": "EUR",
-        "roller_material": null,
-        "locking_type": "Non-locking",
-        "date_introduced": null,
+        "lock_type": "Non-locking",
+        "bearing_material": "Other",
         "product_url": "http://slack-mountain.com/en/pulley-and-tension/61-poulie-de-sangle-slack-mountain.html",
-        "active": true
+        "weight": 135.0,
+        "breaking_strength": 25.0,
+        "price": 22.0,
+        "currency": "EUR",
+        "description": "The Slack Mountain webbing pulley is compatible on all 18mm to 28mm webbing and minimizes friction thanks to its stainless steel ball bearings. Flask with rounded edge. Compatible for use with oval carabiner. CMU 5 kN. 135 g",
+        "active": true,
+        "unmodelled": {
+            "wll": 5,
+            "compatible_webbing_width": [
+                18,
+                28
+            ],
+            "inner_width": 27,
+            "outer_bearing_diameter": 24
+        }
     },
     {
         "id": 10,
         "name": "Rock'n'Roll",
-        "material": "Aluminum, Stainless Steel",
-        "weight": 210,
-        "wll": 2,
-        "mbs": null,
-        "compatible_webbing_width": [
-            25,
-            26
+        "brand": "Equilibrium Slacklines (EQB)",
+        "material": [
+            "Aluminum",
+            "Stainless Steel"
         ],
-        "slider_type": "Moving plates",
-        "inner_width": 26,
-        "outer_bearing_diameter": null,
-        "manufacturer": "Equilibrium Slacklines (EQB)",
-        "price": 51.81,
-        "price_unit": "EUR",
         "roller_material": "Stainless Steel",
-        "locking_type": "Non-locking",
-        "date_introduced": null,
+        "slider_type": "Moving plates",
+        "lock_type": "Non-locking",
+        "bearing_material": "Other",
         "product_url": "https://web.archive.org/web/20140516235914/http://www.slackshop.cz/en/rigging-equipment/82-kladka-rocknroll.html",
-        "active": false
+        "weight": 210.0,
+        "price": 51.81,
+        "currency": "EUR",
+        "active": false,
+        "unmodelled": {
+            "wll": 2,
+            "compatible_webbing_width": [
+                25,
+                26
+            ],
+            "inner_width": 26,
+            "outer_bearing_diameter": null
+        }
     },
     {
         "id": 11,
         "name": "ROLLEX SS",
-        "description": "ROLLEX is the lightest aluminum carabiner with a 1-inch roll. Equipped with ball bearings (stainless steel in the SS version), it ensures smooth sliding movements. The single surface aluminum roll prevents jamming and keeps the line smooth without pressure marks.",
-        "material": "Aluminum, Stainless Steel",
-        "weight": 129,
-        "wll": 4,
-        "mbs": 22,
-        "compatible_webbing_width": [
-            24,
-            26
+        "brand": "Spider Slacklines",
+        "material": [
+            "Aluminum",
+            "Stainless Steel"
         ],
+        "roller_material": "Aluminum",
         "slider_type": "Carabiner",
-        "inner_width": null,
-        "outer_bearing_diameter": null,
-        "manufacturer": "Spider Slacklines",
+        "lock_type": "Non-locking",
+        "bearing_material": "Stainless Steel",
+        "product_url": "https://spider-slacklines.com/shop/en/rollex/353-3146-rollex-highline-carabiner-pulley-7616990000.html#/325-select_model-ss_stainless_steel_bearings/329-choose_rollex_colour-dark_grey/393-select_brake-none/583-select_accessory-none/599-choose_harness_connector-none",
+        "weight": 129.0,
+        "breaking_strength": 22.0,
+        "price": 84.95,
+        "currency": "USD",
+        "description": "ROLLEX is the lightest aluminum carabiner with a 1-inch roll. Equipped with ball bearings (stainless steel in the SS version), it ensures smooth sliding movements. The single surface aluminum roll prevents jamming and keeps the line smooth without pressure marks.",
+        "active": true,
         "gear_sellers": [
             "Slack Inov",
             "Equilibrium Slacklines (EQB)"
         ],
-        "price": 84.95,
-        "price_unit": "USD",
-        "roller_material": "Aluminum",
-        "locking_type": "Non-locking",
-        "bearing_material": "Stainless Steel",
-        "date_introduced": null,
-        "product_url": "https://spider-slacklines.com/shop/en/rollex/353-3146-rollex-highline-carabiner-pulley-7616990000.html#/325-select_model-ss_stainless_steel_bearings/329-choose_rollex_colour-dark_grey/393-select_brake-none/583-select_accessory-none/599-choose_harness_connector-none",
-        "active": true
+        "unmodelled": {
+            "wll": 4,
+            "compatible_webbing_width": [
+                24,
+                26
+            ],
+            "inner_width": null,
+            "outer_bearing_diameter": null
+        }
     },
     {
         "id": 12,
         "name": "ROLLEX SG",
-        "description": "ROLLEX is the lightest aluminum carabiner with a 1-inch roll. Equipped with ball bearings (stainless steel in the SS version), it ensures smooth sliding movements. The single surface aluminum roll prevents jamming and keeps the line smooth without pressure marks.",
-        "material": "Aluminum, Steel",
-        "weight": 129,
-        "wll": 4,
-        "mbs": 22,
-        "compatible_webbing_width": [
-            24,
-            26
+        "brand": "Spider Slacklines",
+        "material": [
+            "Aluminum",
+            "Steel"
         ],
-        "slider_type": "Locking Carabiner",
-        "inner_width": null,
-        "outer_bearing_diameter": null,
-        "manufacturer": "Spider Slacklines",
+        "roller_material": "Aluminum",
+        "slider_type": "Carabiner",
+        "lock_type": "Screw Lock",
+        "bearing_material": "Other",
+        "product_url": "https://spider-slacklines.com/shop/en/rollex/353-3147-rollex-highline-carabiner-pulley-7616990000.html#/324-select_model-sg_screw_gate/331-choose_rollex_colour-gold_sg/393-select_brake-none/583-select_accessory-none/599-choose_harness_connector-none",
+        "weight": 129.0,
+        "breaking_strength": 22.0,
+        "price": 65.94,
+        "currency": "USD",
+        "description": "ROLLEX is the lightest aluminum carabiner with a 1-inch roll. Equipped with ball bearings (stainless steel in the SS version), it ensures smooth sliding movements. The single surface aluminum roll prevents jamming and keeps the line smooth without pressure marks.",
+        "active": true,
         "gear_sellers": [
             "Slack Inov",
             "Equilibrium Slacklines (EQB)"
         ],
-        "price": 65.94,
-        "price_unit": "USD",
-        "roller_material": "Aluminum",
-        "locking_type": "screw locking",
-        "date_introduced": null,
-        "product_url": "https://spider-slacklines.com/shop/en/rollex/353-3147-rollex-highline-carabiner-pulley-7616990000.html#/324-select_model-sg_screw_gate/331-choose_rollex_colour-gold_sg/393-select_brake-none/583-select_accessory-none/599-choose_harness_connector-none",
-        "active": true
+        "unmodelled": {
+            "wll": 4,
+            "compatible_webbing_width": [
+                24,
+                26
+            ],
+            "inner_width": null,
+            "outer_bearing_diameter": null
+        }
     },
     {
         "id": 13,
         "name": "ROLLEX",
-        "description": "Lightest aluminium carabiner with 1 inch roll. The roll runs on 2 ball bearings (SS version has stainless steel bearings), that guarantee a smooth movement. Aluminium roll also prevents jamming the line between bearings that was usual in older version of these carabiners. Surface of the roll is perfectly smooth so it leaves no pressure marks on the webbing.",
-        "material": "Aluminum, Steel",
-        "weight": 129,
-        "wll": 4,
-        "mbs": 22,
-        "compatible_webbing_width": [
-            24,
-            26
+        "brand": "Spider Slacklines",
+        "material": [
+            "Aluminum",
+            "Steel"
         ],
+        "roller_material": "Aluminum",
         "slider_type": "Carabiner",
-        "inner_width": null,
-        "outer_bearing_diameter": null,
-        "manufacturer": "Spider Slacklines",
+        "lock_type": "Non-locking",
+        "bearing_material": "Other",
+        "release_date": 1555189200000,
+        "product_url": "https://www.slackshop.cz/en/rollex/157-379-rollex.html",
+        "weight": 129.0,
+        "breaking_strength": 22.0,
+        "price": 54.95,
+        "currency": "USD",
+        "description": "Lightest aluminium carabiner with 1 inch roll. The roll runs on 2 ball bearings (SS version has stainless steel bearings), that guarantee a smooth movement. Aluminium roll also prevents jamming the line between bearings that was usual in older version of these carabiners. Surface of the roll is perfectly smooth so it leaves no pressure marks on the webbing.",
+        "active": true,
         "gear_sellers": [
             "Slack Inov",
             "Equilibrium Slacklines (EQB)"
         ],
-        "price": 54.95,
-        "price_unit": "USD",
-        "roller_material": "Aluminum",
-        "locking_type": "Non-locking",
-        "date_introduced": 1555189200000,
-        "product_url": "https://www.slackshop.cz/en/rollex/157-379-rollex.html",
-        "active": true
+        "unmodelled": {
+            "wll": 4,
+            "compatible_webbing_width": [
+                24,
+                26
+            ],
+            "inner_width": null,
+            "outer_bearing_diameter": null
+        }
     },
     {
         "id": 14,
         "name": "SKIP",
-        "description": "SKIP is the first full Stainless Steel highly efficient webbing pulley on the market. Suitable for 1 inch / 25 mm wide flat webbing. It can be used as a multiplier in an Ellington tightening system or as a transport pulley.",
-        "material": "Stainless Steel",
-        "weight": 165,
-        "wll": 5,
-        "mbs": 30,
-        "compatible_webbing_width": [
-            25,
-            26
+        "brand": "ZERGE outdoor",
+        "material": [
+            "Stainless Steel"
         ],
+        "roller_material": "Other",
         "slider_type": "Moving plates",
-        "inner_width": 26,
-        "outer_bearing_diameter": 24,
-        "manufacturer": "ZERGE outdoor",
-        "price": 49.0,
-        "price_unit": "EUR",
-        "roller_material": null,
-        "locking_type": "Non-locking",
-        "date_introduced": null,
+        "lock_type": "Non-locking",
+        "bearing_material": "Other",
         "product_url": "https://web.archive.org/web/20241214182156/http://zergeoutdoor.com/product/skip-the-high-efficiency-webbing-pulley/",
-        "active": false
+        "weight": 165.0,
+        "breaking_strength": 30.0,
+        "price": 49.0,
+        "currency": "EUR",
+        "description": "SKIP is the first full Stainless Steel highly efficient webbing pulley on the market. Suitable for 1 inch / 25 mm wide flat webbing. It can be used as a multiplier in an Ellington tightening system or as a transport pulley.",
+        "active": false,
+        "unmodelled": {
+            "wll": 5,
+            "compatible_webbing_width": [
+                25,
+                26
+            ],
+            "inner_width": 26,
+            "outer_bearing_diameter": 24
+        }
     },
     {
         "id": 15,
         "name": "SKIP UL",
-        "description": "SKIP UL is the first full Stainless Steel highly efficient webbing pulley on the market. Suitable for 1inch / 25mm wide flat webbings. It can be used as a multiplier in an Ellington tightening system or as a transport pulley.",
-        "material": "Stainless Steel",
-        "weight": 108,
-        "wll": 3,
-        "mbs": 18,
-        "compatible_webbing_width": [
-            25,
-            26
+        "brand": "ZERGE outdoor",
+        "material": [
+            "Stainless Steel"
         ],
+        "roller_material": "Other",
         "slider_type": "Moving plates",
-        "inner_width": 28,
-        "outer_bearing_diameter": 19,
-        "manufacturer": "ZERGE outdoor",
-        "price": 37.05,
-        "price_unit": "EUR",
-        "roller_material": null,
-        "locking_type": "Non-locking",
-        "date_introduced": null,
+        "lock_type": "Non-locking",
+        "bearing_material": "Other",
         "product_url": "https://web.archive.org/web/20250617131642/http://zergeoutdoor.com/product/skip-ul-the-ultralight-stainless-steel-webbing-pulley/",
-        "active": false
+        "weight": 108.0,
+        "breaking_strength": 18.0,
+        "price": 37.05,
+        "currency": "EUR",
+        "description": "SKIP UL is the first full Stainless Steel highly efficient webbing pulley on the market. Suitable for 1inch / 25mm wide flat webbings. It can be used as a multiplier in an Ellington tightening system or as a transport pulley.",
+        "active": false,
+        "unmodelled": {
+            "wll": 3,
+            "compatible_webbing_width": [
+                25,
+                26
+            ],
+            "inner_width": 28,
+            "outer_bearing_diameter": 19
+        }
     },
     {
         "id": 16,
         "name": "High-way",
-        "material": "Nylon, Aluminum",
-        "weight": 67,
-        "wll": null,
-        "mbs": 21,
-        "compatible_webbing_width": [
-            25,
-            26
+        "brand": "Slack Inov",
+        "material": [
+            "Aluminum"
         ],
+        "roller_material": "Plastic",
         "slider_type": "Moving plates",
-        "inner_width": null,
-        "outer_bearing_diameter": null,
-        "manufacturer": "Slack Inov",
+        "lock_type": "Non-locking",
+        "bearing_material": "Other",
+        "weight": 67.0,
+        "breaking_strength": 21.0,
+        "price": 30.0,
+        "currency": "EUR",
+        "active": false,
         "gear_sellers": [
             "Spider Slacklines"
         ],
-        "price": 30.0,
-        "price_unit": "EUR",
-        "roller_material": "Nylon (Polyamide)",
-        "locking_type": "Non-locking",
-        "date_introduced": null,
-        "product_url": null,
-        "active": false
+        "unmodelled": {
+            "wll": null,
+            "compatible_webbing_width": [
+                25,
+                26
+            ],
+            "inner_width": null,
+            "outer_bearing_diameter": null
+        }
     },
     {
         "id": 17,
         "name": "BC Roller - Straight Gate",
-        "description": "Small, lightweight webbing carabiner. A webbing roller carabiner that fits nicely on the harness and works well with most hardware. Stainless steel bearings and two gate-types.",
-        "material": "Aluminum, Stainless Steel",
-        "weight": 121,
-        "wll": 4,
-        "mbs": 21,
-        "compatible_webbing_width": null,
-        "slider_type": "Carabiner",
-        "inner_width": 28.6,
-        "outer_bearing_diameter": null,
-        "manufacturer": "Balance Community",
-        "price": 49.0,
-        "price_unit": "USD",
+        "brand": "Balance Community",
+        "material": [
+            "Aluminum",
+            "Stainless Steel"
+        ],
         "roller_material": "Aluminum",
+        "slider_type": "Carabiner",
+        "lock_type": "Non-locking",
         "bearing_material": "Stainless Steel",
-        "locking_type": "non-locking",
-        "date_introduced": null,
         "product_url": "https://www.balancecommunity.com/products/bc-roller",
-        "active": true
+        "weight": 121.0,
+        "breaking_strength": 21.0,
+        "price": 49.0,
+        "currency": "USD",
+        "description": "Small, lightweight webbing carabiner. A webbing roller carabiner that fits nicely on the harness and works well with most hardware. Stainless steel bearings and two gate-types.",
+        "active": true,
+        "unmodelled": {
+            "wll": 4,
+            "compatible_webbing_width": null,
+            "inner_width": 28.6,
+            "outer_bearing_diameter": null
+        }
     },
     {
         "id": 18,
         "name": "BC Roller - 2-Stage Twist Lock",
-        "description": "Small, lightweight webbing carabiner. A webbing roller carabiner that fits nicely on the harness and works well with most hardware. Stainless steel bearings and two gate-types.",
-        "material": "Aluminum, Stainless Steel",
-        "weight": 136,
-        "wll": 4,
-        "mbs": 21,
-        "compatible_webbing_width": null,
-        "slider_type": "Locking Carabiner",
-        "inner_width": 28.6,
-        "outer_bearing_diameter": null,
-        "manufacturer": "Balance Community",
-        "price": 55.0,
-        "price_unit": "USD",
+        "brand": "Balance Community",
+        "material": [
+            "Aluminum",
+            "Stainless Steel"
+        ],
         "roller_material": "Aluminum",
+        "slider_type": "Carabiner",
+        "lock_type": "Twist Lock",
         "bearing_material": "Stainless Steel",
-        "locking_type": "twist lock",
-        "date_introduced": null,
         "product_url": "https://www.balancecommunity.com/products/bc-roller",
-        "active": true
+        "weight": 136.0,
+        "breaking_strength": 21.0,
+        "price": 55.0,
+        "currency": "USD",
+        "description": "Small, lightweight webbing carabiner. A webbing roller carabiner that fits nicely on the harness and works well with most hardware. Stainless steel bearings and two gate-types.",
+        "active": true,
+        "unmodelled": {
+            "wll": 4,
+            "compatible_webbing_width": null,
+            "inner_width": 28.6,
+            "outer_bearing_diameter": null
+        }
     },
     {
         "id": 19,
         "name": "HIGHWHEEL Longline Flat Pulley",
-        "description": "The HIGHWHEEL is an aluminum pulley with a 1 inch (2.5cm) roller base that slides on two steel ball bearings to ensure smooth movement. The special aluminum roller prevents jamming between the webbing and the bearings. The roller is completely smooth and leaves no marks on the webbing when sliding.",
-        "material": "Aluminum, Steel",
-        "weight": 91,
-        "wll": 4,
-        "mbs": 20,
-        "compatible_webbing_width": [
-            24,
-            26
+        "brand": "Spider Slacklines",
+        "material": [
+            "Aluminum",
+            "Steel"
         ],
+        "roller_material": "Aluminum",
         "slider_type": "Moving plates",
-        "inner_width": null,
-        "outer_bearing_diameter": null,
-        "manufacturer": "Spider Slacklines",
+        "lock_type": "Non-locking",
+        "bearing_material": "Steel",
+        "product_url": "https://slacklines.us/products/highwheel-longline-flat-pulley",
+        "weight": 91.0,
+        "breaking_strength": 20.0,
+        "price": 39.9,
+        "currency": "USD",
+        "description": "The HIGHWHEEL is an aluminum pulley with a 1 inch (2.5cm) roller base that slides on two steel ball bearings to ensure smooth movement. The special aluminum roller prevents jamming between the webbing and the bearings. The roller is completely smooth and leaves no marks on the webbing when sliding.",
+        "active": true,
         "gear_sellers": [
             "Slack Inov"
         ],
-        "price": 39.9,
-        "price_unit": "USD",
-        "roller_material": "Aluminum",
-        "bearing_material": "Steel",
-        "locking_type": "Non-locking",
-        "date_introduced": null,
-        "product_url": "https://slacklines.us/products/highwheel-longline-flat-pulley",
-        "active": true
+        "unmodelled": {
+            "wll": 4,
+            "compatible_webbing_width": [
+                24,
+                26
+            ],
+            "inner_width": null,
+            "outer_bearing_diameter": null
+        }
     },
     {
         "id": 20,
         "name": "Rolley",
-        "description": "Roll along webbing and make the magic of mechanical advantage possible. By arranging your Rolley as a pulley using a Grippex in a buckingham system you get an ideal mechanical advantage of 3:1. In reality, this means you can tension your slackline as if you had an extra pair of hands helping.",
-        "material": null,
-        "weight": null,
-        "wll": null,
-        "mbs": 25,
-        "compatible_webbing_width": [
-            25,
-            25
+        "brand": "Viper Slacklines",
+        "material": [
+            "Other"
         ],
+        "roller_material": "Other",
         "slider_type": "Moving plates",
-        "inner_width": null,
-        "outer_bearing_diameter": null,
-        "manufacturer": "Viper Slacklines",
-        "price": 645.0,
-        "price_unit": "ZAR",
-        "roller_material": null,
-        "locking_type": "Non-locking",
-        "date_introduced": null,
+        "lock_type": "Non-locking",
+        "bearing_material": "Other",
         "product_url": "https://www.viperslacklines.co.za/products/rollie-25mm-slackline-roller",
-        "active": true
+        "breaking_strength": 25.0,
+        "price": 645.0,
+        "currency": "ZAR",
+        "description": "Roll along webbing and make the magic of mechanical advantage possible. By arranging your Rolley as a pulley using a Grippex in a buckingham system you get an ideal mechanical advantage of 3:1. In reality, this means you can tension your slackline as if you had an extra pair of hands helping.",
+        "active": true,
+        "unmodelled": {
+            "wll": null,
+            "compatible_webbing_width": [
+                25,
+                25
+            ],
+            "inner_width": null,
+            "outer_bearing_diameter": null
+        }
     },
     {
         "id": 21,
         "name": "Polia de Fita Bera",
-        "material": "Aluminum, Stainless Steel",
-        "weight": 125,
-        "wll": 4,
-        "mbs": null,
-        "compatible_webbing_width": null,
+        "brand": "Bera Adventure",
+        "material": [
+            "Aluminum",
+            "Stainless Steel"
+        ],
+        "roller_material": "Other",
         "slider_type": "Moving plates",
-        "inner_width": 28,
-        "outer_bearing_diameter": null,
-        "manufacturer": "Bera Adventure",
-        "price": 139.0,
-        "price_unit": "BRL",
-        "roller_material": null,
+        "lock_type": "Non-locking",
         "bearing_material": "Stainless Steel",
-        "locking_type": "Non-locking",
-        "date_introduced": null,
         "product_url": "https://www.beraadventure.com.br/product/polia-de-fita-bera/",
-        "active": true
+        "weight": 125.0,
+        "price": 139.0,
+        "currency": "BRL",
+        "active": true,
+        "unmodelled": {
+            "wll": 4,
+            "compatible_webbing_width": null,
+            "inner_width": 28,
+            "outer_bearing_diameter": null
+        }
     },
     {
         "id": 22,
         "name": "Hangover 1.0",
-        "material": "Aluminum",
-        "weight": 152,
-        "wll": 4,
-        "mbs": 22,
-        "compatible_webbing_width": [
-            25
+        "brand": "Slacktivity",
+        "material": [
+            "Aluminum"
         ],
-        "slider_type": "Carabiner",
-        "inner_width": 27.8,
-        "outer_bearing_diameter": 19,
-        "manufacturer": "Slacktivity",
-        "price": 55,
-        "price_unit": "EUR",
         "roller_material": "Aluminum",
-        "locking_type": "Non-locking",
+        "slider_type": "Carabiner",
+        "lock_type": "Non-locking",
         "bearing_material": "Steel",
-        "date_introduced": null,
         "product_url": "https://slacktivity.com/shop/hangover-color-edition/",
-        "active": true
+        "weight": 152.0,
+        "breaking_strength": 22.0,
+        "price": 55.0,
+        "currency": "EUR",
+        "active": true,
+        "unmodelled": {
+            "wll": 4,
+            "compatible_webbing_width": [
+                25
+            ],
+            "inner_width": 27.8,
+            "outer_bearing_diameter": 19
+        }
     }
 ]

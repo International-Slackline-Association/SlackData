@@ -10,38 +10,18 @@ Two things are covered here, per gear type:
 1. **API round trip** — POST `true` / `false` / key omitted must come back as
    `True` / `False` / `None` on the `*Public` response (and survive a re-GET),
    and PATCH must be able to flip it in both directions.
-2. **Loader mapping** — the real risk. Each `load_*.py` carries a single
-   `active=x.get("active")` line, and `.get()` answers `None` for a missing or
-   misspelled key instead of raising. Dropping that line, or renaming the JSON
-   key, would silently seed every item of that type as `None` while the rest of
-   the suite stayed green. These tests push a minimal JSON item through the
-   type's real `clean_*` + `add_*_to_db` pair and assert what landed in the DB.
+2. **Loader mapping** — a minimal seed entry per type goes through the real
+   loader (`load_data/load_gear.py`) and the test asserts what landed in the
+   DB. The per-type loaders this once guarded (a `.get("active")` line each,
+   silently `None` when dropped) are gone; the generic one is guarded the same
+   way, per type.
 """
 
 import pytest
 from sqlmodel import select
 
-from slack_data.load_data.load_connectors import (
-    add_connectors_to_db,
-    clean_connector_data,
-)
-from slack_data.load_data.load_grips import add_grips_to_db, clean_grip_data
-from slack_data.load_data.load_leashrings import (
-    add_leashrings_to_db,
-    clean_leashring_data,
-)
-from slack_data.load_data.load_rollers import add_rollers_to_db, clean_roller_data
-from slack_data.load_data.load_starterkits import (
-    add_starterkits_to_db,
-    clean_starterkit_data,
-)
-from slack_data.load_data.load_treepros import add_treepros_to_db, clean_treepro_data
-from slack_data.load_data.load_tricklinekits import (
-    add_tricklinekits_to_db,
-    clean_tricklinekit_data,
-)
-from slack_data.load_data.load_webbings import add_webbings_to_db, clean_webbing_data
-from slack_data.load_data.load_weblocks import add_weblocks_to_db, clean_weblock_data
+from slack_data.load_data._seed_io import read_seed_json, seed_sources
+from slack_data.load_data.load_gear import load_gear
 from slack_data.models.connectors import Connector
 from slack_data.models.grips import Grip
 from slack_data.models.leashrings import LeashRing
@@ -173,176 +153,80 @@ def test_patch_other_field_leaves_active_alone(client, brand, prefix):
 # Loader mapping — JSON `active` key → DB column, per gear type
 # ---------------------------------------------------------------------------
 #
-# Each entry: (id, clean_fn, add_fn, Model, minimal raw JSON item *without*
-# an `active` key). Note the brand field name differs per type — `brand` for
-# webbing/weblock, `manufacturer` for everything else — which is exactly the
-# kind of per-loader divergence these tests exist to pin down.
+# Each entry: (collection, Model, minimal seed entry *without* an `active`
+# key), in the seeds' own vocabulary — the model's field names, `brand` for
+# the maker on every type.
 #
 # The brand is a real one: `get_brand()` takes a brand's id from `catalog_id` in
 # manufacturers.json (see load_data/brand_ids.py), so an invented manufacturer
 # has no id to be given and the load refuses rather than autoincrementing.
 
 LOADER_CASES = [
+    ("webbings", Webbing, {"name": "Loaded Webbing", "brand": "Gibbon", "material": ["Nylon"], "width": 25}),
+    ("weblocks", Weblock, {"name": "Loaded Weblock", "brand": "Gibbon", "style": "Tensionable Weblock", "material": ["Aluminum"], "width_min": 25}),
     (
-        "webbing",
-        clean_webbing_data,
-        add_webbings_to_db,
-        Webbing,
-        {"name": "Loaded Webbing", "brand": "Gibbon", "materialType": "Nylon", "width": 25},
-    ),
-    (
-        "weblock",
-        clean_weblock_data,
-        add_weblocks_to_db,
-        Weblock,
+        "rollers", Roller,
         {
-            "name": "Loaded Weblock",
-            "brand": "Gibbon",
-            "style": "Rodeo",
-            "specifications": {
-                "Material": "Aluminum",
-                "Compatible webbing width": "25 mm",
-            },
+            "name": "Loaded Roller", "brand": "Gibbon", "material": ["Aluminum"],
+            "roller_material": "Aluminum", "lock_type": "Screw Lock",
+            "bearing_material": "Steel", "slider_type": "Carabiner",
         },
     ),
+    ("leashrings", LeashRing, {"name": "Loaded Leash Ring", "brand": "Gibbon", "material": "Stainless Steel"}),
+    ("grips", Grip, {"name": "Loaded Grip", "brand": "Gibbon", "material": "Aluminum", "width_min": 25}),
+    ("treepros", TreePro, {"name": "Loaded TreePro", "brand": "Gibbon"}),
     (
-        "roller",
-        clean_roller_data,
-        add_rollers_to_db,
-        Roller,
-        {
-            "name": "Loaded Roller",
-            "manufacturer": "Gibbon",
-            "material": "Aluminum",
-            "roller_material": "Aluminum",
-            "locking_type": "Screw Lock",
-            "bearing_material": "Steel",
-            "slider_type": "Carabiner",
-            "width": "25",
-        },
+        "starterkits", StarterKit,
+        {"name": "Loaded Starter Kit", "brand": "Gibbon", "webbing_length": 15, "webbing_width": 25, "tensioning_type": "Single Ratchet"},
     ),
     (
-        "leashring",
-        clean_leashring_data,
-        add_leashrings_to_db,
-        LeashRing,
-        {
-            "name": "Loaded Leash Ring",
-            "manufacturer": "Gibbon",
-            "material": "Stainless Steel",
-        },
+        "tricklinekits", TricklineKit,
+        {"name": "Loaded Trickline Kit", "brand": "Gibbon", "webbing_length": 15, "webbing_width": 25, "tensioning_type": "Single Ratchet"},
     ),
-    (
-        "grip",
-        clean_grip_data,
-        add_grips_to_db,
-        Grip,
-        {
-            "name": "Loaded Grip",
-            "manufacturer": "Gibbon",
-            "material": "Aluminum",
-            "width_min": 25,
-        },
-    ),
-    (
-        "treepro",
-        clean_treepro_data,
-        add_treepros_to_db,
-        TreePro,
-        {"name": "Loaded TreePro", "manufacturer": "Gibbon"},
-    ),
-    (
-        "starterkit",
-        clean_starterkit_data,
-        add_starterkits_to_db,
-        StarterKit,
-        {
-            "name": "Loaded Starter Kit",
-            "manufacturer": "Gibbon",
-            "webbing_length": 15,
-            "webbing_width": 25,
-            "tensioning_type": "RAT1",
-        },
-    ),
-    (
-        "tricklinekit",
-        clean_tricklinekit_data,
-        add_tricklinekits_to_db,
-        TricklineKit,
-        {
-            "name": "Loaded Trickline Kit",
-            "manufacturer": "Gibbon",
-            "webbing_length": 15,
-            "webbing_width": 25,
-            "tensioning_type": "RAT1",
-        },
-    ),
-    (
-        "connector",
-        clean_connector_data,
-        add_connectors_to_db,
-        Connector,
-        {
-            "name": "Loaded Connector",
-            "manufacturer": "Gibbon",
-            "connector_style": "Shackle",
-            "material": "Stainless Steel",
-        },
-    ),
+    ("connectors", Connector, {"name": "Loaded Connector", "brand": "Gibbon", "connector_style": "Shackle", "material": "Stainless Steel"}),
 ]
 
 LOADER_IDS = [case[0] for case in LOADER_CASES]
 
 
-def _load_one(session, clean_fn, add_fn, Model, item):
-    """Run one raw JSON item through its loader and return the created row.
+def _load_one(session, collection, Model, item):
+    """Run one seed entry through the real loader and return the created row.
 
     The `id` is supplied here rather than in each case because it is not what
-    these tests are about — but the loaders require it (see
-    `_seed_io.require_seed_id`), since a seed item's id is no longer SQLite's to
-    invent. One row per test, so #1 is always free.
+    these tests are about — but the loader requires it (see
+    `_seed_io.require_seed_id`). One row per test, so #1 is always free.
     """
-    add_fn([clean_fn(dict(item) | {"id": 1})], session)
+    # manufacturers.json passes through: brand ids come from its catalog_id.
+    sources = {"manufacturers.json": read_seed_json("manufacturers.json"), f"{collection}.json": [{"id": 1} | item]}
+    with seed_sources(sources):
+        load_gear(session, collection)
     return session.exec(select(Model)).one()
 
 
-@pytest.mark.parametrize(
-    "clean_fn, add_fn, Model, item",
-    [case[1:] for case in LOADER_CASES],
-    ids=LOADER_IDS,
-)
+@pytest.mark.parametrize("collection, Model, item", LOADER_CASES, ids=LOADER_IDS)
 @pytest.mark.parametrize("raw, expected", [(True, True), (False, False)])
-def test_loader_maps_active(session, clean_fn, add_fn, Model, item, raw, expected):
-    row = _load_one(session, clean_fn, add_fn, Model, item | {"active": raw})
+def test_loader_maps_active(session, collection, Model, item, raw, expected):
+    row = _load_one(session, collection, Model, item | {"active": raw})
     assert row.active is expected
 
 
-@pytest.mark.parametrize(
-    "clean_fn, add_fn, Model, item",
-    [case[1:] for case in LOADER_CASES],
-    ids=LOADER_IDS,
-)
-def test_loader_active_absent_from_json_is_none(session, clean_fn, add_fn, Model, item):
+@pytest.mark.parametrize("collection, Model, item", LOADER_CASES, ids=LOADER_IDS)
+def test_loader_active_absent_from_json_is_none(session, collection, Model, item):
     """A seed item with no `active` key must land as unknown, not as True/False."""
-    row = _load_one(session, clean_fn, add_fn, Model, item)
+    row = _load_one(session, collection, Model, item)
     assert row.active is None
 
 
-@pytest.mark.parametrize(
-    "clean_fn, add_fn, Model, item",
-    [case[1:] for case in LOADER_CASES],
-    ids=LOADER_IDS,
-)
-def test_loader_carries_notes_version_and_product_group(session, clean_fn, add_fn, Model, item):
+@pytest.mark.parametrize("collection, Model, item", LOADER_CASES, ids=LOADER_IDS)
+def test_loader_carries_notes_version_and_product_group(session, collection, Model, item):
     """`notes`, `version` and `product_group` reach the row on every gear type.
 
-    The webbing, roller and grip loaders once left `notes` and `version` out of
-    their `<X>Create(...)` call, so a seed's notes (merge records, provenance)
-    were dropped at seed time with no error anywhere. `product_group` is mapped
-    by hand in every loader the same way, so it can be dropped the same way.
+    The old per-type loaders once dropped `notes` and `version` on three types
+    with no error anywhere; the generic loader carries every model field, and
+    this pins it.
     """
     row = _load_one(
-        session, clean_fn, add_fn, Model,
+        session, collection, Model,
         item | {"notes": "Merged from #999.", "version": "v2", "product_group": "Reggae"},
     )
     assert row.notes == "Merged from #999."
@@ -354,27 +238,13 @@ def test_loader_carries_notes_version_and_product_group(session, clean_fn, add_f
 # The seed files themselves — every item should carry an explicit `active`
 # ---------------------------------------------------------------------------
 
-@pytest.mark.parametrize("json_loader", [
-    pytest.param("load_webbings", id="webbings"),
-    pytest.param("load_weblocks", id="weblocks"),
-    pytest.param("load_rollers", id="rollers"),
-    pytest.param("load_leashrings", id="leashrings"),
-    pytest.param("load_grips", id="grips"),
-    pytest.param("load_treepros", id="treepros"),
-    pytest.param("load_starterkits", id="starterkits"),
-    pytest.param("load_tricklinekits", id="tricklinekits"),
-    pytest.param("load_connectors", id="connectors"),
-])
-def test_seed_json_carries_active_on_every_item(json_loader):
+@pytest.mark.parametrize("collection", [case[0] for case in LOADER_CASES])
+def test_seed_json_carries_active_on_every_item(collection):
     """
     Guards the seed data, not the code: a typo'd or dropped `active` key in a
     root *.json would seed as None and quietly empty out the HISTORIC scope.
     """
-    import importlib
-
-    module = importlib.import_module(f"slack_data.load_data.{json_loader}")
-    read_json = getattr(module, f"{json_loader}_json")
-    items = read_json()
+    items = read_seed_json(f"{collection}.json")
 
     missing = [i.get("name") for i in items if "active" not in i]
     assert missing == [], f"{len(missing)} item(s) with no `active` key: {missing[:5]}"

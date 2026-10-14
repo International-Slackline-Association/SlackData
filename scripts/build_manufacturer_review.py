@@ -28,17 +28,17 @@ from slack_data.utilities.brand_aliases import canonical_brand  # noqa: E402
 
 OUT = ROOT / "manufacturer_review.csv"
 
-# gear seed file -> the key holding the brand name in that file (they differ; see CLAUDE.md)
+# gear seed file -> the key holding the brand name (`brand` in every file since the phase 3 conversion)
 SEED = {
     "webbings.json": "brand",
     "weblocks.json": "brand",
-    "grips.json": "manufacturer",
-    "leashrings.json": "manufacturer",
-    "treepros.json": "manufacturer",
-    "starterkits.json": "manufacturer",
-    "tricklinekits.json": "manufacturer",
-    "rollers.json": "manufacturer",
-    "connectors.json": "manufacturer",
+    "grips.json": "brand",
+    "leashrings.json": "brand",
+    "treepros.json": "brand",
+    "starterkits.json": "brand",
+    "tricklinekits.json": "brand",
+    "rollers.json": "brand",
+    "connectors.json": "brand",
 }
 
 

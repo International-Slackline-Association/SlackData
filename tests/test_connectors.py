@@ -1,13 +1,10 @@
-"""Tests for the /connector endpoints and the connector loader."""
+"""Tests for the /connector endpoints and connectors through the gear loader."""
 
 import pytest
 from conftest import persist
 
-from slack_data.load_data.load_connectors import (
-    add_connectors_to_db,
-    clean_connector_data,
-    load_connectors_json,
-)
+from slack_data.load_data._seed_io import read_seed_json
+from slack_data.load_data.load_gear import to_row
 from slack_data.load_data.load_isa_certifications import CERTIFIABLE_MODELS
 from slack_data.load_data.load_isa_warnings import WARNABLE_MODELS
 from slack_data.models.connectors import (
@@ -130,16 +127,20 @@ def test_delete_connector(client, session, brand):
 
 # --- Loader ---
 
+def load_connectors_json() -> list[dict]:
+    return read_seed_json("connectors.json")
+
+
 def _load(session, item: dict) -> Connector:
-    item = {"id": 1} | item
-    add_connectors_to_db([clean_connector_data(item)], session)
-    return session.get(Connector, item["id"])
+    row = to_row("connectors", {"id": 1, "brand": "Gibbon"} | item, brand_id=1)
+    session.add(row)
+    session.commit()
+    return session.get(Connector, row.id)
 
 
 def test_loader_maps_every_connector_field(session):
     row = _load(session, {
         "name": "Slackle",
-        "manufacturer": "Gibbon",
         "connector_style": "Shackle",
         "closure": "Push pin",
         "material": "Aluminum",
@@ -167,7 +168,7 @@ def test_loader_maps_every_connector_field(session):
 def test_loader_keeps_empty_lists_as_null(session):
     """`[]` is never written: null is "none recorded" (see the model)."""
     row = _load(session, {
-        "name": "X", "manufacturer": "Gibbon", "connector_style": "Shackle",
+        "name": "X", "connector_style": "Shackle",
         "material": "Steel", "standards": [], "gear_sellers": [],
     })
     assert row.standards is None
@@ -182,7 +183,7 @@ def test_loader_keeps_empty_lists_as_null(session):
 def test_loader_refuses_an_unknown_enum_value(session, field, value):
     """A misspelt style, closure or material is an error on re-seed — never a
     silent fallback, which would put the row under the wrong filter pill."""
-    item = {"name": "X", "manufacturer": "Gibbon", "connector_style": "Shackle", "material": "Steel"}
+    item = {"name": "X", "connector_style": "Shackle", "material": "Steel"}
     with pytest.raises(ValueError):
         _load(session, item | {field: value})
 
@@ -203,7 +204,7 @@ def test_connectors_can_be_certified_and_warned():
 
 def test_loader_maps_product_group(session):
     row = _load(session, {
-        "name": "D Shackle 8mm", "manufacturer": "Gibbon", "connector_style": "Shackle",
+        "name": "D Shackle 8mm", "connector_style": "Shackle",
         "material": "Stainless Steel", "product_group": "D Shackle 8mm, Stainless",
     })
     assert row.product_group == "D Shackle 8mm, Stainless"
@@ -230,7 +231,7 @@ def test_every_seeded_group_has_at_least_two_members():
 # --- Captive pin ---
 
 def test_loader_maps_captive_pin_and_defaults_it_false(session):
-    base = {"manufacturer": "Gibbon", "connector_style": "Shackle", "material": "Stainless Steel"}
+    base = {"connector_style": "Shackle", "material": "Stainless Steel"}
     assert _load(session, {**base, "name": "Bow Shackle 12mm", "captive_pin": True}).captive_pin is True
     assert _load(session, {**base, "id": 2, "name": "Bow Shackle 14mm"}).captive_pin is False
 
