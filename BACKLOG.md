@@ -505,8 +505,8 @@ Carried over from LAUNCH_RUNBOOK.md and PHASE4_SHIP_PLAN.md when both were remov
     shackle to use it from the other side). The jaw is sized for BC's MightyLock, 1" and 20 mm sewn
     loops, AWL 6-series weblocks and the soft release, and the bow takes several strands of Spanni or
     9 mm rope. The page names no ISA or EN standard.
-  - **Cong Gear Falcon** (隼), current. The only source is a Facebook photo post
-    (<https://www.facebook.com/photo?fbid=10162586676227383&set=pcb.10162586676302383>, sent
+  - **Cong Gear Falcon** (隼), current. The only source is a Facebook post
+    (<https://www.facebook.com/rio.zhang/posts/pfbid02vrPSanZDPLWUGE2pVsuMaN6CyXcaG8bYkjvYMmmzXGBoJyndAnyhyhncuy6RXKTtl>, sent
     by the operator; a plain fetch gets nothing but the login wall). The spec photo gives
     144 g, MBS 60 kN and WLL 8 kN, and the same MBS and WLL are engraved on the body. Outside it
     is 79 mm tall × 82 mm wide (the 82 mm is measured across the pin, head included). Inside it
