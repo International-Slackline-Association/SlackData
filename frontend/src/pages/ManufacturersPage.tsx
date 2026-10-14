@@ -19,6 +19,7 @@ import FilterGroup from '@/components/gear/FilterGroup'
 import Sheet from '@/components/layout/Sheet'
 import { useIsDesktop } from '@/hooks/useMediaQuery'
 import ManufacturerCard from '@/components/brand/ManufacturerCard'
+import { AddBrandButton } from '@/components/edit/AdminCreate'
 import { useBrandDirectory, type BrandWithCounts } from '@/hooks/useBrandDirectory'
 
 // The directory is grid-only; the toolbar slot the Cards/List toggle used to
@@ -97,7 +98,10 @@ export default function ManufacturersPage() {
   return (
     <OriginProvider origin={origin}>
     <div data-cy="manufacturers-page">
-      <h1 className="mb-6 text-2xl font-bold text-gray-900">Manufacturers</h1>
+      <div className="mb-6 flex items-baseline gap-4">
+        <h1 className="text-2xl font-bold text-gray-900">Manufacturers</h1>
+        <AddBrandButton />
+      </div>
 
       <div className="flex flex-col lg:flex-row lg:gap-8">
         {/* The sidebar only earns its space once there's something to filter by. */}

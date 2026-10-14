@@ -9,8 +9,11 @@
 // listing threw all three away. See utils/origin.ts.
 
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom'
+import { ApiError } from '@/api/client'
 import { fetchGearItem, fetchGearList } from '@/api/gear'
+import { fetchChanges } from '@/api/people'
+import ItemEditing from '@/components/edit/ItemEditing'
 import GearDetailBody from '@/components/gear/GearDetailBody'
 import BackLink from '@/components/layout/BackLink'
 import ProductManuals from '@/components/gear/ProductManuals'
@@ -33,13 +36,21 @@ export default function GearDetailPage() {
   // than as one shop's listing passing itself off as the product.
   const [shown, setShown] = useState<AnyItem | null>(null)
   const [missing, setMissing] = useState(false)
+  // Not listed because an admin hid it (P3-D): the page says so, with History.
+  const [hidden, setHidden] = useState(false)
   const [loading, setLoading] = useState(true)
+  // Bumped after an edit, so the page shows what the next visitor will see.
+  const [reload, setReload] = useState(0)
+  const navigate = useNavigate()
+  const location = useLocation()
+  const mergedFrom = (location.state as { mergedFrom?: string } | null)?.mergedFrom
 
   useEffect(() => {
     if (!meta || !id) return
     let cancelled = false
     setLoading(true)
     setMissing(false)
+    setHidden(false)
     fetchGearItem(meta.slug, id)
       .then(async data => {
         const row = data as unknown as AnyItem
@@ -53,8 +64,17 @@ export default function GearDetailPage() {
           setShown(view)
         }
       })
-      .catch(() => {
-        if (!cancelled) setMissing(true)
+      .catch(caught => {
+        if (cancelled) return
+        const detail = caught instanceof ApiError ? caught.detail : undefined
+        // A merged duplicate (P3-E): its links land on the item it became.
+        if (detail && typeof detail.merged_into === 'number') {
+          navigate(`/${meta.slug}/${detail.merged_into}`, { replace: true, state: { mergedFrom: id } })
+        } else if (detail?.hidden) {
+          setHidden(true)
+        } else {
+          setMissing(true)
+        }
       })
       .finally(() => {
         if (!cancelled) setLoading(false)
@@ -62,9 +82,12 @@ export default function GearDetailPage() {
     return () => {
       cancelled = true
     }
-  }, [meta, id])
+  }, [meta, id, reload, navigate])
 
   if (!meta) return <NotFoundPage />
+  if (hidden && id) {
+    return <HiddenItem slug={meta.slug} label={meta.label} id={id} onChanged={() => setReload(n => n + 1)} />
+  }
   if (missing) return <NotFoundPage />
   if (loading || !item || !shown) {
     return <div data-cy="detail-skeleton" className="py-24 text-center text-gray-400">Loading…</div>
@@ -80,6 +103,12 @@ export default function GearDetailPage() {
         fallback={{ path: `/${meta.slug}`, label: meta.label }}
         className="text-sm text-gray-500 hover:text-teal-primary"
       />
+
+      {mergedFrom && (
+        <p data-cy="merged-notice" className="mt-4 rounded-lg bg-amber-50 px-4 py-2 text-sm text-amber-900">
+          The link you followed was to item #{mergedFrom}, a duplicate merged into this one.
+        </p>
+      )}
 
       <article className="mt-4 rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
         <GearDetailBody item={shown} meta={meta} />
@@ -106,6 +135,61 @@ export default function GearDetailPage() {
       <div className="mt-4 flex justify-end">
         <SuggestButton gearType={meta.slug} variant="correction" item={item} />
       </div>
+
+      <ItemEditing slug={meta.slug} id={String(item.id)} onChanged={() => setReload(n => n + 1)} />
+    </div>
+  )
+}
+
+/** A hidden item's page: who hid it, when and why, and its History (P3-D). */
+function HiddenItem({
+  slug,
+  label,
+  id,
+  onChanged,
+}: {
+  slug: string
+  label: string
+  id: string
+  onChanged: () => void
+}) {
+  const [hide, setHide] = useState<{ name: string; when: string; why: string | null } | null>(null)
+
+  useEffect(() => {
+    let cancelled = false
+    fetchChanges({ target_type: 'item', target_id: `${slug}#${id}` })
+      .then(records => {
+        const record = records.find(r => r.action === 'item.hide')
+        if (!cancelled && record) {
+          setHide({ name: record.actor_name, when: new Date(record.created_at).toLocaleDateString(), why: record.why })
+        }
+      })
+      .catch(() => {})
+    return () => {
+      cancelled = true
+    }
+  }, [slug, id])
+
+  return (
+    <div data-cy="hidden-item" className="mx-auto max-w-5xl">
+      <Link to={`/${slug}`} className="text-sm text-gray-500 hover:text-teal-primary">
+        ← {label}
+      </Link>
+      <div className="mt-4 rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
+        <h1 className="text-lg font-semibold text-gray-900">This item is hidden</h1>
+        <p data-cy="hidden-reason" className="mt-2 text-sm text-gray-700">
+          {hide ? (
+            <>
+              Hidden by {hide.name} on {hide.when}
+              {hide.why ? <> — “{hide.why}”</> : '.'}
+            </>
+          ) : (
+            'An admin took it out of the catalogue.'
+          )}{' '}
+          It is kept, and can be brought back.
+        </p>
+      </div>
+      <ItemEditing slug={slug} id={id} hidden onChanged={onChanged} />
     </div>
   )
 }

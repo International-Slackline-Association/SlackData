@@ -6,17 +6,34 @@ export const API_BASE =
 
 export class ApiError extends Error {
   status: number
-  constructor(status: number, message: string) {
+  /** The response's `detail`, when it was an object: a hidden or merged item's
+   *  404 says which (`{hidden}` / `{merged_into}`), an edit's 409 carries the
+   *  current entry. */
+  detail?: Record<string, unknown>
+  constructor(status: number, message: string, detail?: Record<string, unknown>) {
     super(message)
     this.name = 'ApiError'
     this.status = status
+    this.detail = detail
+  }
+}
+
+async function detailOf(res: Response): Promise<Record<string, unknown> | undefined> {
+  try {
+    const body = (await res.clone().json()) as { detail?: unknown }
+    const { detail } = body
+    return detail && typeof detail === 'object' && !Array.isArray(detail)
+      ? (detail as Record<string, unknown>)
+      : undefined
+  } catch {
+    return undefined
   }
 }
 
 export async function request<T>(path: string): Promise<T> {
   const res = await fetch(`${API_BASE}${path}`)
   if (!res.ok) {
-    throw new ApiError(res.status, `GET ${path} failed: ${res.status}`)
+    throw new ApiError(res.status, `GET ${path} failed: ${res.status}`, await detailOf(res))
   }
   return res.json() as Promise<T>
 }
@@ -28,7 +45,7 @@ export async function request<T>(path: string): Promise<T> {
 
 /** FastAPI's error body: `detail` is a string, or a list of validation errors. */
 interface ErrorBody {
-  detail?: string | { loc?: (string | number)[]; msg?: string }[]
+  detail?: string | { loc?: (string | number)[]; msg?: string }[] | Record<string, unknown>
 }
 
 /**
@@ -49,6 +66,13 @@ async function errorMessage(res: Response, fallback: string): Promise<string> {
   }
   const { detail } = body
   if (typeof detail === 'string') return detail
+  // The edit routes answer {message, errors?} — errors as [{field, message}].
+  if (detail && !Array.isArray(detail) && typeof detail === 'object') {
+    const object = detail as { message?: string; errors?: { field: string; message: string }[] | null }
+    const parts = (object.errors ?? []).map(e => `${e.field}: ${e.message}`)
+    const text = [object.message, ...parts].filter(Boolean).join('; ')
+    if (text) return text
+  }
   if (Array.isArray(detail)) {
     const messages = detail
       .map(e => {
@@ -74,7 +98,8 @@ async function send<T>(method: string, path: string, body: unknown, token?: stri
     body: JSON.stringify(body),
   })
   if (!res.ok) {
-    throw new ApiError(res.status, await errorMessage(res, `${method} ${path} failed: ${res.status}`))
+    const detail = await detailOf(res)
+    throw new ApiError(res.status, await errorMessage(res, `${method} ${path} failed: ${res.status}`), detail)
   }
   return res.json() as Promise<T>
 }

@@ -34,6 +34,7 @@ import GearDetailedList from '@/components/gear/GearDetailedList'
 import GearTable from '@/components/gear/GearTable'
 import CompareBar from '@/components/gear/CompareBar'
 import SuggestButton from '@/components/submissions/SuggestButton'
+import { AddItemButton } from '@/components/edit/AdminCreate'
 import NotFoundPage from './NotFoundPage'
 
 // How many items one comparison may hold. The table scrolls sideways with the
@@ -484,6 +485,7 @@ export default function GearListingPage() {
               {/* If the data is incomplete, say where to report what's missing —
                   but from the right-hand group, not wedged between the count and
                   the view toggle. */}
+              <AddItemButton slug={meta.slug} label={meta.label} />
               <SuggestButton gearType={meta.slug} variant="new-item" />
               <div className="flex overflow-hidden rounded-lg border border-gray-300">
                 <button
