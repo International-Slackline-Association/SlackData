@@ -758,3 +758,83 @@ def test_the_version_lives_outside_every_collection(catalogue):
     """`_meta` is not a collection, so loading the catalogue never returns it."""
     catalogue.bump_version()
     assert "_meta" not in {d.collection for d in catalogue.load(include_retired=True)}
+
+
+# --- Catalogue edits (phase 3) -----------------------------------------------
+#
+# The tables are shared by the whole module, so these tests use document keys
+# no seed holds, and compare the version relative to where it started.
+
+
+def an_edit_document(key: str, name: str, rev: int = 1) -> Document:
+    return Document(collection="grips", key=key, seq=900, data={"id": int(key), "name": name}, rev=rev)
+
+
+def test_an_edit_its_record_and_the_version_are_one_transaction(catalogue, changelog):
+    from slack_data.catalogue.repository import Put
+    from slack_data.changelog.writer import commit_catalogue_change
+
+    catalogue.put_many([an_edit_document("880001", "Before")])
+    before = catalogue.version()
+    record = a_record(target_id="grips#880001")
+    commit_catalogue_change(
+        catalogue, changelog, [Put(an_edit_document("880001", "After", rev=2), expected_rev=1)], [], [record]
+    )
+    assert catalogue.get("grips", "880001").data["name"] == "After"
+    assert record.id in {r.id for r in changelog.recent(100)}
+    assert catalogue.version() == before + 1
+
+
+def test_a_stale_edit_writes_nothing_at_all(catalogue, changelog):
+    """D27 + D28: the rev moved on, so neither the document, the record nor the
+    version changes."""
+    from slack_data.catalogue.repository import Conflict, Put
+    from slack_data.changelog.writer import commit_catalogue_change
+
+    catalogue.put_many([an_edit_document("880002", "Current", rev=3)])
+    before = catalogue.version()
+    record = a_record(target_id="grips#880002")
+    with pytest.raises(Conflict, match="grips/880002"):
+        commit_catalogue_change(
+            catalogue, changelog, [Put(an_edit_document("880002", "Stale", rev=3), expected_rev=2)], [], [record]
+        )
+    assert catalogue.get("grips", "880002").data["name"] == "Current"
+    assert record.id not in {r.id for r in changelog.recent(100)}
+    assert catalogue.version() == before
+
+
+def test_a_reused_record_id_cancels_the_edit(catalogue, changelog):
+    from slack_data.catalogue.repository import Put
+    from slack_data.changelog.writer import commit_catalogue_change
+
+    catalogue.put_many([an_edit_document("880003", "Current")])
+    existing = changelog.append(a_record())
+    with pytest.raises(RecordExists):
+        commit_catalogue_change(
+            catalogue, changelog, [Put(an_edit_document("880003", "Edited", rev=2), expected_rev=1)], [], [existing]
+        )
+    assert catalogue.get("grips", "880003").data["name"] == "Current"
+
+
+def test_a_document_written_before_revs_counts_as_rev_one(catalogue, tables):
+    """The importer wrote prod's documents with no `rev` attribute."""
+    from slack_data.catalogue.repository import Put
+
+    tables["CatalogTable"].put_item(
+        Item={"collection": "grips", "key": "880004", "seq": 900, "data": '{"id": 880004}', "retired": False}
+    )
+    assert catalogue.get("grips", "880004").rev == 1
+    catalogue.apply([Put(an_edit_document("880004", "Edited", rev=2), expected_rev=1)], [])
+    assert catalogue.get("grips", "880004").rev == 2
+
+
+def test_two_creates_cannot_take_one_id_in_dynamodb(catalogue):
+    from slack_data.catalogue.repository import Conflict, Put
+    from slack_data.changelog.writer import next_id
+
+    new_id, advance = next_id(catalogue, "tricklinekits")
+    catalogue.apply([Put(Document(collection="tricklinekits", key=str(new_id), data={"id": new_id}), None)], [advance])
+    with pytest.raises(Conflict):
+        catalogue.apply([Put(Document(collection="tricklinekits", key="880099", data={"id": 880099}), None)], [advance])
+    assert catalogue.get("tricklinekits", "880099") is None
+    assert next_id(catalogue, "tricklinekits")[0] == new_id + 1

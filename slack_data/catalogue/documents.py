@@ -74,6 +74,10 @@ class Document(BaseModel):
     seq: int = 0
     data: Any
     retired: bool = False
+    # The edit-conflict token (D27): every write of a document stores rev + 1,
+    # and an edit is refused unless the rev it read is still the stored one.
+    # Store-only — not part of the entry, so not in the export.
+    rev: int = 1
 
 
 class DuplicateKey(ValueError):

@@ -58,10 +58,12 @@ def plan(repository: CatalogueRepository, wanted: list[Document]) -> list[Docume
             or current.seq != document.seq
             or current.data != document.data
         ):
-            changes.append(document)
+            # A rewrite moves the rev on, so an edit opened before it is
+            # refused rather than silently undoing the import (D27).
+            changes.append(document.model_copy(update={"rev": current.rev + 1 if current else 1}))
     for key, current in stored.items():
         if key not in wanted_keys and not current.retired:
-            changes.append(current.model_copy(update={"retired": True}))
+            changes.append(current.model_copy(update={"retired": True, "rev": current.rev + 1}))
     return changes
 
 
