@@ -247,3 +247,35 @@ def test_every_safety_field_is_a_real_field_of_its_type():
     for collection, fields in SAFETY_FIELDS.items():
         model, _ = GEAR[collection]
         assert fields <= set(model.model_fields), (collection, fields - set(model.model_fields))
+
+
+# --- the importer never silently undoes live edits ---------------------------------
+
+
+def test_every_committed_edit_is_counted(store):
+    log = InMemoryChangeLogRepository()
+    store.put_many([grip("1")])
+    assert store.edits() == 0
+    commit_catalogue_change(store, log, [Put(grip("1", "A", rev=2), expected_rev=1)], [], [record()])
+    assert store.edits() == 1
+
+
+def test_the_importer_refuses_to_overwrite_live_edits(tmp_path, monkeypatch, capsys):
+    from slack_data.catalogue import importer
+
+    path = str(tmp_path / "store.db")
+    monkeypatch.delenv("CATALOG_TABLE", raising=False)
+    monkeypatch.setenv("CATALOG_STORE_PATH", path)
+    assert importer.main(["--apply"]) == 0
+    store = SqliteCatalogueRepository(path)
+    first = store.get("grips", "1")
+    commit_catalogue_change(
+        store, InMemoryChangeLogRepository(),
+        [Put(first.model_copy(update={"data": {**first.data, "name": "Edited live"}, "rev": first.rev + 1}), first.rev)],
+        [], [record()],
+    )
+    assert importer.main(["--apply"]) == 1
+    assert "refused" in capsys.readouterr().out
+    assert store.get("grips", "1").data["name"] == "Edited live"
+    assert importer.main(["--apply", "--overwrite-live-edits"]) == 0
+    assert store.get("grips", "1").data["name"] != "Edited live"

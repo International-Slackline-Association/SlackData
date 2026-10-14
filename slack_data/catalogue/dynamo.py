@@ -25,6 +25,7 @@ from typing import TYPE_CHECKING
 
 from slack_data.catalogue.documents import COLLECTIONS, Document
 from slack_data.catalogue.repository import (
+    EDITS_NAME,
     VERSION_NAME,
     Conflict,
     CounterAdvance,
@@ -160,6 +161,26 @@ class DynamoCatalogueRepository:
                 entry["ExpressionAttributeValues"] = {":expected": advance.expected}
             items.append({"Put": entry})
         return items
+
+    def edits(self) -> int:
+        item = self._table.get_item(
+            Key={"collection": META_COLLECTION, "key": EDITS_NAME}, ConsistentRead=True
+        ).get("Item")
+        return int(item["n"]) if item else 0
+
+    def count_edit(self) -> None:
+        update = {k: v for k, v in self.edits_bump_item()["Update"].items() if k != "TableName"}
+        self._table.update_item(**update)
+
+    def edits_bump_item(self) -> dict:
+        return {
+            "Update": {
+                "TableName": self.table_name,
+                "Key": {"collection": META_COLLECTION, "key": EDITS_NAME},
+                "UpdateExpression": "ADD n :one",
+                "ExpressionAttributeValues": {":one": 1},
+            }
+        }
 
     def version_bump_item(self) -> dict:
         return {

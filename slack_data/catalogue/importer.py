@@ -86,6 +86,11 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[1])
     parser.add_argument("--apply", action="store_true", help="write the changes and bump the version")
     parser.add_argument("--check", action="store_true", help="exit 1 if the store differs from the seeds")
+    parser.add_argument(
+        "--overwrite-live-edits",
+        action="store_true",
+        help="apply even though the store holds edits made on the site (they are lost)",
+    )
     args = parser.parse_args(argv)
 
     from slack_data.catalogue.store import build_repository
@@ -114,6 +119,18 @@ def main(argv: list[str] | None = None) -> int:
     if not args.apply:
         print("dry run — nothing written. Re-run with --apply.")
         return 0
+    edits = repository.edits()
+    if edits and not args.overwrite_live_edits:
+        # Phase 3: from the first edit on the site, the store is the truth (D4)
+        # and the seeds are a stale copy. Importing them would silently undo
+        # every edit since — with no record of it in the change log.
+        print(
+            f"✗ refused: the store holds {edits} edit(s) made on the site, which these seeds do not.\n"
+            "  Importing would undo them with no record in the change log. The store is the\n"
+            "  truth now; take the seeds from the data repo's export instead. If you really\n"
+            "  mean to discard the edits, re-run with --overwrite-live-edits."
+        )
+        return 1
 
     repository.put_many(changes)
     version = repository.bump_version()

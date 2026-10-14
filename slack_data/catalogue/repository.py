@@ -30,8 +30,12 @@ from typing import Protocol
 
 from slack_data.catalogue.documents import Document
 
-# `_meta` names: the version, and one id counter per collection (D26).
+# `_meta` names: the version, the count of live edits, and one id counter per
+# collection (D26).
 VERSION_NAME = "version"
+# Every committed edit adds one. Once it is above zero the store holds work
+# that is in no seed file, and the importer refuses to overwrite it.
+EDITS_NAME = "edits"
 
 
 def counter_name(collection: str) -> str:
@@ -85,6 +89,13 @@ class CatalogueRepository(Protocol):
         """One document, retired or not."""
         ...
 
+    def edits(self) -> int:
+        """How many live edits the store has taken (0: it is still the seeds)."""
+        ...
+
+    def count_edit(self) -> None:
+        ...
+
     def counter(self, collection: str) -> int | None:
         """The collection's next id, or None before its first create."""
         ...
@@ -110,6 +121,7 @@ class InMemoryCatalogueRepository:
         self._items: dict[tuple[str, str], Document] = {}
         self._version = 0
         self._counters: dict[str, int] = {}
+        self._edits = 0
         self.loads = 0  # for tests: how often the whole catalogue was read
 
     def load(self, include_retired: bool = False) -> list[Document]:
@@ -126,6 +138,12 @@ class InMemoryCatalogueRepository:
     def bump_version(self) -> int:
         self._version += 1
         return self._version
+
+    def edits(self) -> int:
+        return self._edits
+
+    def count_edit(self) -> None:
+        self._edits += 1
 
     def get(self, collection: str, key: str) -> Document | None:
         document = self._items.get((collection, key))
@@ -211,6 +229,18 @@ class SqliteCatalogueRepository:
     def put_many(self, documents: list[Document]) -> None:
         with self._connect() as conn:
             self._put(conn, documents)
+
+    def edits(self) -> int:
+        with self._connect() as conn:
+            row = conn.execute("SELECT value FROM meta WHERE name = ?", (EDITS_NAME,)).fetchone()
+        return int(row["value"]) if row else 0
+
+    def count_edit(self) -> None:
+        with self._connect() as conn:
+            conn.execute(
+                "INSERT INTO meta (name, value) VALUES (?, 1) ON CONFLICT(name) DO UPDATE SET value = value + 1",
+                (EDITS_NAME,),
+            )
 
     def get(self, collection: str, key: str) -> Document | None:
         with self._connect() as conn:

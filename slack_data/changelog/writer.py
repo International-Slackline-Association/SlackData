@@ -97,6 +97,7 @@ def commit_catalogue_change(
     for record in records:
         log.append(record)
     store.apply(puts, counters)
+    store.count_edit()
     store.bump_version()
 
 
@@ -109,7 +110,7 @@ def _transact_catalogue(store, log, puts, counters, records) -> None:
 
     catalogue_items = store.transaction_items(puts, counters)
     record_items = [transaction_put(record, log.table.name) for record in records]
-    items = catalogue_items + record_items + [store.version_bump_item()]
+    items = catalogue_items + record_items + [store.edits_bump_item(), store.version_bump_item()]
     try:
         log.table.meta.client.transact_write_items(TransactItems=items)
     except ClientError as error:

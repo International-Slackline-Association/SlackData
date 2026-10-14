@@ -853,3 +853,15 @@ def test_a_persons_changes_and_the_safety_feed_use_their_indexes(changelog):
     assert flagged.id in safety and plain.id not in safety
     [back] = [r for r in changelog.by_actor("ISA_ACTR0001") if r.id == flagged.id]
     assert back.flags == [SAFETY_FLAG], "the index key is not read back as a field"
+
+
+def test_a_committed_edit_counts_in_the_same_transaction(catalogue, changelog):
+    from slack_data.catalogue.repository import Put
+    from slack_data.changelog.writer import commit_catalogue_change
+
+    catalogue.put_many([an_edit_document("880005", "Before")])
+    before = catalogue.edits()
+    commit_catalogue_change(
+        catalogue, changelog, [Put(an_edit_document("880005", "After", rev=2), expected_rev=1)], [], [a_record()]
+    )
+    assert catalogue.edits() == before + 1
