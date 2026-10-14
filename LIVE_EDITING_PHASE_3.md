@@ -9,6 +9,8 @@ History, Recent Changes, feeds, revert, hide and duplicate merge.
 every recommendation in § 4 except P3-H, which is dropped. Gate item 3 (0–2 merged, prod switched
 over) is not met yet: the build goes ahead on the stacked branch, and **ships only after it is**.
 
+**Progress:** 3a (the data layer) is built and tested — § 6. 3b (routes) is next.
+
 ---
 
 ## 0. The gate — when to start
@@ -202,11 +204,12 @@ Recommendation: profile in step 1. If the build still exceeds ~1.5 s after (a), 
 
 ### 5.1 The stored item
 
-- A document carries `data` (canonical, P3-A b) and new envelope fields:
-  - `rev`: the item's version for D27, starting at 1 at conversion;
-  - `hidden`: plus who, when and why;
-  - `merged_into`: the survivor's id.
-  - `retired` stays, for import removals.
+- A document carries `data` (canonical, P3-A b) and `rev`, the item's version for D27 (1 for a
+  document written before phase 3). `retired` stays, for import removals.
+- **Hidden and merged state is in the entry, not the envelope** (changed while building):
+  `"hidden": true` and `"merged_into": <id>` sit in `data` beside `unmodelled`. The export
+  carries them, so the data repo stays a full backup, and every build (store, local, tests) skips
+  those entries the same way (`load_gear.is_listed`). Who hid it, when and why come from the log.
 - **Counters** live in the catalogue table: `_meta/next-id#webbings`, and one per type. They start
   at max(id)+1. Each create advances one with an `UpdateItem ADD` inside the create's transaction.
 
@@ -304,10 +307,10 @@ Each step is one or more commits on `live-editing/3-admin-editing`, branched fro
 
 | Step | Contents | Tests |
 |---|---|---|
-| **3a.1** Profile the rebuild | Time each loader and pass in `build_engine`. Find and remove the waste (SQL echo, per-row commits, repeated brand queries). Set the Lambda memory from the numbers (P3-C) | A test that the built catalogue is unchanged. A timing budget logged, not asserted |
-| **3a.2** Canonical documents (P3-A b) | Write the converter (seeds → built rows → canonical docs). Convert the root seeds in the same commit. Generic loader per type. The ISA and seller passes unchanged. `--check` compares old-format and new-format built catalogues | Every row of every type equal, before and after: the existing `compare()`. Round trip, export byte-identical to the new files. `test_seed_ids` adapted. The whole backend suite green |
-| **3a.3** Envelope and write path | `rev`, `hidden`, `merged_into`, counters. `commit_catalogue_change`, hosted and local | Dynamo: stale rev refused and nothing written; a duplicate record id cancels everything; the version bumps once; the counter never reissues an id; 100-item limit not reached by the largest merge |
-| **3a.4** The log grows | TargetTypes, Actions, Channels, `SAFETY_FIELDS`, `actor-index` GSI in `serverless.yml`. History, actor and flag queries | Dynamo table built from the template (drift fails). Safety flag on exactly the MBS fields |
+| ✅ **3a.1** Profile the rebuild | Time each loader and pass in `build_engine`. Find and remove the waste (SQL echo, per-row commits, repeated brand queries). Set the Lambda memory from the numbers (P3-C) | A test that the built catalogue is unchanged. A timing budget logged, not asserted |
+| ✅ **3a.2** Canonical documents (P3-A b) | Write the converter (seeds → built rows → canonical docs). Convert the root seeds in the same commit. Generic loader per type. The ISA and seller passes unchanged. `--check` compares old-format and new-format built catalogues | Every row of every type equal, before and after: the existing `compare()`. Round trip, export byte-identical to the new files. `test_seed_ids` adapted. The whole backend suite green |
+| ✅ **3a.3** Envelope and write path | `rev`, `hidden`, `merged_into`, counters. `commit_catalogue_change`, hosted and local | Dynamo: stale rev refused and nothing written; a duplicate record id cancels everything; the version bumps once; the counter never reissues an id; 100-item limit not reached by the largest merge |
+| ✅ **3a.4** The log grows | TargetTypes, Actions, Channels, `SAFETY_FIELDS`, `actor-index` GSI in `serverless.yml`. History, actor and flag queries | Dynamo table built from the template (drift fails). Safety flag on exactly the MBS fields |
 | **3b.1** Edit and create routes | `edit_router`: validation, field policy, conflicts, rename re-points ISA names (P3-B), skipped matches made loud | Per field type. ISA statements refused. Renaming a recalled product keeps its warning after the rebuild — **the hazard-2 test**. 409 shape. No catalogue session. Unauthenticated → 401, non-admin → 403 |
 | **3b.2** Hide, unhide, merge, revert | Lookups, 404 bodies, ISA re-point on merge | Hidden item absent from lists, present in History. Merged id → pointer. Merge without an explanation refused. Revert refused per moved field |
 | **3b.3** Brands, feeds | P3-G (a), Atom | Brand name not editable. Feeds validate as Atom |
@@ -315,6 +318,20 @@ Each step is one or more commits on `live-editing/3-admin-editing`, branched fro
 | **3c.1** Edit form, History, Revert | Frontend | Cypress `editing.cy.ts`, against the real API with a scratch store |
 | **3c.2** Recent Changes, Contributions, hidden/merged pages, admin actions, Add product | Frontend | Cypress `changes.cy.ts`. Both new specs added to `shards.json` |
 | **3c.3** Docs | This file's status, LIVE_EDITING_CHANGES.md, CLAUDE.md (seeding ritual, store mode, the canonical format), SAFETY_AND_ACCURACY.md (who can change what), plan § 16 | — |
+
+**What 3a found:**
+
+- **The old seeds held data no loader read**: on weblocks, the SlackDB scrape's WLL, diverter
+  diameter, efficiency, usage and URLs; on rollers, `wll` and three dimensions. The conversion keeps
+  them verbatim under `unmodelled` (never loaded, never edited). Promoting any of them to a real
+  field is a model change (D35).
+- **The conversion is exact**: building the catalogue from the converted seeds gives every row of
+  every table identical to before (`scripts/convert_gear_seeds.py --check`; a planted difference is
+  caught). All 727 entries round-trip entry → row → entry.
+- **Build time**: ~0.8 s locally, down from ~1.5 s, mostly from the one generic loader (no
+  per-row flush, one validation per row). Lambda memory is set after measuring on staging.
+- **Safety fields**: D33's list plus the connectors' three MBS ratings (connectors post-date D33).
+- **The log**: two new indexes on `ChangelogTable`, `actor-index` and a sparse `safety-index`.
 
 Each step ends with the suite for what it touched. Each PR then gets the full backend suite, the
 frontend build, lint and unit tests, and the Cypress specs it touches, before it is pushed. CI then
