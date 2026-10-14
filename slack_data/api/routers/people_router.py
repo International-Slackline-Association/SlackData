@@ -27,9 +27,10 @@ too: records hold an ISA id and names are looked up when the log is read (D43).
 It is not itself a logged change.
 """
 
+import os
 from typing import Annotated, Literal
 
-from fastapi import APIRouter, Depends, HTTPException, Query, status
+from fastapi import APIRouter, Depends, HTTPException, Query, Response, status
 from pydantic import BaseModel, Field, field_validator, model_validator
 
 from slack_data.api.auth import is_dev_person, require_admin, require_person
@@ -39,6 +40,7 @@ from slack_data.changelog.writer import commit_person_change
 from slack_data.models.brand_clients import now_iso
 from slack_data.models.changes import (
     MAX_WHY_LENGTH,
+    SAFETY_FLAG,
     Action,
     ChangeRecord,
     ChangeRecordPublic,
@@ -286,6 +288,9 @@ def list_changes(
     else:
         records = log.recent(limit, before)
 
+    return _public(records, people)
+
+def _public(records, people) -> list[ChangeRecordPublic]:
     names: dict[str, str] = {}
 
     def name_of(isa_id: str) -> str:
@@ -312,3 +317,65 @@ def list_changes(
         )
         for r in records
     ]
+
+
+# --- Feeds (D17, D33): anyone can follow the log in a feed reader --------------
+
+SITE_URL = os.getenv("SITE_URL", "https://slackdata.org").rstrip("/")
+FEED_SIZE = 50
+_ATOM = "http://www.w3.org/2005/Atom"
+
+
+def _link_for(record: ChangeRecordPublic) -> str:
+    if record.target_type == TargetType.ITEM:
+        collection, _, item_id = record.target_id.partition("#")
+        return f"{SITE_URL}/{collection}/{item_id}"
+    if record.target_type == TargetType.BRAND:
+        return f"{SITE_URL}/manufacturers/{record.target_id}"
+    return f"{SITE_URL}/changes"
+
+
+def _atom(title: str, feed_id: str, records: list[ChangeRecordPublic]) -> Response:
+    from xml.etree import ElementTree as ET
+
+    ET.register_namespace("", _ATOM)
+    feed = ET.Element(f"{{{_ATOM}}}feed")
+    ET.SubElement(feed, f"{{{_ATOM}}}title").text = title
+    ET.SubElement(feed, f"{{{_ATOM}}}id").text = feed_id
+    ET.SubElement(feed, f"{{{_ATOM}}}link", href=f"{SITE_URL}/changes")
+    ET.SubElement(feed, f"{{{_ATOM}}}updated").text = records[0].created_at if records else now_iso()
+    for record in records:
+        entry = ET.SubElement(feed, f"{{{_ATOM}}}entry")
+        what = ", ".join(record.changes) or record.action.value
+        ET.SubElement(entry, f"{{{_ATOM}}}title").text = (
+            f"{record.action.value} {record.target_type.value} {record.target_id}: {what}"
+        )
+        ET.SubElement(entry, f"{{{_ATOM}}}id").text = f"urn:slackdata:change:{record.id}"
+        ET.SubElement(entry, f"{{{_ATOM}}}updated").text = record.created_at
+        ET.SubElement(entry, f"{{{_ATOM}}}link", href=_link_for(record))
+        author = ET.SubElement(entry, f"{{{_ATOM}}}author")
+        ET.SubElement(author, f"{{{_ATOM}}}name").text = f"{record.actor_name} ({record.actor_role})"
+        lines = [f"{name}: {change.before!r} → {change.after!r}" for name, change in record.changes.items()]
+        if record.why:
+            lines.append(f"Why: {record.why}")
+        if record.flags:
+            lines.append(f"Flags: {', '.join(record.flags)}")
+        ET.SubElement(entry, f"{{{_ATOM}}}content", type="text").text = "\n".join(lines)
+    xml = ET.tostring(feed, encoding="unicode", xml_declaration=True)
+    return Response(content=xml, media_type="application/atom+xml")
+
+
+@people_router.get("/changes/feed.atom", response_class=Response)
+def changes_feed(people: PeopleRepositoryDep, log: ChangeLogRepositoryDep) -> Response:
+    """Recent Changes as an Atom feed — public (D17)."""
+    return _atom("SlackData — recent changes", f"{SITE_URL}/changes", _public(log.recent(FEED_SIZE), people))
+
+
+@people_router.get("/changes/safety.atom", response_class=Response)
+def safety_feed(people: PeopleRepositoryDep, log: ChangeLogRepositoryDep) -> Response:
+    """Every change to a breaking strength, as an Atom feed — public (D57)."""
+    return _atom(
+        "SlackData — breaking-strength changes",
+        f"{SITE_URL}/changes?flag=safety",
+        _public(log.flagged(SAFETY_FLAG, FEED_SIZE), people),
+    )
