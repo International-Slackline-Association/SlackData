@@ -26,6 +26,7 @@ from sqlmodel import select
 from slack_data.load_data._seed_io import read_seed_json
 from slack_data.load_data.load_gear import (
     DERIVED_FIELDS,
+    ENVELOPE_KEYS,
     GEAR,
     UnknownField,
     stored_fields,
@@ -84,7 +85,7 @@ def test_every_real_seed_entry_round_trips(collection):
 
 @pytest.mark.parametrize("collection", list(GEAR))
 def test_seed_entries_use_only_stored_fields(collection):
-    allowed = stored_fields(collection) | {"id", "brand", "unmodelled"}
+    allowed = stored_fields(collection) | ENVELOPE_KEYS
     for entry in read_seed_json(f"{collection}.json"):
         assert set(entry) <= allowed, (collection, entry["id"], sorted(set(entry) - allowed))
         assert list(entry)[:3] == ["id", "name", "brand"], (collection, entry["id"])
