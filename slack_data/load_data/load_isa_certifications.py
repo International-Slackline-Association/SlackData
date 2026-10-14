@@ -47,6 +47,8 @@ Runs after every gear loader (it needs the rows to exist) — see
 `slack_data.seed`.
 """
 
+import logging
+
 from sqlmodel import Session, select
 
 from slack_data.load_data._seed_io import read_seed_json, seed_path
@@ -78,6 +80,13 @@ CERTIFIABLE_MODELS = {
 # The webbing product type whose certificate is preferred as a webbing row's
 # `isa_certificate`. A Sewn Loop certificate stands in when it is the only one.
 PLAIN_WEBBING = "Webbing"
+
+
+# The matches the last build skipped. A skip means a product lost its ISA
+# statement silently on the page, so it is logged as an error and reported by
+# GET /catalogue (`isa_skipped`), which infra/verify-deploy.sh holds to zero.
+SKIPPED: list[str] = []
+_logger = logging.getLogger(__name__)
 
 
 def load_isa_certified_json() -> list[dict]:
@@ -250,8 +259,10 @@ def add_isa_certifications_to_db(entries: list[dict], session: Session) -> None:
 
     session.commit()
 
+    SKIPPED[:] = problems
     for problem in problems:
         print(f"ISA certification skipped — {problem}")
+        _logger.error("%s — %s", "ISA certification skipped", problem)
     unmatched = [
         e["cert_id"] for e in entries if not (e.get("match") or {}).get("gearIds")
     ]
