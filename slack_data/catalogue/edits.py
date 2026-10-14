@@ -597,3 +597,66 @@ def create_brand(store, log, actor: Person, name: str, fields: dict[str, Any], w
     )
     commit_catalogue_change(store, log, [Put(document, None)], [key_advance, id_advance], [record])
     return Outcome("manufacturers", document.key, data, 1, [record])
+
+
+# --- The edit form's description of each field ------------------------------------
+#
+# The frontend builds its form from this, so the field names, kinds and allowed
+# values come from the models — never from a copy kept in TypeScript.
+
+LONG_TEXT_FIELDS = frozenset({"description", "notes"})
+
+
+def _kind(name: str, annotation: Any) -> tuple[str, list | None]:
+    import enum
+    import types
+    import typing
+
+    args = [a for a in typing.get_args(annotation) if a is not type(None)]
+    is_union = typing.get_origin(annotation) in (typing.Union, types.UnionType)
+    base = args[0] if is_union and len(args) == 1 else annotation
+    origin = typing.get_origin(base)
+    if origin is list:
+        (inner,) = typing.get_args(base) or (str,)
+        if isinstance(inner, type) and issubclass(inner, enum.Enum):
+            return "choices", [m.value for m in inner]
+        return "list", None
+    if isinstance(base, type) and issubclass(base, enum.Enum):
+        return "choice", [m.value for m in base]
+    if base is bool:
+        return "boolean", None
+    if base is int:
+        return "integer", None
+    if base is float:
+        return "number", None
+    return ("longtext" if name in LONG_TEXT_FIELDS else "text"), None
+
+
+def field_specs(collection: str, brands: Iterable[str]) -> list[dict]:
+    """[{name, kind, options, required}] for every editable field, model order;
+    `brand` first after `name`, choosing among the brands that exist."""
+    from slack_data.load_data.load_gear import JSON_TEXT_FIELDS, stored_fields
+
+    if collection not in GEAR:
+        raise NotFound(f"no gear type {collection!r}")
+    _, create = GEAR[collection]
+    brand_options = sorted(set(brands), key=str.lower)
+    specs = []
+    for name, info in create.model_fields.items():
+        if name not in stored_fields(collection):
+            continue
+        if name in JSON_TEXT_FIELDS.get(collection, ()):
+            kind, options = "curve", None
+        elif name == "gear_sellers":
+            kind, options = "choices", brand_options
+        else:
+            kind, options = _kind(name, info.annotation)
+        specs.append({"name": name, "kind": kind, "options": options, "required": info.is_required()})
+        if name == "name":
+            specs.append({"name": "brand", "kind": "choice", "options": brand_options, "required": True})
+    return specs
+
+
+def brand_field_specs() -> list[dict]:
+    kinds = {str: "text", int: "integer", bool: "boolean"}
+    return [{"name": n, "kind": kinds[t], "options": None, "required": False} for n, t in BRAND_FIELDS.items()]

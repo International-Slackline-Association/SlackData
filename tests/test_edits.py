@@ -344,3 +344,26 @@ def test_the_feeds_are_public_atom(client, store):
     safety = ET.fromstring(client.get("/changes/safety.atom").content).findall(f"{atom}entry")
     assert len(safety) == 1
     assert "Why: lab retest" in safety[0].find(f"{atom}content").text
+
+
+# --- The form's field list comes from the model -----------------------------------
+
+
+def test_the_field_list_is_the_models(client, store):
+    from slack_data.load_data.load_gear import stored_fields
+
+    specs = {s["name"]: s for s in client.get("/edit/weblocks/fields", headers=ADMIN).json()}
+    assert set(specs) == stored_fields("weblocks") | {"brand"}
+    assert specs["style"]["kind"] == "choice" and "Tensionable Weblock" in specs["style"]["options"]
+    assert specs["material"]["kind"] == "choices"
+    assert specs["breaking_strength"]["kind"] == "number"
+    assert specs["name"]["required"] is True
+    assert "Gibbon" in specs["brand"]["options"]
+    assert not set(specs) & {"isa_warning", "isa_certified", "brand_id", "id"}
+    webbing = {s["name"]: s for s in client.get("/edit/webbings/fields", headers=ADMIN).json()}
+    assert webbing["stretch"]["kind"] == "curve" and webbing["description"]["kind"] == "longtext"
+
+
+def test_the_brand_field_list(client, store):
+    names = [s["name"] for s in client.get("/edit/brand/fields", headers=ADMIN).json()]
+    assert "website" in names and "name" not in names

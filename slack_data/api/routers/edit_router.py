@@ -11,6 +11,7 @@ phase 6 opens the item routes to every signed-in ISA account with a rate cap.
 | `POST /edit/{slug}/{id}/merge` | `{rev, into, why}` — a detailed why required (D20) |
 | `POST /edit/revert/{record_id}` | undo one recorded edit, field by field (D58) |
 | `GET` · `PATCH /edit/brand/{catalog_id}`, `POST /edit/brand` | a brand's entry, never its name (P3-G) |
+| `GET /edit/{slug}/fields`, `GET /edit/brand/fields` | what the edit form offers: each field's kind and allowed values, from the model |
 
 Every change is written with its change log record in one transaction, and
 answers **409** with the current entry when it was based on a stale `rev`
@@ -148,7 +149,20 @@ def _run(store: CatalogueRepository, collection: str, key: str | None, operation
         raise HTTPException(status.HTTP_503_SERVICE_UNAVAILABLE, "please try again") from error
 
 
+class FieldSpec(BaseModel):
+    name: str
+    # text · longtext · number · integer · boolean · choice · choices · list · curve
+    kind: str
+    options: list[str] | None
+    required: bool
+
+
 # --- Brands (declared before /{slug}, which would otherwise match "brand") -----
+
+
+@edit_router.get("/brand/fields", response_model=list[FieldSpec])
+def brand_fields(_: CurrentAdmin) -> list[FieldSpec]:
+    return [FieldSpec(**spec) for spec in edits.brand_field_specs()]
 
 
 @edit_router.get("/brand/{catalog_id}", response_model=Stored)
@@ -192,6 +206,17 @@ def revert(
 
 
 # --- Items ------------------------------------------------------------------------
+
+
+@edit_router.get("/{slug}/fields", response_model=list[FieldSpec])
+def item_fields(slug: str, _: CurrentAdmin, store: StoreDep) -> list[FieldSpec]:
+    """What the edit form offers for a gear type: each field's kind and allowed
+    values, from the model — the form is built from this, never a copy."""
+    try:
+        specs = edits.field_specs(slug, edits._brand_names(store.load()))
+    except edits.NotFound as error:
+        raise HTTPException(404, error.message) from error
+    return [FieldSpec(**spec) for spec in specs]
 
 
 @edit_router.get("/{slug}/{item_id}", response_model=Stored)
