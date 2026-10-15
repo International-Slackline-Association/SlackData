@@ -63,6 +63,21 @@ CurrentPerson = Annotated[Person, Depends(require_person)]
 CurrentAdmin = Annotated[Person, Depends(require_admin)]
 
 
+def _brands(person: Person) -> list[dict]:
+    """[{catalog_id, name}] for the brands a person represents."""
+    if not person.brands:
+        return []
+    from slack_data.catalogue.names import TargetNames
+    from slack_data.utilities.brand_aliases import canonical_brand
+
+    names = TargetNames()
+    # As items carry it (`brand_name`), so the page can tell which are theirs.
+    return [
+        {"catalog_id": cid, "name": canonical_brand(names.name(TargetType.BRAND, str(cid)) or f"brand #{cid}")}
+        for cid in person.brands
+    ]
+
+
 def _me(person: Person) -> Me:
     return Me(
         sub=person.sub,
@@ -71,6 +86,7 @@ def _me(person: Person) -> Me:
         email=person.email,
         email_verified=person.email_verified,
         roles=person.roles,
+        brands=_brands(person),
         notice_seen_at=person.notice_seen_at,
         name_set=bool(person.display_name),
         name_change_available=person.name_changed_at is None,

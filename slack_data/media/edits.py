@@ -177,7 +177,10 @@ def set_item_media(
     that list as it is)."""
     if photos is None and manuals is None:
         raise edits.Invalid("nothing to change")
-    document = edits._item(store.load(), collection, item_id)
+    documents = store.load()
+    document = edits._item(documents, collection, item_id)
+    # Before anything is published (edit_item checks again, with the rest).
+    edits.check_gear(actor, documents, document.data.get("brand"))
     if document.data.get(MERGED_KEY) is not None:
         raise edits.Refused(f"{edits.api_type(collection)} {item_id} was merged into {document.data[MERGED_KEY]}")
     changes: dict[str, Any] = {}
@@ -220,7 +223,9 @@ def set_brand_media(
     unknown = sorted(set(manuals or {}) - set(GEAR))
     if unknown:
         raise edits.Invalid(f"no gear type {unknown}")
-    document: Document = edits._brand_document(store.load(), catalog_id)
+    documents = store.load()
+    document: Document = edits._brand_document(documents, catalog_id)
+    brand = edits.check_brand(actor, documents, catalog_id)
     data = dict(document.data)
     publishes: list = []
     if logo is not None:
@@ -254,7 +259,7 @@ def set_brand_media(
         return edits.Outcome("manufacturers", document.key, document.data, document.rev)
     _publish(media, publishes)
     record = edits._record(
-        actor, TargetType.BRAND, str(catalog_id), Action.BRAND_EDIT, channel=Channel.WEB, changes=diff, why=why
+        actor, TargetType.BRAND, str(catalog_id), Action.BRAND_EDIT, brand, channel=Channel.WEB, changes=diff, why=why
     )
     put = Put(document.model_copy(update={"data": data, "rev": document.rev + 1}), rev)
     commit_catalogue_change(store, log, [put], [], [record])

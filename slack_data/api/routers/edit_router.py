@@ -1,6 +1,8 @@
 """
-Live editing — phase 3 (LIVE_EDITING_PHASE_3.md § 5.5). Admins only for now;
-phase 6 opens the item routes to every signed-in ISA account with a rate cap.
+Live editing — phase 3 (LIVE_EDITING_PHASE_3.md § 5.5). Admins, and since
+phase 5 a brand's manufacturers on their own brands' gear (`rights.py`, checked
+in `edits.py`); phase 6 opens the item routes to every signed-in ISA account
+with a rate cap. Merges and new brands stay admin-only.
 
 | route | does |
 |---|---|
@@ -28,8 +30,8 @@ from typing import Annotated, Any
 from fastapi import APIRouter, Depends, HTTPException, Path, Request, status
 from pydantic import BaseModel, Field
 
-from slack_data.api.auth import require_admin
-from slack_data.catalogue import edits
+from slack_data.api.auth import require_admin, require_person
+from slack_data.catalogue import edits, rights
 from slack_data.catalogue.repository import CatalogueRepository, Conflict
 from slack_data.changelog.repository import RecordExists
 from slack_data.changelog.store import ChangeLogRepositoryDep
@@ -42,6 +44,20 @@ from slack_data.models.people import Person
 edit_router = APIRouter(prefix="/edit", tags=["edit"])
 
 CurrentAdmin = Annotated[Person, Depends(require_admin)]
+
+
+def require_editor(person: Annotated[Person, Depends(require_person)]) -> Person:
+    """Someone with any editing rights: an admin, or a brand's manufacturer
+    (phase 5). What exactly they may change is `rights.py`'s, checked by every
+    operation in `edits.py`; this only turns everyone else away at the door."""
+    if not rights.may_edit_any(person):
+        raise HTTPException(
+            status.HTTP_403_FORBIDDEN, "editing is open to admins and to a brand's manufacturers"
+        )
+    return person
+
+
+CurrentEditor = Annotated[Person, Depends(require_editor)]
 
 
 def editable_store() -> CatalogueRepository:
@@ -191,7 +207,7 @@ class FieldSpec(BaseModel):
 
 
 @edit_router.post("/media/uploads", response_model=list[UploadTarget])
-def upload_targets(body: Uploads, request: Request, _: CurrentAdmin, __: StoreDep, media: MediaDep):
+def upload_targets(body: Uploads, request: Request, _: CurrentEditor, __: StoreDep, media: MediaDep):
     """One form per file. A type or size the purpose does not allow is refused
     here, before the file travels; S3 refuses it again on arrival, and the
     attach checks the bytes themselves."""
@@ -219,12 +235,12 @@ def upload_targets(body: Uploads, request: Request, _: CurrentAdmin, __: StoreDe
 
 
 @edit_router.get("/brand/fields", response_model=list[FieldSpec])
-def brand_fields(_: CurrentAdmin) -> list[FieldSpec]:
+def brand_fields(_: CurrentEditor) -> list[FieldSpec]:
     return [FieldSpec(**spec) for spec in edits.brand_field_specs()]
 
 
 @edit_router.get("/brand/{catalog_id}", response_model=Stored)
-def read_brand(catalog_id: ItemId, _: CurrentAdmin, store: StoreDep) -> Stored:
+def read_brand(catalog_id: ItemId, _: CurrentEditor, store: StoreDep) -> Stored:
     try:
         document = edits._brand_document(store.load(), catalog_id)
     except edits.NotFound as error:
@@ -233,7 +249,7 @@ def read_brand(catalog_id: ItemId, _: CurrentAdmin, store: StoreDep) -> Stored:
 
 
 @edit_router.patch("/brand/{catalog_id}", response_model=EditResult)
-def edit_brand(catalog_id: ItemId, body: BrandEdit, admin: CurrentAdmin, store: StoreDep, log: ChangeLogRepositoryDep):
+def edit_brand(catalog_id: ItemId, body: BrandEdit, editor: CurrentEditor, store: StoreDep, log: ChangeLogRepositoryDep):
     key = None
     try:
         key = edits._brand_document(store.load(), catalog_id).key
@@ -241,13 +257,13 @@ def edit_brand(catalog_id: ItemId, body: BrandEdit, admin: CurrentAdmin, store: 
         pass
     return _run(
         store, "manufacturers", key,
-        lambda: edits.edit_brand(store, log, admin, catalog_id, body.rev, body.changes, body.why),
+        lambda: edits.edit_brand(store, log, editor, catalog_id, body.rev, body.changes, body.why),
     )
 
 
 @edit_router.put("/brand/{catalog_id}/media", response_model=EditResult)
 def brand_media(
-    catalog_id: ItemId, body: BrandMedia, admin: CurrentAdmin, store: StoreDep, media: MediaDep,
+    catalog_id: ItemId, body: BrandMedia, editor: CurrentEditor, store: StoreDep, media: MediaDep,
     log: ChangeLogRepositoryDep,
 ):
     key = None
@@ -258,7 +274,7 @@ def brand_media(
     return _run(
         store, "manufacturers", key,
         lambda: media_edits.set_brand_media(
-            store, log, media, admin, catalog_id, body.rev, body.logo, body.manuals, body.why
+            store, log, media, editor, catalog_id, body.rev, body.logo, body.manuals, body.why
         ),
     )
 
@@ -272,20 +288,20 @@ def create_brand(body: BrandCreate, admin: CurrentAdmin, store: StoreDep, log: C
 def revert(
     record_id: Annotated[str, Path(max_length=26)],
     body: Revert,
-    admin: CurrentAdmin,
+    editor: CurrentEditor,
     store: StoreDep,
     log: ChangeLogRepositoryDep,
 ):
     record = log.get(record_id)
     collection, _, key = (record.target_id if record else "").partition("#")
-    return _run(store, collection, key or None, lambda: edits.revert(store, log, admin, record_id, body.why))
+    return _run(store, collection, key or None, lambda: edits.revert(store, log, editor, record_id, body.why))
 
 
 # --- Items ------------------------------------------------------------------------
 
 
 @edit_router.get("/{slug}/fields", response_model=list[FieldSpec])
-def item_fields(slug: str, _: CurrentAdmin, store: StoreDep) -> list[FieldSpec]:
+def item_fields(slug: str, _: CurrentEditor, store: StoreDep) -> list[FieldSpec]:
     """What the edit form offers for a gear type: each field's kind and allowed
     values, from the model — the form is built from this, never a copy."""
     try:
@@ -296,7 +312,7 @@ def item_fields(slug: str, _: CurrentAdmin, store: StoreDep) -> list[FieldSpec]:
 
 
 @edit_router.get("/{slug}/{item_id}", response_model=Stored)
-def read_item(slug: str, item_id: ItemId, _: CurrentAdmin, store: StoreDep) -> Stored:
+def read_item(slug: str, item_id: ItemId, _: CurrentEditor, store: StoreDep) -> Stored:
     try:
         document = edits._item(store.load(), slug, item_id)
     except edits.NotFound as error:
@@ -305,16 +321,16 @@ def read_item(slug: str, item_id: ItemId, _: CurrentAdmin, store: StoreDep) -> S
 
 
 @edit_router.patch("/{slug}/{item_id}", response_model=EditResult)
-def edit_item(slug: str, item_id: ItemId, body: ItemEdit, admin: CurrentAdmin, store: StoreDep, log: ChangeLogRepositoryDep):
+def edit_item(slug: str, item_id: ItemId, body: ItemEdit, editor: CurrentEditor, store: StoreDep, log: ChangeLogRepositoryDep):
     return _run(
         store, slug, str(item_id),
-        lambda: edits.edit_item(store, log, admin, slug, item_id, body.rev, body.changes, body.why),
+        lambda: edits.edit_item(store, log, editor, slug, item_id, body.rev, body.changes, body.why),
     )
 
 
 @edit_router.post("/{slug}", response_model=EditResult, status_code=201)
-def create_item(slug: str, body: ItemCreate, admin: CurrentAdmin, store: StoreDep, log: ChangeLogRepositoryDep):
-    return _run(store, slug, None, lambda: edits.create_item(store, log, admin, slug, body.fields, body.why))
+def create_item(slug: str, body: ItemCreate, editor: CurrentEditor, store: StoreDep, log: ChangeLogRepositoryDep):
+    return _run(store, slug, None, lambda: edits.create_item(store, log, editor, slug, body.fields, body.why))
 
 
 @edit_router.post("/{slug}/{item_id}/merge", response_model=EditResult)
@@ -327,12 +343,12 @@ def merge_item(slug: str, item_id: ItemId, body: Merge, admin: CurrentAdmin, sto
 
 @edit_router.put("/{slug}/{item_id}/media", response_model=EditResult)
 def item_media(
-    slug: str, item_id: ItemId, body: ItemMedia, admin: CurrentAdmin, store: StoreDep, media: MediaDep,
+    slug: str, item_id: ItemId, body: ItemMedia, editor: CurrentEditor, store: StoreDep, media: MediaDep,
     log: ChangeLogRepositoryDep,
 ):
     return _run(
         store, slug, str(item_id),
         lambda: media_edits.set_item_media(
-            store, log, media, admin, slug, item_id, body.rev, body.photos, body.manuals, body.why
+            store, log, media, editor, slug, item_id, body.rev, body.photos, body.manuals, body.why
         ),
     )

@@ -15,8 +15,10 @@ next request sees the new version and rebuilds (D30).
 | `revert` | the earlier values of one recorded edit, field by field (D58) |
 | `edit_brand` / `create_brand` | a `manufacturers.json` entry — never its name (P3-G) |
 
-Who may call them is the router's business (admins in phase 3); these
-functions take the acting person only to record them.
+Who may do what is decided here, by `rights.py` (phase 5): admins anything,
+a manufacturer their own brands' gear and entries. The routes only make sure
+someone is signed in, so the edit form, the media dialog, revert and the
+machine API all answer to the one rule.
 """
 
 from collections.abc import Iterable
@@ -25,6 +27,7 @@ from typing import Any
 
 from pydantic import ValidationError
 
+from slack_data.catalogue import rights
 from slack_data.catalogue.documents import ENVELOPE_KEY, Document
 from slack_data.catalogue.repository import CatalogueRepository, CounterAdvance, Put
 from slack_data.changelog.repository import ChangeLogRepository
@@ -102,9 +105,15 @@ class Invalid(EditError):
 
 
 class Refused(EditError):
-    """Not allowed in the item's current state (merged, already hidden …)."""
+    """Not allowed in the item's current state (merged …)."""
 
     status = 409
+
+
+class Forbidden(EditError):
+    """Not this person's to change (rights.py)."""
+
+    status = 403
 
 
 # --- Results ------------------------------------------------------------------
@@ -145,16 +154,58 @@ def _brand_names(documents: Iterable[Document]) -> set[str]:
     }
 
 
-def _record(actor: Person, target_type: TargetType, target_id: str, action: Action, **fields) -> ChangeRecord:
+def _record(
+    actor: Person,
+    target_type: TargetType,
+    target_id: str,
+    action: Action,
+    brand: tuple[int, str] | None = None,
+    **fields,
+) -> ChangeRecord:
+    """A log record; `brand` is the brand whose gear (or entry) changed, which
+    labels a manufacturer's change "manufacturer for <brand>" (P5-E)."""
     return ChangeRecord(
         target_type=target_type,
         target_id=target_id,
         action=action,
         actor_sub=actor.sub,
         actor_isa_id=actor.isa_id,
-        actor_role=actor.role_label(),
+        actor_role=actor.role_label(brand),
         **fields,
     )
+
+
+def check_gear(actor: Person, documents: list[Document], brand_name: str | None, fields: Iterable[str] = ()) -> tuple[int, str] | None:
+    """`Forbidden` unless `actor` may change gear of this brand, and these
+    fields of it. The brand, as (catalog_id, name)."""
+    brand = rights.brand_of(documents, brand_name)
+    if not rights.may_edit(actor, brand):
+        raise Forbidden(
+            "you can change your own brands' products only"
+            if actor.brands
+            else "editing is open to admins and to a brand's manufacturers"
+        )
+    closed = sorted(set(fields) & rights.ADMIN_ONLY_FIELDS)
+    if closed and not rights.is_admin(actor):
+        raise Forbidden(
+            f"only an admin changes {closed}: who makes a product, and who else sells it",
+            [{"field": n, "message": "admin only"} for n in closed],
+        )
+    return brand
+
+
+def check_brand(actor: Person, documents: list[Document], catalog_id: int) -> tuple[int, str] | None:
+    """`Forbidden` unless `actor` may change this brand's own entry."""
+    found = rights.brand_names(documents, [catalog_id])
+    brand = (catalog_id, found[0]["name"]) if found else None
+    if not rights.may_edit(actor, brand):
+        raise Forbidden("you can change your own brands only")
+    return brand
+
+
+def require_admin(actor: Person, what: str) -> None:
+    if not rights.is_admin(actor):
+        raise Forbidden(f"only an admin can {what}")
 
 
 def _diff(before: dict, after: dict) -> dict[str, FieldChange]:
@@ -181,11 +232,13 @@ def canonical(collection: str, entry: dict, brands: set[str]) -> dict:
         )
     try:
         row = to_row(collection, {**entry, "brand": brand}, brand_id=0)
+        # The create schema is stricter than the table (a required list the
+        # table leaves nullable), so a missing value can surface here too.
+        result = to_entry(collection, row, brand, entry.get(UNMODELLED_KEY))
     except UnknownField as error:
         raise Invalid(str(error)) from error
     except ValidationError as error:
         raise Invalid("the item does not validate", _errors(error)) from error
-    result = to_entry(collection, row, brand, entry.get(UNMODELLED_KEY))
     if MERGED_KEY in entry:
         result[MERGED_KEY] = entry[MERGED_KEY]
     for key in MEDIA_KEYS:
@@ -268,7 +321,11 @@ def _deep(value):
 
 
 def _repoint_writes(
-    actor: Person, changed: list[tuple[Document, dict, dict]], why: str | None, channel: Channel
+    actor: Person,
+    changed: list[tuple[Document, dict, dict]],
+    why: str | None,
+    channel: Channel,
+    brand: tuple[int, str] | None = None,
 ) -> tuple[list[Put], list[ChangeRecord]]:
     puts, records = [], []
     for document, before, after in changed:
@@ -280,6 +337,7 @@ def _repoint_writes(
                 ISA_COLLECTIONS[document.collection],
                 document.key,
                 Action.MATCH_REPOINT,
+                brand,
                 channel=channel,
                 changes={"match": FieldChange(before=before, after=after)},
                 why=why,
@@ -313,6 +371,7 @@ def edit_item(
     _check_fields(collection, changes, media)
     documents = store.load()
     document = _item(documents, collection, item_id)
+    brand = check_gear(actor, documents, document.data.get("brand"), changes)
     if document.data.get(MERGED_KEY) is not None:
         raise Refused(f"{api_type(collection)} {item_id} was merged into {document.data[MERGED_KEY]}")
 
@@ -334,6 +393,7 @@ def edit_item(
             TargetType.ITEM,
             item_target(collection, item_id),
             action,
+            brand,
             channel=channel,
             changes=diff,
             why=why,
@@ -347,6 +407,7 @@ def edit_item(
             _repoint(documents, collection, item_id, f"{entry['brand']} {entry['name']}"),
             why,
             channel,
+            brand,
         )
         puts += extra_puts
         records += extra_records
@@ -366,6 +427,9 @@ def create_item(
         raise NotFound(f"no gear type {collection!r}")
     _check_fields(collection, fields)
     documents = store.load(include_retired=True)
+    # A manufacturer adds products of their own brands (P5-D): `brand` is
+    # theirs to name here, as long as it is one of theirs.
+    brand = check_gear(actor, documents, fields.get("brand"), set(fields) - {"brand"})
     new_id, advance = next_id(store, collection)
     wanted = {"id": new_id, **{k: v for k, v in fields.items() if v is not None and v != []}}
     entry = canonical(collection, wanted, _brand_names(documents))
@@ -377,6 +441,7 @@ def create_item(
         TargetType.ITEM,
         item_target(collection, new_id),
         Action.ITEM_CREATE,
+        brand,
         channel=Channel.WEB,
         changes=diff,
         why=why,
@@ -391,7 +456,9 @@ def merge_item(
 ) -> Outcome:
     """`item_id` is a duplicate of `into` (D20). The duplicate stays in the
     store as a pointer; links to it land on the survivor; ISA matches that
-    named it name the survivor instead. The explanation is mandatory."""
+    named it name the survivor instead. The explanation is mandatory. Admins
+    only (§ 7.7)."""
+    require_admin(actor, "merge duplicates")
     if len((why or "").strip()) < MIN_MERGE_WHY:
         raise Invalid(
             f"explain the merge in at least {MIN_MERGE_WHY} characters",
@@ -504,7 +571,9 @@ def edit_brand(store, log, actor: Person, catalog_id: int, rev: int, changes: di
     if not changes:
         raise Invalid("nothing to change")
     _brand_values(changes)
-    document = _brand_document(store.load(), catalog_id)
+    documents = store.load()
+    document = _brand_document(documents, catalog_id)
+    brand = check_brand(actor, documents, catalog_id)
     data = dict(document.data)
     for name, value in changes.items():
         if value is None or value == "":
@@ -515,7 +584,7 @@ def edit_brand(store, log, actor: Person, catalog_id: int, rev: int, changes: di
     if not diff:
         return Outcome("manufacturers", document.key, document.data, document.rev)
     record = _record(
-        actor, TargetType.BRAND, str(catalog_id), Action.BRAND_EDIT, channel=Channel.WEB, changes=diff, why=why
+        actor, TargetType.BRAND, str(catalog_id), Action.BRAND_EDIT, brand, channel=Channel.WEB, changes=diff, why=why
     )
     put = Put(document.model_copy(update={"data": data, "rev": document.rev + 1}), rev)
     commit_catalogue_change(store, log, [put], [], [record])
@@ -527,7 +596,9 @@ CATALOG_ID_COUNTER = "manufacturers.catalog_id"
 
 def create_brand(store, log, actor: Person, name: str, fields: dict[str, Any], why: str | None = None) -> Outcome:
     """A new manufacturer entry. It gets the next `catalog_id` (its permanent
-    `Brand.id`) and the next entry key, both claimed by counters."""
+    `Brand.id`) and the next entry key, both claimed by counters. Admins only
+    in phase 5; everyone in phase 6 (D59)."""
+    require_admin(actor, "add a brand")
     name = " ".join((name or "").split())
     if not name or len(name) > 200:
         raise Invalid("a brand needs a name", [{"field": "name", "message": "required"}])
