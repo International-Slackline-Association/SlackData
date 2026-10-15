@@ -112,6 +112,10 @@ export function patchJson<T>(path: string, body: unknown, token?: string): Promi
   return send<T>('PATCH', path, body, token)
 }
 
+export function putJson<T>(path: string, body: unknown, token?: string): Promise<T> {
+  return send<T>('PUT', path, body, token)
+}
+
 /** An authenticated GET. Separate from `request` so reads stay header-free. */
 export async function getAuthed<T>(path: string, token: string): Promise<T> {
   const res = await fetch(`${API_BASE}${path}`, { headers: authHeaders(token) })

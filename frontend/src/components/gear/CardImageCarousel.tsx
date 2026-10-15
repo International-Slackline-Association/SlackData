@@ -13,8 +13,16 @@
 // The host band must be `relative overflow-hidden` and give this component its
 // height — the image is sized off the band, and the blurred backdrop is scaled
 // past the band's edges (see below).
+//
+// **Small first, then large (P4-D).** Every photo is stored at 480 px and
+// 1600 px. The image shows the small one; once that has loaded — which, being
+// lazy, it only does on screen — the large one is fetched in the background and
+// swapped in when it arrives. So a card shows a photo as soon as 480 px of it
+// can, and is sharp once the rest lands; a card never scrolled to fetches
+// neither. If the large one fails, the small one stays.
 
 import { useState } from 'react'
+import type { Photo } from '@/utils/images'
 
 // Arrows sit at rest rather than appearing on hover: a hidden control is
 // undiscoverable, and an opacity-0 element is un-clickable in Cypress without
@@ -29,23 +37,35 @@ const arrowBtn =
 // `imgDataCy` lets the detail-page body claim its own hook (detail-img) on the
 // visible image while sharing the carousel wholesale with the cards.
 export default function CardImageCarousel({
-  urls,
+  photos,
   alt,
   imgDataCy = 'gear-card-img',
 }: {
-  urls: string[]
+  photos: Photo[]
   alt: string
   imgDataCy?: string
 }) {
   const [index, setIndex] = useState(0)
   const [failed, setFailed] = useState<Set<string>>(new Set())
+  // Large copies that have finished loading, so may replace their small one.
+  const [sharp, setSharp] = useState<Set<string>>(new Set())
 
-  if (urls.length === 0) {
+  if (photos.length === 0) {
     return <span className="text-xs text-gray-300">No image</span>
   }
 
-  const current = urls[index]
-  const step = (delta: number) => setIndex(i => (i + delta + urls.length) % urls.length)
+  const photo = photos[index]
+  const current = sharp.has(photo.large) ? photo.large : photo.small
+  const step = (delta: number) => setIndex(i => (i + delta + photos.length) % photos.length)
+
+  // Called when what is shown has loaded: fetch the large copy, if it is not
+  // the one shown already, and swap it in once it is here.
+  const sharpen = () => {
+    if (current === photo.large || photo.large === photo.small) return
+    const large = new Image()
+    large.onload = () => setSharp(prev => new Set(prev).add(photo.large))
+    large.src = photo.large
+  }
 
   return (
     <>
@@ -74,9 +94,11 @@ export default function CardImageCarousel({
           />
           <img
             data-cy={imgDataCy}
+            data-size={current === photo.large ? 'large' : 'small'}
             src={current}
             alt={alt}
             loading="lazy"
+            onLoad={sharpen}
             // contain, NOT cover: the whole photo is fitted inside the band and
             // nothing is cropped. Our shots (0.67–1.54 w/h) are all narrower
             // than the card band (~1.9), so in practice this is a fit by HEIGHT
@@ -95,7 +117,7 @@ export default function CardImageCarousel({
         </>
       )}
 
-      {urls.length > 1 && (
+      {photos.length > 1 && (
         <>
           <button
             data-cy="card-image-prev"
@@ -117,13 +139,13 @@ export default function CardImageCarousel({
           </button>
 
           <div className="absolute bottom-1.5 left-1/2 z-10 flex -translate-x-1/2 gap-1">
-            {urls.map((url, i) => (
+            {photos.map((p, i) => (
               <button
-                key={url}
+                key={p.large}
                 data-cy="card-image-dot"
                 data-active={String(i === index)}
                 type="button"
-                aria-label={`Image ${i + 1} of ${urls.length}`}
+                aria-label={`Image ${i + 1} of ${photos.length}`}
                 onClick={() => setIndex(i)}
                 className={`h-1.5 w-1.5 rounded-full transition-colors ${
                   i === index ? 'bg-gray-700' : 'bg-gray-300 hover:bg-gray-400'

@@ -1,6 +1,11 @@
 import { GEAR_TYPES } from '../support/gear_types'
-import { imageFilesFor } from '../support/images'
+import { imageFilesFor, loadImageManifest } from '../support/images'
 import { RED_600 } from '../support/colors'
+
+// The media manifest, from the API: every lookup below reads it.
+before(() => {
+  loadImageManifest()
+})
 
 // Detail page tests run for every gear type.
 // The `before` hook fetches a real item from the API so assertions

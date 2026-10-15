@@ -1,7 +1,12 @@
 import { listingUnits } from '../support/listing'
 import { GEAR_TYPES } from '../support/gear_types'
 import { RED_600 } from '../support/colors'
-import { imageFilesFor } from '../support/images'
+import { imageFilesFor, loadImageManifest } from '../support/images'
+
+// The media manifest, from the API: every lookup below reads it.
+before(() => {
+  loadImageManifest()
+})
 
 // Tests the visual anatomy of a gear card against the DESIGN.md spec.
 // Runs for every gear type using real backend data to pick representative items.
@@ -697,6 +702,8 @@ GEAR_TYPES.forEach(({ slug, apiPath, label }) => {
     it('fills the bars with a blurred copy of the image, behind it', () => {
       if (!withImages) return
       cardFor(withImages.item.id).scrollIntoView()
+      // The photos arrive with the media manifest, after the cards render.
+      cardFor(withImages.item.id).find('[data-cy="card-image-backdrop"]').should('exist')
       cardFor(withImages.item.id).then(($card) => {
         const $backdrop = $card.find('[data-cy="card-image-backdrop"]')
         expect($backdrop, 'backdrop exists').to.have.length(1)

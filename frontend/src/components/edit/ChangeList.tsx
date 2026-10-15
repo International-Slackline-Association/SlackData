@@ -7,6 +7,8 @@
 import { Link } from 'react-router-dom'
 import type { ChangeRecordPublic } from '@/types'
 import { display, humanize } from '@/utils/fieldDraft'
+import { addedPhotos, describeMediaChange, MEDIA_FIELDS } from '@/utils/mediaChanges'
+import { mediaUrl, useMedia } from '@/utils/mediaStore'
 
 const ACTION_TEXT: Record<ChangeRecordPublic['action'], string> = {
   'role.grant': 'granted a role',
@@ -123,12 +125,16 @@ export default function ChangeList({
             </div>
             {Object.keys(record.changes).length > 0 && (
               <ul className="mt-1 space-y-0.5 pl-1 text-xs text-gray-600">
-                {Object.entries(record.changes).map(([field, change]) => (
-                  <li key={field}>
-                    <span className="font-medium text-gray-700">{humanize(field)}</span>:{' '}
-                    <span className="line-through">{display(change.before, field)}</span> → {display(change.after, field)}
-                  </li>
-                ))}
+                {Object.entries(record.changes).map(([field, change]) =>
+                  MEDIA_FIELDS.has(field) ? (
+                    <MediaChange key={field} field={field} before={change.before} after={change.after} />
+                  ) : (
+                    <li key={field}>
+                      <span className="font-medium text-gray-700">{humanize(field)}</span>:{' '}
+                      <span className="line-through">{display(change.before, field)}</span> → {display(change.after, field)}
+                    </li>
+                  ),
+                )}
               </ul>
             )}
             {record.why && <p className="mt-1 text-xs text-gray-700">“{record.why}”</p>}
@@ -146,5 +152,26 @@ export default function ChangeList({
         )
       })}
     </ol>
+  )
+}
+
+/** A photo, manual or logo change: what happened, and the photos it added. */
+function MediaChange({ field, before, after }: { field: string; before: unknown; after: unknown }) {
+  useMedia() // the base URL for the thumbnails
+  const added = field === 'photos' ? addedPhotos(before, after).slice(0, 6) : []
+  return (
+    <li data-cy="change-media" data-field={field}>
+      <span className="font-medium text-gray-700">{humanize(field)}</span>: {describeMediaChange(field, before, after)}
+      {added.length > 0 && (
+        <span className="mt-1 flex gap-1">
+          {added.map(photo => (
+            <img key={photo.id} src={mediaUrl(String(photo.small))} alt="" loading="lazy" className="h-10 w-10 rounded border border-gray-200 object-contain" />
+          ))}
+        </span>
+      )}
+      {field === 'logo' && typeof after === 'string' && (
+        <img src={mediaUrl(after)} alt="" loading="lazy" className="mt-1 h-8 max-w-24 object-contain" />
+      )}
+    </li>
   )
 }

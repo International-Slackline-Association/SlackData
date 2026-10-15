@@ -1,63 +1,58 @@
-// Resolves gear images — and gear manuals — from the generated manifests.
+// Resolves gear photos — and gear manuals — from the media manifest the API
+// serves (utils/mediaStore.ts, LIVE_EDITING_PHASE_4.md P4-C).
 //
-// Media is filed by id, one folder per item: gear-images/<type>/<id>_<slug>/
-// holds 1.jpg, 2.jpg …; gear-manuals/<type>/<id>_<slug>/ holds the item's PDFs.
-// The manifests (built by scripts/build_gear_manifest.py) are keyed by that id,
-// so an item renamed in the catalogue store keeps its photos and documents.
-// Manuals resolve here beside images rather than in a parallel module that would
-// duplicate the base URL. The filename -> row half is utils/manuals.ts.
+// Media is data on each item, keyed by the item's id, so an item renamed in
+// the catalogue store keeps its photos and documents. Every photo comes in two
+// sizes (P4-D): the 480 px one shows first, the 1600 px one replaces it once it
+// has loaded (CardImageCarousel). Manuals resolve here beside images rather
+// than in a parallel module; the entry -> row half is utils/manuals.ts.
 //
-// ── THE ONE-LINE HOSTING SWITCH ──────────────────────────────────────────────
-// Locally, images are served from Vite's `public/` at the web root, so the base
-// is "". To move to a CDN/object store, upload the `gear-images/` tree under the
-// same paths and change IMAGE_BASE_URL to e.g. "https://cdn.slackdata.app".
-// Nothing else changes — the manifest keys and file paths stay identical.
-export const IMAGE_BASE_URL = import.meta.env.VITE_IMAGE_BASE_URL ?? ''
-// ─────────────────────────────────────────────────────────────────────────────
+// Callers that render media call `useMedia()` so they re-render when the
+// manifest arrives; these lookups read whatever has arrived so far.
 
-import gearImages from '@/data/gearImages.json'
-import gearManuals from '@/data/gearManuals.json'
-import brandManuals from '@/data/brandManuals.json'
-import brandIds from '@/data/brandIds.json'
 import { brandManualEntries, manualEntries, type Manual } from './manuals'
+import { mediaManifest, mediaUrl } from './mediaStore'
 import { getGearType } from '@/config/gearTypes'
 import { SELLER_RANGE_MANUALS } from '@/config/sellerManuals'
 
-// gear type -> item id -> paths under that type's folder
-const manifest = gearImages as Record<string, Record<string, string[]>>
-const manualManifest = gearManuals as Record<string, Record<string, string[]>>
-// gear type -> brand catalog_id -> paths under <type>/brand/
-const brandManualManifest = brandManuals as Record<string, Record<string, string[]>>
-// brand name, as the API spells it -> catalog_id
-const brandIdOf = brandIds as Record<string, number>
+/** One photo, both sizes as URLs. */
+export interface Photo {
+  small: string
+  large: string
+}
 
 // A gear row as the API serves it; the lookups below read its id and brand_name.
 export type MediaItem = Record<string, unknown>
 
-// All image URLs for an item (first is the primary), or [] if none exist.
-export function imageUrls(gearType: string, item: MediaItem): string[] {
-  const files = manifest[gearType]?.[String(item.id)] ?? []
-  return files.map(f => `${IMAGE_BASE_URL}/gear-images/${gearType}/${f}`)
+// Every photo of an item (the first is the primary), or [] if none.
+export function imageUrls(gearType: string, item: MediaItem): Photo[] {
+  const photos = mediaManifest().photos[gearType]?.[String(item.id)] ?? []
+  return photos.map(p => ({ small: mediaUrl(p.small), large: mediaUrl(p.large) }))
 }
 
-// Image URLs for a listing item. A collapsed group (utils/groups.ts) is no row
-// of its own — its name is the group's and its brand a list of shops — so it
-// shows every member's photos, shop by shop in vendor-table order. On the
-// listing that is the whole group whatever the filters (`_groupRows`, set by
+// Photos for a listing item. A collapsed group (utils/groups.ts) is no row of
+// its own — its name is the group's and its brand a list of shops — so it shows
+// every member's photos, shop by shop in vendor-table order. On the listing
+// that is the whole group whatever the filters (`_groupRows`, set by
 // withGroupRows), even when only one shop matched and the card is a plain row.
-export function itemImageUrls(gearType: string, item: Record<string, unknown>): string[] {
+export function itemImageUrls(gearType: string, item: Record<string, unknown>): Photo[] {
   const members = (item._groupRows ?? item._members) as Record<string, unknown>[] | undefined
   if (Array.isArray(members)) {
-    return [...new Set(members.flatMap(m => imageUrls(gearType, m)))]
+    const seen = new Set<string>()
+    return members.flatMap(m => imageUrls(gearType, m)).filter(p => {
+      if (seen.has(p.large)) return false
+      seen.add(p.large)
+      return true
+    })
   }
   return imageUrls(gearType, item)
 }
 
-// Image URLs for the detail page. A group opened at one member (`_current`, set
-// by groupFor) shows that member's own photos, so picking a shop in the vendor
+// Photos for the detail page. A group opened at one member (`_current`, set by
+// groupFor) shows that member's own photos, so picking a shop in the vendor
 // table switches the carousel to that shop's. A member with none, or a group
 // with no member opened (the listing's Detailed view), shows the whole group's.
-export function detailImageUrls(gearType: string, item: Record<string, unknown>): string[] {
+export function detailImageUrls(gearType: string, item: Record<string, unknown>): Photo[] {
   const members = item._members as Record<string, unknown>[] | undefined
   if (Array.isArray(members)) {
     const current = members.find(m => Number(m.id) === Number(item._current))
@@ -67,29 +62,27 @@ export function detailImageUrls(gearType: string, item: Record<string, unknown>)
   return itemImageUrls(gearType, item)
 }
 
-// Convenience: the primary image URL, or null.
-export function primaryImage(gearType: string, item: MediaItem): string | null {
+// Convenience: the primary photo, or null.
+export function primaryImage(gearType: string, item: MediaItem): Photo | null {
   return imageUrls(gearType, item)[0] ?? null
 }
 
 // The documents a brand publishes for a whole product class — their webbing
 // manual, not this webbing's manual. [] if none. `seller` captions it for a
-// product the brand sells rather than makes (SELLER_RANGE_MANUALS). Items carry
-// brand names, not ids, so the name is looked up in brandIds.json.
+// product the brand sells rather than makes (SELLER_RANGE_MANUALS).
 export function brandManualsFor(gearType: string, brandName: string, seller = false): Manual[] {
-  const id = brandIdOf[brandName]
-  const files = id === undefined ? [] : (brandManualManifest[gearType]?.[String(id)] ?? [])
+  const documents = mediaManifest().brandManuals[gearType]?.[brandName] ?? []
   const label = getGearType(gearType)?.label.toLowerCase() ?? gearType
   return brandManualEntries(
-    files,
-    `${IMAGE_BASE_URL}/gear-manuals/${gearType}/brand`,
+    documents,
+    mediaUrl,
     seller ? `Applies to all ${label} ${brandName} sells` : `Applies to all ${brandName} ${label}`,
   )
 }
 
-// Every document we hold for an item, in manifest order, or [] if none: the
-// item's own first, then whatever its maker publishes for the whole range, then
-// the range-wide documents of any seller in SELLER_RANGE_MANUALS. That order is
+// Every document we hold for an item, in order, or [] if none: the item's own
+// first, then whatever its maker publishes for the whole range, then the
+// range-wide documents of any seller in SELLER_RANGE_MANUALS. That order is
 // what the inline embed reads, so a product with a manual of its own shows it,
 // and one with none still shows the range-wide document rather than nothing.
 export function manualsFor(
@@ -98,13 +91,12 @@ export function manualsFor(
   sellers: readonly string[] = [],
 ): Manual[] {
   const brandName = String(item.brand_name)
-  const files = manualManifest[gearType]?.[String(item.id)] ?? []
-  const makerId = brandIdOf[brandName]
+  const documents = mediaManifest().manuals[gearType]?.[String(item.id)] ?? []
   return [
-    ...manualEntries(files, `${IMAGE_BASE_URL}/gear-manuals/${gearType}`),
+    ...manualEntries(documents, mediaUrl),
     ...brandManualsFor(gearType, brandName),
     ...sellers
-      .filter(s => SELLER_RANGE_MANUALS.includes(s) && brandIdOf[s] !== makerId)
+      .filter(s => SELLER_RANGE_MANUALS.includes(s) && s !== brandName)
       .flatMap(s => brandManualsFor(gearType, s, true)),
   ]
 }

@@ -1,34 +1,42 @@
+export {}
+
 // Manuals & documents — the PDFs a manufacturer publishes about a product,
 // shown on its detail page (DESIGN.md § Manuals & documents).
 //
-// Everything here runs against the real backend and the real manifest: the
-// documents are curated files under public/gear-manuals/, exactly as the images
-// are, so there is nothing to stub. The spec derives which product to visit
-// from the manifest and the catalogue rather than hard-coding one, so adding
-// the next PDF does not rewrite this file.
+// Everything here runs against the real backend and the real media manifest
+// (GET /media/manifest, live editing phase 4): which documents a product has is
+// data on the item, so there is nothing to stub. The spec derives which product
+// to visit from the manifest and the catalogue rather than hard-coding one, so
+// adding the next PDF does not rewrite this file.
 //
-// Documents are filed by id: a product's in gear-manuals/<type>/<id>_<slug>/,
-// a brand's range-wide ones in gear-manuals/<type>/brand/<catalog_id>_<slug>/.
-// Items carry brand names, so brands are matched through brandIds.json.
+// A product's documents are keyed by its id; a brand's range-wide ones by the
+// brand's name as items carry it.
 
-import gearManuals from '../../src/data/gearManuals.json'
-import brandManuals from '../../src/data/brandManuals.json'
-import brandIds from '../../src/data/brandIds.json'
-
-const manifest = gearManuals as Record<string, Record<string, string[]>>
-const brandManifest = brandManuals as Record<string, Record<string, string[]>>
-const brandIdOf = brandIds as Record<string, number>
+type Doc = { file: string; title: string }
+type Manifest = {
+  base: string
+  manuals: Record<string, Record<string, Doc[]>>
+  brandManuals: Record<string, Record<string, Doc[]>>
+}
+let media: Manifest = { base: '', manuals: {}, brandManuals: {} }
 
 type Item = { id: number; name: string; brand_name: string; gear_sellers?: string[] | null }
 
 const apiPathOf = (type: string) => type.replace(/s$/, '')
-const own = (type: string, item: Item) => manifest[type]?.[String(item.id)]
-const rangeOf = (type: string, brand: string) => brandManifest[type]?.[String(brandIdOf[brand])]
+const own = (type: string, item: Item) => media.manuals[type]?.[String(item.id)]
+const rangeOf = (type: string, brand: string) => media.brandManuals[type]?.[brand]
+const urlOf = (doc: Doc) => `${media.base}/${doc.file}`
 
 // Every item of every gear type that holds a document, fetched once.
 const catalogue: Record<string, Item[]> = {}
 function loadCatalogue() {
-  const types = [...new Set([...Object.keys(manifest), ...Object.keys(brandManifest)])]
+  cy.request<Manifest>(`${Cypress.env('apiUrl')}/media/manifest`).then(({ body }) => {
+    media = body
+    loadTypes([...new Set([...Object.keys(media.manuals), ...Object.keys(media.brandManuals)])])
+  })
+}
+
+function loadTypes(types: string[]) {
   cy.wrap(types).each((type: string) => {
     cy.fetchAllItems(apiPathOf(type)).then(all => {
       catalogue[type] = all as Item[]
@@ -61,13 +69,13 @@ describe('Manuals & documents', () => {
     cy.visit(`/${type}/${item.id}`)
     cy.get('[data-cy="product-manuals"]').should('be.visible')
     cy.get('[data-cy="manual-listing"]').should('have.length', own(type, item)!.length)
-    // "Product archive", not "255_aeon/product-archive.pdf".
+    // "Product archive", not "webbings/255/…-product-archive.pdf".
     cy.get('[data-cy="manual-listing"]').first().should('not.contain.text', '.pdf')
   })
 
   it('links each document to the PDF itself, in a new tab, and serves it', () => {
     const [type, item] = pick()
-    const url = `/gear-manuals/${type}/${own(type, item)![0]}`
+    const url = urlOf(own(type, item)![0])
     cy.visit(`/${type}/${item.id}`)
     cy.get('[data-cy="manual-link"]')
       .first()
@@ -88,7 +96,7 @@ describe('Manuals & documents', () => {
     cy.get('[data-cy="manual-embed"]')
       .should('exist')
       .and('have.attr', 'type', 'application/pdf')
-      .and('have.attr', 'data', `/gear-manuals/${type}/${own(type, item)![0]}`)
+      .and('have.attr', 'data', urlOf(own(type, item)![0]))
   })
 
   it('keeps its documents when the product, or its maker, is renamed', () => {
@@ -170,7 +178,7 @@ describe('Range-wide manuals', () => {
 
   it('serves it from the brand folder, and embeds it when there is nothing else', () => {
     const [type, bare] = pickBare()
-    const url = `/gear-manuals/${type}/brand/${rangeOf(type, bare.brand_name)![0]}`
+    const url = urlOf(rangeOf(type, bare.brand_name)![0])
     cy.visit(`/${type}/${bare.id}`)
     cy.get('[data-cy="manual-link"]').first().should('have.attr', 'href', url)
     cy.get('[data-cy="manual-embed"]').should('have.attr', 'data', url)
@@ -196,7 +204,7 @@ describe('Range-wide manuals', () => {
     cy.get('[data-cy="manual-embed"]').should(
       'have.attr',
       'data',
-      `/gear-manuals/${type}/${own(type, item)![0]}`,
+      urlOf(own(type, item)![0]),
     )
   })
 
@@ -239,7 +247,7 @@ describe('A seller\'s range-wide manual', () => {
       .and('have.attr', 'data-scope', 'brand')
     cy.get('[data-cy="manual-link"]')
       .first()
-      .should('have.attr', 'href', `/gear-manuals/webbings/brand/${akiManuals()[0]}`)
+      .should('have.attr', 'href', urlOf(akiManuals()[0]))
     cy.get('[data-cy="manual-scope"]')
       .first()
       .should('contain.text', 'Applies to all webbings Aki Slacklines sells')

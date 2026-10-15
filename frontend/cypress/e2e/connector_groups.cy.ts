@@ -4,8 +4,13 @@
 // Real backend, like every other spec: the groups are whatever connectors.json
 // holds, found through the API rather than hard-coded.
 
-import { imageFilesFor } from '../support/images'
+import { imageFilesFor, loadImageManifest } from '../support/images'
 import { listingUnits } from '../support/listing'
+
+// The media manifest, from the API: every lookup below reads it.
+before(() => {
+  loadImageManifest()
+})
 
 type Row = Record<string, unknown>
 

@@ -28,7 +28,7 @@
 
 import { useMemo, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { EditBrandButton } from '@/components/edit/AdminCreate'
+import { BrandMediaButton, EditBrandButton } from '@/components/edit/AdminCreate'
 import BackLink from '@/components/layout/BackLink'
 import GearGrid from '@/components/gear/GearGrid'
 import GearDetailedList from '@/components/gear/GearDetailedList'
@@ -133,6 +133,8 @@ export default function BrandDetailPage() {
         </span>
         {/* The directory is loaded once per visit; reload to show the edit. */}
         <EditBrandButton catalogId={brand.id} onSaved={() => window.location.reload()} />
+        {/* Media is re-fetched after the save (utils/mediaStore.ts): no reload. */}
+        <BrandMediaButton catalogId={brand.id} onSaved={() => {}} />
       </p>
 
       {/* Contact email — detail page only, never the 76-card directory grid.

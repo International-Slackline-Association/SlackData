@@ -1,6 +1,6 @@
 // Under a gear item's spec sheet: its History, public to everyone, and for an
-// admin the editing actions — Edit, Merge into…, and Revert on
-// any edit in the History (LIVE_EDITING_PHASE_3.md § 5.6).
+// admin the editing actions — Edit, Photos and manuals (phase 4), Merge into…,
+// and Revert on any edit in the History (LIVE_EDITING_PHASE_3.md § 5.6).
 //
 // Every action writes through the API and then asks the page to reload the
 // item (`onChanged`), so what is shown is always what the next visitor sees.
@@ -14,11 +14,12 @@ import { useSiteAuth } from '@/auth/AuthContext'
 import type { ChangeRecordPublic } from '@/types'
 import ChangeList from './ChangeList'
 import EntryEditor from './EntryEditor'
+import { ItemMediaDialog } from './MediaEditor'
 import Modal from './Modal'
 
 const MIN_MERGE_WHY = 30
 
-type Dialog = null | 'edit' | 'merge' | { revert: ChangeRecordPublic }
+type Dialog = null | 'edit' | 'media' | 'merge' | { revert: ChangeRecordPublic }
 
 const BUTTON =
   'cursor-pointer rounded-full border border-gray-300 px-3 py-1.5 text-xs font-medium text-gray-700 hover:border-teal-600 hover:text-teal-700'
@@ -60,6 +61,9 @@ export default function ItemEditing({
             <button type="button" data-cy="item-edit" className={BUTTON} onClick={() => setDialog('edit')}>
               Edit
             </button>
+            <button type="button" data-cy="item-media" className={BUTTON} onClick={() => setDialog('media')}>
+              Photos and manuals
+            </button>
             <button type="button" data-cy="item-merge" className={BUTTON} onClick={() => setDialog('merge')}>
               Merge into…
             </button>
@@ -94,6 +98,9 @@ export default function ItemEditing({
           onClose={() => setDialog(null)}
           onSaved={done}
         />
+      )}
+      {token && dialog === 'media' && (
+        <ItemMediaDialog slug={slug} id={id} token={token} onClose={() => setDialog(null)} onDone={done} />
       )}
       {token && dialog === 'merge' && (
         <MergeDialog slug={slug} id={id} token={token} onClose={() => setDialog(null)} onDone={done} />

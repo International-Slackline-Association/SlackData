@@ -1,6 +1,6 @@
 // Sellers whose range-wide manual also covers what they resell.
 //
-// A range-wide manual (gear-manuals/<type>/brand/) normally reaches the maker's
+// A range-wide manual (a brand's `manuals` for one gear type) normally reaches the maker's
 // own products only. Aki Slacklines is the exception: Aki carried on part of
 // the Landcruising range, and its webbing manual's spec table lists those
 // webbings (Wave 19/25/32, White Magic, Wizard) beside Aki's own. So on a
