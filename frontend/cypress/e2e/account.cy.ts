@@ -47,6 +47,19 @@ describe('Signing in', () => {
       cy.getByData('sign-in-notice').should('not.exist')
     })
 
+    it('signs in from the top nav, on any page, and stays on it', () => {
+      // Locally "signing in" asks for a dev token; hosted it is the ISA's page.
+      cy.visit('/manufacturers', {
+        onBeforeLoad(win) {
+          cy.stub(win, 'prompt').returns(DEV_TOKEN)
+        },
+      })
+      cy.getByData('sign-in').should('be.visible').click()
+      cy.getByData('sign-in').should('not.exist')
+      cy.getByData('account-menu').should('be.visible')
+      cy.location('pathname').should('eq', '/manufacturers')
+    })
+
     it('does not load the sign-in library', () => {
       // D41: anonymous visitors download nothing extra. Locally the mode is
       // dev, so the library has no reason to load at all.

@@ -69,7 +69,8 @@ function readDevToken(): string | null {
   }
 }
 
-/** Local dev / Cypress: a token in sessionStorage, mirroring ADMIN_DEV_TOKEN. */
+/** Local dev / Cypress: a token in sessionStorage — ADMIN_DEV_TOKEN, or a
+ *  `dev-person-token:<name>` for an ordinary account. */
 function useDevToken(enabled: boolean) {
   const [token, setToken] = useState<string | null>(() => (enabled ? readDevToken() : null))
 
@@ -88,7 +89,7 @@ function useDevToken(enabled: boolean) {
   }, [enabled])
 
   const signIn = useCallback(() => {
-    const entered = window.prompt('Admin token (local development only)')
+    const entered = window.prompt('Token (local development only): dev-admin-token, or dev-person-token:<name>')
     if (entered) {
       sessionStorage.setItem(DEV_TOKEN_KEY, entered)
       setToken(entered)
