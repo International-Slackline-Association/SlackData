@@ -678,6 +678,25 @@ resources:
               return request;
           }
 
+    # ---- Strip "/media" before requests reach the media bucket (phase 4) ------
+    # The bucket's keys are the media keys (`webbings/42/<id>-480.webp`), with
+    # no prefix; CloudFront forwards the whole path, so without this every
+    # /media/* request asks for a `media/…` key and S3 answers 403.
+    StripMediaFunction:
+      Type: AWS::CloudFront::Function
+      Properties:
+        Name: ${self:service}-strip-media-${self:provider.stage}
+        AutoPublish: true
+        FunctionConfig:
+          Comment: Strip the /media prefix for the media cache behaviours
+          Runtime: cloudfront-js-1.0
+        FunctionCode: |
+          function handler(event) {
+              var request = event.request;
+              request.uri = request.uri.replace(/^\/media/, '');
+              return request;
+          }
+
     # ---- SPA deep links, without hijacking a status code --------------------
     # Client-routed paths (/webbings/17, /admin) are not objects in S3, so they
     # have to resolve to index.html. This used to be done with a distribution
@@ -817,9 +836,10 @@ resources:
               - EventType: viewer-request
                 FunctionARN: !GetAtt SpaRoutingFunction.FunctionMetadata.FunctionARN
           CacheBehaviors:
-            # Media (phase 4). The keys under /media/ are the bucket's keys, so
-            # no rewrite. Cached as the files say: a year, since a key is never
-            # reused. The PDF behaviour first — CloudFront takes the first match.
+            # Media (phase 4). StripMediaFunction maps /media/<key> onto the
+            # bucket's <key>. Cached as the files say: a year, since a key is
+            # never reused. The PDF behaviour first — CloudFront takes the first
+            # match.
             - PathPattern: /media/*.pdf
               TargetOriginId: media-s3
               ViewerProtocolPolicy: redirect-to-https
@@ -827,11 +847,17 @@ resources:
               CachePolicyId: 658327ea-f89d-4fab-a63d-7e88639e58f6
               ResponseHeadersPolicyId: !Ref MediaPdfHeadersPolicy
               Compress: true
+              FunctionAssociations:
+                - EventType: viewer-request
+                  FunctionARN: !GetAtt StripMediaFunction.FunctionMetadata.FunctionARN
             - PathPattern: /media/*
               TargetOriginId: media-s3
               ViewerProtocolPolicy: redirect-to-https
               CachePolicyId: 658327ea-f89d-4fab-a63d-7e88639e58f6
               ResponseHeadersPolicyId: !Ref MediaHeadersPolicy
+              FunctionAssociations:
+                - EventType: viewer-request
+                  FunctionARN: !GetAtt StripMediaFunction.FunctionMetadata.FunctionARN
             - PathPattern: /api/*
               TargetOriginId: api-httpapi
               ViewerProtocolPolicy: redirect-to-https
