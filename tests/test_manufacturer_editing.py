@@ -165,6 +165,6 @@ def test_the_dev_person_token_is_refused_hosted(client, monkeypatch):
 def test_a_product_missing_a_required_list_is_a_422_not_a_500(client, store):
     """WebbingCreate requires `material`; the table does not. Found writing
     the test above: the create answered 500."""
-    response = client.post("/edit/webbings", headers=ADMIN, json={"fields": {"name": "No Material", "brand": "Gibbon"}})
+    response = client.post("/edit/webbings", headers=ADMIN, json={"fields": {"name": "No Material", "brand": "Gibbon", "width": 25}})
     assert response.status_code == 422
     assert "material" in {e["field"] for e in response.json()["detail"]["errors"]}
