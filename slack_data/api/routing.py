@@ -23,6 +23,7 @@ import os
 
 from fastapi import APIRouter, FastAPI
 
+from slack_data.api.routers.brand_keys_router import brand_keys_router
 from slack_data.api.routers.brand_requests_router import brand_requests_router
 from slack_data.api.routers.brand_router import brand_router
 from slack_data.api.routers.catalogue_router import catalogue_router
@@ -90,7 +91,8 @@ CATALOG_ROUTERS: tuple[APIRouter, ...] = (
 # `media_router` (phase 4) serves the media manifest everywhere, and locally
 # receives uploads into the media store's own directory.
 # `brand_requests_router` (phase 5) writes requests to their own store, and
-# brand links to the people store and the log.
+# brand links to the people store and the log. `brand_keys_router` writes a
+# brand's API keys to the brand-clients store, and the log.
 WRITABLE_ROUTERS: tuple[APIRouter, ...] = (
     submissions_router,
     manufacturer_router,
@@ -98,6 +100,7 @@ WRITABLE_ROUTERS: tuple[APIRouter, ...] = (
     edit_router,
     media_router,
     brand_requests_router,
+    brand_keys_router,
 )
 
 # Kept as the union so a caller iterating "every router" still gets every router.
