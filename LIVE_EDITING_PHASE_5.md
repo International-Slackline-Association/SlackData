@@ -6,7 +6,7 @@ edit, upload to and revert their own brand's gear live; the machine API's update
 
 **Done when:** a brand updates its own gear end to end.
 
-**Status (2026-10-15): building**, on `live-editing/5-manufacturers`, stacked on phase 4. Every
+**Status (2026-10-15): built (5a–5f)**, on `live-editing/5-manufacturers`, stacked on phase 4. See § 7. Every
 choice in § 4 was decided on 2026-10-15: the recommended option, (a), on each.
 
 ---
@@ -198,3 +198,32 @@ account menu; the request queue on `/admin`; the edit controls shown wherever `m
 | **5d** Machine API live | apply instead of queue; transactions; `image_urls` to-dos; docs for brands |
 | **5e** Frontend | request button, account brands and keys, admin queue, edit controls for manufacturers |
 | **5f** Staging, docs | deploy; verify-deploy; DESIGN.md, CLAUDE.md, MANUFACTURER_API.md |
+
+---
+
+## 7. As built (2026-10-15)
+
+- **5a** `Person.brands`; `catalogue/rights.py`, checked inside every edit operation; the edit
+  routes admit anyone with editing rights (`require_editor`); `/me` lists a person's brands. Found
+  on the way: a create missing a field the create schema requires (a webbing's `material`) answered
+  500 — now a 422 naming it.
+- **5b** `slack_data/brand_requests/` (in-memory, SQLite, DynamoDB) and `BrandRequestsTable`
+  (`status-index`, `sub-index`); approve, decline, unlink; `brand.link` / `brand.unlink` in the log.
+- **5c** `brand_keys_router.py`: list (with the full key, D64), create, regenerate, revoke;
+  `key.create` / `key.regenerate` / `key.revoke` on the brand.
+- **5d** `manufacturers/apply.py`; `may_write_directly()` is true whenever the site reads the store.
+  Edits and creates now plan before they commit (`edits.Planned`), which is what lets a batch share
+  a transaction. Every item still leaves a submission row — `applied`, or `approved` while photo
+  links wait — so the receipt and the read-back keep their shape. MANUFACTURER_API.md and
+  /for-manufacturers say updates apply as they arrive.
+- **5e** The frontend: the request button and dialog, the admin queue, *Your brands* with keys, the
+  edit controls for a brand's manufacturers, the log's new actions and filters.
+- **5f** Staging; DESIGN.md, CLAUDE.md.
+
+**Locally**, `dev-person-token:<name>` signs in as an ordinary account (no role), so the whole flow
+runs without the ISA pool; `manufacturer_accounts.cy.ts` drives it end to end.
+
+**Rollout:** with phase 4, after phases 0–3 and prod's switch to the store. Half A creates
+`BrandRequestsTable`. **Tell the three brands with keys** (Balance Community, Raed, Petram) that
+their updates now apply live (MANUFACTURER_API.md) before deploying, since a nightly sync of stale
+values would now overwrite the site (P5-F).

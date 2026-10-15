@@ -46,10 +46,10 @@ describe('Manufacturer API documentation', () => {
   describe('what it has to say', () => {
     beforeEach(() => cy.visit(PATH))
 
-    it('says up front that an update is recorded, not applied', () => {
+    it('says up front that an update is applied as it arrives', () => {
       cy.get('[data-cy="manufacturer-api-callout"]')
         .should('be.visible')
-        .and('contain', 'recorded, not applied instantly')
+        .and('contain', 'applied as it arrives')
     })
 
     it('documents the three endpoints a brand actually calls', () => {

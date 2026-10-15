@@ -70,7 +70,8 @@ else warn "/api/openapi.json -> $STATUS; ENABLE_DOCS may be set on the function.
 
 echo
 echo "Sign-in is wired to the ISA pool"
-for path in submissions me; do
+# me/brand-requests and admin/brand-requests: phase 5, the brand-link routes.
+for path in submissions me me/brand-requests admin/brand-requests me/brands/1/keys; do
   STATUS="$(code "$API/$path")"
   if [ "$STATUS" = "401" ]; then ok "GET /api/$path -> 401 (sign-in required)"
   elif [ "$STATUS" = "503" ]; then

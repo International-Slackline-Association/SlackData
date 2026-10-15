@@ -116,11 +116,12 @@ export default function ManufacturerApiPage() {
           data-cy="manufacturer-api-callout"
           className="mt-6 rounded-lg border border-amber-200 bg-amber-50 p-4 text-sm leading-relaxed text-amber-900"
         >
-          <strong className="font-semibold">An update is recorded, not applied instantly.</strong>{' '}
-          The catalogue is (currently) rebuilt and redeployed from source, so what you send is stored as an
-          approved change request, then applied by an administrator and shipped with the next
-          release. A <code className="rounded bg-amber-100 px-1 py-0.5 font-mono text-xs">201</code>{' '}
-          means we have it, not that the site has changed. Records do not expire.
+          <strong className="font-semibold">An update is applied as it arrives.</strong> Your key edits your
+          own products with the rights of the people who represent your brand: a{' '}
+          <code className="rounded bg-amber-100 px-1 py-0.5 font-mono text-xs">201</code> means the site has
+          changed, and every change is in the product's public History. Your values replace what is there —
+          including a correction made on the site since — so send only what you mean to set. People who
+          represent your brand can also edit it on the site and manage its API keys.
         </div>
 
         <Section id="list" title="1. List your gear">
@@ -226,17 +227,18 @@ export default function ManufacturerApiPage() {
   "accepted": 1,
   "results": [
     { "submission_id": "01JQ8Z...", "gear_type": "webbings", "gear_id": 42,
-      "gear_name": "Aero", "resolution": "id", "status": "approved", "applied": false }
+      "gear_name": "Aero", "resolution": "id", "status": "applied", "applied": true }
   ]
 }`}</Code>
           <p>
-            <code className={CODE}>applied</code> is false until the change ships in a release.
+            <code className={CODE}>applied</code> is true once the change is on the site.
           </p>
           <p>
             To add photos, send <code className={CODE}>image_urls</code> on the item: up to 10 links
             to images you already publish, pointing at the image file itself rather than the page it
-            is on. They are added, never replaced, and an item may carry photos alone. We download
-            them when the update is applied, so keep the links working until then. Sending a link
+            is on. They are added, never replaced, and an item may carry photos alone. The rest of the
+            item applies at once; the photos wait for a person to add them by hand, so keep the links
+            working until the record reads <code className={CODE}>applied</code>. Sending a link
             confirms that SlackData may display that image alongside your product.
           </p>
 

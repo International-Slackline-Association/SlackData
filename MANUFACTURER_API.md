@@ -12,16 +12,22 @@ on [slackdata.org](https://slackdata.org) correct, in one call, without emailing
 
 ## Read this part first
 
-**An update is recorded, not applied instantly.** The catalogue is a read-only file rebuilt and
-redeployed from source; your update becomes a change request that is auto-approved on arrival —
-nobody judges whether you are right about your own product — and then applied by an administrator
-and shipped with the next deploy. So:
+**An update is applied as it arrives.** Your key edits your own products with the same rights as
+the people who represent your brand on SlackData: a `POST` that answers **201** has changed the
+site, and each result says `"applied": true`. So:
 
-- Your `POST` returning **201 is not the site being updated.** It means we have your correction and
-  it is queued as work, not as a decision.
-- There is no rush and no expiry. An approved manufacturer update never ages out of the queue.
+- **What you send is what we show**, for your own products. Nobody reviews it first; every change
+  is in the product's public History, as made by your brand's API key.
+- **Your values replace whatever is there**, including a correction someone made on the site since
+  your last update. Both changes stay in the History. Send only what you mean to set.
+- **A value we cannot accept fails the whole call** — a number where a number belongs, one of the
+  listed values for a choice — naming the item by index, and nothing is changed.
 - You can check what happened to anything you sent with
   [`GET /manufacturer/submissions`](#get-manufacturersubmissions).
+
+People who represent your brand can also edit it on the site, and create, see, renew and revoke
+its API keys under *Your brands* in their account. Ask for that on your brand's page: *I represent
+this brand*.
 
 **Start with `GET /manufacturer/gear`.** We have ids for your products; you have SKUs. That endpoint
 is where the two get introduced, and the whole design assumes you called it first.
@@ -227,10 +233,11 @@ Send links, not files. `image_urls` is a list of photos of the product that are 
 - Photos on their own are a complete item: you need send no other change.
 - **They are added, never replaced.** To remove or reorder a photo we already show, say so in
   `note`.
-- **We do not fetch the links when you send them.** An administrator downloads them when applying
-  your update, so keep them working until [`GET /manufacturer/submissions`](#get-manufacturersubmissions)
-  shows the record as `applied`.
-- JPEG, PNG, WebP or GIF, up to 15 MB each. Larger photos are refused when we download them.
+- **We do not fetch the links.** The rest of the item is applied at once; the photos wait for a
+  person to add them by hand (anyone representing your brand can, from the product's page), so keep
+  the links working until [`GET /manufacturer/submissions`](#get-manufacturersubmissions) shows the
+  record as `applied`. Until then it reads `approved`.
+- JPEG, PNG or WebP, up to 10 MB each.
 
 **By sending a link you confirm that SlackData may display that image** on slackdata.org alongside
 your product. Send only photos you have the right to license that way.
@@ -273,8 +280,8 @@ new product has a path that is never ambiguous: send it with no `gear_id`.
       "manufacturer_sku": "BC-T18-MK3",
       "resolution": "id",
       "stale_gear_id": null,
-      "status": "approved",
-      "applied": false
+      "status": "applied",
+      "applied": true
     }
   ]
 }
@@ -285,18 +292,19 @@ new product has a path that is never ambiguous: send it with no `gear_id`.
 | `gear_id` | **The resolved id.** Write it back to your mapping. |
 | `resolution` | `"id"` matched on the id you sent, `"name"` matched on the name, `"new"` matched nothing. |
 | `stale_gear_id` | Present when the id you sent no longer points at that product — the old value, so you can log the change. |
-| `applied` | Whether the live catalogue changed. **Always `false` today** (see [Read this part first](#read-this-part-first)). It exists now so that if direct writes ever land, your integration needs no new field. |
+| `applied` | Whether the live catalogue changed: `true` once your update is in it. (`false` only if the site ever runs without its live catalogue, when an update is queued for an administrator instead.) |
+| `status` | `applied`; or `approved` while photo links you sent wait to be added by hand. |
 | `batch_id` | Groups this call's records. Quote it if you ever need to ask us about the batch. |
 
 ### All-or-nothing
 
-If **any** item fails to resolve, nothing is stored and the whole call is refused, naming the item
-by index (`items[7]: ...`). That is deliberate: it means a retry after a fix is always safe, and can
-never duplicate the items that would have worked.
+If **any** item fails to resolve, or carries a value we cannot accept, nothing is changed and the
+whole call is refused, naming the item by index (`items[7]: ...`). That is deliberate: a retry after
+a fix is always safe. The same product twice in one call is refused too.
 
-Retrying a call that *succeeded* does create a second batch — we have no idempotency key. Two
-batches show up as two groups rather than being silently merged, but it is still work for a human,
-so don't retry on a 201.
+A very large call (more than about 40 products) is written in more than one step; if the site
+changes under it part-way, the answer is a **502** saying how many items were written — resend the
+rest. Retrying a call that *succeeded* sets the same values again, which changes nothing.
 
 ---
 
@@ -320,15 +328,16 @@ Your own submissions, newest first. `?batch_id=01JXQ8...` narrows it to one call
     "manufacturer_sku": "BC-T18-MK3",
     "changes": { "weight": "71" },
     "image_urls": [],
-    "status": "approved", "created_at": "2026-08-25T09:14:02Z",
-    "reviewed_at": null,
-    "review_note": "auto-approved: sent by Balance Community through the manufacturer API"
+    "status": "applied", "created_at": "2026-08-25T09:14:02Z",
+    "reviewed_at": "2026-08-25T09:14:02Z",
+    "review_note": "applied live through the manufacturer API"
   }
 ]
 ```
 
-`status` is `approved` on arrival. It can become `rejected` — an administrator can send one back
-after the fact, precisely because nobody judged it on the way in — and `review_note` will say why.
+`status` is `applied` on arrival, or `approved` while photo links wait to be added by hand. A
+change an administrator later undoes shows in the product's History rather than here; a record
+can still become `rejected`, and `review_note` will say why.
 **That note is written to be read by you.** This endpoint is the only way you learn about a
 rejection; we send no email.
 
