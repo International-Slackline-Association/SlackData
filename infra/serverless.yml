@@ -123,6 +123,15 @@ functions:
       # See LIVE_EDITING_PHASE_2.md before flipping it.
       CATALOG_TABLE: !Ref CatalogTable
       CATALOG_SOURCE: ${env:CATALOG_SOURCE, 'baked'}
+      # Live editing, phase 4: media. Uploads land in the quarantine bucket
+      # through a presigned POST and are copied to the media bucket once their
+      # bytes are checked; the site fetches them from /media/* on this
+      # distribution (LIVE_EDITING_PHASE_4.md). The role's S3 grants name the
+      # PROD buckets only (P4-I), so on staging an upload is refused by S3 and
+      # everything else works.
+      MEDIA_BUCKET: !Ref MediaBucket
+      UPLOADS_BUCKET: !Ref UploadsBucket
+      MEDIA_BASE_URL: /media
       # The first admins, by verified ISA email (§ 4.4). From the deployer's
       # shell, never written here: the repo is public and these are people's
       # addresses. Each grants admin once, logged as `bootstrap`; after that,
@@ -504,15 +513,16 @@ resources:
     # build-time manifest). An upload landing there would be deleted, and would
     # not render in the meantime because it is not in the manifest.
     #
-    # This bucket is never synced by anything. It is a quarantine: unreviewed
-    # binaries from outside the project land here, and become site assets only
-    # once someone has looked at them and committed them like any other image.
+    # This bucket is never synced by anything. It is a quarantine: files from
+    # the edit panel land here (phase 4, through a presigned POST whose policy
+    # S3 enforces), and become media only once the API has checked their bytes
+    # and copied them to MediaBucket.
     UploadsBucket:
       Type: AWS::S3::Bucket
       Properties:
         BucketName: ${self:service}-uploads-${self:provider.stage}-${aws:accountId}
         # Not served to anyone. CloudFront has no origin here; the only reader is
-        # the admin fetching a photo to review.
+        # the API, checking an upload's first bytes.
         PublicAccessBlockConfiguration:
           BlockPublicAcls: true
           BlockPublicPolicy: true
@@ -524,7 +534,7 @@ resources:
                 SSEAlgorithm: AES256
         LifecycleConfiguration:
           Rules:
-            # An upload is either accepted (and committed to the repo, where it
+            # An upload is either published (copied to MediaBucket, where it
             # then lives permanently) or it isn't. Either way this copy stops
             # being the record after a few months, so it should not accumulate.
             - Id: expire-reviewed-uploads
@@ -534,6 +544,87 @@ resources:
               Status: Enabled
               AbortIncompleteMultipartUpload:
                 DaysAfterInitiation: 7
+        # The browser posts the file straight here (phase 4, P4-A), from the
+        # site's own origin. POST only: nothing reads this bucket from a page.
+        CorsConfiguration:
+          CorsRules:
+            - AllowedMethods: [POST]
+              AllowedHeaders: ['*']
+              AllowedOrigins: !If
+                - IsProd
+                - [https://slackdata.org, https://www.slackdata.org]
+                - [!Sub 'https://${Cdn.DomainName}', 'http://localhost:5173']
+              MaxAge: 3000
+
+    # ---- Media bucket: photos, manuals, logos (phase 4) ---------------------
+    # The media's source of truth (P4-F), served at /media/* through CloudFront
+    # (D48) and never synced by anything. Every key is new when written
+    # (slack_data/media/store.py), and the role has no s3:DeleteObject, so a
+    # file is never replaced or removed by the site; versioning is for a
+    # mistake made by hand. Retained: deleting the stack must not delete it.
+    # The daily export copies it to the data repo, outside AWS.
+    MediaBucket:
+      Type: AWS::S3::Bucket
+      DeletionPolicy: Retain
+      UpdateReplacePolicy: Retain
+      Properties:
+        BucketName: ${self:service}-media-${self:provider.stage}-${aws:accountId}
+        PublicAccessBlockConfiguration:
+          BlockPublicAcls: true
+          BlockPublicPolicy: true
+          IgnorePublicAcls: true
+          RestrictPublicBuckets: true
+        BucketEncryption:
+          ServerSideEncryptionConfiguration:
+            - ServerSideEncryptionByDefault:
+                SSEAlgorithm: AES256
+        VersioningConfiguration:
+          Status: Enabled
+
+    MediaBucketPolicy:
+      Type: AWS::S3::BucketPolicy
+      Properties:
+        Bucket: !Ref MediaBucket
+        PolicyDocument:
+          Statement:
+            - Effect: Allow
+              Principal:
+                Service: cloudfront.amazonaws.com
+              Action: s3:GetObject
+              Resource: !Sub '${MediaBucket.Arn}/*'
+              Condition:
+                StringEquals:
+                  AWS:SourceArn: !Sub 'arn:aws:cloudfront::${AWS::AccountId}:distribution/${Cdn}'
+
+    # What every /media/* response carries (hazard 3). The files are served from
+    # the site's own origin, so none may be read as anything but its stored
+    # type (nosniff), and none may run script or be framed elsewhere (the CSP).
+    # The type itself was decided from the file's bytes when it was published.
+    MediaHeadersPolicy:
+      Type: AWS::CloudFront::ResponseHeadersPolicy
+      Properties:
+        ResponseHeadersPolicyConfig:
+          Name: ${self:service}-media-headers-${self:provider.stage}
+          SecurityHeadersConfig:
+            ContentTypeOptions:
+              Override: true
+            ContentSecurityPolicy:
+              Override: true
+              ContentSecurityPolicy: "default-src 'none'; img-src 'self' data:; style-src 'unsafe-inline'; frame-ancestors 'self'"
+    # PDFs: nosniff and no framing elsewhere, but no default-src 'none' — a
+    # browser's built-in PDF viewer runs under the document's CSP, and would
+    # render a blank page under it.
+    MediaPdfHeadersPolicy:
+      Type: AWS::CloudFront::ResponseHeadersPolicy
+      Properties:
+        ResponseHeadersPolicyConfig:
+          Name: ${self:service}-media-pdf-headers-${self:provider.stage}
+          SecurityHeadersConfig:
+            ContentTypeOptions:
+              Override: true
+            ContentSecurityPolicy:
+              Override: true
+              ContentSecurityPolicy: "frame-ancestors 'self'"
 
     # ---- Website bucket (private; served only through CloudFront) ------------
     WebBucket:
@@ -705,6 +796,11 @@ resources:
               OriginAccessControlId: !Ref Oac
               S3OriginConfig:
                 OriginAccessIdentity: ''
+            - Id: media-s3
+              DomainName: !GetAtt MediaBucket.RegionalDomainName
+              OriginAccessControlId: !Ref Oac
+              S3OriginConfig:
+                OriginAccessIdentity: ''
             - Id: api-httpapi
               DomainName: !Sub '${HttpApi}.execute-api.${AWS::Region}.amazonaws.com'
               CustomOriginConfig:
@@ -721,6 +817,21 @@ resources:
               - EventType: viewer-request
                 FunctionARN: !GetAtt SpaRoutingFunction.FunctionMetadata.FunctionARN
           CacheBehaviors:
+            # Media (phase 4). The keys under /media/ are the bucket's keys, so
+            # no rewrite. Cached as the files say: a year, since a key is never
+            # reused. The PDF behaviour first — CloudFront takes the first match.
+            - PathPattern: /media/*.pdf
+              TargetOriginId: media-s3
+              ViewerProtocolPolicy: redirect-to-https
+              # AWS managed "CachingOptimized"
+              CachePolicyId: 658327ea-f89d-4fab-a63d-7e88639e58f6
+              ResponseHeadersPolicyId: !Ref MediaPdfHeadersPolicy
+              Compress: true
+            - PathPattern: /media/*
+              TargetOriginId: media-s3
+              ViewerProtocolPolicy: redirect-to-https
+              CachePolicyId: 658327ea-f89d-4fab-a63d-7e88639e58f6
+              ResponseHeadersPolicyId: !Ref MediaHeadersPolicy
             - PathPattern: /api/*
               TargetOriginId: api-httpapi
               ViewerProtocolPolicy: redirect-to-https
@@ -761,3 +872,5 @@ resources:
       Value: !Ref CatalogTable
     UploadsBucketName:
       Value: !Ref UploadsBucket
+    MediaBucketName:
+      Value: !Ref MediaBucket

@@ -21,3 +21,7 @@ scraper
 slackdb_archive
 scripts/.cache
 scratchpad_dl
+
+# The media snapshot (phase 4): served by S3 and CloudFront hosted, never by the API.
+media
+media-local
