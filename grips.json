@@ -18,6 +18,18 @@
         "active": false,
         "gear_sellers": [
             "Slacktivity"
+        ],
+        "photos": [
+            {
+                "id": "62ee1debfbed8d33",
+                "small": "grips/1/62ee1debfbed8d33-480.webp",
+                "large": "grips/1/62ee1debfbed8d33-1600.webp"
+            },
+            {
+                "id": "ef9100787c9ffef6",
+                "small": "grips/1/ef9100787c9ffef6-480.webp",
+                "large": "grips/1/ef9100787c9ffef6-1600.webp"
+            }
         ]
     },
     {
@@ -38,6 +50,18 @@
         "active": false,
         "gear_sellers": [
             "Slacktivity"
+        ],
+        "photos": [
+            {
+                "id": "146215230eec3814",
+                "small": "grips/2/146215230eec3814-480.webp",
+                "large": "grips/2/146215230eec3814-1600.webp"
+            },
+            {
+                "id": "35aa66973195f77c",
+                "small": "grips/2/35aa66973195f77c-480.webp",
+                "large": "grips/2/35aa66973195f77c-1600.webp"
+            }
         ]
     },
     {
@@ -55,7 +79,24 @@
         "price": 89.0,
         "currency": "USD",
         "description": "Micro Webbing Grip. A right-sized webbing grip that fits in the palm of your hand. Easily grab and tension your lines with a simple action. A right-sized device to carry with you on your harness.",
-        "active": false
+        "active": false,
+        "photos": [
+            {
+                "id": "d34a6ec934c46f74",
+                "small": "grips/3/d34a6ec934c46f74-480.webp",
+                "large": "grips/3/d34a6ec934c46f74-1600.webp"
+            },
+            {
+                "id": "1146ad837afec523",
+                "small": "grips/3/1146ad837afec523-480.webp",
+                "large": "grips/3/1146ad837afec523-1600.webp"
+            },
+            {
+                "id": "05ea10688df63de7",
+                "small": "grips/3/05ea10688df63de7-480.webp",
+                "large": "grips/3/05ea10688df63de7-1600.webp"
+            }
+        ]
     },
     {
         "id": 4,
@@ -72,7 +113,19 @@
         "price": 8481.0,
         "currency": "RUB",
         "description": "Device for grip the webbing. It’s intermediate element between pulley system and webbing for tension the line.",
-        "active": false
+        "active": false,
+        "photos": [
+            {
+                "id": "d8aee1e478a2374b",
+                "small": "grips/4/d8aee1e478a2374b-480.webp",
+                "large": "grips/4/d8aee1e478a2374b-1600.webp"
+            },
+            {
+                "id": "ac2cbb1d3e7a31f5",
+                "small": "grips/4/ac2cbb1d3e7a31f5-480.webp",
+                "large": "grips/4/ac2cbb1d3e7a31f5-1600.webp"
+            }
+        ]
     },
     {
         "id": 5,
@@ -90,7 +143,14 @@
         "price": 83.95,
         "currency": "EUR",
         "description": "This tiny gem is specifically aimed at users of the \"buckingham\" tensioning technique, who care to save even the last bit of weight and space in their backpack.",
-        "active": false
+        "active": false,
+        "photos": [
+            {
+                "id": "f811bfe9593d032b",
+                "small": "grips/5/f811bfe9593d032b-480.webp",
+                "large": "grips/5/f811bfe9593d032b-1600.webp"
+            }
+        ]
     },
     {
         "id": 6,
@@ -113,6 +173,13 @@
         "gear_sellers": [
             "Slacktivity",
             "Raed Slacklines"
+        ],
+        "photos": [
+            {
+                "id": "65d0c4f54ef2d0b1",
+                "small": "grips/6/65d0c4f54ef2d0b1-480.webp",
+                "large": "grips/6/65d0c4f54ef2d0b1-1600.webp"
+            }
         ]
     },
     {
@@ -132,7 +199,14 @@
         "price": 305.0,
         "currency": "EUR",
         "description": "In 2016 we introduced the eagerly awaited and long requested first 2″ lineGrip - the tricklineGrip G1, as well as the MK2-series G4 and HLG, which featured upgraded tether-cord and retainer-pin.",
-        "active": false
+        "active": false,
+        "photos": [
+            {
+                "id": "bf745c6fba6d1f1f",
+                "small": "grips/7/bf745c6fba6d1f1f-480.webp",
+                "large": "grips/7/bf745c6fba6d1f1f-1600.webp"
+            }
+        ]
     },
     {
         "id": 8,
@@ -151,7 +225,14 @@
         "price": 327.9,
         "currency": "EUR",
         "description": "Generation-2 aluminum webbing clamp for 50mm slacklines – 15kN SWL. Equipped with spring-ball-retainer and brand new 2020 Type-4 rubber plates. Featuring neat weight saving pockets and all-round beveled edges.",
-        "active": true
+        "active": true,
+        "photos": [
+            {
+                "id": "89e8f1faa10adb17",
+                "small": "grips/8/89e8f1faa10adb17-480.webp",
+                "large": "grips/8/89e8f1faa10adb17-1600.webp"
+            }
+        ]
     },
     {
         "id": 9,
@@ -170,6 +251,13 @@
         "active": true,
         "gear_sellers": [
             "Slacktivity"
+        ],
+        "photos": [
+            {
+                "id": "907ba7220197ba24",
+                "small": "grips/9/907ba7220197ba24-480.webp",
+                "large": "grips/9/907ba7220197ba24-1600.webp"
+            }
         ]
     },
     {
@@ -188,7 +276,19 @@
         "price": 39.95,
         "currency": "EUR",
         "description": "Lightweight and compact \"linegrip\" device for rigging with pulley carabiner Rollex.",
-        "active": false
+        "active": false,
+        "photos": [
+            {
+                "id": "26eaee9f0c97f67f",
+                "small": "grips/10/26eaee9f0c97f67f-480.webp",
+                "large": "grips/10/26eaee9f0c97f67f-1600.webp"
+            },
+            {
+                "id": "3971dbfabdb1718a",
+                "small": "grips/10/3971dbfabdb1718a-480.webp",
+                "large": "grips/10/3971dbfabdb1718a-1600.webp"
+            }
+        ]
     },
     {
         "id": 11,
@@ -205,7 +305,34 @@
         "connection_type": "Dyneema Sling Loop",
         "price": 79.9,
         "currency": "EUR",
-        "active": true
+        "active": true,
+        "photos": [
+            {
+                "id": "2121b253c75e0eb6",
+                "small": "grips/11/2121b253c75e0eb6-480.webp",
+                "large": "grips/11/2121b253c75e0eb6-1600.webp"
+            },
+            {
+                "id": "5eace1ae0a100824",
+                "small": "grips/11/5eace1ae0a100824-480.webp",
+                "large": "grips/11/5eace1ae0a100824-1600.webp"
+            },
+            {
+                "id": "40236f27d2228bdf",
+                "small": "grips/11/40236f27d2228bdf-480.webp",
+                "large": "grips/11/40236f27d2228bdf-1600.webp"
+            },
+            {
+                "id": "198917d6b4d4175e",
+                "small": "grips/11/198917d6b4d4175e-480.webp",
+                "large": "grips/11/198917d6b4d4175e-1600.webp"
+            },
+            {
+                "id": "0f9ecf57bd806515",
+                "small": "grips/11/0f9ecf57bd806515-480.webp",
+                "large": "grips/11/0f9ecf57bd806515-1600.webp"
+            }
+        ]
     },
     {
         "id": 12,
@@ -222,7 +349,24 @@
         "connection_type": "Dyneema Sling Loop",
         "price": 3990.0,
         "currency": "INR",
-        "active": false
+        "active": false,
+        "photos": [
+            {
+                "id": "57e6ccd2f35ef69b",
+                "small": "grips/12/57e6ccd2f35ef69b-480.webp",
+                "large": "grips/12/57e6ccd2f35ef69b-1600.webp"
+            },
+            {
+                "id": "203a0a3a6b43a8ac",
+                "small": "grips/12/203a0a3a6b43a8ac-480.webp",
+                "large": "grips/12/203a0a3a6b43a8ac-1600.webp"
+            },
+            {
+                "id": "66675626df694691",
+                "small": "grips/12/66675626df694691-480.webp",
+                "large": "grips/12/66675626df694691-1600.webp"
+            }
+        ]
     },
     {
         "id": 13,
@@ -241,6 +385,23 @@
         "active": true,
         "gear_sellers": [
             "Spider Slacklines"
+        ],
+        "photos": [
+            {
+                "id": "7cf8a3f38c5612f4",
+                "small": "grips/13/7cf8a3f38c5612f4-480.webp",
+                "large": "grips/13/7cf8a3f38c5612f4-1600.webp"
+            },
+            {
+                "id": "b1ae2a5fea65a636",
+                "small": "grips/13/b1ae2a5fea65a636-480.webp",
+                "large": "grips/13/b1ae2a5fea65a636-1600.webp"
+            },
+            {
+                "id": "a7ba761c49e72964",
+                "small": "grips/13/a7ba761c49e72964-480.webp",
+                "large": "grips/13/a7ba761c49e72964-1600.webp"
+            }
         ]
     },
     {
@@ -261,6 +422,30 @@
         "active": true,
         "gear_sellers": [
             "Slack Inov"
+        ],
+        "photos": [
+            {
+                "id": "8af1369e195e3f06",
+                "small": "grips/14/8af1369e195e3f06-480.webp",
+                "large": "grips/14/8af1369e195e3f06-1600.webp"
+            },
+            {
+                "id": "fa5fc6674cc7591d",
+                "small": "grips/14/fa5fc6674cc7591d-480.webp",
+                "large": "grips/14/fa5fc6674cc7591d-1600.webp"
+            },
+            {
+                "id": "2165dc19baac73e8",
+                "small": "grips/14/2165dc19baac73e8-480.webp",
+                "large": "grips/14/2165dc19baac73e8-1600.webp"
+            }
+        ],
+        "manuals": [
+            {
+                "id": "c018dee76ac0db25",
+                "file": "grips/14/c018dee76ac0db25-user-manual.pdf",
+                "title": "User manual"
+            }
         ]
     },
     {
@@ -279,7 +464,31 @@
         "price": 89.0,
         "currency": "USD",
         "description": "Micro Webbing Grip. A right-sized webbing grip that fits in the palm of your hand. Easily grab and tension your lines with a simple action. A right-sized device to carry with you on your harness.",
-        "active": true
+        "active": true,
+        "photos": [
+            {
+                "id": "18be6221b638184f",
+                "small": "grips/15/18be6221b638184f-480.webp",
+                "large": "grips/15/18be6221b638184f-1600.webp"
+            },
+            {
+                "id": "b300a0bb80c03b30",
+                "small": "grips/15/b300a0bb80c03b30-480.webp",
+                "large": "grips/15/b300a0bb80c03b30-1600.webp"
+            },
+            {
+                "id": "b74ee9b0f09ebb98",
+                "small": "grips/15/b74ee9b0f09ebb98-480.webp",
+                "large": "grips/15/b74ee9b0f09ebb98-1600.webp"
+            }
+        ],
+        "manuals": [
+            {
+                "id": "dc95ee8c895a67ac",
+                "file": "grips/15/dc95ee8c895a67ac-user-manual.pdf",
+                "title": "User manual"
+            }
+        ]
     },
     {
         "id": 16,
@@ -297,7 +506,31 @@
         "price": 139.0,
         "currency": "USD",
         "description": "Full-Sized Webbing Grip. A full-sized webbing grip with a lightweight constuction and optimal gripping strength. Works well with all low tech webbings and select high tech webbings. The Wafer XL is the right grip for tensioning your lines, no matter the length.",
-        "active": true
+        "active": true,
+        "photos": [
+            {
+                "id": "cb677bc6ebedb0ee",
+                "small": "grips/16/cb677bc6ebedb0ee-480.webp",
+                "large": "grips/16/cb677bc6ebedb0ee-1600.webp"
+            },
+            {
+                "id": "e981404c6c166cbe",
+                "small": "grips/16/e981404c6c166cbe-480.webp",
+                "large": "grips/16/e981404c6c166cbe-1600.webp"
+            },
+            {
+                "id": "382ca0eac7ae4d24",
+                "small": "grips/16/382ca0eac7ae4d24-480.webp",
+                "large": "grips/16/382ca0eac7ae4d24-1600.webp"
+            }
+        ],
+        "manuals": [
+            {
+                "id": "77695d2bb0a21fdc",
+                "file": "grips/16/77695d2bb0a21fdc-user-manual.pdf",
+                "title": "User manual"
+            }
+        ]
     },
     {
         "id": 17,
@@ -313,7 +546,26 @@
         "price": 81.32,
         "currency": "EUR",
         "description": "T-Grip Light – the ultra-lightweight (only 91 g!) and highly efficient webbing grabber for use in your slackline tensioning system.",
-        "active": true
+        "active": true,
+        "photos": [
+            {
+                "id": "628056bd6548852c",
+                "small": "grips/17/628056bd6548852c-480.webp",
+                "large": "grips/17/628056bd6548852c-1600.webp"
+            },
+            {
+                "id": "4101224bb7f64a62",
+                "small": "grips/17/4101224bb7f64a62-480.webp",
+                "large": "grips/17/4101224bb7f64a62-1600.webp"
+            }
+        ],
+        "manuals": [
+            {
+                "id": "096831c185504ecf",
+                "file": "grips/17/096831c185504ecf-user-manual.pdf",
+                "title": "User manual"
+            }
+        ]
     },
     {
         "id": 18,
@@ -329,7 +581,26 @@
         "price": 130.0,
         "currency": "EUR",
         "description": "Webbing Grip with a unique lightweight design optimized for use in HangOverPulley. The T-Grip is easier to reposition than any other clamping device.",
-        "active": false
+        "active": false,
+        "photos": [
+            {
+                "id": "76f8b617129e0c82",
+                "small": "grips/18/76f8b617129e0c82-480.webp",
+                "large": "grips/18/76f8b617129e0c82-1600.webp"
+            },
+            {
+                "id": "0eab4e17fc8e068a",
+                "small": "grips/18/0eab4e17fc8e068a-480.webp",
+                "large": "grips/18/0eab4e17fc8e068a-1600.webp"
+            }
+        ],
+        "manuals": [
+            {
+                "id": "3b4beda0dbcde87f",
+                "file": "grips/18/3b4beda0dbcde87f-user-manual.pdf",
+                "title": "User manual"
+            }
+        ]
     },
     {
         "id": 19,
@@ -345,7 +616,24 @@
         "price": 1795.0,
         "currency": "ZAR",
         "description": "Get a hold of your webbing safely and securely with the Grippex. This incredibly light line grab is an essential part of your slackline kit when aiming to setup lines longer than 20 meters. Combined with a Rolley, it gives you the power of mechanical advantage to tension your slackline.",
-        "active": true
+        "active": true,
+        "photos": [
+            {
+                "id": "2af0caaecf91bb54",
+                "small": "grips/19/2af0caaecf91bb54-480.webp",
+                "large": "grips/19/2af0caaecf91bb54-1600.webp"
+            },
+            {
+                "id": "0025cd7b459cd383",
+                "small": "grips/19/0025cd7b459cd383-480.webp",
+                "large": "grips/19/0025cd7b459cd383-1600.webp"
+            },
+            {
+                "id": "77ff55f4d622f67e",
+                "small": "grips/19/77ff55f4d622f67e-480.webp",
+                "large": "grips/19/77ff55f4d622f67e-1600.webp"
+            }
+        ]
     },
     {
         "id": 20,
@@ -361,6 +649,23 @@
         "connection_type": "Sling Loop",
         "price": 450.0,
         "currency": "BRL",
-        "active": true
+        "active": true,
+        "photos": [
+            {
+                "id": "ab8700d5e98670c5",
+                "small": "grips/20/ab8700d5e98670c5-480.webp",
+                "large": "grips/20/ab8700d5e98670c5-1600.webp"
+            },
+            {
+                "id": "2bccf6dbc8d61ff1",
+                "small": "grips/20/2bccf6dbc8d61ff1-480.webp",
+                "large": "grips/20/2bccf6dbc8d61ff1-1600.webp"
+            },
+            {
+                "id": "fb095fcad0acdaa1",
+                "small": "grips/20/fb095fcad0acdaa1-480.webp",
+                "large": "grips/20/fb095fcad0acdaa1-1600.webp"
+            }
+        ]
     }
 ]

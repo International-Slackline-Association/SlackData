@@ -20,7 +20,14 @@
             "compatible_webbing_width": null,
             "inner_width": 28,
             "outer_bearing_diameter": null
-        }
+        },
+        "photos": [
+            {
+                "id": "78572082ae05e4e4",
+                "small": "rollers/1/78572082ae05e4e4-480.webp",
+                "large": "rollers/1/78572082ae05e4e4-1600.webp"
+            }
+        ]
     },
     {
         "id": 2,
@@ -49,7 +56,21 @@
             ],
             "inner_width": 27.8,
             "outer_bearing_diameter": null
-        }
+        },
+        "photos": [
+            {
+                "id": "f05218a55cd3e878",
+                "small": "rollers/2/f05218a55cd3e878-480.webp",
+                "large": "rollers/2/f05218a55cd3e878-1600.webp"
+            }
+        ],
+        "manuals": [
+            {
+                "id": "2a9e75d840f35a16",
+                "file": "rollers/2/2a9e75d840f35a16-user-manual.pdf",
+                "title": "User manual"
+            }
+        ]
     },
     {
         "id": 3,
@@ -79,7 +100,14 @@
             ],
             "inner_width": 27.8,
             "outer_bearing_diameter": 19
-        }
+        },
+        "photos": [
+            {
+                "id": "25259589632f213a",
+                "small": "rollers/3/25259589632f213a-480.webp",
+                "large": "rollers/3/25259589632f213a-1600.webp"
+            }
+        ]
     },
     {
         "id": 4,
@@ -108,7 +136,21 @@
             ],
             "inner_width": 27.8,
             "outer_bearing_diameter": null
-        }
+        },
+        "photos": [
+            {
+                "id": "8a7303bdea64c2e7",
+                "small": "rollers/4/8a7303bdea64c2e7-480.webp",
+                "large": "rollers/4/8a7303bdea64c2e7-1600.webp"
+            }
+        ],
+        "manuals": [
+            {
+                "id": "2a9e75d840f35a16",
+                "file": "rollers/4/2a9e75d840f35a16-user-manual.pdf",
+                "title": "User manual"
+            }
+        ]
     },
     {
         "id": 5,
@@ -136,7 +178,14 @@
             ],
             "inner_width": 28.7,
             "outer_bearing_diameter": null
-        }
+        },
+        "photos": [
+            {
+                "id": "8080bf7f058fa1af",
+                "small": "rollers/5/8080bf7f058fa1af-480.webp",
+                "large": "rollers/5/8080bf7f058fa1af-1600.webp"
+            }
+        ]
     },
     {
         "id": 6,
@@ -166,7 +215,14 @@
             ],
             "inner_width": 28,
             "outer_bearing_diameter": 22
-        }
+        },
+        "photos": [
+            {
+                "id": "8ac204f055a3cf1d",
+                "small": "rollers/6/8ac204f055a3cf1d-480.webp",
+                "large": "rollers/6/8ac204f055a3cf1d-1600.webp"
+            }
+        ]
     },
     {
         "id": 7,
@@ -194,7 +250,14 @@
             ],
             "inner_width": 29,
             "outer_bearing_diameter": null
-        }
+        },
+        "photos": [
+            {
+                "id": "7e1e3ba1f6d6c34f",
+                "small": "rollers/7/7e1e3ba1f6d6c34f-480.webp",
+                "large": "rollers/7/7e1e3ba1f6d6c34f-1600.webp"
+            }
+        ]
     },
     {
         "id": 8,
@@ -222,7 +285,19 @@
             ],
             "inner_width": 33,
             "outer_bearing_diameter": 25
-        }
+        },
+        "photos": [
+            {
+                "id": "480ea465858551fa",
+                "small": "rollers/8/480ea465858551fa-480.webp",
+                "large": "rollers/8/480ea465858551fa-1600.webp"
+            },
+            {
+                "id": "19cc71394f4164b7",
+                "small": "rollers/8/19cc71394f4164b7-480.webp",
+                "large": "rollers/8/19cc71394f4164b7-1600.webp"
+            }
+        ]
     },
     {
         "id": 9,
@@ -250,7 +325,19 @@
             ],
             "inner_width": 27,
             "outer_bearing_diameter": 24
-        }
+        },
+        "photos": [
+            {
+                "id": "c5668ac9483b808c",
+                "small": "rollers/9/c5668ac9483b808c-480.webp",
+                "large": "rollers/9/c5668ac9483b808c-1600.webp"
+            },
+            {
+                "id": "b8e39cc41e9b4383",
+                "small": "rollers/9/b8e39cc41e9b4383-480.webp",
+                "large": "rollers/9/b8e39cc41e9b4383-1600.webp"
+            }
+        ]
     },
     {
         "id": 10,
@@ -277,7 +364,14 @@
             ],
             "inner_width": 26,
             "outer_bearing_diameter": null
-        }
+        },
+        "photos": [
+            {
+                "id": "5e35523651b90a35",
+                "small": "rollers/10/5e35523651b90a35-480.webp",
+                "large": "rollers/10/5e35523651b90a35-1600.webp"
+            }
+        ]
     },
     {
         "id": 11,
@@ -310,7 +404,14 @@
             ],
             "inner_width": null,
             "outer_bearing_diameter": null
-        }
+        },
+        "photos": [
+            {
+                "id": "6b789af423a8d01a",
+                "small": "rollers/11/6b789af423a8d01a-480.webp",
+                "large": "rollers/11/6b789af423a8d01a-1600.webp"
+            }
+        ]
     },
     {
         "id": 12,
@@ -343,7 +444,14 @@
             ],
             "inner_width": null,
             "outer_bearing_diameter": null
-        }
+        },
+        "photos": [
+            {
+                "id": "ef6040c79bd2a72e",
+                "small": "rollers/12/ef6040c79bd2a72e-480.webp",
+                "large": "rollers/12/ef6040c79bd2a72e-1600.webp"
+            }
+        ]
     },
     {
         "id": 13,
@@ -377,7 +485,14 @@
             ],
             "inner_width": null,
             "outer_bearing_diameter": null
-        }
+        },
+        "photos": [
+            {
+                "id": "fb9cd4480f5d1302",
+                "small": "rollers/13/fb9cd4480f5d1302-480.webp",
+                "large": "rollers/13/fb9cd4480f5d1302-1600.webp"
+            }
+        ]
     },
     {
         "id": 14,
@@ -405,7 +520,14 @@
             ],
             "inner_width": 26,
             "outer_bearing_diameter": 24
-        }
+        },
+        "photos": [
+            {
+                "id": "61810ffa7600d565",
+                "small": "rollers/14/61810ffa7600d565-480.webp",
+                "large": "rollers/14/61810ffa7600d565-1600.webp"
+            }
+        ]
     },
     {
         "id": 15,
@@ -433,7 +555,14 @@
             ],
             "inner_width": 28,
             "outer_bearing_diameter": 19
-        }
+        },
+        "photos": [
+            {
+                "id": "bdbcf88cf9f9502d",
+                "small": "rollers/15/bdbcf88cf9f9502d-480.webp",
+                "large": "rollers/15/bdbcf88cf9f9502d-1600.webp"
+            }
+        ]
     },
     {
         "id": 16,
@@ -462,7 +591,14 @@
             ],
             "inner_width": null,
             "outer_bearing_diameter": null
-        }
+        },
+        "photos": [
+            {
+                "id": "c6752f45dd544a79",
+                "small": "rollers/16/c6752f45dd544a79-480.webp",
+                "large": "rollers/16/c6752f45dd544a79-1600.webp"
+            }
+        ]
     },
     {
         "id": 17,
@@ -488,7 +624,21 @@
             "compatible_webbing_width": null,
             "inner_width": 28.6,
             "outer_bearing_diameter": null
-        }
+        },
+        "photos": [
+            {
+                "id": "74ac96013326c1ee",
+                "small": "rollers/17/74ac96013326c1ee-480.webp",
+                "large": "rollers/17/74ac96013326c1ee-1600.webp"
+            }
+        ],
+        "manuals": [
+            {
+                "id": "7542eafbbc5c6260",
+                "file": "rollers/17/7542eafbbc5c6260-user-manual.pdf",
+                "title": "User manual"
+            }
+        ]
     },
     {
         "id": 18,
@@ -514,7 +664,21 @@
             "compatible_webbing_width": null,
             "inner_width": 28.6,
             "outer_bearing_diameter": null
-        }
+        },
+        "photos": [
+            {
+                "id": "51ae362a703af5ab",
+                "small": "rollers/18/51ae362a703af5ab-480.webp",
+                "large": "rollers/18/51ae362a703af5ab-1600.webp"
+            }
+        ],
+        "manuals": [
+            {
+                "id": "137a22543010c7e1",
+                "file": "rollers/18/137a22543010c7e1-user-manual.pdf",
+                "title": "User manual"
+            }
+        ]
     },
     {
         "id": 19,
@@ -546,7 +710,24 @@
             ],
             "inner_width": null,
             "outer_bearing_diameter": null
-        }
+        },
+        "photos": [
+            {
+                "id": "6e51eeb5f8bfd8b0",
+                "small": "rollers/19/6e51eeb5f8bfd8b0-480.webp",
+                "large": "rollers/19/6e51eeb5f8bfd8b0-1600.webp"
+            },
+            {
+                "id": "144ebc88a8a88b39",
+                "small": "rollers/19/144ebc88a8a88b39-480.webp",
+                "large": "rollers/19/144ebc88a8a88b39-1600.webp"
+            },
+            {
+                "id": "8a683d4bf3a68987",
+                "small": "rollers/19/8a683d4bf3a68987-480.webp",
+                "large": "rollers/19/8a683d4bf3a68987-1600.webp"
+            }
+        ]
     },
     {
         "id": 20,
@@ -573,7 +754,24 @@
             ],
             "inner_width": null,
             "outer_bearing_diameter": null
-        }
+        },
+        "photos": [
+            {
+                "id": "b73b5fd78ff7af92",
+                "small": "rollers/20/b73b5fd78ff7af92-480.webp",
+                "large": "rollers/20/b73b5fd78ff7af92-1600.webp"
+            },
+            {
+                "id": "701128293bcf9746",
+                "small": "rollers/20/701128293bcf9746-480.webp",
+                "large": "rollers/20/701128293bcf9746-1600.webp"
+            },
+            {
+                "id": "f819d9577c5babd9",
+                "small": "rollers/20/f819d9577c5babd9-480.webp",
+                "large": "rollers/20/f819d9577c5babd9-1600.webp"
+            }
+        ]
     },
     {
         "id": 21,
@@ -597,7 +795,19 @@
             "compatible_webbing_width": null,
             "inner_width": 28,
             "outer_bearing_diameter": null
-        }
+        },
+        "photos": [
+            {
+                "id": "cf0fc3f75af0a726",
+                "small": "rollers/21/cf0fc3f75af0a726-480.webp",
+                "large": "rollers/21/cf0fc3f75af0a726-1600.webp"
+            },
+            {
+                "id": "36d9e23e73ee638c",
+                "small": "rollers/21/36d9e23e73ee638c-480.webp",
+                "large": "rollers/21/36d9e23e73ee638c-1600.webp"
+            }
+        ]
     },
     {
         "id": 22,
@@ -623,6 +833,25 @@
             ],
             "inner_width": 27.8,
             "outer_bearing_diameter": 19
-        }
+        },
+        "photos": [
+            {
+                "id": "6fc4f14c3b27288b",
+                "small": "rollers/22/6fc4f14c3b27288b-480.webp",
+                "large": "rollers/22/6fc4f14c3b27288b-1600.webp"
+            },
+            {
+                "id": "4a86c46b82fc300f",
+                "small": "rollers/22/4a86c46b82fc300f-480.webp",
+                "large": "rollers/22/4a86c46b82fc300f-1600.webp"
+            }
+        ],
+        "manuals": [
+            {
+                "id": "2a9e75d840f35a16",
+                "file": "rollers/22/2a9e75d840f35a16-user-manual.pdf",
+                "title": "User manual"
+            }
+        ]
     }
 ]
