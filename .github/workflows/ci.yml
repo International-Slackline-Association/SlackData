@@ -66,7 +66,7 @@ jobs:
         # [aws] pulls boto3 so the DynamoDB tests run. The *application* still
         # imports it lazily, and tests/test_submissions.py asserts the suite's
         # no-boto3 guarantee structurally rather than by its absence here.
-        run: pip install '-e.[dev,aws]'
+        run: pip install '-e.[dev,aws,media]'
 
       - name: Lint
         run: ruff check slack_data/ tests/ --output-format=github

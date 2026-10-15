@@ -118,3 +118,9 @@ class S3MediaStore:
                 return False
             raise
         return True
+
+    def held_keys(self) -> set[str]:
+        keys = set()
+        for page in self.client.get_paginator("list_objects_v2").paginate(Bucket=self.media_bucket):
+            keys |= {item["Key"] for item in page.get("Contents", [])}
+        return keys

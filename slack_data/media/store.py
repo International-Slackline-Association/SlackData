@@ -90,6 +90,11 @@ class MediaStore(Protocol):
     def exists(self, key: str) -> bool:
         ...
 
+    def held_keys(self) -> set[str]:
+        """Every key in the media store (the migration's; one listing, not a
+        request per file)."""
+        ...
+
 
 def new_upload_id() -> str:
     return secrets.token_hex(16)
@@ -242,6 +247,17 @@ class FilesystemMediaStore:
 
     def exists(self, key: str) -> bool:
         return self.locate(key) is not None
+
+    def held_keys(self) -> set[str]:
+        keys = set()
+        for base in (self.root, self.snapshot):
+            if base is not None and base.is_dir():
+                keys |= {
+                    p.relative_to(base).as_posix()
+                    for p in base.rglob("*")
+                    if p.is_file() and not p.relative_to(base).as_posix().startswith(".")
+                }
+        return keys
 
 
 # --- Selection ------------------------------------------------------------------

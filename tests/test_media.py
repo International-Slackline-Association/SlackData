@@ -213,12 +213,13 @@ def test_a_photo_is_published_logged_and_listed(client, store, media):
 
 
 def test_a_file_whose_bytes_are_not_a_photo_is_never_published(client, store, media):
+    before = entry(client, "grips", 1)["entry"].get("photos")
     lie = upload(client, "photo", "image/webp", HTML)  # the browser's claim, not the bytes
     response = put_media(client, "grips", 1, photos=[{"upload": {"small": lie, "large": lie}}])
     assert response.status_code == 422
     assert "not a JPG or PNG or WEBP file" in response.json()["detail"]["message"]
     assert not (media.root / "grips").exists(), "nothing was published"
-    assert "photos" not in entry(client, "grips", 1)["entry"]
+    assert entry(client, "grips", 1)["entry"].get("photos") == before
 
 
 def test_an_unknown_upload_is_refused(client, store, media):

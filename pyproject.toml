@@ -26,6 +26,11 @@ dev = [
 aws = [
     "boto3>=1.34",
 ]
+# The one-off media migration only (slack_data/media/migrate.py): re-encodes
+# today's photos. Never needed by the API — photos are resized in the browser.
+media = [
+    "pillow>=10",
+]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
