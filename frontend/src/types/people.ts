@@ -11,6 +11,8 @@ export interface Me {
   email: string | null
   email_verified: boolean
   roles: Role[]
+  /** The brands this person represents (phase 5), by name as items carry it. */
+  brands: { catalog_id: number; name: string }[]
   notice_seen_at: string | null
   /** False until the person has typed in the name shown with their changes. */
   name_set: boolean
@@ -59,6 +61,11 @@ export interface ChangeRecordPublic {
     | 'brand.create'
     | 'brand.edit'
     | 'match.repoint'
+    | 'brand.link'
+    | 'brand.unlink'
+    | 'key.create'
+    | 'key.regenerate'
+    | 'key.revoke'
   actor_isa_id: string
   actor_name: string
   actor_role: string

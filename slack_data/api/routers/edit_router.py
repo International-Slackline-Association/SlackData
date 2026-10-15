@@ -201,6 +201,10 @@ class FieldSpec(BaseModel):
     kind: str
     options: list[str] | None
     required: bool
+    # Only an admin changes it (rights.ADMIN_ONLY_FIELDS): who makes a
+    # product, who else sells it. A manufacturer picks `brand` only when
+    # adding a product, among their own brands.
+    admin_only: bool = False
 
 
 # --- Uploads (declared before /{slug}) -------------------------------------------
@@ -301,11 +305,18 @@ def revert(
 
 
 @edit_router.get("/{slug}/fields", response_model=list[FieldSpec])
-def item_fields(slug: str, _: CurrentEditor, store: StoreDep) -> list[FieldSpec]:
+def item_fields(slug: str, editor: CurrentEditor, store: StoreDep) -> list[FieldSpec]:
     """What the edit form offers for a gear type: each field's kind and allowed
-    values, from the model — the form is built from this, never a copy."""
+    values, from the model — the form is built from this, never a copy. A
+    manufacturer is offered their own brands only."""
+    documents = store.load()
+    brands = (
+        edits._brand_names(documents)
+        if rights.is_admin(editor)
+        else [b["name"] for b in rights.brand_names(documents, editor.brands)]
+    )
     try:
-        specs = edits.field_specs(slug, edits._brand_names(store.load()))
+        specs = edits.field_specs(slug, brands)
     except edits.NotFound as error:
         raise HTTPException(404, error.message) from error
     return [FieldSpec(**spec) for spec in specs]

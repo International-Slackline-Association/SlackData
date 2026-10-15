@@ -19,6 +19,9 @@ export interface FieldSpec {
   kind: FieldKind
   options: string[] | null
   required: boolean
+  /** Only an admin changes it (who makes a product, who else sells it). A
+   *  manufacturer picks `brand` only when adding a product, among their own. */
+  admin_only?: boolean
 }
 
 /** A seed entry as the store holds it, and the rev an edit must name (D27). */

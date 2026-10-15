@@ -733,12 +733,20 @@ def field_specs(collection: str, brands: Iterable[str]) -> list[dict]:
             kind, options = "choices", brand_options
         else:
             kind, options = _kind(name, info.annotation)
-        specs.append({"name": name, "kind": kind, "options": options, "required": info.is_required()})
+        specs.append({
+            "name": name, "kind": kind, "options": options, "required": info.is_required(),
+            "admin_only": name in rights.ADMIN_ONLY_FIELDS,
+        })
         if name == "name":
-            specs.append({"name": "brand", "kind": "choice", "options": brand_options, "required": True})
+            specs.append({
+                "name": "brand", "kind": "choice", "options": brand_options, "required": True, "admin_only": True,
+            })
     return specs
 
 
 def brand_field_specs() -> list[dict]:
     kinds = {str: "text", int: "integer", bool: "boolean"}
-    return [{"name": n, "kind": kinds[t], "options": None, "required": False} for n, t in BRAND_FIELDS.items()]
+    return [
+        {"name": n, "kind": kinds[t], "options": None, "required": False, "admin_only": False}
+        for n, t in BRAND_FIELDS.items()
+    ]

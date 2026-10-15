@@ -151,6 +151,15 @@ export default function AccountMenu() {
               </div>
             </form>
           )}
+          <Link
+            to="/account/brands"
+            role="menuitem"
+            data-cy="account-brands-link"
+            onClick={() => setOpen(false)}
+            className="block rounded-lg px-2 py-1.5 text-sm text-gray-700 hover:bg-gray-100"
+          >
+            Your brands
+          </Link>
           {auth.isAdmin && (
             <Link
               to="/admin"

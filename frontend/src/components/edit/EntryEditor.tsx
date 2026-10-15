@@ -12,6 +12,7 @@
 
 import { useEffect, useId, useMemo, useState } from 'react'
 import { ApiError } from '@/api/client'
+import { useSiteAuth } from '@/auth/AuthContext'
 import type { EditConflict, EditResult, FieldSpec, Stored } from '@/types'
 import { asDrafted, display, type Draft, fromDraft, humanize, sameValue, toDraft } from '@/utils/fieldDraft'
 import FieldInput from './FieldInput'
@@ -49,13 +50,19 @@ export default function EntryEditor({
   const [conflict, setConflict] = useState<EditConflict | null>(null)
   const [saving, setSaving] = useState(false)
   const creating = !adapter.loadStored
+  const { isAdmin } = useSiteAuth()
 
   useEffect(() => {
     let cancelled = false
     Promise.all([adapter.loadFields(), adapter.loadStored ? adapter.loadStored() : Promise.resolve(null)])
       .then(([specs, stored]) => {
         if (cancelled) return
-        const all = [...(adapter.extraFields ?? []), ...specs]
+        // Who makes a product and who else sells it are an admin's to change; a
+        // manufacturer names `brand` only when adding a product, and is offered
+        // their own brands (phase 5). The API refuses the rest regardless.
+        const all = [...(adapter.extraFields ?? []), ...specs].filter(
+          f => !f.admin_only || isAdmin || (creating && f.name === 'brand'),
+        )
         setFields(all)
         setBase(stored)
         setDrafts(Object.fromEntries(all.map(spec => [spec.name, toDraft(spec.kind, stored?.entry[spec.name])])))

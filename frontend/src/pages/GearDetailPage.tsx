@@ -129,7 +129,12 @@ export default function GearDetailPage() {
         <SuggestButton gearType={meta.slug} variant="correction" item={item} />
       </div>
 
-      <ItemEditing slug={meta.slug} id={String(item.id)} onChanged={() => setReload(n => n + 1)} />
+      <ItemEditing
+        slug={meta.slug}
+        id={String(item.id)}
+        brandName={String(item.brand_name)}
+        onChanged={() => setReload(n => n + 1)}
+      />
     </div>
   )
 }

@@ -168,3 +168,12 @@ def test_a_product_missing_a_required_list_is_a_422_not_a_500(client, store):
     response = client.post("/edit/webbings", headers=ADMIN, json={"fields": {"name": "No Material", "brand": "Gibbon", "width": 25}})
     assert response.status_code == 422
     assert "material" in {e["field"] for e in response.json()["detail"]["errors"]}
+
+
+def test_the_form_marks_admin_fields_and_offers_a_maker_their_own_brands(client, store, maker):
+    specs = {s["name"]: s for s in client.get("/edit/webbings/fields", headers=MAKER).json()}
+    assert specs["brand"]["admin_only"] and specs["gear_sellers"]["admin_only"]
+    assert not specs["notes"]["admin_only"]
+    assert specs["brand"]["options"] == ["Balance Community"]
+    admin_specs = {s["name"]: s for s in client.get("/edit/webbings/fields", headers=ADMIN).json()}
+    assert len(admin_specs["brand"]["options"]) > 50

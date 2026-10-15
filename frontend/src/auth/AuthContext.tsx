@@ -36,6 +36,11 @@ export interface SiteAuth {
   isLoading: boolean
   error: string | null
   isAdmin: boolean
+  /** May this person change gear of this brand — an admin, or one of its
+   *  manufacturers (phase 5)? The API decides again on every save. */
+  canEditBrand: (brandName: string | null | undefined) => boolean
+  /** Has this person any editing rights at all (admin, or any brand)? */
+  canEditAny: boolean
   /** Sign in, then come back to `returnTo` (default: this page). */
   signIn: (returnTo?: string) => void
   signOut: () => void
@@ -213,6 +218,9 @@ export function SiteAuthProvider({ children }: { children: ReactNode }) {
           ? 'Sign-in is not configured for this deployment. VITE_ISA_AUTHORITY and VITE_ISA_CLIENT_ID must be set at build time.'
           : (isa.error ?? meError),
       isAdmin: Boolean(me?.roles.includes('admin')),
+      canEditBrand: (brandName: string | null | undefined) =>
+        Boolean(me?.roles.includes('admin')) || Boolean(brandName && me?.brands?.some(b => b.name === brandName)),
+      canEditAny: Boolean(me?.roles.includes('admin')) || Boolean(me?.brands?.length),
       signIn,
       signOut,
       acknowledgeNotice: acknowledge,

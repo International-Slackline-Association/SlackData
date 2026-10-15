@@ -27,6 +27,7 @@ const AdminPage = lazy(() => import('@/pages/AdminPage'))
 // most visitors take, so they load on demand too.
 const ChangesPage = lazy(() => import('@/pages/ChangesPage'))
 const ContributionsPage = lazy(() => import('@/pages/ContributionsPage'))
+const AccountBrandsPage = lazy(() => import('@/pages/AccountBrandsPage'))
 
 export default function App() {
   return (
@@ -83,6 +84,14 @@ export default function App() {
               element={
                 <Suspense fallback={null}>
                   <ContributionsPage />
+                </Suspense>
+              }
+            />
+            <Route
+              path="account/brands"
+              element={
+                <Suspense fallback={null}>
+                  <AccountBrandsPage />
                 </Suspense>
               }
             />
