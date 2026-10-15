@@ -33,6 +33,12 @@ it to a real field is a model change (D35).
 has the item to point at, but no row is built from it (LIVE_EDITING_PHASE_3.md
 § 5.4).
 
+**`photos`** and **`manuals`** are the item's media (LIVE_EDITING_PHASE_4.md,
+P4-B): `[{"id", "small", "large"}]` and `[{"id", "file", "title"}]`, each path
+a key under `/media/`. They are data the site reads through `GET
+/media/manifest`, not columns, so no row carries them; they change only through
+the media route (slack_data/media/edits.py), which checks every file it adds.
+
 One field is stored differently from the model: webbing `stretch` is a list of
 `{kn, percent}` readings in the seed and a JSON string on the model, which is
 what the frontend parses. `JSON_TEXT_FIELDS` holds that one translation.
@@ -75,7 +81,11 @@ DERIVED_FIELDS = frozenset({"isa_warning", "isa_certified", "isa_certificate", "
 UNMODELLED_KEY = "unmodelled"
 # An entry carrying it is not built into the catalogue.
 MERGED_KEY = "merged_into"
-ENVELOPE_KEYS = frozenset({"id", "brand", UNMODELLED_KEY, MERGED_KEY})
+# An item's media: read by the media manifest, never built into a row.
+PHOTOS_KEY = "photos"
+MANUALS_KEY = "manuals"
+MEDIA_KEYS = (PHOTOS_KEY, MANUALS_KEY)
+ENVELOPE_KEYS = frozenset({"id", "brand", UNMODELLED_KEY, MERGED_KEY, *MEDIA_KEYS})
 
 
 def is_listed(entry: dict) -> bool:
