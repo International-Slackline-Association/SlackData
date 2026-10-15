@@ -4,10 +4,9 @@ phase 6 opens the item routes to every signed-in ISA account with a rate cap.
 
 | route | does |
 |---|---|
-| `GET /edit/{slug}/{id}` | the stored entry and its `rev`, hidden or merged ones included |
+| `GET /edit/{slug}/{id}` | the stored entry and its `rev`, merged ones included |
 | `PATCH /edit/{slug}/{id}` | set fields (`{rev, changes, why?}`); null clears one |
 | `POST /edit/{slug}` | create (`{fields, why?}`) |
-| `POST /edit/{slug}/{id}/hide` · `/unhide` | `{rev, why}` — why required to hide |
 | `POST /edit/{slug}/{id}/merge` | `{rev, into, why}` — a detailed why required (D20) |
 | `POST /edit/revert/{record_id}` | undo one recorded edit, field by field (D58) |
 | `GET` · `PATCH /edit/brand/{catalog_id}`, `POST /edit/brand` | a brand's entry, never its name (P3-G) |
@@ -67,16 +66,6 @@ class ItemEdit(BaseModel):
 
 class ItemCreate(BaseModel):
     fields: dict[str, Any]
-    why: Why = None
-
-
-class Hide(BaseModel):
-    rev: int
-    why: Annotated[str, Field(max_length=MAX_WHY_LENGTH)]
-
-
-class Unhide(BaseModel):
-    rev: int
     why: Why = None
 
 
@@ -239,16 +228,6 @@ def edit_item(slug: str, item_id: ItemId, body: ItemEdit, admin: CurrentAdmin, s
 @edit_router.post("/{slug}", response_model=EditResult, status_code=201)
 def create_item(slug: str, body: ItemCreate, admin: CurrentAdmin, store: StoreDep, log: ChangeLogRepositoryDep):
     return _run(store, slug, None, lambda: edits.create_item(store, log, admin, slug, body.fields, body.why))
-
-
-@edit_router.post("/{slug}/{item_id}/hide", response_model=EditResult)
-def hide_item(slug: str, item_id: ItemId, body: Hide, admin: CurrentAdmin, store: StoreDep, log: ChangeLogRepositoryDep):
-    return _run(store, slug, str(item_id), lambda: edits.hide_item(store, log, admin, slug, item_id, body.rev, body.why))
-
-
-@edit_router.post("/{slug}/{item_id}/unhide", response_model=EditResult)
-def unhide_item(slug: str, item_id: ItemId, body: Unhide, admin: CurrentAdmin, store: StoreDep, log: ChangeLogRepositoryDep):
-    return _run(store, slug, str(item_id), lambda: edits.unhide_item(store, log, admin, slug, item_id, body.rev, body.why))
 
 
 @edit_router.post("/{slug}/{item_id}/merge", response_model=EditResult)

@@ -28,11 +28,10 @@ and four roller dimensions. It is kept verbatim so the conversion lost nothing,
 is never loaded or edited, and goes out with the export. Promoting a value from
 it to a real field is a model change (D35).
 
-**`hidden` and `merged_into`** mark an entry that is not in the catalogue: hidden
-by an admin (`"hidden": true`), or a duplicate merged into another item
-(`"merged_into": <id>`). They are kept in the seed, so the export carries them
-and an unhide or a merged link still has the item to point at, but no row is
-built from them (LIVE_EDITING_PHASE_3.md § 5.4).
+**`merged_into`** marks a duplicate merged into another item (`"merged_into":
+<id>`). It is kept in the seed, so the export carries it and a link to it still
+has the item to point at, but no row is built from it (LIVE_EDITING_PHASE_3.md
+§ 5.4).
 
 One field is stored differently from the model: webbing `stretch` is a list of
 `{kn, percent}` readings in the seed and a JSON string on the model, which is
@@ -74,15 +73,14 @@ DERIVED_FIELDS = frozenset({"isa_warning", "isa_certified", "isa_certificate", "
 
 # Kept verbatim, never loaded (see the module docstring).
 UNMODELLED_KEY = "unmodelled"
-# An entry carrying either is not built into the catalogue.
-HIDDEN_KEY = "hidden"
+# An entry carrying it is not built into the catalogue.
 MERGED_KEY = "merged_into"
-ENVELOPE_KEYS = frozenset({"id", "brand", UNMODELLED_KEY, HIDDEN_KEY, MERGED_KEY})
+ENVELOPE_KEYS = frozenset({"id", "brand", UNMODELLED_KEY, MERGED_KEY})
 
 
 def is_listed(entry: dict) -> bool:
-    """False for a hidden entry or a merged duplicate."""
-    return not entry.get(HIDDEN_KEY) and entry.get(MERGED_KEY) is None
+    """False for a merged duplicate."""
+    return entry.get(MERGED_KEY) is None
 
 # Stored as JSON in the seed, as a JSON string on the model.
 JSON_TEXT_FIELDS: dict[str, frozenset[str]] = {"webbings": frozenset({"stretch"})}

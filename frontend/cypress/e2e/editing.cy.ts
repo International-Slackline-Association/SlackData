@@ -54,7 +54,7 @@ describe('Live editing', () => {
 
       cy.visit(`/grips/${id}`, signedIn())
       cy.getByData('item-edit').should('be.visible')
-      cy.getByData('item-hide').should('be.visible')
+      cy.getByData('item-hide').should('not.exist')
       cy.getByData('item-merge').should('be.visible')
       // The create is the first entry in its History.
       cy.getByData('change-row').first().should('have.attr', 'data-action', 'item.create')
@@ -153,27 +153,6 @@ describe('Live editing', () => {
       cy.getByData('revert-dialog').should('not.exist')
       cy.getByData('change-row').first().should('have.attr', 'data-action', 'item.revert')
       cy.request({ url: `${api()}/edit/grips/${id}`, headers: AUTH }).its('body.entry').should('not.have.property', 'mbs')
-    })
-  })
-
-  it('hides an item with a reason, says so on its page, and unhides it', () => {
-    newGrip(unique('Grip To Hide')).then(id => {
-      cy.visit(`/grips/${id}`, signedIn())
-      cy.getByData('item-hide').click()
-      cy.getByData('dialog-confirm').should('be.disabled')
-      cy.getByData('dialog-why').type('a test entry')
-      cy.getByData('dialog-confirm').click()
-      cy.getByData('hidden-item').should('be.visible')
-      cy.getByData('hidden-reason').should('contain', 'a test entry')
-
-      cy.visit(`/grips/${id}`, signedOut())
-      cy.getByData('hidden-item').should('be.visible')
-      cy.getByData('item-unhide').should('not.exist')
-
-      cy.visit(`/grips/${id}`, signedIn())
-      cy.getByData('item-unhide').click()
-      cy.getByData('dialog-confirm').click()
-      cy.getByData('gear-detail').should('be.visible')
     })
   })
 

@@ -97,8 +97,8 @@ def crud_router(
         if not item:
             from slack_data.catalogue.unlisted import unlisted
 
-            # A hidden item or a merged duplicate says so (LIVE_EDITING_PHASE_3.md
-            # § 5.4), so a bookmark explains itself; anything else is a plain miss.
+            # A merged duplicate says where it went (LIVE_EDITING_PHASE_3.md § 5.4),
+            # so a bookmark explains itself; anything else is a plain miss.
             reason = unlisted(f"{prefix}s", item_id)
             if reason is not None:
                 raise HTTPException(status_code=404, detail={"message": f"{label} {item_id} is not listed", **reason})

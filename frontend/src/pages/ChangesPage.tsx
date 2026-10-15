@@ -15,7 +15,6 @@ const KINDS: { value: string; label: string; match: (r: ChangeRecordPublic) => b
   { value: '', label: 'All kinds', match: () => true },
   { value: 'edit', label: 'Edits', match: r => r.action === 'item.edit' || r.action === 'brand.edit' },
   { value: 'create', label: 'New items and brands', match: r => r.action === 'item.create' || r.action === 'brand.create' },
-  { value: 'hide', label: 'Hides', match: r => r.action === 'item.hide' || r.action === 'item.unhide' },
   { value: 'merge', label: 'Merges', match: r => r.action === 'item.merge' },
   { value: 'revert', label: 'Reverts', match: r => r.action === 'item.revert' },
   { value: 'roles', label: 'Roles', match: r => r.target_type === 'person' },

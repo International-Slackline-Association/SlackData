@@ -44,9 +44,8 @@ export interface EditConflict {
   rev: number | null
 }
 
-/** Why a gear id answers 404: hidden by an admin, or merged into another. */
+/** Why a gear id answers 404: merged into another. */
 export interface Unlisted {
   message: string
-  hidden?: boolean
   merged_into?: number
 }

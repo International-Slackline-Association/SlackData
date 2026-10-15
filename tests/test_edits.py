@@ -10,7 +10,7 @@ cases are real recalls and certificates. What must hold:
   found while planning (§ 3, hazard 2): the loaders verify `"<brand> <name>"`.
 - **Every change is in the public log**, with the safety flag on MBS fields.
 - **A stale edit is refused with the current entry** (D27).
-- **Hide, merge and revert** behave as § 5 says.
+- **Merge and revert** behave as § 5 says. There is no hiding (D81).
 """
 
 import contextlib
@@ -206,21 +206,15 @@ def test_create_takes_the_next_id_and_is_built(client, store):
     assert int(second.json()["key"]) == new_id + 1
 
 
-# --- Hide, merge ----------------------------------------------------------------------
+# --- Merge (hiding is not a feature: D81) ----------------------------------------------
 
 
-def test_hide_needs_a_reason_and_takes_the_item_out(client, store):
+@pytest.mark.parametrize("action", ["hide", "unhide"])
+def test_an_item_cannot_be_hidden(client, store, action):
     rev = stored(client, "grips", 2)["rev"]
-    assert client.post("/edit/grips/2/hide", headers=ADMIN, json={"rev": rev, "why": " "}).status_code == 422
-    assert client.post("/edit/grips/2/hide", headers=ADMIN, json={"rev": rev, "why": "spam entry"}).status_code == 200
-    from slack_data.models.grips import Grip
-
-    with Session(built(store)) as session:
-        assert session.get(Grip, 2) is None
-    rev = stored(client, "grips", 2)["rev"]
-    assert client.post("/edit/grips/2/unhide", headers=ADMIN, json={"rev": rev}).status_code == 200
-    with Session(built(store)) as session:
-        assert session.get(Grip, 2) is not None
+    response = client.post(f"/edit/grips/2/{action}", headers=ADMIN, json={"rev": rev, "why": "spam entry"})
+    assert response.status_code in (404, 405)
+    assert "hidden" not in stored(client, "grips", 2)["entry"]
 
 
 def test_a_merge_needs_a_detailed_reason(client, store):
@@ -233,7 +227,7 @@ def test_a_merge_moves_the_recall_to_the_survivor(client, store):
     webbing_id, _ = warned_webbing(store)
     survivor = next(
         int(d.key) for d in store.load()
-        if d.collection == "webbings" and d.key != str(webbing_id) and not d.data.get("hidden")
+        if d.collection == "webbings" and d.key != str(webbing_id)
     )
     rev = stored(client, "webbings", webbing_id)["rev"]
     response = client.post(
@@ -277,7 +271,9 @@ def test_a_revert_skips_a_field_that_moved_on(client, store):
 
 def test_only_an_edit_can_be_reverted(client, store):
     rev = stored(client, "grips", 2)["rev"]
-    record_id = client.post("/edit/grips/2/hide", headers=ADMIN, json={"rev": rev, "why": "x"}).json()["records"][0]
+    record_id = client.post(
+        "/edit/grips/2/merge", headers=ADMIN, json={"rev": rev, "into": 4, "why": "x" * 40}
+    ).json()["records"][0]
     assert client.post(f"/edit/revert/{record_id}", headers=ADMIN, json={}).status_code == 409
 
 

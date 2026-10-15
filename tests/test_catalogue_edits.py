@@ -177,10 +177,10 @@ def test_sqlite_reads_a_store_from_before_revs(tmp_path):
     assert SqliteCatalogueRepository(str(path)).get("grips", "1").rev == 1
 
 
-# --- hidden and merged entries are kept, not built -----------------------------
+# --- merged entries are kept, not built ---------------------------------------
 
 
-def test_hidden_and_merged_entries_are_not_loaded(session):
+def test_merged_entries_are_not_loaded(session):
     from sqlmodel import select
 
     from slack_data.load_data._seed_io import read_seed_json, seed_sources
@@ -190,7 +190,6 @@ def test_hidden_and_merged_entries_are_not_loaded(session):
     base = {"brand": "Gibbon", "material": "Aluminum", "width_min": 25}
     entries = [
         {"id": 1, "name": "Shown", **base},
-        {"id": 2, "name": "Hidden", **base, "hidden": True},
         {"id": 3, "name": "Merged", **base, "merged_into": 1},
     ]
     with seed_sources({"manufacturers.json": read_seed_json("manufacturers.json"), "grips.json": entries}):

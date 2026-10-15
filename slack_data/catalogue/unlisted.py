@@ -1,10 +1,10 @@
 """
-Why an item id answers 404: hidden, or merged into another (P3-D, P3-E).
+Why an item id answers 404: merged into another (P3-E).
 
-A hidden entry and a merged duplicate stay in the seed (`load_gear.is_listed`)
-but no row is built from them, so the gear routes miss them like any unknown
-id. This tells the 404 which it is, so a bookmark explains itself: the page
-says who hid it and why (from the public log), or goes to the survivor.
+A merged duplicate stays in the seed (`load_gear.is_listed`) but no row is
+built from it, so the gear routes miss it like any unknown id. This tells the
+404 where it went, so a bookmark explains itself and the site goes to the
+survivor. (Hiding an item was dropped: D81.)
 
 | mode | where the entry is read |
 |---|---|
@@ -15,19 +15,17 @@ says who hid it and why (from the public log), or goes to the survivor.
 
 from typing import Any
 
-from slack_data.load_data.load_gear import GEAR, HIDDEN_KEY, MERGED_KEY, is_listed
+from slack_data.load_data.load_gear import GEAR, MERGED_KEY, is_listed
 
 
 def unlisted(collection: str, item_id: int) -> dict[str, Any] | None:
-    """{"hidden": True} or {"merged_into": N} for an unlisted entry, else None."""
+    """{"merged_into": N} for a merged duplicate, else None."""
     if collection not in GEAR:
         return None
     entry = _entry(collection, item_id)
     if entry is None or is_listed(entry):
         return None
-    if entry.get(MERGED_KEY) is not None:
-        return {"merged_into": entry[MERGED_KEY]}
-    return {HIDDEN_KEY: True}
+    return {"merged_into": entry[MERGED_KEY]}
 
 
 def _entry(collection: str, item_id: int) -> dict | None:

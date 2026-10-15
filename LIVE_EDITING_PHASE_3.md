@@ -1,7 +1,7 @@
 # Live editing — Phase 3 (plan)
 
 Phase 3 of [LIVE_EDITING_PLAN.md](LIVE_EDITING_PLAN.md) (§ 13): **live editing for admins**, plus
-History, Recent Changes, feeds, revert, hide and duplicate merge.
+History, Recent Changes, feeds, revert and duplicate merge. (Hide was built, then dropped: D81.)
 
 **Done when:** admins edit the catalogue without a developer.
 
@@ -35,7 +35,7 @@ building it found; § 7 is the rollout.
 |---|---|
 | **Edit** | An admin edits any field of any product, except the ISA's statements (§ 9 of the plan, phase 7). Edits take effect on the next request |
 | **Create** | An admin adds a product (D26 ids). Brand creation: P3-G |
-| **Hide / unhide** | Admin only. Kept, logged, reversible, absent from listings (§ 5.3) |
+| ~~**Hide / unhide**~~ | **Dropped 2026-10-15 (D81)** — removed from the API and the site after it was built |
 | **Merge a duplicate** | Admin only, with a mandatory explanation. The removed id points to the survivor, and ISA matches are re-pointed (§ 7.7) |
 | **Revert** | Admin only for now; manufacturers revert their own gear in phase 5 (D58). A revert is a new change, refused per field if the field moved on (D27) |
 | **History** | On every item page: each change with its diff, who, when, how and why |
@@ -159,6 +159,8 @@ Recommendation: profile in step 1. If the build still exceeds ~1.5 s after (a), 
 
 ### P3-D What a hidden item's URL shows
 
+> Moot since D81: there is no hiding.
+
 | Option | For | Against |
 |---|---|---|
 | **(a) A public "hidden" page: who, when and why, with History; absent from listings, search and compare** *(recommended)* | Transparent, as the log is public. A bookmark explains itself | One new page state |
@@ -273,7 +275,7 @@ Hosted, it is one `TransactWriteItems` (no new permission, D28):
 | `GET /edit/{slug}/{id}` | — | The stored document and its `rev`, including a hidden item (admins) |
 | `PATCH /edit/{slug}/{id}` | `{rev, changes: {field: value}, why?}` | Validated against `<X>Update` and the field policy. A rename also re-points ISA `gearNames` (P3-B) |
 | `POST /edit/{slug}` | `{fields, why?}` | Create, validated against `<X>Create` |
-| `POST /edit/{slug}/{id}/hide` · `/unhide` | `{rev, why}` | Why is mandatory for a hide |
+| ~~`POST /edit/{slug}/{id}/hide` · `/unhide`~~ | — | Removed (D81) |
 | `POST /edit/{slug}/{id}/merge` | `{rev, into, into_rev, why}` | Why is mandatory, with a minimum length. The source becomes a marker and its ISA matches move |
 | `POST /changes/{record_id}/revert` | `{why?}` | Per-field check against the record's `after` |
 | `PATCH /edit/brand/{name}` · `POST /edit/brand` | as above | P3-G (a): every field except the name |

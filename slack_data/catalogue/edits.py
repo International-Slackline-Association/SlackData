@@ -11,7 +11,6 @@ next request sees the new version and rebuilds (D30).
 |---|---|
 | `edit_item` | the item; on a rename, every ISA match that names it (P3-B) |
 | `create_item` | a new item, with the next id of its type (D26) |
-| `hide_item` / `unhide_item` | `"hidden": true` on the entry, or its removal (§ 5.3) |
 | `merge_item` | `"merged_into": <id>` on the duplicate; its ISA matches move to the survivor (D20) |
 | `revert` | the earlier values of one recorded edit, field by field (D58) |
 | `edit_brand` / `create_brand` | a `manufacturers.json` entry — never its name (P3-G) |
@@ -33,7 +32,6 @@ from slack_data.changelog.writer import commit_catalogue_change, next_id
 from slack_data.load_data.load_gear import (
     DERIVED_FIELDS,
     GEAR,
-    HIDDEN_KEY,
     MERGED_KEY,
     UNMODELLED_KEY,
     UnknownField,
@@ -187,15 +185,14 @@ def canonical(collection: str, entry: dict, brands: set[str]) -> dict:
     except ValidationError as error:
         raise Invalid("the item does not validate", _errors(error)) from error
     result = to_entry(collection, row, brand, entry.get(UNMODELLED_KEY))
-    for key in (HIDDEN_KEY, MERGED_KEY):
-        if key in entry:
-            result[key] = entry[key]
+    if MERGED_KEY in entry:
+        result[MERGED_KEY] = entry[MERGED_KEY]
     return result
 
 
 def _check_fields(collection: str, names: Iterable[str]) -> None:
     forbidden = sorted(
-        n for n in names if n in {"id", UNMODELLED_KEY, HIDDEN_KEY, MERGED_KEY} | DERIVED_FIELDS
+        n for n in names if n in {"id", UNMODELLED_KEY, MERGED_KEY} | DERIVED_FIELDS
     )
     if forbidden:
         raise Invalid(
@@ -382,51 +379,6 @@ def create_item(
     return Outcome(collection, document.key, entry, 1, [record])
 
 
-def _set_envelope(
-    store, log, actor, collection, item_id, rev, key, value, action, why, channel=Channel.WEB
-) -> Outcome:
-    documents = store.load()
-    document = _item(documents, collection, item_id)
-    data = dict(document.data)
-    before = data.get(key)
-    if value is None:
-        data.pop(key, None)
-    else:
-        data[key] = value
-    record = _record(
-        actor,
-        TargetType.ITEM,
-        item_target(collection, item_id),
-        action,
-        channel=channel,
-        changes={key: FieldChange(before=before, after=value)},
-        why=why,
-    )
-    put = Put(document.model_copy(update={"data": data, "rev": document.rev + 1}), rev)
-    commit_catalogue_change(store, log, [put], [], [record])
-    return Outcome(collection, document.key, data, document.rev + 1, [record])
-
-
-def hide_item(store, log, actor: Person, collection: str, item_id: int, rev: int, why: str) -> Outcome:
-    """Out of the listings, kept and reversible (§ 5.3). Admin only; a reason
-    is required, because the hide is public and permanent in the log."""
-    if not (why or "").strip():
-        raise Invalid("say why it is hidden", [{"field": "why", "message": "required"}])
-    document = _item(store.load(), collection, item_id)
-    if document.data.get(MERGED_KEY) is not None:
-        raise Refused(f"{api_type(collection)} {item_id} was merged; it is not listed anyway")
-    if document.data.get(HIDDEN_KEY):
-        raise Refused(f"{api_type(collection)} {item_id} is already hidden")
-    return _set_envelope(store, log, actor, collection, item_id, rev, HIDDEN_KEY, True, Action.ITEM_HIDE, why)
-
-
-def unhide_item(store, log, actor: Person, collection: str, item_id: int, rev: int, why: str | None = None) -> Outcome:
-    document = _item(store.load(), collection, item_id)
-    if not document.data.get(HIDDEN_KEY):
-        raise Refused(f"{api_type(collection)} {item_id} is not hidden")
-    return _set_envelope(store, log, actor, collection, item_id, rev, HIDDEN_KEY, None, Action.ITEM_UNHIDE, why)
-
-
 def merge_item(
     store, log, actor: Person, collection: str, item_id: int, rev: int, into: int, why: str
 ) -> Outcome:
@@ -445,7 +397,7 @@ def merge_item(
     survivor = _item(documents, collection, into)
     if source.data.get(MERGED_KEY) is not None:
         raise Refused(f"{api_type(collection)} {item_id} is already merged")
-    if survivor.data.get(MERGED_KEY) is not None or survivor.data.get(HIDDEN_KEY):
+    if survivor.data.get(MERGED_KEY) is not None:
         raise Refused(f"{api_type(collection)} {into} is not listed — merge into a listed item")
 
     data = {**source.data, MERGED_KEY: into}
@@ -477,8 +429,8 @@ def revert(store, log, actor: Person, record_id: str, why: str | None = None) ->
         raise NotFound(f"no change {record_id}")
     if record.target_type is not TargetType.ITEM or record.action not in (Action.ITEM_EDIT, Action.ITEM_REVERT):
         raise Refused(
-            "only an edit can be reverted — a hide is undone by unhiding, a create by hiding, "
-            "a merge by a developer"
+            "only an edit can be reverted — a create is undone by merging the item into the one it "
+            "duplicates, a merge by a developer"
         )
     collection, _, raw_id = record.target_id.partition("#")
     item_id = int(raw_id)

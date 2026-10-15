@@ -214,6 +214,10 @@ exactly as the seed does now, and serves it through today's SQLModel models and 
 
 ### 5.3 Hiding, and deleting duplicates (D20)
 
+> **Hiding was dropped on 2026-10-15 (D81)**, after phase 3 built it: there is no hide. A product
+> that is no longer sold is marked historic; a duplicate, or a product created by mistake, is merged.
+> The rest of this section is kept as it was decided.
+
 - **Nothing is deleted.** A product that should leave the catalogue is **hidden**: kept, logged,
   reversible, absent from listings. A discontinued product is not hidden — it is marked historic
   (`active: false`), which the site already shows. **Only admins may hide** (D40, D55).
@@ -744,11 +748,12 @@ kept.
 | D72 | What a stored item is (P3-A) | **The model's own vocabulary**: seeds converted once, one generic loader; what no model field held is kept under `unmodelled` | Seed shape + per-type codecs; an overlay of edits |
 | D73 | Renames and ISA matches (P3-B) | **A rename re-points the matches in the same transaction**; a skipped match is an error, counted, held to zero at deploy | Matching by id only; refusing renames of matched items |
 | D74 | Rebuild latency (P3-C) | **Profile, then Lambda memory** if needed; an incremental rebuild only if phase 6 needs it | Building in the background (Lambda freezes it) |
-| D75 | A hidden item's URL (P3-D) | **A public page saying who hid it, when and why**, with its History | A plain 404 |
+| D75 | A hidden item's URL (P3-D) — *superseded by D81* | **A public page saying who hid it, when and why**, with its History | A plain 404 |
 | D76 | A merged item's URL (P3-E) | **404 naming the survivor**; the site redirects | HTTP 308 (a replayed write would follow it) |
 | D77 | Admins' field scope (P3-F) | **Every field but the ISA's four statements**, `gear_sellers` and `product_group` included | The suggestion box's list |
 | D78 | Brands in phase 3 (P3-G) | **Edit every field but the name; create brands**; renames wait | Renames now, non-atomically; products only |
 | D79 | Creating products (P3-I) | **Yes, admins, with per-type id counters** that never reuse an id | Waiting for phase 6 |
+| D81 | Hiding an item (supersedes D75 and the hide in § 5.3) | **Not a feature.** No hide or unhide, in the API or on the site. A product no longer sold is marked historic (`active: false`); a duplicate or a mistaken creation is merged into the item it duplicates. Staging's log keeps its two test records readable | Hide/unhide for admins, as built in phase 3 |
 | D80 | Approved suggestions (P3-H) | **Triage stays as it is until phase 6**: an approved suggestion is still a JSON patch, applied by hand | "Apply as edit" in triage |
 
 P3-H was decided as option (b): from phase 6 everyone edits, and

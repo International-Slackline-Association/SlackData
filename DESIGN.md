@@ -1608,9 +1608,11 @@ LIVE_EDITING_PHASE_3.md § 5.6. Admin-only controls render nothing for anyone el
 the same (`/edit/*` takes `require_admin`).
 
 - **The edit form is generated, never hand-listed.** `GET /edit/{slug}/fields` describes every
-  editable field — its kind (`text`, `longtext`, `number`, `integer`, `boolean`, `choice`,
+  editable field — its kind (`text`, `longtext`, `number`, `integer`, `date`, `boolean`, `choice`,
   `choices`, `list`, `curve`), allowed values and whether it is required — from the model. One
-  input per kind (`components/edit/FieldInput.tsx`); a stretch curve is typed as "kN percent" lines.
+  input per kind (`components/edit/FieldInput.tsx`); a stretch curve is typed as "kN percent" lines,
+  and a release date is a date picker (stored as Unix ms; a stored value shows as its nearest UTC
+  midnight, and an untouched date is never a change).
 - **Only what changed is sent**, a cleared field as null, with a before → after preview above an
   optional, public "why". `data-cy`: `item-edit`, `entry-editor`, `edit-field-<name>`,
   `edit-preview-row`, `edit-why`, `edit-save`.

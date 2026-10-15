@@ -35,14 +35,6 @@ export function createItem(
   return postJson<EditResult>(`/edit/${slug}`, { fields, why }, token)
 }
 
-export function hideItem(slug: string, id: number | string, rev: number, why: string, token: string) {
-  return postJson<EditResult>(`/edit/${slug}/${id}/hide`, { rev, why }, token)
-}
-
-export function unhideItem(slug: string, id: number | string, rev: number, why: string | null, token: string) {
-  return postJson<EditResult>(`/edit/${slug}/${id}/unhide`, { rev, why }, token)
-}
-
 export function mergeItem(
   slug: string,
   id: number | string,

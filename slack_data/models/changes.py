@@ -61,6 +61,8 @@ class Action(str, Enum):
     ROLE_REVOKE = "role.revoke"
     ITEM_CREATE = "item.create"
     ITEM_EDIT = "item.edit"
+    # Hiding was dropped (D81) and these are never written now; staging's
+    # append-only log holds one of each from testing, so they stay readable.
     ITEM_HIDE = "item.hide"
     ITEM_UNHIDE = "item.unhide"
     ITEM_MERGE = "item.merge"

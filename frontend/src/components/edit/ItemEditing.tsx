@@ -1,5 +1,5 @@
 // Under a gear item's spec sheet: its History, public to everyone, and for an
-// admin the editing actions — Edit, Hide / Unhide, Merge into…, and Revert on
+// admin the editing actions — Edit, Merge into…, and Revert on
 // any edit in the History (LIVE_EDITING_PHASE_3.md § 5.6).
 //
 // Every action writes through the API and then asks the page to reload the
@@ -7,7 +7,7 @@
 
 import { useCallback, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { editItem, fetchFields, fetchStored, hideItem, mergeItem, revertChange, unhideItem } from '@/api/edits'
+import { editItem, fetchFields, fetchStored, mergeItem, revertChange } from '@/api/edits'
 import { fetchGearItem } from '@/api/gear'
 import { fetchChanges } from '@/api/people'
 import { useSiteAuth } from '@/auth/AuthContext'
@@ -18,7 +18,7 @@ import Modal from './Modal'
 
 const MIN_MERGE_WHY = 30
 
-type Dialog = null | 'edit' | 'hide' | 'unhide' | 'merge' | { revert: ChangeRecordPublic }
+type Dialog = null | 'edit' | 'merge' | { revert: ChangeRecordPublic }
 
 const BUTTON =
   'cursor-pointer rounded-full border border-gray-300 px-3 py-1.5 text-xs font-medium text-gray-700 hover:border-teal-600 hover:text-teal-700'
@@ -26,13 +26,10 @@ const BUTTON =
 export default function ItemEditing({
   slug,
   id,
-  hidden = false,
   onChanged,
 }: {
   slug: string
   id: string | number
-  /** The item is hidden: offer Unhide instead of Edit / Hide / Merge. */
-  hidden?: boolean
   onChanged: () => void
 }) {
   const auth = useSiteAuth()
@@ -58,23 +55,15 @@ export default function ItemEditing({
     <section data-cy="item-editing" className="mt-4 rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
       <div className="flex flex-wrap items-center gap-2">
         <h2 className="mr-auto text-base font-semibold text-gray-900">History</h2>
-        {auth.isAdmin && token && !hidden && (
+        {auth.isAdmin && token && (
           <>
             <button type="button" data-cy="item-edit" className={BUTTON} onClick={() => setDialog('edit')}>
               Edit
-            </button>
-            <button type="button" data-cy="item-hide" className={BUTTON} onClick={() => setDialog('hide')}>
-              Hide
             </button>
             <button type="button" data-cy="item-merge" className={BUTTON} onClick={() => setDialog('merge')}>
               Merge into…
             </button>
           </>
-        )}
-        {auth.isAdmin && token && hidden && (
-          <button type="button" data-cy="item-unhide" className={BUTTON} onClick={() => setDialog('unhide')}>
-            Unhide
-          </button>
         )}
       </div>
       <p className="mt-1 text-xs text-gray-500">
@@ -105,9 +94,6 @@ export default function ItemEditing({
           onClose={() => setDialog(null)}
           onSaved={done}
         />
-      )}
-      {token && (dialog === 'hide' || dialog === 'unhide') && (
-        <HideDialog slug={slug} id={id} token={token} unhide={dialog === 'unhide'} onClose={() => setDialog(null)} onDone={done} />
       )}
       {token && dialog === 'merge' && (
         <MergeDialog slug={slug} id={id} token={token} onClose={() => setDialog(null)} onDone={done} />
@@ -175,51 +161,6 @@ function useAction(onDone: () => void) {
 }
 
 const TEXTAREA = 'w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-teal-700 focus:outline-none'
-
-function HideDialog({
-  slug,
-  id,
-  token,
-  unhide,
-  onClose,
-  onDone,
-}: {
-  slug: string
-  id: string | number
-  token: string
-  unhide: boolean
-  onClose: () => void
-  onDone: () => void
-}) {
-  const [why, setWhy] = useState('')
-  const { busy, error, run } = useAction(onDone)
-  const submit = () =>
-    run(async () => {
-      const { rev } = await fetchStored(slug, id, token)
-      return unhide ? unhideItem(slug, id, rev, why.trim() || null, token) : hideItem(slug, id, rev, why.trim(), token)
-    })
-  return (
-    <Modal title={unhide ? 'Unhide item' : 'Hide item'} onClose={onClose} data-cy="hide-dialog">
-      <form
-        onSubmit={event => {
-          event.preventDefault()
-          void submit()
-        }}
-      >
-        <p className="text-sm text-gray-600">
-          {unhide
-            ? 'The item goes back into the listings, search and compare.'
-            : 'The item leaves the listings, search and compare. It is kept, and its page says it was hidden, by whom and why. Mark a discontinued product historic instead: hide spam, mistakes and things that are not slackline gear.'}
-        </p>
-        <label className="mt-3 mb-1 block text-xs font-medium text-gray-700">
-          Why{unhide ? ' (optional)' : ' *'}
-          <textarea data-cy="dialog-why" rows={3} value={why} onChange={e => setWhy(e.target.value)} className={TEXTAREA} />
-        </label>
-        <Footer busy={busy} disabled={!unhide && !why.trim()} label={unhide ? 'Unhide' : 'Hide'} onClose={onClose} error={error} />
-      </form>
-    </Modal>
-  )
-}
 
 function MergeDialog({
   slug,

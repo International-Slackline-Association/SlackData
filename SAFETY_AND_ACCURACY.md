@@ -91,7 +91,7 @@ notice, so the footer — which every listing page carries — is enough.)
 ### B2. Who can change what (live editing, phase 3)
 
 Since phase 3, **admins** (the project owner and named SafeCom members) change the catalogue on the
-site, live. Every change — an edit, a new product, a hide, a merge, a revert — is recorded with who
+site, live. Every change — an edit, a new product, a merge, a revert — is recorded with who
 made it, when, the role they held, each field's value before and after, and their reason when they
 gave one. The record is public (`/changes`, every item's History, two Atom feeds) and permanent,
 and a copy is exported daily outside AWS. Any change to a breaking strength is flagged and appears
