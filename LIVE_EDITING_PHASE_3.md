@@ -6,7 +6,7 @@ History, Recent Changes, feeds, revert, hide and duplicate merge.
 **Done when:** admins edit the catalogue without a developer.
 
 **Status (2026-10-13): decided, building** on `live-editing/3-admin-editing`. The operator approved
-every recommendation in § 4 except P3-H, which is dropped. Gate item 3 (0–2 merged, prod switched
+every recommendation in § 4, and option (b) for P3-H (D80). Gate item 3 (0–2 merged, prod switched
 over) is not met yet: the build goes ahead on the stacked branch, and **ships only after it is**.
 
 **Progress:** built and tested — 3a (data layer), 3b (routes), 3c (frontend). § 6 says what
@@ -117,8 +117,9 @@ These shape the decisions in § 4.
 ## 4. Decisions — decided 2026-10-13
 
 **Every recommended option was chosen**: P3-A (b), P3-B (a), P3-C (a) then (b) in phase 6 if needed,
-P3-D (a), P3-E (a), P3-F (a), P3-G (a), P3-I (a). **P3-H is dropped**: from phase 6 everyone edits,
-so an "apply as edit" button would serve the box only for its last months. Until then **the rule
+P3-D (a), P3-E (a), P3-F (a), P3-G (a), P3-I (a). **P3-H: option (b)**, chosen by the operator on
+2026-10-15 (D80) — triage stays as it is until phase 6: from then everyone edits, so an "apply as
+edit" button would serve the box only for its last months. Until then **the rule
 stands**: what the site cannot edit (photos, manuals, anything a suggestion asks for) goes through
 the suggestion box or a developer, applied by hand.
 

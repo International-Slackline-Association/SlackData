@@ -749,7 +749,8 @@ kept.
 | D77 | Admins' field scope (P3-F) | **Every field but the ISA's four statements**, `gear_sellers` and `product_group` included | The suggestion box's list |
 | D78 | Brands in phase 3 (P3-G) | **Edit every field but the name; create brands**; renames wait | Renames now, non-atomically; products only |
 | D79 | Creating products (P3-I) | **Yes, admins, with per-type id counters** that never reuse an id | Waiting for phase 6 |
+| D80 | Approved suggestions (P3-H) | **Triage stays as it is until phase 6**: an approved suggestion is still a JSON patch, applied by hand | "Apply as edit" in triage |
 
-P3-H ("apply as edit" on approved suggestions) was **dropped**: from phase 6 everyone edits, and
+P3-H was decided as option (b): from phase 6 everyone edits, and
 until then what the site cannot edit (photos, manuals, anything a suggestion asks for) goes through
 the suggestion box or a developer, by hand.
