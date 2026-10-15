@@ -822,10 +822,12 @@ def test_an_admin_edit_is_served_on_the_next_request(store_mode):
 
     [record] = client.get("/changes", params={"target_type": "item", "target_id": "webbings#2"}).json()
     assert (record["why"], record["actor_role"]) == ("live test", "admin")
+    assert record["target_name"] == "Edited live", "the log names the item as it is called now"
 
-    hidden = client.post(
-        "/edit/webbings/2/hide", headers=ADMIN, json={"rev": edited.json()["rev"], "why": "live test"}
+    merged = client.post(
+        "/edit/webbings/2/merge", headers=ADMIN,
+        json={"rev": edited.json()["rev"], "into": 1, "why": "live test: the same webbing listed twice"},
     )
-    assert hidden.status_code == 200, hidden.text
-    assert client.get("/webbing/2").json()["detail"]["hidden"] is True
+    assert merged.status_code == 200, merged.text
+    assert client.get("/webbing/2").json()["detail"]["merged_into"] == 1
     assert "Traceback" not in log_path.read_text()

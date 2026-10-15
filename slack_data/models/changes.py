@@ -127,11 +127,15 @@ class ChangeRecord(BaseModel):
 
 
 class ChangeRecordPublic(BaseModel):
-    """A record as the public sees it (D3): with the actor's name looked up."""
+    """A record as the public sees it (D3): with the actor's name, and the
+    target's current name, looked up when it is read (D43)."""
 
     id: str
     target_type: TargetType
     target_id: str
+    # What the target is called now (an item or brand renamed since shows its
+    # new name); None where none is known, and the id is shown instead.
+    target_name: str | None = None
     action: Action
     actor_isa_id: str
     actor_name: str

@@ -291,7 +291,10 @@ def list_changes(
     return _public(records, people)
 
 def _public(records, people) -> list[ChangeRecordPublic]:
+    from slack_data.catalogue.names import TargetNames
+
     names: dict[str, str] = {}
+    targets = TargetNames()
 
     def name_of(isa_id: str) -> str:
         if isa_id not in names:
@@ -304,6 +307,9 @@ def _public(records, people) -> list[ChangeRecordPublic]:
             id=r.id,
             target_type=r.target_type,
             target_id=r.target_id,
+            target_name=(
+                name_of(r.target_id) if r.target_type is TargetType.PERSON else targets.name(r.target_type, r.target_id)
+            ),
             action=r.action,
             actor_isa_id=r.actor_isa_id,
             actor_name=name_of(r.actor_isa_id),
@@ -348,7 +354,7 @@ def _atom(title: str, feed_id: str, records: list[ChangeRecordPublic]) -> Respon
         entry = ET.SubElement(feed, f"{{{_ATOM}}}entry")
         what = ", ".join(record.changes) or record.action.value
         ET.SubElement(entry, f"{{{_ATOM}}}title").text = (
-            f"{record.action.value} {record.target_type.value} {record.target_id}: {what}"
+            f"{record.action.value} {record.target_type.value} {record.target_name or record.target_id}: {what}"
         )
         ET.SubElement(entry, f"{{{_ATOM}}}id").text = f"urn:slackdata:change:{record.id}"
         ET.SubElement(entry, f"{{{_ATOM}}}updated").text = record.created_at

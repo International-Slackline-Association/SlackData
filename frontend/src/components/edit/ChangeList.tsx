@@ -24,15 +24,26 @@ const ACTION_TEXT: Record<ChangeRecordPublic['action'], string> = {
 
 const REVERTIBLE = new Set(['item.edit', 'item.revert'])
 
-/** Where a record's target lives on the site, if anywhere. */
+/** Where a record's target lives on the site, if anywhere. Labelled by what
+ *  it is called now (`target_name`), falling back to its id only when the API
+ *  knows no name. */
 function targetLink(record: ChangeRecordPublic): { to: string; label: string } | null {
+  const name = record.target_name
   if (record.target_type === 'item') {
     const [collection, id] = record.target_id.split('#')
-    return { to: `/${collection}/${id}`, label: `${collection.replace(/s$/, '')} #${id}` }
+    return { to: `/${collection}/${id}`, label: name ?? `${collection.replace(/s$/, '')} #${id}` }
   }
-  if (record.target_type === 'brand') return { to: `/manufacturers/${record.target_id}`, label: `brand #${record.target_id}` }
-  if (record.target_type === 'person') return { to: `/people/${record.target_id}`, label: record.target_id }
+  if (record.target_type === 'brand') return { to: `/manufacturers/${record.target_id}`, label: name ?? `brand #${record.target_id}` }
+  if (record.target_type === 'person') return { to: `/people/${record.target_id}`, label: name ?? record.target_id }
   return null
+}
+
+/** An edit that changed the name reads as a rename: "renamed X to Y". */
+function rename(record: ChangeRecordPublic): { from: string; to: string } | null {
+  const change = record.changes.name
+  if (!change || (record.action !== 'item.edit' && record.action !== 'item.revert')) return null
+  if (typeof change.before !== 'string' || typeof change.after !== 'string') return null
+  return { from: change.before, to: change.after }
 }
 
 function when(iso: string): string {
@@ -62,6 +73,7 @@ export default function ChangeList({
     <ol data-cy="change-list" className="divide-y divide-gray-100">
       {records.map(record => {
         const target = targetLink(record)
+        const renamed = showTarget ? rename(record) : null
         return (
           <li key={record.id} data-cy="change-row" data-action={record.action} className="py-3 text-sm">
             <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
@@ -73,15 +85,30 @@ export default function ChangeList({
                 {record.actor_name}
               </Link>
               <span className="text-xs text-gray-500">({record.actor_role})</span>
-              <span className="text-gray-700">{ACTION_TEXT[record.action] ?? record.action}</span>
-              {showTarget &&
-                (target ? (
-                  <Link to={target.to} className="text-teal-700 hover:underline">
-                    {target.label}
-                  </Link>
-                ) : (
-                  <span className="text-gray-700">{record.target_id}</span>
-                ))}
+              {renamed ? (
+                <span data-cy="change-rename" className="text-gray-700">
+                  renamed {renamed.from} to{' '}
+                  {target ? (
+                    <Link data-cy="change-target" to={target.to} className="text-teal-700 hover:underline">
+                      {renamed.to}
+                    </Link>
+                  ) : (
+                    renamed.to
+                  )}
+                </span>
+              ) : (
+                <>
+                  <span className="text-gray-700">{ACTION_TEXT[record.action] ?? record.action}</span>
+                  {showTarget &&
+                    (target ? (
+                      <Link data-cy="change-target" to={target.to} className="text-teal-700 hover:underline">
+                        {target.label}
+                      </Link>
+                    ) : (
+                      <span className="text-gray-700">{record.target_name ?? record.target_id}</span>
+                    ))}
+                </>
+              )}
               {record.flags.includes('safety') && (
                 <span data-cy="change-safety" className="rounded-full bg-red-100 px-2 py-0.5 text-xs font-semibold text-red-800">
                   breaking strength

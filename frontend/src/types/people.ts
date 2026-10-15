@@ -45,6 +45,8 @@ export interface ChangeRecordPublic {
   target_type: 'person' | 'item' | 'brand' | 'isa_warning' | 'isa_certificate'
   /** For an item: "<collection>#<id>", e.g. "webbings#12". */
   target_id: string
+  /** What the target is called now, looked up when the log is read; null when unknown. */
+  target_name: string | null
   action:
     | 'role.grant'
     | 'role.revoke'

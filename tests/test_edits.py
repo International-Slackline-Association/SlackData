@@ -305,20 +305,49 @@ def test_a_new_brand_gets_the_next_catalog_id_and_can_have_products(client, stor
     assert client.post("/edit/brand", headers=ADMIN, json={"name": "Gibbon"}).status_code == 409
 
 
-# --- What a hidden or merged id answers (P3-D, P3-E) -----------------------------
+# --- The log names its targets as they are called now (D43) ------------------------
 
 
-def test_a_hidden_or_merged_id_says_why_it_is_missing(client, monkeypatch):
+@pytest.fixture
+def names_from_store(store, monkeypatch):
+    """Names read from this test's store, as the live catalogue's are hosted
+    (test_live_api.py checks that path end to end)."""
+    from slack_data.catalogue import names
+
+    monkeypatch.setattr(names, "_documents", store.load)
+
+
+def test_the_log_shows_each_item_by_its_current_name(client, store, names_from_store):
+    edit(client, "grips", 1, {"mbs": 12})
+    old_name = stored(client, "grips", 1)["entry"]["name"]
+    edit(client, "grips", 1, {"name": "Renamed Grip"})
+    records = client.get("/changes", params={"target_type": "item", "target_id": "grips#1"}).json()
+    assert [r["target_name"] for r in records] == ["Renamed Grip", "Renamed Grip"]
+    rename = records[0]["changes"]["name"]
+    assert (rename["before"], rename["after"]) == (old_name, "Renamed Grip")
+
+
+def test_the_log_names_brands_and_people(client, store, names_from_store):
+    brand = client.get("/edit/brand/23", headers=ADMIN).json()
+    client.patch("/edit/brand/23", headers=ADMIN, json={"rev": brand["rev"], "changes": {"website": "https://g.example"}})
+    newest = client.get("/changes").json()[0]
+    assert (newest["target_type"], newest["target_name"]) == ("brand", "Gibbon")
+    feed = client.get("/changes/feed.atom").text
+    assert "brand Gibbon" in feed
+
+
+# --- What a merged id answers (P3-E) -------------------------------------------------
+
+
+def test_a_merged_id_says_where_it_went(client, monkeypatch):
     from slack_data.load_data import _seed_io
 
     entries = [
         {"id": 1, "name": "Shown", "brand": "Gibbon", "material": "Aluminum", "width_min": 25},
-        {"id": 2, "name": "Hidden", "brand": "Gibbon", "material": "Aluminum", "width_min": 25, "hidden": True},
         {"id": 3, "name": "Merged", "brand": "Gibbon", "material": "Aluminum", "width_min": 25, "merged_into": 1},
     ]
     real = _seed_io.read_seed_json
     monkeypatch.setattr(_seed_io, "read_seed_json", lambda name: entries if name == "grips.json" else real(name))
-    assert client.get("/grip/2").json()["detail"]["hidden"] is True
     assert client.get("/grip/3").json()["detail"]["merged_into"] == 1
     assert client.get("/grip/4").json()["detail"] == "Grip 4 not found"
 

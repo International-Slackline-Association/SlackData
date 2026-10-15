@@ -38,6 +38,41 @@ describe('Recent changes', () => {
     cy.getByData('change-row').first().should('have.attr', 'data-action', 'item.edit').and('contain', 'from the changes spec')
   })
 
+  it('names each item as it is called now, and a rename says to what', () => {
+    const first = `Named Grip ${Date.now()}`
+    const renamed = `${first} (renamed)`
+    cy.request({
+      method: 'POST',
+      url: `${api()}/edit/grips`,
+      headers: AUTH,
+      body: { fields: { name: first, brand: 'Gibbon', material: 'Aluminum', width_min: 25 } },
+    })
+      .then(response => {
+        const grip = Number(response.body.key)
+        return cy.request({ url: `${api()}/edit/grips/${grip}`, headers: AUTH }).then(({ body }) =>
+          cy.request({
+            method: 'PATCH',
+            url: `${api()}/edit/grips/${grip}`,
+            headers: AUTH,
+            body: { rev: body.rev, changes: { name: renamed } },
+          }).then(() => grip),
+        )
+      })
+      .then(grip => {
+        cy.visit('/changes')
+        cy.getByData('change-row').first().as('rename')
+        cy.get('@rename').find('[data-cy="change-rename"]').should('contain', `renamed ${first} to ${renamed}`)
+        cy.get('@rename').find('[data-cy="change-target"]').should('have.attr', 'href', `/grips/${grip}`)
+        // The earlier create shows the item's name now, not "grip #id".
+        cy.getByData('change-row')
+          .eq(1)
+          .should('have.attr', 'data-action', 'item.create')
+          .find('[data-cy="change-target"]')
+          .should('have.text', renamed)
+        cy.getByData('change-list').should('not.contain', `grip #${grip}`)
+      })
+  })
+
   it('filters to breaking-strength changes', () => {
     cy.visit('/changes')
     cy.getByData('changes-safety').check()

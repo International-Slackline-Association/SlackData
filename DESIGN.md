@@ -1622,14 +1622,16 @@ the same (`/edit/*` takes `require_admin`).
 - **History** on every item page, public: who (linked to their contributions), role, when, each
   field before → after, the why, a red "breaking strength" pill on safety changes. Admins get
   *Revert this change* on edits; a field that changed again since is left alone and named.
-- **Hide** (why required) and **Merge into…** (the kept item's id, its name shown as confirmation,
-  an explanation of at least 30 characters) sit beside Edit. A hidden item's URL shows *This item is
-  hidden* with who, when and why, and its History (`hidden-item`). A merged item's URL redirects to
-  the item kept, with a notice naming the old id (`merged-notice`).
+- **Merge into…** (the kept item's id, its name shown as confirmation, an explanation of at least
+  30 characters) sits beside Edit. A merged item's URL redirects to the item kept, with a notice
+  naming the old id (`merged-notice`). **There is no Hide** (D81): a product that is no longer sold
+  is marked historic, and a duplicate or a mistaken creation is merged into the item it duplicates.
 - **Add product** sits in the listing toolbar beside *Missing something?*; **Add brand** beside the
   Manufacturers heading; **Edit brand** under a brand's name (every field but the name).
 - **Recent changes** (`/changes`, linked from the footer) and **contributions** (`/people/:isaId`)
-  use the same list. Filters: kind, role, and breaking strength only; the two Atom feeds are linked.
+  use the same list. Each record names its item or brand **as it is called now** (`target_name`,
+  looked up when the log is read, never stored), linked to it, never as `grip #12`; an edit that
+  changed the name reads *renamed Old to New* (`change-rename`). Filters: kind, role, and breaking strength only; the two Atom feeds are linked.
 
 ## Admin Triage (Phase 2)
 
