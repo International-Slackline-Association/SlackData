@@ -81,7 +81,9 @@ export type TricklineKitTensioningType = (typeof TRICKLINEKIT_TENSIONING_TYPES)[
 
 // models/connectors.py — ConnectorStyle. Push-pin vs screw-pin is `closure`,
 // not a style.
-export const CONNECTOR_STYLES = ['Shackle', 'Carabiner', 'Quicklink', 'Soft shackle'] as const
+export const CONNECTOR_STYLES = [
+  'Shackle', 'Carabiner', 'Quicklink', 'Soft shackle', 'Hybrid shackle',
+] as const
 export type ConnectorStyle = (typeof CONNECTOR_STYLES)[number]
 
 // models/connectors.py — ConnectorClosure
@@ -92,9 +94,9 @@ export const CONNECTOR_CLOSURES = [
 export type ConnectorClosure = (typeof CONNECTOR_CLOSURES)[number]
 
 // models/connectors.py — ConnectorMaterial (MetalMaterial plus Dyneema/HMPE, for
-// soft shackles)
+// soft shackles, and Hybrid, for rope-and-metal hybrid shackles)
 export const CONNECTOR_MATERIALS = [
-  'Aluminum', 'Steel', 'Stainless Steel', 'Titanium', 'Dyneema/HMPE', 'Other',
+  'Aluminum', 'Steel', 'Stainless Steel', 'Titanium', 'Dyneema/HMPE', 'Hybrid', 'Other',
 ] as const
 export type ConnectorMaterial = (typeof CONNECTOR_MATERIALS)[number]
 
