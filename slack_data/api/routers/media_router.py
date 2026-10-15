@@ -61,7 +61,7 @@ async def receive_upload(upload_id: str, request: Request) -> Response:
     return Response(status_code=status.HTTP_204_NO_CONTENT)
 
 
-@media_router.get("/{key:path}", include_in_schema=False)
+@media_router.api_route("/{key:path}", methods=["GET", "HEAD"], include_in_schema=False)
 def serve(key: str) -> FileResponse:
     path = _local().locate(key)
     if path is None:
