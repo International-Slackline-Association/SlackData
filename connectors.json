@@ -2265,5 +2265,24 @@
         "active": true,
         "notes": "Listed as 'Maillon Oval 7 mm'. Its spec table: WLL 5.5 kN, outside 65 x 34 mm, inside 50 x 16 mm, made in France. Out of stock when the operator checked on 2026-10-11.",
         "product_group": "Oval Quicklink 7mm, Stainless"
+    },
+    {
+        "id": 126,
+        "manufacturer": "Raed Slacklines",
+        "name": "TiLink",
+        "connector_style": "Hybrid shackle",
+        "material": "Hybrid",
+        "alloy": "Dyneema loop with a UV/abrasion Dyneema sheath, sewn-locked splices; titanium head",
+        "mbs_straight_pull": 25,
+        "weight": 17,
+        "date_introduced": 1793491200000,
+        "price": 29.95,
+        "currency": "EUR",
+        "product_url": "https://raed-sports.com/products/tilink-titanium-soft-shackle-connector-for-highlines",
+        "active": true,
+        "manufacturer_not_for_highline": false,
+        "manufacturer_not_for_highline_source": "https://raed-sports.com/products/tilink-titanium-soft-shackle-connector-for-highlines",
+        "description": "Easy to use. Protected against accidental opening. Protected against cyclic loading. Protected against corrosion. Protected against UV. Lightweight. Small. Easy to double-check. TiLink solves all these problems at once!",
+        "notes": "Listed as 'TiLink - titanium soft shackle connector for highlines'. A soft shackle closed by a titanium head that slides into the noose instead of a button knot. MBS 25 kN single wrap (recorded), 50 kN double wrap. Rope diameter and loop size not stated. Preorder; shipping from Nov 2026."
     }
 ]
