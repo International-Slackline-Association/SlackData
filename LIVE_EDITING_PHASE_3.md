@@ -331,7 +331,10 @@ Each step is one or more commits on `live-editing/3-admin-editing`, branched fro
   every table identical to before (`scripts/convert_gear_seeds.py --check`; a planted difference is
   caught). All 727 entries round-trip entry → row → entry.
 - **Build time**: ~0.8 s locally, down from ~1.5 s, mostly from the one generic loader (no
-  per-row flush, one validation per row). Lambda memory is set after measuring on staging.
+  per-row flush, one validation per row).
+- **On Lambda** (staging, 2026-10-15), the first request after an edit — the rebuild — took
+  3.4 s at 512 MB, 2.0 s at 1024 MB and **1.15 s at 1769 MB** (median of 5; later requests ~0.3 s
+  at every size). Memory is now 1769 MB, one full vCPU (D74).
 - **Safety fields**: D33's list plus the connectors' three MBS ratings (connectors post-date D33).
 - **The log**: two new indexes on `ChangelogTable`, `actor-index` and a sparse `safety-index`.
 

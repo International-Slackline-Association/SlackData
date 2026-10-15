@@ -86,7 +86,11 @@ functions:
   api:
     image:
       name: api
-    memorySize: 512
+    # CPU scales with memory, and an edit makes each warm instance rebuild the
+    # catalogue on its next request. Measured on staging 2026-10-15 (first
+    # request after an edit, median of 5): 512 MB 3.4 s, 1024 MB 2.0 s,
+    # 1769 MB (one full vCPU) 1.15 s. Later requests ~0.3 s at every size.
+    memorySize: 1769
     timeout: 29                                    # API Gateway hard max
     environment:
       # Tells the fail-closed guards (dev tokens, captcha) they are on the live
