@@ -772,7 +772,7 @@ def test_the_export_script_reproduces_the_store(store_mode, tmp_path):
     export = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(export)
 
-    assert export.main(["--api", str(client.base_url), "--out", str(tmp_path)]) == 0
+    assert export.main(["--api", str(client.base_url), "--out", str(tmp_path), "--no-media"]) == 0
     documents = store.load()
     for name, collection in COLLECTIONS.items():
         assert (tmp_path / collection.filename).read_text(encoding="utf-8") == render(
@@ -780,6 +780,30 @@ def test_the_export_script_reproduces_the_store(store_mode, tmp_path):
         ), name
     assert json.loads((tmp_path / "changes.json").read_text()) == []
     assert json.loads((tmp_path / "catalogue.json").read_text())["version"] == store.version()
+
+
+def test_the_export_backs_up_the_media_it_names(store_mode, tmp_path):
+    """Phase 4 (P4-F): the export fetches each media file the manifest names
+    from /media, into media/<key>, once — the backup outside AWS."""
+    import importlib.util
+
+    from slack_data.media.store import SNAPSHOT_DIR
+
+    client, _, _ = store_mode
+    spec = importlib.util.spec_from_file_location("export_catalogue", REPO_ROOT / "export" / "export_catalogue.py")
+    export = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(export)
+
+    manifest = client.get("/media/manifest").json()
+    keys = export.media_keys(manifest)
+    assert len(keys) > 2000
+    sample = [k for k in keys if k.endswith("-480.webp")][:3] + [k for k in keys if k.endswith(".pdf")][:2]
+    assert export.download_media(manifest["base"], sample, tmp_path) == 5
+    for key in sample:
+        assert (tmp_path / key).read_bytes() == (SNAPSHOT_DIR / key).read_bytes()
+    assert export.download_media(manifest["base"], sample, tmp_path) == 0, "only keys not yet held"
+    with pytest.raises(ValueError):
+        export.download_media(manifest["base"], ["../../etc/passwd"], tmp_path)
 
 
 def test_an_edit_in_the_store_is_served_on_the_next_request(store_mode):
