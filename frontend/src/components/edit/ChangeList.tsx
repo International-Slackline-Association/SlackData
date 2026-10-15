@@ -99,7 +99,7 @@ export default function ChangeList({
                 {Object.entries(record.changes).map(([field, change]) => (
                   <li key={field}>
                     <span className="font-medium text-gray-700">{humanize(field)}</span>:{' '}
-                    <span className="line-through">{display(change.before)}</span> → {display(change.after)}
+                    <span className="line-through">{display(change.before, field)}</span> → {display(change.after, field)}
                   </li>
                 ))}
               </ul>

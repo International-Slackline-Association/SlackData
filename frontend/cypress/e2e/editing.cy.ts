@@ -82,6 +82,37 @@ describe('Live editing', () => {
     })
   })
 
+  it('edits a release date with a date picker, not as Unix milliseconds', () => {
+    newGrip(unique('Dated Grip')).then(id => {
+      // Stored the way SlackDB stored dates: midnight in UTC+2, 22:00 UTC the day before.
+      cy.request({ url: `${api()}/edit/grips/${id}`, headers: AUTH }).then(({ body }) =>
+        cy.request({
+          method: 'PATCH',
+          url: `${api()}/edit/grips/${id}`,
+          headers: AUTH,
+          body: { rev: body.rev, changes: { release_date: 1512079200000 } },
+        }),
+      )
+      cy.visit(`/grips/${id}`, signedIn())
+      cy.getByData('item-edit').click()
+      cy.getByData('edit-field-release_date')
+        .should('have.attr', 'type', 'date')
+        .and('have.value', '2017-12-01')
+      // Untouched, it is no change: the stored 22:00 is not "edited" to midnight.
+      cy.getByData('edit-save').should('be.disabled')
+
+      cy.getByData('edit-field-release_date').clear().type('2018-03-15')
+      cy.getByData('edit-preview-row').should('have.length', 1).and('contain', '2017-12-01').and('contain', '2018-03-15')
+      cy.getByData('edit-save').click()
+      cy.getByData('entry-editor').should('not.exist')
+      cy.request({ url: `${api()}/edit/grips/${id}`, headers: AUTH })
+        .its('body.entry.release_date')
+        .should('eq', Date.UTC(2018, 2, 15))
+      // History reads as dates too.
+      cy.getByData('change-row').first().should('contain', '2017-12-01').and('contain', '2018-03-15')
+    })
+  })
+
   it('refuses a stale save, shows what moved, and re-applies on the newest version', () => {
     newGrip(unique('Contested Grip')).then(id => {
       cy.visit(`/grips/${id}`, signedIn())

@@ -606,6 +606,11 @@ def create_brand(store, log, actor: Person, name: str, fields: dict[str, Any], w
 
 LONG_TEXT_FIELDS = frozenset({"description", "notes"})
 
+# Stored as Unix milliseconds (the seed format), edited as a calendar date. The
+# frontend mirrors this set to show dates in the change log
+# (frontend/src/utils/fieldDraft.ts DATE_FIELDS; tests/test_edits.py checks it).
+DATE_FIELDS = frozenset({"release_date"})
+
 
 def _kind(name: str, annotation: Any) -> tuple[str, list | None]:
     import enum
@@ -626,7 +631,7 @@ def _kind(name: str, annotation: Any) -> tuple[str, list | None]:
     if base is bool:
         return "boolean", None
     if base is int:
-        return "integer", None
+        return ("date" if name in DATE_FIELDS else "integer"), None
     if base is float:
         return "number", None
     return ("longtext" if name in LONG_TEXT_FIELDS else "text"), None

@@ -364,6 +364,23 @@ def test_the_field_list_is_the_models(client, store):
     assert webbing["stretch"]["kind"] == "curve" and webbing["description"]["kind"] == "longtext"
 
 
+def test_a_release_date_is_edited_as_a_date(client, store):
+    """Stored as Unix ms, but no one should type 1512079200000 into a form."""
+    import re
+    from pathlib import Path
+
+    from slack_data.catalogue.edits import DATE_FIELDS
+
+    for slug in ("webbings", "weblocks", "grips", "starterkits"):
+        specs = {s["name"]: s for s in client.get(f"/edit/{slug}/fields", headers=ADMIN).json()}
+        assert specs["release_date"]["kind"] == "date", slug
+    # The frontend shows these fields as dates in the change log, from its own copy.
+    ts = (Path(__file__).resolve().parent.parent / "frontend/src/utils/fieldDraft.ts").read_text()
+    mirrored = re.search(r"DATE_FIELDS = new Set\(\[([^\]]*)\]\)", ts)
+    assert mirrored, "DATE_FIELDS not found in fieldDraft.ts"
+    assert set(re.findall(r"'([a-z_]+)'", mirrored.group(1))) == set(DATE_FIELDS)
+
+
 def test_the_brand_field_list(client, store):
     names = [s["name"] for s in client.get("/edit/brand/fields", headers=ADMIN).json()]
     assert "website" in names and "name" not in names

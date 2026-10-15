@@ -6,6 +6,7 @@ export type FieldKind =
   | 'longtext'
   | 'number'
   | 'integer'
+  | 'date'
   | 'boolean'
   | 'choice'
   | 'choices'

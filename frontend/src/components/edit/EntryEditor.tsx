@@ -13,7 +13,7 @@
 import { useEffect, useId, useMemo, useState } from 'react'
 import { ApiError } from '@/api/client'
 import type { EditConflict, EditResult, FieldSpec, Stored } from '@/types'
-import { display, type Draft, fromDraft, humanize, sameValue, toDraft } from '@/utils/fieldDraft'
+import { asDrafted, display, type Draft, fromDraft, humanize, sameValue, toDraft } from '@/utils/fieldDraft'
 import FieldInput from './FieldInput'
 import Modal from './Modal'
 
@@ -86,7 +86,7 @@ export default function EntryEditor({
   const changes = useMemo(() => {
     const out: Record<string, unknown> = {}
     for (const spec of fields ?? []) {
-      const before = base?.entry[spec.name] ?? null
+      const before = asDrafted(spec.kind, base?.entry[spec.name] ?? null)
       const after = parsed.values[spec.name]
       if (!sameValue(before, after)) out[spec.name] = after
     }
@@ -182,8 +182,8 @@ export default function EntryEditor({
                   {changed.map(name => (
                     <li key={name} data-cy="edit-preview-row">
                       <span className="font-medium text-gray-900">{humanize(name)}</span>:{' '}
-                      <span className="text-gray-500 line-through">{display(base?.entry[name])}</span> →{' '}
-                      <span className="text-gray-900">{display(changes[name])}</span>
+                      <span className="text-gray-500 line-through">{display(base?.entry[name], name)}</span> →{' '}
+                      <span className="text-gray-900">{display(changes[name], name)}</span>
                     </li>
                   ))}
                 </ul>
@@ -211,7 +211,7 @@ export default function EntryEditor({
                   .filter(name => !sameValue(base?.entry[name], conflict.current?.[name]))
                   .map(name => (
                     <li key={name}>
-                      {humanize(name)}: now {display(conflict.current?.[name])}
+                      {humanize(name)}: now {display(conflict.current?.[name], name)}
                     </li>
                   ))}
               </ul>

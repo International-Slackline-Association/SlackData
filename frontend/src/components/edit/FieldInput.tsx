@@ -92,6 +92,17 @@ export default function FieldInput({
         </div>
       )
     }
+    case 'date':
+      return (
+        <input
+          id={id}
+          data-cy={cy}
+          type="date"
+          className={INPUT}
+          value={draft as string}
+          onChange={e => onChange(e.target.value)}
+        />
+      )
     default:
       return (
         <input

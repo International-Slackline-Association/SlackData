@@ -9,6 +9,29 @@ import type { FieldKind } from '@/types'
 
 export type Draft = string | string[]
 
+// Fields stored as Unix milliseconds and edited as a calendar date. Mirrors
+// DATE_FIELDS in slack_data/catalogue/edits.py, which gives them the kind
+// 'date' in the form; this copy lets the change log show them as dates too
+// (tests/test_edits.py checks the two agree).
+export const DATE_FIELDS = new Set(['release_date'])
+
+const DAY_MS = 86_400_000
+
+/** Unix ms -> "YYYY-MM-DD". The day is the NEAREST UTC midnight: most stored
+ *  dates are a local midnight somewhere (SlackDB's 22:00 UTC is midnight in
+ *  UTC+2), and rounding recovers the intended day from any timezone. */
+export function msToDate(ms: number): string {
+  return new Date(Math.round(ms / DAY_MS) * DAY_MS).toISOString().slice(0, 10)
+}
+
+/** "YYYY-MM-DD" -> Unix ms at midnight UTC, or null if it is not a real date. */
+export function dateToMs(date: string): number | null {
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(date)
+  if (!m) return null
+  const ms = Date.UTC(Number(m[1]), Number(m[2]) - 1, Number(m[3]))
+  return msToDate(ms) === date ? ms : null
+}
+
 export interface Parsed {
   value: unknown
   error?: string
@@ -32,6 +55,8 @@ export function toDraft(kind: FieldKind, value: unknown): Draft {
         : ''
     case 'boolean':
       return value ? 'true' : 'false'
+    case 'date':
+      return typeof value === 'number' ? msToDate(value) : String(value)
     default:
       return String(value)
   }
@@ -52,6 +77,10 @@ export function fromDraft(kind: FieldKind, draft: Draft): Parsed {
     case 'integer': {
       const n = Number(text)
       return Number.isInteger(n) ? { value: n } : { value: null, error: 'a whole number' }
+    }
+    case 'date': {
+      const ms = dateToMs(text)
+      return ms === null ? { value: null, error: 'a date' } : { value: ms }
     }
     case 'boolean':
       return { value: text === 'true' }
@@ -80,6 +109,13 @@ export function fromDraft(kind: FieldKind, draft: Draft): Parsed {
   }
 }
 
+/** A stored value as the form would save it unchanged. A date the input shows
+ *  as one day must not count as edited because it was stored at 22:00. */
+export function asDrafted(kind: FieldKind, value: unknown): unknown {
+  if (kind !== 'date' || value === undefined || value === null) return value
+  return fromDraft(kind, toDraft(kind, value)).value
+}
+
 /** Equal as stored values: arrays and objects compared by content. */
 export function sameValue(a: unknown, b: unknown): boolean {
   return JSON.stringify(a ?? null) === JSON.stringify(b ?? null)
@@ -91,9 +127,11 @@ export function humanize(name: string): string {
   return words.charAt(0).toUpperCase() + words.slice(1)
 }
 
-/** A value as one line of text, for previews and the change log. */
-export function display(value: unknown): string {
+/** A value as one line of text, for previews and the change log. `field`
+ *  names the field, so a stored date reads as one. */
+export function display(value: unknown, field?: string): string {
   if (value === undefined || value === null || value === '') return '—'
+  if (field && DATE_FIELDS.has(field) && typeof value === 'number') return msToDate(value)
   if (Array.isArray(value)) {
     if (value.length && typeof value[0] === 'object') {
       return value.map(p => `${(p as { kn: unknown }).kn}→${(p as { percent: unknown }).percent}%`).join(', ')
