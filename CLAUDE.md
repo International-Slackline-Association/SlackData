@@ -197,8 +197,8 @@ Root *.json seed files
 | `slack_data/models/brand_clients.py` | `BrandClient` / `BrandPermission` / `ManufacturerPrincipal` — the account linkage `Brand` never had |
 | `slack_data/manufacturers/` | The manufacturer API's stores: `clients.py` (Protocol + SQLite + in-memory), `dynamo.py`, `store.py`, `matching.py` (gear identity), `register.py` (onboarding CLI), `onboard.py` (the CLI's other half — dossier, key minting, ledger, end-to-end proof) |
 | `slack_data/utilities/turnstile.py` | Captcha verification — **fails closed**, unlike `fx.py` |
-| `scripts/fetch_submission_images.py` | Files a manufacturer record's `image_urls` into the item's folder in `frontend/public/gear-images/` (`--id`), then rebuilds the manifest |
-| `frontend/public/gear-images/`, `frontend/public/gear-manuals/` | Gear photos and manufacturer PDFs (manuals, datasheets, test certificates), **one folder per item, named by id**: `<type>/<id>_<name-slug>/1.jpg, 2.jpg …` and `<type>/<id>_<name-slug>/<title>.pdf`, or `gear-manuals/<type>/brand/<catalog_id>_<brand-slug>/<title>.pdf` for a range-wide one. Only the id is read, so a rename keeps them; the slug is a label and may go stale. Rebuild the manifests with `scripts/build_gear_manifest.py` after adding one. Rules in DESIGN.md § Manuals & documents |
+| `slack_data/media/` | Photos, manuals and logos as data (live editing phase 4, LIVE_EDITING_PHASE_4.md): `kinds.py` (types decided from the bytes, limits), `store.py` (Protocol + filesystem store + keys), `s3.py` (uploads + media buckets), `edits.py` (the whole-list media edit), `manifest.py` (`GET /media/manifest`), `migrate.py` (the one-off move from `frontend/public/`) |
+| `media/` | **The dev snapshot of the media store** (P4-F): what local dev and CI serve beneath anything uploaded locally (`MEDIA_DIR`, default `media-local/`). Keys mirror the bucket's: `<type>/<id>/<media id>-480.webp` / `-1600.webp`, `<type>/<id>/<media id>-<title>.pdf`, `brands/<catalog_id>/…`. The seeds' `photos` / `manuals` / `logo` keys name these files. Refreshed deliberately in its own PR with `python export/export_catalogue.py --out . --snapshot` |
 
 There are `__init__.py` files in `models/`, `api/`, and `utilities/`. No `tests/`, no `.github/`, no Docker, no migrations (SQLModel `create_all` only).
 
@@ -574,10 +574,10 @@ derived field list (`submissions/fields.py`). What differs is trust and shape.
 - **Photos arrive as links, never as files.** `image_urls` on an item (up to
   `MAX_IMAGE_URLS`, http(s), added never replaced) is stored on the
   `Submission` and **not fetched by the API**, which leaves no outbound request
-  to abuse. The operator files them with `scripts/fetch_submission_images.py`,
-  whose exact invocation the approved triage row shows. Photos are filed in
-  the item's folder by id (`--id`), so a rename in the same patch cannot
-  misfile them. The uploads bucket exists and is unused. See
+  to abuse. **Photos are uploaded by hand** (live editing phase 4): an admin
+  opens each link from the triage row and adds the photo on the item's page,
+  through Photos and manuals. Nothing in the repo downloads photos any more —
+  the scripts that gathered them were removed with the old image trees. See
   MANUFACTURER_API_PLAN.md § Step 4 — photos as links.
 
 Onboarding is a **CLI, not a route** (`python -m slack_data.manufacturers.register`):
@@ -748,8 +748,8 @@ Before writing any of the above, open the relevant `models/<type>.py` and `utili
   and `https://slacklines.us/products/<handle>.json` gives one product. Each product carries
   variants (size and Spider's ref as `sku`, e.g. `LHSO2`), the description HTML, and every photo as
   a `cdn.shopify.com` URL (`images[].src`). `variant_ids` on an image says which size it shows.
-  Append `&width=1200` to an image URL to match the photos already held, and file them with
-  `scripts/fetch_submission_images.py`. No screenshots are needed. Prices there are USD; for EUR
+  Photos are no longer gathered by script: save the ones wanted and upload them on the item's page
+  (Photos and manuals), which resizes them. No screenshots are needed. Prices there are USD; for EUR
   prices or a still-sold check, list the rows and ask the operator. Products only on Spider's EU
   shop (e.g. the D shackles) need a browser.
 - Country is stored as the `Country` enum's **full display name** (`"Germany"`), not an ISO code; `get_country()` in `utilities/countries.py` maps the sources' alpha-2 codes onto the enum.

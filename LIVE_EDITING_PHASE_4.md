@@ -6,7 +6,7 @@ manifests (D47).
 
 **Done when:** a photo goes live without a deploy.
 
-**Status (2026-10-15): building.** Every choice in § 4 is decided (2026-10-15): the recommended
+**Status (2026-10-15): built (4a–4f) on `live-editing/4-media`.** See § 8. Every choice in § 4 is decided (2026-10-15): the recommended
 option on each, except P4-D (small first, then large on cards), P4-F (backed up by the export) and
 P4-I (b), no request to the ISA. Built on `live-editing/4-media`, stacked on phase 3.
 
@@ -174,27 +174,39 @@ session), and the upload UI up to the presigned POST, which answers 403 there.
 
 ## 5. Design (for the recommended options)
 
+*As built — where it differs from the plan above, this is what holds.*
+
 **Upload, end to end:**
 
-1. The editor picks files. Photos are drawn to a canvas at 1600 px and 480 px and exported as WebP
-   (D44); a PDF is sent as it is. Over the limit before processing (D45) → refused in the browser.
-2. `POST /edit/media/uploads {kind, content_type, size}` (admin) → a presigned POST to
-   `uploads/<uuid>` with `content-length-range` and the content type fixed, valid 10 minutes.
-3. The browser posts the file(s) straight to S3.
-4. `POST /edit/{slug}/{id}/media {rev, add: [{upload, kind, title?}], why?}` → for each upload the
-   API reads its first bytes (`GetObject` with a Range), checks the magic bytes and the size,
-   copies it to the media bucket at `<type>/<id>/<uuid>-<size>.webp` (`PutObject`, the grant), and
-   writes the item's `photos` / `manuals` list with a log record — one transaction for the entry
-   and the record, as every edit.
-5. The next request's `GET /media/manifest` lists it; the CDN serves `/media/…`.
+1. The editor picks files. Photos are drawn to a canvas at 480 px and 1600 px and exported as WebP
+   (JPEG where the browser has no WebP encoder: Safari) (D44); a PDF is sent as it is. Over the
+   limit (D45) or of another type → refused in the browser, before anything travels.
+2. `POST /edit/media/uploads {files: [{purpose, content_type, size}]}` (admin) → one presigned POST
+   per file to `UploadsBucket/edit/<upload id>`, with `content-length-range` (photo 5 MB processed,
+   logo 2 MB, manual 25 MB) and the content type fixed, valid 10 minutes.
+3. The browser posts each file straight to S3.
+4. `PUT /edit/{slug}/{id}/media {rev, photos?, manuals?, why?}` — **the whole list as it should be**,
+   each element an `id` already held (kept, in this position; a manual retitled) or a new `upload`.
+   For each upload the API reads its first bytes and size (`GetObject` with a Range), checks the
+   magic bytes (`slack_data/media/kinds.py`), copies it to the media bucket (`CopyObject`, served
+   with the checked type) at `<type>/<id>/<media id>-480.webp` / `-1600.webp` or
+   `<type>/<id>/<media id>-<title-slug>.pdf`, and commits the entry with its log record — one
+   transaction, rev-checked, as every edit. So add, remove, reorder and retitle are one logged edit.
+   `PUT /edit/brand/{catalog_id}/media {rev, logo?, manuals?: {type: [...]}, why?}` likewise.
+5. The next request's `GET /media/manifest` lists it; the CDN serves `/media/…`, cached a year (no
+   key is ever reused).
 
-**Media keys in an entry:** `"photos": [{"id": "<uuid>", "sizes": {"480": "...", "1600": "..."}}]`,
-`"manuals": [{"id", "path", "title"}]`; on a brand, `"logo"` and `"manuals": {"<collection>": [...]}`.
-Not model fields: the loader ignores them like `unmodelled`; the export carries them.
+**Media keys in an entry:** `"photos": [{"id", "small", "large"}]`, `"manuals": [{"id", "file",
+"title"}]`; on a brand, `"logo": "<key>"` and `"manuals": {"<collection>": [...]}`. Not model fields:
+the loader skips them like `unmodelled`, the generic edit form may not set them (only the media
+route and a revert), and the export carries them.
 
-**Infra:** `MediaBucket` (`slackdata-media-<stage>-<account>`, private, versioned, served only via
-the CloudFront OAC), a `/media/*` cache behaviour with a response-headers policy (nosniff, CSP for
-PDFs), CORS on `UploadsBucket` for the site's origins. No new IAM beyond request #6.
+**Infra:** `MediaBucket` (`slackdata-media-<stage>-<account>`, private, versioned, retained on
+stack deletion, served only via the CloudFront OAC); two cache behaviours, `/media/*.pdf` and
+`/media/*`, each with a response-headers policy — nosniff on both, and `default-src 'none'` on
+everything but PDFs, whose built-in browser viewers run under the document's CSP; CORS (POST only)
+on `UploadsBucket` for the site's origins; `MEDIA_BUCKET`, `UPLOADS_BUCKET`, `MEDIA_BASE_URL=/media`
+on the Lambda. No new IAM beyond request #6.
 
 ---
 
@@ -204,13 +216,59 @@ PDFs), CORS on `UploadsBucket` for the site's origins. No new IAM beyond request
 |---|---|
 | **4a** Media store | Protocol + filesystem + S3; presigned POST (and its local stand-in); magic-byte check; publish; tests on each |
 | **4b** Routes | Upload targets, attach / remove / reorder on items and brands, `GET /media/manifest`; logged edits |
-| **4c** Migration | `python -m slack_data.media.migrate` — re-encode, publish, write entries, log as `import`; `--check`; `scripts/pull_media.py` for local dev |
+| **4c** Migration | Made the repo's dev snapshot once (`media/` and the seeds' media keys: re-encoded, metadata stripped); `python -m slack_data.media.migrate` then copies that snapshot into a hosted store and adds the keys to the stored entries, logged as `import`; `--check` |
 | **4d** Frontend | Browser processing; upload UI in the edit panel; every manifest reader switched to the API manifest |
 | **4e** Infra | `MediaBucket`, `/media/*` behaviour, headers policy, uploads CORS; verify-deploy checks |
-| **4f** Retire | After prod serves the migrated media: the manifests retire, `frontend/public/gear-*` becomes the dev snapshot the local store reads, and the export copies media to the data repo (P4-F) |
+| **4f** Retire | `frontend/public/gear-images`, `gear-manuals`, `manufacturer-images`, the five manifests, and the scripts that gathered photos (`build_gear_manifest.py`, `fetch_submission_images.py`, `fetch_manufacturer_assets.py`) removed — photos are uploaded by hand from now on (2026-10-15) |
 
 ---
 
 ## 7. To settle with the ISA
 
 Nothing. P4-I (b) needs no wider grant, and P4-F's backup is the export, which needs none.
+
+---
+
+## 8. As built (2026-10-15), and the rollout
+
+**Built:** 4a–4e, on `live-editing/4-media`.
+
+- **Backend:** `slack_data/media/` (kinds, store, s3, edits, manifest, migrate), the media routes in
+  `edit_router.py`, `media_router.py` (the manifest; locally also the upload stand-in and `/media/*`).
+- **Migration and dev snapshot:** `media/` holds the 2,683 migrated files (187 MB: the photos are
+  103 MB where the originals were 136), and the root seeds name them. A file's media id is the start
+  of its source's SHA-256, so the prod run names every file exactly as the snapshot does.
+- **Frontend:** `utils/mediaStore.ts` fetches the manifest once per page load; `utils/images.ts`,
+  `manuals.ts` and `manufacturerImages.ts` read it, so the build-time manifests are no longer
+  imported. The carousel loads small then large. The **Photos and manuals** dialog on items and
+  **Logo and manuals** on brands (`components/edit/MediaEditor.tsx`); media changes read in words
+  in History.
+- **Export:** `export/export_catalogue.py` now copies every media file the manifest names into
+  `media/<key>` (new keys only, nothing deleted) — the backup outside AWS (P4-F); `--snapshot`
+  refreshes this repo's own.
+- **Infra:** as § 5; `verify-deploy.sh` checks the manifest's base, a photo's 200, type and nosniff,
+  and that the upload stand-in is off.
+
+**Photos are uploaded by hand from now on (decided 2026-10-15).** The scripts that gathered photos
+while the catalogue was being built — the manifest builder, the manufacturer-photo filer, the SlackDB
+logo fetcher — are removed with the old trees. A brand's `image_urls` are still recorded by the
+manufacturer API; the triage row lists them and says to add them on the item's page.
+
+**4f was done here, not after prod**, since the migration now reads the repo's snapshot rather than
+the old trees. Photos added to `frontend/public/` on another branch after phase 4 branched are not in
+the snapshot: add them on the site once it is live.
+
+**Rollout** (after phases 0–3 are merged and prod reads the store):
+
+1. **Half A** (API + infra): creates `MediaBucket`, the `/media/*` behaviours and the env.
+2. **Migrate prod**, from the operator's SSO session:
+   `CATALOG_TABLE=slackdata-catalog-prod PEOPLE_TABLE=slackdata-people-prod
+   CHANGELOG_TABLE=slackdata-changelog-prod python -m slack_data.media.migrate
+   --media-bucket slackdata-media-prod-<acct> --as <admin ISA id> --apply`, then `--check` (exit 0).
+   Logged as one `import` record per item and brand.
+3. **Half B** (the frontend that reads the manifest), then `infra/verify-deploy.sh`.
+4. **The data repo:** copy the new `export_catalogue.py` there; the next run backs up the media.
+
+**Staging (P4-I b):** everything but the S3 writes. The migration can fill staging's media bucket
+from the operator's session; an upload from the dialog is refused by S3 (the role's grants name
+prod), and the dialog says so.

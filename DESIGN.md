@@ -844,33 +844,24 @@ It is rendered by `GearDetailPage`, **not** by the shared `GearDetailBody` — f
 safety callout is (§ Detailed View): the body is reused once per item in the listing's Detailed view,
 and an embedded PDF viewer per row there would be absurd.
 
-**Stored exactly the way images are** — a curated folder tree plus a generated manifest, one folder
-per item, same one-line hosting switch:
+**Data on the item, like its photos** (live editing phase 4, LIVE_EDITING_PHASE_4.md). An item's
+documents are its entry's `manuals` list, `[{id, file, title}]`, each `file` a key in the media store
+served at `/media/<key>`; the site learns them from `GET /media/manifest`, fetched once per page
+load (`utils/mediaStore.ts`). So a document added on the site shows on the next page load, with no
+deploy. Before phase 4 they were files under `frontend/public/gear-manuals/` and a manifest built
+into the bundle; the migration (`slack_data/media/migrate.py`) moved them, and the repo's `media/`
+is now the dev snapshot of the store.
 
-```
-frontend/public/gear-images/<gear type>/<id>_<name-slug>/1.jpg, 2.jpg …
-frontend/public/gear-manuals/<gear type>/<id>_<name-slug>/<title>.pdf
-frontend/src/data/gearImages.json, gearManuals.json   # generated, never hand-edited
-```
+**Keyed by id, so a rename keeps them.** Both the entry and the manifest are found by the item's
+id; a key is `<gear type>/<id>/<media id>-<title-slug>.pdf`, and the slug is only a "save as" name.
 
-`scripts/build_gear_manifest.py` derives the manifests from whatever is in `public/`, and `--check`
-fails on drift. The folder is the source of truth; the script only reads it.
-
-**Filed by id, so a rename keeps them.** The folder is the item's seed id, then a slug of its name
-when the folder was made. Only the id is read: the manifests are keyed by it, and the frontend looks
-an item's files up by its id. Live editing renames products in the catalogue store, and the slug
-then goes stale — harmlessly; it is a label for people browsing the tree, never renamed to follow.
-Photos are numbered (`1.jpg` is the primary; renumber to reorder).
-
-**The filename is the document's title.** `user-manual.pdf` is "User manual" — the default, because
-that is what most of these are. Anything else is the label, de-slugified: `product-archive.pdf`
-reads **Product archive**, and a second untitled one is `user-manual-2.pdf`, "User manual 2", so a
-product with two unnamed PDFs never renders two identical rows. Documents are listed in filename
+**Each document has a title, typed when it is uploaded** — what the row reads. The upload dialog
+starts it from the filename (`user-manual.pdf` → "User manual"), as the migration titled today's
+files, and an admin can retitle it later without re-uploading. Documents are listed in their stored
 order, and the first is the one embedded.
 
 **A document that is not in English says so in its title**, because the row is a link a reader
-follows: `german-user-manual.pdf` reads **German user manual**. This is a filename convention, not
-a language field — nothing parses it, and it costs nothing at the point where it matters, which is
+follows: **German user manual**. This is a title convention, not a language field — nothing parses it, and it costs nothing at the point where it matters, which is
 the moment before the reader opens a PDF they cannot read. Where a maker publishes both, we hold the
 English one and the title stays the plain default; German-only is the case this exists for
 (Slacktivity's Super Jumpline, Slackliner.de's ratchet-set manual).
@@ -898,34 +889,23 @@ make** — how to rig it, how to inspect it, when to retire it. Copying that PDF
 keys would be forty files to re-upload when version 1.1 lands, and forty chances for one of them to
 stay on 1.0.
 
-So it is filed **once, under the brand**:
+So it is filed **once, under the brand**: the brand's entry holds `manuals`, by gear type —
+`{"webbings": [{id, file, title}]}` — and the manifest lists them under the brand's name as items
+carry it (`brandManuals`), so every spelling of the maker the backend folds finds them.
 
-```
-frontend/public/gear-manuals/<gear type>/brand/<catalog_id>_<brand-slug>/<title>.pdf
-frontend/src/data/brandManuals.json         # generated, never hand-edited
-frontend/src/data/brandIds.json             # brand name -> catalog_id, generated
-```
-
-- **Keyed by the brand's `catalog_id`** from `manufacturers.json` — the stable `Brand.id` — in the
-  `brand/` folder, apart from the products. Items carry the maker's and sellers' *names*, so the
-  frontend looks the id up in `brandIds.json`, built with the backend's own name folding: every
-  spelling of the maker finds the one folder.
-- **Scoped by the folder it sits in, not by the company.** A webbing manual goes in
-  `gear-manuals/webbings/brand/`, and it reaches that maker's webbings only. A generic manual is
+- **Scoped by gear type, not by the company.** A webbing manual is filed under `webbings`, and it
+  reaches that maker's webbings only. A generic manual is
   always about a *class* of product — how you rig a webbing has nothing to say about a tree
   protector — so there is no brand-wide-everything shelf, and a maker whose manual genuinely covers
   two classes files it under both.
-- **Its own manifest**, not a reserved key inside `gearManuals.json`, because it is a different
-  claim: "this document is about the whole range", not "this document is about this item". Both are
-  built by `scripts/build_gear_manifest.py` from whatever is in `public/`, and `--check` fails on
-  drift. A folder whose id is no `catalog_id` is warned about rather than filed silently.
-- **Titled by the same rule**, so one list never shows two title conventions: `user-manual.pdf` is
-  "User manual", `webbing-manual.pdf` is "Webbing manual".
-- **Spider Slacklines and Slack Inov file the same PDF twice**, once in each brand's folder. They
+- **Its own section of the manifest**, not mixed into the items', because it is a different claim:
+  "this document is about the whole range", not "this document is about this item".
+- **Titled the same way**, so one list never shows two title conventions.
+- **Spider Slacklines and Slack Inov file the same PDF twice**, once on each brand. They
   are two companies publishing one document (and co-listing each other's gear — see § Also sold by),
   and an alias table mapping one brand's manuals onto another's would be a second place for the
   brand relationships to be stated, and to go stale. Two brands is two files; that is the whole
-  duplication the folder allows.
+  duplication this allows.
 - **A seller's manual reaches what it resells only where the seller opts in.** Aki Slacklines
   carried on part of the Landcruising range, and its webbing manual's spec table lists those
   webbings (Wave 19/25/32, White Magic, Wizard) beside Aki's own, so Aki's manual shows on every
@@ -1366,8 +1346,9 @@ is honest about that, where a final-sounding one would assert a certainty the sc
 `"Germany"`, not `"DE"`); the frontend maps that name to an ISO alpha-2 code to resolve
 `/flags/{cc}.png`. Flag artwork is vendored from **flagcdn.com** (Flagpedia's public-domain set)
 into `frontend/public/flags/`, not hotlinked — the page must not depend on a third-party CDN at
-runtime. Logos are vendored likewise into `frontend/public/manufacturer-images/`, keyed by our
-**canonical** brand slug so lookup is a pure function of the brand name.
+runtime. A brand's logo is its entry's `logo`, a media key (phase 4, P4-J): set from the brand page
+by an admin, listed by `GET /media/manifest` under the brand's **canonical** name, so lookup is a
+pure function of the brand name.
 
 Cards with no country render **no flag at all** — never a placeholder or "unknown" flag. The
 country filter group is likewise data-driven: it renders only the country values actually present,
@@ -1633,6 +1614,30 @@ the same (`/edit/*` takes `require_admin`).
   looked up when the log is read, never stored), linked to it, never as `grip #12`; an edit that
   changed the name reads *renamed Old to New* (`change-rename`). Filters: kind, role, and breaking strength only; the two Atom feeds are linked.
 
+### Photos and manuals (live editing, phase 4)
+
+LIVE_EDITING_PHASE_4.md. Media is data on the entry, edited like any field and logged.
+
+- **Photos and manuals** (`item-media`) beside Edit opens one dialog (`media-dialog`) holding the
+  item's whole photo list and document list. Photos: thumbnails in order, each with ← → and ×
+  (`media-photo-earlier`, `-later`, `-remove`); *Add photos* (`media-add-photos`, JPEG/PNG/WebP up
+  to 10 MB). Documents: a title field each (`media-manual-title`), ↑ and ×; *Add PDFs*
+  (`media-add-manuals`, up to 25 MB), titled from the filename to start with. One optional why,
+  one Save: the first photo is the one cards show. The dialog's controls stay disabled until the
+  item has loaded (`media-form[data-loaded]`), so nothing picked can be overwritten by the load.
+- **The browser does the processing** (D44): each photo is drawn to a canvas at 480 px and 1600 px
+  on the long edge and exported as WebP (JPEG where the browser cannot encode WebP), so camera
+  metadata never leaves the device. Each file then goes straight to the quarantine bucket through a
+  form the API signs; the server checks every file's own bytes before publishing it.
+- **Removing takes a photo off, it deletes nothing**; the History row and Revert bring it back.
+- **Cards show the small photo first, then the large one** (P4-D): the `<img>` loads the 480 px
+  copy (it is lazy, so only on screen), then fetches the 1600 px one and swaps it in when it has
+  arrived (`data-size="small" | "large"`). The detail page does the same.
+- **In History** a media change reads *added 2 photos, reordered*, *added "User manual"*, *replaced
+  the logo* (`change-media`), with thumbnails of the photos added — never two JSON lists.
+- **Logo and manuals** (`brand-media`) under a brand's name: its logo (resized to 480 px), and its
+  range-wide manuals per gear type ("Applies to all Gibbon webbings").
+
 ## Admin Triage (Phase 2)
 
 Route `/admin` — a **static** segment, so it outranks the dynamic `:slug` gear-type pattern, exactly
@@ -1675,18 +1680,15 @@ A manufacturer record can carry `image_urls`: links to photos the brand already 
 - **In the row**, under the note: a "Photos" list (`data-cy="submission-row-images"`), one link per
   URL (`data-cy="submission-row-image"`, new tab, `rel="noopener noreferrer"`), labelled by the
   URL's last path segment. **Links, not thumbnails.** A thumbnail would load a third-party resource
-  in the admin's browser as soon as the queue renders, and the link shows exactly the URL that will
-  be fetched.
-- **In the approved panel**, below the JSON patch: the shell command that files those photos
-  (`data-cy="image-fetch-command"`), with a **Copy command** button (`data-cy="copy-image-command"`).
-  It names the product by its id (`--id`), so the photos land in its own folder whatever the patch
-  renames it to; the name only labels a folder the script has to create. The block carries its own
-  sentence: the photos go into `frontend/public/gear-images/` and ship with **half B** (the
-  website), not half A.
-- A record with photos and no field changes shows an empty patch (`{}`) and the command. The patch
-  block stays, so the panel keeps one shape.
+  in the admin's browser as soon as the queue renders, and the link shows exactly the URL the brand
+  sent.
+- **In the approved panel**, below the JSON patch, one sentence (`data-cy="photo-upload-note"`):
+  open each link, save the photo, and add it on the item's page with *Photos and manuals* (linked
+  to the item). Photos are uploaded by hand since live editing phase 4; nothing downloads them.
+- A record with photos and no field changes shows an empty patch (`{}`) and the sentence. The
+  patch block stays, so the panel keeps one shape.
 
-Absent, not empty, when the record has no photos: no list, no command.
+Absent, not empty, when the record has no photos: no list, no sentence.
 
 ---
 
