@@ -270,7 +270,7 @@ class Submission(BaseModel):
     source_url: str | None = None
     # Links to photos, from the manufacturer API only — `SubmissionCreate` has no
     # such field, so the public box can never set one. Recorded, not fetched:
-    # the operator files them with scripts/fetch_submission_images.py. Empty,
+    # an admin adds them by hand on the item's page. Empty,
     # not null, when there are none, and for every record stored before the
     # field existed (both stores map an absent value to []).
     image_urls: list[str] = Field(default_factory=list)

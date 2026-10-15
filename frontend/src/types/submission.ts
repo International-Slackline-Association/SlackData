@@ -58,8 +58,8 @@ export interface Submission {
   note: string | null
   source_url: string | null
   /** Links to photos, from the manufacturer API only. Never null — empty when
-   *  there are none. Recorded, not fetched: scripts/fetch_submission_images.py
-   *  files them, and utils/imageFetch.ts builds that command. */
+   *  there are none. Recorded, not fetched: an admin opens each and adds the
+   *  photo on the item's page (Photos and manuals). */
   image_urls: string[]
   submitter_email: string | null
   /** Null for the public box. A manufacturer submission carries

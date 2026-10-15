@@ -1409,8 +1409,8 @@ def test_too_many_fields_in_one_item_is_refused(client, gear):
 
 # --- Photos, as links -------------------------------------------------------
 # MANUFACTURER_API_PLAN.md § Step 4 — photos as links. A brand sends URLs of
-# photos it already publishes; the API records them and fetches nothing. The
-# operator files them later with scripts/fetch_submission_images.py.
+# photos it already publishes; the API records them and fetches nothing. An
+# admin adds them by hand on the item's page (live editing phase 4).
 
 PHOTO = "https://alpha.example/img/mantra-front.jpg"
 PHOTO_2 = "https://alpha.example/img/mantra-detail.png"
