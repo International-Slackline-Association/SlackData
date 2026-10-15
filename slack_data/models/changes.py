@@ -71,6 +71,10 @@ class Action(str, Enum):
     BRAND_EDIT = "brand.edit"
     # An ISA warning or certificate match moved by a rename or a merge (P3-B).
     MATCH_REPOINT = "match.repoint"
+    # A person linked to a brand they represent, or unlinked (phase 5, D5).
+    # Target: the person; `changes.brand` names the brand.
+    BRAND_LINK = "brand.link"
+    BRAND_UNLINK = "brand.unlink"
 
 
 # The one flag so far: a breaking-strength figure changed (D33, D57).

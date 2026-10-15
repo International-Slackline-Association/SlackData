@@ -864,3 +864,41 @@ def test_a_committed_edit_counts_in_the_same_transaction(catalogue, changelog):
         catalogue, changelog, [Put(an_edit_document("880005", "After", rev=2), expected_rev=1)], [], [a_record()]
     )
     assert catalogue.edits() == before + 1
+
+
+# --- Brand-link requests (phase 5) ----------------------------------------------
+
+
+@pytest.fixture
+def brand_requests(tables):
+    from slack_data.brand_requests.dynamo import DynamoBrandRequestRepository
+
+    return DynamoBrandRequestRepository(table=tables["BrandRequestsTable"])
+
+
+def a_request(**overrides):
+    from slack_data.models.brand_requests import BrandRequest
+    from slack_data.utilities.ulid import new_ulid
+
+    return BrandRequest(**{"request_id": new_ulid(), "sub": "s-1", "isa_id": "ISA_1", "catalog_id": 3, **overrides})
+
+
+def test_a_brand_request_round_trips_and_queues_oldest_first(brand_requests):
+    from slack_data.models.brand_requests import RequestStatus
+
+    first, second = a_request(note="We make it"), a_request(sub="s-2")
+    brand_requests.put(second)
+    brand_requests.put(first)
+    assert brand_requests.get(first.request_id) == first
+    pending = [r.request_id for r in brand_requests.with_status(RequestStatus.PENDING)]
+    assert pending.index(first.request_id) < pending.index(second.request_id), "ULID order is age order"
+    brand_requests.put(first.model_copy(update={"status": RequestStatus.APPROVED}))
+    assert first.request_id not in [r.request_id for r in brand_requests.with_status(RequestStatus.PENDING)]
+    assert [r.request_id for r in brand_requests.for_person("s-1")][0] == first.request_id
+
+
+def test_brand_links_round_trip_on_a_person(people):
+    from slack_data.models.people import Person
+
+    people.put(Person(sub="maker-1", isa_id="ISA_M1", brands=[3, 23]))
+    assert people.get("maker-1").brands == [3, 23]

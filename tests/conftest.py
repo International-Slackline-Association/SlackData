@@ -26,6 +26,8 @@ from sqlmodel.pool import StaticPool
 
 from slack_data.api import auth
 from slack_data.api.routing import register_routers
+from slack_data.brand_requests.repository import InMemoryBrandRequestRepository
+from slack_data.brand_requests.store import get_brand_request_repository
 from slack_data.changelog.repository import InMemoryChangeLogRepository
 from slack_data.changelog.store import get_changelog_repository
 from slack_data.database import get_session
@@ -82,7 +84,7 @@ def session(engine):
 
 
 @pytest.fixture
-def client(session, submissions, brand_clients, people, changelog):
+def client(session, submissions, brand_clients, people, changelog, brand_requests):
     app = _build_test_app()
 
     def get_session_override():
@@ -92,6 +94,7 @@ def client(session, submissions, brand_clients, people, changelog):
     app.dependency_overrides[get_repository] = lambda: submissions
     app.dependency_overrides[get_client_repository] = lambda: brand_clients
     app.dependency_overrides[get_people_repository] = lambda: people
+    app.dependency_overrides[get_brand_request_repository] = lambda: brand_requests
     app.dependency_overrides[get_changelog_repository] = lambda: changelog
 
     with TestClient(app) as c:
@@ -110,7 +113,7 @@ def submissions():
 
 
 @pytest.fixture
-def read_only_client(session, submissions, brand_clients, people, changelog):
+def read_only_client(session, submissions, brand_clients, people, changelog, brand_requests):
     """A client for the hosted catalogue's shape: GET routes and nothing else.
 
     The session is still writable — the point of the guard is that the routes
@@ -126,6 +129,7 @@ def read_only_client(session, submissions, brand_clients, people, changelog):
     app.dependency_overrides[get_repository] = lambda: submissions
     app.dependency_overrides[get_client_repository] = lambda: brand_clients
     app.dependency_overrides[get_people_repository] = lambda: people
+    app.dependency_overrides[get_brand_request_repository] = lambda: brand_requests
     app.dependency_overrides[get_changelog_repository] = lambda: changelog
 
     with TestClient(app) as c:
@@ -141,6 +145,12 @@ def brand_clients():
     working directory and carry credentials between tests.
     """
     return InMemoryBrandClientRepository()
+
+
+@pytest.fixture
+def brand_requests():
+    """An empty brand-request store, isolated per test (phase 5)."""
+    return InMemoryBrandRequestRepository()
 
 
 @pytest.fixture
