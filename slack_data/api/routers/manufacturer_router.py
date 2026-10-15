@@ -40,8 +40,10 @@ from typing import Annotated
 from fastapi import APIRouter, Depends, HTTPException, Query, Request, status
 
 from slack_data.api.auth import require_manufacturer
+from slack_data.changelog.store import ChangeLogRepositoryDep
 from slack_data.database import SessionDep
 from slack_data.manufacturers import matching
+from slack_data.manufacturers.apply import apply_batch
 from slack_data.models.brand_clients import ManufacturerPrincipal, may_write_directly
 from slack_data.models.manufacturer_updates import (
     MAX_BATCH_ITEMS,
@@ -352,8 +354,16 @@ def submit_gear(
     principal: PrincipalDep,
     session: SessionDep,
     repository: RepositoryDep,
+    log: ChangeLogRepositoryDep,
 ):
-    """Record a brand's own updates to its own products.
+    """Apply — or, without the catalogue store, record — a brand's own updates
+    to its own products.
+
+    **Phase 5:** with the catalogue store, every item is applied live, all or
+    nothing, as an edit by the brand's manufacturer (`manufacturers/apply.py`),
+    and its record is stored `APPLIED` — or `APPROVED`, a to-do, while photo
+    links it sent wait to be uploaded by hand (P5-H). The rest of this
+    docstring is the queue, which is what happens without the store.
 
     Auto-approved on arrival: the sender is the company that makes the thing, so
     there is no decision left for the admin to make — only the JSON edit and the
@@ -377,22 +387,40 @@ def submit_gear(
     # One id for the call, so triage can group N rows back into the request the
     # manufacturer actually made. A ULID, so the group sorts with its members.
     batch_id = new_ulid()
-    applied = may_write_directly(principal)  # False today, structurally — see brand_clients.py
+    applied = may_write_directly(principal)
+    notes = [_note_for(item, batch) for item in batch.items]
+    done = None
+    if applied:
+        from slack_data.catalogue.store import get_catalogue_repository
+
+        done = apply_batch(get_catalogue_repository(), log, principal, batch.items, matches, patches, notes)
 
     records: list[Submission] = []
-    for item, match, patch in zip(batch.items, matches, patches):
+    for index, (item, match, patch) in enumerate(zip(batch.items, matches, patches)):
+        if done is None:
+            state, reviewed, review_note = SubmissionStatus.APPROVED, None, (
+                f"auto-approved: sent by {principal.brand_name} through the manufacturer API"
+            )
+        elif item.image_urls:
+            state, reviewed, review_note = SubmissionStatus.APPROVED, now_iso(), (
+                "applied live through the manufacturer API; the photo links wait to be added by hand"
+            )
+        else:
+            state, reviewed, review_note = SubmissionStatus.APPLIED, now_iso(), (
+                "applied live through the manufacturer API"
+            )
         records.append(
             Submission(
                 submission_id=new_ulid(),
                 kind=SubmissionKind.MANUFACTURER,
                 gear_type=item.gear_type,
-                gear_id=match.gear_id,
-                gear_name=match.gear_name,
+                gear_id=done[index].gear_id if done else match.gear_id,
+                gear_name=done[index].gear_name if done else match.gear_name,
                 # Their own name, from the verified credential — not a string
                 # they sent. This is attribution, so it must not be assertable.
                 gear_brand=principal.brand_name,
                 changes=patch,
-                note=_note_for(item, batch),
+                note=notes[index],
                 source_url=item.source_url,
                 # Stored as sent (cleaned by the model), never fetched here.
                 image_urls=item.image_urls,
@@ -405,17 +433,14 @@ def submit_gear(
                 brand_id=principal.brand_id,
                 batch_id=batch_id,
                 manufacturer_sku=item.manufacturer_sku,
-                status=SubmissionStatus.APPROVED,
+                status=state,
                 created_at=now_iso(),
-                # Nobody reviewed it — a human did not look at this, the
-                # credential did. Leaving this null keeps "reviewed_at" honest;
-                # the review_note below says how it came to be approved.
-                reviewed_at=None,
-                review_note=(
-                    f"auto-approved: sent by {principal.brand_name}"
-                    " through the manufacturer API"
-                ),
-                expires_at=expiry_for(SubmissionStatus.APPROVED),
+                # Nobody reviewed a queued one — the credential did, not a
+                # human — so reviewed_at stays null there; an applied one was
+                # applied now. The review_note says which.
+                reviewed_at=reviewed,
+                review_note=review_note,
+                expires_at=expiry_for(state),
             )
         )
 
@@ -429,6 +454,17 @@ def submit_gear(
         try:
             repository.create(record)
         except Exception as error:
+            if done is not None:
+                # The catalogue changed, and the log says so; only the receipt
+                # rows are missing. A retry re-applies the same values: no harm.
+                raise HTTPException(
+                    status_code=status.HTTP_502_BAD_GATEWAY,
+                    detail=(
+                        f"every item was applied, but only {index} of {len(records)}"
+                        f" receipts were stored; batch_id {batch_id}. The changes are"
+                        " in the catalogue and its change log."
+                    ),
+                ) from error
             raise HTTPException(
                 status_code=status.HTTP_502_BAD_GATEWAY,
                 detail=(

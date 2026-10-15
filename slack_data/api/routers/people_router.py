@@ -314,8 +314,13 @@ def _public(records, people) -> list[ChangeRecordPublic]:
 
     def name_of(isa_id: str) -> str:
         if isa_id not in names:
-            person = people.find_by_isa_id(isa_id)
-            names[isa_id] = person.full_name if person else isa_id
+            if isa_id.startswith("KEY_"):
+                # A brand's API key, not a person (manufacturers/apply.py);
+                # the role beside it names the brand.
+                names[isa_id] = f"API key {isa_id[4:10]}…"
+            else:
+                person = people.find_by_isa_id(isa_id)
+                names[isa_id] = person.full_name if person else isa_id
         return names[isa_id]
 
     return [

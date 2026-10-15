@@ -349,9 +349,21 @@ def _repoint_writes(
 # --- Items ----------------------------------------------------------------------
 
 
-def edit_item(
-    store: CatalogueRepository,
-    log: ChangeLogRepository,
+@dataclass
+class Planned:
+    """An edit worked out against a read of the store, not yet written: what
+    `commit_catalogue_change` takes, and what to answer once it has. Planning
+    and committing apart is what lets the machine API write a batch of items
+    in one transaction (P5-G)."""
+
+    puts: list[Put]
+    counters: list[CounterAdvance]
+    records: list[ChangeRecord]
+    outcome: Outcome
+
+
+def plan_edit_item(
+    documents: list[Document],
     actor: Person,
     collection: str,
     item_id: int,
@@ -363,13 +375,11 @@ def edit_item(
     channel: Channel = Channel.WEB,
     reverts: str | None = None,
     media: bool = False,
-) -> Outcome:
-    """Set fields on an item. A value of None (or `[]`) clears the field.
-    `media`: photos and manuals may be among them (`_check_fields`)."""
+) -> Planned:
+    """`edit_item`, against `documents`, without writing."""
     if not changes:
         raise Invalid("nothing to change")
     _check_fields(collection, changes, media)
-    documents = store.load()
     document = _item(documents, collection, item_id)
     brand = check_gear(actor, documents, document.data.get("brand"), changes)
     if document.data.get(MERGED_KEY) is not None:
@@ -384,7 +394,7 @@ def edit_item(
     entry = canonical(collection, wanted, _brand_names(documents))
     diff = _diff(document.data, entry)
     if not diff:
-        return Outcome(collection, document.key, document.data, document.rev)
+        return Planned([], [], [], Outcome(collection, document.key, document.data, document.rev))
 
     puts = [Put(document.model_copy(update={"data": entry, "rev": document.rev + 1}), rev)]
     records = [
@@ -411,8 +421,64 @@ def edit_item(
         )
         puts += extra_puts
         records += extra_records
-    commit_catalogue_change(store, log, puts, [], records)
-    return Outcome(collection, document.key, entry, document.rev + 1, records)
+    return Planned(puts, [], records, Outcome(collection, document.key, entry, document.rev + 1, records))
+
+
+def edit_item(
+    store: CatalogueRepository,
+    log: ChangeLogRepository,
+    actor: Person,
+    collection: str,
+    item_id: int,
+    rev: int,
+    changes: dict[str, Any],
+    why: str | None = None,
+    **options,
+) -> Outcome:
+    """Set fields on an item. A value of None (or `[]`) clears the field.
+    `media=True`: photos and manuals may be among them (`_check_fields`)."""
+    planned = plan_edit_item(store.load(), actor, collection, item_id, rev, changes, why, **options)
+    if planned.records:
+        commit_catalogue_change(store, log, planned.puts, [], planned.records)
+    return planned.outcome
+
+
+def plan_create_item(
+    documents: list[Document],
+    actor: Person,
+    collection: str,
+    fields: dict[str, Any],
+    new_id: int,
+    why: str | None = None,
+    *,
+    channel: Channel = Channel.WEB,
+    seq_offset: int = 0,
+) -> Planned:
+    """`create_item` with its id already claimed, without writing. The caller
+    advances the counter (once, for every id it handed out)."""
+    if collection not in GEAR:
+        raise NotFound(f"no gear type {collection!r}")
+    _check_fields(collection, fields)
+    # A manufacturer adds products of their own brands (P5-D): `brand` is
+    # theirs to name here, as long as it is one of theirs.
+    brand = check_gear(actor, documents, fields.get("brand"), set(fields) - {"brand"})
+    wanted = {"id": new_id, **{k: v for k, v in fields.items() if v is not None and v != []}}
+    entry = canonical(collection, wanted, _brand_names(documents))
+    seq = max((d.seq for d in documents if d.collection == collection), default=-1) + 1 + seq_offset
+    document = Document(collection=collection, key=str(new_id), seq=seq, data=entry, rev=1)
+    diff = _diff({}, entry)
+    record = _record(
+        actor,
+        TargetType.ITEM,
+        item_target(collection, new_id),
+        Action.ITEM_CREATE,
+        brand,
+        channel=channel,
+        changes=diff,
+        why=why,
+        flags=_flags(collection, diff),
+    )
+    return Planned([Put(document, None)], [], [record], Outcome(collection, document.key, entry, 1, [record]))
 
 
 def create_item(
@@ -425,30 +491,11 @@ def create_item(
 ) -> Outcome:
     if collection not in GEAR:
         raise NotFound(f"no gear type {collection!r}")
-    _check_fields(collection, fields)
     documents = store.load(include_retired=True)
-    # A manufacturer adds products of their own brands (P5-D): `brand` is
-    # theirs to name here, as long as it is one of theirs.
-    brand = check_gear(actor, documents, fields.get("brand"), set(fields) - {"brand"})
     new_id, advance = next_id(store, collection)
-    wanted = {"id": new_id, **{k: v for k, v in fields.items() if v is not None and v != []}}
-    entry = canonical(collection, wanted, _brand_names(documents))
-    seq = max((d.seq for d in documents if d.collection == collection), default=-1) + 1
-    document = Document(collection=collection, key=str(new_id), seq=seq, data=entry, rev=1)
-    diff = _diff({}, entry)
-    record = _record(
-        actor,
-        TargetType.ITEM,
-        item_target(collection, new_id),
-        Action.ITEM_CREATE,
-        brand,
-        channel=Channel.WEB,
-        changes=diff,
-        why=why,
-        flags=_flags(collection, diff),
-    )
-    commit_catalogue_change(store, log, [Put(document, None)], [advance], [record])
-    return Outcome(collection, document.key, entry, 1, [record])
+    planned = plan_create_item(documents, actor, collection, fields, new_id, why)
+    commit_catalogue_change(store, log, planned.puts, [advance], planned.records)
+    return planned.outcome
 
 
 def merge_item(
