@@ -98,7 +98,10 @@ describe('Manuals & documents', () => {
     const rename = (row: Record<string, unknown>) =>
       row.id === item.id ? { ...row, name: `${row.name} (renamed)` } : row
     cy.intercept('GET', `${Cypress.env('apiUrl')}/${apiPathOf(type)}/**`, req => {
-      req.continue(res => {
+      // `before:response`, not `req.continue(callback)`: the e2e bundle is a
+      // development build, so StrictMode aborts the page's first fetch, and
+      // Cypress fails the test when a continue-callback's request is aborted.
+      req.on('before:response', res => {
         res.body = Array.isArray(res.body) ? res.body.map(rename) : rename(res.body)
       })
     })
