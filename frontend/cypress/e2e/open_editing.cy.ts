@@ -59,9 +59,12 @@ describe('Open editing', () => {
         cy.stub(win, 'prompt').returns(EDITOR)
       },
     })
+    cy.getByData('item-history').should('be.visible')
     cy.getByData('item-edit').should('not.exist')
     cy.getByData('item-edit-sign-in').click()
-    cy.getByData('entry-editor').should('be.visible')
+    // Signing in, then who the API says this is, then the editor: on a cold
+    // API the first of these rebuilds the catalogue.
+    cy.getByData('entry-editor', { timeout: 15000 }).should('be.visible')
     cy.location('search').should('not.contain', 'edit=1')
   })
 
