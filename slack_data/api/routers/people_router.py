@@ -495,9 +495,11 @@ def changes_feed(people: PeopleRepositoryDep, log: ChangeLogRepositoryDep) -> Re
 
 @people_router.get("/changes/safety.atom", response_class=Response)
 def safety_feed(people: PeopleRepositoryDep, log: ChangeLogRepositoryDep) -> Response:
-    """Every change to a breaking strength, as an Atom feed — public (D57)."""
+    """Every safety change, as an Atom feed — public (D57): a breaking
+    strength, and since phase 7 any change to an ISA certificate or warning
+    (P7-C)."""
     return _atom(
-        "SlackData — breaking-strength changes",
+        "SlackData — safety changes",
         f"{SITE_URL}/changes?flag=safety",
         _public(log.flagged(SAFETY_FLAG, FEED_SIZE), people),
     )
