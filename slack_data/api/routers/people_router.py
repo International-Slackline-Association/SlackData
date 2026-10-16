@@ -391,7 +391,7 @@ def list_changes(
         raise HTTPException(status.HTTP_422_UNPROCESSABLE_ENTITY, "filter by one of target, actor or flag")
 
     if target_type is not None:
-        records = log.for_target(target_type, target_id, limit)
+        records = log.for_target(target_type, target_id, limit, before)
     elif actor is not None:
         records = log.by_actor(actor, limit, before)
     elif flag is not None:

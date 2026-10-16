@@ -165,6 +165,24 @@ export default function AccountMenu() {
             </form>
           )}
           <Link
+            to={`/people/${auth.me.isa_id}`}
+            role="menuitem"
+            data-cy="account-changes-link"
+            onClick={() => setOpen(false)}
+            className="block rounded-lg px-2 py-1.5 text-sm text-gray-700 hover:bg-gray-100"
+          >
+            Your changes
+          </Link>
+          <Link
+            to="/changes"
+            role="menuitem"
+            data-cy="account-recent-changes-link"
+            onClick={() => setOpen(false)}
+            className="block rounded-lg px-2 py-1.5 text-sm text-gray-700 hover:bg-gray-100"
+          >
+            Recent changes
+          </Link>
+          <Link
             to="/account/brands"
             role="menuitem"
             data-cy="account-brands-link"

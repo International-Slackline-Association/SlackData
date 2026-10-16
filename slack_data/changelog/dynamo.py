@@ -103,9 +103,9 @@ class DynamoChangeLogRepository:
         return self._query(FEED_INDEX, "feed", FEED_ALL, limit, before)
 
     def for_target(
-        self, target_type: TargetType, target_id: str, limit: int = 50
+        self, target_type: TargetType, target_id: str, limit: int = 50, before: str | None = None
     ) -> list[ChangeRecord]:
-        return self._query(TARGET_INDEX, "target", target_key(target_type, target_id), limit, None)
+        return self._query(TARGET_INDEX, "target", target_key(target_type, target_id), limit, before)
 
     def get(self, record_id: str) -> ChangeRecord | None:
         item = self.table.get_item(Key={"id": record_id}, ConsistentRead=True).get("Item")

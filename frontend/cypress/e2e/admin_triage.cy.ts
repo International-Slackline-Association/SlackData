@@ -113,8 +113,8 @@ describe('Admin triage', () => {
       cy.getByData('admin-dev-mode').should('be.visible')
     })
 
-    it('has no suggestion to approve and no JSON patch — only the item to open', () => {
-      cy.getByData('admin-status-filter').filter('[data-status="approved"]').click()
+    it('shows only what is waiting, with no status filter, no Approve and no JSON patch', () => {
+      cy.getByData('admin-status-filter').should('not.exist')
       ourRow().within(() => {
         cy.getByData('applied-live').should('be.visible')
         cy.getByData('submission-row-image').should('contain', `triage-${run}.jpg`)
@@ -124,19 +124,15 @@ describe('Admin triage', () => {
       cy.get('[data-cy="approve"], [data-cy="approved-patch"]').should('not.exist')
     })
 
-    it('counts what is still waiting for photos', () => {
-      cy.getByData('admin-outstanding').should('contain', 'waiting for photos')
-    })
-
-    it('marking it handled moves it to Applied', () => {
-      cy.getByData('admin-status-filter').filter('[data-status="approved"]').click()
+    it('marking it handled takes it off the queue, for good', () => {
       ourRow().within(() => {
         cy.getByData('review-note').type('photo uploaded')
         cy.getByData('mark-handled').click()
       })
       ourRow().should('not.exist')
-      cy.getByData('admin-status-filter').filter('[data-status="applied"]').click()
-      ourRow().should('be.visible')
+      cy.reload()
+      cy.getByData('admin-page').should('be.visible')
+      ourRow().should('not.exist')
     })
 
     it('signing out returns to the prompt', () => {

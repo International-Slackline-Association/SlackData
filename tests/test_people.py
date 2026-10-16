@@ -393,6 +393,15 @@ def test_changes_by_one_person(client, people, changelog):
     assert rows[0]["actor_name"] == "Person1 Example"
 
 
+def test_one_items_history_pages_back_to_its_first_change(client, changelog):
+    """An item's History is shown whole, a page at a time (`before`)."""
+    ids = [changelog.append(_item_record()).id for _ in range(5)]
+    query = {"target_type": "item", "target_id": "grips#1", "limit": 3}
+    newest = client.get("/changes", params=query).json()
+    older = client.get("/changes", params={**query, "before": newest[-1]["id"]}).json()
+    assert [r["id"] for r in newest + older] == ids[::-1]
+
+
 def test_the_safety_changes(client, changelog):
     log = changelog
     flagged = log.append(_item_record())

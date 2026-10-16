@@ -722,6 +722,8 @@ def test_a_targets_history_uses_the_index(changelog):
     changelog.append(a_record(target_id="ISA_HIST0002"))
     history = changelog.for_target(TargetType.PERSON, "ISA_HIST0001")
     assert [r.action for r in history] == [Action.ROLE_REVOKE, Action.ROLE_GRANT]
+    [older] = changelog.for_target(TargetType.PERSON, "ISA_HIST0001", before=history[0].id)
+    assert older.action == Action.ROLE_GRANT
 
 
 def test_a_role_change_and_its_record_are_one_transaction(people, changelog):

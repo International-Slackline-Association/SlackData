@@ -52,6 +52,20 @@ export interface ChangesQuery {
   flag?: 'safety'
 }
 
+/** Every record a query matches, newest first — paged through, 100 at a time
+ *  (the API's most per page). For one item's History: never cut short. */
+export async function fetchAllChanges(query: Omit<ChangesQuery, 'limit' | 'before'>): Promise<ChangeRecordPublic[]> {
+  const PAGE = 100
+  const all: ChangeRecordPublic[] = []
+  let before: string | undefined
+  for (;;) {
+    const page = await fetchChanges({ ...query, limit: PAGE, before })
+    all.push(...page)
+    if (page.length < PAGE) return all
+    before = page[page.length - 1].id
+  }
+}
+
 /** Public — no sign-in. Newest first. */
 export function fetchChanges(query: ChangesQuery | number = {}): Promise<ChangeRecordPublic[]> {
   const params = typeof query === 'number' ? { limit: query } : query

@@ -12,7 +12,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { editItem, fetchFields, fetchStored, mergeItem, revertChange } from '@/api/edits'
 import { fetchGearItem } from '@/api/gear'
-import { fetchChanges } from '@/api/people'
+import { fetchAllChanges } from '@/api/people'
 import { useSiteAuth } from '@/auth/AuthContext'
 import type { ChangeRecordPublic } from '@/types'
 import ChangeList from './ChangeList'
@@ -71,7 +71,8 @@ export default function ItemEditing({
   }
 
   const loadHistory = useCallback(() => {
-    fetchChanges({ target_type: 'item', target_id: `${slug}#${id}` })
+    // All of it, however long: an item's History is never cut short.
+    fetchAllChanges({ target_type: 'item', target_id: `${slug}#${id}` })
       .then(setHistory)
       .catch(() => setHistory([]))
   }, [slug, id])

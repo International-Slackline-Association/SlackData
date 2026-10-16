@@ -26,9 +26,11 @@ import { relativeAge } from '@/utils/age'
 import { batchBrand, groupByBatch, type SubmissionGroup } from '@/utils/batches'
 import { photoLabel } from '@/utils/photoLinks'
 
-// Queue order, not alphabetical: `approved` sits second because it is the
-// bucket with outstanding work — manufacturers' photos still to add.
-const STATUSES: SubmissionStatus[] = ['pending', 'approved', 'applied', 'rejected']
+// The queue is what still needs doing, and nothing else: suggestions sent
+// before the box closed (`pending`) and manufacturers' updates whose photos
+// are still to add (`approved`). Handled and rejected rows are done; their
+// outcome stays on the record.
+const OPEN: SubmissionStatus[] = ['pending', 'approved']
 
 // Matches the default the API applies; it caps `limit` at 100 (MAX_LIST_LIMIT
 // in submissions_router.py). The queue is meant to be worked from the top, so
@@ -40,13 +42,16 @@ const PAGE_SIZE = 50
 // screen, and the queue is meant to be worked from the top.
 const COLLAPSE_BATCH_OVER = 5
 
+/** A full page of either status means more are waiting past it. */
+function pagesFull(rows: Submission[]): boolean {
+  return OPEN.some(status => rows.filter(r => r.status === status).length >= PAGE_SIZE)
+}
+
 export default function AdminPage() {
   const auth = useSiteAuth()
   const { token, isAuthenticated, isAdmin } = auth
 
-  const [status, setStatus] = useState<SubmissionStatus>('pending')
   const [rows, setRows] = useState<Submission[]>([])
-  const [outstanding, setOutstanding] = useState(0)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
@@ -55,15 +60,9 @@ export default function AdminPage() {
     setLoading(true)
     setError(null)
     try {
-      const [visible, approved] = await Promise.all([
-        fetchSubmissions(token, status, PAGE_SIZE),
-        // Always counted, whichever bucket is on screen — an approved record is
-        // unfinished work and should not be invisible just because the queue
-        // filter is elsewhere.
-        status === 'approved' ? Promise.resolve(null) : fetchSubmissions(token, 'approved', PAGE_SIZE),
-      ])
-      setRows(visible)
-      setOutstanding(approved === null ? visible.length : approved.length)
+      const pages = await Promise.all(OPEN.map(status => fetchSubmissions(token, status, PAGE_SIZE)))
+      // Oldest first across both: the id is a ULID, so it sorts by creation.
+      setRows(pages.flat().sort((a, b) => a.submission_id.localeCompare(b.submission_id)))
     } catch (caught) {
       setError(
         caught instanceof ApiError
@@ -73,7 +72,7 @@ export default function AdminPage() {
     } finally {
       setLoading(false)
     }
-  }, [token, isAdmin, status])
+  }, [token, isAdmin])
 
   useEffect(() => {
     void load()
@@ -135,39 +134,6 @@ export default function AdminPage() {
         </p>
       )}
 
-      {status !== 'approved' && outstanding > 0 && (
-        // The count most likely to be quietly wrong: agreed, but not shipped.
-        <button
-          type="button"
-          data-cy="admin-outstanding"
-          onClick={() => setStatus('approved')}
-          className="mt-4 w-full cursor-pointer rounded-lg bg-amber-50 px-3 py-2 text-left text-sm text-amber-900 hover:bg-amber-100"
-        >
-          <strong className="font-semibold">{outstanding}</strong>{' '}
-          {outstanding === 1 ? 'update is' : 'updates are'} still waiting for photos to be added.
-        </button>
-      )}
-
-      <div className="mt-6 flex gap-2">
-        {STATUSES.map(value => (
-          <button
-            key={value}
-            type="button"
-            data-cy="admin-status-filter"
-            data-status={value}
-            aria-pressed={status === value}
-            onClick={() => setStatus(value)}
-            className={`rounded-full px-4 py-1.5 text-sm font-medium capitalize ${
-              status === value
-                ? 'bg-teal-700 text-white'
-                : 'border border-gray-300 text-gray-700 hover:border-gray-400'
-            }`}
-          >
-            {value}
-          </button>
-        ))}
-      </div>
-
       {error && (
         <p data-cy="admin-error" className="mt-6 rounded-lg bg-red-50 px-3 py-2 text-sm text-red-800">
           {error}
@@ -178,7 +144,7 @@ export default function AdminPage() {
 
       {!loading && !error && rows.length === 0 && (
         <p data-cy="admin-empty" className="mt-10 text-center text-gray-500">
-          Nothing {status}.
+          Nothing waiting.
         </p>
       )}
 
@@ -202,7 +168,7 @@ export default function AdminPage() {
         )}
       </ul>
 
-      {rows.length >= PAGE_SIZE && (
+      {pagesFull(rows) && (
         // A full page means the queue is longer than the page. Saying nothing
         // here reads as "that's all of them", which is how a backlog goes
         // unnoticed — the list is capped at the API's limit, not by the data.

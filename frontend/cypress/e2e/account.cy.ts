@@ -152,6 +152,17 @@ describe('Signing in', () => {
       cy.location('pathname').should('eq', '/admin')
     })
 
+    it('links to your own changes and to everyone\'s', () => {
+      cy.visit('/webbings', signedIn())
+      cy.getByData('account-menu').click()
+      cy.getByData('account-changes-link').click()
+      cy.location('pathname').should('eq', `/people/${ME.isa_id}`)
+      cy.getByData('contributions-page').should('be.visible')
+      cy.getByData('account-menu').click()
+      cy.getByData('account-recent-changes-link').click()
+      cy.location('pathname').should('eq', '/changes')
+    })
+
     it('offers no admin link to someone who is not one', () => {
       cy.intercept('GET', '**/me', {
         body: { ...ME, roles: [], ...SEEN },
