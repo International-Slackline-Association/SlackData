@@ -9,29 +9,12 @@
 # where the intent was right and the result was not — a secret that was exported
 # but not picked up, a half B built from a stale env file, a half A rolled back.
 #
-# Covers Phase 1 (the catalogue is up and read-only), Phase 2 (admin auth,
-# Turnstile's two halves) and Phase 4 (the manufacturer routes exist and answer
-# as JSON), and live editing's phase 1 (ISA sign-in configured, the public
-# change log served). It cannot cover the authenticated happy paths: those need
-# a real ISA sign-in or a brand's API key, which are credentials, not checks.
-#
-# ## How the Turnstile probe works, since it looks like it cannot
-#
-# We cannot solve a captcha from a shell, so we cannot test the happy path. We do
-# not need to. `POST /submissions` with **no** captcha token separates the two
-# configurations exactly, and creates nothing either way:
-#
-#   secret configured    -> turnstile.verify(None) returns False  -> 400
-#   secret NOT configured -> the hosted no-secret branch fires     -> 503
-#
-# So a 400 here is the healthy answer and a 503 is the broken one, which is the
-# inverse of what it looks like. See slack_data/api/routers/submissions_router.py
-# ::_check_captcha and slack_data/utilities/turnstile.py.
-#
-# Then we fetch the deployed JS and look for the Turnstile widget. If the bundle
-# renders a captcha but the API has no secret, that is the combination that costs
-# a real person their submission, and it is caught here even though both halves
-# individually "deployed fine".
+# Covers Phase 1 (the catalogue is up and read-only), Phase 2 (admin auth),
+# Phase 4 (the manufacturer routes exist and answer as JSON), and live editing
+# (ISA sign-in configured, the public change log served, the store, media, and —
+# phase 6 — the anonymous suggestion box gone). It cannot cover the
+# authenticated happy paths: those need a real ISA sign-in or a brand's API key,
+# which are credentials, not checks.
 set -uo pipefail
 
 SITE="${1:-https://slackdata.org}"
@@ -200,57 +183,18 @@ case "$STATUS/$CTYPE" in
 esac
 
 echo
-echo "Turnstile — the API half"
+echo "The anonymous suggestion box is gone (live editing phase 6, D56)"
 BODY='{"gear_type":"webbings","gear_id":1,"changes":{"weight":"71"}}'
 STATUS="$(code -X POST -H 'Content-Type: application/json' -d "$BODY" "$API/submissions")"
-SECRET_LIVE=unknown
 case "$STATUS" in
-  400) ok "POST /api/submissions -> 400 (captcha rejected an absent token: the SECRET IS SET)"
-       SECRET_LIVE=yes ;;
-  503) bad "POST /api/submissions -> 503. TURNSTILE_SECRET is NOT set on the function,
-      so EVERY submission is refused. Re-export it and redeploy half A:
-        export TURNSTILE_SECRET='...' && npx serverless deploy --stage prod"
-       SECRET_LIVE=no ;;
-  201) bad "POST /api/submissions -> 201 without a captcha token. The abuse control is
-      OFF on a public write endpoint, and that submission was stored. Investigate now."
-       SECRET_LIVE=off ;;
-  *)   warn "POST /api/submissions -> $STATUS (expected 400). Cannot tell whether the
-      secret is set; check the function's environment by hand." ;;
+  405|401) ok "POST /api/submissions -> $STATUS (no public write; editing needs a sign-in)" ;;
+  201) bad "POST /api/submissions -> 201 without a sign-in. The retired public box is
+      still live, and that suggestion was stored — the function is an old build." ;;
+  *)   warn "POST /api/submissions -> $STATUS (expected 405)." ;;
 esac
-
-echo
-echo "Turnstile — the frontend half"
-# Find the hashed JS bundle from index.html, then look for the widget in it.
 ASSET="$(curl -s "$SITE/" | grep -oE '/assets/index-[A-Za-z0-9_-]+\.js' | head -1)"
-if [ -z "$ASSET" ]; then
-  warn "could not find the JS bundle in $SITE/ — skipping the frontend check."
-else
-  BUNDLE="$(curl -s "$SITE$ASSET")"
-  if printf '%s' "$BUNDLE" | grep -q 'challenges\.cloudflare\.com'; then
-    SITEKEY_LIVE=yes
-    ok "the deployed bundle loads the Turnstile widget (a site key was built in)"
-  else
-    SITEKEY_LIVE=no
-    warn "the deployed bundle has no Turnstile widget — the suggestion form is dark.
-      Deliberate if you have not turned Phase 2 on yet."
-  fi
-
-  echo
-  echo "…and the two halves agree"
-  if [ "$SECRET_LIVE" = "no" ] && [ "$SITEKEY_LIVE" = "yes" ]; then
-    bad "MISMATCH — the live site RENDERS the suggestion form and the live API REFUSES
-      every submission it sends. A visitor will solve a captcha, hit submit, and lose
-      what they typed. Fix half A (export TURNSTILE_SECRET, redeploy) or rebuild half B
-      without VITE_TURNSTILE_SITE_KEY."
-  elif [ "$SECRET_LIVE" = "yes" ] && [ "$SITEKEY_LIVE" = "no" ]; then
-    warn "the API accepts submissions but the form is not rendered, so nothing can
-      reach it. Harmless, but the feature is invisible: set TURNSTILE_SITE_KEY,
-      run ./sync-env.sh, rebuild, redeploy half B."
-  elif [ "$SECRET_LIVE" = "yes" ] && [ "$SITEKEY_LIVE" = "yes" ]; then
-    ok "both halves live — submissions work end to end"
-  elif [ "$SECRET_LIVE" = "no" ] && [ "$SITEKEY_LIVE" = "no" ]; then
-    ok "both halves absent — submissions are consistently dark (no user can hit the 503)"
-  fi
+if [ -n "$ASSET" ] && curl -s "$SITE$ASSET" | grep -q 'challenges\.cloudflare\.com'; then
+  warn "the deployed bundle still loads the Turnstile widget — half B is an old build."
 fi
 
 echo

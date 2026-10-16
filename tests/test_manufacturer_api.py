@@ -49,7 +49,11 @@ from slack_data.models.manufacturer_updates import (
     MAX_ITEM_CHANGES,
     Resolution,
 )
-from slack_data.models.submissions import MAX_URL_LENGTH, SubmissionKind, SubmissionStatus
+from slack_data.models.submissions import (
+    MAX_URL_LENGTH,
+    SubmissionKind,
+    SubmissionStatus,
+)
 from slack_data.models.webbing import FiberMaterial, Webbing
 from slack_data.models.weblocks import Weblock
 from slack_data.people.repository import InMemoryPeopleRepository
@@ -1536,19 +1540,6 @@ def test_the_api_does_not_fetch_the_photo_links(client, gear, monkeypatch):
     assert _photos(client, [PHOTO]).status_code == 201
 
 
-def test_the_public_box_does_not_take_photo_links(client):
-    """Anonymous photo links are a moderation problem the authenticated path
-    does not have. The key is ignored, not stored."""
-    response = client.post(
-        "/submissions",
-        json={"kind": "correction", "gear_type": "webbings", "gear_id": 1,
-              "changes": {"weight": "70"}, "image_urls": [PHOTO]},
-    )
-    assert response.status_code == 201, response.json()
-    stored = client.get("/submissions", headers=ADMIN).json()
-    assert stored[0]["image_urls"] == []
-
-
 # --- Separation from the catalogue ------------------------------------------
 
 
@@ -1600,18 +1591,6 @@ def test_the_routes_are_mounted_in_read_only_mode(read_only_client, gear):
 
 
 # --- The public box cannot impersonate a manufacturer -----------------------
-
-
-def test_the_public_box_cannot_claim_the_manufacturer_kind(client):
-    """Triage shows a manufacturer submission as better evidence than an
-    anonymous report. If anyone could claim the kind, that badge would be worth
-    nothing."""
-    response = client.post(
-        "/submissions/",
-        json={"kind": "manufacturer", "gear_type": "webbings", "gear_id": 1,
-              "changes": {"weight": "70"}},
-    )
-    assert response.status_code == 422
 
 
 def test_a_misconfigured_store_does_not_mask_the_auth_answer(client, gear, monkeypatch):

@@ -1,20 +1,17 @@
 """
-Submissions — the public suggestion box and the admin triage queue.
+Submissions — the admin triage queue.
 
-This is the first endpoint in SlackData that an anonymous member of the public
-can write through, so most of what is asserted here is about what it *refuses*:
-unknown gear types, invented field names, oversized bodies, bots, and any route
-that isn't the POST being reachable without a token.
-
-The other theme is separation. `POST /submissions/` has to work on the live
-site, where the catalogue SQLite file is opened read-only — so the router must
-never touch the catalogue session. That is easy to get wrong and impossible to
-notice locally, where the catalogue is writable, hence the explicit test below.
+Since phase 6 (LIVE_EDITING_PHASE_6.md, D56, P6-G/H) there is no public
+suggestion box: anyone with an ISA account edits instead. What stays is the
+store and its triage — the suggestions sent before the switch-off, until they
+are dealt with or expire, and the manufacturer API's to-do rows (photo links,
+P5-H). So the rows here are put straight into the store, as those two ways
+left them, and what is asserted is the queue: who may read it, its order, the
+review states and their expiry, and that it never touches the catalogue.
 """
 
 import os
 
-import pytest
 from fastapi import FastAPI
 from fastapi.testclient import TestClient
 
@@ -23,15 +20,14 @@ from slack_data.api.routing import register_routers
 from slack_data.changelog.store import get_changelog_repository
 from slack_data.database import get_session
 from slack_data.models.submissions import (
-    MAX_CHANGES,
-    MAX_NOTE_LENGTH,
-    MAX_VALUE_LENGTH,
+    Submission,
     SubmissionStatus,
+    expiry_for,
+    now_iso,
 )
 from slack_data.people.store import get_people_repository
 from slack_data.submissions.store import get_repository
-from slack_data.utilities import turnstile
-from slack_data.utilities.ulid import is_ulid
+from slack_data.utilities.ulid import new_ulid
 
 ADMIN = {"Authorization": f"Bearer {auth.ADMIN_DEV_TOKEN}"}
 
@@ -45,73 +41,35 @@ CORRECTION = {
     "source_url": "https://example.com/spec.pdf",
 }
 
-NEW_ITEM = {
-    "kind": "new_item",
-    "gear_type": "weblocks",
-    "gear_name": "Some Unlisted Weblock",
-    "changes": {"brand_name": "Balance Community"},
-}
+
+class Stored:
+    """What the old public POST answered, for the tests that read the id back."""
+
+    def __init__(self, submission_id: str) -> None:
+        self.submission_id = submission_id
+
+    def json(self) -> dict:
+        return {"submission_id": self.submission_id}
+
+
+def a_submission(**overrides) -> Submission:
+    return Submission(
+        submission_id=new_ulid(),
+        status=SubmissionStatus.PENDING,
+        created_at=now_iso(),
+        expires_at=expiry_for(SubmissionStatus.PENDING),
+        **{**CORRECTION, **overrides},
+    )
 
 
 def submit(client, **overrides):
-    return client.post("/submissions", json={**CORRECTION, **overrides})
+    """A suggestion as the box stored it, before it was switched off."""
+    repository = client.app.dependency_overrides[get_repository]()
+    return Stored(repository.create(a_submission(**overrides)).submission_id)
 
 
 def pending(client):
     return client.get("/submissions", headers=ADMIN).json()
-
-
-# --- The happy path ---------------------------------------------------------
-
-
-def test_a_correction_is_accepted_and_appears_in_triage(client):
-    response = submit(client)
-    assert response.status_code == 201
-
-    receipt = response.json()
-    assert is_ulid(receipt["submission_id"])
-    assert receipt["status"] == "pending"
-
-    queued = pending(client)
-    assert len(queued) == 1
-    assert queued[0]["submission_id"] == receipt["submission_id"]
-    assert queued[0]["changes"] == {"breaking_strength": "31"}
-    assert queued[0]["gear_id"] == 12
-
-
-def test_a_new_item_tip_is_accepted(client):
-    assert client.post("/submissions", json=NEW_ITEM).status_code == 201
-    assert pending(client)[0]["kind"] == "new_item"
-
-
-def test_a_correction_may_be_a_note_alone(client):
-    """Not every reporter knows which field is wrong — prose is still useful."""
-    assert submit(client, changes={}, note="The photo is of a different model.").status_code == 201
-
-
-def test_the_receipt_does_not_echo_the_submission(client):
-    """Otherwise the POST doubles as a read endpoint for anonymous callers."""
-    body = submit(client).json()
-    assert set(body) == {"submission_id", "status"}
-
-
-def test_a_submission_records_no_ip_or_user_agent(client):
-    """§ Privacy: an anonymous box that logs IPs is not an anonymous box."""
-    submit(client)
-    stored = pending(client)[0]
-    assert "ip" not in stored and "user_agent" not in stored
-    assert stored["submitter_email"] is None
-
-
-def test_a_submission_carries_an_expiry(client):
-    """DynamoDB's TTL is what actually enforces retention — it must be set."""
-    submit(client)
-    assert pending(client)[0]["expires_at"] > 0
-
-
-def test_submitted_by_is_carried_as_null_for_phase_3(client):
-    submit(client)
-    assert pending(client)[0]["submitted_by"] is None
 
 
 # --- Triage ordering and filtering ------------------------------------------
@@ -241,320 +199,6 @@ def test_reading_one_submission(client):
     assert response.json()["submission_id"] == submission_id
 
 
-# --- What it refuses --------------------------------------------------------
-
-
-def test_an_unknown_gear_type_is_rejected(client):
-    assert submit(client, gear_type="parachutes").status_code == 422
-
-
-def test_an_unknown_field_name_is_rejected(client):
-    """Without this the queue fills with typos no one can turn into a patch."""
-    response = submit(client, changes={"breaking_stength": "31"})
-    assert response.status_code == 422
-    assert "breaking_stength" in response.text
-
-
-def test_the_allowed_fields_come_from_the_real_model(client):
-    """A field is correctable because the model has it — never because a list says so."""
-    from slack_data.models.webbing import WebbingUpdate
-    from slack_data.submissions.fields import CORRECTABLE_FIELDS
-
-    assert "weight" in WebbingUpdate.model_fields
-    assert submit(client, changes={"weight": "62"}).status_code == 201
-    # And the exclusions hold: brand_id is a foreign key, not a fact to correct.
-    assert "brand_id" not in CORRECTABLE_FIELDS["webbings"]
-    assert submit(client, changes={"brand_id": "17"}).status_code == 422
-
-
-def test_a_correction_must_name_the_item_it_corrects(client):
-    assert submit(client, gear_id=None).status_code == 422
-
-
-def test_a_new_item_cannot_claim_an_existing_id(client):
-    """Otherwise it reads as a correction to whatever row holds that id."""
-    response = client.post("/submissions", json={**NEW_ITEM, "gear_id": 12})
-    assert response.status_code == 422
-
-
-def test_a_new_item_needs_a_name(client):
-    response = client.post("/submissions", json={**NEW_ITEM, "gear_name": ""})
-    assert response.status_code == 422
-
-
-def test_an_empty_correction_is_rejected(client):
-    assert submit(client, changes={}, note=None).status_code == 422
-
-
-def test_a_blank_proposed_value_is_rejected(client):
-    assert submit(client, changes={"breaking_strength": "   "}).status_code == 422
-
-
-def test_a_bad_source_url_is_rejected(client):
-    assert submit(client, source_url="javascript:alert(1)").status_code == 422
-    assert submit(client, source_url="ftp://example.com").status_code == 422
-
-
-def test_a_bad_email_is_rejected(client):
-    assert submit(client, submitter_email="not-an-email").status_code == 422
-    assert submit(client, submitter_email="a@b.co").status_code == 201
-
-
-def test_blank_optional_strings_are_treated_as_omitted(client):
-    """An untouched form input posts "", which must not become a stored value."""
-    response = submit(client, source_url="", submitter_email="", gear_name="")
-    assert response.status_code == 201
-    stored = pending(client)[0]
-    assert stored["source_url"] is None
-    assert stored["submitter_email"] is None
-
-
-# --- Caps -------------------------------------------------------------------
-
-
-def test_too_many_changed_fields_are_rejected(client):
-    """Weblocks, because it is one of only two types with more than MAX_CHANGES
-    correctable fields — so the cap is reached with entirely *valid* names, and
-    the test is about the cap rather than about the unknown-field check."""
-    from slack_data.submissions.fields import CORRECTABLE_FIELDS
-
-    names = sorted(CORRECTABLE_FIELDS["weblocks"])[: MAX_CHANGES + 1]
-    assert len(names) == MAX_CHANGES + 1, "weblocks must have enough fields to exceed the cap"
-
-    response = client.post(
-        "/submissions",
-        json={
-            "gear_type": "weblocks",
-            "gear_id": 3,
-            "changes": {name: "x" for name in names},
-        },
-    )
-    assert response.status_code == 422
-    assert str(MAX_CHANGES) in response.text
-
-    # ...and the boundary itself is allowed.
-    assert (
-        client.post(
-            "/submissions",
-            json={
-                "gear_type": "weblocks",
-                "gear_id": 3,
-                "changes": {name: "x" for name in names[:MAX_CHANGES]},
-            },
-        ).status_code
-        == 201
-    )
-
-
-def test_an_overlong_value_is_rejected(client):
-    assert submit(client, changes={"name": "x" * (MAX_VALUE_LENGTH + 1)}).status_code == 422
-    assert submit(client, changes={"name": "x" * MAX_VALUE_LENGTH}).status_code == 201
-
-
-def test_an_overlong_note_is_rejected(client):
-    assert submit(client, note="x" * (MAX_NOTE_LENGTH + 1)).status_code == 422
-
-
-def test_an_oversized_body_is_rejected_before_it_is_read(client):
-    """A 413 on Content-Length, so the payload never costs us anything."""
-    response = client.post(
-        "/submissions",
-        content=b'{"gear_type": "webbings", "padding": "' + b"x" * 20_000 + b'"}',
-        headers={"Content-Type": "application/json"},
-    )
-    assert response.status_code == 413
-
-
-# --- Bots -------------------------------------------------------------------
-
-
-def test_the_honeypot_stores_nothing_but_looks_like_success(client):
-    """A bot must learn nothing from the response, so it mirrors a real receipt."""
-    response = submit(client, website="http://spam.example")
-    assert response.status_code == 201
-    assert is_ulid(response.json()["submission_id"])
-    assert response.json()["status"] == "pending"
-    assert pending(client) == []
-
-
-def test_the_honeypot_short_circuits_before_the_captcha(client, monkeypatch):
-    """A bot that trips the honeypot must not even cost us a Cloudflare call."""
-    calls = []
-    monkeypatch.setenv("TURNSTILE_SECRET", "test-secret")
-    monkeypatch.setattr(turnstile, "verify", lambda token: calls.append(token) or True)
-
-    assert submit(client, website="http://spam.example").status_code == 201
-    assert calls == []
-
-
-def test_the_honeypot_and_captcha_fields_are_never_stored(client):
-    submit(client, captcha_token="a-token")
-    stored = pending(client)[0]
-    assert "website" not in stored
-    assert "captcha_token" not in stored
-
-
-# --- Captcha ----------------------------------------------------------------
-
-
-def test_no_captcha_is_required_locally(client):
-    """Local dev and Cypress run with no Cloudflare secret and must still work."""
-    assert not turnstile.is_enabled()
-    assert submit(client).status_code == 201
-
-
-def test_a_failed_captcha_is_rejected(client, monkeypatch):
-    monkeypatch.setenv("TURNSTILE_SECRET", "test-secret")
-    monkeypatch.setattr(turnstile, "verify", lambda token: False)
-    assert submit(client, captcha_token="bad").status_code == 400
-
-
-def test_a_passed_captcha_is_accepted(client, monkeypatch):
-    monkeypatch.setenv("TURNSTILE_SECRET", "test-secret")
-    monkeypatch.setattr(turnstile, "verify", lambda token: True)
-    assert submit(client, captcha_token="good").status_code == 201
-
-
-def test_an_unreachable_captcha_is_a_503_not_a_rejection(client, monkeypatch):
-    """Blame the outage, not the submitter — a 400 would read as "you failed"."""
-    monkeypatch.setenv("TURNSTILE_SECRET", "test-secret")
-
-    def unavailable(token):
-        raise turnstile.CaptchaUnavailable("cloudflare down")
-
-    monkeypatch.setattr(turnstile, "verify", unavailable)
-    assert submit(client, captcha_token="good").status_code == 503
-
-
-def test_hosted_without_a_captcha_secret_refuses_submissions(client, monkeypatch):
-    """Fails closed. A missing secret must not silently disable the abuse control."""
-    from slack_data import database
-
-    monkeypatch.delenv("TURNSTILE_SECRET", raising=False)
-    monkeypatch.setattr(database, "READ_ONLY", True)
-    assert submit(client).status_code == 503
-
-
-def test_the_startup_warning_fires_only_when_hosted_and_unconfigured(monkeypatch, caplog):
-    """The misconfiguration announces itself in the logs.
-
-    Quiet locally (no secret is normal there) and quiet when configured; loud
-    only in the state where a hosted deploy will refuse every submission.
-    """
-    import logging
-
-    from slack_data import database
-    from slack_data.api.routers import submissions_router as router
-
-    def warned() -> bool:
-        caplog.clear()
-        with caplog.at_level(logging.WARNING, logger=router.logger.name):
-            router.warn_if_captcha_is_unconfigured()
-        return any("TURNSTILE_SECRET" in r.message for r in caplog.records)
-
-    monkeypatch.delenv("TURNSTILE_SECRET", raising=False)
-
-    monkeypatch.setattr(database, "READ_ONLY", False)
-    assert not warned(), "local dev has no secret and that is normal — stay quiet"
-
-    monkeypatch.setattr(database, "READ_ONLY", True)
-    assert warned(), "hosted with no secret is the silent failure this exists for"
-
-    monkeypatch.setenv("TURNSTILE_SECRET", "configured")
-    assert not warned(), "configured hosted must be quiet"
-
-
-def test_the_hosted_entrypoint_runs_the_startup_check():
-    """**Pinned because the obvious placement does not work.**
-
-    `lambda_handler.py` builds Mangum with `lifespan="off"`, so a check placed in
-    `main.py`'s lifespan runs under uvicorn, passes its test, and is silent in
-    the only environment it exists for. It was written there first, and a run of
-    the real container image is what caught it. The hosted cold-start path is
-    this module, so the call has to be here.
-    """
-    from pathlib import Path
-
-    source = Path("slack_data/lambda_handler.py").read_text()
-    assert "warn_if_captcha_is_unconfigured()" in source, (
-        "the hosted cold start must run the captcha configuration check;"
-        " main.py's lifespan does not execute under Mangum(lifespan='off')"
-    )
-
-
-def test_a_tokenless_post_separates_the_two_captcha_configurations(
-    client, submissions, monkeypatch
-):
-    """**A deploy-verification contract, not just a status code.**
-
-    `infra/verify-deploy.sh` decides whether the live Lambda has a
-    `TURNSTILE_SECRET` by POSTing with **no** captcha token and reading the
-    answer. It cannot solve a captcha from a shell, and it does not need to —
-    these two codes separate the configurations exactly, and neither stores
-    anything:
-
-        secret set     -> verify(None) is False          -> 400
-        secret not set -> the hosted no-secret branch     -> 503
-
-    That is the inverse of how it reads: 400 is the healthy answer. If either
-    code changes, the post-deploy check silently starts reporting the wrong
-    thing about production, so it is pinned here.
-    """
-    from slack_data import database
-
-    monkeypatch.setattr(database, "READ_ONLY", True)  # hosted
-
-    monkeypatch.delenv("TURNSTILE_SECRET", raising=False)
-    assert submit(client, captcha_token=None).status_code == 503, (
-        "no secret hosted must be 503 — verify-deploy.sh reads this as 'misconfigured'"
-    )
-
-    monkeypatch.setenv("TURNSTILE_SECRET", "a-real-looking-secret")
-    assert submit(client, captcha_token=None).status_code == 400, (
-        "a secret with no token must be 400 — verify-deploy.sh reads this as 'healthy'"
-    )
-    # Asserted against the store rather than the triage route: READ_ONLY is
-    # patched on above, so `require_admin` is in its hosted lockout and the
-    # admin list would 503 regardless of what was stored.
-    assert submissions.list_by_status(SubmissionStatus.PENDING) == [], (
-        "neither probe may store a submission"
-    )
-
-
-def test_the_deploy_verifier_probes_the_documented_codes():
-    """The script and the contract above must not drift apart.
-
-    Cheap, and it is the only thing connecting a bash file nobody runs in CI to
-    the behaviour it depends on.
-    """
-    from pathlib import Path
-
-    script = Path("infra/verify-deploy.sh").read_text()
-    assert "400)" in script and "503)" in script, (
-        "verify-deploy.sh must branch on both codes the API actually returns"
-    )
-    assert "SECRET_LIVE=yes" in script and "SECRET_LIVE=no" in script
-
-
-def test_turnstile_verify_rejects_a_missing_token(monkeypatch):
-    monkeypatch.setenv("TURNSTILE_SECRET", "test-secret")
-    assert turnstile.verify(None) is False
-    assert turnstile.verify("") is False
-
-
-def test_turnstile_raises_rather_than_passing_on_a_network_error(monkeypatch):
-    import httpx
-
-    monkeypatch.setenv("TURNSTILE_SECRET", "test-secret")
-
-    def boom(*args, **kwargs):
-        raise httpx.ConnectError("no route to host")
-
-    monkeypatch.setattr(httpx, "post", boom)
-    with pytest.raises(turnstile.CaptchaUnavailable):
-        turnstile.verify("a-token")
-
-
 # --- Separation from the catalogue ------------------------------------------
 
 
@@ -577,38 +221,29 @@ def test_submissions_never_touch_the_catalogue_session(submissions, people, chan
     app.dependency_overrides[get_repository] = lambda: submissions
     app.dependency_overrides[get_people_repository] = lambda: people
     app.dependency_overrides[get_changelog_repository] = lambda: changelog
+    stored = submissions.create(a_submission())
 
     with TestClient(app) as unwired:
-        created = unwired.post("/submissions", json=CORRECTION)
-        assert created.status_code == 201
         assert unwired.get("/submissions", headers=ADMIN).status_code == 200
         assert (
             unwired.patch(
-                f"/submissions/{created.json()['submission_id']}",
-                json={"status": "approved"},
-                headers=ADMIN,
+                f"/submissions/{stored.submission_id}", json={"status": "applied"}, headers=ADMIN
             ).status_code
             == 200
         )
 
 
-def test_submissions_stay_mounted_when_the_catalogue_is_read_only(read_only_client):
-    """Hosted, the catalogue drops its writes but this endpoint must survive.
+def test_the_public_box_is_gone(client):
+    """D56, P6-H: nobody posts a suggestion any more — they sign in and edit."""
+    assert client.post("/submissions", json=CORRECTION).status_code in (401, 405)
+    assert client.get("/submissions").status_code == 401
 
-    It writes to DynamoDB, a different store entirely — see
-    slack_data/api/routing.py § WRITABLE_ROUTERS.
-    """
-    assert read_only_client.post("/submissions", json=CORRECTION).status_code == 201
+
+def test_triage_stays_mounted_when_the_catalogue_is_read_only(read_only_client):
+    """It reads and writes DynamoDB, a different store entirely — see
+    slack_data/api/routing.py § WRITABLE_ROUTERS."""
     assert read_only_client.get("/submissions", headers=ADMIN).status_code == 200
-    # ...while the catalogue write next door is still gone.
     assert read_only_client.delete("/webbing/1").status_code == 405
-
-
-def test_submissions_are_in_the_openapi_schema_when_hosted(read_only_client):
-    """The public POST is a documented route; the read-only filter must spare it."""
-    paths = read_only_client.get("/openapi.json").json()["paths"]
-    assert "post" in paths["/submissions"]
-    assert "patch" in paths["/submissions/{submission_id}"]
 
 
 # --- The repository contract ------------------------------------------------
@@ -831,21 +466,9 @@ def test_the_app_sends_no_email():
     assert offenders == [], f"the app must send no mail, but: {offenders}"
 
 
-def test_the_honeypot_still_stores_nothing(client):
-    """Kept from the old alert block, because the assertion outlived the mailer.
-
-    The honeypot's job was never only "send no mail" — it is that a bot gets a
-    well-formed receipt and the store stays empty, so there is no signal to tune
-    against.
-    """
-    response = submit(client, website="http://spam.example")
-    assert response.status_code == 201
-    assert is_ulid(response.json()["submission_id"])
-    assert pending(client) == []
-# --- Durable item identity ----------------------------------------------------
 
 
-def test_a_correction_records_the_brand_not_just_the_name(client):
+def test_a_suggestion_keeps_the_brand_not_just_the_name(client):
     """Gear ids are not stable, so the brand is what makes a record resolvable.
 
     The root *.json files carry no ids — a gear id is a SQLite autoincrement
@@ -867,9 +490,6 @@ def test_the_brand_survives_review(client):
     assert reviewed["gear_brand"] == "Balance Community"
 
 
-def test_a_blank_brand_is_stored_as_absent(client):
-    submit(client, gear_brand="   ")
-    assert pending(client)[0]["gear_brand"] is None
 
 
 def test_bare_names_really_do_collide(client):

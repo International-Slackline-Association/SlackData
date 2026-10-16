@@ -88,12 +88,14 @@ def test_catches_a_stage_that_does_not_wait_for_its_routes(template: str) -> Non
 
 def test_catches_two_route_keys_that_compile_to_one_resource(template: str) -> None:
     """Defect 2b — the collision. Re-created by declaring both spellings as
-    events again, which is what the template did until 2026-08-25."""
+    events, which is what the template did for `POST /submissions` until
+    2026-08-25 (that route was retired in live editing phase 6)."""
     broken = template.replace(
-        "      - httpApi: 'POST /submissions'",
-        "      - httpApi: 'POST /submissions'\n      - httpApi: 'POST /submissions/'",
+        "      - httpApi: 'POST /manufacturer/gear'",
+        "      - httpApi: 'POST /manufacturer/gear'\n      - httpApi: 'POST /manufacturer/gear/'",
         1,
     )
+    assert broken != template
     found = check_routes.problems(broken)
     assert any("COLLISION" in line for line in found), found
 
@@ -108,10 +110,11 @@ def test_catches_a_route_key_api_gateway_will_not_accept(template: str) -> None:
     in a slash for a year.
     """
     broken = template.replace(
-        "      - httpApi: 'POST /submissions'",
-        "      - httpApi: 'POST /submissions/'",
+        "      - httpApi: 'POST /manufacturer/gear'",
+        "      - httpApi: 'POST /manufacturer/gear/'",
         1,
-    ).replace("          'POST /submissions':", "          'POST /submissions/':", 1)
+    ).replace("          'POST /manufacturer/gear':", "          'POST /manufacturer/gear/':", 1)
+    assert broken != template
 
     found = check_routes.problems(broken)
     assert any("ILLEGAL" in line for line in found), found

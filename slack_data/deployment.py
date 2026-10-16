@@ -1,9 +1,9 @@
 """
 Is this process the live site? — the one answer every fail-closed guard asks.
 
-Three things fail closed when hosted and open up locally: the admin dev token,
-the manufacturer dev token (both in `api/auth.py`), and the captcha on the
-public submission box (`api/routers/submissions_router.py`). The dev tokens are
+Things fail closed when hosted and open up locally: the admin dev token, the
+dev person token and the manufacturer dev token (all in `api/auth.py`), and the
+local media routes (`api/routers/media_router.py`). The dev tokens are
 in this public repository, so "hosted" being answered wrong is the difference
 between a locked admin API and one whose password anyone can read.
 

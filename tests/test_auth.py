@@ -68,13 +68,13 @@ def test_admin_routes_reject_a_non_bearer_scheme(client):
     assert client.get("/submissions/").status_code == 401
 
 
-def test_public_post_needs_no_credentials(client):
-    """The one route that must stay open. A regression here is silent."""
+def test_there_is_no_public_post_any_more(client):
+    """The anonymous box was the one open write; phase 6 retired it (D56)."""
     response = client.post(
         "/submissions/",
         json={"gear_type": "webbings", "gear_id": 1, "changes": {"name": "Fixed"}},
     )
-    assert response.status_code == 201
+    assert response.status_code in (401, 405)
 
 
 # --- Local dev token --------------------------------------------------------

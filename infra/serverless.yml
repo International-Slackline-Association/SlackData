@@ -140,11 +140,6 @@ functions:
       # admins grant admins on the site. Unset, nobody is bootstrapped.
       ADMIN_BOOTSTRAP_EMAILS: ${env:ADMIN_BOOTSTRAP_EMAILS, ''}
       SUBMISSION_RETENTION_DAYS: '365'             # pending the ISA's answer
-      # Read from the deployer's shell at deploy time, so the secret is never in
-      # this repo. If it is unset the app fails CLOSED — `POST /submissions`
-      # answers 503 rather than running with the captcha disabled. See
-      # slack_data/utilities/turnstile.py.
-      TURNSTILE_SECRET: ${env:TURNSTILE_SECRET, ''}
       # No mail configuration, deliberately. **The app sends no email.** SES
       # would mean an identity to verify, DKIM to keep valid, a sending
       # reputation attached to slackdata.org, and an execution role able to send
@@ -158,28 +153,17 @@ functions:
       # It is unused; dropping it is queued for the next policy revision rather
       # than a round-trip of its own.
     events:
-      # Explicit routes for the public write endpoint, listed BEFORE the
-      # catch-all. They exist solely so the stage can throttle them by name:
-      # route settings key on a route key, and '*' compiles to a single
-      # $default route that cannot be targeted (see RouteSettings below).
+      # An explicit route, listed BEFORE the catch-all, so the stage can
+      # throttle it by name: route settings key on a route key, and '*'
+      # compiles to a single $default route that cannot be targeted (see
+      # RouteSettings below). Authenticated, but the largest body the API
+      # accepts (256 KB) and still a write.
       #
-      # ONE spelling, and it is the un-slashed one, because that is the only
-      # one API Gateway will accept: a route key may not end in '/' (it rejects
-      # the empty path segment with "Part of the given route key path is
-      # empty"). `POST /submissions/` is therefore unthrottleable by
-      # construction — which is why `submissions_router.py` serves the canonical
-      # path at `/submissions` and the SPA calls that. FastAPI still answers the
-      # slashed spelling via a 307, but a request that arrives that way lands on
-      # $default and pays the generous global rate.
-      #
-      # Declaring both also collided: Serverless normalises the two route keys
-      # to the same logical id (naming.js::normalizePath splits on '/', so a
-      # trailing empty segment contributes nothing), and the last declaration
-      # silently won. infra/check-routes.py now catches both faults.
-      - httpApi: 'POST /submissions'
-      # Authenticated, but still the largest body the API accepts (256 KB) and
-      # still a write. Named for the same reason: a route key is the only thing
-      # RouteSettings can throttle.
+      # A route key may not end in '/' (API Gateway rejects the empty path
+      # segment), and two keys differing only by one normalise to the same
+      # logical id; infra/check-routes.py catches both faults. The public
+      # `POST /submissions` that taught us this was retired in live editing
+      # phase 6 (D56) — editing needs an ISA sign-in instead.
       - httpApi: 'POST /manufacturer/gear'
       - httpApi: '*'                               # proxy every method/path to FastAPI
 
@@ -211,7 +195,6 @@ resources:
       # Serverless v3 spreads this list onto the resource's own DependsOn
       # (merge-custom-provider-resources.js — it must be a list, not a string).
       DependsOn:
-        - HttpApiRoutePostSubmissions
         - HttpApiRoutePostManufacturerGear
       Properties:
         DefaultRouteSettings:
@@ -221,19 +204,6 @@ resources:
           ThrottlingRateLimit: 50
           ThrottlingBurstLimit: 100
         RouteSettings:
-          # The one unauthenticated write endpoint on the site. A human
-          # correcting a spec submits once; two a second with a burst of five is
-          # far more than that and far less than a bot needs to be a problem.
-          #
-          # **Per-stage, not per-IP.** HTTP APIs have no usage plans, so this is
-          # a shared budget: a determined bot can spend it and make the box
-          # unavailable to everyone. Accepted — the cost is a temporarily
-          # unavailable suggestion form, the catalogue is untouched, and the
-          # alternative (WAF rate-based rules) is a monthly bill for a feature
-          # nobody has yet abused. Revisit if it is ever actually abused.
-          'POST /submissions':
-            ThrottlingRateLimit: 2
-            ThrottlingBurstLimit: 5
           # A brand posts their whole line in one call, so the useful rate is
           # low and the burst matters more than the sustained rate — a first
           # integration run is a handful of calls in a few seconds, then
