@@ -17,10 +17,12 @@ What has to hold for the switch-over to be safe:
 import contextlib
 import io
 import json
+from concurrent.futures import ThreadPoolExecutor
 
 import pytest
 from fastapi import FastAPI
 from fastapi.testclient import TestClient
+from sqlmodel import Session, select
 
 from slack_data.api.routing import register_routers
 from slack_data.catalogue import live as live_module
@@ -46,7 +48,9 @@ from slack_data.catalogue.repository import (
     SqliteCatalogueRepository,
 )
 from slack_data.catalogue.store import set_catalogue_repository
+from slack_data.database import get_session
 from slack_data.load_data._seed_io import seed_path
+from slack_data.models.webbing import Webbing
 
 
 def quietly(function, *args):
@@ -129,6 +133,42 @@ def test_an_edited_document_is_exactly_one_difference(file_documents, from_files
     [difference] = compare(from_files, quietly(build_engine, sources_from_documents(edited)))
     assert difference.startswith(f"webbing ({webbing.data['id']},) weight:")
     assert difference.endswith("!= 999.0")
+
+
+def test_a_built_catalogue_serves_concurrent_requests(from_files):
+    """FastAPI serves each request on a thread-pool thread. A catalogue on one
+    connection shared by every thread broke under that: interleaved queries
+    failed with "bad parameter or other API misuse", and then the process
+    died (CI's API, in store mode). Each thread needs a connection of its own."""
+    app = FastAPI()
+    register_routers(app, read_only=True)
+
+    def session():
+        with Session(from_files) as s:
+            yield s
+
+    app.dependency_overrides[get_session] = session
+    paths = [f"/{prefix}/?limit=100" for prefix in ("webbing", "weblock", "connector", "starterkit")]
+    with TestClient(app) as client:
+        expected = {path: client.get(path).json() for path in paths}
+
+        def read(n):
+            for i in range(10):
+                path = paths[(n + i) % len(paths)]
+                response = client.get(path)
+                assert response.status_code == 200
+                assert response.json() == expected[path]
+
+        with ThreadPoolExecutor(max_workers=12) as pool:
+            list(pool.map(read, range(12)))
+
+
+def test_a_built_catalogue_outlives_its_pooled_connections(from_files):
+    """An in-memory database lasts only while a connection to it is open, so
+    the engine holds one of its own: emptying the pool loses nothing."""
+    from_files.pool.dispose()
+    with Session(from_files) as session:
+        assert session.exec(select(Webbing)).first() is not None
 
 
 def test_derived_fields_are_derived_not_stored(file_documents):

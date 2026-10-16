@@ -12,11 +12,13 @@ Two catalogues that agree here serve identical API responses, because the read
 code over them is the same.
 """
 
+import sqlite3
+import uuid
 from typing import Any
 
 from sqlalchemy import inspect
 from sqlalchemy.engine import Engine
-from sqlalchemy.pool import StaticPool
+from sqlalchemy.pool import QueuePool
 from sqlmodel import Session, SQLModel, create_engine
 
 from slack_data.catalogue.documents import COLLECTIONS, Document, assemble_all
@@ -35,19 +37,27 @@ def sources_from_documents(documents: list[Document]) -> dict[str, Any]:
 def build_engine(sources: dict[str, Any]) -> Engine:
     """A complete, read-only-by-convention catalogue in memory.
 
-    One shared connection (`StaticPool`), because an in-memory SQLite database
-    exists only on the connection that made it, and FastAPI serves requests on
-    a thread pool.
+    A named in-memory database in SQLite's shared cache, so every thread FastAPI
+    serves a request on gets a connection of its own to the same data. One
+    connection shared by every thread (`StaticPool`, as it was) is not safe:
+    concurrent requests interleave on it, fail with "bad parameter or other API
+    misuse", and then crash the process.
+
+    An in-memory database lasts only while some connection to it is open, and a
+    pool may close its connections, so the engine holds one more for its whole
+    life (`_keepalive`). It closes when the engine is collected.
     """
     # Imported here: `slack_data.seed` imports every model and loader, which is
     # what makes SQLModel.metadata complete for create_all.
     from slack_data.seed import seed_catalog
 
+    uri = f"file:catalogue-{uuid.uuid4().hex}?mode=memory&cache=shared"
     engine = create_engine(
-        "sqlite://",
+        f"sqlite:///{uri}&uri=true",
         connect_args={"check_same_thread": False},
-        poolclass=StaticPool,
+        poolclass=QueuePool,
     )
+    engine._keepalive = sqlite3.connect(uri, uri=True, check_same_thread=False)
     SQLModel.metadata.create_all(engine)
     with seed_sources(sources), Session(engine) as session:
         seed_catalog(session)
