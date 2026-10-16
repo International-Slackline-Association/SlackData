@@ -108,6 +108,9 @@ export default function AdminPage() {
       <header className="flex flex-wrap items-center justify-between gap-3">
         <div>
           <h1 className="text-2xl font-bold text-gray-900">Triage</h1>
+          <Link data-cy="admin-isa-link" to="/admin/isa" className="text-sm font-medium text-teal-700 hover:underline">
+            ISA certificates and warnings →
+          </Link>
           <p className="mt-1 text-sm text-gray-600">
             Oldest first. The public suggestion box is closed — anyone with an ISA account edits now. Left here:
             suggestions sent before it closed, and photos manufacturers sent as links. Open the item, make the

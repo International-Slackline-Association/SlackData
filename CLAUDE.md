@@ -331,7 +331,13 @@ tracked in BACKLOG.md.
 ### ISA certifications
 
 **Certification is derived, never hand-set.** The gear seeds carry no certification flag; a row is
-ISA certified if and only if an entry in `isa_certified.json` matches it. That file is the ISA's
+ISA certified if and only if an entry in `isa_certified.json` matches it. **Since live editing phase 7**
+([LIVE_EDITING_PHASE_7.md](LIVE_EDITING_PHASE_7.md)) the entries — certificates and warnings — live in
+the catalogue store and admins edit them on the site (`/admin/isa`, `slack_data/catalogue/isa.py`):
+correct a field, set the match by picking products (names are derived, never typed), add an entry the
+ISA has not listed (`slackdata-<n>`), retire one. Each is a log record flagged `safety`. A fresh capture
+of the ISA's lists goes in with `python -m slack_data.catalogue.isa_import` (new entries unmatched,
+with a `suggested_match` that is never applied). That file is the ISA's
 approved-gear list (one entry per certificate), built from the committed raw capture
 `isa_approved_data.csv` by `scripts/build_isa_certified.py`, with the same hand-adjudicated `match`
 block as the warnings (the script keeps them across rebuilds). See

@@ -6,7 +6,8 @@ warnings editable by admins**; the bulk import writes to the store; then the aut
 **Done when:** an admin matches a new certificate or warning to a product on the site, with no
 developer, and a fresh copy of the ISA's lists can be brought in without touching a JSON file.
 
-**Status (2026-10-15): decided.** Every choice in § 4 was decided on 2026-10-15: the recommended
+**Status (2026-10-15): built (7a–7c), on `live-editing/7-isa`, stacked on phase 6. The automatic
+sync (7d) waits on the ISA — the request is § 6.** Every choice in § 4 was decided on 2026-10-15: the recommended
 option, (a), on each.
 
 ---
@@ -110,3 +111,34 @@ In every option the sync **proposes**: it never sets an `exact` match itself (D2
 | 7b | The importer (P7-E), with `--check` for CI and tests over the real seeds |
 | 7c | Frontend: the /admin page (P7-B), the product page's admin link, History for an entry |
 | 7d | The sync per P7-F; docs (CLAUDE.md § ISA certifications, BACKLOG.md's auto-sync entry), Cypress, verify-deploy |
+
+---
+
+## 6. The request to the ISA (P7-F)
+
+To send to the ISA's technical contact. It asks for nothing in AWS:
+
+> SlackData shows the ISA's approved-gear list and gear warnings on the products they concern, and
+> keeps them in step by hand: an admin re-captures the two pages and runs an import. Both pages
+> render their tables in the browser from your data app, so there is no file we can fetch on a
+> schedule.
+>
+> Could the ISA publish both lists somewhere machine-readable — a CSV or JSON export URL, or the
+> Google Sheet behind them shared read-only? Any stable URL works; we would read it once a day and
+> nothing else. With one, new certificates and warnings would reach SlackData within a day, offered
+> to our admins to match to products; until then they wait for the next manual capture.
+
+## 7. As built (2026-10-15)
+
+| Step | Where |
+|---|---|
+| 7a | `slack_data/catalogue/isa.py`: `edit_entry`, `create_entry`, `retire_entry`, admin-only, every record flagged `safety` (`isa.create`/`isa.edit`/`isa.retire`); `build_match` derives `gearType`/`gearIds`/`gearNames` from the products chosen and refuses a type that carries no such flag or a merged product; `check_buildable` runs the build's own row builders on the entry first. Routes `GET/PATCH/POST /edit/isa/{certificates,warnings}…`. The log names an entry as the ISA does (`catalogue/names.py`); the safety feed is now "safety changes" |
+| 7b | `slack_data/catalogue/isa_import.py`: reads the approved-gear CSV through `scripts/build_isa_certified.py` and the warnings in `isa_gear_warnings.json`'s shape; adds new entries unmatched with a `suggested_match` (never applied — the warnings build stamps a match at any confidence, so a suggestion cannot live in `match`), updates changed ISA fields without touching the match, retires what the ISA dropped but never an admin's `slackdata-<n>` entry. A test holds the committed capture equal to the store |
+| 7c | `/admin/isa` (`pages/IsaAdminPage.tsx`): the two lists, unmatched first, search, Add, Edit (the shared entry editor), Match (a product picker per gear type; a warning may land on several types), Retire with a reason, History. "ISA matches" on a product page for admins (`?gear=<slug>:<id>`); the import's suggestion offered as "Check and use it" |
+| 7d | Not built: waits on § 6. The importer is the whole sync once a feed exists — a scheduled job that downloads the two files and runs it |
+
+Tests: `tests/test_isa_editing.py`, `frontend/tests/unit/isaEntries.test.ts`,
+`frontend/cypress/e2e/isa_admin.cy.ts` (in `shards.json`).
+
+**Prod rollout:** no infrastructure change. After deploying, nothing changes until an admin edits:
+the stored entries are the ones phase 2 imported.

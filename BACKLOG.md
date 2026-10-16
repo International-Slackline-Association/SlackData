@@ -243,17 +243,13 @@ Gear we don't hold yet in a gear type we already have, and corrections to the ro
 
 Gear types we want to hold but don't yet, and changes to the models, loaders and API.
 
-- [ ] **Auto-sync ISA certification (every 24h).** Build a scheduled job that fetches the
-  official ISA-approved gear list from
-  <https://data.slacklineinternational.org/safety/isa-approved-gear/> once per day and refreshes
-  `isa_approved_data.csv`, then rebuilds `isa_certified.json` with `scripts/build_isa_certified.py`
-  (which keeps every hand-written `match` block and reports new certificates with an empty one).
-  Certification is **derived** from that file by `load_isa_certifications.py` — no gear seed
-  carries a flag any more (CLAUDE.md § ISA certifications, [PR #83](https://github.com/International-Slackline-Association/SlackData/pull/83)).
-  So the job's real output is a queue of new certificates to adjudicate, not a DB write. All 17
-  certificates we can hold are matched today, including **BC Loop** (leashring 27, the renamed BC
-  Aluminum Leash Ring) and **SlackX Orange** (weblock 58, now `SlackX (formerly RadRigs) Orange`
-  — the two brands were merged 2026-10-07). What stays unmatched is tracked in the entries below.
+- [ ] **Auto-sync ISA certification and warnings (every 24h).** Live editing phase 7 built the
+  half that does not depend on the ISA: `python -m slack_data.catalogue.isa_import` diffs a capture
+  of the approved-gear CSV and the warnings against the catalogue store (new entries unmatched with a
+  suggested match, changed fields updated, dropped ones retired, matches never touched), and admins
+  match on the site at `/admin/isa`. What is missing is something to fetch: the ISA's pages render
+  the lists client-side and publish no file. Decided (P7-F a): ask the ISA for a machine-readable
+  export — the request is in LIVE_EDITING_PHASE_7.md § 6 — then run the importer on it daily.
 
 
 - [ ] **Leashes as a gear type.** Four ISA:37 certificates wait on it: **BC Threaded Highline

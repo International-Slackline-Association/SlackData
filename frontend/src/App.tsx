@@ -23,6 +23,7 @@ import NotFoundPage from '@/pages/NotFoundPage'
 // downloads. (The sign-in library is lazy separately — see auth/AuthContext.tsx.)
 // `index.css` is imported once, by main.tsx.
 const AdminPage = lazy(() => import('@/pages/AdminPage'))
+const IsaAdminPage = lazy(() => import('@/pages/IsaAdminPage'))
 // The change log's pages (live editing, phase 3): public, but off the path
 // most visitors take, so they load on demand too.
 const ChangesPage = lazy(() => import('@/pages/ChangesPage'))
@@ -51,6 +52,14 @@ export default function App() {
               behind it is guarded server-side by require_admin
               (slack_data/api/auth.py).
             */}
+            <Route
+              path="admin/isa"
+              element={
+                <Suspense fallback={<div className="p-8 text-sm text-gray-500">Loading…</div>}>
+                  <IsaAdminPage />
+                </Suspense>
+              }
+            />
             <Route
               path="admin"
               element={

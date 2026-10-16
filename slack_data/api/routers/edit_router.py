@@ -18,6 +18,8 @@ admin-only.
 | `POST /edit/media/uploads` | forms to post files straight to quarantine (phase 4, P4-A) |
 | `PUT /edit/{slug}/{id}/media` | the item's photos and/or manuals, as whole lists: add, remove, reorder, retitle (P4-H) |
 | `PUT /edit/brand/{catalog_id}/media` | a brand's logo, and its range-wide manuals per gear type |
+| `GET /edit/isa/{kind}`, `GET /edit/isa/{kind}/fields`, `GET /edit/isa/{kind}/{key}` | admins: the ISA's certificates or warnings as stored, with their revs (phase 7) |
+| `PATCH /edit/isa/{kind}/{key}` · `POST /edit/isa/{kind}` · `POST /edit/isa/{kind}/{key}/retire` | admins: correct or rematch an entry, record one the ISA has not listed yet, retire one (`catalogue/isa.py`) |
 
 Every change is written with its change log record in one transaction, and
 answers **409** with the current entry when it was based on a stale `rev`
@@ -33,7 +35,7 @@ from fastapi import APIRouter, Depends, HTTPException, Path, Request, status
 from pydantic import BaseModel, Field
 
 from slack_data.api.auth import require_admin, require_person
-from slack_data.catalogue import edits, rights
+from slack_data.catalogue import edits, isa, rights
 from slack_data.catalogue.repository import CatalogueRepository, Conflict
 from slack_data.changelog.repository import RecordExists
 from slack_data.changelog.store import ChangeLogRepositoryDep
@@ -256,6 +258,85 @@ def upload_targets(body: Uploads, request: Request, _: CurrentEditor, __: StoreD
         media.upload_target(new_upload_id(), wanted.content_type, MAX_BYTES[wanted.purpose], base)
         for wanted in body.files
     ]
+
+
+# --- ISA certificates and warnings (phase 7; declared before /{slug}) ----------
+
+IsaKind = Annotated[str, Path(pattern="^(certificates|warnings)$")]
+IsaKey = Annotated[str, Path(max_length=64)]
+
+
+class IsaEntry(BaseModel):
+    key: str
+    entry: dict[str, Any]
+    rev: int
+
+
+class IsaEdit(BaseModel):
+    rev: int
+    changes: dict[str, Any] = {}
+    match: isa.MatchIn | None = None
+    why: Why = None
+
+
+class IsaCreate(BaseModel):
+    fields: dict[str, Any]
+    match: isa.MatchIn | None = None
+    why: Why = None
+
+
+class IsaRetire(BaseModel):
+    rev: int
+    why: Annotated[str, Field(min_length=1, max_length=MAX_WHY_LENGTH)]
+
+
+@edit_router.get("/isa/{kind}/fields", response_model=list[FieldSpec])
+def isa_fields(kind: IsaKind, _: CurrentAdmin) -> list[FieldSpec]:
+    return [FieldSpec(**spec) for spec in isa.field_specs(isa.collection_of(kind))]
+
+
+@edit_router.get("/isa/{kind}", response_model=list[IsaEntry])
+def isa_entries(kind: IsaKind, _: CurrentAdmin, store: StoreDep) -> list[IsaEntry]:
+    """Every entry of the list, in file order — the admin page sorts."""
+    collection = isa.collection_of(kind)
+    return [IsaEntry(key=d.key, entry=d.data, rev=d.rev) for d in isa.entries(store.load(), collection)]
+
+
+@edit_router.get("/isa/{kind}/{key}", response_model=IsaEntry)
+def isa_entry(kind: IsaKind, key: IsaKey, _: CurrentAdmin, store: StoreDep) -> IsaEntry:
+    try:
+        document = isa.entry(store.load(), isa.collection_of(kind), key)
+    except edits.NotFound as error:
+        raise HTTPException(404, error.message) from error
+    return IsaEntry(key=document.key, entry=document.data, rev=document.rev)
+
+
+@edit_router.patch("/isa/{kind}/{key}", response_model=EditResult)
+def edit_isa(kind: IsaKind, key: IsaKey, body: IsaEdit, admin: CurrentAdmin, store: StoreDep, log: ChangeLogRepositoryDep):
+    collection = isa.collection_of(kind)
+    return _run(
+        store, collection, key,
+        lambda: isa.edit_entry(store, log, admin, collection, key, body.rev, body.changes, body.match, body.why),
+    )
+
+
+@edit_router.post("/isa/{kind}", response_model=EditResult, status_code=201)
+def create_isa(kind: IsaKind, body: IsaCreate, admin: CurrentAdmin, store: StoreDep, log: ChangeLogRepositoryDep):
+    collection = isa.collection_of(kind)
+    return _run(
+        store, collection, None,
+        lambda: isa.create_entry(store, log, admin, collection, body.fields, body.match, body.why),
+    )
+
+
+@edit_router.post("/isa/{kind}/{key}/retire", response_model=EditResult)
+def retire_isa(
+    kind: IsaKind, key: IsaKey, body: IsaRetire, admin: CurrentAdmin, store: StoreDep, log: ChangeLogRepositoryDep
+):
+    collection = isa.collection_of(kind)
+    return _run(
+        store, collection, key, lambda: isa.retire_entry(store, log, admin, collection, key, body.rev, body.why)
+    )
 
 
 # --- Brands (declared before /{slug}, which would otherwise match "brand") -----

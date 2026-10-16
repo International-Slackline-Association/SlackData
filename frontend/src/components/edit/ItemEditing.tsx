@@ -9,7 +9,7 @@
 // item (`onChanged`), so what is shown is always what the next visitor sees.
 
 import { useCallback, useEffect, useState } from 'react'
-import { useNavigate, useSearchParams } from 'react-router-dom'
+import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 import { editItem, fetchFields, fetchStored, mergeItem, revertChange } from '@/api/edits'
 import { fetchGearItem } from '@/api/gear'
 import { fetchAllChanges } from '@/api/people'
@@ -114,6 +114,12 @@ export default function ItemEditing({
           <button type="button" data-cy="item-merge" className={BUTTON} onClick={() => setDialog('merge')}>
             Merge into…
           </button>
+        )}
+        {auth.isAdmin && token && (
+          // The ISA's certificates and warnings on this product (phase 7).
+          <Link data-cy="item-isa" to={`/admin/isa?gear=${slug}:${id}`} className={BUTTON}>
+            ISA matches
+          </Link>
         )}
       </div>
       <p className="mt-1 text-xs text-gray-500">

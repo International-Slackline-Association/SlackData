@@ -84,6 +84,12 @@ class Action(str, Enum):
     # Target: the person; the reason is the record's `why`.
     PERSON_BLOCK = "person.block"
     PERSON_UNBLOCK = "person.unblock"
+    # An ISA certificate or warning added, corrected or rematched, or retired
+    # from the catalogue — by an admin, or the importer (phase 7, D24).
+    # Target: the entry. Always flagged `safety` (P7-C).
+    ISA_CREATE = "isa.create"
+    ISA_EDIT = "isa.edit"
+    ISA_RETIRE = "isa.retire"
 
 
 # The one flag so far: a breaking-strength figure changed (D33, D57).
