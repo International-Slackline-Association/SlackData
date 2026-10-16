@@ -49,6 +49,9 @@ describe('Signing in', () => {
 
     it('signs in from the top nav, on any page, and stays on it', () => {
       // Locally "signing in" asks for a dev token; hosted it is the ISA's page.
+      // Someone who has seen the notice: on a fresh people store (CI) the real
+      // dev admin has not, and the notice would cover the account menu.
+      cy.intercept('GET', '**/me', { body: { ...ME, ...SEEN } })
       cy.visit('/manufacturers', {
         onBeforeLoad(win) {
           cy.stub(win, 'prompt').returns(DEV_TOKEN)
