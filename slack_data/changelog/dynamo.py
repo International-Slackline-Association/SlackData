@@ -10,6 +10,12 @@ silently drop the IAM half of the append-only guarantee.
 | `id` (PK) | one record; the conditional put that refuses an overwrite |
 | `feed-index`: `feed` (always `all`) + `id` | Recent Changes, newest first |
 | `target-index`: `target` + `id` | one thing's History, newest first |
+| `actor-index`: `actor_isa_id` + `id` | one person's contributions, newest first |
+
+The safety feed has no index of its own: it pages back through `feed-index`
+with a filter (`flagged`). DynamoDB creates one index per update of an
+existing table, and at tens of changes a day a filter over the recent pages
+costs nothing — so phase 3 adds a single index.
 
 A single `feed` partition is fine at this size — tens of changes a day — and is
 what makes "everything, newest first" a query rather than a `Scan`, which the
@@ -27,6 +33,9 @@ if TYPE_CHECKING:  # pragma: no cover - typing only
 
 FEED_INDEX = "feed-index"
 TARGET_INDEX = "target-index"
+ACTOR_INDEX = "actor-index"
+# How far back the safety feed looks, in pages of MAX_PAGE records.
+FLAGGED_MAX_PAGES = 20
 FEED_ALL = "all"
 
 # The condition every append carries (§ 6.5).
@@ -97,6 +106,35 @@ class DynamoChangeLogRepository:
         self, target_type: TargetType, target_id: str, limit: int = 50
     ) -> list[ChangeRecord]:
         return self._query(TARGET_INDEX, "target", target_key(target_type, target_id), limit, None)
+
+    def get(self, record_id: str) -> ChangeRecord | None:
+        item = self.table.get_item(Key={"id": record_id}, ConsistentRead=True).get("Item")
+        return from_item(item) if item else None
+
+    def by_actor(self, isa_id: str, limit: int = 50, before: str | None = None) -> list[ChangeRecord]:
+        return self._query(ACTOR_INDEX, "actor_isa_id", isa_id, limit, before)
+
+    def flagged(self, flag: str, limit: int = 50, before: str | None = None) -> list[ChangeRecord]:
+        from boto3.dynamodb.conditions import Attr, Key
+
+        condition = Key("feed").eq(FEED_ALL)
+        if before is not None:
+            condition = condition & Key("id").lt(before)
+        kwargs = {
+            "IndexName": FEED_INDEX,
+            "KeyConditionExpression": condition,
+            "FilterExpression": Attr("flags").contains(flag),
+            "ScanIndexForward": False,
+            "Limit": MAX_PAGE,
+        }
+        found: list[ChangeRecord] = []
+        for _ in range(FLAGGED_MAX_PAGES):
+            page = self.table.query(**kwargs)
+            found.extend(from_item(item) for item in page.get("Items", []))
+            if len(found) >= limit or "LastEvaluatedKey" not in page:
+                break
+            kwargs["ExclusiveStartKey"] = page["LastEvaluatedKey"]
+        return found[:limit]
 
 
 def transaction_put(record: ChangeRecord, table_name: str) -> dict:

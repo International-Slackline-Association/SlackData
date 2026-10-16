@@ -90,6 +90,13 @@ case "$INDEX" in
       Before phase 2's half A this is expected. After it, CATALOG_TABLE is missing
       from the function, or the store was never filled (importer --apply)." ;;
 esac
+case "$INDEX" in
+  *'"isa_skipped":0'*) ok "no ISA warning or certificate skipped by the last build" ;;
+  *'"isa_skipped":'*) bad "GET /api/catalogue -> $(printf '%s' "$INDEX" | grep -o '"isa_skipped":[0-9]*'): a product
+      silently lost its ISA warning or certificate. The Lambda log names each one
+      (\"ISA warning skipped\" / \"ISA certification skipped\"); a match block's
+      gearNames no longer agrees with the product's brand and name." ;;
+esac
 echo
 echo "The change log is public"
 RESULT="$(code_type "$API/changes")"

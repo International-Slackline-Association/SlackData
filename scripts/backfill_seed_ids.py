@@ -52,19 +52,18 @@ from slack_data.utilities.brand_aliases import canonical_brand
 ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_DB = ROOT / "slack_data" / "database.db"
 
-# seed file -> (catalogue table, the seed's key for the brand name). The brand
-# field is `brand` for webbing/weblock and `manufacturer` everywhere else — the
-# same split the loaders carry; see CLAUDE.md § Loader pattern.
+# seed file -> (catalogue table, the seed's key for the brand name). Every gear
+# seed says `brand` since the phase 3 conversion (slack_data/load_data/load_gear.py).
 SEEDS: dict[str, tuple[str, str]] = {
     "webbings.json": ("webbing", "brand"),
     "weblocks.json": ("weblock", "brand"),
-    "rollers.json": ("roller", "manufacturer"),
-    "leashrings.json": ("leashring", "manufacturer"),
-    "grips.json": ("grip", "manufacturer"),
-    "treepros.json": ("treepro", "manufacturer"),
-    "starterkits.json": ("starterkit", "manufacturer"),
-    "tricklinekits.json": ("tricklinekit", "manufacturer"),
-    "connectors.json": ("connector", "manufacturer"),
+    "rollers.json": ("roller", "brand"),
+    "leashrings.json": ("leashring", "brand"),
+    "grips.json": ("grip", "brand"),
+    "treepros.json": ("treepro", "brand"),
+    "starterkits.json": ("starterkit", "brand"),
+    "tricklinekits.json": ("tricklinekit", "brand"),
+    "connectors.json": ("connector", "brand"),
 }
 
 BRANDS_FILE = "manufacturers.json"

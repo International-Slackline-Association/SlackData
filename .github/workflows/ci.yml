@@ -173,8 +173,17 @@ jobs:
         # Scratch stores in /tmp, not the repo: admin_triage.cy.ts works a queue,
         # and a store that persisted between runs would fill up and push the
         # spec's own fixtures off the first page. See CLAUDE.md § Commands.
+        #
+        # In STORE MODE, as the live site runs once phase 2 has switched over:
+        # the catalogue is the seeds imported into a scratch catalogue store,
+        # built into memory, and editing.cy.ts / changes.cy.ts edit it through
+        # the real routes. The built catalogue is the seeds' exactly
+        # (tests/test_catalogue.py), so every other spec reads what it did.
         run: |
+          CATALOG_STORE_PATH=/tmp/cypress-catalog.db python -m slack_data.catalogue.importer --apply
           cd slack_data
+          CATALOG_SOURCE=store \
+          CATALOG_STORE_PATH=/tmp/cypress-catalog.db \
           SUBMISSIONS_DB_PATH=/tmp/cypress-submissions.db \
           BRAND_CLIENTS_DB_PATH=/tmp/cypress-brand-clients.db \
           PEOPLE_DB_PATH=/tmp/cypress-people.db \

@@ -31,7 +31,23 @@ export function changeRole(token: string, change: RoleChange): Promise<AdminSumm
   return postJson<AdminSummary>('/admin/roles', change, token)
 }
 
+/** Which part of the log: everything, one thing's History, one person's
+ *  contributions, or the safety changes. One filter at a time. */
+export interface ChangesQuery {
+  limit?: number
+  before?: string
+  target_type?: string
+  target_id?: string
+  actor?: string
+  flag?: 'safety'
+}
+
 /** Public — no sign-in. Newest first. */
-export function fetchChanges(limit = 50): Promise<ChangeRecordPublic[]> {
-  return request<ChangeRecordPublic[]>(`/changes?limit=${limit}`)
+export function fetchChanges(query: ChangesQuery | number = {}): Promise<ChangeRecordPublic[]> {
+  const params = typeof query === 'number' ? { limit: query } : query
+  const search = new URLSearchParams()
+  for (const [key, value] of Object.entries({ limit: 50, ...params })) {
+    if (value !== undefined && value !== null && value !== '') search.set(key, String(value))
+  }
+  return request<ChangeRecordPublic[]>(`/changes?${search}`)
 }

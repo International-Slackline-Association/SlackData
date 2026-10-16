@@ -33,7 +33,8 @@ import pytest
 from sqlmodel import Session, SQLModel, create_engine, select
 from sqlmodel.pool import StaticPool
 
-from slack_data.load_data.load_grips import add_grips_to_db, clean_grip_data
+from slack_data.load_data._seed_io import seed_sources
+from slack_data.load_data.load_gear import load_gear
 from slack_data.load_data.load_isa_warnings import WARNABLE_MODELS, match_targets
 from slack_data.models.brands import Brand
 from slack_data.models.connectors import Connector
@@ -50,18 +51,18 @@ from slack_data.utilities.brand_aliases import canonical_brand
 
 ROOT = Path(__file__).parent.parent
 
-# seed file -> the key that names the brand in it. `brand` for webbing/weblock,
-# `manufacturer` for everything else — the split the loaders carry.
+# seed file -> the key that names the brand in it: `brand` in every gear seed
+# since the phase 3 conversion (load_data/load_gear.py).
 SEEDS = {
     "webbings.json": "brand",
     "weblocks.json": "brand",
-    "rollers.json": "manufacturer",
-    "leashrings.json": "manufacturer",
-    "grips.json": "manufacturer",
-    "treepros.json": "manufacturer",
-    "starterkits.json": "manufacturer",
-    "tricklinekits.json": "manufacturer",
-    "connectors.json": "manufacturer",
+    "rollers.json": "brand",
+    "leashrings.json": "brand",
+    "grips.json": "brand",
+    "treepros.json": "brand",
+    "starterkits.json": "brand",
+    "tricklinekits.json": "brand",
+    "connectors.json": "brand",
 }
 
 
@@ -243,7 +244,9 @@ def test_a_reordered_seed_keeps_its_ids(session) -> None:
     survives. `grips.json` is the vehicle purely because it is the smallest.
     """
     grips = load("grips.json")
-    add_grips_to_db([clean_grip_data(dict(grip)) for grip in reversed(grips)], session)
+    sources = {"manufacturers.json": load("manufacturers.json"), "grips.json": list(reversed(grips))}
+    with seed_sources(sources):
+        load_gear(session, "grips")
 
     rows = {row.name: row.id for row in session.exec(select(Grip)).all()}
     wrong = {grip["name"]: (grip["id"], rows.get(grip["name"])) for grip in grips

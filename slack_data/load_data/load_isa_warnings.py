@@ -53,6 +53,7 @@ leashring, grip, connector. Entries pointing at anything else (dogbones, slings,
 kits) are counted and reported, not applied.
 """
 
+import logging
 from datetime import datetime
 
 from sqlmodel import Session, select
@@ -89,6 +90,13 @@ SEVERITY = {
     ISAWarning.WARNING: 2,
     ISAWarning.NOTICE: 1,
 }
+
+
+# The matches the last build skipped. A skip means a product lost its ISA
+# statement silently on the page, so it is logged as an error and reported by
+# GET /catalogue (`isa_skipped`), which infra/verify-deploy.sh holds to zero.
+SKIPPED: list[str] = []
+_logger = logging.getLogger(__name__)
 
 
 def load_isa_warnings_json() -> list[dict]:
@@ -261,8 +269,10 @@ def add_isa_warnings_to_db(warnings: list[dict], session: Session) -> None:
 
     session.commit()
 
+    SKIPPED[:] = problems
     for problem in problems:
         print(f"ISA warning skipped — {problem}")
+        _logger.error("%s — %s", "ISA warning skipped", problem)
     print(f"Stamped {len(resolved)} gear rows with an ISA warning.")
     print(f"Wrote {detail_rows} ISA warning detail rows.")
 

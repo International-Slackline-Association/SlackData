@@ -22,9 +22,8 @@ from sqlmodel.pool import StaticPool
 
 from slack_data.load_data._seed_io import read_seed_json
 from slack_data.load_data.brand_ids import UnknownBrand, brand_catalog_id
-from slack_data.load_data.load_grips import load_grips
+from slack_data.load_data.load_gear import load_gear
 from slack_data.load_data.load_seller_brands import SELLABLE_MODELS, resolve_sellers
-from slack_data.load_data.load_weblocks import clean_weblock_data, load_weblocks
 from slack_data.manufacturers.matching import GEAR_MODELS
 from slack_data.models.brands import Brand
 from slack_data.models.grips import Grip
@@ -50,8 +49,7 @@ def seed_items(slug: str) -> list[dict]:
 
 
 def maker_of(item: dict) -> str:
-    """The seeds spell the brand key two ways — see CLAUDE.md § Loader pattern."""
-    return canonical_brand(str(item.get("brand") or item.get("manufacturer") or ""))
+    return canonical_brand(str(item.get("brand") or ""))
 
 
 # ---------------------------------------------------------------------------
@@ -139,21 +137,11 @@ def session():
         yield session
 
 
-def test_the_weblock_cleaner_carries_the_sellers_through():
-    """`clean_weblock_data` builds a FRESH dict from the nested scrape, so any
-    key it does not name is dropped — which is how the id was once lost."""
-    cleaned = clean_weblock_data(
-        {"id": 1, "name": "X", "brand": "Radrigs", "gear_sellers": ["SlackX"]}
-    )
-    assert cleaned["gear_sellers"] == ["SlackX"]
-
-
 def test_the_loaders_store_a_list_not_its_repr(session):
-    """The webbing/grip/leashring/roller cleaners `str()` everything they do not
-    recognise. Stringified, a seller list reads back as `"['SlackX']"`, which
-    matches no brand and raises nothing."""
-    load_grips(session=session)
-    load_weblocks(session=session)
+    """Stringified, a seller list reads back as `"['SlackX']"`, which matches no
+    brand and raises nothing — how the old per-type cleaners once broke it."""
+    load_gear(session, "grips")
+    load_gear(session, "weblocks")
 
     for model in (Grip, Weblock):
         listed = [row for row in session.exec(select(model)).all() if row.gear_sellers]

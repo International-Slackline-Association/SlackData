@@ -41,6 +41,13 @@ export default function SiteFooter() {
           </Link>
           .
         </p>
+        {/* The public change log (D3): who changed what, and why. */}
+        <p className="text-xs text-gray-500">
+          <Link data-cy="footer-changes-link" to="/changes" className="font-medium text-teal-700 underline">
+            Recent changes
+          </Link>{' '}
+          — every edit to SlackData, with who made it and why.
+        </p>
       </div>
     </footer>
   )

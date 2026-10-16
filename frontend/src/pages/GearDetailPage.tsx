@@ -9,8 +9,10 @@
 // listing threw all three away. See utils/origin.ts.
 
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useLocation, useNavigate, useParams } from 'react-router-dom'
+import { ApiError } from '@/api/client'
 import { fetchGearItem, fetchGearList } from '@/api/gear'
+import ItemEditing from '@/components/edit/ItemEditing'
 import GearDetailBody from '@/components/gear/GearDetailBody'
 import BackLink from '@/components/layout/BackLink'
 import ProductManuals from '@/components/gear/ProductManuals'
@@ -34,6 +36,11 @@ export default function GearDetailPage() {
   const [shown, setShown] = useState<AnyItem | null>(null)
   const [missing, setMissing] = useState(false)
   const [loading, setLoading] = useState(true)
+  // Bumped after an edit, so the page shows what the next visitor will see.
+  const [reload, setReload] = useState(0)
+  const navigate = useNavigate()
+  const location = useLocation()
+  const mergedFrom = (location.state as { mergedFrom?: string } | null)?.mergedFrom
 
   useEffect(() => {
     if (!meta || !id) return
@@ -53,8 +60,15 @@ export default function GearDetailPage() {
           setShown(view)
         }
       })
-      .catch(() => {
-        if (!cancelled) setMissing(true)
+      .catch(caught => {
+        if (cancelled) return
+        const detail = caught instanceof ApiError ? caught.detail : undefined
+        // A merged duplicate (P3-E): its links land on the item it became.
+        if (detail && typeof detail.merged_into === 'number') {
+          navigate(`/${meta.slug}/${detail.merged_into}`, { replace: true, state: { mergedFrom: id } })
+        } else {
+          setMissing(true)
+        }
       })
       .finally(() => {
         if (!cancelled) setLoading(false)
@@ -62,7 +76,7 @@ export default function GearDetailPage() {
     return () => {
       cancelled = true
     }
-  }, [meta, id])
+  }, [meta, id, reload, navigate])
 
   if (!meta) return <NotFoundPage />
   if (missing) return <NotFoundPage />
@@ -80,6 +94,12 @@ export default function GearDetailPage() {
         fallback={{ path: `/${meta.slug}`, label: meta.label }}
         className="text-sm text-gray-500 hover:text-teal-primary"
       />
+
+      {mergedFrom && (
+        <p data-cy="merged-notice" className="mt-4 rounded-lg bg-amber-50 px-4 py-2 text-sm text-amber-900">
+          The link you followed was to item #{mergedFrom}, a duplicate merged into this one.
+        </p>
+      )}
 
       <article className="mt-4 rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
         <GearDetailBody item={shown} meta={meta} />
@@ -106,6 +126,8 @@ export default function GearDetailPage() {
       <div className="mt-4 flex justify-end">
         <SuggestButton gearType={meta.slug} variant="correction" item={item} />
       </div>
+
+      <ItemEditing slug={meta.slug} id={String(item.id)} onChanged={() => setReload(n => n + 1)} />
     </div>
   )
 }

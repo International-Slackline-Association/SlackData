@@ -1601,6 +1601,38 @@ punishment for that.
 
 ---
 
+## Live Editing (live editing, phase 3)
+
+Admins edit the catalogue on the site; everyone reads what changed. Built from
+LIVE_EDITING_PHASE_3.md § 5.6. Admin-only controls render nothing for anyone else; the API enforces
+the same (`/edit/*` takes `require_admin`).
+
+- **The edit form is generated, never hand-listed.** `GET /edit/{slug}/fields` describes every
+  editable field — its kind (`text`, `longtext`, `number`, `integer`, `date`, `boolean`, `choice`,
+  `choices`, `list`, `curve`), allowed values and whether it is required — from the model. One
+  input per kind (`components/edit/FieldInput.tsx`); a stretch curve is typed as "kN percent" lines,
+  and a release date is a date picker (stored as Unix ms; a stored value shows as its nearest UTC
+  midnight, and an untouched date is never a change).
+- **Only what changed is sent**, a cleared field as null, with a before → after preview above an
+  optional, public "why". `data-cy`: `item-edit`, `entry-editor`, `edit-field-<name>`,
+  `edit-preview-row`, `edit-why`, `edit-save`.
+- **Someone saved first (409):** the form lists what moved and offers *Re-apply my changes on the
+  newest version*, which keeps only the fields this person changed (`edit-conflict`,
+  `edit-reapply`).
+- **History** on every item page, public: who (linked to their contributions), role, when, each
+  field before → after, the why, a red "breaking strength" pill on safety changes. Admins get
+  *Revert this change* on edits; a field that changed again since is left alone and named.
+- **Merge into…** (the kept item's id, its name shown as confirmation, an explanation of at least
+  30 characters) sits beside Edit. A merged item's URL redirects to the item kept, with a notice
+  naming the old id (`merged-notice`). **There is no Hide** (D81): a product that is no longer sold
+  is marked historic, and a duplicate or a mistaken creation is merged into the item it duplicates.
+- **Add product** sits in the listing toolbar beside *Missing something?*; **Add brand** beside the
+  Manufacturers heading; **Edit brand** under a brand's name (every field but the name).
+- **Recent changes** (`/changes`, linked from the footer) and **contributions** (`/people/:isaId`)
+  use the same list. Each record names its item or brand **as it is called now** (`target_name`,
+  looked up when the log is read, never stored), linked to it, never as `grip #12`; an edit that
+  changed the name reads *renamed Old to New* (`change-rename`). Filters: kind, role, and breaking strength only; the two Atom feeds are linked.
+
 ## Admin Triage (Phase 2)
 
 Route `/admin` — a **static** segment, so it outranks the dynamic `:slug` gear-type pattern, exactly
@@ -1763,5 +1795,5 @@ which catches any reintroduced fixed-width element regardless of how it is imple
 
 - User accounts for the public (Phase 3 — submissions already carry a null `submitted_by` for it)
 - Review / rating system
-- **Live** catalogue editing — approving a submission still produces a hand-applied JSON patch
+- **Live** editing for everyone (live editing phase 6) — admins edit live since phase 3; approving a submission still produces a hand-applied JSON patch
 - Homepage stats dashboard

@@ -71,7 +71,9 @@
         "currency",
         "connector_groups",
         "webbing_groups",
-        "account"
+        "account",
+        "editing",
+        "changes"
       ]
     },
     {

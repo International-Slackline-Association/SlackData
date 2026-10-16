@@ -28,6 +28,7 @@
 
 import { useMemo, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import { EditBrandButton } from '@/components/edit/AdminCreate'
 import BackLink from '@/components/layout/BackLink'
 import GearGrid from '@/components/gear/GearGrid'
 import GearDetailedList from '@/components/gear/GearDetailedList'
@@ -126,8 +127,12 @@ export default function BrandDetailPage() {
           {brand.name}
         </h1>
       )}
-      <p className="mt-1 text-sm text-gray-500">
-        {brand.total} {brand.total === 1 ? 'item' : 'items'}
+      <p className="mt-1 flex gap-4 text-sm text-gray-500">
+        <span>
+          {brand.total} {brand.total === 1 ? 'item' : 'items'}
+        </span>
+        {/* The directory is loaded once per visit; reload to show the edit. */}
+        <EditBrandButton catalogId={brand.id} onSaved={() => window.location.reload()} />
       </p>
 
       {/* Contact email — detail page only, never the 76-card directory grid.

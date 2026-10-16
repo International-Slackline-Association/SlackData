@@ -25,7 +25,8 @@ this replaced.
 """
 
 import inspect
-from typing import Annotated, Any, Callable
+from collections.abc import Callable
+from typing import Annotated, Any
 
 from fastapi import APIRouter, HTTPException, Path, Query
 from sqlmodel import SQLModel, select
@@ -94,6 +95,13 @@ def crud_router(
     def _get_or_404(session: SessionDep, item_id: int) -> Any:
         item = session.get(model, item_id)
         if not item:
+            from slack_data.catalogue.unlisted import unlisted
+
+            # A merged duplicate says where it went (LIVE_EDITING_PHASE_3.md § 5.4),
+            # so a bookmark explains itself; anything else is a plain miss.
+            reason = unlisted(f"{prefix}s", item_id)
+            if reason is not None:
+                raise HTTPException(status_code=404, detail={"message": f"{label} {item_id} is not listed", **reason})
             raise HTTPException(status_code=404, detail=f"{label} {item_id} not found")
         return item
 

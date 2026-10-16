@@ -64,13 +64,13 @@ DOC_EXTS = {".pdf"}
 SEED = {
     "webbings": ("webbings.json", "brand"),
     "weblocks": ("weblocks.json", "brand"),
-    "grips": ("grips.json", "manufacturer"),
-    "leashrings": ("leashrings.json", "manufacturer"),
-    "treepros": ("treepros.json", "manufacturer"),
-    "starterkits": ("starterkits.json", "manufacturer"),
-    "tricklinekits": ("tricklinekits.json", "manufacturer"),
-    "rollers": ("rollers.json", "manufacturer"),
-    "connectors": ("connectors.json", "manufacturer"),
+    "grips": ("grips.json", "brand"),
+    "leashrings": ("leashrings.json", "brand"),
+    "treepros": ("treepros.json", "brand"),
+    "starterkits": ("starterkits.json", "brand"),
+    "tricklinekits": ("tricklinekits.json", "brand"),
+    "rollers": ("rollers.json", "brand"),
+    "connectors": ("connectors.json", "brand"),
 }
 
 # `<id>_<slug>`: the id is everything before the first underscore.

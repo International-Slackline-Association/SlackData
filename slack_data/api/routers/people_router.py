@@ -8,7 +8,7 @@ People and the change log, over HTTP (LIVE_EDITING_PLAN.md phase 1).
 | `PATCH /me/name` | anyone signed in | change the name shown with your changes — once, for life |
 | `GET /admin/admins` | admins | the admin list |
 | `POST /admin/roles` | admins | grant or revoke admin — a logged change |
-| `GET /changes` | **anyone, no sign-in** (D3, D33) | the change log, newest first |
+| `GET /changes` | **anyone, no sign-in** (D3, D33) | the change log, newest first; or one thing's History (`target_type` + `target_id`), one person's contributions (`actor`), the safety changes (`flag=safety`) |
 
 Like `submissions_router`, this takes **no catalogue session**: it writes only
 to the people and change log stores, so it works on the live site, where the
@@ -27,9 +27,10 @@ too: records hold an ISA id and names are looked up when the log is read (D43).
 It is not itself a logged change.
 """
 
-from typing import Annotated
+import os
+from typing import Annotated, Literal
 
-from fastapi import APIRouter, Depends, HTTPException, Query, status
+from fastapi import APIRouter, Depends, HTTPException, Query, Response, status
 from pydantic import BaseModel, Field, field_validator, model_validator
 
 from slack_data.api.auth import is_dev_person, require_admin, require_person
@@ -39,6 +40,7 @@ from slack_data.changelog.writer import commit_person_change
 from slack_data.models.brand_clients import now_iso
 from slack_data.models.changes import (
     MAX_WHY_LENGTH,
+    SAFETY_FLAG,
     Action,
     ChangeRecord,
     ChangeRecordPublic,
@@ -267,19 +269,32 @@ def list_changes(
     before: str | None = Query(default=None, max_length=26),
     target_type: TargetType | None = None,
     target_id: str | None = Query(default=None, max_length=128),
+    actor: str | None = Query(default=None, max_length=32, description="an ISA id"),
+    flag: Literal["safety"] | None = None,
 ) -> list[ChangeRecordPublic]:
     """Public and unauthenticated. Names are looked up now, never stored in a
     record (D43), so an anonymised person shows as "former contributor"."""
     if (target_type is None) != (target_id is None):
         raise HTTPException(status.HTTP_422_UNPROCESSABLE_ENTITY, "give both target_type and target_id")
+    if sum(x is not None for x in (target_type, actor, flag)) > 1:
+        raise HTTPException(status.HTTP_422_UNPROCESSABLE_ENTITY, "filter by one of target, actor or flag")
 
-    records = (
-        log.for_target(target_type, target_id, limit)
-        if target_type is not None
-        else log.recent(limit, before)
-    )
+    if target_type is not None:
+        records = log.for_target(target_type, target_id, limit)
+    elif actor is not None:
+        records = log.by_actor(actor, limit, before)
+    elif flag is not None:
+        records = log.flagged(flag, limit, before)
+    else:
+        records = log.recent(limit, before)
+
+    return _public(records, people)
+
+def _public(records, people) -> list[ChangeRecordPublic]:
+    from slack_data.catalogue.names import TargetNames
 
     names: dict[str, str] = {}
+    targets = TargetNames()
 
     def name_of(isa_id: str) -> str:
         if isa_id not in names:
@@ -292,6 +307,9 @@ def list_changes(
             id=r.id,
             target_type=r.target_type,
             target_id=r.target_id,
+            target_name=(
+                name_of(r.target_id) if r.target_type is TargetType.PERSON else targets.name(r.target_type, r.target_id)
+            ),
             action=r.action,
             actor_isa_id=r.actor_isa_id,
             actor_name=name_of(r.actor_isa_id),
@@ -300,7 +318,70 @@ def list_changes(
             changes=r.changes,
             why=r.why,
             flags=r.flags,
+            reverts=r.reverts,
             created_at=r.created_at,
         )
         for r in records
     ]
+
+
+# --- Feeds (D17, D33): anyone can follow the log in a feed reader --------------
+
+SITE_URL = os.getenv("SITE_URL", "https://slackdata.org").rstrip("/")
+FEED_SIZE = 50
+_ATOM = "http://www.w3.org/2005/Atom"
+
+
+def _link_for(record: ChangeRecordPublic) -> str:
+    if record.target_type == TargetType.ITEM:
+        collection, _, item_id = record.target_id.partition("#")
+        return f"{SITE_URL}/{collection}/{item_id}"
+    if record.target_type == TargetType.BRAND:
+        return f"{SITE_URL}/manufacturers/{record.target_id}"
+    return f"{SITE_URL}/changes"
+
+
+def _atom(title: str, feed_id: str, records: list[ChangeRecordPublic]) -> Response:
+    from xml.etree import ElementTree as ET
+
+    ET.register_namespace("", _ATOM)
+    feed = ET.Element(f"{{{_ATOM}}}feed")
+    ET.SubElement(feed, f"{{{_ATOM}}}title").text = title
+    ET.SubElement(feed, f"{{{_ATOM}}}id").text = feed_id
+    ET.SubElement(feed, f"{{{_ATOM}}}link", href=f"{SITE_URL}/changes")
+    ET.SubElement(feed, f"{{{_ATOM}}}updated").text = records[0].created_at if records else now_iso()
+    for record in records:
+        entry = ET.SubElement(feed, f"{{{_ATOM}}}entry")
+        what = ", ".join(record.changes) or record.action.value
+        ET.SubElement(entry, f"{{{_ATOM}}}title").text = (
+            f"{record.action.value} {record.target_type.value} {record.target_name or record.target_id}: {what}"
+        )
+        ET.SubElement(entry, f"{{{_ATOM}}}id").text = f"urn:slackdata:change:{record.id}"
+        ET.SubElement(entry, f"{{{_ATOM}}}updated").text = record.created_at
+        ET.SubElement(entry, f"{{{_ATOM}}}link", href=_link_for(record))
+        author = ET.SubElement(entry, f"{{{_ATOM}}}author")
+        ET.SubElement(author, f"{{{_ATOM}}}name").text = f"{record.actor_name} ({record.actor_role})"
+        lines = [f"{name}: {change.before!r} → {change.after!r}" for name, change in record.changes.items()]
+        if record.why:
+            lines.append(f"Why: {record.why}")
+        if record.flags:
+            lines.append(f"Flags: {', '.join(record.flags)}")
+        ET.SubElement(entry, f"{{{_ATOM}}}content", type="text").text = "\n".join(lines)
+    xml = ET.tostring(feed, encoding="unicode", xml_declaration=True)
+    return Response(content=xml, media_type="application/atom+xml")
+
+
+@people_router.get("/changes/feed.atom", response_class=Response)
+def changes_feed(people: PeopleRepositoryDep, log: ChangeLogRepositoryDep) -> Response:
+    """Recent Changes as an Atom feed — public (D17)."""
+    return _atom("SlackData — recent changes", f"{SITE_URL}/changes", _public(log.recent(FEED_SIZE), people))
+
+
+@people_router.get("/changes/safety.atom", response_class=Response)
+def safety_feed(people: PeopleRepositoryDep, log: ChangeLogRepositoryDep) -> Response:
+    """Every change to a breaking strength, as an Atom feed — public (D57)."""
+    return _atom(
+        "SlackData — breaking-strength changes",
+        f"{SITE_URL}/changes?flag=safety",
+        _public(log.flagged(SAFETY_FLAG, FEED_SIZE), people),
+    )

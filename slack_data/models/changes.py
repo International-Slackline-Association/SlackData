@@ -2,8 +2,9 @@
 The change log — every change to SlackData, with who made it and how
 (LIVE_EDITING_PLAN.md § 6). Append-only, permanent and public.
 
-Phase 1 writes only **people events**: role grants and revocations, and the
-bootstrap. Catalogue edits join it in phase 3 through the same record.
+Phase 1 writes **people events**: role grants and revocations, and the
+bootstrap. Phase 3 adds the catalogue: item and brand edits, creates, hides,
+merges and reverts, through the same record.
 
 **No names in a record (D43).** `actor_sub` and `actor_isa_id` say who; the
 public name is looked up from the people store whenever a record is shown or
@@ -29,6 +30,17 @@ class TargetType(str, Enum):
     """What a record changed. Grows with the phases: items, brands, media…"""
 
     PERSON = "person"
+    # target_id "<collection>#<id>", e.g. "webbings#12".
+    ITEM = "item"
+    # target_id the brand's catalog_id.
+    BRAND = "brand"
+    # target_id the warning's id / the certificate's cert_id.
+    ISA_WARNING = "isa_warning"
+    ISA_CERTIFICATE = "isa_certificate"
+
+
+def item_target(collection: str, item_id: int | str) -> str:
+    return f"{collection}#{item_id}"
 
 
 class Channel(str, Enum):
@@ -38,11 +50,31 @@ class Channel(str, Enum):
     BOOTSTRAP = "bootstrap"
     MANUFACTURER_API = "manufacturer-api"
     IMPORT = "import"
+    # A change that restores earlier values; `reverts` names the record undone.
+    REVERT = "revert"
+    # A duplicate merged into another item (D20), and what it re-pointed.
+    MERGE = "merge"
 
 
 class Action(str, Enum):
     ROLE_GRANT = "role.grant"
     ROLE_REVOKE = "role.revoke"
+    ITEM_CREATE = "item.create"
+    ITEM_EDIT = "item.edit"
+    # Hiding was dropped (D81) and these are never written now; staging's
+    # append-only log holds one of each from testing, so they stay readable.
+    ITEM_HIDE = "item.hide"
+    ITEM_UNHIDE = "item.unhide"
+    ITEM_MERGE = "item.merge"
+    ITEM_REVERT = "item.revert"
+    BRAND_CREATE = "brand.create"
+    BRAND_EDIT = "brand.edit"
+    # An ISA warning or certificate match moved by a rename or a merge (P3-B).
+    MATCH_REPOINT = "match.repoint"
+
+
+# The one flag so far: a breaking-strength figure changed (D33, D57).
+SAFETY_FLAG = "safety"
 
 
 def target_key(target_type: TargetType, target_id: str) -> str:
@@ -71,6 +103,8 @@ class ChangeRecord(BaseModel):
     changes: dict[str, FieldChange] = Field(default_factory=dict)
     why: str | None = Field(default=None, max_length=MAX_WHY_LENGTH)
     flags: list[str] = Field(default_factory=list)
+    # On a revert: the id of the record whose change it undoes.
+    reverts: str | None = Field(default=None, max_length=26)
     created_at: str = Field(default_factory=now_iso)
 
     @property
@@ -93,11 +127,15 @@ class ChangeRecord(BaseModel):
 
 
 class ChangeRecordPublic(BaseModel):
-    """A record as the public sees it (D3): with the actor's name looked up."""
+    """A record as the public sees it (D3): with the actor's name, and the
+    target's current name, looked up when it is read (D43)."""
 
     id: str
     target_type: TargetType
     target_id: str
+    # What the target is called now (an item or brand renamed since shows its
+    # new name); None where none is known, and the id is shown instead.
+    target_name: str | None = None
     action: Action
     actor_isa_id: str
     actor_name: str
@@ -106,4 +144,5 @@ class ChangeRecordPublic(BaseModel):
     changes: dict[str, FieldChange]
     why: str | None
     flags: list[str]
+    reverts: str | None = None
     created_at: str

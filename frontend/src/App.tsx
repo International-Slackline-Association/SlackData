@@ -23,6 +23,10 @@ import NotFoundPage from '@/pages/NotFoundPage'
 // downloads. (The sign-in library is lazy separately — see auth/AuthContext.tsx.)
 // `index.css` is imported once, by main.tsx.
 const AdminPage = lazy(() => import('@/pages/AdminPage'))
+// The change log's pages (live editing, phase 3): public, but off the path
+// most visitors take, so they load on demand too.
+const ChangesPage = lazy(() => import('@/pages/ChangesPage'))
+const ContributionsPage = lazy(() => import('@/pages/ContributionsPage'))
 
 export default function App() {
   return (
@@ -66,6 +70,22 @@ export default function App() {
                 }
               />
             )}
+            <Route
+              path="changes"
+              element={
+                <Suspense fallback={null}>
+                  <ChangesPage />
+                </Suspense>
+              }
+            />
+            <Route
+              path="people/:isaId"
+              element={
+                <Suspense fallback={null}>
+                  <ContributionsPage />
+                </Suspense>
+              }
+            />
             <Route path="manufacturers" element={<ManufacturersPage />} />
             <Route path="manufacturers/:id" element={<BrandDetailPage />} />
             <Route path=":slug/compare" element={<ComparePage />} />

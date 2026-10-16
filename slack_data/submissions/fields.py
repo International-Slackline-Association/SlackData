@@ -76,6 +76,21 @@ _SYNTHETIC = frozenset({"brand_name"})
 MANUFACTURER_EXCLUDED = frozenset({"name"})
 
 
+# Breaking strengths (D33): a change to any of them is flagged `safety` in the
+# change log, which feeds the public safety feed (D57). D33 named the MBS of
+# webbing, weblocks, rollers, leash rings and grips; connectors arrived after it
+# and their three MBS ratings are the same claim, so they are here too. WLL is
+# not: it is a maker's margin over the MBS, not a tested strength.
+SAFETY_FIELDS: dict[str, frozenset[str]] = {
+    "webbings": frozenset({"breaking_strength"}),
+    "weblocks": frozenset({"breaking_strength"}),
+    "rollers": frozenset({"breaking_strength"}),
+    "leashrings": frozenset({"breaking_strength"}),
+    "grips": frozenset({"mbs"}),
+    "connectors": frozenset({"mbs_straight_pull", "mbs_crossload", "mbs_gate_open"}),
+}
+
+
 def _correctable(schema: type[BaseModel]) -> frozenset[str]:
     return (frozenset(schema.model_fields) - _EXCLUDED) | _SYNTHETIC
 

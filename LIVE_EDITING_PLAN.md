@@ -214,6 +214,10 @@ exactly as the seed does now, and serves it through today's SQLModel models and 
 
 ### 5.3 Hiding, and deleting duplicates (D20)
 
+> **Hiding was dropped on 2026-10-15 (D81)**, after phase 3 built it: there is no hide. A product
+> that is no longer sold is marked historic; a duplicate, or a product created by mistake, is merged.
+> The rest of this section is kept as it was decided.
+
 - **Nothing is deleted.** A product that should leave the catalogue is **hidden**: kept, logged,
   reversible, absent from listings. A discontinued product is not hidden — it is marked historic
   (`active: false`), which the site already shows. **Only admins may hide** (D40, D55).
@@ -563,7 +567,7 @@ then media, then manufacturers, then editing opens to every ISA account.
 | 0 | Every ISA request at once (§ 12, D50); **re-base `_hosted()`** (§ 11) — ours alone, no ISA involvement | The ISA has agreed to items 1–3 and 5, and applied 4, 6 and 7; `_hosted()` has its test |
 | 1 | ISA sign-in; people store; admin grants; the log for role events; the three manufacturer credentials imported as API keys (D63); **old admin pool deleted** (D9, D62) | Admins work through ISA accounts only, and nothing of ours is left in Cognito but the ISA-made client |
 | 2 | Catalogue imported into DynamoDB; the in-memory read path running **in shadow** beside the baked catalogue, compared on every deploy; then switched over; the daily export to the data repo starts | The site reads from DynamoDB; seeds are no longer hand-edited |
-| 3 | Live editing for admins; History, Recent Changes, feeds, revert, hide, duplicate merge | Admins edit without a developer |
+| 3 | Live editing for admins; History, Recent Changes, feeds, revert, hide, duplicate merge — **built 2026-10-13, see [LIVE_EDITING_PHASE_3.md](LIVE_EDITING_PHASE_3.md)** | Admins edit without a developer |
 | 4 | Photo and manual uploads for admins (manufacturers gain them in phase 5, everyone in phase 6); today's images and manuals migrated and the manifests retired (D47) | A photo goes live without a deploy |
 | 5 | Manufacturer accounts (brand requests, uncapped edits and revert on their own gear); machine API applied live | A brand updates its own gear end to end |
 | 6 | **Editing opens to every ISA account**, with the rate cap (D53); the anonymous box retired (D56, O-19) | Anyone with an ISA account edits; no hand-applied JSON patch remains |
@@ -732,3 +736,26 @@ has an app client in `isa-users` and nothing else in Cognito. These rows make Sl
 | D68 | Bootstrapping the first admins (§ 4.4, 2026-10-13) | **By verified ISA email**, from `ADMIN_BOOTSTRAP_EMAILS` in the deployer's shell. Granted once (`bootstrapped_at`), logged as `bootstrap`; never re-granted after a revocation | By ISA `sub` (a round trip per admin to collect it) |
 | D69 | What tells the app it is hosted (§ 11, 2026-10-13) | **Any of** the Lambda runtime's `AWS_LAMBDA_FUNCTION_NAME`, `SLACKDATA_DEPLOYMENT=hosted`, or `READ_ONLY` (`slack_data/deployment.py`) | One signal alone |
 | D70 | When people are told their name is public (2026-10-13) | **At first sign-in**, the ISA's condition for approving public names: a notice shown until acknowledged (`notice_seen_at`). It informs; it is not a gate | At the first edit (the plan's earlier § 15 suggestion) |
+
+### Seventh round — phase 3 (2026-10-13)
+
+Decided from [LIVE_EDITING_PHASE_3.md](LIVE_EDITING_PHASE_3.md) § 4, where each option's tradeoffs are
+kept.
+
+| # | Topic | Decision | Rejected |
+|---|---|---|---|
+| D71 | The public name (supersedes D37's source) | **Typed in by the person** at the first-sign-in notice, changeable **once for life**; SlackData's tokens carried no name. Shown with their ISA id | The ISA account's name (absent from the token) |
+| D72 | What a stored item is (P3-A) | **The model's own vocabulary**: seeds converted once, one generic loader; what no model field held is kept under `unmodelled` | Seed shape + per-type codecs; an overlay of edits |
+| D73 | Renames and ISA matches (P3-B) | **A rename re-points the matches in the same transaction**; a skipped match is an error, counted, held to zero at deploy | Matching by id only; refusing renames of matched items |
+| D74 | Rebuild latency (P3-C) | **Profile, then Lambda memory** if needed; an incremental rebuild only if phase 6 needs it | Building in the background (Lambda freezes it) |
+| D75 | A hidden item's URL (P3-D) — *superseded by D81* | **A public page saying who hid it, when and why**, with its History | A plain 404 |
+| D76 | A merged item's URL (P3-E) | **404 naming the survivor**; the site redirects | HTTP 308 (a replayed write would follow it) |
+| D77 | Admins' field scope (P3-F) | **Every field but the ISA's four statements**, `gear_sellers` and `product_group` included | The suggestion box's list |
+| D78 | Brands in phase 3 (P3-G) | **Edit every field but the name; create brands**; renames wait | Renames now, non-atomically; products only |
+| D79 | Creating products (P3-I) | **Yes, admins, with per-type id counters** that never reuse an id | Waiting for phase 6 |
+| D81 | Hiding an item (supersedes D75 and the hide in § 5.3) | **Not a feature.** No hide or unhide, in the API or on the site. A product no longer sold is marked historic (`active: false`); a duplicate or a mistaken creation is merged into the item it duplicates. Staging's log keeps its two test records readable | Hide/unhide for admins, as built in phase 3 |
+| D80 | Approved suggestions (P3-H) | **Triage stays as it is until phase 6**: an approved suggestion is still a JSON patch, applied by hand | "Apply as edit" in triage |
+
+P3-H was decided as option (b): from phase 6 everyone edits, and
+until then what the site cannot edit (photos, manuals, anything a suggestion asks for) goes through
+the suggestion box or a developer, by hand.

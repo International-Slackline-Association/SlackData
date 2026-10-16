@@ -798,3 +798,36 @@ def test_an_edit_in_the_store_is_served_on_the_next_request(store_mode):
     assert client.get(f"/grip/{grip.data['id']}").json()["name"] == "Edited in the store"
     assert client.get("/catalogue").json()["version"] == version
     assert "Traceback" not in log_path.read_text()
+
+
+# --- Live editing (phase 3): an admin's edit, end to end ------------------------
+
+
+def test_an_admin_edit_is_served_on_the_next_request(store_mode):
+    """Through the real routes: read the rev, edit, and the very next page
+    shows it; a second edit from the same stale rev is refused with the
+    current entry; the public log has it."""
+    client, _, log_path = store_mode
+    current = client.get("/edit/webbings/2", headers=ADMIN).json()
+    edited = client.patch(
+        "/edit/webbings/2", headers=ADMIN,
+        json={"rev": current["rev"], "changes": {"name": "Edited live"}, "why": "live test"},
+    )
+    assert edited.status_code == 200, edited.text
+    assert client.get("/webbing/2").json()["name"] == "Edited live"
+
+    stale = client.patch("/edit/webbings/2", headers=ADMIN, json={"rev": current["rev"], "changes": {"name": "Lost"}})
+    assert stale.status_code == 409
+    assert stale.json()["detail"]["current"]["name"] == "Edited live"
+
+    [record] = client.get("/changes", params={"target_type": "item", "target_id": "webbings#2"}).json()
+    assert (record["why"], record["actor_role"]) == ("live test", "admin")
+    assert record["target_name"] == "Edited live", "the log names the item as it is called now"
+
+    merged = client.post(
+        "/edit/webbings/2/merge", headers=ADMIN,
+        json={"rev": edited.json()["rev"], "into": 1, "why": "live test: the same webbing listed twice"},
+    )
+    assert merged.status_code == 200, merged.text
+    assert client.get("/webbing/2").json()["detail"]["merged_into"] == 1
+    assert "Traceback" not in log_path.read_text()

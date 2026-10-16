@@ -56,10 +56,15 @@ def _documents() -> tuple[list[Document], int | None, str]:
 
 @catalogue_router.get("")
 def catalogue_index() -> dict:
+    from slack_data.load_data import load_isa_certifications, load_isa_warnings
+
     _, version, source = _documents()
     return {
         "version": version,
         "source": source,
+        # ISA matches the last build skipped: each is a product that silently
+        # lost its warning or certificate. verify-deploy.sh holds it to zero.
+        "isa_skipped": len(load_isa_warnings.SKIPPED) + len(load_isa_certifications.SKIPPED),
         "collections": [{"name": name, "file": spec.filename} for name, spec in COLLECTIONS.items()],
     }
 
