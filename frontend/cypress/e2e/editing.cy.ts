@@ -46,11 +46,12 @@ describe('Live editing', () => {
     cy.request({ method: 'POST', url: `${api()}/me/notice`, headers: AUTH, body: { name: 'Local Admin' } })
   })
 
-  it('shows History to everyone and the editing actions only to an admin', () => {
+  it('shows History to everyone, and the editing actions once signed in', () => {
     newGrip(unique('Visible Grip')).then(id => {
       cy.visit(`/grips/${id}`)
       cy.getByData('item-history').should('be.visible')
       cy.getByData('item-edit').should('not.exist')
+      cy.getByData('item-edit-sign-in').should('be.visible')
 
       cy.visit(`/grips/${id}`, signedIn())
       cy.getByData('item-edit').should('be.visible')

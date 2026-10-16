@@ -18,7 +18,19 @@ export interface Me {
   name_set: boolean
   /** True until they have used their one lifetime change of that name. */
   name_change_available: boolean
+  /** Set while an admin has blocked this account from editing (D22): why. */
+  blocked_reason: string | null
+  blocked_at: string | null
   dev: boolean
+}
+
+/** `GET /admin/people/blocked`, and the answer to a block or unblock. */
+export interface BlockedSummary {
+  isa_id: string
+  name: string
+  blocked_at: string | null
+  blocked_reason: string | null
+  blocked_by: string | null
 }
 
 /** `GET /admin/admins` and `POST /admin/roles`. */
@@ -66,6 +78,8 @@ export interface ChangeRecordPublic {
     | 'key.create'
     | 'key.regenerate'
     | 'key.revoke'
+    | 'person.block'
+    | 'person.unblock'
   actor_isa_id: string
   actor_name: string
   actor_role: string

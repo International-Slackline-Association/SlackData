@@ -6,45 +6,12 @@
 // like every other schema in this repo, and these types follow the code.
 
 // 'manufacturer' is an authenticated brand updating its own gear, through
-// POST /manufacturer/gear. The public box cannot claim it — models/submissions.py
-// rejects the kind on SubmissionCreate — which is what makes it worth a badge.
+// POST /manufacturer/gear. 'correction' and 'new_item' came from the public box,
+// switched off in live editing phase 6 (D56); triage still holds some.
 export type SubmissionKind = 'correction' | 'new_item' | 'manufacturer'
-// `applied` is the loop-closer: approving says the report is right, applying
-// says the JSON was edited and the API redeployed. Without the distinction an
-// approved record reads as done while the wrong value is still on the site.
+// `applied` is "handled": the change was made on the site. `approved` is a
+// manufacturer's update applied live with photo links still to add.
 export type SubmissionStatus = 'pending' | 'approved' | 'applied' | 'rejected'
-
-// Caps, mirrored from models/submissions.py so the form can stop a submission
-// the API would reject anyway. The server still enforces all of them — these
-// exist to give a better error than a 422, never to be the only check.
-export const MAX_CHANGES = 20
-export const MAX_VALUE_LENGTH = 200
-export const MAX_NOTE_LENGTH = 2000
-export const MAX_URL_LENGTH = 500
-
-/** The public POST body. */
-export interface SubmissionCreate {
-  kind: SubmissionKind
-  gear_type: string
-  gear_id?: number | null
-  gear_name?: string | null
-  /** Sent because gear ids are NOT stable — see models/submissions.py. */
-  gear_brand?: string | null
-  /** field name -> proposed value, as strings. Values are prose, not coerced. */
-  changes: Record<string, string>
-  note?: string | null
-  source_url?: string | null
-  submitter_email?: string | null
-  /** Honeypot. Always sent empty by a human; see SubmissionDialog. */
-  website?: string | null
-  captcha_token?: string | null
-}
-
-/** What a successful POST returns — an id and nothing else, by design. */
-export interface SubmissionReceipt {
-  submission_id: string
-  status: SubmissionStatus
-}
 
 /** A stored record. Admin-only; there is no public read route. */
 export interface Submission {

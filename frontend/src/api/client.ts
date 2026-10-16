@@ -1,6 +1,8 @@
 // Base API client. Talks to the FastAPI backend (default http://localhost:8000).
 // Override with VITE_API_URL at build/dev time.
 
+import { capMessage, isCapDetail } from '@/utils/rateCap'
+
 export const API_BASE =
   (import.meta.env.VITE_API_URL as string | undefined) ?? 'http://localhost:8000'
 
@@ -66,6 +68,8 @@ async function errorMessage(res: Response, fallback: string): Promise<string> {
   }
   const { detail } = body
   if (typeof detail === 'string') return detail
+  // The rate cap (429): when the next save is possible, on the reader's clock.
+  if (isCapDetail(detail)) return capMessage(detail)
   // The edit routes answer {message, errors?} — errors as [{field, message}].
   if (detail && !Array.isArray(detail) && typeof detail === 'object') {
     const object = detail as { message?: string; errors?: { field: string; message: string }[] | null }

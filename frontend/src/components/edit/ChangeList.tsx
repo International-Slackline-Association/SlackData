@@ -27,6 +27,8 @@ const ACTION_TEXT: Record<ChangeRecordPublic['action'], string> = {
   'key.create': 'created an API key for',
   'key.regenerate': 'gave a new secret to an API key of',
   'key.revoke': 'revoked an API key of',
+  'person.block': 'blocked from editing',
+  'person.unblock': 'unblocked',
 }
 
 const REVERTIBLE = new Set(['item.edit', 'item.revert'])

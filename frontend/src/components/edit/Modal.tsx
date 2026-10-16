@@ -1,5 +1,4 @@
-// The overlay every editing dialog sits in — the same frame as the suggestion
-// dialog (components/submissions/SubmissionDialog.tsx). Escape closes it.
+// The overlay every editing dialog sits in. Escape closes it.
 
 import { useEffect, useId, type ReactNode } from 'react'
 

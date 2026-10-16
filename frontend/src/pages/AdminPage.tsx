@@ -5,11 +5,11 @@
 // be cosmetic, and `tests/test_auth.py` asserts the server-side half. What this
 // page does is make a queue reviewable.
 //
-// The other thing it must do is be honest about what approving means. Approving
-// records a decision — it does not edit the catalogue, which is still a
-// read-only file built from the root *.json at deploy time. So an approved row
-// hands over a JSON patch and says, in plain words, that the change is not live
-// until that JSON is edited and the API redeployed.
+// Since live editing phase 6 the anonymous suggestion box is closed (D56):
+// anyone with an ISA account edits. What is left in the queue is what the box
+// stored before it closed, and manufacturers' photo links (P5-H). Each is
+// handled the same way (P6-G): open the item, make the change live, then mark
+// the row handled. No JSON patch is applied by hand any more.
 
 import { useCallback, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
@@ -18,6 +18,7 @@ import { fetchSubmissions, reviewSubmission } from '@/api/submissions'
 import { useSiteAuth } from '@/auth/AuthContext'
 import AdminsPanel from '@/components/account/AdminsPanel'
 import BrandRequestsPanel from '@/components/account/BrandRequestsPanel'
+import { BlockedPanel } from '@/components/account/Blocking'
 import { fieldLabel } from '@/config/correctableFields'
 import { getGearType } from '@/config/gearTypes'
 import type { Submission, SubmissionStatus } from '@/types'
@@ -26,7 +27,7 @@ import { batchBrand, groupByBatch, type SubmissionGroup } from '@/utils/batches'
 import { photoLabel } from '@/utils/photoLinks'
 
 // Queue order, not alphabetical: `approved` sits second because it is the
-// bucket with outstanding work — corrections agreed but not yet shipped.
+// bucket with outstanding work — manufacturers' photos still to add.
 const STATUSES: SubmissionStatus[] = ['pending', 'approved', 'applied', 'rejected']
 
 // Matches the default the API applies; it caps `limit` at 100 (MAX_LIST_LIMIT
@@ -107,10 +108,11 @@ export default function AdminPage() {
     <div data-cy="admin-page" className="mx-auto max-w-4xl px-4 py-8">
       <header className="flex flex-wrap items-center justify-between gap-3">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Submission triage</h1>
+          <h1 className="text-2xl font-bold text-gray-900">Triage</h1>
           <p className="mt-1 text-sm text-gray-600">
-            Oldest first. Reviewing records a decision — it does not change the catalogue.
-            Updates from a manufacturer arrive already approved.
+            Oldest first. The public suggestion box is closed — anyone with an ISA account edits now. Left here:
+            suggestions sent before it closed, and photos manufacturers sent as links. Open the item, make the
+            change, then mark it handled.
           </p>
         </div>
         <button
@@ -141,9 +143,8 @@ export default function AdminPage() {
           onClick={() => setStatus('approved')}
           className="mt-4 w-full cursor-pointer rounded-lg bg-amber-50 px-3 py-2 text-left text-sm text-amber-900 hover:bg-amber-100"
         >
-          <strong className="font-semibold">{outstanding}</strong> approved{' '}
-          {outstanding === 1 ? 'correction is' : 'corrections are'} waiting to be applied to the JSON
-          and deployed.
+          <strong className="font-semibold">{outstanding}</strong>{' '}
+          {outstanding === 1 ? 'update is' : 'updates are'} still waiting for photos to be added.
         </button>
       )}
 
@@ -211,6 +212,7 @@ export default function AdminPage() {
       )}
 
       <BrandRequestsPanel token={token!} />
+      <BlockedPanel />
       <AdminsPanel token={token!} />
     </div>
   )
@@ -286,8 +288,7 @@ function BatchGroup({
       </div>
 
       <p className="mt-1 text-sm text-teal-900">
-        Sent by the manufacturer, so it arrived approved — there is no decision to take here, only
-        the JSON edits and a redeploy.
+        Sent by the manufacturer and applied as it arrived — only the photos they linked are left to add.
       </p>
 
       <button
@@ -344,7 +345,6 @@ function SubmissionRow({
   const [reviewNote, setReviewNote] = useState('')
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState<string | null>(null)
-  const [approved, setApproved] = useState(false)
 
   const meta = getGearType(submission.gear_type)
   const isManufacturer = submission.kind === 'manufacturer'
@@ -353,21 +353,15 @@ function SubmissionRow({
   // admin's job on it is different (add an entry, not edit one).
   const isNew = submission.kind === 'new_item' || (isManufacturer && submission.gear_id === null)
 
-  async function review(status: 'approved' | 'applied' | 'rejected', note?: string) {
+  async function review(status: 'applied' | 'rejected') {
     setBusy(true)
     setError(null)
     try {
       await reviewSubmission(token, submission.submission_id, {
         status,
-        review_note: note || reviewNote || null,
+        review_note: reviewNote || (status === 'applied' ? 'handled on the site' : null),
       })
-      if (status === 'approved') {
-        // Stay on screen to hand over the patch — reloading the list would
-        // whisk away the one thing the admin now has to act on.
-        setApproved(true)
-      } else {
-        onReviewed()
-      }
+      onReviewed()
     } catch (caught) {
       setError(caught instanceof ApiError ? caught.message : 'Review failed.')
     } finally {
@@ -470,44 +464,38 @@ function SubmissionRow({
         </div>
       )}
 
-      {approved || submission.status === 'approved' ? (
-        <ApprovedPatch
-          submission={submission}
-          onDone={onReviewed}
-          onMarkHandled={note => review('applied', note)}
-          onReject={() => review('rejected')}
-          busy={busy}
-        />
-      ) : (
-        submission.status === 'pending' && (
-          <div className="mt-4 flex flex-wrap items-center gap-2">
-            <input
-              data-cy="review-note"
-              value={reviewNote}
-              onChange={event => setReviewNote(event.target.value)}
-              placeholder="Review note (optional)"
-              className="min-w-[12rem] flex-1 rounded-lg border border-gray-300 px-3 py-1.5 text-sm focus:border-teal-600 focus:ring-1 focus:ring-teal-600 focus:outline-none"
-            />
-            <button
-              type="button"
-              data-cy="approve"
-              disabled={busy}
-              onClick={() => review('approved')}
-              className="rounded-full bg-teal-700 px-4 py-1.5 text-sm font-semibold text-white hover:bg-teal-800 disabled:opacity-60"
-            >
-              Approve
-            </button>
-            <button
-              type="button"
-              data-cy="reject"
-              disabled={busy}
-              onClick={() => review('rejected')}
-              className="rounded-full border border-gray-300 px-4 py-1.5 text-sm font-medium text-gray-700 hover:border-red-400 hover:text-red-700 disabled:opacity-60"
-            >
-              Reject
-            </button>
-          </div>
-        )
+      {(submission.status === 'pending' || submission.status === 'approved') && (
+        <OpenItem submission={submission} isNew={isNew} />
+      )}
+
+      {(submission.status === 'pending' || submission.status === 'approved') && (
+        <div className="mt-4 flex flex-wrap items-center gap-2">
+          <input
+            data-cy="review-note"
+            value={reviewNote}
+            onChange={event => setReviewNote(event.target.value)}
+            placeholder="Note (optional)"
+            className="min-w-[12rem] flex-1 rounded-lg border border-gray-300 px-3 py-1.5 text-sm focus:border-teal-600 focus:ring-1 focus:ring-teal-600 focus:outline-none"
+          />
+          <button
+            type="button"
+            data-cy="mark-handled"
+            disabled={busy}
+            onClick={() => review('applied')}
+            className="rounded-full bg-teal-700 px-4 py-1.5 text-sm font-semibold text-white hover:bg-teal-800 disabled:opacity-60"
+          >
+            Mark handled
+          </button>
+          <button
+            type="button"
+            data-cy="reject"
+            disabled={busy}
+            onClick={() => review('rejected')}
+            className="rounded-full border border-gray-300 px-4 py-1.5 text-sm font-medium text-gray-700 hover:border-red-400 hover:text-red-700 disabled:opacity-60"
+          >
+            Reject
+          </button>
+        </div>
       )}
 
       {error && (
@@ -520,133 +508,41 @@ function SubmissionRow({
 }
 
 /**
- * What is left to do after approving.
- *
- * Approve reads like "apply", and it isn't. Without this panel an admin would
- * reasonably believe the catalogue had changed, and the wrong number would sit
- * there until somebody noticed.
+ * Where to make the change: the item opened with its editor (the "Edit" a
+ * signed-in visitor gets, P6-E), or the listing to add a new one. A
+ * manufacturer's applied update needs its photos only.
  */
-function ApprovedPatch({
-  submission,
-  onDone,
-  onMarkHandled,
-  onReject,
-  busy,
-}: {
-  submission: Submission
-  onDone: () => void
-  onMarkHandled: (note: string) => void
-  /** The way back out.
-   *
-   * Approving used to be a decision a human took, so a row in this state had
-   * already been judged and only needed applying. A manufacturer's row arrives
-   * approved without anyone having looked at it — so if what they sent is
-   * wrong, there has to be somewhere to say so, or the only options would be
-   * applying it or leaving it in the bucket forever. */
-  onReject: () => void
-  busy: boolean
-}) {
-  const patch = JSON.stringify(submission.changes, null, 2)
-  const photos = submission.image_urls.length
-  const [copied, setCopied] = useState(false)
-  const [sha, setSha] = useState('')
-  // Phase 5: with the catalogue store the manufacturer API applies an update
-  // as it arrives; a row stays here only while its photo links wait.
+function OpenItem({ submission, isNew }: { submission: Submission; isNew: boolean }) {
   const appliedLive = submission.review_note?.startsWith('applied live') ?? false
-
+  const photos = submission.image_urls.length
+  const item = submission.gear_id != null ? `/${submission.gear_type}/${submission.gear_id}` : null
   return (
-    <div className="mt-4 rounded-lg border border-amber-200 bg-amber-50 p-3">
+    <div className="mt-4 rounded-lg border border-amber-200 bg-amber-50 p-3 text-sm text-amber-900">
       {appliedLive ? (
-        <p data-cy="applied-live" className="text-sm text-amber-900">
-          <strong className="font-semibold">Applied live.</strong> These values are already in the catalogue,
-          and in the item's History. Only the photos below are left to add.
+        <p data-cy="applied-live">
+          <strong className="font-semibold">Applied live.</strong> These values are already in the catalogue, and in
+          the item's History. Only the photos are left to add.
         </p>
+      ) : isNew ? (
+        <p>Add it, if it is real, with <em>Add product</em> on the listing — then mark this handled.</p>
       ) : (
-        <p className="text-sm text-amber-900">
-          <strong className="font-semibold">Approved — but not live.</strong> Apply this to{' '}
-          <code className="font-mono text-xs">{submission.gear_type}.json</code> in the repository,
-          then redeploy the API (infra/README.md § Deploying to live, half A). The catalogue is built
-          from that file at deploy time.
-        </p>
+        <p>Check the evidence, make the change on the item, then mark this handled.</p>
       )}
-      <pre data-cy="approved-patch" className="mt-2 overflow-x-auto rounded bg-white p-2 font-mono text-xs text-gray-800">
-        {patch}
-      </pre>
-
-      <div className="mt-2 flex flex-wrap items-center gap-2">
-        <button
-          type="button"
-          data-cy="copy-patch"
-          onClick={() => {
-            void navigator.clipboard?.writeText(patch)
-            setCopied(true)
-          }}
-          className="cursor-pointer rounded-full border border-amber-300 px-3 py-1 text-sm font-medium text-amber-900 hover:bg-amber-100"
-        >
-          {copied ? 'Copied' : 'Copy JSON'}
-        </button>
-        <button
-          type="button"
-          data-cy="patch-done"
-          onClick={onDone}
-          className="cursor-pointer rounded-full px-3 py-1 text-sm font-medium text-amber-900 hover:bg-amber-100"
-        >
-          Later
-        </button>
-        <button
-          type="button"
-          data-cy="patch-reject"
-          disabled={busy}
-          onClick={onReject}
-          className="ml-auto cursor-pointer rounded-full px-3 py-1 text-sm font-medium text-amber-900 hover:bg-amber-100 hover:text-red-700 disabled:opacity-60"
-        >
-          Reject instead
-        </button>
-      </div>
-
       {photos > 0 && (
         // Nothing fetches a photo link for us: photos go up by hand, through
         // the item's Photos and manuals (live editing phase 4).
-        <p data-cy="photo-upload-note" className="mt-3 border-t border-amber-200 pt-3 text-sm text-amber-900">
-          <strong className="font-semibold">Photos.</strong> Open each link above, save the photo, and add it on{' '}
-          {submission.gear_id != null ? (
-            <a href={`/${submission.gear_type}/${submission.gear_id}`} className="font-medium underline">
-              the item's page
-            </a>
-          ) : (
-            "the item's page"
-          )}{' '}
-          with <em>Photos and manuals</em>.
+        <p data-cy="photo-upload-note" className="mt-2">
+          <strong className="font-semibold">Photos.</strong> Open each link above, save the photo, and add it with{' '}
+          <em>Photos and manuals</em> on the item's page.
         </p>
       )}
-
-      {/*
-        The step that actually closes the loop. Until this is clicked the record
-        stays in the Approved bucket and — deliberately — never expires, so a
-        correction cannot be agreed to and then quietly lost. The commit is
-        optional but worth asking for: it is the only link from a value in the
-        catalogue back to the report that changed it.
-      */}
-      <div className="mt-3 flex flex-wrap items-center gap-2 border-t border-amber-200 pt-3">
-        <input
-          data-cy="applied-sha"
-          value={sha}
-          onChange={event => setSha(event.target.value)}
-          placeholder="Commit sha (optional)"
-          className="min-w-[10rem] flex-1 rounded-lg border border-amber-300 bg-white px-3 py-1.5 text-sm focus:border-teal-600 focus:ring-1 focus:ring-teal-600 focus:outline-none"
-        />
-        <button
-          type="button"
-          data-cy="mark-handled"
-          disabled={busy}
-          onClick={() => onMarkHandled(sha ? `applied in ${sha}` : 'applied')}
-          className="cursor-pointer rounded-full bg-teal-700 px-4 py-1.5 text-sm font-semibold text-white hover:bg-teal-800 disabled:opacity-60"
-        >
-          Mark handled
-        </button>
-        <span className="text-xs text-amber-800">once the edit is committed and deployed</span>
-      </div>
+      <Link
+        data-cy="open-item"
+        to={item ? `${item}${appliedLive ? '' : '?edit=1'}` : `/${submission.gear_type}`}
+        className="mt-2 inline-block font-medium text-teal-800 underline-offset-2 hover:underline"
+      >
+        {item ? (appliedLive ? 'Open the item' : 'Open the item to edit') : 'Open the listing'} →
+      </Link>
     </div>
   )
 }
-

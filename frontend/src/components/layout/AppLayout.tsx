@@ -4,6 +4,7 @@ import { Outlet } from 'react-router-dom'
 import { useCurrency } from '@/context/CurrencyContext'
 import useScrollRestoration from '@/hooks/useScrollRestoration'
 import SignInNotice from '@/components/account/SignInNotice'
+import { useSiteAuth } from '@/auth/AuthContext'
 import TopNav from './TopNav'
 import SiteFooter from './SiteFooter'
 
@@ -22,8 +23,23 @@ function StaleRatesNotice() {
   )
 }
 
+// An admin blocked this account from editing (D22, P6-D). It still reads and
+// signs in; the edit buttons are gone, and this says why.
+function BlockedNotice({ reason }: { reason: string }) {
+  return (
+    <div
+      data-cy="blocked-notice"
+      role="status"
+      className="border-b border-red-200 bg-red-50 px-4 py-2 text-center text-xs text-red-800 sm:px-6"
+    >
+      An admin has blocked this account from editing{reason ? `: ${reason}` : '.'}
+    </div>
+  )
+}
+
 export default function AppLayout() {
   const { stale } = useCurrency()
+  const { blockedReason } = useSiteAuth()
   // Back/forward returns you to where you were on the page, not to the top.
   // Lives on the shell so it covers every route at once — see the hook for why
   // it is a hook and not react-router's <ScrollRestoration>.
@@ -42,6 +58,7 @@ export default function AppLayout() {
       style={{ background: '#F8F7F4' }}
     >
       <TopNav />
+      {blockedReason !== null && <BlockedNotice reason={blockedReason} />}
       {stale && <StaleRatesNotice />}
       <main className="mx-auto w-full max-w-7xl flex-1 px-4 py-8 sm:px-6">
         <Outlet />

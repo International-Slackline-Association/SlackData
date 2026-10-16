@@ -1,13 +1,15 @@
 // Under a gear item's spec sheet: its History, public to everyone, and the
-// editing actions — Edit, Photos and manuals (phase 4), and Revert on an edit
-// in the History — for an admin or one of the maker's manufacturers (phase 5);
-// Merge into… for an admin only (LIVE_EDITING_PHASE_3.md § 5.6).
+// editing actions — Edit and Photos and manuals for everyone signed in (phase
+// 6); Revert on an edit in the History for an admin or one of the maker's
+// manufacturers (D58); Merge into… for an admin only (LIVE_EDITING_PHASE_3.md
+// § 5.6). An anonymous visitor sees Edit too: it signs them in and comes back
+// with the editor open (P6-E).
 //
 // Every action writes through the API and then asks the page to reload the
 // item (`onChanged`), so what is shown is always what the next visitor sees.
 
 import { useCallback, useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { editItem, fetchFields, fetchStored, mergeItem, revertChange } from '@/api/edits'
 import { fetchGearItem } from '@/api/gear'
 import { fetchChanges } from '@/api/people'
@@ -33,15 +35,40 @@ export default function ItemEditing({
 }: {
   slug: string
   id: string | number
-  /** The maker, as the item carries it: whose manufacturers may edit it. */
+  /** The maker, as the item carries it: whose manufacturers revert on it. */
   brandName: string
   onChanged: () => void
 }) {
   const auth = useSiteAuth()
   const token = auth.token
-  const canEdit = auth.canEditBrand(brandName) && Boolean(token)
+  const canEdit = auth.canEdit && Boolean(token)
+  const canRevert = auth.canManageBrand(brandName) && Boolean(token)
+  const offerSignIn = !auth.isAuthenticated && !auth.isLoading && auth.mode !== 'unconfigured'
   const [history, setHistory] = useState<ChangeRecordPublic[] | null>(null)
   const [dialog, setDialog] = useState<Dialog>(null)
+  const [params, setParams] = useSearchParams()
+  const wantsEdit = params.get('edit') === '1'
+
+  // Back from signing in to edit (P6-E): open the editor, once.
+  useEffect(() => {
+    if (!wantsEdit || !canEdit) return
+    setDialog('edit')
+    setParams(
+      current => {
+        const next = new URLSearchParams(current)
+        next.delete('edit')
+        return next
+      },
+      { replace: true },
+    )
+  }, [wantsEdit, canEdit, setParams])
+
+  const signInToEdit = () => {
+    const next = new URLSearchParams(params)
+    next.set('edit', '1')
+    setParams(next, { replace: true })
+    auth.signIn(`${window.location.pathname}?${next.toString()}`)
+  }
 
   const loadHistory = useCallback(() => {
     fetchChanges({ target_type: 'item', target_id: `${slug}#${id}` })
@@ -71,6 +98,17 @@ export default function ItemEditing({
             </button>
           </>
         )}
+        {offerSignIn && (
+          <button
+            type="button"
+            data-cy="item-edit-sign-in"
+            title="Anyone with an ISA account can fix or add to this item"
+            className={BUTTON}
+            onClick={signInToEdit}
+          >
+            Edit
+          </button>
+        )}
         {auth.isAdmin && token && (
           <button type="button" data-cy="item-merge" className={BUTTON} onClick={() => setDialog('merge')}>
             Merge into…
@@ -88,7 +126,7 @@ export default function ItemEditing({
             records={history}
             showTarget={false}
             emptyText="No changes on the site yet — this item is as it was imported."
-            onRevert={canEdit ? record => setDialog({ revert: record }) : undefined}
+            onRevert={canRevert ? record => setDialog({ revert: record }) : undefined}
           />
         )}
       </div>

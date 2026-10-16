@@ -3,7 +3,7 @@
 // Like submissions, these reach stores other than the catalogue, so they work
 // on the live site while the catalogue is read-only.
 
-import type { AdminSummary, ChangeRecordPublic, Me, RoleChange } from '@/types'
+import type { AdminSummary, BlockedSummary, ChangeRecordPublic, Me, RoleChange } from '@/types'
 import { getAuthed, patchJson, postJson, request } from './client'
 
 export function fetchMe(token: string): Promise<Me> {
@@ -29,6 +29,16 @@ export function fetchAdmins(token: string): Promise<AdminSummary[]> {
 /** Grant or revoke a role. A logged change, visible in the public change log. */
 export function changeRole(token: string, change: RoleChange): Promise<AdminSummary> {
   return postJson<AdminSummary>('/admin/roles', change, token)
+}
+
+/** Accounts blocked from editing (D22). Admins only. */
+export function fetchBlocked(token: string): Promise<BlockedSummary[]> {
+  return getAuthed<BlockedSummary[]>('/admin/people/blocked', token)
+}
+
+/** Block or unblock an account — a logged change; the reason is public. */
+export function setBlocked(token: string, isaId: string, block: boolean, why: string): Promise<BlockedSummary> {
+  return postJson<BlockedSummary>(`/admin/people/${encodeURIComponent(isaId)}/${block ? 'block' : 'unblock'}`, { why }, token)
 }
 
 /** Which part of the log: everything, one thing's History, one person's

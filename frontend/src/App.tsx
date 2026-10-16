@@ -47,30 +47,21 @@ export default function App() {
             <Route path="for-manufacturers" element={<ManufacturerApiPage />} />
             {/*
               Static, so it outranks the `:slug` gear-type pattern — /admin must
-              not be read as a gear type.
-
-              Gated on VITE_ENABLE_SUBMISSIONS so a build with Phase 2 off drops
-              the route entirely and /admin falls through to NotFound. It is set
-              in BOTH .env.development and .env.production — the hosted site does
-              ship /admin, and what keeps that harmless is not this flag: the page
-              renders "sign-in is not configured" until the ISA sign-in values
-              are filled in (infra/sync-env.sh), and every endpoint behind it is
-              guarded server-side by require_admin (slack_data/api/auth.py). A
-              release gate, never access control.
+              not be read as a gear type. Not access control: every endpoint
+              behind it is guarded server-side by require_admin
+              (slack_data/api/auth.py).
             */}
-            {import.meta.env.VITE_ENABLE_SUBMISSIONS === 'true' && (
-              <Route
-                path="admin"
-                element={
-                  // The fallback is deliberately plain: this chunk is fetched only
-                  // by an administrator, on a fast path, and a spinner that flashes
-                  // for 80ms reads worse than nothing.
-                  <Suspense fallback={<div className="p-8 text-sm text-gray-500">Loading…</div>}>
-                    <AdminPage />
-                  </Suspense>
-                }
-              />
-            )}
+            <Route
+              path="admin"
+              element={
+                // The fallback is deliberately plain: this chunk is fetched only
+                // by an administrator, on a fast path, and a spinner that flashes
+                // for 80ms reads worse than nothing.
+                <Suspense fallback={<div className="p-8 text-sm text-gray-500">Loading…</div>}>
+                  <AdminPage />
+                </Suspense>
+              }
+            />
             <Route
               path="changes"
               element={
