@@ -4,7 +4,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from slack_data.database import get_session, create_db_and_tables, READ_ONLY
+from slack_data.database import CATALOGUE_WRITABLE, create_db_and_tables, get_session
 from slack_data.seed import seed_catalog
 
 from slack_data.api.routers.submissions_router import warn_if_captcha_is_unconfigured
@@ -14,11 +14,11 @@ from slack_data.api.routing import docs_kwargs, register_routers
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     # Local/dev: create a writable SQLite in the CWD and seed it from the root
-    # *.json files on first boot. Hosted (read-only) mode ships a pre-built
-    # catalog baked into the deployment package, so there is nothing to create
-    # or seed here — see slack_data.database and scripts/build_catalog_db.py.
+    # *.json files on first boot. Hosted, the catalogue is either baked into the
+    # image or built from the catalogue store (CATALOG_SOURCE=store), so there is
+    # nothing to seed here — see slack_data.database.
     create_db_and_tables()
-    if not READ_ONLY:
+    if CATALOGUE_WRITABLE:
         with next(get_session()) as session:
             seed_catalog(session)
     # A hosted misconfiguration that is otherwise silent until a visitor hits it.
@@ -32,7 +32,7 @@ async def lifespan(app: FastAPI):
 app = FastAPI(
     lifespan=lifespan,
     root_path=os.getenv("API_ROOT_PATH", ""),
-    **docs_kwargs(READ_ONLY),
+    **docs_kwargs(not CATALOGUE_WRITABLE),
 )
 
 # Allow the local Vite dev server (and preview) to call the API from the browser.
@@ -55,10 +55,11 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# One call so the tests can build the same app. Under READ_ONLY the catalogue's
+# One call so the tests can build the same app. When the catalogue is not
+# writable (baked, or read from the store) its
 # POST/PATCH/DELETE routes are not registered at all — they 404 and are absent
 # from the OpenAPI schema. See api/routing.py for why that, and not a 403.
-register_routers(app, read_only=READ_ONLY)
+register_routers(app, read_only=not CATALOGUE_WRITABLE)
 
 # The SPA is served separately from S3/CloudFront (see infra/), so the API only
 # needs a simple root. CloudFront routes "/" to the SPA and "/api/*" here.

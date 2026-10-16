@@ -16,13 +16,15 @@
 service: slackdata
 
 custom:
-  # The Cognito group that makes a pool member an admin. Named ONCE, here, and
-  # read by both the group resource and the Lambda's environment — a literal
-  # rather than a `!Ref` to the group, because the two must be the same string
-  # and that is easier to see than it is to look up what Ref returns for a user
-  # pool group. Must match the fallback in slack_data/api/auth.py, which is what
-  # applies if this variable ever reaches the Lambda blank.
-  adminGroup: admins
+  # Sign-in is the ISA's shared pool, `isa-users`, with SlackData's own app
+  # client in it — made by the ISA by hand on 2026-10-12, NOT by this stack
+  # (LIVE_EDITING_PLAN.md D61). Both are public values: they appear in every ID
+  # token. SlackData has no user pool of its own (D62). The client's callback
+  # URLs are the bare origins of slackdata.org, www.slackdata.org and
+  # localhost:5173, so a non-prod stage on a CloudFront name cannot sign in; a
+  # new callback is a request to the ISA, since the client is theirs.
+  isaUserPoolId: eu-central-1_iGaYGKeyJ
+  isaClientId: 2snjdh8i6md0m5n6h9te1hlor1
 
   # The slackdata.org certificate, resolved PER STAGE so that a non-prod
   # template never names it at all. A CloudFormation `!If` would not achieve
@@ -87,6 +89,10 @@ functions:
     memorySize: 512
     timeout: 29                                    # API Gateway hard max
     environment:
+      # Tells the fail-closed guards (dev tokens, captcha) they are on the live
+      # site. Dockerfile.lambda sets it too, and the Lambda runtime's own
+      # AWS_LAMBDA_FUNCTION_NAME is a third signal: slack_data/deployment.py.
+      SLACKDATA_DEPLOYMENT: hosted
       # Phase 2 (submissions). The catalogue stays a read-only file baked into
       # the image; these point at the *separate* stores a submission uses.
       SUBMISSIONS_TABLE: !Ref SubmissionsTable
@@ -97,17 +103,27 @@ functions:
       # scoped to `table/slackdata-*`, which was asked for with exactly this in
       # mind (infra/ISA_ROLE_REQUEST_PHASE2.md).
       BRAND_CLIENTS_TABLE: !Ref BrandClientsTable
-      # Must match the resource server scope below, and the default in
-      # slack_data/api/auth.py. A brand's token is refused without it.
-      COGNITO_MANUFACTURER_SCOPE: slackdata/gear.write
-      COGNITO_USER_POOL_ID: !Ref AdminUserPool
-      COGNITO_CLIENT_ID: !Ref AdminUserPoolClient
-      COGNITO_REGION: ${aws:region}
-      # Membership of this group — not mere existence in the pool — is what
-      # makes someone an admin. Named from the group resource below so the two
-      # cannot drift. Unsetting it does NOT disable the check: auth.py falls
-      # back to the same default. See slack_data/api/auth.py.
-      COGNITO_ADMIN_GROUP: ${self:custom.adminGroup}
+      # Live editing, phase 1: who people are (the ISA pool) and what they may
+      # do (the people store), and the append-only record of every change.
+      ISA_USER_POOL_ID: ${self:custom.isaUserPoolId}
+      ISA_CLIENT_ID: ${self:custom.isaClientId}
+      ISA_REGION: eu-central-1
+      PEOPLE_TABLE: !Ref PeopleTable
+      CHANGELOG_TABLE: !Ref ChangelogTable
+      # Live editing, phase 2: the catalogue store, and what the site reads.
+      # `baked` (the default) serves the catalogue baked into the image, with
+      # the store running in shadow; `store` serves the store, built into memory
+      # and rebuilt when its version moves. Chosen in the deployer's shell, so
+      # the switch-over — and its rollback — is one variable and a redeploy:
+      #   CATALOG_SOURCE=store npx serverless deploy --stage prod
+      # See LIVE_EDITING_PHASE_2.md before flipping it.
+      CATALOG_TABLE: !Ref CatalogTable
+      CATALOG_SOURCE: ${env:CATALOG_SOURCE, 'baked'}
+      # The first admins, by verified ISA email (§ 4.4). From the deployer's
+      # shell, never written here: the repo is public and these are people's
+      # addresses. Each grants admin once, logged as `bootstrap`; after that,
+      # admins grant admins on the site. Unset, nobody is bootstrapped.
+      ADMIN_BOOTSTRAP_EMAILS: ${env:ADMIN_BOOTSTRAP_EMAILS, ''}
       SUBMISSION_RETENTION_DAYS: '365'             # pending the ISA's answer
       # Read from the deployer's shell at deploy time, so the secret is never in
       # this repo. If it is unset the app fails CLOSED — `POST /submissions`
@@ -288,11 +304,11 @@ resources:
       UpdateReplacePolicy: Retain
 
     # ---- Brand API clients (Phase 4) ----------------------------------------
-    # Maps a Cognito app client id onto one of our brands. `Brand` has no
-    # account linkage of its own, so this table IS the linkage — and putting it
-    # in data rather than in a per-brand Cognito scope is what makes a leaked
-    # credential revocable with one PutItem, taking effect on the very next
-    # request instead of after a redeploy.
+    # Each brand's API key (client id + secret) and the brand it speaks for
+    # (D63). `Brand` has no account linkage of its own, so this table IS the
+    # linkage — and a leaked key is revocable with one PutItem, taking effect on
+    # the very next request. The secret is stored readable so a brand's editors
+    # can see their key (D64): this table is never part of the daily export.
     #
     # No TTL, deliberately. A submission expires; a credential mapping that
     # expired on its own would lock a brand out silently. It holds a contact
@@ -329,144 +345,139 @@ resources:
       DeletionPolicy: Retain
       UpdateReplacePolicy: Retain
 
-    # The scope a brand's machine token must carry. Declaring a resource server
-    # is what makes `slackdata/gear.write` a thing Cognito will mint at all.
-    #
-    # The per-brand app clients themselves are NOT in this template, and that is
-    # the point: creating one is the moment we decide a company speaks for a
-    # brand (MANUFACTURER_API_PLAN.md § Open questions 2), which is a human
-    # judgement, not a deploy. Create the app client in the console with the
-    # client_credentials grant and this scope, then run
-    # `python -m slack_data.manufacturers.register` to map it to a brand.
-    ManufacturerResourceServer:
-      Type: AWS::Cognito::UserPoolResourceServer
-      # Needs cognito-idp:CreateResourceServer on the DEPLOYING identity (your
-      # SSO session), not the Lambda role — confirmed granted 2026-08-24. Leave
-      # it to CloudFormation: one created by hand collides on identifier
-      # `slackdata` and fails the stack.
+    # ---- People (live editing, phase 1) -------------------------------------
+    # Who may do what (LIVE_EDITING_PLAN.md § 4, D8): one row per ISA account
+    # that has signed in, keyed by the token's `sub`, with its roles. The ISA
+    # pool says who someone is; this table says what they may do here, exactly
+    # as SportHub's `sporthub-users` does. Covered by the `table/slackdata-*`
+    # grant. The role has no Scan, so each list is an index: must stay in step
+    # with slack_data/people/dynamo.py.
+    PeopleTable:
+      Type: AWS::DynamoDB::Table
       Properties:
-        UserPoolId: !Ref AdminUserPool
-        Identifier: slackdata
-        Name: SlackData gear API
-        Scopes:
-          - ScopeName: gear.write
-            ScopeDescription: Submit updates to your own gear
-
-    # ---- Admin login (Phase 2) ----------------------------------------------
-    # One user, created by hand. Self-signup is off: this pool exists to
-    # authenticate the person who triages submissions, not to register anyone.
-    AdminUserPool:
-      Type: AWS::Cognito::UserPool
-      Properties:
-        UserPoolName: ${self:service}-admins-${self:provider.stage}
-        # Tagged so the pool can be addressed by attribute rather than by id.
-        # A user pool's ARN contains an id AWS generates at creation, so an IAM
-        # policy written before the first deploy cannot name it — but it CAN
-        # match `aws:ResourceTag/Project`. Free to add now; without it, granting
-        # the Lambda any Cognito permission later means a second round-trip to
-        # the ISA to fill in an id. See ISA_ROLE_REQUEST_PHASE2.md.
-        UserPoolTags:
-          Project: slackdata
-          Stage: ${self:provider.stage}
-        AdminCreateUserConfig:
-          AllowAdminCreateUserOnly: true           # no public sign-up. The point.
-        UsernameAttributes:
-          - email
-        AutoVerifiedAttributes:
-          - email
-        MfaConfiguration: 'OPTIONAL'
-        EnabledMfas:
-          - SOFTWARE_TOKEN_MFA
-        Policies:
-          PasswordPolicy:
-            MinimumLength: 14
-            RequireLowercase: true
-            RequireUppercase: true
-            RequireNumbers: true
-            RequireSymbols: true
-      # Keep the pool (and the admin account in it) even if the stack is torn
-      # down or the resource is replaced — losing it locks the admin out of
-      # triage, and it holds a real person's credentials.
+        TableName: ${self:service}-people-${self:provider.stage}
+        BillingMode: PAY_PER_REQUEST
+        AttributeDefinitions:
+          - AttributeName: sub
+            AttributeType: S
+          - AttributeName: email_key
+            AttributeType: S
+          - AttributeName: isa_id
+            AttributeType: S
+          - AttributeName: role_admin
+            AttributeType: S
+        KeySchema:
+          - AttributeName: sub
+            KeyType: HASH
+        GlobalSecondaryIndexes:
+          - IndexName: email_key-index
+            KeySchema:
+              - AttributeName: email_key
+                KeyType: HASH
+            Projection:
+              ProjectionType: ALL
+          - IndexName: isa_id-index
+            KeySchema:
+              - AttributeName: isa_id
+                KeyType: HASH
+            Projection:
+              ProjectionType: ALL
+          # Sparse: only admins carry `role_admin`, so this IS the admin list.
+          - IndexName: role_admin-index
+            KeySchema:
+              - AttributeName: role_admin
+                KeyType: HASH
+            Projection:
+              ProjectionType: ALL
+        PointInTimeRecoverySpecification:
+          PointInTimeRecoveryEnabled: true
+      # Holds every role grant. Losing it locks every admin out, and the only
+      # way back in is the bootstrap allowlist.
       DeletionPolicy: Retain
       UpdateReplacePolicy: Retain
 
-    # Being in the pool is authentication; being in this group is
-    # authorisation. Declared here rather than made by hand in the console so
-    # every stage has it, identically, and a new stage is not one forgotten
-    # click away from "any pool member is an admin".
-    #
-    # Cognito adds the group name to the `cognito:groups` claim of a member's
-    # ID token by itself, so the SPA sends nothing new for this.
-    #
-    # Adding a user to it is a separate, deliberate act:
-    #   aws cognito-idp admin-add-user-to-group --user-pool-id <pool> \
-    #       --username <email> --group-name admins
-    # Do that BEFORE deploying this to a stage that already has an admin, or
-    # the deploy locks them out of triage.
-    AdminUserPoolGroup:
-      Type: AWS::Cognito::UserPoolGroup
+    # ---- The change log (live editing, phase 1) -----------------------------
+    # Every change, with who made it and how — permanent and public (§ 6).
+    # **Its name is fixed**: the ISA's `ChangelogIsAppendOnly` statement on the
+    # Lambda role denies UpdateItem / DeleteItem / BatchWriteItem / PartiQL
+    # writes on `table/slackdata-changelog-prod` by exact name (D43), so a
+    # renamed table would silently lose the IAM half of "append-only". The other
+    # half is in code: every append is a conditional put on a fresh ULID
+    # (slack_data/changelog/). Indexes must stay in step with
+    # slack_data/changelog/dynamo.py.
+    ChangelogTable:
+      Type: AWS::DynamoDB::Table
       Properties:
-        GroupName: ${self:custom.adminGroup}
-        UserPoolId: !Ref AdminUserPool
-        Description: May triage submissions — read, approve, reject, mark handled.
-      # No Retain: the group holds no data. Its memberships live on the pool,
-      # which is retained, and re-creating the group does not restore them —
-      # which is exactly why deleting it is not something to do casually.
+        TableName: ${self:service}-changelog-${self:provider.stage}
+        BillingMode: PAY_PER_REQUEST
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+          - AttributeName: feed
+            AttributeType: S
+          - AttributeName: target
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        GlobalSecondaryIndexes:
+          # Recent Changes, newest first: every record has feed = "all".
+          - IndexName: feed-index
+            KeySchema:
+              - AttributeName: feed
+                KeyType: HASH
+              - AttributeName: id
+                KeyType: RANGE
+            Projection:
+              ProjectionType: ALL
+          # One thing's History: target = "<type>#<id>".
+          - IndexName: target-index
+            KeySchema:
+              - AttributeName: target
+                KeyType: HASH
+              - AttributeName: id
+                KeyType: RANGE
+            Projection:
+              ProjectionType: ALL
+        PointInTimeRecoverySpecification:
+          PointInTimeRecoveryEnabled: true
+      # The one record that must never be lost (D11: kept forever).
+      DeletionPolicy: Retain
+      UpdateReplacePolicy: Retain
 
-    AdminUserPoolClient:
-      Type: AWS::Cognito::UserPoolClient
+    # ---- The catalogue store (live editing, phase 2) -------------------------
+    # The source of truth for the catalogue once CATALOG_SOURCE=store (D4): one
+    # item per seed entry, verbatim, plus `_meta/version`, which every request
+    # reads and every write bumps (D30). Read with Query per collection — the
+    # role has no Scan. Keys must stay in step with slack_data/catalogue/dynamo.py.
+    CatalogTable:
+      Type: AWS::DynamoDB::Table
       Properties:
-        ClientName: ${self:service}-admin-spa-${self:provider.stage}
-        UserPoolId: !Ref AdminUserPool
-        # A browser cannot keep a secret, so it must not be issued one — with a
-        # secret configured the SPA's PKCE token exchange fails outright.
-        GenerateSecret: false
-        AllowedOAuthFlows:
-          - code                                   # authorization code + PKCE
-        AllowedOAuthFlowsUserPoolClient: true
-        AllowedOAuthScopes:
-          - openid
-          - email
-        SupportedIdentityProviders:
-          - COGNITO
-        # Cognito matches these exactly — no wildcards — so they have to name the
-        # domain this stage is actually served from. On a non-prod stage that is
-        # the distribution's own CloudFront name, which is why this reads its
-        # domain rather than repeating a literal.
-        # BOTH hostnames, because the distribution answers on both. The
-        # Aliases below list slackdata.org AND www.slackdata.org, and www is
-        # served directly rather than redirected — so a visitor who reaches
-        # /admin via www sends redirect_uri=https://www.slackdata.org/admin and
-        # Cognito answers `redirect_mismatch`, which reads as a broken login
-        # rather than a missing entry in this list. Listing only the apex means
-        # login works or not depending on how the user typed the domain.
-        CallbackURLs: !If
-          - IsProd
-          - - https://slackdata.org/admin
-            - https://www.slackdata.org/admin
-            - http://localhost:5173/admin          # local dev against the real pool
-          - - !Sub 'https://${Cdn.DomainName}/admin'
-            - http://localhost:5173/admin
-        LogoutURLs: !If
-          - IsProd
-          - - https://slackdata.org/
-            - https://www.slackdata.org/
-            - http://localhost:5173/
-          - - !Sub 'https://${Cdn.DomainName}/'
-            - http://localhost:5173/
-        # The API verifies the ID token; refresh keeps a triage session alive.
-        ExplicitAuthFlows:
-          - ALLOW_REFRESH_TOKEN_AUTH
-          - ALLOW_USER_SRP_AUTH
-        PreventUserExistenceErrors: ENABLED
+        TableName: ${self:service}-catalog-${self:provider.stage}
+        BillingMode: PAY_PER_REQUEST
+        AttributeDefinitions:
+          - AttributeName: collection
+            AttributeType: S
+          - AttributeName: key
+            AttributeType: S
+        KeySchema:
+          - AttributeName: collection
+            KeyType: HASH
+          - AttributeName: key
+            KeyType: RANGE
+        PointInTimeRecoverySpecification:
+          PointInTimeRecoveryEnabled: true
+      # After the switch-over this IS the catalogue; the seeds stop being edited.
+      DeletionPolicy: Retain
+      UpdateReplacePolicy: Retain
 
-    AdminUserPoolDomain:
-      Type: AWS::Cognito::UserPoolDomain
-      Properties:
-        UserPoolId: !Ref AdminUserPool
-        # Cognito's own hosted login page. Account-id-suffixed because this
-        # prefix is a per-region global namespace, exactly like the S3 bucket.
-        Domain: ${self:service}-admin-${self:provider.stage}-${aws:accountId}
+    # No Cognito resources. SlackData's admin pool (`slackdata-admins-<stage>`),
+    # its group, app client, hosted domain and the manufacturer resource server
+    # were removed on 2026-10 (D62): people sign in through the ISA's pool and
+    # brands send an API key. The pool was DeletionPolicy: Retain, so removing it
+    # here ORPHANS it rather than deleting it — import the brands' secrets first
+    # (scripts/import_brand_keys_from_cognito.py), then delete it by hand;
+    # infra/preflight.sh flags it until you do.
 
     # ---- Uploads bucket (Phase 4 — manufacturer photo uploads) ---------------
     # SEPARATE from the website bucket, and deliberately so. Half B of the deploy
@@ -716,21 +727,20 @@ resources:
       Value: !GetAtt Cdn.DomainName
     CdnDistributionId:
       Value: !Ref Cdn
-    # The SPA needs these three to build its login. See infra/README.md half B.
-    AdminUserPoolId:
-      Value: !Ref AdminUserPool
-    AdminUserPoolClientId:
-      Value: !Ref AdminUserPoolClient
-    AdminUserPoolGroupName:
-      Value: ${self:custom.adminGroup}
-    AdminLoginDomain:
-      Value: !Sub '${AdminUserPoolDomain}.auth.${AWS::Region}.amazoncognito.com'
+    # The SPA's sign-in: the ISA pool and SlackData's client in it (D61).
+    IsaUserPoolId:
+      Value: ${self:custom.isaUserPoolId}
+    IsaClientId:
+      Value: ${self:custom.isaClientId}
     SubmissionsTableName:
       Value: !Ref SubmissionsTable
     BrandClientsTableName:
       Value: !Ref BrandClientsTable
-    # Where a brand exchanges its client id + secret for a token.
-    ManufacturerTokenUrl:
-      Value: !Sub 'https://${AdminUserPoolDomain}.auth.${AWS::Region}.amazoncognito.com/oauth2/token'
+    PeopleTableName:
+      Value: !Ref PeopleTable
+    ChangelogTableName:
+      Value: !Ref ChangelogTable
+    CatalogTableName:
+      Value: !Ref CatalogTable
     UploadsBucketName:
       Value: !Ref UploadsBucket

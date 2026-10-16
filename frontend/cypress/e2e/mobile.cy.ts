@@ -122,7 +122,11 @@ describe('Mobile — filters live in a bottom sheet', () => {
   it('opens the sidebar in a sheet and closes it again', () => {
     cy.get('[data-cy="mobile-filter-btn"]').click()
     cy.get('[data-cy="sheet"]').should('be.visible')
-    cy.get('[data-cy="filter-sidebar"]').should('be.visible')
+    // In the sheet, not `be.visible`: once every filter group has rendered the
+    // sidebar is far taller than the sheet's scroll region, and Cypress judges
+    // an element under a fixed ancestor by its centre point, which is then
+    // below the screen. That passed or failed by when the check ran.
+    cy.get('[data-cy="sheet"] [data-cy="filter-sidebar"]').should('exist')
     // DESIGN.md: the scope control is always visible, in either layout.
     cy.get('[data-cy="status-toggle"]').should('be.visible')
 

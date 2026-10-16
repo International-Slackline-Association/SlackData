@@ -20,6 +20,7 @@ from fastapi.testclient import TestClient
 
 from slack_data.api import auth
 from slack_data.api.routing import register_routers
+from slack_data.changelog.store import get_changelog_repository
 from slack_data.database import get_session
 from slack_data.models.submissions import (
     MAX_CHANGES,
@@ -27,6 +28,7 @@ from slack_data.models.submissions import (
     MAX_VALUE_LENGTH,
     SubmissionStatus,
 )
+from slack_data.people.store import get_people_repository
 from slack_data.submissions.store import get_repository
 from slack_data.utilities import turnstile
 from slack_data.utilities.ulid import is_ulid
@@ -556,7 +558,7 @@ def test_turnstile_raises_rather_than_passing_on_a_network_error(monkeypatch):
 # --- Separation from the catalogue ------------------------------------------
 
 
-def test_submissions_never_touch_the_catalogue_session(submissions):
+def test_submissions_never_touch_the_catalogue_session(submissions, people, changelog):
     """The one failure that local testing cannot otherwise catch.
 
     Hosted, the catalogue is opened `mode=ro&immutable=1`. A submissions route
@@ -573,6 +575,8 @@ def test_submissions_never_touch_the_catalogue_session(submissions):
 
     app.dependency_overrides[get_session] = no_catalogue
     app.dependency_overrides[get_repository] = lambda: submissions
+    app.dependency_overrides[get_people_repository] = lambda: people
+    app.dependency_overrides[get_changelog_repository] = lambda: changelog
 
     with TestClient(app) as unwired:
         created = unwired.post("/submissions", json=CORRECTION)

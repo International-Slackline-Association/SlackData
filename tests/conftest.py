@@ -13,17 +13,27 @@ FastAPI's dependency_overrides.  Each test starts with an empty database and
 inserts only what it needs.
 """
 
+import json
+import time
+
+import jwt
 import pytest
+from cryptography.hazmat.primitives.asymmetric import rsa
 from fastapi import FastAPI
 from fastapi.testclient import TestClient
 from sqlmodel import Session, SQLModel, create_engine
 from sqlmodel.pool import StaticPool
 
+from slack_data.api import auth
 from slack_data.api.routing import register_routers
+from slack_data.changelog.repository import InMemoryChangeLogRepository
+from slack_data.changelog.store import get_changelog_repository
 from slack_data.database import get_session
-from slack_data.models.brands import Brand
 from slack_data.manufacturers.clients import InMemoryBrandClientRepository
 from slack_data.manufacturers.store import get_client_repository
+from slack_data.models.brands import Brand
+from slack_data.people.repository import InMemoryPeopleRepository
+from slack_data.people.store import get_people_repository
 from slack_data.submissions.repository import InMemorySubmissionRepository
 from slack_data.submissions.store import get_repository
 
@@ -39,6 +49,19 @@ def _build_test_app(read_only: bool = False) -> FastAPI:
     app = FastAPI()
     register_routers(app, read_only=read_only)
     return app
+
+
+@pytest.fixture(autouse=True)
+def _not_on_lambda(monkeypatch):
+    """Every test starts local, whatever shell it runs in.
+
+    `deployment.is_hosted()` reads two environment variables besides
+    `READ_ONLY`; a stray one in a developer's or CI's shell would silently flip
+    every "local dev" test into the hosted lockout. Tests that want hosted set
+    it themselves.
+    """
+    monkeypatch.delenv("AWS_LAMBDA_FUNCTION_NAME", raising=False)
+    monkeypatch.delenv("SLACKDATA_DEPLOYMENT", raising=False)
 
 
 @pytest.fixture
@@ -59,7 +82,7 @@ def session(engine):
 
 
 @pytest.fixture
-def client(session, submissions, brand_clients):
+def client(session, submissions, brand_clients, people, changelog):
     app = _build_test_app()
 
     def get_session_override():
@@ -68,6 +91,8 @@ def client(session, submissions, brand_clients):
     app.dependency_overrides[get_session] = get_session_override
     app.dependency_overrides[get_repository] = lambda: submissions
     app.dependency_overrides[get_client_repository] = lambda: brand_clients
+    app.dependency_overrides[get_people_repository] = lambda: people
+    app.dependency_overrides[get_changelog_repository] = lambda: changelog
 
     with TestClient(app) as c:
         yield c
@@ -85,7 +110,7 @@ def submissions():
 
 
 @pytest.fixture
-def read_only_client(session, submissions, brand_clients):
+def read_only_client(session, submissions, brand_clients, people, changelog):
     """A client for the hosted catalogue's shape: GET routes and nothing else.
 
     The session is still writable — the point of the guard is that the routes
@@ -100,6 +125,8 @@ def read_only_client(session, submissions, brand_clients):
     app.dependency_overrides[get_session] = get_session_override
     app.dependency_overrides[get_repository] = lambda: submissions
     app.dependency_overrides[get_client_repository] = lambda: brand_clients
+    app.dependency_overrides[get_people_repository] = lambda: people
+    app.dependency_overrides[get_changelog_repository] = lambda: changelog
 
     with TestClient(app) as c:
         yield c
@@ -114,6 +141,18 @@ def brand_clients():
     working directory and carry credentials between tests.
     """
     return InMemoryBrandClientRepository()
+
+
+@pytest.fixture
+def people():
+    """An empty people store, isolated per test — the same reason as above."""
+    return InMemoryPeopleRepository()
+
+
+@pytest.fixture
+def changelog():
+    """An empty change log, isolated per test."""
+    return InMemoryChangeLogRepository()
 
 
 @pytest.fixture
@@ -137,3 +176,54 @@ def persist(session, obj):
     session.commit()
     session.refresh(obj)
     return obj
+
+
+POOL = "eu-central-1_TESTPOOL"
+APP_CLIENT = "slackdata-test-client"
+
+
+@pytest.fixture
+def isa(monkeypatch):
+    """The ISA pool configured, with a throwaway RSA key and a matching JWKS.
+
+    Returns a factory for signed ID tokens; an override of None drops a claim.
+    Shared by test_auth.py (the verifier) and test_people.py (the routes).
+    """
+    key = rsa.generate_private_key(public_exponent=65537, key_size=2048)
+    kid = "test-key-1"
+    # Built exactly as `_fetch_jwks` builds it — from the JWK dict a pool
+    # publishes — so the fixture can't drift from the code it stands in for.
+    jwk_data = json.loads(jwt.algorithms.RSAAlgorithm.to_jwk(key.public_key()))
+    jwk_data["kid"] = kid
+    jwk = jwt.PyJWK(jwk_data)
+
+    monkeypatch.setattr(auth, "ISA_USER_POOL_ID", POOL)
+    monkeypatch.setattr(auth, "ISA_CLIENT_ID", APP_CLIENT)
+    monkeypatch.setattr(auth, "ISA_REGION", "eu-central-1")
+    monkeypatch.delenv("ADMIN_BOOTSTRAP_EMAILS", raising=False)
+    # Patch the fetch, not the verification: everything from the signature
+    # onwards is still the real code path.
+    monkeypatch.setattr(auth, "_fetch_jwks", lambda: {kid: jwk})
+    auth._jwks_cache["keys"] = {}
+    auth._jwks_cache["fetched_at"] = 0.0
+
+    def token(**overrides):
+        claims = {
+            "sub": "person-sub-1",
+            "cognito:username": "person-username-1",
+            "aud": APP_CLIENT,
+            "iss": auth.issuer(),
+            "token_use": "id",
+            "name": "Ada",
+            "family_name": "Lovelace",
+            "email": "ada@example.org",
+            "email_verified": True,
+            "exp": int(time.time()) + 3600,
+            "iat": int(time.time()),
+            **overrides,
+        }
+        # An override of None DROPS the claim.
+        claims = {k: v for k, v in claims.items() if v is not None}
+        return jwt.encode(claims, key, algorithm="RS256", headers={"kid": kid})
+
+    return token

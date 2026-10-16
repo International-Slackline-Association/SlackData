@@ -473,7 +473,7 @@ GEAR_TYPES.forEach(({ slug, apiPath, label }) => {
         // this row's alone (connector_groups.cy.ts covers those).
         const withFiles = (all as Record<string, unknown>[]).filter(i => !i.product_group).map(item => ({
           item,
-          files: imageFilesFor(slug, String(item.brand_name), String(item.name)),
+          files: imageFilesFor(slug, item),
         }))
         multi = withFiles.find(x => x.files.length > 1)
         single = withFiles.find(x => x.files.length === 1)
@@ -642,7 +642,7 @@ GEAR_TYPES.forEach(({ slug, apiPath, label }) => {
         // this row's alone (connector_groups.cy.ts covers those).
         const withFiles = (all as Record<string, unknown>[]).filter(i => !i.product_group).map(item => ({
           item,
-          files: imageFilesFor(slug, String(item.brand_name), String(item.name)),
+          files: imageFilesFor(slug, item),
         }))
         withImages = withFiles.find(x => x.files.length > 0)
         multi = withFiles.find(x => x.files.length > 1)

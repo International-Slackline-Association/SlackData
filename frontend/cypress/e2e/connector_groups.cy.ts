@@ -25,7 +25,7 @@ describe('Connector groups', () => {
   // A group in which at least two shops have photos of their own: the case
   // where one shop's photos used to hide every other's.
   let pictured: [string, Row[]] | undefined
-  const filesOf = (m: Row) => imageFilesFor('connectors', String(m.brand_name), String(m.name))
+  const filesOf = (m: Row) => imageFilesFor('connectors', m)
 
   before(() => {
     cy.fetchAllItems('connector').then((all) => {

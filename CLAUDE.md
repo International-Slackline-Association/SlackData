@@ -84,8 +84,8 @@ python -m pytest tests/ -q          # 795 backend tests, 776 run + 19 DynamoDB s
                                     #   submissions, auth, manufacturer API, live server, DynamoDB,
                                     #   manufacturer contact emails, seed ids, infra route/throttle
                                     #   agreement, brand onboarding, co-listings)
-# tests/test_live_api.py boots THREE real uvicorn processes (local-dev, hosted
-# READ_ONLY, and hosted-with-a-Cognito-pool) and hits them over HTTP. It builds its
+# tests/test_live_api.py boots FOUR real uvicorn processes (local-dev, hosted
+# READ_ONLY, hosted with no baked catalogue, and hosted-with-the-ISA-pool) and hits them over HTTP. It builds its
 # own minimal catalogue, so it adds ~9s and needs no seeded database.db, no network.
 #
 # tests/test_dynamo_stores.py runs the DynamoDB repositories against a real
@@ -180,12 +180,18 @@ Root *.json seed files
 | `slack_data/load_data/load_seller_brands.py` | Resolves each gear row's `gear_sellers` names; the one place a seller-only `Brand` is created |
 | `slack_data/models/submissions.py` | Submission schemas — **pydantic, not SQLModel**; never in the catalogue DB |
 | `slack_data/submissions/` | The submission store: `repository.py` (Protocol + SQLite + in-memory), `dynamo.py`, `store.py` (env selection), `fields.py` (allowed field names, derived from the models) |
-| `slack_data/api/auth.py` | Cognito token verification (admin **ID** tokens + manufacturer **access** tokens) + the local dev-token modes |
+| `slack_data/api/auth.py` | ISA **ID** token verification (`verify_isa_token`) + the people lookup and admin bootstrap (`require_person` / `require_admin`), manufacturer API keys (`require_manufacturer`), and the local dev-token modes |
+| `slack_data/deployment.py` | `is_hosted()` — the one answer every fail-closed guard asks (dev tokens, captcha) |
+| `slack_data/models/people.py`, `slack_data/people/` | The people store (live editing phase 1): one record per ISA account, roles, the sign-in notice. Protocol + SQLite + in-memory + DynamoDB, chosen by `PEOPLE_TABLE` / `PEOPLE_DB_PATH` |
+| `slack_data/models/changes.py`, `slack_data/changelog/` | The change log: append-only (no update/delete in the Protocol; conditional puts), public via `GET /changes`. `writer.py` writes a change and its record in one DynamoDB transaction. `CHANGELOG_TABLE` / `CHANGELOG_DB_PATH` |
+| `slack_data/catalogue/` | The catalogue store (live editing phase 2): one document per seed entry, the importer + shadow check (`python -m slack_data.catalogue.importer [--apply|--check]`), the in-memory build, and the live catalogue read when `CATALOG_SOURCE=store`. See LIVE_EDITING_PHASE_2.md |
+| `slack_data/api/routers/catalogue_router.py`, `export/` | Public `GET /catalogue/{collection}` (each seed file, rebuilt from the store byte for byte) and the daily export script + workflow for the data repo |
+| `slack_data/api/routers/people_router.py` | `/me`, `/me/notice`, `/me/name` (the public name is typed in by the person, since the ISA token gives SlackData none, and can be changed once for life), `/admin/admins`, `/admin/roles`, public `/changes` — a writable router, no catalogue session |
 | `slack_data/models/brand_clients.py` | `BrandClient` / `BrandPermission` / `ManufacturerPrincipal` — the account linkage `Brand` never had |
-| `slack_data/manufacturers/` | The manufacturer API's stores: `clients.py` (Protocol + SQLite + in-memory), `dynamo.py`, `store.py`, `matching.py` (gear identity), `register.py` (onboarding CLI), `onboard.py` (the CLI's AWS half — dossier, Cognito app client, ledger, end-to-end proof) |
+| `slack_data/manufacturers/` | The manufacturer API's stores: `clients.py` (Protocol + SQLite + in-memory), `dynamo.py`, `store.py`, `matching.py` (gear identity), `register.py` (onboarding CLI), `onboard.py` (the CLI's other half — dossier, key minting, ledger, end-to-end proof) |
 | `slack_data/utilities/turnstile.py` | Captcha verification — **fails closed**, unlike `fx.py` |
-| `scripts/fetch_submission_images.py` | Files a manufacturer record's `image_urls` into `frontend/public/gear-images/` under the right key, then rebuilds the manifest |
-| `frontend/public/gear-manuals/` | Manufacturer PDFs (manuals, datasheets, test certificates), keyed like images: `<type>/<brand-abbrev>_<name-slug>[-<title>].pdf`, or `<type>/brand/<brand-abbrev>[-<title>].pdf` for a range-wide one. Rebuild the manifests with `scripts/build_gear_manifest.py` after adding one. Rules in DESIGN.md § Manuals & documents |
+| `scripts/fetch_submission_images.py` | Files a manufacturer record's `image_urls` into the item's folder in `frontend/public/gear-images/` (`--id`), then rebuilds the manifest |
+| `frontend/public/gear-images/`, `frontend/public/gear-manuals/` | Gear photos and manufacturer PDFs (manuals, datasheets, test certificates), **one folder per item, named by id**: `<type>/<id>_<name-slug>/1.jpg, 2.jpg …` and `<type>/<id>_<name-slug>/<title>.pdf`, or `gear-manuals/<type>/brand/<catalog_id>_<brand-slug>/<title>.pdf` for a range-wide one. Only the id is read, so a rename keeps them; the slug is a label and may go stale. Rebuild the manifests with `scripts/build_gear_manifest.py` after adding one. Rules in DESIGN.md § Manuals & documents |
 
 There are `__init__.py` files in `models/`, `api/`, and `utilities/`. No `tests/`, no `.github/`, no Docker, no migrations (SQLModel `create_all` only).
 
@@ -194,6 +200,12 @@ There are `__init__.py` files in `models/`, `api/`, and `utilities/`. No `tests/
 1. `create_db_and_tables()` creates the SQLite engine and all tables. It raises if called twice (`DATABASE_ENGINE` is a module global).
 2. For each gear type: `select(<Model>).first()` — **if the table is empty**, run the matching `load_*(session)`.
 3. **Seeding is one-shot.** Once any row exists for a gear type, its JSON is never re-read. To re-seed after editing JSON: delete `slack_data/database.db` and restart the server.
+
+**Store mode (live editing phase 2).** With `CATALOG_SOURCE=store` the catalogue is not seeded from
+the files at all: it is built into memory from the catalogue store and rebuilt whenever the store's
+version moves, so an edit is served on the next request with no restart. Without it, everything
+below applies unchanged. While the store runs in shadow, a seed edit also needs
+`python -m slack_data.catalogue.importer --apply` against the store, and `--check` must be clean.
 
 **Editing a seed `*.json` is not finished until the database is re-seeded and the server restarted.**
 Because seeding is one-shot, a running dev server keeps serving the *old* rows — so the change looks
@@ -534,13 +546,14 @@ derived field list (`submissions/fields.py`). What differs is trust and shape.
 - **`manufacturer_sku` is stored but matches nothing yet** — recorded now so
   brands never have to re-send it, and so it can be promoted into the root
   `*.json` later.
-- **A second verifier, not a loosened one.** `verify_manufacturer_token` sits
-  beside `verify_cognito_token`, sharing only `signing_key()` and the JWKS
-  cache. A client-credentials access token has no `aud` claim at all, so it
-  cannot pass the admin path — and that path guards admin login, so it must not
-  be made to. Identity is `client_id` → `brand_id` through the
-  `slackdata-brand-clients-*` table, which is what makes revocation one PutItem
-  instead of a redeploy.
+- **An API key, not a token** (LIVE_EDITING_PLAN.md D63–D65). A brand sends
+  `Authorization: Bearer <client_id>:<secret>`; `verify_api_key` compares the
+  secret against the `slackdata-brand-clients-*` record in constant time, and
+  the record maps `client_id` → `brand_id`, which is what makes revocation one
+  PutItem instead of a redeploy. The secret is stored readable (D64) so brands
+  can later see it in their account — so that table never goes in the export.
+  Until 2026-10 these were Cognito client-credentials clients in SlackData's
+  own pool; that pool is retired (D62) and `onboard.py` now mints keys locally.
 - **This router *does* take a `SessionDep`** — unlike `submissions_router` — and
   reads through it only, to answer "which of your products is this?". Reads are
   fine hosted; a write would pass every local test and fail live.
@@ -555,20 +568,27 @@ derived field list (`submissions/fields.py`). What differs is trust and shape.
   `MAX_IMAGE_URLS`, http(s), added never replaced) is stored on the
   `Submission` and **not fetched by the API**, which leaves no outbound request
   to abuse. The operator files them with `scripts/fetch_submission_images.py`,
-  whose exact invocation the approved triage row shows. Images are keyed by
-  `<brand-abbrev>_<name-slug>`, so the command uses the name **after** any
-  rename in the patch. The uploads bucket exists and is unused. See
+  whose exact invocation the approved triage row shows. Photos are filed in
+  the item's folder by id (`--id`), so a rename in the same patch cannot
+  misfile them. The uploads bucket exists and is unused. See
   MANUFACTURER_API_PLAN.md § Step 4 — photos as links.
 
 Onboarding is a **CLI, not a route** (`python -m slack_data.manufacturers.register`):
 minting credentials decides whose data a token can change, it happens a dozen
 times a year, and an endpoint for it would be a permanent attack surface.
 
-Admin auth (`api/auth.py`) has three modes: a Cognito pool set → verify the RS256 **ID** token
-against the pool's JWKS; unset **and hosted** → reject everything with 503, never fall through;
-unset and local → a static `ADMIN_DEV_TOKEN`. That middle row is why the dev token is safe to have in
-the repo: reaching it requires no pool *and* no `CATALOG_DB_PATH`, and `Dockerfile.lambda` always
-sets the latter.
+Sign-in (`api/auth.py`) is the ISA account: SlackData has no user pool of its own (D62), only an
+app client the ISA made in its `isa-users` pool (D61). Three modes: `ISA_USER_POOL_ID` set → verify
+the RS256 **ID** token against the pool's JWKS with `aud` = our client, then read the person's roles
+from the people store on every request; unset **and hosted** → reject everything with 503, never
+fall through; unset and local → a static `ADMIN_DEV_TOKEN`, which is a stored local admin. The first
+admins come from `ADMIN_BOOTSTRAP_EMAILS` (verified ISA emails, from the deployer's shell — never in
+the repo), granted once and logged; after that admins grant admins on `/admin`. That middle row is why the dev token is safe to have in
+the repo. "Hosted" is `slack_data/deployment.py`'s `is_hosted()`: any one of the Lambda runtime's
+`AWS_LAMBDA_FUNCTION_NAME`, `SLACKDATA_DEPLOYMENT=hosted` (set by `Dockerfile.lambda` and
+`infra/serverless.yml`) or `READ_ONLY`. It no longer rests on `CATALOG_DB_PATH` alone, because live
+editing stops baking the catalogue (LIVE_EDITING_PHASE_0.md). The captcha's fail-closed check asks
+the same function.
 
 ### Non-model routers
 

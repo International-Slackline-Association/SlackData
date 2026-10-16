@@ -844,25 +844,32 @@ It is rendered by `GearDetailPage`, **not** by the shared `GearDetailBody` — f
 safety callout is (§ Detailed View): the body is reused once per item in the listing's Detailed view,
 and an embedded PDF viewer per row there would be absurd.
 
-**Stored exactly the way images are** — a curated folder tree plus a generated manifest, same key,
-same one-line hosting switch:
+**Stored exactly the way images are** — a curated folder tree plus a generated manifest, one folder
+per item, same one-line hosting switch:
 
 ```
-frontend/public/gear-manuals/<gear type>/<brand-abbrev>_<name-slug>[-<title>].pdf
-frontend/src/data/gearManuals.json          # generated, never hand-edited
+frontend/public/gear-images/<gear type>/<id>_<name-slug>/1.jpg, 2.jpg …
+frontend/public/gear-manuals/<gear type>/<id>_<name-slug>/<title>.pdf
+frontend/src/data/gearImages.json, gearManuals.json   # generated, never hand-edited
 ```
 
-`scripts/build_gear_manifest.py` derives both manifests (images and manuals) from whatever is in
-`public/`, and `--check` fails on drift. The folder is the source of truth; the script only reads it.
+`scripts/build_gear_manifest.py` derives the manifests from whatever is in `public/`, and `--check`
+fails on drift. The folder is the source of truth; the script only reads it.
 
-**The filename carries the document's title.** `landcruise_aeon.pdf` is "User manual" — the default,
-because that is what most of these are. Anything after the product key is the label, de-slugified:
-`landcruise_aeon-product-archive.pdf` reads **Product archive**. A bare numeric tail keeps the image
-convention (`-2` → "User manual 2"), so a product with two unnamed PDFs never renders two identical
-rows.
+**Filed by id, so a rename keeps them.** The folder is the item's seed id, then a slug of its name
+when the folder was made. Only the id is read: the manifests are keyed by it, and the frontend looks
+an item's files up by its id. Live editing renames products in the catalogue store, and the slug
+then goes stale — harmlessly; it is a label for people browsing the tree, never renamed to follow.
+Photos are numbered (`1.jpg` is the primary; renumber to reorder).
+
+**The filename is the document's title.** `user-manual.pdf` is "User manual" — the default, because
+that is what most of these are. Anything else is the label, de-slugified: `product-archive.pdf`
+reads **Product archive**, and a second untitled one is `user-manual-2.pdf`, "User manual 2", so a
+product with two unnamed PDFs never renders two identical rows. Documents are listed in filename
+order, and the first is the one embedded.
 
 **A document that is not in English says so in its title**, because the row is a link a reader
-follows: `…-german-user-manual.pdf` reads **German user manual**. This is a filename convention, not
+follows: `german-user-manual.pdf` reads **German user manual**. This is a filename convention, not
 a language field — nothing parses it, and it costs nothing at the point where it matters, which is
 the moment before the reader opens a PDF they cannot read. Where a maker publishes both, we hold the
 English one and the title stays the plain default; German-only is the case this exists for
@@ -894,15 +901,15 @@ stay on 1.0.
 So it is filed **once, under the brand**:
 
 ```
-frontend/public/gear-manuals/<gear type>/brand/<brand-abbrev>[-<title>].pdf
+frontend/public/gear-manuals/<gear type>/brand/<catalog_id>_<brand-slug>/<title>.pdf
 frontend/src/data/brandManuals.json         # generated, never hand-edited
+frontend/src/data/brandIds.json             # brand name -> catalog_id, generated
 ```
 
-- **Keyed by the brand abbreviation alone** — `bc.pdf`, `bc-webbing-manual.pdf`. That can never
-  collide with a product key, because a product key always contains an underscore
-  (`bc_mightylock`). Several brand *names* share one abbreviation ("Balance Community",
-  "BalanceCommunity", "Balance Community: Slackline Outfitters"), which is the point: the document
-  is filed once and every spelling of the maker finds it.
+- **Keyed by the brand's `catalog_id`** from `manufacturers.json` — the stable `Brand.id` — in the
+  `brand/` folder, apart from the products. Items carry the maker's and sellers' *names*, so the
+  frontend looks the id up in `brandIds.json`, built with the backend's own name folding: every
+  spelling of the maker finds the one folder.
 - **Scoped by the folder it sits in, not by the company.** A webbing manual goes in
   `gear-manuals/webbings/brand/`, and it reaches that maker's webbings only. A generic manual is
   always about a *class* of product — how you rig a webbing has nothing to say about a tree
@@ -911,11 +918,10 @@ frontend/src/data/brandManuals.json         # generated, never hand-edited
 - **Its own manifest**, not a reserved key inside `gearManuals.json`, because it is a different
   claim: "this document is about the whole range", not "this document is about this item". Both are
   built by `scripts/build_gear_manifest.py` from whatever is in `public/`, and `--check` fails on
-  drift. A file whose stem matches no abbreviation in `brandAbbrev.json` is warned about rather than
-  filed silently.
-- **Titled by the same rule**, so one list never shows two title conventions: `bc.pdf` is
-  "User manual", `bc-webbing-manual.pdf` is "Webbing manual".
-- **Spider Slacklines and Slack Inov file the same PDF twice**, once under each abbreviation. They
+  drift. A folder whose id is no `catalog_id` is warned about rather than filed silently.
+- **Titled by the same rule**, so one list never shows two title conventions: `user-manual.pdf` is
+  "User manual", `webbing-manual.pdf` is "Webbing manual".
+- **Spider Slacklines and Slack Inov file the same PDF twice**, once in each brand's folder. They
   are two companies publishing one document (and co-listing each other's gear — see § Also sold by),
   and an alias table mapping one brand's manuals onto another's would be a second place for the
   brand relationships to be stated, and to go stale. Two brands is two files; that is the whole
@@ -1641,9 +1647,10 @@ A manufacturer record can carry `image_urls`: links to photos the brand already 
   be fetched.
 - **In the approved panel**, below the JSON patch: the shell command that files those photos
   (`data-cy="image-fetch-command"`), with a **Copy command** button (`data-cy="copy-image-command"`).
-  It names the product by the name it will have **after** the patch, since images are keyed by name.
-  The block carries its own sentence: the photos go into `frontend/public/gear-images/` and ship with
-  **half B** (the website), not half A, and a rename in the patch is applied first.
+  It names the product by its id (`--id`), so the photos land in its own folder whatever the patch
+  renames it to; the name only labels a folder the script has to create. The block carries its own
+  sentence: the photos go into `frontend/public/gear-images/` and ship with **half B** (the
+  website), not half A.
 - A record with photos and no field changes shows an empty patch (`{}`) and the command. The patch
   block stays, so the panel keeps one shape.
 

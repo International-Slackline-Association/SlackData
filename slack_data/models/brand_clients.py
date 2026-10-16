@@ -1,30 +1,31 @@
 """
-Brand API clients — the link between a Cognito app client and one of our brands.
+Brand API clients — a brand's API key, and the brand it speaks for.
 
 `Brand` (`slack_data/models/brands.py`) has an id and a name and no account
-linkage whatsoever; this module is that linkage. A manufacturer authenticates
-with Cognito machine-to-machine credentials (`client_credentials`), and the
-access token they get back names their **app client**, not our brand. Something
-has to map one to the other, and this is it.
+linkage whatsoever; this module is that linkage for machines. A brand's system
+sends `Authorization: Bearer <client_id>:<secret>` (D65), and this record maps
+the client id onto one of our brands and holds the secret it must match.
 
-Why a record rather than a per-brand Cognito scope (the other option in
-MANUFACTURER_API_PLAN.md § Which brand is this token?): the mapping is data we
-can read, audit and revoke without a redeploy, instead of configuration that
-only exists inside Cognito's console. Deactivating a compromised client is one
-`put` here; a scope-based mapping would need the pool edited and the token
-lifetimes waited out.
+Until 2026-10 the credential was a Cognito app client in SlackData's own user
+pool, exchanged for a token at Cognito's `/oauth2/token`. That pool is gone
+(LIVE_EDITING_PLAN.md D62): SlackData keeps nothing in Cognito but the app
+client the ISA made for it. The three credentials issued before then were
+imported here under their existing client id and secret (D63), so no brand was
+issued a new one.
+
+**The secret is stored readable (D64)** — not hashed, not KMS-encrypted — so a
+brand's manufacturer editors can see their own key in their SlackData account.
+Accepted with D64: anyone who can read the table can read every brand's key.
+This table is therefore never part of the daily export.
 
 Plain pydantic, not SQLModel, for exactly the reason `models/submissions.py`
 gives: these records live in DynamoDB hosted and in a separate SQLite file
 locally, **never** in the catalogue database, which is opened read-only.
 
 **Privacy.** `contact_email` is personal data about a named person at a company,
-so it is optional, it is the only such field here, and it is not required to
-make a client work — it exists so a human can be told when their integration
-starts failing. MANUFACTURER_API_PLAN.md § Open questions asks the ISA to see
-this before it ships; the same GDPR constraints as SUBMISSIONS_PLAN.md § Privacy
-apply. Unlike a submission there is no TTL: a credential mapping that expired on
-its own would lock a brand out silently.
+so it is optional and not required to make a client work. Unlike a submission
+there is no TTL: a credential mapping that expired on its own would lock a
+brand out silently.
 """
 
 from datetime import datetime, timezone
@@ -34,6 +35,7 @@ from pydantic import BaseModel, Field
 
 MAX_CLIENT_ID_LENGTH = 128
 MAX_BRAND_NAME_LENGTH = 200
+MAX_SECRET_LENGTH = 256
 
 
 class BrandPermission(str, Enum):
@@ -53,13 +55,7 @@ DEFAULT_PERMISSIONS: list[BrandPermission] = [BrandPermission.SUGGEST]
 
 
 class BrandClient(BaseModel):
-    """One set of machine credentials, and the brand it speaks for.
-
-    The `client_id` is Cognito's — we never see or store the secret that goes
-    with it, which is why no `secretsmanager:*` grant was requested in
-    `infra/ISA_ROLE_REQUEST_PHASE2.md`. The brand holds it, exchanges it for a
-    token at Cognito's `/oauth2/token`, and we only ever verify a signature.
-    """
+    """One API key, and the brand it speaks for."""
 
     client_id: str = Field(max_length=MAX_CLIENT_ID_LENGTH)
     brand_id: int
@@ -69,9 +65,10 @@ class BrandClient(BaseModel):
     brand_name: str = Field(max_length=MAX_BRAND_NAME_LENGTH)
     permissions: list[BrandPermission] = Field(default_factory=lambda: list(DEFAULT_PERMISSIONS))
     contact_email: str | None = None
-    # Revocation without touching Cognito. A deactivated client's tokens still
-    # verify — they were signed by a real pool — and are refused here instead,
-    # which is the point of resolving through data rather than through scopes.
+    # The other half of the key. None on a record that has no key yet (or a
+    # rolled-back onboarding): such a client authenticates nothing.
+    secret: str | None = Field(default=None, max_length=MAX_SECRET_LENGTH)
+    # Revocation: the key still matches, and is refused anyway.
     active: bool = True
     created_at: str
     note: str | None = None
@@ -88,7 +85,7 @@ class ManufacturerPrincipal(BaseModel):
     brand_id: int
     brand_name: str
     permissions: list[BrandPermission]
-    # True when the identity came from the local dev token rather than Cognito,
+    # True when the identity came from the local dev token rather than a key,
     # so anything that logs or attributes can tell them apart — the same
     # courtesy `require_admin` extends with its `dev` claim.
     dev: bool = False

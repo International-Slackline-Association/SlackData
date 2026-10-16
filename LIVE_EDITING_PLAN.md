@@ -1,6 +1,9 @@
 # Live editing with ISA accounts — the design
 
-**Status: design, decided 2026-10-04, revised 2026-10-05 to open editing; nothing built yet.** Supersedes
+**Status: design, decided 2026-10-04, revised 2026-10-05 to open editing. Phases 0–2 built
+2026-10-13, not yet deployed — [LIVE_EDITING_PHASE_0.md](LIVE_EDITING_PHASE_0.md),
+[LIVE_EDITING_PHASE_1.md](LIVE_EDITING_PHASE_1.md), [LIVE_EDITING_PHASE_2.md](LIVE_EDITING_PHASE_2.md);
+what changed and how it was verified: [LIVE_EDITING_CHANGES.md](LIVE_EDITING_CHANGES.md).** Supersedes
 [SUBMISSIONS_PLAN.md](SUBMISSIONS_PLAN.md) §§ Phase 3–4. The previous version of this file was an
 analysis of what live editing would cost; this one records what was decided and what is still
 open.
@@ -15,105 +18,10 @@ Why: SlackDB worked while a handful of people could edit it freely, and died the
 could. The present "suggest a correction" model, where every change is a JSON patch applied by
 hand and shipped by a redeploy, recreates SlackDB's bottleneck with one person in it.
 
-**How to read this file.** § 1 is settled. Everything after it is the design those decisions
-imply. Anything that is *not* settled is in § 14, **Open choices**, with its options and
-tradeoffs, and is marked **UNDECIDED** — a recommendation there is only a recommendation.
-
----
-
-## 1. Decisions
-
-Decided by the ISA's reply and by the project owner, 2026-10-04. Numbers are referenced
-throughout.
-
-| # | Topic | Decision | Rejected |
-|---|---|---|---|
-| D1 | Who edits live | *Superseded by D52 (2026-10-05).* Was: **Maintainers and approved manufacturers edit live.** Anyone with an ISA account **proposes**; a trusted person approves | Any account editing live (no check before a wrong breaking strength is public); only maintainers live (contradicts the ISA's "manufacturers can change everything") |
-| D2 | Manufacturer scope | *Extended to every editor by D54 (2026-10-05).* **Every field on their own gear, safety specs included** — except the ISA's statements (`isa_certified`, `isa_certificate`, `isa_class`, `isa_warning`) and `gear_sellers` | Literally everything (a brand could clear a recall on its own product); safety fields under review (stricter than the ISA asked) |
-| D3 | Who sees the change log | **Public, with names**: History on every item, a site-wide Recent Changes, a contributions page per person | Names visible to maintainers only; log visible to maintainers only |
-| D4 | Where the data lives | **DynamoDB is the source of truth**; a daily export goes to git | Git as the truth with the site committing for you (minutes per edit, a repo-write credential in a public Lambda, CI needing AWS deploy rights); an overlay over the baked catalogue (two truths, never hands-off); the JSON files in S3 (no atomic edit + log write) |
-| D5 | Becoming a manufacturer editor | **Request → admin approves**, shown whether the account's verified email domain matches the brand's website | Automatic on a domain match (a company mailbox is not authority over a brand; many small brands use gmail); invitation only |
-| D6 | Becoming a maintainer | *Superseded by D55 (2026-10-05).* Was: **Request → admin grants**, shown the requester's record of accepted proposals | Automatic after N accepted proposals (farmable, nobody vouched); SafeCom invitation only |
-| D7 | Admins | **The project owner and SafeCom members.** Granting admin is itself a logged change | One admin; SafeCom only |
-| D8 | Where roles are stored | **Our own table**, as SportHub does; no groups in the shared ISA pool | Cognito groups in `isa-users` (every grant an ISA console action, invisible to our log, visible across ISA apps) |
-| D9 | Today's SlackData admin pool | **Retired as soon as ISA sign-in works.** No break-glass second login | Kept for a period; kept permanently |
-| D10 | Anonymous "suggest a correction" box | *Superseded by D56 (2026-10-05).* Was: **Kept**, beside accounts. A maintainer turns a good suggestion into a real edit | Sign-in required to suggest |
-| D11 | Log retention | **Forever.** On an erasure request the person's name is **anonymised on the site**; the edits stay | Names kept unconditionally; names expiring after N years |
-| D12 | Photos and manuals | *Superseded by D59 (2026-10-05).* Was: **Uploaded on the site.** Live for maintainers and manufacturers, pending for contributors | URLs only; deferred |
-| D13 | Export | **Daily, data and log with names, to a separate data repo** | Pseudonymous ids in the export; data only; no export |
-| D14 | Export vs. erasure | **Names stay in git; on an erasure request the data repo's history is rewritten.** Consequences in § 6.6 | Pseudonymous ids in git; refusing erasure |
-| D15 | Revert | *Superseded by D58 (2026-10-05).* Was: Maintainers and admins revert anything; **manufacturers revert on their own gear.** A revert is a new logged change, never a deletion of history | Maintainers and admins only |
-| D16 | Edit summary ("why") | **Optional** | Always required; required on safety fields |
-| D17 | Telling maintainers there is work | *Superseded by D55 (2026-10-05).* Was: **On-site pending badge + RSS/Atom feed.** No email | Weekly email digest (SES production access); digest to one shared inbox |
-| D18 | A manufacturer changing a safety spec | *Superseded by D57 (2026-10-05).* Was: **Flag it and alert maintainers** — highlighted in Recent Changes and in a dedicated safety feed and badge. On ISA-certified items the certificate's own tested value stays shown beside the edited spec. **Live immediately** | Nothing beyond the log; blocking until reviewed |
-| D19 | New items and brands | *Superseded by D59 (2026-10-05).* Was: Maintainers create items and brands live; manufacturers create their own brand's products live; contributors propose | New brands admin-only |
-| D20 | Deletion | **Nothing is deleted, except duplicates — by admins only**, with a mandatory, detailed explanation, prominently logged. The removed id **redirects to the item it duplicated** | Truly removing the row (breaks links, ISA matches, credentials) |
-| D21 | Who approves a proposal on a brand's gear | *Superseded by D52 (2026-10-05).* Was: **Maintainers, and that brand's manufacturer editors.** A maintainer can override a brand's decision | Maintainers only |
-| D22 | Blocking an account | **Admins only**, with a logged reason | Maintainers temporarily; any maintainer |
-| D23 | Rollout | **Phased**, each step live on its own and stoppable | One big switch-over |
-| D24 | ISA certifications and warnings | **Both**: imported in bulk from the ISA's lists, matched and corrected by admins on the site. **The eventual goal is an automatic ISA sync** | Admin-only hand maintenance; script-only |
-| D25 | How the site reads | **Load the whole catalogue into memory** and serve it through today's read code | Querying DynamoDB per request (a full read-path rewrite, and derived fields stored on items going stale) |
-
-### Second round — the technical choices (2026-10-04)
-
-These were open choices in the first version of this file; the O-numbers they had are kept in
-brackets so earlier discussion still lines up.
-
-| # | Topic | Decision | Rejected |
-|---|---|---|---|
-| D26 | Ids for items created on the site (O-1) | **A per-type counter** in DynamoDB, incremented atomically on create — plain numbers, as today | A reserved numeric range; non-numeric ids |
-| D27 | Two people editing one item (O-2) | **Every item carries a version.** A save based on an outdated version is refused, and the editor is shown what changed meanwhile. The same applies to reverting a field that has changed again since | Last write wins |
-| D28 | Writing an edit and its log record together (O-3) | **One DynamoDB transaction**: both writes succeed or neither. *Corrected 2026-10-05:* this needs **no new permission** — IAM has no `TransactWriteItems` action; a transaction is authorised against the `PutItem` / `UpdateItem` of each item in it, which the role already grants on `slackdata-*` | Ordered writes plus a repair check |
-| D29 | Table layout (O-4) | **Separate tables** — people, catalogue, log | One table for everything |
-| D30 | When the in-memory catalogue is re-read (O-5) | **Every request checks a "catalogue version"** and rebuilds only if it changed, so an edit shows immediately everywhere. A person's role is re-read on every authenticated request | Rebuilding every N seconds |
-| D31 | What a log record stores (O-6) | **Only the changed fields, before → after.** Revert applies the "before" values; seeing an item as it was on a past date means replaying its records | A full copy of the item per change; both |
-| D32 | Rate limits (O-8) | *Superseded by D53 (2026-10-05).* Was: **API Gateway route throttles**, as the suggestion box has. Blocking (D22) is the backstop | Per-account limits in the app |
-| D33 | Safety-critical fields (O-9) | **MBS only**: `breaking_strength` on webbing, weblocks, rollers and leash rings; `mbs` on grips. And **all feeds are public** — anyone can follow Recent Changes without signing in | A wider list (WLL, stretch, …) |
-| D34 | Local development and tests (O-11) | **The SQLite repository, filled from a snapshot of the data repo** — no AWS needed, as today | dynamodb-local for local dev |
-| D35 | What still needs a developer (O-12) | **The § 10 line stands**: new gear types, fields and enum values stay code, reviewed in a PR | A schema admins can extend on the site |
-| D36 | Phase order (O-13) | *Superseded by D60 (2026-10-05).* Was: **Live editing → media → manufacturers → contributor proposals** (§ 13) | Manufacturers before media; contributors before manufacturers |
-| D37 | Which name is public (O-14) | **Full name** | First name + initial; a chosen display name |
-| D38 | Brand links (O-15) | **One person may represent several brands. Co-listing gives no edit rights** — a brand in another's `gear_sellers` cannot edit that product | One brand per person; co-listers editing |
-| D39 | Manufacturers and their own brand entry (O-16) | *Superseded by O-20 (reopened) (2026-10-05).* Was: **Editable** — website, socials, contact email, country, founding year — logged; **except the brand's name and id** | Brand entries maintainer-only |
-| D40 | Who may hide an item (O-17) | *Superseded by D55 (2026-10-05).* Was: **Maintainers and admins only.** A brand marks a product historic (`active: false`) instead — hiding a product under an ISA warning would remove a recall from view | Manufacturers hiding their own gear |
-| D41 | How sign-in loads (O-18) | **On demand**, when someone presses "Sign in" — the public site stays as fast as today | Loaded on every page |
-
-### Third round — the last open choices (2026-10-04)
-
-| # | Topic | Decision | Rejected |
-|---|---|---|---|
-| D42 | A hash chain on the log (O-6b) | **No.** The catalogue is not a high-value target for tampering; the daily export (§ 6.6) is the outside check | Chaining each record to the previous one |
-| D43 | Making the log unalterable, and anonymisation (O-7) | **The ISA adds an explicit deny of `UpdateItem` and `DeleteItem` on the log table**, so AWS itself refuses to change or remove a record. *Limit, found 2026-10-05:* IAM cannot stop a `PutItem` that **overwrites** an existing record — no condition key can demand `attribute_not_exists` — so our code makes every log write conditional, every record gets a fresh time-ordered id, and the daily export is what would reveal an overwrite. **Names are kept out of the log:** records hold the person's `sub` and ISA id, and the name is looked up from the people store when a page or the export is produced. Anonymising someone is one change to their people record. If a person renames their ISA account, their old edits show the new name; their role at the time stays in each record | No deny, names in each record (append-only by code alone); deny with names in each record and anonymisation as a manual AWS procedure (needs a developer and an ISA admin every time) |
-| D44 | Processing photos (O-10.1) | **In the browser, before upload**: resized to a few standard sizes and re-encoded, which also strips camera metadata including GPS. The server still checks type and size | A server-side image Lambda (a new function, trigger and ISA request); no processing (slow on phones, publishes GPS) |
-| D45 | Upload limits (O-10.2) | **Photos JPEG/PNG/WebP up to 10 MB before processing; manuals PDF up to 25 MB** | 5 MB / 10 MB |
-| D46 | Contributor uploads (O-10.3) | *Superseded by D59 (2026-10-05).* Was: **The same pending queue as proposals**, decided by the same people (D21) | Maintainers only; contributors pasting links |
-| D47 | Today's images and manuals (O-10.4) | **Migrated once into the media bucket in phase 4**, logged as an `import`; the build-time manifests retired in the same step | Both side by side for a while; never migrating |
-| D48 | Where media is served from (O-10.5) | **A path on the existing site** (`slackdata.org/media/…`), a second origin on the current CloudFront distribution | A `media.slackdata.org` subdomain with its own distribution |
-| D49 | Which data snapshot tests use (O-11b) | **A pinned, dated snapshot** of the data repo, refreshed deliberately in its own PR, so an edit on the site never turns CI red | The latest export on every run |
-
-### Fourth round — dealing with the ISA (2026-10-05)
-
-| # | Topic | Decision | Rejected |
-|---|---|---|---|
-| D50 | When to ask the ISA | **Everything up front, in phase 0** — one conversation and one role change, so no later phase waits on the ISA. Grants sit unused until their phase, as Tier 3's S3 grant already does | The phase 1 set now and the rest later; strictly per phase |
-| D51 | Who creates SlackData's app client in `isa-users` | **Our stack**, in [serverless.yml](infra/serverless.yml) against the ISA pool's id, **with the ISA's written OK**. It touches only our client, never the pool's settings, and we change callback URLs by deploying | The ISA creating it by hand (every callback change a request to them) |
-
-### Fifth round — open editing (2026-10-05)
-
-These replace the proposal-and-approval model. Earlier rows they override are marked
-*Superseded* above, and their old text is kept as history.
-
-| # | Topic | Decision | Rejected |
-|---|---|---|---|
-| D52 | Who edits live | **Every signed-in ISA account edits live.** There are no proposals and no approval queue: anyone with an ISA account is trusted enough, and the log, the rate cap (D53) and admin blocks (D22) are the safeguards | Proposals approved by trusted people (the old D1) — a queue someone has to watch is the SlackDB bottleneck again |
-| D53 | Guarding against tampering | **A per-account cap: 20 changes an hour and 100 a day.** Each save counts — an edit, a new product or brand, an upload. At the cap, the person is told when they can edit again. **Exempt:** manufacturers on their own brand's gear (capped like anyone elsewhere), and admins. Counted in the app, in the people store — no new AWS permission. API Gateway route throttles stay as a coarse backstop | Per day only; numbers set later; manufacturers exempt everywhere; admins capped |
-| D54 | What an editor may change | **Every field of every product**, for everyone — except the ISA's statements (`isa_certified`, `isa_certificate`, `isa_class`, `isa_warning`) and `gear_sellers`, which only admins change. A manufacturer's products are **not** locked to that manufacturer | Locking a managed brand's products to its maker; locking only MBS |
-| D55 | Maintainers | **The role is dropped.** Tiers are: anonymous, editor (any ISA account), manufacturer, admin. What maintainers were for — reviewing proposals, patrolling — has no work left, or falls to admins (hiding, D40; blocking, D22) | Keeping maintainers as patrollers; keeping them as cap-exempt editors |
-| D56 | The anonymous "suggest a correction" box | **Removed.** To change something, sign in and edit. When it is switched off: O-19 | Keeping it as a queue editors act on |
-| D57 | Breaking-strength (MBS) edits | **Shown in a public safety feed; nobody has to review them.** Any MBS change, by anyone, is marked `safety` in the log. On ISA-certified items the certificate's own tested values stay shown beside the edited spec | Every MBS edit flagged until an admin marks it seen; flagging only manufacturers' MBS edits |
-| D58 | One-click revert | **Admins revert anything; manufacturers revert on their own gear.** Everyone else fixes a bad edit by editing it. A revert is a new logged change | Anyone signed in reverting anything |
-| D59 | Creating products, brands, photos and manuals | **Anyone, live, within the cap** | New brands admin-only; non-manufacturer uploads admin-checked |
-| D60 | Phase order | **D36's order, re-cut for open editing:** live editing for admins → media → manufacturers → editing opens to every ISA account (§ 13) | — |
+**How to read this file.** §§ 2–13 are the design. The decisions behind it are numbered
+(D1, D2, …) and recorded in [Appendix A](#appendix-a-decisions) at the end. Anything that is
+*not* settled is in § 14, **Open choices**, with its options and tradeoffs, and is marked
+**UNDECIDED**. A recommendation there is only a recommendation.
 
 ---
 
@@ -204,8 +112,9 @@ record in the change log (§ 6).
 
 ### 4.2 Plugging into the ISA pool
 
-- **SlackData gets its own app client in `isa-users`**, defined in our stack with the ISA's
-  written OK (D51), shaped like today's `AdminUserPoolClient`:
+- **SlackData has its own app client in `isa-users`**, created by the ISA on 2026-10-12 (D61,
+  superseding D51). As requested, it is shaped like today's `AdminUserPoolClient`, except that its
+  callbacks are the bare origins:
   - no secret (a browser cannot keep one); authorization code + PKCE; scopes `openid email`;
   - read access to `name` and `family_name` (the public full name, D37) and `email` /
     `email_verified` (the manufacturer-request signal, D5);
@@ -243,13 +152,18 @@ record in the change log (§ 6).
   [manufacturers.json](manufacturers.json). The admin approves or declines, logged. One person
   may represent several brands, each linked by its own approved request (D38).
 - **Admin (D7):** granted by an existing admin, logged.
-- **The machine API:** unchanged — a brand system still gets a client-credentials app client and
-  a `brand_id` mapping via `python -m slack_data.manufacturers.register`.
+- **The machine API:** a brand system gets a per-brand API key from our own table, no longer a
+  Cognito client-credentials client (D63). Once manufacturer accounts exist (phase 5), the brand's
+  manufacturer editors create, see, regenerate and revoke keys in their SlackData account (D64);
+  until then `python -m slack_data.manufacturers.register` creates them. The three existing
+  credentials are imported with their current id and secret. A brand sends the key itself on
+  every call (D65).
 
 ### 4.4 Bootstrapping, and retiring the old login
 
-- **First admin:** an env-var allowlist of ISA `sub`s, read at startup and recorded in the log as
-  `bootstrap` the first time it grants. After that, admins grant admins on the site.
+- **First admin:** an env-var allowlist of **verified ISA emails** (`ADMIN_BOOTSTRAP_EMAILS`, D68),
+  recorded in the log as `bootstrap` the one time it grants each person. After that, admins grant
+  admins on the site.
 - **The SlackData admin pool** (`AdminUserPool` in [serverless.yml](infra/serverless.yml)) is
   retired as soon as ISA sign-in works (D9). There is then **one** way in. If the ISA pool or our
   app client fails, nobody can administer SlackData until it is fixed — accepted with D9.
@@ -389,7 +303,9 @@ The same transaction checks the item's version (D27), so a stale edit writes not
 
 - **What it is:** a scheduled GitHub Action that reads the public API and commits the gear data
   and the full change log, **with names**, to a separate data repo (e.g.
-  `International-Slackline-Association/slackdata-data`).
+  `International-Slackline-Association/slackdata-data`). It starts as
+  [emilebragard/slackdata-data](https://github.com/emilebragard/slackdata-data) and is transferred to
+  the ISA org later.
 - **Why we want it:**
   - It is a backup outside AWS and outside the ISA's account.
   - It is the outside copy that makes the log tamper-evident.
@@ -576,15 +492,18 @@ These are true regardless of how the open choices land.
   [infra/check-routes.py](infra/check-routes.py) checks it.
 - **New Cypress specs** go into [frontend/cypress/shards.json](frontend/cypress/shards.json), or
   they never run in CI.
-- **Cognito callback URLs** are matched exactly: every new post-login route must be listed on the
-  ISA app client.
+- **Cognito callback URLs** are matched exactly, and the ISA app client lists only the bare
+  origins (D61). Sign-in and sign-out must return to `window.location.origin` with no path, and
+  route onward from there — today's admin login returns to `/admin`, which this client rejects
+  with `redirect_mismatch`. A changed callback is a request to the ISA, since the client is theirs.
 
 ---
 
 ## 12. Requests to the ISA, and cost
 
 **All of it is asked for at once, in phase 0 (D50).** The column "first needed" says which phase
-would be blocked without it.
+would be blocked without it. **Status 2026-10-13:** 1, 4, 6 and 7 applied by the ISA and checked
+against the live role and pool; 2 and 3 settled (§ 15); 5 on the operator's account for now.
 
 | # | Ask | Why | First needed |
 |---|---|---|---|
@@ -601,7 +520,7 @@ transaction is authorised against the `PutItem` / `UpdateItem` of each item in i
 `SlackDataTables` already grants
 ([AWS docs](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/transaction-apis-iam.html)).
 
-**The request was sent** to the ISA's technical contact on 2026-10-07: the complete rewritten
+**Applied on 2026-10-12** (Appendix A, sixth round): the role change, including the removal of `ses:*`, and the app client. **The request was sent** to the ISA's technical contact on 2026-10-07: the complete rewritten
 role policy, the app client, and a proposed table design for their review.
 
 Items 4, 6 and 7 are changes to the Lambda role, which only an ISA admin can make — our identity
@@ -642,7 +561,7 @@ then media, then manufacturers, then editing opens to every ISA account.
 | Phase | What ships | Done when |
 |---|---|---|
 | 0 | Every ISA request at once (§ 12, D50); **re-base `_hosted()`** (§ 11) — ours alone, no ISA involvement | The ISA has agreed to items 1–3 and 5, and applied 4, 6 and 7; `_hosted()` has its test |
-| 1 | ISA sign-in; people store; admin grants; the log for role events; **old admin pool retired** (D9) | Admins work through ISA accounts only |
+| 1 | ISA sign-in; people store; admin grants; the log for role events; the three manufacturer credentials imported as API keys (D63); **old admin pool deleted** (D9, D62) | Admins work through ISA accounts only, and nothing of ours is left in Cognito but the ISA-made client |
 | 2 | Catalogue imported into DynamoDB; the in-memory read path running **in shadow** beside the baked catalogue, compared on every deploy; then switched over; the daily export to the data repo starts | The site reads from DynamoDB; seeds are no longer hand-edited |
 | 3 | Live editing for admins; History, Recent Changes, feeds, revert, hide, duplicate merge | Admins edit without a developer |
 | 4 | Photo and manual uploads for admins (manufacturers gain them in phase 5, everyone in phase 6); today's images and manuals migrated and the manifests retired (D47) | A photo goes live without a deploy |
@@ -657,40 +576,20 @@ then media, then manufacturers, then editing opens to every ISA account.
 Each item below is **UNDECIDED**. Recommendations are Claude's, offered for the decision, not made
 by it.
 
-**O-19 — When the anonymous box is switched off, and what happens to stored suggestions.**
-- (a) **At phase 6**, when everyone can edit. Until then it remains the only way for the public to
-  report an error, and admins act on it (by hand until phase 3, then through the edit form).
-  Stored suggestions expire on their existing TTL.
-- (b) **Now, or at phase 1.** One less system to run, but for months there is no public way to
-  report a wrong spec.
-
-*Recommendation: (a).*
-
-**O-20 — Who may edit a brand's own entry** (website, socials, contact email, country, founding
-year, name). Reopened from D39, which was written for manufacturers only.
-- (a) **Anyone, like products, except the brand's name and id**, which only admins change. The
-  manufacturer API checks the stored brand name on every call (`verify_brand()` in
-  [matching.py](slack_data/manufacturers/matching.py)), so a casual rename would lock that brand's
-  integration out.
-- (b) **Anyone, all fields.**
-- (c) **The brand's manufacturer accounts and admins only.** A brand's contact details are the
-  brand's to state.
-
-*Recommendation: (a).*
+*O-19 and O-20 were decided on 2026-10-13 (D66, D67). Nothing is open.*
 
 ---
 
 ## 15. To settle with the ISA
 
-The non-permission half of § 12:
+**Settled 2026-10-13** — see [LIVE_EDITING_PHASE_0.md](LIVE_EDITING_PHASE_0.md) § 1:
 
-- **Consent to the SlackData app client** in `isa-users`, created by our stack (D51).
-- **The privacy text** for permanent public names (D3, D11, D37), the git export with names and
-  the history rewrite on erasure (D13, D14). Likely shape: a short SlackData privacy notice, and a
-  one-time "your name will be shown publicly with your edits" agreement the first time someone
-  edits. It must be ISA-approved before phase 1 ships.
-- **Which SafeCom members are admins** (D7).
-- **Creating the data repo** in the ISA's GitHub organisation (D13).
+- **The app client** — the ISA created it by hand (D61).
+- **The privacy text** — public names are approved on condition that people are told **at their
+  first sign-in** (D70). The notice is in `frontend/src/components/account/SignInNotice.tsx`.
+- **Which SafeCom members are admins** — their emails are held; they are bootstrapped by verified
+  email (D68).
+- **The data repo** — started on the operator's account, transferred to the ISA org later (§ 6.6).
 
 ---
 
@@ -712,3 +611,124 @@ These are not changed by this file; each needs updating when the phase that inva
   public log (phase 3).
 - [MANUFACTURER_API_PLAN.md](MANUFACTURER_API_PLAN.md) and [MANUFACTURER_API.md](MANUFACTURER_API.md)
   — updates now apply live (phase 5).
+
+---
+
+## Appendix A. Decisions
+
+The decision record, kept for reference and for agents working on the code. The design above
+cites these numbers (D1–D70) wherever a choice was made; superseded rows are kept, marked, with
+their old text as history. Section numbers start at 2 because this appendix used to be § 1, and
+code comments cite the sections by number.
+
+Decided by the ISA's reply and by the project owner, 2026-10-04. Numbers are referenced
+throughout.
+
+| # | Topic | Decision | Rejected |
+|---|---|---|---|
+| D1 | Who edits live | *Superseded by D52 (2026-10-05).* Was: **Maintainers and approved manufacturers edit live.** Anyone with an ISA account **proposes**; a trusted person approves | Any account editing live (no check before a wrong breaking strength is public); only maintainers live (contradicts the ISA's "manufacturers can change everything") |
+| D2 | Manufacturer scope | *Extended to every editor by D54 (2026-10-05).* **Every field on their own gear, safety specs included** — except the ISA's statements (`isa_certified`, `isa_certificate`, `isa_class`, `isa_warning`) and `gear_sellers` | Literally everything (a brand could clear a recall on its own product); safety fields under review (stricter than the ISA asked) |
+| D3 | Who sees the change log | **Public, with names**: History on every item, a site-wide Recent Changes, a contributions page per person | Names visible to maintainers only; log visible to maintainers only |
+| D4 | Where the data lives | **DynamoDB is the source of truth**; a daily export goes to git | Git as the truth with the site committing for you (minutes per edit, a repo-write credential in a public Lambda, CI needing AWS deploy rights); an overlay over the baked catalogue (two truths, never hands-off); the JSON files in S3 (no atomic edit + log write) |
+| D5 | Becoming a manufacturer editor | **Request → admin approves**, shown whether the account's verified email domain matches the brand's website | Automatic on a domain match (a company mailbox is not authority over a brand; many small brands use gmail); invitation only |
+| D6 | Becoming a maintainer | *Superseded by D55 (2026-10-05).* Was: **Request → admin grants**, shown the requester's record of accepted proposals | Automatic after N accepted proposals (farmable, nobody vouched); SafeCom invitation only |
+| D7 | Admins | **The project owner and SafeCom members.** Granting admin is itself a logged change | One admin; SafeCom only |
+| D8 | Where roles are stored | **Our own table**, as SportHub does; no groups in the shared ISA pool | Cognito groups in `isa-users` (every grant an ISA console action, invisible to our log, visible across ISA apps) |
+| D9 | Today's SlackData admin pool | **Retired as soon as ISA sign-in works** — *entirely, manufacturer credentials included (D62).* No break-glass second login | Kept for a period; kept permanently |
+| D10 | Anonymous "suggest a correction" box | *Superseded by D56 (2026-10-05).* Was: **Kept**, beside accounts. A maintainer turns a good suggestion into a real edit | Sign-in required to suggest |
+| D11 | Log retention | **Forever.** On an erasure request the person's name is **anonymised on the site**; the edits stay | Names kept unconditionally; names expiring after N years |
+| D12 | Photos and manuals | *Superseded by D59 (2026-10-05).* Was: **Uploaded on the site.** Live for maintainers and manufacturers, pending for contributors | URLs only; deferred |
+| D13 | Export | **Daily, data and log with names, to a separate data repo** | Pseudonymous ids in the export; data only; no export |
+| D14 | Export vs. erasure | **Names stay in git; on an erasure request the data repo's history is rewritten.** Consequences in § 6.6 | Pseudonymous ids in git; refusing erasure |
+| D15 | Revert | *Superseded by D58 (2026-10-05).* Was: Maintainers and admins revert anything; **manufacturers revert on their own gear.** A revert is a new logged change, never a deletion of history | Maintainers and admins only |
+| D16 | Edit summary ("why") | **Optional** | Always required; required on safety fields |
+| D17 | Telling maintainers there is work | *Superseded by D55 (2026-10-05).* Was: **On-site pending badge + RSS/Atom feed.** No email | Weekly email digest (SES production access); digest to one shared inbox |
+| D18 | A manufacturer changing a safety spec | *Superseded by D57 (2026-10-05).* Was: **Flag it and alert maintainers** — highlighted in Recent Changes and in a dedicated safety feed and badge. On ISA-certified items the certificate's own tested value stays shown beside the edited spec. **Live immediately** | Nothing beyond the log; blocking until reviewed |
+| D19 | New items and brands | *Superseded by D59 (2026-10-05).* Was: Maintainers create items and brands live; manufacturers create their own brand's products live; contributors propose | New brands admin-only |
+| D20 | Deletion | **Nothing is deleted, except duplicates — by admins only**, with a mandatory, detailed explanation, prominently logged. The removed id **redirects to the item it duplicated** | Truly removing the row (breaks links, ISA matches, credentials) |
+| D21 | Who approves a proposal on a brand's gear | *Superseded by D52 (2026-10-05).* Was: **Maintainers, and that brand's manufacturer editors.** A maintainer can override a brand's decision | Maintainers only |
+| D22 | Blocking an account | **Admins only**, with a logged reason | Maintainers temporarily; any maintainer |
+| D23 | Rollout | **Phased**, each step live on its own and stoppable | One big switch-over |
+| D24 | ISA certifications and warnings | **Both**: imported in bulk from the ISA's lists, matched and corrected by admins on the site. **The eventual goal is an automatic ISA sync** | Admin-only hand maintenance; script-only |
+| D25 | How the site reads | **Load the whole catalogue into memory** and serve it through today's read code | Querying DynamoDB per request (a full read-path rewrite, and derived fields stored on items going stale) |
+
+### Second round — the technical choices (2026-10-04)
+
+These were open choices in the first version of this file; the O-numbers they had are kept in
+brackets so earlier discussion still lines up.
+
+| # | Topic | Decision | Rejected |
+|---|---|---|---|
+| D26 | Ids for items created on the site (O-1) | **A per-type counter** in DynamoDB, incremented atomically on create — plain numbers, as today | A reserved numeric range; non-numeric ids |
+| D27 | Two people editing one item (O-2) | **Every item carries a version.** A save based on an outdated version is refused, and the editor is shown what changed meanwhile. The same applies to reverting a field that has changed again since | Last write wins |
+| D28 | Writing an edit and its log record together (O-3) | **One DynamoDB transaction**: both writes succeed or neither. *Corrected 2026-10-05:* this needs **no new permission** — IAM has no `TransactWriteItems` action; a transaction is authorised against the `PutItem` / `UpdateItem` of each item in it, which the role already grants on `slackdata-*` | Ordered writes plus a repair check |
+| D29 | Table layout (O-4) | **Separate tables** — people, catalogue, log | One table for everything |
+| D30 | When the in-memory catalogue is re-read (O-5) | **Every request checks a "catalogue version"** and rebuilds only if it changed, so an edit shows immediately everywhere. A person's role is re-read on every authenticated request | Rebuilding every N seconds |
+| D31 | What a log record stores (O-6) | **Only the changed fields, before → after.** Revert applies the "before" values; seeing an item as it was on a past date means replaying its records | A full copy of the item per change; both |
+| D32 | Rate limits (O-8) | *Superseded by D53 (2026-10-05).* Was: **API Gateway route throttles**, as the suggestion box has. Blocking (D22) is the backstop | Per-account limits in the app |
+| D33 | Safety-critical fields (O-9) | **MBS only**: `breaking_strength` on webbing, weblocks, rollers and leash rings; `mbs` on grips. And **all feeds are public** — anyone can follow Recent Changes without signing in | A wider list (WLL, stretch, …) |
+| D34 | Local development and tests (O-11) | **The SQLite repository, filled from a snapshot of the data repo** — no AWS needed, as today | dynamodb-local for local dev |
+| D35 | What still needs a developer (O-12) | **The § 10 line stands**: new gear types, fields and enum values stay code, reviewed in a PR | A schema admins can extend on the site |
+| D36 | Phase order (O-13) | *Superseded by D60 (2026-10-05).* Was: **Live editing → media → manufacturers → contributor proposals** (§ 13) | Manufacturers before media; contributors before manufacturers |
+| D37 | Which name is public (O-14) | **Full name** | First name + initial; a chosen display name |
+| D38 | Brand links (O-15) | **One person may represent several brands. Co-listing gives no edit rights** — a brand in another's `gear_sellers` cannot edit that product | One brand per person; co-listers editing |
+| D39 | Manufacturers and their own brand entry (O-16) | *Superseded by O-20 (reopened) (2026-10-05).* Was: **Editable** — website, socials, contact email, country, founding year — logged; **except the brand's name and id** | Brand entries maintainer-only |
+| D40 | Who may hide an item (O-17) | *Superseded by D55 (2026-10-05).* Was: **Maintainers and admins only.** A brand marks a product historic (`active: false`) instead — hiding a product under an ISA warning would remove a recall from view | Manufacturers hiding their own gear |
+| D41 | How sign-in loads (O-18) | **On demand**, when someone presses "Sign in" — the public site stays as fast as today | Loaded on every page |
+
+### Third round — the last open choices (2026-10-04)
+
+| # | Topic | Decision | Rejected |
+|---|---|---|---|
+| D42 | A hash chain on the log (O-6b) | **No.** The catalogue is not a high-value target for tampering; the daily export (§ 6.6) is the outside check | Chaining each record to the previous one |
+| D43 | Making the log unalterable, and anonymisation (O-7) | **The ISA adds an explicit deny of `UpdateItem` and `DeleteItem` on the log table**, so AWS itself refuses to change or remove a record. *Limit, found 2026-10-05:* IAM cannot stop a `PutItem` that **overwrites** an existing record — no condition key can demand `attribute_not_exists` — so our code makes every log write conditional, every record gets a fresh time-ordered id, and the daily export is what would reveal an overwrite. **Names are kept out of the log:** records hold the person's `sub` and ISA id, and the name is looked up from the people store when a page or the export is produced. Anonymising someone is one change to their people record. If a person renames their ISA account, their old edits show the new name; their role at the time stays in each record | No deny, names in each record (append-only by code alone); deny with names in each record and anonymisation as a manual AWS procedure (needs a developer and an ISA admin every time) |
+| D44 | Processing photos (O-10.1) | **In the browser, before upload**: resized to a few standard sizes and re-encoded, which also strips camera metadata including GPS. The server still checks type and size | A server-side image Lambda (a new function, trigger and ISA request); no processing (slow on phones, publishes GPS) |
+| D45 | Upload limits (O-10.2) | **Photos JPEG/PNG/WebP up to 10 MB before processing; manuals PDF up to 25 MB** | 5 MB / 10 MB |
+| D46 | Contributor uploads (O-10.3) | *Superseded by D59 (2026-10-05).* Was: **The same pending queue as proposals**, decided by the same people (D21) | Maintainers only; contributors pasting links |
+| D47 | Today's images and manuals (O-10.4) | **Migrated once into the media bucket in phase 4**, logged as an `import`; the build-time manifests retired in the same step | Both side by side for a while; never migrating |
+| D48 | Where media is served from (O-10.5) | **A path on the existing site** (`slackdata.org/media/…`), a second origin on the current CloudFront distribution | A `media.slackdata.org` subdomain with its own distribution |
+| D49 | Which data snapshot tests use (O-11b) | **A pinned, dated snapshot** of the data repo, refreshed deliberately in its own PR, so an edit on the site never turns CI red | The latest export on every run |
+
+### Fourth round — dealing with the ISA (2026-10-05)
+
+| # | Topic | Decision | Rejected |
+|---|---|---|---|
+| D50 | When to ask the ISA | **Everything up front, in phase 0** — one conversation and one role change, so no later phase waits on the ISA. Grants sit unused until their phase, as Tier 3's S3 grant already does | The phase 1 set now and the rest later; strictly per phase |
+| D51 | Who creates SlackData's app client in `isa-users` | *Superseded by D61 (2026-10-12).* Was: **Our stack**, in [serverless.yml](infra/serverless.yml) against the ISA pool's id, **with the ISA's written OK**. It touches only our client, never the pool's settings, and we change callback URLs by deploying | The ISA creating it by hand (every callback change a request to them) |
+
+### Fifth round — open editing (2026-10-05)
+
+These replace the proposal-and-approval model. Earlier rows they override are marked
+*Superseded* above, and their old text is kept as history.
+
+| # | Topic | Decision | Rejected |
+|---|---|---|---|
+| D52 | Who edits live | **Every signed-in ISA account edits live.** There are no proposals and no approval queue: anyone with an ISA account is trusted enough, and the log, the rate cap (D53) and admin blocks (D22) are the safeguards | Proposals approved by trusted people (the old D1) — a queue someone has to watch is the SlackDB bottleneck again |
+| D53 | Guarding against tampering | **A per-account cap: 20 changes an hour and 100 a day.** Each save counts — an edit, a new product or brand, an upload. At the cap, the person is told when they can edit again. **Exempt:** manufacturers on their own brand's gear (capped like anyone elsewhere), and admins. Counted in the app, in the people store — no new AWS permission. API Gateway route throttles stay as a coarse backstop | Per day only; numbers set later; manufacturers exempt everywhere; admins capped |
+| D54 | What an editor may change | **Every field of every product**, for everyone — except the ISA's statements (`isa_certified`, `isa_certificate`, `isa_class`, `isa_warning`) and `gear_sellers`, which only admins change. A manufacturer's products are **not** locked to that manufacturer | Locking a managed brand's products to its maker; locking only MBS |
+| D55 | Maintainers | **The role is dropped.** Tiers are: anonymous, editor (any ISA account), manufacturer, admin. What maintainers were for — reviewing proposals, patrolling — has no work left, or falls to admins (hiding, D40; blocking, D22) | Keeping maintainers as patrollers; keeping them as cap-exempt editors |
+| D56 | The anonymous "suggest a correction" box | **Removed.** To change something, sign in and edit. When it is switched off: O-19 | Keeping it as a queue editors act on |
+| D57 | Breaking-strength (MBS) edits | **Shown in a public safety feed; nobody has to review them.** Any MBS change, by anyone, is marked `safety` in the log. On ISA-certified items the certificate's own tested values stay shown beside the edited spec | Every MBS edit flagged until an admin marks it seen; flagging only manufacturers' MBS edits |
+| D58 | One-click revert | **Admins revert anything; manufacturers revert on their own gear.** Everyone else fixes a bad edit by editing it. A revert is a new logged change | Anyone signed in reverting anything |
+| D59 | Creating products, brands, photos and manuals | **Anyone, live, within the cap** | New brands admin-only; non-manufacturer uploads admin-checked |
+| D60 | Phase order | **D36's order, re-cut for open editing:** live editing for admins → media → manufacturers → editing opens to every ISA account (§ 13) | — |
+
+### Sixth round — after the ISA set things up (2026-10-12/13)
+
+On 2026-10-12 the ISA's technical contact applied the role change and created our app client, and
+warned that SlackData was duplicating the ISA account system: no other ISA app runs its own user
+pool. Every other app (SlackMap, SportHub, slackline-timer, highline-freestyle, the account site)
+has an app client in `isa-users` and nothing else in Cognito. These rows make SlackData the same.
+
+| # | Topic | Decision | Rejected |
+|---|---|---|---|
+| D61 | Our app client in `isa-users` | **Created by the ISA, by hand**, on 2026-10-12: `slackdata`, id `2snjdh8i6md0m5n6h9te1hlor1`. No secret, code flow, scopes `openid email`, reads `name` / `family_name` / `email` / `email_verified`. Callback and sign-out URLs are the **bare origins** — `https://slackdata.org`, `https://www.slackdata.org`, `http://localhost:5173`, no path. Sign-in is built to return to the bare origin, so no callback change ever needs another request | Our stack owning the client (the old D51); asking for `/admin` and other paths to be added |
+| D62 | What stays of our own pool | **Nothing.** `slackdata-admins-prod` is deleted with the admin login *and* the manufacturer machine credentials in it, so the only thing of ours in Cognito is the ISA-made client | Keeping the pool for machine clients only (exactly the duplication the ISA objected to); moving machine clients and a resource server into `isa-users` (a pool-level change to the ISA's shared people pool) |
+| D63 | Manufacturer machine credentials | **Per-brand API keys in our own `slackdata-brand-clients` table**, no Cognito. The three credentials issued so far (Balance Community, Raed, Petram — [onboarded-brands.md](infra/onboarded-brands.md)) are **imported as keys under their existing client id and secret** before the pool is deleted, so no brand gets a new secret. Their secrets are read from the pool (`describe-user-pool-client`) while it still exists; they never go in the repo, which is public | Re-issuing new keys to all three; hard-coding the existing ones in code |
+| D64 | Seeing a key | **The full key stays viewable** in the SlackData account of each of the brand's manufacturer editors (D5), any time, with create, regenerate and revoke there — every one a logged change. The key is **stored readable** in DynamoDB: not hashed, and not KMS-encrypted (that would be a new ISA request for `kms:Decrypt`). Accepted: anyone who can read the table — an AWS admin of the ISA's account, or code running in the Lambda — can read every brand's key. The brand-clients table is therefore never part of the daily export (§ 6.6). Creating a key moves from the CLI to the site; the trust decision stays with the admin, who approves the brand link it follows from | Shown once and stored hashed (GitHub/Stripe style); KMS-encrypted |
+| D65 | How a brand presents its key (O-21, 2026-10-13) | **The key itself, on every call**: `Authorization: Bearer <client_id>:<secret>`. Each brand's integration changes a few lines, since Cognito's token URL goes with the pool (D62). Worth checking whether any of the three brands has ever called the API, to know who to tell | Our own `/oauth2/token` endpoint mimicking Cognito's client-credentials grant (a token issuer to maintain for three brands) |
+| D66 | The anonymous box (O-19, 2026-10-13) | **(a): switched off at phase 6**, when everyone can edit. Until then it is the only public way to report an error; stored suggestions expire on their existing TTL | Switching it off now or at phase 1 |
+| D67 | Who may edit a brand's own entry (O-20, 2026-10-13) | **(a): anyone, like products, except the brand's name and id**, which only admins change — a casual rename would lock that brand's integration out (`verify_brand()`) | Anyone, all fields; the brand's manufacturers and admins only |
+| D68 | Bootstrapping the first admins (§ 4.4, 2026-10-13) | **By verified ISA email**, from `ADMIN_BOOTSTRAP_EMAILS` in the deployer's shell. Granted once (`bootstrapped_at`), logged as `bootstrap`; never re-granted after a revocation | By ISA `sub` (a round trip per admin to collect it) |
+| D69 | What tells the app it is hosted (§ 11, 2026-10-13) | **Any of** the Lambda runtime's `AWS_LAMBDA_FUNCTION_NAME`, `SLACKDATA_DEPLOYMENT=hosted`, or `READ_ONLY` (`slack_data/deployment.py`) | One signal alone |
+| D70 | When people are told their name is public (2026-10-13) | **At first sign-in**, the ISA's condition for approving public names: a notice shown until acknowledged (`notice_seen_at`). It informs; it is not a gate | At the first edit (the plan's earlier § 15 suggestion) |

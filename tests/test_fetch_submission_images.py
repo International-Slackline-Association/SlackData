@@ -1,13 +1,14 @@
 """`scripts/fetch_submission_images.py` — filing a manufacturer's photo links.
 
 A brand sends `image_urls`; the operator runs this script to turn them into files
-under `frontend/public/gear-images/<type>/`. See MANUFACTURER_API_PLAN.md § Step 4
-— photos as links.
+under `frontend/public/gear-images/<type>/<id>_<slug>/`. See
+MANUFACTURER_API_PLAN.md § Step 4 — photos as links.
 
-**Naming is the whole risk.** An image the manifest cannot key to a product
-never renders and never errors, so most of these tests are about the name a
-download lands under: the key, the index, and the product whose *name* merely
-looks like an index. The rest are about never destroying what is already there.
+**Where a photo lands is the whole risk.** An image the manifest cannot tie to
+a product never renders and never errors, so most of these tests are about the
+folder and the number a download lands under — by id, so a rename in the same
+record cannot misfile it. The rest are about never destroying what is already
+there.
 
 No test here touches the network. Every download goes through a `fetcher`
 argument, and every tree is a `tmp_path`.
@@ -32,7 +33,9 @@ GIF = b"GIF89a" + b"gif-body"
 WEBP = b"RIFF\x24\x00\x00\x00WEBPVP8 " + b"webp-body"
 HTML = b"<!doctype html><html><body>Aero 1 - Balance Community</body></html>"
 
-ABBREV = {"Balance Community": "bc"}
+# The seed, as far as these tests need it: webbing 42 is "Aero 1".
+NAMES = {42: "Aero 1"}
+FOLDER = "42_aero-1"
 
 
 def served(mapping):
@@ -47,97 +50,90 @@ def served(mapping):
     return fetcher
 
 
-def run(tmp_path, urls, fetcher, *, name="Aero 1", valid=None, dry_run=False):
+def run(tmp_path, urls, fetcher, *, item_id=42, name=None, names=None, dry_run=False):
     return fsi.file_images(
-        "webbings", "Balance Community", name, urls,
-        pub=tmp_path, abbrev=ABBREV,
-        valid={"bc_aero-1"} if valid is None else valid,
+        "webbings", item_id, urls, name=name,
+        pub=tmp_path, names=NAMES if names is None else names,
         dry_run=dry_run, fetcher=fetcher,
     )
 
 
-def files(tmp_path):
-    folder = tmp_path / "webbings"
-    return sorted(p.name for p in folder.iterdir()) if folder.exists() else []
+def files(tmp_path, folder=FOLDER):
+    path = tmp_path / "webbings" / folder
+    return sorted(p.name for p in path.iterdir()) if path.exists() else []
 
 
-def hold(tmp_path, name, data=b"held"):
-    folder = tmp_path / "webbings"
-    folder.mkdir(parents=True, exist_ok=True)
-    (folder / name).write_bytes(data)
+def hold(tmp_path, name, data=b"held", folder=FOLDER):
+    path = tmp_path / "webbings" / folder
+    path.mkdir(parents=True, exist_ok=True)
+    (path / name).write_bytes(data)
 
 
-# --- The key ----------------------------------------------------------------
-
-
-def test_the_key_is_built_the_way_the_frontend_builds_it():
-    """`<brand-abbrev>_<name-slug>` — utils/images.ts `imageKey()`."""
-    assert fsi.image_key("Balance Community", "Aero 1", ABBREV) == "bc_aero-1"
-    assert fsi.image_key("Balance Community", "Spider Silk MK1", ABBREV) == "bc_spider-silk-mk1"
-
-
-def test_a_brand_with_no_abbreviation_falls_back_to_its_slug():
-    assert fsi.image_key("Wall Ace", "Duct Tape", ABBREV) == "wall-ace_duct-tape"
-
-
-def test_accents_fold_like_the_frontend_slug():
-    assert fsi.image_key("Balance Community", "Élan Vital", ABBREV) == "bc_elan-vital"
-
-
-def test_the_slug_is_the_manifest_builders_not_a_third_copy():
-    """Two copies (Python + TypeScript) already have to agree. A third is how
-    one of them drifts."""
-    assert fsi.slugify is build_gear_manifest.slugify
+A = "https://bc.example/a.jpg"
 
 
 # --- Where a photo lands ----------------------------------------------------
 
 
-def test_a_first_photo_takes_the_bare_key(tmp_path):
-    report = run(tmp_path, ["https://bc.example/a.jpg"], served({"https://bc.example/a.jpg": JPEG}))
-    assert report.written == ["bc_aero-1.jpg"]
-    assert files(tmp_path) == ["bc_aero-1.jpg"]
+def test_a_first_photo_makes_the_items_folder_and_is_number_1(tmp_path):
+    report = run(tmp_path, [A], served({A: JPEG}))
+    assert report.written == [f"{FOLDER}/1.jpg"]
+    assert files(tmp_path) == ["1.jpg"]
 
 
-def test_later_photos_append_after_the_highest_index_held(tmp_path):
-    hold(tmp_path, "bc_aero-1.jpg")
-    hold(tmp_path, "bc_aero-1-3.png")
-    urls = ["https://bc.example/a.jpg", "https://bc.example/b.png"]
+def test_the_folder_is_named_from_the_seed_like_the_manifest_builder_names_it(tmp_path):
+    run(tmp_path, [A], served({A: JPEG}), names={42: "Élan Vital"})
+    assert (tmp_path / "webbings" / build_gear_manifest.folder_name(42, "Élan Vital")).is_dir()
+    assert (tmp_path / "webbings" / "42_elan-vital").is_dir()
+
+
+def test_later_photos_append_after_the_highest_number_held(tmp_path):
+    hold(tmp_path, "1.jpg")
+    hold(tmp_path, "3.png")
+    urls = [A, "https://bc.example/b.png"]
     report = run(tmp_path, urls, served({urls[0]: JPEG + b"1", urls[1]: PNG}))
-    assert report.written == ["bc_aero-1-4.jpg", "bc_aero-1-5.png"]
+    assert report.written == [f"{FOLDER}/4.jpg", f"{FOLDER}/5.png"]
 
 
-def test_another_products_file_is_not_counted_as_an_index(tmp_path):
-    """"Blue 20" is a product of its own, so `bc_blue-20.jpg` is not image 20 of
-    "Blue". Counting it would file Blue's next photo as image 21."""
-    hold(tmp_path, "bc_blue.jpg")
-    hold(tmp_path, "bc_blue-20.jpg")
-    report = run(
-        tmp_path, ["https://bc.example/a.jpg"], served({"https://bc.example/a.jpg": JPEG}),
-        name="Blue", valid={"bc_blue", "bc_blue-20"},
-    )
-    assert report.written == ["bc_blue-2.jpg"]
+def test_an_existing_folder_is_used_whatever_its_slug_says(tmp_path):
+    """The slug is a label from when the folder was made. After a rename it is
+    stale, and the photos still belong in it — a second folder for one id
+    would split them (and the manifest builder refuses two)."""
+    hold(tmp_path, "1.jpg", folder="42_old-name")
+    report = run(tmp_path, [A], served({A: JPEG}), name="New Name")
+    assert report.written == ["42_old-name/2.jpg"]
+    assert sorted(p.name for p in (tmp_path / "webbings").iterdir()) == ["42_old-name"]
 
 
-def test_an_index_that_would_be_another_products_key_is_skipped(tmp_path):
-    """Writing `bc_blue-2.jpg` when "Blue 2" is a product would hand the photo
-    to the wrong product."""
-    hold(tmp_path, "bc_blue.jpg")
-    report = run(
-        tmp_path, ["https://bc.example/a.jpg"], served({"https://bc.example/a.jpg": JPEG}),
-        name="Blue", valid={"bc_blue", "bc_blue-2"},
-    )
-    assert report.written == ["bc_blue-3.jpg"]
+def test_another_items_folder_is_never_touched(tmp_path):
+    """`4_…` and `42_…` share a prefix of digits, not an id."""
+    hold(tmp_path, "1.jpg", folder="4_other")
+    hold(tmp_path, "1.jpg", folder="420_other")
+    run(tmp_path, [A], served({A: JPEG}))
+    assert files(tmp_path, "4_other") == ["1.jpg"]
+    assert files(tmp_path, "420_other") == ["1.jpg"]
+    assert files(tmp_path) == ["1.jpg"]
 
 
-def test_the_file_lands_where_the_manifest_resolves_it(tmp_path):
-    """The round trip that matters: what this writes, the manifest builder keys
-    back to the product it was filed for."""
-    hold(tmp_path, "bc_aero-1.jpg")
+def test_the_file_lands_where_the_manifest_resolves_it(tmp_path, monkeypatch):
+    """The round trip that matters: what this writes, the manifest builder
+    lists under the id it was filed for, in order."""
+    hold(tmp_path, "1.jpg")
     run(tmp_path, ["https://bc.example/a.png"], served({"https://bc.example/a.png": PNG}))
-    for name in files(tmp_path):
-        key, _ = build_gear_manifest.parse(Path(name).stem, {"bc_aero-1"})
-        assert key == "bc_aero-1", name
+    monkeypatch.setattr(build_gear_manifest, "PUB", tmp_path)
+    monkeypatch.setattr(build_gear_manifest, "seed_items", lambda t: {42: {"id": 42, "name": "Aero 1"}})
+    images, warnings = build_gear_manifest.build()
+    assert images == {"webbings": {"42": [f"{FOLDER}/1.jpg", f"{FOLDER}/2.png"]}}
+    assert warnings == []
+
+
+def test_a_new_item_needs_a_name_for_its_folder(tmp_path):
+    """An id the seeds do not hold yet (a product created after them) has no
+    name to slug — refuse rather than invent one."""
+    with pytest.raises(SystemExit):
+        run(tmp_path, [A], served({A: JPEG}), item_id=900)
+    report = run(tmp_path, [A], served({A: JPEG}), item_id=900, name="Brand New")
+    assert report.written == ["900_brand-new/1.jpg"]
 
 
 # --- What counts as a photo -------------------------------------------------
@@ -158,7 +154,7 @@ def test_anything_else_is_not_a_photo(data):
 def test_the_extension_comes_from_the_bytes_not_the_url(tmp_path):
     url = "https://bc.example/aero.jpg"
     report = run(tmp_path, [url], served({url: PNG}))
-    assert report.written == ["bc_aero-1.png"]
+    assert report.written == [f"{FOLDER}/1.png"]
 
 
 def test_a_product_page_sent_instead_of_an_image_is_refused(tmp_path):
@@ -194,59 +190,53 @@ def test_a_non_http_link_is_refused_without_fetching(tmp_path, url):
 
 
 def test_nothing_is_ever_overwritten(tmp_path):
-    hold(tmp_path, "bc_aero-1.jpg", b"the curated original")
-    run(tmp_path, ["https://bc.example/a.jpg"], served({"https://bc.example/a.jpg": JPEG}))
-    assert (tmp_path / "webbings" / "bc_aero-1.jpg").read_bytes() == b"the curated original"
+    hold(tmp_path, "1.jpg", b"the curated original")
+    run(tmp_path, [A], served({A: JPEG}))
+    assert (tmp_path / "webbings" / FOLDER / "1.jpg").read_bytes() == b"the curated original"
 
 
 def test_a_photo_already_held_byte_for_byte_is_skipped(tmp_path):
     """So running the command twice on one record is safe."""
-    hold(tmp_path, "bc_aero-1.jpg", JPEG)
-    report = run(tmp_path, ["https://bc.example/a.jpg"], served({"https://bc.example/a.jpg": JPEG}))
+    hold(tmp_path, "1.jpg", JPEG)
+    report = run(tmp_path, [A], served({A: JPEG}))
     assert report.written == []
-    assert [url for url, _ in report.skipped] == ["https://bc.example/a.jpg"]
-    assert files(tmp_path) == ["bc_aero-1.jpg"]
+    assert [url for url, _ in report.skipped] == [A]
+    assert files(tmp_path) == ["1.jpg"]
 
 
 def test_the_same_photo_under_two_links_is_written_once(tmp_path):
-    urls = ["https://bc.example/a.jpg", "https://cdn.bc.example/a.jpg"]
+    urls = [A, "https://cdn.bc.example/a.jpg"]
     report = run(tmp_path, urls, served({urls[0]: JPEG, urls[1]: JPEG}))
-    assert report.written == ["bc_aero-1.jpg"]
+    assert report.written == [f"{FOLDER}/1.jpg"]
     assert [url for url, _ in report.skipped] == [urls[1]]
 
 
 def test_a_dry_run_writes_nothing(tmp_path):
-    report = run(
-        tmp_path, ["https://bc.example/a.jpg"], served({"https://bc.example/a.jpg": JPEG}),
-        dry_run=True,
-    )
-    assert report.written == ["bc_aero-1.jpg"], "a dry run still reports the name it would use"
-    assert files(tmp_path) == []
+    report = run(tmp_path, [A], served({A: JPEG}), dry_run=True)
+    assert report.written == [f"{FOLDER}/1.jpg"], "a dry run still reports the name it would use"
+    assert not (tmp_path / "webbings").exists()
 
 
 def test_one_dead_link_does_not_stop_the_others(tmp_path):
-    urls = ["https://bc.example/gone.jpg", "https://bc.example/a.jpg"]
+    urls = ["https://bc.example/gone.jpg", A]
     report = run(tmp_path, urls, served({urls[1]: JPEG}))
-    assert report.written == ["bc_aero-1.jpg"]
+    assert report.written == [f"{FOLDER}/1.jpg"]
     assert [url for url, _ in report.failed] == [urls[0]]
 
 
 # --- Warnings ---------------------------------------------------------------
 
 
-def test_a_key_matching_no_product_is_warned_about(tmp_path):
-    """A rename or new product whose JSON patch is not applied yet: the photos
-    are filed, and will not render until the seed agrees."""
-    report = run(
-        tmp_path, ["https://bc.example/a.jpg"], served({"https://bc.example/a.jpg": JPEG}),
-        name="Aero 2", valid={"bc_aero-1"},
-    )
-    assert report.written == ["bc_aero-2.jpg"]
-    assert any("bc_aero-2" in warning for warning in report.warnings)
+def test_an_id_that_is_no_product_is_warned_about(tmp_path):
+    """A new product whose JSON patch is not applied yet: the photos are filed,
+    and will not render until the seed holds the id."""
+    report = run(tmp_path, [A], served({A: JPEG}), item_id=900, name="Aero 2")
+    assert report.written == ["900_aero-2/1.jpg"]
+    assert any("id 900" in warning for warning in report.warnings)
 
 
-def test_a_key_matching_a_product_is_not_warned_about(tmp_path):
-    report = run(tmp_path, ["https://bc.example/a.jpg"], served({"https://bc.example/a.jpg": JPEG}))
+def test_a_known_id_is_not_warned_about(tmp_path):
+    report = run(tmp_path, [A], served({A: JPEG}))
     assert report.warnings == []
 
 
@@ -259,38 +249,42 @@ def cli(tmp_path, monkeypatch):
     instead of rewriting the repo's gearImages.json."""
     rebuilt = []
     monkeypatch.setattr(fsi, "PUB", tmp_path)
-    monkeypatch.setattr(fsi, "load_abbrev", lambda: ABBREV)
-    monkeypatch.setattr(fsi, "valid_keys", lambda gear_type, abbrev: {"bc_aero-1"})
+    monkeypatch.setattr(fsi, "seed_names", lambda gear_type: NAMES)
     monkeypatch.setattr(fsi, "rebuild_manifest", lambda: rebuilt.append(True))
     return rebuilt
 
 
-ARGS = ["--gear-type", "webbings", "--brand", "Balance Community", "--name", "Aero 1"]
+ARGS = ["--gear-type", "webbings", "--id", "42"]
 
 
 def test_the_command_files_the_photos_and_rebuilds_the_manifest(tmp_path, cli, monkeypatch):
-    monkeypatch.setattr(fsi, "fetch", served({"https://bc.example/a.jpg": JPEG}))
-    assert fsi.main([*ARGS, "https://bc.example/a.jpg"]) == 0
-    assert files(tmp_path) == ["bc_aero-1.jpg"]
+    monkeypatch.setattr(fsi, "fetch", served({A: JPEG}))
+    assert fsi.main([*ARGS, A]) == 0
+    assert files(tmp_path) == ["1.jpg"]
     assert cli == [True]
 
 
 def test_the_command_exits_1_when_any_link_failed(tmp_path, cli, monkeypatch):
-    monkeypatch.setattr(fsi, "fetch", served({"https://bc.example/a.jpg": JPEG}))
-    assert fsi.main([*ARGS, "https://bc.example/a.jpg", "https://bc.example/gone.jpg"]) == 1
-    assert files(tmp_path) == ["bc_aero-1.jpg"], "the link that worked is still filed"
+    monkeypatch.setattr(fsi, "fetch", served({A: JPEG}))
+    assert fsi.main([*ARGS, A, "https://bc.example/gone.jpg"]) == 1
+    assert files(tmp_path) == ["1.jpg"], "the link that worked is still filed"
     assert cli == [True]
 
 
 def test_a_dry_run_command_does_not_rebuild_the_manifest(tmp_path, cli, monkeypatch):
-    monkeypatch.setattr(fsi, "fetch", served({"https://bc.example/a.jpg": JPEG}))
-    assert fsi.main([*ARGS, "--dry-run", "https://bc.example/a.jpg"]) == 0
+    monkeypatch.setattr(fsi, "fetch", served({A: JPEG}))
+    assert fsi.main([*ARGS, "--dry-run", A]) == 0
     assert cli == []
 
 
 def test_an_unknown_gear_type_is_refused(cli):
     with pytest.raises(SystemExit):
-        fsi.main(["--gear-type", "hats", "--brand", "B", "--name", "N", "https://x.example/a.jpg"])
+        fsi.main(["--gear-type", "hats", "--id", "1", "https://x.example/a.jpg"])
+
+
+def test_the_id_is_required(cli):
+    with pytest.raises(SystemExit):
+        fsi.main(["--gear-type", "webbings", "--name", "Aero 1", A])
 
 
 def test_the_hash_helper_is_sha256():

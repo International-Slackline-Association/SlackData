@@ -8,12 +8,13 @@
 // Two things make this worth a module and a unit test rather than a template
 // string in AdminPage:
 //
-// - **Every argument came from outside** (the brand's name, the product's name,
-//   URLs the brand chose) and the admin pastes the result into a shell. So each
-//   one is single-quoted for a POSIX shell, where nothing but `'` is special.
-// - **The name is the one the product will have after the patch.** Images are
-//   keyed by `<brand-abbrev>_<name-slug>`, so photos filed under the pre-rename
-//   name land on a key nothing renders.
+// - **Every argument came from outside** (URLs the brand chose, the product's
+//   name) and the admin pastes the result into a shell. So each one is
+//   single-quoted for a POSIX shell, where nothing but `'` is special.
+// - **Photos are filed by the product's id** (gear-images/<type>/<id>_<slug>/),
+//   so a rename in the same record cannot misfile them. The name only labels a
+//   folder the script has to create, and is the one the product will have after
+//   the patch.
 
 import type { Submission } from '@/types'
 
@@ -27,14 +28,14 @@ export function shellQuote(value: string): string {
 /** The full command, or null when there is nothing to file or nowhere to file it. */
 export function imageFetchCommand(submission: Submission): string | null {
   const urls = submission.image_urls ?? []
+  const id = submission.gear_id
   const name = submission.changes.name ?? submission.gear_name
-  const brand = submission.gear_brand
-  if (urls.length === 0 || !name || !brand) return null
+  if (urls.length === 0 || id === null || id === undefined || !name) return null
 
   return [
     SCRIPT,
     `--gear-type ${shellQuote(submission.gear_type)}`,
-    `--brand ${shellQuote(brand)}`,
+    `--id ${shellQuote(String(id))}`,
     `--name ${shellQuote(name)}`,
     ...urls.map(shellQuote),
   ].join(' ')

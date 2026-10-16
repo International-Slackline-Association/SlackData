@@ -1,0 +1,37 @@
+# The daily export, for the DATA repo (emilebragard/slackdata-data, later the
+# ISA's) — copy this file to .github/workflows/export.yml there, and
+# export_catalogue.py to the repo root. Not run from this repository.
+#
+# No secrets: it reads the public API and commits with the token GitHub gives
+# every workflow (LIVE_EDITING_PLAN.md § 6.6). The files carry no timestamp, so
+# a day with no changes produces no commit.
+name: Daily export
+
+on:
+  schedule:
+    - cron: "17 3 * * *"        # 03:17 UTC daily
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python export_catalogue.py --api https://slackdata.org/api --out data
+      - name: Commit if anything changed
+        run: |
+          git config user.name "slackdata-export"
+          git config user.email "slackdata-export@users.noreply.github.com"
+          git add data
+          if git diff --cached --quiet; then
+            echo "no change"
+          else
+            git commit -m "Export $(date -u +%Y-%m-%d)"
+            git push
+          fi

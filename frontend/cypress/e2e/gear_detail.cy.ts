@@ -363,7 +363,7 @@ GEAR_TYPES.forEach(({ slug, apiPath, label, hasISAWarning, specFields }) => {
         cy.request(`${api()}/${apiPath}/?limit=100`).then(({ body }) => {
           const withFiles = (body as Record<string, unknown>[]).map(i => ({
             item: i,
-            files: imageFilesFor(slug, String(i.brand_name), String(i.name)),
+            files: imageFilesFor(slug, i),
           }))
           multi = withFiles.find(x => x.files.length > 1)
           single = withFiles.find(x => x.files.length === 1)
@@ -388,6 +388,27 @@ GEAR_TYPES.forEach(({ slug, apiPath, label, hasISAWarning, specFields }) => {
         cy.get('[data-cy="card-image-next"]').click()
         cy.get('[data-cy="detail-img"]').should('have.attr', 'src').and('include', multi!.files[1])
         cy.get('[data-cy="card-image-dot"]').eq(1).should('have.attr', 'data-active', 'true')
+      })
+
+      it('keeps a product\'s photos when it, or its brand, is renamed', () => {
+        // Live editing renames products in the catalogue store; photos are
+        // found by id (gear-images/<type>/<id>_<slug>/), never by the current name.
+        if (!multi) return
+        const id = multi.item.id
+        const rename = (row: Record<string, unknown>) =>
+          row.id === id ? { ...row, name: `${row.name} (renamed)`, brand_name: 'Renamed Brand' } : row
+        cy.intercept('GET', `${api()}/${apiPath}/**`, req => {
+          // `before:response`, not `req.continue(callback)`: the e2e bundle is a
+          // development build, so StrictMode aborts the page's first fetch, and
+          // Cypress fails the test when a continue-callback's request is aborted.
+          req.on('before:response', res => {
+            res.body = Array.isArray(res.body) ? res.body.map(rename) : rename(res.body)
+          })
+        })
+        cy.visit(`/${slug}/${id}`)
+        cy.get('[data-cy="detail-name"]').should('contain', '(renamed)')
+        cy.get('[data-cy="detail-img"]').should('have.attr', 'src').and('include', multi.files[0])
+        cy.get('[data-cy="card-image-dot"]').should('have.length', multi.files.length)
       })
 
       it('shows no carousel chrome for a single-image product', () => {

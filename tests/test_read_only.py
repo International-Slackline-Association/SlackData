@@ -74,6 +74,10 @@ def test_read_only_schema_documents_no_catalogue_writes(read_only_client):
     catalogue to resolve which product a brand means, and writes nothing but
     submissions. `tests/test_manufacturer_api.py` pins that with a session whose
     writes raise.
+
+    `/me` and `/admin` (live editing, phase 1) write only to the people and
+    change log stores and take no catalogue session at all —
+    `tests/test_people.py` pins that with a session that raises.
     """
     schema = read_only_client.get("/openapi.json").json()
     offenders = [
@@ -81,9 +85,14 @@ def test_read_only_schema_documents_no_catalogue_writes(read_only_client):
         for path, operations in schema["paths"].items()
         for method in operations
         if method.lower() not in ("get", "head", "parameters")
-        and not path.startswith(("/submissions", "/manufacturer"))
+        and not path.startswith(WRITABLE_PREFIXES)
     ]
     assert offenders == []
+
+
+# The routers that write to a store other than the catalogue, named rather than
+# pattern-matched so a new one is a deliberate edit here.
+WRITABLE_PREFIXES = ("/submissions", "/manufacturer", "/me/", "/admin/")
 
 
 def concrete_routes(routes):
@@ -149,7 +158,7 @@ def test_read_only_leaves_no_catalogue_write_route_registered(read_only_client):
     """Belt and braces: check the router table, not just what it documents."""
     checked = 0
     for route in concrete_routes(read_only_client.app.routes):
-        if route.path.startswith(("/submissions", "/manufacturer")):
+        if route.path.startswith(WRITABLE_PREFIXES):
             # The writable routers, mounted in full in every mode because they
             # write to a different store. Named rather than pattern-matched, so
             # a third one is a deliberate edit here — same rule as the schema
@@ -181,12 +190,17 @@ def test_submissions_router_takes_no_catalogue_session():
     which in hosted mode is a read-only file — and the failure would appear only
     on the live site, never in a local test run.
     """
-    from slack_data.api.routers import submissions_router as module
+    from slack_data.api.routers.people_router import people_router
+    from slack_data.api.routers.submissions_router import submissions_router
     from slack_data.database import get_session
 
-    for route in module.submissions_router.routes:
-        dependants = [route.dependant, *route.dependant.dependencies]
-        assert all(d.call is not get_session for d in dependants), route.path
+    def every_call(dependant):
+        yield dependant.call
+        for child in dependant.dependencies:
+            yield from every_call(child)
+
+    for route in [*submissions_router.routes, *people_router.routes]:
+        assert get_session not in set(every_call(route.dependant)), route.path
 
 
 # ---------------------------------------------------------------------------

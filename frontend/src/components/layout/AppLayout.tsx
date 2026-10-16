@@ -3,6 +3,7 @@
 import { Outlet } from 'react-router-dom'
 import { useCurrency } from '@/context/CurrencyContext'
 import useScrollRestoration from '@/hooks/useScrollRestoration'
+import SignInNotice from '@/components/account/SignInNotice'
 import TopNav from './TopNav'
 import SiteFooter from './SiteFooter'
 
@@ -46,6 +47,7 @@ export default function AppLayout() {
         <Outlet />
       </main>
       <SiteFooter />
+      <SignInNotice />
     </div>
   )
 }

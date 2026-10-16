@@ -1,8 +1,10 @@
 # Gear without images
 
 Every catalogue item that has no photo in `frontend/public/gear-images/`, worked out from the files
-on disk with the manifest's own keying (`scripts/build_gear_manifest.py`): an item is listed when its
-`<brand-abbrev>_<name-slug>` key matches no image file. Generated 2026-10-08, updated 2026-10-12.
+on disk with the manifest's own keying (`scripts/build_gear_manifest.py`): an item is listed when it
+has no image folder. Generated 2026-10-08, updated 2026-10-12, when the key was still
+`<brand-abbrev>_<name-slug>`; since 2026-10-13 photos sit in one folder per item,
+`<type>/<id>_<name-slug>/1.jpg, 2.jpg …`.
 
 **18 items**: 8 webbings, 6 weblocks, 3 leash rings, 1 trickline kit. Grips, rollers, tree
 protectors and starter kits are fully covered. All 18 are historic (`active: false`). None of
@@ -47,9 +49,10 @@ Slack Swan, the Banana or either steel ring survives.
    few pixels across. Not usable as a photo.
 
 Candidates are **not** filed into `public/gear-images/`. Anything downloaded sits in
-`image_candidates/<type>/` for review, named with the item's image key and numbered in the
-suggested photo order (official photos first), and is filed by moving it into
-`public/gear-images/<type>/` and running `python3 scripts/build_gear_manifest.py`.
+`image_candidates/<type>/` for review, named with the item's old image key and numbered in the
+suggested photo order (official photos first), and is filed by moving it into the item's folder,
+`public/gear-images/<type>/<id>_<name-slug>/`, as `1.jpg`, `2.jpg` …, and running
+`python3 scripts/build_gear_manifest.py`.
 
 In the **Candidates** column, "none found" means searched with no usable result; the note says how
 far the trail went.

@@ -22,13 +22,14 @@ socket and no process boundary:
   never executed. Here it is: the server picks its own stores from the
   environment, exactly as the Lambda does.
 
-Two servers are started, because the two configurations that exist in
+Several servers are started, because the configurations that exist in
 production are genuinely different programs:
 
 | fixture | configuration | what it stands for |
 |---|---|---|
-| `live` | writable SQLite, no Cognito pool | local dev, and the shape the write paths are developed against |
+| `live` | writable SQLite, no ISA pool configured | local dev, and the shape the write paths are developed against |
 | `hosted` | `CATALOG_DB_PATH` set → `READ_ONLY` | the Lambda: catalogue writes unmounted, admin/manufacturer auth locked out |
+| `hosted_unbaked` | `SLACKDATA_DEPLOYMENT=hosted`, no `CATALOG_DB_PATH`, no pool | live editing's shape: dev tokens still locked out |
 
 The catalogue is a **hand-built minimum**, not the real seed. One row in each
 gear table is enough to make `seed_catalog` skip every loader, which turns a
@@ -36,6 +37,7 @@ gear table is enough to make `seed_catalog` skip every loader, which turns a
 asserted here is about the catalogue's contents.
 """
 
+import json
 import os
 import socket
 import subprocess
@@ -77,6 +79,9 @@ CLIENT_ID = "live-test-client"
 ADMIN = {"Authorization": f"Bearer {auth.ADMIN_DEV_TOKEN}"}
 BRAND_TOKEN = f"{auth.MANUFACTURER_DEV_TOKEN}:{CLIENT_ID}"
 BRAND = {"Authorization": f"Bearer {BRAND_TOKEN}"}
+# A real API key (D63–D65): the same client, holding a secret.
+SECRET = "live-test-secret-0123456789abcdefghijklmnopq"
+KEY = {"Authorization": f"Bearer {CLIENT_ID}:{SECRET}"}
 
 # Generous: a cold uvicorn import of FastAPI + SQLModel + every model is a
 # couple of seconds on a laptop and slower under load. Failing here means the
@@ -189,6 +194,7 @@ def _register_client(brand_clients_db: Path, brand_id: int, brand_name: str) -> 
             client_id=CLIENT_ID,
             brand_id=brand_id,
             brand_name=brand_name,
+            secret=SECRET,
             created_at=now_iso(),
         )
     )
@@ -206,9 +212,15 @@ def _start_server(work_dir: Path, extra_env: dict) -> tuple[subprocess.Popen, st
         "PYTHONPATH": str(REPO_ROOT),
         "SUBMISSIONS_DB_PATH": str(work_dir / "submissions.db"),
         "BRAND_CLIENTS_DB_PATH": str(work_dir / "brand_clients.db"),
+        "PEOPLE_DB_PATH": str(work_dir / "people.db"),
+        "CHANGELOG_DB_PATH": str(work_dir / "changelog.db"),
         # No pool: the dev-token branch. A hosted deploy sets these, and
-        # `hosted_api` below asserts what happens when it does not.
-        "COGNITO_USER_POOL_ID": "",
+        # `hosted` below asserts what happens when it does not.
+        "ISA_USER_POOL_ID": "",
+        # Whatever shell the suite runs in, each server's hosted-ness is only
+        # what its fixture says (slack_data/deployment.py reads both).
+        "AWS_LAMBDA_FUNCTION_NAME": "",
+        "SLACKDATA_DEPLOYMENT": "",
         # Off, so nothing here calls Cloudflare. (Mail needs no such switch —
         # the app sends none; see test_submissions.test_the_app_sends_no_email.)
         "TURNSTILE_SECRET": "",
@@ -297,8 +309,57 @@ def hosted(tmp_path_factory):
 
 
 @pytest.fixture(scope="module")
+def hosted_unbaked(tmp_path_factory):
+    """Hosted with **no baked catalogue and no pool** — the shape live editing
+    reaches: phase 1 deletes the pool, phase 2 stops baking `CATALOG_DB_PATH`.
+
+    Only `SLACKDATA_DEPLOYMENT=hosted` says it is the live site. The catalogue
+    is an ordinary writable file here, which is the point: `READ_ONLY` is
+    false, and the dev tokens must still be refused.
+    """
+    work_dir = tmp_path_factory.mktemp("hosted-unbaked-api")
+    ids = _build_catalogue(work_dir / "database.db")
+    _register_client(work_dir / "brand_clients.db", ids["alpha_brand"], "Alpha Slacklines")
+
+    process, base_url, log_path = _start_server(work_dir, {"SLACKDATA_DEPLOYMENT": "hosted"})
+    try:
+        with httpx.Client(base_url=base_url, timeout=10.0) as client:
+            yield client, ids, log_path
+    finally:
+        _stop(process)
+
+
+@pytest.fixture(scope="module")
+def store_mode(tmp_path_factory):
+    """Live editing phase 2's shape: `CATALOG_SOURCE=store`, the catalogue read
+    from a store filled with the **real** seeds, built into memory at start.
+
+    Local (not hosted), so the dev token still works — store mode alone must
+    not count as hosted (deployment.is_hosted reads READ_ONLY, which stays
+    "a baked file").
+    """
+    from slack_data.catalogue.importer import documents_from_files
+    from slack_data.catalogue.repository import SqliteCatalogueRepository
+
+    work_dir = tmp_path_factory.mktemp("store-api")
+    store = SqliteCatalogueRepository(str(work_dir / "catalog_store.db"))
+    store.put_many(documents_from_files())
+    store.bump_version()
+
+    process, base_url, log_path = _start_server(
+        work_dir,
+        {"CATALOG_SOURCE": "store", "CATALOG_STORE_PATH": str(work_dir / "catalog_store.db")},
+    )
+    try:
+        with httpx.Client(base_url=base_url, timeout=30.0) as client:
+            yield client, store, log_path
+    finally:
+        _stop(process)
+
+
+@pytest.fixture(scope="module")
 def hosted_with_pool(tmp_path_factory):
-    """The hosted shape **with a Cognito pool configured** — production's real shape.
+    """The hosted shape **with the ISA pool configured** — production's real shape.
 
     `hosted` above proves the lockout when the pool is missing. That is the safe
     failure, but it means the branch production actually takes — pool set, token
@@ -320,9 +381,9 @@ def hosted_with_pool(tmp_path_factory):
         work_dir,
         {
             "CATALOG_DB_PATH": str(catalogue),
-            "COGNITO_USER_POOL_ID": "eu-central-1_NoSuchPool",
-            "COGNITO_CLIENT_ID": "no-such-client",
-            "COGNITO_REGION": "eu-central-1",
+            "ISA_USER_POOL_ID": "eu-central-1_NoSuchPool",
+            "ISA_CLIENT_ID": "no-such-client",
+            "ISA_REGION": "eu-central-1",
         },
     )
     try:
@@ -466,6 +527,18 @@ def test_a_cross_brand_write_is_refused_over_http(live):
     assert response.status_code == 403
 
 
+def test_people_and_the_change_log_over_http(live):
+    """Phase 1's stores, chosen from the environment in a real process: the
+    dev admin signs in, acknowledges the notice, and the public log is served."""
+    client, _, _ = live
+    me = client.get("/me", headers=ADMIN)
+    assert me.status_code == 200, me.text
+    assert me.json()["roles"] == ["admin"]
+    assert client.post("/me/notice", headers=ADMIN).json()["notice_seen_at"]
+    assert client.get("/admin/admins", headers=ADMIN).status_code == 200
+    assert client.get("/changes").status_code == 200
+
+
 def test_an_anonymous_manufacturer_call_is_refused_over_http(live):
     client, _, _ = live
     response = client.post(
@@ -559,17 +632,42 @@ def test_the_hosted_server_locks_out_the_dev_tokens(hosted):
     real process running the real hosted configuration rather than by a
     monkeypatched flag.
 
-    No Cognito pool + hosted → 503 on both the admin and the manufacturer
-    paths. Never a fall-through to the static token.
+    No ISA pool + hosted → 503 on every sign-in path, never a fall-through to
+    the static token. The manufacturer dev token is read as an API key like any
+    other, and no stored key matches it → 401.
     """
     client, _, _ = hosted
     assert client.get("/submissions", headers=ADMIN).status_code == 503
-    assert client.get("/manufacturer/me", headers=BRAND).status_code == 503
+    assert client.get("/me", headers=ADMIN).status_code == 503
+    assert client.get("/manufacturer/me", headers=BRAND).status_code == 401
     assert client.post(
         "/manufacturer/gear",
         headers=BRAND,
         json={"items": [{"gear_type": "webbings", "name": "X", "changes": {"weight": "70"}}]},
-    ).status_code == 503
+    ).status_code == 401
+
+
+def test_a_real_api_key_works_hosted(hosted):
+    """Keys need no pool, so a brand works hosted whatever the sign-in config."""
+    client, _, _ = hosted
+    response = client.get("/manufacturer/me", headers=KEY)
+    assert response.status_code == 200, response.text
+    assert response.json()["brand_name"] == "Alpha Slacklines"
+
+
+def test_the_public_change_log_is_reachable_hosted(hosted):
+    client, _, _ = hosted
+    response = client.get("/changes")
+    assert response.status_code == 200
+    assert response.json() == []
+
+
+def test_hosted_without_a_baked_catalogue_still_locks_out_the_dev_tokens(hosted_unbaked):
+    """Live editing's phase-2 shape, in a real process: no `CATALOG_DB_PATH`,
+    no pool, and still neither dev token is honoured."""
+    client, _, _ = hosted_unbaked
+    assert client.get("/submissions", headers=ADMIN).status_code == 503
+    assert client.get("/manufacturer/me", headers=BRAND).status_code == 401
 
 
 def test_the_hosted_public_submission_box_is_reachable(hosted):
@@ -589,7 +687,7 @@ def test_the_hosted_public_submission_box_is_reachable(hosted):
 
 
 def test_a_configured_pool_disables_the_dev_tokens_hosted(hosted_with_pool):
-    """Configuring Cognito closes the dev door rather than adding a second one —
+    """Configuring the ISA pool closes the dev door rather than adding a second one —
     asserted in a real hosted process, not by monkeypatching a module global."""
     client, _, _ = hosted_with_pool
     assert client.get("/submissions", headers=ADMIN).status_code == 401
@@ -600,13 +698,13 @@ def test_an_unverifiable_token_is_401_not_500(hosted_with_pool):
     """**The failure mode worth catching.**
 
     The pool does not exist, so the JWKS fetch cannot succeed — exactly what an
-    outage at Cognito looks like. Every one of these must come back 401. A 500
+    outage at the ISA pool looks like. Every one of these must come back 401. A 500
     means an unhandled exception in the verifier, which is an error page where a
     login prompt belongs.
     """
     client, _, _ = hosted_with_pool
     for token in ("not.a.jwt", "junk", "a.b.c"):
-        for path in ("/submissions", "/manufacturer/me"):
+        for path in ("/submissions", "/me", "/manufacturer/me"):
             response = client.get(path, headers={"Authorization": f"Bearer {token}"})
             assert response.status_code == 401, f"{path} with {token!r} -> {response.status_code}"
 
@@ -626,4 +724,77 @@ def test_no_traceback_reached_the_log(hosted_with_pool):
     """A handled 401 must not also be logging a stack trace — that is how a real
     incident gets lost in noise."""
     _, _, log_path = hosted_with_pool
+    assert "Traceback" not in log_path.read_text()
+
+
+# --- Store mode: the catalogue read from the store (phase 2) -----------------
+
+
+def _seed(name: str):
+    return json.loads((REPO_ROOT / name).read_text(encoding="utf-8"))
+
+
+def test_store_mode_serves_the_real_catalogue(store_mode):
+    client, _, _ = store_mode
+    webbing = _seed("webbings.json")[0]
+    response = client.get(f"/webbing/{webbing['id']}")
+    assert response.status_code == 200, response.text
+    assert response.json()["name"] == webbing["name"]
+    # Derived at build time, not stored: the brand's enrichment is there.
+    brands = client.get("/brand/?limit=100").json()
+    assert any(brand.get("country") for brand in brands)
+
+
+def test_store_mode_mounts_no_catalogue_writes(store_mode):
+    """An edit to the in-memory copy would be thrown away at the next rebuild,
+    so the raw CRUD writes are not there to make one."""
+    client, _, _ = store_mode
+    assert client.post("/webbing/", json={"name": "x"}).status_code == 405
+    assert client.patch("/webbing/1", json={"name": "x"}).status_code == 405
+    assert client.delete("/webbing/1").status_code == 405
+
+
+def test_store_mode_alone_is_not_hosted(store_mode):
+    client, _, _ = store_mode
+    assert client.get("/me", headers=ADMIN).status_code == 200
+
+
+def test_the_export_script_reproduces_the_store(store_mode, tmp_path):
+    """export/export_catalogue.py against a real server: every file it writes
+    is the store's content in the seed's own format, and the change log is
+    there."""
+    import importlib.util
+
+    from slack_data.catalogue.documents import COLLECTIONS, assemble, render
+
+    client, store, _ = store_mode
+    spec = importlib.util.spec_from_file_location("export_catalogue", REPO_ROOT / "export" / "export_catalogue.py")
+    export = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(export)
+
+    assert export.main(["--api", str(client.base_url), "--out", str(tmp_path)]) == 0
+    documents = store.load()
+    for name, collection in COLLECTIONS.items():
+        assert (tmp_path / collection.filename).read_text(encoding="utf-8") == render(
+            name, assemble(name, documents)
+        ), name
+    assert json.loads((tmp_path / "changes.json").read_text()) == []
+    assert json.loads((tmp_path / "catalogue.json").read_text())["version"] == store.version()
+
+
+def test_an_edit_in_the_store_is_served_on_the_next_request(store_mode):
+    """D30, end to end: a document changes, the version moves, and the very
+    next request sees it — no restart, no redeploy."""
+    client, store, log_path = store_mode
+    grip = next(d for d in store.load() if d.collection == "grips")
+    edited = grip.model_copy(deep=True)
+    edited.data["name"] = "Edited in the store"
+    store.put_many([edited])
+
+    assert client.get(f"/grip/{grip.data['id']}").json()["name"] == grip.data["name"], (
+        "unchanged until the version moves"
+    )
+    version = store.bump_version()
+    assert client.get(f"/grip/{grip.data['id']}").json()["name"] == "Edited in the store"
+    assert client.get("/catalogue").json()["version"] == version
     assert "Traceback" not in log_path.read_text()

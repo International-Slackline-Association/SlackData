@@ -101,9 +101,9 @@ export default function ManufacturerApiPage() {
 
         <p className="mt-4 text-sm leading-relaxed text-gray-700">
           Base URL <code className={CODE}>https://slackdata.org/api</code>. Every call sends{' '}
-          <code className={CODE}>Authorization: Bearer $TOKEN</code> —{' '}
-          <a href="#token" className="font-medium text-amber-700 underline">
-            get a token
+          <code className={CODE}>Authorization: Bearer $KEY</code> —{' '}
+          <a href="#key" className="font-medium text-amber-700 underline">
+            your API key
           </a>
           . No credential yet?{' '}
           <a href="#credential" className="font-medium text-amber-700 underline">
@@ -126,7 +126,7 @@ export default function ManufacturerApiPage() {
         <Section id="list" title="1. List your gear">
           <Endpoint method="GET" path="/manufacturer/gear" />
           <Code>{`curl -s https://slackdata.org/api/manufacturer/gear \\
-  -H "Authorization: Bearer $TOKEN"`}</Code>
+  -H "Authorization: Bearer $KEY"`}</Code>
           <Code>{`[
   { "gear_type": "webbings", "gear_id": 42, "name": "Aero",           "active": true  },
   { "gear_type": "webbings", "gear_id": 57, "name": "Type 18 Mk II",  "active": false },
@@ -143,7 +143,7 @@ export default function ManufacturerApiPage() {
         <Section id="spec" title="2. Read the values we hold">
           <Endpoint method="GET" path="/manufacturer/gear?include=spec" />
           <Code>{`curl -s 'https://slackdata.org/api/manufacturer/gear?gear_type=webbings&include=spec' \\
-  -H "Authorization: Bearer $TOKEN"`}</Code>
+  -H "Authorization: Bearer $KEY"`}</Code>
           <Code>{`{
   "gear_type": "webbings",
   "gear_id": 42,
@@ -200,7 +200,7 @@ export default function ManufacturerApiPage() {
             <code className={CODE}>changes</code>; anything omitted is left alone.
           </p>
           <Code>{`curl -s -X POST https://slackdata.org/api/manufacturer/gear \\
-  -H "Authorization: Bearer $TOKEN" \\
+  -H "Authorization: Bearer $KEY" \\
   -H 'Content-Type: application/json' \\
   -d '{
     "note": "spring 2027 line refresh",
@@ -298,19 +298,19 @@ export default function ManufacturerApiPage() {
         <hr className="mt-12 border-gray-200" />
         <p className="mt-6 text-xs font-semibold uppercase tracking-wide text-gray-500">Reference</p>
 
-        <Section id="token" title="Access tokens">
+        <Section id="key" title="Your API key">
           <p>
-            OAuth 2.0 client credentials. You were given a <code className={CODE}>client_id</code>, a{' '}
-            <code className={CODE}>client_secret</code> and a token URL.
+            You were given a <code className={CODE}>client_id</code> and a{' '}
+            <code className={CODE}>client_secret</code>. Your key is the two joined by a colon, sent
+            as-is on every call — there is no token to fetch first.
           </p>
-          <Code>{`curl -s -X POST "$TOKEN_URL" \\
-  -H 'Content-Type: application/x-www-form-urlencoded' \\
-  -u "$CLIENT_ID:$CLIENT_SECRET" \\
-  -d 'grant_type=client_credentials&scope=slackdata/gear.write'`}</Code>
+          <Code>{`KEY="$CLIENT_ID:$CLIENT_SECRET"
+curl -s https://slackdata.org/api/manufacturer/me \\
+  -H "Authorization: Bearer $KEY"`}</Code>
           <p>
-            Send the result as <code className={CODE}>Authorization: Bearer &lt;access_token&gt;</code>{' '}
-            and cache it until it expires. The scope is exactly{' '}
-            <code className={CODE}>slackdata/gear.write</code>.
+            Keep it out of anything public. If it leaks, tell us and we revoke it and issue a new one.
+            Credentials issued before October 2026 keep the same id and secret; only the token
+            request goes away.
           </p>
           <Endpoint method="GET" path="/manufacturer/me" />
           <p>
@@ -325,7 +325,7 @@ export default function ManufacturerApiPage() {
             head={['Code', 'Meaning', 'What to do']}
             rows={[
               ['201', 'The batch was recorded.', 'Store the resolved ids. Do not retry.'],
-              ['401', "No token, an expired one, or one we can't verify.", 'Get a new access token.'],
+              ['401', 'No key, or one that does not match.', 'Check the key is exactly client_id:client_secret.'],
               [
                 '403',
                 'Your credential is not registered or has been deactivated, or the item names another brand’s gear.',
@@ -433,7 +433,7 @@ export default function ManufacturerApiPage() {
             contact details published on your own site, before issuing anything.
           </p>
           <p>
-            You will receive a client id, a client secret and the token URL. To revoke, tell us.
+            You will receive a client id and a client secret. To revoke, tell us.
           </p>
         </Section>
 

@@ -91,7 +91,7 @@ export default function GearDetailPage() {
           shared with the listing's Detailed view, which would embed one PDF
           viewer per visible item. */}
       <ProductManuals
-        manuals={manualsFor(meta.slug, String(item.brand_name), String(item.name), brandsFor(item).slice(1))}
+        manuals={manualsFor(meta.slug, item, brandsFor(item).slice(1))}
       />
 
       {/* Sits below the spec sheet, on the page where someone is reading the

@@ -16,22 +16,21 @@ The other themes:
   it — a mistake that passes locally (SQLite is writable) and fails hosted.
   `test_the_router_never_writes_to_the_catalogue` wires a session that explodes
   on any write.
-- **Auth shape.** A client-credentials access token is a different animal from
-  the admin's ID token, and making the admin verifier accept both would be the
-  wrong fix. Both verifiers are exercised against the same pool fixture.
+- **Auth shape.** A brand sends an API key, `<client_id>:<secret>` (D63–D65),
+  matched against the brand-clients store in constant time. It is not a
+  person's sign-in, and neither credential opens the other's routes.
 """
 
 import json
-import time
 
-import jwt
 import pytest
-from cryptography.hazmat.primitives.asymmetric import rsa
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from fastapi.testclient import TestClient
 
 from slack_data.api import auth
 from slack_data.api.routing import register_routers
+from slack_data.changelog.repository import InMemoryChangeLogRepository
+from slack_data.changelog.store import get_changelog_repository
 from slack_data.database import get_session
 from slack_data.manufacturers import matching
 from slack_data.manufacturers.clients import InMemoryBrandClientRepository
@@ -53,6 +52,8 @@ from slack_data.models.manufacturer_updates import (
 from slack_data.models.submissions import MAX_URL_LENGTH, SubmissionKind, SubmissionStatus
 from slack_data.models.webbing import FiberMaterial, Webbing
 from slack_data.models.weblocks import Weblock
+from slack_data.people.repository import InMemoryPeopleRepository
+from slack_data.people.store import get_people_repository
 from slack_data.submissions.store import get_repository
 from slack_data.utilities.materials import MetalMaterial
 from slack_data.utilities.ulid import new_ulid
@@ -437,175 +438,121 @@ def test_me_reports_the_resolved_brand(client, gear, brands):
     assert body["dev"] is True  # so anything logging can tell dev from Cognito
 
 
-# --- Hosted without a pool: locked, never open ------------------------------
-
-
-@pytest.mark.parametrize("method,path", MANUFACTURER_ROUTES)
-def test_hosted_without_a_pool_rejects_even_the_dev_token(
-    client, monkeypatch, gear, method, path
-):
-    """The rule that makes a dev token in a public repo safe, applied to the
-    path that *writes*. A hosted deploy missing its pool stays shut."""
-    from slack_data import database
-
-    monkeypatch.setattr(database, "READ_ONLY", True)
-    monkeypatch.setattr(auth, "COGNITO_USER_POOL_ID", None)
-
-    assert call(client, method, path, dev_headers()).status_code == 503
-
-
-# --- Real Cognito client-credentials tokens ---------------------------------
-
-
-@pytest.fixture
-def cognito(monkeypatch):
-    """A throwaway RSA key, a matching JWKS, and a configured pool.
-
-    Built exactly as `tests/test_auth.py` builds it, and mints **access** tokens
-    with a `client_id` and a `scope` — the machine-to-machine shape, which has
-    no `aud` claim at all.
-    """
-    key = rsa.generate_private_key(public_exponent=65537, key_size=2048)
-    kid = "test-key-1"
-    jwk_data = json.loads(jwt.algorithms.RSAAlgorithm.to_jwk(key.public_key()))
-    jwk_data["kid"] = kid
-    jwk = jwt.PyJWK(jwk_data)
-
-    monkeypatch.setattr(auth, "COGNITO_USER_POOL_ID", "eu-central-1_TESTPOOL")
-    monkeypatch.setattr(auth, "COGNITO_CLIENT_ID", "test-client-id")
-    monkeypatch.setattr(auth, "COGNITO_REGION", "eu-central-1")
-    monkeypatch.setattr(auth, "_fetch_jwks", lambda: {kid: jwk})
-    auth._jwks_cache["keys"] = {}
-    auth._jwks_cache["fetched_at"] = 0.0
-
-    def token(**overrides):
-        claims = {
-            "sub": CLIENT_ID,
-            "client_id": CLIENT_ID,
-            "iss": auth.issuer(),
-            "token_use": "access",
-            "scope": auth.MANUFACTURER_SCOPE,
-            "exp": int(time.time()) + 3600,
-            "iat": int(time.time()),
-            **overrides,
-        }
-        return jwt.encode(claims, key, algorithm="RS256", headers={"kid": kid})
-
-    return token
-
-
-def bearer(token: str) -> dict:
-    return {"Authorization": f"Bearer {token}"}
-
-
-def test_a_valid_client_credentials_token_is_accepted(client, gear, cognito):
-    """The shape the admin verifier rejects, accepted by the one built for it."""
-    response = client.get("/manufacturer/me", headers=bearer(cognito()))
-    assert response.status_code == 200
-
-
-def test_a_client_credentials_token_is_refused_by_the_admin_verifier(client, gear, cognito):
-    """Why there are two verifiers at all.
-
-    An access token with no `aud` cannot pass `verify_cognito_token`, and the
-    fix is a second function — never loosening the one guarding admin login.
-    """
-    assert client.get("/submissions/", headers=bearer(cognito())).status_code == 401
-
-
-def test_an_admin_id_token_cannot_write_gear(client, gear, cognito):
-    """And the mirror image: an ID token is a person in a browser, not a machine."""
-    id_token = cognito(token_use="id", aud="test-client-id", scope=None)
-    assert client.get("/manufacturer/me", headers=bearer(id_token)).status_code == 401
+# --- Hosted: the dev token is dead ------------------------------------------
 
 
 @pytest.mark.parametrize(
-    "overrides,reason",
+    "env,read_only",
     [
-        ({"exp": int(time.time()) - 60}, "expired"),
-        ({"iss": "https://cognito-idp.eu-central-1.amazonaws.com/other"}, "wrong pool"),
-        ({"token_use": "id"}, "an id token, not an access token"),
-        ({"scope": "slackdata/something.else"}, "wrong scope"),
-        ({"scope": ""}, "no scope"),
-        ({"client_id": None}, "names no client"),
+        pytest.param({}, True, id="baked-catalogue"),
+        pytest.param({"AWS_LAMBDA_FUNCTION_NAME": "slackdata-prod-api"}, False, id="lambda-runtime"),
+        pytest.param({"SLACKDATA_DEPLOYMENT": "hosted"}, False, id="explicit-variable"),
     ],
 )
-def test_bad_claims_are_rejected(client, gear, cognito, overrides, reason):
-    response = client.get("/manufacturer/me", headers=bearer(cognito(**overrides)))
-    assert response.status_code == 401, reason
-
-
-def test_a_scope_is_matched_whole_not_by_prefix(client, gear, cognito):
-    """`slackdata/gear.write.nothing` must not satisfy `slackdata/gear.write`."""
-    token = cognito(scope=f"{auth.MANUFACTURER_SCOPE}.nothing")
-    assert client.get("/manufacturer/me", headers=bearer(token)).status_code == 401
-
-
-def test_one_of_several_scopes_is_enough(client, gear, cognito):
-    """Real tokens carry every scope the client is granted, space delimited."""
-    token = cognito(scope=f"slackdata/read {auth.MANUFACTURER_SCOPE} openid")
-    assert client.get("/manufacturer/me", headers=bearer(token)).status_code == 200
-
-
-def test_a_token_signed_by_a_different_key_is_rejected(client, gear, cognito):
-    attacker = rsa.generate_private_key(public_exponent=65537, key_size=2048)
-    forged = jwt.encode(
-        {
-            "sub": CLIENT_ID,
-            "client_id": CLIENT_ID,
-            "iss": auth.issuer(),
-            "token_use": "access",
-            "scope": auth.MANUFACTURER_SCOPE,
-            "exp": int(time.time()) + 3600,
-        },
-        attacker,
-        algorithm="RS256",
-        headers={"kid": "test-key-1"},
-    )
-    assert client.get("/manufacturer/me", headers=bearer(forged)).status_code == 401
-
-
-def test_an_unsigned_token_is_rejected(client, gear, cognito):
-    """`alg: none`, rejected because algorithms=["RS256"] is pinned here too."""
-    unsigned = jwt.encode(
-        {
-            "sub": CLIENT_ID,
-            "client_id": CLIENT_ID,
-            "iss": auth.issuer(),
-            "token_use": "access",
-            "scope": auth.MANUFACTURER_SCOPE,
-            "exp": int(time.time()) + 3600,
-        },
-        key=None,
-        algorithm="none",
-        headers={"kid": "test-key-1"},
-    )
-    assert client.get("/manufacturer/me", headers=bearer(unsigned)).status_code == 401
-
-
-def test_the_dev_token_is_dead_once_a_pool_is_configured(client, gear, cognito):
-    assert client.get("/manufacturer/me", headers=dev_headers()).status_code == 401
-
-
-def test_a_cognito_token_still_resolves_through_the_client_record(
-    client, gear, cognito, brand_clients, brands
+@pytest.mark.parametrize("method,path", MANUFACTURER_ROUTES)
+def test_hosted_the_dev_token_is_just_a_wrong_key(
+    client, monkeypatch, gear, env, read_only, method, path
 ):
-    """Signature verification says *who*; the record says *which brand*.
+    """The rule that makes a dev token in a public repo safe, applied to the
+    path that *writes*. Hosted, `dev-manufacturer-token:<id>` is read as an API
+    key like any other — and no stored key matches it. Any one hosted signal is
+    enough (slack_data/deployment.py)."""
+    from slack_data import database
 
-    Deactivating the record must refuse a perfectly valid Cognito token — if it
-    did not, revocation would mean editing the pool.
-    """
+    monkeypatch.setattr(database, "READ_ONLY", read_only)
+    for name, value in env.items():
+        monkeypatch.setenv(name, value)
+
+    assert call(client, method, path, dev_headers()).status_code == 401
+
+
+# --- API keys (D63–D65) -----------------------------------------------------
+
+SECRET = "s3cret-alpha-0123456789abcdefghijklmnopqrstu"
+
+
+def key_headers(client_id: str = CLIENT_ID, secret: str = SECRET) -> dict:
+    return {"Authorization": f"Bearer {client_id}:{secret}"}
+
+
+@pytest.fixture
+def keyed(brand_clients, brands):
+    """The alpha client, now holding a real key."""
     alpha, _ = brands
     brand_clients.put(
         BrandClient(
             client_id=CLIENT_ID,
             brand_id=alpha.id,
             brand_name=alpha.name,
-            active=False,
+            secret=SECRET,
             created_at=now_iso(),
         )
     )
-    assert client.get("/manufacturer/me", headers=bearer(cognito())).status_code == 403
+    return brand_clients
+
+
+def test_a_valid_key_is_accepted(client, gear, keyed):
+    response = client.get("/manufacturer/me", headers=key_headers())
+    assert response.status_code == 200
+    assert response.json()["brand_name"] == "Alpha Slacklines"
+
+
+def test_a_valid_key_is_accepted_hosted(client, gear, keyed, monkeypatch):
+    """Keys need no pool, so hosted is exactly the same path."""
+    monkeypatch.setenv("SLACKDATA_DEPLOYMENT", "hosted")
+    assert client.get("/manufacturer/me", headers=key_headers()).status_code == 200
+
+
+@pytest.mark.parametrize(
+    "header,reason",
+    [
+        (f"{CLIENT_ID}:wrong-secret", "wrong secret"),
+        (f"{CLIENT_ID}:{SECRET}x", "secret with a suffix"),
+        (f"{CLIENT_ID}:{SECRET[:-1]}", "secret with a character missing"),
+        (f"{CLIENT_ID}:", "no secret"),
+        (f":{SECRET}", "no client id"),
+        (SECRET, "no separator"),
+        (f"{OTHER_CLIENT_ID}:{SECRET}", "another client's id with this secret"),
+        (f"never-registered:{SECRET}", "an unknown client"),
+    ],
+)
+def test_a_wrong_key_is_401(client, gear, keyed, header, reason):
+    response = client.get("/manufacturer/me", headers={"Authorization": f"Bearer {header}"})
+    assert response.status_code == 401, reason
+    assert response.headers["www-authenticate"] == "Bearer"
+
+
+def test_a_client_with_no_key_cannot_authenticate(client, gear):
+    """Registered with no secret (a dev mapping, or a rolled-back onboarding):
+    no secret at all, the empty one included, may open it."""
+    assert client.get("/manufacturer/me", headers=key_headers(secret="")).status_code == 401
+    assert client.get("/manufacturer/me", headers=key_headers(secret="None")).status_code == 401
+
+
+def test_a_revoked_key_is_403(client, gear, keyed, brands):
+    """The key still matches; the record says no. Revocation is one put."""
+    record = keyed.get(CLIENT_ID)
+    keyed.put(record.model_copy(update={"active": False}))
+    assert client.get("/manufacturer/me", headers=key_headers()).status_code == 403
+
+
+def test_a_key_is_not_an_admin_token(client, gear, keyed):
+    assert client.get("/submissions/", headers=key_headers()).status_code == 401
+
+
+def test_a_key_is_compared_in_constant_time(monkeypatch, keyed):
+    """Through `hmac.compare_digest`, unknown clients included — so neither the
+    secret nor whether a client id exists leaks through timing."""
+    import hmac as hmac_module
+
+    calls = []
+    real = hmac_module.compare_digest
+    monkeypatch.setattr(auth.hmac, "compare_digest", lambda a, b: calls.append(1) or real(a, b))
+
+    with pytest.raises(HTTPException):
+        auth.verify_api_key(f"never-registered:{SECRET}", keyed)
+    assert auth.verify_api_key(f"{CLIENT_ID}:{SECRET}", keyed) == CLIENT_ID
+    assert len(calls) == 2
 
 
 # --- Discovery --------------------------------------------------------------
@@ -1629,6 +1576,8 @@ def test_the_router_never_writes_to_the_catalogue(session, submissions, brand_cl
     app.dependency_overrides[get_session] = lambda: session
     app.dependency_overrides[get_repository] = lambda: submissions
     app.dependency_overrides[get_client_repository] = lambda: brand_clients
+    app.dependency_overrides[get_people_repository] = lambda: InMemoryPeopleRepository()
+    app.dependency_overrides[get_changelog_repository] = lambda: InMemoryChangeLogRepository()
 
     with TestClient(app) as test_client:
         assert test_client.get("/manufacturer/gear", headers=dev_headers()).status_code == 200

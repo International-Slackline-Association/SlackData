@@ -24,6 +24,7 @@ import os
 from fastapi import APIRouter, FastAPI
 
 from slack_data.api.routers.brand_router import brand_router
+from slack_data.api.routers.catalogue_router import catalogue_router
 from slack_data.api.routers.connector_router import connector_router
 from slack_data.api.routers.fx_router import fx_router
 from slack_data.api.routers.grip_router import grip_router
@@ -31,6 +32,7 @@ from slack_data.api.routers.isa_certification_router import isa_certification_ro
 from slack_data.api.routers.isa_warning_router import isa_warning_router
 from slack_data.api.routers.leashring_router import leashring_router
 from slack_data.api.routers.manufacturer_router import manufacturer_router
+from slack_data.api.routers.people_router import people_router
 from slack_data.api.routers.roller_router import roller_router
 from slack_data.api.routers.starterkit_router import starterkit_router
 from slack_data.api.routers.submissions_router import submissions_router
@@ -50,6 +52,7 @@ SAFE_METHODS = frozenset({"GET", "HEAD"})
 # move it.
 CATALOG_ROUTERS: tuple[APIRouter, ...] = (
     brand_router,
+    catalogue_router,
     connector_router,
     fx_router,
     grip_router,
@@ -77,7 +80,9 @@ CATALOG_ROUTERS: tuple[APIRouter, ...] = (
 # writing only to the submission store. Reads are fine hosted — every GET route
 # in the app reads through the same read-only session — so it is the write side
 # that decides which list it goes in, and its writes are not the catalogue's.
-WRITABLE_ROUTERS: tuple[APIRouter, ...] = (submissions_router, manufacturer_router)
+# `people_router` (sign-in, roles, the public change log) writes only to the
+# people and change log stores, and takes no catalogue session at all.
+WRITABLE_ROUTERS: tuple[APIRouter, ...] = (submissions_router, manufacturer_router, people_router)
 
 # Kept as the union so a caller iterating "every router" still gets every router.
 ROUTERS: tuple[APIRouter, ...] = CATALOG_ROUTERS + WRITABLE_ROUTERS

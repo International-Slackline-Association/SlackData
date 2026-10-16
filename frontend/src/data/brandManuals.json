@@ -1,36 +1,36 @@
 {
   "connectors": {
-    "vanbeest": [
-      "vanbeest-abs-design-assessment-certificate.pdf",
-      "vanbeest-dnv-type-approval-certificate.pdf"
+    "83": [
+      "83_van-beest/abs-design-assessment-certificate.pdf",
+      "83_van-beest/dnv-type-approval-certificate.pdf"
     ]
   },
   "starterkits": {
-    "eqb": [
-      "eqb.pdf"
+    "7": [
+      "7_slackliner-de/german-user-manual.pdf"
     ],
-    "slackde": [
-      "slackde-german-user-manual.pdf"
+    "8": [
+      "8_equilibrium-slacklines-eqb/user-manual.pdf"
     ]
   },
   "webbings": {
-    "aki": [
-      "aki-webbing-manual.pdf"
+    "2": [
+      "2_aki-slacklines/webbing-manual.pdf"
     ],
-    "bc": [
-      "bc-webbing-manual.pdf"
+    "3": [
+      "3_balance-community-slackline-outfitters/webbing-manual.pdf"
     ],
-    "bera": [
-      "bera-webbing-manual.pdf"
+    "11": [
+      "11_slack-inov/webbing-manual.pdf"
     ],
-    "raed": [
-      "raed-webbing-manual.pdf"
+    "13": [
+      "13_raed-slacklines/webbing-manual.pdf"
     ],
-    "slackinov": [
-      "slackinov-webbing-manual.pdf"
+    "16": [
+      "16_spider-slacklines/webbing-manual.pdf"
     ],
-    "spider": [
-      "spider-webbing-manual.pdf"
+    "40": [
+      "40_bera-adventure/webbing-manual.pdf"
     ]
   }
 }
