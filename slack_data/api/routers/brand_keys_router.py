@@ -63,6 +63,9 @@ def _brand_name(person: Person, catalog_id: int) -> str:
     """The brand, if this person may manage its keys; else 403 / 404."""
     if not (person.has(Role.ADMIN) or person.represents(catalog_id)):
         raise HTTPException(status.HTTP_403_FORBIDDEN, "only this brand's manufacturers and admins manage its keys")
+    if person.blocked:
+        # The keys themselves keep working: they are the brand's (P6-D).
+        raise HTTPException(status.HTTP_403_FORBIDDEN, "this account is blocked")
     entry = _brand(catalog_id)
     if entry is None:
         raise HTTPException(status.HTTP_404_NOT_FOUND, f"no brand {catalog_id}")

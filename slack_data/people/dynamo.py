@@ -9,6 +9,7 @@ permission. The role grants no `Scan`, so every list is a query on an index:
 | `email_key-index` | `email_key` (lower-cased email) | "grant admin to this address" |
 | `isa_id-index` | `isa_id` | the name behind a public ISA id |
 | `role_admin-index` | `role_admin`, present only on admins (sparse) | the admin list |
+| `is_blocked-index` | `is_blocked`, present only on blocked accounts (sparse) | the blocked list (phase 6) |
 
 Index names must stay in step with `infra/serverless.yml`;
 `tests/test_dynamo_stores.py` builds the table from the template, so drift
@@ -27,6 +28,7 @@ if TYPE_CHECKING:  # pragma: no cover - typing only
 EMAIL_INDEX = "email_key-index"
 ISA_ID_INDEX = "isa_id-index"
 ADMIN_INDEX = "role_admin-index"
+BLOCKED_INDEX = "is_blocked-index"
 
 
 def to_item(person: Person) -> dict:
@@ -38,11 +40,13 @@ def to_item(person: Person) -> dict:
     if person.has(Role.ADMIN):
         # Sparse: absent on everyone else, so the index holds the admins only.
         item["role_admin"] = Role.ADMIN.value
+    if person.blocked:
+        item["is_blocked"] = "blocked"
     return item
 
 
 def from_item(item: dict) -> Person:
-    data = {key: value for key, value in item.items() if key not in {"email_key", "role_admin"}}
+    data = {key: value for key, value in item.items() if key not in {"email_key", "role_admin", "is_blocked"}}
     return Person(**data)
 
 
@@ -95,3 +99,6 @@ class DynamoPeopleRepository:
         if role is not Role.ADMIN:  # the only role there is; a new one needs its index
             raise ValueError(f"no index for role {role!r}")
         return self._query(ADMIN_INDEX, "role_admin", Role.ADMIN.value)
+
+    def list_blocked(self) -> list[Person]:
+        return self._query(BLOCKED_INDEX, "is_blocked", "blocked")

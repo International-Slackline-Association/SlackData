@@ -159,6 +159,24 @@ def people():
     return InMemoryPeopleRepository()
 
 
+class ToldPeople(InMemoryPeopleRepository):
+    """A people store in which every account has already acknowledged the
+    first-sign-in notice — which the edit routes require since phase 6
+    (P6-B). For tests about editing, not about the notice."""
+
+    TOLD_AT = "2026-10-15T00:00:00.000Z"
+
+    def put(self, person):
+        if person.notice_seen_at is None and self.get(person.sub) is None:
+            person = person.model_copy(update={"notice_seen_at": self.TOLD_AT})
+        return super().put(person)
+
+
+@pytest.fixture
+def told_people():
+    return ToldPeople()
+
+
 @pytest.fixture
 def changelog():
     """An empty change log, isolated per test."""

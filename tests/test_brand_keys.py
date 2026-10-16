@@ -15,7 +15,7 @@ from fastapi import HTTPException
 
 from slack_data.api import auth
 from tests.test_brand_requests import BALANCE, MAKER, catalogue  # noqa: F401 - fixtures
-from tests.test_edits import ADMIN, store  # noqa: F401 - the store fixture
+from tests.test_edits import ADMIN, people, store  # noqa: F401 - fixtures
 
 OTHER = {"Authorization": "Bearer dev-person-token:Other"}
 

@@ -32,7 +32,7 @@ from slack_data.catalogue.store import set_catalogue_repository
 from slack_data.database import get_session
 from slack_data.manufacturers.clients import InMemoryBrandClientRepository
 from slack_data.models.brand_clients import BrandClient, now_iso
-from tests.test_edits import ADMIN, edit
+from tests.test_edits import ADMIN, edit, people  # noqa: F401 - the people fixture
 
 KEY = "brand-client-bc"
 BALANCE = 3

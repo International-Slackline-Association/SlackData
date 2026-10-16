@@ -95,6 +95,17 @@ class Person(BaseModel):
     # cleared, so an admin who is later revoked is not silently re-granted by
     # the allowlist on their next request (§ 4.4).
     bootstrapped_at: str | None = None
+    # Blocked by an admin (D22, phase 6): still reads and signs in, never
+    # saves, uploads or asks for a brand. Who and why are in the log too.
+    blocked_at: str | None = None
+    blocked_reason: str | None = None
+    blocked_by: str | None = None
+    # The rate cap (D53, P6-C): when each counted save of the last 24 hours
+    # was made, in Unix seconds, oldest first — at most `DAILY_CAP` of them.
+    # `saves_rev` goes up by one with every counted save; a save is written
+    # only if it is still the one read, so parallel saves cannot slip past.
+    saves: list[int] = Field(default_factory=list)
+    saves_rev: int = 0
     anonymised: bool = False
     created_at: str = Field(default_factory=now_iso)
     updated_at: str = Field(default_factory=now_iso)
@@ -112,6 +123,10 @@ class Person(BaseModel):
 
     def has(self, role: Role) -> bool:
         return role in self.roles
+
+    @property
+    def blocked(self) -> bool:
+        return self.blocked_at is not None
 
     def represents(self, catalog_id: int | None) -> bool:
         return catalog_id is not None and catalog_id in self.brands
@@ -151,6 +166,9 @@ class Me(BaseModel):
     name_set: bool = False
     # True until they have used their one lifetime change of it.
     name_change_available: bool = True
+    # Set while an admin has blocked this account (D22): the reason they gave.
+    blocked_reason: str | None = None
+    blocked_at: str | None = None
     dev: bool = False
 
 

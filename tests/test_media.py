@@ -50,6 +50,12 @@ def _seed_documents():
 
 
 @pytest.fixture
+def people(told_people):
+    """Accounts that have acknowledged the sign-in notice (P6-B)."""
+    return told_people
+
+
+@pytest.fixture
 def store(client, monkeypatch):
     repository = InMemoryCatalogueRepository()
     repository.put_many(_seed_documents())

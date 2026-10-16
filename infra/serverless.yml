@@ -381,6 +381,8 @@ resources:
             AttributeType: S
           - AttributeName: role_admin
             AttributeType: S
+          - AttributeName: is_blocked
+            AttributeType: S
         KeySchema:
           - AttributeName: sub
             KeyType: HASH
@@ -401,6 +403,13 @@ resources:
           - IndexName: role_admin-index
             KeySchema:
               - AttributeName: role_admin
+                KeyType: HASH
+            Projection:
+              ProjectionType: ALL
+          # Sparse: only blocked accounts carry `is_blocked` (phase 6, D22).
+          - IndexName: is_blocked-index
+            KeySchema:
+              - AttributeName: is_blocked
                 KeyType: HASH
             Projection:
               ProjectionType: ALL

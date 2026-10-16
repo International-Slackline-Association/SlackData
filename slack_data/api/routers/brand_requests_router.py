@@ -133,6 +133,8 @@ def _link_record(admin: Person, person: Person, action: Action, before, after, w
 
 @brand_requests_router.post("/me/brand-requests", response_model=BrandRequestPublic, status_code=201)
 def request_brand(body: NewRequest, person: CurrentPerson, requests: BrandRequestRepositoryDep):
+    if person.blocked:
+        raise HTTPException(status.HTTP_403_FORBIDDEN, "this account is blocked")
     entry = _brand(body.catalog_id)
     if entry is None:
         raise HTTPException(status.HTTP_404_NOT_FOUND, f"no brand {body.catalog_id}")

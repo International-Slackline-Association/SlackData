@@ -832,6 +832,7 @@ def test_an_admin_edit_is_served_on_the_next_request(store_mode):
     shows it; a second edit from the same stale rev is refused with the
     current entry; the public log has it."""
     client, _, log_path = store_mode
+    client.post("/me/notice", headers=ADMIN, json={"name": "Live Admin"})  # P6-B
     current = client.get("/edit/webbings/2", headers=ADMIN).json()
     edited = client.patch(
         "/edit/webbings/2", headers=ADMIN,
