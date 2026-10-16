@@ -1,5 +1,10 @@
 # SUBMISSIONS_PLAN.md — Phase 2: submit-a-change + admin triage
 
+> **Superseded.** The public box this plan built was switched off in live editing phase 6
+> ([LIVE_EDITING_PHASE_6.md](LIVE_EDITING_PHASE_6.md), D56): anyone with an ISA account edits the
+> catalogue live instead, and triage only works through what the box stored before. Kept as the
+> record of how and why the box was built.
+
 Implementation plan for the next agent. Phase 1 (public read-only catalogue) is **live** at
 `https://slackdata.org` — see [infra/README.md](infra/README.md) § Deploying to live for how to
 ship changes.

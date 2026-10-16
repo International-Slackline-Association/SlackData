@@ -6,7 +6,7 @@ is switched off.
 
 **Done when:** anyone with an ISA account edits, and no hand-applied JSON patch remains.
 
-**Status (2026-10-15): decided, being built.** Every choice in § 4 was decided on 2026-10-15: the
+**Status (2026-10-15): built (6a–6f)**, on `live-editing/6-open-editing`, stacked on phase 5. See § 6. Every choice in § 4 was decided on 2026-10-15: the
 recommended option, (a), on each — except **P6-C, decided (b)**: sliding windows. Built so far: the site-wide **Sign in** button in the top nav (fc989e70), which needed
 no decision.
 
@@ -147,3 +147,30 @@ Approved rows already waiting (manufacturer photo links, P5-H) are unchanged: up
 | 6f | Docs (CLAUDE.md's Submissions section, SAFETY_AND_ACCURACY.md, SUBMISSIONS_PLAN.md marked superseded), Cypress (`open_editing.cy.ts` in `shards.json`), verify-deploy |
 
 Testing as before: backend suite with dynamodb-local, the Cypress specs touched, staging deploy.
+
+---
+
+## 6. As built (2026-10-15)
+
+| Step | Where |
+|---|---|
+| 6a–c | `catalogue/rights.py` (everyone edits unless blocked; `manages` for revert and the cap); `people/ratecap.py` (the sliding windows, `CapExceeded` → 429 with `retry_at`); `changelog/writer.py` (the count joins the edit's transaction as a conditional `UpdateItem` on the people table, `CapRace` → 503); `Person.blocked_*`, `saves`, `saves_rev`; the sparse `is_blocked-index`; `POST /admin/people/{isa_id}/block|unblock`, `GET /admin/people/blocked`; `person.block|unblock` in the log; `require_editor` refuses a blocked account and one that has not acknowledged the notice |
+| 6d | `AuthContext` (`canEdit`, `canManageBrand`, `blockedReason`); Edit for everyone and an anonymous Edit that signs in and reopens the editor (`?edit=1`); the cap message (`utils/rateCap.ts`); the blocked banner; Block / Unblock on `/people/<isa id>` and Blocked accounts on /admin (`components/account/Blocking.tsx`) |
+| 6e | The public `POST /submissions`, Turnstile, honeypot, throttle and dialog removed; triage rows link to the item (editor open) and close with Mark handled / Reject — no Approve, no JSON patch |
+| 6f | Tests: `tests/test_open_editing.py`, Dynamo tests for the count and the blocked index, `cypress/e2e/open_editing.cy.ts` (in `shards.json` in place of `submissions`), `admin_triage.cy.ts` rewritten around a manufacturer's photo to-do. Docs: CLAUDE.md, SAFETY_AND_ACCURACY.md, DESIGN.md, SUBMISSIONS_PLAN.md (superseded), infra/README.md, DEPLOY.md |
+
+**Choices made while building, inside the decisions:**
+
+- **Which saves count is read off the log records**: a save recorded as `editor` counts; `admin`
+  and `manufacturer for <brand>` do not. That is exactly D53's exemption, by the same rule that
+  labels the change, and it covers the machine API without a special case.
+- **A media save is checked against the cap before the upload is published**, so a refused save
+  leaves no orphan in the media bucket.
+- **The notice is required by `require_editor`**, so uploads and the edit form's reads need it too.
+- **A blocked account cannot manage its brand's keys**, though the keys keep working (P6-D).
+- **Not built:** the D74 incremental rebuild. To measure on staging under real edits before prod.
+
+**Prod rollout:** the deploy that ships this removes the `POST /submissions` route and its throttle
+in one stack update (CloudFormation updates the stage, then deletes the route), adds the people
+table's `is_blocked-index` (one GSI, online), and stops reading `TURNSTILE_SECRET`. Prod's one
+pending suggestion stays in triage.

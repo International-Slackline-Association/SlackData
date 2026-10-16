@@ -199,7 +199,6 @@ Root *.json seed files
 | `slack_data/catalogue/edits.py`, `api/routers/edit_router.py` | Live editing (phase 3): `/edit/*`, admins only — edit, create, merge, revert, brands (no hide: D81). Each change is written with its log records in one transaction (`changelog/writer.py`), refused with the current entry on a stale `rev`; a rename re-points ISA matches. Needs store mode. Every edit bumps `_meta/edits`, and `importer --apply` then refuses to overwrite the store. See LIVE_EDITING_PHASE_3.md |
 | `slack_data/models/brand_clients.py` | `BrandClient` / `BrandPermission` / `ManufacturerPrincipal` — the account linkage `Brand` never had |
 | `slack_data/manufacturers/` | The manufacturer API's stores: `clients.py` (Protocol + SQLite + in-memory), `dynamo.py`, `store.py`, `matching.py` (gear identity), `register.py` (onboarding CLI), `onboard.py` (the CLI's other half — dossier, key minting, ledger, end-to-end proof) |
-| `slack_data/utilities/turnstile.py` | Captcha verification — **fails closed**, unlike `fx.py` |
 | `slack_data/media/` | Photos, manuals and logos as data (live editing phase 4, LIVE_EDITING_PHASE_4.md): `kinds.py` (types decided from the bytes, limits), `store.py` (Protocol + filesystem store + keys), `s3.py` (uploads + media buckets), `edits.py` (the whole-list media edit), `manifest.py` (`GET /media/manifest`), `migrate.py` (the one-off move from `frontend/public/`) |
 | `slack_data/catalogue/rights.py` | **Who may change what** (phase 5): admins anything; a person with brand links (`Person.brands`) their own brands' products and entries, never a product's `brand` / `gear_sellers`, merges or new brands. Checked inside every operation in `catalogue/edits.py` and `media/edits.py`, so routes, revert and the machine API share one rule |
 | `slack_data/brand_requests/`, `api/routers/brand_requests_router.py` | "I represent this brand" (D5): requests in their own store (`BRAND_REQUESTS_TABLE` / `BRAND_REQUESTS_DB_PATH`), the admin queue, approve (logged `brand.link`), unlink (`brand.unlink`) |
@@ -415,8 +414,8 @@ is that second statement — a list of seller brand NAMES, stored on the product
   brand shows on the directory page with zero items, because inventory counts
   group gear rows by maker and know nothing about sellers.
 - **Nobody may edit it through the API.** `gear_sellers` is in `_EXCLUDED` in
-  `submissions/fields.py`, so it is absent from both the public suggestion box
-  and the manufacturer API: who resells a product is ours to record, a maker
+  `submissions/fields.py`, so it is absent from the manufacturer API (and was from
+  the retired public suggestion box), and only admins change it on the site: who resells a product is ours to record, a maker
   does not get to declare (or delete) a competitor's shelf, and `changes` is a
   dict of strings that could not carry a list anyway.
 
@@ -495,16 +494,18 @@ routes production serves. `tests/test_read_only.py` is the regression guard — 
 
 ### Submissions (Phase 2) — a second, writable store
 
-The "suggest a correction" box. **A submission is a note to the admin, not an edit** — approving one
-records the outcome and produces a JSON patch the admin applies to the root `*.json` by hand,
-followed by a redeploy. The catalogue stays read-only. See [SUBMISSIONS_PLAN.md](SUBMISSIONS_PLAN.md)
-and DESIGN.md § Suggest a Correction.
+**The public "suggest a correction" box was retired in live editing phase 6** (D56,
+[LIVE_EDITING_PHASE_6.md](LIVE_EDITING_PHASE_6.md)): anyone with an ISA account edits instead, so
+`POST /submissions`, its Turnstile captcha, honeypot and throttle are gone. What remains is the
+store and the admin triage (`GET`/`PATCH /submissions`): suggestions sent before the switch-off,
+until they are handled or expire, and the manufacturer API's photo-link to-dos. **A submission is a
+note to the admin, not an edit** — the admin opens the item, edits it live, then marks the row
+handled (`applied`). No JSON patch is applied by hand any more. See
+[SUBMISSIONS_PLAN.md](SUBMISSIONS_PLAN.md) for the history.
 
 The important structural point: `register_routers` splits its routers in two. `CATALOG_ROUTERS` lose
-their writes under `READ_ONLY`; `WRITABLE_ROUTERS` (just `submissions_router`) mount in full in every
-mode, because they write to a **different database** — DynamoDB hosted, a separate SQLite file
-locally. `POST /submissions/` therefore works on the live site while the catalogue cannot be written
-at all.
+their writes under `READ_ONLY`; `WRITABLE_ROUTERS` mount in full in every mode, because they write to
+a **different database** — DynamoDB hosted, a separate SQLite file locally.
 
 - **The submissions router takes no `SessionDep`.** Reaching for the catalogue session would pass
   every local test (where SQLite is writable) and fail on the live site. `tests/test_submissions.py`
@@ -520,8 +521,7 @@ at all.
   form offers only names that list contains.
 - **Append-only.** The repository Protocol has no `delete`, and the hosted IAM role is not granted
   `dynamodb:DeleteItem`. Expiry is DynamoDB's TTL on `expires_at`.
-- **No IP or user-agent is stored** — an anonymous suggestion box that logs IPs is not one. Abuse is
-  handled by Turnstile (fail-closed), a honeypot, and API Gateway route throttling.
+- **No IP or user-agent was stored** — an anonymous suggestion box that logs IPs is not one.
 
 ### The manufacturer API (Phase 4) — brands updating their own gear
 
