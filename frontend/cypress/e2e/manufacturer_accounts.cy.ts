@@ -1,9 +1,10 @@
 // Manufacturer accounts — live editing phase 5 (LIVE_EDITING_PHASE_5.md).
 //
 // End to end against the real API in store mode: a person asks to represent a
-// brand, an admin approves, and the person then edits that brand's gear —
-// and only that brand's — and manages its API keys. Every run makes its own
-// brand and its own person, so nothing another spec reads moves.
+// brand, an admin approves, and the person then edits that brand's gear as its
+// manufacturer, reverts only there (everyone edits since phase 6), and manages
+// its API keys. Every run makes its own brand and its own person, so nothing
+// another spec reads moves.
 
 export {}
 
@@ -51,7 +52,6 @@ describe('Manufacturer accounts', () => {
 
   it('asks to represent a brand; an admin approves', () => {
     cy.visit(`/manufacturers/${catalogId}`, as(PERSON))
-    cy.getByData('edit-brand').should('not.exist')
     cy.getByData('represent-brand').click()
     cy.getByData('represent-note').type('Head of product')
     cy.getByData('dialog-confirm').click()
@@ -78,12 +78,21 @@ describe('Manufacturer accounts', () => {
     cy.getByData('change-row').first().should('contain', `manufacturer for ${BRAND}`)
   })
 
-  it("sees no editing on another brand's product", () => {
+  it("edits another brand's product as anyone does, and cannot revert there", () => {
     cy.request(`${api()}/grip/?limit=5`).then(({ body }) => {
       const other = (body as { id: number; brand_name: string }[]).find(g => g.brand_name !== BRAND)!
+      cy.request({ url: `${api()}/edit/grips/${other.id}`, headers: AUTH }).then(({ body: stored }) =>
+        cy.request({
+          method: 'PATCH',
+          url: `${api()}/edit/grips/${other.id}`,
+          headers: AUTH,
+          body: { rev: stored.rev, changes: { notes: `An admin's note ${run}` } },
+        }),
+      )
       cy.visit(`/grips/${other.id}`, as(PERSON))
-      cy.getByData('item-history').should('be.visible')
-      cy.getByData('item-edit').should('not.exist')
+      cy.getByData('item-edit').should('be.visible')
+      cy.getByData('change-row').should('have.length.at.least', 1)
+      cy.getByData('change-revert').should('not.exist')
     })
   })
 

@@ -1,11 +1,13 @@
 """
-Submissions — the "suggest a correction" store.
+Submissions — the triage store.
 
 **A submission is a note to the admin, not an edit.** Nothing here touches the
-catalogue. The catalogue remains a read-only SQLite file baked into the Lambda
-image and sourced from the root `*.json` in git; approving a submission marks
-the record approved and hands the admin a JSON patch to apply by hand, followed
-by a redeploy. See SUBMISSIONS_PLAN.md § "What Phase 2 is explicitly NOT".
+catalogue. Since phase 6 (LIVE_EDITING_PHASE_6.md, D56) nobody can send one
+any more — anyone with an ISA account edits instead. What the store still
+holds: the suggestions sent before the public box was switched off, until an
+admin deals with them (by editing the item, then marking them handled) or they
+expire; and the manufacturer API's to-do rows — photo links someone has to
+upload by hand (P5-H).
 
 These are plain pydantic models rather than SQLModel tables on purpose. The
 records live in DynamoDB (hosted) or a separate SQLite file (local), never in
@@ -18,18 +20,13 @@ item in camelCase; consistency with the rest of the API won.
 """
 
 import os
-import re
 from datetime import datetime, timedelta, timezone
 from enum import Enum
 
-from pydantic import BaseModel, Field, field_validator, model_validator
-
-from slack_data.submissions.fields import GEAR_TYPES, unknown_fields
+from pydantic import BaseModel, Field, field_validator
 
 # --- Caps -------------------------------------------------------------------
-# A submission is a correction, not a bulk upload. These bound what one
-# unauthenticated POST can put in the store, and are asserted in the tests so
-# loosening one is a deliberate act.
+# What one manufacturer update can put in a record (manufacturer_updates.py).
 MAX_CHANGES = 20
 MAX_VALUE_LENGTH = 200
 MAX_NOTE_LENGTH = 2000
@@ -49,27 +46,12 @@ MAX_EMAIL_LENGTH = 254
 # `expiry_for` the only reader of the variable makes the setting mean one thing.
 RETENTION_DAYS = int(os.getenv("SUBMISSION_RETENTION_DAYS", "365"))
 
-# Deliberately loose: this rejects the obviously-not-an-address, and nothing
-# more. Tight email regexes reject valid addresses, and the field is optional
-# contact info rather than a login — being wrong about it costs a reply, not
-# access. A stricter check would also mean an `email-validator` dependency that
-# Dockerfile.lambda would have to install by hand.
-_EMAIL = re.compile(r"^[^@\s]+@[^@\s]+\.[^@\s]+$")
-
-
 class SubmissionKind(str, Enum):
     CORRECTION = "correction"      # an existing item is wrong
     NEW_ITEM = "new_item"          # gear the catalogue doesn't have
     MANUFACTURER = "manufacturer"  # the brand that makes it, via the authenticated API
 
 
-# Kinds a member of the public may claim for themselves. `MANUFACTURER` is
-# absent deliberately: it is an authenticated brand's identity, granted only
-# after a token check in `/manufacturer/gear`, and triage shows it as better
-# evidence than an anonymous report. If the public POST accepted it, anyone
-# could paint their submission with that authority — see the validator on
-# `SubmissionCreate.kind` and the test named for it.
-PUBLIC_KINDS = frozenset({SubmissionKind.CORRECTION, SubmissionKind.NEW_ITEM})
 
 
 class SubmissionStatus(str, Enum):
@@ -91,138 +73,6 @@ class SubmissionStatus(str, Enum):
 
 # Work is finished on these; an APPROVED record still has a job attached to it.
 TERMINAL_STATUSES = frozenset({SubmissionStatus.APPLIED, SubmissionStatus.REJECTED})
-
-
-class SubmissionCreate(BaseModel):
-    """The public POST body."""
-
-    kind: SubmissionKind = SubmissionKind.CORRECTION
-    gear_type: str
-    gear_id: int | None = None
-    gear_name: str | None = None
-    # Recorded because a submission outlives the catalogue it was made against.
-    # `gear_id` is stable now — every root *.json carries an explicit `id` and
-    # the loaders assign it (see load_data/_seed_io.require_seed_id) — but that
-    # only guarantees the id does not MOVE; a product can still be withdrawn,
-    # merged, or re-adjudicated between a submission arriving and an admin
-    # reading it. `"<brand> <name>"` is unique across the whole catalogue where
-    # bare `name` is not (webbings and weblocks both contain duplicate names),
-    # so the pair stays the durable way to re-resolve what a submission was
-    # about, and the way to notice when the id and the name disagree.
-    #
-    # This is the same guard `load_isa_warnings.py` uses: it records
-    # `"<brand> <name>"` beside each id and verifies the pair before stamping,
-    # so seed-order drift is reported instead of silently re-pointing a recall.
-    gear_brand: str | None = None
-    # field name -> proposed value, as strings. Values are NOT coerced to the
-    # model's types: a submitter writing "about 44" is information the admin
-    # wants to see, and silently dropping it as an invalid float would be worse
-    # than showing it. The field *names* are validated; the values are prose.
-    changes: dict[str, str] = Field(default_factory=dict)
-    note: str | None = None
-    source_url: str | None = None
-    submitter_email: str | None = None
-
-    # --- Anti-abuse, stripped before storage --------------------------------
-    # Hidden in the form and never filled by a human. See the router: a filled
-    # honeypot returns 200 with an id, so the bot learns nothing.
-    website: str | None = None
-    # Cloudflare Turnstile token, verified server-side.
-    captcha_token: str | None = None
-
-    @field_validator("kind")
-    @classmethod
-    def _public_kind_only(cls, value: SubmissionKind) -> SubmissionKind:
-        """The public box cannot mint a manufacturer submission. See PUBLIC_KINDS."""
-        if value not in PUBLIC_KINDS:
-            raise ValueError(f"{value.value} submissions come from the manufacturer API")
-        return value
-
-    @field_validator("gear_type")
-    @classmethod
-    def _known_gear_type(cls, value: str) -> str:
-        if value not in GEAR_TYPES:
-            raise ValueError(f"unknown gear type {value!r}")
-        return value
-
-    @field_validator(
-        "gear_name", "gear_brand", "note", "source_url", "submitter_email", mode="before"
-    )
-    @classmethod
-    def _blank_is_absent(cls, value):
-        """An untouched optional input posts "" — treat that as omitted."""
-        if isinstance(value, str) and not value.strip():
-            return None
-        return value.strip() if isinstance(value, str) else value
-
-    @field_validator("gear_name", "gear_brand")
-    @classmethod
-    def _name_length(cls, value: str | None) -> str | None:
-        if value is not None and len(value) > MAX_NAME_LENGTH:
-            raise ValueError(f"names must be at most {MAX_NAME_LENGTH} characters")
-        return value
-
-    @field_validator("note")
-    @classmethod
-    def _note_length(cls, value: str | None) -> str | None:
-        if value is not None and len(value) > MAX_NOTE_LENGTH:
-            raise ValueError(f"note must be at most {MAX_NOTE_LENGTH} characters")
-        return value
-
-    @field_validator("source_url")
-    @classmethod
-    def _url_shape(cls, value: str | None) -> str | None:
-        if value is None:
-            return None
-        if len(value) > MAX_URL_LENGTH:
-            raise ValueError(f"source_url must be at most {MAX_URL_LENGTH} characters")
-        if not value.startswith(("http://", "https://")):
-            raise ValueError("source_url must be an http(s) URL")
-        return value
-
-    @field_validator("submitter_email")
-    @classmethod
-    def _email_shape(cls, value: str | None) -> str | None:
-        if value is None:
-            return None
-        if len(value) > MAX_EMAIL_LENGTH or not _EMAIL.match(value):
-            raise ValueError("submitter_email is not a valid email address")
-        return value
-
-    @model_validator(mode="after")
-    def _check_changes_and_target(self) -> "SubmissionCreate":
-        if len(self.changes) > MAX_CHANGES:
-            raise ValueError(f"at most {MAX_CHANGES} changed fields per submission")
-
-        bad = unknown_fields(self.gear_type, self.changes)
-        if bad:
-            raise ValueError(
-                f"{self.gear_type} has no field(s): {', '.join(bad)}"
-            )
-
-        for name, value in self.changes.items():
-            if not isinstance(value, str) or not value.strip():
-                raise ValueError(f"{name} has no proposed value")
-            if len(value) > MAX_VALUE_LENGTH:
-                raise ValueError(
-                    f"{name}: proposed value must be at most {MAX_VALUE_LENGTH} characters"
-                )
-
-        if self.kind is SubmissionKind.CORRECTION:
-            if self.gear_id is None or self.gear_id <= 0:
-                raise ValueError("a correction must name the item it corrects")
-            if not self.changes and not self.note:
-                # Nothing to review. One or the other is the whole submission.
-                raise ValueError("a correction needs a changed field or a note")
-        else:
-            # A new item has no id yet — accepting one would produce a record
-            # that looks like a correction to whatever row holds that id.
-            if self.gear_id is not None:
-                raise ValueError("a new item cannot reference an existing id")
-            if not self.gear_name:
-                raise ValueError("a new item needs a product name")
-
-        return self
 
 
 class SubmissionReview(BaseModel):
@@ -262,14 +112,13 @@ class Submission(BaseModel):
     # Denormalized so the triage list renders without touching the catalogue —
     # and so a record still reads correctly after the item is renamed.
     gear_name: str | None = None
-    # The other half of the durable identity. See SubmissionCreate.gear_brand:
-    # ids drift with seed order, `"<brand> <name>"` does not.
+    # The other half of the durable identity: `"<brand> <name>"` is unique
+    # where a bare name is not, so the pair re-resolves what a record was about.
     gear_brand: str | None = None
     changes: dict[str, str] = Field(default_factory=dict)
     note: str | None = None
     source_url: str | None = None
-    # Links to photos, from the manufacturer API only — `SubmissionCreate` has no
-    # such field, so the public box can never set one. Recorded, not fetched:
+    # Links to photos, from the manufacturer API only. Recorded, not fetched:
     # an admin adds them by hand on the item's page. Empty,
     # not null, when there are none, and for every record stored before the
     # field existed (both stores map an absent value to []).
@@ -308,18 +157,6 @@ class Submission(BaseModel):
     # swept away with the work still outstanding. Pending records keep their
     # expiry so abandoned spam ages out on its own.
     expires_at: int | None = None
-
-
-class SubmissionReceipt(BaseModel):
-    """What a successful POST returns.
-
-    Deliberately not the stored record: the submitter gets an id to quote and
-    nothing else. Echoing the submission back would make the endpoint a way to
-    read whatever the honeypot path pretended to store.
-    """
-
-    submission_id: str
-    status: SubmissionStatus = SubmissionStatus.PENDING
 
 
 def now_iso() -> str:

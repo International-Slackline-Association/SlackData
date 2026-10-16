@@ -9,13 +9,14 @@ What must hold:
 - **Approving links the person** — and the link is in the public log, with
   the brand named; the request itself is not.
 - **One pending request per brand**, none for a brand already represented.
-- **Unlinking takes the rights away** on the next request, with a reason.
+- **Unlinking takes the brand's rights away** on the next request, with a
+  reason: their edits are then an ordinary editor's.
 """
 
 import pytest
 
 from slack_data.models.brand_requests import email_domain_matches
-from tests.test_edits import ADMIN, store, stored  # noqa: F401 - the store fixture
+from tests.test_edits import ADMIN, people, store, stored  # noqa: F401 - fixtures
 
 MAKER = {"Authorization": "Bearer dev-person-token:Maker"}
 BALANCE = 3
@@ -132,7 +133,13 @@ def test_unlinking_takes_the_rights_away(client, catalogue):
     assert client.post(f"/admin/people/{me['isa_id']}/brands/{BALANCE}/unlink", headers=ADMIN, json={"why": ""}).status_code == 422
     response = client.post(f"/admin/people/{me['isa_id']}/brands/{BALANCE}/unlink", headers=ADMIN, json={"why": "Left the company"})
     assert response.status_code == 204
+    # Still an editor, as everyone is (phase 6) — but no longer the brand's:
+    # the change is an editor's, and reverting is refused.
     rev = stored(client, "webbings", item)["rev"]
-    assert client.patch(f"/edit/webbings/{item}", headers=MAKER, json={"rev": rev, "changes": {"notes": "b"}}).status_code == 403
+    edited = client.patch(f"/edit/webbings/{item}", headers=MAKER, json={"rev": rev, "changes": {"notes": "b"}})
+    assert edited.status_code == 200
+    history = client.get("/changes", params={"target_type": "item", "target_id": f"webbings#{item}"}).json()
+    assert [r["actor_role"] for r in history] == ["editor", "manufacturer for Balance Community"]
+    assert client.post(f"/edit/revert/{edited.json()['records'][0]}", headers=MAKER, json={}).status_code == 403
     actions = [r["action"] for r in client.get("/changes", params={"target_type": "person", "target_id": me["isa_id"]}).json()]
     assert actions == ["brand.unlink", "brand.link"]

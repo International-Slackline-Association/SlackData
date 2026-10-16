@@ -1,7 +1,6 @@
-// The signed-in person, in the top nav. Renders nothing for anonymous visitors:
-// in live editing's phase 1 only admins have anything to do once signed in, and
-// they sign in from /admin. A "Sign in" button for everyone arrives with editing
-// (LIVE_EDITING_PLAN.md § 13).
+// The signed-in person, in the top nav — or, for an anonymous visitor, the
+// "Sign in" button. Pressing it is what loads the sign-in library (D41), and
+// the person comes back to the page they were on (auth/config.ts).
 
 import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
@@ -33,7 +32,21 @@ export default function AccountMenu() {
     }
   }, [open])
 
-  if (!auth.me) return null
+  if (!auth.me) {
+    // Signed in, but `/me` not answered yet: nothing, rather than a flash of
+    // "Sign in". Unconfigured: there is nothing to sign in to.
+    if (auth.isAuthenticated || auth.isLoading || auth.mode === 'unconfigured') return null
+    return (
+      <button
+        type="button"
+        data-cy="sign-in"
+        onClick={() => auth.signIn()}
+        className="shrink-0 rounded-full border border-teal-700 px-3 py-1 text-sm font-medium text-teal-700 hover:bg-teal-50"
+      >
+        Sign in
+      </button>
+    )
+  }
 
   const saveName = async () => {
     const name = draft?.trim()
@@ -151,6 +164,24 @@ export default function AccountMenu() {
               </div>
             </form>
           )}
+          <Link
+            to={`/people/${auth.me.isa_id}`}
+            role="menuitem"
+            data-cy="account-changes-link"
+            onClick={() => setOpen(false)}
+            className="block rounded-lg px-2 py-1.5 text-sm text-gray-700 hover:bg-gray-100"
+          >
+            Your changes
+          </Link>
+          <Link
+            to="/changes"
+            role="menuitem"
+            data-cy="account-recent-changes-link"
+            onClick={() => setOpen(false)}
+            className="block rounded-lg px-2 py-1.5 text-sm text-gray-700 hover:bg-gray-100"
+          >
+            Recent changes
+          </Link>
           <Link
             to="/account/brands"
             role="menuitem"

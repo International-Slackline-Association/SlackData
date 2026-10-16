@@ -17,7 +17,7 @@ const KINDS: { value: string; label: string; match: (r: ChangeRecordPublic) => b
   { value: 'create', label: 'New items and brands', match: r => r.action === 'item.create' || r.action === 'brand.create' },
   { value: 'merge', label: 'Merges', match: r => r.action === 'item.merge' },
   { value: 'revert', label: 'Reverts', match: r => r.action === 'item.revert' },
-  { value: 'roles', label: 'Roles and brand links', match: r => r.target_type === 'person' },
+  { value: 'roles', label: 'Roles, brand links and blocks', match: r => r.target_type === 'person' },
   { value: 'keys', label: 'API keys', match: r => r.action.startsWith('key.') },
 ]
 

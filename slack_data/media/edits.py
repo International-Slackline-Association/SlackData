@@ -172,15 +172,18 @@ def set_item_media(
     photos: list[PhotoRef] | None = None,
     manuals: list[ManualRef] | None = None,
     why: str | None = None,
+    cap=None,
 ) -> edits.Outcome:
     """Make the item's photos and/or manuals exactly these lists (None: leave
-    that list as it is)."""
+    that list as it is). One save for the rate cap, however many files."""
     if photos is None and manuals is None:
         raise edits.Invalid("nothing to change")
     documents = store.load()
     document = edits._item(documents, collection, item_id)
     # Before anything is published (edit_item checks again, with the rest).
-    edits.check_gear(actor, documents, document.data.get("brand"))
+    brand = edits.check_gear(actor, documents, document.data.get("brand"))
+    if cap is not None:
+        cap.precheck(actor.role_label(brand))
     if document.data.get(MERGED_KEY) is not None:
         raise edits.Refused(f"{edits.api_type(collection)} {item_id} was merged into {document.data[MERGED_KEY]}")
     changes: dict[str, Any] = {}
@@ -199,7 +202,7 @@ def set_item_media(
         )
         publishes += more
     _publish(media, publishes)
-    return edits.edit_item(store, log, actor, collection, item_id, rev, changes, why, media=True)
+    return edits.edit_item(store, log, actor, collection, item_id, rev, changes, why, cap, media=True)
 
 
 # --- Brands ---------------------------------------------------------------------
@@ -215,6 +218,7 @@ def set_brand_media(
     logo: LogoChange | None = None,
     manuals: dict[str, list[ManualRef]] | None = None,
     why: str | None = None,
+    cap=None,
 ) -> edits.Outcome:
     """A brand's logo, and its range-wide manuals per gear type ("Applies to
     all Gibbon webbings"). Only the gear types named in `manuals` change."""
@@ -226,6 +230,8 @@ def set_brand_media(
     documents = store.load()
     document: Document = edits._brand_document(documents, catalog_id)
     brand = edits.check_brand(actor, documents, catalog_id)
+    if cap is not None:
+        cap.precheck(actor.role_label(brand))
     data = dict(document.data)
     publishes: list = []
     if logo is not None:
@@ -262,5 +268,5 @@ def set_brand_media(
         actor, TargetType.BRAND, str(catalog_id), Action.BRAND_EDIT, brand, channel=Channel.WEB, changes=diff, why=why
     )
     put = Put(document.model_copy(update={"data": data, "rev": document.rev + 1}), rev)
-    commit_catalogue_change(store, log, [put], [], [record])
+    commit_catalogue_change(store, log, [put], [], [record], cap)
     return edits.Outcome("manufacturers", document.key, data, document.rev + 1, [record])

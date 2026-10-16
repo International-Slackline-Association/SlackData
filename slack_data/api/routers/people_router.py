@@ -8,6 +8,8 @@ People and the change log, over HTTP (LIVE_EDITING_PLAN.md phase 1).
 | `PATCH /me/name` | anyone signed in | change the name shown with your changes — once, for life |
 | `GET /admin/admins` | admins | the admin list |
 | `POST /admin/roles` | admins | grant or revoke admin — a logged change |
+| `GET /admin/people/blocked` | admins | the accounts blocked from editing |
+| `POST /admin/people/{isa_id}/block`, `.../unblock` | admins | block or unblock an account (D22) — logged, a reason required |
 | `GET /changes` | **anyone, no sign-in** (D3, D33) | the change log, newest first; or one thing's History (`target_type` + `target_id`), one person's contributions (`actor`), the safety changes (`flag=safety`) |
 
 Like `submissions_router`, this takes **no catalogue session**: it writes only
@@ -16,8 +18,13 @@ catalogue is read-only. It is in `WRITABLE_ROUTERS` for that reason.
 
 **The notice.** The ISA agreed to names being public on condition that people
 are told when they first sign in (LIVE_EDITING_PHASE_0.md § 1). The frontend
-shows it until `notice_seen_at` is set. It informs; it is not a gate — the
-API does not refuse a person who has not acknowledged it.
+shows it until `notice_seen_at` is set. It informs; since phase 6 the edit
+routes refuse a save until it is acknowledged (P6-B), so nobody's name is
+published with a change before they were told it would be.
+
+**Blocking** (D22). A blocked account still reads and signs in; it cannot save,
+upload or ask to represent a brand. The block and its reason are in the public
+log, like a role change. An admin is not blocked — their role is revoked first.
 
 **The name.** People type in the name shown with their changes, because the ISA
 token gives SlackData none (`models/people.py`). Until they do, they show as
@@ -30,7 +37,7 @@ It is not itself a logged change.
 import os
 from typing import Annotated, Literal
 
-from fastapi import APIRouter, Depends, HTTPException, Query, Response, status
+from fastapi import APIRouter, Depends, HTTPException, Path, Query, Response, status
 from pydantic import BaseModel, Field, field_validator, model_validator
 
 from slack_data.api.auth import is_dev_person, require_admin, require_person
@@ -90,6 +97,8 @@ def _me(person: Person) -> Me:
         notice_seen_at=person.notice_seen_at,
         name_set=bool(person.display_name),
         name_change_available=person.name_changed_at is None,
+        blocked_reason=person.blocked_reason,
+        blocked_at=person.blocked_at,
         dev=is_dev_person(person),
     )
 
@@ -274,6 +283,92 @@ def change_role(
     return AdminSummary(isa_id=updated.isa_id, name=updated.full_name, email=updated.email)
 
 
+# --- Blocking (D22) ---------------------------------------------------------
+
+
+class Block(BaseModel):
+    why: str = Field(max_length=MAX_WHY_LENGTH)
+
+    @field_validator("why")
+    @classmethod
+    def _required(cls, value: str) -> str:
+        value = value.strip()
+        if not value:
+            raise ValueError("give a reason: it is shown in the public log")
+        return value
+
+
+class BlockedSummary(BaseModel):
+    isa_id: str
+    name: str
+    blocked_at: str | None
+    blocked_reason: str | None
+    blocked_by: str | None
+
+
+def _blocked_summary(person: Person) -> BlockedSummary:
+    return BlockedSummary(
+        isa_id=person.isa_id,
+        name=person.full_name,
+        blocked_at=person.blocked_at,
+        blocked_reason=person.blocked_reason,
+        blocked_by=person.blocked_by,
+    )
+
+
+@people_router.get("/admin/people/blocked", response_model=list[BlockedSummary])
+def list_blocked(_: CurrentAdmin, people: PeopleRepositoryDep) -> list[BlockedSummary]:
+    return [_blocked_summary(p) for p in sorted(people.list_blocked(), key=lambda p: p.blocked_at or "", reverse=True)]
+
+
+def _set_block(isa_id: str, block: bool, body: Block, admin: Person, people, log) -> BlockedSummary:
+    target = people.find_by_isa_id(isa_id)
+    if target is None:
+        raise HTTPException(status.HTTP_404_NOT_FOUND, "no SlackData account has that ISA id")
+    if block and target.has(Role.ADMIN):
+        raise HTTPException(status.HTTP_409_CONFLICT, "an admin cannot be blocked — revoke their admin role first")
+    if block == target.blocked:
+        raise HTTPException(status.HTTP_409_CONFLICT, "already blocked" if block else "not blocked")
+    now = now_iso()
+    updated = target.model_copy(
+        update={
+            "blocked_at": now if block else None,
+            "blocked_reason": body.why if block else None,
+            "blocked_by": admin.isa_id if block else None,
+            "updated_at": now,
+        }
+    )
+    record = ChangeRecord(
+        target_type=TargetType.PERSON,
+        target_id=target.isa_id,
+        action=Action.PERSON_BLOCK if block else Action.PERSON_UNBLOCK,
+        actor_sub=admin.sub,
+        actor_isa_id=admin.isa_id,
+        actor_role=admin.role_label(),
+        channel=Channel.WEB,
+        changes={"blocked": FieldChange(before=not block, after=block)},
+        why=body.why,
+    )
+    commit_person_change(people, log, updated, record)
+    return _blocked_summary(updated)
+
+
+@people_router.post("/admin/people/{isa_id}/block", response_model=BlockedSummary)
+def block_person(
+    isa_id: Annotated[str, Path(max_length=32)], body: Block, admin: CurrentAdmin,
+    people: PeopleRepositoryDep, log: ChangeLogRepositoryDep,
+) -> BlockedSummary:
+    return _set_block(isa_id, True, body, admin, people, log)
+
+
+@people_router.post("/admin/people/{isa_id}/unblock", response_model=BlockedSummary)
+def unblock_person(
+    isa_id: Annotated[str, Path(max_length=32)], body: Block, admin: CurrentAdmin,
+    people: PeopleRepositoryDep, log: ChangeLogRepositoryDep,
+) -> BlockedSummary:
+    return _set_block(isa_id, False, body, admin, people, log)
+
+
 # --- The public change log --------------------------------------------------
 
 
@@ -296,7 +391,7 @@ def list_changes(
         raise HTTPException(status.HTTP_422_UNPROCESSABLE_ENTITY, "filter by one of target, actor or flag")
 
     if target_type is not None:
-        records = log.for_target(target_type, target_id, limit)
+        records = log.for_target(target_type, target_id, limit, before)
     elif actor is not None:
         records = log.by_actor(actor, limit, before)
     elif flag is not None:

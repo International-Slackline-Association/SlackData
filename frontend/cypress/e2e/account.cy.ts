@@ -47,6 +47,22 @@ describe('Signing in', () => {
       cy.getByData('sign-in-notice').should('not.exist')
     })
 
+    it('signs in from the top nav, on any page, and stays on it', () => {
+      // Locally "signing in" asks for a dev token; hosted it is the ISA's page.
+      // Someone who has seen the notice: on a fresh people store (CI) the real
+      // dev admin has not, and the notice would cover the account menu.
+      cy.intercept('GET', '**/me', { body: { ...ME, ...SEEN } })
+      cy.visit('/manufacturers', {
+        onBeforeLoad(win) {
+          cy.stub(win, 'prompt').returns(DEV_TOKEN)
+        },
+      })
+      cy.getByData('sign-in').should('be.visible').click()
+      cy.getByData('sign-in').should('not.exist')
+      cy.getByData('account-menu').should('be.visible')
+      cy.location('pathname').should('eq', '/manufacturers')
+    })
+
     it('does not load the sign-in library', () => {
       // D41: anonymous visitors download nothing extra. Locally the mode is
       // dev, so the library has no reason to load at all.
@@ -137,6 +153,17 @@ describe('Signing in', () => {
       cy.getByData('account-name').should('have.text', 'Local Admin')
       cy.getByData('account-admin-link').click()
       cy.location('pathname').should('eq', '/admin')
+    })
+
+    it('links to your own changes and to everyone\'s', () => {
+      cy.visit('/webbings', signedIn())
+      cy.getByData('account-menu').click()
+      cy.getByData('account-changes-link').click()
+      cy.location('pathname').should('eq', `/people/${ME.isa_id}`)
+      cy.getByData('contributions-page').should('be.visible')
+      cy.getByData('account-menu').click()
+      cy.getByData('account-recent-changes-link').click()
+      cy.location('pathname').should('eq', '/changes')
     })
 
     it('offers no admin link to someone who is not one', () => {

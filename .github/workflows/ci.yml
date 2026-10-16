@@ -155,11 +155,11 @@ jobs:
           cd frontend && npm ci
 
       # Built in DEVELOPMENT mode on purpose, and this is not a detail:
-      # .env.development is what lets submissions.cy.ts and admin_triage.cy.ts
-      # run with no AWS account. A production build loads .env.production
-      # instead (VITE_API_URL=/api, a real Cognito pool, a real Turnstile key)
-      # and flips import.meta.env.PROD, which hides SuggestButton and swaps
-      # AdminAuthProvider's DevBridge for the "not configured" screen. So:
+      # .env.development is what lets the editing and admin specs sign in with
+      # the dev tokens, with no AWS account. A production build loads
+      # .env.production instead (VITE_API_URL=/api, the ISA's real pool) and
+      # flips import.meta.env.PROD, which swaps the dev-token sign-in for the
+      # ISA's hosted one. So:
       #   --mode development   loads .env.development
       #   NODE_ENV=development keeps import.meta.env.PROD false
       # Both are needed — `vite build` sets NODE_ENV=production regardless of

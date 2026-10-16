@@ -1,9 +1,9 @@
 // Entry points that start from nothing: Add product on a listing, Add brand on
 // the manufacturers page, Edit brand and Logo and manuals on a brand's page —
 // each opening the shared EntryEditor (P3-G, P3-I) or the media dialog (phase
-// 4). For admins; and since phase 5 for a brand's manufacturers too, on their
-// own brands (Add brand stays admin-only). Each renders nothing for anyone else.
-// Plus "I represent this brand", for anyone signed in (D5).
+// 4). For everyone signed in since phase 6 (D59), unless blocked; each renders
+// nothing for anyone else. Plus "I represent this brand", for anyone signed in
+// (D5).
 
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -21,7 +21,7 @@ export function AddItemButton({ slug, label }: { slug: string; label: string }) 
   const navigate = useNavigate()
   const [open, setOpen] = useState(false)
   const token = auth.token
-  if (!auth.canEditAny || !token) return null
+  if (!auth.canEdit || !token) return null
   return (
     <>
       <button type="button" data-cy="add-item" className={LINK} onClick={() => setOpen(true)}>
@@ -51,7 +51,7 @@ export function AddBrandButton() {
   const navigate = useNavigate()
   const [open, setOpen] = useState(false)
   const token = auth.token
-  if (!auth.isAdmin || !token) return null
+  if (!auth.canEdit || !token) return null
   return (
     <>
       <button type="button" data-cy="add-brand" className={LINK} onClick={() => setOpen(true)}>
@@ -79,17 +79,15 @@ export function AddBrandButton() {
 
 export function EditBrandButton({
   catalogId,
-  brandName,
   onSaved,
 }: {
   catalogId: number | string
-  brandName: string
   onSaved: () => void
 }) {
   const auth = useSiteAuth()
   const [open, setOpen] = useState(false)
   const token = auth.token
-  if (!auth.canEditBrand(brandName) || !token) return null
+  if (!auth.canEdit || !token) return null
   return (
     <>
       <button type="button" data-cy="edit-brand" className={LINK} onClick={() => setOpen(true)}>
@@ -117,17 +115,15 @@ export function EditBrandButton({
 
 export function BrandMediaButton({
   catalogId,
-  brandName,
   onSaved,
 }: {
   catalogId: number | string
-  brandName: string
   onSaved: () => void
 }) {
   const auth = useSiteAuth()
   const [open, setOpen] = useState(false)
   const token = auth.token
-  if (!auth.canEditBrand(brandName) || !token) return null
+  if (!auth.canEdit || !token) return null
   return (
     <>
       <button type="button" data-cy="brand-media" className={LINK} onClick={() => setOpen(true)}>
@@ -172,7 +168,7 @@ export function RepresentBrandButton({ catalogId, brandName }: { catalogId: numb
     }
   }, [token, catalogId])
 
-  if (!token || !auth.me || auth.me.brands.some(b => b.catalog_id === catalogId)) return null
+  if (!token || !auth.me || auth.blockedReason !== null || auth.me.brands.some(b => b.catalog_id === catalogId)) return null
   if (pending) {
     return (
       <span data-cy="represent-pending" className="text-sm text-gray-500">
@@ -207,9 +203,9 @@ export function RepresentBrandButton({ catalogId, brandName }: { catalogId: numb
             }}
           >
             <p className="text-sm text-gray-600">
-              An admin will look at your request. Once approved you can edit {brandName}'s products, photos and manuals,
-              and manage its API keys; your changes are shown as made by its manufacturer. The admin sees whether your
-              email address is on the brand's own domain.
+              An admin will look at your request. Once approved, your changes to {brandName}'s gear are shown as made by
+              its manufacturer and are not limited by the hourly cap, you can revert changes others make to it, and you
+              manage its API keys. The admin sees whether your email address is on the brand's own domain.
             </p>
             <label className="mt-3 mb-1 block text-xs font-medium text-gray-700">
               Who you are at {brandName} (optional)

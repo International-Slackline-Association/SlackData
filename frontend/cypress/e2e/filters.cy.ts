@@ -515,7 +515,13 @@ GEAR_TYPES.forEach(({ slug, apiPath, label }) => {
       // Activate the last pill of every group that actually has options (some
       // enum fields are all-null in the data → zero pills). Stacking these
       // incompatible constraints drives the list toward empty.
-      pills.forEach(({ group }) => {
+      //
+      // Brand first. Its pills are faceted off the other filters (brandFacetItems),
+      // so once those are on it can re-render down to no pills at all between
+      // the check below and the click — which failed this test now and then on
+      // Connectors. No other group is faceted, so clicking Brand first is stable.
+      const brandFirst = [...pills].sort((a, b) => Number(b.group === 'brand') - Number(a.group === 'brand'))
+      brandFirst.forEach(({ group }) => {
         const scope = `[data-cy="filter-group"][data-group="${group}"]`
         cy.get(scope).then(($g) => {
           if ($g.find('[data-cy="filter-pill"]').length === 0) return

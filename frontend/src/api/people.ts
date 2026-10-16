@@ -3,7 +3,7 @@
 // Like submissions, these reach stores other than the catalogue, so they work
 // on the live site while the catalogue is read-only.
 
-import type { AdminSummary, ChangeRecordPublic, Me, RoleChange } from '@/types'
+import type { AdminSummary, BlockedSummary, ChangeRecordPublic, Me, RoleChange } from '@/types'
 import { getAuthed, patchJson, postJson, request } from './client'
 
 export function fetchMe(token: string): Promise<Me> {
@@ -31,6 +31,16 @@ export function changeRole(token: string, change: RoleChange): Promise<AdminSumm
   return postJson<AdminSummary>('/admin/roles', change, token)
 }
 
+/** Accounts blocked from editing (D22). Admins only. */
+export function fetchBlocked(token: string): Promise<BlockedSummary[]> {
+  return getAuthed<BlockedSummary[]>('/admin/people/blocked', token)
+}
+
+/** Block or unblock an account — a logged change; the reason is public. */
+export function setBlocked(token: string, isaId: string, block: boolean, why: string): Promise<BlockedSummary> {
+  return postJson<BlockedSummary>(`/admin/people/${encodeURIComponent(isaId)}/${block ? 'block' : 'unblock'}`, { why }, token)
+}
+
 /** Which part of the log: everything, one thing's History, one person's
  *  contributions, or the safety changes. One filter at a time. */
 export interface ChangesQuery {
@@ -40,6 +50,20 @@ export interface ChangesQuery {
   target_id?: string
   actor?: string
   flag?: 'safety'
+}
+
+/** Every record a query matches, newest first — paged through, 100 at a time
+ *  (the API's most per page). For one item's History: never cut short. */
+export async function fetchAllChanges(query: Omit<ChangesQuery, 'limit' | 'before'>): Promise<ChangeRecordPublic[]> {
+  const PAGE = 100
+  const all: ChangeRecordPublic[] = []
+  let before: string | undefined
+  for (;;) {
+    const page = await fetchChanges({ ...query, limit: PAGE, before })
+    all.push(...page)
+    if (page.length < PAGE) return all
+    before = page[page.length - 1].id
+  }
 }
 
 /** Public — no sign-in. Newest first. */

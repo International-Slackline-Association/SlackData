@@ -80,6 +80,10 @@ class Action(str, Enum):
     KEY_CREATE = "key.create"
     KEY_REGENERATE = "key.regenerate"
     KEY_REVOKE = "key.revoke"
+    # An account blocked from editing by an admin, or unblocked (D22, phase 6).
+    # Target: the person; the reason is the record's `why`.
+    PERSON_BLOCK = "person.block"
+    PERSON_UNBLOCK = "person.unblock"
 
 
 # The one flag so far: a breaking-strength figure changed (D33, D57).

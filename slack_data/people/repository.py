@@ -46,6 +46,10 @@ class PeopleRepository(Protocol):
         """Everyone holding a role, e.g. the admin list."""
         ...
 
+    def list_blocked(self) -> list[Person]:
+        """Everyone an admin has blocked (D22)."""
+        ...
+
 
 class InMemoryPeopleRepository:
     def __init__(self, people: list[Person] | None = None) -> None:
@@ -71,6 +75,9 @@ class InMemoryPeopleRepository:
     def list_with_role(self, role: Role) -> list[Person]:
         return sorted((p for p in self._items.values() if p.has(role)), key=lambda p: p.sub)
 
+    def list_blocked(self) -> list[Person]:
+        return sorted((p for p in self._items.values() if p.blocked), key=lambda p: p.sub)
+
 
 _SCHEMA = """
 CREATE TABLE IF NOT EXISTS people (
@@ -87,6 +94,11 @@ CREATE TABLE IF NOT EXISTS people (
     brands          TEXT NOT NULL DEFAULT '[]',
     notice_seen_at  TEXT,
     bootstrapped_at TEXT,
+    blocked_at      TEXT,
+    blocked_reason  TEXT,
+    blocked_by      TEXT,
+    saves           TEXT NOT NULL DEFAULT '[]',
+    saves_rev       INTEGER NOT NULL DEFAULT 0,
     anonymised      INTEGER NOT NULL,
     created_at      TEXT NOT NULL,
     updated_at      TEXT NOT NULL
@@ -115,6 +127,13 @@ class SqlitePeopleRepository:
             # A store created before brand links (phase 5).
             if "brands" not in columns:
                 conn.execute("ALTER TABLE people ADD COLUMN brands TEXT NOT NULL DEFAULT '[]'")
+            # A store created before blocks and the rate cap (phase 6).
+            for column in ("blocked_at", "blocked_reason", "blocked_by"):
+                if column not in columns:
+                    conn.execute(f"ALTER TABLE people ADD COLUMN {column} TEXT")
+            if "saves" not in columns:
+                conn.execute("ALTER TABLE people ADD COLUMN saves TEXT NOT NULL DEFAULT '[]'")
+                conn.execute("ALTER TABLE people ADD COLUMN saves_rev INTEGER NOT NULL DEFAULT 0")
 
     def _connect(self) -> sqlite3.Connection:
         conn = sqlite3.connect(self._path)
@@ -126,6 +145,7 @@ class SqlitePeopleRepository:
         row = person.model_dump(mode="json")
         row["roles"] = json.dumps(row["roles"])
         row["brands"] = json.dumps(row["brands"])
+        row["saves"] = json.dumps(row["saves"])
         row["email_verified"] = int(row["email_verified"])
         row["anonymised"] = int(row["anonymised"])
         row["email_key"] = email_key(person.email)
@@ -137,6 +157,7 @@ class SqlitePeopleRepository:
         data.pop("email_key", None)
         data["roles"] = json.loads(data["roles"])
         data["brands"] = json.loads(data.get("brands") or "[]")
+        data["saves"] = json.loads(data.get("saves") or "[]")
         data["email_verified"] = bool(data["email_verified"])
         data["anonymised"] = bool(data["anonymised"])
         return Person(**data)
@@ -167,3 +188,6 @@ class SqlitePeopleRepository:
 
     def list_with_role(self, role: Role) -> list[Person]:
         return [p for p in self._select("1 = 1", ()) if p.has(role)]
+
+    def list_blocked(self) -> list[Person]:
+        return self._select("blocked_at IS NOT NULL", ())

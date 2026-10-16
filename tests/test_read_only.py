@@ -170,17 +170,18 @@ def test_read_only_leaves_no_catalogue_write_route_registered(read_only_client):
 
 
 def test_submissions_are_writable_while_the_catalogue_is_not(read_only_client):
-    """The point of the split: the suggestion box works on the live site.
+    """The point of the split: the triage queue works on the live site.
 
-    A submission is stored in DynamoDB, not in the immutable SQLite catalogue,
-    so read-only mode must not touch it. This is the single most likely thing to
-    be broken by a careless reuse of the catalogue's SessionDep.
+    Its records are in DynamoDB, not in the immutable SQLite catalogue, so
+    read-only mode must not touch it. The public POST was retired in phase 6
+    (D56); an admin's review is the write that remains.
     """
-    posted = read_only_client.post(
-        "/submissions",
-        json={"gear_type": "webbings", "gear_id": 1, "changes": {"breaking_strength": "44"}},
-    )
-    assert posted.status_code == 201, posted.text
+    from tests.test_submissions import ADMIN
+
+    assert read_only_client.get("/submissions", headers=ADMIN).status_code == 200
+    assert read_only_client.patch(
+        "/submissions/01J0000000000000000000000A", json={"status": "applied"}, headers=ADMIN
+    ).status_code == 404, "mounted and answering, not 405"
 
 
 def test_submissions_router_takes_no_catalogue_session():

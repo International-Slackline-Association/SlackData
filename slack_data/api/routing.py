@@ -73,9 +73,10 @@ CATALOG_ROUTERS: tuple[APIRouter, ...] = (
 
 # Routers over a *different* store, mounted in full in every mode.
 #
-# `POST /submissions/` has to work on the live site, where the catalogue is
-# opened read-only — it writes to DynamoDB, which is a separate database that
-# knows nothing about the SQLite file. This split is the whole reason the guard
+# `submissions_router` (the admin triage queue; its public POST was retired in
+# phase 6) has to work on the live site, where the catalogue is opened
+# read-only — it writes to DynamoDB, which is a separate database that knows
+# nothing about the SQLite file. This split is the whole reason the guard
 # above is expressed as "the catalogue publishes no writes" rather than "the app
 # publishes no writes": Phase 2 is precisely the moment those stop being the
 # same statement.

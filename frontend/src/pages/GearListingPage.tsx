@@ -33,7 +33,6 @@ import GearGrid from '@/components/gear/GearGrid'
 import GearDetailedList from '@/components/gear/GearDetailedList'
 import GearTable from '@/components/gear/GearTable'
 import CompareBar from '@/components/gear/CompareBar'
-import SuggestButton from '@/components/submissions/SuggestButton'
 import { AddItemButton } from '@/components/edit/AdminCreate'
 import NotFoundPage from './NotFoundPage'
 
@@ -482,11 +481,10 @@ export default function GearListingPage() {
             </span>
 
             <div className="ml-auto flex items-center gap-3">
-              {/* If the data is incomplete, say where to report what's missing —
-                  but from the right-hand group, not wedged between the count and
+              {/* If the data is incomplete, the way to add what's missing —
+                  from the right-hand group, not wedged between the count and
                   the view toggle. */}
               <AddItemButton slug={meta.slug} label={meta.label} />
-              <SuggestButton gearType={meta.slug} variant="new-item" />
               <div className="flex overflow-hidden rounded-lg border border-gray-300">
                 <button
                   data-cy="view-cards"

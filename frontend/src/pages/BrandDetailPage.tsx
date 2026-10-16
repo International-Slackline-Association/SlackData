@@ -132,9 +132,9 @@ export default function BrandDetailPage() {
           {brand.total} {brand.total === 1 ? 'item' : 'items'}
         </span>
         {/* The directory is loaded once per visit; reload to show the edit. */}
-        <EditBrandButton catalogId={brand.id} brandName={brand.name} onSaved={() => window.location.reload()} />
+        <EditBrandButton catalogId={brand.id} onSaved={() => window.location.reload()} />
         {/* Media is re-fetched after the save (utils/mediaStore.ts): no reload. */}
-        <BrandMediaButton catalogId={brand.id} brandName={brand.name} onSaved={() => {}} />
+        <BrandMediaButton catalogId={brand.id} onSaved={() => {}} />
         <RepresentBrandButton catalogId={brand.id} brandName={brand.name} />
       </p>
 

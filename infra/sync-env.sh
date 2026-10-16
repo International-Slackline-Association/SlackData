@@ -10,21 +10,7 @@
 # against two different clients. Both are public values. (Until 2026-10 these
 # came from SlackData's own pool; that pool is gone, D62.)
 #
-# The Turnstile SITE key comes from Cloudflare rather than AWS, but it IS written
-# here — from `$TURNSTILE_SITE_KEY` — and that is deliberate. Both Turnstile
-# halves then come from one place, the deploying shell, at one moment:
-#
-#   TURNSTILE_SECRET    -> serverless.yml -> Lambda env  (half A)
-#   TURNSTILE_SITE_KEY  -> this script -> .env.production -> bundle (half B)
-#
-# Leaving the site key hand-set is what lets the two drift: you set it once in a
-# committed file, then months later redeploy half A from a fresh terminal with no
-# secret exported, and the form now renders against an API that 503s every
-# submission. Sourcing both from the same shell makes that combination require
-# two separate mistakes instead of one omission. `./preflight.sh` refuses it too.
-#
-# This script never touches a line it has no value for, and never writes the
-# secret half of anything to disk.
+# This script never touches a line it has no value for.
 set -euo pipefail
 
 STAGE="${1:-prod}"
@@ -79,51 +65,10 @@ set_key() {
 set_key VITE_ISA_AUTHORITY "$AUTHORITY"
 set_key VITE_ISA_CLIENT_ID "$CLIENT_ID"
 
-# The site key, from the same shell that carried the secret into half A.
-if [ -n "${TURNSTILE_SITE_KEY:-}" ]; then
-  set_key VITE_TURNSTILE_SITE_KEY "$TURNSTILE_SITE_KEY"
-  if [ -z "${TURNSTILE_SECRET:-}" ]; then
-    echo
-    echo "  ✗ TURNSTILE_SITE_KEY is set but TURNSTILE_SECRET is NOT."
-    echo "    That is the one combination that costs a real person their submission:"
-    echo "    the form will render, and the API will answer 503 to every POST."
-    echo "    Export the secret and redeploy half A before building half B."
-    exit 1
-  fi
-else
-  SITE_KEY="$(grep -E '^VITE_TURNSTILE_SITE_KEY=' "$ENV_FILE" | cut -d= -f2-)"
-  if [ -n "$SITE_KEY" ] && [ -z "${TURNSTILE_SECRET:-}" ]; then
-    # An empty shell is not evidence the API has no secret — it is only evidence
-    # that THIS shell did not deploy half A. Someone else's did, or an earlier
-    # one, and refusing on that basis blocks a correct deploy while a genuinely
-    # broken one that happens to export the variable sails through. So ask the
-    # deployed function what it actually holds. The shell stays the fallback for
-    # when the answer cannot be fetched (no credentials, function not yet
-    # created), because failing closed is the whole point of this check.
-    DEPLOYED_SECRET="$(aws lambda get-function-configuration \
-        --function-name "slackdata-${STAGE}-api" --region "$REGION" \
-        --query 'Environment.Variables.TURNSTILE_SECRET' --output text 2>/dev/null || true)"
-    case "$DEPLOYED_SECRET" in
-      0x????????????????????????????*)
-        echo "  ✓ TURNSTILE_SECRET is not in this shell, but slackdata-${STAGE}-api"
-        echo "    already carries a well-formed one — half A was deployed elsewhere."
-        ;;
-      *)
-        echo
-        echo "  ✗ $ENV_FILE carries a site key, but no usable TURNSTILE_SECRET was"
-        echo "    found in this shell OR on slackdata-${STAGE}-api. The form would"
-        echo "    render and the API would reject every submission it sends."
-        echo "    Export TURNSTILE_SECRET and redeploy half A, or clear the site key."
-        exit 1
-        ;;
-    esac
-  fi
-  if [ -z "$SITE_KEY" ]; then
-    echo
-    echo "  ! VITE_TURNSTILE_SITE_KEY is empty — the suggestion form will not render"
-    echo "    (and is tree-shaken out). That is fine if you are shipping it dark."
-    echo "    To turn it on: export TURNSTILE_SITE_KEY=... and re-run this script."
-  fi
+# The anonymous box's Turnstile site key went with the box (live editing
+# phase 6, D56). A stale one left in the file renders nothing now.
+if grep -qE '^VITE_TURNSTILE_SITE_KEY=.' "$ENV_FILE"; then
+  echo "  (VITE_TURNSTILE_SITE_KEY is set in $ENV_FILE but no longer used — it can go.)"
 fi
 
 echo

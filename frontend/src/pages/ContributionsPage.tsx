@@ -1,16 +1,19 @@
 // One person's contributions — every change they made, newest first, public
 // (D3). Their name is looked up now, never stored with a change (D43), so a
-// rename or an anonymisation shows on every record.
+// rename or an anonymisation shows on every record. An admin can block the
+// account from editing here (D22, P6-D).
 
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { fetchChanges } from '@/api/people'
+import { BlockControl } from '@/components/account/Blocking'
 import ChangeList from '@/components/edit/ChangeList'
 import type { ChangeRecordPublic } from '@/types'
 
 export default function ContributionsPage() {
   const { isaId = '' } = useParams()
   const [records, setRecords] = useState<ChangeRecordPublic[] | null>(null)
+  const [version, setVersion] = useState(0)
 
   useEffect(() => {
     let cancelled = false
@@ -25,7 +28,7 @@ export default function ContributionsPage() {
     return () => {
       cancelled = true
     }
-  }, [isaId])
+  }, [isaId, version])
 
   const name = records?.[0]?.actor_name ?? isaId
   return (
@@ -34,6 +37,7 @@ export default function ContributionsPage() {
         {name}
       </h1>
       <p className="mt-1 text-sm text-gray-600">ISA account {isaId} — every change they made on SlackData.</p>
+      <BlockControl isaId={isaId} onChanged={() => setVersion(v => v + 1)} />
       <div className="mt-4 rounded-xl border border-gray-200 bg-white px-6 py-2 shadow-sm">
         {records === null ? (
           <p className="py-4 text-sm text-gray-400">Loading…</p>

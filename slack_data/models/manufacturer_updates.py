@@ -1,12 +1,9 @@
 """
 What a manufacturer sends, and what they get back.
 
-The wire shape for `POST /manufacturer/gear`. It is deliberately *not*
-`SubmissionCreate`: that model is the public form's body, carrying a honeypot, a
-captcha token and a submitter email, none of which mean anything to a machine
-holding OAuth credentials. What the two do share is everything that matters —
-the field names are validated against the same derived list
-(`submissions/fields.py`), and each item becomes an ordinary `Submission`.
+The wire shape for `POST /manufacturer/gear`. The field names are validated
+against the same derived list as an edit's (`submissions/fields.py`), and each
+item still leaves an ordinary `Submission` row behind it (`manufacturers/apply.py`).
 
 **One call, N products, N records.** A brand with 40 items makes one request;
 it writes 40 submissions sharing a `batch_id`, because the unit an admin acts

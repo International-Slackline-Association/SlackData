@@ -53,6 +53,7 @@ local dev token (`MANUFACTURER_DEV_TOKEN:<client_id>`) is honoured only when
 not hosted.
 """
 
+import hashlib
 import hmac
 import os
 import time
@@ -316,7 +317,9 @@ def _dev_person(people, name: str) -> Person:
         person = people.put(
             Person(
                 sub=sub,
-                isa_id=f"ISA_DEV{slug.upper()[:8]}",
+                # From the whole name: the first characters alone made every
+                # `<Name><run timestamp>` of a Cypress spec one account.
+                isa_id=f"ISA_DEV{hashlib.sha256(slug.encode()).hexdigest()[:8].upper()}",
                 given_name=name[:50],
                 email=f"{slug}@localhost",
                 email_verified=True,

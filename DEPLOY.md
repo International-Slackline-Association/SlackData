@@ -33,7 +33,6 @@ Expired token → `aws sso login --profile isa-slackdata`, then re-run the `eval
 
 ```bash
 cd infra
-export TURNSTILE_SECRET='...'
 ./preflight.sh
 npx serverless deploy --stage prod
 cd ..
@@ -61,8 +60,8 @@ cd ..
 builds. **Replacing** an image under `frontend/public/` needs a rename or a per-path
 invalidation: those files are not fingerprinted but carry the one-year immutable header.
 
-If Cognito or Turnstile values changed, `./sync-env.sh prod` before `npm run build` —
-Vite inlines them, and an empty value fails dark (no suggestion form, no admin sign-in).
+If the ISA sign-in values changed, `./sync-env.sh prod` before `npm run build` —
+Vite inlines them, and an empty value fails dark (no sign-in).
 
 ## Verify
 

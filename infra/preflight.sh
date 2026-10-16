@@ -7,9 +7,6 @@
 # Every check here exists because of a specific way this deploy can go wrong in
 # a way you would not notice until later:
 #
-# - TURNSTILE_SECRET unset  -> the stack deploys fine and `POST /submissions`
-#                              answers 503 forever, because turnstile.py fails
-#                              CLOSED hosted. A working deploy of a dead feature.
 # - Dirty working tree      -> the Lambda image is built from the working tree,
 #                              so uncommitted code ships and nothing records what.
 # - Wrong AWS account       -> this repo targets the ISA's account, not a personal
@@ -59,97 +56,10 @@ warn() { printf '  \033[33m!\033[0m %s\n' "$1"; WARN=1; }
 echo "SlackData deploy preflight (stage: $STAGE)"
 echo
 
-echo "Turnstile — the two halves must agree"
-#
-# The failure this guards is NOT "a value is missing". It is the two halves
-# disagreeing, because they are applied by different halves of the deploy:
-#
-#   TURNSTILE_SECRET    -> your shell -> serverless.yml -> Lambda env  (half A)
-#   TURNSTILE_SITE_KEY  -> your shell -> .env.production -> JS bundle  (half B)
-#
-# Secret missing + site key present is the one combination that costs a real
-# person their submission: the form renders, they solve the challenge, they hit
-# submit, and the API answers 503 because turnstile.py fails closed. It looks
-# like our bug, and what they typed is gone.
-#
-# The secret lives only in a shell, so it is gone every new terminal — which is
-# exactly how this drifts.
+# (A Turnstile check stood here until live editing phase 6 retired the
+# anonymous suggestion box and its captcha, D56.)
 ENV_FILE="../frontend/.env.production"
-FILE_SITE_KEY="$(grep -E '^VITE_TURNSTILE_SITE_KEY=' "$ENV_FILE" 2>/dev/null | cut -d= -f2-)"
-SITE_KEY="${TURNSTILE_SITE_KEY:-$FILE_SITE_KEY}"
 
-# Shape, before pairing. "Set" is not "valid": on 2026-08-28 a documented
-# command was pasted with its own placeholder still in it, and
-# TURNSTILE_SECRET='<your real secret>' deployed clean. Every check here passed
-# — both halves were present and agreed — and the result would have been THE BAD
-# ONE anyway: the form renders, Cloudflare answers invalid-input-secret, and
-# every real submission 400s. A pairing check cannot see that; only the shape
-# can. Cloudflare keys are `0x` followed by 30+ URL-safe characters.
-# A LIVE key is `0x` + 30 or more URL-safe characters. Cloudflare's published
-# DUMMY keys are `1x`/`2x`/`3x` followed by zeros — they are valid and useful
-# (staging used them to prove the plumbing), but the 1x pair accepts ANY token,
-# so shipping them is shipping no captcha at all. Allowed, and always said out
-# loud. Anything matching neither shape is a paste accident.
-# The two halves are NOT the same length — the site key is the shorter one
-# (0x + ~22) and the secret is longer (0x + ~33). A single threshold tuned to
-# the secret rejects a perfectly good site key, so they get their own minimums.
-LIVE_SITE_RE='^0x[0-9A-Za-z_-]{18,}$'
-LIVE_SECRET_RE='^0x[0-9A-Za-z_-]{28,}$'
-TEST_RE='^[123]x0{20,}[0-9A-Za-z]*$'
-SHAPE_BAD=0
-IS_TEST=0
-
-check_shape() {  # $1 = label, $2 = value, $3 = 1 to echo the value, $4 = live regex
-  local label="$1" value="$2" public="$3" live_re="$4"
-  if printf '%s' "$value" | grep -qE "$live_re"; then
-    return 0
-  elif printf '%s' "$value" | grep -qE "$TEST_RE"; then
-    IS_TEST=1
-    return 0
-  fi
-  if [ "$public" = "1" ]; then
-    bad "the Turnstile $label does not look like a Cloudflare key: '$value'
-      Expected 0x + 18 or more characters (live), or a 1x/2x/3x dummy key."
-  else
-    bad "the Turnstile $label does not look like a Cloudflare key (expected 0x +
-      28 or more characters; got ${#value}). A placeholder or truncated paste
-      deploys perfectly and then rejects every submission — this exact check
-      exists because TURNSTILE_SECRET='<your real secret>' once shipped clean.
-      The value is NOT printed here; check it in your shell."
-  fi
-  SHAPE_BAD=1
-}
-
-[ -n "${TURNSTILE_SECRET:-}" ] && check_shape "SECRET" "$TURNSTILE_SECRET" 0 "$LIVE_SECRET_RE"
-[ -n "$SITE_KEY" ]             && check_shape "SITE key" "$SITE_KEY" 1 "$LIVE_SITE_RE"
-
-if [ "$IS_TEST" = "1" ] && [ "$SHAPE_BAD" = "0" ]; then
-  warn "these are Cloudflare TEST keys. The 1x pair accepts any token, so the
-      form works end to end and blocks nothing. Fine for staging; never prod."
-fi
-
-if [ "$SHAPE_BAD" = "1" ]; then
-  :   # already reported; do not also claim the halves agree
-elif [ -n "${TURNSTILE_SECRET:-}" ] && [ -n "$SITE_KEY" ]; then
-  ok "both halves present and well-formed — the form will render AND be accepted"
-elif [ -n "${TURNSTILE_SECRET:-}" ] && [ -z "$SITE_KEY" ]; then
-  warn "TURNSTILE_SECRET is set but there is no site key. The API will accept
-      submissions, but the form is not rendered (and is tree-shaken out), so
-      nothing can reach it. Harmless, but the feature is invisible.
-        export TURNSTILE_SITE_KEY='0x4AAA...'   # public key, Cloudflare dashboard"
-elif [ -z "${TURNSTILE_SECRET:-}" ] && [ -n "$SITE_KEY" ]; then
-  bad "THE BAD ONE: a site key is set (so the form WILL render) but TURNSTILE_SECRET
-      is not (so the API will 503 every submission). A visitor will fill the form in,
-      solve the captcha, submit, and lose what they typed.
-        export TURNSTILE_SECRET='...'   # the SECRET half, same Cloudflare widget
-      Or clear VITE_TURNSTILE_SITE_KEY in $ENV_FILE to ship the feature dark."
-else
-  warn "neither Turnstile value is set — submissions ship DARK (form never renders).
-      That is a legitimate first-deploy state. Export BOTH to turn the feature on:
-        export TURNSTILE_SECRET='...' TURNSTILE_SITE_KEY='0x4AAA...'"
-fi
-
-echo
 echo "API Gateway routes agree with their throttles"
 #
 # The 2026-08-25 failure: RouteSettings named a route key that the same template
@@ -290,7 +200,7 @@ fi
 
 echo
 echo "Frontend build inputs (half B — these are read at BUILD time by Vite)"
-# Turnstile is handled above; these two come from the stack, via ./sync-env.sh.
+# These come from the stack, via ./sync-env.sh.
 for key in VITE_ISA_AUTHORITY VITE_ISA_CLIENT_ID; do
   value="$(grep -E "^${key}=" "$ENV_FILE" 2>/dev/null | cut -d= -f2-)"
   if [ -n "$value" ]; then

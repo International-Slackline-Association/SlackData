@@ -35,9 +35,10 @@ class ChangeLogRepository(Protocol):
         ...
 
     def for_target(
-        self, target_type: TargetType, target_id: str, limit: int = 50
+        self, target_type: TargetType, target_id: str, limit: int = 50, before: str | None = None
     ) -> list[ChangeRecord]:
-        """Everything that happened to one thing, newest first — its History."""
+        """Everything that happened to one thing, newest first — its History.
+        `before` (a record id) pages back through a long one."""
         ...
 
     def by_actor(self, isa_id: str, limit: int = 50, before: str | None = None) -> list[ChangeRecord]:
@@ -71,10 +72,10 @@ class InMemoryChangeLogRepository:
         return rows[:limit]
 
     def for_target(
-        self, target_type: TargetType, target_id: str, limit: int = 50
+        self, target_type: TargetType, target_id: str, limit: int = 50, before: str | None = None
     ) -> list[ChangeRecord]:
         key = target_key(target_type, target_id)
-        return [r for r in self._newest_first() if r.target == key][:limit]
+        return [r for r in self._newest_first() if r.target == key and (before is None or r.id < before)][:limit]
 
     def get(self, record_id: str) -> ChangeRecord | None:
         return self._items.get(record_id)
@@ -164,14 +165,9 @@ class SqliteChangeLogRepository:
         return [self._from_row(row) for row in rows]
 
     def for_target(
-        self, target_type: TargetType, target_id: str, limit: int = 50
+        self, target_type: TargetType, target_id: str, limit: int = 50, before: str | None = None
     ) -> list[ChangeRecord]:
-        with self._connect() as conn:
-            rows = conn.execute(
-                "SELECT * FROM changes WHERE target = ? ORDER BY id DESC LIMIT ?",
-                (target_key(target_type, target_id), limit),
-            ).fetchall()
-        return [self._from_row(row) for row in rows]
+        return self._page("target = ?", (target_key(target_type, target_id),), limit, before)
 
     def _page(self, where: str, args: tuple, limit: int, before: str | None) -> list[ChangeRecord]:
         if before is not None:

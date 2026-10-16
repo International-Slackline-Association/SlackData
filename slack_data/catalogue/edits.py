@@ -15,10 +15,12 @@ next request sees the new version and rebuilds (D30).
 | `revert` | the earlier values of one recorded edit, field by field (D58) |
 | `edit_brand` / `create_brand` | a `manufacturers.json` entry — never its name (P3-G) |
 
-Who may do what is decided here, by `rights.py` (phase 5): admins anything,
-a manufacturer their own brands' gear and entries. The routes only make sure
-someone is signed in, so the edit form, the media dialog, revert and the
-machine API all answer to the one rule.
+Who may do what is decided here, by `rights.py`: since phase 6 everyone signed
+in edits (not a product's maker or sellers, not a brand's name), admins and a
+brand's manufacturers revert, admins merge. The routes only make sure someone
+is signed in, so the edit form, the media dialog, revert and the machine API
+all answer to the one rule. The rate cap is charged where the change is
+committed (`ratecap.py`, passed in as `cap`).
 """
 
 from collections.abc import Iterable
@@ -116,6 +118,9 @@ class Forbidden(EditError):
     status = 403
 
 
+BLOCKED = "this account is blocked from editing"
+
+
 # --- Results ------------------------------------------------------------------
 
 
@@ -180,11 +185,7 @@ def check_gear(actor: Person, documents: list[Document], brand_name: str | None,
     fields of it. The brand, as (catalog_id, name)."""
     brand = rights.brand_of(documents, brand_name)
     if not rights.may_edit(actor, brand):
-        raise Forbidden(
-            "you can change your own brands' products only"
-            if actor.brands
-            else "editing is open to admins and to a brand's manufacturers"
-        )
+        raise Forbidden(BLOCKED)
     closed = sorted(set(fields) & rights.ADMIN_ONLY_FIELDS)
     if closed and not rights.is_admin(actor):
         raise Forbidden(
@@ -199,7 +200,7 @@ def check_brand(actor: Person, documents: list[Document], catalog_id: int) -> tu
     found = rights.brand_names(documents, [catalog_id])
     brand = (catalog_id, found[0]["name"]) if found else None
     if not rights.may_edit(actor, brand):
-        raise Forbidden("you can change your own brands only")
+        raise Forbidden(BLOCKED)
     return brand
 
 
@@ -433,13 +434,15 @@ def edit_item(
     rev: int,
     changes: dict[str, Any],
     why: str | None = None,
+    cap=None,
     **options,
 ) -> Outcome:
     """Set fields on an item. A value of None (or `[]`) clears the field.
-    `media=True`: photos and manuals may be among them (`_check_fields`)."""
+    `media=True`: photos and manuals may be among them (`_check_fields`).
+    `cap`: the editor's rate cap (`ratecap.py`), charged if the save counts."""
     planned = plan_edit_item(store.load(), actor, collection, item_id, rev, changes, why, **options)
     if planned.records:
-        commit_catalogue_change(store, log, planned.puts, [], planned.records)
+        commit_catalogue_change(store, log, planned.puts, [], planned.records, cap)
     return planned.outcome
 
 
@@ -488,13 +491,14 @@ def create_item(
     collection: str,
     fields: dict[str, Any],
     why: str | None = None,
+    cap=None,
 ) -> Outcome:
     if collection not in GEAR:
         raise NotFound(f"no gear type {collection!r}")
     documents = store.load(include_retired=True)
     new_id, advance = next_id(store, collection)
     planned = plan_create_item(documents, actor, collection, fields, new_id, why)
-    commit_catalogue_change(store, log, planned.puts, [advance], planned.records)
+    commit_catalogue_change(store, log, planned.puts, [advance], planned.records, cap)
     return planned.outcome
 
 
@@ -541,10 +545,11 @@ def merge_item(
     return Outcome(collection, source.key, data, source.rev + 1, records + extra_records)
 
 
-def revert(store, log, actor: Person, record_id: str, why: str | None = None) -> Outcome:
+def revert(store, log, actor: Person, record_id: str, why: str | None = None, cap=None) -> Outcome:
     """Restore the values one recorded edit replaced (D58). A field that has
     changed again since is left alone and reported (D27); if every field has,
-    nothing is written."""
+    nothing is written. Admins anywhere, a brand's manufacturers on its gear;
+    everyone else fixes a bad edit by editing it."""
     record = log.get(record_id)
     if record is None:
         raise NotFound(f"no change {record_id}")
@@ -555,7 +560,13 @@ def revert(store, log, actor: Person, record_id: str, why: str | None = None) ->
         )
     collection, _, raw_id = record.target_id.partition("#")
     item_id = int(raw_id)
-    document = _item(store.load(), collection, item_id)
+    documents = store.load()
+    document = _item(documents, collection, item_id)
+    if not rights.may_revert(actor, rights.brand_of(documents, document.data.get("brand"))):
+        raise Forbidden(
+            BLOCKED if actor.blocked
+            else "only an admin, or the brand's manufacturers, revert — fix it by editing it instead"
+        )
     restore, refused = {}, {}
     for name, change in record.changes.items():
         current = document.data.get(name)
@@ -567,7 +578,7 @@ def revert(store, log, actor: Person, record_id: str, why: str | None = None) ->
         raise Refused("every field has changed again since — nothing to revert", refused)
     outcome = edit_item(
         store, log, actor, collection, item_id, document.rev, restore, why,
-        action=Action.ITEM_REVERT, channel=Channel.REVERT, reverts=record.id, media=True,
+        cap=cap, action=Action.ITEM_REVERT, channel=Channel.REVERT, reverts=record.id, media=True,
     )
     outcome.refused = refused
     return outcome
@@ -614,7 +625,9 @@ def _brand_values(changes: dict[str, Any]) -> dict[str, Any]:
     return changes
 
 
-def edit_brand(store, log, actor: Person, catalog_id: int, rev: int, changes: dict[str, Any], why: str | None = None) -> Outcome:
+def edit_brand(
+    store, log, actor: Person, catalog_id: int, rev: int, changes: dict[str, Any], why: str | None = None, cap=None
+) -> Outcome:
     if not changes:
         raise Invalid("nothing to change")
     _brand_values(changes)
@@ -634,18 +647,21 @@ def edit_brand(store, log, actor: Person, catalog_id: int, rev: int, changes: di
         actor, TargetType.BRAND, str(catalog_id), Action.BRAND_EDIT, brand, channel=Channel.WEB, changes=diff, why=why
     )
     put = Put(document.model_copy(update={"data": data, "rev": document.rev + 1}), rev)
-    commit_catalogue_change(store, log, [put], [], [record])
+    commit_catalogue_change(store, log, [put], [], [record], cap)
     return Outcome("manufacturers", document.key, data, document.rev + 1, [record])
 
 
 CATALOG_ID_COUNTER = "manufacturers.catalog_id"
 
 
-def create_brand(store, log, actor: Person, name: str, fields: dict[str, Any], why: str | None = None) -> Outcome:
+def create_brand(
+    store, log, actor: Person, name: str, fields: dict[str, Any], why: str | None = None, cap=None
+) -> Outcome:
     """A new manufacturer entry. It gets the next `catalog_id` (its permanent
-    `Brand.id`) and the next entry key, both claimed by counters. Admins only
-    in phase 5; everyone in phase 6 (D59)."""
-    require_admin(actor, "add a brand")
+    `Brand.id`) and the next entry key, both claimed by counters. Anyone,
+    within the cap (D59)."""
+    if not rights.may_edit(actor):
+        raise Forbidden(BLOCKED)
     name = " ".join((name or "").split())
     if not name or len(name) > 200:
         raise Invalid("a brand needs a name", [{"field": "name", "message": "required"}])
@@ -672,7 +688,7 @@ def create_brand(store, log, actor: Person, name: str, fields: dict[str, Any], w
         actor, TargetType.BRAND, str(catalog_id), Action.BRAND_CREATE,
         channel=Channel.WEB, changes=_diff({}, data), why=why,
     )
-    commit_catalogue_change(store, log, [Put(document, None)], [key_advance, id_advance], [record])
+    commit_catalogue_change(store, log, [Put(document, None)], [key_advance, id_advance], [record], cap)
     return Outcome("manufacturers", document.key, data, 1, [record])
 
 

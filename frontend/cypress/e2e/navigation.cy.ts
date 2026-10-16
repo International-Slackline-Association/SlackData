@@ -178,6 +178,10 @@ describe('Back link — where you came from', () => {
   it('returns to the filtered listing an item was opened from', () => {
     cy.visit('/webbings')
     cy.get('[data-cy="search-input"]').type('core')
+    // The card's origin is the router's location, which catches up with the
+    // last keystroke a render later; cards match "cor" already, so a click in
+    // that gap opened the item from `?q=cor`. Wait for the URL first.
+    cy.location('search').should('include', 'q=core')
     cy.get('[data-cy="gear-card"]').should('have.length.greaterThan', 0)
     cy.get('[data-cy="gear-card-name"]').first().click()
 

@@ -1523,6 +1523,10 @@ sticky nav doesn't cover the heading.
 
 ## Suggest a Correction (Phase 2)
 
+> **Retired in live editing phase 6** (D56). The button, the dialog and the captcha are gone;
+> instead every item page offers **Edit** to everyone — an anonymous visitor is signed in with
+> their ISA account and comes back to the open editor (P6-E). Kept as the record of the box.
+
 The catalogue is community data, and the fastest way for it to rot is for a reader to spot a wrong
 number and have nowhere to put it. This is that place. It is a **suggestion box, not an editor** —
 nothing a visitor submits changes the site. See [SUBMISSIONS_PLAN.md](SUBMISSIONS_PLAN.md).
@@ -1663,6 +1667,11 @@ LIVE_EDITING_PHASE_5.md. A manufacturer is a signed-in person linked to a brand.
   while its photo links wait to be uploaded.
 
 ## Admin Triage (Phase 2)
+
+> **Since live editing phase 6** the queue holds what the retired box stored, and manufacturers'
+> photo links. There is no Approve and no JSON patch: each row links to its item (with the editor
+> open, `?edit=1`), and is closed with **Mark handled** or **Reject** (P6-G). The page also lists
+> **Blocked accounts** (P6-D).
 
 Route `/admin` — a **static** segment, so it outranks the dynamic `:slug` gear-type pattern, exactly
 as `/safety` and `/manufacturers` do (see the comment at the top of `App.tsx`).

@@ -653,6 +653,21 @@ def test_the_admin_index_holds_admins_only_and_follows_revocation(people):
     assert "sub-admin" not in {p.sub for p in people.list_with_role(Role.ADMIN)}
 
 
+def test_the_blocked_index_holds_blocked_accounts_only(people):
+    people.put(a_person(sub="sub-blocked", isa_id="ISA_B0000001", email="c@x.org", blocked_at="2026-10-15T00:00:00Z"))
+    people.put(a_person(sub="sub-free", isa_id="ISA_B0000002", email="d@x.org"))
+    assert "sub-blocked" in {p.sub for p in people.list_blocked()}
+    assert "sub-free" not in {p.sub for p in people.list_blocked()}
+    people.put(people.get("sub-blocked").model_copy(update={"blocked_at": None}))
+    assert "sub-blocked" not in {p.sub for p in people.list_blocked()}
+
+
+def test_save_times_round_trip_as_whole_numbers(people):
+    people.put(a_person(sub="sub-saves", saves=[1_800_000_000, 1_800_000_060], saves_rev=2))
+    back = people.get("sub-saves")
+    assert back.saves == [1_800_000_000, 1_800_000_060] and back.saves_rev == 2
+
+
 # --- The change log ---------------------------------------------------------
 
 
@@ -707,6 +722,8 @@ def test_a_targets_history_uses_the_index(changelog):
     changelog.append(a_record(target_id="ISA_HIST0002"))
     history = changelog.for_target(TargetType.PERSON, "ISA_HIST0001")
     assert [r.action for r in history] == [Action.ROLE_REVOKE, Action.ROLE_GRANT]
+    [older] = changelog.for_target(TargetType.PERSON, "ISA_HIST0001", before=history[0].id)
+    assert older.action == Action.ROLE_GRANT
 
 
 def test_a_role_change_and_its_record_are_one_transaction(people, changelog):
@@ -902,3 +919,41 @@ def test_brand_links_round_trip_on_a_person(people):
 
     people.put(Person(sub="maker-1", isa_id="ISA_M1", brands=[3, 23]))
     assert people.get("maker-1").brands == [3, 23]
+
+
+def test_a_counted_save_is_written_in_the_edits_transaction(catalogue, changelog, people):
+    """P6-C: the person's count and the edit land together."""
+    from slack_data.catalogue.repository import Put
+    from slack_data.changelog.writer import commit_catalogue_change
+    from slack_data.people.ratecap import RateCap
+
+    person = people.put(a_person(sub="sub-capped", isa_id="ISA_C0000001", email="e@x.org"))
+    catalogue.put_many([an_edit_document("880101", "Before")])
+    record = a_record(target_id="grips#880101", actor_role="editor", actor_sub="sub-capped")
+    cap = RateCap(people, person, clock=lambda: 1_800_000_000)
+    commit_catalogue_change(
+        catalogue, changelog, [Put(an_edit_document("880101", "After", rev=2), expected_rev=1)], [], [record], cap
+    )
+    back = people.get("sub-capped")
+    assert (back.saves, back.saves_rev) == ([1_800_000_000], 1)
+    assert back.isa_id == "ISA_C0000001", "an update of the count, not a replacement of the person"
+
+
+def test_a_count_taken_by_a_parallel_save_cancels_the_edit(catalogue, changelog, people):
+    from slack_data.catalogue.repository import Put
+    from slack_data.changelog.writer import commit_catalogue_change
+    from slack_data.people.ratecap import CapRace, RateCap
+
+    read = people.put(a_person(sub="sub-raced", isa_id="ISA_C0000002", email="f@x.org"))
+    people.put(read.model_copy(update={"saves": [1_799_999_999], "saves_rev": 1}))
+    catalogue.put_many([an_edit_document("880102", "Before")])
+    before = catalogue.version()
+    record = a_record(target_id="grips#880102", actor_role="editor", actor_sub="sub-raced")
+    with pytest.raises(CapRace):
+        commit_catalogue_change(
+            catalogue, changelog, [Put(an_edit_document("880102", "After", rev=2), expected_rev=1)], [], [record],
+            RateCap(people, read, clock=lambda: 1_800_000_000),
+        )
+    assert catalogue.get("grips", "880102").data["name"] == "Before"
+    assert record.id not in {r.id for r in changelog.recent(100)}
+    assert catalogue.version() == before

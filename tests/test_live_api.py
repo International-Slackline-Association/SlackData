@@ -221,9 +221,6 @@ def _start_server(work_dir: Path, extra_env: dict) -> tuple[subprocess.Popen, st
         # what its fixture says (slack_data/deployment.py reads both).
         "AWS_LAMBDA_FUNCTION_NAME": "",
         "SLACKDATA_DEPLOYMENT": "",
-        # Off, so nothing here calls Cloudflare. (Mail needs no such switch —
-        # the app sends none; see test_submissions.test_the_app_sends_no_email.)
-        "TURNSTILE_SECRET": "",
         "SQL_ECHO": "false",
         **extra_env,
     }
@@ -593,16 +590,14 @@ def test_the_old_trailing_slash_path_still_reaches_the_handler(live):
     assert client.get("/submissions/", headers=ADMIN).status_code == 307
 
 
-def test_the_public_submission_box_still_works_over_http(live):
-    """Phase 2's one open write endpoint, unaffected by Phase 4."""
+def test_the_public_submission_box_is_gone_over_http(live):
+    """Retired in live editing phase 6 (D56): to change something, sign in and edit."""
     client, ids, _ = live
     response = client.post(
         "/submissions",
-        json={"gear_type": "webbings", "gear_id": ids["alpha_webbing"],
-              "changes": {"weight": "71"}, "note": "Live check."},
+        json={"gear_type": "webbings", "gear_id": ids["alpha_webbing"], "changes": {"weight": "71"}},
     )
-    assert response.status_code == 201
-    assert response.json()["status"] == "pending"
+    assert response.status_code == 405
 
 
 # --- The hosted shape -------------------------------------------------------
@@ -670,17 +665,16 @@ def test_hosted_without_a_baked_catalogue_still_locks_out_the_dev_tokens(hosted_
     assert client.get("/manufacturer/me", headers=BRAND).status_code == 401
 
 
-def test_the_hosted_public_submission_box_is_reachable(hosted):
-    """It writes to a different store, so it must survive the read-only
-    catalogue. Turnstile is unset here, and hosted that fails **closed** — a 503
-    is the correct answer, and it proves the route is mounted and running its
-    captcha check rather than 404ing."""
+def test_the_hosted_triage_is_mounted_and_the_public_box_is_not(hosted):
+    """Triage reads a different store, so it survives the read-only catalogue;
+    the public POST is gone (phase 6)."""
     client, _, _ = hosted
+    assert client.get("/submissions").status_code in (401, 503)
     response = client.post(
         "/submissions",
         json={"gear_type": "webbings", "gear_id": 1, "changes": {"weight": "71"}},
     )
-    assert response.status_code == 503
+    assert response.status_code == 405
 
 
 # --- Hosted, with a pool configured: production's real shape ----------------
@@ -709,15 +703,11 @@ def test_an_unverifiable_token_is_401_not_500(hosted_with_pool):
             assert response.status_code == 401, f"{path} with {token!r} -> {response.status_code}"
 
 
-def test_the_public_write_path_is_unaffected_by_the_pool(hosted_with_pool):
-    """Turnstile is unset and fails closed hosted, so 503 — the route is mounted
-    and running its captcha check, not 404ing and not 500ing."""
+def test_triage_asks_for_a_sign_in_with_the_pool(hosted_with_pool):
+    """With the pool configured, the triage queue answers 401 — mounted, and
+    shut to anyone without a token."""
     client, _, _ = hosted_with_pool
-    response = client.post(
-        "/submissions",
-        json={"gear_type": "webbings", "gear_id": 1, "changes": {"weight": "71"}},
-    )
-    assert response.status_code == 503
+    assert client.get("/submissions").status_code == 401
 
 
 def test_no_traceback_reached_the_log(hosted_with_pool):
@@ -832,6 +822,7 @@ def test_an_admin_edit_is_served_on_the_next_request(store_mode):
     shows it; a second edit from the same stale rev is refused with the
     current entry; the public log has it."""
     client, _, log_path = store_mode
+    client.post("/me/notice", headers=ADMIN, json={"name": "Live Admin"})  # P6-B
     current = client.get("/edit/webbings/2", headers=ADMIN).json()
     edited = client.patch(
         "/edit/webbings/2", headers=ADMIN,

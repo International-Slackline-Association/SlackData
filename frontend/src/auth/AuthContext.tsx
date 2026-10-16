@@ -36,11 +36,14 @@ export interface SiteAuth {
   isLoading: boolean
   error: string | null
   isAdmin: boolean
-  /** May this person change gear of this brand — an admin, or one of its
-   *  manufacturers (phase 5)? The API decides again on every save. */
-  canEditBrand: (brandName: string | null | undefined) => boolean
-  /** Has this person any editing rights at all (admin, or any brand)? */
-  canEditAny: boolean
+  /** May this person edit? Everyone signed in since phase 6, unless an admin
+   *  blocked them. The API decides again on every save. */
+  canEdit: boolean
+  /** An admin, or one of this brand's manufacturers (phase 5): who reverts
+   *  on its gear (D58) and is not counted by the rate cap there (D53). */
+  canManageBrand: (brandName: string | null | undefined) => boolean
+  /** Why an admin blocked this account, while it is blocked (D22). */
+  blockedReason: string | null
   /** Sign in, then come back to `returnTo` (default: this page). */
   signIn: (returnTo?: string) => void
   signOut: () => void
@@ -69,7 +72,8 @@ function readDevToken(): string | null {
   }
 }
 
-/** Local dev / Cypress: a token in sessionStorage, mirroring ADMIN_DEV_TOKEN. */
+/** Local dev / Cypress: a token in sessionStorage — ADMIN_DEV_TOKEN, or a
+ *  `dev-person-token:<name>` for an ordinary account. */
 function useDevToken(enabled: boolean) {
   const [token, setToken] = useState<string | null>(() => (enabled ? readDevToken() : null))
 
@@ -88,7 +92,7 @@ function useDevToken(enabled: boolean) {
   }, [enabled])
 
   const signIn = useCallback(() => {
-    const entered = window.prompt('Admin token (local development only)')
+    const entered = window.prompt('Token (local development only): dev-admin-token, or dev-person-token:<name>')
     if (entered) {
       sessionStorage.setItem(DEV_TOKEN_KEY, entered)
       setToken(entered)
@@ -218,9 +222,12 @@ export function SiteAuthProvider({ children }: { children: ReactNode }) {
           ? 'Sign-in is not configured for this deployment. VITE_ISA_AUTHORITY and VITE_ISA_CLIENT_ID must be set at build time.'
           : (isa.error ?? meError),
       isAdmin: Boolean(me?.roles.includes('admin')),
-      canEditBrand: (brandName: string | null | undefined) =>
-        Boolean(me?.roles.includes('admin')) || Boolean(brandName && me?.brands?.some(b => b.name === brandName)),
-      canEditAny: Boolean(me?.roles.includes('admin')) || Boolean(me?.brands?.length),
+      canEdit: Boolean(me) && !me?.blocked_at,
+      canManageBrand: (brandName: string | null | undefined) =>
+        Boolean(me) &&
+        !me?.blocked_at &&
+        (Boolean(me?.roles.includes('admin')) || Boolean(brandName && me?.brands?.some(b => b.name === brandName))),
+      blockedReason: me?.blocked_at ? (me.blocked_reason ?? '') : null,
       signIn,
       signOut,
       acknowledgeNotice: acknowledge,

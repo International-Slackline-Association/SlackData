@@ -123,15 +123,11 @@ applies any `serverless.yml` change.
 
 ```bash
 cd infra
-export TURNSTILE_SECRET='...'      # Phase 2 — see below. Not stored in this repo.
 npx serverless deploy --stage prod
 ```
 
-**`TURNSTILE_SECRET` is read from your shell at deploy time** (`${env:TURNSTILE_SECRET, ''}` in
-serverless.yml), so the captcha secret never lands in git. Deploying without it exported does not
-break the site: the submissions endpoint fails **closed** and answers 503, while the catalogue is
-untouched. That is the intended failure mode — a captcha that silently switches itself off is worse
-than one that refuses. Get the value from the Cloudflare Turnstile dashboard for `slackdata.org`.
+(`TURNSTILE_SECRET` is no longer needed: the captcha went with the public suggestion box in live
+editing phase 6, D56.)
 
 Two to four minutes for a normal redeploy. Only the **first** deploy takes 15–25 minutes, because
 creating the CloudFront distribution dominates it; that is done. A `serverless.yml` change that
@@ -193,13 +189,13 @@ curl -s -o /dev/null -w '%{http_code}\n' "$BASE/api/webbing/999999"   # 404, not
 curl -s -o /dev/null -w '%{http_code}\n' "$BASE/api/openapi.json"         # 404 — docs are off
 curl -s -o /dev/null -w '%{http_code}\n' -X DELETE "$BASE/api/webbing/1"  # 405 — route not mounted
 
-# Phase 2: submissions. The one *open* write endpoint, and the closed admin ones.
+# Phase 2: submissions — admin triage only since live editing phase 6 (D56).
 curl -s -o /dev/null -w '%{http_code}\n' "$BASE/api/submissions"              # 401 — admin only
 curl -s -o /dev/null -w '%{http_code}\n' -H 'Authorization: Bearer dev-admin-token' \
      "$BASE/api/submissions"                                                  # 401 — dev token is dead hosted
 curl -s -o /dev/null -w '%{http_code}\n' -X POST "$BASE/api/submissions" \
      -H 'Content-Type: application/json' -d '{"gear_type":"webbings","gear_id":1,"note":"test"}'
-                                                                               # 400 — captcha missing (NOT 201)
+                                                                               # 405 — the public box is gone (NOT 201)
 ```
 
 Those last three are the Phase 2 equivalents of the write-surface check above, and the middle one
@@ -208,8 +204,7 @@ repository, so a 200 there would mean the admin API's password is public. It ret
 pool is configured; if the pool configuration were ever lost the answer becomes 503, never 200. See
 `slack_data/api/auth.py` and `tests/test_auth.py`.
 
-A **201** on the POST would mean the captcha is not being enforced — check that `TURNSTILE_SECRET`
-was exported for the deploy.
+A **201** on the POST would mean an old build that still mounts the retired public box.
 
 ```bash
 # Phase 4: the manufacturer API. Both must be JSON, not HTML.
@@ -239,14 +234,12 @@ curl -s -o /dev/null -w '%{http_code}\n' "$BASE/assets/nope.js"    # 403/404 —
 
 End-to-end, in a browser, once half B is deployed:
 
-1. A gear detail page shows **Suggest a correction**. If it does not, `VITE_TURNSTILE_SITE_KEY` was
-   empty at build time — see § Turning Phase 2 on.
-2. The dialog shows a Cloudflare widget. Submitting gives a reference id.
+1. The top nav shows **Sign in**, and an item page shows **Edit** to a visitor who is signed out.
+   Signing in comes back to the same page (the ISA client's callback is the bare origin, D61).
+2. Signed in, Edit saves live and the change is in the item's History, labelled with your role.
 3. **No email arrives, and that is correct** — the app sends none. See § No email, below.
-4. `/admin` offers the ISA sign-in (not a token prompt), and the submission is in the queue with
-   its **brand** shown next to the name.
-5. Approve it → a JSON patch appears with "Approved — but not live". Apply it to the root `*.json`,
-   redeploy half A, then **Mark handled**.
+4. `/admin` offers the ISA sign-in (not a token prompt) to an admin, with the triage queue, brand
+   requests, blocked accounts and admins.
 
 The write routes are not registered at all in hosted mode ([slack_data/api/routing.py](../slack_data/api/routing.py)),
 so `DELETE` hits a path whose only method is `GET` and Starlette answers 405 without reaching a
@@ -341,11 +334,9 @@ The frontend needs three values that **do not exist until half A has run**, and 
 build time. So this is a there-and-back-again, not a single pass:
 
 ```bash
-# 0. Preflight. Checks the things that fail quietly or halfway — an unset
-#    TURNSTILE_SECRET (which deploys fine and 503s forever), a dirty working
-#    tree (the image is built from it), and which AWS account you are in.
+# 0. Preflight. Checks the things that fail quietly or halfway — a dirty
+#    working tree (the image is built from it), and which AWS account you are in.
 cd infra
-export TURNSTILE_SECRET='...'              # Cloudflare dashboard, slackdata.org
 ./preflight.sh
 
 # 1. Half A. Creates the DynamoDB tables and the uploads bucket. (Sign-in is the
@@ -359,9 +350,7 @@ echo "authority: https://cognito-idp.eu-central-1.amazonaws.com/$(out IsaUserPoo
 echo "client id: $(out IsaClientId)"
 
 # 3. Fill frontend/.env.production. `./sync-env.sh` writes the two sign-in values
-#    in place (keeping the comments around them), plus the Turnstile SITE key
-#    from $TURNSTILE_SITE_KEY — so both Turnstile halves come from this one
-#    shell and cannot drift apart. See § Turnstile.
+#    in place (keeping the comments around them).
 ./sync-env.sh prod
 
 # 4. Then run half B (build + sync + invalidate).
@@ -372,17 +361,11 @@ Cognito resource either: a brand authenticates with an API key from `slackdata-b
 Deployed is not onboarded: no brand can authenticate until it has a key (§ Onboarding a
 manufacturer).
 
-**Both of the empty values in `.env.production` fail *dark*, not loudly**, which is the behaviour to
-know about before you go looking for a bug:
-
-| Left empty | What happens |
-|---|---|
-| `VITE_TURNSTILE_SITE_KEY` | The suggestion form is **not rendered at all** — and is tree-shaken out of the bundle entirely. Deliberate: the API rejects every un-captcha'd submission when hosted, so shipping the form without a key would mean a visibly broken feature rather than an absent one. A console warning explains it. |
-| `VITE_ISA_AUTHORITY` / `_CLIENT_ID` | Sign-in renders "not configured" instead of the local dev-token prompt, which the hosted API would reject anyway. |
-
-Neither is a security control — the server enforces both independently (`utilities/turnstile.py`
-fails closed, `api/auth.py` rejects the dev token whenever it is hosted or the ISA pool is configured). They exist so a
-half-finished deploy looks unfinished rather than broken.
+**The empty sign-in values in `.env.production` fail *dark*, not loudly:** with `VITE_ISA_AUTHORITY`
+/ `_CLIENT_ID` empty, sign-in renders "not configured" instead of the local dev-token prompt, which
+the hosted API would reject anyway (`api/auth.py` rejects the dev tokens whenever it is hosted or the
+ISA pool is configured). Not a security control — it exists so a half-finished deploy looks
+unfinished rather than broken.
 
 ### Retained resources and the orphan trap
 
@@ -518,67 +501,13 @@ resumes. Confirm the import is genuinely non-destructive for the table holding r
 before you run it — an import must describe the table as it actually is, so a template property that
 disagrees with the live table is the thing to check first.
 
-### Turnstile — why it needs three checks, not one
+### Turnstile — retired
 
-The suggestion form needs two values that live in different places and are
-applied by **different halves of the deploy**:
-
-| | Where it lives | Applied by |
-|---|---|---|
-| `TURNSTILE_SECRET` | your shell → `serverless.yml` → Lambda env | half A |
-| `TURNSTILE_SITE_KEY` | your shell → `.env.production` → JS bundle | half B |
-
-`serverless.yml` reads the secret as `${env:TURNSTILE_SECRET, ''}` — that `''`
-is a **default, not an error**, so a deploy with no secret succeeds, goes green,
-and warns nobody. At runtime `turnstile.py` fails **closed**, so every
-`POST /submissions/` answers 503. Nothing else changes: catalogue, search,
-detail pages and `/admin` all work. The site looks healthy.
-
-Only one of the four combinations actually hurts:
-
-| Secret | Site key | Result |
-|---|---|---|
-| unset | unset | Form never renders (tree-shaken out). Ships dark — fine. |
-| set | unset | Endpoint works, nothing calls it. Harmless. |
-| set | set | Working. |
-| **unset** | **set** | **The bad one.** A visitor fills the form in, solves the challenge, submits — and gets a 503. Looks like our bug, and what they typed is gone. |
-
-That last row is easy to reach because the secret lives only in a shell, so it
-is gone in every new terminal, while the site key sits in a committed file.
-
-**So the safeguard is three layers, and the first one is structural:**
-
-1. **One source.** `./sync-env.sh` writes `VITE_TURNSTILE_SITE_KEY` from
-   `$TURNSTILE_SITE_KEY`, so both halves come from the same shell at the same
-   moment. Reaching the bad row now takes two separate mistakes instead of one
-   omission — and the script refuses outright if you hand it a site key with no
-   secret exported.
-2. **Before deploying:** `./preflight.sh` hard-fails on the bad row (checking
-   both the shell and the committed file), and warns on the merely-invisible
-   ones.
-3. **After deploying:** `./verify-deploy.sh` checks the **live site**, because
-   intent checks can still be wrong — a secret exported but not picked up, a
-   half B built from a stale env file. It cannot solve a captcha, and does not
-   need to: `POST /submissions/` with **no** token separates the two states
-   exactly and stores nothing either way —
-
-       secret set     -> 400 "captcha verification failed"   (healthy)
-       secret not set -> 503 "temporarily unavailable"       (broken)
-
-   which is the inverse of how it reads. It then fetches the deployed bundle,
-   checks whether the Turnstile widget is in it, and fails if the two disagree.
-   Those two status codes are a contract; `tests/test_submissions.py`
-   ::`test_a_tokenless_post_separates_the_two_captcha_configurations` pins them
-   so the check cannot silently start lying about production.
-
-A fourth, weaker signal: the function logs a `WARNING` naming
-`TURNSTILE_SECRET` on every cold start in that state. It is the only one of the
-four emitted by the running thing itself, so it is the one that still fires when
-somebody deploys by hand. It lives in `lambda_handler.py` rather than
-`main.py`'s lifespan, because Mangum runs with `lifespan="off"` and a check in
-the lifespan is silent in exactly the environment it exists for.
-
-    export TURNSTILE_SECRET='...' TURNSTILE_SITE_KEY='0x4AAA...'   # both, together
+The public suggestion box and its Cloudflare Turnstile captcha were switched off in live editing
+phase 6 (D56): editing needs an ISA sign-in instead. `TURNSTILE_SECRET` and
+`VITE_TURNSTILE_SITE_KEY` are no longer read; preflight, sync-env and verify-deploy no longer check
+them, and verify-deploy now expects `POST /api/submissions` to answer 405. The Turnstile widget in
+Cloudflare's dashboard can be deleted.
 
 ### No email — and why there is nothing to set up
 
@@ -761,8 +690,6 @@ first and triage what it wrote second: rejecting those rows restores their TTL a
 
   The resource must be `table/slackdata-*` (plus `/index/*`), not just the submissions table —
   Phase 4's `slackdata-brand-clients-prod` is read on every authenticated manufacturer request.
-- **A Cloudflare Turnstile site key + secret** for `slackdata.org`. The secret is exported at deploy
-  time (half A above); the site key is public and belongs in `frontend/.env.production`.
 
 ### Registering a brand — the id that can be wrong
 

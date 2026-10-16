@@ -22,10 +22,8 @@
     "manuals/brand_filter/co_listings are still residuals — refresh all four from",
     "the next green run. The packing is only as good as those four numbers.",
     "",
-    "admin_triage and submissions stay in DIFFERENT shards on purpose: they share",
-    "one API process per runner, and the triage queue is one page of the oldest",
-    "50 pending rows, so a spec that files submissions first can push the",
-    "fixtures triage looks for off the page (CLAUDE.md § Commands).",
+    "submissions.cy.ts went with the public suggestion box (live editing phase",
+    "6); open_editing.cy.ts took its place in the detail shard.",
     "",
     "EVERY spec in cypress/e2e/ must appear in exactly one shard. A spec left out",
     "would silently stop running while CI stayed green, so",
@@ -75,7 +73,7 @@
         "editing",
         "changes",
         "media_editing",
-      "manufacturer_accounts"
+        "manufacturer_accounts"
       ]
     },
     {
@@ -95,7 +93,7 @@
       "specs": [
         "gear_detail",
         "isa_warnings",
-        "submissions",
+        "open_editing",
         "manuals",
         "url_state",
         "navigation"

@@ -42,6 +42,12 @@ def _seed_documents():
 
 
 @pytest.fixture
+def people(told_people):
+    """Accounts that have acknowledged the sign-in notice (P6-B)."""
+    return told_people
+
+
+@pytest.fixture
 def store(client):
     repository = InMemoryCatalogueRepository()
     repository.put_many(_seed_documents())
@@ -84,11 +90,14 @@ def test_editing_needs_a_sign_in(client, store):
     assert client.patch("/edit/grips/1", json={"rev": 1, "changes": {"price": 1}}).status_code == 401
 
 
-def test_editing_needs_an_admin(client, store, people, isa):
+def test_any_isa_account_edits_as_an_editor(client, store, people, isa):
+    """Phase 6 (D52): editing is open to every signed-in ISA account."""
     token = isa()
     client.get("/me", headers={"Authorization": f"Bearer {token}"})
     response = client.patch("/edit/grips/1", headers={"Authorization": f"Bearer {token}"}, json={"rev": 1, "changes": {"price": 1}})
-    assert response.status_code == 403
+    assert response.status_code == 200, response.text
+    [record] = client.get("/changes").json()
+    assert record["actor_role"] == "editor"
 
 
 def test_without_the_store_there_is_nothing_to_edit(client, monkeypatch):
