@@ -38,6 +38,7 @@ import { useOriginState } from '@/context/OriginContext'
 import { useIsaWarnings } from '@/hooks/useIsaWarnings'
 import { type AnyItem } from '@/utils/format'
 import { detailImageUrls } from '@/utils/images'
+import { useMedia } from '@/utils/mediaStore'
 import AlsoSoldBy from './AlsoSoldBy'
 import CardImageCarousel from './CardImageCarousel'
 import IsaApprovedBadge from './IsaApprovedBadge'
@@ -82,6 +83,7 @@ export default function GearDetailBody({
   // Only used when `nameHref` is set, i.e. in the listing's Detailed view: the
   // panel's title links to the standalone page, which then knows the way back.
   const originState = useOriginState()
+  useMedia()
   const images = detailImageUrls(meta.slug, item)
   const isaWarning = isaWarningStatus(meta.hasISAWarning ? item.isa_warning : null)
   // The full ISA entries behind that status word — description, what to do,
@@ -109,7 +111,12 @@ export default function GearDetailBody({
           data-cy="detail-image-area"
           className="group relative flex h-52 items-center justify-center self-start overflow-hidden rounded-lg bg-gray-50 sm:h-72"
         >
-          <CardImageCarousel key={images.join('|')} urls={images} alt={String(item.name)} imgDataCy="detail-img" />
+          <CardImageCarousel
+            key={images.map(p => p.large).join('|')}
+            photos={images}
+            alt={String(item.name)}
+            imgDataCy="detail-img"
+          />
         </div>
 
         <div className="min-w-0">

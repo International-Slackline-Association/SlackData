@@ -10,7 +10,14 @@
         "breaking_strength": 25.0,
         "price": 8.5,
         "currency": "EUR",
-        "active": false
+        "active": false,
+        "photos": [
+            {
+                "id": "e6cb42a9fedf5ea4",
+                "small": "leashrings/1/e6cb42a9fedf5ea4-480.webp",
+                "large": "leashrings/1/e6cb42a9fedf5ea4-1600.webp"
+            }
+        ]
     },
     {
         "id": 2,
@@ -22,7 +29,14 @@
         "breaking_strength": 30.0,
         "price": 9.95,
         "currency": "EUR",
-        "active": false
+        "active": false,
+        "photos": [
+            {
+                "id": "b1f1e2fc6e7dee57",
+                "small": "leashrings/2/b1f1e2fc6e7dee57-480.webp",
+                "large": "leashrings/2/b1f1e2fc6e7dee57-1600.webp"
+            }
+        ]
     },
     {
         "id": 3,
@@ -35,7 +49,14 @@
         "breaking_strength": 46.0,
         "price": 10.0,
         "currency": "EUR",
-        "active": false
+        "active": false,
+        "photos": [
+            {
+                "id": "1754ecf7f574cffb",
+                "small": "leashrings/3/1754ecf7f574cffb-480.webp",
+                "large": "leashrings/3/1754ecf7f574cffb-1600.webp"
+            }
+        ]
     },
     {
         "id": 4,
@@ -59,7 +80,19 @@
         "breaking_strength": 30.0,
         "price": 8.95,
         "currency": "EUR",
-        "active": false
+        "active": false,
+        "photos": [
+            {
+                "id": "48a4b4c4e1837059",
+                "small": "leashrings/5/48a4b4c4e1837059-480.webp",
+                "large": "leashrings/5/48a4b4c4e1837059-1600.webp"
+            },
+            {
+                "id": "6d673829107b4c93",
+                "small": "leashrings/5/6d673829107b4c93-480.webp",
+                "large": "leashrings/5/6d673829107b4c93-1600.webp"
+            }
+        ]
     },
     {
         "id": 6,
@@ -76,7 +109,19 @@
         "description": "This ultra strong ring is the allround weapon for serious rigging in the highline area, e.g. leash ring, spaceline ... This component is used \"normally\" in the military helicopter sector and was certified by the German armed forces.",
         "active": false,
         "manufacturer_not_for_highline": false,
-        "manufacturer_not_for_highline_source": "https://web.archive.org/web/20130428013656/http://www.landcruising-slacklines.de/en/shop/16-ringe--platten/318-bomber-ring-76mm"
+        "manufacturer_not_for_highline_source": "https://web.archive.org/web/20130428013656/http://www.landcruising-slacklines.de/en/shop/16-ringe--platten/318-bomber-ring-76mm",
+        "photos": [
+            {
+                "id": "3c142b7faaa698d7",
+                "small": "leashrings/6/3c142b7faaa698d7-480.webp",
+                "large": "leashrings/6/3c142b7faaa698d7-1600.webp"
+            },
+            {
+                "id": "6d673829107b4c93",
+                "small": "leashrings/6/6d673829107b4c93-480.webp",
+                "large": "leashrings/6/6d673829107b4c93-1600.webp"
+            }
+        ]
     },
     {
         "id": 7,
@@ -90,7 +135,19 @@
         "breaking_strength": 25.0,
         "price": 13.95,
         "currency": "EUR",
-        "active": false
+        "active": false,
+        "photos": [
+            {
+                "id": "efa83b12f12b87d1",
+                "small": "leashrings/7/efa83b12f12b87d1-480.webp",
+                "large": "leashrings/7/efa83b12f12b87d1-1600.webp"
+            },
+            {
+                "id": "6d673829107b4c93",
+                "small": "leashrings/7/6d673829107b4c93-480.webp",
+                "large": "leashrings/7/6d673829107b4c93-1600.webp"
+            }
+        ]
     },
     {
         "id": 8,
@@ -126,7 +183,14 @@
         "breaking_strength": 44.4,
         "price": 15.95,
         "currency": "USD",
-        "active": false
+        "active": false,
+        "photos": [
+            {
+                "id": "1952d068d63ec6c0",
+                "small": "leashrings/10/1952d068d63ec6c0-480.webp",
+                "large": "leashrings/10/1952d068d63ec6c0-1600.webp"
+            }
+        ]
     },
     {
         "id": 11,
@@ -136,7 +200,14 @@
         "inner_diameter": 79.0,
         "weight": 155.0,
         "breaking_strength": 22.2,
-        "active": false
+        "active": false,
+        "photos": [
+            {
+                "id": "bfd98c0775c3466f",
+                "small": "leashrings/11/bfd98c0775c3466f-480.webp",
+                "large": "leashrings/11/bfd98c0775c3466f-1600.webp"
+            }
+        ]
     },
     {
         "id": 12,
@@ -149,7 +220,14 @@
         "breaking_strength": 22.2,
         "price": 7.95,
         "currency": "USD",
-        "active": false
+        "active": false,
+        "photos": [
+            {
+                "id": "36796006110a525d",
+                "small": "leashrings/12/36796006110a525d-480.webp",
+                "large": "leashrings/12/36796006110a525d-1600.webp"
+            }
+        ]
     },
     {
         "id": 13,
@@ -164,7 +242,14 @@
         "price": 35.0,
         "currency": "PLN",
         "description": "Steel ring with 57 mm internal diameter. Made of drop forged steel with no welded connections. Galvanized for better protection against corrosion. Smooth surface and 57 mm internal diameter allows for excellent gliding over the webbing and tapes.",
-        "active": true
+        "active": true,
+        "photos": [
+            {
+                "id": "ff30f6da2712b648",
+                "small": "leashrings/13/ff30f6da2712b648-480.webp",
+                "large": "leashrings/13/ff30f6da2712b648-1600.webp"
+            }
+        ]
     },
     {
         "id": 14,
@@ -179,7 +264,14 @@
         "price": 7.95,
         "currency": "USD",
         "description": "Aluminum alloy connector ring that is useful for the connection of various fall arrest components and can be inserted into the bridge system of the Camp Tree Access harness. Available in two color-coded sizes with different diameters.",
-        "active": false
+        "active": false,
+        "photos": [
+            {
+                "id": "4cd9937cc042b6c3",
+                "small": "leashrings/14/4cd9937cc042b6c3-480.webp",
+                "large": "leashrings/14/4cd9937cc042b6c3-1600.webp"
+            }
+        ]
     },
     {
         "id": 15,
@@ -194,7 +286,14 @@
         "price": 150.0,
         "currency": "ZAR",
         "description": "Doubled-up, these make for perfect highline leash rings.",
-        "active": false
+        "active": false,
+        "photos": [
+            {
+                "id": "7fd8b7b13a856f51",
+                "small": "leashrings/15/7fd8b7b13a856f51-480.webp",
+                "large": "leashrings/15/7fd8b7b13a856f51-1600.webp"
+            }
+        ]
     },
     {
         "id": 16,
@@ -209,6 +308,13 @@
         "active": false,
         "gear_sellers": [
             "Spider Slacklines"
+        ],
+        "photos": [
+            {
+                "id": "87bfb3d8fa6a3f23",
+                "small": "leashrings/16/87bfb3d8fa6a3f23-480.webp",
+                "large": "leashrings/16/87bfb3d8fa6a3f23-1600.webp"
+            }
         ]
     },
     {
@@ -222,7 +328,14 @@
         "price": 69.0,
         "currency": "EUR",
         "description": "The way ZERO is designed to distribute the load is allowing it to be more compact. For additional safety it is forged from a solid block of high-strength stainless steel, which makes it extremely durable and bomb-proof and still lighter than many other steel rings on the market.",
-        "active": false
+        "active": false,
+        "photos": [
+            {
+                "id": "a14da0eeb871b148",
+                "small": "leashrings/17/a14da0eeb871b148-480.webp",
+                "large": "leashrings/17/a14da0eeb871b148-1600.webp"
+            }
+        ]
     },
     {
         "id": 18,
@@ -235,7 +348,49 @@
         "price": 79.0,
         "currency": "EUR",
         "description": "The way ZERO is designed to distribute the load is allowing it to be more compact. For additional safety it is forged from a solid block of high-strength stainless steel, which makes it extremely durable and bomb-proof and still lighter than many other steel rings on the market.",
-        "active": false
+        "active": false,
+        "photos": [
+            {
+                "id": "1ef81fb54903f06b",
+                "small": "leashrings/18/1ef81fb54903f06b-480.webp",
+                "large": "leashrings/18/1ef81fb54903f06b-1600.webp"
+            },
+            {
+                "id": "c941ef2cc13d2f6f",
+                "small": "leashrings/18/c941ef2cc13d2f6f-480.webp",
+                "large": "leashrings/18/c941ef2cc13d2f6f-1600.webp"
+            },
+            {
+                "id": "b9a1c89905b08c84",
+                "small": "leashrings/18/b9a1c89905b08c84-480.webp",
+                "large": "leashrings/18/b9a1c89905b08c84-1600.webp"
+            },
+            {
+                "id": "464e801996e61d08",
+                "small": "leashrings/18/464e801996e61d08-480.webp",
+                "large": "leashrings/18/464e801996e61d08-1600.webp"
+            },
+            {
+                "id": "92dab8d0897d1735",
+                "small": "leashrings/18/92dab8d0897d1735-480.webp",
+                "large": "leashrings/18/92dab8d0897d1735-1600.webp"
+            },
+            {
+                "id": "f0625b994a09e30a",
+                "small": "leashrings/18/f0625b994a09e30a-480.webp",
+                "large": "leashrings/18/f0625b994a09e30a-1600.webp"
+            },
+            {
+                "id": "a55ca9bb29b396d1",
+                "small": "leashrings/18/a55ca9bb29b396d1-480.webp",
+                "large": "leashrings/18/a55ca9bb29b396d1-1600.webp"
+            },
+            {
+                "id": "c6ccedaf0a496a7c",
+                "small": "leashrings/18/c6ccedaf0a496a7c-480.webp",
+                "large": "leashrings/18/c6ccedaf0a496a7c-1600.webp"
+            }
+        ]
     },
     {
         "id": 19,
@@ -248,7 +403,14 @@
         "breaking_strength": 32.0,
         "price": 5.75,
         "currency": "USD",
-        "active": false
+        "active": false,
+        "photos": [
+            {
+                "id": "4345c01210637c33",
+                "small": "leashrings/19/4345c01210637c33-480.webp",
+                "large": "leashrings/19/4345c01210637c33-1600.webp"
+            }
+        ]
     },
     {
         "id": 20,
@@ -262,7 +424,14 @@
         "breaking_strength": 15.0,
         "price": 150.0,
         "currency": "CZK",
-        "active": false
+        "active": false,
+        "photos": [
+            {
+                "id": "cef8be49bac92739",
+                "small": "leashrings/20/cef8be49bac92739-480.webp",
+                "large": "leashrings/20/cef8be49bac92739-1600.webp"
+            }
+        ]
     },
     {
         "id": 21,
@@ -278,7 +447,19 @@
         "currency": "CZK",
         "description": "Lightweight high-strength leash ring made of aluminium alloy with polished surface.",
         "notes": "Polished aluminium alloy (dural). Dimensions, weight and 35 kN strength are per ring; the price is for the 2-piece bundle (500 CZK list, 450 CZK on offer) because the manufacturer states two rings are essential for a highline leash and one must never be used alone. A single ring is also sold at 250 CZK. Not PSA certified and not certified for highline use. Also usable as a multiplier on Ellington/Tandem tensioning systems.",
-        "active": true
+        "active": true,
+        "photos": [
+            {
+                "id": "ce76645b0e14a53f",
+                "small": "leashrings/21/ce76645b0e14a53f-480.webp",
+                "large": "leashrings/21/ce76645b0e14a53f-1600.webp"
+            },
+            {
+                "id": "8fc6d0e5308d7721",
+                "small": "leashrings/21/8fc6d0e5308d7721-480.webp",
+                "large": "leashrings/21/8fc6d0e5308d7721-1600.webp"
+            }
+        ]
     },
     {
         "id": 22,
@@ -291,7 +472,14 @@
         "price": 75.05,
         "currency": "EUR",
         "description": "ZERO GOLD is the improved version of the earlier ZERO SILVER and ZERO BLACK. It's machined from 7075 high grade aluminium alloy. The hard anodized finish for additional strength, endurance, and wear resistance. It weighs less than 80 grams, which is less than half of the weight of the lightest steel ring on the market. It's really a \"must have\" piece in every ultralight system.",
-        "active": false
+        "active": false,
+        "photos": [
+            {
+                "id": "2289f9860ad73718",
+                "small": "leashrings/22/2289f9860ad73718-480.webp",
+                "large": "leashrings/22/2289f9860ad73718-1600.webp"
+            }
+        ]
     },
     {
         "id": 23,
@@ -306,7 +494,19 @@
         "breaking_strength": 20.0,
         "price": 12.9,
         "currency": "EUR",
-        "active": false
+        "active": false,
+        "photos": [
+            {
+                "id": "645e6dfefb662e48",
+                "small": "leashrings/23/645e6dfefb662e48-480.webp",
+                "large": "leashrings/23/645e6dfefb662e48-1600.webp"
+            },
+            {
+                "id": "6374f6dd55b60348",
+                "small": "leashrings/23/6374f6dd55b60348-480.webp",
+                "large": "leashrings/23/6374f6dd55b60348-1600.webp"
+            }
+        ]
     },
     {
         "id": 24,
@@ -319,7 +519,19 @@
         "breaking_strength": 20.0,
         "price": 12.0,
         "currency": "USD",
-        "active": false
+        "active": false,
+        "photos": [
+            {
+                "id": "31997e56525f5db6",
+                "small": "leashrings/24/31997e56525f5db6-480.webp",
+                "large": "leashrings/24/31997e56525f5db6-1600.webp"
+            },
+            {
+                "id": "8789bed7bc27028b",
+                "small": "leashrings/24/8789bed7bc27028b-480.webp",
+                "large": "leashrings/24/8789bed7bc27028b-1600.webp"
+            }
+        ]
     },
     {
         "id": 25,
@@ -338,6 +550,13 @@
         "active": true,
         "gear_sellers": [
             "Slack Inov"
+        ],
+        "photos": [
+            {
+                "id": "74637dacb94c32b9",
+                "small": "leashrings/25/74637dacb94c32b9-480.webp",
+                "large": "leashrings/25/74637dacb94c32b9-1600.webp"
+            }
         ]
     },
     {
@@ -353,7 +572,24 @@
         "price": 19.0,
         "currency": "EUR",
         "description": "Lightweight Highline Ring, made of hot forged anodized aluminium 6061-T6, certified and approved by the International Slackline Association – ISA.",
-        "active": true
+        "active": true,
+        "photos": [
+            {
+                "id": "9c26df0e7e8c4093",
+                "small": "leashrings/26/9c26df0e7e8c4093-480.webp",
+                "large": "leashrings/26/9c26df0e7e8c4093-1600.webp"
+            },
+            {
+                "id": "6d673829107b4c93",
+                "small": "leashrings/26/6d673829107b4c93-480.webp",
+                "large": "leashrings/26/6d673829107b4c93-1600.webp"
+            },
+            {
+                "id": "14cfb3cb0c2ad7d7",
+                "small": "leashrings/26/14cfb3cb0c2ad7d7-480.webp",
+                "large": "leashrings/26/14cfb3cb0c2ad7d7-1600.webp"
+            }
+        ]
     },
     {
         "id": 27,
@@ -370,7 +606,26 @@
         "currency": "USD",
         "description": "Sold as a pair. A forged 6061 aluminum leash ring and a clean attachment point for your highline leash. Light at 50 g each, sold as a taped pair so you can double them up for more line contact and added redundancy.",
         "notes": "Formerly called 'Loop'. Drop-forged anodized 6061 aluminium. Dimensions, weight and 24 kN strength are per ring; sold as a pair (two rings taped together) and the price is for the pair, which the manufacturer recommends for extra surface contact and redundancy.",
-        "active": true
+        "active": true,
+        "photos": [
+            {
+                "id": "f0ef36573994ee7f",
+                "small": "leashrings/27/f0ef36573994ee7f-480.webp",
+                "large": "leashrings/27/f0ef36573994ee7f-1600.webp"
+            },
+            {
+                "id": "91134343762a8023",
+                "small": "leashrings/27/91134343762a8023-480.webp",
+                "large": "leashrings/27/91134343762a8023-1600.webp"
+            }
+        ],
+        "manuals": [
+            {
+                "id": "ad384be6ff176093",
+                "file": "leashrings/27/ad384be6ff176093-user-manual.pdf",
+                "title": "User manual"
+            }
+        ]
     },
     {
         "id": 28,
@@ -384,6 +639,13 @@
         "active": false,
         "gear_sellers": [
             "Spider Slacklines"
+        ],
+        "photos": [
+            {
+                "id": "56d57de9c0216fd8",
+                "small": "leashrings/28/56d57de9c0216fd8-480.webp",
+                "large": "leashrings/28/56d57de9c0216fd8-1600.webp"
+            }
         ]
     },
     {
@@ -399,7 +661,21 @@
         "price": 74.95,
         "currency": "EUR",
         "description": "The raed HALO Titanium Highline Leash Ring is an ultralight, yet big and extremely strong ring for your highline leash. It's completely made of Titanium, the metal with the best mechanic properties for engineering ultralight high strength gear. Compared to Aluminium and Steel it has by far the best strength to weight ratio - this allows us to design the HALO leash ring with the least amount of material at a maximum of strength. Titanium has no significant fatigue effects, so it won't crack under cyclic loading. This property, combined with a breaking strength of 88 kN provides full confidence to only use one leash ring in your highline leash. The huge inner diameter of 72 mm lets the HALO Leashring easily pass across split connections and backup loops. The optimized inner geometry provides a big contact surface between ring and webbing - a feature that minimizes the wear of your webbing in leashfalls.",
-        "active": true
+        "active": true,
+        "photos": [
+            {
+                "id": "fc7529210c86329b",
+                "small": "leashrings/29/fc7529210c86329b-480.webp",
+                "large": "leashrings/29/fc7529210c86329b-1600.webp"
+            }
+        ],
+        "manuals": [
+            {
+                "id": "79c058f1af7e0e11",
+                "file": "leashrings/29/79c058f1af7e0e11-user-manual.pdf",
+                "title": "User manual"
+            }
+        ]
     },
     {
         "id": 30,
@@ -408,7 +684,19 @@
         "material": "Aluminum",
         "inner_diameter": 76.0,
         "weight": 85.0,
-        "active": false
+        "active": false,
+        "photos": [
+            {
+                "id": "d2f1e13f8574586c",
+                "small": "leashrings/30/d2f1e13f8574586c-480.webp",
+                "large": "leashrings/30/d2f1e13f8574586c-1600.webp"
+            },
+            {
+                "id": "246b85109804ab08",
+                "small": "leashrings/30/246b85109804ab08-480.webp",
+                "large": "leashrings/30/246b85109804ab08-1600.webp"
+            }
+        ]
     },
     {
         "id": 31,
@@ -425,7 +713,24 @@
         "currency": "USD",
         "description": "80mm ID Aluminum Leash Ring. A leash ring designed for modern day highline rigging. Passing segment connections and a big contact area make this leash ring a great partner for your highline sessions.",
         "notes": "CNC-machined anodized 7075 aluminium with an I-beam section; 16 mm stock width. WLL 7 kN. Sized to pass over an Alpine WebLock 5 including the front pin. Leash ring only — not to be used as an anchor.",
-        "active": true
+        "active": true,
+        "photos": [
+            {
+                "id": "951e28de33702e40",
+                "small": "leashrings/31/951e28de33702e40-480.webp",
+                "large": "leashrings/31/951e28de33702e40-1600.webp"
+            },
+            {
+                "id": "7419e488766b3128",
+                "small": "leashrings/31/7419e488766b3128-480.webp",
+                "large": "leashrings/31/7419e488766b3128-1600.webp"
+            },
+            {
+                "id": "1eb6af0de18309c8",
+                "small": "leashrings/31/1eb6af0de18309c8-480.webp",
+                "large": "leashrings/31/1eb6af0de18309c8-1600.webp"
+            }
+        ]
     },
     {
         "id": 32,
@@ -444,6 +749,30 @@
         "active": true,
         "gear_sellers": [
             "Slack Inov"
+        ],
+        "photos": [
+            {
+                "id": "cd41130731eb9c56",
+                "small": "leashrings/32/cd41130731eb9c56-480.webp",
+                "large": "leashrings/32/cd41130731eb9c56-1600.webp"
+            },
+            {
+                "id": "5ceca2bf87b2455d",
+                "small": "leashrings/32/5ceca2bf87b2455d-480.webp",
+                "large": "leashrings/32/5ceca2bf87b2455d-1600.webp"
+            },
+            {
+                "id": "917a2c1db288ab24",
+                "small": "leashrings/32/917a2c1db288ab24-480.webp",
+                "large": "leashrings/32/917a2c1db288ab24-1600.webp"
+            }
+        ],
+        "manuals": [
+            {
+                "id": "7480a003ba03b84e",
+                "file": "leashrings/32/7480a003ba03b84e-user-manual.pdf",
+                "title": "User manual"
+            }
         ]
     },
     {
@@ -462,6 +791,30 @@
         "active": true,
         "gear_sellers": [
             "Spider Slacklines"
+        ],
+        "photos": [
+            {
+                "id": "ec923d56109b04c9",
+                "small": "leashrings/33/ec923d56109b04c9-480.webp",
+                "large": "leashrings/33/ec923d56109b04c9-1600.webp"
+            },
+            {
+                "id": "0d676c2a1bb644ba",
+                "small": "leashrings/33/0d676c2a1bb644ba-480.webp",
+                "large": "leashrings/33/0d676c2a1bb644ba-1600.webp"
+            },
+            {
+                "id": "ce651570be56dddb",
+                "small": "leashrings/33/ce651570be56dddb-480.webp",
+                "large": "leashrings/33/ce651570be56dddb-1600.webp"
+            }
+        ],
+        "manuals": [
+            {
+                "id": "00dd04640d055860",
+                "file": "leashrings/33/00dd04640d055860-user-manual.pdf",
+                "title": "User manual"
+            }
         ]
     },
     {
@@ -477,6 +830,13 @@
         "price": 130.0,
         "currency": "BRL",
         "notes": "Sold as a pair of polished high-strength aluminium rings; the dimensions, weight and 18 kN strength are per ring, the price is for the pair.",
-        "active": true
+        "active": true,
+        "photos": [
+            {
+                "id": "f52a572c939ac5ec",
+                "small": "leashrings/34/f52a572c939ac5ec-480.webp",
+                "large": "leashrings/34/f52a572c939ac5ec-1600.webp"
+            }
+        ]
     }
 ]

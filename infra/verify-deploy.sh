@@ -107,6 +107,40 @@ case "$RESULT" in
 esac
 
 echo
+echo "Media is served from /media (live editing, phase 4)"
+MANIFEST="$(curl -s "$API/media/manifest")"
+case "$MANIFEST" in
+  *'"base":"/media"'*) ok "GET /api/media/manifest -> base /media" ;;
+  *) bad "GET /api/media/manifest -> no base /media. MEDIA_BASE_URL is not set on the
+      Lambda, or the route is missing: every photo on the site points elsewhere." ;;
+esac
+# The first photo the manifest names: served from the media bucket, as WebP,
+# with the headers that stop it being read as anything else (hazard 3).
+KEY="$(printf '%s' "$MANIFEST" | grep -oE '"large":"[^"]+"' | head -1 | cut -d'"' -f4)"
+if [ -z "$KEY" ]; then
+  warn "the manifest names no photo yet — run the migration (slack_data/media/migrate.py)"
+else
+  HEADERS="$(curl -sI "$SITE/media/$KEY")"
+  case "$HEADERS" in
+    *" 200"*) ok "GET /media/$KEY -> 200" ;;
+    *) bad "GET /media/$KEY -> not 200. The /media/* behaviour or the bucket policy is missing,
+      or the migration has not copied the files." ;;
+  esac
+  printf '%s' "$HEADERS" | grep -qi '^x-content-type-options: nosniff' \
+    && ok "/media/* carries nosniff" \
+    || bad "/media/* has no X-Content-Type-Options: nosniff (MediaHeadersPolicy)"
+  printf '%s' "$HEADERS" | grep -qi '^content-type: image/' \
+    && ok "/media/* serves a photo as an image type" \
+    || bad "/media/$KEY is not served as an image"
+fi
+# Hosted, the API's local stand-ins must not exist.
+STATUS="$(code -X POST "$API/media/uploads/0123456789abcdef0123456789abcdef")"
+case "$STATUS" in
+  404) ok "POST /api/media/uploads/… -> 404 (the local upload stand-in is off)" ;;
+  *) bad "POST /api/media/uploads/… -> $STATUS (expected 404): the local stand-in is live hosted" ;;
+esac
+
+echo
 echo "The manufacturer API answers as an API, not as the website"
 #
 # Two things at once, and the SECOND is the one worth the check.

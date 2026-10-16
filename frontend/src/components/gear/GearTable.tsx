@@ -42,6 +42,7 @@ import type { Origin } from '@/utils/origin'
 import type { SortSpec } from '@/hooks/useUrlState'
 import type { AnyItem } from '@/utils/format'
 import { itemImageUrls } from '@/utils/images'
+import { useMedia } from '@/utils/mediaStore'
 import {
   ariaSort,
   isStretchColumn,
@@ -124,8 +125,10 @@ const GearTableRow = memo(function GearTableRow({
   onToggleCompare?: (id: number) => void
   onOpen: (event: ReactMouseEvent<HTMLTableRowElement>, id: number) => void
 }) {
-  // itemImageUrls, not the item's own key: a collapsed group has none.
-  const image = itemImageUrls(slug, item)[0] ?? null
+  // itemImageUrls, not the item's own key: a collapsed group has none. A 40 px
+  // thumbnail: the small size is already sharper than it needs.
+  useMedia()
+  const image = itemImageUrls(slug, item)[0]?.small ?? null
 
   // A cell's whole area as a link to the item. The card gets this from one
   // stretched <Link> overlay; a table row cannot host one — an absolutely

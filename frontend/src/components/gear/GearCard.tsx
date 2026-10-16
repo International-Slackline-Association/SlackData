@@ -18,6 +18,7 @@ import { useCurrency } from '@/context/CurrencyContext'
 import { useOriginState } from '@/context/OriginContext'
 import { dataAttrs, formatValue, type AnyItem } from '@/utils/format'
 import { itemImageUrls } from '@/utils/images'
+import { useMedia } from '@/utils/mediaStore'
 import { isGroupItem } from '@/utils/groups'
 import VendorBrands from '@/components/brand/VendorBrands'
 import CardImageCarousel from './CardImageCarousel'
@@ -69,6 +70,7 @@ export default function GearCard({
   const isaCertified = hasISA && item.isa_certified === true
 
   // Every image we hold for this product — the card browses the whole set.
+  useMedia()
   const images = itemImageUrls(slug, item)
 
   // Roughly half the catalogue has no product_url (57/100 webbings, 36/100
@@ -165,7 +167,7 @@ export default function GearCard({
             />
           )}
         </div>
-        <CardImageCarousel urls={images} alt={String(item.name)} />
+        <CardImageCarousel photos={images} alt={String(item.name)} />
       </div>
 
       <div className="flex flex-1 flex-col gap-1 p-4">

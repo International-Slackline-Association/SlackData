@@ -11,6 +11,9 @@ phase 6 opens the item routes to every signed-in ISA account with a rate cap.
 | `POST /edit/revert/{record_id}` | undo one recorded edit, field by field (D58) |
 | `GET` · `PATCH /edit/brand/{catalog_id}`, `POST /edit/brand` | a brand's entry, never its name (P3-G) |
 | `GET /edit/{slug}/fields`, `GET /edit/brand/fields` | what the edit form offers: each field's kind and allowed values, from the model |
+| `POST /edit/media/uploads` | forms to post files straight to quarantine (phase 4, P4-A) |
+| `PUT /edit/{slug}/{id}/media` | the item's photos and/or manuals, as whole lists: add, remove, reorder, retitle (P4-H) |
+| `PUT /edit/brand/{catalog_id}/media` | a brand's logo, and its range-wide manuals per gear type |
 
 Every change is written with its change log record in one transaction, and
 answers **409** with the current entry when it was based on a stale `rev`
@@ -22,7 +25,7 @@ there is nothing to edit, and the routes answer 503.
 
 from typing import Annotated, Any
 
-from fastapi import APIRouter, Depends, HTTPException, Path, status
+from fastapi import APIRouter, Depends, HTTPException, Path, Request, status
 from pydantic import BaseModel, Field
 
 from slack_data.api.auth import require_admin
@@ -30,6 +33,9 @@ from slack_data.catalogue import edits
 from slack_data.catalogue.repository import CatalogueRepository, Conflict
 from slack_data.changelog.repository import RecordExists
 from slack_data.changelog.store import ChangeLogRepositoryDep
+from slack_data.media import edits as media_edits
+from slack_data.media.kinds import ALLOWED, MAX_BYTES, MB, Purpose, by_content_type
+from slack_data.media.store import MediaStore, UploadTarget, media_store, new_upload_id
 from slack_data.models.changes import MAX_WHY_LENGTH
 from slack_data.models.people import Person
 
@@ -54,6 +60,16 @@ def editable_store() -> CatalogueRepository:
 
 
 StoreDep = Annotated[CatalogueRepository, Depends(editable_store)]
+
+
+def available_media() -> MediaStore:
+    media = media_store()
+    if media is None:
+        raise HTTPException(status.HTTP_503_SERVICE_UNAVAILABLE, "uploads need the media store")
+    return media
+
+
+MediaDep = Annotated[MediaStore, Depends(available_media)]
 Why = Annotated[str | None, Field(default=None, max_length=MAX_WHY_LENGTH)]
 ItemId = Annotated[int, Path(gt=0, le=2**63 - 1)]
 
@@ -88,6 +104,31 @@ class BrandEdit(BaseModel):
 class BrandCreate(BaseModel):
     name: str
     fields: dict[str, Any] = {}
+    why: Why = None
+
+
+class UploadRequest(BaseModel):
+    purpose: Purpose
+    content_type: str
+    # What the browser says the file is; S3 enforces the real limit.
+    size: int = Field(gt=0)
+
+
+class Uploads(BaseModel):
+    files: list[UploadRequest] = Field(min_length=1, max_length=20)
+
+
+class ItemMedia(BaseModel):
+    rev: int
+    photos: list[media_edits.PhotoRef] | None = None
+    manuals: list[media_edits.ManualRef] | None = None
+    why: Why = None
+
+
+class BrandMedia(BaseModel):
+    rev: int
+    logo: media_edits.LogoChange | None = None
+    manuals: dict[str, list[media_edits.ManualRef]] | None = None
     why: Why = None
 
 
@@ -146,6 +187,34 @@ class FieldSpec(BaseModel):
     required: bool
 
 
+# --- Uploads (declared before /{slug}) -------------------------------------------
+
+
+@edit_router.post("/media/uploads", response_model=list[UploadTarget])
+def upload_targets(body: Uploads, request: Request, _: CurrentAdmin, __: StoreDep, media: MediaDep):
+    """One form per file. A type or size the purpose does not allow is refused
+    here, before the file travels; S3 refuses it again on arrival, and the
+    attach checks the bytes themselves."""
+    errors = []
+    for index, wanted in enumerate(body.files):
+        kind = by_content_type(wanted.content_type)
+        if kind not in ALLOWED[wanted.purpose]:
+            names = " or ".join(t.extension.upper() for t in ALLOWED[wanted.purpose])
+            errors.append({"field": f"files.{index}", "message": f"a {wanted.purpose.value} must be {names}"})
+        elif wanted.size > MAX_BYTES[wanted.purpose]:
+            errors.append({
+                "field": f"files.{index}",
+                "message": f"over the {MAX_BYTES[wanted.purpose] // MB} MB limit for a {wanted.purpose.value}",
+            })
+    if errors:
+        raise HTTPException(422, {"message": "these files cannot be uploaded", "errors": errors})
+    base = str(request.base_url)
+    return [
+        media.upload_target(new_upload_id(), wanted.content_type, MAX_BYTES[wanted.purpose], base)
+        for wanted in body.files
+    ]
+
+
 # --- Brands (declared before /{slug}, which would otherwise match "brand") -----
 
 
@@ -173,6 +242,24 @@ def edit_brand(catalog_id: ItemId, body: BrandEdit, admin: CurrentAdmin, store: 
     return _run(
         store, "manufacturers", key,
         lambda: edits.edit_brand(store, log, admin, catalog_id, body.rev, body.changes, body.why),
+    )
+
+
+@edit_router.put("/brand/{catalog_id}/media", response_model=EditResult)
+def brand_media(
+    catalog_id: ItemId, body: BrandMedia, admin: CurrentAdmin, store: StoreDep, media: MediaDep,
+    log: ChangeLogRepositoryDep,
+):
+    key = None
+    try:
+        key = edits._brand_document(store.load(), catalog_id).key
+    except edits.NotFound:
+        pass
+    return _run(
+        store, "manufacturers", key,
+        lambda: media_edits.set_brand_media(
+            store, log, media, admin, catalog_id, body.rev, body.logo, body.manuals, body.why
+        ),
     )
 
 
@@ -235,4 +322,17 @@ def merge_item(slug: str, item_id: ItemId, body: Merge, admin: CurrentAdmin, sto
     return _run(
         store, slug, str(item_id),
         lambda: edits.merge_item(store, log, admin, slug, item_id, body.rev, body.into, body.why),
+    )
+
+
+@edit_router.put("/{slug}/{item_id}/media", response_model=EditResult)
+def item_media(
+    slug: str, item_id: ItemId, body: ItemMedia, admin: CurrentAdmin, store: StoreDep, media: MediaDep,
+    log: ChangeLogRepositoryDep,
+):
+    return _run(
+        store, slug, str(item_id),
+        lambda: media_edits.set_item_media(
+            store, log, media, admin, slug, item_id, body.rev, body.photos, body.manuals, body.why
+        ),
     )

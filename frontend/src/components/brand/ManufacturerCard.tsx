@@ -19,6 +19,7 @@ import { useOriginState } from '@/context/OriginContext'
 import { GEAR_TYPES } from '@/config/gearTypes'
 import type { BrandWithCounts } from '@/hooks/useBrandDirectory'
 import { manufacturerLogo } from '@/utils/manufacturerImages'
+import { useMedia } from '@/utils/mediaStore'
 import { flagUrl } from '@/utils/countryFlags'
 
 function CountryFlag({ country }: { country: string | null }) {
@@ -40,6 +41,7 @@ function CountryFlag({ country }: { country: string | null }) {
 }
 
 function Logo({ brandName }: { brandName: string }) {
+  useMedia()
   const src = manufacturerLogo(brandName)
   const [failed, setFailed] = useState(false)
 

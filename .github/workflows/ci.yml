@@ -179,6 +179,7 @@ jobs:
         # built into memory, and editing.cy.ts / changes.cy.ts edit it through
         # the real routes. The built catalogue is the seeds' exactly
         # (tests/test_catalogue.py), so every other spec reads what it did.
+        # Media is the repo's snapshot (media/), with uploads in a scratch dir.
         run: |
           CATALOG_STORE_PATH=/tmp/cypress-catalog.db python -m slack_data.catalogue.importer --apply
           cd slack_data
@@ -188,6 +189,7 @@ jobs:
           BRAND_CLIENTS_DB_PATH=/tmp/cypress-brand-clients.db \
           PEOPLE_DB_PATH=/tmp/cypress-people.db \
           CHANGELOG_DB_PATH=/tmp/cypress-changelog.db \
+          MEDIA_DIR=/tmp/cypress-media \
           python -m uvicorn main:app --port 8000 &
           for i in $(seq 1 60); do
             curl -sf localhost:8000/webbing/?limit=1 >/dev/null && exit 0

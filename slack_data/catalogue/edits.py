@@ -32,6 +32,7 @@ from slack_data.changelog.writer import commit_catalogue_change, next_id
 from slack_data.load_data.load_gear import (
     DERIVED_FIELDS,
     GEAR,
+    MEDIA_KEYS,
     MERGED_KEY,
     UNMODELLED_KEY,
     UnknownField,
@@ -187,17 +188,21 @@ def canonical(collection: str, entry: dict, brands: set[str]) -> dict:
     result = to_entry(collection, row, brand, entry.get(UNMODELLED_KEY))
     if MERGED_KEY in entry:
         result[MERGED_KEY] = entry[MERGED_KEY]
+    for key in MEDIA_KEYS:
+        if entry.get(key):
+            result[key] = entry[key]
     return result
 
 
-def _check_fields(collection: str, names: Iterable[str]) -> None:
-    forbidden = sorted(
-        n for n in names if n in {"id", UNMODELLED_KEY, MERGED_KEY} | DERIVED_FIELDS
-    )
+def _check_fields(collection: str, names: Iterable[str], media: bool = False) -> None:
+    """`media`: photos and manuals may be set too — by the media route, which
+    has checked every file, and by a revert, which restores a list it had."""
+    closed = {"id", UNMODELLED_KEY, MERGED_KEY} | DERIVED_FIELDS | (set() if media else set(MEDIA_KEYS))
+    forbidden = sorted(n for n in names if n in closed)
     if forbidden:
         raise Invalid(
             f"not editable here: {forbidden} — the ISA's statements are derived, "
-            "and hiding and merging have their own actions",
+            "and merging and media have their own actions",
             [{"field": n, "message": "not editable"} for n in forbidden],
         )
 
@@ -299,11 +304,13 @@ def edit_item(
     action: Action = Action.ITEM_EDIT,
     channel: Channel = Channel.WEB,
     reverts: str | None = None,
+    media: bool = False,
 ) -> Outcome:
-    """Set fields on an item. A value of None (or `[]`) clears the field."""
+    """Set fields on an item. A value of None (or `[]`) clears the field.
+    `media`: photos and manuals may be among them (`_check_fields`)."""
     if not changes:
         raise Invalid("nothing to change")
-    _check_fields(collection, changes)
+    _check_fields(collection, changes, media)
     documents = store.load()
     document = _item(documents, collection, item_id)
     if document.data.get(MERGED_KEY) is not None:
@@ -446,7 +453,7 @@ def revert(store, log, actor: Person, record_id: str, why: str | None = None) ->
         raise Refused("every field has changed again since — nothing to revert", refused)
     outcome = edit_item(
         store, log, actor, collection, item_id, document.rev, restore, why,
-        action=Action.ITEM_REVERT, channel=Channel.REVERT, reverts=record.id,
+        action=Action.ITEM_REVERT, channel=Channel.REVERT, reverts=record.id, media=True,
     )
     outcome.refused = refused
     return outcome

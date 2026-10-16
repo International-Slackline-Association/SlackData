@@ -119,8 +119,8 @@ class ManufacturerGearItem(BaseModel):
     source_url: str | None = None
     # Links to photos the brand already publishes. **Recorded, never fetched**:
     # the API makes no outbound request for them, so a caller-chosen URL is not
-    # a request-forgery surface. The operator files them with
-    # scripts/fetch_submission_images.py when applying the update. Beside
+    # a request-forgery surface. An admin adds them by hand on the item's page
+    # (Photos and manuals, live editing phase 4) when applying the update. Beside
     # `changes` rather than in it, because a photo adds to a product and
     # corrects no spec. See MANUFACTURER_API_PLAN.md § Step 4 — photos as links.
     image_urls: list[str] = Field(default_factory=list)

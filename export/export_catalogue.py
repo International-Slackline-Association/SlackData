@@ -19,6 +19,17 @@ Writes, into --out:
   removed — stands out (§ 6.5).
 - `catalogue.json` — the catalogue version it was exported at. No timestamp:
   the commit carries the date, and a timestamp would make every day a change.
+- `media/<key>` — every photo, manual and logo the catalogue names (GET
+  /media/manifest, live editing phase 4), fetched from the public `/media/`.
+  This is the media's backup outside AWS (LIVE_EDITING_PHASE_4.md P4-F). A key
+  is never reused for other bytes, so only keys not yet held are fetched, and a
+  file the catalogue stops naming stays: the export never deletes.
+
+`--snapshot` writes only the seeds and the media — the shape of this repo's
+own dev snapshot (root `*.json` and `media/`), refreshed deliberately in its
+own PR:
+
+    python export/export_catalogue.py --api https://slackdata.org/api --out . --snapshot
 
 A run that changes nothing leaves every file byte-identical, so the workflow
 commits only on a real change.
@@ -26,6 +37,7 @@ commits only on a real change.
 
 import argparse
 import json
+import re
 import sys
 import urllib.parse
 import urllib.request
@@ -56,10 +68,55 @@ def all_changes(api: str) -> list[dict]:
     return list(reversed(records))  # oldest first
 
 
+# A key the media store could have made (slack_data/media/store.py valid_key):
+# nothing written outside --out/media.
+MEDIA_KEY = re.compile(r"^[a-z0-9]+(/[a-z0-9-]+)*/[a-z0-9-]+\.(jpg|png|webp|pdf|svg)$")
+
+
+def media_keys(manifest: dict) -> list[str]:
+    """Every key the manifest names, sorted."""
+    keys = set(manifest.get("logos", {}).values())
+    for by_id in manifest.get("photos", {}).values():
+        for photos in by_id.values():
+            keys |= {size for p in photos for size in (p["small"], p["large"])}
+    for section in ("manuals", "brandManuals"):
+        for by_owner in manifest.get(section, {}).values():
+            for documents in by_owner.values():
+                keys |= {d["file"] for d in documents}
+    return sorted(keys)
+
+
+def download_media(base: str, keys: list[str], out: Path) -> int:
+    """Each key not yet under `out`, fetched from `base`; how many were."""
+    fetched = 0
+    for key in keys:
+        if not MEDIA_KEY.match(key) or ".." in key:
+            raise ValueError(f"not a media key: {key!r}")
+        target = out / key
+        if target.exists():
+            continue
+        data = get(f"{base}/{key}")
+        if not data:
+            raise ValueError(f"{key}: empty")
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_bytes(data)
+        fetched += 1
+    return fetched
+
+
+def export_media(api: str, out: Path) -> int:
+    manifest = json.loads(get(f"{api}/media/manifest"))
+    # "/media" hosted: on the site's own origin, beside /api.
+    base = urllib.parse.urljoin(api + "/", manifest["base"]).rstrip("/")
+    return download_media(base, media_keys(manifest), out / "media")
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[1])
     parser.add_argument("--api", default="https://slackdata.org/api")
     parser.add_argument("--out", default=".")
+    parser.add_argument("--snapshot", action="store_true", help="the seeds and the media only (this repo's dev snapshot)")
+    parser.add_argument("--no-media", action="store_true", help="skip the media")
     args = parser.parse_args(argv)
     api = args.api.rstrip("/")
     out = Path(args.out)
@@ -70,6 +127,11 @@ def main(argv: list[str] | None = None) -> int:
         body = get(f"{api}/catalogue/{collection['name']}")
         json.loads(body)  # refuse to write anything that is not JSON
         (out / collection["file"]).write_bytes(body)
+
+    fetched = 0 if args.no_media else export_media(api, out)
+    if args.snapshot:
+        print(f"exported {len(index['collections'])} collections and {fetched} new media files")
+        return 0
 
     changes = all_changes(api)
     (out / "changes.json").write_text(
@@ -83,7 +145,7 @@ def main(argv: list[str] | None = None) -> int:
         + "\n",
         encoding="utf-8",
     )
-    print(f"exported {len(index['collections'])} collections and {len(changes)} changes")
+    print(f"exported {len(index['collections'])} collections, {len(changes)} changes, {fetched} new media files")
     return 0
 
 

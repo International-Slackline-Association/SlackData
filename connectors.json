@@ -22,7 +22,29 @@
         "price": 40.0,
         "currency": "EUR",
         "notes": "WLL 8 kN. Weight includes the PushPin and its rubber cord. The bare shackle of the KingPin Weblock (weblock 41).",
-        "active": true
+        "active": true,
+        "photos": [
+            {
+                "id": "1b4729eecda2294d",
+                "small": "connectors/1/1b4729eecda2294d-480.webp",
+                "large": "connectors/1/1b4729eecda2294d-1600.webp"
+            },
+            {
+                "id": "44c2a91433e6a8c0",
+                "small": "connectors/1/44c2a91433e6a8c0-480.webp",
+                "large": "connectors/1/44c2a91433e6a8c0-1600.webp"
+            },
+            {
+                "id": "cbc4d34cf3e51b92",
+                "small": "connectors/1/cbc4d34cf3e51b92-480.webp",
+                "large": "connectors/1/cbc4d34cf3e51b92-1600.webp"
+            },
+            {
+                "id": "3917a65b92e8d3cb",
+                "small": "connectors/1/3917a65b92e8d3cb-480.webp",
+                "large": "connectors/1/3917a65b92e8d3cb-1600.webp"
+            }
+        ]
     },
     {
         "id": 2,
@@ -42,7 +64,29 @@
         "price": 45.0,
         "currency": "USD",
         "notes": "WLL 12 kN. Pre-order in October 2026. Inside 40 x 51 mm, outside 62 x 86 mm, eye 30 mm. Pin parking spot on one side arm. No standard named.",
-        "active": true
+        "active": true,
+        "photos": [
+            {
+                "id": "f53e0a20c52058dd",
+                "small": "connectors/2/f53e0a20c52058dd-480.webp",
+                "large": "connectors/2/f53e0a20c52058dd-1600.webp"
+            },
+            {
+                "id": "7e6725a6a54adf13",
+                "small": "connectors/2/7e6725a6a54adf13-480.webp",
+                "large": "connectors/2/7e6725a6a54adf13-1600.webp"
+            },
+            {
+                "id": "af8bb97f03efdd37",
+                "small": "connectors/2/af8bb97f03efdd37-480.webp",
+                "large": "connectors/2/af8bb97f03efdd37-1600.webp"
+            },
+            {
+                "id": "49805927af72a608",
+                "small": "connectors/2/49805927af72a608-480.webp",
+                "large": "connectors/2/49805927af72a608-1600.webp"
+            }
+        ]
     },
     {
         "id": 3,
@@ -57,7 +101,39 @@
         "weight": 144.0,
         "product_url": "https://www.facebook.com/rio.zhang/posts/pfbid02vrPSanZDPLWUGE2pVsuMaN6CyXcaG8bYkjvYMmmzXGBoJyndAnyhyhncuy6RXKTtl",
         "notes": "Chinese name 隼. WLL 8 kN (engraved and on the spec photo). Inside 44.8 x 38 mm, outside 79 x 82 mm. Anodised black, red or blue. Only source is a Facebook post; no price or standard known.",
-        "active": true
+        "active": true,
+        "photos": [
+            {
+                "id": "76c796624da32703",
+                "small": "connectors/3/76c796624da32703-480.webp",
+                "large": "connectors/3/76c796624da32703-1600.webp"
+            },
+            {
+                "id": "f8c6bc0d5a30a827",
+                "small": "connectors/3/f8c6bc0d5a30a827-480.webp",
+                "large": "connectors/3/f8c6bc0d5a30a827-1600.webp"
+            },
+            {
+                "id": "5bb084378babe222",
+                "small": "connectors/3/5bb084378babe222-480.webp",
+                "large": "connectors/3/5bb084378babe222-1600.webp"
+            },
+            {
+                "id": "56cbfc549159f06a",
+                "small": "connectors/3/56cbfc549159f06a-480.webp",
+                "large": "connectors/3/56cbfc549159f06a-1600.webp"
+            },
+            {
+                "id": "935edfe5d29a49fc",
+                "small": "connectors/3/935edfe5d29a49fc-480.webp",
+                "large": "connectors/3/935edfe5d29a49fc-1600.webp"
+            },
+            {
+                "id": "0653db42c1de85f2",
+                "small": "connectors/3/0653db42c1de85f2-480.webp",
+                "large": "connectors/3/0653db42c1de85f2-1600.webp"
+            }
+        ]
     },
     {
         "id": 4,
@@ -75,7 +151,29 @@
         "weight": 120.0,
         "product_url": "https://web.archive.org/web/20161009010520/http://www.landcruising-slacklines.de:80/en/shop/6-/38-/491-landcruising-airbow",
         "notes": "Engraved: MBS 70 kN along the shackle, 38 kN across, WLL 8 kN, serial number, 'not certified as P.P.E.', 'Made in Germany', max 90° load angle. Elastic catch cord on the pin. Weight includes the push button pin.",
-        "active": false
+        "active": false,
+        "photos": [
+            {
+                "id": "0cc94787d665e111",
+                "small": "connectors/4/0cc94787d665e111-480.webp",
+                "large": "connectors/4/0cc94787d665e111-1600.webp"
+            },
+            {
+                "id": "843f1e28274ec938",
+                "small": "connectors/4/843f1e28274ec938-480.webp",
+                "large": "connectors/4/843f1e28274ec938-1600.webp"
+            },
+            {
+                "id": "a80b406e4e2d3f7b",
+                "small": "connectors/4/a80b406e4e2d3f7b-480.webp",
+                "large": "connectors/4/a80b406e4e2d3f7b-1600.webp"
+            },
+            {
+                "id": "f325993a5406bbdd",
+                "small": "connectors/4/f325993a5406bbdd-480.webp",
+                "large": "connectors/4/f325993a5406bbdd-1600.webp"
+            }
+        ]
     },
     {
         "id": 5,
@@ -94,7 +192,19 @@
         "price": 15.0,
         "currency": "USD",
         "notes": "WLL 12 kN. Captive pin. Inside 46 x 66.4 mm, outside 66 x 94.5 mm. Jaw stated as 26.9 mm in the text, 27.0 mm in the spec table.",
-        "active": true
+        "active": true,
+        "photos": [
+            {
+                "id": "7aa6259c18789b59",
+                "small": "connectors/5/7aa6259c18789b59-480.webp",
+                "large": "connectors/5/7aa6259c18789b59-1600.webp"
+            },
+            {
+                "id": "104dbcc69e9c9ddf",
+                "small": "connectors/5/104dbcc69e9c9ddf-480.webp",
+                "large": "connectors/5/104dbcc69e9c9ddf-1600.webp"
+            }
+        ]
     },
     {
         "id": 6,
@@ -114,7 +224,14 @@
         "currency": "USD",
         "notes": "Opening is BC's 'opening size' (19 mm); their spec drawing also labels a 12 mm 'gate opening'. Closure not stated. Made in Taiwan.",
         "active": true,
-        "product_group": "Oval Carabiner, Aluminium"
+        "product_group": "Oval Carabiner, Aluminium",
+        "photos": [
+            {
+                "id": "bb5f52c6b65a0e4e",
+                "small": "connectors/6/bb5f52c6b65a0e4e-480.webp",
+                "large": "connectors/6/bb5f52c6b65a0e4e-1600.webp"
+            }
+        ]
     },
     {
         "id": 7,
@@ -133,7 +250,14 @@
         "price": 16.0,
         "currency": "USD",
         "notes": "Listed as 'Soft Shackle - 4mm x 15cm'. WLL 5 kN. Button knot. Opening is BC's 'shackle inner diameter'. Double-wrapped for weblocks.",
-        "active": true
+        "active": true,
+        "photos": [
+            {
+                "id": "f8fb0f6b866fbe34",
+                "small": "connectors/7/f8fb0f6b866fbe34-480.webp",
+                "large": "connectors/7/f8fb0f6b866fbe34-1600.webp"
+            }
+        ]
     },
     {
         "id": 8,
@@ -151,7 +275,29 @@
         "currency": "USD",
         "notes": "Listed as 'Soft Shackle - 5mm'. WLL 9 kN. Button knot. Sold in 10 cm and 20 cm lengths, with or without a sleeve (US$16–24).",
         "active": true,
-        "product_group": "Soft Shackle 5mm"
+        "product_group": "Soft Shackle 5mm",
+        "photos": [
+            {
+                "id": "e31009dc19ffeddf",
+                "small": "connectors/8/e31009dc19ffeddf-480.webp",
+                "large": "connectors/8/e31009dc19ffeddf-1600.webp"
+            },
+            {
+                "id": "866bbb15e36c1c32",
+                "small": "connectors/8/866bbb15e36c1c32-480.webp",
+                "large": "connectors/8/866bbb15e36c1c32-1600.webp"
+            },
+            {
+                "id": "4cdcc208672d57e9",
+                "small": "connectors/8/4cdcc208672d57e9-480.webp",
+                "large": "connectors/8/4cdcc208672d57e9-1600.webp"
+            },
+            {
+                "id": "acc82b602bfc381c",
+                "small": "connectors/8/acc82b602bfc381c-480.webp",
+                "large": "connectors/8/acc82b602bfc381c-1600.webp"
+            }
+        ]
     },
     {
         "id": 9,
@@ -169,7 +315,29 @@
         "currency": "USD",
         "notes": "Listed as 'Soft Shackle - 6mm'. WLL 12 kN. Button knot. Sold in 10 cm and 20 cm lengths, with or without a sleeve (US$19–28).",
         "active": true,
-        "product_group": "Soft Shackle 6mm"
+        "product_group": "Soft Shackle 6mm",
+        "photos": [
+            {
+                "id": "9cc3c60e5128b5f4",
+                "small": "connectors/9/9cc3c60e5128b5f4-480.webp",
+                "large": "connectors/9/9cc3c60e5128b5f4-1600.webp"
+            },
+            {
+                "id": "ffe3570bf15ed50b",
+                "small": "connectors/9/ffe3570bf15ed50b-480.webp",
+                "large": "connectors/9/ffe3570bf15ed50b-1600.webp"
+            },
+            {
+                "id": "4cdcc208672d57e9",
+                "small": "connectors/9/4cdcc208672d57e9-480.webp",
+                "large": "connectors/9/4cdcc208672d57e9-1600.webp"
+            },
+            {
+                "id": "acc82b602bfc381c",
+                "small": "connectors/9/acc82b602bfc381c-480.webp",
+                "large": "connectors/9/acc82b602bfc381c-1600.webp"
+            }
+        ]
     },
     {
         "id": 10,
@@ -189,7 +357,19 @@
         "currency": "EUR",
         "notes": "WLL 7 kN. Opening 'ca. 21 mm'. Closure not stated on the page; the photo shows an oval twist-lock, the same part as Viper's (operator, 2026-10-12). Slacktivity reports it the most triload-resistant carabiner in their tests.",
         "active": true,
-        "product_group": "Oval Carabiner, Twist-lock"
+        "product_group": "Oval Carabiner, Twist-lock",
+        "photos": [
+            {
+                "id": "2b6633db53e89c93",
+                "small": "connectors/10/2b6633db53e89c93-480.webp",
+                "large": "connectors/10/2b6633db53e89c93-1600.webp"
+            },
+            {
+                "id": "28d55a955d6013c1",
+                "small": "connectors/10/28d55a955d6013c1-480.webp",
+                "large": "connectors/10/28d55a955d6013c1-1600.webp"
+            }
+        ]
     },
     {
         "id": 11,
@@ -206,7 +386,14 @@
         "notes": "Listed as 'Dyneema Soft Shackle 14 kN'. Spliced from coated 3 mm Dyneema, made in Germany.",
         "active": true,
         "manufacturer_not_for_highline": true,
-        "manufacturer_not_for_highline_source": "https://raed-sports.com/products/dyneema-soft-shackle-14-kn"
+        "manufacturer_not_for_highline_source": "https://raed-sports.com/products/dyneema-soft-shackle-14-kn",
+        "photos": [
+            {
+                "id": "5934d301a82d7aab",
+                "small": "connectors/11/5934d301a82d7aab-480.webp",
+                "large": "connectors/11/5934d301a82d7aab-1600.webp"
+            }
+        ]
     },
     {
         "id": 12,
@@ -224,7 +411,14 @@
         "active": true,
         "manufacturer_not_for_highline": true,
         "manufacturer_not_for_highline_source": "https://raed-sports.com/products/dyneema-soft-shackle-42-kn",
-        "product_group": "Soft Shackle 6mm"
+        "product_group": "Soft Shackle 6mm",
+        "photos": [
+            {
+                "id": "5934d301a82d7aab",
+                "small": "connectors/12/5934d301a82d7aab-480.webp",
+                "large": "connectors/12/5934d301a82d7aab-1600.webp"
+            }
+        ]
     },
     {
         "id": 13,
@@ -242,7 +436,29 @@
         "currency": "ZAR",
         "notes": "Listed as 'HMPE Soft Shackle 5mm'. Individually proof-tested to 1500 kg (a proof load, not a breaking strength). Button knot. 29 cm long open.",
         "active": true,
-        "product_group": "Soft Shackle 5mm"
+        "product_group": "Soft Shackle 5mm",
+        "photos": [
+            {
+                "id": "7ccc88829b28ae94",
+                "small": "connectors/13/7ccc88829b28ae94-480.webp",
+                "large": "connectors/13/7ccc88829b28ae94-1600.webp"
+            },
+            {
+                "id": "99229d19b32f1e59",
+                "small": "connectors/13/99229d19b32f1e59-480.webp",
+                "large": "connectors/13/99229d19b32f1e59-1600.webp"
+            },
+            {
+                "id": "48a7aac337c7b812",
+                "small": "connectors/13/48a7aac337c7b812-480.webp",
+                "large": "connectors/13/48a7aac337c7b812-1600.webp"
+            },
+            {
+                "id": "55253e22401e5424",
+                "small": "connectors/13/55253e22401e5424-480.webp",
+                "large": "connectors/13/55253e22401e5424-1600.webp"
+            }
+        ]
     },
     {
         "id": 14,
@@ -261,7 +477,24 @@
         "currency": "BRL",
         "notes": "WLL 5 kN. Opening is Bera's 'espaço interno'. Knot diameter 21 mm. Portuguese page only.",
         "active": true,
-        "product_group": "Soft Shackle 5mm"
+        "product_group": "Soft Shackle 5mm",
+        "photos": [
+            {
+                "id": "5ad3523295d13b11",
+                "small": "connectors/14/5ad3523295d13b11-480.webp",
+                "large": "connectors/14/5ad3523295d13b11-1600.webp"
+            },
+            {
+                "id": "dcbfa2b4132b0426",
+                "small": "connectors/14/dcbfa2b4132b0426-480.webp",
+                "large": "connectors/14/dcbfa2b4132b0426-1600.webp"
+            },
+            {
+                "id": "c2d6e5d6e5ec6135",
+                "small": "connectors/14/c2d6e5d6e5ec6135-480.webp",
+                "large": "connectors/14/c2d6e5d6e5ec6135-1600.webp"
+            }
+        ]
     },
     {
         "id": 15,
@@ -279,7 +512,19 @@
         "price": 65.0,
         "currency": "BRL",
         "notes": "WLL 6 kN. Opening is Bera's 'espaço interno'. Knot diameter 33 mm. Portuguese page only.",
-        "active": true
+        "active": true,
+        "photos": [
+            {
+                "id": "816d7cd64de96282",
+                "small": "connectors/15/816d7cd64de96282-480.webp",
+                "large": "connectors/15/816d7cd64de96282-1600.webp"
+            },
+            {
+                "id": "94ceafee1c3d4aa9",
+                "small": "connectors/15/94ceafee1c3d4aa9-480.webp",
+                "large": "connectors/15/94ceafee1c3d4aa9-1600.webp"
+            }
+        ]
     },
     {
         "id": 16,
@@ -297,6 +542,23 @@
         "product_group": "Soft Shackle 6mm",
         "gear_sellers": [
             "Slack Inov"
+        ],
+        "photos": [
+            {
+                "id": "0b2d05aaf688fef0",
+                "small": "connectors/16/0b2d05aaf688fef0-480.webp",
+                "large": "connectors/16/0b2d05aaf688fef0-1600.webp"
+            },
+            {
+                "id": "3719bf884bda36b6",
+                "small": "connectors/16/3719bf884bda36b6-480.webp",
+                "large": "connectors/16/3719bf884bda36b6-1600.webp"
+            },
+            {
+                "id": "e21371a33916fcfc",
+                "small": "connectors/16/e21371a33916fcfc-480.webp",
+                "large": "connectors/16/e21371a33916fcfc-1600.webp"
+            }
         ]
     },
     {
@@ -334,7 +596,14 @@
         "currency": "EUR",
         "notes": "Listed as '12mm Shackle | Captive Pin'. WLL 12 kN (safety factor 5). Captive pin.",
         "active": true,
-        "product_group": "Bow Shackle 12mm, Stainless"
+        "product_group": "Bow Shackle 12mm, Stainless",
+        "photos": [
+            {
+                "id": "e09291741b98d218",
+                "small": "connectors/18/e09291741b98d218-480.webp",
+                "large": "connectors/18/e09291741b98d218-1600.webp"
+            }
+        ]
     },
     {
         "id": 19,
@@ -354,7 +623,14 @@
         "currency": "EUR",
         "notes": "Listed as 'Shackle | 14mm'. WLL 16 kN.",
         "active": true,
-        "product_group": "Bow Shackle 14mm, Stainless"
+        "product_group": "Bow Shackle 14mm, Stainless",
+        "photos": [
+            {
+                "id": "23d265117ca3eb15",
+                "small": "connectors/19/23d265117ca3eb15-480.webp",
+                "large": "connectors/19/23d265117ca3eb15-1600.webp"
+            }
+        ]
     },
     {
         "id": 20,
@@ -374,7 +650,14 @@
         "currency": "EUR",
         "notes": "Listed as 'Twisted Shackle | 12mm'. WLL 12 kN. Mouth width stated 'ca. 22–24 mm'.",
         "active": true,
-        "product_group": "Twisted Shackle 12mm, Stainless"
+        "product_group": "Twisted Shackle 12mm, Stainless",
+        "photos": [
+            {
+                "id": "ecbfc43daa862faa",
+                "small": "connectors/20/ecbfc43daa862faa-480.webp",
+                "large": "connectors/20/ecbfc43daa862faa-1600.webp"
+            }
+        ]
     },
     {
         "id": 21,
@@ -394,7 +677,14 @@
         "currency": "EUR",
         "notes": "Listed as '12mm D Shackle'. WLL 10 kN. 'Shackle opening approx. 50 mm' reads as an inside length, so opening is left empty.",
         "active": true,
-        "product_group": "D Shackle 12mm, Stainless"
+        "product_group": "D Shackle 12mm, Stainless",
+        "photos": [
+            {
+                "id": "8b485c9edc473bb9",
+                "small": "connectors/21/8b485c9edc473bb9-480.webp",
+                "large": "connectors/21/8b485c9edc473bb9-1600.webp"
+            }
+        ]
     },
     {
         "id": 22,
@@ -413,7 +703,14 @@
         "currency": "EUR",
         "notes": "Listed as '8mm D Shackle'. WLL 4 kN. 'Shackle opening approx. 32 mm' reads as an inside length, so opening is left empty.",
         "active": true,
-        "product_group": "D Shackle 8mm, Stainless"
+        "product_group": "D Shackle 8mm, Stainless",
+        "photos": [
+            {
+                "id": "1a4b6fb336e025d8",
+                "small": "connectors/22/1a4b6fb336e025d8-480.webp",
+                "large": "connectors/22/1a4b6fb336e025d8-1600.webp"
+            }
+        ]
     },
     {
         "id": 23,
@@ -432,7 +729,19 @@
         "currency": "EUR",
         "notes": "Listed as '6mm D Shackle'. WLL 3 kN; no MBS published.",
         "active": true,
-        "product_group": "D Shackle 6mm, Stainless"
+        "product_group": "D Shackle 6mm, Stainless",
+        "photos": [
+            {
+                "id": "9d6507dba42a897c",
+                "small": "connectors/23/9d6507dba42a897c-480.webp",
+                "large": "connectors/23/9d6507dba42a897c-1600.webp"
+            },
+            {
+                "id": "5829e0263080101d",
+                "small": "connectors/23/5829e0263080101d-480.webp",
+                "large": "connectors/23/5829e0263080101d-1600.webp"
+            }
+        ]
     },
     {
         "id": 24,
@@ -450,7 +759,14 @@
         "price": 9.0,
         "currency": "EUR",
         "notes": "Listed as '8mm Delta Quick Link – INOX'. Delta. WLL 6 kN. MBS with the gate open '> 1 kN'.",
-        "active": true
+        "active": true,
+        "photos": [
+            {
+                "id": "2601c9f613e3282c",
+                "small": "connectors/24/2601c9f613e3282c-480.webp",
+                "large": "connectors/24/2601c9f613e3282c-1600.webp"
+            }
+        ]
     },
     {
         "id": 25,
@@ -468,7 +784,14 @@
         "price": 8.06,
         "currency": "EUR",
         "notes": "Listed as '5mm Delta Quick Link – INOX'. Delta. WLL 2 kN. Out of stock on 2026-10-11.",
-        "active": true
+        "active": true,
+        "photos": [
+            {
+                "id": "f9948653d8a0d122",
+                "small": "connectors/25/f9948653d8a0d122-480.webp",
+                "large": "connectors/25/f9948653d8a0d122-1600.webp"
+            }
+        ]
     },
     {
         "id": 26,
@@ -485,7 +808,14 @@
         "price": 12.5,
         "currency": "EUR",
         "notes": "Listed as 'Aluminium Carabiner'. WLL 4 kN. Closure not stated. Out of stock on 2026-10-11. Slacktivity: never use on a constant load.",
-        "active": true
+        "active": true,
+        "photos": [
+            {
+                "id": "e2e59c3686386d38",
+                "small": "connectors/26/e2e59c3686386d38-480.webp",
+                "large": "connectors/26/e2e59c3686386d38-1600.webp"
+            }
+        ]
     },
     {
         "id": 27,
@@ -505,7 +835,29 @@
         "currency": "USD",
         "notes": "Listed as '8mm Twist Shackle'. WLL 6 kN.",
         "active": true,
-        "product_group": "Twisted Shackle 8mm, Stainless"
+        "product_group": "Twisted Shackle 8mm, Stainless",
+        "photos": [
+            {
+                "id": "eb78a0f76309fc4f",
+                "small": "connectors/27/eb78a0f76309fc4f-480.webp",
+                "large": "connectors/27/eb78a0f76309fc4f-1600.webp"
+            },
+            {
+                "id": "8d69259dcd8cdb83",
+                "small": "connectors/27/8d69259dcd8cdb83-480.webp",
+                "large": "connectors/27/8d69259dcd8cdb83-1600.webp"
+            },
+            {
+                "id": "6df0082db8c2519f",
+                "small": "connectors/27/6df0082db8c2519f-480.webp",
+                "large": "connectors/27/6df0082db8c2519f-1600.webp"
+            },
+            {
+                "id": "e8e6d6b28e592d51",
+                "small": "connectors/27/e8e6d6b28e592d51-480.webp",
+                "large": "connectors/27/e8e6d6b28e592d51-1600.webp"
+            }
+        ]
     },
     {
         "id": 28,
@@ -525,7 +877,14 @@
         "currency": "USD",
         "notes": "Listed as '8mm Dee Shackle'. WLL 6 kN.",
         "active": true,
-        "product_group": "D Shackle 8mm, Stainless"
+        "product_group": "D Shackle 8mm, Stainless",
+        "photos": [
+            {
+                "id": "929227f1dfa8879b",
+                "small": "connectors/28/929227f1dfa8879b-480.webp",
+                "large": "connectors/28/929227f1dfa8879b-1600.webp"
+            }
+        ]
     },
     {
         "id": 29,
@@ -544,7 +903,29 @@
         "price": 35.0,
         "currency": "USD",
         "notes": "Made in Taiwan.",
-        "active": true
+        "active": true,
+        "photos": [
+            {
+                "id": "eab9c024dd595568",
+                "small": "connectors/29/eab9c024dd595568-480.webp",
+                "large": "connectors/29/eab9c024dd595568-1600.webp"
+            },
+            {
+                "id": "6ab0a3f927963ea8",
+                "small": "connectors/29/6ab0a3f927963ea8-480.webp",
+                "large": "connectors/29/6ab0a3f927963ea8-1600.webp"
+            },
+            {
+                "id": "4c4572f613be8017",
+                "small": "connectors/29/4c4572f613be8017-480.webp",
+                "large": "connectors/29/4c4572f613be8017-1600.webp"
+            },
+            {
+                "id": "33a782c506b76379",
+                "small": "connectors/29/33a782c506b76379-480.webp",
+                "large": "connectors/29/33a782c506b76379-1600.webp"
+            }
+        ]
     },
     {
         "id": 30,
@@ -585,7 +966,14 @@
         "currency": "USD",
         "description": "It's finally here, a shackle that works with the Edelrid Eddy without having to force it on! This shackle is not just a normal twist shackle either, it's very well made and extremely durable. You can feel the quality when installing or removing the pin...so nice! The 11mm Twist Shackle is a drop-forged shackle made from 316-Stainless Steel with the perfect dimensions for your slackline setup. You can now easily embed your Edelrid Eddy inside your pulleys for a super streamlined Pulley System.",
         "notes": "Listed as '11mm Twist Shackle'. Discontinued; specs from the archived page (2024-06-21): 316 stainless, drop forged, made in the UK. MBS 48 kN, WLL 9.6 kN; stock and pin 11 mm, jaw width 22 mm, inside 35 x 22 mm, outside 64 x 44 mm, 152 g. Last listed at US$35.",
-        "active": false
+        "active": false,
+        "photos": [
+            {
+                "id": "3aeb2f33cd989581",
+                "small": "connectors/31/3aeb2f33cd989581-480.webp",
+                "large": "connectors/31/3aeb2f33cd989581-1600.webp"
+            }
+        ]
     },
     {
         "id": 32,
@@ -605,7 +993,14 @@
         "description": "Steel Quicklinks are an excellent alternative to carabiners. They offer the same strength benefits of a steel carabiner for a fraction of the cost. Excellent for various connections within your pulley system or highline anchors.",
         "notes": "Listed as '10mm Oval Quicklink'. Discontinued; specs from the archived page (2024-06-21): a Maillon Rapide, zinc-plated galvanized steel. MBS 53.9 kN, WLL 10.8 kN; stock 10 mm, opening 12 mm, inside 69 x 20.5 mm, outside 89 x 40.5 mm, 137 g. The page's description calls it a 'Delta Maillon Rapide', but the title, URL and dimensions are the oval. Last listed at US$12.",
         "active": false,
-        "product_group": "Oval Quicklink 10mm"
+        "product_group": "Oval Quicklink 10mm",
+        "photos": [
+            {
+                "id": "a0d6611e40079913",
+                "small": "connectors/32/a0d6611e40079913-480.webp",
+                "large": "connectors/32/a0d6611e40079913-1600.webp"
+            }
+        ]
     },
     {
         "id": 33,
@@ -625,7 +1020,14 @@
         "product_url": "https://web.archive.org/web/20210922062243/https://www.balancecommunity.com/products/10mm-delta-quicklink",
         "notes": "Listed as '10mm Delta Quicklink'. Discontinued; only an archived URL is known. Petzl Maillon Delta 10 mm: steel, 25 kN major axis, 10 kN minor axis, gate opening 12 mm, 150 g, CE EN 362 type Q (specs from the operator, 2026-10-11).",
         "active": false,
-        "product_group": "Delta Quicklink 10mm"
+        "product_group": "Delta Quicklink 10mm",
+        "photos": [
+            {
+                "id": "12ce719a1cd7a80d",
+                "small": "connectors/33/12ce719a1cd7a80d-480.webp",
+                "large": "connectors/33/12ce719a1cd7a80d-1600.webp"
+            }
+        ]
     },
     {
         "id": 34,
@@ -644,7 +1046,14 @@
         "currency": "USD",
         "description": "The 8mm Twist Quicklink is a high quality quicklink made from Zinc-Plated Steel. With a strength of 32 kN and a weight of 106 grams, this is a great connector for many applications. To connect your brake to your becket of your pulleys, or as a highline anchor connector, the small size, large opening, and hgh strength of this quicklink make it an ideal connector for the slackline world.",
         "notes": "Listed as '8mm Twist Quicklink'. Discontinued; specs from the archived page (2021-10-21): zinc-plated galvanized steel, made in France. MBS 32 kN, WLL 6.4 kN; stock 8 mm, opening 17.5 mm, inner length 88 mm, outside 104 x 35 mm, 106 g. Last listed at US$26.90.",
-        "active": false
+        "active": false,
+        "photos": [
+            {
+                "id": "1bc2d3a064de79f7",
+                "small": "connectors/34/1bc2d3a064de79f7-480.webp",
+                "large": "connectors/34/1bc2d3a064de79f7-1600.webp"
+            }
+        ]
     },
     {
         "id": 35,
@@ -662,7 +1071,14 @@
         "price": 6.49,
         "currency": "EUR",
         "notes": "Listed as '6mm Quick Link – Maillon Rapide – INOX'. WLL 6.5 kN, made in France.",
-        "active": true
+        "active": true,
+        "photos": [
+            {
+                "id": "70f4873c3d670913",
+                "small": "connectors/35/70f4873c3d670913-480.webp",
+                "large": "connectors/35/70f4873c3d670913-1600.webp"
+            }
+        ]
     },
     {
         "id": 36,
@@ -681,7 +1097,24 @@
         "currency": "EUR",
         "notes": "Listed as '8mm Quick Link – Maillon Rapide – INOX'. WLL 11 kN, made in France. Slacktivity also lists an 8mm stainless quicklink as 'Rustproof' (https://slacktivity.com/shop/quicklink-8mm/): 25 kN, WLL 6 kN, 316, 77 g, gate open '> 1 kN', €8.00.",
         "active": true,
-        "product_group": "Oval Quicklink 8mm, Stainless"
+        "product_group": "Oval Quicklink 8mm, Stainless",
+        "photos": [
+            {
+                "id": "7fb04e18065b3c3c",
+                "small": "connectors/36/7fb04e18065b3c3c-480.webp",
+                "large": "connectors/36/7fb04e18065b3c3c-1600.webp"
+            },
+            {
+                "id": "d616c3ac894b307d",
+                "small": "connectors/36/d616c3ac894b307d-480.webp",
+                "large": "connectors/36/d616c3ac894b307d-1600.webp"
+            },
+            {
+                "id": "618a96413ed3dddf",
+                "small": "connectors/36/618a96413ed3dddf-480.webp",
+                "large": "connectors/36/618a96413ed3dddf-1600.webp"
+            }
+        ]
     },
     {
         "id": 37,
@@ -700,7 +1133,14 @@
         "currency": "EUR",
         "notes": "Listed as '8mm Galvanized Quick Link | Maillon Rapide'. WLL 7 kN.",
         "active": true,
-        "product_group": "Oval Quicklink 8mm"
+        "product_group": "Oval Quicklink 8mm",
+        "photos": [
+            {
+                "id": "4afb1dd090d47355",
+                "small": "connectors/37/4afb1dd090d47355-480.webp",
+                "large": "connectors/37/4afb1dd090d47355-1600.webp"
+            }
+        ]
     },
     {
         "id": 38,
@@ -716,7 +1156,14 @@
         "currency": "EUR",
         "notes": "Listed as 'Maillon Rapide Quicklink, 7mm, 45 kN, stainless steel'.",
         "active": true,
-        "product_group": "Oval Quicklink 7mm, Stainless"
+        "product_group": "Oval Quicklink 7mm, Stainless",
+        "photos": [
+            {
+                "id": "073fb9b7968937eb",
+                "small": "connectors/38/073fb9b7968937eb-480.webp",
+                "large": "connectors/38/073fb9b7968937eb-1600.webp"
+            }
+        ]
     },
     {
         "id": 39,
@@ -741,6 +1188,13 @@
         "product_group": "Oval Quicklink 5mm",
         "gear_sellers": [
             "Slack Inov"
+        ],
+        "photos": [
+            {
+                "id": "7ffc3ff8a2815795",
+                "small": "connectors/39/7ffc3ff8a2815795-480.webp",
+                "large": "connectors/39/7ffc3ff8a2815795-1600.webp"
+            }
         ]
     },
     {
@@ -768,6 +1222,20 @@
         "gear_sellers": [
             "Spider Slacklines",
             "Landcruising"
+        ],
+        "photos": [
+            {
+                "id": "93c45d8f587a3e73",
+                "small": "connectors/40/93c45d8f587a3e73-480.webp",
+                "large": "connectors/40/93c45d8f587a3e73-1600.webp"
+            }
+        ],
+        "manuals": [
+            {
+                "id": "e064cdd325e46a72",
+                "file": "connectors/40/e064cdd325e46a72-technical-drawing.pdf",
+                "title": "Technical drawing"
+            }
         ]
     },
     {
@@ -794,6 +1262,20 @@
         "active": true,
         "gear_sellers": [
             "Landcruising"
+        ],
+        "photos": [
+            {
+                "id": "93c45d8f587a3e73",
+                "small": "connectors/41/93c45d8f587a3e73-480.webp",
+                "large": "connectors/41/93c45d8f587a3e73-1600.webp"
+            }
+        ],
+        "manuals": [
+            {
+                "id": "7a4c84120adc3db6",
+                "file": "connectors/41/7a4c84120adc3db6-technical-drawing.pdf",
+                "title": "Technical drawing"
+            }
         ]
     },
     {
@@ -822,6 +1304,25 @@
             "Balance Community",
             "Spider Slacklines",
             "Landcruising"
+        ],
+        "photos": [
+            {
+                "id": "93c45d8f587a3e73",
+                "small": "connectors/42/93c45d8f587a3e73-480.webp",
+                "large": "connectors/42/93c45d8f587a3e73-1600.webp"
+            },
+            {
+                "id": "6efab87abe78b1d5",
+                "small": "connectors/42/6efab87abe78b1d5-480.webp",
+                "large": "connectors/42/6efab87abe78b1d5-1600.webp"
+            }
+        ],
+        "manuals": [
+            {
+                "id": "fc83949cc52b91b0",
+                "file": "connectors/42/fc83949cc52b91b0-technical-drawing.pdf",
+                "title": "Technical drawing"
+            }
         ]
     },
     {
@@ -851,6 +1352,25 @@
             "Balance Community",
             "Spider Slacklines",
             "Landcruising"
+        ],
+        "photos": [
+            {
+                "id": "93c45d8f587a3e73",
+                "small": "connectors/43/93c45d8f587a3e73-480.webp",
+                "large": "connectors/43/93c45d8f587a3e73-1600.webp"
+            },
+            {
+                "id": "d885e67eb5a1e107",
+                "small": "connectors/43/d885e67eb5a1e107-480.webp",
+                "large": "connectors/43/d885e67eb5a1e107-1600.webp"
+            }
+        ],
+        "manuals": [
+            {
+                "id": "ffeaffe3f1a324e0",
+                "file": "connectors/43/ffeaffe3f1a324e0-technical-drawing.pdf",
+                "title": "Technical drawing"
+            }
         ]
     },
     {
@@ -879,6 +1399,20 @@
         "gear_sellers": [
             "Spider Slacklines",
             "Landcruising"
+        ],
+        "photos": [
+            {
+                "id": "93c45d8f587a3e73",
+                "small": "connectors/44/93c45d8f587a3e73-480.webp",
+                "large": "connectors/44/93c45d8f587a3e73-1600.webp"
+            }
+        ],
+        "manuals": [
+            {
+                "id": "6cd0d161cf456e98",
+                "file": "connectors/44/6cd0d161cf456e98-technical-drawing.pdf",
+                "title": "Technical drawing"
+            }
         ]
     },
     {
@@ -905,6 +1439,20 @@
         "active": true,
         "gear_sellers": [
             "Spider Slacklines"
+        ],
+        "photos": [
+            {
+                "id": "6d75fd0fe7be192f",
+                "small": "connectors/45/6d75fd0fe7be192f-480.webp",
+                "large": "connectors/45/6d75fd0fe7be192f-1600.webp"
+            }
+        ],
+        "manuals": [
+            {
+                "id": "8fe91d136b13ca56",
+                "file": "connectors/45/8fe91d136b13ca56-technical-drawing.pdf",
+                "title": "Technical drawing"
+            }
         ]
     },
     {
@@ -932,6 +1480,20 @@
         "gear_sellers": [
             "Spider Slacklines",
             "Landcruising"
+        ],
+        "photos": [
+            {
+                "id": "6d75fd0fe7be192f",
+                "small": "connectors/46/6d75fd0fe7be192f-480.webp",
+                "large": "connectors/46/6d75fd0fe7be192f-1600.webp"
+            }
+        ],
+        "manuals": [
+            {
+                "id": "f6601ede3287443a",
+                "file": "connectors/46/f6601ede3287443a-technical-drawing.pdf",
+                "title": "Technical drawing"
+            }
         ]
     },
     {
@@ -959,6 +1521,20 @@
         "gear_sellers": [
             "Spider Slacklines",
             "Landcruising"
+        ],
+        "photos": [
+            {
+                "id": "6d75fd0fe7be192f",
+                "small": "connectors/47/6d75fd0fe7be192f-480.webp",
+                "large": "connectors/47/6d75fd0fe7be192f-1600.webp"
+            }
+        ],
+        "manuals": [
+            {
+                "id": "7b7cc2da9a2008e7",
+                "file": "connectors/47/7b7cc2da9a2008e7-technical-drawing.pdf",
+                "title": "Technical drawing"
+            }
         ]
     },
     {
@@ -977,7 +1553,14 @@
         "currency": "EUR",
         "notes": "Listed as 'Omega Stainless Steel Shackle 10mm'.",
         "active": true,
-        "product_group": "Bow Shackle 10mm, Stainless"
+        "product_group": "Bow Shackle 10mm, Stainless",
+        "photos": [
+            {
+                "id": "b347d4a35955d834",
+                "small": "connectors/48/b347d4a35955d834-480.webp",
+                "large": "connectors/48/b347d4a35955d834-1600.webp"
+            }
+        ]
     },
     {
         "id": 49,
@@ -994,7 +1577,14 @@
         "currency": "EUR",
         "notes": "Listed as 'Omega Stainless Steel Shackle 12mm'.",
         "active": true,
-        "product_group": "Bow Shackle 12mm, Stainless"
+        "product_group": "Bow Shackle 12mm, Stainless",
+        "photos": [
+            {
+                "id": "b347d4a35955d834",
+                "small": "connectors/49/b347d4a35955d834-480.webp",
+                "large": "connectors/49/b347d4a35955d834-1600.webp"
+            }
+        ]
     },
     {
         "id": 50,
@@ -1011,7 +1601,14 @@
         "currency": "EUR",
         "notes": "Listed as 'Omega Stainless Steel Shackle 10mm w/ Captive Pin'. Captive pin.",
         "active": true,
-        "product_group": "Bow Shackle 10mm, Stainless"
+        "product_group": "Bow Shackle 10mm, Stainless",
+        "photos": [
+            {
+                "id": "7187808d1563bf22",
+                "small": "connectors/50/7187808d1563bf22-480.webp",
+                "large": "connectors/50/7187808d1563bf22-1600.webp"
+            }
+        ]
     },
     {
         "id": 51,
@@ -1028,7 +1625,14 @@
         "currency": "EUR",
         "notes": "Listed as 'Omega Stainless Steel Shackle 12mm w/ Captive Pin'. Captive pin.",
         "active": true,
-        "product_group": "Bow Shackle 12mm, Stainless"
+        "product_group": "Bow Shackle 12mm, Stainless",
+        "photos": [
+            {
+                "id": "7187808d1563bf22",
+                "small": "connectors/51/7187808d1563bf22-480.webp",
+                "large": "connectors/51/7187808d1563bf22-1600.webp"
+            }
+        ]
     },
     {
         "id": 52,
@@ -1044,7 +1648,14 @@
         "currency": "EUR",
         "notes": "Listed as 'Oval Steel Carabiner'. Screwgate (operator, 2026-10-11). raed: enough for slacklines up to 30 m.",
         "active": true,
-        "product_group": "Oval Carabiner, Screwgate"
+        "product_group": "Oval Carabiner, Screwgate",
+        "photos": [
+            {
+                "id": "098c68597732ab2e",
+                "small": "connectors/52/098c68597732ab2e-480.webp",
+                "large": "connectors/52/098c68597732ab2e-1600.webp"
+            }
+        ]
     },
     {
         "id": 53,
@@ -1061,7 +1672,29 @@
         "currency": "ZAR",
         "notes": "Listed as 'Oval Auto-Locking Carabiner'.",
         "active": true,
-        "product_group": "Oval Carabiner, Twist-lock"
+        "product_group": "Oval Carabiner, Twist-lock",
+        "photos": [
+            {
+                "id": "614a02856c55e039",
+                "small": "connectors/53/614a02856c55e039-480.webp",
+                "large": "connectors/53/614a02856c55e039-1600.webp"
+            },
+            {
+                "id": "94f6aa05f9c7703f",
+                "small": "connectors/53/94f6aa05f9c7703f-480.webp",
+                "large": "connectors/53/94f6aa05f9c7703f-1600.webp"
+            },
+            {
+                "id": "32d3a2000120f90d",
+                "small": "connectors/53/32d3a2000120f90d-480.webp",
+                "large": "connectors/53/32d3a2000120f90d-1600.webp"
+            },
+            {
+                "id": "11e684819e09c357",
+                "small": "connectors/53/11e684819e09c357-480.webp",
+                "large": "connectors/53/11e684819e09c357-1600.webp"
+            }
+        ]
     },
     {
         "id": 54,
@@ -1074,7 +1707,14 @@
         "price": 210.0,
         "currency": "ZAR",
         "notes": "Listed as 'Slackline Shackle'. No specs published.",
-        "active": true
+        "active": true,
+        "photos": [
+            {
+                "id": "6a9d10b7c69fa753",
+                "small": "connectors/54/6a9d10b7c69fa753-480.webp",
+                "large": "connectors/54/6a9d10b7c69fa753-1600.webp"
+            }
+        ]
     },
     {
         "id": 55,
@@ -1089,7 +1729,14 @@
         "price": 11.95,
         "currency": "EUR",
         "notes": "Listed as 'Heavy Duty Shackle'. Gibbon: 'working load limit of 1 ton and a safety factor of 6 (equivalent to a 6-ton breaking strength)'; 6 t = 58.8 kN.",
-        "active": true
+        "active": true,
+        "photos": [
+            {
+                "id": "83090f50ffd6e5f0",
+                "small": "connectors/55/83090f50ffd6e5f0-480.webp",
+                "large": "connectors/55/83090f50ffd6e5f0-1600.webp"
+            }
+        ]
     },
     {
         "id": 56,
@@ -1107,7 +1754,14 @@
         "currency": "EUR",
         "notes": "Listed as 'Nirostahlschäkel 12mm (Edelstahl V4A)'. Sigma Slacklines label. 'Bruchlast: 6.000 kg' = 58.8 kN; Tragfähigkeit 1500 kg, safety factor 4. Bolt bearing 24 mm. German page only.",
         "active": true,
-        "product_group": "Bow Shackle 12mm, Stainless"
+        "product_group": "Bow Shackle 12mm, Stainless",
+        "photos": [
+            {
+                "id": "e7ea24f5a23bb249",
+                "small": "connectors/56/e7ea24f5a23bb249-480.webp",
+                "large": "connectors/56/e7ea24f5a23bb249-1600.webp"
+            }
+        ]
     },
     {
         "id": 57,
@@ -1124,7 +1778,14 @@
         "currency": "EUR",
         "notes": "Listed as 'NIRO Schäkel 12mm gedreht (Edelstahl V4A)'. Sigma Slacklines label. Twisted. No strength stated. German page only.",
         "active": true,
-        "product_group": "Twisted Shackle 12mm, Stainless"
+        "product_group": "Twisted Shackle 12mm, Stainless",
+        "photos": [
+            {
+                "id": "86a23077e3fae905",
+                "small": "connectors/57/86a23077e3fae905-480.webp",
+                "large": "connectors/57/86a23077e3fae905-1600.webp"
+            }
+        ]
     },
     {
         "id": 58,
@@ -1142,7 +1803,14 @@
         "currency": "ZAR",
         "notes": "Listed as '12mm Stainless Steel Bow-Shackle'. WLL 12 kN.",
         "active": true,
-        "product_group": "Bow Shackle 12mm, Stainless"
+        "product_group": "Bow Shackle 12mm, Stainless",
+        "photos": [
+            {
+                "id": "80c28976649aa9c7",
+                "small": "connectors/58/80c28976649aa9c7-480.webp",
+                "large": "connectors/58/80c28976649aa9c7-1600.webp"
+            }
+        ]
     },
     {
         "id": 59,
@@ -1160,7 +1828,14 @@
         "currency": "ZAR",
         "notes": "Listed as '12mm Stainless Steel D-Shackle'. WLL 12 kN.",
         "active": true,
-        "product_group": "D Shackle 12mm, Stainless"
+        "product_group": "D Shackle 12mm, Stainless",
+        "photos": [
+            {
+                "id": "087af1304441b952",
+                "small": "connectors/59/087af1304441b952-480.webp",
+                "large": "connectors/59/087af1304441b952-1600.webp"
+            }
+        ]
     },
     {
         "id": 60,
@@ -1178,7 +1853,14 @@
         "currency": "ZAR",
         "notes": "Listed as '12mm Stainless Steel Twisty-Shackle'. WLL 12 kN.",
         "active": true,
-        "product_group": "Twisted Shackle 12mm, Stainless"
+        "product_group": "Twisted Shackle 12mm, Stainless",
+        "photos": [
+            {
+                "id": "34980882baf5a618",
+                "small": "connectors/60/34980882baf5a618-480.webp",
+                "large": "connectors/60/34980882baf5a618-1600.webp"
+            }
+        ]
     },
     {
         "id": 61,
@@ -1195,7 +1877,14 @@
         "currency": "ZAR",
         "notes": "Listed as '8mm Stainless Steel D-Shackle'. WLL 4 kN.",
         "active": true,
-        "product_group": "D Shackle 8mm, Stainless"
+        "product_group": "D Shackle 8mm, Stainless",
+        "photos": [
+            {
+                "id": "fd3968d44f204723",
+                "small": "connectors/61/fd3968d44f204723-480.webp",
+                "large": "connectors/61/fd3968d44f204723-1600.webp"
+            }
+        ]
     },
     {
         "id": 62,
@@ -1212,7 +1901,14 @@
         "currency": "ZAR",
         "notes": "Listed as '8mm Stainless Steel Twisty-Shackle'. WLL 4 kN.",
         "active": true,
-        "product_group": "Twisted Shackle 8mm, Stainless"
+        "product_group": "Twisted Shackle 8mm, Stainless",
+        "photos": [
+            {
+                "id": "0c9192985fd8534c",
+                "small": "connectors/62/0c9192985fd8534c-480.webp",
+                "large": "connectors/62/0c9192985fd8534c-1600.webp"
+            }
+        ]
     },
     {
         "id": 63,
@@ -1228,7 +1924,14 @@
         "price": 30.0,
         "currency": "ZAR",
         "notes": "Listed as '1.5t Bow-Shackle (Screw-Pin)'. WLL as listed: 15 kN (1.5 t). The page states no MBS or material; steel per the operator, 2026-10-12. Marked GMC 6 (grade 6), per the operator, 2026-10-12. MBS derived from the grade-6 safety factor, MBL = 6 x WLL (EN 13889 / RR-C-271): 6 x 1.5 t = 9 t = 88.3 kN.",
-        "active": true
+        "active": true,
+        "photos": [
+            {
+                "id": "77610e750cf3354e",
+                "small": "connectors/63/77610e750cf3354e-480.webp",
+                "large": "connectors/63/77610e750cf3354e-1600.webp"
+            }
+        ]
     },
     {
         "id": 64,
@@ -1244,7 +1947,14 @@
         "price": 40.0,
         "currency": "ZAR",
         "notes": "Listed as '2t Bow-Shackle (Screw-Pin)'. WLL as listed: 20 kN (2 t). The page states no MBS or material; steel per the operator, 2026-10-12. Marked GMC 6 (grade 6), per the operator, 2026-10-12. MBS derived from the grade-6 safety factor, MBL = 6 x WLL (EN 13889 / RR-C-271): 6 x 2 t = 12 t = 117.7 kN.",
-        "active": true
+        "active": true,
+        "photos": [
+            {
+                "id": "ff7c3e19742852eb",
+                "small": "connectors/64/ff7c3e19742852eb-480.webp",
+                "large": "connectors/64/ff7c3e19742852eb-1600.webp"
+            }
+        ]
     },
     {
         "id": 65,
@@ -1260,7 +1970,14 @@
         "price": 50.0,
         "currency": "ZAR",
         "notes": "Listed as '3.25t Bow-Shackle (Screw-Pin)'. WLL as listed: 32.5 kN (3.25 t). The page states no MBS or material; steel per the operator, 2026-10-12. Marked GMC 6 (grade 6), per the operator, 2026-10-12. MBS derived from the grade-6 safety factor, MBL = 6 x WLL (EN 13889 / RR-C-271): 6 x 3.25 t = 19.5 t = 191.3 kN.",
-        "active": true
+        "active": true,
+        "photos": [
+            {
+                "id": "2029b0ec79159dab",
+                "small": "connectors/65/2029b0ec79159dab-480.webp",
+                "large": "connectors/65/2029b0ec79159dab-1600.webp"
+            }
+        ]
     },
     {
         "id": 66,
@@ -1278,6 +1995,18 @@
         "product_group": "Twisted Shackle 8mm, Stainless",
         "gear_sellers": [
             "Slack Inov"
+        ],
+        "photos": [
+            {
+                "id": "42d91a5cf87e15d1",
+                "small": "connectors/66/42d91a5cf87e15d1-480.webp",
+                "large": "connectors/66/42d91a5cf87e15d1-1600.webp"
+            },
+            {
+                "id": "1666abee134ca407",
+                "small": "connectors/66/1666abee134ca407-480.webp",
+                "large": "connectors/66/1666abee134ca407-1600.webp"
+            }
         ]
     },
     {
@@ -1297,6 +2026,33 @@
         "product_group": "Twisted Shackle 12mm, Stainless",
         "gear_sellers": [
             "Slack Inov"
+        ],
+        "photos": [
+            {
+                "id": "175a3b5e3d7bbf9a",
+                "small": "connectors/67/175a3b5e3d7bbf9a-480.webp",
+                "large": "connectors/67/175a3b5e3d7bbf9a-1600.webp"
+            },
+            {
+                "id": "cda44bd81fb57530",
+                "small": "connectors/67/cda44bd81fb57530-480.webp",
+                "large": "connectors/67/cda44bd81fb57530-1600.webp"
+            },
+            {
+                "id": "a3546db7a2908a8b",
+                "small": "connectors/67/a3546db7a2908a8b-480.webp",
+                "large": "connectors/67/a3546db7a2908a8b-1600.webp"
+            },
+            {
+                "id": "8175db535c46acfa",
+                "small": "connectors/67/8175db535c46acfa-480.webp",
+                "large": "connectors/67/8175db535c46acfa-1600.webp"
+            },
+            {
+                "id": "7aa2512ca9bb2cea",
+                "small": "connectors/67/7aa2512ca9bb2cea-480.webp",
+                "large": "connectors/67/7aa2512ca9bb2cea-1600.webp"
+            }
         ]
     },
     {
@@ -1320,6 +2076,23 @@
         "product_group": "Bow Shackle 10mm, Stainless",
         "gear_sellers": [
             "Slack Inov"
+        ],
+        "photos": [
+            {
+                "id": "11d37f99100f39d5",
+                "small": "connectors/68/11d37f99100f39d5-480.webp",
+                "large": "connectors/68/11d37f99100f39d5-1600.webp"
+            },
+            {
+                "id": "8da90fda67dc450e",
+                "small": "connectors/68/8da90fda67dc450e-480.webp",
+                "large": "connectors/68/8da90fda67dc450e-1600.webp"
+            },
+            {
+                "id": "c0ef641e5b801e20",
+                "small": "connectors/68/c0ef641e5b801e20-480.webp",
+                "large": "connectors/68/c0ef641e5b801e20-1600.webp"
+            }
         ]
     },
     {
@@ -1363,6 +2136,28 @@
         "product_group": "Oval Carabiner, Screwgate",
         "gear_sellers": [
             "Slack Inov"
+        ],
+        "photos": [
+            {
+                "id": "81932f749485b075",
+                "small": "connectors/70/81932f749485b075-480.webp",
+                "large": "connectors/70/81932f749485b075-1600.webp"
+            },
+            {
+                "id": "eac0bb74ebd49470",
+                "small": "connectors/70/eac0bb74ebd49470-480.webp",
+                "large": "connectors/70/eac0bb74ebd49470-1600.webp"
+            },
+            {
+                "id": "b7980121b8a399f7",
+                "small": "connectors/70/b7980121b8a399f7-480.webp",
+                "large": "connectors/70/b7980121b8a399f7-1600.webp"
+            },
+            {
+                "id": "9bb7119d31d83998",
+                "small": "connectors/70/9bb7119d31d83998-480.webp",
+                "large": "connectors/70/9bb7119d31d83998-1600.webp"
+            }
         ]
     },
     {
@@ -1381,6 +2176,28 @@
         "product_group": "Oval Carabiner, Aluminium",
         "gear_sellers": [
             "Slack Inov"
+        ],
+        "photos": [
+            {
+                "id": "3642f397dca4d6e7",
+                "small": "connectors/71/3642f397dca4d6e7-480.webp",
+                "large": "connectors/71/3642f397dca4d6e7-1600.webp"
+            },
+            {
+                "id": "7859566a7668f40d",
+                "small": "connectors/71/7859566a7668f40d-480.webp",
+                "large": "connectors/71/7859566a7668f40d-1600.webp"
+            },
+            {
+                "id": "5542c656bb67bc48",
+                "small": "connectors/71/5542c656bb67bc48-480.webp",
+                "large": "connectors/71/5542c656bb67bc48-1600.webp"
+            },
+            {
+                "id": "08aeb9ae65128bf6",
+                "small": "connectors/71/08aeb9ae65128bf6-480.webp",
+                "large": "connectors/71/08aeb9ae65128bf6-1600.webp"
+            }
         ]
     },
     {
@@ -1424,6 +2241,13 @@
         "product_group": "Oval Quicklink 8mm",
         "gear_sellers": [
             "Slack Inov"
+        ],
+        "photos": [
+            {
+                "id": "e74cb335746c31c8",
+                "small": "connectors/73/e74cb335746c31c8-480.webp",
+                "large": "connectors/73/e74cb335746c31c8-1600.webp"
+            }
         ]
     },
     {
@@ -1444,6 +2268,13 @@
         "product_group": "Oval Quicklink 10mm",
         "gear_sellers": [
             "Slack Inov"
+        ],
+        "photos": [
+            {
+                "id": "d0ad43e9947f619f",
+                "small": "connectors/74/d0ad43e9947f619f-480.webp",
+                "large": "connectors/74/d0ad43e9947f619f-1600.webp"
+            }
         ]
     },
     {
@@ -1489,6 +2320,13 @@
         "product_group": "Oval Quicklink 8mm, Stainless",
         "gear_sellers": [
             "Slack Inov"
+        ],
+        "photos": [
+            {
+                "id": "b81ad68756fc4dca",
+                "small": "connectors/76/b81ad68756fc4dca-480.webp",
+                "large": "connectors/76/b81ad68756fc4dca-1600.webp"
+            }
         ]
     },
     {
@@ -1515,6 +2353,13 @@
         "product_group": "Delta Quicklink 10mm",
         "gear_sellers": [
             "Slack Inov"
+        ],
+        "photos": [
+            {
+                "id": "1a8da62e37d36a4a",
+                "small": "connectors/77/1a8da62e37d36a4a-480.webp",
+                "large": "connectors/77/1a8da62e37d36a4a-1600.webp"
+            }
         ]
     },
     {
@@ -1534,7 +2379,14 @@
         "currency": "EUR",
         "description": "High strength steel bow shackle. Strong an cheap.",
         "notes": "Listed as 'High strength bow shackle', size '60 kN' (ref. SI015). From Slack Inov's archived shop (2019): MBS 60 kN, jaw 16 mm, Ø 12 mm, 132 g. Red screw pin. Slack Inov: 'Hight strength steel, highly resilient to mechanical fatigue (cyclic loadings)'.",
-        "active": false
+        "active": false,
+        "photos": [
+            {
+                "id": "c1d1892dc4a1163b",
+                "small": "connectors/78/c1d1892dc4a1163b-480.webp",
+                "large": "connectors/78/c1d1892dc4a1163b-1600.webp"
+            }
+        ]
     },
     {
         "id": 80,
@@ -1547,7 +2399,14 @@
         "captive_pin": false,
         "product_url": "https://web.archive.org/web/20190608222348/https://slack-inov.com/fr/connecteurs/81-manille-15kn",
         "notes": "Listed as 'Inox Shackle Ø6mm'. From Slack Inov's archived shop (about 2019). Listed as 'Inox shackle Ø6mm - 15kN'.",
-        "active": false
+        "active": false,
+        "photos": [
+            {
+                "id": "7b5023dc6bc86151",
+                "small": "connectors/80/7b5023dc6bc86151-480.webp",
+                "large": "connectors/80/7b5023dc6bc86151-1600.webp"
+            }
+        ]
     },
     {
         "id": 81,
@@ -1608,7 +2467,19 @@
         "currency": "PLN",
         "notes": "Listed as 'Szekla nierdzewna Omega 10 mm'. Polish page only. From Slack house's spec table (2026-10-11): 40 kN, WLL 7 kN, jaw 21 mm, 120 g, ANSI 316, made in China; maker given as 'W/K'.",
         "active": true,
-        "product_group": "Bow Shackle 10mm, Stainless"
+        "product_group": "Bow Shackle 10mm, Stainless",
+        "photos": [
+            {
+                "id": "ef3dc3f8e3158c86",
+                "small": "connectors/84/ef3dc3f8e3158c86-480.webp",
+                "large": "connectors/84/ef3dc3f8e3158c86-1600.webp"
+            },
+            {
+                "id": "f14dc2d7ec14c6bf",
+                "small": "connectors/84/f14dc2d7ec14c6bf-480.webp",
+                "large": "connectors/84/f14dc2d7ec14c6bf-1600.webp"
+            }
+        ]
     },
     {
         "id": 85,
@@ -1627,7 +2498,19 @@
         "currency": "PLN",
         "notes": "Listed as 'Szekla nierdzewna Omega 12 mm'. Polish page only. From Slack house's spec table (2026-10-11): 60 kN, WLL 12 kN, jaw 25 mm, 205 g, ANSI 316, made in China; maker given as 'W/K'.",
         "active": true,
-        "product_group": "Bow Shackle 12mm, Stainless"
+        "product_group": "Bow Shackle 12mm, Stainless",
+        "photos": [
+            {
+                "id": "b12687bb766aed49",
+                "small": "connectors/85/b12687bb766aed49-480.webp",
+                "large": "connectors/85/b12687bb766aed49-1600.webp"
+            },
+            {
+                "id": "571ff4cf3990100f",
+                "small": "connectors/85/571ff4cf3990100f-480.webp",
+                "large": "connectors/85/571ff4cf3990100f-1600.webp"
+            }
+        ]
     },
     {
         "id": 86,
@@ -1646,7 +2529,19 @@
         "currency": "PLN",
         "notes": "Listed as 'Szekla nierdzewna Prosta 12 mm'. Polish page only. From Slack house's spec table (2026-10-11): 60 kN, WLL 12 kN, 200 g, ANSI 316, made in China; maker given as 'W/K'.",
         "active": true,
-        "product_group": "D Shackle 12mm, Stainless"
+        "product_group": "D Shackle 12mm, Stainless",
+        "photos": [
+            {
+                "id": "ec350a5f1dc2032c",
+                "small": "connectors/86/ec350a5f1dc2032c-480.webp",
+                "large": "connectors/86/ec350a5f1dc2032c-1600.webp"
+            },
+            {
+                "id": "b0d4aa0c6cb491ee",
+                "small": "connectors/86/b0d4aa0c6cb491ee-480.webp",
+                "large": "connectors/86/b0d4aa0c6cb491ee-1600.webp"
+            }
+        ]
     },
     {
         "id": 87,
@@ -1664,7 +2559,19 @@
         "currency": "PLN",
         "notes": "Listed as 'Szekla nierdzewna Twist 8 mm'. Polish page only. From Slack house's spec table (2026-10-11): 30 kN, WLL 5 kN, 73 g, ANSI 316, made in China; maker given as 'W/K'.",
         "active": true,
-        "product_group": "Twisted Shackle 8mm, Stainless"
+        "product_group": "Twisted Shackle 8mm, Stainless",
+        "photos": [
+            {
+                "id": "065f670fed89d905",
+                "small": "connectors/87/065f670fed89d905-480.webp",
+                "large": "connectors/87/065f670fed89d905-1600.webp"
+            },
+            {
+                "id": "5e714b2724b4048f",
+                "small": "connectors/87/5e714b2724b4048f-480.webp",
+                "large": "connectors/87/5e714b2724b4048f-1600.webp"
+            }
+        ]
     },
     {
         "id": 88,
@@ -1683,7 +2590,19 @@
         "currency": "PLN",
         "notes": "Listed as 'Szekla nierdzewna Twist 10 mm'. Polish page only. Out of stock on 2026-10-11. From Slack house's spec table (2026-10-11): 58 kN, WLL 9 kN, width 22 mm, 143 g, ANSI 316, made in China; maker given as 'W/K'.",
         "active": true,
-        "product_group": "Twisted Shackle 10mm, Stainless"
+        "product_group": "Twisted Shackle 10mm, Stainless",
+        "photos": [
+            {
+                "id": "1753d198992d7c8d",
+                "small": "connectors/88/1753d198992d7c8d-480.webp",
+                "large": "connectors/88/1753d198992d7c8d-1600.webp"
+            },
+            {
+                "id": "5e714b2724b4048f",
+                "small": "connectors/88/5e714b2724b4048f-480.webp",
+                "large": "connectors/88/5e714b2724b4048f-1600.webp"
+            }
+        ]
     },
     {
         "id": 89,
@@ -1702,7 +2621,19 @@
         "currency": "PLN",
         "notes": "Listed as 'Szekla nierdzewna Twist 12 mm'. Polish page only. From Slack house's spec table (2026-10-11): 70 kN, WLL 11 kN, width 24 mm, 240 g, ANSI 316, made in China; maker given as 'W/K'.",
         "active": true,
-        "product_group": "Twisted Shackle 12mm, Stainless"
+        "product_group": "Twisted Shackle 12mm, Stainless",
+        "photos": [
+            {
+                "id": "51b2260bdbc91951",
+                "small": "connectors/89/51b2260bdbc91951-480.webp",
+                "large": "connectors/89/51b2260bdbc91951-1600.webp"
+            },
+            {
+                "id": "5e714b2724b4048f",
+                "small": "connectors/89/5e714b2724b4048f-480.webp",
+                "large": "connectors/89/5e714b2724b4048f-1600.webp"
+            }
+        ]
     },
     {
         "id": 90,
@@ -1721,7 +2652,19 @@
         "currency": "PLN",
         "notes": "Listed as 'Maillon Delta 10 mm'. Polish page only. From Slack house's spec table (2026-10-11): maker Camp, 40 kN, WLL 8 kN, gap 12 mm, outside 88 x 66 mm, inside 67.5 x 46 mm, 158 g, made in China. The description says galvanized steel ('wykonane z cynkowanej stali'; rechecked 2026-10-12).",
         "active": true,
-        "product_group": "Delta Quicklink 10mm"
+        "product_group": "Delta Quicklink 10mm",
+        "photos": [
+            {
+                "id": "25e89f7b7f972049",
+                "small": "connectors/90/25e89f7b7f972049-480.webp",
+                "large": "connectors/90/25e89f7b7f972049-1600.webp"
+            },
+            {
+                "id": "462b9ac8726ee916",
+                "small": "connectors/90/462b9ac8726ee916-480.webp",
+                "large": "connectors/90/462b9ac8726ee916-1600.webp"
+            }
+        ]
     },
     {
         "id": 91,
@@ -2142,6 +3085,28 @@
         "product_group": "Bow Shackle 12mm, Stainless",
         "gear_sellers": [
             "Slack Inov"
+        ],
+        "photos": [
+            {
+                "id": "fa4306700e91b1d5",
+                "small": "connectors/114/fa4306700e91b1d5-480.webp",
+                "large": "connectors/114/fa4306700e91b1d5-1600.webp"
+            },
+            {
+                "id": "11d37f99100f39d5",
+                "small": "connectors/114/11d37f99100f39d5-480.webp",
+                "large": "connectors/114/11d37f99100f39d5-1600.webp"
+            },
+            {
+                "id": "8da90fda67dc450e",
+                "small": "connectors/114/8da90fda67dc450e-480.webp",
+                "large": "connectors/114/8da90fda67dc450e-1600.webp"
+            },
+            {
+                "id": "c0ef641e5b801e20",
+                "small": "connectors/114/c0ef641e5b801e20-480.webp",
+                "large": "connectors/114/c0ef641e5b801e20-1600.webp"
+            }
         ]
     },
     {
@@ -2165,6 +3130,28 @@
         "product_group": "Bow Shackle 14mm, Stainless",
         "gear_sellers": [
             "Slack Inov"
+        ],
+        "photos": [
+            {
+                "id": "da36b2fe6d9142f6",
+                "small": "connectors/115/da36b2fe6d9142f6-480.webp",
+                "large": "connectors/115/da36b2fe6d9142f6-1600.webp"
+            },
+            {
+                "id": "11d37f99100f39d5",
+                "small": "connectors/115/11d37f99100f39d5-480.webp",
+                "large": "connectors/115/11d37f99100f39d5-1600.webp"
+            },
+            {
+                "id": "8da90fda67dc450e",
+                "small": "connectors/115/8da90fda67dc450e-480.webp",
+                "large": "connectors/115/8da90fda67dc450e-1600.webp"
+            },
+            {
+                "id": "c0ef641e5b801e20",
+                "small": "connectors/115/c0ef641e5b801e20-480.webp",
+                "large": "connectors/115/c0ef641e5b801e20-1600.webp"
+            }
         ]
     },
     {
@@ -2184,7 +3171,14 @@
         "currency": "EUR",
         "description": "High strength steel bow shackle. Strong an cheap.",
         "notes": "Listed as 'High strength bow shackle', size '75 kN' (ref. SI016). From Slack Inov's archived shop (2019): MBS 75 kN, jaw 18 mm, Ø 14 mm, 190 g. Red screw pin. Slack Inov: 'Hight strength steel, highly resilient to mechanical fatigue (cyclic loadings)'.",
-        "active": false
+        "active": false,
+        "photos": [
+            {
+                "id": "c1d1892dc4a1163b",
+                "small": "connectors/116/c1d1892dc4a1163b-480.webp",
+                "large": "connectors/116/c1d1892dc4a1163b-1600.webp"
+            }
+        ]
     },
     {
         "id": 117,
@@ -2203,7 +3197,14 @@
         "currency": "EUR",
         "description": "High strength steel bow shackle. Strong an cheap.",
         "notes": "Listed as 'High strength bow shackle', size '100 kN' (ref. SI017). From Slack Inov's archived shop (2019): MBS 100 kN, jaw 23 mm, Ø 16 mm, 282 g. Red screw pin. Slack Inov: 'Hight strength steel, highly resilient to mechanical fatigue (cyclic loadings)'.",
-        "active": false
+        "active": false,
+        "photos": [
+            {
+                "id": "c1d1892dc4a1163b",
+                "small": "connectors/117/c1d1892dc4a1163b-480.webp",
+                "large": "connectors/117/c1d1892dc4a1163b-1600.webp"
+            }
+        ]
     },
     {
         "id": 118,
@@ -2271,7 +3272,24 @@
         "description": "Our STAINLESS STEEL TWISTED SHAKLE is a perfect connector for any set-up with a 90° rotation between pieces.\nIts high-strength steel is equipped with a shiny and smooth surface, which prevents cuts and damage on webbing and slings.\nOur choice \"Size 8 mm\" includes a CAPTIVE PIN, once unscrewed, the unlosable pin stays blocked inside the shackle body. No more risk of losing or dropoing it.\nThe \"Size 12 mm\" has a jaw opening of 25 mm, so it's suitable for soft releases where you wrap your longline around the shackle without damaging it.",
         "notes": "Listed as 'Twisted Shackles Stainless Steel', size 'Twisted Ø8 mm - 45 kN - 0,8 T WLL with CAPTIVE PIN'. Technical sheet: jaw 16 mm, MBS 25 kN, WLL 4 kN, 67 g, captive pin, made in Taiwan, no certification, not PPE. The size selector says 45 kN; the technical sheet's 25 kN is used. Slack Inov €9.13 without VAT.",
         "active": true,
-        "product_group": "Twisted Shackle 8mm, Stainless"
+        "product_group": "Twisted Shackle 8mm, Stainless",
+        "photos": [
+            {
+                "id": "f1b05f597c2f2877",
+                "small": "connectors/120/f1b05f597c2f2877-480.webp",
+                "large": "connectors/120/f1b05f597c2f2877-1600.webp"
+            },
+            {
+                "id": "3e151a4aa0e6fce3",
+                "small": "connectors/120/3e151a4aa0e6fce3-480.webp",
+                "large": "connectors/120/3e151a4aa0e6fce3-1600.webp"
+            },
+            {
+                "id": "bc408ba6bc5588f2",
+                "small": "connectors/120/bc408ba6bc5588f2-480.webp",
+                "large": "connectors/120/bc408ba6bc5588f2-1600.webp"
+            }
+        ]
     },
     {
         "id": 121,
@@ -2291,7 +3309,34 @@
         "description": "Our STAINLESS STEEL TWISTED SHAKLE is a perfect connector for any set-up with a 90° rotation between pieces.\nIts high-strength steel is equipped with a shiny and smooth surface, which prevents cuts and damage on webbing and slings.\nOur choice \"Size 8 mm\" includes a CAPTIVE PIN, once unscrewed, the unlosable pin stays blocked inside the shackle body. No more risk of losing or dropoing it.\nThe \"Size 12 mm\" has a jaw opening of 25 mm, so it's suitable for soft releases where you wrap your longline around the shackle without damaging it.",
         "notes": "Listed as 'Twisted Shackles Stainless Steel', size 'Twisted Ø12 mm - 70 kN - 1,8 T WLL'. Technical sheet: jaw 25 mm, MBS 70 kN, WLL 18 kN, 220 g, no captive pin, made in Taiwan, no certification, not PPE. Suits a soft release. Slack Inov €14.96 without VAT.",
         "active": true,
-        "product_group": "Twisted Shackle 12mm, Stainless"
+        "product_group": "Twisted Shackle 12mm, Stainless",
+        "photos": [
+            {
+                "id": "21bb685eeb61ad62",
+                "small": "connectors/121/21bb685eeb61ad62-480.webp",
+                "large": "connectors/121/21bb685eeb61ad62-1600.webp"
+            },
+            {
+                "id": "69877a1ecad52f6d",
+                "small": "connectors/121/69877a1ecad52f6d-480.webp",
+                "large": "connectors/121/69877a1ecad52f6d-1600.webp"
+            },
+            {
+                "id": "b886704f7950b36a",
+                "small": "connectors/121/b886704f7950b36a-480.webp",
+                "large": "connectors/121/b886704f7950b36a-1600.webp"
+            },
+            {
+                "id": "e8aa60b5d535258c",
+                "small": "connectors/121/e8aa60b5d535258c-480.webp",
+                "large": "connectors/121/e8aa60b5d535258c-1600.webp"
+            },
+            {
+                "id": "e07e184a098fe123",
+                "small": "connectors/121/e07e184a098fe123-480.webp",
+                "large": "connectors/121/e07e184a098fe123-1600.webp"
+            }
+        ]
     },
     {
         "id": 122,
@@ -2355,7 +3400,14 @@
         "currency": "EUR",
         "notes": "Listed as '7mm Quick Link – INOX'. WLL 3.5 kN, gate open '> 1 kN'.",
         "active": true,
-        "product_group": "Oval Quicklink 7mm, Stainless"
+        "product_group": "Oval Quicklink 7mm, Stainless",
+        "photos": [
+            {
+                "id": "03d8f4c2cff4cae6",
+                "small": "connectors/124/03d8f4c2cff4cae6-480.webp",
+                "large": "connectors/124/03d8f4c2cff4cae6-1600.webp"
+            }
+        ]
     },
     {
         "id": 125,
@@ -2373,7 +3425,19 @@
         "currency": "PLN",
         "notes": "Listed as 'Maillon Oval 7 mm'. Its spec table: WLL 5.5 kN, outside 65 x 34 mm, inside 50 x 16 mm, made in France. Out of stock when the operator checked on 2026-10-11.",
         "active": true,
-        "product_group": "Oval Quicklink 7mm, Stainless"
+        "product_group": "Oval Quicklink 7mm, Stainless",
+        "photos": [
+            {
+                "id": "e392f96b94dd8067",
+                "small": "connectors/125/e392f96b94dd8067-480.webp",
+                "large": "connectors/125/e392f96b94dd8067-1600.webp"
+            },
+            {
+                "id": "f91d75729d4f9dfb",
+                "small": "connectors/125/f91d75729d4f9dfb-480.webp",
+                "large": "connectors/125/f91d75729d4f9dfb-1600.webp"
+            }
+        ]
     },
     {
         "id": 126,
@@ -2393,6 +3457,13 @@
         "notes": "Listed as 'TiLink - titanium soft shackle connector for highlines'. A soft shackle closed by a titanium head that slides into the noose instead of a button knot. MBS 25 kN single wrap (recorded), 50 kN double wrap. Rope diameter and loop size not stated. Preorder; shipping from Nov 2026.",
         "active": true,
         "manufacturer_not_for_highline": false,
-        "manufacturer_not_for_highline_source": "https://raed-sports.com/products/tilink-titanium-soft-shackle-connector-for-highlines"
+        "manufacturer_not_for_highline_source": "https://raed-sports.com/products/tilink-titanium-soft-shackle-connector-for-highlines",
+        "photos": [
+            {
+                "id": "8e773939d1d767e2",
+                "small": "connectors/126/8e773939d1d767e2-480.webp",
+                "large": "connectors/126/8e773939d1d767e2-1600.webp"
+            }
+        ]
     }
 ]

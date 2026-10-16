@@ -1,12 +1,14 @@
 // Admin-only entry points that start from nothing: Add product on a listing,
-// Add brand on the manufacturers page, Edit brand on a brand's page. Each
-// opens the shared EntryEditor (P3-G, P3-I). Renders nothing for anyone else.
+// Add brand on the manufacturers page, Edit brand and Logo and manuals on a
+// brand's page. Each opens the shared EntryEditor (P3-G, P3-I), or the media
+// dialog (phase 4). Renders nothing for anyone else.
 
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { createBrand, createItem, editBrand, fetchBrandFields, fetchFields, fetchStoredBrand } from '@/api/edits'
 import { useSiteAuth } from '@/auth/AuthContext'
 import EntryEditor from './EntryEditor'
+import { BrandMediaDialog } from './MediaEditor'
 
 const LINK = 'cursor-pointer text-sm font-medium text-teal-700 underline-offset-2 hover:text-teal-800 hover:underline'
 
@@ -25,7 +27,7 @@ export function AddItemButton({ slug, label }: { slug: string; label: string }) 
         <EntryEditor
           adapter={{
             title: `Add to ${label}`,
-            note: 'Live for everyone once created, and recorded publicly. Photos are filed separately, under its id.',
+            note: 'Live for everyone once created, and recorded publicly. Add photos and manuals from its page.',
             loadFields: () => fetchFields(slug, token),
             save: (fields, _rev, why) => createItem(slug, fields, why, token),
           }}
@@ -92,6 +94,31 @@ export function EditBrandButton({ catalogId, onSaved }: { catalogId: number | st
           }}
           onClose={() => setOpen(false)}
           onSaved={() => {
+            setOpen(false)
+            onSaved()
+          }}
+        />
+      )}
+    </>
+  )
+}
+
+export function BrandMediaButton({ catalogId, onSaved }: { catalogId: number | string; onSaved: () => void }) {
+  const auth = useSiteAuth()
+  const [open, setOpen] = useState(false)
+  const token = auth.token
+  if (!auth.isAdmin || !token) return null
+  return (
+    <>
+      <button type="button" data-cy="brand-media" className={LINK} onClick={() => setOpen(true)}>
+        Logo and manuals
+      </button>
+      {open && (
+        <BrandMediaDialog
+          catalogId={catalogId}
+          token={token}
+          onClose={() => setOpen(false)}
+          onDone={() => {
             setOpen(false)
             onSaved()
           }}

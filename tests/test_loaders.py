@@ -28,6 +28,7 @@ from slack_data.load_data.load_gear import (
     DERIVED_FIELDS,
     ENVELOPE_KEYS,
     GEAR,
+    MEDIA_KEYS,
     UnknownField,
     stored_fields,
     to_entry,
@@ -80,6 +81,8 @@ def test_every_real_seed_entry_round_trips(collection):
     for entry in read_seed_json(f"{collection}.json"):
         row = to_row(collection, entry, brand_id=1)
         back = to_entry(collection, row, entry["brand"], entry.get("unmodelled"))
+        # Media is never on a row; the edit path carries it over (edits.canonical).
+        back.update({key: entry[key] for key in MEDIA_KEYS if key in entry})
         assert back == entry, (collection, entry["id"])
 
 

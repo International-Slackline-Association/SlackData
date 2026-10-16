@@ -21,6 +21,7 @@ import SuggestButton from '@/components/submissions/SuggestButton'
 import { getGearType } from '@/config/gearTypes'
 import { type AnyItem } from '@/utils/format'
 import { manualsFor } from '@/utils/images'
+import { useMedia } from '@/utils/mediaStore'
 import { groupFor } from '@/utils/groups'
 import { brandsFor } from '@/utils/sellers'
 import NotFoundPage from './NotFoundPage'
@@ -28,6 +29,7 @@ import NotFoundPage from './NotFoundPage'
 export default function GearDetailPage() {
   const { slug, id } = useParams()
   const meta = slug ? getGearType(slug) : undefined
+  useMedia()
 
   const [item, setItem] = useState<AnyItem | null>(null)
   // A member of a generic-part group renders as the GROUP — the part, sold by

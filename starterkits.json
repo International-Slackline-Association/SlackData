@@ -11,7 +11,14 @@
         "includes_treepro": false,
         "price": 90.0,
         "currency": "EUR",
-        "active": false
+        "active": false,
+        "photos": [
+            {
+                "id": "0e14fb8f865bb6bb",
+                "small": "starterkits/1/0e14fb8f865bb6bb-480.webp",
+                "large": "starterkits/1/0e14fb8f865bb6bb-1600.webp"
+            }
+        ]
     },
     {
         "id": 2,
@@ -25,7 +32,14 @@
         "includes_treepro": false,
         "price": 200.0,
         "currency": "EUR",
-        "active": false
+        "active": false,
+        "photos": [
+            {
+                "id": "c0be91ad2a599d27",
+                "small": "starterkits/2/c0be91ad2a599d27-480.webp",
+                "large": "starterkits/2/c0be91ad2a599d27-1600.webp"
+            }
+        ]
     },
     {
         "id": 3,
@@ -39,7 +53,14 @@
         "includes_treepro": true,
         "price": 100.0,
         "currency": "EUR",
-        "active": false
+        "active": false,
+        "photos": [
+            {
+                "id": "75d83bf489d30e68",
+                "small": "starterkits/3/75d83bf489d30e68-480.webp",
+                "large": "starterkits/3/75d83bf489d30e68-1600.webp"
+            }
+        ]
     },
     {
         "id": 4,
@@ -53,7 +74,14 @@
         "includes_treepro": false,
         "price": 120.0,
         "currency": "EUR",
-        "active": false
+        "active": false,
+        "photos": [
+            {
+                "id": "6124819dab1c510b",
+                "small": "starterkits/4/6124819dab1c510b-480.webp",
+                "large": "starterkits/4/6124819dab1c510b-1600.webp"
+            }
+        ]
     },
     {
         "id": 5,
@@ -68,7 +96,14 @@
         "price": 90.0,
         "currency": "USD",
         "description": "A great NZ made beginner / intermediate slackline set that includes everything you need to get started. The webbing it self has less stretch than a trickline but is flexible and bouncy enough to still get a nice a smooth elasticity and the 50mm webbing gives enough stability to the ankle joint to walk and jump easily.",
-        "active": true
+        "active": true,
+        "photos": [
+            {
+                "id": "c7daaff30c047b05",
+                "small": "starterkits/5/c7daaff30c047b05-480.webp",
+                "large": "starterkits/5/c7daaff30c047b05-1600.webp"
+            }
+        ]
     },
     {
         "id": 6,
@@ -82,7 +117,14 @@
         "includes_treepro": true,
         "price": 229.0,
         "currency": "ILS",
-        "active": true
+        "active": true,
+        "photos": [
+            {
+                "id": "cb437bac28c4a7d5",
+                "small": "starterkits/6/cb437bac28c4a7d5-480.webp",
+                "large": "starterkits/6/cb437bac28c4a7d5-1600.webp"
+            }
+        ]
     },
     {
         "id": 7,
@@ -96,7 +138,14 @@
         "includes_treepro": true,
         "price": 199.0,
         "currency": "ILS",
-        "active": true
+        "active": true,
+        "photos": [
+            {
+                "id": "5f6d6130408e0fef",
+                "small": "starterkits/7/5f6d6130408e0fef-480.webp",
+                "large": "starterkits/7/5f6d6130408e0fef-1600.webp"
+            }
+        ]
     },
     {
         "id": 8,
@@ -109,7 +158,14 @@
         "includes_treepro": false,
         "price": 5000.0,
         "currency": "INR",
-        "active": false
+        "active": false,
+        "photos": [
+            {
+                "id": "faa0fda29420288f",
+                "small": "starterkits/8/faa0fda29420288f-480.webp",
+                "large": "starterkits/8/faa0fda29420288f-1600.webp"
+            }
+        ]
     },
     {
         "id": 9,
@@ -124,7 +180,14 @@
         "price": 2000.0,
         "currency": "ZAR",
         "description": "The Active Slackline kit is the perfect line for anyone looking to improve their slackline skills and start pushing themselves to the next level. With the 20m walking distance the places you can set this line up are countless.",
-        "active": true
+        "active": true,
+        "photos": [
+            {
+                "id": "628d090c657b52c5",
+                "small": "starterkits/9/628d090c657b52c5-480.webp",
+                "large": "starterkits/9/628d090c657b52c5-1600.webp"
+            }
+        ]
     },
     {
         "id": 10,
@@ -138,7 +201,14 @@
         "includes_treepro": true,
         "price": 269.0,
         "currency": "ILS",
-        "active": true
+        "active": true,
+        "photos": [
+            {
+                "id": "cb437bac28c4a7d5",
+                "small": "starterkits/10/cb437bac28c4a7d5-480.webp",
+                "large": "starterkits/10/cb437bac28c4a7d5-1600.webp"
+            }
+        ]
     },
     {
         "id": 11,
@@ -152,7 +222,14 @@
         "includes_treepro": true,
         "price": 249.0,
         "currency": "ILS",
-        "active": true
+        "active": true,
+        "photos": [
+            {
+                "id": "5f6d6130408e0fef",
+                "small": "starterkits/11/5f6d6130408e0fef-480.webp",
+                "large": "starterkits/11/5f6d6130408e0fef-1600.webp"
+            }
+        ]
     },
     {
         "id": 12,
@@ -166,7 +243,14 @@
         "includes_treepro": true,
         "price": 110.0,
         "currency": "EUR",
-        "active": false
+        "active": false,
+        "photos": [
+            {
+                "id": "b270d78e15722578",
+                "small": "starterkits/12/b270d78e15722578-480.webp",
+                "large": "starterkits/12/b270d78e15722578-1600.webp"
+            }
+        ]
     },
     {
         "id": 13,
@@ -180,7 +264,14 @@
         "includes_treepro": true,
         "price": 125.0,
         "currency": "EUR",
-        "active": false
+        "active": false,
+        "photos": [
+            {
+                "id": "1f09fe521ce4baec",
+                "small": "starterkits/13/1f09fe521ce4baec-480.webp",
+                "large": "starterkits/13/1f09fe521ce4baec-1600.webp"
+            }
+        ]
     },
     {
         "id": 14,
@@ -195,7 +286,21 @@
         "price": 170.0,
         "currency": "CHF",
         "description": "This slackline is ideal for those who have no or little experience with slacklining. The slackline-webbing reacts very pleasant, it forgives the errors. The slackline webbing is specially developed for slacklining. The ratchet is easy and quickly to install.",
-        "active": true
+        "active": true,
+        "photos": [
+            {
+                "id": "b35d9545d755474c",
+                "small": "starterkits/14/b35d9545d755474c-480.webp",
+                "large": "starterkits/14/b35d9545d755474c-1600.webp"
+            }
+        ],
+        "manuals": [
+            {
+                "id": "136dc426886a7747",
+                "file": "starterkits/14/136dc426886a7747-user-manual.pdf",
+                "title": "User manual"
+            }
+        ]
     },
     {
         "id": 15,
@@ -210,7 +315,14 @@
         "price": 80.0,
         "currency": "USD",
         "description": "This complete introductory slackline kit is designed specifically for beginner and intermediate users. Featuring static-style webbing ideal for learning, the BASE LINE is perfect for getting started and progressing to basic tricks.",
-        "active": true
+        "active": true,
+        "photos": [
+            {
+                "id": "5c03ae7353d24bf4",
+                "small": "starterkits/15/5c03ae7353d24bf4-480.webp",
+                "large": "starterkits/15/5c03ae7353d24bf4-1600.webp"
+            }
+        ]
     },
     {
         "id": 16,
@@ -224,7 +336,14 @@
         "includes_treepro": false,
         "price": 110.0,
         "currency": "EUR",
-        "active": false
+        "active": false,
+        "photos": [
+            {
+                "id": "2e12cd7b6db8f43e",
+                "small": "starterkits/16/2e12cd7b6db8f43e-480.webp",
+                "large": "starterkits/16/2e12cd7b6db8f43e-1600.webp"
+            }
+        ]
     },
     {
         "id": 17,
@@ -238,7 +357,14 @@
         "includes_treepro": false,
         "price": 64.0,
         "currency": "EUR",
-        "active": false
+        "active": false,
+        "photos": [
+            {
+                "id": "371af9e544c56841",
+                "small": "starterkits/17/371af9e544c56841-480.webp",
+                "large": "starterkits/17/371af9e544c56841-1600.webp"
+            }
+        ]
     },
     {
         "id": 18,
@@ -254,7 +380,14 @@
         "price": 135.0,
         "currency": "USD",
         "description": "Rig lines up to 75 feet long! The perfect kit for the first-time slackliner, quick to set up, minimal gear, quality components. Rig a line up to 75 feet (22 m) by yourself in under 10 minutes. Comes with 25 m of your choice of webbing (sewn loops both ends), anchor slings, TreeHugger Classics, carabiners, a Line-Locker Ring, and a BC Shackle.",
-        "active": true
+        "active": true,
+        "photos": [
+            {
+                "id": "6989d9f2d9c7f7d5",
+                "small": "starterkits/18/6989d9f2d9c7f7d5-480.webp",
+                "large": "starterkits/18/6989d9f2d9c7f7d5-1600.webp"
+            }
+        ]
     },
     {
         "id": 19,
@@ -269,7 +402,14 @@
         "price": 245.0,
         "currency": "BRL",
         "description": "The SlacklifeBC Primitive Beginner Slackline kits is a basic 1″ slackline kit ideal for any level of slackliner. Excellent as a backyard setup, a lightweight travel setup, or park-line. The 30m slackline-specific webbing provides an amazing slackline experience.",
-        "active": true
+        "active": true,
+        "photos": [
+            {
+                "id": "2bbdbf7b6447b2c0",
+                "small": "starterkits/19/2bbdbf7b6447b2c0-480.webp",
+                "large": "starterkits/19/2bbdbf7b6447b2c0-1600.webp"
+            }
+        ]
     },
     {
         "id": 20,
@@ -283,7 +423,14 @@
         "includes_treepro": true,
         "price": 99.0,
         "currency": "USD",
-        "active": false
+        "active": false,
+        "photos": [
+            {
+                "id": "111fe29430e11e4e",
+                "small": "starterkits/20/111fe29430e11e4e-480.webp",
+                "large": "starterkits/20/111fe29430e11e4e-1600.webp"
+            }
+        ]
     },
     {
         "id": 21,
@@ -298,7 +445,14 @@
         "includes_treepro": true,
         "price": 118.0,
         "currency": "EUR",
-        "active": true
+        "active": true,
+        "photos": [
+            {
+                "id": "dc1fffa67bc00afc",
+                "small": "starterkits/21/dc1fffa67bc00afc-480.webp",
+                "large": "starterkits/21/dc1fffa67bc00afc-1600.webp"
+            }
+        ]
     },
     {
         "id": 22,
@@ -312,7 +466,14 @@
         "includes_treepro": false,
         "price": 125.0,
         "currency": "EUR",
-        "active": false
+        "active": false,
+        "photos": [
+            {
+                "id": "d635109b6b8ed4f8",
+                "small": "starterkits/22/d635109b6b8ed4f8-480.webp",
+                "large": "starterkits/22/d635109b6b8ed4f8-1600.webp"
+            }
+        ]
     },
     {
         "id": 23,
@@ -326,7 +487,14 @@
         "includes_treepro": false,
         "price": 160.0,
         "currency": "EUR",
-        "active": false
+        "active": false,
+        "photos": [
+            {
+                "id": "4db94121de351f06",
+                "small": "starterkits/23/4db94121de351f06-480.webp",
+                "large": "starterkits/23/4db94121de351f06-1600.webp"
+            }
+        ]
     },
     {
         "id": 24,
@@ -341,7 +509,14 @@
         "price": 50.0,
         "currency": "EUR",
         "description": "The pack gives the equipment to get the best to learn how to slackline and find your balance. You will be able to tight a second webbing above you and get balance thanks to our combined system. (pulley/rope)",
-        "active": false
+        "active": false,
+        "photos": [
+            {
+                "id": "7001531bdaf4df62",
+                "small": "starterkits/24/7001531bdaf4df62-480.webp",
+                "large": "starterkits/24/7001531bdaf4df62-1600.webp"
+            }
+        ]
     },
     {
         "id": 25,
@@ -356,7 +531,14 @@
         "price": 90.0,
         "currency": "USD",
         "description": "The YogaSlackers eLine “Light” Kit is perfect for beginner slackliners practicing slackline yoga. It is also a great travel line. Known for being a favorite, this versatile 1” line offers lower tension for a safe and fun way to work both static and dynamic poses. With the lower stretch of this line you can get the most usable length to slack on without needing an army to tighten it.",
-        "active": true
+        "active": true,
+        "photos": [
+            {
+                "id": "c02128a3381a97ea",
+                "small": "starterkits/25/c02128a3381a97ea-480.webp",
+                "large": "starterkits/25/c02128a3381a97ea-1600.webp"
+            }
+        ]
     },
     {
         "id": 26,
@@ -372,7 +554,14 @@
         "currency": "USD",
         "description": "The complete eLine setup: 15 m of tubular polyester webbing, locking carabiners, two adjustable anchors, a line lock, tree protection and a storage bag.",
         "notes": "The Pro Kit (id 66) is the same kit without the tree protection. Webbing is the 25.4 mm tubular polyester eLine, MBS 21.5 kN.",
-        "active": true
+        "active": true,
+        "photos": [
+            {
+                "id": "cb013e443887f69e",
+                "small": "starterkits/26/cb013e443887f69e-480.webp",
+                "large": "starterkits/26/cb013e443887f69e-1600.webp"
+            }
+        ]
     },
     {
         "id": 27,
@@ -387,7 +576,14 @@
         "price": 63.0,
         "currency": "EUR",
         "description": "Tensioning this kit is so easy even our graphic designer Tonda can do it. So he says.",
-        "active": true
+        "active": true,
+        "photos": [
+            {
+                "id": "d6f25c950545ccfa",
+                "small": "starterkits/27/d6f25c950545ccfa-480.webp",
+                "large": "starterkits/27/d6f25c950545ccfa-1600.webp"
+            }
+        ]
     },
     {
         "id": 28,
@@ -402,7 +598,14 @@
         "price": 43.0,
         "currency": "EUR",
         "description": "We all had to begin somewhere. You can try the Step kit that has been designed to help with the very first steps on a slackline.",
-        "active": true
+        "active": true,
+        "photos": [
+            {
+                "id": "138c78e281f48cb2",
+                "small": "starterkits/28/138c78e281f48cb2-480.webp",
+                "large": "starterkits/28/138c78e281f48cb2-1600.webp"
+            }
+        ]
     },
     {
         "id": 29,
@@ -417,7 +620,14 @@
         "price": 63.0,
         "currency": "EUR",
         "description": "Can’t you decide whether jumping or walking is your cup of tea? Well, we can’t help you there but perhaps the Trick set could hold the answer.",
-        "active": true
+        "active": true,
+        "photos": [
+            {
+                "id": "c29d47e5279ab814",
+                "small": "starterkits/29/c29d47e5279ab814-480.webp",
+                "large": "starterkits/29/c29d47e5279ab814-1600.webp"
+            }
+        ]
     },
     {
         "id": 30,
@@ -433,7 +643,14 @@
         "price": 56.0,
         "currency": "EUR",
         "description": "Yoga is a perfect way to clean your head and stretch your body. Same as slackline. Yoga kit combines these two activities in one and offers a simple way to get inside yourself really deep. Handy bag included.",
-        "active": true
+        "active": true,
+        "photos": [
+            {
+                "id": "7ede523f4e6e290f",
+                "small": "starterkits/30/7ede523f4e6e290f-480.webp",
+                "large": "starterkits/30/7ede523f4e6e290f-1600.webp"
+            }
+        ]
     },
     {
         "id": 31,
@@ -448,7 +665,21 @@
         "price": 200.0,
         "currency": "CHF",
         "description": "This is a very versatile Slackline, 30m long, for ambitious beginners as well as for people who already have a short Slackline and now want to dare to a larger distance.",
-        "active": true
+        "active": true,
+        "photos": [
+            {
+                "id": "5ff4730916b9e947",
+                "small": "starterkits/31/5ff4730916b9e947-480.webp",
+                "large": "starterkits/31/5ff4730916b9e947-1600.webp"
+            }
+        ],
+        "manuals": [
+            {
+                "id": "1978913d3375828e",
+                "file": "starterkits/31/1978913d3375828e-user-manual.pdf",
+                "title": "User manual"
+            }
+        ]
     },
     {
         "id": 32,
@@ -464,7 +695,14 @@
         "price": 3450.0,
         "currency": "ZAR",
         "description": "The Firestarter 35m Slackline Kit has been designed as a high quality, lightweight and affordable kit, for beginner to intermediate slackliners. With this kit you can setup a line up to 35m long. Quality components and a separate tensioning webbing ensure a longlasting slackline.",
-        "active": true
+        "active": true,
+        "photos": [
+            {
+                "id": "b0ae05534f0b1bfd",
+                "small": "starterkits/32/b0ae05534f0b1bfd-480.webp",
+                "large": "starterkits/32/b0ae05534f0b1bfd-1600.webp"
+            }
+        ]
     },
     {
         "id": 33,
@@ -479,7 +717,14 @@
         "price": 82.0,
         "currency": "EUR",
         "description": "You want that special feeling of balance and joy for you, your friends and your whole family? This is the right set for you. Easy to setup, lightweight, extremely durable and very affordable. Your backyard, a park, a camping site, even the beach will become a place to frolic. This slackline set can be easily tensioned by one single person and can be used at very low heights due to its minimal stretch. This makes it ideal for beginners to learn how to balance a slackline and suits well for advanced slackliners to become better very quickly when used in higher lines with less tension.",
-        "active": true
+        "active": true,
+        "photos": [
+            {
+                "id": "9fd319cd7f2d62ff",
+                "small": "starterkits/33/9fd319cd7f2d62ff-480.webp",
+                "large": "starterkits/33/9fd319cd7f2d62ff-1600.webp"
+            }
+        ]
     },
     {
         "id": 34,
@@ -493,7 +738,19 @@
         "includes_treepro": false,
         "price": 48.0,
         "currency": "EUR",
-        "active": false
+        "active": false,
+        "photos": [
+            {
+                "id": "5276b9787b3a3846",
+                "small": "starterkits/34/5276b9787b3a3846-480.webp",
+                "large": "starterkits/34/5276b9787b3a3846-1600.webp"
+            },
+            {
+                "id": "f3531cc6408204e3",
+                "small": "starterkits/34/f3531cc6408204e3-480.webp",
+                "large": "starterkits/34/f3531cc6408204e3-1600.webp"
+            }
+        ]
     },
     {
         "id": 35,
@@ -507,7 +764,14 @@
         "includes_treepro": false,
         "price": 88.0,
         "currency": "EUR",
-        "active": false
+        "active": false,
+        "photos": [
+            {
+                "id": "f3531cc6408204e3",
+                "small": "starterkits/35/f3531cc6408204e3-480.webp",
+                "large": "starterkits/35/f3531cc6408204e3-1600.webp"
+            }
+        ]
     },
     {
         "id": 36,
@@ -522,7 +786,14 @@
         "price": 50.0,
         "currency": "EUR",
         "description": "The Kit Cruise is perfect for beginners such as children, for family use or for anyone who wants to discover the feeling of slacklining on a 5cm wide webbing. Slacklining will be easy and fun. A must have for kids and family.",
-        "active": false
+        "active": false,
+        "photos": [
+            {
+                "id": "e6c04a5f1c3079e4",
+                "small": "starterkits/36/e6c04a5f1c3079e4-480.webp",
+                "large": "starterkits/36/e6c04a5f1c3079e4-1600.webp"
+            }
+        ]
     },
     {
         "id": 37,
@@ -537,7 +808,14 @@
         "price": 90.0,
         "currency": "EUR",
         "description": "The Easy Kit is a must have for the whole family. He is a great tool to learn how to slackline. Thanks to overhead line, kids are now able to get on the slackline and walk instantly without falling.",
-        "active": false
+        "active": false,
+        "photos": [
+            {
+                "id": "d5cc36316b72863a",
+                "small": "starterkits/37/d5cc36316b72863a-480.webp",
+                "large": "starterkits/37/d5cc36316b72863a-1600.webp"
+            }
+        ]
     },
     {
         "id": 38,
@@ -552,7 +830,14 @@
         "price": 55.0,
         "currency": "EUR",
         "description": "The first slackline kit for the occasional practice with a weight gain compared to kits with ratchet, with its carry bag so you can take it anywhere, and the 2,5 cm webbing will make you discover the first sensations similar to the longer slacklines.",
-        "active": true
+        "active": true,
+        "photos": [
+            {
+                "id": "472a776f11ce520c",
+                "small": "starterkits/38/472a776f11ce520c-480.webp",
+                "large": "starterkits/38/472a776f11ce520c-1600.webp"
+            }
+        ]
     },
     {
         "id": 39,
@@ -567,7 +852,14 @@
         "price": 80.0,
         "currency": "EUR",
         "description": "You already know that you want to make progess in slackline and 15m will be too short, but you are still novice and you have no use of an intermediate kit, the kit Inuit 30 m will allow you to have a light primitive set-up. With its carry bag and its 2,9 kg you can take it anywhere. Webbing is 2,5 cm wide Windu.",
-        "active": true
+        "active": true,
+        "photos": [
+            {
+                "id": "26aa23b814d6d1c6",
+                "small": "starterkits/39/26aa23b814d6d1c6-480.webp",
+                "large": "starterkits/39/26aa23b814d6d1c6-1600.webp"
+            }
+        ]
     },
     {
         "id": 40,
@@ -582,7 +874,14 @@
         "price": 90.0,
         "currency": "EUR",
         "description": "You already know that you want to make progess in slackline but you are still novice, but you have no utility of an intermediate kit, the kit Inuit 30 m will allow you to have a light primitive set-up. With its carry bag and its 2,9 kg you can take it anywhere. Available webbings are 2,5 cm wide Cobalt or Snake.",
-        "active": true
+        "active": true,
+        "photos": [
+            {
+                "id": "eeae4f779833631a",
+                "small": "starterkits/40/eeae4f779833631a-480.webp",
+                "large": "starterkits/40/eeae4f779833631a-1600.webp"
+            }
+        ]
     },
     {
         "id": 41,
@@ -597,7 +896,14 @@
         "price": 90.0,
         "currency": "EUR",
         "description": "15m are already in the pocket? Not bad! Time to go on 25m long slackline? Congrats! Needed a light and compact slackline to carry it everywhere with you? Here we are! Teenager or adult, go for the 25m Primitiv Kit. You will be able to carry it everywhere around you.",
-        "active": false
+        "active": false,
+        "photos": [
+            {
+                "id": "cc13b11326c4432a",
+                "small": "starterkits/41/cc13b11326c4432a-480.webp",
+                "large": "starterkits/41/cc13b11326c4432a-1600.webp"
+            }
+        ]
     },
     {
         "id": 42,
@@ -611,7 +917,14 @@
         "includes_treepro": true,
         "price": 189.99,
         "currency": "BRL",
-        "active": true
+        "active": true,
+        "photos": [
+            {
+                "id": "8098c2eb8cf5b4d4",
+                "small": "starterkits/42/8098c2eb8cf5b4d4-480.webp",
+                "large": "starterkits/42/8098c2eb8cf5b4d4-1600.webp"
+            }
+        ]
     },
     {
         "id": 43,
@@ -626,7 +939,14 @@
         "price": 35.0,
         "currency": "EUR",
         "description": "Kit 15m slack with 5cm wide webbing, will be a perfect introduction to slackline and thanks to its easy set-up it will be accessible to families and children. The webbing was designed to be rigid enough to allow learning slackline at very low heights.",
-        "active": false
+        "active": false,
+        "photos": [
+            {
+                "id": "5b86ced79212a91f",
+                "small": "starterkits/43/5b86ced79212a91f-480.webp",
+                "large": "starterkits/43/5b86ced79212a91f-1600.webp"
+            }
+        ]
     },
     {
         "id": 44,
@@ -641,7 +961,14 @@
         "price": 48.0,
         "currency": "EUR",
         "description": "Kit 20m slack with 5cm wide webbing, will be a perfect introduction to slackline and thanks to its easy set-up it will be accessible to families and children. The webbing was designed to be rigid enough to allow learning slackline at very low heights.",
-        "active": true
+        "active": true,
+        "photos": [
+            {
+                "id": "3b8c93c09e3fee63",
+                "small": "starterkits/44/3b8c93c09e3fee63-480.webp",
+                "large": "starterkits/44/3b8c93c09e3fee63-1600.webp"
+            }
+        ]
     },
     {
         "id": 45,
@@ -655,7 +982,14 @@
         "includes_treepro": true,
         "price": 189.0,
         "currency": "BRL",
-        "active": true
+        "active": true,
+        "photos": [
+            {
+                "id": "7dc2059dcdb42918",
+                "small": "starterkits/45/7dc2059dcdb42918-480.webp",
+                "large": "starterkits/45/7dc2059dcdb42918-1600.webp"
+            }
+        ]
     },
     {
         "id": 46,
@@ -669,7 +1003,14 @@
         "includes_treepro": true,
         "price": 85.0,
         "currency": "EUR",
-        "active": false
+        "active": false,
+        "photos": [
+            {
+                "id": "28433eb6e0eb73a8",
+                "small": "starterkits/46/28433eb6e0eb73a8-480.webp",
+                "large": "starterkits/46/28433eb6e0eb73a8-1600.webp"
+            }
+        ]
     },
     {
         "id": 47,
@@ -684,7 +1025,21 @@
         "price": 99.0,
         "currency": "CHF",
         "description": "The Minimum slackline kit is ideal for beginners, kids, for traveling and it was developed to help on the slackline learning process.",
-        "active": true
+        "active": true,
+        "photos": [
+            {
+                "id": "390d64c089a1d276",
+                "small": "starterkits/47/390d64c089a1d276-480.webp",
+                "large": "starterkits/47/390d64c089a1d276-1600.webp"
+            }
+        ],
+        "manuals": [
+            {
+                "id": "f61b742859b5dd8f",
+                "file": "starterkits/47/f61b742859b5dd8f-user-manual.pdf",
+                "title": "User manual"
+            }
+        ]
     },
     {
         "id": 48,
@@ -698,7 +1053,14 @@
         "includes_treepro": false,
         "price": 170.0,
         "currency": "EUR",
-        "active": false
+        "active": false,
+        "photos": [
+            {
+                "id": "837083f8aa8f6216",
+                "small": "starterkits/48/837083f8aa8f6216-480.webp",
+                "large": "starterkits/48/837083f8aa8f6216-1600.webp"
+            }
+        ]
     },
     {
         "id": 49,
@@ -712,7 +1074,14 @@
         "includes_treepro": false,
         "price": 170.0,
         "currency": "EUR",
-        "active": false
+        "active": false,
+        "photos": [
+            {
+                "id": "9ef47a6f5dec1aa6",
+                "small": "starterkits/49/9ef47a6f5dec1aa6-480.webp",
+                "large": "starterkits/49/9ef47a6f5dec1aa6-1600.webp"
+            }
+        ]
     },
     {
         "id": 50,
@@ -727,7 +1096,14 @@
         "price": 78.0,
         "currency": "EUR",
         "description": "The ideal pack to tender more than primitive with two pawls. Consisting of a 25 m webbing with two 50 kN ratchets with their 3 m straps you can install it easily, no need for additional hardware to tighten your webbing. Made in France",
-        "active": true
+        "active": true,
+        "photos": [
+            {
+                "id": "81247f353b277f64",
+                "small": "starterkits/50/81247f353b277f64-480.webp",
+                "large": "starterkits/50/81247f353b277f64-1600.webp"
+            }
+        ]
     },
     {
         "id": 51,
@@ -742,7 +1118,14 @@
         "price": 100.0,
         "currency": "USD",
         "description": "Turn any environment into a playground with this slackline designed as a complete kit specifically for beginners. Featuring static-style material with rubber grip, and an overhead guide line with arm trainer, the PLAY LINE makes learning simple.",
-        "active": true
+        "active": true,
+        "photos": [
+            {
+                "id": "a44390b58d5c7e3e",
+                "small": "starterkits/51/a44390b58d5c7e3e-480.webp",
+                "large": "starterkits/51/a44390b58d5c7e3e-1600.webp"
+            }
+        ]
     },
     {
         "id": 52,
@@ -756,7 +1139,14 @@
         "includes_treepro": true,
         "price": 115.0,
         "currency": "EUR",
-        "active": true
+        "active": true,
+        "photos": [
+            {
+                "id": "38755061c83397df",
+                "small": "starterkits/52/38755061c83397df-480.webp",
+                "large": "starterkits/52/38755061c83397df-1600.webp"
+            }
+        ]
     },
     {
         "id": 53,
@@ -771,7 +1161,14 @@
         "price": 220.0,
         "currency": "CHF",
         "description": "SLACKTIVITY’s Primitive Slackline Kit has a simple setup, it is super-light and you can even choose your favorite type of slackline webbing.",
-        "active": true
+        "active": true,
+        "photos": [
+            {
+                "id": "3cdfc1a6249beba0",
+                "small": "starterkits/53/3cdfc1a6249beba0-480.webp",
+                "large": "starterkits/53/3cdfc1a6249beba0-1600.webp"
+            }
+        ]
     },
     {
         "id": 54,
@@ -786,7 +1183,14 @@
         "price": 66.0,
         "currency": "EUR",
         "description": "The Sigma Impact Set is our complete slackline set for everyone who wants to start right away: webbing, ratchet, shackles, round slings and tree protection in one package. Unpack it, rig it between two trees, step on. The Impact webbing is soft, very stretchy and supple, with good bounce and pleasant rebound. It is digitally printed in two colours and cannot bleed, not onto your hands, not onto your clothes, not even when waterlining. Comfortable to catch and very soft to the touch, barefoot included.",
-        "active": true
+        "active": true,
+        "photos": [
+            {
+                "id": "46f4c15d03cf29b2",
+                "small": "starterkits/54/46f4c15d03cf29b2-480.webp",
+                "large": "starterkits/54/46f4c15d03cf29b2-1600.webp"
+            }
+        ]
     },
     {
         "id": 55,
@@ -800,7 +1204,14 @@
         "includes_treepro": false,
         "price": 56.0,
         "currency": "EUR",
-        "active": true
+        "active": true,
+        "photos": [
+            {
+                "id": "063795859448beed",
+                "small": "starterkits/55/063795859448beed-480.webp",
+                "large": "starterkits/55/063795859448beed-1600.webp"
+            }
+        ]
     },
     {
         "id": 56,
@@ -814,7 +1225,14 @@
         "includes_treepro": false,
         "price": 70.0,
         "currency": "EUR",
-        "active": true
+        "active": true,
+        "photos": [
+            {
+                "id": "58649e49f5979df7",
+                "small": "starterkits/56/58649e49f5979df7-480.webp",
+                "large": "starterkits/56/58649e49f5979df7-1600.webp"
+            }
+        ]
     },
     {
         "id": 57,
@@ -832,6 +1250,13 @@
         "active": false,
         "gear_sellers": [
             "Spider Slacklines"
+        ],
+        "photos": [
+            {
+                "id": "564e6d5e5853c6bf",
+                "small": "starterkits/57/564e6d5e5853c6bf-480.webp",
+                "large": "starterkits/57/564e6d5e5853c6bf-1600.webp"
+            }
         ]
     },
     {
@@ -850,6 +1275,13 @@
         "active": false,
         "gear_sellers": [
             "Spider Slacklines"
+        ],
+        "photos": [
+            {
+                "id": "8c79d912af07d21a",
+                "small": "starterkits/58/8c79d912af07d21a-480.webp",
+                "large": "starterkits/58/8c79d912af07d21a-1600.webp"
+            }
         ]
     },
     {
@@ -868,6 +1300,13 @@
         "active": true,
         "gear_sellers": [
             "Slack Inov"
+        ],
+        "photos": [
+            {
+                "id": "2f3a2dfe3944a3da",
+                "small": "starterkits/59/2f3a2dfe3944a3da-480.webp",
+                "large": "starterkits/59/2f3a2dfe3944a3da-1600.webp"
+            }
         ]
     },
     {
@@ -882,7 +1321,14 @@
         "includes_treepro": true,
         "price": 479.0,
         "currency": "CHF",
-        "active": true
+        "active": true,
+        "photos": [
+            {
+                "id": "e6d6b0f3cbb4f783",
+                "small": "starterkits/60/e6d6b0f3cbb4f783-480.webp",
+                "large": "starterkits/60/e6d6b0f3cbb4f783-1600.webp"
+            }
+        ]
     },
     {
         "id": 61,
@@ -896,7 +1342,14 @@
         "includes_treepro": false,
         "price": 137.0,
         "currency": "EUR",
-        "active": false
+        "active": false,
+        "photos": [
+            {
+                "id": "da9ae6fc1105c71c",
+                "small": "starterkits/61/da9ae6fc1105c71c-480.webp",
+                "large": "starterkits/61/da9ae6fc1105c71c-1600.webp"
+            }
+        ]
     },
     {
         "id": 62,
@@ -912,7 +1365,14 @@
         "price": 129.0,
         "currency": "CHF",
         "description": "With about 1kg weight and a minimum packing volume, the Traveler is a lightweight travel slackline set that can even be taken in your jacket pocket. Never miss a slackline chance! – With it you can take your slackline everywhere.",
-        "active": true
+        "active": true,
+        "photos": [
+            {
+                "id": "68def9638864fc1e",
+                "small": "starterkits/62/68def9638864fc1e-480.webp",
+                "large": "starterkits/62/68def9638864fc1e-1600.webp"
+            }
+        ]
     },
     {
         "id": 63,
@@ -926,7 +1386,14 @@
         "includes_treepro": false,
         "price": 85.0,
         "currency": "EUR",
-        "active": false
+        "active": false,
+        "photos": [
+            {
+                "id": "e57099afe263415d",
+                "small": "starterkits/63/e57099afe263415d-480.webp",
+                "large": "starterkits/63/e57099afe263415d-1600.webp"
+            }
+        ]
     },
     {
         "id": 64,
@@ -940,7 +1407,14 @@
         "includes_treepro": false,
         "price": 115.0,
         "currency": "EUR",
-        "active": false
+        "active": false,
+        "photos": [
+            {
+                "id": "fe66c11b5df7caff",
+                "small": "starterkits/64/fe66c11b5df7caff-480.webp",
+                "large": "starterkits/64/fe66c11b5df7caff-1600.webp"
+            }
+        ]
     },
     {
         "id": 65,
@@ -955,7 +1429,14 @@
         "currency": "USD",
         "description": "The eLine kit on a longer line — 108 ft (33 m) of the same tubular polyester webbing, for a longer training line or a double-stacked setup.",
         "notes": "Manufacturer specs (yogaslackers.com): 1x 108 ft (33 m) eLine slackline, 3x oval locking carabiners, 2x 8 ft (2.4 m) red adjustable anchor, 1x line lock, 1x pair of velcro for DIY tree pro, 1x mesh storage bag, 1x instruction sheet. No tree protection included. Webbing is the 25.4 mm tubular polyester eLine, MBS 21.5 kN.",
-        "active": true
+        "active": true,
+        "photos": [
+            {
+                "id": "ed00cc1e17ee576e",
+                "small": "starterkits/65/ed00cc1e17ee576e-480.webp",
+                "large": "starterkits/65/ed00cc1e17ee576e-1600.webp"
+            }
+        ]
     },
     {
         "id": 66,
@@ -970,7 +1451,14 @@
         "currency": "USD",
         "description": "The Light Kit with three locking carabiners and a second anchor. Same contents as the Full Kit but without the tree protection, which is left out to cut shipping cost — velcro and instructions for making your own are included.",
         "notes": "Manufacturer specs (yogaslackers.com): 1x 50 ft (15 m) eLine slackline, 3x oval locking carabiners, 2x 8 ft (2.4 m) red adjustable anchor, 1x line lock, 1x pair of velcro for DIY tree pro, 1x mesh storage bag, 1x instruction sheet. Webbing is the 25.4 mm tubular polyester eLine, MBS 21.5 kN.",
-        "active": true
+        "active": true,
+        "photos": [
+            {
+                "id": "4718cae891f0eddc",
+                "small": "starterkits/66/4718cae891f0eddc-480.webp",
+                "large": "starterkits/66/4718cae891f0eddc-1600.webp"
+            }
+        ]
     },
     {
         "id": 67,
@@ -986,7 +1474,14 @@
         "currency": "EUR",
         "description": "This slackline kit contains a well balanced assortement of components for an ideal start. The unique properties of our classic White Magic webbing guarantee long-termed pleasure while walking, bouncing, surfing and jumping on the line. Our new Arborfix adjustable treeslings provide a maximum of comfort and flexibility in the setup. Our TreeBuddies protectors ease the setup distinctly and are very compact too.",
         "notes": "Maker's page (Wayback 2013-02-12): 16 m x 35 mm White Magic (white/black) or Nova Magic (red/yellow), 35 kN, sewn loop one end; ratchet with extended lever (35 mm, 40 kN, 750 g); 2 adjustable Arborfix tree slings 0.5–2.8 m; 2 stainless bow shackles 60 kN; 1 pair TreeBuddies; bag. 3.3 kg, made in the EU. 99.95 €.",
-        "active": false
+        "active": false,
+        "photos": [
+            {
+                "id": "4157ffb3a2e1c94b",
+                "small": "starterkits/67/4157ffb3a2e1c94b-480.webp",
+                "large": "starterkits/67/4157ffb3a2e1c94b-1600.webp"
+            }
+        ]
     },
     {
         "id": 68,
@@ -1002,7 +1497,14 @@
         "currency": "EUR",
         "description": "This slackline kit contains a well balanced assortement of components for an ideal start. The unique properties of our classic White Magic webbing guarantee long-termed pleasure while walking, bouncing, surfing and jumping on the line. The sturdy Spansets make the kit very durable and extremely robust. The Starter Aerial is ideal for the hard and rough usage. Our TreeBuddies protectors ease the setup distinctly and are very compact too.",
         "notes": "Maker's page (Wayback 2012-08-02): as Starter Flex, but with 2 Spanset tree slings (2 m, 60 kN, black protection tube) in place of the Arborfix slings. 16 m x 35 mm White Magic / Nova Magic, 35 kN; ratchet 40 kN; 2 stainless bow shackles; 1 pair TreeBuddies; bag. 4.45 kg, made in the EU. 89.95 €.",
-        "active": false
+        "active": false,
+        "photos": [
+            {
+                "id": "ce4efefe495607e1",
+                "small": "starterkits/68/ce4efefe495607e1-480.webp",
+                "large": "starterkits/68/ce4efefe495607e1-1600.webp"
+            }
+        ]
     },
     {
         "id": 69,
@@ -1016,7 +1518,14 @@
         "price": 94.95,
         "currency": "EUR",
         "notes": "Maker's page (German only, Wayback 2010-03-28): 16 m x 35 mm White Magic / Nova Magic (red), 3.5 t; ratchet with extended lever (35 mm, 4 t) and sewn sling; 2 black tree slings with protective sleeve (2 m, 6 t); 2 polished stainless shackles (6 t); 1 pair TreeStandard tree protectors; bag. Made in Germany. 94.95 €. No weight given.",
-        "active": false
+        "active": false,
+        "photos": [
+            {
+                "id": "33e443626d6c5426",
+                "small": "starterkits/69/33e443626d6c5426-480.webp",
+                "large": "starterkits/69/33e443626d6c5426-1600.webp"
+            }
+        ]
     },
     {
         "id": 70,
@@ -1032,7 +1541,19 @@
         "currency": "EUR",
         "description": "Slackline kit for the advanced and ambitious slackliner. Innovative features allow the comfortable tightening of slacklines in the span range of 20-33 m by only one person. The Cruiser closes the gap between our beginner Starter kits and the highly technical pulley systems of the Master Series. Our Cruiser kit is very mobile and flexible due to the adjustable treeslings and the low total weight. The sophisticated and innovative tightening system speeds up the tightening process. Thanks to the 3:1 multiplyer, a strong and well-trained person can set up the slackline to 4,2 kN (wich is enough pretension for a 30 m long line in hip height). The release of the tension is optimized by the round and wide shape of the shackles and the ring. A modular design allows the separate replacement and tune-up of parts. In addition, the Cruiser is able to tension a wide variety of slacklines, wether wide or thin, wether flexible or rigid. The trees are delighted with the included TreeBuddies, which keep the overall packaging size small.",
         "notes": "Maker's page (Wayback 2011-07-22): Ellington webbing-pulley tightener with 3:1 multiplier (≈4.2 kN by one person); 30 m x 25 mm White Magic or Verve, 31 kN, sewn loop one end; 12 m tightening strap; Arborfix slings (45 mm, 0.5–2.8 m); 3 stainless shackles 60 kN; 2 Linelocker 25; Handfriend pull aid; 1 pair TreeBuddies; bag. 4.3 kg, made in the EU. 149.95 €.",
-        "active": false
+        "active": false,
+        "photos": [
+            {
+                "id": "586a39528f05f012",
+                "small": "starterkits/70/586a39528f05f012-480.webp",
+                "large": "starterkits/70/586a39528f05f012-1600.webp"
+            },
+            {
+                "id": "6c675eda87e417d7",
+                "small": "starterkits/70/6c675eda87e417d7-480.webp",
+                "large": "starterkits/70/6c675eda87e417d7-1600.webp"
+            }
+        ]
     },
     {
         "id": 71,
@@ -1047,7 +1568,24 @@
         "currency": "EUR",
         "description": "The special V-Loop (edgewise seam) allows the Slackline Allround Light to be mounted to the slackline post in the simplest and fastest way possible. This system was originally developed for physical education and has been successfully used at many Swiss & Dutch schools for many years.",
         "notes": "Added 2026-10-08 from the Slacktivity archive pass. Maker's page (live; Wayback 2026-07-14 https://web.archive.org/web/20260714192353/https://slacktivity.com/shop/allround-light/): 15 m x 37 mm webbing with a sewn-in V-Loop, and a long-lever stainless (inox) ratchet with a sewn-in V-Loop. No tree slings, carabiners or tree protectors: it is made for Slacktivity's slackline posts and wall mounts (two extra carabiners adapt it to tree slings). 99 €. Sold since at least 2016 on slacktivity.de as 'Slackline Allround Light mit INOX Ratsche (15Meter)' (109 €, https://web.archive.org/web/20200808112602/https://slacktivity.de/collections/outdoor-sortiment/products/slackline-light). Weight not given. The light version of the held Allround Slackline | 15m Set (#14), which adds slings, carabiners and tree protectors.",
-        "active": true
+        "active": true,
+        "photos": [
+            {
+                "id": "3c47be94114ad03b",
+                "small": "starterkits/71/3c47be94114ad03b-480.webp",
+                "large": "starterkits/71/3c47be94114ad03b-1600.webp"
+            },
+            {
+                "id": "aa57b97f6ada9a14",
+                "small": "starterkits/71/aa57b97f6ada9a14-480.webp",
+                "large": "starterkits/71/aa57b97f6ada9a14-1600.webp"
+            },
+            {
+                "id": "50cdfcb9ce983afc",
+                "small": "starterkits/71/50cdfcb9ce983afc-480.webp",
+                "large": "starterkits/71/50cdfcb9ce983afc-1600.webp"
+            }
+        ]
     },
     {
         "id": 72,
@@ -1061,7 +1599,14 @@
         "price": 159.0,
         "currency": "EUR",
         "notes": "Added 2026-10-08 from the Slacktivity archive pass. Maker's German shop only, so no description (live; Wayback 2025-08-04 https://web.archive.org/web/20250804223014/https://slacktivity.de/products/experience-light, first archived 2016-11-06): 30 m x 37 mm flat webbing (the photo shows the black/white Experience webbing, held as #224) and 2 robust long-lever stainless ratchets (MBS 50 kN, max. load 14 kN) with Easy-Release loops; no slings or tree protectors. Meets DIN 79400. 159 €. Weight not given. The light version of the held Experience Slackline | 30m Set (#31).",
-        "active": true
+        "active": true,
+        "photos": [
+            {
+                "id": "aa17be60f46d7c71",
+                "small": "starterkits/72/aa17be60f46d7c71-480.webp",
+                "large": "starterkits/72/aa17be60f46d7c71-1600.webp"
+            }
+        ]
     },
     {
         "id": 73,
@@ -1073,7 +1618,14 @@
         "product_url": "https://web.archive.org/web/20110618054840/http://www.elephant-slacklines.com:80/contents/de/d72_onsight.html",
         "includes_treepro": true,
         "notes": "Maker's page (Wayback 2011-06-18, German only, so no description): complete set of on'sight line, 50 mm long-arm ratchet with spacer, 2 slings (2 m, 4 m circumference), 2 shackles 2 t and 2 tree'skin; also sold without accessories, and as a 15 m version. Webbing: light blue, 25 mm, 30 kN, 3.6 % stretch at 7 kN and 7.2 % at 15 kN, 1.4 mm reinforced loops. blueWing is its successor.",
-        "active": false
+        "active": false,
+        "photos": [
+            {
+                "id": "126d149121f76682",
+                "small": "starterkits/73/126d149121f76682-480.webp",
+                "large": "starterkits/73/126d149121f76682-1600.webp"
+            }
+        ]
     },
     {
         "id": 74,
@@ -1089,7 +1641,14 @@
         "currency": "EUR",
         "description": "The lightest way to find balance and fun during your travels. A total weight of 2100 grams for a complete 20 meters of walkable joy.",
         "notes": "Maker's page (Wayback 2019-01-26 to 2019-11-20; its photo is archived from 2018-07): 25 m MOTM tubular nylon (25 mm, 27 kN, 56 g/m, 16 % at 1/3 MBS) for 20 m walkable, 4 oval aluminium carabiners, 2 D-ring linelockers, 2 tree slings, 2 tree protectors. 2100 g. 139.95 €. The page warns the aluminium carabiners are for travel, not everyday use.",
-        "active": false
+        "active": false,
+        "photos": [
+            {
+                "id": "bcb4c4d35667f351",
+                "small": "starterkits/74/bcb4c4d35667f351-480.webp",
+                "large": "starterkits/74/bcb4c4d35667f351-1600.webp"
+            }
+        ]
     },
     {
         "id": 75,
@@ -1105,7 +1664,14 @@
         "currency": "EUR",
         "description": "Helium - it's the gas that makes things fly, you know it from that floating balloons and Zeppelins. Our radical lightweight Helium Set will make your backpack feel like floating. 1370 grams of pure slackline fun. Take it on your trip around the world without hesitating. Your underwear will weigh more than this slackline set in your travel backpack.",
         "notes": "Sold as \"Helium Set - Ultralightweight Slackline Set\". Maker's page (Wayback 2019-01-25 to 2019-11-20; also on the German shop 2018-07): 20 m Helium polyester (25 mm, 24 kN, 39 g/m, 6 % at 1/3 MBS), 2 adjustable Dyneema whoopie slings, 4 aluminium carabiners, 2 linelockers. 1370 g. 179 €.",
-        "active": false
+        "active": false,
+        "photos": [
+            {
+                "id": "3ed9fd8ffa032af9",
+                "small": "starterkits/75/3ed9fd8ffa032af9-480.webp",
+                "large": "starterkits/75/3ed9fd8ffa032af9-1600.webp"
+            }
+        ]
     },
     {
         "id": 76,
@@ -1121,7 +1687,14 @@
         "currency": "EUR",
         "description": "How lightweight can a travel slackline set be? Our answer: 1090 grams! Ultralight webbing, ultralight slings, ultralight connectors. This set is your companion even in the farthest places on planet earth",
         "notes": "Maker's page (Wayback 2020-10-20 to 2021-09-26): 20 m MOTM light (19 mm tubular nylon, 33 g/m) with a sewn loop, 4 x 6 mm stainless quicklinks (33 g each) instead of carabiners, 2 Helium anchor slings (3 m, 122 g each), D-rings as linelockers; primitive (Ellington) tensioning. 1090 g. 106.67 € for the default configuration. States it includes no tree protection. Succeeded by the HUMBOLDT set (#77).",
-        "active": false
+        "active": false,
+        "photos": [
+            {
+                "id": "ff61ce10cb841871",
+                "small": "starterkits/76/ff61ce10cb841871-480.webp",
+                "large": "starterkits/76/ff61ce10cb841871-1600.webp"
+            }
+        ]
     },
     {
         "id": 77,
@@ -1139,7 +1712,34 @@
         "notes": "Maker's page (Wayback 2023-01-29 to 2025-08-12, and the live raed-sports.com shop): Eclipse polyester webbing (25 mm, 16 kN, 30 g/m, 5 % at 5 kN) with a sewn loop, RODEO weblock (#73), Helium tree sling, Eclipse Soft Release (super short) for (de)tensioning, 4 felt tree-protection patches. 780 g. The archived pages call it a 15 m kit at 129.22 €; the live shop sells it as 20 m at 130 €. Tensioning is weblock + soft release, hence Other. Not for highline: the page says the RODEO in it \"may never be used in highlines\".",
         "active": true,
         "manufacturer_not_for_highline": true,
-        "manufacturer_not_for_highline_source": "https://web.archive.org/web/20250812100853/https://raed-slacklines.com/humboldt-ultralight-travel-slackline-set"
+        "manufacturer_not_for_highline_source": "https://web.archive.org/web/20250812100853/https://raed-slacklines.com/humboldt-ultralight-travel-slackline-set",
+        "photos": [
+            {
+                "id": "0ff8d8d2e592f328",
+                "small": "starterkits/77/0ff8d8d2e592f328-480.webp",
+                "large": "starterkits/77/0ff8d8d2e592f328-1600.webp"
+            },
+            {
+                "id": "de7390d05611df8c",
+                "small": "starterkits/77/de7390d05611df8c-480.webp",
+                "large": "starterkits/77/de7390d05611df8c-1600.webp"
+            },
+            {
+                "id": "985ea35816ca2d7e",
+                "small": "starterkits/77/985ea35816ca2d7e-480.webp",
+                "large": "starterkits/77/985ea35816ca2d7e-1600.webp"
+            },
+            {
+                "id": "a103f2cb4f8ad77b",
+                "small": "starterkits/77/a103f2cb4f8ad77b-480.webp",
+                "large": "starterkits/77/a103f2cb4f8ad77b-1600.webp"
+            },
+            {
+                "id": "26a9e500ab9fe149",
+                "small": "starterkits/77/26a9e500ab9fe149-480.webp",
+                "large": "starterkits/77/26a9e500ab9fe149-1600.webp"
+            }
+        ]
     },
     {
         "id": 78,
@@ -1154,7 +1754,29 @@
         "currency": "EUR",
         "description": "This kit makes it easy to just have fun. Soft-edged Rainbow webbing. Ultra fast setup with our lightweight RODEO weblock. Tree friendly anchor slings. This kit has it all, so you don't have to worry about anything and just go out to have some fun on the line.",
         "notes": "Maker's page (Wayback 2023-09-22 to 2025-09-16; live shop as \"Parkline Comfort Slackline Set\"): 30 m Rainbow webbing with a sewn loop, RODEO weblock, Eclipse Soft Release, 2 x 14 kN Dyneema soft shackles, Anchor Sling RED, 2 x Felt TreeProtection. Live shop 180 €; the archived configurator defaulted to Aurora webbing at 178.48 €. Weight not stated (the shop's 4 kg is a shipping weight).",
-        "active": true
+        "active": true,
+        "photos": [
+            {
+                "id": "dc8b318a0a777f0f",
+                "small": "starterkits/78/dc8b318a0a777f0f-480.webp",
+                "large": "starterkits/78/dc8b318a0a777f0f-1600.webp"
+            },
+            {
+                "id": "7c90177bf6c50428",
+                "small": "starterkits/78/7c90177bf6c50428-480.webp",
+                "large": "starterkits/78/7c90177bf6c50428-1600.webp"
+            },
+            {
+                "id": "be9914dc12b1692a",
+                "small": "starterkits/78/be9914dc12b1692a-480.webp",
+                "large": "starterkits/78/be9914dc12b1692a-1600.webp"
+            },
+            {
+                "id": "c0ee2410b398c97a",
+                "small": "starterkits/78/c0ee2410b398c97a-480.webp",
+                "large": "starterkits/78/c0ee2410b398c97a-1600.webp"
+            }
+        ]
     },
     {
         "id": 79,
@@ -1169,7 +1791,29 @@
         "currency": "EUR",
         "description": "The Yoga Slackline Set is the perfect choice for the advanced slackliner who wants to do yoga poses and acro flows on a slackline. It contains soft webbing, is easy to setup and very affordable. Just configure your preferred length of webbing, the rest of this kit is put together with love and an eye for comfort and quality.",
         "notes": "Maker's page (Wayback 2020-10-20 to 2025-10-14, and the live shop): 25 m MOTM tubular nylon with a sewn loop, 4 oval steel carabiners, wide anchor slings (Anchorsling RED), D-rings as linelockers, 2 x Felt TreeProtection; primitive (Ellington) tensioning. Live shop 140 € (116.13 € in 2020, 143.58 € in 2025 for the default configuration).",
-        "active": true
+        "active": true,
+        "photos": [
+            {
+                "id": "4a99fc4d02a487c0",
+                "small": "starterkits/79/4a99fc4d02a487c0-480.webp",
+                "large": "starterkits/79/4a99fc4d02a487c0-1600.webp"
+            },
+            {
+                "id": "b13baf12f88574d6",
+                "small": "starterkits/79/b13baf12f88574d6-480.webp",
+                "large": "starterkits/79/b13baf12f88574d6-1600.webp"
+            },
+            {
+                "id": "26382fd3019c76d3",
+                "small": "starterkits/79/26382fd3019c76d3-480.webp",
+                "large": "starterkits/79/26382fd3019c76d3-1600.webp"
+            },
+            {
+                "id": "6faebb3bfe80797d",
+                "small": "starterkits/79/6faebb3bfe80797d-480.webp",
+                "large": "starterkits/79/6faebb3bfe80797d-1600.webp"
+            }
+        ]
     },
     {
         "id": 80,
@@ -1184,7 +1828,19 @@
         "currency": "EUR",
         "description": "The Ninja Slackline Set will let you make your first tricks on a slackline: Big bounces, crazy surfs and maybe your first jump tricks! It contains powerful, bouncy webbing and is easy to setup. Just configure your preferred length of webbing, the rest of this kit is put together with love and an eye for comfort and quality.",
         "notes": "Maker's page (Wayback 2020-11-28 to 2025-09-16, and the live shop): 30 m Rainbow webbing with a sewn loop (Cumulus in 2020), 4 steel shackles (Omega 12 mm in 2020), Anchorsling RED, D-rings as linelockers, 2 x Felt TreeProtection; primitive tensioning. Live shop 139 € (120.18 € in 2020). Raed files it under beginner/advanced sets, though it is pitched at first tricks; could be a trickline kit instead.",
-        "active": true
+        "active": true,
+        "photos": [
+            {
+                "id": "5bd1dbd888d98e69",
+                "small": "starterkits/80/5bd1dbd888d98e69-480.webp",
+                "large": "starterkits/80/5bd1dbd888d98e69-1600.webp"
+            },
+            {
+                "id": "c89d3c59912d72bf",
+                "small": "starterkits/80/c89d3c59912d72bf-480.webp",
+                "large": "starterkits/80/c89d3c59912d72bf-1600.webp"
+            }
+        ]
     },
     {
         "id": 81,
@@ -1199,6 +1855,33 @@
         "currency": "EUR",
         "description": "The Rodeoline Beginner Set is a great choice to start into rodeolining. It contains our famous RODEO weblock and our HELIUM webbing. This makes it a very lightweight set which is easy to learn on and quickly succeed your first rodeo tricks on.",
         "notes": "Maker's page (Wayback 2020-07-29 to 2025-09-16, and the live shop): 25 m Helium webbing with a sewn loop, RODEO weblock, 2 x Anchorsling RED, 2 x oval steel carabiners (a 14 kN soft shackle in the 2025 configurator). A rodeoline is rigged slack, so there is no tensioning system: Other. The 2020 page describes the steel RODEO (#143), later ones the aluminium #73. Live shop 130 € (138.60 € in 2020).",
-        "active": true
+        "active": true,
+        "photos": [
+            {
+                "id": "fca7a17edbf686c5",
+                "small": "starterkits/81/fca7a17edbf686c5-480.webp",
+                "large": "starterkits/81/fca7a17edbf686c5-1600.webp"
+            },
+            {
+                "id": "e8b6f5b1f0059f37",
+                "small": "starterkits/81/e8b6f5b1f0059f37-480.webp",
+                "large": "starterkits/81/e8b6f5b1f0059f37-1600.webp"
+            },
+            {
+                "id": "11b708b9fbe49844",
+                "small": "starterkits/81/11b708b9fbe49844-480.webp",
+                "large": "starterkits/81/11b708b9fbe49844-1600.webp"
+            },
+            {
+                "id": "f62c97151a1236c5",
+                "small": "starterkits/81/f62c97151a1236c5-480.webp",
+                "large": "starterkits/81/f62c97151a1236c5-1600.webp"
+            },
+            {
+                "id": "3668f9256fc46b47",
+                "small": "starterkits/81/3668f9256fc46b47-480.webp",
+                "large": "starterkits/81/3668f9256fc46b47-1600.webp"
+            }
+        ]
     }
 ]

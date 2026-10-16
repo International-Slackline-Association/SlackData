@@ -10,6 +10,8 @@ wheels/
 venv/
 .venv/
 *.db
+# Media uploaded in local dev (MEDIA_DIR's default); the snapshot is media/.
+media-local/
 
 # Node dependencies. frontend/.gitignore covers the frontend's copy; this catches
 # every other one — notably infra/, which gets a node_modules once the pinned

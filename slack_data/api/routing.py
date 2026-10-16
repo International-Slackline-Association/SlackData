@@ -33,6 +33,7 @@ from slack_data.api.routers.isa_certification_router import isa_certification_ro
 from slack_data.api.routers.isa_warning_router import isa_warning_router
 from slack_data.api.routers.leashring_router import leashring_router
 from slack_data.api.routers.manufacturer_router import manufacturer_router
+from slack_data.api.routers.media_router import media_router
 from slack_data.api.routers.people_router import people_router
 from slack_data.api.routers.roller_router import roller_router
 from slack_data.api.routers.starterkit_router import starterkit_router
@@ -85,11 +86,14 @@ CATALOG_ROUTERS: tuple[APIRouter, ...] = (
 # people and change log stores, and takes no catalogue session at all.
 # `edit_router` (live editing, phase 3) writes the catalogue STORE — never the
 # session the site reads, which is rebuilt from the store — and the log.
+# `media_router` (phase 4) serves the media manifest everywhere, and locally
+# receives uploads into the media store's own directory.
 WRITABLE_ROUTERS: tuple[APIRouter, ...] = (
     submissions_router,
     manufacturer_router,
     people_router,
     edit_router,
+    media_router,
 )
 
 # Kept as the union so a caller iterating "every router" still gets every router.

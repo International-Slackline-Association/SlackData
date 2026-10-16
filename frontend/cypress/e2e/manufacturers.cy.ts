@@ -12,10 +12,14 @@
 // cypress/support/images.ts) so logo assertions are anchored to the real vendored
 // image set rather than to whatever the DOM claims about itself.
 
-import manufacturerImages from '../../src/data/manufacturerImages.json'
 
-// canonical brand name -> stored logo filename
-const LOGO_MANIFEST = manufacturerImages as Record<string, string>
+// canonical brand name -> logo key, from the media manifest (phase 4)
+let LOGO_MANIFEST: Record<string, string> = {}
+before(() => {
+  cy.request(`${Cypress.env('apiUrl')}/media/manifest`).then(({ body }) => {
+    LOGO_MANIFEST = body.logos
+  })
+})
 
 describe('Manufacturers page', () => {
   const api = () => Cypress.env('apiUrl')
@@ -575,7 +579,7 @@ describe('Manufacturers page', () => {
     })
   })
 
-  it('a brand with a logo in the manifest renders it from /manufacturer-images/', () => {
+  it('a brand with a logo in the manifest renders it from the media store', () => {
     const withLogo = Object.keys(LOGO_MANIFEST)
     expect(withLogo.length, 'manifest is non-empty').to.be.greaterThan(0)
 
@@ -590,7 +594,7 @@ describe('Manufacturers page', () => {
         .closest('[data-cy="manufacturers-card"]')
         .find('[data-cy="manufacturer-logo"]')
         .should('have.attr', 'src')
-        .and('include', '/manufacturer-images/')
+        .and('include', LOGO_MANIFEST[target.name as string])
     })
   })
 

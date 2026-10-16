@@ -89,8 +89,10 @@ def test_read_only_schema_documents_no_catalogue_writes(read_only_client):
 
 
 # The routers that write to a store other than the catalogue, named rather than
-# pattern-matched so a new one is a deliberate edit here.
-WRITABLE_PREFIXES = ("/submissions", "/manufacturer", "/me/", "/admin/", "/edit/")
+# pattern-matched so a new one is a deliberate edit here. `/media/uploads/` is
+# the local stand-in for S3's presigned POST (live editing phase 4): it writes
+# to the media directory, and answers 404 hosted.
+WRITABLE_PREFIXES = ("/submissions", "/manufacturer", "/me/", "/admin/", "/edit/", "/media/uploads/")
 
 
 def concrete_routes(routes):
