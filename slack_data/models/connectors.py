@@ -16,6 +16,9 @@ class ConnectorStyle(str, Enum):
     CARABINER = "Carabiner"
     QUICKLINK = "Quicklink"
     SOFT_SHACKLE = "Soft shackle"
+    # A rope body closed by a metal part instead of a knot or a pin — Raed's
+    # TiLink, a Dyneema loop with a titanium head that seats in a noose.
+    HYBRID_SHACKLE = "Hybrid shackle"
 
 
 class ConnectorClosure(str, Enum):
@@ -40,6 +43,8 @@ class ConnectorMaterial(str, Enum):
     STAINLESS_STEEL = "Stainless Steel"
     TITANIUM = "Titanium"
     DYNEEMA = "Dyneema/HMPE"  # Dyneema is a brand of HMPE; same value as FiberMaterial
+    # Rope and metal in one connector (a hybrid shackle); `alloy` names both.
+    HYBRID = "Hybrid"
     OTHER = "Other"
 
 

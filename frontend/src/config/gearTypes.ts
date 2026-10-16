@@ -31,8 +31,8 @@ export const GEAR_TYPES: GearTypeMeta[] = [
   { slug: 'leashrings',    apiPath: 'leashring',    label: 'Leash Rings',     hasISA: true,  hasISAWarning: true,  certifiable: true,  available: true },
   { slug: 'grips',         apiPath: 'grip',         label: 'Grips',           hasISA: true,  hasISAWarning: true,  certifiable: true,  available: true },
   { slug: 'rollers',       apiPath: 'roller',       label: 'Rollers',         hasISA: true,  hasISAWarning: true,  certifiable: true,  available: true },
-  { slug: 'treepros',      apiPath: 'treepro',      label: 'Tree Protectors', hasISA: false, hasISAWarning: false, certifiable: false, available: true },
   { slug: 'connectors',    apiPath: 'connector',    label: 'Connectors',      hasISA: true,  hasISAWarning: true,  certifiable: true,  available: true },
+  { slug: 'treepros',      apiPath: 'treepro',      label: 'Tree Protectors', hasISA: false, hasISAWarning: false, certifiable: false, available: true },
   { slug: 'starterkits',   apiPath: 'starterkit',   label: 'Starter Kits',    hasISA: false,  hasISAWarning: false, certifiable: false, available: true },
   { slug: 'tricklinekits', apiPath: 'tricklinekit', label: 'Trickline Kits',  hasISA: false,  hasISAWarning: false, certifiable: false, available: true },
 ]

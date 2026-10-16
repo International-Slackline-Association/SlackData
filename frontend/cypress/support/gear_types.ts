@@ -111,21 +111,6 @@ export const GEAR_TYPES: GearTypeConfig[] = [
     ],
   },
   {
-    slug: 'treepros',
-    apiPath: 'treepro',
-    label: 'Tree Protectors',
-    hasISA: false,
-    hasISAWarning: false,
-    certifiable: false,
-    specFields: [
-      { field: 'weight',               label: 'Weight',     unit: 'g',  alwaysPresent: false },
-      { field: 'width',                label: 'Width',      unit: 'cm', alwaysPresent: false },
-      { field: 'length',               label: 'Length',     unit: 'cm', alwaysPresent: false },
-      { field: 'thickness',            label: 'Thickness',  unit: 'mm', alwaysPresent: false },
-      { field: 'has_sling_attachment', label: 'Sling Attachment', alwaysPresent: false },
-    ],
-  },
-  {
     slug: 'connectors',
     apiPath: 'connector',
     label: 'Connectors',
@@ -143,6 +128,21 @@ export const GEAR_TYPES: GearTypeConfig[] = [
       { field: 'pin_diameter',      label: 'Pin Diameter',  unit: 'mm', alwaysPresent: false },
       { field: 'rope_diameter',     label: 'Rope Diameter', unit: 'mm', alwaysPresent: false },
       { field: 'weight',            label: 'Weight',        unit: 'g',  alwaysPresent: false },
+    ],
+  },
+  {
+    slug: 'treepros',
+    apiPath: 'treepro',
+    label: 'Tree Protectors',
+    hasISA: false,
+    hasISAWarning: false,
+    certifiable: false,
+    specFields: [
+      { field: 'weight',               label: 'Weight',     unit: 'g',  alwaysPresent: false },
+      { field: 'width',                label: 'Width',      unit: 'cm', alwaysPresent: false },
+      { field: 'length',               label: 'Length',     unit: 'cm', alwaysPresent: false },
+      { field: 'thickness',            label: 'Thickness',  unit: 'mm', alwaysPresent: false },
+      { field: 'has_sling_attachment', label: 'Sling Attachment', alwaysPresent: false },
     ],
   },
   {
