@@ -1,6 +1,6 @@
 // Recent Changes — every change to SlackData, newest first, public (D3, D33).
 // Filters: the kind of change and the role it was made in, applied to the
-// pages fetched; "breaking strength only" asks the API for the safety changes
+// pages fetched; "safety changes only" asks the API for the safety changes
 // (D57), which have their own index. Both feeds are linked for a feed reader.
 
 import { useCallback, useEffect, useMemo, useState } from 'react'
@@ -19,6 +19,7 @@ const KINDS: { value: string; label: string; match: (r: ChangeRecordPublic) => b
   { value: 'revert', label: 'Reverts', match: r => r.action === 'item.revert' },
   { value: 'roles', label: 'Roles, brand links and blocks', match: r => r.target_type === 'person' },
   { value: 'keys', label: 'API keys', match: r => r.action.startsWith('key.') },
+  { value: 'isa', label: 'ISA certificates and warnings', match: r => r.target_type.startsWith('isa_') },
 ]
 
 const SELECT = 'rounded-lg border border-gray-300 px-2 py-1 text-sm focus:border-teal-700 focus:outline-none'
@@ -62,8 +63,9 @@ export default function ChangesPage() {
         </a>{' '}
         ·{' '}
         <a data-cy="feed-safety" href={`${API_BASE}/changes/safety.atom`} className="text-teal-700 underline">
-          breaking-strength changes
-        </a>
+          safety changes
+        </a>{' '}
+        (breaking strengths, and the ISA's certificates and warnings)
         .
       </p>
 
@@ -85,7 +87,7 @@ export default function ChangesPage() {
         </select>
         <label className="flex items-center gap-1.5 text-sm text-gray-700">
           <input data-cy="changes-safety" type="checkbox" checked={safety} onChange={e => setSafety(e.target.checked)} />
-          Breaking strength only
+          Safety changes only
         </label>
       </div>
 

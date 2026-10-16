@@ -80,6 +80,9 @@ export interface ChangeRecordPublic {
     | 'key.revoke'
     | 'person.block'
     | 'person.unblock'
+    | 'isa.create'
+    | 'isa.edit'
+    | 'isa.retire'
   actor_isa_id: string
   actor_name: string
   actor_role: string

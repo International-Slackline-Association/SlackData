@@ -29,6 +29,9 @@ const ACTION_TEXT: Record<ChangeRecordPublic['action'], string> = {
   'key.revoke': 'revoked an API key of',
   'person.block': 'blocked from editing',
   'person.unblock': 'unblocked',
+  'isa.create': 'recorded an ISA entry',
+  'isa.edit': 'changed an ISA entry',
+  'isa.retire': 'retired an ISA entry',
 }
 
 const REVERTIBLE = new Set(['item.edit', 'item.revert'])
@@ -127,7 +130,7 @@ export default function ChangeList({
               )}
               {record.flags.includes('safety') && (
                 <span data-cy="change-safety" className="rounded-full bg-red-100 px-2 py-0.5 text-xs font-semibold text-red-800">
-                  breaking strength
+                  {record.target_type.startsWith('isa_') ? 'ISA' : 'breaking strength'}
                 </span>
               )}
               {record.channel !== 'web' && (
