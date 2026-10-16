@@ -100,8 +100,11 @@ made it, when, the role they held, each field's value before and after, and thei
 gave one. The record is public (`/changes`, every item's History, two Atom feeds) and permanent,
 and a copy is exported daily outside AWS. Any change to a breaking strength is flagged and appears
 in the breaking-strength feed; on an ISA-certified product the certificate's own tested values stay
-shown beside the spec. The ISA's statements — certification and warnings — are not editable on the
-site. The anonymous *Suggest a correction* box was retired when editing opened: to fix something,
+shown beside the spec. The ISA's statements — certification and warnings — are changed by admins
+only: matching an entry to our products, correcting what a capture of the ISA's list got wrong,
+recording one the ISA has not listed yet, or retiring one it dropped. Each of those is a safety change
+too, in the same feed. Whether a product is certified or warned about is never typed: it follows from
+those entries when the catalogue is built. The anonymous *Suggest a correction* box was retired when editing opened: to fix something,
 sign in and edit it.
 
 ---

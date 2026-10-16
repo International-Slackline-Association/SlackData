@@ -571,7 +571,7 @@ then media, then manufacturers, then editing opens to every ISA account.
 | 4 | Photo and manual uploads for admins (manufacturers gain them in phase 5, everyone in phase 6); today's images and manuals migrated and the manifests retired (D47) | A photo goes live without a deploy |
 | 5 | Manufacturer accounts (brand requests, uncapped edits and revert on their own gear); machine API applied live | A brand updates its own gear end to end |
 | 6 | **Editing opens to every ISA account**, with the rate cap (D53); the anonymous box retired (D56, O-19) — **built 2026-10-15, see [LIVE_EDITING_PHASE_6.md](LIVE_EDITING_PHASE_6.md)** | Anyone with an ISA account edits; no hand-applied JSON patch remains |
-| 7 | ISA certificates and warnings editable by admins; the import writes to the store; then the automatic sync | — |
+| 7 | ISA certificates and warnings editable by admins; the import writes to the store; then the automatic sync — **built 2026-10-15 but for the sync, which waits on a feed from the ISA; see [LIVE_EDITING_PHASE_7.md](LIVE_EDITING_PHASE_7.md)** | — |
 
 ---
 
