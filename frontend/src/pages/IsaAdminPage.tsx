@@ -35,7 +35,12 @@ const BUTTON =
   'cursor-pointer rounded-full border border-gray-300 px-3 py-1 text-xs font-medium text-gray-700 hover:border-teal-600 hover:text-teal-700'
 const INPUT = 'w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-teal-700 focus:outline-none'
 
-type Dialog = null | { edit: IsaEntry } | { match: IsaEntry; prefill?: IsaMatchIn } | { retire: IsaEntry } | 'add'
+type Dialog =
+  | null
+  | { kind: IsaKind; edit: IsaEntry }
+  | { kind: IsaKind; match: IsaEntry; prefill?: IsaMatchIn }
+  | { kind: IsaKind; retire: IsaEntry }
+  | 'add'
 
 export default function IsaAdminPage() {
   const auth = useSiteAuth()
@@ -43,30 +48,37 @@ export default function IsaAdminPage() {
   const [params, setParams] = useSearchParams()
   const kind: IsaKind = params.get('kind') === 'warnings' ? 'warnings' : 'certificates'
   const gear = params.get('gear') // "webbings:62"
-  const [entries, setEntries] = useState<IsaEntry[] | null>(null)
+  // Both lists, always: a product's view (`?gear=`) shows what lands on it
+  // from either, and the tabs switch between them otherwise.
+  const [lists, setLists] = useState<Record<IsaKind, IsaEntry[]> | null>(null)
   const [error, setError] = useState<string | null>(null)
   const [search, setSearch] = useState('')
   const [dialog, setDialog] = useState<Dialog>(null)
 
   const load = useCallback(() => {
     if (!token || !auth.isAdmin) return
-    setEntries(null)
-    fetchIsaEntries(kind, token)
-      .then(setEntries)
-      .catch(caught => setError(caught instanceof Error ? caught.message : 'Could not load the list.'))
-  }, [token, auth.isAdmin, kind])
+    Promise.all([fetchIsaEntries('certificates', token), fetchIsaEntries('warnings', token)])
+      .then(([certificates, warnings]) => setLists({ certificates, warnings }))
+      .catch(caught => setError(caught instanceof Error ? caught.message : 'Could not load the lists.'))
+  }, [token, auth.isAdmin])
   useEffect(load, [load])
 
+  const entries = lists?.[kind] ?? null
   const shown = useMemo(() => {
-    if (!entries) return []
+    if (!lists) return []
     const [slug, id] = (gear ?? '').split(':')
     const needle = search.trim().toLowerCase()
-    return sortEntries(entries).filter(
-      e =>
-        (!gear || landsOn(e, slug, Number(id))) &&
-        (!needle || `${e.key} ${entryTitle(kind, e)}`.toLowerCase().includes(needle)),
+    const kinds: IsaKind[] = gear ? ['certificates', 'warnings'] : [kind]
+    return kinds.flatMap(k =>
+      sortEntries(lists[k])
+        .filter(
+          e =>
+            (!gear || landsOn(e, slug, Number(id))) &&
+            (!needle || `${e.key} ${entryTitle(k, e)}`.toLowerCase().includes(needle)),
+        )
+        .map(e => ({ kind: k, entry: e })),
     )
-  }, [entries, gear, search, kind])
+  }, [lists, gear, search, kind])
 
   if (!auth.me) return <p className="p-8 text-sm text-gray-600">Sign in as an admin to manage the ISA's lists.</p>
   if (!auth.isAdmin) {
@@ -128,7 +140,7 @@ export default function IsaAdminPage() {
 
       {gear && (
         <p data-cy="isa-gear-filter" className="mt-3 rounded-lg bg-teal-50 px-3 py-2 text-sm text-teal-900">
-          Showing what lands on <Link to={`/${gear.replace(':', '/')}`} className="font-medium underline">{gear.replace(':', ' #')}</Link>.{' '}
+          Showing the certificates and warnings that land on <Link to={`/${gear.replace(':', '/')}`} className="font-medium underline">{gear.replace(':', ' #')}</Link>.{' '}
           <button
             type="button"
             className="cursor-pointer underline"
@@ -144,22 +156,22 @@ export default function IsaAdminPage() {
       )}
 
       {error && <p className="mt-4 text-sm text-red-700">{error}</p>}
-      {entries === null && !error && <p className="mt-6 text-sm text-gray-500">Loading…</p>}
-      {entries && (
+      {lists === null && !error && <p className="mt-6 text-sm text-gray-500">Loading…</p>}
+      {entries && !gear && (
         <p className="mt-4 text-xs text-gray-500">
           {entries.length} {kind}, {unmatched} unmatched — unmatched first.
         </p>
       )}
 
       <ul className="mt-3 space-y-3">
-        {shown.map(e => (
+        {shown.map(({ kind: k, entry: e }) => (
           <IsaRow
-            key={e.key}
-            kind={kind}
+            key={`${k}-${e.key}`}
+            kind={k}
             entry={e}
-            onEdit={() => setDialog({ edit: e })}
-            onMatch={prefill => setDialog({ match: e, prefill })}
-            onRetire={() => setDialog({ retire: e })}
+            onEdit={() => setDialog({ kind: k, edit: e })}
+            onMatch={prefill => setDialog({ kind: k, match: e, prefill })}
+            onRetire={() => setDialog({ kind: k, retire: e })}
           />
         ))}
       </ul>
@@ -181,20 +193,25 @@ export default function IsaAdminPage() {
           adapter={{
             title: `Edit ${dialog.edit.key}`,
             note: "Correct what the capture of the ISA's list got wrong. The match is set separately.",
-            loadFields: () => fetchIsaFields(kind, token),
+            loadFields: () => fetchIsaFields(dialog.kind, token),
             loadStored: () =>
-              fetchIsaEntry(kind, dialog.edit.key, token).then(s => ({ collection: kind, key: s.key, entry: s.entry, rev: s.rev })),
-            save: (changes, rev, why) => editIsa(kind, dialog.edit.key, { rev: rev ?? 0, changes, why }, token),
+              fetchIsaEntry(dialog.kind, dialog.edit.key, token).then(s => ({
+                collection: dialog.kind,
+                key: s.key,
+                entry: s.entry,
+                rev: s.rev,
+              })),
+            save: (changes, rev, why) => editIsa(dialog.kind, dialog.edit.key, { rev: rev ?? 0, changes, why }, token),
           }}
           onClose={() => setDialog(null)}
           onSaved={done}
         />
       )}
       {token && dialog && typeof dialog === 'object' && 'match' in dialog && (
-        <MatchDialog kind={kind} entry={dialog.match} prefill={dialog.prefill} token={token} onClose={() => setDialog(null)} onDone={done} />
+        <MatchDialog kind={dialog.kind} entry={dialog.match} prefill={dialog.prefill} token={token} onClose={() => setDialog(null)} onDone={done} />
       )}
       {token && dialog && typeof dialog === 'object' && 'retire' in dialog && (
-        <RetireDialog kind={kind} entry={dialog.retire} token={token} onClose={() => setDialog(null)} onDone={done} />
+        <RetireDialog kind={dialog.kind} entry={dialog.retire} token={token} onClose={() => setDialog(null)} onDone={done} />
       )}
     </div>
   )
