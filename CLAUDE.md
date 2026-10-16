@@ -115,6 +115,9 @@ cd frontend && npm run shards       # every spec is in exactly one shard
 python3 scripts/build_isa_certified.py            # rewrite isa_certified.json
 python3 scripts/build_isa_certified.py --check    # exit 1 if the JSON is stale
 
+# Locally, "dev-person-token:<name>" signs in as an ordinary account of that name
+# (no role) — what manufacturer_accounts.cy.ts uses to ask for a brand. Never hosted.
+
 # admin_triage.cy.ts needs a submissions store it hasn't already filled. The
 # triage list is a queue — oldest first, one page of 50 — so fixtures the spec
 # creates land at the bottom and drop off the page once ~50 pending rows have
@@ -198,6 +201,10 @@ Root *.json seed files
 | `slack_data/manufacturers/` | The manufacturer API's stores: `clients.py` (Protocol + SQLite + in-memory), `dynamo.py`, `store.py`, `matching.py` (gear identity), `register.py` (onboarding CLI), `onboard.py` (the CLI's other half — dossier, key minting, ledger, end-to-end proof) |
 | `slack_data/utilities/turnstile.py` | Captcha verification — **fails closed**, unlike `fx.py` |
 | `slack_data/media/` | Photos, manuals and logos as data (live editing phase 4, LIVE_EDITING_PHASE_4.md): `kinds.py` (types decided from the bytes, limits), `store.py` (Protocol + filesystem store + keys), `s3.py` (uploads + media buckets), `edits.py` (the whole-list media edit), `manifest.py` (`GET /media/manifest`), `migrate.py` (the one-off move from `frontend/public/`) |
+| `slack_data/catalogue/rights.py` | **Who may change what** (phase 5): admins anything; a person with brand links (`Person.brands`) their own brands' products and entries, never a product's `brand` / `gear_sellers`, merges or new brands. Checked inside every operation in `catalogue/edits.py` and `media/edits.py`, so routes, revert and the machine API share one rule |
+| `slack_data/brand_requests/`, `api/routers/brand_requests_router.py` | "I represent this brand" (D5): requests in their own store (`BRAND_REQUESTS_TABLE` / `BRAND_REQUESTS_DB_PATH`), the admin queue, approve (logged `brand.link`), unlink (`brand.unlink`) |
+| `api/routers/brand_keys_router.py` | A brand's API keys on the site (D64), for its manufacturers and admins; each action logged on the brand, never the secret |
+| `slack_data/manufacturers/apply.py` | The machine API applied live (phase 5): the values as sent, last write wins, planned against one read and written in transactions, all or nothing; a key is recorded as `KEY_<client id>` |
 | `media/` | **The dev snapshot of the media store** (P4-F): what local dev and CI serve beneath anything uploaded locally (`MEDIA_DIR`, default `media-local/`). Keys mirror the bucket's: `<type>/<id>/<media id>-480.webp` / `-1600.webp`, `<type>/<id>/<media id>-<title>.pdf`, `brands/<catalog_id>/…`. The seeds' `photos` / `manuals` / `logo` keys name these files. Refreshed deliberately in its own PR with `python export/export_catalogue.py --out . --snapshot` |
 
 There are `__init__.py` files in `models/`, `api/`, and `utilities/`. No `tests/`, no `.github/`, no Docker, no migrations (SQLModel `create_all` only).
@@ -525,6 +532,9 @@ It reuses the submissions pipeline rather than forking it: an update becomes an
 ordinary `Submission` with `kind="manufacturer"`, validated against the same
 derived field list (`submissions/fields.py`). What differs is trust and shape.
 
+- **Applied live since phase 5** when the site reads the catalogue store
+  (`manufacturers/apply.py`, `may_write_directly()`); the rest of this section
+  is the queue it falls back to without the store.
 - **Auto-approved on arrival.** The sender makes the product, so there is no
   decision left — only the JSON edit and the redeploy. Records are stored
   `APPROVED`, which (via `expiry_for`) means they **never expire**: it is work

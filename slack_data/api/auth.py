@@ -90,6 +90,11 @@ ISA_REGION = os.getenv("ISA_REGION", os.getenv("AWS_REGION", "eu-central-1"))
 # branch that reads it cannot execute in a hosted deploy.
 ADMIN_DEV_TOKEN = os.getenv("ADMIN_DEV_TOKEN", "dev-admin-token")
 DEV_ADMIN_SUB = "dev-admin"
+# Locally, "dev-person-token:<name>" signs in as an ordinary account of that
+# name (no role), so a manufacturer's flow — ask, be approved, edit — can be
+# driven locally and in Cypress. The same lockout as the admin token: never
+# hosted, never with a pool configured.
+DEV_PERSON_PREFIX = "dev-person-token:"
 
 # Local-dev only, and the same unreachable-in-production branch as
 # ADMIN_DEV_TOKEN. Sent as "<token>:<client_id>", so local runs resolve a brand
@@ -300,6 +305,26 @@ def _dev_admin(people) -> Person:
     return person
 
 
+def _dev_person(people, name: str) -> Person:
+    """A local ordinary account, created on first sight (DEV_PERSON_PREFIX)."""
+    slug = "".join(c for c in name.lower() if c.isalnum())[:24]
+    if not slug:
+        raise _unauthorized("a dev person token needs a name")
+    sub = f"dev-person-{slug}"
+    person = people.get(sub)
+    if person is None:
+        person = people.put(
+            Person(
+                sub=sub,
+                isa_id=f"ISA_DEV{slug.upper()[:8]}",
+                given_name=name[:50],
+                email=f"{slug}@localhost",
+                email_verified=True,
+            )
+        )
+    return person
+
+
 def require_person(
     people: PeopleRepositoryDep,
     log: ChangeLogRepositoryDep,
@@ -322,6 +347,8 @@ def require_person(
             detail="sign-in is not configured",
         )
 
+    if token.startswith(DEV_PERSON_PREFIX):
+        return _dev_person(people, token[len(DEV_PERSON_PREFIX):])
     if token != ADMIN_DEV_TOKEN:
         raise _unauthorized("invalid dev admin token")
     return _dev_admin(people)

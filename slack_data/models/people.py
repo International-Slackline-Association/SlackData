@@ -42,8 +42,8 @@ ANONYMISED_NAME = "former contributor"
 
 class Role(str, Enum):
     """A role granted on SlackData. Editors are every signed-in account, so
-    they have no role to grant (D52, D55); manufacturer links arrive in phase 5
-    as brand links, not as a role."""
+    they have no role to grant (D52, D55); a manufacturer is a person with
+    brand links (`Person.brands`, phase 5), not a role."""
 
     ADMIN = "admin"
 
@@ -82,6 +82,11 @@ class Person(BaseModel):
     # verified address may bootstrap an admin (§ 4.4).
     email_verified: bool = False
     roles: list[Role] = Field(default_factory=list)
+    # The brands this person represents, by catalog_id (phase 5, P5-A): each
+    # linked by an admin approving their request (D5), and unlinked by an admin
+    # (§ 7.8). Read with the person on every request, so "may this person edit
+    # this product?" costs nothing more.
+    brands: list[int] = Field(default_factory=list)
     # When the "your name is shown with your changes" notice was acknowledged.
     # The ISA's condition for publishing names: people are told at their first
     # sign-in (LIVE_EDITING_PHASE_0.md § 1).
@@ -108,9 +113,19 @@ class Person(BaseModel):
     def has(self, role: Role) -> bool:
         return role in self.roles
 
-    def role_label(self) -> str:
-        """The role recorded with a change, at the time of the change (§ 6.2)."""
-        return Role.ADMIN.value if self.has(Role.ADMIN) else "editor"
+    def represents(self, catalog_id: int | None) -> bool:
+        return catalog_id is not None and catalog_id in self.brands
+
+    def role_label(self, brand: tuple[int, str] | None = None) -> str:
+        """The role recorded with a change, at the time of the change (§ 6.2).
+        `brand` is (catalog_id, name) of the brand whose gear is changed: a
+        person representing it is "manufacturer for <name>" there (P5-E) —
+        unless they are an admin, which is what the change is then."""
+        if self.has(Role.ADMIN):
+            return Role.ADMIN.value
+        if brand is not None and self.represents(brand[0]):
+            return f"manufacturer for {brand[1]}"
+        return "editor"
 
 
 class PersonPublic(BaseModel):
@@ -129,6 +144,8 @@ class Me(BaseModel):
     email: str | None
     email_verified: bool
     roles: list[Role]
+    # The brands this person represents: [{catalog_id, name}].
+    brands: list[dict] = Field(default_factory=list)
     notice_seen_at: str | None
     # False until the person has typed in their public name.
     name_set: bool = False

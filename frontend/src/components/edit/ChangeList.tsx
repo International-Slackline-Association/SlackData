@@ -22,6 +22,11 @@ const ACTION_TEXT: Record<ChangeRecordPublic['action'], string> = {
   'brand.create': 'created brand',
   'brand.edit': 'edited brand',
   'match.repoint': 'moved an ISA match on',
+  'brand.link': 'linked a brand to',
+  'brand.unlink': 'unlinked a brand from',
+  'key.create': 'created an API key for',
+  'key.regenerate': 'gave a new secret to an API key of',
+  'key.revoke': 'revoked an API key of',
 }
 
 const REVERTIBLE = new Set(['item.edit', 'item.revert'])
@@ -79,13 +84,20 @@ export default function ChangeList({
         return (
           <li key={record.id} data-cy="change-row" data-action={record.action} className="py-3 text-sm">
             <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
-              <Link
-                to={`/people/${record.actor_isa_id}`}
-                data-cy="change-actor"
-                className="font-medium text-gray-900 hover:text-teal-700 hover:underline"
-              >
-                {record.actor_name}
-              </Link>
+              {record.actor_isa_id.startsWith('KEY_') ? (
+                // A brand's API key, not a person: nothing to link to.
+                <span data-cy="change-actor" className="font-medium text-gray-900">
+                  {record.actor_name}
+                </span>
+              ) : (
+                <Link
+                  to={`/people/${record.actor_isa_id}`}
+                  data-cy="change-actor"
+                  className="font-medium text-gray-900 hover:text-teal-700 hover:underline"
+                >
+                  {record.actor_name}
+                </Link>
+              )}
               <span className="text-xs text-gray-500">({record.actor_role})</span>
               {renamed ? (
                 <span data-cy="change-rename" className="text-gray-700">

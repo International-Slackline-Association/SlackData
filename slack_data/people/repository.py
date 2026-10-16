@@ -84,6 +84,7 @@ CREATE TABLE IF NOT EXISTS people (
     email_key       TEXT,
     email_verified  INTEGER NOT NULL,
     roles           TEXT NOT NULL,
+    brands          TEXT NOT NULL DEFAULT '[]',
     notice_seen_at  TEXT,
     bootstrapped_at TEXT,
     anonymised      INTEGER NOT NULL,
@@ -111,6 +112,9 @@ class SqlitePeopleRepository:
             for column in ("display_name", "name_changed_at"):
                 if column not in columns:
                     conn.execute(f"ALTER TABLE people ADD COLUMN {column} TEXT")
+            # A store created before brand links (phase 5).
+            if "brands" not in columns:
+                conn.execute("ALTER TABLE people ADD COLUMN brands TEXT NOT NULL DEFAULT '[]'")
 
     def _connect(self) -> sqlite3.Connection:
         conn = sqlite3.connect(self._path)
@@ -121,6 +125,7 @@ class SqlitePeopleRepository:
     def _to_row(person: Person) -> dict:
         row = person.model_dump(mode="json")
         row["roles"] = json.dumps(row["roles"])
+        row["brands"] = json.dumps(row["brands"])
         row["email_verified"] = int(row["email_verified"])
         row["anonymised"] = int(row["anonymised"])
         row["email_key"] = email_key(person.email)
@@ -131,6 +136,7 @@ class SqlitePeopleRepository:
         data = dict(row)
         data.pop("email_key", None)
         data["roles"] = json.loads(data["roles"])
+        data["brands"] = json.loads(data.get("brands") or "[]")
         data["email_verified"] = bool(data["email_verified"])
         data["anonymised"] = bool(data["anonymised"])
         return Person(**data)

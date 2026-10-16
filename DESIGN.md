@@ -1638,6 +1638,30 @@ LIVE_EDITING_PHASE_4.md. Media is data on the entry, edited like any field and l
 - **Logo and manuals** (`brand-media`) under a brand's name: its logo (resized to 480 px), and its
   range-wide manuals per gear type ("Applies to all Gibbon webbings").
 
+### Manufacturer accounts (live editing, phase 5)
+
+LIVE_EDITING_PHASE_5.md. A manufacturer is a signed-in person linked to a brand.
+
+- **I represent this brand** (`represent-brand`) on a brand's page, for anyone signed in who does
+  not already represent it: an optional note, then *Your request … is waiting for an admin*
+  (`represent-pending`).
+- **On /admin**, *Brand requests* (`brand-requests`) above the admins: each request names the
+  person, the brand, their note, and the email signal — a green pill when their verified address is
+  on the brand's domain, else the domain and the brand's site side by side. Approve or Decline, with
+  an optional note that is public on approval.
+- **Their own gear**: on a product their brand makes, Edit, Photos and manuals and Revert show as
+  for an admin; Merge does not. The edit form leaves out who makes and who else sells a product,
+  and *Add product* offers only their own brands. On their brand's page, Edit brand and Logo and
+  manuals. Their changes read "manufacturer for <brand>" in History.
+- **Your brands** (`/account/brands`, in the account menu): each brand with its API keys, shown in
+  full (D64), with *New key*, *New secret* and *Revoke* (each confirmed); and the person's requests
+  with their outcome.
+- **In the log**, brand links read *linked a brand to …*, keys *created an API key for …*; a change
+  made by a key is shown as "API key …" with its brand's role, unlinked. *Roles and brand links* and
+  *API keys* are filters on Recent changes.
+- **The manufacturer API applies live**; triage shows a row it applied as *Applied live*, left only
+  while its photo links wait to be uploaded.
+
 ## Admin Triage (Phase 2)
 
 Route `/admin` — a **static** segment, so it outranks the dynamic `:slug` gear-type pattern, exactly

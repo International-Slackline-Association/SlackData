@@ -17,6 +17,7 @@ import { ApiError } from '@/api/client'
 import { fetchSubmissions, reviewSubmission } from '@/api/submissions'
 import { useSiteAuth } from '@/auth/AuthContext'
 import AdminsPanel from '@/components/account/AdminsPanel'
+import BrandRequestsPanel from '@/components/account/BrandRequestsPanel'
 import { fieldLabel } from '@/config/correctableFields'
 import { getGearType } from '@/config/gearTypes'
 import type { Submission, SubmissionStatus } from '@/types'
@@ -209,6 +210,7 @@ export default function AdminPage() {
         </p>
       )}
 
+      <BrandRequestsPanel token={token!} />
       <AdminsPanel token={token!} />
     </div>
   )
@@ -548,15 +550,25 @@ function ApprovedPatch({
   const photos = submission.image_urls.length
   const [copied, setCopied] = useState(false)
   const [sha, setSha] = useState('')
+  // Phase 5: with the catalogue store the manufacturer API applies an update
+  // as it arrives; a row stays here only while its photo links wait.
+  const appliedLive = submission.review_note?.startsWith('applied live') ?? false
 
   return (
     <div className="mt-4 rounded-lg border border-amber-200 bg-amber-50 p-3">
-      <p className="text-sm text-amber-900">
-        <strong className="font-semibold">Approved — but not live.</strong> Apply this to{' '}
-        <code className="font-mono text-xs">{submission.gear_type}.json</code> in the repository,
-        then redeploy the API (infra/README.md § Deploying to live, half A). The catalogue is built
-        from that file at deploy time.
-      </p>
+      {appliedLive ? (
+        <p data-cy="applied-live" className="text-sm text-amber-900">
+          <strong className="font-semibold">Applied live.</strong> These values are already in the catalogue,
+          and in the item's History. Only the photos below are left to add.
+        </p>
+      ) : (
+        <p className="text-sm text-amber-900">
+          <strong className="font-semibold">Approved — but not live.</strong> Apply this to{' '}
+          <code className="font-mono text-xs">{submission.gear_type}.json</code> in the repository,
+          then redeploy the API (infra/README.md § Deploying to live, half A). The catalogue is built
+          from that file at deploy time.
+        </p>
+      )}
       <pre data-cy="approved-patch" className="mt-2 overflow-x-auto rounded bg-white p-2 font-mono text-xs text-gray-800">
         {patch}
       </pre>

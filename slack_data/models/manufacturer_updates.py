@@ -26,7 +26,7 @@ from enum import Enum
 from typing import Any
 from urllib.parse import urlparse
 
-from pydantic import BaseModel, Field, field_validator, model_validator
+from pydantic import BaseModel, Field, PrivateAttr, field_validator, model_validator
 
 from slack_data.models.submissions import (
     MAX_NAME_LENGTH,
@@ -124,6 +124,23 @@ class ManufacturerGearItem(BaseModel):
     # `changes` rather than in it, because a photo adds to a product and
     # corrects no spec. See MANUFACTURER_API_PLAN.md § Step 4 — photos as links.
     image_urls: list[str] = Field(default_factory=list)
+    # The values as sent — JSON numbers, booleans, lists, nulls — before
+    # `_stringify` turns them into the prose a queued record holds. Applied
+    # live (phase 5), they go through the same validation as an edit, and a
+    # number must arrive as one, not as its text.
+    _sent: dict[str, Any] = PrivateAttr(default_factory=dict)
+
+    @model_validator(mode="wrap")
+    @classmethod
+    def _keep_sent(cls, data, handler):
+        item = handler(data)
+        if isinstance(data, dict) and isinstance(data.get("changes"), dict):
+            item._sent = {name: value for name, value in data["changes"].items() if name in item.changes}
+        return item
+
+    def typed_changes(self) -> dict[str, Any]:
+        """`changes` with the values as sent: what an edit takes."""
+        return {name: self._sent.get(name, value) for name, value in self.changes.items()}
 
     @field_validator("image_urls", mode="before")
     @classmethod

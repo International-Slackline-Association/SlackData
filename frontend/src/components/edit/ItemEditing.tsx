@@ -1,6 +1,7 @@
-// Under a gear item's spec sheet: its History, public to everyone, and for an
-// admin the editing actions — Edit, Photos and manuals (phase 4), Merge into…,
-// and Revert on any edit in the History (LIVE_EDITING_PHASE_3.md § 5.6).
+// Under a gear item's spec sheet: its History, public to everyone, and the
+// editing actions — Edit, Photos and manuals (phase 4), and Revert on an edit
+// in the History — for an admin or one of the maker's manufacturers (phase 5);
+// Merge into… for an admin only (LIVE_EDITING_PHASE_3.md § 5.6).
 //
 // Every action writes through the API and then asks the page to reload the
 // item (`onChanged`), so what is shown is always what the next visitor sees.
@@ -27,14 +28,18 @@ const BUTTON =
 export default function ItemEditing({
   slug,
   id,
+  brandName,
   onChanged,
 }: {
   slug: string
   id: string | number
+  /** The maker, as the item carries it: whose manufacturers may edit it. */
+  brandName: string
   onChanged: () => void
 }) {
   const auth = useSiteAuth()
   const token = auth.token
+  const canEdit = auth.canEditBrand(brandName) && Boolean(token)
   const [history, setHistory] = useState<ChangeRecordPublic[] | null>(null)
   const [dialog, setDialog] = useState<Dialog>(null)
 
@@ -56,7 +61,7 @@ export default function ItemEditing({
     <section data-cy="item-editing" className="mt-4 rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
       <div className="flex flex-wrap items-center gap-2">
         <h2 className="mr-auto text-base font-semibold text-gray-900">History</h2>
-        {auth.isAdmin && token && (
+        {canEdit && (
           <>
             <button type="button" data-cy="item-edit" className={BUTTON} onClick={() => setDialog('edit')}>
               Edit
@@ -64,10 +69,12 @@ export default function ItemEditing({
             <button type="button" data-cy="item-media" className={BUTTON} onClick={() => setDialog('media')}>
               Photos and manuals
             </button>
-            <button type="button" data-cy="item-merge" className={BUTTON} onClick={() => setDialog('merge')}>
-              Merge into…
-            </button>
           </>
+        )}
+        {auth.isAdmin && token && (
+          <button type="button" data-cy="item-merge" className={BUTTON} onClick={() => setDialog('merge')}>
+            Merge into…
+          </button>
         )}
       </div>
       <p className="mt-1 text-xs text-gray-500">
@@ -81,7 +88,7 @@ export default function ItemEditing({
             records={history}
             showTarget={false}
             emptyText="No changes on the site yet — this item is as it was imported."
-            onRevert={auth.isAdmin && token ? record => setDialog({ revert: record }) : undefined}
+            onRevert={canEdit ? record => setDialog({ revert: record }) : undefined}
           />
         )}
       </div>

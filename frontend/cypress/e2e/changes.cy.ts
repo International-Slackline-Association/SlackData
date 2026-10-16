@@ -88,7 +88,7 @@ describe('Recent changes', () => {
     cy.getByData('changes-kind').select('create')
     cy.getByData('change-row').should($rows => {
       expect($rows.length).to.be.greaterThan(0)
-      $rows.each((_, row) => expect(row.getAttribute('data-action')).to.equal('item.create'))
+      $rows.each((_, row) => expect(row.getAttribute('data-action')).to.be.oneOf(['item.create', 'brand.create']))
     })
   })
 

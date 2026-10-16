@@ -1186,15 +1186,11 @@ def test_applied_is_false_because_the_catalogue_cannot_be_written(client, gear):
     assert response.json()["results"][0]["applied"] is False
 
 
-def test_a_write_permission_does_not_bypass_the_queue_today(client, gear, brand_clients, brands):
-    """**Pin on the forward-compatible seam.**
-
-    A brand holding `WRITE` still gets its update queued, because the hosted
-    catalogue is a read-only file and no code path could write it. When that
-    changes, `may_write_directly` is the single place to change — and this test
-    is the one that must be consciously updated, rather than a behaviour that
-    drifts silently.
-    """
+def test_without_the_catalogue_store_an_update_is_queued(client, gear, brand_clients, brands):
+    """**Pin on the seam.** With no catalogue store (the baked catalogue, the
+    seed files) there is nothing to write, so even a `WRITE` key's update is
+    queued. With the store it is applied live (phase 5,
+    tests/test_manufacturer_live.py)."""
     alpha, _ = brands
     brand_clients.put(
         BrandClient(

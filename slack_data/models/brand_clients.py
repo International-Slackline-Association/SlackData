@@ -41,9 +41,9 @@ MAX_SECRET_LENGTH = 256
 class BrandPermission(str, Enum):
     """What a brand's credentials let it do.
 
-    `SUGGEST` is the whole of today. `WRITE` is declared now and **deliberately
-    not honoured yet** — see `may_write_directly()` below for why, and for the
-    single place that has to change when it becomes real.
+    Retired as a decision in phase 5 (P5-J): with the catalogue store, every
+    active key applies its brand's updates live (`may_write_directly()`). Kept
+    so stored records still read.
     """
 
     SUGGEST = "suggest"
@@ -98,24 +98,20 @@ class ManufacturerPrincipal(BaseModel):
         return brand_id is not None and brand_id == self.brand_id
 
 
-def may_write_directly(principal: ManufacturerPrincipal) -> bool:
-    """Whether this principal's update can bypass the queue and edit the catalogue.
+def may_write_directly(principal: ManufacturerPrincipal | None = None) -> bool:
+    """Whether a brand's update is applied to the catalogue, rather than queued.
 
-    **Always False today, and the falseness is structural, not a policy choice.**
-    The hosted catalogue is a SQLite file baked into the Lambda image and opened
-    `mode=ro&immutable=1`; there is no code path that could write it, and
-    `slack_data/api/routing.py` does not even mount the catalogue's write routes
-    in that mode. A brand holding `WRITE` therefore still gets its update
-    recorded as a submission — auto-approved, because we trust the sender, but
-    applied to the root `*.json` by hand like everything else.
-
-    This function exists so that the day the catalogue becomes writable, the
-    change is *here* — and so the API's response shape already reports the
-    outcome per item (`applied: true/false`) rather than having to grow a new
-    field then. `tests/test_manufacturer_api.py` pins the current answer, which
-    makes flipping it a deliberate act rather than a side effect.
+    **True whenever the site reads the catalogue store** (live editing, phase
+    5): a key then edits with the rights of its brand's manufacturers
+    (`manufacturers/apply.py`), every active key alike — `BrandPermission` no
+    longer decides (P5-J). Without the store (the baked catalogue hosted, the
+    seed files locally) there is nothing to write, and an update is queued for
+    a person to apply, as before phase 5. The response's `applied` reports
+    which, per item, so brands' integrations need no new field.
     """
-    return False
+    from slack_data.catalogue.store import reads_from_store, store_configured
+
+    return store_configured() and reads_from_store()
 
 
 def now_iso() -> str:

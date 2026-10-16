@@ -113,6 +113,8 @@ functions:
       ISA_CLIENT_ID: ${self:custom.isaClientId}
       ISA_REGION: eu-central-1
       PEOPLE_TABLE: !Ref PeopleTable
+      # Phase 5: "I represent this brand" requests, waiting for an admin.
+      BRAND_REQUESTS_TABLE: !Ref BrandRequestsTable
       CHANGELOG_TABLE: !Ref ChangelogTable
       # Live editing, phase 2: the catalogue store, and what the site reads.
       # `baked` (the default) serves the catalogue baked into the image, with
@@ -406,6 +408,47 @@ resources:
           PointInTimeRecoveryEnabled: true
       # Holds every role grant. Losing it locks every admin out, and the only
       # way back in is the bootstrap allowlist.
+      DeletionPolicy: Retain
+      UpdateReplacePolicy: Retain
+
+    # ---- Brand-link requests (live editing, phase 5) -------------------------
+    # "I represent this brand", until an admin decides (D5, P5-B). The queue is
+    # a Query on status-index (oldest first: request ids are ULIDs); a person's
+    # own requests a Query on sub-index. No Scan is granted, so both are needed.
+    BrandRequestsTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:service}-brand-requests-${self:provider.stage}
+        BillingMode: PAY_PER_REQUEST
+        AttributeDefinitions:
+          - AttributeName: request_id
+            AttributeType: S
+          - AttributeName: status
+            AttributeType: S
+          - AttributeName: sub
+            AttributeType: S
+        KeySchema:
+          - AttributeName: request_id
+            KeyType: HASH
+        GlobalSecondaryIndexes:
+          - IndexName: status-index
+            KeySchema:
+              - AttributeName: status
+                KeyType: HASH
+              - AttributeName: request_id
+                KeyType: RANGE
+            Projection:
+              ProjectionType: ALL
+          - IndexName: sub-index
+            KeySchema:
+              - AttributeName: sub
+                KeyType: HASH
+              - AttributeName: request_id
+                KeyType: RANGE
+            Projection:
+              ProjectionType: ALL
+        PointInTimeRecoverySpecification:
+          PointInTimeRecoveryEnabled: true
       DeletionPolicy: Retain
       UpdateReplacePolicy: Retain
 
@@ -892,6 +935,8 @@ resources:
       Value: !Ref BrandClientsTable
     PeopleTableName:
       Value: !Ref PeopleTable
+    BrandRequestsTableName:
+      Value: !Ref BrandRequestsTable
     ChangelogTableName:
       Value: !Ref ChangelogTable
     CatalogTableName:
