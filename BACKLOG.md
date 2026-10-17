@@ -2,6 +2,22 @@
 
 Non-phase engineering tasks not tracked in [PLAN.md](PLAN.md) (frontend roadmap).
 
+## High priority
+
+- [ ] **Auto-sync ISA certification and warnings (every 24h) — high priority (operator,
+  2026-10-17).** Live editing phase 7 built the
+  half that does not depend on the ISA: `python -m slack_data.catalogue.isa_import` diffs a capture
+  of the approved-gear CSV and the warnings against the catalogue store (new entries unmatched with a
+  suggested match, changed fields updated, dropped ones retired, matches never touched), and admins
+  match on the site at `/admin/isa`. What is missing is something to fetch: the ISA's pages render
+  the lists client-side and publish no file. Decided (P7-F a): ask the ISA for a machine-readable
+  export — the request is in LIVE_EDITING_PHASE_7.md § 6 — then run the importer on it daily.
+  **Why it is urgent:** our capture is already behind. On 2026-10-17 the operator found an ISA
+  Notice of 2026-09-01 on Slack Inov's Spliced Leash in the ISA's own list, missing from
+  `isa_gear_warnings.json`; it was added by hand (warning 83, on leash 17). Every safety notice the
+  ISA publishes stays off the site until someone happens to notice it, which is exactly what the
+  sync is for.
+
 ## Staged, waiting for a photo
 
 Products whose specs and links are complete but that have no usable photo, across brands. They
@@ -243,19 +259,6 @@ Gear we don't hold yet in a gear type we already have, and corrections to the ro
 
 Gear types we want to hold but don't yet, and changes to the models, loaders and API.
 
-- [ ] **Auto-sync ISA certification and warnings (every 24h).** Live editing phase 7 built the
-  half that does not depend on the ISA: `python -m slack_data.catalogue.isa_import` diffs a capture
-  of the approved-gear CSV and the warnings against the catalogue store (new entries unmatched with a
-  suggested match, changed fields updated, dropped ones retired, matches never touched), and admins
-  match on the site at `/admin/isa`. What is missing is something to fetch: the ISA's pages render
-  the lists client-side and publish no file. Decided (P7-F a): ask the ISA for a machine-readable
-  export — the request is in LIVE_EDITING_PHASE_7.md § 6 — then run the importer on it daily.
-
-
-- [x] **Leashes as a gear type** (shipped 2026-10-17: model, router, the Leashes tab, 42 rows from 18
-  brands with 103 photos, and the four ISA:37 certificates matched — `approved_gear_4`, `10`, `11`,
-  `32`, 10 rows). The research, the decisions and every source are in LEASHES_REVIEW.md.
-
 - [ ] **Leashes: what the first round left open.**
   - **Into the live store.** The seed and `media/` are the dev snapshot; the site reads the store,
     whose importer refuses while it holds live edits. The 42 leashes need a one-off import that only
@@ -267,7 +270,7 @@ Gear types we want to hold but don't yet, and changes to the models, loaders and
   - **Manuals** not attached: Slacktivity's leash manual (EN/DE PDFs) and raed's leash manual (held
     on the HALO ring today).
   - **No photo anywhere** for Souz's Leash and Leash PP and Balancing Earth's Highline Leash 9.9mm;
-    only two 285 px thumbnails for Spider's Spliced Highline Leash.
+    only two 285 px thumbnails for Slack Inov's Spliced Highline Leash.
   - **Not read** (the Archive was down): raed's 2020 "Highline Leash" (€26.95) and SlackLife BC's
     "Alpine Bounce Leash"; Slack Inov's live shop needs a real browser.
   - **Rings sold with leashes that we do not hold** are named in notes, not linked (out of scope
@@ -495,6 +498,10 @@ Carried over from LAUNCH_RUNBOOK.md and PHASE4_SHIP_PLAN.md when both were remov
   not a layout change. Revisit once there is a homepage/dashboard to hang it off (PLAN.md).
 
 ## ✅ Shipped (kept here briefly so the entries above don't get re-opened)
+
+- **Leashes as a gear type** (shipped 2026-10-17: model, router, the Leashes tab, 42 rows from 18
+  brands with 103 photos, and the four ISA:37 certificates matched — `approved_gear_4`, `10`, `11`,
+  `32`, 10 rows). The research, the decisions and every source are in LEASHES_REVIEW.md.
 
 - **Connectors as a gear type** (shipped 2026-10-11/12: model, loader, router, 120 seeded rows with
   photos and manuals, the Connectors tab, generic parts grouped by `product_group`; see CLAUDE.md §
