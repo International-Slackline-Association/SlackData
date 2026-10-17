@@ -252,10 +252,27 @@ Gear types we want to hold but don't yet, and changes to the models, loaders and
   export — the request is in LIVE_EDITING_PHASE_7.md § 6 — then run the importer on it daily.
 
 
-- [ ] **Leashes as a gear type.** Four ISA:37 certificates wait on it: **BC Threaded Highline
-  Leash**, **Slacktivity HighlineLeash**, **raed PRO leash** and **raed ALPINE leash**
-  (`approved_gear_4`, `10`, `11`, `32` in `isa_certified.json`). Needs the full new-gear-type
-  checklist (CLAUDE.md), then `match` blocks for those four and a rebuild/re-seed.
+- [x] **Leashes as a gear type** (shipped 2026-10-17: model, router, the Leashes tab, 42 rows from 18
+  brands with 103 photos, and the four ISA:37 certificates matched — `approved_gear_4`, `10`, `11`,
+  `32`, 10 rows). The research, the decisions and every source are in LEASHES_REVIEW.md.
+
+- [ ] **Leashes: what the first round left open.**
+  - **Into the live store.** The seed and `media/` are the dev snapshot; the site reads the store,
+    whose importer refuses while it holds live edits. The 42 leashes need a one-off import that only
+    adds the new collection (logged as `import`), then `python -m slack_data.media.migrate` for the
+    photos — or creating them by hand on the site.
+  - **The manufacturer API, the seller pass and `CORRECTABLE_FIELDS`** do not know leashes yet
+    (they move together: `tests/test_gear_sellers.py` holds the first two equal), so the leashes'
+    `gear_sellers` names are not checked against `manufacturers.json` at seed time.
+  - **Manuals** not attached: Slacktivity's leash manual (EN/DE PDFs) and raed's leash manual (held
+    on the HALO ring today).
+  - **No photo anywhere** for Souz's Leash and Leash PP and Balancing Earth's Highline Leash 9.9mm;
+    only two 285 px thumbnails for Spider's Spliced Highline Leash.
+  - **Not read** (the Archive was down): raed's 2020 "Highline Leash" (€26.95) and SlackLife BC's
+    "Alpine Bounce Leash"; Slack Inov's live shop needs a real browser.
+  - **Rings sold with leashes that we do not hold** are named in notes, not linked (out of scope
+    for this round): PureLoop, Bera's 60/85 mm freestyle ring, Slackhouse Ring F Alu/Steel,
+    SlackLife BC's 22 kN and 44 kN rings, Balancing Earth's and SlackTech's steel rings.
 
 
 - [ ] **Add bungees as a gear type.** The `Bungee` model already exists on branch

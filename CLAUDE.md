@@ -176,7 +176,7 @@ Root *.json seed files
 | `slack_data/database.py` | `DATABASE_ENGINE`, `get_session()`, `SessionDep`, `create_db_and_tables()` |
 | `slack_data/models/brands.py` | `Brand` model + `get_brand()` upsert helper (central entity) |
 | `slack_data/models/<type>.py` | SQLModel schemas per gear type |
-| `slack_data/load_data/load_gear.py` | The one loader for all nine gear types: seed entry ↔ row (`to_row` / `to_entry`), the `GEAR` registry |
+| `slack_data/load_data/load_gear.py` | The one loader for all ten gear types: seed entry ↔ row (`to_row` / `to_entry`), the `GEAR` registry |
 | `slack_data/load_data/_seed_io.py` | `read_seed_json()` / `seed_path()` / `to_bool()` / `require_seed_id()` — shared by every loader |
 | `slack_data/load_data/brand_ids.py` | `catalog_id` from `manufacturers.json` — the stable `Brand.id`, read lazily |
 | `scripts/backfill_seed_ids.py` | Writes/verifies the explicit ids in the seeds; `--check` for CI |
@@ -269,6 +269,7 @@ Every gear type carries an **`active: bool | None`** field on its `Base<X>` (so 
 | StarterKit | `/starterkit` | `starterkits.json` | 64 |
 | TricklineKit | `/tricklinekit` | `tricklinekits.json` | 10 |
 | Connector | `/connector` | `connectors.json` | 120 |
+| Leash | `/leash` | `leashes.json` | 42 |
 | ISAGearWarning | `/isawarning` | `isa_gear_warnings.json` | 88 |
 | ISAGearCertification | `/isacertification` | `isa_certified.json` | 22 |
 
@@ -282,6 +283,17 @@ on the frontend and approved on 2026-10-11:
 
 Three candidates with too little data and no photos were moved to the local staging file instead,
 `candidates/connectors.json` (ids 9069, 9115, 9116; see `candidates/stage.py`).
+
+**Leashes** (`models/leashes.py`) are the newest type, seeded 2026-10-17 from the research and
+review in LEASHES_REVIEW.md, which holds every design decision. One row per length (and, for three
+leashes, per ring or construction option), with the rows of one leash sharing `product_group`. `breaking_strength` is the leash's own stated strength; where the maker
+states two, it holds the lower. `ring_options` (`[{leashring_id, count}]`) is the first link from
+one gear type to another: `load_gear.check_ring_options` refuses an id that is not a leash ring.
+`leashes` is the one collection that is not its router prefix plus "s", so `crud_router` takes
+`collection=` and `edits.api_type` maps it. Leashes are not in the manufacturer API, the
+seller pass, or `CORRECTABLE_FIELDS` yet. Locally the media manifest also lists the photos of
+staged candidates (ids >= 9000, `media/manifest.py` `staged_documents`, seed-files mode only), which
+`candidates/stage_photos.py` encodes from the originals in `candidates/images/<collection>/<id>/`.
 
 **Generic parts several shops sell are grouped, not merged.** Each shop's listing stays its own row
 with that shop's stated specs, price and link, and rows for the same part share `product_group`.
@@ -319,7 +331,7 @@ ids are **verified against the recorded `"<brand> <name>"`** before use, so seed
 reported instead of silently re-pointing a recall. The pass writes two things:
 
 1. `isa_warning` (the `ISAWarning` enum) onto the gear row — worst severity wins. Only
-   webbing / weblock / roller / leashring / grip / connector have the column.
+   webbing / weblock / roller / leashring / grip / connector / leash have the column.
 2. One `ISAGearWarning` row per (entry x matched gear id) — `models/isa_gear_warnings.py`, served
    read-only by `/isawarning` — holding the full entry (description, solution, parsed date, source
    links, in-production flag, match confidence). It has **no FK**: `(gear_type, gear_id)` is the
@@ -352,8 +364,8 @@ Its rules:
 - **Webbing and Webbing – Sewn Loop certificates** both certify the webbing row; **Intermittent
   Connection** certificates never do (the build leaves them unmatched, and the loader refuses them
   even if matched). Superseded certificates stay unmatched — newest only.
-- **Six types can be certified**: webbing / weblock / roller / leashring / grip / connector
-  (ISA:52 is the Highline Connector standard). Kits and tree protectors have no certification
+- **Seven types can be certified**: webbing / weblock / roller / leashring / grip / connector /
+  leash (ISA:52 is the Highline Connector standard; ISA:37 certifies a leash tether or a sewn set). Kits and tree protectors have no certification
   field at all.
 
 It writes, per certified row: `isa_certified = True`; `isa_certificate`, the primary certificate
@@ -366,9 +378,9 @@ certificate (standard version, lab, test date, manual, pictures as links). No FK
 
 All three gear-row fields are in `_EXCLUDED` (`submissions/fields.py`): certification is the ISA's
 to state, and a hand-edit would be overwritten on the next seed. The old computed webbing
-`classification` is gone. 18 rows are certified today (the 18th is connector 1, the KingPin
-shackle); 10 certificates match nothing (leashes, Intermittent Connection, one superseded) —
-tracked in BACKLOG.md.
+`classification` is gone. 28 rows are certified today: 18 before leashes (the 18th is connector 1,
+the KingPin shackle) and 10 leash rows from four ISA:37 certificates. 6 certificates match nothing
+(Intermittent Connection, one superseded) — tracked in BACKLOG.md.
 
 ### Gear descriptions
 
