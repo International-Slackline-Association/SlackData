@@ -186,6 +186,11 @@ EXPECTED_CERTIFIED = {
     ("leashring", 26), ("leashring", 27), ("leashring", 29),
     ("grip", 3), ("grip", 15), ("grip", 16),
     ("connector", 1),  # Slacktivity KingPin shackle, ISA:52
+    # ISA:37: BC Threaded (each length, with and without rings), Slacktivity
+    # (no, one, two rings), raed PRO leash and its sewn set, raed ALPINE set.
+    ("leash", 1), ("leash", 2), ("leash", 3), ("leash", 4),
+    ("leash", 9), ("leash", 10), ("leash", 11),
+    ("leash", 12), ("leash", 13), ("leash", 14),
 }
 
 
@@ -249,7 +254,7 @@ def test_superseded_and_intermittent_certificates_are_unmatched():
 def test_no_gear_seed_carries_a_certification_flag_of_its_own():
     """`isa_certified.json` is the only source; a flag in a seed would be ignored
     silently, which is worse than not being there."""
-    for name in ("webbings", "weblocks", "rollers", "leashrings", "grips", "starterkits", "tricklinekits"):
+    for name in ("webbings", "weblocks", "rollers", "leashrings", "grips", "starterkits", "tricklinekits", "leashes"):
         text = (ROOT / f"{name}.json").read_text(encoding="utf-8")
         for key in ('"isa_certified"', '"isa_approved"', '"ISA approved"'):
             assert key not in text, f"{name}.json still carries {key}"
