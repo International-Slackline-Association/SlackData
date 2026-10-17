@@ -733,11 +733,12 @@ The other figure goes in `notes`. So do figures for a component rather than the 
 sleeve's strength (BC 13.3 kN, Geko 12 kN) and the core rope's alone (Bera 20 kN). The rope's
 EN 892 data (impact force, UIAA falls, elongation) is in `notes` too, not in fields.
 
-### Q8. Who makes the Spliced Highline Leash — DECIDED: a, filed under Spider
+### Q8. Who makes the Spliced Highline Leash — DECIDED: Slack Inov makes it, Spider sells it
 
 It is listed on Spider's EU shop but "Made in France", while Spider's own leash is made in Italy.
-It is filed under **Spider Slacklines**, where it is sold. The origin, and the possibility that
-Slack Inov makes it, go in `notes`.
+First filed under Spider, where it is sold. **Changed 2026-10-17 (operator):** the ISA's Notice of
+2026-09-01 on this leash names **Slack-Inov** as its maker, so it is filed under Slack Inov, with
+Spider Slacklines as a seller (`gear_sellers`). The notice is ISA warning 83, matched to leash 17.
 
 ### Q9. "Not for highlining" — DECIDED: leashes do not have that field
 

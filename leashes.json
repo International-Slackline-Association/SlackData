@@ -805,7 +805,7 @@
     {
         "id": 17,
         "name": "Spliced Highline Leash",
-        "brand": "Spider Slacklines",
+        "brand": "Slack Inov",
         "construction": "Rope",
         "ring_end": "Spliced",
         "core_rope": "14 mm high-tenacity polyester",
@@ -823,8 +823,11 @@
         "price": 66.63,
         "currency": "EUR",
         "description": "The SPLICED Highline leash features a rope spliced around the HIGHRING, padded by DONUT, offering a design that is lighter than traditional double fig-8 knot leashes and preventing the tail whip commonly associated with knots.\nThis compact design uses a 14 mm diameter rope that is extremely flexible, easy to tie and untie, enhancing comfort during your highlining sessions.\nWith a strength of 54 kN on the spliced side and 25 kN on the fig-8 knot side, this leash will never fail.",
-        "notes": "Ref HLSS4, 'TEMPORARILY UNAVAILABLE' on 2026-10-11. Made in France — filed under Spider, where it is sold; Slack Inov may make it. Spliced around an 80 mm HighRing padded by a Donut; 463 g with both. MBS 25 kN on the fig-8 side (stored), 54 kN on the spliced side. 240 cm = a 335 cm leash with a fig-8. Lifespan 10 years. The rope's own build: 12-strand core, 24-strand sleeve ('12 fuses core, 24 fuses sleeve'); dynamic or static not stated.",
+        "notes": "Ref HLSS4, 'TEMPORARILY UNAVAILABLE' on 2026-10-11. Made in France. Filed under Slack Inov, which the ISA's notice of 2026-09-01 names as its maker; Spider sells it (operator, 2026-10-17). Spliced around an 80 mm HighRing padded by a Donut; 463 g with both. MBS 25 kN on the fig-8 side (stored), 54 kN on the spliced side. 240 cm = a 335 cm leash with a fig-8. Lifespan 10 years. The rope's own build: 12-strand core, 24-strand sleeve ('12 fuses core, 24 fuses sleeve'); dynamic or static not stated.",
         "active": true,
+        "gear_sellers": [
+            "Spider Slacklines"
+        ],
         "photos": [
             {
                 "id": "4228b162e9cd1bb1",
