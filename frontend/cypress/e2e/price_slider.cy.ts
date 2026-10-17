@@ -1,7 +1,7 @@
 import { GEAR_TYPES } from '../support/gear_types'
 
 // Price slider precision and reachability — DESIGN.md § Left Filter Sidebar
-// ("Price is the first group in every gear type's sidebar").
+// (price is the first group after the ISA groups, and first on uncertifiable types).
 //
 // Two contracts live here, and both were once broken:
 //

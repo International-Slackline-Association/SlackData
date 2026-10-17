@@ -49,14 +49,21 @@ function biggestBrand(items: Record<string, unknown>[]): string {
 const asParam = (brand: string) => new URLSearchParams({ brand }).toString()
 
 describe('Brand filter — every gear type', () => {
-  GEAR_TYPES.forEach(({ slug, label }) => {
+  GEAR_TYPES.forEach(({ slug, label, certifiable }) => {
     it(`${label}: has a Brand group, and it is the last one in the sidebar`, () => {
       cy.visit(`/${slug}`)
       cy.get(GROUP).should('exist').and('contain.text', 'Brand')
       // Last of ALL of them — on webbings that means below the stretch widget
       // too, which the sidebar appends after the configured groups.
       cy.get('[data-cy="filter-group"]').last().should('have.attr', 'data-group', 'brand')
-      cy.get('[data-cy="filter-group"]').eq(0).should('have.attr', 'data-group', 'price')
+      // ISA Certified, then ISA Warning, then Price, of those shown (DESIGN.md).
+      // A pill group with one possible answer is hidden like any other — no
+      // roller is certified, so Rollers starts at ISA Warning.
+      cy.get('[data-cy="filter-group"]').should($groups => {
+        const names = [...$groups].map(g => g.getAttribute('data-group'))
+        const lead = (certifiable ? ['isa_certified', 'isa_warning'] : []).filter(g => names.includes(g))
+        expect(names.slice(0, lead.length + 1)).to.deep.equal([...lead, 'price'])
+      })
     })
   })
 })

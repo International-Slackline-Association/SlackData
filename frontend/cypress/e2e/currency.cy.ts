@@ -419,8 +419,17 @@ describe('Price filter', () => {
     })
   })
 
-  it('is the first filter group in the sidebar', () => {
+  // The ISA groups lead on the types the ISA certifies; price comes straight
+  // after them, and leads where the type cannot be certified (DESIGN.md).
+  it('comes right after ISA Certified and ISA Warning on a certifiable type', () => {
     cy.visit('/webbings')
+    cy.get('[data-cy="filter-group"]').eq(0).should('have.attr', 'data-group', 'isa_certified')
+    cy.get('[data-cy="filter-group"]').eq(1).should('have.attr', 'data-group', 'isa_warning')
+    cy.get('[data-cy="filter-group"]').eq(2).should('have.attr', 'data-group', 'price')
+  })
+
+  it('is the first filter group where the type cannot be certified', () => {
+    cy.visit('/treepros')
     cy.get('[data-cy="filter-group"]').first()
       .should('have.attr', 'data-group', 'price')
   })
