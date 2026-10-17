@@ -32,6 +32,7 @@ class Brand(BaseBrands, table=True):
     _starterkits: list["StarterKit"] = Relationship(back_populates="brand")
     _tricklinekits: list["TricklineKit"] = Relationship(back_populates="brand")
     _connectors: list["Connector"] = Relationship(back_populates="brand")
+    _leashes: list["Leash"] = Relationship(back_populates="brand")
 
     
     @computed_field
@@ -96,6 +97,13 @@ class Brand(BaseBrands, table=True):
         Computed field to get the names of all connectors associated with this brand.
         """
         return [connector.name for connector in self._connectors]
+
+    @computed_field
+    def leashes(self) -> list[str]:
+        """
+        Computed field to get the names of all leashes associated with this brand.
+        """
+        return [leash.name for leash in self._leashes]
     
 def get_brand(session: SessionDep, brand_cache: dict[str, int] | None, item: dict) -> tuple[int,dict]:
     """Upsert a brand by `item["brand"]`, returning `(brand_id, brand_cache)`.

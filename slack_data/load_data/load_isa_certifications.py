@@ -58,6 +58,7 @@ from slack_data.models.isa_gear_certifications import (
     ISAGearCertification,
     ISAGearCertificationCreate,
 )
+from slack_data.models.leashes import Leash
 from slack_data.models.leashrings import LeashRing
 from slack_data.models.rollers import Roller
 from slack_data.models.webbing import Webbing
@@ -75,6 +76,8 @@ CERTIFIABLE_MODELS = {
     "leashring": LeashRing,
     "grip": Grip,
     "connector": Connector,
+    # ISA:37 certifies a leash tether ("Leash Teather") or a sewn set ("Leash").
+    "leash": Leash,
 }
 
 # The webbing product type whose certificate is preferred as a webbing row's

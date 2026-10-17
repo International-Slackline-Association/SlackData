@@ -88,6 +88,7 @@ SAFETY_FIELDS: dict[str, frozenset[str]] = {
     "leashrings": frozenset({"breaking_strength"}),
     "grips": frozenset({"mbs"}),
     "connectors": frozenset({"mbs_straight_pull", "mbs_crossload", "mbs_gate_open"}),
+    "leashes": frozenset({"breaking_strength"}),
 }
 
 

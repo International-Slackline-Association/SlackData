@@ -142,9 +142,13 @@ class Outcome:
 # --- Helpers ------------------------------------------------------------------
 
 
+IRREGULAR_API_TYPES = {"leashes": "leash"}
+
+
 def api_type(collection: str) -> str:
-    """`webbings` -> `webbing`: the gear type as ISA match blocks name it."""
-    return collection[:-1]
+    """`webbings` -> `webbing`: the gear type as ISA match blocks name it.
+    `leashes` is the one collection that is not its singular plus "s"."""
+    return IRREGULAR_API_TYPES.get(collection, collection[:-1])
 
 
 def _find(documents: Iterable[Document], collection: str, key: str) -> Document | None:

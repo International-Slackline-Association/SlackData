@@ -39,6 +39,7 @@ from slack_data.load_data.load_isa_warnings import WARNABLE_MODELS, match_target
 from slack_data.models.brands import Brand
 from slack_data.models.connectors import Connector
 from slack_data.models.grips import Grip
+from slack_data.models.leashes import Leash
 from slack_data.models.leashrings import LeashRing
 from slack_data.models.rollers import Roller
 from slack_data.models.starterkits import StarterKit
@@ -63,6 +64,7 @@ SEEDS = {
     "starterkits.json": "brand",
     "tricklinekits.json": "brand",
     "connectors.json": "brand",
+    "leashes.json": "brand",
 }
 
 
@@ -176,6 +178,7 @@ MODELS = {
     "starterkits.json": StarterKit,
     "tricklinekits.json": TricklineKit,
     "connectors.json": Connector,
+    "leashes.json": Leash,
 }
 
 

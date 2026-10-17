@@ -75,13 +75,15 @@ def crud_router(
     create_model: type[SQLModel],
     public_model: type[SQLModel],
     update_model: type[SQLModel],
+    collection: str | None = None,
 ) -> APIRouter:
     """The standard five CRUD routes over one table.
 
     `prefix` is the bare singular name (`"webbing"`), which becomes the URL
     prefix, the OpenAPI tag, the `{webbing_id}` path parameter and the handler
     names. The 404 label is the model's own class name, so it cannot drift from
-    the thing it names.
+    the thing it names. `collection` is the seed file's stem, which is the
+    prefix plus "s" for every type but `leashes`.
     """
     router = APIRouter(
         prefix=f"/{prefix}",
@@ -91,6 +93,7 @@ def crud_router(
     id_path = f"/{{{prefix}_id}}"
     id_param = f"{prefix}_id"
     label = model.__name__
+    collection = collection or f"{prefix}s"
 
     def _get_or_404(session: SessionDep, item_id: int) -> Any:
         item = session.get(model, item_id)
@@ -99,7 +102,7 @@ def crud_router(
 
             # A merged duplicate says where it went (LIVE_EDITING_PHASE_3.md § 5.4),
             # so a bookmark explains itself; anything else is a plain miss.
-            reason = unlisted(f"{prefix}s", item_id)
+            reason = unlisted(collection, item_id)
             if reason is not None:
                 raise HTTPException(status_code=404, detail={"message": f"{label} {item_id} is not listed", **reason})
             raise HTTPException(status_code=404, detail=f"{label} {item_id} not found")

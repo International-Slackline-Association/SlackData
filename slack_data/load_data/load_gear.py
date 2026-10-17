@@ -1,5 +1,5 @@
 """
-The gear loader — one for all nine types (LIVE_EDITING_PHASE_3.md, P3-A).
+The gear loader — one for all ten types (LIVE_EDITING_PHASE_3.md, P3-A).
 
 A gear seed entry is the item in the model's own vocabulary: the `<X>Create`
 field names and enum values, plus `id` and `brand` (the maker's name). So an
@@ -46,12 +46,13 @@ what the frontend parses. `JSON_TEXT_FIELDS` holds that one translation.
 
 import json
 
-from sqlmodel import Session, SQLModel
+from sqlmodel import Session, SQLModel, select
 
 from slack_data.load_data._seed_io import read_seed_json, require_seed_id
 from slack_data.models.brands import get_brand
 from slack_data.models.connectors import Connector, ConnectorCreate
 from slack_data.models.grips import Grip, GripCreate
+from slack_data.models.leashes import Leash, LeashCreate
 from slack_data.models.leashrings import LeashRing, LeashRingCreate
 from slack_data.models.rollers import Roller, RollerCreate
 from slack_data.models.starterkits import StarterKit, StarterKitCreate
@@ -72,6 +73,8 @@ GEAR: dict[str, tuple[type[SQLModel], type[SQLModel]]] = {
     "starterkits": (StarterKit, StarterKitCreate),
     "tricklinekits": (TricklineKit, TricklineKitCreate),
     "connectors": (Connector, ConnectorCreate),
+    # After leashrings: a leash's `ring_options` name leash ring ids.
+    "leashes": (Leash, LeashCreate),
 }
 
 # Set on every build by load_isa_warnings / load_isa_certifications; never typed.
@@ -98,6 +101,26 @@ JSON_TEXT_FIELDS: dict[str, frozenset[str]] = {"webbings": frozenset({"stretch"}
 
 class UnknownField(ValueError):
     """A seed entry names a field its model does not hold, or a derived one."""
+
+
+class UnknownRing(ValueError):
+    """A leash's `ring_options` names a leash ring id that is not in the catalogue."""
+
+
+def check_ring_options(session: Session, rows: list[SQLModel]) -> None:
+    """Refuse a leash whose `ring_options` name a leash ring we do not hold.
+
+    The first reference from one gear type to another (LEASHES_REVIEW.md § Q2),
+    so it is checked where the rows are built: a typo would otherwise show a
+    leash "sold with" nothing, or with someone else's ring.
+    """
+    held = {ring_id for ring_id in session.exec(select(LeashRing.id))}
+    for row in rows:
+        for option in getattr(row, "ring_options", None) or []:
+            if option["leashring_id"] not in held:
+                raise UnknownRing(
+                    f"leash {row.id} ({row.name!r}): no leash ring {option['leashring_id']}"
+                )
 
 
 def stored_fields(collection: str) -> frozenset[str]:
@@ -162,6 +185,8 @@ def load_gear(session: Session, collection: str) -> int:
             continue
         brand_id, brand_cache = get_brand(session, brand_cache, {"brand": entry.get("brand")})
         rows.append(to_row(collection, entry, brand_id))
+    if collection == "leashes":
+        check_ring_options(session, rows)
     # One add and one commit: a session.get per row (the old loaders' way of
     # attaching the Brand) flushed the session every time, which was most of
     # the cost of building the catalogue.
