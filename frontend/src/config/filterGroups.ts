@@ -221,6 +221,24 @@ export const FILTER_GROUPS: Record<GearSlug, FilterGroupMeta[]> = {
     BRAND_GROUP,
   ],
 
+  leashes: [
+    { group: 'price', label: 'Price', type: 'range', valueField: 'price_display', currencyUnit: true },
+    { group: 'construction',      label: 'Construction',      type: 'pill', pillKind: 'enum' },
+    { group: 'ring_end',          label: 'Ring Connection',   type: 'pill', pillKind: 'enum' },
+    { group: 'core_type',         label: 'Rope Type',         type: 'pill', pillKind: 'enum' },
+    { group: 'sleeve_material',   label: 'Sleeve',            type: 'pill', pillKind: 'enum' },
+    { group: 'twist_marker',      label: 'Twist Marker',      type: 'pill', pillKind: 'bool' },
+    { group: 'isa_certified',     label: 'ISA Certified',     type: 'pill', pillKind: 'bool' },
+    { group: 'isa_warning',       label: 'ISA Warning',       type: 'pill', pillKind: 'enum',
+      order: ISA_WARNING_ORDER, includeNone: true },
+    { group: 'length',            label: 'Length',            type: 'range', unit: 'cm' },
+    { group: 'diameter',          label: 'Diameter',          type: 'range', unit: 'mm' },
+    { group: 'weight',            label: 'Weight',            type: 'range', unit: 'g' },
+    { group: 'breaking_strength', label: 'Breaking Strength', type: 'range', unit: 'kN' },
+    // Brand comes LAST, as on every type.
+    BRAND_GROUP,
+  ],
+
   // Upcoming types have no data / no listing yet.
   bungees: [],
   leashringpro: [],

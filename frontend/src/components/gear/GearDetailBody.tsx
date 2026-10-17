@@ -45,6 +45,7 @@ import IsaApprovedBadge from './IsaApprovedBadge'
 import IsaStatusLabel from './IsaStatusLabel'
 import { isaWarningStatus } from './IsaWarningBadge'
 import IsaWarningPanel from './IsaWarningPanel'
+import RingOptions from './RingOptions'
 import HistoricBadge from './HistoricBadge'
 import SpecTable from './SpecTable'
 import VendorTable from './VendorTable'
@@ -281,6 +282,9 @@ export default function GearDetailBody({
           )}
 
           <SpecTable item={item} slug={meta.slug} />
+
+          {/* A leash's rings, each linking to its leash ring page. */}
+          {meta.slug === 'leashes' && <RingOptions item={item} />}
         </div>
       </div>
 

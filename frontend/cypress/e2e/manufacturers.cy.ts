@@ -418,7 +418,7 @@ describe('Manufacturers page', () => {
 
   const totalOn = ($card: JQuery<HTMLElement>) =>
     ['webbings', 'weblocks', 'rollers', 'leashrings',
-     'grips', 'treepros', 'starterkits', 'tricklinekits', 'connectors']
+     'grips', 'treepros', 'starterkits', 'tricklinekits', 'connectors', 'leashes']
       .reduce((sum, slug) => sum + Number($card.attr(`data-count-${slug}`) ?? '0'), 0)
 
   it('lists manufacturers by total gear count, descending, by default', () => {
@@ -714,6 +714,7 @@ describe('Manufacturers page', () => {
       { apiPath: 'starterkit',   attr: 'data-count-starterkits'   },
       { apiPath: 'tricklinekit', attr: 'data-count-tricklinekits' },
       { apiPath: 'connector',    attr: 'data-count-connectors'    },
+      { apiPath: 'leash',        attr: 'data-count-leashes'       },
     ]
 
     // Pick the first brand from the API

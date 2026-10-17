@@ -73,6 +73,11 @@ const EXTRA_SORT_FIELDS: Record<string, SortField[]> = {
     { field: 'opening',           label: 'Opening',       unit: 'mm', nullLast: true },
     { field: 'pin_diameter',      label: 'Pin Diameter',  unit: 'mm', nullLast: true },
   ],
+  leashes: [
+    { field: 'length',            label: 'Length',            unit: 'cm', nullLast: true },
+    { field: 'diameter',          label: 'Diameter',          unit: 'mm', nullLast: true },
+    { field: 'breaking_strength', label: 'MBS',               unit: 'kN', nullLast: true },
+  ],
 }
 
 // ── Search tests (unchanged for every gear type) ──────────────────────────────

@@ -8,10 +8,10 @@
 
 import type {
   AttachmentPoint, BearingMaterial, ConnectionType, ConnectorClosure, ConnectorMaterial,
-  ConnectorStyle, Currency,
-  FiberMaterial, FrontPin, ISAWarning, LockType, MetalMaterial, PriceUnit,
-  RollerMaterial, SliderType, StarterKitTensioningType, TricklineKitTensioningType,
-  WebbingConstruction, WeblockStyle,
+  ConnectorStyle, CoreType, Currency,
+  FiberMaterial, FrontPin, ISAWarning, LeashConstruction, LockType, MetalMaterial, PriceUnit,
+  RingConnection, RollerMaterial, SleeveMaterial, SliderType, StarterKitTensioningType,
+  TricklineKitTensioningType, WebbingConstruction, WeblockStyle,
 } from './enums'
 
 // Fields shared by every gear type (from each Base* class + the brand_name
@@ -162,15 +162,47 @@ export interface Connector extends GearBase {
   isa_warning: ISAWarning | null
 }
 
+// One leash ring a leash is sold with, as an option (`count` of them).
+export interface RingOption {
+  leashring_id: number
+  count: number
+}
+
+// One row per LENGTH a maker sells; the lengths of one leash share
+// `product_group` (LEASHES_REVIEW.md § Q4). Leashes carry no
+// manufacturer_not_for_highline field (§ Q9).
+export interface Leash
+  extends Omit<GearBase, 'manufacturer_not_for_highline' | 'manufacturer_not_for_highline_source'> {
+  construction: LeashConstruction
+  ring_end: RingConnection | null
+  core_type: CoreType | null
+  core_rope: string | null
+  core_diameter: number | null  // mm
+  sleeve_material: SleeveMaterial | null
+  sleeve_width: number | null   // mm
+  diameter: number | null       // mm, overall
+  length: number | null         // cm
+  // The leash's own stated strength, kN; the lower one where the maker states two.
+  breaking_strength: number | null
+  // The leash rings it is sold with; null = sold without, or not researched.
+  ring_options: RingOption[] | null
+  twist_marker: boolean | null
+  product_group: string | null
+  isa_certified: boolean
+  isa_certificate: string | null
+  isa_warning: ISAWarning | null
+}
+
 // Union of every concrete gear item.
 export type GearItem =
   | Webbing | Weblock | LeashRing | Grip | Roller | TreePro | StarterKit | TricklineKit
-  | Connector
+  | Connector | Leash
 
-// URL slugs (mirror config/gearTypes.ts). The first nine are data-backed and
+// URL slugs (mirror config/gearTypes.ts). The first ten are data-backed and
 // covered by the test suite; the last two are upcoming categories with no data
 // yet (shown in the nav, listing renders a "coming soon" state).
 export type GearSlug =
   | 'webbings' | 'weblocks' | 'leashrings' | 'grips'
   | 'rollers' | 'treepros' | 'starterkits' | 'tricklinekits' | 'connectors'
+  | 'leashes'
   | 'bungees' | 'leashringpro'
