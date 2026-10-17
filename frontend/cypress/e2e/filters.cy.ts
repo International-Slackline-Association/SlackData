@@ -200,7 +200,7 @@ const FILTER_GROUPS: Record<string, FilterGroup[]> = {
   //         isa_warning(enum) length/diameter/weight/breaking_strength(float)
   leashes: [
     { group: 'isa_certified',     label: 'ISA Certified',     type: 'pill'  },
-    { group: 'isa_warning',       label: 'ISA Warning',       type: 'pill'  },
+    { group: 'isa_warning',       label: 'ISA Warning',       type: 'pill'  }, // None/Notice (the Spliced Leash)
     { group: 'price',             label: 'Price',             type: 'range', valueAttr: 'data-price-display' },
     { group: 'construction',      label: 'Construction',      type: 'pill'  }, // Threaded/Rope
     { group: 'ring_end',          label: 'Ring Connection',   type: 'pill'  }, // Knot/Sewn/Spliced

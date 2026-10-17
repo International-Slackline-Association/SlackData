@@ -323,7 +323,7 @@ until 2026-10-12; its quicklinks are now generic parts, one row per shop, groupe
 
 ### ISA gear warnings
 
-`isa_gear_warnings.json` (root, 82 entries scraped from the ISA's warnings database) is loaded by
+`isa_gear_warnings.json` (root, 83 entries: 82 scraped from the ISA's warnings database, one added by hand) is loaded by
 `load_data/load_isa_warnings.py`, which **runs last in `seed.py`** — it addresses gear by primary
 key, so every gear table must already be populated. Each entry carries a hand-adjudicated `match`
 block (`gearType` / `gearIds` / `gearNames` / `confidence` / `note`) mapping it onto our catalogue;
@@ -337,7 +337,7 @@ reported instead of silently re-pointing a recall. The pass writes two things:
    links, in-production flag, match confidence). It has **no FK**: `(gear_type, gear_id)` is the
    link, because a warning can land on any of five tables.
 
-Seeding is gated on the `ISAGearWarning` table being empty. Eight entries match nothing we hold —
+Seeding is gated on the `ISAGearWarning` table being empty. Six entries match nothing we hold —
 tracked in BACKLOG.md.
 
 ### ISA certifications
