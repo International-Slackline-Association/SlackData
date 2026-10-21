@@ -16,6 +16,17 @@ html {
   -webkit-text-size-adjust: 100%;
 }
 
+html,
+body {
+  /* Nothing on this site is meant to be wider than the screen — every wide
+     thing (tab strip, tables, charts) scrolls inside its own box. So any
+     horizontal overflow is a leak, and on a phone a leak lets the whole page
+     drift sideways under the thumb. `clip` rather than `hidden`: it creates no
+     scroll container, so the sticky header and sidebar keep working. Both
+     elements, because iOS Safari ignores it on one alone. */
+  overflow-x: clip;
+}
+
 body {
   margin: 0;
   background-color: #F8F7F4;

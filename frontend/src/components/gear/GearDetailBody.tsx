@@ -109,7 +109,7 @@ export default function GearDetailBody({
             first one rather than keeping an index into the old set. */}
         <div
           data-cy="detail-image-area"
-          className="group relative flex h-52 items-center justify-center self-start overflow-hidden rounded-lg bg-gray-50 sm:h-72"
+          className="group relative flex h-52 items-center justify-center self-start overflow-hidden contain-paint rounded-lg bg-gray-50 sm:h-72"
         >
           <CardImageCarousel
             key={images.map(p => p.large).join('|')}
