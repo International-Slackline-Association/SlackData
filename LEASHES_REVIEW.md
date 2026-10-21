@@ -493,6 +493,9 @@ dates from 2014.
 US$45.95, or leash only for $15.50 less. Made in USA.
 - **Construction**: 12 ft of 9.9 mm dynamic rope in finely woven 11/16" tubular nylon, tied with
   a figure-8 to 2× 2 5/16" drop-forged steel rings, each proof loaded to 3,600 lbf.
+- **Rows** (operator, 2026-10-17): no rings (37, US$30.45) and with 2 rings (43, US$45.95), one
+  group. The rings are leash ring 35, SlackTech's 2 5/16" ID steel ring (rated 5,000 lbs, US$7.75
+  each). SlackTech also sold a 3" ID steel ring (leash ring 36, rated 10,000 lbs).
 
 **31. Leash of Iktomi**
 ([2019](https://web.archive.org/web/20190511201818/http://slacklinetechnology.com/shop/highline-leash-of-iktomi)),
@@ -642,6 +645,8 @@ and `ring_options`:
   Loop rings (US$65, 69) — ids 1–4.
 - **Slacktivity Highline Leash**: no ring (€49), one ring (€65), two rings (€79) — ids 9–11.
 - **Slack Inov Dynamic leash**: rope only or threaded (rope + sleeve) — ids 18–19.
+- **SlackTech Highline Leash Kit**: no rings (US$30.45) or two 2 5/16" steel rings (US$45.95) —
+  ids 37 and 43.
 
 The comparison table on the detail page then reads "N options" and shows a Rings and a
 Construction column where the rows differ in them.
