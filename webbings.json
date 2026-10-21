@@ -882,6 +882,9 @@
         "price": 2.5,
         "currency": "USD",
         "active": false,
+        "gear_sellers": [
+            "SlackTech"
+        ],
         "photos": [
             {
                 "id": "799a70fb644ab5b4",
@@ -1771,6 +1774,9 @@
         "price": 2.5,
         "currency": "USD",
         "active": false,
+        "gear_sellers": [
+            "SlackTech"
+        ],
         "photos": [
             {
                 "id": "56e2d2f5fa870026",
@@ -8302,6 +8308,9 @@
         "currency": "USD",
         "description": "CORETEK takes standard tubular webbing to the next level with a second piece of polyester webbing threaded through the center. This gives the line a supportive core offering a solid, but responsive feel ideal for slacklining.",
         "active": false,
+        "gear_sellers": [
+            "SlackTech"
+        ],
         "photos": [
             {
                 "id": "95139da5f481fa40",
@@ -8333,6 +8342,9 @@
         "currency": "USD",
         "description": "SUGOI (pronounced \"sue-GOY\") meaning awesome, is a flat polyester webbing with low stretch and high strength; the perfect weave for long and highlines.",
         "active": false,
+        "gear_sellers": [
+            "SlackTech"
+        ],
         "photos": [
             {
                 "id": "3b348bcad58e11c7",

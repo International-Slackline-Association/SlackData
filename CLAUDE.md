@@ -449,7 +449,7 @@ the sellers, deduped). Two surfaces read it:
   price and above the ISA certification block) — each shop's name, linked to its
   brand page. DESIGN.md § Also sold by.
 
-Seeded today: **81 co-listings**, from five sources with very different
+Seeded today: **93 co-listings**, from six sources with very different
 provenance.
 
 - **Slack Inov ↔ Spider Slacklines**, 61: the two companies each sell the
@@ -488,6 +488,15 @@ provenance.
   once per brand (100+154, same 25 mm / 57 g/m); on 2026-10-08 the Slack Pro!
   row was folded into the Slack.fr one, Slack.fr's specs kept, and its photo
   moved onto `slackfr_neon-light` as `-3`, so id 154 no longer exists.
+- **SlackTech** (US, closed) sold 12 products made by others that we hold:
+  BC's Aero 1 and Type 18 MKII, Slackline Industries' CoreTek and Sugoi
+  (webbings 9, 18, 132, 133), the LineGrip Alu G4 (grip 1), Slackline
+  Industries' BOSS LINE, TRICK LINE, BASE LINE and PLAY LINE kits and Gibbon's
+  Jibline (trickline kits 8, 11, 16, starter kits 15, 51), YogaSlackers' eLine
+  Light Kit (starter kit 25) and Van Beest's Green Pin 1/2" shackle (connector
+  43). Recorded on 2026-10-17 from the Wayback copies of slacklinetechnology.com
+  (2014–2019). Its own hardware (steel leash rings, quicklinks, shackles, oval
+  carabiners, tree padding) is held as SlackTech rows.
 
 **Not done here:** a redirect for merged rows (the Landcruising/Aki,
 EQB/Spider `Bandit` and `Paddle`, Slack.fr/Slack Pro! `Neon Light`, and Matrix Outer/Wave Tube 32 pairs were merged without one, so their old ids 404), and anything on the **card** — the card shows the maker, because the
