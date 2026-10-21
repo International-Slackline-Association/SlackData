@@ -1,6 +1,6 @@
 // Persistent top navigation, two tiers:
-//   Tier 1 (fixed height): wordmark + manufacturers link — the stable upper area.
-//   Tier 2: gear-category tabs. A single row that SCROLLS horizontally when it
+//   Tier 1 (fixed height): wordmark, ISA credit, currency and account controls.
+//   Tier 2: gear-category and manufacturers tabs. A single row that SCROLLS horizontally when it
 //           doesn't fit. This reverses an earlier decision to wrap instead:
 //           wrapping put 10 tabs onto ~5 rows at 390px, i.e. 200px+ of
 //           permanently sticky chrome on a phone. The strip keeps the header at
@@ -70,15 +70,15 @@ export default function TopNav() {
   const mfrActive = isSectionActive(pathname, '/manufacturers')
 
   // Publish the measured header height as --header-h so the sticky filter sidebar
-  // can pin itself just below the nav. Tier-2 tabs wrap onto more rows on narrow
-  // widths, so the header height is variable — observe it instead of hard-coding.
+  // can pin itself just below the nav. The ISA credit can add a row on narrow
+  // widths, so observe the header height instead of hard-coding it.
   const headerRef = useRef<HTMLElement>(null)
   const stripRef = useRef<HTMLElement>(null)
   const activeTabRef = useRef<HTMLAnchorElement>(null)
 
   // The credit sits inline beside the wordmark when tier 1 has room for it, and
-  // drops to its own row below when it doesn't — rather than overlapping the
-  // Manufacturers link, which it did on a phone. Measured, not a breakpoint:
+  // drops to its own row below when it doesn't fit beside the controls.
+  // Measured, not a breakpoint:
   // what fits depends on the wordmark, the currency picker and the font, and a
   // fixed breakpoint would be wrong as soon as any of those changes. The inline
   // width is cached while it is inline, because once it has moved down there is
@@ -185,17 +185,8 @@ export default function TopNav() {
               phone; the whole credit drops a row when even the logo won't fit. */}
           {!creditBelow && <IsaCredit creditRef={creditRef} below={false} />}
         </div>
-        {/* Right side: the currency selector sits beside Manufacturers on every
-            page, not just listings — prices appear on detail and compare too. */}
+        {/* Currency and account controls stay available on every page. */}
         <div ref={rightRef} className="flex items-center gap-2 sm:gap-4 shrink-0">
-          <Link
-            to="/manufacturers"
-            data-cy="manufacturers-link"
-            data-active={mfrActive ? 'true' : 'false'}
-            className={tabClass(mfrActive)}
-          >
-            Manufacturers
-          </Link>
           <CurrencySelector />
           <AccountMenu />
         </div>
@@ -207,10 +198,10 @@ export default function TopNav() {
         </div>
       )}
 
-      {/* Tier 2 — category tabs, wrap on small screens */}
+      {/* Tier 2 — catalogue tabs, scroll horizontally on small screens */}
       <nav
         ref={stripRef}
-        aria-label="Gear categories"
+        aria-label="Catalogue"
         className="max-w-7xl mx-auto px-4 sm:px-6 flex flex-nowrap items-center gap-x-1 overflow-x-auto scrollbar-none snap-x scroll-px-4 border-t border-gray-100"
       >
         {ALL_GEAR_TYPES.map(({ slug, label, available }) => {
@@ -236,6 +227,15 @@ export default function TopNav() {
             </Link>
           )
         })}
+        <Link
+          ref={mfrActive ? activeTabRef : undefined}
+          to="/manufacturers"
+          data-cy="manufacturers-link"
+          data-active={mfrActive ? 'true' : 'false'}
+          className={tabClass(mfrActive)}
+        >
+          Manufacturers
+        </Link>
       </nav>
     </header>
   )
