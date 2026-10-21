@@ -14786,19 +14786,37 @@
         "name": "Path",
         "brand": "Cong Gear",
         "material": [
-            "Polyester",
             "Dyneema/HMPE"
         ],
+        "webbing_construction": "Flat",
         "width": 20,
+        "thickness": 3.0,
         "weight": 31.0,
         "breaking_strength": 40.0,
-        "notes": "Added 2026-09-10 from the ISA's own approval graphic (wp-content/uploads/2026/09/path2.jpg), which is the only source: ISA APPROVED, Highline Webbing, ISA:41:A+, and the maker's specs printed on it - 20 mm, 31 g/m, MBS/WLL 40 / 12 kN. This closes the \"Cong Gear Path\" entry that sat unmatched on the ISA-approved list, and \"The Path\" among the named-but-unsourced webbings; they are one product, not two. Only the MBS is stored: the 12 kN WLL is the ISA's working load limit, which we hold no column for and which is not a property of the weave. Fibers are recorded as Polyester + Dyneema/HMPE on the operator's information, not from a published spec sheet - the graphic names no material, and 40 kN at 31 g/m in 20 mm is light for either fiber alone. Either fiber grades A+ at 40 kN, so the derived classification agrees with the badge. webbing_construction, thickness, stretch, price and product URL are null: the graphic states none of them, and Cong Gear has no product page we hold. Colour is not stored either: `colors` is a model field no webbing loader maps, so a value there would be dead seed data - the webbing is white with one red and one blue edge thread. Country of origin is unknown too - the manufacturers.json entry carries a null country rather than a guess from the 道 (dao, \"path\") glyph on the graphic.",
+        "stretch": [
+            {
+                "kn": 5,
+                "percent": 2.2
+            },
+            {
+                "kn": 10,
+                "percent": 2.9
+            }
+        ],
+        "notes": "Added 2026-09-10 from the ISA's own approval graphic (wp-content/uploads/2026/09/path2.jpg), which was the only source until the maker's manual: ISA APPROVED, Highline Webbing, ISA:41:A+, and the maker's specs printed on it - 20 mm, 31 g/m, MBS/WLL 40 / 12 kN. This closes the \"Cong Gear Path\" entry that sat unmatched on the ISA-approved list, and \"The Path\" among the named-but-unsourced webbings; they are one product, not two. Only the MBS is stored: the 12 kN WLL is the ISA's working load limit, which we hold no column for and which is not a property of the weave. Fiber is 100% HMPE per Cong Gear's own Path manual (v1.1, 2026-06-10, attached), which replaced the earlier Polyester + Dyneema/HMPE recorded on the operator's information. At 40 kN it grades A+, so the derived classification agrees with the badge. Construction (Flat), thickness (3 mm) and stretch (2.2% at 5 kN, 2.9% at 10 kN) are from the manual; price and product URL are null, as Cong Gear has no product page (its website is 'under construction'). Colour is not stored either: `colors` is a model field no webbing loader maps, so a value there would be dead seed data - the webbing is white with one red and one blue edge thread. The maker is Shanghai Balance Sports Development Co., Ltd. (Shanghai, China), per the manual.",
         "active": true,
         "photos": [
             {
                 "id": "da30e5cb3572e600",
                 "small": "webbings/260/da30e5cb3572e600-480.webp",
                 "large": "webbings/260/da30e5cb3572e600-1600.webp"
+            }
+        ],
+        "manuals": [
+            {
+                "id": "56b0f5488888fe39",
+                "file": "webbings/260/56b0f5488888fe39-user-manual.pdf",
+                "title": "User manual"
             }
         ]
     },
