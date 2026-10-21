@@ -500,11 +500,15 @@ US$45.95, or leash only for $15.50 less. Made in USA.
 **31. Leash of Iktomi**
 ([2019](https://web.archive.org/web/20190511201818/http://slacklinetechnology.com/shop/highline-leash-of-iktomi)),
 from US$154.95, sold out, made in USA. "the next step in highline leash evolution".
-- **Options**: 8 ft (Tie-in), 4 ft, 4.5 ft or 5 ft.
+- **Options**: 8 ft (Tie-in) US$154.95; 4 ft, 4.5 ft or 5 ft US$209.95.
 - **Specs**: ring 39 kN, spliced rope 39 kN, knotted rope 19.5 kN, "Harness Ring Connection (x2):
   44 kN", total weight < 1 lb, colour "Hot".
-- It seems to be a spliced system with a ring at the harness end too. The construction is not
-  described further.
+- **Two systems** (the page's full description, read 2026-10-17). The "Tie In System" is the
+  leash ring and an 8 ft leash, tied to the harness with a knot. The "Ringed System" is the leash
+  ring, the leash (4, 4.5 or 5 ft) spliced at both ends, and two Petzl Open Rings as the harness
+  connection: no knot anywhere.
+- **The ring** is SlackTech's own, machined from 7075 aluminium, 39 kN, not sold on its own: leash
+  ring 37, linked from all four rows.
 
 #### Petram Slacklines (PL) — live page, product discontinued
 
@@ -545,7 +549,6 @@ stock: "Due to no Petram's leash rings in stock. Leashes are discontinued for no
   - Slackhouse Ring F Alu / Ring F Steel
   - SlackLife BC's 22 kN gold ring and 44 kN bomber ring
   - Balancing Earth's medium and large stainless rings
-  - SlackTech's 2 5/16" and 3" steel rings
   - Viper's Enigma ring (live on Viper's Shopify)
 
   BC's 2012 2-5/16" steel ring may be our "Medium Steel Ring" (leash ring 12, 59 mm ID); not
@@ -634,7 +637,10 @@ leash rope under four product names, one per ring choice.
   - Slackhouse Smycza (Ring F Alu / Steel);
   - SlackLife BC's 22 kN and 44 kN rings;
   - Balancing Earth's medium and large stainless rings;
-  - SlackTech's 2 5/16" steel rings, and BC's 2012 steel rings (history only, Q6).
+  - BC's 2012 steel rings (history only, Q6).
+
+  SlackTech's rings were added on 2026-10-17 (operator): leash rings 35 (2 5/16" steel), 36 (3"
+  steel) and 37 (the Iktomi ring).
 - Merging or deleting a leash ring has to re-point or refuse the leashes that name it. Nothing
   checks that today, because no gear type points at another.
 
@@ -732,7 +738,8 @@ Leash-specific fields:
 **Which figure goes in `breaking_strength`.** Where the maker states two, it holds the **lower**,
 which is the knotted end, the one that fails first:
 - Spider Spliced: 25 kN, not 54 kN on the spliced side;
-- SlackTech Iktomi: 19.5 kN, not 39 kN on the spliced side.
+- SlackTech Iktomi tie-in (38): 19.5 kN, not 39 kN on the spliced side. Its ringed system (39–41)
+  has no knot, so those rows hold 39 kN (corrected 2026-10-17 from the page's full description).
 
 The other figure goes in `notes`. So do figures for a component rather than the leash: the
 sleeve's strength (BC 13.3 kN, Geko 12 kN) and the core rope's alone (Bera 20 kN). The rope's

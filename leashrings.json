@@ -880,5 +880,22 @@
                 "large": "leashrings/36/5fd268a6df9466f8-1600.webp"
             }
         ]
+    },
+    {
+        "id": 37,
+        "name": "Iktomi Leash Ring",
+        "brand": "SlackTech",
+        "material": "Aluminum",
+        "product_url": "https://web.archive.org/web/20190511201818/http://slacklinetechnology.com/shop/highline-leash-of-iktomi",
+        "breaking_strength": 39.0,
+        "notes": "The leash ring of the Leash of Iktomi (leashes 38-41), not sold on its own. Machined from 7075 aluminium: 'an ultra light weight and low profile bomber ring'. 'Slackline Ring Strength: 39 kN (8,800 lbf)'. Diameters and weight not stated. The photo shows the whole Iktomi system: the ring is the silver one. Made in USA.",
+        "active": false,
+        "photos": [
+            {
+                "id": "cc7371f433923835",
+                "small": "leashrings/37/cc7371f433923835-480.webp",
+                "large": "leashrings/37/cc7371f433923835-1600.webp"
+            }
+        ]
     }
 ]

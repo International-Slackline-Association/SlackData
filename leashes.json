@@ -1377,10 +1377,17 @@
         "ring_end": "Spliced",
         "length": 244.0,
         "breaking_strength": 19.5,
+        "ring_options": [
+            {
+                "leashring_id": 37,
+                "count": 1
+            }
+        ],
         "product_url": "https://web.archive.org/web/20190511201818/http://slacklinetechnology.com/shop/highline-leash-of-iktomi",
+        "price": 154.95,
         "currency": "USD",
         "description": "The leash of Iktomi is the next step in highline leash evolution. Every component of the leash system was evaluated and streamlined all in an effort to bring you the best walking experience. We looked at the knots, rings, handling characteristics, strength of historic leashes and Iktomi was presented. The trickster, the teacher, the shape shifter... Feel how your experience changes when walking with Iktomi.",
-        "notes": "Sold out in 2019, 'from US$154.95' (price per length not shown). Lengths offered: 8 ft (Tie-in), 4 ft, 4.5 ft, 5 ft; what the tie-in option differs by is not described. Ring 39 kN, spliced rope 39 kN, knotted rope 19.5 kN (stored), 'Harness Ring Connection (x2): 44 kN', total < 1 lb, colour 'Hot'. Made in USA.",
+        "notes": "The 'Tie In System': the leash ring (leash ring 37) and an 8 ft leash spliced to it, tied in to the harness with a knot, so the knotted rope's 19.5 kN is stored. US$154.95 (2019). 'Slackline Ring Strength: 39 kN', 'Spliced Rope Strength: 39 kN', 'Knotted Rope Strength: 19.5 kN', 'Harness Ring Connection (x2): 44 kN', total weight < 1 lb, colour 'Hot'. Sold out in 2019. Made in USA.",
         "active": false,
         "product_group": "SlackTech Leash of Iktomi",
         "photos": [
@@ -1388,11 +1395,6 @@
                 "id": "cc7371f433923835",
                 "small": "leashes/38/cc7371f433923835-480.webp",
                 "large": "leashes/38/cc7371f433923835-1600.webp"
-            },
-            {
-                "id": "18b9b6fb9b12f6dd",
-                "small": "leashes/38/18b9b6fb9b12f6dd-480.webp",
-                "large": "leashes/38/18b9b6fb9b12f6dd-1600.webp"
             },
             {
                 "id": "676bd110d36594be",
@@ -1408,11 +1410,18 @@
         "construction": "Rope",
         "ring_end": "Spliced",
         "length": 122.0,
-        "breaking_strength": 19.5,
+        "breaking_strength": 39.0,
+        "ring_options": [
+            {
+                "leashring_id": 37,
+                "count": 1
+            }
+        ],
         "product_url": "https://web.archive.org/web/20190511201818/http://slacklinetechnology.com/shop/highline-leash-of-iktomi",
+        "price": 209.95,
         "currency": "USD",
         "description": "The leash of Iktomi is the next step in highline leash evolution. Every component of the leash system was evaluated and streamlined all in an effort to bring you the best walking experience. We looked at the knots, rings, handling characteristics, strength of historic leashes and Iktomi was presented. The trickster, the teacher, the shape shifter... Feel how your experience changes when walking with Iktomi.",
-        "notes": "Sold out in 2019, 'from US$154.95' (price per length not shown). Lengths offered: 8 ft (Tie-in), 4 ft, 4.5 ft, 5 ft; what the tie-in option differs by is not described. Ring 39 kN, spliced rope 39 kN, knotted rope 19.5 kN (stored), 'Harness Ring Connection (x2): 44 kN', total < 1 lb, colour 'Hot'. Made in USA.",
+        "notes": "The 'Ringed System': the leash ring (leash ring 37), the leash spliced at both ends, and two Petzl Open Rings as the harness connection, so no knot: 39 kN, the ring's and the spliced rope's strength, is stored. US$209.95 at every length (2019). 'Slackline Ring Strength: 39 kN', 'Spliced Rope Strength: 39 kN', 'Knotted Rope Strength: 19.5 kN', 'Harness Ring Connection (x2): 44 kN', total weight < 1 lb, colour 'Hot'. Sold out in 2019. Made in USA.",
         "active": false,
         "product_group": "SlackTech Leash of Iktomi"
     },
@@ -1423,11 +1432,18 @@
         "construction": "Rope",
         "ring_end": "Spliced",
         "length": 137.0,
-        "breaking_strength": 19.5,
+        "breaking_strength": 39.0,
+        "ring_options": [
+            {
+                "leashring_id": 37,
+                "count": 1
+            }
+        ],
         "product_url": "https://web.archive.org/web/20190511201818/http://slacklinetechnology.com/shop/highline-leash-of-iktomi",
+        "price": 209.95,
         "currency": "USD",
         "description": "The leash of Iktomi is the next step in highline leash evolution. Every component of the leash system was evaluated and streamlined all in an effort to bring you the best walking experience. We looked at the knots, rings, handling characteristics, strength of historic leashes and Iktomi was presented. The trickster, the teacher, the shape shifter... Feel how your experience changes when walking with Iktomi.",
-        "notes": "Sold out in 2019, 'from US$154.95' (price per length not shown). Lengths offered: 8 ft (Tie-in), 4 ft, 4.5 ft, 5 ft; what the tie-in option differs by is not described. Ring 39 kN, spliced rope 39 kN, knotted rope 19.5 kN (stored), 'Harness Ring Connection (x2): 44 kN', total < 1 lb, colour 'Hot'. Made in USA.",
+        "notes": "The 'Ringed System': the leash ring (leash ring 37), the leash spliced at both ends, and two Petzl Open Rings as the harness connection, so no knot: 39 kN, the ring's and the spliced rope's strength, is stored. US$209.95 at every length (2019). 'Slackline Ring Strength: 39 kN', 'Spliced Rope Strength: 39 kN', 'Knotted Rope Strength: 19.5 kN', 'Harness Ring Connection (x2): 44 kN', total weight < 1 lb, colour 'Hot'. Sold out in 2019. Made in USA.",
         "active": false,
         "product_group": "SlackTech Leash of Iktomi"
     },
@@ -1438,11 +1454,18 @@
         "construction": "Rope",
         "ring_end": "Spliced",
         "length": 152.0,
-        "breaking_strength": 19.5,
+        "breaking_strength": 39.0,
+        "ring_options": [
+            {
+                "leashring_id": 37,
+                "count": 1
+            }
+        ],
         "product_url": "https://web.archive.org/web/20190511201818/http://slacklinetechnology.com/shop/highline-leash-of-iktomi",
+        "price": 209.95,
         "currency": "USD",
         "description": "The leash of Iktomi is the next step in highline leash evolution. Every component of the leash system was evaluated and streamlined all in an effort to bring you the best walking experience. We looked at the knots, rings, handling characteristics, strength of historic leashes and Iktomi was presented. The trickster, the teacher, the shape shifter... Feel how your experience changes when walking with Iktomi.",
-        "notes": "Sold out in 2019, 'from US$154.95' (price per length not shown). Lengths offered: 8 ft (Tie-in), 4 ft, 4.5 ft, 5 ft; what the tie-in option differs by is not described. Ring 39 kN, spliced rope 39 kN, knotted rope 19.5 kN (stored), 'Harness Ring Connection (x2): 44 kN', total < 1 lb, colour 'Hot'. Made in USA.",
+        "notes": "The 'Ringed System': the leash ring (leash ring 37), the leash spliced at both ends, and two Petzl Open Rings as the harness connection, so no knot: 39 kN, the ring's and the spliced rope's strength, is stored. US$209.95 at every length (2019). 'Slackline Ring Strength: 39 kN', 'Spliced Rope Strength: 39 kN', 'Knotted Rope Strength: 19.5 kN', 'Harness Ring Connection (x2): 44 kN', total weight < 1 lb, colour 'Hot'. Sold out in 2019. Made in USA.",
         "active": false,
         "product_group": "SlackTech Leash of Iktomi"
     },

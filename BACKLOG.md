@@ -275,7 +275,8 @@ Gear types we want to hold but don't yet, and changes to the models, loaders and
     "Alpine Bounce Leash"; Slack Inov's live shop needs a real browser.
   - **Rings sold with leashes that we do not hold** are named in notes, not linked (out of scope
     for this round): PureLoop, Bera's 60/85 mm freestyle ring, Slackhouse Ring F Alu/Steel,
-    SlackLife BC's 22 kN and 44 kN rings, Balancing Earth's and SlackTech's steel rings.
+    SlackLife BC's 22 kN and 44 kN rings, Balancing Earth's steel rings. (SlackTech's were added
+    2026-10-17: leash rings 35–37.)
 
 
 - [ ] **Add bungees as a gear type.** The `Bungee` model already exists on branch

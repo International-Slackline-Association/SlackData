@@ -263,7 +263,7 @@ Every gear type carries an **`active: bool | None`** field on its `Base<X>` (so 
 | Webbing | `/webbing` | `webbings.json` | 245 |
 | Weblock | `/weblock` | `weblocks.json` | 127 |
 | Roller | `/roller` | `rollers.json` | 21 |
-| LeashRing | `/leashring` | `leashrings.json` | 34 |
+| LeashRing | `/leashring` | `leashrings.json` | 37 |
 | Grip | `/grip` | `grips.json` | 20 |
 | TreePro | `/treepro` | `treepros.json` | 25 |
 | StarterKit | `/starterkit` | `starterkits.json` | 64 |
