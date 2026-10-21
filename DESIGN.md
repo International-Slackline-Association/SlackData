@@ -1808,7 +1808,9 @@ in `index.html` and `index.css` unless noted.
   inside its own box, so overflow at the root is always a leak. `clip`, not `hidden`, so the sticky
   header and sidebar keep working. The leak that prompted it is the card image's blurred backdrop:
   WebKit lets a filtered child escape `overflow-hidden` when it sizes the page, so on iOS a
-  full-width card let the page pan sideways. Both image bands also carry `contain-paint`.
+  full-width card let the page pan sideways. The backdrop also sits in its own `contain-paint`
+  wrapper — never on the band itself, where the stacking context it creates would sink the
+  carousel controls beneath the card's full-cover link.
 - **Safe areas.** `viewport-fit=cover` (without it every `env(safe-area-inset-*)` is 0). The body
   pads left/right for the landscape notch; the fixed CompareBar and Sheet pad themselves.
 - **Heights.** The shell is `min-h-svh` (100vh puts a short page's footer under the URL bar); the

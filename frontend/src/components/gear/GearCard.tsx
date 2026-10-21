@@ -132,10 +132,7 @@ export default function GearCard({
         data-image-count={images.length}
         // overflow-hidden: the image fits the band by height and the blurred
         // backdrop is scaled past its edges — both must be clipped to the band.
-        // contain-paint as well: WebKit lets a filtered child escape
-        // overflow-hidden when it sizes the page, so on iOS the blur's bleed
-        // past a full-width card made the whole page pan sideways.
-        className="group relative flex h-40 items-center justify-center overflow-hidden contain-paint bg-gray-50"
+        className="group relative flex h-40 items-center justify-center overflow-hidden bg-gray-50"
       >
         {/* Top-left: lifecycle status. Historic = no longer sold; nothing renders
             for active/unknown gear. Mirrors the manufacturer card's Inactive pill. */}
