@@ -1792,7 +1792,33 @@ scrollbar is hidden, and the header stays ~100px tall. Do not revert this to wra
 ### Inputs
 
 Every focusable `<input>` is **≥16px (`text-base`) below `sm`**, stepping down to `text-sm` above it.
-Under 16px, iOS Safari zooms the page on focus and never zooms back out.
+Under 16px, iOS Safari zooms the page on focus and never zooms back out. `index.css` backs this up
+with one unlayered rule that sets every `input` / `textarea` / `select` to 16px on a coarse pointer,
+so a field that forgets (the brand pill search, the admin forms) can't zoom the page either.
+
+Search fields set `autoCorrect="off"`, `autoCapitalize="none"` and `spellCheck={false}`: what is
+typed there is brand and product names, which autocorrect "fixes".
+
+### Platform layer
+
+The handful of declarations that make the site feel installed rather than embedded on a phone. All
+in `index.html` and `index.css` unless noted.
+
+- **No horizontal page scroll, ever.** `html, body { overflow-x: clip }`: every wide thing scrolls
+  inside its own box, so overflow at the root is always a leak. `clip`, not `hidden`, so the sticky
+  header and sidebar keep working. The leak that prompted it is the card image's blurred backdrop:
+  WebKit lets a filtered child escape `overflow-hidden` when it sizes the page, so on iOS a
+  full-width card let the page pan sideways. Both image bands also carry `contain-paint`.
+- **Safe areas.** `viewport-fit=cover` (without it every `env(safe-area-inset-*)` is 0). The body
+  pads left/right for the landscape notch; the fixed CompareBar and Sheet pad themselves.
+- **Heights.** The shell is `min-h-svh` (100vh puts a short page's footer under the URL bar); the
+  table's self-scrolling region uses `dvh`.
+- **Taps.** No tap highlight; buttons get `scale(0.97)` on `:active` instead. Controls are
+  `touch-action: manipulation` (no double-tap wait) and buttons and nav tabs are `user-select: none`.
+  Both rules sit in `@layer base` so a component's own value (the slider's `pan-y`) still wins.
+- **Hover** needs nothing: Tailwind v4's `hover:` only applies under `(hover: hover)`.
+- **Status bar.** `theme-color` is the header's white; `color-scheme: light`, since the site has no
+  dark theme.
 
 ### Tables
 
