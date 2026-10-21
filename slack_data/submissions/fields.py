@@ -18,6 +18,7 @@ from pydantic import BaseModel
 
 from slack_data.models.connectors import ConnectorUpdate
 from slack_data.models.grips import GripUpdate
+from slack_data.models.leashes import LeashUpdate
 from slack_data.models.leashrings import LeashRingUpdate
 from slack_data.models.rollers import RollerUpdate
 from slack_data.models.starterkits import StarterKitUpdate
@@ -108,6 +109,7 @@ CORRECTABLE_FIELDS: dict[str, frozenset[str]] = {
     "starterkits": _correctable(StarterKitUpdate),
     "tricklinekits": _correctable(TricklineKitUpdate),
     "connectors": _correctable(ConnectorUpdate),
+    "leashes": _correctable(LeashUpdate),
 }
 
 GEAR_TYPES: frozenset[str] = frozenset(CORRECTABLE_FIELDS)

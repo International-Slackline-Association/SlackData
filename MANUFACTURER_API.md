@@ -374,6 +374,7 @@ rejection; we send no email.
 | `starterkits` | Starter kits |
 | `tricklinekits` | Trickline kits |
 | `connectors` | Shackles, carabiners, quicklinks, soft shackles |
+| `leashes` | Highline leashes |
 
 **The authoritative list of field names for a type is what
 `GET /manufacturer/gear?include=spec` returns for your own products.** The lists below are the same
@@ -421,6 +422,10 @@ their list.
   `material`, `mbs_crossload`, `mbs_gate_open`, `mbs_straight_pull`, `notes`, `opening`,
   `pin_diameter`, `price`, `product_url`, `release_date`, `rope_diameter`, `standards`,
   `standards_source`, `version`, `weight`
+- **`leashes`** — `active`, `brand_name`, `breaking_strength`, `construction`, `core_diameter`,
+  `core_rope`, `core_type`, `currency`, `description`, `diameter`, `length`, `notes`, `price`,
+  `product_url`, `release_date`, `ring_end`, `ring_options`, `sleeve_material`, `sleeve_width`,
+  `twist_marker`, `version`, `weight`
 
 ### Units and conventions, so a correct number isn't recorded wrongly
 
@@ -439,6 +444,9 @@ tells you the unit faster than this table does.
 | `mbs_straight_pull`, `mbs_crossload`, `mbs_gate_open` on `connectors` | kilonewtons — breaking strengths only; send a WLL in `notes`, never in these |
 | `opening`, `pin_diameter`, `rope_diameter` on `connectors` | millimetres. `opening` is a shackle's jaw width, a carabiner's or quicklink's gate opening, a soft shackle's inner loop size |
 | `connector_style`, `closure`, `material` on `connectors` | one of a fixed list each, e.g. `"Shackle"`, `"Push pin"`, `"Aluminum"`; `standards` is a list, e.g. `["EN362:2005"]` |
+| `length` on `leashes` | **centimetres**; `diameter`, `core_diameter`, `sleeve_width` on `leashes` are millimetres |
+| `construction`, `ring_end`, `core_type`, `sleeve_material` on `leashes` | one of a fixed list each, e.g. `"Threaded"`, `"Spliced"`, `"Dynamic"`, `"Nylon"` |
+| `ring_options` on `leashes` | a JSON string of the leash rings the leash is sold with, `[{"leashring_id": 35, "count": 2}]`: ids of leash rings in our catalogue (`GET /leashring`), each with how many come with it |
 | `width` on `rollers` | **a string, not a number** — a range, e.g. `"19-25 mm"` |
 | `width`, `length` on `treepros` | **centimetres**; `thickness` on `treepros` is millimetres |
 | `webbing_length` on kits | metres; `webbing_width` on kits is millimetres |

@@ -102,6 +102,20 @@ class BaseLeash(SQLModel):
     # ("Spider Highline Leash"), because a group spans brands.
     product_group: str | None = Field(default=None, index=True)
 
+    @field_validator("ring_options", mode="before")
+    @classmethod
+    def _ring_options_from_text(cls, value):
+        """The manufacturer API carries a list of objects as JSON text, as it
+        does a webbing's `stretch` (MANUFACTURER_API.md § 6)."""
+        if isinstance(value, str):
+            import json
+
+            try:
+                return json.loads(value) if value.strip() else None
+            except json.JSONDecodeError as error:
+                raise ValueError('ring_options as text is JSON: [{"leashring_id": 35, "count": 2}]') from error
+        return value
+
     @field_validator("ring_options")
     @classmethod
     def _ring_options_shape(cls, value: list[dict] | None) -> list[dict] | None:
