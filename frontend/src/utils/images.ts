@@ -35,11 +35,17 @@ export function imageUrls(gearType: string, item: MediaItem): Photo[] {
 // every member's photos, shop by shop in vendor-table order. On the listing
 // that is the whole group whatever the filters (`_groupRows`, set by
 // withGroupRows), even when only one shop matched and the card is a plain row.
+// The shops that matched lead (`_members`, or the row itself), so a card
+// filtered to one brand opens on that brand's photo, not the first shop's.
 export function itemImageUrls(gearType: string, item: Record<string, unknown>): Photo[] {
-  const members = (item._groupRows ?? item._members) as Record<string, unknown>[] | undefined
+  type Row = Record<string, unknown>
+  const members = (item._groupRows ?? item._members) as Row[] | undefined
   if (Array.isArray(members)) {
+    const matching = (item._members as Row[] | undefined) ?? [item]
+    const ids = new Set(matching.map(m => String(m.id)))
+    const ordered = [...matching, ...members.filter(m => !ids.has(String(m.id)))]
     const seen = new Set<string>()
-    return members.flatMap(m => imageUrls(gearType, m)).filter(p => {
+    return ordered.flatMap(m => imageUrls(gearType, m)).filter(p => {
       if (seen.has(p.large)) return false
       seen.add(p.large)
       return true
