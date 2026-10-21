@@ -803,5 +803,27 @@
                 "large": "treepros/32/9c1d27651d055025-1600.webp"
             }
         ]
+    },
+    {
+        "id": 33,
+        "name": "Tree Padding",
+        "brand": "SlackTech",
+        "product_url": "https://web.archive.org/web/20140604032539/http://slacklinetechnology.com/shop/basic-slackline/basic-hardware/slacktech-tree-padding.html",
+        "width": 25.4,
+        "length": 183,
+        "has_sling_attachment": true,
+        "price": 19.95,
+        "price_unit": "pair",
+        "currency": "USD",
+        "description": "SlackTech Tree Padding is a necessary component to your park slackline rig. Tree padding protects trees from abrasion caused by slackline anchors. These custom cut pieces of tree padding come with Velcro straps to make a solid connection around the tree. Additional Velcro straps are used to \"Velcro\" your slings and anchoring material to the tree padding. These features hold both the padding and sling in place while you connect all the needed components of your system. They are 10\" in height and 72\" long giving you plenty of material to work with. Always protect trees when slacklining in public spaces. Municipalities do not like removing trees killed from slackline abrasion. Sold in pairs.",
+        "notes": "Listed as 'SlackTech Tree Padding' (2014) and 'SlackTech Tree Protection' (2015), US$19.95 a pair. 10\" x 72\". Velcro straps close it around the tree, and more Velcro straps hold the slings to it (stored as a sling attachment). Made in USA.",
+        "active": false,
+        "photos": [
+            {
+                "id": "624a630b8f5dff51",
+                "small": "treepros/33/624a630b8f5dff51-480.webp",
+                "large": "treepros/33/624a630b8f5dff51-1600.webp"
+            }
+        ]
     }
 ]

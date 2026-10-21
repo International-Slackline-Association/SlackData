@@ -265,11 +265,11 @@ Every gear type carries an **`active: bool | None`** field on its `Base<X>` (so 
 | Roller | `/roller` | `rollers.json` | 21 |
 | LeashRing | `/leashring` | `leashrings.json` | 37 |
 | Grip | `/grip` | `grips.json` | 20 |
-| TreePro | `/treepro` | `treepros.json` | 25 |
+| TreePro | `/treepro` | `treepros.json` | 33 |
 | StarterKit | `/starterkit` | `starterkits.json` | 64 |
 | TricklineKit | `/tricklinekit` | `tricklinekits.json` | 10 |
-| Connector | `/connector` | `connectors.json` | 120 |
-| Leash | `/leash` | `leashes.json` | 42 |
+| Connector | `/connector` | `connectors.json` | 141 |
+| Leash | `/leash` | `leashes.json` | 43 |
 | ISAGearWarning | `/isawarning` | `isa_gear_warnings.json` | 88 |
 | ISAGearCertification | `/isacertification` | `isa_certified.json` | 22 |
 

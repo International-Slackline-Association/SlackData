@@ -261,7 +261,8 @@ Gear types we want to hold but don't yet, and changes to the models, loaders and
 
 - [ ] **Leashes: what the first round left open.**
   - **Into the live store.** The seed and `media/` are the dev snapshot; the site reads the store,
-    whose importer refuses while it holds live edits. The 42 leashes need a one-off import that only
+    whose importer refuses while it holds live edits. The 43 leashes (and the SlackTech rows of 2026-10-17: leash rings 35–37,
+    connectors 127–142, tree protector 33) need a one-off import that only
     adds the new collection (logged as `import`), then `python -m slack_data.media.migrate` for the
     photos — or creating them by hand on the site.
   - **The manufacturer API, the seller pass and `CORRECTABLE_FIELDS`** do not know leashes yet
