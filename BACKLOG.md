@@ -260,14 +260,6 @@ Gear we don't hold yet in a gear type we already have, and corrections to the ro
 Gear types we want to hold but don't yet, and changes to the models, loaders and API.
 
 - [ ] **Leashes: what the first round left open.**
-  - **Into the live store.** The seed and `media/` are the dev snapshot; the site reads the store,
-    whose importer refuses while it holds live edits. The 43 leashes (and the SlackTech rows of 2026-10-17: leash rings 35–37,
-    connectors 127–142, tree protector 33) need a one-off import that only
-    adds the new collection (logged as `import`), then `python -m slack_data.media.migrate` for the
-    photos — or creating them by hand on the site.
-  - **The manufacturer API, the seller pass and `CORRECTABLE_FIELDS`** do not know leashes yet
-    (they move together: `tests/test_gear_sellers.py` holds the first two equal), so the leashes'
-    `gear_sellers` names are not checked against `manufacturers.json` at seed time.
   - **Manuals** not attached: Slacktivity's leash manual (EN/DE PDFs) and raed's leash manual (held
     on the HALO ring today).
   - **No photo anywhere** for Souz's Leash and Leash PP and Balancing Earth's Highline Leash 9.9mm;

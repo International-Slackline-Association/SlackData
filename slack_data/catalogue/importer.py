@@ -18,7 +18,9 @@ profile) or `CATALOG_STORE_PATH` (a local SQLite file) — `store.py`.
 the importer is re-run before each deploy and `--check` must come back clean:
 that is "compared on every deploy" (§ 13). **After the switch-over** the store
 is the truth and the seeds stop being edited (D4); the importer is then only
-how a fresh local store is filled from a data snapshot (D34).
+how a fresh local store is filled from a data snapshot (D34). What a pull
+request still adds to the seeds goes in with `seed_import.py`, which never
+overwrites a field changed on the site.
 
 An entry that has left the seeds is **retired**, never deleted (documents.py).
 Nothing is written to the change log: an import is not an edit anyone made.
@@ -127,8 +129,9 @@ def main(argv: list[str] | None = None) -> int:
         print(
             f"✗ refused: the store holds {edits} edit(s) made on the site, which these seeds do not.\n"
             "  Importing would undo them with no record in the change log. The store is the\n"
-            "  truth now; take the seeds from the data repo's export instead. If you really\n"
-            "  mean to discard the edits, re-run with --overwrite-live-edits."
+            "  truth now; take the seeds from the data repo's export instead. To bring in what\n"
+            "  a pull request added to the seeds, use python -m slack_data.catalogue.seed_import.\n"
+            "  If you really mean to discard the edits, re-run with --overwrite-live-edits."
         )
         return 1
 
