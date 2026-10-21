@@ -47,6 +47,10 @@ export default function MobileFilterBar({
       <input
         data-cy="search-input"
         type="search"
+        // Brand and product names, not prose: no autocorrect "fixing" them.
+        autoCorrect="off"
+        autoCapitalize="none"
+        spellCheck={false}
         value={query}
         onChange={e => onQueryChange(e.target.value)}
         placeholder={placeholder}
