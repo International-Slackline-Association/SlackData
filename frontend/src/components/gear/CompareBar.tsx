@@ -53,7 +53,7 @@ export default function CompareBar({
     <div
       ref={barRef}
       data-cy="compare-bar"
-      className="fixed inset-x-0 bottom-0 z-30 border-t border-gray-200 bg-white pb-[env(safe-area-inset-bottom)] shadow-[0_-2px_10px_rgba(0,0,0,0.06)]"
+      className="fixed inset-x-0 bottom-0 z-30 border-t border-gray-200 bg-white pb-[env(safe-area-inset-bottom)] pl-[env(safe-area-inset-left)] pr-[env(safe-area-inset-right)] shadow-[0_-2px_10px_rgba(0,0,0,0.06)]"
     >
       {/* One instance of every control, re-ordered by breakpoint rather than
           duplicated — a second hidden copy would put two

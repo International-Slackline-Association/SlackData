@@ -443,7 +443,7 @@ export default function GearTable({
     // the nav exactly.
     <div
       data-cy="gear-table-scroll"
-      className="isolate max-h-[calc(100vh-var(--header-h,96px)-var(--compare-bar-h,0px)-2rem)] overflow-auto rounded-xl border border-gray-200 bg-white shadow-sm"
+      className="isolate max-h-[calc(100dvh-var(--header-h,96px)-var(--compare-bar-h,0px)-2rem)] overflow-auto rounded-xl border border-gray-200 bg-white shadow-sm"
     >
       <table data-cy="gear-table" className="w-full border-separate border-spacing-0 text-sm">
         <thead>

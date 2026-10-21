@@ -56,7 +56,7 @@ function IsaCredit({ creditRef, below }: { creditRef: React.Ref<HTMLAnchorElemen
 }
 
 const tabClass = (active: boolean, muted = false) =>
-  `flex min-h-11 shrink-0 snap-start items-center whitespace-nowrap px-3 text-sm border-b-2 -mb-px transition-colors ${
+  `flex min-h-11 shrink-0 snap-start items-center whitespace-nowrap select-none px-3 text-sm border-b-2 -mb-px transition-colors ${
     active
       ? 'text-teal-primary border-teal-primary font-semibold'
       : muted

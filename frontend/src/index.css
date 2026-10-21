@@ -14,6 +14,9 @@ html {
   /* Stop iOS Safari inflating text when the device is rotated to landscape.
      Font sizes are already set deliberately per breakpoint. */
   -webkit-text-size-adjust: 100%;
+  /* The grey flash iOS and Android paint over anything tapped. Buttons give
+     their own press feedback instead (see @layer base below). */
+  -webkit-tap-highlight-color: transparent;
 }
 
 html,
@@ -32,6 +35,53 @@ body {
   background-color: #F8F7F4;
   font-family: system-ui, 'Segoe UI', Roboto, sans-serif;
   -webkit-font-smoothing: antialiased;
+  /* Landscape iPhone: keep content out from under the notch. Zero everywhere
+     else. Fixed elements (CompareBar, Sheet) pad themselves. */
+  padding-left: env(safe-area-inset-left, 0px);
+  padding-right: env(safe-area-inset-right, 0px);
+}
+
+/* iOS zooms the page when focus lands in a field under 16px, and never zooms
+   back out — the user is left panning a cropped page sideways. Unlayered on
+   purpose, so it beats the `text-sm` / `text-xs` utilities on every field. Touch
+   only: a mouse never triggers the zoom, so desktop keeps the smaller type. */
+@media (pointer: coarse) {
+  input,
+  textarea,
+  select {
+    font-size: 16px;
+  }
+}
+
+@layer base {
+  /* No double-tap zoom on controls, so the browser fires the tap at once
+     instead of waiting to see if a second one follows. In `base` so a
+     component's own touch-action (RangeSlider's pan-y) still wins. */
+  a,
+  button,
+  label,
+  select,
+  summary,
+  [role='button'] {
+    touch-action: manipulation;
+  }
+
+  /* A long press on a control shouldn't select its label or pop the callout.
+     Controls only — text that is content stays selectable. */
+  button,
+  [role='button'] {
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+  }
+
+  /* Press feedback the moment a finger lands, replacing the tap highlight.
+     `transform`, not `scale`: Tailwind v4 drives its scale/translate utilities
+     through their own properties, so this composes with them. */
+  button:not(:disabled):active,
+  [role='button']:active {
+    transform: scale(0.97);
+  }
 }
 
 @utility scrollbar-none {
