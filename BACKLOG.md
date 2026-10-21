@@ -497,6 +497,14 @@ Gear types we want to hold but don't yet, and changes to the models, loaders and
 
 Carried over from LAUNCH_RUNBOOK.md and PHASE4_SHIP_PLAN.md when both were removed (2026-10-04).
 
+- [ ] **Rebalance the Cypress shards — CI went from under 8 min to over 15.** On PR #104 the
+  `search` shard alone took 14 min (`search_sort.cy.ts` 5 min, `isa_certification.cy.ts` 7 min,
+  much of it 5 s retry timeouts per gear type), while the whole suite used to finish in < 8 min.
+  `frontend/cypress/shards.json` packs by durations measured before leashes and connectors were
+  added, and the per-gear-type specs grow with every new type. Re-measure and repack (or let a
+  script refresh the durations from CI timings), add a shard if needed, and look at trimming the
+  per-type loops in the slowest specs.
+
 - [ ] **Serverless Framework v3 → v4, and who runs deploys.** Pinned to v3 so launch did not wait
   on deciding who owns a Serverless account; v3 is EOL and gets no security updates. The same
   answer decides both: whether we deploy into the ISA's account or they deploy from this config,
