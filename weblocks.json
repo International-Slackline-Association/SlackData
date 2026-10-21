@@ -7493,5 +7493,67 @@
                 "large": "weblocks/144/cf4c308ff5ac0890-1600.webp"
             }
         ]
+    },
+    {
+        "id": 145,
+        "name": "Zenlock",
+        "brand": "Balancing Earth Slacklines",
+        "style": "Tensionable Weblock",
+        "material": [
+            "Steel",
+            "Aluminum",
+            "Stainless Steel"
+        ],
+        "width_min": 25,
+        "width_max": 25,
+        "product_url": "https://web.archive.org/web/20191209021129/https://www.balancingearthslacklines.com/hardware-anchors-weblock-zenlock-p/zwa.htm",
+        "weight": 382.0,
+        "breaking_strength": 50.0,
+        "front_pin": "Push Pin",
+        "attachment_point": "Hole",
+        "colors": "Blue, Green",
+        "price": 59.99,
+        "currency": "USD",
+        "description": "The Zenlock 1 inch Webbing Anchor from Balancing Earth Slacklines is the first in our line of manufactured Slackline hardware.\n\nThe Zenlock is specifically designed for strength and efficiency in pre-tensioning your slackline. This 1 inch slackline webbing anchor is bomber, affordable and ready for your next longline session.\n\nThe 3.5 mm heavy duty steel plates are powder coated to protect against the elements. The center diverter is machined aircraft aluminum to save on weight and ensure proper efficiency. The large attachment hole allows for multiple connector options and ease of rigging.\n\nAvailable in blue or green",
+        "notes": "Manufacturer specs (Balancing Earth's own pages, Wayback 2018-02 to 2019-12): MBS 11,240 lbf (50 kN), WLL 2,248 lbf (10 kN), 382 g, high-strength carbon steel side plates 3.4 mm (the blurb says 3.5 mm), powder coated; 6061-T6 aluminium diverter, 25 mm O.D.; spacing at the rear connector 6.6 mm; 1 in (25.4 mm) webbing; made in the USA. Safety pin listed separately: 17-4 stainless, anodised aluminium handle, 12.7 mm O.D., 38 mm grip, 66 g, MBS 163 kN, pull strength 5 kN - whether the 382 g includes it is not stated. The photo shows it as the front pin: a push-button quick-release pin with a blue 'Balancing Earth Slacklines' handle. Not the Slack Inov ZENLOCK (weblock 112), an unrelated 2025 design. The product images (vspfiles/photos/ZWA-*, ZSR-*) and 'Zenlock Manual.pdf' were never archived, and SlackDB never listed it; the photo (green, rigged) was supplied by the operator. Release date unknown; the first capture is February 2018. Product code ZWA. Price $85.00 from the first capture (2018-02-24) to 2019-01, $69.99 in 2019-10, $59.99 at the last capture (2019-12-09). Until 2019 the blurb read 'ready for your next longline or highline session'; by 2019-08 'or highline' was dropped. Sibling of the Zenlock SR (weblock 146), the soft-release model with the same specs.",
+        "active": false,
+        "photos": [
+            {
+                "id": "08c46d3a6a277b74",
+                "small": "weblocks/145/08c46d3a6a277b74-480.webp",
+                "large": "weblocks/145/08c46d3a6a277b74-1600.webp"
+            }
+        ]
+    },
+    {
+        "id": 146,
+        "name": "Zenlock SR",
+        "brand": "Balancing Earth Slacklines",
+        "style": "Tensionable Weblock",
+        "material": [
+            "Steel",
+            "Aluminum",
+            "Stainless Steel"
+        ],
+        "width_min": 25,
+        "width_max": 25,
+        "product_url": "https://web.archive.org/web/20191209032855/https://www.balancingearthslacklines.com/hardware-anchors-weblock-zenlock-Sr-Soft-release-p/zsr.htm",
+        "weight": 382.0,
+        "breaking_strength": 50.0,
+        "front_pin": "Push Pin",
+        "attachment_point": "Pin",
+        "colors": "Blue, Green",
+        "price": 59.99,
+        "currency": "USD",
+        "description": "The Zenlock SR 1 inch Webbing Anchor from Balancing Earth Slacklines is the Soft Release Model of our Zenlock Webbing Anchor Series.\n\nThe Zenlock SR is specifically designed for use with a soft release de-tensioning system.\n\nBuilt with the same strength and efficiency as the Zenlock. This 1 inch slackline webbing anchor is bomber, affordable and ready for your next longline session.\n\nThe 3.5 mm heavy duty steel plates are powder coated to protect against the elements. The center diverter is machined aircraft aluminum to save on weight and ensure proper efficiency. With it's rear Safety Pin it allows for quick installation of your Soft release.\n\nAvailable in blue or green",
+        "notes": "Manufacturer specs (Balancing Earth's own pages, Wayback 2018-02 to 2019-12): MBS 11,240 lbf (50 kN), WLL 2,248 lbf (10 kN), 382 g, high-strength carbon steel side plates 3.4 mm (the blurb says 3.5 mm), powder coated; 6061-T6 aluminium diverter, 25 mm O.D.; spacing at the rear connector 6.6 mm; 1 in (25.4 mm) webbing; made in the USA. Safety pin listed separately: 17-4 stainless, anodised aluminium handle, 12.7 mm O.D., 38 mm grip, 66 g, MBS 163 kN, pull strength 5 kN - whether the 382 g includes it is not stated. The photo shows two of them, front and rear: push-button quick-release pins with blue 'Balancing Earth Slacklines' handles. Not the Slack Inov ZENLOCK (weblock 112), an unrelated 2025 design. The product images (vspfiles/photos/ZWA-*, ZSR-*) and 'Zenlock Manual.pdf' were never archived, and SlackDB never listed it; the photo (green, held in hand) was supplied by the operator. Release date unknown; the first capture is February 2018. Product code ZSR. The pages publish one spec sheet for both models; the SR's rear safety pin takes a soft release directly (attachment_point Pin), offered as a +$26.95 add-on from 2018-07. Price $85.00 from the first capture (2018-02-27) to 2019-01, $69.99 in 2019-08, $59.99 at the last capture (2019-12-09), bare weblock. Until 2019 the blurb read 'ready for your next longline or highline session'; by 2019-08 'or highline' was dropped. Sibling of the Zenlock (weblock 145).",
+        "active": false,
+        "photos": [
+            {
+                "id": "cbe26ffac288f12c",
+                "small": "weblocks/146/cbe26ffac288f12c-480.webp",
+                "large": "weblocks/146/cbe26ffac288f12c-1600.webp"
+            }
+        ]
     }
 ]
