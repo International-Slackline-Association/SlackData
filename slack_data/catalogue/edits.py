@@ -252,6 +252,44 @@ def canonical(collection: str, entry: dict, brands: set[str]) -> dict:
     return result
 
 
+# A leash's `ring_options` names leash rings by id: the one link from one gear
+# type to another (LEASHES_REVIEW.md § Q2). The catalogue build refuses a leash
+# whose ring is not listed (`load_gear.check_ring_options`), so an edit naming
+# one must be refused here, before it is stored: a build that fails keeps the
+# site on its previous catalogue, and every later edit with it.
+RINGS_FIELD = "ring_options"
+RING_COLLECTION = "leashrings"
+
+
+def _listed_rings(documents: Iterable[Document]) -> dict[int, Document]:
+    return {
+        int(d.key): d
+        for d in documents
+        if d.collection == RING_COLLECTION and d.key.isdigit() and not d.retired and d.data.get(MERGED_KEY) is None
+    }
+
+
+def _check_rings(documents: list[Document], collection: str, entry: dict) -> None:
+    unknown = sorted(
+        {o["leashring_id"] for o in entry.get(RINGS_FIELD) or []} - set(_listed_rings(documents))
+    )
+    if unknown:
+        raise Invalid(
+            f"no listed leash ring {', '.join(map(str, unknown))} — a leash is sold with rings the catalogue holds",
+            [{"field": RINGS_FIELD, "message": f"no leash ring {i}"} for i in unknown],
+        )
+
+
+def _ring_users(documents: Iterable[Document], ring_id: int) -> list[int]:
+    """The listed leashes sold with leash ring `ring_id`."""
+    return sorted(
+        int(d.key)
+        for d in documents
+        if d.collection == "leashes" and not d.retired and d.data.get(MERGED_KEY) is None
+        and any(o.get("leashring_id") == ring_id for o in d.data.get(RINGS_FIELD) or [])
+    )
+
+
 def _check_fields(collection: str, names: Iterable[str], media: bool = False) -> None:
     """`media`: photos and manuals may be set too — by the media route, which
     has checked every file, and by a revert, which restores a list it had."""
@@ -397,6 +435,7 @@ def plan_edit_item(
         else:
             wanted[name] = value
     entry = canonical(collection, wanted, _brand_names(documents))
+    _check_rings(documents, collection, entry)
     diff = _diff(document.data, entry)
     if not diff:
         return Planned([], [], [], Outcome(collection, document.key, document.data, document.rev))
@@ -471,6 +510,7 @@ def plan_create_item(
     brand = check_gear(actor, documents, fields.get("brand"), set(fields) - {"brand"})
     wanted = {"id": new_id, **{k: v for k, v in fields.items() if v is not None and v != []}}
     entry = canonical(collection, wanted, _brand_names(documents))
+    _check_rings(documents, collection, entry)
     seq = max((d.seq for d in documents if d.collection == collection), default=-1) + 1 + seq_offset
     document = Document(collection=collection, key=str(new_id), seq=seq, data=entry, rev=1)
     diff = _diff({}, entry)
@@ -528,6 +568,12 @@ def merge_item(
         raise Refused(f"{api_type(collection)} {item_id} is already merged")
     if survivor.data.get(MERGED_KEY) is not None:
         raise Refused(f"{api_type(collection)} {into} is not listed — merge into a listed item")
+    users = _ring_users(documents, item_id) if collection == RING_COLLECTION else []
+    if users:
+        raise Refused(
+            f"leashes {', '.join(map(str, users))} are sold with leash ring {item_id} — "
+            f"change their ring options to ring {into} first"
+        )
 
     data = {**source.data, MERGED_KEY: into}
     puts = [Put(source.model_copy(update={"data": data, "rev": source.rev + 1}), rev)]
@@ -630,7 +676,15 @@ def _brand_values(changes: dict[str, Any]) -> dict[str, Any]:
 
 
 def edit_brand(
-    store, log, actor: Person, catalog_id: int, rev: int, changes: dict[str, Any], why: str | None = None, cap=None
+    store,
+    log,
+    actor: Person,
+    catalog_id: int,
+    rev: int,
+    changes: dict[str, Any],
+    why: str | None = None,
+    cap=None,
+    channel: Channel = Channel.WEB,
 ) -> Outcome:
     if not changes:
         raise Invalid("nothing to change")
@@ -648,7 +702,7 @@ def edit_brand(
     if not diff:
         return Outcome("manufacturers", document.key, document.data, document.rev)
     record = _record(
-        actor, TargetType.BRAND, str(catalog_id), Action.BRAND_EDIT, brand, channel=Channel.WEB, changes=diff, why=why
+        actor, TargetType.BRAND, str(catalog_id), Action.BRAND_EDIT, brand, channel=channel, changes=diff, why=why
     )
     put = Put(document.model_copy(update={"data": data, "rev": document.rev + 1}), rev)
     commit_catalogue_change(store, log, [put], [], [record], cap)
@@ -734,9 +788,17 @@ def _kind(name: str, annotation: Any) -> tuple[str, list | None]:
     return ("longtext" if name in LONG_TEXT_FIELDS else "text"), None
 
 
-def field_specs(collection: str, brands: Iterable[str]) -> list[dict]:
+def ring_label(ring_id: int, document: Document) -> str:
+    """"35 — SlackTech 2 5/16\" Steel Leash Ring": a ring option the form offers.
+    The id comes first: it is what the form reads back."""
+    return f"{ring_id} — {document.data.get('brand')} {document.data.get('name')}"
+
+
+def field_specs(collection: str, brands: Iterable[str], documents: Iterable[Document] = ()) -> list[dict]:
     """[{name, kind, options, required}] for every editable field, model order;
-    `brand` first after `name`, choosing among the brands that exist."""
+    `brand` first after `name`, choosing among the brands that exist.
+    `ring_options` is kind `rings`, offering every listed leash ring of
+    `documents` as "<id> — <brand> <name>"."""
     from slack_data.load_data.load_gear import JSON_TEXT_FIELDS, stored_fields
 
     if collection not in GEAR:
@@ -751,6 +813,9 @@ def field_specs(collection: str, brands: Iterable[str]) -> list[dict]:
             kind, options = "curve", None
         elif name == "gear_sellers":
             kind, options = "choices", brand_options
+        elif name == RINGS_FIELD:
+            rings = _listed_rings(documents)
+            kind, options = "rings", [ring_label(i, rings[i]) for i in sorted(rings)]
         else:
             kind, options = _kind(name, info.annotation)
         specs.append({

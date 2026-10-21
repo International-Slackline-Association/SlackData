@@ -222,7 +222,7 @@ def _run(store: CatalogueRepository, collection: str, key: str | None, operation
 
 class FieldSpec(BaseModel):
     name: str
-    # text · longtext · number · integer · boolean · choice · choices · list · curve
+    # text · longtext · number · integer · boolean · choice · choices · list · curve · rings
     kind: str
     options: list[str] | None
     required: bool
@@ -419,9 +419,9 @@ def item_fields(slug: str, editor: CurrentEditor, store: StoreDep) -> list[Field
     """What the edit form offers for a gear type: each field's kind and allowed
     values, from the model — the form is built from this, never a copy. Every
     brand, for everyone: a new product may be any brand's (D59)."""
-    brands = edits._brand_names(store.load())
+    documents = store.load()
     try:
-        specs = edits.field_specs(slug, brands)
+        specs = edits.field_specs(slug, edits._brand_names(documents), documents)
     except edits.NotFound as error:
         raise HTTPException(404, error.message) from error
     return [FieldSpec(**spec) for spec in specs]

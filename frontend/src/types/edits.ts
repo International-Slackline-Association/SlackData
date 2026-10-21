@@ -12,6 +12,8 @@ export type FieldKind =
   | 'choices'
   | 'list'
   | 'curve'
+  /** A leash's ring options: leash ring ids, each with how many (`options` lists the rings). */
+  | 'rings'
 
 /** One editable field, as the model describes it — the form is built from these. */
 export interface FieldSpec {

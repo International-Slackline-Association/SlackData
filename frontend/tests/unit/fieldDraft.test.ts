@@ -30,6 +30,7 @@ describe('round trip', () => {
     ['choices', ['Polyester', 'Dyneema/HMPE']],
     ['list', ['ISA:52', 'EN 362']],
     ['curve', [{ kn: 4, percent: 1.1 }, { kn: 8, percent: 3 }]],
+    ['rings', [{ leashring_id: 35, count: 2 }, { leashring_id: 25, count: 1 }]],
   ]
   for (const [kind, value] of cases) {
     test(`${kind}: ${JSON.stringify(value)}`, () => {
@@ -39,7 +40,7 @@ describe('round trip', () => {
 })
 
 describe('empty means unset', () => {
-  for (const kind of ['text', 'number', 'integer', 'boolean', 'choice', 'list', 'curve'] as const) {
+  for (const kind of ['text', 'number', 'integer', 'boolean', 'choice', 'list', 'curve', 'rings'] as const) {
     test(kind, () => assert.equal(fromDraft(kind, '  ').value, null))
   }
   test('choices', () => assert.equal(fromDraft('choices', []).value, null))
@@ -53,6 +54,8 @@ describe('bad input is an error, not a guess', () => {
   test('number', () => assert.ok(fromDraft('number', 'forty').error))
   test('integer', () => assert.ok(fromDraft('integer', '2007.5').error))
   test('curve with three numbers on a line', () => assert.ok(fromDraft('curve', '4 1.1 9').error))
+  test('rings: a name instead of an id', () => assert.ok(fromDraft('rings', 'Vortex x 1').error))
+  test('rings: none of a ring', () => assert.ok(fromDraft('rings', '35 x 0').error))
   test('a decimal comma is a decimal', () => assert.equal(fromDraft('number', '44,5').value, 44.5))
 })
 
@@ -102,5 +105,20 @@ describe('dates (stored as Unix ms, edited as a calendar date)', () => {
     assert.equal(display(1512079200000, 'release_date'), '2017-12-01')
     assert.equal(display(1512079200000, 'weight'), '1512079200000')
     assert.equal(display(null, 'release_date'), '—')
+  })
+})
+
+describe('ring options', () => {
+  test('a picked option line reads as its ring, one of it', () => {
+    assert.deepEqual(fromDraft('rings', '35 — SlackTech 2 5/16" Steel Leash Ring').value, [{ leashring_id: 35, count: 1 }])
+  })
+  test('"x" and "×" both give the count', () => {
+    assert.deepEqual(fromDraft('rings', '35 x 2\n26×1').value, [
+      { leashring_id: 35, count: 2 },
+      { leashring_id: 26, count: 1 },
+    ])
+  })
+  test('the change log reads them as rings', () => {
+    assert.equal(display([{ leashring_id: 35, count: 2 }]), '2× ring 35')
   })
 })

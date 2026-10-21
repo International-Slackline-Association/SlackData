@@ -157,7 +157,7 @@ export default function EntryEditor({
           <div className="grid max-h-[50vh] grid-cols-1 gap-3 overflow-y-auto pr-1 sm:grid-cols-2">
             {fields.map(spec => {
               const id = `${formId}-${spec.name}`
-              const wide = ['longtext', 'curve', 'choices', 'list'].includes(spec.kind)
+              const wide = ['longtext', 'curve', 'choices', 'list', 'rings'].includes(spec.kind)
               return (
                 <div key={spec.name} className={wide ? 'sm:col-span-2' : ''}>
                   <label htmlFor={id} className="mb-1 block text-xs font-medium text-gray-700">

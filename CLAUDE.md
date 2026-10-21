@@ -290,8 +290,12 @@ leashes, per ring or construction option), with the rows of one leash sharing `p
 states two, it holds the lower. `ring_options` (`[{leashring_id, count}]`) is the first link from
 one gear type to another: `load_gear.check_ring_options` refuses an id that is not a leash ring.
 `leashes` is the one collection that is not its router prefix plus "s", so `crud_router` takes
-`collection=` and `edits.api_type` maps it. Leashes are not in the manufacturer API, the
-seller pass, or `CORRECTABLE_FIELDS` yet. Locally the media manifest also lists the photos of
+`collection=` and `edits.api_type` maps it. Leashes are editable like every other type: on the
+site, through the manufacturer API (which carries `ring_options` as JSON text, as it does a
+webbing's `stretch`), and through the seller pass. The edit form offers `ring_options` as kind
+`rings` (one `<ring id> x <count>` per line, the leash rings to pick from as its options), and
+`catalogue/edits.py` refuses a ring that is not a listed leash ring, and a merge of a ring a leash
+names: stored, either would fail every rebuild. Locally the media manifest also lists the photos of
 staged candidates (ids >= 9000, `media/manifest.py` `staged_documents`, seed-files mode only), which
 `candidates/stage_photos.py` encodes from the originals in `candidates/images/<collection>/<id>/`.
 
