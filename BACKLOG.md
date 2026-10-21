@@ -286,6 +286,43 @@ Gear types we want to hold but don't yet, and changes to the models, loaders and
   - <https://spider-slacklines.com/shop/en/bungee/1284-7330-modular-bungee.html#/1362-select_model-soft_shackle_openable>
 
 
+- [ ] **When a product was sold: year (and optionally month) of release and of end of production.**
+  Today every gear type has one `release_date: int | None`, unix milliseconds, and nothing for when
+  production stopped (`active` only says whether it is sold *now*). That is the wrong shape for what
+  we actually know. Nobody knows the day a webbing came out, so a millisecond timestamp invents
+  precision, and the times in the seeds show it: most fall at 22:00 or 23:00 UTC, which is midnight
+  local time for someone typing a date into a form. Some of the values aren't release dates at all.
+  **58 of the 81 starter kits carry 2021-05-26**, which looks like the date they were entered
+  (SlackDB's), not when they were released. 197 rows have a value (57 webbings, 28 weblocks, 64
+  starter kits, 23 tree protectors, …), no leash has one, and the frontend shows it nowhere. It is
+  only editable on `/edit` (`DATE_FIELDS` in `catalogue/edits.py` and `utils/fieldDraft.ts`).
+
+  **The shape.** Two partial dates per row, both optional, at whatever precision is known:
+  `released` and `discontinued`, each a year with an optional month. Possible encodings
+  (UNDECIDED): an ISO-style string `"2019"` / `"2019-04"` (sorts as text, reads in the seed, one
+  field each), or separate `*_year` / `*_month` ints (easier to filter, but a month without a year
+  has to be refused). Open questions:
+  - **Migrating `release_date`.** Keep the year (and month?) of each value, but first decide what
+    to do with values that are entry dates rather than release dates (the 2021-05-26 cluster). Drop
+    them, or keep them marked unverified?
+  - **How it relates to `active`.** If `discontinued` is set, `active` should be `false`. Is
+    `active` then derived, or kept and checked against it? A product can be known to be
+    discontinued without anyone knowing when.
+  - **Frontend.** A "Sold 2016 – 2021" / "Since 2019" line on the detail page, a year-range filter
+    or sort on the listing, and the year-month picker on `/edit`.
+  - **Sources.** Wayback snapshots of shop pages give "first seen / last seen" bounds, which are
+    evidence for a date, not the date itself. Do we record that it is a bound?
+
+  **Why now: this is the first step towards batch-specific data** (the entry below). A batch is
+  told apart in the wild mostly by *when* it was made ("produced before April 2020"), and
+  `product_group` already gives us the structure: one row per version, each with its own specs,
+  grouped on the detail page (`utils/groups.ts`, `VendorTable.tsx`'s `version` column, the webbing
+  `Reggae` pair). Once every row carries a production window, a group's rows *are* its batches,
+  each dated, and `VendorTable` can show the window per version. That probably makes the child
+  table the batch entry below proposes unnecessary. That entry predates `product_group`, and it
+  should be revisited with this one.
+
+
 - [ ] **Store production batches of the same product.** One row is currently one product, so every
   spec is a single value that silently claims to hold for everything ever sold under that name. It
   does not: a manufacturer changes a weave, a supplier, or a sewing line, and MBS / stretch /
