@@ -294,6 +294,7 @@
         "price": 600.0,
         "currency": "MXN",
         "notes": "'Edición limitada'. Captured 2025-02; not returned by the live store search on 2026-10-16. MXN 600 on sale (regular 649). Length not stated. No rings. Tactile twist indicator on the sleeve. Outer sleeve strength 12 kN (the sleeve's, not the leash's). Colours: green, light blue, dark blue, pink, ochre, orange. Spanish page only, so no description.",
+        "active": false,
         "photos": [
             {
                 "id": "fabae99ffbe9e079",
@@ -1164,6 +1165,7 @@
         "price": 15.9,
         "currency": "EUR",
         "notes": "Captured 2015-2023; not on the current site's menus. Ready to use, or DIY (4 m rope + 3.5 m strap). Rope: 'EDLINGER II BEAL rope or tendon rope'; sleeve: '24mm Tubular or Slack Mountain Snake'. 120 g/m. 'A leash must be changed every 9 falls factor 2 (Beal standards)'. Made in France. No rings.",
+        "active": false,
         "photos": [
             {
                 "id": "650070fbbade0f7d",
