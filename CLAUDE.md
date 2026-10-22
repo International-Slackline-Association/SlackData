@@ -102,11 +102,15 @@ cd frontend && npm run test:unit    # 276 unit tests — node:test on the pure u
 cd frontend && env -u ELECTRON_RUN_AS_NODE npx cypress run --spec cypress/e2e/<spec>.cy.ts
 # (the `env -u` is required under VS Code, or Cypress dies with SIGILL / exit 132)
 
-# In CI the e2e job is SHARDED — six runners, packed by measured spec duration
-# from frontend/cypress/shards.json. Adding a spec to cypress/e2e/ means adding
-# it to that manifest, or it silently never runs; `npm run shards` (also run by
-# test:unit and by CI before the matrix is built) is what stops that.
+# In CI the e2e job is SHARDED — seven runners, packed by measured spec duration
+# from frontend/cypress/shards.json, starting alongside pytest rather than after
+# it. Adding a spec to cypress/e2e/ means adding it to that manifest, or it
+# silently never runs; `npm run shards` (also run by test:unit and by CI before
+# the matrix is built) is what stops that.
 cd frontend && npm run shards       # every spec is in exactly one shard
+# When the shards drift apart in CI, refresh the times from a green run and repack
+# (reads the run's Cypress summaries through `gh`; --shards N changes the count):
+cd frontend && npm run shards:pack -- --from-run <run id>
 
 # isa_certified.json is DERIVED from isa_approved_data.csv (the raw ISA
 # approved-gear capture, committed as provenance). Edit or re-scrape the CSV,

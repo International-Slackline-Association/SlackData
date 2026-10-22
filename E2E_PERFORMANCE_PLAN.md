@@ -481,3 +481,20 @@ xvfb-run -a npx cypress run --spec cypress/e2e/<spec>.cy.ts
 `npx cypress verify` is the quick diagnostic — it reports the smoke test timing out rather than
 failing silently. CI needs none of this: `ubuntu-latest` sets no `DISPLAY`, so Cypress starts Xvfb
 itself. Now recorded in PLAN.md § Running things.
+
+### 5.7 Repacked from CI, by a script (2026-10-22)
+
+PR #104 (leashes) saw shards of 14 min and more. Most of that was failing tests: a failing
+`cy.contains` waits out its 5 s timeout on every retry, once per gear type, so a red spec runs far
+longer than a green one (`isa_certification` 7 min red, 1:26 green; `gear_cards` 29:33 red, ~5:30
+green). The packing had drifted too: on green numbers the slowest shard was ~8:00 of specs against
+~5:45 for the lightest.
+
+The durations now live in `frontend/cypress/shards.json` (`durations`, with the runs they came from
+in `measured`), and `frontend/scripts/pack-shards.mjs` repacks from them, longest first.
+`npm run shards:pack -- --from-run <run id>` reads that run's Cypress summary tables through `gh`
+and takes each spec's time only from a run it passed in, for the reason above. Seven shards now
+(`search_sort` alone, 5:42, is the floor), and the e2e jobs no longer wait for pytest (§3).
+
+Per-type trimming (§2.4) is still not done. It is the next lever once `search_sort`, `filters` and
+`gear_cards` each fill a runner alone, and it is a coverage decision, not a packing one.

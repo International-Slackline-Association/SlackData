@@ -497,13 +497,14 @@ Gear types we want to hold but don't yet, and changes to the models, loaders and
 
 Carried over from LAUNCH_RUNBOOK.md and PHASE4_SHIP_PLAN.md when both were removed (2026-10-04).
 
-- [ ] **Rebalance the Cypress shards — CI went from under 8 min to over 15.** On PR #104 the
-  `search` shard alone took 14 min (`search_sort.cy.ts` 5 min, `isa_certification.cy.ts` 7 min,
-  much of it 5 s retry timeouts per gear type), while the whole suite used to finish in < 8 min.
-  `frontend/cypress/shards.json` packs by durations measured before leashes and connectors were
-  added, and the per-gear-type specs grow with every new type. Re-measure and repack (or let a
-  script refresh the durations from CI timings), add a shard if needed, and look at trimming the
-  per-type loops in the slowest specs.
+- [x] **Rebalance the Cypress shards — CI went from under 8 min to over 15.** Done 2026-10-22.
+  Most of the 14-min `search` shard on PR #104 was failing tests waiting out their timeouts
+  (`isa_certification` is 1:26 green), but the packing had drifted as well. Durations now live in
+  `frontend/cypress/shards.json`, and `npm run shards:pack -- --from-run <run id>` refreshes them
+  from a CI run's Cypress summaries and repacks. Seven shards now, ~5:30 each, and the e2e jobs no
+  longer wait ~4 min for pytest. Still open: trimming the per-type loops (E2E_PERFORMANCE_PLAN.md
+  § 2.4). `search_sort`, `filters` and `gear_cards` each fill a runner alone, so they are the
+  floor now.
 
 - [ ] **Serverless Framework v3 → v4, and who runs deploys.** Pinned to v3 so launch did not wait
   on deciding who owns a Serverless account; v3 is EOL and gets no security updates. The same
