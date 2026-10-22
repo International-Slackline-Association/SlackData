@@ -1,4 +1,5 @@
 import { GEAR_TYPES } from '../support/gear_types'
+import { listingUnits } from '../support/listing'
 import { RED_600 } from '../support/colors'
 
 // ISA Approved badge behaviour.
@@ -9,16 +10,6 @@ import { RED_600 } from '../support/colors'
 const ISA_TYPES  = GEAR_TYPES.filter(t => t.hasISA)
 const NO_ISA     = GEAR_TYPES.filter(t => !t.hasISA)
 
-// A grouped product (product_group) shows as one card named after its group, so
-// the card tests pick a unit whose every member agrees on certification and look
-// for the name the card actually shows.
-function cardUnit(all: Record<string, unknown>[], certified: boolean): string | undefined {
-  const key = (i: Record<string, unknown>) => (i.product_group as string | null) || (i.name as string)
-  const unit = all.find(i => i.isa_certified === certified
-    && all.filter(j => key(j) === key(i)).every(j => j.isa_certified === certified))
-  return unit && key(unit)
-}
-
 // ── On gear listing cards ─────────────────────────────────────────────────────
 
 describe('ISA Approved badge — gear cards', () => {
@@ -26,12 +17,12 @@ describe('ISA Approved badge — gear cards', () => {
     describe(label, () => {
       it('shows the ISA Approved stamp on certified items', () => {
         cy.fetchAllItems(apiPath).then((all) => {
-          const certified = cardUnit(all as Record<string, unknown>[], true)
+          const certified = listingUnits(all as Record<string, unknown>[]).find(i => i.isa_certified === true)
           if (!certified) return // skip if no certified items in dataset
 
           cy.visit(`/${slug}`)
           cy.get('[data-cy="gear-card"]')
-            .contains('[data-cy="gear-card-name"]', certified)
+            .contains('[data-cy="gear-card-name"]', certified.name as string)
             .closest('[data-cy="gear-card"]')
             .find('[data-cy="isa-approved-badge"]')
             .should('be.visible')
@@ -40,12 +31,12 @@ describe('ISA Approved badge — gear cards', () => {
 
       it('does not show the ISA badge on non-certified items', () => {
         cy.fetchAllItems(apiPath).then((all) => {
-          const notCertified = cardUnit(all as Record<string, unknown>[], false)
+          const notCertified = listingUnits(all as Record<string, unknown>[]).find(i => i.isa_certified === false)
           if (!notCertified) return
 
           cy.visit(`/${slug}`)
           cy.get('[data-cy="gear-card"]')
-            .contains('[data-cy="gear-card-name"]', notCertified)
+            .contains('[data-cy="gear-card-name"]', notCertified.name as string)
             .closest('[data-cy="gear-card"]')
             .find('[data-cy="isa-approved-badge"]')
             .should('not.exist')
@@ -54,12 +45,12 @@ describe('ISA Approved badge — gear cards', () => {
 
       it('positions the ISA badge inside the card image area', () => {
         cy.fetchAllItems(apiPath).then((all) => {
-          const certified = cardUnit(all as Record<string, unknown>[], true)
+          const certified = listingUnits(all as Record<string, unknown>[]).find(i => i.isa_certified === true)
           if (!certified) return
 
           cy.visit(`/${slug}`)
           cy.get('[data-cy="gear-card"]')
-            .contains('[data-cy="gear-card-name"]', certified)
+            .contains('[data-cy="gear-card-name"]', certified.name as string)
             .closest('[data-cy="gear-card"]')
             .find('[data-cy="gear-card-image-area"]')
             .find('[data-cy="isa-approved-badge"]')
@@ -69,12 +60,12 @@ describe('ISA Approved badge — gear cards', () => {
 
       it('does not use a plain checkmark or text pill for ISA certification', () => {
         cy.fetchAllItems(apiPath).then((all) => {
-          const certified = cardUnit(all as Record<string, unknown>[], true)
+          const certified = listingUnits(all as Record<string, unknown>[]).find(i => i.isa_certified === true)
           if (!certified) return
 
           cy.visit(`/${slug}`)
           cy.get('[data-cy="gear-card"]')
-            .contains('[data-cy="gear-card-name"]', certified)
+            .contains('[data-cy="gear-card-name"]', certified.name as string)
             .closest('[data-cy="gear-card"]')
             .within(() => {
               cy.get('[data-cy="isa-checkmark"]').should('not.exist')

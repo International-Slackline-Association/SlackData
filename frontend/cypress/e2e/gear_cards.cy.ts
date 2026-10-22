@@ -100,7 +100,7 @@ GEAR_TYPES.forEach(({ slug, apiPath, label, hasISA }) => {
 
     it('shows the price in amber when the item has a price', () => {
       cy.fetchAllItems(apiPath).then((all) => {
-        const withPrice = (all as Record<string, unknown>[]).find(i => i.price != null)
+        const withPrice = listingUnits(all as Record<string, unknown>[]).find(i => i.price != null)
         if (!withPrice) return
 
         cy.get('[data-cy="gear-card"]')
@@ -113,7 +113,7 @@ GEAR_TYPES.forEach(({ slug, apiPath, label, hasISA }) => {
 
     it('omits the price element entirely when price is null', () => {
       cy.fetchAllItems(apiPath).then((all) => {
-        const noPrice = (all as Record<string, unknown>[]).find(i => i.price == null)
+        const noPrice = listingUnits(all as Record<string, unknown>[]).find(i => i.price == null)
         if (!noPrice) return
 
         cy.get('[data-cy="gear-card"]')
@@ -129,7 +129,7 @@ GEAR_TYPES.forEach(({ slug, apiPath, label, hasISA }) => {
     if (hasISA) {
       it('shows the ISA Approved badge on certified items', () => {
         cy.fetchAllItems(apiPath).then((all) => {
-          const certified = (all as Record<string, unknown>[]).find(i => i.isa_certified === true)
+          const certified = listingUnits(all as Record<string, unknown>[]).find(i => i.isa_certified === true)
           if (!certified) return
 
           cy.get('[data-cy="gear-card"]')
@@ -142,7 +142,7 @@ GEAR_TYPES.forEach(({ slug, apiPath, label, hasISA }) => {
 
       it('does not show an ISA badge on non-certified items', () => {
         cy.fetchAllItems(apiPath).then((all) => {
-          const notCertified = (all as Record<string, unknown>[]).find(i => i.isa_certified === false)
+          const notCertified = listingUnits(all as Record<string, unknown>[]).find(i => i.isa_certified === false)
           if (!notCertified) return
 
           cy.get('[data-cy="gear-card"]')

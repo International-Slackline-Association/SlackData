@@ -112,7 +112,7 @@ describe('ISA warning bubble — gear cards', () => {
     describe(label, () => {
       it('shows a bubble carrying the status word on warned items', () => {
         cy.fetchAllItems(apiPath).then((all) => {
-          const warned = (all as Item[]).find(i => i.isa_warning != null)
+          const warned = listingUnits(all as Item[]).find(i => i.isa_warning != null)
           if (!warned) return
           cy.visit(`/${slug}`)
           cy.get('[data-cy="gear-card"]')
@@ -130,7 +130,7 @@ describe('ISA warning bubble — gear cards', () => {
 
       it('shows no bubble on unwarned items', () => {
         cy.fetchAllItems(apiPath).then((all) => {
-          const clean = (all as Item[]).find(i => i.isa_warning == null)
+          const clean = listingUnits(all as Item[]).find(i => i.isa_warning == null)
           if (!clean) return
           cy.visit(`/${slug}`)
           cy.get('[data-cy="gear-card"]')
@@ -143,7 +143,7 @@ describe('ISA warning bubble — gear cards', () => {
 
       it('colours the bubble by severity', () => {
         cy.fetchAllItems(apiPath).then((all) => {
-          const found = byStatus(all as Item[])
+          const found = byStatus(listingUnits(all as Item[]))
           for (const status of SHOWN_STATUSES) {
             const item = found[status]
             if (!item) continue
@@ -164,7 +164,7 @@ describe('ISA warning bubble — gear cards', () => {
   describe('stacking order (webbings)', () => {
     it('sits in the top-right of the image area', () => {
       cy.fetchAllItems('webbing').then((all) => {
-        const warned = (all as Item[]).find(i => i.isa_warning != null)
+        const warned = listingUnits(all as Item[]).find(i => i.isa_warning != null)
         if (!warned) return
         cy.visit('/webbings')
         cy.get('[data-cy="gear-card"]')
@@ -186,7 +186,7 @@ describe('ISA warning bubble — gear cards', () => {
 
     it('sits ABOVE the ISA class letter when both are present', () => {
       cy.fetchAllItems('webbing').then((all) => {
-        const both = (all as Item[]).find(
+        const both = listingUnits(all as Item[]).find(
           i => i.isa_warning != null && i.isa_certified === true && i.isa_class != null,
         )
         if (!both) return
@@ -208,7 +208,7 @@ describe('ISA warning bubble — gear cards', () => {
 
     it('sits LEFT of the ISA stamp when the item is certified', () => {
       cy.fetchAllItems('webbing').then((all) => {
-        const both = (all as Item[]).find(
+        const both = listingUnits(all as Item[]).find(
           i => i.isa_warning != null && i.isa_warning !== 'No Warning' && i.isa_certified === true,
         )
         if (!both) return
@@ -232,7 +232,7 @@ describe('ISA warning bubble — gear cards', () => {
 
     it('does not collide with the Historic pill, which stays on the left', () => {
       cy.fetchAllItems('webbing').then((all) => {
-        const historicWarned = (all as Item[]).find(
+        const historicWarned = listingUnits(all as Item[]).find(
           i => i.isa_warning != null && i.active === false,
         )
         if (!historicWarned) return

@@ -61,7 +61,7 @@ GEAR_TYPES.forEach(({ slug, apiPath, label, hasISAWarning, specFields }) => {
     // "as sold" secondary line are currency.cy.ts's business.
     it('shows the price when it is set', () => {
       cy.request(`${api()}/${apiPath}/?limit=100`).then(({ body }) => {
-        const withPrice = (body as Record<string, unknown>[]).find(i => i.price != null)
+        const withPrice = (body as Record<string, unknown>[]).find(i => i.price != null && !i.product_group)
         if (!withPrice) return
         cy.visit(`/${slug}/${withPrice.id}`)
         cy.get('[data-cy="detail-price"]').should('be.visible')
@@ -308,7 +308,7 @@ GEAR_TYPES.forEach(({ slug, apiPath, label, hasISAWarning, specFields }) => {
 
     it('shows a "View product" button when product_url is set', () => {
       cy.request(`${api()}/${apiPath}/?limit=100`).then(({ body }) => {
-        const withUrl = (body as Record<string, unknown>[]).find(i => i.product_url)
+        const withUrl = (body as Record<string, unknown>[]).find(i => i.product_url && !i.product_group)
         if (!withUrl) return
         cy.visit(`/${slug}/${withUrl.id}`)
         cy.get('[data-cy="view-product-btn"]')
@@ -374,7 +374,7 @@ GEAR_TYPES.forEach(({ slug, apiPath, label, hasISAWarning, specFields }) => {
             item: i,
             files: imageFilesFor(slug, i),
           }))
-          multi = withFiles.find(x => x.files.length > 1)
+          multi = withFiles.find(x => x.files.length > 1 && !x.item.product_group) // a grouped product's page is named after its group
           single = withFiles.find(x => x.files.length === 1)
         })
       })
