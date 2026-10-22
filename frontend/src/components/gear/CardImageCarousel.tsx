@@ -83,15 +83,23 @@ export default function CardImageCarousel({
               soft border out of frame).
               An <img> and not a CSS background: backgrounds ignore loading=lazy,
               so a 240-card grid would fetch every backdrop up front. Same src as
-              the image below, so it costs no extra request. */}
-          <img
-            data-cy="card-image-backdrop"
-            aria-hidden="true"
-            alt=""
-            src={current}
-            loading="lazy"
-            className="absolute inset-0 h-full w-full scale-110 object-cover blur-xl"
-          />
+              the image below, so it costs no extra request.
+              The wrapper clips it a second time, with contain-paint: WebKit
+              lets a filtered child escape overflow-hidden when it sizes the
+              page, so on iOS the bleed past a full-width card made the whole
+              page pan sideways. The clip lives here and not on the band because
+              contain-paint makes a stacking context, and on the band that would
+              sink the arrows and dots beneath the card's full-cover link. */}
+          <span aria-hidden="true" className="absolute inset-0 overflow-hidden contain-paint">
+            <img
+              data-cy="card-image-backdrop"
+              aria-hidden="true"
+              alt=""
+              src={current}
+              loading="lazy"
+              className="block h-full w-full scale-110 object-cover blur-xl"
+            />
+          </span>
           <img
             data-cy={imgDataCy}
             data-size={current === photo.large ? 'large' : 'small'}

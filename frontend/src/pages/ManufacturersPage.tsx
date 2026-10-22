@@ -163,6 +163,10 @@ export default function ManufacturersPage() {
             <input
               data-cy="manufacturer-search"
               type="search"
+              // Brand and product names, not prose: no autocorrect "fixing" them.
+              autoCorrect="off"
+              autoCapitalize="none"
+              spellCheck={false}
               value={query}
               onChange={e => setQuery(e.target.value)}
               placeholder="Search manufacturers…"

@@ -9,7 +9,15 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- viewport-fit=cover: without it every env(safe-area-inset-*) in the app
+         is 0px. interactive-widget: the Android keyboard shrinks the layout like
+         iOS's does, so bottom-pinned UI and dvh react to it the same way. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content" />
+    <!-- The site is light-only, so one theme colour: the header's white, which is
+         what touches the status bar. color-scheme stops native form controls
+         turning dark on a dark-mode phone. -->
+    <meta name="theme-color" content="#ffffff" />
+    <meta name="color-scheme" content="light" />
     <title>SlackData</title>
   </head>
   <body>

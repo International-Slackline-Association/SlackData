@@ -73,7 +73,7 @@ export default function Sheet({
         aria-modal="true"
         aria-label={title}
         tabIndex={-1}
-        className="relative flex max-h-[85dvh] flex-col rounded-t-2xl bg-white shadow-[0_-4px_24px_rgba(0,0,0,0.15)] outline-none"
+        className="relative flex max-h-[85dvh] flex-col rounded-t-2xl bg-white pl-[env(safe-area-inset-left)] pr-[env(safe-area-inset-right)] shadow-[0_-4px_24px_rgba(0,0,0,0.15)] outline-none"
       >
         {/* Drag handle — visual affordance only; the sheet is dismissed by the
             × , the scrim or Esc. A real drag gesture would fight the inner

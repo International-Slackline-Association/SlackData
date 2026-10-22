@@ -53,8 +53,10 @@ export default function AppLayout() {
     // measured height as --compare-bar-h (0 when it isn't rendered). It belongs
     // on the OUTER column, not on <main>: the footer sits after main, so padding
     // main alone still left the footer underneath the bar.
+    // svh, not vh: on a phone 100vh is the height with the URL bar hidden, so a
+    // short page pushed its footer under the bar and needed a scroll to reach.
     <div
-      className="flex min-h-screen flex-col pb-[var(--compare-bar-h,0px)]"
+      className="flex min-h-svh flex-col pb-[var(--compare-bar-h,0px)]"
       style={{ background: '#F8F7F4' }}
     >
       <TopNav />
