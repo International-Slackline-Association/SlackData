@@ -339,9 +339,10 @@ install on every shard. If it is tried, it is measured first.
 the Cypress summary table across 2–3 runs against the baseline in §1 — not job wall clock, which also
 moves with queueing and setup.
 
-**Do not remove `needs: [backend, frontend]` to start e2e sooner.** It saves ~90 s and costs six
-shards' worth of compute on every branch that fails `tsc`. If it is ever worth it, that is a
-deliberate trade, not a cleanup.
+**Do not remove `needs: [frontend]` to start e2e sooner.** It costs every shard's compute on each
+branch that fails `tsc`, and the e2e build skips `tsc -b` because that job ran it. *(The `backend`
+gate was dropped deliberately on 2026-10-22: pytest had grown to ~4 min, the e2e jobs share nothing
+with it, and the repo is public, so the trade is runner capacity on a red pytest, not minutes.)*
 
 **Local Cypress on the dev machine is not a benchmark.** Under VS Code / WSL the runner dies with
 SIGILL / SIGTRAP (exit 132/133) intermittently even with `env -u ELECTRON_RUN_AS_NODE`, and produces
@@ -426,7 +427,7 @@ from the manifest, and a manifest naming a spec that does not exist.
 ### 5.3 Also done
 
 - **Cypress binary cached** (`~/.cache/Cypress`). The log said *"first time using Cypress"* on every
-  run; ~20 s, now paid by all six shards if left uncached.
+  run; ~20 s, now paid by every shard if left uncached.
 - **`fail-fast: false`** on the matrix — one shard failing must not cancel the other five.
 - **Per-shard screenshot artifacts**, since `upload-artifact@v4` refuses a duplicate name.
 - **`npm run build:e2e` / `serve:e2e` / `shards`**, so the load-bearing invocation lives in
@@ -480,3 +481,20 @@ xvfb-run -a npx cypress run --spec cypress/e2e/<spec>.cy.ts
 `npx cypress verify` is the quick diagnostic — it reports the smoke test timing out rather than
 failing silently. CI needs none of this: `ubuntu-latest` sets no `DISPLAY`, so Cypress starts Xvfb
 itself. Now recorded in PLAN.md § Running things.
+
+### 5.7 Repacked from CI, by a script (2026-10-22)
+
+PR #104 (leashes) saw shards of 14 min and more. Most of that was failing tests: a failing
+`cy.contains` waits out its 5 s timeout on every retry, once per gear type, so a red spec runs far
+longer than a green one (`isa_certification` 7 min red, 1:26 green; `gear_cards` 29:33 red, ~5:30
+green). The packing had drifted too: on green numbers the slowest shard was ~8:00 of specs against
+~5:45 for the lightest.
+
+The durations now live in `frontend/cypress/shards.json` (`durations`, with the runs they came from
+in `measured`), and `frontend/scripts/pack-shards.mjs` repacks from them, longest first.
+`npm run shards:pack -- --from-run <run id>` reads that run's Cypress summary tables through `gh`
+and takes each spec's time only from a run it passed in, for the reason above. Seven shards now
+(`search_sort` alone, 5:42, is the floor), and the e2e jobs no longer wait for pytest (§3).
+
+Per-type trimming (§2.4) is still not done. It is the next lever once `search_sort`, `filters` and
+`gear_cards` each fill a runner alone, and it is a coverage decision, not a packing one.

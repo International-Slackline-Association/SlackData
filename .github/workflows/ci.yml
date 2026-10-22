@@ -119,7 +119,10 @@ jobs:
   e2e:
     name: cypress (${{ matrix.shard.name }})
     runs-on: ubuntu-latest
-    needs: [backend, frontend, shards]
+    # Not gated on pytest: that job takes ~4 min and the two share nothing, so
+    # waiting for it only delayed every shard. The gate on `frontend` stays —
+    # the build step below skips `tsc -b` because that job already ran it.
+    needs: [frontend, shards]
     strategy:
       # One shard failing must not cancel the rest — a partial picture of which
       # specs broke is exactly what makes a red run expensive to diagnose.
