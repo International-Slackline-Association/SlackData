@@ -100,6 +100,24 @@ export const CONNECTOR_MATERIALS = [
 ] as const
 export type ConnectorMaterial = (typeof CONNECTOR_MATERIALS)[number]
 
+// models/leashes.py — LeashConstruction: a rope inside tubular webbing, or a
+// single rope with no sleeve.
+export const LEASH_CONSTRUCTIONS = ['Threaded', 'Rope'] as const
+export type LeashConstruction = (typeof LEASH_CONSTRUCTIONS)[number]
+
+// models/leashes.py — RingConnection: how the leash meets its ring.
+export const RING_CONNECTIONS = ['Knot', 'Sewn', 'Spliced'] as const
+export type RingConnection = (typeof RING_CONNECTIONS)[number]
+
+// models/leashes.py — CoreType
+// null = not stated by the maker.
+export const CORE_TYPES = ['Dynamic', 'Static'] as const
+export type CoreType = (typeof CORE_TYPES)[number]
+
+// models/leashes.py — SleeveMaterial
+export const SLEEVE_MATERIALS = ['Nylon', 'Polyester', 'Polypropylene', 'Other'] as const
+export type SleeveMaterial = (typeof SLEEVE_MATERIALS)[number]
+
 // models/treepro.py — PriceUnit
 export const PRICE_UNITS = ['single', 'pair'] as const
 export type PriceUnit = (typeof PRICE_UNITS)[number]

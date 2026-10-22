@@ -24,6 +24,7 @@ from slack_data.load_data._seed_io import read_seed_json, seed_sources
 from slack_data.load_data.load_gear import load_gear
 from slack_data.models.connectors import Connector
 from slack_data.models.grips import Grip
+from slack_data.models.leashes import Leash
 from slack_data.models.leashrings import LeashRing
 from slack_data.models.rollers import Roller
 from slack_data.models.starterkits import StarterKit
@@ -93,6 +94,11 @@ def _payloads(brand_id: int) -> dict[str, dict]:
             "name": "Active Connector",
             "connector_style": "Shackle",
             "material": "Aluminum",
+            "brand_id": brand_id,
+        },
+        "/leash": {
+            "name": "Active Leash",
+            "construction": "Threaded",
             "brand_id": brand_id,
         },
     }
@@ -184,6 +190,7 @@ LOADER_CASES = [
         {"name": "Loaded Trickline Kit", "brand": "Gibbon", "webbing_length": 15, "webbing_width": 25, "tensioning_type": "Single Ratchet"},
     ),
     ("connectors", Connector, {"name": "Loaded Connector", "brand": "Gibbon", "connector_style": "Shackle", "material": "Stainless Steel"}),
+    ("leashes", Leash, {"name": "Loaded Leash", "brand": "Gibbon", "construction": "Threaded"}),
 ]
 
 LOADER_IDS = [case[0] for case in LOADER_CASES]

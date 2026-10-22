@@ -62,6 +62,7 @@ from slack_data.load_data._seed_io import read_seed_json, seed_path
 from slack_data.models.connectors import Connector
 from slack_data.models.grips import Grip
 from slack_data.models.isa_gear_warnings import ISAGearWarning, ISAGearWarningCreate
+from slack_data.models.leashes import Leash
 from slack_data.models.leashrings import LeashRing
 from slack_data.models.rollers import Roller
 from slack_data.models.webbing import Webbing
@@ -79,6 +80,7 @@ WARNABLE_MODELS = {
     "leashring": LeashRing,
     "grip": Grip,
     "connector": Connector,
+    "leash": Leash,
 }
 
 # Worst wins when several warnings land on one row: a product with both a recall

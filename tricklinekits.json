@@ -175,6 +175,9 @@
         "currency": "USD",
         "description": "Inspired by the evolution of tricklining, the BOSS LINE is designed to replicate a pro competition slackline and support advanced tricks. Featuring trampoline-style webbing with rubber grip and the Alpha Ratchet system with extended handle, slow release, independent anchoring and safety backup line line, this kit delivers ultimate power for high-level training. For the advanced slackliner.",
         "active": true,
+        "gear_sellers": [
+            "SlackTech"
+        ],
         "photos": [
             {
                 "id": "2edf2238c582a01d",
@@ -218,6 +221,9 @@
         "description": "The TRICK LINE offers dynamic movement and bounce for tricklining, the branch of the sport that goes beyond walking by adding jumps, spins and rotations. Featuring trampoline-style webbing with rubber grip and a backup line system, this kit is ideal for intermediate users and beginner tricks.",
         "notes": "Manufacturer specs (slacklineindustries.com): 50 ft (15 m), 2 in (50 mm), webbing strength 3 tons (29.89 kN), max user weight 300 lb (136 kg), age 8 and up, SKU SI11550Z. Felt tree wraps with Velcro closures and a backup line are included. The page does not say how many ratchets. Single ratchet read from the manufacturer's product photo. Shopify ship weight 7.0 lb is packed, so weight is left null.",
         "active": true,
+        "gear_sellers": [
+            "SlackTech"
+        ],
         "photos": [
             {
                 "id": "9a68d2da2391e77a",
@@ -338,6 +344,9 @@
         "currency": "PLN",
         "notes": "Listed by Slackhouse (slackhouseshop.pl), which names Gibbon as the producer, so it is filed under Gibbon per the master list's retailer rule. 15 m set: a 12.5 m Jibline plus a ratchet on a 2.5 m loop, with a ratchet cover. Polyester, 50 mm, MBS 30 kN, 2.7 kg, rubber-printed surface, TÜV certified, made in China. Tree-shirt S wraps were optional. Regular price 389 PLN (on sale for 319 PLN when it sold out). Recorded as historic at the owner's call. Gibbon still sells a 'JIBLINE TREEWEAR SET' on gibbon-slacklines.com, which is not this listing. Description left blank because only a Polish page was checked.",
         "active": false,
+        "gear_sellers": [
+            "SlackTech"
+        ],
         "photos": [
             {
                 "id": "6a07c1970756f17e",

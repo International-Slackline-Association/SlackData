@@ -316,6 +316,9 @@
         "currency": "USD",
         "description": "This complete introductory slackline kit is designed specifically for beginner and intermediate users. Featuring static-style webbing ideal for learning, the BASE LINE is perfect for getting started and progressing to basic tricks.",
         "active": true,
+        "gear_sellers": [
+            "SlackTech"
+        ],
         "photos": [
             {
                 "id": "5c03ae7353d24bf4",
@@ -532,6 +535,9 @@
         "currency": "USD",
         "description": "The YogaSlackers eLine “Light” Kit is perfect for beginner slackliners practicing slackline yoga. It is also a great travel line. Known for being a favorite, this versatile 1” line offers lower tension for a safe and fun way to work both static and dynamic poses. With the lower stretch of this line you can get the most usable length to slack on without needing an army to tighten it.",
         "active": true,
+        "gear_sellers": [
+            "SlackTech"
+        ],
         "photos": [
             {
                 "id": "c02128a3381a97ea",
@@ -1119,6 +1125,9 @@
         "currency": "USD",
         "description": "Turn any environment into a playground with this slackline designed as a complete kit specifically for beginners. Featuring static-style material with rubber grip, and an overhead guide line with arm trainer, the PLAY LINE makes learning simple.",
         "active": true,
+        "gear_sellers": [
+            "SlackTech"
+        ],
         "photos": [
             {
                 "id": "a44390b58d5c7e3e",

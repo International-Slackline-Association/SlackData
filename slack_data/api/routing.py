@@ -33,6 +33,7 @@ from slack_data.api.routers.fx_router import fx_router
 from slack_data.api.routers.grip_router import grip_router
 from slack_data.api.routers.isa_certification_router import isa_certification_router
 from slack_data.api.routers.isa_warning_router import isa_warning_router
+from slack_data.api.routers.leash_router import leash_router
 from slack_data.api.routers.leashring_router import leashring_router
 from slack_data.api.routers.manufacturer_router import manufacturer_router
 from slack_data.api.routers.media_router import media_router
@@ -62,6 +63,7 @@ CATALOG_ROUTERS: tuple[APIRouter, ...] = (
     grip_router,
     isa_certification_router,
     isa_warning_router,
+    leash_router,
     leashring_router,
     roller_router,
     starterkit_router,

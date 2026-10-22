@@ -342,6 +342,7 @@ def test_seed_files_introduce_no_currency_we_cannot_convert():
     seeds = [
         "webbings.json", "rollers.json", "leashrings.json", "grips.json",
         "treepros.json", "starterkits.json", "tricklinekits.json", "connectors.json",
+        "leashes.json",
     ]
     found: set[str] = set()
 

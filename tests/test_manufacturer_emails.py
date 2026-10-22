@@ -68,6 +68,16 @@ BRAND_LOCAL_SUFFIXES = {
 # address. Any OTHER repeated address is a copy-paste error, not a shared shop.
 KNOWN_SHARED = {"support@slack-inov.com": {"Slack Inov", "Slack.fr"}}
 
+# Personal mailboxes published anyway, each a deliberate decision by the
+# operator, as exact (brand, address) pairs so the exception widens nothing
+# else. SlackTech's came from the operator. Cong Gear prints both of its own
+# in the Gear Path manual (v1.1), the only contact it gives.
+KNOWN_PERSONAL = {
+    ("SlackTech", "jason@slacklinetechnology.com"),
+    ("Cong Gear", "riodinho.x@gmail.com"),
+    ("Cong Gear", "278297750@qq.com"),
+}
+
 
 @pytest.fixture(scope="module")
 def entries() -> list[dict]:
@@ -159,7 +169,7 @@ def test_no_seeded_email_belongs_to_a_named_individual(seeded_emails):
     offenders = {
         name: email
         for name, email in seeded_emails.items()
-        if _is_personal(name, email)
+        if _is_personal(name, email) and (name, email) not in KNOWN_PERSONAL
     }
     assert offenders == {}, (
         "these look like personal mailboxes — a public page must not carry them: "
@@ -214,7 +224,14 @@ def test_alt_addresses_are_held_to_the_same_bar_as_the_primary(alt_emails):
     for name, email in alt_emails.items():
         assert email == email.strip().lower(), f"{name}: {email!r} is not normalised"
         assert EMAIL_RE.match(email), f"{name}: {email!r} is not a valid address"
-        assert not _is_personal(name, email), f"{name}: {email!r} looks personal"
+        if (name, email) not in KNOWN_PERSONAL:
+            assert not _is_personal(name, email), f"{name}: {email!r} looks personal"
+
+
+def test_every_known_personal_exception_is_still_in_the_seed(seeded_emails, alt_emails):
+    """An exception outliving its address would silently pre-approve the next one."""
+    held = set(seeded_emails.items()) | set(alt_emails.items())
+    assert KNOWN_PERSONAL <= held, f"stale exceptions: {KNOWN_PERSONAL - held}"
 
 
 def test_an_alt_address_is_not_a_copy_of_its_own_primary(entries):

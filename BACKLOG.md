@@ -2,6 +2,22 @@
 
 Non-phase engineering tasks not tracked in [PLAN.md](PLAN.md) (frontend roadmap).
 
+## High priority
+
+- [ ] **Auto-sync ISA certification and warnings (every 24h) — high priority (operator,
+  2026-10-17).** Live editing phase 7 built the
+  half that does not depend on the ISA: `python -m slack_data.catalogue.isa_import` diffs a capture
+  of the approved-gear CSV and the warnings against the catalogue store (new entries unmatched with a
+  suggested match, changed fields updated, dropped ones retired, matches never touched), and admins
+  match on the site at `/admin/isa`. What is missing is something to fetch: the ISA's pages render
+  the lists client-side and publish no file. Decided (P7-F a): ask the ISA for a machine-readable
+  export — the request is in LIVE_EDITING_PHASE_7.md § 6 — then run the importer on it daily.
+  **Why it is urgent:** our capture is already behind. On 2026-10-17 the operator found an ISA
+  Notice of 2026-09-01 on Slack Inov's Spliced Leash in the ISA's own list, missing from
+  `isa_gear_warnings.json`; it was added by hand (warning 83, on leash 17). Every safety notice the
+  ISA publishes stays off the site until someone happens to notice it, which is exactly what the
+  sync is for.
+
 ## Staged, waiting for a photo
 
 Products whose specs and links are complete but that have no usable photo, across brands. They
@@ -243,19 +259,17 @@ Gear we don't hold yet in a gear type we already have, and corrections to the ro
 
 Gear types we want to hold but don't yet, and changes to the models, loaders and API.
 
-- [ ] **Auto-sync ISA certification and warnings (every 24h).** Live editing phase 7 built the
-  half that does not depend on the ISA: `python -m slack_data.catalogue.isa_import` diffs a capture
-  of the approved-gear CSV and the warnings against the catalogue store (new entries unmatched with a
-  suggested match, changed fields updated, dropped ones retired, matches never touched), and admins
-  match on the site at `/admin/isa`. What is missing is something to fetch: the ISA's pages render
-  the lists client-side and publish no file. Decided (P7-F a): ask the ISA for a machine-readable
-  export — the request is in LIVE_EDITING_PHASE_7.md § 6 — then run the importer on it daily.
-
-
-- [ ] **Leashes as a gear type.** Four ISA:37 certificates wait on it: **BC Threaded Highline
-  Leash**, **Slacktivity HighlineLeash**, **raed PRO leash** and **raed ALPINE leash**
-  (`approved_gear_4`, `10`, `11`, `32` in `isa_certified.json`). Needs the full new-gear-type
-  checklist (CLAUDE.md), then `match` blocks for those four and a rebuild/re-seed.
+- [ ] **Leashes: what the first round left open.**
+  - **Manuals** not attached: Slacktivity's leash manual (EN/DE PDFs) and raed's leash manual (held
+    on the HALO ring today).
+  - **No photo anywhere** for Souz's Leash and Leash PP and Balancing Earth's Highline Leash 9.9mm;
+    only two 285 px thumbnails for Slack Inov's Spliced Highline Leash.
+  - **Not read** (the Archive was down): raed's 2020 "Highline Leash" (€26.95) and SlackLife BC's
+    "Alpine Bounce Leash"; Slack Inov's live shop needs a real browser.
+  - **Rings sold with leashes that we do not hold** are named in notes, not linked (out of scope
+    for this round): PureLoop, Bera's 60/85 mm freestyle ring, Slackhouse Ring F Alu/Steel,
+    SlackLife BC's 22 kN and 44 kN rings, Balancing Earth's steel rings. (SlackTech's were added
+    2026-10-17: leash rings 35–37.)
 
 
 - [ ] **Add bungees as a gear type.** The `Bungee` model already exists on branch
@@ -270,6 +284,43 @@ Gear types we want to hold but don't yet, and changes to the models, loaders and
   - <https://slackx.eu/Products/Bungee-Anchor/>
   - <https://slacktivity.com/shop/slackline-bungees/>
   - <https://spider-slacklines.com/shop/en/bungee/1284-7330-modular-bungee.html#/1362-select_model-soft_shackle_openable>
+
+
+- [ ] **When a product was sold: year (and optionally month) of release and of end of production.**
+  Today every gear type has one `release_date: int | None`, unix milliseconds, and nothing for when
+  production stopped (`active` only says whether it is sold *now*). That is the wrong shape for what
+  we actually know. Nobody knows the day a webbing came out, so a millisecond timestamp invents
+  precision, and the times in the seeds show it: most fall at 22:00 or 23:00 UTC, which is midnight
+  local time for someone typing a date into a form. Some of the values aren't release dates at all.
+  **58 of the 81 starter kits carry 2021-05-26**, which looks like the date they were entered
+  (SlackDB's), not when they were released. 197 rows have a value (57 webbings, 28 weblocks, 64
+  starter kits, 23 tree protectors, …), no leash has one, and the frontend shows it nowhere. It is
+  only editable on `/edit` (`DATE_FIELDS` in `catalogue/edits.py` and `utils/fieldDraft.ts`).
+
+  **The shape.** Two partial dates per row, both optional, at whatever precision is known:
+  `released` and `discontinued`, each a year with an optional month. Possible encodings
+  (UNDECIDED): an ISO-style string `"2019"` / `"2019-04"` (sorts as text, reads in the seed, one
+  field each), or separate `*_year` / `*_month` ints (easier to filter, but a month without a year
+  has to be refused). Open questions:
+  - **Migrating `release_date`.** Keep the year (and month?) of each value, but first decide what
+    to do with values that are entry dates rather than release dates (the 2021-05-26 cluster). Drop
+    them, or keep them marked unverified?
+  - **How it relates to `active`.** If `discontinued` is set, `active` should be `false`. Is
+    `active` then derived, or kept and checked against it? A product can be known to be
+    discontinued without anyone knowing when.
+  - **Frontend.** A "Sold 2016 – 2021" / "Since 2019" line on the detail page, a year-range filter
+    or sort on the listing, and the year-month picker on `/edit`.
+  - **Sources.** Wayback snapshots of shop pages give "first seen / last seen" bounds, which are
+    evidence for a date, not the date itself. Do we record that it is a bound?
+
+  **Why now: this is the first step towards batch-specific data** (the entry below). A batch is
+  told apart in the wild mostly by *when* it was made ("produced before April 2020"), and
+  `product_group` already gives us the structure: one row per version, each with its own specs,
+  grouped on the detail page (`utils/groups.ts`, `VendorTable.tsx`'s `version` column, the webbing
+  `Reggae` pair). Once every row carries a production window, a group's rows *are* its batches,
+  each dated, and `VendorTable` can show the window per version. That probably makes the child
+  table the batch entry below proposes unnecessary. That entry predates `product_group`, and it
+  should be revisited with this one.
 
 
 - [ ] **Store production batches of the same product.** One row is currently one product, so every
@@ -446,6 +497,14 @@ Gear types we want to hold but don't yet, and changes to the models, loaders and
 
 Carried over from LAUNCH_RUNBOOK.md and PHASE4_SHIP_PLAN.md when both were removed (2026-10-04).
 
+- [ ] **Rebalance the Cypress shards — CI went from under 8 min to over 15.** On PR #104 the
+  `search` shard alone took 14 min (`search_sort.cy.ts` 5 min, `isa_certification.cy.ts` 7 min,
+  much of it 5 s retry timeouts per gear type), while the whole suite used to finish in < 8 min.
+  `frontend/cypress/shards.json` packs by durations measured before leashes and connectors were
+  added, and the per-gear-type specs grow with every new type. Re-measure and repack (or let a
+  script refresh the durations from CI timings), add a shard if needed, and look at trimming the
+  per-type loops in the slowest specs.
+
 - [ ] **Serverless Framework v3 → v4, and who runs deploys.** Pinned to v3 so launch did not wait
   on deciding who owns a Serverless account; v3 is EOL and gets no security updates. The same
   answer decides both: whether we deploy into the ISA's account or they deploy from this config,
@@ -478,6 +537,10 @@ Carried over from LAUNCH_RUNBOOK.md and PHASE4_SHIP_PLAN.md when both were remov
   not a layout change. Revisit once there is a homepage/dashboard to hang it off (PLAN.md).
 
 ## ✅ Shipped (kept here briefly so the entries above don't get re-opened)
+
+- **Leashes as a gear type** (shipped 2026-10-17: model, router, the Leashes tab, 42 rows from 18
+  brands with 103 photos, and the four ISA:37 certificates matched — `approved_gear_4`, `10`, `11`,
+  `32`, 10 rows). The research, the decisions and every source are in LEASHES_REVIEW.md.
 
 - **Connectors as a gear type** (shipped 2026-10-11/12: model, loader, router, 120 seeded rows with
   photos and manuals, the Connectors tab, generic parts grouped by `product_group`; see CLAUDE.md §

@@ -67,8 +67,13 @@ export const ISA_WARNING_ORDER = ['none', 'Recall', 'Warning', 'Notice'] as cons
 
 export const FILTER_GROUPS: Record<GearSlug, FilterGroupMeta[]> = {
   webbings: [
-    // Price leads every sidebar — it's the filter people reach for first, and
-    // the only one meaningful for all 8 gear types.
+    { group: 'isa_certified',     label: 'ISA Certified',     type: 'pill', pillKind: 'bool' },
+    { group: 'isa_warning',       label: 'ISA Warning',       type: 'pill', pillKind: 'enum',
+      order: ISA_WARNING_ORDER, includeNone: true },
+    // The ISA groups lead the sidebar on every type the ISA certifies
+    // (operator, 2026-10-17): ISA Certified, then ISA Warning, then Price —
+    // the safety questions before the price. Price leads on the types that
+    // cannot be certified.
     { group: 'price', label: 'Price per meter', type: 'range',
       valueField: 'price_display', currencyUnit: true },
     { group: 'material',          label: 'Material Type',     type: 'pill', pillKind: 'enum' },
@@ -77,9 +82,6 @@ export const FILTER_GROUPS: Record<GearSlug, FilterGroupMeta[]> = {
     // ISA-certified webbing, so it reads as a badge on those items rather than
     // as a filter axis across the whole catalogue (filter by ISA Certified
     // instead).
-    { group: 'isa_certified',     label: 'ISA Certified',     type: 'pill', pillKind: 'bool' },
-    { group: 'isa_warning',       label: 'ISA Warning',       type: 'pill', pillKind: 'enum',
-      order: ISA_WARNING_ORDER, includeNone: true },
     { group: 'weight',            label: 'Weight',            type: 'range', unit: 'g/m' },
     { group: 'breaking_strength', label: 'Breaking Strength', type: 'range', unit: 'kN' },
     // + the Stretch widget (StretchFilter), appended in the sidebar for webbings
@@ -91,6 +93,9 @@ export const FILTER_GROUPS: Record<GearSlug, FilterGroupMeta[]> = {
   ],
 
   weblocks: [
+    { group: 'isa_certified',     label: 'ISA Certified',     type: 'pill', pillKind: 'bool' },
+    { group: 'isa_warning',       label: 'ISA Warning',       type: 'pill', pillKind: 'enum',
+      order: ISA_WARNING_ORDER, includeNone: true },
     { group: 'price', label: 'Price', type: 'range', valueField: 'price_display', currencyUnit: true },
     { group: 'style',             label: 'Style',             type: 'pill', pillKind: 'enum',
       order: WEBLOCK_STYLES },
@@ -98,9 +103,6 @@ export const FILTER_GROUPS: Record<GearSlug, FilterGroupMeta[]> = {
     { group: 'width_min',         label: 'Min Width',         type: 'range', unit: 'mm' },
     { group: 'front_pin',         label: 'Front Pin',         type: 'pill', pillKind: 'enum' },
     { group: 'attachment_point',  label: 'Attachment Point',  type: 'pill', pillKind: 'enum' },
-    { group: 'isa_certified',     label: 'ISA Certified',     type: 'pill', pillKind: 'bool' },
-    { group: 'isa_warning',       label: 'ISA Warning',       type: 'pill', pillKind: 'enum',
-      order: ISA_WARNING_ORDER, includeNone: true },
     { group: 'weight',            label: 'Weight',            type: 'range', unit: 'g' },
     { group: 'breaking_strength', label: 'Breaking Strength', type: 'range', unit: 'kN' },
     // Brand comes LAST: it is the longest group in the sidebar (45 brands on
@@ -110,11 +112,11 @@ export const FILTER_GROUPS: Record<GearSlug, FilterGroupMeta[]> = {
   ],
 
   leashrings: [
-    { group: 'price', label: 'Price', type: 'range', valueField: 'price_display', currencyUnit: true },
-    { group: 'material',          label: 'Material',          type: 'pill', pillKind: 'enum' },
     { group: 'isa_certified',     label: 'ISA Certified',     type: 'pill', pillKind: 'bool' },
     { group: 'isa_warning',       label: 'ISA Warning',       type: 'pill', pillKind: 'enum',
       order: ISA_WARNING_ORDER, includeNone: true },
+    { group: 'price', label: 'Price', type: 'range', valueField: 'price_display', currencyUnit: true },
+    { group: 'material',          label: 'Material',          type: 'pill', pillKind: 'enum' },
     { group: 'inner_diameter',    label: 'Inner Diameter',    type: 'range', unit: 'mm' },
     { group: 'outer_diameter',    label: 'Outer Diameter',    type: 'range', unit: 'mm' },
     { group: 'weight',            label: 'Weight',            type: 'range', unit: 'g' },
@@ -126,13 +128,13 @@ export const FILTER_GROUPS: Record<GearSlug, FilterGroupMeta[]> = {
   ],
 
   grips: [
+    { group: 'isa_certified',             label: 'ISA Certified',      type: 'pill', pillKind: 'bool' },
+    { group: 'isa_warning',               label: 'ISA Warning',        type: 'pill', pillKind: 'enum',
+      order: ISA_WARNING_ORDER, includeNone: true },
     { group: 'price', label: 'Price', type: 'range', valueField: 'price_display', currencyUnit: true },
     { group: 'material',                  label: 'Material',           type: 'pill', pillKind: 'enum' },
     { group: 'width_min',                 label: 'Min Width',          type: 'pill', pillKind: 'int', unit: 'mm' },
     { group: 'connection_type',           label: 'Connection Type',    type: 'pill', pillKind: 'enum' },
-    { group: 'isa_certified',             label: 'ISA Certified',      type: 'pill', pillKind: 'bool' },
-    { group: 'isa_warning',               label: 'ISA Warning',        type: 'pill', pillKind: 'enum',
-      order: ISA_WARNING_ORDER, includeNone: true },
     { group: 'weight',                    label: 'Weight',             type: 'range', unit: 'g' },
     { group: 'wll',                       label: 'WLL',                type: 'range', unit: 'kN' },
     { group: 'mbs',                       label: 'MBS',                type: 'range', unit: 'kN' },
@@ -144,15 +146,15 @@ export const FILTER_GROUPS: Record<GearSlug, FilterGroupMeta[]> = {
   ],
 
   rollers: [
+    { group: 'isa_certified',     label: 'ISA Certified',     type: 'pill', pillKind: 'bool' },
+    { group: 'isa_warning',       label: 'ISA Warning',       type: 'pill', pillKind: 'enum',
+      order: ISA_WARNING_ORDER, includeNone: true },
     { group: 'price', label: 'Price', type: 'range', valueField: 'price_display', currencyUnit: true },
     { group: 'material',          label: 'Frame Material',    type: 'pill', pillKind: 'enum' },
     { group: 'roller_material',   label: 'Roller Material',   type: 'pill', pillKind: 'enum' },
     { group: 'slider_type',       label: 'Slider Type',       type: 'pill', pillKind: 'enum' },
     { group: 'lock_type',         label: 'Lock Type',         type: 'pill', pillKind: 'enum' },
     { group: 'bearing_material',  label: 'Bearing Material',  type: 'pill', pillKind: 'enum' },
-    { group: 'isa_certified',     label: 'ISA Certified',     type: 'pill', pillKind: 'bool' },
-    { group: 'isa_warning',       label: 'ISA Warning',       type: 'pill', pillKind: 'enum',
-      order: ISA_WARNING_ORDER, includeNone: true },
     { group: 'weight',            label: 'Weight',            type: 'range', unit: 'g' },
     { group: 'breaking_strength', label: 'Breaking Strength', type: 'range', unit: 'kN' },
     // Brand comes LAST: it is the longest group in the sidebar (45 brands on
@@ -203,13 +205,13 @@ export const FILTER_GROUPS: Record<GearSlug, FilterGroupMeta[]> = {
   ],
 
   connectors: [
+    { group: 'isa_certified',     label: 'ISA Certified',     type: 'pill', pillKind: 'bool' },
+    { group: 'isa_warning',       label: 'ISA Warning',       type: 'pill', pillKind: 'enum',
+      order: ISA_WARNING_ORDER, includeNone: true },
     { group: 'price', label: 'Price', type: 'range', valueField: 'price_display', currencyUnit: true },
     { group: 'connector_style',   label: 'Type',              type: 'pill', pillKind: 'enum' },
     { group: 'closure',           label: 'Closure',           type: 'pill', pillKind: 'enum' },
     { group: 'material',          label: 'Material',          type: 'pill', pillKind: 'enum' },
-    { group: 'isa_certified',     label: 'ISA Certified',     type: 'pill', pillKind: 'bool' },
-    { group: 'isa_warning',       label: 'ISA Warning',       type: 'pill', pillKind: 'enum',
-      order: ISA_WARNING_ORDER, includeNone: true },
     { group: 'mbs_straight_pull', label: 'MBS',               type: 'range', unit: 'kN' },
     { group: 'mbs_crossload',     label: 'Crossload MBS',     type: 'range', unit: 'kN' },
     { group: 'opening',           label: 'Opening',           type: 'range', unit: 'mm' },
@@ -218,6 +220,24 @@ export const FILTER_GROUPS: Record<GearSlug, FilterGroupMeta[]> = {
     // Brand comes LAST: it is the longest group in the sidebar (45 brands on
     // webbings, even folded) and the least specific, so it sits below the spec
     // filters people scroll for rather than pushing them under a wall of pills.
+    BRAND_GROUP,
+  ],
+
+  leashes: [
+    { group: 'isa_certified',     label: 'ISA Certified',     type: 'pill', pillKind: 'bool' },
+    { group: 'isa_warning',       label: 'ISA Warning',       type: 'pill', pillKind: 'enum',
+      order: ISA_WARNING_ORDER, includeNone: true },
+    { group: 'price', label: 'Price', type: 'range', valueField: 'price_display', currencyUnit: true },
+    { group: 'construction',      label: 'Construction',      type: 'pill', pillKind: 'enum' },
+    { group: 'ring_end',          label: 'Ring Connection',   type: 'pill', pillKind: 'enum' },
+    { group: 'core_type',         label: 'Rope Type',         type: 'pill', pillKind: 'enum' },
+    { group: 'sleeve_material',   label: 'Sleeve',            type: 'pill', pillKind: 'enum' },
+    { group: 'twist_marker',      label: 'Twist Marker',      type: 'pill', pillKind: 'bool' },
+    { group: 'length',            label: 'Length',            type: 'range', unit: 'cm' },
+    { group: 'diameter',          label: 'Diameter',          type: 'range', unit: 'mm' },
+    { group: 'weight',            label: 'Weight',            type: 'range', unit: 'g' },
+    { group: 'breaking_strength', label: 'Breaking Strength', type: 'range', unit: 'kN' },
+    // Brand comes LAST, as on every type.
     BRAND_GROUP,
   ],
 

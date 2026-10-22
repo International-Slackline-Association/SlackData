@@ -120,6 +120,28 @@ describe('Connector groups', () => {
       .should('have.length', total)
   })
 
+  it('a card filtered to one shop opens on that shop\'s photo, with the group\'s after it', function () {
+    if (!pictured) this.skip()
+    const [, members] = pictured!
+    const brandsOf = (m: Row) => [String(m.brand_name), ...((m.gear_sellers as string[] | null) ?? [])]
+    // A shop with photos that is not first in the vendor order, and the only
+    // member of the group its brand makes or sells, so the card is its row.
+    const shop = members.slice(1).find(m =>
+      filesOf(m).length > 0 &&
+      members.filter(o => brandsOf(o).includes(String(m.brand_name))).length === 1,
+    )
+    if (!shop) this.skip()
+    const total = new Set(members.flatMap(filesOf)).size
+    cy.visit(`/connectors?${new URLSearchParams({ brand: String(shop!.brand_name) })}`)
+    cy.get(`[data-cy="gear-card"]`)
+      .filter(`:has([data-cy="gear-card-name"]:contains("${String(shop!.name)}"))`)
+      .first()
+      .within(() => {
+        cy.get('[data-cy="gear-card-img"]').should('have.attr', 'src').and('include', filesOf(shop!)[0])
+        cy.get('[data-cy="card-image-dot"]').should('have.length', total)
+      })
+  })
+
   it('the detail carousel shows the opened shop\'s photos and switches with the vendor row', function () {
     if (!pictured) this.skip()
     const [, members] = pictured!

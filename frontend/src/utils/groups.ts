@@ -1,10 +1,11 @@
 // One product stated more than once is one row PER STATEMENT in the catalogue,
 // each with its own specs, price and link, sharing a `product_group` (any gear
-// model). Two kinds today:
+// model). Three kinds today:
 //   - generic parts several shops sell — the same 8 mm stainless D shackle from
 //     Slacktivity, SlackGear and Balance Community (connectors);
 //   - one product whose specs depend on its maker or batch — Slack.fr's and
-//     Slack Inov's Reggae (webbings).
+//     Slack Inov's Reggae (webbings);
+//   - one leash in the lengths its maker sells, one row per length (leashes).
 // The listing shows such a group as ONE card; the detail page lists its rows
 // as a vendor table.
 //
@@ -43,6 +44,8 @@ export const GROUP_NUMERIC_FIELDS = [
   'inner_diameter', 'outer_diameter',
   // kits
   'webbing_length', 'webbing_width',
+  // leashes
+  'diameter', 'core_diameter', 'sleeve_width',
 ] as const
 
 // Text (and flag) specs a group shows only when every member agrees on them.
@@ -52,6 +55,8 @@ const GROUP_TEXT_FIELDS = [
   'style', 'front_pin', 'attachment_point',
   'roller_material', 'slider_type', 'lock_type', 'bearing_material', 'connection_type',
   'tensioning_type', 'includes_treepro', 'has_sling_attachment',
+  'construction', 'ring_end', 'core_type', 'core_rope', 'sleeve_material', 'twist_marker',
+  'ring_options',
 ] as const
 
 export interface GroupMeta {

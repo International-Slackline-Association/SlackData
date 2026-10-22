@@ -89,6 +89,12 @@ function yesNo(field: string, label: string): SpecRowDef {
   return { field, label, value: item => (item[field] ? 'Yes' : 'No') }
 }
 
+// A flag the maker may simply not mention: null drops the row rather than
+// reading as "No".
+function stated(field: string, label: string): SpecRowDef {
+  return { field, label, value: item => (item[field] == null ? '' : item[field] ? 'Yes' : 'No') }
+}
+
 // Only a shackle has a pin to lose, so the row is a shackle's alone. A group
 // whose shops disagree carries null here (utils/groups.ts) and drops the row;
 // the vendor table shows each shop's answer.
@@ -216,6 +222,25 @@ export const SPEC_ROWS: Record<GearSlug, SpecRowDef[]> = {
     ranged('weight', 'Weight', 'g'),
     plain('alloy', 'Alloy'),
     plain('standards', 'Stated Standards'),
+  ],
+  // The rings a leash is sold with are not a row: they are their own block on
+  // the detail page (RingOptions), with a link to each leash ring.
+  leashes: [
+    priceRow(),
+    plain('construction', 'Construction'),
+    plain('ring_end', 'Ring Connection'),
+    ranged('length', 'Length', 'cm'),
+    ranged('breaking_strength', 'Breaking Strength', 'kN'),
+    ranged('weight', 'Weight', 'g'),
+    ranged('diameter', 'Diameter', 'mm'),
+    // The rope: inside the sleeve on a threaded leash, the leash itself on a
+    // rope leash — so "Rope", never "Core".
+    plain('core_rope', 'Rope'),
+    plain('core_type', 'Rope Type'),
+    ranged('core_diameter', 'Rope Diameter', 'mm'),
+    plain('sleeve_material', 'Sleeve'),
+    ranged('sleeve_width', 'Sleeve Width', 'mm'),
+    stated('twist_marker', 'Twist Marker'),
   ],
   // upcoming types have no data yet
   bungees: [],

@@ -418,3 +418,57 @@ def test_a_release_date_is_edited_as_a_date(client, store):
 def test_the_brand_field_list(client, store):
     names = [s["name"] for s in client.get("/edit/brand/fields", headers=ADMIN).json()]
     assert "website" in names and "name" not in names
+
+
+# --- Leashes: the rings a leash is sold with ------------------------------------------
+#
+# `ring_options` names leash rings by id, and the catalogue build refuses a leash
+# whose ring is not listed (load_gear.check_ring_options). So the edit path must
+# refuse one first: stored, it would fail every rebuild from then on.
+
+
+def test_a_leash_is_editable_and_its_rings_with_it(client, store):
+    response = edit(client, "leashes", 43, {"ring_options": [{"leashring_id": 36, "count": 2}], "price": 50.0})
+    assert response.status_code == 200, response.text
+    assert response.json()["entry"]["ring_options"] == [{"leashring_id": 36, "count": 2}]
+    from slack_data.models.leashes import Leash
+
+    with Session(built(store)) as session:
+        assert session.get(Leash, 43).ring_options == [{"leashring_id": 36, "count": 2}]
+
+
+def test_a_ring_option_naming_no_leash_ring_is_refused(client, store):
+    response = edit(client, "leashes", 43, {"ring_options": [{"leashring_id": 9999, "count": 2}]})
+    assert response.status_code == 422
+    assert response.json()["detail"]["errors"][0]["field"] == "ring_options"
+
+
+def test_a_ring_option_naming_a_merged_ring_is_refused(client, store):
+    rev = stored(client, "leashrings", 1)["rev"]
+    merged = client.post("/edit/leashrings/1/merge", headers=ADMIN, json={"rev": rev, "into": 2, "why": "x" * 40})
+    assert merged.status_code == 200, merged.text
+    assert edit(client, "leashes", 43, {"ring_options": [{"leashring_id": 1, "count": 1}]}).status_code == 422
+
+
+def test_a_new_leash_with_an_unknown_ring_is_refused(client, store):
+    fields = {"name": "Test leash", "brand": "SlackTech", "construction": "Rope",
+              "ring_options": [{"leashring_id": 9999, "count": 1}]}
+    assert client.post("/edit/leashes", headers=ADMIN, json={"fields": fields}).status_code == 422
+
+
+def test_a_ring_a_leash_is_sold_with_cannot_be_merged_away(client, store):
+    """The leash would name a ring the build no longer lists."""
+    rev = stored(client, "leashrings", 35)["rev"]
+    response = client.post("/edit/leashrings/35/merge", headers=ADMIN, json={"rev": rev, "into": 36, "why": "x" * 40})
+    assert response.status_code == 409
+    assert "43" in response.json()["detail"]["message"]
+
+
+def test_ring_options_are_edited_as_rings(client, store):
+    specs = {s["name"]: s for s in client.get("/edit/leashes/fields", headers=ADMIN).json()}
+    rings = specs["ring_options"]
+    assert rings["kind"] == "rings"
+    assert any(o.startswith("35 — SlackTech ") for o in rings["options"])
+    # Every listed ring, and nothing else: the id leads each option.
+    listed = {int(d.key) for d in store.load() if d.collection == "leashrings" and not d.retired}
+    assert {int(o.split(" ")[0]) for o in rings["options"]} == listed

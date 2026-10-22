@@ -384,7 +384,8 @@ curl -s https://slackdata.org/api/manufacturer/me \\
             <code className={CODE}>weblocks</code>, <code className={CODE}>leashrings</code>,{' '}
             <code className={CODE}>grips</code>, <code className={CODE}>rollers</code>,{' '}
             <code className={CODE}>treepros</code>, <code className={CODE}>starterkits</code>,{' '}
-            <code className={CODE}>tricklinekits</code>, <code className={CODE}>connectors</code>.
+            <code className={CODE}>tricklinekits</code>, <code className={CODE}>connectors</code>,{' '}
+            <code className={CODE}>leashes</code>.
           </p>
           <p>Units are not uniform across gear types:</p>
           <Table

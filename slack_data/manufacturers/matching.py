@@ -51,6 +51,7 @@ from slack_data.models.brand_clients import ManufacturerPrincipal
 from slack_data.models.brands import Brand
 from slack_data.models.connectors import Connector
 from slack_data.models.grips import Grip
+from slack_data.models.leashes import Leash
 from slack_data.models.leashrings import LeashRing
 from slack_data.models.rollers import Roller
 from slack_data.models.starterkits import StarterKit
@@ -72,6 +73,7 @@ GEAR_MODELS = {
     "starterkits": StarterKit,
     "tricklinekits": TricklineKit,
     "connectors": Connector,
+    "leashes": Leash,
 }
 
 _WHITESPACE = re.compile(r"\s+")
@@ -238,7 +240,18 @@ def current_spec(item, gear_type: str) -> dict:
     # `name` is deliberately absent: it is the handle the item is matched by,
     # not one of its specs, and it is already on the row above. Having it in
     # both places invited a brand to edit the copy that cannot be edited.
-    return {name: getattr(item, name, None) for name in sorted(manufacturer_fields(gear_type))}
+    return {name: _as_sent(getattr(item, name, None)) for name in sorted(manufacturer_fields(gear_type))}
+
+
+def _as_sent(value):
+    """A list of objects (a leash's `ring_options`) as the JSON text `changes`
+    carries it — `changes` takes no nested values, so the read hands back what
+    the write takes, as it does a webbing's `stretch`."""
+    if isinstance(value, list) and any(isinstance(part, dict) for part in value):
+        import json
+
+        return json.dumps(value)
+    return value
 
 
 def brand_gear(

@@ -6,7 +6,7 @@ rollback, the orphan trap — is in [infra/README.md](infra/README.md).
 | You changed | Run |
 |---|---|
 | Frontend code, styles, copy, images in `frontend/public/` | **B** |
-| Root `*.json` gear data (baked into the Lambda image) | **A** |
+| Root `*.json` gear data, brands, ISA lists (a pull request adding to the seeds) | **A**, then **A2**, then **B** |
 | Python API code (`slack_data/`), `infra/serverless.yml` | **A** |
 | Both | **A**, then **B** |
 
@@ -34,11 +34,38 @@ Expired token → `aws sso login --profile isa-slackdata`, then re-run the `eval
 ```bash
 cd infra
 ./preflight.sh
-npx serverless deploy --stage prod
+CATALOG_SOURCE=store npx serverless deploy --stage prod
 cd ..
 ```
 
+**Always pass `CATALOG_SOURCE=store`.** `serverless.yml` defaults it to `baked`, so a deploy
+without it quietly puts the site back on the catalogue baked into the image: every edit made on
+the site disappears from view (they are still in the store, and come back with the next deploy that
+passes it). `verify-deploy.sh` reports `source: store` when it is right.
+
 2–4 minutes. A `serverless.yml` change that alters the CloudFront distribution ~15.
+
+## A2 — what a pull request added to the seeds
+
+The site reads the catalogue store, not the seeds, and `importer --apply` refuses a store with live
+edits. A pull request that adds to the seeds (a gear type, products, a co-listing, a certificate's
+match) reaches the site through the seed import: it creates what the store lacks, with its photos,
+and sets fields the change log shows the site never changed; anything changed on the site, or a key
+the site gave to another entry, is left and reported. Every write is logged as an `import` under
+your ISA id. Run it after **A** (the new code must know the new fields) and before **B** (the new
+frontend should not show a gear type before it has rows):
+
+```bash
+export CATALOG_TABLE=$(out CatalogTableName) CHANGELOG_TABLE=$(out ChangelogTableName) \
+       PEOPLE_TABLE=$(out PeopleTableName) SQL_ECHO=false
+python -m slack_data.catalogue.seed_import                                        # read the plan
+python -m slack_data.catalogue.seed_import --as <your ISA id> \
+  --media-bucket "$(out MediaBucketName)" --apply
+python -m slack_data.catalogue.seed_import --check                                # exit 0
+```
+
+Read the plan before applying: a `!` line is something it will not do (a field edited on the site
+since, a renumbering the seeds need). Then `./verify-deploy.sh` (`isa_skipped: 0`).
 
 ## B — website (SPA + images)
 

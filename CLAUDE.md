@@ -176,7 +176,7 @@ Root *.json seed files
 | `slack_data/database.py` | `DATABASE_ENGINE`, `get_session()`, `SessionDep`, `create_db_and_tables()` |
 | `slack_data/models/brands.py` | `Brand` model + `get_brand()` upsert helper (central entity) |
 | `slack_data/models/<type>.py` | SQLModel schemas per gear type |
-| `slack_data/load_data/load_gear.py` | The one loader for all nine gear types: seed entry ↔ row (`to_row` / `to_entry`), the `GEAR` registry |
+| `slack_data/load_data/load_gear.py` | The one loader for all ten gear types: seed entry ↔ row (`to_row` / `to_entry`), the `GEAR` registry |
 | `slack_data/load_data/_seed_io.py` | `read_seed_json()` / `seed_path()` / `to_bool()` / `require_seed_id()` — shared by every loader |
 | `slack_data/load_data/brand_ids.py` | `catalog_id` from `manufacturers.json` — the stable `Brand.id`, read lazily |
 | `scripts/backfill_seed_ids.py` | Writes/verifies the explicit ids in the seeds; `--check` for CI |
@@ -196,6 +196,7 @@ Root *.json seed files
 | `slack_data/catalogue/` | The catalogue store (live editing phase 2): one document per seed entry, the importer + shadow check (`python -m slack_data.catalogue.importer [--apply|--check]`), the in-memory build, and the live catalogue read when `CATALOG_SOURCE=store`. See LIVE_EDITING_PHASE_2.md |
 | `slack_data/api/routers/catalogue_router.py`, `export/` | Public `GET /catalogue/{collection}` (each seed file, rebuilt from the store byte for byte) and the daily export script + workflow for the data repo |
 | `slack_data/api/routers/people_router.py` | `/me`, `/me/notice`, `/me/name` (the public name is typed in by the person, since the ISA token gives SlackData none, and can be changed once for life), `/admin/admins`, `/admin/roles`, public `/changes` — a writable router, no catalogue session |
+| `slack_data/catalogue/seed_import.py` | **Seed changes into a live store** (2026-10-21): what a pull request adds to the seeds — new entries with their photos, and new values of fields the change log shows the site never changed — written through the edit path, logged as `import` under an admin; a field changed on the site, or a key the site gave to another entry, is left and reported. `python -m slack_data.catalogue.seed_import [--check | --as <ISA id> --media-bucket NAME --apply]`. DEPLOY.md § A2 |
 | `slack_data/catalogue/edits.py`, `api/routers/edit_router.py` | Live editing (phase 3): `/edit/*`, admins only — edit, create, merge, revert, brands (no hide: D81). Each change is written with its log records in one transaction (`changelog/writer.py`), refused with the current entry on a stale `rev`; a rename re-points ISA matches. Needs store mode. Every edit bumps `_meta/edits`, and `importer --apply` then refuses to overwrite the store. See LIVE_EDITING_PHASE_3.md |
 | `slack_data/models/brand_clients.py` | `BrandClient` / `BrandPermission` / `ManufacturerPrincipal` — the account linkage `Brand` never had |
 | `slack_data/manufacturers/` | The manufacturer API's stores: `clients.py` (Protocol + SQLite + in-memory), `dynamo.py`, `store.py`, `matching.py` (gear identity), `register.py` (onboarding CLI), `onboard.py` (the CLI's other half — dossier, key minting, ledger, end-to-end proof) |
@@ -263,12 +264,13 @@ Every gear type carries an **`active: bool | None`** field on its `Base<X>` (so 
 | Webbing | `/webbing` | `webbings.json` | 245 |
 | Weblock | `/weblock` | `weblocks.json` | 127 |
 | Roller | `/roller` | `rollers.json` | 21 |
-| LeashRing | `/leashring` | `leashrings.json` | 34 |
+| LeashRing | `/leashring` | `leashrings.json` | 37 |
 | Grip | `/grip` | `grips.json` | 20 |
-| TreePro | `/treepro` | `treepros.json` | 25 |
+| TreePro | `/treepro` | `treepros.json` | 33 |
 | StarterKit | `/starterkit` | `starterkits.json` | 64 |
 | TricklineKit | `/tricklinekit` | `tricklinekits.json` | 10 |
-| Connector | `/connector` | `connectors.json` | 120 |
+| Connector | `/connector` | `connectors.json` | 141 |
+| Leash | `/leash` | `leashes.json` | 43 |
 | ISAGearWarning | `/isawarning` | `isa_gear_warnings.json` | 88 |
 | ISAGearCertification | `/isacertification` | `isa_certified.json` | 22 |
 
@@ -282,6 +284,21 @@ on the frontend and approved on 2026-10-11:
 
 Three candidates with too little data and no photos were moved to the local staging file instead,
 `candidates/connectors.json` (ids 9069, 9115, 9116; see `candidates/stage.py`).
+
+**Leashes** (`models/leashes.py`) are the newest type, seeded 2026-10-17 from the research and
+review in LEASHES_REVIEW.md, which holds every design decision. One row per length (and, for three
+leashes, per ring or construction option), with the rows of one leash sharing `product_group`. `breaking_strength` is the leash's own stated strength; where the maker
+states two, it holds the lower. `ring_options` (`[{leashring_id, count}]`) is the first link from
+one gear type to another: `load_gear.check_ring_options` refuses an id that is not a leash ring.
+`leashes` is the one collection that is not its router prefix plus "s", so `crud_router` takes
+`collection=` and `edits.api_type` maps it. Leashes are editable like every other type: on the
+site, through the manufacturer API (which carries `ring_options` as JSON text, as it does a
+webbing's `stretch`), and through the seller pass. The edit form offers `ring_options` as kind
+`rings` (one `<ring id> x <count>` per line, the leash rings to pick from as its options), and
+`catalogue/edits.py` refuses a ring that is not a listed leash ring, and a merge of a ring a leash
+names: stored, either would fail every rebuild. Locally the media manifest also lists the photos of
+staged candidates (ids >= 9000, `media/manifest.py` `staged_documents`, seed-files mode only), which
+`candidates/stage_photos.py` encodes from the originals in `candidates/images/<collection>/<id>/`.
 
 **Generic parts several shops sell are grouped, not merged.** Each shop's listing stays its own row
 with that shop's stated specs, price and link, and rows for the same part share `product_group`.
@@ -311,7 +328,7 @@ until 2026-10-12; its quicklinks are now generic parts, one row per shop, groupe
 
 ### ISA gear warnings
 
-`isa_gear_warnings.json` (root, 82 entries scraped from the ISA's warnings database) is loaded by
+`isa_gear_warnings.json` (root, 83 entries: 82 scraped from the ISA's warnings database, one added by hand) is loaded by
 `load_data/load_isa_warnings.py`, which **runs last in `seed.py`** — it addresses gear by primary
 key, so every gear table must already be populated. Each entry carries a hand-adjudicated `match`
 block (`gearType` / `gearIds` / `gearNames` / `confidence` / `note`) mapping it onto our catalogue;
@@ -319,13 +336,13 @@ ids are **verified against the recorded `"<brand> <name>"`** before use, so seed
 reported instead of silently re-pointing a recall. The pass writes two things:
 
 1. `isa_warning` (the `ISAWarning` enum) onto the gear row — worst severity wins. Only
-   webbing / weblock / roller / leashring / grip / connector have the column.
+   webbing / weblock / roller / leashring / grip / connector / leash have the column.
 2. One `ISAGearWarning` row per (entry x matched gear id) — `models/isa_gear_warnings.py`, served
    read-only by `/isawarning` — holding the full entry (description, solution, parsed date, source
    links, in-production flag, match confidence). It has **no FK**: `(gear_type, gear_id)` is the
    link, because a warning can land on any of five tables.
 
-Seeding is gated on the `ISAGearWarning` table being empty. Eight entries match nothing we hold —
+Seeding is gated on the `ISAGearWarning` table being empty. Six entries match nothing we hold —
 tracked in BACKLOG.md.
 
 ### ISA certifications
@@ -352,8 +369,8 @@ Its rules:
 - **Webbing and Webbing – Sewn Loop certificates** both certify the webbing row; **Intermittent
   Connection** certificates never do (the build leaves them unmatched, and the loader refuses them
   even if matched). Superseded certificates stay unmatched — newest only.
-- **Six types can be certified**: webbing / weblock / roller / leashring / grip / connector
-  (ISA:52 is the Highline Connector standard). Kits and tree protectors have no certification
+- **Seven types can be certified**: webbing / weblock / roller / leashring / grip / connector /
+  leash (ISA:52 is the Highline Connector standard; ISA:37 certifies a leash tether or a sewn set). Kits and tree protectors have no certification
   field at all.
 
 It writes, per certified row: `isa_certified = True`; `isa_certificate`, the primary certificate
@@ -366,9 +383,9 @@ certificate (standard version, lab, test date, manual, pictures as links). No FK
 
 All three gear-row fields are in `_EXCLUDED` (`submissions/fields.py`): certification is the ISA's
 to state, and a hand-edit would be overwritten on the next seed. The old computed webbing
-`classification` is gone. 18 rows are certified today (the 18th is connector 1, the KingPin
-shackle); 10 certificates match nothing (leashes, Intermittent Connection, one superseded) —
-tracked in BACKLOG.md.
+`classification` is gone. 28 rows are certified today: 18 before leashes (the 18th is connector 1,
+the KingPin shackle) and 10 leash rows from four ISA:37 certificates. 6 certificates match nothing
+(Intermittent Connection, one superseded) — tracked in BACKLOG.md.
 
 ### Gear descriptions
 
@@ -437,7 +454,7 @@ the sellers, deduped). Two surfaces read it:
   price and above the ISA certification block) — each shop's name, linked to its
   brand page. DESIGN.md § Also sold by.
 
-Seeded today: **81 co-listings**, from five sources with very different
+Seeded today: **93 co-listings**, from six sources with very different
 provenance.
 
 - **Slack Inov ↔ Spider Slacklines**, 61: the two companies each sell the
@@ -476,6 +493,15 @@ provenance.
   once per brand (100+154, same 25 mm / 57 g/m); on 2026-10-08 the Slack Pro!
   row was folded into the Slack.fr one, Slack.fr's specs kept, and its photo
   moved onto `slackfr_neon-light` as `-3`, so id 154 no longer exists.
+- **SlackTech** (US, closed) sold 12 products made by others that we hold:
+  BC's Aero 1 and Type 18 MKII, Slackline Industries' CoreTek and Sugoi
+  (webbings 9, 18, 132, 133), the LineGrip Alu G4 (grip 1), Slackline
+  Industries' BOSS LINE, TRICK LINE, BASE LINE and PLAY LINE kits and Gibbon's
+  Jibline (trickline kits 8, 11, 16, starter kits 15, 51), YogaSlackers' eLine
+  Light Kit (starter kit 25) and Van Beest's Green Pin 1/2" shackle (connector
+  43). Recorded on 2026-10-17 from the Wayback copies of slacklinetechnology.com
+  (2014–2019). Its own hardware (steel leash rings, quicklinks, shackles, oval
+  carabiners, tree padding) is held as SlackTech rows.
 
 **Not done here:** a redirect for merged rows (the Landcruising/Aki,
 EQB/Spider `Bandit` and `Paddle`, Slack.fr/Slack Pro! `Neon Light`, and Matrix Outer/Wave Tube 32 pairs were merged without one, so their old ids 404), and anything on the **card** — the card shows the maker, because the

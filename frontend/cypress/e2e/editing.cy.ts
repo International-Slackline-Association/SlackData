@@ -142,6 +142,43 @@ describe('Live editing', () => {
     })
   })
 
+  it("edits a leash's rings: shown as id x count, picked from the leash rings, linked on the page", () => {
+    cy.request({
+      method: 'POST',
+      url: `${api()}/edit/leashes`,
+      headers: AUTH,
+      body: {
+        fields: {
+          name: unique('Ring Test Leash'),
+          brand: 'SlackTech',
+          construction: 'Rope',
+          ring_options: [{ leashring_id: 35, count: 2 }],
+        },
+      },
+    }).then(response => {
+      const id = Number(response.body.key)
+      cy.visit(`/leashes/${id}`, signedIn())
+      cy.getByData('item-edit').click()
+      cy.getByData('edit-field-ring_options').should('have.value', '35 x 2')
+      // Picked by name; the line it adds is the ring's id.
+      cy.getByData('edit-field-ring_options-add').find('option').contains(/^36 — /).then(option => {
+        cy.getByData('edit-field-ring_options-add').select(option.val() as string)
+      })
+      cy.getByData('edit-field-ring_options').should('have.value', '35 x 2\n36 x 1')
+      cy.getByData('edit-why').type('also sold with the 3 inch ring')
+      cy.getByData('edit-save').click()
+      cy.getByData('entry-editor').should('not.exist')
+      cy.get('[data-cy="ring-option"][data-leashring-id="36"]').should('have.attr', 'data-count', '1')
+      cy.get('[data-cy="ring-option"][data-leashring-id="35"]').should('have.attr', 'data-count', '2')
+
+      // A ring named instead of numbered is an error, not a guess.
+      cy.getByData('item-edit').click()
+      cy.getByData('edit-field-ring_options').clear().type('Vortex x 1')
+      cy.getByData('edit-field-error-ring_options').should('contain', 'one ring per line')
+      cy.getByData('edit-save').should('be.disabled')
+    })
+  })
+
   it('reverts an edit from the History', () => {
     newGrip(unique('Grip To Revert')).then(id => {
       cy.request({ url: `${api()}/edit/grips/${id}`, headers: AUTH }).then(({ body }) =>

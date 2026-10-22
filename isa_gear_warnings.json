@@ -1930,6 +1930,29 @@
                 "confidence": "exact",
                 "note": "added 2026-09-02 from the archived manufacturer page (raed-slacklines.com/riglock)"
             }
+        },
+        {
+            "id": "83",
+            "status": "Notice",
+            "date": "01.09.26",
+            "productType": "Leash",
+            "model": "Spliced Leash",
+            "manufacturer": "Slack-Inov",
+            "inProduction": "Yes",
+            "description": "The leash shows unintended opening of the splice but is still secured with stitches.",
+            "solution": "For professional use only. Not recommended for general highline use.",
+            "link1": "https://www.instagram.com/p/DdBPjznA2up/",
+            "match": {
+                "gearType": "leash",
+                "gearIds": [
+                    17
+                ],
+                "gearNames": [
+                    "Slack Inov Spliced Highline Leash"
+                ],
+                "confidence": "exact",
+                "note": "added 2026-10-17 by the operator from the ISA's list, newer than our capture"
+            }
         }
     ]
 }

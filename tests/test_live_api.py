@@ -55,6 +55,7 @@ from slack_data.models.brands import Brand
 from slack_data.models.connectors import Connector, ConnectorMaterial, ConnectorStyle
 from slack_data.models.grips import Grip
 from slack_data.models.isa_gear_warnings import ISAGearWarning
+from slack_data.models.leashes import Leash, LeashConstruction
 from slack_data.models.leashrings import LeashRing
 from slack_data.models.rollers import (
     BearingMaterial,
@@ -160,6 +161,9 @@ def _build_catalogue(path: Path) -> dict:
             "connector": Connector(
                 name="C", connector_style=ConnectorStyle.SHACKLE,
                 material=ConnectorMaterial.STEEL, brand_id=alpha.id,
+            ),
+            "leash": Leash(
+                name="Le", construction=LeashConstruction.THREADED, brand_id=alpha.id
             ),
         }
         for row in rows.values():

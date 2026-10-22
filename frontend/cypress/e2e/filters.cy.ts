@@ -193,6 +193,26 @@ const FILTER_GROUPS: Record<string, FilterGroup[]> = {
     { group: 'weight',            label: 'Weight',            type: 'range', unit: 'g'  },
     { group: 'brand',             label: 'Brand',             type: 'pill'  }, // maker OR co-listing seller — see brand_filter.cy.ts
   ],
+
+  // ── Leash ─────────────────────────────────────────────────────────────────
+  // Fields: construction(enum) ring_end(enum) core_type(enum: Dynamic/Static)
+  //         sleeve_material(enum) twist_marker(bool) isa_certified(bool)
+  //         isa_warning(enum) length/diameter/weight/breaking_strength(float)
+  leashes: [
+    { group: 'isa_certified',     label: 'ISA Certified',     type: 'pill'  },
+    { group: 'isa_warning',       label: 'ISA Warning',       type: 'pill'  }, // None/Notice (the Spliced Leash)
+    { group: 'price',             label: 'Price',             type: 'range', valueAttr: 'data-price-display' },
+    { group: 'construction',      label: 'Construction',      type: 'pill'  }, // Threaded/Rope
+    { group: 'ring_end',          label: 'Ring Connection',   type: 'pill'  }, // Knot/Sewn/Spliced
+    { group: 'core_type',         label: 'Rope Type',         type: 'pill'  }, // Dynamic/Static
+    { group: 'sleeve_material',   label: 'Sleeve',            type: 'pill'  },
+    { group: 'twist_marker',      label: 'Twist Marker',      type: 'pill'  },
+    { group: 'length',            label: 'Length',            type: 'range', unit: 'cm' },
+    { group: 'diameter',          label: 'Diameter',          type: 'range', unit: 'mm' },
+    { group: 'weight',            label: 'Weight',            type: 'range', unit: 'g'  },
+    { group: 'breaking_strength', label: 'Breaking Strength', type: 'range', unit: 'kN' },
+    { group: 'brand',             label: 'Brand',             type: 'pill'  }, // maker OR co-listing seller — see brand_filter.cy.ts
+  ],
 }
 
 // ── Helpers ───────────────────────────────────────────────────────────────────

@@ -8,7 +8,7 @@
 //           category is never scrolled off-screen. Don't "fix" it back to wrap.
 //
 // Contract (navigation.cy.ts + manufacturers.cy.ts):
-//   [data-cy="nav-tab"]            one per data-backed gear type (exactly 8)
+//   [data-cy="nav-tab"]            one per data-backed gear type (exactly 10)
 //     data-type="{slug}", data-active="true"|"false"
 //   [data-cy="nav-tab-upcoming"]   coming-soon categories (not counted as tabs)
 //   [data-cy="manufacturers-link"] data-active semantics like a tab

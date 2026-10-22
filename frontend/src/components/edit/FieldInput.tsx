@@ -49,6 +49,41 @@ export default function FieldInput({
           onChange={e => onChange(e.target.value)}
         />
       )
+    case 'rings':
+      // One line per option the leash is sold with: a ring and how many. The
+      // picker appends a line for a ring, so nobody has to know its id.
+      return (
+        <div>
+          <textarea
+            id={id}
+            data-cy={cy}
+            rows={3}
+            placeholder={'leash ring id x how many, one per line\n35 x 2'}
+            className={`${INPUT} font-mono`}
+            value={draft as string}
+            onChange={e => onChange(e.target.value)}
+          />
+          <select
+            data-cy={`${cy}-add`}
+            aria-label="Add a leash ring"
+            className={`${INPUT} mt-1`}
+            value=""
+            onChange={e => {
+              const ringId = e.target.value.split(' ')[0]
+              if (!ringId) return
+              const text = (draft as string).trim()
+              onChange(`${text ? `${text}\n` : ''}${ringId} x 1`)
+            }}
+          >
+            <option value="">Add a leash ring…</option>
+            {(spec.options ?? []).map(option => (
+              <option key={option} value={option}>
+                {option}
+              </option>
+            ))}
+          </select>
+        </div>
+      )
     case 'boolean':
       return (
         <select id={id} data-cy={cy} className={INPUT} value={draft as string} onChange={e => onChange(e.target.value)}>

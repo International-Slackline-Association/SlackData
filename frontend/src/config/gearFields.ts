@@ -35,6 +35,7 @@ export const CARD_DATA_FIELDS: Record<GearSlug, string[]> = {
   starterkits:   ['price', 'price_base', 'price_display', 'currency', 'weight', 'webbing_length', 'webbing_width'],
   tricklinekits: ['price', 'price_base', 'price_display', 'currency', 'weight', 'webbing_length', 'webbing_width'],
   connectors:    ['price', 'price_base', 'price_display', 'currency', 'weight', 'mbs_straight_pull', 'mbs_crossload', 'opening', 'pin_diameter'],
+  leashes:       ['price', 'price_base', 'price_display', 'currency', 'weight', 'length', 'diameter', 'breaking_strength'],
   // upcoming types have no data / cards yet
   bungees:       [],
   leashringpro:  [],
@@ -72,6 +73,13 @@ export const INLINE_SPECS: Record<GearSlug, InlineSpec[]> = {
     { field: 'material' },
     { field: 'opening', value: item => rangeText(item, 'opening', 'mm') },
     { field: 'mbs_straight_pull', value: item => rangeText(item, 'mbs_straight_pull', 'kN') },
+  ],
+  // A leash's lengths collapse to one card (utils/groups.ts), so length and
+  // strength read as ranges there ("335–360 cm").
+  leashes:       [
+    { field: 'construction' },
+    { field: 'length', value: item => rangeText(item, 'length', 'cm') },
+    { field: 'breaking_strength', value: item => rangeText(item, 'breaking_strength', 'kN') },
   ],
   bungees:       [],
   leashringpro:  [],

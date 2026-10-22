@@ -1,4 +1,5 @@
 import { GEAR_TYPES } from '../support/gear_types'
+import { listingUnits } from '../support/listing'
 import { RED_600 } from '../support/colors'
 
 // ISA Approved badge behaviour.
@@ -16,7 +17,7 @@ describe('ISA Approved badge — gear cards', () => {
     describe(label, () => {
       it('shows the ISA Approved stamp on certified items', () => {
         cy.fetchAllItems(apiPath).then((all) => {
-          const certified = (all as Record<string, unknown>[]).find(i => i.isa_certified === true)
+          const certified = listingUnits(all as Record<string, unknown>[]).find(i => i.isa_certified === true)
           if (!certified) return // skip if no certified items in dataset
 
           cy.visit(`/${slug}`)
@@ -30,7 +31,7 @@ describe('ISA Approved badge — gear cards', () => {
 
       it('does not show the ISA badge on non-certified items', () => {
         cy.fetchAllItems(apiPath).then((all) => {
-          const notCertified = (all as Record<string, unknown>[]).find(i => i.isa_certified === false)
+          const notCertified = listingUnits(all as Record<string, unknown>[]).find(i => i.isa_certified === false)
           if (!notCertified) return
 
           cy.visit(`/${slug}`)
@@ -44,7 +45,7 @@ describe('ISA Approved badge — gear cards', () => {
 
       it('positions the ISA badge inside the card image area', () => {
         cy.fetchAllItems(apiPath).then((all) => {
-          const certified = (all as Record<string, unknown>[]).find(i => i.isa_certified === true)
+          const certified = listingUnits(all as Record<string, unknown>[]).find(i => i.isa_certified === true)
           if (!certified) return
 
           cy.visit(`/${slug}`)
@@ -59,7 +60,7 @@ describe('ISA Approved badge — gear cards', () => {
 
       it('does not use a plain checkmark or text pill for ISA certification', () => {
         cy.fetchAllItems(apiPath).then((all) => {
-          const certified = (all as Record<string, unknown>[]).find(i => i.isa_certified === true)
+          const certified = listingUnits(all as Record<string, unknown>[]).find(i => i.isa_certified === true)
           if (!certified) return
 
           cy.visit(`/${slug}`)

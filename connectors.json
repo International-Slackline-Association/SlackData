@@ -760,6 +760,7 @@
         "currency": "EUR",
         "notes": "Listed as '8mm Delta Quick Link – INOX'. Delta. WLL 6 kN. MBS with the gate open '> 1 kN'.",
         "active": true,
+        "product_group": "Delta Quicklink 8mm, Stainless",
         "photos": [
             {
                 "id": "2601c9f613e3282c",
@@ -1351,7 +1352,8 @@
         "gear_sellers": [
             "Balance Community",
             "Spider Slacklines",
-            "Landcruising"
+            "Landcruising",
+            "SlackTech"
         ],
         "photos": [
             {
@@ -3463,6 +3465,357 @@
                 "id": "8e773939d1d767e2",
                 "small": "connectors/126/8e773939d1d767e2-480.webp",
                 "large": "connectors/126/8e773939d1d767e2-1600.webp"
+            }
+        ]
+    },
+    {
+        "id": 127,
+        "name": "Oval Quicklink 10mm",
+        "brand": "SlackTech",
+        "connector_style": "Quicklink",
+        "closure": "Quicklink sleeve",
+        "material": "Steel",
+        "alloy": "plated steel",
+        "mbs_straight_pull": 55.0,
+        "captive_pin": false,
+        "weight": 137.0,
+        "product_url": "https://web.archive.org/web/20160331182014/http://slacklinetechnology.com/10-mm-standard-quicklink.html",
+        "price": 7.5,
+        "currency": "USD",
+        "notes": "Listed as '10mm Standard Quicklink' (2016): Maillon Rapide, plated. MBS 55 kN, 137 g. Fits 5/8\" chain links and smaller. 'Made in Italy' per the page.",
+        "active": false,
+        "product_group": "Oval Quicklink 10mm",
+        "photos": [
+            {
+                "id": "a4ad835979d58fee",
+                "small": "connectors/127/a4ad835979d58fee-480.webp",
+                "large": "connectors/127/a4ad835979d58fee-1600.webp"
+            }
+        ]
+    },
+    {
+        "id": 128,
+        "name": "Oval Quicklink 8mm",
+        "brand": "SlackTech",
+        "connector_style": "Quicklink",
+        "closure": "Quicklink sleeve",
+        "material": "Steel",
+        "alloy": "plated steel",
+        "captive_pin": false,
+        "product_url": "https://web.archive.org/web/20160327034309/http://slacklinetechnology.com/slackline-kit/all-slackline-gear/quicklinks.html",
+        "price": 5.5,
+        "currency": "USD",
+        "notes": "Listed as '8mm Standard Quicklink' (2016), US$5.50; its own page was never archived, so only the listing's name and price are known. 'Standard' is SlackTech's word for its plated Maillon Rapide quicklinks.",
+        "active": false,
+        "product_group": "Oval Quicklink 8mm"
+    },
+    {
+        "id": 129,
+        "name": "Delta Quicklink 10mm",
+        "brand": "SlackTech",
+        "connector_style": "Quicklink",
+        "closure": "Quicklink sleeve",
+        "material": "Steel",
+        "alloy": "plated steel",
+        "mbs_straight_pull": 45.0,
+        "captive_pin": false,
+        "product_url": "https://web.archive.org/web/20160329043130/http://slacklinetechnology.com/10mm-delta-quicklink.html",
+        "price": 7.5,
+        "currency": "USD",
+        "notes": "Listed as '10mm Standard Delta Quicklink' (2016): Maillon Rapide, plated, MBS 45 kN, CE. 'Made in Italy' per the page.",
+        "active": false,
+        "product_group": "Delta Quicklink 10mm",
+        "photos": [
+            {
+                "id": "16ab9643e24407c8",
+                "small": "connectors/129/16ab9643e24407c8-480.webp",
+                "large": "connectors/129/16ab9643e24407c8-1600.webp"
+            }
+        ]
+    },
+    {
+        "id": 130,
+        "name": "Delta Quicklink 8mm",
+        "brand": "SlackTech",
+        "connector_style": "Quicklink",
+        "closure": "Quicklink sleeve",
+        "material": "Steel",
+        "alloy": "plated steel",
+        "mbs_straight_pull": 27.0,
+        "captive_pin": false,
+        "product_url": "https://web.archive.org/web/20160329043147/http://slacklinetechnology.com/8mm-delta-quicklink.html",
+        "price": 5.5,
+        "currency": "USD",
+        "notes": "Listed as '8mm Standard Delta Quicklink' (2016): Maillon Rapide, plated, MBS 27 kN, CE. The page also calls it 'corrosion stainless steel'; 'Standard Plated' in its name is used. 'Made in Italy' per the page.",
+        "active": false,
+        "photos": [
+            {
+                "id": "4c0b9965885c4bd5",
+                "small": "connectors/130/4c0b9965885c4bd5-480.webp",
+                "large": "connectors/130/4c0b9965885c4bd5-1600.webp"
+            }
+        ]
+    },
+    {
+        "id": 131,
+        "name": "Oval Quicklink 10mm, Stainless",
+        "brand": "SlackTech",
+        "connector_style": "Quicklink",
+        "closure": "Quicklink sleeve",
+        "material": "Stainless Steel",
+        "mbs_straight_pull": 60.0,
+        "captive_pin": false,
+        "weight": 142.0,
+        "product_url": "https://web.archive.org/web/20150108002829/http://slacklinetechnology.com/stainess-10-mm-quick-link.html",
+        "price": 10.49,
+        "currency": "USD",
+        "notes": "Listed as '10mm SS Quicklink' (2015) and '10mm Quicklink' (2014, US$9.95): Kong, stainless steel, MBS 60 kN, 142 g. Fits 5/8\" chain links and smaller. Made in Italy.",
+        "active": false,
+        "photos": [
+            {
+                "id": "a4ad835979d58fee",
+                "small": "connectors/131/a4ad835979d58fee-480.webp",
+                "large": "connectors/131/a4ad835979d58fee-1600.webp"
+            }
+        ]
+    },
+    {
+        "id": 132,
+        "name": "Oval Quicklink 8mm, Stainless",
+        "brand": "SlackTech",
+        "connector_style": "Quicklink",
+        "closure": "Quicklink sleeve",
+        "material": "Stainless Steel",
+        "mbs_straight_pull": 40.0,
+        "captive_pin": false,
+        "weight": 79.0,
+        "standards": [
+            "CE"
+        ],
+        "standards_source": "https://web.archive.org/web/20141022050253/http://slacklinetechnology.com/8mm-stainless-steel-quicklink.html",
+        "product_url": "https://web.archive.org/web/20141022050253/http://slacklinetechnology.com/8mm-stainless-steel-quicklink.html",
+        "price": 7.25,
+        "currency": "USD",
+        "notes": "Listed as '8mm SS Quicklink' (2014): Kong, stainless steel, MBS 40 kN, 79 g, CE. Made in Italy.",
+        "active": false,
+        "product_group": "Oval Quicklink 8mm, Stainless",
+        "photos": [
+            {
+                "id": "61d7be29fce44416",
+                "small": "connectors/132/61d7be29fce44416-480.webp",
+                "large": "connectors/132/61d7be29fce44416-1600.webp"
+            }
+        ]
+    },
+    {
+        "id": 133,
+        "name": "Delta Quicklink 10mm, Stainless",
+        "brand": "SlackTech",
+        "connector_style": "Quicklink",
+        "closure": "Quicklink sleeve",
+        "material": "Stainless Steel",
+        "mbs_straight_pull": 60.0,
+        "captive_pin": false,
+        "product_url": "https://web.archive.org/web/20160109232259/http://slacklinetechnology.com/stainless-10-mm-triangle-quick-link.html",
+        "price": 15.95,
+        "currency": "USD",
+        "notes": "Listed as '10mm SS Triangle Quicklink' (2016) and '10mm Triangle Quicklink' (2014): Kong, stainless steel, MBS 60 kN, 'three directional loading'. A triangle quicklink, filed as a delta (operator, 2026-10-17). The photo is the one SlackTech showed, which is its 10mm Standard Delta's. Made in Italy.",
+        "active": false,
+        "photos": [
+            {
+                "id": "16ab9643e24407c8",
+                "small": "connectors/133/16ab9643e24407c8-480.webp",
+                "large": "connectors/133/16ab9643e24407c8-1600.webp"
+            }
+        ]
+    },
+    {
+        "id": 134,
+        "name": "Delta Quicklink 8mm, Stainless",
+        "brand": "SlackTech",
+        "connector_style": "Quicklink",
+        "closure": "Quicklink sleeve",
+        "material": "Stainless Steel",
+        "captive_pin": false,
+        "product_url": "https://web.archive.org/web/20141028190942/http://slacklinetechnology.com/slackline-kit/shop-slackline-gear/quicklinks.html",
+        "price": 10.95,
+        "currency": "USD",
+        "notes": "Listed as '8mm SS Triangle Quicklink' (2014), US$10.95; its own page was never archived, so only the listing's name and price are known. A triangle quicklink, filed as a delta (operator, 2026-10-17).",
+        "active": false,
+        "product_group": "Delta Quicklink 8mm, Stainless"
+    },
+    {
+        "id": 135,
+        "name": "Twisted Quicklink 8mm, Stainless",
+        "brand": "SlackTech",
+        "connector_style": "Quicklink",
+        "closure": "Quicklink sleeve",
+        "material": "Stainless Steel",
+        "mbs_straight_pull": 32.0,
+        "captive_pin": false,
+        "product_url": "https://web.archive.org/web/20141030094442/http://slacklinetechnology.com/maillon-rapide-twisted-quicklink.html",
+        "price": 14.49,
+        "currency": "USD",
+        "notes": "Listed as '8mm Twisted Quicklink' (2014-2016): Maillon Rapide, stainless steel, MBS 32 kN; US$14.95 by 2019. For turning an embedded pulley 90 degrees. Made in France.",
+        "active": false,
+        "photos": [
+            {
+                "id": "db9b3fd6864e255b",
+                "small": "connectors/135/db9b3fd6864e255b-480.webp",
+                "large": "connectors/135/db9b3fd6864e255b-1600.webp"
+            }
+        ]
+    },
+    {
+        "id": 136,
+        "name": "Bow Shackle 7/16\"",
+        "brand": "SlackTech",
+        "connector_style": "Shackle",
+        "closure": "Screw pin",
+        "material": "Stainless Steel",
+        "alloy": "316",
+        "mbs_straight_pull": 68.5,
+        "opening": 25.4,
+        "captive_pin": false,
+        "product_url": "https://web.archive.org/web/20150802054319/http://slacklinetechnology.com/7-16-stainless-bow-shackle.html",
+        "price": 15.45,
+        "currency": "USD",
+        "notes": "Listed as '7/16\" Bow Shackle' (2014-2019), US$15.45: forged 316 stainless steel, 'MBS of 15,400 lbf'. Jaw width 'just over 1\"' (opening stored as 1\"); fits the BC Alpine Web Lock 3.0. Made in China.",
+        "active": false,
+        "photos": [
+            {
+                "id": "1afeee3272c39ab1",
+                "small": "connectors/136/1afeee3272c39ab1-480.webp",
+                "large": "connectors/136/1afeee3272c39ab1-1600.webp"
+            }
+        ]
+    },
+    {
+        "id": 137,
+        "name": "Twisted Shackle 3/8\"",
+        "brand": "SlackTech",
+        "connector_style": "Shackle",
+        "closure": "Screw pin",
+        "material": "Stainless Steel",
+        "alloy": "316",
+        "mbs_straight_pull": 44.0,
+        "captive_pin": false,
+        "product_url": "https://web.archive.org/web/20150109163949/http://slacklinetechnology.com/3-8-twisted-shackle.html",
+        "price": 13.45,
+        "currency": "USD",
+        "notes": "Listed as '3/8\" Twisted Screw Pin Shackle' (2014-2016): forged 316 stainless steel, 'MBS of 9,900 LBF and WLL of 1,980 lbf'. US$13.45-13.95. Made in China.",
+        "active": false,
+        "photos": [
+            {
+                "id": "0d17b453e231ebfe",
+                "small": "connectors/137/0d17b453e231ebfe-480.webp",
+                "large": "connectors/137/0d17b453e231ebfe-1600.webp"
+            }
+        ]
+    },
+    {
+        "id": 138,
+        "name": "Twisted Shackle 5/16\"",
+        "brand": "SlackTech",
+        "connector_style": "Shackle",
+        "closure": "Screw pin",
+        "material": "Stainless Steel",
+        "alloy": "316",
+        "captive_pin": false,
+        "product_url": "https://web.archive.org/web/20140617192223/http://slacklinetechnology.com/5-16-twisted-screw-pin-anchor-shackle.html",
+        "price": 9.45,
+        "currency": "USD",
+        "notes": "Listed as '5/16\" Twisted Screw Pin Shackle' (2014) and '5/16\" SS Twisted Screw Pin Shackle' (2016): forged 316 stainless steel, 'Working Load Limit of 1,320 lbf' (5.9 kN); no breaking strength stated. Made in China.",
+        "active": false,
+        "photos": [
+            {
+                "id": "c83636df86126d7a",
+                "small": "connectors/138/c83636df86126d7a-480.webp",
+                "large": "connectors/138/c83636df86126d7a-1600.webp"
+            }
+        ]
+    },
+    {
+        "id": 139,
+        "name": "D Shackle 6mm, Captive Pin",
+        "brand": "SlackTech",
+        "connector_style": "Shackle",
+        "closure": "Screw pin",
+        "material": "Stainless Steel",
+        "alloy": "316",
+        "mbs_straight_pull": 14.7,
+        "captive_pin": true,
+        "product_url": "https://web.archive.org/web/20140629104534/http://slacklinetechnology.com/shop/highline-78/shackles/1-4-forged-shackle-d-shackle.html",
+        "price": 5.95,
+        "currency": "USD",
+        "notes": "Listed as '1/4\" Strait D-Shackle with Captive Pin' (2014): forged 316 stainless steel, 'MBS 3,300 lbf'; for connecting a tensioning rope to a pulley's becket. The 2014-2016 listings sell a '5/16\" SS D-Shackle with Captive Pin' at the same US$5.95, probably this shackle renamed. Made in China.",
+        "active": false,
+        "product_group": "D Shackle 6mm, Stainless",
+        "photos": [
+            {
+                "id": "f7d2f8edff308073",
+                "small": "connectors/139/f7d2f8edff308073-480.webp",
+                "large": "connectors/139/f7d2f8edff308073-1600.webp"
+            }
+        ]
+    },
+    {
+        "id": 140,
+        "name": "D Shackle 12mm, Captive Pin",
+        "brand": "SlackTech",
+        "connector_style": "Shackle",
+        "closure": "Screw pin",
+        "material": "Stainless Steel",
+        "captive_pin": true,
+        "product_url": "https://web.archive.org/web/20141028191043/http://slacklinetechnology.com/slackline-kit/shop-slackline-gear/shackles.html",
+        "price": 13.95,
+        "currency": "USD",
+        "notes": "Listed as '1/2\" SS D-Shackle with Captive Pin', US$13.95 (2014) and $16.95 (2016); its own page was never archived, so only the listings' name and price are known.",
+        "active": false,
+        "product_group": "D Shackle 12mm, Stainless"
+    },
+    {
+        "id": 141,
+        "name": "Oval Carabiner, Screwgate",
+        "brand": "SlackTech",
+        "connector_style": "Carabiner",
+        "closure": "Screwgate",
+        "material": "Steel",
+        "mbs_straight_pull": 30.0,
+        "captive_pin": false,
+        "product_url": "https://web.archive.org/web/20141030095825/http://slacklinetechnology.com/locking-steel-oval-carabiner.html",
+        "price": 10.95,
+        "currency": "USD",
+        "notes": "Listed as 'Locking Steel Oval' (2014-2016) and 'Steel Oval' (2014, US$9.95): the Liberty Mountain steel oval screwgate, MBS 30 kN, key-lock nose. Made in Czech Republic.",
+        "active": false,
+        "product_group": "Oval Carabiner, Screwgate",
+        "photos": [
+            {
+                "id": "3bea5903660ad6f1",
+                "small": "connectors/141/3bea5903660ad6f1-480.webp",
+                "large": "connectors/141/3bea5903660ad6f1-1600.webp"
+            }
+        ]
+    },
+    {
+        "id": 142,
+        "name": "Oval Carabiner, Aluminium",
+        "brand": "SlackTech",
+        "connector_style": "Carabiner",
+        "material": "Aluminum",
+        "mbs_straight_pull": 22.0,
+        "captive_pin": false,
+        "product_url": "https://web.archive.org/web/20151229102757/http://slacklinetechnology.com/rock-exotica-rocko-non-locker-carabiner.html",
+        "price": 11.95,
+        "currency": "USD",
+        "notes": "Listed as 'rockO Non-Locker Carabiner' (2014-2016): the Rock Exotica rockO, an aluminium oval, non-locking, key-lock nose, MBS 22 kN. US$10.45 (2014), $11.95 (2015). Made in USA.",
+        "active": false,
+        "product_group": "Oval Carabiner, Aluminium",
+        "photos": [
+            {
+                "id": "18a1af56c239553b",
+                "small": "connectors/142/18a1af56c239553b-480.webp",
+                "large": "connectors/142/18a1af56c239553b-1600.webp"
             }
         ]
     }

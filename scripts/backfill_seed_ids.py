@@ -64,6 +64,7 @@ SEEDS: dict[str, tuple[str, str]] = {
     "starterkits.json": ("starterkit", "brand"),
     "tricklinekits.json": ("tricklinekit", "brand"),
     "connectors.json": ("connector", "brand"),
+    "leashes.json": ("leash", "brand"),
 }
 
 BRANDS_FILE = "manufacturers.json"

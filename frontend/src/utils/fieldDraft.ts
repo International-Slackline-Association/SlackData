@@ -53,6 +53,15 @@ export function toDraft(kind: FieldKind, value: unknown): Draft {
             })
             .join('\n')
         : ''
+    case 'rings':
+      return Array.isArray(value)
+        ? value
+            .map(option => {
+              const o = option as { leashring_id?: unknown; count?: unknown }
+              return `${o.leashring_id} x ${o.count}`
+            })
+            .join('\n')
+        : ''
     case 'boolean':
       return value ? 'true' : 'false'
     case 'date':
@@ -104,6 +113,18 @@ export function fromDraft(kind: FieldKind, draft: Draft): Parsed {
       }
       return { value: points.length ? points : null }
     }
+    case 'rings': {
+      // "35 x 2", "35" (one ring), or a picked option ("35 — SlackTech …").
+      const options = []
+      for (const line of text.split('\n')) {
+        if (!line.trim()) continue
+        const m = /^\s*(\d+)\s*(?:[x×*]\s*(\d+))?\s*(?:—.*)?$/.exec(line)
+        const count = m ? Number(m[2] ?? 1) : 0
+        if (!m || count < 1) return { value: null, error: 'one ring per line: its id, then "x" and how many, e.g. 35 x 2' }
+        options.push({ leashring_id: Number(m[1]), count })
+      }
+      return { value: options.length ? options : null }
+    }
     default:
       return { value: text }
   }
@@ -133,6 +154,11 @@ export function display(value: unknown, field?: string): string {
   if (value === undefined || value === null || value === '') return '—'
   if (field && DATE_FIELDS.has(field) && typeof value === 'number') return msToDate(value)
   if (Array.isArray(value)) {
+    if (value.length && typeof value[0] === 'object' && 'leashring_id' in (value[0] as object)) {
+      return value
+        .map(o => `${(o as { count: unknown }).count}× ring ${(o as { leashring_id: unknown }).leashring_id}`)
+        .join(', ')
+    }
     if (value.length && typeof value[0] === 'object') {
       return value.map(p => `${(p as { kn: unknown }).kn}→${(p as { percent: unknown }).percent}%`).join(', ')
     }

@@ -60,6 +60,32 @@ def build_manifest(documents: list[Document]) -> dict:
     return {"photos": photos, "manuals": manuals, "brandManuals": brand_manuals, "logos": logos}
 
 
+def staged_documents() -> list[Document]:
+    """Local dev only: the candidates `candidates/stage.py` stages (ids >= 9000).
+
+    A staged row is put straight into the SQLite catalogue, so it is in no seed
+    file and the manifest would list no photo for it. Its photos are listed
+    from its candidate entry instead (`candidates/stage_photos.py` writes them),
+    which is only ever read here, in the seed-files mode: hosted, the catalogue
+    comes from the store and this is never reached. No candidates folder (CI, a
+    fresh clone — it is git-excluded) means nothing to add.
+    """
+    import json
+
+    from slack_data.load_data._seed_io import seed_path
+
+    folder = seed_path("candidates")
+    staged: list[Document] = []
+    for collection in GEAR:
+        path = folder / f"{collection}.json"
+        if not path.exists():
+            continue
+        for entry in json.loads(path.read_text(encoding="utf-8")):
+            if isinstance(entry.get("id"), int) and entry["id"] >= 9000 and entry.get(PHOTOS_KEY):
+                staged.append(Document(collection=collection, key=str(entry["id"]), data=entry))
+    return staged
+
+
 _CACHE: dict = {"documents": None, "manifest": None}
 
 
@@ -72,6 +98,8 @@ def current_manifest() -> dict:
     documents, _, source = _documents()
     if source == "store" and _CACHE["documents"] is documents:
         return _CACHE["manifest"]
+    if source == "seed files":
+        documents = documents + staged_documents()
     manifest = build_manifest(documents)
     if source == "store":
         _CACHE.update(documents=documents, manifest=manifest)

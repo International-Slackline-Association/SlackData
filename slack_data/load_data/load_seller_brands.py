@@ -37,6 +37,7 @@ from slack_data.load_data.brand_ids import UnknownBrand, brand_catalog_id
 from slack_data.models.brands import Brand
 from slack_data.models.connectors import Connector
 from slack_data.models.grips import Grip
+from slack_data.models.leashes import Leash
 from slack_data.models.leashrings import LeashRing
 from slack_data.models.rollers import Roller
 from slack_data.models.starterkits import StarterKit
@@ -60,6 +61,7 @@ SELLABLE_MODELS = {
     "starterkits": StarterKit,
     "tricklinekits": TricklineKit,
     "connectors": Connector,
+    "leashes": Leash,
 }
 
 

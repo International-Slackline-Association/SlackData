@@ -510,9 +510,10 @@ def test_bare_names_really_do_collide(client):
         duplicates[filename] = [n for n, count in names.items() if count > 1 and n]
 
     assert duplicates["webbings.json"], "webbings used to contain duplicate product names"
-    # Weblocks became name-unique on 2026-10-07: their only collisions were the
-    # EQB/Spider Bandit SH/SL twins, which were one product each and were merged.
-    assert duplicates["weblocks.json"] == []
+    # Weblocks were name-unique from 2026-10-07 (the EQB/Spider Bandit SH/SL
+    # twins, one product each, were merged) until 2026-10-21, when Balancing
+    # Earth's 2018 Zenlock arrived beside Slack Inov's unrelated 2025 ZENLOCK.
+    assert duplicates["weblocks.json"] == ["zenlock"]
 
 
 def test_brand_and_name_together_are_unique(client):

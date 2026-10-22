@@ -1,7 +1,7 @@
 // Central gear-type registry. Single source of truth for the nav tabs, routing,
 // and API path resolution.
 //
-// `GEAR_TYPES` are the nine data-backed types the test suite iterates over
+// `GEAR_TYPES` are the ten data-backed types the test suite iterates over
 // (mirrors cypress/support/gear_types.ts) and the only ones rendered as
 // [data-cy="nav-tab"]. `UPCOMING_GEAR_TYPES` are categories with no data yet —
 // shown in the nav (as [data-cy="nav-tab-upcoming"]) and routing to a
@@ -29,6 +29,8 @@ export const GEAR_TYPES: GearTypeMeta[] = [
   { slug: 'webbings',      apiPath: 'webbing',      label: 'Webbings',        hasISA: true,  hasISAWarning: true,  certifiable: true,  available: true },
   { slug: 'weblocks',      apiPath: 'weblock',      label: 'Weblocks',        hasISA: true,  hasISAWarning: true,  certifiable: true,  available: true },
   { slug: 'leashrings',    apiPath: 'leashring',    label: 'Leash Rings',     hasISA: true,  hasISAWarning: true,  certifiable: true,  available: true },
+  // Beside Leash Rings in the nav, which is where a reader looks for them.
+  { slug: 'leashes',       apiPath: 'leash',        label: 'Leashes',         hasISA: true,  hasISAWarning: true,  certifiable: true,  available: true },
   { slug: 'grips',         apiPath: 'grip',         label: 'Grips',           hasISA: true,  hasISAWarning: true,  certifiable: true,  available: true },
   { slug: 'rollers',       apiPath: 'roller',       label: 'Rollers',         hasISA: true,  hasISAWarning: true,  certifiable: true,  available: true },
   { slug: 'connectors',    apiPath: 'connector',    label: 'Connectors',      hasISA: true,  hasISAWarning: true,  certifiable: true,  available: true },

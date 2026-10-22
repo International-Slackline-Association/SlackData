@@ -69,6 +69,7 @@ const COLUMNS: Record<string, Column[]> = {
   treepros: [{ field: 'width', label: 'Width', unit: 'cm' }, { field: 'length', label: 'Length', unit: 'cm' }, WEIGHT],
   starterkits: KIT,
   tricklinekits: KIT,
+  leashes: [{ field: 'length', label: 'Length', unit: 'cm' }, WEIGHT, MBS],
 }
 
 export default function VendorTable({ item, meta }: { item: AnyItem; meta: GearTypeMeta }) {
@@ -86,8 +87,10 @@ export default function VendorTable({ item, meta }: { item: AnyItem; meta: GearT
   ).slice().sort(compareMembers)
   if (members.length < 2) return null
 
-  // Shops selling one generic part, or versions of one product by maker or batch.
+  // Shops selling one generic part, one leash in its lengths, or versions of
+  // one product by maker or batch.
   const shops = meta.slug === 'connectors'
+  const lengths = meta.slug === 'leashes'
   // A column every vendor leaves blank is noise.
   const columns = (COLUMNS[meta.slug] ?? []).filter(c => members.some(m => m[c.field] != null))
   // A batch is told apart by its `version`, which a shop listing never needs.
@@ -99,6 +102,22 @@ export default function VendorTable({ item, meta }: { item: AnyItem; meta: GearT
   // group; what each shop states it is certified to is shown per row.
   const standardsOf = (m: AnyItem) => (Array.isArray(m.standards) ? (m.standards as string[]) : [])
   const showStandards = members.some(m => standardsOf(m).length > 0)
+  // A leash's rows may differ by the rings they come with as well as by length
+  // (BC sells each length with and without two rings): the ring counts each
+  // row is sold with, e.g. "2", or "1 or 2" for a choice.
+  const ringCountsOf = (m: AnyItem) =>
+    Array.isArray(m.ring_options) ? (m.ring_options as { count: number }[]).map(o => o.count) : []
+  const showRings = lengths && members.some(m => ringCountsOf(m).length > 0)
+  const ringsText = (m: AnyItem) => {
+    const counts = ringCountsOf(m)
+    return counts.length ? counts.join(' or ') : 'None'
+  }
+  // ...or by how it is built (Slack Inov's leash as rope only or threaded).
+  const showConstruction = lengths && new Set(members.map(m => m.construction)).size > 1
+  // "N lengths" only while every row IS a length; rows that also differ by
+  // rings are options.
+  const allLengthsDiffer = new Set(members.map(m => m.length)).size === members.length
+  const unit = lengths && !allLengthsDiffer ? 'options' : 'lengths'
 
   // The fallback for the cells no hidden anchor can fill, because a link may
   // not nest in a link. It stands aside for those links themselves and for a
@@ -113,12 +132,14 @@ export default function VendorTable({ item, meta }: { item: AnyItem; meta: GearT
   return (
     <section data-cy="vendor-table" data-group={group} className="mt-8">
       <h2 className="mb-1 text-lg font-bold text-gray-900">
-        {shops ? `Sold by ${members.length} shops` : `${members.length} versions`}
+        {shops ? `Sold by ${members.length} shops` : lengths ? `${members.length} ${unit}` : `${members.length} versions`}
       </h2>
       <p className="mb-3 text-sm text-gray-500">
         {shops
           ? `${group} is generic hardware. Each shop's figures are as that shop states them.`
-          : `${group} has been made by more than one maker or in more than one batch, and the figures differ. Each version is shown as its maker states it.`}
+          : lengths
+            ? `${group} comes in ${members.length} ${unit}. Each one's figures are as the maker states them.`
+            : `${group} has been made by more than one maker or in more than one batch, and the figures differ. Each version is shown as its maker states it.`}
       </p>
       <div className="overflow-x-auto rounded-xl border border-gray-200 bg-white">
         <table className="w-full text-left text-sm">
@@ -132,6 +153,8 @@ export default function VendorTable({ item, meta }: { item: AnyItem; meta: GearT
               ))}
               {showStandards && <th className="px-3 py-2">Certification</th>}
               {showCaptive && <th className="px-3 py-2">Captive pin</th>}
+              {showConstruction && <th className="px-3 py-2">Construction</th>}
+              {showRings && <th className="px-3 py-2">Rings</th>}
               <th className="px-3 py-2 text-right">Price</th>
               <th className="px-3 py-2">Link</th>
             </tr>
@@ -211,6 +234,16 @@ export default function VendorTable({ item, meta }: { item: AnyItem; meta: GearT
                   {showCaptive && (
                     <td data-field="captive_pin" className="h-px p-0">
                       {cell('', m.captive_pin === true ? 'Yes' : 'No')}
+                    </td>
+                  )}
+                  {showConstruction && (
+                    <td data-field="construction" className="h-px p-0">
+                      {cell('', typeof m.construction === 'string' ? m.construction : '—')}
+                    </td>
+                  )}
+                  {showRings && (
+                    <td data-field="ring_options" className="h-px p-0">
+                      {cell('', ringsText(m))}
                     </td>
                   )}
                   <td data-field="price" className="h-px whitespace-nowrap p-0 text-right">

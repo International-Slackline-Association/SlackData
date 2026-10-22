@@ -126,11 +126,19 @@
                 "manual_url: source scheme 'httpa://' corrected to 'https://'"
             ],
             "match": {
-                "gearType": null,
-                "gearIds": [],
-                "gearNames": [],
-                "confidence": "none",
-                "note": "Leash — a gear type we do not hold yet (BACKLOG: leashes gear type)"
+                "gearType": "leash",
+                "gearIds": [
+                    9,
+                    10,
+                    11
+                ],
+                "gearNames": [
+                    "Slacktivity Highline Leash, no ring",
+                    "Slacktivity Highline Leash, with 1 ring",
+                    "Slacktivity Highline Leash, with 2 rings"
+                ],
+                "confidence": "exact",
+                "note": ""
             }
         },
         {
@@ -315,11 +323,17 @@
             "manufacturer_email": "info@raed-slacklines.com",
             "source_notes": [],
             "match": {
-                "gearType": null,
-                "gearIds": [],
-                "gearNames": [],
-                "confidence": "none",
-                "note": "Leash — a gear type we do not hold yet (BACKLOG: leashes gear type)"
+                "gearType": "leash",
+                "gearIds": [
+                    13,
+                    12
+                ],
+                "gearNames": [
+                    "Raed Slacklines PRO Highline Sewn Leash Set",
+                    "Raed Slacklines PRO Highline Leash"
+                ],
+                "confidence": "exact",
+                "note": ""
             }
         },
         {
@@ -343,11 +357,15 @@
             "manufacturer_email": "info@raed-slacklines.com",
             "source_notes": [],
             "match": {
-                "gearType": null,
-                "gearIds": [],
-                "gearNames": [],
-                "confidence": "none",
-                "note": "Leash — a gear type we do not hold yet (BACKLOG: leashes gear type)"
+                "gearType": "leash",
+                "gearIds": [
+                    14
+                ],
+                "gearNames": [
+                    "Raed Slacklines ALPINE Highline Leash Set"
+                ],
+                "confidence": "exact",
+                "note": ""
             }
         },
         {
@@ -1014,11 +1032,21 @@
                 "testing_lab: source says 'not needed'"
             ],
             "match": {
-                "gearType": null,
-                "gearIds": [],
-                "gearNames": [],
-                "confidence": "none",
-                "note": "Leash — a gear type we do not hold yet (BACKLOG: leashes gear type)"
+                "gearType": "leash",
+                "gearIds": [
+                    1,
+                    2,
+                    3,
+                    4
+                ],
+                "gearNames": [
+                    "Balance Community Threaded Highline Leash Kit 3.50 m, no rings",
+                    "Balance Community Threaded Highline Leash Kit 3.75 m, no rings",
+                    "Balance Community Threaded Highline Leash Kit 3.50 m, with 2 rings",
+                    "Balance Community Threaded Highline Leash Kit 3.75 m, with 2 rings"
+                ],
+                "confidence": "exact",
+                "note": ""
             }
         },
         {

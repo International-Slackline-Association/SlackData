@@ -57,7 +57,7 @@ class Collection:
 
 _LISTS = (
     "webbings", "weblocks", "rollers", "leashrings", "grips",
-    "treepros", "starterkits", "tricklinekits", "connectors",
+    "treepros", "starterkits", "tricklinekits", "connectors", "leashes",
 )
 
 COLLECTIONS: dict[str, Collection] = {

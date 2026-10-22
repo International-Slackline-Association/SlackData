@@ -838,5 +838,64 @@
                 "large": "leashrings/34/f52a572c939ac5ec-1600.webp"
             }
         ]
+    },
+    {
+        "id": 35,
+        "name": "2 5/16\" Steel Leash Ring",
+        "brand": "SlackTech",
+        "material": "Steel",
+        "inner_diameter": 58.7,
+        "product_url": "https://web.archive.org/web/20140512011116/http://slacklinetechnology.com/2-5-16-id-steel-leash-ring.html",
+        "breaking_strength": 22.2,
+        "price": 7.75,
+        "currency": "USD",
+        "description": "This Drop Forged steel ring set is perfect for use as a highline leash ring. Each ring has been proof tested to 3,600 lbs and rated to 5,000 lbs, these rings have the holding power to keep you on the line, indefinitely. There are no welds, no bends, and no burrs, just pure strength. In addition to being a great leash ring set, these can be used to make tri-line anchors and can be used for general rigging purposes. Sold in pairs or in singles.",
+        "notes": "Listed as '2 5/16\" ID Steel Leash Ring Set' (2014) and '2 5/16\" ID Drop Forged Steel Ring' (2016). Drop-forged steel, proof tested to 3,600 lbs, 'rated to 5,000 lbs' (stored as the breaking strength). Price is one ring: US$15.50 a pair or $7.75 single in 2014, $7.95 single in 2016. The two rings of SlackTech's Highline Leash Kit (leash 43). Made in China.",
+        "active": false,
+        "photos": [
+            {
+                "id": "b6848ea8c248f75e",
+                "small": "leashrings/35/b6848ea8c248f75e-480.webp",
+                "large": "leashrings/35/b6848ea8c248f75e-1600.webp"
+            }
+        ]
+    },
+    {
+        "id": 36,
+        "name": "3\" Steel Leash Ring",
+        "brand": "SlackTech",
+        "material": "Steel",
+        "inner_diameter": 76.2,
+        "product_url": "https://web.archive.org/web/20160410111609/http://slacklinetechnology.com/large-steel-ring.html",
+        "breaking_strength": 44.5,
+        "price": 14.95,
+        "currency": "USD",
+        "description": "This 3\" ID Drop Forged steel ring is great for use as a Highline Leash ring, doubled up of course. Every ring has been proof tested to 3,600 lbs and rated to 10,000 lbs, these rings have the holding power to keep you on the line, indefinitely. There are no welds, no burrs and no bends, just pure strength. In addition to being a great highline leash ring, these can be used as an inexpensive rope grab for tensioning webbing and rope.",
+        "notes": "Listed as '3\" ID Steel Leash Ring Set' (2014) and '3\" ID Drop Forged Steel Ring' (2016). Drop-forged steel, proof tested to 3,600 lbs, 'rated to 10,000 lbs' (stored as the breaking strength). Price is one ring: US$29.90 a pair or $14.95 single in 2014, $14.95 single in 2016. Used doubled as a leash ring. Same inside diameter and rating as BC's Bomber Steel Ring (leash ring 10); whether it is the same ring is not known. Made in China.",
+        "active": false,
+        "photos": [
+            {
+                "id": "5fd268a6df9466f8",
+                "small": "leashrings/36/5fd268a6df9466f8-480.webp",
+                "large": "leashrings/36/5fd268a6df9466f8-1600.webp"
+            }
+        ]
+    },
+    {
+        "id": 37,
+        "name": "Iktomi Leash Ring",
+        "brand": "SlackTech",
+        "material": "Aluminum",
+        "product_url": "https://web.archive.org/web/20190511201818/http://slacklinetechnology.com/shop/highline-leash-of-iktomi",
+        "breaking_strength": 39.0,
+        "notes": "The leash ring of the Leash of Iktomi (leashes 38-41), not sold on its own. Machined from 7075 aluminium: 'an ultra light weight and low profile bomber ring'. 'Slackline Ring Strength: 39 kN (8,800 lbf)'. Diameters and weight not stated. The photo shows the whole Iktomi system: the ring is the silver one. Made in USA.",
+        "active": false,
+        "photos": [
+            {
+                "id": "cc7371f433923835",
+                "small": "leashrings/37/cc7371f433923835-480.webp",
+                "large": "leashrings/37/cc7371f433923835-1600.webp"
+            }
+        ]
     }
 ]

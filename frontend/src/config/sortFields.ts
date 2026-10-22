@@ -70,6 +70,11 @@ export const EXTRA_SORT_FIELDS: Record<GearSlug, SortFieldMeta[]> = {
     { field: 'opening',           label: 'Opening',       nullLast: true },
     { field: 'pin_diameter',      label: 'Pin Diameter',  nullLast: true },
   ],
+  leashes: [
+    { field: 'length',            label: 'Length',            nullLast: true },
+    { field: 'diameter',          label: 'Diameter',          nullLast: true },
+    { field: 'breaking_strength', label: 'MBS',               nullLast: true },
+  ],
   bungees:      [],
   leashringpro: [],
 }

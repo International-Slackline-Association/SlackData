@@ -230,9 +230,12 @@ may declare an explicit order instead, and values absent from that order sort af
 alphabetically. No group uses this today (the ISA class letter, the one ranked domain, is not a filter —
 see below); the mechanism stays in `filterGroups.ts` for the next ranked enum.
 
-**Price is the first group in every gear type's sidebar** — above Material, above everything. It is
-the filter people reach for first in any gear catalogue, and it is the only one that is meaningful
-for all 8 types.
+**The ISA groups lead the sidebar on every type the ISA certifies** (webbings, weblocks, leash
+rings, grips, rollers, connectors, leashes; operator, 2026-10-17): **ISA Certified, then ISA Warning,
+then Price** — the safety questions before the price. A group with only one possible answer is hidden
+as usual (no roller is certified, so Rollers starts at ISA Warning). Price is the first group on the
+types that cannot be certified (tree protectors, starter and trickline kits). It is the filter people
+reach for first in any gear catalogue, and the only one meaningful for every type.
 
 It is a range slider like any other numeric filter, with four behaviours unique to it:
 
