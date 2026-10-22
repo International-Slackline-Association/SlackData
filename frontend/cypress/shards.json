@@ -3,101 +3,145 @@
     "The Cypress specs, packed into balanced shards for CI. One GitHub Actions",
     "runner per shard, each booting its own API + frontend.",
     "",
-    "The packing is derived from measured per-spec durations — see",
-    "E2E_PERFORMANCE_PLAN.md § 1 for the table and how to refresh it. Do NOT",
-    "split alphabetically or by file count: filters.cy.ts and",
-    "manufacturer_api_docs.cy.ts are ~125x apart, and the job is only as fast as",
-    "its slowest shard. `estimate` is the pre-sharding cost of that shard's",
-    "specs, kept here so the balance is reviewable in a diff.",
+    "WRITTEN BY scripts/pack-shards.mjs, from `durations`: each spec's time on a",
+    "CI runner, read from the Cypress summary of real runs (`measured`). Do NOT",
+    "split alphabetically or by file count: search_sort.cy.ts and",
+    "manufacturer_api_docs.cy.ts are ~300x apart, and the job is only as fast as",
+    "its slowest shard. `estimate` is the sum of a shard's durations, kept so the",
+    "balance is reviewable in a diff.",
     "",
-    "REPACKED when table.cy.ts landed. At 5:23 it is the second longest spec in",
-    "the suite, and every shard was already ~6:00, so there was no headroom",
-    "anywhere to drop it into: on the smallest it made that runner 11:14 and the",
-    "whole job with it. The 22 specs that have CI numbers are packed longest-first",
-    "from that table; filters.cy.ts is no longer alone on a runner, which is why",
-    "tests/unit/shards.test.ts stopped hardcoding that.",
+    "Refresh when the shards drift apart in CI (every new gear type lengthens the",
+    "per-type loops): `npm run shards:pack -- --from-run <run id>` with a green",
+    "run's id. A spec takes its time only from a run it PASSED in, since a failing",
+    "spec's time is mostly retries. `--shards N` changes the count.",
     "",
-    "table.cy.ts was 5:23 when this was packed and measures 4:13 since the",
-    "compare selection stopped writing the URL — a LOCAL number either way, and",
-    "manuals/brand_filter/co_listings are still residuals — refresh all four from",
-    "the next green run. The packing is only as good as those four numbers.",
-    "",
-    "submissions.cy.ts went with the public suggestion box (live editing phase",
-    "6); open_editing.cy.ts took its place in the detail shard.",
+    "Packed 2026-10-22 from the leashes PR's run, with gear_cards, gear_detail",
+    "and isa_warnings from run 39645502359 (pre-leashes): they failed on the",
+    "leashes run, so their times are ~10% low until a green leashes run refreshes",
+    "them. search_sort is alone on its shard and sets the floor (~5:42).",
     "",
     "EVERY spec in cypress/e2e/ must appear in exactly one shard. A spec left out",
     "would silently stop running while CI stayed green, so",
     "scripts/check-shards.mjs enforces it — run by `npm run test:unit` and by",
-    "CI's shard-planning job. Adding a spec means adding it here."
+    "CI's shard-planning job. Adding a spec means adding it to a shard here (by",
+    "hand, or by running the packer, which times an unmeasured spec at 0:30)."
   ],
+  "measured": {
+    "runs": [
+      39646468027,
+      39645502359
+    ],
+    "at": "2026-10-22"
+  },
+  "durations": {
+    "search_sort": "5:42",
+    "filters": "5:25",
+    "gear_cards": "5:21",
+    "table": "3:53",
+    "gear_listing": "3:31",
+    "compare": "2:17",
+    "isa_warnings": "2:05",
+    "gear_detail": "1:39",
+    "isa_certification": "1:26",
+    "manufacturers": "1:17",
+    "currency": "0:56",
+    "price_slider": "0:56",
+    "url_state": "0:40",
+    "navigation": "0:34",
+    "mobile": "0:30",
+    "editing": "0:21",
+    "range_slider": "0:18",
+    "brand_filter": "0:17",
+    "media_editing": "0:15",
+    "account": "0:14",
+    "open_editing": "0:11",
+    "isa_admin": "0:10",
+    "brand_links": "0:08",
+    "gear_status": "0:08",
+    "manufacturer_accounts": "0:06",
+    "admin_triage": "0:05",
+    "changes": "0:04",
+    "manuals": "0:04",
+    "webbing_groups": "0:04",
+    "connector_groups": "0:03",
+    "safety_notices": "0:03",
+    "co_listings": "0:02",
+    "manufacturer_api_docs": "0:01"
+  },
   "shards": [
     {
+      "name": "search_sort",
+      "estimate": "5:42",
+      "specs": [
+        "search_sort"
+      ]
+    },
+    {
       "name": "filters",
-      "estimate": "6:54",
+      "estimate": "5:31",
       "specs": [
         "filters",
-        "brand_filter",
-        "co_listings",
-        "manufacturer_api_docs"
-      ]
-    },
-    {
-      "name": "search",
-      "estimate": "6:54",
-      "specs": [
-        "search_sort",
-        "isa_certification",
-        "safety_notices"
-      ]
-    },
-    {
-      "name": "cards",
-      "estimate": "6:50",
-      "specs": [
-        "gear_cards",
-        "manufacturers",
-        "range_slider",
-        "brand_links",
-        "gear_status"
+        "changes",
+        "co_listings"
       ]
     },
     {
       "name": "table",
-      "estimate": "5:40",
+      "estimate": "5:31",
       "specs": [
         "table",
-        "currency",
-        "connector_groups",
-        "webbing_groups",
+        "url_state",
+        "navigation",
         "account",
-        "editing",
-        "changes",
-        "media_editing",
-        "manufacturer_accounts"
+        "manufacturer_accounts",
+        "webbing_groups"
       ]
     },
     {
-      "name": "listing",
-      "estimate": "7:12",
+      "name": "compare",
+      "estimate": "5:31",
+      "specs": [
+        "compare",
+        "isa_certification",
+        "currency",
+        "mobile",
+        "open_editing",
+        "brand_links",
+        "connector_groups"
+      ]
+    },
+    {
+      "name": "isa_warnings",
+      "estimate": "5:31",
+      "specs": [
+        "isa_warnings",
+        "gear_detail",
+        "price_slider",
+        "editing",
+        "brand_filter",
+        "isa_admin",
+        "safety_notices"
+      ]
+    },
+    {
+      "name": "gear_cards",
+      "estimate": "5:30",
+      "specs": [
+        "gear_cards",
+        "gear_status",
+        "manufacturer_api_docs"
+      ]
+    },
+    {
+      "name": "gear_listing",
+      "estimate": "5:30",
       "specs": [
         "gear_listing",
-        "compare",
-        "price_slider",
-        "mobile",
-        "admin_triage"
-      ]
-    },
-    {
-      "name": "detail",
-      "estimate": "7:07",
-      "specs": [
-        "gear_detail",
-        "isa_warnings",
-        "open_editing",
-        "isa_admin",
-        "manuals",
-        "url_state",
-        "navigation"
+        "manufacturers",
+        "range_slider",
+        "media_editing",
+        "admin_triage",
+        "manuals"
       ]
     }
   ]
